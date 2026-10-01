@@ -40,3 +40,23 @@
 
 # Large map data kept locally
 /geo/wp-content/uploads/tiles/iran.pmtiles
+
+
+# WordPress runtime / temporary files
+/geo/wp-content/upgrade-temp-backup/
+/geo/wp-content/cache/
+
+# WordPress runtime logs
+/geo/wp-content/debug.log
+/geo/wp-content/uploads/ai-scribe-logs/*.log
+/http-probe.log
+
+
+# Windows / macOS local junk
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor temporary files
+*.swp
+*.swo
