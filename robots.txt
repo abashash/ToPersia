@@ -1,0 +1,31 @@
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+
+# بات‌های جستجو و استناد AI
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+# بات‌های آموزش — برای حضور در دانش پایهٔ مدل‌ها
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
+# داده‌کاوی انبوه بدون استناد
+User-agent: CCBot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+
+Sitemap: https://topersia.com/sitemap_index.xml

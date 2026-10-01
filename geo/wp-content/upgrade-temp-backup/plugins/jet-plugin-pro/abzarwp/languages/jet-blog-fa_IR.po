@@ -1,0 +1,1664 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetBlog For Elementor\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-18 23:34+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-blog.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "\"All\" Button Label"
+msgstr "برچسب کلید (همه)"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه  Jet پیشرفته"
+
+msgid "ASC"
+msgstr "صعودی"
+
+msgid "Activate Elementor Now"
+msgstr "فعال سازی الان المنتور"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Add the previous and next page links."
+msgstr "لینک صفحه قبلی و بعدی را اضافه کنید."
+
+msgid "After"
+msgstr "بعد"
+
+msgid "After Excerpt"
+msgstr "بعد از خلاصه"
+
+msgid "After Text"
+msgstr "متن بعد"
+
+msgid "After Title"
+msgstr "بعد از عنوان"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All"
+msgstr "همه"
+
+msgid "Angle"
+msgstr "زاویه(Angle)"
+
+msgid "Angle Double"
+msgstr "زاویه دوبل(Angle Double)"
+
+msgid "Arrow"
+msgstr "فلش(Arrow)"
+
+msgid "Arrow Circle"
+msgstr "دایره فلش(Arrow Circle)"
+
+msgid "Arrows Style"
+msgstr "استایل پیکان‌ها"
+
+msgid "As Blocks"
+msgstr "بعنوان بلوک ها"
+
+msgid "Ascending"
+msgstr "صعودی"
+
+msgid "Author"
+msgstr "نویسنده"
+
+msgid "Author Icon"
+msgstr "آیکن نویسنده"
+
+msgid "Autoplay"
+msgstr "پخش خودکار"
+
+msgid "Autoplay Posts"
+msgstr "پخش خودکار پست ها"
+
+msgid "Autoplay Speed"
+msgstr "سرعت پخش اتوماتیک"
+
+msgid "Available Widgets"
+msgstr "ابزارک های موجود"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Angle"
+msgstr "زاویه"
+
+msgctxt "Background Control"
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Background Type"
+msgstr "نوع پس‌زمینه"
+
+msgctxt "Background Control"
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgctxt "Background Control"
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgctxt "Background Control"
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgctxt "Background Control"
+msgid "Center Center"
+msgstr "وسط وسط"
+
+msgctxt "Background Control"
+msgid "Center Left"
+msgstr "وسط چپ"
+
+msgctxt "Background Control"
+msgid "Center Right"
+msgstr "وسط راست"
+
+msgctxt "Background Control"
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgctxt "Background Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Background Control"
+msgid "Gradient"
+msgstr "گرادیانت"
+
+msgctxt "Background Control"
+msgid "Linear"
+msgstr "خطی"
+
+msgctxt "Background Control"
+msgid "Location"
+msgstr "مکان"
+
+msgctxt "Background Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgctxt "Background Control"
+msgid "Radial"
+msgstr "شعاعی"
+
+msgctxt "Background Control"
+msgid "Second Color"
+msgstr "رنگ دوم"
+
+msgctxt "Background Control"
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgctxt "Background Control"
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgctxt "Background Control"
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgctxt "Background Control"
+msgid "Type"
+msgstr "نوع"
+
+msgid "Baseline"
+msgstr "پایه"
+
+msgid "Before"
+msgstr "قبل"
+
+msgid "Before Text"
+msgstr "متن قبل"
+
+msgid "Before Title"
+msgstr "قبل از عنوان"
+
+msgid "Before/After Content"
+msgstr "محتوا قبل/ بعد"
+
+msgid "Before/After Title"
+msgstr "عنوان قبل/بعد"
+
+msgid "Blogging Package for Elementor Page Builder"
+msgstr "بسته وبلاگ برای صفحه ساز المنتور"
+
+msgid "Border"
+msgstr "حاشیه(Border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه(Border)"
+
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "نوع حاشیه (border)"
+
+msgctxt "Border Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "خط‌ چین"
+
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgctxt "Border Control"
+msgid "Double"
+msgstr "دوخطی"
+
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgctxt "Border Control"
+msgid "Width"
+msgstr "عرض"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Bottom"
+msgstr "پایین"
+
+msgid "Bottom Indent"
+msgstr "فرورفتگی پایین"
+
+msgid "Box"
+msgstr "جعبه"
+
+msgid "Box Overlay"
+msgstr "پوشش جعبه"
+
+msgctxt "Box Shadow Control"
+msgid "Box Shadow"
+msgstr "جعبه سایه"
+
+msgctxt "Box Shadow Control"
+msgid "Inset"
+msgstr "درونی"
+
+msgctxt "Box Shadow Control"
+msgid "Outline"
+msgstr "بیرونی"
+
+msgctxt "Box Shadow Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Box Size"
+msgstr "اندازه جعبه"
+
+msgid "Boxed"
+msgstr "جعبه ای"
+
+msgid "Canvas Background"
+msgstr "پس زمینه بوم"
+
+msgid "Caret"
+msgstr "هشتک(Caret)"
+
+msgid "Caret Square"
+msgstr "میدان هشتک(Caret Square)"
+
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+msgid "Center"
+msgstr "مرکز"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Chevron"
+msgstr "شورون (Chevron)"
+
+msgid "Chevron Circle"
+msgstr "دایره جهت نما(Chevron Circle)"
+
+msgid ""
+"Choose a certain set of options in the widget’s Style tab by moving the "
+"slider, and improve your Elementor editor performance by selecting "
+"appropriate style settings fill level (from None to Full level)"
+msgstr ""
+"با حرکت دادن اسلایدر ، مجموعه خاصی از گزینه ها را در زبانه استایل ابزارک "
+"انتخاب کنید و با انتخاب سطح مناسب تنظیمات استایل (از هیچ به سطح کامل) ، "
+"عملکرد ویرایشگر المنتور خود را بهبود ببخشید."
+
+msgid "Clean"
+msgstr "تمیز"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Color Hover"
+msgstr "رنگ هاور"
+
+msgid "Columns Number"
+msgstr "شماره ستون ها"
+
+msgid "Comment Count"
+msgstr "تعداد نظرات"
+
+msgid "Comment count"
+msgstr "تعداد نظرات"
+
+msgid "Comments Icon"
+msgstr "آیکن نظرات"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Container"
+msgstr "کانتینر"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Counter Suffix"
+msgstr "پسوند شمارنده"
+
+msgid "Create new Posts Query with Query builder"
+msgstr "ایجاد کوئری جدید پست با کوئری‌ساز"
+
+msgid "Create own API key %s"
+msgstr "ساخت کلید API در %s "
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Current"
+msgstr "کنونی"
+
+msgid "Current Date"
+msgstr "تاریخ فعلی"
+
+msgid "Currently works only in -webkit- browsers"
+msgstr "در حال حاضر فقط در مرورگرهای -webkit- کار می کند"
+
+msgid "Custom Field Key"
+msgstr "کلید فیلد سفارشی"
+
+msgid "Custom Field Value"
+msgstr "مقدار فیلد سفارشی"
+
+msgid "Custom Fields"
+msgstr "فیلد های سفارشی"
+
+msgid "Custom Thumbnail"
+msgstr "بندانگشتی سفارشی"
+
+msgid "Custom Video List"
+msgstr "لیست سفارشی ویدئو"
+
+msgid "Customize Icon"
+msgstr "سفارشی‌سازی آیکن"
+
+msgid "DESC"
+msgstr "نزولی"
+
+msgid "DIV"
+msgstr "DIV"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Data Update"
+msgstr "بروزرسانی داده"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Date Format"
+msgstr "فرمت تاریخ"
+
+msgid "Date Icon"
+msgstr "آیکن تاریخ"
+
+msgid "Default"
+msgstr "پیش‌فرض"
+
+msgid "Descending"
+msgstr "نزولی"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Disable All Widgets"
+msgstr "غیر فعال سازی همه ابزارک ها"
+
+msgid "Disable Caching"
+msgstr "غیرفعال سازی کش"
+
+msgid "Display Meta Label and Value"
+msgstr "نمایش برچسب و مقدار متا"
+
+msgid "Divider Gap"
+msgstr "فاصله جداکننده"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Documentation on date and time formatting"
+msgstr "مستندات فرمت تاریخ و زمان"
+
+msgid "Duration"
+msgstr "مدت زمان"
+
+msgid "Duration Color"
+msgstr "رنگ مدت"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Editor Load Level"
+msgstr "سطح بارگذاری ویرایشگر"
+
+msgid "Enable All Widgets"
+msgstr "فعال سازی همه ابزارک ها"
+
+msgid "Enable Carousel"
+msgstr "فعال کردن کاروسل"
+
+msgid ""
+"Enable this option in order to reduce the terms filter size by grouping "
+"extra terms items and hiding them under the suspension dots."
+msgstr ""
+"برای کاهش اندازه فیلتر شرایط با گروه بندی موارد اصطلاحات اضافی و پنهان کردن "
+"آنها در زیر نقاط تعلیق ، این گزینه را فعال کنید."
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Excerpt Length"
+msgstr "طول خلاصه نوشته"
+
+msgid "Excerpt Trimmed Ending"
+msgstr "پایان خلاصه"
+
+msgid "Exclude posts by IDs (eg. 10, 22, 19 etc.)"
+msgstr "حذف پست ها با شناسه ها (10, 22, 19 etc.)"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Featured"
+msgstr "ویژه"
+
+msgid "Featured Excerpt Trimmed Ending"
+msgstr "پایان خلاصه"
+
+msgid "Featured Meta Position"
+msgstr "موقعیت متای ویژه"
+
+msgid "Featured Post Excerpt Length"
+msgstr "طول خلاصه پست ویژه"
+
+msgid "Featured Post Image Max Width"
+msgstr "حداکثر عرض تصویر پست ویژه"
+
+msgid "Featured Post Image Position"
+msgstr "موقعیت تصویر پست ویژه"
+
+msgid "Featured Post Image Size"
+msgstr "اندازه تصویر پست ویژه"
+
+msgid "Featured Post Layout"
+msgstr "طرح بندی پست ویژه"
+
+msgid "Featured Post Margin"
+msgstr "فاصله (Margin) پست ویژه"
+
+msgid "Featured Post Max Width"
+msgstr "حداکثر عرض پست ویژه"
+
+msgid "Featured Post Meta"
+msgstr "متا پست ویژه"
+
+msgid "Featured Post Position"
+msgstr "موقعیت پست ویژه"
+
+msgid "Featured Post Read More Button"
+msgstr "دکمه ادامه مطلب پست ویژه"
+
+msgid "Featured Post Title Max Length (Words)"
+msgstr "حداکثر طول عنوان پست ویژه (کلمات)"
+
+msgid "Featured Read More Button"
+msgstr "دکمه ادامه مطلب ویژه"
+
+msgid "Featured Terms Links"
+msgstr "لینک های شرایط ویژه"
+
+msgid "Filter"
+msgstr "فیلتر"
+
+msgid "Filter by Custom Field"
+msgstr "فیلتر براساس فیلد سفارشی"
+
+msgid ""
+"Force getting videos data from API on each widget refresh. Not recommended, "
+"only for debugging."
+msgstr ""
+"اجبار دریافت ویدئوها از API در هر بازخوانی ابزارک ، توصیه نمی شود ، فقط برای "
+"رفع اشکال است."
+
+msgid "Format"
+msgstr "فرمت"
+
+msgid "Format date"
+msgstr "فرمت تاريخ"
+
+msgid "Format date (localized)"
+msgstr "فرمت تاريخ (محلی)"
+
+msgid "From All"
+msgstr "از همه"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "Gap Between Boxes"
+msgstr "فاصله بین جعبه ها"
+
+msgid "Gap Between Items"
+msgstr "شکاف بین آیتم ها"
+
+msgid "Gap Between Text and Icon"
+msgstr "شکاف بین متن و آیکن"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "General Styles"
+msgstr "استایل های عمومی"
+
+msgid "General settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Generate custom query"
+msgstr "تولید کوئری سفارشی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Get custom posts from terms:"
+msgstr "دریافت پست های سفارشی از شرایط:"
+
+msgid "Get posts from categories:"
+msgstr "دریافت پست ها از دسته ها:"
+
+msgid "Get posts from tags:"
+msgstr "دریافت پست ها از برچسب ها:"
+
+msgid "Global Wrapper Margin"
+msgstr "فاصله (Margin) بسته بندی(Wrapper) عمومی"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "H1"
+msgstr "H1"
+
+msgid "H2"
+msgstr "H2"
+
+msgid "H3"
+msgstr "H3"
+
+msgid "H4"
+msgstr "H4"
+
+msgid "H5"
+msgstr "H5"
+
+msgid "H6"
+msgstr "H6"
+
+msgid "Heading"
+msgstr "عنوان"
+
+msgid "Heading Background"
+msgstr "پس زمینه عنوان"
+
+msgid "Heading Box"
+msgstr "جعبه عنوان"
+
+msgid "Heading Column Width (in pixels)"
+msgstr "عرض ستون عنوان (در پیکسل)"
+
+msgid "Heading Counter"
+msgstr "شمارنده عنوان"
+
+msgid "Heading Icon"
+msgstr "آیکن عنوان"
+
+msgid "Heading Padding"
+msgstr "فاصله داخلی (Padding) عنوان"
+
+msgid "Heading Text"
+msgstr "متن عنوان"
+
+msgid "Heading Title"
+msgstr "عنوان"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hidden Terms Box"
+msgstr "جعبه شرایط پنهان"
+
+msgid "Hidden Terms Icon Size"
+msgstr "اندازه آیکن شرایط پنهان"
+
+msgid "Hide"
+msgstr "پنهان"
+
+msgid "Hide Author On Mobile"
+msgstr "پنهان کردن نویسنده در موبایل"
+
+msgid "Hide Author On Tablets"
+msgstr "پنهان کردن نویسنده در تبلت ها"
+
+msgid "Hide Date On Mobile"
+msgstr "پنهان کردن تاریخ در موبایل"
+
+msgid "Hide Date On Tablets"
+msgstr "پنهان کردن تاریخ در تبلت"
+
+msgid "Hide Duration On Device"
+msgstr "پنهان کردن مدت در دستگاه"
+
+msgid "Hide Index On Device"
+msgstr "پنهان کردن ایندکس در دستگاه"
+
+msgid "Hide Thumbnail Image On Device"
+msgstr "پنهان کردن تصویر بندانگشتی در دستگاه"
+
+msgid "Hide Thumbnail On Mobile"
+msgstr "پنهان کردن بندانگشتی در موبایل"
+
+msgid "Hide Thumbnail On Tablets"
+msgstr "پنهان کردن بندانگشتی در تبلت ها"
+
+msgid "Hide Title On Mobile"
+msgstr "پنهان کردن عنوان در موبایل"
+
+msgid "Hide Title On Tablets"
+msgstr "پنهان کردن عنوان در تبلت"
+
+msgid "Hide unfilled slider"
+msgstr "پنهان کردن اسلایدر تکمیل نشده"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Horizontal Alignment"
+msgstr "چینش افقی"
+
+msgid "Horizontal Gap Between Label and Value"
+msgstr "فاصله افقی بین برچسب و مقدار"
+
+msgid "Horizontal Position by"
+msgstr "موقعیت افقی براساس"
+
+msgid "Horizontal Postition by"
+msgstr "موقعیت افقی براساس"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Hover/Active Color"
+msgstr "رنگ فعال/هاور"
+
+msgid "ID"
+msgstr "شناسه"
+
+msgid "IDs"
+msgstr "شناسه ها"
+
+msgid "Icon Box Size"
+msgstr "اندازه جعبه آیکن"
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Margin"
+msgstr "فاصله (Margin) آیکن"
+
+msgid "Icon Padding"
+msgstr "فاصله داخلی (padding) آیکن"
+
+msgid "Icon Position"
+msgstr "موقعیت آیكن"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid ""
+"If this is used with query posts by ID, it will be ignored. Note: use the "
+"%current_id% macros to exclude the current post."
+msgstr ""
+"اگر این مورد با پست های درخواست توسط شناسه استفاده شود ، نادیده گرفته می "
+"شود. توجه: برای حذف پست فعلی ، از ماکروهای %current_id% استفاده کنید."
+
+msgid ""
+"If this is used with query posts by sticky, it will be ignored. Note: use "
+"the %current_id% macros to exclude the current post."
+msgstr ""
+"اگر این مورد با پست های کوئری توسط چسبان استفاده شود ، نادیده گرفته می شود. "
+"توجه: برای حذف پست فعلی ، از ماکروهای %current_id% استفاده کنید."
+
+msgid "Image Size"
+msgstr "اندازه تصویر"
+
+msgid "Include posts by IDs (10, 22, 19 etc.)"
+msgstr "شامل پست ها براساس شناسه ها (10, 22, 19 etc.)"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Inline"
+msgstr "خطی"
+
+msgid "Inner Content Margin"
+msgstr "فاصله (Margin) محتوای داخلی"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Elementor Now"
+msgstr "نصب الان المنتور"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده"
+
+msgid "Item Min Width"
+msgstr "حداقل عرض آیتم"
+
+msgid "Items"
+msgstr "آیتم‌ها"
+
+msgid "JetBlog"
+msgstr "JetBlog"
+
+msgid "JetBlog For Elementor"
+msgstr "JetBlog برای المنتور"
+
+msgid "JetBlog Settings"
+msgstr "تنظیمات JetBlog "
+
+msgid "JetBlog requires Elementor to be activated."
+msgstr "JetBlog به المنتور نیاز دارد تا فعال شود."
+
+msgid "JetBlog requires Elementor to be installed."
+msgstr "JetBlog نیاز به نصب المنتور دارد."
+
+msgid "JetElements"
+msgstr "JetElements"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins License Deactivation"
+msgstr "غیرفعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های Jet"
+
+msgid "Justified"
+msgstr "جاستیفای"
+
+msgid "Justify"
+msgstr "جاستیفای"
+
+msgid "Key"
+msgstr "کلید"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Layout"
+msgstr "طرح"
+
+msgid "Layout 1 (5 posts)"
+msgstr "طرح 1 (5 پست)"
+
+msgid "Layout 2 (4 posts)"
+msgstr "طرح 2 (4 پست)"
+
+msgid "Layout 3 (4 posts)"
+msgstr "طرح 3 (4 پست)"
+
+msgid "Layout 4 (3 posts)"
+msgstr "طرح 4 (3 پست)"
+
+msgid "Layout 5 (5 posts)"
+msgstr "طرح 5 (5 پست)"
+
+msgid "Layout 6 (5 posts)"
+msgstr "طرح 6 (5 پست)"
+
+msgid "Layout 7 (2, 4, 6 posts)"
+msgstr "طرح 7 (2, 4, 6 پست)"
+
+msgid "Layout 8 (3, 6, 9 posts)"
+msgstr "طرح 8 (3, 6, 9 پست)"
+
+msgid "Layout 9 (4, 8, 12 posts)"
+msgstr "طرح 9 (4, 8, 12 پست)"
+
+msgid "Leave empty to automatically get title from video"
+msgstr "برای دریافت خودکار عنوان از ویدئو خالی بگذارید"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Left Indent"
+msgstr "تورفتگی چپ"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Links Color"
+msgstr "رنگ لینک‌ها"
+
+msgid "Links Hover Color"
+msgstr "رنگ هاور لینک ها"
+
+msgid "Loader Dash Color"
+msgstr "رنگ خط تیره لودر"
+
+msgid "Loader Opacity"
+msgstr "شفافیت لودر"
+
+msgid "Loader Styles"
+msgstr "استایل لودر"
+
+msgid "Loader Track Color"
+msgstr "رنگ مسیر لودر"
+
+msgid "Long Arrow"
+msgstr "فلش بلند(Long Arrow)"
+
+msgid "Main Box Title"
+msgstr "عنوان جعبه اصلی"
+
+msgid "Main Box Width ( % )"
+msgstr "عرض جعبه اصلی ( % )"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid "Mark First Post as Featured"
+msgstr "علامت گذاری اولین پست به عنوان ویژه"
+
+msgid "Max Terms to Show"
+msgstr "حداکثر شرایط برای نمایش"
+
+msgid "Menu Order"
+msgstr "ترتیب منو"
+
+msgid "Menu order"
+msgstr "ترتیب منو"
+
+msgid "Meta"
+msgstr "متا"
+
+msgid "Meta Divider"
+msgstr "جداکننده متا"
+
+msgid "Meta Fields Position"
+msgstr "موقعیت فیلدهای متا"
+
+msgid "Meta Icon Gap"
+msgstr "شکاف آیکن متا"
+
+msgid "Meta Icon Size"
+msgstr "اندازه آیکن متا"
+
+msgid "Meta Label"
+msgstr "برچسب متا"
+
+msgid "Meta Position"
+msgstr "مکان متا"
+
+msgid "Meta Styles %s"
+msgstr "استایل های متا  %s"
+
+msgid "Meta Value"
+msgstr "مقدار متا"
+
+msgid "Meta key from postmeta table in database"
+msgstr "کلید متا از جدول postmeta در پایگاه داده"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "Min Height"
+msgstr "حداقل ارتفاع"
+
+msgid "Modified"
+msgstr "اصلاح شده"
+
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr ""
+"خطای شروع ماژول بروزرسانی پایگاه داده در %s - نسخه و نامک (slug) آرگومان های "
+"مورد نیاز است"
+
+msgid "More Terms Icon"
+msgstr "آیکن شرایط بیشتر"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های جت با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Multiline Typing"
+msgstr "تایپ چندخطی"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Name (slug)"
+msgstr "نامک(slug)"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "Newer Link Padding"
+msgstr "فاصله داخلی (Padding) لینک جدیدتر"
+
+msgid "Newer posts"
+msgstr "پست های جدیدتر"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "Next Arrow Position"
+msgstr "موقعیت پیکان بعدی"
+
+msgid "No"
+msgstr "نه"
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "نرمال"
+
+msgid ""
+"Note: posts number per page will be inherited from Reading Settings. You can "
+"change it %s"
+msgstr ""
+"توجه: تعداد پست ها در هر صفحه از تنظیمات خواندن به ارث می رسد. می توانید %s "
+"را تغییر دهید"
+
+msgid "Number of Slides"
+msgstr "تعداد اسلایدها"
+
+msgid "Number of videos"
+msgstr "تعداد ویدیوها"
+
+msgid "Older Link Padding"
+msgstr "فاصله داخلی (Padding) لینک قدیمی تر"
+
+msgid "Older posts"
+msgstr "پست های قدیمی تر"
+
+msgid "Option for non-mobile devices"
+msgstr "گزینه ای برای دستگاه های غیرهمراه"
+
+msgid "Or use JetEngine Query Builder"
+msgstr "یا استفاده کوئری از کوئری ساز JetEngine"
+
+msgid "Order"
+msgstr "ترتیب"
+
+msgid "Order by"
+msgstr "ترتیب براساس"
+
+msgid "Padding"
+msgstr "حاشیه"
+
+msgid "Paging Arrows"
+msgstr "پیکان های صفحه بندی"
+
+msgid "Parent"
+msgstr "والد"
+
+msgid "Playlist Height"
+msgstr "ارتفاع لیست پخش"
+
+msgid ""
+"Please set Google API key to correctly get data for YouTube videos. You can "
+"create own API key  %1$s. Paste created key on %2$s"
+msgstr ""
+"لطفاً کلید API گوگل را تنظیم کنید تا داده های ویدیوهای یوتیوب را به درستی "
+"دریافت کند. می توانید کلید API خود را %1$s ایجاد کنید. کلید ایجاد شده روی را "
+"در %2$s قرار دهید"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Pointer Color"
+msgstr "رنگ نشانگر"
+
+msgid "Pointer Height"
+msgstr "ارتفاع نشانگر"
+
+msgid "Pointer Width"
+msgstr "عرض اشاره گر"
+
+msgid "Post"
+msgstr "پست"
+
+msgid "Post Date Format"
+msgstr "فرمت تاریخ پست"
+
+msgid "Post Image"
+msgstr "تصویر پست"
+
+msgid "Post Image Max Width"
+msgstr "حداکثر عرض تصویر پست"
+
+msgid "Post Image Overlay"
+msgstr "پوشش تصویر پست"
+
+msgid "Post Image Position"
+msgstr "موقعیت تصویر پست"
+
+msgid "Post Image Size"
+msgstr "اندازه تصویر پست"
+
+msgid "Post Meta"
+msgstr "متا پست"
+
+msgid "Post Read More Button"
+msgstr "دکمه ادامه مطلب پست"
+
+msgid "Post Text"
+msgstr "متن پست"
+
+msgid "Post Thumbnail"
+msgstr "بندانگشتی پست"
+
+msgid "Post Title"
+msgstr "عنوان پست"
+
+msgid "Post Title Max Length (Words)"
+msgstr "حداکثر طول عنوان پست (کلمات)"
+
+msgid "Post Type"
+msgstr "نوع پست"
+
+msgid "Posts"
+msgstr "پست ها"
+
+msgid "Posts List Margin"
+msgstr "فاصله (Margin) لیست پست ها"
+
+msgid "Posts Navigation"
+msgstr "ناوبری نوشته‌ها"
+
+msgid "Posts Number to Show"
+msgstr "تعداد پست های برای نمایش"
+
+msgid "Posts Offset"
+msgstr "آفست های پست"
+
+msgid "Posts Pagination"
+msgstr "صفحه بندی پست ها"
+
+msgid "Posts Wrapper"
+msgstr "بسته بندی(Wrapper) پست ها"
+
+msgid "Prepare meta value with callback"
+msgstr "مقادیر متا را با برگشت تماس آماده کنید"
+
+msgid "Preserve post ID order given in the \"Include posts by IDs\" option"
+msgstr ""
+"ترتیب شناسه پست را که در گزینه (شامل پست ها توسط شناسه ها) موجود است ، حفظ "
+"کنید"
+
+msgid "Prev Arrow Position"
+msgstr "موقعیت پیکان قبلی"
+
+msgid "Prev/Next Icons"
+msgstr "آیکن های قبلی/بعدی"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Query & Controls"
+msgstr "کوئری و کنترل ها"
+
+msgid "Query Custom Posts By"
+msgstr "کوئری پست سفارشی توسط"
+
+msgid "Query Posts By"
+msgstr "کوئری پست براساس"
+
+msgid "Rand"
+msgstr "تصادفی"
+
+msgid "Read More"
+msgstr "ادامه مطلب"
+
+msgid "Read More Button"
+msgstr "دکمه ادامه مطلب"
+
+msgid "Read More Button Icon"
+msgstr "آیکن دکمه ادامه مطلب"
+
+msgid "Read More Button Label"
+msgstr "برچسب دکمه ادامه مطلب"
+
+msgid "Relevance"
+msgstr "ارتباط"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Right Indent"
+msgstr "تورفتگی راست"
+
+msgid "RollUp Extra Terms"
+msgstr "شرایط اضافی RollUp"
+
+msgid "Rows Number"
+msgstr "شماره ردیف ها"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره شد"
+
+msgid "Scrollbar Styles"
+msgstr "استایل های نواراسکرول"
+
+msgid "Scrollbar Thumb"
+msgstr "بدانگشتی نواراسکرول"
+
+msgid "Scrollbar Track"
+msgstr "مسیر نواراسکرول"
+
+msgid "Scrolling to the top of the widget after a click on pagination arrow"
+msgstr "پس از کلیک بر روی پیکان صفحه بندی ، به بالای ابزارک پیمایش می کند"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select Control Arrows Type"
+msgstr "نوع پیکان های کنترل را انتخاب کنید"
+
+msgid "Select Terms Type for Filter"
+msgstr "انتخاب نوع شرایط برای فیلتر"
+
+msgid "Select post types supports Filter by Terms feature"
+msgstr "انتخاب فیلتر پشتیبانی انواع پست ها با ویژگی شرایط"
+
+msgid "Select query from JetEngine Query Builder"
+msgstr "انتخاب کوئری از کوئری ساز JetEngine"
+
+msgid ""
+"Select query from JetEngine query builder to use as source. Supports only "
+"Posts queries"
+msgstr ""
+"کوئری را از کوئری ساز JetEngine برای استفاده به عنوان منبع انتخاب کنید. فقط "
+"از کوئری های پست ها پشتیبانی می کند"
+
+msgid "Select query..."
+msgstr "انتخاب کوئری..."
+
+msgid "Select types..."
+msgstr "انتخاب انواع..."
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Set 0 to hide excerpt or -1 to show full excerpt"
+msgstr "تنظیم 0 برای پنهان کردن خلاصه یا -1 برای نمایش خلاصه کامل"
+
+msgid "Set 0 to show full title"
+msgstr "برای نمایش کامل عنوان 0 را تنظیم کنید"
+
+msgid "Set comma separated IDs list (10, 22, 19 etc.)"
+msgstr "تنظیم لیست شناسه های جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Set comma separated terms IDs list (10, 22, 19 etc.)"
+msgstr "تنظیم لیست شناسه های جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Set custom query"
+msgstr "تنظیم کوئری سفارشی"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Show"
+msgstr "نمایش"
+
+msgid "Show \"All\" Button in Start of Filter"
+msgstr "نمایش دکمه (همه) در شروع فیلتر"
+
+msgid "Show Arrows Only on Hover"
+msgstr "نمایش پیکان ها فقط در هاور"
+
+msgid "Show Controls Arrows"
+msgstr "نمایش پیکان های کنترل"
+
+msgid "Show Current Date"
+msgstr "نمایش تاریخ فعلی"
+
+msgid "Show Excerpt on Small Boxes Only on Hover"
+msgstr "نمایش خلاصه فقط در هاور جعبه های کوچک"
+
+msgid "Show Filter by Terms"
+msgstr "نمایش فیلتر براساس شرایط"
+
+msgid "Show Item Duration"
+msgstr "نمایش مدت آیتم"
+
+msgid "Show Item Number and Status"
+msgstr "نمایش تعداد آیتم و وضعیت"
+
+msgid "Show Meta %s"
+msgstr "نمایش متا %s"
+
+msgid "Show Paging Control"
+msgstr "نمایش کنترل صفحه بندی"
+
+msgid "Show Post Author"
+msgstr "نمایش نویسنده پست"
+
+msgid "Show Post Comments"
+msgstr "نمایش نظرات ارسال شده"
+
+msgid "Show Post Date"
+msgstr "نمایش تاریخ پست"
+
+msgid "Show Post Terms"
+msgstr "نمایش شرایط پست"
+
+msgid "Show Post Thumbnail"
+msgstr "نمایش بندانگشتی پست"
+
+msgid "Show Post Title"
+msgstr "نمایش عنوان پست"
+
+msgid "Show Scroll Only on Hover"
+msgstr "نمایش اسکرول فقط در هاور"
+
+msgid "Show Terms From"
+msgstr "نمایش شرایط از"
+
+msgid "Show Thumbnails Heading"
+msgstr "نمایش عنوان بندانگشتی"
+
+msgid "Show Title Pointer"
+msgstr "نمایش نشانگر عنوان"
+
+msgid "Show Videos Counter"
+msgstr "نمایش شمارنده فیلم ها"
+
+msgid "Simple"
+msgstr "ساده"
+
+msgid "Slider Settings"
+msgstr "تنظیمات اسلایدر"
+
+msgid "Smart Posts List"
+msgstr "لیست پست های هوشمند"
+
+msgid "Smart Posts List: allow filters for post types"
+msgstr "لیست پست های هوشمند: اجازه فیلتر کردن انواع پست ها"
+
+msgid "Smart Posts Tiles"
+msgstr "کاشی پست های هوشمند"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه جت خود باید لایسنس را فعال کنید"
+
+msgid "Source"
+msgstr "منبع"
+
+msgid "Source URL"
+msgstr "آدرس منبع"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Update"
+msgstr "شروع بروزرسانی"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Sticky Posts"
+msgstr "پست های چسبیده"
+
+msgid "Sub"
+msgstr "زیر"
+
+msgid "Super"
+msgstr "فوق العاده"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Tags"
+msgstr "برچسب ها"
+
+msgid "Terms"
+msgstr "شرایط"
+
+msgid "Terms Links"
+msgstr "لینک های شرایط"
+
+msgid "Text Bottom"
+msgstr "پایین متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text Decoration"
+msgstr "تزئینات متن"
+
+msgid "Text Decoration Hover"
+msgstr "هاور دکوراسیون متن"
+
+msgid "Text Ticker"
+msgstr "تیکر متن"
+
+msgid "Text Top"
+msgstr "بالای متن"
+
+msgid "The newer posts link icon"
+msgstr "آیکن لینک پست های جدیدتر"
+
+msgid "The newer posts text"
+msgstr "متن پست های جدیدتر"
+
+msgid "The next page link icon"
+msgstr "آیکن لینک صفحه بعدی"
+
+msgid "The next page text"
+msgstr "متن صفحه بعدی"
+
+msgid "The older posts link icon"
+msgstr "آیکن لینک پست های قدیمی تر"
+
+msgid "The older posts link text"
+msgstr "متن لینک پست های قدیمی تر"
+
+msgid "The previous page link text"
+msgstr "متن لینک صفحه قبلی"
+
+msgid "Thumb Style"
+msgstr "استایل بندانگشتی"
+
+msgid "Thumbnail"
+msgstr "بند انگشتی"
+
+msgid "Thumbnail Column Width (in pixels)"
+msgstr "عرض ستون بند انگشتی (در پیکسل)"
+
+msgid "Thumbnail Image Gap"
+msgstr "شکاف تصویر بندانگشتی"
+
+msgid "Thumbnail Row Padding"
+msgstr "فاصله داخلی (Padding) ردیف بند انگشتی"
+
+msgid "Thumbnail Size"
+msgstr "اندازه بندانگشتی"
+
+msgid "Thumbnail Styles"
+msgstr "استایل های بند انگشتی"
+
+msgid "Thumbnails Background"
+msgstr "پس زمینه بند انگشتی ها"
+
+msgid "Thumbnails List Width (%)"
+msgstr "عرض لیست بندانگشتی(%)"
+
+msgid "Thumbnails Numbers and Status Icons"
+msgstr "تعداد بندانگشتی و آیکن های وضعیت"
+
+msgid "Thumbnails Orientation"
+msgstr "جهت بندانگشتی"
+
+msgid "Thumbnails Position"
+msgstr "موقعیت تصویربند انگشتی"
+
+msgid "Title"
+msgstr "عنوان فیلد"
+
+msgid "Title Color"
+msgstr "رنگ عنوان"
+
+msgid "Title Max Length (Words)"
+msgstr "حداکثر طول عنوان (کلمات)"
+
+msgid "Title Tag"
+msgstr "برچسب عنوان"
+
+msgid "To Top"
+msgstr "به بالا"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Top Indent"
+msgstr "تورفتگی بالا"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typing Cursor Char"
+msgstr "کاراکتر نشانگر تایپ"
+
+msgid "Typing Effect"
+msgstr "افکت تایپ"
+
+msgid "Typography"
+msgstr "تایپو گرافی"
+
+msgctxt "Typography Control"
+msgid "Line Through"
+msgstr "خط روی نوشته"
+
+msgctxt "Typography Control"
+msgid "None"
+msgstr "هیچ"
+
+msgctxt "Typography Control"
+msgid "Overline"
+msgstr "خط بالا"
+
+msgctxt "Typography Control"
+msgid "Underline"
+msgstr "خط زیر"
+
+msgid "URL"
+msgstr "نشانی اینترنتی"
+
+msgid "Underline"
+msgstr "خط زیر"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Update complete, thank you for updating to the latest version!"
+msgstr "به روزرسانی کامل شد ، از شما برای به روزرسانی به آخرین نسخه متشکریم!"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Use Custom Query"
+msgstr "استفاده از کوئری سفارشی"
+
+msgid "Use as Archive Template"
+msgstr "استفاده بعنوان قالب آرشیو"
+
+msgid "Value Format"
+msgstr "فرمت مقدار"
+
+msgid "Value format string, accepts HTML markup. %s - is meta value"
+msgstr "استرینگ فرمت مقدار نشانه گذاری های HTML را میپذیرد.%s - مقدار متا است"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Vertical Alignment"
+msgstr "چینش عمودی"
+
+msgid "Vertical Position by"
+msgstr "موقعیت عمودی براساس"
+
+msgid "Vertical Postition by"
+msgstr "موقعیت عمودی براساس"
+
+msgid "Video Playlist"
+msgstr "لیست پخش ویدئو"
+
+msgid "We need to update your database to the latest version."
+msgstr "ما باید پایگاه داده شما را به آخرین نسخه به روز کنیم."
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Widget Title"
+msgstr "عنوان ابزارک ها"
+
+msgid "Works only with main Query object."
+msgstr "فقط با آبجکت کوئری اصلی کار می کند."
+
+msgid "Wrapper Border Radius"
+msgstr "گردی گوشه‌های حاشیه (Border) بسته بندی"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You not have any Posts queries, create new here - %s"
+msgstr "شما هیچ کوئری پست ندارید، اینجا ایجاد کنید - %s"
+
+msgid "YouTube API Key"
+msgstr "کلید API یوتیوب"
+
+msgid "YouTube Channel or Playlist"
+msgstr "کانال یا لیست پخش یوتیوب"
+
+msgid "YouTube Channel or Playlist URL"
+msgstr "آدرس کانال یوتیوب یا لیست پخش"
+
+msgid "YouTube or Vimeo video URL"
+msgstr "آدرس ویدئوی یوتیوب یا ویمئو"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اصلی شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "here"
+msgstr "اینجا"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetblog/"
+msgstr "https://crocoblock.com/plugins/jetblog/"
+
+msgid "settings page"
+msgstr "صفحه تنظیمات"
+
+msgid "videos"
+msgstr "ویدئو ها"

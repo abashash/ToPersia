@@ -1,0 +1,504 @@
+.elementor-1935 .elementor-element.elementor-element-261a817{--display:flex;}/* Start custom CSS for html, class: .elementor-element-6b54fd7 *//* ═══════════════════════════════════════════════════════════════
+   ToPersia Mega Menu Panel — v2 (فشرده‌تر)
+   ═══════════════════════════════════════════════════════════════ */
+
+.tp-mega{
+  --tp-bg:#FAF7F1;
+  --tp-card:#FFFFFF;
+  --tp-line:#E8E1D2;
+  --tp-line-2:#F0EAD9;
+  --tp-ink:#2A2A28;
+  --tp-ink-2:#6F6B64;
+  --tp-muted:#98A09B;
+  --tp-brand:#177E7A;
+  --tp-brand-2:#0a5450;
+  --tp-gold:#C9A55E;
+  --tp-gold-soft:#F6EEDB;
+  --tp-map-bg:#F1EAD9;
+
+  direction:rtl;
+  width:100%;
+  max-width:1400px;
+  margin:0 auto;
+  background:var(--tp-bg);
+  border-radius:20px;
+  /* ⬇️ پدینگ بیرونی کم شد: 22 → 14 */
+  padding:14px;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,.05),
+    0 30px 60px -20px rgba(0,0,0,.5);
+  display:grid;
+  /* ⬇️ ستون کناری نازک‌تر، وسط پهن‌تر */
+  grid-template-columns:210px minmax(0,1fr) 280px;
+  /* ⬇️ گپ‌ها کم شد: 22 → 14 */
+  gap:14px;
+  color:var(--tp-ink);
+  font-family:"Vazirmatn","Peyda",system-ui,-apple-system,"Segoe UI",sans-serif;
+  position:relative;
+  z-index:50;
+}
+
+.tp-mega *,
+.tp-mega *::before,
+.tp-mega *::after{box-sizing:border-box}
+
+.tp-mega a{text-decoration:none;color:inherit;display:block}
+.tp-mega button{font:inherit;cursor:pointer}
+.tp-mega svg{display:block}
+
+@media(max-width:1100px){
+  .tp-mega{
+    grid-template-columns:180px minmax(0,1fr) 240px;
+    gap:10px;
+    padding:10px;
+  }
+}
+@media(max-width:900px){
+  .tp-mega{
+    grid-template-columns:1fr;
+    gap:12px;
+    border-radius:16px;
+    padding:12px;
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ستون راست: تب‌های عمودی
+   ─────────────────────────────────────────────────────────────── */
+.tp-mega__side{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  /* ⬇️ پدینگ کمتر */
+  padding-inline-end:14px;
+  border-inline-end:1px solid var(--tp-line);
+  align-self:start;
+}
+
+@media(max-width:900px){
+  .tp-mega__side{
+    padding-inline-end:0;
+    padding-block-end:10px;
+    border-inline-end:0;
+    border-block-end:1px solid var(--tp-line);
+    flex-direction:row;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .tp-mega__side::-webkit-scrollbar{display:none}
+  .tp-mega__side-link{flex:0 0 auto}
+}
+
+.tp-mega__side-link{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  /* ⬇️ پدینگ کمتر: 12/14 → 10/12 */
+  padding:10px 12px;
+  border-radius:11px;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--tp-ink-2);
+  background:transparent;
+  border:0;
+  text-align:start;
+  transition:background .18s,color .18s;
+  white-space:nowrap;
+  width:100%;
+  font-family:inherit;
+  cursor:pointer;
+}
+.tp-mega__side-link svg{
+  width:19px;
+  height:19px;
+  flex:0 0 auto;
+  color:var(--tp-muted);
+  transition:color .18s;
+}
+.tp-mega__side-link:hover{
+  background:var(--tp-line-2);
+  color:var(--tp-ink);
+}
+.tp-mega__side-link:hover svg{color:var(--tp-brand)}
+
+.tp-mega__side-link.is-active{
+  background:var(--tp-gold-soft);
+  color:var(--tp-ink);
+  font-weight:800;
+}
+.tp-mega__side-link.is-active svg{color:var(--tp-gold)}
+
+.tp-mega__side-link:focus-visible{
+  outline:2px solid var(--tp-brand);
+  outline-offset:2px;
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ستون میانی
+   ─────────────────────────────────────────────────────────────── */
+.tp-mega__main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+.tp-mega__pane{
+  display:flex;
+  flex-direction:column;
+  /* ⬇️ گپ کم شد: 16 → 12 */
+  gap:12px;
+  animation:tpFade .22s ease;
+}
+.tp-mega__pane[hidden]{display:none}
+
+@keyframes tpFade{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.tp-mega__head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  padding-block-end:2px;
+}
+@media(max-width:640px){
+  .tp-mega__head{flex-direction:column;align-items:stretch;gap:8px}
+}
+
+.tp-mega__title h3{
+  margin:0;
+  font-size:1.3rem;
+  font-weight:900;
+  letter-spacing:-.02em;
+  color:var(--tp-ink);
+  line-height:1.2;
+}
+.tp-mega__title p{
+  margin:2px 0 0;
+  font-size:.74rem;
+  color:var(--tp-muted);
+  font-weight:600;
+}
+
+.tp-mega__head-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:.8rem;
+  font-weight:700;
+  color:var(--tp-brand);
+  padding:6px 10px;
+  border-radius:9px;
+  transition:background .18s;
+}
+.tp-mega__head-link:hover{background:rgba(23,126,122,.08)}
+.tp-mega__head-link svg{width:14px;height:14px;transition:transform .2s}
+.tp-mega__head-link:hover svg{transform:translateX(-3px)}
+
+/* ─── تب‌های داخلی ─── */
+.tp-mega__tabs{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  flex-wrap:wrap;
+}
+.tp-mega__tabs button{
+  background:transparent;
+  border:0;
+  padding:7px 13px;
+  border-radius:9px;
+  color:var(--tp-ink-2);
+  font-size:.83rem;
+  font-weight:700;
+  transition:background .18s,color .18s;
+  position:relative;
+  white-space:nowrap;
+  font-family:inherit;
+  cursor:pointer;
+}
+.tp-mega__tabs button:hover{color:var(--tp-ink)}
+.tp-mega__tabs button.is-active{
+  color:var(--tp-brand);
+  background:rgba(23,126,122,.08);
+}
+.tp-mega__tabs button.is-active::before{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--tp-gold);
+  margin-inline-end:6px;
+  vertical-align:middle;
+  transform:translateY(-1px);
+}
+
+/* ─── گرید ─── */
+.tp-mega__grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  /* ⬇️ گپ کم: 12 → 8 */
+  gap:8px;
+}
+.tp-mega__grid[hidden]{display:none}
+
+@media(max-width:1100px){
+  .tp-mega__grid{grid-template-columns:repeat(3,1fr);gap:7px}
+}
+@media(max-width:640px){
+  .tp-mega__grid{grid-template-columns:repeat(2,1fr);gap:6px}
+}
+
+/* ─── کارت — تصویر بزرگ‌تر، بدنه چسبیده ─── */
+.tp-mega__card{
+  background:var(--tp-card);
+  border:1px solid var(--tp-line);
+  border-radius:12px;
+  overflow:hidden;
+  transition:transform .22s cubic-bezier(.4,0,.2,1),
+             box-shadow .22s,
+             border-color .22s;
+  display:flex;
+  flex-direction:column;
+}
+.tp-mega__card:hover{
+  transform:translateY(-3px);
+  border-color:var(--tp-brand);
+  box-shadow:0 14px 26px -14px rgba(23,126,122,.35);
+}
+
+.tp-mega__card img{
+  width:100%;
+  /* ⬆️ ارتفاع تصویر زیاد شد: 100 → 130 */
+  height:130px;
+  object-fit:cover;
+  display:block;
+  background:linear-gradient(135deg,#d4b465,#527670 60%,#17332f);
+  transition:transform .5s;
+}
+.tp-mega__card:hover img{transform:scale(1.06)}
+
+.tp-mega__card-text{
+  /* ⬇️ پدینگ کمتر */
+  padding:9px 11px 11px;
+  position:relative;
+  /* ⬇️ ارتفاع کمتر: 64 → 52 */
+  min-height:52px;
+}
+.tp-mega__card-name{
+  display:block;
+  font-size:.92rem;
+  font-weight:800;
+  color:var(--tp-ink);
+  letter-spacing:-.01em;
+  line-height:1.3;
+}
+.tp-mega__card-sub{
+  display:block;
+  font-size:.7rem;
+  color:var(--tp-muted);
+  font-weight:500;
+  margin-top:2px;
+  /* ⬇️ یک‌خط نگه‌داشتن */
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.tp-mega__card-arrow{
+  position:absolute;
+  inset-block-end:11px;
+  inset-inline-start:11px;
+  width:13px;
+  height:13px;
+  color:var(--tp-muted);
+  opacity:.6;
+  transition:color .2s,opacity .2s,transform .2s;
+}
+.tp-mega__card:hover .tp-mega__card-arrow{
+  color:var(--tp-brand);
+  opacity:1;
+  transform:translateX(-3px);
+}
+.tp-mega__card:hover .tp-mega__card-name{color:var(--tp-brand)}
+
+/* ─── نقشه ─── */
+.tp-mega__map{
+  position:relative;
+  background:var(--tp-map-bg);
+  border:1px solid var(--tp-line);
+  border-radius:14px;
+  padding:10px;
+  color:var(--tp-brand);
+  overflow:hidden;
+}
+.tp-mega__map svg{
+  width:100%;
+  height:auto;
+  max-height:300px;
+  display:block;
+}
+.tp-map-pin circle:first-child{
+  fill:var(--tp-brand);
+  stroke:#fff;
+  stroke-width:2.5;
+}
+.tp-map-pin__halo{
+  fill:var(--tp-brand);
+  opacity:.18;
+  animation:tpPulse 2s ease-in-out infinite;
+}
+.tp-map-pin:nth-child(2) .tp-map-pin__halo{animation-delay:.3s}
+.tp-map-pin:nth-child(3) .tp-map-pin__halo{animation-delay:.6s}
+.tp-map-pin:nth-child(4) .tp-map-pin__halo{animation-delay:.9s}
+.tp-map-pin:nth-child(5) .tp-map-pin__halo{animation-delay:1.2s}
+.tp-map-pin:nth-child(6) .tp-map-pin__halo{animation-delay:1.5s}
+.tp-map-pin:nth-child(7) .tp-map-pin__halo{animation-delay:1.8s}
+
+@keyframes tpPulse{
+  0%,100%{opacity:.10;transform:scale(.8)}
+  50%{opacity:.28;transform:scale(1.6)}
+}
+
+.tp-mega__map-legend{
+  display:flex;
+  gap:16px;
+  margin-top:8px;
+  font-size:.76rem;
+  color:var(--tp-ink-2);
+  flex-wrap:wrap;
+}
+.tp-mega__map-legend span{display:inline-flex;align-items:center;gap:6px}
+.tp-dot{display:inline-block;width:8px;height:8px;border-radius:50%}
+.tp-dot--brand{background:var(--tp-brand)}
+.tp-dot--muted{background:var(--tp-muted)}
+
+/* ───────────────────────────────────────────────────────────────
+   ستون چپ: کارت ویژه
+   ─────────────────────────────────────────────────────────────── */
+.tp-mega__feature{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  align-self:start;
+}
+@media(max-width:900px){
+  .tp-mega__feature{flex-direction:row;gap:10px}
+  .tp-mega__feature-card{flex:1;min-height:180px}
+  .tp-mega__feature-link{flex:0 0 auto;align-self:flex-end;padding-block:12px}
+}
+@media(max-width:640px){
+  .tp-mega__feature{flex-direction:column}
+  .tp-mega__feature-link{align-self:stretch}
+}
+
+.tp-mega__feature-card{
+  position:relative;
+  flex:1;
+  /* ⬆️ ارتفاع کمی کمتر: 340 → 320 */
+  min-height:320px;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(155deg,#c8a55a 0%,#658479 45%,#1e4742 100%);
+  isolation:isolate;
+  transition:transform .3s,box-shadow .3s;
+  box-shadow:0 12px 28px -14px rgba(11,43,42,.5);
+}
+.tp-mega__feature-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 22px 40px -16px rgba(11,43,42,.6);
+}
+.tp-mega__feature-card img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s;
+  z-index:0;
+}
+.tp-mega__feature-card:hover img{transform:scale(1.06)}
+.tp-mega__feature-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(0deg,
+      rgba(5,12,10,.92) 0%,
+      rgba(5,12,10,.55) 30%,
+      rgba(5,12,10,.12) 62%,
+      transparent 100%);
+  z-index:1;
+}
+.tp-mega__feature-body{
+  position:absolute;
+  inset:auto 16px 18px 16px;
+  z-index:2;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.tp-mega__feature-body b{
+  font-size:1.5rem;
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1.1;
+}
+.tp-mega__feature-body em{
+  font-style:normal;
+  font-size:.82rem;
+  font-weight:800;
+  color:var(--tp-gold);
+  margin-top:2px;
+}
+.tp-mega__feature-body i{
+  font-style:normal;
+  font-size:.76rem;
+  color:rgba(255,255,255,.78);
+  line-height:1.6;
+  margin-top:5px;
+  font-weight:500;
+}
+.tp-mega__feature-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  /* ⬇️ پدینگ کمتر: 13/16 → 11/14 */
+  padding:11px 14px;
+  border-radius:12px;
+  background:rgba(23,126,122,.08);
+  border:1px solid rgba(23,126,122,.15);
+  color:var(--tp-brand);
+  font-size:.83rem;
+  font-weight:800;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.tp-mega__feature-link:hover{
+  background:var(--tp-brand);
+  color:#fff;
+  border-color:var(--tp-brand);
+}
+.tp-mega__feature-link svg{
+  width:14px;
+  height:14px;
+  transition:transform .2s;
+}
+.tp-mega__feature-link:hover svg{transform:translateX(-3px)}
+
+/* ───────────────────────────────────────────────────────────────
+   کاهش حرکت
+   ─────────────────────────────────────────────────────────────── */
+@media(prefers-reduced-motion:reduce){
+  .tp-mega *,
+  .tp-mega *::before,
+  .tp-mega *::after{
+    transition:none !important;
+    animation:none !important;
+  }
+  .tp-mega__card:hover{transform:none}
+  .tp-mega__card:hover img{transform:none}
+  .tp-mega__feature-card:hover{transform:none}
+  .tp-mega__feature-card:hover img{transform:none}
+}/* End custom CSS */

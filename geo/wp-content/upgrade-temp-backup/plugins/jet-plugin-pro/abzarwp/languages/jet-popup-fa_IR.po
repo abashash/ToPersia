@@ -1,0 +1,1649 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetPopup\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-19 18:06+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-popup.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "%s Single"
+msgstr "%s تک"
+
+msgid "1 Hour"
+msgstr "۱ ساعت"
+
+msgid "10 Minutes"
+msgstr "10 دقیقه"
+
+msgid "12 Hours"
+msgstr "۱۲ ساعت"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه Jet پیشرفته"
+
+msgid "3 Days"
+msgstr "سه روز"
+
+msgid "3 Hours"
+msgstr "۳ ساعت"
+
+msgid "30 Minutes"
+msgstr "30 دقیقه"
+
+msgid "404 Page"
+msgstr "صفحه 404"
+
+msgid "6 Hours"
+msgstr "۶ ساعت"
+
+msgid ""
+"A new preset will be created. You'll be redirected to Editing page. Also the "
+"template will be added to the popups list on \"All Popups\" page."
+msgstr ""
+"نمونه های آماده جدید ایجاد خواهد شد. به صفحه ویرایش هدایت خواهید شد. همچنین "
+"قالب به لیست پاپ آپ در صفحه (همه پاپ آپ ها) اضافه خواهد شد."
+
+msgid "API Keys"
+msgstr "کلیدهای API"
+
+msgid "API key"
+msgstr "کلید API"
+
+msgid "Account Data were received"
+msgstr "اطلاعات حساب دریافت شد"
+
+msgid "Account ID: "
+msgstr "شناسه حساب: "
+
+msgid "Account Login Page"
+msgstr "صفحه ورود حساب"
+
+msgid "Account Page"
+msgstr "صفحه حساب"
+
+msgid "Action Type"
+msgstr "نوع اقدام"
+
+msgid "Activate"
+msgstr "فعالسازی"
+
+msgid "Activate License"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Plugin"
+msgstr "فعال‌سازی افزونه"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license for automatic updates and awesome support"
+msgstr "لایسنس را برای به روزرسانی خودکار و پشتیبانی عالی فعال کنید"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Add Icon"
+msgstr "افزودن آیکن"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Add condition"
+msgstr "افزودن شرط"
+
+msgid "Advanced"
+msgstr "پیشرفته"
+
+msgid "After Text"
+msgstr "متن بعد"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All"
+msgstr "همه"
+
+msgid "All %s Archives"
+msgstr "همه آرشیو %s"
+
+msgid "All Archives"
+msgstr "همه ی بایگانی ها"
+
+msgid "All Popups"
+msgstr "همه پاپ آپ ها"
+
+msgid "All Products Archives"
+msgstr "آرشیو تمام محصولات"
+
+msgid "And"
+msgstr "و (And)"
+
+msgid "Animation"
+msgstr "انیمیشن"
+
+msgid "Animation type"
+msgstr "نوع انیمیشن"
+
+msgid "Api Server Error"
+msgstr "خطای Api سرور"
+
+msgid "Archive"
+msgstr "آرشیو"
+
+msgid "Attached Popup"
+msgstr "پاپ آپ پیوست شده"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Angle"
+msgstr "زاویه"
+
+msgctxt "Background Control"
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Background Type"
+msgstr "نوع پس‌زمینه"
+
+msgctxt "Background Control"
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgctxt "Background Control"
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgctxt "Background Control"
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgctxt "Background Control"
+msgid "Center Center"
+msgstr "وسط وسط"
+
+msgctxt "Background Control"
+msgid "Center Left"
+msgstr "وسط چپ"
+
+msgctxt "Background Control"
+msgid "Center Right"
+msgstr "وسط راست"
+
+msgctxt "Background Control"
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgctxt "Background Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Background Control"
+msgid "Gradient"
+msgstr "گرادیانت"
+
+msgctxt "Background Control"
+msgid "Linear"
+msgstr "خطی"
+
+msgctxt "Background Control"
+msgid "Location"
+msgstr "مکان"
+
+msgctxt "Background Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgctxt "Background Control"
+msgid "Radial"
+msgstr "شعاعی"
+
+msgctxt "Background Control"
+msgid "Second Background Color"
+msgstr "رنگ پس زمینه دوم"
+
+msgctxt "Background Control"
+msgid "Second Color"
+msgstr "رنگ دوم"
+
+msgctxt "Background Control"
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgctxt "Background Control"
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgctxt "Background Control"
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgctxt "Background Control"
+msgid "Type"
+msgstr "نوع"
+
+msgid "Bar"
+msgstr "نوار"
+
+msgid "Before Text"
+msgstr "متن قبل"
+
+msgid "Blend Mode"
+msgstr "حالت ترکیبی"
+
+msgid "Block Editor"
+msgstr "ویرایشگر بلوک"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه (Border)"
+
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "نوع حاشیه (border)"
+
+msgctxt "Border Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "منقطع"
+
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgctxt "Border Control"
+msgid "Double"
+msgstr "دوبل"
+
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgctxt "Border Control"
+msgid "Width"
+msgstr "عرض"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Bordering"
+msgstr "گوشه"
+
+msgid "Bottom"
+msgstr "دکمه"
+
+msgid "BounceIn"
+msgstr "ورود پرشی"
+
+msgid "BounceOut"
+msgstr "خروج پرشی"
+
+msgctxt "Box Shadow Control"
+msgid "Box Shadow"
+msgstr "سایه جعبه"
+
+msgctxt "Box Shadow Control"
+msgid "Inset"
+msgstr "درونی"
+
+msgctxt "Box Shadow Control"
+msgid "Outline"
+msgstr "بیرونی"
+
+msgctxt "Box Shadow Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Box Size"
+msgstr "اندازه جعبه"
+
+msgid "Button Link"
+msgstr "لینک دکمه"
+
+msgid "Button Size"
+msgstr "اندازه دکمه"
+
+msgid "Button text"
+msgstr "متن دکمه"
+
+msgid "CPT Archive"
+msgstr "آرشیوCPT"
+
+msgid "CPT Single"
+msgstr "CPT تک"
+
+msgid "CPT Taxonomy"
+msgstr "طبقه‌بندی CPT"
+
+msgid "Can't create popup. Please try again"
+msgstr "پاپ آپ ایجاد نمی شود. لطفا دوباره تلاش کنید"
+
+msgid "Can't create preset. Please try again"
+msgstr "نمونه آماده ایجاد نمی شود. لطفا دوباره تلاش کنید"
+
+msgid "Cancel"
+msgstr "لغو"
+
+msgid "Categories: "
+msgstr "دسته بندی ها: "
+
+msgid "Category:"
+msgstr "دسته بندی:"
+
+msgid "Center"
+msgstr "وسط"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Child Page"
+msgstr "صفحه فرزند"
+
+msgid "Choose Preset(optional)"
+msgstr "انتخاب تمپلیت (اختیاری)"
+
+msgid "Choose animation effect for popup."
+msgstr "افکت انیمیشن پاپ آپ را انتخاب کنید"
+
+msgid "Choose popup open event."
+msgstr "رویداد باز پاپ آپ را انتخاب کنید."
+
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgid "Click"
+msgstr "کلیک"
+
+msgid "Click Here"
+msgstr "کلیک کنید"
+
+msgid "Click On Button"
+msgstr "کلیک روی دکمه"
+
+msgid "Click On Custom Selector"
+msgstr "کلیک روی انتخابگر سفارشی"
+
+msgid "Click On Widget"
+msgstr "کلیک روی ابزارک"
+
+msgid "Close All Popups"
+msgstr "بستن همه پاپ آپ ها"
+
+msgid "Close All Popups Сonstantly"
+msgstr "بستن همواره همه پاپ آپ ها"
+
+msgid "Close Button"
+msgstr "دکمه بستن"
+
+msgid "Close On Click"
+msgstr "بستن در کلیک"
+
+msgid "Close On Overlay Click"
+msgstr "بستن در کلیک پوشش"
+
+msgid "Close Popup"
+msgstr "بستن پاپ آپ"
+
+msgid "Close Popup When Success"
+msgstr "بستن پاپ آپ هنگام موفقیت"
+
+msgid "Close Popup Сonstantly"
+msgstr "بستن همواره پاپ آپ "
+
+msgid "Column Width"
+msgstr "عرض ستون"
+
+msgid "Columns Gap"
+msgstr "فاصله ستون ها"
+
+msgid "Conditions aren't selected"
+msgstr "شرایط انتخاب نشده است"
+
+msgid "Conditions have been saved"
+msgstr "شرایط ذخیره شده است!"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Contact Form 7"
+msgstr "فرم تماس 7"
+
+msgid "Container Background"
+msgstr "پس زمینه کانتاینر"
+
+msgid "Container Overlay"
+msgstr "پوشش کانتاینر"
+
+msgid "Content Position"
+msgstr "موقعیت محتوا"
+
+msgid "Content Type"
+msgstr "نوع محتوا"
+
+msgid "Content Type: "
+msgstr "نوع محتوا:"
+
+msgid "Content type"
+msgstr "نوع محتوا"
+
+msgid "Create"
+msgstr "ایجاد"
+
+msgid "Create New Popup"
+msgstr "ایجاد پاپ آپ جدید"
+
+msgid "Create a Popup"
+msgstr "ایجاد پاپ آپ"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Custom Height"
+msgstr "ارتفاع سفارشی"
+
+msgid "Custom Query"
+msgstr "کوئری سفارشی"
+
+msgid "Custom Selector"
+msgstr "انتخاب گر سفارشی"
+
+msgid "Custom Selector Click"
+msgstr "کلیک انتخابگر سفارشی"
+
+msgid "Custom selector"
+msgstr "انتخاب‌گر سفارشی"
+
+msgid "DB Update complete, thank you for updating to the latest version!"
+msgstr ""
+"به روز رسانی DB کامل شد ، از شما برای به روزرسانی به آخرین نسخه متشکرم!"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Data Update"
+msgstr "بروزرسانی داده"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Date Created: "
+msgstr "تاریخ ایجاد: "
+
+msgid "Date set according to your timezone: %s."
+msgstr "تاریخ براساس منطقه زمانی شما تنظیم شده است:%s."
+
+msgid "Day"
+msgstr "روز"
+
+msgid "Deactivate License"
+msgstr "غیرفعال‌سازی لایسنس"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Desktop"
+msgstr "دسکتاپ"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Device"
+msgstr "دستگاه"
+
+msgid "Disable Page Scrolling"
+msgstr "غیرفعال کردن اسکرول صفحه"
+
+msgid "Disable page scrolling"
+msgstr "غیرفعال کردن اسکرول صفحه"
+
+msgid "Display Conditions"
+msgstr "شرایط نمایش"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "DoubleOptin: "
+msgstr "دومرحله ای: "
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-Mail"
+msgstr "ایمیل"
+
+msgid "E-Mail Label"
+msgstr "برچسب ایمیل"
+
+msgid "E-Mail Placeholder"
+msgstr "نگه دارنده مکان ایمیل"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "E-mail %s has been subscribed"
+msgstr "ایمیل %s مشترک شده است"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Edit Conditions"
+msgstr "ویرایش شرایط"
+
+msgid "Edit Popup"
+msgstr "ویرایش پاپ آپ"
+
+msgid "Edit Settings"
+msgstr "ویرایش تنظیمات"
+
+msgid "Elementor"
+msgstr "المنتور"
+
+msgid "Elementor editor content is not available in the Blocks Editor"
+msgstr "محتوای ویرایشگر المنتور در ویرایشگر بلوک ها در دسترس نیست"
+
+msgid "Elementor not installed"
+msgstr "المنتور نصب نشده است"
+
+msgid "Elementor plugin not active."
+msgstr "افزونه المنتور فعال نیست."
+
+msgid "Email Size"
+msgstr "Email Size"
+
+msgid "Enable to block page scrolling. Close popup to continue page scrolling."
+msgstr ""
+"فعال کردن برای مسدود کردن پیمایش صفحه. برای ادامه پیمایش صفحه، پاپ آپ را "
+"ببندید."
+
+msgid "End Time"
+msgstr "زمان پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Enter E-Mail"
+msgstr "ایمیل را وارد کنید"
+
+msgid "Enter Redirect Url"
+msgstr "آدرس تغییرمسیر را وارد کنید"
+
+msgid "Enter Submit Button Text"
+msgstr "متن دکمه ارسال را وارد کنید"
+
+msgid ""
+"Enter a delay after which the popup will appear after the page is loaded."
+msgstr "یک تأخیر که پس از بارگیری صفحه، پاپ آپ ظاهر می شود را وارد کنید."
+
+msgid "Enter popup name"
+msgstr "نام پاپ آپ را وارد کنید"
+
+msgid "Enter the css selector used in the block HTML"
+msgstr "انتخابگر css مورد استفاده در بلوک HTML را وارد کنید"
+
+msgid "Enter the date when the popup will appear."
+msgstr "تاریخ ظاهر شدن پاپ آپ را وارد کنید."
+
+msgid ""
+"Enter the scrolling percentage of the page on which the popup will appear."
+msgstr "درصد پیمایش صفحه ای که پاپ آپ در آن ظاهر می شود را وارد کنید."
+
+msgid "Enter the time when the popup will appear."
+msgstr "زمان ظاهر شدن پاپ آپ را وارد کنید."
+
+msgid "Enter the time when the popup will will disappear."
+msgstr "زمان ظاهر شدن پاپ آپ را وارد کنید."
+
+msgid "Entire"
+msgstr "کل"
+
+msgid "Entire Site"
+msgstr "تمام سایت"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Export Popup"
+msgstr "برون‌بری پاپ آپ"
+
+msgid "Fade"
+msgstr "محو شدن"
+
+msgid "Field Merge Tag"
+msgstr "برچسب ادغام فیلد"
+
+msgid "Fields"
+msgstr "فیلدها"
+
+msgid "File not passed"
+msgstr "فایل عبور نکرد"
+
+msgid "Filter By: "
+msgstr "فیلتر براساس: "
+
+msgid "First Name: "
+msgstr "نام کوچک: "
+
+msgid "Focus"
+msgstr "فوکوس"
+
+msgid "Font Color"
+msgstr "رنگ فونت"
+
+msgid "Force Loading"
+msgstr "اجبار بارگیری"
+
+msgid "Force Loading every time you open the popup"
+msgstr "هر زمان که پاپ آپ را باز می کنید ، بارگیری را اجباری کنید"
+
+msgid "Force Loading every time you open the popup."
+msgstr "هر زمان که پاپ آپ را باز می کنید ، بارگیری را اجباری کنید"
+
+msgid "Format not allowed"
+msgstr "فرمت مجاز نیست"
+
+msgid "Front Page"
+msgstr "صفحه فرانت"
+
+msgid "Full View"
+msgstr "تمام صفحه"
+
+msgid "Full Width"
+msgstr "تمام عرض"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Styles"
+msgstr "استایل های عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Guest"
+msgstr "مهمان"
+
+msgid "Gutenberg"
+msgstr "گوتنبرگ"
+
+msgid "Height"
+msgstr "ارتفاع"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Here you can create a new blank popup or use template preset."
+msgstr ""
+"در اینجا می توانید یک پاپ آپ جدید ایجاد کنید یا از یک تمپلیت استفاده کنید."
+
+msgid ""
+"Here you can customize the popup by specifying the animation, opening "
+"trigger, overlay settings, close buttons and more."
+msgstr ""
+"در اینجا می‌توانید با مشخص کردن انیمیشن، باز کردن trigger، تنظیمات پوشش، "
+"دکمه‌های بستن و موارد دیگر، پاپ آپ را سفارشی کنید."
+
+msgid "Here you can import a popup."
+msgstr "در اینجا می توانید یک پاپ آپ درون‌ریزی کنید."
+
+msgid ""
+"Here you can set one or multiple conditions, according to which the given "
+"popup will be either shown or hidden on specific pages."
+msgstr ""
+"در اینجا می‌توانید یک یا چند شرط را تنظیم کنید، که طبق آن پاپ آپ داده‌شده در "
+"صفحات خاصی نشان داده یا پنهان می‌شود."
+
+msgid "Horizontal Flip"
+msgstr "فلیپ افقی"
+
+msgid "Horizontal Padding"
+msgstr "فاصله داخلی (Padding) افقی"
+
+msgid "Horizontal Position"
+msgstr "موقعیت افقی"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Distance"
+msgstr "فاصله آیکن"
+
+msgid "Icon Margin"
+msgstr "فاصله (Margin) آیکن"
+
+msgid "Icon Position"
+msgstr "موقعیت آیکن"
+
+msgid "Icon Rendered"
+msgstr "آیکن رندر شده"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid "Icon Styles"
+msgstr "استایل دکمه"
+
+msgid "Icon Transform"
+msgstr "انتقال آیکن"
+
+msgid "Import"
+msgstr "درون‌ریزی"
+
+msgid "Import Popup"
+msgstr "درون ریزی پاپ آپ"
+
+msgid "Import a Popup"
+msgstr "درون‌ریزی پاپ‌آپ"
+
+msgid "In Child Product Categories"
+msgstr "در دسته بندی محصولات فرزند"
+
+msgid ""
+"In Popup Library, you can select the pre-designed popups that can be used as "
+"presets for your new popups."
+msgstr ""
+"در کتابخانه پاپ آپ، می‌توانید پاپ آپ از قبل طراحی‌شده‌ای که می‌توان به‌عنوان "
+"پیش‌تنظیم برای پاپ آپ جدیدتان استفاده شوند را انتخاب کنید."
+
+msgid "In Post categories"
+msgstr "در دسته‌بندی‌های پست"
+
+msgid "In Post tags"
+msgstr "در برچسب‌های پست"
+
+msgid "Inactivity time after(s)"
+msgstr "زمان عدم فعالیت بعد از(s)"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Incorrect doc type."
+msgstr "نوع فایل صحیح نیست"
+
+msgid "Incorrect type"
+msgstr "نوع نادرست"
+
+msgid "Info"
+msgstr "اطلاعات"
+
+msgid "Input"
+msgstr "ورودی"
+
+msgid "Input params string"
+msgstr "رشته پارامترها را وارد کنید"
+
+msgid "Input your MailChimp API key. Learn more about "
+msgstr "کلید API MailChimp خود را وارد کنید. اطلاعات بیشتر "
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Plugin"
+msgstr "نصب افزونه"
+
+msgid "Install Popup"
+msgstr "نصب پاپ آپ"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installations: "
+msgstr "نصب: "
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده"
+
+msgid "Integrations"
+msgstr "ادغام"
+
+msgid "Internal error. Please, try again later"
+msgstr "خطای داخلی. لطفاً بعداً دوباره امتحان کنید"
+
+msgid "Jet Blocks"
+msgstr "جت بلوک"
+
+msgid "Jet Elements"
+msgstr "المان های جت"
+
+msgid "Jet Engine"
+msgstr "موتور جت"
+
+msgid "Jet Popup"
+msgstr "پاپ‌آپ‌جت"
+
+msgid "Jet Tricks"
+msgstr "جت تریک"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins License Deactivation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های Jet"
+
+msgid "JetPopup"
+msgstr "JetPopup"
+
+msgid "JetPopup Library"
+msgstr "کتابخانه JetPopup"
+
+msgid "JetPopup License not activated"
+msgstr "لایسنس پاپ آپ جت فعال نیست"
+
+msgid "JetPopup Settings"
+msgstr "تنظیمات JetPopup"
+
+msgid "JetStyleManager"
+msgstr "JetStyleManager"
+
+msgid "Justified"
+msgstr "جاستیفای"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Label Color"
+msgstr "رنگ برچسب"
+
+msgid "Label Gap"
+msgstr "فاصله برچسب"
+
+msgid "Label Typography"
+msgstr "تایپوگرافی برچسب"
+
+msgid "Last Name: "
+msgstr "نام خانوادگي: "
+
+msgid "Leave Page"
+msgstr "ترک صفحه"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Key:"
+msgstr "کلید لایسنس:"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "List"
+msgstr "لیست"
+
+msgid "List ID: "
+msgstr "شناسه لیست: "
+
+msgid "Lists were received"
+msgstr "لیست ها دریافت شد"
+
+msgid "Loading content with Ajax"
+msgstr "بارگیری محتوا با آژاکس"
+
+msgid "MailChimp Audiences"
+msgstr "مخاطبین MailChimp"
+
+msgid "MailChimp Audiences List"
+msgstr "لیست مخاطبین MailChimp"
+
+msgid "MailChimp Error"
+msgstr "خطای MailChimp"
+
+msgid "Mailchimp"
+msgstr "MailChimp"
+
+msgid "Mailchimp API key"
+msgstr "API MailChimp"
+
+msgid "Mailchimp Account"
+msgstr "حساب MailChimp"
+
+msgid "Mailchimp: E-Mail Label"
+msgstr "MailChimp: برچسب ایمیل"
+
+msgid "Mailchimp: E-Mail Placeholder"
+msgstr "MailChimp: نگه دارنده مکان ایمیل"
+
+msgid "Mailchimp: Field Label"
+msgstr "MailChimp: برچسب فیلد"
+
+msgid "Mailchimp: Field Placeholder"
+msgstr "MailChimp: نگه دارنده مکان فیلد"
+
+msgid "Mailchimp: Redirect Url"
+msgstr "MailChimp: آدرس تغییر مسیر"
+
+msgid "Mailchimp: Submit Text"
+msgstr "MailChimp: متن ارسال"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid "Member Count: "
+msgstr "تعداد عضو: "
+
+msgid "Merge Fields were received"
+msgstr "فیلد های ادغام دریافت شد"
+
+msgid "Merge Fields: "
+msgstr "ادغام فیلدها: "
+
+msgid "Message"
+msgstr "پیام"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "Minute"
+msgstr "دقیقه"
+
+msgid "Mobile"
+msgstr "موبایل"
+
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr ""
+"خطای شروع ماژول بروزرسانی پایگاه داده در %s - نسخه و نامک (slug) آرگومان های "
+"مورد نیاز است"
+
+msgid "Month"
+msgstr "ماه"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های Jet با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "MoveUp"
+msgstr "حرکت بالا"
+
+msgid "Name(optional)"
+msgstr "نام (اختیاری)"
+
+msgid "Name: "
+msgstr "نام: "
+
+msgid "New Popup"
+msgstr "پاپ آپ جدید"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No Data Found"
+msgstr "داده ای یافت نشد"
+
+msgid "No data found in file"
+msgstr "هیچ داده ای در فایل یافت نشد"
+
+msgid "No matches found"
+msgstr "یافت نشد"
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Not Selected"
+msgstr "انتخاب نشده"
+
+msgid "Not selected"
+msgstr "انتخاب نشده"
+
+msgid "On Date"
+msgstr "در تاریخ"
+
+msgid "On Time"
+msgstr "در زمان"
+
+msgid "On page load(s)"
+msgstr "در بارگذاری صفحه"
+
+msgid "Opacity"
+msgstr "شفافیت"
+
+msgid "Open Date"
+msgstr "تاریخ بازشدن"
+
+msgid "Open Delay(s)"
+msgstr "تأخیر باز کردن"
+
+msgid "Open Event"
+msgstr "رویداد باز"
+
+msgid "Open Time"
+msgstr "زمان باز بودن"
+
+msgid "Open delay"
+msgstr "تأخیر باز کردن"
+
+msgid "Open event"
+msgstr "رویداد باز"
+
+msgid "Or"
+msgstr "یا (Or)"
+
+msgid "Other Styles"
+msgstr "استایل های دیگر"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Page"
+msgstr "برگه"
+
+msgid "Page Scroll Progress(%)"
+msgstr "پیشرفت پیمایش صفحه (%)"
+
+msgid "Page Scrolled(%)"
+msgstr "صفحه پیمایش شده (%)"
+
+msgid "Page Template"
+msgstr "قالب صفحه"
+
+msgid "Pages"
+msgstr "صفحات"
+
+msgid "Placeholder"
+msgstr "نگهدارنده مکان"
+
+msgid "Please, provide valid mail"
+msgstr "لطفاً ایمیل معتبری ارائه دهید"
+
+msgid "Please, set up MailChimp API key and List ID"
+msgstr "لطفاً ، کلید API MailChimp و شناسه لیست را تنظیم کنید"
+
+msgid "Plugin Active"
+msgstr "افزونه فعال"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Popup Action Button"
+msgstr "دکمه اقدام پاپ آپ"
+
+msgid "Popup Action Button: Button Link"
+msgstr "دکمه اقدام پاپ آپ: لینک دکمه"
+
+msgid "Popup Action Button: Button text"
+msgstr "دکمه اقدام پاپ آپ: متن دکمه"
+
+msgid "Popup Container"
+msgstr "کانتاینر پاپ آپ"
+
+msgid "Popup Overlay"
+msgstr "پوشش پاپ آپ"
+
+msgid "Popup has been created"
+msgstr "پاپ آپ ایجاد شده است"
+
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Post"
+msgstr "پست"
+
+msgid "Post categories"
+msgstr "دسته‌بندی‌های پست"
+
+msgid "Post tags"
+msgstr "برچسب های پست"
+
+msgid "Posts"
+msgstr "پست‌ها"
+
+msgid "Preset Library"
+msgstr "کتابخانه طرح های آماده"
+
+msgid "Presets Library"
+msgstr "کتابخانه پیش‌تنظیم"
+
+msgid "Prevent Page Scrolling"
+msgstr "غیرفعال کردن اسکرول صفحه"
+
+msgid "Product Cart"
+msgstr "سبد خریدمحصول"
+
+msgid "Product Categories"
+msgstr "دسته بندی‌های محصول"
+
+msgid "Product Checkout"
+msgstr "تسویه حساب محصول"
+
+msgid "Product Empty Cart"
+msgstr "سبد خرید خالی محصول"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Product Tags"
+msgstr "برچسبهای محصول"
+
+msgid "Product from Category"
+msgstr "محصول از دسته‌بندی"
+
+msgid "Product from Tag"
+msgstr "محصول از برچسب"
+
+msgid "Products Archive"
+msgstr "آرشیو محصولات"
+
+msgid "Query Has Items"
+msgstr "کوئری مواردی دارد"
+
+msgid "Query Has No Items"
+msgstr "کوئری آیتمی ندارد"
+
+msgid "Query not found"
+msgstr "کوئری یافت نشد"
+
+msgid "Read More"
+msgstr "ادامه مطلب"
+
+msgid "Redirect Url"
+msgstr "آدرس تغییر مسیر"
+
+msgid "Relation Type"
+msgstr "نوع رابطه"
+
+msgid "Repeat Showing Popup In"
+msgstr "تکرار نمایش پاپ آپ در"
+
+msgid "Repeat showing popup in"
+msgstr "تکرار نمایش پاپ آپ در"
+
+msgid "Required Plugins: "
+msgstr "افزونه های ضروری: "
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Roles"
+msgstr "نقش ها"
+
+msgid "Rotate"
+msgstr "چرخش"
+
+msgid "Rows Gap"
+msgstr "فاصله ردیف ها"
+
+msgid "SVG Icon"
+msgstr "آیکن SVG"
+
+msgid "Save Conditions"
+msgstr "ذخیره شرایط"
+
+msgid "Save Settings"
+msgstr "ذخیره‌ی تنظیمات"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Scroll Page Progress(%)"
+msgstr "پیشرفت اسکرول صفحه(%)"
+
+msgid "Scroll To Block"
+msgstr "اسکرول به بلوک"
+
+msgid "Scroll To Widget"
+msgstr "اسکرول به ابزارک"
+
+msgid "Search Results"
+msgstr "نتایح جستجو"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Select Jet Popup for this Block"
+msgstr "انتخاب پاپ‌آپ جت‌ برای این بلوک"
+
+msgid "Select Taxonomy"
+msgstr "انتخاب طبقه‌بندی"
+
+msgid "Select category"
+msgstr "انتخاب دسته بندی"
+
+msgid "Select device"
+msgstr "انتخاب دستگاه"
+
+msgid "Select page"
+msgstr "انتخاب برگه"
+
+msgid "Select post"
+msgstr "انتخاب پست"
+
+msgid "Select post type"
+msgstr "نوع پست را انتخاب کنید"
+
+msgid "Select product"
+msgstr "انتخاب محصول"
+
+msgid "Select query"
+msgstr "انتخاب کوئری"
+
+msgid "Select roles"
+msgstr "انتخاب نقش ها"
+
+msgid "Select tag"
+msgstr "انتخاب برچسب"
+
+msgid "Select taxonomy"
+msgstr "انتخاب طبقه‌بندی"
+
+msgid "Select template"
+msgstr "انتخاب قالب"
+
+msgid "Select trigger type"
+msgstr "انتخاب نوع فعال کننده (trigger)"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Server Error. Please try again later."
+msgstr "خطای سرور. لطفاً بعداً دوباره امتحان کنید."
+
+msgid "Server error. Please, check your apikey status or format"
+msgstr "خطای سرور. لطفاً وضعیت یا فرمت apikey خود را بررسی کنید"
+
+msgid "Server error. Please, try again later"
+msgstr "خطای سرور. لطفاً بعداً دوباره امتحان کنید"
+
+msgid "Server error. Stop cheating!!!"
+msgstr "خطای سرور. تقلب نکنید!!!"
+
+msgid "Set a custom selector on which a popup will appear when clicked."
+msgstr "یک انتخابگر سفارشی تنظیم کنید که با کلیک روی آن یک پاپ آپ ظاهر شود."
+
+msgid ""
+"Set the conditions that determine where your Popup is used throughout your "
+"site."
+msgstr "شرایطی را تعیین کنید که پاپ آپ شما در کل سایت شما استفاده شود."
+
+msgid "Set the popup settings"
+msgstr "تنظیم کردن تنظیمات پاپ‌آپ"
+
+msgid "Set the popup visibility conditions"
+msgstr "تنظیم شرایط مشاهده پاپ آپ"
+
+msgid "Set the timeout caching and a popup will be displayed again"
+msgstr "کش پایان زمان را تنظیم کنید و پاپ آپ دوباره نمایش داده می شود"
+
+msgid "Set the timeout caching and a popup will be displayed again."
+msgstr "کش پایان زمان را تنظیم کنید و پاپ آپ دوباره نمایش داده می شود"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات ذخیره شده است!"
+
+msgid "Settings have been saved!"
+msgstr "تنظیمات ذخیره شده است!"
+
+msgid "Shop Page"
+msgstr "صفحه فروشگاه"
+
+msgid "Show Once"
+msgstr "یکبار نمایش"
+
+msgid "Show once"
+msgstr "یکبار نمایش"
+
+msgid "Single Product"
+msgstr "تک محصول"
+
+msgid "Singular"
+msgstr "مفرد"
+
+msgid "Size"
+msgstr "سایز"
+
+msgid "Slide In"
+msgstr "اسلايد داخل"
+
+msgid "SlideInDown"
+msgstr "اسلاید داخل پایین"
+
+msgid "SlideInLeft"
+msgstr "اسلاید درچپ"
+
+msgid "SlideInRight"
+msgstr "اسلاید در راست"
+
+msgid "SlideInUp"
+msgstr "اسلاید داخل بالا"
+
+msgid "Sorry, but you need to activate license to install this popup preset"
+msgstr ""
+"متأسفیم ، اما برای نصب این از پیش تنظیم پاپ آپ باید لایسنس را فعال کنید"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه Jet خود باید لایسنس را فعال کنید"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Time"
+msgstr "زمان شروع"
+
+msgid "Start Update"
+msgstr "شروع بروزرسانی"
+
+msgid "States"
+msgstr "وضعیت"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Stop Cheating!"
+msgstr "تقلب نکنید!"
+
+msgid "Submit Button"
+msgstr "دکمه ارسال"
+
+msgid "Submit Text"
+msgstr "متن ارسال"
+
+msgid "Subscribe"
+msgstr "عضویت"
+
+msgid "Success"
+msgstr "موفقیت"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Sync"
+msgstr "همگام سازی"
+
+msgid "Sync Fields"
+msgstr "همگام سازی فیلدها"
+
+msgid "Synchronize your MailChimp account or add a new list"
+msgstr "حساب MailChimp خود را همگام سازی کنید یا لیست جدیدی اضافه کنید"
+
+msgid "Tablet"
+msgstr "تبلت"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Thank You Page"
+msgstr "صفحه تشکر"
+
+msgid "The advanced plugin for creating popups with Elementor"
+msgstr "افزونه پیشرفته برای ایجاد پاپ آپ با المنتور"
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+"این لایسنس، مجوزها را برای تمام افزونه های موجود در این مجموعه فعال می کند."
+
+msgid "Top"
+msgstr "برترین‌ها"
+
+msgctxt "Transform Control"
+msgid "Translate X"
+msgstr "انتقال  X"
+
+msgctxt "Transform Control"
+msgid "Translate Y"
+msgstr "انتقال Y"
+
+msgid "Trigger Type"
+msgstr "نوع تریگر"
+
+msgid "Try exit"
+msgstr "خارج شوید"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "URL Parameter"
+msgstr "پارامتر Url"
+
+msgid "Undefined"
+msgstr "تعریف نشده"
+
+msgid "Undefined condition type"
+msgstr "نوع شرط تعریف نشده"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Use Additional Fields"
+msgstr "استفاده فیلدهای اضافی"
+
+msgid "Use Close Button"
+msgstr "استفاده دکمه بستن"
+
+msgid "Use Overlay"
+msgstr "استفاده از پوشش"
+
+msgid "Use Redirect Url?"
+msgstr "استفاده آدرس تغییر مسیر؟"
+
+msgid "Use ajax every time you open the popup"
+msgstr "هر بار که پاپ آپ را باز می کنید از آجاکس استفاده کنید"
+
+msgid "User Inactivity Time(s)"
+msgstr "زمان عدم فعالیت کاربر"
+
+msgid "User inactivity time"
+msgstr "زمان عدم فعالیت کاربر"
+
+msgid "Username: "
+msgstr "نام کاربری: "
+
+msgid "Vertical Flip"
+msgstr "فلیپ عمودی"
+
+msgid "Vertical Padding"
+msgstr "فاصله داخلی(padding) عمودی"
+
+msgid "Vertical Position"
+msgstr "موقعیت عمودی"
+
+msgid "Visibility Conditions"
+msgstr "شرایط مشاهده"
+
+msgid "We need to update your database to the latest version."
+msgstr "ما باید پایگاه داده شما را به آخرین نسخه به روز کنیم."
+
+msgid "Week"
+msgstr "هفته"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "When closing the popup, when retriggered, it will not appear again"
+msgstr "هنگام بستن پاپ آپ، هنگام راه اندازی دوباره ، دیگر ظاهر نمی شود"
+
+msgid ""
+"When using ajax, the content of the popup will be loaded after the popup "
+"appears. This allows you to increase the loading speed of the site."
+msgstr ""
+"هنگام استفاده از آجاکس، محتوای پاپ آپ پس از ظاهر شدن پاپ آپ بارگذاری می شود. "
+"این به شما امکان می دهد تا سرعت بارگذاری سایت را افزایش دهید."
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You Haven’t Created Popup Yet."
+msgstr "شما هنوز پاپ آپ ایجاد نکرده اید."
+
+msgid "You can also install additional plugins needed for this preset."
+msgstr ""
+"همچنین می توانید افزونه های اضافی مورد نیاز برای این پیش تنظیم را نصب کنید."
+
+msgid "You don't have permissions to do this"
+msgstr "شما مجوز کافی برای انجام این کار ندارید"
+
+msgid "You really want to create a new Popup?"
+msgstr "شما واقعاً می خواهید یک پاپ آپ جدید ایجاد کنید؟"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Your license has been activated!"
+msgstr "لایسنس شما فعال شده است!"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid "Your mailchimp profile short data"
+msgstr "اطلاعات کوتاه پروفایل MailChimp شما"
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اصلی شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "Z-Index"
+msgstr "شاخص z"
+
+msgid "ZoomIn"
+msgstr "بزرگنمایی"
+
+msgid "ZoomOut"
+msgstr "کوچک نمایی"
+
+msgid "enter the time of user inactivity after which the popup will appear."
+msgstr "زمان عدم فعالیت کاربر که پس از آن پاپ آپ ظاهر می شود را وارد کنید."
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetpopup/"
+msgstr "https://crocoblock.com/plugins/jetpopup/"
+
+msgid ""
+"if the widget is in a popup, the successful response status will close the "
+"popup."
+msgstr "اگر ابزارک در پاپ آپ باشد ، وضعیت پاسخ موفق، پاپ آپ را می بندد."
+
+msgid "Сlose the popup when clicking on the overlay."
+msgstr "با کلیک کاربر روی پوشش ، پاپ آپ را ببندید"

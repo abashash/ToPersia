@@ -1,0 +1,55 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "Accepted": [
+            "پذیرفته شده"
+        ],
+        "Approved!": [
+            "تایید شده!"
+        ],
+        "Loading the next translation for review...": [
+            "در حال بارگیری ترجمه بعدی برای بررسی..."
+        ],
+        "Back": [
+            "عقب"
+        ],
+        "Turn off to not automatically load the next translation after finishing this review.": [
+            "برای عدم بارگیری خودکار ترجمه بعدی پس از اتمام این بررسی، آن را خاموش کنید."
+        ],
+        "Turn on to automatically load the next translation after finishing this  .": [
+            "برای بارگیری خودکار ترجمه بعدی پس از اتمام این بررسی، آن را روشن کنید ."
+        ],
+        "Edit": [
+            "ویرایش"
+        ],
+        "Edit translation": [
+            "ویرایش ترجمه"
+        ],
+        "Please wait, applying translation..": [
+            "لطفا صبر کنید، در حال اعمال ترجمه.."
+        ],
+        "Next review": [
+            "بررسی بعدی"
+        ],
+        "Publish this translation": [
+            "انتشار این ترجمه"
+        ],
+        "Accept this translation": [
+            "پذیرش این ترجمه"
+        ],
+        "Published!": [
+            "منتشر شده!"
+        ],
+        "Someone is already reviewing this translation. Please try again later.": [
+            "شخصی در حال بررسی این ترجمه است. لطفاً بعداً دوباره امتحان کنید."
+        ],
+        "There was an error in applying translation.": [
+            "در اعمال ترجمه خطایی وجود داشت."
+        ]     
+      }
+    }
+  }

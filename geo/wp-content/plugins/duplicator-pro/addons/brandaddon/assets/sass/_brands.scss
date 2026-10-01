@@ -1,0 +1,212 @@
+.brand-tbl {
+    .brand-detail {
+        display: none;
+        margin: 0;
+    }
+
+    .brand-detail td {
+        padding: 3px 0 5px 20px
+    }
+
+    .brand-detail div {
+        line-height: 20px;
+        padding: 2px 2px 2px 15px
+    }
+
+
+    .brand-detail label {
+        min-width: 150px;
+        display: inline-block;
+        font-weight: bold
+    }
+}
+
+.brand-logo-editor {
+    button,
+    .ed_button {
+        text-decoration: none;
+        white-space: nowrap;
+        min-height: initial;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 0 1.25rem 0;
+        border-radius: 2px;
+        text-align: center;
+        cursor: pointer;
+        box-sizing: border-box;
+        font-size: 0.8125rem;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 9px;
+        background-color: $white;
+        border: 1px solid $secondary-color;
+        color: $secondary-color;
+
+        &:hover,
+        &:focus {
+            background: #f0f0f1;
+            border-color: #0b2f7d;
+            color: #0b2f7d;
+        }
+    }
+}
+
+#dup-storage-form input[type="text"],
+input[type="password"] {
+    width: 250px;
+}
+
+#dup-storage-form input#name {
+    width: 100%;
+    max-width: 500px
+}
+
+#dup-storage-form input#_local_storage_folder {
+    width: 100% !important;
+    max-width: 500px
+}
+
+td.dupli-sub-title {
+    padding: 0;
+    margin: 0
+}
+
+td.dupli-sub-title b {
+    padding: 20px 0;
+    margin: 0;
+    display: block;
+    font-size: 1.25em;
+}
+
+input#max_default_store_files {
+    width: 50px !important
+}
+
+form#dupli-package-brand-form {
+    padding: 0
+}
+
+form#dupli-package-brand-form input[type="text"] {
+    width: 350px;
+}
+
+form#dupli-package-brand-form .readonly {
+    background: transparent;
+    border: none;
+}
+
+textarea#brand-notes {
+    width: 350px;
+}
+
+textarea#brand-logo {
+    width: 600px;
+    height: 120px;
+    font-size: 12px
+}
+
+textarea#brand-default-logo {
+    width: 600px;
+    ;
+    height: 50px;
+    font-size: 12px
+}
+
+div.style-guide-link {
+    text-align: right;
+    width: 100%;
+    margin: 0 0 5px 0
+}
+
+
+div.dupli-dlg-alert-txt {
+    line-height: 20px;
+    font-size: 14px !important
+}
+
+div.preview-area {
+    border: 2px dashed #CDCDCD;
+    width: 95%;
+    height: auto;
+    background: #fff;
+    font-family: Verdana, Arial, sans-serif;
+}
+
+div.preview-box {
+    border: 1px solid #CDCDCD;
+    border-radius: 5px;
+    max-width: 750px;
+    margin: 10px auto 0 auto;
+    height: auto;
+    border-bottom: 1px dashed #999
+}
+
+div.preview-header {
+    height: auto;
+    background: #F1F1F1;
+    box-shadow: 0 5px 3px -3px #999;
+}
+
+div.preview-title {
+    font-size: 26px;
+    padding: 10px 0 7px 15px;
+    font-weight: bold;
+    min-height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.preview-content {
+    padding: 8px 15px 0 15px;
+    clear: both
+}
+
+div.preview-version {
+    white-space: nowrap;
+    color: #777;
+    font-size: 11px;
+    font-style: italic;
+    text-align: right;
+    padding: 0 15px 5px 0;
+    line-height: 14px;
+    font-weight: normal;
+    align-self: center;
+}
+
+div.preview-version a {
+    color: #999
+}
+
+div.preview-mode {
+    text-align: right;
+    color: #999;
+    font-style: italic;
+    font-size: 12px
+}
+
+div.preview-steps {
+    font-size: 22px;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid #D3D3D3;
+    font-weight: bold;
+    margin: 15px 0 20px 0;
+}
+
+div.preview-steps b {
+    color: red
+}
+
+div#preview-logo {
+    display: inline-block
+}
+
+#preview-logo img {
+    max-width: 100%
+}
+
+div.preview-notes {
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+    margin: 5px
+}

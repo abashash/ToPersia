@@ -1,0 +1,570 @@
+/* ===========================================================
+   ToPersia AI Summarizer — admin screen styles (2026 UI)
+   Palette follows the ToPersia G3 template:
+   brand #177E7A · brand-2 #0a5450 · deep #0b3a37
+   gold #B9871A · gold-soft #E9CD78
+   =========================================================== */
+
+.tpas-wrap {
+	--tpas-brand: #177E7A;
+	--tpas-brand-2: #0a5450;
+	--tpas-deep: #0b3a37;
+	--tpas-gold: #B9871A;
+	--tpas-gold-soft: #E9CD78;
+	--tpas-ink: #17332f;
+	--tpas-border: #dbe7e3;
+	--tpas-soft: #eef6f4;
+
+	max-width: 1100px;
+	margin: 18px 0 40px;
+}
+
+.tpas-wrap *,
+.tpas-wrap *::before,
+.tpas-wrap *::after { box-sizing: border-box; }
+
+/* ---------------------------------------------------------------
+   Hero header
+   --------------------------------------------------------------- */
+.tpas-hero {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	flex-wrap: wrap;
+	padding: 30px 34px;
+	margin-bottom: 22px;
+	border-radius: 18px;
+	overflow: hidden;
+	color: #fff;
+	background:
+		radial-gradient(120% 240% at 100% -20%, rgba(255, 255, 255, 0.14), transparent 46%),
+		radial-gradient(120% 220% at -10% 120%, rgba(233, 205, 120, 0.16), transparent 52%),
+		linear-gradient(135deg, #0e5a55 0%, #0f4b47 55%, #0b3a37 100%);
+	box-shadow: 0 24px 48px -28px rgba(5, 34, 31, 0.55), 0 2px 6px rgba(5, 34, 31, 0.16);
+	border: 1px solid #115c57;
+}
+
+.tpas-hero::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--tpas-gold-soft) 0%, rgba(233, 205, 120, 0.35) 58%, transparent 100%);
+}
+
+.tpas-hero::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 22px);
+}
+
+.tpas-hero__title { position: relative; z-index: 1; }
+.tpas-hero__title h1 {
+	margin: 0 0 8px;
+	padding: 0;
+	color: #fff;
+	font-size: 1.5rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	border: 0;
+}
+
+.tpas-hero__title p {
+	margin: 0;
+	max-width: 62ch;
+	color: #d9ece9;
+	font-size: 13px;
+	line-height: 1.7;
+}
+
+.tpas-hero__badge {
+	position: relative;
+	z-index: 1;
+	flex: 0 0 auto;
+	padding: 7px 16px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	background: rgba(255, 255, 255, 0.12);
+	color: var(--tpas-gold-soft);
+	font-size: 11px;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------
+   Tab bar
+   --------------------------------------------------------------- */
+.tpas-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	padding: 6px;
+	margin-bottom: 22px;
+	border-radius: 16px;
+	background: #fff;
+	border: 1px solid var(--tpas-border);
+	box-shadow: 0 10px 28px -22px rgba(10, 84, 80, 0.4);
+}
+
+.tpas-nav__tab {
+	position: relative;
+	flex: 1 1 auto;
+	border: 0;
+	border-radius: 11px;
+	background: transparent;
+	color: #4a6a65;
+	padding: 13px 20px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 700;
+	font-family: inherit;
+	transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.tpas-nav__tab:hover { background: var(--tpas-soft); color: var(--tpas-brand); }
+
+.tpas-nav__tab.is-active {
+	background: linear-gradient(180deg, #f2de9b, var(--tpas-gold-soft) 58%, var(--tpas-gold));
+	color: #3a2c05;
+	box-shadow: inset 0 -2px 0 rgba(122, 92, 20, 0.5), 0 10px 20px -14px rgba(185, 135, 26, 0.8);
+}
+
+.tpas-nav__tab:focus-visible,
+.tpas-nav__tab.is-active:focus-visible {
+	outline: 2px solid var(--tpas-brand);
+	outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Tab panels (cards)
+   --------------------------------------------------------------- */
+.tpas-tab-panel {
+	display: none;
+	background: #fff;
+	border: 1px solid var(--tpas-border);
+	border-radius: 18px;
+	padding: 10px 28px 22px;
+	box-shadow: 0 30px 60px -40px rgba(10, 84, 80, 0.45), 0 2px 6px rgba(10, 84, 80, 0.06);
+}
+
+.tpas-tab-panel.is-active { display: block; }
+
+/* for the option tables we must avoid double chip margins */
+.tpas-tab-panel .form-table { margin: 10px 0 0; }
+
+/* ---------------------------------------------------------------
+   Section heading
+   --------------------------------------------------------------- */
+.tpas-eyebrow {
+	display: inline-block;
+	width: 36px;
+	height: 3px;
+	border-radius: 3px;
+	vertical-align: middle;
+	margin-inline-end: 12px;
+	background: linear-gradient(90deg, var(--tpas-gold-soft), var(--tpas-gold));
+}
+
+.tpas-section {
+	color: var(--tpas-brand-2);
+	font-size: 1.06rem;
+	font-weight: 800;
+	letter-spacing: -0.01em;
+}
+
+/* ---------------------------------------------------------------
+   Table rows
+   --------------------------------------------------------------- */
+.tpas-wrap .form-table th,
+.tpas-wrap .form-table td {
+	border-bottom: 1px solid #eef3f1;
+	padding: 16px 12px;
+	vertical-align: top;
+}
+
+.tpas-wrap .form-table tr:last-child th,
+.tpas-wrap .form-table tr:last-child td { border-bottom: 0; }
+
+.tpas-wrap .form-table th {
+	color: var(--tpas-brand-2);
+	font-weight: 700;
+	font-size: 13px;
+	width: 230px;
+}
+
+.tpas-wrap .form-table td .description {
+	color: #6d857f;
+	font-size: 12px;
+	font-style: normal;
+	margin-top: 7px;
+	line-height: 1.6;
+	max-width: 52ch;
+}
+
+/* ---------------------------------------------------------------
+   Fields
+   --------------------------------------------------------------- */
+.tpas-wrap .regular-text,
+.tpas-wrap textarea.large-text,
+.tpas-wrap select {
+	border: 1px solid #cddcd8;
+	border-radius: 10px;
+	box-shadow: 0 1px 2px rgba(10, 84, 80, 0.06);
+	font-size: 13px;
+	min-height: 38px;
+	padding: 7px 12px;
+	transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+	background: #fff;
+	color: var(--tpas-ink);
+}
+
+.tpas-wrap .regular-text { max-width: 640px; width: 100%; }
+.tpas-wrap textarea.large-text { max-width: 720px; line-height: 1.7; }
+
+.tpas-wrap .regular-text:focus,
+.tpas-wrap textarea.large-text:focus,
+.tpas-wrap select:focus {
+	border-color: var(--tpas-brand);
+	box-shadow: 0 0 0 3px rgba(23, 126, 122, 0.16), 0 1px 2px rgba(10, 84, 80, 0.06);
+	background: #fff;
+}
+
+.tpas-wrap input[type="color"] { padding: 3px; min-height: 34px; }
+.tpas-wrap input[type="number"] { width: 160px; }
+
+.tpas-wrap .form-table input[type="checkbox"] {
+	accent-color: var(--tpas-brand);
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	flex: 0 0 auto;
+}
+
+/* ---------------------------------------------------------------
+   Chip grids (two-column pickers)
+   --------------------------------------------------------------- */
+.tpas-chips {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+	max-width: 620px;
+}
+
+.tpas-chip {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	min-height: 40px;
+	padding: 9px 13px;
+	border: 1px solid var(--tpas-border);
+	border-radius: 11px;
+	background: #fafcfb;
+	color: var(--tpas-ink);
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+}
+
+.tpas-chip:hover {
+	border-color: color-mix(in srgb, var(--tpas-brand) 55%, var(--tpas-border));
+	background: var(--tpas-soft);
+}
+
+.tpas-chip:has(input:checked) {
+	border-color: color-mix(in srgb, var(--tpas-brand) 65%, var(--tpas-border));
+	background: linear-gradient(180deg, #f2faf8, #e7f4f0);
+	box-shadow: inset 3px 0 0 var(--tpas-brand);
+	font-weight: 700;
+	color: var(--tpas-brand-2);
+}
+
+.tpas-chip svg { width: 17px; height: 17px; flex: 0 0 auto; pointer-events: none; }
+
+.tpas-chip:has(input:focus-visible) {
+	outline: 2px solid var(--tpas-brand);
+	outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Test connection row + result
+   --------------------------------------------------------------- */
+.tpas-test-row th,
+.tpas-test-row td {
+	background: linear-gradient(180deg, #fdf8ea, #faf2d8);
+	border-radius: 12px;
+}
+
+.tpas-wrap .tpas-engine-test.button {
+	background: linear-gradient(180deg, #f4e3a6, var(--tpas-gold-soft) 52%, var(--tpas-gold));
+	border: 1px solid color-mix(in srgb, var(--tpas-gold) 60%, #fff);
+	color: #3a2c05;
+	font-weight: 800;
+	border-radius: 10px;
+	padding: 4px 14px;
+	min-height: 32px;
+	box-shadow: 0 12px 24px -14px rgba(185, 135, 26, 0.7);
+	transition: filter 0.16s ease, transform 0.12s ease;
+}
+
+.tpas-wrap .tpas-engine-test.button:hover,
+.tpas-wrap .tpas-engine-test.button:focus {
+	background: linear-gradient(180deg, #f7eab2, var(--tpas-gold-soft) 52%, var(--tpas-gold));
+	filter: brightness(1.04);
+	color: #3a2c05;
+	transform: translateY(-1px);
+}
+
+.tpas-wrap .tpas-engine-test.button:disabled { cursor: wait; transform: none; }
+
+.tpas-test-result,
+.tpas-engine-test-result {
+	display: inline-block;
+	font-weight: 700;
+	font-size: 13px;
+	margin-inline-start: 6px;
+	vertical-align: middle;
+}
+
+.tpas-test-result.is-success,
+.tpas-engine-test-result.is-success { color: #0a7a3e; }
+.tpas-test-result.is-error,
+.tpas-engine-test-result.is-error { color: #b3261e; }
+
+/* ---------------------------------------------------------------
+   Repeatable AI engines table
+   --------------------------------------------------------------- */
+.tpas-engines-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-block-end: 10px;
+}
+
+.tpas-engines-table th,
+.tpas-engines-table td {
+	padding: 8px 10px;
+	text-align: start;
+	vertical-align: middle;
+	border-bottom: 1px solid color-mix(in srgb, var(--tpas-brand, #2563eb) 10%, #fff);
+}
+
+.tpas-engines-table thead th {
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: #6b7280;
+}
+
+.tpas-engines-table input[type="text"],
+.tpas-engines-table input[type="password"],
+.tpas-engines-table input[type="url"],
+.tpas-engines-table select {
+	width: 100%;
+	min-width: 120px;
+}
+
+.tpas-engines-col-default { width: 60px; text-align: center; }
+
+.tpas-engine-key-set {
+	display: block;
+	font-size: 11px;
+	color: #0a7a3e;
+	margin-block-start: 2px;
+}
+
+.tpas-engine-remove {
+	color: #b3261e;
+	font-size: 18px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.tpas-engine-remove:hover { color: #7a1a13; }
+
+#tpas-engine-template { display: none; }
+
+/* ---------------------------------------------------------------
+   Submit bar
+   --------------------------------------------------------------- */
+.tpas-submit {
+	position: sticky;
+	bottom: 12px;
+	z-index: 5;
+	margin-top: 22px;
+	padding: 14px 20px;
+	display: flex;
+	justify-content: flex-end;
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	border: 1px solid var(--tpas-border);
+	border-radius: 15px;
+	box-shadow: 0 24px 48px -26px rgba(10, 84, 80, 0.5);
+}
+
+.tpas-submit p.submit { margin: 0; padding: 0; }
+
+.tpas-submit .button-primary {
+	background: linear-gradient(180deg, #1e948d, #177E7A 55%, #0c6763);
+	border: 1px solid #0d615d;
+	border-radius: 11px;
+	color: #fff;
+	font-weight: 800;
+	padding: 7px 30px;
+	min-height: 44px;
+	box-shadow: 0 14px 26px -14px rgba(23, 126, 122, 0.9);
+	transition: filter 0.16s ease, transform 0.12s ease;
+}
+
+.tpas-submit .button-primary:hover,
+.tpas-submit .button-primary:focus {
+	background: linear-gradient(180deg, #177E7A, #0a5450);
+	color: #fff;
+	filter: brightness(1.05);
+	transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------------------
+   Insights card + extra panels (prompts / summaries)
+   --------------------------------------------------------------- */
+.tpas-card {
+	background: #fff;
+	border: 1px solid var(--tpas-border);
+	border-radius: 18px;
+	padding: 20px 26px 24px;
+	margin-top: 22px;
+	box-shadow: 0 30px 60px -40px rgba(10, 84, 80, 0.45), 0 2px 6px rgba(10, 84, 80, 0.06);
+}
+
+.tpas-card .widefat { margin-top: 8px; }
+
+.tpas-card .widefat th,
+.tpas-card .widefat td { font-size: 13px; }
+
+.tpas-subhead {
+	color: var(--tpas-brand-2);
+	font-size: 13px;
+	font-weight: 800;
+	margin: 22px 0 8px;
+}
+
+.tpas-top { margin: 0; padding-inline-start: 22px; }
+.tpas-top li { font-size: 13px; line-height: 1.8; color: var(--tpas-ink); }
+
+/* Prompt template language blocks */
+.tpas-lang {
+	border: 1px solid var(--tpas-border);
+	border-radius: 14px;
+	background: #fff;
+	margin: 0 0 12px;
+	overflow: hidden;
+}
+
+.tpas-lang[open] { box-shadow: 0 22px 44px -32px rgba(10, 84, 80, 0.5); }
+
+.tpas-lang__summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 13px 18px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 800;
+	color: var(--tpas-brand-2);
+	list-style: none;
+	background: linear-gradient(180deg, #fdfaf1, #f7f3e4);
+}
+
+.tpas-lang__summary::-webkit-details-marker { display: none; }
+.tpas-lang[open] .tpas-lang__summary { background: linear-gradient(180deg, #f2faf8, #e7f4f0); }
+
+.tpas-lang__summary code {
+	background: #fff;
+	border: 1px solid var(--tpas-border);
+	border-radius: 999px;
+	padding: 2px 10px;
+	font-size: 11px;
+	color: var(--tpas-gold);
+}
+
+.tpas-lang .form-table { margin: 0; }
+.tpas-lang .form-table textarea { width: 100%; max-width: 100%; }
+
+.tpas-flag {
+	font-style: normal;
+	font-size: 10px;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #6d4d00;
+	background: #f4e3a6;
+	border-radius: 999px;
+	padding: 2px 9px;
+	margin-inline-start: 8px;
+	display: inline-block;
+}
+
+/* Summaries list page */
+.tpas-wrap .widefat { border-radius: 14px; border-color: var(--tpas-border); }
+.tpas-wrap .widefat th,
+.tpas-wrap .widefat td { font-size: 13px; }
+
+.tpas-summary-detail { margin-top: 6px; }
+.tpas-summary-detail summary {
+	color: var(--tpas-brand);
+	font-size: 12px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.tpas-summary-detail pre {
+	white-space: pre-wrap;
+	word-break: break-word;
+	background: var(--tpas-soft);
+	border: 1px solid var(--tpas-border);
+	border-radius: 10px;
+	padding: 12px;
+	margin: 8px 0 0;
+	max-height: 320px;
+	overflow: auto;
+	font-size: 12px;
+	line-height: 1.7;
+}
+
+/* ---------------------------------------------------------------
+   Focus base
+   --------------------------------------------------------------- */
+.tpas-wrap :is(a, button):focus-visible {
+	outline: 2px solid var(--tpas-brand);
+	outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------- */
+@media (max-width: 782px) {
+	.tpas-hero { padding: 22px 20px; }
+	.tpas-hero__title h1 { font-size: 1.25rem; }
+	.tpas-tab-panel { padding: 8px 16px 16px; }
+	.tpas-chips { grid-template-columns: minmax(0, 1fr); }
+	.tpas-submit { justify-content: stretch; }
+	.tpas-submit .button-primary { flex: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tpas-nav__tab, .tpas-chip, .tpas-wrap .tpas-engine-test.button,
+	.tpas-submit .button-primary { transition: none; }
+	.tpas-wrap .tpas-engine-test.button:hover,
+	.tpas-submit .button-primary:hover { transform: none; }
+}

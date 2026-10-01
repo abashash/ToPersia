@@ -1,0 +1,8 @@
+# کلاس‌های <body> از سورس زندهٔ صفحهٔ استان — topersia.com
+#
+# چرا این‌جاست: قاعده‌های tokens.css با .tp-shell فعال می‌شوند و صفحهٔ
+# آزمون آن را نداشت، پس چیزی را نمی‌سنجید که در تولید فعال است.  P5-D206
+#
+# خط‌های # نادیده گرفته می‌شوند؛ بقیه به هم می‌چسبند.
+
+rtl wp-singular tp_province-template-default single single-tp_province postid-99 logged-in wp-theme-woodmart tp-shell tp-own-type wd wrapper-full-width categories-accordion-on wd-white-label-img elementor-default elementor-template-full-width elementor-kit-68 elementor-page-1840

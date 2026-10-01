@@ -1,0 +1,699 @@
+{
+ "post_types": [],
+ "taxonomies": [],
+ "listings": [],
+ "components": [],
+ "meta_boxes": {
+  "meta-36": {
+   "args": {
+    "object_type": "post",
+    "allowed_tax": [],
+    "allowed_post_type": [
+     "tp_visa"
+    ],
+    "allowed_posts": [],
+    "excluded_posts": [],
+    "active_conditions": [],
+    "position": "normal",
+    "priority": "high",
+    "name": "P1 — ویزا و شرایط ورود"
+   },
+   "meta_fields": [
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "کد و نوع روادید",
+       "name": "vt_code",
+       "type": "select",
+       "options_source": "glossary",
+       "id": 7234,
+       "options": [],
+       "glossary_id": "179"
+      },
+      {
+       "title": "حداکثر اقامت (روز)",
+       "name": "vt_stay_days",
+       "type": "number",
+       "options_source": "manual",
+       "id": 4665,
+       "min_value": "0",
+       "step_value": "1"
+      },
+      {
+       "title": "اعتبار روادید (روز)",
+       "name": "vt_validity_days",
+       "type": "number",
+       "options_source": "manual",
+       "id": 7884,
+       "min_value": "0",
+       "step_value": "1"
+      },
+      {
+       "title": "چندورودی؟",
+       "name": "vt_multiple_entry",
+       "type": "switcher",
+       "options_source": "manual",
+       "id": 2358
+      },
+      {
+       "title": "قابل تمدید؟",
+       "name": "vt_extendable",
+       "type": "switcher",
+       "options_source": "manual",
+       "id": 6692
+      },
+      {
+       "title": "کانال‌های دریافت",
+       "name": "vt_channels",
+       "type": "checkbox",
+       "options_source": "glossary",
+       "id": 6069,
+       "options": [],
+       "glossary_id": "181"
+      },
+      {
+       "title": "زمان پردازش",
+       "name": "vt_processing_note",
+       "type": "text",
+       "options_source": "manual",
+       "id": 6744
+      },
+      {
+       "title": "مدارک لازم",
+       "name": "vt_required_docs",
+       "type": "textarea",
+       "options_source": "manual",
+       "id": 4107
+      },
+      {
+       "title": "شرایط و محدودیت‌ها",
+       "name": "vt_note",
+       "type": "textarea",
+       "options_source": "manual",
+       "id": 8477
+      }
+     ],
+     "id": 5815,
+     "title": "انواع روادید",
+     "name": "visa_types",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "is_required": true,
+     "show_in_rest": true,
+     "options_source": "manual",
+     "description": "هر ردیف یک نوع روادید. ترتیب ردیف‌ها هیچ معنایی ندارد — کلید پایدار «کد و نوع روادید» است و مرتب‌سازی در زمان نمایش انجام می‌شود. کد را پس از ورود داده هرگز تغییر نده. هزینه در این جدول نمی‌آید؛ هزینه به تابعیت وابسته است و در ماتریس سیاست ثبت می‌شود."
+    },
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "کشور",
+       "name": "pc_country",
+       "type": "select",
+       "options_source": "glossary",
+       "id": 5600,
+       "options": [],
+       "glossary_id": "189"
+      },
+      {
+       "title": "دستهٔ سیاست",
+       "name": "pc_policy_code",
+       "type": "select",
+       "options_source": "glossary",
+       "id": 5818,
+       "options": [],
+       "glossary_id": "180"
+      },
+      {
+       "title": "مدت اقامت مجاز (روز)",
+       "name": "pc_stay_days",
+       "type": "number",
+       "options_source": "manual",
+       "id": 1649,
+       "min_value": "0",
+       "step_value": "1"
+      },
+      {
+       "title": "شرط ورود",
+       "name": "pc_condition",
+       "type": "select",
+       "options_source": "glossary",
+       "id": 2803,
+       "options": [],
+       "glossary_id": "182"
+      },
+      {
+       "title": "واجد شرایط روادید فرودگاهی؟",
+       "name": "pc_voa_eligible",
+       "type": "switcher",
+       "options_source": "manual",
+       "id": 4958
+      },
+      {
+       "title": "بیمهٔ ایرانی اجباری؟",
+       "name": "pc_insurance_required",
+       "type": "switcher",
+       "options_source": "manual",
+       "id": 6163
+      },
+      {
+       "title": "حداقل هزینه (یورو)",
+       "name": "pc_fee_min_eur",
+       "type": "number",
+       "options_source": "manual",
+       "id": 4569,
+       "min_value": "0",
+       "step_value": "1"
+      },
+      {
+       "title": "حداکثر هزینه (یورو)",
+       "name": "pc_fee_max_eur",
+       "type": "number",
+       "options_source": "manual",
+       "id": 3093,
+       "min_value": "0",
+       "step_value": "1"
+      },
+      {
+       "title": "تاریخ اعتبار این وضعیت",
+       "name": "pc_effective_date",
+       "type": "date",
+       "options_source": "manual",
+       "id": 3098
+      },
+      {
+       "title": "یادداشت ویژهٔ این کشور",
+       "name": "pc_note",
+       "type": "textarea",
+       "options_source": "manual",
+       "id": 8901
+      }
+     ],
+     "id": 5965,
+     "title": "ماتریس سیاست بر پایهٔ تابعیت",
+     "name": "visa_policy_matrix",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "is_required": true,
+     "show_in_rest": true,
+     "description": "هر ردیف یک کشور، نه یک گروه. انتظار می‌رود حدود ۲۰۰ ردیف داشته باشد. کشور را از کشویی انتخاب کن — هرگز نام کشور را تایپ نکن. یادداشت فقط برای کشورهایی پر شود که استثنا یا شرط ویژه دارند (حدود ۲۵ کشور)؛ بقیه خالی بماند تا بار ترجمه کم بماند."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 9559,
+     "title": "قواعد تور اجباری",
+     "name": "guided_tour_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "قواعد تور اجباری و راهنمای همراه. کدام تابعیت‌ها مشمول‌اند، فرآیند چیست، و چه مدارکی لازم است. اگر قاعده تغییر کرد، یک ردیف هم در «تاریخچهٔ تغییرات سیاست» ثبت کن."
+    },
+    {
+     "type": "number",
+     "options": [],
+     "repeater-fields": [],
+     "id": 2881,
+     "title": "مدت معافیت در مناطق آزاد (روز)",
+     "name": "free_zone_stay_days",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "min_value": "0",
+     "step_value": "1",
+     "show_in_rest": true,
+     "description": "مدت اقامت مجاز بدون روادید در مناطق آزاد. عدد خام بدون جداکنندهٔ هزارگان."
+    },
+    {
+     "type": "switcher",
+     "options": [],
+     "repeater-fields": [],
+     "id": 6295,
+     "title": "اجازهٔ ورود به سرزمین اصلی؟",
+     "name": "free_zone_mainland_allowed",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "اگر معافیت مناطق آزاد اجازهٔ سفر به سرزمین اصلی نمی‌دهد، این را خاموش بگذار. این تفکیک حیاتی است — خلط این دو، اطلاعات خطرناک تولید می‌کند."
+    },
+    {
+     "type": "textarea",
+     "options": [],
+     "repeater-fields": [],
+     "id": 1897,
+     "title": "کشورهای مستثنا (کد ISO)",
+     "name": "free_zone_excluded_iso",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "کد دوحرفی ISO کشورهای مستثنا، با حروف کوچک لاتین، یک کد در هر خط — مثال: us سپس gb سپس ca. نام کشور ننویس."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 3847,
+     "title": "توضیح رژیم مناطق آزاد",
+     "name": "free_zone_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "توضیح رژیم روادید مناطق آزاد: کدام مناطق، چه شرایطی، و محدودیت ورود به سرزمین اصلی."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 4787,
+     "title": "خلاصهٔ فرآیند درخواست",
+     "name": "application_process_summary",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "is_required": true,
+     "show_in_rest": true,
+     "description": "خلاصهٔ روایی فرآیند درخواست. مراحل گام‌به‌گام در فیلد جداگانه ثبت می‌شوند؛ اینجا تصویر کلی و نکات مهم بیاید."
+    },
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "شمارهٔ گام",
+       "name": "step_order",
+       "type": "number",
+       "options_source": "manual",
+       "id": 6533,
+       "min_value": "0",
+       "step_value": "1"
+      },
+      {
+       "title": "عنوان گام",
+       "name": "step_title",
+       "type": "text",
+       "options_source": "manual",
+       "id": 9586
+      },
+      {
+       "title": "شرح گام",
+       "name": "step_text",
+       "type": "textarea",
+       "options_source": "manual",
+       "id": 4486
+      }
+     ],
+     "id": 4197,
+     "title": "مراحل گام‌به‌گام",
+     "name": "application_steps",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "is_required": true,
+     "show_in_rest": true,
+     "description": "مراحل گام‌به‌گام درخواست روادید. مبنای نشانه‌گذاری HowTo در گوگل است، پس هر گام باید یک اقدام مشخص و قابل انجام باشد. شمارهٔ گام ترتیب واقعی را تعیین می‌کند، نه جای ردیف."
+    },
+    {
+     "title": "درگاه رسمی اصلی",
+     "name": "official_application_portal",
+     "object_type": "field",
+     "width": "50%",
+     "options": [],
+     "repeater-fields": [],
+     "type": "text",
+     "id": 1212,
+     "isNested": false,
+     "options_source": "manual",
+     "show_in_rest": true,
+     "description": "نشانی کامل درگاه رسمی با https. این فیلد در همهٔ زبان‌ها یکسان می‌ماند و ترجمه نمی‌شود."
+    },
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "نشانی درگاه",
+       "name": "portal_url",
+       "type": "text",
+       "options_source": "manual",
+       "id": 6161
+      },
+      {
+       "title": "عنوان درگاه",
+       "name": "portal_label",
+       "type": "text",
+       "options_source": "manual",
+       "id": 5880
+      },
+      {
+       "title": "حوزهٔ کاربرد",
+       "name": "portal_scope",
+       "type": "text",
+       "options_source": "manual",
+       "id": 6257
+      }
+     ],
+     "id": 4671,
+     "title": "سایر درگاه‌های رسمی",
+     "name": "portal_links",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "سایر درگاه‌های رسمی مرتبط — روادید تجاری، روادید فرودگاهی، سامانهٔ پیگیری. درگاه اصلی در فیلد جداگانهٔ بالا ثبت می‌شود، اینجا تکرارش نکن."
+    },
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "نوع مدرک",
+       "name": "doc_type",
+       "type": "select",
+       "options_source": "glossary",
+       "id": 3999,
+       "options": [],
+       "glossary_id": "184"
+      },
+      {
+       "title": "حداقل ابعاد (پیکسل)",
+       "name": "doc_min_px",
+       "type": "text",
+       "options_source": "manual",
+       "id": 9288
+      },
+      {
+       "title": "قالب و حجم فایل",
+       "name": "doc_format",
+       "type": "text",
+       "options_source": "manual",
+       "id": 8189
+      },
+      {
+       "title": "توضیح",
+       "name": "doc_note",
+       "type": "textarea",
+       "options_source": "manual",
+       "id": 1997
+      }
+     ],
+     "id": 3191,
+     "title": "مشخصات فنی مدارک",
+     "name": "document_specs",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "مشخصات فنی عکس و تصویر پاسپورت طبق اعلام رسمی وزارت امور خارجه. ابعاد را به‌صورت «عرض × ارتفاع» بنویس."
+    },
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "کد مبدأ (IATA یا اسلاگ)",
+       "name": "ep_code",
+       "type": "text",
+       "options_source": "manual",
+       "id": 3999
+      },
+      {
+       "title": "نوع مبدأ",
+       "name": "ep_type",
+       "type": "select",
+       "options_source": "glossary",
+       "id": 9872,
+       "options": [],
+       "glossary_id": "183"
+      },
+      {
+       "title": "نام مبدأ",
+       "name": "ep_name",
+       "type": "text",
+       "options_source": "manual",
+       "id": 1288
+      }
+     ],
+     "id": 2223,
+     "title": "مبادی صدور روادید فرودگاهی",
+     "name": "voa_entry_points",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "فقط مبادی‌ای که واقعاً روادید فرودگاهی صادر می‌کنند. کد را با حروف کوچک لاتین وارد کن — مثال: ika. مبادی ورودی عمومی در فیلد ارجاع محتوایی می‌آیند، نه اینجا."
+    },
+    {
+     "type": "textarea",
+     "options": [],
+     "repeater-fields": [],
+     "id": 7973,
+     "title": "سایر مبادی ورودی (ارجاع محتوایی)",
+     "name": "entry_points_reference",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "ارجاع متنی به فرودگاه‌ها و مرزهای اصلی. قالب هر خط: نام — نشانی. این فیلد هرگز به رابطه تبدیل نمی‌شود."
+    },
+    {
+     "type": "number",
+     "options": [],
+     "repeater-fields": [],
+     "id": 5194,
+     "title": "حداقل اعتبار پاسپورت (ماه)",
+     "name": "passport_validity_months",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "min_value": "0",
+     "step_value": "1",
+     "is_required": true,
+     "show_in_rest": true,
+     "description": "حداقل اعتبار پاسپورت بر حسب ماه، از تاریخ ورود."
+    },
+    {
+     "type": "switcher",
+     "options": [],
+     "repeater-fields": [],
+     "id": 7074,
+     "title": "بیمهٔ سلامت ایرانی اجباری؟",
+     "name": "insurance_required",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "on_by_default": true,
+     "show_in_rest": true,
+     "description": "آیا بیمهٔ سلامت ایرانی برای صدور روادید اجباری است. معافیت‌های به‌ازای ملیت در ماتریس سیاست ثبت می‌شوند، نه اینجا."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 7209,
+     "title": "توضیح بیمهٔ اجباری",
+     "name": "insurance_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "شرکت‌های مجاز، هزینهٔ تقریبی، محل خرید، و اینکه بیمهٔ خارجی پذیرفته می‌شود یا نه."
+    },
+    {
+     "type": "textarea",
+     "options": [],
+     "repeater-fields": [],
+     "id": 3379,
+     "title": "سیاست مهر پاسپورت",
+     "name": "passport_stamping_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "سیاست مهر زدن یا نزدن پاسپورت و استثناهایش."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 8699,
+     "title": "قواعد دوتابعیتی",
+     "name": "dual_nationality_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "قواعد دوتابعیتی، الزام سفر با پاسپورت ایرانی، و وضعیت خدمت وظیفه. یکی از حساس‌ترین بخش‌های این صفحه — دقت بیشتری لازم دارد."
+    },
+    {
+     "type": "textarea",
+     "options": [],
+     "repeater-fields": [],
+     "id": 8172,
+     "title": "محدودیت‌های مطلق ورود",
+     "name": "restricted_entry_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "محدودیت‌های مطلق ورود. کوتاه، صریح و بدون ابهام بنویس."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 8665,
+     "title": "معافیت پاسپورت‌های دیپلماتیک/خدمت",
+     "name": "special_passport_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "معافیت‌های ویژهٔ دارندگان پاسپورت دیپلماتیک، خدمت یا رسمی. این محور مستقل از تابعیت است و با ماتریس سیاست خلط نشود."
+    },
+    {
+     "type": "number",
+     "options": [],
+     "repeater-fields": [],
+     "id": 5231,
+     "title": "حداکثر دفعات تمدید",
+     "name": "extension_max_count",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "min_value": "0",
+     "step_value": "1",
+     "show_in_rest": true,
+     "description": "حداکثر دفعات مجاز تمدید روادید."
+    },
+    {
+     "type": "number",
+     "options": [],
+     "repeater-fields": [],
+     "id": 5682,
+     "title": "مدت هر تمدید (روز)",
+     "name": "extension_days_each",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "min_value": "0",
+     "step_value": "1",
+     "show_in_rest": true,
+     "description": "مدت هر بار تمدید بر حسب روز."
+    },
+    {
+     "type": "number",
+     "options": [],
+     "repeater-fields": [],
+     "id": 9981,
+     "title": "حداکثر اقامت کل (روز)",
+     "name": "max_total_stay_days",
+     "object_type": "field",
+     "width": "33.33333%",
+     "isNested": false,
+     "min_value": "0",
+     "step_value": "1",
+     "show_in_rest": true,
+     "description": "حداکثر اقامت کل پس از همهٔ تمدیدها."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 8600,
+     "title": "تمدید و اضافه‌اقامت",
+     "name": "extension_info",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "محل مراجعه برای تمدید، مدارک لازم، هزینه، و جریمهٔ اقامت مازاد. هر دو موضوع تمدید و اضافه‌اقامت در همین فیلد."
+    },
+    {
+     "title": "واحد پول رسمی هزینه",
+     "name": "fee_currency",
+     "object_type": "field",
+     "width": "33.33333%",
+     "options": [],
+     "repeater-fields": [],
+     "type": "text",
+     "id": 1391,
+     "isNested": false,
+     "options_source": "manual",
+     "show_in_rest": true,
+     "description": "واحد پول رسمی پرداخت هزینهٔ روادید — مثال: EUR."
+    },
+    {
+     "type": "wysiwyg",
+     "options": [],
+     "repeater-fields": [],
+     "id": 7120,
+     "title": "سیاست هزینه و پرداخت",
+     "name": "fee_policy_note",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "سیاست هزینه: کجا پرداخت می‌شود، نقدی یا آنلاین، و اینکه هزینه بر پایهٔ عمل متقابل به تابعیت وابسته است. عدد قطعی ننویس؛ ارقام به‌ازای کشور در ماتریس ثبت می‌شوند."
+    },
+    {
+     "type": "repeater",
+     "options": [],
+     "repeater-fields": [
+      {
+       "title": "تاریخ تغییر",
+       "name": "chg_date",
+       "type": "date",
+       "options_source": "manual",
+       "id": 6115
+      },
+      {
+       "title": "دامنهٔ تغییر",
+       "name": "chg_scope",
+       "type": "text",
+       "options_source": "manual",
+       "id": 6503
+      },
+      {
+       "title": "شرح تغییر",
+       "name": "chg_summary",
+       "type": "textarea",
+       "options_source": "manual",
+       "id": 3700
+      },
+      {
+       "title": "منبع",
+       "name": "chg_source_url",
+       "type": "text",
+       "options_source": "manual",
+       "id": 8245
+      }
+     ],
+     "id": 2968,
+     "title": "تاریخچهٔ تغییرات سیاست",
+     "name": "policy_change_log",
+     "object_type": "field",
+     "width": "100%",
+     "isNested": false,
+     "show_in_rest": true,
+     "description": "هر تغییر سیاست روادید یک ردیف بگیرد. این فیلد سه کار می‌کند: سیگنال به‌روزرسانی فعال برای موتورهای جستجو، نشانهٔ تازگی برای موتورهای پاسخ، و دفترچهٔ کار نیروی به‌روزرسانی."
+    }
+   ],
+   "id": "meta-36"
+  }
+ },
+ "relations": [],
+ "options_pages": [],
+ "glossaries": [],
+ "queries": [],
+ "content": null
+}

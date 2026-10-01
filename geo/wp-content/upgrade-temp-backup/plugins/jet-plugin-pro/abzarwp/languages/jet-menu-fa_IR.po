@@ -1,0 +1,2395 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetMenu\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-18 23:37+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-menu.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "%1$s installed and activated successfully."
+msgstr "%1$s با موفقیت نصب و فعال شد."
+
+msgid "%1$s installed successfully."
+msgstr "%1$s با موفقیت نصب شد."
+
+msgid "%3$s Go to the %1$sMenus screen%2$s to create one."
+msgstr "%3$s برای ایجاد منو به صفحه %1$sصفحه منوها%2$s بروید."
+
+msgid "%s - position of the horizontal shadow"
+msgstr "%s - موقعیت سایه افقی"
+
+msgid "%s - position of the vertical shadow"
+msgstr "%s - موقعیت سایه عمودی"
+
+msgid "%s - shadow blur distance"
+msgstr "%s -فاصله تاری سایه"
+
+msgid "%s - shadow size"
+msgstr "%s -اندازه سایه"
+
+msgid "%s background attachment"
+msgstr "نحوه نمایش پس‌زمینه %s"
+
+msgid "%s background color"
+msgstr "رنگ پس زمینه %s"
+
+msgid "%s background gradient direction"
+msgstr "جهت گرادیانت پس زمینه %s"
+
+msgid "%s background image"
+msgstr "تصویر پس زمینه %s"
+
+msgid "%s background image position"
+msgstr "موقعیت تصویر پس زمینه %s"
+
+msgid "%s background repeat"
+msgstr "تکرار پس زمینه %s"
+
+msgid "%s background second color"
+msgstr "رنگ پس زمینه دوم %s"
+
+msgid "%s background settings"
+msgstr "تنظیمات پس زمینه %s"
+
+msgid "%s background size"
+msgstr "اندازه پس‌زمینه %s"
+
+msgid "%s border color"
+msgstr "رنگ حاشیه (Border)%s"
+
+msgid "%s border settings"
+msgstr "تنظیمات حاشیه (Border) %s"
+
+msgid "%s border style"
+msgstr "استایل حاشیه (Border)%s"
+
+msgid "%s border width"
+msgstr "عرض حاشیه (Border)%s"
+
+msgid "%s box shadow settings"
+msgstr "تنظیمات سایه جعبه %s"
+
+msgid "%s font family"
+msgstr "خانواده فونت %s"
+
+msgid "%s font size(px)"
+msgstr "اندازه فونت (px) %s"
+
+msgid "%s font style"
+msgstr "استایل فونت %s"
+
+msgid "%s font weight"
+msgstr "وزن فونت %s"
+
+msgid "%s gradient background"
+msgstr "گرادیانت پس زمینه %s"
+
+msgid "%s letter spacing"
+msgstr "فاصله حروف %s"
+
+msgid "%s line height(em)"
+msgstr "ارتفاع خط(em) %s"
+
+msgid "%s shadow color"
+msgstr "رنگ سایه %s"
+
+msgid "%s shadow inset"
+msgstr "سایه داخلی %s"
+
+msgid "%s subset"
+msgstr "زیر مجموعه %s"
+
+msgid "%s text transform"
+msgstr "تبدیل متن %s"
+
+msgid "%s typography settings"
+msgstr "تنظیمات تایپوگرافی %s"
+
+msgid "- Select Menu -"
+msgstr "- انتخاب منو -"
+
+msgid "100"
+msgstr "100"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های Jet پیشرفته"
+
+msgid "200"
+msgstr "200"
+
+msgid "300"
+msgstr "300"
+
+msgid "400"
+msgstr "400"
+
+msgid "500"
+msgstr "500"
+
+msgid "600"
+msgstr "600"
+
+msgid "700"
+msgstr "700"
+
+msgid "800"
+msgstr "800"
+
+msgid "900"
+msgstr "900"
+
+msgid ""
+"A top-notch mega menu addon for Elementor. Use it to create a fully "
+"responsive mega menu with drop-down items, rich in content modules, and "
+"change your menu style according to your vision without any coding knowledge!"
+msgstr ""
+"یک افزونه مگامنوی درجه یک برای المنتور. از آن برای ایجاد یک مگامنوی کاملاً "
+"واکنشگرا با موارد کشویی ، پر از ماژول های محتوا استفاده کنید و استایل منو "
+"خود را بدون هیچ گونه دانش برنامه نویسی متناسب با سلیقه خود تغییر دهید!"
+
+msgid "Activate"
+msgstr "فعالسازی"
+
+msgid "Activate %2$s"
+msgstr "فعال سازی  %2$s"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Add New Mega Menu Item"
+msgstr "افزودن مگامنوی جدید"
+
+msgid "Advanced"
+msgstr "پیشرفته"
+
+msgid "Advanced Styles"
+msgstr "استایل پیشرفته"
+
+msgid "After Template"
+msgstr "بعد از قالب"
+
+msgid "After items content"
+msgstr "بعد از محتوای آیتم ها"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All installations and activations have been completed."
+msgstr "تمامی نصب ها و فعال سازی با موفقیت به اتمام رسید."
+
+msgid "All installations have been completed."
+msgstr "تمامی نصب ها به پایان رسید."
+
+msgid ""
+"All menu options will be reseted to defaults. Please export current options "
+"to prevent data lost. Are you sure you want to continue?"
+msgstr ""
+"همه گزینه های منو به پیش فرض بازنشانی می شوند. لطفاً برای جلوگیری از از دست "
+"رفتن داده ها ، گزینه های فعلی را برون ریزی کنید. آیا مطمئن هستید که میخواهید "
+"ادامه دهید؟"
+
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "همه افزونه ها نصب شده و با موفقیت فعال شدند. %1$s"
+
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr "خطایی در هنگام نصب رخ داد %1$s: <strong>%2$s</strong>."
+
+msgid "Animation"
+msgstr "انیمیشن"
+
+msgid "Apply"
+msgstr "اعمال"
+
+msgid "Apply This Preset Globally"
+msgstr "اعمال عمومی این پیش تنظیم"
+
+msgid "Arrow horizontal position"
+msgstr "موقعیت افقی پیکان"
+
+msgid "Arrow margin"
+msgstr "فاصله (margin) پیکان"
+
+msgid "Arrow order"
+msgstr "ترتیب پیکان"
+
+msgid "Arrow size"
+msgstr "اندازه پیکان"
+
+msgid "Arrow vertical position"
+msgstr "موقعیت عمودی پیکان"
+
+msgid "Auto"
+msgstr "خوکار"
+
+msgid "Available version:"
+msgstr "نسخه های موجود :"
+
+msgid "Back Text"
+msgstr "متن پشت"
+
+msgid "Back Text Color"
+msgstr "رنگ متن برگشت"
+
+msgid "Back Text Typography"
+msgstr "تایپوگرافی متن برگشت"
+
+msgid "Back button text"
+msgstr "متن دکمه برگشت"
+
+msgid "Back button text color"
+msgstr "رنگ متن دکمه برگشت"
+
+msgid "Back text"
+msgstr "متن پشت"
+
+msgid "Background"
+msgstr "پس زمینه"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgid "Background color"
+msgstr "رنگ پس زمینه"
+
+msgid "Badge"
+msgstr "نشان"
+
+msgid "Badge Background Color"
+msgstr "رنگ پس زمینه نشان"
+
+msgid "Badge Border"
+msgstr "حاشیه (Border) نشان"
+
+msgid "Badge Color"
+msgstr "رنگ نشان"
+
+msgid "Badge Padding"
+msgstr "فاصله داخلی (Padding) نشان"
+
+msgid "Badge Text Color"
+msgstr "رنگ متن نشان"
+
+msgid "Badge Text color"
+msgstr "رنگ متن نشان"
+
+msgid "Badge Typography"
+msgstr "تایپوگرافی نشان ها"
+
+msgid "Badge Vertical Position"
+msgstr "موقعیت عمودی نشان"
+
+msgid "Badge background color"
+msgstr "رنگ پس زمینه نشان"
+
+msgid "Badge border radius"
+msgstr "گردی حاشیه (Border) نشان"
+
+msgid "Badge color"
+msgstr "رنگ نشان"
+
+msgid "Badge horizontal position"
+msgstr "موقعیت افقی نشان"
+
+msgid "Badge margin"
+msgstr "فاصله (margin) نشان"
+
+msgid "Badge offset X"
+msgstr "آفست X نشان"
+
+msgid "Badge offset Y"
+msgstr "آفست Y نشان"
+
+msgid "Badge order"
+msgstr "ترتیب نشان"
+
+msgid "Badge padding"
+msgstr "فاصله داخلی (Padding) نشان"
+
+msgid "Badge size"
+msgstr "اندازه نشان"
+
+msgid "Badge vertical position"
+msgstr "موقعیت عمودی نشان"
+
+msgid "Badge vertical position (may be overridden with order)"
+msgstr "موقعیت عمودی نشان (ممکن است با ترتیب لغو شود)"
+
+msgid "Before Template"
+msgstr "قبل از قالب"
+
+msgid "Before items content"
+msgstr "قبل از محتوای آیتم ها"
+
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] "شروع به فعال سازی افزونه"
+msgstr[1] "شروع به فعال سازی افزونه ها"
+
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] "شروع نصب افزونه"
+msgstr[1] "شروع نصب افزونه ها"
+
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] "شروع به بروز رسانی افزونه"
+msgstr[1] "شروع به بروز رسانی افزونه ها"
+
+msgid "Block Editor"
+msgstr "ویرایشگر بلوک"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgctxt "Border Control"
+msgid "First Item Border Type"
+msgstr "نوع حاشیه (Border) اولین آیتم"
+
+msgctxt "Border Control"
+msgid "Last Item Border Type"
+msgstr "نوع حاشیه (border) آخرین آیتم"
+
+msgid "Border Radius"
+msgstr "گردی گوشه‌های حاشیه (Border)"
+
+msgid "Border radius"
+msgstr "گردی گوشه حاشیه (Border)"
+
+msgid "Bottom"
+msgstr "پایین"
+
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgid "Breadcrumbs"
+msgstr "مسیر صفحات"
+
+msgid "Breadcrumbs Divider Icon"
+msgstr "آیکن جدا کننده مسیر صفحات"
+
+msgid "Breadcrumbs Path"
+msgstr "مسیر صفحات"
+
+msgid "Breadcrumbs Text Typography"
+msgstr "تایپوگرافی متن مسیرسایت"
+
+msgid "Breadcrumbs divider color"
+msgstr "رنگ جدا کننده مسیر صفحات"
+
+msgid "Breadcrumbs divider icon"
+msgstr "آیکن جدا کننده مسیر صفحات"
+
+msgid "Breadcrumbs divider icon size(px)"
+msgstr "اندازه آیکن جدا کننده مسیر صفحات (px)"
+
+msgid "Breadcrumbs text color"
+msgstr "رنگ متن مسیر صفحات"
+
+msgid "Breadcrums Divider Color"
+msgstr "رنگ جدا کننده مسیر صفحات"
+
+msgid "Breadcrums Text Color"
+msgstr "رنگ متن مسیرسایت"
+
+msgid "Breadcrums text"
+msgstr "متن مسیر صفحات"
+
+msgid "Breakpoint"
+msgstr "نقطه شکست"
+
+msgid "Cache menu CSS"
+msgstr "کش CSS منو"
+
+msgid "Capitalize"
+msgstr "بزرگ کردن"
+
+msgid "Center"
+msgstr "مرکز"
+
+msgid "Center Center"
+msgstr "وسط وسط"
+
+msgid "Center Left"
+msgstr "وسط چپ"
+
+msgid "Center Right"
+msgstr "وسط راست"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Choose After Items Template"
+msgstr "قالب پس از آیتم ها را انتخاب کنید"
+
+msgid "Choose Before Items Template"
+msgstr "قالب قبل از آیتم ها را انتخاب کنید"
+
+msgid "Choose Header Template"
+msgstr "قالب هدر را انتخاب نمایید"
+
+msgid "Choose an animation effect for sub menu"
+msgstr "برای منوی فرعی یک افکت انیمیشن انتخاب کنید"
+
+msgid "Choose elementor template"
+msgstr "قالب المنتور را انتخاب کنید"
+
+msgid "Choose toggle global position on window screen"
+msgstr "موقعیت عمومی تاگل (Toggle)  را روی صفحه پنجره انتخاب کنید"
+
+msgid "Choose which menu view you want to display"
+msgstr "انتخاب کنید کدام نمای منو می خواهید نمایش داده شود"
+
+msgid "Choose witch menu view you want to display"
+msgstr "نمای منویی را که می خواهید نمایش دهید انتخاب کنید"
+
+msgid "Click"
+msgstr "کلیک"
+
+msgid "Close After Navigation"
+msgstr "بستن پس از پیمایش"
+
+msgid "Close Menu Panel After Item Link Navigation"
+msgstr "بستن پنل منو پس از پیمایش لینک آیتم"
+
+msgid "Close icon"
+msgstr "آیکن بستن منو"
+
+msgid "Close/Back Icon Color"
+msgstr "رنگ آیکن برگشت/بستن"
+
+msgid "Close/Back Icon Size"
+msgstr "اندازه آیکن برگشت/بستن"
+
+msgid "Close/Back button color"
+msgstr "رنگ دکمه برگشت/بستن"
+
+msgid "Close/Back icon size(px)"
+msgstr "اندازه آیکن برگشت/بستن(px)"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Contain"
+msgstr "شامل"
+
+msgid "Container"
+msgstr "کانتینر"
+
+msgid "Container Back Icon"
+msgstr "آیکن بازگشت کانتینر"
+
+msgid "Container Background Color"
+msgstr "رنگ پس زمینه کانتاینر"
+
+msgid "Container Border"
+msgstr "حاشیه (border) کانتاینر"
+
+msgid "Container Box"
+msgstr "جعبه کانتینر(Container)"
+
+msgid "Container Close Icon"
+msgstr "آیکن بستن کانتینر"
+
+msgid "Container Color"
+msgstr "رنگ کانتینر "
+
+msgid "Container Padding"
+msgstr "فاصله داخلی (Padding) کانتاینر"
+
+msgid "Container Position"
+msgstr "موقعیت کانتینر"
+
+msgid "Container Styles"
+msgstr "استایل کانتینر"
+
+msgid "Container Width"
+msgstr "عرض کانتینر "
+
+msgid "Container aligment"
+msgstr "چینش کانتینر"
+
+msgid "Container border radius"
+msgstr "گردی گوشه‌های حاشیه (border) کانتینر"
+
+msgid "Container padding"
+msgstr "فاصله داخلی (Padding) کانتینر"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid ""
+"Content for sub-menu items available only for mobile view at this moment"
+msgstr ""
+"محتوای آیتم های زیرمنو در حال حاضر فقط برای مشاهده تلفن همراه موجود است"
+
+msgid "Controls Styles"
+msgstr "استایل کنترل ها"
+
+msgid "Cover"
+msgstr "پوشش"
+
+msgid "Cover Color"
+msgstr "رنگ کاور"
+
+msgid "Cover background color"
+msgstr "رنگ پس زمینه کاور"
+
+msgid "Create"
+msgstr "ایجاد"
+
+msgid "Create Preset"
+msgstr "ساخت پیش تنظیم"
+
+msgid "Create new preset from current options configuration"
+msgstr "از پیکربندی گزینه های فعلی  پیش تنظیم جدید ایجاد کنید"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Custom mega content width"
+msgstr "عرض محتوای مگامنوی سفارشی"
+
+msgid "Custom selector"
+msgstr "سلکتور(selector) سفارشی"
+
+msgid "Cyrillic"
+msgstr "Cyrillic"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Dashed"
+msgstr "خط بریده بریده"
+
+msgid "Data Update"
+msgstr "بروزرسانی داده"
+
+msgid "Default"
+msgstr "پیش‌فرض"
+
+msgid "Delete Preset"
+msgstr "حذف پیش تنظیم"
+
+msgid "Delete existing preset"
+msgstr "حذف پیش تنظیم موجود"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Description Color"
+msgstr "رنگ توضیحات"
+
+msgid "Description Typography"
+msgstr "تایپوگرافی توضیحات "
+
+msgid "Description color"
+msgstr "رنگ توضیحات"
+
+msgid "Description typography"
+msgstr "تایپوگرافی توضیحات"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Desktop Container"
+msgstr "کانتینر دسکتاپ"
+
+msgid "Desktop Item Badge"
+msgstr "نشان آیتم دسکتاپ"
+
+msgid "Desktop Item Dropdown"
+msgstr "کشویی(dropdown) آیتم دسکتاپ"
+
+msgid "Desktop Item Icon"
+msgstr "آیکن آیتم دسکتاپ"
+
+msgid "Desktop Menu"
+msgstr "منوی دسکتاپ"
+
+msgid "Desktop Menu Items"
+msgstr "آیتم های منوی دسکتاپ"
+
+msgid "Desktop Sub Menu"
+msgstr "زیرمنوی دسکتاپ"
+
+msgid "Desktop and mobile view"
+msgstr "نمای دسکتاپ و موبایل"
+
+msgid "Desktop view on all devices"
+msgstr "نمای دسکتاپ در همه دستگاه ها"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست برنامه نویسان"
+
+msgid "Device View"
+msgstr "نمای در دستگاه "
+
+msgid "Device view"
+msgstr "نمای دستگاه"
+
+msgid "Dismiss this notice"
+msgstr "بستن این هشدار"
+
+msgid "Distance"
+msgstr "فاصله"
+
+msgid "Divider"
+msgstr "جدا کننده"
+
+msgid "Divider Color"
+msgstr "رنگ جدا کننده"
+
+msgid "Divider Size"
+msgstr "اندازه جداکننده"
+
+msgid "Divider width(px)"
+msgstr "عرض جداکننده(px)"
+
+msgid "Do you want to use the cache for the Elementor's templates?"
+msgstr "آیا می خواهید از کش برای قالب های المنتور استفاده کنید؟"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgid "Double"
+msgstr "دوخطی"
+
+msgid "Drop-down Icon"
+msgstr "آیکن کشویی(dropdown)"
+
+msgid "Drop-down arrow color"
+msgstr "رنگ پیکان کشویی(dropdown)"
+
+msgid "Drop-down arrow styles"
+msgstr "استایل پیکان کشویی(dropdown)"
+
+msgid "Dropdown"
+msgstr "کشویی (Dropdown)"
+
+msgid "Dropdown Color"
+msgstr "رنگ کشویی (dropdown)"
+
+msgid "Dropdown Icon"
+msgstr "آیکن کشویی(dropdown)"
+
+msgid "Dropdown Icon Color"
+msgstr "رنگ آیکن کشویی(dropdown)"
+
+msgid "Dropdown Icon Size"
+msgstr "سایز آیکن کشویی(dropdown)"
+
+msgid "Dropdown Layout"
+msgstr "طرح بندی کشویی(dropdown)"
+
+msgid "Dropdown Position"
+msgstr "موقعیت کشویی(dropdown)"
+
+msgid "Dropdown SVG icon"
+msgstr "آیکن SVG کشویی(dropdown)"
+
+msgid "Dropdown Toggle"
+msgstr "تاگل کشویی(dropdown)"
+
+msgid "Dropdown color"
+msgstr "رنگ کشویی(dropdown)"
+
+msgid "Dropdown icon"
+msgstr "آیکن کشویی(dropdown)"
+
+msgid "Dropdown opened icon"
+msgstr "آیکن کشویی(dropdown) باز"
+
+msgid "Dropdown size(px)"
+msgstr "اندازه کشویی (Dropdown) (px)"
+
+msgid "Dropdown type"
+msgstr "نوع کشویی (Dropdown)"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Edit Mega Menu Item"
+msgstr "ویرایش مورد مگامنو"
+
+msgid "Edit Mega content"
+msgstr "ویرایش محتوای مگا"
+
+msgid "Elementor"
+msgstr "المنتور"
+
+msgid "Elementor editor content is not available in the Blocks Editor"
+msgstr "محتوای ویرایشگر المنتور در ویرایشگر بلوک ها در دسترس نیست"
+
+msgid "Elementor not instaled"
+msgstr "المنتور نصب نشده است"
+
+msgid "Enable JetMenu for current location"
+msgstr "JetMenu را برای جایگاه فعلی فعال کنید"
+
+msgid "Enable or disable SVG images uploading"
+msgstr "بارگذاری تصاویر SVG را فعال یا غیرفعال کنید"
+
+msgid ""
+"Enable this option in order to reduce the menu size by groupping extra menu "
+"items and hiding them under the suspension dots."
+msgstr ""
+"برای کاهش اندازه منو با گروه بندی موارد اضافی منو و پنهان کردن آنها در زیر "
+"نقطه های تعلیق ، این گزینه را فعال کنید."
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid ""
+"Enter css selector whose width will be equal to the width of the container "
+"mega menu"
+msgstr "سلکتور css را وارد کنید که عرض آن برابر با عرض مگامنوی کانتینر باشد"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Export Options"
+msgstr "برون ریزی تنظیمات"
+
+msgid "External Source"
+msgstr "منبع خارجی"
+
+msgid "Extra extra large(less then 1400px)"
+msgstr "فوق العاده بزرگ (کمتر از 1400px)"
+
+msgid "Extra large(less then 1200px)"
+msgstr "خیلی بزرگ (کمتر از 1200px)"
+
+msgid "Fade"
+msgstr "محو شدن"
+
+msgid "First Item"
+msgstr "اولین مورد"
+
+msgid "First Item Custom Styles"
+msgstr "استایل سفارشی اولین آیتم"
+
+msgid "First item custom styles"
+msgstr "استایل سفارشی اولین آیتم"
+
+msgid "First item inherit border radius"
+msgstr "اولین مورد گردی حاشیه (Border) را به ارث می برد"
+
+msgid "First menu item inherit border radius"
+msgstr "اولین آیتم منو گردی حاشیه را به ارث می برد"
+
+msgid "First sub item"
+msgstr "اولین زیر مورد"
+
+msgid "Fixed"
+msgstr "ثابت"
+
+msgid "Fixed to top-left screen corner"
+msgstr "گوشه بالا-چپ صفحه"
+
+msgid "Fixed to top-right screen corner"
+msgstr "گوشه بالا-راست صفحه"
+
+msgid "Font size"
+msgstr "اندازه فونت"
+
+msgid "From Bottom to Top"
+msgstr "از پایین به بالا"
+
+msgid "From Left to Right"
+msgstr "از چپ به راست"
+
+msgid "From Right to Left"
+msgstr "از راست به چپ"
+
+msgid "From Top to Bottom"
+msgstr "از بالا به پایین"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to Mobile Settings"
+msgstr "رفتن به تنظیمات موبایل"
+
+msgid "Go to Revamp JetMenu"
+msgstr "رفتن به بازسازی JetMenu "
+
+msgid "Go to account"
+msgstr "برو به حساب"
+
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+msgid ""
+"Go to the <a href=\"%s\" target=\"_blank\">Menus screen</a> to manage your "
+"menus."
+msgstr ""
+"برای مدیریت منو های خود به <a href=\"%s\" target=\"_blank\"> صفحه فهرست ها </"
+"a> بروید."
+
+msgid "Greek"
+msgstr "Greek"
+
+msgid "Hamburger Menu"
+msgstr "منوی همبرگری"
+
+msgid "Header Template"
+msgstr "قالب هدر"
+
+msgid "Header content"
+msgstr "محتوای هدر"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hide Details"
+msgstr "مخفی کردن جزئیات"
+
+msgid "Hide badge on mobile"
+msgstr "پنهان کردن نشان در تلفن همراه"
+
+msgid "Hide item navigation label"
+msgstr "پنهان کردن برچسب ناوبری مورد"
+
+msgid "Hide on mobile"
+msgstr "مخفی کردن در موبایل"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Horizontal Aligment"
+msgstr "چینش افقی"
+
+msgid "Horizontal and Vertical Layout"
+msgstr "چیدمان افقی و عمودی"
+
+msgid "Horizontal position"
+msgstr "موقعیت افقی"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Background Color"
+msgstr "رنگ پس زمینه آیکن"
+
+msgid "Icon Box Size"
+msgstr "اندازه جعبه آیکن"
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Font Size"
+msgstr "اندازه فونت آیکن"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid "Icon color"
+msgstr "رنگ آیکن"
+
+msgid "Icon horizontal position"
+msgstr "آیکن موقعیت افقی"
+
+msgid "Icon margin"
+msgstr "فاصله (Margin) آیکن"
+
+msgid "Icon order"
+msgstr "ترتیب آیکن"
+
+msgid "Icon size"
+msgstr "اندازه آیکن"
+
+msgid "Icon size(px)"
+msgstr "اندازه آیکن(px)"
+
+msgid "Icon type"
+msgstr "نوع آیکن"
+
+msgid "Icon vertical position"
+msgstr "آیکن موقعیت عمودی"
+
+msgid "Import"
+msgstr "درون ریزی"
+
+msgid "Import Options"
+msgstr "گزینه‌های درون ریزی"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Incorrect data in options file"
+msgstr "داده های نادرست در فایل گزینه ها"
+
+msgid "Incorrect input data"
+msgstr "داده های ورودی نادرست است"
+
+msgid "Inherit border radius for the first menu item from main container"
+msgstr ""
+"برای اولین مورد منو از کانتینر اصلی ، گردی حاشیه(border) را به ارث ببرید"
+
+msgid "Inherit border radius for the last menu item from main container"
+msgstr ""
+"برای آخرین مورد منو از کانتینر اصلی ، گردی حاشیه(border) را به ارث ببرید"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install %2$s"
+msgstr "نصب  %2$s"
+
+msgid "Install Plugins"
+msgstr "نصب افزونه ها"
+
+msgid "Install Required Plugins"
+msgstr "نصب افزونه های ضروری"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgctxt "Install/Update Status"
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+msgid "Installed But Not Activated"
+msgstr "نصب شده اما فعال نشده است"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jetنصب شده"
+
+msgid "Installed version:"
+msgstr "نسخه نصب شده:"
+
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr "در حال نصب افزونه %1$s (%2$d/%3$d)"
+
+msgid "Installing Plugin: %s"
+msgstr "نصب افزونه: %s"
+
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr "در حال نصب و راه اندازی افزونه %1$s (%2$d/%3$d)"
+
+msgid "Italic"
+msgstr "ایتالیک"
+
+msgid "Item"
+msgstr "آیتم"
+
+msgid "Item Arrow Color"
+msgstr "رنگ پیکان مورد"
+
+msgid "Item Background"
+msgstr "پس زمینه مورد"
+
+msgid "Item Badge"
+msgstr "نشان آیتم"
+
+msgid "Item Badge Visible"
+msgstr "نشان آیتم قابل مشاهده"
+
+msgid "Item Description Color"
+msgstr "رنگ توضیحات مورد"
+
+msgid "Item Description Visible"
+msgstr "توضیحات آیتم قابل مشاهده"
+
+msgid "Item Divider Visible"
+msgstr "جداکننده آیتم قابل مشاهده"
+
+msgid "Item Horizontal Padding"
+msgstr "فاصله داخلی(Padding) افقی آیتم"
+
+msgid "Item Icon"
+msgstr "آیکن آیتم"
+
+msgid "Item Icon Color"
+msgstr "رنگ آیکن مورد"
+
+msgid "Item Icon Visible"
+msgstr "آیکن آیتم قابل مشاهده"
+
+msgid "Item Margin"
+msgstr "فاصله (Margin) آیتم"
+
+msgid "Item Padding"
+msgstr "فاصله داخلی(Padding) آیتم"
+
+msgid "Item SVG"
+msgstr "SVG آیتم"
+
+msgid "Item Text Color"
+msgstr "رنگ متن مورد"
+
+msgid "Item Vertical Padding"
+msgstr "فاصله داخلی(Padding) عمودی آیتم"
+
+msgid "Item badge"
+msgstr "نشان آیتم"
+
+msgid "Item border radius"
+msgstr "گردی حاشیه (Border)مورد"
+
+msgid "Item custom padding"
+msgstr "فاصله داخلی(Padding)  سفارشی آیتم "
+
+msgid "Item icon"
+msgstr "آیکن آیتم"
+
+msgid "Item max width (%)"
+msgstr "حداکثر عرض آیتم (%)"
+
+msgid "Item settings have been saved"
+msgstr "تنظیمات مورد ذخیره شده است"
+
+msgid "Items"
+msgstr "آیتم"
+
+msgid "Items Align"
+msgstr "چینش آیتم ها"
+
+msgid "Items Alignment"
+msgstr "چینش آیتم‌ها"
+
+msgid "Items Horizontal Padding"
+msgstr "فاصله داخلی(Padding) افقی آیتم ها"
+
+msgid "Items Icon Size"
+msgstr "اندازه آیکن آیتم‌ها"
+
+msgid "Items Space"
+msgstr "فاصله آیتم ها"
+
+msgid "Items Styles"
+msgstr "استایل  آیتم ها"
+
+msgid "Items Typography"
+msgstr "تایپوگرافی آیتم ها"
+
+msgid "Items Vertical Padding"
+msgstr "فاصله داخلی(Padding) عمودی آیتم ها"
+
+msgid "Items badge styles"
+msgstr "استایل نشان های آیتم ها"
+
+msgid "Items description"
+msgstr "توضیحات آیتم ها"
+
+msgid "Items icon styles"
+msgstr "استایل آیکن های آیتم ها"
+
+msgid "Items label"
+msgstr "برچسب آیتم ها"
+
+msgid "Jet Menu"
+msgstr "جت‌منو"
+
+msgid "JetMenu"
+msgstr "JetMenu "
+
+msgid "JetMenu Locations Settings"
+msgstr "تنظیمات موقعیت های JetMenu "
+
+msgid "JetMenu Update"
+msgstr "آپدیت JetMenu "
+
+msgid "JetMenu for Elementor recommends the following plugin: %1$s."
+msgid_plural "JetMenu for Elementor recommends the following plugins: %1$s."
+msgstr[0] "JetMenu  افزونه های زیر را پیشنهاد میکند: %1$s."
+msgstr[1] "JetMenu  افزونه های زیر را پیشنهاد میکند: %1$s."
+
+msgid "JetMenu for Elementor requires the following plugin: %1$s."
+msgid_plural "JetMenu for Elementor requires the following plugins: %1$s."
+msgstr[0] "JetMenu  به نصب افزونه های زیر نیاز دارد: %1$s."
+msgstr[1] "JetMenu  به نصب افزونه های زیر نیاز دارد: %1$s."
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های Jet"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Label Color"
+msgstr "رنگ برچسب"
+
+msgid "Label Text Typography"
+msgstr "تایپوگرافی متن برچسب"
+
+msgid "Label Typography"
+msgstr "تایپوگرافی برچسب"
+
+msgid "Large(less then 992px)"
+msgstr "بزرگ (کمتر از 992px)"
+
+msgid "Last Item"
+msgstr "آخرین مورد"
+
+msgid "Last Item Custom Styles"
+msgstr "استایل سفارشی آخرین آیتم"
+
+msgid "Last item border"
+msgstr "حاشیه (border) آخرین آیتم"
+
+msgid "Last item custom styles"
+msgstr "استایل سفارشی آخرین آیتم"
+
+msgid "Last item inherit border radius"
+msgstr "آخرین مورد گردی حاشیه (Border) را به ارث می برد"
+
+msgid "Last menu item inherit border radius"
+msgstr "آخرین مورد منو گردی حاشیه را به ارث می برد"
+
+msgid "Last sub item"
+msgstr "آخرین زیر مورد"
+
+msgid "Latin"
+msgstr "Latin"
+
+msgid "Layout"
+msgstr "طرح بندی"
+
+msgid "Leave empty to automatic width detection"
+msgstr "برای تشخیص عرض خودکار خالی بگذارید"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Left Side"
+msgstr "سمت چپ"
+
+msgid "Level"
+msgstr "سطح "
+
+msgid "Levels"
+msgstr "سطح ها"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "Load preset to use it for all menu locations"
+msgstr "برای استفاده پیش تنظیم برای همه مکانهای منو ، آنرا بارگذاری کنید"
+
+msgid "Loader Color"
+msgstr "رنگ لودر"
+
+msgid "Loader color"
+msgstr "رنگ لودر"
+
+msgid "Lowercase"
+msgstr "حروف کوچک"
+
+msgid "Main Menu"
+msgstr "فهرست اصلی"
+
+msgid "Main Menu Items"
+msgstr "آیتم های منوی اصلی"
+
+msgid "Main Menu Items Custom Style"
+msgstr "استایل سفارشی آیتم های منوی اصلی"
+
+msgid "Main Menu Width"
+msgstr "عرض منوی اصلی"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid "Max width 100% of device viewport width. Default 400px"
+msgstr "حداکثر عرض 100%  عرض نمای دستگاه(viewport). پیش فرض 400px"
+
+msgid "Medium(less then 768px)"
+msgstr "متوسط (کمتر از 768px)"
+
+msgid "Mega Activated"
+msgstr "مگامنو فعال شد"
+
+msgid "Mega Container Width Type"
+msgstr "نوع عرض کانتینر مگا "
+
+msgid "Mega Content"
+msgstr "محتوای مگا"
+
+msgid "Mega Content Ajax Loading"
+msgstr "بارگذاری آجاکس محتوای مگا"
+
+msgid "Mega Menu"
+msgstr "مگامنو"
+
+msgid "Mega Menu Item"
+msgstr "مگامنو"
+
+msgid "Mega Menu Items"
+msgstr "آیتم های مگامنو"
+
+msgid "Mega Menu Width"
+msgstr "عرض مگامنو"
+
+msgid "Mega Panel"
+msgstr "پنل مگا"
+
+msgid "Mega Submenu Panel"
+msgstr "پنل زیرمگامنو"
+
+msgid "Mega container position relative to item"
+msgstr "موقعیت کانتینر مگامنو نسبت به آیتم"
+
+msgid "Mega content"
+msgstr "محتوای مگا"
+
+msgid "Mega content is empty"
+msgstr "محتوای مگا خالی است"
+
+msgid "Mega content position"
+msgstr "موقعیت محتوای مگامنو"
+
+msgid "Mega content type"
+msgstr "نوع محتوای مگا"
+
+msgid "Mega menu base width"
+msgstr "عرض پایه مگامنو"
+
+msgid "Mega menu width selector"
+msgstr "انتخابگر عرض مگا منو"
+
+msgid "Menu"
+msgstr "منو"
+
+msgid "Menu Item"
+msgstr "آیتم منو"
+
+msgid "Menu Items Alignment"
+msgstr "چینش آیتم های منو"
+
+msgid "Menu Preset"
+msgstr "پیش تنظیم منو"
+
+msgid "Menu RollUp"
+msgstr "منو RollUp"
+
+msgid "Menu back icon"
+msgstr "آیکن بازگشت منو"
+
+msgid "Menu container"
+msgstr "کانتینر منو"
+
+msgid "Menu container border radius"
+msgstr "کانتینر منو گردی حاشیه (Border) را به ارث می برد"
+
+msgid "Menu container min width (px)"
+msgstr "حداقل عرض کانتینر منو (px)"
+
+msgid "Menu container padding"
+msgstr "فاصله داخلی (Padding) کانتینر منو"
+
+msgid "Menu container styles"
+msgstr "استایل کانتینر منو"
+
+msgid "Menu for Mobile"
+msgstr "منو برای موبایل"
+
+msgid "Menu items alignment"
+msgstr "چینش آیتم های منو"
+
+msgid "Menu settings have been saved"
+msgstr "تنظیمات منو ذخیره شده است"
+
+msgid "Menu undefined"
+msgstr "منو تعریف نشده"
+
+msgid "Min Width (px)"
+msgstr "حداقل عرض (px)"
+
+msgid "Minimal"
+msgstr "حداقل"
+
+msgid "Minimum required version:"
+msgstr "حداقل نسخه مورد نیاز:"
+
+msgid "Mobile"
+msgstr "موبایل"
+
+msgid "Mobile Advanced"
+msgstr "موبایل پیشرفته"
+
+msgid "Mobile Container"
+msgstr "کانتینر موبایل"
+
+msgid "Mobile Device"
+msgstr "موبایل"
+
+msgid "Mobile Device Render"
+msgstr "Mobile Render"
+
+msgid "Mobile Items"
+msgstr "آیتم های موبایل"
+
+msgid "Mobile Layout"
+msgstr "طرح بندی موبایل"
+
+msgid "Mobile Menu"
+msgstr "منوی موبایل"
+
+msgid "Mobile Render"
+msgstr "رندر موبایل"
+
+msgid "Mobile Toggle"
+msgstr "تاگل (Toggle) موبایل"
+
+msgid "Mobile view on all devices"
+msgstr "نمای موبایل در همه دستگاه ها"
+
+msgid "Mobile( <%dpx )"
+msgstr "تلفن همراه (<٪ dpx)"
+
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr ""
+"خطای شروع ماژول بروزرسانی پایگاه داده در %s - نسخه و نامک (slug) آرگومان های "
+"مورد نیاز است"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های Jetبا لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Mouse leave delay(ms)"
+msgstr "تاخیر در ترک ماوس (ms)"
+
+msgid "Move Down"
+msgstr "حرکت پایین"
+
+msgid "Move Left"
+msgstr "حرکت چپ"
+
+msgid "Move Right"
+msgstr "حرکت راست"
+
+msgid "Move Up"
+msgstr "حرکت بالا "
+
+msgid "Navigation Controls"
+msgstr "کنترل های ناوبری"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No Repeat"
+msgstr "بدون تکرار"
+
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "اتفاقی نیفتاد. افزونه %1$s  از قبل فعال شده بود."
+
+msgid "No plugins are available to be activated at this time."
+msgstr "در این زمان هیچ افزونه ای برای فعالسازی در دسترس نیست."
+
+msgid "No plugins are available to be installed at this time."
+msgstr "هیچ افزونه ای در حال برای نصب در دسترس نمی باشد."
+
+msgid "No plugins are available to be updated at this time."
+msgstr "هیچ افزونه ای در حال برای به روز رسانی در دسترس نمی باشد."
+
+msgid "No plugins to install, update or activate."
+msgstr "افزونه ای برای نصب، به روزرسانی یا فعال سازی موجود نیست."
+
+msgid "No plugins were selected to be activated. No action taken."
+msgstr "هیچ اتفاقی نیفتاد. هیچ افزونه ای برای فعالسازی انتخاب نشده بود."
+
+msgid "No plugins were selected to be installed. No action taken."
+msgstr "هیچ اتفاقی نیفتاد. هیچ افزونه ای برای نصب انتخاب نشده بود."
+
+msgid "No plugins were selected to be updated. No action taken."
+msgstr "هیچ اتفاقی نیفتاد. هیچ افزونه ای برای بروزرسانی انتخاب نشده بود."
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Not Installed"
+msgstr "نصب نشده"
+
+msgid "Not Selected"
+msgstr "انتخاب نشده"
+
+msgid "Oblique"
+msgstr "مورب"
+
+msgid "Offset"
+msgstr "آفست"
+
+msgid ""
+"Once this option is enabled you start building from scratch. To get back to "
+"the old menu switch this toggle off"
+msgstr ""
+"وقتی این گزینه فعال شد ، از ابتدا شروع به ساخت می کنید. برای بازگشت به منوی "
+"قدیمی ، این حالت را خاموش کنید"
+
+msgid "Opened Toggle Icon"
+msgstr "آیکن بازشده تاگل (Toggle)"
+
+msgid "Options"
+msgstr "گزینه ها"
+
+msgid "Options Reset"
+msgstr "بازنشانی تنظیمات"
+
+msgid "Options successfully imported. Page will be reloaded."
+msgstr "گزینه ها با موفقیت وارد شدند. صفحه بارگیری مجدد خواهد شد."
+
+msgid "Order"
+msgstr "ترتیب"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Panel"
+msgstr "پنل"
+
+msgid "Panel border radius"
+msgstr "گردی حاشیه (border) پنل"
+
+msgid "Panel margin"
+msgstr "فاصله (margin) پنل"
+
+msgid "Panel padding"
+msgstr "فاصله داخلی (padding) پنل"
+
+msgid "Panel width(px)"
+msgstr "عرض پنل (px)"
+
+msgid ""
+"Please assign this menu to a theme location to enable the JetMenu settings."
+msgstr ""
+"لطفاً برای فعال کردن تنظیمات JetMenu  ، این منو را به یک جایگاه قالب اختصاص "
+"دهید."
+
+msgid "Please contact the administrator of this site for help."
+msgstr "لطفاً برای راهنمایی با مدیر این سایت تماس بگیرید."
+
+msgid ""
+"Please contact the plugin provider and ask them to package their plugin "
+"according to the WordPress guidelines."
+msgstr ""
+"لطفا با ارائه دهنده افزونه تماس بگیرید و از آنها بخواهید افزونه خود را با "
+"توجه به دستورالعمل وردپرس بسته بندی کنند."
+
+msgid "Please, select menu."
+msgstr "لطفاً ، منو را انتخاب کنید."
+
+msgid "Please, specify preset name"
+msgstr "لطفاً نام از پیش تعیین شده را مشخص کنید"
+
+msgid "Plugin"
+msgstr "افزونه"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin activated successfully."
+msgstr "افزونه با موفقیت فعال شد."
+
+msgid "Plugin activation failed."
+msgstr "فعالسازی افزونه با شکست مواجه شد."
+
+msgid ""
+"Plugin not activated. A higher version of %s is needed for this theme. "
+"Please update the plugin."
+msgstr ""
+"افزونه فعال نمی شود. نسخه بالاتر از%s برای این قالب مورد نیاز است. لطفاً "
+"افزونه را به روز کنید."
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Pre-Packaged"
+msgstr "بسته بندی"
+
+msgid "Preset ID not defined"
+msgstr "شناسه پیش تنظیم تعریف نشده است"
+
+msgid "Preset Manager"
+msgstr "مدیریت پیش تنظیم"
+
+msgid "Preset have been applyed"
+msgstr "پیش تنظیم اعمال شده است"
+
+msgid "Preset have been removing"
+msgstr "پیش تنظیم حذف شده است"
+
+msgid "Preset have been updated"
+msgstr "پیش تنظیم بروز شده است"
+
+msgid "Preset name"
+msgstr "نام پیش تنظیم"
+
+msgid "Preset with the same name already exists, please change it"
+msgstr "پیش تنظیم با همان نام از قبل موجود است ، لطفاً آن را تغییر دهید"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Push"
+msgstr "هل دادن (Push)"
+
+msgid "Read more %1$s"
+msgstr "بیشتر بخوانید %s"
+
+msgid "Read more about"
+msgstr "اطلاعات بیشتر درباره"
+
+msgid "Read more about "
+msgstr "اطلاعات بیشتر درباره "
+
+msgid "Recommended"
+msgstr "پیشنهادی"
+
+msgid "Relative item"
+msgstr "آیتم مربوط "
+
+msgid "Remove"
+msgstr "حذف"
+
+msgid "Repeat"
+msgstr "تکرار"
+
+msgid "Repeat X"
+msgstr "تکرار در محور X"
+
+msgid "Repeat Y"
+msgstr "تکرار در محور Y"
+
+msgid "Required"
+msgstr "الزامی"
+
+msgid "Required Update not Available"
+msgstr "بروزرسانی مورد نیاز وجود ندارد"
+
+msgid "Required data is missed"
+msgstr "اطلاعات مورد نیاز از دست رفته است"
+
+msgid "Requires Update"
+msgstr "نیاز به بروز رسانی"
+
+msgid "Reset Options"
+msgstr "بازنشانی تنظیمات"
+
+msgid "Return to Required Plugins Installer"
+msgstr "بازگشت به نصب کننده افزونه های مورد نیاز"
+
+msgid "Return to the Dashboard"
+msgstr "برگشت به پیشخوان"
+
+msgid "Revamp Menu"
+msgstr "بازسازی منو"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Right Side"
+msgstr "سمت راست"
+
+msgid "Roll Up"
+msgstr "RollUp"
+
+msgid "RollUp Item Icon"
+msgstr "آیکن آیتم RollUp "
+
+msgid "RollUp Item Text"
+msgstr "متن آیتم RollUp"
+
+msgid "RollUp Svg Icon"
+msgstr "آیکن RollUp Svg"
+
+msgid "RollUp Text"
+msgstr "متن RollUp"
+
+msgid "RollUp Type"
+msgstr "نوع RollUp"
+
+msgid "SVG Icon"
+msgstr "آیکن SVG "
+
+msgid "SVG images upload status"
+msgstr "وضعیت بارگذاری تصاویر SVG"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Save current options configuration to existing preset"
+msgstr "پیکربندی گزینه های فعلی را در از پیش تنظیم موجود ذخیره کنید"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Scroll"
+msgstr "اسکرول"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select Font..."
+msgstr "انتخاب فونت ..."
+
+msgid "Select Menu"
+msgstr "انتخاب منو"
+
+msgid "Select Menu for Desktop"
+msgstr "انتخاب منو برای دسکتاپ"
+
+msgid "Select Menu for Mobile"
+msgstr "انتخاب منو برای موبایل"
+
+msgid "Select Menu for Mobile(Phone)"
+msgstr "انتخاب منو برای موبایل"
+
+msgid "Select menu for mobile layout"
+msgstr "منو را برای طرح موبایل انتخاب کنید"
+
+msgid "Select options preset"
+msgstr "انتخاب پیش تنظیم گزینه ها"
+
+msgid "Selector"
+msgstr "سلکتور "
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Set 0 to automatic width detection"
+msgstr "برای تشخیص عرض خودکار 0 بگذارید"
+
+msgid "Set badge horizontal offset for this item(px)"
+msgstr "تنظیم افست نشان افقی برای این آیتم (px)"
+
+msgid "Set badge size for this item(px)"
+msgstr "تنظیم اندازه نشان برای این آیتم (px)"
+
+msgid "Set badge vertical offset for this item(px)"
+msgstr "تنظیم افست نشان عمودی برای این آیتم (px)"
+
+msgid "Set custom mega content width for container(px)."
+msgstr "عرض محتوای مگامنوی سفارشی را برای این کانتینر تنظیم کنید (px)"
+
+msgid "Set icon size for this item(px)"
+msgstr "تنظیم اندازه آیکن برای این آیتم (px)"
+
+msgid "Set the parent_slug config variable instead."
+msgstr "تنظیم متغیر پیکربندی parent_slug به جای آن."
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Settings not provided"
+msgstr "تنظیمات ارائه نشده است"
+
+msgid "Settings preset have been created"
+msgstr "تنظیمات از پیش تعیین شده ایجاد شده است"
+
+msgid "Show Details"
+msgstr "نمایش جزئیات"
+
+msgid "Show Sub Menu Layout"
+msgstr "طرح بندی نمایش زیرمنو"
+
+msgid "Show Sub Menu Trigger"
+msgstr "نمایش تریگر(trigger) زیرمنو"
+
+msgid "Show item description?"
+msgstr "نمایش توضیحات آیتم ها؟"
+
+msgid "Show sub item description"
+msgstr "نمایش توضیحات مورد زیرمنو"
+
+msgid "Show toggle button loader?"
+msgstr "نمایش لودر دکمه تاگل (Toggle)؟"
+
+msgid "Show top item description"
+msgstr "نمایش توضیحات آیتم های بالا؟"
+
+msgid "Simple Panel"
+msgstr "پنل ساده"
+
+msgid "Simple Submenu Panel"
+msgstr "پنل زیرمنوی ساده"
+
+msgid "Size"
+msgstr "سایز"
+
+msgid "Slide In"
+msgstr "اسلايد داخل(Slide In)"
+
+msgid "Slide Out"
+msgstr "اسلاید بیرون(Slide Out)"
+
+msgid "Small(less then 576px)"
+msgstr "کوچک (کمتر از 576px)"
+
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgid "Something went wrong with the plugin API."
+msgstr "خطایی در رابطه با Api افزونه رخ داده است."
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه Jetخود باید لایسنس را فعال کنید"
+
+msgid "Source"
+msgstr "منبع"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Update"
+msgstr "شروع بروزرسانی"
+
+msgid "States"
+msgstr "حالت ها"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Stretch"
+msgstr "کشیده"
+
+msgid "Sub"
+msgstr "زیر"
+
+msgid "Sub Animation"
+msgstr "انیمیشن زیرمنو"
+
+msgid "Sub Icon"
+msgstr "آیکن زیرمنو"
+
+msgid "Sub Items"
+msgstr "آیتم های فرعی"
+
+msgid "Sub Items Typography"
+msgstr "تایپوگرافی آیتم های فرعی"
+
+msgid "Sub Label"
+msgstr "زیر برچسب"
+
+msgid "Sub Label Typography"
+msgstr "تایپوگرافی برچسب زیر"
+
+msgid "Sub Level"
+msgstr "سطح زیر"
+
+msgid "Sub Marker"
+msgstr "نشانه گذار(Marker) زیرمنو"
+
+msgid "Sub Marker Color"
+msgstr "رنگ زیرمارکر"
+
+msgid "Sub Menu"
+msgstr "زیرمنو"
+
+msgid "Sub Menu Button"
+msgstr "دکمه زیر منو"
+
+msgid "Sub Menu Dropdown Icon Color"
+msgstr "رنگ آیکن کشویی زیرمنو"
+
+msgid "Sub Menu Icon"
+msgstr "آیکن زیر منو"
+
+msgid "Sub Menu Icon Color"
+msgstr "رنگ آیکن زیرمنو"
+
+msgid "Sub Menu Icon Styles"
+msgstr "استایل‌ آیکن زیرمنو"
+
+msgid "Sub Menu Items"
+msgstr "آیتم های زیرمنو"
+
+msgid "Sub Menu Items Style"
+msgstr "استایل مورد زیر منو"
+
+msgid "Sub Menu Position"
+msgstr "موقعیت زیر منو"
+
+msgid "Sub Menu Target"
+msgstr "هدف(Target) زیرمنو"
+
+msgid "Sub Menu Trigger"
+msgstr "تریگر(Trigger) زیرمنو"
+
+msgid "Sub Menu Width"
+msgstr "عرض زیر منو"
+
+msgid "Sub Position"
+msgstr "موقعیت زیرمنو"
+
+msgid "Sub Target"
+msgstr "هدف زیرمنو "
+
+msgid "Sub Trigger"
+msgstr "تریگر(Trigger) زیرمنو"
+
+msgid "Sub item"
+msgstr "زیر آیتم"
+
+msgid "Sub item arrow color"
+msgstr "رنگ پیکان زیر مورد"
+
+msgid "Sub item border radius"
+msgstr "گردی حاشیه (Border)مورد زیر"
+
+msgid "Sub item description color"
+msgstr "رنگ توضیحات زیرمورد"
+
+msgid "Sub item icon color"
+msgstr "رنگ آیکن زیر مورد"
+
+msgid "Sub item margin"
+msgstr "فاصله (margin) آیتم زیر"
+
+msgid "Sub item padding"
+msgstr "فاصله داخلی (padding) آیتم زیر"
+
+msgid "Sub item text color"
+msgstr "رنگ متن زیر مورد"
+
+msgid "Sub items states"
+msgstr "وضعیت های آیتم های زیرمنو"
+
+msgid "Sub items styles"
+msgstr "استایل‌ زیرآیتم ها"
+
+msgid "Sub level menu"
+msgstr "منوی سطح زیر"
+
+msgid "Sub level menu description"
+msgstr "توضیحات منوی سطح زیر"
+
+msgid "Sub menu open trigger"
+msgstr "تریگر(trigger) باز زیرمنو"
+
+msgid "Submenu Icon"
+msgstr "آیکن زیر منو"
+
+msgid "Submenu Opened Icon"
+msgstr "آیکن بازشده زیرمنو"
+
+msgid "Submenu container styles"
+msgstr "استایل کانتینر زیرمنو"
+
+msgid "Success!"
+msgstr "موفق!"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Svg"
+msgstr "Svg"
+
+msgid "TGMPA v%s"
+msgstr "TGMPA v%s"
+
+msgid "Tablet and Mobile"
+msgstr "تبلت و موبایل"
+
+msgid "Tablet( <%dpx )"
+msgstr "تبلت (<٪ dpx)"
+
+msgid "Template Content Cache"
+msgstr "کش محتوای قالب"
+
+msgid "Text"
+msgstr "متن "
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text color"
+msgstr "رنگ متن"
+
+msgid ""
+"The following plugin needs to be updated to its latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgid_plural ""
+"The following plugins need to be updated to their latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+"برای اطمینان از حداکثر سازگاری با این قالب ، باید افزونه زیر را به آخرین "
+"نسخه آن به روز کنید : %1$s."
+msgstr[1] ""
+"برای اطمینان از حداکثر سازگاری با این قالب ، باید افزونه های زیر را به آخرین "
+"نسخه آن به روز کنید : %1$s."
+
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] "افزونه زیر با موفقیت فعال شد:"
+msgstr[1] "افزونه زیر با موفقیت فعال شد:"
+
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] "افزونه پیشنهادی زیر در حال حاضر غیرفعال است: %1$s."
+msgstr[1] "افزونه های پیشنهادی زیر در حال حاضر غیرفعال هستند: %1$s."
+
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] "افزونه مورد نیاز زیر در حال حاضر غیرفعال است: %1$s."
+msgstr[1] "افزونه های مورد نیاز زیر در حال حاضر غیرفعال هستند: %1$s."
+
+msgid ""
+"The installation and activation process is starting. This process may take a "
+"while on some hosts, so please be patient."
+msgstr ""
+"روند نصب و فعال سازی شروع شده است. این فرآیند ممکن است در برخی از هاست ها "
+"طول بکشد، بنابراین لطفا صبور باشید."
+
+msgid "The installation of %1$s failed."
+msgstr "نصب از %1$s ناموفق."
+
+msgid ""
+"The installation process is starting. This process may take a while on some "
+"hosts, so please be patient."
+msgstr ""
+"روند نصب شروع شده است. این فرآیند ممکن است در برخی از سرور ها طول بکشد، "
+"بنابراین لطفا صبور باشید."
+
+msgid ""
+"The remote plugin package consists of more than one file, but the files are "
+"not packaged in a folder."
+msgstr ""
+"بسته افزونه از راه دور شامل بیش از یک فایل است، اما فایل ها در یک پوشه بسته "
+"بندی نمی شوند."
+
+msgid ""
+"The remote plugin package does not contain a folder with the desired slug "
+"and renaming did not work."
+msgstr ""
+"بسته نصب از راه دور افزونه در پوشه مورد نظر یافت نشد با تغییر نام هم کار "
+"نکرد."
+
+msgid "There are no menus in your site."
+msgstr "هیچ منویی در سایت شما موجود نیست."
+
+msgid ""
+"There are one or more required or recommended plugins to install, update or "
+"activate."
+msgstr ""
+"یک یا چند افزونه مورد نظر یا توصیه برای نصب، به روز رسانی یا فعال بودن وجود "
+"دارد."
+
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] "بروزرسانی برای این افزونه ها وجود دارد: %1$s."
+msgstr[1] "یک بروزرسانی جدید وجود دارد برای: %1$s."
+
+msgid ""
+"This module can't be used inside Mega Menu content. Please, use it to show "
+"selected Mega Menu on specific page."
+msgstr ""
+"این ماژول نمی تواند در محتوای مگامنو استفاده شود. لطفاً ، برای نمایش مگامنوی "
+"انتخاب شده در صفحه خاص از آن استفاده کنید."
+
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr "این افزونه برای هماهنگی با قالب نیاز به بروز رسانی دارد."
+
+msgid "This theme does not register any menu locations."
+msgstr "این قالب هیچ جایگاه فهرست را ثبت نمی کند."
+
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] "این قالب افزونه زیر را پیشنهاد می کند: %1$s."
+msgstr[1] "این قالب افزونه های زیر را پیشنهاد می کند:  %1$s."
+
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] "این قالب به افزونه زیر  نیاز دارد:%1$s."
+msgstr[1] "این قالب به افزونه های زیر  نیاز دارد:%1$s."
+
+msgid "Title Color"
+msgstr "رنگ عنوان"
+
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] "فعال سازی<span class=\"count\">(%s)</span>"
+msgstr[1] "فعال سازی<span class=\"count\">(%s)</span>"
+
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] "برای نصب <span class=\"count\">(%s)</span>"
+msgstr[1] "برای نصب <span class=\"count\">(%s)</span>"
+
+msgid ""
+"To assign this menu to a theme location, scroll to the bottom of this page "
+"and tag the menu to a 'Display location'."
+msgstr ""
+"برای اختصاص دادن این منو به یک جایگاه قالب، به پایین این صفحه بروید و منو را "
+"به (نمایش مکان) تگ کنید."
+
+msgid "Toggle"
+msgstr "تاگل (Toggle)"
+
+msgid "Toggle Closed State Icon"
+msgstr "آیکن وضعیت بسته تاگل (Toggle)"
+
+msgid "Toggle Distance"
+msgstr "فاصله بازشونده (Toggle)"
+
+msgid "Toggle Icon"
+msgstr "آیکن تاگل (Toggle)"
+
+msgid "Toggle Opened Icon"
+msgstr "آیکن وضعیت بازشده تاگل (Toggle)"
+
+msgid "Toggle Opened State Icon"
+msgstr "آیکن وضعیت بازشده تاگل (Toggle)"
+
+msgid "Toggle Position"
+msgstr "موقعیت تاگل (Toggle)"
+
+msgid "Toggle Size"
+msgstr "سایز تاگل (Toggle)"
+
+msgid "Toggle Styles"
+msgstr "استایل تاگل (Toggle)"
+
+msgid "Toggle Text"
+msgstr "متن تاگل (Toggle)"
+
+msgid "Toggle Text Color"
+msgstr "رنگ متن باز شونده (Toggle)"
+
+msgid "Toggle Text Typography"
+msgstr "تایپوگرافی متن باز شونده (Toggle)"
+
+msgid "Toggle position"
+msgstr "موقعیت تاگل (Toggle)"
+
+msgid "Toggle text"
+msgstr "متن تاگل (Toggle)"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgid "Top Items"
+msgstr "آیتم های بالا"
+
+msgid "Top Items Typography"
+msgstr "تایپوگرافی آیتم های بالا"
+
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgid "Top Level"
+msgstr "سطح بالا"
+
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgid "Top items dropdown SVG icon"
+msgstr "آیکن SVG آیتم های بالای کشویی(dropdown)"
+
+msgid "Top items dropdown icon"
+msgstr "آیتم های بالا آیکن کشویی(dropdown)"
+
+msgid "Top items dropdown type"
+msgstr "نوع کشویی های(dropdown) آیتم های بالا"
+
+msgid "Top items states"
+msgstr "حالت های آیتم های بالا"
+
+msgid "Top items styles"
+msgstr "استایل آیتم های بالا"
+
+msgid "Top level item max width (%)"
+msgstr "حداکثر عرض مورد سطح بالا (%)"
+
+msgid "Top level menu"
+msgstr "منوی سطح بالا"
+
+msgid "Top level menu description"
+msgstr "توضیحات منوی سطح بالا"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typography"
+msgstr "تایپوگرافی "
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update"
+msgstr "به‌روزرسانی"
+
+msgid "Update %2$s"
+msgstr "بروزرسانی%2$s"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] "به روز رسانی در دسترس <span class=\"count\">(%s)</span>"
+msgstr[1] "به روز رسانی در دسترس <span class=\"count\">(%s)</span>"
+
+msgid "Update Now"
+msgstr "اکنون بروز رسانی کنید"
+
+msgid "Update Preset"
+msgstr "بروزرسانی پیش تنظیم"
+
+msgid "Update Required"
+msgstr "نیاز به بروزرسانی"
+
+msgid "Update complete, thank you for updating to the latest version!"
+msgstr "به روزرسانی کامل شد ، از شما برای به روزرسانی به آخرین نسخه متشکریم!"
+
+msgid "Update recommended"
+msgstr "به روز رسانی توصیه می شود"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr "بروزرسانی افزونه %1$s (%2$d/%3$d)"
+
+msgid "Updating Plugin: %s"
+msgstr "بروزرسانی افزونه ها: %s"
+
+msgid "Upgrade message from the plugin author:"
+msgstr "پیغام بروز رسانی از نویسنده افزونه:"
+
+msgid "Uppercase"
+msgstr "حروف بزرگ"
+
+msgid "Use Breadcrumbs?"
+msgstr "استفاده راهنمای صفحات؟"
+
+msgid "Use Mega content"
+msgstr "استفاده از محتوای مگا"
+
+msgid "Use Mobile Render"
+msgstr "استفاده از Mobile Render "
+
+msgid "Use Toggle Button Loader?"
+msgstr "استفاده لودر دکمه تاگل(Toggle)؟"
+
+msgid "Use ajax loading"
+msgstr "استفاده از بارگذاری آژاکس"
+
+msgid "Use ajax loading for mega content"
+msgstr "برای محتوای مگا از بارگذاری آژاکس استفاده کنید"
+
+msgid "Use breadcrumbs?"
+msgstr "استفاده راهنمای صفحات؟"
+
+msgid "Use current theme integration?"
+msgstr "استفاده از پیاده سازی تم فعلی ؟"
+
+msgid "Use horizontal items Roll Up?"
+msgstr "استفاده از آیتم های افقی Roll Up ؟"
+
+msgid "Use items badge?"
+msgstr "استفاده از نشان آیتم ها؟"
+
+msgid "Use items divider?"
+msgstr "استفاده جداکننده آیتم ها؟"
+
+msgid "Use items icon?"
+msgstr "استفاده آیکن آیتم ها؟"
+
+msgid "Version"
+msgstr "نسخه"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Vertical Aligment"
+msgstr "چینش عمودی"
+
+msgid "Vertical Mega Menu"
+msgstr "مگامنوی عمودی"
+
+msgid "Vertical Position"
+msgstr "موقعیت عمودی"
+
+msgid "Vertical position"
+msgstr "موقعیت عمودی"
+
+msgid "We need to update your database to the latest version."
+msgstr "ما باید پایگاه داده شما را به آخرین نسخه به روز کنیم."
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "Width (px)"
+msgstr "عرض (px)"
+
+msgid "Width same as Custom css selector width"
+msgstr "به اندازه عرض سلکتور سفارشی css"
+
+msgid "Width same as main container width"
+msgstr "به اندازه عرض اصلی کانتینر"
+
+msgid "Width same as total items width"
+msgstr "به اندازه عرض همه آیتم ها"
+
+msgid "Width(px)"
+msgstr "عرض (px)"
+
+msgid "WordPress Repository"
+msgstr "مخزن وردپرس"
+
+msgid "X-Small(less then 320px)"
+msgstr "خیلی کوچک (کمتر از 320px)"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You are not allowed to do this"
+msgstr "شما مجاز به انجام این عمل نیستید"
+
+msgid ""
+"You are using a legacy mode. Switch to the Revamp JetMenu plugin. Please "
+"mind, you can always rollback. "
+msgstr ""
+"شما از حالت قدیمی استفاده می کنید. به افزونه Revamp JetMenu بروید. لطفاً توجه "
+"داشته باشید ، همیشه می توانید عقب گرد کنید."
+
+msgid ""
+"You will need to create a new menu location to use the JetMenu on your site."
+msgstr ""
+"برای استفاده از JetMenu  در سایت خود باید جایگاه منوی جدیدی ایجاد کنید."
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اولیه شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "Z Index"
+msgstr "ایندکس Z"
+
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr "ناشناخته"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetmenu/"
+msgstr "https://crocoblock.com/plugins/jetmenu/"
+
+msgid "itemId is empty"
+msgstr "itemId  خالی است"
+
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr "and"
+
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] "همه <span class=\"count\">(%s)</span>"
+msgstr[1] "همه <span class=\"count\">(%s)</span>"

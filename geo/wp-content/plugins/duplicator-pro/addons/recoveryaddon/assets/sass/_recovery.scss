@@ -1,0 +1,247 @@
+// Collapsible panel shared with ImportAddon — duplicated here to keep addons independent
+.dupli-import-box {
+    background-color: $white;
+    border: 1px solid $medium-gray;
+    margin: 0;
+}
+
+.dupli-import-box .box-title {
+    border-bottom: 1px solid $medium-gray;
+    padding: 10px 12px;
+    font-weight: bold;
+    font-size: 17px;
+    font-weight: bold;
+    color: #000;
+}
+
+.dupli-import-box .box-content {
+    padding: 20px;
+}
+
+.dupli-import-box.closable .box-title {
+    position: relative;
+}
+
+.dupli-import-box.closable .box-title::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 36px;
+    display: inline-block;
+    width: 36px;
+    text-align: center;
+    font-family: "Font Awesome 5 Free";
+    content: "";
+    font-weight: 900;
+}
+
+.dupli-import-box.closable.closed .box-title {
+    border: 0 none;
+}
+
+.dupli-import-box.closable.closed .box-title::after {
+    content: "\f0d7";
+}
+
+.dupli-import-box.closable.opened .box-title::after {
+    content: "\f0d8";
+}
+
+.dupli-import-box.closable.closed .box-content {
+    display: none;
+}
+
+.dupli-import-box.closable.opened .box-content {
+    display: block;
+}
+
+div.dupli-recovery-point-selector .dupli-notice {
+    margin: 0;
+    font-size: 16px;
+}
+
+div.dupli-recovery-point-selector div.dupli-notice-details {
+    margin: 20px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.dupli-recovery-info-set {
+    border: 1px solid lightgray;
+    padding: 5px;
+    border-radius: 5px;
+    background: #FAFAFA;
+}
+
+.dupli-recovery-info-set .dupli-selector-wrapper {
+    text-align: right;
+}
+
+.dupli-recovery-info-set select {
+    margin: 0 0 5px 0;
+}
+
+.dupli-recovery-widget-wrapper {
+    font-size: 14px;
+}
+
+.dupli-recovery-widget-wrapper .button {
+    margin-right: 10px;
+    min-width: 190px;
+}
+
+#TB_ajaxContent .dupli-recovery-buttons {
+    display: flex;
+}
+
+#TB_ajaxContent .dupli-recovery-buttons>* {
+    flex: 1 1 100%;
+}
+
+
+.dupli-recovery-widget-wrapper .button:last-child {
+    margin-right: 0;
+}
+
+.dupli-recovery-widget-wrapper .button:disabled,
+.dupli-recovery-widget-wrapper .button.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.dupli-recovery-details-max-width-wrapper {
+    max-width: 900px;
+}
+
+.dupli-recovery-point-selector .recovery-select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 10px 0;
+}
+
+.dupli-recovery-point-selector-area-wrapper {
+    margin-bottom: 20px;
+}
+
+.dupli-recovery-widget-wrapper label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+.dupli-recovery-point-selector-area-wrapper .dupli-opening-packages-windows {
+    float: right;
+}
+
+.dupli-recovery-point-selector-area {
+    text-align: right;
+}
+
+.dupli-recovery-package-info table {
+    border-collapse: collapse;
+}
+
+.dupli-recovery-package-info table td {
+    padding: 0 5px 5px 0;
+}
+
+.dupli-recovery-active-link-header>.main-icon {
+    display: block;
+    width: 30px;
+    height: 36px;
+    color: #000;
+    text-align: center;
+    line-height: 36px;
+    font-size: 23px;
+    margin-right: 10px;
+    float: left;
+}
+
+.dupli-recovery-active-link-header>.main-title {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: bold;
+}
+
+.dupli-recovery-active-link-header>.main-subtitle {
+    font-style: italic;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.dupli-recovery-point-actions>.copy-link {
+    position: relative;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border: 1px solid $medium-gray;
+    height: 30px;
+    line-height: 30px;
+    background: $white;
+    color: #000;
+    padding: 0 35px 0 5px;
+    border-radius: 2px;
+}
+
+.dupli-recovery-point-actions>.copy-link .content {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dupli-recovery-point-actions>.copy-link .copy-icon {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-color: $medium-gray;
+}
+
+.dupli-recovery-point-actions>.copy-link.disabled {
+    cursor: not-allowed;
+    border: 1px solid $medium-gray !important;
+    pointer-events: none;
+}
+
+.dupli-recovery-point-actions>.copy-link.disabled .copy-icon {
+    background-color: $medium-gray !important;
+}
+
+.dupli-recovery-point-actions>.dupli-recovery-buttons {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.notice .dupli-recovery-point-actions>.dupli-recovery-buttons {
+    text-align: left;
+}
+
+.dupli-recovery-details-max-width-wrapper .dupli-recovery-buttons {
+    text-align: right;
+}
+
+.toplevel_page_duplicator .dupli-opening-packages-windows {
+    display: none;
+}
+
+.dupli-recovery-not-required {
+    margin-top: 10px;
+    border: 1px solid $light-gray;
+    border-radius: 3px;
+    padding: 15px;
+    background: $white;
+}
+
+.dupli-recovery-flag-icon {
+    color: $anchor-color;
+}
+
+.dup-package-flags-tooltip .dupli-recovery-tooltip-link {
+    color: $primary-color;
+    font-weight: bold;
+}

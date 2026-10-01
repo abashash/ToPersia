@@ -1,0 +1,617 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "مکث ترجمه خودکار شما با خطایی مواجه شد. لطفاً بعداً دوباره امتحان کنید یا با پشتیبانی ما تماس بگیرید."
+        ],
+        "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "از سرگیری ترجمه خودکار شما با خطایی مواجه شد. لطفاً بعداً دوباره امتحان کنید یا با پشتیبانی ما تماس بگیرید."
+        ],
+        "Error": [
+            "خطا"
+        ],
+        "Draft — Pending review": [
+            "پیش‌نویس - در انتظار بررسی"
+        ],
+        "Complete": [
+            "تکمیل شده"
+        ],
+        "Insufficient funds": [
+            "بودجه ناکافی"
+        ],
+        "Translate Everything Automatically - running": [
+            "ترجمه خودکار همه - درحال اجرا"
+        ],
+        "Translate Everything Automatically - active": [
+            "ترجمه خودکار همه - فعال"
+        ],
+        "Pause": [
+            "مکث"
+        ],
+        "Pause automatic translation": [
+            "مکث ترجمه خودکار"
+        ],
+        "WPML will finish in-progress translations but won't translate anything new.": [
+            "افزونه WPML ترجمه‌های در حال انجام را تمام می کند اما چیز جدیدی را ترجمه نمی کند."
+        ],
+        "Translate Everything Automatically is paused": [
+            "ترجمه خودکار همه در حالت مکث است"
+        ],
+        "Translate Everything Automatically - paused": [
+            "ترجمه خودکار همه - مکث شده"
+        ],
+        "Resume": [
+            "ادامه"
+        ],
+        "Start automatic translation": [
+            "شروع ترجمه خودکار"
+        ],
+        "This uses %scredits%s to translate your existing content and anything you add or change later.": [
+            "این از %scredits%s برای ترجمه محتوای موجود شما و هر چیزی که بعداً اضافه یا تغییر می‌دهید استفاده می‌کند."
+        ],
+        "Start translating everything automatically": [
+            "شروع ترجمه خودکار همه"
+        ],
+        "WPML will translate any new content you create into %1$s.": [
+            "افزونه WPML هر محتوای جدیدی را که ایجاد می کنید به %1$s ترجمه می کند."
+        ],
+        "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
+            "افزونه WPML تمام محتوای جدید آینده را به %1$s ترجمه می‌کند و هنگام ایجاد تغییرات، ترجمه‌ها را به‌روز نگه می‌دارد."
+        ],
+        "Do you want to translate existing content, too?": [
+            "آیا می‌خواهید محتوای موجود را نیز ترجمه کنید؟"
+        ],
+        "Yes, translate all new and existing content": [
+            "بله، تمام مطالب جدید و موجود را ترجمه کنید"
+        ],
+        "No, only translate new content": [
+            "خیر، فقط مطالب جدید را ترجمه کنید"
+        ],
+        "You can translate existing content from the Translation Management Dashboard": [
+            "می توانید محتوای موجود را از داشبورد مدیریت ترجمه، ترجمه کنید"
+        ],
+        "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "خطای اتصال. لطفا یک دقیقه صبر کنید و این صفحه را دوباره بارگیری کنید. اگر مشکل ادامه داشت، لطفاً با پشتیبانی WPML تماس بگیرید."
+        ],
+        "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
+            "ترجمه خودکار از اعتبار استفاده می کند. %1$sاطلاعات بیشتر درباره اعتبار ترجمه خودکار‌%2$s"
+        ],
+        "You need credits to start translating everything.": [
+            "برای شروع ترجمه همه چیز به اعتبار نیاز دارید."
+        ],
+        "Cancel": [
+            "لغو"
+        ],
+        "Start translating everything": [
+            "شروع ترجمه همه"
+        ],
+        "%1$d language": [
+            "%1$d زبان",
+            "%1$d زبان"
+        ],
+        "Please wait...": [
+            "لطفا صبر کنید..."
+        ],
+        "All new future content": [
+            "همه مطالب جدید آینده"
+        ],
+        "Translate Everything Automatically - stopped": [
+            "ترجمه خودکار همه - متوقف"
+        ],
+        "Fix it": [
+            "تعمیر"
+        ],
+        "From:": [
+            "از:"
+        ],
+        "--Choose language--": [
+            "--انتخاب زبان--"
+        ],
+        "to:": [
+            "به:"
+        ],
+        "Set language pair(s) for Translator %s:": [
+            "تنظیم جفت زبان برای مترجم %s:"
+        ],
+        "+ Add more language pairs for this translator": [
+            "+ افزودن جفت‌های زبان بیشتر برای این مترجم"
+        ],
+        "First Name": [
+            "نام "
+        ],
+        "Last Name": [
+            "نام خانوادگي"
+        ],
+        "Role": [
+            "نقش"
+        ],
+        "(required)": [
+            "(ضروری)"
+        ],
+        "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "اطمینان حاصل کنید که آدرس ایمیل درستی ارائه کرده اید،مثال. name@domain.com"
+        ],
+        "This field is required": [
+            "این فیلد الزامی است"
+        ],
+        "A translator can be any WordPress role.": [
+            "یک مترجم می تواند هر نقش وردپرسی باشد."
+        ],
+        "Username": [
+            "نام‌ کاربری"
+        ],
+        "Email": [
+            "ایمیل"
+        ],
+        "Search": [
+            "جستجو"
+        ],
+        "What should happen with your automatically translated content?": [
+            "برای محتوای ترجمه شده بصورت خودکار شما چه اتفاقی باید بیفتد؟"
+        ],
+        "Let me review it before it gets published": [
+            "اجازه دهید قبل از انتشار آن را بررسی کنم"
+        ],
+        "Publish right away but mark as not reviewed so I can take a look later": [
+            "سریع منتشر کنید اما به‌عنوان بررسی نشده علامت بزنید تا بعداً نگاهی بیندازم"
+        ],
+        "Publish right away without reviewing": [
+            "بلافاصله بدون بررسی منتشر کنید"
+        ],
+        "Who will translate?": [
+            "چه کسی ترجمه خواهد کرد؟"
+        ],
+        "Only myself": [
+            "فقط خودم"
+        ],
+        "You will be the sole translator for this site.": [
+            "شما تنها مترجم این سایت خواهید بود."
+        ],
+        "Users of this site": [
+            "کاربران این سایت"
+        ],
+        "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
+            "شما کاربران جدید این سایت وردپرس را به عنوان مترجم انتخاب کرده یا ایجاد خواهید کرد. شما همچنین می توانید خود را انتخاب کنید. این به شما امکان می دهد تیمی از مترجمان را راه اندازی کنید که در جفت زبان های مختلف کار می کنند."
+        ],
+        "Translation Service: %s": [
+            "خدمات ترجمه: %s"
+        ],
+        "A Professional Translation Service": [
+            "خدمات ترجمه حرفه‌ای"
+        ],
+        "You have preselected %s to translate your content. Finish setting it up by entering the API token they provided to you.": [
+            "شما %s را برای ترجمه محتوای خود از قبل انتخاب کرده اید. با وارد کردن توکن API که در اختیار شما قرار داده اند، راه اندازی آن را به پایان برسانید."
+        ],
+        "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
+            "افزونه WPML یکپارچه سازی دقیق با بیش از 70 سرویس ترجمه ارائه می دهد. شما خدمات ترجمه ای را که ترجیح می دهید انتخاب می کنید و از یک فرآیند ساده برای ارسال کارها و دریافت ترجمه های تکمیل شده لذت می برید."
+        ],
+        "I want to set a \"Translation Manager\" who will choose the translators for this site": [
+            "من می خواهم یک \"مدیر ترجمه\" تنظیم کنم که مترجمان این سایت را انتخاب کند"
+        ],
+        "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
+            "شما یکی از کاربران این سایت را انتخاب کرده و راه اندازی مترجمان را به او محول می کنید. هنگامی که در حال ساخت وب سایت برای مشتری هستید، این گزینه را انتخاب کنید، که کاربران مترجم را راه اندازی می کند یا یک سرویس ترجمه را انتخاب می کند."
+        ],
+        "Translate Everything Automatically": [
+            "ترجمه خودکار هرچیزی"
+        ],
+        "Let WPML do the translating for you": [
+            "اجازه دهید WPML کار ترجمه را برای شما انجام دهد"
+        ],
+        "Translates all your published content automatically": [
+            "تمام محتوای منتشر شده شما را به صورت خودکار ترجمه می کند"
+        ],
+        "Uses machine translation powered by Google, Microsoft, or DeepL": [
+            "از ترجمه ماشینی سرویس گوگل، ماکروسافت، یا DeepL استفاده می کند"
+        ],
+        "Instantly translates new content and updates translations whenever you edit a page or post": [
+            "هر زمان که صفحه یا پستی را ویرایش می کنید، فوراً محتوای جدید را ترجمه می کند و ترجمه ها را به روز می کند"
+        ],
+        "You can review translations before publishing or hire professional reviewers": [
+            "می‌توانید ترجمه‌ها را قبل از انتشار بررسی کنید یا ناظران حرفه‌ای را استخدام کنید"
+        ],
+        "Affordable and fast": [
+            "مقرون به صرفه و سریع"
+        ],
+        "How would you like to translate the content?": [
+            "چگونه می خواهید مطالب را ترجمه کنید؟"
+        ],
+        "Choose": [
+            "انتخاب"
+        ],
+        "Translate What You Choose": [
+            "ترجمه انتخابی"
+        ],
+        "You decide what to translate and who'll translate it": [
+            "شما تصمیم می گیرید چه چیزی را ترجمه کنید و چه کسی آن را ترجمه کند"
+        ],
+        "Translate yourself": [
+            "خودت ترجمه کن"
+        ],
+        "Use automatic translation on the content you choose": [
+            "از ترجمه خودکار در محتوایی که انتخاب می کنید، استفاده کنید"
+        ],
+        "Work with translators that are users of your site": [
+            "با مترجمانی که کاربران سایت شما هستند، کار کنید"
+        ],
+        "or": [
+            "یا"
+        ],
+        "Send to professional translation services": [
+            "ارسال به خدمات ترجمه حرفه ای"
+        ],
+        "Save settings": [
+            "ذخیره تنظیمات "
+        ],
+        "Continue": [
+            "ادامه"
+        ],
+        "Start over": [
+            "شروع دوباره"
+        ],
+        "Back": [
+            "قبل"
+        ],
+        "user": [
+            "کاربر"
+        ],
+        "Editor": [
+            "ویرایشگر"
+        ],
+        "Select an existing %s and set as Translation Manager": [
+            "یک %s موجود را انتخاب کنید و به عنوان مدیر ترجمه تنظیم کنید"
+        ],
+        "Create a new %s and set as Translation Manager": [
+            "یک %s جدید ایجاد کنید و به عنوان مدیر ترجمه تنظیم کنید"
+        ],
+        "Add Translation Manager": [
+            "افزودن مدیر ترجمه"
+        ],
+        "Add a Translation Manager": [
+            "افزودن مدیر ترجمه"
+        ],
+        "Set language pair(s)": [
+            "تنظیم جفت(های) زبان"
+        ],
+        "Previous": [
+            "قبلی"
+        ],
+        "Save": [
+            "ذخيره"
+        ],
+        "Add a Translator": [
+            "افزودن یک مترجم"
+        ],
+        "Select an existing user and set as Translator": [
+            "یک کاربر موجود را انتخاب و به عنوان مترجم تنظیم کنید"
+        ],
+        "Create a new user and set as Translator": [
+            "یک کاربر جدید ایجاد و به عنوان مترجم تنظیم کنید"
+        ],
+        "Edit language pair(s) for translator": [
+            "ویرایش جفت(های) زبان برای مترجم"
+        ],
+        "Name": [
+            "نام"
+        ],
+        "Language Pairs": [
+            "جفت زبان"
+        ],
+        "You can translate to and from all languages": [
+            "شما می توانید به/از همه زبان ها ترجمه کنید"
+        ],
+        "%s file upload failed.": [
+            "فایل %s آپلود نشد."
+        ],
+        "Flag": [
+            "پرچم"
+        ],
+        "Flag file": [
+            "فایل پرچم"
+        ],
+        "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "شما فقط زبان اضافه کردید. در مرحله بعد، آن را به عنوان زبان پیش فرض سایت یا زبان ترجمه انتخاب کنید."
+        ],
+        "Language added": [
+            "زبان اضافه شد"
+        ],
+        "The value \"%s\" already exists": [
+            "مقدار \"%s\" از قبل وجود دارد"
+        ],
+        "Add a new language": [
+            "افزودن زبان جدید"
+        ],
+        "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "با انتخاب زبان عمومی از لیست زیر، یک زبان خاص کشور ایجاد کنید. سپس، کشوری را که باید برای آن بومی سازی شود، انتخاب کنید."
+        ],
+        "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "با انتخاب ترکیبی که از قبل در پایگاه داده وجود دارد، WPML می تواند به پر کردن فیلدهای لازم کمک کند. اطلاعات بیشتر درباره <AddingACustomLanguageLink />."
+        ],
+        "Cannot find?": [
+            "پیدا نکردید؟"
+        ],
+        "Click here": [
+            "ایجا کلیک کنید"
+        ],
+        "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "فرمت اشتباه.فقط شامل حروف کوچک و \"-\" .مثال: \"fr\" , \"pt-br\", \"zh-hans\""
+        ],
+        "Language": [
+            "زبان"
+        ],
+        "Location": [
+            "موقعیت"
+        ],
+        "Code": [
+            "کد"
+        ],
+        "The language will not be supported by automatic translations": [
+            "این زبان توسط ترجمه خودکار پشتیبانی نخواهد شد"
+        ],
+        "Language mapping": [
+            "نگاشت (mapping) زبان"
+        ],
+        "Don't map this language": [
+            "این زبان را نگاشت نکنید"
+        ],
+        "Default locale": [
+            "محلی پیش‌فرض"
+        ],
+        "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "فرمت اشتباه.فقط حروف کوچک و \"_\".مثال: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+        ],
+        "hreflang": [
+            "hreflang"
+        ],
+        "Encode url?": [
+            "رمزگذاری url؟"
+        ],
+        "Flags must be:": [
+            "پرچم‌ها باید به این صورت باشند:"
+        ],
+        "NO": [
+            "نه"
+        ],
+        "YES": [
+            "بله"
+        ],
+        " (required)": [
+            " (اجباری)"
+        ],
+        "Please fill in the field": [
+            "لطفا فیلد را پر کنید"
+        ],
+        "PNG, SVG, or JPG files": [
+            "فایل‌های PNG، SVG یا JPG"
+        ],
+        "Save language": [
+            "ذخیره زبان"
+        ],
+        "18 x 12 pixels": [
+            "18 x 12 پیکسل"
+        ],
+        "Read more about ": [
+            "اطلاعات بیشتر درباره "
+        ],
+        "The name of your language as it will appear on your site's language switcher.": [
+            "نام زبان شما همانطور که در تغییر زبان سایت شما ظاهر می شود."
+        ],
+        "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "یک مقدار منحصر به فرد که زبان موجود در پایگاه داده و URL را مشخص می کند. پس از ذخیره، کد زبان قابل تغییر نیست."
+        ],
+        "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "اگر زبان سفارشی شما شبیه به زبان موجود است، می توانید از غلط گیر املا و ترجمه خودکار زبان موجود استفاده کنید. به عنوان مثال، اگر زبان سفارشی شما سوئیسی-آلمانی است، می توانید به آلمانی به عنوان زبانی که برای بررسی املا و ترجمه خودکار استفاده می شود، نگاشت کنید. اگر زبان سفارشی خود را به یک زبان موجود نگاشت نکنید، ویژگی‌های املا و ترجمه خودکار در آن زبان در دسترس نخواهد بود."
+        ],
+        "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "مقدار WPML هنگام بارگیری ترجمه ها از فایل های MO و PO بررسی می شود. محلی پیش فرض در نام فایل ها در پوشه /wp-content/languages/ در تنظیمات وردپرس شما گنجانده شده است."
+        ],
+        "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "گوگل از ویژگی hreflang استفاده می کند تا کاربران را به سایت هایی به زبان و مکان مربوطه هدایت کند. مثال ها:"
+        ],
+        "All English-speaking users: en": [
+            "همه کاربران انگلیسی زبان: en"
+        ],
+        "English for UK users: en-gb": [
+            "انگلیسی برای کاربران بریتانیایی: en-gb"
+        ],
+        "English for US users: en-us": [
+            "انگلیسی برای کاربران آمریکایی: en-us"
+        ],
+        "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "تعیین می کند که آیا URL های این زبان کدگذاری شده اند یا از کاراکترهای ASCII استفاده می کنند (اگر مطمئن نیستید، آن را \"نه\" انتخاب کنید)."
+        ],
+        "adding a custom language": [
+            "افزودن زبان سفارشی"
+        ],
+        "Default language": [
+            "زبان پیش‌فرض"
+        ],
+        "What is the current language of your website?": [
+            "زبان فعلی وب سایت شما چیست؟"
+        ],
+        "Translation languages": [
+            "زبان‌های ترجمه"
+        ],
+        "Which languages do you want to translate your site into?": [
+            "می خواهید سایت خود را به چه زبان هایی ترجمه کنید؟"
+        ],
+        "If you cannot find languages that you need in the list": [
+            "اگر نمی توانید زبان های مورد نیاز خود را در لیست پیدا کنید"
+        ],
+        "create a custom language": [
+            "یک زبان سفارشی ایجاد کنید"
+        ],
+        "What are the languages of your site?": [
+            "زبان سایت شما چیست؟"
+        ],
+        "Automatic translation": [
+            "ترجمه خودکار"
+        ],
+        "What should happen with your automatically translated content": [
+            "برای محتوای ترجمه شده بصورت خودکار شما چه اتفاقی باید بیفتد؟"
+        ],
+        "%d credits/word": [
+            "%d اعتبار/کلمه"
+        ],
+        "Informal": [
+            "غیر رسمی"
+        ],
+        "Automatic": [
+            "اتوماتیک"
+        ],
+        "Formal": [
+            "رسمی"
+        ],
+        "Which translation engines do you want to use?": [
+            "از کدام موتورهای ترجمه می خواهید استفاده کنید؟"
+        ],
+        "Automatic translation engines differ in translation style and supported language pairs.\nIf your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.\n": [
+            "موتورهای ترجمه خودکار در استایل ترجمه و جفت زبان های پشتیبانی شده متفاوت هستند.\nاگر موتور ترجمه ترجیحی شما از جفت زبانی که می‌خواهید استفاده کنید پشتیبانی نمی‌کند، ما به موتور ترجیحی بعدی شما که از آن پشتیبانی می‌کند بازمی‌گردیم.\n"
+        ],
+        "Drag & drop to sort from the most to the least preferred engine.": [
+            "بکشید و رها کنید تا از بیشترین موتور به کمترین ترجیح مرتب شود."
+        ],
+        "Choose the tone of your automatic translations.": [
+            "لحن ترجمه‌های خودکار خود را انتخاب کنید."
+        ],
+        "Read more": [
+            "ادامه مطلب"
+        ],
+        "Learn more": [
+            "اطلاعات بیشتر"
+        ],
+        "On": [
+            "روشن"
+        ],
+        "Off": [
+            "خاموش"
+        ],
+        "You must use the <b>Advanced Translation Editor</b> if you want to translate your content automatically.": [
+            "اگر می خواهید محتوای خود را به طور خودکار ترجمه کنید، باید از <b>ویرایشگر ترجمه پیشرفته</b> استفاده کنید."
+        ],
+        "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your %1$sTranslation Management settings%2$s.": [
+            "شما در حال حاضر از یک سرویس ترجمه برای ترجمه محتوای خود استفاده می کنید. برای ترجمه خودکار سایت خود، ابتدا خدمات ترجمه خود را در %1$sتنظیمات مدیریت ترجمه%2$s خود قطع کنید."
+        ],
+        "Translation Mode": [
+            "حالت ترجمه"
+        ],
+        "How to translate your site's content": [
+            "چگونه محتوای سایت شما را ترجمه کنیم"
+        ],
+        "Change mode": [
+            "تغییر حالت"
+        ],
+        "You decide what to translate and who’ll translate it.": [
+            "شما تصمیم می گیرید که چه چیزی را ترجمه کنید و چه کسی آن را ترجمه کند."
+        ],
+        "Let WPML do the translating for you.": [
+            "اجازه دهید WPML کار ترجمه را برای شما انجام دهد"
+        ],
+        "To use automatic translation, <a>sign up for pay-as-you-go</a> or <a2>assign credits to your site</a2>.": [
+            "برای استفاده از ترجمه خودکار، <a>برای پرداخت هزینه ثبت نام کنید</a> یا <a2>به سایت خود اعتبار اختصاص دهید</a2>."
+        ],
+        "There was an error when loading the credit wizard.": [
+            "هنگام بارگیری ویزارد اعتبار خطایی روی داد."
+        ],
+        "Translation mode settings summary": [
+            "خلاصه تنظیمات حالت ترجمه"
+        ],
+        "You decided to:": [
+            "تصمیم شما:"
+        ],
+        "Translate everything <b>automatically</b>": [
+            "ترجمه <b>خودکار</b> همه چیز"
+        ],
+        "Pay for credits as you go": [
+            "پرداخت اعتبار"
+        ],
+        "Assign credits to your site on WPML.org": [
+            "به سایت خود در WPML.org اعتبار اختصاص دهید"
+        ],
+        "Review translations <b>after</b> publishing.": [
+            "بررسی ترجمه ها <b>بعد</b> از انتشار."
+        ],
+        "Review translations <b>before</b> publishing.": [
+            "بررسی ترجمه ها <b>قبل</b> از انتشار."
+        ],
+        "Publish translations <b>without</b> review.": [
+            "انتشار ترجمه ها <b>بدون</b> بررسی."
+        ],
+        "Translate only <b>future</b> content.": [
+            "فقط محتوای <b>آینده</b> را ترجمه کنید."
+        ],
+        "Translate <b>current</b> and <b>future</b> content.": [
+            "محتوای <b>حال</b> و <b>آینده</b> را ترجمه کنید."
+        ],
+        "Translate all my current content plus new content as I create it.": [
+            "تمام محتوای فعلی من به اضافه محتوای جدید را هنگام ایجاد آن، ترجمه کنید."
+        ],
+        "Only translate new content I create starting now.": [
+            "فقط محتوای جدیدی را که از هم اکنون ایجاد می کنم، ترجمه کنید."
+        ],
+        "What should WPML translate?": [
+            "WPML چه چیزی را باید ترجمه کند؟"
+        ],
+        "Translate Everything mode uses automatic translation credits to translate all your site's content instantly.": [
+            "حالت ترجمه همه چیز از اعتبار ترجمه خودکار برای ترجمه فوری تمام محتوای سایت شما استفاده می کند."
+        ],
+        "Error: %s": [
+            "خطا : %s"
+        ],
+        "Authenticate": [
+            "احراز‌هویت"
+        ],
+        "To send content and receive translations from <service_name />, enter the credentials you received from them.": [
+            "برای ارسال محتوا و دریافت ترجمه از <service_name />، اعتبارهایی را که از آنها دریافت کرده اید وارد کنید."
+        ],
+        "Need credentials? Contact <link_to_service />": [
+            "به اعتبار نیاز دارید؟ با <link_to_service /> تماس بگیرید"
+        ],
+        "Success! You can start sending content to %s for translation after you finish the setup wizard.": [
+            "موفق! پس از اتمام ویزارد راه‌اندازی، می‌توانید شروع به ارسال محتوا به %s برای ترجمه کنید."
+        ],
+        "The credentials are invalid. Please, try again.": [
+            "اعتبارنامه نامعتبر است. لطفا دوباره تلاش کنید."
+        ],
+        "Choose a Translation Service": [
+            "انتخاب یک سرویس ترجمه"
+        ],
+        "Loading": [
+            "بارگذاری"
+        ],
+        "Settings saved successfully": [
+            "تنظیمات با موفقیت ذخیره شد"
+        ],
+        "Could not load translation engines": [
+            "موتورهای ترجمه بارگیری نشدند"
+        ],
+        "Could not update engine": [
+            "موتور بروز رسانی نشد"
+        ],
+        "Could not save review mode": [
+            "حالت بررسی ذخیره نشد"
+        ],
+        "Settings": [
+            "تنظیمات"
+        ],
+        "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "وقتی WPML برای ترجمه خودکار محتوای سایت شما تنظیم شده است،امکان اتصال یک سرویس ترجمه وجود ندارد. برای استفاده از خدمات ترجمه، لطفاً حالت ترجمه خود را در صفحه <LinkToSettingsPage /> تغییر دهید."
+        ],
+        "Documentation": [
+            "مستندات"
+        ],
+        "Activate": [
+            "فعالسازی"
+        ],
+        "Description": [
+            "توضیحات"
+        ],
+        "Ranking": [
+            "امتیاز"
+        ]      
+      }
+    }
+  }

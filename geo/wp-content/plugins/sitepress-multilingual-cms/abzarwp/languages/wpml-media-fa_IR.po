@@ -1,0 +1,584 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPML Media\n"
+"POT-Creation-Date: 2021-01-13 17:43+0330\n"
+"PO-Revision-Date: 2021-01-15 22:20+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: plugin.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: classes/batch-media-url-translation/wpml-media-custom-field-batch-media-url-translation.php:54
+#, php-format
+msgid "Translating media urls in custom field translations: %s"
+msgstr "ترجمه URL های رسانه در ترجمه های زمینه سفارشی: %s"
+
+#: classes/batch-media-url-translation/wpml-media-custom-field-batch-media-url-translation.php:56
+#: classes/batch-media-url-translation/wpml-media-post-batch-media-url-translation.php:47
+#: classes/batch-media-url-translation/wpml-media-string-batch-media-url-translation.php:59
+#, php-format
+msgid "%d left"
+msgstr "%d چپ"
+
+#: classes/batch-media-url-translation/wpml-media-custom-field-batch-media-url-translation.php:57
+#: classes/batch-media-url-translation/wpml-media-post-batch-media-url-translation.php:48
+#: classes/batch-media-url-translation/wpml-media-string-batch-media-url-translation.php:60
+msgid "done!"
+msgstr "انجام شد!"
+
+#: classes/batch-media-url-translation/wpml-media-custom-field-batch-media-url-translation.php:64
+#, php-format
+msgid ""
+"Translating media urls in custom fields translations failed: Please try "
+"again (%s)"
+msgstr ""
+"ترجمه نشانی های اینترنتی رسانه در ترجمه های زمینه های سفارشی انجام نشد: لطفاً "
+"دوباره امتحان کنید  (%s)"
+
+#: classes/batch-media-url-translation/wpml-media-post-batch-media-url-translation.php:45
+#, php-format
+msgid "Translating media urls in post translations: %s"
+msgstr "ترجمه URL های رسانه در ترجمه های پست: %s"
+
+#: classes/batch-media-url-translation/wpml-media-post-batch-media-url-translation.php:55
+#, php-format
+msgid ""
+"Translating media urls in posts translations failed: Please try again (%s)"
+msgstr ""
+"ترجمه نشانی url های در ترجمه های ارسال شده ناموفق بود: لطفاً دوباره امتحان "
+"کنید (%s)"
+
+#: classes/batch-media-url-translation/wpml-media-string-batch-media-url-translation.php:57
+#, php-format
+msgid "Translating media urls in string translations: %s"
+msgstr "ترجمه URL های رسانه در ترجمه های رشته ای: %s"
+
+#: classes/batch-media-url-translation/wpml-media-string-batch-media-url-translation.php:67
+#, php-format
+msgid ""
+"Translating media urls in string translations failed: Please try again (%s)"
+msgstr ""
+"ترجمه URL های رسانه در ترجمه های رشته ای ناموفق بود: لطفاً دوباره امتحان کنید "
+"(%s)"
+
+#: classes/class-wpml-media.php:179
+msgid "Started..."
+msgstr "شروع شد ..."
+
+#. translators: WPML Media Translation saddon/section name
+#: classes/class-wpml-media.php:347
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:39
+#: classes/menus/wpml-media-menus.php:69
+#: classes/menus/wpml-media-translations-ui.php:69
+msgid "Media Translation"
+msgstr "ترجمه رسانه"
+
+#: classes/media-selector/class-wpml-media-selector.php:176
+#, php-format
+msgid "Choose which media to translate with this %s"
+msgstr "انتخاب کنید که کدام رسانه را با این %s ترجمه کنید"
+
+#: classes/media-selector/class-wpml-media-selector.php:181
+msgid "Loading..."
+msgstr "در حال بارگزاری ..."
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:29
+msgid "Continue"
+msgstr "ادامه"
+
+#. translators: WPML plugin name
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:37
+msgid "WPML"
+msgstr "WPML"
+
+#. translators: media file string used in "if you want to use a different media file for each language..."
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:50
+msgid "media file"
+msgstr "فایل رسانه"
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:59
+msgid "Media sent to translation"
+msgstr "رسانه برای ترجمه ارسال شد"
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:60
+msgid "You have sent content which contains media attachments for translation."
+msgstr ""
+"شما محتوایی را ارسال کرده اید که حاوی پیوست های رسانه ای برای ترجمه است."
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:61
+#, php-format
+msgid "Translators will translate all your %1$smedia texts%2$s."
+msgstr "مترجمان %1$s پیام نوشتاری شما را ترجمه می کنند %2$s."
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:63
+#, php-format
+msgid ""
+"If you want to use a different %1$s for each language, you can set them in: "
+"%2$s."
+msgstr ""
+"اگر می خواهید از %1$s متفاوت برای هر زبان استفاده کنید ، می توانید آنها را "
+"در: %2$s تنظیم کنید."
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:67
+msgid "Learn more about Media Translation"
+msgstr "درباره ترجمه رسانه بیشتر بدانید"
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:68
+msgctxt "plugin name"
+msgid "WPML"
+msgstr "WPML"
+
+#: classes/media-selector/class-wpml-media-submitted-basket-notice.php:69
+msgctxt "wpml addon name"
+msgid "Media Translation"
+msgstr "ترجمه رسانه"
+
+#: classes/media-translation/class-wpml-media-attachment-image-update.php:68
+msgid "Failed to load the image editor"
+msgstr "ویرایشگر تصویر بارگیری نشد"
+
+#: classes/media-translation/class-wpml-media-save-translation.php:144
+#, fuzzy
+msgid "Invalid nonce"
+msgstr "عدم اعتبار نامعتبر است"
+
+#: classes/media-translation/class-wpml-media-set-posts-media-flag.php:49
+msgid "Running setup..."
+msgstr "درحال راه اندازی ..."
+
+#: classes/media-translation/class-wpml-media-set-posts-media-flag.php:61
+msgid "Setup complete!"
+msgstr "راه اندازی کامل شد!"
+
+#: classes/media-translation/class-wpml-media-set-posts-media-flag.php:85
+#, php-format
+msgid "Setup in progress: %d%% complete..."
+msgstr "تنظیم در حال انجام است: %d%% کامل است ..."
+
+#: classes/menus/wpml-media-help-tab.php:14
+msgid "WPML &raquo; Media Translation"
+msgstr "ترجمه رسانه WPML &raquo;"
+
+#: classes/menus/wpml-media-help-tab.php:15
+msgid "WPML &raquo; Translation Management"
+msgstr "مدیریت رسانه WPML &raquo; "
+
+#: classes/menus/wpml-media-help-tab.php:19
+msgid "Translating Media"
+msgstr "ترجمه رسانه"
+
+#: classes/menus/wpml-media-help-tab.php:21
+msgid "There are two ways for you to translate Media:"
+msgstr "برای ترجمه رسانه شما دو روش وجود دارد:"
+
+#: classes/menus/wpml-media-help-tab.php:24
+#, php-format
+msgid ""
+"Use the dashboard on the %s page to translate your images and other media "
+"files."
+msgstr ""
+"برای ترجمه تصاویر و سایر فایل های رسانه خود از پیشخوان موجود در صفحه %s "
+"استفاده کنید."
+
+#: classes/menus/wpml-media-help-tab.php:28
+#, php-format
+msgid ""
+"Use the dashboard on the %s page to send pages that contain media, for "
+"translation."
+msgstr ""
+"برای ارسال صفحاتی که حاوی رسانه هستند ، از پیشخوان موجود در صفحه %s استفاده "
+"کنید."
+
+#: classes/menus/wpml-media-help-tab.php:33
+msgid "Learn more about WPML Media Translation"
+msgstr "درباره WPML Media Translation بیشتر بیاموزید"
+
+#: classes/menus/wpml-media-menus.php:70
+msgid "Cancel"
+msgstr "لغو"
+
+#: classes/menus/wpml-media-menus.php:71
+msgid "Save media translation"
+msgstr "ترجمه رسانه را ذخیره کنید"
+
+#: classes/menus/wpml-media-menus.php:77
+msgid "Scan complete!"
+msgstr "اسکن کامل شد!"
+
+#. translators: name ot WPML-Media plugin
+#: classes/menus/wpml-media-posts-media-flag-notice.php:54
+msgid "WPML Media Translation"
+msgstr "ترجمه رسانه WPML"
+
+#. translators: used to build a link in the "Click here to finish the setup"
+#: classes/menus/wpml-media-posts-media-flag-notice.php:57
+msgctxt "Used to build a link in the \"Click here to finish the setup\""
+msgid "here"
+msgstr "اینجا"
+
+#: classes/menus/wpml-media-posts-media-flag-notice.php:62
+#, php-format
+msgid "The %1$s setup is almost complete. Click %2$s to finish the setup."
+msgstr ""
+"تنظیم  %1$s تقریباً کامل است. برای پایان دادن به تنظیم ، روی  %2$s  کلیک کنید."
+
+#: classes/menus/wpml-media-posts-media-flag-notice.php:84
+msgid "Setup required"
+msgstr "راه اندازی لازم است"
+
+#: classes/menus/wpml-media-posts-media-flag-notice.php:98
+msgid ""
+"In order to get WPML Media Translation fully working, you need to run this "
+"set up which takes only a few moments depending on the total number of posts "
+"in your WordPress install."
+msgstr ""
+"برای اینکه WPML Media Translation کاملاً کار کند ، باید این تنظیم را اجرا "
+"کنید که بسته به تعداد کل پست های نصب شده در وردپرس شما فقط چند لحظه طول می "
+"کشد."
+
+#: classes/menus/wpml-media-posts-media-flag-notice.php:101
+msgid "Finish setup"
+msgstr "راه اندازی را تمام کنید"
+
+#: classes/menus/wpml-media-screen-options-factory.php:21
+msgid "Number of items per page:"
+msgstr "تعداد موارد در هر صفحه:"
+
+#: classes/menus/wpml-media-translations-ui.php:70
+msgid "Filter by date"
+msgstr "فیلتر بر اساس تاریخ"
+
+#: classes/menus/wpml-media-translations-ui.php:71
+msgid "All dates"
+msgstr "همه تاریخ ها"
+
+#: classes/menus/wpml-media-translations-ui.php:72
+msgid "in"
+msgstr "در"
+
+#: classes/menus/wpml-media-translations-ui.php:73
+msgid "to"
+msgstr "به"
+
+#: classes/menus/wpml-media-translations-ui.php:74
+msgid "Filter by translation status"
+msgstr "فیلتر بر اساس وضعیت ترجمه"
+
+#: classes/menus/wpml-media-translations-ui.php:75
+msgid "All translation statuses"
+msgstr "همه وضعیت های ترجمه"
+
+#: classes/menus/wpml-media-translations-ui.php:76
+msgid "Media file not translated"
+msgstr "فایل رسانه ترجمه نشده است"
+
+#: classes/menus/wpml-media-translations-ui.php:77
+msgid "Translated media uploaded"
+msgstr "رسانه ترجمه شده بارگذاری شد"
+
+#: classes/menus/wpml-media-translations-ui.php:78
+msgid "Translation in progress"
+msgstr "ترجمه در حال انجام است"
+
+#: classes/menus/wpml-media-translations-ui.php:79
+msgid "Needs media file translation"
+msgstr "به ترجمه فایل رسانه نیاز دارد"
+
+#: classes/menus/wpml-media-translations-ui.php:80
+msgid "Filter by language"
+msgstr "فیلتر بر اساس زبان"
+
+#: classes/menus/wpml-media-translations-ui.php:81
+msgid "Any language"
+msgstr "هر زبان"
+
+#: classes/menus/wpml-media-translations-ui.php:82
+msgid "Search Media:"
+msgstr "رسانه جستجو:"
+
+#: classes/menus/wpml-media-translations-ui.php:83
+msgid "Title, caption or description"
+msgstr "عنوان، کپشن یا توضیحات"
+
+#: classes/menus/wpml-media-translations-ui.php:84
+msgid "Filter"
+msgstr "فیلتر"
+
+#: classes/menus/wpml-media-translations-ui.php:85
+msgid "Original language"
+msgstr "زبان اصلی"
+
+#: classes/menus/wpml-media-translations-ui.php:86
+msgid "No attachments found"
+msgstr "پیوستی یافت نشد"
+
+#: classes/menus/wpml-media-translations-ui.php:87
+msgid "Add media file translation"
+msgstr "ترجمه فایل رسانه را اضافه کنید"
+
+#: classes/menus/wpml-media-translations-ui.php:88
+#, php-format
+msgid "Edit %s translation"
+msgstr "ویرایش %s ترجمه"
+
+#: classes/menus/wpml-media-translations-ui.php:89
+msgid "Original:"
+msgstr "اصلی:"
+
+#: classes/menus/wpml-media-translations-ui.php:90
+msgid "Translation:"
+msgstr "ترجمه:"
+
+#: classes/menus/wpml-media-translations-ui.php:91
+msgid "File"
+msgstr "فایل"
+
+#: classes/menus/wpml-media-translations-ui.php:92
+msgid "Name"
+msgstr "نام"
+
+#: classes/menus/wpml-media-translations-ui.php:93
+#: classes/translation-editor-layout/class-wpml-media-translation-editor-layout.php:91
+msgid "Caption"
+msgstr "کپشن"
+
+#: classes/menus/wpml-media-translations-ui.php:94
+msgid "Alt text"
+msgstr "متن جایگزین"
+
+#: classes/menus/wpml-media-translations-ui.php:95
+#: classes/translation-editor-layout/class-wpml-media-translation-editor-layout.php:94
+msgid "Description"
+msgstr "توضیحات"
+
+#: classes/menus/wpml-media-translations-ui.php:96
+msgid "Copy from original"
+msgstr "کپی از نسخه اصلی"
+
+#: classes/menus/wpml-media-translations-ui.php:97
+msgid "Upload translated media file"
+msgstr "فایل رسانه ترجمه شده را بارگذاری کنید"
+
+#: classes/menus/wpml-media-translations-ui.php:98
+msgid "Use a different file"
+msgstr "از یک فایل متفاوت استفاده کنید"
+
+#: classes/menus/wpml-media-translations-ui.php:99
+msgid "Revert to original"
+msgstr "برگرداندن به اصل"
+
+#: classes/menus/wpml-media-translations-ui.php:100
+msgid "Restore original media file"
+msgstr "فایل رسانه اصلی را بازیابی کنید"
+
+#: classes/menus/wpml-media-translations-ui.php:102
+msgid ""
+"Any changes you make to the text here will not affect any previous "
+"publications of this media on your website. This edited version will only "
+"appear if you select it from the library to be embedded."
+msgstr ""
+"هر تغییری که در متن اینجا ایجاد کنید ، تأثیری بر انتشار قبلی این رسانه در وب "
+"سایت شما نخواهد داشت. این نسخه ویرایش شده تنها درصورتی که از کتابخانه برای "
+"جاسازی شده انتخاب کنید ، ظاهر می شود."
+
+#: classes/menus/wpml-media-translations-ui.php:132
+msgid "Not translated"
+msgstr "ترجمه نشده است"
+
+#: classes/menus/wpml-media-translations-ui.php:133
+msgid "In progress"
+msgstr "در حال پیش رفت"
+
+#: classes/menus/wpml-media-translations-ui.php:134
+msgid "Translated"
+msgstr "ترجمه شد"
+
+#: classes/menus/wpml-media-translations-ui.php:135
+msgid "Needs translation"
+msgstr "نیاز به ترجمه دارد"
+
+#: classes/menus/wpml-media-translations-ui.php:166
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: classes/menus/wpml-media-translations-ui.php:330
+msgid "Navigation"
+msgstr "ناوبری"
+
+#: classes/menus/wpml-media-translations-ui.php:331
+msgid "of"
+msgstr "از"
+
+#: classes/menus/wpml-media-translations-ui.php:335
+msgid "First page"
+msgstr "صفحه اول"
+
+#: classes/menus/wpml-media-translations-ui.php:338
+msgid "Previous page"
+msgstr "صفحه قبلی"
+
+#: classes/menus/wpml-media-translations-ui.php:344
+msgid "Next page"
+msgstr "صفحه بعد"
+
+#: classes/menus/wpml-media-translations-ui.php:347
+msgid "Last page"
+msgstr "صفحه آخر"
+
+#: classes/menus/wpml-media-translations-ui.php:350
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] "آیتم های %s"
+msgstr[1] "آیتم %s"
+
+#: classes/menus/wpml-media-translations-ui.php:361
+msgid "Close"
+msgstr "بستن"
+
+#: classes/menus/wpml-media-translations-ui.php:362
+msgid "The media that you uploaded was replaced in these translated posts:"
+msgstr "رسانه ای که بارگذاری کردید در این پست های ترجمه شده جایگزین شد:"
+
+#: classes/menus/wpml-media-translations-ui.php:363
+msgid ""
+"The same media might be used in other posts too. Do you want to scan and "
+"replace it?"
+msgstr ""
+"ممکن است از همین رسانه در سایر پست ها نیز استفاده شود. آیا می خواهید آن را "
+"اسکن و جایگزین کنید؟"
+
+#: classes/menus/wpml-media-translations-ui.php:364
+msgid ""
+"The media that you uploaded will be used in future post translations. The "
+"same media might be used in already existing posts. Do you want to scan and "
+"replace it now?"
+msgstr ""
+"رسانه ای که بارگذاری کرده اید در ترجمه های بعدی ارسال خواهد شد. ممکن است از "
+"همین رسانه در پست های موجود استفاده شود. آیا می خواهید اکنون اسکن و جایگزین "
+"کنید؟"
+
+#: classes/menus/wpml-media-translations-ui.php:365
+msgid "Scan for content that has specifically this media (faster)"
+msgstr "اسکن محتوایی که به طور خاص این رسانه را دارد (سریعتر)"
+
+#: classes/menus/wpml-media-translations-ui.php:366
+msgid ""
+"Scan for content that has any of the media files that I translated (takes "
+"more time)"
+msgstr ""
+"اسکن محتوایی که دارای هر یک از فایل های رسانه ای است که من ترجمه کرده ام "
+"(زمان بیشتری طول می کشد)"
+
+#: classes/menus/wpml-media-translations-ui.php:367
+msgctxt "Button label (verb)"
+msgid "Scan & Replace"
+msgstr "اسکن و جایگزینی"
+
+#: classes/privacy/class-wpml-media-privacy-content.php:19
+msgid ""
+"WPML Media Translation will send the email address and name of each manager "
+"and assigned translator as well as the content itself to Advanced "
+"Translation Editor and to the translation services which are used."
+msgstr ""
+"WPML Media Translation آدرس ایمیل و نام هر مدیر و مترجم اختصاص داده شده و "
+"همچنین خود محتوا را به Advanced Translation Editor و خدمات ترجمه مورد "
+"استفاده ارسال می کند."
+
+#: classes/setup/class-wpml-media-set-initial-language.php:34
+msgid "Setting language to media: done!"
+msgstr "تنظیم زبان برای رسانه: انجام شد!"
+
+#: classes/translation-editor-layout/class-wpml-media-translation-editor-layout.php:26
+msgid "Media"
+msgstr "رسانه"
+
+#: classes/translation-editor-layout/class-wpml-media-translation-editor-layout.php:88
+msgid "Title"
+msgstr "عنوان"
+
+#: classes/translation-editor-layout/class-wpml-media-translation-editor-layout.php:97
+msgid "Alt Text"
+msgstr "متن جایگزین"
+
+#: classes/upgrade/class-wpml-media-2-3-0-migration.php:77
+msgid "Upgrade required"
+msgstr "ارتقا لازم است"
+
+#: classes/upgrade/class-wpml-media-2-3-0-migration.php:83
+#, php-format
+msgid ""
+"The %1$sWPML Media%2$s database needs updating. Please run the updater and "
+"leave the tab open until it completes."
+msgstr ""
+"دیتا بیس %1$sWPML Media%2$s نیاز به به روزرسانی دارد. لطفاً به روزرسانی را "
+"اجرا کرده و تا زمان تکمیل زبانه ، آن را باز بگذارید."
+
+#: classes/upgrade/class-wpml-media-2-3-0-migration.php:89
+msgctxt "Update button label"
+msgid "Update"
+msgstr "بروز رسانی"
+
+#: classes/upgrade/class-wpml-media-2-3-0-migration.php:119
+msgid "Reset new content duplication settings"
+msgstr "تنظیمات تکثیر محتوای جدید را بازنشانی کنید"
+
+#: classes/upgrade/class-wpml-media-2-3-0-migration.php:130
+#, php-format
+msgid "Updating attachments translation status: %d remaining."
+msgstr "به روزرسانی وضعیت ترجمه پیوست ها: %d باقیمانده."
+
+#: classes/upgrade/class-wpml-media-2-3-0-migration.php:137
+msgid "Update complete!"
+msgstr "بروز رسانی کامل شد!"
+
+#: inc/wpml-media-dependencies.class.php:29
+#, php-format
+msgid ""
+"WPML Media is enabled but not effective. It requires <a href=\"%s\">WPML</a> "
+"in order to work."
+msgstr ""
+"WPML Media فعال است اما موثر نیست. برای کار کردن به <a href=\"%s\">WPML</"
+"a>نیاز دارد."
+
+#. Plugin Name of the plugin/theme
+msgid "WPML Media"
+msgstr "رسانه WPML"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wpml.org/"
+msgstr "https://wpml.org/"
+
+#. Description of the plugin/theme
+msgid ""
+"Add multilingual support for Media files | <a href=\"https://wpml.org/?"
+"page_id=113610\">Documentation</a> | <a href=\"https://wpml.org/version/"
+"media-translation-2-6-2/\">WPML Media Translation 2.6.2 release notes</a>"
+msgstr ""
+"پشتیبانی چند زبانه از فایل های رسانه را اضافه کنید | <a href=\"https://wpml."
+"org/?page_id=113610\"> مستندات </a> | <a href=\"https://wpml.org/version/"
+"media-translation-2-6-2/\"> یادداشت های انتشار WPML Media Translation 2.6.2 "
+"</a>"
+
+#. Author of the plugin/theme
+msgid "OnTheGoSystems"
+msgstr "OnTheGoSystems"
+
+#. Author URI of the plugin/theme
+msgid "http://www.onthegosystems.com/"
+msgstr "http://www.onthegosystems.com/"

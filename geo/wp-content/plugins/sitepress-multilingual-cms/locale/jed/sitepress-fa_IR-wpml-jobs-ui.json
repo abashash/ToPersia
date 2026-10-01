@@ -1,0 +1,404 @@
+{
+   "domain": "messages",
+   "locale_data": {
+     "messages": {
+       "": {
+         "domain": "messages"
+       },
+       "Draft — Pending review": [
+         "پیش‌نویس - در انتظار بررسی"
+     ],
+     "Complete": [
+         "تکمیل"
+     ],
+     "Insufficient funds": [
+         "بودجه ناکافی"
+     ],
+     "Start batch sync": [
+         "شروع همگام‌سازی گروهی"
+     ],
+     "Cancel job": [
+         "لغو کار"
+     ],
+     "Continue reviewing": [
+         "ادامه بررسی"
+     ],
+     "Start downloading XLIFF file": [
+         "شروع دانلود فایل XLIFF"
+     ],
+     "Edit": [
+         "ویرایش"
+     ],
+     "Get translation": [
+         "دریافت ترجمه"
+     ],
+     "Resign": [
+         "استعفا"
+     ],
+     "Review": [
+         "بررسی"
+     ],
+     "Translate": [
+         "ترجمه"
+     ],
+     "Take and Translate": [
+         "انتخاب و ترجمه"
+     ],
+     "View": [
+         "نمایش"
+     ],
+     "Delete Translations": [
+         "حذف ترجمه‌ها"
+     ],
+     "Keep Translations as Draft": [
+         "نگهداری ترجمه‌ها بعنوان پیش‌نویس"
+     ],
+     "Never mind. I want to review these translations.": [
+         "بیخیال. من می خواهم این ترجمه ها را بررسی کنم."
+     ],
+     "Cancel": [
+         "لغو"
+     ],
+     "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+         "با این کار، کارهای انتخاب شده بدون انتشار از صف ترجمه حذف می شوند. دوست دارید با ترجمه ها چه کار کنید؟"
+     ],
+     "Cancel Translation Review": [
+         "لغو بررسی ترجمه"
+     ],
+     "Bulk actions": [
+         "عملیات گروهی"
+     ],
+     "Apply": [
+         "اعمال"
+     ],
+     "Actions applied to multiple translation jobs can take a few seconds. Please do not leave the page.": [
+         "عملیات اعمال شده در چندین کار ترجمه ممکن است چند ثانیه طول بکشد. لطفا صفحه را ترک نکنید."
+     ],
+     "Actions applied to multiple translation jobs can take a few minutes. Please do not leave the page.": [
+         "عملیات اعمال شده در چندین کار ترجمه ممکن است چند دقیقه طول بکشد. لطفا صفحه را ترک نکنید."
+     ],
+     "Select translator": [
+         "انتخاب مترجم"
+     ],
+     "Assign": [
+         "اختصاص"
+     ],
+     "In progress": [
+         "در حال انجام"
+     ],
+     "Translation ready to download": [
+         "ترجمه آماده دانلود"
+     ],
+     "Completed": [
+         "تکمیل شده"
+     ],
+     "Published — Pending review": [
+         "منتشر شده — در‌انتظار بررسی"
+     ],
+     "Published — Review in progress": [
+         "منتشر شده — بررسی در حال انجام"
+     ],
+     "Draft — Review in progress": [
+         "پیش‌نویس — بررسی در حال انجام"
+     ],
+     "Needs update": [
+         "نیاز به بروزرسانی"
+     ],
+     "Cancelled": [
+         "لغو شده"
+     ],
+     "Needs translation": [
+         "نیازمند ترجمه"
+     ],
+     "View original": [
+         "مشاهده اصل"
+     ],
+     "(no title)": [
+         "(بدون عنوان)"
+     ],
+     "Automatic translation": [
+         "ترجمه خودکار"
+     ],
+     "TP ID: %d": [
+         "آی‌دی TP : %d"
+     ],
+     "Reset": [
+         "ریست"
+     ],
+     "Filter": [
+         "فیلتر"
+     ],
+     "ID (%s)": [
+         "آی‌دی (%s)"
+     ],
+     "Title (%s)": [
+         "عنوان (%s)"
+     ],
+     "Type (%s)": [
+         "نوع (%s)"
+     ],
+     "Language (%s)": [
+         "زبان (%s)"
+     ],
+     "Batch name (%s)": [
+         "نام گروهی (%s)"
+     ],
+     "Status (%s)": [
+         "وضعیت (%s)"
+     ],
+     "Translated by (%s)": [
+         "ترجمه شده توسط (%s)"
+     ],
+     "Sent date (%s)": [
+         "تاریخ ارسال (%s)"
+     ],
+     "Deadline (%s)": [
+         "مهلت (%s)"
+     ],
+     "Clear all filters": [
+         "پاکسازی همه فیلترها"
+     ],
+     "Any Translation Service": [
+         "هرخدمات ترجمه"
+     ],
+     "Any WordPress Translator": [
+         "هر مترجم وردپرس"
+     ],
+     "From": [
+         "از"
+     ],
+     "To": [
+         "تا"
+     ],
+     "Anyone": [
+         "هر‌کسی"
+     ],
+     "Include jobs from translation services": [
+         "درج کارها از خدمات ترجمه"
+     ],
+     "All types": [
+         "همه انواع"
+     ],
+     "Select visible columns": [
+         "انتخاب ستون‌های قابل‌مشاهده"
+     ],
+     "Sort descending": [
+         "مرتب‌سازی نزولی"
+     ],
+     "Sort ascending": [
+         "مرتب‌سازی صعودی"
+     ],
+     "Cancel sorting": [
+         "لغو مرتب‌سازی"
+     ],
+     "The bulk action is running...": [
+         "عملیات گروهی در حال اجرا..."
+     ],
+     "Export all jobs to XLIFF 1.0": [
+         "برون‌بری همه کارها به XLIFF 1.0"
+     ],
+     "Export all filtered jobs to XLIFF 1.0": [
+         "برون‌بری همه کارهای فیلترشده به XLIFF 1.0"
+     ],
+     "Export all jobs to XLIFF 1.1": [
+         "برون‌بری همه کارها به XLIFF 1.1"
+     ],
+     "Export all filtered jobs to XLIFF 1.1": [
+         "برون‌بری همه کارهای فیلترشده به XLIFF 1.1"
+     ],
+     "Export all jobs to XLIFF 1.2": [
+         "برون‌بری همه کارها به XLIFF 1.2"
+     ],
+     "Export all filtered jobs to XLIFF 1.2": [
+         "برون‌بری همه کارهای فیلترشده به XLIFF 1.2"
+     ],
+     "Export": [
+         "برون‌ریزی"
+     ],
+     "Select File": [
+         "انتخاب فایل‌"
+     ],
+     ".xliff .zip": [
+         ".xliff .zip"
+     ],
+     "Importing": [
+         "درون‌ریزی"
+     ],
+     "Import": [
+         "درون‌ریزی"
+     ],
+     "Import / Export XLIFF": [
+         "درون‌ریزی/برون‌بری XLIFF"
+     ],
+     "Actions": [
+         "اقدامات"
+     ],
+     "Batch name": [
+         "نام دسته"
+     ],
+     "Filter by %s": [
+         "فیلتر با %s"
+     ],
+     "Title": [
+         "عنوان"
+     ],
+     "Approve translation reviews": [
+         "تأیید بررسی‌های ترجمه"
+     ],
+     "Cancel jobs": [
+         "لغو کارها"
+     ],
+     "Cancel translation reviews": [
+         "لغو بررسی‌های ترجمه"
+     ],
+     "Export to XLIFF %s": [
+         "برون بری به XLIFF %s"
+     ],
+     "Get translations": [
+         "دریافت ترجمه‌ها"
+     ],
+     "This action does not apply to any of the selected translation jobs": [
+         "این عمل برای هیچ یک از کارهای ترجمه انتخابی اعمال نمی شود"
+     ],
+     "Translations have been downloaded": [
+         "ترجمه‌ها دانلود شد"
+     ],
+     "Translation has been downloaded": [
+         "ترجمه دانلود شد"
+     ],
+     "Translations could not be downloaded": [
+         "ترجمه‌ها دانلود نشدند"
+     ],
+     "Translation could not be downloaded": [
+         "ترجمه دانلود نشد"
+     ],
+     "Approving translations reviews failed!": [
+         "بررسی ترجمه‌ها تایید نشد!"
+     ],
+     "Failed approving translations for the following posts: ": [
+         "ترجمه برای پست‌های زیر تأیید نشد: "
+     ],
+     "Translations reviews approved successfully!": [
+         "بررسی‌های ترجمه‌ها با موفقیت تأیید شد!"
+     ],
+     "No valid jobs selected to approve translations reviews!": [
+         "هیچ کار معتبری برای تأیید نظرات ترجمه انتخاب نشده است!"
+     ],
+     "The translator has been assigned to the job": [
+         "مترجم به این کار منصوب شده است"
+     ],
+     "The translator could not be assigned to the job": [
+         "مترجم را نمی توان به این کار اختصاص داد"
+     ],
+     "The jobs have been cancelled": [
+         "کارها لغو شده است"
+     ],
+     "The job has been cancelled": [
+         "کار لغو شده است"
+     ],
+     "The jobs could not be cancelled": [
+         "کارها لغو نشدند"
+     ],
+     "The job could not be cancelled": [
+         "کار لغو نشد"
+     ],
+     "Translation reviews have been canceled": [
+         "بررسیهای ترجمه لغو شد"
+     ],
+     "Translation review has been canceled": [
+         "بررسی ترجمه لغو شد"
+     ],
+     "Translation reviews could not be canceled": [
+         "بررسی‌های ترجمه لغو نشد"
+     ],
+     "Translation review could not be canceled": [
+         "بررسی ترجمه لغو نشد"
+     ],
+     "Sent on": [
+         "ارسال شده در"
+     ],
+     "Deadline": [
+         "مهلت"
+     ],
+     "Status": [
+         "وضعيت"
+     ],
+     "Pending review": [
+         "در انتظار بررسی"
+     ],
+     "ID": [
+         "شناسه"
+     ],
+     "Type": [
+         "نوع"
+     ],
+     "Languages": [
+         "زبان‌ها"
+     ],
+     "Translated by": [
+         "ترجمه شده توسط"
+     ],
+     "Download XLIFF file couldn't be finished": [
+         "دانلود فایل XLIFF تمام نشد"
+     ],
+     "Could not load jobs for export": [
+         "کارها برای برون بری بارگیری نشد"
+     ],
+     "The export to XLIFF failed": [
+         "برون بری به XLIFF انجام نشد"
+     ],
+     "Imported %d jobs": [
+         "%d کار درون ریزی شد"
+     ],
+     "Imported one job": [
+         "یک کار درون ریزی شد"
+     ],
+     "Could not import any job": [
+         "هیچ کاری درون ریزی نشد"
+     ],
+     "Import failed!": [
+         "درون‌ریزی انجام نشد!"
+     ],
+     "Loading translations queue": [
+         "بارگیری صف ترجمه"
+     ],
+     "Loading translation jobs": [
+         "بارگیری کارهای ترجمه"
+     ],
+     "Jobs could not be loaded": [
+         "کاراها بارگیری نشدند"
+     ],
+     "Specify some jobs to resign": [
+         "چند کار را برای استعفا مشخص کنید"
+     ],
+     "We could not resign jobs: %s": [
+         "استعفا از کارها انجام نشد: %s"
+     ],
+     "Resigned from jobs": [
+         "از کار ها استعفا داد"
+     ],
+     "Resigned from job": [
+         "از کار استعفا داد"
+     ],
+     "Failed to resign from jobs": [
+         "استعفا از کار انجام نشد"
+     ],
+     "The Advanced Editor jobs synchronization has failed": [
+         "همگام سازی کارهای ویرایشگر پیشرفته ناموفق بود"
+     ],
+     "Synchronization with the Professional Translation service has failed": [
+         "همگام‌سازی با سرویس ترجمه حرفه‌ای انجام نشد"
+     ],
+     "%d translation has been downloaded": [
+         "%d ترجمه دانلود شد",
+         "%d ترجمه دانلود شد"
+     ],
+     "Batch sync finished successfully!": [
+         "همگام‌سازی گروهی با موفقیت به پایان رسید!"
+     ],
+     "Batch sync couldn't be finished": [
+         "همگام‌سازی گروهی تمام نشد"
+     ]       
+     }
+   }
+ }

@@ -1,0 +1,3324 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetWooBuilder For Elementor\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-19 20:16+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-woo-builder.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid " customer review"
+msgstr " نظر مشتری"
+
+msgid " customer reviews"
+msgstr " نظر مشتری"
+
+msgid "\"%1$s\" requires \"%2$s\" to be installed and activated."
+msgstr "(%1$s) نیازمند (%2$s) برای نصب و فعال شدن دارد."
+
+msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
+msgstr "(%1$s)به(%2$s) نسخه %3$s  یا بالاتر نیاز دارد."
+
+msgid "%1$s for %2$s item"
+msgid_plural "%1$s for %2$s items"
+msgstr[0] "%1$s برای %2$s مورد"
+msgstr[1] "%1$s برای %2$s مورد"
+
+msgid "%s"
+msgid_plural "%s"
+msgstr[0] "%s"
+msgstr[1] "%s"
+
+msgid "100"
+msgstr "100"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های جت پیشرفته"
+
+msgid "200"
+msgstr "200"
+
+msgid "300"
+msgstr "300"
+
+msgid "400"
+msgstr "400"
+
+msgid "500"
+msgstr "500"
+
+msgid "600"
+msgstr "600"
+
+msgid "700"
+msgstr "700"
+
+msgid "800"
+msgstr "800"
+
+msgid "900"
+msgstr "900"
+
+msgid "A link to set a new password will be sent to your email address."
+msgstr "لینکی برای تعیین رمز عبور جدید به آدرس ایمیل شما ارسال می شود."
+
+msgid "ASC"
+msgstr "صعودی"
+
+msgid "Account Addresses"
+msgstr "آدرسهای حساب"
+
+msgid "Account Content"
+msgstr "محتوای حساب"
+
+msgid "Account Dashboard"
+msgstr "داشبورد حساب"
+
+msgid "Account Details"
+msgstr "جزئیات حساب"
+
+msgid "Account Downloads"
+msgstr "دانلودهای حساب"
+
+msgid "Account Login Form"
+msgstr "فرم ورود حساب"
+
+msgid "Account Logout"
+msgstr "خروج حساب"
+
+msgid "Account Orders"
+msgstr "سفارشات حساب"
+
+msgid "Account Registration Form"
+msgstr "فرم ثبت نام حساب"
+
+msgid "Action Controls"
+msgstr "کنترل های عملکرد"
+
+msgid "Activate License"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license for automatic updates and awesome support"
+msgstr "لایسنس را برای به روزرسانی خودکار و پشتیبانی عالی فعال کنید"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Conditions"
+msgstr "شرایط فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Add"
+msgstr "افزودن"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid "Add To Cart Button"
+msgstr "دکمه افزودن به سبد خرید"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Add to Cart"
+msgstr "افزودن به سبد"
+
+msgid "Added"
+msgstr "اضافه شد"
+
+msgid "Additional information"
+msgstr "اطلاعات بیشتر"
+
+msgid "Addresses Forms"
+msgstr "فرم های آدرس"
+
+msgid "After Caption"
+msgstr "بعد از کپشن"
+
+msgid "After Count"
+msgstr "بعد از تعداد"
+
+msgid "After Item"
+msgstr "آیتم بعد"
+
+msgid "After Item Title"
+msgstr "بعد از عنوان آیتم"
+
+msgid "After Summary"
+msgstr "بعد از خلاصه"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All"
+msgstr "همه"
+
+msgid "Allow to use custom query from Query Builder as items source."
+msgstr ""
+"اجازه دهید از کوئری سفارشی از سازنده کوئری به عنوان منبع آیتم ها استفاده شود."
+
+msgid "Angle"
+msgstr "زاویه(Angle)"
+
+msgid "Angle Double"
+msgstr "زاویه دوبل(Angle Double)"
+
+msgid "Animation Speed"
+msgstr "سرعت انیمیشن"
+
+msgid "Apartment address"
+msgstr "آدرس آپارتمان"
+
+msgid "Apartment, suite, unit etc. (optional)"
+msgstr "آپارتمان ، سوئیت ، واحد و غیره (اختیاری)"
+
+msgid "Apply Coupon"
+msgstr "اعمال کوپن"
+
+msgid "Archive Add to Cart"
+msgstr "افزودن به سبد آرشیو"
+
+msgid "Archive Categories"
+msgstr "دسته‌بندی‌‌های آرشیو"
+
+msgid "Archive Category"
+msgstr "دسته بندی بایگانی"
+
+msgid "Archive Category Count"
+msgstr "تعداد دسته بندی آرشیو"
+
+msgid "Archive Category Count: After Count"
+msgstr "تعداد دسته بندی آرشیو: بعد از تعداد"
+
+msgid "Archive Category Count: Before Count"
+msgstr "تعداد دسته بندی آرشیو: قبل از تعداد"
+
+msgid "Archive Category Description"
+msgstr "توضیحات دسته بندی آرشیو"
+
+msgid "Archive Category Description: Trimmed After"
+msgstr "توضیحات دسته بندی آرشیو: تقسیم بعد از"
+
+msgid "Archive Category Template"
+msgstr "قالب دسته بندی بایگانی"
+
+msgid "Archive Category Thumbnail"
+msgstr "تصویر دسته آرشیو"
+
+msgid "Archive Category Title"
+msgstr "عنوان دسته آرشیو"
+
+msgid "Archive Category Widgets"
+msgstr "ابزارک های دسته بندی بایگانی"
+
+msgid "Archive Excerpt"
+msgstr "خلاصه آرشیو"
+
+msgid "Archive Item"
+msgstr "بایگانی"
+
+msgid "Archive Price"
+msgstr "قیمت آرشیو"
+
+msgid "Archive Product"
+msgstr "آرشیو محصول"
+
+msgid "Archive Product Template"
+msgstr "قالب بایگانی محصولات"
+
+msgid "Archive Product Widgets"
+msgstr "ابزارک های آرشیو محصول"
+
+msgid "Archive Rating"
+msgstr "امتیاز آرشیو"
+
+msgid "Archive SKU"
+msgstr "شناسه SKU آرشیو"
+
+msgid "Archive Sale Badge"
+msgstr "نشان حراج آرشیو"
+
+msgid "Archive Sale Badge: Badge Label"
+msgstr "نشان حراج آرشیو: برچسب نشان"
+
+msgid "Archive Stock Status"
+msgstr "وضعیت موجودی آرشیو"
+
+msgid "Archive Tags"
+msgstr "برچسب‌های آرشیو"
+
+msgid "Archive Thumbnail"
+msgstr "بندانگشتی آرشیو"
+
+msgid "Archive Title"
+msgstr "عنوان آرشیو"
+
+msgid "Arrow"
+msgstr "فلش(Arrow)"
+
+msgid "Arrow Circle"
+msgstr "دایره فلش(Arrow Circle)"
+
+msgid "Arrow Type"
+msgstr "نوع پیکان"
+
+msgid "Asterisk Color"
+msgstr "رنگ ستاره"
+
+msgid "Attributes"
+msgstr "ویژگی ها"
+
+msgid "Autoplay"
+msgstr "پخش خودکار"
+
+msgid "Available on backorder"
+msgstr "موجود در پیش سفارش "
+
+msgid "Background"
+msgstr "تصویر زمینه"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Angle"
+msgstr "زاویه"
+
+msgctxt "Background Control"
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Background Type"
+msgstr "نوع پس‌زمینه"
+
+msgctxt "Background Control"
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgctxt "Background Control"
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgctxt "Background Control"
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgctxt "Background Control"
+msgid "Center Center"
+msgstr "مرکز مرکز"
+
+msgctxt "Background Control"
+msgid "Center Left"
+msgstr "وسط چپ"
+
+msgctxt "Background Control"
+msgid "Center Right"
+msgstr "وسط راست"
+
+msgctxt "Background Control"
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgctxt "Background Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Background Control"
+msgid "Gradient"
+msgstr "گرادیانت"
+
+msgctxt "Background Control"
+msgid "Linear"
+msgstr "خطی"
+
+msgctxt "Background Control"
+msgid "Location"
+msgstr "مکان"
+
+msgctxt "Background Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgctxt "Background Control"
+msgid "Radial"
+msgstr "شعاعی"
+
+msgctxt "Background Control"
+msgid "Second Color"
+msgstr "رنگ دوم"
+
+msgctxt "Background Control"
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgctxt "Background Control"
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgctxt "Background Control"
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgctxt "Background Control"
+msgid "Type"
+msgstr "نوع"
+
+msgid "Backorder"
+msgstr "پیش‌سفارش"
+
+msgid "Badge Label"
+msgstr "برچسب نشان"
+
+msgid "Badges"
+msgstr "نشان ها"
+
+msgid "Baseline"
+msgstr "پایه"
+
+msgid "Before Caption"
+msgstr "قبل کپشن"
+
+msgid "Before Count"
+msgstr "قبل از تعداد"
+
+msgid "Before Item"
+msgstr "آیتم قبل"
+
+msgid "Before Item Title"
+msgstr "قبل از عنوان آیتم"
+
+msgid "Before Summary"
+msgstr "قبل از خلاصه"
+
+msgid ""
+"Before using the custom template functionality, make sure to Enable Custom "
+"Archive Product option"
+msgstr ""
+"قبل از استفاده از عملکرد تمپلیت سفارشی، مطمئن شوید که گزینه محصول آرشیو "
+"سفارشی را فعال کنید"
+
+msgid "Bestsellers"
+msgstr "پرفروش ها"
+
+msgid "Billing address"
+msgstr "آدرس صورت حساب"
+
+msgid "Block"
+msgstr "بلاک(Block)"
+
+msgid "Block Reverse"
+msgstr "بلوک معکوس"
+
+msgid "Body Style"
+msgstr "استایل بدنه"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه (Border)"
+
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "نوع حاشیه (border)"
+
+msgctxt "Border Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "خط‌ چین"
+
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgctxt "Border Control"
+msgid "Double"
+msgstr "دوبل"
+
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgctxt "Border Control"
+msgid "Width"
+msgstr "عرض"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه(Border)"
+
+msgid "Bottom"
+msgstr "پایین"
+
+msgid "Bottom Indent"
+msgstr "فرورفتگی پایین"
+
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgid "Box Height"
+msgstr "ارتفاع جعبه"
+
+msgctxt "Box Shadow Control"
+msgid "Box Shadow"
+msgstr "سایه باکس"
+
+msgctxt "Box Shadow Control"
+msgid "Inset"
+msgstr "درونی"
+
+msgctxt "Box Shadow Control"
+msgid "Outline"
+msgstr "بیرونی"
+
+msgctxt "Box Shadow Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Box Size"
+msgstr "اندازه جعبه"
+
+msgid "Box Width"
+msgstr "عرض جعبه"
+
+msgid "Browse products"
+msgstr "مرور محصولات"
+
+msgid "Bullet Space"
+msgstr "فاصله گلوله"
+
+msgid "Button"
+msgstr "دکمه"
+
+msgid "Button Icon"
+msgstr "آیکن دکمه"
+
+msgid "Button Label"
+msgstr "برچسب دکمه"
+
+msgid "Button Label Text"
+msgstr "متن برچسب دکمه"
+
+msgid "Buttons"
+msgstr "دکمه‌ها"
+
+msgid "Can't create template. Please try again"
+msgstr "قالب ایجاد نمی شود. لطفا دوباره تلاش کنید"
+
+msgid "Canvas"
+msgstr "بوم"
+
+msgid "Caret"
+msgstr "هشتک(Caret)"
+
+msgid "Caret Square"
+msgstr "میدان هشتک(Caret Square)"
+
+msgid "Carousel"
+msgstr "کاروسل"
+
+msgid "Carousel Height"
+msgstr "ارتفاع کاروسل"
+
+msgid "Carousel Navigation"
+msgstr "ناوبری کاروسل"
+
+msgid "Carousel Pagination"
+msgstr "صفحه‌بندی کاروسل"
+
+msgid "Cart"
+msgstr "سبد خريد"
+
+msgid "Cart Cross Sells"
+msgstr "فروش متقابل سبد خرید"
+
+msgid "Cart Cross Sells: Heading"
+msgstr "فروش متقابل سبد خرید: هدینگ"
+
+msgid "Cart Empty Message"
+msgstr "پیام سبد خرید خالی"
+
+msgid "Cart Return To Shop"
+msgstr "بازگشت به فروشگاه سبد خرید"
+
+msgid "Cart Return To Shop: Label"
+msgstr "بازگشت به فروشگاه سبد خرید: برچسب"
+
+msgid "Cart Return To Shop: Link"
+msgstr "بازگشت به فروشگاه سبد خرید: لینک"
+
+msgid "Cart Table"
+msgstr "جدول سبد خرید"
+
+msgid "Cart Table Column: Heading"
+msgstr "ستون جدول سبدخرید: هدینگ"
+
+msgid "Cart Table: Coupon Button Label"
+msgstr "جدول سبد خرید: برچسب دکمه کدتخفیف"
+
+msgid "Cart Table: Coupon Placeholder"
+msgstr "جدول سبد خرید: مکان‌نگهدار کدتخفیف"
+
+msgid "Cart Table: Update Cart Button Label"
+msgstr "جدول سبد خرید: برچسب دکمه بروزرسانی سبد"
+
+msgid "Cart Template"
+msgstr "قالب سبد خرید"
+
+msgid "Cart Totals"
+msgstr "مجموع سبد خرید"
+
+msgid "Cart Widgets"
+msgstr "ابزارک های سبد خرید"
+
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+msgid "Categories Count"
+msgstr "تعداد دسته بندی ها"
+
+msgid "Categories Grid"
+msgstr "شبکه دسته بندی "
+
+msgid "Categories Grid: After Count"
+msgstr "گرید دسته‌بندی‌ها: بعد از تعداد"
+
+msgid "Categories Grid: Before Count"
+msgstr "گرید دسته‌بندی‌ها: قبل از تعداد"
+
+msgid "Categories Grid: Trimmed After"
+msgstr "گرید دسته بندی‌ها : تقسیم پس از"
+
+msgid "Categories IDs"
+msgstr "شناسه های دسته بندی ها"
+
+msgid "Categories Number"
+msgstr "تعداد دسته بندی"
+
+msgid "Categories not found"
+msgstr "دسته بندی ها یافت نشد"
+
+msgid "Category"
+msgstr "دسته بندی"
+
+msgid "Category Item"
+msgstr "دسته بندی"
+
+msgid "Center"
+msgstr "مرکز"
+
+msgid "Centered Slides"
+msgstr "اسلایدها در مرکز"
+
+msgid "Changes to the cart will update automatically."
+msgstr "تغییرات در سبد خرید به طور خودکار به روز می شوند."
+
+msgid "Check For Updates"
+msgstr "بررسی بروزرسانی ها"
+
+msgid "Checkout"
+msgstr "تسویه حساب"
+
+msgid "Checkout Additional Form"
+msgstr "فرم اضافی پرداخت"
+
+msgid "Checkout Additional Form: Heading"
+msgstr "فرم اضافی پرداخت: هدینگ"
+
+msgid "Checkout Billing Form"
+msgstr "فرم صورتحساب پرداخت"
+
+msgid "Checkout Billing Form Item: Default Value"
+msgstr "آیتم فرم صورتحساب پرداخت: مقدار پیشفرض"
+
+msgid "Checkout Billing Form Item: Label"
+msgstr "آیتم فرم صورتحساب پرداخت: برچسب"
+
+msgid "Checkout Billing Form Item: Placeholder"
+msgstr "آیتم فرم صورتحساب پرداخت: مکان‌نگهدار"
+
+msgid "Checkout Coupon Form"
+msgstr "فرم کدتخفیف تسویه حساب"
+
+msgid "Checkout Coupon Form: Toggle Link Text"
+msgstr "فرم کدتخفیف تسویه حساب: متن لینک بازکردن"
+
+msgid "Checkout Coupon Form: Toggle Text"
+msgstr "فرم کدتخفیف تسویه حساب: متن دکمه بازکردن"
+
+msgid "Checkout Login Form"
+msgstr "فرم ورود تسویه حساب"
+
+msgid "Checkout Login Form: Toggle Text"
+msgstr "فرم ورود تسویه حساب: متن بازکردن"
+
+msgid "Checkout Order Review"
+msgstr "بررسی سفارش پرداخت"
+
+msgid "Checkout Payment"
+msgstr "پرداخت تسویه حساب"
+
+msgid "Checkout Shipping Form"
+msgstr "فرم حمل و نقل تسویه حساب"
+
+msgid "Checkout Shipping Form Item: Default Value"
+msgstr "آیتم فرم حمل و نقل تسویه حساب: مقدار پیشفرض"
+
+msgid "Checkout Shipping Form Item: Label"
+msgstr "آیتم فرم حمل و نقل تسویه حساب: برچسب"
+
+msgid "Checkout Shipping Form Item: Placeholder"
+msgstr "آیتم فرم حمل و نقل تسویه حساب: مکان‌نگهدار"
+
+msgid "Checkout Shipping Form: Heading"
+msgstr "فرم حمل و نقل تسویه حساب: هدینگ"
+
+msgid "Checkout Template"
+msgstr "قالب تسویه حساب"
+
+msgid "Checkout Top Template"
+msgstr "قالب بالای تسویه حساب"
+
+msgid "Checkout Widgets"
+msgstr "ابزارک های تسویه حساب"
+
+msgid "Chevron"
+msgstr "شورون (Chevron)"
+
+msgid "Chevron Circle"
+msgstr "دایره جهت نما(Chevron Circle)"
+
+msgid "Choose a hover effect for product thumbnails switching"
+msgstr "برای تغییرحالت  بندانگشتی محصول ، یک افکت هاور انتخاب کنید"
+
+msgid "Class"
+msgstr "کلاس"
+
+msgid "Click here to enter your code"
+msgstr "برای وارد کردن کد اینجا کلیک کنید"
+
+msgid "Click here to login"
+msgstr "برای ورود کلیک کنید"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Column"
+msgstr "ستون"
+
+msgid "Column Width"
+msgstr "عرض ستون"
+
+msgid "Columns"
+msgstr "ستون‌ها"
+
+msgid "Columns Gap"
+msgstr "شکاف ستون ها"
+
+msgid "Company"
+msgstr "شرکت"
+
+msgid "Company name"
+msgstr "نام شركت"
+
+msgid "Confirm new password"
+msgstr "تکرار رمز عبور جدید"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Count"
+msgstr "تعداد"
+
+msgid "Country"
+msgstr "كشور"
+
+msgid "Coupon Code"
+msgstr "كد تخفیف"
+
+msgid "Coupon Form"
+msgstr "فرم کد تخفیف"
+
+msgid "Coupon Form Float"
+msgstr "فرم کدتخفیف شناور"
+
+msgid "Coupon Toggle"
+msgstr "باز کننده کد تخفیف"
+
+msgid "Coupon:"
+msgstr "کد تخفیف:"
+
+msgid "Create New Template"
+msgstr "ایجاد تمپلیت جدید"
+
+msgid "Create Template"
+msgstr "ایجاد قالب"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Cross Sells"
+msgstr "کراس فروش"
+
+msgid "Cross-Sells Product Template"
+msgstr "قالب محصول فروش متقابل"
+
+msgid "Currency Sign"
+msgstr "نماد ارز"
+
+msgid "Currency Sing"
+msgstr "واحد پولی"
+
+msgid "Currency Symbol"
+msgstr "نماد ارز پول"
+
+msgid "Current"
+msgstr "فعلی"
+
+msgid "Current Subcategories"
+msgstr "زیر دسته بندی های فعلی"
+
+msgid "Current password (leave blank to leave unchanged)"
+msgstr "رمز عبور فعلی (خالی بگذارید تا بدون تغییر بماند)"
+
+msgid "Custom Archive Category"
+msgstr "دسته بندی بایگانی سفارشی"
+
+msgid "Custom Archive Product"
+msgstr "محصول بایگانی سفارشی"
+
+msgid "Custom Cart"
+msgstr "سبد خرید سفارشی"
+
+msgid "Custom Checkout"
+msgstr "تسویه حساب سفارشی"
+
+msgid "Custom Field"
+msgstr "فيلد سفارشی"
+
+msgid "Custom Height"
+msgstr "ارتفاع سفارشی"
+
+msgid "Custom My Account Page"
+msgstr "صفحه حساب من سفارشی"
+
+msgid "Custom My Account Page endpoints"
+msgstr "نقاط پایانی صفحه حساب من سفارشی"
+
+msgid "Custom Query"
+msgstr "كوئري سفارشی"
+
+msgid "Custom Shop Page"
+msgstr "صفحه فروشگاه سفارشی"
+
+msgid "Custom Single Product"
+msgstr "تک محصول سفارشی"
+
+msgid "Custom Size"
+msgstr "اندازه سفارشی"
+
+msgid "Custom Taxonomy"
+msgstr "طبقه‌بندی سفارشی"
+
+msgid "Custom Taxonomy Template"
+msgstr "قالب طبقه بندی سفارشی"
+
+msgid "Custom Template"
+msgstr "قالب پیشفرض"
+
+msgid "Custom Thank You Page"
+msgstr "صفحه تشکر سفارشی"
+
+msgid "Custom Width"
+msgstr "عرض سفارشی"
+
+msgid "Customize Fields"
+msgstr "سفارشی سازی فیلدها"
+
+msgid "DESC"
+msgstr "نزولی"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Data Update"
+msgstr "بروزرسانی داده"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Date:"
+msgstr "تاریخ:"
+
+msgid "Deactivate License"
+msgstr "غیرفعال‌سازی لایسنس"
+
+msgid "Default"
+msgstr "پیش‌فرض"
+
+msgid "Default Page Template from your theme"
+msgstr "قالب صفحه پیش فرض از تم شما"
+
+msgid "Default Value"
+msgstr "مقدار پیش‌فرض"
+
+msgid "Delay"
+msgstr "تاخیر"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Description Length"
+msgstr "طول توضیحات"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Details"
+msgstr "جزئیات"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Direction"
+msgstr "جهت"
+
+msgid "Direction:"
+msgstr "جهت :"
+
+msgid "Disable on Interaction"
+msgstr "غیرفعال در تعامل"
+
+msgid "Disabled"
+msgstr "غیرفعال"
+
+msgid "Display"
+msgstr "نمایش"
+
+msgid "Display Type"
+msgstr "نوع نمایش"
+
+msgid "Display name"
+msgstr "نام نمایشی"
+
+msgid "District"
+msgstr "بخش"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Download Button"
+msgstr "دکمه دانلود"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "Dynamic Bullets"
+msgstr "گلوله های پویا"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Edit Link"
+msgstr "لینک ویرایش"
+
+msgid "Edit Popup"
+msgstr "ويرايش پاپ آپ"
+
+msgid "Edit Template"
+msgstr "ویرایش قالب"
+
+msgid "Effect"
+msgstr "افکت"
+
+msgid "Elementor"
+msgstr "المنتور"
+
+msgid "Elementor Canvas"
+msgstr "بوم المنتور"
+
+msgid "Elementor Default"
+msgstr "پیش فرض المنتور"
+
+msgid "Elementor Full Width"
+msgstr "تمام عرض المنتور"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Email address"
+msgstr "آدرس ایمیل‪"
+
+msgid "Email:"
+msgstr "ایمیل:"
+
+msgid "Empty"
+msgstr "خالی"
+
+msgid "Empty Cart Template"
+msgstr "قالب سبد خرید خالی"
+
+msgid "Empty Message"
+msgstr "پیام خالی"
+
+msgid "Empty Rating"
+msgstr "امتیاز خالی"
+
+msgid "Empty Star Color"
+msgstr "رنگ ستاره خالی"
+
+msgid "Enable"
+msgstr "فعال‌سازی"
+
+msgid "Enable Carousel"
+msgstr "فعال کردن کاروسل"
+
+msgid "Enable Custom Columns Count"
+msgstr "فعالسازی تعداد ستون های سفارشی"
+
+msgid "Enable Custom Query"
+msgstr "فعال كردن كوئري سفارشي"
+
+msgid "Enable Equal Columns Height"
+msgstr "فعالسازی ارتفاع برابر ستون ها"
+
+msgid "Enable Line Wrap"
+msgstr "فعال سازی بسته بندی(Wrap) خط"
+
+msgid "Enable Permalink"
+msgstr "فعال سازی پیوند‌یکتا"
+
+msgid "Enable Prev & Next Pages Links."
+msgstr "فعالسازی لینک های صفحه بندی قبلی و بعدی"
+
+msgid "Enable Quantity Input"
+msgstr "فعالسازی تعداد ورودی"
+
+msgid "Enable Thumbnail Effect"
+msgstr "فعال سازی افکت بندانگشتی"
+
+msgid "Enable Thumbnail Permalink"
+msgstr "فعال سازی پیوند‌یکتا بندانگشتی"
+
+msgid "Enable Title Tooltip"
+msgstr "فعالسازی راهنمای عنوان"
+
+msgid "Enable Tooltip"
+msgstr "فعالسازی تولتیپ"
+
+msgid "Enable Woocommerce Templates Styles"
+msgstr "فعال سازی استایل تمپلیت ووکامرس"
+
+msgid "Enable custom archive category"
+msgstr "دسته بندی بایگانی سفارشی را فعال کنید"
+
+msgid "Enable custom archive product"
+msgstr "محصول بایگانی سفارشی را فعال کنید"
+
+msgid "Enable custom cart"
+msgstr "سبد خرید سفارشی را فعال کنید"
+
+msgid "Enable custom checkout"
+msgstr "فعال سازی تسویه حساب سفارشی"
+
+msgid "Enable custom my account page"
+msgstr "صفحه حساب من سفارشی را فعال کنید"
+
+msgid "Enable custom my account page endpoints"
+msgstr "نقاط پایانی صفحه حساب من را سفارشی کنید"
+
+msgid "Enable custom shop page"
+msgstr "صفحه فروشگاه سفارشی را فعال کنید"
+
+msgid "Enable custom single product page"
+msgstr "صفحه تک محصول سفارشی را فعال کنید"
+
+msgid ""
+"Enable custom taxonomy template. Read more about custom template <a href="
+"\"https://crocoblock.com/knowledge-base/articles/jetwoobuilder-how-to-set-up-"
+"a-custom-product-taxonomy-template/\" target=\"_blank\" rel=\"nofollow"
+"\">here</a>"
+msgstr ""
+"قالب طبقه بندی سفارشی را فعال کنید. در مورد قالب سفارشی <a href=\"https://"
+"crocoblock.com/knowledge-base/articles/jetwoobuilder-how-to-set-up-a-custom-"
+"product-taxonomy-template/\" target=\"_blank\" rel=\"nofollow\">اینجا</"
+"a>بیشتر بخوانید"
+
+msgid "Enable custom thank you page"
+msgstr "صفحه تشکر سفارشی را فعال کنید"
+
+msgid "Enable product thumbnails to switch on hover"
+msgstr "برای تغییرحالت در هاور ، تصاویر بندانگشتي محصول را فعال کنید"
+
+msgid "Enable responsive fields width for mobile devices."
+msgstr "عرض فیلدهای رسپانسیو را برای دستگاه های تلفن همراه فعال کنید."
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Enter your heading"
+msgstr "هدینگ خود را وارد کنید."
+
+msgid "Enter your message here."
+msgstr "پیام خود را اینجا بنویسید."
+
+msgid "Equal Columns Height"
+msgstr "برابر شدن ارتفاع ستون ها"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Even Background Color"
+msgstr "رنگ پس‌زمینه زوج"
+
+msgid "Excerpt"
+msgstr "خلاصه"
+
+msgid "Exclude Categories"
+msgstr "دسته بندی‌های مستثنی"
+
+msgid "Exclude by IDs"
+msgstr "شناسه های مستثنی"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Export Template"
+msgstr "برون ریزی تمپلیت"
+
+msgid "Fade"
+msgstr "محو شدن"
+
+msgid "Fade With Zoom"
+msgstr "محو با بزرگنمایی"
+
+msgid "Fallback"
+msgstr "برگشتی(Fallback)"
+
+msgid "Favourites"
+msgstr "مورد علاقه ها"
+
+msgid "Featured"
+msgstr "ویژه"
+
+msgid "Featured Box Width"
+msgstr "عرض جعبه ویژه"
+
+msgid "Featured Image"
+msgstr "تصویر شاخص"
+
+msgid "Field Type"
+msgstr "نوع فیلد"
+
+msgid "Fields"
+msgstr "فیلدها"
+
+msgid "Fields List"
+msgstr "لیست فیلدها"
+
+msgid "Fieldset"
+msgstr "مجموعه فیلد"
+
+msgid "File not passed"
+msgstr "فایل عبور نکرد"
+
+msgid "First"
+msgstr "اولین"
+
+msgid "First Name"
+msgstr "نام "
+
+msgid "First name"
+msgstr "نام"
+
+msgid "Fits only top level sections of grid item."
+msgstr "فقط برای بخش‌های سطح بالای آیتم گرید مناسب است."
+
+msgid "Focus"
+msgstr "فوکوس"
+
+msgid "Font Color"
+msgstr "رنگ فونت"
+
+msgid "Font Size"
+msgstr "اندازه فونت"
+
+msgid "Font Weight"
+msgstr "وزن فونت"
+
+msgid ""
+"For Products Grid and Product List widgets use Click On Custom Selector "
+"Trigger Type with .jet-quickview-button selector"
+msgstr ""
+"برای ابزارک های شبکه و لیست محصولات از تیکر انتخاب گر سفارشی در کلیک با "
+"انتخابگر  .jet-quickview-button استفاده کنید"
+
+msgid "For Query Controls Condition"
+msgstr "برای شرایط کنترل‌های کوئری"
+
+msgid ""
+"For creating this template, you need combine shop template and archive "
+"template in JetWooBuilder settings"
+msgstr ""
+"برای ایجاد این تمپلیت ، شما باید تمپلیت فروشگاه و بایگانی را در تنظیمات "
+"JetWooBuilder ترکیب کنید"
+
+msgid ""
+"Force use of AJAX Add to Cart instead of page reload on the product single "
+"page."
+msgstr "اجبار استفاده افزودن به سبد خرید آژاکس بجای بارگیری مجدد صفحه محصول."
+
+msgid ""
+"Force use of native WooCommerce templates instead of those rewritten in "
+"theme."
+msgstr ""
+"اجبار استفاده از قالب بومی ووکامرس را بجای بازنویسی ها در قالب استفاده کنید."
+
+msgid "Form"
+msgstr "فرم"
+
+msgid "Format not allowed"
+msgstr "فرمت مجاز نیست"
+
+msgid "Free Mode"
+msgstr "حالت آزاد"
+
+msgid ""
+"From your account dashboard you can view your <a href=\"%1$s\">recent "
+"orders</a>, manage your <a href=\"%2$s\">billing address</a>, and <a href="
+"\"%3$s\">edit your password and account details</a>."
+msgstr ""
+"از داشبورد حساب کاربری خود می توانید <a href=\"%1$s\">سفارشات اخیر</a> را "
+"مشاهده کنید. <a href=\"%2$s\">آدرس های پستی</a> را مدیریت و <a href=\"%3$s"
+"\">رمز عبور و جزئیات حساب خود را ویرایش کنید</a>."
+
+msgid ""
+"From your account dashboard you can view your <a href=\"%1$s\">recent "
+"orders</a>, manage your <a href=\"%2$s\">shipping and billing addresses</a>, "
+"and <a href=\"%3$s\">edit your password and account details</a>."
+msgstr ""
+"از پیشخوان حساب کاربری خود می توانید <a href=\"%1$s\">آخرین سفارش ها</a> را "
+"ببینید ، به راحتی <a href=\"%2$s\">آدرس حمل و نقل و صورت حساب </a> را مدیریت "
+"کنید و <a href=\"%3$s\">اطلاعات حساب کاربری و رمز عبور</a> را تغییر دهید."
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "Full Width"
+msgstr "تمام صفجه"
+
+msgid "Gap"
+msgstr "فاصله"
+
+msgid "Gap Between Columns"
+msgstr "فاصله بین ستون ها"
+
+msgid "Gap Between Rows"
+msgstr "فاصله بین ردیف ها"
+
+msgid "Gap between columns"
+msgstr "فاصله بین ستون ها"
+
+msgid "Gap between rows"
+msgstr "فاصله بین ردیف ها"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های جت"
+
+msgid "Give your Query a custom unique id to allow server side filtering"
+msgstr ""
+"به کوئری خود یک شناسه سفارشی منحصر به فرد بدهید تا بتوانید در سمت سرور "
+"فیلترینگ را ایجاد کنید"
+
+msgid "Give your Query a custom unique id to allow server side filtering."
+msgstr ""
+"به کوئری خود یک شناسه سفارشی منحصر به فرد بدهید تا بتوانید در سمت سرور "
+"فیلترینگ را ایجاد کنید"
+
+msgid "Global Widgets"
+msgstr "ابزارک های عمومی"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+msgid "Grid Item"
+msgstr "آیتم گرید"
+
+msgid "H1"
+msgstr "H1"
+
+msgid "H2"
+msgstr "H2"
+
+msgid "H3"
+msgstr "H3"
+
+msgid "H4"
+msgstr "H4"
+
+msgid "H5"
+msgstr "H5"
+
+msgid "H6"
+msgstr "H6"
+
+msgid "HTML Tag"
+msgstr "برچسب HTML"
+
+msgid "Have a coupon?"
+msgstr "کد تخفیف دارید؟"
+
+msgid "Heading"
+msgstr "عنوان"
+
+msgid "Headings"
+msgstr "هدینگ‌ها"
+
+msgid "Height"
+msgstr "ارتفاع"
+
+msgid "Hello %1$s (not %1$s? <a href=\"%2$s\">Log out</a>)"
+msgstr "سلام %1$s (%1$s نیستید؟ <a href=\"%2$s\">خروج</a>)"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hidden Products"
+msgstr "محصولات پنهان"
+
+msgid "Hide"
+msgstr "پنهان"
+
+msgid "Hide Empty"
+msgstr "پنهان کردن موارد خالی"
+
+msgid "Hide Icon"
+msgstr "پنهان کردن آیکن"
+
+msgid "Hide Subcategories"
+msgstr "مخفی کردن زیر دسته ها"
+
+msgid "Hide Title"
+msgstr "پنهان کردن عنوان "
+
+msgid "Hide Uncategorized"
+msgstr "مخفی کردن دسته بندی نشده"
+
+msgid "Hook"
+msgstr "هوک"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Horizontal Alignment"
+msgstr "چینش افقی"
+
+msgid "Horizontal Position"
+msgstr "موقعیت افقی"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Hover on Touch"
+msgstr "هاور در لمس"
+
+msgid "ID"
+msgstr "شناسه"
+
+msgid "IDs"
+msgstr "شناسه ها"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Position"
+msgstr "موقعیت آیکن"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid ""
+"If you have shopped with us before, please enter your details below. If you "
+"are a new customer, please proceed to the Billing section."
+msgstr ""
+"اگر قبلا خرید با ما را تجربه کرده اید، لطفا جزئیات خود را در زیر وارد کنید. "
+"اگر مشتری جدید هستید، لطفا به بخش صورتحساب بروید."
+
+msgid ""
+"If you want to use My Account Page endpoint templates with current theme "
+"view, than make sure that My Account Template is set to `Default`."
+msgstr ""
+"اگر می خواهید از قالب های نقطه پایانی صفحه حساب من با نمای قالب فعلی استفاده "
+"کنید ، مطمئن شوید که قالب حساب من روی (پیش فرض) تنظیم شده باشد."
+
+msgid "Image"
+msgstr "عكس"
+
+msgid "Image Size"
+msgstr "اندازه تصویر"
+
+msgid "Import Now"
+msgstr "درون ریزی الان"
+
+msgid "Import Template"
+msgstr "درون ریزی تمپلیت"
+
+msgid "In Stock"
+msgstr "موجود"
+
+msgid "In Stock Label"
+msgstr "برچسب موجود بودن"
+
+msgid "In content"
+msgstr "در محتوا"
+
+msgid "Include Categories"
+msgstr "دسته بندی‌های شامل"
+
+msgid "Include Tag"
+msgstr "برچسب شامل"
+
+msgid "Include by IDs"
+msgstr "شناسه های شامل"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Incorrect template type. Please try again."
+msgstr "نوع تمپلیت نادرست است. لطفا دوباره تلاش کنید."
+
+msgid "Indent"
+msgstr "تو رفتگی"
+
+msgid "Info Box"
+msgstr "جعبه اطلاعات"
+
+msgid "Inline"
+msgstr "درون خطی(Inline)"
+
+msgid "Inline Reverse"
+msgstr "معکوس اینلاین"
+
+msgid "Input"
+msgstr "ورودی"
+
+msgid "Inputs"
+msgstr "ورودی‌ها"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های جت نصب شده"
+
+msgid "Item"
+msgstr "آیتم"
+
+msgid "Item Min Width"
+msgstr "حداقل عرض آیتم"
+
+msgid "Item Title"
+msgstr "عنوان آیتم"
+
+msgid "Items"
+msgstr "آیتم"
+
+msgid "Jet Woo Archive Template"
+msgstr "قالب آرشیو ووکامرس جت"
+
+msgid "Jet Woo Cart Template"
+msgstr "قالب سبدخرید ووکامرس جت"
+
+msgid "Jet Woo Category Template"
+msgstr "قالب دسته بندی ووکامرس جت"
+
+msgid "Jet Woo Checkout Template"
+msgstr "قالب تسویه حساب ووکامرس جت"
+
+msgid "Jet Woo My Account Template"
+msgstr "قالب حساب من ووکامرس جت"
+
+msgid "Jet Woo Shop Template"
+msgstr "قالب فروشگاه ووکامرس جت"
+
+msgid "Jet Woo Single Template"
+msgstr "قالب تكي Jet Woo"
+
+msgid "Jet Woo Thank You Template"
+msgstr "قالب تشکر ووکامرس جت"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins License Deactivation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های جت"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های جت"
+
+msgid "JetWooBuilder"
+msgstr "JetWooBuilder "
+
+msgid "JetWooBuilder For Elementor"
+msgstr "JetWooBuilder  برای المنتور"
+
+msgid "JetWooBuilder Purchase Popup"
+msgstr "پاپ آپ خرید JetWooBuilder"
+
+msgid "JetWooBuilder Quick View"
+msgstr "نمایش سریع JetWooBuilder "
+
+msgid "JetWooBuilder Template"
+msgstr "قالب JetWooBuilder "
+
+msgid "JetWooBuilder Template Settings"
+msgstr "تنظیمات قالب JetWooBuilder "
+
+msgid ""
+"JetWooBuilder Template is enabled, however, it can&rsquo;t be displayed in "
+"shortcode when you&rsquo;re on Elementor editor page."
+msgstr ""
+"JetWooBuilder ساز فعال است ، با این وجود ، وقتی در صفحه ویرایشگر المنتور "
+"هستید ، نمی تواند در کد کوتاه نمایش داده شود."
+
+msgid "JetWooBuilder Templates"
+msgstr "قالب های JetWooBuilder "
+
+msgid "Justified"
+msgstr "جاستیفای"
+
+msgid "Justify"
+msgstr "جاستیفای"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Labels"
+msgstr "برچسب‌ها"
+
+msgid "Last"
+msgstr "آخرین"
+
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+msgid "Last name"
+msgstr "نام خانوادگی"
+
+msgid "Layout"
+msgstr "طرح بندی"
+
+msgid "Layout 1 (5 taxonomy)"
+msgstr "طرح 1 (5 طبقه بندی)"
+
+msgid "Layout 2 (4 taxonomy)"
+msgstr "طرح 2 (4 طبقه بندی)"
+
+msgid "Layout 3 (4 taxonomy)"
+msgstr "طرح 3 (4 طبقه بندی)"
+
+msgid "Layout 4 (3 taxonomy)"
+msgstr "طرح 4 (3 طبقه بندی)"
+
+msgid "Layout 5 (5 taxonomy)"
+msgstr "طرح 5 (5 طبقه بندی)"
+
+msgid "Layout 6 (5 taxonomy)"
+msgstr "طرح 6 (5 طبقه بندی)"
+
+msgid "Layout 7 (2, 4, 6 taxonomy)"
+msgstr "طرح 7 (2, 4, 6 طبقه بندی)"
+
+msgid "Layout 8 (3, 6, 9 taxonomy)"
+msgstr "طرح 8 (3, 6, 9 طبقه بندی)"
+
+msgid "Layout 9 (4, 8, 12 taxonomy)"
+msgstr "طرح 9 (4, 8, 12 طبقه بندی)"
+
+msgid "Layout Switcher"
+msgstr "سوئیچر طرح بندی."
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Left Indent"
+msgstr "تورفتگی چپ"
+
+msgid "Length"
+msgstr "طول"
+
+msgid "Letters"
+msgstr "حروف"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Key:"
+msgstr "کلید لایسنس:"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "Line Through"
+msgstr "خط روی نوشته"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Link Min Width"
+msgstr "حداقل عرض لینک"
+
+msgid "Links"
+msgstr "لینک‌ها"
+
+msgid "List Item"
+msgstr "لیست آیتم"
+
+msgid "Loading"
+msgstr "بارگذاری"
+
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+msgid "Log in"
+msgstr "ورود"
+
+msgid "Login"
+msgstr "ورود"
+
+msgid "Login Toggle"
+msgstr "فعالساز ورود"
+
+msgid "Logout"
+msgstr "خروج "
+
+msgid "Loop"
+msgstr "حلقه"
+
+msgid "Lost your password?"
+msgstr "رمز عبور را فراموش کرده اید؟"
+
+msgid "Macros"
+msgstr "ماکروها"
+
+msgid "Main"
+msgstr "اصلی"
+
+msgid "Make Archive Item Clickable"
+msgstr "قابل کلیک کردن آیتم آرشیو"
+
+msgid "Make Item Clickable"
+msgstr "قابل کلیک کردن آیتم"
+
+msgid "Make Product Item Clickable"
+msgstr "محصول را قابل کلیک کنید"
+
+msgid "Makes browsers render all widgets more consistently."
+msgstr "باعث می شود رندر تمام ابزارک ها توسط مرورگرها با ثبات انجام شود."
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Manual Selection"
+msgstr "انتخاب دستی"
+
+msgid "Margin"
+msgstr "فاصله(Margin)"
+
+msgid "Menu Order"
+msgstr "ترتیب منو"
+
+msgid "Message"
+msgstr "پیام"
+
+msgid "Meta Field Key"
+msgstr "کلید متا فیلد"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "Min Height"
+msgstr "حداقل ارتفاع"
+
+msgid "Min Width"
+msgstr "حداقل عرض"
+
+msgid "Modified Date"
+msgstr "تاریخ ویرایش"
+
+msgid "Modify"
+msgstr "ویرایش"
+
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr ""
+"خطای شروع ماژول بروزرسانی پایگاه داده در %s - نسخه و نامک (slug) آرگومان های "
+"مورد نیاز است"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های جت با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "My Account"
+msgstr "حساب کاربری"
+
+msgid "My Account Address Endpoint Template"
+msgstr "قالب نقطه پایانی آدرس های حساب من"
+
+msgid "My Account Dashboard Template"
+msgstr "قالب داشبورد حساب من"
+
+msgid "My Account Downloads Endpoint Template"
+msgstr "قالب نقطه پایانی دانلودهای حساب من"
+
+msgid "My Account Edit Account Endpoint Template"
+msgstr "قالب نقطه پایانی ویرایش حساب ،حساب من"
+
+msgid "My Account Login Page Template"
+msgstr "قالب صفحه ورود حساب من"
+
+msgid "My Account Orders Endpoint Template"
+msgstr "قالب نقطه پایانی سفارشات حساب من"
+
+msgid "My Account Page"
+msgstr "برگه حساب من"
+
+msgid "My Account Page Widgets"
+msgstr "ابزارک های صفحه حساب من"
+
+msgid "My Account Template"
+msgstr "قالب حساب من"
+
+msgid "My account"
+msgstr "حساب من"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Navigation"
+msgstr "ناوبری "
+
+msgid "Navigation Icons"
+msgstr "آیکن های پیمایش"
+
+msgid "New Template"
+msgstr "تمپلیت جدید"
+
+msgid "New password (leave blank to leave unchanged)"
+msgstr "رمز عبور جدید (خالی بگذارید تا بدون تغییر بماند)"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "Next Arrow"
+msgstr "پیکان بعدی"
+
+msgid "Next Arrow Position"
+msgstr "موقعیت پیکان بعدی"
+
+msgid "Next Icon"
+msgstr "آیکن بعدی"
+
+msgid "Next Label"
+msgstr "برچسب بعدی"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No data found in file"
+msgstr "هیچ داده ای در فایل یافت نشد"
+
+msgid "No downloads available yet."
+msgstr "هنوز هیچ دانلودی در دسترس نیست."
+
+msgid "No header, no footer, just template content"
+msgstr "بدون هدر، بدون فوتر، فقط محتوای قالب"
+
+msgid "No order has been made yet."
+msgstr "هنوز هیچ سفارشی انجام نشده است."
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Not Found Message"
+msgstr "هیچ پیامی یافت نشد"
+
+msgid ""
+"Not working? You can set a different selector for the title in Site Settings "
+"> Layout"
+msgstr ""
+"کار نمیکند؟ می توانید سلکتور دیگری را برای عنوان در تنظیمات سایت> چیدمان "
+"تنظیم کنید"
+
+msgid "Note:"
+msgstr "یادداشت:"
+
+msgid "Number"
+msgstr "شماره"
+
+msgid "Number of cross-sells products to show"
+msgstr "تعداد محصولات فروش متقابل برای نمایش"
+
+msgid "Number of related products to show"
+msgstr "تعداد محصولات مرتبط برای نشان دادن"
+
+msgid "Number of up-sells products to show"
+msgstr "تعداد محصولات فروش بالا برای نمایش"
+
+msgid "On Backorder"
+msgstr "در پیش سفارش"
+
+msgid "On Backorder Label"
+msgstr "برچسب در پیش سفارش"
+
+msgid "Open in New Window"
+msgstr "بازکردن در پنجره جدید"
+
+msgid "Order"
+msgstr "ترتیب"
+
+msgid "Order Action Button"
+msgstr "دکمه اقدام سفارش"
+
+msgid "Order Address"
+msgstr "آدرس‌های سفارش"
+
+msgid "Order Downloads"
+msgstr "دانلودهای سفارش"
+
+msgid "Order Status"
+msgstr "وضعیت سفارش"
+
+msgid "Order Table"
+msgstr "جدول سفارش"
+
+msgid "Order by"
+msgstr "ترتیب براساس"
+
+msgid "Order details"
+msgstr "جزییات سفارش"
+
+msgid "Order number:"
+msgstr "شماره سفارش:"
+
+msgid "Other Options"
+msgstr "تنظیمات دیگر"
+
+msgid "Out Of Stock"
+msgstr "ناموجود"
+
+msgid "Out of Stock"
+msgstr "ناموجود"
+
+msgid "Out of Stock Label"
+msgstr "برچسب اتمام موجودی"
+
+msgid "Out of content"
+msgstr "بیرون محتوا"
+
+msgid "Overflow"
+msgstr "سرریز"
+
+msgid "Overlay"
+msgstr "پوشش"
+
+msgid "Overline"
+msgstr "خط بالا"
+
+msgid "Overview"
+msgstr "بررسی اجمالی"
+
+msgid "Padding"
+msgstr "فاصله داخلی(Padding)"
+
+msgid "Page Title"
+msgstr "عنوان صفحه"
+
+msgid "Pagination"
+msgstr "صفحه بندی"
+
+msgid "Panel"
+msgstr "پنل"
+
+msgid "Parent Category"
+msgstr "دسته اصلی"
+
+msgid "Parent Category ID"
+msgstr "شناسه دسته والد"
+
+msgid "Password"
+msgstr "رمز عبور"
+
+msgid "Password change"
+msgstr "تغییر رمز عبور"
+
+msgid "Pay"
+msgstr "پرداخت"
+
+msgid "Payment"
+msgstr "پرداخت"
+
+msgid "Payment method:"
+msgstr "روش پرداخت:"
+
+msgid "Phone"
+msgstr "تلفن"
+
+msgid "Placeholder"
+msgstr "پلیس هولدر"
+
+msgid "Placeholder Text"
+msgstr "متن نگهدارنده ی متن"
+
+msgid ""
+"Please add at least one product with \"publish\", \"pending\", \"draft\" or "
+"\"future\" status"
+msgstr ""
+"لطفاً حداقل یک محصول با وضعیت (انتشار) ، (در انتظار) ، (پیش نویس) یا (آینده) "
+"اضافه کنید"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Plural Caption"
+msgstr "کپشن جمع"
+
+msgid "Popularity"
+msgstr "محبوبیت"
+
+msgid "Position"
+msgstr "موقعیت"
+
+msgid "Post Parent IDs"
+msgstr "شناسه‌های والد پست"
+
+msgid "Postcode"
+msgstr "کد پستی"
+
+msgid "Postcode / ZIP"
+msgstr "کد پستی/ ZIP"
+
+msgid "Preset 1"
+msgstr "مدل 1"
+
+msgid "Preset 10"
+msgstr "مدل 10"
+
+msgid "Preset 2"
+msgstr "مدل  2"
+
+msgid "Preset 3"
+msgstr "مدل  3"
+
+msgid "Preset 4"
+msgstr "مدل  4"
+
+msgid "Preset 5"
+msgstr "مدل  5"
+
+msgid "Preset 6"
+msgstr "مدل  6"
+
+msgid "Preset 7 "
+msgstr "مدل 7 "
+
+msgid "Preset 8 "
+msgstr "مدل  8 "
+
+msgid "Preset 9 "
+msgstr "مدل  9 "
+
+msgid "Presets"
+msgstr "پیش تنظیم"
+
+msgid "Prev Arrow"
+msgstr "پیکان قبل"
+
+msgid "Prev Arrow Position"
+msgstr "موقعیت پیکان قبلی"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Previous Icon"
+msgstr "آیکن قبلی"
+
+msgid "Previous Label"
+msgstr "برچسب قبلی"
+
+msgid "Price"
+msgstr "قیمت"
+
+msgid "Prices"
+msgstr "قیمت‌ها"
+
+msgid "Print Custom Templates CSS Inline"
+msgstr "نمايش قالب های سفارشی درون خطی CSS"
+
+msgid "Product"
+msgstr "محصول"
+
+msgid "Product Count"
+msgstr "تعداد محصول"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Product Rating"
+msgstr "امتیاز محصول"
+
+msgid "Product Reviews Form"
+msgstr "فرم نظرات محصول"
+
+msgid "Product Sale Badge"
+msgstr "نشان حراج محصول"
+
+msgid "Product Sharing"
+msgstr "اشتراک‌گذاری محصول"
+
+msgid "Product Shortcode Template"
+msgstr "قالب کد کوتاه محصول"
+
+msgid "Product Tabs"
+msgstr "زبانه‌های محصول"
+
+msgid "Product Title"
+msgstr "عنوان محصول"
+
+msgid "Product Variation"
+msgstr "متغیر محصول"
+
+msgid "Products Description"
+msgstr "توضیحات محصولات"
+
+msgid "Products Grid"
+msgstr "شبکه محصولات"
+
+msgid "Products Grid: Backorder Label"
+msgstr "گرید محصولات: برچسب پیش‌سفارش"
+
+msgid "Products Grid: Badge Label"
+msgstr "گرید محصولات: برچسب نشان"
+
+msgid "Products Grid: Not Found Message"
+msgstr "گرید محصولات: پیام یافت نشد"
+
+msgid "Products Grid: Out of Stock Label"
+msgstr "گرید محصولات: برچسب ناموجود"
+
+msgid "Products Grid: Stock Label"
+msgstr "گرید محصولات: برچسب موجود"
+
+msgid "Products List"
+msgstr "لیست محصولات"
+
+msgid "Products List: Not Found Message"
+msgstr "لیست محصولات: پیام یافت نشد"
+
+msgid "Products Loop"
+msgstr "حلقه محصوالات"
+
+msgid "Products Loop: Switcher Main Label"
+msgstr "حلقه محصولات: برچسب اصلی سوئیچر"
+
+msgid "Products Loop: Switcher Secondary Label"
+msgstr "حلقه محصولات: برچسب دوم سوئیچر"
+
+msgid "Products Navigation"
+msgstr "ناوبری محصولات"
+
+msgid "Products Navigation: Next Label"
+msgstr "ناوبری محصولات: برچسب بعدی"
+
+msgid "Products Navigation: Prev Label"
+msgstr "ناوبری محصولات: برچسب قبلی"
+
+msgid "Products Notices"
+msgstr "اطلاعیه های محصولات"
+
+msgid "Products Number"
+msgstr "تعداد محصولات"
+
+msgid "Products Ordering"
+msgstr "مرتب سازی محصولات"
+
+msgid "Products Page Title"
+msgstr "عنوان صفحه محصول"
+
+msgid "Products Pagination"
+msgstr "صفحه بندی محصولات"
+
+msgid "Products Pagination: Next Label"
+msgstr "صفحه بندی محصولات: برچسب بعدی"
+
+msgid "Products Pagination: Prev Label"
+msgstr "صفحه بندی محصولات: برچسب قبلی"
+
+msgid "Products Result Count"
+msgstr "تعداد نتایج محصولات"
+
+msgid "Products not found."
+msgstr "محصولات یافت نشد."
+
+msgid "Purchase Popup"
+msgstr "پاپ‌آپ خرید"
+
+msgid "Quantity"
+msgstr "تعداد"
+
+msgid "Quantity Input"
+msgstr "ورودی تعداد"
+
+msgid "Query ID"
+msgstr "شناسه کوئری"
+
+msgid "Query by"
+msgstr "کوئری براساس"
+
+msgid "Quick View"
+msgstr "مشاهده سریع"
+
+msgid "Quick View Button Order"
+msgstr "ترتیب دکمه نمایش سریع"
+
+msgid "Random"
+msgstr "تصادفي"
+
+msgid "Rated"
+msgstr "امتیاز دار"
+
+msgid "Rating"
+msgstr "امتیاز"
+
+msgid "Rating 1"
+msgstr "امتیاز 1"
+
+msgid "Rating 10"
+msgstr "امتیاز 10"
+
+msgid "Rating 11"
+msgstr "امتیاز 11"
+
+msgid "Rating 12"
+msgstr "امتیاز 12"
+
+msgid "Rating 13"
+msgstr "امتیاز 13"
+
+msgid "Rating 14"
+msgstr "امتیاز 14"
+
+msgid "Rating 2"
+msgstr "امتیاز 2"
+
+msgid "Rating 3"
+msgstr "امتیاز 3"
+
+msgid "Rating 4"
+msgstr "امتیاز 4"
+
+msgid "Rating 5"
+msgstr "امتیاز 5"
+
+msgid "Rating 6"
+msgstr "امتیاز 6"
+
+msgid "Rating 7"
+msgstr "امتیاز 7"
+
+msgid "Rating 8"
+msgstr "امتیاز 8"
+
+msgid "Rating 9"
+msgstr "امتیاز 9"
+
+msgid "Recently Viewed"
+msgstr "مشاهده اخیر"
+
+msgid "Register"
+msgstr "ثبت نام"
+
+msgid "Regular"
+msgstr "عادی"
+
+msgid "Related"
+msgstr "مرتبط"
+
+msgid "Related and Up-Sells Products Template"
+msgstr "قالب محصولات مرتبط و فروش بالا"
+
+msgid "Remember me"
+msgstr "مرا بخاطر داشته باش"
+
+msgid "Remove"
+msgstr "حذف"
+
+msgid "Remove Button"
+msgstr "دکمه حذف"
+
+msgid "Remove this item"
+msgstr "حذف آیتم"
+
+msgid "Required"
+msgstr "ضروری"
+
+msgid "Responsive Mobile Approach"
+msgstr "رویکرد رسپانسیو موبایل"
+
+msgid "Result Count"
+msgstr "تعداد نتیجه"
+
+msgid "Return to shop"
+msgstr "بازگشت به فروشگاه"
+
+msgid "Returning customer?"
+msgstr "قبلاً مشتری ما بوده اید ؟"
+
+msgid "Reviews Link"
+msgstr "لینک نظرات"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Right Indent"
+msgstr "تورفتگی راست"
+
+msgid "Right Offset"
+msgstr "افست راست"
+
+msgid "Row"
+msgstr "ردیف"
+
+msgid "Rows Gap"
+msgstr "شکاف ردیف‌ها"
+
+msgid "Rows Number"
+msgstr "شماره ردیف ها"
+
+msgid "SKU"
+msgstr "شناسه(SKU) محصول"
+
+msgid "Sale"
+msgstr "حراج"
+
+msgid "Sale Badge"
+msgstr "نشان حراج"
+
+msgid "Sale Flash"
+msgstr "فلش فروش ویژه"
+
+msgid "Sale!"
+msgstr "حراج!"
+
+msgid "Sales"
+msgstr "فروش"
+
+msgid ""
+"Sample Product for Editing (if not selected - will be used latest added)"
+msgstr ""
+"نمونه محصول برای ویرایش (در صورت عدم انتخاب - آخرین مورد اضافه شده استفاده "
+"خواهد شد)"
+
+msgid "Save changes"
+msgstr "ذخیره تغییرات"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره شد"
+
+msgid "Search Page Template"
+msgstr "قالب صفحه جستجو"
+
+msgid "Secondary"
+msgstr "ثانویه"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Select Field"
+msgstr "انتخاب فیلد"
+
+msgid "Select Layout Preset"
+msgstr "انتخاب طرح از پیش تنظیم شده"
+
+msgid "Select Product..."
+msgstr "انتخاب محصول..."
+
+msgid "Select Template..."
+msgstr "انتخاب قالب..."
+
+msgid "Select a template&hellip;"
+msgstr "انتخاب قالب&hellip;"
+
+msgid "Select render method"
+msgstr "انتخاب روش رندر"
+
+msgid ""
+"Select the template to use it as  a checkout top content template (E.g: "
+"Coupon form, login form etc.)"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب بالای محتوای صفحه تسویه حساب "
+"استفاده شود (مانند: فرم کدتخفیف ، فرم ورود و غیره)"
+
+msgid "Select the template to use it as  an empty cart template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب سبد خرید خالی استفاده شود"
+
+msgid "Select the template to use it as a cart template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب سبد خرید استفاده شود"
+
+msgid "Select the template to use it as a checkout template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب پرداخت استفاده شود"
+
+msgid "Select the template to use it as a global archive category template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب دسته بندی بایگانی عمومی استفاده "
+"شود"
+
+msgid "Select the template to use it as a global archive product template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب محصول بایگانی عمومی استفاده شود"
+
+msgid "Select the template to use it as a global cross-sells product template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب عمومی فروش متقابل استفاده شود"
+
+msgid "Select the template to use it as a global product shortcode template"
+msgstr ""
+"الگو را انتخاب کنید تا از آن به عنوان یک قالب کوتاه کد محصول عمومی استفاده "
+"شود"
+
+msgid "Select the template to use it as a global related products template"
+msgstr ""
+"الگو را انتخاب کنید تا از آن به عنوان قالب عمومی محصولات مرتبط استفاده شود"
+
+msgid "Select the template to use it as a global search page template"
+msgstr ""
+"الگو را انتخاب کنید تا از آن به عنوان قالب صفحه جستجوی عمومی استفاده شود"
+
+msgid "Select the template to use it as a global shop template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب عمومی فروشگاه استفاده شود"
+
+msgid "Select the template to use it as a global single product template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب تک محصول عمومی استفاده شود"
+
+msgid "Select the template to use it as a global wishlist product template."
+msgstr ""
+"تمپلیتی را که به عنوان قالب عمومی لیست علاقه مندی محصول استفاده شود، انتخاب "
+"کنید."
+
+msgid ""
+"Select the template to use it as a login page template (E.g: Registration "
+"form, login form etc.)"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب صفحه ورود استفاده شود (مانند فرم "
+"ثبت نام ، فرم ورود و غیره)"
+
+msgid "Select the template to use it as a my account dashboard template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب داشبورد حساب من استفاده شود"
+
+msgid ""
+"Select the template to use it as a my account downloads endpoint template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب نقطه پایانی دانلودهای حساب من "
+"استفاده شود"
+
+msgid ""
+"Select the template to use it as a my account edit account endpoint template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب نقطه پایان ویرایش حساب من استفاده "
+"شود"
+
+msgid ""
+"Select the template to use it as a my account edit address endpoint template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب نقطه پایانی آدرس های حساب من "
+"استفاده شود"
+
+msgid "Select the template to use it as a my account orders endpoint template"
+msgstr ""
+"قالب را انتخاب کنید تا از آن به عنوان قالب نقطه پایانی سفارشات حساب من "
+"استفاده شود"
+
+msgid "Select the template to use it as a my account template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب حساب من استفاده شود"
+
+msgid "Select the template to use it as a thank you template"
+msgstr "قالب را انتخاب کنید تا از آن به عنوان قالب تشکر استفاده کنید"
+
+msgid ""
+"Select widgets render method for archive product and archive category "
+"templates"
+msgstr ""
+"روش رندر ابزارک را برای قالب بایگانی محصول و دسته بندي بایگانی انتخاب کنید"
+
+msgid "Separate Box Sizes"
+msgstr "اندازه های جعبه جدا"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Set -1 to show full description and 0 to hide it."
+msgstr "-1 را برای نشان دادن توضیحات کامل و 0 را برای پنهان کردن تنظیم کنید."
+
+msgid "Set -1 to show full excerpt and 0 to hide it."
+msgstr "تنظیم -1 برای نشان دادن متن کامل و 0 برای پنهان کردن آن."
+
+msgid "Set -1 to show full short description and 0 to hide it."
+msgstr "-1 را برای نشان دادن توضیحات کامل و 0 را برای پنهان کردن تنظیم کنید."
+
+msgid "Set -1 to show full title and 0 to hide it."
+msgstr "-1 را برای نشان دادن عنوان کامل و 0 را برای پنهان کردن تنظیم کنید."
+
+msgid "Set 0 to show full categories list."
+msgstr "برای نمایش لیست کامل دسته بندی ها 0 را تنظیم کنید."
+
+msgid "Set 0 to show full list of categories."
+msgstr "برای نمایش لیست کامل دسته بندی ها 0 را تنظیم کنید."
+
+msgid "Set 0 to show full list of tags."
+msgstr "برای نمایش لیست کامل برچسب ها 0 را تنظیم کنید."
+
+msgid "Set 0 to show tags full list."
+msgstr "برای نمایش لیست کامل برچسب ها 0 را تنظیم کنید."
+
+msgid "Set Template Name"
+msgstr "تنظیم نام تمپلیت"
+
+msgid "Set comma separated IDs list (10, 22, 19 etc.)."
+msgstr "تنظیم لیست شناسه های جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Set comma separated categories IDs list (10, 22, 19 etc.)."
+msgstr "تنظیم لیست شناسه های دسته بندی جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Set comma separated post parents IDs list (10, 22, 19 etc.)."
+msgstr "تنظیم لیست شناسه های والد پست جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Set comma separated products IDs list (10, 22, 19 etc.)."
+msgstr "تنظیم لیست شناسه های محصولات جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Set comma separated taxonomies IDs list (10, 22, 19 etc.)."
+msgstr "تنظیم لیست شناسه های طبقه بندی جدا شده با کاما (10, 22, 19 غیره.)"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Ship to a different address?"
+msgstr "حمل و نقل به یک آدرس متفاوت؟"
+
+msgid "Shipping address"
+msgstr "آدرس حمل و نقل"
+
+msgid "Shop"
+msgstr "خرید"
+
+msgid "Shop Loop"
+msgstr "حلقه فروشگاه."
+
+msgid "Shop Page"
+msgstr "صفحه فروشگاه"
+
+msgid "Shop Product Widgets"
+msgstr "ابزارک های محصولات فروشگاه"
+
+msgid "Shop Template"
+msgstr "قالب فروشگاه"
+
+msgid "Short Description"
+msgstr "توضیحات کوتاه"
+
+msgid "Show"
+msgstr "نمایش"
+
+msgid "Show Counts"
+msgstr "نمایش تعداد"
+
+msgid "Show Empty Rating"
+msgstr "نمایش امتیاز خالی"
+
+msgid "Show Only Direct Descendants."
+msgstr "نمایش فقط فرزندان مستقیم."
+
+msgid "Show Quick View"
+msgstr "نمایش مشاهده سریع"
+
+msgid "Show View Cart Link"
+msgstr "نمایش لینک مشاهده سبد"
+
+msgid "Show in select"
+msgstr "نمایش در انتخاب"
+
+msgid "Show this if field value is empty"
+msgstr "اگر مقدار فیلد خالی است این را نشان دهید"
+
+msgid "Simulate Touch"
+msgstr "شبیه‌سازی کلیک"
+
+msgid "Single"
+msgstr "تکی"
+
+msgid "Single Add to Cart"
+msgstr "افزودن تکی به سبد خرید "
+
+msgid "Single Attributes"
+msgstr "ویژگی های تکی"
+
+msgid "Single Attributes: Heading"
+msgstr "ویژگی های تکی: هدینگ"
+
+msgid "Single Content"
+msgstr "محتوای تکی"
+
+msgid "Single Excerpt"
+msgstr "خلاصه تکی"
+
+msgid "Single Images"
+msgstr "تصاویر تکی"
+
+msgid "Single Meta"
+msgstr "متای تکی"
+
+msgid "Single Price"
+msgstr "قیمت تکی"
+
+msgid "Single Product"
+msgstr "تک محصول"
+
+msgid "Single Product Template"
+msgstr "قالب محصول تکی"
+
+msgid "Single Product Widgets"
+msgstr "ابزارک های محصول تکی"
+
+msgid "Single Rating"
+msgstr "امتیاز تکی"
+
+msgid "Single Rating: After Caption"
+msgstr "امتیاز تک : بعد کپشن"
+
+msgid "Single Rating: Before Caption"
+msgstr "امتیاز تک : قبل کپشن"
+
+msgid "Single Rating: Link URL"
+msgstr "امتیاز تک: آدرس URL لینک"
+
+msgid "Single Rating: Plural Caption"
+msgstr "امتیاز تک : کپشن مفرد"
+
+msgid "Single Rating: Singular Caption"
+msgstr "امتیاز تک : کپشن مفرد"
+
+msgid "Single Related Products"
+msgstr "محصولات مرتبط تکی"
+
+msgid "Single Reviews Form"
+msgstr "فرم نظرات تکی"
+
+msgid "Single Sale Badge"
+msgstr "نشان حراج تکی"
+
+msgid "Single Sale Badge: Badge Label"
+msgstr "نشان حراج تک: برچسب نشان"
+
+msgid "Single Sharing"
+msgstr "اشتراک گذاری تکی"
+
+msgid "Single Tabs"
+msgstr "تک زبانه ها"
+
+msgid "Single Title"
+msgstr "عنوان تکی"
+
+msgid "Single Upsells"
+msgstr "فروش بالا (Upsells) تکی"
+
+msgid "Singular Caption"
+msgstr "کپشن مفرد"
+
+msgid "Size"
+msgstr "اندازه"
+
+msgid "Slide"
+msgstr "اسلاید"
+
+msgid "Slide Bottom"
+msgstr "اسلاید پایین"
+
+msgid "Slide Left"
+msgstr "اسلاید به چپ"
+
+msgid "Slide Overflow"
+msgstr "سرریز اسلاید"
+
+msgid "Slide Right"
+msgstr "اسلاید به راست"
+
+msgid "Slide Top"
+msgstr "اسلاید به بالا"
+
+msgid "Slides Min Height"
+msgstr "حداقل ارتفاع اسلایدها"
+
+msgid "Slides to Scroll"
+msgstr "اسلایدها برای اسکرول"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه جت خود باید لایسنس را فعال کنید"
+
+msgid "Space Between"
+msgstr "فاصله بین"
+
+msgid "Specific IDs"
+msgstr "شناسه های خاص"
+
+msgid "Specific Next Arrow Styles"
+msgstr "استایل خاص پیکان بعدی"
+
+msgid "Specific Prev Arrow Styles"
+msgstr "استایل خاص پیکان قبلی"
+
+msgid "Star Color"
+msgstr "رنگ ستاره"
+
+msgid "Star Size"
+msgstr "اندازه ستاره"
+
+msgid "Stars"
+msgstr "ستاره"
+
+msgid "Stars Type"
+msgstr "نوع ستاره‌ها"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Update"
+msgstr "شروع بروزرسانی"
+
+msgid "State"
+msgstr "استان"
+
+msgid "State / County"
+msgstr "استان/شهرستان"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Stock Status"
+msgstr "وضعیت موجودی"
+
+msgid "Street address"
+msgstr "آدرس خيابان"
+
+msgid "Stretch"
+msgstr "کشیده"
+
+msgid "Striped"
+msgstr "راه راه"
+
+msgid "Style"
+msgstr "استایل"
+
+msgid "Styles"
+msgstr "استایل ها"
+
+msgid ""
+"Styles will be displayed in front of the template content. This will prevent "
+"jumps in styles during page load, but will affect the speed of its loading. "
+"This option will affect all custom templates."
+msgstr ""
+"استایل ها در فرانت محتوای قالب نمایش داده می شوند. این از پرش در استایل ها "
+"هنگام بارگذاری صفحه جلوگیری می کند ، اما در سرعت بارگذاری آن تأثیر می گذارد. "
+"این گزینه روی همه قالب های سفارشی تأثیر می گذارد."
+
+msgid "Sub"
+msgstr "زیر"
+
+msgid "Subtotal"
+msgstr "جمع جزء"
+
+msgid "Summary"
+msgstr "خلاصه"
+
+msgid "Super"
+msgstr "دربالاترین"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Switcher Buttons"
+msgstr "دکمه‌های سوئیچر"
+
+msgid "Switcher Wrapper"
+msgstr "بسته بندی سوئیچر"
+
+msgid "Table"
+msgstr "جدول"
+
+msgid "Table Cell"
+msgstr "سلول جدول"
+
+msgid "Table Cells"
+msgstr "سلول های جدول"
+
+msgid "Table Heading"
+msgstr "عنوان جدول"
+
+msgid "Table Headings"
+msgstr "عناوین جدول"
+
+msgid "Table Item"
+msgstr "آیتم جدول"
+
+msgid "Tabs"
+msgstr "زبانه‌ها"
+
+msgid "Tabs Control Width"
+msgstr "عرض کنترل زبانه ها"
+
+msgid "Tag"
+msgstr "برچسب"
+
+msgid "Tags"
+msgstr "برچسب ها"
+
+msgid "Tags Count"
+msgstr "تعداد برچسب ها"
+
+msgid "Taxonomy Slug"
+msgstr "نامک (Slug) طبقه بندی"
+
+msgid "Taxonomy Tiles"
+msgstr "کاشی های طبقه بندی"
+
+msgid "Taxonomy Tiles: After Count"
+msgstr "کاشی های طبقه بندی: بعد از تعداد"
+
+msgid "Taxonomy Tiles: Before Count"
+msgstr "کاشی های طبقه بندی: قبل از تعداد"
+
+msgid "Taxonomy Type"
+msgstr "نوع طبقه‌بندی"
+
+msgid "Taxonomy not found."
+msgstr "طبقه بندی یافت نشد."
+
+msgid "Template"
+msgstr "قالب"
+
+msgid "Template Columns"
+msgstr "ستون‌های قالب"
+
+msgid "Template Columns Horizontal Gutter (px)"
+msgstr "گاتر افقی ستونهای قالب (px)"
+
+msgid "Template Columns Vertical Gutter (px)"
+msgstr "گاتر عمودی ستونهای قالب (px)"
+
+msgid "Template Layout"
+msgstr "طرح بندي قالب"
+
+msgid "Template Name:"
+msgstr "نام قالب:"
+
+msgid "Template Settings"
+msgstr "تنظیمات قالب"
+
+msgid "Template Type"
+msgstr "نوع قالب"
+
+msgid "Text Alignment"
+msgstr "چینش متن"
+
+msgid "Text Bottom"
+msgstr "پایین متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text Decoration"
+msgstr "تزئینات متن"
+
+msgid "Text Top"
+msgstr "بالای متن"
+
+msgid "Textarea Height"
+msgstr "ارتفاع ناحیه متن"
+
+msgid "Thank You"
+msgstr "تشکر"
+
+msgid "Thank You Customer Address Details"
+msgstr "تشکر جزئیات آدرس مشتری"
+
+msgid "Thank You Order"
+msgstr "تشکر سفارش"
+
+msgid "Thank You Order Details"
+msgstr "تشکر جزئیات سفارش"
+
+msgid "Thank You Order: Date Table Heading"
+msgstr "پیام تشکر سفارش: پیام هدینگ تاریخ جدول"
+
+msgid "Thank You Order: Email Table Heading"
+msgstr "پیام تشکر سفارش: هدینگ ایمیل جدول"
+
+msgid "Thank You Order: Message"
+msgstr "پیام تشکر سفارش: پیام"
+
+msgid "Thank You Order: Order Table Heading"
+msgstr "پیام تشکر سفارش: هدینگ سفارش جدول"
+
+msgid "Thank You Order: Payment Method Table Heading"
+msgstr "تشکر سفارش : هدینگ جدول روش پرداخت"
+
+msgid "Thank You Order: Total Table Heading"
+msgstr "پیام تشکر سفارش: هدینگ کل سفارش جدول"
+
+msgid "Thank You Page"
+msgstr "صفحه تشکر"
+
+msgid "Thank You Page Widgets"
+msgstr "ابزارک های صفحه تشکر"
+
+msgid "Thank You Template"
+msgstr "قالب تشکر"
+
+msgid "Thank you. Your order has been received."
+msgstr "متشکریم، سفارش شما دریافت شد."
+
+msgid ""
+"The description is not prominent by default; however, some themes may show "
+"it."
+msgstr ""
+"توضیحات به طور پیش فرض برجسته نیست با این حال، برخی از قالب ها ممکن است آن "
+"را نشان دهند."
+
+msgid "The following addresses will be used on the checkout page by default."
+msgstr "آدرس زیر در صفحه پرداخت به طور پیش فرض استفاده می شود."
+
+msgid ""
+"The names of the hooks are based on the location of the elements in the "
+"default WooCommerce templates."
+msgstr "نام هوک ها بر اساس مکان المانها در تمپلیت های پیش فرض ووکامرس است."
+
+msgid "The selected custom template will be applied to this term archive."
+msgstr "تمپلیت سفارشی انتخاب شده در این آرشیو شرایط اعمال خواهد شد."
+
+msgid ""
+"The style and view of this widget is often affected by your theme and "
+"plugins. If you experience any such issue, try to switch to a basic theme "
+"and deactivate related plugins."
+msgstr ""
+"استایل این ابزارک اغلب تحت تأثیر قالب و افزونه های شما قرار دارد. اگر چنین "
+"مسئله ای را تجربه کردید ، سعی کنید به یک قالب ساده تغییر دهید و افزونه های "
+"مرتبط را غیرفعال کنید."
+
+msgid "These buttons only become visible when your order is considered failed."
+msgstr ""
+"این دکمه ها تنها زمانی قابل مشاهده می شوند که سفارش شما ناموفق تلقی شود."
+
+msgid ""
+"These widgets will be available when editing the archive category template"
+msgstr "این ابزارک ها هنگام ویرایش قالب دسته بندی بایگانی در دسترس خواهند بود"
+
+msgid ""
+"These widgets will be available when editing the archive product template"
+msgstr "این ابزارک ها هنگام ویرایش قالب بایگانی محصول در دسترس خواهند بود"
+
+msgid "These widgets will be available when editing the cart template"
+msgstr "این ابزارک ها هنگام ویرایش قالب سبد خرید در دسترس خواهند بود"
+
+msgid "These widgets will be available when editing the checkout template"
+msgstr "این ابزارک ها هنگام ویرایش قالب پرداخت در دسترس خواهند بود"
+
+msgid ""
+"These widgets will be available when editing the my account page template"
+msgstr "این ابزارک ها هنگام ویرایش قالب صفحه حساب من در دسترس خواهند بود"
+
+msgid ""
+"These widgets will be available when editing the product single template"
+msgstr "این ابزارک ها هنگام ویرایش قالب محصول تک در دسترس خواهند بود"
+
+msgid "These widgets will be available when editing the shop page"
+msgstr "این ابزارک ها هنگام ویرایش صفحه فروشگاه در دسترس خواهند بود"
+
+msgid ""
+"These widgets will be available when editing the thank you page template"
+msgstr "این ابزارک ها هنگام ویرایش قالب صفحه تشکر در دسترس خواهند بود"
+
+msgid "This Template For:"
+msgstr "این تمپلیت برای:"
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+"این لایسنس، مجوزها را برای تمام افزونه های موجود در این مجموعه فعال می کند."
+
+msgid ""
+"This option enables default WooCommerce styles for 'Add to Cart' ajax button "
+"('Loading' and 'Added' statements)"
+msgstr ""
+"این گزینه استایل های پیش فرض ووکامرس را برای دکمه (افزودن به سبد خرید) آژاکس "
+"(عبارات (بارگیری) و (اضافه شده)) فعال می کند"
+
+msgid ""
+"This option works only on the products archive pages, and allows you to "
+"display products for current categories, tags and taxonomies."
+msgstr ""
+"این گزینه فقط در صفحه بایگانی فروشگاه کار می کند و به شما امکان می دهد "
+"محصولات را برای دسته های فعلی ، برچسب ها و طبقه بندی ها نمایش دهید."
+
+msgid ""
+"This option works with widgets that add products to the cart using AJAX "
+"request."
+msgstr ""
+"این گزینه با ویجت هایی کار می کند که محصولات را با استفاده از درخواست آجاکس "
+"به سبد خرید اضافه می کنند."
+
+msgid "This template includes the header, full-width content and footer"
+msgstr "این الگو شامل هدر، محتوای تمام عرض و فوتر است"
+
+msgid "This template not registered"
+msgstr "این قالب ثبت نشده است"
+
+msgid ""
+"This will be how your name will be displayed in the account section and in "
+"reviews"
+msgstr "به این ترتیب نام شما در قسمت حساب و نظر ها نمایش داده می شود"
+
+msgid "Thumbnail"
+msgstr "بند انگشتی"
+
+msgid "Thumbnail Effect"
+msgstr "افکت بندانگشتی"
+
+msgid "Thumbnail Position"
+msgstr "موقعیت تصویر بندانگشتی"
+
+msgid "Thumbnail Size"
+msgstr "اندازه بندانگشتی"
+
+msgid "Thumbnails"
+msgstr "بندانگشتی ها"
+
+msgid "Tile"
+msgstr "کاشی"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Title HTML Tag"
+msgstr "برچسب HTML عنوان"
+
+msgid "Title Length"
+msgstr "طول عنوان"
+
+msgid "Toggle"
+msgstr "تاگل"
+
+msgid "Toggle Link"
+msgstr "لینک تغییر وضعیت"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Top Indent"
+msgstr "تورفتگی بالا"
+
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgid "Top Offset"
+msgstr "افست بالا"
+
+msgid "Top Rated"
+msgstr "برترین ها"
+
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgid "Total"
+msgstr "کل"
+
+msgid "Total:"
+msgstr "جمع:"
+
+msgid "Town / City"
+msgstr "شهر"
+
+msgid "Trim Type"
+msgstr "نوع تقسیم"
+
+msgid "Trimmed After"
+msgstr "تقسیم بعد از"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typography"
+msgstr "تایپوگرافی"
+
+msgid "URL"
+msgstr "آدرس URL"
+
+msgid "Underline"
+msgstr "زیر خط"
+
+msgid ""
+"Unfortunately your order cannot be processed as the originating bank/"
+"merchant has declined your transaction. Please attempt your purchase again."
+msgstr ""
+"متاسفانه پردازش سفارش شما ممکن نیست. درگاه پرداخت (بانک) انتخاب شده، این "
+"پرداخت را نپذیرفت. لطفا دوباره خرید خود را تکرار کنید."
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Up Sells"
+msgstr "فروش بالا (Up Sells)"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Button"
+msgstr "دکمه بروزرسانی"
+
+msgid "Update Cart"
+msgstr "بروز رسانی سبد خرید"
+
+msgid "Update Cart Automatically"
+msgstr "به روزرسانی سبد"
+
+msgid "Update Now"
+msgstr "اکنون بروز رسانی کنید"
+
+msgid "Update complete, thank you for updating to the latest version!"
+msgstr "به روزرسانی کامل شد ، از شما برای به روزرسانی به آخرین نسخه متشکریم!"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid ""
+"Use %percentage_sale% and %numeric_sale% macros to display a withdrawal of "
+"discounts as a percentage or numeric of the initial price."
+msgstr ""
+"برای نمایش تخفیف ها به عنوان درصد یا عدد نسبت به قیمت اولیه ، از ماکروهای "
+"%percentage_sale% و  %numeric_sale% استفاده کنید."
+
+msgid "Use AJAX Add to Cart"
+msgstr "استفاده سبد خرید آژاکس"
+
+msgid "Use Current Query"
+msgstr "استفاده از کوئری فعلی"
+
+msgid "Use Icon?"
+msgstr "استفاده از آیکن؟"
+
+msgid "Use Native Templates"
+msgstr "استفاده از قالب بومی"
+
+msgid "Use default ajax add to cart styles"
+msgstr "استایل پیشفرض آژاکس افزودن به سبد خرید "
+
+msgid "Use this widget for display My Account Page Endpoints."
+msgstr "از این ابزارک برای نمایش نقاط پایانی صفحه حساب من استفاده کنید."
+
+msgid ""
+"Use this widget in combination with one of Woocommerce Product Social Share "
+"plugins."
+msgstr ""
+"از این ابزارک در ترکیب با یکی از افزونه های اشتراک گذاری محصول ووکامرس "
+"استفاده کنید."
+
+msgid "Username"
+msgstr "نام کاربری"
+
+msgid "Username or email"
+msgstr "نام کاربری یا ایمیل"
+
+msgid "Username or email address"
+msgstr "نام کاربری یا آدرس ایمیل"
+
+msgid "Validation"
+msgstr "تاييد"
+
+msgid "Value"
+msgstr "مقدار"
+
+msgid "Variation Description"
+msgstr "توضیحات متغیر"
+
+msgid "Variation Reset"
+msgstr "ریست متغیر"
+
+msgid "Variations"
+msgstr "متغیر‌ها"
+
+msgid "Velocity"
+msgstr "سرعت"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Vertical Alignment"
+msgstr "چینش عمودی"
+
+msgid "Vertical Position"
+msgstr "موقعیت عمودی"
+
+msgid "Vertical Position by"
+msgstr "موقعیت عمودی در"
+
+msgid "Vertical Thumbnails Width"
+msgstr "عرض بند انگشتی عمودی"
+
+msgid "View Cart"
+msgstr " مشاهده سبد "
+
+msgid "We need to update your database to the latest version."
+msgstr "ما باید پایگاه داده شما را به آخرین نسخه به روز کنیم."
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Wide"
+msgstr "عريض"
+
+msgid "Widgets"
+msgstr "ابزارک ها"
+
+msgid "Widgets Render Method"
+msgstr "روش رندر ابزارک"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "Width (%)"
+msgstr "عرض (%)"
+
+msgid "Wishlist Product Template"
+msgstr "قالب علاقه مندی محصول"
+
+msgid "Woo Page Builder"
+msgstr "صفحه ساز ووکامرس"
+
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+msgid "Woocommerce Actions"
+msgstr "اقدامات ووکامرس"
+
+msgid "Words"
+msgstr "کلمات"
+
+msgid "Words Count"
+msgstr "تعداد کلمات"
+
+msgid "Works only with AJAX add to cart."
+msgstr "فقط با افزودن به سبد خرید آجاکس کار می کند ."
+
+msgid "Works only with main Query object."
+msgstr "فقط با آبجکت کوئری اصلی کار می کند."
+
+msgid "Wrapper"
+msgstr "پوشاننده"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You don't have permissions to do this"
+msgstr "شما مجوز کافی برای انجام این کار ندارید"
+
+msgid "You have not set up this type of address yet."
+msgstr "شما هنوز هیچ آدرسی ثبت نکرده اید."
+
+msgid "You may be interested in..."
+msgstr "ممکن است شما علاقه مند باشید..."
+
+msgid "You must be logged in to checkout."
+msgstr "شما باید  برای پرداخت وارد سایت شوید."
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های جت نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Your license has been activated!"
+msgstr "لایسنس شما فعال شده است!"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid "Your order"
+msgstr "سفارش شما"
+
+msgid "Your order has been received."
+msgstr "سفارش شما دریافت شد."
+
+msgid ""
+"Your perfect asset in creating WooCommerce page templates using loads of "
+"special widgets & stylish page layouts"
+msgstr ""
+"ابزارهای کامل برای ایجاد قالب های صفحه ووکامرس با استفاده از تعداد زیادی "
+"ابزارک ویژه و صفحه آرایی شیک"
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اصلی شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "customer review"
+msgstr "نظر مشتری"
+
+msgid "customer reviews"
+msgstr "نظر مشتری"
+
+msgid "div"
+msgstr "div"
+
+msgctxt "hash before order number"
+msgid "#"
+msgstr "#"
+
+msgid "here"
+msgstr "اینجا"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetwoobuilder/"
+msgstr "https://crocoblock.com/plugins/jetwoobuilder/"
+
+msgid "https://your-link.com"
+msgstr "https://your-link.com"
+
+msgid "p"
+msgstr "p"
+
+msgid "span"
+msgstr "span"

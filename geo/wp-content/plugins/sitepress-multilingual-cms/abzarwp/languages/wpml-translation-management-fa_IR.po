@@ -1,0 +1,5148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPML Translation Management\n"
+"POT-Creation-Date: 2021-01-13 17:43+0330\n"
+"PO-Revision-Date: 2021-01-18 23:56+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: plugin.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: classes/AJAX/class-wpml-tm-ajax.php:22
+msgid "You have attempted to submit data in a not legit way."
+msgstr "شما سعی کرده اید داده ها را به روشی غیر قانونی ارسال کنید."
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-job-progress.php:43
+#, php-format
+msgctxt "Translation jobs list"
+msgid "%s completed"
+msgstr "%s کامل شد"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:9
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:25
+msgid "ID"
+msgstr "شناسه"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:10
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:26
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:231
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:99
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:74
+#: classes/menu/translation-editor/fields/model/class-wpml-editor-ui-field-image.php:15
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:58
+#: classes/translation-jobs/ExtraFieldDataInEditor.php:89
+#: menu/wpml-tm-menus-management.php:601
+msgid "Title"
+msgstr "عنوان"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:11
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:77
+msgid "Languages"
+msgstr "زبان ها"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:12
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:27
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:100
+msgid "Batch name"
+msgstr "نام دسته"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:13
+msgid "Translated by"
+msgstr "ترجمه شده توسط"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:14
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:29
+msgid "Sent on"
+msgstr "ارسال شده در"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:15
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:30
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:62
+msgid "Deadline"
+msgstr "مهلت"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:16
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:31
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:76
+msgid "Status"
+msgstr "وضعیت"
+
+#. translators: The word "Language" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-columns.php:28
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:60
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:124
+msgid "Language"
+msgstr "زبان"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-element-info.php:83
+msgid "String package job"
+msgstr "کار بسته رشته"
+
+#: classes/API/REST/jobs/class-wpml-tm-rest-jobs-translation-service.php:28
+msgid "Local"
+msgstr "محلی"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-api-error.php:11
+#, php-format
+msgid "There was a problem communicating with ATE: %s "
+msgstr "مشکلی در برقراری ارتباط با ATE وجود داشت: %s "
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:171
+#, php-format
+msgid "%1$s jobs added to the Advanced Translation Editor."
+msgstr "%1$s شغل به ویرایشگر پیشرفته ترجمه اضافه شد."
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:177
+msgid ""
+"Jobs could not be created in Advanced Translation Editor. Please try again "
+"or contact the WPML support for help."
+msgstr ""
+"مشاغل نمی توانند در ویاریشگر ترجمه حرفه ای ایجاد شوند. لطفاً دوباره امتحان "
+"کنید یا برای راهنمایی با پشتیبانی WPML تماس بگیرید."
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:511
+msgid "Resend that email"
+msgstr "ارسال مجدد آن ایمیل"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:514
+msgid ""
+"WPML cannot send these documents to translation because the Advanced "
+"Translation Editor is not fully set-up yet."
+msgstr ""
+"WPML نمی تواند این اسناد را به ترجمه ارسال کند زیرا ویرایشگر پیشرفته ترجمه "
+"هنوز به طور کامل تنظیم نشده است."
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:516
+msgid ""
+"Please open the confirmation email that you received and click on the link "
+"inside it to confirm your email."
+msgstr ""
+"لطفاً ایمیل تأییدی را که دریافت کرده اید باز کرده و روی پیوند موجود در آن "
+"کلیک کنید تا ایمیل خود را تأیید کنید."
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-actions.php:525
+msgid "Advanced Translation Editor error:"
+msgstr "خطای ویرایشگر ترجمه پیشرفته:"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-sync-script-loader.php:71
+msgid "Processing translation (could take a few minutes)"
+msgstr "پردازش ترجمه (ممکن است چند دقیقه طول بکشد)"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-jobs-sync-script-loader.php:74
+msgid "Processing translation"
+msgstr "در حال پردازش ترجمه"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:33
+msgid ""
+"This site can use WPML's Advanced Translation Editor, but you did not "
+"receive permission to use it. You are still translating with WPML's classic "
+"translation editor. Please ask your site's Translation Manager to enable the "
+"Advanced Translation Editor for you."
+msgstr ""
+"این سایت می تواند از ویرایشگر پیشرفته ترجمه WPML استفاده کند ، اما شما اجازه "
+"استفاده از آن را دریافت نکردید. شما هنوز با ویرایشگر ترجمه کلاسیک WPML در "
+"حال ترجمه هستید. لطفاً از مدیر ترجمه سایت خود بخواهید ویرایشگر پیشرفته ترجمه "
+"را برای شما فعال کند."
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:34
+msgid "Learn more about WPML's Advanced Translation Editor"
+msgstr "درباره ویرایشگر ترجمه پیشرفته WPML بیشتر بدانید"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:35
+msgid "Advanced Translation Editor is disabled."
+msgstr "ویرایشگر ترجمه پیشرفته غیر فعال است."
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:36
+msgid "More"
+msgstr "بیشتر"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:37
+msgid "Request activation from"
+msgstr "درخواست فعالسازی از"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:59
+msgid "Minimize"
+msgstr "به حداقل برسانید"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:109
+#: classes/menu/translation-roles/class-wpml-translation-roles-ajax-actions.php:96
+#, php-format
+msgid "An email has been sent to %s"
+msgstr "ایمیل ای به %s ارسال شده است"
+
+#: classes/ATE/Hooks/class-wpml-tm-ate-translator-message-classic-editor.php:114
+#, php-format
+msgid "Sorry, the email could not be sent to %s for an unknown reason."
+msgstr "متأسفیم ، به دلیل نامشخصی نمی توان ایمیل را به %s  ارسال کرد."
+
+#: classes/ATE/Hooks/class-wpml-tm-old-editor.php:31
+msgid ""
+"You activated the Advanced Translation Editor for this site, but you are "
+"updating an old translation. WPML opened the Standard Translation Editor, so "
+"you can update this translation. When you translate new content, you'll get "
+"the Advanced Translation Editor with all its features. To change your "
+"settings, go to WPML Settings."
+msgstr ""
+"شما ویرایشگر پیشرفته ترجمه را برای این سایت فعال کردید ، اما در حال به "
+"روزرسانی ترجمه قدیمی هستید. WPML ویرایشگر ترجمه استاندارد را باز کرد ، "
+"بنابراین می توانید این ترجمه را به روز کنید. هنگام ترجمه محتوای جدید ، "
+"ویرایشگر پیشرفته ترجمه را با تمام ویژگی های خود دریافت خواهید کرد. برای "
+"تغییر تنظیمات خود ، به تنظیمات WPML بروید."
+
+#: classes/ATE/Log/Hooks.php:28 classes/ATE/Log/View.php:34
+msgid "Advanced Translation Editor Error Logs"
+msgstr "گزارش های خطای ویرایشگر ترجمه پیشرفته"
+
+#: classes/ATE/Log/View.php:20
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:396
+msgid "Advanced Translation Editor"
+msgstr "ویرایشگر ترجمه پیشرفته"
+
+#: classes/ATE/Log/View.php:24
+#, php-format
+msgid "Error Logs (%d)"
+msgstr "خطای ورود به سیستم (%d)"
+
+#: classes/ATE/Log/View.php:58
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:50
+#: menu/wpml-tm-menus-management.php:639
+msgid "Date"
+msgstr "تاریخ"
+
+#: classes/ATE/Log/View.php:61
+msgid "Event"
+msgstr "رویداد"
+
+#: classes/ATE/Log/View.php:64
+#: classes/menu/translation-editor/fields/model/class-wpml-editor-ui-field-image.php:18
+#: classes/menu/translation-services/MainLayoutTemplate.php:72
+msgid "Description"
+msgstr "توضیحات"
+
+#: classes/ATE/Log/View.php:67
+msgid "WPML Job ID"
+msgstr "شناسه شغلی WPML"
+
+#: classes/ATE/Log/View.php:70
+msgid "ATE Job ID"
+msgstr "شناسه شغلی ATE"
+
+#: classes/ATE/Log/View.php:73
+msgid "Extra data"
+msgstr "داده اضافی"
+
+#: classes/ATE/Log/View.php:108
+msgid "No entries"
+msgstr "بدون ورودی"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:72
+msgid "ICanLocalize migration could not complete"
+msgstr "ICanLocalize مهاجرت کامل نشد"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:76
+msgid ""
+"WPML needs to update your connection to ICanLocalize, but could not complete "
+"the change."
+msgstr ""
+"WPML باید اتصال شما را با ICanLocalize به روز کند ، اما نمی تواند تغییر را "
+"کامل کند."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:83
+msgid ""
+"Please contact WPML support and give them the following debug information:"
+msgstr ""
+"لطفاً با پشتیبانی WPML تماس بگیرید و اطلاعات اشکال زدایی زیر را به آنها بدهید:"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:94
+#, php-format
+msgid "Failed step: %s"
+msgstr "مرحله ناموفق: %s"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:109
+msgid ""
+"Please wait a few minutes and try again to see if there’s a temporary "
+"problem."
+msgstr ""
+"لطفاً چند دقیقه صبر کنید و دوباره امتحان کنید تا ببینید آیا مشکلی موقتی وجود "
+"دارد."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:116
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-support.php:77
+msgid "Try again"
+msgstr "دوباره تلاش کنید"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:137
+msgid "WPML Support"
+msgstr "پشتیبانی WPML"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:155
+msgid "Error details"
+msgstr "جزئیات خطا"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:177
+msgid "Ask us"
+msgstr "از ما بپرسید"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:180
+msgid "Start the update"
+msgstr "به روزرسانی را شروع کنید"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:185
+msgid ""
+"WPML 3.9 changes the way it works with ICanLocalize. This requires WPML to "
+"move to a new interface with ICanLocalize."
+msgstr ""
+"WPML 3.9 نحوه کار با ICanLocalize را تغییر می دهد. این کار به WPML نیاز دارد "
+"تا با ICanLocalize به رابط کاربری جدیدی منتقل شود."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:189
+msgid ""
+"If you are in a production site, you have to run this update before you can "
+"send more content for translation and receive completed translations."
+msgstr ""
+"اگر در یک سایت تولیدی هستید ، قبل از ارسال محتوای بیشتر برای ترجمه و دریافت "
+"ترجمه های کامل ، باید این به روزرسانی را اجرا کنید."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:193
+msgid ""
+"If this is not your production site (it's a staging or testing site), please "
+"do not run the update."
+msgstr ""
+"اگر این سایت تولید شما نیست (یک سایت صحنه سازی یا آزمایش است) ، لطفاً به "
+"روزرسانی را اجرا نکنید."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:197
+msgid ""
+"Running this update on a non-production site will make it impossible to "
+"correctly run it on the production site."
+msgstr ""
+"اجرای این به روزرسانی در یک سایت غیر تولیدی ، اجرای صحیح آن را در سایت تولید "
+"غیرممکن می کند."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:201
+#, php-format
+msgid "Not sure? %s."
+msgstr "مطمئن نیستید؟ %s."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:242
+msgid ""
+"WPML updated your connection to ICanLocalize. You can continue sending "
+"content to translation."
+msgstr ""
+"WPML اتصال شما را به ICanLocalize به روز کرد. می توانید به ارسال محتوا به "
+"ترجمه ادامه دهید."
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-notices.php:276
+msgid "This is indeed my production site"
+msgstr "این در واقع سایت تولید من است"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-support.php:65
+msgid "Migration to ICL 2.0"
+msgstr "مهاجرت به ICL 2.0"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-support.php:67
+msgid "Number of attempts made"
+msgstr "تعداد تلاش های انجام شده"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-support.php:69
+msgid "Last attempt was on"
+msgstr "آخرین تلاش در"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-support.php:72
+msgid "Last error"
+msgstr "آخرین خطا"
+
+#: classes/ICL-20-migration/ui/class-wpml-tm-icl20-migration-support.php:91
+msgid "Rollback migration (use at your own risk!)"
+msgstr "مهاجرت بازگشت (استفاده از خود شما!)"
+
+#: classes/admin-bar/Hooks.php:41
+msgid "Edit Translation"
+msgstr "ترجمه را ویرایش کنید"
+
+#: classes/class-wpml-tm-api.php:27
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:209
+#: classes/wpml-st/class-wpml-remote-string-translation.php:11
+msgid "Not translated"
+msgstr "ترجمه نشده"
+
+#: classes/class-wpml-tm-api.php:31
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:212
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-status-names.php:10
+msgid "Waiting for translator"
+msgstr "منتظر مترجم"
+
+#: classes/class-wpml-tm-api.php:36
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:215
+msgid "In basket"
+msgstr "در سبد"
+
+#: classes/class-wpml-tm-api.php:40
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:218
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-status-names.php:11
+msgid "In progress"
+msgstr "در حال پیش رفت"
+
+#: classes/class-wpml-tm-api.php:44
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:231
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:39
+msgid "Duplicate"
+msgstr "کپی کردن"
+
+#: classes/class-wpml-tm-api.php:48
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:234
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:450
+msgid "Complete"
+msgstr "کامل"
+
+#: classes/class-wpml-tm-api.php:52
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:237
+msgid "needs update"
+msgstr "نیاز به بروزرسانی دارد"
+
+#: classes/class-wpml-tm-promotions.php:36
+#, php-format
+msgid ""
+"Looks like you are running a multilingual WooCommerce site. To easily "
+"translate WooCommerce products and categories, you should use %s"
+msgstr ""
+"به نظر می رسد شما در حال اجرای یک سایت ووکامرس چند زبانه هستید. برای ترجمه "
+"آسان محصولات و دسته های ووکامرس ، باید از %s استفاده کنید"
+
+#: classes/class-wpml-tm-requirements.php:65
+msgid ""
+"WPML Translation Management requires the following PHP extensions and "
+"settings:"
+msgstr "مدیریت ترجمه WPML به پسوندها و تنظیمات PHP زیر نیاز دارد:"
+
+#: classes/class-wpml-tm-requirements.php:98
+msgid "PHP Setting"
+msgstr "تنظیمات PHP"
+
+#: classes/class-wpml-tm-requirements.php:105
+msgid "PHP Extension"
+msgstr "پسوند PHP"
+
+#: classes/class-wpml-tm-requirements.php:129
+msgid "and"
+msgstr "و"
+
+#: classes/class-wpml-tm-requirements.php:136
+#, php-format
+msgid ""
+"WPML Translation Management is enabled but not effective. It requires %s in "
+"order to work."
+msgstr ""
+"WPML ترجمه مدیریت فعال است اما موثر نیست. برای کار کردن به %s نیاز دارد."
+
+#: classes/class-wpml-tm-service-activation-ajax.php:92
+msgctxt "Incomplete local jobs after TS activation: [response] 00 Title"
+msgid "Incomplete local translation jobs"
+msgstr "کار ترجمه محلی ناقص است"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:93
+msgctxt "Incomplete local jobs after TS activation: [response] 01 Cancelled"
+msgid "Cancelled local translation jobs:"
+msgstr "کار ترجمه محلی لغو شد:"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:94
+msgctxt "Incomplete local jobs after TS activation: [response] 02 Open"
+msgid "Open local translation jobs:"
+msgstr "مشاغل ترجمه محلی را باز کنید:"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:95
+msgctxt "Incomplete local jobs after TS activation: [response] 03 Error"
+msgid "Unable to cancel some or all jobs"
+msgstr "لغو برخی یا همه مشاغل امکان پذیر نیست"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:96
+msgctxt "Incomplete local jobs after TS activation: [response] 04 Error"
+msgid "Unable to complete the action"
+msgstr "انجام عملیات ممکن نیست"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:97
+msgctxt "Incomplete local jobs after TS activation: [response] 10 Close button"
+msgid "Local translation jobs will be kept and the above notice hidden."
+msgstr "کارهای ترجمه محلی حفظ می شوند و اخطار فوق پنهان می شود."
+
+#: classes/class-wpml-tm-service-activation-ajax.php:98
+msgctxt "Incomplete local jobs after TS activation: [response] 20 Close button"
+msgid "Close"
+msgstr "بستن"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:99
+msgctxt "Incomplete local jobs after TS activation: [confirmation] 01 Message"
+msgid "Are you sure you want to do this?"
+msgstr "آیا مطمئنید که می خواهید این کار را انجام دهید؟"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:100
+msgctxt "Incomplete local jobs after TS activation: [confirmation] 01 Yes"
+msgid "Yes"
+msgstr "بله"
+
+#: classes/class-wpml-tm-service-activation-ajax.php:101
+msgctxt "Incomplete local jobs after TS activation: [confirmation] 01 No"
+msgid "No"
+msgstr "خیر"
+
+#: classes/class-wpml-tm-translators-dropdown.php:71
+#: classes/class-wpml-tm-translators-dropdown.php:91
+#: classes/class-wpml-tm-translators-dropdown.php:111
+msgid "First available"
+msgstr "اولین بار در دسترس است"
+
+#: classes/class-wpml-tm-translators-dropdown.php:148
+msgid "Translation Proxy error"
+msgstr "خطای پروکسی ترجمه"
+
+#: classes/class-wpml-tm-translators-dropdown.php:150
+msgid "Error"
+msgstr "خطا"
+
+#: classes/class-wpml-tm-translators-dropdown.php:154
+msgid "Translation jobs for:"
+msgstr "مشاغل ترجمه برای :"
+
+#: classes/class-wpml-tm-troubleshooting-clear-ts-ui.php:9
+msgid "Show other professional translation options"
+msgstr "سایر گزینه های ترجمه حرفه ای را نشان دهید"
+
+#: classes/class-wpml-tm-troubleshooting-clear-ts-ui.php:10
+msgid "Enable other translation services"
+msgstr "سایر خدمات ترجمه را فعال کنید"
+
+#: classes/class-wpml-tm-troubleshooting-clear-ts-ui.php:11
+#, php-format
+msgid ""
+"Your site is currently configured to use only %s as its professional "
+"translation service."
+msgstr ""
+"سایت شما در حال حاضر پیکربندی شده است تا فقط %s را به عنوان سرویس ترجمه حرفه "
+"ای خود استفاده کند."
+
+#: classes/class-wpml-tm-troubleshooting-clear-ts.php:26
+msgid "Ok!"
+msgstr "قبول!"
+
+#: classes/class-wpml-tm-troubleshooting-clear-ts.php:28
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config.php:122
+msgid "You can't do that!"
+msgstr "شما نمی توانید چنین کاری کنید!"
+
+#: classes/class-wpml-translation-job-factory.php:266
+#: inc/translation-jobs/jobs/wpml-element-translation-job.class.php:23
+msgid "The original has been deleted!"
+msgstr "اصل حذف شده است!"
+
+#: classes/class-wpml-translation-job-factory.php:271
+#: classes/emails/wpml-tm-mail-notification.php:433
+msgid "Deleted"
+msgstr "حذف شده"
+
+#: classes/class-wpml-translation-job-factory.php:409
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:55
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:110
+msgid "Strings"
+msgstr "رشته ها"
+
+#: classes/class-wpml-translation-management.php:229
+#: inc/translation-proxy/translationproxy.class.php:169
+#: inc/translation-proxy/translationproxy.class.php:171
+#: inc/translation-proxy/translationproxy.class.php:364
+msgid "Translation Service"
+msgstr "سرویس ترجمه"
+
+#: classes/class-wpml-translation-management.php:237
+#: classes/translation-basket/wpml-tm-translation-basket-dialog-view.php:34
+msgid "Done"
+msgstr "انجام شد"
+
+#: classes/class-wpml-translation-management.php:238
+#, php-format
+msgid "%s requires additional data"
+msgstr "%s به داده های اضافی نیاز دارد"
+
+#: classes/class-wpml-translation-management.php:239
+#, php-format
+msgid "You can find this at %s site"
+msgstr "این را می توانید در سایت %s پیدا کنید"
+
+#: classes/class-wpml-translation-management.php:244
+msgid "No matches"
+msgstr "هیچ بازی"
+
+#: classes/class-wpml-translation-management.php:245
+msgid "User found"
+msgstr "کاربر پیدا شد"
+
+#: classes/class-wpml-translation-management.php:321
+#, php-format
+msgid ""
+"WPML Translation Management is enabled but not effective. It requires <a "
+"href=\"%s\">WPML</a> in order to work."
+msgstr ""
+"WPML ترجمه مدیریت فعال است اما موثر نیست. برای کار کردن به <a href=\"%s"
+"\">WPML</a> نیاز دارد."
+
+#: classes/class-wpml-translation-management.php:332
+msgid ""
+"WPML Translation Management is enabled but not effective. Please finish the "
+"installation of WPML first."
+msgstr ""
+"WPML ترجمه مدیریت فعال است اما موثر نیست. لطفاً ابتدا نصب WPML را به پایان "
+"برسانید."
+
+#: classes/class-wpml-translation-management.php:341
+#, php-format
+msgid ""
+"WPML Translation Management is enabled but not effective. It is not "
+"compatible with  <a href=\"%s\">WPML</a> versions prior 2.0.5."
+msgstr ""
+"WPML ترجمه مدیریت فعال است اما موثر نیست. با نسخه های قبل از 2.0.5 2.0 <a "
+"href=\"%s\">WPML</a> سازگار نیست."
+
+#: classes/class-wpml-translation-management.php:351
+msgid "Translation saved."
+msgstr "ترجمه ذخیره شد."
+
+#: classes/class-wpml-translation-management.php:357
+msgid "Translation cancelled."
+msgstr "ترجمه لغو شد."
+
+#. translators: "Translation Management" will be used in other strings and wrapped with HTML tags to make it a link to external documentation
+#: classes/class-wpml-translation-management.php:368
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:166
+#: menu/wpml-tm-menus-management.php:63
+msgid "Translation Management"
+msgstr "مدیریت ترجمه"
+
+#: classes/class-wpml-translation-management.php:408
+#: classes/class-wpml-translation-management.php:409
+msgid "Translations"
+msgstr "ترجمه ها"
+
+#: classes/class-wpml-translation-management.php:454
+#: menu/wpml-tm-menus-settings.php:77
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: classes/class-wpml-translation-management.php:490
+msgid "Configure"
+msgstr "پیکربندی"
+
+#: classes/class-wpml-translation-management.php:630
+msgid "Translation Services Tab"
+msgstr "زبانه سرویس های ترجمه"
+
+#: classes/class-wpml-translation-management.php:631
+msgid "Translators Tab"
+msgstr "زبانه مترجمان"
+
+#. translators: Translation Management wizard - Shown after selecting a translation service.
+#: classes/class-wpml-translation-management.php:643
+#: classes/menu/translation-services/ActiveServiceTemplate.php:77
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:114
+msgid "Authenticate"
+msgstr "اعتبار دادن"
+
+#: classes/class-wpml-translation-management.php:647
+#: classes/menu/translation-services/ActiveServiceTemplate.php:27
+#: classes/wizard/class-wpml-tm-setup-wizard.php:59
+msgid "Deactivate"
+msgstr "غیر فعال"
+
+#: classes/class-wpml-translation-management.php:652
+#, php-format
+msgid "One more step before you can use %s"
+msgstr "یک مرحله دیگر قبل از اینکه بتوانید از %s استفاده کنید"
+
+#: classes/class-wpml-translation-management.php:656
+#, php-format
+msgid ""
+"Remember to authenticate this site's connection with %1$s. Before you "
+"authenticate, you cannot send jobs to translation to %1$s."
+msgstr ""
+"فراموش نکنید که اتصال این سایت را با %1$s احراز هویت کنید. قبل از احراز "
+"هویت ، نمی توانید کار ها را به %1$s به ترجمه ارسال کنید."
+
+#: classes/class-wpml-translation-management.php:659
+msgid "Complete the authentication"
+msgstr "احراز هویت را کامل کنید"
+
+#: classes/class-wpml-translation-management.php:665
+msgid "You have selected a translation service which requires translators."
+msgstr "شما یک سرویس ترجمه را انتخاب کرده اید که به مترجمان نیاز دارد."
+
+#: classes/class-wpml-translation-management.php:666
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:63
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:93
+msgid "Add a Translator"
+msgstr "یک مترجم اضافه کنید"
+
+#: classes/class-wpml-translation-management.php:669
+#, php-format
+msgid "If you wish to use %1$s, please go to %2$s and use the %3$s button."
+msgstr ""
+"اگر می خواهید از %1$s استفاده کنید ، لطفاً به %2$s بروید و از دکمه %3$s "
+"استفاده کنید."
+
+#: classes/class-wpml-translation-management.php:671
+msgid "There is a problem with your translation service."
+msgstr "سرویس ترجمه شما مشکلی دارد."
+
+#: classes/class-wpml-translation-management.php:674
+msgid "Please contact your administrator."
+msgstr "لطفاً با سرپرست خود تماس بگیرید."
+
+#: classes/class-wpml-translation-management.php:679
+#, php-format
+msgid ""
+"If you wish to use only local translators, please go to %1$s and use the "
+"%2$s button."
+msgstr ""
+"اگر می خواهید فقط از مترجمان محلی استفاده کنید ، لطفاً به %1$s بروید و از "
+"دکمه %2$s  استفاده کنید."
+
+#: classes/class-wpml-translation-management.php:754
+msgid ""
+"WPML can't find the translation service. Please contact WPML Support or your "
+"translation service provider."
+msgstr ""
+"WPML نمی تواند سرویس ترجمه را پیدا کند. لطفاً با پشتیبانی WPML یا ارائه دهنده "
+"خدمات ترجمه خود تماس بگیرید."
+
+#: classes/emails/ATE/class-wpml-tm-ate-request-activation-email.php:22
+#, php-format
+msgid ""
+"The translator %1$s is requesting to use the Advanced Translation Editor on "
+"site %2$s."
+msgstr ""
+"مترجم %1$s درخواست استفاده از ویرایشگر ترجمه پیشرفته در سایت %2$s را دارد."
+
+#: classes/emails/ATE/class-wpml-tm-ate-request-activation-email.php:23
+msgid "Advanced Translation Editor settings"
+msgstr "تنظیمات ویرایشگر ترجمه پیشرفته"
+
+#: classes/emails/ATE/class-wpml-tm-ate-request-activation-email.php:24
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:56
+#, php-format
+msgid ""
+"* Remember, your login name for %1$s is %2$s. If you need help with your "
+"password, use the password reset in the login page."
+msgstr ""
+"* بخاطر داشته باشید ، نام ورود شما برای  %1$s %2$s است. اگر در مورد رمز عبور "
+"خود به کمک نیاز دارید ، از تنظیم مجدد رمز عبور در صفحه ورود استفاده کنید."
+
+#: classes/emails/ATE/class-wpml-tm-ate-request-activation-email.php:29
+#, php-format
+msgid "Request to use WPML's Advanced Translation Editor by %s"
+msgstr "درخواست استفاده از ویرایشگر ترجمه پیشرفته WPML توسط %s"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-daily-summary-report-model.php:9
+#, php-format
+msgid "Translation updates for %1$s for %2$s"
+msgstr "بروز رسانی های ترجمه برای %1$s برای  %2$s"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-daily-summary-report-model.php:16
+#, php-format
+msgid "Today %1$s had the following %2$s translation updates"
+msgstr "امروز %1$s  دارای %2$s به روزرسانی ترجمه زیر بود"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:45
+msgid "Jobs that are waiting for translation"
+msgstr "مشاغلی که منتظر ترجمه هستند"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:46
+msgid "Original Page"
+msgstr "صفحه اصلی"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:47
+msgid "Translation"
+msgstr "ترجمه"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:48
+#: menu/wpml-tm-menus-management.php:826
+msgid "Translator"
+msgstr "مترجم"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:49
+msgid "Updated / Translated"
+msgstr "به روز شده / ترجمه شده"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:51
+msgid "Your deadline"
+msgstr "مهلت شما"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:52
+msgid "Translation languages"
+msgstr "زبان های ترجمه"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:53
+msgid "Number of pages"
+msgstr "تعداد صفحات"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:54
+msgid "Number of strings"
+msgstr "تعداد رشته ها"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:55
+msgid "Number of words"
+msgstr "تعداد کلمات"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:56
+msgid "Undefined"
+msgstr "تعریف نشده"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:59
+msgid "Want to improve the quality of your site’s translation?"
+msgstr "آیا می خواهید کیفیت ترجمه سایت خود را بهبود ببخشید؟"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:63
+msgid "Translation Feedback"
+msgstr "بازخورد ترجمه"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:64
+#, php-format
+msgid "Allow visitors to tell you about translation issues by enabling %s"
+msgstr ""
+"با فعال کردن %s به بازدیدکنندگان اجازه دهید تا در مورد مسائل ترجمه به شما "
+"بگویند"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:68
+msgid "translation services that are integrated with WPML"
+msgstr "خدمات ترجمه که با WPML تلفیق شده اند"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report-view.php:69
+#, php-format
+msgid "Try one of the %s"
+msgstr "یکی از %s را امتحان کنید"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-summary-report.php:125
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:103
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:102
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:122
+msgid "to"
+msgstr "به"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-weekly-summary-report-model.php:9
+#, php-format
+msgid "Translation updates for %1$s until %2$s"
+msgstr "بروز رسانی های ترجمه برای %1$s  تا %2$s"
+
+#: classes/emails/notification/summary/class-wpml-tm-jobs-weekly-summary-report-model.php:16
+#, php-format
+msgid "This week %1$s had the following %2$s translation updates"
+msgstr "این هفته %1$s دارای به روزرسانی های ترجمه %2$s  زیر بود"
+
+#. translators: Promote translation services: %s replaced by "professional translation services integrated with WPML"
+#: classes/emails/notification/wpml-tm-email-notification-view.php:38
+#, php-format
+msgctxt ""
+"Promote translation services: %s replaced by \"professional translation "
+"services integrated with WPML\""
+msgid "Need faster translation work? Try one of the %s."
+msgstr "به کار سریعتر ترجمه نیاز دارید؟ یکی از %s را امتحان کنید."
+
+#. translators: Promote translation services: Promote translation services: used to build a link to the translation services page
+#: classes/emails/notification/wpml-tm-email-notification-view.php:40
+msgctxt ""
+"Promote translation services: used to build a link to the translation "
+"services page"
+msgid "professional translation services integrated with WPML"
+msgstr "خدمات ترجمه حرفه ای یکپارچه با WPML"
+
+#: classes/emails/notification/wpml-tm-email-notification-view.php:53
+msgid "WPML Notification Settings"
+msgstr "تنظیمات اعلان WPML"
+
+#: classes/emails/notification/wpml-tm-email-notification-view.php:58
+#, php-format
+msgid ""
+"To stop receiving notifications, log-in to %s and change your preferences."
+msgstr ""
+"برای متوقف کردن دریافت اعلان ها ، به %s  وارد شوید و تنظیمات برگزیده خود را "
+"تغییر دهید."
+
+#. translators: List of translation jobs: %s replaced by "list of translation jobs"
+#: classes/emails/overdue-report/wpml-tm-overdue-jobs-report.php:101
+#, php-format
+msgctxt "List of translation jobs: %s replaced by \"list of translation jobs\""
+msgid "You can see all the jobs that you sent and their deadlines in the %s."
+msgstr ""
+"همه مشاغلی را که ارسال کرده اید و آخرین مهلت آنها را می توانید در %s مشاهده "
+"کنید."
+
+#. translators: List of translation jobs: used to build a link to the translation jobs page
+#: classes/emails/overdue-report/wpml-tm-overdue-jobs-report.php:103
+msgctxt ""
+"List of translation jobs: used to build a link to the translation jobs page"
+msgid "list of translation jobs"
+msgstr "لیست کار ترجمه"
+
+#: classes/emails/overdue-report/wpml-tm-overdue-jobs-report.php:112
+msgid ""
+"This is a quick reminder about translation jobs that you sent and are behind "
+"schedule."
+msgstr ""
+"این یک یادآوری سریع در مورد مشاغل ترجمه ای است که شما ارسال کرده اید و از "
+"برنامه عقب افتاده اند."
+
+#: classes/emails/overdue-report/wpml-tm-overdue-jobs-report.php:113
+msgid "The deadline that you set for the following jobs has passed:"
+msgstr "مهلتی که برای مشاغل زیر تعیین کرده اید به پایان رسیده است:"
+
+#: classes/emails/overdue-report/wpml-tm-overdue-jobs-report.php:115
+#, php-format
+msgid "deadline: %1$s, late by %2$d days"
+msgstr "مهلت: %1$s ، با تأخیر  %2$d روز"
+
+#: classes/emails/overdue-report/wpml-tm-overdue-jobs-report.php:121
+msgid "Overdue translation jobs report"
+msgstr "گزارش مشاغل معوقه"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:44
+msgid "You have been assigned to new translation job(s):"
+msgstr "شما به کار (های) ترجمه جدید منصوب شده اید:"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:55
+msgid "There is 1 job, which you can take (not specifically assigned to you):"
+msgstr ""
+"1 شغل وجود دارد که می توانید آن را انجام دهید (اختصاصاً به شما اختصاص داده "
+"نشده است):"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:56
+#, php-format
+msgid ""
+"There are %s jobs, which you can take (not specifically assigned to you):"
+msgstr ""
+"%s شغل وجود دارد که می توانید آنها را انجام دهید (منحصرا به شما اختصاص داده "
+"نشده است):"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:90
+msgid "There is 1 job waiting for a translator:"
+msgstr "1 شغل در انتظار مترجم است:"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:91
+#, php-format
+msgid "There are %s jobs waiting for a translator:"
+msgstr "%s شغل در انتظار مترجم هستند:"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:146
+#, php-format
+msgid "New translation job from %s"
+msgstr "کار ترجمه جدید از %s"
+
+#: classes/emails/report/class-wpml-tm-batch-report-email-builder.php:153
+#, php-format
+msgid "Job waiting for a translator in %s"
+msgstr "کار منتظر مترجم در %s"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:56
+msgid "start translating"
+msgstr "شروع به ترجمه کنید"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:57
+msgctxt "Take a translation job waiting for a translator"
+msgid "take it"
+msgstr "بگیر"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:84
+#, php-format
+msgid "Link to original document %d"
+msgstr "لینک به سند اصلی %d"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:102
+#, php-format
+msgid "From %1$s to %2$s:"
+msgstr "از %1$s به %2$s:"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:119
+msgid "Your Profile"
+msgstr "پروفایل شما"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:123
+#, php-format
+msgid ""
+"You are receiving this email because you have a translator \n"
+"\t\t\taccount in %1$s. To stop receiving notifications, \n"
+"\t\t\tlog-in to %2$s and unselect \"Send me a notification email \n"
+"\t\t\twhen there is something new to translate\". Please note that \n"
+"\t\t\tthis will take you out of the translators pool."
+msgstr ""
+"این ایمیل را دریافت می کنید زیرا مترجم دارید\n"
+"\t\t\tحساب در %1$s برای متوقف کردن دریافت اعلان ها ،\n"
+"\t\t\tبه %2$s وارد شوید و \"\" ایمیل اعلان برای من ارسال شود \"را لغو انتخاب "
+"کنید\n"
+"\t\t\tوقتی چیز جدیدی برای ترجمه وجود دارد \". لطفا توجه داشته باشید که\n"
+"\t\t\tاین شما را از حوض مترجمان خارج می کند."
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:172
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:45
+msgid "WPML's Advanced Translation Editor"
+msgstr "ویرایشگر ترجمه حرفه ای WPML"
+
+#: classes/emails/report/class-wpml-tm-email-jobs-summary-view.php:174
+#, php-format
+msgid "Need help translating? Read how to use %s."
+msgstr "برای ترجمه نیاز به کمک دارید؟ نحوه استفاده از %s را بخوانید."
+
+#: classes/emails/wpml-tm-email-view.php:22
+#, php-format
+msgid "Dear %s,"
+msgstr "روز %s ،"
+
+#: classes/emails/wpml-tm-email-view.php:35
+#, php-format
+msgid "Hi %s,"
+msgstr "سلام %s,"
+
+#: classes/emails/wpml-tm-email-view.php:52
+#, php-format
+msgid "Generated by WPML plugin, running on %s."
+msgstr "با افزونه  WPML تولید شده و در %s اجرا می شود."
+
+#: classes/emails/wpml-tm-mail-notification.php:104
+#, php-format
+msgid "You can view your other translation jobs here: %s"
+msgstr "سایر کارهای ترجمه خود را می توانید در اینجا مشاهده کنید: %s"
+
+#: classes/emails/wpml-tm-mail-notification.php:109
+#, php-format
+msgid ""
+"This message was automatically sent by Translation Management running on "
+"%1$s. To stop receiving these notifications contact the system administrator "
+"at %2$s.\n"
+"\n"
+"This email is not monitored for replies."
+msgstr ""
+"این پیام به طور خودکار توسط مدیریت ترجمه که در %1$s اجرا می شود ارسال شد. "
+"برای جلوگیری از دریافت این اعلان ها ، با مدیر سیستم با شماره %2$s تماس "
+"بگیرید.\n"
+"\n"
+"این ایمیل برای پاسخ دادن کنترل نمی شود."
+
+#: classes/emails/wpml-tm-mail-notification.php:118
+#, php-format
+msgid ""
+"This message was automatically sent by Translation Management running on "
+"%1$s. To stop receiving these notifications, go to Notification Settings, or "
+"contact the system administrator at %2$s.\n"
+"\n"
+"This email is not monitored for replies."
+msgstr ""
+"این پیام به طور خودکار توسط مدیریت ترجمه که در %1$s اجرا می شود ارسال شد. "
+"برای متوقف کردن دریافت این اعلان ها ، به تنظیمات اعلان بروید ، یا با سرپرست "
+"سیستم با  %2$s تماس بگیرید.\n"
+"\n"
+"این ایمیل برای پاسخ دادن کنترل نمی شود."
+
+#: classes/emails/wpml-tm-mail-notification.php:181
+msgid "View translation jobs"
+msgstr "مشاغل ترجمه را مشاهده کنید"
+
+#: classes/emails/wpml-tm-mail-notification.php:228
+#, php-format
+msgid "Translator has updated translation job for %s"
+msgstr "مترجم کار ترجمه را برای %s به روز کرده است"
+
+#: classes/emails/wpml-tm-mail-notification.php:232
+#, php-format
+msgid ""
+"The translator %1$shas updated the translation job for \"%2$s\" from %3$s to "
+"%4$s."
+msgstr "مترجم %1$shas کار ترجمه را برای \"%2$s\" از  %3$s به  %4$s به روز کرد."
+
+#: classes/emails/wpml-tm-mail-notification.php:237
+#, php-format
+msgid "Translator has completed translation job for %s"
+msgstr "مترجم کار ترجمه را برای %s به پایان رسانده است"
+
+#: classes/emails/wpml-tm-mail-notification.php:241
+#, php-format
+msgid ""
+"The translator %1$shas completed the translation job for \"%2$s\" from %3$s "
+"to %4$s."
+msgstr "مترجم %1$shas کار ترجمه را برای  \"%2$s\" از %3$s به %4$s انجام داد."
+
+#: classes/emails/wpml-tm-mail-notification.php:248
+msgid "Need help with translation?"
+msgstr "برای ترجمه به کمک نیاز دارید؟"
+
+#: classes/emails/wpml-tm-mail-notification.php:249
+msgid "or"
+msgstr "یا"
+
+#: classes/emails/wpml-tm-mail-notification.php:251
+msgid "Manage your translators"
+msgstr "مترجمان خود را مدیریت کنید"
+
+#: classes/emails/wpml-tm-mail-notification.php:253
+msgid "try a translation service"
+msgstr "یک سرویس ترجمه را امتحان کنید"
+
+#: classes/emails/wpml-tm-mail-notification.php:277
+#, php-format
+msgid "Translator job updated for %s"
+msgstr "کار مترجم برای %s به روز شد"
+
+#: classes/emails/wpml-tm-mail-notification.php:279
+#, php-format
+msgid ""
+"A new translation for %1$s from %2$s to %3$s was created on the Translation "
+"Service. It&#8217;s ready to download and will be applied next time the "
+"Translation Service delivers completed translations to your site or when you "
+"manually fetch them."
+msgstr ""
+"ترجمه جدیدی برای %1$s از %2$s به  %3$s در سرویس ترجمه ایجاد شد. It&#8217;s "
+"آماده دانلود است و دفعه دیگر که سرویس ترجمه ترجمه های کامل را به سایت شما "
+"تحویل می دهد یا وقتی دستی آنها را واکشی می کنید ، اعمال می شود."
+
+#: classes/emails/wpml-tm-mail-notification.php:301
+#, php-format
+msgid "Translator job canceled for %s"
+msgstr "کار مترجم برای %s لغو شد"
+
+#: classes/emails/wpml-tm-mail-notification.php:303
+#, php-format
+msgid ""
+"The translation for %1$s from %2$s to %3$s was canceled on the Translation "
+"Service. You can send this document to translation again from the "
+"Translation Dashboard."
+msgstr ""
+"ترجمه %1$s از %2$s به %3$s در سرویس ترجمه لغو شد. می توانید این سند را از "
+"پیشخوان ترجمه مجدداً به ترجمه ارسال کنید."
+
+#: classes/emails/wpml-tm-mail-notification.php:352
+msgid "The translation job was completed on time."
+msgstr "کار ترجمه به موقع انجام شد."
+
+#: classes/emails/wpml-tm-mail-notification.php:358
+#, php-format
+msgid "This translation job is overdue by %s day."
+msgid_plural "This translation job is overdue by %s days."
+msgstr[0] "این کار ترجمه %s روزها است."
+msgstr[1] "این کار ترجمه %s روز است."
+
+#: classes/emails/wpml-tm-mail-notification.php:393
+#, php-format
+msgid "Removed from translation job on %s"
+msgstr "در %s از کار ترجمه حذف شد"
+
+#: classes/emails/wpml-tm-mail-notification.php:395
+#, php-format
+msgid ""
+"You have been removed from the translation job \"%1$s\" for %2$s to %3$s."
+msgstr "شما از کار ترجمه  \"%1$s\" برای %2$s  تا %3$s حذف شده اید."
+
+#: classes/emails/wpml-tm-mail-notification.php:430
+#, php-format
+msgid "Translator has resigned from job on %s"
+msgstr "مترجم در %s از کار استعفا داده است"
+
+#: classes/emails/wpml-tm-mail-notification.php:436
+#, php-format
+msgid ""
+"Translator %1$s has resigned from the translation job \"%2$s\" for %3$s to "
+"%4$s.%5$sView translation jobs: %6$s"
+msgstr ""
+"مترجم %1$s از کار ترجمه \"%2$s\"  برای %3$s  به %4$s استعفا داده است.%5$s "
+"مشاهده کارهای ترجمه:  %6$s"
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:162
+#, php-format
+msgid ""
+"You can't edit this translation, because this translation to %s is already "
+"in progress."
+msgstr ""
+"شما نمی توانید این ترجمه را ویرایش کنید ، زیرا این ترجمه به %s در حال انجام "
+"است."
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:170
+msgid ""
+"Cannot edit this item, because it is currently in the translation basket."
+msgstr "نمی توان این مورد را ویرایش کرد ، زیرا در حال حاضر در سبد ترجمه است."
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:175
+#, php-format
+msgid "Edit the %s translation"
+msgstr "ترجمه %s را ویرایش کنید"
+
+#: classes/filters/class-wpml-tm-translation-status-display.php:180
+#, php-format
+msgid "You don't have the rights to translate from %1$s to %2$s"
+msgstr "شما حق ترجمه از %1$s  به %2$s را ندارید"
+
+#: classes/jobs/utils/ElementLink.php:28
+msgid "View original"
+msgstr "مشاهده اصلی"
+
+#: classes/jobs/utils/ElementLink.php:44
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:104
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:114
+msgid "View"
+msgstr "مشاهده"
+
+#: classes/menu/ams-ate-console/class-wpml-tm-ams-ate-console-section.php:98
+msgid "Translation Tools"
+msgstr "ابزار های ترجمه"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:108
+#, php-format
+msgid "%d translation job"
+msgstr "%d کار ترجمه"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:109
+#, php-format
+msgid "%d translation jobs"
+msgstr "%d کارهای ترجمه"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:111
+#, php-format
+msgid "%s has been sent to remote translators"
+msgstr "%s  برای مترجمان از راه دور ارسال شده است"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:115
+#, php-format
+msgid "%s have been sent to remote translators"
+msgstr "%s به مترجمان از راه دور ارسال شده است"
+
+#. translators: "Check status and get translations" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/menu/class-wpml-tm-scripts-factory.php:119
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:296
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:173
+msgid "Check status and get translations"
+msgstr "وضعیت را بررسی کنید و ترجمه ها را دریافت کنید"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:121
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "در حال بررسی وضعیت کار ترجمه. لطفا این صفحه را نبندید!"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:124
+#, php-format
+msgid "You are downloading %d jobs"
+msgstr "شما %d کار را دانلود می کنید"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:126
+msgid "Status checked:"
+msgstr "وضعیت بررسی شد:"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:127
+msgid "Dismiss this notice."
+msgstr "رد کردن این اعلان."
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:129
+msgid "none of your translation jobs have been completed"
+msgstr "هیچ یک از کارهای ترجمه شما تکمیل نشده است"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:133
+#, php-format
+msgid "%d translation jobs have been finished and applied."
+msgstr "%d کار ترجمه به پایان رسیده و اعمال شده است."
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:138
+msgid ""
+"A communication error has appeared. Please wait a few minutes and try again."
+msgstr ""
+"یک خطای ارتباطی ظاهر شده است. لطفاً چند دقیقه صبر کنید و دوباره امتحان کنید."
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:142
+#, php-format
+msgid "Last check: %s"
+msgstr "آخرین بررسی : %s"
+
+#: classes/menu/class-wpml-tm-scripts-factory.php:143
+#: classes/menu/tp-polling/wpml-tm-last-picked-up.php:42
+msgid "never"
+msgstr "هرگز"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ajax.php:30
+msgid "The XML is not valid:"
+msgstr "XML معتبر نیست:"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ajax.php:33
+msgid "The XML is valid."
+msgstr "XML معتبر است."
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ajax.php:47
+msgid "The XML has been saved."
+msgstr "XML ذخیره شده است."
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ajax.php:49
+msgid "The XML could not be saved."
+msgstr "XML ذخیره نشد."
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui-hooks.php:25
+msgid "Custom XML Configuration"
+msgstr "پیکربندی XML سفارشی"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:24
+msgid "Custom XML configuration"
+msgstr "پیکربندی XML سفارشی"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:25
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:30
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:168
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:139
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:82
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:95
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:119
+#: classes/notices/AteLockNotice.php:60 menu/wpml-tm-menus-settings.php:339
+#: menu/wpml-tm-menus-settings.php:480 menu/wpml-tm-menus-settings.php:576
+#: menu/wpml-tm-menus-settings.php:698 menu/xliff-options.php:78
+msgid "Save"
+msgstr "ذخیره"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:26
+msgid "Shortcuts"
+msgstr "میانبرها"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:28
+msgid "Fold/Unfold code"
+msgstr "فولد کردن / باز کردن کد"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:29
+msgid "Autoformat"
+msgstr "فرمت اتوماتیک"
+
+#: classes/menu/custom-xml-config/class-wpml-tm-custom-xml-ui.php:32
+msgid "How to write Language Configuration Files"
+msgstr "نحوه نوشتن فایلهای پیکربندی زبان"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:41
+msgid "in"
+msgstr "در"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:100
+msgid "translated to"
+msgstr "ترجمه شده به"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:103
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:101
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:271
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:301
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:751
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:754
+msgid "Any language"
+msgstr "هر زبان"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:120
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:61
+msgid "Translation status"
+msgstr "وضعیت ترجمه"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:123
+msgid "All translation statuses"
+msgstr "همه وضعیت های ترجمه"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:125
+msgid "Not translated or needs updating"
+msgstr "ترجمه نشده است یا نیاز به به روزرسانی دارد"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:128
+msgid "Needs updating"
+msgstr "نیاز به به روزرسانی دارد"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:129
+msgid "Translation in progress"
+msgstr "ترجمه در حال انجام است"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:130
+#: classes/wpml-st/class-wpml-remote-string-translation.php:7
+msgid "Translation complete"
+msgstr "ترجمه کامل شد"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:151
+#, php-format
+msgid ""
+"Language filtering has been disabled because you already have items in %s in "
+"the basket."
+msgstr ""
+"فیلتر کردن زبان غیرفعال شده است زیرا شما قبلاً مواردی را در %s در سبد خود "
+"دارید."
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:158
+msgid "To re-enable it, please empty the basket or send it for translation."
+msgstr ""
+"برای فعال کردن مجدد آن ، لطفاً سبد را خالی کنید یا آن را برای ترجمه ارسال "
+"کنید."
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:171
+msgid "Element type"
+msgstr "نوع المنت"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:172
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:249
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:737
+msgid "All types"
+msgstr "همه نوع"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:210
+msgid "parent"
+msgstr "پدر (parent)"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:241
+msgid "Publish status"
+msgstr "وضعیت را منتشر کنید"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:242
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:327
+msgid "All statuses"
+msgstr "همه ی وضعیت ها"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:262
+msgid "Priority"
+msgstr "اولویت"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:263
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:42
+msgid "All Translation Priorities"
+msgstr "تمام اولویت های ترجمه"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:289
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:104
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:351
+msgid "Filter"
+msgstr "فیلتر"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:291
+msgid "Reset filter"
+msgstr "تنظیم مجدد فیلتر"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-display-filter.php:310
+msgid "1. Select items for translation"
+msgstr "1. موارد را برای ترجمه انتخاب کنید"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:59
+msgid "(missing title)"
+msgstr "(عنوان موجود نیست)"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:103
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:109
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:152
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:451
+msgid "Edit"
+msgstr "ویرایش"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:149
+msgid "Edit note for the translators"
+msgstr "ویرایش یادداشت برای مترجمان"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:152
+msgid "Add note for the translators"
+msgstr "یادداشت را برای مترجمان اضافه کنید"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:158
+msgid "Note for the translators"
+msgstr "یادداشت برای مترجمان"
+
+#. translators: Translation Management wizard - a generic "Cancel" button shown when opening a dialog
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:164
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:242
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:279
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:78
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:97
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:120
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:47
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:69
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:92
+#: classes/words-count/hooks/wpml-tm-word-count-admin-hooks.php:43
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:33
+#: inc/translation-jobs/jobs/wpml-translation-job.class.php:357
+msgid "Cancel"
+msgstr "لغو"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-document-row.php:224
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-status-names.php:14
+#: classes/wpml-st/class-wpml-remote-string-translation.php:15
+msgid "Translation ready to download"
+msgstr "ترجمه آماده دانلود است"
+
+#: classes/menu/dashboard/class-wpml-tm-dashboard-pagination.php:55
+#, php-format
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "نمایش دادن  %1$s&#8211;%2$s از %3$s"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:78
+msgid "Bulk actions"
+msgstr "اقدامات بزرگ"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:79
+msgid "Cancel jobs"
+msgstr "لغو کارها"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:80
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:171
+msgid "Get translations"
+msgstr "دریافت ترجمه"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:81
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:70
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:599
+msgid "Apply"
+msgstr "اعمال"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:82
+msgid "First page"
+msgstr "صفحه اول"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:83
+msgid "Previous page"
+msgstr "صفحه قبلی"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:84
+msgid "Next page"
+msgstr "صفحه بعد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:85
+msgid "Last page"
+msgstr "صفحه آخر"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:86
+msgid "Navigation"
+msgstr "ناوبری"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:87
+msgid "0 items"
+msgstr "0 مورد"
+
+#. translators: this is shown between two number: processed items and total number of items to process
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:88
+#: classes/menu/mcsetup/class-wpml-tm-mcs-pagination-render.php:91
+#: classes/notices/translation-jobs-migration/class-wpml-all-translation-jobs-migration-notice.php:17
+#: classes/notices/translation-jobs-migration/class-wpml-translation-jobs-missing-tp-id-migration-notice.php:18
+msgid "of"
+msgstr "از"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:89
+msgid "Select translator"
+msgstr "مترجم را انتخاب کنید"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:90
+msgid "Assign"
+msgstr "اختصاص دادن"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:91
+msgid "External Actions"
+msgstr "اقدامات خارجی"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:92
+#: menu/wpml-tm-menus-management.php:644
+msgid "Actions"
+msgstr "اقدام"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:94
+msgid "Actions that will happen on the translation service"
+msgstr "اقداماتی که در سرویس ترجمه اتفاق خواهد افتاد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:97
+msgid "Select all"
+msgstr "انتخاب همه"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:102
+msgid "from"
+msgstr "از"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:105
+msgid "Ascending"
+msgstr "صعودی"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:106
+msgid "Descending"
+msgstr "نزولی"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:107
+msgid "Sort"
+msgstr "مرتب کردن"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:108
+msgid "Direction"
+msgstr "جهت"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:109
+msgid "sort by"
+msgstr "ترتیب بر اساس"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:110
+msgid "then sort by"
+msgstr "سپس مرتب سازی بر اساس"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:111
+msgid "translated by"
+msgstr "ترجمه شده توسط"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:112
+msgid "with"
+msgstr "با"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:113
+msgid "sent between"
+msgstr "فرستاده شده بین"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:114
+msgid "with deadline between"
+msgstr "با مهلت بین"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:115
+msgid "Reset filters"
+msgstr "تنظیم مجدد فیلترها"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:116
+msgid "Select status"
+msgstr "وضعیت را انتخاب کنید"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:119
+msgid "Loading jobs..."
+msgstr "در حال بارگیری مشاغل ..."
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:120
+msgid "Downloading translations..."
+msgstr "در حال دانلود ترجمه ها ..."
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:121
+msgid "Synchronizing batch..."
+msgstr "همگام سازی دسته ..."
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:122
+msgid "Canceling jobs..."
+msgstr "در حال لغو کارها ..."
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:123
+msgid "Assigning translator..."
+msgstr "اختصاص مترجم ..."
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:124
+msgid "Downloading XLIFF file..."
+msgstr "در حال دانلود فایل XLIFF ..."
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:127
+msgid "Translations downloaded"
+msgstr "ترجمه ها دانلود شدند"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:129
+msgid "Batch synchronization has been sent"
+msgstr "همگام سازی دسته ای ارسال شده است"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:132
+msgid "Jobs canceled"
+msgstr "کار های کنسل شده"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:133
+msgid "Translator assigned"
+msgstr "مترجم اختصاص داده شد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:134
+msgid "XLIFF file downloaded"
+msgstr "فایل XLIFF  دانلود شد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:138
+msgid "Check status"
+msgstr "وضعیت بررسی"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:139
+msgid "Translation is ready, no need to check its status"
+msgstr "ترجمه آماده است ، نیازی به بررسی وضعیت آن نیست"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:140
+msgid "Translation is cancelled, no need to check its status"
+msgstr "ترجمه لغو شده است ، نیازی به بررسی وضعیت آن نیست"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:141
+msgid "Translation is ready to download, no need to check its status"
+msgstr "ترجمه آماده دانلود است ، نیازی به بررسی وضعیت آن نیست"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:142
+msgid "Translation has already been synchronized, no need to check its status"
+msgstr "ترجمه قبلاً هماهنگ شده است ، نیازی به بررسی وضعیت آن نیست"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:143
+msgid "This is a local job, no need to check its status"
+msgstr "این یک کار محلی است ، نیازی به بررسی وضعیت آن نیست"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:147
+msgid "Download the translated XLIFF file"
+msgstr "فایل ترجمه شده XLIFF را دانلود کنید"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:149
+msgid "This is a local job so it does not have an XLIFF file to download"
+msgstr "این یک کار محلی است بنابراین فایل XLIFF برای دانلود ندارد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:153
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:177
+msgid "You cannot download the translation as it has not been completed"
+msgstr "شما نمی توانید ترجمه را دانلود کنید زیرا ترجمه آن کامل نشده است"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:157
+msgid "You cannot download the XLIFF file because TS_NAME has canceled the job"
+msgstr "نمی توانید فایل XLIFF را دانلود کنید زیرا TS_NAME کار را لغو کرده است"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:163
+msgid "Cancel job"
+msgstr "لغو کار"
+
+#. translators: "%s" is replaced with the name of the translation service associated with the job.
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:165
+#, php-format
+msgid "Contact %s for cancellation"
+msgstr "برای لغو با %s تماس بگیرید"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:166
+msgid "The job is already finished"
+msgstr "کار در حال حاضر تمام شده است"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:167
+msgid "The job is already canceled"
+msgstr "کار از قبل لغو شده است"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:173
+msgid "You cannot download the translation for a local job"
+msgstr "نمی توانید ترجمه را برای یک شغل محلی دانلود کنید"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:181
+msgid "You have already downloaded this job"
+msgstr "شما قبلاً این کار را دانلود کرده اید"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-script-data.php:185
+msgid "You cannot download this job because TS_NAME has canceled it"
+msgstr "نمی توانید این کار را دانلود کنید زیرا TS_NAME آن را لغو کرده است"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-status-names.php:9
+msgid "Cancelled"
+msgstr "لغو شد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-status-names.php:12
+msgid "Needs update"
+msgstr "نیاز به به روزرسانی دارد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-status-names.php:17
+msgid "Completed"
+msgstr "کامل شد"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-translated_by_filters.php:26
+msgid "Anyone"
+msgstr "هر کس"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-translated_by_filters.php:34
+msgid "Any Translation Service"
+msgstr "هر سرویس ترجمه"
+
+#: classes/menu/jobs-list/class-wpml-tm-jobs-list-translated_by_filters.php:42
+msgid "Any WordPress Translator"
+msgstr "هر مترجم وردپرس"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:36
+msgid "Advanced Translation Editor is not active yet"
+msgstr "ویرایشگر ترجمه پیشرفته هنوز فعال نشده است"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:38
+msgid ""
+"Request activation to receive an email with directions to activate the "
+"service."
+msgstr ""
+"برای دریافت ایمیل با راهنمایی برای فعال کردن سرویس ، درخواست فعال سازی کنید."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:42
+msgid "Request activation"
+msgstr "درخواست فعال سازی"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:47
+msgid "Advanced Translation Editor is being activated"
+msgstr "ویرایشگر ترجمه پیشرفته در حال فعال شدن است"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:55
+msgid "Advanced Translation Editor is enabled and active"
+msgstr "ویرایشگر ترجمه پیشرفته فعال است"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:58
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:66
+msgid "Advanced Translation Editor is active"
+msgstr " ویرایشگر ترجمه پیشرفته فعال است"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:63
+msgid ""
+"WPML's Advanced Translation Editor is enabled, but not all your translators "
+"can use it."
+msgstr ""
+"ویرایشگر ترجمه حرفه ای WPML فعال است ، اما همه مترجمان شما نمی توانند از آن "
+"استفاده کنند."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate-strings.php:154
+msgid "Synchronize translators and translation managers"
+msgstr "مترجمان و مدیران ترجمه را همگام سازی کنید"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate.php:51
+msgid "WPML support"
+msgstr "پشتیبانی WPML"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate.php:59
+#, php-format
+msgid ""
+"Please try again in a few minutes. If the problem persists, please contact "
+"%s."
+msgstr ""
+"لطفا چند دقیقه ی دیگر دوباره سعی کنید. اگر مشکل همچنان ادامه دارد ، لطفاً با "
+"%s تماس بگیرید."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-ate.php:82
+msgid ""
+"You can continue the Translation Management configuration later by going to "
+"WPML -> Settings -> How to translate posts and pages."
+msgstr ""
+"بعداً می توانید با رفتن به WPML -> تنظیمات -> نحوه ترجمه نوشته ها و صفحات ، "
+"پیکربندی مدیریت ترجمه را ادامه دهید."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:39
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:208
+msgid "Don't translate"
+msgstr "ترجمه نکن"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:40
+msgid "Copy from original to translation"
+msgstr "از اصل به ترجمه کپی کنید"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:41
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:214
+msgid "Copy once"
+msgstr "یکبار کپی کنید"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:42
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:217
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:154
+#: menu/wpml-tm-menus-management.php:473
+msgid "Translate"
+msgstr "ترجمه"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:95
+msgid "Hide system fields"
+msgstr "فیلد های سیستم را مخفی کنید"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:96
+msgid "Show system fields"
+msgstr "نمایش فیلد های سیستم"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-custom-field-settings-menu.php:211
+msgctxt "Verb"
+msgid "Copy"
+msgstr "کپی"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-pagination-ajax.php:58
+#: classes/menu/translation-services/troubleshooting/RefreshServices.php:67
+msgid "Invalid Request."
+msgstr "درخواست نامعتبر است."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-pagination-render.php:90
+msgid "Displaying"
+msgstr "نمایش دادن"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-pagination-render.php:92
+msgid "Display all results"
+msgstr "نمایش همه نتایج"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-pagination-render.php:93
+msgid "Display 20 results per page"
+msgstr "نمایش 20 نتیجه در هر صفحه"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-pagination-render.php:94
+msgid "Nothing found"
+msgstr "چیزی پیدا نشد"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-post-custom-field-settings-menu.php:25
+#: menu/wpml-tm-menus-settings.php:43
+msgid "Custom Fields Translation"
+msgstr "ترجمه فیلد های سفارشی"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-post-custom-field-settings-menu.php:39
+msgid ""
+"No custom fields found. It is possible that they will only show up here "
+"after you add more posts after installing a new plugin."
+msgstr ""
+"هیچ فیلد سفارشی پیدا نشد این امکان وجود دارد که پس از افزودن پست های بیشتر "
+"پس از نصب افزونه جدید ، آنها فقط در اینجا نشان داده شوند."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-post-custom-field-settings-menu.php:50
+msgid "Custom fields"
+msgstr "فیلد های سفارشی"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-search-render.php:42
+msgid "Search for"
+msgstr "جستجو برای"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-term-custom-field-settings-menu.php:25
+#: menu/wpml-tm-menus-settings.php:44
+msgid "Custom Term Meta Translation"
+msgstr "ترجمه متا اصطلاحات سفارشی"
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-term-custom-field-settings-menu.php:39
+msgid ""
+"No term meta found. It is possible that they will only show up here after "
+"you add/create them."
+msgstr ""
+"متای اصطلاحی یافت نشد. این احتمال وجود دارد که فقط بعد از اضافه کردن یا "
+"ایجاد آنها در اینجا نشان داده شوند."
+
+#: classes/menu/mcsetup/class-wpml-tm-mcs-term-custom-field-settings-menu.php:50
+msgid "Term Meta"
+msgstr "اصطلاح متا"
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:28
+msgid "Adjust links in posts so they point to the translated content"
+msgstr "لینک ها را در پست ها تنظیم کنید تا آنها به محتوای ترجمه شده اشاره کنند"
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:29
+#, php-format
+msgid ""
+"All posts have been processed. %s links were changed to point to the "
+"translated content."
+msgstr ""
+"همه پست ها پردازش شده اند.  لینک های  %s تغییر داده شدند تا به محتوای ترجمه "
+"شده اشاره کنند."
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:38
+msgid ""
+"Adjust links in posts and strings so they point to the translated content"
+msgstr ""
+"پیوندها را در پست ها و رشته ها تنظیم کنید تا آنها به محتوای ترجمه شده اشاره "
+"کنند"
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:39
+#, php-format
+msgid ""
+"All posts and strings have been processed. %s links were changed to point to "
+"the translated content."
+msgstr ""
+"همه پست ها و رشته ها پردازش شده اند. لینک های %s تغییر داده شدند تا به "
+"محتوای ترجمه شده اشاره کنند."
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:43
+#, php-format
+msgid "Processing posts... %1$s of %2$s done."
+msgstr "در حال پردازش نوشته ها ... %1$s از %2$s انجام شد."
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:45
+#, php-format
+msgid "Processing strings... %1$s of %2$s done."
+msgstr "پردازش رشته ها ... %1$s از %2$s انجام شد."
+
+#: classes/menu/mcsetup/class-wpml-translate-link-targets-ui.php:56
+msgid "Scan now and adjust links"
+msgstr "اکنون اسکن کرده و لینک ها را تنظیم کنید"
+
+#: classes/menu/translation-basket/Strings.php:34
+msgid "Working..."
+msgstr "کار کردن..."
+
+#: classes/menu/translation-basket/Strings.php:35
+msgid "An error occurred:"
+msgstr "یک خطا رخ داد:"
+
+#: classes/menu/translation-basket/Strings.php:37
+msgid "You are not allowed to run this action."
+msgstr "شما مجاز به اجرای این عمل نیستید."
+
+#: classes/menu/translation-basket/Strings.php:40
+msgid "Batch"
+msgstr "دسته"
+
+#: classes/menu/translation-basket/Strings.php:41
+msgid "No selected translators!"
+msgstr "مترجمی انتخاب نشده است!"
+
+#: classes/menu/translation-basket/Strings.php:42
+msgid "Rollback jobs..."
+msgstr "مشاغل برگشتی ..."
+
+#: classes/menu/translation-basket/Strings.php:43
+msgid "Batch rolled back"
+msgstr "دسته برگشت"
+
+#: classes/menu/translation-basket/Strings.php:44
+msgid "Errors:"
+msgstr "خطا ها:"
+
+#: classes/menu/translation-basket/Strings.php:46
+msgid "Preparing your content for translation"
+msgstr "در حال آماده سازی محتوای خود برای ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:47
+msgid "Sending your jobs to translation"
+msgstr "ارسال کار خود به ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:49
+msgid "Sending your jobs to professional translation"
+msgstr "ارسال کار خود به ترجمه تخصصی"
+
+#: classes/menu/translation-basket/Strings.php:61
+msgctxt "1/2 Confirm to disconnect duplicates"
+msgid "You are about to translate duplicated posts."
+msgstr "شما در شرف ترجمه نوشته های تکراری هستید."
+
+#: classes/menu/translation-basket/Strings.php:69
+msgctxt "2/2 Confirm to disconnect duplicates"
+msgid ""
+"These items will be automatically disconnected from originals, so "
+"translation is not lost when you update the originals."
+msgstr ""
+"این موارد به طور خودکار از نسخه اصلی قطع می شوند ، بنابراین هنگام به "
+"روزرسانی نسخه اصلی ، ترجمه از بین نمی رود."
+
+#: classes/menu/translation-basket/Strings.php:82
+#: classes/menu/translation-services/ActiveServiceTemplate.php:95
+#: classes/notices/translation-jobs-migration/class-wpml-tm-translation-jobs-fix-summary-notice.php:6
+#: menu/wpml-tm-menus-management.php:177
+msgid "Translation Dashboard"
+msgstr "پیشخوان ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:87
+msgid "WPML->Settings->Translation notifications"
+msgstr "WPML-> تنظیمات-> اعلان های ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:104
+msgid "All done. What happens next?"
+msgstr "همه کارها تمام شد.  بعد چه اتفاقی می افتد؟"
+
+#: classes/menu/translation-basket/Strings.php:106
+msgid ""
+"WPML sent emails to the translators, telling them about the new work from "
+"you."
+msgstr ""
+"WPML با ارسال ایمیل به مترجمان ، در مورد کار جدید از شما به آنها می گوید."
+
+#: classes/menu/translation-basket/Strings.php:111
+#, php-format
+msgid ""
+"Your translators should log-in to their accounts in this site and go to "
+"%1$sWPML->Translations%2$s. There, they will see the jobs that are waiting "
+"for them."
+msgstr ""
+"مترجمان شما باید به حساب خود در این سایت وارد شوند و به%1$sWPML->Translations"
+"%2$sمراجعه کنند. در آنجا مشاغلی را که در انتظار آنها هستند مشاهده خواهند کرد."
+
+#: classes/menu/translation-basket/Strings.php:119
+#, php-format
+msgid ""
+"You can always follow the progress of translation in the %1$s. For a more "
+"detailed view and to cancel jobs, visit the %2$s list."
+msgstr ""
+"شما همیشه می توانید پیشرفت ترجمه را در %1$s دنبال کنید. برای مشاهده جزئیات "
+"بیشتر و لغو مشاغل ، از لیست  %2$s  بازدید کنید."
+
+#: classes/menu/translation-basket/Strings.php:127
+#, php-format
+msgid "You can control email notifications to translators and yourself in %s."
+msgstr "می توانید اعلان های ایمیل به مترجمان و خود را در  %s کنترل کنید."
+
+#: classes/menu/translation-basket/Strings.php:141
+#: classes/menu/translation-basket/Strings.php:189
+msgid "Ready!"
+msgstr "آماده!"
+
+#. translators: This text is followed by 'Translation Queue'. eg To translate those jobs, go to the Translation Queue
+#: classes/menu/translation-basket/Strings.php:143
+msgid "To translate those jobs, go to "
+msgstr "برای ترجمه آن مشاغل ، به اینجا بروید "
+
+#: classes/menu/translation-basket/Strings.php:145
+msgid "WPML->Translation Queue"
+msgstr "WPML-> صف ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:172
+msgid "Want to translate everything automatically?"
+msgstr "آیا می خواهید همه چیز را به صورت خودکار ترجمه کنید؟"
+
+#: classes/menu/translation-basket/Strings.php:175
+#, php-format
+msgid "Go to the %s tab for automatic translation and time-saving goodies."
+msgstr "برای ترجمه خودکار و موارد مفید صرفه جویی در وقت ، به زبانه %s بروید."
+
+#: classes/menu/translation-basket/Strings.php:181
+msgid "Don’t offer this again"
+msgstr "این را دیگر پیشنهاد نکنید"
+
+#: classes/menu/translation-basket/Strings.php:193
+#, php-format
+msgid "You can check the status of these jobs in %s."
+msgstr "می توانید وضعیت این مشاغل را در  %s بررسی کنید."
+
+#: classes/menu/translation-basket/Strings.php:208
+msgid "WPML->Translation Jobs"
+msgstr "WPML-> مشاغل ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:216
+msgid "WPML->Translation Management->Translation Tools"
+msgstr "WPML-> مدیریت ترجمه-> ابزار ترجمه"
+
+#: classes/menu/translation-basket/Strings.php:227
+msgid ""
+"WPML could not send notification emails to the translators, telling them "
+"about the new work from you."
+msgstr ""
+"WPML نمی تواند ایمیل های اعلان را برای مترجمان ارسال کند ، و به آنها درباره "
+"کار جدید از شما بگویید."
+
+#: classes/menu/translation-basket/class-wpml-tm-translate-independently.php:93
+msgid "Failed to disconnect posts"
+msgstr "قطع ارتباط نوشته ها انجام نشد"
+
+#: classes/menu/translation-basket/class-wpml-tm-translate-independently.php:100
+msgid "No duplicate posts found to disconnect."
+msgstr "هیچ نوشته تکراری برای قطع ارتباط یافت نشد."
+
+#: classes/menu/translation-basket/class-wpml-tm-translate-independently.php:107
+msgid "Successfully disconnected posts"
+msgstr "ارتباطات با موفقیت قطع شد"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:75
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:59
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:27
+#: menu/wpml-tm-menus-management.php:606
+msgid "Type"
+msgstr "نوع"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:78
+msgid "Words to translate"
+msgstr "کلمات برای ترجمه"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:117
+#, php-format
+msgid "%1$s to %2$s"
+msgstr "%1$s به %2$s"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:125
+#, php-format
+msgid "%1$s to %2$s and %3$s"
+msgstr "%1$s به %2$s و  %3$s"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:160
+msgid "Remove from Translation Basket"
+msgstr "حذف از سبد ترجمه"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:165
+msgid "The basket is empty"
+msgstr "سبد خالی است"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:288
+msgid "Reusable Block"
+msgstr "بلوک قابل استفاده مجدد"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:293
+msgid ""
+"WPML added this item because it's linked to another in the basket. If you "
+"wish, you can manually remove it."
+msgstr ""
+"WPML این مورد را اضافه کرد زیرا به سبد دیگری مرتبط است. در صورت تمایل می "
+"توانید آن را به صورت دستی حذف کنید."
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:297
+#, php-format
+msgid "automatically added %s"
+msgstr "به طور خودکار %s اضافه شد"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:369
+msgid "Clear Basket"
+msgstr "پاک کردن سبد"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:401
+#, php-format
+msgid ""
+"%1$s and the %2$s use a translation memory, which can reduce the number of "
+"words you need to translate."
+msgstr ""
+"%1$s و %2$s  از یک حافظه ترجمه استفاده می کنند ، که می تواند تعداد کلمات "
+"مورد نیاز برای ترجمه را کاهش دهد."
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:408
+#, php-format
+msgid ""
+"%s uses a translation memory, which can reduce the number of words you need "
+"to translate."
+msgstr ""
+"%s از یک حافظه ترجمه استفاده می کند ، که می تواند تعداد کلمات مورد نیاز برای "
+"ترجمه را کاهش دهد."
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:411
+#, php-format
+msgid ""
+"The %s uses a translation memory, which can reduce the number of words you "
+"need to translate."
+msgstr ""
+"%s از یک حافظه ترجمه استفاده می کند ، که می تواند تعداد کلمات مورد نیاز برای "
+"ترجمه را کاهش دهد."
+
+#. translators: "%s" is replaced by the name of a translation service.
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:420
+#, php-format
+msgid "%s may produce a different word count"
+msgstr "%s  ممکن است تعداد کلمات متفاوتی ایجاد کند"
+
+#. translators: "%s" is replaced by the the previous string.
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:424
+#, php-format
+msgid "The number of words WPML will send to translation (%s):"
+msgstr "تعداد کلماتی که WPML به ترجمه ارسال خواهد کرد (%s):"
+
+#: classes/menu/translation-basket/sitepress-table-basket.class.php:426
+msgid "The number of words WPML will send to translation:"
+msgstr "تعداد کلماتی که WPML به ترجمه ارسال خواهد کرد:"
+
+#: classes/menu/translation-basket/wpml-basket-tab-ajax.class.php:90
+#, php-format
+msgid ""
+"You've sent the content for translation to %s. Please continue to their "
+"site, to make sure that the translation starts."
+msgstr ""
+"شما محتوا را برای ترجمه به %s ارسال کرده اید. لطفاً برای اطمینان از شروع "
+"ترجمه به سایت آنها ادامه دهید."
+
+#: classes/menu/translation-basket/wpml-basket-tab-ajax.class.php:97
+#, php-format
+msgid "Continue to %s"
+msgstr "ادامه برای  %s"
+
+#: classes/menu/translation-basket/wpml-basket-tab-ajax.class.php:103
+#, php-format
+msgid ""
+"You've sent the content for translation to %1$s. Currently, we are "
+"processing it and delivering to %1$s."
+msgstr ""
+"شما محتوا را برای ترجمه به %1$s ارسال کرده اید. در حال حاضر ، ما در حال "
+"پردازش و تحویل آن به %1$s هستیم."
+
+#: classes/menu/translation-basket/wpml-basket-tab-ajax.class.php:109
+msgid "Check the batch delivery status"
+msgstr "وضعیت تحویل دسته ای را بررسی کنید"
+
+#: classes/menu/translation-basket/wpml-basket-tab-ajax.class.php:248
+msgid "No items found in basket"
+msgstr "هیچ موردی در سبد یافت نشد"
+
+#: classes/menu/translation-basket/wpml-basket-tab-ajax.class.php:262
+#, php-format
+msgid "%s items in basket:"
+msgstr "%s مورد در سبد:"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-header.php:15
+#, php-format
+msgid "%1$s translation: %2$s"
+msgstr "ترجمه %1$s : %2$s"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-header.php:17
+#, php-format
+msgid "View %s"
+msgstr "مشاهده %s"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:182
+msgid ""
+"We see you're translating content that contains HTML. Switch to the Advanced "
+"Translation Editor to translate content without the risk of breaking your "
+"HTML code."
+msgstr ""
+"می بینیم شما در حال ترجمه محتوایی هستید که حاوی HTML است. برای ترجمه محتوا "
+"بدون خطر شکستن کد HTML خود ، به ویرایشگر ترجمه پیشرفته بروید."
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:184
+msgid "Read more..."
+msgstr "بیشتر بخوانید ..."
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:201
+msgid ""
+"This content came from the Block editor and you need to translate it "
+"carefully so that formatting is not broken."
+msgstr ""
+"این محتوا از ویرایشگر بلوک آمده است و شما باید آن را به دقت ترجمه کنید تا "
+"قالب بندی خراب نشود."
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:202
+msgid "Learn how to translate content that comes from Block editor"
+msgstr "بیاموزید که چگونه محتوایی را که از Block editor می آید ترجمه کنید"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:222
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:114
+msgid "Copy all fields from original"
+msgstr "همه فیلد ها را از نسخه اصلی کپی کنید"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:229
+msgid "Some fields in translation are already filled!"
+msgstr "برخی از قسمتهای ترجمه از قبل پر شده اند!"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:231
+msgid "You have two ways to copy content from the original language:"
+msgstr "شما دو روش برای کپی کردن مطالب از زبان اصلی دارید:"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:234
+msgid "copy to empty fields only"
+msgstr "فقط در فیلد های خالی کپی کنید"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:235
+msgid "copy and overwrite all fields"
+msgstr "کپی و بازنویسی تمام فیلد ها"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:246
+msgid "Copy to empty fields only"
+msgstr "فقط در فیلد های خالی کپی کنید"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:248
+msgid "Copy & Overwrite all fields"
+msgstr "کپی و بازنویسی تمام فیلد ها"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:259
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:282
+msgid "Edit independently"
+msgstr "به طور مستقل ویرایش کنید"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:265
+msgid "This document is a duplicate of:"
+msgstr "این سند کپی از موارد زیر است:"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor-ui.php:273
+#, php-format
+msgid "WPML will no longer synchronize this %s with the original content."
+msgstr "WPML دیگر این %s  را با محتوای اصلی همگام سازی نخواهد کرد."
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:56
+msgid "Don't show this again."
+msgstr "این را دیگر نشان ندهید"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:60
+msgid ""
+"<p>The administrator has disabled term translation from the translation "
+"editor. </p>\n"
+"<p>If your access permissions allow you can change this under \"Translation "
+"Management\" - \"Multilingual Content Setup\" - \"Block translating taxonomy "
+"terms that already got translated\". </p>\n"
+"<p>Please note that editing terms from the translation editor will affect "
+"all posts that have the respective terms associated.</p>"
+msgstr ""
+"<p> سرپرست ترجمه اصطلاح را از ویرایشگر ترجمه غیرفعال کرده است. </p>\n"
+"<p> اگر مجوزهای دسترسی شما اجازه می دهد این را در بخش \"مدیریت ترجمه\" - "
+"\"تنظیم محتوای چند زبانه\" - \"جلوی ترجمه اصطلاحات طبقه بندی که قبلاً ترجمه "
+"شده اند\" را تغییر دهید. </p>\n"
+"<p> لطفاً توجه داشته باشید که ویرایش شرایط ویرایشگر ترجمه بر همه پستهایی که "
+"اصطلاحات مربوط به آنها مرتبط است تأثیر خواهد گذاشت. </p>"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:66
+msgid ""
+"Please be advised that editing this term's translation here will change the "
+"value of the term in general. The changes made here, will not only affect "
+"this post!"
+msgstr ""
+"لطفاً به شما توصیه شود که ویرایش ترجمه این اصطلاح در اینجا باعث تغییر ارزش "
+"اصطلاح به طور کلی می شود. تغییرات ایجاد شده در اینجا ، فقط بر این نوشته "
+"تأثیر نخواهد گذاشت!"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:70
+msgid "Terms translation is disabled"
+msgstr "ترجمه شرایط غیرفعال است"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:74
+msgid "You have unsaved work. Are you sure you want to close without saving?"
+msgstr ""
+"شما کار ذخیره نشده ای دارید آیا مطمئن هستید که می خواهید بدون صرفه جویی بسته "
+"شود؟"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:86
+msgid "Hide completed"
+msgstr "پنهان کردن کامل شد"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:90
+msgid "Save & Close"
+msgstr "ذخیره و بستن"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:95
+msgid "Saving..."
+msgstr "در حال ذخیره ..."
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:99
+msgid "Translation is complete"
+msgstr "ترجمه کامل شد"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:106
+msgid "Original"
+msgstr "اصلی"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:110
+msgid "Translation to"
+msgstr "ترجمه به"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:118
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:164
+msgid "Resign"
+msgstr "استعفا"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:122
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:64
+msgid "Are you sure you want to resign from this job?"
+msgstr "آیا مطمئن هستید که می خواهید از این شغل استعفا دهید؟"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:127
+msgid "You have unsaved changes!"
+msgstr "شما تغییرات ذخیره نشده ای دارید!"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:131
+msgid "Copy from original"
+msgstr "کپی از نسخه اصلی"
+
+#: classes/menu/translation-editor/class-wpml-translation-editor.php:134
+msgid "Show differences"
+msgstr "اختلافات را نشان دهید"
+
+#: classes/menu/translation-editor/fields/model/class-wpml-editor-ui-field-image.php:16
+msgid "Caption"
+msgstr "کپشن"
+
+#: classes/menu/translation-editor/fields/model/class-wpml-editor-ui-field-image.php:17
+msgid "Alt Text"
+msgstr "متن جایگزین"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:38
+msgid "Notification emails to translators"
+msgstr "اعلان ایمیل به مترجمان"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:39
+msgid "Notify translators when new jobs are waiting for them"
+msgstr "وقتی شغل های جدید در انتظار آنها هستند ، آنها را مطلع کنید"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:40
+msgid "Include XLIFF files in the notification emails"
+msgstr "فایل های XLIFF را در ایمیل های اعلان قرار دهید"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:41
+msgid "Notify translators when they are removed from jobs"
+msgstr "وقتی مترجمان از شغل برکنار شدند ، به آنها اطلاع دهید"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:42
+msgid "Notification emails to the translation manager"
+msgstr "ایمیل های اطلاع رسانی به مدیر ترجمه"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:43
+#, php-format
+msgid "Notify the translation manager when jobs are completed %s"
+msgstr "پس از اتمام کارها %s به مدیر ترجمه اطلاع دهید"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:44
+#, php-format
+msgid "Notify the translation manager when jobs are late by %s days"
+msgstr "درصورت تأخیر %s روزها به مدیر ترجمه اطلاع دهید"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:67
+msgid "immediately"
+msgstr "بلافاصله"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:72
+msgid "once a day"
+msgstr "روزی یکبار"
+
+#: classes/menu/translation-notifications/class-wpml-tm-emails-settings.php:77
+msgid "once a week"
+msgstr "هفته ای یکبار"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:57
+msgid "Job ID"
+msgstr "شناسه کار"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:63
+msgid "Check all"
+msgstr "بررسی همه"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:124
+msgid " - (needs update)"
+msgstr " - ( نیاز به بروز رسانی دارد )"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue-jobs-model.php:157
+msgid "Take and translate"
+msgstr "بگیر و ترجمه کن"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:117
+msgid "You've resigned from this job."
+msgstr "شما از این شغل استعفا داده اید."
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:148
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:260
+msgid "Translation updated: "
+msgstr "ترجمه بروز رسانی شد: "
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:165
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:258
+msgid "Translation added: "
+msgstr "ترجمه اضافه شد: "
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:173
+msgid "Translation has been removed by admin"
+msgstr "ترجمه توسط سرپرست حذف شده است"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:229
+msgid "Translations queue"
+msgstr "صف ترجمه ها"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:232
+msgid "No translation languages configured for this user."
+msgstr "هیچ زبان ترجمه ای برای این کاربر پیکربندی نشده است."
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:262
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:101
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:121
+msgid "From"
+msgstr "از"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:293
+msgid "To"
+msgstr "به"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:346
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:758
+msgid "Available to translate"
+msgstr "قابل ترجمه است"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:493
+msgid "No translation jobs found"
+msgstr "شغل ترجمه یافت نشد"
+
+#: classes/menu/translation-queue/class-wpml-translations-queue.php:522
+msgid "Not set"
+msgstr "تنظیم نشده"
+
+#. translators: "Translation Roles" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/menu/translation-roles/class-wpml-tm-translation-roles-section.php:68
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:152
+msgid "Translation Roles"
+msgstr "نقش ترجمه"
+
+#. translators: "Translators" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/menu/translation-roles/class-wpml-tm-translation-roles-section.php:69
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:56
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:145
+msgid "Translators"
+msgstr "مترجمان"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:57
+msgid ""
+"WPML’s Translation Editor makes it easy for your own translators to "
+"translate content in your site. You can create accounts for new translators "
+"or use existing WordPress users as your translators."
+msgstr ""
+"ویرایشگر ترجمه WPML مترجم مطالب در سایت را برای مترجمان خود آسان می کند. می "
+"توانید برای مترجمان جدید حساب ایجاد کنید یا از کاربران وردپرس موجود به عنوان "
+"مترجم خود استفاده کنید."
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:59
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:21
+#: classes/menu/translation-services/MainLayoutTemplate.php:71
+msgid "Name"
+msgstr "نام"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:60
+msgid "Email"
+msgstr "ایمیل"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:61
+msgid "Language Pairs"
+msgstr "جفت های زبان"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:64
+#: classes/notices/wpml-tm-post-edit-notices.php:157
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:85
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:48
+msgid "Go back"
+msgstr "بازگشت"
+
+#. translators: Translation Management wizard - Move to the next step of the wizard
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:65
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:84
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:63
+msgid "Continue"
+msgstr "ادامه"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:66
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:27
+msgid "First name:"
+msgstr "نام:"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:67
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:28
+msgid "Last name:"
+msgstr "نام خانوادگی:"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:68
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:29
+msgid "Email:"
+msgstr "ایمیل:"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:69
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:30
+msgid "User name:"
+msgstr "نام کاربری:"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:70
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:31
+msgid "WordPress role:"
+msgstr "نقش وردپرس:"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:71
+#: classes/menu/translation-roles/class-wpml-translator-view.php:31
+msgid "Remove"
+msgstr "حذف کردن"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:72
+#: classes/menu/translation-roles/class-wpml-translator-view.php:32
+msgid "Edit Languages"
+msgstr "زبان ها را ویرایش کنید"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:73
+msgid "Skip this step - I don't need to add more translators"
+msgstr "از این مرحله صرف نظر کنید - نیازی نیست مترجمان بیشتری اضافه کنم"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:74
+msgid ""
+"Only Translation Managers can add translators to the site. You can assign a "
+"different WordPress user to be the site's Translation Manager or make "
+"yourself a Translation Manager."
+msgstr ""
+"فقط مدیران ترجمه می توانند مترجمان را به سایت اضافه کنند. می توانید یک کاربر "
+"متفاوت وردپرس را به عنوان مدیر ترجمه سایت اختصاص دهید یا خود را به عنوان "
+"مدیر ترجمه درآورید."
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:75
+msgid "Yes"
+msgstr "بله"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:76
+#: classes/menu/translation-roles/class-wpml-translator-view.php:33
+msgid "No"
+msgstr "خیر"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:77
+msgid "You can translate to and from all languages"
+msgstr "می توانید به همه زبانها ترجمه کنید"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:78
+msgid "Remove me as a translator"
+msgstr "مرا به عنوان مترجم حذف کن"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:94
+msgid "Set language pair(s)"
+msgstr "تنظیم جفت (های) زبانی"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:96
+msgid "Previous"
+msgstr "قبلی"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:98
+msgid "Select an existing user and set as Translator"
+msgstr "یک کاربر موجود را انتخاب کنید و به عنوان مترجم تنظیم کنید"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:99
+msgid "Create a new user and set as Translator"
+msgstr "کاربر جدیدی ایجاد کنید و به عنوان مترجم تنظیم کنید"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:100
+msgid "Set language pair(s) for Translator %USERNAME%"
+msgstr "تنظیم جفت (های) زبانی برای مترجم  %USERNAME%"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:103
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:123
+msgid "--Choose language--"
+msgstr "-- زبان را انتخاب کنید --"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:104
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:124
+msgid "Add more language pairs for this translator"
+msgstr "برای این مترجم جفت زبان بیشتری اضافه کنید"
+
+#: classes/menu/translation-roles/class-wpml-tm-translators-view.php:118
+msgid "Edit language pair(s) for translator"
+msgstr "جفت (های) زبان را برای مترجم ویرایش کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:53
+#, php-format
+msgid ""
+"You are the Translation Manager for %s. This role lets you manage everything "
+"related to translation for this site."
+msgstr ""
+"شما مدیر ترجمه  %s هستید. این نقش به شما امکان می دهد همه موارد مربوط به "
+"ترجمه را برای این سایت مدیریت کنید."
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:54
+msgid ""
+"Before you can start sending content to translation, you need to complete a "
+"short setup."
+msgstr "قبل از شروع ارسال محتوا به ترجمه ، باید یک تنظیم کوتاه را انجام دهید."
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:55
+msgid "Set-up the translation"
+msgstr "ترجمه را تنظیم کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:57
+msgid "At your service"
+msgstr "در خدمت شما"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:59
+#, php-format
+msgid "Administrator for %s"
+msgstr "مدیر برای %s"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-ajax-actions.php:64
+#, php-format
+msgid "You are now the Translation Manager for %s - action needed"
+msgstr "شما اکنون مدیر ترجمه %s  هستید - اقدامات لازم"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:20
+msgid "Translation Managers"
+msgstr "مدیران ترجمه"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:22
+#: classes/menu/translation-roles/class-wpml-translator-view.php:30
+msgid "Edit user"
+msgstr "کاربر را ویرایش کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:23
+msgid "Remove Translation Manager"
+msgstr "حذف مدیر ترجمه"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:24
+msgid "This site doesn't yet have a Translation Manager."
+msgstr "این سایت هنوز مدیر ترجمه ندارد."
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:25
+msgid "Search for user"
+msgstr "جستجو برای کاربر"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:26
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:35
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:45
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:46
+msgid "Add a Translation Manager"
+msgstr "مدیر ترجمه اضافه کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:32
+msgid "Select an existing WordPress user (needs to be an editor or above)"
+msgstr "کاربر موجود وردپرس را انتخاب کنید (باید ویرایشگر یا بالاتر باشد)"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:33
+msgid "Create a new user to be the Translation Manager"
+msgstr "یک کاربر جدید ایجاد کنید تا مدیر ترجمه باشد"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:34
+msgid "Set a Translation Manager"
+msgstr "یک مدیر ترجمه تنظیم کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:48
+msgid "Select an existing user and set as Translation Manager"
+msgstr "یک کاربر موجود را انتخاب کنید و به عنوان مدیر ترجمه تنظیم کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-manager-view.php:49
+msgid "Create a new user and set as Translation Manager"
+msgstr "یک کاربر جدید ایجاد کنید و به عنوان مدیر ترجمه تنظیم کنید"
+
+#: classes/menu/translation-roles/class-wpml-translation-roles-ajax-actions.php:47
+#: classes/menu/translation-roles/class-wpml-translation-roles-ajax-actions.php:89
+msgid "Could not find user!"
+msgstr "کاربر یافت نشد"
+
+#: classes/menu/translation-roles/class-wpml-translation-roles-ajax-actions.php:98
+msgid "Failed to send email"
+msgstr "ارسال ایمیل انجام نشد"
+
+#: classes/menu/translation-services/ActivationAjax.php:74
+msgid ""
+"It was not possible to refresh the active translation service information."
+msgstr "تازه کردن اطلاعات خدمات ترجمه فعال امکان پذیر نبود."
+
+#: classes/menu/translation-services/ActivationAjax.php:127
+msgid "You are not allowed to perform this action."
+msgstr "شما مجاز به انجام این عمل نیستید."
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:26
+msgid "Active service:"
+msgstr "سرویس فعال:"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:30
+#, php-format
+msgid "Enter here your %s authentication details"
+msgstr "جزئیات تأیید صحت %s خود را اینجا وارد کنید"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:37
+#, php-format
+msgid "You can find API token at %s site"
+msgstr "می توانید توکن API را در سایت %s پیدا کنید"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:39
+#, php-format
+msgid "%s authentication"
+msgstr "احراز هویت %s"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:42
+msgid "Refresh language pairs"
+msgstr "جفت زبان را تازه کنید"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:43
+msgid "Refresh information"
+msgstr "اطلاعات را تازه کنید"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:44
+msgid "documentation"
+msgstr "مستندات"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:46
+msgid "Refreshing translation service information..."
+msgstr "درحال تازه کردن اطلاعات خدمات ترجمه ..."
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:61
+#, php-format
+msgid ""
+"To send content for translation to %1$s, you need to have an %1$s account."
+msgstr "برای ارسال محتوا برای ترجمه به %1$s ، باید حساب  %1$s داشته باشید."
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:66
+msgid ""
+"If you don't have one, you can create it after clicking the authenticate "
+"button."
+msgstr ""
+"اگر فاقد آن هستید ، می توانید پس از کلیک روی دکمه تأیید اعتبار ، آن را ایجاد "
+"کنید."
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:71
+#, php-format
+msgid "Please, check the %2$s page for more details."
+msgstr "لطفاً ، برای جزئیات بیشتر صفحه %2$s را بررسی کنید."
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:78
+msgid "De-authorize"
+msgstr "از مجوز خارج شوید"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:79
+msgid "Update credentials"
+msgstr "اعتبارنامه را به روز کنید"
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:99
+#, php-format
+msgid "Success! You can now send content to %s."
+msgstr "موفق باشید! اکنون می توانید محتوا را به %s ارسال کنید."
+
+#: classes/menu/translation-services/ActiveServiceTemplate.php:105
+#, php-format
+msgid "Go to the %s to choose the content and send it to translation."
+msgstr "برای انتخاب محتوا و ارسال آن به ترجمه ، به %s بروید."
+
+#: classes/menu/translation-services/AuthenticationAjax.php:38
+msgid "Service activated."
+msgstr "سرویس فعال شد."
+
+#: classes/menu/translation-services/AuthenticationAjax.php:40
+#: classes/menu/translation-services/AuthenticationAjax.php:59
+msgid ""
+"The authentication didn't work. Please make sure you entered your details "
+"correctly and try again."
+msgstr ""
+"احراز هویت کار نکرد. لطفاً اطمینان حاصل کنید که مشخصات خود را به درستی وارد "
+"کرده و دوباره امتحان کنید."
+
+#: classes/menu/translation-services/AuthenticationAjax.php:57
+msgid "Service credentials updated."
+msgstr "اطلاعات سرویس به روز شد."
+
+#: classes/menu/translation-services/AuthenticationAjax.php:74
+msgid "Service invalidated."
+msgstr "سرویس نامعتبر است."
+
+#: classes/menu/translation-services/AuthenticationAjax.php:75
+msgid "Unable to invalidate this service. Please contact WPML support."
+msgstr "اعتبار این سرویس نامعتبر است. لطفا با پشتیبانی WPML تماس بگیرید."
+
+#: classes/menu/translation-services/AuthenticationAjax.php:102
+#: classes/translation-proxy/class-wpml-tp-refresh-language-pairs.php:44
+msgid "Invalid Request"
+msgstr "درخواست نامعتبر است"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:49
+msgid ""
+"WPML cannot load the list of translation services. This can be a connection "
+"problem. Please wait a minute and reload this page."
+msgstr ""
+"WPML نمی تواند لیست خدمات ترجمه را بارگیری کند. این می تواند یک مشکل اتصال "
+"باشد. لطفاً یک دقیقه صبر کنید و این صفحه را دوباره بارگیری کنید."
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:52
+#, php-format
+msgid "If the problem continues, please contact %s."
+msgstr "در صورت ادامه مشکل ، لطفاً با  %s تماس بگیرید."
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:56
+msgid "Activate"
+msgstr "فعالسازی"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:57
+#: classes/wizard/class-wpml-tm-setup-wizard.php:60
+msgid "Documentation"
+msgstr "مستندات"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:60
+msgid "Looking for a different translation service?"
+msgstr "آیا به دنبال یک سرویس ترجمه متفاوت هستید؟"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:64
+msgid "Tell us which one"
+msgstr "به ما بگویید کدام یک"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:67
+msgid "Search"
+msgstr "جستجو"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:68
+msgid "Clear search"
+msgstr "جستجو را پاک کنید"
+
+#: classes/menu/translation-services/MainLayoutTemplate.php:73
+msgid "Ranking"
+msgstr "رتبه بندی"
+
+#: classes/menu/translation-services/NoSiteKeyTemplate.php:24
+msgid "Please register WPML to enable the professional translation option"
+msgstr "لطفاً WPML را ثبت کنید تا گزینه ترجمه حرفه ای فعال شود"
+
+#: classes/menu/translation-services/Section.php:93
+msgid "Translation Services"
+msgstr "سرویس های ترجمه"
+
+#: classes/menu/translation-services/ServicesRetriever.php:31
+msgid "Other Translation Services"
+msgstr "سایر خدمات ترجمه"
+
+#: classes/menu/translation-services/ServicesRetriever.php:36
+msgid "Translation Management System"
+msgstr "سیستم مدیریت ترجمه"
+
+#: classes/menu/translation-services/ServicesRetriever.php:45
+msgid "Partner Translation Services"
+msgstr "خدمات ترجمه شریک"
+
+#: classes/menu/translation-services/ServicesRetriever.php:54
+msgid "Other Partner Translation Services from Around the World"
+msgstr "سایر خدمات ترجمه شریک از سراسر جهان"
+
+#: classes/menu/translation-services/troubleshooting/RefreshServices.php:40
+msgid "Refresh Translation Services"
+msgstr "تازه کردن خدمات ترجمه"
+
+#: classes/menu/translation-services/troubleshooting/RefreshServices.php:50
+msgid "Services Refreshed."
+msgstr "خدمات تازه شده است."
+
+#: classes/menu/translation-services/troubleshooting/RefreshServices.php:57
+msgid ""
+"WPML cannot load the list of translation services. This can be a connection "
+"problem. Please wait a minute and reload this page.\n"
+" If the problem continues, please contact WPML support."
+msgstr ""
+"WPML نمی تواند لیست خدمات ترجمه را بارگیری کند. این می تواند یک مشکل اتصال "
+"باشد. لطفاً یک دقیقه صبر کنید و این صفحه را دوباره بارگیری کنید.\n"
+"در صورت ادامه مشکل ، لطفاً با پشتیبانی WPML تماس بگیرید."
+
+#: classes/notices/AteLockNotice.php:56 classes/notices/AteLockNotice.php:69
+msgid "Site Moved or Copied - Action Required"
+msgstr "سایت منتقل یا کپی شده است - اقدام لازم است"
+
+#: classes/notices/AteLockNotice.php:57
+msgid ""
+"Looks like this site is a copy of a different site, or moved to a different "
+"URL."
+msgstr ""
+"به نظر می رسد این سایت کپی یک سایت دیگر است یا به یک URL دیگر منتقل شده است."
+
+#: classes/notices/AteLockNotice.php:58
+msgid "I moved the site to this new URL"
+msgstr "من سایت را به این URL جدید منتقل کردم"
+
+#: classes/notices/AteLockNotice.php:59
+msgid "This is a copy of my original site"
+msgstr "این یک کپی از سایت اصلی من است"
+
+#: classes/notices/AteLockNotice.php:61
+msgid "More details"
+msgstr "جزئیات بیشتر"
+
+#: classes/notices/AteLockNotice.php:70
+msgid ""
+"Looks like this site is a copy of a different site, or moved to a different "
+"URL. Please contact your translation manager to update Translation "
+"Management plugin configuration."
+msgstr ""
+"به نظر می رسد این سایت کپی یک سایت دیگر است یا به یک URL دیگر منتقل شده است. "
+"لطفاً برای به روزرسانی پیکربندی افزونه مدیریت ترجمه ، با مدیر ترجمه خود تماس "
+"بگیرید."
+
+#: classes/notices/translation-jobs-migration/class-wpml-all-translation-jobs-migration-notice.php:13
+#: classes/notices/translation-jobs-migration/class-wpml-tm-translation-jobs-fix-summary-notice.php:11
+msgid "Problem receiving translation jobs?"
+msgstr "مشکلی در دریافت کار ترجمه ندارید؟"
+
+#: classes/notices/translation-jobs-migration/class-wpml-all-translation-jobs-migration-notice.php:14
+msgid ""
+"WPML needs to update its table of translation jobs, so that your site can "
+"continue receiving completed translations. This process will take a few "
+"minutes and does not modify content or translations in your site."
+msgstr ""
+"WPML باید جدول مشاغل ترجمه خود را به روز کند ، تا سایت شما همچنان بتواند "
+"ترجمه های کامل را دریافت کند. این روند چند دقیقه طول خواهد کشید و محتوای یا "
+"ترجمه های سایت شما را اصلاح نمی کند."
+
+#: classes/notices/translation-jobs-migration/class-wpml-all-translation-jobs-migration-notice.php:15
+msgid "Start update"
+msgstr "شروع به روزرسانی"
+
+#: classes/notices/translation-jobs-migration/class-wpml-all-translation-jobs-migration-notice.php:18
+msgid "jobs fixed"
+msgstr "کار های ثابت"
+
+#: classes/notices/translation-jobs-migration/class-wpml-all-translation-jobs-migration-notice.php:20
+#: classes/notices/translation-jobs-migration/class-wpml-translation-jobs-missing-tp-id-migration-notice.php:21
+msgid ""
+"The communication error with Translation Proxy has appeared. Please try "
+"later."
+msgstr "خطای ارتباطی با ترجمه پروکسی ظاهر شده است. لطفا بعدا تلاش کنید."
+
+#: classes/notices/translation-jobs-migration/class-wpml-tm-translation-jobs-fix-summary-notice.php:7
+#, php-format
+msgid ""
+"WPML completed updating the translations history. Next, please visit the %s "
+"and click on the button to \"Check status and get translations\"."
+msgstr ""
+"WPML به روزرسانی تاریخچه ترجمه را انجام داد. در مرحله بعدی ، لطفاً از %s "
+"بازدید کرده و روی دکمه \"بررسی وضعیت و دریافت ترجمه ها\" کلیک کنید."
+
+#: classes/notices/translation-jobs-migration/class-wpml-tm-troubleshooting-fix-translation-jobs-tp-id.php:66
+msgid "Fix WPML Translation Jobs \"tp_id\" field"
+msgstr "قسمت WPML Translation Jobs \"tp_id\" را برطرف کنید"
+
+#: classes/notices/translation-jobs-migration/class-wpml-tm-troubleshooting-fix-translation-jobs-tp-id.php:68
+msgid ""
+"Fixes the \"tp_id\" field of WPML ranslation jobs and set the status to \"in "
+"progress\" (it requires manual action to re-sync translation status + "
+"download translations). It accepts comma separated values of translation job "
+"IDs (rid)."
+msgstr ""
+"قسمت \"tp_id\" کار ترجمه WPML را برطرف کرده و وضعیت را \"در حال انجام\" "
+"تنظیم می کند (برای همگام سازی مجدد وضعیت ترجمه + بارگیری ترجمه ها به اقدام "
+"دستی نیاز دارد). مقادیر جدا شده با کاما را از شناسه های کار ترجمه می پذیرد "
+"(rid)."
+
+#: classes/notices/translation-jobs-migration/class-wpml-translation-jobs-missing-tp-id-migration-notice.php:13
+msgid "WPML Translation Jobs Migration"
+msgstr "WPML ترجمه مشاغل"
+
+#. translators: the placeholder is replaced with the current version of WPML
+#: classes/notices/translation-jobs-migration/class-wpml-translation-jobs-missing-tp-id-migration-notice.php:15
+#, php-format
+msgid ""
+"WPML found some remote jobs on your site that must be migrated in order to "
+"work with WPML %s. You might not be able to access some of the WPML "
+"administration pages until this migration is fully completed."
+msgstr ""
+"WPML برخی از مشاغل از راه دور را در سایت شما پیدا کرده است که برای کار با "
+"WPML %s باید منتقل شوند. تا زمانی که این انتقال کامل نشود ، ممکن است نتوانید "
+"به برخی از صفحات مدیریت WPML دسترسی پیدا کنید."
+
+#: classes/notices/translation-jobs-migration/class-wpml-translation-jobs-missing-tp-id-migration-notice.php:16
+msgid "Run now"
+msgstr "الان اجرا کن"
+
+#: classes/notices/translation-jobs-migration/class-wpml-translation-jobs-missing-tp-id-migration-notice.php:19
+msgid "jobs migrated"
+msgstr "کارها مهاجرت کردند"
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:65
+#, php-format
+msgid "How to work correctly with %s"
+msgstr "نحوه کار صحیح با %s"
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:70
+#, php-format
+msgid ""
+"Congratulations for choosing %s to translate your site's content. To avoid "
+"high costs and wasted time, please watch our short video."
+msgstr ""
+"به شما برای انتخاب %s برای ترجمه محتوای سایت خود تبریک می گوییم. برای "
+"جلوگیری از هزینه های زیاد و اتلاف وقت ، لطفا فیلم کوتاه ما را مشاهده کنید."
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:75
+msgid "Need help? See "
+msgstr "کمک خواستن؟ دیدن"
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:77
+msgid "how to translate different parts of the site."
+msgstr "نحوه ترجمه قسمتهای مختلف سایت."
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:80
+msgid ""
+"This stuff is actually important. Please follow the video to send a test "
+"translation. Then, you can dismiss this message. Thank you!"
+msgstr ""
+"این مسائل در واقع مهم هستند. لطفا برای ارسال ترجمه آزمایشی فیلم را دنبال "
+"کنید. سپس ، می توانید این پیام را رد کنید. متشکرم!"
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:81
+msgid "My test translation went fine."
+msgstr "ترجمه آزمایشی من خوب پیش رفت."
+
+#: classes/notices/translation-service-instruction/class-wpml-tm-ts-instructions-notice.php:82
+msgid "Dismiss this message."
+msgstr "رد کردن این پیام."
+
+#: classes/notices/wpml-tm-post-edit-notices.php:111
+#, php-format
+msgid "%sTranslation in progress - wait before editing%s"
+msgstr "%s ترجمه در حال انجام است - قبل از ویرایش %s منتظر بمانید"
+
+#: classes/notices/wpml-tm-post-edit-notices.php:115
+msgid ""
+"This page that you are editing is being translated right now. If you edit "
+"now, some or all of the translation for this page may be missing. It's best "
+"to wait until translation completes, then edit and update the translation."
+msgstr ""
+"این صفحه ای که شما در حال ویرایش آن هستید در حال ترجمه است. اگر اکنون ویرایش "
+"کنید ، ممکن است ترجمه یا ترجمه برخی از این صفحه وجود نداشته باشد. بهتر است "
+"صبر کنید تا ترجمه کامل شود ، سپس ترجمه را ویرایش و به روز کنید."
+
+#: classes/notices/wpml-tm-post-edit-notices.php:116
+msgid "Take me back"
+msgstr "من را برگردان"
+
+#: classes/notices/wpml-tm-post-edit-notices.php:117
+msgid "I understand - continue editing"
+msgstr "می فهمم - ویرایش را ادامه دهید"
+
+#: classes/notices/wpml-tm-post-edit-notices.php:118
+#: classes/notices/wpml-tm-post-edit-notices.php:161
+msgid "Don't show this warning again"
+msgstr "این هشدار را دیگر نشان ندهید"
+
+#: classes/notices/wpml-tm-post-edit-notices.php:132
+#, php-format
+msgid ""
+"%sWarning:%s You are trying to edit a translation that is currently in the "
+"process of being added using WPML."
+msgstr ""
+"%s  هشدار: %s  شما در حال تلاش برای ویرایش ترجمه ای هستید که در حال حاضر در "
+"مرحله افزودن با استفاده از WPML است."
+
+#: classes/notices/wpml-tm-post-edit-notices.php:137
+#, php-format
+msgid ""
+"Please refer to the <a href=\"%s\">Translation Management dashboard</a> for "
+"the exact status of this translation."
+msgstr ""
+"لطفاً برای وضعیت دقیق این ترجمه به <a href=\"%s\"> پیشخوان مدیریت ترجمه </a> "
+"مراجعه کنید."
+
+#: classes/notices/wpml-tm-post-edit-notices.php:153
+#, php-format
+msgid ""
+"%sWarning:%s You are trying to edit a translation using the standard "
+"WordPress editor but your site is configured to use the WPML Translation "
+"Editor."
+msgstr ""
+"%s  هشدار: %s  شما در حال ویرایش ترجمه با استفاده از ویرایشگر استاندارد "
+"WordPress هستید اما سایت شما برای استفاده از ویرایشگر ترجمه WPML پیکربندی "
+"شده است."
+
+#: classes/notices/wpml-tm-post-edit-notices.php:158
+msgid "Edit anyway"
+msgstr "ویرایش به هر حال"
+
+#: classes/notices/wpml-tm-post-edit-notices.php:159
+msgid "Open in Translation Editor"
+msgstr "باز کردن در ویرایشگر ترجمه"
+
+#: classes/notices/wpml-tm-post-edit-notices.php:179
+#, php-format
+msgid ""
+"%sWarning:%s You are trying to add a translation using the standard "
+"WordPress editor but your site is configured to use the WPML Translation "
+"Editor."
+msgstr ""
+"%s هشدار: %s شما در حال تلاش برای افزودن ترجمه با استفاده از ویرایشگر "
+"استاندارد WordPress هستید اما سایت شما برای استفاده از ویرایشگر ترجمه WPML "
+"پیکربندی شده است."
+
+#: classes/notices/wpml-tm-post-edit-notices.php:184
+#, php-format
+msgid ""
+"You should use <a href=\"%s\">Translation management dashboard</a> to send "
+"the original document to translation."
+msgstr ""
+"برای ارسال سند اصلی به ترجمه ، باید از <a href=\"%s\"> پیشخوان مدیریت ترجمه "
+"</a> استفاده کنید."
+
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:53
+msgid "Use WPML's Translation Editor"
+msgstr "از ویرایشگر ترجمه WPML استفاده کنید"
+
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:67
+msgid "Use WPML's Translation Editor to translate:"
+msgstr "برای ترجمه از ویرایشگر ترجمه WPML استفاده کنید:"
+
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:68
+msgid "Use the WordPress Editor to translate:"
+msgstr "برای ترجمه از ویرایشگر وردپرس استفاده کنید:"
+
+#. translators: %s: Post name singular
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:74
+#, php-format
+msgid "This %s"
+msgstr "این %s"
+
+#. translators: %s: Post name plural
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:79
+#, php-format
+msgid "All %s"
+msgstr "همه %s"
+
+#: classes/post-edit-screen/class-wpml-tm-post-edit-tm-editor-select.php:82
+msgid "All the site's content"
+msgstr "تمام مطالب سایت"
+
+#: classes/privacy/class-wpml-tm-privacy-content.php:19
+msgid ""
+"WPML Translation Management will send the email address and name of each "
+"manager and assigned translator as well as the content itself to Advanced "
+"Translation Editor and to the translation services which are used."
+msgstr ""
+"مدیریت ترجمه WPML آدرس ایمیل و نام هر مدیر و مترجم اختصاص داده شده و همچنین "
+"خود محتوا را به ویرایشگر ترجمه حرفه ای و خدمات ترجمه مورد استفاده ارسال می "
+"کند."
+
+#: classes/support/class-wpml-tm-support-info-filter.php:23
+msgid "SimpleXML extension"
+msgstr "پسوند SimpleXML"
+
+#: classes/support/class-wpml-tm-support-info-filter.php:24
+msgid "Loaded"
+msgstr "برگزار شد"
+
+#: classes/support/class-wpml-tm-support-info-filter.php:24
+msgid "Not loaded"
+msgstr "بارگیری نشده است"
+
+#: classes/support/class-wpml-tm-support-info-filter.php:27
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:787
+msgid ""
+"SimpleXML extension is required for using XLIFF files in WPML Translation "
+"Management."
+msgstr ""
+"پسوند SimpleXML برای استفاده از فایل های XLIFF در مدیریت ترجمه WPML مورد "
+"نیاز است."
+
+#: classes/translation-basket/class-wpml-tm-translation-basket-validation-notice.php:43
+msgid "WPML cannot send some of the content to translation"
+msgstr "WPML نمی تواند بخشی از مطالب را به ترجمه ارسال کند"
+
+#: classes/translation-basket/class-wpml-tm-translation-basket-validation-notice.php:44
+msgid ""
+"Some of the content that you selected for translation includes fields that "
+"are encoded. Translators will not be able to work on this kind of content, "
+"so we removed it from the job."
+msgstr ""
+"برخی از مطالبی که برای ترجمه انتخاب کرده اید شامل فیلد هایی است که رمزگذاری "
+"شده اند. مترجمان نمی توانند روی این نوع محتوا کار کنند ، بنابراین ما آن را "
+"از کار حذف کردیم."
+
+#: classes/translation-basket/class-wpml-tm-translation-basket-validation-notice.php:45
+msgid ""
+"To fix this problem, you need to tell WPML how these fields are encoded, so "
+"that WPML can decode them before sending for translation."
+msgstr ""
+"برای رفع این مشکل ، باید به WPML بگویید که چگونه این فیلدها رمزگذاری شده "
+"اند ، تا WPML بتواند آنها را قبل از ارسال برای ترجمه رمزگشایی کند."
+
+#: classes/translation-basket/class-wpml-tm-translation-basket-validation-notice.php:46
+msgid "show fields"
+msgstr "نمایش فیلد ها"
+
+#: classes/translation-basket/class-wpml-translation-basket-validation.php:55
+msgid "There are base64 encoded fields in this document"
+msgstr "در این سند فیلد های رمزگذاری شده base64 وجود دارد"
+
+#: classes/translation-basket/wpml-tm-translation-basket-dialog-view.php:32
+msgid "Sending for translation"
+msgstr "در حال ارسال برای ترجمه"
+
+#: classes/translation-basket/wpml-tm-translation-basket-dialog-view.php:33
+msgid "Items sent for translation!"
+msgstr "موارد ارسال شده برای ترجمه!"
+
+#: classes/translation-dashboard/class-wpml-tm-parent-filter-ajax.php:52
+msgid "None found"
+msgstr "هیچکدام پیدا نشد"
+
+#: classes/translation-jobs/ExtraFieldDataInEditor.php:90
+msgid "Body"
+msgstr "بدنه"
+
+#: classes/translation-jobs/ExtraFieldDataInEditor.php:91
+msgid "Excerpt"
+msgstr "گزیده"
+
+#. translators: The placeholder will be replaced with a number (an ID)
+#: classes/translation-jobs/class-wpml-element-translation-package.php:62
+#, php-format
+msgid "External package ID: %d"
+msgstr "شناسه بسته خارجی: %d"
+
+#: classes/translation-jobs/class-wpml-tm-job-layout.php:111
+msgid "Custom Fields"
+msgstr "فیلد های سفارشی"
+
+#: classes/translation-jobs/class-wpml-tm-job-layout.php:144
+msgid ""
+"Changes in these translations will affect terms in general! (Not only for "
+"this post)"
+msgstr ""
+"تغییرات در این ترجمه ها به طور کلی بر اصطلاحات تأثیر می گذارد! (نه فقط برای "
+"این نوشته)"
+
+#: classes/translation-jobs/notices/class-wpml-tm-unsent-jobs-notice-template.php:46
+msgid ""
+"Translations may delay because translators did not receive notifications"
+msgstr "ترجمه ها ممکن است به تأخیر بیفتند زیرا مترجمان اعلان دریافت نکرده اند"
+
+#: classes/translation-jobs/notices/class-wpml-tm-unsent-jobs-notice-template.php:47
+msgid ""
+"You have sent documents to translation. WPML can send notification emails to "
+"assigned translators, but translators for some languages have selected not "
+"to receive this notification."
+msgstr ""
+"شما اسناد را برای ترجمه ارسال کرده اید. WPML می تواند ایمیل های اعلان را به "
+"مترجمان اختصاص داده شده ارسال کند ، اما مترجمان برخی زبان ها انتخاب کرده اند "
+"که این اعلان را دریافت نکنند."
+
+#: classes/translation-jobs/notices/class-wpml-tm-unsent-jobs-notice-template.php:50
+#, php-format
+msgid ""
+"You should contact your %1$s and ask them to enable the notification emails "
+"which will allow them to see when there is new work waiting for them. To "
+"enable notifications, translators need to log-in to this site, go to their "
+"user profile page and change the related option in the WPML language "
+"settings section."
+msgstr ""
+"شما باید با %1$s خود تماس بگیرید و از آنها بخواهید ایمیل های اعلانی را فعال "
+"کنند که به آنها امکان می دهد ببینند چه کار جدیدی در انتظار آنها است. برای "
+"فعال کردن اعلان ها ، مترجمان باید به این سایت وارد شوند ، به صفحه نمایه "
+"کاربر آنها رفته و گزینه مربوطه را در بخش تنظیمات زبان WPML تغییر دهند."
+
+#: classes/translation-jobs/notices/class-wpml-tm-unsent-jobs-notice-template.php:51
+msgid "translators"
+msgstr "مترجمان"
+
+#: classes/translation-jobs/notices/class-wpml-tm-unsent-jobs-notice-template.php:67
+#, php-format
+msgid "Job %1$s: %2$s - %3$s"
+msgstr "کار %1$s: %2$s - %3$s"
+
+#: classes/translation-jobs/notices/class-wpml-tm-unsent-jobs-notice.php:105
+msgid "Dismiss"
+msgstr "رد"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:38
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:41
+msgid "Translation Priority"
+msgstr "اولویت ترجمه"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:40
+msgid "Translation Priorities"
+msgstr "اولویت های ترجمه"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:43
+msgid "Edit Translation Priority"
+msgstr "ویرایش اولویت ترجمه"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:44
+msgid "Update Translation Priority"
+msgstr "اولویت ترجمه را به روز کنید"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:45
+msgid "Add new Translation Priority"
+msgstr "اولویت ترجمه جدید اضافه کنید"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities-register-action.php:46
+msgid "New Translation Priority Name"
+msgstr "نام اولویت ترجمه جدید"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities.php:76
+msgid "Optional"
+msgstr "اختیاری"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities.php:80
+msgid "Required"
+msgstr "ضروری"
+
+#: classes/translation-priorities/class-wpml-tm-translation-priorities.php:84
+msgid "Not needed"
+msgstr "نیاز نیست"
+
+#: classes/translation-proxy/class-wpml-tp-refresh-language-pairs.php:31
+msgid "Language pairs refreshed"
+msgstr "جفت زبان تازه شد"
+
+#: classes/translation-proxy/class-wpml-tp-refresh-language-pairs.php:37
+msgid "Language pairs not refreshed, please try again"
+msgstr "جفت زبان تازه نشده است ، لطفاً دوباره امتحان کنید"
+
+#: classes/translation-proxy/lock/wpml-tp-lock-notice.php:27
+msgid "Some communications with the translation proxy are locked."
+msgstr "برخی از ارتباطات با پروکسی ترجمه قفل شده است."
+
+#: classes/translation-proxy/lock/wpml-tp-lock.php:30
+msgid "The constant WPML_ENVIRONMENT is set to \"Test\"."
+msgstr "WPML_ENVIRONMENT ثابت روی \"Test\" تنظیم شده است."
+
+#: classes/translation-proxy/log/class-wpml-translationproxy-communication-log.php:119
+#, php-format
+msgid ""
+"For retrieving debug information for communication between your%1$s site and "
+"the translation system, use the <a href=\"%2$s\">communication log</a> page."
+msgstr ""
+"برای بازیابی اطلاعات اشکال زدایی برای برقراری ارتباط بین سایت %1$s و سیستم "
+"ترجمه ، از صفحه <a href=\"%2$s\"> گزارش ارتباطات </a> استفاده کنید."
+
+#: classes/troubleshooting/SynchronizeSourceIdOfATEJobs/TriggerSynchronization.php:36
+msgid "Synchronize local job ids with ATE jobs"
+msgstr "شناسه های شغلی محلی را با مشاغل ATE همگام سازی کنید"
+
+#: classes/troubleshooting/SynchronizeSourceIdOfATEJobs/TriggerSynchronization.php:45
+msgid ""
+"Synchronize local job ids with their ATE counterparts. You will have to "
+"refresh a few times any admin page to accomplish the process."
+msgstr ""
+"شناسه های شغلی محلی را با همتایان ATE خود هماهنگ کنید. برای انجام این "
+"فرایند ، باید چندین بار از صفحه مدیریت را تازه کنید."
+
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:42
+msgid ""
+"Only select this option if you have no pending jobs or you are sure of what "
+"you are doing."
+msgstr ""
+"فقط اگر شغل معلق ندارید یا از کاری که انجام می دهید مطمئن هستید این گزینه را "
+"انتخاب کنید."
+
+#. translators: Reset professional translation state ("%1$s" is the service name)
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:46
+#, php-format
+msgid ""
+"If you have sent content to %1$s, you should cancel the projects in %1$s "
+"system. Any work that completes after you do this reset cannot be received "
+"by your site."
+msgstr ""
+"اگر محتوا را به %1$s ارسال کرده اید ، باید پروژه ها را در سیستم %1$s لغو "
+"کنید. هر کاری که بعد از انجام این تنظیم مجدد انجام شود توسط سایت شما قابل "
+"دریافت نیست."
+
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:48
+msgid ""
+"Any work that completes after you do this reset cannot be received by your "
+"site."
+msgstr ""
+"هر کاری که بعد از انجام این تنظیم مجدد انجام شود توسط سایت شما قابل دریافت "
+"نیست."
+
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:54
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:59
+msgid "Reset professional translation state"
+msgstr "تنظیم مجدد حالت ترجمه حرفه ای"
+
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:55
+msgid ""
+"Use this feature when you want to reset your translation process. All your "
+"existing translations will remain unchanged. Any translation work that is "
+"currently in progress will be stopped."
+msgstr ""
+"وقتی می خواهید فرآیند ترجمه خود را بازنشانی کنید ، از این ویژگی استفاده "
+"کنید. همه ترجمه های موجود شما بدون تغییر باقی می مانند. هر کار ترجمه ای که "
+"در حال انجام است متوقف می شود."
+
+#. translators: Reset professional translation state ("%1$s" is the service name)
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config-ui.php:58
+#, php-format
+msgid "I am about to stop any ongoing work done by %1$s."
+msgstr "من در شرف متوقف کردن هر کار مداوم انجام شده توسط %1$s هستم."
+
+#. translators: Reset professional translation state confirmation ("%1$s" is the service name)
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config.php:90
+#, php-format
+msgid "Are you sure you want to reset the %1$s translation process?"
+msgstr "آیا مطمئن هستید که می خواهید روند ترجمه %1$s  را دوباره تنظیم کنید؟"
+
+#. translators: Confirmation that translation process was reset ("%1$s" is the service name)
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config.php:194
+#, php-format
+msgid "The translation process with %1$s was reset."
+msgstr "روند ترجمه با %1$s بازنشانی شد."
+
+#. translators: Confirmation that site has been disconnected from translation service ("%1$s" is the service name)
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config.php:197
+#, php-format
+msgid ""
+"Your site was successfully disconnected from %1$s. Go to the translators tab "
+"to connect a new %1$s account or use a different translation service."
+msgstr ""
+"ارتباط سایت شما با موفقیت از  %1$s قطع شد. برای اتصال حساب  %1$s جدید یا "
+"استفاده از سرویس ترجمه دیگری به زبانه مترجمان بروید."
+
+#: classes/troubleshooting/class-wpml-tm-troubleshooting-reset-pro-trans-config.php:199
+msgid "PRO translation has been reset."
+msgstr "ترجمه PRO بازنشانی شد."
+
+#: classes/user/wpml-user-jobs-notification-settings-template.php:43
+msgid "WPML Translator Settings"
+msgstr "تنظیمات مترجم WPML"
+
+#: classes/user/wpml-user-jobs-notification-settings-template.php:44
+msgid "Notification emails:"
+msgstr "ایمیل های اطلاع رسانی:"
+
+#: classes/user/wpml-user-jobs-notification-settings-template.php:46
+msgid "Send me a notification email when there is something new to translate"
+msgstr ""
+"هنگامی که مورد جدیدی برای ترجمه وجود دارد ، یک ایمیل اعلان برای من ارسال کنید"
+
+#. translators: This is the title of the first screen of Translation Management wizard
+#: classes/wizard/class-wpml-tm-setup-wizard.php:26
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:61
+msgid "Who will translate this site?"
+msgstr "چه کسی این سایت را ترجمه خواهد کرد؟"
+
+#: classes/wizard/class-wpml-tm-setup-wizard.php:30
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:38
+msgid "What translation tool do you want to use?"
+msgstr "می خواهید از کدام ابزار ترجمه استفاده کنید؟"
+
+#: classes/wizard/class-wpml-tm-setup-wizard.php:34
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:43
+msgid "Summary"
+msgstr "خلاصه"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:41
+msgid "WPML's Classic Translation Editor"
+msgstr "ویرایشگر ترجمه کلاسیک WPML"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:55
+msgid "Support for all content types"
+msgstr "پشتیبانی از انواع محتوا"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:60
+msgid "Spell checker"
+msgstr "بررسی کننده غلط املایی"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:65
+msgid "Translation Memory"
+msgstr "حافظه ترجمه"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:70
+msgid "Machine Translation"
+msgstr "ترجمه ماشینی"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:75
+msgid "Translator preview"
+msgstr "پیش نمایش مترجم"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-editor.php:83
+msgid "Select"
+msgstr "انتخاب"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:44
+msgid "Your translation service"
+msgstr "خدمات ترجمه شما"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:45
+msgid "Your translators"
+msgstr "مترجمان شما"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:46
+msgid ""
+"WPML created the accounts for your translators and sent them instructions."
+msgstr ""
+"WPML حساب هایی را برای مترجمان شما ایجاد کرده و دستورالعمل هایی را برای آنها "
+"ارسال کرده است."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:49
+msgid "Done!"
+msgstr "انجام شد!"
+
+#. translators: The word "plus" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:110
+msgid "plus"
+msgstr "پلاس"
+
+#. translators: The word "pencil" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:117
+msgid "pencil"
+msgstr "مداد"
+
+#. translators: "Getting Started Guide" will be used in other strings and wrapped with HTML tags to make it a link to external documentation
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:131
+msgid "Getting Started Guide"
+msgstr "راهنمای شروع"
+
+#. translators: "WPML > Translation Management" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:138
+msgid "WPML > Translation Management"
+msgstr "WPML> مدیریت ترجمه"
+
+#. translators: "WPML > Translations" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:159
+msgid "WPML > Translations"
+msgstr "WPML> ترجمه ها"
+
+#. translators: "successfully using translation services" will be used in other strings and wrapped with HTML tags to make it a link to external documentation
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:180
+msgid "successfully using translation services"
+msgstr "با موفقیت از خدمات ترجمه استفاده کنید"
+
+#. translators: "Translation Basket" will be used in other strings and wrapped with HTML tags to make it more prominent
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:187
+#: menu/wpml-tm-menus-management.php:745
+msgid "Translation Basket"
+msgstr "سبد ترجمه"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:207
+#, php-format
+msgid ""
+"You will be the only translator for this site and will be able to translate "
+"any page or post. Use the %1$s or a %2$s icon found on the post listing "
+"pages in the admin or in the %3$s box when editing content."
+msgstr ""
+"شما تنها مترجم این سایت خواهید بود و قادر به ترجمه هر صفحه یا پستی خواهید "
+"بود. هنگام ویرایش محتوا ، از آیکن %1$s یا %2$s موجود در صفحات لیست نوشته در "
+"مدیر یا در کادر %3$s استفاده کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:217
+msgid "You selected users of this site to be your translators. You need to:"
+msgstr "شما کاربران این سایت را به عنوان مترجم خود انتخاب کرده اید. شما باید:"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:223
+msgid ""
+"You selected a translation service to translate your content. You need to:"
+msgstr "شما یک سرویس ترجمه را برای ترجمه محتوای خود انتخاب کرده اید. شما باید:"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:229
+msgid ""
+"You selected both users of this site and a professional translation service. "
+"You need to:"
+msgstr ""
+"شما هم کاربران این سایت و هم یک سرویس ترجمه حرفه ای را انتخاب کرده اید. شما "
+"باید:"
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:235
+msgid ""
+"You're all set. The user that you've selected as the site's Translation "
+"Manager will choose who translates, add translator users and send content "
+"for translation."
+msgstr ""
+"همه چیز آماده است کاربری که شما به عنوان مدیر ترجمه سایت انتخاب کرده اید ، "
+"انتخاب می کند که چه کسی ترجمه کند ، کاربران مترجم اضافه کند و محتوا را برای "
+"ترجمه ارسال کند."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:255
+#, php-format
+msgid ""
+"Read the %1$s to learn about translating images, menus, widgets and more."
+msgstr ""
+"%1$s را بخوانید تا درباره ترجمه تصاویر ، منوها ، ابزارک ها و موارد دیگر "
+"بدانید."
+
+#. translators: %1$s and %2$s will be replaced with "Translation Management" and "Translation Roles" respectively.
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:262
+#, php-format
+msgid ""
+"To add more users of this site as translators, go to the %1$s page and click "
+"the %2$s tab."
+msgstr ""
+"برای افزودن بیشتر کاربران این سایت به عنوان مترجم ، به صفحه %1$s بروید و روی "
+"زبانه %2$s  کلیک کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:269
+#, php-format
+msgid ""
+"Visit our documentation to learn more about using %1$s to learn about "
+"translating images, menus, widgets and more."
+msgstr ""
+"برای کسب اطلاعات بیشتر در مورد استفاده از %1$s  برای یادگیری در مورد ترجمه "
+"تصاویر ، منوها ، ابزارک ها و موارد دیگر ، از اسناد ما دیدن کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:276
+#, php-format
+msgid "Visit our documentation to learn more about %1$s."
+msgstr "برای کسب اطلاعات بیشتر در مورد %1$s به اسناد ما مراجعه کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:296
+#, php-format
+msgid ""
+"Use the %1$s page to select content for translation and send it to your "
+"translators."
+msgstr ""
+"از صفحه %1$s برای انتخاب محتوا برای ترجمه و ارسال آن به مترجمان خود استفاده "
+"کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:302
+#, php-format
+msgid ""
+"Translators will receive notifications and use the %1$s page to translate "
+"the content that you've sent them."
+msgstr ""
+"مترجمان اعلان دریافت می کنند و از صفحه %1$s برای ترجمه محتوایی که برای آنها "
+"ارسال کرده اید استفاده می کنند."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:309
+#, php-format
+msgid ""
+"Use the %1$s page to select content for translation and send it to the "
+"translation service."
+msgstr ""
+"از صفحه %1$s برای انتخاب محتوا برای ترجمه و ارسال آن به سرویس ترجمه استفاده "
+"کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:315
+#, php-format
+msgid ""
+"Once the translation jobs are completed, you can get them into your site by "
+"using the %1$s button on the %2$s page."
+msgstr ""
+"پس از اتمام کارهای ترجمه ، می توانید با استفاده از دکمه %1$s در صفحه  %2$s "
+"آنها را وارد سایت خود کنید."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:322
+#, php-format
+msgid "In the %1$s page, choose who will translate."
+msgstr "در صفحه %1$s ، انتخاب کنید که چه کسی ترجمه کند."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:328
+#, php-format
+msgid ""
+"Your translators will receive notifications and use the %1$s page to "
+"translate the content that you've sent them."
+msgstr ""
+"مترجمان شما اعلان دریافت می کنند و از صفحه %1$s برای ترجمه محتوایی که برای "
+"آنها ارسال کرده اید استفاده می کنند."
+
+#: classes/wizard/steps/class-wpml-tm-wizard-summary.php:334
+#, php-format
+msgid ""
+"To collect completed translations from the translation service, go to %1$s "
+"and click on the %2$s button"
+msgstr ""
+"برای جمع آوری ترجمه های کامل شده از خدمات ترجمه ، به  %1$s بروید و روی دکمه "
+"%2$s کلیک کنید"
+
+#. translators: Translation Management wizard - When asked who will translate this site, the user (%s) can chose to be the only translator
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:65
+#, php-format
+msgid "Only myself (%s)"
+msgstr "فقط خودم (%s)"
+
+#. translators: Translation Management wizard - When asked who will translate this site, the user can select or create a user to manage the translators
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:67
+msgid ""
+"I want to set a \"Translation Manager\" who will choose the translators for "
+"this site"
+msgstr ""
+"من می خواهم یک \"مدیر ترجمه\" تنظیم کنم که مترجمان این سایت را انتخاب کند"
+
+#. translators: Translation Management wizard - When asked who will translate this site, the user can select or create users as translators
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:69
+msgid "Users of this site"
+msgstr "کاربران این سایت"
+
+#. translators: Translation Management wizard - When asked who will translate this site,
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:71
+msgid "A Translation Service"
+msgstr "یک سرویس ترجمه"
+
+#. translators: Translation Management wizard - tooltip text shown near the "Only myself (%s)" option
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:73
+msgid ""
+"You will be the sole translator for this site. You will be able to translate "
+"any document between any language pair. If you want to do some of the "
+"translations and allow others to translate as well, select the \"Users of "
+"this site\" option instead."
+msgstr ""
+"شما تنها مترجم این سایت خواهید بود. شما قادر خواهید بود هر سندی را بین هر "
+"جفت زبانی ترجمه کنید. اگر می خواهید برخی از ترجمه ها را انجام دهید و به "
+"دیگران نیز اجازه ترجمه دهید ، به جای آن گزینه \"کاربران این سایت\" را انتخاب "
+"کنید."
+
+#. translators: Translation Management wizard - tooltip text shown near the "I want to set a "Translation Manager" who ..." option
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:76
+msgid ""
+"You will choose a user of this site and delegate the setup of translators to "
+"him/her. Choose this option when you are building a website for a client, "
+"who will set up translator users or choose a translation service."
+msgstr ""
+"شما یک کاربر از این سایت را انتخاب خواهید کرد و تنظیم مترجمان را به او محول "
+"می کنید. هنگام ساختن وب سایتی برای مشتری ، که کاربران مترجم را راه اندازی می "
+"کند یا سرویس ترجمه را انتخاب می کند ، این گزینه را انتخاب کنید."
+
+#. translators: Translation Management wizard - the tooltip text shown near the "I want to set a "Translation Manager" who ..." option, will also provide a link to an external 'Working with Translation Managers' page (%s)
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:79
+#, php-format
+msgid "Read more on %s"
+msgstr "بیشتر بخوانید در %s"
+
+#. translators: Translation Management wizard - the tooltip text shown near the "I want to set a "Translation Manager" who ..." option, will also provide a link to an external 'Working with Translation Managers' page
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:81
+msgid "Working with Translation Managers"
+msgstr "کار با مدیران ترجمه"
+
+#. translators: Translation Management wizard - tooltip text shown near the "Users of this site" option
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:86
+msgid ""
+"You will choose users of this WordPress site as the translators. You can "
+"also choose yourself. This allows you to set up a team of translators "
+"working in different language pairs."
+msgstr ""
+"شما کاربران این سایت وردپرس را به عنوان مترجم انتخاب خواهید کرد. شما همچنین "
+"می توانید خودتان را انتخاب کنید. با این کار می توانید تیمی از مترجمان را که "
+"در جفت های مختلف زبان کار می کنند ، تنظیم کنید."
+
+#. translators: Translation Management wizard - tooltip text shown near the "A Translation Service" option
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:88
+msgid ""
+"WPML offers tight integration with over 70 translation services. You will "
+"choose the translation service that you prefer and enjoy a streamlined "
+"process for sending jobs and receiving completed translations."
+msgstr ""
+"WPML ادغام دقیق با بیش از 70 سرویس ترجمه را ارائه می دهد. شما سرویس ترجمه "
+"مورد نظر خود را انتخاب خواهید کرد و از یک روند ساده برای ارسال مشاغل و "
+"دریافت ترجمه های کامل لذت خواهید برد."
+
+#. translators: Translation Management wizard - when selecting the "A Translation Service" option, a button appears which allows selecting a translation service
+#. translators: Translation Management wizard - The dialog title for selecting a translation service
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:90
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:98
+msgid "Choose a Translation Service"
+msgstr "یک سرویس ترجمه انتخاب کنید"
+
+#. translators: Translation Management wizard - A short explanation of the dialog's purpose
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:100
+msgid ""
+"Here is the full list of translation services that are integrated with WPML. "
+"With any service that you choose, you enjoy a streamlined process."
+msgstr ""
+"در اینجا لیست کاملی از خدمات ترجمه است که با WPML ادغام شده اند. با هر "
+"سرویسی که انتخاب کنید ، از یک روند ساده لذت خواهید برد."
+
+#. translators: Translation Management wizard - Shown after selecting a translation service
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:106
+#, php-format
+msgid "Connect this site to your %s account"
+msgstr "این سایت را به حساب %s خود متصل کنید"
+
+#. translators: Translation Management wizard - Shown after selecting a translation service. "%s" is replaced with the name of the selected translation service
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:108
+#, php-format
+msgid ""
+"Inside your %1$s account, you will find an \"API token\". This token allows "
+"WPML to connect to your account at %2$s to send and receive jobs."
+msgstr ""
+"در داخل حساب %1$s  خود ، یک \"توکن API\" پیدا خواهید کرد. این توکن به WPML "
+"اجازه می دهد تا برای ارسال و دریافت کار با حساب  %2$s به حساب شما متصل شود."
+
+#. translators: Translation Management wizard - Shown after selecting a translation service. "%s" is replaced with the name of the selected translation service
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:110
+#, php-format
+msgid "How to find API token in %s"
+msgstr "نحوه یافتن توکن API در %s"
+
+#. translators: Translation Management wizard - Shown after selecting a translation service.
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:112
+msgid "Use a different Translation Service"
+msgstr "از سرویس ترجمه دیگری استفاده کنید"
+
+#. translators: Translation Management wizard - Shown after selecting a translation service. "%s" is replaced with the name of the selected translation service
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:116
+#, php-format
+msgid "No account at %s?"
+msgstr "در %s حسابی ندارید؟"
+
+#. translators: Translation Management wizard - Shown after selecting a translation service.
+#: classes/wizard/steps/class-wpml-tm-wizard-who-will-translate-step.php:118
+msgid "Create an account in one minute"
+msgstr "در یک دقیقه حساب ایجاد کنید"
+
+#: classes/words-count/class-wpml-tm-string.php:16
+msgid "String"
+msgstr "رشته"
+
+#: classes/words-count/hooks/wpml-tm-word-count-admin-hooks.php:42
+msgid "Word count estimation"
+msgstr "برآورد تعداد کلمات"
+
+#: classes/words-count/hooks/wpml-tm-word-count-admin-hooks.php:44
+msgid "Initializing..."
+msgstr "در حال راه اندازی ..."
+
+#: classes/words-count/hooks/wpml-tm-word-count-admin-hooks.php:45
+msgid "Word count for the entire site"
+msgstr "تعداد کلمات برای کل سایت"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:28
+msgid "Items"
+msgstr "موارد"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:29
+msgid "Words"
+msgstr "کلمات"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:30
+msgid "Count time"
+msgstr "زمان را بشمارید"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:31
+msgid "Total"
+msgstr "کل"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:32
+msgid "Recalculate"
+msgstr "دوباره محاسبه کنید"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:34
+msgid "Needs refresh - Some items of this type are not counted"
+msgstr "به تازه سازی نیاز دارد - برخی از موارد از این نوع شمرده نمی شوند"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:35
+#, php-format
+msgid "%d minute"
+msgstr "%d دقیقه"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:36
+#, php-format
+msgid "%d minutes"
+msgstr "%d دقیقه"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:37
+msgid ""
+"We detected a possible issue blocking the word count process. Please verify "
+"the following settings:"
+msgstr ""
+"ما یک مسئله احتمالی را شناسایی کردیم که مانع روند شمارش کلمات است. لطفاً "
+"تنظیمات زیر را تأیید کنید:"
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:39
+msgid ""
+"Your site should be publicly accessible or the server should have access to "
+"the site."
+msgstr ""
+"سایت شما باید در دسترس عموم باشد یا سرور باید به سایت دسترسی داشته باشد."
+
+#: classes/words-count/report/wpml-tm-word-count-report-view.php:40
+msgid "The constant DISABLE_WP_CRON should not be set to true."
+msgstr "DISABLE_WP_CRON ثابت نباید درست باشد."
+
+#: classes/words-count/wpml-tm-package-element.php:54
+msgid "Unknown string Package"
+msgstr "بسته رشته ناشناخته"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:8
+msgid "Partial translation"
+msgstr "ترجمه جزئی"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:9
+msgid "Translation needs update"
+msgstr "ترجمه باید به روز شود"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:12
+msgid "Waiting for translator / In progress"
+msgstr "منتظر مترجم / در حال انجام است"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:14
+msgid "Strings in the basket"
+msgstr "رشته ها در سبد"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:80
+msgid "Translate selected strings"
+msgstr "رشته های انتخاب شده را ترجمه کنید"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:92
+msgid "All languages"
+msgstr "همه زبان ها"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:117
+#: menu/wpml-tm-menus-management.php:525
+#, php-format
+msgid "Flag for %s"
+msgstr "پرچم گذاری برای  %s"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:135
+#, php-format
+msgid "Estimated cost: %s USD"
+msgstr "هزینه تخمینی: %s USD"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:152
+msgid ""
+"One of the selected strings is in a language that is not activate. It can "
+"not be added to the translation basket."
+msgstr ""
+"یکی از رشته های انتخاب شده به زبانی است که فعال نمی شود. نمی تواند به سبد "
+"ترجمه اضافه شود."
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:153
+msgid ""
+"Strings in different languages are selected. They can not be added to the "
+"translation basket."
+msgstr ""
+"رشته ها به زبان های مختلف انتخاب می شوند. آنها نمی توانند به سبد ترجمه اضافه "
+"شوند."
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:154
+msgid ""
+"You cannot add strings in this language to the basket since it already "
+"contains posts or strings of another source language! Either submit the "
+"current basket or delete the posts of differing language in the current "
+"basket"
+msgstr ""
+"شما نمی توانید رشته هایی به این زبان به سبد اضافه کنید زیرا در حال حاضر شامل "
+"نوشته ها یا رشته های زبان منبع دیگر است! یا سبد کنونی را ارسال کنید یا نوشته "
+"های متفاوت زبان را در سبد فعلی حذف کنید"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:155
+msgid "Add to translation basket"
+msgstr "افزودن به سبد ترجمه"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:176
+msgid "In the translation basket"
+msgstr "در سبد ترجمه"
+
+#: classes/wpml-st/class-wpml-remote-string-translation.php:195
+#, php-format
+msgid "One or more strings sent to %s"
+msgstr "یک یا چند رشته به %s ارسال شده است"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:267
+msgid " - A xliff file is attached."
+msgstr " - یک فایل xliff پیوست شده است."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:485
+msgid "You are trying to import an empty file."
+msgstr "شما در حال درون ریزی یک فایل خالی هستید."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:497
+msgid "Incompatible Archive."
+msgstr "بایگانی ناسازگاراست."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:504
+msgid "Could not retrieve file from archive."
+msgstr "فایل از بایگانی بازیابی نمی شود."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:515
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:542
+msgid "The archive contains one or more empty files."
+msgstr "بایگانی شامل یک یا چند فایل خالی است."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:525
+msgid "You are trying to import an incompatible Archive."
+msgstr "شما در حال وارد کردن بایگانی ناسازگار هستید."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:530
+msgid "You are trying to import an empty archive."
+msgstr "شما در حال وارد کردن بایگانی خالی هستید."
+
+#. translators: %s: job id.
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:564
+#, php-format
+msgid "Translation of job %s has been uploaded and completed."
+msgstr "ترجمه کار %s بارگذاری و تکمیل شده است."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:592
+msgid "Bulk Actions"
+msgstr "اقدامات بزرگ"
+
+#. translators: %s: XLIFF version.
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:647
+#, php-format
+msgid "Export XLIFF %s"
+msgstr "برون بری XLIFF %s"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:674
+msgid "No translation jobs were selected for export."
+msgstr "هیچ شغل ترجمه ای برای برون بری انتخاب نشده است."
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:732
+msgid "Export all jobs:"
+msgstr "برون بری تمام کار ها:"
+
+#. translators: %1: post type, %2: from language, %3: to language, %4: status.
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:762
+#, php-format
+msgid "Export all filtered jobs of %1$s from %2$s to %3$s in %4$s:"
+msgstr "برون بری همه ی کارهای فیلتر شده ی %1$s از %2$s به %3$s در %4$s:"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:775
+msgid "Import / Export XLIFF"
+msgstr "درون ریزی / برون بری XLIFF"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:784
+msgid "SimpleXML missing!"
+msgstr "SimpleXML گم شده است!"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:788
+msgid "WPML Minimum Requirements"
+msgstr "حداقل الزامات WPML"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:801
+msgid "Export"
+msgstr "برون بری"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:813
+msgid "Select the xliff file or zip file to upload from your computer:&nbsp;"
+msgstr ""
+"فایل xliff یا فایل zip را برای بارگذاری از رایانه خود انتخاب کنید: & nbsp؛"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:818
+msgid "Upload"
+msgstr "بارگزاری"
+
+#: classes/xliff/class-wpml-tm-xliff-frontend.php:853
+msgid "Include XLIFF files in notification emails"
+msgstr "فایل های XLIFF را در ایمیل های اعلان قرار دهید"
+
+#: classes/xliff/class-wpml-tm-xliff-reader.php:30
+msgid "The xliff file could not be read."
+msgstr "فایل xliff قابل خواندن نیست."
+
+#: classes/xliff/class-wpml-tm-xliff-shared.php:183
+#, php-format
+msgid "The translation job (%s) doesn't belong to you."
+msgstr "کار ترجمه (%s)  متعلق به شما نیست."
+
+#: classes/xliff/class-wpml-tm-xliff-shared.php:227
+#, php-format
+msgid "\"%s\" is not a valid XLIFF file."
+msgstr "\"%s\" یک فایل XLIFF معتبر نیست."
+
+#: classes/xliff/class-wpml-tm-xliff-shared.php:238
+msgid "The uploaded xliff file does not seem to be properly formed."
+msgstr "به نظر نمی رسد فایل xliff بارگذاری شده به درستی تشکیل شده باشد."
+
+#: classes/xliff/class-wpml-tm-xliff-shared.php:241
+msgid "Missing or wrong data:"
+msgstr "داده های گمشده یا اشتباه:"
+
+#: classes/xliff/class-wpml-tm-xliff-shared.php:259
+msgid "The uploaded xliff file doesn't belong to this system."
+msgstr "فایل xliff بارگذاری شده به این سیستم تعلق ندارد."
+
+#: dist/js/translationDashboard/app.js:14
+msgid "227"
+msgstr "227"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "198"
+msgstr "198"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "96"
+msgstr "96"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "97"
+msgstr "97"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "99"
+msgstr "99"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "98"
+msgstr "98"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "100"
+msgstr "100"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "101"
+msgstr "101"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "102"
+msgstr "102"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "30"
+msgstr "30"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "231"
+msgstr "231"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "95"
+msgstr "95"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "33"
+msgstr "33"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "223"
+msgstr "223"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "194"
+msgstr "194"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "188"
+msgstr "188"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "189"
+msgstr "189"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "190"
+msgstr "190"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "276"
+msgstr "276"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "91"
+msgstr "91"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "92"
+msgstr "92"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "93"
+msgstr "93"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "137"
+msgstr "137"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "60"
+msgstr "60"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "61"
+msgstr "61"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "62"
+msgstr "62"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "90"
+msgstr "90"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "168"
+msgstr "168"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "108"
+msgstr "108"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "169"
+msgstr "169"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "130"
+msgstr "130"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "191"
+msgstr "191"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "174"
+msgstr "174"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "110"
+msgstr "110"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "147"
+msgstr "147"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "148"
+msgstr "148"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "254"
+msgstr "254"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "31"
+msgstr "31"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "150"
+msgstr "150"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "151"
+msgstr "151"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "152"
+msgstr "152"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "153"
+msgstr "153"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "155"
+msgstr "155"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "156"
+msgstr "156"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "166"
+msgstr "166"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "167"
+msgstr "167"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "160"
+msgstr "160"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "161"
+msgstr "161"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "162"
+msgstr "162"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "163"
+msgstr "163"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "243"
+msgstr "243"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "271"
+msgstr "271"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "262"
+msgstr "262"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "246"
+msgstr "246"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "263"
+msgstr "263"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "185"
+msgstr "185"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "244"
+msgstr "244"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "253"
+msgstr "253"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "245"
+msgstr "245"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "177"
+msgstr "177"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "261"
+msgstr "261"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "178"
+msgstr "178"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "187"
+msgstr "187"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "170"
+msgstr "170"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "171"
+msgstr "171"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "268"
+msgstr "268"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "200"
+msgstr "200"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "250"
+msgstr "250"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "251"
+msgstr "251"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "38"
+msgstr "38"
+
+#: dist/js/translationDashboard/app.js:14
+msgid "40"
+msgstr "40"
+
+#: dist/js/translationQueue/app.js:1
+msgid "entries"
+msgstr "ورودی های"
+
+#: dist/js/translationQueue/app.js:1
+msgid "values"
+msgstr "مقادیر"
+
+#: dist/js/translationQueue/app.js:1
+msgid "keys"
+msgstr "کلید ها"
+
+#: dist/js/translationServiceInstruction/app.js:1
+msgid "symbol-registry"
+msgstr "رجیستری نماد"
+
+#: dist/js/translationServiceInstruction/app.js:1
+msgid "symbols"
+msgstr "نماد ها"
+
+#: dist/js/translationServiceInstruction/app.js:1
+msgid "op-symbols"
+msgstr "op-symbols"
+
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:325
+msgid "Translation (incomplete) saved."
+msgstr "ترجمه (ناقص) ذخیره شد."
+
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:375
+msgid "Submitted data is not valid."
+msgstr "داده های ارسالی معتبر نیست"
+
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:394
+msgid "Job ID is missing"
+msgstr "شناسه کار موجود نیست"
+
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:397
+msgid "The original post cannot be retrieved"
+msgstr "نوشته اصلی قابل بازیابی نیست"
+
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:400
+msgid "The type of the post cannot be retrieved"
+msgstr "نوع نوشته قابل بازیابی نیست"
+
+#: inc/translation-jobs/helpers/wpml-save-translation-data-action.class.php:404
+msgid ""
+"This job cannot be edited anymore because a newer job for this element "
+"exists."
+msgstr ""
+"این شغل دیگر قابل ویرایش نیست زیرا شغل جدیدتری برای این عنصر وجود دارد."
+
+#: inc/translation-jobs/jobs/wpml-translation-job.class.php:274
+msgid "(inactive and unknown service)"
+msgstr "(سرویس غیرفعال و ناشناخته)"
+
+#: inc/translation-jobs/jobs/wpml-translation-job.class.php:351
+msgid "Send"
+msgstr "ارسال"
+
+#: inc/translation-proxy/translationproxy-basket.class.php:159
+msgid "The items you have selected are now in the translation basket &ndash;"
+msgstr "مواردی که انتخاب کرده اید اکنون در سبد ترجمه & ndash؛"
+
+#: inc/translation-proxy/translationproxy-basket.class.php:160
+#, php-format
+msgid "<a href=\"%s\">Send to translation &raquo;</a>"
+msgstr "<a href=\"%s\"> ارسال به ترجمه  &raquo;</a>"
+
+#: inc/translation-proxy/translationproxy-basket.class.php:376
+#, php-format
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already in "
+"progress."
+msgstr ""
+"نوشته \"%1$s\" برای %2$s نادیده گرفته خواهد شد ، زیرا ترجمه در حال انجام است."
+
+#: inc/translation-proxy/translationproxy-basket.class.php:391
+#, php-format
+msgid "Post \"%1$s\" will be ignored for %2$s, because it is an original post."
+msgstr ""
+"نوشته \"%1$s\" برای  %2$s نادیده گرفته خواهد شد ، زیرا این یک پست اصلی است."
+
+#: inc/translation-proxy/translationproxy-basket.class.php:449
+#: inc/translation-proxy/translationproxy-basket.class.php:932
+msgid "Please select at least one document to translate."
+msgstr "لطفاً حداقل یک سند را برای ترجمه انتخاب کنید."
+
+#: inc/translation-proxy/translationproxy-basket.class.php:459
+#: inc/translation-proxy/translationproxy-basket.class.php:911
+msgid "Please select at least one language to translate into."
+msgstr "لطفاً حداقل یک زبان را برای ترجمه انتخاب کنید."
+
+#: inc/translation-proxy/translationproxy-basket.class.php:474
+msgid ""
+"You cannot add strings  in this language to the basket since it already "
+"contains posts or strings of another source language!\n"
+"\t\t\t\t\t\tEither submit the current basket and then add the post or delete "
+"the posts of differing language in the current basket"
+msgstr ""
+"شما نمی توانید رشته هایی به این زبان به سبد اضافه کنید زیرا در حال حاضر شامل "
+"پست ها یا رشته های زبان منبع دیگر است!\n"
+"\t\t\t\t\t\tیا سبد کنونی را ارسال کنید و سپس نوشته را اضافه کنید یا نوشته "
+"های متفاوت زبان را در سبد فعلی حذف کنید"
+
+#: inc/translation-proxy/translationproxy-basket.class.php:508
+#, php-format
+msgid ""
+"String \"%1$s\" will be ignored for %2$s, because translation is already "
+"waiting for translator."
+msgstr ""
+"رشته \"%1$s\"  برای  %2$s نادیده گرفته خواهد شد ، زیرا ترجمه از قبل منتظر "
+"مترجم است."
+
+#: inc/translation-proxy/translationproxy-basket.class.php:818
+msgid "Select additional options"
+msgstr "گزینه های اضافی را انتخاب کنید"
+
+#: inc/translation-proxy/translationproxy-basket.class.php:818
+msgid "Refresh"
+msgstr "تازه کردن"
+
+#: inc/translation-proxy/translationproxy-basket.class.php:896
+msgid ""
+"You cannot add posts in this language to the basket since it already "
+"contains posts or strings of another source language!\n"
+"\t\t\t\t\t\tEither submit the current basket and then add the post or delete "
+"the posts of differing language in the current basket"
+msgstr ""
+"شما نمی توانید پست های این زبان را به سبد اضافه کنید زیرا در حال حاضر شامل "
+"پست ها یا رشته های زبان منبع دیگر است!\n"
+"\t\t\t\t\t\tیا سبد کنونی را ارسال کنید و سپس پست را اضافه کنید یا پستهای "
+"متفاوت زبان را در سبد فعلی حذف کنید"
+
+#: inc/translation-proxy/translationproxy-popup.php:26
+#, php-format
+msgid ""
+"<p>Requested languages are not supported by the translation service (%s). "
+"Please <a%s>contact us</a> for support. </p>"
+msgstr ""
+"<p> زبانهای درخواستی توسط سرویس ترجمه (%s) پشتیبانی نمی شوند. لطفاً برای "
+"پشتیبانی  <a%s> با ما تماس بگیرید </a> . </p>"
+
+#: inc/translation-proxy/translationproxy-popup.php:28
+#, php-format
+msgid ""
+"<p>Could not add the requested languages. Please <a%s>contact us</a> for "
+"support. </p><p>Show <a%s>debug information</a>.</p>"
+msgstr ""
+"<p> نمی توان زبانهای درخواستی را اضافه کرد. لطفاً برای پشتیبانی <a%s> با ما "
+"تماس  بگیرید </a>.</p><p> نمایش <a%s> اطلاعات اشکال زدایی </a>.</p>"
+
+#: inc/translation-proxy/translationproxy-project.class.php:289
+#, php-format
+msgid "%s: WPML Translation Jobs"
+msgstr "%s: کار ترجمه  WPML"
+
+#: inc/translation-proxy/translationproxy.class.php:233
+msgid "Contact"
+msgstr "تماس"
+
+#: inc/translation-proxy/translationproxy.class.php:234
+msgid "Hide this"
+msgstr "این را مخفی کنید"
+
+#: inc/translation-proxy/translationproxy.class.php:239
+msgid "Need translators?"
+msgstr "به مترجم نیاز دارید؟"
+
+#: inc/translation-proxy/wpml-pro-translation.class.php:87
+msgid "Please activate translation service first."
+msgstr "لطفاً ابتدا خدمات ترجمه را فعال کنید."
+
+#: inc/translation-proxy/wpml-pro-translation.class.php:90
+msgid "Could not update the translation pickup mode."
+msgstr "حالت pickup ترجمه به روز نمی شود."
+
+#: inc/translation-proxy/wpml-pro-translation.class.php:93
+msgid "Ok"
+msgstr "قبول"
+
+#: inc/translation-proxy/wpml-pro-translation.class.php:526
+msgid "Minor edit - don't update translation"
+msgstr "ویرایش جزئی - ترجمه را به روز نکنید"
+
+#: inc/translation-proxy/wpml-pro-translation.class.php:540
+msgid "Minor edit"
+msgstr "ویرایش جزئی"
+
+#: inc/translation-proxy/wpml-pro-translation.class.php:543
+msgid "Don't update translation"
+msgstr "ترجمه را به روز نکنید"
+
+#: inc/translation-proxy/wpml-translation-basket.class.php:125
+#, php-format
+msgid "The length of the batch name exceeds the maximum length of %s"
+msgstr "طول نام دسته از حداکثر طول %s بیشتر است"
+
+#: inc/translation-proxy/wpml-translation-basket.class.php:133
+msgid "This batch name already exists and was modified to ensure unique naming"
+msgstr ""
+"این نام دسته ای از قبل وجود دارد و برای اطمینان از نامگذاری منحصر به فرد "
+"اصلاح شده است"
+
+#: inc/translation-proxy/wpml-translation-basket.class.php:140
+msgid "The batch name was appended with the source language of its elements."
+msgstr "نام دسته با زبان منبع عناصر آن ضمیمه شده است."
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:34
+#: menu/wpml-tm-menus-management.php:554
+msgid "Add selected content to translation basket"
+msgstr "محتوای انتخابی را به سبد ترجمه اضافه کنید"
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:36
+msgid "Add selected content to translation basket / Duplicate"
+msgstr "افزودن محتوای انتخاب شده به سبد ترجمه / کپی"
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:41
+msgid "Choose at least one translation action"
+msgstr "حداقل یک اقدام ترجمه را انتخاب کنید"
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:45
+msgid "Finished Post Duplication"
+msgstr "تکثیر ارسال به پایان رسید"
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:50
+msgid "Duplicating"
+msgstr "در حال کپی کردن"
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:51
+msgid "Post parent"
+msgstr "پدر (parent) نوشته"
+
+#: menu/dashboard/wpml-tm-dashboard-ajax.class.php:52
+msgid "Any"
+msgstr "هر"
+
+#: menu/wpml-tm-menus-management.php:72
+msgid "WPML's Translation Management"
+msgstr "مدیریت ترجمه WPML"
+
+#: menu/wpml-tm-menus-management.php:75
+#, php-format
+msgid "Before you can use %s, you need to complete this quick setup."
+msgstr "قبل از استفاده از %s ، باید این تنظیم سریع را انجام دهید."
+
+#: menu/wpml-tm-menus-management.php:274
+msgid "Published"
+msgstr "منتشر شده"
+
+#: menu/wpml-tm-menus-management.php:275 menu/wpml-tm-menus-settings.php:385
+msgid "Draft"
+msgstr "پیش نویس"
+
+#: menu/wpml-tm-menus-management.php:276
+msgid "Pending Review"
+msgstr "بررسی در انتظار"
+
+#: menu/wpml-tm-menus-management.php:277
+msgid "Scheduled"
+msgstr "برنامه ریزی شده"
+
+#: menu/wpml-tm-menus-management.php:278
+msgid "Private"
+msgstr "خصوصی"
+
+#: menu/wpml-tm-menus-management.php:338
+#, php-format
+msgid "To see more items, use the filter and narrow down the search. %s"
+msgstr ""
+"برای دیدن موارد بیشتر ، از فیلتر استفاده کنید و جستجو را محدود کنید. %s"
+
+#: menu/wpml-tm-menus-management.php:339
+msgid "Help"
+msgstr "راهنمایی"
+
+#: menu/wpml-tm-menus-management.php:359
+msgid "account status"
+msgstr "وضعیت حساب کاربری"
+
+#: menu/wpml-tm-menus-management.php:379
+msgid "2. Select translation options"
+msgstr "2. گزینه های ترجمه را انتخاب کنید"
+
+#: menu/wpml-tm-menus-management.php:408
+msgid "Word count estimate:"
+msgstr "برآورد تعداد کلمات:"
+
+#: menu/wpml-tm-menus-management.php:409
+#, php-format
+msgid "%s words"
+msgstr "کلمات %s"
+
+#: menu/wpml-tm-menus-management.php:411
+#, php-format
+msgid "in %s document(s)"
+msgstr "در %s مستندات"
+
+#. translators: This text will be used to build a link to the translation roles page
+#: menu/wpml-tm-menus-management.php:439
+msgid "at least one translator"
+msgstr "حداقل یک مترجم"
+
+#. translators: This text will be used to build a link to the translation services page
+#: menu/wpml-tm-menus-management.php:442
+msgid "active and authenticated translation service"
+msgstr "سرویس ترجمه فعال و معتبر"
+
+#. translators: %1$s contains a link to the translation roles page with "at least one translator" as a text whilst %2$s is a link to the translation services page with "active and authenticated translation service" as a text
+#: menu/wpml-tm-menus-management.php:445
+#, php-format
+msgid ""
+"To send content to translation first make sure you either have %1$s or an "
+"%2$s."
+msgstr "برای ارسال محتوا به ترجمه ابتدا مطمئن شوید که %1$s  یا %2$s دارید."
+
+#. translators: %s is replaced with the name of the active translation service
+#: menu/wpml-tm-menus-management.php:452
+#, php-format
+msgid ""
+"To send content to translation first make sure \"%s\" is authenticated or "
+"you have at least one translator."
+msgstr ""
+"برای ارسال محتوا به ترجمه ابتدا اطمینان حاصل کنید که  \"%s\"  احراز هویت شده "
+"است یا حداقل یک مترجم دارید."
+
+#: menu/wpml-tm-menus-management.php:488
+msgid "All Languages"
+msgstr "همه زبان ها"
+
+#: menu/wpml-tm-menus-management.php:499 menu/wpml-tm-menus-management.php:537
+msgid "Duplicate content"
+msgstr "کپی کردن محتوا"
+
+#: menu/wpml-tm-menus-management.php:507 menu/wpml-tm-menus-management.php:543
+msgid "Do nothing"
+msgstr "هیچ کاری نکن"
+
+#: menu/wpml-tm-menus-management.php:564
+msgid ""
+"Any existing content (translations) will be overwritten when creating "
+"duplicates."
+msgstr ""
+"هنگام ایجاد نسخه های تکراری ، هرگونه محتوای موجود (ترجمه ها) رونویسی می شود."
+
+#: menu/wpml-tm-menus-management.php:567
+msgid ""
+"When duplicating content, please first duplicate parent pages to maintain "
+"the site's hierarchy."
+msgstr ""
+"هنگام تکثیر محتوا ، لطفاً ابتدا صفحات پدر (parent ) را برای حفظ سلسله مراتب "
+"سایت کپی کنید."
+
+#: menu/wpml-tm-menus-management.php:658
+msgid "No documents found"
+msgstr "هیچ سندی یافت نشد"
+
+#: menu/wpml-tm-menus-management.php:763
+msgid "1. Review documents for translation"
+msgstr "1. اسناد ترجمه را مرور کنید"
+
+#: menu/wpml-tm-menus-management.php:770
+msgid ""
+"You are about to delete selected items from the basket. Are you sure you "
+"want to do that?"
+msgstr ""
+"شما در شرف حذف موارد انتخاب شده از سبد خرید هستید. آیا شما مطمئن هستید که "
+"میخواهید انجام دهید؟"
+
+#: menu/wpml-tm-menus-management.php:802
+#, php-format
+msgid "%1$s|WPML|%2$s"
+msgstr "%1$s|WPML|%2$s"
+
+#: menu/wpml-tm-menus-management.php:815
+msgid ""
+"This deadline is what WPML suggests according to the amount of work that you "
+"already sent to this translator. You can modify this date to set the "
+"deadline manually."
+msgstr ""
+"این مهلت زمانی است که WPML با توجه به میزان کاری که قبلاً برای این مترجم "
+"ارسال کرده اید پیشنهاد می کند. می توانید این تاریخ را تغییر دهید تا آخرین "
+"مهلت را به صورت دستی تنظیم کنید."
+
+#: menu/wpml-tm-menus-management.php:821
+#, fuzzy
+msgid "2. Set a batch name and deadline"
+msgstr "2. یک نام و مهلت دسته ای تعیین کنید"
+
+#: menu/wpml-tm-menus-management.php:822
+msgid "3. Choose translator or Translation Service"
+msgstr "3. مترجم یا خدمات ترجمه را انتخاب کنید"
+
+#: menu/wpml-tm-menus-management.php:823
+msgid "Batch name:"
+msgstr "نام دسته:"
+
+#: menu/wpml-tm-menus-management.php:824
+msgid "Give a name to the batch. If omitted, the default name will be applied."
+msgstr "به دسته ای نام دهید. در صورت حذف ، نام پیش فرض اعمال خواهد شد."
+
+#: menu/wpml-tm-menus-management.php:825
+msgid "Language pair"
+msgstr "جفت زبان"
+
+#: menu/wpml-tm-menus-management.php:827
+msgid ""
+"Did you know that you can also set Translation Services and professional "
+"translators will handle your translation?"
+msgstr ""
+"آیا می دانید می توانید خدمات ترجمه را نیز تنظیم کنید و مترجمان حرفه ای ترجمه "
+"شما را انجام می دهند؟"
+
+#: menu/wpml-tm-menus-management.php:828
+msgid "Suggested deadline:"
+msgstr "مهلت پیشنهادی:"
+
+#: menu/wpml-tm-menus-management.php:830
+msgid "Send all items for translation"
+msgstr "ارسال همه موارد برای ترجمه"
+
+#: menu/wpml-tm-menus-management.php:839
+msgid "Check available Translation Services"
+msgstr "خدمات ترجمه موجود را بررسی کنید"
+
+#: menu/wpml-tm-menus-management.php:880
+msgid "Translation Jobs"
+msgstr "مشاغل ترجمه"
+
+#: menu/wpml-tm-menus-management.php:896
+msgid "Communication Log"
+msgstr "گزارش ارتباطات"
+
+#: menu/wpml-tm-menus-management.php:926
+msgid ""
+"This is a log of the communication between your site and the translation "
+"system. It doesn't include any private information and allows WPML support "
+"to help with problems related to sending content to translation."
+msgstr ""
+"این یک گزارش از ارتباطات بین سایت شما و سیستم ترجمه است. این شامل هیچ گونه "
+"اطلاعات خصوصی نیست و به پشتیبانی WPML برای کمک به مشکلات مربوط به ارسال "
+"محتوا به ترجمه کمک می کند."
+
+#: menu/wpml-tm-menus-management.php:934
+msgid "Clear log"
+msgstr "ورود به سیستم را پاک کنید"
+
+#: menu/wpml-tm-menus-management.php:936
+msgid "The communication log is empty."
+msgstr "گزارش ارتباطی خالی است."
+
+#: menu/wpml-tm-menus-management.php:941
+msgid "Disable logging"
+msgstr "ورود به سیستم را غیرفعال کنید"
+
+#: menu/wpml-tm-menus-management.php:944
+msgid ""
+"Communication logging is currently disabled. To allow WPML support to help "
+"you with issues related to sending content to translation, you need to "
+"enable the communication logging."
+msgstr ""
+"ثبت ارتباطات در حال حاضر غیرفعال است. برای اینکه پشتیبانی WPML بتواند در "
+"زمینه ارسال مطالب به ترجمه به شما کمک کند ، باید ثبت ارتباطات را فعال کنید."
+
+#: menu/wpml-tm-menus-management.php:948
+msgid "Enable logging"
+msgstr "فعالسازی ورود به سیستم"
+
+#: menu/wpml-tm-menus-settings.php:25 menu/wpml-tm-menus-settings.php:183
+msgid "How to translate posts and pages"
+msgstr "نحوه ترجمه نوشته ها و صفحات"
+
+#: menu/wpml-tm-menus-settings.php:28
+msgid "Posts and pages synchronization"
+msgstr "همگام سازی نوشته ها و صفحات"
+
+#: menu/wpml-tm-menus-settings.php:29 menu/wpml-tm-menus-settings.php:357
+msgid "Translated documents options"
+msgstr "گزینه های اسناد ترجمه شده"
+
+#: menu/wpml-tm-menus-settings.php:31
+msgid "Login and registration pages"
+msgstr "صفحات ورود و ثبت نام"
+
+#: menu/wpml-tm-menus-settings.php:34
+msgid "Custom posts slug translation options"
+msgstr "نوشته های سفارشی گزینه های ترجمه نامک"
+
+#: menu/wpml-tm-menus-settings.php:37 menu/wpml-tm-menus-settings.php:509
+msgid "Translation pickup mode"
+msgstr "حالت pickup ترجمه"
+
+#: menu/wpml-tm-menus-settings.php:40 menu/xliff-options.php:24
+msgid "XLIFF file options"
+msgstr "گزینه های فایل XLIFF"
+
+#: menu/wpml-tm-menus-settings.php:57
+msgid "Post Types Translation"
+msgstr "ترجمه انواع نوشته"
+
+#: menu/wpml-tm-menus-settings.php:61
+msgid "Taxonomies Translation"
+msgstr "ترجمه طبقه بندی ها"
+
+#: menu/wpml-tm-menus-settings.php:65 menu/wpml-tm-menus-settings.php:607
+msgid "Admin Strings to Translate"
+msgstr "رشته های ادمین برای ترجمه"
+
+#: menu/wpml-tm-menus-settings.php:98
+msgid "Multilingual Content Setup"
+msgstr "تنظیم محتوای چند زبانه"
+
+#: menu/wpml-tm-menus-settings.php:109
+msgid "Translation Notifications"
+msgstr "اعلان های ترجمه"
+
+#: menu/wpml-tm-menus-settings.php:131
+msgid ""
+"There is new translated content on this site. You can scan posts and strings "
+"to adjust links to point to translated content."
+msgstr ""
+"محتوای ترجمه شده جدیدی در این سایت وجود دارد. می توانید پست ها و رشته ها را "
+"اسکن کنید تا لینک ها را به سمت محتوای ترجمه شده تنظیم کنید."
+
+#: menu/wpml-tm-menus-settings.php:149
+msgid ""
+"WPML can read a configuration file that tells it what needs translation in "
+"themes and plugins. The file is named wpml-config.xml and it's placed in the "
+"root folder of the plugin or theme."
+msgstr ""
+"WPML می تواند یک فایل پیکربندی را بخواند که به آن بگویید چه چیزی در پوسته ها "
+"و افزونه ها به ترجمه نیاز دارد. این فایل wpml-config.xml نام دارد و در فولدر "
+"اصلی افزونه یا پوسته قرار می گیرد."
+
+#: menu/wpml-tm-menus-settings.php:159
+msgid "Learn more"
+msgstr "بیشتر بیاموزید"
+
+#. translators: Heading shown for selecting the editor to use with WPML's Translation Management when creating new content
+#: menu/wpml-tm-menus-settings.php:199
+msgid "New content"
+msgstr "محتوای جدید"
+
+#. translators: Editor to use with WPML's Translation Management when creating new content
+#: menu/wpml-tm-menus-settings.php:214
+msgid "Use WPML's Advanced Translation Editor"
+msgstr "از  ویرایشگر ترجمه حرفه ای WPML استفاده کنید"
+
+#. translators: Editor to use with WPML's Translation Management when creating new content
+#. translators: Which editor to use when updating content that was created with WPML's Classic Translation Editor?
+#: menu/wpml-tm-menus-settings.php:228 menu/wpml-tm-menus-settings.php:274
+msgid "Use WPML's Classic Translation Editor"
+msgstr "از  ویرایشگر ترجمه کلاسیک WPML استفاده کنید"
+
+#. translators: heading shown for selecting the editor to use when updating content that was created with WPML's Classic Translation Editor
+#: menu/wpml-tm-menus-settings.php:244
+msgid "Content that was created with WPML's Classic Translation Editor"
+msgstr "محتوایی که با ویرایشگر ترجمه کلاسیک WPML ایجاد شده است"
+
+#. translators: Which editor to use when updating content that was created with WPML's Classic Translation Editor?
+#: menu/wpml-tm-menus-settings.php:259
+msgid ""
+"Switch to using the Advanced Translation Editor (old translations may be "
+"unusable)"
+msgstr ""
+"به استفاده از Advanced Editor Editor بروید (ترجمه های قدیمی ممکن است غیر "
+"قابل استفاده باشند)"
+
+#: menu/wpml-tm-menus-settings.php:290
+msgid "Taxonomies"
+msgstr "طبقه بندی ها"
+
+#: menu/wpml-tm-menus-settings.php:301
+msgid "Don't include already translated terms in the translation editor"
+msgstr "اصطلاحات ترجمه شده قبلی را در ویرایشگر ترجمه وارد نکنید"
+
+#: menu/wpml-tm-menus-settings.php:308
+msgid "Translators help"
+msgstr "راهنمای مترجمان"
+
+#: menu/wpml-tm-menus-settings.php:318
+msgid "Show translation instructions in the list of pages"
+msgstr "دستورالعمل های ترجمه را در لیست صفحات نشان دهید"
+
+#: menu/wpml-tm-menus-settings.php:332
+msgid "Learn more about the different translation options"
+msgstr "درباره گزینه های مختلف ترجمه بیشتر بیاموزید"
+
+#: menu/wpml-tm-menus-settings.php:372
+msgid "Document status"
+msgstr "وضعیت مستند"
+
+#: menu/wpml-tm-menus-settings.php:400
+msgid "Same as the original document"
+msgstr "همانند سند اصلی"
+
+#: menu/wpml-tm-menus-settings.php:410
+msgid ""
+"Choose if translations should be published when received. Note: If Publish "
+"is selected, the translation will only be published if the original document "
+"is published when the translation is received."
+msgstr ""
+"انتخاب کنید که آیا ترجمه ها باید هنگام دریافت منتشر شوند. توجه: اگر Publish "
+"انتخاب شود ، ترجمه تنها در صورت انتشار سند اصلی هنگام دریافت ترجمه ، منتشر "
+"می شود."
+
+#: menu/wpml-tm-menus-settings.php:419
+msgid "Page URL"
+msgstr "URL صفحه"
+
+#: menu/wpml-tm-menus-settings.php:433
+msgid "Auto-generate from title (default)"
+msgstr "تولید خودکار از عنوان (پیش فرض)"
+
+#: menu/wpml-tm-menus-settings.php:449
+msgid ""
+"Translate (this will include the slug in the translation and not create it "
+"automatically from the title)"
+msgstr ""
+"ترجمه (این شامل نامک در ترجمه است و به طور خودکار از عنوان ایجاد نمی شود)"
+
+#: menu/wpml-tm-menus-settings.php:465
+msgid "Copy from original language if translation language uses encoded URLs"
+msgstr ""
+"اگر زبان ترجمه از URL های رمزگذاری شده استفاده می کند ، از زبان اصلی کپی کنید"
+
+#: menu/wpml-tm-menus-settings.php:525
+msgid ""
+"How should the site receive completed translations from Translation Service?"
+msgstr "چگونه سایت باید ترجمه های کامل شده از سرویس ترجمه را دریافت کند؟"
+
+#: menu/wpml-tm-menus-settings.php:543
+msgid ""
+"Translation Service will deliver translations automatically using XML-RPC"
+msgstr ""
+"سرویس ترجمه با استفاده از XML-RPC ترجمه ها را به صورت خودکار ارائه می دهد"
+
+#: menu/wpml-tm-menus-settings.php:562
+msgid "The site will fetch translations manually"
+msgstr "سایت ترجمه ها را به صورت دستی واکشی می کند"
+
+#: menu/wpml-tm-menus-settings.php:615
+msgid "Admin Strings"
+msgstr "رشته های ادمین"
+
+#: menu/wpml-tm-menus-settings.php:643
+msgid "Edit translatable strings"
+msgstr "رشته های قابل ترجمه را ویرایش کنید"
+
+#: menu/wpml-tm-menus-settings.php:748
+msgid "Translate Link Targets"
+msgstr "اهداف لینک را ترجمه کنید"
+
+#: menu/xliff-management.php:8
+msgid "XLIFF translation"
+msgstr "ترجمه XLIFF"
+
+#: menu/xliff-options.php:11
+msgid "Do nothing - all new line characters will stay untouched."
+msgstr "کاری انجام ندهید - همه کاراکتر های خط جدید دست نخورده باقی می مانند."
+
+#: menu/xliff-options.php:15
+#, php-format
+msgid ""
+"All new lines should be replaced by HTML element %s. Use this option if "
+"translation tool used by translator does not support new lines characters "
+"(for example Virtaal software)"
+msgstr ""
+"همه خطوط جدید باید با عنصر HTML %s جایگزین شوند. اگر ابزار ترجمه مورد "
+"استفاده توسط مترجم از کاراکترهای خطوط جدید پشتیبانی نمی کند (به عنوان مثال "
+"نرم افزار Virtaal) از این گزینه استفاده کنید"
+
+#: menu/xliff-options.php:34
+msgid "XLIFF version"
+msgstr "نسخه XLIFF"
+
+#: menu/xliff-options.php:37
+msgid "Choose default format for XLIFF file:"
+msgstr "قالب پیش فرض را برای فایل XLIFF انتخاب کنید:"
+
+#: menu/xliff-options.php:40
+msgid "Please choose"
+msgstr "لطفا انتخاب کنید"
+
+#: menu/xliff-options.php:49
+#, php-format
+msgid "XLIFF %s"
+msgstr "XLIFF %s"
+
+#: menu/xliff-options.php:59
+msgid "New lines character"
+msgstr "خطوط جدید شخصیت"
+
+#: menu/xliff-options.php:61
+msgid "How new lines characters in XLIFF files should be handled?"
+msgstr "چگونه باید خطوط جدید در فایل های XLIFF کنترل شوند؟"
+
+#. Plugin Name of the plugin/theme
+msgid "WPML Translation Management"
+msgstr "مدیریت ترجمه WPML"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wpml.org/"
+msgstr "https://wpml.org/"
+
+#. Description of the plugin/theme
+msgid ""
+"Add a complete translation process for WPML | <a href=\"https://wpml.org"
+"\">Documentation</a> | <a href=\"https://wpml.org/version/translation-"
+"management-2-10-4/\">WPML Translation Management 2.10.4 release notes</a>"
+msgstr ""
+"فرایند ترجمه کاملی را اضافه کنید برای  WPML | <a href=\"https://wpml.org\"> "
+"مستندات </a> | <a href=\"https://wpml.org/version/translation-"
+"management-2-10-4/\"> WPML Translation Management 2.10.4 یادداشت های منتشر "
+"شده </a>"
+
+#. Author of the plugin/theme
+msgid "OnTheGoSystems"
+msgstr "OnTheGoSystems"
+
+#. Author URI of the plugin/theme
+msgid "http://www.onthegosystems.com/"
+msgstr "http://www.onthegosystems.com/"

@@ -1,0 +1,172 @@
+(function ($) {
+  "use strict";
+
+  // Track initialization status
+  var isInitialized = false;
+  var initializationAttempts = 0;
+  var MAX_ATTEMPTS = 5;
+
+  // Function to check if library is loaded
+  function isJalaliDatepickerLoaded() {
+    return typeof window.jalaliDatepicker !== "undefined";
+  }
+
+  // Main initialization function
+  function initJalaliDatepicker() {
+    if (initializationAttempts >= MAX_ATTEMPTS) {
+      console.error("Azbarwp: Maximum initialization attempts reached");
+      return false;
+    }
+
+    initializationAttempts++;
+
+    if (!isJalaliDatepickerLoaded()) {
+      console.error(
+        "Azbarwp: jalaliDatepicker library not loaded (attempt " +
+          initializationAttempts +
+          ")"
+      );
+
+      // Retry after a short delay instead of dynamic loading
+      setTimeout(function () {
+        initJalaliDatepicker();
+      }, 500);
+
+      return false;
+    }
+
+    applyDatepicker();
+    return true;
+  }
+
+  // Apply datepicker to elements
+  function applyDatepicker() {
+    if (!isJalaliDatepickerLoaded()) return false;
+
+    try {
+      // Clear any initialization flags
+      $("[data-jdp]").each(function () {
+        $(this).removeAttr("data-jdp-initialized");
+      });
+
+      // Initialize with custom settings
+      jalaliDatepicker.startWatch({
+        selector: "[data-jdp]",
+        persianDigit: true,
+        autoClose: true,
+        position: "auto",
+        observer: true,
+        format: "YYYY/MM/DD",
+      });
+
+      console.log("Azbarwp: Datepicker initialized successfully");
+      isInitialized = true;
+
+      // Force re-init on click for problematic fields - use both selectors
+      $(document).off("click", ".persian-jalali-date-input, [data-jdp]"); // Remove any duplicate handlers
+      $(document).on(
+        "click",
+        ".persian-jalali-date-input, [data-jdp]",
+        function () {
+          var $this = $(this);
+          if (
+            !$this.attr("data-jdp-initialized") ||
+            $this.attr("data-jdp-initialized") === "false"
+          ) {
+            jalaliDatepicker.attachDatepicker($this[0]);
+            $this.attr("data-jdp-initialized", "true");
+          }
+        }
+      );
+
+      // Initialize existing fields directly - use both selectors
+      $(".persian-jalali-date-input, [data-jdp]").each(function () {
+        if (!$(this).attr("data-jdp-initialized")) {
+          jalaliDatepicker.attachDatepicker(this);
+          $(this).attr("data-jdp-initialized", "true");
+        }
+      });
+
+      return true;
+    } catch (error) {
+      console.error("Azbarwp: Datepicker initialization error", error);
+      return false;
+    }
+  }
+
+  // Initialize when document is ready
+  $(document).ready(function () {
+    // Try initialization with delay to ensure library is loaded
+    setTimeout(initJalaliDatepicker, 500);
+  });
+
+  // Handle Elementor frontend initialization
+  $(window).on("elementor/frontend/init", function () {
+    if (typeof elementorFrontend !== "undefined") {
+      elementorFrontend.hooks.addAction(
+        "frontend/element_ready/form.default",
+        function () {
+          setTimeout(initJalaliDatepicker, 300);
+        }
+      );
+    }
+  });
+
+  // Handle Elementor editor/preview mode
+  if (typeof elementor !== "undefined") {
+    // Editor mode
+    $(window).on("elementor:init", function () {
+      setTimeout(initJalaliDatepicker, 1000);
+    });
+
+    // Preview mode
+    $(window).on("elementor/frontend/init", function () {
+      setTimeout(initJalaliDatepicker, 1000);
+    });
+  }
+
+  // Handle dynamic content changes using MutationObserver (modern replacement for DOMNodeInserted)
+  var observer = new MutationObserver(function (mutations) {
+    var shouldReinit = false;
+
+    mutations.forEach(function (mutation) {
+      if (mutation.type === "childList") {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            var $node = $(node);
+            // Check if the added node contains datepicker fields or is one itself
+            if ($node.find("[data-jdp]").length > 0 || $node.is("[data-jdp]")) {
+              shouldReinit = true;
+            }
+          }
+        });
+      }
+    });
+
+    if (shouldReinit) {
+      setTimeout(initJalaliDatepicker, 300);
+    }
+  });
+
+  // Start observing the document for changes
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+
+  // Make functions available globally for debugging
+  window.persianJalaliElementor = {
+    initDatepicker: initJalaliDatepicker,
+    isJalaliLoaded: isJalaliDatepickerLoaded,
+    manualInit: function (selector) {
+      if (isJalaliDatepickerLoaded() && selector) {
+        var element = document.querySelector(selector);
+        if (element) {
+          jalaliDatepicker.attachDatepicker(element);
+          return true;
+        }
+      }
+      return false;
+    },
+  };
+})(jQuery);

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ToPersia — یادداشت راهبردی: امکانات حساب کاربری (فاز آینده)</title>
+<style>
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/vazirmatn/33.0.3/Vazirmatn-font-face.css');
+  :root{
+    --lapis:#0E4681; --ink:#22303e; --muted:#5c6b7a; --line:#d8e0e8;
+    --bg:#f5f7fa; --card:#ffffff; --row:#f0f4f8; --code-bg:#eef2f6;
+    --low:#1c7a43; --med:#8A6A1E; --high:#a83232;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;font-size:16.5px;line-height:1.85}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 16px 64px}
+  header{background:var(--lapis);color:#fff;border-radius:14px;padding:26px 28px;margin-bottom:26px}
+  header h1{margin:0 0 6px;font-size:23px}
+  header p{margin:0;color:#cfe0f2;font-size:14.5px}
+  .warn{background:#fbf1e2;border:1px solid #eed9b5;border-radius:10px;padding:14px 18px;margin:0 0 26px;color:#7a5b00;font-size:14.5px}
+  h2{color:var(--lapis);font-size:19.5px;margin:34px 0 6px;border-inline-start:5px solid var(--lapis);padding-inline-start:12px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 12px;padding-inline-start:17px}
+  .table-wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto;margin:10px 0}
+  table{width:100%;border-collapse:collapse;min-width:700px}
+  th{background:var(--lapis);color:#fff;font-size:13.5px;padding:10px 12px;text-align:right;white-space:nowrap}
+  td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:top;font-size:15px}
+  tbody tr:nth-child(even){background:var(--row)}
+  .pill{display:inline-block;border-radius:999px;padding:1px 11px;font-size:12.5px;font-weight:600;white-space:nowrap}
+  .p-low{background:#e6f4ec;color:var(--low)}
+  .p-med{background:#f7f0e0;color:var(--med)}
+  .p-high{background:#f7e3e3;color:var(--high)}
+  .p-none{background:#eef2f6;color:var(--muted)}
+  .src{font-size:12px;color:var(--muted)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:14px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>یادداشت راهبردی — امکانات حساب کاربری (فاز آینده، نه فاز ۵)</h1>
+  <p>پروژهٔ ToPersia · تجمیع ایده‌های مطرح‌شده در گفت‌وگو — مرجع برای وقتی به تصمیم «حساب کاربری بسازیم یا نه» رسیدیم</p>
+</header>
+
+<div class="warn">⚠️ این سند یک تصمیم فاز ۵ نیست. هیچ‌کدام از موارد زیر بلاک‌کنندهٔ ساخت G4/G5 یا Backfill نیست. هدف فقط این است که ایده‌ها در چت گم نشوند.</div>
+
+<h2>پیش‌نیاز مشترک همهٔ موارد زیر</h2>
+<div class="card">
+  <p>همهٔ ویژگی‌های این سند (به‌جز مقایسه و چک‌لیست لوازم سفر) به یک <strong>لایهٔ کاملاً جدید و پویا</strong> نیاز دارند — چون معماری فعلی سایت بر پایهٔ انتشار Static/بچ روزانه (NFR-OPS-01) طراحی شده، اما «حساب کاربری» و «Favorite کردن» ذاتاً لحظه‌ای‌اند، نه چیزی که منتظر Build فردا بماند. یعنی این یک زیرسیستم جداست، نه توسعهٔ همان مدل «فیلد در متاباکس».</p>
+</div>
+
+<h2>جدول تجمیعی — همهٔ ایده‌ها</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>ویژگی</th><th>نیاز به لاگین؟</th><th>پیچیدگی</th><th>ارزش</th><th>منبع</th></tr></thead>
+<tbody>
+<tr><td>مقایسهٔ دو/چند مکان (شهر/استان)</td><td>خیر (می‌تواند session-based باشد)</td><td><span class="pill p-low">کم</span></td><td><span class="pill p-high">بالا (SEO+AEO)</span></td><td>کاربر + Claude</td></tr>
+<tr><td>چک‌لیست لوازم سفر</td><td>خیر (اختیاری برای ذخیره)</td><td><span class="pill p-low">کم</span></td><td><span class="pill p-med">متوسط</span></td><td>کاربر (دستهٔ ۲) — تفکیک‌شده از AI</td></tr>
+<tr><td>Favorite کردن پست‌ها</td><td>بله</td><td><span class="pill p-low">کم</span></td><td><span class="pill p-med">متوسط-بالا</span></td><td>کاربر</td></tr>
+<tr><td>کامنت + امتیاز (Rating/Review)</td><td>بله (ثبت‌نام اجباری)</td><td><span class="pill p-med">متوسط</span></td><td><span class="pill p-high">بالا (Schema AggregateRating)</span></td><td>کاربر</td></tr>
+<tr><td>برنامهٔ سفر — نسخهٔ ارزان (چیدن خودکار بر اساس مجاورت جغرافیایی، بدون AI)</td><td>برای ذخیره بله</td><td><span class="pill p-med">متوسط</span></td><td><span class="pill p-high">بالا</span></td><td>Claude (تفکیک از نسخهٔ AI)</td></tr>
+<tr><td>برنامه‌ریز سفر با AI واقعی («۳ روز قشم چیکار کنم»)</td><td>بله</td><td><span class="pill p-high">بالا</span></td><td><span class="pill p-high">خیلی بالا، مشروط به حجم محتوا</span></td><td>کاربر</td></tr>
+<tr><td>شخصی‌سازی صفحهٔ اصلی بر اساس علایق (Classification)</td><td>بله</td><td><span class="pill p-med">متوسط</span></td><td><span class="pill p-med">متوسط-بالا</span></td><td>Claude</td></tr>
+<tr><td>هشدار رویداد برای مکان‌های Favorite‌شده (از طریق R15/R16)</td><td>بله</td><td><span class="pill p-med">متوسط</span></td><td><span class="pill p-med">متوسط</span></td><td>Claude</td></tr>
+<tr><td>مسیر چندشهره («تهران تا شیراز، سر راه چی هست»)</td><td>برای ذخیره بله</td><td><span class="pill p-high">بالا</span></td><td><span class="pill p-high">بالا</span></td><td>Claude</td></tr>
+<tr><td>دفترچهٔ سفر عمومی/اشتراک‌گذاری‌شدنی</td><td>بله</td><td><span class="pill p-med">متوسط</span></td><td><span class="pill p-high">بالا (تولید محتوای ایندکس‌پذیر رایگان)</span></td><td>Claude</td></tr>
+<tr><td>مقایسهٔ چندتایی (۳-۴ آیتم هم‌زمان)</td><td>خیر</td><td><span class="pill p-low">کم</span></td><td><span class="pill p-med">متوسط</span></td><td>کاربر (بسط‌یافته)</td></tr>
+<tr><td>اخبار/مقالات مرتبط روی صفحهٔ هر شهر/استان/جاذبه</td><td class="src">خیر — کاملاً محتوایی/نمایشی</td><td><span class="pill p-med">متوسط (سؤال معماری باز)</span></td><td><span class="pill p-med">متوسط-بالا</span></td><td>کاربر — یافتهٔ جدید، در IA/CA فعلی موجودیت رسمی ندارد</td></tr>
+</tbody>
+</table></div>
+
+<h2>یادداشت باز — اخبار/مقالات مرتبط با موجودیت</h2>
+<div class="card">
+  <p><strong>یافته:</strong> «اخبار»/«مقالات» به‌عنوان موجودیت ساختاریافته در هیچ‌جای IA/CA (۴۲ موجودیت) وجود ندارد؛ فقط در سند برنامه‌ریزی محتوای پروژهٔ جداگانهٔ Content Studio به‌عنوان یک قالب محتوایی نام برده شده، نه یک CPT با رابطهٔ رسمی.</p>
+  <p><strong>نیاز به حساب کاربری:</strong> خیر — این یک قابلیت محتوایی/نمایشی است، مستقل از لایهٔ کاربر.</p>
+  <p><strong>سؤال معماری باز:</strong> اتصال مقاله به شهر/استان/جاذبه از طریق (الف) رابطهٔ رسمی جدید در IA، یا (ب) برچسب/Taxonomy سبک وردپرسی؟ گرایش اولیه به گزینهٔ (ب) — چون محتوای ادیتوریال است نه دادهٔ مرجع ساختاریافته و از تورم رابطه پرهیز می‌کند — ولی تحلیل کامل هنوز انجام نشده.</p>
+</div>
+
+<h2>ثبت‌نام — مدل خودانتخابی (نه تشخیص خودکار کشور)</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>مسیر</th><th>نیازمندی فنی</th><th>برای اطلاع‌رسانی بعدی</th></tr></thead>
+<tbody>
+<tr><td>«ثبت‌نام با شماره موبایل»</td><td>گیت‌وی SMS ایرانی + هزینهٔ هر پیامک (برای OTP و اطلاع‌رسانی هر دو)</td><td>پیامک</td></tr>
+<tr><td>«Sign up with email»</td><td>سرویس ایمیل استاندارد</td><td>ایمیل</td></tr>
+</tbody>
+</table></div>
+<div class="card"><p><strong>چرا خودانتخابی به‌جای تشخیص خودکار:</strong> تشخیص از روی زبان صفحه/IP خطاپذیر است (ایرانی مقیم خارج، یا خارجیِ فارسی‌خوان). دو دکمهٔ ثبت‌نام کنار هم ساده‌تر است و نیازی به منطق تشخیص کشور ندارد؛ همان کانال ثبت‌نام برای اطلاع‌رسانی‌های بعدی (رویداد، خبر مکان Favorite‌شده) هم استفاده می‌شود.</p></div>
+
+<h2>توالی پیشنهادی اگر مسیر کاربر انتخاب شود</h2>
+<div class="card">
+  <p>۱. مقایسه + چک‌لیست لوازم سفر (بدون وابستگی به حساب کاربری، می‌تواند زودتر ساخته شود)<br>
+  ۲. زیرساخت حساب کاربری (سبک) + Favorite<br>
+  ۳. کامنت/امتیاز روی همان زیرساخت<br>
+  ۴. برنامهٔ سفر نسخهٔ ارزان (بدون AI)<br>
+  ۵. شخصی‌سازی + هشدار رویداد<br>
+  ۶. برنامه‌ریز AI کامل + مسیر چندشهره + دفترچهٔ سفر عمومی — آخرین قدم، وقتی هم زیرساخت هم حجم محتوا آماده است</p>
+</div>
+
+<h2>یادداشت باز — فیلدهای جدید جاذبه‌ها (CA-A)</h2>
+<div class="card">
+  <p>یافتهٔ ثبت‌شدهٔ قبلی: <code>architect</code> و <code>architectural_style</code> در CA-A برای A2 (بنای تاریخی) تعریف نشده‌اند. هر مورد مشخص دیگری که به ذهن رسید، همین‌جا اضافه می‌شود.</p>
+</div>
+
+</div>
+</body>
+</html>

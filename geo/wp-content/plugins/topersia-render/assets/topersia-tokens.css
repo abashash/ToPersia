@@ -1,0 +1,529 @@
+@charset "UTF-8";
+/* ==========================================================================
+   ToPersia — لایۀ توکن رنگ و خوانایی
+   نسخه: 2.1.0
+   تصمیم‌های حاکم: P5-D150 · P5-D151 · P5-D152 · P5-D153 · P5-D154 · P5-D155 · P5-D156 · P5-D157
+
+   قاعدۀ حاکم بر این فایل:
+   هیچ کد رنگی خام (#RRGGBB) بیرون از بخش ۲ نوشته نمی‌شود.
+   هیچ‌جا left/right به کار نمی‌رود؛ فقط ویژگی‌های منطقی start/end.
+   ========================================================================== */
+
+/* ==========================================================================
+   ۱ — شکاف قلم
+   قلم اختصاصی پروژه که آماده شد، فقط همین بلوک عوض می‌شود.
+   نه یک خط دیگر در کل پروژه.
+   ========================================================================== */
+/*
+@font-face{
+  font-family:"ToPersiaSans";
+  src:url("../fonts/ToPersiaSans.woff2") format("woff2");
+  font-weight:100 900;      ← اگر قلم متغیر است
+  font-style:normal;
+  font-display:swap;        ← الزامی؛ بدون این، متن تا رسیدن قلم نامرئی می‌ماند
+  unicode-range:U+0600-06FF,U+200C,U+FB50-FDFF,U+FE70-FEFF,U+0020-007F;
+}
+*/
+
+:root{
+  --tp-font:"ToPersiaSans","Vazirmatn",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --tp-mono:ui-monospace,"SFMono-Regular","Menlo",monospace;
+
+  --tp-scale:1;          /* اندازۀ متن */
+  --tp-line:1.95;        /* فاصلۀ متن — سطر */
+  --tp-space-p:.9em;     /* فاصلۀ متن — پاراگراف */
+  --tp-word:0em;         /* فاصلۀ متن — کلمه. برای خط فارسی امن است، برخلاف letter-spacing */
+  --tp-measure:68ch;     /* پهنای ستون */
+  --tp-radius:10px;         /* کارت و بلوک — از تنظیمات */
+  --tp-control-radius:8px;  /* دکمه و فرم — از تنظیمات */
+  --tp-border-w:1px;        /* ضخامت حاشیه — از تنظیمات */
+  --tp-tap:44px;         /* حداقل اندازۀ هدف روی صفحۀ لمسی */
+}
+
+/* ==========================================================================
+   ۲ — پالت · P5-D150
+   تنها مرجع رنگ پروژه. وودمارت و المنتور فقط حالت روشن را می‌گیرند (P5-D152).
+
+   توکن‌های پایه از فایل پالت‌اند و دست‌نخورده‌اند.
+   توکن‌های ـtext مشتق‌اند و برای وقتی‌اند که رنگ باید معنا بدهد:
+   روی نردبان روشنایی نشسته‌اند تا زیر کوررنگی هم از هم جدا بمانند (P5-D153).
+   ========================================================================== */
+
+/* پیش‌فرض بدون جاوااسکریپت = روشن */
+:root,
+html[data-tp-mode="light"]{
+  --tp-bg:#FAF7F1;            --tp-surface:#F4EFE6;
+  --tp-primary:#1C9E9A;       --tp-secondary:#2E6E8E;      --tp-accent:#D69C1E;
+  --tp-success:#3F7D4E;       --tp-warning:#C9861A;        --tp-error:#B54145;
+  --tp-text:#2A2A28;          --tp-text-strong:#2A2A28;    --tp-text-2:#6F6B64;
+  --tp-border:#DDD5C8;        --tp-divider:#DDD5C8;
+  --tp-hover:#177E7A;         --tp-active:#0F6461;
+
+  --tp-accent-text:#7D5A12;   --tp-accent-strong:#B9871A;  --tp-secondary-strong:#255A74;
+  --tp-success-text:#2F5C3A;  --tp-warning-text:#7A5110;   --tp-error-text:#73292C;
+  --tp-primary-text:#0F6461;
+  --tp-selected:#0F6461;    --tp-on-selected:#FFFFFF;
+
+  --tp-on-primary:#11161B;   --tp-on-hover:#FFFFFF;
+  --tp-on-accent:#11161B;    --tp-on-warning:#11161B;     --tp-on-secondary:#FFFFFF;
+  --tp-shadow-none:none;
+  --tp-shadow-soft:0 1px 2px rgba(42,42,40,.05), 0 8px 24px -12px rgba(42,42,40,.18);
+  --tp-shadow-deep:0 2px 4px rgba(42,42,40,.08), 0 14px 34px -14px rgba(42,42,40,.28);
+  --tp-shadow:var(--tp-shadow-soft);
+  color-scheme:light;
+}
+
+html[data-tp-mode="evening"]{
+  --tp-bg:#F6EFE4;            --tp-surface:#EFE4D3;
+  --tp-primary:#AF5E35;       --tp-secondary:#4E6B52;      --tp-accent:#E1A62B;
+  --tp-success:#5C8A5B;       --tp-warning:#CC7A2C;        --tp-error:#B24B4A;
+  --tp-text:#332B26;          --tp-text-strong:#332B26;    --tp-text-2:#706156;
+  --tp-border:#D8C7B2;        --tp-divider:#D8C7B2;
+  --tp-hover:#984D29;         --tp-active:#7A3D1D;
+
+  --tp-accent-text:#7A570F;   --tp-accent-strong:#B9871A;  --tp-secondary-strong:#3C5540;
+  --tp-success-text:#355634;  --tp-warning-text:#814D1C;   --tp-error-text:#6E2E2E;
+  --tp-primary-text:#0F6461;
+  --tp-selected:#7A3D1D;    --tp-on-selected:#FFFFFF;
+
+  --tp-on-primary:#FFFFFF;   --tp-on-hover:#FFFFFF;
+  --tp-on-accent:#11161B;    --tp-on-warning:#11161B;     --tp-on-secondary:#FFFFFF;
+  --tp-shadow-none:none;
+  --tp-shadow-soft:0 1px 2px rgba(51,43,38,.06), 0 8px 24px -12px rgba(51,43,38,.22);
+  --tp-shadow-deep:0 2px 4px rgba(51,43,38,.10), 0 14px 34px -14px rgba(51,43,38,.32);
+  --tp-shadow:var(--tp-shadow-soft);
+  color-scheme:light;
+}
+
+/* متن بدنه عمداً از #F2EEE7 نرم‌تر شد: کنتراست ۱۵٫۷۳ روی زمینۀ تیره
+   هالۀ نوری می‌سازد، به‌ویژه برای آستیگمات. سرفصل‌ها روشن ماندند. P5-D155 */
+html[data-tp-mode="dark"]{
+  --tp-bg:#11161B;            --tp-surface:#1B232B;
+  --tp-primary:#27A59D;       --tp-secondary:#3D5E8C;      --tp-accent:#D4A63D;
+  --tp-success:#4E9B69;       --tp-warning:#D18A2F;        --tp-error:#CC5A5F;
+  --tp-text:#E6E1D9;          --tp-text-strong:#F2EEE7;    --tp-text-2:#B5B1AA;
+  --tp-border:#313B46;        --tp-divider:#28313B;
+  --tp-hover:#2EB8AF;         --tp-active:#208A83;
+
+  --tp-accent-text:#D4A63D;   --tp-accent-strong:#D4A63D;  --tp-secondary-strong:#8FB0DE;
+  --tp-success-text:#91C8A4;  --tp-warning-text:#D39039;   --tp-error-text:#CF6267;
+  --tp-primary-text:#7AD4CD;
+  --tp-selected:#27A59D;    --tp-on-selected:#11161B;
+
+  --tp-on-primary:#11161B;   --tp-on-hover:#11161B;
+  --tp-on-accent:#11161B;    --tp-on-warning:#11161B;     --tp-on-secondary:#FFFFFF;
+  --tp-shadow-none:none;
+  --tp-shadow-soft:0 1px 2px rgba(0,0,0,.4), 0 8px 28px -12px rgba(0,0,0,.7);
+  --tp-shadow-deep:0 2px 6px rgba(0,0,0,.5), 0 16px 40px -14px rgba(0,0,0,.85);
+  --tp-shadow:var(--tp-shadow-soft);
+  color-scheme:dark;
+}
+
+/* ==========================================================================
+   ۲ب — لایۀ قالب دستۀ G · P5-D219
+
+   قالب مرجع پالت خودش را داشت: سه سطح سطح، دو سطح خط، یک سبز برند نرم،
+   چهار رنگ فصل. این‌ها در پالت پروژه جا نداشتند و حالا دارند.
+
+   روز و شب عیناً مقدار مرجع‌اند — مرجع همین دو حالت را داشت و همین
+   مقادیر طراحی‌اند، نه حدس. غروب را مرجع نداشت، پس از پالت خودِ غروب
+   با یک نردبان ثابت ساخته می‌شود (۹۲٪ و ۸۴٪ به سمت متن) تا هیچ رنگ
+   تازه‌ای وارد پروژه نشود.
+
+   اندازه‌ها (شعاع، پهنا) رنگ نیستند و در هر سه حالت یکی‌اند.
+   ========================================================================== */
+:root,
+html[data-tp-mode="light"]{
+  --tp-brand-2:#0a5450;
+  --tp-ok:#3F7C4E;
+  --tp-g-shadow-sm:0 1px 2px rgba(20,27,25,.05),0 6px 18px -10px rgba(20,27,25,.14);
+  --tp-g-shadow:0 1px 2px rgba(20,27,25,.05),0 20px 44px -22px rgba(20,27,25,.22);
+  --tp-bg-2:#efe9dd;
+  --tp-surface-2:#efe9dd;
+  --tp-surface-3:#e6dfd0;
+  --tp-text-3:#8b938d;
+  --tp-border-2:#e8e1d2;
+  --tp-soft:#E2EFEE;
+  --tp-accent-soft:#e6cf94;
+
+  --tp-s-spring:#177E7A; --tp-s-spring-soft:#E2EFEE;
+  --tp-s-summer:#B9871A; --tp-s-summer-soft:#F6EDD8;
+  --tp-s-autumn:#98502B; --tp-s-autumn-soft:#F3E4DA;
+  --tp-s-winter:#2E6E8E; --tp-s-winter-soft:#E1EAF0;
+}
+
+html[data-tp-mode="evening"]{
+  --tp-brand-2:var(--tp-active);
+  --tp-ok:var(--tp-success);
+  --tp-g-shadow-sm:var(--tp-shadow-soft);
+  --tp-g-shadow:var(--tp-shadow-deep);
+  --tp-bg-2:color-mix(in srgb, var(--tp-bg) 92%, var(--tp-text));
+  --tp-surface-2:color-mix(in srgb, var(--tp-surface) 92%, var(--tp-text));
+  --tp-surface-3:color-mix(in srgb, var(--tp-surface) 84%, var(--tp-text));
+  --tp-text-3:color-mix(in srgb, var(--tp-text-2) 80%, var(--tp-bg));
+  --tp-border-2:color-mix(in srgb, var(--tp-border) 92%, var(--tp-bg));
+  --tp-soft:color-mix(in srgb, var(--tp-primary) 12%, var(--tp-bg));
+  --tp-accent-soft:color-mix(in srgb, var(--tp-accent) 45%, var(--tp-bg));
+
+  --tp-s-spring:#177E7A; --tp-s-spring-soft:#E2EFEE;
+  --tp-s-summer:#B9871A; --tp-s-summer-soft:#F6EDD8;
+  --tp-s-autumn:#98502B; --tp-s-autumn-soft:#F3E4DA;
+  --tp-s-winter:#2E6E8E; --tp-s-winter-soft:#E1EAF0;
+}
+
+html[data-tp-mode="dark"]{
+  --tp-brand-2:#7ad4cd;
+  --tp-ok:#91C8A4;
+  --tp-g-shadow-sm:0 1px 2px rgba(0,0,0,.4),0 6px 20px -10px rgba(0,0,0,.5);
+  --tp-g-shadow:0 1px 2px rgba(0,0,0,.5),0 20px 50px -22px rgba(0,0,0,.7);
+  --tp-bg-2:#141d1c;
+  --tp-surface-2:#1e2927;
+  --tp-surface-3:#26332f;
+  --tp-text-3:#8b958f;
+  --tp-border-2:#222e2b;
+  --tp-soft:#16302F;
+  --tp-accent-soft:#5a4a22;
+
+  --tp-s-spring:#2EB8AF; --tp-s-spring-soft:#16302F;
+  --tp-s-summer:#D4A63D; --tp-s-summer-soft:#332A16;
+  --tp-s-autumn:#C4703F; --tp-s-autumn-soft:#33231A;
+  --tp-s-winter:#5D93BF; --tp-s-winter-soft:#1A2833;
+}
+
+/* متنِ فصل — نسخۀ «متن» هر رنگ فصل، همان الگوی ـtext پالت.  P5-D153
+   مرجع رنگ فصل را هم برای پر به کار می‌برد و هم برای متنِ ۱۱٫۵ پیکسلی روی
+   پس‌زمینۀ نرمِ همان فصل، و آن‌جا ۴٫۱۴ می‌داد. رنگ تازه‌ای نیست: همان رنگ
+   فصل است که یک پله به سمت رنگ متنِ همان حالت رفته. پرها دست‌نخورده‌اند. */
+:root,
+html[data-tp-mode="light"],
+html[data-tp-mode="evening"]{
+  --tp-s-spring-text:color-mix(in srgb, var(--tp-s-spring) 80%, var(--tp-text));
+  --tp-s-summer-text:color-mix(in srgb, var(--tp-s-summer) 55%, var(--tp-text));
+  --tp-s-autumn-text:color-mix(in srgb, var(--tp-s-autumn) 80%, var(--tp-text));
+  --tp-s-winter-text:color-mix(in srgb, var(--tp-s-winter) 80%, var(--tp-text));
+}
+html[data-tp-mode="dark"]{
+  --tp-s-spring-text:color-mix(in srgb, var(--tp-s-spring) 75%, var(--tp-text-strong));
+  --tp-s-summer-text:color-mix(in srgb, var(--tp-s-summer) 75%, var(--tp-text-strong));
+  --tp-s-autumn-text:color-mix(in srgb, var(--tp-s-autumn) 70%, var(--tp-text-strong));
+  --tp-s-winter-text:color-mix(in srgb, var(--tp-s-winter) 70%, var(--tp-text-strong));
+}
+
+/* ==========================================================================
+   ۲ج — کاشی · P5-D245
+   مقادیر محاسبه‌شدۀ کاشی روزِ کارت «هوای این روزها» (`.tp-wx__day`)، با
+   getComputedStyle در هر سه حالت خوانده شد:
+     پس‌زمینه   روز #FAF7F1 · بعدازظهر #F6EFE4 · شب #11161B   = --tp-bg
+     قاب        روز #DDD5C8 · بعدازظهر #D8C7B2 · شب #313B46   = --tp-border
+     متن        روز #2A2A28 · بعدازظهر #332B26 · شب #E6E1D9   = --tp-text
+     متن فرعی   روز #6F6B64 · بعدازظهر #706156 · شب #B5B1AA   = --tp-text-2
+     شعاع       ۱۲ پیکسل در هر سه
+   پس هر کدام ارجاع به همان توکن پالت است، نه عددِ دوم — یک منبع رنگ، سه
+   حالت خودبه‌خود. کاشی روزِ هوا هاور ندارد؛ هاور از کاشیِ هم‌خانوادۀ نوار
+   کنش (`.tp-act:hover`) می‌آید: --tp-soft.
+   همۀ کاشی‌ها و دکمه‌های پنجرۀ فهرست همین‌ها را می‌گیرند؛ پیش‌تر در حالت
+   شب یکی تیره (#11161B) و دیگری زیتونی (#1E2927) بود.
+   --tp-tile-muted فقط برای متن ۱۴ پیکسل به بالا (placeholder جست‌وجو) و قاب
+   فیلد روی پرده است؛ متن ریزِ کاشی — برچسب، جهت، شهرهای مسیر — طبق P5-D184
+   --tp-tile-text می‌گیرد، همان که `.n-dir` مرجع گرفته بود.
+   ========================================================================== */
+:root{
+  --tp-tile-bg:var(--tp-bg);
+  --tp-tile-border:var(--tp-border);
+  --tp-tile-text:var(--tp-text);
+  --tp-tile-muted:var(--tp-text-2);
+  --tp-tile-hover-bg:var(--tp-soft);
+  --tp-tile-radius:12px;
+}
+
+/* اندازه‌ها — بی‌ربط به حالت رنگ */
+:root{
+  --tp-r-sm:12px;
+  --tp-r:18px;
+  --tp-r-lg:26px;
+  --tp-r-xl:34px;
+  --tp-content-w:1340px;
+  --tp-rail-w:340px;
+}
+
+/* ==========================================================================
+   ۳ — لایۀ خوانایی · P5-D156
+   هیچ‌کدام HTML سرور را عوض نمی‌کنند؛ همه روی <html> می‌نشینند.
+   کش صفحه دست‌نخورده می‌ماند. P5-D151
+   ========================================================================== */
+/* وودمارت در base.css می‌نویسد html{font-size:var(--wd-text-font-size)} و
+   چون بعد از ما بار می‌شود، با ویژگی برابر برنده می‌شد و «اندازۀ متن»
+   هیچ اثری نداشت. html:root یک درجه بالاتر است. */
+html:root{font-size:calc(100% * var(--tp-scale,1)); -webkit-text-size-adjust:100%}
+
+html[data-spacing="compact"]{--tp-line:1.75; --tp-space-p:.75em; --tp-word:0em}
+html[data-spacing="loose"]  {--tp-line:2.30; --tp-space-p:1.15em; --tp-word:.06em}
+html[data-measure="narrow"]{--tp-measure:52ch}
+
+html[data-contrast="high"]{--tp-border:currentColor; --tp-text-2:var(--tp-text)}
+/* «کاهش شدت رنگ و نور» — رنگ آرام و تصویر ملایم‌تر، در یک کنترل */
+html[data-calm="on"] .tp-shell{filter:saturate(.55)}
+html[data-calm="on"] .tp-shell :where(img,video){filter:brightness(.9)}
+html[data-tp-mode="dark"] .tp-shell :where(img,video){filter:brightness(.88)}
+html[data-tp-mode="dark"][data-calm="on"] .tp-shell :where(img,video){filter:brightness(.78)}
+
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after{
+  transition-duration:.001ms !important;
+  animation-duration:.001ms !important;
+  animation-iteration-count:1 !important;
+  scroll-behavior:auto !important;
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    transition-duration:.001ms !important;
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+  }
+}
+@media (prefers-contrast:more){
+  :root{--tp-border:currentColor}
+  html:root .tp-shell :where(a){text-decoration:underline}
+}
+/* هدف لمسی حداقل ۴۴px — فقط روی نشانگر درشت، تا دسکتاپ شلوغ نشود.
+   دکمه‌های قالب G بیرون‌اند: `display:inline-flex` روی کاشی گالری و دکمۀ
+   نقشه و دکمۀ منبع ترجیحی چیدمان مرجع را می‌شکست — روی گوشی، همان‌جا
+   که کاربر می‌بیند. قالب اندازه‌های خودش را دارد.  P5-D219 */
+@media (pointer:coarse){
+  html:root .tp-shell :where(button):not(:where(.tp-page *)),
+  html:root .tp-shell :where(html:root .tp-chip,
+  html:root .tp-a11y-btn,
+  html:root .tp-nav a){
+    min-block-size:var(--tp-tap);
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+}
+/* ==========================================================================
+   ۴ — پایۀ نوشتار
+   ========================================================================== */
+html:root .tp-shell{
+  font-family:var(--tp-font);
+  line-height:var(--tp-line);
+  word-spacing:var(--tp-word);
+  color:var(--tp-text);
+  background:var(--tp-bg);
+}
+/* جزء عنصری داخل `:where()` است تا وزن نگیرد: با `h1` بیرون، این قاعده
+   (۰,۲,۲) می‌شد و از `.tp-page .tp-hero h1` با (۰,۲,۱) سنگین‌تر — تیتر
+   سربرگ روی سایت `--tp-text-strong` می‌گرفت به‌جای سفید.  P5-D205 */
+html:root .tp-shell :where(h1,h2,h3,h4){
+  color:var(--tp-text-strong); line-height:1.4; font-weight:800;
+}
+html:root .tp-prose{max-inline-size:var(--tp-measure)}
+html:root .tp-prose :where(p){margin-block:0 var(--tp-space-p)}
+/* کنتراست رنگ پیوند با متن بدنه ۲٫۱ تا ۳٫۰ است — زیر آستانۀ ۳.
+   پس پیوند درون متن هرگز فقط با رنگ شناخته نمی‌شود. P5-D154 */
+html:root .tp-shell :where(a):not(:where(.tp-page *)){color:var(--tp-hover)}
+html:root .tp-prose :where(a),
+html:root .tp-sources :where(a){
+  text-decoration:underline;
+  text-underline-offset:.25em;
+  text-decoration-thickness:1px;
+}
+html:root .tp-shell :where(a):not(:where(.tp-page *)):hover,
+html:root .tp-shell :where(a):not(:where(.tp-page *)):focus-visible{
+  color:var(--tp-active);
+  text-decoration:underline;
+  text-underline-offset:.28em;
+  text-decoration-thickness:2px;
+  text-decoration-color:var(--tp-accent-strong);
+}
+html:root .tp-shell :focus-visible{outline:3px solid var(--tp-hover); outline-offset:2px; border-radius:3px}
+/* دادۀ ماشینی: مختصات، پیش‌شماره، شناسه، نشانی منبع */
+html:root .tp-lat:not(:where(.tp-page *)){font-family:var(--tp-mono); font-size:.88em; direction:ltr; unicode-bidi:isolate}
+/* وضعیت — رنگ فقط تقویت‌کننده است، نه حامل معنا. P5-D153 */
+html:root .tp-status{display:inline-flex; align-items:center; gap:.5rem; font-weight:700;
+  padding:.35rem .9rem; border-radius:999px; border:1.5px solid currentColor;
+  background:var(--tp-surface)}
+html:root .tp-status :where(svg){inline-size:20px; block-size:20px; flex:none; fill:currentColor}
+html:root .tp-status--ok{color:var(--tp-success-text)}
+html:root .tp-status--warn{color:var(--tp-warning-text)}
+html:root .tp-status--err{color:var(--tp-error-text)}
+/* پنهان از چشم، پیدا برای صفحه‌خوان.
+   جای display:none را گرفت — که برچسب دکمه را در موبایل نابود می‌کرد. */
+html:root .tp-vh{
+  position:absolute !important; inline-size:1px; block-size:1px;
+  padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%);
+  white-space:nowrap; border:0;
+}
+html:root .tp-skip{position:absolute; inset-block-start:-100px; inset-inline-start:1rem; z-index:1000;
+  background:var(--tp-hover); color:#fff; padding:.6rem 1rem;
+  border-radius:0 0 8px 8px; font-weight:700}
+html:root .tp-skip:focus{inset-block-start:0; text-decoration:none}
+/* ==========================================================================
+   ۵ — پنل نمایش و خوانایی
+   ========================================================================== */
+/* ==========================================================================
+   کلید سه‌حالتۀ رنگ — در سربرگ  ·  P5-D159
+   ========================================================================== */
+html:root .tp-modes{
+  display:inline-flex; align-items:center; gap:2px;
+  padding:3px; border:1px solid var(--tp-border); border-radius:999px;
+  background:var(--tp-surface);
+}
+html:root .tp-modes__btn{
+  display:inline-flex; align-items:center; gap:.4rem; cursor:pointer;
+  font-family:inherit; font-size:.8125rem; font-weight:600;
+  padding:.34rem .7rem; border:0; border-radius:999px;
+  background:transparent; color:var(--tp-text-2); line-height:1.6;
+}
+html:root .tp-modes__btn :where(svg){inline-size:16px; block-size:16px; flex:none}
+html:root .tp-modes__btn:hover{color:var(--tp-hover)}
+html:root .tp-modes__btn[aria-checked="true"]{
+  background:var(--tp-hover); color:var(--tp-on-hover);
+}
+html:root .tp-modes__btn:focus-visible{outline:3px solid var(--tp-hover); outline-offset:2px}
+/* در عرض کم فقط نشانه می‌ماند — برچسب برای صفحه‌خوان حفظ می‌شود */
+@media (max-width:820px){
+  html:root .tp-modes__label{
+    position:absolute !important; inline-size:1px; block-size:1px;
+    padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;
+  }
+  html:root .tp-modes__btn{padding-inline:.55rem}
+}
+/* ==========================================================================
+   هم‌ترازی در ردیف سربرگ وودمارت
+   .whb-column خودش flex با align-items:center است و .wd-header-html
+   ده پیکسل padding افقی دارد — هر دو از فایل زندۀ header-base.css خوانده شد.
+   این بخش فقط تناسب و فاصله را درست می‌کند، نه ساختار تم را.
+   ========================================================================== */
+html:root .wd-header-html{display:flex; align-items:center}
+
+html:root .tp-modes{
+  align-self:center; margin-block:0; margin-inline:6px;
+  padding:2px; line-height:1;
+}
+html:root .tp-modes__btn{
+  padding:.3rem .65rem; font-size:.8rem; line-height:1.5;
+  /* وودمارت به هر button یک min-height:42px می‌دهد. بدون این خط، کلید حالت
+     ۴۸ پیکسل می‌شود و از نوار بالای ۴۲ پیکسلی بیرون می‌زند. */
+  min-block-size:0; block-size:30px;
+}
+html:root .tp-modes__btn :where(svg){inline-size:15px; block-size:15px}
+
+/* جست‌وجوی سربرگ — با input[type="search"] هدف‌گیری می‌شود، نه با نام کلاس
+   تم. اگر عرض ۴۲۰ برایتان زیاد یا کم بود، همین یک عدد را عوض کنید. */
+html:root .whb-column :where(form){
+  margin-block:0; margin-inline:8px; max-inline-size:420px;
+}
+html:root .whb-column :where(form) :where(input)[type="search"]{inline-size:100%}
+html:root .whb-column :is(input[type="search"],input[type="text"]){
+  block-size:38px; padding-inline:1rem;
+  border:1px solid var(--tp-border); border-radius:999px;
+  background:var(--tp-surface); color:var(--tp-text);
+  font-family:var(--tp-font); font-size:.875rem;
+}
+html:root .whb-column :is(input[type="search"],input[type="text"])::placeholder{
+  color:var(--tp-text-2); opacity:1;
+}
+html:root .whb-column :is(input[type="search"],input[type="text"]):focus{
+  border-color:var(--tp-hover); outline:none;
+}
+
+html:root .tp-a11y-btn{
+  font-family:inherit; font-size:.875rem; font-weight:600; cursor:pointer; min-block-size:0;
+  color:var(--tp-text); background:transparent;
+  border:1px solid var(--tp-border); border-radius:999px;
+  padding:.42rem .9rem; display:inline-flex; align-items:center; gap:.45rem;
+  align-self:center; flex:none;
+}
+html:root .tp-a11y-btn :where(svg){inline-size:17px; block-size:17px; fill:currentColor}
+html:root .tp-a11y-btn:hover{border-color:var(--tp-hover); color:var(--tp-hover)}
+html:root .tp-a11y-btn[aria-expanded="true"]{
+  background:var(--tp-surface); border-color:var(--tp-hover); color:var(--tp-hover);
+}
+@media (max-width:820px){
+  html:root .tp-a11y-btn{padding-inline:.6rem}
+  html:root .tp-a11y-btn__label{
+    position:absolute !important; inline-size:1px; block-size:1px;
+    padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap;
+  }
+}
+html:root .tp-a11y{
+  border-block:1px solid var(--tp-divider);
+  background:var(--tp-surface); color:var(--tp-text);
+}
+/* پنل مثل مگا منو زیر سربرگ باز می‌شود.
+   جاوااسکریپت پنل را به <body> منتقل می‌کند تا از ردیف فلکس سربرگ و از هر
+   overflow:hidden بیرون بیاید، سپس position و top را روی خود عنصر می‌نشاند.
+   position اینجا هم نوشته می‌شود تا اگر جاوااسکریپت دیر رسید یا شکست خورد،
+   پنل در جریان سند نیفتد و ته صفحه — کنار فوتر — ظاهر نشود. */
+html:root .tp-a11y--float{
+  position:absolute; top:0; left:0; right:0;
+  z-index:9990; box-shadow:var(--tp-shadow);
+}
+html:root .tp-a11y__in{
+  max-inline-size:1180px; margin-inline:auto;
+  padding:1.3rem clamp(1rem,4vw,2rem) 1.1rem;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:1.1rem 1.8rem;
+}
+html:root .tp-a11y :where(fieldset){border:0; margin:0; padding:0; min-inline-size:0}
+html:root .tp-a11y :where(fieldset).tp-a11y--wide{grid-column:span 2}
+@media (max-width:640px){html:root .tp-a11y :where(fieldset).tp-a11y--wide{grid-column:span 1}}
+
+/* در موبایل «پهنای ستون» هیچ اثری ندارد — سنجش: ۳۵۸px در هر دو حالت.
+   نمایش کنترلی که کاری نمی‌کند، بار شناختی بی‌سود است. */
+@media (max-width:900px){html:root .tp-a11y__measure{display:none}}
+html:root .tp-a11y :where(legend){
+  font-size:.8125rem; font-weight:700; color:var(--tp-text-2);
+  padding:0; margin-block-end:.5rem;
+}
+html:root .tp-a11y__row{display:flex; flex-wrap:wrap; gap:.4rem}
+html:root .tp-a11y__row :where(button){
+  font-family:inherit; font-size:.875rem; font-weight:600; cursor:pointer;
+  padding:.4rem .85rem; border-radius:var(--tp-control-radius);
+  border:1px solid var(--tp-border); background:var(--tp-bg); color:var(--tp-text);
+}
+html:root .tp-a11y__row :where(button):hover{border-color:var(--tp-hover); color:var(--tp-hover)}
+html:root .tp-a11y__row :where(button)[aria-checked="true"],
+html:root .tp-a11y__row :where(button)[aria-pressed="true"]{
+  background:var(--tp-hover); border-color:var(--tp-hover); color:var(--tp-on-hover);
+}
+html:root .tp-a11y__foot{
+  grid-column:1/-1; margin:0; padding-block-start:.9rem;
+  border-block-start:1px solid var(--tp-divider);
+  display:flex; gap:.6rem; align-items:center; flex-wrap:wrap;
+  font-size:.8125rem; color:var(--tp-text-2);
+}
+html:root .tp-a11y__foot :where(button){
+  font-family:inherit; font-size:.8125rem; font-weight:700; cursor:pointer;
+  background:transparent; border:1px solid var(--tp-border);
+  border-radius:999px; padding:.35rem .85rem; color:var(--tp-text);
+}
+html:root .tp-a11y__foot :where(button):hover{border-color:var(--tp-hover); color:var(--tp-hover)}
+html:root .tp-a11y__preset{border-color:var(--tp-hover) !important; color:var(--tp-hover) !important}
+html:root .tp-a11y__note{margin-inline-start:auto}
+@media (max-width:640px){html:root .tp-a11y__note{margin-inline-start:0}}
+
+/* ==========================================================================
+   ۶ — چاپ
+   ========================================================================== */
+@media print{
+  html:root .tp-a11y,
+  html:root .tp-a11y-btn,
+  html:root .tp-skip{display:none !important}
+  html:root .tp-shell{background:#fff; color:#000}
+  html:root .tp-prose :where(a)::after{content:" (" attr(href) ")"; font-size:.85em; word-break:break-all}
+}
+
+/* ==========================================================================
+   هدف لمسی — در انتهای فایل تکرار می‌شود
+   قاعدۀ بخش ۴ پیش از قاعده‌های مؤلفه می‌آید و min-block-size:0 آن را
+   خنثی می‌کرد. این بلوک آخرین حرف را می‌زند.
+   ========================================================================== */
+@media (pointer:coarse){
+  html:root .tp-modes__btn,
+  html:root .tp-a11y-btn,
+  html:root .tp-a11y__row :where(button),
+  html:root .tp-a11y__foot :where(button){
+    min-block-size:var(--tp-tap); block-size:auto;
+  }
+}

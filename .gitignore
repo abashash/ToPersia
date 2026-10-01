@@ -1,0 +1,42 @@
+﻿# Local WordPress configuration
+/geo/wp-config.php
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Private key containers
+*.key
+*.p12
+*.pfx
+**/tls-key.pem
+**/*-key.pem
+**/private-key.pem
+
+# SSH private keys
+**/.ssh/id_*
+**/.ssh/*.pub
+
+# Credentials / secrets / tokens
+**/secrets.json
+**/secret.json
+**/credentials.json
+**/credential.json
+**/service-account.json
+**/*-service-account.json
+**/auth.json
+**/token.json
+**/tokens.json
+**/.secrets/
+**/.credentials/
+
+# Password / credential dumps
+**/*password*.txt
+**/*password*.json
+**/*credentials*.sql
+**/*secret*.sql
+
+# Large map data kept locally
+/geo/wp-content/uploads/tiles/iran.pmtiles

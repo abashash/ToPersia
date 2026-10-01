@@ -1,0 +1,524 @@
+// Collapsible panel shared with RecoveryAddon — duplicated here to keep addons independent
+.dupli-import-box {
+    background-color: $white;
+    border: 1px solid $medium-gray;
+    margin: 0;
+}
+
+.dupli-import-box .box-title {
+    border-bottom: 1px solid $medium-gray;
+    padding: 10px 12px;
+    font-weight: bold;
+    font-size: 17px;
+    font-weight: bold;
+    color: #000;
+}
+
+.dupli-import-box .box-content {
+    padding: 20px;
+}
+
+.dupli-import-box.closable .box-title {
+    position: relative;
+}
+
+.dupli-import-box.closable .box-title::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 36px;
+    display: inline-block;
+    width: 36px;
+    text-align: center;
+    font-family: "Font Awesome 5 Free";
+    content: "";
+    font-weight: 900;
+}
+
+.dupli-import-box.closable.closed .box-title {
+    border: 0 none;
+}
+
+.dupli-import-box.closable.closed .box-title::after {
+    content: "\f0d7";
+}
+
+.dupli-import-box.closable.opened .box-title::after {
+    content: "\f0d8";
+}
+
+.dupli-import-box.closable.closed .box-content {
+    display: none;
+}
+
+.dupli-import-box.closable.opened .box-content {
+    display: block;
+}
+
+.dupli-import-header {
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.dupli-import-header .title {
+    margin: 0;
+    line-height: 40px;
+    font-size:20px;
+}
+
+.dupli-import-header .options {
+    position: absolute;
+    right: 0;
+    top: 2px;
+    z-index: 10000;
+}
+
+.dupli-import-header hr {
+    margin: 0;
+}
+
+.dupli-import-header .options .button {
+    width: 34px;
+    height: 34px;
+    box-sizing: border-box;
+    line-height: 34px;
+    text-align: center;
+    padding: 0;
+}
+
+
+/* ======================================================================================================================
+STEP  1 - DOM ELEMENTS
+====================================================================================================================== */
+
+
+/* -----------------------------
+MENU - DROP-DOWN HAMBURGER
+----------------------------- */
+
+.dupli-import-view-list {
+    position: relative;
+}
+
+.dupli-import-view-list.active::before {
+    content: "\f147";
+    font-family: dashicons;
+    display: inline-block;
+    line-height: 1;
+    font-weight: 400;
+    font-style: normal;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: -30px;
+}
+
+.dupli-toggle-sub-menu,
+.dupli-toggle-sub-menu ul,
+.dupli-toggle-sub-menu li {
+    margin: 0;
+}
+
+.dupli-toggle-sub-menu .title {
+    color: $dark-gray;
+    font-weight: bold;
+}
+
+.dupli-toggle-sub-menu .separator {
+    border-top: 1px solid #ccd0d4;
+}
+
+.dupli-toggle-sub-menu .dupli-toggle {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.dupli-toggle-sub-menu ul {
+    display: none;
+    position: relative;
+    opacity: 0;
+    border: 1px solid $medium-gray;
+    z-index: -1;
+    background: $white;
+    transition: opacity 0.3s;
+    padding-bottom: 20px;
+}
+
+.dupli-toggle-sub-menu:hover ul {
+    display: block;
+    opacity: 1;
+    z-index: 10001;
+}
+
+.dupli-toggle-sub-menu ul li {
+    padding: 10px 10px 10px 40px;
+}
+
+.dupli-toggle-sub-menu ul li.title {
+    padding: 10px 10px 0 10px;
+}
+
+#dupli-import-vews-and-opt-wrapper .description {
+    display: block;
+    color: $dark-gray;
+    font-style: italic;
+}
+
+#dupli-import-vews-and-opt-wrapper {
+    width: 250px;
+}
+
+
+/* -----------------------------
+DRAG-DROP UPLOAD AREA
+----------------------------- */
+
+.dupli-import-upload-box {
+    background: $white;
+    border: 1px dashed $medium-gray;
+    border-radius: 2px;
+    height: 220px;
+    box-sizing: border-box;
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+}
+
+#dupli-import-upload-file .fs-upload-target {
+    color: $black;
+    border: 0 none;
+    border-radius: 0;
+    height: 218px;
+    box-sizing: border-box;
+
+    &:hover {
+        background: rgba(0,0,0,.1);
+    }
+}
+
+#dupli-import-upload-file .fs-upload-target {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fs-upload-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#dupli-import-upload-file-footer {
+    padding: 5px;
+    text-align: right;
+}
+
+#dupli-import-upload-file-footer .dupli-open-help-link {
+    letter-spacing: 2px;
+    float: right;
+}
+
+
+/* -----------------------------
+ARCHIVE DISPLAY RESULTS:
+Basic/Advanced
+----------------------------- */
+
+.dup-drag-drop-message {
+    font-size: 18px;
+    line-height: 1;
+    font-weight: bold;
+    display: block;
+    margin: 20px 0;
+}
+
+#dupli-import-mode-tab-header {
+    border-bottom: 1px solid $medium-gray;
+}
+
+#dupli-import-mode-tab-header > div {
+    float: left;
+    padding:10px 0 15px 0;
+    font-size: 16px;
+    border-bottom: 2px solid transparent;
+    min-width: 250px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+#dupli-import-mode-tab-header > div:hover {
+    font-weight: bold;
+}
+
+#dupli-import-mode-tab-header > div.active {
+        border-bottom: 3px solid #91BCE3;
+    font-weight: bold;
+}
+
+#dupli-import-remote-url {
+    box-sizing: border-box;
+    height: 40px;
+    width: 1000px;
+    max-width: calc(100% - 150px);
+    margin-right: 10px;
+}
+
+.dupli-import-upload-box > div {
+    width: 100%;
+}
+
+.dupli-import-upload-box .dup-import-button {
+    display: inline-block;
+    padding: 0 30px !important;
+    font-weight: normal;
+    box-sizing: border-box;
+    height: 40px;
+}
+
+#dupli-import-mode-remote-tab sup {
+    font-size:10px;
+    color: $medium-gray;
+}
+
+div.dupli-import-upload-box small {
+    color: $medium-gray;
+    font-style: italic;
+    padding: 7px;
+}
+
+.dup-import-avail-packs .dupli-import-no-package-found td {
+    padding: 20px;
+}
+
+div.dupli-import-no-package-found-msg {
+    font-size: 15px;
+    text-align: center;
+}
+
+table.dup-import-avail-packs th {
+    background-color: $light-gray;
+}
+
+table.dup-import-avail-packs tbody tr:nth-child(even) {
+    border: 1px solid $medium-gray;
+}
+
+table.dup-import-avail-packs {
+    width: 100%;
+    min-height: inherit;
+    border: 1px solid $medium-gray;
+    border-collapse: collapse;
+}
+
+table.dup-import-avail-packs thead {
+    border-bottom: 1px solid $light-gray;
+}
+
+table.dup-import-avail-packs th {
+    font-weight: bold;
+}
+
+table.dup-import-avail-packs th,
+table.dup-import-avail-packs td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    line-height: 30px;
+}
+
+table.dup-import-avail-packs .size {
+    width: 100px;
+}
+
+table.dup-import-avail-packs .created {
+    text-align: left;
+    width: 125px;
+}
+
+table.dup-import-avail-packs .funcs {
+    text-align: center;
+    width: 400px;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+table.dup-import-avail-packs .funcs button,
+table.dup-import-avail-packs .funcs .button {
+    min-width: 120px;
+}
+
+table.dup-import-avail-packs .funcs .separator {
+    margin-left: 5px;
+}
+
+table.dup-import-avail-packs .funcs .separator-2x {
+    margin-left: 10px;
+}
+
+table.dup-import-avail-packs .funcs .dupli-loader {
+    display: flex;
+}
+
+table.dup-import-avail-packs .funcs div.actions {
+    text-align: right;
+}
+
+table.dup-import-avail-packs .funcs .dupli-import-action-cancel-upload {
+    margin-left: 10px;
+}
+
+.dupli-import-package-detail {
+    padding: 10px;
+    border-radius: 2px;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.dupli-import-package-detail-content *:first-child {
+    margin-top: 0;
+}
+
+.dupli-import-package-detail-content *:last-child {
+    margin-bottom: 0;
+}
+
+.dupli-import-package-detail ul {
+    margin: 0;
+}
+
+.dupli-import-package-detail ul li {
+    margin: 2px;
+    padding: 0;
+}
+
+.dupli-import-package-detail .label.title {
+    font-weight: bold;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dupli-import-package-detail .label {
+    display: inline-block;
+    min-width: 150px;
+}
+
+.dupli-import-package-detail .value {
+    font-weight: bold;
+}
+
+div#dupli-import-available-packages {
+    background-color: $white;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list tbody {
+    display: block;
+    padding: 20px;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list thead,
+#dupli-import-available-packages.view-single-item .packages-list tbody tr {
+    display: none;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list tbody tr:first-child {
+    display: block;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list td {
+    display: block;
+    width: 100%;
+    padding: 0;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list .dupli-import-package-detail {
+    display: block !important;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list .name::before {
+    content: "Package: ";
+    font-weight: bold;
+    margin: 0 5px 10px 0;
+    display: inline-block;
+}
+
+#dupli-import-available-packages.view-single-item .packages-list .size,
+#dupli-import-available-packages.view-single-item .packages-list .created,
+#dupli-import-available-packages.view-single-item .packages-list .dupli-import-action-package-detail-toggle {
+    display: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    #dupli-import-available-packages.view-list-item .size,
+    #dupli-import-available-packages.view-list-item .created,
+    #dupli-import-available-packages.view-list-item thead .funcs {
+        display: none;
+    }
+    #dupli-import-available-packages.view-list-item td {
+        display: block;
+        text-align: left !important;
+        padding: 0 20px;
+    }
+    #dupli-import-available-packages.view-list-item tbody tr {
+        border-bottom: 1px solid $medium-gray;
+        padding-bottom: 10px;
+        display: block;
+    }
+}
+
+.dupli-import-confirm-buttons {
+    padding-top: $global-padding;
+    text-align: right;
+}
+
+.dupli-import-confirm-buttons input {
+    margin-left: 5px !important;
+}
+
+
+/* ======================================================================================================================
+STEP 3 - STAND-ALONE INSTALLER DOM ELEMENTS
+======================================================================================================================*/
+
+#dupli-import-installer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, .6);
+    z-index: 1000002;
+}
+
+#dupli-import-installer-iframe {
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+    z-index: 1000003;
+}
+
+
+/* Making sure the WP menu is not under the import screen */
+
+#wpadminbar,
+#wpadminbar .ab-sub-wrapper,
+#wpadminbar ul,
+#wpadminbar ul li {
+    z-index: 1000004;
+}

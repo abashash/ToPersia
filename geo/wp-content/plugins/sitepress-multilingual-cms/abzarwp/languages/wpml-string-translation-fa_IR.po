@@ -1,0 +1,1100 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"Project-Id-Version: WPML String Translation\n"
+"POT-Creation-Date: 2021-01-23 14:42+0330\n"
+"PO-Revision-Date: 2025-05-13 17:12+0330\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: plugin.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: \n"
+"Language: fa_IR\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+msgid " They were added to the string translation table."
+msgstr " آن‌ها به جدول string translation اضافه شدند."
+
+msgid "%d new translation was added."
+msgid_plural "%d new translations were added."
+msgstr[0] "%d ترجمه جدید اضافه شد"
+msgstr[1] "٪d ترجمه جدید اضافه شد"
+
+msgid "%d translation was updated."
+msgid_plural "%d translations were updated."
+msgstr[0] "ترجمه های %d به روز شد/شدند."
+msgstr[1] "ترجمه %d به روز شد/شدند."
+
+msgid "%s slugs are set to be translated, but they are missing their translation"
+msgstr "رشته %s برای ترجمه آماده شده است، اما ترجمه آن‌ها از دست رفته است"
+
+msgid "(original)"
+msgstr "(اورجینال)"
+
+msgid ""
+"* This feature is only intended for sites that are in development. It will "
+"significantly slow down the site, but help you find strings that WPML cannot "
+"detect in the PHP code."
+msgstr ""
+"* این ویژگی فقط برای سایتهایی در حال توسعه است. به طور قابل توجهی سایت را کند "
+"می کند ، اما به شما کمک می کند رشته هایی را پیدا کنید که WPML قادر به تشخیص آن "
+"در کد PHP نیست."
+
+msgid "-- Please select --"
+msgstr "-- لطفا انتخاب کنید --"
+
+msgid ".po file:"
+msgstr "فایل .po:"
+
+msgid "A"
+msgstr "A"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Add selected strings"
+msgstr "رشته های انتخاب شده را اضافه کنید"
+
+msgid "Add the new translations."
+msgstr "افزودن ترجمه جدید"
+
+msgid ""
+"Adds theme and plugins localization capabilities to WPML | <a href=\"https://"
+"wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/string-"
+"translation-3-1-6/\">WPML String Translation 3.1.6 release notes</a>"
+msgstr ""
+"قابلیت محلی سازی تم و پلاگین ها را به WPML اضافه می کند | <a href=\"https://"
+"wpml.org\">"
+
+msgid "Admin Texts Translation"
+msgstr "Admin Texts Translation"
+
+msgid "All"
+msgstr "همه"
+
+msgid "All Translation Priorities"
+msgstr "همه اولویتهای ترجمه"
+
+msgid "All domains"
+msgstr "همه دامنه ها"
+
+msgid "All strings"
+msgstr "همه رشته ها"
+
+msgid "All strings in %s"
+msgstr "همه رشته های در %s"
+
+msgid "Also create translations according to the .po file"
+msgstr "همچنین ترجمه‌ها با توجه به ایجاد فایل .po"
+
+msgid "Also include translations"
+msgstr "همچنین شامل ترجمه‌ها"
+
+msgid "Also prevent similar messages in the future?"
+msgstr "همچنین از پیام‌های مشابه در آینده جلوگیری کنید؟"
+
+msgid "Apply"
+msgstr "اعمال"
+
+msgid ""
+"Are you sure you want to delete these packages?\n"
+"Their strings and translations will be deleted too."
+msgstr ""
+"آیا مطمئن هستید که می‌خواهید این بسته‌ها را حذف کنید؟\n"
+"رشته‌ها و ترجمه‌های آن‌ها نیز حذف خواهند شد."
+
+msgid ""
+"Are you sure you want to delete these strings?\n"
+"Their translations will be deleted too."
+msgstr ""
+"آیا مطمئن هستید که می‌خواهید این رشته‌ها را حذف کنید؟\n"
+"ترجمه‌های آن‌ها نیز همچنین حذف خواهند شد."
+
+msgid "Auto register strings for translation"
+msgstr "رشته ها را برای ترجمه به صورت خودکار ثبت کنید"
+
+msgid "Auto-download WordPress translations"
+msgstr "دانلود خودکار ترجمه‌های وردپرس"
+
+msgid "Auto-register strings from these text domains"
+msgstr "ثبت خودکار رشته‌ها از این text domains"
+
+msgid ""
+"Automatic string registration will remain active for %s. Please visit the "
+"site's front-end to allow WPML to find strings for translation."
+msgstr ""
+"ثبت خودکار رشته ها برای %s فعال خواهد بود. لطفاً از قسمت جلوی سایت بازدید کنید "
+"تا WPML بتواند رشته هایی برای ترجمه پیدا کند."
+
+msgid "Automatically add paragraphs"
+msgstr "افزودن پاراگراف‌ها به‌صورت خودکار"
+
+msgid "Cancel"
+msgstr "انصراف"
+
+msgid "Change the language of selected strings"
+msgstr "تغییر زبان رشته‌های انتخاب شده"
+
+msgid "Change translation priority of selected strings"
+msgstr "تغییر اولویت ترجمه رشته های انتخاب شده"
+
+msgid "Check other languages"
+msgstr "بررسی زبان‌های دیگر"
+
+msgid "Cleanup and optimization completed!"
+msgstr "پاکسازی و بهینه سازی کامل شد!"
+
+msgid "Cleanup and optimize string tables"
+msgstr "تمیز کردن و بهینه سازی جداول رشته"
+
+msgid "Click to toggle"
+msgstr "برای باز شدن کلیک کنید"
+
+msgid "Close"
+msgstr "بستن"
+
+msgid "Complete"
+msgstr "کامل شده"
+
+msgid "Completely translated strings"
+msgstr "رشته‌ها کاملاً ترجمه شده‌اند"
+
+msgid "Configure"
+msgstr "پیکربندی"
+
+msgid "Contains %s strings"
+msgstr "شامل %s رشته ها"
+
+msgid "Context"
+msgstr "متن"
+
+msgid "Convert to multilingual widget"
+msgstr "تبدیل به ابزارک چند زبانه"
+
+msgid "Converting to multilingual widget failed. No sidebar specified."
+msgstr "تبدیل ابزارک چند زبانه ناموفق بود. نوار کناری مشخص نشده است."
+
+msgid "Current source language"
+msgstr "زبان سورس فعلی"
+
+msgid "D"
+msgstr "D"
+
+msgid "DD"
+msgstr "DD"
+
+msgid "DDD"
+msgstr "DDD"
+
+msgid "DDDD"
+msgstr "DDDD"
+
+msgid "Default package language"
+msgstr "زبان بسته پیش فرض"
+
+msgid "Delete Selected Packages"
+msgstr "حذف بسته‌های انتخاب شده"
+
+msgid "Delete selected strings"
+msgstr "حذف رشته‌های انتخاب شده"
+
+msgid "Dismiss all notices"
+msgstr "بستن همه اعلان ها"
+
+msgid "Display %d results per page"
+msgstr "نمایش نتایج %d در هر صفحه"
+
+msgid "Display all results"
+msgstr "نمایش همه نتایج"
+
+msgid "Display packages for this kind:"
+msgstr "نمایش بسته‌ها برای این نوع:"
+
+msgid "Display:"
+msgstr "نمایش:"
+
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "نمایش %1$s&#8211;%2$s از %3$s"
+
+msgid "Do"
+msgstr "Do"
+
+msgid "Domain"
+msgstr "دامنه"
+
+msgid "Done"
+msgstr "انجام شد"
+
+msgid "E"
+msgstr "E"
+
+msgid "Edit"
+msgstr "ويرايش"
+
+msgid "Error getting the translation file. Please go back and try again."
+msgstr "خطا در گرفتن فایل ترجمه. لطفاً برگردید و دوباره کنید."
+
+msgid "Errors: %s"
+msgstr "خطاها: %s"
+
+msgid "Exact match"
+msgstr "مطابقت کامل"
+
+msgid "Existing translation"
+msgstr "ترجمه موجود"
+
+msgid "Exit search"
+msgstr "خروج از جستجو"
+
+msgid "Export strings into .po/.pot file"
+msgstr "برون‌ریزی رشته‌ها به فایل .po/.pot"
+
+msgid "Failed downloading the language information file."
+msgstr "دریافت فایل اطلاعات زبان شکست خورد."
+
+msgid ""
+"Failed downloading the language information file. Please go back and try a "
+"little later."
+msgstr ""
+"دریافت فایل اطلاعات زبان شکست خورد. لطفاً به عقب برگردید و بعداً کمی تلاش کنید."
+
+msgid "File upload error"
+msgstr "خطا در آپلود فایل"
+
+msgid "Files already scanned."
+msgstr "فایل اسکن شد"
+
+msgid "For more details, see %s."
+msgstr "برای جزئیات بیشتر، %s مراجعه کنید."
+
+msgid "G"
+msgstr "G"
+
+msgid "GG"
+msgstr "GG"
+
+msgid "GGGG"
+msgstr "GGGG"
+
+msgid "GGGGG"
+msgstr "GGGGG"
+
+msgid "H"
+msgstr "H"
+
+msgid "HH"
+msgstr "HH"
+
+msgid "Highlight color for strings"
+msgstr "رنگ برجسته برای رشته‌ها"
+
+msgid "Hmm"
+msgstr "Hmm"
+
+msgid "Hmmss"
+msgstr "Hmmss"
+
+msgid "Import"
+msgstr "ایمپورت"
+
+msgid "Import / export .po"
+msgstr "درون ریزی / برون ریزی .po"
+
+msgid "In domain:"
+msgstr "در دامنه:"
+
+msgid "In progress"
+msgstr "در حال پیشرفت"
+
+msgid "In translation basket"
+msgstr "در سبد ترجمه"
+
+msgid "Inactive"
+msgstr "غیرفعال"
+
+msgid "Include translations"
+msgstr "شامل ترجمه‌ها"
+
+msgid "Info"
+msgstr "اطلاعات"
+
+msgid "Invalid language: %s"
+msgstr "زبان نامعتبر: %s"
+
+msgid "Invalid nonce"
+msgstr "عدم اعتبار نامعتبر است"
+
+msgid "Kind"
+msgstr "نوع"
+
+msgid "Language of domains"
+msgstr "زبان دامنه"
+
+msgid "Language of this %1$s is %2$s"
+msgstr "زبان این %1$s است %2$s"
+
+msgid "Languages of domains"
+msgstr "زبان های دامنه"
+
+msgid "Loaded"
+msgstr "لود شده"
+
+msgid "Look for strings while pages are rendered"
+msgstr "در حین ارائه صفحات ، رشته ها را جستجو کنید"
+
+msgid "M"
+msgstr "M"
+
+msgid "MM"
+msgstr "MM"
+
+msgid "MMM"
+msgstr "MMM"
+
+msgid "MMMM"
+msgstr "MMMM"
+
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "مشکل با جدول ترجمه رشته در سایت شما وجود دارد."
+
+msgctxt "MO Import blocked 2/4"
+msgid ""
+"This problem is not causing a problem running the site right now, but can "
+"become a critical issue in the future."
+msgstr "این مشکل در راه‌اندازی سایت نیست اما می‌تواند در آینده یک مسئله حیاتی باشد."
+
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr "تیم پشتیبانی WPML می داند که چگونه آن را حل کند."
+
+msgctxt "MO Import blocked 4/4"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank\">support "
+"thread</a> and we'll fix it for you."
+msgstr ""
+"لطفا یک پیام را در <a href=\"%s\" target=\"_blank\"> موضوع پشتیبانی </a> مرتبط "
+"کنید و ما برای شما آن را رفع خواهیم کرد."
+
+msgctxt "MO Import blocked short 1/3"
+msgid ""
+"WPML cannot replace .mo files because of technical problems in the String "
+"Translation table."
+msgstr ""
+"WPML نمی‌تواند جایگزین فایل‌های .mo به علت مشکلات فنی در جدول ترجمه رشته باشد."
+
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr "تیم پشتیبانی WPML می داند که چگونه آن را حل کند."
+
+msgctxt "MO Import blocked short 3/3"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank\" >support "
+"thread</a> and we'll fix it for you."
+msgstr ""
+"لطفاً یک پیام در قسمت مربوطه اضافه کنید<a href=\"%s\" target=\"_blank\" >موضوع "
+"پشتیبانی</a> و ما آن رای برای شما رفع می‌کنیم."
+
+msgid "Missing parameters"
+msgstr "پارامترهای گم شده"
+
+msgid "Missing version number for translation."
+msgstr "شماره نسخه گمشده برای ترجمه."
+
+msgid "More options"
+msgstr "گزینه های بیشتر"
+
+msgid "Multibyte String extension"
+msgstr "پسوند Multibyte String"
+
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr "افزودنی Multibyte String نیازمند WPML String Translation است."
+
+msgid "Multilingual Text"
+msgstr "متن چند زبانه"
+
+msgid "Multilingual arbitrary text or HTML"
+msgstr "ویژگی چندزبانه متن یا HTML"
+
+msgid "N"
+msgstr "N"
+
+msgid "NN"
+msgstr "NN"
+
+msgid "NNN"
+msgstr "NNN"
+
+msgid "NNNN"
+msgstr "NNNN"
+
+msgid "NNNNN"
+msgstr "NNNNN"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Name: %s"
+msgstr "نام: %s"
+
+msgid "Needs update"
+msgstr "نیاز به بروزرسانی"
+
+msgid "New translation"
+msgstr "ترجمه جدید"
+
+msgid "New translations (%d)"
+msgstr "ترجمه‌های جدید (%d)"
+
+msgid "No - keep showing these message"
+msgstr "خیر - نمایش این پیام را ادامه بده"
+
+msgid "No TextDomain"
+msgstr "بدون No TextDomain"
+
+msgid ""
+"No action performed. Please select the strings that you need to update or add."
+msgstr ""
+"هیچ عملی انجام نشده است. لطفاً رشته‌هایی را که برای به‌روز رسانی یا افزودن نیاز "
+"دارید انتخاب کنید."
+
+msgid "No packages found"
+msgstr "هیچ بسته ای یافت نشد"
+
+msgid "No records found"
+msgstr "رکوردی یافت نشد"
+
+msgid "No string found"
+msgstr "رشته پیدا نشد"
+
+msgid "No strings found"
+msgstr "رشته پیدا نشد"
+
+msgid "No updates found."
+msgstr "هیچ بروزرسانی یافت نشد."
+
+msgid "Nonce value is invalid"
+msgstr "مقدار nonce نامعتبر است"
+
+msgid "Not loaded"
+msgstr "لود نشده"
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr "به عنوان \"تکمیل شده\" مشخص نشده است. برای فعال کردن 'ذخیره' را بزنید."
+
+msgid "Not translated"
+msgstr "ترجمه نشده است"
+
+msgid "Number of strings"
+msgstr "تعداد رشته ها"
+
+msgid "OnTheGoSystems"
+msgstr "OnTheGoSystems"
+
+msgid "Optional"
+msgstr "اختیاری"
+
+msgid "PO export may be glitchy. We are working to fix it."
+msgstr "برون ریزی PO ممکن است دچار خستگی شود. ما در حال کار بر روی آن هستیم."
+
+msgid "Package Management"
+msgstr "مدیریت پکیج ها"
+
+msgid "Packages"
+msgstr "بسته ها"
+
+msgid "Partial Translation"
+msgstr "ترجمه جزئی"
+
+msgid "Partial translation"
+msgstr "ترجمه جزئی"
+
+msgid "Performance considerations"
+msgstr "ملاحظات عملکرد"
+
+msgid ""
+"Please activate WPML Multilingual CMS to have WPML String Translation working."
+msgstr "لطفا CMS چند زبانه WPML را فعال کنید تا ترجمه رشته WPML کار کند."
+
+msgid "Please enter a domain!"
+msgstr "لطفاً یک دامنه را وارد کنید!"
+
+msgid "Please select at least one document to translate."
+msgstr "لطفا حداقل یک سند را برای ترجمه انتخاب کنید."
+
+msgid "Please select at least one language to translate into."
+msgstr "لطفا حداقل یک زبان برای ترجمه را انتخاب کنید."
+
+msgid "Please select the .po file to upload!"
+msgstr "لطفاً یک فایل .po را برای آپلود انتخاب کنید!"
+
+msgid "Plugin"
+msgstr "افزونه"
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already in "
+"progress."
+msgstr ""
+"پست \"٪ 1 $ s\" برای٪ 2 $ s نادیده گرفته خواهد شد ، زیرا ترجمه در حال انجام است."
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already waiting "
+"for translator."
+msgstr ""
+"پست \"%1$s\" برای %2$s نادیده گرفته خواهد شد ، زیرا ترجمه از قبل منتظر مترجم "
+"است."
+
+msgid "Proceed"
+msgstr "پردازش شد"
+
+msgid "Q"
+msgstr "Q"
+
+msgid "Recreate ST DB cache tables"
+msgstr "جداول ST cache را دوباره از نو بسازید"
+
+msgid ""
+"Recreate String Translation cache tables when they are missing or are invalid."
+msgstr ""
+"جداول کش String Translation دوباره بازیابی کنید، زیرا آن‌ها از دست رفته یا "
+"نامعتبر هستند."
+
+msgid "Return to String Translation"
+msgstr "Return to String Translation"
+
+msgid "Review changes and update"
+msgstr "بررسی تغییرات و به‌روز رسانی"
+
+msgid "S"
+msgstr "S"
+
+msgid "SS"
+msgstr "SS"
+
+msgid "SSS"
+msgstr "SSS"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Scan selected plugins for strings"
+msgstr "اسکن پلاگین‌های انتخاب شده برای رشته‌ها"
+
+msgid "Scan selected themes for strings"
+msgstr "اسکن همه قالب‌های انتخاب شده برای رشته‌ها"
+
+msgid "Scan successful! WPML found %s strings."
+msgstr "اسکن موفق بود! رشته‌های WPML %s پیدا شد."
+
+msgid "Scanning file: %s"
+msgstr "اسکن فایل: %s"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search for:"
+msgstr "جستجو برای:"
+
+msgid ""
+"Search in both the original language and in translations. Searching in "
+"translations may take a bit of time."
+msgstr "جستجو در زبان اصلی و در ترجمه. جستجو در ترجمه ها ممکن است کمی وقت بگذارد."
+
+msgid "Select All"
+msgstr "انتخاب همه"
+
+msgid "Select all"
+msgstr "انتخاب همه"
+
+msgid "Select domain:"
+msgstr "انتخاب دامنه:"
+
+msgid "Select for which domain to set the language: "
+msgstr "دامنه جهت تنظیم زبان را انتخاب کنید: "
+
+msgid "Select what the strings are for:"
+msgstr "رشته‌ها را انتخاب کنید:"
+
+msgid "Send to translation"
+msgstr "ارسال به بخش ترجمه"
+
+msgid "Set different slugs in different languages for %s."
+msgstr "رشته های مختلف را در زبان های مختلف برای %s  تنظیم کنید."
+
+msgid "Set the source language of these strings to:"
+msgstr "تنظیم زبان اصلی این رشته‌ها به:"
+
+msgid "Show custom MO Files Pre-generation dialog box"
+msgstr "کادرهای گفتگوی پیش از فایلهای MO سفارشی را نشان دهید"
+
+msgid "Showing only strings that contain %s"
+msgstr "نمایش فقط رشته‌هایی که حاوی %s هستند"
+
+msgid "Skipping file: %s"
+msgstr "رد کردن فایل: %s"
+
+msgid "Slug translations"
+msgstr "ترجمه نامک (Slug)"
+
+msgid ""
+"Some of the strings selected belong to packages. You can only change the "
+"language of these strings if all strings in the packages are selected."
+msgstr ""
+"بعضی از رشته‌ها به بسته‌ها تعلق دارند. اگر تمام رشته‌ها در بسته‌بندی‌ها انتخاب شوند، "
+"می‌توانید زبان این رشته‌ها را فقط تغییر دهید."
+
+msgid ""
+"Some themes and plugins don't properly set the textdomain (second argument) in "
+"GetText calls. When you select this option, WPML will assume that the strings "
+"found in GetText calls in the PHP files of the theme and plugin should have the "
+"textdomain with the theme/plugin's name."
+msgstr ""
+"برخی از قالب و پلاگین‌ها به طور درست textdomain (آرگومان دوم) با متن تنظیم "
+"نمی‌کنند. هنگامی که این گزینه را انتخاب کنید, WPML فرض می‌کند که رشته‌هایی که در "
+"تماس با GetText در فایل‌های PHP هستند و مورد استفاده در قالب و افزونه قرار "
+"می‌گیرند و افزونه باید دارای دامنه با نام قالب/افزونه باشد."
+
+msgid "String"
+msgstr "رشته"
+
+msgctxt "String Tracking warning: sentence 1"
+msgid ""
+"%s allows you to see where strings come from, so you can translate them "
+"accurately."
+msgstr ""
+"%s اجازه می‌دهد تا ببینید که رشته‌ها آمده اند، بنابراین شما می‌توانید آن‌ها را با "
+"دقت ترجمه کنید."
+
+msgctxt "String Tracking warning: sentence 1, anchor text"
+msgid "String Tracking"
+msgstr "پیگیری رشته"
+
+msgctxt "String Tracking warning: sentence 2"
+msgid "It needs to parse the PHP source files and the output HTML."
+msgstr "لازم است فایل‌های منبع PHP و HTML حروجی را تجزیه کند."
+
+msgctxt "String Tracking warning: sentence 3"
+msgid ""
+"This feature is CPU-intensive and should only be used while you are developing "
+"sites."
+msgstr "این ویژگی CPU-intensive است و فقط باید در هنگام ایجاد سایت‌ها استفاده شود."
+
+msgctxt "String Tracking warning: sentence 4"
+msgid ""
+"Remember to turn it off before going to production, to avoid performance "
+"problems."
+msgstr ""
+"به یاد داشته باشید قبل از رفتن به تولید آن را خاموش کنید تا از مشکلات عملکرد "
+"جلوگیری شود."
+
+msgid "String Translation"
+msgstr "ترجمه رشته"
+
+msgid "String translation"
+msgstr "ترجمه رشته"
+
+msgid "Strings from all text domains are excluded"
+msgstr "رشته‌ها از همه text domains حذف می‌شوند"
+
+msgid "Strings from all text domains will be auto-registered"
+msgstr "رشته‌ها از تمام text domains خودکار ثبت می‌شوند"
+
+msgid "Strings in need of translation"
+msgstr "رشته‌هایی که نیاز به ترجمه دارند"
+
+msgid "Strings in the plugins"
+msgstr "رشته‌ها در پلاگین‌ها"
+
+msgid "Strings in the themes"
+msgstr "رشته‌ها در قالب‌ها"
+
+msgid "Strings per page:"
+msgstr "رشته ها در صفحه:"
+
+msgid "Strings translations updated"
+msgstr "ترجمه رشته‌ها را به‌روز شد"
+
+msgid "Submit"
+msgstr "ارسال"
+
+msgid "Success!"
+msgstr "موفقیت!"
+
+msgid "Textdomain"
+msgstr "Textdomain"
+
+msgid "The database has been updated."
+msgstr "پایگاه داده به روز شده است."
+
+msgid "The following files were processed:"
+msgstr "فایل‌های زیر پردازش شدند:"
+
+msgid "Theme"
+msgstr "قالب"
+
+msgid "There is nothing to be updated or to be added."
+msgstr "هیچ چیزی برای به‌روز شدن و اضافه شدن وجود ندارد."
+
+msgid "There is nothing to translate."
+msgstr "چیزی برای ترجمه وجود ندارد."
+
+msgid ""
+"These are the strings that we found in your .po file. Please carefully review "
+"them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom of this "
+"screen%2$s. You can exclude individual strings by clearing the check boxes next "
+"to them."
+msgstr ""
+"اینها رشته هایی هستند که ما در فایل .po شما پیدا کردیم. لطفا آنها را با دقت "
+"مرور کنید. سپس، با کلیک بر روی دکمه های 'اضافه کردن' یا 'لغو' در %1$sبتم این "
+"صفحه نمایش%2$s. شما می توانید رشته های فردی را با پاک کردن جعبه های چک در کنار "
+"آنها حذف کنید."
+
+msgid "This domain currently has the following strings:"
+msgstr "این دامنه در حال حاضر دارای رشته‌های زیر است:"
+
+msgid ""
+"This folder appears to be not writable. This is blocking translation for "
+"strings from appearing on the site."
+msgstr ""
+"به نظر می‌رسد این پوشه قابل نوشتن نیست. این مانع از ترجمه رشته‌ها در سایت می‌شود."
+
+msgid ""
+"This update includes %d new strings and %d updated strings. You can review the "
+"strings below. Then, go to the <a%s>bottom of this page</a> and click on the "
+"Proceed button."
+msgstr ""
+"این به روز رسانی شامل %d رشته های جدید و %d رشته های به روز شده است. شما می "
+"توانید رشته های زیر را بررسی کنید. سپس، به پایین <a%s> این صفحه </a> بروید و "
+"روی دکمه ادامه کلیک کنید."
+
+msgid "This widget is converted to multilingual"
+msgstr "این ابزارک به چند زبانه تبدیل شده است"
+
+msgid "Title:"
+msgstr "عنوان:"
+
+msgid ""
+"To resolve this, please contact your hosting company and request that they make "
+"that folder writable."
+msgstr ""
+"برای حل مشکل، لطفاً با شرکت میزبان (هاست) خود تماس بگیرید و از آن‌ها بخواهید که "
+"این پوشه را نوشتنی (قابل نوشتن) کنند."
+
+msgid "Track where strings appear on the site"
+msgstr "پیگیری جایی که رشته‌ها در سایت نمایش داده می‌شوند"
+
+msgid ""
+"Translate base slugs of custom post types and taxonomies (via WPML -> Taxonomy "
+"translation)."
+msgstr ""
+"ترجمه اسلاگ‌های پایه انواع نوشته سفارشی و طبقه‌بندی‌ها (از طریق WPML -> ترجمه "
+"طبقه‌بندی‌ها)."
+
+msgid ""
+"Translate custom post and taxonomy base slugs (via WPML String Translation)."
+msgstr "ترجمه پست سفارشی و طبقه بندی لغات پایه (از طریق ترجمه رشته WPML)."
+
+msgid "Translate strings"
+msgstr "ترجمه رشته ها"
+
+msgid "Translate strings in %s"
+msgstr "ترجمه رشته‌ها در %s"
+
+msgid "Translate texts in admin screens &raquo;"
+msgstr "ترجمه متن‌ها در صفحه‌های مدیریت &raquo;"
+
+msgid "Translating users of types: %s"
+msgstr "ترجمه کاربران از انواع: %s"
+
+msgid "Translation"
+msgstr "ترجمه"
+
+msgid "Translation complete"
+msgstr "ترجمه کامل شد"
+
+msgid "Translation is in progress"
+msgstr "ترجمه در حال انجام"
+
+msgid "Translation needed"
+msgstr "ترجمه مورد نیاز"
+
+msgid "Translation needs update"
+msgstr "ترجمه نیاز به بروز رسانی دارد"
+
+msgid "Translation status:"
+msgstr "وضعیت ترجمه:"
+
+msgid "Update Now"
+msgstr "همین حالا به روز کنید"
+
+msgid "Updated %s translation is available"
+msgstr "به‌روز شده %s ترجمه در دسترس است"
+
+msgid "Updated translations (%d)"
+msgstr "ترجمه بروزرسانی شد (%d)"
+
+msgid ""
+"Use theme or plugin text domains when gettext calls do not use a string literal"
+msgstr ""
+"استفاده از text domain قالب یا افزونه زمانی که gettext صدا زده می شود به عنوان "
+"string literal استفاده نمی شود."
+
+msgid "Use this language as the default language for new strings in this domain"
+msgstr ""
+"از این زبان بعنوان زبان پیش‌فرض برای رشته‌های جدید در این دامنه استفاده کنید"
+
+msgid "View"
+msgstr "بازدید"
+
+msgid "W"
+msgstr "W"
+
+msgid ""
+"WPML Package Translation is enabled but not effective. It requires <a href=\"%s"
+"\">WPML</a>, String Translation and Translation Management in order to work."
+msgstr ""
+"بسته‌بندی ترجمه WPML فعال است اما موثر نیست. این نیاز به <a href=\"%s\">WPML</"
+"a>, String Translation و Translation Management برای کار کردن دارد."
+
+msgid "WPML String Translation"
+msgstr "ترجمه رشته WPML"
+
+msgid ""
+"WPML String Translation is attempting to write .mo files with translations to "
+"folder:"
+msgstr ""
+"افزونه WPML String Translation در تلاش است فایل‌های mo. را با ترجمه پوشه قابل "
+"نوشتن باشد:"
+
+msgid ""
+"WPML String Translation is enabled but not effective, because WPML is outdated. "
+"Please update WPML first."
+msgstr ""
+"ترجمه رشته WPML فعال است، اما موثر نیست، زیرا WPML قدیمی است. لطفا ابتدا WPML "
+"را به روز کنید."
+
+msgid ""
+"WPML String Translation is enabled but not effective. Please finish the "
+"installation of WPML first."
+msgstr ""
+"ترجمه رشته WPML فعال است، اما موثر نیست. لطفا ابتدا نصب WPML را پایان دهید."
+
+msgid ""
+"WPML String Translation will send all strings to WPML’s Advanced Translation "
+"Editor and to the translation services which are used."
+msgstr ""
+"ترجمه رشته WPML تمام رشته ها را به ویرایشگر پیشرفته ترجمه WPML و خدمات ترجمه که "
+"مورد استفاده قرار می گیرند، ارسال می کند."
+
+msgid "WPML Translation"
+msgstr "ترجمه WPML"
+
+msgid ""
+"WPML can keep track of where strings are used on the public pages. Activating "
+"this feature will enable the 'view in page' functionality and make translation "
+"easier."
+msgstr ""
+"WPML می‌تواند رشته‌های که در صفحات عمومی استفاده می‌شوند را پیگیری کند. فعال کردن "
+"این ویژگی قابلیت مشاهده در صفحه را فعال کرده و ترجمه را ساده تر می‌کند."
+
+msgid "WPML could not delete the strings"
+msgstr "افزونه WPML نمی‌تواند این رشته‌ها را حذف کند"
+
+msgid ""
+"WPML needs to update the database. This update will help improve WPML's "
+"performance when fetching translated strings."
+msgstr ""
+"WPML نیاز به آپدیت دیتابیس است. این به‌روز رسانی کمک می‌کند که عملکرد WPML هنگام "
+"تهیه رشته‌های ترجمه شده بهبود می‌یابد."
+
+msgid "WPML's documentation on troubleshooting .mo files generation."
+msgstr "مستندات WPML درباره عیب یابی در تولید فایل‌های .mo"
+
+msgid "WW"
+msgstr "WW"
+
+msgid "Waiting for translator"
+msgstr "منتظر برای ترجمه"
+
+msgid ""
+"We have detected a problem with some tables in the database. Please contact "
+"%1$sWPML support%2$s to get this fixed."
+msgstr "ما یک مشکل با برخی از جداول در پایگاه داده تشخیص داده شده است."
+
+msgid "Widget is already converted"
+msgstr "ابزارک در حال حاضر تبدیل شده است"
+
+msgid "With Priority:"
+msgstr "با اولویت:"
+
+msgid "X"
+msgstr "X"
+
+msgid "Y"
+msgstr "Y"
+
+msgid "YY"
+msgstr "YY"
+
+msgid "YYYY"
+msgstr "YYYY"
+
+msgid "YYYYY"
+msgstr "YYYYY"
+
+msgid "YYYYYY"
+msgstr "YYYYYY"
+
+msgid "Yes - disable these notifications completely"
+msgstr "بله - این اعلان‌ها به طور کامل غیره فعال کنید"
+
+msgid ""
+"You cannot add packages in this language to the basket since it already "
+"contains posts, packages or strings of another source language!\n"
+"\t\t\t\t\tEither submit the current basket and then add the post or delete the "
+"posts of differing language in the current basket"
+msgstr ""
+"شما نمی‌توانید بسته‌های این زبان را به سبد اضافه کنید زیرا از قبل حاوی نوشته‌ها "
+"است, بسته‌ها یا رشته‌های یک زبان منبع دیگر!\n"
+"\t\t\t\t\tیا سبد فعلی و یا ثبت کنید سپس نوشته را اضافه کنید و یا نوشته‌های مختلف "
+"زبان در سبد فعلی حذف کنید"
+
+msgid "You excluded: "
+msgstr "شما حذف کردید:"
+
+msgid ""
+"You have selected strings belonging to a package. Please select all strings "
+"from the affected package or unselect these strings."
+msgstr ""
+"شما رشته‌های که متعلق به یک بسته هستند را انتخاب کرده‌اید. لطفاً همه رشته‌ها را از "
+"بسته تحت تاثیر انتخاب کنید یا این رشته‌ها را انتخاب کنید."
+
+msgid "You included: "
+msgstr "شما شامل: "
+
+msgid "Z"
+msgstr "Z"
+
+msgid "ZZ"
+msgstr "ZZ"
+
+msgid "a"
+msgstr "a"
+
+msgid "and others"
+msgstr "و سایر"
+
+msgid "d"
+msgstr "d"
+
+msgid "dd"
+msgstr "dd"
+
+msgid "ddd"
+msgstr "ddd"
+
+msgid "dddd"
+msgstr "dddd"
+
+msgid "e"
+msgstr "e"
+
+msgid "edit"
+msgstr "ویرایش"
+
+msgid "g"
+msgstr "g"
+
+msgid "gg"
+msgstr "gg"
+
+msgid "gggg"
+msgstr "gggg"
+
+msgid "ggggg"
+msgstr "ggggg"
+
+msgid "h"
+msgstr "h"
+
+msgid "hh"
+msgstr "hh"
+
+msgid "hmm"
+msgstr "Hmm"
+
+msgid "hmmss"
+msgstr "hmmss"
+
+msgid "http://www.onthegosystems.com/"
+msgstr "http://www.onthegosystems.com/"
+
+msgid "https://wpml.org/"
+msgstr "https://wpml.org/"
+
+msgid "k"
+msgstr "k"
+
+msgid "kk"
+msgstr "kk"
+
+msgid "m"
+msgstr "m"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "new"
+msgstr "جدید"
+
+msgid "none"
+msgstr "هیچ"
+
+msgid "s"
+msgstr "s"
+
+msgid "select from existing"
+msgstr "انتخاب از بین موجودها"
+
+msgid "ss"
+msgstr "SS"
+
+msgid "view in page"
+msgstr "نمایش در صفحه"
+
+msgid "view in source"
+msgstr "مشاهده در منبع"
+
+msgid "w"
+msgstr "w"
+
+msgid "ww"
+msgstr "ww"
+
+msgid "x"
+msgstr "x"
+
+msgid "y"
+msgstr "y"
+
+msgid "yo"
+msgstr "yo"
+
+msgid "yy"
+msgstr "yy"
+
+msgid "yyy"
+msgstr "yyy"
+
+msgid "yyyy"
+msgstr "yyyy"

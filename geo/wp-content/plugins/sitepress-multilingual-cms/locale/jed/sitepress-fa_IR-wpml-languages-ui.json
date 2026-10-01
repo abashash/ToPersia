@@ -1,0 +1,61 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "hide the translations instead.": [
+            "به جای آن ترجمه ها را پنهان کنید."
+        ],
+        "Error happened! Please try again.": [
+            "خطایی رخ داد! لطفا دوباره تلاش کنید."
+        ],
+        "Cancel": [
+            "لغو"
+        ],
+        "Choose Content to Automatically Translate into": [
+            "محتوا را برای ترجمه خودکار به آن انتخاب کنید"
+        ],
+        "Save Changes and Enable Automatic Translation": [
+            "تغییرات را ذخیره کنید و ترجمه خودکار را فعال کنید"
+        ],
+        "Cancel Language Changes": [
+            "لغو تغییرات زبان"
+        ],
+        "Save": [
+            "ذخيره"
+        ],
+        "Add new languages": [
+            "افزودن زبان‌های جدید"
+        ],
+        "Add new language": [
+            "افزودن زبان جدید"
+        ],
+        "Never mind - don't add new languages": [
+            "مهم نیست - زبان‌های جدید اضافه نکنید"
+        ],
+        "Never mind - don't add new language": [
+            "مهم نیست - زبان جدید اضافه نکنید"
+        ],
+        "Choose which content to translate into the new language": [
+            "انتخاب کنید کدام محتوا به زبان جدید ترجمه شود"
+        ],
+        "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "به‌طور خودکار تمام پست‌ها و صفحه‌های من، به علاوه محتوای جدید را هنگام ایجاد آن، ترجمه کنید."
+        ],
+        "Only automatically translate new content.": [
+            "فقط محتوای جدید را به صورت خودکار ترجمه کنید."
+        ],
+        "Which content do you want to translate into the new language?": [
+            "کدام محتوا را می خواهید به زبان جدید ترجمه کنید؟"
+        ],
+        "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "وقتی ترجمه خودکار را از سرمیگیرید، این محتوا <a>به طور خودکار ترجمه می شود</a>."
+        ],
+        "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "همچنان می‌توانید محتوای موجود را در هر زمان از داشبورد مدیریت ترجمه، ترجمه کنید."
+        ]        
+      }
+    }
+  }

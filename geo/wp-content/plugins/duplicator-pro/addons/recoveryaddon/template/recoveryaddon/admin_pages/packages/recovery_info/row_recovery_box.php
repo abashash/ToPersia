@@ -1,0 +1,64 @@
+<?php
+
+/**
+ * Duplicator Backup row in table Backups list
+ */
+
+use Duplicator\Addons\RecoveryAddon\Package\RecoveryPackage;
+use Duplicator\Core\Controllers\ControllersManager;
+use Duplicator\Core\Views\TplMng;
+use Duplicator\Package\DupPackage;
+use Duplicator\Views\KsesHelper;
+
+defined("ABSPATH") or die("");
+
+/**
+ * Variables
+ *
+ * @var ControllersManager $ctrlMng
+ * @var TplMng $tplMng
+ */
+
+$package       = $tplMng->getDataValueObjRequired('package', DupPackage::class);
+$isRecoverable = RecoveryPackage::isPackageIdRecoverable($package->getId());
+
+if ($isRecoverable) {
+    $tplMng->render('recoveryaddon/admin_pages/packages/recovery_info/row_recovery_box_available');
+} else {
+    $tplMng->render('recoveryaddon/admin_pages/packages/recovery_info/row_recovery_box_unavailable');
+}
+?>
+<hr class="margin-top-1 margin-bottom-1">
+<small><i>
+        <?php
+        echo wp_kses(
+            sprintf(
+                _x(
+                    '%1$sDisaster Recovery%2$s makes it quick and easy to restore your site during an emergency.
+            You don’t need WordPress to be working for this.
+            Just keep the Disaster Recovery Link in a safe spot and use it when needed, or use the Launcher to restore your backup.',
+                    '%1$s and %2$s represents the opening and closing HTML tags for an anchor or link',
+                    'duplicator-pro'
+                ),
+                '<a href="' . esc_url(DUPLICATOR_DUPLICATOR_DOCS_URL . 'tools-recovery') . '" target="_blank">',
+                '</a>'
+            ),
+            KsesHelper::GEN_TAGS
+        );
+        ?>
+        <br>
+        <?php
+        echo wp_kses(
+            sprintf(
+                _x(
+                    'If your backup isn’t eligible for Disaster Recovery, you can still use the %1$sRestore Backup button.%2$s',
+                    '%1$s and %2$s represents the opening and closing HTML tags for an anchor or link',
+                    'duplicator-pro'
+                ),
+                '<a href="' . esc_url(DUPLICATOR_DUPLICATOR_DOCS_URL . 'restoring-your-backup') . '" target="_blank">',
+                '</a>'
+            ),
+            KsesHelper::GEN_TAGS
+        );
+        ?>
+    </i></small>

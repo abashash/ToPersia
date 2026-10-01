@@ -1,0 +1,121 @@
+{
+  "source": "uploaded topersia_geo.sql.gz",
+  "database": "topersia_geo",
+  "db_server": {
+    "engine": "MariaDB",
+    "version": "10.11.19"
+  },
+  "site_urls": {
+    "siteurl": "https://topersia.com/geo",
+    "home": "https://topersia.com/"
+  },
+  "elementor_observations": {
+    "elementor_data_records": 21,
+    "elementor_page_settings_records_observed": 7,
+    "elementor_template_type_meta_occurrences": 32,
+    "total_elements_observed": 407,
+    "containers_observed": 131,
+    "widgets_observed": 276,
+    "widget_types": {
+      "shortcode": 136,
+      "heading": 45,
+      "button": 36,
+      "image": 24,
+      "icon-list": 12,
+      "text-editor": 9,
+      "icon": 6,
+      "html": 5,
+      "search": 3
+    },
+    "elementor_version_markers": [
+      "4.2.3",
+      "4.2.4"
+    ],
+    "elementor_pro_version_markers": [
+      "4.2.0",
+      "4.2.2"
+    ],
+    "common_settings_keys_observed": [
+      "content_width",
+      "min_height",
+      "min_height_tablet",
+      "min_height_mobile",
+      "flex_direction",
+      "margin",
+      "padding",
+      "title",
+      "size",
+      "header_size",
+      "background_image",
+      "background_color",
+      "background_background",
+      "background_overlay_image",
+      "width",
+      "align",
+      "text",
+      "shortcode",
+      "scroll_y"
+    ]
+  },
+  "jetengine": {
+    "post_type_slugs": [
+      "tp_country",
+      "tp_province",
+      "tp_county",
+      "tp_city",
+      "tp_region",
+      "tp_island",
+      "tp_desert",
+      "tp_village",
+      "tp_mountain",
+      "tp_water_body",
+      "tp_district",
+      "tp_forest_plain",
+      "tp_border_crossing",
+      "tp_monument",
+      "tp_religious_site",
+      "tp_ancient_site",
+      "tp_natural_feature",
+      "tp_museum",
+      "tp_protected_area",
+      "tp_landscape",
+      "tp_handicraft",
+      "tp_local_food",
+      "tp_costume",
+      "tp_music",
+      "tp_dance",
+      "tp_language",
+      "tp_ethnic_group",
+      "tp_ritual",
+      "tp_figure",
+      "tp_historical_era",
+      "tp_health_safety",
+      "tp_travel_etiquette",
+      "tp_designation",
+      "tp_route",
+      "tp_visa",
+      "tp_currency",
+      "tp_calendar",
+      "tp_transport",
+      "tp_festival",
+      "tp_sports_event",
+      "tp_religious_event",
+      "tp_seasonal_event"
+    ],
+    "post_type_count": 42,
+    "schema_tables_present": [
+      "jwWSU9v_jet_post_types",
+      "jwWSU9v_jet_taxonomies",
+      "jwWSU9v_jet_rel_default",
+      "jwWSU9v_jet_rel_default_meta",
+      "jwWSU9v_jet_review_types",
+      "jwWSU9v_jet_reviews"
+    ]
+  },
+  "relevant_wp_tables": {
+    "options": "jwWSU9v_options",
+    "posts": "jwWSU9v_posts",
+    "postmeta": "jwWSU9v_postmeta"
+  },
+  "important_warning": "The SQL dump is a database snapshot, not the filesystem. It reveals stored Elementor/JetEngine/WPML data and schema, but cannot prove every currently installed plugin file/control. Resolve conflicts in favor of live plugin files and exports."
+}

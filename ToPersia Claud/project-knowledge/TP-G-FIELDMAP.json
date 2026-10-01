@@ -1,0 +1,368 @@
+{
+ "_meta": {
+  "source": "Jetengine_Skin.json · export 2026-09-09",
+  "scope": "۱۳ نوع پست دستهٔ G + متاباکس مشترک",
+  "rule": "رندر بر پایهٔ «نوع» است نه نوع پست. افزودن G14 با فیلدهای موجود صفر خط کد می‌خواهد.",
+  "zones": {
+   "card": "کارت حقایق",
+   "details": "فهرست جزئیات",
+   "badge": "نشان — فقط وقتی درست است",
+   "names": "زیر نام در سربرگ",
+   "skip": "سالِ جفت‌شده با نشان، جدا نمایش داده نمی‌شود"
+  },
+  "kinds": {
+   "number": "رقم فارسی + جداکنندهٔ ٬ + واحد",
+   "year": "رقم فارسی بدون جداکننده",
+   "latin": "مونو، چپ‌به‌راست",
+   "flag": "سوییچر",
+   "text": "همان‌طور که هست"
+  }
+ },
+ "fields": {
+  "official_name_fa": {
+   "label": "نام رسمی فارسی",
+   "unit": "",
+   "kind": "text",
+   "zone": "names"
+  },
+  "official_name_en": {
+   "label": "نام رسمی انگلیسی",
+   "unit": "",
+   "kind": "text",
+   "zone": "names"
+  },
+  "official_name_ar": {
+   "label": "نام رسمی عربی",
+   "unit": "",
+   "kind": "text",
+   "zone": "names"
+  },
+  "geo_coordinates": {
+   "label": "مختصات جغرافیایی",
+   "unit": "",
+   "kind": "latin",
+   "zone": "card"
+  },
+  "population": {
+   "label": "جمعیت",
+   "unit": "نفر",
+   "kind": "number",
+   "zone": "card"
+  },
+  "area_km2": {
+   "label": "مساحت",
+   "unit": "کیلومتر مربع",
+   "kind": "number",
+   "zone": "card"
+  },
+  "official_language": {
+   "label": "زبان رسمی",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "timezone": {
+   "label": "منطقهٔ زمانی",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "currency_note": {
+   "label": "یادداشت ارز",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "government_type": {
+   "label": "نوع حکومت",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "neighboring_countries": {
+   "label": "کشورهای همسایه",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "calling_code": {
+   "label": "پیش‌شمارهٔ تلفن",
+   "unit": "",
+   "kind": "latin",
+   "zone": "card"
+  },
+  "best_season": {
+   "label": "مناسب‌ترین فصل برای سفر",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "internet_tld": {
+   "label": "دامنهٔ اینترنتی",
+   "unit": "",
+   "kind": "latin",
+   "zone": "card"
+  },
+  "region_classification": {
+   "label": "نوع منطقه",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "geographic_boundary": {
+   "label": "محدودهٔ جغرافیایی",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "climate_overview": {
+   "label": "مرور اقلیم",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "historical_context": {
+   "label": "زمینهٔ تاریخی",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "province_code": {
+   "label": "کد استان",
+   "unit": "",
+   "kind": "latin",
+   "zone": "card"
+  },
+  "geo_boundary": {
+   "label": "مختصات جغرافیایی",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "bordering_countries": {
+   "label": "کشورهای هم‌مرز",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "climate_type": {
+   "label": "نوع اقلیم",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "free_zone": {
+   "label": "منطقهٔ آزاد",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge"
+  },
+  "elevation_m": {
+   "label": "ارتفاع از سطح دریا",
+   "unit": "متر",
+   "kind": "number",
+   "zone": "card"
+  },
+  "transport_access": {
+   "label": "دسترسی و حمل‌ونقل",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "founded_year": {
+   "label": "سال بنیان‌گذاری",
+   "unit": "",
+   "kind": "year",
+   "zone": "card"
+  },
+  "airport_name": {
+   "label": "نام فرودگاه",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "airport_iata": {
+   "label": "کد فرودگاه",
+   "unit": "",
+   "kind": "latin",
+   "zone": "card"
+  },
+  "railway_station": {
+   "label": "ایستگاه راه‌آهن",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge"
+  },
+  "unesco_creative_city": {
+   "label": "شهر خلاق یونسکو",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge"
+  },
+  "neighborhood_type": {
+   "label": "نوع محله",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "tourism_target_village": {
+   "label": "روستای هدف گردشگری",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge"
+  },
+  "island_type": {
+   "label": "نوع جزیره",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "access_method": {
+   "label": "راه دسترسی",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "mountain_type": {
+   "label": "نوع عارضه",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "provinces_spanning": {
+   "label": "استان‌های گسترده در آن",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  },
+  "trekking_difficulty": {
+   "label": "دشواری صعود",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "volcanic": {
+   "label": "آتشفشانی",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge"
+  },
+  "national_monument": {
+   "label": "اثر طبیعی ملی",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge",
+   "year": "national_monument_year"
+  },
+  "national_monument_year": {
+   "label": "سال ثبت اثر طبیعی ملی",
+   "unit": "",
+   "kind": "year",
+   "zone": "skip"
+  },
+  "water_body_type": {
+   "label": "نوع پهنهٔ آبی",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "length_km": {
+   "label": "طول",
+   "unit": "کیلومتر",
+   "kind": "number",
+   "zone": "card"
+  },
+  "max_depth_m": {
+   "label": "حداکثر عمق",
+   "unit": "متر",
+   "kind": "number",
+   "zone": "card"
+  },
+  "salinity_type": {
+   "label": "نوع شوری",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "biosphere_reserve": {
+   "label": "ذخیره‌گاه زیست‌کره",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge",
+   "year": "biosphere_year"
+  },
+  "biosphere_year": {
+   "label": "سال پیوستن به ذخیره‌گاه زیست‌کره",
+   "unit": "",
+   "kind": "year",
+   "zone": "skip"
+  },
+  "desert_type": {
+   "label": "نوع کویر",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "max_temperature_c": {
+   "label": "حداکثر دمای ثبت‌شده",
+   "unit": "درجهٔ سانتی‌گراد",
+   "kind": "number",
+   "zone": "card"
+  },
+  "world_heritage": {
+   "label": "میراث جهانی",
+   "unit": "",
+   "kind": "flag",
+   "zone": "badge",
+   "year": "world_heritage_year"
+  },
+  "world_heritage_year": {
+   "label": "سال ثبت میراث جهانی",
+   "unit": "",
+   "kind": "year",
+   "zone": "skip"
+  },
+  "world_heritage_criteria": {
+   "label": "معیار ثبت میراث جهانی",
+   "unit": "",
+   "kind": "latin",
+   "zone": "card"
+  },
+  "area_type": {
+   "label": "نوع پهنه",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "forest_type": {
+   "label": "نوع جنگل",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "crossing_type": {
+   "label": "نوع گذرگاه",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "border_country": {
+   "label": "کشور مقابل",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "status": {
+   "label": "وضعیت",
+   "unit": "",
+   "kind": "text",
+   "zone": "card"
+  },
+  "operating_hours": {
+   "label": "ساعات کاری",
+   "unit": "",
+   "kind": "text",
+   "zone": "details"
+  }
+ }
+}

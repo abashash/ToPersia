@@ -1,0 +1,119 @@
+=== ToPersia — خروجی لاگ رویدادها ===
+تولید ..................... 2026-09-27 06:59 UTC
+هستهٔ ToPersia ............ 4.8.0
+WordPress ................. 7.1.2
+PHP ....................... 8.2.33
+سایت ...................... https://topersia.com/
+جدول ...................... jwWSU9v_topersia_log
+پیکربندی لاگ .............. فعال · آستانه warning · PHP on · JS on · نگه‌داری 14 روز · سقف 5000 سطر
+فیلتر ..................... سطح=همه · کانال=همه · درخواست=همه · جست‌وجو=—
+منطبق با فیلتر ............ 23
+صادرشده ................... 23 (سقف 3000)
+بازهٔ زمانی ............... 2026-09-27 10:14:09  →  2026-09-27 10:29:22
+
+--- شمارش بر سطح ---
+error ..................... 20
+warning ................... 3
+
+--- شمارش بر کانال ---
+js ........................ 20
+php ....................... 3
+
+--- پرتکرارترین پیام‌ها ---
+   20 × error/js         بارگذاری منبع شکست: SCRIPT
+              ↳ topersia-core.php:1623
+    3 × warning/php      Undefined array key "background_image_tablet"
+              ↳ topersia-core.php:1222
+
+--- رویدادها — تازه‌ترین اول، گروه‌بندی بر پایهٔ درخواست ---
+
+▼ درخواست eb13db6e6e38 · 2026-09-27 10:29:22 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #21 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #23 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست c27758e84a89 · 2026-09-27 10:29:22 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #20 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"https:\/\/topersia.com\/assets\/plugins\/elementor\/assets\/js\/chunks\/background-slideshow.min.js?ver=4.3.2","line":0,"col":0,"page":"\/"}
+   #22 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"https:\/\/topersia.com\/assets\/plugins\/elementor\/assets\/js\/chunks\/background-slideshow.min.js?ver=4.3.2","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 64b7b6dbb663 · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #9 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #19 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست c9ca5ff453a8 · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #10 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #18 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 9970b46d7d5a · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #11 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #17 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 057c63c1ef56 · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #6 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #16 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست a58aab8714e7 · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #7 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #15 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 102eeed4a60a · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #8 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #14 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 6f30e635134b · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #5 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #13 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 40a27672afb1 · 2026-09-27 10:29:20 · کاربر 1 · /geo/wp-admin/admin-ajax.php · 2 رویداد
+   #4 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+   #12 [error] js · topersia-core.php:1623
+        بارگذاری منبع شکست: SCRIPT
+        ctx {"file":"","line":0,"col":0,"page":"\/"}
+
+▼ درخواست 7ce5ae36113a · 2026-09-27 10:14:09 · کاربر 0 · / · 3 رویداد
+   #1 [warning] php · topersia-core.php:1222
+        Undefined array key "background_image_tablet"
+        ctx {"file":"wp-content\/plugins\/elementor\/includes\/base\/controls-stack.php","line":1499}
+   #2 [warning] php · topersia-core.php:1222
+        Undefined array key "background_image_tablet"
+        ctx {"file":"wp-content\/plugins\/elementor\/includes\/base\/controls-stack.php","line":1499}
+   #3 [warning] php · topersia-core.php:1222
+        Undefined array key "background_image_tablet"
+        ctx {"file":"wp-content\/plugins\/elementor\/includes\/base\/controls-stack.php","line":1499}

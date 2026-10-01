@@ -1,0 +1,2122 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetReviews For Elementor\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-18 10:39+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-reviews.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid " ago"
+msgstr " قبل"
+
+msgid "%1$s installed and activated successfully."
+msgstr "%1$s نصب و فعالسازی با موفقیت انجام شد."
+
+msgid "%1$s installed successfully."
+msgstr "%1$s با موفقیت نصب شد."
+
+msgid "*Already reviewed"
+msgstr "*قبلاً بررسی شده است"
+
+msgid "*Captcha validation failed"
+msgstr "*اعتبار سنجی کپچا انجام نشد"
+
+msgid "*Guests cannot publish reviews"
+msgstr "*مهمانان نمی توانند نظر منتشر کنند"
+
+msgid "*Publish your review"
+msgstr "*نظر خود را منتشر کنید"
+
+msgid "*This field is required or not valid"
+msgstr "*این فیلد لازم است یا معتبر نیست"
+
+msgid "*User with this role cannot publish a new review"
+msgstr "*کاربر با این نقش نمی تواند یک نظر جدید منتشر کند"
+
+msgid "*Your comment must be approved by the moderator"
+msgstr "*نظر شما باید توسط مدیریت تأیید شود"
+
+msgid "*Your review must be approved by the moderator"
+msgstr "* نظر شما باید توسط مدیریت تأیید شود"
+
+msgid "1 Review"
+msgid_plural "%s Reviews"
+msgstr[0] "%s بررسی"
+msgstr[1] "1 بررسی ها"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های Jet پیشرفته"
+
+msgid "A new comment for \"%s\" has been submitted"
+msgstr "نظر جدیدی برای (%s) ارسال شده است"
+
+msgid "A new review for \"%s\" has been submitted"
+msgstr "یک نظر جدید برای (%s) ارسال شده است"
+
+msgid "Above Progressbar"
+msgstr "بالای نوار پیشرفت"
+
+msgid "Actions"
+msgstr "عملیات"
+
+msgid "Activate"
+msgstr "فعالسازی"
+
+msgid "Activate %2$s"
+msgstr "فعال سازی  %2$s"
+
+msgid "Activate Elementor Now"
+msgstr "فعال سازی الان المنتور"
+
+msgid "Activate License"
+msgstr "فعال سازی  لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license for automatic updates and awesome support"
+msgstr "لایسنس را برای به روز رسانی خودکار و پشتیبانی  فعال کنید"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Licence"
+msgstr " لایسنس فعال"
+
+msgid "Add New"
+msgstr "افزودن جدید"
+
+msgid "Add New Field"
+msgstr "افزودن فیلد جدید"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid "Add New Review Type"
+msgstr "افزودن نوع جدید بررسی"
+
+msgid "Add Structured Data to review box"
+msgstr "افزودن داده های ساختاری به جعبه بررسی"
+
+msgid "Add Type"
+msgstr "افزودن نوع"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"افزودن و فعال کردن لایسنس برای به روز رسانی خودکار ، پشتیبانی  ، ویژگی های "
+"عالی و موارد دیگر"
+
+msgid "Add/Update jet-rating data to post metadata"
+msgstr "افزودن/بروزرسانی داده رتبه Jet به متاداده پست"
+
+msgid "Advanced"
+msgstr "پیشرفته"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All"
+msgstr "همه"
+
+msgid "All Reviews"
+msgstr "همه بررسی ها"
+
+msgid "All installations and activations have been completed."
+msgstr "تمامی نصب ها و فعال سازی با موفقیت به اتمام رسید."
+
+msgid "All installations have been completed."
+msgstr "تمامی نصب ها به پایان رسید."
+
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "همه پلاگین ها نصب شده و با موفقیت فعال شدند. %1$s"
+
+msgid "Allow comments"
+msgstr "اجازه نظرات"
+
+msgid "Allow likes/dislikes for review items for this type of post"
+msgstr "اجازه لایک/دیس لایک برای آیتم بررسی در این نوع پست"
+
+msgid "Allow review comments for this type of post"
+msgstr "اجازه بررسی کامنت های برای این نوع پست"
+
+msgid "Allow review rate actions"
+msgstr "اجازه اقدامات امتیاز بررسی"
+
+msgid "Allow this type of post to use JetReviews"
+msgstr "به این نوع پست ها اجازه دهید از JetReviews استفاده کنند"
+
+msgid "Allowed roles"
+msgstr "نقش های مجاز"
+
+msgid "Allowed:"
+msgstr "مجاز:"
+
+msgid "Allows you to use reviews for user source"
+msgstr "به شما امکان می دهد از بررسی های منبع کاربر استفاده کنید"
+
+msgid "Already Reviewed Message"
+msgstr "*قبلاً بررسی شده است"
+
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr "خطایی در هنگام نصب  %1$s رخ داد :  <strong>%2$s</strong>."
+
+msgid "Angle"
+msgstr "زاویه"
+
+msgid "Angle Double"
+msgstr "زاویه دوبل"
+
+msgid "Any Review Fields Not Found"
+msgstr "هیچ فیلد نظر یافت نشد"
+
+msgid "Any Sources not found"
+msgstr "هیچ منبعی یافت نشد"
+
+msgid "Apply"
+msgstr "اعمال"
+
+msgid "Approve"
+msgstr "تایید"
+
+msgid "Approve it: %s"
+msgstr "تایید آن: %s"
+
+msgid "Approved"
+msgstr "تایید شده"
+
+msgid "Approved Comments"
+msgstr "نظرات تأیید شده"
+
+msgid "Approved Reviews"
+msgstr "بررسی های تأیید شده"
+
+msgid "Approved reviews:"
+msgstr "بررسی های تایید شده:"
+
+msgid "Apr"
+msgstr "آپریل"
+
+msgid "Arrow"
+msgstr "فلش"
+
+msgid "Arrow Circle"
+msgstr "دایره فلش"
+
+msgid "Ascending"
+msgstr "صعودی"
+
+msgid "Assigned to"
+msgstr "متعلق به"
+
+msgid "Assigned to:"
+msgstr "اختصاص داده شده به:"
+
+msgid "At bottom of summary box"
+msgstr "در پایین جعبه خلاصه"
+
+msgid "At left side of summary box"
+msgstr "در سمت چپ جعبه خلاصه"
+
+msgid "At right side of summary box"
+msgstr "در سمت راست جعبه خلاصه"
+
+msgid "At top of summary box"
+msgstr "در بالای جعبه خلاصه"
+
+msgid "Aug"
+msgstr "آگوست"
+
+msgid "Author"
+msgstr "نویسنده"
+
+msgid "Author Mail Placeholder"
+msgstr "نگهدارنده مکان ایمیل نویسنده"
+
+msgid "Author Name"
+msgstr "نام نویسنده"
+
+msgid "Author Name Color"
+msgstr "رنگ نام نویسنده"
+
+msgid "Author Name Placeholder"
+msgstr "نگهدارنده مکان نام نویسنده"
+
+msgid "Author Name Typography"
+msgstr "تایپوگرافی نام نویسنده"
+
+msgid "Author: %1$s"
+msgstr "نویسنده: %1$s"
+
+msgid "Available version:"
+msgstr "نسخه های موجود :"
+
+msgid "Avatar"
+msgstr "آواتار"
+
+msgid "Avatar Size"
+msgstr "اندازه آواتار"
+
+msgid "Avatar Spacing"
+msgstr "فضای آواتار"
+
+msgid "Average"
+msgstr "میانگین "
+
+msgid "Average Layout"
+msgstr "طرح بندی میانگین "
+
+msgid "Average Rating"
+msgstr "میانگین امتیاز"
+
+msgid "Average rating metadata key"
+msgstr "کلید متا داده میانگین امتیاز"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgid "Bar Height"
+msgstr "ارتفاع نوار"
+
+msgid "Baseline"
+msgstr "پایه"
+
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] "شروع به فعال سازی افزونه"
+msgstr[1] "شروع به فعال سازی افزونه ها"
+
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] "شروع نصب افزونه"
+msgstr[1] "شروع نصب افزونه ها"
+
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] "شروع به بروز رسانی افزونه"
+msgstr[1] "شروع به بروز رسانی افزونه ها"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه (Border)"
+
+msgid "Border Radius"
+msgstr "گردی گوشه‌های حاشیه (Border)"
+
+msgid "Bottom"
+msgstr "دکمه"
+
+msgid "Bulk Actions"
+msgstr "اعمال گروهی"
+
+msgid "Buttons"
+msgstr "دکمه‌ها"
+
+msgid "Cancel"
+msgstr "لغو"
+
+msgid "Cancel Button"
+msgstr "دکمه لغو"
+
+msgid "Captcha validation failed"
+msgstr "تایید کپچا نامعتبر است"
+
+msgid "Caret"
+msgstr "هشتک"
+
+msgid "Caret Square"
+msgstr "میدان هشتک"
+
+msgid "Center"
+msgstr "وسط"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Checking the content of reviews and comments for disallowed words."
+msgstr "بررسی محتوای نظرات و نقد و بررسی ها برای کلمات غیر مجاز."
+
+msgid "Chevron"
+msgstr "شورون (Chevron)"
+
+msgid "Chevron Circle"
+msgstr "دایره جهت نما"
+
+msgid "Choose review author verification types"
+msgstr "انواع تأیید نویسنده بررسی را انتخاب کنید"
+
+msgid "Choose review type for post type"
+msgstr "نوع بررسی را برای نوع پست انتخاب کنید"
+
+msgid "Choose review type for user source"
+msgstr "نوع بررسی را برای منبع کاربر انتخاب کنید"
+
+msgid "Choose structure data type"
+msgstr "نوع ساختار داده را انتخاب کنید"
+
+msgid "Choose сomment author verification types"
+msgstr "انواع تأیید نویسنده را برای کامنت انتخاب کنید"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Comment"
+msgstr "نظر"
+
+msgid "Comment Count"
+msgstr "تعداد نظرات"
+
+msgid "Comment Form"
+msgstr "فرم نظر"
+
+msgid "Comment Gap"
+msgstr "فاصله(Gap)  بررسی"
+
+msgid "Comment Item"
+msgstr "آیتم نظر"
+
+msgid "Comment List"
+msgstr "لیست نظرات "
+
+msgid "Comment Update Error"
+msgstr "خطای بروزرسانی نظر"
+
+msgid "Comment approve needed notify"
+msgstr "اطلاع رسانی برای نیاز به تایید نظر"
+
+msgid "Comment author verification"
+msgstr "تأیید نویسنده کامنت"
+
+msgid "Comment have been deleted"
+msgstr "نظر حذف شده است"
+
+msgid "Comment have been updated"
+msgstr "نظر به روز شده است"
+
+msgid "Comment: %s"
+msgstr "نظر: %s"
+
+msgid "Comments"
+msgstr "نظرات"
+
+msgid "Comments Placeholder"
+msgstr "نگه دارنده مکان نظرات"
+
+msgid "Comments Title"
+msgstr "عنوان نظرات"
+
+msgid "Comments allowed:"
+msgstr "نظرات مجاز است:"
+
+msgid "Comments need approval:"
+msgstr "نظرات نیاز به تأیید دارند:"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Container"
+msgstr "کانتینر"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Content Color"
+msgstr "رنگ محتوا"
+
+msgid "Content Source"
+msgstr "منبع محتوا"
+
+msgid "Content Type:"
+msgstr "نوع محتوا:"
+
+msgid "Content Typography"
+msgstr "تایپوگرافی محتوا"
+
+msgid "CreativeWork"
+msgstr "کار خلاقانه"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Current CCT item author"
+msgstr "نویسنده آیتم فعلی CCT"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "DataBase Error"
+msgstr "خطای پایگاه داده"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Date:"
+msgstr "تاریخ:"
+
+msgid "Date: %1$s"
+msgstr "تاریخ: %1$s"
+
+msgid "Deactivate License"
+msgstr "غیر فعال کردن لایسنس"
+
+msgid "Dec"
+msgstr "دسامبر"
+
+msgid "Decimals Count"
+msgstr "تعداد اعشاری"
+
+msgid "Define meta key, which will store the average post rating."
+msgstr "کلید متا را تعیین کنید ، که میانگین امتیاز پست را ذخیره می کند."
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delete it: %s"
+msgstr "حذف آن: %s"
+
+msgid "Demo Mode is active. Only logged users can leave review."
+msgstr "حالت دمو فعال است. فقط کاربران وارد شده می توانند نظر ارسال کنند."
+
+msgid "Descending"
+msgstr "نزولی"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Details"
+msgstr "جزئیات"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Disallowed word 1, Disallowed word 2"
+msgstr "کلمه غیر مجاز 1, کلمه غیر مجاز 2"
+
+msgid "Disallowed words"
+msgstr "کلمات غیر مجاز"
+
+msgid "Dislikes"
+msgstr "دیس لایک"
+
+msgid "Dismiss this notice"
+msgstr "بستن این هشدار"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Edit Comment"
+msgstr "ویرایش نظر"
+
+msgid "Edit Fields"
+msgstr "ویرایش فیلدها"
+
+msgid "Edit Review"
+msgstr "ویرایش بررسی"
+
+msgid "Edit Review Fields"
+msgstr "ویرایش فیلدهای بررسی"
+
+msgid "Email admin only when approval is needed"
+msgstr "فقط در صورت نیاز به تایید به مدیر ایمیل بزنید"
+
+msgid "Email admin whenever anyone submit a comment"
+msgstr "زمانی که نظری ارسال شد به مدیر ایمیل ارسال کنید"
+
+msgid "Email admin whenever anyone submit a review"
+msgstr "زمانی که نقد و بررسی ارسال شد به مدیر ایمیل ارسال کنید"
+
+msgid "Email post author whenever anyone submit a review"
+msgstr "زمانی که نظری ارسال شد به نویسنده پست ایمیل ارسال کنید"
+
+msgid "Email: %1$s"
+msgstr "ایمیل: %1$s"
+
+msgid "Empty Color"
+msgstr "رنگ خالی"
+
+msgid "Empty Dislike Icon"
+msgstr "آیکن دیس لایک خالی"
+
+msgid "Empty Like Icon"
+msgstr "آیکن لایک خالی"
+
+msgid "Empty Star Icon"
+msgstr "آیکن ستاره خالی"
+
+msgid "Empty Stars Color"
+msgstr "رنگ ستاره های خالی"
+
+msgid "Enable disallowed content checking"
+msgstr "فعال کردن بررسی محتوای غیر مجاز"
+
+msgid "Enable reCAPTCHA v3"
+msgstr "فعال سازی ریکپچا ورژن3"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid ""
+"Enter post ID to get data from or leave empy to get data from current post"
+msgstr ""
+"شناسه پست را وارد کنید تا از آن داده دریافت کنید یا برای دریافت داده از پست "
+"فعلی ،خالی بگذارید"
+
+msgid "Enter review type name"
+msgstr "نام نوع بررسی را وارد کنید"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Error Review Approval"
+msgstr "خطای تأیید بررسی"
+
+msgid "Event"
+msgstr "رویداد"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "External Source"
+msgstr "منبع خارجی"
+
+msgid "Feb"
+msgstr "فوریه"
+
+msgid "Few words about reviewd item"
+msgstr "چند نکته در مورد آیتم بررسی شده"
+
+msgid "Field Max"
+msgstr "حداکثر فیلد"
+
+msgid "Field Max Value"
+msgstr "حداکثر مقدار فیلد"
+
+msgid "Field Value"
+msgstr "مقدار فیلد"
+
+msgid "Fields"
+msgstr "فیلدها"
+
+msgid "Fields Box"
+msgstr "جعبه فیلدها"
+
+msgid "Fields Box Padding"
+msgstr "فاصله داخلی(Padding) جعبه فیلدها"
+
+msgid "Fields Gap"
+msgstr "فاصله فیلدها"
+
+msgid "Fields Settings"
+msgstr "تنظیمات فیلدها"
+
+msgid "Filled Dislike Icon"
+msgstr "آیکن دیس لایک پر"
+
+msgid "Filled Like Icon"
+msgstr "آیکن لایک پر"
+
+msgid "Filled Star Icon"
+msgstr "آیکن ستاره پرشده"
+
+msgid "Filled Stars Color"
+msgstr "رنگ ستاره های  پرشده"
+
+msgid "Forms"
+msgstr "فرم ها"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Review Stats"
+msgstr "آمار عمومی بررسی ها"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get Data From Post"
+msgstr "دریافت داده از پست"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Get reviews by source ID. Leave empty to detect automatically"
+msgstr ""
+"دریافت بررسی براساس شناسه منبع.خالی بگذارید تا به طور خودکار شناسایی شود"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Guest"
+msgstr "مهمان"
+
+msgid "Guest User"
+msgstr "کاربر مهمان"
+
+msgid "Header"
+msgstr "سربرگ"
+
+msgid "Header Settings"
+msgstr "تنظیمات سربرگ"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hide"
+msgstr "پنهان"
+
+msgid "Hide Comments"
+msgstr "مخفی کردن نظرات"
+
+msgid "Hide Comments Button"
+msgstr "پنهان کردن دکمه نظرات"
+
+msgid "Hide Details"
+msgstr "مخفی کردن جزئیات"
+
+msgid "High Color"
+msgstr "رنگ زیاد"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "ID"
+msgstr "شناسه"
+
+msgid "Icon Color"
+msgstr "رنگ آیکون"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid "Icons"
+msgstr "آیکن ها"
+
+msgid "Import"
+msgstr "درون‌ریزی"
+
+msgid "Import product native reviews and comments to create JetReviews items"
+msgstr ""
+"برای ایجاد آیتمهای JetReviews، نظرات و بررسی های محصول را درون ریزی کنید"
+
+msgid "Import products reviews"
+msgstr "درون ریزی نظرات محصولات"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Input"
+msgstr "ورودی"
+
+msgid "Inputs"
+msgstr "ورودی ها"
+
+msgid "Inside Progressbar"
+msgstr "داخل نوار پیشرفت"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install %2$s"
+msgstr "نصب  %2$s"
+
+msgid "Install Elementor Now"
+msgstr "نصب الان المنتور"
+
+msgid "Install Plugins"
+msgstr "نصب افزونه  ها"
+
+msgid "Install Required Plugins"
+msgstr "افزونه های مورد نیاز را نصب کنید"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgctxt "Install/Update Status"
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+msgid "Installed But Not Activated"
+msgstr "نصب شده اما فعال نشده است"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده"
+
+msgid "Installed version:"
+msgstr "نسخه نصب شده:"
+
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr "در حال نصب افزونه  %1$s (%2$d/%3$d)"
+
+msgid "Installing Plugin: %s"
+msgstr "در حال نصب افزونه:  %s"
+
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr "در حال نصب و راه اندازی افزونه %1$s (%2$d/%3$d)"
+
+msgid "Integrations"
+msgstr "ادغام"
+
+msgid "Internal error. Please, try again later"
+msgstr "خطای داخلی. لطفاً بعداً دوباره امتحان کنید"
+
+msgid "Item Border"
+msgstr "حاشیه (Border) آیتم"
+
+msgid "Item Border Radius"
+msgstr "گردی حاشیه (Border)مورد"
+
+msgid "Item Size"
+msgstr "اندازه آیتم"
+
+msgid "Item Space"
+msgstr "فضای آیتم"
+
+msgid "Jan"
+msgstr "ژانویه"
+
+msgid "Jet Reviews Query"
+msgstr "کوئری JetReviews"
+
+msgid "JetMenu requires Elementor to be installed."
+msgstr "JetMenu  نیاز به نصب المنتور دارد."
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins License Deactivation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins Settings"
+msgstr "Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های Jet"
+
+msgid "JetReviews"
+msgstr "JetReviews"
+
+msgid "JetReviews - Reviews Widget for Elementor Page Builder"
+msgstr "JetReviews - ابزارک بررسی برای صفحه ساز المنتور"
+
+msgid "JetReviews For Elementor"
+msgstr "JetReviews برای المنتور"
+
+msgid "JetReviews Structured Data"
+msgstr "داده های ساختار یافته JetReviews"
+
+msgid "JetReviews requires Elementor to be activated."
+msgstr "JetReviews نیاز به فعال سازی المنتور دارد."
+
+msgid "JetReviews unavailable for jetThemeCore template preview"
+msgstr "JetReviews برای پیش نمایش قالب jetThemeCore در دسترس نیست"
+
+msgid "JetReviews unavailable for this source type"
+msgstr "JetReviews برای این نوع منبع در دسترس نیست"
+
+msgid "Jul"
+msgstr "جولای"
+
+msgid "Jun"
+msgstr "ژوئن"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Label Color"
+msgstr "رنگ برچسب"
+
+msgid "Label Suffix"
+msgstr "برچسب پسوند"
+
+msgid "Label Typography"
+msgstr "تایپوگرافی برچسب"
+
+msgid "Labels"
+msgstr "برچسب ها"
+
+msgid "Layout"
+msgstr "طرح بندی"
+
+msgid "Leave a comment"
+msgstr "یک نظر ارسال کنید"
+
+msgid "Leave a review"
+msgstr "نظر بدهید"
+
+msgid "Leave you reply"
+msgstr "ارسال پاسخ"
+
+msgid "Leave your comments"
+msgstr "نظرات خود را ارسال کنید"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Legend"
+msgstr "شرح"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Key:"
+msgstr "کلید لایسنس:"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی به اتمام می رسد"
+
+msgid "License not active"
+msgstr " لایسنس فعال نیست"
+
+msgid "Likes"
+msgstr "لایک‌ها"
+
+msgid "Likes/dislikes allowed:"
+msgstr "لایک/ دیس لایک مجاز است:"
+
+msgid "List of fields cannot be empty"
+msgstr "لیست فیلدها نمی تواند خالی باشد"
+
+msgid "Long Arrow"
+msgstr "فلش بلند"
+
+msgid "Low Color"
+msgstr "رنگ ضعیف"
+
+msgid "Mail"
+msgstr "ایمیل"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Manually Input"
+msgstr "ورودی دستی"
+
+msgid "Mar"
+msgstr "مارس"
+
+msgid "Margin"
+msgstr "فاصله(Margin)"
+
+msgid "Max Value"
+msgstr "حداکثر مقدار"
+
+msgid "Max:"
+msgstr "حداکثر:"
+
+msgid "May"
+msgstr "می"
+
+msgid "Medium Color"
+msgstr "رنگ متوسط"
+
+msgid "Menu Order"
+msgstr "چیدمان منو"
+
+msgid "Meta data sync error"
+msgstr "خطای همگام سازی متا داده ها"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "Minimum required version:"
+msgstr "حداقل نسخه مورد نیاز:"
+
+msgid "Misc"
+msgstr "متفرقه"
+
+msgid "Moderator Check Message"
+msgstr "نیاز به بررسی مدیر دارد"
+
+msgid "Modified"
+msgstr "ویرایش شده"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های Jet با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Name (slug)"
+msgstr "نامک(slug)"
+
+msgid "Name:"
+msgstr "نام:"
+
+msgid "Need admin approval for a new review"
+msgstr "برای نظر جدید نیاز به تأیید مدیر دارید"
+
+msgid "Need admin approval for a new review comment"
+msgstr "برای نظر جدید به تأیید مدیر نیاز دارید"
+
+msgid "New Comment Button"
+msgstr "دکمه نظر جدید"
+
+msgid "New Comment Button Icon"
+msgstr "آیکن دکمه نظر جدید"
+
+msgid "New Comment has been saved"
+msgstr "نظر جدید ذخیره شد"
+
+msgid "New Review Button"
+msgstr "دکمه بررسی جدید"
+
+msgid "New Review Button Icon"
+msgstr "آیکن دکمه بررسی جدید"
+
+msgid "New Review type has been created"
+msgstr "نوع نظر جدید ایجاد شده است"
+
+msgid "New comment notify"
+msgstr "اطلاع رسانی نظر جدید"
+
+msgid "New review approval"
+msgstr "تأیید نظر جدید"
+
+msgid "New review comments need approval"
+msgstr "کامنت های بررسی جدید نیاز به تأیید دارند"
+
+msgid "New review notify"
+msgstr "اطلاع رسانی بررسی جدید"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "Next Icon"
+msgstr "آیکن بعدی"
+
+msgid "Nice!"
+msgstr "خوب!"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No Data Found"
+msgstr "داده ای یافت نشد"
+
+msgid "No Reviews Message"
+msgstr " هیچ نظری وجود نداد"
+
+msgid "No Types found"
+msgstr "هیچ نوعی یافت نشد"
+
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "اتفاقی نیفتاد. افزونه %1$s  از قبل فعال شده بود."
+
+msgid "No plugins are available to be activated at this time."
+msgstr "در این زمان هیچ افزونه ای برای فعالسازی در دسترس نیست."
+
+msgid "No plugins are available to be installed at this time."
+msgstr "هیچ افزونه ای در حال برای نصب در دسترس نمی باشد."
+
+msgid "No plugins are available to be updated at this time."
+msgstr "هیچ افزونه ای در حال برای به روز رسانی در دسترس نمی باشد."
+
+msgid "No plugins to install, update or activate."
+msgstr "در حال حاضر هیچ افزونه نصب نیست,به روز رسانی یا فعال کنید."
+
+msgid "No plugins were selected to be activated. No action taken."
+msgstr "هیچ اتفاقی نیفتاد. هیچ افزونه ای برای فعالسازی انتخاب نشده بود."
+
+msgid "No plugins were selected to be installed. No action taken."
+msgstr "هیچ اتفاقی نیفتاد. هیچ افزونه ای برای نصب انتخاب نشده بود."
+
+msgid "No plugins were selected to be updated. No action taken."
+msgstr "هیچ افزونه ای برای به روز رسانی انتخاب نشده است هیچ اتفاقی نمی افتد."
+
+msgid "No reviews found"
+msgstr "نظری یافت نشد"
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Not Approved"
+msgstr "تایید نشده"
+
+msgid "Not Approved Comments"
+msgstr "نظرات تأیید نشده"
+
+msgid "Not Approved Reviews"
+msgstr "بررسی های تأیید نشده"
+
+msgid "Not Installed"
+msgstr "نصب نشده"
+
+msgid "Not Valid Valid Message"
+msgstr "این پیام معتبر نیست"
+
+msgid "Not approved reviews:"
+msgstr "بررسی های تأیید نشده:"
+
+msgid "Nov"
+msgstr "نوامبر"
+
+msgid "Number"
+msgstr "عدد"
+
+msgid ""
+"Number of items to show in the listing grid or per page if JetSmartFilters "
+"pagination is used. Query Count dynamic tag will show total number of items "
+"matched current Query"
+msgstr ""
+"در صورت استفاده از صفحه بندی JetSmartFilters  ، تعداد مواردی که باید در شبکه "
+"لیست یا هر صفحه نشان داده شوند. برچسب پویای تعداد کوئری تعداد کل موارد مطابق "
+"با کوئری فعلی را نشان می دهد"
+
+msgid "Number of items to skip"
+msgstr "تعداد موارد برای رد شدن"
+
+msgid "Oct"
+msgstr "اکتبر"
+
+msgid "Offset"
+msgstr "افست"
+
+msgid "Organization"
+msgstr "سازمان"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Pagination"
+msgstr "صفحه بندی"
+
+msgid "Percent"
+msgstr "درصد"
+
+msgid "Percentage"
+msgstr "درصدی"
+
+msgid "Pinned Icon"
+msgstr "آیکن پین شده"
+
+msgid "Place"
+msgstr "مکان"
+
+msgid "Please confirm type deletion"
+msgstr "لطفاً حذف نوع را تأیید کنید"
+
+msgid "Please contact the administrator of this site for help."
+msgstr "لطفا برای کمک به سرپرست این سایت تماس بگیرید."
+
+msgid ""
+"Please contact the plugin provider and ask them to package their plugin "
+"according to the WordPress guidelines."
+msgstr ""
+"لطفا با ارائه دهنده پلاگین تماس بگیرید و از آنها بخواهید پلاگین خود را با "
+"توجه به دستورالعمل وردپرس بسته بندی کنند."
+
+msgid "Plugin"
+msgstr "افزونه"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin activated successfully."
+msgstr "افزونه با موفقیت فعال شد."
+
+msgid "Plugin activation failed."
+msgstr "فعالسازی افزونه با شکست مواجه شد."
+
+msgid ""
+"Plugin not activated. A higher version of %s is needed for this theme. "
+"Please update the plugin."
+msgstr ""
+"افزونه فعال نمی شود. نسخه بالاتر از%s برای این موضوع مورد نیاز است. لطفاً "
+"افزونه را به روز کنید."
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Plural Review Count Label"
+msgstr "برچسب تعداد بررسی جمع"
+
+msgid "Points"
+msgstr "امتیازات(Points)"
+
+msgid "Post"
+msgstr "نوشته"
+
+msgid "Post Meta"
+msgstr "متای پست"
+
+msgid "Post Source"
+msgstr "منبع پست"
+
+msgid "Post Type"
+msgstr "نوع پست"
+
+msgid "Post Type:"
+msgstr "نوع پست:"
+
+msgid "Post Types Review Stats"
+msgstr "آمار بررسی انواع پست"
+
+msgid "Post author notify"
+msgstr "اطلاع رسانی پست نویسنده"
+
+msgid "Post meta ratio bound"
+msgstr "نسبت متا پست محدود است"
+
+msgid "Post metadata"
+msgstr "متاداده پست"
+
+msgid "Post metadata have been updated"
+msgstr "متاداده پست به روز شده است"
+
+msgid "Pre-Packaged"
+msgstr "پیش بسته بندی شده"
+
+msgid "Prev Icon"
+msgstr "آیکن قبلی"
+
+msgid "Primary"
+msgstr "اصلی"
+
+msgid "Product"
+msgstr "محصول"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Progress Bar Color"
+msgstr "رنگ نوار پیشرفت"
+
+msgid "Progress Canvas Color"
+msgstr "رنگ بوم پیشرفت"
+
+msgid "Progress Height"
+msgstr "ارتفاع پیشرفت"
+
+msgid "Progress Styles"
+msgstr "استایل  پیشرفت"
+
+msgid "Progressbar"
+msgstr "نوار پیشرفت"
+
+msgid "Publish Time Color"
+msgstr "رنگ زمان انتشار"
+
+msgid "Publish Time Typography"
+msgstr "تایپوگرافی زمان انتشار"
+
+msgid "Rand"
+msgstr "تصادفی"
+
+msgid "Rating"
+msgstr "امتیاز"
+
+msgid "Rating Input Type"
+msgstr "نوع ورودی امتیاز"
+
+msgid "Rating Layout"
+msgstr "طرح بندی امتیاز"
+
+msgid "Rating:"
+msgstr "رتبه بندی:"
+
+msgid "Ratio"
+msgstr "نسبت"
+
+msgid "Ratio Bound"
+msgstr "نسبت مقید"
+
+msgid "Recommended"
+msgstr "پیشنهادی"
+
+msgid "Register reCAPTCHA v3 keys here."
+msgstr "کلیدهای ریکپچا v3 را در اینجا ثبت کنید."
+
+msgid "Rendering structure data in JSON-LD format"
+msgstr "رندر ساختار داده ها در فرمت JSON-LD"
+
+msgid "Reply"
+msgstr "پاسخ"
+
+msgid "Reply Button Icon"
+msgstr "آیکن دکمه پاسخ"
+
+msgid "Reply Comment Button"
+msgstr "دکمه پاسخ نظر"
+
+msgid "Reply Form"
+msgstr "فرم پاسخ"
+
+msgid "Reply Gap"
+msgstr "فاصله(Gap) پاسخ"
+
+msgid "Reply Placeholder"
+msgstr "نگهدارنده مکان پاسخ"
+
+msgid "Required"
+msgstr "الزامی"
+
+msgid "Required Update not Available"
+msgstr "بروزرسانی مورد نظر در دسترس نیست"
+
+msgid "Requires Update"
+msgstr "به روزرسانی نیاز است"
+
+msgid "Results Block Width"
+msgstr "عرض بلوک نتایج"
+
+msgid "Return to Required Plugins Installer"
+msgstr "بازگشت به نصب کننده افزونه های مورد نیاز"
+
+msgid "Return to the Dashboard"
+msgstr "برگشت به پیشخوان"
+
+msgid "Review"
+msgstr "بررسی"
+
+msgid "Review Author Avatar"
+msgstr "آواتار نویسنده بررسی"
+
+msgid "Review Author Name"
+msgstr "نام نویسنده بررسی"
+
+msgid "Review Average Rating"
+msgstr "میانگین امتیاز بررسی"
+
+msgid "Review Border"
+msgstr "حاشیه (border) بررسی"
+
+msgid "Review Border Radius"
+msgstr "گردی حاشیه (Border) بررسی"
+
+msgid "Review Box Shadow"
+msgstr "سایه جعبه بررسی"
+
+msgid "Review Box Title"
+msgstr "عنوان جعبه نظر"
+
+msgid "Review Content Placeholder"
+msgstr "نگه دارنده مکان محتوای بررسی"
+
+msgid "Review Date"
+msgstr "تاریخ بررسی"
+
+msgid "Review Field Label"
+msgstr "برچسب فیلد نظر"
+
+msgid "Review Fields"
+msgstr "فیلدهای نظر"
+
+msgid "Review Form"
+msgstr "فرم بررسی"
+
+msgid "Review Gap"
+msgstr "فاصله(Gap) بررسی"
+
+msgid "Review ID"
+msgstr "شناسه بررسی"
+
+msgid "Review Item"
+msgstr "آیتم بررسی"
+
+msgid "Review Item Description"
+msgstr "توضیحات آیتم بررسی"
+
+msgid "Review Item Image"
+msgstr "تصویر آیتم بررسی"
+
+msgid "Review Item Name"
+msgstr "نام آیتم بررسی"
+
+msgid "Review List"
+msgstr "لیست بررسی ها"
+
+msgid "Review Padding"
+msgstr "فاصله داخلی (Padding) بررسی"
+
+msgid "Review Property"
+msgstr "ویژگی بررسی"
+
+msgid "Review Rating Type"
+msgstr "نوع امتیاز بررسی"
+
+msgid "Review Stats"
+msgstr "آمار بررسی ها"
+
+msgid "Review Summary Description"
+msgstr "توضیحات خلاصه بررسی"
+
+msgid "Review Summary Title"
+msgstr "عنوان خلاصه بررسی"
+
+msgid "Review Title Placeholder"
+msgstr "نگه دارنده مکان عنوان بررسی"
+
+msgid "Review Type:"
+msgstr "نوع بررسی:"
+
+msgid "Review Types"
+msgstr "انواع بررسی "
+
+msgid "Review Update Error"
+msgstr "خطای بروزرسانی بررسی"
+
+msgid "Review approve needed notify"
+msgstr "اطلاع رسانی برای نیاز به تایید بررسی"
+
+msgid "Review author verification"
+msgstr "تأیید نویسنده بررسی"
+
+msgid "Review data have been updated"
+msgstr "داده های بررسی به روز شده است"
+
+msgid "Review fields has been updated"
+msgstr "فیلدهای بررسی به روز شده است"
+
+msgid "Review have been deleted"
+msgstr "بررسی حذف شد"
+
+msgid "Review info"
+msgstr "اطلاعات بررسی"
+
+msgid "Review type"
+msgstr "نوع بررسی"
+
+msgid "Review type fields"
+msgstr "فیلدهای انواع بررسی"
+
+msgid "Review type:"
+msgstr "نوع بررسی:"
+
+msgid "Reviewd Item Description"
+msgstr "توضیحات مورد بررسی شده"
+
+msgid "Reviewed Item Image"
+msgstr "تصویر مورد بررسی شده"
+
+msgid "Reviewed Item Name"
+msgstr "نام آیتم بررسی شده"
+
+msgid "Reviewed Object ID"
+msgstr "شناسه آبجکت بررسی شده"
+
+msgid "Reviewed Object Type"
+msgstr "نوع آبجکت بررسی شده"
+
+msgid "Reviews"
+msgstr "بررسی ها"
+
+msgid "Reviews Count"
+msgstr "تعداد بررسی ها"
+
+msgid "Reviews Count Label"
+msgstr "برچسب تعداد بررسی ها"
+
+msgid "Reviews Info"
+msgstr "اطلاعات بررسی"
+
+msgid "Reviews Listing"
+msgstr "لیست بررسی ها"
+
+msgid "Reviews Per Page"
+msgstr "تعداد بررسی ها در هر صفحه"
+
+msgid "Reviews need approval:"
+msgstr "بررسی ها نیاز به تأیید دارند:"
+
+msgid "Reviews:"
+msgstr "بررسی ها:"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Save Review Data"
+msgstr "ذخیره داده بررسی"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search Comments"
+msgstr "جستجوی نظرات"
+
+msgid "Search reviews"
+msgstr "جستجوی بررسی ها"
+
+msgid "Secondary"
+msgstr "ثانویه"
+
+msgid "Secret Key:"
+msgstr "کلید محرمانه:"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select action"
+msgstr "انتخاب عمل"
+
+msgid "Select products"
+msgstr "انتخاب محصولات"
+
+msgid "Select review source"
+msgstr "انتخاب منبع بررسی"
+
+msgid "Select review source type"
+msgstr "انتخاب نوع منبع بررسی"
+
+msgid "Sep"
+msgstr "سپتامبر"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Server error. Please, try again later"
+msgstr "خطای سرور. لطفاً بعداً دوباره امتحان کنید"
+
+msgid "Service"
+msgstr "خدمات"
+
+msgid "Set the parent_slug config variable instead."
+msgstr "تنظیم parent_slug به جای متغیر پیکربندی."
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Shop Manager"
+msgstr "مدیر فروشگاه"
+
+msgid "Shop owner"
+msgstr "صاحب فروشگاه"
+
+msgid "Show"
+msgstr "نمایش"
+
+msgid "Show Comment Author Avatar"
+msgstr "نمایش آواتار نویسنده نظر"
+
+msgid "Show Comments"
+msgstr "نمایش نظرات"
+
+msgid "Show Comments Button"
+msgstr "نمایش دکمه نظرات"
+
+msgid "Show Comments Button Icon"
+msgstr "نمایش آیکن دکمه نظرات"
+
+msgid "Show Details"
+msgstr "نمایش جزئیات"
+
+msgid "Show Review Author"
+msgstr "نمایش نویسنده بررسی"
+
+msgid "Show Review Author Avatar"
+msgstr "نمایش آواتار نویسنده بررسی"
+
+msgid "Show Review Title"
+msgstr "نمایش عنوان بررسی "
+
+msgid "Singular Review Count Label"
+msgstr "برچسب تعداد بررسی مفرد"
+
+msgid "Site Key:"
+msgstr "کلید سایت:"
+
+msgid "Slider"
+msgstr "اسلایدر"
+
+msgid "Slider Color"
+msgstr "رنگ اسلایدر"
+
+msgid "Slug"
+msgstr "نامک (Slug)"
+
+msgid "Something went wrong with the plugin API."
+msgstr "خطایی در رابطه با Api افزونه رخ داده است."
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه Jet خود باید لایسنس را فعال کنید"
+
+msgid "Source"
+msgstr "منبع"
+
+msgid "Source ID"
+msgstr "شناسه منبع"
+
+msgid "Source Type"
+msgstr "نوع منبع"
+
+msgid "Source type: "
+msgstr "نوع منبع: "
+
+msgid "Source: "
+msgstr "منبع: "
+
+msgid "Spacing"
+msgstr "فاصله ها"
+
+msgid "Specify ratio conversion limit for post metadata."
+msgstr "محدودیت تبدیل نسبت را برای متاداده پست تعیین کنید."
+
+msgid "Star Gap"
+msgstr "فاصله ستاره"
+
+msgid "Star Size"
+msgstr "اندازه ستاره"
+
+msgid "Stars"
+msgstr "ستاره"
+
+msgid "Stars Gap"
+msgstr "فاصله ستاره ها"
+
+msgid "Stars Position"
+msgstr "موقعیت ستاره ها"
+
+msgid "Stars Rating"
+msgstr "امتیاز ستاره ای"
+
+msgid "Stars Size"
+msgstr "اندازه ستاره ها"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Static Review"
+msgstr "بررسی ثابت"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Step"
+msgstr "مرحله"
+
+msgid "Step:"
+msgstr "مرحله:"
+
+msgid "Structure Data"
+msgstr "ساختار داده ها"
+
+msgid "Structured Data"
+msgstr "داده های ساختاری"
+
+msgid "Structured data supported only for Post Meta and Manually Input sources"
+msgstr "داده های ساختاری فقط برای متای پست و منابع ورودی دستی پشتیبانی می شوند"
+
+msgid "Sub"
+msgstr "زیر"
+
+msgid "Submit"
+msgstr "ارسال"
+
+msgid "Submit Comment"
+msgstr "ثبت کردن نظر"
+
+msgid "Submit Comment Button"
+msgstr "دکمه ارسال نظر"
+
+msgid "Submit Reply Button"
+msgstr "دکمه ارسال پاسخ"
+
+msgid "Submit Review"
+msgstr "تائید بررسی"
+
+msgid "Submit Review Button"
+msgstr "دکمه ارسال بررسی"
+
+msgid "Submit a reply"
+msgstr "ارسال پاسخ"
+
+msgid "Submit a review"
+msgstr "ارسال بررسی"
+
+msgid "Success"
+msgstr "موفقیت"
+
+msgid "Success Review Approval"
+msgstr "تأیید موفق بررسی"
+
+msgid "Success. Review Has Been Added"
+msgstr "تمام. بررسی اضافه شد."
+
+msgid "Success. Review Has Been Removed"
+msgstr "تمام. بررسی حدف شد."
+
+msgid "Summary"
+msgstr "خلاصه"
+
+msgid "Summary Average"
+msgstr "خلاصه"
+
+msgid "Summary Average Layout"
+msgstr "طرح بندی شرح میانگین "
+
+msgid "Summary Block Title"
+msgstr "عنوان بلوک خلاصه"
+
+msgid "Summary Box"
+msgstr "جعبه خلاصه"
+
+msgid "Summary Content"
+msgstr "خلاصه محتوا"
+
+msgid "Summary Legend"
+msgstr "خلاصه شرح"
+
+msgid "Summary Results Block Position"
+msgstr "موقعیت بلوک نتایج خلاصه"
+
+msgid "Summary Settings"
+msgstr "تنظیمات خلاصه"
+
+msgid "Summary Text"
+msgstr "شرح"
+
+msgid "Summary Title"
+msgstr "عنوان خلاصه"
+
+msgid "Super"
+msgstr "فوق العاده"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Sync average rating"
+msgstr "همگام سازی میانگین امتیاز"
+
+msgid "Sync rating data"
+msgstr "همگام سازی داده های رتبه بندی"
+
+msgid "TGMPA v%s"
+msgstr "TGMPA v%s"
+
+msgid "Text Above Summary Value"
+msgstr "متن بالاتر از مقدار خلاصه"
+
+msgid "Text Bottom"
+msgstr "پایین متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text Top"
+msgstr "بالای متن"
+
+msgid ""
+"The following plugin needs to be updated to its latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgid_plural ""
+"The following plugins need to be updated to their latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+"برای اطمینان از حداکثر سازگاری با این قالب ، باید افزونه زیر را به آخرین "
+"نسخه آن به روز کنید : %1$s."
+msgstr[1] ""
+"برای اطمینان از حداکثر سازگاری با این قالب ، باید افزونه های زیر را به آخرین "
+"نسخه آن به روز کنید : %1$s."
+
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] "پلاگین زیر با موفقیت فعال شد:"
+msgstr[1] "افزونه زیر با موفقیت فعال شد:"
+
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] "افزونه پیشنهادی زیر در حال حاضر غیرفعال است: %1$s."
+msgstr[1] "افزونه های پیشنهادی زیر در حال حاضر غیرفعال هستند: %1$s."
+
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] "افزونه مورد نیاز زیر در حال حاضر غیرفعال است: %1$s."
+msgstr[1] "افزونه های مورد نیاز زیر در حال حاضر غیرفعال هستند: %1$s."
+
+msgid ""
+"The installation and activation process is starting. This process may take a "
+"while on some hosts, so please be patient."
+msgstr ""
+"روند نصب و فعال سازی شروع شده است. این فرآیند ممکن است در برخی از هاست ها "
+"طول بکشد، بنابراین لطفا صبور باشید."
+
+msgid "The installation of %1$s failed."
+msgstr "نصب %1$s انجام نشد."
+
+msgid ""
+"The installation process is starting. This process may take a while on some "
+"hosts, so please be patient."
+msgstr ""
+"روند نصب شروع شده است. این فرآیند ممکن است در برخی از سرور ها طول بکشد، "
+"بنابراین لطفا صبور باشید."
+
+msgid ""
+"The remote plugin package consists of more than one file, but the files are "
+"not packaged in a folder."
+msgstr ""
+"افزونه راه دور درخواست شده شامل چندین فایل می باشد اما این فایل ها در بسته "
+"بسته بندی نشده اند."
+
+msgid ""
+"The remote plugin package does not contain a folder with the desired slug "
+"and renaming did not work."
+msgstr ""
+"بسته نصب از راه دور افزونه در پوشه مورد نظر یافت نشد با تغییر نام هم کار "
+"نکرد."
+
+msgid "The review has not been deleted"
+msgstr "بررسی حذف نشده است"
+
+msgid "The review have been deleted"
+msgstr "بررسی حذف شده است"
+
+msgid ""
+"There are one or more required or recommended plugins to install, update or "
+"activate."
+msgstr ""
+"یک یا چند پلاگین مورد نظر یا توصیه برای نصب، به روز رسانی یا فعال بودن وجود "
+"دارد."
+
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] "بروزرسانی برای این افزونه ها وجود دارد: %1$s."
+msgstr[1] "برای این افزونه ها بروز رسانی موجود است: %1$s."
+
+msgid "Thing"
+msgstr "چیز"
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr "این لایسنس مجوز همه افزونه های موجود در این مجموعه را فعال می کند."
+
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr "این افزونه برای هماهنگی با قالب نیاز به بروز رسانی دارد."
+
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] "این قالب افزونه زیر را پیشنهاد می کند: %1$s."
+msgstr[1] "این قالب افزونه های زیر را پیشنهاد می کند:  %1$s."
+
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] "این قالب به افزونه زیر  نیاز دارد:%1$s."
+msgstr[1] "این قالب به افزونه های زیر  نیاز دارد:%1$s."
+
+msgid "This user can comment reviews"
+msgstr "این کاربر می تواند بررسی را نقد کند"
+
+msgid "This user can rate reviews"
+msgstr "این کاربر می تواند نظرات را امتیاز بدهد"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Title Color"
+msgstr "رنگ عنوان"
+
+msgid "Title Spacing"
+msgstr "فاصله عنوان"
+
+msgid "Title Typography"
+msgstr "تایپوگرافی عنوان"
+
+msgid "Title of your review"
+msgstr "عنوان بررسی شما"
+
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] "فعال سازی<span class=\"count\">(%s)</span>"
+msgstr[1] "فعال سازی<span class=\"count\">(%s)</span>"
+
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] "برای نصب <span class=\"count\">(%s)</span>"
+msgstr[1] "برای نصب <span class=\"count\">(%s)</span>"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Total Average"
+msgstr "میانگین کل"
+
+msgid "Total satisfy percent: %1$s"
+msgstr "درصد رضایت کل: %1$s"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type Fields"
+msgstr "انواع فیلدها"
+
+msgid "Type name cannot be empty"
+msgstr "نام نوع نمی تواند خالی باشد"
+
+msgid "Type with this slug is already exist"
+msgstr "نوع با این نامک (slug) از قبل وجود دارد"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typography"
+msgstr "تایپوگرافی"
+
+msgid "Unapprove"
+msgstr "عدم تایید"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update"
+msgstr "به روز رسانی"
+
+msgid "Update %2$s"
+msgstr "بروزرسانی%2$s"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] "به روز رسانی در دسترس <span class=\"count\">(%s)</span>"
+msgstr[1] "به روز رسانی در دسترس <span class=\"count\">(%s)</span>"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Update Required"
+msgstr "به روزرسانی نیاز است"
+
+msgid "Update recommended"
+msgstr "به روز رسانی توصیه می شود"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr "بروزرسانی پلاگین %1$s (%2$d/%3$d)"
+
+msgid "Updating Plugin: %s"
+msgstr "در حال به روز رسانی افزونه : %s"
+
+msgid "Upgrade message from the plugin author:"
+msgstr "پیغام بروز رسانی از نویسنده افزونه:"
+
+msgid "Use post metadata for jet reviews data"
+msgstr "برای داده های بررسی Jet از متا داده پست استفاده کنید"
+
+msgid "Use reCAPTCHA v3 form verification"
+msgstr "از تأییدیه فرم کپچای v3 استفاده کنید"
+
+msgid "Use review for post type"
+msgstr "استفاده بررسی برای نوع پست"
+
+msgid "Use review for user source"
+msgstr "استفاده بررسی برای منبع کاربر"
+
+msgid "User"
+msgstr "کاربر"
+
+msgid "User Source"
+msgstr "منبع کاربر"
+
+msgid "Value"
+msgstr "مقدار"
+
+msgid "Value:"
+msgstr "مقدار:"
+
+msgid "Values Alignment"
+msgstr "چینش مقادیر"
+
+msgid "Values Position"
+msgstr "موقعیت مقادیر"
+
+msgid "Verified owner"
+msgstr "مالک تأیید شده"
+
+msgid "Verify Icon Size"
+msgstr "اندازه آیکن تایید"
+
+msgid "Verify Label"
+msgstr "برچسب تأیید "
+
+msgid "Verify Label Color"
+msgstr "رنگ برچسپ تایید"
+
+msgid "Verify Label Typography"
+msgstr "تایپوگرافی برچسب تایید"
+
+msgid "Version"
+msgstr "نسخه"
+
+msgid "Very High Color"
+msgstr "رنگ خیلی زیاد"
+
+msgid "Very Low Color"
+msgstr "رنگ خیلی ضعیف"
+
+msgid "WP Review Data"
+msgstr "داده نظر وردپرس"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "What was reviewed?"
+msgstr "چه مواردی بررسی شد؟"
+
+msgid ""
+"When a reviews contains any of these words in its content, it will be "
+"checked as unapproved automatically. Separate keywords with commas"
+msgstr ""
+"وقتی نظری حاوی هر یک از این کلمات در محتوای خود باشد، به‌طور خودکار به‌عنوان "
+"تایید نشده درنظر گرفته می‌شود. کلمات کلیدی را با کاما از هم جدا کنید"
+
+msgid "Woo Product Customer"
+msgstr "مشتری محصول ووکامرس"
+
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+msgid "WordPress Repository"
+msgstr "مخزن وردپرس"
+
+msgid "Write a review"
+msgstr "نوشتن بررسی"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You can't leave a review. Demo mode is active"
+msgstr "نمی توانید یک بررسی ارسال کنید. حالت دمو فعال است"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Your Mail"
+msgstr "ایمیل شما"
+
+msgid "Your Name"
+msgstr "نام شما"
+
+msgid "Your license has been activated!"
+msgstr "لایسنس شما فعال شده است!"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اولیه شما 30 روز دیگر منقضی می شود. می توانید مجوز فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "Your review"
+msgstr "نظر شما"
+
+msgid "[%1$s] Please check a new review: \"%2$s\""
+msgstr "[%1$s] لطفا یک نظر جدید را بررسی کنید: (%2$s)"
+
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr "ناشناخته"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetreviews/"
+msgstr "https://crocoblock.com/plugins/jetreviews/"
+
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr "and"
+
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] "همه <span class=\"count\">(%s)</span>"
+msgstr[1] "همه <span class=\"count\">(%s)</span>"

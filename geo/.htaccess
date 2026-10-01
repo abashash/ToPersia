@@ -1,0 +1,20 @@
+# This file was updated by Duplicator Pro on 2026-08-13 20:36:40.
+# See the original_files_ folder for the original source_site_htaccess file.
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /geo/
+RewriteRule ^index\.php$ - [L]
+RewriteRule ^ar/wp-login.php /geo/wp-login.php [QSA,L]
+RewriteRule ^en/wp-login.php /geo/wp-login.php [QSA,L]
+RewriteRule ^fa/wp-login.php /geo/wp-login.php [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /geo/index.php [L]
+</IfModule>
+
+# END WordPress

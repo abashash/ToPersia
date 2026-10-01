@@ -1,0 +1,235 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "مکث ترجمه خودکار شما با خطایی مواجه شد. لطفاً بعداً دوباره امتحان کنید یا با پشتیبانی ما تماس بگیرید."
+        ],
+        "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "از سرگیری ترجمه خودکار شما با خطایی مواجه شد. لطفاً بعداً دوباره امتحان کنید یا با پشتیبانی ما تماس بگیرید."
+        ],
+        "Error": [
+            "خطا"
+        ],
+        "Draft — Pending review": [
+            "پیش‌نویس - در انتظار بررسی"
+        ],
+        "Complete": [
+            "تکمیل شده"
+        ],
+        "Insufficient funds": [
+            "بودجه ناکافی"
+        ],
+        "Your pending automatic translations will be canceled.": [
+            "ترجمه‌های خودکار معلق شما لغو خواهند شد."
+        ],
+        "Save": [
+            "ذخیره"
+        ],
+        "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "برای ترجمه محتوای خود به <a>داشبورد مدیریت ترجمه</a> بروید."
+        ],
+        "Review the translations before publishing": [
+            "ترجمه ها را قبل از انتشار بررسی کنید"
+        ],
+        "Publish translations and review them later": [
+            "ترجمه ها را منتشر کنید و بعدا آنها را بررسی کنید"
+        ],
+        "Publish translations without reviewing": [
+            "ترجمه ها را بدون بررسی منتشر کنید"
+        ],
+        "Translate Everything": [
+            "ترجمه هرچیزی"
+        ],
+        "WPML will automatically translate content that you publish or update": [
+            "افزونه WPML به طور خودکار محتوایی را که منتشر می کنید یا به روز می کنید، ترجمه می کند"
+        ],
+        "How do you want to translate this site?": [
+            "چگونه می خواهید این سایت را ترجمه کنید؟"
+        ],
+        "Translate Some": [
+            "ترجمه انتخابی"
+        ],
+        "I want to choose which content to translate": [
+            "من می خواهم انتخاب کنم که کدام محتوا را ترجمه کنم"
+        ],
+        "All Languages": [
+            "همه زبان‌ها"
+        ],
+        "Overwrite existing translations": [
+            "بازنویسی ترجمه‌های موجود"
+        ],
+        "Some of the content you want to translate is already translated": [
+            "برخی از مطالبی که می‌خواهید ترجمه کنید قبلا ترجمه شده است"
+        ],
+        "What do you want to do with the content that’s already translated?": [
+            "با محتوایی که قبلاً ترجمه شده، می‌خواهید چه کار کنید؟"
+        ],
+        "Leave existing translations as is": [
+            "رها کردن ترجمه‌های موجود"
+        ],
+        "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "این همچنین حافظه ترجمه سایت شما را به روز می کند. اطلاعات بیشتر درباره <a href=\"%s\" target=\"_blank\" >حافظه ترجمه</a>"
+        ],
+        "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "به شما امکان می‌دهد مطالب خود را دوباره ترجمه کنید و حافظه ترجمه را برای سایت خود به روز کنید. اطلاعات بیشتر درباره <a href=\"%s\" target=\"_blank\" >حافظه ترجمه</a>"
+        ],
+        "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "به مترجمان شما امکان می‌دهد مطالب شما را دوباره ترجمه کنند و حافظه ترجمه را برای سایت شما به روز کنند. درباره <a href=\"%s\" target=\"_blank\" >حافظه ترجمه</a> بیشتر بخوانید"
+        ],
+        "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "نکته: می‌توانید با دستورالعمل‌های ویژه، یادداشتی برای مترجمان در جدول بالا اضافه کنید."
+        ],
+        "Translate automatically": [
+            "ترجمه خودکار"
+        ],
+        "How do you want to translate?": [
+            "چگونه می‌خواهید ترجمه کنید؟"
+        ],
+        "Assign to a translator": [
+            "اختصاص به یک مترجم"
+        ],
+        "Translate myself": [
+            "ترجمه خودم"
+        ],
+        "You do not need translation credits to translate content yourself.": [
+            "برای ترجمه توسط خودتان نیازی به اعتبار ترجمه ندارید."
+        ],
+        "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            "شما فقط می‌توانید به طور خودکار محتوا را از زبان پیش‌فرض سایت خود (انگلیسی) به سایر زبان‌های سایت خود ترجمه کنید. برای ادامه، محتوای زبان‌های دوم سایت خود را لغو انتخاب کنید."
+        ],
+        "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "شما فقط می‌توانید به‌طور خودکار محتوا را از زبان اصلی خود (%s) به زبان‌های دیگر ترجمه کنید. برای جابجایی به %s از سوئیچر زبان در بالای این صفحه استفاده کنید."
+        ],
+        "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            "محتوای انتخابی شامل مواردی است که در ابتدا به این زبان ایجاد شده‌اند. برای ادامه این موارد را از حالت انتخاب خارج کنید."
+        ],
+        "Add to Translation Queue": [
+            "افزودن به صف ترجمه"
+        ],
+        "Select a post or page to translate": [
+            "یک پست یا صفحه را برای ترجمه انتخاب کنید"
+        ],
+        "Translate or duplicate content to at least one language": [
+            "محتوا را حداقل به یک زبان ترجمه یا کپی کنید"
+        ],
+        "Choose how you want to translate your content": [
+            "نحوه ترجمه محتوای خود را انتخاب کنید"
+        ],
+        "Selected content is already translated": [
+            "محتوای انتخاب شده قبلا ترجمه شده است"
+        ],
+        "Selected content includes items in a language other than your site's default language.": [
+            "محتوای انتخابی شامل مواردی به زبانی غیر از زبان پیش‌فرض سایت شما است."
+        ],
+        "Choose at least one translation action": [
+            "حداقل یک عمل ترجمه را انتخاب کنید"
+        ],
+        "Duplicate": [
+            "کپی"
+        ],
+        "Start translating and duplicating": [
+            "شروع به ترجمه و تکثیر"
+        ],
+        "Add to Translation Basket and duplicate": [
+            "افزودن به سبد ترجمه و تکرار"
+        ],
+        "Add to Translation Queue and duplicate": [
+            "افزودن به صف ترجمه و تکرار"
+        ],
+        "Start translating": [
+            "شروع ترجمه"
+        ],
+        "Add to Translation Basket": [
+            "افزودن به سبد ترجمه"
+        ],
+        "One more thing...": [
+            "یک مورد دیگر..."
+        ],
+        "What would you like to do when your content has finished translating automatically?": [
+            "وقتی ترجمه خودکار محتوای شما تمام شد، دوست دارید چه کاری انجام دهید؟"
+        ],
+        "Save settings": [
+            "ذخیره تنظیمات"
+        ],
+        "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "این تنظیم برای همه ترجمه‌های خودکار آینده اعمال می‌شود. می‌توانید این مورد را در هر زمان در WPML → تنظیمات تغییر دهید."
+        ],
+        "Translate": [
+            "ترجمه"
+        ],
+        "Duplicate content": [
+            "کپی محتوا"
+        ],
+        "Do nothing": [
+            "کاری نکن"
+        ],
+        "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "برای اختصاص محتوا به یک مترجم، ابتدا <a href=\"%s\" target=\"_blank\">یک مترجم اضافه کنید</a> یا <a href=\"%s\" target=\"_blank\">به یک سرویس ترجمه متصل شوید</a>."
+        ],
+        "You need credits to use automatic translation.": [
+            "برای استفاده از ترجمه خودکار به اعتبار نیاز دارید."
+        ],
+        "Translators Tab": [
+            "زبانه مترجمان"
+        ],
+        "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "خطای اتصال. لطفا یک دقیقه صبر کنید و این صفحه را دوباره بارگیری کنید. اگر مشکل ادامه داشت، لطفاً <a>با پشتیبانی WPML تماس بگیرید</a>."
+        ],
+        "Finish setting up %s on your site": [
+            "راه اندازی %s را در سایت خود به پایان برسانید"
+        ],
+        "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "برای ارسال محتوا برای ترجمه، باید %s را احراز هویت کنید. برای تکمیل تنظیمات، به %s بروید."
+        ],
+        "Add a translator to use %s.": [
+            "برای استفاده از %s یک مترجم اضافه کنید."
+        ],
+        "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "برای ارسال محتوا به %s برای ترجمه، به %s بروید تا یک مترجم به سایت خود اضافه کنید."
+        ],
+        "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "موتورهای ترجمه خودکار انتخابی شما از زبان(های) زیر پشتیبانی نمی کنند: %s. درباره <a>انتخاب موتور ترجمه</a> بیشتر بخوانید."
+        ],
+        "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "برخی از محتوای انتخاب شده در حال ترجمه است. این کار هر ترجمه در حال انجام را لغو می کند."
+        ],
+        "It is not possible to translate %s content automatically.": [
+            "امکان ترجمه خودکار محتوای %s وجود ندارد."
+        ],
+        "Translate selected items yourself or deselect these items above.": [
+            "موارد انتخابی را خودتان ترجمه کنید یا این موارد را در بالا لغو‌انتخاب کنید."
+        ],
+        "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "هر محتوای موجود (ترجمه) هنگام ایجاد موارد تکراری رونویسی می شود."
+        ],
+        "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "هنگام کپی کردن محتوا، لطفاً ابتدا صفحات اصلی را تکرار کنید تا سلسله مراتب سایت حفظ شود."
+        ],
+        "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "برخی از محتوایی که برای ترجمه انتخاب کرده‌اید شامل فیلدهایی است که کدگذاری شده‌اند. مترجمان نمی‌توانند روی این نوع محتوا کار کنند، بنابراین آن را از کار حذف کردیم."
+        ],
+        "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "برای رفع این مشکل، باید به WPML بگویید که این فیلدها چگونه رمزگذاری می شوند، تا WPML بتواند قبل از ارسال برای ترجمه، آنها را رمزگشایی کند."
+        ],
+        "How to indicate to WPML that it needs to decode fields.": [
+            "چگونه به WPML نشان دهیم که باید فیلدها را دیکود کند."
+        ],
+        "WPML cannot send some of the content to translation": [
+            "WPML نمی تواند بخشی از محتوا را به ترجمه ارسال کند"
+        ],
+        "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: در این مستندات فیلدهای کدگذاری شده base64 وجود دارد"
+        ],
+        "Hide details": [
+            "پنهان‌سازی جزئیات"
+        ],
+        "Show details": [
+            "نمایش جزئیات"
+        ]        
+      }
+    }
+  }

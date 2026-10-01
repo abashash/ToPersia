@@ -1,0 +1,84 @@
+=== ToPersia AI Summarizer ===
+Contributors: topersia
+Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, deepseek, summary, travel, translation
+Requires at least: 5.8
+Tested up to: 6.8
+Requires PHP: 7.2
+Stable tag: 1.2.1
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Buttons that open AI assistants with a ready structured-summary prompt, plus an on-page AI panel that generates briefs server-side from the current page. Built for ToPersia with full 9-language support.
+
+== Description ==
+
+Two components, one plugin, dedicated to ToPersia.
+
+**AI Assistant buttons.** Adds a row of buttons (ChatGPT, Perplexity, Claude, Grok, Copilot, Gemini and DeepSeek) before, after or below the featured image. Each button opens the chosen assistant with a structured, localized summary prompt already prepared for the current page (URL and title filled in). A copy-promo button copies the prompt instead.
+
+**On-page AI panel.** An "AI TRAVEL BRIEF" panel styled like the ToPersia G3 template. It generates a structured summary, key points or a travel plan directly on the page from the page's own content, using an OpenAI-compatible engine (DeepSeek by default). Output is cached per post/language, rate-limited per IP, and never trusts model-provided HTML.
+
+Both components are fully wrapped by filters, so they can be altered per page, per post, per language or per service.
+
+= Languages =
+
+The AI wording (heading, structured prompt and panel UI) is provided out of the box in all nine ToPersia languages: Persian, English, Arabic, French, German, Spanish, Russian, Turkish and Chinese. Language is detected from WPML or the site locale.
+
+= Integration =
+
+* Shortcodes: `[tpas]`, `[tpas_ai]`, aliases `[topersia_ai]`, `[topersia_ai_panel]`
+* Gutenberg blocks: `tpas/buttons` and `tpas/panel` (server-rendered)
+* Elementor widget: one widget, two modes (buttons / panel)
+* Auto-insertion by position with per-post override boxes in the editor
+* Anonymous click tracking (optional) with per-post and global totals
+
+=Filters=
+
+The plugin exposes filters such as `tpas_services`, `tpas_service_url`, `tpas_prompt`, `tpas_context`, `tpas_panel_html`, `tpas_buttons_html`, `tpas_api_payload`, `tpas_api_request_args` and more. See the code docblocks for details.
+
+== Installation ==
+
+1. Upload the `topersia-ai-summarizer` folder to `/wp-content/plugins/`, or install the ZIP through Plugins → Add New.
+2. Activate the plugin.
+3. Go to Settings → ToPersia AI, pick the assistants to show, choose a position, and configure the internal engine (API key).
+4. Use `[tpas_ai]` in any post, drop the block, or set "Panel position" to auto-insert.
+
+== Frequently Asked Questions ==
+
+= How is the language chosen? =
+
+The plugin reads WPML (Polylang compatible filter) and falls back to `get_locale()`. Unsupported locales fall back to English.
+
+= Which engine powers the on-page panel? =
+
+DeepSeek by default through `/v1/chat/completions`. Any OpenAI-compatible endpoint can be set under Settings → On-page AI panel (custom engine option).
+
+= Does the panel store my API key? =
+
+The key is stored in the `tpas_settings` option, never printed, and kept when you save the settings screen with an empty key field.
+
+= Do buttons open in a new tab? =
+
+Yes by default, with `rel="noopener nofollow"`, both configurable.
+
+== Changelog ==
+
+= 1.1.1 =
+* Now a workspace project of ToPersia (third plugin, own version and zip).
+* AI context facts: only the `card` and `details` fields of TP-G-FIELDMAP.json, labelled and formatted by ToPersia Render; never a serialized value, an underscore key, a WPML key or a status field. The internal engine can no longer produce "Copied Media Ids: a:0:{}".
+* Only published, password-free posts reach the AI context, and generation is refused for any other post (P5-D247).
+* Upgrade routine drops the pre-1.1 unique key `post_language`, which dbDelta could not remove and which kept key points and plans out of the summaries table.
+* Serialized-text check follows WordPress is_serialized() (strict) when WordPress is absent, so object payloads (O:…) are caught too.
+* Persian strings use the single-codepoint ۀ (U+06C0) as the rest of ToPersia (P5-D248); the fa_IR catalogue was rewritten in place.
+* Test stubs brought up to date so the suite runs to the end; wp_send_json_* stubs record the HTTP status like WordPress. New group "Phase 1 / 4.4.0" in tests/test-09-phase1.php.
+
+= 1.0.0 =
+* First release for ToPersia: 7 assistants, on-page AI panel, 9 languages, G3-styled UI, blocks, shortcodes and Elementor widget.
+
+== Upgrade Notice ==
+
+= 1.1.1 =
+Drops the stale post_language unique key of the summaries table on the first load after upgrading (idempotent).
+
+= 1.0.0 =
+Initial release.

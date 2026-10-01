@@ -1,0 +1,570 @@
+{
+  "jwWSU9v_jet_post_types": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "slug",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "type": "text"
+    },
+    {
+      "name": "labels",
+      "type": "longtext"
+    },
+    {
+      "name": "args",
+      "type": "longtext"
+    },
+    {
+      "name": "meta_fields",
+      "type": "longtext"
+    }
+  ],
+  "jwWSU9v_jet_rel_default": [
+    {
+      "name": "_ID",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "created",
+      "type": "timestamp"
+    },
+    {
+      "name": "rel_id",
+      "type": "varchar(40)"
+    },
+    {
+      "name": "parent_rel",
+      "type": "int(11)"
+    },
+    {
+      "name": "parent_object_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "child_object_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "parent_id",
+      "type": "("
+    },
+    {
+      "name": "child_id",
+      "type": "("
+    }
+  ],
+  "jwWSU9v_jet_rel_default_meta": [
+    {
+      "name": "_ID",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "created",
+      "type": "timestamp"
+    },
+    {
+      "name": "rel_id",
+      "type": "varchar(40)"
+    },
+    {
+      "name": "parent_object_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "child_object_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "meta_key",
+      "type": "text"
+    },
+    {
+      "name": "meta_value",
+      "type": "text"
+    },
+    {
+      "name": "meta_id",
+      "type": "("
+    }
+  ],
+  "jwWSU9v_jet_review_comments": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "source",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "post_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "parent_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "review_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "author",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "content",
+      "type": "longtext"
+    },
+    {
+      "name": "date",
+      "type": "datetime"
+    },
+    {
+      "name": "likes",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "dislikes",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "approved",
+      "type": "varchar(20)"
+    }
+  ],
+  "jwWSU9v_jet_review_guests": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "guest_id",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "name",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "mail",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "phone",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "meta_data",
+      "type": "longtext"
+    }
+  ],
+  "jwWSU9v_jet_review_media": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "review_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "media_type",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "media_url",
+      "type": "text"
+    },
+    {
+      "name": "created_at",
+      "type": "datetime"
+    }
+  ],
+  "jwWSU9v_jet_review_meta": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "review_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "meta_key",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "meta_value",
+      "type": "longtext"
+    }
+  ],
+  "jwWSU9v_jet_review_types": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "name",
+      "type": "text"
+    },
+    {
+      "name": "slug",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "description",
+      "type": "longtext"
+    },
+    {
+      "name": "source",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "source_type",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "fields",
+      "type": "longtext"
+    },
+    {
+      "name": "settings",
+      "type": "longtext"
+    },
+    {
+      "name": "meta_data",
+      "type": "longtext"
+    }
+  ],
+  "jwWSU9v_jet_reviews": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "source",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "post_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "post_type",
+      "type": "text"
+    },
+    {
+      "name": "author",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "date",
+      "type": "datetime"
+    },
+    {
+      "name": "title",
+      "type": "text"
+    },
+    {
+      "name": "content",
+      "type": "longtext"
+    },
+    {
+      "name": "type_slug",
+      "type": "text"
+    },
+    {
+      "name": "rating_data",
+      "type": "longtext"
+    },
+    {
+      "name": "rating",
+      "type": "int(11)"
+    },
+    {
+      "name": "likes",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "dislikes",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "approved",
+      "type": "varchar(20)"
+    },
+    {
+      "name": "pinned",
+      "type": "varchar(20)"
+    }
+  ],
+  "jwWSU9v_jet_taxonomies": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "slug",
+      "type": "text"
+    },
+    {
+      "name": "object_type",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "type": "text"
+    },
+    {
+      "name": "labels",
+      "type": "longtext"
+    },
+    {
+      "name": "args",
+      "type": "longtext"
+    },
+    {
+      "name": "meta_fields",
+      "type": "longtext"
+    }
+  ],
+  "jwWSU9v_options": [
+    {
+      "name": "option_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "option_name",
+      "type": "varchar(191)"
+    },
+    {
+      "name": "option_value",
+      "type": "longtext"
+    },
+    {
+      "name": "autoload",
+      "type": "varchar(20)"
+    },
+    {
+      "name": "option_name",
+      "type": "("
+    },
+    {
+      "name": "autoload",
+      "type": "("
+    }
+  ],
+  "jwWSU9v_postmeta": [
+    {
+      "name": "meta_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "post_id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "meta_key",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "meta_value",
+      "type": "longtext"
+    },
+    {
+      "name": "post_id",
+      "type": "("
+    },
+    {
+      "name": "meta_key",
+      "type": "("
+    }
+  ],
+  "jwWSU9v_posts": [
+    {
+      "name": "ID",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "post_author",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "post_date",
+      "type": "datetime"
+    },
+    {
+      "name": "post_date_gmt",
+      "type": "datetime"
+    },
+    {
+      "name": "post_content",
+      "type": "longtext"
+    },
+    {
+      "name": "post_title",
+      "type": "text"
+    },
+    {
+      "name": "post_excerpt",
+      "type": "text"
+    },
+    {
+      "name": "post_status",
+      "type": "varchar(20)"
+    },
+    {
+      "name": "comment_status",
+      "type": "varchar(20)"
+    },
+    {
+      "name": "ping_status",
+      "type": "varchar(20)"
+    },
+    {
+      "name": "post_password",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "post_name",
+      "type": "varchar(200)"
+    },
+    {
+      "name": "to_ping",
+      "type": "text"
+    },
+    {
+      "name": "pinged",
+      "type": "text"
+    },
+    {
+      "name": "post_modified",
+      "type": "datetime"
+    },
+    {
+      "name": "post_modified_gmt",
+      "type": "datetime"
+    },
+    {
+      "name": "post_content_filtered",
+      "type": "longtext"
+    },
+    {
+      "name": "post_parent",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "guid",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "menu_order",
+      "type": "int(11)"
+    },
+    {
+      "name": "post_type",
+      "type": "varchar(20)"
+    },
+    {
+      "name": "post_mime_type",
+      "type": "varchar(100)"
+    },
+    {
+      "name": "comment_count",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "post_name",
+      "type": "("
+    },
+    {
+      "name": "type_status_date",
+      "type": "("
+    },
+    {
+      "name": "post_parent",
+      "type": "("
+    },
+    {
+      "name": "post_author",
+      "type": "("
+    },
+    {
+      "name": "type_status_author",
+      "type": "("
+    }
+  ],
+  "jwWSU9v_woodmart_unsubscribed_emails": [
+    {
+      "name": "id",
+      "type": "bigint(20)"
+    },
+    {
+      "name": "user_email",
+      "type": "varchar(100)"
+    },
+    {
+      "name": "unsubscribed_email_name",
+      "type": "varchar(100)"
+    },
+    {
+      "name": "unsubscription_date",
+      "type": "datetime"
+    },
+    {
+      "name": "unsubscription_date_gmt",
+      "type": "datetime"
+    }
+  ],
+  "jwWSU9v_woodmart_wishlist_products": [
+    {
+      "name": "ID",
+      "type": "int(11)"
+    },
+    {
+      "name": "product_id",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "wishlist_id",
+      "type": "int(11)"
+    },
+    {
+      "name": "date_added",
+      "type": "timestamp"
+    },
+    {
+      "name": "on_sale",
+      "type": "tinyint(1)"
+    },
+    {
+      "name": "product_id",
+      "type": "("
+    }
+  ],
+  "jwWSU9v_woodmart_wishlists": [
+    {
+      "name": "ID",
+      "type": "int(11)"
+    },
+    {
+      "name": "user_id",
+      "type": "int(11)"
+    },
+    {
+      "name": "wishlist_group",
+      "type": "varchar(255)"
+    },
+    {
+      "name": "date_created",
+      "type": "timestamp"
+    }
+  ]
+}

@@ -1,0 +1,455 @@
+﻿msgid ""
+msgstr ""
+"Project-Id-Version: ToPersia AI Summarizer 1.1.0\n"
+"Report-Msgid-Bugs-To: https://topersia.com/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: opencode\n"
+"X-Domain: topersia-ai-summarizer\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: fa_IR"
+
+#: includes/class-tp-ai-admin.php:76
+msgid "ToPersia AI"
+msgstr "ToPersia AI"
+
+#: includes/class-tp-ai-admin.php:77
+msgid "Testing…"
+msgstr "Testing…"
+
+#: includes/class-tp-ai-admin.php:78
+msgid "Connected — model replied."
+msgstr "Connected — model replied."
+
+#: includes/class-tp-ai-admin.php:176
+msgid "Connection failed."
+msgstr "Connection failed."
+
+#: includes/class-tp-ai-admin.php:179
+msgid "AI Assistant buttons"
+msgstr "AI Assistant buttons"
+
+#: includes/class-tp-ai-admin.php:182
+msgid "Heading"
+msgstr "Heading"
+
+#: includes/class-tp-ai-admin.php:186
+msgid "Leave empty to use the localized default for the page language."
+msgstr "Leave empty to use the localized default for the page language."
+
+#: includes/class-tp-ai-admin.php:189
+msgid "Prompt"
+msgstr "Prompt"
+
+#: includes/class-tp-ai-admin.php:192
+msgid "Placeholders: {url}, {title}, {site}."
+msgstr "Placeholders: {url}, {title}, {site}."
+
+#: includes/class-tp-ai-admin.php:203
+msgid "Assistants"
+msgstr "Assistants"
+
+#: includes/class-tp-ai-admin.php:204
+msgid "Position"
+msgstr "Position"
+
+#: includes/class-tp-ai-admin.php:205
+msgid "After the featured image"
+msgstr "After the featured image"
+
+#: includes/class-tp-ai-admin.php:206
+msgid "Before the content"
+msgstr "Before the content"
+
+#: includes/class-tp-ai-admin.php:207
+msgid "After the content"
+msgstr "After the content"
+
+#: includes/class-tp-ai-admin.php:208 includes/class-tp-ai-admin.php:295
+msgid "Before and after"
+msgstr "Before and after"
+
+#: includes/class-tp-ai-admin.php:210
+msgid "Manual (shortcode / block)"
+msgstr "Manual (shortcode / block)"
+
+#: includes/class-tp-ai-admin.php:211
+msgid "Also show on archive pages"
+msgstr "Also show on archive pages"
+
+#: includes/class-tp-ai-admin.php:212
+msgid "Style"
+msgstr "Style"
+
+#: includes/class-tp-ai-admin.php:213
+msgid "Filled"
+msgstr "Filled"
+
+#: includes/class-tp-ai-admin.php:214
+msgid "Outline"
+msgstr "Outline"
+
+#: includes/class-tp-ai-admin.php:216
+msgid "Minimal"
+msgstr "Minimal"
+
+#: includes/class-tp-ai-admin.php:217
+msgid "Layout"
+msgstr "Layout"
+
+#: includes/class-tp-ai-admin.php:218
+msgid "Full width"
+msgstr "Full width"
+
+#: includes/class-tp-ai-admin.php:220
+msgid "Inline"
+msgstr "Inline"
+
+#: includes/class-tp-ai-admin.php:221
+msgid "Alignment"
+msgstr "Alignment"
+
+#: includes/class-tp-ai-admin.php:222
+msgid "Start"
+msgstr "Start"
+
+#: includes/class-tp-ai-admin.php:223
+msgid "Center"
+msgstr "Center"
+
+#: includes/class-tp-ai-admin.php:225
+msgid "End"
+msgstr "End"
+
+#: includes/class-tp-ai-admin.php:226
+msgid "Heading size"
+msgstr "Heading size"
+
+#: includes/class-tp-ai-admin.php:227
+msgid "Large"
+msgstr "Large"
+
+#: includes/class-tp-ai-admin.php:228
+msgid "Normal"
+msgstr "Normal"
+
+#: includes/class-tp-ai-admin.php:230
+msgid "Small"
+msgstr "Small"
+
+#: includes/class-tp-ai-admin.php:231
+msgid "Accent color"
+msgstr "Accent color"
+
+#: includes/class-tp-ai-admin.php:232
+msgid "Corner radius (px)"
+msgstr "Corner radius (px)"
+
+#: includes/class-tp-ai-admin.php:233
+msgid "Icon style"
+msgstr "Icon style"
+
+#: includes/class-tp-ai-admin.php:234
+msgid "Brand marks"
+msgstr "Brand marks"
+
+#: includes/class-tp-ai-admin.php:236
+msgid "Neutral glyphs"
+msgstr "Neutral glyphs"
+
+#: includes/class-tp-ai-admin.php:237
+msgid "Show icons"
+msgstr "Show icons"
+
+#: includes/class-tp-ai-admin.php:238
+msgid "Copy-prompt button"
+msgstr "Copy-prompt button"
+
+#: includes/class-tp-ai-admin.php:239
+msgid "Open in a new tab"
+msgstr "Open in a new tab"
+
+#: includes/class-tp-ai-admin.php:240
+msgid "Add rel=\"nofollow\""
+msgstr "Add rel=\"nofollow\""
+
+#: includes/class-tp-ai-admin.php:245
+msgid "Track clicks (anonymously)"
+msgstr "Track clicks (anonymously)"
+
+#: includes/class-tp-ai-admin.php:247
+msgid "On-page AI panel"
+msgstr "On-page AI panel"
+
+#: includes/class-tp-ai-admin.php:253
+msgid "Enable the on-page AI panel"
+msgstr "Enable the on-page AI panel"
+
+#: includes/class-tp-ai-admin.php:256
+msgid "Engine"
+msgstr "Engine"
+
+#: includes/class-tp-ai-admin.php:259
+msgid "API key"
+msgstr "API key"
+
+#: includes/class-tp-ai-admin.php:265
+msgid "Leave empty to keep the stored key."
+msgstr "Leave empty to keep the stored key."
+
+#: includes/class-tp-ai-admin.php:266
+msgid "Custom base URL"
+msgstr "Custom base URL"
+
+#: includes/class-tp-ai-admin.php:266
+msgid "Model"
+msgstr "Model"
+
+#: includes/class-tp-ai-admin.php:268
+msgid "Leave empty to use the engine default."
+msgstr "Leave empty to use the engine default."
+
+#: includes/class-tp-ai-admin.php:269
+msgid "Temperature (0–2)"
+msgstr "Temperature (0–2)"
+
+#: includes/class-tp-ai-admin.php:270
+msgid "Max output tokens"
+msgstr "Max output tokens"
+
+#: includes/class-tp-ai-admin.php:271
+msgid "Context size (chars)"
+msgstr "Context size (chars)"
+
+#: includes/class-tp-ai-admin.php:272
+msgid "Cache (hours)"
+msgstr "Cache (hours)"
+
+#: includes/class-tp-ai-admin.php:274
+msgid "Rate limit (requests/hour/IP)"
+msgstr "Rate limit (requests/hour/IP)"
+
+#: includes/class-tp-ai-admin.php:276
+msgid "Output types"
+msgstr "Output types"
+
+#: includes/class-tp-ai-admin.php:277
+msgid "Structured summary"
+msgstr "Structured summary"
+
+#: includes/class-tp-ai-admin.php:278
+msgid "Key points"
+msgstr "Key points"
+
+#: includes/class-tp-ai-admin.php:292
+msgid "Travel plan"
+msgstr "Travel plan"
+
+#: includes/class-tp-ai-admin.php:293
+msgid "Default output type"
+msgstr "Default output type"
+
+#: includes/class-tp-ai-admin.php:294
+msgid "Auto-generate on first view"
+msgstr "Auto-generate on first view"
+
+#: includes/class-tp-ai-admin.php:296
+msgid "Panel position"
+msgstr "Panel position"
+
+#: includes/class-tp-ai-admin.php:297
+msgid "Top of content"
+msgstr "Top of content"
+
+#: includes/class-tp-ai-admin.php:300
+msgid "Bottom of content"
+msgstr "Bottom of content"
+
+#: includes/class-tp-ai-admin.php:301
+msgid "Test connection"
+msgstr "Test connection"
+
+#: includes/class-tp-ai-admin.php:379
+msgid "Test API key"
+msgstr "Test API key"
+
+#: includes/class-tp-ai-admin.php:400
+msgid "Enable"
+msgstr "Enable"
+
+#: includes/class-tp-ai-admin.php:421
+msgid "Show on post types"
+msgstr "Show on post types"
+
+#: includes/class-tp-ai-frontend.php:46
+msgid "Settings"
+msgstr "Settings"
+
+#: includes/class-tp-ai-render.php:138
+msgid "Copied to clipboard."
+msgstr "Copied to clipboard."
+
+#: includes/class-tp-ai-render.php:150
+msgid "Summarize this page with %s"
+msgstr "Summarize this page with %s"
+
+#: includes/class-tp-ai-elementor-widget.php:65
+msgid "Copy prompt"
+msgstr "Copy prompt"
+
+#: includes/class-tp-ai-elementor-widget.php:69
+msgid "Component"
+msgstr "Component"
+
+#: includes/class-tp-ai-elementor-widget.php:70
+msgid "AI buttons"
+msgstr "AI buttons"
+
+#: includes/class-tp-ai-elementor-widget.php:78
+msgid "AI panel"
+msgstr "AI panel"
+
+#: includes/class-tp-ai-admin.php:91
+msgid "Assistants (comma separated)"
+msgstr "Assistants (comma separated)"
+
+#: includes/class-tp-ai-admin.php:92
+msgid "Hide AI buttons on this post"
+msgstr "Hide AI buttons on this post"
+
+#: includes/class-tp-ai-admin.php:169
+msgid "Hide on-page AI panel"
+msgstr "Hide on-page AI panel"
+
+#: includes/class-tp-ai-admin.php:170
+msgid "ToPersia AI Summarizer"
+msgstr "ToPersia AI Summarizer"
+
+#: includes/class-tp-ai-admin.php:173
+msgid "Buttons that open AI assistants with a ready structured-summary prompt, and an on-page AI panel that generates summaries from the current page."
+msgstr "Buttons that open AI assistants with a ready structured-summary prompt, and an on-page AI panel that generates summaries from the current page."
+
+msgid "Plugin sections"
+msgstr "Plugin sections"
+
+#: includes/class-tp-ai-admin.php
+msgid "Prompt templates"
+msgstr "قالب‌های پرامپت"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI Prompts"
+msgstr "پرامپت‌های هوش مصنوعی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Summary archive"
+msgstr "آرشیو خلاصه‌ها"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI Summaries"
+msgstr "خلاصه‌های هوش مصنوعی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Engine mode"
+msgstr "حالت موتور"
+
+#: includes/class-tp-ai-admin.php
+msgid "Auto — API when a key is set, else internal"
+msgstr "خودکار — وقتی کلید تنظیم شده API، وگرنه داخلی"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI API always"
+msgstr "همیشه API هوش مصنوعی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Internal engine (free, offline)"
+msgstr "موتور داخلی (رایگان، آفلاین)"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI provider"
+msgstr "ارائه‌دهنده هوش مصنوعی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Capability analytics"
+msgstr "آمار استفاده"
+
+#: includes/class-tp-ai-admin.php
+msgid "Store anonymous click counts on the AI panel. No IP or user agent is recorded."
+msgstr "شمارش ناشناس کلیک‌ها در پنل هوش مصنوعی؛ هیچ IP یا مرورگری ثبت نمی‌شود."
+
+#: includes/class-tp-ai-admin.php
+msgid "Insights (last 30 days)"
+msgstr "بینش (۳۰ روز گذشته)"
+
+#: includes/class-tp-ai-admin.php
+msgid "Enable \"Capability analytics\" above to collect anonymous usage counts."
+msgstr "برای جمع‌آوری آمار استفادۀ ناشناس، «آمار استفاده» را در بالا فعال کنید."
+
+#: includes/class-tp-ai-admin.php
+msgid "Clicks"
+msgstr "کلیک‌ها"
+
+#: includes/class-tp-ai-admin.php
+msgid "No clicks recorded yet."
+msgstr "هنوز کلیکی ثبت نشده است."
+
+#: includes/class-tp-ai-admin.php
+msgid "Most used pages"
+msgstr "پربازدیدترین صفحه‌ها"
+
+#: includes/class-tp-ai-admin.php
+msgid "custom"
+msgstr "سفارشی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Back to settings"
+msgstr "بازگشت به تنظیمات"
+
+#: includes/class-tp-ai-admin.php
+msgid "View content"
+msgstr "مشاهده محتوا"
+
+#: includes/class-tp-ai-admin.php
+msgid "Delete"
+msgstr "حذف"
+
+#: includes/class-tp-ai-admin.php
+msgid "Internal"
+msgstr "داخلی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Lang"
+msgstr "زبان"
+
+#: includes/class-tp-ai-admin.php
+msgid "Post"
+msgstr "نوشته"
+
+#: includes/class-tp-ai-admin.php
+msgid "Output"
+msgstr "خروجی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Updated"
+msgstr "به‌روزرسانی"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI summaries stored while the panel runs. They are rebuilt automatically when a post is edited."
+msgstr "خلاصه‌های تولیدشده هنگام کار پنل؛ با ویرایش نوشته به‌صورت خودکار از نو ساخته می‌شوند."
+
+#: includes/class-tp-ai-admin.php
+msgid "No summaries stored yet. Open any page with the AI panel and generate one."
+msgstr "هنوز خلاصه‌ای ذخیره نشده است؛ در هر صفحه‌ای با پنل هوش مصنوعی یکی بسازید."
+
+#: includes/class-tp-ai-admin.php
+msgid "Summary deleted."
+msgstr "خلاصه حذف شد."
+
+#: includes/class-tp-ai-admin.php
+msgid "Placeholders: {url}, {title}, {site}, {related} (JetEngine relations), {facts} (JetEngine meta). Leave a field empty to use the built-in default."
+msgstr "جای‌گذاری‌ها: {url}، {title}، {site}، {related} (ارتباط‌های JetEngine)، {facts} (متای JetEngine)؛ برای استفاده از پیش‌فرض، خالی بگذارید."
+
+#: includes/class-tp-ai-admin.php
+msgid "Override the per-language prompts that drive the AI panel and the assistant buttons."
+msgstr "لغو پرامپت‌های پیش‌فرض هر زبان که پنل هوش مصنوعی و دکمه‌های دستیار را هدایت می‌کنند."
+

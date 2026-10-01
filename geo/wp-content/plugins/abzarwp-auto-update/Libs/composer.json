@@ -1,0 +1,25 @@
+{
+    "require": {
+        "jelix/version": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AbzarWP\\App\\": "../App"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "apcu-autoloader": false,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "platform": {
+            "php": "7.4"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

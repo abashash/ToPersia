@@ -1,0 +1,56 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
+            "می‌توانید از <strong>داشبورد مدیریت ترجمه</strong> انتخاب کنید کدام پست‌ها ترجمه شوند."
+        ],
+        "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "بله، محتوای <b>موجود</b> و <b>آینده</b> را بطور خودکار ترجمه کنید"
+        ],
+        "Yes, but only translate <b>future</b> content automatically": [
+            "بله، اما فقط محتوای <b>آینده</b> را به صورت خودکار ترجمه کنید"
+        ],
+        "Yes, translate <b>future</b> content automatically": [
+            "بله، محتوای <b>آینده</b> را به صورت خودکار ترجمه کنید"
+        ],
+        "No, I want to translate some of these posts, but not all": [
+            "نه، من می خواهم برخی از این پست ها را ترجمه کنم، اما نه همه"
+        ],
+        "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "اگر می خواهید محتوای خود را به صورت خودکار ترجمه کنید، باید از ویرایشگر ترجمه پیشرفته استفاده کنید."
+        ],
+        "Synchronize translators and translation managers with ATE": [
+            "مترجمان و مدیران ترجمه را با ATE همگام کنید"
+        ],
+        "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "لطفا چند دقیقه ی دیگر دوباره سعی کنید. اگر مشکل ادامه داشت، لطفاً با %sWPML support%تماس بگیرید."
+        ],
+        "Are you OK with paying for this?": [
+            "آیا با پرداخت این مبلغ مشکلی دارید؟"
+        ],
+        "Cancel": [
+            "لغو"
+        ],
+        "Make translatable": [
+            "قابل ترجمه کردن"
+        ],
+        "Save": [
+            "ذخيره"
+        ],
+        "Please confirm this translation setting": [
+            "لطفاً این تنظیم ترجمه را تأیید کنید"
+        ],
+        "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "سایت شما طوری تنظیم شده است که تمام مطالب را به صورت خودکار ترجمه کند. وقتی <PostTypesNames /> را قابل ترجمه می کنید، WPML به طور خودکار %1$d مورد موجود را ترجمه می کند.",
+            "سایت شما طوری تنظیم شده است که تمام مطالب را به صورت خودکار ترجمه کند. وقتی <PostTypesNames /> را قابل ترجمه می کنید، WPML به طور خودکار %1$d مورد موجود را ترجمه می کند."
+        ],
+        "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "سایت شما طوری تنظیم شده است که تمام مطالب را به صورت خودکار ترجمه کند. وقتی <PostTypesNames /> را قابل ترجمه می کنید، WPML به طور خودکار تمام محتوای آینده را ترجمه می کند."
+        ]        
+      }
+    }
+  }

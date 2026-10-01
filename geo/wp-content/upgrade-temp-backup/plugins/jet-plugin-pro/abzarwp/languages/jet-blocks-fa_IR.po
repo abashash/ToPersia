@@ -1,0 +1,2014 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetBlocks For Elementor\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-18 23:33+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-blocks.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های جت پیشرفته"
+
+msgid "404 Not Found"
+msgstr "404 یافت نشد"
+
+msgid "Account Password Reset"
+msgstr "بازیابی رمزعبور حساب"
+
+msgid "Activate Elementor Now"
+msgstr "فعال سازی الان المنتور"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Icon"
+msgstr "آیکن فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Additional settings are available in the %s"
+msgstr "تنظیمات اضافی در %s موجود است"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid ""
+"An account is already registered with that username. Please choose another."
+msgstr ""
+"در حال حاضر یک حساب کاربری با این نام کاربری ثبت شده است. لطفا یکی دیگر را "
+"انتخاب کنید."
+
+msgid ""
+"An account is already registered with your email address. Please log in."
+msgstr "یک حساب کاربری با ایمیل شما قبلا ایجاد شده است. لطفا وارد شوید."
+
+msgid "An email has been sent. Please check your inbox."
+msgstr "یک ایمیل ارسال شده است. لطفا صندوق ورودی خود را بررسی کنید."
+
+msgid "Angle"
+msgstr "زاویه"
+
+msgid "Angle Double"
+msgstr "زاویه دوبل"
+
+msgid "Archives"
+msgstr "آرشیو"
+
+msgid "Arrow"
+msgstr "فلش"
+
+msgid "Arrow Circle"
+msgstr "دایره فلش"
+
+msgid "Ascending"
+msgstr "صعودی"
+
+msgid "At least 1 lowercase letter"
+msgstr "حداقل 1 حرف کوچک"
+
+msgid "At least 1 numerical number"
+msgstr "حداقل 1 عدد"
+
+msgid "At least 1 special character"
+msgstr "حداقل 1 کاراکتر خاص"
+
+msgid "At least 1 uppercase letter"
+msgstr "حداقل 1 حرف بزرگ"
+
+msgid "At least 8 characters"
+msgstr "حداقل 8 کاراکتر"
+
+msgid "At the bottom"
+msgstr "در پایین"
+
+msgid "Auth Links"
+msgstr "لینک‌های احراز هویت"
+
+msgid "Auth Links Alignment"
+msgstr "چینش لینک‌های احراز هویت"
+
+msgid "Author"
+msgstr "نویسنده"
+
+msgid "Available Extensions"
+msgstr "افزودنی های در دسترس"
+
+msgid "Available Widgets"
+msgstr "ابزارک های موجود"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Angle"
+msgstr "زاویه"
+
+msgctxt "Background Control"
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Background Type"
+msgstr "نوع پس‌زمینه"
+
+msgctxt "Background Control"
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgctxt "Background Control"
+msgid "Bottom Left"
+msgstr "پايين چپ"
+
+msgctxt "Background Control"
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgctxt "Background Control"
+msgid "Center Center"
+msgstr "مركز مركز"
+
+msgctxt "Background Control"
+msgid "Center Left"
+msgstr "مرکز چپ"
+
+msgctxt "Background Control"
+msgid "Center Right"
+msgstr "مرکز راست"
+
+msgctxt "Background Control"
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgctxt "Background Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Background Control"
+msgid "Gradient"
+msgstr "گرادیانت"
+
+msgctxt "Background Control"
+msgid "Linear"
+msgstr "خطی"
+
+msgctxt "Background Control"
+msgid "Location"
+msgstr "مکان"
+
+msgctxt "Background Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgctxt "Background Control"
+msgid "Radial"
+msgstr "شعاعی"
+
+msgctxt "Background Control"
+msgid "Second Color"
+msgstr "رنگ دوم"
+
+msgctxt "Background Control"
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgctxt "Background Control"
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgctxt "Background Control"
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgctxt "Background Control"
+msgid "Type"
+msgstr "نوع"
+
+msgid "Background color"
+msgstr "رنگ پس زمینه"
+
+msgid "Baseline"
+msgstr "پایه"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه (Border)"
+
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "نوع حاشیه (border)"
+
+msgctxt "Border Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "خطچین"
+
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgctxt "Border Control"
+msgid "Double"
+msgstr "دو خطی"
+
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgctxt "Border Control"
+msgid "Width"
+msgstr "عرض"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Border Width"
+msgstr "عرض حاشیه (Border)"
+
+msgid "Both Text and Image"
+msgstr "هردو"
+
+msgid "Both must be completed to work."
+msgstr "هر دو باید تکمیل شوند تا کار کنند."
+
+msgid "Bottom"
+msgstr "دکمه"
+
+msgid "Bottom Indent"
+msgstr "فرورفتگی پایین"
+
+msgctxt "Box Shadow Control"
+msgid "Box Shadow"
+msgstr "ایجاد سایه"
+
+msgctxt "Box Shadow Control"
+msgid "Inset"
+msgstr "درونی"
+
+msgctxt "Box Shadow Control"
+msgid "Outline"
+msgstr "بیرونی"
+
+msgctxt "Box Shadow Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Box Size"
+msgstr "اندازه جعبه"
+
+msgid "Breadcrumb Settings"
+msgstr "تنظیمات مسیر صفحات "
+
+msgid "Breadcrumbs"
+msgstr "مسیر صفحات"
+
+msgid "Breadcrumbs Items / Page Title"
+msgstr "مسیر صفحه / عنوان صفحه"
+
+msgid "Browse:"
+msgstr "مرور :"
+
+msgid "Buttons Container Styles"
+msgstr "استایل  جعبه دکمه ها"
+
+msgid "Buttons settings"
+msgstr "تننظیمات دکمه‌ها"
+
+msgid "Caret"
+msgstr "هشتک"
+
+msgid "Caret Square"
+msgstr "میدان هشتک"
+
+msgid "Cart"
+msgstr "سبد خريد"
+
+msgid "Cart Buttons Style"
+msgstr "استایل دکمه های سبدخرید"
+
+msgid "Cart Dropdown"
+msgstr "کشویی سبد خرید"
+
+msgid "Cart Dropdown Label"
+msgstr "برچسب کشویی سبد خرید"
+
+msgid "Cart Items Style"
+msgstr "استایل موارد سبد خرید"
+
+msgid "Cart Link"
+msgstr "لینک سبد"
+
+msgid "Cart Subtotal Format"
+msgstr "فرمت جمع سبد خرید"
+
+msgid "Center"
+msgstr "مرکز"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Checkout Button Styles"
+msgstr "استایل‌ دکمه تسویه حساب"
+
+msgid "Chevron"
+msgstr "شورون (Chevron)"
+
+msgid "Chevron Circle"
+msgstr "دایره جهت نما"
+
+msgid "Choose Template"
+msgstr "انتخاب قالب"
+
+msgid ""
+"Choose a certain set of options in the widget’s Style tab by moving the "
+"slider, and improve your Elementor editor performance by selecting "
+"appropriate style settings fill level (from None to Full level)"
+msgstr ""
+"با حرکت دادن اسلایدر ، مجموعه خاصی از گزینه ها را در زبانه استایل ابزارک "
+"انتخاب کنید و با انتخاب سطح مناسب تنظیمات استایل (از هیچ به سطح کامل) ، "
+"عملکرد ویرایشگر المنتور خود را بهبود ببخشید."
+
+msgid "Clear Text Button Icon"
+msgstr "آیکن دکمه پاک کردن متن"
+
+msgid "Click"
+msgstr "کلیک"
+
+msgid "Close Button"
+msgstr "دکمه بستن"
+
+msgid "Close Icon"
+msgstr "آیکون بستن"
+
+msgid "Close icon"
+msgstr "آیکن بستن"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Column Order"
+msgstr "ترتیب ستون"
+
+msgid "Comment Count"
+msgstr "تعداد نظرات"
+
+msgid "Confirm Password"
+msgstr "تکرار کلمه عبور"
+
+msgid "Confirm Password Label"
+msgstr "برچسب تکرار رمز عبور"
+
+msgid "Confirm Password Placeholder"
+msgstr "نگه دارنده مکان تکرار رمز عبور"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Container"
+msgstr "کانتاینر"
+
+msgid "Container Styles"
+msgstr "استایل جعبه"
+
+msgid "Container Width"
+msgstr "عرض جعبه"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid ""
+"Couldn&#8217;t register you&hellip; please contact us if you continue to "
+"have problems."
+msgstr ""
+"ثبت نام شما ناموفق بود. اگر این مشکل ادامه داشت، لطفا با ما تماس بگیرید."
+
+msgid "Count"
+msgstr "تعداد محصول"
+
+msgid "Count Background Color"
+msgstr "رنگ پس زمینه تعداد"
+
+msgid "Count Box Size"
+msgstr "اندازه جعبه تعداد"
+
+msgid "Count Color"
+msgstr "رنگ تعداد"
+
+msgid "Count Font Size"
+msgstr "اندازه فونت تعداد"
+
+msgid "Cover"
+msgstr "کاور"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Crumbs Style"
+msgstr "استایل مسیر"
+
+msgid "Current"
+msgstr "فعلی"
+
+msgid "Custom"
+msgstr "سفارشی"
+
+msgid "Custom Home Page Label"
+msgstr "برچسب صفحه اصلی سفارشی"
+
+msgid "Custom Logo Text"
+msgstr "متن لوگوی سفارشی"
+
+msgid "Custom Separator"
+msgstr "جداگانه سفارشی"
+
+msgid "Custom URL"
+msgstr "آدرسی URL سفارشی"
+
+msgid "Custom mail sender"
+msgstr "فرستنده ایمیل سفارشی"
+
+msgid "Custom post type link"
+msgstr "لینک نوع پست سفارشی"
+
+msgid "Customise the email address the email is sent from."
+msgstr "آدرس ایمیلی که ایمیل از آن ارسال می شود را سفارشی کنید."
+
+msgid "Customise the email subject line."
+msgstr "موضوع ایمیل را سفارشی کنید."
+
+msgid "Customise the form title."
+msgstr "سفارشی سازی عنوان فرم."
+
+msgid ""
+"Customise the main lost password form text. Allowed tags are: <a> with \"href"
+"\" and \"title\" attributes, <br>, <em>, <strong>, <p> with \"style\" "
+"attribute."
+msgstr ""
+"متن فرم اصلی فراموشی رمز را سفارشی کنید. برچسب های مجاز: <a> با (href) و "
+"صفت(title) , <br>, <em>, <strong>, <p> با صفت (style) ."
+
+msgid "Customise the name the email is sent from."
+msgstr "نامی را که ایمیل از آن ارسال می شود را سفارشی کنید."
+
+msgid ""
+"Customise the new password form text. Allowed tags are: <a> with \"href\" "
+"and \"title\" attributes, <br>, <em>, <strong>, <p> with \"style\" "
+"attribute. Use the following code to show a minimum password length: %x"
+msgstr ""
+"متن فرم رمز عبور جدید را سفارشی کنید. برچسب های مجاز: <a> با (href) و صفت "
+"(title) , <br>, <em>, <strong>, <p> با صفت (style) . از کد زیر برای نشان "
+"دادن حداقل طول رمز عبور استفاده کنید: %x"
+
+msgid ""
+"Customise the new password form text. Use the following codes to show the "
+"relevant info in the email:\n"
+"\t\t\t\t\tUsername: {username}\n"
+"\t\t\t\t\tReset URL: {reset_link}"
+msgstr ""
+"متن فرم رمز عبور جدید را سفارشی کنید. برای نمایش اطلاعات مربوطه در ایمیل از "
+"کدهای زیر استفاده کنید:\n"
+"\t\t\t\t\\نام کاربری: {username}\n"
+"\t\t\t\t\tآدرس URL ریست: {reset_link}"
+
+msgid "Dashboard"
+msgstr "داشبورد"
+
+msgid "Dashed"
+msgstr "خط چین"
+
+msgid "Data Update"
+msgstr "بروزرسانی داده"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Default"
+msgstr "پیش‌فرض"
+
+msgid "Default login page"
+msgstr "صفحه ورود پیش فرض"
+
+msgid "Demo messages for styling."
+msgstr "پیام های دمو برای استایل."
+
+msgid "Descending"
+msgstr "نزولی"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Desktop"
+msgstr "دسکتاپ"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Disable All Widgets"
+msgstr "غیر فعال سازی همه ابزارک ها"
+
+msgid "Display Logo Image and Text"
+msgstr "نمایش تصویر لوگو و متن"
+
+msgid "Divider"
+msgstr "جدا کننده"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgid "Double"
+msgstr "دو خطی"
+
+msgid "Dropdown"
+msgstr "کشویی"
+
+msgid "Dropdown Empty Message Styles"
+msgstr "استایل  پیام خالی کشویی"
+
+msgid "Dropdown Icon Color"
+msgstr "رنگ آیکن کشویی"
+
+msgid "Dropdown Icon Size"
+msgstr "اندازه آیکن کشویی"
+
+msgid "Dropdown Label Styles"
+msgstr "استایل  برچسب کشویی"
+
+msgid "Dropdown Placement"
+msgstr "قرار دادن کشویی"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "ERROR"
+msgstr "خطا"
+
+msgid "Edit Template"
+msgstr "ویرایش قالب"
+
+msgid "Editor Load Level"
+msgstr "سطح بارگذاری ویرایشگر"
+
+msgid "Effect"
+msgstr "افکت"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Email Address or Username"
+msgstr "آدرس ایمیل یا نام کاربری"
+
+msgid "Email Label"
+msgstr "برچسب ایمیل"
+
+msgid "Email Placeholder"
+msgstr "نگهدارنده مکان ایمیل"
+
+msgid "Email Subject"
+msgstr "موضوع ایمیل "
+
+msgid "Email settings"
+msgstr "تنظیمات ایمیل"
+
+msgid "Enable All Widgets"
+msgstr "فعال سازی همه ابزارک ها"
+
+msgid "Enable Mobile Trigger"
+msgstr "فعال سازی تریگر موبایل"
+
+msgid "Enable reCAPTCHA v3"
+msgstr "فعال سازی ریکپچا v3"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Entered passwords don't match"
+msgstr "رمزهای عبور یکسان نیستند"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Error Color"
+msgstr "رنگ خطا"
+
+msgid "Error:"
+msgstr "خطا:"
+
+msgid "Errors"
+msgstr "خطاها"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Fade"
+msgstr "محو شدن"
+
+msgid "Fields"
+msgstr "فیلدها"
+
+msgid "Firefox and IE Explorer browsers are not supported"
+msgstr "مرورگرهای فایرفاکس و IE Explorer پشتیبانی نمی شوند"
+
+msgid "First Name"
+msgstr "نام "
+
+msgid "First Name - Last Name"
+msgstr "نام - نام خانوادگی "
+
+msgid "Focus"
+msgstr "فوکوس"
+
+msgid "Font size"
+msgstr "اندازه فونت"
+
+msgid "For logged-in users"
+msgstr "برای کاربران وارد شده"
+
+msgid "For not logged-in users"
+msgstr "برای کاربران وارد نشده"
+
+msgid "Form"
+msgstr "فرم"
+
+msgid "Form Style"
+msgstr "استایل فرم"
+
+msgid "Forms"
+msgstr "فرم‌ها"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "Full Screen Popup"
+msgstr "پاپ آپ تمام عرض"
+
+msgid "Full Width"
+msgstr "تمام عرض"
+
+msgid "Gap"
+msgstr "شکاف"
+
+msgid "Gap After Icon"
+msgstr "شکاف بعد از آیکن"
+
+msgid "Gap After Label"
+msgstr "شکاف بعد از برچسب"
+
+msgid "Gap Before 1st Level Sub"
+msgstr "شکاف قبل از زیرسطح 1"
+
+msgid "Gap Before 2nd Level Sub"
+msgstr "شکاف قبل از زیرسطح 2"
+
+msgid "Gap Before Dropdown Icon"
+msgstr "شکاف قبل از آیکن کشویی"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "General Styles"
+msgstr "استایل  عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های جت"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+msgid "Hamburger Panel"
+msgstr "پنل Hamburger"
+
+msgid "Have an account?"
+msgstr "یک حساب کاربری دارید؟"
+
+msgid "Height"
+msgstr "ارتفاع"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hi, %s"
+msgstr "سلام, %s"
+
+msgid "Home"
+msgstr "خانه"
+
+msgid "Home page"
+msgstr "صفحه خانه"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Horizontal Position by"
+msgstr "موقعیت افقی در"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Hover Color"
+msgstr "رنگ هاور"
+
+msgid "I agree with the terms and conditions and the privacy policy"
+msgstr "من با شرایط و ضوابط و سیاست حفظ حریم خصوصی موافقم"
+
+msgid "ID"
+msgstr "شناسه"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Separator"
+msgstr "آیکن جداکننده"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid "Icon Styles"
+msgstr "استایل دکمه"
+
+msgid "If this was a mistake, just ignore this email and nothing will happen."
+msgstr ""
+"اگر این یک اشتباه است، فقط این ایمیل را نادیده بگیرید و هیچ اتفاقی نخواهد "
+"افتاد."
+
+msgid "Image"
+msgstr "عكس"
+
+msgid "Image and Text Vertical Alignment"
+msgstr "چینش عمودی تصویر و متن"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Inline"
+msgstr "درون خطی(Inline)"
+
+msgid "Input Field"
+msgstr "فیلد ورودی"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Elementor Now"
+msgstr "نصب الان المنتور"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های جت نصب شده"
+
+msgid "Integrations"
+msgstr "ادغام‌ها"
+
+msgid "Is Product Search"
+msgstr "جستجوی محصول است؟"
+
+msgid "Items"
+msgstr "آیتم‌ها"
+
+msgid "Items Styles"
+msgstr "استایل آیتم ها"
+
+msgid "Jet Sticky"
+msgstr "چسبیده (Jet)"
+
+msgid "JetBlocks"
+msgstr "JetBlocks"
+
+msgid "JetBlocks For Elementor"
+msgstr "JetBlocks برای المنتور"
+
+msgid "JetBlocks Settings"
+msgstr "تنظیمات JetBlocks"
+
+msgid "JetBlocks requires Elementor to be activated."
+msgstr "JetBlocks نیاز به فعال سازی المنتور دارد."
+
+msgid "JetBlocks requires Elementor to be installed."
+msgstr "JetBlocks نیاز به نصب المنتور دارد."
+
+msgid "JetPlugins License Deactivation"
+msgstr "غیرفعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های جت"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های جت"
+
+msgid "Justified"
+msgstr "جاستیفای"
+
+msgid "Justify"
+msgstr "جاستیفای"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Label Color"
+msgstr "رنگ برچسب"
+
+msgid "Label Font Size"
+msgstr "اندازه فونت برچسب"
+
+msgid "Label Styles"
+msgstr "استایل برچسب"
+
+msgid "Label for home page"
+msgstr "برچسب برای صفحه اصلی"
+
+msgid "Labels"
+msgstr "برچسب ها"
+
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+msgid "Last Name - First Name"
+msgstr "نام خانوادگی - نام "
+
+msgid "Layout"
+msgstr "طرح بندی"
+
+msgid "Layout Type"
+msgstr "نوع طرح بندی"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Left Indent"
+msgstr "تورفتگی چپ"
+
+msgid "Left Side"
+msgstr "سمت چپ"
+
+msgid "Left on the current page"
+msgstr "سمت چپ در صفحه فعلی"
+
+msgid "Length"
+msgstr "طول"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Link Color"
+msgstr "رنگ لینک ها"
+
+msgid "Link Hover Color"
+msgstr "رنگ لینک هاور"
+
+msgid "Linked Logo"
+msgstr "لوگوی لینک دار"
+
+msgid "Loader Styles"
+msgstr "استایل لودر"
+
+msgid "Loader color"
+msgstr "رنگ لودر"
+
+msgid "Log In"
+msgstr "ورود"
+
+msgid "Log In Button Label"
+msgstr "برچسب دکمه ورود"
+
+msgid "Logged in message"
+msgstr "پیام ورود"
+
+msgid "Login"
+msgstr "ورود اعضا"
+
+msgid "Login Form"
+msgstr "فرم ورود"
+
+msgid "Login Icon"
+msgstr "آیکن ورود"
+
+msgid "Login Link"
+msgstr "لینک ورود"
+
+msgid "Login Link Styles"
+msgstr "استایل  لینک ورود"
+
+msgid "Login Link Text"
+msgstr "متن لینک ورود"
+
+msgid "Login Page URL"
+msgstr "لینک برگه ورود"
+
+msgid "Login Prefix"
+msgstr "پیشوند ورود"
+
+msgid "Login button text"
+msgstr "متن دکمه ورود"
+
+msgid "Login link"
+msgstr "لینک ورود"
+
+msgid "Login page url"
+msgstr "آدرس صفحه ورود"
+
+msgid "Login/Logout, Register/Registered"
+msgstr "ورود/خروج ،ثبت نام/ثبت نام شده"
+
+msgid "Logo"
+msgstr "لوگو"
+
+msgid "Logo Alignment"
+msgstr "چینش لوگو"
+
+msgid "Logo Image"
+msgstr "تصویر لوگو"
+
+msgid "Logo Text From"
+msgstr "متن لوگو از"
+
+msgid "Logo Type"
+msgstr "نوع لوگو"
+
+msgid "Logout"
+msgstr "خروج"
+
+msgid "Logout Icon"
+msgstr "آیکن خروج"
+
+msgid "Logout Link"
+msgstr "لینک خروج"
+
+msgid "Logout Link Styles"
+msgstr "استایل  لینک ثبت خروج"
+
+msgid "Logout Link Text"
+msgstr "متن لینک خروج"
+
+msgid "Logout Link URL"
+msgstr "لینک خروج"
+
+msgid "Logout Prefix"
+msgstr "پیشوند خروج"
+
+msgid "Long Arrow"
+msgstr "فلش بلند"
+
+msgid "Lost Password Form Text"
+msgstr "متن فرم فراموشی رمزعبور"
+
+msgid "Lost Password Link"
+msgstr "لینک فراموشی رمزعبور"
+
+msgid "Lost Password link"
+msgstr "لینک فراموشی رمزعبور"
+
+msgid "Lost Password link text"
+msgstr "متن لینک فراموشی رمز عبور"
+
+msgid "Lost your password?"
+msgstr "رمز عبور را فراموش کرده اید؟"
+
+msgid "Lowercase"
+msgstr "حروف کوچک"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid "Max Height"
+msgstr "حداکثر ارتفاع"
+
+msgid "Max Width (px)"
+msgstr "حداکثر عرض (px)"
+
+msgid "Menu"
+msgstr "منو"
+
+msgid "Menu Alignment"
+msgstr "چینش منو"
+
+msgid "Menu Order"
+msgstr "ترتیب منو"
+
+msgid "Messages"
+msgstr "پیام‌ها"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "Minified"
+msgstr "فشرده"
+
+msgid "Minimum Height"
+msgstr "حداقل ارتفاع"
+
+msgid "Minimum Password Length"
+msgstr "حداقل طول رمز عبور"
+
+msgid "Minute %s"
+msgstr "دقیقه %s"
+
+msgid "Mobile"
+msgstr "موبایل"
+
+msgid "Mobile Menu"
+msgstr "منوی موبایل"
+
+msgid "Mobile Menu Layout"
+msgstr "طرح بندی منو موبایل"
+
+msgid "Mobile Trigger"
+msgstr "تریگر موبایل"
+
+msgid "Mobile Trigger Alignment"
+msgstr "چینش تریگر موبایل"
+
+msgid "Mobile Trigger Close Icon"
+msgstr "آیکن بستن تریگر موبایل"
+
+msgid "Mobile Trigger Icon"
+msgstr "آیکن تریگر موبایل"
+
+msgid "Modified"
+msgstr "اصلاح شده"
+
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr "خطای شروع ماژول بروزرسان DB در %s - آرگومان های نسخه و نامک الزامی است"
+
+msgid "More"
+msgstr "بیشتر"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های جت با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Move Down"
+msgstr "حرکت به پایین"
+
+msgid "Move Up"
+msgstr "حرکت به بالا"
+
+msgid "My Account"
+msgstr "حساب من"
+
+msgid "My Cart"
+msgstr "سبدخرید من"
+
+msgid "Name (slug)"
+msgstr "نامک(slug)"
+
+msgid "Navigation Menu"
+msgstr "منو ناوبری"
+
+msgid "New Password"
+msgstr "رمز عبور جدید"
+
+msgid "New Password Label"
+msgstr "برچسب رمز عبور جدید"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "Nickname"
+msgstr "لقب"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No email address found!"
+msgstr "آدرس ایمیلی پیدا نشد!"
+
+msgid "No username found!"
+msgstr "نام کاربری پیدا نشد!"
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Number"
+msgstr "عدد"
+
+msgid "Off"
+msgstr "غیرفعال"
+
+msgid "On"
+msgstr "فعال"
+
+msgid "Order"
+msgstr "ترتیب"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Page %s"
+msgstr "صفحه %s"
+
+msgid "Page Title"
+msgstr "عنوان برگه"
+
+msgid "Page Title / Breadcrumbs Items"
+msgstr "عنوان صفحه/ مسیر صفحه"
+
+msgid "Panel"
+msgstr "پنل"
+
+msgid "Panel Width"
+msgstr "عرض پنل"
+
+msgid "Password"
+msgstr "رمز عبور"
+
+msgid "Password Label"
+msgstr "برچسب رمز عبور"
+
+msgid "Password Placeholder"
+msgstr "نگهدارنده مکان رمز عبور"
+
+msgid "Password Requirements"
+msgstr "الزامات رمز عبور"
+
+msgid "Password Requirements:"
+msgstr "الزامات رمز عبور:"
+
+msgid "Path type"
+msgstr "نوع مسیر"
+
+msgid "Placeholder"
+msgstr "نگهدارنده مکان"
+
+msgid "Placeholder Color"
+msgstr "رنگ نگهدارنده مکان"
+
+msgid "Please Confirm Password"
+msgstr "لطفا رمزعبور خود را تأیید کنید"
+
+msgid "Please add your email address or username!"
+msgstr "لطفا آدرس ایمیل یا نام کاربری خود را اضافه کنید!"
+
+msgid "Please enter a new password."
+msgstr "لطفاَ رمز عبور جدید را وارد کنید"
+
+msgid "Please enter a new password. Minimum %x characters."
+msgstr "لطفا یک رمز عبور جدید وارد کنید. حداقل %x کاراکتر."
+
+msgid "Please enter a username or email address."
+msgstr "لطفا یک نام کاربری یا آدرس ایمیل وارد کنید."
+
+msgid "Please enter a valid account username."
+msgstr "لطفا یک نام کاربری معتبر وارد کنید."
+
+msgid "Please enter an account password."
+msgstr "لطفاً یک رمز ورود حساب وارد کنید."
+
+msgid ""
+"Please enter your email address or username. You will receive a link to "
+"create a new password via email."
+msgstr ""
+"لطفا نام کاربری یا آدرس ایمیل خود را وارد نمایید. شما یک لینک برای ایجاد یک "
+"رمز عبور جدید از طریق ایمیل دریافت خواهید کرد."
+
+msgid "Please provide a valid email address."
+msgstr "لطفا یک ایمیل معتبر وارد کنید."
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Plus"
+msgstr "پلاس"
+
+msgid "Plus Circle"
+msgstr "دایره پلاس"
+
+msgid "Plus Square"
+msgstr "میدان پلاس"
+
+msgid "Popup Box"
+msgstr "جعبه پاپ آپ"
+
+msgid "Popup Close"
+msgstr "بستن پاپ آپ"
+
+msgid "Popup Close Button Icon"
+msgstr "آیکن دکمه بستن پاپ آپ"
+
+msgid "Popup Content Width"
+msgstr "عرض محتوای پاپ آپ"
+
+msgid "Popup Position"
+msgstr "موقعیت پاپ آپ"
+
+msgid "Popup Trigger"
+msgstr "تریگر پاپ آپ"
+
+msgid "Popup Trigger Icon"
+msgstr "آیکن تریگر پاپ آپ"
+
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Prefix"
+msgstr "پیشوند"
+
+msgid "Prefix Style"
+msgstr "استایل پیشوند"
+
+msgid "Prefix for the breadcrumb path"
+msgstr "پیشوند برای مسیر صفحه"
+
+msgid "Privacy Policy"
+msgstr "حریم خصوصی"
+
+msgid "Product Amount Styles"
+msgstr "استایل مقدار محصول"
+
+msgid "Product Image Style"
+msgstr "استایل تصویر محصول"
+
+msgid "Product Item Style"
+msgstr "استایل آیتم محصول"
+
+msgid "Product List Style"
+msgstr "استایل لیست محصول"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Product Quantity Styles"
+msgstr "استایل تعداد محصول"
+
+msgid "Product Remove Button Styles"
+msgstr "استایل دکمه حذف محصول"
+
+msgid "Product Title Styles"
+msgstr "استایل عنوان محصول"
+
+msgid "Products Count Format"
+msgstr "فرمت شمارش محصولات"
+
+msgid "Profile Name Settings"
+msgstr "تنظیمات نام پروفایل"
+
+msgid "Rand"
+msgstr "تصادفی"
+
+msgid "Re-enter Password"
+msgstr "تکرار رمز عبور"
+
+msgid "Re-enter Password Label"
+msgstr "برچسب تکرار رمز عبور"
+
+msgid "Read our tutorial on using Library templates."
+msgstr "آموزش استفاده از قالب های کتابخانه را بخوانید."
+
+msgid "Redirect After Login"
+msgstr "تغییر مسیر بعد از ورود"
+
+msgid "Redirect After Logout"
+msgstr "تغییر مسیر پس از خروج"
+
+msgid "Redirect After Password Reset"
+msgstr "ریدایرکت پس از بازیابی رمز عبور"
+
+msgid "Redirect After Register"
+msgstr "ریدایرکت بعد از ثبت نام"
+
+msgid "Redirect URL"
+msgstr "آدرس تغییر مسیر"
+
+msgid "Register"
+msgstr "ثبت نام"
+
+msgid "Register Button Label"
+msgstr "برچسب دکمه ثبت نام"
+
+msgid "Register Icon"
+msgstr "آیکن ثبت نام"
+
+msgid "Register Link"
+msgstr "لینک ثبت نام"
+
+msgid "Register Link Styles"
+msgstr "استایل  لینک ثبت نام"
+
+msgid "Register Link Text"
+msgstr "متن لینک ثبت نام"
+
+msgid "Register Page URL"
+msgstr "لینک ثبت نام"
+
+msgid "Register Prefix"
+msgstr "پیشوند ثبت نام"
+
+msgid "Register reCAPTCHA v3 keys %1$s."
+msgstr "ثبت کلیدهای ریکپچا نسخه 3 %1$s"
+
+msgid "Register reCAPTCHA v3 keys here."
+msgstr "کلیدهای ریکپچا v3 را در اینجا ثبت کنید."
+
+msgid "Register/Registered, Login/Logout"
+msgstr "ثبت نام/ثبت نام شده ، ورود/خروج"
+
+msgid "Registered Icon"
+msgstr "آیکن ثبت نام شده"
+
+msgid "Registered Link"
+msgstr "لینک ثبت نام شده"
+
+msgid "Registered Link Styles"
+msgstr "استایل  لینک ثبت نام شده"
+
+msgid "Registered Link Text"
+msgstr "متن لینک ثبت نام شده"
+
+msgid "Registered Page URL"
+msgstr "آدرس URL صفحه ثبت نام شده"
+
+msgid "Registered Prefix"
+msgstr "پیشوند ثبت نام شده"
+
+msgid "Registration Form"
+msgstr "فرم ثبت نام"
+
+msgid ""
+"Registration currently disabled and this form will not be visible for guest "
+"users. Please, enable registration in Settings/General or remove this widget "
+"from the page."
+msgstr ""
+"ثبت نام در حال حاضر غیرفعال است و این فرم برای کاربران مهمان قابل مشاهده "
+"نخواهد بود. لطفاً ثبت نام را در تنظیمات / عمومی فعال کنید یا این ابزارک را از "
+"صفحه حذف کنید."
+
+msgid "Registration disabled"
+msgstr "ثبت نام غیرفعال است"
+
+msgid "Remember Me"
+msgstr "مرا بخاطر بسپار"
+
+msgid "Remember Me Label"
+msgstr "برچسب مرا به یاد بسپار"
+
+msgid "Remove Link on Front Page"
+msgstr "حذف لینک در صفحه خانه"
+
+msgid "Reset Link Label"
+msgstr "برچسب لینک بازیابی"
+
+msgid "Reset Password"
+msgstr "بازیابی کلمه عبور"
+
+msgid "Reset Password Form"
+msgstr "فرم فراموشی رمز عبور"
+
+msgid "Reset Password Form Text"
+msgstr "متن فرم بازیابی رمزعبور"
+
+msgid "Reset button text"
+msgstr "متن دکمه ریست"
+
+msgid "Retina Logo Image"
+msgstr "تصویر لوگوی رتینا"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Right Indent"
+msgstr "تورفتگی راست"
+
+msgid "Right Side"
+msgstr "سمت راست"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره شده"
+
+msgid "Scale"
+msgstr "مقیاس"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search &hellip;"
+msgstr "جستجو &hellip;"
+
+msgid "Search Placeholder"
+msgstr "نگهدارنده مکان جستجو"
+
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "نتایج جستجو برای  &#8220;%s&#8221;"
+
+msgid "Secret Key:"
+msgstr "کلید خصوصی:"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select Login page"
+msgstr "انتخاب صفحه ورود"
+
+msgid "Select Menu"
+msgstr "انتخاب منو"
+
+msgid "Select an existing template or create a "
+msgstr "یک قالب موجود را انتخاب کنید یا ایجاد یک "
+
+msgid "Sender"
+msgstr "فرستنده"
+
+msgid "Separator Type"
+msgstr "نوع جداکننده"
+
+msgid "Separators Style"
+msgstr "استایل جدا کننده ها"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Set a minimum password length. Recommended: 8"
+msgstr "حداقل طول رمز عبور را تعیین کنید. پیشنهادی: 8"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Settings page"
+msgstr "صفحه تنظیمات"
+
+msgid "Show Cart Dropdown"
+msgstr "نمایش کشویی سبد خرید"
+
+msgid "Show Cart Subtotal"
+msgstr "نمايش جمع سبد خرید"
+
+msgid "Show Confirm Password Field"
+msgstr "نمایش فیلد تایید رمز عبور"
+
+msgid "Show Effect"
+msgstr "نمایش افکت"
+
+msgid "Show Items Description"
+msgstr "نمایش توضیحات آیتم ها"
+
+msgid "Show Login Link"
+msgstr "نمایش لینک ورود"
+
+msgid "Show Logout Link"
+msgstr "نمایش خروج لینک"
+
+msgid "Show Page Title"
+msgstr "نمایش عنوان صفحه"
+
+msgid "Show Prefix"
+msgstr "نمایش پیشوند"
+
+msgid "Show Privacy Policy Checkbox"
+msgstr "نمایش چکباکس حریم خصوصی"
+
+msgid "Show Products Count"
+msgstr "نمایش تعداد محصولات"
+
+msgid "Show Register Link"
+msgstr "نمایش لینک ثبت نام"
+
+msgid "Show Registered Link"
+msgstr "نمایش لینک ثبت نام شده"
+
+msgid "Show Search Form in Popup"
+msgstr "نمایش فرم جستجو در پاپ آپ"
+
+msgid "Show Submit Button"
+msgstr "نمایش دکمه تایید"
+
+msgid "Show Trigger Type"
+msgstr "نمایش نوع تریگر"
+
+msgid "Show on Front Page"
+msgstr "نمایش در صفحه اصلی"
+
+msgid "Sign in"
+msgstr "ورود"
+
+msgid "Site Key:"
+msgstr "کلید سایت:"
+
+msgid "Site Logo"
+msgstr "لوگوی سایت"
+
+msgid "Site Name"
+msgstr "نام سایت"
+
+msgid "Slide"
+msgstr "اسلاید"
+
+msgid "Slide From The Left Side "
+msgstr "اسلاید از چپ "
+
+msgid "Slide From The Right Side "
+msgstr "اسلاید از راست "
+
+msgid "Slide Out"
+msgstr "اسلاید بیرون"
+
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgid "Someone requested that the password be reset for the following account:"
+msgstr "شخصی درخواست کرد ه است که رمزعبور برای حساب زیر بازنشانی شود:"
+
+msgid ""
+"Someone requested that the password be reset for the following account:\n"
+"\t\t\t\t\tUsername: {username}\n"
+"\t\t\t\t\tIf this was a mistake, just ignore this email and nothing will "
+"happen.\n"
+"\t\t\t\t\tTo reset your password, visit the following address:\n"
+"\t\t\t\t\t{reset_link}"
+msgstr ""
+"شخصی درخواست کرده است که رمز عبور برای حساب زیر بازنشانی شود:\n"
+"\t\t\t\t\\نام کاربری: {username}\n"
+"\t\t\t\t\tاگر این یک اشتباه بود، فقط این ایمیل را نادیده بگیرید و هیچ اتفاقی "
+"نمی افتد.\n"
+"\t\t\t\t\tبرای بازنشانی رمز عبور به آدرس زیر مراجعه کنید:\n"
+"\t\t\t\t\t{reset_link}"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه جت خود باید لایسنس را فعال کنید "
+
+msgid ""
+"Sorry, that key does not appear to be valid. Please reset your password "
+"again."
+msgstr ""
+"با عرض پوزش، به نظر می رسد کلید معتبر نیست. لطفاً دوباره رمز عبور خود را "
+"بازنشانی کنید."
+
+msgid "Sorry, that key has expired. Please reset your password again."
+msgstr ""
+"متاسفانه کلید منقضی شده است. لطفاً دوباره رمز عبور خود را بازنشانی کنید."
+
+msgid "Special character"
+msgstr "کاراکتر خاص"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Showing Mobile Menu From"
+msgstr "شروع نمایش منوی موبایل از"
+
+msgid "Start Update"
+msgstr "شروع بروزرسانی"
+
+msgid "Static page"
+msgstr "صفحه استاتیک"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Stay on the current page"
+msgstr "ماندن در صفحه فعلی "
+
+msgid "Sticky Section"
+msgstr "بخش چسبیده"
+
+msgid "Sticky Section Style"
+msgstr "استایل بخش چسبیده"
+
+msgid "Sticky Section Visibility"
+msgstr "قابلیت مشاهده بخش چسبیده"
+
+msgid "Style"
+msgstr "استایل"
+
+msgid "Sub"
+msgstr "زیر"
+
+msgid "Sub Dropdown Icon"
+msgstr "آیکون کشویی پایین"
+
+msgid "Submit"
+msgstr "تایید"
+
+msgid "Submit Button"
+msgstr "دکمه تایید"
+
+msgid "Submit Button Icon"
+msgstr "آیکن دکمه تایید"
+
+msgid "Submit Button Label"
+msgstr "برچسب دکمه تایید"
+
+msgid "Success"
+msgstr "موفق"
+
+msgid "Success Color"
+msgstr "رنگ موفق"
+
+msgid "Success reset redirect"
+msgstr "ریدایرکت بازنشانی موفق"
+
+msgid "Super"
+msgstr "فوق العاده"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Tablet"
+msgstr "تبلت"
+
+msgid "Taxonomy to show in breadcrumbs for content types"
+msgstr "طبقه بندی برای نمایش انواع محتوا در مسیر صفحات "
+
+msgid "Template is not defined. "
+msgstr "قالب تعریف نشده است. "
+
+msgid "Text"
+msgstr "متن"
+
+msgid "Text Background Color"
+msgstr "رنگ پس زمینه متن"
+
+msgid "Text Below Image"
+msgstr "متن زیر تصویر"
+
+msgid "Text Bottom"
+msgstr "پایین متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text Top"
+msgstr "بالای متن"
+
+msgid "That email address is not recognised."
+msgstr "آدرس ایمیل شناسایی نشد."
+
+msgid "That key has expired. Please reset your password again."
+msgstr "آن کلید منقضی شده است. لطفاً دوباره رمز عبور خود را بازنشانی کنید."
+
+msgid "That key is no longer valid. Please reset your password again. Code: "
+msgstr ""
+"آن کلید دیگر معتبر نیست. لطفاً دوباره رمز عبور خود را بازنشانی کنید. کد: "
+
+msgid "That username is not recognised."
+msgstr "نام‌کاربری شناسایی نشد."
+
+msgid ""
+"The basic utilitary widgets for implementing additional functionality to "
+"headers, footers and special sections built with Elementor"
+msgstr ""
+"ابزارک های اصلی کاربردی برای اجرای قابلیت های اضافی به عنوان هدر ، فوتر و "
+"بخش های ویژه ساخته شده با المنتور"
+
+msgid "The e-mail could not be sent."
+msgstr "ایمیل ارسال نشد."
+
+msgid "The passwords don't match."
+msgstr "رمزهای عبور یکسان نیستند."
+
+msgid "The reset link is not valid."
+msgstr "لینک تنظیم مجدد نامعتبر است."
+
+msgid "The username field is empty."
+msgstr "فیلد نام کاربری خالی است."
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+"این لایسنس، مجوزها را برای تمام افزونه های موجود در این مجموعه فعال می کند."
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Title HTML Tag"
+msgstr "برچسب HTML عنوان"
+
+msgid "To reset your password, visit the following address:"
+msgstr "برای تنظیم مجدد رمز عبور خود ، به آدرس زیر مراجعه کنید:"
+
+msgid "Toggle"
+msgstr "تغیر وضعیت (Toggle)"
+
+msgid "Toggle Alignment"
+msgstr "چینش تاگل(Toggle)"
+
+msgid "Toggle Icon"
+msgstr "آیکن تاگل(Toggle)"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Top Dropdown Icon"
+msgstr "آیکون کشویی بالا"
+
+msgid "Top Indent"
+msgstr "ردیف بالا"
+
+msgid "Top Level Items"
+msgstr "موارد سطح بالا"
+
+msgid "Total Amount Styles"
+msgstr "استایل  مقدار مجموع"
+
+msgid "Total Container Styles"
+msgstr "استایل جعبه مجموع"
+
+msgid "Total Title Styles"
+msgstr "استایل  عنوان مجموع"
+
+msgid "Totals"
+msgstr "مجموع"
+
+msgid "Totals Color"
+msgstr "رنگ مجموع"
+
+msgid "Totals Font Size"
+msgstr "اندازه فونت مجموع"
+
+msgid "Transition Duration"
+msgstr "مدت زمان انتقال"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروزرسانی الان"
+
+msgid "Update complete, thank you for updating to the latest version!"
+msgstr "به روزرسانی کامل شد ، از شما برای به روزرسانی به آخرین نسخه متشکریم!"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Uppercase"
+msgstr "حروف بزرگ "
+
+msgid "Use %s marker for username"
+msgstr "برای نام کاربری از نشانگر %s استفاده کنید"
+
+msgid "Use Ajax Loading for Template"
+msgstr "استفاده از بارگذاری آژاکس برای قالب"
+
+msgid "Use Cache for Template"
+msgstr "استفاده از کش برای تمپلیت"
+
+msgid "Use reCAPTCHA v3 form verification"
+msgstr "استفاده از تأییدیه فرم ریکپچای v3"
+
+msgid "User Name Display Format"
+msgstr "فرمت نمایش نام کاربری"
+
+msgid "User Registered Message"
+msgstr "پیام کاربر ثبت نام شده"
+
+msgid "Username"
+msgstr "نام کاربری"
+
+msgid "Username Label"
+msgstr "برچسب نام کاربری"
+
+msgid "Username Placeholder"
+msgstr "نگهدارنده مکان نام کاربری"
+
+msgid "Username/Email Label"
+msgstr "برچسب نام‌کاربری/ایمیل"
+
+msgid "Username: %s"
+msgstr "نام‌کاربری : %s"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Vertical Menu Alignment"
+msgstr "چینش منوی عمودی"
+
+msgid "Vertical Menu Width"
+msgstr "عرض منو عمودی"
+
+msgid "Vertical Postition by"
+msgstr "موقعیت عمودی در"
+
+msgid "View Cart Button Styles"
+msgstr "استایل‌ دکمه مشاهده سبد خرید"
+
+msgid "View your shopping cart"
+msgstr "مشاهده سبد خرید"
+
+msgid "We need to update your database to the latest version."
+msgstr "ما باید پایگاه داده شما را به آخرین نسخه به روز کنیم."
+
+msgid "Week %s"
+msgstr "هفته %s"
+
+msgid "Weight"
+msgstr "وزن"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "What is Library?"
+msgstr "کتابخانه چیست؟"
+
+msgid "Widgets & Extensions"
+msgstr "افزودنی ها و ابزارک ها"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "Width (px)"
+msgstr "عرض (px)"
+
+msgid "WooCommerce Shopping Cart"
+msgstr "سبد خرید ووکامرس"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You Haven’t Saved Templates Yet."
+msgstr "شما هنوز قالبی را ذخیره نکرده اید."
+
+msgid "You already logged in"
+msgstr "شما قبلا وارد شده اید"
+
+msgid "You already registered"
+msgstr "شما قبلا ثبت نام کرده اید"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های جت نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid "Your password has been reset. %s"
+msgstr "رمز عبور شما بازنشانی شد. %s"
+
+msgid "Z-Index"
+msgstr "ایندکس Z"
+
+msgid "Z-index"
+msgstr "ایندکس Z"
+
+msgid "Zoom"
+msgstr "بزرگنمایی"
+
+msgctxt "daily archives date format"
+msgid "j"
+msgstr "j"
+
+msgctxt "hour archives time format"
+msgid "g a"
+msgstr "g a"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetblocks/"
+msgstr "https://crocoblock.com/plugins/jetblocks/"
+
+msgid "key not found!"
+msgstr "کلید پیدا نشد!"
+
+msgctxt "minute and hour archives time format"
+msgid "g:i a"
+msgstr "g:i a"
+
+msgctxt "minute archives time format"
+msgid "i"
+msgstr "i"
+
+msgctxt "monthly archives date format"
+msgid "F"
+msgstr "F"
+
+msgid "new one"
+msgstr "جدید"
+
+msgid "or"
+msgstr "یا"
+
+msgid "something went wrong with that!"
+msgstr "اشتباهی رخ داده است!"
+
+msgctxt "weekly archives date format"
+msgid "W"
+msgstr "W"
+
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"

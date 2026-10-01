@@ -1,0 +1,253 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "From:": [
+            "از:"
+        ],
+        "--Choose language--": [
+            "--انتخاب زبان--"
+        ],
+        "to:": [
+            "به:"
+        ],
+        "Set language pair(s) for Translator %s:": [
+            "تنظیم جفت زبان برای مترجم %s:"
+        ],
+        "+ Add more language pairs for this translator": [
+            "+ افزودن جفت‌های زبان بیشتر برای این مترجم"
+        ],
+        "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            "حافظه ترجمه با موفقیت در ویرایشگر ترجمه پیشرفته کپی شد."
+        ],
+        "Deactivate ICanLocalize.com as Translation Service on this site": [
+            "ICanLocalize.com را به عنوان سرویس ترجمه در این سایت غیرفعال کنید"
+        ],
+        "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            "مترجم را از دست داده‌اید؟ یا از آخرین نسخه حافظه ترجمه، کار جدید بوده است؟"
+        ],
+        "Enter here your ICanLocalize authentication details.": [
+            "جزئیات احراز هویت ICanLocalize خود را در اینجا وارد کنید."
+        ],
+        "API Token:": [
+            "توکن API:"
+        ],
+        "Please enter valid value for ICL token.": [
+            "لطفاً مقدار معتبری را برای توکن ICL وارد کنید."
+        ],
+        "Enter ICL API token here": [
+            "توکن ICL API را در اینجا وارد کنید"
+        ],
+        "Submit": [
+            "ارسال"
+        ],
+        "Sign up": [
+            "ثبت‌نام"
+        ],
+        "to ICanLocalize to receive your API token.": [
+            "به ICanLocalize برای دریافت توکن API خود."
+        ],
+        "Already have an account? Login and": [
+            "از قبل حساب کاربری دارید؟ وارد شوید و"
+        ],
+        "get your token.": [
+            "توکن خود را دریافت کنید."
+        ],
+        "Copy new Translation Memory to Advanced Translation Memory": [
+            "حافظه ترجمه جدید را در حافظه ترجمه پیشرفته کپی کنید"
+        ],
+        "Import translation memory": [
+            "درون‌ریزی حافظه ترجمه"
+        ],
+        "ICanLocalize is already deactivated on this site": [
+            "ICanLocalize قبلاً در این سایت غیرفعال شده است"
+        ],
+        "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            "همچنان می‌توانید مترجم‌ها یا حافظه ترجمه را به ویرایشگر مترجم پیشرفته درون‌ریزی کنید"
+        ],
+        "Move from ICanLocalize.com to Advanced Translation Editor": [
+            "از ICanLocalize.com به ویرایشگر ترجمه پیشرفته بروید"
+        ],
+        "Import translators": [
+            "درون‌ریزی مترجمان"
+        ],
+        "Come back": [
+            "برگرد"
+        ],
+        "Cancel": [
+            "لغو"
+        ],
+        "Save": [
+            "ذخیره"
+        ],
+        "Name": [
+            "نام"
+        ],
+        "Language Pairs": [
+            "جفت زبان"
+        ],
+        "Not supported pairs:": [
+            "جفت‌‌های پشتیبانی نشده:"
+        ],
+        "ICanLocalize.com deactivated": [
+            "ICanLocalize.com غیرفعال شد"
+        ],
+        "Translate memory is imported": [
+            "حافظه ترجمه درون‌ریزی شد"
+        ],
+        "There is no translators in ICL": [
+            "در ICL مترجمی وجود ندارد"
+        ],
+        "Translators saved": [
+            "مترجمان ذخیره شدند"
+        ],
+        "%s file upload failed.": [
+            "فایل %s آپلود نشد."
+        ],
+        "Flag": [
+            "پرچم"
+        ],
+        "Flag file": [
+            "فایل پرچم"
+        ],
+        "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "شما فقط زبان اضافه کردید. در مرحله بعد، آن را به عنوان زبان پیش فرض سایت یا زبان ترجمه انتخاب کنید."
+        ],
+        "Language added": [
+            "زبان اضافه شد"
+        ],
+        "The value \"%s\" already exists": [
+            "مقدار \"%s\" از قبل وجود دارد"
+        ],
+        "Add a new language": [
+            "افزودن زبان جدید"
+        ],
+        "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "با انتخاب زبان عمومی از لیست زیر، یک زبان خاص کشور ایجاد کنید. سپس، کشوری را که باید برای آن بومی سازی شود، انتخاب کنید."
+        ],
+        "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "با انتخاب ترکیبی که از قبل در پایگاه داده وجود دارد، WPML می تواند به پر کردن فیلدهای لازم کمک کند. اطلاعات بیشتر درباره <AddingACustomLanguageLink />."
+        ],
+        "Cannot find?": [
+            "پیدا نکردید؟"
+        ],
+        "Click here": [
+            "ایجا کلیک کنید"
+        ],
+        "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "فرمت اشتباه.فقط شامل حروف کوچک و \"-\" .مثال: \"fr\" , \"pt-br\", \"zh-hans\""
+        ],
+        "Language": [
+            "زبان"
+        ],
+        "Location": [
+            "موقعیت"
+        ],
+        "Code": [
+            "کد"
+        ],
+        "The language will not be supported by automatic translations": [
+            "این زبان توسط ترجمه خودکار پشتیبانی نخواهد شد"
+        ],
+        "Language mapping": [
+            "نگاشت (mapping) زبان"
+        ],
+        "Don't map this language": [
+            "این زبان را نگاشت نکنید"
+        ],
+        "Default locale": [
+            "محلی پیش‌فرض"
+        ],
+        "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "فرمت اشتباه.فقط حروف کوچک و \"_\".مثال: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+        ],
+        "hreflang": [
+            "hreflang"
+        ],
+        "Encode url?": [
+            "رمزگذاری url؟"
+        ],
+        "Flags must be:": [
+            "پرچم‌ها باید به این صورت باشند:"
+        ],
+        "NO": [
+            "نه"
+        ],
+        "YES": [
+            "بله"
+        ],
+        " (required)": [
+            " (اجباری)"
+        ],
+        "Please fill in the field": [
+            "لطفا فیلد را پر کنید"
+        ],
+        "PNG, SVG, or JPG files": [
+            "فایل‌های PNG، SVG یا JPG"
+        ],
+        "Save language": [
+            "ذخیره زبان"
+        ],
+        "18 x 12 pixels": [
+            "18 x 12 پیکسل"
+        ],
+        "Read more about ": [
+            "اطلاعات بیشتر درباره "
+        ],
+        "The name of your language as it will appear on your site's language switcher.": [
+            "نام زبان شما همانطور که در تغییر زبان سایت شما ظاهر می شود."
+        ],
+        "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "یک مقدار منحصر به فرد که زبان موجود در پایگاه داده و URL را مشخص می کند. پس از ذخیره، کد زبان قابل تغییر نیست."
+        ],
+        "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "اگر زبان سفارشی شما شبیه به زبان موجود است، می توانید از غلط گیر املا و ترجمه خودکار زبان موجود استفاده کنید. به عنوان مثال، اگر زبان سفارشی شما سوئیسی-آلمانی است، می توانید به آلمانی به عنوان زبانی که برای بررسی املا و ترجمه خودکار استفاده می شود، نگاشت کنید. اگر زبان سفارشی خود را به یک زبان موجود نگاشت نکنید، ویژگی‌های املا و ترجمه خودکار در آن زبان در دسترس نخواهد بود."
+        ],
+        "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "مقدار WPML هنگام بارگیری ترجمه ها از فایل های MO و PO بررسی می شود. محلی پیش فرض در نام فایل ها در پوشه /wp-content/languages/ در تنظیمات وردپرس شما گنجانده شده است."
+        ],
+        "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "گوگل از ویژگی hreflang استفاده می کند تا کاربران را به سایت‌هایی به زبان و مکان مربوطه هدایت کند. مثال ها:"
+        ],
+        "All English-speaking users: en": [
+            "همه کاربران انگلیسی زبان: en"
+        ],
+        "English for UK users: en-gb": [
+            "انگلیسی برای کاربران بریتانیایی: en-gb"
+        ],
+        "English for US users: en-us": [
+            "انگلیسی برای کاربران آمریکایی: en-us"
+        ],
+        "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "تعیین می کند که آیا URL های این زبان کدگذاری شده اند یا از کاراکترهای ASCII استفاده می کنند (اگر مطمئن نیستید، آن را \"نه\" انتخاب کنید)."
+        ],
+        "adding a custom language": [
+            "افزودن زبان سفارشی"
+        ],
+        "Default language": [
+            "زبان پیش‌فرض"
+        ],
+        "What is the current language of your website?": [
+            "زبان فعلی وب سایت شما چیست؟"
+        ],
+        "Translation languages": [
+            "زبان‌های ترجمه"
+        ],
+        "Which languages do you want to translate your site into?": [
+            "می خواهید سایت خود را به چه زبان‌هایی ترجمه کنید؟"
+        ],
+        "If you cannot find languages that you need in the list": [
+            "اگر نمی‌توانید زبان‌های مورد نیاز خود را در لیست پیدا کنید"
+        ],
+        "create a custom language": [
+            "ایجاد یک زبان سفارشی"
+        ],
+        "What are the languages of your site?": [
+            "زبان سایت شما چیست؟"
+        ]       
+      }
+    }
+  }

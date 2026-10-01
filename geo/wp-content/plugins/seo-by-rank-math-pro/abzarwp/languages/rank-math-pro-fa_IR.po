@@ -1,0 +1,3565 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: rank-math-pro\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Rank Math\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;"
+"_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
+"esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "%1$s to exclude for %2$s."
+msgstr "مستثنا کردن %1$s برای %2$s."
+
+msgid "%1$sConnect now%2$s. It only takes 20 seconds!"
+msgstr "%1$sاتصال الان%2$s. فقط 20 ثانیه طول می کشد!"
+
+msgid "%d Hour"
+msgstr "%d ساعت"
+
+msgid "%d Min"
+msgstr "%d دقیقه"
+
+msgid "%d Sec"
+msgstr "%d ثانیه"
+
+msgid "%d redirection moved to Trash."
+msgid_plural "%d redirections moved to Trash."
+msgstr[0] "%d ریدایرکت‌ به زباله‌دان منتقل شد."
+msgstr[1] "%d ریدایرکت‌ به زباله‌دان منتقل شد."
+
+msgid "%d redirections have been assigned to the category."
+msgstr "%d ریدایرکت به دسته بندی اختصاص داده شده است."
+
+msgid ""
+"%s It is recommended to save a database backup before using this option "
+"because importing malformed CSV can result in loss of data."
+msgstr ""
+"%s توصیه می‌شود قبل از استفاده از این گزینه، یک نسخه پشتیبان از پایگاه داده "
+"سایت خود ذخیره کنید زیرا اگر درون ‌ریزی CSV با مشکل مواجه شود منجر به از دست "
+"رفتن داده‌ها می‌شود."
+
+msgid "%s categories"
+msgstr "دسته بندی های %s"
+
+msgid "%s category"
+msgstr "دسته بندی %s"
+
+msgid "%s published privately."
+msgstr "%s به صورت خصوصی منتشر شد."
+
+msgid "%s published."
+msgstr "%s منتشر شد."
+
+msgid "%s reverted to draft."
+msgstr "%s به پیش نویس بازگشت."
+
+msgid "%s scheduled."
+msgstr "%s برنامه ریزی شد."
+
+msgid "%s updated."
+msgstr "%s بروزرسانی شد."
+
+msgid "%s value to use in Product schema."
+msgstr "%s مقدار مورد استفاده در اسکیمای محصول."
+
+msgid "%s value to use in the Product schema."
+msgstr "%s مقدار مورد استفاده در اسکیمای محصول."
+
+msgid "&#8595; Rank Math"
+msgstr "&#8595; رنک مث"
+
+msgid "&larr; Go Back to the Redirections"
+msgstr "&larr; بازگشت به ریدایرکت‌ها"
+
+msgid "&mdash; Not Selected &mdash;"
+msgstr "&mdash; انتخاب نشده &mdash;"
+
+msgid "(no title)"
+msgstr "(بدون عنوان)"
+
+msgid "<a href=\"%s\">&#8592; Sitemap Index</a>"
+msgstr "<a href=\"%s\">&#8592; ایندکس نقشه سایت</a>"
+
+msgid ""
+"<strong>Min Size: 112Χ112px</strong>.<br /> A squared image is preferred by "
+"the search engines."
+msgstr ""
+"<strong>حداقل اندازه: 112Χ112px</strong>.<br /> یک تصویر مربعی توسط موتورهای "
+"جستجو ترجیح داده می شود."
+
+msgid ""
+"<strong>Min Size: 1400x1400px, Max Size: 3000x3000px</strong>.<br /> The "
+"filesize should not exceed 0.5MB."
+msgstr ""
+"<strong>حداقل اندازه: 1400x1400px, حداکثر اندازه: 3000x3000px</strong>.<br /"
+"> حجم فایل نباید بیشتر از 0.5 مگابایت باشد."
+
+msgid ""
+"A Custom Watermark item could not be saved because the name field is empty."
+msgstr "یک آیتم واترمارک سفارشی ذخیره نمی‌شود زیرا فیلد نام خالی است."
+
+msgid "A plaintext description of the podcast."
+msgstr "توضیحات متنی ساده از پادکست."
+
+msgid "ALL UPPERCASE"
+msgstr "همه با حروف بزرگ"
+
+msgid "API Key"
+msgstr "کلید API"
+
+msgid "About Page"
+msgstr "صفحه درباره ما"
+
+msgid "Activate now"
+msgstr "فعال‌سازی"
+
+msgid "AdSense"
+msgstr "ادسنس(Adsense)"
+
+msgid ""
+"Add <code>alt</code> attributes for commenter profile pictures (avatars) "
+"automatically. The alt attribute value will be the username."
+msgstr ""
+"ویژگی <code>alt</code> را برای تصاویر پروفایل (آواتار) نظر دهنده‌ها به طور "
+"خودکار اضافه کنید. مقدار ویژگی alt نام کاربری خواهد بود."
+
+msgid "Add ALT attributes for avatars"
+msgstr "افزودن ویژگی alt به آواتارها"
+
+msgid "Add FAQ Schema Markup"
+msgstr "افزودن مارک آپ اسکیمای سوالات متداول"
+
+msgid "Add Image"
+msgstr "افزودن تصویر"
+
+msgid "Add Link"
+msgstr "افزودن لینک"
+
+msgid "Add New"
+msgstr "افزودن جدید"
+
+msgid "Add New %s"
+msgstr "افزودن %s جدید"
+
+msgid "Add New %s category"
+msgstr "افزودن دسته بندی %s جدید"
+
+msgid "Add New Category"
+msgstr "افزودن دسته بندی جدید"
+
+msgid "Add New Schema"
+msgstr "افزودن اسکیما جدید"
+
+msgid ""
+"Add Video schema to posts which have YouTube or Vimeo Video in the content. "
+"Applies to only those Posts/Pages/CPTs in which Autodetect Video Option is "
+"On."
+msgstr ""
+"اسکیمای ویدئویی را به پست هایی که ویدئوی یوتیوب یا ویمئو در محتوا دارند "
+"اضافه کنید. فقط برای آن دسته از پست ها/صفحات/CPT هایی که در آنها تشخیص "
+"خودکار گزینه روشن است اعمال می شود."
+
+msgid "Add Watermark"
+msgstr "افزودن واترمارک"
+
+msgid ""
+"Add a caption for all images without a caption automatically. The caption is "
+"dynamically applied when the content is displayed, the stored content is not "
+"changed."
+msgstr ""
+"یک کپشن برای همه تصاویر بدون کپشن به صورت خودکار اضافه کنید. هنگامی که محتوا "
+"نمایش داده می شود ، کپشن به صورت پویا اعمال می شود ، محتوای ذخیره شده تغییر "
+"نمی کند."
+
+msgid ""
+"Add a description for all images without a description automatically. The "
+"description is dynamically applied when the content is displayed, the stored "
+"content is not changed."
+msgstr ""
+"افزودن توضیحات برای همه تصاویر بدون توضیحات به صورت خودکار. هنگامی که محتوا "
+"نمایش داده می شود ، توضیحات به صورت پویا اعمال می شود ، محتوای ذخیره شده "
+"تغییر نمی کند."
+
+msgid "Add another"
+msgstr "افزودن یکی دیگر"
+
+msgid "Add copyright details if your show is copyrighted."
+msgstr "اگر نمایش شما دارای کپی رایت است، جزئیات آن را اضافه کنید."
+
+msgid "Add missing image caption"
+msgstr "افزودن عنوان تصویر گم شده"
+
+msgid "Add missing image description"
+msgstr "افزودن توضیحات تصویر گم شده"
+
+msgid "Add more image watermarks to choose from for the social thumbnails."
+msgstr ""
+"واترمارک تصویری بیشتری اضافه کنید تا از میان تصاویر بندانگشتی شبکه‌های "
+"اجتماعی انتخاب کنید."
+
+msgid "Add number"
+msgstr "افزودن شماره"
+
+msgid "Add or edit redirections by importing and exporting a CSV file."
+msgstr ""
+"با درون‌ریزی و برون ‌بری یک فایل CSV، ریدایرکت‌ها را اضافه یا ویرایش کنید."
+
+msgid ""
+"Add the URI prefixes you use for affiliate (cloaked) links, which redirect "
+"to external sites. These will not count as internal links in the content "
+"analysis. Add one per line."
+msgstr ""
+"پیشوند های آدرس URI مورد استفاده خود را برای لینک‌های همکاری در فروش (مخفی) "
+"که به سایت‌های خارجی ریدایرکت داده می‌شوند اضافه کنید. این‌ها به‌عنوان لینک‌های "
+"داخلی در تجزیه و تحلیل محتوا محسوب نمی‌شوند. در هر خط یکی اضافه کنید."
+
+msgid ""
+"Add the tracking prefix provided by your tracking service like Chartable, "
+"Podsights, Podtrac, etc."
+msgstr ""
+"پیشوند ردیابی ارائه شده توسط سرویس ردیابی خود مانند Chartable، Podsights، "
+"Podtrac و غیره را اضافه کنید."
+
+msgid "Add time"
+msgstr "افزودن زمان"
+
+msgid "Add to Category"
+msgstr "افزودن به دسته بندی"
+
+msgid "Added by the Rank Math SEO Plugin."
+msgstr "اضافه شده توسط افزونه رنک مث."
+
+msgid "Additional CSS code"
+msgstr "کد CSS اضافی"
+
+msgid ""
+"Additional CSS code to customize the appearance of the reports. Insert the "
+"CSS code directly, without the wrapping style tag. Please note that the CSS "
+"support is limited in email clients and the appearance may vary greatly."
+msgstr ""
+"کد CSS اضافی برای سفارشی کردن ظاهر گزارش ها. کد CSS را مستقیماً بدون تگ "
+"استایل بسته بندی وارد کنید. لطفاً توجه داشته باشید که پشتیبانی CSS در سرویس "
+"گیرندگان ایمیل محدود است و ظاهر آن ممکن است بسیار متفاوت باشد."
+
+msgid "Additional settings are available in the Rank Math SEO"
+msgstr "تنظیمات اضافی در افزونه رنک مث موجود است"
+
+msgid "Address"
+msgstr "آدرس"
+
+msgid "Address Format"
+msgstr "فرمت آدرس"
+
+msgid ""
+"Address where the reports will be sent. You can add multiple recipients "
+"separated with commas."
+msgstr "آدرس محل ارسال گزارش .می توانید چند گیرنده جدا شده با کاما اضافه کنید."
+
+msgid "Address, Suburb, Region, Zip or Landmark"
+msgstr "آدرس، محله، منطقه، کدپستی"
+
+msgid "Address:"
+msgstr "آدرس:"
+
+msgid "Advanced %s"
+msgstr "%s پیشرفته"
+
+msgid "Affiliate Link Prefix"
+msgstr "پیشوند لینک همکاری در فروش"
+
+msgid "Afghanistan"
+msgstr "افغانستان"
+
+msgid "Aland Islands"
+msgstr "جزایر آلند"
+
+msgid "Albania"
+msgstr "آلبانی"
+
+msgid "Algeria"
+msgstr "الجزایر"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All %s"
+msgstr "همه  %s"
+
+msgid "All %s categories"
+msgstr "همۀ دسته‌ بندی های %s"
+
+msgid "All Locations are part of the same Organization"
+msgstr "همه مکان‌ها بخشی از یک سازمان هستند"
+
+msgid "All Redirection Categories"
+msgstr "همۀ دسته‌ بندی های ریدایرکت‌"
+
+msgid "All Schemas"
+msgstr "همۀ اسکیماها"
+
+msgid "All Taxonomies"
+msgstr "همه طبقه بندی ها"
+
+msgid "Allowed filetypes: %s"
+msgstr "انواع فایل مجاز: %s"
+
+msgid "Alt"
+msgstr "جایگزین"
+
+msgid "Alt text set for the current image."
+msgstr "تنظیم متن Alt برای تصویر فعلی."
+
+msgid "Alternate Name"
+msgstr "نام جایگزین"
+
+msgid "American Samoa"
+msgstr "ساموآ آمریکا"
+
+msgid ""
+"An API Key is required to display embedded Google Maps on your site. Get it "
+"here: %s"
+msgstr ""
+"برای نمایش نقشه گوگل امبد شده در سایت شما ، یک کلید API لازم است. آن را از "
+"اینجا دریافت کنید: %s"
+
+msgid ""
+"An alternate version of your site name (for example, an acronym or shorter "
+"name)."
+msgstr "یک نسخه جایگزین از نام سایت شما (برای مثال، مخفف یا نام کوتاه تر)."
+
+msgid "Analytics"
+msgstr "آنالیز"
+
+msgid "Analytics Report"
+msgstr "گزارش آنالیز"
+
+msgid "Andorra"
+msgstr "آندورا"
+
+msgid "Angola"
+msgstr "آنگولا"
+
+msgid "Anguilla"
+msgstr "آنگویلا"
+
+msgid "Antarctica"
+msgstr "قطب جنوب"
+
+msgid "Antigua & Barbuda"
+msgstr "آنتیگوا و باربودا"
+
+msgid "Antigua and Barbuda"
+msgstr "آنتیگوا و باربوداس"
+
+msgid "Appearance Author"
+msgstr "نمایش نویسنده"
+
+msgid "Appearance Headline"
+msgstr "نمایش عنوان"
+
+msgid "Appearance Published Date"
+msgstr "نمایش تاریخ انتشار"
+
+msgid "Appearance URL"
+msgstr "نمایش URL"
+
+msgid ""
+"Are you sure you want to add Video Schema to the posts/pages with the video "
+"in the content? This action is irreversible."
+msgstr ""
+"آیا مطمئن هستید که می خواهید اسکیمای ویدئویی را به پستها/صفحات حاوی ویدئو در "
+"محتوا اضافه کنید؟ این عمل برگشت ناپذیر است."
+
+msgid ""
+"Are you sure you want to change the Schema type for the selected posts? "
+"Doing so may irreversibly delete the existing Schema data."
+msgstr ""
+"آیا مطمئنید که می‌خواهید نوع اسکیما را برای پست‌ های انتخاب شده تغییر دهید؟ با "
+"انجام این کار ممکن است داده‌های فعلی اسکیما به‌طور برگشت‌ناپذیر حذف شوند."
+
+msgid "Are you sure you want to import meta data from this CSV file?"
+msgstr "آیا مطمئنید که می‌خواهید متا دیتا ها را از این فایل CSV درون ‌ریزی کنید؟"
+
+msgid "Are you sure you want to import redirections from this CSV file?"
+msgstr "آیا مطمئنید که می‌خواهید ریدایرکت‌ها را از این فایل CSV درون‌ریزی کنید؟"
+
+msgid "Are you sure you want to stop the import process?"
+msgstr "آیا مطمئنید که می‌خواهید فرآیند درون‌ریزی را متوقف کنید؟"
+
+msgid "Argentina"
+msgstr "آرژانتین"
+
+msgid "Armenia"
+msgstr "ارمنستان"
+
+msgid "Article"
+msgstr "مقاله"
+
+msgid "Arts"
+msgstr "هنری"
+
+msgid "Aruba"
+msgstr "آروبا"
+
+msgid ""
+"As above, but the label that would be applicable for more than one location "
+"(default: RM Locations)."
+msgstr ""
+"همانطور که در بالا ذکر شد ، اما برچسبی که برای بیش از یک مکان قابل استفاده "
+"است (پیش فرض: RM Locations)."
+
+msgid "Australia"
+msgstr "استرالیا"
+
+msgid "Austria"
+msgstr "اتریش"
+
+msgid "Author Name"
+msgstr "نام نویسنده"
+
+msgid "Auto-generate image for the auto detected video."
+msgstr "تولید خودکار تصویر برای ویدیوی تشخیص داده شده به صورت خودکار."
+
+msgid "Autodetect Video"
+msgstr "شناسایی خودکار ویدئو"
+
+msgid "Autogenerate Image"
+msgstr "تولید خودکار تصویر"
+
+msgid "Automatic updates are not available."
+msgstr "به روز رسانی خودکار در دسترس نیست."
+
+msgid "Automatically detect the user's location as the starting point."
+msgstr "به طور خودکار مکان کاربر را به‌عنوان نقطه شروع شناسایی کنید."
+
+msgid "Avatar of %s"
+msgstr "آواتار %s"
+
+msgid "Average Position"
+msgstr "جایگاه نسبی"
+
+msgid "Azerbaijan"
+msgstr "آذربایجان"
+
+msgid "Bahamas"
+msgstr "باهاما"
+
+msgid "Bahrain"
+msgstr "بحرین"
+
+msgid "Bangladesh"
+msgstr "بنگلادش"
+
+msgid "Barbados"
+msgstr "باربادوس"
+
+msgid "Basic Summary"
+msgstr "خلاصه پایه"
+
+msgid "Belarus"
+msgstr "بلاروس"
+
+msgid "Belau"
+msgstr "بلاو"
+
+msgid "Belgium"
+msgstr "بلژیک"
+
+msgid "Belize"
+msgstr "بلیز"
+
+msgid "Benin"
+msgstr "بنین"
+
+msgid "Bermuda"
+msgstr "برمودا"
+
+msgid "Bhutan"
+msgstr "بوتان"
+
+msgid "Blog Post"
+msgstr "پست وبلاگ"
+
+msgid "Bolivia"
+msgstr "بولیوی"
+
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr "بونیر، سنت اواستیاوس و صبا"
+
+msgid "Book"
+msgstr "کتاب"
+
+msgid "Bosnia & Herzegovina"
+msgstr "بوسنی و هرزگوین"
+
+msgid "Bosnia and Herzegovina"
+msgstr "بوسني و هرزگوين"
+
+msgid "Botswana"
+msgstr "بوتسوانا"
+
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgid "Bouvet Island"
+msgstr "جزیره بووت"
+
+msgid "Brand"
+msgstr "برند"
+
+msgid "Brand value to use in Schema.org & OpenGraph markup."
+msgstr "مقدار برند برای استفاده در نشانه گذاری Schema.org و OpenGraph."
+
+msgid "Brazil"
+msgstr "برزیل"
+
+msgid "Breadcrumbs"
+msgstr "مسیر راهنما"
+
+msgid "Breadcrumbs Panel"
+msgstr "پنل مسیر سایت"
+
+msgid "Breadcrumbs are disabled in the Rank Math SEO"
+msgstr "مسیر راهنما در افزونه رنک مث غیرفعال است"
+
+msgid "British Indian Ocean Territory"
+msgstr "قلمرو اقیانوس هند انگلیس"
+
+msgid "British Virgin Islands"
+msgstr "جزایر بریتیش ویرجین"
+
+msgid "Brunei"
+msgstr "برونئی"
+
+msgid "Brunei Darussalam"
+msgstr "برونئی دارالسلام"
+
+msgid "Bulgaria"
+msgstr "بلغارستان"
+
+msgid "Burkina Faso"
+msgstr "بورکینا فاسو"
+
+msgid "Burundi"
+msgstr "بوروندی"
+
+msgid "Business"
+msgstr "کسب و کار"
+
+msgid "Business Type"
+msgstr "نوع کسب و کار"
+
+msgid "By"
+msgstr "توسط"
+
+msgid "CSV File"
+msgstr "فایل CSV"
+
+msgid "CSV Import"
+msgstr "درون‌ریزی CSV"
+
+msgid "CSV could not be imported:"
+msgstr "درون‌ریزی فایل CSV انجام نشد:"
+
+msgid "CSV could not be imported: File type error."
+msgstr "درون‌ریزی فایل CSV انجام نشد: خطای نوع فایل."
+
+msgid "CSV could not be imported: Upload failed."
+msgstr "درون‌ ریزی فایل CSV انجام نشد: بارگذاری ناموفق بود."
+
+msgid "CSV import canceled."
+msgstr "درون‌ ریزی فایل CSV لغو شد."
+
+msgid "CSV import completed."
+msgstr "درون‌ریزی CSV تکمیل شد."
+
+msgid "CSV import completed. Successfully imported %d rows."
+msgstr "درون‌ریزی CSV تکمیل شد. %d ردیف با موفقیت درون‌ریزی شد."
+
+msgid ""
+"CSV import in progress. You can see its progress and cancel it in the "
+"%1$sImport & Export panel%2$s."
+msgstr ""
+"درون ریزی CSV در حال انجام است. می توانید پیشرفت آن را مشاهده کرده و آن را "
+"در %1$sپنل درون ریزی و برون ریزی%2$s لغو کنید."
+
+msgid "CSV import is in progress..."
+msgstr "درون‌ریزی CSV در حال پردازش است..."
+
+msgid "Cambodia"
+msgstr "کامبوج"
+
+msgid "Cameroon"
+msgstr "کامرون"
+
+msgid "Canada"
+msgstr "کانادا"
+
+msgid "Cancel Import"
+msgstr "لغو درون‌ ریزی"
+
+msgid "Cannot Update"
+msgstr "نمی توان به روز کرد"
+
+msgid "Canonical URL"
+msgstr "آدرس اینترنتی متعارف"
+
+msgid "Cape Verde"
+msgstr "کیپ ورد"
+
+msgid ""
+"Capitalization settings for the <code>alt</code> attribute values. This will "
+"be applied for <strong>all</strong> <code>alt</code> attributes."
+msgstr ""
+"تنظیمات حروف بزرگ برای مقادیر ویژگی های <code>alt</code>. این تنظیم بر روی "
+"<strong>همه</strong> ویژگی های <code> alt </code> اعمال خواهد شد."
+
+msgid ""
+"Capitalization settings for the <code>title</code> attribute values. This "
+"will be applied for <strong>all</strong> <code>title</code> attributes."
+msgstr ""
+"تنظیمات حروف بزرگ برای مقادیر ویژگی<code>عنوان</code>. این تنظیم بر روی "
+"<strong>همه</strong> ویژگی های<code>عنوان</code> اعمال خواهد شد."
+
+msgid ""
+"Capitalization settings for the image captions.  This will be applied for "
+"<strong>all</strong> image captions."
+msgstr ""
+"تنظیمات حروف بزرگ برای کپشن تصویر. این مورد برای <strong> همه </strong> کپشن "
+"های تصویر اعمال می شود."
+
+msgid ""
+"Capitalization settings for the image descriptions. This will be applied for "
+"<strong>all</strong> image descriptions."
+msgstr ""
+"تنظیمات حروف بزرگ برای توضیحات تصویر. این مورد برای <strong> همه </strong> "
+"توضیحات تصویر اعمال می شود."
+
+msgid "Caption"
+msgstr "کپشن"
+
+msgid "Caption format"
+msgstr "فرمت کپشن"
+
+msgid "Caribbean Netherlands"
+msgstr "کارائیب هلند"
+
+msgid "Catalog"
+msgstr "کاتالوگ"
+
+msgid "Category"
+msgstr "دسته بندی"
+
+msgid "Cayman Islands"
+msgstr "جزایر کیمن"
+
+msgid "Center"
+msgstr "مرکز"
+
+msgid "Central African Republic"
+msgstr "جمهوری آفریقای مرکزی"
+
+msgid "Chad"
+msgstr "چاد"
+
+msgid "Chamber of Commerce ID"
+msgstr "محفظه شناسه تجارت"
+
+msgid "Change alt attribute casing"
+msgstr "تغییر طرح ویژگی alt"
+
+msgid "Change caption casing"
+msgstr "تغییر طرح کپشن"
+
+msgid "Change description casing"
+msgstr "تغییر طرح توضیحات"
+
+msgid "Change title casing"
+msgstr "تغییر طرح عنوان"
+
+msgid ""
+"Check this to import meta fields only if their current meta value is empty."
+msgstr ""
+"برای درون ریزی فیلدهای متا فقط در صورتی که مقدار متای فعلی آنها خالی باشد ، "
+"این مورد را انتخاب کنید."
+
+msgid "Check this to only create non-existing redirections."
+msgstr "این گزینه را فقط برای ایجاد ریدایرکت‌های ناموجود انتخاب کنید."
+
+msgid "Chile"
+msgstr "شیلی"
+
+msgid "China"
+msgstr "چین"
+
+msgid "Choose a country"
+msgstr "انتخاب یک کشور"
+
+msgid "Choose the object types to export."
+msgstr "انواع آبجکت ها را برای برون ‌بری انتخاب کنید."
+
+msgid "Choose whether the site represents a person or an organization."
+msgstr "اینکه آیا سایت نماینده یک شخص است یا یک سازمان را انتخاب کنید."
+
+msgid ""
+"Choose your Sitemap configuration and select which type of posts or pages "
+"you want to include in your Sitemaps. %s"
+msgstr ""
+"پیکربندی نقشه سایت خود را انتخاب کرده و نوع پست یا صفحاتی را که می خواهید در "
+"نقشه سایت خود قرار دهید انتخاب کنید. %s"
+
+msgid "Christmas Island"
+msgstr "جزیره کریسمس"
+
+msgid "Clear Filter"
+msgstr "پاک کردن فیلتر"
+
+msgid "Closed"
+msgstr "بسته"
+
+msgid "Closed label"
+msgstr "برچسب بسته"
+
+msgid "Cocos (Keeling) Islands"
+msgstr "جزایر کوکوس (کایلینگ)"
+
+msgid "Colombia"
+msgstr "کلمبیا"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid ""
+"Color hex code or any other valid value for the <code>background:</code> CSS "
+"property."
+msgstr ""
+"کد رنگی hex یا هر مقدار معتبر دیگر برای <code> background: </code> خاصیت CSS."
+
+msgid "Columns number mismatch."
+msgstr "تعداد ستون‌ها مطابقت ندارند."
+
+msgid "Comedy"
+msgstr "کمدی"
+
+msgid "Comoros"
+msgstr "کومور"
+
+msgid "Competitor Analysis"
+msgstr "آنالیز رقبا"
+
+msgid "Complete"
+msgstr "تکمیل"
+
+msgid "Congo"
+msgstr "کنگو"
+
+msgid "Congo (Brazzaville)"
+msgstr "کنگو (برازاویل)"
+
+msgid "Congo (Kinshasa)"
+msgstr "کنگو (کینشاسا)"
+
+msgid "Congo - Brazzaville"
+msgstr "کنگو (برازاویل)"
+
+msgid "Congo - Kinshasa"
+msgstr "کنگو (کینشاسا)"
+
+msgid "Congo, the Democratic Republic of the"
+msgstr "کنگو، جمهوری دموکراتیک"
+
+msgid "Cons"
+msgstr "معایب"
+
+msgid "Contact Page"
+msgstr "صفحه تماس"
+
+msgid ""
+"Conversion started. A success message will be shown here once the process "
+"completes. You can close this page."
+msgstr ""
+"تبدیل آغاز شد. پس از اتمام مراحل، پیام موفقیتی در اینجا نشان داده می شود. می "
+"توانید این صفحه را ببندید."
+
+msgid "Cook Islands"
+msgstr "جزایر کوک"
+
+msgid "Copy all active redirections to the .htaccess file."
+msgstr "کپی همۀ ریدایرکت‌های فعال در فایل htaccess. ."
+
+msgid "Copyright Text"
+msgstr "متن كپي‌رايت"
+
+msgid "Costa Rica"
+msgstr "کاستاریکا"
+
+msgid "Cote D'ivoire"
+msgstr "ساحل عاج"
+
+msgid "Could not import redirection."
+msgstr "درون‌ریزی ریدایرکت انجام نشد."
+
+msgid "Country"
+msgstr "کشور"
+
+msgid "Course"
+msgstr "دوره"
+
+msgid ""
+"Create a News Sitemap for your news-related content. You only need a News "
+"sitemap if you plan on posting news-related content on your website."
+msgstr ""
+"برای محتوای مرتبط با اخبار خود نقشه سایت اخبار ایجاد کنید. تنها در صورتی که "
+"قصد ارسال مطالب مرتبط با اخبار در وب سایت خود را دارید ، به یک نقشه سایت "
+"خبری نیاز دارید."
+
+msgid "Created"
+msgstr "ایجاد شده"
+
+msgid "Croatia"
+msgstr "کرواسی"
+
+msgid "Cuba"
+msgstr "کوبا"
+
+msgid "Curaçao"
+msgstr "کوراسائو"
+
+msgid "Custom"
+msgstr "سفارشی"
+
+msgid "Custom Canonical URL"
+msgstr "آدرس URL متعارف سفارشی"
+
+msgid "Custom Canonical URL removed from %1$d %2$s."
+msgstr "آدرس اینترنتی متعارف سفارشی از %1$d %2$s حذف شد."
+
+msgid "Custom Fields"
+msgstr "فیلدهای سفارشی"
+
+msgid "Custom Image Watermarks"
+msgstr "واترمارک سفارشی تصویر"
+
+msgid "Custom Meta Description"
+msgstr "توضیحات متای سفارشی"
+
+msgid "Custom Meta Title"
+msgstr "عنوان متای سفارشی"
+
+msgid "Custom Mode %s"
+msgstr "حالت سفارشی %s"
+
+msgid ""
+"Customize the label of the option users can use can click to get directions "
+"to your business location on the frontend."
+msgstr ""
+"برچسب گزینه ای را که کاربران می توانند روی آن کلیک کنند ، سفارشی کنید تا به "
+"مسیر کسب و کار شما در نمای فرانت دسترسی پیدا کند."
+
+msgid "Cyprus"
+msgstr "قبرس"
+
+msgid "Czech Republic"
+msgstr "جمهوری چک"
+
+msgid "Czechia"
+msgstr "چک"
+
+msgid "Côte d'Ivoire"
+msgstr "ساحل عاج"
+
+msgid "Data Sets"
+msgstr "مجموعه داده‌ها"
+
+msgid ""
+"Data import will not work for this service as sufficient permissions are not "
+"given."
+msgstr ""
+"درون ریزی داده برای این سرویس کار نخواهد کرد زیرا مجوزهای کافی داده نشده است."
+
+msgid "DataSet"
+msgstr "مجموعه داده"
+
+msgid "Dataset"
+msgstr "مجموعه داده"
+
+msgid "Date Created"
+msgstr "تاریخ ایجاد"
+
+msgid "Date Posted"
+msgstr "تاریخ پست"
+
+msgid "Default"
+msgstr "پیش‌‌فرض"
+
+msgid "Default Thumbnail Watermark"
+msgstr "واترمارک بندانگشتی پیش‌فرض"
+
+msgid "Deleted"
+msgstr "حذف شده"
+
+msgid "Denmark"
+msgstr "دانمارک"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Description format"
+msgstr "فرمت توضیحات"
+
+msgid "Detect Location"
+msgstr "شناسایی مکان"
+
+msgid "Director"
+msgstr "کارگردان"
+
+msgid ""
+"Display the Global Identified on Product Page along with other product "
+"details."
+msgstr "شناسه عمومی را در صفحه محصول به همراه سایر جزئیات محصول نمایش دهید."
+
+msgid "Distribution"
+msgstr "اکران"
+
+msgid "Djibouti"
+msgstr "جیبوتی"
+
+msgid "Do not overwrite existing data"
+msgstr "داده های موجود را رونویسی نکنید"
+
+msgid "Do not update current redirections"
+msgstr "ریدایرکت‌های فعلی را به ‌روزرسانی نکنید"
+
+msgid "Dominica"
+msgstr "دومینیکا"
+
+msgid "Dominican Republic"
+msgstr "جمهوری دمینیکان"
+
+msgid "Don't add opening hours data in Schema"
+msgstr "داده‌های مربوط به ساعات کاری را در اسکیما اضافه نکنید"
+
+msgid "Easy %s"
+msgstr "%s آسان"
+
+msgid "Ecuador"
+msgstr "اکوادور"
+
+msgid "Edit %s"
+msgstr "ویرایش %s"
+
+msgid "Edit %s category"
+msgstr "ویرایش دسته بندی %s"
+
+msgid "Edit Category"
+msgstr "ویرایش دسته بندی"
+
+msgid "Edit Schema"
+msgstr "ویرایش اسکیما"
+
+msgid "Education"
+msgstr "تحصیلات"
+
+msgid "Education Required"
+msgstr "تحصیلات مورد نیاز"
+
+msgid "Egypt"
+msgstr "مصر"
+
+msgid "El Salvador"
+msgstr "ال سالوادور"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "Employment Type "
+msgstr "نوع اشتغال "
+
+msgid "Empty column data."
+msgstr "داده های ستون خالی است."
+
+msgid ""
+"Enable if all of the locations where you serve customers are a part of the "
+"same legal entity."
+msgstr ""
+"اگر همه مکانهایی که به مشتریان خدمات می دهید بخشی از یک شخص حقوقی یکسان "
+"هستند ، آن را فعال کنید."
+
+msgid "Enable updates"
+msgstr "فعال‌سازی به‌روزرسانی‌ها"
+
+msgid "Enhanced Search"
+msgstr "جستجوی پیشرفته"
+
+msgid ""
+"Enter a site URL to see how it ranks for the same SEO criteria as your site."
+msgstr ""
+"یک URL سایت را وارد کنید تا ببینید چه رتبه‌ای برای همان معیارهای سئو سایت شما "
+"دارد."
+
+msgid "Enter the name of your site to appear in search results."
+msgstr "نام سایت خود را وارد کنید تا در نتایج جستجو ظاهر شود."
+
+msgid ""
+"Enter the number of days to keep Analytics data in your database. The "
+"maximum allowed days are 180. Though, 2x data will be stored in the DB for "
+"calculating the difference properly."
+msgstr ""
+"تعداد روزهایی را که میخواهید داده‌های آنالیتیکس در پایگاه داده شما نگهداری "
+"شوند وارد کنید. حداکثر روزهای مجاز 180 است. اگرچه داده‌های 2x (دو برابر آن "
+"بازه زمانی) برای محاسبه صحیح تفاوت در پایگاه داده ذخیره می‌شوند."
+
+msgid "Episode"
+msgstr "اپیزود"
+
+msgid "Equatorial Guinea"
+msgstr "گینه استوایی"
+
+msgid "Eritrea"
+msgstr "اریتره"
+
+msgid "Estimated Cost:"
+msgstr "هزینه تخمینی:"
+
+msgid "Estonia"
+msgstr "استونی"
+
+msgid "Ethiopia"
+msgstr "اتیوپی"
+
+msgid "Event"
+msgstr "رویداد"
+
+msgid "Every 15 Days"
+msgstr "هر 15 روز"
+
+msgid "Every 7 Days"
+msgstr "هر 7 روز"
+
+msgid "Example: /get/"
+msgstr "مثال: /get/"
+
+msgid "Exclude %s Terms "
+msgstr "مستثی کردن %s شرایط "
+
+msgid "Experience Required"
+msgstr "تجربه مورد نیاز"
+
+msgid "Export"
+msgstr "برون‌ریزی"
+
+msgid "Export 404 Logs"
+msgstr "برون ریزی گزارش‌های 404"
+
+msgid "Export CSV"
+msgstr "برون ریزی CSV"
+
+msgid "Export Redirections"
+msgstr "برون‌ ریزی ریدایرکت‌ ها"
+
+msgid ""
+"Export and download 404 logs from a selected period of time in the form of a "
+"CSV file. Leave the from/to fields empty to export all logs."
+msgstr ""
+"گزارش 404 را از یک دوره زمانی انتخاب شده در قالب یک فایل CSV برون ریزی و "
+"دانلود کنید. فیلد های از/تا را خالی بگذارید تا همه گزارش ها برون ریزی شوند."
+
+msgid "Export current redirections as a CSV file."
+msgstr "برون‌بری ریدایرکت ‌های فعلی در یک فایل CSV."
+
+msgid "External Link Icon"
+msgstr "آیکن لینک خارجی"
+
+msgid "FAQ"
+msgstr "سوالات متداول"
+
+msgid "FULL REPORT"
+msgstr "گزارش کامل"
+
+msgid "Fact Check"
+msgstr "بررسی واقعیت"
+
+msgid "FactCheck"
+msgstr "بررسی واقعیت"
+
+msgid "Falkland Islands"
+msgstr "جزایر فالکلند"
+
+msgid "Falkland Islands (Islas Malvinas)"
+msgstr "جزایر فالکلند (مالویناس)"
+
+msgid "Falkland Islands (Malvinas)"
+msgstr "جزایر فالکلند (مالویناس)"
+
+msgid "Faroe Islands"
+msgstr "جزایر فارو"
+
+msgid "Fax"
+msgstr "فکس"
+
+msgid "Fiji"
+msgstr "فیجی"
+
+msgid "Filter"
+msgstr "فیلتر"
+
+msgid "Filter by Schema Type"
+msgstr "فیلتر بر اساس نوع اسکیما"
+
+msgid "Find"
+msgstr "یافتن"
+
+msgid "Finland"
+msgstr "فنلاند"
+
+msgid "For more information, please see %s."
+msgstr "برای اطلاعات بیشتر لطفاً %s را ببینید."
+
+msgid ""
+"For the advanced users who want to control every SEO aspect of the website. "
+"You are offered options to change everything and have full control over the "
+"website’s SEO."
+msgstr ""
+"برای کاربران پیشرفته ای که می خواهند هر موردی از سئو در وب سایت را کنترل "
+"کنند. به شما گزینه هایی برای تغییر همه چیز و کنترل کامل سئوی وب سایت را "
+"ارائه می دهد."
+
+msgid ""
+"For websites where you only want to change the basics and let Rank Math do "
+"most of the heavy lifting. Most settings are set to default as per industry "
+"best practices. One just has to set it and forget it."
+msgstr ""
+"این گزینه برای وبسایت‌هایی کاربرد دارد که صرفاً می‌خواهید تنظیمات پایه را تغییر "
+"دهید و اجازه دهید که رنک مث خودش اکثر تنظیمات جزئی و پیچیده را انجام دهد. "
+"بیشتر تنظیمات طبق بهترین استانداردهای بهینه‌سازی به صورت پیش‌فرض پیکربندی "
+"می‌شوند. فقط کافی است که یک بار تنظیمات را پیکربندی کنید و سپس آن را فراموش "
+"کنید."
+
+msgid ""
+"For your video content, a Video Sitemap is a recommended step for better "
+"rankings and inclusion in the Video search."
+msgstr ""
+"برای محتوای ویدئویی شما، استفاده از یک نقشه سایت ویدئو یک مرحله توصیه شده "
+"برای رتبه‌ بندی بهتر و درج در جستجوی ویدئو است."
+
+msgid "Format"
+msgstr "فرمت"
+
+msgid "Format used for the new captions."
+msgstr "فرمت برای کپشن جدید استفاده می‌شود."
+
+msgid "Format used for the new descriptions."
+msgstr "فرمت برای توضیحات جدید استفاده می‌شود."
+
+msgid ""
+"Format used when the address is displayed using the "
+"<code>[rank_math_contact_info]</code> shortcode.<br><strong>Available Tags: "
+"{address}, {locality}, {region}, {postalcode}, {country}, {gps}</strong>"
+msgstr ""
+"فرمتی که هنگام نمایش آدرس با استفاده از کد کوتاه "
+"<code>[rank_math_contact_info]</code> استفاده می شود.<br><strong>برچسب های "
+"در دسترس: {address}, {locality}, {region}, {postalcode}, {country}, {gps}</"
+"strong>"
+
+msgid "Format: +1-401-555-1212"
+msgstr "فرمت: +1-401-555-1212"
+
+msgid "France"
+msgstr "فرانسه"
+
+msgid "Free version"
+msgstr "نسخه رایگان"
+
+msgid "French Guiana"
+msgstr "گیانای فرانسه"
+
+msgid "French Polynesia"
+msgstr "پلینزی فرانسه"
+
+msgid "French Southern Territories"
+msgstr "سرزمین های جنوبی فرانسه"
+
+msgid "Friday"
+msgstr "جمعه"
+
+msgid "From date"
+msgstr "از تاریخ"
+
+msgid "GTIN"
+msgstr "GTIN"
+
+msgid "GTIN-12"
+msgstr "GTIN-12"
+
+msgid "GTIN-13"
+msgstr "GTIN-13"
+
+msgid "GTIN-14"
+msgstr "GTIN-14"
+
+msgid "GTIN-8"
+msgstr "GTIN-8"
+
+msgid "Gabon"
+msgstr "گابون"
+
+msgid "Gambia"
+msgstr "گامبیا"
+
+msgid "Games &amp; Hobbies"
+msgstr "بازی و سرگرمی"
+
+msgid "Generate"
+msgstr "تولید"
+
+msgid "Generate Video Schema for Old Posts/Pages"
+msgstr "تولید اسکیمای ویدئو برای صفحات/پست های قدیمی"
+
+msgid "Geo Coordinates"
+msgstr "مختصات جغرافیایی"
+
+msgid "Georgia"
+msgstr "گرجستان"
+
+msgid "Germany"
+msgstr "آلمان"
+
+msgid "Ghana"
+msgstr "غنا"
+
+msgid "Gibraltar"
+msgstr "جبل الطارق"
+
+msgid "Global Identifier"
+msgstr "شناسه عمومی"
+
+msgid "Global Identifier key to use in the Product Schema."
+msgstr "کلید شناسایی عمومی برای استفاده در طرح محصول."
+
+msgid "Global Identifier label"
+msgstr "برچسب شناسه عمومی"
+
+msgid "Global Identifier label to show on Product Page."
+msgstr "برچسب شناسه عمومی برای نمایش در صفحه محصول."
+
+msgid "Google Core Updates"
+msgstr "به روز رسانی هسته گوگل"
+
+msgid "Google Core Updates in the Graphs"
+msgstr "به روز رسانی هسته گوگل در نمودارها"
+
+msgid "Google Maps API Key"
+msgstr "کلید API نقشه گوگل"
+
+msgid "Google Maps Embed API"
+msgstr "امبد API نقشه گوگل"
+
+msgid "Google News Publication Name"
+msgstr "نام انتشار گوگل نیوز"
+
+msgid "Government &amp; Organizations"
+msgstr "دولت و سازمان ها"
+
+msgid "Greece"
+msgstr "یونان"
+
+msgid "Greenland"
+msgstr "گرینلند"
+
+msgid "Grenada"
+msgstr "گرنادا"
+
+msgid "Guadeloupe"
+msgstr "گوادالوپ"
+
+msgid "Guam"
+msgstr "گوام"
+
+msgid "Guatemala"
+msgstr "گواتمالا"
+
+msgid "Guernsey"
+msgstr "گورنسی"
+
+msgid "Guinea"
+msgstr "گینه"
+
+msgid "Guinea-Bissau"
+msgstr "گینه بیسائو"
+
+msgid "Guyana"
+msgstr "گایانا"
+
+msgid "HTML Tag"
+msgstr "برچسب HTML"
+
+msgid "Haiti"
+msgstr "هائیتی"
+
+msgid "Health"
+msgstr "سلامت"
+
+msgid "Heard Island and McDonald Islands"
+msgstr "جزیره مک دونالد و جزایر هرد"
+
+msgid "Heard Island and Mcdonald Islands"
+msgstr "جزایر ایسلند و جزایر مک دونالد"
+
+msgid "Hide Opening Hours"
+msgstr "مخفی کردن ساعات کاری"
+
+msgid "Hide Sitemap"
+msgstr "پنهان کردن نقشه سایت"
+
+msgid "Hide route"
+msgstr "پنهان کردن مسیر"
+
+msgid "Hide the sitemap from normal visitors?"
+msgstr "نقشه سایت را برای بازدیدکنندگان معمولی مخفی می‌کنید؟"
+
+msgid "Hiring Organization "
+msgstr "سازمان استخدام "
+
+msgid "Hits"
+msgstr "بازدیدها"
+
+msgid "Holy See (Vatican City State)"
+msgstr "سفر مقدس (ایالت شهر واتیکان)"
+
+msgid "Honduras"
+msgstr "هندوراس"
+
+msgid "Hong Kong"
+msgstr "هنگ کنگ"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "How To"
+msgstr "چگونه (How To)"
+
+msgid "Hungary"
+msgstr "مجارستان"
+
+msgid "Hybrid"
+msgstr "هایبرید"
+
+msgid "ISBN"
+msgstr "ISBN"
+
+msgid "Iceland"
+msgstr "ایسلند"
+
+msgid "Identifier"
+msgstr "شناسه"
+
+msgid ""
+"If an imported redirection differs from an existing redirection (or another "
+"imported redirection) only by the source value, then those redirections will "
+"be merged into a single redirection with multiple sources. You can change "
+"this behavior with the %s filter hook."
+msgstr ""
+"اگر یک ریدایرکت وارد شده با یک ریدایرکت موجود (یا یک ریدایرکت وارد شده دیگر) "
+"فقط با مقدار منبع متفاوت باشد، آن ریدایرکت در یک ریدایرکت واحد با چندین منبع "
+"ادغام خواهند شد. می توانید این رفتار را با هوک فیلتر %s تغییر دهید."
+
+msgid ""
+"If the numeric ID is specified in the %s column, then the redirection will "
+"be edited. If it is not set or empty, then a new redirection will be created."
+msgstr ""
+"اگر شناسه عددی در ستون %s مشخص شده باشد، آن ریدایرکت ویرایش می‌شود. اگر تنظیم "
+"نباشد یا خالی باشد، یک ریدایرکت جدید ایجاد می‌شود."
+
+msgid ""
+"If you can see the site data in your Search Console and Analytics accounts, "
+"but not here, then %1$s try reconnecting your account %2$s and make sure "
+"that the correct properties are selected in the %1$s Analytics Settings%2$s."
+msgstr ""
+"اگر می‌توانید داده‌های سایت را در حساب‌های Search Console و Analytics خود "
+"مشاهده کنید، اما اینجا نیست، %1$s مجددا حساب خود را وصل کنید %2$s و مطمئن "
+"شوید که گزینه‌های صحیح در %1$s تنظیمات آنالیتیکس%2$s انتخاب شده‌اند."
+
+msgid "Image Alt"
+msgstr "جایگزین (Alt) عکس"
+
+msgid "Image Title"
+msgstr "عنوان تصویر"
+
+msgid "Import"
+msgstr "درون‌ریزی"
+
+msgid "Import & Export"
+msgstr "درون‌ریزی و برون‌ریزی"
+
+msgid "Import CSV"
+msgstr "درون ریزی CSV"
+
+msgid "Import Redirections"
+msgstr "درون‌ ریزی ریدایرکت‌ها"
+
+msgid "Import SEO meta data for posts, terms, and users from a CSV file."
+msgstr ""
+"متا دیتا های سئو را برای پست‌ها، شرایط و کاربران از یک فایل CSV درون‌ریزی کنید."
+
+msgid ""
+"Import a CSV file to create or update redirections. The file must include at "
+"least the following columns: %s"
+msgstr ""
+"برای ایجاد یا به‌ روزرسانی ریدایرکت‌ ها، یک فایل CSV درون ‌ریزی کنید. این فایل "
+"باید حداقل شامل ستون‌های زیر باشد: %s"
+
+msgid "Import could not be canceled."
+msgstr "امکان لغو درون‌ریزی وجود ندارد."
+
+msgid "Import could not be canceled: invalid nonce. Please try again."
+msgstr ""
+"امکان لغو درون‌ریزی وجود ندارد: کلید سری وردپرس معتبر نیست. لطفاً دوباره تلاش "
+"کنید."
+
+msgid ""
+"Import could not be canceled: you are not allowed to import content to this "
+"site."
+msgstr ""
+"امکان لغو درون‌ریزی وجود ندارد: شما مجاز به درون‌ ریزی محتوا به این سایت "
+"نیستید."
+
+msgid "Import failed."
+msgstr "درون ریزی انجام نشد."
+
+msgid "Import finished. In the next steps you can review the settings."
+msgstr "درون‌ریزی به پایان رسید. در مراحل بعدی می‌توانید تنظیمات را مرور کنید."
+
+msgid "Import in progress..."
+msgstr "درون ‌ریزی در حال پردازش..."
+
+msgid "Import successful."
+msgstr "درون‌ریزی با موفقیت انجام شد."
+
+msgid "Imported %d rows."
+msgstr "%d ردیف درون‌ریزی شد."
+
+msgid "Impressions"
+msgstr "نمایش‌ها"
+
+msgid "Include Images"
+msgstr "شامل تصاویر"
+
+msgid "Include Images from the ACF Fields."
+msgstr "شامل تصاویر از فیلدهای ACF."
+
+msgid "Include KML File in the Sitemap"
+msgstr "فایل KML را در نقشه سایت قرار دهید"
+
+msgid "Include Only Tracked Keywords"
+msgstr "فقط شامل کلمات کلیدی ردیابی شده"
+
+msgid "Include Sections"
+msgstr "شمال بخش ها"
+
+msgid "Include business locations in site-wide search results."
+msgstr "مکانهای تجاری را در نتایج جستجوی کل سایت گنجانید."
+
+msgid "Include deactivated redirections"
+msgstr "شامل ریدایرکت ‌های غیرفعال"
+
+msgid "Include images added in the ACF fields."
+msgstr "شامل تصاویر اضافه شده از فیلدهای ACF."
+
+msgid "Include read-only columns (SEO score and link counts)"
+msgstr "شامل ستون‌های فقط-خواندنی (نمره سئو و تعداد لینک‌ها)"
+
+msgid ""
+"Include reference to images from the post content in sitemaps. This helps "
+"search engines index your images better."
+msgstr ""
+"شامل ارجاع به تصاویر از محتوای پست در نقشه‌های سایت، این به موتورهای جستجو "
+"کمک می کند تصاویر شما را بهتر ایندکس کنند."
+
+msgid "Index"
+msgstr "ایندکس"
+
+msgid "India"
+msgstr "هند"
+
+msgid "Indicates whether the podcast is explicit language or adult content."
+msgstr "نشان می دهد که پادکست به زبان صریح است یا محتوای بزرگسالان."
+
+msgid "Indonesia"
+msgstr "اندونزی"
+
+msgid "Insert/edit link"
+msgstr "درج/ویرایش لینک"
+
+msgid "Invalid nonce."
+msgstr "فعلا نامعتبر."
+
+msgid "Iran"
+msgstr "ایران"
+
+msgid "Iran, Islamic Republic of"
+msgstr "ایران"
+
+msgid "Iraq"
+msgstr "عراق"
+
+msgid "Ireland"
+msgstr "ایرلند"
+
+msgid "Is Explicit"
+msgstr "صریح"
+
+msgid "Isle of Man"
+msgstr "جزیره ی من"
+
+msgid "Israel"
+msgstr "اسرائیل"
+
+msgid "It seems that there are no stats to show right now."
+msgstr "به نظر می‌رسد در حال حاضر هیچ آماری برای نمایش وجود ندارد."
+
+msgid ""
+"It seems that you don't have an active subscription for %1$s. Please see "
+"%2$sdetails and pricing%3$s."
+msgstr ""
+"به نظر می‌رسد که شما هیچ اشتراک فعالی را برای %1$s در حساب کاربری خود ندارید. "
+"لطفاً %2$sجزئیات و قیمت%3$s را ببینید."
+
+msgid "Italy"
+msgstr "ایتالیا"
+
+msgid "Items processed: %1$s/%2$s"
+msgstr "آیتم‌های پردازش شده: %1$s/%2$s"
+
+msgid "Ivory Coast"
+msgstr "ساحل عاج"
+
+msgid "Jamaica"
+msgstr "جامائیکا"
+
+msgid "Japan"
+msgstr "ژاپن"
+
+msgid "Jersey"
+msgstr "جرسی"
+
+msgid "Job Location"
+msgstr "موقعیت شغل"
+
+msgid "Job Posting"
+msgstr "ارسال شغل"
+
+msgid "Job Type"
+msgstr "نوع شغل"
+
+msgid "Jordan"
+msgstr "اردن"
+
+msgid ""
+"KML is a file format used to display geographic data in an Earth browser "
+"such as Google Earth. More information: <a href=\"%s\" target=\"_blank"
+"\">Locations KML</a>"
+msgstr ""
+"KML فرمت فایلی است که برای نمایش داده های جغرافیایی در مرورگر Earth مانند "
+"Google Earth استفاده می شود. اطلاعات بیشتر: <a href=\"%s\" target=\"_blank"
+"\">مکان های KML</a>"
+
+msgid "Kazakhstan"
+msgstr "قزاقستان"
+
+msgid "Kenya"
+msgstr "کنیا"
+
+msgid "Keywords"
+msgstr "کلمات کلیدی"
+
+msgid "Kids &amp; Family"
+msgstr "بچه و خانواده"
+
+msgid "Kilometers"
+msgstr "کیلومتر"
+
+msgid "Kiribati"
+msgstr "کیریباتی"
+
+msgid "Korea, Democratic People's Republic of"
+msgstr "کره، جمهوری دموکراتیک"
+
+msgid "Korea, Republic of"
+msgstr "جمهوری کره"
+
+msgid "Kosovo"
+msgstr "کوزوو"
+
+msgid "Kuwait"
+msgstr "کویت"
+
+msgid "Kyrgyzstan"
+msgstr "قرقیزستان"
+
+msgid "Lao People's Democratic Republic"
+msgstr "لائوس، جمهوری دموکراتیک خلق"
+
+msgid "Laos"
+msgstr "لائوس"
+
+msgid "Last Mod."
+msgstr "آخرین حالت."
+
+msgid "Latitude and longitude values separated by comma."
+msgstr "مقادیر عرض جغرافیایی و طول جغرافیایی که با کاما از هم جدا شده‌اند."
+
+msgid "Latvia"
+msgstr "لتونی"
+
+msgid "Learn more"
+msgstr "اطلاعات بیشتر"
+
+msgid "Learn more about <a href=\"%s\" target=\"_blank\">Video Sitemap</a>."
+msgstr ""
+"اطلاعات بیشتر درباره <a href=\"%s\" target=\"_blank\">نقشه سایت ویدئو</a>."
+
+msgid "Learn more about <a href=\"%s\" target=\"_blank\">XML Sitemaps</a>."
+msgstr ""
+"اطلاعات بیشتر درباره <a href=\"%s\" target=\"_blank\">نقشه سایت XML</a>."
+
+msgid "Learn more."
+msgstr "اطلاعات بیشتر."
+
+msgid "Lebanon"
+msgstr "لبنان"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Lesotho"
+msgstr "لسوتو"
+
+msgid "Liberia"
+msgstr "لیبریا"
+
+msgid "Libya"
+msgstr "ليبي"
+
+msgid "Libyan Arab Jamahiriya"
+msgstr "جاماحیریه عرب لیبی"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "Liechtenstein"
+msgstr "لیختنشتاین"
+
+msgid ""
+"Limit the number of locations shown on your website to those nearest your "
+"user."
+msgstr ""
+"تعداد مکانهای نشان داده شده در وب سایت خود را به نزدیکترین کاربر خود محدود "
+"کنید."
+
+msgid "Link Color"
+msgstr "رنگ لینک"
+
+msgid "Link Title"
+msgstr "عنوان لینک"
+
+msgid "Link inserted."
+msgstr "لینک درج شد."
+
+msgid "Link selected."
+msgstr "لینک انتخاب شد."
+
+msgid "Link to Full Report"
+msgstr "لینک به گزارش کامل"
+
+msgid ""
+"List of custom fields name to check for video content. Add one per line."
+msgstr ""
+"لیست نام فیلدهای سفارشی برای بررسی محتوای ویدئو. در هر خط یکی اضافه کنید."
+
+msgid "Lithuania"
+msgstr "لیتوانی"
+
+msgid "Local Business"
+msgstr "کسب‌و‌کار محلی"
+
+msgid "Local Sitemap"
+msgstr "نقشه سایت محلی"
+
+msgid "Location"
+msgstr "موقعیت"
+
+msgid "Location Detection"
+msgstr "شناسایی مکان"
+
+msgid "Location Post Type Name"
+msgstr "نام نوع پست مکان"
+
+msgid "Locations Category Base"
+msgstr "پایه دسته بندی مکان‌ها"
+
+msgid "Locations Post Type Base"
+msgstr "پایه نوع پست مکان‌ها"
+
+msgid "Locations Post Type Name (Plural)"
+msgstr "نام نوع پست مکان ها (جمع)"
+
+msgid "Logo"
+msgstr "لوگو"
+
+msgid "Logo Link"
+msgstr "لینک لوگو"
+
+msgid "Logo appearing in the header part of the report."
+msgstr "لوگو در قسمت هدر گزارش ظاهر می شود."
+
+msgid "Luxembourg"
+msgstr "لوکزامبرگ"
+
+msgid "MPN"
+msgstr "MPN"
+
+msgid "Macao"
+msgstr "ماکائو"
+
+msgid "Macao S.A.R., China"
+msgstr "ماکائو S.A.R. ، چین"
+
+msgid "Macau"
+msgstr "ماکائو"
+
+msgid "Macedonia"
+msgstr "مقدونيه"
+
+msgid "Macedonia, the Former Yugosalv Republic of"
+msgstr "مقدونیه، جمهوری سابق یوگسلاوی"
+
+msgid "Madagascar"
+msgstr "ماداگاسکار"
+
+msgid ""
+"Make your podcasts discoverable via Google Podcasts, Apple Podcasts, and "
+"similar services with Podcast RSS feed and Schema Markup generated by Rank "
+"Math."
+msgstr ""
+"با فید پادکست RSS و Schema Markup تولید شده توسط Rank Math، پادکست‌های خود را "
+"از طریق Google Podcasts، Apple Podcasts و سرویس‌های مشابه قابل شناسایی کنید."
+
+msgid "Malawi"
+msgstr "مالاوی"
+
+msgid "Malaysia"
+msgstr "مالزی"
+
+msgid "Maldives"
+msgstr "مالدیو"
+
+msgid "Mali"
+msgstr "مالی"
+
+msgid "Malta"
+msgstr "مالتا"
+
+msgid "Manage Categories"
+msgstr "مدیریت دسته‌ بندی ها"
+
+msgid "Map Style"
+msgstr "استایل نقشه"
+
+msgid "Mark Solved."
+msgstr "علامت‌گذاری به‌عنوان حل شده."
+
+msgid "Mark Unsolved."
+msgstr "علامت‌گذاری به‌عنوان حل نشده."
+
+msgid "Marshall Islands"
+msgstr "جزایر مارشال"
+
+msgid "Martinique"
+msgstr "مارتینیک"
+
+msgid "Materials:"
+msgstr "مواد:"
+
+msgid "Mauritania"
+msgstr "موريتانيا"
+
+msgid "Mauritius"
+msgstr "موریس"
+
+msgid "Maximum number of locations to show"
+msgstr "حداکثر تعداد مکان‌هایی که باید نمایش داده شود"
+
+msgid "Mayotte"
+msgstr "مایوت"
+
+msgid "Measurement system"
+msgstr "سیستم اندازه‌گیری"
+
+msgid "Merged"
+msgstr "ادغام شده"
+
+msgid "Mexico"
+msgstr "مکزیک"
+
+msgid "Micronesia"
+msgstr "میکرونزی"
+
+msgid "Micronesia, Federated States of"
+msgstr "میکرونزی ، ایالات فدرال"
+
+msgid "Middle Center"
+msgstr "مرکز وسط"
+
+msgid "Middle Left"
+msgstr "وسط چپ"
+
+msgid "Middle Right"
+msgstr "وسط راست"
+
+msgid "Miles"
+msgstr "مایل"
+
+msgid "Missing CSV headers."
+msgstr "هدر های CSV وجود ندارند."
+
+msgid "Missing alt tag"
+msgstr "برچسب alt موجود نیست"
+
+msgid "Missing caption"
+msgstr "توضیحات موجود نیست"
+
+msgid "Missing import file."
+msgstr "فایل درون‌ریزی وجود ندارد."
+
+msgid "Missing one or more required columns."
+msgstr "یک یا چند ستون ضروری وجود ندارد."
+
+msgid "Missing or default title tag"
+msgstr "برچسب عنوان موجود نیست یا پیش‌فرض است"
+
+msgid "Moldova"
+msgstr "مالديو"
+
+msgid "Moldova, Republic of"
+msgstr "مولداوی ، جمهوری"
+
+msgid "Monaco"
+msgstr "موناکو"
+
+msgid "Monday"
+msgstr "دوشنبه"
+
+msgid "Mongolia"
+msgstr "مغولستان"
+
+msgid "Monitor SEO Performance"
+msgstr "مانیتور عمکرد سئو"
+
+msgid "Montenegro"
+msgstr "مونته نگرو"
+
+msgid "Months"
+msgstr "ماه‌"
+
+msgid "Montserrat"
+msgstr "مونتسرات"
+
+msgid "More details"
+msgstr "جزئیات بیشتر"
+
+msgid "More information"
+msgstr "اطلاعات بیشتر"
+
+msgid "Morocco"
+msgstr "مراکش"
+
+msgid "Movie"
+msgstr "فیلم"
+
+msgid "Mozambique"
+msgstr "موزامبیک"
+
+msgid "Music"
+msgstr "موزیک"
+
+msgid "Myanmar"
+msgstr "میانمار"
+
+msgid "Myanmar (Burma)"
+msgstr "ميانمار"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Name of the podcast."
+msgstr "نام پادکست."
+
+msgid "Name*"
+msgstr "نام*"
+
+msgid "Namibia"
+msgstr "نامیبیا"
+
+msgid "Nauru"
+msgstr "نائورو"
+
+msgid "Nepal"
+msgstr "نپال"
+
+msgid "Netherlands"
+msgstr "هلند"
+
+msgid "Netherlands Antilles"
+msgstr "آنتیل هلند"
+
+msgid "New %s"
+msgstr "%s جدید"
+
+msgid "New %s category"
+msgstr "دسته بندی %s جدید"
+
+msgid "New Caledonia"
+msgstr "کالدونیای جدید"
+
+msgid "New Category"
+msgstr "دسته بندی جدید"
+
+msgid "New Category Name"
+msgstr "نام دسته بندی جدید"
+
+msgid "New Schema"
+msgstr "اسکیما جدید"
+
+msgid "New Zealand"
+msgstr "نیوزیلند"
+
+msgid "News &amp; Politics"
+msgstr "اخبار و سیاست"
+
+msgid "News Article"
+msgstr "مقاله خبری"
+
+msgid "News Post Type"
+msgstr "نوع پست خبری"
+
+msgid "News Sitemap"
+msgstr "نقشه سایت خبری"
+
+msgid "News Sitemaps"
+msgstr "نقشه سایت‌های خبری"
+
+msgid ""
+"News Sitemaps allow you to control which content you submit to Google News."
+msgstr ""
+"نقشه سایت‌ خبری به شما امکان می‌دهد محتوای خود را به گوگل نیوز ارسال کنید."
+
+msgid ""
+"News Sitemaps allow you to control which content you submit to Google News. "
+"More information: <a href=\"%s\" target=\"_blank\">News Sitemaps overview</a>"
+msgstr ""
+"نقشه سایت خبری به شما امکان می دهد محتوایی را که به Google News ارسال می "
+"کنید کنترل کنید. اطلاعات بیشتر: <a href=\"%s\" target=\"_blank\">نمای کلی "
+"نقشه سایت اخبار</a>"
+
+msgid "Nicaragua"
+msgstr "نیکاراگوئه"
+
+msgid "Niger"
+msgstr "نیجر"
+
+msgid "Nigeria"
+msgstr "نیجریه"
+
+msgid "Niue"
+msgstr "نیوئه"
+
+msgid "No"
+msgstr "خیر"
+
+msgid "No %s found in Trash."
+msgstr "هیچ %s در زباله‌دان یافت نشد."
+
+msgid "No %s found."
+msgstr "هیچ %s یافت نشد."
+
+msgid "No Archive"
+msgstr "بدون بایگانی"
+
+msgid "No Follow"
+msgstr "بدون دنبال کردن"
+
+msgid "No Image Index"
+msgstr "بدون ایندکس تصویر"
+
+msgid "No Index"
+msgstr "بدون ایندکس"
+
+msgid "No Snippet"
+msgstr "نو اسنیپت"
+
+msgid "No change"
+msgstr "بدون تغییر"
+
+msgid "No data to show."
+msgstr "هیچ داده ای برای نمایش وجود ندارد."
+
+msgid "No file selected."
+msgstr "هیچ فایلی انتخاب نشده است."
+
+msgid "No html body found."
+msgstr "هیچ بدنۀ html ی یافت نشد."
+
+msgid "No matches found."
+msgstr "مطابقتی یافت نشد."
+
+msgid "No posts found to convert."
+msgstr "هیچ نوشته‌ای برای تبدیل یافت نشد."
+
+msgid "No settings found to be imported."
+msgstr "هیچ تنظیماتی برای درون‌ریزی یافت نشد."
+
+msgid "No url found."
+msgstr "هیچ url ی یافت نشد."
+
+msgid "No valid ID provided."
+msgstr "شناسۀ معتبری ارائه نشده است."
+
+msgid "No valid redirection found."
+msgstr "هیچ ریدایرکت معتبری یافت نشد."
+
+msgid "Noindex Hidden Products"
+msgstr "بدون ایندکس محصولات پنهان"
+
+msgid ""
+"Non-persistent random word chosen from a list. A new random word will be "
+"chosen on each page load."
+msgstr ""
+"کلمه تصادفی غیر مداوم از یک لیست انتخاب شده است. یک کلمه تصادفی جدید در هر "
+"بارگذاری صفحه انتخاب می شود."
+
+msgid "Nonce error. Please try again."
+msgstr "کلید سری وردپرس معتبر نیست. لطفا دوباره تلاش کنید."
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "None (Click here to set one)"
+msgstr "هیچ کدام (برای تنظیم اینجا کلیک کنید)"
+
+msgid "Norfolk Island"
+msgstr "جزیره نورفولک"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "North Korea"
+msgstr "کره شمالی"
+
+msgid "Northern Mariana Islands"
+msgstr "جزایر ماریانای شمالی"
+
+msgid "Norway"
+msgstr "نروژ"
+
+msgid "Note:"
+msgstr "توجه:"
+
+msgid "Object unique id"
+msgstr "شناسه یکتای آبجکت"
+
+msgid "Off"
+msgstr "غیرفعال"
+
+msgid "Oman"
+msgstr "عمان"
+
+msgid ""
+"Once you save the changes, we will create a new custom post type called "
+"\"Locations\" where you can add multiple locations of your business/"
+"organization."
+msgstr ""
+"هنگامی که تغییرات را ذخیره کردید، یک نوع پست سفارشی جدید به نام \"مکان‌ها\" "
+"ایجاد خواهیم کرد که در آن می‌توانید چندین مکان از کسب و کار یا سازمان خود را "
+"اضافه کنید."
+
+msgid "One or more errors occured while importing: "
+msgstr "هنگام درون‌ریزی یک یا چند خطا رخ داد: "
+
+msgid ""
+"One or more of the selected redirections could not be changed because they "
+"are scheduled for future activation/deactivation."
+msgstr ""
+"یک یا چند مورد از ریدایرکت انتخابی را نمی توان تغییر داد زیرا برای فعال سازی/"
+"غیرفعال سازی آینده برنامه ریزی شده اند."
+
+msgid ""
+"Only the %1$s and the %2$s columns are required, the others are optional."
+msgstr "فقط ستون های %1$s و %2$s مورد نیاز هستند، بقیه اختیاری هستند."
+
+msgid "Open 24/7"
+msgstr "24/7 باز"
+
+msgid "Open 24/7 label"
+msgstr "برچسب 24/7 باز"
+
+msgid "Open 24h label"
+msgstr "برچسب 24h باز"
+
+msgid "Open now"
+msgstr "الان باز"
+
+msgid "Opening Hours"
+msgstr "ساعات کاری"
+
+msgid "Opening Hours Format"
+msgstr "فرمت ساعات کاری"
+
+msgid "Opening Hours:"
+msgstr "ساعات کاری:"
+
+msgid "Organization"
+msgstr "سازمان"
+
+msgid "Organization Logo"
+msgstr "لوگوی سازمان"
+
+msgid "Organization URL"
+msgstr "آدرس URL سازمان"
+
+msgid "Organize your redirections in categories."
+msgstr "سازماندهی ریدایرکت‌ها در دسته‌بندی‌ها."
+
+msgid "Orphan Posts"
+msgstr "پست های بدون دسته بندی"
+
+msgid "Owner Email "
+msgstr "ایمیل مالک "
+
+msgid "Owner Name"
+msgstr "نام مالک"
+
+msgid "PRO version"
+msgstr "نسخه پرو"
+
+msgid "Pakistan"
+msgstr "پاکستان"
+
+msgid "Palau"
+msgstr "پالائو"
+
+msgid "Palestine"
+msgstr "فلسطین"
+
+msgid "Palestinian Territory"
+msgstr "سرزمین فلسطین"
+
+msgid "Palestinian Territory, Occupied"
+msgstr "سرزمین فلسطین"
+
+msgid "Panama"
+msgstr "پاناما"
+
+msgid "Papua New Guinea"
+msgstr "پاپوا گينه ي نو"
+
+msgid "Paraguay"
+msgstr "پاراگوئه"
+
+msgid "Parent Category"
+msgstr "دسته بندی والد"
+
+msgid "Parent Category:"
+msgstr "دسته بندی والد:"
+
+msgid "Payroll"
+msgstr "حقوق و دستمزد"
+
+msgid "Persistent random word chosen from a list"
+msgstr "کلمه تصادفی مداوم از یک لیست انتخاب شده است"
+
+msgid "Person"
+msgstr "شخص"
+
+msgid "Person or Company"
+msgstr "شخص یا شرکت"
+
+msgid "Person/Organization Name"
+msgstr "نام شخص/سازمان"
+
+msgid "Peru"
+msgstr "پرو"
+
+msgid "Philippines"
+msgstr "فیلیپین"
+
+msgid "Phone"
+msgstr "تلفن"
+
+msgid "Phone Number"
+msgstr "شماره تلفن"
+
+msgid "Pinterest Debugger"
+msgstr "دیباگر پینترست"
+
+msgid "Pitcairn"
+msgstr "پیتکرن"
+
+msgid "Please %1$s connect Rank Math SEO PRO %2$s for automatic updates."
+msgstr "لطفا برای بروزرسانی خودکار به %1$s رنک مث پرو وصل شوید %2$s."
+
+msgid "Please activate Schema & Sitemap module to use this module."
+msgstr "برای استفاده از این ماژول، لطفاً ماژول اسکیما و نقشه سایت را فعال کنید."
+
+msgid "Please activate Schema module to use this module."
+msgstr "لطفا ماژول اسکیما را برای استفاده از این ماژول فعال کنید."
+
+msgid "Please activate Sitemap module to use this module."
+msgstr "برای استفاده از این ماژول، لطفاً ماژول نقشه سایت را فعال کنید."
+
+msgid "Please select a CSV file to import."
+msgstr "لطفاً یک فایل CSV را برای درون‌ ریزی انتخاب کنید."
+
+msgid "Please select a file to import."
+msgstr "لطفاً یک فایل برای درون ریزی انتخاب کنید."
+
+msgid "Please select at least one object type to export."
+msgstr "لطفاً حداقل یک نوع آبجکت را برای برون‌بری انتخاب کنید."
+
+msgid ""
+"Please update Rank Math Free to the latest version first before using Rank "
+"Math PRO."
+msgstr ""
+"لطفاً قبل از فعال کردن نسخۀ پرو رنک مث ، ابتدا رنک مث رایگان را به آخرین نسخه "
+"به‌روزرسانی کنید."
+
+msgid "Please update the free version before updating Rank Math SEO PRO."
+msgstr "لطفاً قبل از بروزرسانی رنک مث پرو ، نسخه رایگان را به روز کنید."
+
+msgid "Podcast"
+msgstr "پادکست"
+
+msgid "Podcast Category"
+msgstr "دسته‌بندی پادکست"
+
+msgid "Podcast Description"
+msgstr "توضیحات پادکست"
+
+msgid "Podcast Image"
+msgstr "تصویر پادکست"
+
+msgid "Podcast Name"
+msgstr "نام پادکست"
+
+msgid "Podcast channel image configured in the Rank Math Settings."
+msgstr "تصویر کانال پادکست در تنظیمات رنک مث پیکربندی شده است."
+
+msgid "Poland"
+msgstr "لهستان"
+
+msgid ""
+"Populate automatic Video Schema by auto-detecting any video in the content."
+msgstr ""
+"با شناسایی خودکار هر ویدئویی در محتوا، اسکیمای ویدئو را به‌صورت اتوماتیک "
+"تکمیل کنید."
+
+msgid "Portugal"
+msgstr "پرتغال"
+
+msgid "Position"
+msgstr "موقعیت"
+
+msgid "Positions Summary"
+msgstr "خلاصه موقعیت ها"
+
+msgid "Post"
+msgstr "پست"
+
+msgid "Post Analytics"
+msgstr "آنالیز پست"
+
+msgctxt "Post Type General Name"
+msgid "Schemas"
+msgstr "اسکیما ها"
+
+msgctxt "Post Type Singular Name"
+msgid "Schema"
+msgstr "اسکیما"
+
+msgid "Post types:"
+msgstr "انواع پست‌ها:"
+
+msgid "Posting Expiry Date"
+msgstr "تاریخ انقضا ارسال"
+
+msgid "Posts"
+msgstr "پست ها"
+
+msgid "Preview"
+msgstr "پیش نمایش"
+
+msgid "Price Range"
+msgstr "دامنه قیمت"
+
+msgid "Price Valid Until"
+msgstr "قیمت معتبر تا"
+
+msgid "Price indication"
+msgstr "نشانگر قیمت"
+
+msgid "Primary %s"
+msgstr "%s اصلی"
+
+msgid "Primary Country"
+msgstr "کشور اصلی"
+
+msgid "Primary Focus Keyword"
+msgstr "کلمه کلیدی کانونی اصلی"
+
+msgid "Print"
+msgstr "پرینت"
+
+msgid "Product"
+msgstr "محصول"
+
+msgid "Product Brand"
+msgstr "برند محصول"
+
+msgid "Product Currency"
+msgstr "واحد پول محصول"
+
+msgid "Product In-Stock"
+msgstr "محصول در انبار"
+
+msgid "Product Price"
+msgstr "قیمت محصول"
+
+msgid "Product SKU"
+msgstr "شناسه (SKU) محصول"
+
+msgid "Pros"
+msgstr "مزایا"
+
+msgid "Public Post Types"
+msgstr "انواع پست‌های عمومی"
+
+msgid "Public Taxonomies"
+msgstr "طبقه‌بندی‌های عمومی"
+
+msgid "Publication Date"
+msgstr "تاریخ انتشار"
+
+msgid "Published Date"
+msgstr "تاریخ انتشار"
+
+msgid "Puerto Rico"
+msgstr "پورتوریکو"
+
+msgid "Qatar"
+msgstr "قطر"
+
+msgid "Random Word"
+msgstr "کلمه تصادفی"
+
+msgid "Rank Math FAQ Schema"
+msgstr "اسکیمای سوالات متداول رنک مث"
+
+msgid "Rank Math PRO"
+msgstr "رنک مث پرو"
+
+msgid ""
+"Rank Math PRO is installed but it is not connected to your account, so you "
+"are missing out on important SEO features."
+msgstr ""
+"رنک مث پرو نصب شده است اما به حساب شما متصل نیست، بنابراین ویژگی های مهم سئو "
+"را از دست می دهید."
+
+msgid "Rank Math SEO Filters"
+msgstr "فیلترهای افزونه رنک مث"
+
+msgid "Rank Math SEO PRO For WordPress"
+msgstr "افزونه سئوی رنک مث پرو برای وردپرس"
+
+msgid "Rank Math Schema Templates"
+msgstr "قالب های اسکیمای رنک مث"
+
+msgid "Rank Math [SEO Report] - %s"
+msgstr "رنک مث [گزارش سئو] - %s"
+
+msgid ""
+"Rank Math free version is required to run Rank Math PRO, but it could not be "
+"activated automatically. Please install and activate the free version first."
+msgstr ""
+"نسخه رایگان رنک مث برای اجرای نسخه پرو مورد نیاز است، اما نمی تواند به طور "
+"خودکار فعال شود. لطفا ابتدا نسخه رایگان را نصب و فعال کنید."
+
+msgid ""
+"Rank Math free version is required to run Rank Math PRO, but it could not be "
+"installed automatically. Please install and activate the free version first."
+msgstr ""
+"نسخه رایگان رنک مث برای اجرای رنک مث پرو مورد نیاز است ، اما به طور خودکار "
+"نصب نمی شود. لطفاً ابتدا نسخه رایگان را نصب و فعال کنید."
+
+msgid ""
+"Rank Math free version is required to run Rank Math PRO. Both plugins are "
+"now disabled."
+msgstr ""
+"نسخه رایگان رنک مث برای اجرای رنک مث پرو مورد نیاز است .هر دو افزونه در حال "
+"حاضر غیرفعال هستند."
+
+msgid "Rank Math: Added Video Schema to posts successfully."
+msgstr "رنک مث: اسکیمای ویدئو به پستها با موفقیت اضافه شد."
+
+msgid "Recipe"
+msgstr "دستورالعمل"
+
+msgid "Redirect"
+msgstr "ریدایرکت"
+
+msgid "Redirected Posts"
+msgstr "پست ‌های ریدایرکت شده"
+
+msgid "Redirection Categories"
+msgstr "دسته‌ بندی های ریدایرکت‌ها"
+
+msgid "Redirection Category"
+msgstr "دسته بندی ریدایرکت"
+
+msgid "Redirection will be activated on this date (optional)."
+msgstr "ریدایرکت در این تاریخ فعال خواهد شد (اختیاری)."
+
+msgid "Redirection will be deactivated on this date (optional)."
+msgstr "ریدایرکت در این تاریخ غیرفعال خواهد شد (اختیاری)."
+
+msgid "Redirections CSV"
+msgstr "CSV ریدایرکت‌ها"
+
+msgid "Redirections successfully synced to the .htaccess file."
+msgstr "ریدایرکت‌ها با موفقیت در فایل htaccess. همگام‌ سازی شدند."
+
+msgid "Reference Web page "
+msgstr "صفحه وب مرجع "
+
+msgid "Religion &amp; Spirituality"
+msgstr "دین و معنویت"
+
+msgid "Remove"
+msgstr "حذف"
+
+msgid "Remove Media Data from RSS feed"
+msgstr "حذف اطلاعات رسانه از فید RSS"
+
+msgid "Remove custom canonical URL"
+msgstr "حذف آدرس URL متعارف سفارشی"
+
+msgid "Remove redirection"
+msgstr "حذف ریدایرکت"
+
+msgid "Replace"
+msgstr "جایگزین"
+
+msgid ""
+"Replace characters or words in the alt tags, title tags, or in the captions."
+msgstr ""
+"در برچسب های alt ، برچسب های عنوان یا در کپشن ها ، کاراکترها یا کلمات را "
+"جایگزین کنید."
+
+msgid "Replacements"
+msgstr "جایگزینی‌ها"
+
+msgid "Report Email Address"
+msgstr "آدرس ایمیل گزارش"
+
+msgid "Report Email Subject"
+msgstr "موضوع ایمیل گزارش"
+
+msgid "Report Footer Text"
+msgstr "متن فوتر گزارش"
+
+msgid "Report Header Background"
+msgstr "پس زمینه هدر گزارش"
+
+msgid "Report Logo"
+msgstr "لوگوی گزارش"
+
+msgid "Report Top Text"
+msgstr "متن بالای گزارش"
+
+msgid "Republic of Ireland"
+msgstr "جمهوری ایرلند"
+
+msgid "Restaurant"
+msgstr "رستوران"
+
+msgid "Reunion"
+msgstr "رئونیون"
+
+msgid "Rich Pins Validator"
+msgstr "اعتبارسنجی Rich Pins"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Roadmap"
+msgstr "نقشه راه"
+
+msgid "Robots Meta"
+msgstr "متای ربات ها"
+
+msgid "Robots meta edited for %1$d %2$s."
+msgstr "متای روباتها برای %1$d %2$s ویرایش شد."
+
+msgid "Romania"
+msgstr "رومانی"
+
+msgid "Route"
+msgstr "مسیر"
+
+msgid "Russia"
+msgstr "روسیه"
+
+msgid "Russian Federation"
+msgstr "روسیه فدرال"
+
+msgid "Rwanda"
+msgstr "رواندا"
+
+msgid "Réunion"
+msgstr "رنیون"
+
+msgid "SEO Description"
+msgstr "توضیحات سئو"
+
+msgid "SEO Details"
+msgstr "جزئیات سئو"
+
+msgid "SEO Report of Your Website"
+msgstr "گزارش سئوی وب سایت شما"
+
+msgid "SEO Settings"
+msgstr "تنظیمات سئو"
+
+msgid "SEO Title"
+msgstr "عنوان سئو"
+
+msgid "SEO is the most consistent source of traffic for any website"
+msgstr "سئو ثابت ترین منبع ترافیک برای هر وب سایت است"
+
+msgid "Saint Barthélemy"
+msgstr "سنت بارثلمی"
+
+msgid "Saint Helena"
+msgstr "سنت هلنا"
+
+msgid "Saint Kitts and Nevis"
+msgstr "سنت کیتز و نوویس"
+
+msgid "Saint Lucia"
+msgstr "سنت لوسیا"
+
+msgid "Saint Martin (Dutch part)"
+msgstr "سنت مارتین (بخش هلندی)"
+
+msgid "Saint Martin (French part)"
+msgstr "سنت مارتین (بخش فرانسوی )"
+
+msgid "Saint Pierre and Miquelon"
+msgstr "سنت پیر و میکلون"
+
+msgid "Saint Vincent and the Grenadines"
+msgstr "سنت وینسنت و گرنادین"
+
+msgid "Salary"
+msgstr "حقوق"
+
+msgid "Salary Currency"
+msgstr "واحد پولی حقوق"
+
+msgid "Samoa"
+msgstr "ساموآ"
+
+msgid "San Marino"
+msgstr "سان مارینو"
+
+msgid "Sao Tome and Principe"
+msgstr "سائوتومه و پرنسیپه"
+
+msgid "Satellite"
+msgstr "ماهواره‌ای"
+
+msgid "Saturday"
+msgstr "شنبه"
+
+msgid "Saudi Arabia"
+msgstr "عربستان سعودی"
+
+msgid "Save and Continue"
+msgstr "ذخیره و ادامه"
+
+msgid "Scheduled Activation"
+msgstr "فعال‌سازی برنامه‌ریزی‌شده"
+
+msgid "Scheduled Deactivation"
+msgstr "غیرفعال‌سازی برنامه‌ریزی‌شده"
+
+msgid "Schema"
+msgstr "اسکیما"
+
+msgid "Schema Templates"
+msgstr "قالب های اسکیما"
+
+msgid "Schema edited for %1$d %2$s."
+msgstr "اسکیما برای %1$d %2$s ویرایش شد."
+
+msgid "Schema to add."
+msgstr "اسکیما برای افزودن."
+
+msgid "Schemas"
+msgstr "اسکیما ها"
+
+msgid "Science &amp; Medicine"
+msgstr "علم و دارو"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search %s"
+msgstr "جستجوی %s"
+
+msgid "Search Impression:"
+msgstr "نمایش جستجو:"
+
+msgid "Search Redirection Categories"
+msgstr "جستجوی دسته‌ بندی های ریدایرکت‌"
+
+msgid "Search Traffic"
+msgstr "ترافیک جستجو"
+
+msgid "Search Traffic:"
+msgstr "ترافیک جستجو:"
+
+msgid "Search categories"
+msgstr "جستجوی دسته بندی ها"
+
+msgid "Search engines display your email address."
+msgstr "موتورهای جستجو آدرس ایمیل شما را نمایش می دهند."
+
+msgid ""
+"Search engines may prominently display your contact phone number for mobile "
+"users."
+msgstr ""
+"موتورهای جستجو ممکن است شماره تلفن تماس شما را برای کاربران تلفن همراه به "
+"صورت برجسته نمایش دهند."
+
+msgid "Search schemas"
+msgstr "جستجوی اسکیماها"
+
+msgid "Season"
+msgstr "فصل"
+
+msgid "Secondary phone"
+msgstr "تلفن دوم"
+
+msgid "Select Brand"
+msgstr "انتخاب برند"
+
+msgid "Select Category"
+msgstr "انتخاب دسته بندی"
+
+msgid "Select Page"
+msgstr "انتخاب صفحه"
+
+msgid "Select Product Brand Taxonomy to use in Schema.org & OpenGraph markup."
+msgstr ""
+"طبقه بندی برند محصول را برای استفاده در نشانه گذاری Schema.org و OpenGraph "
+"انتخاب کنید."
+
+msgid ""
+"Select a Rank Math settings file on your computer and upload it to use the "
+"custom settings."
+msgstr ""
+"یک فایل تنظیمات رنک مث را در کامپیوتر خود انتخاب کنید و آن را بارگذاری کنید "
+"تا از تنظیمات سفارشی استفاده کنید."
+
+msgid ""
+"Select a page on your site where you want to show the LocalBusiness meta "
+"data."
+msgstr ""
+"صفحه ای را در سایت خود انتخاب کنید که می خواهید متا داده های کسب و کار محلی "
+"را در آن نشان دهید."
+
+msgid ""
+"Select opening hours. You can add multiple sets if you have different "
+"opening or closing hours on some days or if you have a mid-day break. Times "
+"are specified using 24:00 time."
+msgstr ""
+"ساعات کاری را انتخاب کنید. اگر در برخی از روزها ساعات باز یا بسته شدن "
+"متفاوتی دارید یا در اواسط روز استراحت دارید ، می توانید چندین مجموعه را "
+"اضافه کنید. زمان با استفاده از ساعت 24:00 مشخص می شود."
+
+msgid ""
+"Select post types to enable SEO options for them and include them in the "
+"sitemap."
+msgstr ""
+"انواع پست‌ها را انتخاب کنید تا تنظیمات سئو برای آنها فعال شود و آنها را در "
+"نقشه سایت وارد کنید."
+
+msgid ""
+"Select taxonomies to enable SEO options for them and include them in the "
+"sitemap."
+msgstr ""
+"طبقه‌بندی را انتخاب کنید تا تنظیمات سئو را برای آنها فعال کنید و آنها را در "
+"نقشه سایت وارد کنید."
+
+msgid "Select the category that best reflects the content of your show."
+msgstr ""
+"دسته ای را انتخاب کنید که به بهترین نحوه محتوای نمایش شما را منعکس می کند."
+
+msgid ""
+"Select the default watermark that will be applied if no specific watermark "
+"is selected."
+msgstr ""
+"یک واترمارک پیش‌فرض انتخاب کنید تا در مواقعی که هیچ واترمارک مشخصی انتخاب "
+"نشده است، واترمارک پیش‌فرض نمایش داده شود."
+
+msgid "Select the map style you wish to use on the frontend of your website."
+msgstr ""
+"استایل نقشه ای را که می خواهید در نمای وب سایت خود استفاده کنید انتخاب کنید."
+
+msgid ""
+"Select the post type where you use videos and want them to be shown in the "
+"Video search."
+msgstr ""
+"نوع پستی را که در آن از ویدئوها استفاده می کنید و می خواهید در جستجوی ویدئو "
+"نشان داده شود، انتخاب کنید."
+
+msgid "Select the post type you use for News articles."
+msgstr "نوع پستی را که برای مقاله های خبری استفاده می کنید انتخاب کنید."
+
+msgid ""
+"Select the text to display alongside your opening hours when your store is "
+"open 24/7."
+msgstr "متنی که میخواهید برای کسب و کار 24/7 ساعتی خود نمایش دهید انتخاب کنید."
+
+msgid ""
+"Select this if you have a custom Rank Math settings file you want to use."
+msgstr ""
+"اگر فایل سفارشی تنظیمات رنک مث دارید که می خواهید از آن استفاده کنید ، این "
+"مورد را انتخاب کنید."
+
+msgid ""
+"Select whether to include a link to the Full Report admin page in the email "
+"or not."
+msgstr ""
+"انتخاب کنید که لینکی به صفحه مدیریت گزارش کامل در ایمیل اضافه شود یا خیر."
+
+msgid "Select which tables to show in the report."
+msgstr "جداول موردنظر جهت نمایش در گزارش را انتخاب دهید."
+
+msgid ""
+"Select your organization’s primary country of operation. This helps improve "
+"the accuracy of the store locator."
+msgstr ""
+"کشور اصلی فعالیت سازمان خود را انتخاب کنید. این به بهبود دقت مکان یاب "
+"فروشگاه کمک می کند."
+
+msgid "Select your preferred measurement system (miles or kilometers)."
+msgstr "سیستم اندازه گیری دلخواه خود را (مایل یا کیلومتر) انتخاب کنید."
+
+msgid "Senegal"
+msgstr "سنگال"
+
+msgid "Sentence casing"
+msgstr "طرح جمله"
+
+msgid "Serbia"
+msgstr "صربستان"
+
+msgid "Serbia and Montenegro"
+msgstr "صربيا"
+
+msgid "Service"
+msgstr "خدمات"
+
+msgid ""
+"Set Product Pages to noindex when WooCommerce Catalog visibility is set to "
+"hidden."
+msgstr ""
+"هنگامی که قابلیت مشاهده کاتالوگ محصول روی مخفی قرار دارد ، صفحات محصول را "
+"روی بدون ایندکس تنظیم کنید."
+
+msgid "Set Schema: Default (%s)"
+msgstr "تنظیم اسکیما: پیش‌فرض (%s)"
+
+msgid "Set Schema: None"
+msgstr "تنظیم اسکیما: هیچ کدام"
+
+msgid "Set to follow"
+msgstr "تنظیم به دنبال کردن"
+
+msgid "Set to index"
+msgstr "تنظیم به ایندکس"
+
+msgid "Set to nofollow"
+msgstr "تنظیم به بدون دنبال کردن"
+
+msgid "Set to noindex"
+msgstr "تنظیم به بدون ایندکس"
+
+msgid "Settings could not be imported:"
+msgstr "تنظیمات نمی‌توانند درون‌ریزی شوند:"
+
+msgid "Settings could not be imported: Upload failed."
+msgstr "درون‌ریزی تنظیمات انجام نشد: بارگذاری ناموفق بود."
+
+msgid "Settings file could not be imported:"
+msgstr "فایل تنظیمات درون ریزی نشد:"
+
+msgid "Seychelles"
+msgstr "سیشل"
+
+msgid "Show Global Identifier"
+msgstr "نمایش شناسه عمومی"
+
+msgid "Show Route label"
+msgstr "نمایش برچسب مسیر"
+
+msgid "Show route"
+msgstr "نمایش مسیر"
+
+msgid "Sierra Leone"
+msgstr "سیرالئون"
+
+msgid "Singapore"
+msgstr "سنگاپور"
+
+msgid "Sint Maarten"
+msgstr "سنت مارتن"
+
+msgid "Sitemap"
+msgstr "نقشه سایت"
+
+msgid "Sitemaps"
+msgstr "نقشه‌های سایت"
+
+msgid "Slovakia"
+msgstr "اسلواکی"
+
+msgid "Slovenia"
+msgstr "اسلوونی"
+
+msgid "Society &amp; Culture"
+msgstr "جامعه و فرهنگ"
+
+msgid "Software"
+msgstr "نرم‌افزار"
+
+msgid "Solomon Islands"
+msgstr "جزایر سلیمان"
+
+msgid "Somalia"
+msgstr "سومالی"
+
+msgid "Sorry, no keyword found."
+msgstr "متأسفانه، هیچ کلمه کلیدی یافت نشد."
+
+msgid "Sorry, no locations were found."
+msgstr "متأسفانه هیچ مکانی یافت نشد."
+
+msgid "Sorry, no post id found."
+msgstr "متأسفانه، شناسه پستی یافت نشد."
+
+msgid "Sorry, no record id found."
+msgstr "متأسفانه، هیچ شناسه رکوردی یافت نشد."
+
+msgid "Sorry, you are not allowed to export redirections on this site."
+msgstr "متاسفیم، شما مجاز به برون‌ ریزی ریدایرکت‌های این سایت نیستید."
+
+msgid "Sorry, you are not allowed to export the content of this site."
+msgstr "متاسفیم، شما مجاز به برون‌ ریزی محتوای این سایت نیستید."
+
+msgid "Sorry, you are not allowed to import contents to this site."
+msgstr "متاسفیم، شما مجاز به درون‌ ریزی محتواها به این سایت نیستید."
+
+msgid "Sorry, you are not allowed to import redirections on this site."
+msgstr "متاسفیم، شما مجاز به درون ‌ریزی ریدایرکت‌ ها در این سایت نیستید."
+
+msgid "Sorry, you are not allowed to save template."
+msgstr "با عرض معذرت، شما مجاز به ذخیره قالب نیستید."
+
+msgid ""
+"Sorry, your user does not seem to have the necessary capabilities to export."
+msgstr ""
+"متأسفیم ، به نظر می رسد کاربر شما قابلیت های لازم برای برون ریزی را ندارد."
+
+msgid "South Africa"
+msgstr "آفریقای جنوبی"
+
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "جورجیای جنوبی و جزایر ساندویچ جنوبی"
+
+msgid "South Georgia/Sandwich Islands"
+msgstr "گرجستان جنوبی/جزایر ساندویچ"
+
+msgid "South Korea"
+msgstr "کره جنوبی"
+
+msgid "South Sudan"
+msgstr "سودان جنوبی"
+
+msgid "Spain"
+msgstr "اسپانیا"
+
+msgid "Special Coverage"
+msgstr "پوشش ویژه"
+
+msgid "Special Sitemaps:"
+msgstr "نقشه های سایت ویژه:"
+
+msgid "Sports &amp; Recreation"
+msgstr "ورزش و تفریح"
+
+msgid "Sri Lanka"
+msgstr "سریلانکا"
+
+msgid "St. Helena"
+msgstr "سنت هلن"
+
+msgid "St. Kitts & Nevis"
+msgstr "سنت کیتس و نویس"
+
+msgid "St. Lucia"
+msgstr "سنت لوسیا"
+
+msgid "St. Martin"
+msgstr "سنت مارتین"
+
+msgid "St. Pierre & Miquelon"
+msgstr "سنت پیر و میکلون"
+
+msgid "St. Vincent & Grenadines"
+msgstr "سنت وینسنت و گرنادین"
+
+msgid "Start Audit"
+msgstr "شروع بررسی"
+
+msgid "Subject of the report emails."
+msgstr "موضوع ایمیل گزارش."
+
+msgid "Sudan"
+msgstr "سودان"
+
+msgid "Sunday"
+msgstr "یکشنبه"
+
+msgid "Supply:"
+msgstr "تامین:"
+
+msgid "Suriname"
+msgstr "سورینام"
+
+msgid "Svalbard & Jan Mayen"
+msgstr "سوالبارد و جان ماین"
+
+msgid "Svalbard and Jan Mayen"
+msgstr "سوالبارد و جان ماین"
+
+msgid "Swaziland"
+msgstr "سوازیلند"
+
+msgid "Sweden"
+msgstr "سوئد"
+
+msgid "Switzerland"
+msgstr "سوئیس"
+
+msgid "Sync to .htaccess"
+msgstr "همگام‌سازی با  .htaccess"
+
+msgid "Syria"
+msgstr "سوريه"
+
+msgid "Syrian Arab Republic"
+msgstr "جمهوری عربی سوریه"
+
+msgid "São Tomé & Príncipe"
+msgstr "سائوتومه و پرینسیپ"
+
+msgid "São Tomé and Príncipe"
+msgstr "سائوتومه و پرینسیپ"
+
+msgid "TV &amp; Film"
+msgstr "فیلم"
+
+msgid "Tags"
+msgstr "برچسب ها"
+
+msgid "Taiwan"
+msgstr "تایوان"
+
+msgid "Taiwan, Province of China"
+msgstr "تایوان ، متعلق به چین"
+
+msgid "Tajikistan"
+msgstr "تاجیکستان"
+
+msgid "Tanzania"
+msgstr "تانزانيا"
+
+msgid "Tanzania, United Republic of"
+msgstr "جمهوری متحده تانزانیا"
+
+msgid "Tax ID"
+msgstr "شناسه مالیاتی"
+
+msgid "Taxonomies:"
+msgstr "طبقه‌بندی‌ها:"
+
+msgid "Technology"
+msgstr "فناوری"
+
+msgid "Temporal Coverage"
+msgstr "پوشش زمانی"
+
+msgid "Terms"
+msgstr "شرایط"
+
+msgid "Terrain"
+msgstr "زمینی"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text or basic HTML to insert below the title."
+msgstr "متن یا HTML پایه برای درج در زیرعنوان."
+
+msgid "Text or basic HTML to insert in the footer area."
+msgstr "متن یا HTML پایه برای درج در قسمت فوتر."
+
+msgid "Text to show in Opening hours when business is closed."
+msgstr "متنی که می‌خواهید در ساعاتی که کسب وکار شما بسته است نمایش داده شود."
+
+msgid "Thailand"
+msgstr "تایلند"
+
+msgid "The %1$s column may contain the value %2$s, or nothing."
+msgstr "ستون %1$s ممکن است حاوی مقدار %2$s یا چیزی نباشد."
+
+msgid ""
+"The email address of the podcast owner. Please make sure the email address "
+"is active and monitored."
+msgstr ""
+"آدرس ایمیل صاحب پادکست. لطفا مطمئن شوید که آدرس ایمیل فعال و تحت نظارت است."
+
+msgid "The following lines could not be imported: "
+msgstr "خطوط زیر را نمی توان درون ریزی کرد: "
+
+msgid ""
+"The label that appears in the sidebar for the custom post type where you can "
+"add & manage locations."
+msgstr ""
+"برچسبی که در نوار کناری برای نوع پست سفارشی ظاهر می شود ، جایی که می توانید "
+"مکان ها را اضافه و مدیریت کنید."
+
+msgid ""
+"The name of the news publication. It must match the name exactly as it "
+"appears on your articles in news.google.com, omitting any trailing "
+"parentheticals. <a href=\"https://support.google.com/news/publisher-center/"
+"answer/9606710\" target=\"_blank\">More information at support.google.com</a>"
+msgstr ""
+"این نام انتشارات خبری است. این نام باید (بدون پرانتزهای انتهایی) دقیقاً با "
+"نامی مطابقت داشته باشد که در مقاله‌های شما در news.google.com نشان داده "
+"می‌شود. <a href=\"https://support.google.com/news/publisher-center/"
+"answer/9606710\" target=\"_blank\">اطلاعات بیشتر را در support.google.com "
+"بخوانید</a>"
+
+msgid "The podcast owner contact name."
+msgstr "نام مخاطب صاحب پادکست."
+
+msgid "The price range of the business, for example $$$."
+msgstr "دامنه قیمت کسب و کار، به عنوان مثال: $$$."
+
+msgid ""
+"The redirections could not be synced because the .htaccess file does not "
+"exist or it is not writable."
+msgstr ""
+"ریدایرکت‌ها همگام‌سازی نمی‌شوند زیرا فایل htaccess. وجود ندارد یا قابل نوشتن "
+"نیست."
+
+msgid ""
+"The total test count is different for the competitor as we don't have access "
+"to their database."
+msgstr ""
+"تعداد کل تست برای رقیب متفاوت است زیرا ما به پایگاه داده آنها دسترسی نداریم."
+
+msgid ""
+"This Video Sitemap is generated by <a href=\"%s\" target=\"_blank\">Rank "
+"Math WordPress SEO Plugin</a>. It is what search engines like Google use to "
+"find and understand the video content on your website."
+msgstr ""
+"این نقشه سایت ویدئو توسط <a href=\"%s\" target=\"_blank\">افزونه سئوی وردپرس "
+"رنک مث </a> ایجاد شده است. این چیزی است که موتورهای جستجو مانند گوگل برای "
+"پیدا کردن و درک محتوای ویدیویی در وب سایت شما استفاده می کنند."
+
+msgid "This XML Sitemap contains <strong>%s</strong> URLs."
+msgstr "این نقشه سایت XML حاوی <strong>%s</strong> آدرس‌ URL است."
+
+msgid ""
+"This XML Sitemap is generated by <a href=\"%s\" target=\"_blank\">Rank Math "
+"WordPress SEO Plugin</a>. It is what search engines like Google use to crawl "
+"and re-crawl posts/pages/products/images/archives on your website."
+msgstr ""
+"این نقشه سایت XML توسط <a href=\"%s\" target=\"_blank\">افزونه سئوی وردپرس "
+"رنک مث</a> ایجاد شده است. این نقشه سایت دقیقاً همان چیزی است که موتورهای "
+"جستجو مانند گوگل از آن استفاده می‌کنند تا بتوانند با خزیدن در پست‌ها/صفحه‌ها/"
+"محصولات/تصاویر/بایگانی‌های سایت شما، محتواهای سایت شما را ایندکس کنند."
+
+msgid "This email was sent to you as a registered member of %s."
+msgstr "این ایمیل به عنوان عضو ثبت شده %s برای شما ارسال شده است."
+
+msgid ""
+"This option allows you to monitor the SEO performance of all of your sites "
+"in one centralized dashboard on RankMath.com, so you can check up on sites "
+"at a glance. <a href=\"%1$s\" target=\"_blank\">Learn more</a>."
+msgstr ""
+"این گزینه به شما امکان می دهد عملکرد سئوی همه سایت های خود را در یک داشبورد "
+"متمرکز در RankMath.com نظارت کنید ، بنابراین می توانید در یک نگاه سایت ها را "
+"بررسی کنید.<a href=\"%1$s\" target=\"_blank\">اطلاعات بیشتر</a>."
+
+msgid "This option allows you to show %s in the Analytics graphs."
+msgstr "این گزینه به شما امکان می دهد %s را در نمودارهای آنالیز نشان دهید."
+
+msgid "This page can't load Google Maps correctly. Please add %s."
+msgstr ""
+"این صفحه نمی‌تواند نقشۀ گوگل را به درستی بارگذاری کند. لطفاً %s را اضافه کنید."
+
+msgid "This update will install a beta version of Rank Math SEO PRO."
+msgstr "این بروزرسانی یک نسخه بتا از رنک مث پرو را نصب خواهد کرد."
+
+msgid "Thursday"
+msgstr "پنج‌شنبه"
+
+msgid "Time format used in the contact shortcode."
+msgstr "فرمت زمان مورد استفاده در کد کوتاه تماس."
+
+msgid "Timor-Leste"
+msgstr "تیمور-لسته"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Title Casing"
+msgstr "طرح عنوان"
+
+msgid "Title text set for the current image."
+msgstr "تنظیم متن عنوان برای تصویر فعلی."
+
+msgid "To date"
+msgstr "تا تاریخ"
+
+msgid "To update your email preferences, %s. ###ADDRESS###"
+msgstr "برای بروزرسانی تنظیمات ایمیل خود، %s.###ADDRESS###"
+
+msgid "Togo"
+msgstr "توگو"
+
+msgid "Tokelau"
+msgstr "توکلائو"
+
+msgid "Tonga"
+msgstr "تونگا"
+
+msgid "Tools:"
+msgstr "ابزارها:"
+
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgid "Top Losing Keywords"
+msgstr "ضعیفترین کلمه های کلیدی"
+
+msgid "Top Losing Posts"
+msgstr "ضعیف ترین پست ها"
+
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgid "Top Winning Keywords"
+msgstr "برترین کلمه های کلیدی"
+
+msgid "Top Winning Posts"
+msgstr "برترین پست ها"
+
+msgid "Total Clicks"
+msgstr "کل کلیک‌ها"
+
+msgid "Total Impressions"
+msgstr "کل نمایش‌ها"
+
+msgid "Total Keywords"
+msgstr "کلمات کلیدی"
+
+msgid "Tracking Prefix"
+msgstr "پیشوند ردیابی"
+
+msgid "Trinidad & Tobago"
+msgstr "ترینیداد و توباگو"
+
+msgid "Trinidad and Tobago"
+msgstr "ترینیداد و توباگو"
+
+msgid "Tuesday"
+msgstr "سه‌شنبه"
+
+msgid "Tunisia"
+msgstr "تونس"
+
+msgid "Turkey"
+msgstr "ترکیه"
+
+msgid "Turkmenistan"
+msgstr "ترکمنستان"
+
+msgid "Turks & Caicos Islands"
+msgstr "جزایر ترکس و کایکوس"
+
+msgid "Turks and Caicos Islands"
+msgstr "جزایر ترکس و کایکوس"
+
+msgid "Turned Off"
+msgstr "خاموش"
+
+msgid "Tuvalu"
+msgstr "تووالو"
+
+msgid "U.S. Virgin Islands"
+msgstr "جزایر ویرجین ایالات متحده"
+
+msgid "URL"
+msgstr "آدرس URL"
+
+msgid "URL of the item."
+msgstr "آدرس URL این آیتم."
+
+msgid "URL where the logo link should point to."
+msgstr "نشانی URL که لینک لوگو باید به آن اشاره کند."
+
+msgid "Uganda"
+msgstr "اوگاندا"
+
+msgid "Uh-oh"
+msgstr "اوه اوه"
+
+msgid "Ukraine"
+msgstr "اوکراین"
+
+msgid "Uncategorized"
+msgstr "دسته بندی نشده"
+
+msgid "United Arab Emirates"
+msgstr "امارات متحده عربی"
+
+msgid "United Kingdom"
+msgstr "انگلستان"
+
+msgid "United Kingdom (UK)"
+msgstr "انگلستان (UK)"
+
+msgid "United States"
+msgstr "ایالات متحده"
+
+msgid "United States (US)"
+msgstr "ایالات متحده  (US)"
+
+msgid "United States Minor Outlying Islands"
+msgstr "جزایر کوچک حاشیه های ایالات متحده"
+
+msgid "Unknown Region"
+msgstr "ناحیه ناشناخته"
+
+msgid "Unknown object type."
+msgstr "نوع آبجکت ناشناخته است."
+
+msgid "Unpublish when expired"
+msgstr "لغو انتشار در هنگام انقضاء"
+
+msgid "Update"
+msgstr "بروزرسانی"
+
+msgid "Update %s"
+msgstr "به روزرسانی  %s"
+
+msgid "Update %s category"
+msgstr "به‌روزرسانی دسته بندی %s"
+
+msgid "Update Category"
+msgstr "بروزرسانی دسته بندی"
+
+msgid "Update Schema"
+msgstr "به‌روزرسانی اسکیما"
+
+msgid "Updated"
+msgstr "بروز شده"
+
+msgid "Upload"
+msgstr "آپلود"
+
+msgid "Uploading..."
+msgstr "در حال بارگذاری..."
+
+msgid "Uruguay"
+msgstr "اروگوئه"
+
+msgid ""
+"Use %1$s (case-sensitive) as the value for the %2$s column to delete a "
+"redirection."
+msgstr ""
+"از %1$s (حساس به حروف کوچک و بزرگ) به‌عنوان مقدار ستون %2$s برای حذف ریدایرکت "
+"استفاده کنید."
+
+msgid "Use Multiple Locations"
+msgstr "استفاده از چندین مکان"
+
+msgid "Use advanced options"
+msgstr "استفاده از گزینه ‌های پیشرفته"
+
+msgid "Use in Schema Markup"
+msgstr "استفاده در نشانه‌گذاری اسکیما"
+
+msgid ""
+"Use the following columns in the CSV file (the order does not matter): %s"
+msgstr "از ستون‌های زیر در فایل CSV استفاده کنید (ترتیب مهم نیست): %s"
+
+msgid "User Roles:"
+msgstr "نقش‌های کاربری:"
+
+msgid "Users"
+msgstr "کاربران"
+
+msgid "Uzbekistan"
+msgstr "ازبکستان"
+
+msgid "VAT ID"
+msgstr "شناسه مالیات"
+
+msgid "VIEW DETAILED ANALYTICS"
+msgstr "مشاهده تجزیه و تحلیل جزئیات"
+
+msgid "Vanuatu"
+msgstr "وانواتو"
+
+msgid "Vatican"
+msgstr "واتيكان"
+
+msgid "Venezuela"
+msgstr "ونزوئلا"
+
+msgid "Video"
+msgstr "ویدئو"
+
+msgid "Video Post Type"
+msgstr "نوع پست ویدئو"
+
+msgid "Video Sitemap"
+msgstr "نقشه سایت ویدئو"
+
+msgid "Video Sitemaps"
+msgstr "نقشه سایت‌های ویدئو"
+
+msgid ""
+"Video Sitemaps give search engines information about video content on your "
+"site."
+msgstr ""
+"نقشه سایت ویدئو به موتورهای جستجو اطلاعاتی درباره محتوای ویدئویی سایت شما "
+"می‌دهد."
+
+msgid ""
+"Video Sitemaps give search engines information about video content on your "
+"site. More information: <a href=\"%s\" target=\"_blank\">Video Sitemaps</a>"
+msgstr ""
+"نقشه سایت ویدیویی اطلاعاتی در مورد محتوای ویدیویی در سایت شما به موتورهای "
+"جستجو می دهد. اطلاعات بیشتر: <a href=\"%s\" target=\"_blank\">نقشه های سایت "
+"ویدیویی</a>"
+
+msgid "Video Thumbnail"
+msgstr "بند انگشتی ویدئو"
+
+msgid "Video Thumbnail: %s"
+msgstr "بند انگشتی ویدئو: %s"
+
+msgid "Video URL."
+msgstr "آدرس URL ویدئو."
+
+msgid "Viet Nam"
+msgstr "ویتنام"
+
+msgid "Vietnam"
+msgstr "ویتنام"
+
+msgid "View %s"
+msgstr "نمایش %s"
+
+msgid "View Schema"
+msgstr "مشاهدۀ اسکیما"
+
+msgid "View Schemas"
+msgstr "مشاهدۀ اسکیماها"
+
+msgid "Virgin Islands, British"
+msgstr "جزایر ویرجین، بریتانیا"
+
+msgid "Virgin Islands, U.S."
+msgstr "جزایر ویرجین آمریکا"
+
+msgid "Wallis & Futuna"
+msgstr "والیس و فوتونا"
+
+msgid "Wallis and Futuna"
+msgstr "والیس و فوتونا"
+
+msgid "Warning:"
+msgstr "هشدار:"
+
+msgid ""
+"We created %1$sRank Math, a WordPress SEO plugin%2$s, to help every website "
+"owner get access to the SEO tools they need to improve their SEO and attract "
+"more traffic to their website."
+msgstr ""
+"ما %1$sرنک مث، افزونه سئوی وردپرس%2$s را ساختیم، تا به همۀ صاحبان وبسایت‌ها "
+"کمک کنیم تا به ابزار سئوی حرفه‌ای که برای بهبود سئو و افزایش ترافیک وبسایت "
+"خود نیاز دارند دسترسی داشته باشند."
+
+msgid "Website Alternate Name"
+msgstr "نام جایگزین وبسایت"
+
+msgid "Website Name"
+msgstr "نام سایت"
+
+msgid "Wednesday"
+msgstr "چهارشنبه"
+
+msgid "Western Sahara"
+msgstr "صحرای غربی"
+
+msgid "Western Samoa"
+msgstr "ساموای غربی"
+
+msgid ""
+"When enabled, the Winning Keywords and Losing Keywords sections will only "
+"show Tracked Keywords."
+msgstr ""
+"در صورت فعال بودن ، بخش کلمات کلیدی برتر و ضعیف فقط کلمات کلیدی ردیابی شده "
+"را نشان می دهد."
+
+msgid ""
+"When enabled, the Winning Keywords section will only show Tracked Keywords."
+msgstr ""
+"در صورت فعال بودن ، بخش کلمات کلیدی برتر فقط کلمات کلیدی ردیابی شده را نشان "
+"می دهد."
+
+msgid "Worldwide"
+msgstr "در سراسر جهان"
+
+msgid "XML Sitemap"
+msgstr "نقشه سایت XML"
+
+msgid ""
+"XML Sitemaps help search engines index your website&#039;s content more "
+"effectively."
+msgstr ""
+"نقشه سایت XML به موتورهای جستجو کمک می کند تا محتوای وب سایت شما را به طور "
+"مؤثر ایندکس کنند."
+
+msgid "Yemen"
+msgstr "یمن"
+
+msgid "Yes"
+msgstr "بله"
+
+msgid ""
+"You will generally only need a News Sitemap when your website is included in "
+"Google News."
+msgstr ""
+"عموماً تنها زمانی به یک نقشه سایت خبری نیاز خواهید داشت که وب سایت شما در "
+"گوگل نیوز وارد شود."
+
+msgid ""
+"You will generally only need a Video Sitemap when your website has video "
+"content."
+msgstr ""
+"شما به طور کلی فقط زمانی به نقشه سایت ویدئو نیاز دارید که وب سایت شما دارای "
+"محتوای ویدیویی باشد."
+
+msgid "Your Locations KML file can be found here: %s"
+msgstr "فایل KML مکان های خود را می توانید در اینجا پیدا کنید: %s"
+
+msgid "Your News Sitemap index can be found here: : %s"
+msgstr "می‌توانید ایندکس نقشه سایت خبری خود را از اینجا مشاهده کنید: %s"
+
+msgid "Your Podcast RSS feed can be found here: %s"
+msgstr "فید RSS پادکست خود را می‌توانید در اینجا پیدا کنید: %s"
+
+msgid "Your Video Sitemap index can be found here: %s"
+msgstr "ایندکس نقشه سایت ویدئو شما از اینجا قابل مشاهده است: %s"
+
+msgid "Your location:"
+msgstr "مکان شما:"
+
+msgid ""
+"Your name or company name intended to feature in Google's Knowledge Panel."
+msgstr "نام یا نام شرکت شما که در پنل دانش گوگل نمایش داده شود."
+
+msgid "Zambia"
+msgstr "زامبیا"
+
+msgid "Zimbabwe"
+msgstr "زیمباوه"
+
+msgid "all lowercase"
+msgstr "همه با حروف کوچک"
+
+msgid "click here"
+msgstr "اینجا کلیک کنید"
+
+msgid "e.g. 09:00-17:00"
+msgstr "مثال: 09:00-17:00"
+
+msgid ""
+"locations.kml Sitemap is generated automatically when the Local SEO module "
+"is enabled, and the geo-coordinates are added."
+msgstr ""
+"هنگامی که ماژول سئوی محلی فعال است و مختصات جغرافیایی اضافه می شود ، نقشه "
+"سایت Location.kml به طور خودکار ایجاد می شود."
+
+msgid "our Knowledge Base article"
+msgstr "مقاله پایگاه دانش ما"
+
+msgctxt "taxonomy general name"
+msgid "Redirection Categories"
+msgstr "دسته‌ بندی های ریدایرکت‌ها"
+
+msgctxt "taxonomy singular name"
+msgid "Redirection Category"
+msgstr "دسته بندی ریدایرکت"
+
+msgid "Åland Islands"
+msgstr "جزایراسلند"

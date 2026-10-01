@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-tp-mode="light">
+<head>
+<meta charset="utf-8">
+<title>صحنهٔ آزمون سربرگ زیر انیمیشن هوا</title>
+
+<!--
+  دارایی‌ها با نام ساده صدا زده می‌شوند و `contrast.php --deep` آن‌ها را
+  هر بار **تازه از پوشهٔ افزونه** کنار این فایل می‌گذارد.
+
+  عمداً نسخهٔ دستیِ نگه‌داشته در `.preview/` نیست: آن نسخه می‌تواند عقب
+  بماند و آزمون بی‌صدا چیزی را بسنجد که دیگر تولیدی نیست.  P5-D198
+-->
+<link rel="stylesheet" href="topersia-tokens.css">
+<link rel="stylesheet" href="topersia-theme-bridge.css">
+<link rel="stylesheet" href="topersia-g-template.css">
+
+<!-- بعد از ما، همان‌طور که در سایت. `user-core` دقیقاً `.tp-hero h1` را
+     هدف می‌گیرد، پس بی‌آن این صفحه سربرگی را می‌سنجد که وجود ندارد. P5-D202 -->
+<link rel="stylesheet" href="woodmart-base-rtl.css">
+<link rel="stylesheet" href="user-core.css">
+
+<style>
+  html,body{margin:0;background:var(--tp-bg)}
+  /* سربرگ تنها، بی‌حاشیه، تا برش عکس دقیقاً خودش باشد */
+  .tp-page{margin:0;max-inline-size:none}
+</style>
+
+<script>
+/*
+ * پیش از هر چیز دیگر: نشانه‌های حالت روی <html>.
+ *
+ * همان‌جایی می‌نشینند که وردپرس می‌گذارد — پیش از بارشدن اسکریپت هوا —
+ * وگرنه آزمون چیزی را می‌سنجد که در زندگی واقعی دیرتر می‌رسد.
+ */
+( function () {
+	var q = new URLSearchParams( location.search );
+	var root = document.documentElement;
+
+	if ( q.get( 'mode' ) ) { root.setAttribute( 'data-tp-mode', q.get( 'mode' ) ); }
+	if ( 'off' === q.get( 'motion' ) ) { root.setAttribute( 'data-motion', 'off' ); }
+	if ( 'on' === q.get( 'calm' ) ) { root.setAttribute( 'data-calm', 'on' ); }
+}() );
+</script>
+</head>
+<!-- کلاس‌های بدنه از `reference/live-body-class.txt` در زمان ساخت تزریق
+     می‌شوند؛ بی‌آن‌ها لایهٔ `.tp-shell` خاموش است.  P5-D206 -->
+<body class="tp-shell">
+
+<div class="tp-page">
+  <header class="tp-hero" id="hero">
+    <div class="tp-hero__fallback" aria-hidden="true"></div>
+    <div class="tp-hero__overlay" aria-hidden="true"></div>
+    <div class="tp-hero__in"><div class="tp-hero__copy" id="copy">
+      <p class="tp-eyebrow">استان</p>
+      <h1>استان اصفهان</h1>
+      <p class="tp-hero__alt">Isfahan Province · محافظة أصفهان</p>
+      <p class="tp-hero__lead">سومین استان پهناور ایران در مرکز فلات، با میراثی که از صفویه تا امروز ادامه دارد.</p>
+    </div></div>
+  </header>
+</div>
+
+<script src="topersia-g-weather.js"></script>
+<script src="topersia-g-weather-fx.js"></script>
+<script>
+(function () {
+	'use strict';
+
+	var hero = document.getElementById( 'hero' );
+	var copy = document.getElementById( 'copy' );
+	var ctl = null;
+
+	/* نمونه‌های هوا — عمداً شدید، تا بدترین حالت هر وضعیت سنجیده شود */
+	var WX = {
+		rain:  { state:'rain',  precipMm:12, windDeg:270, windKph:34, isDay:1 },
+		snow:  { state:'snow',  precipMm:6,  windDeg:300, windKph:22, isDay:1 },
+		storm: { state:'storm', precipMm:14, windDeg:250, windKph:46, isDay:1 },
+		dust:  { state:'dust',  precipMm:0,  windDeg:270, windKph:55, isDay:1 },
+		fog:   { state:'fog',   precipMm:0,  windDeg:200, windKph:10, isDay:1 }
+	};
+
+	function layerEl() { return hero.querySelector( '.tp-wx-fx' ); }
+
+	function stored( state ) {
+		try { return !! sessionStorage.getItem( 'tp-wx-fx-' + state ); }
+		catch ( e ) { return null; }
+	}
+
+	/* ── سنجش کنتراست ─────────────────────────────────────────────── */
+
+	window.__setup = function ( mode, state ) {
+
+		document.documentElement.setAttribute( 'data-tp-mode', mode );
+
+		if ( ctl ) { ctl.stop(); }
+		var old = layerEl();
+		if ( old && old.parentNode ) { old.parentNode.removeChild( old ); }
+
+		/* هر ترکیب باید تازه سوار شود، وگرنه «یک‌بار در هر نشست» جلویش
+		   را می‌گیرد و عکسِ خالی سنجیده می‌شود */
+		try { sessionStorage.clear(); } catch ( e ) {}
+
+		ctl = state ? window.TopersiaWeatherFx.mount( hero, WX[ state ] ) : null;
+
+		/* لایه را بی‌درنگ کاملاً مرئی کن — محوشدن ورودی نباید عدد را نرم کند */
+		var layer = layerEl();
+		if ( layer ) {
+			layer.classList.add( 'is-on' );
+			layer.style.transition = 'none';
+		}
+
+		return !! ctl || ! state;
+	};
+
+	/* فلاش را روشن نگه می‌دارد — روشن‌ترین نقطهٔ چرخه */
+	window.__flash = function ( on ) {
+		var f = hero.querySelector( '.tp-wx-fx__flash' );
+		if ( ! f ) { return false; }
+		f.style.transition = 'none';
+		if ( on ) { f.classList.add( 'is-lit' ); } else { f.classList.remove( 'is-lit' ); }
+		return true;
+	};
+
+	/**
+	 * فریمِ بدترین‌حالت — دروازهٔ سنجش.  P5-D199
+	 *
+	 * لایه را با رنگ ذره در بیشینهٔ آلفا کامل پر می‌کند، بعد ماسک روی
+	 * همین می‌نشیند چون روی خودِ `.tp-wx-fx` است. هیچ چیدمان تصادفی از
+	 * این روشن‌تر نمی‌شود، پس اگر متن روی این رد شود روی هر فریم واقعی
+	 * رد می‌شود.
+	 *
+	 * لایهٔ تولیدی دست‌نخورده می‌ماند — همان عنصر، همان کلاس، همان ماسک
+	 * و همان جای z. فقط آنچه کشیده می‌شود عوض می‌شود.
+	 */
+	window.__worst = function () {
+
+		var layer = layerEl();
+		if ( ! layer || ! ctl ) { return null; }
+
+		var peak = window.TopersiaWeatherFx.peak( ctl.profile );
+		if ( ! peak ) { return null; }
+
+		/*
+		 * بوم زنده بیرون کشیده می‌شود، نه لایه: حلقه در بومِ جداشده
+		 * می‌کشد و بی‌اثر می‌شود، بی‌آنکه چیزی برچیده شود یا پرِ ما را
+		 * فریم بعد پاک کند.
+		 */
+		var live = layer.querySelector( 'canvas' );
+		if ( live && live.parentNode ) { live.parentNode.removeChild( live ); }
+
+		/* مه بوم ندارد و شیب است؛ پرِ تخت جای شیب می‌نشیند و نفس‌کشیدن
+		   خاموش می‌شود — هر دو سطح را روشن‌تر می‌کنند، نه تاریک‌تر. */
+		layer.style.animation = 'none';
+		layer.style.background = 'rgba(' + peak.rgb + ',' + peak.alpha + ')';
+
+		/* برقِ طوفان تصادفی نیست، پس همان CSS واقعی روشن می‌ماند */
+		if ( 'storm' === ctl.profile.state ) { window.__flash( true ); }
+
+		return { state: ctl.profile.state, rgb: peak.rgb, alpha: peak.alpha };
+	};
+
+	window.__hideText = function ( hide ) {
+		copy.style.visibility = hide ? 'hidden' : '';
+		return true;
+	};
+
+	window.__heroRect = function () {
+		var r = hero.getBoundingClientRect();
+		return { x:r.left, y:r.top, width:r.width, height:r.height };
+	};
+
+	/* مستطیل هر متن، نسبت به خودِ سربرگ */
+	window.__targets = function () {
+		var hr = hero.getBoundingClientRect();
+		return Array.prototype.map.call(
+			copy.querySelectorAll( 'p, h1' ),
+			function ( el ) {
+				var r = el.getBoundingClientRect();
+				var cs = getComputedStyle( el );
+				return {
+					name: ( el.className || el.tagName ).toString(),
+					color: cs.color,
+					size: Math.round( parseFloat( cs.fontSize ) * 10 ) / 10,
+					x: r.left - hr.left, y: r.top - hr.top,
+					w: r.width, h: r.height
+				};
+			}
+		);
+	};
+
+	/**
+	 * بدترین پیکسل زیر هر متن.
+	 *
+	 * عکس با متنِ پنهان گرفته شده، پس آنچه می‌خوانیم دقیقاً زمینه است —
+	 * با همهٔ لایه‌ها، گرادیان‌ها و فلاش، نه ترکیب حدسیِ نیاکان.
+	 */
+	window.__measure = function ( dataUrl, targets ) {
+
+		return new Promise( function ( resolve ) {
+
+			var img = new Image();
+
+			img.onload = function () {
+
+				var cv = document.createElement( 'canvas' );
+				cv.width = img.naturalWidth;
+				cv.height = img.naturalHeight;
+				var g = cv.getContext( '2d', { willReadFrequently: true } );
+				g.drawImage( img, 0, 0 );
+
+				var hr = hero.getBoundingClientRect();
+				var sx = img.naturalWidth / hr.width;
+				var sy = img.naturalHeight / hr.height;
+
+				function lum( r, gg, b ) {
+					function f( v ) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow( ( v + 0.055 ) / 1.055, 2.4 ); }
+					return 0.2126 * f( r ) + 0.7152 * f( gg ) + 0.0722 * f( b );
+				}
+
+				function ratio( l1, l2 ) {
+					return ( Math.max( l1, l2 ) + 0.05 ) / ( Math.min( l1, l2 ) + 0.05 );
+				}
+
+				var out = targets.map( function ( t ) {
+
+					var m = t.color.match( /[\d.]+/g ).map( Number );
+					var lText = lum( m[ 0 ], m[ 1 ], m[ 2 ] );
+
+					var x0 = Math.max( 0, Math.floor( t.x * sx ) );
+					var y0 = Math.max( 0, Math.floor( t.y * sy ) );
+					var x1 = Math.min( cv.width,  Math.ceil( ( t.x + t.w ) * sx ) );
+					var y1 = Math.min( cv.height, Math.ceil( ( t.y + t.h ) * sy ) );
+
+					if ( x1 <= x0 || y1 <= y0 ) { return { name: t.name, worst: null }; }
+
+					var data = g.getImageData( x0, y0, x1 - x0, y1 - y0 ).data;
+					var worst = Infinity, wp = null, sum = 0, n = 0;
+
+					for ( var p = 0; p < data.length; p += 4 * 2 ) {
+						var r = ratio( lText, lum( data[ p ], data[ p + 1 ], data[ p + 2 ] ) );
+						sum += r; n ++;
+						if ( r < worst ) { worst = r; wp = [ data[ p ], data[ p + 1 ], data[ p + 2 ] ]; }
+					}
+
+					return {
+						name: t.name,
+						size: t.size,
+						worst: Math.round( worst * 100 ) / 100,
+						mean: Math.round( ( sum / n ) * 100 ) / 100,
+						worstPixel: wp
+					};
+				} );
+
+				resolve( out );
+			};
+
+			img.onerror = function () { resolve( [ { error: 'تصویر بار نشد' } ] ); };
+			img.src = dataUrl;
+		} );
+	};
+
+	/* ── سنجش دروازهٔ حرکت ─────────────────────────────────────────── */
+
+	/*
+	 * این بخش با `__setup` فرق دارد و باید فرق داشته باشد: آن‌جا لایه
+	 * به‌زور سوار می‌شود تا رنگ سنجیده شود؛ این‌جا پرسش خودِ سوارشدن
+	 * است. پس نه چیزی پاک می‌شود، نه زوری در کار است.
+	 */
+
+	var auto = null;
+	var q = new URLSearchParams( location.search );
+	var want = q.get( 'state' );
+
+	if ( 'clear' === q.get( 'session' ) ) {
+		try { sessionStorage.clear(); } catch ( e ) {}
+	}
+
+	if ( want ) {
+
+		var before = hero.children.length;
+		var c = window.TopersiaWeatherFx.mount( hero, WX[ want ] );
+		var el = layerEl();
+
+		auto = {
+			state: want,
+			mounted: !! c,
+			/* «ساخته نشد» یعنی عنصری در DOM نیست — نه ساخته‌شده‌ای که با
+			   شفافیت صفر پنهان است و حلقه‌اش پشتش می‌چرخد */
+			layer: !! el,
+			canvas: !! ( el && el.querySelector( 'canvas' ) ),
+			kidsBefore: before,
+			kidsAfter: hero.children.length,
+			stored: stored( want ),
+			allowed: window.TopersiaWeatherFx.motionAllowed(),
+			reduce: matchMedia( '(prefers-reduced-motion: reduce)' ).matches,
+			motionAttr: document.documentElement.getAttribute( 'data-motion' ),
+			calmAttr: document.documentElement.getAttribute( 'data-calm' )
+		};
+
+		if ( c ) { c.stop(); }
+	}
+
+	window.__auto = function () { return auto; };
+}());
+</script>
+</body>
+</html>

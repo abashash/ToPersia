@@ -1,0 +1,40 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "Preparing...": [
+            "آماده‌سازی..."
+        ],
+        "All jobs have been cancelled": [
+            "همه کارها لغو شده است"
+        ],
+        "There is no more jobs to cancel": [
+            "کار دیگری برای لغو وجود ندارد"
+        ],
+        "The jobs cancellation has failed": [
+            "لغو کارها ناموفق بود"
+        ],
+        "Cancel in-progress automatic jobs": [
+            "کارهای خودکار در حال انجام را لغو کنید"
+        ],
+        "Domain name has been updated": [
+            "نام دامنه بروز شد"
+        ],
+        "Domain name update has been failed": [
+            "بروز رسانی نام دامنه ناموفق بود"
+        ],
+        "Update domain name in language switcher settings": [
+            "نام دامنه را در تنظیمات سوئیچر زبان بروز کنید"
+        ],
+        "Refresh license data to recognise license update": [
+            "برای تشخیص به‌روزرسانی لایسنس، داده‌های لایسنس را بازخوانی کنید"
+        ],
+        "WPML License has been refreshed": [
+            "لایسنس WPML بروز شده است"
+        ]        
+      }
+    }
+  }

@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "slug": "tp_country",
+    "status": "publish"
+  },
+  {
+    "id": 2,
+    "slug": "tp_province",
+    "status": "publish"
+  },
+  {
+    "id": 3,
+    "slug": "tp_county",
+    "status": "publish"
+  },
+  {
+    "id": 4,
+    "slug": "tp_city",
+    "status": "publish"
+  },
+  {
+    "id": 5,
+    "slug": "tp_region",
+    "status": "publish"
+  },
+  {
+    "id": 6,
+    "slug": "tp_island",
+    "status": "publish"
+  },
+  {
+    "id": 7,
+    "slug": "tp_desert",
+    "status": "publish"
+  },
+  {
+    "id": 8,
+    "slug": "tp_village",
+    "status": "publish"
+  },
+  {
+    "id": 9,
+    "slug": "tp_mountain",
+    "status": "publish"
+  },
+  {
+    "id": 10,
+    "slug": "tp_water_body",
+    "status": "publish"
+  },
+  {
+    "id": 11,
+    "slug": "tp_district",
+    "status": "publish"
+  },
+  {
+    "id": 12,
+    "slug": "tp_forest_plain",
+    "status": "publish"
+  },
+  {
+    "id": 13,
+    "slug": "tp_border_crossing",
+    "status": "publish"
+  },
+  {
+    "id": 14,
+    "slug": "tp_monument",
+    "status": "publish"
+  },
+  {
+    "id": 15,
+    "slug": "tp_religious_site",
+    "status": "publish"
+  },
+  {
+    "id": 16,
+    "slug": "tp_ancient_site",
+    "status": "publish"
+  },
+  {
+    "id": 17,
+    "slug": "tp_natural_feature",
+    "status": "publish"
+  },
+  {
+    "id": 18,
+    "slug": "tp_museum",
+    "status": "publish"
+  },
+  {
+    "id": 19,
+    "slug": "tp_protected_area",
+    "status": "publish"
+  },
+  {
+    "id": 20,
+    "slug": "tp_landscape",
+    "status": "publish"
+  },
+  {
+    "id": 21,
+    "slug": "tp_handicraft",
+    "status": "publish"
+  },
+  {
+    "id": 22,
+    "slug": "tp_local_food",
+    "status": "publish"
+  },
+  {
+    "id": 23,
+    "slug": "tp_costume",
+    "status": "publish"
+  },
+  {
+    "id": 24,
+    "slug": "tp_music",
+    "status": "publish"
+  },
+  {
+    "id": 25,
+    "slug": "tp_dance",
+    "status": "publish"
+  },
+  {
+    "id": 26,
+    "slug": "tp_language",
+    "status": "publish"
+  },
+  {
+    "id": 27,
+    "slug": "tp_ethnic_group",
+    "status": "publish"
+  },
+  {
+    "id": 28,
+    "slug": "tp_ritual",
+    "status": "publish"
+  }
+]

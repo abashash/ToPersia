@@ -1,0 +1,13 @@
+/*!
+DUPLICATOR IMPORT ADDON STYLE
+*/
+
+@import "../../../../node_modules/foundation-sites/scss/foundation";
+@import '../../../../assets/sass/settings';
+
+.dup-styles {
+    @import "import";
+}
+
+// Must be outside of .dup-styles: full-page admin view used by the import installer
+@import "import_installer";

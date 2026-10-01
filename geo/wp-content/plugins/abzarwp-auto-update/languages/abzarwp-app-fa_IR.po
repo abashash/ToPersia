@@ -1,0 +1,855 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AbzarWP - Auto Update\n"
+"POT-Creation-Date: 2022-03-04 18:23+0330\n"
+"PO-Revision-Date: 2022-03-04 18:23+0330\n"
+"Last-Translator: Mahdi Akrami <info@akrami.pro>\n"
+"Language-Team: Mahdi Akrami <info@akrami.pro>\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: index.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: App/API/API.php:55 App/API/HTTP.php:61 App/Account.php:303
+#: App/Account.php:381 App/Authentication.php:89 App/Backups.php:412
+#: App/LoginWithoutPassword.php:49 App/Products.php:1125
+#: App/Tables/Actions.php:277
+msgid "An error occurred. Please try again."
+msgstr "خطایی رخ داده است. لطفاً دوباره تلاش کنید."
+
+#: App/Account.php:303
+msgid "Switch Account"
+msgstr "تعویض حساب"
+
+#: App/Account.php:381
+msgid "Logout Account"
+msgstr "خروج از حساب"
+
+#: App/Ajax.php:120 App/Ajax.php:155
+msgid "No items selected!"
+msgstr "هنوز محصولی انتخاب نشده است!"
+
+#: App/Ajax.php:130
+msgid "Invalid Action."
+msgstr "عملیات نامعتبر."
+
+#: App/Ajax.php:161
+msgid "Product not found!"
+msgstr "محصول یافت نشد!"
+
+#: App/Ajax.php:169
+msgid "Error"
+msgstr "خطا"
+
+#: App/Ajax.php:243 App/Views/Templates/Select-Products.php:19
+msgid "No products found for installation."
+msgstr "هیچ محصولی برای نصب یافت نشد."
+
+#: App/Ajax.php:282
+msgid "Buy product for this domain"
+msgstr "خرید محصول برای این دامنه"
+
+#: App/Ajax.php:316
+msgid "Selected products successfully installed."
+msgstr "محصولات انتخاب شده با موفقیت نصب شدند."
+
+#: App/Authentication.php:92
+msgid "Your account connected successfully."
+msgstr "حساب شما با موفقیت متصل شد."
+
+#: App/Authentication.php:95 App/Dashboard.php:551
+#: App/Views/dashboard-header.php:100
+msgid "Connect Account"
+msgstr "اتصال حساب کاربری"
+
+#: App/Backups.php:67
+msgid "Invalid Product."
+msgstr "محصول نامعتبر است."
+
+#: App/Backups.php:72
+msgid "Can't Create Backup Folder."
+msgstr "خطایی در ساخت پوشه فایل پشتیبان رخ داده است."
+
+#: App/Backups.php:157
+msgid "Create Backup Error: Product Folder Not Exist."
+msgstr "خطای ایجاد فایل پشتیبان: پوشه محصول برای ایجاد فایل ZIP پیدا نشد."
+
+#: App/Backups.php:183
+msgid "Create Backup Error: Unable to Create Zip Archive."
+msgstr "خطای ایجاد فایل پشتیبان: خطایی در ساخت فایل ZIP رخ داده است."
+
+#: App/Backups.php:404
+msgid "Backup File Deleted Successful."
+msgstr "فایل پشتیبان با موفقیت حذف شد."
+
+#: App/Dashboard.php:43
+msgid "Plugins"
+msgstr "افزونه‌ها"
+
+#: App/Dashboard.php:50
+msgid "Themes"
+msgstr "قالب‌ها"
+
+#: App/Dashboard.php:57
+msgid "Backups"
+msgstr "فایل‌های پشتیبان"
+
+#: App/Dashboard.php:63
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: App/Dashboard.php:82
+msgid "No Access"
+msgstr "عدم دسترسی"
+
+#: App/Dashboard.php:89
+msgid "You do not have access to update plugins or theme."
+msgstr "شما دسترسی آپدیت افزونه‌ها و قالب‌ها را ندارید."
+
+#: App/Dashboard.php:193
+msgid "AbzarWP Auto Updater"
+msgstr "آپدیت خودکار ابزار وردپرس"
+
+#: App/Dashboard.php:194
+msgid "AbzarWP Updater"
+msgstr "ابزار وردپرس"
+
+#: App/Dashboard.php:207 App/Tables/Base.php:116
+#: App/Views/dashboard-header.php:76
+msgid "Add Product"
+msgstr "افزودن محصول"
+
+#: App/Dashboard.php:213 App/Views/Modal/Login-Without-Password.php:19
+#: App/Views/dashboard-header.php:132
+msgid "Temporary Login Without Password"
+msgstr "لاگین بدون گذرواژه"
+
+#: App/Dashboard.php:218 App/Debug.php:391 App/Views/dashboard-header.php:126
+msgid "Site Health Info"
+msgstr "اطلاعات سلامت سایت"
+
+#: App/Dashboard.php:223 App/Views/Templates/Helper-Links.php:9
+msgid "Support"
+msgstr "پشتیبانی"
+
+#: App/Dashboard.php:479
+msgid "Select"
+msgstr "انتخاب کنید"
+
+#: App/Dashboard.php:480 App/Debug.php:409
+msgid "Copied!"
+msgstr "کپی شد!"
+
+#: App/Dashboard.php:481 App/Helper.php:1065
+msgid "Are you sure?"
+msgstr "آیا مطمئن هستید؟"
+
+#: App/Dashboard.php:482 App/Tables/Actions.php:269
+msgid "Success!"
+msgstr "با موفقیت انجام شد."
+
+#: App/Dashboard.php:483
+msgid "Something went wrong."
+msgstr "مشکلی رخ داد."
+
+#: App/Dashboard.php:484
+msgid "Install canceled."
+msgstr "نصب متوقف شد."
+
+#: App/Dashboard.php:485
+#, php-format
+msgid "Update failed: %s"
+msgstr "آپدیت ناموفق بود: %s"
+
+#: App/Dashboard.php:486
+#, php-format
+msgid "Installation failed: %s"
+msgstr "نصب ناموفق بود: %s"
+
+#: App/Dashboard.php:487
+#, php-format
+msgid "Activation failed: %s"
+msgstr "فعال کردن ناموفق بود: %s"
+
+#: App/Dashboard.php:488
+#, php-format
+msgid "Deactivation failed: %s"
+msgstr "غیر فعال کردن ناموفق بود: %s"
+
+#: App/Dashboard.php:489
+#, php-format
+msgid "Deletion failed: %s"
+msgstr "حذف نشد: %s"
+
+#: App/Dashboard.php:490
+#, php-format
+msgid "%s was successfully deleted."
+msgstr "%s با موفقیت پاک شد."
+
+#: App/Dashboard.php:492
+msgid "An error has occurred. Please reload the page and try again."
+msgstr "خطایی رخ داد. لطفاً برگه را دوباره بارگذاری و دوباره تلاش نمایید."
+
+#: App/Dashboard.php:546
+msgid "Welcome to AbzarWP Updater"
+msgstr "به آپدیت خودکار ابزار وردپرس خوش آمدید"
+
+#: App/Dashboard.php:547
+msgid "You need to connect your account to get started."
+msgstr "برای شروع باید حساب خود را متصل کنید."
+
+#: App/Debug.php:369
+msgid "The Site Health check requires JavaScript."
+msgstr ""
+
+#. translators: %s: URL to Site Health Status page.
+#: App/Debug.php:397
+#, php-format
+msgid ""
+"This page can show you every detail about the configuration of your "
+"WordPress website. For any improvements that could be made, see the <a href="
+"\"%s\">Site Health Status</a> page."
+msgstr ""
+
+#: App/Debug.php:401
+msgid ""
+"If you want to export a handy list of all the information on this page, you "
+"can use the button below to copy it to the clipboard. You can then paste it "
+"in a text file and save it to your device, or paste it in an email exchange "
+"with a support engineer or theme/plugin developer for example."
+msgstr ""
+
+#: App/Debug.php:407
+msgid "Copy site info to clipboard"
+msgstr ""
+
+#: App/Debug.php:508 App/Tables/Base.php:104 App/Views/Tabs/settings.php:184
+msgid "No items found."
+msgstr "موردی پیدا نشد."
+
+#: App/Email.php:206
+#, php-format
+msgid "New updates available for %s"
+msgstr "آپدیت جدید برای %s در دسترس است"
+
+#: App/Helper.php:679
+msgid ""
+"The size cannot be calculated. The directory is not accessible. Usually "
+"caused by invalid permissions."
+msgstr ""
+
+#: App/Helper.php:684
+msgid ""
+"The directory size calculation has timed out. Usually caused by a very large "
+"number of sub-directories and files."
+msgstr ""
+
+#: App/Helper.php:779
+msgid "Connection Information"
+msgstr ""
+
+#. translators: 1: Current WordPress version, 2: Plugin name, 3: Required WordPress version.
+#: App/Helper.php:809
+#, php-format
+msgctxt "plugin"
+msgid ""
+"<strong>Error:</strong> Current WordPress version (%1$s) does not meet "
+"minimum requirements for %2$s. The plugin requires WordPress %3$s."
+msgstr ""
+
+#: App/Helper.php:886
+msgid "Once Hourly"
+msgstr "ساعتی یک بار"
+
+#: App/Helper.php:890
+msgid "Once Daily"
+msgstr "روزانه یک بار"
+
+#: App/Helper.php:894
+msgid "Twice Daily"
+msgstr "روزانه دوبار"
+
+#: App/Helper.php:898
+msgid "Once Weekly"
+msgstr "یک‌بار در هفته"
+
+#: App/Helper.php:902
+msgid "Once Monthly"
+msgstr "یک‌بار در ماه"
+
+#: App/LoginWithoutPassword.php:26
+msgid "Cannot crete link, permission denied."
+msgstr ""
+
+#: App/LoginWithoutPassword.php:266
+msgid "This link has expired."
+msgstr "این پیوند منقضی شده است یا وجود ندارد."
+
+#: App/Products.php:952
+msgid " has been publicly disabled from the settings tab."
+msgstr " از تب تنظیمات به صورت همگانی غیر فعال شده است."
+
+#: App/Products.php:956 App/Views/Tabs/settings.php:30
+msgid "Check Abzarwp Plugins Update"
+msgstr "هشدار وجود آپدیت برای افزونه‌های ابزار وردپرس"
+
+#: App/Products.php:960 App/Views/Tabs/settings.php:62
+msgid "Check Wordpress Plugins Update"
+msgstr "هشدار وجود آپدیت برای افزونه‌های وردپرس"
+
+#: App/Products.php:964 App/Views/Tabs/settings.php:37
+msgid "Check Abzarwp Themes Update"
+msgstr "هشدار وجود آپدیت برای قالب‌های ابزار وردپرس"
+
+#: App/Products.php:1007
+msgid "Active"
+msgstr "فعال"
+
+#: App/Products.php:1008
+msgid "Inactive"
+msgstr "غیر فعال"
+
+#: App/Products.php:1009
+msgid "Not Installed"
+msgstr "نصب نشده"
+
+#: App/Products.php:1017
+msgid "Updates Enabled"
+msgstr "هشدار آپدیت فعال است"
+
+#: App/Products.php:1018
+msgid "Updates Disabled"
+msgstr "هشدار آپدیت غیر فعال است"
+
+#: App/Products.php:1019
+msgid "Update Available"
+msgstr "آپدیت در دسترس است"
+
+#: App/Products.php:1111
+msgid "Product Deleted Successful."
+msgstr "محصول با موفقیت حذف شد."
+
+#: App/Tables/Backups.php:38
+msgid "Uncertain (Host Limitation)"
+msgstr "نامشخص (محدودیت هاست)"
+
+#: App/Tables/Backups.php:45
+msgid "Recalculate"
+msgstr "محاسبه مجدد"
+
+#: App/Tables/Backups.php:52
+#, php-format
+msgid "Used space: %s"
+msgstr "فضای استفاده شده: %s"
+
+#: App/Tables/Backups.php:58
+#, php-format
+msgid "Free space: %s"
+msgstr "فضای خالی: %s"
+
+#: App/Tables/Backups.php:69
+msgid "Backup Folder:"
+msgstr "مسیر ذخیره فایل‌ها:"
+
+#: App/Tables/Backups.php:82 App/Tables/Base.php:333
+#: App/Views/Templates/List-Products-Table.php:23
+msgid "Name"
+msgstr "نام"
+
+#: App/Tables/Backups.php:83
+msgid "Version"
+msgstr "نگارش"
+
+#: App/Tables/Backups.php:150
+msgid "Download"
+msgstr "دانلود"
+
+#: App/Tables/Backups.php:160 App/Tables/Products.php:217
+#: App/Tables/Products.php:367
+msgid "Delete"
+msgstr "پاک کردن"
+
+#: App/Tables/Backups.php:173
+msgid "Type"
+msgstr ""
+
+#: App/Tables/Backups.php:181
+msgid "Creation Date"
+msgstr "تاریخ ایجاد"
+
+#: App/Tables/Base.php:334 App/Views/Templates/List-Products-Table.php:24
+msgid "Description"
+msgstr "توضیح"
+
+#: App/Tables/Base.php:639
+msgid "Select bulk action"
+msgstr "انتخاب کار دسته جمعی"
+
+#: App/Tables/Base.php:641
+msgid "Bulk actions"
+msgstr "کارهای دسته‌جمعی"
+
+#: App/Tables/Base.php:662
+msgid "Apply"
+msgstr ""
+
+#: App/Tables/Products.php:114
+msgid "There is a new version available."
+msgstr "نگارش تازه‌ای در دسترس است."
+
+#: App/Tables/Products.php:117
+msgid "Receive updates for this product is active."
+msgstr "دریافت آپدیت برای این محصول فعال است."
+
+#: App/Tables/Products.php:127
+msgid "Receive updates for this product has been disabled."
+msgstr "دریافت آپدیت برای این محصول غیر فعال شده است."
+
+#: App/Tables/Products.php:164 App/Views/Templates/List-Products-Table.php:48
+#, php-format
+msgid "Version %s"
+msgstr "نگارش %s"
+
+#: App/Tables/Products.php:189
+msgid "Actions"
+msgstr "عملیات‌ها"
+
+#: App/Tables/Products.php:190 App/Tables/Products.php:239
+msgid "Update Status"
+msgstr "وضعیت آپدیت"
+
+#: App/Tables/Products.php:195
+msgid "Network Activate"
+msgstr "فعال کردن در شبکه"
+
+#: App/Tables/Products.php:195 App/Tables/Products.php:340
+msgid "Activate"
+msgstr "فعال کردن"
+
+#: App/Tables/Products.php:199
+msgid "Network Deactivate"
+msgstr "غیر فعال کردن در شبکه"
+
+#: App/Tables/Products.php:199 App/Tables/Products.php:353
+msgid "Deactivate"
+msgstr "غیر فعال کردن"
+
+#: App/Tables/Products.php:205 App/Tables/Products.php:329
+msgid "Install"
+msgstr "نصب کردن"
+
+#: App/Tables/Products.php:213
+msgid "Update"
+msgstr "آپدیت"
+
+#: App/Tables/Products.php:222
+msgid "Enable Updates"
+msgstr "فعال کردن هشدار آپدیت"
+
+#: App/Tables/Products.php:223
+msgid "Disable Updates"
+msgstr "غیر فعال کردن هشدار آپدیت"
+
+#: App/Tables/Products.php:238
+msgid "Install Status"
+msgstr "وضعیت نصب"
+
+#: App/Tables/Products.php:242
+msgid "Show all"
+msgstr "نمایش همه"
+
+#. translators: %s: Number of items.
+#: App/Tables/Products.php:265
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: App/Tables/Products.php:371
+msgid "Remove from list"
+msgstr "حذف از لیست"
+
+#: App/Tables/Products.php:379
+#, php-format
+msgid "Are you sure you want to delete %s?"
+msgstr "آیا مطمئنید می‌خواهید %s را حذف کنید؟"
+
+#: App/Views/Modal/Accounts.php:32 App/Views/dashboard-header.php:120
+msgid "Switch Accounts"
+msgstr "مدیریت حساب‌ها"
+
+#: App/Views/Modal/Accounts.php:82 App/Views/dashboard-header.php:140
+msgid "Log out account"
+msgstr "خروج از حساب"
+
+#: App/Views/Modal/Accounts.php:104
+msgid "Log into an Existing Account"
+msgstr "افزودن حساب جدید"
+
+#: App/Views/Modal/Add-Products.php:20
+msgid "Add Products"
+msgstr "افزودن محصولات"
+
+#: App/Views/Modal/Add-Products.php:30
+msgid ""
+"If you select \"Ready Sites\", all the products used in it will be usable "
+"only for one domain."
+msgstr ""
+"در صورت انتخاب \"سایت های آماده\" تمامی محصولات استفاده شده در آن فقط برای "
+"یک دامنه قابل استفاده خواهند بود."
+
+#: App/Views/Modal/Add-Products.php:39 App/Views/dashboard.php:11
+msgid "Loading..."
+msgstr "در حال دریافت اطلاعات ..."
+
+#: App/Views/Modal/Add-Products.php:61
+msgid "Selected Products"
+msgstr "محصولات انتخاب شده"
+
+#: App/Views/Modal/Add-Products.php:73
+#, php-format
+msgid "You have selected %1$s products to install on the %2$s domain."
+msgstr "شما %1$s محصول برای نصب روی دامنه %2$s انتخاب کرده‌اید."
+
+#: App/Views/Modal/Add-Products.php:79
+msgid "Clear Selected"
+msgstr "پاکسازی انتخاب‌ها"
+
+#: App/Views/Modal/Add-Products.php:94
+msgid "Start Installation"
+msgstr "شروع نصب"
+
+#: App/Views/Modal/Login-Without-Password.php:27
+msgid ""
+"This section is designed AbzarWP Support and if you need to check your "
+"problem from the site admin, you can create a temporary login link and send "
+"it to us. Using this link, our partners will automatically enter your site "
+"admin without the need to enter a username and password. This feature "
+"increases the security of your login information."
+msgstr ""
+"این بخش مخصوص پشتیبانی ابزار وردپرس طراحی شده و در صورتی که همکاران ما برای "
+"حل مشکل شما نیاز به دسترسی ادمین داشته باشند، شما میتوانید یک لینک ورود موقت "
+"ایجاد و برای ما ارسال کنید. با استفاده از این لینک همکاران ما بدون نیاز به "
+"وارد کردن نام کاربری و رمز عبور به صورت خودکار وارد ادمین سایت شما خواهند "
+"شد. این ویژگی باعث افزایش امنیت اطلاعات ورود شما میشود."
+
+#: App/Views/Modal/Login-Without-Password.php:31
+msgid ""
+"The created links will automatically expire after 7 days and will no longer "
+"be usable. You can also expire the links manually."
+msgstr ""
+"لینک های ایجاد شده به صورت خودکار پس از 7 روز منقضی  خواهند شد و دیگر قابل "
+"استفاده نخواهند بود. همچنین شما میتوانید لینک ها را به صورت دستی باطل کنید."
+
+#: App/Views/Modal/Login-Without-Password.php:36
+msgid "Create New Link"
+msgstr "ایجاد لینک جدید"
+
+#: App/Views/Tabs/settings.php:24
+msgid "AbzarWP Products Settings"
+msgstr "تنظیمات آپدیت محصولات ابزار وردپرس"
+
+#: App/Views/Tabs/settings.php:25 App/Views/Tabs/settings.php:57
+msgid "You can customize this settings for each plugin or theme."
+msgstr ""
+"شما میتوانید این تنظیم را به صورت جداگانه برای هر قالب یا پلاگین انجام دهید."
+
+#: App/Views/Tabs/settings.php:44
+msgid "Check Abzarwp Translations Update"
+msgstr "هشدار وجود آپدیت برای ترجمه‌های ابزار وردپرس"
+
+#: App/Views/Tabs/settings.php:56
+msgid "Wordpress Update Settings"
+msgstr "تنظیمات آپدیت وردپرس"
+
+#: App/Views/Tabs/settings.php:69
+msgid "Check Wordpress Themes Update"
+msgstr "هشدار وجود آپدیت برای قالب‌های وردپرس"
+
+#: App/Views/Tabs/settings.php:76
+msgid "Check Wordpress Translations Update"
+msgstr "هشدار وجود آپدیت برای ترجمه‌های وردپرس"
+
+#: App/Views/Tabs/settings.php:83
+msgid "Check Wordpress Core Update"
+msgstr "هشدار وجود آپدیت برای هسته وردپرس"
+
+#: App/Views/Tabs/settings.php:95
+msgid "Backup Settings"
+msgstr "تنظیمات پشتیبان گیری"
+
+#: App/Views/Tabs/settings.php:96
+msgid "Backups are stored on your host."
+msgstr "فایل های پشتیبان در هاست شما ذخیره میشوند."
+
+#: App/Views/Tabs/settings.php:101
+msgid "Enable Backup"
+msgstr "فعال کردن پشتیبان گیری"
+
+#: App/Views/Tabs/settings.php:108
+msgid "Delete Old Backups"
+msgstr "حذف بکاپ های قدیمی"
+
+#: App/Views/Tabs/settings.php:112
+msgid "After each update old backup deleted."
+msgstr "به صورت خودکار فایل‌های قدیمی حذف میشوند."
+
+#: App/Views/Tabs/settings.php:117
+msgid "Number of backups"
+msgstr "تعداد فایل بکاپ"
+
+#: App/Views/Tabs/settings.php:121
+msgid "Number of backup for each plugin or theme."
+msgstr "حداکثر تعداد فایل پشتیبان برای هر قالب یا پلاگین."
+
+#: App/Views/Tabs/settings.php:132 App/Views/Tabs/settings.php:133
+msgid "Notification Settings"
+msgstr "تنظیمات اطلاع رسانی"
+
+#: App/Views/Tabs/settings.php:138
+msgid "Email Notification"
+msgstr "اطلاع رسانی ایمیل"
+
+#: App/Views/Tabs/settings.php:146
+msgid "for Wordpress Updates"
+msgstr "برای آپدیت‌های وردپرس"
+
+#: App/Views/Tabs/settings.php:153
+msgid "for AbzarWP Updates"
+msgstr "برای آپدیت‌های ابزار وردپرس"
+
+#: App/Views/Tabs/settings.php:160
+msgid "Email Schedule"
+msgstr "زمان ارسال ایمیل"
+
+#: App/Views/Tabs/settings.php:168
+msgid "Email Address"
+msgstr "آدرس ایمیل"
+
+#: App/Views/Tabs/settings.php:172
+msgid "Separate emails with commas."
+msgstr "ایمیل‌ها را با کاما از هم جدا کنید."
+
+#: App/Views/Tabs/settings.php:191
+msgid "Save changes"
+msgstr "ذخیره تغییرات"
+
+#: App/Views/Templates/Helper-Links.php:11
+msgid "FAQ"
+msgstr "سوالات متداول"
+
+#: App/Views/Templates/Helper-Links.php:13
+msgid "About Us"
+msgstr "درباره ما"
+
+#: App/Views/Templates/Helper-Links.php:15
+msgid "Terms of Service"
+msgstr "قوانین"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:22
+msgid "Created"
+msgstr "تاریخ ایجاد"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:23
+msgid "Expire Date"
+msgstr "تاریخ انقضا"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:24
+msgid "Count Used"
+msgstr "تعداد استفاده"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:25
+msgid "Last Used"
+msgstr "آخرین استفاده"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:26
+msgid "Last IP"
+msgstr "آخرین IP"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:54
+msgid "Expired"
+msgstr "منقضی شده"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:58
+#, php-format
+msgid "%s remaining"
+msgstr "%s دیگر"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:67
+#, php-format
+msgid "%s ago"
+msgstr "%s پیش"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:88
+msgid "Copy link"
+msgstr "کپی پیوند"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:94
+msgid "Revoke"
+msgstr "ابطال"
+
+#: App/Views/Templates/Login-Without-Password-Table.php:120
+msgid "Revoke all login links"
+msgstr "باطل کردن همه لینک‌های ورود"
+
+#: App/Views/Templates/Notices.php:73
+msgid "Close"
+msgstr "بستن"
+
+#: App/Views/Templates/Select-Products.php:27
+msgid "Try again"
+msgstr "برای تلاش دوباره کلیک کنید"
+
+#: App/Views/Templates/Select-Products.php:110
+msgid "Select Purchase"
+msgstr "یک خرید را انتخاب کنید"
+
+#: App/Views/Templates/Select-Products.php:189
+msgid "Select Plan"
+msgstr "یک پلن را انتخاب کنید"
+
+#: App/Views/Templates/Select-Products.php:341
+msgid "There are no products for this purchase."
+msgstr "هیچ محصولی برای این خرید وجود ندارد."
+
+#: App/Views/Templates/Select-Products.php:352
+msgid "Select products to activate"
+msgstr "محصولات را برای فعالسازی انتخاب کنید"
+
+#: App/Views/Templates/Select-Products.php:412
+msgid "Refresh Purchases"
+msgstr "تازه سازی لیست خرید"
+
+#: App/Views/dashboard-header.php:31
+#, php-format
+msgid "Get Version %s"
+msgstr "دریافت نگارش %s"
+
+#: App/Views/dashboard-header.php:52
+msgid "Check for updates"
+msgstr "بررسی به‌روزرسانی"
+
+#: App/Views/dashboard-header.php:67
+msgid "Help"
+msgstr "راهنما"
+
+#: App/Views/dashboard-header.php:98
+msgid "Manage your account"
+msgstr "مشاهده حساب کاربری"
+
+#. Plugin Name of the plugin/theme
+msgid "AbzarWP - Auto Update"
+msgstr "ابزار وردپرس - آپدیت خودکار"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://abzarwp.com/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "AbzarWP.Com"
+msgstr ""
+
+#~ msgid "Product page"
+#~ msgstr "صفحه محصول"
+
+#~ msgid "Buy product"
+#~ msgstr "خرید محصول"
+
+#~ msgid "Start Activate"
+#~ msgstr "شروع فعال‌سازی"
+
+#~ msgid "Number of files: %s"
+#~ msgstr "تعداد فایل‌ها: %s"
+
+#~ msgid "Size of backup folder: %s"
+#~ msgstr "حجم کل پوشه پشتیبان: %s"
+
+#~ msgid ""
+#~ "Licenses for products added from this section will be registered for the "
+#~ "%s domain."
+#~ msgstr ""
+#~ "لایسنس محصولاتی که از این بخش اضافه شوند برای دامنه %s ثبت خواهند شد."
+
+#, fuzzy
+#~| msgid "Invalid Product."
+#~ msgid "Invalid Table."
+#~ msgstr "محصول نامعتبر است."
+
+#, fuzzy
+#~| msgid "Install"
+#~ msgid "Install Now"
+#~ msgstr "نصب کردن"
+
+#~ msgid "Dashboard Notification"
+#~ msgstr "اطلاع رسانی پیشخوان"
+
+#, fuzzy
+#~| msgid "Update Status"
+#~ msgid "Updates Status"
+#~ msgstr "وضعیت بروزرسانی"
+
+#~ msgid "Link has been copied to your clipboard."
+#~ msgstr "پیوند در کلیپ‌بورد شما کپی شد."
+
+#~ msgid "Add Account"
+#~ msgstr "افزودن حساب"
+
+#~ msgid "Disable All Notifications"
+#~ msgstr "غیر فعال کردن همه اطلاع رسانی ها"
+
+#, fuzzy
+#~| msgid "Select an Order"
+#~ msgid "Select File"
+#~ msgstr "یک خرید را انتخاب کنید"
+
+#~ msgid "Select an Order"
+#~ msgstr "یک خرید را انتخاب کنید"
+
+#~ msgid ""
+#~ "You can create a self-expiring links for someone and give them a special "
+#~ "link with which they can login to your WordPress Administrator without "
+#~ "needing a username and password."
+#~ msgstr ""
+#~ "این بخش مخصوص پشتیبانی ابزار وردپرس طراحی شده و درصورتی که پشتیبان ما "
+#~ "نیاز به بررسی مشکل شما در ادمین سایت بود کافی هست که شما یک لینک ورود "
+#~ "موقت ایجاد و برای ما ارسال کنید. لینک های ایجاد شده به صورت خودکار پس از "
+#~ "7 روز منقضی میشوند و دیگر قابل استفاده نیستند."
+
+#~ msgid "Smart Auto Login Link"
+#~ msgstr "لینک ورود خودکار هوشمند"
+
+#~ msgid "One-Time Login Link Expired."
+#~ msgstr "لینک ورود یکبار مصرف منقضی شده است."
+
+#~ msgid "Not yet logged in"
+#~ msgstr "هنوز استفاده نشده"
+
+#~ msgid "System info"
+#~ msgstr "مشخصات سیستم"
+
+#~ msgid "System Info"
+#~ msgstr "مشخصات سیستم"
+
+#~ msgid "Search..."
+#~ msgstr "جستجو..."
+
+#~ msgid "You can add plugins and themes from dashboard."
+#~ msgstr ""
+#~ "شما می توانید قالب ها و افزونه های خریداری شده را از داشبورد خود مدیریت "
+#~ "کنید."
+
+#~ msgid "Dashboard"
+#~ msgstr "داشبورد"

@@ -1,0 +1,100 @@
+:root {
+	--wd-text-font: "Peyda", Arial, Helvetica, sans-serif;
+	--wd-text-font-weight: 400;
+	--wd-text-color: #2A2A28;
+	--wd-text-font-size: 15px;
+	--wd-title-font: "Peyda", Arial, Helvetica, sans-serif;
+	--wd-title-font-weight: 700;
+	--wd-title-color: #2A2A28;
+	--wd-entities-title-font: "Peyda", Arial, Helvetica, sans-serif;
+	--wd-entities-title-font-weight: 500;
+	--wd-entities-title-color: #2A2A28;
+	--wd-entities-title-color-hover: #177E7A;
+	--wd-alternative-font: "Peyda", Arial, Helvetica, sans-serif;
+	--wd-widget-title-font: "Peyda", Arial, Helvetica, sans-serif;
+	--wd-widget-title-font-weight: 600;
+	--wd-widget-title-transform: none;
+	--wd-widget-title-color: #2A2A28;
+	--wd-widget-title-font-size: 16px;
+	--wd-header-el-font: "Peyda", Arial, Helvetica, sans-serif;
+	--wd-header-el-font-weight: 700;
+	--wd-header-el-transform: none;
+	--wd-header-el-font-size: 14px;
+	--wd-otl-style: dotted;
+	--wd-otl-width: 2px;
+	--wd-otl-color: #177E7A;
+	--wd-primary-color: #1C9E9A;
+	--wd-alternative-color: #D69C1E;
+	--btn-default-font-family: "Peyda", Arial, Helvetica, sans-serif;
+	--btn-default-font-weight: 600;
+	--btn-default-bgcolor: #177E7A;
+	--btn-default-bgcolor-hover: #0F6461;
+	--btn-accented-font-family: "Peyda", Arial, Helvetica, sans-serif;
+	--btn-accented-font-weight: 600;
+	--btn-accented-bgcolor: #B9871A;
+	--btn-accented-bgcolor-hover: #D69C1E;
+	--wd-form-brd-width: 2px;
+	--notices-success-bg: #3F7D4E;
+	--notices-success-color: #fff;
+	--notices-warning-bg: #C9861A;
+	--notices-warning-color: #fff;
+	--wd-link-color: #177E7A;
+	--wd-link-color-hover: #0F6461;
+	--wd-link-decor-style: solid;
+	--wd-link-decor-color: #B9871A;
+}
+.wd-age-verify-wrap {
+	--wd-popup-width: 500px;
+}
+.wd-popup.wd-promo-popup {
+	background-color: #111111;
+	background-image: none;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: left center;
+}
+.wd-promo-popup-wrap {
+	--wd-popup-width: 800px;
+}
+:is(.woodmart-woocommerce-layered-nav, .wd-product-category-filter) .wd-scroll-content {
+	max-height: 223px;
+}
+.wd-page-title .wd-page-title-bg img {
+	object-fit: cover;
+	object-position: center center;
+}
+.wd-footer {
+	background-color: #F4EFE6;
+	background-image: none;
+}
+.mfp-wrap.wd-popup-quick-view-wrap {
+	--wd-popup-width: 920px;
+}
+:root{
+--wd-container-w: 1222px;
+--wd-form-brd-radius: 0px;
+--btn-default-color: #fff;
+--btn-default-color-hover: #fff;
+--btn-accented-color: #333;
+--btn-accented-color-hover: #333;
+--btn-default-brd-radius: 5px;
+--btn-default-box-shadow: none;
+--btn-default-box-shadow-hover: none;
+--btn-accented-brd-radius: 5px;
+--btn-accented-box-shadow: none;
+--btn-accented-box-shadow-hover: none;
+--wd-brd-radius: 8px;
+}
+
+@media (min-width: 1222px) {
+section.elementor-section.wd-section-stretch > .elementor-container {
+margin-left: auto;
+margin-right: auto;
+}
+}
+
+
+.wd-page-title {
+background-color: #0a0a0a;
+}
+

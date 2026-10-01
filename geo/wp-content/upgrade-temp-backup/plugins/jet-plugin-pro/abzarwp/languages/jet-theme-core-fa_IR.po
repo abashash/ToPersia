@@ -1,0 +1,966 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetThemeCore\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-18 16:51+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-theme-core.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid " version avaliable"
+msgstr " نسخه موجود"
+
+msgid "%s Single"
+msgstr "%s تک"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه جت پیشرفته"
+
+msgid "404 Page"
+msgstr "صفحه 404"
+
+msgid ""
+"<strong>You have no more activations left.</strong> <a href=\"%s\" target="
+"\"_blank\">Please upgrade to a more advanced license</a> (you'll only need "
+"to cover the difference)."
+msgstr ""
+"<strong> دیگر فعالیتی برای شما باقی نمانده است. </strong> <a href=\"%s\" "
+"target=\"_blank\"> لطفاً به لایسنس پیشرفته تری ارتقا دهید </a> (فقط باید "
+"اختلاف قیمت را پرداخت کنید) ."
+
+msgid ""
+"<strong>Your License Has Expired.</strong> <a href=\"%s\" target=\"_blank"
+"\">Renew your license today</a> to keep getting feature updates, premium "
+"support and unlimited access to the template library."
+msgstr ""
+"<strong> لایسنس شما منقضی شده است. </strong> <a href=\"%s\" target=\"_blank"
+"\"> امروز لایسنس خود را تمدید کنید </a> تا همچنان به روزرسانی ویژگی ، "
+"پشتیبانی پریمیوم و دسترسی نامحدود به کتابخانه قالب ادامه دهید."
+
+msgid ""
+"<strong>Your license key doesn't match your current domain</strong>. This is "
+"most likely due to a change in the domain URL of your site (including HTTPS/"
+"SSL migration). Please deactivate the license and then reactivate it again."
+msgstr ""
+"<strong> کلید لایسنس شما با دامنه فعلی شما مطابقت ندارد </strong>. این به "
+"احتمال زیاد به دلیل تغییر در URL دامنه سایت شما (از جمله انتقال HTTPS / SSL) "
+"است. لطفاً لایسنس را غیرفعال کنید و دوباره آن را فعال کنید."
+
+msgid ""
+"<strong>Your license key doesn't match your current domain</strong>. This is "
+"most likely due to a change in the domain URL. Please deactivate the license "
+"and then reactivate it again."
+msgstr ""
+"<strong> کلید لایسنس شما با دامنه فعلی شما مطابقت ندارد </strong>. این به "
+"احتمال زیاد به دلیل تغییر در URL دامنه است. لطفا با پشتیبانی محصول تماس "
+"بگیرید."
+
+msgid ""
+"<strong>Your license key has been cancelled</strong> (most likely due to a "
+"refund request). Please consider acquiring a new license."
+msgstr ""
+"<strong>کلید لایسنس شما لغو شده است</strong>(به احتمال زیاد به دلیل درخواست "
+"بازپرداخت). لطفاً با پشتیبانی در ارتباط باشید."
+
+msgid "Access the vast knowledge base"
+msgstr "به پایگاه دانش گسترده دسترسی پیدا کنید"
+
+msgid "Account Login Page"
+msgstr "صفحه ورود حساب"
+
+msgid "Account Page"
+msgstr "صفحه حساب"
+
+msgid "Actions"
+msgstr "اقدامات"
+
+msgid "Activate"
+msgstr "فعالسازی"
+
+msgid "Activate License"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Add New"
+msgstr "افزودن جدید"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid "Add New Template"
+msgstr "افزودن قالب جدید"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Add condition"
+msgstr "افزودن شرط"
+
+msgid "Advanced"
+msgstr "پیشرفته"
+
+msgid "All"
+msgstr "همه"
+
+msgid "All %s Archives"
+msgstr "همه آرشیو %s"
+
+msgid "All Archives"
+msgstr "همه آرشیو ها"
+
+msgid "All Products Archives"
+msgstr "آرشیو تمام محصولات"
+
+msgid ""
+"An error occurred. Please check your internet connection and try again. If "
+"the problem persists, contact our support."
+msgstr ""
+"خطایی رخ داد لطفاً اتصال اینترنت خود را بررسی کنید و دوباره امتحان کنید. در "
+"صورت ادامه مشکل ، با پشتیبانی ما تماس بگیرید."
+
+msgid "Any Topic"
+msgstr "هر موضوعی"
+
+msgid "Archive"
+msgstr "آرشیو"
+
+msgid "Archives"
+msgstr "آرشیو"
+
+msgid "Back"
+msgstr "قبلی"
+
+msgid "Back to Library"
+msgstr "بازگشت به کتابخانه"
+
+msgid "Backup Manager"
+msgstr "مدیریت بکاپ گیری"
+
+msgid "Backup deleting completed"
+msgstr "حذف بکاپ انجام شد"
+
+msgid "Backup deleting error"
+msgstr "خطای حذف بکاپ"
+
+msgid "Block Editor"
+msgstr "ویرایشگر بلوک"
+
+msgid "CPT Archive"
+msgstr "آرشیو CPT"
+
+msgid "CPT Single"
+msgstr "CPT تک"
+
+msgid "CPT Taxonomy"
+msgstr "طبقه‌بندی CPT"
+
+msgid "Can't delete selected backup"
+msgstr "بکاپ انتخاب شده حذف نمی شود"
+
+msgid "Cancel"
+msgstr "لغو"
+
+msgid "Check For Updates"
+msgstr "بررسی بروزرسانی ها"
+
+msgid "Check Updates"
+msgstr "بررسی بروزرسانی ها"
+
+msgid "Check documentation"
+msgstr "بررسی مستندات"
+
+msgid "Child Page"
+msgstr "صفحه فرزند"
+
+msgid "Child Theme"
+msgstr "قالب فرزند"
+
+msgid "Child theme active"
+msgstr "فعال سازی قالب فرزند"
+
+msgid "Clone to Library"
+msgstr "کپی به کتابخانه"
+
+msgid "Close"
+msgstr "بستن"
+
+msgid "Community"
+msgstr "انجمن"
+
+msgid "Conditions aren't selected"
+msgstr "شرایط انتخاب نشده است"
+
+msgid "Conditions have been saved"
+msgstr "شرایط ذخیره شده است"
+
+msgid ""
+"Conditions in Theme Templates and the ones you set while creating the "
+"template in Theme Builder are different. Conditions from Theme Builder work "
+"with any theme from Crocoblock Installation Wizard and rerender the page "
+"structure completely or partially."
+msgstr ""
+"شرایط موجود در تمپلیت های قالب‌ و شرایطی که هنگام ایجاد تمپلیت در قالب ساز "
+"تنظیم می‌کنید، متفاوت هستند. شرایط قالب ساز با هر قالبی از Crocoblock کار می "
+"کند و ساختار صفحه را به طور کامل یا جزئی دوباره رندر می کند."
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Create Template"
+msgstr "ایجاد قالب"
+
+msgid "Create backup"
+msgstr "ایجاد بکاپ"
+
+msgid "Created"
+msgstr "ایجاد شد"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid ""
+"Define relations before Jet and Elementor Pro templates attached to the same "
+"locations"
+msgstr ""
+"روابط را قبل از تمپلیتهای جت و المنتور پرو که به همان مکان‌ها متصل شده‌اند، "
+"تعریف کنید"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Desktop"
+msgstr "دسکتاپ"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Device"
+msgstr "دستگاه"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Download"
+msgstr "دانلود"
+
+msgid "Dynamic"
+msgstr "داینامیک"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Edit Conditions"
+msgstr "ویرایش شرایط"
+
+msgid "Edit Template"
+msgstr "ویرایش قالب"
+
+msgid "Elementor"
+msgstr "المنتور"
+
+msgid "Elementor Pro Overrides"
+msgstr "رونویسی پرو المنتور"
+
+msgid "Elementor Pro and Jet locations relations"
+msgstr "روابط مکان های جت و المنتور پرو"
+
+msgid "Elementor plugin not active."
+msgstr "افزونه المنتور فعال نیست."
+
+msgid "Enable automatic backup"
+msgstr "فعال سازی بکاپ گیری خودکار"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Enter template name(optional)"
+msgstr "نام تمپلیت را وارد کنید (اختیاری)"
+
+msgid "Entire"
+msgstr "کل"
+
+msgid "Entire Site"
+msgstr "کل سایت"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Export Template"
+msgstr "برون ریزی قالب"
+
+msgid "File"
+msgstr "فایل"
+
+msgid "File not exists"
+msgstr "فایل وجود ندارد"
+
+msgid "File not passed"
+msgstr "فایل عبور نکرد"
+
+msgid "Footer"
+msgstr "فوتر"
+
+msgid "Footers"
+msgstr "فوترها"
+
+msgid "Format not allowed"
+msgstr "فرمت مجاز نیست"
+
+msgid "Front Page"
+msgstr "صفحه فرانت"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Get more info from documentation"
+msgstr "دریافت اطلاعات بیشتر از مستندات"
+
+msgid "Go All-Inclusive"
+msgstr "گرفتن همه"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to JetThemeBuilder"
+msgstr "رفتن به JetThemeBuilder"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Guest"
+msgstr "مهمان"
+
+msgid "Header"
+msgstr "هدر"
+
+msgid "Headers"
+msgstr "هدرها"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid ""
+"Here you can get all the necessary information, detailed instructions and "
+"latest news."
+msgstr ""
+"در اینجا می توانید تمام اطلاعات لازم ، دستورالعمل های دقیق و آخرین اخبار را "
+"بدست آورید."
+
+msgid ""
+"Here you can set one or multiple conditions, according to which the given "
+"template will be either shown or hidden on specific pages."
+msgstr ""
+"در اینجا می‌توانید یک یا چند شرط را تنظیم کنید که بر اساس آن تمپلیت داده شده "
+"در صفحات خاصی نشان داده یا پنهان می‌شود."
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "In Child Product Categories"
+msgstr "در دسته بندی محصولات فرزند"
+
+msgid "In Post categories"
+msgstr "در دسته‌بندی‌های پست"
+
+msgid "In Post tags"
+msgstr "در برچسب های پست"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Incorrect template type."
+msgstr "نوع تمپلیت نادرست است."
+
+msgid "Incorrect template type. Please try again."
+msgstr "نوع قالب نادرست است. لطفا دوباره تلاش کنید."
+
+msgid "Input params string"
+msgstr "رشته پارامترهای ورودی"
+
+msgid "Insert"
+msgstr "درج"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده"
+
+msgid "Installed but not active"
+msgstr "نصب شده اما فعال نیست"
+
+msgid "Invalid template id"
+msgstr "شناسه تمپلیت نامعتبر است"
+
+msgid "Jet Overrides"
+msgstr "رونویسی Jet"
+
+msgid "JetPlugins License Deactivation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های جت"
+
+msgid "JetThemeCore"
+msgstr "JetThemeCore"
+
+msgid "Join community to stay tuned to the latest news"
+msgstr "به انجمن بپیوندید تا با آخرین اخبار همراه باشید"
+
+msgid "Kava Theme"
+msgstr "قالب Kava"
+
+msgid "Knowledge Base"
+msgstr "دانشنامه"
+
+msgid "Learn More About Crocoblock"
+msgstr "درباره کروکوبلاک بیشتر بدانید"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "MagicButton Templates"
+msgstr "قالب های MagicButton"
+
+msgid "MagicButton templates synchronization"
+msgstr "همگام سازی قالب های MagicButton"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Mobile"
+msgstr "موبایل"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های جت با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Most powerful plugin created to make building websites super easy"
+msgstr "قدرتمندترین افزونه ایجاد شده برای ساختن وب سایت فوق العاده آسان"
+
+msgid "My Library"
+msgstr "کتابخانه من"
+
+msgid "New theme backup will be automatically created before each update"
+msgstr ""
+"پشتیبان گیری از قالب جدید به طور خودکار قبل از هر بروزرسانی ایجاد می شود"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "New update available"
+msgstr "بروزرسانی جدید در دسترس"
+
+msgid "No Templates Found"
+msgstr "هیچ قالبی یافت نشد"
+
+msgid "No Templates Found In Trash"
+msgstr "هیچ قالبی در سطل زباله یافت نشد"
+
+msgid "No backups found"
+msgstr "هیچ بکاپی پیدا نشد"
+
+msgid "No data found in file"
+msgstr "هیچ داده ای در فایل یافت نشد"
+
+msgid "Not Installed"
+msgstr "نصب نشده"
+
+msgid "Not Selected"
+msgstr "انتخاب نشده"
+
+msgid "Not available for this type"
+msgstr "برای این نوع موجود نیست"
+
+msgid "Not installed"
+msgstr "نصب نشده"
+
+msgid "Page"
+msgstr "برگه"
+
+msgid "Page Template"
+msgstr "قالب صفحه"
+
+msgid "Page Templates"
+msgstr "تمپلیت‌های صفحه"
+
+msgid "Page template has been created"
+msgstr "تمپلیت صفحه ایجاد شده است"
+
+msgid "Page template has been deleted"
+msgstr "تمپلیت صفحه حذف شده است"
+
+msgid "Page template layout updated"
+msgstr "طرح تمپلیت صفحه به روز شد"
+
+msgid "Pages"
+msgstr "صفحات"
+
+msgid "Permission denied"
+msgstr "مجوز رد شد"
+
+msgid "Please reload page after applying preview settings"
+msgstr "لطفاً پس از اعمال تنظیمات پیش نمایش ، صفحه را بارگیری کنید"
+
+msgid "Please remove selected post after changing preview post type"
+msgstr "لطفاً پس از تغییر نوع پیش نمایش پست ، پست انتخاب شده را حذف کنید"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Post"
+msgstr "پست"
+
+msgid "Post Type"
+msgstr "نوع  پست"
+
+msgid "Post categories"
+msgstr "دسته‌بندی‌های پست"
+
+msgid "Post tags"
+msgstr "برچسب های پست"
+
+msgid "Posts"
+msgstr "پست ها"
+
+msgid ""
+"Prevent Elementor Pro locations registration from JetThemeCore. Enable this "
+"if your headers/footers disappear when JetThemeCore is active"
+msgstr ""
+"از ثبت جایگاه های Elementor Pro از JetThemeCore جلوگیری کنید. اگر هدر/فوتر "
+"شما هنگام فعال بودن JetThemeCore ناپدید شد ، این قابلیت را فعال کنید"
+
+msgid "Prevent Pro locations registration"
+msgstr "جلوگیری از ثبت جایگاه های پرو"
+
+msgid "Preview Settings"
+msgstr "تنظیمات پیش‌نمایش"
+
+msgid "Product Cart"
+msgstr "سبد خریدمحصول"
+
+msgid "Product Categories"
+msgstr "دسته‌های محصول"
+
+msgid "Product Checkout"
+msgstr "تسویه حساب محصول"
+
+msgid "Product Empty Cart"
+msgstr "سبد خرید خالی محصول"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Product Tags"
+msgstr "برچسبهای محصول"
+
+msgid "Product from Category"
+msgstr "محصول از دسته بندی"
+
+msgid "Product from Tag"
+msgstr "محصول از برچسب"
+
+msgid "Products Archive"
+msgstr "آرشیو محصولات"
+
+msgid "Products Archives"
+msgstr "آرشیو های محصول"
+
+msgid "Products Card"
+msgstr "کارت محصولات"
+
+msgid "Products Checkout"
+msgstr "تسویه حساب محصولات"
+
+msgid "Roles"
+msgstr "نقش ها"
+
+msgid "Save Conditions"
+msgstr "ذخیره شرایط"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Search Results"
+msgstr "نتایح جستجو"
+
+msgid "Search Template"
+msgstr "جستجوی قالب"
+
+msgid "Section"
+msgstr "بخش"
+
+msgid "Sections"
+msgstr "بخش ها"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Select Post"
+msgstr "انتخاب پست"
+
+msgid "Select Taxonomy"
+msgstr "انتخاب طبقه بندی"
+
+msgid "Select category"
+msgstr "انتخاب دسته بندی"
+
+msgid "Select device"
+msgstr "انتخاب دستگاه"
+
+msgid "Select page"
+msgstr "انتخاب صفحه"
+
+msgid "Select post"
+msgstr "انتخاب پست"
+
+msgid "Select post type"
+msgstr "انتحاب نوع پست"
+
+msgid "Select product"
+msgstr "انتخاب محصول"
+
+msgid "Select roles"
+msgstr "انتخاب نقش ها"
+
+msgid "Select tag"
+msgstr "انتخاب برچسب"
+
+msgid "Select taxonomy"
+msgstr "انتخاب طبقه بندی"
+
+msgid "Select template"
+msgstr "انتخاب تمپلیت"
+
+msgid "Select template content type"
+msgstr "نوع محتوای تمپلیت را انتخاب کنید"
+
+msgid "Select template type"
+msgstr "انتخاب نوع تمپلیت"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Server Error. Please try again later."
+msgstr "خطای سرور. لطفا بعدا دوباره امتحان کنید"
+
+msgid "Server error"
+msgstr "خطای سرور"
+
+msgid "Set the page template visibility conditions"
+msgstr "شرایط مشاهده تمپلیت صفحه را تنظیم کنید"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Shop Page"
+msgstr "صفحه فروشگاه"
+
+msgid "Show Both, Elementor Pro Before Jet"
+msgstr "نمایش هردو، المنتور پرو قبل جت"
+
+msgid "Show Both, Jet Before Elementor Pro"
+msgstr "نمایش هردو، جت قبل المنتور پرو"
+
+msgid "Single"
+msgstr "صفحه تکی"
+
+msgid "Single Product"
+msgstr "محصول تک"
+
+msgid "Singular"
+msgstr "تکی"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه Jet خود باید لایسنس را فعال کنید"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Success"
+msgstr "موفق"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Sync Templates Library"
+msgstr "همگام سازی قالب های کتابخانه"
+
+msgid "Tablet"
+msgstr "تبلت"
+
+msgid "Template"
+msgstr "قالب"
+
+msgid "Template Content Type"
+msgstr "نوع محتوای تمپلیت"
+
+msgid "Template List not found"
+msgstr "لیست تمپلیت پیدا نشد"
+
+msgid "Template Name"
+msgstr "نام تمپلیت"
+
+msgid "Template Type"
+msgstr "نوع تمپلیت"
+
+msgid "Template builded by Elementor"
+msgstr "تمپلیت ساخته شده توسط المنتور"
+
+msgid "Template builded by Gutenberg"
+msgstr "تمپلیت ساخته شده توسط گوتنبرگ"
+
+msgid "Template builded by JetThemeCore"
+msgstr "تمپلیت ساخته شده توسط JetThemeCore"
+
+msgid "Template builded by JetWooBuilder"
+msgstr "تمپلیت ساخته شده توسط JetWooBuilder"
+
+msgid "Template cannot be used for JetThemeBuilder"
+msgstr "تمپلیت را نمی توان برای JetThemeBuilder استفاده کرد"
+
+msgid "Template cannot be used, please install required content editor"
+msgstr "تمپلیت قابل استفاده نیست، لطفا ویرایشگر محتوای مورد نیاز را نصب کنید"
+
+msgid "Template couldn't be loaded. Please activate you license key before."
+msgstr "قالب بارگیری نشد. لطفاً کلید لایسنس خود را فعال کنید."
+
+msgid "Template for WooCommerce page"
+msgstr "تمپلیت برای صفحه ووکامرس"
+
+msgid "Template has been created"
+msgstr "تمپلیت ایجاد شده است"
+
+msgid "Template isn't used yet"
+msgstr "تمپلیت هنوز استفاده نشده است"
+
+msgid "Template layout updated"
+msgstr "طرح تمپلیت به روز شد"
+
+msgid "Templates has been created"
+msgstr "تمپلیت ها ایجاد شده است"
+
+msgid "Templates library have been synchronized"
+msgstr "کتابخانه قالب ها هماهنگ شده اند"
+
+msgid "Thank You Page"
+msgstr "صفحه تشکر"
+
+msgid "Theme Builder"
+msgstr "سازنده قالب"
+
+msgid "Theme Location"
+msgstr "مکان قالب"
+
+msgid "Theme Parts"
+msgstr "قطعات قالب"
+
+msgid "Theme Template Conditions"
+msgstr "شرایط تمپلیت قالب"
+
+msgid "Theme Templates"
+msgstr "تمپلیت های قالب"
+
+msgid "Theme URL not found."
+msgstr "آدرس URL قالب پیدا نشد."
+
+msgid "Theme backup have been created"
+msgstr "نسخه پشتیبان ایجاد شده است"
+
+msgid "Theme have been activated."
+msgstr "قالب فعال شده است."
+
+msgid "Theme have been installed."
+msgstr "قالب نصب شده است."
+
+msgid "Theme have been updated."
+msgstr "قالب بروز شده است."
+
+msgid "Theme not found."
+msgstr "قالب یافت نشد."
+
+msgid "Theme slug not found."
+msgstr "نامک (slug) قالب یافت نشد."
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "URL Parameter"
+msgstr "پارامتر Url"
+
+msgid "Unable to connect to the filesystem. Please confirm your credentials."
+msgstr "اتصال به سیستم پرونده امکان پذیر نیست. لطفا مدارک خود را تأیید کنید."
+
+msgid "Undefined"
+msgstr "تعریف نشده"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Update failed."
+msgstr "به روز رسانی نا موفق بود."
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Use template"
+msgstr "استفاده از تمپلیت"
+
+msgid ""
+"Use the template conditions for theme locations for topics that support "
+"them. We recommended you use the JetThemeBuilder to create new pages for "
+"your site."
+msgstr ""
+"از شرایط تمپلیت برای مکان های قالب برای موضوعاتی که از آنها پشتیبانی می کنند "
+"استفاده کنید. توصیه می کنیم از JetThemeBuilder برای ایجاد صفحات جدید برای "
+"سایت خود استفاده کنید."
+
+msgid "View Template"
+msgstr "نمایش قالب"
+
+msgid "View Video"
+msgstr "مشاهده ویدئو"
+
+msgid "View video tutorials"
+msgstr "مشاهده آموزش های ویدئویی"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+msgid "You already have the latest theme installed"
+msgstr "شما در حال حاضر جدیدترین نسخه قالب را نصب کرده اید"
+
+msgid "You are not allowed to install themes."
+msgstr "شما مجاز به نصب قالب نیستید."
+
+msgid "You are not allowed to update themes."
+msgstr "شما مجاز به بروزرسانی قالب ها نیستید."
+
+msgid "You don't have permissions to do this"
+msgstr "شما مجوز کافی برای انجام این کار ندارید"
+
+msgid "You have not permissions to theme updating"
+msgstr "شما اجازه به روزرسانی قالب را ندارید"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک افزونه ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid "Your license is missing. Please check your key again."
+msgstr "لایسنس شما موجود نیست. لطفا کلید خود را دوباره بررسی کنید."
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetthemecore/"
+msgstr "https://crocoblock.com/plugins/jetthemecore/"

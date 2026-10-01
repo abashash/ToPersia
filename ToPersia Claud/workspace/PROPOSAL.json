@@ -1,0 +1,862 @@
+{
+    "tp_country": {
+        "provinces": [
+            {
+                "id": 71,
+                "dir": "children",
+                "other": "tp_province",
+                "name": "country_province",
+                "type": "one_to_many"
+            }
+        ],
+        "capital": [
+            {
+                "id": 95,
+                "dir": "children",
+                "other": "tp_city",
+                "name": "capital_of_country",
+                "type": "one_to_one"
+            }
+        ],
+        "practical": [
+            {
+                "id": 156,
+                "dir": "children",
+                "other": "tp_health_safety",
+                "name": "applies_g1_p4",
+                "type": "many_to_many"
+            },
+            {
+                "id": 159,
+                "dir": "children",
+                "other": "tp_travel_etiquette",
+                "name": "applies_g1_p5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 185,
+                "dir": "children",
+                "other": "tp_visa",
+                "name": "applies_g1_p1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 226,
+                "dir": "children",
+                "other": "tp_currency",
+                "name": "applies_g1_p2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 228,
+                "dir": "children",
+                "other": "tp_calendar",
+                "name": "applies_g1_p6",
+                "type": "many_to_many"
+            }
+        ]
+    },
+    "tp_region": {
+        "provinces": [
+            {
+                "id": 83,
+                "dir": "children",
+                "other": "tp_province",
+                "name": "region_province",
+                "type": "one_to_many"
+            }
+        ]
+    },
+    "tp_province": {
+        "crumbs": [
+            {
+                "id": 71,
+                "dir": "parents",
+                "other": "tp_country",
+                "name": "country_province",
+                "type": "one_to_many"
+            },
+            {
+                "id": 83,
+                "dir": "parents",
+                "other": "tp_region",
+                "name": "region_province",
+                "type": "one_to_many"
+            }
+        ],
+        "counties": [
+            {
+                "id": 72,
+                "dir": "children",
+                "other": "tp_county",
+                "name": "province_county",
+                "type": "one_to_many"
+            }
+        ],
+        "villages": [
+            {
+                "id": 75,
+                "dir": "children",
+                "other": "tp_village",
+                "name": "province_village",
+                "type": "one_to_many"
+            }
+        ],
+        "nature": [
+            {
+                "id": 77,
+                "dir": "children",
+                "other": "tp_island",
+                "name": "province_island",
+                "type": "one_to_many"
+            },
+            {
+                "id": 78,
+                "dir": "children",
+                "other": "tp_mountain",
+                "name": "province_mountain",
+                "type": "one_to_many"
+            },
+            {
+                "id": 79,
+                "dir": "children",
+                "other": "tp_water_body",
+                "name": "province_water",
+                "type": "one_to_many"
+            },
+            {
+                "id": 80,
+                "dir": "children",
+                "other": "tp_desert",
+                "name": "province_desert",
+                "type": "one_to_many"
+            },
+            {
+                "id": 81,
+                "dir": "children",
+                "other": "tp_forest_plain",
+                "name": "province_forest",
+                "type": "one_to_many"
+            },
+            {
+                "id": 89,
+                "dir": "children",
+                "other": "tp_protected_area",
+                "name": "province_park",
+                "type": "one_to_many"
+            },
+            {
+                "id": 90,
+                "dir": "children",
+                "other": "tp_natural_feature",
+                "name": "province_natural",
+                "type": "one_to_many"
+            },
+            {
+                "id": 94,
+                "dir": "children",
+                "other": "tp_landscape",
+                "name": "province_landscape",
+                "type": "one_to_many"
+            }
+        ],
+        "border": [
+            {
+                "id": 82,
+                "dir": "children",
+                "other": "tp_border_crossing",
+                "name": "province_border",
+                "type": "one_to_many"
+            }
+        ],
+        "ancient": [
+            {
+                "id": 92,
+                "dir": "children",
+                "other": "tp_ancient_site",
+                "name": "province_ancient",
+                "type": "one_to_many"
+            }
+        ],
+        "capital": [
+            {
+                "id": 96,
+                "dir": "children",
+                "other": "tp_city",
+                "name": "capital_of_province",
+                "type": "one_to_one"
+            }
+        ],
+        "neighbors": [
+            {
+                "id": 102,
+                "dir": "children",
+                "other": "tp_province",
+                "name": "borders_province",
+                "type": "many_to_many"
+            },
+            {
+                "id": 102,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "borders_province",
+                "type": "many_to_many"
+            }
+        ],
+        "culture": [
+            {
+                "id": 107,
+                "dir": "children",
+                "other": "tp_handicraft",
+                "name": "practiced_g3_c1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 110,
+                "dir": "children",
+                "other": "tp_local_food",
+                "name": "practiced_g3_c2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 113,
+                "dir": "children",
+                "other": "tp_costume",
+                "name": "practiced_g3_c5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 116,
+                "dir": "children",
+                "other": "tp_music",
+                "name": "practiced_g3_c6",
+                "type": "many_to_many"
+            },
+            {
+                "id": 119,
+                "dir": "children",
+                "other": "tp_dance",
+                "name": "practiced_g3_c7",
+                "type": "many_to_many"
+            },
+            {
+                "id": 122,
+                "dir": "children",
+                "other": "tp_ritual",
+                "name": "practiced_g3_c10",
+                "type": "many_to_many"
+            },
+            {
+                "id": 125,
+                "dir": "children",
+                "other": "tp_handicraft",
+                "name": "produced_g3_c1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 128,
+                "dir": "children",
+                "other": "tp_local_food",
+                "name": "produced_g3_c2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 131,
+                "dir": "children",
+                "other": "tp_language",
+                "name": "spoken_g3_c8",
+                "type": "many_to_many"
+            },
+            {
+                "id": 232,
+                "dir": "children",
+                "other": "tp_festival",
+                "name": "held_in_g3_e1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 245,
+                "dir": "children",
+                "other": "tp_sports_event",
+                "name": "held_in_g3_e3",
+                "type": "many_to_many"
+            },
+            {
+                "id": 253,
+                "dir": "children",
+                "other": "tp_religious_event",
+                "name": "held_in_g3_e5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 263,
+                "dir": "children",
+                "other": "tp_seasonal_event",
+                "name": "held_in_g3_e6",
+                "type": "many_to_many"
+            }
+        ],
+        "practical": [
+            {
+                "id": 157,
+                "dir": "children",
+                "other": "tp_health_safety",
+                "name": "applies_g3_p4",
+                "type": "many_to_many"
+            },
+            {
+                "id": 160,
+                "dir": "children",
+                "other": "tp_travel_etiquette",
+                "name": "applies_g3_p5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 227,
+                "dir": "children",
+                "other": "tp_currency",
+                "name": "applies_g3_p2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 229,
+                "dir": "children",
+                "other": "tp_calendar",
+                "name": "applies_g3_p6",
+                "type": "many_to_many"
+            }
+        ],
+        "routes": [
+            {
+                "id": 172,
+                "dir": "parents",
+                "other": "tp_route",
+                "name": "passes_g3_p9",
+                "type": "many_to_many"
+            }
+        ]
+    },
+    "tp_city": {
+        "crumbs": [
+            {
+                "id": 73,
+                "dir": "parents",
+                "other": "tp_county",
+                "name": "county_city",
+                "type": "one_to_many"
+            }
+        ],
+        "districts": [
+            {
+                "id": 74,
+                "dir": "children",
+                "other": "tp_district",
+                "name": "city_district",
+                "type": "one_to_many"
+            }
+        ],
+        "ancient": [
+            {
+                "id": 84,
+                "dir": "children",
+                "other": "tp_monument",
+                "name": "city_monument",
+                "type": "one_to_many"
+            },
+            {
+                "id": 86,
+                "dir": "children",
+                "other": "tp_religious_site",
+                "name": "city_religious",
+                "type": "one_to_many"
+            },
+            {
+                "id": 88,
+                "dir": "children",
+                "other": "tp_museum",
+                "name": "city_museum",
+                "type": "one_to_many"
+            },
+            {
+                "id": 93,
+                "dir": "children",
+                "other": "tp_ancient_site",
+                "name": "city_ancient",
+                "type": "one_to_many"
+            },
+            {
+                "id": 143,
+                "dir": "parents",
+                "other": "tp_historical_era",
+                "name": "period_g5",
+                "type": "many_to_many"
+            }
+        ],
+        "nature": [
+            {
+                "id": 91,
+                "dir": "children",
+                "other": "tp_natural_feature",
+                "name": "city_natural",
+                "type": "one_to_many"
+            }
+        ],
+        "capital_of": [
+            {
+                "id": 95,
+                "dir": "parents",
+                "other": "tp_country",
+                "name": "capital_of_country",
+                "type": "one_to_one"
+            },
+            {
+                "id": 96,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "capital_of_province",
+                "type": "one_to_one"
+            },
+            {
+                "id": 97,
+                "dir": "parents",
+                "other": "tp_county",
+                "name": "capital_of_county",
+                "type": "one_to_one"
+            }
+        ],
+        "villages": [
+            {
+                "id": 98,
+                "dir": "children",
+                "other": "tp_village",
+                "name": "nearest_city_village",
+                "type": "one_to_many"
+            }
+        ],
+        "border": [
+            {
+                "id": 100,
+                "dir": "children",
+                "other": "tp_border_crossing",
+                "name": "nearest_city_border",
+                "type": "one_to_many"
+            }
+        ],
+        "culture": [
+            {
+                "id": 108,
+                "dir": "children",
+                "other": "tp_handicraft",
+                "name": "practiced_g5_c1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 111,
+                "dir": "children",
+                "other": "tp_local_food",
+                "name": "practiced_g5_c2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 114,
+                "dir": "children",
+                "other": "tp_costume",
+                "name": "practiced_g5_c5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 117,
+                "dir": "children",
+                "other": "tp_music",
+                "name": "practiced_g5_c6",
+                "type": "many_to_many"
+            },
+            {
+                "id": 120,
+                "dir": "children",
+                "other": "tp_dance",
+                "name": "practiced_g5_c7",
+                "type": "many_to_many"
+            },
+            {
+                "id": 123,
+                "dir": "children",
+                "other": "tp_ritual",
+                "name": "practiced_g5_c10",
+                "type": "many_to_many"
+            },
+            {
+                "id": 126,
+                "dir": "children",
+                "other": "tp_handicraft",
+                "name": "produced_g5_c1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 129,
+                "dir": "children",
+                "other": "tp_local_food",
+                "name": "produced_g5_c2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 132,
+                "dir": "children",
+                "other": "tp_language",
+                "name": "spoken_g5_c8",
+                "type": "many_to_many"
+            },
+            {
+                "id": 151,
+                "dir": "parents",
+                "other": "tp_figure",
+                "name": "assoc_fig_g5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 153,
+                "dir": "children",
+                "other": "tp_figure",
+                "name": "born_in",
+                "type": "one_to_many"
+            },
+            {
+                "id": 154,
+                "dir": "children",
+                "other": "tp_figure",
+                "name": "died_in",
+                "type": "one_to_many"
+            },
+            {
+                "id": 233,
+                "dir": "children",
+                "other": "tp_festival",
+                "name": "held_in_g5_e1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 246,
+                "dir": "children",
+                "other": "tp_sports_event",
+                "name": "held_in_g5_e3",
+                "type": "many_to_many"
+            },
+            {
+                "id": 254,
+                "dir": "children",
+                "other": "tp_religious_event",
+                "name": "held_in_g5_e5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 264,
+                "dir": "children",
+                "other": "tp_seasonal_event",
+                "name": "held_in_g5_e6",
+                "type": "many_to_many"
+            }
+        ],
+        "practical": [
+            {
+                "id": 158,
+                "dir": "children",
+                "other": "tp_health_safety",
+                "name": "applies_g5_p4",
+                "type": "many_to_many"
+            },
+            {
+                "id": 230,
+                "dir": "children",
+                "other": "tp_calendar",
+                "name": "applies_g5_p6",
+                "type": "many_to_many"
+            }
+        ],
+        "routes": [
+            {
+                "id": 173,
+                "dir": "parents",
+                "other": "tp_route",
+                "name": "passes_g5_p9",
+                "type": "many_to_many"
+            }
+        ]
+    },
+    "tp_district": {
+        "crumbs": [
+            {
+                "id": 74,
+                "dir": "parents",
+                "other": "tp_city",
+                "name": "city_district",
+                "type": "one_to_many"
+            }
+        ],
+        "ancient": [
+            {
+                "id": 144,
+                "dir": "parents",
+                "other": "tp_historical_era",
+                "name": "period_g6",
+                "type": "many_to_many"
+            }
+        ]
+    },
+    "tp_village": {
+        "crumbs": [
+            {
+                "id": 75,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_village",
+                "type": "one_to_many"
+            },
+            {
+                "id": 76,
+                "dir": "parents",
+                "other": "tp_county",
+                "name": "county_village",
+                "type": "one_to_many"
+            },
+            {
+                "id": 98,
+                "dir": "parents",
+                "other": "tp_city",
+                "name": "nearest_city_village",
+                "type": "one_to_many"
+            }
+        ],
+        "ancient": [
+            {
+                "id": 85,
+                "dir": "children",
+                "other": "tp_monument",
+                "name": "village_monument",
+                "type": "one_to_many"
+            },
+            {
+                "id": 87,
+                "dir": "children",
+                "other": "tp_religious_site",
+                "name": "village_religious",
+                "type": "one_to_many"
+            }
+        ],
+        "culture": [
+            {
+                "id": 109,
+                "dir": "children",
+                "other": "tp_handicraft",
+                "name": "practiced_g7_c1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 112,
+                "dir": "children",
+                "other": "tp_local_food",
+                "name": "practiced_g7_c2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 118,
+                "dir": "children",
+                "other": "tp_music",
+                "name": "practiced_g7_c6",
+                "type": "many_to_many"
+            },
+            {
+                "id": 121,
+                "dir": "children",
+                "other": "tp_dance",
+                "name": "practiced_g7_c7",
+                "type": "many_to_many"
+            },
+            {
+                "id": 124,
+                "dir": "children",
+                "other": "tp_ritual",
+                "name": "practiced_g7_c10",
+                "type": "many_to_many"
+            },
+            {
+                "id": 127,
+                "dir": "children",
+                "other": "tp_handicraft",
+                "name": "produced_g7_c1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 130,
+                "dir": "children",
+                "other": "tp_local_food",
+                "name": "produced_g7_c2",
+                "type": "many_to_many"
+            },
+            {
+                "id": 234,
+                "dir": "children",
+                "other": "tp_festival",
+                "name": "held_in_g7_e1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 239,
+                "dir": "children",
+                "other": "tp_festival",
+                "name": "held_at_g7_e1",
+                "type": "many_to_many"
+            },
+            {
+                "id": 247,
+                "dir": "children",
+                "other": "tp_sports_event",
+                "name": "held_in_g7_e3",
+                "type": "many_to_many"
+            },
+            {
+                "id": 252,
+                "dir": "children",
+                "other": "tp_sports_event",
+                "name": "held_at_g7_e3",
+                "type": "many_to_many"
+            },
+            {
+                "id": 255,
+                "dir": "children",
+                "other": "tp_religious_event",
+                "name": "held_in_g7_e5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 258,
+                "dir": "children",
+                "other": "tp_religious_event",
+                "name": "held_at_g7_e5",
+                "type": "many_to_many"
+            },
+            {
+                "id": 265,
+                "dir": "children",
+                "other": "tp_seasonal_event",
+                "name": "held_in_g7_e6",
+                "type": "many_to_many"
+            }
+        ],
+        "routes": [
+            {
+                "id": 174,
+                "dir": "parents",
+                "other": "tp_route",
+                "name": "passes_g7_p9",
+                "type": "many_to_many"
+            }
+        ]
+    },
+    "tp_island": {
+        "crumbs": [
+            {
+                "id": 77,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_island",
+                "type": "one_to_many"
+            }
+        ],
+        "routes": [
+            {
+                "id": 175,
+                "dir": "parents",
+                "other": "tp_route",
+                "name": "passes_g8_p9",
+                "type": "many_to_many"
+            }
+        ]
+    },
+    "tp_mountain": {
+        "crumbs": [
+            {
+                "id": 78,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_mountain",
+                "type": "one_to_many"
+            },
+            {
+                "id": 101,
+                "dir": "parents",
+                "other": "tp_mountain",
+                "name": "range_parent",
+                "type": "one_to_many"
+            }
+        ],
+        "subranges": [
+            {
+                "id": 101,
+                "dir": "children",
+                "other": "tp_mountain",
+                "name": "range_parent",
+                "type": "one_to_many"
+            }
+        ]
+    },
+    "tp_water_body": {
+        "crumbs": [
+            {
+                "id": 79,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_water",
+                "type": "one_to_many"
+            }
+        ]
+    },
+    "tp_desert": {
+        "crumbs": [
+            {
+                "id": 80,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_desert",
+                "type": "one_to_many"
+            }
+        ]
+    },
+    "tp_forest_plain": {
+        "crumbs": [
+            {
+                "id": 81,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_forest",
+                "type": "one_to_many"
+            }
+        ]
+    },
+    "tp_border_crossing": {
+        "crumbs": [
+            {
+                "id": 82,
+                "dir": "parents",
+                "other": "tp_province",
+                "name": "province_border",
+                "type": "one_to_many"
+            },
+            {
+                "id": 100,
+                "dir": "parents",
+                "other": "tp_city",
+                "name": "nearest_city_border",
+                "type": "one_to_many"
+            }
+        ],
+        "routes": [
+            {
+                "id": 177,
+                "dir": "parents",
+                "other": "tp_route",
+                "name": "connects_g13_p9",
+                "type": "many_to_many"
+            }
+        ]
+    }
+}

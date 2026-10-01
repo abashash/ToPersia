@@ -1,0 +1,2869 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetSmartFilters\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-06 13:34+0330\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ../../../jet-smart-filters\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-smart-filters.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid " Delete permanently "
+msgstr " حذف دائمی "
+
+msgid " Empty Trash "
+msgstr " خالی کردن زباله دان "
+
+msgid " Move to trash "
+msgstr " انتقال به زبال دان "
+
+msgid " Per page "
+msgstr " در هر صفحه "
+
+msgid " Published on: "
+msgstr " منتشر شده در: "
+
+msgid " Required field must be filled "
+msgstr " فیلد الزامی باید پر شود "
+
+msgid " Restore  "
+msgstr " بازگرداندن  "
+
+msgid " Restore All "
+msgstr " بازگرداندن همه "
+
+msgid " Settings "
+msgstr " تنظیمات "
+
+msgid " Showing results "
+msgstr " نمایش نتایج "
+
+msgid " of "
+msgstr " از "
+
+msgid "%s - inputs"
+msgstr "‫%s - ورودی‌ها (‫inputs)"
+
+msgid "%s - slider"
+msgstr "‫%s - اسلایدر"
+
+msgid "1, 10, 100, 0.1 etc"
+msgstr "1, 10, 100, 0.1 غیره"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های Jet پیشرفته"
+
+msgid ""
+"<b>Please note!</b> <i>Apply type</i> option for the destination filter "
+"should be set into <b>Mixed</b> or <b>Reload</b> type "
+msgstr ""
+"‫<b>لطفاً توجه کنید!</b> <i>نوع اعمال</i> برای فیلتر مقصد باید در نوع "
+"<b>ترکیبی</b> یا <b>بارگذاری مجدد</b> تنظیم شود "
+
+msgid "ACF"
+msgstr "ACF"
+
+msgid "AJAX"
+msgstr "آژاکس"
+
+msgid "AJAX on typing"
+msgstr "آژاکس در تایپ"
+
+msgid "ASC"
+msgstr "صعودی"
+
+msgid "Ability to deselect radio buttons"
+msgstr "امکان لغو انتخاب دکمه های رادیو"
+
+msgid "Accessibility Settings"
+msgstr "تنظیمات دسترسی"
+
+msgid "Activate License"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license for automatic updates and awesome support"
+msgstr "لایسنس را برای به روزرسانی خودکار و پشتیبانی عالی فعال کنید"
+
+msgid "Activate license to update your JetPlugins"
+msgstr "لایسنس خود را برای به روز رسانی پلاگین‌های جت فعال کنید"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Background Color"
+msgstr "رنگ پس‌زمینه فعال"
+
+msgid "Active Border Color"
+msgstr "رنگ حاشیه (Border) فعال"
+
+msgid "Active Category"
+msgstr "دسته بندی فعال"
+
+msgid "Active Color"
+msgstr "رنگ فعال"
+
+msgid "Active Filter Label"
+msgstr "برچسب فیلتر فعال"
+
+msgid "Active Filters"
+msgstr "فیلتر های فعال"
+
+msgid "Active Item Background Color"
+msgstr "رنگ پس زمینه آیتم  فعال"
+
+msgid "Active Item Border"
+msgstr "حاشیه (Border) آیتم فعال"
+
+msgid "Active Item Border Color"
+msgstr "رنگ حاشیه (Border) آیتم فعال"
+
+msgid "Active Item Color"
+msgstr "رنگ آیتم فعال"
+
+msgid "Active Item Offset"
+msgstr "آفست آیتم فعال"
+
+msgid "Active Item Padding"
+msgstr "فاصله داخلی (Padding) آیتم فعال"
+
+msgid "Active Item Typography"
+msgstr "تایپوگرافی آیتم فعال"
+
+msgid "Active Items"
+msgstr "آیتم های فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Active Tag"
+msgstr "برچسب فعال"
+
+msgid "Active Tags"
+msgstr "برچسب های فعال"
+
+msgid "Active Text Color"
+msgstr "رنگ متن فعال"
+
+msgid "Active day"
+msgstr "روز فعال"
+
+msgid "Active filters:"
+msgstr "فیلتر های فعال:"
+
+msgid "Active items"
+msgstr "آیتم های فعال"
+
+msgid "Active state"
+msgstr "حالت فعال"
+
+msgid "Active tags:"
+msgstr "برچسب های فعال :"
+
+msgid "Active tags: "
+msgstr "برچسب های فعال: "
+
+msgid "Add New"
+msgstr "افزودن جدید"
+
+msgid "Add New Filter"
+msgstr "افزودن فیلتر جدید"
+
+msgid "Add New Item"
+msgstr "افزودن آیتم جدید"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid "Add all option"
+msgstr "افزودن گزینه همه"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Add new alias"
+msgstr "افزودن نام مستعار جدید"
+
+msgid "Additional Provider"
+msgstr "ارائه دهنده اضافی"
+
+msgid "Additional Providers Enabled"
+msgstr "ارائه دهندگان اضافی فعال شده است"
+
+msgid "Additional Providers List"
+msgstr "لیست ارائه دهندگان اضافی"
+
+msgid "Additional Query ID"
+msgstr "شناسه کوئری اضافی"
+
+msgid "Additional Settings"
+msgstr "تنظیمات اضافی"
+
+msgid "Additional provider"
+msgstr "ارائه دهنده اضافی"
+
+msgid "Additional providers enabled"
+msgstr "ارائه دهندگان اضافی فعال"
+
+msgid "Additional providers list"
+msgstr "لیست ارائه دهندگان اضافی"
+
+msgid "Additional query ID"
+msgstr "شناسه کوئری اضافی"
+
+msgid ""
+"Adds easy-to-use AJAX filters to the pages built with Elementor which "
+"contain the dynamic listings."
+msgstr ""
+"فیلترهای آژاکس را به صفحات ساخته شده توسط المنتور که شامل لیست های پویا "
+"هستند اضافه می کند."
+
+msgid "After reverse transformation, the URL does not match the incoming value"
+msgstr "پس از تبدیل معکوس، URL با مقدار ورودی مطابقت ندارد"
+
+msgid "Ajax Request Type"
+msgstr "نوع درخواست آژاکس"
+
+msgid "Align cross axis"
+msgstr "چینش محور متقاطع"
+
+msgid "Align main axis"
+msgstr "چینش محور اصلی"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "All"
+msgstr "همه"
+
+msgid "All Filters"
+msgstr "همه فیلترها"
+
+msgid "All available plugins are already installed"
+msgstr "همه افزونه‌های موجود قبلاً نصب شده‌اند"
+
+msgid "All filters"
+msgstr "همه فیلترها"
+
+msgid "All option label"
+msgstr "افزودن برچسب همه"
+
+msgid "All plugins updated"
+msgstr "همه افزونه ها به روز شدند"
+
+msgid ""
+"Allow to replace selected parts of the filtered URLs with any alias words "
+"you want"
+msgstr ""
+"اجازه دهید قسمت های انتخابی URL های فیلتر شده را با هر کلمه مستعاری که می "
+"خواهید جایگزین کنید"
+
+msgid "Alphabet"
+msgstr "الفبا"
+
+msgid "Alphabet Filter"
+msgstr "فیلتر الفبایی"
+
+msgid "Alphabet filter"
+msgstr "فیلتر الفبایی"
+
+msgid "Always"
+msgstr "همیشه"
+
+msgid "Apply"
+msgstr "اعمال"
+
+msgid "Apply Button"
+msgstr "دکمه اعمال"
+
+msgid "Apply Indexer"
+msgstr "اعمال ایندکسر"
+
+msgid "Apply Redirect"
+msgstr "اعمال ردایرکت"
+
+msgid "Apply button icon"
+msgstr "آیکن دکمه اعمال"
+
+msgid "Apply button text"
+msgstr "متن دکمه اعمال"
+
+msgid "Apply filter"
+msgstr "اعمال فیلتر"
+
+msgid "Apply filters"
+msgstr "اعمال فیلتر ها"
+
+msgid "Apply indexer"
+msgstr "اعمال ایندکسر"
+
+msgid "Apply on"
+msgstr "اعمال روی"
+
+msgid "Apply redirect"
+msgstr "اعمال ریدایرکت"
+
+msgid "Apply thousands and decimal separators to inputs"
+msgstr "هزاراگان و جداکننده‌های اعشاری را برای ورودی‌ها اعمال کنید"
+
+msgid "Apply type"
+msgstr "نوع فیلتر"
+
+msgid "Apr"
+msgstr "آپریل"
+
+msgid "April"
+msgstr "آپریل"
+
+msgid ""
+"Are you sure you want to delete permanently all filters in the trash? You "
+"can’t undo this action."
+msgstr ""
+"آیا مطمئن هستید که می خواهید برای همیشه همه فیلترهای موجود در زباله دان را "
+"حذف کنید؟ نمی‌توانید این عمل را واگرد کنید."
+
+msgid ""
+"Are you sure you want to delete this filter forever? You can’t undo this "
+"action."
+msgstr ""
+"آیا مطمئن هستید که می خواهید این فیلتر را برای همیشه حذف کنید؟ نمی‌توانید این "
+"عمل را واگرد کنید."
+
+msgid "Are you sure you want to go to listing without saving changes?"
+msgstr "آیا مطمئنید که می‌خواهید بدون ذخیره تغییرات به لیست بروید؟"
+
+msgid "Aug"
+msgstr "آگوست"
+
+msgid "August"
+msgstr "آگوست"
+
+msgid "Author"
+msgstr "نویسنده"
+
+msgid "Auto re-indexing data when changing posts or filters"
+msgstr "ایندکس مجدد خودکار داده ها هنگام تغییر پست ها یا فیلترها"
+
+msgid "Autoscroll to top of the provider when reloading content via AJAX."
+msgstr ""
+"هنگام بارگیری مجدد محتوا از طریق آجاکس ، به بالای ارائه دهنده اسکرول کنید."
+
+msgid "Back"
+msgstr "برگشت"
+
+msgid "Back to Listing"
+msgstr "بازگشت به لیست"
+
+msgid "Background"
+msgstr "پس زمینه"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgid "Background color"
+msgstr "رنگ پس زمینه"
+
+msgid "Base URL"
+msgstr "آدرس URL پایه"
+
+msgid "Behavior"
+msgstr "رفتار"
+
+msgid "Block"
+msgstr "بلوک"
+
+msgid "Block rendered as empty."
+msgstr "بلوک خالی ارائه شد."
+
+msgid "Body Background Color"
+msgstr "رنگ پس زمینه بدنه"
+
+msgid "Body Border"
+msgstr "حاشیه (border) بدنه"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه (Border)"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Border color"
+msgstr "رنگ حاشیه (Border)"
+
+msgid "Border radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Bottom"
+msgstr "دکمه"
+
+msgid "Box shadow"
+msgstr "سایه جعبه"
+
+msgid "Box size"
+msgstr "اندازه جعبه"
+
+msgid "Button"
+msgstr "دکمه"
+
+msgid "Button Border"
+msgstr "حاشیه (Border) دکمه"
+
+msgid "Button Icon"
+msgstr "آیکن دکمه"
+
+msgid "Button icon"
+msgstr "آیکن دکمه"
+
+msgid "By Custom Field (from Query Variable)"
+msgstr "براساس فیلد سفارشی (از متغیر کوئری)"
+
+msgid "By date from highest to lowest"
+msgstr "براساس تاریخ از بالاترین به پایین ترین"
+
+msgid "By date from lowest to highest"
+msgstr "براساس تاریخ از پایین ترین به بالاترین"
+
+msgid "By title from highest to lowest"
+msgstr "براساس عنوان از بالاترین به پایین ترین"
+
+msgid "By title from lowest to highest"
+msgstr "براساس عنوان از پایین ترین به بالاترین"
+
+msgid "Calendar"
+msgstr "تقویم"
+
+msgid "Calendar Caption"
+msgstr "کپشن تقویم"
+
+msgid "Calendar Cell"
+msgstr "سلول تقویم"
+
+msgid "Calendar Days"
+msgstr "روزهای تقویم"
+
+msgid "Calendar Header"
+msgstr "هدر تقویم"
+
+msgid "Calendar Navigation Arrows"
+msgstr "پیکان های ناوبری تقویم"
+
+msgid "Calendar Week Days"
+msgstr "روزهای هفته تقویم"
+
+msgid "Calendar Width"
+msgstr "عرض تقویم"
+
+msgid "Calendar width"
+msgstr "عرض تقویم"
+
+msgid "Cancel"
+msgstr "انصراف"
+
+msgid "Caption"
+msgstr "کپشن"
+
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+msgid "Center"
+msgstr "مرکز"
+
+msgid "Change Counters"
+msgstr "تغییر شمارنده"
+
+msgid "Change counters"
+msgstr "تغییر شمارنده"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Check Range Filter"
+msgstr "فیلتر محدوده بررسی"
+
+msgid ""
+"Check this option to reset field appearance CSS value. This will make field "
+"appearance the same for all browsers"
+msgstr ""
+"برای تنظیم مجدد فیلد مقدار CSS ، این گزینه را علامت بزنید. این باعث می شود "
+"که ظاهر فیلد برای همه مرورگرها یکسان باشد"
+
+msgid "Check uniqueness of keys"
+msgstr "بررسی یکتا بودن کلیدها"
+
+msgid "Checkbox"
+msgstr "چک باکس"
+
+msgid "Checkbox Icon"
+msgstr "آیکن چک باکس"
+
+msgid "Checkboxes"
+msgstr "چک باکس ها"
+
+msgid "Checkboxes Filter"
+msgstr "فیلترهای چک باکس"
+
+msgid "Checkboxes list"
+msgstr "لیست چک باکس"
+
+msgid "Checked"
+msgstr "چک خورده"
+
+msgid "Checked Background Color"
+msgstr "رنگ پس زمینه انتخاب شده"
+
+msgid "Checked Border Color"
+msgstr "رنگ حاشیه (Border) انتخاب شده"
+
+msgid "Checked Color"
+msgstr "رنگ چک باکس"
+
+msgid "Checked color"
+msgstr "رنگ انتخاب شده"
+
+msgid "Checked state"
+msgstr "حالت چک خورده"
+
+msgid "Children Offset Left"
+msgstr "آفست چپ فرزندان(Children)"
+
+msgid "Choose Type"
+msgstr "نوع را انتخاب کنید"
+
+msgid "Clause key"
+msgstr "کلید Clause"
+
+msgid "Clear"
+msgstr "پاک کردن"
+
+msgid "Clear Filters"
+msgstr "پاکسازی فیلترها"
+
+msgid "Clear Item"
+msgstr "پاکسازی آیتم"
+
+msgid "Clear Item Label"
+msgstr "پاکسازی برچسب آیتم"
+
+msgid "Clear item"
+msgstr "پاکسازی آیتم"
+
+msgid "Click on apply button"
+msgstr "کلیک روی دکمه اعمال"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Color / Image"
+msgstr "رنگ / تصویر"
+
+msgid "Column"
+msgstr "ستون"
+
+msgid "Columns"
+msgstr "ستون‌ها"
+
+msgid "Coming soon"
+msgstr "به زودی"
+
+msgid "Comparison operator"
+msgstr "عملگر مقایسه"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Container Background Color"
+msgstr "رنگ پس زمینه کانتینر"
+
+msgid "Container Border"
+msgstr "حاشیه (border) کانتینر"
+
+msgid "Container Padding"
+msgstr "فاصله داخلی (Padding) کانتینر"
+
+msgid "Container Width"
+msgstr "عرض کانتینر"
+
+msgid "Container width"
+msgstr "عرض کانتاینر"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Controls"
+msgstr "کنترل ها"
+
+msgid "Counter"
+msgstr "شمارنده"
+
+msgid "Counter Prefix"
+msgstr "پیشوند شمارنده"
+
+msgid "Counter Suffix"
+msgstr "پسوند شمارنده"
+
+msgid "Counter prefix"
+msgstr "پیشوند شمارنده"
+
+msgid "Counter suffix"
+msgstr "پسوند شمارنده"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Current"
+msgstr "فعلی"
+
+msgid "Current Background Color"
+msgstr "رنگ پس زمینه فعلی"
+
+msgid "Current Border Color"
+msgstr "رنگ حاشیه (Border) فعلی"
+
+msgid "Current Color"
+msgstr "رنگ فعلی"
+
+msgid "Current Item"
+msgstr "آیتم فعلی"
+
+msgid "Current Text Color"
+msgstr "رنگ متن فعلی"
+
+msgid "Current day"
+msgstr "روز جاری"
+
+msgid "Current state"
+msgstr "وضعیت فعلی"
+
+msgid "Custom Field Key"
+msgstr "کلید فیلد سفارشی"
+
+msgid "Custom Fields"
+msgstr "فیلد های سفارشی"
+
+msgid "Custom Query Variable"
+msgstr "متغیر کوئری سفارشی"
+
+msgid "Custom range"
+msgstr "محدوده سفارشی"
+
+msgid "DESC"
+msgstr "نزولی"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Data Source"
+msgstr "منبع داده"
+
+msgid "Date"
+msgstr "تاریخ"
+
+msgid "Date Format"
+msgstr "فرمت تاریخ"
+
+msgid "Date Formats"
+msgstr "فرمت های تاریخ"
+
+msgid "Date Period"
+msgstr "دوره تاریخ"
+
+msgid "Date Period Filter"
+msgstr "فیلتر دوره تاریخ"
+
+msgid "Date Period Format"
+msgstr "فرمت دوره تاریخ"
+
+msgid "Date Range"
+msgstr "بازه زمانی"
+
+msgid "Date Range Filter"
+msgstr "فیلتر محدوده تاریخ"
+
+msgid "Date range from"
+msgstr "محدوده تاریخ از"
+
+msgid "Date range to"
+msgstr "محدوده تاریخ تا"
+
+msgid "Date range value"
+msgstr "مقدار محدوده تاریخ"
+
+msgid "Date: newest to oldest (by default)"
+msgstr "تاریخ: جدیدترین به قدیمی‌ترین (پیش‌فرض)"
+
+msgid "Date: oldest to newest"
+msgstr "تاریخ: قدیمی به جدیدترین"
+
+msgid "Datepicker Button"
+msgstr "دکمه انتخابگر تاریخ"
+
+msgid "Datepicker Button Text"
+msgstr "متن دکمه انتخابگر تاریخ"
+
+msgid "Datepicker date formats"
+msgstr "فرمت های تاریخ انتخابگر تاریخ"
+
+msgid "Day"
+msgstr "روز"
+
+msgid "Day Content"
+msgstr "محتوای روز"
+
+msgid "Day content"
+msgstr "محتوای روز"
+
+msgid "Days"
+msgstr "روز"
+
+msgid "Deactivate License"
+msgstr "غیرفعال‌سازی لایسنس"
+
+msgid "Dec"
+msgstr "دسامبر"
+
+msgid "December"
+msgstr "دسامبر"
+
+msgid "Decimal separator"
+msgstr "جدا کننده اعشار"
+
+msgid "Default"
+msgstr "پیش‌فرض"
+
+msgid "Default Color"
+msgstr "رنگ پیشفرض"
+
+msgid "Default WordPress search"
+msgstr "جستجوی پیش فرض وردپرس"
+
+msgid "Delete permanently"
+msgstr "حذف دائمی"
+
+msgid "Delete permanently?"
+msgstr "برای همیشه حذف شود؟"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Difference Between Checkboxes, Select and Radio Filters"
+msgstr "تفاوت بین چک‌باکس ها، انتخاب و فیلترهای رادیویی"
+
+msgid "Direct transformation"
+msgstr "تبدیل مستقیم"
+
+msgid "Direction"
+msgstr "جهت"
+
+msgid "Disable"
+msgstr "غیرفعال"
+
+msgid "Disable Background Color"
+msgstr "رنگ پس زمینه غیر فعال"
+
+msgid "Disable Border Color"
+msgstr "رنگ حاشیه (Border) غیرفعال"
+
+msgid "Disable Color"
+msgstr "رنگ غیرفعال"
+
+msgid "Disabled Text Color"
+msgstr "رنگ متن غیر فعال"
+
+msgid "Dismiss this notice."
+msgstr "این اطلاعیه را رد کنید."
+
+msgid "Display"
+msgstr "نمایش نده"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Done"
+msgstr "انجام شد"
+
+msgid "Don’t save"
+msgstr "ذخیره نکنید"
+
+msgid "Dots"
+msgstr "نقطه"
+
+msgid "Dots Item"
+msgstr "آیتم نقطه‌\tها"
+
+msgid "Dropdown"
+msgstr "کشویی"
+
+msgid "Dropdown Body"
+msgstr "بدنه کشویی"
+
+msgid "Dropdown Body Background Color"
+msgstr "رنگ پس زمینه بدنه کشویی"
+
+msgid "Dropdown Body Border"
+msgstr "حاشیه (border) بدنه کشویی"
+
+msgid "Dropdown Body Items Padding"
+msgstr "فاصله داخلی (Padding) آیتم های بدنه کشویی"
+
+msgid "Dropdown Body Offset"
+msgstr "آفست بدنه کشویی"
+
+msgid "Dropdown Enabled"
+msgstr "کشویی فعال"
+
+msgid "Dropdown body"
+msgstr "بدنه دراپ‌داون"
+
+msgid "Dropdown enabled"
+msgstr "دراپ‌داون فعال"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "EXISTS"
+msgstr "وجود دارد"
+
+msgid "Edit"
+msgstr "ویرایش"
+
+msgid "Edit Filter"
+msgstr "ویرایش فیلتر"
+
+msgid "Elementor Pro Archive"
+msgstr "آرشیو المنتور پرو"
+
+msgid "Elementor Pro Archive Products"
+msgstr "محصولات آرشیو المنتور پرو"
+
+msgid "Elementor Pro Loop Grid"
+msgstr "لوپ گرید (Loop Grid) المنتور پرو"
+
+msgid "Elementor Pro Portfolio"
+msgstr "نمونه کار المنتور پرو"
+
+msgid "Elementor Pro Posts"
+msgstr "پست های المنتور پرو"
+
+msgid "Elementor Pro Products"
+msgstr "محصولات المنتور پرو"
+
+msgid "Empty trash"
+msgstr "خالی کردن زباله دان"
+
+msgid "Empty trash?"
+msgstr "زباله دان خالی شود؟"
+
+msgid "Enable Items"
+msgstr "آیتم را فعال کنید"
+
+msgid "Enable Load More"
+msgstr "فعال‌سازی “بارگذاری بیشتر”"
+
+msgid "Enable Prev/Next"
+msgstr "فعال سازی دکمه های قبلی/بعدی"
+
+msgid "Enable Prev/Next buttons"
+msgstr "فعال سازی دکمه های قبلی/بعدی"
+
+msgid "Enable autoscroll"
+msgstr "فعال‌سازی اسکرول‌خودکار"
+
+msgid "Enable filters tabindex functionality"
+msgstr "فعال سازی عملکرد tabindex فیلترها"
+
+msgid "Enable indexed filters functionality"
+msgstr "فعال سازی عملکرد فیلترهای ایندکس شده"
+
+msgid "Enable prev/next buttons"
+msgstr "فعال‌سازی دکمه های قبلی/بعدی"
+
+msgid "Enable this if you want to filter current loop with JetSmartFilters"
+msgstr ""
+"اگر می‌خواهید حلقه فعلی را با جت اسمارت فیلتر فیلتر کنید، این را فعال کنید"
+
+msgid "End Format"
+msgstr "پایان فرمت"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Enter URL with JetSmartFilters parameters to check aliases"
+msgstr ""
+"‫URL را با پارامترهای جت اسمارت فیلتر وارد کنید تا نام مستعار را بررسی کنید"
+
+msgid "Enter name"
+msgstr "نام را وارد کنید"
+
+msgid "Equals (=)"
+msgstr "برابر (=)"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Error loading block: %s"
+msgstr "خطا در بارگیری بلوک: %s"
+
+msgid "Error. Incomplete request"
+msgstr "خطا. درخواست ناقص"
+
+msgid "Example: %s"
+msgstr "مثال: %s"
+
+msgid "Exclude"
+msgstr "استثناء"
+
+msgid "Exclude Or Include Items"
+msgstr "آیتم های استثنا یا شامل"
+
+msgid "Exclude/Include"
+msgstr "استثنا /شامل"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Feb"
+msgstr "فوریه"
+
+msgid "February"
+msgstr "فوریه"
+
+msgid "Field Source Plugin"
+msgstr "افزونه منبع فیلد"
+
+msgid "Filter"
+msgstr "فیلتر"
+
+msgid "Filter Content Position"
+msgstr "موقعیت محتوای فیلتر"
+
+msgid "Filter Label"
+msgstr "برچسب فیلتر"
+
+msgid "Filter Labels"
+msgstr "برچسب های فیلتر"
+
+msgid "Filter Name"
+msgstr "نام فیلتر"
+
+msgid "Filter Options"
+msgstr "گزینه های فیلتر"
+
+msgid "Filter Settings"
+msgstr "تنظیمات فیلتر"
+
+msgid "Filter Type"
+msgstr "نوع فیلتر"
+
+msgid "Filter by"
+msgstr "فیلتر براساس"
+
+msgid "Filter by data source"
+msgstr "فیلتر بر اساس منبع داده"
+
+msgid "Filter by type"
+msgstr "فیلتر بر اساس نوع"
+
+msgid "Filter hierarchy"
+msgstr "سلسله مراتب فیلتر"
+
+msgid "Filter options"
+msgstr "گزینه های فیلتر"
+
+msgid ""
+"Filter the posts or products by post or meta date using periods like day, "
+"week, month, year, and custom range."
+msgstr ""
+"پست ها یا محصولات را بر اساس پست یا متا تاریخ با استفاده از دوره هایی مانند "
+"روز، هفته، ماه، سال و محدوده سفارشی فیلتر کنید."
+
+msgid "Filters"
+msgstr "فیلتر ها"
+
+msgid "Filters Position"
+msgstr "موقعیت فیلترها"
+
+msgid "Filters position"
+msgstr "موقعیت فیلترها"
+
+msgid "First Item Border Width"
+msgstr "عرض حاشیه (Border) آیتم اول"
+
+msgid "Fr"
+msgstr "جمعه"
+
+msgid "Fri"
+msgstr "جمعه"
+
+msgid "Friday"
+msgstr "جمعه"
+
+msgid "From Placeholder"
+msgstr "از پلیس هولدر"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "Gap"
+msgstr "فاصله"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Generic text"
+msgstr "متن عمومی"
+
+msgid "Get Choices From Field Data"
+msgstr "دریافت انتخاب ها از داده فیلد"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Get from Post Meta by query meta key"
+msgstr "دریافت از متای پست توسط کلید متای کوئری"
+
+msgid "Get from Term Meta by query meta key"
+msgstr "دریافت از متای شرایط توسط کلید متای کوئری"
+
+msgid "Get from User Meta by query meta key"
+msgstr "دریافت از متای کاربر توسط کلید متای کوئری"
+
+msgid "Get from query meta key"
+msgstr "دریافت از کلید متای کوئری"
+
+msgid "Get min/max dynamically"
+msgstr "دریافت پویا حداقل/حداکثر"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Go to docs"
+msgstr "به داکیومنت بروید"
+
+msgid "Greater than or equals (>=)"
+msgstr "بزرگتر یا مساوی (>=)"
+
+msgid "Group Item Width"
+msgstr "عرض گروه"
+
+msgid "Group terms by parents"
+msgstr "گروه بندی شرایط توسط والد"
+
+msgid "Grouped Filters"
+msgstr "فیلترهای گروهی"
+
+msgid "Gutter"
+msgstr "شکاف(Gutter)"
+
+msgid "Header Background Color"
+msgstr "رنگ پس زمینه هدر"
+
+msgid "Header Border"
+msgstr "حاشیه (Border) هدر"
+
+msgid "Header background color"
+msgstr "رنگ پس زمینه هدر"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hide"
+msgstr "مخفی"
+
+msgid "Hide apply button"
+msgstr "مخفی کردن دکمه اعمال"
+
+msgid "Hierarchical"
+msgstr "سلسله مراتبی"
+
+msgid "Hierarchical Position"
+msgstr "موقعیت سلسله مراتبی"
+
+msgid "Holder"
+msgstr "نگهدارنده"
+
+msgid "Horizontal Alignment"
+msgstr "چینش افقی"
+
+msgid "Horizontal Gap Between Items"
+msgstr "فاصله افقی بین آیتم ها"
+
+msgid "Horizontal Offset"
+msgstr "افست افقی"
+
+msgid "Horizontal Offset control works only with Line Filters Position"
+msgstr "کنترل افست افقی فقط با موقعیت فیلترهای خط کار می کند"
+
+msgid "Horizontal Space Between"
+msgstr "فضای افقی بین"
+
+msgid "Horizontal Space Between Content"
+msgstr "فضای افقی بین محتوا"
+
+msgid "Horizontal gap"
+msgstr "فاصله افقی"
+
+msgid "Horizontal offset"
+msgstr "افست افقی"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Hover Background Color"
+msgstr "رنگ پس زمینه هاور"
+
+msgid "Hover Border Color"
+msgstr "رنگ حاشیه (Border) هاور"
+
+msgid "Hover Color"
+msgstr "رنگ هاور"
+
+msgid "Hover Text Color"
+msgstr "رنگ متن هاور"
+
+msgid "Hover state"
+msgstr "حالت هاور"
+
+msgid "How to Apply Filters to WooCommerce Products"
+msgstr "نحوه اعمال فیلترها در محصولات ووکامرس"
+
+msgid "How to Assign the Filter to a Specific Widget"
+msgstr "نحوه تخصیص فیلتر به یک ویجت خاص"
+
+msgid "How to Build the Checkboxes Filter with Posts Data Source"
+msgstr "نحوه ساخت فیلتر چک باکس ها با منبع داده پست ها"
+
+msgid "How to Create Range Filter"
+msgstr "نحوه ایجاد فیلتر محدوده"
+
+msgid "How to Create Search Filter"
+msgstr "نحوه ایجاد فیلتر جستجو"
+
+msgid "How to Create a Hierarchical Filter with Select Filter Type"
+msgstr "نحوه ایجاد یک فیلتر سلسله مراتبی با انتخاب نوع فیلتر"
+
+msgid "How to Create a New Filter and Apply It to Publications"
+msgstr "نحوه ایجاد یک فیلتر جدید و اعمال آن در نشریات"
+
+msgid "How to Create a Price Range Filter for WooCommerce Products"
+msgstr "نحوه ایجاد یک فیلتر محدوده قیمت برای محصولات ووکامرس"
+
+msgid "How to Exclude/Include Items in Checkboxes, Radio, and Select Filters"
+msgstr ""
+"چگونه آیتم‌ها را در چک باکس‌ها، رادیو و فیلترهای انتخابی حذف یا اضافه کنیم"
+
+msgid "How to Filter Publications by Taxonomy"
+msgstr "نحوه فیلتر انتشارات بر اساس طبقه بندی"
+
+msgid "How to Filter WooCommerce Products by Attributes"
+msgstr "نحوه فیلتر محصولات ووکامرس بر اساس ویژگی ها"
+
+msgid "How to Filter WooCommerce Products by Categories"
+msgstr "نحوه فیلتر محصولات ووکامرس بر اساس دسته بندی ها"
+
+msgid "How to Filter WooCommerce Products by Rating"
+msgstr "نحوه فیلتر محصولات ووکامرس بر اساس امتیاز"
+
+msgid "How to Filter the Related Post Items"
+msgstr "نحوه فیلتر کردن آیتم های پست مرتبط"
+
+msgid "How to Set Indexer Option for Filters "
+msgstr "نحوه تنظیم گزینه Indexer برای فیلترها "
+
+msgid "How to Set Manual Input Data Source for Visual Filter"
+msgstr "نحوه تنظیم منبع داده ورودی دستی برای فیلتر ویژوال"
+
+msgid "How to Use Alphabet Filter"
+msgstr "نحوه استفاده از فیلتر الفبا"
+
+msgid "How to Use Check Range Filter"
+msgstr "نحوه استفاده از فیلتر محدوده بررسی"
+
+msgid "How to Use Date Period Filter"
+msgstr "نحوه استفاده از فیلتر دوره تاریخ"
+
+msgid "How to Use Select Filter"
+msgstr "نحوه استفاده از فیلتر انتخاب"
+
+msgid "How to Use Values from Meta Fields"
+msgstr "نحوه استفاده از مقادیر از فیلدهای متا"
+
+msgid "How to Use the Date Range filte"
+msgstr "نحوه استفاده از فیلتر محدوده تاریخ"
+
+msgid "How to compare the above value"
+msgstr "نحوه مقایسه مقدار فوق"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Offset"
+msgstr "افست آیکن"
+
+msgid "Icon color"
+msgstr "رنگ آیکن"
+
+msgid "Icon gap"
+msgstr "شکاف آیکن"
+
+msgid "Icon size"
+msgstr "اندازه آیكن"
+
+msgid "If Item Empty"
+msgstr "اگر آیتم  خالی است"
+
+msgid "If Period Type is Day, only this value will be taken"
+msgstr "اگر نوع دوره روز باشد ، فقط این مقدار گرفته می شود"
+
+msgid "If item empty"
+msgstr "اگر آیتم خالی است"
+
+msgid ""
+"If your filter on the destination page uses some custom query ID, you can "
+"set it here."
+msgstr ""
+"اگر فیلتر شما در صفحه مقصد از شناسه کوئری سفارشی استفاده می‌کند، می‌توانید آن "
+"را در اینجا تنظیم کنید."
+
+msgid "Image"
+msgstr "عكس"
+
+msgid "Image Size"
+msgstr "اندازه تصویر"
+
+msgid "Image size"
+msgstr "اندازه تصویر"
+
+msgid "In Range Background Color"
+msgstr "رنگ پس زمینه در محدوده"
+
+msgid "In Range Color"
+msgstr "رنگ در محدوده"
+
+msgid "In range background color"
+msgstr "رنگ پس زمینه در محدوده"
+
+msgid "In range color"
+msgstr "رنگ در محدوده"
+
+msgid "Include"
+msgstr "شامل"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Incorrect input data"
+msgstr "داده های ورودی نادرست است"
+
+msgid "Index Filters"
+msgstr "ایندکس کردن فیلترها"
+
+msgid "Index Post Types"
+msgstr "ایندکس انواع پست‌ها"
+
+msgid "Indexed"
+msgstr "ایندکس شد"
+
+msgid "Indexer Options"
+msgstr "تنظیمات ایندکسر"
+
+msgid "Indexer Settings"
+msgstr "تنظیمات ایندکسر(Indexer)"
+
+msgid "Indexing"
+msgstr "در حال ایندکس شدن"
+
+msgid "Indexing..."
+msgstr "ایندکس..."
+
+msgid "Inequality operator"
+msgstr "عملگر نامساوی"
+
+msgid "Inline Block"
+msgstr "بلوک اینلاین"
+
+msgid "Input"
+msgstr "ورودی"
+
+msgid "Input Width"
+msgstr "عرض ورودی"
+
+msgid "Input width"
+msgstr "عرض ورودی"
+
+msgid "Inputs"
+msgstr "ورودی ها"
+
+msgid "Inputs Offset"
+msgstr "آفست ورودی"
+
+msgid "Inputs Width"
+msgstr "عرض ورودی ها"
+
+msgid "Inputs enabled"
+msgstr "ورودی ها فعال"
+
+msgid "Inputs separators enabled"
+msgstr "جداکننده های ورودی فعال شد"
+
+msgid "Inputs width"
+msgstr "عرض ورودی ها"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده"
+
+msgid "Intersection"
+msgstr "تقاطع(Intersection)"
+
+msgid "Is Checkbox Meta Field (Jet Engine)"
+msgstr "فیلد متای چک باکس است (Jet Engine)"
+
+msgid "Is Filterable"
+msgstr "قابل فیلتر است"
+
+msgid "Is filterable"
+msgstr "قابل فیلتر"
+
+msgid "Is hierarchical"
+msgstr "سلسله مراتبی است (hierarchical)"
+
+msgid "Item"
+msgstr "آیتم"
+
+msgid "Item (Checked state)"
+msgstr "آیتم (حالت چک خورده)"
+
+msgid "Item Label"
+msgstr "برچسب آیتم"
+
+msgid "Item Width"
+msgstr "عرض آیتم"
+
+msgid "Item width"
+msgstr "عرض آیتم"
+
+msgid "Items"
+msgstr "آیتم ها"
+
+msgid "Items Padding"
+msgstr "فاصله داخلی (Padding) آیتم ها"
+
+msgid "Items center offset"
+msgstr "افست مرکز آیتم ها"
+
+msgid "Items edge offset"
+msgstr "افست لبه آیتم ها"
+
+msgid "Items padding"
+msgstr "فاصله داخلی (Padding) آیتم ها"
+
+msgid "Jan"
+msgstr "ژانویه"
+
+msgid "January"
+msgstr "ژانویه"
+
+msgid "Jet Smart Filters"
+msgstr "Jet Smart Filters"
+
+msgid "JetEngine"
+msgstr "‫جت انجین"
+
+msgid "JetEngine Calendar"
+msgstr "تقویم جت انجین"
+
+msgid "JetEngine Custom Content Types"
+msgstr "انواع محتوای سفارشی ‫جت انجین"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins License Deactivation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه‌های جت"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های Jet"
+
+msgid "JetSmartFilters"
+msgstr "جت اسمارت فیلتر"
+
+msgid "JetWooBuilder Products Grid"
+msgstr "گرید محصولات جت ووبیلدر"
+
+msgid "JetWooBuilder Products List"
+msgstr "لیست محصولات جت ووبیلدر"
+
+msgid "Jul"
+msgstr "جولای"
+
+msgid "July"
+msgstr "جولای"
+
+msgid "Jun"
+msgstr "ژوئن"
+
+msgid "June"
+msgstr "ژوئن"
+
+msgid "Justify"
+msgstr "جاستیفای"
+
+msgid "Key"
+msgstr "کلید"
+
+msgid "LIKE"
+msgstr "لایک"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Label Block"
+msgstr "بلوک برچسب"
+
+msgid "Label typography"
+msgstr "تایپوگرافی برچسب"
+
+msgid "Last Item Border Width"
+msgstr "عرض حاشیه (Border) آیتم آخر"
+
+msgid "Last modified date"
+msgstr "تاریخ آخرین تغییر"
+
+msgid "Learn More"
+msgstr "اطلاعات بیشتر"
+
+msgid "Leave blank for auto width"
+msgstr "برای عرض خودکار خالی بگذارید"
+
+msgid "Leave the field empty if there is no limitation needed"
+msgstr "در صورت عدم نیاز به محدودیت، فیلد را خالی بگذارید"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Less"
+msgstr "کمتر"
+
+msgid "Less Items Count"
+msgstr "تعداد موارد کمتر"
+
+msgid "Less Text"
+msgstr "متن کمتر"
+
+msgid "Less items count"
+msgstr "تعداد موارد کمتر"
+
+msgid "Less text"
+msgstr "متن کمتر"
+
+msgid "Less than or equals (<=)"
+msgstr "کوچکتر از یا برابر (<=)"
+
+msgid "Licence expires <b class=\"expire-date\">%s</b>"
+msgstr "لایسنس منقضی می‌شود <b class=“expire-date”>%s</b>"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Key:"
+msgstr "کلید لایسنس:"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "Line"
+msgstr "خط"
+
+msgid "List"
+msgstr "لیست"
+
+msgid "List of URL structure types"
+msgstr "لیست انواع ساختار URL"
+
+msgid "List of content widgets that available for filtering"
+msgstr "لیستی از ابزارک ها که برای فیلتر در دسترس هستند"
+
+msgid "List post types that will be indexed"
+msgstr "لیست انواع پست هایی که ایندکس میشوند"
+
+msgid "Listing Grid"
+msgstr "لیست شبکه"
+
+msgid "Load More"
+msgstr "بارگذاری بیشتر"
+
+msgid "Load More Text"
+msgstr "متن بارگذاری بیشتر"
+
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Manual Input"
+msgstr "ورودی دستی"
+
+msgid "Mar"
+msgstr "مارس"
+
+msgid "March"
+msgstr "مارس"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid "Max Value"
+msgstr "حداکثر مقدار"
+
+msgid "Maximum possible date to select"
+msgstr "حداکثر تاریخ ممکن برای انتخاب"
+
+msgid "Maximum value"
+msgstr "حداکثر مقدار"
+
+msgid "May"
+msgstr "می"
+
+msgid "Meta Date"
+msgstr "متا داده"
+
+msgid "Meta key"
+msgstr "کلید متا"
+
+msgid "Meta key numeric"
+msgstr "عدد کلید متا"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "Min Value"
+msgstr "حداقل مقدار"
+
+msgid "Min number of letters"
+msgstr "حداقل تعداد حرف ها"
+
+msgid "Min width"
+msgstr "حداقل عرض"
+
+msgid "Min/Max Dates Enabled"
+msgstr "حداقل/حداکثر تاریخ فعال شد"
+
+msgid "Minimal Width"
+msgstr "حداقل عرض"
+
+msgid "Minimal value"
+msgstr "حداقل مقدار"
+
+msgid "Minimal width"
+msgstr "حداقل عرض"
+
+msgid "Minimum possible date to select"
+msgstr "حداقل تاریخ ممکن برای انتخاب"
+
+msgid "Mixed"
+msgstr "ترکیبی"
+
+msgid "Mo"
+msgstr "دوشنبه"
+
+msgid "Mon"
+msgstr "دوشنبه"
+
+msgid "Monday"
+msgstr "دوشنبه"
+
+msgid "Month"
+msgstr "ماه"
+
+msgid "More"
+msgstr "بیشتر"
+
+msgid "More Less Toggle"
+msgstr "تاگل(Toggle) بیشتر کمتر"
+
+msgid "More Text"
+msgstr "متن بیشتر"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های جت با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در آیتم %s"
+
+msgid "More text"
+msgstr "متن بیشتر"
+
+msgid "More/Less Enabled"
+msgstr "بیشتر/کمتر فعال"
+
+msgid "More/less enabled"
+msgstr "بیشتر/کمتر فعال"
+
+msgid "Move to trash"
+msgstr "انتقال به زباله دان"
+
+msgid "N Selected"
+msgstr "‫N انتخاب شد"
+
+msgid "N Selected Color"
+msgstr "‫N رنگ انتخاب شده"
+
+msgid "N Selected Margin"
+msgstr "‫N مارجین ( Margin ) انتخاب شده"
+
+msgid "N Selected Typography"
+msgstr "‫N تایپوگرافی انتخاب شده است"
+
+msgid "Name (post slug)"
+msgstr "نام (نامک پست)"
+
+msgid "Navigation Arrows"
+msgstr "پیکان های پیمایش"
+
+msgid "Navigation arrows"
+msgstr "پیکان‌های ناوبری"
+
+msgid "Need help?"
+msgstr "نیاز به کمک دارید؟"
+
+msgid "Needle"
+msgstr "سوزن"
+
+msgid "Never"
+msgstr "هرگز"
+
+msgid "New Level"
+msgstr "سطح جدید"
+
+msgid "New Option"
+msgstr "گزینه جدید"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "Next Text"
+msgstr "متن بعدی"
+
+msgid "Next text"
+msgstr "متن بعدی"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No Filters Found"
+msgstr "هیچ فیلتری پیدا نشد"
+
+msgid "No Filters Found In Trash"
+msgstr "هیچ فیلتری در زباله دان یافت نشد"
+
+msgid "No Result Text"
+msgstr "بدون متن نتیجه"
+
+msgid "No filters found"
+msgstr "هیچ فیلتری پیدا نشد"
+
+msgid "No matches found"
+msgstr "مطابقتی یافت نشد"
+
+msgid "No order (by ID)"
+msgstr "بدون ترتیب (با شناسه)"
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Normal Background Color"
+msgstr "رنگ پس زمینه عادی"
+
+msgid "Normal Color"
+msgstr "رنگ عادی"
+
+msgid "Notes"
+msgstr "یادداشت ها"
+
+msgid "Nov"
+msgstr "نوامبر"
+
+msgid "November"
+msgstr "نوامبر"
+
+msgid "Number of Named Items"
+msgstr "تعداد آیتم‌های نامگذاری شده"
+
+msgid "Number of comments"
+msgstr "تعداد نظرات"
+
+msgid "Number of decimals"
+msgstr "تعداد اعشارها"
+
+msgid "Oct"
+msgstr "اکتبر"
+
+msgid "October"
+msgstr "اکتبر"
+
+msgid "Offset"
+msgstr "آفست"
+
+msgid "Offset Right"
+msgstr "افست راست"
+
+msgid "Offset Top"
+msgstr "افست بالا"
+
+msgid "Offset right"
+msgstr "افست راست"
+
+msgid "Offset top"
+msgstr "افست بالا"
+
+msgid "Open in new window"
+msgstr "باز کردن در پنجره جدید"
+
+msgid "Options"
+msgstr "گزینه ها"
+
+msgid "Options List"
+msgstr "لیست گزینه ها"
+
+msgid "Order"
+msgstr "ترتیب"
+
+msgid "Order By"
+msgstr "ترتیب بر اساس"
+
+msgid "Order by"
+msgstr "مرتب سازی با"
+
+msgid "Other Filters Changed"
+msgstr "سایر فیلترها تغییر کردند"
+
+msgid "Other Month Color"
+msgstr "رنگ ماه دیگر"
+
+msgid "Other month color"
+msgstr "رنگ ماه دیگر"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Page reload"
+msgstr "بارگیری مجدد صفحه"
+
+msgid "Pagination"
+msgstr "صفحه بندی"
+
+msgid "Pagination for:"
+msgstr "صفحه بندی برای:"
+
+msgid "Period Type"
+msgstr "نوع دوره زمانی"
+
+msgid "Placeholder"
+msgstr "پلیس هولدر"
+
+msgid "Placeholder color"
+msgstr "رنگ مکان‌نگهدار"
+
+msgid "Please check this option if you will use with JetSmartFilters."
+msgstr "اگر با جت اسمارت فیلتر استفاده می کنید، لطفاً این گزینه را علامت بزنید."
+
+msgid "Please enter query id."
+msgstr "لطفا شناسه کوئری را وارد نمایید."
+
+msgid "Please select a filter"
+msgstr "لطفاً فیلتر را انتخاب کنید"
+
+msgid "Please select a provider"
+msgstr "لطفاً یک ارائه دهنده را انتخاب کنید"
+
+msgid "Please select content provider to show."
+msgstr "لطفا ارائه دهنده محتوا را برای نمایش انتخاب کنید."
+
+msgid "Please select filter to show."
+msgstr "لطفاً فیلتر را برای نمایش انتخاب کنید."
+
+msgid ""
+"Please set <b>jet-smart-filters</b> into Query ID option of Posts widget you "
+"want to filter"
+msgstr ""
+"لطفاً <b>jet-smart-filters</b> را در گزینه شناسه کوئری از ابزارک پستها که می "
+"خواهید فیلتر کنید ،تنظیم کنید"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid ""
+"Plus date operations are available with the following structure: + or - N "
+"number and unit of the date such as day(s), week(s), month(s) or year(s)"
+msgstr ""
+"عملیات تاریخ پلاس با ساختار زیر در دسترس است: + یا - N عدد و واحد تاریخ "
+"مانند روز(ها)، هفته(ها)، ماه(ها) یا سال(ها)"
+
+msgid "Points Height"
+msgstr "ارتفاع امتیازها"
+
+msgid "Points Width"
+msgstr "عرض امتیازها"
+
+msgid "Points size"
+msgstr "اندازه نقاط"
+
+msgid "Popular plugins fields"
+msgstr "فیلد های محبوب افزونه ها"
+
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Post Date"
+msgstr "تاریخ پست"
+
+msgid "Post Type"
+msgstr "نوع مطلب"
+
+msgid "Post Types and their Taxonomies for which permalinks will be rewritten"
+msgstr ""
+"انواع پست ها و طبقه بندی های آنها که پیوندیکتا برای آنها بازنویسی می شود"
+
+msgid "Posts"
+msgstr "پست ها"
+
+msgid "Prefix/Suffix"
+msgstr "پیشوند/ پسوند"
+
+msgid "Prev"
+msgstr "قبلی"
+
+msgid "Prev Text"
+msgstr "متن قبلی"
+
+msgid "Prev text"
+msgstr "متن قبلی"
+
+msgid "Prev/Next Buttons"
+msgstr "دکمه های قبلی/بعدی"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Product price"
+msgstr "قیمت محصول"
+
+msgid "Product rating"
+msgstr "رتبه بندی محصولات"
+
+msgid "Product reviews number"
+msgstr "تعداد نظرات محصول"
+
+msgid "Product sales number"
+msgstr "تعداد فروش محصول"
+
+msgid "Provider top offset"
+msgstr "افست بالای ارائه دهنده"
+
+msgid "Publish"
+msgstr "انتشار"
+
+msgid "Query ID"
+msgstr "شناسه کوئری"
+
+msgid "Query ID for filters"
+msgstr "شناسه کوئری برای فیلترها"
+
+msgid "Query Variable *"
+msgstr "متغیر کوئری *"
+
+msgid "Quick edit"
+msgstr "ویرایش سریع"
+
+msgid "REGEXP"
+msgstr "Regexp"
+
+msgid "Radio"
+msgstr "رادیو"
+
+msgid "Radio Filter"
+msgstr "فیلتر رادیویی(Radio)"
+
+msgid "Radio Icon"
+msgstr "آیکن رادیو"
+
+msgid "Random"
+msgstr "تصادفي"
+
+msgid "Range"
+msgstr "بازه"
+
+msgid "Range Filter"
+msgstr "فیلتر محدوده"
+
+msgid "Range Points"
+msgstr "امتیازات محدوده"
+
+msgid "Range color"
+msgstr "رنگ محدوده"
+
+msgid "Range points"
+msgstr "نقاط محدوده"
+
+msgid "Rating"
+msgstr "امتیاز"
+
+msgid "Rating Filter"
+msgstr "فیلتر امتیاز"
+
+msgid "Rating icon"
+msgstr "آیکن امتیاز"
+
+msgid "Redirect Path"
+msgstr "مسیر ردایرکت"
+
+msgid "Redirect path"
+msgstr "مسیر ریدایرکت"
+
+msgid "Relational Operator"
+msgstr "عملگر رابطه ای"
+
+msgid "Remove"
+msgstr "حذف"
+
+msgid "Remove Filters"
+msgstr "حذف فیلترها"
+
+msgid "Remove Right Offset"
+msgstr "حذف افست راست"
+
+msgid "Remove Size"
+msgstr "حذف اندازه"
+
+msgid "Remove button"
+msgstr "دکمه حذف"
+
+msgid "Remove button tex"
+msgstr "حذف متن دکمه"
+
+msgid "Remove button text"
+msgstr "متن دکمه حذف"
+
+msgid "Remove filters"
+msgstr "حذف فیلترها"
+
+msgid "Replacement"
+msgstr "جایگزینی"
+
+msgid "Reset Field Appearance"
+msgstr "تنظیم مجدد ظاهر فیلد"
+
+msgid "Restore"
+msgstr "بازگرداندن"
+
+msgid "Reverse transformation"
+msgstr "تبدیل معکوس"
+
+msgid "Rewritable Post Types"
+msgstr "انواع پست قابل بازنویسی"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Sa"
+msgstr "شنبه"
+
+msgid "Sat"
+msgstr "شنبه"
+
+msgid "Saturday"
+msgstr "پنجشنبه"
+
+msgid "Save"
+msgstr "ذخیره"
+
+msgid "Save changes?"
+msgstr "ذخیره تغییرات؟"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره"
+
+msgid "Saving"
+msgstr "در حال ذخیره شدن"
+
+msgid "Scroll Enabled"
+msgstr "اسکرول فعال"
+
+msgid "Scroll Height(px)"
+msgstr "ارتفاع اسکرول (px)"
+
+msgid "Scroll enabled"
+msgstr "اسکرول فعال"
+
+msgid "Scroll height(px)"
+msgstr "ارتفاع اسکرول (px)"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Search Enabled"
+msgstr "جستجو فعال"
+
+msgid "Search Filter"
+msgstr "فیلتر جستجو"
+
+msgid "Search Items"
+msgstr "جستجو آیتم ها"
+
+msgid "Search Placeholder"
+msgstr "پلیس هولدر جستجو"
+
+msgid "Search button icon"
+msgstr "آیکن دکمه جستجو"
+
+msgid "Search button text"
+msgstr "متن دکمه جستجو"
+
+msgid "Search by"
+msgstr "جستجو توسط"
+
+msgid "Search enabled"
+msgstr "جستجو فعال"
+
+msgid "Search in %s"
+msgstr "جستجو در %s"
+
+msgid "Search placeholder"
+msgstr "مکان‌نگهدار جستجو"
+
+msgid "Search..."
+msgstr "جستجو..."
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "See how the aliases will look"
+msgstr "ببینید نام مستعار چگونه به نظر می رسد"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Select Date"
+msgstr "انتخاب تاریخ"
+
+msgid "Select Filter"
+msgstr "انتخاب فیلتر"
+
+msgid "Select Width"
+msgstr "انتخاب عرض"
+
+msgid "Select behavior..."
+msgstr "انتخاب رفتار..."
+
+msgid "Select data source..."
+msgstr "منبع داده را انتخاب کنید ..."
+
+msgid "Select date source..."
+msgstr "انتخاب منبع داده..."
+
+msgid "Select filter"
+msgstr "انتخاب فیلتر"
+
+msgid "Select filter type..."
+msgstr "نوع فیلتر را انتخاب کنید ..."
+
+msgid "Select filter..."
+msgstr "انتخاب فیلتر..."
+
+msgid "Select item..."
+msgstr "انتخاب آیتم..."
+
+msgid "Select operator..."
+msgstr "انتخاب اپراتور ..."
+
+msgid "Select period type..."
+msgstr "انتخاب نوع دوره..."
+
+msgid "Select post type..."
+msgstr "انتخاب پست تایپ..."
+
+msgid "Select provider..."
+msgstr "انتخاب ارائه دهنده ..."
+
+msgid "Select search source..."
+msgstr "انتخاب منبع جستجو..."
+
+msgid "Select some options"
+msgstr "برخی گزینه ها را انتخاب کنید"
+
+msgid "Select taxonomy..."
+msgstr "انتخاب طبقه‌بندی..."
+
+msgid "Select type..."
+msgstr "انتخاب نوع..."
+
+msgid "Select width"
+msgstr "انتخاب عرض"
+
+msgid "Select..."
+msgstr "انتخاب..."
+
+msgid "Selected     : "
+msgstr "انتخاب شد     : "
+
+msgid "Selected Color"
+msgstr "رنگ انتخاب شده"
+
+msgid "Selected On Hover Color"
+msgstr "انتخاب شده در رنگ هاور"
+
+msgid "Selected color"
+msgstr "رنگ انتخاب شده"
+
+msgid "Selected hover color"
+msgstr "رنگ هاور انتخاب شده"
+
+msgid "Sep"
+msgstr "سپتامبر"
+
+msgid "Separator"
+msgstr "جداکننده"
+
+msgid "September"
+msgstr "سپتامبر"
+
+msgid "Server error. Stop cheating!!!"
+msgstr "خطای سرور. تقلب نکنید!!!"
+
+msgid "Set number of items on either the start and the end list edges."
+msgstr "تعداد آیتم ها را در لبه های شروع و انتهای لیست تنظیم کنید."
+
+msgid ""
+"Set number of items to either side of current page, not including current "
+"page.Set 0 to show all items."
+msgstr ""
+"تعداد آیتم ها را به دو طرف صفحه فعلی تنظیم کنید ، به جز صفحه فعلی . 0 را "
+"قرار دهید تا همه موارد نشان داده شود."
+
+msgid ""
+"Set queried field key. For multiple field keys separate them with commas"
+msgstr ""
+"کلید فیلد کوئری را تنظیم کنید. برای چندین کلید فیلد آنها را با کاما جدا کنید"
+
+msgid "Set relation between values"
+msgstr "تنظیم رابطه بین مقادیر"
+
+msgid ""
+"Set unique query ID if you use multiple blocks of same provider on the page. "
+"Same ID you need to set for filtered block."
+msgstr ""
+"اگر از چندین بلوک از همان ارائه دهنده در صفحه استفاده می کنید، شناسه کوئری "
+"یکتا را تنظیم کنید. همان شناسه‌ای که باید برای بلوک فیلتر شده تنظیم کنید."
+
+msgid ""
+"Set unique query ID if you use multiple widgets of same provider on the "
+"page. Same ID you need to set for filtered widget."
+msgstr ""
+"اگر از چندین ابزارک ارائه دهنده مشابه در صفحه استفاده می کنید ، شناسه جستجوی "
+"منحصر به فرد را تنظیم کنید. شناسه مشابهی که باید برای ابزارک فیلتر شده تنظیم "
+"کنید."
+
+msgid "Setting GeoSearch Based on User Geolocation"
+msgstr "تنظیم GeoSearch بر اساس موقعیت جغرافیایی کاربر"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Show"
+msgstr "نشان می دهد"
+
+msgid "Show Checkbox"
+msgstr "نمایش چک باکس"
+
+msgid "Show Counter"
+msgstr "نمایش شمارنده"
+
+msgid "Show Radio"
+msgstr "نمایش رادیو(Radio)"
+
+msgid "Show active filters for:"
+msgstr "نمایش فیلترهای فعال برای:"
+
+msgid "Show active tags for:"
+msgstr "نمایش برچسب های فعال برای:"
+
+msgid "Show apply button"
+msgstr "نمایش دکمه اعمال"
+
+msgid "Show checkbox"
+msgstr "نمایش چک باکس"
+
+msgid "Show counter"
+msgstr "نمایش شمارنده"
+
+msgid "Show empty terms"
+msgstr "نمایش شرایط خالی"
+
+msgid "Show filter label"
+msgstr "نمایش برچسب فیلتر"
+
+msgid "Show items label"
+msgstr "نمایش برچسب آیتم ها"
+
+msgid "Show only children of current term"
+msgstr "نمایش تنها فرزندان شرایط فعلی"
+
+msgid "Show only childs of current term"
+msgstr "نمایش فرزندان(Children) شرایط فعلی"
+
+msgid "Size"
+msgstr "سایز"
+
+msgid "Slider"
+msgstr "اسلایدر"
+
+msgid "Smart Filters"
+msgstr "فیلترهای هوشمند"
+
+msgid "Smart Filters List"
+msgstr "لیست فیلترهای هوشمند"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه Jet خود باید لایسنس را فعال کنید"
+
+msgid "Sorry, nothing to see here..."
+msgstr "متاسفم، چیزی برای دیدن وجود ندارد…"
+
+msgid "Sort by"
+msgstr "ترتیب بر اساس"
+
+msgid "Sort filter"
+msgstr "فیلتر مرتب سازی"
+
+msgid "Sort..."
+msgstr "ترتیب..."
+
+msgid "Sorting"
+msgstr "مرتب سازی"
+
+msgid "Sorting Filter"
+msgstr "فلیتر مرتب سازی"
+
+msgid "Sorting List"
+msgstr "لیست مرتب سازی"
+
+msgid "Sorting list"
+msgstr "لیست مرتب سازی"
+
+msgid "Space Between"
+msgstr "فاصله بین"
+
+msgid "Space Between Content"
+msgstr "فضای بین محتوا"
+
+msgid "Star"
+msgstr "ستاره"
+
+msgid "Star half"
+msgstr "نیمه ستاره"
+
+msgid "Star half o"
+msgstr "نیمه ستاره o"
+
+msgid "Star o"
+msgstr "ستاره o"
+
+msgid "Stars"
+msgstr "ستاره"
+
+msgid "Stars count"
+msgstr "تعداد ستاره"
+
+msgid "Start Format"
+msgstr "شروع فرمت"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start/End Date Period Enabled"
+msgstr "دوره شروع/پایان تاریخ فعال است"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Step"
+msgstr "مرحله"
+
+msgid "Stretch"
+msgstr "کشیده"
+
+msgid "Stroke"
+msgstr "حاشیه(Stroke)"
+
+msgid "Su"
+msgstr "یک شنبه"
+
+msgid "Sun"
+msgstr "یکشنبه"
+
+msgid "Sunday"
+msgstr "یک شنبه"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Support for the Visual filter will be added with future updates"
+msgstr "پشتیبانی از فیلتر ویژوال با به روزرسانی های آینده اضافه خواهد شد"
+
+msgid "Switch to Classic View"
+msgstr "تعویض به نمای کلاسیک"
+
+msgid "Switch to New View"
+msgstr "تعویض به نمای جدید"
+
+msgid "Switched"
+msgstr "تعویض شد"
+
+msgid "Switching"
+msgstr "در حال تعویض"
+
+msgid "Switching..."
+msgstr "تعویض..."
+
+msgid "Tabindex"
+msgstr "تب‌ایندکس"
+
+msgid "Tabindex focus color"
+msgstr "رنگ فوکوس تب ایندکس"
+
+msgid "Tag Item"
+msgstr "آیتم برچسب"
+
+msgid "Tags"
+msgstr "برچسب ها"
+
+msgid "Tags List"
+msgstr "لیست برچسب ها"
+
+msgid "Tags Position"
+msgstr "موقعیت برچسب ها"
+
+msgid "Taxonomies"
+msgstr "طبقه بندی ها"
+
+msgid "Taxonomy"
+msgstr "طبقه بندی"
+
+msgid "Taxonomy..."
+msgstr "طبقه‌بندی..."
+
+msgid "Text Alignment"
+msgstr "چینش متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text that will be displayed if there are no results after filtering"
+msgstr "متنی که در صورت عدم نتیجه پس از فیلتر نمایش داده می‌شود"
+
+msgid "Th"
+msgstr "پنج شنبه"
+
+msgid "The minimum number of letters to start the search."
+msgstr "حداقل تعداد حروف برای شروع جستجو."
+
+msgid "This filter for"
+msgstr "فیلتر برای"
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+"این لایسنس، مجوزها را برای تمام افزونه های موجود در این مجموعه فعال می کند."
+
+msgid ""
+"This option allows you to set global WordPress variables and variables from "
+"the URL in the same way as on the page from which the request was sent. Use "
+"this option if the macros or dynamic tags in your query settings don’t work "
+"properly."
+msgstr ""
+"این گزینه به شما امکان می دهد  متغیرهای جهانی وردپرس و متغیرهای از آدرس URL "
+"صفحه ای که درخواست از آن ارسال شده است تنظیم کنید. اگر ماکروها یا برچسب های "
+"پویا در تنظیمات کوئری شما به درستی کار نمی کنند ، از این گزینه استفاده کنید."
+
+msgid ""
+"This option should to be enabled if you need to filter data from Checkbox "
+"meta fields type, created with JetEngine plugin."
+msgstr ""
+"در صورت نیاز به فیلتر کردن داده ها از نوع فیلدهای متای چک باکس ، ایجاد شده "
+"با افزونه ‫جت انجین ، این گزینه باید فعال شود."
+
+msgid "Thousands separator"
+msgstr "جداکننده هزارگان"
+
+msgid "Thu"
+msgstr "پنجشنبه"
+
+msgid "Thursday"
+msgstr "پنچشنبه"
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Title: ascending"
+msgstr "عنوان: صعودی"
+
+msgid "Title: descending"
+msgstr "عنوان: نزولی"
+
+msgid "To Placeholder"
+msgstr "به پلیس هولدر"
+
+msgid "To set the limit by date, fill in the date in the following format"
+msgstr "برای تعیین محدودیت بر اساس تاریخ، تاریخ را به شکل زیر پر کنید"
+
+msgid "To set the limit by the current date, fill in"
+msgstr "برای تعیین محدودیت در تاریخ فعلی، آن را پر کنید"
+
+msgid "Today"
+msgstr "امروز‍"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Trash"
+msgstr "زباله دان"
+
+msgid "Trash is empty"
+msgstr "زباله دان خالی است"
+
+msgid "Try quickstart installation"
+msgstr "نصب سریع راه اندازی را امتحان کنید"
+
+msgid "Tu"
+msgstr "سه شنبه"
+
+msgid "Tue"
+msgstr "سه شنبه"
+
+msgid "Tuesday"
+msgstr "سه‌شنبه"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typography"
+msgstr "تایپوگرافی"
+
+msgid "URL Structure Settings"
+msgstr "تنظیمات ساختار URL"
+
+msgid "URL Structure Type"
+msgstr "انواع ساختار URL"
+
+msgid "URL does not contain JetSmartFilters parameters"
+msgstr "‫URL حاوی پارامترهای جت اسمارت فیلتر نیست"
+
+msgid "URL of the page where filter should be applied"
+msgstr "آدرس URL صفحه ای که فیلتر باید در آن اعمال شود"
+
+msgid "URL with filtered value"
+msgstr "URL با مقدار فیلتر شده"
+
+msgid "Union"
+msgstr "اتصال(Union)"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Unpack Free All-inclusive items"
+msgstr "آیتم‌های رایگان را از بسته بندی خارج کنید"
+
+msgid "Update"
+msgstr "به روز رسانی"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Updated"
+msgstr "به روز شد"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Updating"
+msgstr "در حال به روز رسانی"
+
+msgid "Use Custom Query Variable"
+msgstr "استفاده از متغیر کوئری سفارشی"
+
+msgid "Use Indexed filters"
+msgstr "استفاده از فیلتر های ایندکس شده"
+
+msgid "Use URL Aliases"
+msgstr "استفاده مستعار URL"
+
+msgid "Use a {number} macro to display the number of other items"
+msgstr "از ماکرو {number} برای نمایش تعداد موارد دیگر استفاده کنید"
+
+msgid "Use auto re-indexing"
+msgstr "استفاده ایندکس‌مجدد خودکار"
+
+msgid "Use comma to separate options"
+msgstr "برای جدا کردن گزینه ها از کاما استفاده کنید"
+
+msgid "Use filters for widgets"
+msgstr "استفاده از فیلترها برای ابزارک ها"
+
+msgid "Users"
+msgstr "کاربران"
+
+msgid "Value"
+msgstr "مقدار"
+
+msgid "Value change"
+msgstr "تغییر مقدار"
+
+msgid "Values"
+msgstr "مقادیر"
+
+msgid "Values prefix"
+msgstr "پیشوند مقادیر"
+
+msgid "Values suffix"
+msgstr "پسوند مقادیر"
+
+msgid "Vertical Alignment"
+msgstr "چینش عمودی"
+
+msgid "Vertical Gap Between Items"
+msgstr "فاصله عمودی بین آیتم ها"
+
+msgid "Vertical Offset"
+msgstr "افست عمودی"
+
+msgid "Vertical Offset "
+msgstr "افست عمودی "
+
+msgid "Vertical Space Between"
+msgstr "فاصله عمودی بین"
+
+msgid "Vertical Space Between Content"
+msgstr "فضای عمودی بین محتوا"
+
+msgid "Vertical alignment"
+msgstr "چینش عمودی"
+
+msgid "Vertical gap"
+msgstr "فاصله عمودی"
+
+msgid "View Filter"
+msgstr "مشاهده فیلتر"
+
+msgid "Visual"
+msgstr "ویژوال"
+
+msgid "Visual Filter"
+msgstr "فیلتر ویژوال"
+
+msgid "Visual Filter Overview"
+msgstr "نمای کلی فیلتر ویژوال"
+
+msgid "We"
+msgstr "چهارشنبه"
+
+msgid "Wed"
+msgstr "چهارشنبه"
+
+msgid "Wednesday"
+msgstr "چهار شنبه"
+
+msgid "Week"
+msgstr "هفته"
+
+msgid "Weekend Color"
+msgstr "رنگ آخر هفته"
+
+msgid "Weekend color"
+msgstr "رنگ آخر هفته"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "Wk"
+msgstr "هفته"
+
+msgid "WooCommerce Archive (Jet Woo Builder)"
+msgstr "آرشیو ووکامرس (جت ووبیلدر)"
+
+msgid "WooCommerce Archive (by JetWooBuilder)"
+msgstr "آرشیو ووکامرس (به وسیله جت ووبیلدر)"
+
+msgid "WooCommerce Shortcode"
+msgstr "کد کوتاه ووکامرس"
+
+msgid "WooCommerce min/max prices"
+msgstr "قیمت حداقل/حداکثر ووکامرس"
+
+msgid "WooCommerce:"
+msgstr "ووکامرس:"
+
+msgid "WooCommerce: _height - product height"
+msgstr "ووکامرس: _height - ارتفاع محصول"
+
+msgid "WooCommerce: _length - product length"
+msgstr "ووکامرس: _length - طول محصول"
+
+msgid "WooCommerce: _price - filter by product price"
+msgstr "ووکامرس: _price - فیلتر بر اساس قیمت محصول"
+
+msgid "WooCommerce: _sale_price_dates_from - filter by product sale start date"
+msgstr "ووکامرس: _sale_price_dates_from - فیلتر بر اساس تاریخ شروع فروش محصول"
+
+msgid "WooCommerce: _sale_price_dates_to - filter by product sale end date"
+msgstr "ووکامرس: _sale_price_dates_to - فیلتر بر اساس تاریخ پایان فروش محصول"
+
+msgid "WooCommerce: _wc_average_rating - filter by product rating"
+msgstr "ووکامرس: _wc_average_rating - فیلتر بر اساس رتبه بندی محصول"
+
+msgid "WooCommerce: _weight - product weight"
+msgstr "ووکامرس: _weight - وزن محصول"
+
+msgid "WooCommerce: _width - product width"
+msgstr "ووکامرس: _width - عرض محصول"
+
+msgid "WooCommerce: total_sales - filter by sales count"
+msgstr "ووکامرس: total_sales - فیلتر بر اساس تعداد فروش"
+
+msgid "Wrap"
+msgstr "بسته بندی(Wrap)"
+
+msgid "Year"
+msgstr "سال"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid ""
+"You can also use the keyword \"%1$s\" instead of the year, month, or day. "
+"Example: %2$s - the limit will be the 15th of the current year and month"
+msgstr ""
+"همچنین می توانید به جای سال، ماه یا روز از کلمه کلیدی “%1$s” استفاده کنید. "
+"مثال: %2$s - حد مجاز پانزدهمین سال و ماه جاری خواهد بود"
+
+msgid "You can install <b>%s more Plugin</b> with your licence"
+msgid_plural "You can install <b>%s more Plugins</b>  with your licence"
+msgstr[0] "می‌توانید %s افزونه‌های بیشتری را با مجوز خود نصب کنید"
+msgstr[1] "می توانید %s افزونه بیشتری را با مجوز خود نصب کنید"
+
+msgid "You can update <b>%s plugin</b>"
+msgid_plural "You can update <b>%s plugins</b>"
+msgstr[0] "می‌توانید <b>%s افزونه‌ها</b> را آپدیت کنید"
+msgstr[1] "می‌توانید <b>%s افزونه</b> را آپدیت کنید"
+
+msgid ""
+"You can use JetEngine macros as field value. For example %current_id% - to "
+"get ID of the current post or term, %object_id% - ID of any current object, "
+"%current_meta|meta_key% - current meta value, etc."
+msgstr ""
+"می توانید از ماکروهای ‫جت انجین به عنوان مقدار فیلد استفاده کنید. برای مثال "
+"%current_id% - برای دریافت شناسه پست یا شرایط فعلی، %object_id% - شناسه هر "
+"شی فعلی، %current_meta|meta_key% - مقدار متای فعلی و غیره."
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های جت نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Your license has been activated!"
+msgstr "لایسنس شما فعال شده است!"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اصلی شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "Your site database needs to be updated to the latest version."
+msgstr "پایگاه داده (database) سایت شما باید به آخرین نسخه به روز شود."
+
+msgid "Your site."
+msgstr "سایت شما."
+
+msgid "and {number} others"
+msgstr "و {number} دیگران"
+
+msgid "day of month with leading zero;"
+msgstr "روز ماه با صفر پیشرو;"
+
+msgid "day of month;"
+msgstr "روز ماه;"
+
+msgid "filter by product price;"
+msgstr "فیلتر با قیمت محصول;"
+
+msgid "filter by product rating;"
+msgstr "فیلتر با امتیاز محصول;"
+
+msgid "filter by product sale end date;"
+msgstr "فیلتر با تاریخ پایان فروش محصول;"
+
+msgid "filter by product sale start date;"
+msgstr "فیلتر با تاریخ شروع فروش محصول;"
+
+msgid "filter by sales count;"
+msgstr "فیلتر با تعداد فروش;"
+
+msgid "full day name;"
+msgstr "نام روز کامل;"
+
+msgid "full month name;"
+msgstr "نام کامل ماه;"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetsmartfilters/"
+msgstr "https://crocoblock.com/plugins/jetsmartfilters/"
+
+msgid "month of year with leading zero;"
+msgstr "ماه سال با صفر پیشرو;"
+
+msgid "month of year;"
+msgstr "ماه سال;"
+
+msgid "product height;"
+msgstr "ارتفاع محصول;"
+
+msgid "product length;"
+msgstr "طول محصول;"
+
+msgid "product weight;"
+msgstr "وزن محصول;"
+
+msgid "product width;"
+msgstr "عرض محصول;"
+
+msgid "short day name;"
+msgstr "نام روز کوچک;"
+
+msgid "short month name;"
+msgstr "نام کوچک ماه;"
+
+msgid "year (four digit);"
+msgstr "سال (چهار رقمی);"
+
+msgid "year (two digit);"
+msgstr "سال (دو رقمی);"
+
+msgid ""
+"you need to add the meta field name by which you want to filter the data, "
+"into the field. The Query Variable is set automatically for taxonomies, "
+"search filters and filters via the post publication date."
+msgstr ""
+"شما باید نام فیلد متا را که می خواهید داده ها را با آن فیلتر کنید ، در فیلد "
+"اضافه کنید. متغیر کوئری به طور خودکار برای طبقه بندی ها ، فیلترهای جستجو و "
+"فیلترها از طریق تاریخ انتشار پست تنظیم می شود."

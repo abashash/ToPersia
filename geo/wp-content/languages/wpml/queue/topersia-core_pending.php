@@ -1,0 +1,2 @@
+<?php
+return ['items'=>['خانه'=>['saveStringInDb'=>true,'cmp'=>['topersia-core',1],'names'=>[],'urls'=>[]],'ToPersia Meta Title'=>['saveStringInDb'=>true,'cmp'=>['topersia-core',1],'names'=>[],'urls'=>[]],'meta_title از متاباکس JetEngine'=>['saveStringInDb'=>true,'cmp'=>['topersia-core',1],'names'=>[],'urls'=>[]],'ToPersia Meta Description'=>['saveStringInDb'=>true,'cmp'=>['topersia-core',1],'names'=>[],'urls'=>[]],'meta_description از متاباکس JetEngine'=>['saveStringInDb'=>true,'cmp'=>['topersia-core',1],'names'=>[],'urls'=>[]]]];

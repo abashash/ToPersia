@@ -1,0 +1,268 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "From:": [
+            "از:"
+        ],
+        "--Choose language--": [
+            "--انتخاب زبان--"
+        ],
+        "to:": [
+            "به:"
+        ],
+        "Set language pair(s) for Translator %s:": [
+            "تنظیم جفت زبان برای مترجم %s:"
+        ],
+        "+ Add more language pairs for this translator": [
+            "+ افزودن جفت های زبان بیشتر برای این مترجم"
+        ],
+        "First Name": [
+            "نام"
+        ],
+        "Last Name": [
+            "نام خانوادگی"
+        ],
+        "Role": [
+            "نقش"
+        ],
+        "(required)": [
+            "(اجباری)"
+        ],
+        "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "اطمینان حاصل کنید که آدرس ایمیل درستی ارائه کرده اید،مثال. name@domain.com"
+        ],
+        "This field is required": [
+            "این فیلد الزامی است"
+        ],
+        "A translator can be any WordPress role.": [
+            "یک مترجم می تواند هر نقش وردپرسی باشد."
+        ],
+        "Username": [
+            "نام کاربری"
+        ],
+        "Email": [
+            "ایمیل"
+        ],
+        "Search": [
+            "جستجو"
+        ],
+        "user": [
+            "کاربر"
+        ],
+        "Editor": [
+            "ویرایشگر"
+        ],
+        "Select an existing %s and set as Translation Manager": [
+            "یک %s موجود را انتخاب کنید و به عنوان مدیر ترجمه تنظیم کنید"
+        ],
+        "Create a new %s and set as Translation Manager": [
+            "یک %s جدید ایجاد کنید و به عنوان مدیر ترجمه تنظیم کنید"
+        ],
+        "Cancel": [
+            "لغو"
+        ],
+        "Add Translation Manager": [
+            "افزودن مدیر ترجمه"
+        ],
+        "Add a Translation Manager": [
+            "افزودن مدیر ترجمه"
+        ],
+        "Set language pair(s)": [
+            "تنظیم جفت(های) زبان"
+        ],
+        "Previous": [
+            "قبلی"
+        ],
+        "Save": [
+            "ذخيره"
+        ],
+        "Add a Translator": [
+            "افزودن یک مترجم"
+        ],
+        "Select an existing user and set as Translator": [
+            "یک کاربر موجود را انتخاب و به عنوان مترجم تنظیم کنید"
+        ],
+        "Create a new user and set as Translator": [
+            "یک کاربر جدید ایجاد و به عنوان مترجم تنظیم کنید"
+        ],
+        "Edit language pair(s) for translator": [
+            "ویرایش جفت(های) زبان برای مترجم"
+        ],
+        "Name": [
+            "نام"
+        ],
+        "Language Pairs": [
+            "جفت زبان"
+        ],
+        "You can translate to and from all languages": [
+            "شما می توانید به/از همه زبان ها ترجمه کنید"
+        ],
+        "%s file upload failed.": [
+            "فایل %s آپلود نشد."
+        ],
+        "Flag": [
+            "پرچم"
+        ],
+        "Flag file": [
+            "فایل پرچم"
+        ],
+        "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "شما فقط زبان اضافه کردید. در مرحله بعد، آن را به عنوان زبان پیش فرض سایت یا زبان ترجمه انتخاب کنید."
+        ],
+        "Language added": [
+            "زبان اضافه شد"
+        ],
+        "The value \"%s\" already exists": [
+            "مقدار \"%s\" از قبل وجود دارد"
+        ],
+        "Add a new language": [
+            "افزودن زبان جدید"
+        ],
+        "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "با انتخاب زبان عمومی از لیست زیر، یک زبان خاص کشور ایجاد کنید. سپس، کشوری را که باید برای آن بومی سازی شود، انتخاب کنید."
+        ],
+        "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "با انتخاب ترکیبی که از قبل در پایگاه داده وجود دارد، WPML می تواند به پر کردن فیلدهای لازم کمک کند. اطلاعات بیشتر درباره <AddingACustomLanguageLink />."
+        ],
+        "Cannot find?": [
+            "پیدا نمی شود؟"
+        ],
+        "Click here": [
+            "اینجا کلیک کنید"
+        ],
+        "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "فرمت اشتباه.فقط شامل حروف کوچک و \"-\" .مثال: \"fr\" , \"pt-br\", \"zh-hans\""
+        ],
+        "Language": [
+            "زبان"
+        ],
+        "Location": [
+            "موقعیت"
+        ],
+        "Code": [
+            "کد"
+        ],
+        "The language will not be supported by automatic translations": [
+            "این زبان توسط ترجمه خودکار پشتیبانی نخواهد شد"
+        ],
+        "Language mapping": [
+            "نگاشت (mapping) زبان"
+        ],
+        "Don't map this language": [
+            "این زبان را نگاشت نکنید"
+        ],
+        "Default locale": [
+            "محلی پیش فرض"
+        ],
+        "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "فرمت اشتباه.فقط حروف کوچک و \"_\".مثال: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+        ],
+        "hreflang": [
+            "hreflang"
+        ],
+        "Encode url?": [
+            "رمزگذاری url؟"
+        ],
+        "Flags must be:": [
+            "پرچم‌ها باید به این صورت باشند:"
+        ],
+        "NO": [
+            "نه"
+        ],
+        "YES": [
+            "بله"
+        ],
+        " (required)": [
+            " (اجباری)"
+        ],
+        "Please fill in the field": [
+            "لطفا فیلد را پر کنید"
+        ],
+        "PNG, SVG, or JPG files": [
+            "فایل‌های PNG، SVG یا JPG"
+        ],
+        "Save language": [
+            "ذخیره زبان"
+        ],
+        "18 x 12 pixels": [
+            "18 x 12 پیکسل"
+        ],
+        "Read more about ": [
+            "اطلاعات بیشتر درباره "
+        ],
+        "The name of your language as it will appear on your site's language switcher.": [
+            "نام زبان شما همانطور که در تغییر زبان سایت شما ظاهر می شود."
+        ],
+        "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "یک مقدار منحصر به فرد که زبان موجود در پایگاه داده و URL را مشخص می کند. پس از ذخیره، کد زبان قابل تغییر نیست."
+        ],
+        "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "اگر زبان سفارشی شما شبیه به زبان موجود است، می توانید از غلط گیر املا و ترجمه خودکار زبان موجود استفاده کنید. به عنوان مثال، اگر زبان سفارشی شما سوئیسی-آلمانی است، می توانید به آلمانی به عنوان زبانی که برای بررسی املا و ترجمه خودکار استفاده می شود، نگاشت کنید. اگر زبان سفارشی خود را به یک زبان موجود نگاشت نکنید، ویژگی‌های املا و ترجمه خودکار در آن زبان در دسترس نخواهد بود."
+        ],
+        "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "مقدار WPML هنگام بارگیری ترجمه ها از فایل های MO و PO بررسی می شود. محلی پیش فرض در نام فایل ها در پوشه /wp-content/languages/ در تنظیمات وردپرس شما گنجانده شده است."
+        ],
+        "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "گوگل از ویژگی hreflang استفاده می کند تا کاربران را به سایت هایی به زبان و مکان مربوطه هدایت کند. مثال ها:"
+        ],
+        "All English-speaking users: en": [
+            "همه کاربران انگلیسی زبان: en"
+        ],
+        "English for UK users: en-gb": [
+            "انگلیسی برای کاربران بریتانیایی: en-gb"
+        ],
+        "English for US users: en-us": [
+            "انگلیسی برای کاربران آمریکایی: en-us"
+        ],
+        "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "تعیین می کند که آیا URL های این زبان کدگذاری شده اند یا از کاارکترهای ASCII استفاده می کنند (اگر مطمئن نیستید، آن را \"نه\" انتخاب کنید)."
+        ],
+        "adding a custom language": [
+            "افزودن زبان سفارشی"
+        ],
+        "Default language": [
+            "زبان پیش‌فرض"
+        ],
+        "What is the current language of your website?": [
+            "زبان فعلی وب سایت شما چیست؟"
+        ],
+        "Translation languages": [
+            "زبان های ترجمه"
+        ],
+        "Which languages do you want to translate your site into?": [
+            "می خواهید سایت خود را به چه زبان هایی ترجمه کنید؟"
+        ],
+        "If you cannot find languages that you need in the list": [
+            "اگر نمی توانید زبان های مورد نیاز خود را در لیست پیدا کنید"
+        ],
+        "create a custom language": [
+            "ایجاد یک زبان سفارشی"
+        ],
+        "What are the languages of your site?": [
+            "زبان سایت شما چیست؟"
+        ],
+        "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
+            "می‌توانید یک فرد اختصاصی را اضافه کنید تا بر هر چیزی که در سایت شما مربوط به ترجمه است نظارت کند. %sمدیران ترجمه%s می‌توانند مترجمان محلی جدید یا خدمات ترجمه حرفه‌ای اضافه کنند، کارهای ترجمه ایجاد و اختصاص دهند، ترجمه‌های تکمیل‌شده را بررسی کنند، و تنظیمات مربوط به ترجمه را تغییر دهند."
+        ],
+        "Translation Managers": [
+            "مدیران ترجمه"
+        ],
+        "Note: All Administrators are automatically given Translation Manager privileges.": [
+            "توجه: به همه مدیران به طور خودکار امتیازات مدیریت ترجمه داده می شود."
+        ],
+        "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "%sمترجمین محلی%s کاربران سایت شما هستند که می توانند وارد سایت شما شوند و ترجمه های سایت شما را اضافه، ویرایش و بررسی کنند. یک مترجم و جفت های ترجمه مرتبط با آنها را اضافه کنید تا کارهای ترجمه را به آنها اختصاص دهید."
+        ],
+        "You can %shire an experienced translator%s to review your automatic translations for perfect quality.": [
+            "شما می توانید %sیک مترجم مجرب را استخدام کنید%s تا ترجمه های خودکار شما را با کیفیت عالی بررسی کند."
+        ],
+        "Translators": [
+            "مترجمان"
+        ]       
+      }
+    }
+  }

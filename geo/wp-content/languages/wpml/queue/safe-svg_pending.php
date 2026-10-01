@@ -1,0 +1,2 @@
+<?php
+return ['items'=>['Safe SVG Settings'=>['saveStringInDb'=>true,'cmp'=>['safe-svg',1],'names'=>[],'urls'=>[]],'User Roles'=>['saveStringInDb'=>true,'cmp'=>['safe-svg',1],'names'=>[],'urls'=>[]],'Large Files'=>['saveStringInDb'=>true,'cmp'=>['safe-svg',1],'names'=>[],'urls'=>[]],'Safe SVG\\4block title'=>['saveStringInDb'=>true,'cmp'=>['WordPress',3],'names'=>[],'urls'=>[]],'Display the SVG icon\\4block description'=>['saveStringInDb'=>true,'cmp'=>['WordPress',3],'names'=>[],'urls'=>[]]]];

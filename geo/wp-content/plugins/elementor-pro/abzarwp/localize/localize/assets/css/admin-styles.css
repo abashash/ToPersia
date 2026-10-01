@@ -1,0 +1,4 @@
+/* admin-styles.css */
+a[href*='admin.php?page=abzarwp_elementor_pro_settings'] {
+    color: #07c00a !important;
+}

@@ -1,0 +1,244 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "Sending for translation": [
+            "ارسال برای ترجمه"
+        ],
+        "Connecting to WPML’s Advanced Translation Editor": [
+            "اتصال به ویرایشگر ترجمه پیشرفته WPML"
+        ],
+        "Try again": [
+            "تلاش دوباره"
+        ],
+        "You don't have the rights to review this language": [
+            "شما حق بررسی این زبان را ندارید"
+        ],
+        "translations": [
+            "ترجمه‌ها"
+        ],
+        "left in the queue": [
+            "مانده در صف"
+        ],
+        "Translation on hold": [
+            "ترجمه در انتظار"
+        ],
+        "No translations in the queue": [
+            "هیچ ترجمه‌ای در صف وجود ندارد"
+        ],
+        "%d translations left": [
+            "%d ترجمه مانده"
+        ],
+        "%d min remaining": [
+            "%d دقیقه مانده"
+        ],
+        "less than 1 min remaining": [
+            "کمتر از 1 دقیقه باقی مانده"
+        ],
+        "Automatic translation status": [
+            "وضعیت ترجمه خودکار"
+        ],
+        "Translate Everything Automatically": [
+            "ترجمه خودکار همه"
+        ],
+        "Translate Everything Automatically is active": [
+            "ترجمه خودکار همه فعال است"
+        ],
+        "Translate Everything Automatically is paused": [
+            "ترجمه خودکار همه در حالت مکث است"
+        ],
+        "Translate Everything Automatically stopped": [
+            "ترجمه خودکار همه متوقف است"
+        ],
+        "Preparing content for translation": [
+            "آماده سازی محتوا برای ترجمه"
+        ],
+        "Preparing more content for translation": [
+            "آماده سازی محتوای بیشتر برای ترجمه"
+        ],
+        "An error occured, fix it to continue.": [
+            "خطایی روی داد، برای ادامه آن را برطرف کنید."
+        ],
+        "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "مشکلی در ترجمه خودکار وجود دارد که نیاز به توجه شما دارد. برای ادامه آن را اصلاح کنید."
+        ],
+        "Your default language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "زبان پیش‌فرض شما، %s، باید به یک زبان پشتیبانی‌شده نگاشت شود تا بتوان از ترجمه خودکار استفاده کرد."
+        ],
+        "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "برای استفاده از ترجمه خودکار، زبان‌های زیر در سایت شما باید به یک زبان پشتیبانی شده نگاشت شوند: %s",
+            "زبان شما، %s، باید به یک زبان پشتیبانی‌شده نگاشت شود تا بتوان از ترجمه خودکار استفاده کرد."
+        ],
+        "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
+            "محتوا در آن زبان‌ها: %s را نمی‌توان به‌طور خودکار ترجمه کرد مگر اینکه آنها را به زبانی متفاوت از زبان پیش‌فرض نگاشت کنید."
+        ],
+        "%d translation waiting for review": [
+            "%d ترجمه در انتظار بررسی است",
+            "%d ترجمه در انتظار بررسی است"
+        ],
+        "Account credits used": [
+            "اعتبارات حساب استفاده شده"
+        ],
+        "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "هنگامی که از تمام اعتبارات پیش پرداخت خود استفاده کردید، هر اعتبار اضافی را که استفاده می کنید پس از پایان ماه برای شما صورتحساب می کنیم."
+        ],
+        "Payment limit:": [
+            "محدودیت پرداخت:"
+        ],
+        "%s credits": [
+            "%s اعتبار"
+        ],
+        "Credits used:": [
+            "اعتبارات استفاده شده:"
+        ],
+        "Credits left:": [
+            "اعتبارات مانده:"
+        ],
+        "The number of credit you will receive an invoice for at the end of the month. View your pay-as-you-go details in your site’s automatic translation settings.": [
+            "تعداد اعتباری که در پایان ماه برای آن فاکتور دریافت خواهید کرد. جزئیات پرداخت خود را در تنظیمات ترجمه خودکار سایت خود مشاهده کنید."
+        ],
+        "Calculating": [
+            "محاسبه"
+        ],
+        "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "اعتبارات پیش پرداخت باقی مانده که به این سایت در WPML.org اختصاص داده شده است."
+        ],
+        "Prepaid credits left": [
+            "اعتبارات پیش پرداخت مانده"
+        ],
+        "Pay-as-you-go credits used": [
+            "اعتبارات پرداختی استفاده شده است"
+        ],
+        "Resume": [
+            "ادامه"
+        ],
+        "Stop": [
+            "توقف"
+        ],
+        "Fix it": [
+            "تعمیر"
+        ],
+        "Pause": [
+            "مکث"
+        ],
+        "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "مکث ترجمه خودکار شما با خطایی مواجه شد. لطفاً بعداً دوباره امتحان کنید یا با پشتیبانی ما تماس بگیرید."
+        ],
+        "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "از سرگیری ترجمه خودکار شما با خطایی مواجه شد. لطفاً بعداً دوباره امتحان کنید یا با پشتیبانی ما تماس بگیرید."
+        ],
+        "Error": [
+            "خطا"
+        ],
+        "Draft — Pending review": [
+            "پیش‌نویس - در انتظار بررسی"
+        ],
+        "Complete": [
+            "تکمیل"
+        ],
+        "Insufficient funds": [
+            "بودجه ناکافی"
+        ],
+        "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "درباره نحوه ترجمه محتوای خود در <a>راهنمای شروع</a> بیشتر بخوانید"
+        ],
+        "Let's Start Translating!": [
+            "بیایید ترجمه را شروع کنیم!"
+        ],
+        "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "محتوای خود را از داشبورد ترجمه زیر انتخاب کنید و اولین کار ترجمه خود را ایجاد کنید!"
+        ],
+        "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "<a>تنظیمات ترجمه خودکار</a> خود را تغییر دهید (کارهای ترجمه در حال انجام با تنظیمات فعلی تکمیل خواهند شد)."
+        ],
+        "Read more about translating your site automatically.": [
+            "درباره ترجمه خودکار سایت خود بیشتر بخوانید."
+        ],
+        "Your site is being automatically translated!": [
+            "سایت شما به طور خودکار ترجمه می شود!"
+        ],
+        "Calculating...": [
+            "محاسبه ..."
+        ],
+        "Do not close WP admin!": [
+            "پیشخوان وردپرس را نبندید!"
+        ],
+        "The number of translations": [
+            "تعداد ترجمه ها"
+        ],
+        "Translate Everything Automatically - running": [
+            "ترجمه خودکار همه - درحال اجرا"
+        ],
+        "Translate Everything Automatically - active": [
+            "ترجمه خودکار همه - فعال"
+        ],
+        "Pause automatic translation": [
+            "مکث ترجمه خودکار"
+        ],
+        "WPML will finish in-progress translations but won't translate anything new.": [
+            "افزونه WPML ترجمه‌های در حال انجام را تمام می کند اما چیز جدیدی را ترجمه نمی کند."
+        ],
+        "Translate Everything Automatically - paused": [
+            "ترجمه خودکار همه - مکث شده"
+        ],
+        "Start automatic translation": [
+            "شروع ترجمه خودکار"
+        ],
+        "This uses %scredits%s to translate your existing content and anything you add or change later.": [
+            "این از %scredits%s برای ترجمه محتوای موجود شما و هر چیزی که بعداً اضافه یا تغییر می‌دهید استفاده می‌کند."
+        ],
+        "Start translating everything automatically": [
+            "شروع ترجمه خودکار همه"
+        ],
+        "WPML will translate any new content you create into %1$s.": [
+            "افزونه WPML هر محتوای جدیدی را که ایجاد می کنید به %1$s ترجمه می کند."
+        ],
+        "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
+            "افزونه WPML تمام محتوای جدید آینده را به %1$s ترجمه می‌کند و هنگام ایجاد تغییرات، ترجمه‌ها را به‌روز نگه می‌دارد."
+        ],
+        "Do you want to translate existing content, too?": [
+            "آیا می‌خواهید محتوای موجود را نیز ترجمه کنید؟"
+        ],
+        "Yes, translate all new and existing content": [
+            "بله، تمام مطالب جدید و موجود را ترجمه کنید"
+        ],
+        "No, only translate new content": [
+            "خیر، فقط مطالب جدید را ترجمه کنید"
+        ],
+        "You can translate existing content from the Translation Management Dashboard": [
+            "می توانید محتوای موجود را از داشبورد مدیریت ترجمه، ترجمه کنید"
+        ],
+        "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "خطای اتصال. لطفا یک دقیقه صبر کنید و این صفحه را دوباره بارگیری کنید. اگر مشکل ادامه داشت، لطفاً با پشتیبانی WPML تماس بگیرید."
+        ],
+        "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
+            "ترجمه خودکار از اعتبار استفاده می کند. %1$sاطلاعات بیشتر درباره اعتبار ترجمه خودکار‌%2$s"
+        ],
+        "You need credits to start translating everything.": [
+            "برای شروع ترجمه همه چیز به اعتبار نیاز دارید."
+        ],
+        "Cancel": [
+            "لغو"
+        ],
+        "Start translating everything": [
+            "شروع ترجمه همه"
+        ],
+        "%1$d language": [
+            "%1$d زبان",
+            "%1$d زبان"
+        ],
+        "Please wait...": [
+            "لطفا صبر کنید..."
+        ],
+        "All new future content": [
+            "همه مطالب جدید آینده"
+        ],
+        "Translate Everything Automatically - stopped": [
+            "ترجمه خودکار همه - متوقف"
+        ]
+      }
+    }
+  }

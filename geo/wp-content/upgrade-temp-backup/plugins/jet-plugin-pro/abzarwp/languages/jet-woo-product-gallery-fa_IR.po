@@ -1,0 +1,859 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetProductGallery For Elementor\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-15 21:23+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-woo-product-gallery.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid " Background Color"
+msgstr " رنگ پس زمینه"
+
+msgid "\"%1$s\" requires \"%2$s\" version %3$s or greater."
+msgstr "(%1$s)به(%2$s) نسخه %3$s یا بالاتر نیاز دارد."
+
+msgid "%s Video Player"
+msgstr "ویدئو پلیر %s"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه  جت پیشرفته"
+
+msgid "Activate License"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license for automatic updates and awesome support"
+msgstr "لایسنس را برای به روزرسانی خودکار و پشتیبانی عالی فعال کنید"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Add Images"
+msgstr "افزودن تصاویر"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "Arrow Next"
+msgstr "پیکان بعدی"
+
+msgid "Arrow Previous"
+msgstr "پیکان قبلی"
+
+msgid "Aspect Ratio"
+msgstr "نسبت ابعاد"
+
+msgid "Autoplay"
+msgstr "پخش خودکار"
+
+msgid "Available Widgets"
+msgstr "ابزارک های موجود"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgid "Border"
+msgstr "حاشیه (border)"
+
+msgid "Border Color"
+msgstr "رنگ حاشیه(Border)"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (border)"
+
+msgid "Bottom"
+msgstr "پایین"
+
+msgid "Bottom Indent"
+msgstr "فرورفتگی پایین"
+
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgid "Bullet Size"
+msgstr "اندازه گلوله"
+
+msgid "Bullet Space"
+msgstr "فاصله گلوله"
+
+msgid "Bullets"
+msgstr "گلوله ها"
+
+msgid "Button"
+msgstr "دکمه"
+
+msgid "Button Icon"
+msgstr "آیکن دکمه"
+
+msgid "Center"
+msgstr "وسط"
+
+msgid "Center Center"
+msgstr "وسط مرکز"
+
+msgid "Check For Updates"
+msgstr "بررسی بروزرسانی ها"
+
+msgid "Choose File"
+msgstr "انتخاب فایل"
+
+msgid "Choose Poster"
+msgstr "انتخاب پوستر"
+
+msgid "Choose Video"
+msgstr "انتخاب ویدئو"
+
+msgid "Close (Esc)"
+msgstr "بستن (Esc)"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Columns"
+msgstr "ستون‌ها"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Controller Type"
+msgstr "نوع کنترلر"
+
+msgid "Controls"
+msgstr "کنترل ها"
+
+msgid "Coverflow"
+msgstr "جریان"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Cube"
+msgstr "مکعب"
+
+msgid "Current"
+msgstr "فعلی"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Deactivate License"
+msgstr "غیرفعال‌سازی لایسنس"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Direction:"
+msgstr "جهت :"
+
+msgid "Disable Featured Image"
+msgstr "غیر فعال کردن تصویر شاخص"
+
+msgid "Disabled"
+msgstr "غیرفعال"
+
+msgid "Display Video In"
+msgstr "نمایش ویدئو در"
+
+msgid "Display Video at First Place"
+msgstr "نمایش ویدئو در اولین مکان"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "Dynamic Bullets"
+msgstr "گلوله های پویا"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Elementor"
+msgstr "المنتور"
+
+msgid "Enable"
+msgstr "فعال سازی"
+
+msgid "Enable Centered Slides"
+msgstr "فعال سازی اسلایدهای مرکزی"
+
+msgid "Enable Equal Slides Height"
+msgstr "فعال کردن ارتفاع برابر اسلایدها"
+
+msgid "Enable Featured Image"
+msgstr "فعال کردن تصویر شاخص"
+
+msgid "Enable Gallery"
+msgstr "فعال کردن گالری"
+
+msgid "Enable Loop"
+msgstr "فعال کردن حلقه"
+
+msgid "Enable Video"
+msgstr "فعال سازی ویدئو"
+
+msgid "Enable Zoom"
+msgstr "فعال کردن بزرگنمایی"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "End Indent"
+msgstr "پایان تورفتگی"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Enter your URL"
+msgstr "آدرس URL خود را وارد کنید"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Fade"
+msgstr "محو شدن"
+
+msgid "First Proportion"
+msgstr "نسبت اول"
+
+msgid "Flip"
+msgstr "فلیپ"
+
+msgid "Fraction"
+msgstr "کسر"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "Gallery"
+msgstr "گالری"
+
+msgid "Gallery Anchor Navigation"
+msgstr "ناوبری گالری "
+
+msgid "Gallery Grid"
+msgstr "گالری شبکه ای"
+
+msgid "Gallery Key"
+msgstr "گالری "
+
+msgid "Gallery Modern"
+msgstr "گالری مدرن"
+
+msgid "Gallery Slider"
+msgstr "گالری اسلایدر"
+
+msgid "Gallery not found."
+msgstr "گالری یافت نشد."
+
+msgid "Gallery renderer class not found."
+msgstr "کلاس رندرکننده گالری پیدا نشد."
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های جت"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+msgid "Gutter"
+msgstr "فاصله"
+
+msgid "Height"
+msgstr "ارتفاع"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Horizontal Alignment"
+msgstr "چینش افقی"
+
+msgid "Horizontal Position"
+msgstr "موقعیت افقی"
+
+msgid "Horizontal Position by: "
+msgstr "موقعیت افقی در: "
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Size"
+msgstr "اندازه آیكن"
+
+msgid "Image"
+msgstr "عكس"
+
+msgid "Image 2"
+msgstr "تصویر 2"
+
+msgid "Image 3"
+msgstr "تصویر 3"
+
+msgid "Image 4"
+msgstr "تصویر 4"
+
+msgid "Image 5"
+msgstr "تصویر 5"
+
+msgid "Image Alignment"
+msgstr "چینش تصویر"
+
+msgid "Image Border Radius"
+msgstr "میزان گردی حاشیه (Border) تصویر"
+
+msgid "Image Size"
+msgstr "اندازه  عکس"
+
+msgid "Images"
+msgstr "تصاوير"
+
+msgid "Images Proportion 1 (%)"
+msgstr "نسبت تصاویر 1 (%)"
+
+msgid "Images Proportion 2 (%)"
+msgstr "نسبت تصاویر 2 (%)"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های جت نصب شده"
+
+msgid "Jet Product Gallery Video"
+msgstr "ویدئو JetProductGallery"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins License Deactivation"
+msgstr "غیرفعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های جت"
+
+msgid "JetProductGallery"
+msgstr "JetProductGallery"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Left Indent"
+msgstr "تورفتگی چپ"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Key:"
+msgstr "کلید لایسنس:"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "List of widgets that will be available when editing the page"
+msgstr "لیست ابزارک هایی که هنگام ویرایش صفحه در دسترس خواهند بود"
+
+msgid "Loop"
+msgstr "حلقه"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Manual Select"
+msgstr "انتخاب دستی"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid "Middle"
+msgstr "وسط"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های Jet با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Mute"
+msgstr "بی صدا"
+
+msgid "Navigation"
+msgstr "ناوبری"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "Next (arrow right)"
+msgstr "بعدی(پیکان راست)"
+
+msgid "Next Arrow"
+msgstr "پیکان بعدی"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Offset Top"
+msgstr "افست بالا"
+
+msgid "Offset Top (px)"
+msgstr "افست بالا (px)"
+
+msgid "Open popup with video"
+msgstr "بازکردن پاپ آپ با ویدئو"
+
+msgid "Options"
+msgstr "گزینه ها"
+
+msgid "Outer Offset"
+msgstr "آفست بیرونی"
+
+msgid "Overlay"
+msgstr "پوشش"
+
+msgid "Overlay Color"
+msgstr "رنگ پوششی"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Pagination"
+msgstr "صفحه بندی"
+
+msgid "Pagination Height"
+msgstr "ارتفاع صفحه‌بندی"
+
+msgid "Pagination Type"
+msgstr "نوع صفحه بندی"
+
+msgid "Photoswipe Controls"
+msgstr "کنترلهای عکس"
+
+msgid "Photoswipe Gallery"
+msgstr "گالری عکس"
+
+msgid "Photoswipe Trigger"
+msgstr "تریگر عکس"
+
+msgid "Photoswipe Trigger Button"
+msgstr "دکمه بازکردن اسلایدعکس"
+
+msgid "Placeholder"
+msgstr "نگهدارنده مکان"
+
+msgid "Play Button"
+msgstr "دکمه پخش"
+
+msgid "Play Video"
+msgstr "پخش ویدئو"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Popup"
+msgstr "پاپ آپ"
+
+msgid "Popup Button"
+msgstr "دکمه پاپ آپ"
+
+msgid "Popup Overlay"
+msgstr "پوشش پاپ آپ"
+
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Post Types"
+msgstr "پست تایپها"
+
+msgid "Poster"
+msgstr "پوستر"
+
+msgid "Prev Arrow"
+msgstr "پیکان قبل"
+
+msgid "Prev/Next Arrows"
+msgstr "پیکان های قبلی/بعدی"
+
+msgid "Previous (arrow left)"
+msgstr "قبلی (پیکان چپ)"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Product id"
+msgstr "شناسه محصول"
+
+msgid "Progressbar"
+msgstr "نوار پیشرفت"
+
+msgid "Progressbar Color"
+msgstr "رنگ نوار پیشرفت"
+
+msgid "Progressbar Fill Color"
+msgstr "رنگ پر نوار پیشرفت"
+
+msgid "Progressbar Height"
+msgstr "ارتفاع نوار پیشرفت"
+
+msgid "Progressbar Width"
+msgstr "عرض نوار پیشرفت"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Right Indent"
+msgstr "تورفتگی راست"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره شد"
+
+msgid "Second Proportion"
+msgstr "نسبت دوم"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Self Hosted"
+msgstr "میزبان خود"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Share"
+msgstr "اشتراک گذاری"
+
+msgid "Show"
+msgstr "نمایش"
+
+msgid "Show Arrows"
+msgstr "نمایش فلش ها"
+
+msgid "Show Caption"
+msgstr "نمایش زیرنویس"
+
+msgid "Show Counter"
+msgstr "نمایش شمارنده"
+
+msgid "Show Full Screen"
+msgstr "نمایش تمام صفحه"
+
+msgid "Show Navigation"
+msgstr "نمایش ناوبری"
+
+msgid "Show On Hover"
+msgstr "نمایش در هاور"
+
+msgid "Show Share"
+msgstr "نمایش اشتراک"
+
+msgid "Show Zoom"
+msgstr "نمایش بزرگ نمایی"
+
+msgid "Size"
+msgstr "اندازه"
+
+msgid "Slide"
+msgstr "اسلايد"
+
+msgid "Slider"
+msgstr "اسلایدر"
+
+msgid "Slides Per View"
+msgstr "اسلایدها در هر نمایش"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه جت خود باید لایسنس را فعال کنید"
+
+msgid "Source"
+msgstr "منبع"
+
+msgid "Space Between"
+msgstr "فاصله بین"
+
+msgid "Space Between Images"
+msgstr "فاصله بین تصاویر"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Indent"
+msgstr "شروع تورفتگی"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Swipes Sensitivity"
+msgstr "حساسیت اسلاید"
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+"این لایسنس، مجوزها را برای تمام افزونه های موجود در این مجموعه فعال می کند."
+
+msgid "Thumbnails"
+msgstr "بندانگشتی ها"
+
+msgid "Thumbnails Size"
+msgstr "اندازه تصاویر بندانگشتی"
+
+msgid "Toggle fullscreen"
+msgstr "تبدیل به حالت تمام صفحه"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Top Indent"
+msgstr "ردیف بالا"
+
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgid "Transition Effect"
+msgstr "افکت انتقال"
+
+msgid "Trigger Type"
+msgstr "نوع فعال کننده"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typography"
+msgstr "تایپوگرافی"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Vertical Alignment"
+msgstr "چینش عمودی"
+
+msgid "Vertical Position"
+msgstr "موقعیت عمودی"
+
+msgid "Vertical Position by: "
+msgstr "موقعیت عمودی در: "
+
+msgid "Video"
+msgstr "ویدیو"
+
+msgid "Video Play Button"
+msgstr "دکمه پخش ویدیو"
+
+msgid "Video Popup Button"
+msgstr "دکمه پاپ آپ ویدئو"
+
+msgid "Video Poster:"
+msgstr "پوستر ویدئو:"
+
+msgid "Video Type"
+msgstr "نوع ویدیو"
+
+msgid "Video Type:"
+msgstr "نوع ویدئو:"
+
+msgid "Video URL:"
+msgstr "آدرس ویدئو:"
+
+msgid "Video:"
+msgstr "ویدیو:"
+
+msgid "Vimeo"
+msgstr "ویمئو"
+
+msgid "Vimeo URL"
+msgstr "آدرس ویمیو"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Widgets"
+msgstr "ابزارک ها"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "WooCommerce Products"
+msgstr "محصولات ووکامرس"
+
+msgid "Worked just with youtube and vimeo video types."
+msgstr "فقط با ویدیوی یوتیوب و ویمئو کار میکند"
+
+msgid "YouTube"
+msgstr "یوتیوب"
+
+msgid "YouTube URL"
+msgstr "آدرس یوتیوب"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Your license has been activated!"
+msgstr "لایسنس شما فعال شده است!"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid "Your perfect tool for creating galleries."
+msgstr "ابزار عالی شما برای ایجاد گالری."
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اصلی شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "Youtube"
+msgstr "یوتیوب"
+
+msgid "Zoom Magnify"
+msgstr "بزرگنمایی"
+
+msgid "Zoom in/out"
+msgstr "بزرگنمایی/کوچک نمایی"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jetproductgallery/"
+msgstr "https://crocoblock.com/plugins/jetproductgallery/"

@@ -1,0 +1,41 @@
+/**
+*
+*	Name:			IRANYekanWeb Font
+*	Version:		5.0
+*	Author:			Moslem Ebrahimi (moslemebrahimi.com)
+*	Created on:		Dec 25, 2012
+*	Updated on:		Sep 01, 2017
+*	Website:		             http://fontiran.com
+*	Copyright:		Commercial/Proprietary Software
+--------------------------------------------------------------------------------------
+فونت های ایران سن سریف یک نرم افزار مالکیتی محسوب می شود. جهت آگاهی از قوانین استفاده از این فونت ها لطفا به وب سایت (فونت ایران دات کام) مراجعه نمایید
+--------------------------------------------------------------------------------------
+IRAN Sans-serif fonts are considered a proprietary software. To gain information about the laws regarding the use of these fonts, please visit www.fontiran.com
+--------------------------------------------------------------------------------------
+This set of fonts are used in this project under the license: (MJPQF)
+
+--------------------------------------------------------------------------------------
+*
+**/
+
+:root {
+	--abzarwp-font-family: iranyekanwebregular;
+}
+
+@font-face {
+	font-family: iranyekanwebregular;
+	font-style: normal;
+	font-weight: normal;
+	src: url('../fonts/eot/IRANYekanWebRegular.eot');
+	src: url('../fonts/eot/IRANYekanWebRegular.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+				 url('../fonts/woff/IRANYekanWebRegular.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+				 url('../fonts/woff2/IRANYekanWebRegular.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+				 url('../fonts/ttf/IRANYekanWebRegular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: iranyekanwebregularnew;
+    font-style: normal;
+    font-weight: normal;
+    src: url('data:font/otf;base64,=f=gfnP1SerGCJvMJib1D15jzeS1rEbJqkZECJSy4GChvMHGa1KMfSNHYV5SThSMKGa1KMfSR1jM5GNhHuTSq1v1siIKH1KiQSujbSyGQvMGaKMSYchxdByGCsaWPSeWff5iaph7f7h7b6epYfVSTO1jTjRGyOrXlIQhYwrtVByGIsaWPDuGQs1tPSe7foL70YV7ysaETjRGyCQXMIeXfZrX59vtaZ8taZVxzvVSTd1jTjRGyNrtl6r7nBh7aL5STH1jTjRGyW1ECO1Gqj1Gadujys1jwsaWPSyXfpQX0oYWYEhpysujwsaWPdaECD1jTdQGygrtnBh7aL5STWMGaK5GRs1x') format('opentype')
+}

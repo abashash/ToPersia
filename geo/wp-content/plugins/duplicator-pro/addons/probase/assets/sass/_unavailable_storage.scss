@@ -1,0 +1,55 @@
+// Unavailable storage providers teaser (shown when license is missing)
+
+.dup-unavailable-wrapper {
+    text-align: center;
+    background: $white;
+    border: 1px solid $medium-gray;
+    padding: $global-padding;
+
+    h3 {
+        margin: 0 0 8px;
+        font-weight: 500;
+    }
+
+    > p {
+        margin: 0 auto 28px;
+        color: $dark-gray;
+    }
+
+    .dup-unavailable-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+
+    .dup-unavailable-card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        padding: 0.5rem;
+        background: $white;
+        border: 2px solid $light-gray;
+        border-radius: $global-radius;
+
+        i, img {
+            font-size: 2.5rem;
+            width: 60px;
+            height: auto;
+        }
+
+        &__label {
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 100%;
+            text-overflow: ellipsis;
+        }
+    }
+}

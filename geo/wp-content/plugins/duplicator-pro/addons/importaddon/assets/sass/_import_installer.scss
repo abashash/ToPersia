@@ -1,0 +1,52 @@
+.admin_page_duplicator-import-installer {
+    .dup-header.dup-styles {
+        display: none;
+    }
+
+    .wpcontent {
+        position: relative;
+    }
+
+    #wpfooter {
+        display: none;
+    }
+
+    .admin_page_duplicator-import-installer:not(.dup-actions-error) #wpbody-content>* {
+        display: none;
+    }
+    
+    #adminmenuwrap,
+    #dupli-import-installer-wrapper {
+        height: calc(100vh - 32px);
+        overflow: hidden;
+    }
+    
+    @media only screen and (max-width: 782px) {
+        #adminmenuwrap,
+        #dupli-import-installer-wrapper {
+            height: calc(100vh - 46px);
+        }
+    }
+    
+    #dupli-import-installer-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex !important;
+        flex-flow: column;
+        z-index: 1000000;
+    }
+    
+    #dupli-import-installer-iframe {
+        flex: 1 1 auto;
+    }
+    
+    #dupli-import-installer-top-bar {
+        padding: 20px 0;
+    }
+}
+
+
+
+

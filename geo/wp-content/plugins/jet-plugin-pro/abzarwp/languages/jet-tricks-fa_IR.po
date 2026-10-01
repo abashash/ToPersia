@@ -1,0 +1,962 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetTricks\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-18 16:08+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-tricks.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های Jet پیشرفته"
+
+msgid "Activate Elementor Now"
+msgstr "فعال سازی الان المنتور"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Active On"
+msgstr "فعال در"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid "After Label"
+msgstr "برچسب بعد"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "Always show tooltips."
+msgstr "نمایش همیشه تولتیپ ها."
+
+msgid "Animation"
+msgstr "انیمیشن"
+
+msgid "Animation Delay"
+msgstr "تاخیر انیمیشن"
+
+msgid "Appearance Duration"
+msgstr "مدت آشکار بودن"
+
+msgid "Arrow Color"
+msgstr "رنگ پیکان"
+
+msgid "Autohide Time (seconds)"
+msgstr "زمان پنهان کردن خودکار (ثانیه)"
+
+msgid "Avaliable Extensions"
+msgstr "افزودنی های در دسترس"
+
+msgid "Avaliable Widgets"
+msgstr "ابزارک‌های در دسترس"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Angle"
+msgstr "زاویه"
+
+msgctxt "Background Control"
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Background Type"
+msgstr "نوع پس‌زمینه"
+
+msgctxt "Background Control"
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgctxt "Background Control"
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgctxt "Background Control"
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgctxt "Background Control"
+msgid "Center Center"
+msgstr "وسط وسط"
+
+msgctxt "Background Control"
+msgid "Center Left"
+msgstr "وسط چپ"
+
+msgctxt "Background Control"
+msgid "Center Right"
+msgstr "وسط راست"
+
+msgctxt "Background Control"
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgctxt "Background Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Background Control"
+msgid "Gradient"
+msgstr "گرادیانت"
+
+msgctxt "Background Control"
+msgid "Linear"
+msgstr "خطی"
+
+msgctxt "Background Control"
+msgid "Location"
+msgstr "مکان"
+
+msgctxt "Background Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgctxt "Background Control"
+msgid "Radial"
+msgstr "شعاعی"
+
+msgctxt "Background Control"
+msgid "Second Color"
+msgstr "رنگ دوم"
+
+msgctxt "Background Control"
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgctxt "Background Control"
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgctxt "Background Control"
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgctxt "Background Control"
+msgid "Type"
+msgstr "نوع"
+
+msgid "Before Label"
+msgstr "برچسب قبل"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "نوع حاشیه (border)"
+
+msgctxt "Border Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "خط‌ چین"
+
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgctxt "Border Control"
+msgid "Double"
+msgstr "دوخطی"
+
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "خط ممتد"
+
+msgctxt "Border Control"
+msgid "Width"
+msgstr "عرض"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Bottom"
+msgstr "پایین"
+
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgid "Bottom End"
+msgstr "پایان پایین"
+
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgid "Bottom Spacing"
+msgstr "فاصله پایین"
+
+msgid "Bottom Start"
+msgstr "شروع پایین"
+
+msgctxt "Box Shadow Control"
+msgid "Box Shadow"
+msgstr "سایه باکس"
+
+msgctxt "Box Shadow Control"
+msgid "Inset"
+msgstr "درونی"
+
+msgctxt "Box Shadow Control"
+msgid "Outline"
+msgstr "بیرونی"
+
+msgctxt "Box Shadow Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Box Size"
+msgstr "اندازه جعبه"
+
+msgid "Button"
+msgstr "دکمه"
+
+msgid "Center"
+msgstr "وسط"
+
+msgid "Check For Updates"
+msgstr "بررسی بروزرسانی ها"
+
+msgid "Choose Image"
+msgstr "انتخاب عکس"
+
+msgid "Choose Template"
+msgstr "انتخاب قالب"
+
+msgid ""
+"Choose a certain set of options in the widget’s Style tab by moving the "
+"slider, and improve your Elementor editor performance by selecting "
+"appropriate style settings fill level (from None to Full level)"
+msgstr ""
+"با حرکت دادن اسلایدر ، مجموعه خاصی از گزینه ها را در زبانه استایل ابزارک "
+"انتخاب کنید و با انتخاب سطح مناسب تنظیمات استایل (از هیچ به سطح کامل) ، "
+"عملکرد ویرایشگر المنتور خود را بهبود ببخشید."
+
+msgid "Circ"
+msgstr "Circ"
+
+msgid "Click"
+msgstr "كلیك"
+
+msgid "Closed Height"
+msgstr "ارتفاع حالت بسته"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Container"
+msgstr "جعبه"
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Content Type"
+msgstr "نوع محتوا"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Custom Selector"
+msgstr "سلکتور سفارشی"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Delay"
+msgstr "تاخیر"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Disappearance Duration"
+msgstr "مدت ناپدید شدن"
+
+msgid "Distance"
+msgstr "فاصله"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Duration"
+msgstr "مدت زمان"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Easing"
+msgstr "کاهش(Easing)"
+
+msgid "Edit Template"
+msgstr "ویرایش قالب"
+
+msgid "Editor"
+msgstr "ویرایشگر"
+
+msgid "Editor Load Level"
+msgstr "سطح بارگذاری ویرایشگر"
+
+msgid "Enable Particles"
+msgstr "فعال‌سازی ذرات معلق"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Expo"
+msgstr "Expo"
+
+msgid "Fade"
+msgstr "Fade"
+
+msgid "Fall Perspective"
+msgstr "چشم انداز افتادن(Fall Perspective)"
+
+msgid "Flash"
+msgstr "Flash"
+
+msgid "Focus"
+msgstr "فوکوس"
+
+msgid "Fold"
+msgstr "فولد"
+
+msgid "Fold After a Specified Amount of Time"
+msgstr "بستن بعد از مدت زمان مشخص"
+
+msgid "Fold Icon"
+msgstr "آیکن فولد"
+
+msgid "Fold Text"
+msgstr "متن فولد "
+
+msgid "Fold Сontent on Сlick Outside Widget"
+msgstr "بستن محتوا با کلیک در خارج از ابزارک"
+
+msgid "Font Color"
+msgstr "رنگ فونت"
+
+msgid "Font Size"
+msgstr "اندازه فونت"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های Jet"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+msgid "Height"
+msgstr "ارتفاع"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Hide"
+msgstr "پنهان"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Horizontal Position(%)"
+msgstr "موقعیت افقی(%)"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hotspot"
+msgstr "نقطه کانونی"
+
+msgid "Hotspots"
+msgstr "هات اسپات"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid ""
+"I am text block. Click edit button to change this text. Lorem ipsum dolor "
+"sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec "
+"ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit amet, "
+"consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, "
+"pulvinar dapibus leo. Lorem ipsum dolor sit amet, consectetur adipiscing "
+"elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo. "
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, "
+"luctus nec ullamcorper mattis, pulvinar dapibus leo. Lorem ipsum dolor sit "
+"amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper "
+"mattis, pulvinar dapibus leo."
+msgstr ""
+"من بلاک متن هستم برای تغییر این متن روی دکمه ویرایش کلیک کنید.لورم ایپسوم "
+"متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک "
+"است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و "
+"برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای "
+"کاربردی می باشد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و "
+"با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون "
+"و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای "
+"متنوع با هدف بهبود ابزارهای کاربردی می باشد."
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon Box"
+msgstr "جعبه آیکن"
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Gap"
+msgstr "فاصله آیکن"
+
+msgid "Icon Orientation"
+msgstr "جهت آیکن"
+
+msgid "Icon Position"
+msgstr "موقعیت آیکن"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid "Image"
+msgstr "عكس"
+
+msgid "Image not defined"
+msgstr "تصویر تعریف نشده است"
+
+msgid "InOutBack"
+msgstr "InOutBack"
+
+msgid "InOutCirc"
+msgstr "InOutCirc"
+
+msgid "InOutExpo"
+msgstr "InOutExpo"
+
+msgid "InOutSine"
+msgstr "InOutSine"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Elementor Now"
+msgstr "نصب الان المنتور"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده"
+
+msgid "Invert"
+msgstr "معکوس"
+
+msgid "Jet Hotspots: Description"
+msgstr "هات اسپات Jet: توضیحات"
+
+msgid "Jet Hotspots: Link"
+msgstr "هات اسپات Jet: لینک"
+
+msgid "Jet Hotspots: Text"
+msgstr "هات اسپات Jet: متن"
+
+msgid "Jet Unfold: Content"
+msgstr " آنفولد Jet - محتوا"
+
+msgid "Jet Unfold: Fold Text"
+msgstr "آنفولد جت - متن فولد"
+
+msgid "Jet Unfold: Unfold Text"
+msgstr "آنفولد Jet - متن آنفولد"
+
+msgid "Jet View More: Button Label"
+msgstr "مشاهده بیشتر جت: برچسب دکمه"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های Jet"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های Jet"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های Jet"
+
+msgid "JetTricks"
+msgstr "JetTricks "
+
+msgid "JetTricks - Satellite Text"
+msgstr "JetTricks  - متن ماهواره ای"
+
+msgid "JetTricks - Tooltip Description"
+msgstr "JetTricks  - توضیحات تولتیپ"
+
+msgid "JetTricks requires Elementor to be activated."
+msgstr "JetTricks  نیاز به فعال سازی المنتور دارد."
+
+msgid "JetTricks requires Elementor to be installed."
+msgstr "JetTricks  نیاز به نصب المنتور دارد."
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "Left End"
+msgstr "پایان چپ"
+
+msgid "Left Start"
+msgstr "شروع چپ"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "Linear"
+msgstr "Linear"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Margin"
+msgstr "فاصله(Margin)"
+
+msgid "Middle Center"
+msgstr "وسط وسط"
+
+msgid "Middle Left"
+msgstr "وسط چپ"
+
+msgid "Middle Right"
+msgstr "وسط راست"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Mouse Enter"
+msgstr "ورود ماوس"
+
+msgid "Mouse Enter + Click"
+msgstr "ورود ماوس + کلیک"
+
+msgid "Mouse Enter + Focus"
+msgstr "ورود ماوس + فوکوس"
+
+msgid "Move Up"
+msgstr "حرکت به بالا"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "No"
+msgstr "نه"
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Offset"
+msgstr "افست"
+
+msgid "Offset X"
+msgstr "آفست X"
+
+msgid "Offset Y"
+msgstr "آفست Y"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Parallax"
+msgstr "پارالاکس"
+
+msgid "Parallax Speed(%)"
+msgstr "سرعت پارالاکس(%)"
+
+msgid "Parallax Widget Extension"
+msgstr " ابزارک پارالاکس"
+
+msgid "Particles"
+msgstr "ذرات"
+
+msgid "Particles JSON"
+msgstr "ذرات JSON"
+
+msgid ""
+"Paste your particles JSON code here - Generate it from <a href=\"https://"
+"vincentgarreau.com/particles.js/\" target=\"_blank\">Here!</a>"
+msgstr ""
+"کد JSON ذرات خود را در اینجا جای گذاری کنید - از <a href=\"http://"
+"vincentgarreau.com/particles.js/#default\" target=\"_blank\"> اینجا </a> "
+"تولید کنید."
+
+msgid "Perspective"
+msgstr "چشم انداز(Perspective)"
+
+msgid "Placement"
+msgstr "مکان قرار گیری"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Pulse"
+msgstr "Pulse"
+
+msgid "Read More"
+msgstr "ادامه مطلب"
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Right End"
+msgstr "پایان راست"
+
+msgid "Right Start"
+msgstr "شروع راست"
+
+msgid "Rotate"
+msgstr "چرخش"
+
+msgid "Rubber"
+msgstr "Rubber"
+
+msgid "Satellite"
+msgstr "متن ماهواره‌ای"
+
+msgid "Satellite Widget Extension"
+msgstr "افزودنی متن ماهواره ای"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره شد"
+
+msgid "Scale"
+msgstr "Scale"
+
+msgid "Scroll to Top After Hiding Content"
+msgstr "اسکرول به بالا بعد از پنهان شدن محتوا"
+
+msgid "Section Id"
+msgstr "شناسه بخش"
+
+msgid "Sections"
+msgstr "بخش ها"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select"
+msgstr "انتخاب"
+
+msgid "Separator"
+msgstr "جداکننده"
+
+msgid "Separator Height"
+msgstr "ارتفاع جداکننده"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Shake"
+msgstr "Shake"
+
+msgid "Shift-Away"
+msgstr "Shift-Away"
+
+msgid "Shift-Toward"
+msgstr "Shift-Toward"
+
+msgid "Show"
+msgstr "نمایش"
+
+msgid "Show All Sections"
+msgstr "نمایش همه بخش ها"
+
+msgid "Show Effect"
+msgstr "نمایش افکت"
+
+msgid "Show On Init"
+msgstr "نمایش در آغاز"
+
+msgid "Sine"
+msgstr "Sine"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه جت خود باید لایسنس را فعال کنید"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "State Styles"
+msgstr "استایل حالت "
+
+msgid "States Styles"
+msgstr "استایل حالت ها"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Sticky Column"
+msgstr "ستون چسبنده"
+
+msgid "Sticky On"
+msgstr "چسباندن در"
+
+msgid "Style"
+msgstr "استایل"
+
+msgid "Styles"
+msgstr "استایل ها"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Swing"
+msgstr "تاب خوردن"
+
+msgid "Switch on to enable & access Particles options!"
+msgstr "برای فعال کردن و دسترسی به گزینه های ذرات روشن کنید!"
+
+msgid "Tada"
+msgstr "Tada"
+
+msgid "Template"
+msgstr "قالب"
+
+msgid "Template is not defined. "
+msgstr "قالب تعریف نشده است. "
+
+msgid "Text"
+msgstr "متن"
+
+msgid "Text Alignment"
+msgstr "چینش متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "This is Tooltip!"
+msgstr "این یک تولتیپ است!"
+
+msgid "Tooltip"
+msgstr "تولتیپ"
+
+msgid "Tooltip Widget Extension"
+msgstr "افزودنی تولتیپ"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgid "Top End"
+msgstr "بالا پایین"
+
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgid "Top Spacing"
+msgstr "فاصله بالا"
+
+msgid "Top Start"
+msgstr "بالا شروع"
+
+msgid "Trigger"
+msgstr "تریگر"
+
+msgid "Type"
+msgstr "نوع"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "UnFold"
+msgstr "آنفولد"
+
+msgid "Unfold"
+msgstr "آنفولد"
+
+msgid "Unfold Icon"
+msgstr "آیکن آنفولد"
+
+msgid "Unfold Text"
+msgstr "متن آنفولد"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Use Arrow"
+msgstr "استفاده از پیکان"
+
+msgid "Use Arrow?"
+msgstr "استفاده از پیکان؟"
+
+msgid "Use Parallax?"
+msgstr "استفاده از پارالاکس؟"
+
+msgid "Use Satellite?"
+msgstr "استفاده از متن ماهواره‌ ای؟"
+
+msgid "Use Tooltip?"
+msgstr "استفاده از تولتیپ؟"
+
+msgid ""
+"Use different eye-catching stylish animation effects and let your content "
+"become truly alive with outstanding visual tricks!"
+msgstr ""
+"از جلوه های مختلف انیمیشن شیک و چشم نواز استفاده کنید و اجازه دهید محتوای "
+"شما با ترفندهای بصری برجسته واقعاً زنده شود!"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "Vertical Position(%)"
+msgstr "موقعیت عمودی(%)"
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "Widgets & Extensions"
+msgstr "افزودنی ها و ابزارک ها"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "Wrapper Styles"
+msgstr "استایل بسته بندی(Wrapper)"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های Jet نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Z-Index"
+msgstr "ایندکس Z"
+
+msgid "Zoom In"
+msgstr "بزرگ نمایی"
+
+msgid "Zoom Out"
+msgstr "کوچک نمایی"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jettricks/"
+msgstr "https://crocoblock.com/plugins/jettricks/"

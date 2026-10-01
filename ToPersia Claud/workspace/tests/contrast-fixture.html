@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>کالیبراسیون کاوشگر کنتراست</title>
+<!--
+  صفحهٔ کالیبراسیون — P5-D193
+
+  کاوشگر کنتراست سه بار غلط بود و هر سه بار ریشه یکی: چیزی را خواند که
+  مرورگر به آن نرسیده بود، یا چیزی را زمینه شمرد که زمینه نبود. این صفحه
+  همان سه ریشه را به‌صورت موارد شناخته‌شده می‌گذارد تا تصحیح چهارم نتواند
+  بی‌صدا اولی را بشکند.
+
+  هر مورد دو چیز اعلام می‌کند:
+
+    data-expect-bg   رنگِ زمینه پس از ترکیب — با حساب سادهٔ آلفا به دست
+                     می‌آید و دستی نوشته شده، نه با اجرای کاوشگر
+    data-expect      نسبت مورد انتظار
+
+  نسبت را `contrast.php` مستقل در PHP از روی همین دو رنگ حساب می‌کند و با
+  عدد کاوشگر می‌سنجد. دو پیاده‌سازی جدا که بخوانند یعنی فرمول درست است؛
+  یکی‌بودن زمینه یعنی حل لایه‌ها درست است.
+
+  هیچ توکن و هیچ فایل پروژه‌ای اینجا نمی‌آید — کالیبراسیون باید مستقل از
+  پالت بماند وگرنه با هر تغییر رنگ می‌شکند.
+-->
+<style>
+  html, body { margin: 0; background: #FFFFFF; }
+  body { font: 16px/1.6 system-ui, sans-serif; color: #000000; }
+  .case { position: relative; padding: 24px; margin: 0; min-height: 90px; }
+  .case p { margin: 0; font-size: 16px; font-weight: 700; }
+  .on-dark p, .on-media p { color: #FFFFFF; position: relative; z-index: 2; }
+
+  /* ۱ — متن روی پس‌زمینهٔ نیمه‌شفاف
+     rgba(0,0,0,.5) روی سفید  →  0*.5 + 255*.5 = 127.5 */
+  #c-alpha { background: rgba(0, 0, 0, .5); }
+
+  /* ۲ — عنصری با transition روی رنگ
+     اسکریپت پایین صفحه بی‌درنگ به سیاه می‌بردش. اگر کاوشگر انتقال را
+     خاموش نکند، مقدارِ وسطِ انتقال را می‌خواند نه مقصد را.
+
+     مدت عمداً بسیار بلند است. کروم بی‌سر با --virtual-time-budget زمان
+     را جلو می‌برد، و با سه ثانیه انتقال پیش از سنجش تمام می‌شد و این
+     مورد هرگز نمی‌افتاد — یعنی چیزی را محافظت نمی‌کرد. با ۹۹۹ ثانیه
+     بودجهٔ مجازی کمتر از یک درصدش را پیش می‌برد، پس نبودِ freeze
+     بی‌درنگ خودش را نشان می‌دهد. */
+  #c-transition { background: #FFFFFF; transition: background-color 999s linear; }
+  #c-transition.is-done { background: #000000; }
+
+  /* ۳ — شبه‌عنصر تزئینی که زمینه نیست
+     نوار سه‌پیکسلیِ سفیدِ بالای کارت. absolute است و inset افقی صفر دارد،
+     ولی پشتِ متن نیست. زمینه باید سیاه بماند. */
+  #c-decor { background: #000000; }
+  #c-decor::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: #FFFFFF;
+  }
+
+  /* ۴ — متن روی گرادیان
+     پوشش تمام‌قد با تیره‌ترین توقف rgba(0,0,0,.9) روی سفید
+     →  0*.9 + 255*.1 = 25.5 */
+  #c-gradient { background: #FFFFFF; }
+  #c-gradient::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.9) 100%);
+  }
+
+  /* ۵ — متن روی رسانه با پوشش
+     بدترین حالتِ رسانه سفید است. rgba(10,14,18,.62) رویش:
+       r = 10*.62 + 255*.38 = 103.1
+       g = 14*.62 + 255*.38 = 105.58
+       b = 18*.62 + 255*.38 = 108.06 */
+  #c-media { background: #FFFFFF; }
+  #c-media::after {
+    content: ""; position: absolute; inset: 0;
+    background: rgba(10, 14, 18, .62);
+  }
+/* ۸ — هاورِ والد، متنِ فرزند.  P5-D209
+   پر از آنِ والد است و رنگ متن از آنِ فرزند. اگر کاوشگر فقط فرزند را
+   حالت‌دار کند، متنِ روشن را روی پس‌زمینهٔ عادیِ **روشنِ** والد می‌سنجد
+   و ۱٫۰۸ می‌دهد — حالتی که روی صفحه هرگز پیش نمی‌آید. */
+.cal-parentbox{background:#fff;padding:10px;margin-top:10px}
+.cal-parent{display:block;background:#FFFFFF;padding:8px;color:#000;text-decoration:none}
+.cal-parent:hover{background:#000000}
+.cal-parent:hover .cal-child{color:#FFFFFF}
+
+/* ۷ — `:where()` وزن ندارد.  P5-D205
+   بازنده دیرتر است و اگر کاوشگر `:where` را یک کلاس بشمارد، هم‌وزن
+   می‌شود و به‌خاطر ترتیب می‌برَد — یعنی ‎#8A8A8A و ۳٫۴۵. */
+.cal-wherebox{background:#fff;padding:10px;margin-top:10px}
+.cal-wherebox a.cal-link2{color:#000;text-decoration:none}
+/* برنده — (۰,۳,۱) */
+.cal-wherebox a.cal-link2:hover{color:#000}
+/* بازنده — (۰,۲,۱) چون :where() صفر است، ولی دیرتر در فایل */
+:where(.cal-wherebox) a.cal-link2:hover{color:#8A8A8A}
+
+/* ۶ — هاور: برنده باید ببرد. ترتیب عمداً وارونهٔ وزن است. */
+.cal-hoverbox{background:#fff;padding:10px;margin-top:10px}
+.cal-hoverbox a.cal-link{color:#000;text-decoration:none}
+/* برنده — وزن (۰,۳,۱) */
+.cal-hoverbox a.cal-link:hover{color:#000}
+/* بازنده — وزن (۰,۲,۱)، ولی دیرتر در فایل و کم‌کنتراست */
+a.cal-link:hover{color:#8A8A8A}
+/* گرادیانِ خودِ عنصر — کاوشگر باید بدترین توقف را بگیرد.  P5-D225
+   متن سفید روی گرادیانی که از #FFFFFF تا #000000 می‌رود: بدترین توقف
+   سفید است، پس نسبت باید ۱ باشد — نه ۲۱ که با گرفتنِ تیره‌ترین توقف
+   درمی‌آمد، و نه ۱٫۰۸ که با ندیدنِ گرادیان درمی‌آمد. */
+.cal-gradbox{background:#fff;padding:10px;margin-top:10px}
+.cal-grad{display:block;padding:8px;color:#FFFFFF;
+  background:linear-gradient(90deg,#000000 0%,#FFFFFF 100%)}
+/* متنِ نیمه‌شفاف — روی زمینهٔ واقعی ترکیب می‌شود، نه روی سیاه.  P5-D225
+   سفیدِ ۶۰٪ روی سفید، سفید است ⇒ ۱. روش پیشین آن را خاکستری ۹۹ می‌خواند
+   و ۲٫۸۵ می‌داد. */
+.cal-alphabox{background:#fff;padding:10px;margin-top:10px}
+.cal-alpha{display:block;padding:8px;color:rgba(255,255,255,.6)}
+
+/* هاورِ گرادیانی — پرِ هاور گرادیان است نه رنگ.  P5-D225
+   عادی: سفید روی سفید. هاور: سفید روی سیاه ⇒ ۲۱. روش پیشین گرادیان را
+   به backgroundColor می‌داد، مرورگر دورش می‌انداخت، و ۱ درمی‌آمد. */
+.cal-hgradbox{background:#fff;padding:10px;margin-top:10px}
+.cal-hgrad{display:block;padding:8px;background:#FFFFFF;color:#FFFFFF}
+.cal-hgrad:hover{background:linear-gradient(180deg,#000000,#000000);color:#FFFFFF}
+/* هاورِ سبک‌تر — قاعدهٔ عادیِ سنگین‌تر برنده است.  P5-D225
+   `a:hover` (۰,۱,۱) در برابر `.cal-outbox .cal-o` (۰,۲,۰): روی صفحه
+   هاور هیچ اثری ندارد، پس سیاه روی سفید ⇒ ۲۱. کاوشگر پیشین فقط هاورها
+   را با هم می‌سنجید و سفید روی سفید ⇒ ۱ می‌داد. */
+.cal-outbox{background:#fff;padding:10px;margin-top:10px}
+.cal-outbox .cal-o{display:block;padding:8px;color:#000000;text-decoration:none}
+:where(.cal-outbox) a:hover{color:#FFFFFF}
+/* متنِ کنار آیکون — برگِ متنی است و سنجیده می‌شود.  P5-D225
+   پیوندِ نوار بخش‌ها از P5-D223 یک `<svg>` کنار متن دارد. کاوشگر پیشین
+   هر عنصرِ فرزنددار را کنار می‌گذاشت و کل متن نوار بی‌صدا نسنجیده می‌ماند. */
+.cal-iconbox{background:#fff;padding:10px;margin-top:10px}
+.cal-iconlink{display:block;padding:8px;color:#000000;text-decoration:none}
+.cal-iconlink svg{inline-size:15px;block-size:15px;vertical-align:-3px}
+</style>
+</head>
+<body data-tp-calibrate>
+
+  <section class="case on-dark" id="c-alpha">
+    <p data-expect-case="نیمه‌شفاف"
+       data-expect-fg="255,255,255"
+       data-expect-bg="127.5,127.5,127.5"
+       data-expect="3.98">متن روی پس‌زمینهٔ نیمه‌شفاف</p>
+  </section>
+
+  <section class="case on-dark" id="c-transition">
+    <p data-expect-case="انتقال رنگ"
+       data-expect-fg="255,255,255"
+       data-expect-bg="0,0,0"
+       data-expect="21">عنصری با انتقال روی رنگ</p>
+  </section>
+
+  <section class="case on-dark" id="c-decor">
+    <p data-expect-case="شبه‌عنصر تزئینی"
+       data-expect-fg="255,255,255"
+       data-expect-bg="0,0,0"
+       data-expect="21">شبه‌عنصر تزئینی که زمینه نیست</p>
+  </section>
+
+  <section class="case on-dark" id="c-gradient">
+    <p data-expect-case="گرادیان"
+       data-expect-fg="255,255,255"
+       data-expect-bg="25.5,25.5,25.5"
+       data-expect="17.49">متن روی گرادیان</p>
+  </section>
+
+  <section class="case on-media" id="c-media">
+    <p data-expect-case="رسانه با پوشش"
+       data-expect-fg="255,255,255"
+       data-expect-bg="103.1,105.58,108.06"
+       data-expect="5.47">متن روی رسانه با پوشش</p>
+  </section>
+
+  <!--
+    ۶ — هاور: قاعدهٔ برنده، نه هر قاعده‌ای که منطبق است.  P5-D203
+
+    دو قاعده روی همین پیوند می‌نشینند و **بازنده عمداً دیرتر** آمده و
+    عمداً کم‌کنتراست است. اگر کاوشگر وزن را نادیده بگیرد و ترتیب را
+    بگیرد، ‎#8A8A8A را می‌سنجد و ۳٫۴۵ می‌دهد؛ اگر درست داوری کند، ‎#000
+    را می‌سنجد و ۲۱.
+
+    نسخهٔ اولِ کاوشگر دقیقاً همین را غلط می‌کرد: هر قاعدهٔ منطبق را
+    جداگانه inline می‌زد و رنگی را می‌سنجید که هرگز رندر نمی‌شود. با
+    آمدن CSS زندهٔ قالب، سی‌ودو افتادنِ دروغین ساخت.
+  -->
+  <section class="cal-hoverbox">
+    <a href="#" class="cal-link"
+       data-expect-case="هاور برنده"
+       data-expect-hover="1"
+       data-expect-fg="0,0,0"
+       data-expect-bg="255,255,255"
+       data-expect="21">پیوندی با دو قاعدهٔ هاور</a>
+  </section>
+
+  <!--
+    ۷ — `:where()` وزن ندارد.  P5-D205
+
+    وقتی جزء عنصریِ `tokens.css` داخل `:where()` رفت، کاوشگر آن را یک
+    کلاس شمرد و قاعده‌های لایهٔ توکن ناگهان از قاعده‌های ناحیه سنگین‌تر
+    شدند — سی‌ودو افتادنِ دروغین. این مورد دقیقاً همان را می‌گیرد.
+  -->
+  <section class="cal-wherebox">
+    <a href="#" class="cal-link2"
+       data-expect-case="بی‌وزنیِ where"
+       data-expect-hover="1"
+       data-expect-fg="0,0,0"
+       data-expect-bg="255,255,255"
+       data-expect="21">پیوندی با قاعدهٔ where</a>
+  </section>
+
+  <!--
+    ۸ — هاورِ والد، متنِ فرزند.  P5-D209
+
+    پر از آنِ والد است و رنگ متن از آنِ فرزند. کاوشگر باید هر دو را با
+    هم حالت‌دار کند: سفید روی سیاه ⇒ ۲۱. اگر فقط فرزند را حالت‌دار کند،
+    سفید روی سفید می‌شود ⇒ ۱٫۰۸.
+  -->
+  <section class="cal-parentbox">
+    <a href="#" class="cal-parent">
+      <span class="cal-child"
+         data-expect-case="هاورِ والد"
+         data-expect-hover="1"
+         data-expect-fg="255,255,255"
+         data-expect-bg="0,0,0"
+         data-expect="21">متنی که والدش هاور می‌شود</span>
+    </a>
+  </section>
+
+  <!--
+    گرادیانِ خودِ عنصر — پیش از P5-D225 اصلاً دیده نمی‌شد.
+    متن سفید، گرادیان سیاه→سفید. بدترین پیکسل سفیدِ سمت راست است ⇒ ۱.
+  -->
+  <section class="cal-gradbox">
+    <span class="cal-grad"
+       data-expect-case="گرادیانِ خودِ عنصر"
+       data-expect-fg="255,255,255"
+       data-expect-bg="255,255,255"
+       data-expect="1">متنی روی گرادیان</span>
+  </section>
+
+  <!-- متنِ نیمه‌شفاف روی سفید ⇒ ۱ -->
+  <section class="cal-alphabox">
+    <span class="cal-alpha"
+       data-expect-case="متنِ نیمه‌شفاف"
+       data-expect-fg="255,255,255"
+       data-expect-bg="255,255,255"
+       data-expect="1">متن نیمه‌شفاف</span>
+  </section>
+
+  <!-- هاوری که پرش گرادیان است ⇒ ۲۱ -->
+  <section class="cal-hgradbox">
+    <span class="cal-hgrad"
+       data-expect-case="هاورِ گرادیانی"
+       data-expect-hover="1"
+       data-expect-fg="255,255,255"
+       data-expect-bg="0,0,0"
+       data-expect="21">متن روی هاور گرادیانی</span>
+  </section>
+
+  <!-- هاوری که از قاعدهٔ عادی سبک‌تر است ⇒ بی‌اثر ⇒ ۲۱ -->
+  <section class="cal-outbox">
+    <a href="#" class="cal-o"
+       data-expect-case="هاورِ سبک‌تر"
+       data-expect-hover="1"
+       data-expect-fg="0,0,0"
+       data-expect-bg="255,255,255"
+       data-expect="21">پیوندی که هاورش بازنده است</a>
+  </section>
+
+  <!-- متنِ کنار آیکون ⇒ برگِ متنی ⇒ ۲۱ -->
+  <section class="cal-iconbox">
+    <a href="#" class="cal-iconlink"
+       data-expect-case="متنِ کنار آیکون"
+       data-expect-leaf="1"
+       data-expect-fg="0,0,0"
+       data-expect-bg="255,255,255"
+       data-expect="21"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 12h16"/></svg>پیوند با آیکون</a>
+  </section>
+
+  <script>
+    /*
+     * انتقال را پیش از رسیدن کاوشگر، و به‌صورت «در حال اجرا» شروع می‌کند.
+     *
+     * خواندن getComputedStyle اجباری است: بدون آن، تغییر کلاس در زمان
+     * پارس با اولین محاسبهٔ سبک یکی می‌شود و مرورگر اصلاً انتقالی شروع
+     * نمی‌کند — آن‌وقت این مورد هرگز نمی‌افتد و چیزی را محافظت نمی‌کند.
+     */
+    ( function () {
+      var el = document.getElementById( 'c-transition' );
+      getComputedStyle( el ).backgroundColor;   /* flush */
+      el.classList.add( 'is-done' );
+    }() );
+  </script>
+
+</body>
+</html>

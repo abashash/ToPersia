@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"Language: ar\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+msgid "افزونۀ ToPersia Schema Engine غیرفعال است: نسخۀ هسته %1$s است ولی دست‌کم %2$s لازم دارد."
+msgstr "إضافة ToPersia Schema Engine غير مفعّلة: إصدار النواة %1$s، والمطلوب %2$s على الأقل."
+
+msgid "افزونۀ ToPersia Schema Engine غیرفعال است: افزونۀ ToPersia Core Functions فعال نیست. تا فعال‌شدن آن، هیچ دادۀ ساختاریافته‌ای منتشر نمی‌شود."
+msgstr "إضافة ToPersia Schema Engine غير مفعّلة: إضافة ToPersia Core Functions غير مفعّلة. لن تُنشر أي بيانات منظّمة حتى تفعيلها."
+
+msgid "خانه"
+msgstr "الرئيسية"

@@ -1,0 +1,184 @@
+{
+    "domain": "messages",
+    "locale_data": {
+      "messages": {
+        "": {
+          "domain": "messages"
+        },
+        "Advanced": [
+            "پیشرفته"
+        ],
+        "HTML anchor": [
+            "آنکر HTML"
+        ],
+        "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "هنگام بارگیری صفحه با استفاده از URL \"#anchor\" یک شورتکد به این بلوک اضافه کنید."
+        ],
+        "Additional CSS class(es)": [
+            "کلاس(های) CSS اضافی"
+        ],
+        "Separate multiple classes with spaces.": [
+            "چندین کلاس را با فاصله جدا کنید."
+        ],
+        "Color": [
+            "رنگ"
+        ],
+        "px": [
+            "px"
+        ],
+        "%": [
+            "%"
+        ],
+        "Dimensions": [
+            "نسبت"
+        ],
+        "BLOCK": [
+            "بلوک"
+        ],
+        "Block margin": [
+            "مارجین بلوک"
+        ],
+        "Block padding": [
+            "پدینگ بلوک"
+        ],
+        "LANGUAGE": [
+            "زبان"
+        ],
+        "Language spacing": [
+            "فاصله زبان"
+        ],
+        "Language padding": [
+            "پدینگ زبان"
+        ],
+        "Display": [
+            "نمایش"
+        ],
+        "Show flag": [
+            "نمایش پرچم"
+        ],
+        "Show language name": [
+            "نمایش نام زبان"
+        ],
+        "Display language name in": [
+            "نمایش نام زبان در"
+        ],
+        "Style": [
+            "استایل "
+        ],
+        "Flag settings": [
+            "تنظیمات پرچم"
+        ],
+        "Width": [
+            "عرض"
+        ],
+        "Height": [
+            "ارتفاع"
+        ],
+        "Spacing": [
+            "فاصله"
+        ],
+        "Allow wrapping to multiple lines": [
+            "اجازه چند خط را به بسته‌بندی (wrapp) بدهید"
+        ],
+        "Open on click": [
+            "بازکردن با کلیک"
+        ],
+        "Show arrow": [
+            "نمایش پیکان"
+        ],
+        "Layout": [
+            "طرح"
+        ],
+        "Justification": [
+            "جاستیفای"
+        ],
+        "Orientation": [
+            "جهت"
+        ],
+        "Typography": [
+            "تایپوگرافی"
+        ],
+        "Background": [
+            "پس‌زمینه"
+        ],
+        "Language Text": [
+            "متن زبان"
+        ],
+        "Language Background": [
+            "پس‌زمینه زبان"
+        ],
+        "Current language text": [
+            "متن زبان فعلی"
+        ],
+        "Current language background": [
+            "پس زمینه زبان فعلی"
+        ],
+        "Full name": [
+            "نام کامل"
+        ],
+        "Code": [
+            "کد"
+        ],
+        "Justify items left": [
+            "جاستیفای آیتم‌ها به چپ"
+        ],
+        "Justify items center": [
+            "جاستیفای آیتم‌ها به مرکز"
+        ],
+        "Justify items right": [
+            "جاستیفای آیتم‌ها به راست"
+        ],
+        "Justify items space between": [
+            "فاصله بین جاستیفای آیتم‌ها"
+        ],
+        "Horizontal": [
+            "افقی"
+        ],
+        "Vertical": [
+            "عمودی"
+        ],
+        "Normal": [
+            "عادی"
+        ],
+        "Medium": [
+            "معمولی"
+        ],
+        "Large": [
+            "بزرگ"
+        ],
+        "X-Large": [
+            "خیلی بزرگ"
+        ],
+        "Ab": [
+            "Ab"
+        ],
+        "AB": [
+            "AB"
+        ],
+        "ab": [
+            "ab"
+        ],
+        "Small": [
+            "کوچک"
+        ],
+        "Displays the WPML Language Switcher.": [
+            "سوئیچر زبان WPML را نمایش می دهد."
+        ],
+        "Language Switcher": [
+            "سوئیچر زبان"
+        ],
+        "displays the WPML Language Switcher": [
+            "سوئیچر زبان WPML را نمایش می دهد"
+        ],
+        "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "سوئیچر زبان WPML را نمایش می دهد. <br/> اطلاعات بیشتر درباره <a>نحوه ترجمه این بلوک</a>."
+        ],
+        "Navigation Language Switcher": [
+            "سوئیچر زبان منو"
+        ],
+        "Reset all": [
+            "ریست همه"
+        ]       
+      }
+    }
+  }

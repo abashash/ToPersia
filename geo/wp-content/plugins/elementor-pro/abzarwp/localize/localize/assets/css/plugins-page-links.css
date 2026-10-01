@@ -1,0 +1,29 @@
+#abzarwp-elementor-pro-settings-link {
+    color: white !important;
+    background-color: #d30161;
+}
+
+#abzarwp-elementor-pro-docs-link {
+    background-color: #6c35be;
+}
+
+#abzarwp-elementor-pro-settings-link:hover {
+    color: white !important;
+    background-color: #88043e;
+}
+
+#abzarwp-elementor-pro-docs-link:hover {
+    background-color: #531bb2;
+}
+
+.abzarwp-elementor-pro-plugin-link {
+    color: white !important;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.abzarwp-elementor-pro-plugin-link:hover,
+.abzarwp-elementor-pro-plugin-link:active {
+    color: white !important;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,28 @@
+فاصلهٔ بالای سربرگ روی زنجیرهٔ واقعی — نسخهٔ محلی با پشتهٔ کامل (SourceGuardian، بی xdebug)
+node tests/header-gap.js http://topersia.local/province/isfahan/ http://topersia.local/city/isfahan/
+عدد = بالای .tp-hero منهای پایینِ header.whb-header، در اسکرول صفر
+
+4.2.0 (پیش)  /province/isfahan/  1440  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
+4.2.0 (پیش)  /province/isfahan/  390  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
+4.2.0 (پیش)  /city/isfahan/  1440  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
+4.2.0 (پیش)  /city/isfahan/  390  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
+4.2.3 (پس)  /province/isfahan/  1440  فاصله 0px  —
+4.2.3 (پس)  /province/isfahan/  390  فاصله 0px  —
+4.2.3 (پس)  /city/isfahan/  1440  فاصله 0px  —
+4.2.3 (پس)  /city/isfahan/  390  فاصله 0px  —
+4.3.0  /province/isfahan/  1440  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 147px)
+4.3.0  /province/isfahan/  390  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 101px)
+4.3.0  /city/isfahan/  1440  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 147px)
+4.3.0  /city/isfahan/  390  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 101px)
+4.4.0  /province/isfahan/  1440  فاصله 0px  —
+4.4.0  /province/isfahan/  390  فاصله 0px  —
+4.4.0  /city/isfahan/  1440  فاصله 0px  —
+4.4.0  /city/isfahan/  390  فاصله 0px  —
+4.4.1  /province/isfahan/  1440  فاصله 0px  —
+4.4.1  /province/isfahan/  390  فاصله 0px  —
+4.4.1  /city/isfahan/  1440  فاصله 0px  —
+4.4.1  /city/isfahan/  390  فاصله 0px  —
+4.4.2  /province/isfahan/  1440  فاصله 0px  —
+4.4.2  /province/isfahan/  390  فاصله 0px  —
+4.4.2  /city/isfahan/  1440  فاصله 0px  —
+4.4.2  /city/isfahan/  390  فاصله 0px  —

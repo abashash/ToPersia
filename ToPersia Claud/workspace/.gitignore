@@ -1,0 +1,19 @@
+# وردپرس محلی
+wp-content/
+wp-config.php
+
+# سیستم
+.DS_Store
+Thumbs.db
+
+# موقت
+*.log
+*.bak
+node_modules/
+vendor/
+
+# پیش‌نمایش آزمون چیدمان
+.preview/
+
+# نسخه‌های ایستای سنجش کارایی (P5-D264) — ضبط محلی، بزرگ، با گواهی خودامضا
+tests/.lh-snapshots/

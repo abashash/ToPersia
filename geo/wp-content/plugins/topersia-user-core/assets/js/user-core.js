@@ -1,0 +1,183 @@
+(function(){
+  'use strict';
+  function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn,{once:true}):fn();}
+  ready(function(){
+    var cfg=window.ToPersiaUserCore||{};
+    var T=cfg.i18n||{};
+    function ajax(action,data){
+      var payload=new URLSearchParams();payload.set('action',action);payload.set('nonce',cfg.nonce||'');
+      Object.keys(data||{}).forEach(function(k){
+        var v=data[k];
+        if(Array.isArray(v)){v.forEach(function(one){payload.append(k+'[]',one==null?'':one);});return;}
+        payload.set(k,v==null?'':v);
+      });
+      return fetch(cfg.ajaxUrl||'',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:payload.toString(),credentials:'same-origin'})
+        .then(function(r){return r.json().catch(function(){throw new Error('HTTP '+r.status);});});
+    }
+    /* «هستۀ نمایش» و هر افزونۀ دیگر از همین در استفاده می‌کنند؛ نانس و
+       نشانی یک‌جا می‌مانند.  ۱٫۱۰٫۰ */
+    cfg.call=ajax;
+    function setMessage(id,text,ok){var el=document.getElementById(id);if(!el)return;el.textContent=text||'';el.className='tp-message'+(ok?' success':' error');}
+    function activateTab(root,tab,push){
+      var target=null;
+      root.querySelectorAll('[data-tp-panel]').forEach(function(panel){
+        if(panel.getAttribute('data-tp-panel')===tab)target=panel;
+      });
+      if(!target){
+        tab=root.getAttribute('data-tp-default-tab')||'overview';
+        root.querySelectorAll('[data-tp-panel]').forEach(function(panel){
+          if(panel.getAttribute('data-tp-panel')===tab)target=panel;
+        });
+      }
+      if(!target){
+        var first=root.querySelector('[data-tp-panel]');
+        if(!first)return;
+        tab=first.getAttribute('data-tp-panel');
+      }
+      root.querySelectorAll('[data-tp-panel]').forEach(function(panel){
+        var on=panel.getAttribute('data-tp-panel')===tab;
+        panel.classList.toggle('active',on);
+        panel.hidden=!on;
+        panel.setAttribute('aria-hidden',on?'false':'true');
+      });
+      root.querySelectorAll('[data-tp-tab][role="tab"]').forEach(function(button){
+        var on=button.getAttribute('data-tp-tab')===tab;
+        button.classList.toggle('active',on);
+        button.setAttribute('aria-selected',on?'true':'false');
+        button.setAttribute('tabindex',on?'0':'-1');
+      });
+      if(push){
+        var u=window.location.href.split('#')[0];
+        window.history.replaceState(null,'',u+'#'+encodeURIComponent(tab));
+      }
+      root.dispatchEvent(new CustomEvent('topersia:tab-change',{detail:{tab:tab},bubbles:false}));
+    }
+    document.querySelectorAll('[data-tp-dashboard]').forEach(function(root){
+      root.addEventListener('click',function(e){var t=e.target.closest('[data-tp-tab]');if(!t||!root.contains(t))return;e.preventDefault();activateTab(root,t.getAttribute('data-tp-tab')||'overview',true);});
+      root.addEventListener('keydown',function(e){var b=e.target.closest('[data-tp-tab][role="tab"]');if(!b||!root.contains(b))return;var a=[].slice.call(root.querySelectorAll('[data-tp-tab][role="tab"]')),i=a.indexOf(b),n=i;if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%a.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i-1+a.length)%a.length;if(e.key==='Home')n=0;if(e.key==='End')n=a.length-1;if(n!==i){e.preventDefault();a[n].focus();activateTab(root,a[n].getAttribute('data-tp-tab'),true);}});
+      var h=window.location.hash.replace(/^#/,'');var initial='overview';try{if(h)initial=decodeURIComponent(h);}catch(_e){}activateTab(root,initial,false);
+    });
+    var saveHandler=function(e){var button=e.target.closest('.tp-save-entity');if(!button)return;var saved=button.classList.contains('is-saved');button.disabled=true;ajax(saved?'topersia_remove_saved_place':'topersia_save_place',{post_id:button.getAttribute('data-post-id')||'',post_type:button.getAttribute('data-post-type')||''}).then(function(r){if(!r.success)return;button.classList.toggle('is-saved',!saved);var L=window.ToPersiaUserCore||{};button.textContent=saved?(L.saveLabel||'Save'):'✓ '+(L.savedLabel||'Saved');button.setAttribute('aria-pressed',saved?'false':'true');button.title=saved?(L.saveLabel||'Save'):(L.removeSavedLabel||'Remove from saved');document.querySelectorAll('[data-tp-saved-count]').forEach(function(c){if(r.data&&typeof r.data.count!=='undefined')c.textContent=String(r.data.count);});}).catch(function(){}).finally(function(){button.disabled=false;});};
+    document.addEventListener('click',saveHandler);
+
+    /* لغو دنبال‌کردن از پنل حساب — کارت همان‌جا برداشته می‌شود.  ۱٫۱۰٫۰ */
+    document.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('[data-tp-unfollow]'):null;if(!b)return;
+      b.disabled=true;
+      ajax('topersia_follow_entity',{post_id:b.getAttribute('data-post-id')||'',post_type:b.getAttribute('data-post-type')||'',mode:'unfollow'}).then(function(r){
+        if(!r||!r.success){b.disabled=false;return;}
+        var card=b.closest('[data-tp-follow-card]');if(card)card.remove();
+        document.querySelectorAll('[data-tp-follow-count]').forEach(function(c){c.textContent=String(r.data.count);});
+        var list=document.querySelector('[data-tp-follow-list]');
+        if(list&&!list.querySelector('[data-tp-follow-card]')){var empty=document.querySelector('[data-tp-follow-empty]');if(empty)empty.hidden=false;list.hidden=true;}
+      }).catch(function(){b.disabled=false;});
+    });
+
+    /* ══ ورود با پیامک ═══════════════════════════════════════════════
+       تا ۱٫۹٫۱۲ دکمه‌های فرم ورود هیچ دستگیره‌ای نداشتند — فرم روی سایت
+       زنده کاری نمی‌کرد. هر کارت جدا بسته می‌شود؛ شناسه‌ها درون همان
+       کارت جست‌وجو می‌شوند، نه سراسری.  ۱٫۱۰٫۰
+       ────────────────────────────────────────────────────────────── */
+    function bindAuth(card){
+      if(card.getAttribute('data-tp-bound'))return;card.setAttribute('data-tp-bound','1');
+      var mobile=card.querySelector('#tp-mobile'),send=card.querySelector('#tp-send-otp'),box=card.querySelector('#tp-otp-box'),code=card.querySelector('#tp-otp'),verify=card.querySelector('#tp-verify-otp'),msg=card.querySelector('#tp-auth-message');
+      var token='';
+      function say(text,ok){if(!msg)return;msg.textContent=text||'';msg.className='tp-message'+(ok?' success':' error');}
+      function fail(r){say((r&&r.data&&r.data.message)||T.networkError||'Error',false);}
+      if(send)send.addEventListener('click',function(){
+        send.disabled=true;say(T.otpSending||'',true);
+        ajax('topersia_send_otp',{mobile:mobile?mobile.value:''}).then(function(r){
+          if(!r||!r.success){fail(r);return;}
+          token=r.data.token||'';if(box)box.classList.remove('tp-hidden');say(r.data.message||'',true);if(code)code.focus();
+        }).catch(function(){fail();}).finally(function(){send.disabled=false;});
+      });
+      if(verify)verify.addEventListener('click',function(){
+        verify.disabled=true;say(T.otpChecking||'',true);
+        var back=card.getAttribute('data-tp-redirect')||'';
+        ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',redirect:back}).then(function(r){
+          if(!r||!r.success){fail(r);verify.disabled=false;return;}
+          window.location.href=(r.data&&r.data.redirect)||cfg.loginUrl||'/';
+        }).catch(function(){fail();verify.disabled=false;});
+      });
+    }
+    document.querySelectorAll('[data-tp-auth]').forEach(bindAuth);
+
+    /* ══ پنجرۀ ورود/ثبت‌نام ═════════════════════════════════════════
+       فقط برای مهمان چاپ می‌شود. «هستۀ نمایش» با رویداد
+       `topersia:login-required` بازش می‌کند؛ نشانی بازگشت همان صفحه است.
+       ────────────────────────────────────────────────────────────── */
+    var modal=document.getElementById('tp-uc-login');
+    if(modal){
+      if(modal.parentNode!==document.body)document.body.appendChild(modal);
+      var last=null;
+      var reasons={save:T.reasonSave,follow:T.reasonFollow,review:T.reasonReview,ai:T.reasonAi};
+      var open=function(detail){
+        detail=detail||{};
+        var card=modal.querySelector('[data-tp-auth]');
+        if(card)card.setAttribute('data-tp-redirect',detail.redirect||window.location.href);
+        var why=modal.querySelector('[data-tp-uc-reason]');
+        if(why)why.textContent=reasons[detail.reason]||'';
+        last=document.activeElement;
+        modal.hidden=false;
+        document.documentElement.classList.add('tp-uc-login-open');
+        var f=modal.querySelector('#tp-mobile');if(f)f.focus();
+      };
+      var close=function(){
+        modal.hidden=true;
+        document.documentElement.classList.remove('tp-uc-login-open');
+        if(last&&last.focus)last.focus();
+      };
+      cfg.openLogin=open;
+      document.addEventListener('topersia:login-required',function(e){open(e.detail);});
+      modal.addEventListener('click',function(e){if(e.target===modal||(e.target.closest&&e.target.closest('[data-tp-uc-close]')))close();});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)close();});
+      document.addEventListener('click',function(e){
+        var a=e.target.closest?e.target.closest('[data-tp-login]'):null;if(!a)return;
+        e.preventDefault();open({reason:a.getAttribute('data-tp-login')||'',redirect:window.location.href});
+      });
+    }
+
+    var logout=document.getElementById('tp-logout');if(logout){logout.addEventListener('click',function(){logout.disabled=true;ajax('topersia_logout',{}).then(function(r){if(r.success)window.location.href=r.data.redirect;}).catch(function(){logout.disabled=false;});});}
+    var profile=document.getElementById('tp-profile-form');if(profile){profile.addEventListener('submit',function(e){e.preventDefault();var btn=profile.querySelector('button[type="submit"]');if(btn)btn.disabled=true;var d={};new FormData(profile).forEach(function(v,k){d[k]=v;});ajax('topersia_save_profile',d).then(function(r){setMessage('tp-profile-message',(r.data&&r.data.message)||'',!!r.success);if(r.success&&d.language){document.documentElement.setAttribute('data-tp-user-lang',d.language);}}).catch(function(){setMessage('tp-profile-message','Error',false);}).finally(function(){if(btn)btn.disabled=false;});});}
+    /* تمام‌صفحه — سه پله، چون position:fixed اگر یکی از نیاکان
+       transform یا filter یا contain داشته باشد، به آن نیا قفل می‌شود
+       و عنصر به جای دیدگاه، ته سند می‌نشیند.
+
+       ۱٫۹٫۱۲: کد گزارش‌دهی تشخیص (report و فراخوانی topersia_log_js)
+       کاملاً حذف شد. آن کد به کنشی پیام می‌فرستاد که در هیچ فایل
+       PHP ثبت نشده بود، پس همۀ گزارش‌ها به پاسخ -1 می‌رسیدند و دور
+       ریخته می‌شدند (نونس هم نمی‌فرستاد). خودِ سه پله مانده، چون
+       مکانیزم اجراست و قالب WoodMart روی برخی قالب‌بندی‌ها بلوک
+       احاطه‌کننده می‌سازد. */
+    var dash=document.querySelector('[data-tp-fullscreen="1"]');
+    if(dash){
+      var pinned=function(){
+        var cs=window.getComputedStyle(dash);
+        if(cs.position!=='fixed')return false;
+        /* افقی سنجیده نمی‌شود: 100vw عرض نوار پیمایش را هم می‌شمارد و در
+           RTL عنصر چند پیکسل به چپ می‌رود. ملاک، چسبیدن به بالای دیدگاه است. */
+        return Math.abs(dash.getBoundingClientRect().top)<=2;
+      };
+
+      /* پلۀ یک — انتقال به body و کلاس‌ها */
+      if(dash.parentNode!==document.body)document.body.appendChild(dash);
+      document.documentElement.classList.add('tp-usercore-fullscreen');
+      document.body.classList.add('tp-usercore-open');
+
+      /* پلۀ دو — سبک درون‌خطی، اگر شیوه‌نامه‌ای بازنویسی کرده باشد */
+      if(!pinned()){
+        dash.style.setProperty('position','fixed','important');
+        dash.style.setProperty('inset','0','important');
+        dash.style.setProperty('height','100dvh','important');
+        dash.style.setProperty('z-index','999999','important');
+        dash.style.setProperty('overflow','auto','important');
+      }
+
+      /* پلۀ سه — بیرون‌بردن از body، برای وقتی که خود body بلوک احاطه‌کننده
+         ساخته است. آن‌وقت هیچ نیایی جز html نمی‌ماند. */
+      if(!pinned()){
+        document.documentElement.appendChild(dash);
+      }
+    }
+  });
+})();

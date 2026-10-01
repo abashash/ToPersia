@@ -1,0 +1,458 @@
+:root {
+    --bs-body-line-height:       1.4em;
+    --bs-body-font-size:         13px;
+    --bs-body-bg:                #fafafa;
+    --bs-font-sans-serif:        var(--abzarwp-font-family), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --abzarwp-app-loading-top:   0;
+    --abzarwp-app-loading-start: 160px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box !important;
+}
+
+.abzarwp-app-bootstrap {
+    font-size:   1rem;
+    line-height: 1.5;
+}
+
+body.rtl #wpbody-content {
+    padding-left: 0 !important;
+}
+
+body:not(.rtl) #wpbody-content {
+    padding-right: 0 !important;
+}
+
+body.rtl #wpbody-content,
+body.rtl #wpbody-content h1,
+body.rtl #wpbody-content h2,
+body.rtl #wpbody-content h3,
+body.rtl #wpbody-content h4,
+body.rtl #wpbody-content h5,
+body.rtl #wpbody-content h6,
+body.rtl #abzarwp-app-debug-card,
+body.rtl a[href*='abzarwp.com'],
+body.rtl #adminmenu a[href*='abzarwp-app'] {
+    font-family: var(--abzarwp-font-family), Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+}
+
+#abzarwp-app-debug-card {
+    top:    auto !important;
+    height: 50vh;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+#wpfooter {
+    position: relative !important;
+}
+
+:focus-visible {
+    outline: none !important;
+}
+
+.form-check-input::before {
+    display: none;
+}
+
+/**
+ * App Style
+ */
+
+body:not(.abzarwp-app-loading-done) {
+    /*overflow: hidden;*/
+}
+
+#abzarwp-app {
+    z-index: 1040;
+}
+
+#abzarwp-app-loading {
+    z-index: 1090;
+}
+
+/*#abzarwp-app-loading {*/
+/*    bottom: 0;*/
+/*    top:    var(--abzarwp-app-loading-top);*/
+/*}*/
+
+/*body.rtl #abzarwp-app-loading {*/
+/*    left:  0;*/
+/*    right: var(--abzarwp-app-loading-start);*/
+/*}*/
+
+/*body:not(.rtl) #abzarwp-app-loading {*/
+/*    left:  var(--abzarwp-app-loading-start);*/
+/*    right: 0;*/
+/*}*/
+
+.html.wp-toolbar #abzarwp-app-loading {
+    --abzarwp-app-loading-top: 36px;
+}
+
+.folded #abzarwp-app-loading {
+    --abzarwp-app-loading-start: 36px;
+}
+
+@media only screen and (max-width: 960px) {
+    .auto-fold #abzarwp-app-loading {
+        --abzarwp-app-loading-start: 36px;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .html.wp-toolbar #abzarwp-app-loading {
+        --abzarwp-app-loading-top: 46px;
+    }
+
+    .auto-fold #abzarwp-app-loading {
+        --abzarwp-app-loading-start: 0
+    }
+
+    .auto-fold .wp-responsive-open #abzarwp-app-loading {
+        --abzarwp-app-loading-start: 190px
+    }
+}
+
+@media screen and (max-width: 600px) {
+    html.wp-toolbar #abzarwp-app-loading {
+        --abzarwp-app-loading-top: 0;
+    }
+}
+
+
+.abzarwp-app-account .dropdown-toggle.show {
+    border-style: solid;
+}
+
+.abzarwp-app-account .dropdown-menu {
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body.modal-open #adminmenuwrap {
+    z-index: 1050 !important;
+}
+
+.abzarwp-app-account .dropdown-menu {
+    width: 100%;
+}
+
+@media screen and (min-width: 361px) {
+    .abzarwp-app-account .dropdown-menu {
+        width: 354px;
+    }
+}
+
+.vh-50 {
+    height: 50vh !important;
+}
+
+.fw-500 {
+    font-weight: 500 !important;
+}
+
+.fs-12 {
+    font-size: 0.75rem !important;
+}
+
+.fs-13 {
+    font-size: 0.8125rem !important;
+}
+
+.fs-14 {
+    font-size: 0.875rem !important;
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden !important;
+}
+
+.text-pre-wrap {
+    white-space: pre-wrap !important;
+}
+
+.text-pre-line {
+    white-space: pre-line !important;
+}
+
+.position-fixed {
+    z-index: 999999999;
+}
+
+.sticky-md-top {
+    top: 42px;
+}
+
+.btn-loading {
+    transition: none;
+}
+
+.btn > .dashicons {
+    vertical-align: sub;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+    cursor: pointer;
+}
+
+body:not(.mobile) .bd-search::after {
+    direction:       ltr;
+    position:        absolute;
+    top:             .4rem;
+    right:           .4rem;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    height:          1.5rem;
+    padding-right:   .25rem;
+    padding-left:    .25rem;
+    font-size:       .75rem;
+    color:           #6c757d;
+    content:         'Ctrl + /';
+    border:          1px solid #dee2e6;
+    border-radius:   .125rem;
+}
+
+body:not(.mobile) .bd-search .form-control {
+    padding-right: 3.75rem;
+}
+
+.btn-check + .bg-transparent {
+    color: #00000080;
+}
+
+.text-highlight {
+    color:      #000;
+    background: #ff0;
+}
+
+#abzarwp-app-backtotop {
+    width:      40px;
+    height:     40px;
+    bottom:     10px;
+    box-shadow: rgba(0, 0, 0, .15) 0 2px 3px !important;
+}
+
+#abzarwp-app-backtotop > span > i {
+    width:  calc(100% - 6px);
+    height: calc(100% - 6px);
+}
+
+body.mobile #abzarwp-app-backtotop {
+    display: none !important;
+}
+
+/**
+ * Tooltip
+ */
+.tooltip {
+    z-index: 10800 !important;
+}
+
+/**
+ * Alerts
+ */
+
+#abzarwp-app .alert h1,
+#abzarwp-app .alert h2,
+#abzarwp-app .alert h3,
+#abzarwp-app .alert h4,
+#abzarwp-app .alert h5,
+#abzarwp-app .alert h6,
+#abzarwp-app .alert p {
+    color:     inherit;
+    font-size: inherit;
+    padding:   0;
+    margin:    0;
+}
+
+#abzarwp-app .wp-notices-wrap .notice,
+#abzarwp-app .wp-notices-wrap .updated,
+#abzarwp-app .wp-notices-wrap .error {
+    margin: 0 !important;
+}
+
+#abzarwp-app .alert table,
+#abzarwp-app .wp-notices-wrap table {
+    width: 100%;
+}
+
+#abzarwp-app .alert iframe,
+#abzarwp-app .wp-notices-wrap iframe {
+    height: 150px !important;
+}
+
+/**
+ * Tables
+ */
+
+.abzarwp-app-table {
+    border-collapse: separate;
+    border-spacing:  0;
+}
+
+#abzarwp-app-lwp-table .table-responsive {
+    max-height: 300px;
+}
+
+#abzarwp-app-lwp-table thead {
+    z-index: 1020;
+}
+
+#abzarwp-app .health-check-body.health-check-debug-tab {
+    max-width: 100% !important;
+}
+
+#abzarwp-app-tab-debug .position-sticky,
+#abzarwp-app-tab-help .position-sticky {
+    top: 32px !important;
+}
+
+#abzarwp-app .toast.position-fixed {
+    z-index: 1090;
+}
+
+#abzarwp-app .start-50.transform-center {
+    transform: translateX(50%);
+}
+
+#abzarwp-app .end-50.transform-center {
+    transform: translateX(-50%);
+}
+
+#abzarwp-app-table-backups .check-column input[type='checkbox'] {
+    visibility: hidden;
+}
+
+/**
+ * Select2 backdrop for select container
+ */
+.select2-container--open {
+    z-index: 1070;
+}
+
+.select2-container--open.select2::before {
+    content:        '';
+    position:       fixed;
+    width:          100%;
+    height:         100%;
+    background:     #000;
+    opacity:        0.2;
+    top:            0;
+    right:          0;
+    left:           0;
+    bottom:         0;
+    pointer-events: none;
+}
+
+/**
+ * WP Table
+ */
+
+/*thead .check-column input[type='checkbox'] {*/
+/*    display: none;*/
+/*}*/
+
+.tablenav {
+    height: auto;
+}
+
+.table .column-name {
+    min-width: 250px;
+}
+
+.table > :not(:last-child) > :last-child > * {
+    border-bottom-color: inherit !important;
+}
+
+.table > :last-child > :first-child > * {
+    border-top-width: 0;
+}
+
+.table .toggle-row {
+    display: none;
+}
+
+.table tr.row-notice {
+    position: relative;
+    top:      -2px;
+}
+
+.table tr[data-status*='|active|'] > *,
+.table tr[data-status*='|active|'] + .row-notice > * {
+    background-color: #f0f6fc;
+}
+
+body.rtl .table tr[data-status*='|active|'] th.check-column,
+body.rtl .table tr[data-status*='|active|'] + .row-notice > *:first-child {
+    border-right: 4px solid #72aee6;
+}
+
+body:not(.rtl) .table tr[data-status*='|active|'] th.check-column,
+body:not(.rtl) .table tr[data-status*='|active|'] + .row-notice > *:first-child {
+    border-left: 4px solid #72aee6;
+}
+
+/**
+ * Table Row Actions
+ */
+.table .row-actions {
+    color:       #dcdcde !important;
+    padding-top: 10px !important;
+}
+
+/**
+ * Table Update Notice
+ */
+
+#abzarwp-app .plugin-update-tr .update-message {
+    margin: 0 !important;
+}
+
+#abzarwp-app .plugin-update-tr .plugin-update {
+    margin:     0 !important;
+    padding:    0 !important;
+    border:     0 none !important;
+    box-shadow: none !important;
+}
+
+/**
+ * Resize card with drag & drop
+ */
+.card.card-resizable-n > .ui-resizable-n {
+    position: absolute;
+    top:      -4px;
+    right:    0;
+    left:     0;
+    z-index:  9999;
+    width:    100%;
+    height:   8px;
+    cursor:   row-resize;
+}
+
+/**
+ * Aparat Video Iframe
+ */
+
+.h_iframe-aparat_embed_frame {
+    position: relative;
+}
+
+.h_iframe-aparat_embed_frame .ratio {
+    display: block;
+    width:   100%;
+    height:  auto;
+}
+
+.h_iframe-aparat_embed_frame iframe {
+    position: absolute;
+    top:      0;
+    left:     0;
+    width:    100%;
+    height:   100%;
+}

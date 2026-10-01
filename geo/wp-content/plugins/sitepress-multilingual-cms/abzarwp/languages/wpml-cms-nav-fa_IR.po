@@ -1,0 +1,312 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPML CMS Nav\n"
+"POT-Creation-Date: 2021-01-13 17:42+0330\n"
+"PO-Revision-Date: 2021-01-15 21:42+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: plugin.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: inc/cms-navigation-schema.php:52 inc/cms-navigation.class.php:467
+#: inc/cms-navigation.class.php:469 menu/navigation.php:65
+msgid "News"
+msgstr "اخبار"
+
+#: inc/cms-navigation.class.php:141
+#, php-format
+msgid ""
+"WPML CMS Navigation is enabled but not effective. It requires <a href=\"%s"
+"\">WPML</a> in order to work."
+msgstr ""
+"WPML CMS Navigation فعال است اما موثر نیست. برای کار کردن به <a href=\"%s"
+"\">WPML</a> نیاز دارد."
+
+#: inc/cms-navigation.class.php:148
+#, php-format
+msgid ""
+"WPML CMS Navigation is enabled but not effective. It is not compatible with  "
+"<a href=\"%s\">WPML</a> versions prior 2.0.5."
+msgstr ""
+"ناوبری WPML CMS  فعال است اما موثر نیست. با نسخه های قبل از 2.0.5 2.0 <a "
+"href=\"%s\">WPML</a> سازگار نیست."
+
+#: inc/cms-navigation.class.php:172 inc/cms-navigation.class.php:173
+#: inc/cms-navigation.class.php:1059 menu/navigation.php:10
+msgid "Navigation"
+msgstr "ناوبری"
+
+#: inc/cms-navigation.class.php:279
+msgid "Home"
+msgstr "خانه"
+
+#: inc/cms-navigation.class.php:408
+msgid "Articles tagged "
+msgstr "مقالات برچسب گذاری شده"
+
+#: inc/cms-navigation.class.php:430
+msgid "Search for: "
+msgstr "جستجو برای: "
+
+#: inc/cms-navigation.class.php:923
+msgid "CMS Navigation"
+msgstr "ناوبری CMS"
+
+#: inc/cms-navigation.class.php:976
+msgid "Exclude from the top navigation"
+msgstr "از ناوبری بالا حذف کنید"
+
+#: inc/cms-navigation.class.php:977
+msgid "Mini home (don't list child pages for this page)"
+msgstr "خانه کوچک (صفحات فرزند (child ) را برای این صفحه لیست نکنید)"
+
+#: inc/cms-navigation.class.php:980
+msgid "Section"
+msgstr "بخش"
+
+#: inc/cms-navigation.class.php:983
+msgid "--none--"
+msgstr "--هیچ یک--"
+
+#: inc/cms-navigation.class.php:991 inc/cms-navigation.class.php:1015
+msgid "enter new"
+msgstr "اکنون وارد کنید"
+
+#: inc/cms-navigation.class.php:995
+msgid "Offsite page address"
+msgstr "آدرس صفحه خارج از سایت"
+
+#: inc/cms-navigation.class.php:1019
+msgid "cancel"
+msgstr "لغو"
+
+#: inc/cms-navigation.class.php:1062
+msgid ""
+"WPML provides advanced menus and navigation to go with your WordPress "
+"website, including drop-down menus, breadcrumbs and sidebar navigation."
+msgstr ""
+"WPML منوهای پیشرفته و ناوبری را برای استفاده در وب سایت وردپرس شما فراهم می "
+"کند ، از جمله فهرست های آبشاری ،مسیر راهنما و ناوبری سایدبار."
+
+#: inc/cms-navigation.class.php:1063
+msgid "Configure navigation"
+msgstr "ناوبری را پیکر بندی کنید"
+
+#: inc/cms-navigation.class.php:1072
+msgid "Configure"
+msgstr "پیکربندی"
+
+#: inc/widgets/sidebar_navigation_widget.class.php:10
+#: inc/widgets/sidebar_navigation_widget.class.php:12
+msgid "Sidebar Navigation"
+msgstr "ناوبری سایدبار"
+
+#: menu/navigation.php:5
+msgid "The cache has been cleared."
+msgstr "حافظه پنهان پاک شده است."
+
+#: menu/navigation.php:8
+msgid "Setup WPML CMS Navigation"
+msgstr "ناوبری WPML CMS را تنظیم کنید"
+
+#: menu/navigation.php:12
+msgid ""
+"Out-of-the-box support for full CMS navigation in your WordPress site "
+"including drop down menus, breadcrumbs trail and sidebar navigation."
+msgstr ""
+"پشتیبانی خارج از باکس برای ناوبری کامل CMS در سایت وردپرس شما شامل فهرست های "
+"آبشاری ، دنباله مسیر راهنما و ناوبری سایدبار."
+
+#: menu/navigation.php:15
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: menu/navigation.php:21 menu/navigation.php:66
+msgid "Page order"
+msgstr "ترتیب صفحه"
+
+#: menu/navigation.php:28
+msgid "Menu order"
+msgstr "ترتیب منو"
+
+#: menu/navigation.php:33
+msgid "Alphabetically"
+msgstr "با حروف الفبا"
+
+#: menu/navigation.php:38
+msgid "Creation time"
+msgstr "زمان ایجاد"
+
+#: menu/navigation.php:43
+msgid "Blog posts menu"
+msgstr "منوی پست های وبلاگ"
+
+#: menu/navigation.php:49
+msgid "Show blog posts menu"
+msgstr "نمایش منوی پست های وبلاگ"
+
+#: menu/navigation.php:63
+msgid "Categories menu title"
+msgstr "عنوان منو دسته بندی ها"
+
+#: menu/navigation.php:70
+msgid "Select what items to display for the blog menu:"
+msgstr "مواردی را برای نمایش در فهرست وبلاگ انتخاب کنید:"
+
+#: menu/navigation.php:75
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+#: menu/navigation.php:80
+msgid "Recent posts"
+msgstr "پست های اخیر"
+
+#: menu/navigation.php:85
+msgid "Nothing"
+msgstr "هیچ"
+
+#: menu/navigation.php:91
+msgid "Sidebar pages menu"
+msgstr "منو صفحه های سایدبار"
+
+#: menu/navigation.php:94
+msgid "Heading start"
+msgstr "آغاز عنوان"
+
+#: menu/navigation.php:96
+msgid "Heading end"
+msgstr "پایان عنوان"
+
+#: menu/navigation.php:103
+msgid "Breadcrumbs separator"
+msgstr "جدا کننده مسیر های راهنما"
+
+#: menu/navigation.php:112
+msgid "Caching"
+msgstr "ذخیره سازی"
+
+#: menu/navigation.php:119
+msgid "Cache navigation elements for super fast performance"
+msgstr "عناصر ناوبری پنهان برای عملکرد فوق العاده سریع"
+
+#: menu/navigation.php:121
+msgid "Clear cache now"
+msgstr "اکنون حافظه پنهان را پاک کنید"
+
+#: menu/navigation.php:131
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#: menu/navigation.php:138
+msgid "Instructions for adding the navigation to your theme"
+msgstr "دستورالعمل های اضافه کردن ناوبری به پوسته شما"
+
+#: menu/navigation.php:143
+msgid "Navigation element"
+msgstr "المنت ناوبری"
+
+#: menu/navigation.php:144
+msgid "Description"
+msgstr "توضیحات"
+
+#: menu/navigation.php:145
+msgid "HTML to add"
+msgstr "HTML برای افزودن"
+
+#: menu/navigation.php:146
+msgid "Where to add"
+msgstr "کجا اضافه شود"
+
+#: menu/navigation.php:151
+msgid "Top navigation"
+msgstr "ناوبری بالا"
+
+#: menu/navigation.php:152
+msgid ""
+"A list of the top level pages with drop down menus for second level menus. "
+"Can optionally contain the post categories"
+msgstr ""
+"لیستی از صفحات سطح بالا با فهرست های آبشاری برای منوهای سطح دوم. می تواند "
+"دسته های پست را به صورت اختیاری داشته باشد"
+
+#: menu/navigation.php:157
+msgid "Breadcrumbs trails"
+msgstr "مسیر های راهنما"
+
+#: menu/navigation.php:158
+msgid "Lists the path back to the home page"
+msgstr "مسیر بازگشت به صفحه اصلی را لیست می کند"
+
+#: menu/navigation.php:160
+#, php-format
+msgid "%1$s or %2$s, %3$s, %4$s, %5$s and %6$s"
+msgstr "%1$s یا %2$s, %3$s, %4$s, %5$s و %6$s"
+
+#: menu/navigation.php:163
+msgid "Sidebar navigation"
+msgstr "ناوبری سایدبار"
+
+#: menu/navigation.php:164
+msgid "Local navigation tree with page siblings, parent and brothers"
+msgstr ""
+"درخت ناوبری محلی با خواهر و برادر (siblings) صفحه ، والدین و برادران (parent "
+"and brothers)"
+
+#: menu/navigation.php:170
+#, php-format
+msgid "You can also add the sidebar navigation as a <a%s>widget</a>."
+msgstr ""
+"همچنین می توانید ناوبری سایدبار را به عنوان ابزارک <a%s> اضافه کنید </a>."
+
+#: menu/navigation.php:172
+msgid ""
+"To customize the appearance of the navigation elements, you will need to "
+"override the styling provided in the plugin's CSS file."
+msgstr ""
+"برای شخصی سازی ظاهر عناصر ناوبری ، باید استایل ارائه شده در فایل CSS افزونه "
+"را نادیده بگیرید."
+
+#: menu/navigation.php:174
+#, php-format
+msgid "Visit %s for full CSS customization information."
+msgstr "برای اطلاعات کامل سفارشی سازی CSS از %s بازدید کنید."
+
+#. Plugin Name of the plugin/theme
+msgid "WPML CMS Nav"
+msgstr "ناوبری WPML CMS"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wpml.org/"
+msgstr "https://wpml.org/"
+
+#. Description of the plugin/theme
+msgid ""
+"Adds CMS navigation elements to sites built with WPML | <a href=\"https://"
+"wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/cms-"
+"nav-1-5-5/\">WPML CMS Nav 1.5.5 release notes</a>"
+msgstr ""
+"عناصر ناوبری CMS را به سایتهای ساخته شده با WPML | اضافه می کند <a href="
+"\"https://wpml.org\"> مستندات </a> | <a href=\"https://wpml.org/version/cms-"
+"nav-1-5-5/\"> یادداشت های انتشار WPML CMS Nav 1.5.5 </a>"
+
+#. Author of the plugin/theme
+msgid "OnTheGoSystems"
+msgstr "OnTheGoSystems"
+
+#. Author URI of the plugin/theme
+msgid "http://www.onthegosystems.com/"
+msgstr "http://www.onthegosystems.com/"

@@ -1,0 +1,747 @@
+
+══════════════════════════════════════════════════════════════════════════════
+  G3 — استان اصفهان   (post_id 20 · tp_province)
+══════════════════════════════════════════════════════════════════════════════
+  tp_hero        ▪ 671 بایت
+      <header class="tp-hero">
+      <div class="tp-hero__fallback" aria-hidden="true">
+      </div>
+      <img class="tp-hero__img" src="https://topersia.com/wp-content/uploads/501.jpg" alt="">
+      <div class="tp-hero__overlay" aria-hidden="true">
+      </div>
+      <div class="tp-hero__in">
+      <div class="tp-hero__copy">
+      <p class="tp-eyebrow">استان</p>
+      <h1>استان اصفهان</h1>
+      <p class="tp-hero__alt">
+      <span lang="en" dir="ltr">Isfahan Province</span> · <em lang="ar">محافظة أصفهان</em>
+      </p>
+      <p class="tp-altnames">ایالت اصفهان · سپاهان · نصف جهان</p>
+      <p class="tp-hero__lead">سومین استان پهناور ایران در مرکز فلات.</p>
+      </div>
+      </div>
+      </header>
+  tp_actionbar   ▪ 461 بایت
+      <div class="tp-actionbar" data-tp-actionbar data-tp-entity="tp:province:isfahan">
+      <div class="tp-actions">
+      <button class="tp-act" type="button" data-tp-share>
+      <span>اشتراک</span>
+      </button>
+      <button class="tp-act" type="button" data-tp-save aria-pressed="false">
+      <span>ذخیره</span>
+      </button>
+      <button class="tp-act" type="button" data-tp-follow>
+      <span>دنبال‌کردن</span>
+      </button>
+      </div>
+      <p class="tp-act__note" role="status" aria-live="polite">
+      </p>
+      </div>
+  tp_crumbs      ▪ 242 بایت
+      <p class="tp-crumb" aria-label="مسیر راهنما">
+      <a href="https://topersia.com/">ToPersia</a>
+      <span>›</span>
+      <a href="https://topersia.com/iran/">ایران</a>
+      <span>›</span>
+      <span aria-current="page">استان اصفهان</span>
+      </p>
+  tp_stats       ▪ 776 بایت
+      <div class="tp-stats-wrap">
+      <div class="tp-stats" role="list" aria-label="اطلاعات کلیدی">
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">مرکز استان</span>
+      <b class="tp-stat__v">
+      <a href="https://topersia.com/isfahan/">شهر اصفهان</a>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">جمعیت</span>
+      <b class="tp-stat__v">۵٬۱۲۰٬۸۵۰ <i class="tp-u">نفر</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">مساحت</span>
+      <b class="tp-stat__v">۱۰۷٬۰۱۸ <i class="tp-u">کیلومتر مربع</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">کد استان</span>
+      <b class="tp-stat__v">
+      <span class="tp-lat" dir="ltr">04</span>
+      </b>
+      </div>
+      </div>
+      </div>
+  tp_facts       ▪ 530 بایت
+      <section id="tp-geo" class="tp-rail-card" aria-labelledby="tp-geoTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-geoTitle">اطلاعات جغرافیایی</h3>
+      <span class="tp-k">GEO</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-geo-grid">
+      <div class="tp-fact">
+      <span>نوع اقلیم</span>
+      <b>نیمه‌خشک</b>
+      </div>
+      </div>
+      <div class="tp-details">
+      <div class="tp-detail">
+      <h4>محدودهٔ جغرافیایی</h4>
+      <p>POLYGON((50.1 33.9, 52.8 33.9, 52.8 30.8, 50.1 30.8, 50.1 33.9))</p>
+      </div>
+      </div>
+      </div>
+      </section>
+  tp_badges      ▫ ناپدید (بدون داده)
+  tp_seasons     ▪ 1214 بایت
+      <section id="tp-season" class="tp-rail-card" aria-labelledby="tp-seasonTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-seasonTitle">بهترین زمان سفر</h3>
+      <span class="tp-k">WHEN</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-seasons" role="img" aria-label="بهترین زمان سفر: بهار">
+      <div class="tp-season tp-season--spring has-on">
+      <div class="tp-season__h">بهار</div>
+      <div class="tp-month is-on">فروردین</div>
+      <div class="tp-month is-on">اردیبهشت</div>
+      <div class="tp-month is-on">خرداد</div>
+      </div>
+      <div class="tp-season tp-season--summer">
+      <div class="tp-season__h">تابستان</div>
+      <div class="tp-month">تیر</div>
+      <div class="tp-month">مرداد</div>
+      <div class="tp-month">شهریور</div>
+      </div>
+      <div class="tp-season tp-season--autumn">
+      <div class="tp-season__h">پاییز</div>
+      <div class="tp-month">مهر</div>
+      <div class="tp-month">آبان</div>
+      <div class="tp-month">آذر</div>
+      </div>
+      <div class="tp-season tp-season--winter">
+      <div class="tp-season__h">زمستان</div>
+      <div class="tp-month">دی</div>
+      <div class="tp-month">بهمن</div>
+      <div class="tp-month">اسفند</div>
+      </div>
+      </div>
+      <p class="tp-seasons__cap">بهار</p>
+      </div>
+      </section>
+  tp_weather     ▪ 505 بایت
+      <section id="tp-weather" class="tp-rail-card" aria-labelledby="tp-weatherTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-weatherTitle">هوای این روزها</h3>
+      <span class="tp-k">FORECAST</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-wx" data-tp-weather data-tp-coords="32.6539, 51.6660">
+      <div class="tp-wx__day is-load">
+      </div>
+      <div class="tp-wx__day is-load">
+      </div>
+      <div class="tp-wx__day is-load">
+      </div>
+      </div>
+      <p class="tp-wx__src">در حال گرفتن داده…</p>
+      </div>
+      </section>
+  tp_map         ▪ 1388 بایت
+      <section id="tp-map" class="tp-rail-card tp-rail-card--flush" aria-labelledby="tp-mapTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-mapTitle">نقشه</h3>
+      <span class="tp-k">MAP</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-map-inner" data-tp-map data-tp-coords="32.6539, 51.6660">
+      <svg class="tp-map-svg" viewBox="0 0 320 230" role="img" aria-label="نمای شماتیک نقشه">
+      <defs>
+      <pattern id="tpmap20" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="1"/>
+      </pattern>
+      </defs>
+      <rect width="320" height="230" fill="url(#tpmap20)"/>
+      <path d="M40 60 C 80 40, 140 50, 190 42 C 240 36, 280 60, 290 100 C 296 140, 260 180, 210 190 C 160 200, 100 195, 60 175 C 30 160, 22 110, 40 60 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3" opacity=".65"/>
+      <circle cx="150" cy="118" r="3" fill="currentColor" opacity=".35"/>
+      </svg>
+      <div class="tp-map-pop" role="note">
+      <b>استان اصفهان</b>
+      </div>
+      <button class="tp-map-pin" type="button" aria-label="نمایش اطلاعات نشانگر">
+      </button>
+      </div>
+      <div class="tp-map-coord">
+      <span class="tp-lbl">مختصات مرکز</span>
+      <span class="tp-lat" dir="ltr">32.6539, 51.6660</span>
+      </div>
+      <button class="tp-map-btn" type="button" data-tp-map-open>باز کردن نقشهٔ کامل</button>
+      </div>
+      </section>
+  tp_slider      ▪ 503 بایت
+      <section id="tp-rel-counties" class="tp-section">
+      <div class="tp-section-head">
+      <h2>شهرستان‌ها</h2>
+      <span class="tp-count">۱ مورد</span>
+      </div>
+      <div class="tp-slider-wrap">
+      <div class="tp-slider">
+      <a class="tp-card" href="https://topersia.com/kashan-county/">
+      <span class="tp-card__art" aria-hidden="true">
+      <span class="tp-card__no">۱</span>
+      </span>
+      <div class="tp-card__body">
+      <span class="tp-card__tag">شهرستان</span>
+      <b class="tp-card__title">کاشان</b>
+      </div>
+      </a>
+      </div>
+      </div>
+      </section>
+  tp_relgrid     ▪ 483 بایت
+      <section id="tp-nature" class="tp-rail-card" aria-labelledby="tp-natureTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-natureTitle">پهنه‌های طبیعی</h3>
+      <span class="tp-k">NATURE</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-grid">
+      <a href="https://topersia.com/karkas/">
+      <span class="tp-kind">کوه</span>
+      <b>کرکس</b>
+      </a>
+      <a href="https://topersia.com/maranjab/">
+      <span class="tp-kind">کویر</span>
+      <b>کویر مرنجاب</b>
+      </a>
+      </div>
+      </div>
+      </section>
+  tp_gallery     ▪ 506 بایت
+      <section id="tp-gallery-sec" class="tp-section">
+      <div class="tp-section-head">
+      <h2>گالری</h2>
+      </div>
+      <div class="tp-gallery">
+      <figure class="tp-gallery__item">
+      <img class="" src="https://topersia.com/wp-content/uploads/601.jpg" alt="">
+      <figcaption class="tp-gallery__label">تصویر 601</figcaption>
+      </figure>
+      <figure class="tp-gallery__item">
+      <img class="" src="https://topersia.com/wp-content/uploads/602.jpg" alt="">
+      <figcaption class="tp-gallery__label">تصویر 602</figcaption>
+      </figure>
+      </div>
+      </section>
+  tp_audio       ▪ 371 بایت
+      <section id="tp-audio" class="tp-rail-card" aria-labelledby="tp-audioTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-audioTitle">روایت صوتی</h3>
+      <span class="tp-k">LISTEN</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-audio">
+      <a href="https://topersia.com/a/1.mp3">
+      <b>روایت کوتاه استان</b>
+      <span>۴:۱۲</span>
+      </a>
+      </div>
+      </div>
+      </section>
+  tp_faq         ▪ 301 بایت
+      <section id="tp-faq" class="tp-section tp-faq">
+      <div class="tp-section-head">
+      <h2>پرسش‌های متداول</h2>
+      </div>
+      <details class="tp-faq__item">
+      <summary>بهترین زمان سفر به اصفهان کی است؟</summary>
+      <p>بهار، به‌ویژه اردیبهشت.</p>
+      </details>
+      </section>
+  tp_sources     ▪ 923 بایت
+      <section id="tp-sources" class="tp-rail-card" aria-labelledby="tp-sourcesTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-sourcesTitle">منابع و راستی‌آزمایی</h3>
+      <span class="tp-k">PROVENANCE</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-sources-rail">
+      <ol>
+      <li>
+      <a href="https://amar.org.ir" rel="nofollow noopener">مرکز آمار ایران</a>
+      </li>
+      <li>یونسکو</li>
+      </ol>
+      <span class="tp-verified">✓ آخرین راستی‌آزمایی: ۱۲ خرداد ۱۴۰۴</span>
+      <div class="tp-uid">
+      <div>
+      <span>وضعیت محتوا</span>
+      <b>راستی‌آزمایی‌شده</b>
+      </div>
+      <div>
+      <span>شناسهٔ موجودیت</span>
+      <b class="tp-lat" dir="ltr">tp:province:isfahan</b>
+      </div>
+      <div>
+      <span>مرجع خارجی</span>
+      <a class="tp-lat" dir="ltr" href="https://www.wikidata.org/wiki/Q83848" rel="nofollow noopener">https://www.wikidata.org/wiki/Q83848</a>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+
+══════════════════════════════════════════════════════════════════════════════
+  G5 — شهر شیراز   (post_id 30 · tp_city)
+══════════════════════════════════════════════════════════════════════════════
+  tp_hero        ▪ 444 بایت
+      <header class="tp-hero">
+      <div class="tp-hero__fallback" aria-hidden="true">
+      </div>
+      <div class="tp-hero__overlay" aria-hidden="true">
+      </div>
+      <div class="tp-hero__in">
+      <div class="tp-hero__copy">
+      <p class="tp-eyebrow">شهر</p>
+      <h1>شیراز</h1>
+      <p class="tp-hero__alt">
+      <span lang="en" dir="ltr">Shiraz</span> · <em lang="ar">شيراز</em>
+      </p>
+      <p class="tp-hero__lead">مرکز استان فارس و شهر شعر و باغ.</p>
+      </div>
+      </div>
+      </header>
+  tp_actionbar   ▪ 456 بایت
+      <div class="tp-actionbar" data-tp-actionbar data-tp-entity="tp:city:shiraz">
+      <div class="tp-actions">
+      <button class="tp-act" type="button" data-tp-share>
+      <span>اشتراک</span>
+      </button>
+      <button class="tp-act" type="button" data-tp-save aria-pressed="false">
+      <span>ذخیره</span>
+      </button>
+      <button class="tp-act" type="button" data-tp-follow>
+      <span>دنبال‌کردن</span>
+      </button>
+      </div>
+      <p class="tp-act__note" role="status" aria-live="polite">
+      </p>
+      </div>
+  tp_crumbs      ▪ 162 بایت
+      <p class="tp-crumb" aria-label="مسیر راهنما">
+      <a href="https://topersia.com/">ToPersia</a>
+      <span>›</span>
+      <span aria-current="page">شیراز</span>
+      </p>
+  tp_stats       ▪ 737 بایت
+      <div class="tp-stats-wrap">
+      <div class="tp-stats" role="list" aria-label="اطلاعات کلیدی">
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">جمعیت</span>
+      <b class="tp-stat__v">۱٬۵۶۵٬۵۷۲ <i class="tp-u">نفر</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">مساحت</span>
+      <b class="tp-stat__v">۲۴۰ <i class="tp-u">کیلومتر مربع</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">ارتفاع از سطح دریا</span>
+      <b class="tp-stat__v">۱٬۵۰۰ <i class="tp-u">متر</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">سال بنیان‌گذاری</span>
+      <b class="tp-stat__v">۵۵۰</b>
+      </div>
+      </div>
+      </div>
+  tp_facts       ▪ 736 بایت
+      <section id="tp-geo" class="tp-rail-card" aria-labelledby="tp-geoTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-geoTitle">اطلاعات جغرافیایی</h3>
+      <span class="tp-k">GEO</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-geo-grid">
+      <div class="tp-fact">
+      <span>نام فرودگاه</span>
+      <b>فرودگاه بین‌المللی شهید دستغیب</b>
+      </div>
+      <div class="tp-fact">
+      <span>کد فرودگاه</span>
+      <b>
+      <span class="tp-lat" dir="ltr">SYZ</span>
+      </b>
+      </div>
+      </div>
+      <div class="tp-details">
+      <div class="tp-detail">
+      <h4>دسترسی و حمل‌ونقل</h4>
+      <p>فرودگاه بین‌المللی، پایانهٔ مسافربری و بزرگراه‌های شمال–جنوب.</p>
+      </div>
+      </div>
+      </div>
+      </section>
+  tp_badges      ▪ 387 بایت
+      <section id="tp-badges" class="tp-rail-card" aria-labelledby="tp-badgesTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-badgesTitle">نشان‌ها</h3>
+      <span class="tp-k">STATUS</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-badges">
+      <span class="tp-badge">ایستگاه راه‌آهن</span>
+      <span class="tp-badge">شهر خلاق یونسکو</span>
+      </div>
+      </div>
+      </section>
+  tp_seasons     ▪ 1218 بایت
+      <section id="tp-season" class="tp-rail-card" aria-labelledby="tp-seasonTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-seasonTitle">بهترین زمان سفر</h3>
+      <span class="tp-k">WHEN</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-seasons" role="img" aria-label="بهترین زمان سفر: پاییز">
+      <div class="tp-season tp-season--spring">
+      <div class="tp-season__h">بهار</div>
+      <div class="tp-month">فروردین</div>
+      <div class="tp-month">اردیبهشت</div>
+      <div class="tp-month">خرداد</div>
+      </div>
+      <div class="tp-season tp-season--summer">
+      <div class="tp-season__h">تابستان</div>
+      <div class="tp-month">تیر</div>
+      <div class="tp-month">مرداد</div>
+      <div class="tp-month">شهریور</div>
+      </div>
+      <div class="tp-season tp-season--autumn has-on">
+      <div class="tp-season__h">پاییز</div>
+      <div class="tp-month is-on">مهر</div>
+      <div class="tp-month is-on">آبان</div>
+      <div class="tp-month is-on">آذر</div>
+      </div>
+      <div class="tp-season tp-season--winter">
+      <div class="tp-season__h">زمستان</div>
+      <div class="tp-month">دی</div>
+      <div class="tp-month">بهمن</div>
+      <div class="tp-month">اسفند</div>
+      </div>
+      </div>
+      <p class="tp-seasons__cap">پاییز</p>
+      </div>
+      </section>
+  tp_weather     ▪ 505 بایت
+      <section id="tp-weather" class="tp-rail-card" aria-labelledby="tp-weatherTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-weatherTitle">هوای این روزها</h3>
+      <span class="tp-k">FORECAST</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-wx" data-tp-weather data-tp-coords="29.5918, 52.5837">
+      <div class="tp-wx__day is-load">
+      </div>
+      <div class="tp-wx__day is-load">
+      </div>
+      <div class="tp-wx__day is-load">
+      </div>
+      </div>
+      <p class="tp-wx__src">در حال گرفتن داده…</p>
+      </div>
+      </section>
+  tp_map         ▪ 1375 بایت
+      <section id="tp-map" class="tp-rail-card tp-rail-card--flush" aria-labelledby="tp-mapTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-mapTitle">نقشه</h3>
+      <span class="tp-k">MAP</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-map-inner" data-tp-map data-tp-coords="29.5918, 52.5837">
+      <svg class="tp-map-svg" viewBox="0 0 320 230" role="img" aria-label="نمای شماتیک نقشه">
+      <defs>
+      <pattern id="tpmap30" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="1"/>
+      </pattern>
+      </defs>
+      <rect width="320" height="230" fill="url(#tpmap30)"/>
+      <path d="M40 60 C 80 40, 140 50, 190 42 C 240 36, 280 60, 290 100 C 296 140, 260 180, 210 190 C 160 200, 100 195, 60 175 C 30 160, 22 110, 40 60 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3" opacity=".65"/>
+      <circle cx="150" cy="118" r="3" fill="currentColor" opacity=".35"/>
+      </svg>
+      <div class="tp-map-pop" role="note">
+      <b>شیراز</b>
+      </div>
+      <button class="tp-map-pin" type="button" aria-label="نمایش اطلاعات نشانگر">
+      </button>
+      </div>
+      <div class="tp-map-coord">
+      <span class="tp-lbl">مختصات مرکز</span>
+      <span class="tp-lat" dir="ltr">29.5918, 52.5837</span>
+      </div>
+      <button class="tp-map-btn" type="button" data-tp-map-open>باز کردن نقشهٔ کامل</button>
+      </div>
+      </section>
+  tp_slider      ▫ ناپدید (بدون داده)
+  tp_relgrid     ▫ ناپدید (بدون داده)
+  tp_gallery     ▫ ناپدید (بدون داده)
+  tp_audio       ▫ ناپدید (بدون داده)
+  tp_faq         ▫ ناپدید (بدون داده)
+  tp_sources     ▪ 593 بایت
+      <section id="tp-sources" class="tp-rail-card" aria-labelledby="tp-sourcesTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-sourcesTitle">منابع و راستی‌آزمایی</h3>
+      <span class="tp-k">PROVENANCE</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-sources-rail">
+      <span class="tp-verified">✓ آخرین راستی‌آزمایی: ۱۵ خرداد ۱۴۰۴</span>
+      <div class="tp-uid">
+      <div>
+      <span>وضعیت محتوا</span>
+      <b>به‌روز</b>
+      </div>
+      <div>
+      <span>شناسهٔ موجودیت</span>
+      <b class="tp-lat" dir="ltr">tp:city:shiraz</b>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+
+══════════════════════════════════════════════════════════════════════════════
+  G11 — دشت لوت   (post_id 40 · tp_desert)
+══════════════════════════════════════════════════════════════════════════════
+  tp_hero        ▪ 427 بایت
+      <header class="tp-hero">
+      <div class="tp-hero__fallback" aria-hidden="true">
+      </div>
+      <div class="tp-hero__overlay" aria-hidden="true">
+      </div>
+      <div class="tp-hero__in">
+      <div class="tp-hero__copy">
+      <p class="tp-eyebrow">کویر</p>
+      <h1>دشت لوت</h1>
+      <p class="tp-hero__alt">
+      <span lang="en" dir="ltr">Lut Desert</span>
+      </p>
+      <p class="tp-hero__lead">گرم‌ترین نقطهٔ ثبت‌شدهٔ سطح زمین.</p>
+      </div>
+      </div>
+      </header>
+  tp_actionbar   ▪ 455 بایت
+      <div class="tp-actionbar" data-tp-actionbar data-tp-entity="tp:desert:lut">
+      <div class="tp-actions">
+      <button class="tp-act" type="button" data-tp-share>
+      <span>اشتراک</span>
+      </button>
+      <button class="tp-act" type="button" data-tp-save aria-pressed="false">
+      <span>ذخیره</span>
+      </button>
+      <button class="tp-act" type="button" data-tp-follow>
+      <span>دنبال‌کردن</span>
+      </button>
+      </div>
+      <p class="tp-act__note" role="status" aria-live="polite">
+      </p>
+      </div>
+  tp_crumbs      ▪ 165 بایت
+      <p class="tp-crumb" aria-label="مسیر راهنما">
+      <a href="https://topersia.com/">ToPersia</a>
+      <span>›</span>
+      <span aria-current="page">دشت لوت</span>
+      </p>
+  tp_stats       ▪ 788 بایت
+      <div class="tp-stats-wrap">
+      <div class="tp-stats" role="list" aria-label="اطلاعات کلیدی">
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">مساحت</span>
+      <b class="tp-stat__v">۵۱٬۸۰۰ <i class="tp-u">کیلومتر مربع</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">نوع کویر</span>
+      <b class="tp-stat__v">نمکی</b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">حداکثر دمای ثبت‌شده</span>
+      <b class="tp-stat__v">۷۰.۷ <i class="tp-u">درجهٔ سانتی‌گراد</i>
+      </b>
+      </div>
+      <div class="tp-stat" role="listitem">
+      <span class="tp-stat__k">معیار ثبت میراث جهانی</span>
+      <b class="tp-stat__v">
+      <span class="tp-lat" dir="ltr">vii, viii</span>
+      </b>
+      </div>
+      </div>
+      </div>
+  tp_facts       ▪ 576 بایت
+      <section id="tp-geo" class="tp-rail-card" aria-labelledby="tp-geoTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-geoTitle">اطلاعات جغرافیایی</h3>
+      <span class="tp-k">GEO</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-details">
+      <div class="tp-detail">
+      <h4>محدودهٔ جغرافیایی</h4>
+      <p>POLYGON((57.0 31.5, 59.5 31.5, 59.5 28.5, 57.0 28.5, 57.0 31.5))</p>
+      </div>
+      <div class="tp-detail">
+      <h4>استان‌های گسترده در آن</h4>
+      <p>کرمان، سیستان و بلوچستان، خراسان جنوبی</p>
+      </div>
+      </div>
+      </div>
+      </section>
+  tp_badges      ▪ 424 بایت
+      <section id="tp-badges" class="tp-rail-card" aria-labelledby="tp-badgesTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-badgesTitle">نشان‌ها</h3>
+      <span class="tp-k">STATUS</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-badges">
+      <span class="tp-badge">اثر طبیعی ملی <span>· ۱۳۸۵</span>
+      </span>
+      <span class="tp-badge">میراث جهانی <span>· ۲۰۱۶</span>
+      </span>
+      </div>
+      </div>
+      </section>
+  tp_seasons     ▪ 1222 بایت
+      <section id="tp-season" class="tp-rail-card" aria-labelledby="tp-seasonTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-seasonTitle">بهترین زمان سفر</h3>
+      <span class="tp-k">WHEN</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-seasons" role="img" aria-label="بهترین زمان سفر: زمستان">
+      <div class="tp-season tp-season--spring">
+      <div class="tp-season__h">بهار</div>
+      <div class="tp-month">فروردین</div>
+      <div class="tp-month">اردیبهشت</div>
+      <div class="tp-month">خرداد</div>
+      </div>
+      <div class="tp-season tp-season--summer">
+      <div class="tp-season__h">تابستان</div>
+      <div class="tp-month">تیر</div>
+      <div class="tp-month">مرداد</div>
+      <div class="tp-month">شهریور</div>
+      </div>
+      <div class="tp-season tp-season--autumn">
+      <div class="tp-season__h">پاییز</div>
+      <div class="tp-month">مهر</div>
+      <div class="tp-month">آبان</div>
+      <div class="tp-month">آذر</div>
+      </div>
+      <div class="tp-season tp-season--winter has-on">
+      <div class="tp-season__h">زمستان</div>
+      <div class="tp-month is-on">دی</div>
+      <div class="tp-month is-on">بهمن</div>
+      <div class="tp-month is-on">اسفند</div>
+      </div>
+      </div>
+      <p class="tp-seasons__cap">زمستان</p>
+      </div>
+      </section>
+  tp_weather     ▪ 505 بایت
+      <section id="tp-weather" class="tp-rail-card" aria-labelledby="tp-weatherTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-weatherTitle">هوای این روزها</h3>
+      <span class="tp-k">FORECAST</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-wx" data-tp-weather data-tp-coords="30.2500, 58.5000">
+      <div class="tp-wx__day is-load">
+      </div>
+      <div class="tp-wx__day is-load">
+      </div>
+      <div class="tp-wx__day is-load">
+      </div>
+      </div>
+      <p class="tp-wx__src">در حال گرفتن داده…</p>
+      </div>
+      </section>
+  tp_map         ▪ 1378 بایت
+      <section id="tp-map" class="tp-rail-card tp-rail-card--flush" aria-labelledby="tp-mapTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-mapTitle">نقشه</h3>
+      <span class="tp-k">MAP</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-map-inner" data-tp-map data-tp-coords="30.2500, 58.5000">
+      <svg class="tp-map-svg" viewBox="0 0 320 230" role="img" aria-label="نمای شماتیک نقشه">
+      <defs>
+      <pattern id="tpmap40" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="1"/>
+      </pattern>
+      </defs>
+      <rect width="320" height="230" fill="url(#tpmap40)"/>
+      <path d="M40 60 C 80 40, 140 50, 190 42 C 240 36, 280 60, 290 100 C 296 140, 260 180, 210 190 C 160 200, 100 195, 60 175 C 30 160, 22 110, 40 60 Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="4 3" opacity=".65"/>
+      <circle cx="150" cy="118" r="3" fill="currentColor" opacity=".35"/>
+      </svg>
+      <div class="tp-map-pop" role="note">
+      <b>دشت لوت</b>
+      </div>
+      <button class="tp-map-pin" type="button" aria-label="نمایش اطلاعات نشانگر">
+      </button>
+      </div>
+      <div class="tp-map-coord">
+      <span class="tp-lbl">مختصات مرکز</span>
+      <span class="tp-lat" dir="ltr">30.2500, 58.5000</span>
+      </div>
+      <button class="tp-map-btn" type="button" data-tp-map-open>باز کردن نقشهٔ کامل</button>
+      </div>
+      </section>
+  tp_slider      ▫ ناپدید (بدون داده)
+  tp_relgrid     ▫ ناپدید (بدون داده)
+  tp_gallery     ▫ ناپدید (بدون داده)
+  tp_audio       ▫ ناپدید (بدون داده)
+  tp_faq         ▫ ناپدید (بدون داده)
+  tp_sources     ▪ 514 بایت
+      <section id="tp-sources" class="tp-rail-card" aria-labelledby="tp-sourcesTitle">
+      <div class="tp-rail-card__head">
+      <h3 id="tp-sourcesTitle">منابع و راستی‌آزمایی</h3>
+      <span class="tp-k">PROVENANCE</span>
+      </div>
+      <div class="tp-rail-card__body">
+      <div class="tp-sources-rail">
+      <div class="tp-uid">
+      <div>
+      <span>وضعیت محتوا</span>
+      <b>راستی‌آزمایی‌شده</b>
+      </div>
+      <div>
+      <span>شناسهٔ موجودیت</span>
+      <b class="tp-lat" dir="ltr">tp:desert:lut</b>
+      </div>
+      </div>
+      </div>
+      </div>
+      </section>
+
+══════════════════════════════════════════════════════════════════════════════
+  جدول پوشش — بایت خروجی هر ناحیه
+══════════════════════════════════════════════════════════════════════════════
+  ناحیه         استان         شهر       کویر
+  tp_hero                   671            444            427
+  tp_actionbar              461            456            455
+  tp_crumbs                 242            162            165
+  tp_stats                  776            737            788
+  tp_facts                  530            736            576
+  tp_badges                 —            387            424
+  tp_seasons               1214           1218           1222
+  tp_weather                505            505            505
+  tp_map                   1388           1375           1378
+  tp_slider                 503            —            —
+  tp_relgrid                483            —            —
+  tp_gallery                506            —            —
+  tp_audio                  371            —            —
+  tp_faq                    301            —            —
+  tp_sources                923            593            514
+
+  لاگ هسته: خالی

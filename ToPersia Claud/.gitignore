@@ -1,0 +1,22 @@
+# ToPersia — مخزن محلی، بدون remote.  ۴٫۲٫۲ بند ۵
+# هر زیپ = یک commit با برچسب نسخه (git tag v4.2.3).
+
+# بکاپ کامل سایت زنده — چند گیگابایت، با دیتابیس کاربران.
+Wordpress/
+
+# هر دیتابیس — دیتابیس کاربران در آن است.
+*.sql
+*.sql.gz
+*.sql.zip
+
+# نسخهٔ محلیِ سایت بیرون از این مخزن است: C:\wamp64\www\topersia
+# (دیتابیسش topersia_local). اگر روزی کپی‌ای از آن این‌جا افتاد، این‌ها نگهش می‌دارند:
+**/www/topersia/
+**/wamp64/
+LOCAL-DATA.txt
+LOCAL-STUBS.txt
+
+# ابزار و سیستم
+.claude/
+desktop.ini
+node_modules/

@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/* ==========================================================================
+   ToPersia — پل تم  ·  P5-D158 · P5-D159
+   نسخه: 2.3.0
+
+   چرا نسخۀ قبلی کافی نبود
+     وودمارت متغیرهایش را فقط در :root تعریف نمی‌کند؛ روی خود اجزا هم
+     تعریف می‌کند. این‌ها از فایل زندۀ همین نصب خوانده شده‌اند:
+       .wd-tools-element{--wd-header-el-color:#333}
+       .whb-color-dark .wd-nav-header{--wd-navigation-color:51, 51, 51}
+       .whb-color-light .wd-header-text{--wd-text-color:…;--wd-title-color:#FFF}
+       .whb-color-dark:not(.whb-with-bg){background-color:#fff}
+     اعلان :root ما هم از نظر ویژگی و هم از نظر ترتیب به این‌ها می‌بازد.
+
+   راه‌حل
+     هر انتخابگر این فایل با html:root پیشوند می‌گیرد. این یک
+     صفت به ویژگی می‌افزاید، پس همیشه بر معادل خودش در تم برتری دارد و
+     دیگر ترتیب بارگذاری اهمیتی ندارد.
+   ========================================================================== */
+
+/* ==========================================================================
+   ۱ — قلم  ·  در هر سه حالت یکسان
+   قلم آیکونی woodmart-font عمداً دست‌نخورده می‌ماند.
+   ========================================================================== */
+html:root{
+  --wd-text-font:var(--tp-font);
+  --wd-title-font:var(--tp-font);
+  --wd-entities-title-font:var(--tp-font);
+  --wd-alternative-font:var(--tp-font);
+  --wd-widget-title-font:var(--tp-font);
+  --wd-widget-sidebar-title-font:var(--tp-font);
+  --wd-header-el-font:var(--tp-font);
+
+  --btn-font-family:var(--tp-font);
+  --btn-default-font-family:var(--tp-font);
+  --btn-accented-font-family:var(--tp-font);
+
+  --e-global-typography-primary-font-family:var(--tp-font);
+  --e-global-typography-secondary-font-family:var(--tp-font);
+  --e-global-typography-text-font-family:var(--tp-font);
+  --e-global-typography-accent-font-family:var(--tp-font);
+}
+
+html:root .tp-own-type :where(h1,h2,h3,h4,h5,h6,p,li,td,th,dt,dd,label,legend,
+  figcaption,blockquote,a,span,div,button,input,select,textarea,.elementor-widget-container){
+  font-family:var(--tp-font);
+}
+html:root .tp-own-type :where([class*="wd-icon"],[class*="wd-tools-icon"],
+  [class^="fa-"],[class*=" fa-"],.woodmart-font,i,.eicon,[class^="eicon-"],[class*=" eicon-"]),
+html:root .tp-own-type :where([class*="wd-icon"],[class*="wd-tools-icon"],
+  [class^="fa-"],[class*=" fa-"],.woodmart-font,.eicon,[class^="eicon-"],[class*=" eicon-"])::before,
+html:root .tp-own-type :where([class*="wd-icon"],[class*="wd-tools-icon"],
+  [class^="fa-"],[class*=" fa-"],.woodmart-font,.eicon,[class^="eicon-"],[class*=" eicon-"])::after{
+  font-family:"woodmart-font", inherit;
+}
+
+/* ==========================================================================
+   ۲ — رنگ در سطح ریشه
+   ========================================================================== */
+html:root{
+  --wd-main-bgcolor:var(--tp-bg);
+
+  --wd-text-color:var(--tp-text);
+  --wd-title-color:var(--tp-text-strong);
+  --wd-entities-title-color:var(--tp-text-strong);
+  --wd-entities-title-color-hover:var(--tp-hover);
+
+  --wd-link-color:var(--tp-hover);
+  --wd-link-color-hover:var(--tp-active);
+  --wd-primary-color:var(--tp-primary);
+  --wd-alternative-color:var(--tp-accent);
+  --wd-action-color:var(--tp-text);
+
+  --wd-header-el-color:var(--tp-text);
+  --wd-header-el-color-hover:var(--tp-hover);
+  --wd-bcrumb-color-active:var(--tp-text);
+  --wd-bcrumb-delim-color:var(--tp-text-2);
+
+  --wd-form-bg:var(--tp-surface);
+  --wd-form-color:var(--tp-text);
+  --wd-form-placeholder-color:var(--tp-text-2);
+  --wd-form-brd-color:var(--tp-border);
+  --wd-form-brd-color-focus:var(--tp-hover);
+
+  --e-global-color-primary:var(--tp-text-strong);
+  --e-global-color-secondary:var(--tp-text-2);
+  --e-global-color-text:var(--tp-text);
+  --e-global-color-accent:var(--tp-primary);
+}
+
+/* ==========================================================================
+   ۳ — رنگ در سطح اجزا
+   دقیقاً همان انتخابگرهایی که وودمارت روی آن‌ها متغیر تعریف می‌کند،
+   یک درجه با ویژگی بالاتر.
+   ========================================================================== */
+html:root :is(.wd-tools-element,.whb-color-light .wd-tools-element){
+  --wd-header-el-color:var(--tp-text);
+  --wd-header-el-color-hover:var(--tp-hover);
+}
+html:root :is(.whb-color-light,.whb-color-dark) .wd-header-text{
+  --wd-text-color:var(--tp-text);
+  --wd-title-color:var(--tp-text-strong);
+  --wd-link-color:var(--tp-hover);
+  --wd-link-color-hover:var(--tp-active);
+}
+html:root :is(.whb-color-light,.whb-color-dark) .wd-header-nav>span{
+  color:var(--tp-text-2);
+}
+
+/* --wd-navigation-color رنگ نیست؛ سه کانال RGB است و وودمارت داخل rgba()
+   می‌گذاردش. پس var(--tp-*) نمی‌شود داد و باید عدد خام نوشت. */
+html:root,
+html:root :is(.whb-color-light,.whb-color-dark) .wd-nav-header,
+html:root .wd-nav{--wd-navigation-color:42, 42, 40}
+
+html:root[data-tp-mode="light"],
+html:root[data-tp-mode="light"] :is(.whb-color-light,.whb-color-dark) .wd-nav-header,
+html:root[data-tp-mode="light"] .wd-nav{--wd-navigation-color:42, 42, 40}
+
+html:root[data-tp-mode="evening"],
+html:root[data-tp-mode="evening"] :is(.whb-color-light,.whb-color-dark) .wd-nav-header,
+html:root[data-tp-mode="evening"] .wd-nav{--wd-navigation-color:51, 43, 38}
+
+html:root[data-tp-mode="dark"],
+html:root[data-tp-mode="dark"] :is(.whb-color-light,.whb-color-dark) .wd-nav-header,
+html:root[data-tp-mode="dark"] .wd-nav{--wd-navigation-color:230, 225, 217}
+
+html:root body{background-color:var(--tp-bg)}
+
+/* ==========================================================================
+   ۴ — پس‌زمینۀ ردیف‌ها
+   وودمارت رنگ ردیف را با کلاس ثابت می‌نویسد و در سازندۀ سربرگ هم رنگ
+   دلخواه را به‌صورت رنگ ثابت بیرون می‌دهد. تنها راه، بازنویسی است.
+
+   اگر ردیفی باید رنگ خودش را نگه دارد، کلاس tp-keep-bg به آن بدهید.
+   ========================================================================== */
+html:root :is(.whb-row,.whb-main-header,.whb-top-bar,
+  .whb-color-dark,.whb-color-light):not(.tp-keep-bg){
+  background-color:var(--tp-bg) !important;
+  border-color:var(--tp-divider) !important;
+}
+html:root :is(.wd-footer,.site-footer,.wd-copyrights):not(.tp-keep-bg){
+  background-color:var(--tp-surface) !important;
+  color:var(--tp-text) !important;
+}
+html:root :is(.wd-dropdown,.wd-dropdown-menu,.wd-sub-menu,
+  .wd-search-dropdown):not(.tp-keep-bg){
+  background-color:var(--tp-surface);
+  border-color:var(--tp-border);
+  color:var(--tp-text);
+}
+
+/* ==========================================================================
+   ۵ — هدر چسبیده  ·  P5-D223
+   وقتی وودمارت هدر را می‌چسباند (`.whb-sticked` روی هدر، یا نسخۀ دومِ
+   `.whb-clone`)، هدر و نوار بخش‌های صفحه یک واحدند: هر دو سطحِ
+   `--tp-surface`، مرز پایین و سایه — در هر سه حالت، چون همه توکن‌اند.
+
+   ردیف‌های درونی هم سطح می‌گیرند؛ وگرنه قاعدۀ بخش ۴ (`--tp-bg` با
+   !important) رویش رنگ می‌زد. وزن این‌جا از بخش ۴ بیشتر است، پس ترتیب
+   بارگذاری مهم نیست. `tp-keep-bg` همچنان احترام دارد.
+   ========================================================================== */
+html:root .whb-sticked :is(.whb-main-header,.whb-row,.whb-top-bar,
+  .whb-color-dark,.whb-color-light):not(.tp-keep-bg),
+html:root .whb-clone.whb-sticked:not(.tp-keep-bg),
+html:root .whb-clone.whb-sticked :is(.whb-row,.whb-color-dark,.whb-color-light):not(.tp-keep-bg){
+  background-color:var(--tp-surface) !important;
+}
+html:root .whb-sticked .whb-main-header:not(.tp-keep-bg),
+html:root .whb-clone.whb-sticked:not(.tp-keep-bg){
+  border-bottom:1px solid var(--tp-border) !important;
+  box-shadow:var(--tp-g-shadow-sm);
+}

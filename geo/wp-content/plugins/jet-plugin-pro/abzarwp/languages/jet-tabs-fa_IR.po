@@ -1,0 +1,1024 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JetTabs For Elementor\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-04-17 23:45+0430\n"
+"Last-Translator: \n"
+"Language-Team: فارسی\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: jet-tabs.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Loco-Version: 2.5.3; wp-5.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+msgid "18 Advanced JetPlugins"
+msgstr "18 افزونه های جت پیشرفته"
+
+msgid "Accordion Container"
+msgstr "کانتینر آکاردئون"
+
+msgid "Action Button"
+msgstr "دکمه اکشن"
+
+msgid "Activate Elementor Now"
+msgstr "فعال سازی الان المنتور"
+
+msgid "Activate License"
+msgstr "فعال‌سازی لایسنس"
+
+msgid "Activate Now"
+msgstr "فعال سازی الان"
+
+msgid "Activate Wizard"
+msgstr "فعالسازی راه انداز"
+
+msgid "Activate license for automatic updates and awesome support"
+msgstr "لایسنس را برای به روزرسانی خودکار و پشتیبانی عالی فعال کنید"
+
+msgid "Active"
+msgstr "فعال"
+
+msgid "Active Icon"
+msgstr "آیکن فعال"
+
+msgid "Active Licence"
+msgstr "لایسنس فعال"
+
+msgid "Active Size(%)"
+msgstr "اندازه فعال(%)"
+
+msgid "Add New License"
+msgstr "افزودن لایسنس جدید"
+
+msgid ""
+"Add and Activate license for automatic updates, awesome support, useful "
+"features and more"
+msgstr ""
+"لایسنس را برای به روزرسانی های خودکار ، پشتیبانی پرمیوم ، ویژگی های مفید و "
+"موارد دیگر اضافه و فعال کنید"
+
+msgid "Alignment"
+msgstr "چینش"
+
+msgid "Animation Duration"
+msgstr "مدت انیمیشن"
+
+msgid "Auto Switch"
+msgstr "سوئیچ خودکار"
+
+msgid "Auto Switch Delay"
+msgstr "تاخیر سوئیچ خودکار"
+
+msgid "Avaliable Widgets"
+msgstr "ابزارک‌های در دسترس"
+
+msgid "Back"
+msgstr "بازگشت"
+
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Angle"
+msgstr "زاویه"
+
+msgctxt "Background Control"
+msgid "Background Color"
+msgstr "رنگ پس زمینه"
+
+msgctxt "Background Control"
+msgid "Background Type"
+msgstr "نوع پس‌زمینه"
+
+msgctxt "Background Control"
+msgid "Bottom Center"
+msgstr "پایین وسط"
+
+msgctxt "Background Control"
+msgid "Bottom Left"
+msgstr "پایین چپ"
+
+msgctxt "Background Control"
+msgid "Bottom Right"
+msgstr "پایین راست"
+
+msgctxt "Background Control"
+msgid "Center Center"
+msgstr "وسط وسط"
+
+msgctxt "Background Control"
+msgid "Center Left"
+msgstr "وسط چپ"
+
+msgctxt "Background Control"
+msgid "Center Right"
+msgstr "وسط راست"
+
+msgctxt "Background Control"
+msgid "Classic"
+msgstr "کلاسیک"
+
+msgctxt "Background Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Background Control"
+msgid "Gradient"
+msgstr "گرادیانت"
+
+msgctxt "Background Control"
+msgid "Linear"
+msgstr "خطی"
+
+msgctxt "Background Control"
+msgid "Location"
+msgstr "مکان"
+
+msgctxt "Background Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgctxt "Background Control"
+msgid "Radial"
+msgstr "شعاعی"
+
+msgctxt "Background Control"
+msgid "Second Color"
+msgstr "رنگ دوم"
+
+msgctxt "Background Control"
+msgid "Top Center"
+msgstr "بالا وسط"
+
+msgctxt "Background Control"
+msgid "Top Left"
+msgstr "بالا چپ"
+
+msgctxt "Background Control"
+msgid "Top Right"
+msgstr "بالا راست"
+
+msgctxt "Background Control"
+msgid "Type"
+msgstr "نوع"
+
+msgid "Border"
+msgstr "حاشیه (Border)"
+
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "نوع حاشیه (border)"
+
+msgctxt "Border Control"
+msgid "Color"
+msgstr "رنگ"
+
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "خط‌ چین"
+
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "نقطه چین"
+
+msgctxt "Border Control"
+msgid "Double"
+msgstr "دوبل"
+
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "خط"
+
+msgctxt "Border Control"
+msgid "Width"
+msgstr "عرض"
+
+msgid "Border Radius"
+msgstr "گردی حاشیه (Border)"
+
+msgid "Bottom"
+msgstr "پایین"
+
+msgctxt "Box Shadow Control"
+msgid "Box Shadow"
+msgstr "سایه جعبه"
+
+msgctxt "Box Shadow Control"
+msgid "Inset"
+msgstr "درونی"
+
+msgctxt "Box Shadow Control"
+msgid "Outline"
+msgstr "بیرونی"
+
+msgctxt "Box Shadow Control"
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Box Size"
+msgstr "اندازه جعبه"
+
+msgid "Button Order"
+msgstr "ترتیب دکمه"
+
+msgid "Button text"
+msgstr "متن دکمه"
+
+msgid "Center"
+msgstr "وسط"
+
+msgid "Check For Updates"
+msgstr "بررسی برای به روز رسانی"
+
+msgid "Choose Template"
+msgstr "انتخاب قالب"
+
+msgid ""
+"Choose a certain set of options in the widget’s Style tab by moving the "
+"slider, and improve your Elementor editor performance by selecting "
+"appropriate style settings fill level (from None to Full level)"
+msgstr ""
+"با حرکت دادن اسلایدر ، مجموعه خاصی از گزینه ها را در زبانه استایل ابزارک "
+"انتخاب کنید و با انتخاب سطح مناسب تنظیمات استایل (از هیچ به سطح کامل) ، "
+"عملکرد ویرایشگر المنتور خود را بهبود ببخشید."
+
+msgid "Circ"
+msgstr "Circ"
+
+msgid "Classic Accordion"
+msgstr "آکاردئون کلاسیک"
+
+msgid "Click"
+msgstr "کلیک"
+
+msgid "Collapsible"
+msgstr "قابل باز شدن"
+
+msgid "Color"
+msgstr "رنگ"
+
+msgid "Congratulations!"
+msgstr "تبریک!"
+
+msgid "Container"
+msgstr "کانتینر "
+
+msgid "Content"
+msgstr "محتوا"
+
+msgid "Content Order and Alignment"
+msgstr "ترتیب و چینش محتوا"
+
+msgid "Content Type"
+msgstr "نوع محتوا"
+
+msgid "Control CSS ID"
+msgstr "شناسه کنترل CSS"
+
+msgid "Control Color"
+msgstr "رنگ کنترل"
+
+msgid "Cover Styles"
+msgstr "استایل های کاور"
+
+msgid "Crocoblock"
+msgstr "کروکوبلاک"
+
+msgid "Cubic"
+msgstr "Cubic"
+
+msgid "Dashboard"
+msgstr "پیشخوان"
+
+msgid "Data Update"
+msgstr "بروزرسانی داده"
+
+msgid "Deactivate License"
+msgstr "غیرفعال‌سازی لایسنس"
+
+msgid "Description"
+msgstr "توضیحات"
+
+msgid "Description Order"
+msgstr "ترتیب توضیحات"
+
+msgid "Design"
+msgstr "طراحی"
+
+msgid "Dev Test Page"
+msgstr "صفحه تست توسعه"
+
+msgid "Disable"
+msgstr "غیرفعال"
+
+msgid "Disable Label Color"
+msgstr "رنگ برچسب غیرفعال"
+
+msgid "Documentation"
+msgstr "مستندات"
+
+msgid "Dynamic"
+msgstr "پویایی"
+
+msgid "E-commerce"
+msgstr "تجارت الکترونیک"
+
+msgid "Easing"
+msgstr "کاهش(Easing)"
+
+msgid "Edit Template"
+msgstr "ویرایش قالب"
+
+msgid "Editor"
+msgstr "ویرایشگر"
+
+msgid "Editor Load Level"
+msgstr "سطح بارگذاری ویرایشگر"
+
+msgid "Enable"
+msgstr "فعال"
+
+msgid "Enable Label Color"
+msgstr "رنگ برچسب فعال"
+
+msgid "End"
+msgstr "پایان"
+
+msgid "Enjoy the perks of All-inclusive"
+msgstr "از امتیازات فراگیر لذت ببرید"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "Expiration Date:"
+msgstr "تاریخ انقضا:"
+
+msgid "Expo"
+msgstr "Expo"
+
+msgid "FAQ Schema"
+msgstr "اسکیمای سوالات متداول"
+
+msgid "Fade"
+msgstr "محو شدن (Fade)"
+
+msgid "Fall Perspective"
+msgstr "چشم انداز افتادن(Fall Perspective)"
+
+msgid "Full"
+msgstr "کامل"
+
+msgid "General"
+msgstr "عمومی"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "Get Crocoblock"
+msgstr "دریافت کروکوبلاک"
+
+msgid "Get More Plugins"
+msgstr "دریافت افزونه های بیشتر"
+
+msgid "Get a JetPlugins bundle"
+msgstr "دریافت بسته نرم افزاری افزونه های جت"
+
+msgid "Go All-Inclusive"
+msgstr "فراگیر"
+
+msgid "Go Lifetime"
+msgstr "مادام العمر"
+
+msgid "Go to account"
+msgstr "رفتن به حساب"
+
+msgid "Go to settings"
+msgstr "رفتن به تنظیمات"
+
+msgid "H1"
+msgstr "H1"
+
+msgid "H2"
+msgstr "H2"
+
+msgid "H3"
+msgstr "H3"
+
+msgid "H4"
+msgstr "H4"
+
+msgid "H5"
+msgstr "H5"
+
+msgid "H6"
+msgstr "H6"
+
+msgid "HTML Tag"
+msgstr "برچسب HTML"
+
+msgid "Handler"
+msgstr "هندلر"
+
+msgid "Handler Color"
+msgstr "رنگ هندلر"
+
+msgid "Handler Offset"
+msgstr "آفست هندلر"
+
+msgid "Handler Width"
+msgstr "عرض هندلر"
+
+msgid "Height"
+msgstr "ارتفاع"
+
+msgid "Height(px)"
+msgstr "ارتفاع  (px)"
+
+msgid "Help Center"
+msgstr "مرکز راهنما"
+
+msgid "Horizontal"
+msgstr "افقی"
+
+msgid "Hot Deals"
+msgstr "تخفیف ویژه"
+
+msgid "Hover"
+msgstr "هاور"
+
+msgid "Icon"
+msgstr "آیکن"
+
+msgid "Icon "
+msgstr "آیکن "
+
+msgid "Icon Color"
+msgstr "رنگ آیکن"
+
+msgid "Icon Margin"
+msgstr "فاصله (Margin) آیکن"
+
+msgid "Icon Position"
+msgstr "موقعیت آیکن"
+
+msgid "Icon Size"
+msgstr "اندازه آیکن"
+
+msgid "Icon Styles"
+msgstr "استایل‌های آیکن"
+
+msgid "Image"
+msgstr "عكس"
+
+msgid "Image Accordion"
+msgstr "آکاردئون تصویر"
+
+msgid "Image Margin"
+msgstr "فاصله (Margin) تصویر"
+
+msgid "Image Width"
+msgstr "عرض عکس"
+
+msgid "Images Size"
+msgstr "اندازه تصاویر"
+
+msgid "Included Plugins:"
+msgstr "افزونه های شامل:"
+
+msgid "Initial State"
+msgstr "حالت اولیه"
+
+msgid "Install"
+msgstr "نصب"
+
+msgid "Install Elementor Now"
+msgstr "نصب الان المنتور"
+
+msgid "Install Wizard"
+msgstr "راه انداز سریع"
+
+msgid "Installed JetPlugins"
+msgstr "افزونه های جت نصب شده"
+
+msgid "Item"
+msgstr "آیتم"
+
+msgid "Item #1"
+msgstr "آیتم #1"
+
+msgid "Item #2"
+msgstr "آیتم #2"
+
+msgid "Item #3"
+msgstr "آیتم #3"
+
+msgid "Item Gutter"
+msgstr "فاصله آیتم"
+
+msgid "Item Label HTML Tag"
+msgstr "تگ HTML برچسب آیتم"
+
+msgid "Items"
+msgstr "آیتم"
+
+msgid "Jet Accordion: Item Editor Content"
+msgstr "اکاردائون جت : محتوای ویرایشگر مورد"
+
+msgid "Jet Accordion: Item Label"
+msgstr "اکاردائون جت : برچسب مورد"
+
+msgid "Jet Image Accordion: Item Button text"
+msgstr "اکاردائون عکس Jet  : متن دکمه مورد"
+
+msgid "Jet Image Accordion: Item Description"
+msgstr "اکاردائون عکس جت : توضیحات مورد"
+
+msgid "Jet Image Accordion: Item Label"
+msgstr "اکاردائون عکس جت : برچسب مورد"
+
+msgid "Jet Image Accordion: Item Link"
+msgstr "اکاردائون عکس جت :لینک مورد"
+
+msgid "Jet Switcher: Disable Editor Content"
+msgstr "سوئیچر جت: محتوای ویرایشگر غیرفعال"
+
+msgid "Jet Switcher: Disable Label"
+msgstr "سوئیچر جت: برچسب غیرفعال"
+
+msgid "Jet Switcher: Enable Editor Content"
+msgstr "سوئیچر جت: محتوای ویرایشگر فعال"
+
+msgid "Jet Switcher: Enable Label"
+msgstr "سوئیچر جت: برچسب فعال"
+
+msgid "Jet Tabs: Item Editor Content"
+msgstr "زبانه های جت : محتوای ویرایشگر مورد"
+
+msgid "Jet Tabs: Item Label"
+msgstr "زبانه های جت : برچسب مورد"
+
+msgid "JetPlugins License Activation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins License Deactivation"
+msgstr "فعال سازی لایسنس افزونه های جت"
+
+msgid "JetPlugins Settings"
+msgstr "تنظیمات افزونه های جت"
+
+msgid "JetPlugin’s Update"
+msgstr "بروز رسانی افزونه های جت"
+
+msgid "JetTabs"
+msgstr "JetTabs"
+
+msgid "JetTabs - Tabs and Accordions for Elementor Page Builder"
+msgstr "JetTabs - زبانه ها و آکاردئون برای صفحه ساز المنتور"
+
+msgid "JetTabs For Elementor"
+msgstr "JetTabs برای المنتور"
+
+msgid "JetTabs requires Elementor to be activated."
+msgstr "JetTabs نیاز به فعال سازی المنتور دارد."
+
+msgid "JetTabs requires Elementor to be installed."
+msgstr "JetTabs نیاز به نصب المنتور دارد."
+
+msgid "Justify"
+msgstr "جاستیفای"
+
+msgid "Label"
+msgstr "برچسب"
+
+msgid "Labels"
+msgstr "برچسب ها"
+
+msgid "Left"
+msgstr "چپ"
+
+msgid "License"
+msgstr "لایسنس"
+
+msgid "License Key:"
+msgstr "کلید لایسنس:"
+
+msgid "License Manager"
+msgstr "مدیر لایسنس"
+
+msgid "License expires soon!"
+msgstr "لایسنس به زودی منقضی می شود!"
+
+msgid "License not active"
+msgstr "لایسنس غیرفعال"
+
+msgid "Link"
+msgstr "لینک"
+
+msgid "Loader Styles"
+msgstr "استایل لودر"
+
+msgid "Loader color"
+msgstr "رنگ لودر"
+
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+msgstr "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم."
+
+msgid "Manage Now"
+msgstr "مدیریت"
+
+msgid "Manage license"
+msgstr "مدیریت لایسنس ها"
+
+msgid "Manage plugins"
+msgstr "مدیریت افزونه ها"
+
+msgid "Margin"
+msgstr "فاصله (Margin)"
+
+msgid ""
+"Module DB Updater init error in %s - version and slug is required arguments"
+msgstr ""
+"خطای شروع ماژول بروزرسانی پایگاه داده در %s - نسخه و نامک (slug) آرگومان های "
+"مورد نیاز است"
+
+msgid "More"
+msgstr "بیشتر"
+
+msgid "More included JetPlugins with your licence"
+msgstr "بیشتر شامل افزونه های جت با لایسنس شما است"
+
+msgid "More information about %s"
+msgstr "اطلاعات بیشتر در مورد %s"
+
+msgid "Move Up"
+msgstr "حرکت به بالا(Move Up)"
+
+msgid "New Tab"
+msgstr "زبانه‌ی جدید"
+
+msgid "New to Crocoblock?"
+msgstr "در کروکوبلاک جدید هستید؟"
+
+msgid "No"
+msgstr "نه"
+
+msgid "No Active Tabs"
+msgstr "بدون زبانه فعال "
+
+msgid "None"
+msgstr "هیچ"
+
+msgid "Normal"
+msgstr "عادی"
+
+msgid "Off"
+msgstr "غیرفعال"
+
+msgid "On"
+msgstr "فعال"
+
+msgid "Orientation"
+msgstr "جهت"
+
+msgid "Padding"
+msgstr "فاصله داخلی (Padding)"
+
+msgid "Plugin Manager"
+msgstr "مدیریت افزونه"
+
+msgid "Plugin pages"
+msgstr "برگه‌های افزونه"
+
+msgid "Position"
+msgstr "موقعيت"
+
+msgid "Preset-1"
+msgstr "حالت آماده-1"
+
+msgid "Preset-2"
+msgstr "حالت آماده-2"
+
+msgid "Product Name:"
+msgstr "نام محصول:"
+
+msgid "Quint"
+msgstr "Quint"
+
+msgid "Read our tutorial on using Library templates."
+msgstr "آموزش استفاده از قالب های کتابخانه را بخوانید."
+
+msgid "Right"
+msgstr "راست"
+
+msgid "Save up to 60%"
+msgstr "60٪ صرفه جویی"
+
+msgid "Saved"
+msgstr "ذخیره شد"
+
+msgid "Scrolling offset (px)"
+msgstr "آفست اسکرول (px)"
+
+msgid "Scrolling to the Content"
+msgstr "پیمایش به محتوا"
+
+msgid "Scrolling to the Content after Switching Tab Control"
+msgstr "اسکرول کردن به محتوا پس از تغییر کنترل برگه"
+
+msgid "See all plans"
+msgstr "مشاهده همه پلن ها"
+
+msgid "Select an existing template or create a "
+msgstr "یک قالب موجود را انتخاب کنید یا ایجاد یک "
+
+msgid "Select the HTML Tag for the Item's label"
+msgstr "تگ HTML را برای برچسب آیتم انتخاب کنید"
+
+msgid "Select the HTML Tag for the Item's title"
+msgstr "تگ HTML را برای عنوان آیتم انتخاب کنید"
+
+msgid "Server Error"
+msgstr "خطای سرور"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Settings have been saved"
+msgstr "تنظیمات شما ذخیره شد"
+
+msgid "Show Effect"
+msgstr "نمایش افکت"
+
+msgid "Sine"
+msgstr "ساین"
+
+msgid "Sorry, but you need to activate license to update your JetPlugin"
+msgstr "متأسفیم ، اما برای به روزرسانی افزونه جت خود باید لایسنس را فعال کنید"
+
+msgid "Start"
+msgstr "شروع"
+
+msgid "Start Here"
+msgstr "شروع"
+
+msgid "Start Update"
+msgstr "شروع بروزرسانی"
+
+msgid "State Styles"
+msgstr "استایل های حالت"
+
+msgid "States"
+msgstr "حالت ها"
+
+msgid "Status:"
+msgstr "وضعیت:"
+
+msgid "Stretch"
+msgstr "کشیده"
+
+msgid "Support & Info"
+msgstr "پشتیبانی و اطلاعات"
+
+msgid "Switcher"
+msgstr "سوئیچر"
+
+msgid "Switcher Content"
+msgstr "محتوای سوئیچر"
+
+msgid "Switcher Control"
+msgstr "کنترل سوئیچر"
+
+msgid "Switcher Preset"
+msgstr "حالت آماده سوئیچر"
+
+msgid "Tab #1"
+msgstr "زبانه #1"
+
+msgid "Tab #2"
+msgstr "زبانه #2"
+
+msgid "Tab #3"
+msgstr "زبانه #3"
+
+msgid "Tab Item Content"
+msgstr "محتوای مورد زبانه"
+
+msgid "Tabs"
+msgstr "زبانه ها"
+
+msgid "Tabs Alignment"
+msgstr "چینش زبانه ها"
+
+msgid "Tabs Container Alignment"
+msgstr "چینش کانتینر زبانه ها"
+
+msgid "Tabs Content"
+msgstr "محتوای زبانه ها"
+
+msgid "Tabs Control"
+msgstr "کنترل زبانه ها"
+
+msgid "Tabs Control Item"
+msgstr "آیتم کنترل زبانه ها"
+
+msgid "Tabs Control Width"
+msgstr "عرض کنترل زبانه ها"
+
+msgid "Tabs Event"
+msgstr "رویداد زبانه ها"
+
+msgid "Tabs Position"
+msgstr "موقعیت زبانه ها"
+
+msgid "Template"
+msgstr "قالب"
+
+msgid "Template is not defined. "
+msgstr "قالب تعریف نشده است. "
+
+msgid "Text Alignment"
+msgstr "چینش متن"
+
+msgid "Text Color"
+msgstr "رنگ متن"
+
+msgid "Text color"
+msgstr "رنگ متن"
+
+msgid ""
+"The switcher are working. Please, note, that you have to add a template to "
+"the library in order to be able to display it inside the switcher."
+msgstr ""
+"سوئیچر کار می کند. لطفاً توجه داشته باشید که برای اینکه بتوانید آن را در داخل "
+"سوئیچر نمایش دهید ، باید قالبی به کتابخانه اضافه کنید."
+
+msgid ""
+"The tabs are working. Please, note, that you have to add a template to the "
+"library in order to be able to display it inside the tabs."
+msgstr ""
+"زبانه ها کار می کنند. لطفاً توجه داشته باشید که برای اینکه بتوانید آن را درون "
+"زبانه ها نمایش دهید ، باید قالبی به کتابخانه اضافه کنید."
+
+msgid ""
+"The toggles are working. Please, note, that you have to add a template to "
+"the library in order to be able to display it inside the toggles."
+msgstr ""
+"تاگل ها کار می کنند. لطفاً توجه داشته باشید که برای اینکه بتوانید آن را در "
+"داخل تاگل ها نمایش دهید ، باید قالبی به کتابخانه اضافه کنید."
+
+msgid ""
+"This license will activate licenses for all plugins included in this set."
+msgstr ""
+"این لایسنس، مجوزها را برای تمام افزونه های موجود در این مجموعه فعال می کند."
+
+msgid "Title"
+msgstr "عنوان"
+
+msgid "Title Order"
+msgstr "ترتیب عنوان"
+
+msgid "Toggle"
+msgstr "تاگل(Toggle)"
+
+msgid "Toggle #1"
+msgstr "تاگل #1"
+
+msgid "Toggle #2"
+msgstr "تاگل #2"
+
+msgid "Toggle #3"
+msgstr "تاگل #3"
+
+msgid "Toggle Content"
+msgstr "محتوای تاگل(Toggle)"
+
+msgid "Toggle Control"
+msgstr "کنترل تاگل(Toggle)"
+
+msgid "Top"
+msgstr "بالا"
+
+msgid "Type:"
+msgstr "نوع:"
+
+msgid "Typography"
+msgstr "تایپوگرافی"
+
+msgid ""
+"Unlock the ultimate website building toolkit for Elementor 150+ widgets and "
+"50+ templates"
+msgstr ""
+"قفل جعبه ابزار ساخت وب سایت نهایی برای المنتور 150+ ابزارک و 50+ قالب را باز "
+"کنید"
+
+msgid "Update & Installation"
+msgstr "بزوررسانی و نصب"
+
+msgid "Update Now"
+msgstr "بروز رسانی الان"
+
+msgid "Update complete, thank you for updating to the latest version!"
+msgstr "به روزرسانی کامل شد ، از شما برای به روزرسانی به آخرین نسخه متشکریم!"
+
+msgid "Updates"
+msgstr "بروز رسانی ها"
+
+msgid "Use Ajax Loading for Template"
+msgstr "استفاده از بارگذاری آژاکس برای قالب"
+
+msgid "Use Image?"
+msgstr "استفاده از تصویر؟"
+
+msgid "Vertical"
+msgstr "عمودی"
+
+msgid "We need to update your database to the latest version."
+msgstr "ما باید پایگاه داده شما را به آخرین نسخه به روز کنیم."
+
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+msgid "What is Library?"
+msgstr "کتابخانه چیست؟"
+
+msgid "Widgets"
+msgstr "ابزارک ها"
+
+msgid "Width"
+msgstr "عرض"
+
+msgid "Working with left or right tabs position"
+msgstr "با موقعیت زبانه های چپ یا راست کار میکند"
+
+msgid ""
+"Working with left or right tabs position and left or right icon position"
+msgstr "با موقعیت زبانه های چپ یا راست و موقعیت آیکن چپ یا راست کار میکند"
+
+msgid "Working with left or right tabs position and top icon position"
+msgstr "کار با موقعیت زبانه های چپ یا راست و موقعیت آیکن بالا"
+
+msgid "Yes"
+msgstr "بلی"
+
+msgid "You Haven’t Saved Templates Yet."
+msgstr "شما هنوز قالبی را ذخیره نکرده اید."
+
+msgid "Your Installed JetPlugins"
+msgstr "افزونه های جت نصب شده شما"
+
+msgid "Your Licenses"
+msgstr "لایسنس های شما"
+
+msgid "Your license has been activated!"
+msgstr "لایسنس شما فعال شده است!"
+
+msgid ""
+"Your license includes several plugins within the package. License "
+"deactivation in one plugin disables it in the rest of them. You can manage "
+"it through the License Manager."
+msgstr ""
+"لایسنس شامل چندین افزونه در بسته است. غیرفعال سازی لایسنس در یک پلاگین ، آن "
+"را در بقیه موارد غیرفعال می کند. می توانید از طریق مدیریت لایسنس آن را "
+"مدیریت کنید."
+
+msgid ""
+"Your primary license will expire in 30 days. You can renew you current "
+"licese in your crocoblock account"
+msgstr ""
+"لایسنس اصلی شما 30 روز دیگر منقضی می شود. می توانید لایسنس فعلی خود را در "
+"حساب crocoblock خود تمدید کنید"
+
+msgid "Zoom In"
+msgstr "بزرگنمایی(Zoom In)"
+
+msgid "Zoom Out"
+msgstr "کوچک‌نمایی(Zoom Out)"
+
+msgid "div"
+msgstr "div"
+
+msgid "https://crocoblock.com/"
+msgstr "https://crocoblock.com/"
+
+msgid "https://crocoblock.com/plugins/jettabs/"
+msgstr "https://crocoblock.com/plugins/jettabs/"
+
+msgid "new one"
+msgstr "جدید بسازید"
+
+msgid "p"
+msgstr "p"
+
+msgid "span"
+msgstr "span"

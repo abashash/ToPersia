@@ -1,0 +1,1396 @@
+@charset "UTF-8";
+/* ==========================================================================
+   ToPersia — شیوه‌نامۀ قالب دستۀ G
+   نسخه: 3.0.0 — انتقال مستقیم از reference/ToPersia-G3-Province-Template.html
+
+   ⚠ این فایل با دست نوشته نمی‌شود.  P5-D219
+     php scripts/tp-template-gen.php
+
+   تبدیل‌ها همه مکانیکی‌اند: کلاس‌ها پیشوند tp- گرفته‌اند، متغیرهای مرجع
+   به توکن نگاشت شده‌اند، و هر قاعده زیر .tp-page نشسته. رنگ‌های ثابتِ
+   مرجع دست‌نخورده‌اند — گرادیان سربرگ، بلوک هوش مصنوعی، پس‌زمینۀ کاشی‌ها،
+   سفیدِ روی رسانه. گارد آزمون می‌گوید هیچ مقدار تازه‌ای در فایل نیست:
+   هر هگز باید عیناً در مرجع هم باشد.
+   ========================================================================== */
+
+/* ═══ TP-ADDED-START ═══════════════════════════════════════════════
+   هرچه میان این دو نشان است، در مرجع نبود و ما نوشتیم. گاردهای رنگِ
+   پروژه (P5-D184 · P5-D188 · P5-D191) فقط همین بخش را می‌سنجند؛ بخشِ
+   منتقل‌شده طرح تأییدشده است و گارد خودش را دارد: هیچ مقداری در آن
+   نباید باشد که در مرجع نیست.  P5-D219
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ═══ آزادسازیِ ظرف — بیرون از .tp-page، بی‌پیشوند  ۴٫۲٫۱ بند ۲ ═══════
+   سربرگ مرجع تمام‌عرض است و به زیر هدر می‌چسبد. دو ظرفِ قالب میان هدر
+   و `.tp-page` می‌نشینند و هر کدام پهنا یا پرکردنِ خودش را می‌افزاید:
+
+     .wd-content-layout   وودمارت — بیشینۀ پهنا و پرکردن بالا و پایین
+     .e-con               ظرف المنتور — پرکردن و فاصله از متغیرهای کیت
+
+   ۴٫۱٫۶ این‌ها را داشت و انتقالِ ۴٫۲٫۰ جا انداختشان: سربرگ در جعبه ماند
+   و بالایش فاصله افتاد. سلکتورها عمداً بی‌پیشوند و بیرون از `.tp-page`
+   اند، چون خودِ ظرف‌ها بیرون‌اند؛ `:has(.tp-page)` مهارشان می‌کند، پس
+   فقط صفحه‌ای که خودمان می‌سازیم اثر می‌گیرد. پهنای محتوا را `.tp-wrap`
+   می‌دهد (۱۳۴۰)، نه ظرف. */
+.wd-content-layout:has(.tp-page){max-width:none;padding:0}
+.e-con:has(.tp-page){--padding-top:0px;--padding-right:0px;--padding-bottom:0px;--padding-left:0px;--gap:0px}
+
+/* دکمۀ «بالا»ی وودمارت روی موبایلِ صفحه‌های ما — نوار پایین خودش «بالا»
+   دارد و این دکمه رویش می‌افتاد. همان مهارِ `:has(.tp-page)`.  P5-D223 */
+@media(max-width:720px){body:has(.tp-page) .scrollToTop{display:none}}
+
+/* ═══ هدر چسبان و نوار بخش‌ها — P5-D223 ══════════════════════════════
+   دو عدد را جاوااسکریپت اندازه می‌گیرد و روی `.tp-page` می‌گذارد:
+     --tp-snav-top   پایینِ واقعیِ هدر چسبان (با نوار مدیریت، اگر هست)
+     --tp-snav-h     بلندیِ خودِ نوار
+   لنگر هر بخش جمع این دو است. پیش‌فرض‌ها همان عددهای مرجع‌اند، پس بی
+   جاوااسکریپت چیزی از مرجع عوض نمی‌شود. */
+.tp-page{--tp-snav-top:var(--tp-header-h);--tp-snav-h:66px}
+/* موبایل نوار بالا ندارد، پس لنگر فقط هدر است.  P5-D228 */
+@media(max-width:720px){.tp-page{--tp-snav-h:0px}}
+
+/* فهرست لنگرِ مرجع فقط بخش‌های خودش را دارد؛ روستاها، فصل، هوا، محله‌ها
+   و بقیه از برگۀ موبایل هم پرش می‌خورند و زیر نوار می‌رفتند. */
+.tp-page section[id]{scroll-margin-top:calc(var(--tp-snav-top) + var(--tp-snav-h))}
+
+/* چسبیده: سطحِ متمایز، مرز پایین، سایه — هر سه از توکن، پس در هر سه حالت.
+   هدرِ چسبیدۀ وودمارت همین را از پل تم می‌گیرد؛ دو نیمۀ یک واحدند. */
+html .tp-page .tp-snav.tp-is-stuck{
+  background:var(--tp-surface);
+  border-bottom:1px solid var(--tp-border);
+  box-shadow:var(--tp-g-shadow-sm);
+}
+
+/* ═══ موبایل — ناوبری  P5-D228 (جایگزین بخش موبایل P5-D223) ════════════
+   روی موبایل نوار بخش‌های بالا نیست — همان مرجع، که زیر ۷۲۰ پنهانش می‌کند.
+   نوار پایین ناوبری موبایل است و همیشه روی صفحه ثابت می‌ماند: خودش، برگۀ
+   بخش‌ها و همۀ مودال‌ها را جاوااسکریپت به یک ظرف در body می‌برد، چون
+   `position:fixed` زیر نیایی با transform یا filter یا contain (کانتینر
+   المنتور) نسبت به همان نیا حساب می‌شود و با صفحه می‌لغزد.
+
+   ظرف همان کلاس `tp-page` را دارد تا هر قاعدۀ `.tp-page …` بخورد؛ خودش
+   `display:contents` است — جعبه نمی‌سازد، padding صفحه را نمی‌گیرد و مبنای
+   `fixed` نمی‌شود. وزن (۰,۲,۱) و بی‌رقیب. */
+html .tp-page.tp-portal{display:contents}
+
+/* پایینِ صفحه جای نوار پایین را نگه می‌دارد، به‌اضافۀ نوار خانۀ آیفون.
+   وزن (۰,۱,۲) از قاعدۀ مرجع (۰,۱,۱) سنگین‌تر؛ بی ناحیۀ امن همان ۶۴. */
+@media(max-width:720px){html body .tp-page{padding-block-end:calc(64px + env(safe-area-inset-bottom))}}
+
+/* ═══ نوار کنش — پنل اشتراک  ۴٫۳٫۰ بند ۵ · P5-D239 ═══════════════════════
+   دکمۀ «اشتراک» در ظرفِ .tp-share است که خودش خانۀ شبکۀ سه‌تایی است؛
+   grid تا دکمه همان پهنای پیشین را بگیرد. پنل زیر دکمه: روی دستگاه hover
+   با :hover، با صفحه‌کلید با :focus-within، و با ضربه با `tp-is-open`.
+   آیکون‌ها کلاس‌های خودِ وودمارت‌اند (.wd-social-icons · social-*) — فقط
+   متغیرهای اندازه و رنگ‌شان از توکن‌های ما می‌آید. */
+html .tp-page .tp-share{position:relative;display:grid}
+html .tp-page .tp-share__panel{display:none;position:absolute;inset-block-start:calc(100% + 6px);inset-inline-start:0;z-index:120;min-inline-size:236px;padding:12px;background:var(--tp-surface);border:1px solid var(--tp-border);border-radius:12px;box-shadow:var(--tp-g-shadow-sm)}
+@media(hover:hover){html .tp-page .tp-share:hover .tp-share__panel{display:block}}
+html .tp-page .tp-share:focus-within .tp-share__panel,html .tp-page .tp-share.tp-is-open .tp-share__panel{display:block}
+html .tp-page .tp-share__icons{--wd-social-size:36px;--wd-social-color:var(--tp-text);--wd-social-bg:var(--tp-soft);--wd-social-color-hover:var(--tp-primary-text);--wd-social-radius:50%;gap:6px;justify-content:flex-start}
+html .tp-page .tp-share__row{display:flex;flex-wrap:wrap;gap:6px;margin-block-start:10px}
+html .tp-page .tp-share__btn{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--tp-border);border-radius:999px;background:transparent;color:var(--tp-text);font:inherit;font-size:.8rem;cursor:pointer}
+html .tp-page .tp-share__btn svg{inline-size:16px;block-size:16px}
+
+/* ═══ نظرها — حالت خالی، فرم، دعوت به ورود  ۴٫۳٫۰ بند ۷ · P5-D234 ════════
+   بالای فرم همان جعبۀ .tp-rate مرجع است؛ فرم زیرش می‌نشیند و فقط از
+   توکن‌ها رنگ می‌گیرد. معیار با قرص‌های یک تا پنج انتخاب می‌شود — دکمۀ
+   رادیویی واقعی، پس صفحه‌کلید و صفحه‌خوان همان رفتار بومی را دارند. */
+html .tp-page .tp-rate__first{margin:0 0 12px;font-weight:700;color:var(--tp-text-strong)}
+html .tp-page .tp-review-invite{margin:12px 0 0;font-size:calc(.9 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-review-invite a{color:var(--tp-primary-text);font-weight:700}
+html .tp-page .tp-review-form{display:grid;gap:10px;margin-block-start:14px;padding-block-start:14px;border-block-start:1px solid var(--tp-border-2)}
+html .tp-page .tp-rate--empty .tp-review-form{margin-block-start:0;padding-block-start:0;border:0}
+html .tp-page .tp-review-form__title{margin:0;font-size:calc(1 * var(--tp-rem));color:var(--tp-text-strong)}
+html .tp-page .tp-review-form__row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+html .tp-page .tp-review-form__label{font-size:calc(.86 * var(--tp-rem));color:var(--tp-text)}
+html .tp-page .tp-review-form__pills{display:inline-flex;gap:4px}
+html .tp-page .tp-review-form__pill{position:relative;cursor:pointer}
+html .tp-page .tp-review-form__pill input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+html .tp-page .tp-review-form__pill span{display:grid;place-items:center;inline-size:32px;block-size:32px;border:1px solid var(--tp-border);border-radius:999px;color:var(--tp-text);font-size:calc(.84 * var(--tp-rem))}
+html .tp-page .tp-review-form__pill input:checked + span{background:var(--tp-soft);border-color:var(--tp-primary-text);color:var(--tp-primary-text);font-weight:700}
+html .tp-page .tp-review-form__pill input:focus-visible + span{outline:2px solid var(--tp-primary-text);outline-offset:2px}
+html .tp-page .tp-review-form__field{display:grid;gap:4px;font-size:calc(.86 * var(--tp-rem));color:var(--tp-text)}
+html .tp-page .tp-review-form__field input,html .tp-page .tp-review-form__field textarea{inline-size:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--tp-border);border-radius:10px;background:var(--tp-surface);color:var(--tp-text);font:inherit}
+html .tp-page .tp-review-form__send{justify-self:start;padding:8px 18px;border:0;border-radius:999px;background:var(--tp-primary);color:var(--tp-on-primary);font:inherit;font-weight:700;cursor:pointer}
+html .tp-page .tp-review-form__send:disabled{opacity:.6;cursor:default}
+html .tp-page .tp-review-form__note{margin:0;min-block-size:1.2em;font-size:calc(.84 * var(--tp-rem));color:var(--tp-text)}
+
+/* ═══ خبر — تصویر کارت، صفحۀ خبرها  ۴٫۳٫۰ بند ۶ ═════════════════════════
+   جای «NEWS» لاتینِ مرجع در کاشیِ کارت، تصویر شاخص خبر یا آیکون روزنامه
+   می‌نشیند (P5-D240). صفحۀ /news/ همان کارت‌ها را دارد و شمارۀ صفحه‌ها. */
+html .tp-page .tp-news .tp-thumb{overflow:hidden}
+html .tp-page .tp-news .tp-thumb img{inline-size:100%;block-size:100%;object-fit:cover;display:block}
+html .tp-page .tp-news .tp-thumb svg{inline-size:28px;block-size:28px}
+html .tp-page.tp-news-page .tp-section-head h1{margin:0;font-size:calc(1.5 * var(--tp-rem));color:var(--tp-text-strong)}
+html .tp-page .tp-news-pages{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-block-start:16px}
+html .tp-page .tp-news-pages a,html .tp-page .tp-news-pages span{display:grid;place-items:center;min-inline-size:36px;block-size:36px;padding:0 8px;border:1px solid var(--tp-border);border-radius:999px;color:var(--tp-text);text-decoration:none}
+html .tp-page .tp-news-pages span[aria-current]{background:var(--tp-soft);border-color:var(--tp-primary-text);color:var(--tp-primary-text);font-weight:700}
+html .tp-page.tp-news-extra{display:grid;gap:10px;margin-block-start:16px}
+
+/* ═══ نقشۀ زنده  ۴٫۳٫۰ بند ۱ · P5-D241 ══════════════════════════════════
+   لایۀ زنده روی همان SVG مرجع می‌نشیند و تا بار شدنش شفاف است؛ SVG نه
+   پنهان می‌شود نه جابه‌جا، پس چیدمان مرجع دست نمی‌خورد. پس از بار شدن،
+   نشانگر ایستای مرجع جای خودش را به نشانگر نقشه می‌دهد. پاپ‌آپ نام بالا
+   می‌ماند. */
+html .tp-page .tp-map-live{position:absolute;inset:0;z-index:1;opacity:0;transition:opacity .25s ease-out}
+html .tp-page .tp-map-inner--live .tp-map-live,html .tp-page .tp-modal__map--live .tp-map-live{opacity:1}
+html .tp-page .tp-map-inner--live .tp-map-pin,html .tp-page .tp-modal__map--live .tp-modal__pin{visibility:hidden}
+html .tp-page .tp-map-inner .tp-map-pop{z-index:2}
+html .tp-page .tp-map-live .maplibregl-ctrl-attrib{font-size:11px}
+
+/* ═══ نوار پایین موبایل — آشکارشدن با نخستین اسکرول  ۴٫۳٫۰ بند ۱۲ ═══════
+   بالای صفحه پنهان است؛ با نخستین اسکرولِ بیش از 24px جاوااسکریپت
+   `tp-mnav--on` را می‌گذارد و دیگر برنمی‌دارد — حتی اگر کاربر دوباره بالا
+   برود. پنهان یعنی visibility هم، تا فوکوس و کلیک نگیرد. فقط زیر `tp-js`
+   که اسکریپت راه‌انداز در head می‌گذارد: بی جاوااسکریپت نوار از آغاز پیداست
+   و در نخستین رنگ‌آمیزی هم پرشی نیست. وزن (۰,۳,۱) بالاتر از (۰,۲,۱). */
+@media(max-width:720px){
+  html.tp-js .tp-page .tp-mnav{transform:translateY(calc(100% + 8px));visibility:hidden;transition:transform .2s ease-out,visibility 0s linear .2s}
+  html.tp-js .tp-page .tp-mnav.tp-mnav--on{transform:none;visibility:visible;transition:transform .2s ease-out,visibility 0s}
+}
+
+/* ═══ کاشی‌های ستون کناری — P5-D244 ════════════════════════════════════
+   «پهنه‌های طبیعی»، «محوطه‌های باستانی»، «روستاها»، «اطلاعات جغرافیایی»،
+   «نشان‌ها» و هر شبکۀ رابطه‌ای ستون کناری: عیناً کاشی `.neighbors` مرجع —
+   سه ستون، برچسب کوچک بالا، نام پررنگ، وسط‌چین. ستون‌ها `minmax(0,1fr)`
+   تا نامِ بلند به‌جای پهن‌کردن ستون در کاشی سرریز کند و جاوااسکریپت ببیند
+   (`tp-tiles--2`). هیچ واژه‌ای وسط نمی‌شکند: `word-break:normal`، بی
+   خط‌تیره. کاشیِ `hidden` پنهان می‌ماند — `display` نویسنده بر `[hidden]`
+   مرورگر می‌برد. letter-spacing ندارد: برچسب فارسی است. */
+html .tp-page .tp-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+html .tp-page .tp-tiles.tp-tiles--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+html .tp-page .tp-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+ padding:10px 6px;background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius);
+ color:var(--tp-tile-text);font-weight:700;text-align:center;min-inline-size:0;
+ word-break:normal;overflow-wrap:normal;hyphens:none;transition:background-color .16s,border-color .16s}
+html .tp-page .tp-tile[hidden]{display:none}
+/* برچسب ۰٫۶rem است: متن ریز رنگ متن می‌گیرد، نه متن فرعی (P5-D184) — همان
+   `.n-dir` مرجع که مولد به --tp-text نگاشته. */
+html .tp-page .tp-tile__k{font-size:calc(.6 * var(--tp-rem));color:var(--tp-tile-text);font-weight:700;line-height:1.2}
+html .tp-page .tp-tile b{font-size:calc(.78 * var(--tp-rem));font-weight:800;color:inherit;line-height:1.3}
+html .tp-page a.tp-tile[href]:hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text)}
+/* برچسب کوچک روی هاور همان رنگ نام — --tp-primary-text روی پرِ هاور ۵٫۹ است. */
+html .tp-page a.tp-tile[href]:hover .tp-tile__k{color:var(--tp-primary-text)}
+html .tp-page a.tp-tile[href]:focus-visible{outline:2px solid var(--tp-primary-text);outline-offset:2px}
+/* خطِ زیرِ نام — «مسیرهای گردشگری»: ایستگاه‌ها یا شهر.  P5-D269
+   همان اندازه، رنگ و بلندی خط برچسب کوچک (متن ریز ← --tp-tile-text، P5-D184؛
+   بلندی خط ۱٫۲ مثل `.n-dir` مرجع — پذیرش با آن جفتش می‌کند)؛ روی هاور همان رنگ نام. */
+html .tp-page .tp-tile__sub{font-size:calc(.6 * var(--tp-rem));color:var(--tp-tile-text);font-weight:700;line-height:1.2}
+html .tp-page a.tp-tile[href]:hover .tp-tile__sub{color:var(--tp-primary-text)}
+
+/* ═══ توکن کاشی برای همۀ کاشی‌ها — P5-D245 ═══════════════════════════════
+   پس‌زمینه، قاب، متن، متن فرعی، هاور و شعاع همه از `--tp-tile-*` (کاشی روز
+   هوا). نیمۀ منتقل‌شده این کاشی‌ها را روی `--tp-surface-2` بی‌قاب می‌نشاند
+   و در شب یکی تیره و دیگری زیتونی بود. وزن‌ها یک پله از قاعدۀ مرجع
+   سنگین‌ترند: (۰,۲,۳) در برابر (۰,۲,۲)، و برای تراشۀ فرهنگ (۰,۳,۳) در
+   برابر قاعدۀ شبِ مرجع (۰,۳,۲). «اطلاعات سفر» دو ستون می‌ماند، فقط رنگ
+   می‌گیرد. */
+html body .tp-page .tp-neighbors a,
+html body .tp-page .tp-practical-grid a{
+  background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);
+  border-radius:var(--tp-tile-radius);color:var(--tp-tile-text);
+}
+html body .tp-page .tp-neighbors a .tp-n-dir,
+html body .tp-page .tp-practical-grid a span{color:var(--tp-tile-text);letter-spacing:normal}
+html body .tp-page .tp-neighbors a:hover,
+html body .tp-page .tp-practical-grid a:hover{
+  background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text);
+}
+/* متن ریزِ کاشی روی هاور همان رنگ نام: --tp-primary-text روی --tp-tile-hover-bg
+   در حالت روز ۵٫۹. --tp-tile-muted هرگز روی پرِ هاور نمی‌آید — آن‌جا ۴٫۴۹ است.
+   «مسیرها» از ۴٫۴٫۱ کاشی `.tp-tile` است (P5-D269) و قاعدۀ خودش را از بلوک
+   P5-D244 می‌گیرد. */
+html body .tp-page .tp-neighbors a:hover .tp-n-dir,
+html body .tp-page .tp-practical-grid a:hover span{color:var(--tp-primary-text)}
+
+/* خانواده‌های فرهنگ — هر عضو کاشی است، نه قرص گرادیانی.  P5-D245 */
+html body .tp-page .tp-culture-card .tp-culture-card__list a{
+  background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);
+  border-radius:var(--tp-tile-radius);color:var(--tp-tile-text);box-shadow:none;
+}
+html body .tp-page .tp-culture-card .tp-culture-card__list a:hover{
+  background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text);box-shadow:none;
+}
+/* نقطۀ برند روی هاورِ روشن هم دیده شود — سفیدِ مرجع روی پرِ نرم گم می‌شد.
+   نقطه متنی ندارد؛ color فقط قاعدۀ P5-D191 را صریح نگه می‌دارد. */
+html body .tp-page .tp-culture-card .tp-culture-card__list a:hover::before{
+  background:var(--tp-hover);color:var(--tp-on-hover);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--tp-hover) 14%,transparent);transform:none;
+}
+
+/* ═══ یکسانی کارت‌ها — P5-D246 ═════════════════════════════════════════
+   کارت اسلایدر: تصویر با `object-fit:cover` (راه‌راهِ تزئینی مرجع روی عکس
+   نمی‌آید)؛ عنوان دو خط — جایش را حتی با یک خط نگه می‌دارد. هنر، بدنه و
+   توضیحِ رفته در بلوک P5-D266 پایین. ردیف شبکه همۀ کارت‌ها را
+   هم‌قد می‌کند. فرهنگ و اعضای پنجرۀ فهرست: ردیف‌های هم‌قد (`1fr`)، نام عضو
+   حداکثر دو خط.
+   شبکۀ پنجرۀ گالری: نسبت مرجع ۴:۳ و کاشی پهنِ ۸:۳ است، ولی کاشی پهن دو ستون
+   به‌اضافۀ فاصله است و ۰٫۳۷۵ فاصله بلندتر درمی‌آمد (۴٫۵ پیکسل در ۱۲). ردیف‌ها
+   `1fr` می‌شوند و کاشی کشیده — همۀ کاشی‌ها یک بلندی، همان بلندیِ ردیف پهن. */
+html body .tp-page .tp-card-slide__art > .tp-card-slide__img{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover;display:block}
+html body .tp-page .tp-card-slide__art--img::before{display:none}
+html body .tp-page .tp-card-slide__title{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;
+  min-block-size:2lh;
+}
+
+/* ═══ کارت اسلایدر — P5-D266 (جایگزین بخشی از P5-D246) ═════════════════
+   مرجع هنر را absolute با ۱۶۲ پیکسل می‌نشاند و بدنه از پایین رویش می‌آمد؛
+   کارتی که بدنه‌اش بلندتر بود عکس کمتری نشان می‌داد — در یک اسلایدر ۸۶ و
+   ۱۳۶ و ۱۴۹ پیکسل، با هنرِ همه ۱۶۲. حالا هنر در جریان عادی کارت است، ۲۰۰
+   پیکسل (موبایل ۱۸۰)، پس همه‌اش دیده می‌شود. توضیح نمی‌آید. بدنه ارتفاع
+   ثابت دارد: یک خط برچسب، دو خط عنوان، یک خط پاورقی؛ ارتفاع خط هر کدام
+   صریح است (همان مقدارهای محاسبه‌شدۀ پیشین: ۱٫۹ · ۱٫۴ · ۱٫۹) تا جمع دقیق
+   باشد — ۶۰ پیکسل فاصله و حاشیه + ۵٫۵۶۲rem خط. برچسب و پاورقی تک‌خطی‌اند؛
+   پاورقی ته بدنه. */
+html body .tp-page .tp-card-slide{justify-content:flex-start;min-block-size:0}
+html body .tp-page .tp-card-slide__art{position:relative;inset:auto;flex:none;block-size:200px}
+html body .tp-page .tp-card-slide__body{display:flex;flex-direction:column;flex:none;min-block-size:0;
+  block-size:calc(60px + 5.562 * var(--tp-rem));overflow:hidden}
+html body .tp-page .tp-card-slide__tag{line-height:1.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body .tp-page .tp-card-slide__title{line-height:1.4}
+html body .tp-page .tp-card-slide__foot{margin-block-start:auto;line-height:1.9;white-space:nowrap;overflow:hidden}
+html body .tp-page .tp-card-slide__foot > span{overflow:hidden;text-overflow:ellipsis}
+@media(max-width:720px){
+  html body .tp-page .tp-card-slide__art{block-size:180px}
+}
+html body .tp-page .tp-culture-grid{grid-auto-rows:1fr}
+.tp-page .tp-list__card b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+/* پنجرۀ گالری بی خانۀ خالی — ۴٫۴٫۲. کاشی پهن (نخستین و نهمین، الگوی مرجع)
+   دو ستون می‌گیرد و ستون‌ها `auto-fill` است. در پهنایی که شمار ستون فرد است
+   (۱۹۲۰ ← پنج ستون) کاشی پهن در ستون آخر جا نمی‌شد، به ردیف بعد می‌رفت و
+   خانۀ آخر ردیف سیاه می‌ماند. `dense` نخستین کاشی تکی بعدی را همان‌جا
+   می‌نشاند؛ فقط ردیف پایانی ممکن است ناتمام بماند. */
+html body .tp-page .tp-gallery-modal__grid{grid-auto-rows:1fr;grid-auto-flow:row dense}
+html body .tp-page .tp-gallery-modal__grid > .tp-gallery-modal__item{align-self:stretch}
+/* تیترِ سربرگ در چپ‌به‌راست — ۴٫۴٫۲. فاصلۀ منفیِ مرجع (-.07em) برای تیتر
+   فارسی است؛ در لاتین، با فاصلۀ باریکِ قلم، فاصلۀ دو واژه دو پیکسل می‌شد و
+   «Isfahan Province» یک واژه دیده می‌شد. فقط `:dir(ltr)`؛ فارسی و عربی
+   همان مرجع. */
+html body .tp-page .tp-hero h1:dir(ltr){letter-spacing:-.02em;word-spacing:.15em}
+
+/* ═══ تصویر بندانگشتی اخبار — SPRINT-4.4 ۱٫۵ ═══════════════════════════
+   ۴:۳ — ۱۱۲×۸۴ در دسکتاپ، ۸۸×۶۶ در موبایل. بی‌تصویر، همان جعبۀ آیکون با
+   همان اندازه. مرجع ۹۶×۶۴ و ۷۲ پهنا داشت. */
+html body .tp-page .tp-news a{grid-template-columns:112px 1fr}
+html body .tp-page .tp-news .tp-thumb{inline-size:112px;block-size:84px;aspect-ratio:4/3}
+@media(max-width:720px){
+  html body .tp-page .tp-news a{grid-template-columns:88px 1fr}
+  html body .tp-page .tp-news .tp-thumb{inline-size:88px;block-size:66px}
+}
+
+/* ═══ تاریخ راستی‌آزمایی — P5-D268 ═════════════════════════════════════
+   زیر مقدار «وضعیت محتوا»، در همان خانه؛ نشان جداگانۀ «✓ آخرین
+   راستی‌آزمایی» رفت. مقدار و تاریخ هر دو به لبۀ پایانی ردیف. تاریخ متن
+   ریز است (۰٫۷۲rem)، پس --tp-text، نه متن فرعی (P5-D184). */
+html .tp-page .tp-uid b{text-align:end}
+html .tp-page .tp-uid__date{display:block;margin-block-start:2px;font-size:calc(.72 * var(--tp-rem));font-weight:600;color:var(--tp-text)}
+
+/* ═══ تراز دوطرفۀ متن چندخطی بدنه — P5-D270 ════════════════════════════
+   یک کلاس، نه قاعدۀ سراسری روی `p`: بدنۀ «درباره» · پاسخ پرسش‌ها · خروجی
+   هوش مصنوعی · متن خبر · (فاز ۴) متن گفت‌وگوی پادکست. خط آخر از آغاز.
+   سرفصل‌های درون بدنۀ «درباره» دوطرفه نمی‌شوند. عنوان، برچسب، دکمه،
+   کاشی، تراشه، عدد و متن لاتین مونو این کلاس را نمی‌گیرند. */
+html .tp-page .tp-justify{text-align:justify;text-align-last:start;text-justify:inter-word}
+/* ۴٫۴٫۳ — تیتر سربرگ عربی: همزه و سرکش «أ» در بلندی خط ۱٫۰۲ به برچسب نوعِ بالای تیتر
+   می‌رسید (صفحۀ عربی شهر). عربی بالای خط جای بیشتری می‌خواهد؛ فارسی و انگلیسی همان. */
+html .tp-page .tp-hero h1:lang(ar){line-height:1.3}
+html .tp-page .tp-justify h2,
+html .tp-page .tp-justify h3,
+html .tp-page .tp-justify h4,
+html .tp-page .tp-justify h5,
+html .tp-page .tp-justify h6{text-align:start;text-align-last:auto}
+
+/* ═══ دعوت به ثبت‌نام در بلوک هوش مصنوعی — SPRINT-4.4 ۱٫۷ · P5-D267 ═══════
+   دکمۀ دعوت با --tp-accent و --tp-on-accent، تا با دکمه‌های ثانویۀ
+   فیروزه‌ای بلوک اشتباه نشود. بلوک در هر سه حالت همان سبزِ تیرۀ ثابتِ
+   مرجع است، پس سفید و #d3e7e3 همان رنگ‌های خودِ بلوک‌اند؛ حلقۀ فوکوس
+   سفید. متن دعوت فارسی است و letter-spacing ندارد. */
+/* P5-D267 — مهمان: جملۀ دعوت زیر عنوان (یک بار)، و **یک** دکمۀ «ثبت‌نام /
+   ورود» در ردیف دکمه‌ها کنار «کپی خروجی»؛ پیوند متنیِ «ورود» رفت. دکمه
+   همان قالب دکمه‌های ردیف است (شعاع ۱۱، بلندی ۴۰، همان قلم) و فقط رنگ
+   accent دارد. وزن جمله (۰,۳,۲) از `.tp-ai p` منتقل‌شده (۰,۲,۲) بیشتر. */
+html .tp-page .tp-ai p.tp-ai__cta-text{margin:4px 0 0;color:#d3e7e3;font-size:calc(.86 * var(--tp-rem));font-weight:700;line-height:1.7;letter-spacing:normal}
+html .tp-page .tp-ai__signup{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-block-size:40px;padding:10px 16px;
+ border:1px solid var(--tp-accent);border-radius:11px;background:var(--tp-accent);color:var(--tp-on-accent);
+ font-weight:800;font-size:calc(.78 * var(--tp-rem));text-decoration:none;letter-spacing:normal}
+html .tp-page .tp-ai__signup:hover{background:var(--tp-accent-strong);border-color:var(--tp-accent-strong);color:var(--tp-on-accent)}
+html .tp-page .tp-ai__signup:focus-visible{outline:2px solid #fff;outline-offset:2px}
+
+/* هر آیتمِ برگۀ «بخش‌ها» آیکون ثابت بخش خودش را کنار برچسب دارد — همان
+   مجموعه‌ای که نوار می‌خواند. رنگ از خودِ پیوند. */
+.tp-page .tp-sheet__p a > svg{inline-size:18px;block-size:18px;flex:none}
+
+/* آیکون هر بخش، درون‌خط — پیوند همان جعبۀ مرجع را نگه می‌دارد. */
+.tp-page .tp-snav a > svg{
+  inline-size:15px;block-size:15px;
+  vertical-align:-3px;
+  margin-inline-end:6px;
+}
+
+/* ═══ موبایل — سرفصل‌ها  ۴٫۲٫۳ بند ۴ ══════════════════════════════════
+   «همه شهرها ←» و هر `.more` در همان ردیفِ عنوان می‌ماند: `h2` راست،
+   `.more` چپ، متن راهنما زیر هر دو. مرجع زیر ۷۲۰ ستونی‌اش می‌کرد.
+   جعبۀ درونی (`h2` + راهنما) `display:contents` می‌شود تا هر دو آیتمِ
+   همین شبکه باشند. وزن (۰,۲,۲) از ستونیِ مرجع (۰,۲,۱) سنگین‌تر. */
+@media(max-width:720px){
+  html .tp-page div.tp-section-head{
+    display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;
+    column-gap:12px;row-gap:4px;
+  }
+  html .tp-page div.tp-section-head > div{display:contents}
+  html .tp-page div.tp-section-head h2{grid-column:1;grid-row:1;min-inline-size:0}
+  html .tp-page div.tp-section-head .tp-more{grid-column:2;grid-row:1;justify-self:end}
+  html .tp-page div.tp-section-head .tp-lead{grid-column:1/-1;grid-row:2}
+}
+
+/* ═══ موبایل — فاصلۀ کارت‌ها  ۴٫۲٫۳ بند ۳ ════════════════════════════
+   دو ستون `display:contents` اند و هر بخش و کارتِ کناری آیتمِ همین شبکه.
+   مرجع `gap:0` گذاشته و فاصله را روی `.content-grid > .rail-card` — ولی
+   کارت کناری فرزندِ `.rail` است، پس آن انتخاب‌گر هرگز نمی‌خورد و کارت‌ها
+   به هم می‌چسبیدند (در خودِ مرجع هم). حالا فاصلۀ ردیف ۲۸ و margin پایینِ
+   بخش صفر، تا دو برابر نشود. */
+@media(max-width:720px){
+  html .tp-page div.tp-content-grid{row-gap:28px}
+  html .tp-page section.tp-section{margin-bottom:0}
+}
+
+/* ═══ ریست — تنها چیزی که در مرجع نبود ══════════════════════════════
+   مرجع دکمه و پیوندِ بی‌سبکِ مرورگر را فرض کرده. وودمارت روی هر <button>
+   و هر <a> در کل سایت قاعده می‌گذارد. اگر اینها خنثی نشوند، هر دکمۀ
+   متنیِ قالب — «همه تصاویر ←»، «N مورد دیگر»، کنترل اسلایدر — قاب و
+   ارتفاع ۴۲ و حروف‌فاصلۀ وودمارت را می‌گیرد.
+
+   دامنه عمداً `.tp-page` است؛ بقیۀ سایت دست‌نخورده می‌ماند. */
+/*
+ * «خنثی» یعنی برگشت به دکمۀ مرورگر، نه صفر.
+ *
+ * `revert` هر ویژگی را به مقدار پیش‌فرض مرورگر برمی‌گرداند — دقیقاً همان
+ * چیزی که مرجع فرض کرده. نسخۀ اول صفر می‌گذاشت و آزمون پذیرش گرفتش:
+ * دکمه‌های اسلایدر در مرجع پرکردن ۱×۶ مرورگر را دارند و در ما صفر
+ * داشتند؛ کاشی گالری رنگ و `gap:5px` وودمارت را.
+ *
+ * وزن (۰,۱,۱) است: از `:is(button,…)` وودمارت (۰,۱,۰) سنگین‌تر، از هر
+ * قاعدۀ مرجع (۰,۲,۱) سبک‌تر — پس هر جا مرجع مقداری دارد، همان برنده است.
+ */
+.tp-page button,
+.tp-page input[type="button"],
+.tp-page input[type="submit"]{
+  background:revert;
+  border:revert;
+  border-radius:revert;
+  min-height:revert;
+  min-width:revert;
+  padding:revert;
+  box-shadow:revert;
+  text-transform:revert;
+  text-decoration:revert;
+  text-shadow:revert;
+  letter-spacing:revert;
+  color:revert;
+  display:revert;
+  gap:revert;
+  align-items:revert;
+  justify-content:revert;
+  text-align:revert;
+  vertical-align:revert;
+  position:revert;
+  cursor:revert;
+  transition:revert;
+  outline:revert;
+  font:inherit;
+}
+
+/* هاورِ وودمارت (۰,۲,۰) از ریست سنگین‌تر است و از متغیرهای خودش می‌خواند؛
+   همان‌ها به مقدار مرورگر برمی‌گردند. متغیر وزن ندارد، پس با هیچ قاعدۀ
+   مرجعی رقابت نمی‌کند. `--li-mb` همان فاصلۀ ۱۰ پیکسلیِ زیر هر `li` است. */
+.tp-page{
+  --btn-color:buttontext;
+  --btn-color-hover:buttontext;
+  --btn-bgcolor:buttonface;
+  --btn-bgcolor-hover:buttonface;
+  --btn-box-shadow:none;
+  --btn-box-shadow-hover:none;
+}
+
+/* وودمارت متغیر فاصلۀ فهرست را روی خودِ `ul/ol` می‌گذارد (`--li-mb:10px`)
+   و زیر هر `li` جز آخری ۱۰ پیکسل می‌نشاند. مرورگر صفر می‌دهد. */
+.tp-page li{margin-bottom:revert}
+
+/* وودمارت `strong,b{font-weight:600}` دارد؛ مرورگر `bolder` می‌دهد (۷۰۰). */
+.tp-page b,
+.tp-page strong{font-weight:revert}
+
+/* ─── شش نامِ مشترک با user-core ────────────────────────────────────
+   `topersia-user-core.css` بعد از ما بار می‌شود و شش کلاس هم‌نام دارد.
+   لنگرِ `.tp-page` وزن ما را بالاتر می‌برد، ولی فقط برای ویژگی‌هایی که
+   **اعلام کرده‌ایم**؛ هرچه اعلام نکنیم قاعدۀ آن‌ها بی‌رقیب می‌نشیند.
+   یک بار `.tp-card{padding:21px}` همین‌طور از آن‌ها رسید.
+
+   این بلوک اول فایل است، پس هر جا مرجع خودش مقداری دارد همان برنده
+   می‌شود و این‌ها فقط شکافِ بی‌رقیب را می‌بندند.  P5-D204 */
+.tp-page .tp-hero{
+  display:block;justify-content:normal;align-items:normal;gap:normal;
+  flex-direction:row;padding:0;margin:0;max-width:none;
+}
+.tp-page .tp-main{width:auto;margin:0;min-width:0;padding:0}
+.tp-page .tp-stats{gap:normal;margin:0}
+.tp-page .tp-stat{
+  border-radius:0;background:transparent;text-align:start;cursor:auto;
+  color:inherit;font:inherit;transition:none;
+}
+.tp-page .tp-badge{align-self:auto;background:transparent}
+.tp-page a{
+  text-decoration:none;
+  box-shadow:none;
+  border-bottom:0;
+  letter-spacing:normal;
+}
+.tp-page a:hover{text-decoration:none}
+
+/* ارتفاع هدر چسبانِ قالب. جاوااسکریپت اندازۀ واقعی را می‌گذارد؛ این عدد
+   فقط وقتی به کار می‌آید که هدر چسبانی در کار نباشد — همان ۶۴ مرجع. */
+.tp-page{--tp-header-h:64px}
+@media(max-width:720px){.tp-page{--tp-header-h:56px}}
+
+/* واحدِ `rem`ِ مرجع — ریشۀ ۱۶ پیکسلی که مرجع رویش کشیده شده، ضربدر
+   اندازۀ متنی که خواننده برگزیده. به تنظیم «اندازۀ پایه»ی سایت بسته
+   نیست؛ آن تنظیم ریشۀ `html` را ۱۷ می‌کند و نسبت‌های طرح را می‌شکست. */
+.tp-page{--tp-rem:calc(16px * var(--tp-scale,1))}
+
+/* عکسِ واقعی در کاشی — مرجع عکس نداشت و کاشی‌هایش گرادیان بودند.
+   عکسِ افقی در کاشیِ بزرگِ ۴۲۰ پیکسلی به ارتفاع طبیعی‌اش می‌نشست و پایینش
+   گرادیان پیدا بود. عکس کلِ کاشی را می‌پوشاند؛ سایۀ پایینِ `::after` و
+   برچسب همچنان رویش‌اند، چون در ترتیبِ رسم بعد از آن‌اند. */
+.tp-page .tp-gallery-main__item > img,
+.tp-page .tp-gallery-modal__item > img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+
+/* نمای تمام‌صفحۀ عکس — شاسی همان مودال گالری است.
+   مرجع کلیک روی کاشی را فقط با `scale` جواب می‌داد چون عکس واقعی نداشت.
+   ۴٫۲٫۱ بند ۸ — تمام‌عرض و `contain`، بلندی حداکثر ۸۰vh. دکمه‌ها وسطِ
+   عمودیِ عکس روی لبه‌ها.  P5-D243 (جایگزین P5-D226) — «بعدی» سرِ پایانِ
+   خط، «قبلی» سرِ آغاز: در راست‌به‌چپ «بعدی» لبۀ چپ با «‹» و «قبلی» لبۀ
+   راست با «›»، در چپ‌به‌راست برعکس؛ ویژگی منطقی خودش هر دو جهت را
+   می‌دهد. پرِ دکمه همان تیرگیِ ۸۲٪ سایۀ کاشیِ مرجع است، چون روی هر عکسی
+   می‌نشیند و پیکانِ سفید باید رویش خوانا بماند. زیرنویس در هر اندازه. */
+.tp-page .tp-solo{margin:0 auto;max-inline-size:1400px}
+.tp-page .tp-solo__stage{position:relative}
+.tp-page .tp-solo__img{
+  display:block;inline-size:100%;block-size:auto;max-block-size:80vh;
+  object-fit:contain;border-radius:var(--tp-r);touch-action:pan-y;
+  /* تا عکسِ کامل بار شود، جعبه فرو نمی‌ریزد و دکمه‌ها جا نمی‌پرند؛ با
+     `contain` عکس وسطِ همین جعبه می‌نشیند، پس دکمه‌ها وسطِ عکس می‌مانند. */
+  min-block-size:30vh;
+}
+.tp-page .tp-solo__nav{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+  inline-size:48px;block-size:48px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;font-size:calc(1.6 * var(--tp-rem));line-height:1;
+  border:1px solid rgba(255,255,255,.22);background:rgba(5,12,10,.82);color:#fff;
+}
+.tp-page .tp-solo__nav:hover{background:rgba(6,12,11,.94)}
+.tp-page .tp-solo__nav--next{inset-inline-end:12px}
+.tp-page .tp-solo__nav--prev{inset-inline-start:12px}
+.tp-page .tp-solo__cap{display:grid;gap:4px;padding:14px 8px 0;text-align:center;color:#fff}
+.tp-page .tp-solo__cap b{font-size:calc(.95 * var(--tp-rem));font-weight:800}
+.tp-page .tp-solo__cap span{color:rgba(255,255,255,.72);font-size:calc(.82 * var(--tp-rem))}
+.tp-page .tp-solo__cap span:empty{display:none}
+@media(max-width:720px){
+  .tp-page .tp-solo__nav{inline-size:40px;block-size:40px;font-size:calc(1.3 * var(--tp-rem))}
+  .tp-page .tp-solo__nav--next{inset-inline-end:6px}
+  .tp-page .tp-solo__nav--prev{inset-inline-start:6px}
+}
+
+/* ═══ اسلایدر و گالری — P5-D243 ═════════════════════════════════════
+   دکمۀ اسلایدری که کاری نمی‌کند غیرفعال است (در آغاز «قبلی»، در پایان
+   «بعدی») و کم‌رنگ دیده می‌شود. وزن (۰,۳,۲) از هاورِ مرجع (۰,۳,۲) پیش‌تر
+   نیست، پس رویداد اشاره هم بسته است تا هاور رویش ننشیند. */
+html .tp-page .tp-slider-nav button:disabled{opacity:.38;cursor:default;pointer-events:none}
+
+/* پیکانِ «بکشید» مرجع «←» است — در راست‌به‌چپ همان سمتی که کارت‌های
+   پنهان هستند. در صفحۀ چپ‌به‌راست آن سمت راست است. «←» آینه‌ای رسم
+   نمی‌شود، پس نویسه عوض می‌شود. وردپرس فقط برای راست‌به‌چپ `dir` می‌گذارد.
+   وزن (۰,۳,۲) از قاعدۀ مرجع (۰,۲,۲) سنگین‌تر.  P5-D243 */
+html:not([dir="rtl"]) .tp-page .tp-slider-hint::before{content:"→"}
+
+/* هیچ گذاری در گالری بیش از ۱۵۰ms نیست: تعویض و باز شدن بی‌درنگ.
+   هفت قاعدۀ مرجع ۱۸۰ تا ۳۰۰ داشتند؛ این‌ها یک پله سنگین‌ترند. */
+html .tp-page .tp-gallery-main > .tp-gallery-main__item,
+html .tp-page .tp-gallery-main > .tp-gallery-main__item::after,
+html .tp-page .tp-gallery-modal__grid > .tp-gallery-modal__item,
+html .tp-page .tp-gallery-modal__grid > .tp-gallery-modal__item::after,
+html .tp-page .tp-gallery-modal__item > .tp-gallery-modal__cap,
+html .tp-page .tp-gallery-modal__head > .tp-gallery-modal__close{transition-duration:150ms}
+html .tp-page div.tp-gallery-modal.tp-show{animation-duration:150ms}
+
+/* ═══ مودالِ فهرست — P5-D221 · P5-D245 ══════════════════════════════
+   شاسی همان مودال گالری است (پردۀ تیره، سرِ چسبان، عنوان و شمار و بستن).
+   جعبۀ جست‌وجو، دکمۀ بستن و کارتِ فشردۀ اعضا از ۴٫۴٫۰ توکن کاشی می‌گیرند
+   (P5-D245) — همان کاشی روز هوا در هر سه حالت، روی پردۀ تیره. z-index
+   همان ۶۰۰ مودال گالری: بالای نوار بخش‌ها (۱۱۰) و نوار پایین موبایل (۷۰). */
+.tp-page .tp-gallery-modal--list .tp-gallery-modal__head{flex-wrap:wrap}
+/* جعبۀ جست‌وجو روی پردۀ تیره نشسته: پر و متن از کاشی، ولی قابش --tp-tile-muted —
+   در شب پرِ کاشی (#11161B) با پرده یکی است و قابِ کاشی (#313B46) فقط ۱٫۷۳؛
+   مرز فیلد باید ۳ باشد (WCAG 1.4.11). متن فرعی آن‌جا ۹٫۱ است. */
+.tp-page .tp-list__q{
+  flex:1 1 260px;max-inline-size:520px;min-block-size:44px;
+  padding:0 16px;border-radius:var(--tp-tile-radius);
+  border:1px solid var(--tp-tile-muted);background:var(--tp-tile-bg);
+  color:var(--tp-tile-text);font:inherit;font-size:calc(.9 * var(--tp-rem));
+}
+.tp-page .tp-list__q::placeholder{color:var(--tp-tile-muted)}
+.tp-page .tp-list__q:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
+html .tp-page .tp-gallery-modal--list .tp-gallery-modal__head > .tp-gallery-modal__close{
+  background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-tile-text);
+}
+html .tp-page .tp-gallery-modal--list .tp-gallery-modal__head > .tp-gallery-modal__close:hover{
+  background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text);
+}
+.tp-page .tp-list__body{max-inline-size:1400px;margin-inline:auto;padding-bottom:30px}
+/* لنگرِ `html` مثل نیمۀ منتقل‌شده: قاعدۀ سرفصلِ tokens.css
+   (`html:root .tp-shell :where(h1…h4)`، وزن ۰,۲,۱) وگرنه رنگِ تیره می‌داد
+   و سرفصل روی پردۀ تیره ۱٫۲۳ درمی‌آمد — سنجۀ کنتراست گرفتش. */
+html .tp-page .tp-list__fam{color:#fff;font-size:calc(.9 * var(--tp-rem));font-weight:800;margin:18px 0 10px}
+html .tp-page .tp-list__block:first-child .tp-list__fam{margin-top:0}
+.tp-page .tp-list__grid{
+  list-style:none;margin:0;padding:0;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));grid-auto-rows:1fr;gap:8px;
+}
+.tp-page .tp-list__card{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  min-block-size:48px;padding:10px 14px;border-radius:var(--tp-tile-radius);
+  border:1px solid var(--tp-tile-border);background:var(--tp-tile-bg);color:var(--tp-tile-text);
+}
+.tp-page a.tp-list__card:hover,
+.tp-page a.tp-list__card:focus-visible{background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text)}
+.tp-page .tp-list__card b{font-weight:700;font-size:calc(.9 * var(--tp-rem))}
+.tp-page .tp-list__tag{flex:none;color:var(--tp-tile-text);font-size:calc(.72 * var(--tp-rem))}
+.tp-page a.tp-list__card:hover .tp-list__tag,
+.tp-page a.tp-list__card:focus-visible .tp-list__tag{color:var(--tp-primary-text)}
+.tp-page .tp-list__empty{color:rgba(255,255,255,.72);text-align:center;padding:40px 0;margin:0}
+@media(max-width:720px){
+  .tp-page .tp-list__q{order:3;flex-basis:100%;max-inline-size:none}
+  .tp-page .tp-list__grid{grid-template-columns:1fr}
+}
+
+/* ═══ صوت و ویدیو — P5-D222 ═════════════════════════════════════════
+   ردیفِ پروندۀ صوتی `div` است (پخش‌کننده درونِ `<a>` نامعتبر است)، با همان
+   مقادیرِ ردیفِ `a`ِ مرجع — گارد آزمون برابری دو اعلان را می‌پاید. پخش‌کننده
+   زیر همان سه ستون، تمام‌عرض. */
+.tp-page .tp-audio__item{display:grid;grid-template-columns:auto 1fr auto;gap:calc(.5 * var(--tp-rem));align-items:center;
+ padding:calc(.45 * var(--tp-rem)) calc(.6 * var(--tp-rem));border:1px solid var(--tp-border);border-radius:12px;background:var(--tp-bg);
+ color:var(--tp-text);font-size:calc(.84 * var(--tp-rem))}
+.tp-page .tp-audio__item audio{grid-column:1/-1;inline-size:100%;block-size:36px;margin-block-start:4px}
+
+/* آیکونِ نوعِ ردیف روایت — صدا یا تصویر — در همان ستونِ نخستِ مرجع.  P5-D227
+   (نشانِ پخشِ کاشیِ بزرگِ گالری رفت: گالری دوباره فقط عکس است.) */
+.tp-page .tp-audio__kind{display:grid;place-items:center}
+
+/* صحنۀ پخش: ۱۶:۹، هرگز بلندتر از ۸۰vh. */
+.tp-page .tp-solo__stage--media{
+  inline-size:min(100%, calc(80vh * 16 / 9));aspect-ratio:16/9;margin-inline:auto;
+}
+.tp-page .tp-solo__stage--media > iframe,
+.tp-page .tp-solo__stage--media > video{
+  position:absolute;inset:0;inline-size:100%;block-size:100%;border:0;border-radius:var(--tp-r);
+}
+
+/* بخش‌هایی که مرجع نداشت (روستاها، محله‌ها، استان‌ها، گذرهای مرزی…) روی
+   موبایل بی‌`order` می‌مانند و `order:0` یعنی می‌پرند اول صفحه. این پیش‌فرض
+   آنها را میان «روابط» (۴۰) و «همیشه انتها» (۹۰) می‌نشاند. قاعده‌های
+   شناسه‌دارِ مرجع وزن بیشتری دارند، پس دست‌نخورده برنده می‌مانند. */
+@media(max-width:720px){.tp-page .tp-main-col>*,.tp-page .tp-rail>*{order:50}}
+
+/* ═══ لایۀ انیمیشن هوا — کار خودِ ToPersia، در مرجع نبود  P5-D197 ═══
+   این بخش از `topersia-g-zones.css` منتقل شد، دست‌نخورده. مرجع هوا نداشت،
+   پس اگر فقط مرجع منتقل می‌شد، انیمیشن سربرگ بی‌صدا می‌افتاد.
+
+   نردبان z-index صریح است و ناچار: در مرجع هیچ‌کدام از لایه‌های سربرگ
+   جز `.hero__in` عدد نداشتند، و یک لایۀ `z-index:1` میانشان بالای
+   پوشش می‌نشست — یعنی ذره روی متن. ترتیب همان ترتیب مرجع می‌ماند؛
+   فقط صریح می‌شود.  P5-D197 */
+.tp-page .tp-hero__fallback{z-index:0}
+.tp-page .tp-hero__img{z-index:0}
+.tp-page .tp-wx-fx{z-index:1}
+.tp-page .tp-hero__overlay{z-index:2}
+/* مرجع خودش به `.hero__in` عدد ۲ داده؛ این یکی باید از آن سنگین‌تر باشد
+   تا بالای پوشش بنشیند، پس فرزندِ مستقیمِ سربرگ نامیده می‌شود. */
+html .tp-page .tp-hero > .tp-hero__in{z-index:3}
+
+/* ─── متنِ فصل ───────────────────────────────────────────────────────
+   مرجع `--s` را هم برای پر به کار می‌برد و هم برای متن؛ نگاشتِ رنگ متن
+   آن را به `--tp-s-text` می‌برد و این‌جا هر فصل نسخۀ متنِ خودش را
+   می‌گیرد. پرها همان `--tp-s` مرجع می‌مانند.  P5-D153 */
+.tp-page .tp-season--spring{--tp-s-text:var(--tp-s-spring-text)}
+.tp-page .tp-season--summer{--tp-s-text:var(--tp-s-summer-text)}
+.tp-page .tp-season--autumn{--tp-s-text:var(--tp-s-autumn-text)}
+.tp-page .tp-season--winter{--tp-s-text:var(--tp-s-winter-text)}
+
+/* ─── یک ایرادِ خودِ مرجع ────────────────────────────────────────────
+   لایۀ دادۀ مرجع `.tp-altnames` را زیر `.hero__alt` در سربرگ می‌گذاشت،
+   ولی شیوه‌نامه‌اش `color:var(--muted)` به آن داده بود — خاکستریِ تیره
+   روی عکسِ تیره. خودِ مرجع هم ۲٫۵۹ می‌دهد.  P5-D187
+   مقدار تازه‌ای نیست: همان سفیدِ ۷۶٪ که `.hero__alt` مرجع دارد. */
+.tp-page .tp-hero .tp-altnames{color:rgba(255,255,255,.76)}
+
+.tp-page .tp-wx-fx{
+  position:absolute;inset:0;pointer-events:none;
+  opacity:0;transition:opacity .6s linear;
+  /* ذره هرگز پشت متن سربرگ نمی‌رود.
+     زیرِ overlay بودن لازم است ولی کافی نیست: overlay در بخش بزرگی از
+     پهنایش فقط ۲۰ تا ۵۵ درصد کدر است، پس یک ذرۀ روشن از پشتش رد
+     می‌شود و کنتراست متن ریز را می‌اندازد. سنجش پیکسلی نشان داد
+     «زیر overlay» تنها، یازده ترکیب از پانزده را رد می‌کند.  P5-D197 */
+  -webkit-mask-image:linear-gradient(to top,transparent 0%,transparent 42%,#000 66%,#000 100%);
+          mask-image:linear-gradient(to top,transparent 0%,transparent 42%,#000 66%,#000 100%);
+}
+.tp-page .tp-wx-fx.is-on{opacity:1}
+.tp-page .tp-wx-fx canvas{display:block;inline-size:100%;block-size:100%}
+
+/* مه ذره ندارد — شیب ماتی که آرام نفس می‌کشد */
+.tp-page .tp-wx-fx--fog{
+  background:
+    linear-gradient(0deg,
+      rgba(226,222,214,var(--tp-fog-a,.22)) 0%,
+      rgba(226,222,214,calc(var(--tp-fog-a,.22) * .45)) 38%,
+      rgba(226,222,214,0) 72%);
+  animation:tp-fog-breathe var(--tp-fog-ms,4200ms) ease-in-out infinite;
+}
+@keyframes tp-fog-breathe{
+  0%,100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+  50%    {opacity:.72;transform:translate3d(0,-2%,0) scale(1.04)}
+}
+
+/* برق — فلاش CSS، نه ذره. زمان‌بندی‌اش از جاوااسکریپت می‌آید تا
+   نامنظم باشد؛ برق دوره‌ای فوراً مصنوعی دیده می‌شود. */
+.tp-page .tp-wx-fx__flash{
+  position:absolute;inset:0;
+  background:radial-gradient(120% 80% at 50% 0%,
+    rgba(255,255,255,.55) 0%, rgba(255,255,255,.18) 34%, rgba(255,255,255,0) 68%);
+  opacity:0;transition:opacity 90ms linear;
+}
+.tp-page .tp-wx-fx__flash.is-lit{opacity:1}
+
+@media(prefers-reduced-motion:reduce){
+  .tp-page .tp-wx-fx{display:none}
+}
+
+/* ═══ TP-ADDED-END ═════════════════════════════════════════════════ */
+
+html .tp-page *,html .tp-page *::before,html .tp-page *::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html .tp-page{margin:0;background:var(--tp-bg);color:var(--tp-text);
+ font-family:"Peyda",Vazirmatn,system-ui,-apple-system,"Segoe UI",sans-serif;
+ line-height:1.9;font-size:var(--tp-rem);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html .tp-page img{max-width:100%;display:block}
+html .tp-page a{color:inherit;text-decoration:none}
+html .tp-page h1,html .tp-page h2,html .tp-page h3,html .tp-page h4{margin:0;line-height:1.4;font-weight:800;color:var(--tp-text-strong);letter-spacing:-.02em}
+html .tp-page p{margin:0 0 1em}
+html .tp-page button{font:inherit}
+html .tp-page .tp-wrap{max-width:var(--tp-content-w);margin-inline:auto;padding-inline:20px}
+@media(max-width:720px){
+html .tp-page .tp-wrap{padding-inline:14px}
+}
+html .tp-page :focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:3px;border-radius:6px}
+html .tp-page #tp-ai,html .tp-page #tp-overview,html .tp-page #tp-gallery,html .tp-page #tp-attractions,html .tp-page #tp-places,html .tp-page #tp-culture,html .tp-page #tp-news,html .tp-page #tp-faq,html .tp-page #tp-reviews,html .tp-page #tp-map,html .tp-page #tp-practical,html .tp-page #tp-sources,html .tp-page #tp-geo,html .tp-page #tp-neighbors,html .tp-page #tp-routes{scroll-margin-top:calc(var(--tp-snav-top) + var(--tp-snav-h))}
+@media(max-width:720px){
+html .tp-page #tp-ai,html .tp-page #tp-overview,html .tp-page #tp-gallery,html .tp-page #tp-attractions,html .tp-page #tp-places,html .tp-page #tp-culture,html .tp-page #tp-news,html .tp-page #tp-faq,html .tp-page #tp-reviews,html .tp-page #tp-map,html .tp-page #tp-practical,html .tp-page #tp-sources,html .tp-page #tp-geo,html .tp-page #tp-neighbors,html .tp-page #tp-routes{scroll-margin-top:calc(var(--tp-snav-top) + var(--tp-snav-h))}
+}
+/* TOP BAR */
+/* HERO */
+html .tp-page .tp-hero{position:relative;min-height:480px;overflow:hidden;background:#17322e;isolation:isolate}
+html .tp-page .tp-hero__fallback{position:absolute;inset:0;
+ background:
+  radial-gradient(120% 90% at 78% 12%, #d9bd6d 0%, transparent 42%),
+  linear-gradient(155deg,#c8a55a 0%,#658479 32%,#1e4742 68%,#0b1c19 100%)}
+html .tp-page .tp-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 45%}
+html .tp-page .tp-hero__overlay{position:absolute;inset:0;
+ background:
+  linear-gradient(90deg,rgba(7,18,16,.86) 0%,rgba(7,18,16,.55) 40%,rgba(7,18,16,.20) 68%,rgba(7,18,16,.42) 100%),
+  linear-gradient(0deg,rgba(5,13,11,.82) 0%,rgba(5,13,11,.20) 42%,rgba(5,13,11,.10) 100%)}
+html .tp-page .tp-hero__in{position:relative;z-index:2;display:flex;align-items:flex-end;min-height:480px;padding-block:0 44px}
+html .tp-page .tp-hero__copy{max-width:860px;color:#fff}
+html .tp-page .tp-eyebrow{display:inline-flex;align-items:center;gap:10px;color:#eccf7d;font-weight:800;
+ font-size:calc(.74 * var(--tp-rem));letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+html .tp-page .tp-eyebrow::after{content:"";width:44px;height:2px;background:#eccf7d;opacity:.9;border-radius:2px}
+html .tp-page .tp-hero h1{font-size:clamp(calc(2.9 * var(--tp-rem)),6.6vw,calc(5.4 * var(--tp-rem)));line-height:1.02;letter-spacing:-.07em;color:#fff;margin:0 0 10px;font-weight:900}
+html .tp-page .tp-hero__alt{color:rgba(255,255,255,.76);font-size:calc(1 * var(--tp-rem));font-weight:500;margin:0 0 15px;letter-spacing:0}
+html .tp-page .tp-hero__alt em{font-style:normal;opacity:.75}
+html .tp-page .tp-hero__lead{color:rgba(255,255,255,.94);font-size:calc(1.1 * var(--tp-rem));line-height:1.9;max-width:70ch;font-weight:400;margin:0}
+html .tp-page .tp-hero__credit{position:absolute;z-index:3;inset-inline-start:20px;bottom:12px;
+ color:rgba(255,255,255,.55);font-size:calc(.62 * var(--tp-rem))}
+@media(max-width:720px){
+html .tp-page .tp-hero,html .tp-page .tp-hero__in{min-height:400px}
+html .tp-page .tp-hero__in{padding-block:0 26px}
+html .tp-page .tp-hero h1{font-size:calc(2.6 * var(--tp-rem));letter-spacing:-.06em}
+html .tp-page .tp-hero__lead{font-size:calc(.96 * var(--tp-rem));line-height:1.8}
+html .tp-page .tp-hero__credit{display:none}
+}
+/* SECTION NAV */
+html .tp-page .tp-snav{position:sticky;top:var(--tp-snav-top);z-index:110;margin-top:18px;
+ background:color-mix(in srgb,var(--tp-bg) 92%,transparent);
+ backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--tp-border)}
+html .tp-page .tp-snav__in{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:8px 0}
+html .tp-page .tp-snav__in::-webkit-scrollbar{display:none}
+html .tp-page .tp-snav a{white-space:nowrap;padding:8px 13px;border-radius:999px;color:var(--tp-text-2);
+ font-size:calc(.78 * var(--tp-rem));font-weight:700;transition:background .2s,color .2s,box-shadow .2s;
+ position:relative;border:1px solid transparent;-webkit-tap-highlight-color:transparent}
+html .tp-page .tp-snav a:hover,html .tp-page .tp-snav a:focus-visible{background:var(--tp-surface-2);color:var(--tp-text-strong)}
+html .tp-page .tp-snav a.tp-is-active{background:var(--tp-hover);
+ color:var(--tp-on-hover);
+ font-weight:800;
+ border-color:var(--tp-hover);
+ box-shadow:0 6px 16px -6px rgba(14,111,106,.55)}
+html .tp-page .tp-snav a.tp-is-active:hover{background:var(--tp-brand-2);color:var(--tp-on-hover);border-color:var(--tp-brand-2)}
+html[data-tp-mode="dark"] .tp-page .tp-snav a.tp-is-active{background:var(--tp-hover);color:#0b1310;
+ box-shadow:0 6px 16px -6px rgba(56,182,173,.55)}
+@media(max-width:720px){
+html .tp-page .tp-snav{top:var(--tp-snav-top);margin-top:12px}
+html .tp-page .tp-snav a{font-size:calc(.72 * var(--tp-rem));padding:7px 11px}
+}
+/* STATS */
+html .tp-page .tp-stats-wrap{position:relative;z-index:5;margin-top:-34px}
+html .tp-page .tp-stats{background:var(--tp-surface);border:1px solid var(--tp-border);border-radius:var(--tp-r-lg);
+ box-shadow:var(--tp-g-shadow);display:grid;grid-template-columns:repeat(4,1fr);overflow:hidden}
+html .tp-page .tp-stat{padding:22px 24px;border-inline-start:1px solid var(--tp-border-2)}
+html .tp-page .tp-stat:first-child{border-inline-start:0}
+html .tp-page .tp-stat b{display:block;font-size:calc(1.28 * var(--tp-rem));color:var(--tp-text-strong);font-weight:800;letter-spacing:-.02em}
+html .tp-page .tp-stat span{display:block;color:var(--tp-text-2);font-size:calc(.76 * var(--tp-rem));margin-top:3px;font-weight:500}
+html .tp-page .tp-stat .tp-lat{font-family:ui-monospace,"SF Mono",monospace;direction:ltr;display:inline-block;font-weight:700}
+@media(max-width:900px){
+html .tp-page .tp-stats{grid-template-columns:1fr 1fr}
+html .tp-page .tp-stat:nth-child(3){border-inline-start:0;border-top:1px solid var(--tp-border-2)}
+html .tp-page .tp-stat:nth-child(4){border-top:1px solid var(--tp-border-2)}
+}
+@media(max-width:720px){
+html .tp-page .tp-stats-wrap{margin-top:-22px}
+html .tp-page .tp-stat{padding:16px 16px}
+}
+/* LAYOUT */
+html .tp-page .tp-main{padding-block:44px 60px}
+html .tp-page .tp-crumb{color:var(--tp-text-2);font-size:calc(.82 * var(--tp-rem));margin:0 0 26px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+html .tp-page .tp-crumb a:hover{color:var(--tp-primary-text)}
+html .tp-page .tp-crumb span{opacity:.4}
+html .tp-page .tp-content-grid{display:grid;grid-template-columns:minmax(0,1fr) var(--tp-rail-w);gap:44px;align-items:start}
+@media(max-width:1100px){
+html .tp-page .tp-content-grid{grid-template-columns:1fr;gap:32px}
+}
+html .tp-page .tp-main-col{min-width:0}
+/* SECTIONS */
+html .tp-page .tp-section{margin:0 0 52px}
+html .tp-page .tp-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:20px}
+html .tp-page .tp-section-head h2{font-size:calc(1.55 * var(--tp-rem));letter-spacing:-.035em}
+html .tp-page .tp-section-head .tp-lead{margin:4px 0 0;color:var(--tp-text-2);font-size:calc(.88 * var(--tp-rem))}
+html .tp-page .tp-section-head .tp-more{color:var(--tp-primary-text);font-weight:800;font-size:calc(.8 * var(--tp-rem));white-space:nowrap;
+ background:none;border:0;cursor:pointer;padding:0;font-family:inherit;transition:.16s}
+html .tp-page .tp-section-head .tp-more:hover{color:var(--tp-brand-2)}
+@media(max-width:720px){
+html .tp-page .tp-section-head{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:16px}
+html .tp-page .tp-section-head h2{font-size:calc(1.32 * var(--tp-rem))}
+html .tp-page .tp-section-head .tp-lead{font-size:calc(.82 * var(--tp-rem))}
+}
+/* AI BRIEF */
+html .tp-page .tp-ai{border-radius:var(--tp-r-lg);padding:26px 28px;color:#fff;position:relative;overflow:hidden;
+ background:linear-gradient(148deg,#0e5a55 0%,#0f4b47 52%,#0b3a37 100%);
+ box-shadow:var(--tp-g-shadow);border:1px solid #115c57}
+html .tp-page .tp-ai::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:
+  radial-gradient(120% 80% at 100% 0%,rgba(255,255,255,.14),transparent 50%),
+  repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 1px,transparent 1px 16px)}
+html .tp-page .tp-ai>*{position:relative;z-index:1}
+html .tp-page .tp-ai__kicker{font-size:calc(.7 * var(--tp-rem));color:#a8dbd5;font-weight:900;letter-spacing:.14em;margin-bottom:8px}
+html .tp-page .tp-ai h2{font-size:calc(1.32 * var(--tp-rem));color:#fff;margin:0 0 6px;letter-spacing:-.03em}
+html .tp-page .tp-ai p{margin:0;color:#d3e7e3;font-size:calc(.94 * var(--tp-rem))}
+html .tp-page .tp-ai__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;position:relative;z-index:10}
+html .tp-page .tp-ai__btn{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:#fff;
+ padding:10px 16px;border-radius:11px;cursor:pointer;font-size:calc(.78 * var(--tp-rem));font-weight:800;
+ transition:.18s;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+ display:inline-flex;align-items:center;gap:7px;
+ -webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;
+ min-height:40px}
+html .tp-page .tp-ai__btn:hover{background:rgba(255,255,255,.18)}
+html .tp-page .tp-ai__btn:active{transform:scale(.97);background:rgba(255,255,255,.25)}
+html .tp-page .tp-ai__btn.tp-is-active{background:#fff;color:#0b3a37;border-color:#fff}
+html .tp-page .tp-ai__btn svg{width:14px;height:14px;flex:0 0 auto;pointer-events:none}
+html .tp-page .tp-ai__btn--copy{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04)}
+html .tp-page .tp-ai__engines{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;
+ padding-top:14px;border-top:1px solid rgba(255,255,255,.14);align-items:center;position:relative;z-index:10}
+html .tp-page .tp-ai__engines-label{font-size:calc(.7 * var(--tp-rem));color:#a8dbd5;font-weight:800;letter-spacing:.08em;
+ text-transform:uppercase;margin-inline-end:4px}
+html .tp-page .tp-ai__engine{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);
+ background:rgba(255,255,255,.06);color:rgba(255,255,255,.85);cursor:pointer;
+ font-size:calc(.73 * var(--tp-rem));font-weight:800;transition:.18s;font-family:inherit;
+ display:inline-flex;align-items:center;gap:6px;
+ -webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none;
+ min-height:36px}
+html .tp-page .tp-ai__engine:hover{background:rgba(255,255,255,.14);color:#fff}
+html .tp-page .tp-ai__engine:active{transform:scale(.97)}
+html .tp-page .tp-ai__engine.tp-is-active{background:#e9cd78;color:#0b3a37;border-color:#e9cd78}
+html .tp-page .tp-ai__engine svg{width:12px;height:12px;flex:0 0 auto;pointer-events:none}
+html .tp-page .tp-ai__out{margin-top:18px;border-top:1px solid rgba(255,255,255,.16);padding-top:16px;display:block}
+html .tp-page .tp-ai__out p{margin:0;font-size:calc(1 * var(--tp-rem));line-height:2;color:#eaf4f2;white-space:pre-line}
+html .tp-page .tp-ai__out-meta{margin-top:14px;font-size:calc(.7 * var(--tp-rem));color:rgba(255,255,255,.62);
+ display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+html .tp-page .tp-ai__badge{display:inline-flex;align-items:center;gap:6px;
+ background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);
+ padding:4px 10px;border-radius:999px;font-weight:700;color:#fff}
+html .tp-page .tp-ai__badge .tp-dot{width:6px;height:6px;border-radius:50%;background:#4dd0c7;
+ box-shadow:0 0 8px #4dd0c7;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+html .tp-page .tp-ai__disclaimer{margin-top:14px;font-size:calc(.7 * var(--tp-rem));color:rgba(255,255,255,.55)}
+@media(max-width:560px){
+html .tp-page .tp-ai{padding:22px 18px}
+html .tp-page .tp-ai h2{font-size:calc(1.15 * var(--tp-rem))}
+html .tp-page .tp-ai p{font-size:calc(.86 * var(--tp-rem))}
+html .tp-page .tp-ai__actions{gap:6px;margin-top:16px}
+html .tp-page .tp-ai__btn{font-size:calc(.72 * var(--tp-rem));padding:9px 12px;gap:5px;min-height:38px}
+html .tp-page .tp-ai__btn svg{width:13px;height:13px}
+html .tp-page .tp-ai__engines{gap:5px;margin-top:12px;padding-top:12px}
+html .tp-page .tp-ai__engine{font-size:calc(.68 * var(--tp-rem));padding:7px 11px;min-height:34px}
+html .tp-page .tp-ai__out p{font-size:calc(.92 * var(--tp-rem));line-height:1.9}
+html .tp-page .tp-ai__out-meta{font-size:calc(.65 * var(--tp-rem));gap:6px}
+html .tp-page .tp-ai__disclaimer{font-size:calc(.65 * var(--tp-rem))}
+}
+/* DIRECT ANSWER */
+html .tp-page .tp-answer h2{font-size:calc(1.72 * var(--tp-rem));letter-spacing:-.04em;margin-bottom:12px}
+html .tp-page .tp-answer__divider{width:56px;height:3px;background:var(--tp-accent-strong);border-radius:999px;margin:0 0 22px}
+html .tp-page .tp-longform{font-size:calc(1.06 * var(--tp-rem));line-height:2.14;color:var(--tp-text)}
+html .tp-page .tp-longform h3{font-size:calc(1.18 * var(--tp-rem));margin:34px 0 10px;letter-spacing:-.03em;color:var(--tp-text-strong);
+ display:flex;align-items:baseline;gap:10px}
+html .tp-page .tp-longform h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--tp-accent-strong);flex:0 0 auto;transform:translateY(-4px)}
+html .tp-page .tp-longform p{margin:0 0 1.15em}
+html .tp-page .tp-longform ul,html .tp-page .tp-longform ol{padding-inline-start:1.4em;margin:0 0 1.2em}
+html .tp-page .tp-longform li{margin-bottom:.5em}
+html .tp-page .tp-longform strong{color:var(--tp-text-strong);font-weight:800}
+html .tp-page .tp-longform .tp-takeaways{margin:26px 0;padding:18px 20px;background:var(--tp-surface);
+ border:1px solid var(--tp-border);border-radius:var(--tp-r);box-shadow:var(--tp-g-shadow-sm)}
+html .tp-page .tp-longform .tp-takeaways h4{margin:0 0 10px;font-size:calc(.94 * var(--tp-rem));color:var(--tp-primary-text);letter-spacing:.02em}
+html .tp-page .tp-longform .tp-takeaways ul{margin:0;padding-inline-start:1.2em}
+html .tp-page .tp-longform .tp-field-note{display:block;margin-top:28px;padding:12px 16px;border-inline-start:3px solid var(--tp-accent-strong);
+ background:color-mix(in srgb,var(--tp-accent-strong) 8%,transparent);color:var(--tp-text-2);font-size:calc(.76 * var(--tp-rem));border-radius:0 10px 10px 0}
+html .tp-page .tp-longform .tp-field-note code{font-family:ui-monospace,monospace;font-size:.92em;color:var(--tp-text-strong)}
+html .tp-page .tp-answer__meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+html .tp-page .tp-answer__meta span{font-size:calc(.72 * var(--tp-rem));color:var(--tp-text-2);border:1px solid var(--tp-border);
+ border-radius:999px;padding:6px 11px;background:var(--tp-surface);font-weight:600}
+@media(max-width:720px){
+html .tp-page .tp-answer h2{font-size:calc(1.4 * var(--tp-rem))}
+html .tp-page .tp-longform{font-size:calc(.98 * var(--tp-rem));line-height:2}
+html .tp-page .tp-longform h3{font-size:calc(1.05 * var(--tp-rem));margin:26px 0 8px}
+html .tp-page .tp-answer__meta{gap:6px;margin-top:18px}
+html .tp-page .tp-answer__meta span{font-size:calc(.68 * var(--tp-rem));padding:5px 10px}
+}
+/* GALLERY */
+html .tp-page .tp-gallery-main{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,1fr);
+ gap:8px;height:420px}
+html .tp-page .tp-gallery-main__item{position:relative;display:block;overflow:hidden;border-radius:var(--tp-r);
+ background:linear-gradient(135deg,#d4b465,#527670 58%,#17332f);
+ transition:.3s;cursor:pointer;border:0;padding:0}
+html .tp-page .tp-gallery-main__item::after{content:"";position:absolute;inset:0;
+ background:linear-gradient(180deg,transparent 42%,rgba(5,12,10,.78));transition:.3s}
+html .tp-page .tp-gallery-main__item:hover{transform:scale(1.008)}
+html .tp-page .tp-gallery-main__item:hover::after{background:linear-gradient(180deg,transparent 30%,rgba(5,12,10,.85))}
+html .tp-page .tp-gallery-main__item--large{grid-row:span 2}
+html .tp-page .tp-gallery-main__label{position:absolute;z-index:3;inset-inline:16px;bottom:14px;
+ color:#fff;font-size:calc(.88 * var(--tp-rem));font-weight:800;line-height:1.5;text-shadow:0 1px 3px rgba(0,0,0,.4);
+ text-align:start}
+html .tp-page .tp-gallery-main__item--large .tp-gallery-main__label{font-size:calc(1.35 * var(--tp-rem));bottom:20px;inset-inline:20px}
+html .tp-page .tp-gallery-main__meta{display:inline-block;color:rgba(255,255,255,.75);font-size:calc(.68 * var(--tp-rem));
+ font-weight:600;margin-inline-start:6px;letter-spacing:0;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+html .tp-page .tp-gallery-main__count{position:absolute;z-index:3;top:12px;inset-inline-start:12px;
+ background:rgba(0,0,0,.5);color:#fff;font-size:calc(.7 * var(--tp-rem));font-weight:800;
+ padding:5px 10px;border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+@media(max-width:720px){
+html .tp-page .tp-gallery-main{grid-template-columns:1fr 1fr;grid-template-rows:200px 140px 140px;height:auto;gap:6px}
+html .tp-page .tp-gallery-main__item--large{grid-column:span 2;grid-row:span 1}
+html .tp-page .tp-gallery-main__item--large .tp-gallery-main__label{font-size:calc(1 * var(--tp-rem))}
+html .tp-page .tp-gallery-main__label{font-size:calc(.78 * var(--tp-rem));inset-inline:12px;bottom:10px}
+html .tp-page .tp-gallery-main__meta{font-size:calc(.62 * var(--tp-rem))}
+}
+/* GALLERY MODAL */
+html .tp-page .tp-gallery-modal{position:fixed;inset:0;background:rgba(6,12,11,.94);
+ backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+ display:none;z-index:600;padding:22px;overflow-y:auto;overscroll-behavior:contain}
+html .tp-page .tp-gallery-modal.tp-show{display:block;animation:fadeIn .22s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+html .tp-page .tp-gallery-modal__head{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;
+ align-items:center;gap:16px;padding:8px 4px 18px;background:linear-gradient(180deg,rgba(6,12,11,.98) 60%,transparent)}
+html .tp-page .tp-gallery-modal__title{color:#fff;font-size:calc(1.05 * var(--tp-rem));font-weight:800;margin:0}
+html .tp-page .tp-gallery-modal__title small{display:block;color:rgba(255,255,255,.55);font-size:calc(.72 * var(--tp-rem));font-weight:500;margin-top:3px}
+html .tp-page .tp-gallery-modal__close{width:44px;height:44px;border:1px solid rgba(255,255,255,.22);
+ background:rgba(255,255,255,.08);color:#fff;border-radius:50%;cursor:pointer;
+ display:grid;place-items:center;font-size:calc(1.4 * var(--tp-rem));line-height:1;
+ backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:.18s}
+html .tp-page .tp-gallery-modal__close:hover{background:rgba(255,255,255,.18)}
+html .tp-page .tp-gallery-modal__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+ gap:12px;max-width:1400px;margin-inline:auto;padding-bottom:30px}
+html .tp-page .tp-gallery-modal__item{position:relative;overflow:hidden;border-radius:var(--tp-r);
+ background:linear-gradient(135deg,#d4b465,#527670 58%,#17332f);
+ aspect-ratio:4/3;cursor:pointer;transition:.24s;border:0;padding:0;
+ box-shadow:0 8px 26px -12px rgba(0,0,0,.6)}
+html .tp-page .tp-gallery-modal__item--wide{grid-column:span 2;aspect-ratio:8/3}
+html .tp-page .tp-gallery-modal__item:hover{transform:translateY(-4px);box-shadow:0 20px 40px -14px rgba(0,0,0,.7)}
+html .tp-page .tp-gallery-modal__item::after{content:"";position:absolute;inset:0;
+ background:linear-gradient(180deg,transparent 45%,rgba(5,12,10,.82));opacity:0;transition:.24s}
+html .tp-page .tp-gallery-modal__item:hover::after{opacity:1}
+html .tp-page .tp-gallery-modal__cap{position:absolute;z-index:2;inset-inline:16px;bottom:14px;color:#fff;
+ font-size:calc(.84 * var(--tp-rem));font-weight:800;opacity:0;transform:translateY(6px);transition:.24s;text-align:start}
+html .tp-page .tp-gallery-modal__item:hover .tp-gallery-modal__cap{opacity:1;transform:translateY(0)}
+html .tp-page .tp-gallery-modal__cap small{display:block;font-size:calc(.68 * var(--tp-rem));font-weight:500;color:rgba(255,255,255,.72);margin-top:2px}
+@media(max-width:720px){
+html .tp-page .tp-gallery-modal{padding:14px}
+html .tp-page .tp-gallery-modal__grid{grid-template-columns:1fr 1fr;gap:8px}
+html .tp-page .tp-gallery-modal__item--wide{grid-column:span 2}
+html .tp-page .tp-gallery-modal__title{font-size:calc(.92 * var(--tp-rem))}
+html .tp-page .tp-gallery-modal__title small{font-size:calc(.66 * var(--tp-rem))}
+html .tp-page .tp-gallery-modal__close{width:38px;height:38px;font-size:calc(1.2 * var(--tp-rem))}
+}
+/* CULTURE */
+html .tp-page .tp-culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:900px){
+html .tp-page .tp-culture-grid{grid-template-columns:1fr 1fr;gap:12px}
+}
+@media(max-width:560px){
+html .tp-page .tp-culture-grid{grid-template-columns:1fr;gap:10px}
+}
+html .tp-page .tp-culture-card{position:relative;background:var(--tp-surface);border:1px solid var(--tp-border);
+ border-radius:var(--tp-r);padding:20px 20px 18px;overflow:hidden;
+ transition:.24s cubic-bezier(.4,0,.2,1);box-shadow:var(--tp-g-shadow-sm);
+ display:flex;flex-direction:column;gap:14px}
+html .tp-page .tp-culture-card:hover{border-color:color-mix(in srgb,var(--tp-hover) 45%, var(--tp-border));transform:translateY(-3px);
+ box-shadow:0 1px 2px rgba(20,27,25,.05),0 18px 40px -20px rgba(20,27,25,.24)}
+html .tp-page .tp-culture-card::before{content:"";position:absolute;inset-block-start:0;inset-inline:0;
+ height:3px;background:linear-gradient(90deg,var(--tp-hover),var(--tp-accent-strong));opacity:.9}
+html .tp-page .tp-culture-card::after{content:"";position:absolute;inset:auto -30% -40% auto;
+ width:180px;height:180px;border-radius:50%;
+ background:radial-gradient(circle,color-mix(in srgb,var(--tp-hover) 10%,transparent) 0%,transparent 65%);
+ pointer-events:none;opacity:0;transition:opacity .3s}
+html .tp-page .tp-culture-card:hover::after{opacity:1}
+html .tp-page .tp-culture-card__head{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+html .tp-page .tp-culture-card__icon{width:40px;height:40px;border-radius:12px;flex:0 0 auto;
+ display:grid;place-items:center;background:var(--tp-soft);color:var(--tp-primary-text);
+ box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tp-hover) 15%,transparent);transition:.22s}
+html[data-tp-mode="dark"] .tp-page .tp-culture-card__icon{background:#12312f;color:var(--tp-brand-2)}
+html .tp-page .tp-culture-card:hover .tp-culture-card__icon{background:var(--tp-hover);color:var(--tp-on-hover);transform:rotate(-4deg) scale(1.05)}
+html .tp-page .tp-culture-card__icon svg{width:20px;height:20px}
+html .tp-page .tp-culture-card__title{min-width:0}
+html .tp-page .tp-culture-card__kicker{display:block;font-size:calc(.62 * var(--tp-rem));font-weight:900;letter-spacing:.16em;
+ color:var(--tp-text-2);margin-bottom:2px;text-transform:uppercase;transition:.2s}
+html .tp-page .tp-culture-card:hover .tp-culture-card__kicker{color:var(--tp-primary-text)}
+html .tp-page .tp-culture-card__title h3{font-size:calc(1 * var(--tp-rem));margin:0;letter-spacing:-.02em;line-height:1.3}
+html .tp-page .tp-culture-card__list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;position:relative;z-index:1}
+html .tp-page .tp-culture-card__list li{display:inline-flex}
+html .tp-page .tp-culture-card__list a{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 13px;
+ border-radius:999px;
+ background:linear-gradient(180deg,color-mix(in srgb,var(--tp-surface-2) 92%, #fff 8%),color-mix(in srgb,var(--tp-surface-2) 100%, var(--tp-hover) 2%));
+ color:var(--tp-text);font-size:calc(.79 * var(--tp-rem));font-weight:700;letter-spacing:-.005em;line-height:1.2;
+ border:1px solid color-mix(in srgb,var(--tp-border) 80%, transparent);
+ white-space:nowrap;transition:all .22s cubic-bezier(.4,0,.2,1);position:relative}
+html .tp-page .tp-culture-card__list a::before{content:"";width:6px;height:6px;border-radius:50%;flex:0 0 auto;
+ background:var(--tp-hover);box-shadow:0 0 0 3px color-mix(in srgb,var(--tp-hover) 14%, transparent);
+ transition:all .22s cubic-bezier(.4,0,.2,1)}
+html .tp-page .tp-culture-card__list a:hover{background:linear-gradient(180deg,var(--tp-hover),var(--tp-brand-2));
+ color:var(--tp-on-hover);border-color:var(--tp-hover);transform:translateY(-2px);
+ box-shadow:0 8px 18px -8px color-mix(in srgb,var(--tp-hover) 70%,transparent),0 2px 6px -2px color-mix(in srgb,var(--tp-hover) 40%,transparent)}
+html .tp-page .tp-culture-card__list a:hover::before{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.25);transform:scale(1.15)}
+html .tp-page .tp-culture-card__list a:focus-visible{outline:2px solid var(--tp-accent-strong);outline-offset:2px}
+html[data-tp-mode="dark"] .tp-page .tp-culture-card__list a{background:linear-gradient(180deg,color-mix(in srgb,var(--tp-surface-2) 100%, #fff 2%),color-mix(in srgb,var(--tp-surface-2) 100%, var(--tp-hover) 3%))}
+html[data-tp-mode="dark"] .tp-page .tp-culture-card__list a:hover{background:linear-gradient(180deg,var(--tp-hover),var(--tp-brand-2));color:#0b1310}
+html .tp-page .tp-culture-card__count{position:absolute;top:18px;inset-inline-end:18px;
+ font-family:ui-monospace,monospace;font-size:calc(.72 * var(--tp-rem));font-weight:800;color:var(--tp-text-2);direction:ltr;transition:.2s}
+html .tp-page .tp-culture-card:hover .tp-culture-card__count{color:var(--tp-primary-text)}
+/* SLIDERS */
+html .tp-page .tp-slider-wrap{position:relative}
+html .tp-page .tp-slider{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(230px,1fr);
+ gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+ padding-bottom:14px;scrollbar-width:thin;overscroll-behavior-inline:contain}
+html .tp-page .tp-slider>*{scroll-snap-align:start}
+html .tp-page .tp-slider-bar{display:flex;justify-content:space-between;align-items:center;margin-top:10px;color:var(--tp-text-2);font-size:calc(.72 * var(--tp-rem))}
+html .tp-page .tp-slider-hint{display:flex;align-items:center;gap:8px}
+html .tp-page .tp-slider-hint::before{content:"←";color:var(--tp-primary-text);font-size:calc(1 * var(--tp-rem))}
+html .tp-page .tp-slider-nav{display:flex;gap:6px}
+html .tp-page .tp-slider-nav button{width:36px;height:36px;border:1px solid var(--tp-border);background:var(--tp-surface);
+ border-radius:50%;cursor:pointer;color:var(--tp-text);display:grid;place-items:center;font-size:calc(1.05 * var(--tp-rem));transition:.16s}
+html .tp-page .tp-slider-nav button:hover{background:var(--tp-surface-2)}
+@media(max-width:720px){
+html .tp-page .tp-slider{grid-auto-columns:82%;gap:10px}
+html .tp-page .tp-slider-bar{margin-top:8px}
+}
+html .tp-page .tp-card-slide{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+ min-height:280px;border:1px solid var(--tp-border);background:var(--tp-surface);
+ border-radius:var(--tp-r);overflow:hidden;box-shadow:var(--tp-g-shadow-sm);transition:.2s}
+html .tp-page .tp-card-slide:hover{transform:translateY(-3px);box-shadow:var(--tp-g-shadow)}
+html .tp-page .tp-card-slide__art{position:absolute;inset:0 0 auto 0;height:162px;overflow:hidden;
+ background:linear-gradient(135deg,#d4b465,#527670 58%,#17332f)}
+html .tp-page .tp-card-slide__art::after{content:"";position:absolute;inset:0;
+ background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(0,0,0,.22))}
+html .tp-page .tp-card-slide__art::before{content:"";position:absolute;inset:0;
+ background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 1px,transparent 1px 14px)}
+html .tp-page .tp-card-slide__no{position:absolute;top:12px;inset-inline-start:12px;width:34px;height:34px;
+ border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);
+ color:#fff;border:1px solid rgba(255,255,255,.28);font-size:calc(.72 * var(--tp-rem));font-weight:900;
+ backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:2}
+html .tp-page .tp-card-slide__body{position:relative;z-index:2;background:var(--tp-surface);padding:16px 18px 18px;min-height:130px}
+html .tp-page .tp-card-slide__tag{font-size:calc(.68 * var(--tp-rem));font-weight:900;color:var(--tp-primary-text);display:block;margin-bottom:6px;letter-spacing:.02em}
+html .tp-page .tp-card-slide__title{font-size:calc(1.05 * var(--tp-rem));font-weight:800;margin:0 0 6px;color:var(--tp-text-strong)}
+html .tp-page .tp-card-slide__desc{margin:0;color:var(--tp-text-2);font-size:calc(.79 * var(--tp-rem));line-height:1.75}
+html .tp-page .tp-card-slide__foot{display:flex;justify-content:space-between;gap:8px;margin-top:14px;color:var(--tp-text-2);font-size:calc(.7 * var(--tp-rem));font-weight:600}
+/* NEWS */
+html .tp-page .tp-news{display:grid;gap:10px}
+html .tp-page .tp-news a{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;
+ padding:14px;background:var(--tp-surface);border:1px solid var(--tp-border);
+ border-radius:var(--tp-r);transition:.16s;box-shadow:var(--tp-g-shadow-sm)}
+html .tp-page .tp-news a:hover{border-color:var(--tp-hover);transform:translateY(-1px)}
+html .tp-page .tp-news .tp-thumb{height:64px;border-radius:10px;background:linear-gradient(135deg,var(--tp-soft),var(--tp-surface-2));
+ display:grid;place-items:center;color:var(--tp-primary-text);font-weight:900;font-size:calc(.68 * var(--tp-rem));letter-spacing:.14em}
+html .tp-page .tp-news h3{font-size:calc(.98 * var(--tp-rem));margin:0;color:var(--tp-text-strong);font-weight:800}
+html .tp-page .tp-news time{display:block;color:var(--tp-text-2);font-size:calc(.73 * var(--tp-rem));margin-top:4px}
+html .tp-page .tp-news p{margin:4px 0 0;color:var(--tp-text-2);font-size:calc(.82 * var(--tp-rem));line-height:1.7}
+html .tp-page .tp-news-more{margin-top:14px;display:flex;justify-content:center}
+html .tp-page .tp-news-more a{display:inline-flex;align-items:center;gap:8px;
+ padding:11px 22px;background:var(--tp-hover);color:var(--tp-on-hover);border-radius:999px;
+ font-size:calc(.84 * var(--tp-rem));font-weight:800;transition:.18s;
+ box-shadow:0 8px 20px -8px rgba(14,111,106,.5)}
+html .tp-page .tp-news-more a:hover{background:var(--tp-brand-2);transform:translateY(-1px);
+ box-shadow:0 12px 24px -8px rgba(14,111,106,.6)}
+html .tp-page .tp-news-more a svg{width:14px;height:14px}
+@media(max-width:720px){
+html .tp-page .tp-news a{grid-template-columns:72px 1fr;gap:12px;padding:12px}
+html .tp-page .tp-news .tp-thumb{height:56px;font-size:calc(.6 * var(--tp-rem))}
+html .tp-page .tp-news h3{font-size:calc(.9 * var(--tp-rem))}
+html .tp-page .tp-news p{font-size:calc(.78 * var(--tp-rem))}
+html .tp-page .tp-news-more a{font-size:calc(.78 * var(--tp-rem));padding:10px 18px}
+}
+/* FAQ */
+html .tp-page .tp-faq details{background:var(--tp-surface);border:1px solid var(--tp-border);border-radius:var(--tp-r);
+ padding:16px 18px;margin-bottom:10px;transition:.16s}
+html .tp-page .tp-faq details[open]{box-shadow:var(--tp-g-shadow-sm);border-color:var(--tp-border-2)}
+html .tp-page .tp-faq summary{cursor:pointer;font-weight:800;font-size:calc(.98 * var(--tp-rem));color:var(--tp-text-strong);
+ list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+html .tp-page .tp-faq summary::-webkit-details-marker{display:none}
+html .tp-page .tp-faq summary::after{content:"+";color:var(--tp-primary-text);font-size:calc(1.3 * var(--tp-rem));font-weight:400;line-height:1;transition:.2s}
+html .tp-page .tp-faq details[open] summary::after{transform:rotate(45deg)}
+html .tp-page .tp-faq p{color:var(--tp-text-2);font-size:calc(.9 * var(--tp-rem));margin:12px 0 0}
+@media(max-width:720px){
+html .tp-page .tp-faq details{padding:14px 15px;margin-bottom:8px}
+html .tp-page .tp-faq summary{font-size:calc(.92 * var(--tp-rem))}
+html .tp-page .tp-faq p{font-size:calc(.85 * var(--tp-rem))}
+}
+/* REVIEWS */
+html .tp-page .tp-rate{background:var(--tp-surface);border:1px solid var(--tp-border);border-radius:var(--tp-r-lg);
+ padding:22px 24px;box-shadow:var(--tp-g-shadow-sm)}
+html .tp-page .tp-rate__top{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+html .tp-page .tp-rate__score{font-size:calc(2.6 * var(--tp-rem));font-weight:900;line-height:1;color:var(--tp-text-strong);letter-spacing:-.04em}
+html .tp-page .tp-rate__stars{color:var(--tp-accent-text);font-size:calc(1 * var(--tp-rem));letter-spacing:.12em}
+html .tp-page .tp-rate__count{color:var(--tp-text-2);font-size:calc(.76 * var(--tp-rem));margin-top:4px}
+html .tp-page .tp-rate__bars{flex:1;min-width:200px;display:grid;gap:5px}
+html .tp-page .tp-bar{display:grid;grid-template-columns:18px 1fr 34px;gap:10px;align-items:center;font-size:calc(.74 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-bar i{display:block;height:7px;border-radius:99px;background:var(--tp-surface-2);position:relative;overflow:hidden}
+html .tp-page .tp-bar i::after{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:var(--tp-w);background:var(--tp-accent-strong);border-radius:99px}
+html .tp-page .tp-rate__list{margin-top:18px;border-top:1px solid var(--tp-border-2);padding-top:4px}
+html .tp-page .tp-cmt{padding:14px 0;border-bottom:1px solid var(--tp-border-2);font-size:calc(.86 * var(--tp-rem))}
+html .tp-page .tp-cmt:last-child{border-bottom:0}
+html .tp-page .tp-cmt b{font-size:calc(.9 * var(--tp-rem));color:var(--tp-text-strong)}
+html .tp-page .tp-cmt .tp-rate__stars{font-size:calc(.82 * var(--tp-rem));margin-inline-start:8px}
+html .tp-page .tp-cmt p{margin:5px 0 0;color:var(--tp-text-2);font-size:calc(.86 * var(--tp-rem));line-height:1.75}
+@media(max-width:720px){
+html .tp-page .tp-rate{padding:18px 16px}
+html .tp-page .tp-rate__top{gap:16px}
+html .tp-page .tp-rate__score{font-size:calc(2.1 * var(--tp-rem))}
+html .tp-page .tp-rate__stars{font-size:calc(.9 * var(--tp-rem))}
+html .tp-page .tp-rate__count{font-size:calc(.7 * var(--tp-rem))}
+html .tp-page .tp-rate__bars{min-width:100%}
+html .tp-page .tp-bar{grid-template-columns:16px 1fr 30px;gap:8px;font-size:calc(.7 * var(--tp-rem))}
+html .tp-page .tp-cmt{font-size:calc(.82 * var(--tp-rem));padding:12px 0}
+html .tp-page .tp-cmt b{font-size:calc(.85 * var(--tp-rem))}
+html .tp-page .tp-cmt p{font-size:calc(.8 * var(--tp-rem))}
+}
+/* LEFT RAIL */
+html .tp-page .tp-rail{display:grid;gap:16px;position:sticky;top:calc(var(--tp-header-h) + 56px);align-self:start}
+@media(max-width:1100px){
+html .tp-page .tp-rail{position:static;grid-template-columns:1fr 1fr;gap:14px}
+}
+@media(max-width:720px){
+html .tp-page .tp-rail{grid-template-columns:1fr;gap:14px}
+}
+html .tp-page .tp-rail-card{background:var(--tp-surface);border:1px solid var(--tp-border);border-radius:var(--tp-r-lg);
+ overflow:hidden;box-shadow:var(--tp-g-shadow-sm)}
+html .tp-page .tp-rail-card__head{display:flex;justify-content:space-between;align-items:center;
+ padding:15px 18px 12px;border-bottom:1px solid var(--tp-border-2)}
+html .tp-page .tp-rail-card__head h3{margin:0;font-size:calc(.92 * var(--tp-rem));letter-spacing:-.02em}
+html .tp-page .tp-rail-card__head .tp-k{font-size:calc(.62 * var(--tp-rem));font-weight:900;letter-spacing:.16em;color:var(--tp-primary-text)}
+html .tp-page .tp-rail-card__body{padding:16px 18px 18px}
+html .tp-page .tp-map-svg{display:block;width:100%;height:230px;background:var(--tp-surface-2);color:var(--tp-primary-text)}
+html[data-tp-mode="dark"] .tp-page .tp-map-svg{color:var(--tp-brand-2)}
+html .tp-page .tp-map-pin{position:absolute;top:48%;inset-inline-start:48%;width:22px;height:22px;border-radius:50%;
+ background:var(--tp-hover);border:4px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.28);cursor:pointer;
+ transform:translate(-50%,-50%);z-index:3}
+html .tp-page .tp-map-pop{position:absolute;top:20%;inset-inline-start:14%;background:var(--tp-surface);
+ border:1px solid var(--tp-border);padding:10px 13px;border-radius:12px;box-shadow:var(--tp-g-shadow);
+ font-size:calc(.75 * var(--tp-rem));white-space:nowrap;z-index:2}
+html .tp-page .tp-map-pop b{display:block;font-size:calc(.84 * var(--tp-rem));color:var(--tp-text-strong)}
+html .tp-page .tp-map-pop span{color:var(--tp-text-2)}
+html .tp-page .tp-map-inner{position:relative}
+html .tp-page .tp-map-coord{padding:14px 18px;font-family:ui-monospace,monospace;font-size:calc(.92 * var(--tp-rem));
+ color:var(--tp-text-strong);direction:ltr;text-align:left;border-top:1px solid var(--tp-border-2);
+ display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:900;
+ letter-spacing:.02em}
+html .tp-page .tp-map-coord .tp-lbl{font-family:"Peyda",Vazirmatn,sans-serif;direction:rtl;color:var(--tp-text-2);font-size:calc(.72 * var(--tp-rem));font-weight:600;letter-spacing:0}
+html .tp-page .tp-map-btn{display:block;width:100%;border:0;background:var(--tp-hover);color:var(--tp-on-hover);
+ padding:12px;font-size:calc(.84 * var(--tp-rem));font-weight:800;cursor:pointer;transition:.16s;letter-spacing:.02em}
+html .tp-page .tp-map-btn:hover{background:var(--tp-brand-2)}
+/* GEO */
+html .tp-page .tp-geo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+html .tp-page .tp-geo-grid .tp-fact{padding:11px 12px;background:var(--tp-surface-2);border-radius:14px}
+html .tp-page .tp-geo-grid .tp-fact.tp-wide{grid-column:span 2}
+html .tp-page .tp-geo-grid .tp-fact span{display:block;color:var(--tp-text);font-size:calc(.66 * var(--tp-rem));font-weight:600}
+html .tp-page .tp-geo-grid .tp-fact b{display:block;font-size:calc(.84 * var(--tp-rem));color:var(--tp-text-strong);margin-top:2px;font-weight:800}
+html .tp-page .tp-practical-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+html .tp-page .tp-practical-grid a{display:flex;justify-content:space-between;align-items:center;gap:8px;
+ padding:9px 11px;background:var(--tp-surface-2);border-radius:12px;
+ font-size:calc(.76 * var(--tp-rem));font-weight:600;transition:.16s;color:var(--tp-text)}
+html .tp-page .tp-practical-grid a:hover{background:var(--tp-soft);color:var(--tp-primary-text)}
+html .tp-page .tp-practical-grid a span{color:var(--tp-text);font-size:calc(.72 * var(--tp-rem))}
+/* NEIGHBORS */
+html .tp-page .tp-neighbors{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+html .tp-page .tp-neighbors a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+ padding:10px 6px;background:var(--tp-surface-2);
+ border-radius:11px;font-weight:700;transition:.16s;color:var(--tp-text);text-align:center}
+html .tp-page .tp-neighbors .tp-n-dir{font-size:calc(.6 * var(--tp-rem));color:var(--tp-text);font-weight:700;letter-spacing:.02em;line-height:1.2}
+html .tp-page .tp-neighbors a b{font-size:calc(.78 * var(--tp-rem));font-weight:800;color:inherit;line-height:1.3}
+html .tp-page .tp-neighbors a:hover{background:var(--tp-hover);color:var(--tp-on-hover)}
+html .tp-page .tp-neighbors a:hover .tp-n-dir{color:var(--tp-on-hover)}
+html .tp-page .tp-routes{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+html .tp-page .tp-routes a{display:flex;flex-direction:column;gap:4px;padding:12px 13px;
+ background:var(--tp-surface-2);border-radius:13px;transition:.16s}
+html .tp-page .tp-routes a:hover{background:var(--tp-hover);color:var(--tp-on-hover)}
+html .tp-page .tp-routes a b{font-size:calc(.82 * var(--tp-rem));font-weight:800;color:inherit}
+html .tp-page .tp-routes a span{font-size:calc(.68 * var(--tp-rem));color:var(--tp-text)}
+html .tp-page .tp-routes a:hover span{color:var(--tp-on-hover)}
+html .tp-page .tp-sources-rail{font-size:calc(.76 * var(--tp-rem));color:var(--tp-text-2);line-height:1.85}
+html .tp-page .tp-sources-rail ol{margin:0 0 12px;padding-inline-start:1.1em;display:grid;gap:5px;list-style-type:persian}
+html .tp-page .tp-verified{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;
+ background:color-mix(in srgb,var(--tp-ok) 12%,transparent);
+ border:1px solid color-mix(in srgb,var(--tp-ok) 30%,transparent);
+ border-radius:999px;font-size:calc(.72 * var(--tp-rem));font-weight:700;color:var(--tp-success-text)}
+/* MAP MODAL */
+html .tp-page .tp-modal{position:fixed;inset:0;background:rgba(6,12,11,.68);backdrop-filter:blur(4px);
+ display:none;align-items:center;justify-content:center;padding:20px;z-index:500}
+html .tp-page .tp-modal.tp-show{display:flex;animation:fadeIn .18s ease}
+html .tp-page .tp-modal__card{width:min(960px,100%);background:var(--tp-surface);border:1px solid var(--tp-border);
+ border-radius:var(--tp-r-lg);overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.4)}
+html .tp-page .tp-modal__head{display:flex;justify-content:space-between;align-items:center;
+ padding:16px 20px;border-bottom:1px solid var(--tp-border)}
+html .tp-page .tp-modal__head h3{margin:0;font-size:calc(1 * var(--tp-rem))}
+html .tp-page .tp-modal__close{width:38px;height:38px;border:1px solid var(--tp-border);background:var(--tp-surface);
+ border-radius:50%;cursor:pointer;color:var(--tp-text);font-size:calc(1.1 * var(--tp-rem));line-height:1}
+html .tp-page .tp-modal__close:hover{background:var(--tp-surface-2)}
+html .tp-page .tp-modal__map{position:relative;height:480px;background:var(--tp-surface-2);color:var(--tp-primary-text)}
+html .tp-page .tp-modal__map svg{width:100%;height:100%;display:block}
+html .tp-page .tp-modal__pin{position:absolute;top:50%;inset-inline-start:50%;width:26px;height:26px;
+ background:var(--tp-hover);border:5px solid #fff;border-radius:50%;
+ box-shadow:0 8px 26px rgba(0,0,0,.32);transform:translate(-50%,-50%)}
+html .tp-page .tp-modal__meta{padding:14px 20px;font-size:calc(.78 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-modal__meta .tp-lat{font-family:ui-monospace,monospace;direction:ltr;color:var(--tp-text-strong);font-weight:700}
+@media(max-width:720px){
+html .tp-page .tp-modal__map{height:360px}
+}
+/* FOOTER */
+/* MOBILE REORDER */
+@media(max-width:720px){
+html .tp-page .tp-main-col,html .tp-page .tp-rail{display: contents;}
+html .tp-page .tp-content-grid{grid-template-columns: 1fr; gap: 0;}
+html .tp-page .tp-content-grid > .tp-section,html .tp-page .tp-content-grid > .tp-rail-card{margin: 0 0 28px;}
+html .tp-page .tp-content-grid > *:last-child{margin-bottom: 0;}
+html .tp-page #tp-ai{order:1}
+html .tp-page #tp-overview{order:2}
+html .tp-page #tp-gallery{order:3}
+html .tp-page #tp-attractions{order:4}
+html .tp-page #tp-places{order:5}
+html .tp-page #tp-culture{order:6}
+html .tp-page #tp-news{order:7}
+html .tp-page #tp-map{order:8}
+html .tp-page #tp-geo{order:9}
+html .tp-page #tp-practical{order:10}
+html .tp-page #tp-neighbors{order:11}
+html .tp-page #tp-routes{order:12}
+html .tp-page #tp-faq{order:13}
+html .tp-page #tp-reviews{order:14}
+html .tp-page #tp-sources{order:15}
+html .tp-page #tp-faq{margin-top: 24px;}
+}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+html .tp-page *,html .tp-page *::before,html .tp-page *::after{transition-duration:.001ms !important;animation-duration:.001ms !important}
+html .tp-page .tp-card-slide:hover,html .tp-page .tp-news a:hover,html .tp-page .tp-culture-card:hover,html .tp-page .tp-gallery-main__item:hover,html .tp-page .tp-culture-card__list a:hover{transform:none}
+}
+/* ── افزوده‌های ToPersia ── */
+html .tp-page .tp-stat__k{display:block;font-size:calc(.8 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-stat__v{font-size:calc(1.25 * var(--tp-rem));font-weight:800}
+html .tp-page .tp-stat__v .tp-u,html .tp-page .tp-fact b .tp-u{font-style:normal;font-weight:400;font-size:.72em;color:var(--tp-text-2);margin-inline-start:calc(.2 * var(--tp-rem))}
+html .tp-page .tp-lat{font-family:ui-monospace,monospace;direction:ltr;unicode-bidi:isolate}
+html .tp-page .tp-badges{display:flex;flex-wrap:wrap;gap:calc(.4 * var(--tp-rem))}
+html .tp-page .tp-badge{display:inline-flex;align-items:center;gap:calc(.3 * var(--tp-rem));font-size:calc(.78 * var(--tp-rem));font-weight:700;
+ padding:calc(.2 * var(--tp-rem)) calc(.65 * var(--tp-rem));border-radius:999px;border:1.5px solid var(--tp-ok);color:var(--tp-success-text)}
+html .tp-page .tp-badge span{font-weight:400;opacity:.85}
+html .tp-page .tp-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+html .tp-page .tp-grid a{display:block;padding:calc(.45 * var(--tp-rem)) calc(.6 * var(--tp-rem));border:1px solid var(--tp-border);border-radius:12px;
+ background:var(--tp-bg);color:var(--tp-text);text-decoration:none;line-height:1.5}
+html .tp-page .tp-grid a:hover{background:var(--tp-soft);color:var(--tp-primary-text);border-color:var(--tp-hover)}
+html .tp-page .tp-kind{display:block;font-size:calc(.7 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-grid b{font-size:calc(.88 * var(--tp-rem))}
+/* جدول فصل‌ها — رنگ هر ستون از پالت پروژه */
+html .tp-page .tp-seasons{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+html .tp-page .tp-season{border:1px solid var(--tp-border);border-radius:12px;overflow:hidden;background:var(--tp-bg)}
+html .tp-page .tp-season--spring{--tp-s:var(--tp-s-spring);--tp-s-soft:var(--tp-s-spring-soft)}
+html .tp-page .tp-season--summer{--tp-s:var(--tp-s-summer);--tp-s-soft:var(--tp-s-summer-soft)}
+html .tp-page .tp-season--autumn{--tp-s:var(--tp-s-autumn);--tp-s-soft:var(--tp-s-autumn-soft)}
+html .tp-page .tp-season--winter{--tp-s:var(--tp-s-winter);--tp-s-soft:var(--tp-s-winter-soft)}
+html .tp-page .tp-season.tp-has-on{border-color:var(--tp-s)}
+html .tp-page .tp-season__h{font-size:calc(.72 * var(--tp-rem));font-weight:800;text-align:center;padding:calc(.3 * var(--tp-rem)) 0;
+ background:var(--tp-s-soft);color:var(--tp-s-text);border-block-end:1px solid var(--tp-border)}
+html .tp-page .tp-season.tp-has-on .tp-season__h{background:var(--tp-s);color:#fff}
+html .tp-page .tp-month{font-size:calc(.68 * var(--tp-rem));text-align:center;padding:calc(.32 * var(--tp-rem)) 0;color:var(--tp-text-2);
+ border-block-start:1px solid var(--tp-border)}
+html .tp-page .tp-month:first-of-type{border-block-start:0}
+html .tp-page .tp-month.tp-is-on{background:var(--tp-s-soft);color:var(--tp-s-text);font-weight:700}
+html[data-tp-mode="dark"] .tp-page .tp-season.tp-has-on .tp-season__h{color:var(--tp-bg)}
+html .tp-page .tp-seasons__cap{margin:calc(.6 * var(--tp-rem)) 0 0;font-size:calc(.82 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-more-rest{font:inherit;font-size:calc(.82 * var(--tp-rem));font-weight:700;color:var(--tp-primary-text);cursor:pointer;
+ background:transparent;border:1px solid var(--tp-border);border-radius:10px;
+ padding:calc(.35 * var(--tp-rem)) calc(.8 * var(--tp-rem));margin-block-start:calc(.6 * var(--tp-rem));display:inline-block}
+html .tp-page .tp-more-rest:hover{background:var(--tp-soft);border-color:var(--tp-hover)}
+/* ── نوار کنش ── */
+html .tp-page .tp-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+html .tp-page .tp-act{display:grid;justify-items:center;gap:calc(.25 * var(--tp-rem));padding:calc(.55 * var(--tp-rem)) calc(.3 * var(--tp-rem));border-radius:12px;
+ border:1px solid var(--tp-border);background:var(--tp-bg);color:var(--tp-text);cursor:pointer;
+ font:inherit;font-size:calc(.76 * var(--tp-rem));font-weight:600;text-decoration:none}
+html .tp-page .tp-act svg{inline-size:19px;block-size:19px}
+html .tp-page .tp-act:hover{border-color:var(--tp-hover);color:var(--tp-primary-text);background:var(--tp-soft)}
+html .tp-page .tp-act.tp-is-on{background:var(--tp-hover);border-color:var(--tp-hover);color:var(--tp-on-hover)}
+html .tp-page .tp-act__note{margin:calc(.5 * var(--tp-rem)) 0 0;font-size:calc(.78 * var(--tp-rem));color:var(--tp-primary-text);min-block-size:1.2em}
+/* ── هوا ── */
+html .tp-page .tp-wx{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+html .tp-page .tp-wx__day{display:grid;justify-items:center;gap:calc(.15 * var(--tp-rem));padding:calc(.6 * var(--tp-rem)) calc(.3 * var(--tp-rem));border-radius:12px;
+ border:1px solid var(--tp-border);background:var(--tp-bg);font-size:calc(.72 * var(--tp-rem))}
+html .tp-page .tp-wx__day.tp-is-load{block-size:104px;background:var(--tp-surface);border-style:dashed}
+html .tp-page .tp-wx__day svg{inline-size:26px;block-size:26px;color:var(--tp-accent-text)}
+html .tp-page .tp-wx__d{color:var(--tp-text-2);font-weight:600}
+html .tp-page .tp-wx__day b{font-size:calc(1.05 * var(--tp-rem))}
+html .tp-page .tp-wx__n{color:var(--tp-text-2)}
+html .tp-page .tp-wx__s{color:var(--tp-text-2);font-size:calc(.68 * var(--tp-rem))}
+html .tp-page .tp-wx__src{margin:calc(.5 * var(--tp-rem)) 0 0;font-size:calc(.74 * var(--tp-rem));color:var(--tp-text-2)}
+/* ── متاهای افزوده ── */
+html .tp-page .tp-altnames{margin:calc(.3 * var(--tp-rem)) 0 0;font-size:calc(.85 * var(--tp-rem));color:var(--tp-text-2)}
+html .tp-page .tp-audio{display:grid;gap:5px}
+html .tp-page .tp-audio a{display:grid;grid-template-columns:auto 1fr auto;gap:calc(.5 * var(--tp-rem));align-items:center;
+ padding:calc(.45 * var(--tp-rem)) calc(.6 * var(--tp-rem));border:1px solid var(--tp-border);border-radius:12px;background:var(--tp-bg);
+ color:var(--tp-text);text-decoration:none;font-size:calc(.84 * var(--tp-rem))}
+html .tp-page .tp-audio a:hover{border-color:var(--tp-hover);color:var(--tp-primary-text)}
+html .tp-page .tp-audio svg{inline-size:16px;block-size:16px;color:var(--tp-primary-text)}
+html .tp-page .tp-audio span{color:var(--tp-text-2);font-size:calc(.76 * var(--tp-rem))}
+html .tp-page .tp-uid{margin-block-start:calc(.7 * var(--tp-rem));display:grid;gap:calc(.35 * var(--tp-rem));font-size:calc(.78 * var(--tp-rem))}
+html .tp-page .tp-uid div{display:flex;justify-content:space-between;gap:calc(.6 * var(--tp-rem));
+ padding-block:calc(.3 * var(--tp-rem));border-block-start:1px solid var(--tp-border)}
+html .tp-page .tp-uid span{color:var(--tp-text-2)}
+/* ══ موبایل: ترتیب بر پایۀ اهمیت ══════════════════════════════════
+   main-col و rail به display:contents می‌روند تا همۀ بخش‌ها هم‌سطح
+   شوند و بشود با order مرتبشان کرد. سه بخش پایانی عمداً آخرند:
+   پرسش‌ها و نظرها و منابع، چیزهایی‌اند که بعد از تصمیم خوانده می‌شوند. */
+@media(max-width:720px){
+html .tp-page .tp-main-col,html .tp-page .tp-rail{display:contents}
+/* سه بلوک پشت سر هم: اول مطالب، بعد متاها، بعد روابط. */
+/* ۱ — مطالب */
+html .tp-page #tp-ai{order:1}
+html .tp-page #tp-overview{order:2}
+html .tp-page #tp-gallery{order:3}
+html .tp-page #tp-attractions{order:4}
+html .tp-page #tp-places{order:5}
+html .tp-page #tp-culture{order:6}
+html .tp-page #tp-news{order:7}
+html .tp-page #tp-audio{order:8}
+/* ۲ — متاها */
+html .tp-page #tp-map{order:20}
+html .tp-page #tp-weather{order:21}
+html .tp-page #tp-season{order:22}
+html .tp-page #tp-geo{order:23}
+html .tp-page #tp-badges{order:24}
+/* ۳ — روابط */
+html .tp-page #tp-nature{order:40}
+html .tp-page #tp-ancient{order:41}
+html .tp-page #tp-practical{order:42}
+html .tp-page #tp-neighbors{order:43}
+html .tp-page #tp-routes{order:44}
+/* ۴ — همیشه انتها */
+html .tp-page #tp-faq{order:90;margin-top:24px}
+html .tp-page #tp-reviews{order:91}
+html .tp-page #tp-sources{order:92}
+html .tp-page .tp-snav{display:none}
+html .tp-page .tp-mnav{display:block}
+html .tp-page{padding-block-end:64px}
+}
+@media(min-width:721px){
+html .tp-page .tp-mnav{display:none}
+}
+/* نوار پایین موبایل */
+html .tp-page .tp-mnav{position:fixed;inset-inline:0;inset-block-end:0;z-index:70;
+ background:var(--tp-surface);border-block-start:1px solid var(--tp-border);
+ padding:calc(.35 * var(--tp-rem)) calc(.5 * var(--tp-rem)) calc(calc(.35 * var(--tp-rem)) + env(safe-area-inset-bottom))}
+html .tp-page .tp-mnav__row{display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+html .tp-page .tp-mnav button,html .tp-page .tp-mnav a{display:grid;justify-items:center;gap:calc(.1 * var(--tp-rem));padding:calc(.35 * var(--tp-rem)) calc(.2 * var(--tp-rem));
+ border:0;background:transparent;color:var(--tp-text-2);font:inherit;font-size:calc(.66 * var(--tp-rem));
+ font-weight:600;cursor:pointer;border-radius:10px;text-decoration:none}
+html .tp-page .tp-mnav svg{inline-size:20px;block-size:20px}
+html .tp-page .tp-mnav button:hover,html .tp-page .tp-mnav .tp-is-on{color:var(--tp-primary-text);background:var(--tp-soft)}
+html .tp-page .tp-sheet{position:fixed;inset:0;z-index:80;display:none}
+html .tp-page .tp-sheet[open]{display:block}
+html .tp-page .tp-sheet__bd{position:absolute;inset:0;background:rgba(10,14,18,.55)}
+html .tp-page .tp-sheet__p{position:absolute;inset-inline:0;inset-block-end:0;max-block-size:72vh;overflow:auto;
+ background:var(--tp-bg);border-start-start-radius:20px;border-start-end-radius:20px;padding:calc(1 * var(--tp-rem)) calc(1 * var(--tp-rem)) calc(2 * var(--tp-rem))}
+html .tp-page .tp-sheet__p h2{font-size:calc(1 * var(--tp-rem));margin:0 0 calc(.8 * var(--tp-rem))}
+html .tp-page .tp-sheet__p ol{margin:0;padding:0;list-style:none;display:grid;gap:4px;counter-reset:s}
+html .tp-page .tp-sheet__p a{display:flex;gap:calc(.6 * var(--tp-rem));align-items:center;padding:calc(.55 * var(--tp-rem)) calc(.7 * var(--tp-rem));
+ border:1px solid var(--tp-border);border-radius:12px;color:var(--tp-text);text-decoration:none;font-size:calc(.9 * var(--tp-rem))}
+html .tp-page .tp-sheet__p a::before{counter-increment:s;content:counter(s);inline-size:calc(1.4 * var(--tp-rem));block-size:calc(1.4 * var(--tp-rem));
+ display:grid;place-items:center;border-radius:50%;background:var(--tp-soft);
+ color:var(--tp-primary-text);font-size:calc(.7 * var(--tp-rem));font-weight:800}
+/* دکمۀ منبع ترجیحی */
+html .tp-page .tp-gps{margin-block-start:calc(.6 * var(--tp-rem));display:grid;gap:calc(.4 * var(--tp-rem));justify-items:center}
+html .tp-page .tp-gps__fb{font-size:calc(.78 * var(--tp-rem));color:var(--tp-primary-text);font-weight:700;text-align:center}
+/* نوار کنش — بالای مسیر راهنما، افقی */
+html .tp-page .tp-actionbar{margin:0 0 14px}
+html .tp-page .tp-actionbar .tp-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+html .tp-page .tp-actionbar .tp-act{display:inline-flex;flex-direction:row;align-items:center;gap:calc(.45 * var(--tp-rem));
+ padding:calc(.42 * var(--tp-rem)) calc(.9 * var(--tp-rem));border-radius:999px;justify-items:unset}
+html .tp-page .tp-actionbar .tp-gps{margin:0 0 0 auto;display:flex;align-items:center;gap:calc(.5 * var(--tp-rem));justify-items:unset}
+html .tp-page .tp-actionbar .tp-act__note{margin:calc(.45 * var(--tp-rem)) 0 0}
+@media(max-width:720px){
+html .tp-page .tp-actionbar .tp-actions{display:grid;grid-template-columns:repeat(3,1fr)}
+html .tp-page .tp-actionbar .tp-act{flex-direction:column;gap:calc(.2 * var(--tp-rem));padding:calc(.5 * var(--tp-rem)) calc(.3 * var(--tp-rem));border-radius:12px}
+html .tp-page .tp-actionbar .tp-gps{grid-column:1/-1;margin:calc(.5 * var(--tp-rem)) 0 0;justify-content:center}
+}
+html .tp-page .tp-sheet__g{font-size:calc(.74 * var(--tp-rem));font-weight:800;color:var(--tp-text-2);
+ letter-spacing:.06em;margin-block-start:calc(.7 * var(--tp-rem));padding-inline-start:calc(.2 * var(--tp-rem))}
+html .tp-page .tp-sheet__g:first-child{margin-block-start:0}
+/* دکمۀ منبع ترجیحی — یکسان در دسکتاپ و موبایل */
+html .tp-page .tp-gps-btn{display:grid;grid-template-columns:auto 1fr;gap:calc(.15 * var(--tp-rem)) calc(.6 * var(--tp-rem));align-items:center;
+ inline-size:100%;margin-block-start:calc(.6 * var(--tp-rem));padding:calc(.6 * var(--tp-rem)) calc(.9 * var(--tp-rem));cursor:pointer;
+ border:1.5px solid var(--tp-hover);border-radius:14px;background:var(--tp-soft);
+ color:var(--tp-text);font:inherit;text-align:start}
+html .tp-page .tp-gps-btn:hover{background:var(--tp-hover);border-color:var(--tp-hover)}
+html .tp-page .tp-gps-btn:hover .tp-gps-btn__t,html .tp-page .tp-gps-btn:hover .tp-gps-btn__s{color:var(--tp-on-hover)}
+html .tp-page .tp-gps-btn:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
+html .tp-page .tp-g{inline-size:22px;block-size:22px;grid-row:1/3;flex:none}
+html .tp-page .tp-gps-btn__t{font-weight:800;font-size:calc(.88 * var(--tp-rem));line-height:1.5;color:var(--tp-text-strong)}
+html .tp-page .tp-gps-btn__s{font-size:calc(.74 * var(--tp-rem));line-height:1.5;color:var(--tp-text-2)}
+@media(max-width:720px){
+html .tp-page .tp-actionbar .tp-actions{grid-template-columns:repeat(3,1fr)}
+html .tp-page .tp-gps-btn{margin-block-start:calc(.55 * var(--tp-rem))}
+}
+/* حالت کارتی ستون کناری */
+html .tp-page .tp-actionbar--rail{padding:calc(.85 * var(--tp-rem)) calc(1.05 * var(--tp-rem))}
+html .tp-page .tp-actionbar--rail .tp-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+html .tp-page .tp-actionbar--rail .tp-act{flex-direction:column;gap:calc(.25 * var(--tp-rem));padding:calc(.55 * var(--tp-rem)) calc(.3 * var(--tp-rem));border-radius:12px}
+html .tp-page .tp-actionbar--rail .tp-gps-btn{margin-block-start:calc(.6 * var(--tp-rem))}
