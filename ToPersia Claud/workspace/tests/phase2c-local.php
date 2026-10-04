@@ -221,10 +221,10 @@ $stats = function ( $h ) {
 };
 $c_stats = $stats( (string) topersia_g_sc_stats( array( 'id' => $country ) ) );
 $count_cell = topersia_g_stat_cell( $country, 'count:provinces' );
-mut( 'کارت آمار کشور: جمعیت · مساحت · شمار استان‌ها · منطقۀ زمانی — شمار از منتشرشده‌ها (' . topersia_g_fa( count( $prov_publish ) ) . ')؛ جهش: دروازه خاموش',
+mut( 'کارت آمار کشور: جمعیت · مساحت · شمار استان‌ها · زبان رسمی — شمار از منتشرشده‌ها (' . topersia_g_fa( count( $prov_publish ) ) . ')؛ جهش: دروازه خاموش',
 	function ( $cells ) use ( $prov_publish ) {
 		return 4 === count( $cells )
-			&& array( 'جمعیت', 'مساحت', 'شمار استان‌ها', 'منطقۀ زمانی' ) === array_column( $cells, 0 )
+			&& array( 'جمعیت', 'مساحت', 'شمار استان‌ها', 'زبان رسمی' ) === array_column( $cells, 0 )
 			&& topersia_g_fa( count( $prov_publish ) ) === $cells[2][1];
 	},
 	$c_stats, array( $c_stats[0], $c_stats[1], array( 'شمار استان‌ها', topersia_g_fa( $gate_off ) ), $c_stats[3] ),

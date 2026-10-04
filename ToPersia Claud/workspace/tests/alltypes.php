@@ -435,6 +435,58 @@ $renders = 0;
 $sizes   = array();
 $relmap  = topersia_g_relmap();
 
+/*
+ * ۲ج٫۱ · P5-D275 — هر نوع ناحیه‌های استان را با همان ترتیب می‌گیرد.
+ *
+ * ترتیب ستون‌ها از مرجع؛ هم‌جایگاه‌ها: استان‌های کشور، محله‌های شهر و
+ * برنامه‌های نشان جای `#places` و پس از آن، همسایه‌های متنی جای «هم‌مرزها»؛
+ * رابطه‌ای که مرجع نامش را نبرده (گذر مرزی، زیرشاخه، مرکزیت) ته همان ستون.
+ * ناحیۀ ناشناس، ترتیب وارونه، یا بخشی بی هیچ محتوا = ایراد.
+ */
+$TP_ORDER = array(
+	'main' => array( 'tp-ai', 'tp-overview', 'tp-gallery', 'tp-attractions', 'tp-places', 'tp-provinces', 'tp-districts', 'tp-programmes', 'tp-prog-', 'tp-culture', 'tp-news', 'tp-faq', 'tp-reviews' ),
+	'rail' => array( 'tp-actions', 'tp-map', 'tp-season', 'tp-weather', 'tp-audio', 'tp-geo', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-neighbors', 'tp-routes', 'tp-sources', 'tp-border', 'tp-subranges', 'tp-capital-of' ),
+);
+
+function tp_at_order_bad( $html ) {
+
+	$bad = array();
+	$col = array(
+		'main' => preg_match( '~<div class="tp-main-col">(.*?)</div><aside class="tp-rail"~su', (string) $html, $m ) ? $m[1] : '',
+		'rail' => preg_match( '~<aside class="tp-rail"[^>]*>(.*)</aside>~su', (string) $html, $m ) ? $m[1] : '',
+	);
+
+	foreach ( $col as $name => $part ) {
+
+		preg_match_all( '~<section id="(tp-[a-z0-9-]+)"[^>]*>(.*?)</section>~su', $part, $secs, PREG_SET_ORDER );
+
+		$last = -1;
+
+		foreach ( $secs as $s ) {
+
+			$id  = 0 === strpos( $s[1], 'tp-prog-' ) ? 'tp-prog-' : $s[1];
+			$pos = array_search( $id, $GLOBALS['TP_ORDER'][ $name ], true );
+
+			if ( false === $pos ) {
+				$bad[] = $name . ': ناحیۀ ناشناس ' . $s[1];
+				continue;
+			}
+
+			if ( $pos < $last ) {
+				$bad[] = $name . ': ' . $s[1] . ' پیش از جایگاهش';
+			}
+
+			$last = max( $last, $pos );
+
+			if ( '' === trim( wp_strip_all_tags( $s[2] ) ) && ! preg_match( '~<(img|svg|iframe|video|audio|canvas)\b~', $s[2] ) ) {
+				$bad[] = $name . ': ' . $s[1] . ' خالی';
+			}
+		}
+	}
+
+	return $bad;
+}
+
 foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj' ) as $mode ) {
 
 	$mains = tp_at_world( $mode );
@@ -500,6 +552,13 @@ foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj' ) as $mode ) {
 					if ( 0 !== strpos( (string) $html, '<div class="tp-page">' ) ) {
 						tp_at_note( 'Shape', 'صفحه با پوستهٔ .tp-page شروع نشد', '-' );
 					}
+					/* ۲ج٫۱ — ترتیب و بی‌خالیِ ناحیه‌ها؛ در «پر» که بیشترین ناحیه را دارد */
+					if ( 'rich' === $mode ) {
+						foreach ( tp_at_order_bad( $html ) as $why ) {
+							tp_at_note( 'Order', $why, 'P5-D275' );
+						}
+						$GLOBALS['tp_at_orders'][ $type ] = $html;
+					}
 				}
 			} catch ( Throwable $e ) {
 				tp_at_note( get_class( $e ), $e->getMessage(), basename( $e->getFile() ) . ':' . $e->getLine() );
@@ -509,6 +568,17 @@ foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj' ) as $mode ) {
 }
 
 $GLOBALS['tp_at_ctx'] = array( 'mode' => '-', 'type' => '-', 'tag' => 'done' );
+
+/* جهش ادعای ترتیب: صفحۀ استان با ستون اصلیِ وارونه و یک بخش خالی باید ایراد بگیرد */
+$tp_order_real = isset( $GLOBALS['tp_at_orders']['tp_province'] ) ? $GLOBALS['tp_at_orders']['tp_province'] : '';
+$tp_order_mut  = preg_replace_callback( '~(<div class="tp-main-col">)(.*?)(</div><aside class="tp-rail")~su', function ( $m ) {
+	preg_match_all( '~<section id="tp-[a-z0-9-]+".*?</section>~su', $m[2], $s );
+	return $m[1] . implode( '', array_reverse( $s[0] ) ) . $m[3];
+}, $tp_order_real );
+if ( '' === $tp_order_real || tp_at_order_bad( $tp_order_real ) || ! tp_at_order_bad( $tp_order_mut )
+	|| ! tp_at_order_bad( str_replace( '</div><aside class="tp-rail"', '<section id="tp-reviews" class="tp-section"><div> </div></section></div><aside class="tp-rail"', $tp_order_real ) ) ) {
+	tp_at_note( 'Mutant', 'ادعای ترتیب ناحیه‌ها جهش (ستون وارونه · بخش خالی) را نگرفت', 'P5-D275' );
+}
 
 /*
  * حکم.

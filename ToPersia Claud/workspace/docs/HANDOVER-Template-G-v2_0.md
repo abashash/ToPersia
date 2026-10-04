@@ -228,6 +228,80 @@ node tests/user-flows.js     # کاربر آزمون tp_test_430: ذخیره · 
 
 ---
 
+### ۴٫۵٫۰ — فاز ۲ج: یک چیدمان برای همهٔ قالب‌ها · ماتریس «نوع × ناحیه»  (P5-D275)
+
+چیدمان صفحهٔ استان الگوی هر ۴۱ نوع صفحه‌دار است: یک تابع ترتیب (`topersia_g_layout()`)، همان ناحیه‌ها، همان سبک. نوع فقط با سطر خودش در `topersia_g_type_matrix()` از الگو جدا می‌شود — شرط نوع‌محورِ پراکنده در تولیدکننده‌ها نوشته نمی‌شود. ناحیهٔ بی‌داده چیزی برنمی‌گرداند، پس جای خالی نمی‌ماند و ترتیب بقیه دست نمی‌خورد (ادعای ترتیب و بی‌خالی در `alltypes.php`، با جهش). کارت آمار حداکثر چهار خانه، از فهرست اولویت سطر ماتریس: چهار نخستینِ دارای داده؛ کمتر از چهار، شبکه به شمار خانه‌ها (`data-tp-n`). واحد بلند در خانهٔ آمار نماد مرجع است (`km²` · `km` · `°C`)؛ کارت حقایق واحد کامل.
+
+**قالب المنتور:** «ToPersia — G Entity Single» (#1840) فقط سیزده نوع G را شرط نمایش داشت؛ ۲۹ نوع دیگر با تک‌صفحهٔ پیش‌فرض پوسته رندر می‌شدند و `[tp_page]` اصلاً به آن‌ها نمی‌رسید. محلی با `scripts/tp-local-2c.php --apply` (API خودِ المنتور پرو) هر ۴۱ نوع شرط نمایش گرفت؛ روی زنده همین کار با دست — بخش ۷. **کش عنصر المنتور** (`elementor_element_cache_ttl` = ۲۴ ساعت) بدنهٔ `[tp_page]` را یک روز نگه می‌داشت؛ از ۴٫۵٫۰ ویجتی که `[tp_` دارد پویا اعلام می‌شود (`elementor/element/is_dynamic_content`).
+
+**ناحیه‌ها، به ترتیب**
+
+| ستون | ناحیه | منبع |
+|---|---|---|
+| سربرگ | تیتر · نام‌های دیگر · خلاصه · کارت آمار | `name_*` · `official_name_*` · `name_local` · `alternative_names` · `short_summary` · `hero_image` · ماتریس `stats` |
+| اصلی | خلاصهٔ هوشمند `tp-ai` | افزونهٔ هوش مصنوعی |
+| اصلی | درباره `tp-overview` | `overview_text` + ناحیهٔ details + چیپ‌های card |
+| اصلی | گالری `tp-gallery` | `featured_image_gallery` (+ تجمیعی کشور، استان، شهر — ۲ج٫۵) |
+| اصلی | جاذبه‌ها `tp-attractions` | رابطه |
+| اصلی | شهرها `tp-places` · استان‌ها `tp-provinces` · محله‌ها `tp-districts` | رابطه — هم‌جایگاه `#places` |
+| اصلی | یک اسلایدر برای هر برنامهٔ نشان `tp-programmes` · `tp-prog-*` | رکوردهای D + پرس‌وجوهای D1–D6 جت‌انجین — فقط کشور (`on`) |
+| اصلی | فرهنگ و غذا `tp-culture` | رابطه |
+| اصلی | اخبار `tp-news` · پرسش‌ها `tp-faq` · نظرها `tp-reviews` | خبر · `faq_items` · JetReviews خانوادهٔ P5-D234 |
+| کناری | اقدام‌ها · نقشه `tp-map` · زمان سفر `tp-season` · هوا `tp-weather` · روایت‌ها `tp-audio` | user-core · `geo_coordinates` · `best_season` · `geo_coordinates` + REST · `audio_narration` |
+| کناری | حقایق `tp-geo` · نشان‌ها `tp-badges` | FIELDMAP card منهای آمار · FIELDMAP badge (پنج عنوان رسمی، P5-D279) |
+| کناری | طبیعت · باستانی · روستاها | رابطه |
+| کناری | اطلاعات سفر `tp-practical` | رابطه‌ها با ارث‌بری + FIELDMAP travel (راه‌آهن، منطقهٔ آزاد، فرودگاه) — هر نوع |
+| کناری | هم‌مرزها / همسایه‌ها `tp-neighbors` | رابطهٔ ۱۰۲ / FIELDMAP neighbors (`neighboring_countries`، بی پیوند) |
+| کناری | مسیرها `tp-routes` · منابع `tp-sources` | رابطه · `source_references` |
+| کناری، ته ستون | گذرهای مرزی · زیرشاخه‌ها · مرکزیت | رابطه‌هایی که مرجع نامشان را نبرده |
+
+**ماتریس** — ستون «آمار» فهرست اولویت است (چهار نخستینِ دارای داده)؛ «حقایق و بقیه» فیلدهای FIELDMAP همان نوع بیرون از آمار؛ «گستره» برای جعبهٔ مسیریابی فاز ۳ (P5-D253) — از CA-A و CA-G و فهرست ۳٫۲، نهایی در فاز ۳. این جدول از خودِ کد ساخته شد (ماتریس · relmap · FIELDMAP · فیلدهای زندهٔ جت‌انجین).
+
+| نوع | گستره | تفاوت با استان (ماتریس) | آمار سربرگ (به ترتیب) | رابطه‌ها (شناسه) | حقایق و بقیه (FIELDMAP) | نظر (P5-D234) |
+|---|---|---|---|---|---|---|
+| کشور `tp_country` | پهنه | تیتر فقط نام؛ بی tp-weather · tp-routing · tp-aqi؛ با tp-programmes | `population` · `area_km2` · شمار provinces (رابطه) · `official_language` · `calling_code` | capital (95) · provinces (71) · practical (156،159،185،226…) | حقایق: `timezone` `government_type` `internet_tld`؛ درباره: `currency_note`؛ همسایه‌ها: `neighboring_countries` | ندارد |
+| منطقه `tp_region` | پهنه | — | `region_classification` · شمار provinces (رابطه) | provinces (83) | درباره: `geographic_boundary` `climate_overview` `historical_context` | ندارد |
+| استان `tp_province` | پهنه | — | مرکز (رابطه) · `province_code` · `area_km2` · `population` · `climate_type` | capital (96) · places (72→73) · villages (75) · attractions (72→73→84،72→73→86،72→73→88،72→73→93) · nature (77،78،79،80…) · ancient (92) · culture (107،110،113،116…) · practical (157،160،227،229) · neighbors (102،102) · routes (172) | درباره: `geo_boundary` `bordering_countries`؛ سفر: `free_zone` | destination |
+| شهر `tp_city` | نقطه | — | `area_km2` · `population` · `elevation_m` · `founded_year` | capital-of (95،96،97) · districts (74) · villages (98) · attractions (84،86،88،93) · nature (91) · ancient (84،86،88،93…) · culture (108،111،114،117…) · practical (158،230) · border (100) · routes (173) | درباره: `transport_access`؛ سفر: `airport_name` `airport_iata` `railway_station` `free_zone`؛ نشان‌ها: `unesco_creative_city` | destination |
+| محله `tp_district` | نقطه | — | `neighborhood_type` | ancient (144) | — | destination |
+| روستا `tp_village` | نقطه | — | `population` · `elevation_m` | ancient (85،87) · culture (109،112،118،121…) · routes (174) | نشان‌ها: `tourism_target_village` | destination |
+| جزیره `tp_island` | پهنه | — | `island_type` · `area_km2` | routes (175) | درباره: `access_method`؛ سفر: `free_zone` | destination |
+| کوه `tp_mountain` | پهنه | — | `elevation_m` · `mountain_type` · `trekking_difficulty` | subranges (101) | درباره: `provinces_spanning`؛ حقایق: `volcanic`؛ نشان‌ها: `national_monument` | nature |
+| پهنه آبی `tp_water_body` | پهنه | — | `water_body_type` · `area_km2` · `length_km` · `max_depth_m` · `salinity_type` | — | درباره: `geo_boundary` `provinces_spanning`؛ نشان‌ها: `biosphere_reserve` | nature |
+| کویر `tp_desert` | پهنه | — | `desert_type` · `area_km2` · `max_temperature_c` | — | درباره: `geo_boundary` `provinces_spanning`؛ نشان‌ها: `world_heritage` `biosphere_reserve` `national_monument`؛ حقایق: `world_heritage_criteria` | nature |
+| جنگل/دشت `tp_forest_plain` | پهنه | — | `area_type` · `forest_type` · `area_km2` | — | درباره: `geo_boundary` `provinces_spanning`؛ نشان‌ها: `world_heritage` `biosphere_reserve` `national_monument`؛ حقایق: `world_heritage_criteria` | nature |
+| گذرگاه مرزی `tp_border_crossing` | نقطه | — | `crossing_type` · `border_country` · `status` | routes (177) | درباره: `operating_hours` | border |
+| بنای تاریخی `tp_monument` | نقطه | — | `classification` · `construction_year` · `suggested_duration` · `restoration_status` · `architectural_style` | — | نشان‌ها: `world_heritage`؛ حقایق: `world_heritage_criteria` | heritage |
+| مکان مذهبی `tp_religious_site` | نقطه | — | `classification` · `religion` · `suggested_duration` · `photography_policy` | — | نشان‌ها: `world_heritage`؛ حقایق: `world_heritage_criteria` | heritage |
+| محوطه باستانی `tp_ancient_site` | نقطه | — | `excavation_status` · `architectural_style` · `suggested_duration` | — | درباره: `geo_boundary`؛ نشان‌ها: `world_heritage`؛ حقایق: `world_heritage_criteria` | heritage |
+| عارضه طبیعی `tp_natural_feature` | نقطه | — | `classification` · `height_m` · `depth_m` · `length_km` · `area_km2` · `suggested_duration` | — | نشان‌ها: `world_heritage` `national_monument`؛ حقایق: `world_heritage_criteria` | nature |
+| موزه `tp_museum` | نقطه | — | `classification` · `founded_year` · `suggested_duration` | — | — | heritage |
+| پارک ملی `tp_protected_area` | پهنه | — | `park_type` · `area_km2` · `suggested_duration` | — | درباره: `geo_boundary` `provinces_spanning`؛ نشان‌ها: `biosphere_reserve` `world_heritage` `national_monument`؛ حقایق: `world_heritage_criteria` | nature |
+| منظر فرهنگی `tp_landscape` | پهنه | — | `landscape_type` · `total_area_km2` · `suggested_duration` | — | درباره: `geo_boundary` `provinces_spanning`؛ نشان‌ها: `world_heritage`؛ حقایق: `world_heritage_criteria` | heritage |
+| صنایع دستی `tp_handicraft` | — | — | `classification` · `intangible_heritage_year` · `intangible_heritage_status` | — | — | ندارد |
+| غذای محلی `tp_local_food` | — | — | `classification_` | — | — | ندارد |
+| لباس سنتی `tp_costume` | — | — | `classification` | — | — | ندارد |
+| موسیقی محلی `tp_music` | — | — | `classification` | — | — | ندارد |
+| رقص محلی `tp_dance` | — | — | `dance_type` | — | — | ندارد |
+| زبان / گویش `tp_language` | — | — | `language_family` · `script` · `speaker_estimate_iran` · `name_endonym` | — | — | ندارد |
+| قوم / فرهنگ `tp_ethnic_group` | — | — | `population_estimate` | — | — | ندارد |
+| آیین / مراسم سنتی `tp_ritual` | — | — | `classification` · `spatial_scope` · `intangible_heritage_year` · `intangible_heritage_status` | — | — | ندارد |
+| شخصیت تاریخی `tp_figure` | — | — | `classification` · `birth_year_approx` · `death_year_approx` | — | — | ندارد |
+| دوره / سلسلۀ تاریخی `tp_historical_era` | — | — | `start_year_approx` · `end_year_approx` | — | — | ندارد |
+| سلامت و ایمنی `tp_health_safety` | — | — | `emergency_police` · `emergency_ambulance` · `emergency_fire` | — | — | ندارد |
+| فرهنگ سفر و آداب `tp_travel_etiquette` | — | — | — (بی فیلد کوتاه) | — | — | ندارد |
+| تعیین رسمی `tp_designation` | — | — | `programme_start_year` | — | — | ندارد |
+| مسیر گردشگری `tp_route` | — | — | `total_distance_km` · `estimated_duration_days` · `difficulty_level` · `classification` | — | — | ندارد |
+| ویزا و شرایط ورود `tp_visa` | — | — | `max_total_stay_days` · `passport_validity_months` · `free_zone_stay_days` | — | — | ندارد |
+| ارز و روش‌های پرداخت `tp_currency` | — | — | `currency_iso_code` · `currency_symbol` · `international_card_status` · `redenomination_status` | — | — | ندارد |
+| تقویم و مناسبت‌های رسمی `tp_calendar` | — | — | — (بی فیلد کوتاه) | — | — | ندارد |
+| حمل‌ونقل عمومی `tp_transport` | — | — | — (بی فیلد کوتاه) | — | — | ندارد |
+| جشنواره و رویداد `tp_festival` | — | — | `event_frequency` · `venue_name` | — | — | event |
+| رویداد ورزشی `tp_sports_event` | — | — | `sport_type` · `competition_level` · `event_frequency` | — | — | event |
+| مراسم مذهبی عمومی `tp_religious_event` | — | — | `calendar_system` · `ceremony_duration_days` · `crowd_scale` | — | — | event |
+| رویداد طبیعی و فصلی `tp_seasonal_event` | — | — | `natural_phenomenon_type` · `season` · `weather_dependency` | — | — | event |
+| شهرستان `tp_county` | — | صفحه ندارد (P5-D220) | — | — | — | — |
+
 ## ۳ — تصمیم‌های ثبت‌شده
 
 | شناسه | تصمیم | دلیل |

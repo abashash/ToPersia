@@ -3,6 +3,7 @@
  *
  *   node tests/phase2c.js [--only=title,stats,…]
  *
+ *   stats   ۲ج٫۱ — هر نوعِ دارای کارت آمار: هیچ مقدار دو خط نمی‌شود؛ ستون‌ها به شمار خانه‌ها
  *   title   ۲ج٫۴ — تیتر کشور («ایران») در ۱۴۴۰ و ۳۹۰ یک خط
  *
  * «یک خط» با ارتفاع دیدنی سنجیده می‌شود: سطرهای متن با Range (هر سطر یک
@@ -11,8 +12,17 @@
  */
 
 const { chromium, firefox } = require( 'playwright' );
+const { execFileSync } = require( 'child_process' );
+const path = require( 'path' );
 
 const BASE = 'http://topersia.local';
+const PHP  = process.env.TP_PHP || 'C:\\wamp64\\bin\\php\\php8.3.28\\php.exe';
+
+/* نشانیِ هر نوع با کارت آمار — از وردپرس محلی (tests/phase2c-urls.php) */
+const STAT_PAGES = ( () => {
+	try { return JSON.parse( execFileSync( PHP, [ path.join( __dirname, 'phase2c-urls.php' ) ], { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'ignore' ] } ) ); }
+	catch ( e ) { return {}; }
+} )();
 const ONLY = ( ( process.argv.find( a => a.startsWith( '--only=' ) ) || '' ).slice( 7 ) ).split( ',' ).filter( Boolean );
 const want = k => ! ONLY.length || ONLY.includes( k );
 
@@ -32,14 +42,21 @@ async function open( browser, path, width ) {
 }
 
 /* شمار سطرِ دیدنیِ متن هر عنصر — مستطیل‌های Range با `top` متمایز (±۲). */
+/* شمار سطرِ دیدنیِ متن هر عنصر: مستطیل‌های سطرِ گره‌های متنی، خوشه به مرکز عمودی
+   (بازۀ نیم‌ارتفاع سطر) — جعبۀ عنصر و جعبۀ متنِ یک سطر دو سطر شمرده نمی‌شوند. */
 const LINES = `( el => {
-	const r = document.createRange(); r.selectNodeContents( el );
-	const tops = [];
-	for ( const b of r.getClientRects() ) {
-		if ( b.width < 1 ) continue;
-		if ( ! tops.some( t => Math.abs( t - b.top ) < 2 ) ) tops.push( b.top );
+	const mids = [];
+	const walk = document.createTreeWalker( el, NodeFilter.SHOW_TEXT );
+	for ( let n = walk.nextNode(); n; n = walk.nextNode() ) {
+		if ( ! n.textContent.trim() ) continue;
+		const r = document.createRange(); r.selectNodeContents( n );
+		for ( const b of r.getClientRects() ) {
+			if ( b.width < 1 || b.height < 1 ) continue;
+			const m = b.top + b.height / 2;
+			if ( ! mids.some( x => Math.abs( x - m ) < b.height / 2 ) ) mids.push( m );
+		}
 	}
-	return tops.length;
+	return mids.length;
 } )`;
 
 ( async () => {
@@ -47,6 +64,26 @@ const LINES = `( el => {
 
 		const browser = await engine.launch();
 		console.log( '\n' + bname + '\n' + '─'.repeat( 78 ) );
+
+		/* ۲ج٫۱ — هیچ مقدار کارت آمار در ۱۴۴۰ و ۳۹۰ دو خط نمی‌شود؛ هر نوعی که کارت آمار دارد  P5-D282 */
+		if ( want( 'stats' ) ) {
+			for ( const [ type, { url, cells } ] of Object.entries( STAT_PAGES ) ) {
+				for ( const width of [ 1440, 390 ] ) {
+					const { ctx, page } = await open( browser, url, width );
+					const got = await page.$$eval( '.tp-stats .tp-stat', ( els, lines ) => els.map( el => {
+						const v = el.querySelector( '.tp-stat__v' );
+						const b = el.getBoundingClientRect();
+						return { v: v.textContent.trim(), lines: eval( lines )( v ), w: Math.round( b.width ) };
+					} ), LINES );
+					const wrap = got.filter( c => c.lines !== 1 );
+					const grid = await page.evaluate( () => { const el = document.querySelector( '.tp-stats' ); return el ? { n: el.getAttribute( 'data-tp-n' ), cols: getComputedStyle( el ).gridTemplateColumns.split( ' ' ).length } : { n: null, cols: 0 }; } );
+					const fit  = width > 900 ? grid.cols === got.length : grid.cols <= 2;
+					check( `۲ج٫۱ ${ type } ${ width }: ${ got.length } خانۀ آمار، هر مقدار یک خط؛ ستون‌ها به شمار خانه‌ها  P5-D282 · P5-D275`,
+						got.length === cells && ! wrap.length && fit, JSON.stringify( { wrap, grid } ) );
+					await ctx.close();
+				}
+			}
+		}
 
 		if ( want( 'title' ) ) {
 			for ( const width of [ 1440, 390 ] ) {

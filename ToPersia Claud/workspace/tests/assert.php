@@ -36,7 +36,8 @@ echo "\nقواعد رندر\n" . str_repeat( '─', 78 ) . "\n";
 
 /* عدد */
 t( 'عدد: رقم فارسی + جداکنندهٔ ٬', false !== strpos( r( 20, 'tp_stats' ), '۵٬۱۲۰٬۸۵۰' ) );
-t( 'عدد: واحد از نقشه می‌آید، نه از عنوان JetEngine', false !== strpos( r( 20, 'tp_stats' ), 'کیلومتر مربع' ) );
+/* ۲ج٫۱: خانۀ آمار نماد مرجع را می‌گیرد («۱۰۷٬۰۱۸ km²»)، کارت حقایق و چیپ‌ها واحد کامل — هر دو از نقشه */
+t( 'عدد: واحد از نقشه می‌آید، نه از عنوان JetEngine — آمار با نماد مرجع km²، حقایق با واحد کامل  P5-D282', false !== strpos( r( 20, 'tp_stats' ), '<i class="tp-u">km²</i>' ) && false === strpos( r( 20, 'tp_stats' ), 'کیلومتر مربع' ) && false !== strpos( topersia_g_value( 'area_km2', '107018' ), 'کیلومتر مربع' ) );
 t( 'عدد اعشاری: بخش اعشار جدا نمی‌شود', false !== strpos( r( 40, 'tp_stats' ), '۷۰.۷' ) );
 
 /* سال */
@@ -117,11 +118,27 @@ t( 'صفحه: کویر بدون رابطه، نوار بخش کوتاه‌تری
 t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', false !== strpos( $page, 'tp-hero' ) && false !== strpos( $page, 'tp-stats' ) );
 
 /* پوشش نقشه */
-$map_count = count( topersia_g_map() );
-t( 'نقشه: دقیقاً ۵۷ فیلد', 57 === $map_count, "شمار: {$map_count}" );
+/* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است */
+$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone']; } );
+$map_count = count( $g_map );
+t( 'نقشه: دقیقاً ۵۷ فیلد G (بیرون از ناحیۀ stat)', 57 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
-foreach ( topersia_g_map() as $f ) { if ( 'choice' === $f['kind'] ) { $choice ++; } }
-t( 'نقشه: سیزده فیلد choice', 13 === $choice, "شمار: {$choice}" );
+foreach ( $g_map as $f ) { if ( 'choice' === $f['kind'] ) { $choice ++; } }
+t( 'نقشه: سیزده فیلد choice در G', 13 === $choice, "شمار: {$choice}" );
+
+/* ماتریس نوع × ناحیه — هر کلید آمار یا ویژه است (capital · count:) یا فیلد نقشه؛ choice واژه‌نامۀ همان نوع را دارد  P5-D275 */
+$mx_bad = array();
+foreach ( topersia_g_type_matrix() as $mx_type => $mx_row ) {
+	foreach ( isset( $mx_row['stats'] ) ? $mx_row['stats'] : array() as $mx_key ) {
+		if ( 'capital' === $mx_key || 0 === strpos( $mx_key, 'count:' ) ) { continue; }
+		$mx_f = isset( topersia_g_map()[ $mx_key ] ) ? topersia_g_map()[ $mx_key ] : null;
+		if ( ! $mx_f ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' نیست'; continue; }
+		if ( 'flag' === $mx_f['kind'] ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' پرچم است'; }
+		if ( 'choice' === $mx_f['kind'] && ( empty( $mx_f['glossary'] ) || ( is_array( $mx_f['glossary'] ) && empty( $mx_f['glossary'][ $mx_type ] ) ) ) ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' بی واژه‌نامه'; }
+	}
+}
+t( 'ماتریس: هر کلید آمارِ هر نوع فیلد نقشه است، نه پرچم، و choice واژه‌نامۀ همان نوع را دارد  P5-D275 · P5-D282',
+	count( topersia_g_type_matrix() ) >= 41 && ! $mx_bad, implode( ' · ', $mx_bad ) );
 
 /* نقشهٔ رابطه — گام ۱ · تولیدشده با scripts/tp-relmap-gen.php از Jetengine_Skin.json */
 $relmap = topersia_g_relmap();
