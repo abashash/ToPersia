@@ -1533,7 +1533,7 @@ t( 'گالری: سطر دوم کاشی فقط توضیحِ پیوست است —
 $solo = preg_match( '#<div class="tp-gallery-modal tp-gallery-modal--solo" id="tpGallerySolo".*?</figure></div>#su', $p20, $sm8 ) ? $sm8[0] : '';
 
 t( 'تمام‌صفحه: «قبلی» سپس «بعدی» در DOM؛ راست‌به‌چپ بعدی «‹» و قبلی «›»، هر نویسه در dir=ltr؛ زیرنویس زیر عکس  P5-D243 · بند ۸',
-	false !== strpos( $solo, '<img class="tp-solo__img" alt="" decoding="async" width="1600" height="1067">'
+	false !== strpos( $solo, '<img class="tp-solo__img" alt="" decoding="async" draggable="false" width="1600" height="1067">'
 		. '<button class="tp-solo__nav tp-solo__nav--prev" type="button" data-tp-shot-prev aria-label="قبلی"><span dir="ltr">›</span></button>'
 		. '<button class="tp-solo__nav tp-solo__nav--next" type="button" data-tp-shot-next aria-label="بعدی"><span dir="ltr">‹</span></button>' )
 	&& false !== strpos( $solo, '<figcaption class="tp-solo__cap"><b data-tp-solo-title></b><span data-tp-solo-caption></span></figcaption>' )

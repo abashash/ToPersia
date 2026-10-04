@@ -2913,8 +2913,9 @@ if ( ! function_exists( 'topersia_g_slider_section' ) ) {
 
 			if ( ! empty( $item['img'] ) && function_exists( 'wp_get_attachment_image' ) ) {
 				$art = (string) wp_get_attachment_image( $item['img'], 'medium_large', false, array(
-					'class'    => 'tp-card-slide__img',
-					'alt'      => '',
+					'class'     => 'tp-card-slide__img',
+					'alt'       => '',
+					'draggable' => 'false',   /* کشیدن با موس — P5-D277 */
 					'loading'  => 'lazy',
 					'decoding' => 'async',
 					'sizes'    => '(max-width: 720px) 82vw, 300px',
@@ -2951,7 +2952,8 @@ if ( ! function_exists( 'topersia_g_slider_section' ) ) {
 /** برنامه‌ای با بیش از این شمار عضو مودال نمی‌گیرد؛ فقط شمار و پیوند به صفحۀ خودش.  P5-D276 */
 if ( ! function_exists( 'topersia_g_programme_list_max' ) ) {
 	function topersia_g_programme_list_max() {
-		return 100;
+		/* صافی فقط برای آزمونِ همین شاخه بی ساختن صد عضو. */
+		return function_exists( 'apply_filters' ) ? (int) apply_filters( 'topersia_g_programme_list_max', 100 ) : 100;
 	}
 }
 
@@ -6031,7 +6033,7 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 			. '</div>'
 			. '<figure class="tp-solo">'
 			. '<div class="tp-solo__stage" data-tp-solo-stage>'
-			. '<img class="tp-solo__img" alt="" decoding="async"' . $solo_wh . '>'
+			. '<img class="tp-solo__img" alt="" decoding="async" draggable="false"' . $solo_wh . '>'
 			. '<button class="tp-solo__nav tp-solo__nav--prev" type="button" data-tp-shot-prev'
 			. ' aria-label="' . esc_attr__( 'قبلی', 'topersia' ) . '"><span dir="ltr">' . $arrow['prev'] . '</span></button>'
 			. '<button class="tp-solo__nav tp-solo__nav--next" type="button" data-tp-shot-next'

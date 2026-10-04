@@ -1053,6 +1053,21 @@ html .tp-page .tp-stats[data-tp-n="1"]{grid-template-columns:1fr}
   html .tp-page .tp-stats[data-tp-n="3"] .tp-stat:nth-child(3){grid-column:1/-1}
 }
 
+/* ═══ کشیدن با موس — SPRINT-4.4 ۲ج٫۳ · P5-D277 ══════════════════════════
+   اسلایدر و صحنۀ نمای تمام‌صفحه: نشانگر grab فقط برای موس؛ هنگام کشیدن
+   grabbing، بی انتخاب متن و بی چسبیدن (جابه‌جایی scrollLeft مستقیم است؛
+   پس از رها کردن جاوااسکریپت به نزدیک‌ترین کارت می‌چسباند). لمس دست نمی‌خورد. */
+@media(hover:hover) and (pointer:fine){
+  html .tp-page .tp-slider,
+  html .tp-page .tp-slider>*,
+  html .tp-page .tp-solo__stage{cursor:grab}
+}
+html .tp-page .tp-slider.tp-is-dragging{scroll-snap-type:none;scroll-behavior:auto}
+html .tp-page .tp-slider.tp-is-dragging,
+html .tp-page .tp-slider.tp-is-dragging *,
+html .tp-page .tp-solo__stage.tp-is-dragging,
+html .tp-page .tp-solo__stage.tp-is-dragging *{cursor:grabbing;-webkit-user-select:none;user-select:none}
+
 /* ═══ دعوت به ثبت‌نام در بلوک هوش مصنوعی — SPRINT-4.4 ۱٫۷ · P5-D267 ═══════
    دکمۀ دعوت با --tp-accent و --tp-on-accent، تا با دکمه‌های ثانویۀ
    فیروزه‌ای بلوک اشتباه نشود. بلوک در هر سه حالت همان سبزِ تیرۀ ثابتِ

@@ -205,6 +205,108 @@ async function solo( page, tag, touch ) {
 	await page.waitForTimeout( 200 );
 }
 
+/* ── P5-D277 کشیدن با موس — اسلایدر و نمای تمام‌صفحه ───────────────────
+   ۲۰۰ پیکسل به سوی «بعدی» (راست‌به‌چپ: چپ به راست · چپ‌به‌راست: راست به
+   چپ). کلیکِ پایانِ کشیدن هیچ پیوندی را باز نمی‌کند؛ کلیکِ بی‌کشیدن باز
+   می‌کند. شنوندۀ پایانیِ سند نتیجۀ کلیک را می‌گیرد و خودش ناوبری را می‌بندد،
+   پس صفحه می‌ماند و هارنسِ file:// هم سنجیده می‌شود. */
+async function drag( page, tag ) {
+
+	const id = await page.evaluate( () => {
+		const s = [ ...document.querySelectorAll( '.tp-slider' ) ].find( e => e.scrollWidth > e.clientWidth + 4 && e.querySelector( 'a.tp-card-slide' ) );
+		if ( ! s ) { return ''; }
+		s.scrollIntoView( { behavior: 'instant', block: 'center' } );
+		window.__tpClicks = [];
+		window.__tpProbe = e => {
+			const a = e.target.closest ? e.target.closest( 'a[href]' ) : null;
+			window.__tpClicks.push( { a: !! a, prevented: e.defaultPrevented } );
+			e.preventDefault();
+		};
+		document.addEventListener( 'click', window.__tpProbe );
+		return s.id;
+	} );
+
+	if ( ! id ) { info( tag + ': اسلایدرِ لبریزِ پیوندی برای کشیدن نبود' ); return; }
+
+	const el  = page.locator( '#' + id );
+	const box = await el.boundingBox();
+	const st0 = await el.evaluate( e => ( { left: e.scrollLeft, rtl: 'rtl' === getComputedStyle( e ).direction, cursor: getComputedStyle( e ).cursor,
+		card: getComputedStyle( e.querySelector( 'a.tp-card-slide' ) ).cursor, imgs: [ ...e.querySelectorAll( 'img' ) ].every( i => 'false' === i.getAttribute( 'draggable' ) ) } ) );
+	const dx  = st0.rtl ? 200 : -200;
+	const x0  = box.x + box.width / 2 - dx / 2;
+	const y   = box.y + Math.min( 90, box.height / 3 );
+
+	await page.mouse.move( x0, y );
+	await page.mouse.down();
+	let during = null;
+	for ( let i = 1; i <= 10; i ++ ) {
+		await page.mouse.move( x0 + dx * i / 10, y );
+		if ( 5 === i ) {
+			during = await el.evaluate( e => ( { cls: e.classList.contains( 'tp-is-dragging' ), cursor: getComputedStyle( e ).cursor, select: getComputedStyle( e ).userSelect || getComputedStyle( e ).webkitUserSelect, snap: getComputedStyle( e ).scrollSnapType } ) );
+		}
+	}
+	await page.mouse.up();
+	await page.waitForTimeout( 1200 );
+
+	const st1 = await el.evaluate( e => {
+		const c = e.getBoundingClientRect(), rtl = 'rtl' === getComputedStyle( e ).direction;
+		return {
+			left: e.scrollLeft,
+			snapped: [ ...e.children ].some( k => { const r = k.getBoundingClientRect(); return Math.abs( rtl ? r.right - c.right : r.left - c.left ) <= 2; } ),
+			select: getComputedStyle( e ).userSelect || getComputedStyle( e ).webkitUserSelect, cls: e.classList.contains( 'tp-is-dragging' )
+		};
+	} );
+	const prevOn  = await page.evaluate( i => { const b = document.querySelector( `[data-target="${ i }"][data-dir="-1"]` ); return !! b && ! b.disabled; }, id );
+	const clicks1 = await page.evaluate( () => window.__tpClicks.slice() );
+	const moved   = Math.abs( st1.left - st0.left ) >= 120 && ( st0.rtl ? st1.left < st0.left : st1.left > st0.left );
+	const noNav   = clicks1.every( c => ! c.a || c.prevented );
+
+	check( `${ tag }: کشیدن ۲۰۰px با موس اسلایدر را به «بعدی» می‌برد، می‌چسبد، فلش «قبلی» فعال می‌شود و هیچ پیوندی باز نمی‌شود  P5-D277 · P5-D243`,
+		moved && st1.snapped && prevOn && noNav, JSON.stringify( { st0, st1, prevOn, clicks1 } ) );
+	check( `${ tag }: نشانگر grab (کارت هم)، هنگام کشیدن grabbing و user-select:none و بی چسبیدن؛ پس از رها کردن متن انتخاب‌پذیر؛ هر <img> draggable=false  P5-D277`,
+		'grab' === st0.cursor && 'grab' === st0.card && st0.imgs && during && during.cls && 'grabbing' === during.cursor && 'none' === during.select
+		&& /none/.test( during.snap ) && ! st1.cls && 'none' !== st1.select, JSON.stringify( { st0, during, st1 } ) );
+
+	/* کلیکِ بی‌کشیدن روی کارتی که کامل پیداست — پیوند باز می‌شود (شنونده نمی‌گذارد صفحه برود) */
+	await page.evaluate( () => { window.__tpClicks = []; } );
+	const target = await el.evaluate( e => {
+		const c = e.getBoundingClientRect();
+		const a = [ ...e.querySelectorAll( 'a.tp-card-slide' ) ].find( k => { const r = k.getBoundingClientRect(); return r.left >= c.left - 1 && r.right <= c.right + 1; } );
+		if ( ! a ) { return null; }
+		const r = a.getBoundingClientRect();
+		return { x: r.left + r.width / 2, y: r.top + Math.min( 60, r.height / 3 ) };
+	} );
+	if ( target ) { await page.mouse.click( target.x, target.y ); }
+	const clicks2 = await page.evaluate( () => window.__tpClicks.slice() );
+	check( `${ tag }: کلیکِ بی‌کشیدن پیوند کارت را باز می‌کند  P5-D277`,
+		!! target && 1 === clicks2.length && clicks2[0].a && ! clicks2[0].prevented, JSON.stringify( clicks2 ) );
+	await page.evaluate( () => document.removeEventListener( 'click', window.__tpProbe ) );
+
+	/* نمای تمام‌صفحه: کشیدن موس روی صحنه — همان جهت، دکمه‌ها هنوز با کلیک کار می‌کنند */
+	const tile = await page.$( '[data-tp-shot]' );
+	if ( ! tile ) { return; }
+	await tile.scrollIntoViewIfNeeded();
+	await tile.click();
+	await page.waitForTimeout( 400 );
+	const cnt = () => page.$eval( '[data-tp-solo-count]', e => parseInt( e.textContent.replace( /[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf( d ) ), 10 ) );
+	const sb  = await page.locator( '[data-tp-solo-stage] img' ).boundingBox();
+	const c0  = await cnt();
+	const sx  = sb.x + sb.width / 2, sy = sb.y + sb.height / 2;
+	await page.mouse.move( sx - dx / 2, sy );
+	await page.mouse.down();
+	for ( let i = 1; i <= 8; i ++ ) { await page.mouse.move( sx - dx / 2 + dx * i / 8, sy ); }
+	await page.mouse.up();
+	await page.waitForTimeout( 250 );
+	const c1 = await cnt();
+	await page.click( '#tpGallerySolo [data-tp-shot-next]' );
+	await page.waitForTimeout( 150 );
+	const c2 = await cnt();
+	check( `${ tag }: تمام‌صفحه — کشیدن موس به سوی «بعدی» عکس بعد؛ دکمۀ «بعدی» همچنان با کلیک  P5-D277`,
+		c1 === c0 + 1 && c2 === c1 + 1, JSON.stringify( { c0, c1, c2 } ) );
+	await page.keyboard.press( 'Escape' );
+	await page.waitForTimeout( 200 );
+}
+
 /* ── P5-D245 توکن کاشی در سه حالت ────────────────────────────────── */
 async function tileTokens( page, tag ) {
 
@@ -857,6 +959,7 @@ const LANG_PAGES = [
 				const s = await open( browser, url, opts );
 				if ( ! await sliders( s.page, `${ name } ${ size }` ) ) { check( `${ name } ${ size }: دست‌کم یک اسلایدرِ لبریز سنجیده شد`, false ); }
 				await solo( s.page, `${ name } ${ size }`, touch );
+				if ( ! touch ) { await drag( s.page, `${ name } ${ size } ${ label }` ); }
 				await s.ctx.close();
 			}
 		}
@@ -883,6 +986,7 @@ const LANG_PAGES = [
 			const n = await sliders( s.page, name + ' ۱۴۴۰' );
 			if ( ! n ) { info( 'اسلایدرِ لبریز در ۱۴۴۰ نبود' ); }
 			await solo( s.page, name + ' ۱۴۴۰', false );
+			await drag( s.page, name + ' ۱۴۴۰' );
 			await tileTokens( s.page, name + ' ۱۴۴۰' );
 			await tileFit( s.page, name + ' ۱۴۴۰' );
 			await more( s.page, name + ' ۱۴۴۰' );

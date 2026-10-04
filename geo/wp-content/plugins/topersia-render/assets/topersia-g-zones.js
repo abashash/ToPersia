@@ -485,6 +485,115 @@
 		} );
 	} )();
 
+	/* ══ کشیدن اسلایدر با موس — P5-D277 ════════════════════════════════
+	   فقط موس (`pointerType`): لمس و صفحه‌کلید همان رفتار بومی‌اند. پنج
+	   پیکسل پیش از شروع، تا کلیکِ لرزان کلیک بماند. هنگام کشیدن چسبیدن
+	   خاموش است (`tp-is-dragging`) و جابه‌جایی همان `scrollLeft` است، پس جهت
+	   خودبه‌خود P5-D243 است: در راست‌به‌چپ کشیدن از چپ به راست = بعدی. پس از
+	   رها کردن، به نزدیک‌ترین کارت می‌چسبد و فلش‌ها از رویداد `scroll` همان
+	   بالا به‌روز می‌شوند. کلیکِ پس از کشیدن هیچ پیوندی را باز نمی‌کند.
+	   ────────────────────────────────────────────────────────────────── */
+	( function () {
+
+		var STEP = 5;
+
+		/* لبۀ آغاز نزدیک‌ترین کارت — `scroll-snap-align:start` در هر دو جهت. */
+		function snap( el ) {
+
+			var box  = el.getBoundingClientRect();
+			var rtl  = 'rtl' === window.getComputedStyle( el ).direction;
+			var best = null;
+
+			Array.prototype.forEach.call( el.children, function ( card ) {
+				var r = card.getBoundingClientRect();
+				var d = rtl ? r.right - box.right : r.left - box.left;
+				if ( null === best || Math.abs( d ) < Math.abs( best ) ) {
+					best = d;
+				}
+			} );
+
+			if ( null !== best && Math.abs( best ) > 1 ) {
+				el.scrollBy( { left: best, behavior: 'smooth' } );
+			}
+		}
+
+		Array.prototype.forEach.call( page.querySelectorAll( '.tp-slider' ), function ( el ) {
+
+			var id = null, x0 = 0, s0 = 0, dragging = false, moved = false;
+
+			/* تصویر و پیوندِ کشیدنیِ بومی شبح می‌سازد و رویدادهای اشاره‌گر را لغو می‌کند. */
+			el.addEventListener( 'dragstart', function ( e ) { e.preventDefault(); } );
+
+			el.addEventListener( 'pointerdown', function ( e ) {
+
+				if ( 'mouse' !== e.pointerType || 0 !== e.button ) {
+					return;
+				}
+
+				id = e.pointerId;
+				x0 = e.clientX;
+				s0 = el.scrollLeft;
+				dragging = false;
+				moved = false;
+			} );
+
+			el.addEventListener( 'pointermove', function ( e ) {
+
+				if ( e.pointerId !== id ) {
+					return;
+				}
+
+				var dx = e.clientX - x0;
+
+				if ( ! dragging ) {
+
+					if ( Math.abs( dx ) < STEP ) {
+						return;
+					}
+
+					dragging = true;
+					moved    = true;
+					el.setPointerCapture( id );
+					el.classList.add( 'tp-is-dragging' );
+				}
+
+				el.scrollLeft = s0 - dx;
+			} );
+
+			function end( e ) {
+
+				if ( e.pointerId !== id ) {
+					return;
+				}
+
+				id = null;
+
+				if ( ! dragging ) {
+					return;
+				}
+
+				dragging = false;
+				el.classList.remove( 'tp-is-dragging' );
+				snap( el );
+
+				/* کلیک درست پس از pointerup می‌آید؛ اگر نیامد، کلیکِ بعدی (حتی Enter) نباید بیفتد. */
+				window.setTimeout( function () { moved = false; }, 0 );
+			}
+
+			el.addEventListener( 'pointerup', end );
+			el.addEventListener( 'pointercancel', end );
+
+			/* کلیکِ پایانِ کشیدن — در فاز گرفتن، پیش از پیوند. */
+			el.addEventListener( 'click', function ( e ) {
+				if ( moved ) {
+					moved = false;
+					e.preventDefault();
+					e.stopPropagation();
+				}
+			}, true );
+		} );
+	} )();
+
 	/* ══ مدیر مودال ═════════════════════════════════════════════════════
 	   قفل روی `body` و `documentElement` هر دو: iOS فقط دومی را می‌فهمد
 	   و اندروید فقط اولی را.
@@ -775,6 +884,47 @@
 
 				show( ( rtl() ? dx > 0 : dx < 0 ) ? at + 1 : at - 1 );
 			}, { passive: true } );
+
+			/* همان کشیدن با موس — همان آستانه، همان جهت.  P5-D277 */
+			var mx = 0, my = 0, mid = null;
+
+			stage.addEventListener( 'dragstart', function ( e ) { e.preventDefault(); } );
+
+			/* گرفتن اشاره‌گر فقط پس از پنج پیکسل و هرگز از روی دکمه — وگرنه کلیکِ «قبلی/بعدی» به صحنه می‌رسید، نه به دکمه. */
+			stage.addEventListener( 'pointerdown', function ( e ) {
+				if ( 'mouse' !== e.pointerType || 0 !== e.button || ( e.target.closest && e.target.closest( 'button' ) ) ) { return; }
+				mid = e.pointerId;
+				mx  = e.clientX;
+				my  = e.clientY;
+			} );
+
+			stage.addEventListener( 'pointermove', function ( e ) {
+				if ( e.pointerId !== mid || stage.classList.contains( 'tp-is-dragging' ) || Math.abs( e.clientX - mx ) < 5 ) { return; }
+				stage.setPointerCapture( mid );
+				stage.classList.add( 'tp-is-dragging' );
+			} );
+
+			function mouseEnd( e ) {
+
+				if ( e.pointerId !== mid ) {
+					return;
+				}
+
+				mid = null;
+				stage.classList.remove( 'tp-is-dragging' );
+
+				var dx = e.clientX - mx;
+				var dy = e.clientY - my;
+
+				if ( 'pointercancel' === e.type || Math.abs( dx ) < 40 || Math.abs( dx ) < Math.abs( dy ) ) {
+					return;
+				}
+
+				show( ( rtl() ? dx > 0 : dx < 0 ) ? at + 1 : at - 1 );
+			}
+
+			stage.addEventListener( 'pointerup', mouseEnd );
+			stage.addEventListener( 'pointercancel', mouseEnd );
 		}
 
 		/* کاشی هم در موزاییک صفحه است هم در مودالِ گالریِ لایۀ بیرونی. */

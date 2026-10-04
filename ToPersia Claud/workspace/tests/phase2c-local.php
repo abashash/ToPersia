@@ -277,6 +277,57 @@ $after   = in_array( $nm_code, array_column( topersia_g_programmes( true ), 'cod
 t( 'نشان‌ها از داده: «اثر طبیعی ملی» بی عضو نمی‌آید → با یک کوهِ منتشرشده می‌آید → با پیش‌نویس‌شدنش نه  P5-D247',
 	! $before && $with && ! $after, var_export( array( $before, $with, $after ), true ) );
 
+/* ══ ۲ج٫۲ — اسلایدر حداکثر ۸ کارت ═════════════════════════════════════ */
+section( '۲ج٫۲ — اسلایدر: حداکثر ۸ کارت؛ بیشتر ← پنجره با همۀ منتشرشده‌ها  P5-D276' );
+
+/* هر نوع صفحه‌دار با پست منتشرشدۀ محلی: پرعضوترین پستش (بیشترین رابطه) */
+$over   = array();
+$wrong  = array();
+$seen   = array();
+$sliders_total = 0;
+foreach ( array_keys( topersia_g_kind_labels() ) as $type ) {
+	if ( in_array( $type, topersia_g_no_page_types(), true ) ) { continue; }
+	$ids = get_posts( array( 'post_type' => $type, 'post_status' => 'publish', 'numberposts' => 3, 'fields' => 'ids', 'suppress_filters' => false ) );
+	/* پرداده‌ترین پست‌های محلی (LOCAL-DATA اصفهان) هم — سه پست نخست هر نوع اغلب بی رابطه‌اند */
+	$ids = array_unique( array_merge( $ids, get_posts( array( 'post_type' => $type, 'name' => 'isfahan', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => false ) ) ) );
+	foreach ( $ids as $one ) {
+		$html = page_in( $one );
+		preg_match_all( '~<section id="(tp-[a-z0-9-]+)" class="tp-section">(.*?)</section>~su', $html, $secs, PREG_SET_ORDER );
+		foreach ( $secs as $s ) {
+			$n = substr_count( $s[2], 'class="tp-card-slide"' );
+			if ( ! $n ) { continue; }
+			$sliders_total ++;
+			$seen[ $type ] = true;
+			if ( $n > 8 ) { $over[] = $type . '#' . $one . ' ' . $s[1] . ':' . $n; }
+			$key = substr( $s[1], 3 );
+			if ( isset( topersia_g_relmap()[ $type ][ $key ] ) ) {
+				$total = topersia_g_rel_items( $one, $key, 0 )['total'];
+				$modal = modal_total( (string) topersia_g_list_modal( $one, $key ), 'tp-list-' . $key );
+				$link  = false !== strpos( $s[2], 'href="#tp-list-' . $key . '"' );
+				if ( $total > 8 ? ( $modal !== $total || ! $link ) : ( -1 !== $modal || $link ) ) { $wrong[] = $type . '#' . $one . ' ' . $key . ' total ' . $total . ' modal ' . $modal; }
+			}
+		}
+	}
+}
+mut( 'هیچ اسلایدری در هیچ نوعی بیش از ۸ کارت ندارد (' . $sliders_total . ' اسلایدر در ' . count( $seen ) . ' نوع)',
+	function ( $o ) use ( $sliders_total ) { return $sliders_total > 0 && ! $o; }, $over, array( 'tp_province#1 tp-places:12' ), implode( ' | ', $over ) );
+mut( 'هر اسلایدرِ رابطه با بیش از ۸ عضو: پیوند + پنجره با دقیقاً N منتشرشده؛ ۸ یا کمتر: نه پیوند نه پنجره',
+	function ( $w ) { return ! $w; }, $wrong, array( 'tp_province attractions total 3 modal 3' ), implode( ' | ', $wrong ) );
+
+/* استثنا: برنامۀ بیش از سقف (۱۰۰) — بی پنجره؛ فقط شمار و پیوند به صفحۀ خود برنامه. سقف با صافی به ۱۰ */
+add_filter( 'topersia_g_programme_list_max', $ten = function () { return 10; } );
+$c_small  = page_in( $country );
+$wh_small = $wh_ids ? section_html( $c_small, $wh_ids['section'] ) : '';
+$wh_url   = $wh_index !== false ? topersia_g_programmes()[ $wh_index ]['url'] : '';
+$wh_modal_small = (string) topersia_g_programme_modals( $country );
+remove_filter( 'topersia_g_programme_list_max', $ten );
+mut( 'برنامۀ بیش از سقف: بی پنجره؛ پیوند «همه ' . topersia_g_fa( $wh_expected ) . ' مورد ←» به صفحۀ خودِ برنامه (سقف آزمون ۱۰)',
+	function ( $p ) use ( $wh_url, $wh_ids, $wh_expected ) {
+		return '' !== $wh_url && false !== strpos( $p[0], '<a class="tp-more" href="' . esc_url( $wh_url ) . '">همه ' . topersia_g_fa( $wh_expected ) . ' مورد ←</a>' )
+			&& -1 === modal_total( $p[1], $wh_ids['list'] ) && false === strpos( $p[0], 'data-tp-list-open' );
+	},
+	array( $wh_small, $wh_modal_small ), array( $wh_sec, $wh_modal ) );
+
 /* ══ ۲ج٫۶ — «نشان‌ها» فقط عنوان رسمی ══════════════════════════════════ */
 section( '۲ج٫۶ — «نشان‌ها» فقط عنوان رسمی  P5-D279' );
 
