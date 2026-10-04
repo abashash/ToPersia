@@ -1,0 +1,3 @@
+# Tests and the template generator compare bytes, and the zips ship these files as they are:
+# the working copy must be LF even where core.autocrlf=true would check out CRLF.
+* text=auto eol=lf
