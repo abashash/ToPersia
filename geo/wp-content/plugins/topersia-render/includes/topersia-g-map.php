@@ -37,8 +37,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * نقشۀ ۵۷ فیلد اختصاصی دستۀ G.
  *
  * kind:  number · year · latin · flag · text · choice
- * zone:  card · details · badge · names · neighbors · skip
+ * zone:  card · details · badge · names · neighbors · travel · skip
  *        neighbors: فهرست متنی همسایه‌ها ← کاشی‌های «همسایه‌ها» در ستون کناری (P5-D281)
+ *        travel:    «اطلاعات سفر» — وضعیت اداری و دسترسی، نه افتخار (P5-D279 · P5-D282)
+ *        badge:     فقط عنوان رسمی افتخاری، جفت‌شده با سال (P5-D279)
+ *        پرچمِ card یا travel فقط روشن می‌آید، با مقدار «بله»
  * year:  کلید فیلد سالی که با این نشان جفت می‌شود.
  * glossary: شناسۀ واژه‌نامۀ JetEngine برای فیلدهای choice.
  *
@@ -76,13 +79,13 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'geo_boundary'               => array( 'label' => 'محدودۀ جغرافیایی', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'bordering_countries'        => array( 'label' => 'کشورهای هم‌مرز', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'climate_type'               => array( 'label' => 'نوع اقلیم', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),
-		'free_zone'                  => array( 'label' => 'منطقۀ آزاد', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge' ),
+		'free_zone'                  => array( 'label' => 'منطقۀ آزاد', 'unit' => '', 'kind' => 'flag', 'zone' => 'travel' ),
 		'elevation_m'                => array( 'label' => 'ارتفاع از سطح دریا', 'unit' => 'متر', 'kind' => 'number', 'zone' => 'card' ),
 		'transport_access'           => array( 'label' => 'دسترسی و حمل‌ونقل', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'founded_year'               => array( 'label' => 'سال بنیان‌گذاری', 'unit' => '', 'kind' => 'year', 'zone' => 'card' ),
-		'airport_name'               => array( 'label' => 'نام فرودگاه', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),
-		'airport_iata'               => array( 'label' => 'کد فرودگاه', 'unit' => '', 'kind' => 'latin', 'zone' => 'card' ),
-		'railway_station'            => array( 'label' => 'ایستگاه راه‌آهن', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge' ),
+		'airport_name'               => array( 'label' => 'نام فرودگاه', 'unit' => '', 'kind' => 'text', 'zone' => 'travel' ),
+		'airport_iata'               => array( 'label' => 'کد فرودگاه', 'unit' => '', 'kind' => 'latin', 'zone' => 'travel' ),
+		'railway_station'            => array( 'label' => 'ایستگاه راه‌آهن', 'unit' => '', 'kind' => 'flag', 'zone' => 'travel' ),
 		'unesco_creative_city'       => array( 'label' => 'شهر خلاق یونسکو', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge' ),
 		'neighborhood_type'          => array( 'label' => 'نوع محله', 'unit' => '', 'kind' => 'choice', 'zone' => 'card', 'glossary' => '39' ),
 		'tourism_target_village'     => array( 'label' => 'روستای هدف گردشگری', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge' ),
@@ -91,7 +94,7 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'mountain_type'              => array( 'label' => 'نوع عارضه', 'unit' => '', 'kind' => 'choice', 'zone' => 'card', 'glossary' => '41' ),
 		'provinces_spanning'         => array( 'label' => 'استان‌های گسترده در آن', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'trekking_difficulty'        => array( 'label' => 'دشواری صعود', 'unit' => '', 'kind' => 'choice', 'zone' => 'card', 'glossary' => '42' ),
-		'volcanic'                   => array( 'label' => 'آتشفشانی', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge' ),
+		'volcanic'                   => array( 'label' => 'آتشفشانی', 'unit' => '', 'kind' => 'flag', 'zone' => 'card' ),
 		'national_monument'          => array( 'label' => 'اثر طبیعی ملی', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge', 'year' => 'national_monument_year' ),
 		'national_monument_year'     => array( 'label' => 'سال ثبت اثر طبیعی ملی', 'unit' => '', 'kind' => 'year', 'zone' => 'skip' ),
 		'water_body_type'            => array( 'label' => 'نوع پهنۀ آبی', 'unit' => '', 'kind' => 'choice', 'zone' => 'card', 'glossary' => '43' ),

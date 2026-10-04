@@ -279,7 +279,8 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
 				return esc_html( topersia_g_glossary_label( $glossary, $raw ) );
 
 			case 'flag':
-				return esc_html( isset( $field['label'] ) ? topersia_g_t( $field['label'] ) : $raw );
+				/* پرچم بیرون از «نشان‌ها» (کارت حقایق، «اطلاعات سفر») فقط روشن می‌آید: «بله».  P5-D279 */
+				return topersia_g_flag_on( $raw ) ? esc_html__( 'بله', 'topersia' ) : '';
 		}
 
 		return esc_html( $raw );
@@ -344,6 +345,11 @@ if ( ! function_exists( 'topersia_g_zone_fields' ) ) {
 			$raw = topersia_g_raw( $post_id, $name );
 
 			if ( ! topersia_g_filled( $raw ) ) {
+				continue;
+			}
+
+			/* پرچمِ خاموش «پر» است ولی چیزی نمی‌گوید.  P5-D279 */
+			if ( isset( $field['kind'] ) && 'flag' === $field['kind'] && ! topersia_g_flag_on( $raw ) ) {
 				continue;
 			}
 
@@ -1840,8 +1846,14 @@ if ( ! function_exists( 'topersia_g_key_fact' ) ) {
 	function topersia_g_key_fact( $post_id ) {
 
 		$fields = topersia_g_zone_fields( $post_id, 'card', array( 'geo_coordinates', 'best_season' ) );
+		$map    = topersia_g_map();
 
 		foreach ( array_keys( $fields ) as $name ) {
+
+			/* «بله» تنها، روی کارت چیزی نمی‌گوید — پرچم حقیقت کلیدی نیست.  P5-D279 */
+			if ( 'flag' === $map[ $name ]['kind'] ) {
+				continue;
+			}
 
 			$raw = topersia_g_raw( $post_id, $name );
 
@@ -1959,7 +1971,11 @@ if ( ! function_exists( 'topersia_g_stat_keys' ) ) {
 
 		$slots = 4 - ( topersia_g_capital_id( $post_id ) ? 1 : 0 );
 
-		$fields = topersia_g_zone_fields( $post_id, 'card', array( 'geo_coordinates', 'best_season' ) );
+		/* پرچم («آتشفشانی: بله») جای کارت حقایق است، نه آمار سربرگ.  P5-D279 · P5-D282 */
+		$map    = topersia_g_map();
+		$fields = array_filter( topersia_g_zone_fields( $post_id, 'card', array( 'geo_coordinates', 'best_season' ) ), function ( $name ) use ( $map ) {
+			return 'flag' !== $map[ $name ]['kind'];
+		}, ARRAY_FILTER_USE_KEY );
 
 		/*
 		 * ترتیب کارت آمار صریح است، نه ترتیبِ نقشۀ فیلد.  P5-D208
@@ -2028,7 +2044,8 @@ if ( ! function_exists( 'topersia_g_sc_stats' ) ) {
 				. '<b class="tp-stat__v">' . $cell[1] . '</b></div>';
 		}
 
-		return '<div class="tp-wrap tp-stats-wrap"><div class="tp-stats" role="list" aria-label="'
+		/* شمار خانه‌ها برای شبکه — کمتر از چهار، بی جای خالی.  P5-D275 */
+		return '<div class="tp-wrap tp-stats-wrap"><div class="tp-stats" role="list" data-tp-n="' . count( $cells ) . '" aria-label="'
 			. esc_attr__( 'اطلاعات کلیدی', 'topersia' ) . '">' . $out . '</div></div>';
 	}
 }
@@ -3322,6 +3339,52 @@ if ( ! function_exists( 'topersia_g_tiles' ) ) {
 	}
 }
 
+/**
+ * کارت «اطلاعات سفر» — `.practical-grid` مرجع.  P5-D233 · P5-D279 · P5-D282
+ *
+ * اول موردهای رابطه (سلامت، آداب، ارز، تقویم، ویزا — با ارث‌بری) با پیکان و
+ * پیوند؛ سپس فیلدهای ناحیۀ travel در FIELDMAP به شکل «برچسب: مقدار»، بی
+ * پیوند: ایستگاه راه‌آهن و منطقۀ آزاد (وضعیت اداری، نه افتخار) و نام کامل و
+ * کد فرودگاه (از کارت آمار بیرون آمد).
+ *
+ * @param int   $pid    پست.
+ * @param array $result خروجی `topersia_g_rel_items( $pid, 'practical', 0 )`.
+ * @return string HTML، یا خالی.
+ */
+if ( ! function_exists( 'topersia_g_practical_section' ) ) {
+	function topersia_g_practical_section( $pid, $result ) {
+
+		$map  = topersia_g_map();
+		$body = '';
+
+		foreach ( $result['items'] as $item ) {
+			$body .= topersia_g_a_open( $item['url'] ) . esc_html( $item['name'] )
+				. ' <span>→</span></a>';
+		}
+
+		foreach ( topersia_g_zone_fields( $pid, 'travel' ) as $name => $raw ) {
+
+			$value = topersia_g_value( $name, $raw );
+
+			if ( '' === trim( wp_strip_all_tags( (string) $value ) ) ) {
+				continue;
+			}
+
+			$body .= topersia_g_a_open( '' ) . esc_html( topersia_g_t( $map[ $name ]['label'] ) ) . ': ' . $value . '</a>';
+		}
+
+		$group = isset( $result['group'] ) ? (array) $result['group'] : array();
+
+		/* نوعِ بی گروه رابطه (جزیره) همان نام بخش را می‌گیرد — یک منبع، P5-D233 */
+		return topersia_g_section(
+			'tp-practical',
+			! empty( $group['title'] ) ? $group['title'] : topersia_g_rel_zones()['practical'][3],
+			'',
+			'' !== $body ? '<div class="tp-practical-grid">' . $body . '</div>' : ''
+		);
+	}
+}
+
 /** [tp_relgrid rel="..."] — کاشی‌های ستون کناری با دکمۀ ادامه. */
 if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 	function topersia_g_sc_relgrid( $atts = array() ) {
@@ -3345,6 +3408,14 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 		$shown  = isset( $atts['limit'] ) ? absint( $atts['limit'] ) : 6;
 		$result = topersia_g_rel_items( $pid, $key, 0 );
 
+		/*
+		 * «اطلاعات سفر» = رابطه‌ها + فیلدهای ناحیۀ travel (ایستگاه راه‌آهن، منطقۀ
+		 * آزاد، فرودگاه) — حتی بی رابطه، مثل جزیرۀ منطقۀ آزاد.  P5-D279 · P5-D282
+		 */
+		if ( 'practical' === $key ) {
+			return topersia_g_practical_section( $pid, $result );
+		}
+
 		if ( empty( $result['items'] ) ) {
 			return '';
 		}
@@ -3366,18 +3437,6 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 		 * `.routes` دوستونۀ مرجع: نام پررنگ، زیرش ایستگاه‌ها یا شهر، وسط‌چین
 		 * مثل «استان‌های هم‌مرز»؛ ستون‌ها و «N مورد دیگر» همان.  P5-D269
 		 */
-		if ( 'practical' === $key ) {
-
-			$body = '';
-
-			foreach ( $result['items'] as $item ) {
-				$body .= topersia_g_a_open( $item['url'] ) . esc_html( $item['name'] )
-					. ' <span>→</span></a>';
-			}
-
-			return topersia_g_section( 'tp-practical', $title, $kick, '<div class="tp-practical-grid">' . $body . '</div>' );
-		}
-
 		if ( 'neighbors' === $key ) {
 
 			$here = topersia_g_text( $pid, 'geo_coordinates' );
@@ -4826,6 +4885,11 @@ if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
 				'on'    => array( 'tp-programmes' ),
 				'stats' => array( 'population', 'area_km2', 'count:provinces', 'timezone' ),
 			),
+
+			/* P5-D282 — نام فرودگاه به «اطلاعات سفر»؛ خانۀ آزاد تا کیفیت هوای فاز ۳ ارتفاع */
+			'tp_city' => array(
+				'stats' => array( 'area_km2', 'population', 'elevation_m', 'founded_year' ),
+			),
 		);
 
 		if ( function_exists( 'apply_filters' ) ) {
@@ -4940,6 +5004,9 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 		$has  = ( $type && isset( $map[ $type ] ) ) ? $map[ $type ] : array();
 
 		$rel = array( 'main' => array(), 'rail' => array() );
+
+		/* «اطلاعات سفر» برای هر نوع — فیلدهای travel بی گروه رابطه هم کارت می‌سازند.  P5-D279 */
+		$has['practical'] = true;
 
 		foreach ( topersia_g_rel_zones() as $key => $zone ) {
 

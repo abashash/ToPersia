@@ -272,6 +272,10 @@ msgid "بعدی"
 msgstr "التالي"
 
 #: includes/topersia-g-zones.php
+msgid "بله"
+msgstr "نعم"
+
+#: includes/topersia-g-zones.php
 msgid "بنای تاریخی"
 msgstr "معلم تاريخي"
 

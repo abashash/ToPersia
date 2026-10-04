@@ -77,6 +77,7 @@ return array (
     'بسته' => 'Closed',
     'بعدازظهر' => 'Evening',
     'بعدی' => 'Next',
+    'بله' => 'Yes',
     'بنای تاریخی' => 'Historic monument',
     'به همۀ معیارها امتیاز بدهید.' => 'Rate every criterion.',
     'بهار' => 'Spring',

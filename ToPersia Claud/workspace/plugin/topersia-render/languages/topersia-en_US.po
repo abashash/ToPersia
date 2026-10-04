@@ -272,6 +272,10 @@ msgid "بعدی"
 msgstr "Next"
 
 #: includes/topersia-g-zones.php
+msgid "بله"
+msgstr "Yes"
+
+#: includes/topersia-g-zones.php
 msgid "بنای تاریخی"
 msgstr "Historic monument"
 

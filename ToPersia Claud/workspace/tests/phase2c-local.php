@@ -277,6 +277,75 @@ $after   = in_array( $nm_code, array_column( topersia_g_programmes( true ), 'cod
 t( 'نشان‌ها از داده: «اثر طبیعی ملی» بی عضو نمی‌آید → با یک کوهِ منتشرشده می‌آید → با پیش‌نویس‌شدنش نه  P5-D247',
 	! $before && $with && ! $after, var_export( array( $before, $with, $after ), true ) );
 
+/* ══ ۲ج٫۶ — «نشان‌ها» فقط عنوان رسمی ══════════════════════════════════ */
+section( '۲ج٫۶ — «نشان‌ها» فقط عنوان رسمی  P5-D279' );
+
+$honours  = array( 'world_heritage', 'biosphere_reserve', 'national_monument', 'unesco_creative_city', 'tourism_target_village' );
+$badge_of = function ( $map ) { return array_keys( array_filter( $map, function ( $f ) { return 'badge' === $f['zone'] && 'flag' === $f['kind']; } ) ); };
+$fmap     = topersia_g_map();
+$old_map  = $fmap;
+$old_map['railway_station']['zone'] = 'badge';
+mut( 'FIELDMAP: پرچمِ ناحیۀ badge دقیقاً پنج عنوان رسمی — جهش: ایستگاه راه‌آهن در نشان‌ها',
+	function ( $m ) use ( $badge_of, $honours ) { $b = $badge_of( $m ); sort( $b ); $h = $honours; sort( $h ); return $b === $h; },
+	$fmap, $old_map, implode( ' · ', $badge_of( $fmap ) ) );
+t( 'FIELDMAP: ایستگاه راه‌آهن و منطقۀ آزاد ← travel · آتشفشانی ← card · فرودگاه ← travel; هیچ متاکلید عوض نشد',
+	'travel' === $fmap['railway_station']['zone'] && 'travel' === $fmap['free_zone']['zone'] && 'card' === $fmap['volcanic']['zone']
+	&& 'travel' === $fmap['airport_name']['zone'] && 'travel' === $fmap['airport_iata']['zone'] );
+
+/* «در هیچ نوعی»: هر نوعی که پرچمی دارد، با همۀ پرچم‌هایش روشن — کارت نشان‌ها فقط عنوان رسمی */
+$all_flags  = array_keys( array_filter( $fmap, function ( $f ) { return 'flag' === $f['kind']; } ) );
+$hon_labels = array_map( function ( $k ) use ( $fmap ) { return $fmap[ $k ]['label']; }, $honours );
+$bad_types  = array();
+$checked    = array();
+foreach ( array_keys( topersia_g_kind_labels() ) as $type ) {
+	if ( 'tp_county' === $type ) { continue; }
+	$own = array_values( array_intersect( $all_flags, array_keys( topersia_pack_schema( $type )['fields'] ) ) );
+	if ( ! $own ) { continue; }
+	$tmp = tmp_post( $type, 'آزمون نشان ۲ج', 'draft', array_fill_keys( $own, 'true' ) );
+	preg_match_all( '~<b>(.*?)</b>~u', (string) topersia_g_sc_badges( array( 'id' => $tmp ) ), $bm );
+	$extra = array_diff( $bm[1], $hon_labels );
+	$checked[] = $type;
+	if ( $extra ) { $bad_types[] = $type . ': ' . implode( '،', $extra ); }
+}
+mut( 'نشان‌ها: در هیچ نوعی (' . count( $checked ) . ' نوع پرچم‌دار، همۀ پرچم‌ها روشن) پرچمی جز پنج عنوان رسمی نمی‌آید',
+	function ( $bad ) use ( $checked ) { return count( $checked ) >= 10 && ! $bad; },
+	$bad_types, array( 'tp_city: ایستگاه راه‌آهن' ), implode( ' | ', $bad_types ) );
+
+$city_t = tmp_post( 'tp_city', 'شهر آزمون ۲ج', 'draft', array( 'railway_station' => 'true', 'free_zone' => 'true', 'unesco_creative_city' => 'true', 'airport_name' => 'فرودگاه بین‌المللی آزمون', 'airport_iata' => 'TST', 'population' => '1000', 'area_km2' => '10', 'elevation_m' => '1500' ) );
+$prac = (string) topersia_g_sc_relgrid( array( 'id' => $city_t, 'rel' => 'practical' ) );
+mut( 'اطلاعات سفر: ایستگاه راه‌آهن و منطقۀ آزاد «بله» — وضعیت، نه نشان؛ بی پیوند',
+	function ( $h ) { return false !== strpos( $h, 'ایستگاه راه‌آهن: بله' ) && false !== strpos( $h, 'منطقۀ آزاد: بله' ) && false !== strpos( $h, 'id="tp-practical"' ); },
+	$prac, str_replace( 'ایستگاه راه‌آهن: بله', '', $prac ) );
+
+$mount_v = tmp_post( 'tp_mountain', 'کوه آزمون ۲ج', 'draft', array( 'volcanic' => 'true', 'national_monument' => 'true', 'national_monument_year' => '1398' ) );
+$facts_v = (string) topersia_g_sc_facts( array( 'id' => $mount_v ) );
+$badge_v = (string) topersia_g_sc_badges( array( 'id' => $mount_v ) );
+mut( 'آتشفشانی: کارت حقایق با مقدار «بله»، نه نشان؛ اثر طبیعی ملی نشان با سالش',
+	function ( $p ) { return (bool) preg_match( '~<span class="tp-tile__k">آتشفشانی</span><b>بله</b>~u', $p[0] ) && false === strpos( $p[1], 'آتشفشانی' ) && false !== strpos( $p[1], 'اثر طبیعی ملی' ) && false !== strpos( $p[1], '۱۳۹۸' ); },
+	array( $facts_v, $badge_v ), array( $facts_v, $badge_v . '<b>آتشفشانی</b>' ) );
+
+$mount_off = tmp_post( 'tp_mountain', 'کوه آزمون خاموش ۲ج', 'draft', array( 'volcanic' => 'false', 'elevation_m' => '2000' ) );
+t( 'پرچمِ خاموش در کارت حقایق نمی‌آید (نه «آتشفشانی: خیر»، نه برچسب خالی)',
+	false === strpos( (string) topersia_g_sc_facts( array( 'id' => $mount_off ) ), 'آتشفشانی' ) );
+
+/* ══ ۲ج٫۷ — سربرگ شهر ═══════════════════════════════════════════════ */
+section( '۲ج٫۷ — سربرگ شهر  P5-D282' );
+
+$st_city = $stats( (string) topersia_g_sc_stats( array( 'id' => $city_t ) ) );
+mut( 'شهر: نام و کد فرودگاه در کارت آمار نیستند؛ خانۀ آزاد «ارتفاع از سطح دریا» (تا کیفیت هوای فاز ۳)',
+	function ( $cells ) { $k = array_column( $cells, 0 ); return ! array_intersect( array( 'نام فرودگاه', 'کد فرودگاه' ), $k ) && in_array( 'ارتفاع از سطح دریا', $k, true ); },
+	$st_city, array_merge( array( array( 'نام فرودگاه', 'فرودگاه بین‌المللی آزمون' ) ), $st_city ),
+	implode( ' | ', array_column( $st_city, 0 ) ) );
+t( 'شهر: نام کامل و کد IATA در «اطلاعات سفر»',
+	false !== strpos( $prac, 'نام فرودگاه: فرودگاه بین‌المللی آزمون' ) && false !== strpos( $prac, 'کد فرودگاه: <span class="tp-lat" dir="ltr">TST</span>' ) );
+
+/* شهر واقعی بی سال بنیان: سه خانه، شبکه سه‌ستونه — بی جای خالی (P5-D275) */
+$isf_city = (int) ( get_posts( array( 'post_type' => 'tp_city', 'name' => 'isfahan', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => false ) )[0] ?? 0 );
+$isf_html = (string) topersia_g_sc_stats( array( 'id' => $isf_city ) );
+$isf_n    = count( $stats( $isf_html ) );
+t( 'شهر اصفهان: ' . $isf_n . ' خانه و data-tp-n برابر آن — شبکه به شمار خانه‌ها',
+	$isf_n >= 1 && false !== strpos( $isf_html, 'data-tp-n="' . $isf_n . '"' ), implode( ' | ', array_column( $stats( $isf_html ), 0 ) ) );
+
 /* ══ پایان ══════════════════════════════════════════════════════════ */
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pass']}   افتاده: {$GLOBALS['fail']}\n";
 exit( $GLOBALS['fail'] ? 1 : 0 );

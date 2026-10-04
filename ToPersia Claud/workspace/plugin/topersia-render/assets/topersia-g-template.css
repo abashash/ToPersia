@@ -302,6 +302,18 @@ html .tp-page .tp-justify h4,
 html .tp-page .tp-justify h5,
 html .tp-page .tp-justify h6{text-align:start;text-align-last:auto}
 
+/* ═══ کارت آمار با کمتر از چهار خانه — SPRINT-4.4 ۲ج٫۱ · P5-D275 · P5-D282 ═
+   خانه‌ها از ماتریس نوع می‌آیند و خانۀ بی‌داده نمی‌آید؛ شبکۀ چهارستونۀ مرجع
+   با سه خانه یک چهارمِ خالی می‌گذاشت. ستون‌ها به شمار خانه‌ها (`data-tp-n`)؛
+   زیر ۹۰۰ دو ستون مرجع، و خانۀ تنهای ردیف آخر تمام‌پهنا. چهار خانه همان مرجع. */
+html .tp-page .tp-stats[data-tp-n="3"]{grid-template-columns:repeat(3,1fr)}
+html .tp-page .tp-stats[data-tp-n="2"]{grid-template-columns:repeat(2,1fr)}
+html .tp-page .tp-stats[data-tp-n="1"]{grid-template-columns:1fr}
+@media(max-width:900px){
+  html .tp-page .tp-stats[data-tp-n="3"]{grid-template-columns:1fr 1fr}
+  html .tp-page .tp-stats[data-tp-n="3"] .tp-stat:nth-child(3){grid-column:1/-1}
+}
+
 /* ═══ دعوت به ثبت‌نام در بلوک هوش مصنوعی — SPRINT-4.4 ۱٫۷ · P5-D267 ═══════
    دکمۀ دعوت با --tp-accent و --tp-on-accent، تا با دکمه‌های ثانویۀ
    فیروزه‌ای بلوک اشتباه نشود. بلوک در هر سه حالت همان سبزِ تیرۀ ثابتِ
