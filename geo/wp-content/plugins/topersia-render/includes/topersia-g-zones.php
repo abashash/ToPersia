@@ -859,6 +859,16 @@ if ( ! function_exists( 'topersia_g_kind_label' ) ) {
 if ( ! function_exists( 'topersia_g_title' ) ) {
 	function topersia_g_title( $post_id ) {
 
+		/*
+		 * تیترِ «فقط نام» — سطر نوع در ماتریس (`title` = name).  P5-D281
+		 * نام کوتاهِ زبان صفحه (`name_{زبان}`: «ایران»)، نه نام رسمی و نه
+		 * پیشوند نوع؛ نام رسمی در ردیف نام‌های زیر تیتر می‌ماند.
+		 */
+		if ( 'name' === topersia_g_type_row( $post_id )['title'] ) {
+			$short = topersia_g_text( $post_id, 'name_' . topersia_g_page_lang() );
+			return '' !== $short ? $short : topersia_g_name( $post_id );
+		}
+
 		$name = topersia_g_name( $post_id );
 
 		if ( 'fa' !== topersia_g_page_lang() ) {
@@ -1061,10 +1071,17 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 		 */
 		$names = array();
 		$here  = topersia_g_page_lang();
+		$title = topersia_g_title( $pid );
+
+		/*
+		 * تیترِ «فقط نام» (P5-D281) نام رسمیِ زبان صفحه را در خود ندارد —
+		 * «ایران» نه «جمهوری اسلامی ایران» — پس آن هم در همین ردیف می‌آید.
+		 */
+		$keep_here = 'name' === topersia_g_type_row( $pid )['title'];
 
 		foreach ( array( 'fa', 'en', 'ar' ) as $code ) {
 
-			if ( $code === $here || '' === $official[ $code ] ) {
+			if ( '' === $official[ $code ] || ( $code === $here && ( ! $keep_here || $official[ $code ] === $title ) ) ) {
 				continue;
 			}
 
@@ -1107,7 +1124,7 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 		}
 
 		/* تیتر: پیشوند نوع + نام — همان تابعی که «دربارۀ …» می‌خواند.  P5-D224 */
-		$out .= '<h1>' . esc_html( topersia_g_title( $pid ) ) . '</h1>';
+		$out .= '<h1>' . esc_html( $title ) . '</h1>';
 
 		if ( $names ) {
 			$out .= '<p class="tp-hero__alt">' . implode( $sep, $names ) . '</p>';
@@ -1665,17 +1682,23 @@ if ( ! function_exists( 'topersia_g_card_foot' ) ) {
 if ( ! function_exists( 'topersia_g_list_more' ) ) {
 	function topersia_g_list_more( $group, $key ) {
 
+		/*
+		 * هر اسلایدر با بیش از هشت عضو پیوند فهرست می‌گیرد — الگوی «همه شهرها ←».
+		 * P5-D276. برچسب گروه (`more`) اول؛ نبود، برچسب همین جدول؛ نبود، عمومی.
+		 */
 		$keys = array(
 			'places'      => '',
 			'attractions' => '',
+			'provinces'   => 'همه استان‌ها ←',
+			'districts'   => 'همه محله‌ها ←',
 			'culture'     => 'همه فرهنگ ←',
 		);
 
-		if ( ! isset( $keys[ $key ] ) ) {
-			return '';
+		if ( isset( $group['more'] ) && '' !== (string) $group['more'] ) {
+			return topersia_g_t( (string) $group['more'] );
 		}
 
-		return topersia_g_t( ( isset( $group['more'] ) && '' !== (string) $group['more'] ) ? (string) $group['more'] : $keys[ $key ] );
+		return ( isset( $keys[ $key ] ) && '' !== $keys[ $key ] ) ? topersia_g_t( $keys[ $key ] ) : __( 'همه موارد ←', 'topersia' );
 	}
 }
 
@@ -1837,8 +1860,102 @@ if ( ! function_exists( 'topersia_g_key_fact' ) ) {
 	}
 }
 
+/**
+ * خانه‌های کارت آمار سربرگ، به ترتیب — حداکثر چهار.  P5-D282 · ۲ج٫۱
+ *
+ * نوعی که در ماتریس سطر `stats` دارد همان فهرست را به ترتیب می‌گیرد و هر
+ * کلیدِ بی‌مقدار جایش را به کلید بعدی می‌دهد. بقیه قاعدۀ پیشین: مرکز (اگر
+ * هست) + فیلدهای کوتاه `card` به ترتیب `topersia_g_stat_keys()`.
+ *
+ * @return array کلیدها: نام فیلد · `capital` · `count:{گروه}`
+ */
+if ( ! function_exists( 'topersia_g_stat_plan' ) ) {
+	function topersia_g_stat_plan( $post_id ) {
+
+		$row = topersia_g_type_row( $post_id );
+
+		if ( empty( $row['stats'] ) ) {
+			return array_merge( topersia_g_capital_id( $post_id ) ? array( 'capital' ) : array(), topersia_g_stat_keys( $post_id ) );
+		}
+
+		$plan = array();
+
+		foreach ( $row['stats'] as $key ) {
+
+			if ( count( $plan ) >= 4 ) {
+				break;
+			}
+
+			if ( null !== topersia_g_stat_cell( $post_id, $key ) ) {
+				$plan[] = $key;
+			}
+		}
+
+		return $plan;
+	}
+}
+
+/**
+ * یک خانۀ کارت آمار — برچسب و مقدارِ آمادۀ چاپ، یا null اگر داده نیست.
+ *
+ *   capital         مرکز یا پایتخت از رابطۀ یک‌به‌یک، با پیوند
+ *   count:{گروه}    شمار اعضای منتشرشدۀ گروه رابطه (P5-D247)
+ *   نام فیلد        برچسب و مقدار از FIELDMAP
+ */
+if ( ! function_exists( 'topersia_g_stat_cell' ) ) {
+	function topersia_g_stat_cell( $post_id, $key ) {
+
+		if ( 'capital' === $key ) {
+
+			$capital = topersia_g_capital_id( $post_id );
+
+			if ( ! $capital ) {
+				return null;
+			}
+
+			$group = topersia_g_group( $post_id, 'capital' );
+			$view  = topersia_g_view_id( $capital );
+			$url   = topersia_g_public_url( $view );
+
+			return array(
+				isset( $group['title'] ) ? topersia_g_t( $group['title'] ) : '',
+				'' !== $url
+					? '<a href="' . esc_url( $url ) . '">' . esc_html( topersia_g_name( $view ) ) . '</a>'
+					: esc_html( topersia_g_name( $view ) ),
+			);
+		}
+
+		if ( 0 === strpos( $key, 'count:' ) ) {
+
+			$labels = array( 'provinces' => __( 'شمار استان‌ها', 'topersia' ) );
+			$group  = substr( $key, 6 );
+			$ids    = isset( $labels[ $group ] ) ? topersia_g_group_ids( $post_id, topersia_g_group( $post_id, $group ) ) : array();
+
+			return $ids ? array( $labels[ $group ], esc_html( topersia_g_fa( count( $ids ) ) ) ) : null;
+		}
+
+		$map = topersia_g_map();
+		$raw = topersia_g_raw( $post_id, $key );
+
+		if ( ! isset( $map[ $key ] ) || ! topersia_g_filled( $raw ) ) {
+			return null;
+		}
+
+		$value = topersia_g_value( $key, $raw );
+
+		return '' === trim( wp_strip_all_tags( (string) $value ) ) ? null : array( topersia_g_t( $map[ $key ]['label'] ), $value );
+	}
+}
+
 if ( ! function_exists( 'topersia_g_stat_keys' ) ) {
 	function topersia_g_stat_keys( $post_id ) {
+
+		/* نوعِ ماتریس‌دار: فقط فیلدهای همان خانه‌ها — کارت حقایق بقیه را می‌گیرد. */
+		if ( ! empty( topersia_g_type_row( $post_id )['stats'] ) ) {
+			return array_values( array_filter( topersia_g_stat_plan( $post_id ), function ( $key ) {
+				return 'capital' !== $key && 0 !== strpos( $key, 'count:' );
+			} ) );
+		}
 
 		$slots = 4 - ( topersia_g_capital_id( $post_id ) ? 1 : 0 );
 
@@ -1886,29 +2003,16 @@ if ( ! function_exists( 'topersia_g_sc_stats' ) ) {
 			return '';
 		}
 
-		$cells   = array();
-		$capital = topersia_g_capital_id( $pid );
-
-		if ( $capital ) {
-
-			$group = topersia_g_group( $pid, 'capital' );
-			$view  = topersia_g_view_id( $capital );
-			$url   = topersia_g_public_url( $view );
-
-			$cells[] = array(
-				isset( $group['title'] ) ? topersia_g_t( $group['title'] ) : '',
-				'' !== $url
-					? '<a href="' . esc_url( $url ) . '">' . esc_html( topersia_g_name( $view ) ) . '</a>'
-					: esc_html( topersia_g_name( $view ) ),
-			);
-		}
-
 		/* مختصات زیر نقشه می‌نشیند و بهترین فصل در جدول فصل‌ها. */
-		$map = topersia_g_map();
+		$cells = array();
 
-		foreach ( topersia_g_stat_keys( $pid ) as $name ) {
+		foreach ( topersia_g_stat_plan( $pid ) as $key ) {
 
-			$cells[] = array( topersia_g_t( $map[ $name ]['label'] ), topersia_g_value( $name, topersia_g_raw( $pid, $name ) ) );
+			$cell = topersia_g_stat_cell( $pid, $key );
+
+			if ( null !== $cell ) {
+				$cells[] = $cell;
+			}
 		}
 
 		if ( empty( $cells ) ) {
@@ -2725,23 +2829,52 @@ if ( ! function_exists( 'topersia_g_sc_slider' ) ) {
 		}
 
 		/*
-		 * همۀ موارد در DOM، بی‌پنهان‌سازی — مثل مرجع.  P5-D215
-		 * مگر گروه سقف داشته باشد: شهرهای استان صدتایی‌اند و اسلایدر
-		 * دوازده‌تای اول را نشان می‌دهد؛ بقیه در مودالِ فهرست.  P5-D220
+		 * حداکثر هشت کارت در هر اسلایدرِ هر قالب، به ترتیب P5-D211.  P5-D276
+		 * بیشتر: پیوند «همه … ←» کنار عنوان و مودالِ فهرست با همۀ اعضا در
+		 * HTML سرور (P5-D221). هشت یا کمتر: نه پیوند، نه مودال.
 		 */
-		$group0 = topersia_g_group( $pid, $key );
-		$limit  = isset( $atts['limit'] ) ? absint( $atts['limit'] )
-			: ( isset( $group0['limit'] ) ? absint( $group0['limit'] ) : 0 );
-		$result = topersia_g_rel_items( $pid, $key, $limit );
+		$max    = topersia_g_slider_max();
+		$result = topersia_g_rel_items( $pid, $key, $max );
 
 		if ( empty( $result['items'] ) ) {
 			return '';
 		}
 
+		$group         = $result['group'];
+		$group['more'] = $result['total'] > $max ? topersia_g_list_more( $group, $key ) : '';
+
+		/* `places` شناسۀ خودش را دارد چون در مرجع `#places` است، نه
+		   یکی از `#rel-*` ها.  P5-D215 */
+		return topersia_g_slider_section( 'tp-' . $key, 'tpsl' . $pid . preg_replace( '/[^a-z0-9]+/i', '', $key ),
+			$group, $result['items'], topersia_g_title( $pid ), '' !== $group['more'] ? 'tp-list-' . $key : '' );
+	}
+}
+
+/** سقف کارت هر اسلایدر در همۀ قالب‌ها — بی صافی، تا ادعا قطعی بماند.  P5-D276 */
+if ( ! function_exists( 'topersia_g_slider_max' ) ) {
+	function topersia_g_slider_max() {
+		return 8;
+	}
+}
+
+/**
+ * بخش اسلایدر — یک سازنده برای گروه‌های رابطه و برنامه‌های نشان.  P5-D276
+ *
+ * @param string $sec_id  شناسۀ بخش.
+ * @param string $uid     شناسۀ اسلایدر (هدف دکمه‌های پیمایش).
+ * @param array  $group   title · lead · more (برچسب پیوند فهرست، خالی = بی پیوند) · hub.
+ * @param array  $items   کارت‌ها — حداکثر `topersia_g_slider_max()`.
+ * @param string $entity  نامی که جای `%s` متن راهنما می‌نشیند.
+ * @param string $list    شناسۀ مودالِ فهرست، یا خالی.
+ */
+if ( ! function_exists( 'topersia_g_slider_section' ) ) {
+	function topersia_g_slider_section( $sec_id, $uid, $group, $items, $entity, $list ) {
+
+		$items = array_slice( $items, 0, topersia_g_slider_max() );
 		$cards = '';
 		$no    = 0;
 
-		foreach ( $result['items'] as $item ) {
+		foreach ( $items as $item ) {
 
 			$no ++;
 
@@ -2788,25 +2921,259 @@ if ( ! function_exists( 'topersia_g_sc_slider' ) ) {
 				. ( $linked ? '</a>' : '</article>' );
 		}
 
-		$group = $result['group'];
-		$title = isset( $group['title'] ) ? $group['title'] : '';
-		$uid   = 'tpsl' . $pid . preg_replace( '/[^a-z0-9]+/i', '', $key );
-
-		/* `places` شناسۀ خودش را دارد چون در مرجع `#places` است، نه
-		   یکی از `#rel-*` ها.  P5-D215 */
-		$sec_id = 'tp-' . $key;
-
-		/* «همه … ←» مودالِ فهرست را باز می‌کند.  P5-D221 */
-		$group['more'] = topersia_g_list_more( $group, $key );
-		$list           = '' !== $group['more'] ? 'tp-list-' . $key : '';
-
-		/* نوار زیر اسلایدر در مرجع **داخل** `.slider-wrap` است، نه بعدش. */
+		/* «همه … ←» مودالِ فهرست را باز می‌کند (P5-D221)؛ نوار زیر اسلایدر در مرجع **داخل** `.slider-wrap` است. */
 		return '<section id="' . esc_attr( $sec_id ) . '" class="tp-section">'
-			. topersia_g_section_head( $group, topersia_g_title( $pid ), $list )
+			. topersia_g_section_head( $group, $entity, $list )
 			. '<div class="tp-slider-wrap">'
 			. '<div class="tp-slider" id="' . esc_attr( $uid ) . '">' . $cards . '</div>'
-			. topersia_g_slider_bar( $uid, count( $result['items'] ) )
+			. topersia_g_slider_bar( $uid, count( $items ) )
 			. '</div></section>';
+	}
+}
+
+/** برنامه‌ای با بیش از این شمار عضو مودال نمی‌گیرد؛ فقط شمار و پیوند به صفحۀ خودش.  P5-D276 */
+if ( ! function_exists( 'topersia_g_programme_list_max' ) ) {
+	function topersia_g_programme_list_max() {
+		return 100;
+	}
+}
+
+/**
+ * پرس‌وجوهای عضویت برنامه‌ها — Query Builder جت‌انجین (D1–D6).  P5-D281
+ *
+ * هر پرس‌وجوی پست با تنها یک شرط متا «سوییچ = true» یک قاعدۀ عضویت است:
+ * نوع‌های پست و کلید سوییچ. بی جت‌انجین، خالی.
+ *
+ * @return array هر عضو: id · key · types
+ */
+if ( ! function_exists( 'topersia_g_programme_queries' ) ) {
+	function topersia_g_programme_queries() {
+
+		$out = array();
+
+		if ( ! class_exists( '\Jet_Engine\Query_Builder\Manager' ) ) {
+			return $out;
+		}
+
+		foreach ( (array) \Jet_Engine\Query_Builder\Manager::instance()->get_queries() as $query ) {
+
+			if ( ! is_object( $query ) || 'posts' !== $query->query_type ) {
+				continue;
+			}
+
+			$args  = (array) $query->query;
+			$meta  = isset( $args['meta_query'] ) ? array_values( (array) $args['meta_query'] ) : array();
+			$types = isset( $args['post_type'] ) ? array_values( array_filter( (array) $args['post_type'] ) ) : array();
+
+			if ( 1 !== count( $meta ) || empty( $meta[0]['key'] ) || ! $types
+				|| ( isset( $meta[0]['compare'] ) && '=' !== $meta[0]['compare'] )
+				|| ! isset( $meta[0]['value'] ) || 'true' !== (string) $meta[0]['value'] ) {
+				continue;
+			}
+
+			$out[] = array( 'id' => (int) $query->id, 'key' => (string) $meta[0]['key'], 'types' => $types );
+		}
+
+		return $out;
+	}
+}
+
+/**
+ * برنامه‌های نشان (رکوردهای D) با اعضای منتشرشدۀ هر کدام.  P5-D281
+ *
+ * فهرست برنامه‌ها از داده است، نه از کد: هر رکورد منتشرشدۀ `tp_designation`
+ * زبان جاری یک برنامه است، به ترتیب P5-D211. عضویت از پرس‌وجوی همان برنامه
+ * (`topersia_g_programme_queries()`)؛ پرس‌وجو با کلید سوییچش به `programme_code`
+ * رکورد می‌رسد — یکی دیگری را در بر دارد (`creative_city` ⊂
+ * `unesco_creative_city` · `global_geopark` ⊃ `geopark`) و فقط تطبیق یکتا
+ * پذیرفته است. اعضا از دروازۀ منتشرشده (P5-D247)، به ترتیب P5-D211.
+ * برنامۀ بی عضو نمی‌آید.
+ *
+ * @param bool $flush از نو، نه از حافظۀ همین درخواست (آزمون).
+ * @return array هر عضو: id · code · name · url · ids
+ */
+if ( ! function_exists( 'topersia_g_programmes' ) ) {
+	function topersia_g_programmes( $flush = false ) {
+
+		static $memo = array();
+
+		$lang = topersia_g_page_lang();
+
+		if ( isset( $memo[ $lang ] ) && ! $flush ) {
+			return $memo[ $lang ];
+		}
+
+		$out = array();
+
+		if ( ! function_exists( 'get_posts' ) ) {
+			return $memo[ $lang ] = $out;
+		}
+
+		$queries = topersia_g_programme_queries();
+		$records = get_posts( array( 'post_type' => 'tp_designation', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => false ) );
+
+		foreach ( topersia_g_sort_entities( topersia_g_published( array_map( 'absint', (array) $records ) ) ) as $rid ) {
+
+			$code = trim( (string) topersia_g_raw( $rid, 'programme_code' ) );
+			$hits = array_values( array_filter( $queries, function ( $q ) use ( $code ) {
+				return '' !== $code && ( false !== strpos( $q['key'], $code ) || false !== strpos( $code, $q['key'] ) );
+			} ) );
+
+			if ( 1 !== count( $hits ) ) {
+				continue;
+			}
+
+			$ids = get_posts( array(
+				'post_type'        => $hits[0]['types'],
+				'post_status'      => 'publish',
+				'numberposts'      => -1,
+				'fields'           => 'ids',
+				'suppress_filters' => false,
+				'meta_query'       => array( array( 'key' => $hits[0]['key'], 'value' => 'true' ) ),
+			) );
+			$ids = topersia_g_sort_entities( topersia_g_published( array_map( 'absint', (array) $ids ) ) );
+
+			if ( $ids ) {
+				$out[] = array( 'id' => $rid, 'code' => $code, 'name' => topersia_g_name( $rid ), 'url' => topersia_g_public_url( $rid ), 'ids' => $ids );
+			}
+		}
+
+		return $memo[ $lang ] = $out;
+	}
+}
+
+/** شناسۀ بخش و مودال یک برنامه — خط‌تیره، نه زیرخط (P5-D180). نخستین برنامه لنگرِ نوار بخش‌هاست. */
+if ( ! function_exists( 'topersia_g_programme_ids' ) ) {
+	function topersia_g_programme_ids( $code, $first ) {
+		$slug = trim( preg_replace( '/[^a-z0-9]+/', '-', strtolower( (string) $code ) ), '-' );
+		return array(
+			'section' => $first ? 'tp-programmes' : 'tp-prog-' . $slug,
+			'list'    => 'tp-list-prog-' . $slug,
+			'slider'  => 'tpslprog' . preg_replace( '/[^a-z0-9]+/', '', strtolower( (string) $code ) ),
+		);
+	}
+}
+
+/**
+ * [tp_programmes] — یک اسلایدر برای هر برنامۀ نشان، مثل استان‌ها.  P5-D281
+ *
+ * هر اسلایدر طبق P5-D276: هشت کارت؛ بیشتر ← پیوند و مودالِ فهرست؛ بیش از
+ * صد عضو ← فقط شمار و پیوند به صفحۀ خودِ برنامه.
+ */
+if ( ! function_exists( 'topersia_g_sc_programmes' ) ) {
+	function topersia_g_sc_programmes( $atts = array() ) {
+
+		$pid = topersia_g_pid( $atts );
+
+		if ( ! $pid ) {
+			return '';
+		}
+
+		$max   = topersia_g_slider_max();
+		$out   = '';
+		$first = true;
+
+		foreach ( topersia_g_programmes() as $prog ) {
+
+			$items = array();
+
+			foreach ( array_slice( $prog['ids'], 0, $max ) as $one ) {
+				$items[] = topersia_g_place_item( topersia_g_view_id( $one ), 'attractions', false );
+			}
+
+			$total = count( $prog['ids'] );
+			$ids   = topersia_g_programme_ids( $prog['code'], $first );
+			$group = array( 'title' => $prog['name'], 'more' => '', 'hub' => '' );
+			$list  = '';
+
+			if ( $total > topersia_g_programme_list_max() && '' !== $prog['url'] ) {
+				/* translators: %s: شمار اعضای برنامه */
+				$group['more'] = sprintf( __( 'همه %s مورد ←', 'topersia' ), topersia_g_fa( $total ) );
+				$group['hub']  = $prog['url'];
+			} elseif ( $total > $max ) {
+				$group['more'] = __( 'همه موارد ←', 'topersia' );
+				$list          = $ids['list'];
+			}
+
+			$out  .= topersia_g_slider_section( $ids['section'], $ids['slider'], $group, $items, '', $list );
+			$first = false;
+		}
+
+		return $out;
+	}
+}
+
+/** مودالِ فهرست هر برنامه با بیش از هشت و تا صد عضو.  P5-D276 */
+if ( ! function_exists( 'topersia_g_programme_modals' ) ) {
+	function topersia_g_programme_modals( $pid ) {
+
+		unset( $pid );
+
+		$out   = '';
+		$first = true;
+
+		foreach ( topersia_g_programmes() as $prog ) {
+
+			$total = count( $prog['ids'] );
+			$ids   = topersia_g_programme_ids( $prog['code'], $first );
+			$first = false;
+
+			if ( $total <= topersia_g_slider_max() || $total > topersia_g_programme_list_max() ) {
+				continue;
+			}
+
+			$items = array();
+
+			foreach ( $prog['ids'] as $one ) {
+				$item    = topersia_g_place_item( topersia_g_view_id( $one ), 'attractions', false );
+				$items[] = array( 'name' => $item['name'], 'meta' => topersia_g_list_meta( 'attractions', $item ), 'url' => $item['url'] );
+			}
+
+			$out .= topersia_g_list_modal_html( $ids['list'], $prog['name'], array( array( 'head' => '', 'items' => $items ) ) );
+		}
+
+		return $out;
+	}
+}
+
+/**
+ * [tp_neighbor_names] — همسایه‌ها از فیلد متنی، کاشی `.neighbors`.  P5-D281
+ *
+ * فیلدی که ناحیه‌اش در FIELDMAP `neighbors` است — امروز `neighboring_countries`
+ * کشور. جداکننده در دادۀ واقعی خط است (CRLF)؛ ویرگول فارسی و لاتین هم. همان
+ * کاشیِ «هم‌مرزها» (P5-D244)، بی پیوند — کشور دیگری صفحه ندارد.
+ */
+if ( ! function_exists( 'topersia_g_sc_neighbor_names' ) ) {
+	function topersia_g_sc_neighbor_names( $atts = array() ) {
+
+		$pid = topersia_g_pid( $atts );
+
+		if ( ! $pid ) {
+			return '';
+		}
+
+		foreach ( topersia_g_map() as $name => $field ) {
+
+			if ( 'neighbors' !== $field['zone'] ) {
+				continue;
+			}
+
+			$list = array_values( array_filter( array_map( 'trim', (array) preg_split( '/\R|[،,]+/u', topersia_g_text( $pid, $name ) ) ), 'strlen' ) );
+
+			if ( ! $list ) {
+				continue;
+			}
+
+			$body = '';
+
+			foreach ( $list as $one ) {
+				$body .= topersia_g_a_open( '' ) . '<b>' . esc_html( $one ) . '</b></a>';
+			}
+
+			return topersia_g_section( 'tp-neighbors', $field['label'], '', '<div class="tp-neighbors">' . $body . '</div>' );
+		}
+
+		return '';
 	}
 }
 
@@ -4427,6 +4794,93 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
    ========================================================================= */
 
 /**
+ * ماتریس «نوع × ناحیه» — تنها جای تفاوت قالب‌ها.  P5-D275 · SPRINT-4.4 ۲ج٫۱
+ *
+ * چیدمان صفحۀ استان الگوی هر نوع صفحه‌دار است: همان ناحیه‌ها با همان ترتیب
+ * (`topersia_g_layout()`). نوع فقط با سطر خودش در این جدول از الگو جدا
+ * می‌شود؛ شرطِ نوع‌محور در تولیدکنندۀ ناحیه‌ها نوشته نمی‌شود. ناحیۀ بی‌داده
+ * خودش چیزی برنمی‌گرداند، پس جای خالی نمی‌ماند و ترتیب بقیه همان است.
+ *
+ *   off    شناسۀ ناحیه‌هایی که این نوع نمی‌گیرد، حتی با داده
+ *   on     ناحیه‌های اختیاری (`topersia_g_optin_zones()`) که این نوع می‌گیرد
+ *   title  'kind' پیش‌فرض (نوع + نام: «استان اصفهان») · 'name' فقط نام کوتاه
+ *   stats  خانه‌های کارت آمار سربرگ به ترتیب اولویت؛ چهار نخستینِ دارای
+ *          داده می‌آیند (`topersia_g_stat_cell()`)
+ *   scope  'area' پهنه‌ای · 'point' نقطه‌ای — جعبۀ مسیریابی فاز ۳ (P5-D253)
+ *
+ * نظر بازدیدکنندگان این‌جا نیست: منبعش پیکربندی نوع‌به‌نوع JetReviews در
+ * user-core است (P5-D234)؛ نوعی که خانواده ندارد بخش نظر نمی‌گیرد. سند همین
+ * جدول در HANDOVER، «ماتریس نوع × ناحیه».
+ *
+ * @return array نوع پست ← سطر
+ */
+if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
+	function topersia_g_type_matrix() {
+
+		$rows = array(
+
+			/* P5-D281 · P5-D282 — تیتر بی نام نوع؛ بی هوا، انیمیشن هوا، مسیریابی و کیفیت هوا */
+			'tp_country' => array(
+				'title' => 'name',
+				'off'   => array( 'tp-weather', 'tp-routing', 'tp-aqi' ),
+				'on'    => array( 'tp-programmes' ),
+				'stats' => array( 'population', 'area_km2', 'count:provinces', 'timezone' ),
+			),
+		);
+
+		if ( function_exists( 'apply_filters' ) ) {
+			$rows = apply_filters( 'topersia_g_type_matrix', $rows );
+		}
+
+		return $rows;
+	}
+}
+
+/**
+ * سطر ماتریس یک نوع (یا یک پست)، با پیش‌فرض‌ها.
+ *
+ * @param int|string $post_or_type شناسۀ پست یا نام نوع.
+ * @return array off · on · title · stats · scope
+ */
+if ( ! function_exists( 'topersia_g_type_row' ) ) {
+	function topersia_g_type_row( $post_or_type ) {
+
+		$type = is_string( $post_or_type ) && ! is_numeric( $post_or_type )
+			? $post_or_type
+			: ( function_exists( 'get_post_type' ) ? (string) get_post_type( absint( $post_or_type ) ) : '' );
+
+		$rows = topersia_g_type_matrix();
+		$row  = isset( $rows[ $type ] ) ? (array) $rows[ $type ] : array();
+
+		return array_merge(
+			array( 'off' => array(), 'on' => array(), 'title' => 'kind', 'stats' => array(), 'scope' => 'area' ),
+			$row
+		);
+	}
+}
+
+/** ناحیه‌هایی که فقط نوعِ صاحب `on` در ماتریس می‌گیرد. */
+if ( ! function_exists( 'topersia_g_optin_zones' ) ) {
+	function topersia_g_optin_zones() {
+		return array( 'tp-programmes' );
+	}
+}
+
+/** آیا این ناحیه برای این پست روشن است — طبق ماتریس.  P5-D275 */
+if ( ! function_exists( 'topersia_g_zone_on' ) ) {
+	function topersia_g_zone_on( $post_id, $zone_id ) {
+
+		$row = topersia_g_type_row( $post_id );
+
+		if ( in_array( $zone_id, (array) $row['off'], true ) ) {
+			return false;
+		}
+
+		return ! in_array( $zone_id, topersia_g_optin_zones(), true ) || in_array( $zone_id, (array) $row['on'], true );
+	}
+}
+
+/**
  * نمایش هر گروه رابطه: ستون · تولیدکننده · شناسه · نام در نوار بخش‌ها.
  *
  * ترتیب همین آرایه، ترتیب نشستن بخش‌ها در هر ستون است.
@@ -4521,6 +4975,11 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 				array( 'fn' => 'topersia_g_sc_gallery',  'id' => 'tp-gallery',  'nav' => 'گالری' ),
 				'attractions',
 				'places',
+				/* هم‌جایگاهِ `#places`: زیرمجموعۀ سکونتگاهیِ نوع‌های دیگر — استان‌های کشور، محله‌های شهر.  P5-D275 */
+				'provinces',
+				'districts',
+				/* یک اسلایدر برای هر برنامۀ نشان (رکوردهای D) — فقط کشور.  P5-D281 */
+				array( 'fn' => 'topersia_g_sc_programmes', 'id' => 'tp-programmes', 'nav' => 'نشان‌ها' ),
 				'culture',
 				array( 'fn' => 'topersia_g_sc_news',    'id' => 'tp-news',    'nav' => 'اخبار' ),
 				array( 'fn' => 'topersia_g_sc_faq',     'id' => 'tp-faq',     'nav' => 'پرسش‌ها' ),
@@ -4539,6 +4998,8 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 				'villages',
 				'practical',
 				'neighbors',
+				/* کشورهای همسایه از فیلد متنی — جای «هم‌مرزها»؛ هیچ نوعی هر دو را ندارد.  P5-D281 */
+				array( 'fn' => 'topersia_g_sc_neighbor_names', 'id' => 'tp-neighbors', 'nav' => '' ),
 				'routes',
 				array( 'fn' => 'topersia_g_sc_sources', 'id' => 'tp-sources', 'nav' => 'منابع' ),
 			),
@@ -4570,6 +5031,13 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 				if ( empty( $named[ $key ] ) ) {
 					$layout[ $col ][] = $zone;
 				}
+			}
+
+			/* تفاوت نوع‌ها فقط از ماتریس — ترتیب بقیه دست نمی‌خورد.  P5-D275 */
+			if ( $post_id ) {
+				$layout[ $col ] = array_values( array_filter( $layout[ $col ], function ( $zone ) use ( $post_id ) {
+					return '' === $zone['id'] || topersia_g_zone_on( $post_id, $zone['id'] );
+				} ) );
 			}
 		}
 
@@ -4757,10 +5225,21 @@ if ( ! function_exists( 'topersia_g_sc_page' ) ) {
 		$mbar   = topersia_g_safe( 'topersia_g_mobilebar', array( $pid, $nav, $rendered ), $pid, $notes );
 		$modals = topersia_g_safe( 'topersia_g_modals', array( $pid ), $pid, $notes );
 
-		/* مودالِ فهرست فقط برای بخشی که واقعاً رندر شد.  P5-D221 · P5-D192 */
-		foreach ( array( 'places', 'attractions', 'culture' ) as $list_key ) {
-			if ( isset( $rendered[ 'tp-' . $list_key ] ) ) {
-				$modals .= topersia_g_safe( 'topersia_g_list_modal', array( $pid, $list_key ), $pid, $notes );
+		/*
+		 * مودالِ فهرست فقط برای بخشی که واقعاً رندر شد.  P5-D221 · P5-D192
+		 * هر اسلایدرِ رابطه (اگر بیش از هشت عضو دارد — P5-D276)، فرهنگ، و هر
+		 * برنامۀ نشان.
+		 */
+		foreach ( $layout['main'] as $zone ) {
+
+			if ( ! isset( $rendered[ $zone['id'] ] ) ) {
+				continue;
+			}
+
+			if ( in_array( $zone['fn'], array( 'topersia_g_sc_slider', 'topersia_g_sc_culture' ), true ) ) {
+				$modals .= topersia_g_safe( 'topersia_g_list_modal', array( $pid, isset( $zone['atts']['rel'] ) ? $zone['atts']['rel'] : 'culture' ), $pid, $notes );
+			} elseif ( 'topersia_g_sc_programmes' === $zone['fn'] ) {
+				$modals .= topersia_g_safe( 'topersia_g_programme_modals', array( $pid ), $pid, $notes );
 			}
 		}
 
@@ -5184,7 +5663,7 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 
 		$group = topersia_g_group( $post_id, $key );
 
-		if ( '' === topersia_g_list_more( $group, $key ) ) {
+		if ( empty( $group ) ) {
 			return '';
 		}
 
@@ -5213,7 +5692,13 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 
 		} else {
 
-			$res   = topersia_g_rel_items( $post_id, $key, 0 );
+			$res = topersia_g_rel_items( $post_id, $key, 0 );
+
+			/* هشت یا کمتر: همه در خودِ اسلایدرند — نه پیوند، نه مودال.  P5-D276 */
+			if ( $res['total'] <= topersia_g_slider_max() ) {
+				return '';
+			}
+
 			$items = array();
 
 			foreach ( $res['items'] as $item ) {
@@ -5224,6 +5709,21 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 				$blocks[] = array( 'head' => '', 'items' => $items );
 			}
 		}
+
+		return topersia_g_list_modal_html( 'tp-list-' . $key, isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '', $blocks );
+	}
+}
+
+/**
+ * پوستۀ مودالِ فهرست — مشترک گروه‌های رابطه و برنامه‌های نشان.  P5-D221
+ *
+ * @param string $id     شناسۀ مودال (`tp-list-…`).
+ * @param string $title  عنوان ترجمه‌شده.
+ * @param array  $blocks هر عضو: head · items (name · meta · url).
+ * @return string HTML، یا خالی اگر عضوی نیست.
+ */
+if ( ! function_exists( 'topersia_g_list_modal_html' ) ) {
+	function topersia_g_list_modal_html( $id, $title, $blocks ) {
 
 		$total = 0;
 		$body  = '';
@@ -5265,8 +5765,6 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 			return '';
 		}
 
-		$id    = 'tp-list-' . $key;
-		$title = isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '';
 		/* translators: %s: شمار اعضا */
 		$count = sprintf( _n( '%s مورد', '%s مورد', (int) $total, 'topersia' ), topersia_g_fa( $total ) );
 		/* translators: 1: شمار پیداشده، 2: شمار همه */

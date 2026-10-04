@@ -493,7 +493,16 @@ if ( ! function_exists( 'topersia_render_enqueue_assets' ) ) {
 		 * هر دو در پاورقی می‌نشینند و تا پاسخ هوا نرسد هیچ‌چیز روی صفحه
 		 * نمی‌گذارند — سربرگ عنصر LCP است و نباید منتظر اینها بماند.
 		 * بی‌سربرگ بی‌اثرند، مثل `topersia-g-zones.js`.
+		 *
+		 * نوعی که ماتریس هوا را برایش خاموش کرده (کشور — P5-D281) این دو
+		 * پرونده را اصلاً نمی‌گیرد: بی کارت هوا انیمیشنی هم نیست.
 		 */
+		$entity = ( function_exists( 'is_singular' ) && is_singular() ) ? (int) get_queried_object_id() : 0;
+
+		if ( $entity && function_exists( 'topersia_g_zone_on' ) && ! topersia_g_zone_on( $entity, 'tp-weather' ) ) {
+			return;
+		}
+
 		wp_enqueue_script(
 			'topersia-g-weather',
 			$url . 'assets/topersia-g-weather.js',

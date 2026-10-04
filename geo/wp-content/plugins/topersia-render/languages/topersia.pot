@@ -792,6 +792,10 @@ msgid "شرق"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "شمار استان‌ها"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "شمال"
 msgstr ""
 
@@ -1401,6 +1405,15 @@ msgid "نیازمند راستی‌آزمایی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+#, php-format
+msgid "همه %s مورد ←"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "همه استان‌ها ←"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "همه تصاویر ←"
 msgstr ""
 
@@ -1414,6 +1427,14 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "همه فرهنگ ←"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "همه محله‌ها ←"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "همه موارد ←"
 msgstr ""
 
 #: includes/topersia-g-zones.php

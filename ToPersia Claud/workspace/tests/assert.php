@@ -971,7 +971,7 @@ t( 'دارایی: هر enqueue نسخه را از filemtime می‌گیرد',
  *
  * تا ۴٫۲٫۰ شهرستان‌ها بودند (P5-D215)؛ حالا شهرهای استان از زنجیرهٔ
  * ۷۲→۷۳، کارت اول مرکز استان (۹۶). دادهٔ آزمون سیزده شهر دارد به‌اضافهٔ
- * مرکز — بیش از دوازده، تا سقف اسلایدر واقعاً چیزی را ببُرد.
+ * مرکز — بیش از هشت، تا سقف اسلایدر (P5-D276) واقعاً چیزی را ببُرد.
  */
 $cities_html = r( 20, 'tp_slider', array( 'rel' => 'places' ) );
 
@@ -984,7 +984,7 @@ t( 'places: شماره لاتینِ دورقمی است، نه فارسی  P5-D2
 	'شماره فارسی است' );
 
 t( 'places: بقیه «شهر»اند و به صفحهٔ خودِ شهر پیوند دارند — نه شهرستان  P5-D220',
-	11 === substr_count( $cities_html, '<span class="tp-card-slide__tag">شهر</span>' )
+	7 === substr_count( $cities_html, '<span class="tp-card-slide__tag">شهر</span>' )
 	&& false !== strpos( $cities_html, '<a class="tp-card-slide" href="https://topersia.com/kashan/">' )
 	&& false === strpos( $cities_html, '<article class="tp-card-slide">' )
 	&& false === strpos( $cities_html, 'شهرستان' ),
@@ -993,13 +993,13 @@ t( 'places: بقیه «شهر»اند و به صفحهٔ خودِ شهر پیو�
 /* ترتیب P5-D211 — همان تابعِ مرتب‌سازی، روی همهٔ شهرهای زنجیره بی‌مرکز */
 preg_match_all( '#<h3 class="tp-card-slide__title">(.*?)</h3>#u', $cities_html, $city_titles );
 $city_order = array_map( function ( $id ) { return topersia_g_name( $id ); },
-	array_merge( array( 21 ), array_slice( topersia_g_sort_entities( array( 27, 28, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 29 ) ), 0, 11 ) ) );
+	array_merge( array( 21 ), array_slice( topersia_g_sort_entities( array( 27, 28, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 29 ) ), 0, 7 ) ) );
 
 t( 'places: ترتیب P5-D211 — مرکز، بعد اولویت و جمعیت و الفبا  P5-D220',
 	$city_order === $city_titles[1], implode( '،', $city_titles[1] ) );
 
-t( 'places: اسلایدر دوازده‌تای اول را نشان می‌دهد  P5-D220',
-	12 === substr_count( $cities_html, 'tp-card-slide__title' ), substr_count( $cities_html, 'tp-card-slide__title' ) . ' کارت' );
+t( 'places: اسلایدر هشت‌تای اول را نشان می‌دهد — سقف همهٔ اسلایدرها  P5-D276',
+	8 === substr_count( $cities_html, 'tp-card-slide__title' ), substr_count( $cities_html, 'tp-card-slide__title' ) . ' کارت' );
 
 t( 'places: سرفصل «شهرها» و «مرکز استان و شهرهای استان اصفهان»  P5-D220',
 	false !== strpos( $cities_html, '<h2>شهرها</h2>' )
@@ -1082,14 +1082,19 @@ $list_open = array(
 	'culture'     => 'همه فرهنگ ←',
 );
 
+/*
+ * P5-D276: اسلایدرِ بیش از هشت عضو (شهرها — چهارده) پیوند و مودال می‌گیرد،
+ * هشت یا کمتر (جاذبه‌ها — سه) هیچ‌کدام؛ فرهنگ شبکه است و همیشه دارد.
+ */
 $list_bad = array();
 foreach ( $list_open as $lk => $label ) {
+	$want   = 'attractions' === $lk ? 0 : 1;
 	$opener = '<a class="tp-more" href="#tp-list-' . $lk . '" role="button" aria-haspopup="dialog" aria-controls="tp-list-' . $lk . '" data-tp-list-open>' . $label . '</a>';
-	if ( 1 !== substr_count( $p20_all, $opener ) ) { $list_bad[] = $lk . ': بازکننده'; }
-	if ( 1 !== substr_count( $p20_all, '<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-' . $lk . '" role="dialog" aria-modal="true"' ) ) { $list_bad[] = $lk . ': مودال'; }
+	if ( $want !== substr_count( $p20_all, $opener ) ) { $list_bad[] = $lk . ': بازکننده'; }
+	if ( $want !== substr_count( $p20_all, '<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-' . $lk . '" role="dialog" aria-modal="true"' ) ) { $list_bad[] = $lk . ': مودال'; }
 }
 
-t( 'فهرست: «همه شهرها / جاذبه‌ها / فرهنگ ←» هر کدام یک مودال — شاسیِ گالری  P5-D221',
+t( 'فهرست: «همه شهرها / فرهنگ ←» هر کدام یک مودال؛ جاذبه‌های سه‌تایی نه پیوند نه مودال — شاسیِ گالری  P5-D221 · P5-D276',
 	! $list_bad, implode( ' · ', $list_bad ) );
 
 $list_places = preg_match( '#<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-places".*?</div></div>(?=<div class="tp-gallery-modal|$)#su', $p20_all, $lpm ) ? $lpm[0] : '';
@@ -1100,7 +1105,7 @@ t( 'فهرست: سرِ چسبان با عنوان، شمار، جست‌وجو �
 	substr( strip_tags( $list_places ), 0, 120 ) );
 
 /* ۴٫۳٫۰ بند ۱۰: برچسب نوعِ هم‌نوع‌ها رفت؛ شهر جمعیتش را با رقم فارسی و «نفر» می‌گیرد. */
-t( 'فهرست: همهٔ چهارده شهر — بیش از دوازدهٔ اسلایدر — با پیوندِ HTML، نه JSON  P5-D221',
+t( 'فهرست: همهٔ چهارده شهر — بیش از هشتِ اسلایدر — با پیوندِ HTML، نه JSON  P5-D221 · P5-D276',
 	14 === substr_count( $list_places, '<li class="tp-list__item">' )
 	&& false !== strpos( $list_places, '<a class="tp-list__card" href="https://topersia.com/kashan/"><b>کاشان</b><span class="tp-list__tag">۳۰۴٬۴۸۷ نفر</span></a>' )
 	&& false === strpos( $list_places, '<span class="tp-list__tag">شهر</span>' )
@@ -1111,8 +1116,8 @@ t( 'فهرست: همهٔ چهارده شهر — بیش از دوازدهٔ اس
 t( 'فهرست: فرهنگ به خانواده‌ها گروه می‌شود  P5-D221',
 	(bool) preg_match( '#id="tp-list-culture".*?<div class="tp-list__block"><h4 class="tp-list__fam">صنایع دستی</h4><ul class="tp-list__grid"><li class="tp-list__item"><a class="tp-list__card" href="https://topersia.com/mina/"><b>میناکاری</b>#su', $p20_all ) );
 
-t( 'فهرست: پیام «موردی پیدا نشد» آماده و پنهان  P5-D221',
-	3 === substr_count( $p20_all, '<p class="tp-list__empty" role="status" hidden>موردی پیدا نشد</p>' ) );
+t( 'فهرست: پیام «موردی پیدا نشد» آماده و پنهان — یکی در هر مودال (شهرها، فرهنگ)  P5-D221',
+	2 === substr_count( $p20_all, '<p class="tp-list__empty" role="status" hidden>موردی پیدا نشد</p>' ) );
 
 t( 'فهرست: بی‌بخش، بی‌مودال — شهر بخشِ شهرها ندارد، مودالش هم نه  P5-D221 · P5-D192',
 	false === strpos( r( 30, 'tp_page' ), 'id="tp-list-places"' ) );

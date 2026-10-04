@@ -216,6 +216,12 @@ return array(
 	'شهرها'                           => array( 'en' => 'Cities', 'ar' => 'المدن' ),
 	'مرکز استان و شهرهای %s'          => array( 'en' => 'The provincial capital and the cities of %s', 'ar' => 'مركز المحافظة ومدن %s' ),
 	'همه شهرها ←'                     => array( 'en' => 'All cities →', 'ar' => 'جميع المدن ←' ),
+	/* ۲ج — اسلایدر حداکثر هشت کارت، بیشتر ← پیوند فهرست (P5-D276) · کارت آمار کشور (P5-D282) */
+	'همه استان‌ها ←'                  => array( 'en' => 'All provinces →', 'ar' => 'جميع المحافظات ←' ),
+	'همه محله‌ها ←'                   => array( 'en' => 'All neighborhoods →', 'ar' => 'جميع الأحياء ←' ),
+	'همه موارد ←'                     => array( 'en' => 'All items →', 'ar' => 'جميع العناصر ←' ),
+	'همه %s مورد ←'                   => array( 'en' => 'All %s items →', 'ar' => 'جميع العناصر (%s) ←' ),
+	'شمار استان‌ها'                   => array( 'en' => 'Provinces', 'ar' => 'عدد المحافظات' ),
 	'روستاها'                         => array( 'en' => 'Villages', 'ar' => 'القرى' ),
 	'جاذبه‌های منتخب'                 => array( 'en' => 'Featured attractions', 'ar' => 'أبرز المعالم' ),
 	'جاذبه‌های شاخص %s و شهرهایش'     => array( 'en' => 'Top attractions of %s and its cities', 'ar' => 'أبرز معالم %s ومدنها' ),

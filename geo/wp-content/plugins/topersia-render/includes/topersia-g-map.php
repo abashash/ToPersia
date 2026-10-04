@@ -37,7 +37,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * نقشۀ ۵۷ فیلد اختصاصی دستۀ G.
  *
  * kind:  number · year · latin · flag · text · choice
- * zone:  card · details · badge · names · skip
+ * zone:  card · details · badge · names · neighbors · skip
+ *        neighbors: فهرست متنی همسایه‌ها ← کاشی‌های «همسایه‌ها» در ستون کناری (P5-D281)
  * year:  کلید فیلد سالی که با این نشان جفت می‌شود.
  * glossary: شناسۀ واژه‌نامۀ JetEngine برای فیلدهای choice.
  *
@@ -63,7 +64,7 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'timezone'                   => array( 'label' => 'منطقۀ زمانی', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),
 		'currency_note'              => array( 'label' => 'یادداشت ارز', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'government_type'            => array( 'label' => 'نوع حکومت', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),
-		'neighboring_countries'      => array( 'label' => 'کشورهای همسایه', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
+		'neighboring_countries'      => array( 'label' => 'کشورهای همسایه', 'unit' => '', 'kind' => 'text', 'zone' => 'neighbors' ),
 		'calling_code'               => array( 'label' => 'پیش‌شمارۀ تلفن', 'unit' => '', 'kind' => 'latin', 'zone' => 'card' ),
 		'best_season'                => array( 'label' => 'مناسب‌ترین فصل برای سفر', 'unit' => '', 'kind' => 'choice', 'zone' => 'card', 'glossary' => '34' ),
 		'internet_tld'               => array( 'label' => 'دامنۀ اینترنتی', 'unit' => '', 'kind' => 'latin', 'zone' => 'card' ),
@@ -414,7 +415,8 @@ if ( ! function_exists( 'topersia_g_relmap' ) ) {
 				 * مرکز استان است (رابطۀ ۹۶، برچسب «مرکز استان») و بقیه
 				 * «شهر» با پیوند به صفحۀ خودِ شهر. ترتیب P5-D211.
 				 *
-				 * اسلایدر دوازده‌تای اول را نشان می‌دهد؛ فهرست کامل در
+				 * اسلایدر هشت‌تای اول را نشان می‌دهد، مثل هر اسلایدر دیگر
+				 * (P5-D276 — سقف دوازدۀ پیشین برداشته شد)؛ فهرست کامل در
 				 * مودالِ فهرستی است که «همه شهرها ←» بازش می‌کند (P5-D221).
 				 */
 				'places' => array(
@@ -423,7 +425,6 @@ if ( ! function_exists( 'topersia_g_relmap' ) ) {
 					'more'   => 'همه شهرها ←',
 					'hub'    => '',
 					'kicker' => 'PLACES',
-					'limit'  => 12,
 					'chains' => array(
 						array(
 							array( 'id' => 72, 'dir' => 'children' ),
