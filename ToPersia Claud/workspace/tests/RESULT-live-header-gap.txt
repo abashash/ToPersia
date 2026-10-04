@@ -1,28 +1,310 @@
-فاصلهٔ بالای سربرگ روی زنجیرهٔ واقعی — نسخهٔ محلی با پشتهٔ کامل (SourceGuardian، بی xdebug)
-node tests/header-gap.js http://topersia.local/province/isfahan/ http://topersia.local/city/isfahan/
-عدد = بالای .tp-hero منهای پایینِ header.whb-header، در اسکرول صفر
-
-4.2.0 (پیش)  /province/isfahan/  1440  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
-4.2.0 (پیش)  /province/isfahan/  390  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
-4.2.0 (پیش)  /city/isfahan/  1440  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
-4.2.0 (پیش)  /city/isfahan/  390  فاصله 50px  div.elementor-element padding-top 10px + main#main-content.wd-content-layout padding-top 40px
-4.2.3 (پس)  /province/isfahan/  1440  فاصله 0px  —
-4.2.3 (پس)  /province/isfahan/  390  فاصله 0px  —
-4.2.3 (پس)  /city/isfahan/  1440  فاصله 0px  —
-4.2.3 (پس)  /city/isfahan/  390  فاصله 0px  —
-4.3.0  /province/isfahan/  1440  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 147px)
-4.3.0  /province/isfahan/  390  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 101px)
-4.3.0  /city/isfahan/  1440  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 147px)
-4.3.0  /city/isfahan/  390  فاصله 0px  —  (هدر clone وودمارت؛ پایین هدر 101px)
-4.4.0  /province/isfahan/  1440  فاصله 0px  —
-4.4.0  /province/isfahan/  390  فاصله 0px  —
-4.4.0  /city/isfahan/  1440  فاصله 0px  —
-4.4.0  /city/isfahan/  390  فاصله 0px  —
-4.4.1  /province/isfahan/  1440  فاصله 0px  —
-4.4.1  /province/isfahan/  390  فاصله 0px  —
-4.4.1  /city/isfahan/  1440  فاصله 0px  —
-4.4.1  /city/isfahan/  390  فاصله 0px  —
-4.4.2  /province/isfahan/  1440  فاصله 0px  —
-4.4.2  /province/isfahan/  390  فاصله 0px  —
-4.4.2  /city/isfahan/  1440  فاصله 0px  —
-4.4.2  /city/isfahan/  390  فاصله 0px  —
+[
+ {
+  "url": "http://topersia.local/province/isfahan/",
+  "width": 1440,
+  "gap": 0,
+  "headerBottom": 147,
+  "heroTop": 147,
+  "header": {
+   "mb": 0,
+   "position": "static"
+  },
+  "chain": [
+   {
+    "el": "header.tp-hero",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.tp-page",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor-shortcode",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-239ad75f.elementor-widget",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-357a771e.e-con-full",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor.elementor-1840.elementor-location-single",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "main#main-content.wd-content-layout.content-layout-wrapper.container",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.wd-page-content.main-page-wrapper",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   }
+  ]
+ },
+ {
+  "url": "http://topersia.local/province/isfahan/",
+  "width": 390,
+  "gap": 0,
+  "headerBottom": 101,
+  "heroTop": 101,
+  "header": {
+   "mb": 0,
+   "position": "static"
+  },
+  "chain": [
+   {
+    "el": "header.tp-hero",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.tp-page",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor-shortcode",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-239ad75f.elementor-widget",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-357a771e.e-con-full",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor.elementor-1840.elementor-location-single",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "main#main-content.wd-content-layout.content-layout-wrapper.container",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.wd-page-content.main-page-wrapper",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   }
+  ]
+ },
+ {
+  "url": "http://topersia.local/city/isfahan/",
+  "width": 1440,
+  "gap": 0,
+  "headerBottom": 147,
+  "heroTop": 147,
+  "header": {
+   "mb": 0,
+   "position": "static"
+  },
+  "chain": [
+   {
+    "el": "header.tp-hero",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.tp-page",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor-shortcode",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-239ad75f.elementor-widget",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-357a771e.e-con-full",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.elementor.elementor-1840.elementor-location-single",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "main#main-content.wd-content-layout.content-layout-wrapper.container",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   },
+   {
+    "el": "div.wd-page-content.main-page-wrapper",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 147,
+    "before": []
+   }
+  ]
+ },
+ {
+  "url": "http://topersia.local/city/isfahan/",
+  "width": 390,
+  "gap": 0,
+  "headerBottom": 101,
+  "heroTop": 101,
+  "header": {
+   "mb": 0,
+   "position": "static"
+  },
+  "chain": [
+   {
+    "el": "header.tp-hero",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.tp-page",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor-shortcode",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-239ad75f.elementor-widget",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor-element.elementor-element-357a771e.e-con-full",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.elementor.elementor-1840.elementor-location-single",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "main#main-content.wd-content-layout.content-layout-wrapper.container",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   },
+   {
+    "el": "div.wd-page-content.main-page-wrapper",
+    "mt": 0,
+    "pt": 0,
+    "bt": 0,
+    "top": 101,
+    "before": []
+   }
+  ]
+ }
+]

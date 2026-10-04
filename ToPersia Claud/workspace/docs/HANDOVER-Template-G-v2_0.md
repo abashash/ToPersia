@@ -29,6 +29,8 @@
 
 **شناسه‌های کاری:** پست آزمون `99` (`tp_province`, نامک `isfahan`) · قالب المنتور `1840` · کیت `68`
 
+**محیط محلی از ۰ب (۵ اکتبر، P5-D285 · P5-D284 · P5-D304):** ریشۀ مخزن و هم‌ارز `public_html` زنده `C:\wamp64\www\topersia` (DocumentRoot میزبان `topersia.local`) · وردپرس در `geo\` (`siteurl` `/geo`، `home` ریشه، `/assets` و `/core` در `.htaccess` ریشه، مثل زنده) · workspace در `ToPersia Claud\workspace` · همۀ مسیرهای آزمون و اسکریپت از `tests/env.json` · پایگاه‌داده `topersia_local` روی MySQL 8.4.7 (۳۳۰۶)، زنده MariaDB 10.11 — MariaDB 11.4.9 محلی روی ۳۳۰۷ هست ولی خالی؛ جابه‌جایی پیش از فاز ۳ با تصمیم کاربر · WP-CLI 2.12.0 در `C:\wamp64\bin\wp-cli` · mu-pluginهای `tp-local-*` بار می‌شوند · مخزن `github.com/abashash/ToPersia` (تا تأیید خصوصی‌شدن هیچ push) · گارد پیش از commit `scripts/git-guard` · تاریخچه از درون‌ریزی ۱ اکتبر؛ برچسب‌های پیشین نیستند و مبنای نسخۀ قبل زیپ‌های `dist/` است.
+
 ---
 
 ## ۲ — آنچه ساخته شد

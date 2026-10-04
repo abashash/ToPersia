@@ -92,7 +92,7 @@ t( 'فرم ورود: جهت از زبان صفحه — فارسی rtl، انگل
 /*
  * ── ۱٫۱۰٫۳ — فرم ورود و پیام‌هایش به زبان صفحه ──
  * واژه‌نامۀ سه‌زبانۀ واقعی از خودِ کلاس خوانده می‌شود (این‌جا stub آن بار است).
- * جهش: قالب و کلاس احراز هویتِ ۱٫۱۰٫۲ (git v4.4.1) — فارسیِ ثابت و `__()` بی‌کاتالوگ.
+ * جهش: قالب و کلاس احراز هویتِ ۱٫۱۰٫۲ (dist/topersia-user-core-1.10.2.zip) — فارسیِ ثابت و `__()` بی‌کاتالوگ.
  */
 $dict = preg_match( '/private array \$strings = \[(.*?)\n    \];/su', $src( 'includes/class-topersia-i18n.php' ), $dm ) ? eval( 'return [' . $dm[1] . '];' ) : array();
 
@@ -103,8 +103,15 @@ $uc_login = function ( $tpl ) use ( $dict ) {
 	$keys_ok = $km[1] && ! array_filter( $km[1], function ( $k ) use ( $dict ) { return empty( $dict[ $k ]['fa'] ) || empty( $dict[ $k ]['en'] ) || empty( $dict[ $k ]['ar'] ); } );
 	return ! preg_match( '/[\x{0600}-\x{06FF}]/u', $bare ) && $keys_ok && 6 === count( array_unique( $km[1] ) );
 };
+/* ۱٫۱۰٫۲ (همراه v4.4.1) از زیپ dist/ — برچسب‌های پیش از درون‌ریزی ۱ اکتبر در مخزن تازه نیستند (۰ب٫۲، P5-D284) */
 $uc_old = function ( $rel ) {
-	return (string) shell_exec( 'git -C ' . escapeshellarg( dirname( __DIR__, 2 ) ) . ' show v4.4.1:workspace/plugin/topersia-user-core/' . $rel . ' 2>&1' );
+	$zip = new ZipArchive();
+	if ( true !== $zip->open( dirname( __DIR__ ) . '/dist/topersia-user-core-1.10.2.zip' ) ) {
+		return '';
+	}
+	$s = $zip->getFromName( 'topersia-user-core/' . $rel );
+	$zip->close();
+	return false === $s ? '' : (string) $s;
 };
 $old_login = $uc_old( 'templates/login.php' );
 t( 'فرم ورود: هیچ متن فارسیِ ثابت — شش برچسب و دکمه از واژه‌نامۀ سه‌زبانه (fa · en · ar)؛ جهش — قالب ۱٫۱۰٫۲ — می‌افتد  ۱٫۱۰٫۳',

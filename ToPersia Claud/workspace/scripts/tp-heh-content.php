@@ -23,8 +23,10 @@
  * کد خروج: ۰ سالم · ۱ پس از apply هنوز در دامنه مانده · ۲ محیط ناقص
  */
 
-$_SERVER['HTTP_HOST']      = 'topersia.local';
-$_SERVER['SERVER_NAME']    = 'topersia.local';
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
+$_SERVER['HTTP_HOST']      = TP_HOST;
+$_SERVER['SERVER_NAME']    = TP_HOST;
 $_SERVER['SERVER_PORT']    = 80;
 $_SERVER['REQUEST_URI']    = '/';
 $_SERVER['REMOTE_ADDR']    = '127.0.0.1';
@@ -33,7 +35,7 @@ $_SERVER['REQUEST_METHOD'] = 'GET';
 const TP_HEH_TWO = "\u{0647}\u{0654}";
 const TP_HEH_ONE = "\u{06C0}";
 const TP_HEH_HEX = '0xD987D994';              /* بایت‌های UTF-8 همان دو نقطۀ کد */
-const TP_HEH_DIR = 'C:/wamp64/www/topersia/'; /* بیرون از مخزن */
+const TP_HEH_DIR = TP_ROOT . '/'; /* بیرون از مخزن */
 
 $mode    = isset( $argv[1] ) ? $argv[1] : '';
 $restore = 0 === strpos( $mode, '--restore=' ) ? substr( $mode, 10 ) : '';
@@ -43,7 +45,7 @@ if ( ! in_array( $mode, array( '--report', '--apply' ), true ) && '' === $restor
 	exit( 2 );
 }
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) || 'topersia_local' !== DB_NAME ) {
 	fwrite( STDERR, "فقط نسخۀ محلی — topersia.local، محیط local، پایگاه topersia_local\n" );

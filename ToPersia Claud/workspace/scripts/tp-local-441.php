@@ -33,15 +33,17 @@
  * می‌کند؛ اجرای دوباره بی‌خطر است.
  */
 
-$_SERVER['HTTP_HOST']      = 'topersia.local';
-$_SERVER['SERVER_NAME']    = 'topersia.local';
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
+$_SERVER['HTTP_HOST']      = TP_HOST;
+$_SERVER['SERVER_NAME']    = TP_HOST;
 $_SERVER['SERVER_PORT']    = 80;
 $_SERVER['REQUEST_URI']    = '/';
 $_SERVER['REMOTE_ADDR']    = '127.0.0.1';
 $_SERVER['REQUEST_METHOD'] = 'GET';
 
-const TP_WP       = 'C:/wamp64/www/topersia/geo/';
-const TP_REPORT   = 'C:/wamp64/www/topersia/LOCAL-DATA.txt';
+const TP_WP       = TP_WP_DIR . '/';
+const TP_REPORT   = TP_ROOT . '/LOCAL-DATA.txt';
 const TP_MARK     = '══════ ۴٫۴٫۱ ══════';
 const TP_SEEN     = '2026-09-28';
 const TP_STEPS    = array( 'translations', 'translations-rel', 'test-admin', 'services-migrate' );

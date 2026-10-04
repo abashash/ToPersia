@@ -12,14 +12,16 @@
  * هر ادعا جهش دارد. کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
 
-$_SERVER['HTTP_HOST']      = 'topersia.local';
-$_SERVER['SERVER_NAME']    = 'topersia.local';
+require_once __DIR__ . '/env.php';
+
+$_SERVER['HTTP_HOST']      = TP_HOST;
+$_SERVER['SERVER_NAME']    = TP_HOST;
 $_SERVER['SERVER_PORT']    = 80;
 $_SERVER['REQUEST_URI']    = '/';
 $_SERVER['REMOTE_ADDR']    = '127.0.0.1';
 $_SERVER['REQUEST_METHOD'] = 'GET';
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) || 'topersia_local' !== DB_NAME ) {
 	fwrite( STDERR, "فقط نسخۀ محلی\n" );
@@ -84,7 +86,7 @@ function tmp_rel( $rel_id, $parent, $child ) {
 }
 
 function local_get( $path ) {
-	$res = wp_remote_get( 'http://topersia.local' . $path, array( 'timeout' => 300, 'redirection' => 0 ) );
+	$res = wp_remote_get( TP_BASE_URL . $path, array( 'timeout' => 300, 'redirection' => 0 ) );
 	return is_wp_error( $res ) ? array( 'code' => 0, 'body' => '' ) : array( 'code' => (int) wp_remote_retrieve_response_code( $res ), 'body' => (string) wp_remote_retrieve_body( $res ) );
 }
 

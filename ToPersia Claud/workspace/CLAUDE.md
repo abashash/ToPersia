@@ -10,10 +10,29 @@
 
 | | مسیر / نسخه |
 |---|---|
+| ریشۀ مخزن و هم‌ارز `public_html` زنده | `C:\wamp64\www\topersia` (DocumentRoot میزبان `topersia.local`؛ `index.php` ← `geo/wp-blog-header.php`؛ `/assets` ← `geo/wp-content` و `/core` ← `geo/wp-includes` در `.htaccess` ریشه) |
+| وردپرس محلی | `C:\wamp64\www\topersia\geo` — `siteurl` `http://topersia.local/geo` · `home` `http://topersia.local` |
+| workspace | `C:\wamp64\www\topersia\ToPersia Claud\workspace` — نام پوشه فاصله دارد؛ همه‌جا در نقل‌قول |
+| **مسیرها از یک فایل** | **`tests/env.json`** (P5-D285) — هر آزمون PHP با `tests/env.php` (`TP_WP_DIR` · `TP_BASE_URL` · `TP_HOST` · `TP_ROOT` · `TP_PHP` · `TP_MYSQL` · `TP_WP_CLI`)، هر آزمون node با `tests/env.js`. مسیر ثابت ننویس؛ نگهبان «فقط topersia.local» سیاست است و در کد می‌ماند |
 | PHP | `C:\wamp64\bin\php\php8.3.28\php.exe` — **نه** نسخهٔ scratchpad |
+| پایگاه‌داده | `topersia_local` روی **MySQL 8.4.7** (۳۳۰۶)؛ MariaDB 11.4.9 روی ۳۳۰۷ هست ولی خالی. زنده MariaDB 10.11 — جابه‌جایی با تصمیم کاربر (۰ب٫۱) |
+| WP-CLI | `C:\wamp64\bin\wp-cli\wp-cli.phar` 2.12.0 — `php wp-cli.phar --path="C:/wamp64/www/topersia/geo" --url=http://topersia.local …` |
 | مرورگر آزمون | کروم، از راه CDP (`tests/cdp.js`) |
 | مرورگر کاربر | **فایرفاکس ۱۵۶** — چیزی که کروم می‌بیند لزوماً چیزی نیست که کاربر می‌بیند |
 | node | روی PATH |
+| پیش‌نمایش Claude Code | `ToPersia Claud/.claude/launch.json` فقط با `url` و `autoVerify: false` (P5-D304) — سروری راه نمی‌اندازد؛ جلسه بی worktree، روی `main` |
+
+## git و GitHub — P5-D284
+
+مخزن ریشه `C:\wamp64\www\topersia` با remote `github.com/abashash/ToPersia`. **تا کاربر ننوشته که مخزن خصوصی شد، هیچ push و هیچ Pull Request** («Create PR» به کار نمی‌رود). commit روی `main` محلی، پس از سبز شدن آزمون و گارد؛ push فقط پایان فاز. هیچ داده، لاگ، بکاپ، دیتابیس یا کلید در git (`.gitignore` ریشه).
+
+**گارد پیش از commit:** `scripts/git-guard` (نصب: `sh scripts/git-guard-install` ← `.git/hooks/pre-commit`). رد می‌کند: `wp-config.php` · `*.sql*` · بستۀ Duplicator · `*.log` · فایل بالای ۲۵ مگابایت · مقدار کلید (Google · OpenAI · `xi-api-key` · کلید خصوصی · `define( 'TOPERSIA_…_KEY', '…' )`) · نام کاربری مدیر محلی از متغیر محیطی `TP_GUARD_ADMIN_USER`. آزمون جهش: `sh scripts/git-guard-test` (index موقت؛ index واقعی دست نمی‌خورد). `--no-verify` فقط با تصمیم کاربر.
+
+**تاریخچه:** مخزن از درون‌ریزی ۱ اکتبر شروع می‌شود؛ برچسب‌های v4.1.0 تا v4.4.3 و commitهای پیش از آن نیستند. مبنای نسخۀ پیشین زیپ‌های `dist/` است، نه `git archive` برچسب؛ هستۀ ۴٫۱۰٫۰ «پیش از اصلاح» در `reference/topersia-core.php`.
+
+## اسکیل‌ها — قاعدۀ ۱۴ · P5-D286
+
+این سند، `docs/`، HANDOVER و قالب مرجع بر هر اسکیل مقدم‌اند؛ هیچ اسکیل طراحی صفحه‌ای را که مرجع دارد بازطراحی نمی‌کند. آغاز کار: `topersia-master-skill` · `topersia-project-context`. صفحۀ موجودیت: فقط سنجش (`web-design-guidelines` · `ui-ux-review` · `web-accessibility` · `design:accessibility-review`). المنتور: `topersia-elementor` · `topersia-ultimate-wordpress` — صفحۀ موجودیت یک ویجت `[tp_page]` می‌ماند. آزمون مرورگری `frontend-testing-and-qa` · خطا `debugging-and-error-recovery` · پیش از commit و پایان فاز `code-review-and-quality` · امنیت `security-and-hardening` · سئو و اسکیما `seo-geo-aeo-review` و `searchfit-seo`. جدول کامل: `docs/SPRINT-4.4-PHASES.md` بخش ۰.
 
 **سایت پشت «به‌زودی» است.** بازدیدکنندهٔ بی‌نام صفحهٔ maintenance می‌گیرد،
 نه صفحهٔ استان؛ پس خواندن صفحهٔ زنده با مرورگر بی‌سر کار نمی‌کند. فایل‌های
@@ -114,7 +133,7 @@ node tests/lighthouse.js --ab=tests/.lh-snapshots/v4.4.0,tests/.lh-snapshots/v4.
 
 **روش `P5-D264` — نسخهٔ ایستا، نه سرورِ زنده.** در فاز ۱ همان کد یک روز ۵۵ و روز بعد ۲۶ گرفت، چون TTFB سرور WAMP از ۴ به ۱۲ ثانیه رفت؛ عدد حالِ سرور را می‌سنجید. حالا هر صفحه یک بار با **همهٔ** پاسخ‌هایش ضبط می‌شود و Lighthouse از سرور ایستای درون همان فرایند می‌خواند (`--host-resolver-rules`)؛ درخواستِ بیرون از نسخهٔ ایستا ۴۰۴ و فهرست می‌شود و پذیرش یعنی صفر. TTFB سرور جدا گزارش می‌شود. بودجه (هیچ امتیازی بیش از ۲ واحد پایین‌تر) از `--ab` است: دو نسخهٔ ایستا یک‌درمیان، همان ماشین و همان دقیقه.
 
-**نسخهٔ ایستای مبنا پیش از همگام‌سازی کد تازه ضبط می‌شود**، و پیش از ضبط با diff ثابت می‌شود که افزونه‌های نسخهٔ محلی عیناً `git -c core.autocrlf=false archive` برچسب قبلی‌اند. `tests/.lh-snapshots/` در git نمی‌آید (بزرگ، با گواهی خودامضا).
+**نسخهٔ ایستای مبنا پیش از همگام‌سازی کد تازه ضبط می‌شود**، و پیش از ضبط با diff ثابت می‌شود که افزونه‌های نسخهٔ محلی عیناً زیپ‌های `dist/` نسخهٔ قبلی‌اند (تاریخچهٔ برچسب‌ها در مخزن تازه نیست — ۰ب٫۲). `tests/.lh-snapshots/` در git نمی‌آید (بزرگ، با گواهی خودامضا).
 
 `TP_LIGHTHOUSE` مسیر `lighthouse/cli/index.js` و `CHROME_PATH` کرومیوم Playwright. در ویندوز `EPERM` پاک‌کردن پوشهٔ موقتِ chrome-launcher پذیرفته است فقط اگر JSON گزارش نوشته شده باشد.
 
@@ -150,7 +169,7 @@ node tests/pack-admin.js     # زبانهٔ «بستهٔ محتوا» در پی�
 پاسخ آزمون اتصال، جدول لاگ، `debug.log` و `http-probe.log` می‌گردد. سرویسِ کلیددارِ بی‌کلید
 «آزموده نشد» است، نه PASS؛ میزبانِ بسته با `WP_HTTP_BLOCK_EXTERNAL` هم.
 
-`js-logger.js` هستهٔ نسخهٔ محلی را **موقتاً** با ۴٫۱۰٫۰ (`git show 53c6df5`) عوض می‌کند و
+`js-logger.js` هستهٔ نسخهٔ محلی را **موقتاً** با ۴٫۱۰٫۰ (`reference/topersia-core.php`) عوض می‌کند و
 در پایان، حتی با خطا، برمی‌گرداند — **هم‌زمان با هیچ آزمون دیگری روی topersia.local اجرا
 نشود.** ثبت‌کننده فقط برای مدیر است، پس با `tp_test_admin`. فایرفاکس بارگذاری‌های در راه را
 درست پس از `beforeunload` قطع می‌کند (ثانیه‌ها پیش از `pagehide`)؛ کروم برای بارگذاری

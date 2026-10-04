@@ -25,14 +25,16 @@
  *   php scripts/tp-local-data.php
  */
 
-$_SERVER['HTTP_HOST']   = 'topersia.local';
-$_SERVER['SERVER_NAME'] = 'topersia.local';
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
+$_SERVER['HTTP_HOST']   = TP_HOST;
+$_SERVER['SERVER_NAME'] = TP_HOST;
 $_SERVER['SERVER_PORT'] = 80;
 $_SERVER['REQUEST_URI'] = '/';
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 $_SERVER['REQUEST_METHOD'] = 'GET';
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) ) {
 	fwrite( STDERR, "فقط نسخهٔ محلی — topersia.local با محیط local\n" );
@@ -466,7 +468,7 @@ if ( $log['skipped'] ) {
 $out .= "\n── منابع ──\n";
 foreach ( $S as $s ) { $out .= '  ' . $s[0] . "\n    " . $s[1] . "\n"; }
 
-file_put_contents( 'C:/wamp64/www/topersia/LOCAL-DATA.txt', $out );
+file_put_contents( TP_ROOT . '/LOCAL-DATA.txt', $out );
 
 printf( "منتشر: %d · ساخته: %d · به‌روز: %d · رابطه: %d · منتشرنشده: %d\n",
 	count( $log['published'] ), count( $log['created'] ), count( $log['updated'] ), count( $log['relations'] ), count( $log['skipped'] ) );

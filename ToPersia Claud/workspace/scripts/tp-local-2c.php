@@ -14,10 +14,12 @@
  * فقط topersia.local. روی زنده همین کار در Theme Builder با دست (HANDOVER بخش ۷).
  */
 
-$_SERVER['HTTP_HOST']   = 'topersia.local';
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
+$_SERVER['HTTP_HOST']   = TP_HOST;
 $_SERVER['REQUEST_URI'] = '/';
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) ) {
 	fwrite( STDERR, "فقط نسخۀ محلی\n" );

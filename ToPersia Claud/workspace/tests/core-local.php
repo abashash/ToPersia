@@ -21,14 +21,16 @@
  * کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
 
-$_SERVER['HTTP_HOST']      = 'topersia.local';
-$_SERVER['SERVER_NAME']    = 'topersia.local';
+require_once __DIR__ . '/env.php';
+
+$_SERVER['HTTP_HOST']      = TP_HOST;
+$_SERVER['SERVER_NAME']    = TP_HOST;
 $_SERVER['SERVER_PORT']    = 80;
 $_SERVER['REQUEST_URI']    = '/';
 $_SERVER['REMOTE_ADDR']    = '127.0.0.1';
 $_SERVER['REQUEST_METHOD'] = 'GET';
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) || 'topersia_local' !== DB_NAME ) {
 	fwrite( STDERR, "فقط نسخۀ محلی\n" );
@@ -309,7 +311,7 @@ $outputs = array(
 	'مصرف و خطا'      => wp_json_encode( get_option( TOPERSIA_SERVICES_USAGE ) ),
 	'جدول لاگ'        => (string) $wpdb->get_var( "SELECT GROUP_CONCAT( CONCAT( message, context ) SEPARATOR '\n' ) FROM " . topersia_log_table() . ' WHERE logged_at > NOW() - INTERVAL 1 HOUR' ),
 	'debug.log'       => (string) @file_get_contents( WP_CONTENT_DIR . '/debug.log', false, null, max( 0, (int) @filesize( WP_CONTENT_DIR . '/debug.log' ) - 2000000 ) ),
-	'http-probe.log'  => (string) @file_get_contents( 'C:/wamp64/www/topersia/http-probe.log' ),
+	'http-probe.log'  => (string) @file_get_contents( TP_ROOT . '/http-probe.log' ),
 );
 $leaks = function ( $outs ) use ( $fake ) {
 	return array_keys( array_filter( $outs, function ( $h ) use ( $fake ) { return false !== strpos( (string) $h, $fake ); } ) );

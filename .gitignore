@@ -60,3 +60,28 @@ desktop.ini
 # Editor temporary files
 *.swp
 *.swo
+# --- P5-D284 (phase 0b.2): nothing of data, logs, backups or databases in git ---
+# Duplicator output
+/geo/wp-content/backups-dup-pro/
+/geo/wp-content/backups-dup-lite/
+*.daf
+*_archive.zip
+/*installer.php
+/dup-installer/
+# Any database dump, at any depth
+*.sql
+*.sql.gz
+*.sql.zip
+# Full live backup
+/Wordpress/
+# Any log
+*.log
+# AbzarWP plugin zips
+/geo/wp-content/abzarwp-backups/
+# Test artefacts
+tests/.lh-snapshots/
+node_modules/
+# Local-only data at the root
+/LOCAL-DATA.txt
+/LOCAL-STUBS.txt
+/heh-content-backup-*.json

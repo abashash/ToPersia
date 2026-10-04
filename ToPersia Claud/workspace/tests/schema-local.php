@@ -14,11 +14,13 @@
  * کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
 
-$_SERVER['HTTP_HOST']   = 'topersia.local';
-$_SERVER['SERVER_NAME'] = 'topersia.local';
+require_once __DIR__ . '/env.php';
+
+$_SERVER['HTTP_HOST']   = TP_HOST;
+$_SERVER['SERVER_NAME'] = TP_HOST;
 $_SERVER['REQUEST_URI'] = '/';
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || 'topersia_local' !== DB_NAME || ! function_exists( 'topersia_schema_map' ) ) {
 	fwrite( STDERR, "فقط نسخۀ محلی با topersia-schema فعال\n" );

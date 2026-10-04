@@ -1,5 +1,0 @@
-# 4.2.2 — local diagnostic stubs for SourceGuardian-encoded AbzarWP license shims.
-# 4.2.3 — RESTORED. SourceGuardian loader (ixed.8.2ts.win · ixed.8.3ts.win, v17.0.0,
-#         sourceguardian.com) is in php.ini + phpForApache.ini of php8.2.29 and php8.3.28.
-#         All 12 original abzarwp.php files are back in place; no *.sg-off remains.
-#         active_plugins restored byte-for-byte from the live dump (abzarwp-auto-update active).

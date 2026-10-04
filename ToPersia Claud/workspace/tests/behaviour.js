@@ -28,6 +28,7 @@
  */
 
 const { chromium, firefox } = require( 'playwright' );
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 const { execFileSync } = require( 'child_process' );
 const fs   = require( 'fs' );
 const os   = require( 'os' );
@@ -35,7 +36,7 @@ const path = require( 'path' );
 
 const URLS = process.argv.slice( 2 ).filter( a => /^https?:/.test( a ) );
 if ( ! URLS.length ) {
-	URLS.push( 'http://topersia.local/province/isfahan/', 'http://topersia.local/city/isfahan/' );
+	URLS.push( ENV.base + '/province/isfahan/', ENV.base + '/city/isfahan/' );
 }
 
 let pass = 0, fail = 0;
@@ -48,7 +49,7 @@ function info( t ) { console.log( '  · ' + t ); }
 /* صفحه‌های هارنس — همان tests/preview.php، استان راست‌به‌چپ و چپ‌به‌راست */
 function harness() {
 	const dir = fs.mkdtempSync( path.join( os.tmpdir(), 'tp-behaviour-' ) );
-	const wamp = 'C:\\wamp64\\bin\\php\\php8.3.28\\php.exe';
+	const wamp = ENV.php;
 	const php = process.env.TP_PHP || ( fs.existsSync( wamp ) ? wamp : 'php' );
 	execFileSync( php, [ path.join( __dirname, 'preview.php' ), dir ], { stdio: 'ignore' } );
 	const url = f => 'file:///' + path.join( dir, f ).replace( /\\/g, '/' );
@@ -779,8 +780,8 @@ async function langPage( browser, url, want, tag ) {
 		} ) );
 		/* پیوند ورود (`data-tp-login`) پنجره باز می‌کند؛ href فقط جایگزینِ بی‌جاوااسکریپت است و
 		   به برگۀ حساب زبان جاری می‌رود، یا اگر آن زبان برگه ندارد، به اصل — جدا گزارش می‌شود */
-		const links = [ ...new Set( pages.flatMap( p => [ ...p.querySelectorAll( 'a[href^="http://topersia.local/"]:not([data-tp-login])' ) ].map( a => new URL( a.href ).pathname ) ) ) ];
-		const login = [ ...new Set( pages.flatMap( p => [ ...p.querySelectorAll( 'a[data-tp-login][href^="http://topersia.local/"]' ) ].map( a => new URL( a.href ).pathname ) ) ) ];
+		const links = [ ...new Set( pages.flatMap( p => [ ...p.querySelectorAll( 'a[href^="' + location.origin + '/"]:not([data-tp-login])' ) ].map( a => new URL( a.href ).pathname ) ) ) ];
+		const login = [ ...new Set( pages.flatMap( p => [ ...p.querySelectorAll( 'a[data-tp-login][href^="' + location.origin + '/"]' ) ].map( a => new URL( a.href ).pathname ) ) ) ];
 		return {
 			lang: document.documentElement.lang, dir: getComputedStyle( pages[0] ).direction,
 			odd: [ ...new Set( odd ) ], explicit: [ ...new Set( explicit ) ], links, login,
@@ -918,15 +919,15 @@ async function langProbe( browser, url, ui, same ) {
 }
 
 const LANG442 = [
-	{ url: 'http://topersia.local/en/province/isfahan/', fa: 'http://topersia.local/province/isfahan/', path: '/en/province/isfahan/', dir: 'ltr', h1: 'Isfahan Province', eyebrow: 'Province', lang: 'en' },
-	{ url: 'http://topersia.local/ar/province/isfahan/', fa: 'http://topersia.local/province/isfahan/', path: '/ar/province/isfahan/', dir: 'rtl', h1: 'محافظة أصفهان', eyebrow: 'محافظة', lang: 'ar' },
-	{ url: 'http://topersia.local/en/city/isfahan/', fa: 'http://topersia.local/city/isfahan/', path: '/en/city/isfahan/', dir: 'ltr', h1: 'Isfahan', eyebrow: 'City', lang: 'en' },
-	{ url: 'http://topersia.local/ar/city/isfahan/', fa: 'http://topersia.local/city/isfahan/', path: '/ar/city/isfahan/', dir: 'rtl', h1: 'أصفهان', eyebrow: 'مدينة', lang: 'ar' },
+	{ url: ENV.base + '/en/province/isfahan/', fa: ENV.base + '/province/isfahan/', path: '/en/province/isfahan/', dir: 'ltr', h1: 'Isfahan Province', eyebrow: 'Province', lang: 'en' },
+	{ url: ENV.base + '/ar/province/isfahan/', fa: ENV.base + '/province/isfahan/', path: '/ar/province/isfahan/', dir: 'rtl', h1: 'محافظة أصفهان', eyebrow: 'محافظة', lang: 'ar' },
+	{ url: ENV.base + '/en/city/isfahan/', fa: ENV.base + '/city/isfahan/', path: '/en/city/isfahan/', dir: 'ltr', h1: 'Isfahan', eyebrow: 'City', lang: 'en' },
+	{ url: ENV.base + '/ar/city/isfahan/', fa: ENV.base + '/city/isfahan/', path: '/ar/city/isfahan/', dir: 'rtl', h1: 'أصفهان', eyebrow: 'مدينة', lang: 'ar' },
 ];
 
 /* هم‌مرز فارسیِ اصفهان: اصفهان یک بار، با وجود ترجمه‌هایش — دروازۀ زبان  P5-D247 */
 async function neighborOnce( browser, tag ) {
-	const s = await open( browser, 'http://topersia.local/province/chaharmahal-and-bakhtiari/' );
+	const s = await open( browser, ENV.base + '/province/chaharmahal-and-bakhtiari/' );
 	const n = await s.page.evaluate( () => [ ...document.querySelectorAll( '#tp-neighbors a' ) ].map( a => ( { name: a.querySelector( 'b' ).textContent.trim(), href: new URL( a.href ).pathname } ) ) );
 	await s.ctx.close();
 	const isf = n.filter( x => /اصفهان|Isfahan|أصفهان/.test( x.name ) );
@@ -935,10 +936,10 @@ async function neighborOnce( browser, tag ) {
 }
 
 const LANG_PAGES = [
-	{ url: 'http://topersia.local/en/province/isfahan/', path: '/en/province/isfahan/', lang: 'en', dir: 'ltr', prefix: '/en/' },
-	{ url: 'http://topersia.local/ar/province/isfahan/', path: '/ar/province/isfahan/', lang: 'ar', dir: 'rtl', prefix: '/ar/' },
-	{ url: 'http://topersia.local/en/city/isfahan/', path: '/en/city/isfahan/', lang: 'en', dir: 'ltr', prefix: '/en/' },
-	{ url: 'http://topersia.local/ar/city/isfahan/', path: '/ar/city/isfahan/', lang: 'ar', dir: 'rtl', prefix: '/ar/' },
+	{ url: ENV.base + '/en/province/isfahan/', path: '/en/province/isfahan/', lang: 'en', dir: 'ltr', prefix: '/en/' },
+	{ url: ENV.base + '/ar/province/isfahan/', path: '/ar/province/isfahan/', lang: 'ar', dir: 'rtl', prefix: '/ar/' },
+	{ url: ENV.base + '/en/city/isfahan/', path: '/en/city/isfahan/', lang: 'en', dir: 'ltr', prefix: '/en/' },
+	{ url: ENV.base + '/ar/city/isfahan/', path: '/ar/city/isfahan/', lang: 'ar', dir: 'rtl', prefix: '/ar/' },
 ];
 
 ( async () => {

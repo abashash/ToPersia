@@ -1,0 +1,82 @@
+#!/bin/sh
+# git-guard — گارد پیش از commit · P5-D284 (فاز ۰ب٫۲)
+#
+# commit را رد می‌کند اگر در فایل‌های stage‌شده (افزوده، کپی، تغییر، تغییر نام) باشد:
+#   wp-config.php · دیتابیس (*.sql، *.sql.gz، *.sql.zip) · بستۀ Duplicator (*.daf،
+#   *_archive.zip، installer.php و dup-installer/ در ریشه، backups-dup-*) · هر *.log ·
+#   فایل بزرگ‌تر از ۲۵ مگابایت · الگوی کلید در خط‌های افزوده: کلید Google (AIza…)،
+#   کلید OpenAI (sk-…)، مقدار xi-api-key، بلوک کلید خصوصی (BEGIN … PRIVATE KEY)،
+#   define( 'TOPERSIA_…_KEY', '…' ) با مقدار · نام کاربری مدیر محلی.
+#
+# نام کاربری مدیر محلی هرگز در این پرونده نوشته نمی‌شود: از متغیر محیطی
+# TP_GUARD_ADMIN_USER خوانده می‌شود؛ خالی باشد، فقط هشدار می‌دهد.
+#
+# الگوها شکل مقدار واقعی را می‌خواهند (طول و نویسه‌ها)، پس نام سرآیند در کد
+# ('xi-api-key') یا یادداشتی که «AIza» را نام می‌برد رد نمی‌شود. خود این پرونده هم.
+#
+# نصب: sh "ToPersia Claud/workspace/scripts/git-guard-install"
+# آزمون جهش: sh "ToPersia Claud/workspace/scripts/git-guard-test"
+# دور زدن (فقط با تصمیم کاربر): git commit --no-verify
+
+LIMIT=26214400   # ۲۵ مگابایت
+bad=0
+
+say() { printf 'git-guard: %s\n' "$*" >&2; }
+block() { say "رد — $1: $2"; bad=1; }
+
+files=$(git diff --cached --name-only --diff-filter=ACMR)
+
+OLDIFS=$IFS
+IFS='
+'
+for f in $files; do
+	case "$f" in
+		wp-config.php|*/wp-config.php) block 'wp-config.php' "$f" ;;
+	esac
+	case "$f" in
+		*.sql|*.sql.gz|*.sql.zip) block 'دیتابیس' "$f" ;;
+	esac
+	case "$f" in
+		*.log) block 'لاگ' "$f" ;;
+	esac
+	case "$f" in
+		*.daf|*_archive.zip|*/backups-dup-pro/*|*/backups-dup-lite/*|backups-dup-pro/*|backups-dup-lite/*|dup-installer/*) block 'بستۀ Duplicator' "$f" ;;
+		*/*) : ;;
+		*installer.php) block 'نصب‌کنندۀ Duplicator در ریشه' "$f" ;;
+	esac
+	size=$(git cat-file -s ":$f" 2>/dev/null || echo 0)
+	if [ "${size:-0}" -gt "$LIMIT" ]; then
+		block 'بزرگ‌تر از ۲۵ مگابایت' "$f ($size بایت)"
+	fi
+done
+IFS=$OLDIFS
+
+# خط‌های افزوده — بی پرونده‌های دودویی
+added=$(git diff --cached -U0 --diff-filter=ACMR --no-color --no-ext-diff | grep -E '^\+' | grep -vE '^\+\+\+ ')
+
+check() {
+	if printf '%s\n' "$added" | grep -qE -- "$2"; then
+		block "$1" "$(printf '%s\n' "$added" | grep -cE -- "$2") خط"
+	fi
+}
+
+check 'کلید Google'     'AIza[0-9A-Za-z_-]{35}'
+check 'کلید OpenAI'     '(^|[^A-Za-z0-9_])sk-(proj-)?[A-Za-z0-9_-]{20,}'
+check 'مقدار xi-api-key' "xi-api-key['\"]?[[:space:]]*(:|=>?|,)[[:space:]]*['\"]?[A-Za-z0-9_]{20,}"
+check 'کلید خصوصی'      '-----BEGIN ([A-Z]+ )*PRIVATE KEY-----'
+check 'ثابت کلید با مقدار' "define\\([[:space:]]*['\"]TOPERSIA_[A-Z0-9_]*KEY['\"][[:space:]]*,[[:space:]]*['\"][^'\"]{8,}['\"]"
+
+if [ -n "${TP_GUARD_ADMIN_USER:-}" ]; then
+	if printf '%s\n' "$added" | grep -qF -- "$TP_GUARD_ADMIN_USER"; then
+		block 'نام کاربری مدیر محلی' 'در خط‌های افزوده'
+	fi
+else
+	say 'هشدار — TP_GUARD_ADMIN_USER خالی است؛ نام کاربری مدیر محلی سنجیده نشد.'
+fi
+
+if [ "$bad" -ne 0 ]; then
+	say 'commit رد شد. فایل را از stage بیرون کن (git restore --staged) یا مقدار را بردار.'
+	exit 1
+fi
+
+exit 0

@@ -1,0 +1,80 @@
+#!/bin/sh
+# آزمون جهش گارد پیش از commit · P5-D284 (فاز ۰ب٫۲)
+#
+# هر فایل ساختگی در یک index موقت stage می‌شود (index واقعی دست نمی‌خورد) و گارد
+# باید ردش کند؛ فایل پاک باید بگذرد. کلیدهای ساختگی همین‌جا از تکه‌ها ساخته می‌شوند
+# تا خودِ این پرونده الگوی کلید نداشته باشد. در پایان همۀ فایل‌ها و index موقت پاک.
+#
+#   sh "ToPersia Claud/workspace/scripts/git-guard-test"
+#
+# کد خروج: ۰ همه درست · ۱ جهشی نگرفته شد یا فایل پاک رد شد.
+
+root=$(git rev-parse --show-toplevel) || exit 2
+guard="$root/ToPersia Claud/workspace/scripts/git-guard"
+gitdir=$(git rev-parse --absolute-git-dir)
+idx="$gitdir/tp-guard-test-index"
+rel="ToPersia Claud/workspace/tests/.guard-tmp"
+dir="$root/$rel"
+pass=0
+fail=0
+
+cleanup() {
+	rm -rf "$dir" "$root/dup-installer" "$root/tp-guard-probe-installer.php" "$idx"
+}
+trap cleanup EXIT INT TERM
+cleanup
+mkdir -p "$dir" "$root/dup-installer"
+
+pad() { printf "%0${1}d" 0 | tr '0' "$2"; }   # n نویسۀ یکسان — کلید ساختگی
+
+# برچسب · انتظار (block|pass) · مسیر نسبت به ریشه · متغیر محیطی اختیاری
+run() {
+	cp "$gitdir/index" "$idx"
+	GIT_INDEX_FILE="$idx" git -C "$root" add -f -- "$3" 2>/dev/null
+	if env $4 GIT_INDEX_FILE="$idx" sh "$guard" >/dev/null 2>&1; then got=pass; else got=block; fi
+	if [ "$got" = "$2" ]; then
+		pass=$((pass + 1)); printf '  ✅ %s — %s\n' "$1" "$got"
+	else
+		fail=$((fail + 1)); printf '  ❌ %s — انتظار %s، شد %s\n' "$1" "$2" "$got"
+	fi
+}
+
+printf '%s\n' '<?php /* probe */' > "$dir/wp-config.php"
+printf '%s\n' '-- probe' > "$dir/probe.sql"
+printf '%s\n' 'probe' > "$dir/probe.sql.gz"
+printf '%s\n' 'probe' > "$dir/probe.log"
+printf '%s\n' 'probe' > "$dir/probe.daf"
+printf '%s\n' 'probe' > "$dir/site_archive.zip"
+printf '%s\n' '<?php /* probe */' > "$root/tp-guard-probe-installer.php"
+printf '%s\n' '<?php /* probe */' > "$root/dup-installer/main.php"
+head -c 27262976 /dev/zero > "$dir/big.bin"
+printf '%s\n' "\$k = 'AIza$(pad 35 x)';" > "$dir/google.php"
+printf '%s\n' "\$k = 'sk-$(pad 24 x)';" > "$dir/openai.php"
+printf '%s\n' "'xi-api-key' => '$(pad 32 x)'," > "$dir/eleven.php"
+printf '%s\n' "-----BEGIN RSA PRIVATE KEY""-----" "$(pad 40 x)" > "$dir/key.pem.txt"
+printf '%s\n' "define( 'TOPERSIA_PROBE_API_""KEY', '$(pad 20 x)' );" > "$dir/const.php"
+printf '%s\n' 'owner: tp_guard_probe_user' > "$dir/admin.txt"
+printf '%s\n' "headers: array( 'xi-api-key' => \$key ) // نام سرآیند بی مقدار" > "$dir/clean-header.php"
+printf '%s\n' 'سلام' > "$dir/clean.txt"
+
+echo 'گارد پیش از commit — آزمون جهش (P5-D284)'
+run 'wp-config.php'                 block "$rel/wp-config.php"
+run 'دیتابیس .sql'                  block "$rel/probe.sql"
+run 'دیتابیس .sql.gz'               block "$rel/probe.sql.gz"
+run 'لاگ'                           block "$rel/probe.log"
+run 'بستۀ Duplicator .daf'           block "$rel/probe.daf"
+run 'بستۀ Duplicator _archive.zip'   block "$rel/site_archive.zip"
+run 'installer.php در ریشه'         block "tp-guard-probe-installer.php"
+run 'dup-installer/ در ریشه'        block "dup-installer/main.php"
+run 'فایل ۲۶ مگابایتی'              block "$rel/big.bin"
+run 'کلید Google'                   block "$rel/google.php"
+run 'کلید OpenAI'                   block "$rel/openai.php"
+run 'مقدار xi-api-key'              block "$rel/eleven.php"
+run 'کلید خصوصی'                    block "$rel/key.pem.txt"
+run 'ثابت TOPERSIA_…_KEY با مقدار'  block "$rel/const.php"
+run 'نام کاربری مدیر از متغیر محیطی' block "$rel/admin.txt" 'TP_GUARD_ADMIN_USER=tp_guard_probe_user'
+run 'نام سرآیند بی مقدار — پاک'     pass  "$rel/clean-header.php" 'TP_GUARD_ADMIN_USER=tp_guard_probe_user'
+run 'فایل پاک'                      pass  "$rel/clean.txt" 'TP_GUARD_ADMIN_USER=tp_guard_probe_user'
+
+printf '  گذشته: %s   افتاده: %s\n' "$pass" "$fail"
+[ "$fail" -eq 0 ]

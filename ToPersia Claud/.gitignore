@@ -1,5 +1,7 @@
-# ToPersia — مخزن محلی، بدون remote.  ۴٫۲٫۲ بند ۵
-# هر زیپ = یک commit با برچسب نسخه (git tag v4.2.3).
+# ToPersia Claud — پوشۀ پروژه درون مخزن ریشۀ C:\wamp64\www\topersia (هم‌ارز public_html).
+# remote: github.com/abashash/ToPersia — باید خصوصی باشد؛ push فقط پایان فاز و فقط پس از
+# تأیید کاربر که مخزن خصوصی است (P5-D284). قاعده‌های کلی و گارد پیش از commit در ریشه
+# (.gitignore ریشه · scripts/git-guard). هر زیپ = یک commit با برچسب نسخه.
 
 # بکاپ کامل سایت زنده — چند گیگابایت، با دیتابیس کاربران.
 Wordpress/
@@ -9,14 +11,15 @@ Wordpress/
 *.sql.gz
 *.sql.zip
 
-# نسخهٔ محلیِ سایت بیرون از این مخزن است: C:\wamp64\www\topersia
-# (دیتابیسش topersia_local). اگر روزی کپی‌ای از آن این‌جا افتاد، این‌ها نگهش می‌دارند:
+# وردپرس محلی در geo/ ریشه است، نه این‌جا (دیتابیسش topersia_local). اگر روزی
+# کپی‌ای از سایت در این پوشه افتاد، این‌ها نگهش می‌دارند:
 **/www/topersia/
 **/wamp64/
 LOCAL-DATA.txt
 LOCAL-STUBS.txt
 
-# ابزار و سیستم
-.claude/
+# ابزار و سیستم — از .claude/ فقط پیکربندی پیش‌نمایش در git (P5-D304)
+.claude/*
+!.claude/launch.json
 desktop.ini
 node_modules/

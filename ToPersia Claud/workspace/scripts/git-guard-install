@@ -1,0 +1,16 @@
+#!/bin/sh
+# نصب گارد پیش از commit در .git/hooks/pre-commit · P5-D284
+# قلاب فقط پروندۀ ردیابی‌شدۀ scripts/git-guard را اجرا می‌کند؛ تغییر گارد بی نصب دوباره اثر دارد.
+root=$(git rev-parse --show-toplevel) || exit 1
+hook="$(git rev-parse --git-path hooks)/pre-commit"
+if [ -f "$hook" ] && ! grep -q 'git-guard' "$hook"; then
+	cp "$hook" "$hook.before-git-guard"
+	printf 'قلاب پیشین در %s.before-git-guard نگه داشته شد\n' "$hook"
+fi
+cat > "$hook" <<'HOOK'
+#!/bin/sh
+# ToPersia — P5-D284. اجرای گارد ردیابی‌شده.
+exec sh "$(git rev-parse --show-toplevel)/ToPersia Claud/workspace/scripts/git-guard" "$@"
+HOOK
+chmod +x "$hook" 2>/dev/null
+printf 'نصب شد: %s\n' "$hook"

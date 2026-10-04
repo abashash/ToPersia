@@ -18,12 +18,14 @@
  * کد خروج: ۰ سالم · ۲ محیط ناقص
  */
 
-$_SERVER['HTTP_HOST'] = 'topersia.local'; $_SERVER['SERVER_NAME'] = 'topersia.local'; $_SERVER['REQUEST_URI'] = '/';
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
+$_SERVER['HTTP_HOST'] = TP_HOST; $_SERVER['SERVER_NAME'] = TP_HOST; $_SERVER['REQUEST_URI'] = '/';
 
 $mode = isset( $argv[1] ) ? $argv[1] : '';
 if ( ! in_array( $mode, array( '--report', '--apply' ), true ) ) { fwrite( STDERR, "--report یا --apply\n" ); exit( 2 ); }
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || 'topersia_local' !== DB_NAME || ! function_exists( 'icl_add_string_translation' ) ) {
 	fwrite( STDERR, "فقط نسخۀ محلی با WPML String Translation\n" );

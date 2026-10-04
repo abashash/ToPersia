@@ -37,7 +37,9 @@ $TP_JSON = in_array( '--json', $argv, true );
 
 if ( in_array( '--all-php', $argv, true ) ) {
 
-	$bins = glob( 'C:/wamp64/bin/php/php*/php.exe' );
+	require_once __DIR__ . '/env.php';
+	/* همۀ PHPهای کنار PHP اصلی env.json — P5-D285 */
+	$bins = glob( dirname( dirname( TP_PHP ) ) . '/php*/php.exe' );
 	$code = 0;
 
 	foreach ( (array) $bins as $bin ) {

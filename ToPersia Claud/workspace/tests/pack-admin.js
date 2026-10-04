@@ -20,10 +20,11 @@ const os = require( 'node:os' );
 const path = require( 'node:path' );
 const { execFileSync } = require( 'node:child_process' );
 const { chromium, firefox } = require( 'playwright' );
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 const WS   = path.resolve( __dirname, '..' );
-const PHP  = process.env.TP_PHP || 'C:\\wamp64\\bin\\php\\php8.3.28\\php.exe';
-const BASE = 'http://topersia.local';
+const PHP  = ENV.php;
+const BASE = ENV.base;
 const TAB  = BASE + '/geo/wp-admin/admin.php?page=topersia&tab=pack';
 
 let pass = 0, fail = 0;

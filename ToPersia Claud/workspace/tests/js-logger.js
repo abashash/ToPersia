@@ -6,7 +6,7 @@
  *
  * ثبت‌کننده فقط برای مدیر است؛ پس با مدیرِ آزمون `tp_test_admin` (کوکی از
  * tests/local-login.php، بی گذرواژه — هرگز مدیر واقعی). هر سناریو دو بار، در
- * کروم و فایرفاکس: با هستۀ ۴٫۱۰٫۰ (پیش از اصلاح — `git show 53c6df5`) و ۴٫۱۱٫۰
+ * کروم و فایرفاکس: با هستۀ ۴٫۱۰٫۰ (پیش از اصلاح — `reference/topersia-core.php`) و ۴٫۱۱٫۰
  * (workspace)، روی همان سایت. جای‌گزینی موقت است و در پایان، حتی با خطا،
  * ۴٫۱۱٫۰ برمی‌گردد.
  *
@@ -38,6 +38,8 @@
  * کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
 
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
+
 const fs   = require( 'node:fs' );
 const http = require( 'node:http' );
 const net  = require( 'node:net' );
@@ -53,13 +55,14 @@ try {
 }
 
 const WS    = path.resolve( __dirname, '..' );
-const REPO  = path.resolve( WS, '..' );
-const PHP   = process.env.TP_PHP || 'C:\\wamp64\\bin\\php\\php8.3.28\\php.exe';
-const MYSQL = process.env.TP_MYSQL || 'C:\\wamp64\\bin\\mysql\\mysql8.4.7\\bin\\mysql.exe';
-const LIVE  = 'C:\\wamp64\\www\\topersia\\geo\\wp-content\\plugins\\topersia-core\\topersia-core.php';
+const PHP   = ENV.php;
+const MYSQL = ENV.mysql;
+const LIVE  = ENV.wp + '/wp-content/plugins/topersia-core/topersia-core.php';
 const NEW   = path.join( WS, 'plugin', 'topersia-core', 'topersia-core.php' );
-const OLD_COMMIT = '53c6df5';   /* topersia-core 4.10.0 — ورود بی‌تغییر از بکاپ */
-const HOME  = 'http://topersia.local/';
+/* هستۀ ۴٫۱۰٫۰ «پیش از اصلاح» — رونوشت بی‌تغییر بکاپ در reference/. تاریخچۀ git پیش از درون‌ریزی
+   ۱ اکتبر (commit 53c6df5) در مخزن تازه نیست؛ ۰ب٫۲ (P5-D284) */
+const OLD_FILE = path.join( WS, 'reference', 'topersia-core.php' );
+const HOME  = ENV.base + '/';
 const PAGES = [ HOME, HOME + 'province/isfahan/', HOME + 'city/isfahan/' ];
 const TABLE = 'jwWSU9v_topersia_log';
 const KNOWN_404 = /\/site\/wp-content\/themes\/woodmart\/images\/payments\.png$/;
@@ -113,11 +116,11 @@ async function settle( since, user ) {
 }
 
 /* ── نسخۀ هسته روی سایت محلی ── */
-const OLD_SRC = execFileSync( 'git', [ '-C', REPO, 'show', OLD_COMMIT + ':workspace/plugin/topersia-core/topersia-core.php' ], { maxBuffer: 64 << 20 } );
+const OLD_SRC = fs.readFileSync( OLD_FILE );
 const NEW_SRC = fs.readFileSync( NEW );
 
 if ( ! /Version:\s+4\.10\.0/.test( OLD_SRC.toString( 'utf8' ) ) ) {
-	console.error( 'هستۀ ۴٫۱۰٫۰ در ' + OLD_COMMIT + ' پیدا نشد' );
+	console.error( 'هستۀ ۴٫۱۰٫۰ در ' + OLD_FILE + ' پیدا نشد' );
 	process.exit( 2 );
 }
 if ( ! fs.readFileSync( LIVE ).equals( NEW_SRC ) ) {
@@ -150,7 +153,7 @@ function slowProxy() {
 	const server = http.createServer( ( req, res ) => {
 		let u;
 		try { u = new URL( req.url ); } catch ( e ) { res.writeHead( 400 ); res.end(); return; }
-		if ( 'topersia.local' !== u.hostname ) { res.writeHead( 204 ); res.end(); return; }
+		if ( ENV.host !== u.hostname ) { res.writeHead( 204 ); res.end(); return; }
 		const headers = Object.assign( {}, req.headers );
 		delete headers[ 'proxy-connection' ];
 		const go = () => {

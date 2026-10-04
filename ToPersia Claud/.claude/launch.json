@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "autoVerify": false,
+  "configurations": [
+    { "name": "topersia-wamp", "url": "http://topersia.local" }
+  ]
+}

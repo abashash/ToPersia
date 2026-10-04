@@ -12,11 +12,12 @@
  */
 
 const { chromium, firefox } = require( 'playwright' );
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 const { execFileSync } = require( 'child_process' );
 const path = require( 'path' );
 
-const BASE = 'http://topersia.local';
-const PHP  = process.env.TP_PHP || 'C:\\wamp64\\bin\\php\\php8.3.28\\php.exe';
+const BASE = ENV.base;
+const PHP  = ENV.php;
 
 /* نشانیِ هر نوع با کارت آمار — از وردپرس محلی (tests/phase2c-urls.php) */
 const STAT_PAGES = ( () => {

@@ -57,7 +57,7 @@ const SNAP   = opt( 'snapshot', '' );
 const AB     = opt( 'ab', '' ).split( ',' ).filter( Boolean );
 const URLS   = args.filter( a => /^https?:/.test( a ) );
 const BUDGET = 2;
-const LOCAL_PLUGINS = process.env.TP_LOCAL_PLUGINS || 'C:/wamp64/www/topersia/geo/wp-content/plugins';
+const LOCAL_PLUGINS = process.env.TP_LOCAL_PLUGINS || ENV.wp + '/wp-content/plugins';
 
 function die( code, msg ) {
 	console.error( msg );
@@ -69,7 +69,7 @@ if ( ! SNAP && 2 !== AB.length ) {
 }
 
 if ( ! URLS.length ) {
-	URLS.push( 'http://topersia.local/province/isfahan/', 'http://topersia.local/city/isfahan/' );
+	URLS.push( ENV.base + '/province/isfahan/', ENV.base + '/city/isfahan/' );
 }
 
 function findLighthouse() {
@@ -89,6 +89,7 @@ if ( ! LH || ! fs.existsSync( LH ) ) {
 }
 const LH_VERSION = require( path.join( path.dirname( LH ), '..', 'package.json' ) ).version;
 const CHROME     = process.env.CHROME_PATH || require( 'playwright' ).chromium.executablePath();
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 /* ── نسخۀ ایستا ── */
 

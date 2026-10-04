@@ -20,6 +20,8 @@
  *   php scripts/tp-local-sr.php --write    نوشتن
  */
 
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
 $WRITE = in_array( '--write', $argv, true );
 $DB    = 'topersia_local';
 
@@ -29,7 +31,7 @@ if ( 'topersia_local' !== $DB ) {
 }
 
 $PAIRS = array(
-	'https://topersia.com'   => 'http://topersia.local',
+	'https://topersia.com'   => TP_BASE_URL,
 	'https:\\/\\/topersia.com' => 'http:\\/\\/topersia.local',
 );
 

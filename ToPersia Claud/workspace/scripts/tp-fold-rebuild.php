@@ -14,8 +14,10 @@
  * کد خروج: ۰ سالم · ۱ پس از بازسازی هنوز کهنه یا نبوده · ۲ محیط ناقص
  */
 
-$_SERVER['HTTP_HOST']      = 'topersia.local';
-$_SERVER['SERVER_NAME']    = 'topersia.local';
+require_once dirname( __DIR__ ) . '/tests/env.php';
+
+$_SERVER['HTTP_HOST']      = TP_HOST;
+$_SERVER['SERVER_NAME']    = TP_HOST;
 $_SERVER['SERVER_PORT']    = 80;
 $_SERVER['REQUEST_URI']    = '/';
 $_SERVER['REMOTE_ADDR']    = '127.0.0.1';
@@ -28,7 +30,7 @@ if ( ! in_array( $mode, array( '--report', '--rebuild' ), true ) ) {
 	exit( 2 );
 }
 
-require 'C:/wamp64/www/topersia/geo/wp-load.php';
+require TP_WP_DIR . '/wp-load.php';
 
 if ( 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) || 'topersia_local' !== DB_NAME ) {
 	fwrite( STDERR, "فقط نسخۀ محلی — topersia.local، محیط local، پایگاه topersia_local\n" );

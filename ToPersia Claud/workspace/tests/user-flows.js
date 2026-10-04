@@ -30,12 +30,13 @@ const fs = require( 'node:fs' );
 const path = require( 'node:path' );
 const { execFileSync } = require( 'node:child_process' );
 const { chromium, firefox } = require( 'playwright' );
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 const WS    = path.resolve( __dirname, '..' );
-const PHP   = process.env.TP_PHP || 'C:\\wamp64\\bin\\php\\php8.3.28\\php.exe';
-const PROBE = 'C:/wamp64/www/topersia/http-probe.log';
-const PROV  = { url: 'http://topersia.local/province/isfahan/', id: 99 };
-const CITY  = { url: 'http://topersia.local/city/isfahan/', id: 399 };
+const PHP   = ENV.php;
+const PROBE = ENV.root + '/http-probe.log';
+const PROV  = { url: ENV.base + '/province/isfahan/', id: 99 };
+const CITY  = { url: ENV.base + '/city/isfahan/', id: 399 };
 const BOT   = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 
 /* میزبان‌های API که خلاصه‌ساز می‌شناسد (class-tp-ai-api.php) */
