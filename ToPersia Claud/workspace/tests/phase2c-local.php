@@ -8,6 +8,8 @@
  * همین‌جا ساخته و در پایان پاک می‌شود (پست موقت، متا، ردیف رابطه).
  *
  *   ۲ج٫۴  قالب کشور  P5-D281 · P5-D282
+ *   ۲ج٫۵  گالری تجمیعی و صف هسته  P5-D274 · P5-D300 · P5-D290 — کارهای صفی که
+ *         آزمون می‌سازد در پایان اجرا و ردیفشان پاک می‌شود
  *
  * هر ادعا جهش دارد. کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
@@ -49,7 +51,9 @@ function mut( $label, callable $claim, $real, $mutant, $note = '' ) {
 
 function section( $s ) { echo "\n{$s}\n" . str_repeat( '─', 78 ) . "\n"; }
 
-$cleanup = array( 'posts' => array(), 'rel' => array() );
+/* as_floor: کف صف هسته پیش از آزمون — هر کار topersia بالاتر از آن ساختۀ همین آزمون است (۲ج٫۵) */
+require_once __DIR__ . '/queue-sweep.php';
+$cleanup = array( 'posts' => array(), 'rel' => array(), 'as_floor' => tp_queue_floor() );
 $GLOBALS['cleanup'] = &$cleanup;
 
 register_shutdown_function( function () use ( &$cleanup ) {
@@ -60,6 +64,8 @@ register_shutdown_function( function () use ( &$cleanup ) {
 	foreach ( $cleanup['posts'] as $p ) {
 		wp_delete_post( $p, true );
 	}
+	/* پاک‌شدن پست موقت والدهای تجمیعی را در صف گذاشت — اجرا، و ردیف‌های صفِ ساختۀ آزمون پاک */
+	tp_queue_sweep( $cleanup['as_floor'] );
 } );
 
 function tmp_post( $type, $title, $status = 'publish', $meta = array() ) {
@@ -398,6 +404,324 @@ $isf_html = (string) topersia_g_sc_stats( array( 'id' => $isf_city ) );
 $isf_n    = count( $stats( $isf_html ) );
 t( 'شهر اصفهان: ' . $isf_n . ' خانه و data-tp-n برابر آن — شبکه به شمار خانه‌ها',
 	$isf_n >= 1 && false !== strpos( $isf_html, 'data-tp-n="' . $isf_n . '"' ), implode( ' | ', array_column( $stats( $isf_html ), 0 ) ) );
+
+/* ══ ۲ج٫۵ — گالری تجمیعی ═════════════════════════════════════════════ */
+section( '۲ج٫۵ — گالری تجمیعی: صف هسته، پایین به بالا، منبع، فقط منتشرشده  P5-D274 · P5-D300 · P5-D290' );
+
+$g5_hook  = 'topersia_gallery_agg_rebuild';
+$g5_ready = $cleanup['as_floor'] >= 0 && function_exists( 'topersia_g_gallery_agg_enabled' );
+t( 'صف واحد هسته آماده — Action Scheduler ' . ( class_exists( 'ActionScheduler_Versions' ) ? ActionScheduler_Versions::instance()->latest_version() : '؟' ) . '، گروه «topersia»؛ لایۀ مشتق در local روشن  P5-D290 · P5-D300',
+	$g5_ready && defined( 'TOPERSIA_QUEUE_GROUP' ) && 'topersia' === TOPERSIA_QUEUE_GROUP && topersia_g_gallery_agg_enabled() );
+
+/* پیوست‌های تصویری آزاد: نه در گالری کشور، نه اصفهان — و تصویرِ درست (کاشی می‌سازد) */
+$g5_isf  = (int) ( get_posts( array( 'post_type' => 'tp_province', 'name' => 'isfahan', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => false ) )[0] ?? 0 );
+$g5_used = array_merge( topersia_g_gallery_own_ids( $country ), $g5_isf ? topersia_g_gallery_own_ids( $g5_isf ) : array() );
+$g5_free = array();
+foreach ( get_posts( array( 'post_type' => 'attachment', 'post_mime_type' => 'image', 'post_status' => 'inherit', 'numberposts' => -1, 'fields' => 'ids', 'orderby' => 'ID', 'order' => 'ASC', 'suppress_filters' => false ) ) as $g5_one ) {
+	if ( ! in_array( (int) $g5_one, $g5_used, true ) && topersia_g_gallery_shots( array( (int) $g5_one ) ) ) {
+		$g5_free[] = (int) $g5_one;
+	}
+}
+
+if ( ! $g5_ready || ! $g5_isf || count( $g5_free ) < 8 ) :
+	t( '۲ج٫۵ آزموده نشد — صف، اصفهان یا هشت پیوست تصویری آزاد نیست', false, count( $g5_free ) . ' پیوست آزاد' );
+else :
+
+list( $a0, $a1, $a2, $a3, $a4, $a5, $a6, $a7 ) = $g5_free;
+
+$g5_drain = function () use ( $g5_hook ) {
+	$n = 0;
+	for ( $i = 0; $i < 8; $i++ ) {
+		$k = topersia_queue_run_now( $g5_hook );
+		if ( ! $k ) { break; }
+		$n += $k;
+	}
+	return $n;
+};
+$g5_rows = function ( $id ) {
+	return array_map( function ( $r ) { return $r['id'] . '@' . $r['src']; }, topersia_g_gallery_agg_stored( $id ) );
+};
+/* کارهای بازسازیِ ساخته‌شده پس از $floor، هر وضعیتی — اجرای هم‌زمان WP-Cron محلی ادعا را نمی‌شکند */
+$g5_jobs = function ( $floor ) use ( $g5_hook ) {
+	global $wpdb;
+	$out = array();
+	foreach ( $wpdb->get_results( $wpdb->prepare( "SELECT args, scheduled_date_gmt, status FROM {$wpdb->prefix}actionscheduler_actions WHERE hook = %s AND action_id > %d AND status IN ( 'pending', 'in-progress', 'complete' )", $g5_hook, $floor ) ) as $r ) {
+		$args  = json_decode( $r->args, true );
+		$out[] = array( 'post' => (int) ( $args['post'] ?? 0 ), 'at' => strtotime( $r->scheduled_date_gmt . ' UTC' ) );
+	}
+	return $out;
+};
+
+/* کارهای مانده از بخش‌های پیشین (پست موقت ۲ج٫۴ و ۲ج٫۶) — صف از صفر */
+$g5_drain();
+$g5_country_before = topersia_g_gallery_agg_stored( $country );
+$g5_isf_before     = topersia_g_gallery_agg_stored( $g5_isf );
+$g5_floor          = (int) $wpdb->get_var( "SELECT COALESCE( MAX( action_id ), 0 ) FROM {$wpdb->prefix}actionscheduler_actions" );
+$g5_post_mark      = count( $cleanup['posts'] );
+$g5_rel_mark       = count( $cleanup['rel'] );
+
+/* چیدمان: کشور ← استان P ← شهرستان K ← شهر C ← بنا M (رابطه‌های ۷۱ · ۷۲ · ۷۳ · ۸۴) */
+$g5_P = tmp_post( 'tp_province', 'استان آزمون ۲ج٫۵' );
+$g5_K = tmp_post( 'tp_county', 'شهرستان آزمون ۲ج٫۵' );
+$g5_C = tmp_post( 'tp_city', 'شهر آزمون ۲ج٫۵' );
+$g5_M = tmp_post( 'tp_monument', 'بنای آزمون ۲ج٫۵' );
+tmp_rel( 71, $country, $g5_P );
+tmp_rel( 72, $g5_P, $g5_K );
+tmp_rel( 73, $g5_K, $g5_C );
+tmp_rel( 84, $g5_C, $g5_M );
+update_post_meta( $g5_M, 'featured_image_gallery', $a1 . ',' . $a2 . ',' . $a3 );
+update_post_meta( $g5_C, 'featured_image_gallery', (string) $a0 );
+
+/* صف: یک کار برای هر پله، پایین به بالا — بی ذخیرۀ پست، فقط از رابطه و گالری */
+$g5_order = function ( $jobs ) use ( $g5_C, $g5_P, $country ) {
+	$at = array();
+	foreach ( array( $g5_C, $g5_P, $country ) as $id ) {
+		$mine = array_values( array_filter( $jobs, function ( $j ) use ( $id ) { return $j['post'] === $id; } ) );
+		if ( 1 !== count( $mine ) ) { return false; }
+		$at[] = $mine[0]['at'];
+	}
+	return $at[0] < $at[1] && $at[1] < $at[2];
+};
+$g5_j = $g5_jobs( $g5_floor );
+mut( 'ردیف رابطه و گالریِ تازه (بی ذخیرۀ پست) یک کار برای هر پله می‌سازد — شهر، استان، کشور؛ تکراری‌ها ادغام؛ زمان‌ها پایین به بالا  P5-D290',
+	$g5_order, $g5_j, array_merge( $g5_j, array( array( 'post' => $g5_P, 'at' => 0 ) ) ),
+	count( $g5_j ) . ' کار' );
+
+/* P5-D300 — هیچ محاسبه‌ای در بارگذاری: پیش از صف گالری استان خالی است؛ جهش = ساختن در همان بارگذاری */
+mut( 'پیش از اجرای صف گالری استان آزمون خالی است — صفحه فقط متای مشتق را می‌خواند  P5-D300',
+	function ( $shots ) { return array() === $shots; },
+	topersia_g_gallery_shots_for( $g5_P ), topersia_g_gallery_shots( wp_list_pluck( topersia_g_gallery_agg_build( $g5_P ), 'id' ) ) );
+
+$g5_drain();
+$g5_c_rows = $g5_rows( $g5_C );
+$g5_p_rows = $g5_rows( $g5_P );
+$g5_k_rows = $g5_rows( $country );
+mut( 'پس از صف: شهر ← دو عکس از سه عکس بنا (حداکثر ۲ از هر فرزند)؛ استان ← عکس شهر، سپس نخستین عکس بنا؛ کشور هر دو — منبع صاحب عکس است، نه فرزند میانی',
+	function ( $x ) use ( $a0, $a1, $a2, $g5_C, $g5_M ) {
+		return array( "$a1@$g5_M", "$a2@$g5_M" ) === $x[0]
+			&& array( "$a0@$g5_C", "$a1@$g5_M" ) === $x[1]
+			&& in_array( "$a0@$g5_C", $x[2], true ) && in_array( "$a1@$g5_M", $x[2], true );
+	},
+	array( $g5_c_rows, $g5_p_rows, $g5_k_rows ),
+	array( $g5_c_rows, array( "$a0@$g5_C", "$a1@$g5_C" ), $g5_k_rows ),
+	'شهر ' . implode( ' ', $g5_c_rows ) . ' · استان ' . implode( ' ', $g5_p_rows ) );
+
+/* نمای تمام‌صفحه و کپشن: نام و نشانی منبع (n · u)؛ عکس خود بی منبع */
+$g5_modal = (string) topersia_g_modals( $g5_P );
+$g5_json  = preg_match( "~data-tp-shots='([^']*)'~", $g5_modal, $g5_m ) ? (array) json_decode( html_entity_decode( $g5_m[1], ENT_QUOTES ), true ) : array();
+$g5_by    = array_column( $g5_json, null, 'id' );
+$g5_src_ok = function ( $by ) use ( $a0, $a1, $g5_C, $g5_M ) {
+	return isset( $by[ $a0 ], $by[ $a1 ] )
+		&& topersia_g_name( $g5_C ) === $by[ $a0 ]['n'] && get_permalink( $g5_C ) === $by[ $a0 ]['u']
+		&& topersia_g_name( $g5_M ) === $by[ $a1 ]['n'] && get_permalink( $g5_M ) === $by[ $a1 ]['u'];
+};
+mut( 'گالری کامل استان: هر عکس تجمیعی نام و نشانی صفحۀ منبع دارد (n · u) — شهر برای عکس شهر، بنا برای عکس بنا',
+	$g5_src_ok, $g5_by, array( $a0 => array( 'n' => '', 'u' => '' ) + ( $g5_by[ $a0 ] ?? array() ) ) + $g5_by );
+$g5_gal  = (string) topersia_g_sc_gallery( array( 'id' => $g5_P ) );
+$g5_lab  = (string) ( topersia_g_gallery_shots( array( $a0 ) )[0]['label'] ?? '' );
+t( 'کاشی گالری: سطر دوم نام منبع («· ' . topersia_g_name( $g5_C ) . '») — کاشی بی برچسب سطری ندارد',
+	'' === $g5_lab ? false === strpos( $g5_gal, 'tp-gallery-main__meta' ) : false !== strpos( $g5_gal, 'tp-gallery-main__meta">· ' . esc_html( topersia_g_name( $g5_C ) ) ),
+	'برچسب پیوست: ' . ( '' === $g5_lab ? 'خالی' : $g5_lab ) );
+
+/* JSON-LD: image فقط hero_image خود موجودیت؛ گالری تجمیعی هرگز در اسکیما */
+update_post_meta( $g5_P, 'hero_image', $a7 );
+$g5_graph = (string) wp_json_encode( topersia_schema_build( $g5_P ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+$g5_agg_urls = array_map( function ( $id ) { return (string) wp_get_attachment_image_src( $id, 'full' )[0]; }, array_column( topersia_g_gallery_agg_stored( $g5_P ), 'id' ) );
+mut( 'JSON-LD استان: image همان hero_image خودش؛ هیچ عکس تجمیعی (' . count( $g5_agg_urls ) . ') در اسکیما نیست',
+	function ( $g ) use ( $a7, $g5_agg_urls ) {
+		if ( ! $g5_agg_urls || false === strpos( $g, (string) wp_get_attachment_image_src( $a7, 'full' )[0] ) ) { return false; }
+		foreach ( $g5_agg_urls as $u ) { if ( false !== strpos( $g, $u ) ) { return false; } }
+		return true;
+	},
+	$g5_graph, $g5_graph . ( $g5_agg_urls ? $g5_agg_urls[0] : '' ) );
+
+/* آبشار: کار والد پیش از فرزند اجرا شد (ادغام ترتیب را تضمین نمی‌کند) ← بازسازی فرزند والد را دوباره در صف می‌گذارد */
+update_post_meta( $g5_M, 'featured_image_gallery', $a4 . ',' . $a1 . ',' . $a2 . ',' . $a3 );
+$g5_pj = topersia_queue_pending( $g5_hook, array( 'post' => $g5_P ) );
+$g5_cj = topersia_queue_pending( $g5_hook, array( 'post' => $g5_C ) );
+if ( $g5_pj ) { ActionScheduler::runner()->process_action( $g5_pj[0], 'topersia-test' ); }
+$g5_stale = $g5_rows( $g5_P );
+if ( $g5_cj ) { ActionScheduler::runner()->process_action( $g5_cj[0], 'topersia-test' ); }
+$g5_again = (bool) topersia_queue_pending( $g5_hook, array( 'post' => $g5_P ) );
+$g5_drain();
+$g5_fresh = $g5_rows( $g5_P );
+mut( 'ترتیب بد (والد پیش از فرزند): استان اول دادۀ کهنه می‌سازد، بازسازیِ شهر استان را دوباره در صف می‌گذارد و گالری استان تازه می‌شود',
+	function ( $x ) use ( $a0, $a1, $a4, $g5_C, $g5_M ) {
+		return in_array( "$a1@$g5_M", $x[0], true ) && $x[1] && array( "$a0@$g5_C", "$a4@$g5_M" ) === $x[2];
+	},
+	array( $g5_stale, $g5_again, $g5_fresh ), array( $g5_stale, false, $g5_stale ),
+	'کهنه ' . implode( ' ', $g5_stale ) . ' · تازه ' . implode( ' ', $g5_fresh ) );
+
+/* /en/: منبع به ترجمۀ منتشرشده نگاشت می‌شود؛ منبعِ بی ترجمۀ انگلیسی کنار می‌رود؛ پیوست بی نسخۀ زبان همان اصل */
+$g5_tr = function ( $src, $lang, $title ) {
+	$type = get_post_type( $src );
+	$trid = apply_filters( 'wpml_element_trid', null, $src, 'post_' . $type );
+	$id   = wp_insert_post( array( 'post_type' => $type, 'post_status' => 'publish', 'post_title' => $title, 'post_name' => sanitize_title( $title ), 'post_content' => '' ), true );
+	do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_' . $type, 'trid' => $trid, 'language_code' => $lang, 'source_language_code' => 'fa' ) );
+	$GLOBALS['cleanup']['posts'][] = (int) $id;
+	return (int) $id;
+};
+$g5_P_en  = $g5_tr( $g5_P, 'en', 'Test Province 2c5' );
+$g5_C_en  = $g5_tr( $g5_C, 'en', 'Test City 2c5' );
+$g5_lang  = apply_filters( 'wpml_current_language', null );
+do_action( 'wpml_switch_language', 'en' );
+$g5_en    = array_column( topersia_g_gallery_shots_for( $g5_P_en ), null, 'id' );
+$g5_c_url = (string) get_permalink( $g5_C_en );
+/* پیوستِ رسانۀ ترجمه‌شدۀ WPML به نسخۀ همین زبان می‌رود؛ بی نسخه، همان اصل */
+$g5_a0_en = (int) apply_filters( 'wpml_object_id', $a0, 'attachment', true );
+$g5_a4_en = (int) apply_filters( 'wpml_object_id', $a4, 'attachment', true );
+do_action( 'wpml_switch_language', $g5_lang );
+mut( '/en/: عکس شهر با نام و نشانی ترجمۀ انگلیسی شهر و پیوستِ نسخۀ انگلیسی (' . $a0 . ' ← ' . $g5_a0_en . ')؛ عکس بنای بی ترجمۀ انگلیسی کنار می‌رود  P5-D247',
+	function ( $b ) use ( $g5_a0_en, $g5_a4_en, $g5_c_url ) {
+		return isset( $b[ $g5_a0_en ] ) && 'Test City 2c5' === $b[ $g5_a0_en ]['src_name'] && $g5_c_url === $b[ $g5_a0_en ]['src_url']
+			&& false !== strpos( $g5_c_url, '/en/' ) && ! isset( $b[ $g5_a4_en ] );
+	},
+	$g5_en, $g5_en + array( $g5_a4_en => array( 'src_name' => topersia_g_name( $g5_M ), 'src_url' => '' ) ),
+	( $g5_en[ $g5_a0_en ]['src_url'] ?? '—' ) );
+
+/* فقط منتشرشده: بنا پیش‌نویس ← دروازۀ نمایش بی‌درنگ؛ پس از صف از ذخیره هم */
+wp_update_post( array( 'ID' => $g5_M, 'post_status' => 'draft' ) );
+$g5_c_mid    = array_column( topersia_g_gallery_shots_for( $g5_C ), 'id' );
+$g5_c_stored = $g5_rows( $g5_C );
+$g5_drain();
+mut( 'بنا پیش‌نویس شد: حتی پیش از صف عکسش در گالری شهر نیست؛ پس از صف از ذخیرۀ شهر و استان هم رفت  P5-D247',
+	function ( $x ) use ( $a1, $a4, $g5_M ) {
+		return ! array_intersect( array( $a1, $a4 ), $x[0] ) && in_array( "$a4@$g5_M", $x[1], true ) && array() === $x[2] && ! preg_grep( '~@' . $g5_M . '$~', $x[3] );
+	},
+	array( $g5_c_mid, $g5_c_stored, $g5_rows( $g5_C ), $g5_rows( $g5_P ) ),
+	array( array_merge( $g5_c_mid, array( $a4 ) ), $g5_c_stored, $g5_rows( $g5_C ), $g5_rows( $g5_P ) ) );
+
+/* سقف ۲۴: اصفهانِ واقعی و یک شهرِ تازه زیر شهرستانی تازه */
+$g5_K2 = tmp_post( 'tp_county', 'شهرستان آزمون ۲ج٫۵ ب' );
+$g5_C2 = tmp_post( 'tp_city', 'شهر آزمون ۲ج٫۵ ب', 'publish', array( 'featured_image_gallery' => $a5 . ',' . $a6 ) );
+tmp_rel( 72, $g5_isf, $g5_K2 );
+tmp_rel( 73, $g5_K2, $g5_C2 );
+$g5_drain();
+$g5_isf_own  = count( topersia_g_gallery_own_ids( $g5_isf ) );
+$g5_isf_ids  = array_column( topersia_g_gallery_shots_for( $g5_isf ), 'id' );
+$g5_room     = max( 0, TOPERSIA_GALLERY_MAX - $g5_isf_own );
+$g5_isf_want = array_slice( array( $a5, $a6 ), 0, min( 2, $g5_room ) );
+mut( 'سقف ۲۴: اصفهان با ' . topersia_g_fa( $g5_isf_own ) . ' عکس خود ' . topersia_g_fa( count( $g5_isf_want ) ) . ' عکس از شهر تازه می‌گیرد — کل ' . topersia_g_fa( min( TOPERSIA_GALLERY_MAX, $g5_isf_own + 2 ) ),
+	function ( $ids ) use ( $g5_isf_want, $g5_isf_own, $a5, $a6 ) {
+		return count( $ids ) === min( TOPERSIA_GALLERY_MAX, $g5_isf_own + 2 ) && array_values( array_intersect( $ids, array( $a5, $a6 ) ) ) === $g5_isf_want;
+	},
+	$g5_isf_ids, array_merge( $g5_isf_ids, array( $a6 ) ) );
+
+/* هیچ گالری‌ای تکراری، بیش از ۲۴ یا منبعِ منتشرنشده در ذخیره ندارد */
+$g5_sweep = array();
+foreach ( array( $country, $g5_isf, $g5_P, $g5_C, $g5_C2 ) as $g5_one ) {
+	$att = array_column( topersia_g_gallery_shots_for( $g5_one ), 'id' );
+	if ( count( $att ) !== count( array_unique( $att ) ) ) { $g5_sweep[] = '#' . $g5_one . ' تکراری'; }
+	if ( count( $att ) > TOPERSIA_GALLERY_MAX ) { $g5_sweep[] = '#' . $g5_one . ' ' . count( $att ); }
+	foreach ( topersia_g_gallery_agg_stored( $g5_one ) as $r ) {
+		if ( 'publish' !== get_post_status( $r['src'] ) ) { $g5_sweep[] = '#' . $g5_one . ' منبع #' . $r['src']; }
+	}
+}
+mut( 'کشور، اصفهان و چیدمان آزمون: هیچ عکس تکراری، هیچ گالری بیش از ۲۴، هیچ منبع منتشرنشده در ذخیره',
+	function ( $s ) { return ! $s; }, $g5_sweep, array( '#' . $country . ' تکراری' ), implode( ' | ', $g5_sweep ) );
+
+/* شهر پیش‌نویس ← عکسش بی‌درنگ از گالری استان و پس از صف از ذخیرۀ استان و کشور */
+wp_update_post( array( 'ID' => $g5_C, 'post_status' => 'draft' ) );
+$g5_p_mid = array_column( topersia_g_gallery_shots_for( $g5_P ), 'id' );
+$g5_drain();
+mut( 'شهر پیش‌نویس شد: عکسش بی‌درنگ از گالری استان کنار رفت و پس از صف از ذخیرۀ استان و کشور هم  P5-D247',
+	function ( $x ) use ( $a0, $g5_C ) { return ! in_array( $a0, $x[0], true ) && array() === $x[1] && ! in_array( "$a0@$g5_C", $x[2], true ); },
+	array( $g5_p_mid, $g5_rows( $g5_P ), $g5_rows( $country ) ),
+	array( $g5_p_mid, array( "$a0@$g5_C" ), $g5_rows( $country ) ) );
+
+/* دروازۀ محلی: خاموش ← فقط عکس‌های خود و هیچ کاری در صف */
+add_filter( 'topersia_gallery_agg_enabled', '__return_false' );
+$g5_off   = count( topersia_g_gallery_shots_for( $country ) );
+$g5_off_q = topersia_g_gallery_agg_schedule( $country );
+remove_filter( 'topersia_gallery_agg_enabled', '__return_false' );
+$g5_on    = count( topersia_g_gallery_shots_for( $country ) );
+$g5_own   = count( topersia_g_gallery_own_ids( $country ) );
+mut( 'دروازۀ محلی (P5-D300): خاموش ← گالری کشور فقط ' . topersia_g_fa( $g5_own ) . ' عکس خودش و هیچ کاری در صف؛ روشن ← ' . topersia_g_fa( $g5_on ),
+	function ( $x ) use ( $g5_own ) { return $x[0] === $g5_own && 0 === $x[1] && $x[2] > $g5_own; },
+	array( $g5_off, $g5_off_q, $g5_on ), array( $g5_on, $g5_off_q, $g5_on ) );
+
+/* پیشخوان: کارت فقط برای manage_options؛ admin-post با توان و nonce — رد ۴۰۳، بی کار در صف */
+$g5_adm = get_user_by( 'login', 'tp_test_admin' );
+$g5_sub = get_user_by( 'login', 'tp_test_430' );
+if ( $g5_adm && $g5_sub ) {
+	$g5_card = function ( $uid ) { wp_set_current_user( $uid ); ob_start(); topersia_g_gallery_agg_admin_card(); return (string) ob_get_clean(); };
+	$g5_die  = function () { return function ( $message, $title = '', $args = array() ) { unset( $message, $title ); throw new RuntimeException( 'die:' . ( is_array( $args ) ? (int) ( $args['response'] ?? 0 ) : (int) $args ) ); }; };
+	$g5_post = function ( $uid, $nonce ) use ( $g5_die ) {
+		wp_set_current_user( $uid );
+		$_REQUEST['_wpnonce'] = $nonce;
+		add_filter( 'wp_die_handler', $g5_die );
+		try { do_action( 'admin_post_topersia_gallery_agg_rebuild_all' ); $r = 'بی‌رد'; } catch ( RuntimeException $e ) { $r = $e->getMessage(); }
+		remove_filter( 'wp_die_handler', $g5_die );
+		unset( $_REQUEST['_wpnonce'] );
+		return $r;
+	};
+	$g5_c_adm = $g5_card( $g5_adm->ID );
+	$g5_c_sub = $g5_card( $g5_sub->ID );
+	$g5_r_sub = $g5_post( $g5_sub->ID, wp_create_nonce( 'topersia_gallery_agg_rebuild_all' ) );
+	$g5_r_bad = $g5_post( $g5_adm->ID, 'bad' );
+	wp_set_current_user( 0 );
+	mut( 'کارت «بازسازی همه» فقط برای manage_options؛ admin-post: مشترک با nonce درست ← ۴۰۳، مدیر با nonce نادرست ← ۴۰۳؛ هیچ کاری در صف',
+		function ( $x ) {
+			return false !== strpos( $x[0], 'name="action" value="topersia_gallery_agg_rebuild_all"' ) && false !== strpos( $x[0], 'name="_wpnonce"' )
+				&& '' === $x[1] && 'die:403' === $x[2] && 'die:403' === $x[3] && ! $x[4];
+		},
+		array( $g5_c_adm, $g5_c_sub, $g5_r_sub, $g5_r_bad, topersia_queue_pending( 'topersia_gallery_agg_rebuild_all' ) ),
+		array( $g5_c_adm, $g5_c_adm, $g5_r_sub, $g5_r_bad, array() ),
+		$g5_r_sub . ' · ' . $g5_r_bad );
+} else {
+	t( 'پیشخوان «بازسازی همه»: حساب آزمون مدیر یا مشترک نیست — آزموده نشد', false );
+}
+
+/* پاک‌سازی همین‌جا: چیدمان برداشته، صف اجرا ← ذخیرۀ کشور و اصفهان عیناً پیش از آزمون */
+foreach ( array_reverse( array_slice( $cleanup['rel'], $g5_rel_mark ) ) as $r ) {
+	topersia_relation( $r[0] )->delete_rows( $r[1], $r[2] );
+}
+foreach ( array_slice( $cleanup['posts'], $g5_post_mark ) as $p ) {
+	wp_delete_post( $p, true );
+}
+$g5_drain();
+$g5_after = array( topersia_g_gallery_agg_stored( $country ), topersia_g_gallery_agg_stored( $g5_isf ) );
+mut( 'پاک‌سازی: پس از برداشتن چیدمان و اجرای صف، ذخیرۀ تجمیعی کشور و اصفهان عیناً همان پیش از آزمون',
+	function ( $x ) use ( $g5_country_before, $g5_isf_before ) { return $x[0] === $g5_country_before && $x[1] === $g5_isf_before; },
+	$g5_after, array( array_merge( $g5_after[0], array( array( 'id' => $a0, 'src' => $g5_C ) ) ), $g5_after[1] ) );
+
+/* زبان: کار صفی که در بافت انگلیسی اجرا شود همان گالری زبان اصلی را می‌سازد؛ جهش = ساختنِ بی سنجاق زبان */
+do_action( 'wpml_switch_language', 'en' );
+$g5_en_rows = topersia_g_gallery_agg_rebuild( $country, false );
+$g5_raw_en  = topersia_g_gallery_agg_build( $country );
+do_action( 'wpml_switch_language', $g5_lang );
+mut( 'بازسازی همیشه به زبان اصلی: در بافت انگلیسی همان ردیف‌های فارسی کشور ذخیره می‌شود (فرزندان و منبع از زبان اصلی)',
+	function ( $rows ) use ( $g5_country_before, $country ) { return $rows === $g5_country_before && $rows === topersia_g_gallery_agg_stored( $country ); },
+	$g5_en_rows, $g5_raw_en,
+	'بی سنجاق: ' . wp_json_encode( $g5_raw_en ) );
+
+/* «بازسازی همه» از صف: یک کار برای هر پستِ منتشرشدۀ زبان اصلی، پله‌به‌پله؛ اجرا ← کشور همان پیشین */
+$g5_floor2 = (int) $wpdb->get_var( "SELECT COALESCE( MAX( action_id ), 0 ) FROM {$wpdb->prefix}actionscheduler_actions" );
+$g5_ids    = topersia_g_gallery_agg_all_ids();
+$g5_n      = topersia_g_gallery_agg_queue_all();
+$g5_fan    = $g5_jobs( $g5_floor2 );
+$g5_steps  = function ( $jobs ) use ( $g5_ids ) {
+	$at = array();
+	foreach ( $jobs as $j ) { $at[ $j['post'] ] = $j['at']; }
+	$max = array();
+	$min = array();
+	foreach ( $g5_ids as $type => $ids ) {
+		$t = array_values( array_intersect_key( $at, array_flip( $ids ) ) );
+		if ( count( $t ) !== count( $ids ) ) { return false; }
+		$max[ $type ] = $t ? max( $t ) : 0;
+		$min[ $type ] = $t ? min( $t ) : PHP_INT_MAX;
+	}
+	return $max['tp_city'] < $min['tp_province'] && $max['tp_province'] < $min['tp_country'];
+};
+$g5_total = array_sum( array_map( 'count', $g5_ids ) );
+mut( '«بازسازی همه» از صف: ' . topersia_g_fa( $g5_total ) . ' کار — یکی برای هر شهر، استان و کشورِ منتشرشده؛ شهرها پیش از استان‌ها، استان‌ها پیش از کشور',
+	function ( $x ) use ( $g5_steps, $g5_total ) { return $x[0] === $g5_total && count( $x[1] ) === $g5_total && $g5_steps( $x[1] ); },
+	array( $g5_n, $g5_fan ), array( $g5_n, array_map( function ( $j ) { $j['at'] = 0; return $j; }, $g5_fan ) ) );
+$g5_drain();
+t( '«بازسازی همه» اجرا شد: ذخیرۀ کشور و اصفهان همان پیشین',
+	topersia_g_gallery_agg_stored( $country ) === $g5_country_before && topersia_g_gallery_agg_stored( $g5_isf ) === $g5_isf_before );
+
+endif;
 
 /* ══ پایان ══════════════════════════════════════════════════════════ */
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pass']}   افتاده: {$GLOBALS['fail']}\n";

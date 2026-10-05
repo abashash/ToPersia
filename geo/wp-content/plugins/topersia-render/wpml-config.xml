@@ -1,0 +1,6 @@
+<wpml-config>
+  <!-- P5-D300: گالری تجمیعی لایۀ مشتق روی پست زبان اصلی است — WPML رونوشت یا ترجمه‌اش نمی‌کند. -->
+  <custom-fields>
+    <custom-field action="ignore">_tp_gallery_agg</custom-field>
+  </custom-fields>
+</wpml-config>

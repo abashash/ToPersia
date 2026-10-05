@@ -839,7 +839,18 @@
 			}
 
 			if ( title ) { title.textContent = shot.t || ''; }
-			if ( cap ) { cap.textContent = shot.c || ''; }
+			if ( cap ) {
+				cap.textContent = shot.c || '';
+				/* عکس تجمیعی: موجودیت منبع با پیوند به صفحه‌اش.  P5-D274 */
+				if ( shot.n ) {
+					if ( cap.textContent ) { cap.appendChild( document.createTextNode( ' · ' ) ); }
+					var src = document.createElement( shot.u ? 'a' : 'span' );
+					if ( shot.u ) { src.setAttribute( 'href', shot.u ); }
+					src.className = 'tp-solo__src';
+					src.textContent = shot.n;
+					cap.appendChild( src );
+				}
+			}
 			if ( counter ) { counter.textContent = fa( at + 1 ) + ' / ' + fa( n ); }
 
 			preload( at + 1 );

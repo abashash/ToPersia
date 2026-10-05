@@ -1053,6 +1053,11 @@ html .tp-page .tp-stats[data-tp-n="1"]{grid-template-columns:1fr}
   html .tp-page .tp-stats[data-tp-n="3"] .tp-stat:nth-child(3){grid-column:1/-1}
 }
 
+/* ═══ گالری تجمیعی — SPRINT-4.4 ۲ج٫۵ · P5-D274 ══════════════════════════
+   پیوند موجودیت منبع در کپشن نمای تمام‌صفحه: رنگِ همان کپشن (کنتراستش سنجیده)،
+   با زیرخط تا پیوند بودنش بی رنگ تازه پیدا باشد. */
+html .tp-page .tp-solo__src{color:inherit;text-decoration:underline;text-underline-offset:2px}
+
 /* ═══ کشیدن با موس — SPRINT-4.4 ۲ج٫۳ · P5-D277 ══════════════════════════
    اسلایدر و صحنۀ نمای تمام‌صفحه: نشانگر grab فقط برای موس؛ هنگام کشیدن
    grabbing، بی انتخاب متن و بی چسبیدن (جابه‌جایی scrollLeft مستقیم است؛

@@ -889,6 +889,17 @@ require_once __DIR__ . '/includes/topersia-cache.php';
 require_once __DIR__ . '/includes/topersia-fold.php';
 require_once __DIR__ . '/includes/topersia-pack.php';
 
+/*
+ * صف پس‌زمینۀ واحد — Action Scheduler 3.9.3 بسته‌بندی‌شده در خود هسته (P5-D290).
+ * بیرون از هر قلاب، طبق مستند کتابخانه؛ اگر نسخۀ دیگری (Rank Math) هم ثبت شده،
+ * خود کتابخانه بالاترین نسخه را یک بار راه می‌اندازد. زیپی که پوشۀ vendor را جا
+ * انداخته باشد سایت را نمی‌خواباند: صف «آماده نیست» می‌شود و لاگ می‌گیرد.
+ */
+if ( is_readable( __DIR__ . '/vendor/action-scheduler/action-scheduler.php' ) ) {
+	require_once __DIR__ . '/vendor/action-scheduler/action-scheduler.php';
+}
+require_once __DIR__ . '/includes/topersia-queue.php';
+
 /* ═══════════════════════════════════════════════════════════════════════
  *  بخش ۱ — ابزارهای مشترک
  * ═══════════════════════════════════════════════════════════════════════

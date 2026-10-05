@@ -9,10 +9,19 @@ msgstr ""
 "X-Generator: scripts/tp-i18n.php\n"
 "X-Domain: topersia\n"
 
+#: includes/topersia-g-gallery-agg.php
+#, php-format
+msgid "#%1$d: %2$d عکس تجمیعی"
+msgstr "#%1$d: %2$d aggregated photos"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%1$s از %2$s"
 msgstr "%1$s of %2$s"
+
+#: includes/topersia-g-gallery-agg.php
+msgid "--post=<id> یا --all یا --queue"
+msgstr "--post=<id> or --all or --queue"
 
 #: includes/topersia-g-zones.php
 msgid "ToPersia را منبع ترجیحی گوگل کنید"
@@ -41,6 +50,11 @@ msgstr "Fire temple"
 #: includes/topersia-g-map.php
 msgid "آتش‌نشانی"
 msgstr "Fire service"
+
+#: includes/topersia-g-gallery-agg.php
+#, php-format
+msgid "آخرین بازسازی همه: %s"
+msgstr "Last full rebuild: %s"
 
 #: includes/topersia-g-map.php
 msgid "آدرس خارجی"
@@ -98,6 +112,11 @@ msgstr "Natural monument / reserve"
 msgid "اثر طبیعی ملی"
 msgstr "National natural monument"
 
+#: includes/topersia-g-gallery-agg.php
+#, php-format
+msgid "اجرا: %d"
+msgstr "Ran: %d"
+
 #: includes/topersia-g-zones.php
 msgid "اخبار"
 msgstr "News"
@@ -134,6 +153,10 @@ msgstr "Ordibehesht"
 #: includes/topersia-g-zones.php
 msgid "ارز و روش‌های پرداخت"
 msgstr "Currency and payment methods"
+
+#: includes/topersia-g-gallery-agg.php
+msgid "از پیش در صف است."
+msgstr "Already queued."
 
 #: includes/topersia-g-zones.php
 msgid "استان"
@@ -266,6 +289,10 @@ msgstr "Bazaar"
 #: includes/topersia-g-map.php
 msgid "بازتعریف واحد پول"
 msgstr "Redenomination"
+
+#: includes/topersia-g-gallery-agg.php
+msgid "بازسازی همه"
+msgstr "Rebuild all"
 
 #: includes/topersia-g-map.php
 msgid "بازنشسته / منتفی"
@@ -726,6 +753,10 @@ msgstr "Being excavated"
 msgid "در حال گرفتن داده…"
 msgstr "Loading data…"
 
+#: includes/topersia-g-gallery-agg.php
+msgid "در صف قرار گرفت."
+msgstr "Queued."
+
 #: includes/topersia-g-map.php
 msgid "در معرض خطر"
 msgstr "Endangered"
@@ -771,6 +802,10 @@ msgstr "Sea of Oman"
 #: includes/topersia-g-map.php
 msgid "دسترسی محدود"
 msgstr "Restricted access"
+
+#: includes/topersia-g-gallery-agg.php
+msgid "دسترسی ندارید."
+msgstr "You do not have permission."
 
 #: includes/topersia-g-map.php
 msgid "دسترسی و حمل‌ونقل"
@@ -2299,6 +2334,14 @@ msgstr "km²"
 msgid "گالری"
 msgstr "Gallery"
 
+#: includes/topersia-g-gallery-agg.php
+msgid "گالری تجمیعی"
+msgstr "Aggregated gallery"
+
+#: includes/topersia-g-gallery-agg.php
+msgid "گالری تجمیعی تا ممیزی فقط محلی است (topersia_gallery_agg_enabled)."
+msgstr "The aggregated gallery is local-only until the audit (topersia_gallery_agg_enabled)."
+
 #: includes/topersia-g-zones.php
 msgid "گالری تصاویر"
 msgstr "Photo gallery"
@@ -2311,6 +2354,10 @@ msgstr "Art gallery"
 #, php-format
 msgid "گالری کامل %s"
 msgstr "Full gallery of %s"
+
+#: includes/topersia-g-gallery-agg.php
+msgid "گالری کشور، استان و شهر از عکس‌های فرزندانشان پر می‌شود و پس از هر تغییر خودکار بازسازی می‌شود. این دکمه همه را از نو می‌سازد."
+msgstr "Country, province and city galleries are filled from their children’s photos and rebuilt automatically after every change. This button rebuilds them all."
 
 #: includes/topersia-g-map.php
 msgid "گذرهای مرزی"

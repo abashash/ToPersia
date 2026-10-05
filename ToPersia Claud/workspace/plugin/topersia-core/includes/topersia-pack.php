@@ -307,6 +307,16 @@ function topersia_pack_field_def( $field, $post_type, $classes, $is_sub = false 
 		'description' => isset( $field['description'] ) ? (string) $field['description'] : '',
 	);
 
+	/*
+	 * گالری تجمیعی (P5-D274 · SPRINT-4.4 ۲ج٫۵): گالری کشور، استان و شهر از
+	 * فرزندانشان پر می‌شود؛ قالب فقط عکس خاص خودِ موجودیت را می‌خواهد تا یک عکس
+	 * بارها درون‌ریزی نشود.
+	 */
+	if ( ! $is_sub && isset( $field['name'] ) && 'featured_image_gallery' === $field['name']
+		&& in_array( $post_type, array( 'tp_country', 'tp_province', 'tp_city' ), true ) ) {
+		$def['description'] = trim( $def['description'] . ' فقط عکس‌های خاص خود این موجودیت؛ بقیه خودکار از فرزندان می‌آید.' );
+	}
+
 	$unit = topersia_pack_unit( $label, $type );
 
 	if ( '' !== $unit ) {

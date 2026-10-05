@@ -223,6 +223,18 @@ return array(
 	'همه %s مورد ←'                   => array( 'en' => 'All %s items →', 'ar' => 'جميع العناصر (%s) ←' ),
 	'شمار استان‌ها'                   => array( 'en' => 'Provinces', 'ar' => 'عدد المحافظات' ),
 	'بله'                              => array( 'en' => 'Yes', 'ar' => 'نعم' ),
+	/* ۲ج٫۵ — گالری تجمیعی (P5-D274): کارت پیشخوان و پیام‌های WP-CLI */
+	'گالری تجمیعی'                    => array( 'en' => 'Aggregated gallery', 'ar' => 'المعرض المجمَّع' ),
+	'گالری کشور، استان و شهر از عکس‌های فرزندانشان پر می‌شود و پس از هر تغییر خودکار بازسازی می‌شود. این دکمه همه را از نو می‌سازد.' => array( 'en' => 'Country, province and city galleries are filled from their children’s photos and rebuilt automatically after every change. This button rebuilds them all.', 'ar' => 'تمتلئ معارض الدولة والمحافظة والمدينة بصور أبنائها، وتُعاد بناؤها تلقائياً بعد كل تغيير. هذا الزر يعيد بناءها كلها.' ),
+	'در صف قرار گرفت.'                => array( 'en' => 'Queued.', 'ar' => 'أُضيف إلى قائمة الانتظار.' ),
+	'از پیش در صف است.'               => array( 'en' => 'Already queued.', 'ar' => 'موجود في قائمة الانتظار مسبقاً.' ),
+	'آخرین بازسازی همه: %s'           => array( 'en' => 'Last full rebuild: %s', 'ar' => 'آخر إعادة بناء كاملة: %s' ),
+	'بازسازی همه'                     => array( 'en' => 'Rebuild all', 'ar' => 'إعادة بناء الكل' ),
+	'دسترسی ندارید.'                  => array( 'en' => 'You do not have permission.', 'ar' => 'ليست لديك صلاحية.' ),
+	'گالری تجمیعی تا ممیزی فقط محلی است (topersia_gallery_agg_enabled).' => array( 'en' => 'The aggregated gallery is local-only until the audit (topersia_gallery_agg_enabled).', 'ar' => 'المعرض المجمَّع محلي فقط حتى التدقيق (topersia_gallery_agg_enabled).' ),
+	'اجرا: %d'                        => array( 'en' => 'Ran: %d', 'ar' => 'نُفِّذ: %d' ),
+	'#%1$d: %2$d عکس تجمیعی'          => array( 'en' => '#%1$d: %2$d aggregated photos', 'ar' => '#%1$d: %2$d صورة مجمَّعة' ),
+	'--post=<id> یا --all یا --queue'  => array( 'en' => '--post=<id> or --all or --queue', 'ar' => '--post=<id> أو --all أو --queue' ),
 	/* ۲ج٫۱ — برچسب و واژه‌نامۀ فیلدهای کارت آمار نوع‌های غیر G (Jetengine_Skin.json) */
 	'گونه'                         => array( 'en' => 'Type', 'ar' => 'النوع' ),
 	'مدت بازدید'              => array( 'en' => 'Visit length', 'ar' => 'مدة الزيارة' ),

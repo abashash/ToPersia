@@ -8,9 +8,18 @@ msgstr ""
 "X-Generator: scripts/tp-i18n.php\n"
 "X-Domain: topersia\n"
 
+#: includes/topersia-g-gallery-agg.php
+#, php-format
+msgid "#%1$d: %2$d عکس تجمیعی"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%1$s از %2$s"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+msgid "--post=<id> یا --all یا --queue"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -39,6 +48,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "آتش‌نشانی"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+#, php-format
+msgid "آخرین بازسازی همه: %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -97,6 +111,11 @@ msgstr ""
 msgid "اثر طبیعی ملی"
 msgstr ""
 
+#: includes/topersia-g-gallery-agg.php
+#, php-format
+msgid "اجرا: %d"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "اخبار"
 msgstr ""
@@ -132,6 +151,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "ارز و روش‌های پرداخت"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+msgid "از پیش در صف است."
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -264,6 +287,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "بازتعریف واحد پول"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+msgid "بازسازی همه"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -725,6 +752,10 @@ msgstr ""
 msgid "در حال گرفتن داده…"
 msgstr ""
 
+#: includes/topersia-g-gallery-agg.php
+msgid "در صف قرار گرفت."
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "در معرض خطر"
 msgstr ""
@@ -769,6 +800,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "دسترسی محدود"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+msgid "دسترسی ندارید."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2298,6 +2333,14 @@ msgstr ""
 msgid "گالری"
 msgstr ""
 
+#: includes/topersia-g-gallery-agg.php
+msgid "گالری تجمیعی"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+msgid "گالری تجمیعی تا ممیزی فقط محلی است (topersia_gallery_agg_enabled)."
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "گالری تصاویر"
 msgstr ""
@@ -2309,6 +2352,10 @@ msgstr ""
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "گالری کامل %s"
+msgstr ""
+
+#: includes/topersia-g-gallery-agg.php
+msgid "گالری کشور، استان و شهر از عکس‌های فرزندانشان پر می‌شود و پس از هر تغییر خودکار بازسازی می‌شود. این دکمه همه را از نو می‌سازد."
 msgstr ""
 
 #: includes/topersia-g-map.php

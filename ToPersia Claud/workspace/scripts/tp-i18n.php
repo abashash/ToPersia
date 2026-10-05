@@ -42,6 +42,7 @@ $FILES = array(
 	'includes/topersia-g-zones.php',
 	'includes/topersia-g-ai.php',
 	'includes/topersia-g-news.php',
+	'includes/topersia-g-gallery-agg.php',
 	'templates/news-list.php',
 );
 

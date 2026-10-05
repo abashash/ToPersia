@@ -5,6 +5,7 @@
  *
  *   stats   ۲ج٫۱ — هر نوعِ دارای کارت آمار: هیچ مقدار دو خط نمی‌شود؛ ستون‌ها به شمار خانه‌ها
  *   title   ۲ج٫۴ — تیتر کشور («ایران») در ۱۴۴۰ و ۳۹۰ یک خط
+ *   gallery ۲ج٫۵ — گالری تجمیعی کشور: عکس استان با منبع؛ پیوند منبع در نمای تمام‌صفحه و کلیکش
  *
  * «یک خط» با ارتفاع دیدنی سنجیده می‌شود: سطرهای متن با Range (هر سطر یک
  * مستطیل با `top` تازه)، نه ارتفاع جعبه. درخواست به topersia.com بسته است.
@@ -91,6 +92,49 @@ const LINES = `( el => {
 				const { ctx, page } = await open( browser, '/country/islamic-republic-of-iran/', width );
 				const h1 = await page.$eval( '.tp-hero h1', ( el, lines ) => ( { text: el.textContent.trim(), lines: eval( lines )( el ) } ), LINES );
 				check( `۲ج٫۴ تیتر کشور «${ h1.text }» در ${ width } یک خط  P5-D281`, 1 === h1.lines && 'ایران' === h1.text, h1.lines + ' سطر' );
+				await ctx.close();
+			}
+		}
+
+		/* ۲ج٫۵ — عکس تجمیعیِ کشور: در نمای تمام‌صفحه کپشن پیوند صفحۀ منبع دارد؛ کلیک همان صفحه  P5-D274 */
+		if ( want( 'gallery' ) ) {
+			for ( const width of [ 1440, 390 ] ) {
+				const { ctx, page } = await open( browser, '/country/islamic-republic-of-iran/', width );
+				const shots = await page.evaluate( () => {
+					const m = document.getElementById( 'tpGalleryModal' );
+					try { return m ? JSON.parse( m.getAttribute( 'data-tp-shots' ) || '[]' ) : []; } catch ( e ) { return []; }
+				} );
+				const agg = shots.filter( s => s.n );
+				let solo = null;
+				if ( agg.length ) {
+					await page.click( '[data-tp-gallery-open]' );
+					await page.waitForSelector( '#tpGalleryModal.tp-show' );
+					await page.locator( `#tpGalleryModal [data-tp-shot="${ agg[0].id }"]` ).click();
+					await page.waitForSelector( '#tpGallerySolo.tp-show' );
+					solo = await page.$eval( '#tpGallerySolo', el => {
+						const cap = el.querySelector( '[data-tp-solo-caption]' );
+						const a   = cap && cap.querySelector( '.tp-solo__src' );
+						if ( ! a ) { return null; }
+						const r = a.getBoundingClientRect();
+						return {
+							tag: a.tagName, href: a.getAttribute( 'href' ), text: a.textContent,
+							inherit: getComputedStyle( a ).color === getComputedStyle( cap ).color,
+							under: getComputedStyle( a ).textDecorationLine,
+							inView: r.width > 0 && r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth,
+						};
+					} );
+					if ( solo ) {
+						await Promise.all( [
+							page.waitForNavigation( { waitUntil: 'domcontentloaded', timeout: 240000 } ),
+							page.click( '#tpGallerySolo .tp-solo__src' ),
+						] );
+					}
+				}
+				const landed = page.url();
+				check( `۲ج٫۵ ${ width }: گالری کشور ${ shots.length } عکس، ${ agg.length } تجمیعی از «${ agg.length ? agg[0].n : '—' }»؛ کپشن تمام‌صفحه پیوند منبع (رنگ کپشن، زیرخط، در قاب) و کلیکش ← صفحۀ منبع  P5-D274`,
+					agg.length >= 1 && agg.length < shots.length && agg.every( s => s.u && s.n ) && !! solo && 'A' === solo.tag && solo.href === agg[0].u
+						&& solo.text === agg[0].n && solo.inherit && /underline/.test( solo.under ) && solo.inView && landed === agg[0].u,
+					JSON.stringify( { n: shots.length, agg: agg.map( s => s.id + ':' + s.n ), solo, landed } ) );
 				await ctx.close();
 			}
 		}

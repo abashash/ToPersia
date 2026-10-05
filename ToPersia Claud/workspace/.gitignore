@@ -11,6 +11,9 @@ Thumbs.db
 *.bak
 node_modules/
 vendor/
+# جز Action Scheduler بسته‌بندی‌شده در هسته (P5-D290) — بخشی از افزونه است، همراه پوشۀ vendor خودش
+!plugin/topersia-core/vendor/
+!plugin/topersia-core/vendor/action-scheduler/vendor/
 
 # پیش‌نمایش آزمون چیدمان
 .preview/

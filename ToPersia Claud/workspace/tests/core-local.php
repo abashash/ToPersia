@@ -68,6 +68,10 @@ foreach ( array( TOPERSIA_SERVICES_OPTION, TOPERSIA_SERVICES_USAGE, TOPERSIA_COM
 }
 $cleanup = array( 'posts' => array(), 'meta' => array(), 'rel' => array() );
 
+/* کارهای صفی که پست‌های موقت می‌سازند (گالری تجمیعی ۲ج٫۵) — در پایان اجرا و پاک */
+require_once __DIR__ . '/queue-sweep.php';
+$cleanup['queue'] = tp_queue_floor();
+
 register_shutdown_function( function () use ( &$restore_options, &$cleanup ) {
 	foreach ( $restore_options as $o => $v ) {
 		if ( null === $v ) { delete_option( $o ); } else { update_option( $o, $v, false ); }
@@ -82,6 +86,7 @@ register_shutdown_function( function () use ( &$restore_options, &$cleanup ) {
 	foreach ( $cleanup['posts'] as $p ) {
 		wp_delete_post( $p, true );
 	}
+	tp_queue_sweep( $cleanup['queue'] );
 	topersia_api_flush();
 } );
 

@@ -3631,6 +3631,72 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 		return $out;
 	}
 
+	/**
+	 * عکس‌های گالری یک صفحه: گالری خود، سپس عکس‌های تجمیعیِ ازپیش‌ساخته.  P5-D274
+	 *
+	 * هیچ محاسبه‌ای در بارگذاری نیست — فقط خواندن متای مشتق (P5-D300). عکس
+	 * تجمیعی منبعش را دارد (`src_name` · `src_url`): کپشن و نمای تمام‌صفحه
+	 * پیوند صفحۀ منبع را نشان می‌دهند. منبعِ منتشرنشده (P5-D247) در همین‌جا
+	 * کنار می‌رود، حتی پیش از بازسازی. سقف کل ۲۴؛ گالری خودِ ۲۴ یا بیشتر = بی
+	 * تجمیع. پیوست و منبع به زبان صفحه نگاشت می‌شوند (`wpml_object_id`).
+	 *
+	 * @return array همان شکل `topersia_g_gallery_shots()` + src_name · src_url
+	 */
+	function topersia_g_gallery_shots_for( $pid ) {
+
+		$shots = topersia_g_gallery_shots( topersia_g_raw( $pid, 'featured_image_gallery' ) );
+
+		if ( ! function_exists( 'topersia_g_gallery_agg_enabled' ) || ! topersia_g_gallery_agg_enabled() ) {
+			return $shots;
+		}
+
+		$room = TOPERSIA_GALLERY_MAX - count( $shots );
+		$seen = array();
+
+		foreach ( $shots as $shot ) {
+			$seen[ $shot['id'] ] = true;
+		}
+
+		foreach ( topersia_g_gallery_agg_stored( $pid ) as $row ) {
+
+			if ( $room <= 0 ) {
+				break;
+			}
+
+			$src = topersia_g_view_id( $row['src'] );
+
+			if ( ! $src || ! topersia_g_published( array( $src ) ) ) {
+				continue;
+			}
+
+			$att = function_exists( 'apply_filters' ) ? absint( apply_filters( 'wpml_object_id', $row['id'], 'attachment', true ) ) : absint( $row['id'] );
+
+			if ( ! $att || isset( $seen[ $att ] ) ) {
+				continue;
+			}
+
+			$one = topersia_g_gallery_shots( array( $att ) );
+
+			if ( ! $one ) {
+				continue;
+			}
+
+			$one[0]['src_name'] = topersia_g_name( $src );
+			$one[0]['src_url']  = topersia_g_public_url( $src );
+			$seen[ $att ]       = true;
+			$shots[]            = $one[0];
+			$room--;
+		}
+
+		return $shots;
+	}
+
+	/** سطر دومِ کاشی گالری: توضیح عکس و، برای عکس تجمیعی، نام موجودیت منبع. */
+	function topersia_g_gallery_meta( $shot ) {
+		$parts = array_filter( array( isset( $shot['place'] ) ? (string) $shot['place'] : '', isset( $shot['src_name'] ) ? (string) $shot['src_name'] : '' ), 'strlen' );
+		return implode( ' · ', $parts );
+	}
+
 	function topersia_g_sc_gallery( $atts = array() ) {
 
 		$pid = topersia_g_pid( $atts );
@@ -3639,17 +3705,8 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 			return '';
 		}
 
-		$raw = topersia_g_raw( $pid, 'featured_image_gallery' );
-
-		if ( is_string( $raw ) ) {
-			$raw = array_filter( array_map( 'trim', explode( ',', $raw ) ) );
-		}
-
-		if ( ! is_array( $raw ) || empty( $raw ) ) {
-			return '';
-		}
-
-		$shots = topersia_g_gallery_shots( $raw );
+		/* گالری خود، سپس تجمیعی از فرزندان (P5-D274) — بی گالری خود هم */
+		$shots = topersia_g_gallery_shots_for( $pid );
 
 		if ( empty( $shots ) ) {
 			return '';
@@ -3685,8 +3742,8 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 					: '' )
 				. ( '' !== $shot['label']
 					? '<span class="tp-gallery-main__label">' . esc_html( $shot['label'] )
-						. ( '' !== $shot['place']
-							? ' <span class="tp-gallery-main__meta">· ' . esc_html( $shot['place'] ) . '</span>'
+						. ( '' !== topersia_g_gallery_meta( $shot )
+							? ' <span class="tp-gallery-main__meta">· ' . esc_html( topersia_g_gallery_meta( $shot ) ) . '</span>'
 							: '' )
 						. '</span>'
 					: '' )
@@ -5997,7 +6054,7 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 		}
 
 		/* همان فهرستی که موزاییک از آن ساخته شد — یک منبع، دو مصرف. */
-		$shots = topersia_g_gallery_shots( topersia_g_raw( $post_id, 'featured_image_gallery' ) );
+		$shots = topersia_g_gallery_shots_for( $post_id );
 
 		/*
 		 * شاسیِ پخش — همان شاسیِ تمام‌صفحۀ عکس، با صحنۀ خالی.  P5-D222
@@ -6048,7 +6105,7 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 				. $shot['img']
 				. ( '' !== $shot['label']
 					? '<span class="tp-gallery-modal__cap">' . esc_html( $shot['label'] )
-						. ( '' !== $shot['place'] ? ' <small>' . esc_html( $shot['place'] ) . '</small>' : '' )
+						. ( '' !== topersia_g_gallery_meta( $shot ) ? ' <small>' . esc_html( topersia_g_gallery_meta( $shot ) ) . '</small>' : '' )
 						. '</span>'
 					: '' )
 				. '</button>';
@@ -6062,6 +6119,9 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 				'alt' => $shot['label'],
 				't'   => $shot['label'],
 				'c'   => $shot['place'],
+				/* عکس تجمیعی: نام و نشانی موجودیت منبع — پیوند در نمای تمام‌صفحه (P5-D274) */
+				'n'   => isset( $shot['src_name'] ) ? $shot['src_name'] : '',
+				'u'   => isset( $shot['src_url'] ) ? $shot['src_url'] : '',
 				/* ابعاد — جاوااسکریپت با هر عکس روی `<img>` می‌نشاند.  P5-D246 */
 				'w'   => $shot['w'],
 				'h'   => $shot['h'],

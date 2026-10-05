@@ -798,6 +798,13 @@ if ( ! function_exists( 'topersia_render_settings_page' ) ) {
 
 				<div class="tp-save"><?php submit_button( esc_html__( 'ذخیرۀ تغییرات', 'topersia' ), 'primary', 'submit', false ); ?></div>
 			</form>
+
+			<?php
+			/* گالری تجمیعی (P5-D274 · P5-D300) — کارت در topersia-g-gallery-agg.php، با کاتالوگ */
+			if ( function_exists( 'topersia_g_gallery_agg_admin_card' ) ) {
+				topersia_g_gallery_agg_admin_card();
+			}
+			?>
 		</div>
 
 		<script>
