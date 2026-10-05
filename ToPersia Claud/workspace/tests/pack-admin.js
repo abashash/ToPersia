@@ -226,7 +226,7 @@ async function run( type, name ) {
 		fs.unlinkSync( tmpTr );
 	} finally {
 		await browser.close();
-		const left = JSON.parse( php( [ 'tests/pack-admin-state.php', 'cleanup', tag, setup.last_run, String( setup.floor ) ] ) );
+		const left = JSON.parse( php( [ 'tests/pack-admin-state.php', 'cleanup', tag, setup.last_run, String( setup.floor ), String( setup.post_floor ) ] ) );
 		if ( left.left ) { check( `${ name }: پاک‌سازی`, false, left.left + ' پست ماند' ); }
 	}
 }

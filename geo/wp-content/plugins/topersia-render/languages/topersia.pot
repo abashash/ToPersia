@@ -27,6 +27,10 @@ msgid "ToPersia را منبع ترجیحی گوگل کنید"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "© مشارکت‌کنندگان OpenStreetMap"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "آبان"
 msgstr ""
 
@@ -289,6 +293,10 @@ msgstr ""
 msgid "بازتعریف واحد پول"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "بازخورد نقشه"
+msgstr ""
+
 #: includes/topersia-g-gallery-agg.php
 msgid "بازسازی همه"
 msgstr ""
@@ -358,6 +366,10 @@ msgid "برگ‌ریزان"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "بزرگ‌نمایی"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "بستن"
 msgstr ""
 
@@ -371,6 +383,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "بستن پخش"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "بستن پنجرۀ نقشه"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -430,6 +446,10 @@ msgstr ""
 msgid "بومی و سنتی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "بکشید تا نقشه بچرخد؛ کلیک: شمال به بالا"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "بیابانی و تنک"
 msgstr ""
@@ -477,6 +497,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "تصویر"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "تصویر %s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1825,6 +1850,10 @@ msgstr ""
 msgid "نساجی سنتی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "نشانگر نقشه"
+msgstr ""
+
 #: topersia-render.php
 msgid "نشانی کپی شد."
 msgstr ""
@@ -1885,6 +1914,10 @@ msgstr ""
 
 #: topersia-render.php
 msgid "نمایش و خوانایی"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "نمایش یا پنهان‌کردن منبع نقشه"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2303,6 +2336,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "کوه"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "کوچک‌نمایی"
 msgstr ""
 
 #: includes/topersia-g-zones.php

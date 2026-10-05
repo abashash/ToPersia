@@ -28,6 +28,10 @@ msgid "ToPersia را منبع ترجیحی گوگل کنید"
 msgstr "Make ToPersia a preferred source on Google"
 
 #: includes/topersia-g-zones.php
+msgid "© مشارکت‌کنندگان OpenStreetMap"
+msgstr "© OpenStreetMap contributors"
+
+#: includes/topersia-g-zones.php
 msgid "آبان"
 msgstr "Aban"
 
@@ -290,6 +294,10 @@ msgstr "Bazaar"
 msgid "بازتعریف واحد پول"
 msgstr "Redenomination"
 
+#: includes/topersia-g-zones.php
+msgid "بازخورد نقشه"
+msgstr "Map feedback"
+
 #: includes/topersia-g-gallery-agg.php
 msgid "بازسازی همه"
 msgstr "Rebuild all"
@@ -359,6 +367,10 @@ msgid "برگ‌ریزان"
 msgstr "Autumn foliage"
 
 #: includes/topersia-g-zones.php
+msgid "بزرگ‌نمایی"
+msgstr "Zoom in"
+
+#: includes/topersia-g-zones.php
 msgid "بستن"
 msgstr "Close"
 
@@ -373,6 +385,10 @@ msgstr "Close list"
 #: includes/topersia-g-zones.php
 msgid "بستن پخش"
 msgstr "Close player"
+
+#: includes/topersia-g-zones.php
+msgid "بستن پنجرۀ نقشه"
+msgstr "Close map popup"
 
 #: includes/topersia-g-zones.php
 msgid "بستن گالری"
@@ -431,6 +447,10 @@ msgstr "Updated a few minutes ago"
 msgid "بومی و سنتی"
 msgstr "Indigenous and traditional"
 
+#: includes/topersia-g-zones.php
+msgid "بکشید تا نقشه بچرخد؛ کلیک: شمال به بالا"
+msgstr "Drag to rotate the map; click to reset north"
+
 #: includes/topersia-g-map.php
 msgid "بیابانی و تنک"
 msgstr "Desert scrub"
@@ -479,6 +499,11 @@ msgstr "Selected photos of the attractions of %s"
 #: includes/topersia-g-zones.php
 msgid "تصویر"
 msgstr "Image"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "تصویر %s"
+msgstr "Image %s"
 
 #: includes/topersia-g-zones.php
 msgid "تعیین رسمی"
@@ -1826,6 +1851,10 @@ msgstr "Be the first to write a review"
 msgid "نساجی سنتی"
 msgstr "Traditional textiles"
 
+#: includes/topersia-g-zones.php
+msgid "نشانگر نقشه"
+msgstr "Map marker"
+
 #: topersia-render.php
 msgid "نشانی کپی شد."
 msgstr "Link copied."
@@ -1887,6 +1916,10 @@ msgstr "Show marker details"
 #: topersia-render.php
 msgid "نمایش و خوانایی"
 msgstr "Display and readability"
+
+#: includes/topersia-g-zones.php
+msgid "نمایش یا پنهان‌کردن منبع نقشه"
+msgstr "Show or hide map attribution"
 
 #: includes/topersia-g-map.php
 msgid "نمکی"
@@ -2305,6 +2338,10 @@ msgstr "Synagogue"
 #: includes/topersia-g-zones.php
 msgid "کوه"
 msgstr "Mountain"
+
+#: includes/topersia-g-zones.php
+msgid "کوچک‌نمایی"
+msgstr "Zoom out"
 
 #: includes/topersia-g-zones.php
 msgid "کویر"

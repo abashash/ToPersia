@@ -54,6 +54,7 @@ function tagged( $tag ) {
 
 if ( 'setup' === $cmd ) {
 	$floor = tp_queue_floor();
+	$pfloor = tp_post_floor();
 	$id    = wp_insert_post( array( 'post_type' => 'tp_county', 'post_status' => 'publish', 'post_title' => 'شهرستان آزمون پیشخوان ' . $tag ), true );
 	do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_tp_county', 'trid' => false, 'language_code' => 'fa' ) );
 	/* شهر فارسیِ مقصد درون‌ریزی ترجمه (۲ج٫۹) — پیش‌نویس */
@@ -66,7 +67,7 @@ if ( 'setup' === $cmd ) {
 	), true );
 	do_action( 'wpml_set_element_language_details', array( 'element_id' => $city, 'element_type' => 'post_tp_city', 'trid' => false, 'language_code' => 'fa' ) );
 	wp_update_post( array( 'ID' => $city ) );
-	echo wp_json_encode( array( 'county' => (int) $id, 'city' => (int) $city, 'last_run' => base64_encode( serialize( get_option( TOPERSIA_PACK_LAST_RUN, null ) ) ), 'floor' => $floor ) );
+	echo wp_json_encode( array( 'county' => (int) $id, 'city' => (int) $city, 'last_run' => base64_encode( serialize( get_option( TOPERSIA_PACK_LAST_RUN, null ) ) ), 'floor' => $floor, 'post_floor' => $pfloor ) );
 	exit( 0 );
 }
 
@@ -112,6 +113,7 @@ if ( 'cleanup' === $cmd ) {
 		$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $run . '"' ) . '%' ) );
 	}
 	tp_queue_sweep( isset( $argv[4] ) ? (int) $argv[4] : -1 );
+	tp_wpml_sweep( isset( $argv[5] ) ? (int) $argv[5] : 0 );
 	/* ردیف‌های لاگ اجراهای همین آزمون — شناسۀ اجرا از گزینۀ آخرین درون‌ریزی، که آزمون ساخته */
 	if ( is_array( $last ) && ! empty( $last['run'] ) && isset( $last['file'] ) && false !== strpos( (string) $last['file'], $tag ) ) {
 		$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $last['run'] . '"' ) . '%' ) );

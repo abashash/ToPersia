@@ -54,7 +54,7 @@ function section( $s ) { echo "\n{$s}\n" . str_repeat( '─', 78 ) . "\n"; }
 
 /* as_floor: کف صف هسته پیش از آزمون — هر کار topersia بالاتر از آن ساختۀ همین آزمون است (۲ج٫۵) */
 require_once __DIR__ . '/queue-sweep.php';
-$cleanup = array( 'posts' => array(), 'rel' => array(), 'as_floor' => tp_queue_floor() );
+$cleanup = array( 'posts' => array(), 'rel' => array(), 'as_floor' => tp_queue_floor(), 'post_floor' => tp_post_floor() );
 $GLOBALS['cleanup'] = &$cleanup;
 
 register_shutdown_function( function () use ( &$cleanup ) {
@@ -67,6 +67,7 @@ register_shutdown_function( function () use ( &$cleanup ) {
 	}
 	/* پاک‌شدن پست موقت والدهای تجمیعی را در صف گذاشت — اجرا، و ردیف‌های صفِ ساختۀ آزمون پاک */
 	tp_queue_sweep( $cleanup['as_floor'] );
+	tp_wpml_sweep( $cleanup['post_floor'] );
 } );
 
 function tmp_post( $type, $title, $status = 'publish', $meta = array() ) {

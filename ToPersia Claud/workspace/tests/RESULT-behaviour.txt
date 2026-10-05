@@ -164,11 +164,11 @@
 ──────────────────────────────────────────────────────────────────────────────
   ✅ کروم /en/province/isfahan/: <html lang="en…">، جهت ltr؛ هر عنصر صفحه همان جهت؛ هیچ dir صریحِ وارونه  ۲٫۰٫۸
   ✅ کروم /en/province/isfahan/: شرط زبان WPML — هر پیوند درونی به /en/؛ رابطۀ بی‌نسخه در این زبان نمی‌آید (3 پیوند)  P5-D247 · ۲٫۰٫۸
-  · کروم /en/province/isfahan/: h1 «Isfahan Province»
+  · کروم /en/province/isfahan/: h1 «Isfahan»
   · کروم /en/province/isfahan/: جایگزینِ بی‌جاوااسکریپتِ پیوند ورود به /account/ — برگۀ حساب این زبان ندارد (داده)
   ✅ کروم /ar/province/isfahan/: <html lang="ar…">، جهت rtl؛ هر عنصر صفحه همان جهت؛ هیچ dir صریحِ وارونه  ۲٫۰٫۸
   ✅ کروم /ar/province/isfahan/: شرط زبان WPML — هر پیوند درونی به /ar/؛ رابطۀ بی‌نسخه در این زبان نمی‌آید (2 پیوند)  P5-D247 · ۲٫۰٫۸
-  · کروم /ar/province/isfahan/: h1 «محافظة أصفهان»
+  · کروم /ar/province/isfahan/: h1 «أصفهان»
   · کروم /ar/province/isfahan/: جایگزینِ بی‌جاوااسکریپتِ پیوند ورود به /account/ — برگۀ حساب این زبان ندارد (داده)
   ✅ کروم /en/city/isfahan/: <html lang="en…">، جهت ltr؛ هر عنصر صفحه همان جهت؛ هیچ dir صریحِ وارونه  ۲٫۰٫۸
   ✅ کروم /en/city/isfahan/: شرط زبان WPML — هر پیوند درونی به /en/؛ رابطۀ بی‌نسخه در این زبان نمی‌آید (3 پیوند)  P5-D247 · ۲٫۰٫۸
@@ -183,11 +183,11 @@
 کروم — ۴٫۴٫۲ زبان صفحه و گالری
 ──────────────────────────────────────────────────────────────────────────────
   ✅ کروم /en/province/isfahan/: هیچ رشتۀ رابط فارسی در صفحه و لایۀ بیرونی — متن، aria، title، placeholder؛ جهش (همان صفحه بی کاتالوگ، /province/isfahan/) می‌افتد  ۴٫۴٫۲
-  ✅ کروم /en/province/isfahan/: تیتر «Isfahan Province» بی پیشوند فارسی، eyebrow «Province»  ۴٫۴٫۲ · P5-D224
+  ✅ کروم /en/province/isfahan/: تیتر «Isfahan» بی پیشوند فارسی، eyebrow «Province»  ۴٫۴٫۲ · P5-D224
   ✅ کروم /en/province/isfahan/: تیتر چپ‌به‌راست فاصلۀ واژه دارد — letter-spacing ≥ −۰٫۰۳em، word-spacing > ۰ (مرجعِ فارسی −۰٫۰۷em دو واژه را یکی می‌کرد)  ۴٫۴٫۲
   · کروم /en/province/isfahan/: هدر وودمارت و مگامنو 13 برچسب فارسی — منوی وردپرس (ترجمۀ منو در WPML) و ویجت HTML المنتور (فاز ۷)، نه این افزونه
   ✅ کروم /ar/province/isfahan/: هیچ رشتۀ رابط فارسی در صفحه و لایۀ بیرونی — متن، aria، title، placeholder؛ جهش (همان صفحه بی کاتالوگ، /province/isfahan/) می‌افتد  ۴٫۴٫۲
-  ✅ کروم /ar/province/isfahan/: تیتر «محافظة أصفهان» بی پیشوند فارسی، eyebrow «محافظة»  ۴٫۴٫۲ · P5-D224
+  ✅ کروم /ar/province/isfahan/: تیتر «أصفهان» بی پیشوند فارسی، eyebrow «محافظة»  ۴٫۴٫۲ · P5-D224
   · کروم /ar/province/isfahan/: هدر وودمارت و مگامنو 13 برچسب فارسی — منوی وردپرس (ترجمۀ منو در WPML) و ویجت HTML المنتور (فاز ۷)، نه این افزونه
   ✅ کروم /en/city/isfahan/: هیچ رشتۀ رابط فارسی در صفحه و لایۀ بیرونی — متن، aria، title، placeholder؛ جهش (همان صفحه بی کاتالوگ، /city/isfahan/) می‌افتد  ۴٫۴٫۲
   ✅ کروم /en/city/isfahan/: تیتر «Isfahan» بی پیشوند فارسی، eyebrow «City»  ۴٫۴٫۲ · P5-D224
@@ -363,11 +363,11 @@
 ──────────────────────────────────────────────────────────────────────────────
   ✅ فایرفاکس /en/province/isfahan/: <html lang="en…">، جهت ltr؛ هر عنصر صفحه همان جهت؛ هیچ dir صریحِ وارونه  ۲٫۰٫۸
   ✅ فایرفاکس /en/province/isfahan/: شرط زبان WPML — هر پیوند درونی به /en/؛ رابطۀ بی‌نسخه در این زبان نمی‌آید (3 پیوند)  P5-D247 · ۲٫۰٫۸
-  · فایرفاکس /en/province/isfahan/: h1 «Isfahan Province»
+  · فایرفاکس /en/province/isfahan/: h1 «Isfahan»
   · فایرفاکس /en/province/isfahan/: جایگزینِ بی‌جاوااسکریپتِ پیوند ورود به /account/ — برگۀ حساب این زبان ندارد (داده)
   ✅ فایرفاکس /ar/province/isfahan/: <html lang="ar…">، جهت rtl؛ هر عنصر صفحه همان جهت؛ هیچ dir صریحِ وارونه  ۲٫۰٫۸
   ✅ فایرفاکس /ar/province/isfahan/: شرط زبان WPML — هر پیوند درونی به /ar/؛ رابطۀ بی‌نسخه در این زبان نمی‌آید (2 پیوند)  P5-D247 · ۲٫۰٫۸
-  · فایرفاکس /ar/province/isfahan/: h1 «محافظة أصفهان»
+  · فایرفاکس /ar/province/isfahan/: h1 «أصفهان»
   · فایرفاکس /ar/province/isfahan/: جایگزینِ بی‌جاوااسکریپتِ پیوند ورود به /account/ — برگۀ حساب این زبان ندارد (داده)
   ✅ فایرفاکس /en/city/isfahan/: <html lang="en…">، جهت ltr؛ هر عنصر صفحه همان جهت؛ هیچ dir صریحِ وارونه  ۲٫۰٫۸
   ✅ فایرفاکس /en/city/isfahan/: شرط زبان WPML — هر پیوند درونی به /en/؛ رابطۀ بی‌نسخه در این زبان نمی‌آید (3 پیوند)  P5-D247 · ۲٫۰٫۸
@@ -382,11 +382,11 @@
 فایرفاکس — ۴٫۴٫۲ زبان صفحه و گالری
 ──────────────────────────────────────────────────────────────────────────────
   ✅ فایرفاکس /en/province/isfahan/: هیچ رشتۀ رابط فارسی در صفحه و لایۀ بیرونی — متن، aria، title، placeholder؛ جهش (همان صفحه بی کاتالوگ، /province/isfahan/) می‌افتد  ۴٫۴٫۲
-  ✅ فایرفاکس /en/province/isfahan/: تیتر «Isfahan Province» بی پیشوند فارسی، eyebrow «Province»  ۴٫۴٫۲ · P5-D224
+  ✅ فایرفاکس /en/province/isfahan/: تیتر «Isfahan» بی پیشوند فارسی، eyebrow «Province»  ۴٫۴٫۲ · P5-D224
   ✅ فایرفاکس /en/province/isfahan/: تیتر چپ‌به‌راست فاصلۀ واژه دارد — letter-spacing ≥ −۰٫۰۳em، word-spacing > ۰ (مرجعِ فارسی −۰٫۰۷em دو واژه را یکی می‌کرد)  ۴٫۴٫۲
   · فایرفاکس /en/province/isfahan/: هدر وودمارت و مگامنو 13 برچسب فارسی — منوی وردپرس (ترجمۀ منو در WPML) و ویجت HTML المنتور (فاز ۷)، نه این افزونه
   ✅ فایرفاکس /ar/province/isfahan/: هیچ رشتۀ رابط فارسی در صفحه و لایۀ بیرونی — متن، aria، title، placeholder؛ جهش (همان صفحه بی کاتالوگ، /province/isfahan/) می‌افتد  ۴٫۴٫۲
-  ✅ فایرفاکس /ar/province/isfahan/: تیتر «محافظة أصفهان» بی پیشوند فارسی، eyebrow «محافظة»  ۴٫۴٫۲ · P5-D224
+  ✅ فایرفاکس /ar/province/isfahan/: تیتر «أصفهان» بی پیشوند فارسی، eyebrow «محافظة»  ۴٫۴٫۲ · P5-D224
   · فایرفاکس /ar/province/isfahan/: هدر وودمارت و مگامنو 13 برچسب فارسی — منوی وردپرس (ترجمۀ منو در WPML) و ویجت HTML المنتور (فاز ۷)، نه این افزونه
   ✅ فایرفاکس /en/city/isfahan/: هیچ رشتۀ رابط فارسی در صفحه و لایۀ بیرونی — متن، aria، title، placeholder؛ جهش (همان صفحه بی کاتالوگ، /city/isfahan/) می‌افتد  ۴٫۴٫۲
   ✅ فایرفاکس /en/city/isfahan/: تیتر «Isfahan» بی پیشوند فارسی، eyebrow «City»  ۴٫۴٫۲ · P5-D224

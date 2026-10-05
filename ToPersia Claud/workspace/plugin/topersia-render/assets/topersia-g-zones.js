@@ -1888,7 +1888,9 @@
 					center: lnglat,
 					zoom: cfg.zoom || 8,
 					interactive: !! interactive,
-					attributionControl: { compact: false }
+					attributionControl: { compact: false },
+					/* دکمه‌ها و aria-label نقشه و نشانگر به زبان صفحه — از کاتالوگ سرور.  P5-D278 */
+					locale: cfg.locale || {}
 				} );
 
 				/* برای آزمون و افزونه‌های دیگر: همان نقشه روی ظرفش. */

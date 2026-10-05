@@ -77,7 +77,7 @@ function section( $s ) { echo "\n{$s}\n" . str_repeat( '─', 78 ) . "\n"; }
 /* ── پاک‌سازی: هر چه ساخته شد، حتی اگر آزمون وسط راه بیفتد ── */
 /* queue: کارهای صفی که پست‌های موقت می‌سازند (گالری تجمیعی ۲ج٫۵) — در پایان اجرا و پاک */
 require_once __DIR__ . '/queue-sweep.php';
-$GLOBALS['cleanup'] = array( 'posts' => array(), 'runs' => array(), 'log_ids' => array(), 'last_run' => get_option( TOPERSIA_PACK_LAST_RUN, null ), 'queue' => tp_queue_floor() );
+$GLOBALS['cleanup'] = array( 'posts' => array(), 'runs' => array(), 'log_ids' => array(), 'last_run' => get_option( TOPERSIA_PACK_LAST_RUN, null ), 'queue' => tp_queue_floor(), 'post_floor' => tp_post_floor() );
 
 register_shutdown_function( function () {
 	global $wpdb;
@@ -89,6 +89,7 @@ register_shutdown_function( function () {
 		wp_delete_post( $id, true );
 	}
 	tp_queue_sweep( $c['queue'] );
+	tp_wpml_sweep( $c['post_floor'] );
 	foreach ( array_unique( $c['runs'] ) as $run ) {
 		$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $run . '"' ) . '%' ) );
 	}

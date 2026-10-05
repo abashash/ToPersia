@@ -6,6 +6,10 @@
  *   stats   ۲ج٫۱ — هر نوعِ دارای کارت آمار: هیچ مقدار دو خط نمی‌شود؛ ستون‌ها به شمار خانه‌ها
  *   title   ۲ج٫۴ — تیتر کشور («ایران») در ۱۴۴۰ و ۳۹۰ یک خط
  *   gallery ۲ج٫۵ — گالری تجمیعی کشور: عکس استان با منبع؛ پیوند منبع در نمای تمام‌صفحه و کلیکش
+ *   lang    ۲ج٫۸ — هر نوع در /en/ و /ar/ (ترجمۀ موجود یا موقت — tests/phase2c-lang.php): در متن
+ *           و aria-label · title · alt هیچ رقم فارسی؛ در /en/ هیچ حرف عربی‌خط جز درون lang="fa|ar"؛
+ *           در /ar/ حرف ویژۀ فارسی فقط هشدار. نقشۀ fa · en · ar: برچسب کاشی، دکمه‌ها، aria-label
+ *           و انتساب به زبان صفحه، با عکس در tests/.screens/ (کروم: همه؛ فایرفاکس: نقشه)
  *
  * «یک خط» با ارتفاع دیدنی سنجیده می‌شود: سطرهای متن با Range (هر سطر یک
  * مستطیل با `top` تازه)، نه ارتفاع جعبه. درخواست به topersia.com بسته است.
@@ -16,6 +20,8 @@ const { chromium, firefox } = require( 'playwright' );
 const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 const { execFileSync } = require( 'child_process' );
 const path = require( 'path' );
+const fs = require( 'fs' );
+const SCREENS = path.join( __dirname, '.screens' );
 
 const BASE = ENV.base;
 const PHP  = ENV.php;
@@ -61,7 +67,62 @@ const LINES = `( el => {
 	return mids.length;
 } )`;
 
+/*
+ * ۲ج٫۸ — هر متن و ویژگی رابط درون صفحۀ ما (.tp-page و ظرف portal، با مودال‌های پنهان):
+ * رقم فارسی · حرف عربی‌خط بیرون از lang="fa|ar" · حرف ویژۀ فارسی بیرون از lang="fa".
+ * بیرون از .tp-page (سربرگ و پانویس پوسته) فقط شمرده می‌شود — آگاهی، نه حکم.
+ */
+const SCAN = `( () => {
+	const faDigit = /[\\u06F0-\\u06F9]/;
+	const arab    = /[\\u0600-\\u06FF\\u0750-\\u077F\\u08A0-\\u08FF\\uFB50-\\uFDFF\\uFE70-\\uFEFF]/;
+	const faOnly  = /[\\u067E\\u0686\\u0698\\u06AF\\u06CC\\u06A9]/;
+	const out = { digits: [], arabic: [], faLetters: [], texts: 0, outside: 0 };
+	const where = el => { const p = el.closest( '[id]' ); return ( p ? '#' + p.id : '' ) + ' ' + ( el.getAttribute( 'class' ) || el.tagName ).toString().split( ' ' )[0]; };
+	const langOf = el => { const l = el.closest( '[lang]' ); return l ? l.getAttribute( 'lang' ) : ''; };
+	const take = ( s, el, kind ) => {
+		const lg = langOf( el );
+		const sn = kind + ' ' + where( el ) + ': ' + s.trim().replace( /\\s+/g, ' ' ).slice( 0, 50 );
+		if ( faDigit.test( s ) ) { out.digits.push( sn ); }
+		if ( arab.test( s ) && ! /^(fa|ar)\\b/i.test( lg ) ) { out.arabic.push( sn ); }
+		if ( faOnly.test( s ) && ! /^fa\\b/i.test( lg ) ) { out.faLetters.push( sn ); }
+	};
+	const skip = n => n.parentElement && n.parentElement.closest( 'script,style,template,noscript' );
+	const roots = [ ...document.querySelectorAll( '.tp-page' ) ].filter( r => ! r.parentElement.closest( '.tp-page' ) );
+	for ( const root of roots ) {
+		const w = document.createTreeWalker( root, NodeFilter.SHOW_TEXT );
+		for ( let n = w.nextNode(); n; n = w.nextNode() ) {
+			if ( ! skip( n ) && n.textContent.trim() ) { out.texts++; take( n.textContent, n.parentElement, 'text' ); }
+		}
+		for ( const el of root.querySelectorAll( '[aria-label],[title],[alt],[placeholder]' ) ) {
+			for ( const a of [ 'aria-label', 'title', 'alt', 'placeholder' ] ) { const v = el.getAttribute( a ); if ( v ) { take( v, el, a ); } }
+		}
+	}
+	const b = document.createTreeWalker( document.body, NodeFilter.SHOW_TEXT );
+	for ( let n = b.nextNode(); n; n = b.nextNode() ) {
+		if ( ! skip( n ) && n.parentElement && ! n.parentElement.closest( '.tp-page' ) && arab.test( n.textContent ) && ! /^(fa|ar)\\b/i.test( langOf( n.parentElement ) ) ) { out.outside++; }
+	}
+	return out;
+} )()`;
+
+/* ۲ج٫۸ — ترجمۀ en و ar هر نوع: موجود، یا موقت (tests/phase2c-lang.php)؛ پاک‌سازی در finally */
+function langPages() {
+	return JSON.parse( execFileSync( PHP, [ path.join( __dirname, 'phase2c-lang.php' ), 'setup' ], { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'inherit' ] } ) );
+}
+function langCleanup( L ) {
+	const arg = Buffer.from( JSON.stringify( { made: L.made, run: L.run, floor: L.floor, post_floor: L.post_floor } ) ).toString( 'base64' );
+	return JSON.parse( execFileSync( PHP, [ path.join( __dirname, 'phase2c-lang.php' ), 'cleanup', arg ], { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'inherit' ] } ) );
+}
+
+/* منتظر روزهای هوا (پاسخ /weather) — اگر کارت هوا هست */
+async function weatherSettled( page ) {
+	if ( await page.$( '.tp-wx__day' ) ) {
+		await page.waitForSelector( '.tp-wx__day:not(.tp-is-load)', { timeout: 30000 } ).catch( () => {} );
+	}
+}
+
 ( async () => {
+	const L = want( 'lang' ) ? langPages() : null;
+	try {
 	for ( const [ bname, engine ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ] ) {
 
 		const browser = await engine.launch();
@@ -139,7 +200,86 @@ const LINES = `( el => {
 			}
 		}
 
+		/* ۲ج٫۸ — همه‌چیز به زبان صفحه  P5-D278 */
+		if ( L ) {
+
+			/* هر نوع در /en/ و /ar/ — کروم (متن از سرور و کاتالوگ JS است، نه از موتور مرورگر) */
+			if ( engine === chromium ) {
+				let outside = 0;
+				const warn  = [];
+				for ( const [ type, row ] of Object.entries( L.pages ) ) {
+					for ( const lang of [ 'en', 'ar' ] ) {
+						if ( ! row[ lang ] ) {
+							check( `۲ج٫۸ ${ type } /${ lang }/: صفحۀ ترجمه هست`, false, 'ترجمه ساخته نشد' );
+							continue;
+						}
+						const { ctx, page } = await open( browser, row[ lang ], 1440 );
+						await weatherSettled( page );
+						const s = await page.evaluate( SCAN );
+						outside += s.outside;
+						if ( 'en' === lang ) {
+							check( `۲ج٫۸ ${ type } /en/: ${ s.texts } متن — هیچ رقم فارسی، هیچ حرف عربی‌خط جز درون lang="fa|ar"  P5-D278`,
+								s.texts > 20 && ! s.digits.length && ! s.arabic.length, JSON.stringify( { url: row.en, digits: s.digits.slice( 0, 4 ), arabic: s.arabic.slice( 0, 6 ) } ) );
+						} else {
+							check( `۲ج٫۸ ${ type } /ar/: ${ s.texts } متن — هیچ رقم فارسی  P5-D278`,
+								s.texts > 20 && ! s.digits.length, JSON.stringify( { url: row.ar, digits: s.digits.slice( 0, 6 ) } ) );
+							if ( s.faLetters.length ) { warn.push( `${ type }: ${ s.faLetters.length } — ${ s.faLetters.slice( 0, 3 ).join( ' | ' ) }` ); }
+						}
+						await ctx.close();
+					}
+				}
+				console.log( `  · هشدار /ar/ — حرف ویژۀ فارسی (پ چ ژ گ ی ک) بیرون از lang="fa": ${ warn.length } نوع` );
+				warn.forEach( w => console.log( '      ' + w ) );
+				console.log( `  · آگاهی — متن عربی‌خطِ بیرون از صفحۀ ما (سربرگ و پانویس پوسته) در همۀ صفحه‌های /en/ و /ar/: ${ outside } گره` );
+			}
+
+			/* نقشۀ fa · en · ar روی استان اصفهان — هر دو مرورگر، با عکس */
+			fs.mkdirSync( SCREENS, { recursive: true } );
+			const prov = L.pages.tp_province || {};
+			const want8 = {
+				fa: { zin: 'بزرگ‌نمایی', zout: 'کوچک‌نمایی', map: 'نقشه', marker: 'نشانگر نقشه', attrib: 'مشارکت‌کنندگان OpenStreetMap' },
+				en: { zin: 'Zoom in', zout: 'Zoom out', map: 'Map', marker: 'Map marker', attrib: 'OpenStreetMap contributors' },
+				ar: { zin: 'تكبير', zout: 'تصغير', map: 'الخريطة', marker: 'علامة على الخريطة', attrib: 'مساهمو OpenStreetMap' },
+			};
+			for ( const lang of [ 'fa', 'en', 'ar' ] ) {
+				if ( ! prov[ lang ] ) { check( `۲ج٫۸ نقشۀ ${ lang }: صفحۀ استان هست`, false ); continue; }
+				const { ctx, page } = await open( browser, prov[ lang ], 1440 );
+				await page.locator( '[data-tp-map-open]' ).first().click();
+				const ok = await page.waitForFunction( () => {
+					const f = document.querySelector( '[data-tp-map-full]' );
+					return !! ( f && f.tpMap && f.tpMap.loaded() && f.tpMap.areTilesLoaded() );
+				}, null, { timeout: 90000 } ).then( () => true ).catch( () => false );
+				await page.waitForTimeout( 1500 );
+				const m = ok ? await page.evaluate( () => {
+					const f   = document.querySelector( '[data-tp-map-full]' );
+					const lay = JSON.stringify( f.tpMap.getStyle().layers );
+					const at  = sel => { const e = f.querySelector( sel ); return e ? e : null; };
+					return {
+						label:  ( lay.match( /name:(fa|en|ar)/ ) || [] )[1] || '',
+						zin:    ( at( '.maplibregl-ctrl-zoom-in' ) || {} ).title || '',
+						zout:   ( at( '.maplibregl-ctrl-zoom-out' ) || {} ).title || '',
+						map:    at( '.maplibregl-canvas' ) ? at( '.maplibregl-canvas' ).getAttribute( 'aria-label' ) : '',
+						marker: at( '.maplibregl-marker' ) ? at( '.maplibregl-marker' ).getAttribute( 'aria-label' ) : '',
+						attrib: ( at( '.maplibregl-ctrl-attrib-inner' ) || {} ).textContent || '',
+					};
+				} ) : null;
+				const w = want8[ lang ];
+				const shot = path.join( SCREENS, `2c8-map-${ lang }-${ engine === chromium ? 'chrome' : 'firefox' }.png` );
+				if ( ok ) { await page.locator( '[data-tp-map-full]' ).screenshot( { path: shot } ); }
+				check( `۲ج٫۸ ${ bname } نقشۀ ${ lang }: برچسب کاشی name:${ lang }، دکمه‌های بزرگ‌نمایی، aria-label نقشه و نشانگر و انتساب به زبان صفحه؛ عکس ${ path.basename( shot ) }  P5-D278`,
+					!! m && lang === m.label && w.zin === m.zin && w.zout === m.zout && w.map === m.map && w.marker === m.marker && m.attrib.includes( w.attrib ),
+					JSON.stringify( m ) );
+				await ctx.close();
+			}
+		}
+
 		await browser.close();
+	}
+	} finally {
+		if ( L ) {
+			const left = langCleanup( L );
+			if ( left.left ) { check( '۲ج٫۸ پاک‌سازی ترجمه‌های موقت', false, left.left + ' پست ماند' ); }
+		}
 	}
 
 	console.log( '\n' + '─'.repeat( 78 ) + `\n  گذشته: ${ pass }   افتاده: ${ fail }` );

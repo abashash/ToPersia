@@ -319,6 +319,13 @@ html .tp-page .tp-stats[data-tp-n="1"]{grid-template-columns:1fr}
    با زیرخط تا پیوند بودنش بی رنگ تازه پیدا باشد. */
 html .tp-page .tp-solo__src{color:inherit;text-decoration:underline;text-underline-offset:2px}
 
+/* ═══ نقشه به زبان صفحه — SPRINT-4.4 ۲ج٫۸ · P5-D278 ════════════════════
+   سطر مختصات مرجع چپ‌به‌راست است و برچسبش راست‌به‌چپ — طراحیِ صفحۀ فارسی
+   (پذیرش با مرجع). در صفحۀ عربی و انگلیسی هر دو جهت صفحه را می‌گیرند؛
+   خودِ مختصات dir="ltr" دارد. */
+html:not(:lang(fa)) .tp-page .tp-map-coord{direction:inherit;text-align:start}
+html:not(:lang(fa)) .tp-page .tp-map-coord .tp-lbl{direction:inherit}
+
 /* ═══ کشیدن با موس — SPRINT-4.4 ۲ج٫۳ · P5-D277 ══════════════════════════
    اسلایدر و صحنۀ نمای تمام‌صفحه: نشانگر grab فقط برای موس؛ هنگام کشیدن
    grabbing، بی انتخاب متن و بی چسبیدن (جابه‌جایی scrollLeft مستقیم است؛

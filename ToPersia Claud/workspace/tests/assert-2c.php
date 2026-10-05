@@ -195,3 +195,61 @@ tp441_mut( 'رابطۀ ترجمه از پست فارسی با گارد: طرفِ
 	},
 	tp2c_body( $pack2c, 'topersia_pack_tr_relations' ),
 	str_replace( '( $single && $mapped === $item )', '( false )', tp2c_body( $pack2c, 'topersia_pack_tr_relations' ) ) );
+
+/* ── ۲ج٫۸ — همه‌چیز به زبان صفحه (P5-D278) ─────────────────────────── */
+
+echo "\nفاز ۲ج SPRINT-4.4 — ۲ج٫۸ همه‌چیز به زبان صفحه  P5-D278\n" . str_repeat( '─', 78 ) . "\n";
+
+/* رفتار، با همان سازوکار زبانِ assert-442 (صافی wpml_current_language و کاتالوگ ساخته‌شده) */
+$GLOBALS['tp_meta'][990801] = array(
+	'overview_text' => '<p>استان اصفهان در مرکز ایران است و از شمال به استان قم می‌رسد.</p>',
+	'short_summary' => 'Isfahan is a province in central Iran (اصفهان).',
+	'name_local'    => 'اِصفَهان',
+);
+$probe8 = function () {
+	return array(
+		'overview' => topersia_g_raw( 990801, 'overview_text' ),
+		'summary'  => topersia_g_raw( 990801, 'short_summary' ),
+		'local'    => topersia_g_raw( 990801, 'name_local' ),
+		'code'     => topersia_g_value( 'calling_code', '+۹۸' ),
+		'tld'      => topersia_g_value( 'internet_tld', '.ir .ایران' ),
+	);
+};
+$lang8 = array( 'fa' => tp442_lang( 'fa', $probe8 ), 'en' => tp442_lang( 'en', $probe8 ), 'ar' => tp442_lang( 'ar', $probe8 ) );
+unset( $GLOBALS['tp_meta'][990801] );
+
+tp441_mut( 'فیلد به زبان دیگر: در /en/ و /ar/ متن چیره‌فارسی خالی، متن انگلیسیِ دارای نام فارسی و نام محلی سر جایشان؛ کد «+۹۸» ← «+98» (/ar/ «+٩٨»)، «.ایران» با bdi lang="fa"؛ صفحۀ فارسی دست‌نخورده',
+	function ( $x ) {
+		return '' === $x['en']['overview'] && false !== strpos( $x['en']['summary'], 'Isfahan' ) && 'اِصفَهان' === $x['en']['local']
+			&& false !== strpos( $x['en']['code'], '+98' ) && false !== strpos( $x['en']['tld'], '<bdi lang="fa" dir="rtl">ایران</bdi>' )
+			&& false !== strpos( $x['ar']['code'], '+٩٨' ) && '' === $x['ar']['overview'] && false !== strpos( $x['ar']['tld'], '<bdi lang="fa" dir="rtl">ایران</bdi>' )
+			&& false !== strpos( $x['fa']['overview'], 'استان اصفهان' ) && false !== strpos( $x['fa']['code'], '+۹۸' ) && false === strpos( $x['fa']['tld'], '<bdi' );
+	},
+	$lang8, array_replace_recursive( $lang8, array( 'en' => array( 'overview' => $lang8['fa']['overview'] ) ) ) );
+
+$shots8 = array( array( 'id' => 7, 'img' => '<img src="x.jpg" alt="کاروانسرای سعدالسلطنه">', 'label' => 'کاروانسرای سعدالسلطنه', 'place' => 'قزوین', 'foreign' => true ) );
+$loc8   = tp442_lang( 'en', function () use ( $shots8 ) { return topersia_g_gallery_localize( $shots8 ); } );
+tp441_mut( 'گالری: پیوستی که متنش به زبان صفحه نیست — برچسب «Image 1» از کاتالوگ، همان در alt، بی توضیح؛ عکس می‌ماند',
+	function ( $s ) { return 'Image 1' === $s[0]['label'] && '' === $s[0]['place'] && false !== strpos( $s[0]['img'], 'alt="Image 1"' ) && false !== strpos( $s[0]['img'], 'src="x.jpg"' ); },
+	$loc8, $shots8 );
+
+$jsz2c = file_get_contents( TP_PLUGIN_DIR . '/assets/topersia-g-zones.js' );
+tp441_mut( 'نقشه: برچسب کاشی با lang سبک Protomaps، رابط MapLibre با locale از کاتالوگ سرور (دکمه‌ها و aria-label نقشه و نشانگر)، انتساب ترجمه‌پذیر',
+	function ( $x ) {
+		$loc = tp2c_body( $x[1], 'topersia_g_map_locale' );
+		foreach ( array( 'Map.Title', 'Marker.Title', 'NavigationControl.ZoomIn', 'NavigationControl.ZoomOut', 'AttributionControl.ToggleAttribution' ) as $k ) {
+			if ( ! preg_match( "/'" . preg_quote( $k, '/' ) . "'\s*=> __\(/", $loc ) ) { return false; }
+		}
+		return false !== strpos( $x[0], 'locale: cfg.locale || {}' ) && false !== strpos( $x[0], "{ lang: cfg.lang || 'fa' }" )
+			&& false !== strpos( $x[1], "\$cfg['locale'] = topersia_g_map_locale();" ) && false !== strpos( $x[1], "'attribution' => __( '© مشارکت‌کنندگان OpenStreetMap', 'topersia' )" );
+	},
+	array( $jsz2c, $zones2c ), array( str_replace( 'locale: cfg.locale || {}', 'locale: {}', $jsz2c ), $zones2c ) );
+
+tp441_mut( 'یک دروازه: topersia_g_raw هر مقدار را از topersia_g_untranslated می‌گذراند؛ نام‌ها، منبع‌ها و کد latin بیرون از آن',
+	function ( $s ) {
+		$raw  = tp2c_body( $s, 'topersia_g_raw' );
+		$gate = tp2c_body( $s, 'topersia_g_untranslated' );
+		return false !== strpos( $raw, 'if ( topersia_g_untranslated( $key, $value ) ) {' ) && false !== strpos( $gate, "'source_references'" )
+			&& false !== strpos( $gate, "'name_local'" ) && false !== strpos( $gate, "'latin' === \$map[ \$key ]['kind']" );
+	},
+	$zones2c, str_replace( 'if ( topersia_g_untranslated( $key, $value ) ) {', 'if ( false ) {', $zones2c ) );

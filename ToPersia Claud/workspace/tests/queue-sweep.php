@@ -22,6 +22,31 @@ function tp_queue_floor() {
 	return (int) $wpdb->get_var( "SELECT COALESCE( MAX( action_id ), 0 ) FROM {$wpdb->prefix}actionscheduler_actions" );
 }
 
+/** بزرگ‌ترین شناسۀ پست پیش از آزمون — برای tp_wpml_sweep. */
+function tp_post_floor() {
+	global $wpdb;
+	return (int) $wpdb->get_var( "SELECT COALESCE( MAX( ID ), 0 ) FROM {$wpdb->posts}" );
+}
+
+/**
+ * ردیف‌های icl_translations پست‌هایی که آزمون پس از کف ساخت و پاک کرد. wp_delete_post
+ * بیرون از پیشخوان قلاب حذف WPML را ندارد و ردیف زبان می‌ماند — ردیف یتیمی که در
+ * trid یک پست واقعی می‌تواند جای ترجمۀ زبانی را بگیرد (۲ج٫۸: صدها ردیف از اجراهای پیشین).
+ *
+ * @return int شمار ردیف پاک‌شده
+ */
+function tp_wpml_sweep( $floor ) {
+	global $wpdb;
+	if ( $floor <= 0 ) {
+		return 0;
+	}
+	return (int) $wpdb->query( $wpdb->prepare(
+		"DELETE t FROM {$wpdb->prefix}icl_translations t LEFT JOIN {$wpdb->posts} p ON p.ID = t.element_id WHERE t.element_type LIKE %s AND t.element_id > %d AND p.ID IS NULL",
+		'post\\_%',
+		$floor
+	) );
+}
+
 /** اجرای کارهای مانده و پاک‌کردن ردیف‌های ساختۀ آزمون. @return int شمار ردیف پاک‌شده */
 function tp_queue_sweep( $floor ) {
 	global $wpdb;

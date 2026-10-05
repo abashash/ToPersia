@@ -918,9 +918,10 @@ async function langProbe( browser, url, ui, same ) {
 	return r;
 }
 
+/* تیتر ترجمه از name_{زبان} (copy WPML)، نوع در eyebrow — تا ۲ج٫۸ ترجمه‌های محلی فیلد copy نداشتند و تیتر عنوان پست بود */
 const LANG442 = [
-	{ url: ENV.base + '/en/province/isfahan/', fa: ENV.base + '/province/isfahan/', path: '/en/province/isfahan/', dir: 'ltr', h1: 'Isfahan Province', eyebrow: 'Province', lang: 'en' },
-	{ url: ENV.base + '/ar/province/isfahan/', fa: ENV.base + '/province/isfahan/', path: '/ar/province/isfahan/', dir: 'rtl', h1: 'محافظة أصفهان', eyebrow: 'محافظة', lang: 'ar' },
+	{ url: ENV.base + '/en/province/isfahan/', fa: ENV.base + '/province/isfahan/', path: '/en/province/isfahan/', dir: 'ltr', h1: 'Isfahan', eyebrow: 'Province', lang: 'en' },
+	{ url: ENV.base + '/ar/province/isfahan/', fa: ENV.base + '/province/isfahan/', path: '/ar/province/isfahan/', dir: 'rtl', h1: 'أصفهان', eyebrow: 'محافظة', lang: 'ar' },
 	{ url: ENV.base + '/en/city/isfahan/', fa: ENV.base + '/city/isfahan/', path: '/en/city/isfahan/', dir: 'ltr', h1: 'Isfahan', eyebrow: 'City', lang: 'en' },
 	{ url: ENV.base + '/ar/city/isfahan/', fa: ENV.base + '/city/isfahan/', path: '/ar/city/isfahan/', dir: 'rtl', h1: 'أصفهان', eyebrow: 'مدينة', lang: 'ar' },
 ];

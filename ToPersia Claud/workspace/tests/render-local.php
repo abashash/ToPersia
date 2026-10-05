@@ -190,9 +190,14 @@ $h_fa = $hero( '/province/isfahan/' );
 $h_en = $hero( '/en/province/isfahan/' );
 $h_ar = $hero( '/ar/province/isfahan/' );
 
-mut( 'صفحه: /en/ «Province» + «Isfahan Province»، /ar/ «محافظة» + «محافظة أصفهان»، فارسی «استان» + «استان اصفهان» — بی پیشوندِ فارسی روی ترجمه',
-	function ( $r ) { return array( 'Province', 'Isfahan Province' ) === $r[1] && array( 'محافظة', 'محافظة أصفهان' ) === $r[2] && array( 'استان', 'استان اصفهان' ) === $r[0]; },
-	array( $h_fa, $h_en, $h_ar ), array( $h_fa, array( 'استان', 'استان Isfahan Province' ), array( 'استان', 'استان محافظة أصفهان' ) ),
+/*
+ * تیتر ترجمه از name_{زبان} (فیلد copy WPML)، بی پیشوند نوع؛ نوع در eyebrow. تا ۲ج٫۸
+ * ترجمه‌های محلیِ ۴٫۴٫۱ فیلدهای copy نداشتند و تیتر به عنوان پست («Isfahan
+ * Province») می‌افتاد — زنده چنین نیست (WPML copy را روی ترجمه می‌نشاند).
+ */
+mut( 'صفحه: /en/ «Province» + «Isfahan»، /ar/ «محافظة» + «أصفهان»، فارسی «استان» + «استان اصفهان» — بی پیشوندِ فارسی روی ترجمه',
+	function ( $r ) { return array( 'Province', 'Isfahan' ) === $r[1] && array( 'محافظة', 'أصفهان' ) === $r[2] && array( 'استان', 'استان اصفهان' ) === $r[0]; },
+	array( $h_fa, $h_en, $h_ar ), array( $h_fa, array( 'استان', 'استان Isfahan' ), array( 'استان', 'استان أصفهان' ) ),
 	wp_json_encode( array( $h_fa, $h_en, $h_ar ), JSON_UNESCAPED_UNICODE ) );
 
 echo str_repeat( '─', 78 ) . "\n";

@@ -447,6 +447,17 @@ return array(
 	'پرسش‌ها'         => array( 'en' => 'FAQ', 'ar' => 'الأسئلة' ),
 	'نظرها'           => array( 'en' => 'Reviews', 'ar' => 'المراجعات' ),
 	'نقشه'            => array( 'en' => 'Map', 'ar' => 'الخريطة' ),
+	/* ۲ج٫۸ — رشته‌های رابط MapLibre (گزینۀ locale) و انتساب نقشه — P5-D278 */
+	'نشانگر نقشه'     => array( 'en' => 'Map marker', 'ar' => 'علامة على الخريطة' ),
+	'بزرگ‌نمایی'      => array( 'en' => 'Zoom in', 'ar' => 'تكبير' ),
+	'کوچک‌نمایی'      => array( 'en' => 'Zoom out', 'ar' => 'تصغير' ),
+	'بکشید تا نقشه بچرخد؛ کلیک: شمال به بالا' => array( 'en' => 'Drag to rotate the map; click to reset north', 'ar' => 'اسحب لتدوير الخريطة؛ وانقر لإعادة الشمال إلى الأعلى' ),
+	'نمایش یا پنهان‌کردن منبع نقشه' => array( 'en' => 'Show or hide map attribution', 'ar' => 'إظهار مصدر الخريطة أو إخفاؤه' ),
+	'بازخورد نقشه'    => array( 'en' => 'Map feedback', 'ar' => 'ملاحظات على الخريطة' ),
+	'بستن پنجرۀ نقشه' => array( 'en' => 'Close map popup', 'ar' => 'إغلاق نافذة الخريطة' ),
+	'© مشارکت‌کنندگان OpenStreetMap' => array( 'en' => '© OpenStreetMap contributors', 'ar' => '© مساهمو OpenStreetMap' ),
+	/* ۲ج٫۸ — برچسب عکسی که متن پیوستش به زبان صفحه نیست */
+	'تصویر %s'        => array( 'en' => 'Image %s', 'ar' => 'صورة %s' ),
 	'زمان سفر'        => array( 'en' => 'When to go', 'ar' => 'وقت السفر' ),
 	'روایت‌ها'        => array( 'en' => 'Narrations', 'ar' => 'الروايات' ),
 	'جغرافیا'         => array( 'en' => 'Geography', 'ar' => 'الجغرافيا' ),

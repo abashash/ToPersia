@@ -70,7 +70,8 @@ $cleanup = array( 'posts' => array(), 'meta' => array(), 'rel' => array() );
 
 /* کارهای صفی که پست‌های موقت می‌سازند (گالری تجمیعی ۲ج٫۵) — در پایان اجرا و پاک */
 require_once __DIR__ . '/queue-sweep.php';
-$cleanup['queue'] = tp_queue_floor();
+$cleanup['queue']      = tp_queue_floor();
+$cleanup['post_floor'] = tp_post_floor();
 
 register_shutdown_function( function () use ( &$restore_options, &$cleanup ) {
 	foreach ( $restore_options as $o => $v ) {
@@ -87,6 +88,7 @@ register_shutdown_function( function () use ( &$restore_options, &$cleanup ) {
 		wp_delete_post( $p, true );
 	}
 	tp_queue_sweep( $cleanup['queue'] );
+	tp_wpml_sweep( $cleanup['post_floor'] );
 	topersia_api_flush();
 } );
 

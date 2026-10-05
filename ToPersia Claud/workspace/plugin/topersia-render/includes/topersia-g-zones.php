@@ -114,6 +114,96 @@ if ( ! function_exists( 'topersia_g_fa' ) ) {
 }
 
 /**
+ * متن به زبانی جز زبان صفحه؟ — برای متن پیوست (عنوان، توضیح، alt) که WPML
+ * رسانه حتی در نسخۀ انگلیسیِ پیوست فارسی رونوشت می‌کند.  P5-D278
+ *
+ * چیرگی، نه «یک نویسه»: متن انگلیسی‌ای که نامی فارسی در پرانتز دارد بیگانه
+ * نیست. صفحۀ فارسی: هرگز. صفحۀ عربی: بیش از سه درصد حروفش ویژۀ فارسی
+ * (پ چ ژ گ ی ک — «ی» و «ک» در متن فارسی پرکاربردند، در عربی نه). بقیه: حرف
+ * عربی‌خط بیش از لاتین — زبان محتوای اصلی فارسی است.
+ */
+if ( ! function_exists( 'topersia_g_foreign_text' ) ) {
+	function topersia_g_foreign_text( $text ) {
+
+		$text = trim( (string) $text );
+		$lang = topersia_g_page_lang();
+
+		if ( '' === $text || 'fa' === $lang ) {
+			return false;
+		}
+
+		$arabic = (int) preg_match_all( '/\p{Arabic}/u', $text );
+
+		if ( ! $arabic ) {
+			return false;
+		}
+
+		if ( 'ar' === $lang ) {
+			return (int) preg_match_all( '/[\x{067E}\x{0686}\x{0698}\x{06AF}\x{06CC}\x{06A9}]/u', $text ) > 0.03 * $arabic;
+		}
+
+		return $arabic > (int) preg_match_all( '/\p{Latin}/u', $text );
+	}
+}
+
+/**
+ * متن خامِ آمیخته ← HTML گریخته: در صفحۀ غیرفارسی رقم به زبان صفحه (پیش از
+ * گریز، تا نهاد عددی HTML دست نخورد)؛ و در صفحۀ لاتین‌خط هر تکۀ عربی‌خط با زبان
+ * خودش (`<bdi lang="fa">`) — منبعی که نام فارسی در عنوان انگلیسی‌اش دارد،
+ * دامنۀ «.ایران» در کد.  P5-D278
+ */
+if ( ! function_exists( 'topersia_g_lang_runs' ) ) {
+	function topersia_g_lang_runs( $text ) {
+
+		$lang = topersia_g_page_lang();
+
+		if ( 'fa' === $lang ) {
+			return esc_html( (string) $text );
+		}
+
+		$html = esc_html( topersia_g_fa( (string) $text ) );
+
+		/* صفحۀ عربی: فقط تکه‌ای که خودش چیره‌فارسی است («.ایران»)، نه جملۀ عربیِ دارای نامی فارسی */
+		return (string) preg_replace_callback( '/\p{Arabic}+(?:[\s\x{200C}،؛:.()«»\-—]*\p{Arabic}+)*/u', function ( $m ) use ( $lang ) {
+			return ( 'ar' !== $lang || topersia_g_foreign_text( $m[0] ) ) ? '<bdi lang="fa" dir="rtl">' . $m[0] . '</bdi>' : $m[0];
+		}, $html );
+	}
+}
+
+/**
+ * فیلدِ به زبان دیگر؟ — در صفحۀ غیرفارسی، فیلدی که متنش چیره به زبان دیگر است
+ * خالی شمرده می‌شود: ناحیه‌اش نمی‌آید.  P5-D278
+ *
+ * هر دو راه به این‌جا می‌رسند: ترجمه‌ای که از ویرایشگر WPML با رونوشت متن ساخته
+ * و هرگز ترجمه نشد (کلاس translate با متن فارسی)، و متن بلندی که WPML «copy»
+ * دارد و متن فارسی اصل را روی هر زبان می‌نشاند. کلاس WPML ملاک نیست — زبان
+ * خودِ متن است.
+ *
+ * بیرون: نام‌ها (رسمی، محلی، دیگر) و منبع‌ها — به زبان دیگر بودنشان درست است و
+ * با lang="fa" نشان داده می‌شوند؛ و فیلد «latin» (کد) — بخش عربی‌خطش با bdi.
+ */
+if ( ! function_exists( 'topersia_g_untranslated' ) ) {
+	function topersia_g_untranslated( $key, $value ) {
+
+		static $keep = array( 'name_fa', 'name_en', 'name_ar', 'official_name_fa', 'official_name_en', 'official_name_ar', 'name_local', 'alternative_names', 'source_references' );
+
+		if ( '' === $value || null === $value || in_array( $key, $keep, true ) || 'fa' === topersia_g_page_lang() ) {
+			return false;
+		}
+
+		$map = topersia_g_map();
+
+		if ( isset( $map[ $key ]['kind'] ) && 'latin' === $map[ $key ]['kind'] ) {
+			return false;
+		}
+
+		$text = is_array( $value ) || is_object( $value ) ? (string) wp_json_encode( $value, JSON_UNESCAPED_UNICODE ) : (string) $value;
+
+		return topersia_g_foreign_text( wp_strip_all_tags( $text ) );
+	}
+}
+
+/**
  * جداکنندۀ فهرست به جهت صفحه — «، » در راست‌به‌چپ، «, » در چپ‌به‌راست.  ۴٫۴٫۲
  */
 if ( ! function_exists( 'topersia_g_list_sep' ) ) {
@@ -213,7 +303,14 @@ if ( ! function_exists( 'topersia_g_raw' ) ) {
 			return '';
 		}
 
-		return get_post_meta( $post_id, $key, true );
+		$value = get_post_meta( $post_id, $key, true );
+
+		/* ترجمه‌پذیرِ ترجمه‌نشده در صفحۀ غیرفارسی — خالی  P5-D278 */
+		if ( topersia_g_untranslated( $key, $value ) ) {
+			return is_array( $value ) ? array() : '';
+		}
+
+		return $value;
 	}
 }
 
@@ -271,7 +368,11 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
 				return topersia_g_fa( preg_replace( '/[^0-9۰-۹]/u', '', $raw ) );
 
 			case 'latin':
-				return '<span class="tp-lat" dir="ltr">' . esc_html( $raw ) . '</span>';
+				/*
+				 * کد لاتین با رقم زبان صفحه — «+۹۸» ذخیره‌شده در /en/ «+98». بخش
+				 * عربی‌خطِ کد (دامنۀ «.ایران») در صفحۀ غیرفارسی با زبان خودش.  P5-D278
+				 */
+				return '<span class="tp-lat" dir="ltr">' . topersia_g_lang_runs( topersia_g_fa( $raw ) ) . '</span>';
 
 			case 'choice':
 				$glossary = isset( $field['glossary'] ) ? $field['glossary'] : '';
@@ -1063,16 +1164,19 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 
 		if ( topersia_g_filled( $hero ) && function_exists( 'wp_get_attachment_image' ) ) {
 
-			$image = wp_get_attachment_image(
-				is_array( $hero ) ? absint( reset( $hero ) ) : absint( $hero ),
-				'full',
-				false,
-				array(
-					'class'         => 'tp-hero__img',
-					'loading'       => 'eager',
-					'fetchpriority' => 'high',
-				)
+			$hero_id = is_array( $hero ) ? absint( reset( $hero ) ) : absint( $hero );
+			$attr    = array(
+				'class'         => 'tp-hero__img',
+				'loading'       => 'eager',
+				'fetchpriority' => 'high',
 			);
+
+			/* alt پیوست به زبان دیگر ← نام موجودیت به زبان صفحه  P5-D278 */
+			if ( topersia_g_foreign_text( get_post_meta( $hero_id, '_wp_attachment_image_alt', true ) ) ) {
+				$attr['alt'] = topersia_g_title( $pid );
+			}
+
+			$image = wp_get_attachment_image( $hero_id, 'full', false, $attr );
 		}
 
 		/*
@@ -1144,7 +1248,9 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 		}
 
 		if ( $others ) {
-			$out .= '<p class="tp-altnames">' . esc_html( implode( $sep, $others ) ) . '</p>';
+			/* نام محلی و نام‌های دیگرِ فارسی در صفحۀ غیرفارسی — با زبان خودشان  P5-D278 */
+			$fa_names = topersia_g_foreign_text( implode( ' ', $others ) ) ? ' lang="fa" dir="rtl"' : '';
+			$out     .= '<p class="tp-altnames"' . $fa_names . '>' . esc_html( $fa_names ? topersia_g_fa( implode( '، ', $others ) ) : implode( $sep, $others ) ) . '</p>';
 		}
 
 		if ( '' !== $lead ) {
@@ -2335,7 +2441,7 @@ if ( ! function_exists( 'topersia_g_map_provider' ) ) {
 					'name'        => 'maplibre-pmtiles',
 					'base'        => topersia_render_url() . 'assets/map/',
 					'tiles'       => set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . $rel ),
-					'attribution' => '© OpenStreetMap',
+					'attribution' => __( '© مشارکت‌کنندگان OpenStreetMap', 'topersia' ),
 				);
 			}
 		}
@@ -2377,10 +2483,31 @@ if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 			return '';
 		}
 
-		$cfg['zoom'] = topersia_g_map_zoom( $post_id );
-		$cfg['lang'] = topersia_g_page_lang();
+		$cfg['zoom']   = topersia_g_map_zoom( $post_id );
+		$cfg['lang']   = topersia_g_page_lang();
+		$cfg['locale'] = topersia_g_map_locale();
 
 		return " data-tp-map-cfg='" . esc_attr( wp_json_encode( $cfg ) ) . "'";
+	}
+}
+
+/**
+ * رشته‌های رابط خودِ MapLibre — دکمه‌ها و aria-label نقشه و نشانگر — به زبان
+ * صفحه، با گزینۀ مستند `locale` نقشه (کلیدهای MapLibre 5.x). برچسب کاشی جدا
+ * از `lang` سبک Protomaps است.  P5-D278
+ */
+if ( ! function_exists( 'topersia_g_map_locale' ) ) {
+	function topersia_g_map_locale() {
+		return array(
+			'Map.Title'                            => __( 'نقشه', 'topersia' ),
+			'Marker.Title'                         => __( 'نشانگر نقشه', 'topersia' ),
+			'NavigationControl.ZoomIn'             => __( 'بزرگ‌نمایی', 'topersia' ),
+			'NavigationControl.ZoomOut'            => __( 'کوچک‌نمایی', 'topersia' ),
+			'NavigationControl.ResetBearing'       => __( 'بکشید تا نقشه بچرخد؛ کلیک: شمال به بالا', 'topersia' ),
+			'AttributionControl.ToggleAttribution' => __( 'نمایش یا پنهان‌کردن منبع نقشه', 'topersia' ),
+			'AttributionControl.MapFeedback'       => __( 'بازخورد نقشه', 'topersia' ),
+			'Popup.Close'                          => __( 'بستن پنجرۀ نقشه', 'topersia' ),
+		);
 	}
 }
 
@@ -3603,6 +3730,7 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 			/* عنوانِ پیوست برچسب است و توضیحش جای مکان — همان دو سطر مرجع. */
 			$title = function_exists( 'get_the_title' ) ? trim( (string) get_the_title( $attachment ) ) : '';
 			$label = '' !== $title ? $title : $caption;
+			$alt   = function_exists( 'get_post_meta' ) ? (string) get_post_meta( $attachment, '_wp_attachment_image_alt', true ) : '';
 
 			/* ابعاد نسخۀ کامل — `<img>` نمای تمام‌صفحه width و height صریح می‌گیرد.  P5-D246 */
 			$full = function_exists( 'wp_get_attachment_image_src' ) ? wp_get_attachment_image_src( $attachment, 'full' ) : false;
@@ -3625,6 +3753,8 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 				 * پرونده پر می‌کند) کاشی «چهل‌ستون · چهل‌ستون» می‌نوشت.
 				 */
 				'place' => ( '' !== $caption && $caption !== $label ) ? $caption : '',
+				/* متن پیوست به زبانی جز زبان صفحه — topersia_g_gallery_localize جایش را می‌گیرد  P5-D278 */
+				'foreign' => topersia_g_foreign_text( $label . ' ' . $caption . ' ' . $alt ),
 			);
 		}
 
@@ -3647,7 +3777,7 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 		$shots = topersia_g_gallery_shots( topersia_g_raw( $pid, 'featured_image_gallery' ) );
 
 		if ( ! function_exists( 'topersia_g_gallery_agg_enabled' ) || ! topersia_g_gallery_agg_enabled() ) {
-			return $shots;
+			return topersia_g_gallery_localize( $shots );
 		}
 
 		$room = TOPERSIA_GALLERY_MAX - count( $shots );
@@ -3686,6 +3816,29 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 			$seen[ $att ]       = true;
 			$shots[]            = $one[0];
 			$room--;
+		}
+
+		return topersia_g_gallery_localize( $shots );
+	}
+
+	/**
+	 * متن پیوستِ زبان دیگر نمی‌آید (P5-D278): عکس سر جایش، برچسبش «تصویر n» به
+	 * زبان صفحه و همان در alt؛ توضیح نه. نام منبع تجمیعی به زبان صفحه است و می‌ماند.
+	 */
+	function topersia_g_gallery_localize( $shots ) {
+
+		foreach ( $shots as $n => $shot ) {
+
+			if ( empty( $shot['foreign'] ) ) {
+				continue;
+			}
+
+			/* translators: %s: شمارۀ عکس در گالری */
+			$label = sprintf( __( 'تصویر %s', 'topersia' ), topersia_g_fa( $n + 1 ) );
+
+			$shots[ $n ]['label'] = $label;
+			$shots[ $n ]['place'] = '';
+			$shots[ $n ]['img']   = preg_replace( '/\salt="[^"]*"/', ' alt="' . esc_attr( $label ) . '"', (string) $shot['img'], 1 );
 		}
 
 		return $shots;
@@ -4867,9 +5020,11 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 				continue;
 			}
 
+			/* نام منبع در صفحۀ غیرفارسی — تکه‌های فارسی با زبان خودشان؛ رقم به زبان صفحه  P5-D278 */
+			$shown = topersia_g_lang_runs( $name );
 			$list .= '<li>' . ( '' !== $url
-				? '<a href="' . esc_url( $url ) . '" rel="nofollow noopener">' . esc_html( $name ) . '</a>'
-				: esc_html( $name ) ) . '</li>';
+				? '<a href="' . esc_url( $url ) . '" rel="nofollow noopener">' . $shown . '</a>'
+				: $shown ) . '</li>';
 		}
 
 		if ( '' !== $list ) {
