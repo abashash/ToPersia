@@ -3,7 +3,7 @@
 #
 # commit را رد می‌کند اگر در فایل‌های stage‌شده (افزوده، کپی، تغییر، تغییر نام) باشد:
 #   wp-config.php · دیتابیس (*.sql، *.sql.gz، *.sql.zip) · بستۀ Duplicator (*.daf،
-#   *_archive.zip، installer.php و dup-installer/ در ریشه، backups-dup-*) · هر *.log ·
+#   *_archive.zip، installer.php و dup-installer/ در ریشه، backups-dup-*، duplicator-backups/) · هر *.log ·
 #   فایل بزرگ‌تر از ۲۵ مگابایت · الگوی کلید در خط‌های افزوده: کلید Google (AIza…)،
 #   کلید OpenAI (sk-…)، مقدار xi-api-key، بلوک کلید خصوصی (BEGIN … PRIVATE KEY)،
 #   define( 'TOPERSIA_…_KEY', '…' ) با مقدار · نام کاربری مدیر محلی.
@@ -40,7 +40,7 @@ for f in $files; do
 		*.log) block 'لاگ' "$f" ;;
 	esac
 	case "$f" in
-		*.daf|*_archive.zip|*/backups-dup-pro/*|*/backups-dup-lite/*|backups-dup-pro/*|backups-dup-lite/*|dup-installer/*) block 'بستۀ Duplicator' "$f" ;;
+		*.daf|*_archive.zip|*/backups-dup-pro/*|*/backups-dup-lite/*|backups-dup-pro/*|backups-dup-lite/*|*/duplicator-backups/*|duplicator-backups/*|dup-installer/*) block 'بستۀ Duplicator' "$f" ;;
 		*/*) : ;;
 		*installer.php) block 'نصب‌کنندۀ Duplicator در ریشه' "$f" ;;
 	esac

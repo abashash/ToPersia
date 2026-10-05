@@ -64,6 +64,8 @@ desktop.ini
 # Duplicator output
 /geo/wp-content/backups-dup-pro/
 /geo/wp-content/backups-dup-lite/
+# Duplicator Pro 5 storage (DUPLICATOR_SSDIR_NAME) — packages, tmp, logs (2ج.12)
+/geo/wp-content/duplicator-backups/
 *.daf
 *_archive.zip
 /*installer.php

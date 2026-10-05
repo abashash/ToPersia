@@ -26,7 +26,7 @@
 
 مخزن ریشه `C:\wamp64\www\topersia` با remote `github.com/abashash/ToPersia`. **تا کاربر ننوشته که مخزن خصوصی شد، هیچ push و هیچ Pull Request** («Create PR» به کار نمی‌رود). commit روی `main` محلی، پس از سبز شدن آزمون و گارد؛ push فقط پایان فاز. هیچ داده، لاگ، بکاپ، دیتابیس یا کلید در git (`.gitignore` ریشه).
 
-**گارد پیش از commit:** `scripts/git-guard` (نصب: `sh scripts/git-guard-install` ← `.git/hooks/pre-commit`). رد می‌کند: `wp-config.php` · `*.sql*` · بستۀ Duplicator · `*.log` · فایل بالای ۲۵ مگابایت · مقدار کلید (Google · OpenAI · `xi-api-key` · کلید خصوصی · `define( 'TOPERSIA_…_KEY', '…' )`) · نام کاربری مدیر محلی از متغیر محیطی `TP_GUARD_ADMIN_USER`. آزمون جهش: `sh scripts/git-guard-test` (index موقت؛ index واقعی دست نمی‌خورد). `--no-verify` فقط با تصمیم کاربر.
+**گارد پیش از commit:** `scripts/git-guard` (نصب: `sh scripts/git-guard-install` ← `.git/hooks/pre-commit`). رد می‌کند: `wp-config.php` · `*.sql*` · بستۀ Duplicator (و هر چیز زیر `duplicator-backups/`، پوشۀ Duplicator Pro 5 — ۲ج٫۱۲) · `*.log` · فایل بالای ۲۵ مگابایت · مقدار کلید (Google · OpenAI · `xi-api-key` · کلید خصوصی · `define( 'TOPERSIA_…_KEY', '…' )`) · نام کاربری مدیر محلی از متغیر محیطی `TP_GUARD_ADMIN_USER` (مقدار: نام مدیرهای واقعی، بی حساب آزمونِ `_tp_test_account`؛ بی‌صدا بار شود، هرگز چاپ نشود). آزمون جهش: `sh scripts/git-guard-test` (index موقت؛ index واقعی دست نمی‌خورد). `--no-verify` فقط با تصمیم کاربر.
 
 **تاریخچه:** مخزن از درون‌ریزی ۱ اکتبر شروع می‌شود؛ برچسب‌های v4.1.0 تا v4.4.3 و commitهای پیش از آن نیستند. مبنای نسخۀ پیشین زیپ‌های `dist/` است، نه `git archive` برچسب؛ هستۀ ۴٫۱۰٫۰ «پیش از اصلاح» در `reference/topersia-core.php`.
 
@@ -162,6 +162,7 @@ php tests/render-local.php   # ۴٫۴٫۲ — JSON-LD با موتور واقعی
 php tests/pack-local.php     # هستهٔ ۴٫۱۲٫۰ — بستهٔ محتوا: اسکیمای زنده، JSON Schema، رفت‌وبرگشت، پروندهٔ هوش مصنوعی، اجرا، برگرداندن، هرس؛ ۲ج٫۹ درون‌ریزی ترجمه
 node tests/pack-admin.js     # زبانهٔ «بستهٔ محتوا» در پیشخوان واقعی — کروم و فایرفاکس، مدیر آزمون؛ بخش ترجمه هم
 node tests/services-admin.js # ۲ج٫۱۱ — «سرویس‌های خارجی»: fa و en، ۱۴۴۰ · ۱۲۸۰ · ۱۰۲۴، کروم و فایرفاکس؛ خانهٔ دیدنی، کنتراست، بی بریدگی؛ «ذخیره» با برگرداندن گزینه
+node tests/duplicator-local.js # ۲ج٫۱۲ — Duplicator محلی: پوشه‌ها، Add New بی «Requirements: Fail»، بستهٔ آزمایشی فقط پایگاه‌داده، پاک‌کردن، git؛ تنظیم‌ها برمی‌گردد
 ```
 
 هر دو دادهٔ آزمون را خودشان می‌سازند و پاک می‌کنند؛ پست واقعی (#399) فقط رفت‌وبرگشت می‌خورد که هیچ چیز نمی‌نویسد. گزینهٔ «آخرین درون‌ریزی» به مقدار پیش از آزمون برمی‌گردد.
