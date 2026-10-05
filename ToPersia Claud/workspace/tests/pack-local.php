@@ -17,8 +17,12 @@
  *   نامعتبر     JSON خراب، اسکلت ۱٫۲، schema و نوع و posts نادرست
  *   هوش مصنوعی  گزینۀ نادرست، نوع نادرست، کلید ناشناخته، رسانه، منبع بی نشانی،
  *               رابطۀ پیدانشده و چندپهلو، تکراری
- *   اجرا        پیش‌نویس با needs_verification، زبان، یال، ترجمه با
- *               translation_of و فیلد رونوشت از اصل؛ هرگز در خروجی عمومی
+ *   اجرا        پیش‌نویس با needs_verification، زبان، یال؛ هرگز در خروجی
+ *               عمومی؛ درون‌ریزی اصلی فقط فارسی (۲ج٫۹)
+ *   ترجمه       ۲ج٫۹ · P5-D283 — قالب ترجمه (فقط translate، source فارسی)،
+ *               آزمایشی با سه وضعیت ترجمه، رد پروندۀ بخش دیگر، trid مشترک،
+ *               copy از اصل، رابطه از اصل با گارد (همگام‌ساز جت‌انجین در
+ *               تراکنشِ برگشتی: یال فارسی را برمی‌داشت)، رفت‌وبرگشت، نامک
  *   برگرداندن   به‌روزرسانی (متا، Repeater، والدِ یکتا) و ساخت؛ لاگ مستقل از
  *               آستانۀ لاگ؛ هرس ردیف‌های آخرین درون‌ریزی را نگه می‌دارد
  *
@@ -388,13 +392,16 @@ $invalid = array(
 	'pack_type'   => wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'post' ), 'posts' => array( array() ) ) ),
 	'pack_posts'  => wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_city' ), 'posts' => array( 'a' => array() ) ) ),
 	'pack_empty'  => '   ',
+	/* ۲ج٫۹: پروندۀ ترجمه و زبان دیگر در درون‌ریزی اصلی */
+	'pack_tr'     => wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_TR_SCHEMA, 'post_type' => 'tp_city', 'language' => 'en' ), 'posts' => array( array() ) ) ),
+	'pack_lang'   => wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_city', 'language' => 'en' ), 'posts' => array( array() ) ) ),
 );
 $codes = array();
 foreach ( $invalid as $want_code => $raw_file ) {
 	$r       = topersia_pack_parse( $raw_file );
 	$codes[] = is_wp_error( $r ) ? $r->get_error_code() : 'accepted';
 }
-mut( 'رد: JSON خراب · اسکلت ۱٫۲ (با نشانی زبانۀ خودش) · schema دیگر · نوع غیرموجودیت · posts غیرفهرست · پروندۀ خالی — هر کدام کد خودش؛ پروندۀ درست پذیرفته',
+mut( 'رد: JSON خراب · اسکلت ۱٫۲ (با نشانی زبانۀ خودش) · schema دیگر · نوع غیرموجودیت · posts غیرفهرست · پروندۀ خالی · پروندۀ ترجمه · زبان دیگر — هر کدام کد خودش؛ پروندۀ درست پذیرفته',
 	function ( $c ) use ( $invalid ) { return array_keys( $invalid ) === $c[0] && is_array( $c[1] ); },
 	array( $codes, topersia_pack_parse( $json ) ), array( array_slice( $codes, 1 ), topersia_pack_parse( $json ) ), implode( ' · ', $codes ) );
 
@@ -487,27 +494,32 @@ mut( 'تکراری در سایت: پست تازۀ «اصفهان» بی نامک
 	$p_isf, $p_isf2 );
 
 /* ══ اجرا ══════════════════════════════════════════════════════════════════ */
-section( 'اجرا — پیش‌نویس، زبان، یال، ترجمه' );
+section( 'اجرا — پیش‌نویس، زبان، یال؛ درون‌ریزی اصلی فقط فارسی' );
 
-$fa_post = $ai_post();
-$en_post = array(
-	'entity_uid' => '', 'slug' => '', 'language' => 'en', 'translation_of' => 'test-city-twob', 'title' => 'Test City Twob',
-	'fields'     => array( 'name_en' => 'WRONG NAME', 'population' => 99, 'short_summary' => 'A made-up city for the import test.', 'overview_text' => '<p>' . str_repeat( 'word ', 810 ) . '</p>' ),
-	'relations'  => array(),
-);
-$d_run  = topersia_pack_parse( $file( array( $fa_post, $en_post ) ) );
-$p_en   = topersia_pack_plan_post( $d_run, 1, topersia_pack_pending( $d_run, 1 ) );
-t( 'آزمایشی ترجمه: اصل در همین پرونده ساخته می‌شود؛ name_en و population (رونوشت WPML) «از اصل»، نه از پرونده',
-	'create' === $p_en['action'] && 'original' === $p_en['fields']['name_en']['status'] && 'original' === $p_en['fields']['population']['status'] && 'ok' === $p_en['fields']['short_summary']['status'],
-	wp_json_encode( topersia_pack_plan_counts( $p_en ) ) . ' ' . implode( ' · ', $p_en['notes'] ) );
+$fa_post  = $ai_post();
+$fa_post2 = $ai_post( array( 'fields' => array( 'name_fa' => 'شهر آزمون ۲ب دوم', 'name_en' => 'Test City Twob Two', 'meta_title' => 'شهر آزمون ۲ب دوم' ) ) );
+$fa_post2['slug'] = 'test-city-twob-two';
 
-$run1  = run_id( 'create' );
-$batch = topersia_pack_run_batch( $d_run, 0, 1, $run1 );
-$b2    = topersia_pack_run_batch( $d_run, 1, 1, $run1 );
-$fa_id = (int) $batch['results'][0]['target'];
-$en_id = (int) $b2['results'][0]['target'];
+/* ۲ج٫۹: پست en در پروندۀ فارسی رد؛ پروندۀ en یکسره رد — هر دو با همان پیام */
+$en_in_main = array( 'entity_uid' => '', 'slug' => '', 'language' => 'en', 'title' => 'Test City Twob', 'fields' => array( 'name_en' => 'Test City Twob' ), 'relations' => array() );
+$tr_msg     = 'برای ترجمه از بخش درون‌ریزی ترجمه استفاده کنید.';
+$p_en_main  = topersia_pack_plan_post( topersia_pack_parse( $file( array( $fa_post, $en_in_main ) ) ), 1 );
+$en_file    = topersia_pack_parse( wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_city', 'language' => 'en' ), 'posts' => array( $en_in_main ) ) ) );
+mut( 'درون‌ریزی اصلی فقط فارسی: پست en در پروندۀ فارسی رد، پروندۀ en یکسره رد — هر دو «' . $tr_msg . '»',
+	function ( $x ) use ( $tr_msg ) {
+		return 'skip' === $x[0]['action'] && 'lang' === $x[0]['problem'] && in_array( $tr_msg, $x[0]['notes'], true )
+			&& is_wp_error( $x[1] ) && 'pack_lang' === $x[1]->get_error_code() && $tr_msg === $x[1]->get_error_message();
+	},
+	array( $p_en_main, $en_file ), array( topersia_pack_plan_post( topersia_pack_parse( $file( array( $fa_post ) ) ), 0 ), topersia_pack_parse( $file( array( $fa_post ) ) ) ) );
+
+$d_run  = topersia_pack_parse( $file( array( $fa_post, $fa_post2 ) ) );
+$run1   = run_id( 'create' );
+$batch  = topersia_pack_run_batch( $d_run, 0, 1, $run1 );
+$b2     = topersia_pack_run_batch( $d_run, 1, 1, $run1 );
+$fa_id  = (int) $batch['results'][0]['target'];
+$fa2_id = (int) $b2['results'][0]['target'];
 $GLOBALS['cleanup']['posts'][] = $fa_id;
-$GLOBALS['cleanup']['posts'][] = $en_id;
+$GLOBALS['cleanup']['posts'][] = $fa2_id;
 
 t( 'دسته‌دسته: دو فراخوان یک‌پستی — «بعدی» ۱ سپس ۲ از ۲، done فقط در پایان',
 	1 === $batch['next'] && ! $batch['done'] && 2 === $b2['next'] && $b2['done'] && 2 === $b2['total'] );
@@ -523,17 +535,6 @@ mut( 'ساخت: پیش‌نویس، content_status needs_verification، زبان
 $county_now = array_map( 'intval', (array) topersia_relation( 73 )->get_parents( $fa_id, 'ids' ) );
 mut( 'یال با API جت‌انجین: شهر تازه فرزند «شهرستان آزمون ۲ب الف» در رابطۀ ۷۳',
 	function ( $p ) use ( $county_a ) { return array( $county_a ) === $p; }, $county_now, array() );
-
-$trid_fa = apply_filters( 'wpml_element_trid', null, $fa_id, 'post_tp_city' );
-$trid_en = apply_filters( 'wpml_element_trid', null, $en_id, 'post_tp_city' );
-mut( 'ترجمه: پست en با trid اصل، پیش‌نویس، needs_verification؛ name_en و population از اصل (Test City Twob · 12345)، نه «WRONG NAME» و 99؛ entity_uid اصل',
-	function ( $id ) use ( $trid_fa, $fa_id ) {
-		return $id && 'en' === topersia_pack_post_language( $id ) && $trid_fa && (int) $trid_fa === (int) apply_filters( 'wpml_element_trid', null, $id, 'post_tp_city' )
-			&& 'draft' === get_post_status( $id ) && 'needs_verification' === get_post_meta( $id, 'content_status', true )
-			&& 'Test City Twob' === get_post_meta( $id, 'name_en', true ) && '12345' === get_post_meta( $id, 'population', true )
-			&& get_post_meta( $fa_id, 'entity_uid', true ) === get_post_meta( $id, 'entity_uid', true );
-	},
-	$en_id, $fa_id );
 
 /* هرگز در خروجی عمومی — مهمان */
 wp_set_current_user( 0 );
@@ -553,6 +554,171 @@ wp_set_current_user( (int) $admin[0] );
 wp_update_post( array( 'ID' => $fa_id, 'post_status' => 'draft' ) );
 t( 'جهش همان سنجش: منتشرشده، نشانی خودش برای مهمان ۲۰۰ یا ۳۰۱ به نشانی شهر — سنجش کور نیست',
 	in_array( $own_pub['code'], array( 200, 301 ), true ), (string) $own_pub['code'] );
+
+/* ══ ترجمه — ۲ج٫۹ ══════════════════════════════════════════════════════════ */
+section( 'ترجمه — بخش جدا: قالب، آزمایشی، پیوند WPML، copy و رابطه از پست فارسی  ۲ج٫۹ · P5-D283' );
+
+$tr_keys = topersia_pack_tr_keys( 'tp_city' );
+$uid_fa  = (string) get_post_meta( $fa_id, 'entity_uid', true );
+$tpl_tr  = topersia_pack_tr_export( array( $fa_id ), 'en' );
+$classes = topersia_pack_wpml_classes();
+
+mut( 'قالب ترجمه: ' . TOPERSIA_PACK_TR_SCHEMA . '، en از fa؛ translation_of = entity_uid؛ فقط عنوان، متن و ' . count( $tr_keys ) . ' فیلد «translate» WPML با source فارسی و value خالی؛ بی copy و بی رابطه؛ دستور انگلیسی',
+	function ( $t ) use ( $tr_keys, $uid_fa, $fa_id, $classes ) {
+		$p = $t['posts'][0];
+		$f = get_object_vars( $p['fields'] );
+		foreach ( $tr_keys as $k ) { if ( 2 !== ( $classes[ $k ] ?? 0 ) ) { return false; } }
+		return TOPERSIA_PACK_TR_SCHEMA === $t['meta']['schema'] && 'en' === $t['meta']['language'] && 'fa' === $t['meta']['source_language']
+			&& $uid_fa === $p['translation_of'] && $tr_keys && array_keys( $f ) === $tr_keys && ! isset( $f['population'], $f['name_en'], $p['relations'] )
+			&& get_the_title( $fa_id ) === $p['title']['source'] && '' === $p['title']['value'] && array_key_exists( 'content', $p )
+			&& get_post_meta( $fa_id, 'short_summary', true ) === $f['short_summary']['source'] && '' === $f['short_summary']['value']
+			&& ! preg_match( '/[\x{0600}-\x{06FF}]/u', implode( ' ', $t['instructions'] ) );
+	},
+	$tpl_tr,
+	( function ( $t ) { $t['posts'][0]['fields'] = (object) array_merge( get_object_vars( $t['posts'][0]['fields'] ), array( 'population' => array( 'source' => 12345, 'value' => null ) ) ); return $t; } )( $tpl_tr ) );
+
+/* هر بخش پروندۀ بخش دیگر را رد می‌کند */
+$main_fa  = $file( array( $fa_post ) );
+$tr_as_fa = wp_json_encode( array_merge( $tpl_tr, array( 'meta' => array_merge( $tpl_tr['meta'], array( 'language' => 'fa' ) ) ) ) );
+$code     = function ( $r ) { return is_wp_error( $r ) ? $r->get_error_code() : 'accepted'; };
+$codes_tr = array( $code( topersia_pack_tr_parse( $main_fa ) ), $code( topersia_pack_tr_parse( $tr_as_fa ) ), $code( topersia_pack_parse( wp_json_encode( $tpl_tr ) ) ) );
+mut( 'هر بخش پروندۀ دیگری را رد می‌کند: پروندۀ فارسی در بخش ترجمه · قالب ترجمه با زبان fa · قالب ترجمه در درون‌ریزی اصلی؛ قالب ترجمۀ en پذیرفته',
+	function ( $x ) { return array( 'pack_main', 'pack_tr_lang', 'pack_tr' ) === $x[0] && is_array( $x[1] ); },
+	array( $codes_tr, topersia_pack_tr_parse( wp_json_encode( $tpl_tr ) ) ), array( $codes_tr, topersia_pack_tr_parse( $main_fa ) ), implode( ' · ', $codes_tr ) );
+
+/* قالب پرشده — هوش مصنوعیِ شبیه‌سازی‌شده */
+$tr_fill = function ( $title, $summary ) use ( $tpl_tr ) {
+	$p                               = $tpl_tr['posts'][0];
+	$f                               = get_object_vars( $p['fields'] );
+	$f['short_summary']['value']     = $summary;
+	$f['overview_text']['value']     = '<p>' . str_repeat( 'word ', 810 ) . '</p>';
+	$f['population']                 = array( 'source' => 12345, 'value' => 99 );
+	$p['fields']                     = $f;
+	$p['title']['value']             = $title;
+	return $p;
+};
+$tr_file = function ( $posts ) use ( $tpl_tr ) {
+	$t          = $tpl_tr;
+	$t['posts'] = $posts;
+	return wp_json_encode( $t );
+};
+$tr_missing = array( 'translation_of' => 'no-such-entity-2c9', 'title' => array( 'source' => '', 'value' => 'Nowhere' ), 'fields' => array() );
+$d_tr       = topersia_pack_tr_parse( $tr_file( array( $tr_fill( 'Test City Twob', 'A made-up city for the import test.' ), $tr_missing, $tr_fill( 'Again', 'Again.' ) ) ) );
+$q          = array( topersia_pack_tr_plan_post( $d_tr, 0 ), topersia_pack_tr_plan_post( $d_tr, 1 ), topersia_pack_tr_plan_post( $d_tr, 2 ) );
+mut( 'آزمایشی ترجمه: ساخت با عنوان و short_summary «درست» و population (copy) «فیلد غیرترجمه‌ای در فایل ← نادیده»؛ translation_of ناموجود «پست فارسی پیدانشده»؛ همان پست دوباره «تکراری»؛ هیچ نوشتن',
+	function ( $x ) use ( $fa_id ) {
+		return 'create' === $x[0]['action'] && 'ok' === $x[0]['title']['status'] && 'ok' === $x[0]['fields']['short_summary']['status']
+			&& 'tr_ignored' === $x[0]['fields']['population']['status'] && 'skip' === $x[1]['action'] && 'tr_missing' === $x[1]['problem']
+			&& 'duplicate' === $x[2]['problem'] && ! topersia_pack_tr_of( $fa_id, 'en' );
+	},
+	$q, array( $q[0], $q[0], $q[2] ), wp_json_encode( topersia_pack_plan_counts( $q[0] ) ) );
+
+/* گارد رابطه: بنای فارسیِ فرزند شهر فارسی در رابطۀ یک‌والدِ ۸۴، بی ترجمۀ انگلیسی */
+$mon_g = tmp_post( 'tp_monument', 'بنای آزمون ۲ج٫۹' );
+topersia_relation( 84 )->update( $fa_id, $mon_g );
+$fa_rel_before = rel_hash( $fa_id );
+global $wpdb;
+$rel_tbl = $wpdb->prefix . 'jet_rel_default';
+$row_sql = $wpdb->prepare( "SELECT _ID, parent_object_id FROM {$rel_tbl} WHERE rel_id = 84 AND child_object_id = %d", $mon_g ); // phpcs:ignore WordPress.DB.PreparedSQL
+$row_0   = $wpdb->get_row( $row_sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL
+
+$run_tr = run_id( 'tr' );
+$r_tr   = topersia_pack_run_batch( $d_tr, 0, 3, $run_tr, 'translation' );
+$en_id  = (int) $r_tr['results'][0]['target'];
+$GLOBALS['cleanup']['posts'][] = $en_id;
+
+$trid_fa = apply_filters( 'wpml_element_trid', null, $fa_id, 'post_tp_city' );
+mut( 'اجرای ترجمه: پست en با trid پست فارسی، پیش‌نویس، needs_verification؛ عنوان و short_summary از پرونده؛ population و name_en (copy) و entity_uid از پست فارسی، نه 99؛ دو پست دیگر رد',
+	function ( $id ) use ( $trid_fa, $fa_id, $r_tr ) {
+		return $id && 'en' === topersia_pack_post_language( $id ) && $trid_fa && (int) $trid_fa === (int) apply_filters( 'wpml_element_trid', null, $id, 'post_tp_city' )
+			&& 'draft' === get_post_status( $id ) && 'needs_verification' === get_post_meta( $id, 'content_status', true )
+			&& 'Test City Twob' === get_post_field( 'post_title', $id ) && 'A made-up city for the import test.' === get_post_meta( $id, 'short_summary', true )
+			&& '12345' === get_post_meta( $id, 'population', true ) && get_post_meta( $fa_id, 'name_en', true ) === get_post_meta( $id, 'name_en', true )
+			&& get_post_meta( $fa_id, 'entity_uid', true ) === get_post_meta( $id, 'entity_uid', true )
+			&& array( 'created', 'skipped', 'skipped' ) === array_column( $r_tr['results'], 'result' );
+	},
+	$en_id, $fa_id, implode( ' · ', $r_tr['results'][0]['notes'] ) );
+
+t( 'نامک ترجمه = نامک پست فارسی (' . get_post_field( 'post_name', $fa_id ) . ') — ۲ج٫۱۰',
+	'' !== get_post_field( 'post_name', $fa_id ) && get_post_field( 'post_name', $fa_id ) === get_post_field( 'post_name', $en_id ), get_post_field( 'post_name', $en_id ) );
+
+/* رابطه‌ها از پست فارسی: شهرستان بی‌ترجمه (۷۳، چندفرزندی) همان اصل؛ بنای بی‌ترجمه (۸۴، یک‌والد) کنار ماند و از شهر فارسی جدا نشد */
+$en_county = array_map( 'intval', (array) topersia_relation( 73 )->get_parents( $en_id, 'ids' ) );
+$en_mons   = array_map( 'intval', (array) topersia_relation( 84 )->get_children( $en_id, 'ids' ) );
+$fa_mons   = array_map( 'intval', (array) topersia_relation( 84 )->get_children( $fa_id, 'ids' ) );
+mut( 'رابطه از پست فارسی: ترجمه فرزند همان شهرستان (۷۳)؛ بنای بی‌ترجمه در رابطۀ یک‌والد ۸۴ کنار ماند — شهر فارسی هنوز والدش است و هیچ یال فارسی عوض نشد',
+	function ( $x ) use ( $county_a, $mon_g, $fa_rel_before ) {
+		return array( $county_a ) === $x[0] && array() === $x[1] && in_array( $mon_g, $x[2], true ) && $fa_rel_before === $x[3];
+	},
+	array( $en_county, $en_mons, $fa_mons, rel_hash( $fa_id ) ), array( $en_county, array( $mon_g ), array(), rel_hash( $fa_id ) ) );
+
+/*
+ * چرا گارد — همگام‌ساز خودِ جت‌انجین (sync_relations_items) در دو تراکنشِ برگشتی:
+ * (۱) با قلاب هم‌گام‌سازی خودکارش: بنا به ترجمه می‌رود و همان قلاب برش می‌گرداند —
+ * والد همان شهر فارسی ولی ردیف پاک و دوباره ساخته شده (_ID تازه)؛ (۲) بی آن قلاب
+ * (صافی jet-engine/compatibility/wpml/auto-sync-relations خاموش، یا نوع ترجمه‌نشده):
+ * بنا از شهر فارسی جدا می‌ماند. گارد ما ردیف را دست نمی‌زند — همان _ID.
+ */
+$jet_cls = '\Jet_Engine\Compatibility\Packages\Jet_Engine_WPML_Package\Relations\Manager';
+$row_tr  = $wpdb->get_row( $row_sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL
+$cf      = array();
+if ( class_exists( $jet_cls ) ) {
+	$jm = $jet_cls::instance();
+	foreach ( array( 'hook', 'nohook' ) as $case ) {
+		$wpdb->query( 'SET autocommit = 0' );
+		$wpdb->query( 'START TRANSACTION' );
+		if ( 'nohook' === $case ) {
+			remove_action( 'jet-engine/relation/update/after', array( $jm, 'sync_relations_on_update' ), 10 );
+		}
+		$jm->sync_relations_items( $fa_id, $en_id, 'en' );
+		$cf[ $case ] = $wpdb->get_row( $row_sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL
+		if ( 'nohook' === $case ) {
+			add_action( 'jet-engine/relation/update/after', array( $jm, 'sync_relations_on_update' ), 10, 4 );
+		}
+		$wpdb->query( 'ROLLBACK' );
+		$wpdb->query( 'SET autocommit = 1' );
+		foreach ( jet_engine()->relations->get_active_relations() as $one_rel ) {
+			$one_rel->reset_db_cache();
+		}
+		wp_cache_flush();
+	}
+}
+$row_end = $wpdb->get_row( $row_sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL
+t( 'چرا گارد: همگام‌ساز جت‌انجین یال فارسی را جابه‌جا می‌کند و فقط قلاب خودکار خودش برش می‌گرداند (ردیف پاک و دوباره ساخته، _ID تازه)؛ بی آن قلاب بنا از شهر فارسی جدا می‌ماند. گارد ما: همان ردیف، همان _ID — هر دو آزمایش در تراکنشِ برگشتی',
+	isset( $cf['hook'], $cf['nohook'] ) && $row_0 === $row_tr && $row_0 === $row_end
+	&& (int) $fa_id === (int) $cf['hook']['parent_object_id'] && $cf['hook']['_ID'] !== $row_0['_ID']
+	&& (int) $en_id === (int) $cf['nohook']['parent_object_id'],
+	'پیش: ' . wp_json_encode( $row_0 ) . ' · پس از گارد: ' . wp_json_encode( $row_tr ) . ' · جت‌انجین با قلاب: ' . wp_json_encode( $cf['hook'] ?? null ) . ' · بی قلاب: ' . wp_json_encode( $cf['nohook'] ?? null ) . " (fa={$fa_id} en={$en_id})" );
+
+/* «ترجمه هست ← به‌روزرسانی» و رفت‌وبرگشت */
+$tpl_tr2 = topersia_pack_tr_export( array( $fa_id ), 'en' );
+$d_rt    = topersia_pack_tr_parse( wp_json_encode( $tpl_tr2 ) );
+$p_rt    = topersia_pack_tr_plan_post( $d_rt, 0 );
+$en_m    = meta_hash( $en_id );
+$run_rt  = run_id( 'tr-rt' );
+$r_rt    = topersia_pack_tr_apply( $d_rt, 0, $run_rt );
+$bad_rt  = $tpl_tr2;
+$bad_rt['posts'][0]['fields'] = (object) array_merge( get_object_vars( $tpl_tr2['posts'][0]['fields'] ), array( 'short_summary' => array( 'source' => '', 'value' => 'Changed.' ) ) );
+$p_bad   = topersia_pack_tr_plan_post( topersia_pack_tr_parse( wp_json_encode( $bad_rt ) ), 0 );
+mut( 'رفت‌وبرگشت ترجمه: قالب ترجمۀ پست دارای ترجمه value را از ترجمه دارد؛ درون‌ریزی بی‌دست‌کاری «ترجمه هست ← به‌روزرسانی» با همه «بی‌تغییر»، اجرا «unchanged»، متای ترجمه بایت‌به‌بایت همان',
+	function ( $p ) use ( $en_id, $r_rt, $en_m, $run_rt ) {
+		$c = topersia_pack_plan_counts( $p );
+		return 'update' === $p['action'] && $en_id === $p['target'] && in_array( 'tr_update', $p['flags'], true ) && ! array_diff( array_keys( $c ), array( 'same', 'empty' ) )
+			&& 'unchanged' === $r_rt['result'] && meta_hash( $en_id ) === $en_m && 0 === import_rows( $run_rt );
+	},
+	$p_rt, $p_bad, wp_json_encode( topersia_pack_plan_counts( $p_rt ) ) );
+
+/* به‌روزرسانی ترجمه و برگرداندنش: وضعیت محتوای ترجمه مال خودش می‌ماند */
+update_post_meta( $en_id, 'content_status', 'verified' );
+$en_before = meta_arr( $en_id );
+$run_tr2   = run_id( 'tr-upd' );
+$r_upd     = topersia_pack_tr_apply( topersia_pack_tr_parse( wp_json_encode( $bad_rt ) ), 0, $run_tr2 );
+$upd_ok    = 'updated' === $r_upd['result'] && 'Changed.' === get_post_meta( $en_id, 'short_summary', true ) && 'verified' === get_post_meta( $en_id, 'content_status', true );
+$u_tr      = topersia_pack_undo_batch( $run_tr2, 0, 10 );
+mut( 'به‌روزرسانی ترجمه: short_summary «Changed.»، وضعیت محتوای خودِ ترجمه دست نخورد (هم‌گام‌سازی copy آن را از اصل نمی‌نشاند)؛ برگرداندن متای ترجمه را بایت‌به‌بایت برگرداند',
+	function ( $x ) use ( $en_before ) { return $x[0] && $x[1] && md5( serialize( $en_before ) ) === $x[2]; },
+	array( $upd_ok, $u_tr['done'], meta_hash( $en_id ) ), array( $upd_ok, $u_tr['done'], 'x' ),
+	meta_diff( $en_before, meta_arr( $en_id ) ) );
 
 /* ══ برگرداندن ═════════════════════════════════════════════════════════════ */
 section( 'برگرداندن — آخرین درون‌ریزی' );
@@ -607,11 +773,14 @@ topersia_log_prune();
 t( 'جهش هرس: پس از برگرداندن، ردیف‌های ۴۰۰روزۀ همان اجرا هرس می‌شوند — استثنا فقط برای آخرین درون‌ریزیِ برگشت‌پذیر',
 	0 === import_rows( $run2 ) );
 
-/* برگرداندن ساخت */
-$u1 = topersia_pack_undo_batch( $run1, 0, 10 );
-t( 'برگرداندن ساخت: هر دو پست تازه (fa و en) به زباله رفتند و یال ۷۳ شهر تازه برداشته شد',
-	$u1['done'] && 'trash' === get_post_status( $fa_id ) && 'trash' === get_post_status( $en_id ) && array() === array_map( 'intval', (array) topersia_relation( 73 )->get_parents( $fa_id, 'ids' ) ),
-	get_post_status( $fa_id ) . ' · ' . get_post_status( $en_id ) );
+/* برگرداندن ساخت — نخست ترجمه (۲ج٫۹)، سپس دو پست فارسی */
+$u_tr1 = topersia_pack_undo_batch( $run_tr, 0, 10 );
+$u1    = topersia_pack_undo_batch( $run1, 0, 10 );
+t( 'برگرداندن ساخت: ترجمۀ en و هر دو پست فارسیِ تازه به زباله رفتند؛ یال ۷۳ شهر تازه و یال ۷۳ ترجمه (ساختۀ هم‌گام‌سازی رابطه) برداشته شد',
+	$u_tr1['done'] && $u1['done'] && 'trash' === get_post_status( $en_id ) && 'trash' === get_post_status( $fa_id ) && 'trash' === get_post_status( $fa2_id )
+	&& array() === array_map( 'intval', (array) topersia_relation( 73 )->get_parents( $fa_id, 'ids' ) )
+	&& array() === array_map( 'intval', (array) topersia_relation( 73 )->get_parents( $en_id, 'ids' ) ),
+	get_post_status( $en_id ) . ' · ' . get_post_status( $fa_id ) . ' · ' . get_post_status( $fa2_id ) . ' · ۷۳ ترجمه ' . wp_json_encode( topersia_relation( 73 )->get_parents( $en_id, 'ids' ) ) );
 
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $GLOBALS['pass'], $GLOBALS['fail'] );

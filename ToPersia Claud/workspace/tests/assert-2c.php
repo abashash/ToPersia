@@ -148,3 +148,50 @@ tp441_mut( '«بازسازی همه» در پیشخوان: manage_options و che
 tp441_mut( 'render پروندۀ گالری تجمیعی را در فهرست بارگذاری‌اش دارد',
 	function ( $s ) { return (bool) preg_match( "~foreach \( array\([^)]*'includes/topersia-g-gallery-agg\.php'[^)]*\) as \\\$topersia_g_file \)~", $s ); },
 	$rmain2c, str_replace( ", 'includes/topersia-g-gallery-agg.php'", '', $rmain2c ) );
+
+/* ── ۲ج٫۹ — درون‌ریزی: فارسی پیش‌فرض، ترجمه جدا (P5-D283) ──────────────── */
+
+echo "\nفاز ۲ج SPRINT-4.4 — ۲ج٫۹ درون‌ریزی ترجمه  P5-D283\n" . str_repeat( '─', 78 ) . "\n";
+
+$pack2c = is_file( $core2c . '/includes/topersia-pack.php' ) ? file_get_contents( $core2c . '/includes/topersia-pack.php' ) : '';
+$tr_msg = 'برای ترجمه از بخش درون‌ریزی ترجمه استفاده کنید.';
+
+tp441_mut( 'درون‌ریزی اصلی فقط زبان پیش‌فرض: پرونده و پستِ زبان دیگر با پیام «' . $tr_msg . '» رد؛ JSON Schema اصلی هم فقط همان زبان؛ پروندۀ ترجمه در بخش اصلی رد',
+	function ( $s ) use ( $tr_msg ) {
+		$parse = tp2c_body( $s, 'topersia_pack_parse' );
+		$plan  = tp2c_body( $s, 'topersia_pack_plan_post' );
+		return false !== strpos( $parse, "new WP_Error( 'pack_lang', '" . $tr_msg . "' )" ) && false !== strpos( $parse, "TOPERSIA_PACK_TR_SCHEMA === \$schema" )
+			&& false !== strpos( $plan, "\$plan['problem'] = 'lang';" ) && false !== strpos( $plan, "'" . $tr_msg . "'" )
+			&& false !== strpos( tp2c_body( $s, 'topersia_pack_json_schema' ), '$langs  = array( topersia_pack_default_language() );' )
+			&& false === strpos( $plan, 'translation_of' . "'] ) && is_string( \$post['translation_of'] ) ? trim" );
+	},
+	$pack2c, str_replace( "\$plan['problem'] = 'lang';", "\$plan['problem'] = '';", $pack2c ) );
+
+$trplan2c  = tp2c_body( $pack2c, 'topersia_pack_tr_plan_post' );
+$trapply2c = tp2c_body( $pack2c, 'topersia_pack_tr_apply' );
+tp441_mut( 'ترجمه: فقط کلاس «translate» WPML از پرونده نوشته می‌شود — بقیه «فیلد غیرترجمه‌ای در فایل ← نادیده» پیش از هر خواندن مقدار؛ رابطه از پرونده هرگز',
+	function ( $b ) {
+		$ig = strpos( $b, "if ( ! isset( \$classes[ \$key ] ) || 2 !== \$classes[ \$key ] ) {" );
+		$in = strpos( $b, 'topersia_pack_value_in( $def, $value, $key )' );
+		return false !== $ig && false !== $in && $ig < $in && false !== strpos( $b, "'status' => 'tr_ignored'" )
+			&& false === strpos( $b, "\$post['relations']" ) && false !== strpos( $b, "array( 'translation_of', 'title', 'content', 'fields', '_dup_of' )" );
+	},
+	$trplan2c, str_replace( "if ( ! isset( \$classes[ \$key ] ) || 2 !== \$classes[ \$key ] ) {", 'if ( false ) {', $trplan2c ) );
+
+tp441_mut( 'ترجمه: پیوند با API ترجمۀ WPML (trid پست فارسی)، پیش‌نویس، copy با wpml_sync_custom_field؛ needs_verification پس از ذخیرۀ پایانی (WPML با هر ذخیره copy را از اصل می‌نشاند)',
+	function ( $b ) {
+		$save = strpos( $b, "wp_update_post( array( 'ID' => \$post_id ) );" );
+		$st   = strpos( $b, "delete_post_meta( \$post_id, 'content_status' );" );
+		return false !== strpos( $b, "'trid'                 => apply_filters( 'wpml_element_trid', null, \$original, \$element )" )
+			&& false !== strpos( $b, "'post_status'  => 'draft'" ) && false !== strpos( $b, "do_action( 'wpml_sync_custom_field', \$original, \$key );" )
+			&& false !== $save && false !== $st && $save < $st && false !== strpos( $b, "array( 'needs_verification' )" );
+	},
+	$trapply2c, str_replace( "delete_post_meta( \$post_id, 'content_status' );", '', $trapply2c ) );
+
+tp441_mut( 'رابطۀ ترجمه از پست فارسی با گارد: طرفِ بی‌ترجمه در رابطه‌ای که آن طرف یک همتا می‌گیرد پیوند نمی‌خورد (یال فارسی دست نمی‌خورد)',
+	function ( $b ) {
+		return false !== strpos( $b, "\$single = 'parent' === \$role ? \$relation->is_single_parent() : \$relation->is_single_child();" )
+			&& false !== strpos( $b, 'if ( ! $mapped || ( $single && $mapped === $item ) ) {' ) && false !== strpos( $b, 'topersia_relation_connect(' );
+	},
+	tp2c_body( $pack2c, 'topersia_pack_tr_relations' ),
+	str_replace( '( $single && $mapped === $item )', '( false )', tp2c_body( $pack2c, 'topersia_pack_tr_relations' ) ) );

@@ -7,6 +7,8 @@
  * گذرواژه‌ای). مسیر کامل کاربر: بارگیری قالب و JSON Schema و برون‌بری پست،
  * بارگذاری پرونده، گزارش آزمایشی دسته‌دسته (AJAX)، «اجرا» دسته‌دسته، و
  * «برگرداندن» پس از تازه‌کردن صفحه. نقطه‌های AJAX برای مهمان و مشترک بسته.
+ * ۲ج٫۹ (P5-D283): بخش «درون‌ریزی ترجمه» — قالب ترجمۀ شهر فارسیِ موقت، ردِ
+ * پروندۀ فارسی، آزمایشی، اجرا (پست en با همان trid) و برگرداندن.
  *
  * هر داده‌ای که ساخته می‌شود عنوانش نشان «آزمون پیشخوان <tag>» دارد و در پایان
  * پاک می‌شود؛ گزینۀ «آخرین درون‌ریزی» به مقدار پیش از آزمون برمی‌گردد.
@@ -77,12 +79,70 @@ async function run( type, name ) {
 
 		await page.goto( TAB, { waitUntil: 'domcontentloaded', timeout: 240000 } );
 		const cards = await page.$$eval( '.tp-pack-card h3', h => h.map( x => x.textContent.trim() ) );
-		check( `${ name }: سه کارت — قالب برای هوش مصنوعی · برون‌بری پست موجود · درون‌ریزی`,
-			JSON.stringify( cards ) === JSON.stringify( [ 'قالب برای هوش مصنوعی', 'برون‌بری پست موجود', 'درون‌ریزی' ] ), JSON.stringify( cards ) );
+		check( `${ name }: پنج کارت — قالب برای هوش مصنوعی · برون‌بری پست موجود · درون‌ریزی · قالب ترجمه · درون‌ریزی ترجمه؛ قالب اصلی بی گزینش زبان`,
+			JSON.stringify( cards ) === JSON.stringify( [ 'قالب برای هوش مصنوعی', 'برون‌بری پست موجود', 'درون‌ریزی', 'قالب ترجمه', 'درون‌ریزی ترجمه' ] ) && ! ( await page.$( 'select[name=lang]' ) ),
+			JSON.stringify( cards ) );
+
+		/* ══ ترجمه — ۲ج٫۹ ══ */
+		const nav = () => page.waitForNavigation( { waitUntil: 'domcontentloaded', timeout: 240000 } );
+		await page.selectOption( 'select[name=tlang]', 'en' );
+		await page.fill( 'form:has(input[name=what][value=translation]) input[name=post]', String( setup.city ) );
+		const trTpl = await download( page, () => page.click( 'form:has(input[name=what][value=translation]) button' ) );
+		const tp    = trTpl.json.posts && trTpl.json.posts[0] ? trTpl.json.posts[0] : { fields: {} };
+		check( `${ name }: «قالب ترجمه» — topersia-geo-translation/1.0، en، translation_of؛ short_summary با source فارسی و value خالی؛ population (copy) نیست`,
+			'topersia-geo-translation/1.0' === trTpl.json.meta.schema && 'en' === trTpl.json.meta.language && !! tp.translation_of
+			&& tp.fields.short_summary && /ساختگی/.test( tp.fields.short_summary.source ) && '' === tp.fields.short_summary.value && ! ( 'population' in tp.fields ),
+			trTpl.name );
+
+		const tmp = path.join( os.tmpdir(), 'pack-' + tag + '.json' );
+		fs.writeFileSync( tmp, packFile( tag ) );
+		await page.setInputFiles( 'input[name=topersia_pack_tr_file]', tmp );
+		await Promise.all( [ nav(), page.click( 'button[name=topersia_pack_tr_upload]' ) ] );
+		const rejMain = await page.evaluate( () => ( document.querySelector( '.notice-error' ) || {} ).textContent || '' );
+		check( `${ name }: پروندۀ فارسی در «درون‌ریزی ترجمه» رد — «این پروندۀ درون‌ریزی اصلی (فارسی) است»`,
+			/درون‌ریزی اصلی \(فارسی\)/.test( rejMain ), rejMain.slice( 0, 120 ) );
+
+		tp.title.value                = 'Admin Translation ' + tag;
+		tp.fields.short_summary.value = 'A made-up city for the admin translation test.';
+		tp.fields.population          = { source: 777, value: 1 };
+		const tmpTr = path.join( os.tmpdir(), 'tr-' + tag + '.json' );
+		fs.writeFileSync( tmpTr, JSON.stringify( trTpl.json ) );
+		await page.setInputFiles( 'input[name=topersia_pack_tr_file]', tmpTr );
+		await Promise.all( [ nav(), page.click( 'button[name=topersia_pack_tr_upload]' ) ] );
+		await page.waitForFunction( () => /گزارش کامل شد/.test( ( document.getElementById( 'tp-pack-state' ) || {} ).textContent || '' ), null, { timeout: 240000 } );
+		const trRep = await page.evaluate( () => {
+			const p = document.querySelector( '#tp-pack-report .tp-pack-post' );
+			return {
+				head: ( [ ...document.querySelectorAll( 'h2' ) ].find( h => /گزارش آزمایشی/.test( h.textContent ) ) || {} ).textContent || '',
+				action: p ? p.dataset.action : '',
+				pop: p ? ( ( [ ...p.querySelectorAll( 'tr' ) ].find( tr => /population/.test( tr.textContent ) ) || {} ).textContent || '' ) : '',
+				run: ! document.getElementById( 'tp-pack-run' ).disabled,
+			};
+		} );
+		check( `${ name }: گزارش آزمایشی ترجمه — ساخت؛ population «فیلد غیرترجمه‌ای در فایل ← نادیده»؛ «اجرا» روشن`,
+			/ترجمه/.test( trRep.head ) && 'create' === trRep.action && /فیلد غیرترجمه‌ای در فایل/.test( trRep.pop ) && trRep.run, JSON.stringify( trRep ).slice( 0, 300 ) );
+
+		await page.click( '#tp-pack-run' );
+		await page.waitForFunction( () => /اجرا تمام شد/.test( document.getElementById( 'tp-pack-state' ).textContent ), null, { timeout: 480000 } );
+		const trState = JSON.parse( php( [ 'tests/pack-admin-state.php', 'state', tag ] ) );
+		const enPost  = trState.posts.find( p => 'en' === p.lang ) || {};
+		const faCity  = trState.posts.find( p => p.id === setup.city ) || {};
+		check( `${ name }: «اجرا»ی ترجمه — پست en پیش‌نویس با needs_verification، همان trid، population از پست فارسی (777، نه 1)، نامک همان`,
+			'draft' === enPost.status && 'needs_verification' === enPost.content && !! faCity.trid && enPost.trid === faCity.trid && '777' === enPost.pop && enPost.slug === faCity.slug,
+			JSON.stringify( enPost ) );
+
+		await page.goto( TAB, { waitUntil: 'domcontentloaded', timeout: 240000 } );
+		const trLast = await page.evaluate( () => ( [ ...document.querySelectorAll( 'p' ) ].find( p => /^imp-/.test( p.textContent.trim() ) ) || {} ).textContent || '' );
+		if ( await page.$( '#tp-pack-undo' ) ) {
+			await page.click( '#tp-pack-undo' );
+			await page.waitForFunction( () => /برگردانده شد/.test( document.getElementById( 'tp-pack-undo-state' ).textContent ), null, { timeout: 240000 } );
+		}
+		const trUndone = ( JSON.parse( php( [ 'tests/pack-admin-state.php', 'state', tag ] ) ).posts.find( p => 'en' === p.lang ) || {} ).status;
+		check( `${ name }: «آخرین درون‌ریزی» با نشان «ترجمه»؛ برگرداندن پست en را به زباله برد`,
+			/ترجمه/.test( trLast ) && 'trash' === trUndone, trLast.slice( 0, 120 ) + ' · ' + trUndone );
 
 		/* بارگیری‌ها */
 		await page.selectOption( 'select[name=type]', 'tp_city' );
-		await page.selectOption( 'select[name=lang]', 'fa' );
 		const tpl = await download( page, () => page.click( 'button[name=what][value=template]' ) );
 		check( `${ name }: «پروندۀ قالب» — topersia-pack-tp_city-fa.json، schema 2.0، دستور فارسی، یک پست خالی`,
 			'topersia-pack-tp_city-fa.json' === tpl.name && 'topersia-geo-import/2.0' === tpl.json.meta.schema && 'tp_city' === tpl.json.meta.post_type
@@ -92,14 +152,12 @@ async function run( type, name ) {
 		check( `${ name }: «JSON Schema» — draft 2020-12، post_type ثابت tp_city`,
 			'https://json-schema.org/draft/2020-12/schema' === sch.json.$schema && 'tp_city' === sch.json.properties.meta.properties.post_type.const, sch.name );
 
-		await page.fill( 'input[name=post]', '399' );
-		const exp = await download( page, () => page.click( 'form:has(input[name=post]) button' ) );
+		await page.fill( 'form:has(input[name=what][value=post]) input[name=post]', '399' );
+		const exp = await download( page, () => page.click( 'form:has(input[name=what][value=post]) button' ) );
 		check( `${ name }: «برون‌بری» #399 — نامک isfahan، رابطۀ ۷۳ با نام و uid`,
 			'isfahan' === exp.json.posts[0].slug && Array.isArray( exp.json.posts[0].relations[ '73' ] ) && !! exp.json.posts[0].relations[ '73' ][0].uid, exp.name );
 
-		/* بارگذاری و گزارش آزمایشی */
-		const tmp = path.join( os.tmpdir(), 'pack-' + tag + '.json' );
-		fs.writeFileSync( tmp, packFile( tag ) );
+		/* بارگذاری و گزارش آزمایشی — همان پروندۀ فارسی که بخش ترجمه رد کرد */
 		await page.setInputFiles( 'input[name=topersia_pack_file]', tmp );
 		await Promise.all( [ page.waitForNavigation( { waitUntil: 'domcontentloaded', timeout: 240000 } ), page.click( 'button[name=topersia_pack_upload]' ) ] );
 		await page.waitForFunction( () => /گزارش کامل شد/.test( ( document.getElementById( 'tp-pack-state' ) || {} ).textContent || '' ), null, { timeout: 240000 } );
@@ -120,14 +178,16 @@ async function run( type, name ) {
 			&& true === rep.bad[0] && true === rep.bad[1] && false === rep.bad[2] && rep.run, JSON.stringify( rep ).slice( 0, 300 ) );
 
 		const before = JSON.parse( php( [ 'tests/pack-admin-state.php', 'state', tag ] ) );
-		check( `${ name }: آزمایشی هیچ چیز ننوشت — فقط شهرستان موقت`, 1 === before.posts.length && 'tp_county' === before.posts[0].type, JSON.stringify( before.posts ) );
+		/* شهرهای فارسیِ همین درون‌ریزی — نه شهر و ترجمۀ آزمون ترجمه */
+		const fresh = p => 'tp_city' === p.type && p.id !== setup.city && 'fa' === p.lang;
+		check( `${ name }: آزمایشی هیچ چیز ننوشت — هیچ شهر تازه`, 0 === before.posts.filter( fresh ).length, JSON.stringify( before.posts.filter( fresh ) ) );
 
 		/* اجرا */
 		await page.click( '#tp-pack-run' );
 		await page.waitForFunction( () => /اجرا تمام شد/.test( document.getElementById( 'tp-pack-state' ).textContent ), null, { timeout: 480000 } );
 		const done = await page.evaluate( () => document.getElementById( 'tp-pack-state' ).textContent );
 		const after = JSON.parse( php( [ 'tests/pack-admin-state.php', 'state', tag ] ) );
-		const cities = after.posts.filter( p => 'tp_city' === p.type );
+		const cities = after.posts.filter( fresh );
 		check( `${ name }: «اجرا» — دو شهر تازه، هر دو پیش‌نویس با needs_verification، زبان fa، فرزند شهرستان موقت؛ best_season نادرست نوشته نشد`,
 			/2 ساخت/.test( done ) && /1 رد/.test( done ) && 2 === cities.length
 			&& cities.every( c => 'draft' === c.status && 'needs_verification' === c.content && 'fa' === c.lang && 1 === c.parents.length && c.parents[0] === setup.county )
@@ -142,7 +202,7 @@ async function run( type, name ) {
 			await page.waitForFunction( () => /برگردانده شد/.test( document.getElementById( 'tp-pack-undo-state' ).textContent ), null, { timeout: 240000 } );
 		}
 		const undone = JSON.parse( php( [ 'tests/pack-admin-state.php', 'state', tag ] ) );
-		const ucities = undone.posts.filter( p => 'tp_city' === p.type );
+		const ucities = undone.posts.filter( fresh );
 		check( `${ name }: «برگرداندن» — هر دو شهر تازه در زباله و بی یال؛ گزینه «برگردانده شد»`,
 			2 === ucities.length && ucities.every( c => 'trash' === c.status && 0 === c.parents.length ) && !! ( undone.last_run && undone.last_run.undone ), JSON.stringify( ucities ) );
 
@@ -163,9 +223,10 @@ async function run( type, name ) {
 		await subCtx.close();
 
 		fs.unlinkSync( tmp );
+		fs.unlinkSync( tmpTr );
 	} finally {
 		await browser.close();
-		const left = JSON.parse( php( [ 'tests/pack-admin-state.php', 'cleanup', tag, setup.last_run ] ) );
+		const left = JSON.parse( php( [ 'tests/pack-admin-state.php', 'cleanup', tag, setup.last_run, String( setup.floor ) ] ) );
 		if ( left.left ) { check( `${ name }: پاک‌سازی`, false, left.left + ' پست ماند' ); }
 	}
 }
