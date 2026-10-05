@@ -1655,6 +1655,24 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		$plan['action'] = 'create';
 		$plan['title']  = array( 'status' => 'ok', 'value' => $title );
 		$plan['slug']   = $slug;
+
+		/*
+		 * ۲ج٫۱۰: نامک از نام انگلیسی (بخش ۲، همان ترتیب) — قلاب نامک پس از نوشتن متا
+		 * می‌سازدش. نامک صریحِ پرونده که با نام انگلیسی نمی‌خواند فقط آگاهی است، نه
+		 * مانع: دو موجودیت هم‌نام نامک جدا می‌خواهند.
+		 */
+		$en_name = '';
+		foreach ( array( 'official_name_en', 'name_en', 'page_title' ) as $k ) {
+			if ( isset( $fields[ $k ] ) && is_string( $fields[ $k ] ) && '' !== trim( $fields[ $k ] ) ) {
+				$en_name = trim( $fields[ $k ] );
+				break;
+			}
+		}
+		if ( '' !== $slug && '' !== $en_name && sanitize_title( $en_name ) !== $slug ) {
+			$plan['notes'][] = 'نامک پرونده «' . $slug . '» با نام انگلیسی نمی‌خواند («' . sanitize_title( $en_name ) . '») — همان نامک پرونده ساخته می‌شود';
+		} elseif ( '' === $slug && '' === $en_name ) {
+			$plan['notes'][] = 'بی نام انگلیسی (official_name_en · name_en · page_title) — نامک لاتین تا پر شدنش ساخته نمی‌شود';
+		}
 	}
 
 	/* فیلدها */

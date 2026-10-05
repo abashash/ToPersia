@@ -10,6 +10,7 @@
  *   ۲ج٫۴  قالب کشور  P5-D281 · P5-D282
  *   ۲ج٫۵  گالری تجمیعی و صف هسته  P5-D274 · P5-D300 · P5-D290 — کارهای صفی که
  *         آزمون می‌سازد در پایان اجرا و ردیفشان پاک می‌شود
+ *   ۲ج٫۱۰ نامک از نام انگلیسی — سه مسیر ساخت، ادعای دائمی، فهرست ناهمخوان
  *
  * هر ادعا جهش دارد. کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
@@ -722,6 +723,120 @@ t( '«بازسازی همه» اجرا شد: ذخیرۀ کشور و اصفهان
 	topersia_g_gallery_agg_stored( $country ) === $g5_country_before && topersia_g_gallery_agg_stored( $g5_isf ) === $g5_isf_before );
 
 endif;
+
+/* ══ ۲ج٫۱۰ — نامک از نام انگلیسی ════════════════════════════════════ */
+section( '۲ج٫۱۰ — نامک از نام انگلیسی: ادعای دائمی، سه مسیر ساخت، فهرست ناهمخوان' );
+
+global $wpdb;
+
+/* ادعای دائمی — هر پست نوع‌های ToPersia؛ پست‌های موقت همین آزمون (پیش‌نویسِ بی نام انگلیسی) بیرون */
+$s10_own  = array_flip( array_map( 'intval', $cleanup['posts'] ) );
+$s10_rows = $wpdb->get_results( "SELECT ID, post_type, post_status, post_name FROM {$wpdb->posts} WHERE post_type LIKE 'tp\\_%' AND post_status NOT IN ( 'auto-draft', 'inherit', 'trash' ) ORDER BY post_type, ID" );
+$s10_bad  = array();
+$s10_list = array();
+$s10_num  = array();
+$s10_n    = 0;
+foreach ( $s10_rows as $r ) {
+	if ( isset( $s10_own[ (int) $r->ID ] ) ) {
+		continue;
+	}
+	$s10_n++;
+	$slug = (string) $r->post_name;
+	if ( ! preg_match( '/^[a-z0-9-]+$/', $slug ) ) {
+		$s10_bad[] = '#' . $r->ID . ' ' . $r->post_type . ' «' . $slug . '»';
+		continue;
+	}
+	$want = '';
+	foreach ( array( 'official_name_en', 'name_en', 'page_title' ) as $k ) {
+		$v = trim( (string) get_post_meta( $r->ID, $k, true ) );
+		if ( '' !== $v ) {
+			$want = sanitize_title( $v );
+			break;
+		}
+	}
+	if ( ctype_digit( str_replace( '-', '', $slug ) ) ) {
+		$s10_num[] = '#' . $r->ID . ' ' . $r->post_type . ' [' . $r->post_status . '] «' . $slug . '» — نام انگلیسی «' . get_post_meta( $r->ID, 'name_en', true ) . '»';
+	} elseif ( '' !== $want && $want !== $slug ) {
+		$s10_list[] = '#' . $r->ID . ' ' . $r->post_type . ' [' . $r->post_status . '] ' . $slug . ' ← ' . $want;
+	}
+}
+mut( 'ادعای دائمی: هر پست نوع‌های ToPersia (' . topersia_g_fa( $s10_n ) . '، بی زباله و پیش‌نویس خودکار) نامک ^[a-z0-9-]+$ دارد',
+	function ( $bad ) { return ! $bad; }, $s10_bad, array( '#1 tp_city «%d8%a7%d8%b5%d9%81%d9%87%d8%a7%d9%86»' ), implode( ' | ', array_slice( $s10_bad, 0, 8 ) ) );
+
+/* ۱ — ساخت دستی: جت‌انجین متای متاباکس را در save_post (اولویت ۱۰) می‌نویسد، پیش از قلاب نامک (۹۹۹) */
+$s10_jet = function ( $id ) {
+	if ( 'tp_city' === get_post_type( $id ) && '' === (string) get_post_meta( $id, 'name_en', true ) ) {
+		update_post_meta( $id, 'name_en', 'Manual Slug Twoc Ten' );
+	}
+};
+add_action( 'save_post', $s10_jet, 10 );
+$s10_m = tmp_post( 'tp_city', 'شهر نامک دستی ۲ج٫۱۰', 'draft' );
+remove_action( 'save_post', $s10_jet, 10 );
+
+/* ۲ — درون‌ریز ۲ب بی نامک صریح؛ ۳ — ترجمۀ ۲ج٫۹ و انتشار هر دو */
+$s10_run = 'imp-test-2c10-' . strtolower( wp_generate_password( 6, false, false ) );
+$s10_r   = topersia_pack_apply( topersia_pack_parse( wp_json_encode( array(
+	'meta'  => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_city', 'language' => 'fa' ),
+	'posts' => array( array( 'title' => '', 'fields' => array( 'name_fa' => 'شهر نامک درون‌ریزی ۲ج٫۱۰', 'name_en' => 'Import Slug Twoc Ten' ), 'relations' => array() ) ),
+) ) ), 0, $s10_run );
+$s10_i = (int) $s10_r['target'];
+$cleanup['posts'][] = $s10_i;
+
+$s10_tpl = topersia_pack_tr_export( array( $s10_i ), 'en' );
+$s10_tpl['posts'][0]['title']['value'] = 'Import Slug Twoc Ten';
+$s10_tr = topersia_pack_tr_apply( topersia_pack_tr_parse( wp_json_encode( $s10_tpl ) ), 0, $s10_run );
+$s10_t  = (int) $s10_tr['target'];
+$cleanup['posts'][] = $s10_t;
+$s10_t_draft = get_post_field( 'post_name', $s10_t );
+wp_update_post( array( 'ID' => $s10_i, 'post_status' => 'publish' ) );
+wp_update_post( array( 'ID' => $s10_t, 'post_status' => 'publish' ) );
+
+$s10_got = array(
+	'manual'   => get_post_field( 'post_name', $s10_m ),
+	'import'   => get_post_field( 'post_name', $s10_i ),
+	'uid'      => (string) get_post_meta( $s10_i, 'entity_uid', true ),
+	'tr_draft' => $s10_t_draft,
+	'tr_pub'   => get_post_field( 'post_name', $s10_t ),
+	'fa_pub'   => get_post_field( 'post_name', $s10_i ),
+);
+mut( 'سه مسیر: ساخت دستی (متا در save_post) ← manual-slug-twoc-ten؛ درون‌ریز ۲ب بی نامک ← نسخۀ نامکیِ name_en و entity_uid با همان؛ ترجمۀ ۲ج٫۹ همان نامک فارسی — پیش‌نویس و پس از انتشار هر دو، بی پسوند -2',
+	function ( $g ) {
+		return 'manual-slug-twoc-ten' === $g['manual'] && sanitize_title( 'Import Slug Twoc Ten' ) === $g['import'] && false !== strpos( $g['uid'], '/city/' . $g['import'] )
+			&& $g['import'] === $g['tr_draft'] && $g['import'] === $g['tr_pub'] && $g['import'] === $g['fa_pub'];
+	},
+	$s10_got, array_merge( $s10_got, array( 'tr_pub' => $s10_got['tr_pub'] . '-2' ) ), wp_json_encode( $s10_got ) );
+
+/* آزمایشی: نامک صریحِ ناهمخوان و پست بی نام انگلیسی — آگاهی، نه مانع؛ هیچ نوشتن */
+$s10_plan = function ( $posts ) {
+	$d = topersia_pack_parse( wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_city', 'language' => 'fa' ), 'posts' => $posts ) ) );
+	return array( topersia_pack_plan_post( $d, 0 ), topersia_pack_plan_post( $d, 1, topersia_pack_pending( $d, 1 ) ) );
+};
+$s10_p  = $s10_plan( array(
+	array( 'slug' => 'wrong-slug-twoc-ten', 'fields' => array( 'name_fa' => 'شهر نامک صریح ۲ج٫۱۰', 'name_en' => 'Right Name Twoc Ten' ) ),
+	array( 'slug' => '', 'fields' => array( 'name_fa' => 'شهر بی نام انگلیسی ۲ج٫۱۰' ) ),
+) );
+$s10_ok = $s10_plan( array(
+	array( 'slug' => 'right-name-twoc-ten', 'fields' => array( 'name_fa' => 'شهر نامک صریح ۲ج٫۱۰', 'name_en' => 'Right Name Twoc Ten' ) ),
+	array( 'slug' => '', 'fields' => array( 'name_fa' => 'شهر با نام انگلیسی ۲ج٫۱۰', 'name_en' => 'With English Twoc Ten' ) ),
+) );
+mut( 'آزمایشی: نامک صریحِ ناهمخوان با نام انگلیسی و پستِ بی نام انگلیسی هر کدام یادداشت می‌گیرند — ساخت سر جایش (دو موجودیت هم‌نام نامک جدا می‌خواهند)',
+	function ( $x ) {
+		return 'create' === $x[0]['action'] && preg_grep( '/با نام انگلیسی نمی‌خواند/u', $x[0]['notes'] )
+			&& 'create' === $x[1]['action'] && preg_grep( '/بی نام انگلیسی/u', $x[1]['notes'] );
+	},
+	$s10_p, $s10_ok );
+
+/* فهرست برای گزارش — منتشرشده فقط فهرست؛ تغییر با ۳۰۱ Rank Math و تصمیم کاربر (فاز ۱۰) */
+echo '  · نامک لاتینِ ناهمخوان با نام انگلیسی: ' . count( $s10_list ) . "\n";
+foreach ( $s10_list as $line ) {
+	echo '      ' . $line . "\n";
+}
+echo '  · نامک تمام‌عددی: ' . count( $s10_num ) . "\n";
+foreach ( $s10_num as $line ) {
+	echo '      ' . $line . "\n";
+}
+
+$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $s10_run . '"' ) . '%' ) );
 
 /* ══ پایان ══════════════════════════════════════════════════════════ */
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pass']}   افتاده: {$GLOBALS['fail']}\n";

@@ -61,5 +61,31 @@ topersia-render 4.4.3 — روی topersia.local
   ✅ «بازسازی همه» از صف: ۱۴۶ کار — یکی برای هر شهر، استان و کشورِ منتشرشده؛ شهرها پیش از استان‌ها، استان‌ها پیش از کشور
   ✅ «بازسازی همه» اجرا شد: ذخیرۀ کشور و اصفهان همان پیشین
 
+۲ج٫۱۰ — نامک از نام انگلیسی: ادعای دائمی، سه مسیر ساخت، فهرست ناهمخوان
 ──────────────────────────────────────────────────────────────────────────────
-  گذشته: 46   افتاده: 0
+  ✅ ادعای دائمی: هر پست نوع‌های ToPersia (۱۵۰۷، بی زباله و پیش‌نویس خودکار) نامک ^[a-z0-9-]+$ دارد
+  ✅ سه مسیر: ساخت دستی (متا در save_post) ← manual-slug-twoc-ten؛ درون‌ریز ۲ب بی نامک ← نسخۀ نامکیِ name_en و entity_uid با همان؛ ترجمۀ ۲ج٫۹ همان نامک فارسی — پیش‌نویس و پس از انتشار هر دو، بی پسوند -2
+  ✅ آزمایشی: نامک صریحِ ناهمخوان با نام انگلیسی و پستِ بی نام انگلیسی هر کدام یادداشت می‌گیرند — ساخت سر جایش (دو موجودیت هم‌نام نامک جدا می‌خواهند)
+  · نامک لاتینِ ناهمخوان با نام انگلیسی: 17
+      #1952 tp_ancient_site [publish] moon-qanat ← qanat-of-the-moon
+      #1953 tp_ancient_site [publish] vazvan-qanat ← qanat-of-vazvan
+      #1954 tp_ancient_site [publish] mozdabad-qanat ← mozd-abad-qanat
+      #1967 tp_festival [publish] golabgiri-kashan ← golabgiri
+      #1948 tp_monument [publish] naqsh-e-jahan-square ← meidan-emam-esfahan
+      #1950 tp_monument [publish] chehel-sotoun-garden ← bagh-e-chehel-sotun
+      #1951 tp_monument [publish] fin-garden ← bagh-e-fin
+      #1955 tp_monument [publish] sheikhali-khan-caravanserai ← sheikhali-khan
+      #1956 tp_monument [publish] maranjab-caravanserai ← maranjab
+      #1957 tp_monument [publish] amin-abad-caravanserai ← amin-abad
+      #1958 tp_monument [publish] gabr-abad-caravanserai ← gabr-abad
+      #1959 tp_monument [publish] mahyar-caravanserai ← mahyar
+      #1960 tp_monument [publish] gaz-caravanserai ← gaz
+      #1961 tp_monument [publish] kuhpayeh-caravanserai ← kuhpayeh
+      #1962 tp_monument [publish] neyestanak-caravanserai ← neyestanak
+      #1949 tp_religious_site [publish] jameh-mosque-of-isfahan ← masjed-e-jame-of-isfahan
+      #1946 tp_water_body [publish] gavkhouni-wetland ← gavkhouni
+  · نامک تمام‌عددی: 1
+      #204 tp_currency [publish] «01» — نام انگلیسی «01»
+
+──────────────────────────────────────────────────────────────────────────────
+  گذشته: 49   افتاده: 0
