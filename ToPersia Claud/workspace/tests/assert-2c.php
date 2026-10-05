@@ -105,14 +105,14 @@ tp441_mut( 'آبشار: بازسازیِ تغییرکرده نیاکان را د
 	array( $rebuild2c, tp2c_body( $agg2c, 'topersia_g_gallery_agg_rebuild_all' ), $agg2c ),
 	array( str_replace( 'topersia_g_gallery_agg_schedule( $post_id, false )', '', $rebuild2c ), tp2c_body( $agg2c, 'topersia_g_gallery_agg_rebuild_all' ), $agg2c ) );
 
-tp441_mut( 'ساختن همیشه به زبان اصلی WPML — بازسازی و فهرست «همه» در topersia_g_gallery_agg_in_default_lang؛ زبان پیشین در finally برمی‌گردد',
+tp441_mut( 'ساختن همیشه به زبان اصلی WPML — بازسازی و فهرست «همه» در topersia_g_gallery_agg_in_default_lang (همان topersia_g_in_default_lang)؛ زبان پیشین در finally برمی‌گردد',
 	function ( $x ) {
 		return false !== strpos( $x[0], 'return topersia_g_gallery_agg_in_default_lang( function () use ( $post_id, $cascade ) {' )
 			&& false !== strpos( $x[1], 'return topersia_g_gallery_agg_in_default_lang( function () {' )
 			&& (bool) preg_match( "/finally \{\s*do_action\( 'wpml_switch_language', \\\$current \);/", $x[2] );
 	},
-	array( $rebuild2c, tp2c_body( $agg2c, 'topersia_g_gallery_agg_all_ids' ), tp2c_body( $agg2c, 'topersia_g_gallery_agg_in_default_lang' ) ),
-	array( str_replace( 'return topersia_g_gallery_agg_in_default_lang( function () use ( $post_id, $cascade ) {', 'return ( function () use ( $post_id, $cascade ) {', $rebuild2c ), tp2c_body( $agg2c, 'topersia_g_gallery_agg_all_ids' ), tp2c_body( $agg2c, 'topersia_g_gallery_agg_in_default_lang' ) ) );
+	array( $rebuild2c, tp2c_body( $agg2c, 'topersia_g_gallery_agg_all_ids' ), tp2c_body( $zones2c, 'topersia_g_in_default_lang' ) . tp2c_body( $agg2c, 'topersia_g_gallery_agg_in_default_lang' ) ),
+	array( str_replace( 'return topersia_g_gallery_agg_in_default_lang( function () use ( $post_id, $cascade ) {', 'return ( function () use ( $post_id, $cascade ) {', $rebuild2c ), tp2c_body( $agg2c, 'topersia_g_gallery_agg_all_ids' ), tp2c_body( $zones2c, 'topersia_g_in_default_lang' ) . tp2c_body( $agg2c, 'topersia_g_gallery_agg_in_default_lang' ) ) );
 
 tp441_mut( '«بازسازی همه» از صف پخش می‌شود — یک کار برای هر پست، نه یک کار بلند؛ هم‌زمان فقط WP-CLI',
 	function ( $s ) {
@@ -356,3 +356,24 @@ tp441_mut( 'WP-CLI `wp topersia i18n-gaps` با --lang · --type · --format=tab
 			&& false !== strpos( tp2c_body( $x[0], 'topersia_i18n_gaps_card' ), "'1' === \$_GET['gaps']" ) && false !== strpos( tp2c_body( $x[0], 'topersia_i18n_gap_export' ), 'topersia_pack_tr_export(' );
 	},
 	array( $gap2c, $pack2c ), array( $gap2c, str_replace( "if ( 'gaps' === \$what ) {", "if ( false ) {", $pack2c ) ) );
+
+/* ══ وصلۀ ۲ج و۲ — آمار حقیقی مستقل از زبان (P5-D306) ══════════════════ */
+
+echo "\nوصلۀ ۲ج — و۲ آمار حقیقی  P5-D306\n" . str_repeat( '─', 78 ) . "\n";
+
+tp441_mut( 'شمار گروه کارت آمار (count:provinces کشور و منطقه) روی گراف زبان پیش‌فرض: topersia_g_fact_count — پست اصل (topersia_g_default_id) در topersia_g_in_default_lang؛ گالری تجمیعی همان یاورها',
+	function ( $x ) {
+		$cell = tp2c_body( $x[0], 'topersia_g_stat_cell' );
+		$fact = tp2c_body( $x[0], 'topersia_g_fact_count' );
+		return false !== strpos( $cell, 'topersia_g_fact_count( $post_id, $group )' ) && false === strpos( $cell, 'topersia_g_group_ids(' )
+			&& false !== strpos( $fact, 'topersia_g_default_id( $post_id )' ) && false !== strpos( $fact, 'topersia_g_in_default_lang( function () use ( $origin, $group_key )' )
+			&& false !== strpos( tp2c_body( $x[1], 'topersia_g_gallery_agg_primary' ), 'return topersia_g_default_id( $post_id );' );
+	},
+	array( $zones2c, $agg2c ), array( str_replace( 'topersia_g_fact_count( $post_id, $group )', "count( topersia_g_group_ids( \$post_id, topersia_g_group( \$post_id, \$group ) ) )", $zones2c ), $agg2c ) );
+
+tp441_mut( 'فقط کارت آمار: فهرست، اسلایدر و پنجرۀ استان‌ها همچنان صفحه‌های همان زبان (P5-D247) — topersia_g_fact_count فقط یک بار صدا زده می‌شود؛ ماتریس جز count:provinces شمار رابطه‌ای ندارد',
+	function ( $s ) {
+		return 1 === substr_count( $s, 'topersia_g_fact_count( $post_id, $group )' )
+			&& 2 === preg_match_all( "/'count:[a-z_]+'/", $s, $m ) && array( "'count:provinces'" ) === array_values( array_unique( $m[0] ) );
+	},
+	$zones2c, $zones2c . "\n// topersia_g_fact_count( \$post_id, \$group )" );

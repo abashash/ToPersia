@@ -62,6 +62,49 @@ if ( ! function_exists( 'topersia_g_page_lang' ) ) {
 }
 
 /**
+ * $fn در زبان پیش‌فرض WPML، و بازگرداندن زبان پیشین — حتی با خطا. فقط قلاب‌های
+ * مستند WPML (wpml_default_language · wpml_current_language · wpml_switch_language).
+ * گالری تجمیعی (۲ج٫۵) و آمار حقیقی (P5-D306) هر دو از این‌جا.
+ */
+if ( ! function_exists( 'topersia_g_in_default_lang' ) ) {
+	function topersia_g_in_default_lang( callable $fn ) {
+
+		$default = function_exists( 'apply_filters' ) ? apply_filters( 'wpml_default_language', null ) : null;
+		$current = function_exists( 'apply_filters' ) ? apply_filters( 'wpml_current_language', null ) : null;
+
+		if ( ! $default || ! $current || $default === $current ) {
+			return $fn();
+		}
+
+		do_action( 'wpml_switch_language', $default );
+
+		try {
+			return $fn();
+		} finally {
+			do_action( 'wpml_switch_language', $current );
+		}
+	}
+}
+
+/** پست زبان پیش‌فرض WPML (یا خودش). */
+if ( ! function_exists( 'topersia_g_default_id' ) ) {
+	function topersia_g_default_id( $post_id ) {
+
+		$post_id = absint( $post_id );
+		$type    = function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '';
+		$default = function_exists( 'apply_filters' ) ? apply_filters( 'wpml_default_language', null ) : null;
+
+		if ( '' === $type || ! $default ) {
+			return $post_id;
+		}
+
+		$id = absint( apply_filters( 'wpml_object_id', $post_id, $type, false, $default ) );
+
+		return $id ? $id : $post_id;
+	}
+}
+
+/**
  * رشتۀ رابط به زبان صفحه.  P5-D146 · ۴٫۴٫۲
  *
  * منبع هر برچسب فارسی است و ترجمه‌اش در کاتالوگ `topersia` افزونه
@@ -2038,6 +2081,25 @@ if ( ! defined( 'TOPERSIA_STAT_MAX' ) ) {
 }
 
 /**
+ * آمار حقیقی مستقل از زبان — P5-D306 · وصلۀ ۲ج و۲.
+ *
+ * «ایران ۳۱ استان دارد» واقعیتی دربارۀ جهان است، نه دربارۀ صفحه‌هایی که ما به
+ * انگلیسی ترجمه کرده‌ایم: در /en/ شمردن به زبان صفحه «۱» می‌نوشت. پس شمار روی
+ * گراف زبان پیش‌فرض است — پست اصل، فقط منتشرشده‌های فارسی (P5-D247) — در هر
+ * زبان صفحه، با رقم همان زبان. فهرست، اسلایدر و پنجرۀ همان گروه دست نمی‌خورند:
+ * فقط صفحه‌های همان زبان.
+ */
+if ( ! function_exists( 'topersia_g_fact_count' ) ) {
+	function topersia_g_fact_count( $post_id, $group_key ) {
+
+		$origin = topersia_g_default_id( $post_id );
+
+		return (int) topersia_g_in_default_lang( function () use ( $origin, $group_key ) {
+			return count( topersia_g_group_ids( $origin, topersia_g_group( $origin, $group_key ) ) );
+		} );
+	}
+}
+/**
  * یک خانۀ کارت آمار — برچسب و مقدارِ آمادۀ چاپ، یا null اگر داده نیست.
  *
  *   capital         مرکز یا پایتخت از رابطۀ یک‌به‌یک، با پیوند
@@ -2071,9 +2133,9 @@ if ( ! function_exists( 'topersia_g_stat_cell' ) ) {
 
 			$labels = array( 'provinces' => __( 'شمار استان‌ها', 'topersia' ) );
 			$group  = substr( $key, 6 );
-			$ids    = isset( $labels[ $group ] ) ? topersia_g_group_ids( $post_id, topersia_g_group( $post_id, $group ) ) : array();
+			$count  = isset( $labels[ $group ] ) ? topersia_g_fact_count( $post_id, $group ) : 0;
 
-			return $ids ? array( $labels[ $group ], esc_html( topersia_g_fa( count( $ids ) ) ) ) : null;
+			return $count ? array( $labels[ $group ], esc_html( topersia_g_fa( $count ) ) ) : null;
 		}
 
 		$map = topersia_g_map();

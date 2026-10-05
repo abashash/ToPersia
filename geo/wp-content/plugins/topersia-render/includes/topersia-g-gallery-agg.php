@@ -100,39 +100,14 @@ if ( ! function_exists( 'topersia_g_gallery_own_ids' ) ) {
  */
 if ( ! function_exists( 'topersia_g_gallery_agg_in_default_lang' ) ) {
 	function topersia_g_gallery_agg_in_default_lang( callable $fn ) {
-
-		$default = apply_filters( 'wpml_default_language', null );
-		$current = apply_filters( 'wpml_current_language', null );
-
-		if ( ! $default || $default === $current ) {
-			return $fn();
-		}
-
-		do_action( 'wpml_switch_language', $default );
-
-		try {
-			return $fn();
-		} finally {
-			do_action( 'wpml_switch_language', $current );
-		}
+		return topersia_g_in_default_lang( $fn );   /* یک پیاده‌سازی، با آمار حقیقی P5-D306 — zones */
 	}
 }
 
 /** پست زبان اصلی WPML (یا خودش). متای مشتق فقط آن‌جا. */
 if ( ! function_exists( 'topersia_g_gallery_agg_primary' ) ) {
 	function topersia_g_gallery_agg_primary( $post_id ) {
-
-		$post_id = absint( $post_id );
-		$type    = (string) get_post_type( $post_id );
-		$default = apply_filters( 'wpml_default_language', null );
-
-		if ( '' === $type || ! $default ) {
-			return $post_id;
-		}
-
-		$primary = absint( apply_filters( 'wpml_object_id', $post_id, $type, false, $default ) );
-
-		return $primary ? $primary : $post_id;
+		return topersia_g_default_id( $post_id );
 	}
 }
 

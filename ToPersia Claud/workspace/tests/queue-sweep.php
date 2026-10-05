@@ -25,7 +25,12 @@ function tp_queue_floor() {
 /** بزرگ‌ترین شناسۀ پست پیش از آزمون — برای tp_wpml_sweep. */
 function tp_post_floor() {
 	global $wpdb;
-	return (int) $wpdb->get_var( "SELECT COALESCE( MAX( ID ), 0 ) FROM {$wpdb->posts}" );
+	$floor = (int) $wpdb->get_var( "SELECT COALESCE( MAX( ID ), 0 ) FROM {$wpdb->posts}" );
+	/* نخستین کف همین فرایند — tp_test_delete پستی را که پیش از آزمون بوده هرگز پاک نمی‌کند (قاعدۀ ۱۶) */
+	if ( ! isset( $GLOBALS['tp_test_floor'] ) ) {
+		$GLOBALS['tp_test_floor'] = $floor;
+	}
+	return $floor;
 }
 
 /**
@@ -99,6 +104,11 @@ function tp_test_delete( $id, $marker = null ) {
 	}
 	if ( '' === $want || $want !== (string) get_post_meta( $id, '_tp_test_marker', true ) ) {
 		fwrite( STDERR, "قاعدۀ ۱۶: #{$id} نشانگر این آزمون را ندارد — پاک نشد\n" );
+		return false;
+	}
+	/* دو قفل: نشانگر، و (در همان فرایند) شناسۀ بالای کفِ آغاز آزمون */
+	if ( null === $marker && isset( $GLOBALS['tp_test_floor'] ) && $id <= (int) $GLOBALS['tp_test_floor'] ) {
+		fwrite( STDERR, "قاعدۀ ۱۶: #{$id} پیش از آزمون بود — پاک نشد\n" );
 		return false;
 	}
 	return (bool) wp_delete_post( $id, true );
