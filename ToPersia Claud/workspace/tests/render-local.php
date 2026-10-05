@@ -54,6 +54,8 @@ function mut( $label, callable $claim, $real, $mutant, $note = '' ) {
 
 function section( $s ) { echo "\n{$s}\n" . str_repeat( '─', 78 ) . "\n"; }
 
+require_once __DIR__ . '/queue-sweep.php';   /* tp_test_mark · tp_test_delete — قاعدۀ ۱۶ */
+
 $cleanup = array( 'posts' => array(), 'rel' => array() );
 
 register_shutdown_function( function () use ( &$cleanup ) {
@@ -62,7 +64,7 @@ register_shutdown_function( function () use ( &$cleanup ) {
 		if ( $rel ) { $rel->delete_rows( $r[1], $r[2] ); }
 	}
 	foreach ( $cleanup['posts'] as $p ) {
-		wp_delete_post( $p, true );
+		tp_test_delete( $p );
 	}
 } );
 
@@ -73,6 +75,7 @@ function tmp_post( $type, $title, $status = 'publish' ) {
 		exit( 2 );
 	}
 	/* پستِ ساختۀ خط فرمان زبان WPML نمی‌گیرد و دروازۀ زبان (P5-D247) کنارش می‌گذارد — مثل ویرایشگر، فارسی */
+	tp_test_mark( $id );
 	do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_' . $type, 'trid' => false, 'language_code' => 'fa' ) );
 	$GLOBALS['cleanup']['posts'][] = $id;
 	return (int) $id;

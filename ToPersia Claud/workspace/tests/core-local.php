@@ -85,7 +85,7 @@ register_shutdown_function( function () use ( &$restore_options, &$cleanup ) {
 		delete_post_meta( $m[0], $m[1] );
 	}
 	foreach ( $cleanup['posts'] as $p ) {
-		wp_delete_post( $p, true );
+		tp_test_delete( $p );   /* قاعدۀ ۱۶ */
 	}
 	tp_queue_sweep( $cleanup['queue'] );
 	tp_wpml_sweep( $cleanup['post_floor'] );
@@ -99,6 +99,7 @@ function tmp_post( $type, $title, $status = 'publish', array $meta = array() ) {
 		fwrite( STDERR, 'tmp_post: ' . $id->get_error_message() . "\n" );
 		exit( 2 );
 	}
+	tp_test_mark( $id );
 	foreach ( $meta as $k => $v ) { update_post_meta( $id, $k, $v ); }
 	$GLOBALS['cleanup']['posts'][] = $id;
 	return (int) $id;

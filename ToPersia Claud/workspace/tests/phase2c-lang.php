@@ -5,7 +5,8 @@
  *   php tests/phase2c-lang.php setup          برای هر نوع صفحه‌دار یک پست فارسی منتشرشده و ترجمۀ
  *                                             en و ar آن — موجود، یا موقت با درون‌ریزی ترجمۀ ۲ج٫۹ و
  *                                             انتشار. JSON: pages (نوع ← fa · en · ar) · made · run · floor
- *   php tests/phase2c-lang.php cleanup <b64>  پست‌های موقت، ردیف‌های لاگ درون‌ریزی و کارهای صف
+ *   php tests/phase2c-lang.php cleanup <b64>  پست‌های موقت (فقط با نشانگر همان run — قاعدۀ ۱۶)، ردیف‌های لاگ درون‌ریزی و کارهای صف
+ *   php tests/phase2c-lang.php gaps           شمار شکاف ترجمۀ هر زبان — وصلۀ ۲ج و۱ (فقط خواندن)
  *
  * ترجمۀ موقت فقط عنوان دارد (نام همان زبان، یا انگلیسی)؛ بقیه copy از پست فارسی و
  * رابطه با هم‌گام‌سازی گارددار ۲ج٫۹ — همان چیزی که ویرایشگر ترجمه می‌سازد.
@@ -105,7 +106,7 @@ if ( 'setup' === $cmd ) {
 					$row[ $lang ] = '';
 					continue;
 				}
-				$made[]        = $tr;
+				$made[]        = tp_test_mark( $tr, $run );   /* قاعدۀ ۱۶ — نشانگر همان run */
 				$row['made'][] = $lang;
 				wp_update_post( array( 'ID' => $tr, 'post_status' => 'publish' ) );
 			}
@@ -120,6 +121,12 @@ if ( 'setup' === $cmd ) {
 	exit( 0 );
 }
 
+/* وصلۀ ۲ج و۱ — شمار شکاف ترجمۀ هر زبان (فقط خواندن) */
+if ( 'gaps' === $cmd ) {
+	echo wp_json_encode( function_exists( 'topersia_i18n_gaps' ) ? topersia_i18n_gap_counts( topersia_i18n_gaps() ) : new stdClass() ), "\n";
+	exit( 0 );
+}
+
 if ( 'cleanup' === $cmd ) {
 
 	$data = isset( $argv[2] ) ? json_decode( (string) base64_decode( $argv[2] ), true ) : null;
@@ -130,7 +137,7 @@ if ( 'cleanup' === $cmd ) {
 	}
 
 	foreach ( (array) $data['made'] as $id ) {
-		wp_delete_post( (int) $id, true );
+		tp_test_delete( (int) $id, (string) $data['run'] );   /* فقط ترجمۀ دارای نشانگر همین run */
 	}
 
 	if ( ! empty( $data['run'] ) && 0 === strpos( (string) $data['run'], 'imp-test-2c8-' ) ) {

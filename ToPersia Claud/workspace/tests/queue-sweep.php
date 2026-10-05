@@ -63,3 +63,43 @@ function tp_queue_sweep( $floor ) {
 	}
 	return $n;
 }
+
+/*
+ * قاعدۀ ۱۶ (رخداد #171، ۵ اکتبر): هیچ آزمونی پستی را که خودش نساخته پاک یا
+ * بازنویسی نمی‌کند. پست موقت درست پس از ساخت نشانگر `_tp_test_marker` می‌گیرد
+ * و پاک‌سازی فقط پستی را برمی‌دارد که همان نشانگر را دارد — شناسۀ اشتباه در
+ * فهرست پاک‌سازی پست واقعی را نمی‌برد. دو فرایند جدا (setup · cleanup) نشانگر
+ * را صریح می‌دهند.
+ */
+
+/** نشانگر این اجرا. */
+function tp_test_marker() {
+	static $m = null;
+	if ( null === $m ) {
+		$m = 'tp-test-' . gmdate( 'YmdHis' ) . '-' . getmypid();
+	}
+	return $m;
+}
+
+/** نشانگر روی پستی که آزمون همین حالا ساخت. */
+function tp_test_mark( $id, $marker = null ) {
+	$id = (int) $id;
+	if ( $id > 0 ) {
+		update_post_meta( $id, '_tp_test_marker', null === $marker ? tp_test_marker() : (string) $marker );
+	}
+	return $id;
+}
+
+/** پاک‌کردن فقط پستی که همین نشانگر را دارد؛ بقیه دست نمی‌خورد و گزارش می‌شود. */
+function tp_test_delete( $id, $marker = null ) {
+	$id   = (int) $id;
+	$want = null === $marker ? tp_test_marker() : (string) $marker;
+	if ( $id <= 0 || ! get_post( $id ) ) {
+		return false;
+	}
+	if ( '' === $want || $want !== (string) get_post_meta( $id, '_tp_test_marker', true ) ) {
+		fwrite( STDERR, "قاعدۀ ۱۶: #{$id} نشانگر این آزمون را ندارد — پاک نشد\n" );
+		return false;
+	}
+	return (bool) wp_delete_post( $id, true );
+}

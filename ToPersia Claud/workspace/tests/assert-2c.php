@@ -321,3 +321,38 @@ unset( $GLOBALS['tp_meta'][990802] );
 tp441_mut( 'دروازهٔ زبان برای آرایه: فقط مقدارها سنجیده می‌شوند — repeater فارسی با کلیدهای لاتین در /en/ خالی، گزینه‌های نامکی می‌مانند',
 	function ( $x ) { return array() === $x['rep'] && array( 'late-spring', 'early-autumn' ) === $x['slugs']; },
 	$rep8, array_merge( $rep8, array( 'rep' => array( array( 'fact_label_text' => 'جمعیت', 'fact_value_text' => 'زیاد' ) ) ) ) );
+
+/* ══ وصلۀ ۲ج و۱ — گزارش شکاف ترجمه (P5-D305) ════════════════════════════ */
+
+echo "\nوصلۀ ۲ج — و۱ گزارش شکاف ترجمه  P5-D305\n" . str_repeat( '─', 78 ) . "\n";
+
+$gap2c  = is_file( $core2c . '/includes/topersia-i18n-gaps.php' ) ? file_get_contents( $core2c . '/includes/topersia-i18n-gaps.php' ) : '';
+$pack2c = is_file( $core2c . '/includes/topersia-pack.php' ) ? file_get_contents( $core2c . '/includes/topersia-pack.php' ) : '';
+
+tp441_mut( 'گزارش هیچ نمی‌نویسد: در پروندۀ گزارش هیچ نوشتن متا، پست، گزینه، transient یا پرس‌وجوی نوشتنی نیست (در لحظه از داده؛ بی جدول و متای تازه)',
+	function ( $s ) { return '' !== $s && ! preg_match( '/\b(update_post_meta|add_post_meta|delete_post_meta|wp_insert_post|wp_update_post|wp_delete_post|update_option|add_option|set_transient|wp_cache_set)\s*\(|\$wpdb->(insert|update|delete|query|replace)\s*\(/', $s ); },
+	$gap2c, $gap2c . "\nupdate_post_meta( 1, 'x', 'y' );" );
+
+tp441_mut( 'کلیدهای شکاف از کلاس translate خودِ تنظیمات WPML (topersia_pack_tr_keys)، نه فهرست دستی؛ عنوان و متن هم',
+	function ( $s ) { $b = tp2c_body( $s, 'topersia_i18n_post_gaps' ); return false !== strpos( $b, 'foreach ( topersia_pack_tr_keys( $type ) as $key )' ) && false !== strpos( $b, "array( 'post_title', 'post_content' )" ); },
+	$gap2c, str_replace( 'foreach ( topersia_pack_tr_keys( $type ) as $key )', "foreach ( array( 'official_language' ) as \$key )", $gap2c ) );
+
+tp441_mut( 'تشخیص خط همان render ۲ج٫۸: آستانۀ سه درصد حرف ویژۀ فارسی در عربی، عربی‌خط بیش از لاتین در بقیه، آرایه فقط با مقدار',
+	function ( $x ) {
+		$c = tp2c_body( $x[0], 'topersia_i18n_foreign' );
+		$r = tp2c_body( $x[1], 'topersia_g_foreign_text' );
+		$t = tp2c_body( $x[0], 'topersia_i18n_text' );
+		foreach ( array( '[\x{067E}\x{0686}\x{0698}\x{06AF}\x{06CC}\x{06A9}]', '0.03 * $arabic', "preg_match_all( '/\p{Latin}/u', \$text )" ) as $needle ) {
+			if ( false === strpos( $c, $needle ) || false === strpos( $r, $needle ) ) { return false; }
+		}
+		return false !== strpos( $t, 'array_walk_recursive' );
+	},
+	array( $gap2c, $zones2c ), array( str_replace( '0.03 * $arabic', '0.3 * $arabic', $gap2c ), $zones2c ) );
+
+tp441_mut( 'WP-CLI `wp topersia i18n-gaps` با --lang · --type · --format=table|csv|json؛ برون‌بری «what=gaps» همان قالب ۲ج٫۹ (topersia_i18n_gap_export)؛ کارت پیشخوان فقط با درخواست (gaps=1)',
+	function ( $x ) {
+		return false !== strpos( $x[0], "WP_CLI::add_command( 'topersia i18n-gaps'" ) && false !== strpos( $x[0], "\$assoc['lang']" ) && false !== strpos( $x[0], "\$assoc['type']" ) && false !== strpos( $x[0], "'json' === \$format" )
+			&& false !== strpos( $x[1], "if ( 'gaps' === \$what ) {" ) && false !== strpos( $x[1], 'topersia_i18n_gap_export( $tlang, $type )' )
+			&& false !== strpos( tp2c_body( $x[0], 'topersia_i18n_gaps_card' ), "'1' === \$_GET['gaps']" ) && false !== strpos( tp2c_body( $x[0], 'topersia_i18n_gap_export' ), 'topersia_pack_tr_export(' );
+	},
+	array( $gap2c, $pack2c ), array( $gap2c, str_replace( "if ( 'gaps' === \$what ) {", "if ( false ) {", $pack2c ) ) );

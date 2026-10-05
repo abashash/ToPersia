@@ -86,7 +86,7 @@ register_shutdown_function( function () {
 		foreach ( array_keys( topersia_pack_relations( get_post_type( $id ) ?: 'tp_city' ) ) as $k ) {
 			// یال‌ها با حذف پست پاک می‌شوند (cleanup_relation جت‌انجین)
 		}
-		wp_delete_post( $id, true );
+		tp_test_delete( $id );   /* قاعدۀ ۱۶ */
 	}
 	tp_queue_sweep( $c['queue'] );
 	tp_wpml_sweep( $c['post_floor'] );
@@ -109,6 +109,7 @@ function tmp_post( $type, $title, $status = 'publish', $meta = array() ) {
 		fwrite( STDERR, 'tmp_post: ' . $id->get_error_message() . "\n" );
 		exit( 2 );
 	}
+	tp_test_mark( $id );
 	do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_' . $type, 'trid' => false, 'language_code' => 'fa' ) );
 	$GLOBALS['cleanup']['posts'][] = (int) $id;
 	return (int) $id;
@@ -517,8 +518,8 @@ $d_run  = topersia_pack_parse( $file( array( $fa_post, $fa_post2 ) ) );
 $run1   = run_id( 'create' );
 $batch  = topersia_pack_run_batch( $d_run, 0, 1, $run1 );
 $b2     = topersia_pack_run_batch( $d_run, 1, 1, $run1 );
-$fa_id  = (int) $batch['results'][0]['target'];
-$fa2_id = (int) $b2['results'][0]['target'];
+$fa_id  = tp_test_mark( (int) $batch['results'][0]['target'] );
+$fa2_id = tp_test_mark( (int) $b2['results'][0]['target'] );
 $GLOBALS['cleanup']['posts'][] = $fa_id;
 $GLOBALS['cleanup']['posts'][] = $fa2_id;
 
@@ -625,7 +626,7 @@ $row_0   = $wpdb->get_row( $row_sql, ARRAY_A ); // phpcs:ignore WordPress.DB.Pre
 
 $run_tr = run_id( 'tr' );
 $r_tr   = topersia_pack_run_batch( $d_tr, 0, 3, $run_tr, 'translation' );
-$en_id  = (int) $r_tr['results'][0]['target'];
+$en_id  = tp_test_mark( (int) $r_tr['results'][0]['target'] );
 $GLOBALS['cleanup']['posts'][] = $en_id;
 
 $trid_fa = apply_filters( 'wpml_element_trid', null, $fa_id, 'post_tp_city' );

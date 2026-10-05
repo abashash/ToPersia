@@ -74,6 +74,8 @@ async function run( type, name ) {
 		const ctx = await browser.newContext( { viewport: { width: 1440, height: 900 }, acceptDownloads: true } );
 		await ctx.route( /topersia\.com/, r => r.abort() );
 		await ctx.addCookies( login.cookies );
+		/* پیشخوان محلی با WPML زیر بار کند است: کلیکی که ناوبری یا بارگیری راه می‌اندازد تا پایانش صبر می‌کند — سقف پیش‌فرض ۳۰ ثانیه در فایرفاکس کم بود */
+		ctx.setDefaultTimeout( 240000 );
 		const page = await ctx.newPage();
 		page.on( 'dialog', d => d.accept() );
 
@@ -140,6 +142,21 @@ async function run( type, name ) {
 		const trUndone = ( JSON.parse( php( [ 'tests/pack-admin-state.php', 'state', tag ] ) ).posts.find( p => 'en' === p.lang ) || {} ).status;
 		check( `${ name }: «آخرین درون‌ریزی» با نشان «ترجمه»؛ برگرداندن پست en را به زباله برد`,
 			/ترجمه/.test( trLast ) && 'trash' === trUndone, trLast.slice( 0, 120 ) + ' · ' + trUndone );
+
+		/* وصلۀ ۲ج و۱ · P5-D305 — کارت «گزارش شکاف ترجمه»: فقط با درخواست؛ هر سطر نوع دکمۀ برون‌بری همان قالب ۲ج٫۹ (برگۀ جدا تا بارگیری‌های پایین دست نخورند) */
+		const gp = await ctx.newPage();
+		await gp.goto( TAB, { waitUntil: 'load' } );
+		const gapsBefore = await gp.$$eval( '#tp-pack-gaps ~ table', t => t.length );
+		await Promise.all( [ gp.waitForNavigation( { waitUntil: 'load', timeout: 300000 } ), gp.click( 'a[href*="gaps=1"]' ) ] );
+		const gapHeads = await gp.$$eval( '#tp-pack-gaps ~ h3', hs => hs.map( h => h.textContent ) );
+		const gapLink  = await gp.getAttribute( 'a[href*="what=gaps"][href*="type=tp_city"]', 'href' ).catch( () => '' );
+		check( `${ name }: «گزارش شکاف ترجمه» فقط با «ساختن گزارش» — سپس یک سرتیتر برای هر زبان ترجمه با شمار، و دکمۀ برون‌بری برای هر نوع شکاف‌دار`,
+			0 === gapsBefore && gapHeads.length >= 2 && gapHeads.every( h => /پست بی ترجمه/.test( h ) ) && !! gapLink, gapHeads.join( ' | ' ) );
+		const gapTpl = await download( gp, () => gp.click( 'a[href*="what=gaps"][href*="type=tp_city"]' ) );
+		check( `${ name }: برون‌بری شکاف — topersia-geo-translation/1.0، scope=gaps، فقط tp_city، هر پست با translation_of`,
+			'topersia-geo-translation/1.0' === gapTpl.json.meta.schema && 'gaps' === gapTpl.json.meta.scope && 'tp_city' === gapTpl.json.meta.post_type
+			&& gapTpl.json.posts.length > 0 && gapTpl.json.posts.every( p => p.translation_of ), gapTpl.name + ' · ' + gapTpl.json.posts.length + ' پست' );
+		await gp.close();
 
 		/* بارگیری‌ها */
 		await page.selectOption( 'select[name=type]', 'tp_city' );

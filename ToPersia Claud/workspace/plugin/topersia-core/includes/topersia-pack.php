@@ -3183,6 +3183,11 @@ function topersia_pack_admin_render() {
 		echo '</form>';
 
 		echo '</div>';
+
+		/* ۱۹-ز — گزارش شکاف ترجمه (P5-D305)؛ فقط با درخواست ساخته می‌شود */
+		if ( function_exists( 'topersia_i18n_gaps_card' ) ) {
+			topersia_i18n_gaps_card( $export, $nonce );
+		}
 	}
 
 	if ( $error ) {
@@ -3488,7 +3493,15 @@ function topersia_pack_download() {
 	/* قالب و برون‌بری اصلی فقط زبان پیش‌فرض — ۲ج٫۹ · P5-D283 */
 	$lang = topersia_pack_default_language();
 
-	if ( 'translation' === $what ) {
+	if ( 'gaps' === $what ) {
+		/* ۱۹-ز — قالب ترجمه فقط برای پست‌ها و فیلدهای شکاف‌دار یک زبان و یک نوع (P5-D305) */
+		$tlang = isset( $_GET['tlang'] ) ? sanitize_key( $_GET['tlang'] ) : '';
+		$body  = function_exists( 'topersia_i18n_gap_export' ) && topersia_is_entity( $type ) ? topersia_i18n_gap_export( $tlang, $type ) : null;
+		if ( ! $body ) {
+			wp_die( 'برای این زبان و نوع شکافی نیست، یا زبان از زبان‌های ترجمۀ فعال WPML نیست.' );
+		}
+		$name = 'topersia-translation-gaps-' . $type . '-' . $tlang . '.json';
+	} elseif ( 'translation' === $what ) {
 		$tlang = isset( $_GET['tlang'] ) ? sanitize_key( $_GET['tlang'] ) : '';
 		$body  = topersia_pack_tr_export( $ids, $tlang );
 		if ( ! $body ) {

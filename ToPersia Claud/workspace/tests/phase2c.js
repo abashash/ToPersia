@@ -121,6 +121,13 @@ async function weatherSettled( page ) {
 }
 
 ( async () => {
+	/* وصلۀ ۲ج و۱ · P5-D305 — پنهان‌شدن بی‌صدا نه: شمار شکاف ترجمۀ هر زبان، پیش از ترجمه‌های موقت، هشدار (نه شکست) */
+	if ( want( 'lang' ) ) {
+		const G = JSON.parse( execFileSync( PHP, [ path.join( __dirname, 'phase2c-lang.php' ), 'gaps' ], { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'inherit' ] } ) );
+		for ( const [ lang, c ] of Object.entries( G ) ) {
+			console.log( `  ⚠︎ شکاف ترجمه ${ lang }: ${ c.missing } پست فارسی بی ترجمه · ${ c.partial } ترجمۀ شکاف‌دار (${ c.cells } خانه) — wp topersia i18n-gaps --lang=${ lang }` );
+		}
+	}
 	const L = want( 'lang' ) ? langPages() : null;
 	try {
 	for ( const [ bname, engine ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ] ) {

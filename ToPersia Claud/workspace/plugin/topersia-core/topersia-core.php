@@ -897,6 +897,7 @@ require_once __DIR__ . '/includes/topersia-services.php';
 require_once __DIR__ . '/includes/topersia-cache.php';
 require_once __DIR__ . '/includes/topersia-fold.php';
 require_once __DIR__ . '/includes/topersia-pack.php';
+require_once __DIR__ . '/includes/topersia-i18n-gaps.php';   /* ۱۹-ز گزارش شکاف ترجمه — وصلۀ ۲ج و۱ · P5-D305 */
 
 /*
  * صف پس‌زمینۀ واحد — Action Scheduler 3.9.3 بسته‌بندی‌شده در خود هسته (P5-D290).

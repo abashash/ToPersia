@@ -63,7 +63,7 @@ register_shutdown_function( function () use ( &$cleanup ) {
 		if ( $rel ) { $rel->delete_rows( $r[1], $r[2] ); }
 	}
 	foreach ( $cleanup['posts'] as $p ) {
-		wp_delete_post( $p, true );
+		tp_test_delete( $p );   /* قاعدۀ ۱۶ */
 	}
 	/* پاک‌شدن پست موقت والدهای تجمیعی را در صف گذاشت — اجرا، و ردیف‌های صفِ ساختۀ آزمون پاک */
 	tp_queue_sweep( $cleanup['as_floor'] );
@@ -78,6 +78,7 @@ function tmp_post( $type, $title, $status = 'publish', $meta = array() ) {
 	}
 	/* پستِ ساختۀ خط فرمان زبان WPML نمی‌گیرد و دروازۀ زبان (P5-D247) کنارش می‌گذارد — مثل ویرایشگر، فارسی */
 	do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_' . $type, 'trid' => false, 'language_code' => 'fa' ) );
+	tp_test_mark( $id );
 	foreach ( $meta as $k => $v ) { update_post_meta( $id, $k, $v ); }
 	$GLOBALS['cleanup']['posts'][] = $id;
 	return (int) $id;
@@ -559,6 +560,7 @@ $g5_tr = function ( $src, $lang, $title ) {
 	$type = get_post_type( $src );
 	$trid = apply_filters( 'wpml_element_trid', null, $src, 'post_' . $type );
 	$id   = wp_insert_post( array( 'post_type' => $type, 'post_status' => 'publish', 'post_title' => $title, 'post_name' => sanitize_title( $title ), 'post_content' => '' ), true );
+	tp_test_mark( $id );
 	do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_' . $type, 'trid' => $trid, 'language_code' => $lang, 'source_language_code' => 'fa' ) );
 	$GLOBALS['cleanup']['posts'][] = (int) $id;
 	return (int) $id;
@@ -679,7 +681,7 @@ foreach ( array_reverse( array_slice( $cleanup['rel'], $g5_rel_mark ) ) as $r ) 
 	topersia_relation( $r[0] )->delete_rows( $r[1], $r[2] );
 }
 foreach ( array_slice( $cleanup['posts'], $g5_post_mark ) as $p ) {
-	wp_delete_post( $p, true );
+	tp_test_delete( $p );
 }
 $g5_drain();
 $g5_after = array( topersia_g_gallery_agg_stored( $country ), topersia_g_gallery_agg_stored( $g5_isf ) );
@@ -780,13 +782,13 @@ $s10_r   = topersia_pack_apply( topersia_pack_parse( wp_json_encode( array(
 	'meta'  => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_city', 'language' => 'fa' ),
 	'posts' => array( array( 'title' => '', 'fields' => array( 'name_fa' => 'شهر نامک درون‌ریزی ۲ج٫۱۰', 'name_en' => 'Import Slug Twoc Ten' ), 'relations' => array() ) ),
 ) ) ), 0, $s10_run );
-$s10_i = (int) $s10_r['target'];
+$s10_i = tp_test_mark( (int) $s10_r['target'] );
 $cleanup['posts'][] = $s10_i;
 
 $s10_tpl = topersia_pack_tr_export( array( $s10_i ), 'en' );
 $s10_tpl['posts'][0]['title']['value'] = 'Import Slug Twoc Ten';
 $s10_tr = topersia_pack_tr_apply( topersia_pack_tr_parse( wp_json_encode( $s10_tpl ) ), 0, $s10_run );
-$s10_t  = (int) $s10_tr['target'];
+$s10_t  = tp_test_mark( (int) $s10_tr['target'] );
 $cleanup['posts'][] = $s10_t;
 $s10_t_draft = get_post_field( 'post_name', $s10_t );
 wp_update_post( array( 'ID' => $s10_i, 'post_status' => 'publish' ) );
@@ -838,6 +840,76 @@ foreach ( $s10_num as $line ) {
 }
 
 $wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $s10_run . '"' ) . '%' ) );
+
+/* ══ وصلۀ ۲ج و۱ — گزارش شکاف ترجمه  P5-D305 ════════════════════════════ */
+section( 'وصلۀ ۲ج و۱ — گزارش شکاف ترجمه  P5-D305' );
+
+/* کشور فارسیِ موقت (نشانگر قاعدۀ ۱۶) — گزارش به Iran و ترجمه‌های واقعی‌اش وابسته نیست */
+$v1_fa  = tmp_post( 'tp_country', 'کشور آزمون شکاف ۲ج', 'publish', array( 'official_language' => 'فارسی', 'name_fa' => 'کشور آزمون شکاف' ) );
+$v1_row = function ( $gaps, $id, $kind ) {
+	foreach ( isset( $gaps['en']['tp_country'][ $kind ] ) ? $gaps['en']['tp_country'][ $kind ] : array() as $row ) {
+		if ( ( 'missing' === $kind && (int) $row === $id ) || ( 'partial' === $kind && (int) $row['translation'] === $id ) ) {
+			return $row;
+		}
+	}
+	return null;
+};
+$v1_meta = function () use ( $wpdb ) {
+	return $wpdb->get_row( "SELECT COUNT(*) AS n, MAX(meta_id) AS m FROM {$wpdb->postmeta}", ARRAY_A ) + $wpdb->get_row( "SELECT COUNT(*) AS p, MAX(ID) AS i FROM {$wpdb->posts}", ARRAY_A );
+};
+
+$v1_m0   = $v1_meta();
+$v1_gap0 = topersia_i18n_gaps( 'en', 'tp_country' );
+$v1_m1   = $v1_meta();
+t( 'گزارش هیچ نمی‌نویسد: شمار و بیشینۀ شناسۀ متا و پست پیش و پس از ساختن گزارش یکی', $v1_m0 === $v1_m1, wp_json_encode( array( $v1_m0, $v1_m1 ) ) );
+t( 'شکاف ۱: کشور فارسی منتشرشدۀ بی ترجمۀ انگلیسی در «بی ترجمه»', null !== $v1_row( $v1_gap0, $v1_fa, 'missing' ) );
+
+/* ترجمۀ آزمایشی با چرخۀ ۲ج٫۹ (فقط عنوان)، سپس official_language فارسی — همان رونوشت اسکریپت عکس */
+$v1_run = 'imp-test-2cv1-' . strtolower( wp_generate_password( 6, false, false ) );
+$v1_tpl = topersia_pack_tr_export( array( $v1_fa ), 'en' );
+$v1_tpl['posts'][0]['title']['value'] = 'Gap Test Country';
+$v1_tr  = topersia_pack_tr_apply( topersia_pack_tr_parse( wp_json_encode( $v1_tpl ) ), 0, $v1_run );
+$v1_en  = tp_test_mark( (int) $v1_tr['target'] );
+$cleanup['posts'][] = $v1_en;
+update_post_meta( $v1_en, 'official_language', 'فارسی' );
+$v1_gapA = topersia_i18n_gaps( 'en', 'tp_country' );
+$v1_expA = topersia_i18n_gap_export( 'en', 'tp_country' );
+update_post_meta( $v1_en, 'official_language', 'Persian' );
+$v1_gapB = topersia_i18n_gaps( 'en', 'tp_country' );
+
+$v1_rowA = $v1_row( $v1_gapA, $v1_en, 'partial' );
+$v1_rowB = $v1_row( $v1_gapB, $v1_en, 'partial' );
+mut( 'شکاف ۲: ترجمه با official_language فارسی ← «برابر فارسی» در گزارش؛ پرشده («Persian») ← بیرون از گزارش. کلیدها از کلاس translate واقعی WPML',
+	function ( $x ) { return $x[0] && 'same' === ( $x[0]['fields']['official_language'] ?? '' ) && ( ! $x[1] || ! isset( $x[1]['fields']['official_language'] ) ) && in_array( 'official_language', topersia_pack_tr_keys( 'tp_country' ), true ); },
+	array( $v1_rowA, $v1_rowB ), array( $v1_rowA, $v1_rowA ), wp_json_encode( array( $v1_rowA, $v1_rowB ), JSON_UNESCAPED_UNICODE ) );
+
+/* برون‌بری شکاف: همان قالب ۲ج٫۹، فقط پست و فیلد شکاف‌دار */
+$v1_post = null;
+foreach ( (array) ( $v1_expA['posts'] ?? array() ) as $p ) {
+	if ( topersia_i18n_original_of( $p['translation_of'], 'tp_country' ) === $v1_fa ) {
+		$v1_post = $p;
+	}
+}
+$v1_keys = $v1_post ? array_keys( get_object_vars( $v1_post['fields'] ) ) : array();
+t( 'برون‌بری شکاف: پروندۀ topersia-geo-translation با scope=gaps؛ پست آزمون فقط با فیلدهای شکاف‌دارش (official_language هست، فیلد بی شکاف نه)',
+	$v1_expA && TOPERSIA_PACK_TR_SCHEMA === $v1_expA['meta']['schema'] && 'gaps' === $v1_expA['meta']['scope'] && in_array( 'official_language', $v1_keys, true )
+	&& ! array_diff( $v1_keys, array_keys( $v1_rowA['fields'] ) ),
+	implode( ' · ', $v1_keys ) );
+
+/* تشخیص خط همان render ۲ج٫۸ — دو پیاده‌سازی، یک پاسخ */
+$v1_samples = array( 'فارسی', 'Persian', 'Isfahan (اصفهان)', 'الفارسية', 'اللغة الفارسية الرسمية', 'زبان رسمی کشور ایران', array( 'k_latin_key_name' => 'جمعیت' ), '' );
+$v1_same    = true;
+foreach ( array( 'en', 'ar' ) as $v1_l ) {
+	$v1_g = topersia_i18n_in_lang( $v1_l, function () use ( $v1_samples ) {
+		return array_map( function ( $s ) { return topersia_g_foreign_text( is_array( $s ) ? implode( ' ', $s ) : $s ); }, $v1_samples );
+	} );
+	$v1_c = array_map( function ( $s ) use ( $v1_l ) { return topersia_i18n_foreign( $s, $v1_l ); }, $v1_samples );
+	$v1_same = $v1_same && $v1_g === $v1_c;
+}
+t( 'تشخیص خط: topersia_i18n_foreign (هسته) و topersia_g_foreign_text (render) روی نمونه‌ها در en و ar یک پاسخ — آرایه فقط با مقدار', $v1_same );
+
+/* پاک‌سازی: فقط پست‌های همین آزمون (نشانگر) و ردیف‌های لاگ همین run */
+$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $v1_run . '"' ) . '%' ) );
 
 /* ══ پایان ══════════════════════════════════════════════════════════ */
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pass']}   افتاده: {$GLOBALS['fail']}\n";
