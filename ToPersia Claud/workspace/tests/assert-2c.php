@@ -308,3 +308,16 @@ tp441_mut( 'جداساز: مقدار لاتین bdi[dir=ltr]؛ عبارت فار
 			&& '<bdi dir="rtl">آخرین موفق: —</bdi>' === $b['empty'] && '<bdi dir="rtl">آخرین موفق: <bdi dir="ltr">2026-10-05 11:09</bdi></bdi>' === $b['pair'];
 	},
 	$bdi11, str_replace( '<bdi dir="rtl">endpoint', '<bdi>endpoint', $bdi11 ) );
+
+/* بازبینی پایان فاز: آرایه — فقط مقدارها؛ کلید لاتین زیرفیلد چیرگی متن فارسی را نمی‌پوشاند */
+$GLOBALS['tp_meta'][990802] = array(
+	'tp_rep'   => array( array( 'fact_label_text' => 'جمعیت', 'fact_value_text' => 'زیاد' ) ),
+	'tp_slugs' => array( 'late-spring', 'early-autumn' ),
+);
+$rep8 = tp442_lang( 'en', function () {
+	return array( 'rep' => topersia_g_raw( 990802, 'tp_rep' ), 'slugs' => topersia_g_raw( 990802, 'tp_slugs' ) );
+} );
+unset( $GLOBALS['tp_meta'][990802] );
+tp441_mut( 'دروازهٔ زبان برای آرایه: فقط مقدارها سنجیده می‌شوند — repeater فارسی با کلیدهای لاتین در /en/ خالی، گزینه‌های نامکی می‌مانند',
+	function ( $x ) { return array() === $x['rep'] && array( 'late-spring', 'early-autumn' ) === $x['slugs']; },
+	$rep8, array_merge( $rep8, array( 'rep' => array( array( 'fact_label_text' => 'جمعیت', 'fact_value_text' => 'زیاد' ) ) ) ) );

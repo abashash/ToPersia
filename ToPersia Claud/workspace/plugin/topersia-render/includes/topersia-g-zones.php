@@ -197,7 +197,18 @@ if ( ! function_exists( 'topersia_g_untranslated' ) ) {
 			return false;
 		}
 
-		$text = is_array( $value ) || is_object( $value ) ? (string) wp_json_encode( $value, JSON_UNESCAPED_UNICODE ) : (string) $value;
+		/* آرایه (repeater، چندگزینه‌ای): فقط مقدارها — کلیدهای لاتین زیرفیلد چیرگی متن فارسی را نپوشانند */
+		if ( is_array( $value ) || is_object( $value ) ) {
+			$parts = array();
+			array_walk_recursive( $value, function ( $v ) use ( &$parts ) {
+				if ( is_scalar( $v ) ) {
+					$parts[] = (string) $v;
+				}
+			} );
+			$text = implode( ' ', $parts );
+		} else {
+			$text = (string) $value;
+		}
 
 		return topersia_g_foreign_text( wp_strip_all_tags( $text ) );
 	}

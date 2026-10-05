@@ -60,6 +60,7 @@ if ( 'snapshot' === $cmd ) {
 	echo wp_json_encode( array(
 		'entities' => array_map( function ( $r ) { return array( (int) $r['id'], base64_encode( (string) $r['data'] ) ); }, $rows ),
 		'floor'    => (int) $wpdb->get_var( "SELECT COALESCE( MAX(id), 0 ) FROM {$backups}" ),
+		'at'       => time(),
 		'files'    => tp_dup_files(),
 	) );
 	exit( 0 );
@@ -127,7 +128,7 @@ if ( 'delete' === $cmd ) {
 /* هر پرونده و پوشۀ تازه زیر duplicator-backups که در عکس نبود — فقط ساختۀ همین آزمون */
 if ( 'sweep' === $cmd ) {
 	$snap = json_decode( (string) file_get_contents( 'php://stdin' ), true );
-	if ( ! is_array( $snap ) || ! isset( $snap['files'] ) ) {
+	if ( ! is_array( $snap ) || ! isset( $snap['files'], $snap['at'] ) ) {
 		fwrite( STDERR, "عکس نامعتبر\n" );
 		exit( 2 );
 	}
@@ -135,7 +136,8 @@ if ( 'sweep' === $cmd ) {
 	$keep    = array_flip( $snap['files'] );
 	$removed = array();
 	foreach ( tp_dup_files() as $rel ) {
-		if ( ! isset( $keep[ $rel ] ) && is_file( $root . '/' . $rel ) ) {
+		/* فقط پرونده‌ای که پس از عکس ساخته یا نوشته شد — نه پروندۀ هم‌زمان کس دیگر پیش از آزمون */
+		if ( ! isset( $keep[ $rel ] ) && is_file( $root . '/' . $rel ) && filemtime( $root . '/' . $rel ) >= (int) $snap['at'] - 2 ) {
 			unlink( $root . '/' . $rel );
 			$removed[] = $rel;
 		}

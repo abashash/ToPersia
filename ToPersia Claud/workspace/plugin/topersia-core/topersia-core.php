@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Core Functions
  * Description: توابع اختصاصی سایت ToPersia — اسلاگ لاتین از نام انگلیسیِ کیوریت‌شده، شناسۀ یکتای موجودیت، ریدایرکت موجودیت‌های گراف‌فقط (G4)، منطق مسیرهای گردشگری (P9)، قاعدۀ سراسری وضعیت ردیف، یکپارچگی Rank Math، پنهان‌سازی مسیر نصب، کاهش اثر انگشت، و پنل تنظیمات و تشخیص. موتور دادۀ ساختاریافته در افزونۀ جداگانۀ topersia-schema است.
- * Version: 4.12.1
+ * Version: 4.13.0
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-core
@@ -40,6 +40,15 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
+ * 4.13.0 — SPRINT-4.4 فاز ۲ج.
+ *        — صف واحد: Action Scheduler 3.9.3 بسته‌بندی‌شده در vendor/ (P5-D290)؛
+ *          includes/topersia-queue.php (گروه topersia، ادغام فقط با کار در انتظار).
+ *        — بخش ۱۹-و درون‌ریزی ترجمه (P5-D283): درون‌ریزی اصلی فقط زبان پیش‌فرض؛
+ *          قالب ترجمه topersia-geo-translation/1.0، پیوند trid، copy با WPML،
+ *          needs_verification پس از ذخیرۀ پایانی، برگشت‌پذیر. یادداشت نامک ۲ج٫۱۰.
+ *        — صفحۀ سرویس‌های خارجی (۲ج٫۱۱): جهت پیشخوان، ستون‌های بی بریدگی،
+ *          vertical-align:middle، رادیو و textarea خودبلندشونده، جداساز لاتین.
+ *
  * 4.12.1 — سرویس‌های خارجی: تولید متن (ai.text) بیرون — کلیدش در خلاصه‌ساز (خواستۀ
  *          کاربر)؛ ElevenLabs در صدای هوش مصنوعی؛ «+ ارائه‌دهندۀ دوم» برای سرویس‌های
  *          چندآداپتوری با بازگشت خودکار؛ چیدمان صفحه (ستون ثابت، فیلد تمام‌پهنا، حاشیه).
@@ -494,7 +503,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ هسته — افزونۀ شِما این را برای بررسی سازگاری می‌خواند. */
 if ( ! defined( 'TOPERSIA_CORE_VERSION' ) ) {
-	define( 'TOPERSIA_CORE_VERSION', '4.12.1' );
+	define( 'TOPERSIA_CORE_VERSION', '4.13.0' );
 }
 
 /** کلید تنها گزینۀ پایگاه‌داده — همه‌چیز در یک آرایۀ autoload ذخیره می‌شود. */
@@ -1532,7 +1541,7 @@ function topersia_log_export_build( $filters = array() ) {
 	/* ── لایۀ یک: محیط ── */
 	$out  = "=== ToPersia — خروجی لاگ رویدادها ===\n";
 	$out .= topersia_log_export_line( 'تولید', gmdate( 'Y-m-d H:i' ) . ' UTC' );
-	$out .= topersia_log_export_line( 'هستۀ ToPersia', defined( 'TOPERSIA_CORE_VERSION' ) ? TOPERSIA_CORE_VERSION : '4.12.1' );
+	$out .= topersia_log_export_line( 'هستۀ ToPersia', defined( 'TOPERSIA_CORE_VERSION' ) ? TOPERSIA_CORE_VERSION : '4.13.0' );
 	$out .= topersia_log_export_line( 'WordPress', get_bloginfo( 'version' ) );
 	$out .= topersia_log_export_line( 'PHP', PHP_VERSION );
 	$out .= topersia_log_export_line( 'سایت', home_url( '/' ) );
