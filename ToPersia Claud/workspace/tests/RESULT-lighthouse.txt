@@ -1,3 +1,55 @@
+پایان فاز ۲ج — بودجهٔ کارایی (بند ۸ · P5-D264) · ۵ اکتبر ۲۰۲۶ · Lighthouse 13.5.0 (نصب در %LOCALAPPDATA%\topersia-tools\lighthouse)
+روش: A = زیپ‌های dist نسخهٔ پیشین (render 4.4.3 · core 4.12.1) موقتاً روی topersia.local — diff با زیپ: یکی؛ B = render 4.5.0 · core 4.13.0 (diff با workspace: یکی).
+هر کدام یک بار ضبط ایستا (موبایل و دسکتاپ)، سپس --ab پنج اجرای یک‌درمیان. پس از ضبط A، نسخهٔ تازه برگشت و diff یکی بود. کش عنصر المنتور پیش از هر ضبط پاک شد.
+  node tests/lighthouse.js --record --snapshot=tests/.lh-snapshots/v4.5.0 · --record --snapshot=tests/.lh-snapshots/v4.4.3 · --ab=tests/.lh-snapshots/v4.4.3,tests/.lh-snapshots/v4.5.0 --runs=5
+
+کارایی روی نسخۀ ایستا — P5-D264 · Lighthouse 13.5.0 · کرومیوم chromium-1243 · میانۀ 5 اجرا
+موبایل: گلوگاه شبیه‌سازی‌شدۀ پیش‌فرض · دسکتاپ: --preset=desktop · هر درخواست از نسخۀ ایستا؛ هیچ‌چیز به آپاچی یا اینترنت نمی‌رسد
+امتیاز ۰–۱۰۰ · LCP · FCP · TBT به میلی‌ثانیه · «پاسخ» = server-response-time خود Lighthouse روی سرور ایستا
+جفت هم‌زمان: A و B یک‌درمیان، هر اجرای A بی‌درنگ پیش از اجرای B
+
+A نسخۀ ایستا: v4.4.3 · ضبط 2026-10-05T13:05:08.050Z · git def8629c-dirty · render 4.4.3 · core 4.12.1 (dist)
+  افزونه‌های سایت محلی هنگام ضبط: topersia-render 4.4.3 · topersia-user-core 1.10.4 · topersia-ai-summarizer 1.2.1 · topersia-core 4.12.1
+  351 پاسخ · 9,190,309 بایت خام · topersia.local 209 · fonts.googleapis.com 4 · picsum.photos 138 · وضعیت 200×213 403×138
+  پس‌زمینۀ خود کروم هنگام ضبط (بی Referer صفحه؛ ۴۰۴ محلی، نه ضبط، نه اینترنت): clients2.google.com 4 · www.google.com 4 · update.googleapis.com 4 · accounts.google.com 16 · android.clients.google.com 4
+  TTFB سرور هنگام ضبط /province/isfahan/                                         200 · میانه 3547 ms · نمونه‌ها 3040 · 3509 · 3547 · 3665 · 3604
+  TTFB سرور هنگام ضبط /city/isfahan/                                             200 · میانه 2944 ms · نمونه‌ها 2944 · 2978 · 3302 · 2840 · 2892
+  TTFB سرور هنگام ضبط /wp-json/topersia/v1/weather?coords=32.6539%2C%2051.6660   200 · میانه 2910 ms · نمونه‌ها 3068 · 2910 · 3893 · 2595 · 2834
+  TTFB سرور هنگام ضبط /wp-json/topersia/v1/weather?coords=32.6653%2C%2051.6703   200 · میانه 2925 ms · نمونه‌ها 2925 · 2951 · 3140 · 2879 · 2759
+
+صفحه                  حالت     کارایی  دسترس  روش   سئو   LCP     CLS    TBT    FCP     پاسخ  کارایی هر اجرا
+/province/isfahan/    موبایل   47      91     78    66    13848   0.028  409    7883    20    43 · 47 · 47 · 47 · 48
+/province/isfahan/    دسکتاپ   80      91     78    66    2716    0.001  57     1412    16    81 · 80 · 82 · 79 · 80
+/city/isfahan/        موبایل   51      91     78    66    12922   0.019  325    7424    13    48 · 51 · 49 · 52 · 51
+/city/isfahan/        دسکتاپ   84      91     78    66    2347    0.010  57     1194    16    84 · 85 · 85 · 84 · 84
+  سرور ایستا: 3400 پاسخ · بیرون از نسخۀ ایستا: 0 · پس‌زمینۀ کروم: clients2.google.com 20 · update.googleapis.com 20 · www.google.com 20 · accounts.google.com 80 · android.clients.google.com 20
+
+B نسخۀ ایستا: v4.5.0 · ضبط 2026-10-05T13:01:58.605Z · git def8629c-dirty · render 4.5.0 · core 4.13.0
+  افزونه‌های سایت محلی هنگام ضبط: topersia-render 4.5.0 · topersia-user-core 1.10.4 · topersia-ai-summarizer 1.2.1 · topersia-core 4.13.0
+  351 پاسخ · 9,207,317 بایت خام · topersia.local 209 · fonts.googleapis.com 4 · picsum.photos 138 · وضعیت 200×213 403×138
+  پس‌زمینۀ خود کروم هنگام ضبط (بی Referer صفحه؛ ۴۰۴ محلی، نه ضبط، نه اینترنت): clients2.google.com 4 · update.googleapis.com 4 · accounts.google.com 16 · www.google.com 4 · android.clients.google.com 4
+  TTFB سرور هنگام ضبط /province/isfahan/                                         200 · میانه 3313 ms · نمونه‌ها 2942 · 3292 · 3329 · 3394 · 3313
+  TTFB سرور هنگام ضبط /city/isfahan/                                             200 · میانه 2689 ms · نمونه‌ها 2676 · 2705 · 2689 · 2259 · 2821
+  TTFB سرور هنگام ضبط /wp-json/topersia/v1/weather?coords=32.6539%2C%2051.6660   200 · میانه 2880 ms · نمونه‌ها 2922 · 2880 · 2902 · 2704 · 2726
+  TTFB سرور هنگام ضبط /wp-json/topersia/v1/weather?coords=32.6653%2C%2051.6703   200 · میانه 2711 ms · نمونه‌ها 3819 · 2405 · 2711 · 2314 · 2784
+
+صفحه                  حالت     کارایی  دسترس  روش   سئو   LCP     CLS    TBT    FCP     پاسخ  کارایی هر اجرا
+/province/isfahan/    موبایل   47      91     78    66    13848   0.028  422    7970    19    44 · 45 · 49 · 49 · 47
+/province/isfahan/    دسکتاپ   81      91     78    66    2716    0.001  57     1354    15    81 · 81 · 80 · 81 · 81
+/city/isfahan/        موبایل   50      91     78    66    12926   0.028  351    7417    14    50 · 47 · 56 · 57 · 49
+/city/isfahan/        دسکتاپ   85      91     78    66    2349    0.004  62     1190    13    85 · 82 · 84 · 85 · 85
+  سرور ایستا: 3400 پاسخ · بیرون از نسخۀ ایستا: 0 · پس‌زمینۀ کروم: clients2.google.com 20 · accounts.google.com 80 · update.googleapis.com 20 · www.google.com 20 · android.clients.google.com 20
+
+══ بودجه — B منهای A (میانۀ امتیاز) · سقف افت 2 واحد ══
+/province/isfahan/ موبایل — کارایی +0 · دسترس +0 · روش +0 · سئو +0
+/province/isfahan/ دسکتاپ — کارایی +1 · دسترس +0 · روش +0 · سئو +0
+/city/isfahan/ موبایل — کارایی -1 · دسترس +0 · روش +0 · سئو +0
+/city/isfahan/ دسکتاپ — کارایی +1 · دسترس +0 · روش +0 · سئو +0
+هیچ امتیازی بیش از 2 واحد پایین نیامد.
+
+════════════════════════════════════════════════════════════════════════════════
+پیشین — مبنای فاز ۲ (v4.4.0)
+════════════════════════════════════════════════════════════════════════════════
 مبنای کارایی — P5-D264 · SPRINT-4.4 بند ۲٫۰٫۷ · قاعدۀ ۰-۸ · جایگزین روش فاز ۱
 روش: نسخۀ ایستای صفحه، میانۀ ۵ اجرا، TTFB جدا. Lighthouse 13.5.0 با کرومیوم Playwright.
   node tests/lighthouse.js --record --snapshot=tests/.lh-snapshots/v4.4.0      ضبط از سایت محلی (یک بار موبایل، یک بار دسکتاپ)

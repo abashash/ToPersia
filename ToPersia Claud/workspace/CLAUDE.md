@@ -136,7 +136,7 @@ node tests/lighthouse.js --ab=tests/.lh-snapshots/v4.4.0,tests/.lh-snapshots/v4.
 
 **نسخهٔ ایستای مبنا پیش از همگام‌سازی کد تازه ضبط می‌شود**، و پیش از ضبط با diff ثابت می‌شود که افزونه‌های نسخهٔ محلی عیناً زیپ‌های `dist/` نسخهٔ قبلی‌اند (تاریخچهٔ برچسب‌ها در مخزن تازه نیست — ۰ب٫۲). `tests/.lh-snapshots/` در git نمی‌آید (بزرگ، با گواهی خودامضا).
 
-`TP_LIGHTHOUSE` مسیر `lighthouse/cli/index.js` و `CHROME_PATH` کرومیوم Playwright. در ویندوز `EPERM` پاک‌کردن پوشهٔ موقتِ chrome-launcher پذیرفته است فقط اگر JSON گزارش نوشته شده باشد.
+`TP_LIGHTHOUSE` مسیر `lighthouse/cli/index.js` (نصب ۵ اکتبر: `%LOCALAPPDATA%\topersia-tools\lighthouse`، lighthouse 13.5.0) و `CHROME_PATH` کرومیوم Playwright. در ویندوز `EPERM` پاک‌کردن پوشهٔ موقتِ chrome-launcher پذیرفته است فقط اگر JSON گزارش نوشته شده باشد.
 
 `NODE_PATH` باید به `node_modules` همان کش `npx` برسد. ورود بی‌گذرواژه است:
 `tests/local-login.php` از نشستِ تازهٔ وردپرس کوکی می‌سازد — برای مشترکِ آزمون
@@ -163,6 +163,8 @@ php tests/pack-local.php     # هستهٔ ۴٫۱۲٫۰ — بستهٔ محتوا
 node tests/pack-admin.js     # زبانهٔ «بستهٔ محتوا» در پیشخوان واقعی — کروم و فایرفاکس، مدیر آزمون؛ بخش ترجمه هم
 node tests/services-admin.js # ۲ج٫۱۱ — «سرویس‌های خارجی»: fa و en، ۱۴۴۰ · ۱۲۸۰ · ۱۰۲۴، کروم و فایرفاکس؛ خانهٔ دیدنی، کنتراست، بی بریدگی؛ «ذخیره» با برگرداندن گزینه
 node tests/duplicator-local.js # ۲ج٫۱۲ — Duplicator محلی: پوشه‌ها، Add New بی «Requirements: Fail»، بستهٔ آزمایشی فقط پایگاه‌داده، پاک‌کردن، git؛ تنظیم‌ها برمی‌گردد
+node tests/acceptance-shots.js # پایان فاز ۲ج — عکس پذیرش: کشور · استان · شهر · بنای تاریخی × سه حالت × ۱۴۴۰ و ۳۹۰ × fa و en (tests/.screens/2c-accept/، index.html)
+php scripts/tp-zip.php topersia-render topersia-core   # زیپ نصب از نسخهٔ سربرگ ← dist/؛ زیپ موجود بازنویسی نمی‌شود
 ```
 
 هر دو دادهٔ آزمون را خودشان می‌سازند و پاک می‌کنند؛ پست واقعی (#399) فقط رفت‌وبرگشت می‌خورد که هیچ چیز نمی‌نویسد. گزینهٔ «آخرین درون‌ریزی» به مقدار پیش از آزمون برمی‌گردد.
