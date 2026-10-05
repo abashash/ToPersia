@@ -40,8 +40,9 @@ function check( label, ok, note ) {
 	else      { fail ++; console.log( '  ❌ ' + label + ( note ? '   ← ' + note : '' ) ); }
 }
 
-async function open( browser, path, width ) {
+async function open( browser, path, width, cookies ) {
 	const ctx  = await browser.newContext( { viewport: { width, height: 900 } } );
+	if ( cookies ) { await ctx.addCookies( cookies ); }   /* پیش‌نمایش پیش‌نویس — مدیر آزمون */
 	await ctx.route( /topersia\.com|picsum\.photos/, r => r.abort() );
 	const page = await ctx.newPage();
 	await page.goto( BASE + path, { waitUntil: 'domcontentloaded', timeout: 240000 } );
@@ -129,6 +130,10 @@ async function weatherSettled( page ) {
 		}
 	}
 	const L = want( 'lang' ) ? langPages() : null;
+	/* ترجمۀ پیش‌نویسِ موجود (بازبینی کاربر) با پیش‌نمایش مدیر آزمون دیده می‌شود، نه با انتشار — وصلۀ ۲ج و۴ */
+	const ADMIN = L && Object.values( L.pages ).some( r => r.preview && r.preview.length )
+		? JSON.parse( execFileSync( PHP, [ path.join( __dirname, 'local-login.php' ), 'tp_test_admin' ], { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'inherit' ] } ) ).cookies : null;
+	const asOf = ( row, lang ) => ( row.preview || [] ).includes( lang ) ? ADMIN : null;
 	try {
 	for ( const [ bname, engine ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ] ) {
 
@@ -220,7 +225,7 @@ async function weatherSettled( page ) {
 							check( `۲ج٫۸ ${ type } /${ lang }/: صفحۀ ترجمه هست`, false, 'ترجمه ساخته نشد' );
 							continue;
 						}
-						const { ctx, page } = await open( browser, row[ lang ], 1440 );
+						const { ctx, page } = await open( browser, row[ lang ], 1440, asOf( row, lang ) );
 						await weatherSettled( page );
 						const s = await page.evaluate( SCAN );
 						outside += s.outside;
@@ -237,8 +242,8 @@ async function weatherSettled( page ) {
 				}
 				/* وصلۀ ۲ج و۲ · P5-D306 — «شمار استان‌ها»ی کشور در هر زبان همان شمار فارسی، با رقم همان زبان */
 				const country = L.pages.tp_country || {};
-				const provCell = async ( url, label ) => {
-					const { ctx, page } = await open( browser, url, 1440 );
+				const provCell = async ( url, label, cookies ) => {
+					const { ctx, page } = await open( browser, url, 1440, cookies );
 					const v = await page.evaluate( l => {
 						const c = [ ...document.querySelectorAll( '.tp-stat' ) ].find( s => ( s.querySelector( '.tp-stat__k' ) || {} ).textContent === l );
 						return c ? c.querySelector( '.tp-stat__v' ).textContent.trim() : '';
@@ -248,7 +253,7 @@ async function weatherSettled( page ) {
 				};
 				const toLatin = s => s.replace( /[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf( d ) ).replace( /[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf( d ) );
 				if ( country.fa && country.en && country.ar ) {
-					const v6 = { fa: await provCell( country.fa, 'شمار استان‌ها' ), en: await provCell( country.en, 'Provinces' ), ar: await provCell( country.ar, 'عدد المحافظات' ) };
+					const v6 = { fa: await provCell( country.fa, 'شمار استان‌ها' ), en: await provCell( country.en, 'Provinces', asOf( country, 'en' ) ), ar: await provCell( country.ar, 'عدد المحافظات', asOf( country, 'ar' ) ) };
 					check( `و۲ کشور: «شمار استان‌ها» در /en/ و /ar/ همان شمار فارسی (${ v6.fa }) با رقم همان زبان — ${ v6.en } · ${ v6.ar }  P5-D306`,
 						'' !== v6.fa && /^[۰-۹]+$/.test( v6.fa ) && /^[0-9]+$/.test( v6.en ) && /^[٠-٩]+$/.test( v6.ar )
 						&& toLatin( v6.fa ) === v6.en && toLatin( v6.ar ) === v6.en && Number( v6.en ) > 1, JSON.stringify( v6 ) );
@@ -270,7 +275,7 @@ async function weatherSettled( page ) {
 			};
 			for ( const lang of [ 'fa', 'en', 'ar' ] ) {
 				if ( ! prov[ lang ] ) { check( `۲ج٫۸ نقشۀ ${ lang }: صفحۀ استان هست`, false ); continue; }
-				const { ctx, page } = await open( browser, prov[ lang ], 1440 );
+				const { ctx, page } = await open( browser, prov[ lang ], 1440, asOf( prov, lang ) );
 				await page.locator( '[data-tp-map-open]' ).first().click();
 				const ok = await page.waitForFunction( () => {
 					const f = document.querySelector( '[data-tp-map-full]' );

@@ -76,12 +76,24 @@ if ( ! function_exists( 'topersia_g_in_default_lang' ) ) {
 			return $fn();
 		}
 
+		/*
+		 * پیش‌نمایش پیش‌نویس: WPML زبان پست پیش‌نمایش را بر هر تعویض زبان می‌نشاند
+		 * (WPML_Language_Resolution::current_lang_filter) و تعویض بی‌اثر می‌ماند — شمار
+		 * «استان‌ها» روی ترجمۀ پیش‌نویس ایران ۱ می‌شد. فقط در همین بازه خاموش.  P5-D306
+		 */
+		$no_preview = function_exists( 'add_filter' ) && add_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 );
+
 		do_action( 'wpml_switch_language', $default );
 
 		try {
 			return $fn();
 		} finally {
 			do_action( 'wpml_switch_language', $current );
+			if ( $no_preview ) {
+				remove_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 );
+				/* بازگشت به زبان صفحه، با همان قاعدۀ پیش‌نمایش */
+				do_action( 'wpml_switch_language', $current );
+			}
 		}
 	}
 }
@@ -4368,9 +4380,12 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
 
 		foreach ( topersia_g_zone_fields( $pid, 'card', array( 'geo_coordinates' ) ) as $name => $raw ) {
 
-			/* چیپ‌های مرجع متن خالص‌اند — «مساحت: ۱۰۷٬۰۱۸ km²». */
+			/*
+			 * چیپ‌های مرجع متن خالص‌اند — «مساحت: ۱۰۷٬۰۱۸ km²». در صفحۀ غیرفارسی تکۀ فارسیِ
+			 * مقدار (دامنۀ «.ایران») با زبان خودش — همان کاشی‌ها؛ فارسی بی‌تغییر.  P5-D278
+			 */
 			$chips .= '<span>' . esc_html( topersia_g_t( $map[ $name ]['label'] ) ) . ': '
-				. esc_html( trim( wp_strip_all_tags( topersia_g_value( $name, $raw ) ) ) )
+				. topersia_g_lang_runs( trim( wp_strip_all_tags( topersia_g_value( $name, $raw ) ) ) )
 				. '</span>';
 		}
 

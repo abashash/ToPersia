@@ -111,7 +111,18 @@ if ( 'setup' === $cmd ) {
 				wp_update_post( array( 'ID' => $tr, 'post_status' => 'publish' ) );
 			}
 
-			$row[ $lang ] = 'publish' === get_post_status( $tr ) ? tp2c8_url( $tr, $lang ) : '';
+			/*
+			 * ترجمۀ موجودِ منتشرنشده (پیش‌نویس بازبینی کاربر، مثل ایران در وصلۀ ۲ج و۴): نه منتشر
+			 * می‌شود نه جایش ترجمۀ موقت — پیش‌نمایش همان پیش‌نویس، که phase2c.js با مدیر آزمون می‌بیند.
+			 */
+			if ( 'publish' === get_post_status( $tr ) ) {
+				$row[ $lang ] = tp2c8_url( $tr, $lang );
+			} else {
+				do_action( 'wpml_switch_language', $lang );
+				$row[ $lang ] = wp_make_link_relative( get_preview_post_link( $tr ) );
+				do_action( 'wpml_switch_language', 'fa' );
+				$row['preview'][] = $lang;
+			}
 		}
 
 		$pages[ $type ] = $row;

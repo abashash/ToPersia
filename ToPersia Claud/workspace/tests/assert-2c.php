@@ -412,3 +412,18 @@ tp441_mut( 'خواننده: خالی فقط در ترجمه (topersia_g_default_
 			&& false !== strpos( $b, "\$raw  = \$own ? trim( (string) topersia_g_raw( \$pid, 'last_verified_date' ) ) : '';" );
 	},
 	$zones2c, str_replace( "\$raw  = \$own ? trim( (string) topersia_g_raw( \$pid, 'last_verified_date' ) ) : '';", "\$raw  = trim( (string) topersia_g_raw( \$pid, 'last_verified_date' ) );", $zones2c ) );
+
+/* پذیرش وصله: پیش‌نمایش پیش‌نویس ترجمه — WPML زبان پیش‌نمایش را بر تعویض می‌نشاند */
+tp441_mut( 'topersia_g_in_default_lang: در بازۀ تعویض wpml_should_filter_preview_lang خاموش و پس از بازگشت برداشته می‌شود — شمار استان‌ها روی پیش‌نمایش ترجمۀ پیش‌نویس هم از گراف فارسی  P5-D306',
+	function ( $s ) {
+		$b = tp2c_body( $s, 'topersia_g_in_default_lang' );
+		$a = strpos( $b, "add_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 )" );
+		$w = strpos( $b, "do_action( 'wpml_switch_language', \$default );" );
+		$r = strpos( $b, "remove_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 );" );
+		return false !== $a && false !== $w && false !== $r && $a < $w && $w < $r && false !== strpos( $b, 'finally' );
+	},
+	$zones2c, str_replace( "add_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 )", 'false', $zones2c ) );
+
+tp441_mut( 'چیپ‌های «پاسخ کوتاه»: مقدار از topersia_g_lang_runs (تکۀ فارسی «.ایران» در /en/ با lang="fa")، نه esc_html خام  P5-D278',
+	function ( $s ) { return false !== strpos( $s, ". topersia_g_lang_runs( trim( wp_strip_all_tags( topersia_g_value( \$name, \$raw ) ) ) )" ) && false === strpos( $s, ". esc_html( trim( wp_strip_all_tags( topersia_g_value( \$name, \$raw ) ) ) )" ); },
+	$zones2c, str_replace( ". topersia_g_lang_runs( trim( wp_strip_all_tags( topersia_g_value( \$name, \$raw ) ) ) )", ". esc_html( trim( wp_strip_all_tags( topersia_g_value( \$name, \$raw ) ) ) )", $zones2c ) );
