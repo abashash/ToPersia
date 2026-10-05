@@ -44,6 +44,8 @@ const http = require( 'node:http' );
 const https = require( 'node:https' );
 const crypto = require( 'node:crypto' );
 const { execFile, execFileSync } = require( 'node:child_process' );
+/* پیش از نخستین کاربرد (LOCAL_PLUGINS · URLS) — پایین‌تر بود و در TDZ می‌افتاد؛ ۰ب٫۱ Lighthouse را اجرا نکرد */
+const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 const args   = process.argv.slice( 2 );
 const opt    = ( name, def ) => {
@@ -89,7 +91,6 @@ if ( ! LH || ! fs.existsSync( LH ) ) {
 }
 const LH_VERSION = require( path.join( path.dirname( LH ), '..', 'package.json' ) ).version;
 const CHROME     = process.env.CHROME_PATH || require( 'playwright' ).chromium.executablePath();
-const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 /* ── نسخۀ ایستا ── */
 

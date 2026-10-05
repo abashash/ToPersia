@@ -11,9 +11,9 @@
 
 ۴٫۱۰٫۰ (پیش از اصلاح) — فایرفاکس
 ──────────────────────────────────────────────────────────────────────────────
-  · ترک بی‌درنگ (go × 3): 0 ردیف در 0 ارسال
-  · ترک بی‌درنگ (reload × 3): 24 ردیف در 12 ارسال   SCRIPT background-slideshow.min.js · وعدهٔ رسیدگی‌نشده: [elementor] failed to load ch  · SCRIPT background-video.min.js
-  · ترک بی‌درنگ (blank × 3): 24 ردیف در 12 ارسال   SCRIPT background-slideshow.min.js · وعدهٔ رسیدگی‌نشده: [elementor] failed to load ch  · SCRIPT background-video.min.js
+  · ترک بی‌درنگ (go × 3): 16 ردیف در 8 ارسال   وعدهٔ رسیدگی‌نشده: [elementor] failed to load ch  · SCRIPT background-slideshow.min.js · SCRIPT background-video.min.js
+  · ترک بی‌درنگ (reload × 3): 12 ردیف در 6 ارسال   SCRIPT background-video.min.js · وعدهٔ رسیدگی‌نشده: [elementor] failed to load ch  · SCRIPT background-slideshow.min.js
+  · ترک بی‌درنگ (blank × 3): 20 ردیف در 10 ارسال   SCRIPT background-video.min.js · وعدهٔ رسیدگی‌نشده: [elementor] failed to load ch  · SCRIPT background-slideshow.min.js
   · بارگذاری عادی (3 صفحه): 0 ردیف در 0 ارسال
   · سازوکار: تکرار ← 2 ارسال · بی نام ← «|» · پس از beforeunload ← 2 ردیف در شش ثانیه، 2 ردیف پس از پانزده · پس از pagehide ← 2 ردیف
   · ردیف به ازای هر ارسال: 10 ردیف در 5 ارسال
@@ -24,7 +24,7 @@
   · ترک بی‌درنگ (reload × 3): 0 ردیف در 0 ارسال
   · ترک بی‌درنگ (blank × 3): 0 ردیف در 0 ارسال
   · بارگذاری عادی (3 صفحه): 0 ردیف در 0 ارسال
-  · سازوکار: تکرار ← 1 ارسال · بی نام ← «/tp-jslog-test/attr-new-cr-1791150729678.js» · پس از beforeunload ← 0 ردیف در شش ثانیه، 1 ردیف پس از پانزده · پس از pagehide ← 0 ردیف
+  · سازوکار: تکرار ← 1 ارسال · بی نام ← «/tp-jslog-test/attr-new-cr-1791202698875.js» · پس از beforeunload ← 0 ردیف در شش ثانیه، 1 ردیف پس از پانزده · پس از pagehide ← 0 ردیف
   · ردیف به ازای هر ارسال: 3 ردیف در 3 ارسال
 
 ۴٫۱۱٫۰ — فایرفاکس
@@ -33,7 +33,7 @@
   · ترک بی‌درنگ (reload × 3): 0 ردیف در 0 ارسال
   · ترک بی‌درنگ (blank × 3): 0 ردیف در 0 ارسال
   · بارگذاری عادی (3 صفحه): 0 ردیف در 0 ارسال
-  · سازوکار: تکرار ← 1 ارسال · بی نام ← «/tp-jslog-test/attr-new-ff-1791150935515.js» · پس از beforeunload ← 0 ردیف در شش ثانیه، 1 ردیف پس از پانزده · پس از pagehide ← 0 ردیف
+  · سازوکار: تکرار ← 1 ارسال · بی نام ← «/tp-jslog-test/attr-new-ff-1791202899104.js» · پس از beforeunload ← 0 ردیف در شش ثانیه، 1 ردیف پس از پانزده · پس از pagehide ← 0 ردیف
   · ردیف به ازای هر ارسال: 3 ردیف در 3 ارسال
 
 ادعاها
