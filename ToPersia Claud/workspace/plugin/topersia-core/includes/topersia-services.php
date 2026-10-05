@@ -697,6 +697,39 @@ function topersia_services_status_label( $status ) {
 	return isset( $map[ $status ] ) ? $map[ $status ] : $status;
 }
 
+/**
+ * متن جداشده — ۲ج٫۱۱. مقدار لاتین (نشانی، شناسه، کلید پوشیده، تاریخ، عدد) در
+ * `<bdi dir="ltr">`؛ عبارت فارسی — حتی اگر با واژۀ لاتین آغاز شود («endpoint ·
+ * مدل»، «TTL کش») — در `<bdi dir="rtl">`، تا در پیشخوان چپ‌به‌راست هم ترتیب و
+ * نشانه‌گذاری‌اش («»، پرانتز، دونقطه) سر جایش بماند. dir خودکار برای این دومی
+ * از نخستین حرف لاتین جهت را چپ‌به‌راست می‌گرفت.
+ *
+ * @param string $text متن خام.
+ * @param string $html HTMLِ گریخته‌ای که پس از متن درون همان جداساز می‌آید (مقدار یک برچسب).
+ * @return string HTML گریخته
+ */
+function topersia_services_bdi( $text, $html = '' ) {
+	$text = (string) $text;
+	return '<bdi dir="' . ( preg_match( '/\p{Arabic}/u', $text ) ? 'rtl' : 'ltr' ) . '">' . esc_html( $text ) . $html . '</bdi>';
+}
+
+/** «برچسب: مقدار» — یک جداساز فارسی، مقدار درونش جدا. وگرنه دونقطه در پیشخوان چپ‌به‌راست به آن سو می‌رفت. */
+function topersia_services_pair( $label, $value ) {
+	return topersia_services_bdi( $label . ': ', '' === (string) $value ? '—' : topersia_services_bdi( $value ) );
+}
+
+/** پیش‌فرض TTL به زبان آدمی — عدد ثانیه است، ۰ دائمی، رشته قاعدۀ جدول ۲٫۳. */
+function topersia_services_ttl_label( $ttl ) {
+	if ( '' === $ttl || null === $ttl ) {
+		return '';
+	}
+	if ( is_numeric( $ttl ) ) {
+		return 0 === (int) $ttl ? 'دائمی' : human_time_diff( 0, (int) $ttl );
+	}
+	$map = array( 'expires' => 'سرآیند Expires پاسخ', 'hour' => 'تا پایان ساعت', 'hash' => 'تا تغییر محتوا' );
+	return isset( $map[ $ttl ] ) ? $map[ $ttl ] : (string) $ttl;
+}
+
 /** صفحۀ «ToPersia ← سرویس‌های خارجی». */
 function topersia_services_page() {
 
@@ -713,45 +746,58 @@ function topersia_services_page() {
 	$legacy   = topersia_services_legacy();
 	$pending  = array_diff_key( $legacy, $saved );
 
-	echo '<div class="wrap tp-admin tp-services-page" dir="rtl"><h1>سرویس‌های خارجی</h1>';
+	/* جهت صفحه همان جهت پیشخوان — ۲ج٫۱۱. dir ثابت rtl پیشخوان انگلیسی را به‌هم می‌ریخت. */
+	echo '<div class="wrap tp-admin tp-services-page"><h1>سرویس‌های خارجی</h1>';
 
 	if ( function_exists( 'topersia_admin_css' ) ) {
 		echo '<style>' . topersia_admin_css() . '</style>'; // phpcs:ignore WordPress.Security.EscapeOutput -- شیوه‌نامۀ ثابت هسته
 	}
 
 	/*
-	 * نُه ستون در پهنای پیشخوان: پهنای هر ستون ثابت، هر فیلد تمام‌پهنا، و اگر
-	 * جا نشد اسکرول افقیِ خودِ جدول — نه بریدن ستون‌های آخر. .wrap راست‌به‌چپ در
-	 * پیشخوانِ چپ‌به‌راست حاشیۀ راست ندارد؛ این‌جا دو سو یکی است.
+	 * نُه ستون، بی اسکرول افقی از ۱۰۲۴ به بالا (۲ج٫۱۱): پهنای ستون درصدی، هر
+	 * مقدار بلند می‌شکند (نشانی و مدل در textarea خودبلندشونده، ارائه‌دهنده رادیو
+	 * نه select) — هیچ مقداری پشت اسکرول یا لبۀ فیلد پنهان نمی‌ماند. خانه‌ها
+	 * وسطِ عمودی؛ ستون‌های کوتاه (روشن · وضعیت · TTL · آزمون) وسط‌چین و بقیه
+	 * start. فقط ویژگی منطقی (inline/block)؛ هیچ left/right ثابت.
 	 */
 	echo '<style>'
-		. '.tp-services-page.wrap{margin:10px 20px 24px}'
-		. '.tp-services-scroll{overflow-x:auto;margin:0 0 12px}'
-		. '.tp-services{table-layout:fixed;width:100%;min-width:1180px}'
-		. '.tp-services th,.tp-services td{vertical-align:top;padding:10px 8px;overflow-wrap:anywhere}'
-		. '.tp-services input[type=text],.tp-services input[type=url],.tp-services input[type=password],.tp-services input[type=number],.tp-services select{width:100%;max-width:100%;box-sizing:border-box;margin:0 0 6px}'
+		. '.tp-services-page.wrap{margin-block:10px 24px;margin-inline:20px}'
+		. '.tp-services-scroll{overflow-x:auto;margin-block:0 12px}'
+		. '.tp-services{table-layout:fixed;inline-size:100%;min-inline-size:760px}'
+		. '.tp-services-page .tp-services :is(th,td){vertical-align:middle;text-align:start;padding-block:10px;padding-inline:5px;overflow-wrap:anywhere}'
+		. '.tp-services-page .tp-services :is(th,td).tp-c-short{text-align:center}'
+		. '.tp-services-page .tp-services :is(input[type=text],input[type=password],input[type=number],textarea){inline-size:100%;max-inline-size:100%;margin-block:0 6px;margin-inline:0}'
+		. '.tp-services-page .tp-services textarea.tp-svc-grow{display:block;resize:none;overflow:hidden;line-height:1.5;min-block-size:0;padding-block:.3rem}'
+		. '.tp-services-page .tp-services input[type=number]{padding-inline:4px;appearance:textfield;-moz-appearance:textfield}'
+		. '.tp-services-page .tp-services input[type=number]::-webkit-inner-spin-button,.tp-services-page .tp-services input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}'
 		. '.tp-services .description{font-size:12px;line-height:1.5}'
-		. '.tp-services col.c-service{width:14%}.tp-services col.c-provider{width:17%}.tp-services col.c-status{width:8%}.tp-services col.c-key{width:13%}'
-		. '.tp-services col.c-endpoint{width:18%}.tp-services col.c-limits{width:8%}.tp-services col.c-ttl{width:8%}.tp-services col.c-usage{width:6%}.tp-services col.c-test{width:8%}'
+		. '.tp-services code{font-size:11px}'
+		. '.tp-services .tp-svc-line{display:block}'
+		. '.tp-services .tp-svc-num{display:block}.tp-services .tp-svc-num span{display:block;font-size:12px;line-height:1.4}'
+		. '.tp-services fieldset.tp-svc-prov{margin:0;padding:0;border:0;min-inline-size:0}'
+		. '.tp-services fieldset.tp-svc-prov label{display:block;line-height:1.5;margin-block:0 4px}'
+		. '.tp-services :is(.tp-service-test,.tp-alt-add){white-space:normal;block-size:auto;min-block-size:30px;line-height:1.4;padding-block:4px;padding-inline:6px;max-inline-size:100%}'
+		. '.tp-services col.c-service{width:13%}.tp-services col.c-on{width:7%}.tp-services col.c-provider{width:13%}.tp-services col.c-status{width:12%}.tp-services col.c-key{width:12%}'
+		. '.tp-services col.c-endpoint{width:18%}.tp-services col.c-limits{width:8%}.tp-services col.c-ttl{width:9%}.tp-services col.c-test{width:8%}'
 		. '.tp-services tr.tp-alt td{background:#f6f7f7}.tp-services tr.tp-alt[hidden]{display:none}'
-		. '.tp-services .tp-alt-add{margin-top:6px}'
+		. '.tp-services .tp-alt-add{margin-block-start:6px}'
 		. '</style>';
 
 	if ( is_array( $notice ) && $notice ) {
-		echo '<div class="notice notice-info"><p>' . esc_html( implode( ' · ', $notice ) ) . '</p></div>';
+		echo '<div class="notice notice-info"><p>' . implode( ' · ', array_map( 'topersia_services_bdi', $notice ) ) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- topersia_services_bdi می‌گریزد
 	}
 
 	if ( ! topersia_services_can_encrypt() ) {
-		echo '<div class="notice notice-error"><p>ext-sodium در دسترس نیست — هیچ کلیدی ذخیره نمی‌شود.</p></div>';
+		echo '<div class="notice notice-error"><p>' . topersia_services_bdi( 'ext-sodium در دسترس نیست — هیچ کلیدی ذخیره نمی‌شود.' ) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
 	}
 
 	if ( $pending ) {
-		echo '<form method="post" class="tp-card" style="margin:1em 0;padding:1em">';
+		echo '<form method="post" class="tp-card" style="margin-block:1em;padding:1em">';
 		wp_nonce_field( 'topersia_services' );
 		echo '<input type="hidden" name="topersia_services_action" value="migrate">';
-		echo '<p><strong>تنظیم قدیمی پیدا شد:</strong> ' . esc_html( implode( '، ', array_map( function ( $s ) use ( $catalog ) {
+		echo '<p><strong>تنظیم قدیمی پیدا شد:</strong> ' . topersia_services_bdi( implode( '، ', array_map( function ( $s ) use ( $catalog ) { // phpcs:ignore WordPress.Security.EscapeOutput
 			return isset( $catalog[ $s ] ) ? $catalog[ $s ]['label'] : $s;
-		}, array_keys( $pending ) ) ) ) . '. تا انتقال، همان تنظیم خوانده می‌شود. «انتقال» یک بار آن را به این لایه می‌آورد (کلید رمز می‌شود)؛ تنظیم قدیمی پاک نمی‌شود.</p>';
+		}, array_keys( $pending ) ) ) . '. تا انتقال، همان تنظیم خوانده می‌شود. «انتقال» یک بار آن را به این لایه می‌آورد (کلید رمز می‌شود)؛ تنظیم قدیمی پاک نمی‌شود.' ) . '</p>';
 		submit_button( 'انتقال', 'secondary', 'submit', false );
 		echo '</form>';
 	}
@@ -761,16 +807,19 @@ function topersia_services_page() {
 	echo '<input type="hidden" name="topersia_services_action" value="save">';
 
 	printf(
-		'<p><label><input type="checkbox" name="site_is_commercial" value="1"%s> سایت تجاری است (اشتراک یا تبلیغ) — آداپتورهای با ردۀ رایگانِ غیرتجاری بی کلید پولی خاموش می‌شوند</label></p>',
-		checked( topersia_site_is_commercial(), true, false )
+		'<p><label><input type="checkbox" name="site_is_commercial" value="1"%s> %s</label></p>',
+		checked( topersia_site_is_commercial(), true, false ),
+		topersia_services_bdi( 'سایت تجاری است (اشتراک یا تبلیغ) — آداپتورهای با ردۀ رایگانِ غیرتجاری بی کلید پولی خاموش می‌شوند' ) // phpcs:ignore WordPress.Security.EscapeOutput
 	);
 
-	echo '<p class="description">کلید تولید متن هوش مصنوعی در تنظیمات خودِ خلاصه‌ساز است. «+ ارائه‌دهندۀ دوم» پشتیبان است: وقتی اولی خاموش است، کلید ندارد یا همین تازگی شکست خورد، دومی به کار می‌رود.</p>';
+	echo '<p class="description">' . topersia_services_bdi( 'کلید تولید متن هوش مصنوعی در تنظیمات خودِ خلاصه‌ساز است. «+ ارائه‌دهندۀ دوم» پشتیبان است: وقتی اولی خاموش است، کلید ندارد یا همین تازگی شکست خورد، دومی به کار می‌رود.' ) // phpcs:ignore WordPress.Security.EscapeOutput
+		. ' ' . topersia_services_bdi( 'فیلد خالی یعنی پیش‌فرض — نوشتۀ کم‌رنگ درون فیلد، یا «پیش‌فرض» زیر آن.' ) . '</p>';
 
 	echo '<div class="tp-services-scroll"><table class="widefat striped tp-services">'
-		. '<colgroup><col class="c-service"><col class="c-provider"><col class="c-status"><col class="c-key"><col class="c-endpoint"><col class="c-limits"><col class="c-ttl"><col class="c-usage"><col class="c-test"></colgroup>'
-		. '<thead><tr><th>سرویس</th><th>ارائه‌دهنده</th><th>وضعیت</th><th>کلید</th><th>endpoint · مدل · نسخه</th>'
-		. '<th>سقف روزانه (کاربر · سایت)</th><th>TTL کش (ثانیه)</th><th>آخرین موفق · مصرف امروز</th><th></th>'
+		. '<colgroup><col class="c-service"><col class="c-on"><col class="c-provider"><col class="c-status"><col class="c-key"><col class="c-endpoint"><col class="c-limits"><col class="c-ttl"><col class="c-test"></colgroup>'
+		. '<thead><tr><th scope="col">سرویس</th><th scope="col" class="tp-c-short">روشن</th><th scope="col">ارائه‌دهنده</th><th scope="col" class="tp-c-short">' . topersia_services_bdi( 'وضعیت · مصرف' ) . '</th>'
+		. '<th scope="col">کلید</th><th scope="col">' . topersia_services_bdi( 'endpoint · مدل · نسخه' ) . '</th>'
+		. '<th scope="col">' . topersia_services_bdi( 'سقف روزانه (کاربر · سایت)' ) . '</th><th scope="col" class="tp-c-short">' . topersia_services_bdi( 'TTL کش (ثانیه)' ) . '</th><th scope="col" class="tp-c-short">آزمون</th>'
 		. '</tr></thead><tbody>';
 
 	foreach ( $catalog as $service => $meta ) {
@@ -785,13 +834,21 @@ function topersia_services_page() {
 	submit_button( 'ذخیره' );
 	echo '</form></div>';
 
-	/* آزمون اتصال — فقط شناسۀ سرویس فرستاده می‌شود؛ پاسخ پیام کوتاه است. «+» سطر دوم را نشان می‌دهد. */
+	/*
+	 * آزمون اتصال — فقط شناسۀ سرویس فرستاده می‌شود؛ پاسخ پیام کوتاه است. «+» سطر دوم را نشان می‌دهد.
+	 * textarea هم‌قد متنش (یا نگه‌دارش، وقتی خالی است) — هیچ نشانی پشت لبۀ فیلد نمی‌ماند؛ Enter مثل input فرم را می‌فرستد، خط تازه نمی‌سازد.
+	 */
 	$ajax  = admin_url( 'admin-ajax.php' );
 	$nonce = wp_create_nonce( 'topersia_service_test' );
-	echo '<script>(function(){document.querySelectorAll(".tp-service-test").forEach(function(b){b.addEventListener("click",function(){'
+	echo '<script>(function(){'
+		. 'function grow(t){var v=t.value;if(!v&&t.placeholder){t.value=t.placeholder}t.style.height="auto";t.style.height=(t.scrollHeight+t.offsetHeight-t.clientHeight)+"px";if(!v){t.value=""}}'
+		. 'function growAll(r){r.querySelectorAll("textarea.tp-svc-grow").forEach(grow)}'
+		. 'document.querySelectorAll("textarea.tp-svc-grow").forEach(function(t){t.addEventListener("input",function(){grow(t)});t.addEventListener("keydown",function(e){if("Enter"===e.key){e.preventDefault();if(t.form&&t.form.requestSubmit){t.form.requestSubmit()}}})});'
+		. 'growAll(document);window.addEventListener("load",function(){growAll(document)});window.addEventListener("resize",function(){growAll(document)});'
+		. 'document.querySelectorAll(".tp-service-test").forEach(function(b){b.addEventListener("click",function(){'
 		. 'var out=b.nextElementSibling;out.textContent="…";var f=new FormData();f.append("action","topersia_service_test");f.append("_ajax_nonce",' . wp_json_encode( $nonce ) . ');f.append("service",b.getAttribute("data-service"));'
 		. 'fetch(' . wp_json_encode( $ajax ) . ',{method:"POST",body:f,credentials:"same-origin"}).then(function(r){return r.json()}).then(function(j){var d=j&&j.data?j.data:{};out.textContent=(d.ok?"✓ ":(d.tested===false?"— ":"✗ "))+(d.message||"");}).catch(function(){out.textContent="✗ خطا";});});});'
-		. 'document.querySelectorAll(".tp-alt-add").forEach(function(b){b.addEventListener("click",function(){var r=document.querySelector("tr[data-service=\""+b.getAttribute("data-tp-alt")+"\"]");if(!r){return}r.hidden=false;var u=r.querySelector("[data-tp-alt-use]");if(u){u.value="1"}b.hidden=true;var f=r.querySelector("select,input:not([type=hidden])");if(f){f.focus()}});});})();</script>';
+		. 'document.querySelectorAll(".tp-alt-add").forEach(function(b){b.addEventListener("click",function(){var r=document.querySelector("tr[data-service=\""+b.getAttribute("data-tp-alt")+"\"]");if(!r){return}r.hidden=false;growAll(r);var u=r.querySelector("[data-tp-alt-use]");if(u){u.value="1"}b.hidden=true;var f=r.querySelector("input:not([type=hidden]),textarea");if(f){f.focus()}});});})();</script>';
 }
 
 /**
@@ -815,59 +872,98 @@ function topersia_services_row_html( $service, array $meta, array $adapters, $ca
 	$ttl_d = topersia_cache_ttl_defaults();
 	$ttl_d = isset( $ttl_d[ $bsvc ] ) ? $ttl_d[ $bsvc ] : '';
 	$ad    = isset( $adapters[ $cfg['provider'] ] ) ? $adapters[ $cfg['provider'] ] : array();
+	$label = $alt ? 'ارائه‌دهندۀ دوم ' . $meta['label'] : $meta['label'];
 	$hide  = $alt && ! $row;
 	$h     = '';
 
 	$h .= '<tr data-service="' . esc_attr( $service ) . '"' . ( $alt ? ' class="tp-alt"' : '' ) . ( $hide ? ' hidden' : '' ) . '>';
 
+	/* سرویس */
 	if ( $alt ) {
-		$h .= '<td><strong>ارائه‌دهندۀ دوم</strong><br><span class="description">پشتیبان «' . esc_html( $meta['label'] ) . '»</span>'
+		$h .= '<td><strong>ارائه‌دهندۀ دوم</strong><span class="tp-svc-line description">' . topersia_services_bdi( 'پشتیبان «' . $meta['label'] . '»' ) . '</span>'
 			. '<input type="hidden" name="' . esc_attr( $name ) . '[use]" value="' . ( $row ? '1' : '0' ) . '" data-tp-alt-use>'
-			. '<br><label><input type="checkbox" name="' . esc_attr( $name ) . '[enabled]" value="1"' . checked( $cfg['enabled'], true, false ) . '> روشن</label>'
-			. ( $row ? '<br><label><input type="checkbox" name="' . esc_attr( $name ) . '[remove]" value="1"> حذف</label>' : '' ) . '</td>';
+			. ( $row ? '<label class="tp-svc-line"><input type="checkbox" name="' . esc_attr( $name ) . '[remove]" value="1"> حذف</label>' : '' ) . '</td>';
 	} else {
-		$h .= '<td><strong>' . esc_html( $meta['label'] ) . '</strong><br><code dir="ltr">' . esc_html( $service ) . '</code><br><span class="description">' . esc_html( $meta['purpose'] ) . '</span>'
-			. '<br><label><input type="checkbox" name="' . esc_attr( $name ) . '[enabled]" value="1"' . checked( $cfg['enabled'], true, false ) . '> روشن</label>'
-			. ( $can_add && ! isset( $saved[ $service . TOPERSIA_SERVICES_ALT ] ) ? '<br><button type="button" class="button button-small tp-alt-add" data-tp-alt="' . esc_attr( $service . TOPERSIA_SERVICES_ALT ) . '">+ ارائه‌دهندۀ دوم</button>' : '' ) . '</td>';
+		$h .= '<td><strong>' . topersia_services_bdi( $meta['label'] ) . '</strong><span class="tp-svc-line"><code><bdi dir="ltr">' . str_replace( array( '_', '.' ), array( '_<wbr>', '.<wbr>' ), esc_html( $service ) ) . '</bdi></code></span>'
+			. '<span class="tp-svc-line description">' . topersia_services_bdi( $meta['purpose'] ) . '</span>'
+			. ( $can_add && ! isset( $saved[ $service . TOPERSIA_SERVICES_ALT ] ) ? '<button type="button" class="button button-small tp-alt-add" data-tp-alt="' . esc_attr( $service . TOPERSIA_SERVICES_ALT ) . '">' . topersia_services_bdi( '+ ارائه‌دهندۀ دوم' ) . '</button>' : '' ) . '</td>';
 	}
 
-	$h .= '<td><select name="' . esc_attr( $name ) . '[provider]">';
-	foreach ( topersia_services_providers_for( $bsvc, $adapters ) as $id ) {
-		$h .= '<option value="' . esc_attr( $id ) . '"' . selected( $cfg['provider'], $id, false ) . '>' . esc_html( $adapters[ $id ]['label'] ) . '</option>';
+	/* روشن */
+	$h .= '<td class="tp-c-short"><label><input type="checkbox" name="' . esc_attr( $name ) . '[enabled]" value="1"' . checked( $cfg['enabled'], true, false ) . '><span class="screen-reader-text">' . esc_html( 'روشن — ' . $label ) . '</span></label></td>';
+
+	/* ارائه‌دهنده — رادیو، نه select: نام بلند در ستون باریک بریده نمی‌شود */
+	$ids = topersia_services_providers_for( $bsvc, $adapters );
+	$h  .= '<td>';
+	if ( count( $ids ) > 1 ) {
+		$h .= '<fieldset class="tp-svc-prov"><legend class="screen-reader-text">' . esc_html( 'ارائه‌دهنده — ' . $label ) . '</legend>';
+		foreach ( $ids as $id ) {
+			$h .= '<label><input type="radio" name="' . esc_attr( $name ) . '[provider]" value="' . esc_attr( $id ) . '"' . checked( $cfg['provider'], $id, false ) . '> ' . topersia_services_bdi( $adapters[ $id ]['label'] ) . '</label>';
+		}
+		$h .= '</fieldset>';
+	} elseif ( $ids ) {
+		$h .= '<input type="hidden" name="' . esc_attr( $name ) . '[provider]" value="' . esc_attr( $ids[0] ) . '">' . topersia_services_bdi( $adapters[ $ids[0] ]['label'] );
 	}
-	$h .= '</select>' . ( ! empty( $ad['doc'] ) ? '<br><span class="description" dir="ltr">' . esc_html( $ad['doc'] ) . '</span>' : '' ) . '</td>';
+	if ( ! empty( $ad['doc'] ) ) {
+		$doc  = (string) $ad['doc'];
+		$host = 0 === strpos( $doc, 'https://' ) ? (string) wp_parse_url( $doc, PHP_URL_HOST ) : '';
+		$h   .= '<span class="tp-svc-line description">' . ( '' !== $host
+			? topersia_services_bdi( 'مستند: ', '<a href="' . esc_url( $doc ) . '" title="' . esc_attr( $doc ) . '" target="_blank" rel="noopener noreferrer">' . topersia_services_bdi( $host ) . '</a>' )
+			: topersia_services_bdi( $doc ) ) . '</span>';
+	}
+	$h .= '</td>';
 
-	$h .= '<td>' . esc_html( topersia_services_status_label( $cfg['status'] ) ) . ( '' !== $cfg['reason'] && 'active' !== $cfg['status'] && $cfg['reason'] !== topersia_services_status_label( $cfg['status'] ) ? '<br><span class="description">' . esc_html( $cfg['reason'] ) . '</span>' : '' ) . '</td>';
+	/* وضعیت · مصرف */
+	$last  = ! empty( $usage['last_ok_at'] ) ? wp_date( 'Y-m-d H:i', (int) $usage['last_ok_at'] ) : '';
+	$today = isset( $usage['day'], $usage['count'] ) && current_time( 'Y-m-d' ) === $usage['day'] ? (int) $usage['count'] : 0;
+	$h    .= '<td class="tp-c-short"><strong>' . esc_html( topersia_services_status_label( $cfg['status'] ) ) . '</strong>'
+		. ( '' !== $cfg['reason'] && 'active' !== $cfg['status'] && $cfg['reason'] !== topersia_services_status_label( $cfg['status'] ) ? '<span class="tp-svc-line description">' . topersia_services_bdi( $cfg['reason'] ) . '</span>' : '' )
+		. '<span class="tp-svc-line description">' . topersia_services_pair( 'آخرین موفق', $last ) . '</span>'
+		. '<span class="tp-svc-line description">' . topersia_services_pair( 'امروز', (string) $today ) . '</span></td>';
 
+	/* کلید — فقط‌نوشتنی؛ آشکار فقط «••••» و چهار نویسۀ آخر */
 	$h .= '<td>';
 	if ( 'config' === $cfg['key_source'] ) {
-		$h .= '<span>از wp-config · ••••' . esc_html( $cfg['key_tail'] ) . '</span><br><input type="password" disabled placeholder="قفل: ثابت wp-config">';
+		$h .= topersia_services_bdi( 'از ثابت wp-config — قفل' ) . '<span class="tp-svc-line">' . topersia_services_bdi( '••••' . $cfg['key_tail'] ) . '</span>';
 	} elseif ( ! empty( $cfg['needs_key'] ) || '' !== $cfg['key_tail'] ) {
-		$h .= ( '' !== $cfg['key_tail'] ? '<span>••••' . esc_html( $cfg['key_tail'] ) . '</span><br>' : '' )
-			. '<input type="password" name="' . esc_attr( $name ) . '[key]" value="" autocomplete="new-password" placeholder="' . esc_attr( '' !== $cfg['key_tail'] ? 'خالی: همان کلید' : 'کلید' ) . '">'
-			. ( '' !== $cfg['key_tail'] ? '<br><label><input type="checkbox" name="' . esc_attr( $name ) . '[key_clear]" value="1"> حذف کلید</label>' : '' );
+		$h .= ( '' !== $cfg['key_tail'] ? '<span class="tp-svc-line">' . topersia_services_bdi( '••••' . $cfg['key_tail'] ) . '</span>' : '' )
+			. '<input type="password" dir="ltr" name="' . esc_attr( $name ) . '[key]" value="" autocomplete="new-password" placeholder="' . esc_attr( '' !== $cfg['key_tail'] ? 'کلید تازه' : 'کلید' ) . '" aria-label="' . esc_attr( 'کلید — ' . $label ) . '">'
+			. ( '' !== $cfg['key_tail'] ? '<label class="tp-svc-line"><input type="checkbox" name="' . esc_attr( $name ) . '[key_clear]" value="1"> حذف کلید</label>' : '' );
 	} else {
 		$h .= '<span class="description">کلید لازم نیست</span>';
 	}
 	$h .= '</td>';
 
-	$h .= '<td><input type="url" dir="ltr" name="' . esc_attr( $name ) . '[endpoint]" value="' . esc_attr( $cfg['configured'] && ! empty( $row['endpoint'] ) ? $cfg['endpoint'] : '' ) . '" placeholder="' . esc_attr( isset( $ad['endpoint'] ) ? $ad['endpoint'] : '' ) . '">'
-		. '<input type="text" dir="ltr" name="' . esc_attr( $name ) . '[model]" value="' . esc_attr( $cfg['configured'] && ! empty( $row['model'] ) ? $cfg['model'] : '' ) . '" placeholder="' . esc_attr( isset( $ad['model'] ) && '' !== $ad['model'] ? $ad['model'] : 'مدل' ) . '">'
-		. '<input type="text" dir="ltr" name="' . esc_attr( $name ) . '[version]" value="' . esc_attr( $cfg['configured'] && ! empty( $row['version'] ) ? $cfg['version'] : '' ) . '" placeholder="نسخه">';
-	foreach ( $cfg['fields'] as $k => $label ) {
-		$h .= '<input type="text" dir="ltr" name="' . esc_attr( $name ) . '[extra][' . esc_attr( $k ) . ']" value="' . esc_attr( isset( $cfg['extra'][ $k ] ) && is_scalar( $cfg['extra'][ $k ] ) ? (string) $cfg['extra'][ $k ] : '' ) . '" placeholder="' . esc_attr( $label ) . '" aria-label="' . esc_attr( $label ) . '">';
+	/* endpoint · مدل · نسخه — خالی یعنی پیش‌فرض آداپتور (نگه‌دار). extra بی فیلد: فقط خواندنی، تا پیدا باشد. */
+	$h .= '<td><textarea class="tp-svc-grow" rows="1" dir="ltr" name="' . esc_attr( $name ) . '[endpoint]" placeholder="' . esc_attr( ! empty( $ad['endpoint'] ) ? $ad['endpoint'] : 'endpoint' ) . '" aria-label="' . esc_attr( 'endpoint — ' . $label ) . '">' . esc_textarea( $cfg['configured'] && ! empty( $row['endpoint'] ) ? $cfg['endpoint'] : '' ) . '</textarea>'
+		. '<textarea class="tp-svc-grow" rows="1" dir="ltr" name="' . esc_attr( $name ) . '[model]" placeholder="' . esc_attr( isset( $ad['model'] ) && '' !== $ad['model'] ? $ad['model'] : 'مدل' ) . '" aria-label="' . esc_attr( 'مدل — ' . $label ) . '">' . esc_textarea( $cfg['configured'] && ! empty( $row['model'] ) ? $cfg['model'] : '' ) . '</textarea>'
+		. '<input type="text" dir="ltr" name="' . esc_attr( $name ) . '[version]" value="' . esc_attr( $cfg['configured'] && ! empty( $row['version'] ) ? $cfg['version'] : '' ) . '" placeholder="نسخه" aria-label="' . esc_attr( 'نسخه — ' . $label ) . '">';
+	foreach ( $cfg['fields'] as $k => $flabel ) {
+		$h .= '<textarea class="tp-svc-grow" rows="1" dir="ltr" name="' . esc_attr( $name ) . '[extra][' . esc_attr( $k ) . ']" placeholder="' . esc_attr( $flabel ) . '" aria-label="' . esc_attr( $flabel ) . '">' . esc_textarea( isset( $cfg['extra'][ $k ] ) && is_scalar( $cfg['extra'][ $k ] ) ? (string) $cfg['extra'][ $k ] : '' ) . '</textarea>';
+	}
+	foreach ( $cfg['extra'] as $k => $v ) {
+		if ( isset( $cfg['fields'][ $k ] ) ) {
+			continue;
+		}
+		if ( is_scalar( $v ) && '' !== (string) $v ) {
+			$h .= '<span class="tp-svc-line description">' . topersia_services_bdi( $k . ': ' . $v ) . '</span>';
+		} elseif ( is_array( $v ) && isset( $v['on'] ) ) {
+			$h .= '<span class="tp-svc-line description">' . topersia_services_bdi( (string) $k ) . ' ' . ( $v['on'] ? 'روشن' : 'خاموش' ) . '</span>';
+		}
 	}
 	$h .= '</td>';
 
-	$h .= '<td><input type="number" min="0" name="' . esc_attr( $name ) . '[limit_user]" value="' . esc_attr( null === $cfg['limits']['user'] ? '' : $cfg['limits']['user'] ) . '" placeholder="کاربر">'
-		. '<input type="number" min="0" name="' . esc_attr( $name ) . '[limit_site]" value="' . esc_attr( null === $cfg['limits']['site'] ? '' : $cfg['limits']['site'] ) . '" placeholder="سایت"></td>';
+	/* سقف روزانه */
+	$h .= '<td><label class="tp-svc-num"><span>کاربر</span><input type="number" min="0" name="' . esc_attr( $name ) . '[limit_user]" value="' . esc_attr( null === $cfg['limits']['user'] ? '' : $cfg['limits']['user'] ) . '" placeholder="—"></label>'
+		. '<label class="tp-svc-num"><span>سایت</span><input type="number" min="0" name="' . esc_attr( $name ) . '[limit_site]" value="' . esc_attr( null === $cfg['limits']['site'] ? '' : $cfg['limits']['site'] ) . '" placeholder="—"></label></td>';
 
-	$h .= '<td><input type="number" min="0" name="' . esc_attr( $name ) . '[ttl]" value="' . esc_attr( $cfg['ttl'] ) . '" placeholder="' . esc_attr( (string) $ttl_d ) . '"></td>';
+	/* TTL — پیش‌فرض جدول ۲٫۳ نوشته می‌شود، نه فقط نگه‌دار بریده‌شده */
+	$ttl_l = topersia_services_ttl_label( $ttl_d );
+	$h    .= '<td class="tp-c-short"><input type="number" min="0" name="' . esc_attr( $name ) . '[ttl]" value="' . esc_attr( $cfg['ttl'] ) . '" placeholder="—" aria-label="' . esc_attr( 'TTL کش (ثانیه) — ' . $label ) . '">'
+		. ( '' !== $ttl_l ? '<span class="tp-svc-line description">' . topersia_services_pair( 'پیش‌فرض', $ttl_l ) . '</span>' : '' ) . '</td>';
 
-	$h .= '<td>' . esc_html( ! empty( $usage['last_ok_at'] ) ? wp_date( 'Y-m-d H:i', (int) $usage['last_ok_at'] ) : '—' )
-		. '<br>' . esc_html( isset( $usage['day'] ) && current_time( 'Y-m-d' ) === $usage['day'] ? (string) (int) $usage['count'] : '0' ) . '</td>';
-
-	$h .= '<td><button type="button" class="button tp-service-test" data-service="' . esc_attr( $service ) . '">آزمون اتصال</button><div class="tp-service-result" aria-live="polite"></div></td>';
+	/* آزمون */
+	$h .= '<td class="tp-c-short"><button type="button" class="button tp-service-test" data-service="' . esc_attr( $service ) . '">آزمون اتصال</button><div class="tp-service-result" aria-live="polite" dir="auto"></div></td>';
 
 	return $h . '</tr>';
 }

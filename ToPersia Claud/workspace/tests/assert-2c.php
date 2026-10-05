@@ -253,3 +253,58 @@ tp441_mut( 'یک دروازه: topersia_g_raw هر مقدار را از topersia
 			&& false !== strpos( $gate, "'name_local'" ) && false !== strpos( $gate, "'latin' === \$map[ \$key ]['kind']" );
 	},
 	$zones2c, str_replace( 'if ( topersia_g_untranslated( $key, $value ) ) {', 'if ( false ) {', $zones2c ) );
+
+/* ══ ۲ج٫۱۱ صفحۀ سرویس‌های خارجی ═══════════════════════════════════════ */
+
+echo "\nفاز ۲ج SPRINT-4.4 — ۲ج٫۱۱ صفحۀ سرویس‌های خارجی\n" . str_repeat( '─', 78 ) . "\n";
+
+$svc2c   = is_file( $core2c . '/includes/topersia-services.php' ) ? file_get_contents( $core2c . '/includes/topersia-services.php' ) : '';
+$page11  = tp2c_body( $svc2c, 'topersia_services_page' );
+$row11   = tp2c_body( $svc2c, 'topersia_services_row_html' );
+$css11   = preg_match( "/echo '<style>'\n(.*?)\. '<\/style>';/s", $page11, $m11 ) ? $m11[1] : '';
+
+tp441_mut( 'جهت صفحه همان جهت پیشخوان: wrap بی dir ثابت (پیشخوان انگلیسی چپ‌به‌راست، فارسی راست‌به‌چپ)',
+	function ( $p ) { return false !== strpos( $p, '<div class="wrap tp-admin tp-services-page"><h1>' ) && false === strpos( $p, 'tp-services-page" dir=' ); },
+	$page11, str_replace( 'tp-services-page"><h1>', 'tp-services-page" dir="rtl"><h1>', $page11 ) );
+
+tp441_mut( 'شیوه‌نامۀ صفحه: همۀ خانه‌ها vertical-align:middle و text-align:start، ستون کوتاه وسط‌چین؛ فقط ویژگی منطقی — هیچ left/right ثابت؛ بی min-width ۱۱۸۰ (بی اسکرول افقی از ۱۰۲۴)',
+	function ( $c ) {
+		return '' !== $c && false !== strpos( $c, ':is(th,td){vertical-align:middle;text-align:start;' ) && false !== strpos( $c, ':is(th,td).tp-c-short{text-align:center}' )
+			&& ! preg_match( '/(margin|padding|border)-(left|right)\s*:|[{;]\s*(left|right)\s*:|text-align\s*:\s*(left|right)|float\s*:\s*(left|right)/', $c )
+			&& false === strpos( $c, '1180px' );
+	},
+	$css11, str_replace( '.tp-services-page.wrap{margin-block:10px 24px;margin-inline:20px}', '.tp-services-page.wrap{margin:10px 20px 24px;margin-left:2px}', $css11 ) );
+
+tp441_mut( 'ستون‌های کوتاه (روشن · وضعیت · TTL · آزمون) در سر و در هر سطر tp-c-short؛ هیچ سرستون خالی',
+	function ( $x ) {
+		return 4 === substr_count( $x[0], '<th scope="col" class="tp-c-short">' ) && 4 === substr_count( $x[1], '<td class="tp-c-short">' )
+			&& false === strpos( $x[0], '<th></th>' ) && false === strpos( $x[0], '<th scope="col"></th>' );
+	},
+	array( $page11, $row11 ), array( $page11, str_replace( '<td class="tp-c-short"><button', '<td><button', $row11 ) ) );
+
+tp441_mut( 'مقدار ناپیدا: ارائه‌دهنده رادیو نه select (نام بلند بریده نمی‌شد)، نشانی و مدل در textarea خودبلندشونده، پیش‌فرض TTL نوشته می‌شود، extra بی فیلد (مسیر PMTiles) پیدا',
+	function ( $r ) {
+		return false === strpos( $r, '<select' ) && false !== strpos( $r, 'type="radio"' ) && 2 <= substr_count( $r, '<textarea class="tp-svc-grow"' )
+			&& false !== strpos( $r, "topersia_services_pair( 'پیش‌فرض', \$ttl_l )" ) && false !== strpos( $r, "topersia_services_bdi( \$k . ': ' . \$v )" );
+	},
+	$row11, str_replace( 'type="radio"', 'type="select"', $row11 ) . '<select' );
+
+tp441_mut( 'textarea هم‌قد متن یا نگه‌دارش — در بارگذاری، تغییر اندازه و نمایش سطر دوم («+»)',
+	function ( $p ) { return false !== strpos( $p, 'function grow(t){var v=t.value;if(!v&&t.placeholder){t.value=t.placeholder}' ) && false !== strpos( $p, 'r.hidden=false;growAll(r);' ) && false !== strpos( $p, 'window.addEventListener("resize",function(){growAll(document)});' ); },
+	$page11, str_replace( 'r.hidden=false;growAll(r);', 'r.hidden=false;', $page11 ) );
+
+if ( ! function_exists( 'topersia_services_bdi' ) && '' !== $svc2c ) {
+	eval( tp2c_body( $svc2c, 'topersia_services_bdi' ) . "\n" . tp2c_body( $svc2c, 'topersia_services_pair' ) ); // phpcs:ignore Squiz.PHP.Eval -- فقط دو تابع خالص همین فایل
+}
+$bdi11 = function_exists( 'topersia_services_bdi' ) ? array(
+	'id'    => topersia_services_bdi( 'ai.tts' ),
+	'head'  => topersia_services_bdi( 'endpoint · مدل · نسخه' ),
+	'empty' => topersia_services_pair( 'آخرین موفق', '' ),
+	'pair'  => topersia_services_pair( 'آخرین موفق', '2026-10-05 11:09' ),
+) : array();
+tp441_mut( 'جداساز: مقدار لاتین bdi[dir=ltr]؛ عبارت فارسی — حتی آغازشده با واژۀ لاتین — bdi[dir=rtl] (dir خودکار «endpoint · مدل» را چپ‌به‌راست می‌کرد)؛ «برچسب: مقدار» یک جداساز فارسی با مقدار ltr درونش، خالی «—»',
+	function ( $b ) {
+		return $b && '<bdi dir="ltr">ai.tts</bdi>' === $b['id'] && '<bdi dir="rtl">endpoint · مدل · نسخه</bdi>' === $b['head']
+			&& '<bdi dir="rtl">آخرین موفق: —</bdi>' === $b['empty'] && '<bdi dir="rtl">آخرین موفق: <bdi dir="ltr">2026-10-05 11:09</bdi></bdi>' === $b['pair'];
+	},
+	$bdi11, str_replace( '<bdi dir="rtl">endpoint', '<bdi>endpoint', $bdi11 ) );
