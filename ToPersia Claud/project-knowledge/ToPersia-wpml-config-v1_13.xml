@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ToPersia — پیکربندی سراسری WPML Custom Fields Translation
+  نسخه: 1.13  |  مبنا: v1.12 (271 کلید)
+
+  تغییر این نسخه (وصلۀ ۲ج و۳ · P5-D308): content_status از copy به ignore —
+  وضعیت راستی‌آزمایی هر زبان جدا می‌ماند؛ مقدار خالی در ترجمه یعنی
+  needs_verification و نشان «راستی‌آزمایی‌شده» هر زبان فقط از وضعیت همان زبان.
+  تا ممیزی NotebookLM فقط محلی (فاز ۱۰).
+
+  ── نسخۀ 1.12 ──
+  مبنا: v1.11 راستی‌آزمایی‌شده (185 کلید)
+
+  افزودهٔ این نسخه — هفت موجودیت پایانی فاز ۵:
+    P2 tp_currency · P6 tp_calendar · P7 tp_transport
+    E1 tp_festival · E3 tp_sports_event · E5 tp_religious_event
+    E6 tp_seasonal_event
+
+  کلید تازه: 86  (30 Copy + 56 Translate)
+  کلید بازاستفاده‌شده از نسخهٔ قبل (بدون تکرار): best_season · calendar_timing · safety_link
+  بلوک تازه در custom-fields-texts: 17
+  جمع نهایی 1.12: 271 کلید — Copy: 120 · Translate: 151
+  جمع نهایی 1.13: 271 کلید
+    Copy: 119
+    Translate: 151
+    Ignore: 1 (content_status)
+
+  قاعده: هر کلیدی که در custom-fields-texts نیامده باشد، عیناً به همهٔ
+  زبان‌ها کپی می‌شود. زیرفیلدهای کد، تاریخ، عدد و نشانی عمداً نیامده‌اند.
+-->
+<wpml-config>
+
+  <custom-fields>
+    <custom-field action="copy">accepted_foreign_currencies</custom-field>
+    <custom-field action="translate">access_method</custom-field>
+    <custom-field action="translate">accessibility_note</custom-field>
+    <custom-field action="translate">activities</custom-field>
+    <custom-field action="translate">activity_specific_warnings</custom-field>
+    <custom-field action="translate">address</custom-field>
+    <custom-field action="translate">admission_fee</custom-field>
+    <custom-field action="translate">admission_note</custom-field>
+    <custom-field action="translate">ai_summary</custom-field>
+    <custom-field action="translate">air_travel_note</custom-field>
+    <custom-field action="copy">airport_iata</custom-field>
+    <custom-field action="translate">airport_name</custom-field>
+    <custom-field action="translate">alternative_names</custom-field>
+    <custom-field action="translate">annual_date_rule</custom-field>
+    <custom-field action="copy">annual_review_month</custom-field>
+    <custom-field action="translate">application_process_summary</custom-field>
+    <custom-field action="translate">application_steps</custom-field>
+    <custom-field action="copy">area_km2</custom-field>
+    <custom-field action="copy">area_type</custom-field>
+    <custom-field action="translate">atm_usage_note</custom-field>
+    <custom-field action="translate">audio_narration</custom-field>
+    <custom-field action="copy">audio_sample</custom-field>
+    <custom-field action="translate">banknote_condition_rule</custom-field>
+    <custom-field action="copy">best_season</custom-field>
+    <custom-field action="translate">best_worst_time_note</custom-field>
+    <custom-field action="copy">biosphere_reserve</custom-field>
+    <custom-field action="copy">biosphere_year</custom-field>
+    <custom-field action="translate">birth_year_approx</custom-field>
+    <custom-field action="translate">booking_platforms</custom-field>
+    <custom-field action="translate">border_country</custom-field>
+    <custom-field action="translate">bordering_countries</custom-field>
+    <custom-field action="copy">calendar_system</custom-field>
+    <custom-field action="translate">calendar_system_note</custom-field>
+    <custom-field action="translate">calendar_systems</custom-field>
+    <custom-field action="translate">calendar_timing</custom-field>
+    <custom-field action="copy">calling_code</custom-field>
+    <custom-field action="translate">capital_reference</custom-field>
+    <custom-field action="translate">card_acceptance_summary</custom-field>
+    <custom-field action="translate">card_network_status</custom-field>
+    <custom-field action="translate">cash_recommendation_note</custom-field>
+    <custom-field action="translate">ceremonial_food_reference</custom-field>
+    <custom-field action="copy">ceremony_duration_days</custom-field>
+    <custom-field action="translate">cities_with_metro</custom-field>
+    <custom-field action="copy">classification</custom-field>
+    <custom-field action="translate">climate_overview</custom-field>
+    <custom-field action="translate">climate_type</custom-field>
+    <custom-field action="translate">closure_impact_note</custom-field>
+    <custom-field action="translate">collection_categories</custom-field>
+    <custom-field action="copy">competition_level</custom-field>
+    <custom-field action="ignore">content_status</custom-field>
+    <custom-field action="copy">crossing_type</custom-field>
+    <custom-field action="copy">crowd_scale</custom-field>
+    <custom-field action="translate">crowding_and_price_note</custom-field>
+    <custom-field action="copy">currency_iso_code</custom-field>
+    <custom-field action="translate">currency_note</custom-field>
+    <custom-field action="copy">currency_symbol</custom-field>
+    <custom-field action="translate">currency_units</custom-field>
+    <custom-field action="translate">daily_budget_bands</custom-field>
+    <custom-field action="copy">dance_type</custom-field>
+    <custom-field action="translate">death_year_approx</custom-field>
+    <custom-field action="translate">declaration_rules_note</custom-field>
+    <custom-field action="translate">denominations</custom-field>
+    <custom-field action="copy">desert_type</custom-field>
+    <custom-field action="translate">dialect_variants</custom-field>
+    <custom-field action="copy">difficulty_level</custom-field>
+    <custom-field action="translate">digital_payment_note</custom-field>
+    <custom-field action="translate">document_specs</custom-field>
+    <custom-field action="translate">domestic_network_note</custom-field>
+    <custom-field action="translate">dress_code_note</custom-field>
+    <custom-field action="translate">dress_code_summary</custom-field>
+    <custom-field action="translate">dual_nationality_note</custom-field>
+    <custom-field action="copy">dual_pricing_active</custom-field>
+    <custom-field action="copy">elevation_m</custom-field>
+    <custom-field action="copy">emergency_ambulance</custom-field>
+    <custom-field action="copy">emergency_fire</custom-field>
+    <custom-field action="copy">emergency_police</custom-field>
+    <custom-field action="translate">end_year_approx</custom-field>
+    <custom-field action="copy">entity_uid</custom-field>
+    <custom-field action="copy">entry_permit_required</custom-field>
+    <custom-field action="translate">entry_points_reference</custom-field>
+    <custom-field action="copy">estimated_duration_days</custom-field>
+    <custom-field action="translate">ethnicity_reference</custom-field>
+    <custom-field action="translate">etiquette_link</custom-field>
+    <custom-field action="copy">event_end_date</custom-field>
+    <custom-field action="copy">event_frequency</custom-field>
+    <custom-field action="copy">event_start_date</custom-field>
+    <custom-field action="copy">event_travel_impact</custom-field>
+    <custom-field action="translate">exchange_channel_notes</custom-field>
+    <custom-field action="translate">exchange_locations</custom-field>
+    <custom-field action="copy">extension_days_each</custom-field>
+    <custom-field action="translate">extension_info</custom-field>
+    <custom-field action="copy">extension_max_count</custom-field>
+    <custom-field action="copy">external_recognition_uris</custom-field>
+    <custom-field action="copy">external_reference_uri</custom-field>
+    <custom-field action="translate">fabric_type</custom-field>
+    <custom-field action="translate">faq_items</custom-field>
+    <custom-field action="copy">featured_image_gallery</custom-field>
+    <custom-field action="copy">fee_currency</custom-field>
+    <custom-field action="translate">fee_policy_note</custom-field>
+    <custom-field action="copy">forest_type</custom-field>
+    <custom-field action="translate">formation</custom-field>
+    <custom-field action="translate">founded_year</custom-field>
+    <custom-field action="copy">free_zone</custom-field>
+    <custom-field action="copy">free_zone_excluded_iso</custom-field>
+    <custom-field action="copy">free_zone_mainland_allowed</custom-field>
+    <custom-field action="translate">free_zone_note</custom-field>
+    <custom-field action="copy">free_zone_stay_days</custom-field>
+    <custom-field action="translate">garment_components</custom-field>
+    <custom-field action="translate">general_safety_notes</custom-field>
+    <custom-field action="copy">geo_boundary</custom-field>
+    <custom-field action="copy">geo_coordinates</custom-field>
+    <custom-field action="copy">geographic_boundary</custom-field>
+    <custom-field action="copy">geographic_coordinates</custom-field>
+    <custom-field action="copy">geopark</custom-field>
+    <custom-field action="copy">geopark_year</custom-field>
+    <custom-field action="translate">government_type</custom-field>
+    <custom-field action="translate">guided_tour_note</custom-field>
+    <custom-field action="copy">hero_image</custom-field>
+    <custom-field action="translate">historical_context</custom-field>
+    <custom-field action="translate">housed_in</custom-field>
+    <custom-field action="translate">insurance_note</custom-field>
+    <custom-field action="copy">insurance_required</custom-field>
+    <custom-field action="translate">intangible_heritage_criteria</custom-field>
+    <custom-field action="copy">intangible_heritage_designation</custom-field>
+    <custom-field action="copy">intangible_heritage_status</custom-field>
+    <custom-field action="copy">intangible_heritage_year</custom-field>
+    <custom-field action="translate">intercity_bus_note</custom-field>
+    <custom-field action="copy">international_card_status</custom-field>
+    <custom-field action="copy">internet_tld</custom-field>
+    <custom-field action="copy">is_official_language</custom-field>
+    <custom-field action="copy">is_recurring</custom-field>
+    <custom-field action="copy">island_type</custom-field>
+    <custom-field action="translate">key_species</custom-field>
+    <custom-field action="copy">landscape_type</custom-field>
+    <custom-field action="translate">language_family</custom-field>
+    <custom-field action="translate">language_reference</custom-field>
+    <custom-field action="copy">last_verified_date</custom-field>
+    <custom-field action="copy">length_km</custom-field>
+    <custom-field action="translate">local_emergency_facilities</custom-field>
+    <custom-field action="translate">lunar_date_disclaimer</custom-field>
+    <custom-field action="translate">main_ingredients</custom-field>
+    <custom-field action="translate">major_works</custom-field>
+    <custom-field action="copy">managed_area</custom-field>
+    <custom-field action="translate">materials</custom-field>
+    <custom-field action="copy">max_depth_m</custom-field>
+    <custom-field action="copy">max_temperature_c</custom-field>
+    <custom-field action="copy">max_total_stay_days</custom-field>
+    <custom-field action="translate">meta_description</custom-field>
+    <custom-field action="translate">meta_title</custom-field>
+    <custom-field action="translate">mode_choice_guide</custom-field>
+    <custom-field action="copy">mountain_type</custom-field>
+    <custom-field action="translate">music_accompaniment_reference</custom-field>
+    <custom-field action="copy">name_ar</custom-field>
+    <custom-field action="copy">name_en</custom-field>
+    <custom-field action="translate">name_endonym</custom-field>
+    <custom-field action="copy">name_fa</custom-field>
+    <custom-field action="translate">name_local</custom-field>
+    <custom-field action="translate">national_holidays</custom-field>
+    <custom-field action="copy">national_monument</custom-field>
+    <custom-field action="copy">national_registration</custom-field>
+    <custom-field action="translate">natural_hazard_summary</custom-field>
+    <custom-field action="copy">natural_phenomenon_type</custom-field>
+    <custom-field action="translate">nearby_park_reference</custom-field>
+    <custom-field action="copy">neighborhood_type</custom-field>
+    <custom-field action="translate">neighboring_countries</custom-field>
+    <custom-field action="translate">occasion</custom-field>
+    <custom-field action="copy">official_application_portal</custom-field>
+    <custom-field action="copy">official_event_url</custom-field>
+    <custom-field action="translate">official_language</custom-field>
+    <custom-field action="copy">official_name_ar</custom-field>
+    <custom-field action="copy">official_name_en</custom-field>
+    <custom-field action="copy">official_name_fa</custom-field>
+    <custom-field action="copy">official_source_link</custom-field>
+    <custom-field action="translate">operating_hours</custom-field>
+    <custom-field action="translate">optimal_conditions</custom-field>
+    <custom-field action="translate">organizer_name</custom-field>
+    <custom-field action="translate">overview_text</custom-field>
+    <custom-field action="copy">page_title</custom-field>
+    <custom-field action="copy">park_type</custom-field>
+    <custom-field action="translate">passport_stamping_note</custom-field>
+    <custom-field action="copy">passport_validity_months</custom-field>
+    <custom-field action="copy">peak_end_week</custom-field>
+    <custom-field action="copy">peak_start_week</custom-field>
+    <custom-field action="translate">peak_window_note</custom-field>
+    <custom-field action="translate">permanent_highlights</custom-field>
+    <custom-field action="translate">photography_note</custom-field>
+    <custom-field action="copy">photography_policy</custom-field>
+    <custom-field action="translate">photography_restrictions</custom-field>
+    <custom-field action="translate">policy_change_log</custom-field>
+    <custom-field action="copy">population</custom-field>
+    <custom-field action="copy">population_estimate</custom-field>
+    <custom-field action="translate">portal_links</custom-field>
+    <custom-field action="translate">predecessor_reference</custom-field>
+    <custom-field action="translate">predictability_note</custom-field>
+    <custom-field action="translate">price_reading_rule</custom-field>
+    <custom-field action="translate">program_highlights</custom-field>
+    <custom-field action="copy">programme_code</custom-field>
+    <custom-field action="copy">province_code</custom-field>
+    <custom-field action="translate">provinces_spanning</custom-field>
+    <custom-field action="translate">public_participation_note</custom-field>
+    <custom-field action="translate">rail_network_note</custom-field>
+    <custom-field action="copy">railway_station</custom-field>
+    <custom-field action="translate">rate_reference_links</custom-field>
+    <custom-field action="translate">rate_regime_note</custom-field>
+    <custom-field action="translate">recipe_content</custom-field>
+    <custom-field action="copy">redenomination_end_date</custom-field>
+    <custom-field action="copy">redenomination_law_date</custom-field>
+    <custom-field action="translate">redenomination_note</custom-field>
+    <custom-field action="copy">redenomination_ratio</custom-field>
+    <custom-field action="copy">redenomination_start_date</custom-field>
+    <custom-field action="copy">redenomination_status</custom-field>
+    <custom-field action="copy">region_classification</custom-field>
+    <custom-field action="translate">regional_etiquette_notes</custom-field>
+    <custom-field action="translate">regional_health_notes</custom-field>
+    <custom-field action="translate">regional_notes</custom-field>
+    <custom-field action="translate">related_instruments_reference</custom-field>
+    <custom-field action="translate">religious_site_etiquette</custom-field>
+    <custom-field action="translate">restricted_entry_note</custom-field>
+    <custom-field action="translate">ritual_context_reference</custom-field>
+    <custom-field action="translate">route_reference_note</custom-field>
+    <custom-field action="translate">route_stop_notes</custom-field>
+    <custom-field action="translate">safety_link</custom-field>
+    <custom-field action="copy">salinity_type</custom-field>
+    <custom-field action="translate">script</custom-field>
+    <custom-field action="copy">season</custom-field>
+    <custom-field action="translate">short_summary</custom-field>
+    <custom-field action="translate">social_customs_summary</custom-field>
+    <custom-field action="translate">source_references</custom-field>
+    <custom-field action="copy">spatial_scope</custom-field>
+    <custom-field action="copy">speaker_estimate_iran</custom-field>
+    <custom-field action="translate">special_passport_note</custom-field>
+    <custom-field action="translate">spectator_access_note</custom-field>
+    <custom-field action="copy">sport_type</custom-field>
+    <custom-field action="translate">start_year_approx</custom-field>
+    <custom-field action="copy">status</custom-field>
+    <custom-field action="translate">successor_reference</custom-field>
+    <custom-field action="copy">suggested_duration</custom-field>
+    <custom-field action="translate">technique_summary</custom-field>
+    <custom-field action="copy">timezone</custom-field>
+    <custom-field action="translate">tipping_guidance</custom-field>
+    <custom-field action="copy">total_area_km2</custom-field>
+    <custom-field action="copy">total_distance_km</custom-field>
+    <custom-field action="copy">tourism_target_village</custom-field>
+    <custom-field action="copy">tourist_card_available</custom-field>
+    <custom-field action="translate">tourist_card_services</custom-field>
+    <custom-field action="translate">tourist_suitability_note</custom-field>
+    <custom-field action="translate">traditional_sports_reference</custom-field>
+    <custom-field action="translate">transport_access</custom-field>
+    <custom-field action="translate">transport_etiquette_note</custom-field>
+    <custom-field action="translate">transport_modes</custom-field>
+    <custom-field action="copy">trekking_difficulty</custom-field>
+    <custom-field action="copy">unesco_creative_city</custom-field>
+    <custom-field action="translate">unit_confusion_explainer</custom-field>
+    <custom-field action="translate">vaccination_recommendations</custom-field>
+    <custom-field action="translate">venue_name</custom-field>
+    <custom-field action="copy">video_sample</custom-field>
+    <custom-field action="translate">viewing_points</custom-field>
+    <custom-field action="translate">visa_info_link</custom-field>
+    <custom-field action="translate">visa_policy_matrix</custom-field>
+    <custom-field action="translate">visa_types</custom-field>
+    <custom-field action="translate">visiting_hours</custom-field>
+    <custom-field action="translate">visitor_etiquette_note</custom-field>
+    <custom-field action="translate">voa_entry_points</custom-field>
+    <custom-field action="copy">volcanic</custom-field>
+    <custom-field action="copy">water_body_type</custom-field>
+    <custom-field action="translate">water_safety_note</custom-field>
+    <custom-field action="copy">weather_dependency</custom-field>
+    <custom-field action="copy">world_heritage</custom-field>
+    <custom-field action="translate">world_heritage_criteria</custom-field>
+    <custom-field action="copy">world_heritage_ref_number</custom-field>
+    <custom-field action="copy">world_heritage_year</custom-field>
+
+  </custom-fields>
+
+  <custom-fields-texts>
+    
+
+    
+    <key name="faq_items">
+      <key name="*">
+        <key name="faq_question" />
+        <key name="faq_answer" />
+      </key>
+    </key>
+
+    
+    <key name="source_references">
+      <key name="*">
+        <key name="source_name" />
+      </key>
+    </key>
+
+    
+    <key name="audio_narration">
+      <key name="*">
+        <key name="audio_title" />
+        <key name="audio_file" />
+        <key name="audio_external_url" />
+        <key name="audio_duration" />
+        <key name="audio_transcript" />
+      </key>
+    </key>
+
+    
+
+    
+    <key name="route_stop_notes">
+      <key name="*">
+        <key name="stop_note" />
+        <key name="stop_id" type="post-ids" />
+      </key>
+    </key>
+
+    
+
+    
+    <key name="visa_types">
+      <key name="*">
+        <key name="vt_processing_note" />
+        <key name="vt_required_docs" />
+        <key name="vt_note" />
+      </key>
+    </key>
+
+    
+    <key name="visa_policy_matrix">
+      <key name="*">
+        <key name="pc_note" />
+      </key>
+    </key>
+
+    
+    <key name="application_steps">
+      <key name="*">
+        <key name="step_title" />
+        <key name="step_text" />
+      </key>
+    </key>
+
+    
+    <key name="portal_links">
+      <key name="*">
+        <key name="portal_label" />
+        <key name="portal_scope" />
+      </key>
+    </key>
+
+    
+    <key name="document_specs">
+      <key name="*">
+        <key name="doc_note" />
+      </key>
+    </key>
+
+    
+    <key name="voa_entry_points">
+      <key name="*">
+        <key name="ep_name" />
+      </key>
+    </key>
+
+    
+    <key name="policy_change_log">
+      <key name="*">
+        <key name="chg_summary" />
+      </key>
+    </key>
+
+  
+
+    <key name="booking_platforms">
+      <key name="*">
+        <key name="bp_note" />
+      </key>
+    </key>
+
+    <key name="calendar_systems">
+      <key name="*">
+        <key name="cs_note" />
+      </key>
+    </key>
+
+    <key name="card_network_status">
+      <key name="*">
+        <key name="cn_condition_note" />
+      </key>
+    </key>
+
+    <key name="cities_with_metro">
+      <key name="*">
+        <key name="cm_city_name" />
+        <key name="cm_city_url" />
+        <key name="cm_note" />
+      </key>
+    </key>
+
+    <key name="currency_units">
+      <key name="*">
+        <key name="cu_name" />
+        <key name="cu_note" />
+      </key>
+    </key>
+
+    <key name="daily_budget_bands">
+      <key name="*">
+        <key name="db_note" />
+      </key>
+    </key>
+
+    <key name="denominations">
+      <key name="*">
+        <key name="dn_note" />
+      </key>
+    </key>
+
+    <key name="exchange_locations">
+      <key name="*">
+        <key name="ex_city_name" />
+        <key name="ex_city_url" />
+        <key name="ex_area_name" />
+        <key name="ex_note" />
+      </key>
+    </key>
+
+    <key name="national_holidays">
+      <key name="*">
+        <key name="nh_name" />
+        <key name="nh_date_rule" />
+        <key name="nh_note" />
+      </key>
+    </key>
+
+    <key name="nearby_park_reference">
+      <key name="*">
+        <key name="np_name" />
+        <key name="np_url" />
+      </key>
+    </key>
+
+    <key name="program_highlights">
+      <key name="*">
+        <key name="ph_title" />
+        <key name="ph_description" />
+      </key>
+    </key>
+
+    <key name="rate_reference_links">
+      <key name="*">
+        <key name="rr_label" />
+      </key>
+    </key>
+
+    <key name="regional_notes">
+      <key name="*">
+        <key name="rn_g3_name" />
+        <key name="rn_note" />
+      </key>
+    </key>
+
+    <key name="tourist_card_services">
+      <key name="*">
+        <key name="tc_fee_note" />
+        <key name="tc_note" />
+      </key>
+    </key>
+
+    <key name="traditional_sports_reference">
+      <key name="*">
+        <key name="ts_name" />
+        <key name="ts_url" />
+        <key name="ts_note" />
+      </key>
+    </key>
+
+    <key name="transport_modes">
+      <key name="*">
+        <key name="tm_description" />
+        <key name="tm_note" />
+      </key>
+    </key>
+
+    <key name="viewing_points">
+      <key name="*">
+        <key name="vp_name" />
+        <key name="vp_url" />
+        <key name="vp_note" />
+      </key>
+    </key>
+
+  </custom-fields-texts>
+</wpml-config>

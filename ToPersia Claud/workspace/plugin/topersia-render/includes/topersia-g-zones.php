@@ -5109,13 +5109,24 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 		$ref    = topersia_g_text( $pid, 'external_reference_uri' );
 
 		/*
+		 * وضعیت راستی‌آزمایی هر زبان جداست (WPML 1.13: content_status «ignore»).
+		 * ترجمۀ بی مقدار «نیازمند راستی‌آزمایی» است و نه وضعیت اصل فارسی را
+		 * می‌گیرد نه تاریخ راستی‌آزمایی‌اش را (last_verified_date هنوز copy است).  P5-D308
+		 */
+		$own = '' !== $status;
+
+		if ( ! $own && topersia_g_default_id( $pid ) !== (int) $pid ) {
+			$status = 'needs_verification';
+		}
+
+		/*
 		 * تاریخ راستی‌آزمایی زیر مقدار «وضعیت محتوا»، در همان خانه — نشانِ
 		 * جداگانۀ «✓ آخرین راستی‌آزمایی: …» رفت. تاریخ نبود، فقط وضعیت.
 		 * `<time datetime>` تا تاریخ ماشین‌خوان هم باشد.  P5-D268
 		 */
 		if ( '' !== $status ) {
 
-			$raw  = trim( (string) topersia_g_raw( $pid, 'last_verified_date' ) );
+			$raw  = $own ? trim( (string) topersia_g_raw( $pid, 'last_verified_date' ) ) : '';
 			$when = topersia_g_date_fa( $raw );
 			$iso  = preg_match( '/^\d{4}-\d{2}-\d{2}/', $raw ) ? substr( $raw, 0, 10 )
 				: ( preg_match( '/^\d{9,11}$/', $raw ) ? gmdate( 'Y-m-d', (int) $raw ) : '' );

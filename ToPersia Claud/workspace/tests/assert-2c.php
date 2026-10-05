@@ -377,3 +377,38 @@ tp441_mut( 'فقط کارت آمار: فهرست، اسلایدر و پنجرۀ 
 			&& 2 === preg_match_all( "/'count:[a-z_]+'/", $s, $m ) && array( "'count:provinces'" ) === array_values( array_unique( $m[0] ) );
 	},
 	$zones2c, $zones2c . "\n// topersia_g_fact_count( \$post_id, \$group )" );
+/* ══ وصلۀ ۲ج و۳ — وضعیت راستی‌آزمایی هر زبان (P5-D308) ═════════════════ */
+
+echo "\nوصلۀ ۲ج — و۳ وضعیت راستی‌آزمایی هر زبان  P5-D308\n" . str_repeat( '─', 78 ) . "\n";
+
+/* اصل فارسی verified با تاریخ؛ ترجمۀ انگلیسی بی content_status ولی با تاریخ رونوشت‌شده (last_verified_date هنوز copy) */
+$GLOBALS['tp_posts'][990803] = array( 'type' => 'tp_country', 'title' => 'کشور آزمون وضعیت' );
+$GLOBALS['tp_posts'][990804] = array( 'type' => 'tp_country', 'title' => 'Status Test Country' );
+$GLOBALS['tp_meta'][990803]  = array( 'content_status' => 'verified', 'last_verified_date' => '2026-09-20' );
+$GLOBALS['tp_meta'][990804]  = array( 'last_verified_date' => '2026-09-20' );
+$GLOBALS['tp_filters']['wpml_default_language'] = array( function () { return 'fa'; } );
+$GLOBALS['tp_filters']['wpml_object_id']        = array( function ( $id ) { return 990804 === (int) $id ? 990803 : $id; } );
+$src3 = function () {
+	return array(
+		'en' => tp442_lang( 'en', function () { return topersia_g_sc_sources( array( 'id' => 990804 ) ); } ),
+		'fa' => topersia_g_sc_sources( array( 'id' => 990803 ) ),
+	);
+};
+$v3_real = $src3();
+$GLOBALS['tp_meta'][990804]['content_status'] = 'verified';   /* جهش: مقدار اصل روی ترجمه — همان رونوشت copy پیکربندی 1.12 */
+$v3_mut  = $src3();
+unset( $GLOBALS['tp_posts'][990803], $GLOBALS['tp_posts'][990804], $GLOBALS['tp_meta'][990803], $GLOBALS['tp_meta'][990804], $GLOBALS['tp_filters']['wpml_default_language'], $GLOBALS['tp_filters']['wpml_object_id'] );
+tp441_mut( 'ترجمۀ بی content_status در /en/: «Needs verification» بی «Verified» و بی تاریخ راستی‌آزمایی اصل؛ اصل فارسی همان «راستی‌آزمایی‌شده» با تاریخ خودش',
+	function ( $x ) {
+		return false !== strpos( $x['en'], 'Needs verification' ) && false === strpos( $x['en'], 'Verified' ) && false === strpos( $x['en'], 'tp-uid__date' )
+			&& false !== strpos( $x['fa'], 'راستی‌آزمایی‌شده' ) && false !== strpos( $x['fa'], 'datetime="2026-09-20"' );
+	},
+	$v3_real, $v3_mut );
+
+tp441_mut( 'خواننده: خالی فقط در ترجمه (topersia_g_default_id ≠ خود پست) needs_verification می‌شود و تاریخ فقط کنار وضعیت خودِ همان زبان می‌آید',
+	function ( $s ) {
+		$b = tp2c_body( $s, 'topersia_g_sc_sources' );
+		return false !== strpos( $b, "if ( ! \$own && topersia_g_default_id( \$pid ) !== (int) \$pid ) {\n\t\t\t\$status = 'needs_verification';" )
+			&& false !== strpos( $b, "\$raw  = \$own ? trim( (string) topersia_g_raw( \$pid, 'last_verified_date' ) ) : '';" );
+	},
+	$zones2c, str_replace( "\$raw  = \$own ? trim( (string) topersia_g_raw( \$pid, 'last_verified_date' ) ) : '';", "\$raw  = trim( (string) topersia_g_raw( \$pid, 'last_verified_date' ) );", $zones2c ) );

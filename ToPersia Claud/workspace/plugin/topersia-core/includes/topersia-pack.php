@@ -2860,7 +2860,7 @@ function topersia_pack_tr_apply( $data, $index, $run ) {
 			$prev['content'] = get_post_field( 'post_content', $post_id );
 		}
 
-		/* content_status هم: هم‌گام‌سازی copy زیر آن را از اصل می‌نویسد و باید برگردد */
+		/* content_status هم: در پیکربندی 1.12 (زنده تا ممیزی) هم‌گام‌سازی copy زیر آن را از اصل می‌نویسد و باید برگردد */
 		foreach ( array_merge( array_keys( $writes ), array( 'content_status' ) ) as $key ) {
 			$prev['meta'][ $key ] = get_post_meta( $post_id, $key, false );
 		}
@@ -2917,8 +2917,9 @@ function topersia_pack_tr_apply( $data, $index, $run ) {
 
 	/*
 	 * وضعیت محتوای ترجمه مال خودش است: تازه needs_verification، موجود همان پیشین.
-	 * پس از ذخیرۀ پایانی — WPML با هر ذخیرۀ ترجمه فیلدهای copy (و content_status
-	 * در تنظیمات کنونی copy است) را از اصل روی ترجمه می‌نشاند.
+	 * پس از ذخیرۀ پایانی — WPML با هر ذخیرۀ ترجمه فیلدهای copy را از اصل روی ترجمه
+	 * می‌نشاند و content_status در پیکربندی 1.12 (زنده تا ممیزی) copy است؛ در 1.13
+	 * محلی ignore (P5-D308) و این نوشتن همان مقدار خودِ ترجمه را نگه می‌دارد.
 	 */
 	delete_post_meta( $post_id, 'content_status' );
 	foreach ( 'created' === $plan['result'] ? array( 'needs_verification' ) : (array) $prev['meta']['content_status'] as $value ) {

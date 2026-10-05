@@ -11,6 +11,7 @@
  *   ۲ج٫۵  گالری تجمیعی و صف هسته  P5-D274 · P5-D300 · P5-D290 — کارهای صفی که
  *         آزمون می‌سازد در پایان اجرا و ردیفشان پاک می‌شود
  *   ۲ج٫۱۰ نامک از نام انگلیسی — سه مسیر ساخت، ادعای دائمی، فهرست ناهمخوان
+ *   وصلۀ ۲ج و۱ گزارش شکاف ترجمه  P5-D305 · و۳ وضعیت راستی‌آزمایی هر زبان  P5-D308
  *
  * هر ادعا جهش دارد. کد خروج: ۰ سالم · ۱ افتادن · ۲ محیط ناقص
  */
@@ -910,6 +911,57 @@ t( 'تشخیص خط: topersia_i18n_foreign (هسته) و topersia_g_foreign_text
 
 /* پاک‌سازی: فقط پست‌های همین آزمون (نشانگر) و ردیف‌های لاگ همین run */
 $wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $v1_run . '"' ) . '%' ) );
+
+/* ══ وصلۀ ۲ج و۳ — وضعیت راستی‌آزمایی هر زبان  P5-D308 ═══════════════════ */
+section( 'وصلۀ ۲ج و۳ — وضعیت راستی‌آزمایی هر زبان  P5-D308' );
+
+/* کلاس از تنظیم زندۀ WPML (پیکربندی 1.13)، نه فهرست دستی */
+$v3_cls = topersia_pack_wpml_classes();
+mut( 'WPML 1.13: content_status «ignore» (۰)؛ last_verified_date و population همچنان copy (۱)',
+	function ( $c ) { return 0 === ( $c['content_status'] ?? null ) && 1 === ( $c['last_verified_date'] ?? null ) && 1 === ( $c['population'] ?? null ); },
+	$v3_cls, array( 'content_status' => 1 ) + $v3_cls, var_export( $v3_cls['content_status'] ?? null, true ) );
+
+/* فارسی verified (نشانگر قاعدۀ ۱۶) ← ترجمۀ انگلیسی با چرخۀ ۲ج٫۹ (needs_verification) */
+$v3_fa  = tmp_post( 'tp_country', 'کشور آزمون وضعیت ۲ج', 'publish', array( 'name_fa' => 'کشور آزمون وضعیت', 'content_status' => 'verified', 'last_verified_date' => '2026-09-20', 'population' => '1000' ) );
+$v3_run = 'imp-test-2cv3-' . strtolower( wp_generate_password( 6, false, false ) );
+$v3_tpl = topersia_pack_tr_export( array( $v3_fa ), 'en' );
+$v3_tpl['posts'][0]['title']['value'] = 'Status Test Country';
+$v3_tr  = topersia_pack_tr_apply( topersia_pack_tr_parse( wp_json_encode( $v3_tpl ) ), 0, $v3_run );
+$v3_en  = tp_test_mark( (int) $v3_tr['target'] );
+$cleanup['posts'][] = $v3_en;
+$v3_cs0 = (string) get_post_meta( $v3_en, 'content_status', true );
+
+/* ذخیرۀ دوبارۀ اصل و خود ترجمه؛ کنترل: population (copy) باید به ترجمه برسد، وگرنه هم‌گام‌سازی اجرا نشده و ادعا تهی است */
+update_post_meta( $v3_fa, 'population', '2000' );
+wp_update_post( array( 'ID' => $v3_fa ) );
+wp_update_post( array( 'ID' => $v3_en ) );
+$v3_after = array( 'cs' => (string) get_post_meta( $v3_en, 'content_status', true ), 'pop' => (string) get_post_meta( $v3_en, 'population', true ), 'fa' => (string) get_post_meta( $v3_fa, 'content_status', true ) );
+mut( 'ذخیرۀ دوبارۀ پست فارسی verified و ترجمه: ترجمۀ needs_verification همان می‌ماند؛ کنترل: population (copy) ۲۰۰۰ به ترجمه رسید — جهش: رونوشت verified',
+	function ( $x ) use ( $v3_cs0 ) { return 'needs_verification' === $v3_cs0 && 'needs_verification' === $x['cs'] && '2000' === $x['pop'] && 'verified' === $x['fa']; },
+	$v3_after, array( 'cs' => 'verified' ) + $v3_after, $v3_cs0 . ' · ' . wp_json_encode( $v3_after ) );
+
+/* ترجمۀ بی مقدار در /en/: «Needs verification» بی تاریخ؛ نه «Verified» و نه تاریخ راستی‌آزمایی اصل (last_verified_date copy است) */
+wp_update_post( array( 'ID' => $v3_en, 'post_status' => 'publish' ) );
+delete_post_meta( $v3_en, 'content_status' );
+$v3_lang = apply_filters( 'wpml_current_language', null );
+do_action( 'wpml_switch_language', 'en' );
+$v3_path = wp_make_link_relative( get_permalink( $v3_en ) );
+do_action( 'wpml_switch_language', $v3_lang );
+$v3_src  = function () use ( $v3_path ) { $r = local_get( $v3_path ); return array( $r['code'], section_html( $r['body'], 'tp-sources' ) ); };
+$v3_real = $v3_src();
+/* جهش: همان صفحه اگر content_status هنوز copy بود (مقدار اصل روی ترجمه) */
+update_post_meta( $v3_en, 'content_status', 'verified' );
+$v3_mut  = $v3_src();
+delete_post_meta( $v3_en, 'content_status' );
+mut( 'ترجمۀ بی content_status در ' . $v3_path . ': «Needs verification»، بی «Verified» و بی تاریخ راستی‌آزمایی اصل — جهش: مقدار رونوشت‌شدۀ اصل',
+	function ( $x ) { return 200 === $x[0] && false !== strpos( $x[1], 'Needs verification' ) && false === strpos( $x[1], 'Verified' ) && false === strpos( $x[1], 'tp-uid__date' ); },
+	$v3_real, $v3_mut, $v3_real[0] . ' · ' . ( false !== strpos( $v3_path, '/en/' ) ? 'en' : 'مسیر بی /en/' ) );
+
+/* فارسی دست‌نخورده: همان نشان و تاریخ خودش */
+$v3_fa_src = section_html( local_get( wp_make_link_relative( get_permalink( $v3_fa ) ) )['body'], 'tp-sources' );
+t( 'صفحۀ فارسی همان «راستی‌آزمایی‌شده» با تاریخ خودش (<time datetime="2026-09-20">)', false !== strpos( $v3_fa_src, 'راستی‌آزمایی‌شده' ) && false !== strpos( $v3_fa_src, 'datetime="2026-09-20"' ) );
+
+$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . topersia_log_table() . " WHERE channel = 'import' AND context LIKE %s", '%' . $wpdb->esc_like( '"run":"' . $v3_run . '"' ) . '%' ) );
 
 /* ══ پایان ══════════════════════════════════════════════════════════ */
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pass']}   افتاده: {$GLOBALS['fail']}\n";
