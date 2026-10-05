@@ -1915,6 +1915,11 @@ if ( ! function_exists( 'topersia_g_stat_plan' ) ) {
 	}
 }
 
+/** بیشینۀ نویسۀ مقدارِ غیرعددیِ خانۀ آمار — یک خط در ۳۹۰ (P5-D282). */
+if ( ! defined( 'TOPERSIA_STAT_MAX' ) ) {
+	define( 'TOPERSIA_STAT_MAX', 16 );
+}
+
 /**
  * یک خانۀ کارت آمار — برچسب و مقدارِ آمادۀ چاپ، یا null اگر داده نیست.
  *
@@ -1972,7 +1977,20 @@ if ( ! function_exists( 'topersia_g_stat_cell' ) ) {
 			$value = topersia_g_value( $key, $raw, $post_id );
 		}
 
-		return '' === trim( wp_strip_all_tags( (string) $value ) ) ? null : array( topersia_g_t( $map[ $key ]['label'] ), $value );
+		$plain = trim( wp_strip_all_tags( (string) $value ) );
+
+		/*
+		 * مقدار بلند هرگز در کارت آمار نمی‌آید (P5-D282) — خانه جایش را به نامزد
+		 * بعدی ماتریس می‌دهد. عدد و سال کوتاه‌اند؛ متن آزاد، کد و برچسب واژه‌نامه
+		 * بالای TOPERSIA_STAT_MAX نویسه در ۳۹۰ دو خط می‌شد («شهرستان کاشان،
+		 * به‌ویژه قمصر و نیاسر» سه خط، هر دو مرورگر).
+		 */
+		if ( ! in_array( $map[ $key ]['kind'], array( 'number', 'year' ), true )
+			&& ( function_exists( 'mb_strlen' ) ? mb_strlen( $plain, 'UTF-8' ) : strlen( $plain ) ) > TOPERSIA_STAT_MAX ) {
+			return null;
+		}
+
+		return '' === $plain ? null : array( topersia_g_t( $map[ $key ]['label'] ), $value );
 	}
 }
 
@@ -4952,7 +4970,8 @@ if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
 			'tp_travel_etiquette' => array( 'stats' => array(), 'scope' => 'none' ),   /* همه wysiwyg — بی خانۀ کوتاه */
 			'tp_calendar'         => array( 'stats' => array(), 'scope' => 'none' ),
 			'tp_transport'        => array( 'stats' => array(), 'scope' => 'none' ),
-			'tp_festival'         => array( 'stats' => array( 'event_frequency', 'venue_name' ), 'scope' => 'none' ),
+			/* محل برگزاری متن آزاد و اغلب بلند است — در آمار نه (P5-D282، یافتۀ ۲ج٫۱ در ۳۹۰) */
+			'tp_festival'         => array( 'stats' => array( 'event_frequency' ), 'scope' => 'none' ),
 			'tp_sports_event'     => array( 'stats' => array( 'sport_type', 'competition_level', 'event_frequency' ), 'scope' => 'none' ),
 			'tp_religious_event'  => array( 'stats' => array( 'calendar_system', 'ceremony_duration_days', 'crowd_scale' ), 'scope' => 'none' ),
 			'tp_seasonal_event'   => array( 'stats' => array( 'natural_phenomenon_type', 'season', 'weather_dependency' ), 'scope' => 'none' ),

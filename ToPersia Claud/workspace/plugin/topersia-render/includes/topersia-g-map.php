@@ -164,7 +164,6 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'international_card_status'  => array( 'label' => 'کارت بین‌المللی', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '195' ),
 		'redenomination_status'      => array( 'label' => 'بازتعریف واحد پول', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '192' ),
 		'event_frequency'            => array( 'label' => 'تکرار', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '213' ),
-		'venue_name'                 => array( 'label' => 'محل برگزاری', 'unit' => '', 'kind' => 'text', 'zone' => 'stat' ),
 		'sport_type'                 => array( 'label' => 'رشته', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '214' ),
 		'competition_level'          => array( 'label' => 'سطح', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '215' ),
 		'calendar_system'            => array( 'label' => 'تقویم', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '204' ),

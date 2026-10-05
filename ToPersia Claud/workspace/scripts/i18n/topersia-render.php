@@ -263,7 +263,6 @@ return array(
 	'کارت بین‌المللی'   => array( 'en' => 'International cards', 'ar' => 'البطاقات الدولية' ),
 	'بازتعریف واحد پول' => array( 'en' => 'Redenomination', 'ar' => 'إعادة تقييم العملة' ),
 	'تکرار'                       => array( 'en' => 'Frequency', 'ar' => 'التكرار' ),
-	'محل برگزاری'            => array( 'en' => 'Venue', 'ar' => 'مكان الحدث' ),
 	'رشته'                         => array( 'en' => 'Sport', 'ar' => 'الرياضة' ),
 	'سطح'                           => array( 'en' => 'Level', 'ar' => 'المستوى' ),
 	'تقویم'                       => array( 'en' => 'Calendar', 'ar' => 'التقويم' ),

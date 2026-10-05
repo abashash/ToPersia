@@ -1437,10 +1437,6 @@ msgstr "Limited"
 msgid "محدودۀ جغرافیایی"
 msgstr "Geographic extent"
 
-#: includes/topersia-g-map.php
-msgid "محل برگزاری"
-msgstr "Venue"
-
 #: includes/topersia-g-zones.php
 msgid "محله"
 msgstr "Neighborhood"
