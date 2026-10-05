@@ -128,7 +128,41 @@ if ( 'setup' === $cmd ) {
 		$pages[ $type ] = $row;
 	}
 
-	echo wp_json_encode( array( 'pages' => $pages, 'made' => $made, 'run' => $run, 'floor' => $floor, 'post_floor' => $pfloor ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ), "\n";
+	/*
+	 * نگهبان رفتاری پیش‌نمایش (P5-D306): wpml_should_filter_preview_lang در مستند WPML نیست، فقط در
+	 * کد — پس آزمون رفتاری، مستقل از دادۀ واقعی: کشور فارسی موقت با دو استان موقت (رابطۀ ۷۱) و
+	 * ترجمۀ انگلیسی **پیش‌نویس**؛ پیش‌نمایشش با مدیر آزمون باید «Provinces 2» نشان دهد (گراف فارسی؛
+	 * گراف انگلیسی صفر است). همه با نشانگر همین run.
+	 */
+	$fx_fa = wp_insert_post( array( 'post_type' => 'tp_country', 'post_status' => 'publish', 'post_title' => 'کشور آزمون پیش‌نمایش ۲ج' ), true );
+	$fixture = array();
+	if ( ! is_wp_error( $fx_fa ) ) {
+		do_action( 'wpml_set_element_language_details', array( 'element_id' => $fx_fa, 'element_type' => 'post_tp_country', 'trid' => false, 'language_code' => 'fa' ) );
+		$made[] = tp_test_mark( $fx_fa, $run );
+		update_post_meta( $fx_fa, 'official_language', 'فارسی' );
+		$rel71 = topersia_relation( 71 );
+		foreach ( array( 'یک', 'دو' ) as $n ) {
+			$pv = wp_insert_post( array( 'post_type' => 'tp_province', 'post_status' => 'publish', 'post_title' => 'استان آزمون پیش‌نمایش ' . $n ), true );
+			if ( is_wp_error( $pv ) ) { continue; }
+			do_action( 'wpml_set_element_language_details', array( 'element_id' => $pv, 'element_type' => 'post_tp_province', 'trid' => false, 'language_code' => 'fa' ) );
+			$made[] = tp_test_mark( $pv, $run );
+			if ( $rel71 ) { $rel71->update( $fx_fa, $pv ); }
+		}
+		$tpl = topersia_pack_tr_export( array( $fx_fa ), 'en' );
+		if ( $tpl ) {
+			$tpl['posts'][0]['title']['value'] = 'Preview Test Country';
+			$plan = topersia_pack_tr_apply( topersia_pack_tr_parse( wp_json_encode( $tpl ) ), 0, $run );
+			$fx_en = (int) $plan['target'];
+			if ( $fx_en ) {
+				$made[] = tp_test_mark( $fx_en, $run );   /* پیش‌نویس می‌ماند */
+				do_action( 'wpml_switch_language', 'en' );
+				$fixture = array( 'en' => wp_make_link_relative( get_preview_post_link( $fx_en ) ), 'status' => get_post_status( $fx_en ), 'want' => 2 );
+				do_action( 'wpml_switch_language', 'fa' );
+			}
+		}
+	}
+
+	echo wp_json_encode( array( 'pages' => $pages, 'preview_fixture' => $fixture, 'made' => $made, 'run' => $run, 'floor' => $floor, 'post_floor' => $pfloor ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ), "\n";
 	exit( 0 );
 }
 

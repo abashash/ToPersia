@@ -131,7 +131,7 @@ async function weatherSettled( page ) {
 	}
 	const L = want( 'lang' ) ? langPages() : null;
 	/* ترجمۀ پیش‌نویسِ موجود (بازبینی کاربر) با پیش‌نمایش مدیر آزمون دیده می‌شود، نه با انتشار — وصلۀ ۲ج و۴ */
-	const ADMIN = L && Object.values( L.pages ).some( r => r.preview && r.preview.length )
+	const ADMIN = L && ( Object.values( L.pages ).some( r => r.preview && r.preview.length ) || ( L.preview_fixture && L.preview_fixture.en ) )
 		? JSON.parse( execFileSync( PHP, [ path.join( __dirname, 'local-login.php' ), 'tp_test_admin' ], { encoding: 'utf8', stdio: [ 'ignore', 'pipe', 'inherit' ] } ) ).cookies : null;
 	const asOf = ( row, lang ) => ( row.preview || [] ).includes( lang ) ? ADMIN : null;
 	try {
@@ -259,6 +259,18 @@ async function weatherSettled( page ) {
 						&& toLatin( v6.fa ) === v6.en && toLatin( v6.ar ) === v6.en && Number( v6.en ) > 1, JSON.stringify( v6 ) );
 				} else {
 					check( 'و۲ کشور: صفحه‌های fa · en · ar هست', false, JSON.stringify( country ) );
+				}
+				/*
+				 * نگهبان رفتاری پیش‌نمایش — wpml_should_filter_preview_lang فقط در کد WPML است، نه در مستند:
+				 * کشور موقتِ دو استانی با ترجمۀ انگلیسی پیش‌نویس؛ پیش‌نمایش مدیر باید ۲ نشان دهد (گراف انگلیسی صفر)  P5-D306
+				 */
+				const fx = L.preview_fixture || {};
+				if ( fx.en ) {
+					const vfx = await provCell( fx.en, 'Provinces', ADMIN );
+					check( `و۲ پیش‌نمایش ترجمۀ پیش‌نویس (${ fx.status }): «Provinces» ${ vfx || '—' } = ${ fx.want } از گراف فارسی، نه گراف زبان پیش‌نمایش  P5-D306`,
+						String( fx.want ) === vfx && 'draft' === fx.status, fx.en );
+				} else {
+					check( 'و۲ پیش‌نمایش: چیدمان آزمون ساخته شد', false, JSON.stringify( fx ) );
 				}
 				console.log( `  · هشدار /ar/ — حرف ویژۀ فارسی (پ چ ژ گ ی ک) بیرون از lang="fa": ${ warn.length } نوع` );
 				warn.forEach( w => console.log( '      ' + w ) );
