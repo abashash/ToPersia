@@ -284,10 +284,10 @@ t( 'منتشرشده: صفحۀ هم‌مرزِ فارسی اصفهان را یک
    برون‌بری لاگ 4.9.0)؛ از 4.11.0 هر سه یکی.  SPRINT-4.4 فاز ۲ */
 
 $v441 = array(
-	'render'     => array( TP_PLUGIN_DIR . 'topersia-render.php', '4.5.0', array( '/^ \* Version:\s*(\S+)/m', "/define\( 'TOPERSIA_RENDER_VERSION', '([^']+)' \)/" ) ),
+	'render'     => array( TP_PLUGIN_DIR . 'topersia-render.php', '4.5.1', array( '/^ \* Version:\s*(\S+)/m', "/define\( 'TOPERSIA_RENDER_VERSION', '([^']+)' \)/" ) ),
 	'user-core'  => array( dirname( TP_PLUGIN_DIR ) . '/topersia-user-core/topersia-user-core.php', '1.10.4', array( '/^ \* Version:\s*(\S+)/m', "/define\('TOPERSIA_USER_CORE_VERSION', '([^']+)'\)/" ) ),
 	'summarizer' => array( dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/topersia-ai-summarizer.php', '1.2.1', array( '/^\s*\*\s*Version:\s*(\S+)/m', "/define\(\s*'TP_AI_VERSION',\s*'([^']+)'/" ) ),
-	'core'       => array( dirname( TP_PLUGIN_DIR ) . '/topersia-core/topersia-core.php', '4.13.0', array(
+	'core'       => array( dirname( TP_PLUGIN_DIR ) . '/topersia-core/topersia-core.php', '4.13.1', array(
 		'/^ \* Version:\s*(\S+)/m',
 		"/define\( 'TOPERSIA_CORE_VERSION', '([^']+)' \);/",
 		"/defined\( 'TOPERSIA_CORE_VERSION' \) \? TOPERSIA_CORE_VERSION : '([^']+)'/",
@@ -304,5 +304,5 @@ foreach ( $v441 as $name => $spec ) {
 		$vbad441[] = $name . ' ' . implode( '/', $got );
 	}
 }
-t( 'نسخه: topersia-render ۴٫۵٫۰ · topersia-user-core ۱٫۱۰٫۴ · topersia-ai-summarizer ۱٫۲٫۱ · topersia-core ۴٫۱۳٫۰ — هر جا که نسخه نوشته شده یکی (هسته: سربرگ، ثابت، برون‌بری لاگ)',
+t( 'نسخه: topersia-render ۴٫۵٫۱ · topersia-user-core ۱٫۱۰٫۴ · topersia-ai-summarizer ۱٫۲٫۱ · topersia-core ۴٫۱۳٫۱ — هر جا که نسخه نوشته شده یکی (هسته: سربرگ، ثابت، برون‌بری لاگ)',
 	array() === $vbad441, implode( ' · ', $vbad441 ) );

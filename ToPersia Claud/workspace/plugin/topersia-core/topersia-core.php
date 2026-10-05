@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Core Functions
  * Description: توابع اختصاصی سایت ToPersia — اسلاگ لاتین از نام انگلیسیِ کیوریت‌شده، شناسۀ یکتای موجودیت، ریدایرکت موجودیت‌های گراف‌فقط (G4)، منطق مسیرهای گردشگری (P9)، قاعدۀ سراسری وضعیت ردیف، یکپارچگی Rank Math، پنهان‌سازی مسیر نصب، کاهش اثر انگشت، و پنل تنظیمات و تشخیص. موتور دادۀ ساختاریافته در افزونۀ جداگانۀ topersia-schema است.
- * Version: 4.13.0
+ * Version: 4.13.1
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-core
@@ -40,6 +40,11 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
+ * 4.13.1 — وصلۀ ۲ج.
+ *        — گزارش شکاف ترجمه (P5-D305): `wp topersia i18n-gaps` و برگۀ «شکاف‌ها» کنار
+ *          درون‌ریزی ترجمه؛ در لحظه از داده، بی نوشتن؛ برون‌بری قالب فقط برای شکاف‌ها.
+ *        — درون‌ریزی ترجمه: content_status هر زبان جدا (P5-D308؛ پیکربندی WPML 1.13).
+ *
  * 4.13.0 — SPRINT-4.4 فاز ۲ج.
  *        — صف واحد: Action Scheduler 3.9.3 بسته‌بندی‌شده در vendor/ (P5-D290)؛
  *          includes/topersia-queue.php (گروه topersia، ادغام فقط با کار در انتظار).
@@ -503,7 +508,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ هسته — افزونۀ شِما این را برای بررسی سازگاری می‌خواند. */
 if ( ! defined( 'TOPERSIA_CORE_VERSION' ) ) {
-	define( 'TOPERSIA_CORE_VERSION', '4.13.0' );
+	define( 'TOPERSIA_CORE_VERSION', '4.13.1' );
 }
 
 /** کلید تنها گزینۀ پایگاه‌داده — همه‌چیز در یک آرایۀ autoload ذخیره می‌شود. */
@@ -1542,7 +1547,7 @@ function topersia_log_export_build( $filters = array() ) {
 	/* ── لایۀ یک: محیط ── */
 	$out  = "=== ToPersia — خروجی لاگ رویدادها ===\n";
 	$out .= topersia_log_export_line( 'تولید', gmdate( 'Y-m-d H:i' ) . ' UTC' );
-	$out .= topersia_log_export_line( 'هستۀ ToPersia', defined( 'TOPERSIA_CORE_VERSION' ) ? TOPERSIA_CORE_VERSION : '4.13.0' );
+	$out .= topersia_log_export_line( 'هستۀ ToPersia', defined( 'TOPERSIA_CORE_VERSION' ) ? TOPERSIA_CORE_VERSION : '4.13.1' );
 	$out .= topersia_log_export_line( 'WordPress', get_bloginfo( 'version' ) );
 	$out .= topersia_log_export_line( 'PHP', PHP_VERSION );
 	$out .= topersia_log_export_line( 'سایت', home_url( '/' ) );
