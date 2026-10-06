@@ -340,6 +340,23 @@ const INTENT = [
 } )() );
 
 /*
+ * ۲ه٫۶ · P5-D315 — نام نوع فقط در eyebrow، پس eyebrow حدود ۱۲٪ بزرگ‌تر از مرجع:
+ * .74rem ← .83rem (و بلندی خطِ همان نسبت). رنگ، خط تزئینی و جایگاه همان مرجع.
+ * فاصلۀ حروف fa/ar صفر است ولی برگۀ هارنس متن لاتین مرجع را دارد، پس این‌جا دیده نمی‌شود.
+ * مقدارها دقیق، هر مرورگر جدا؛ مقدار دیگری شکست است.
+ */
+const W315 = '۲ه٫۶ · P5-D315 — eyebrow حدود ۱۲٪ بزرگ‌تر (نام نوع فقط این‌جا)';
+const EYEBROW = /^page \.tp-hero > \.tp-hero__in\.tp-wrap > \.tp-hero__copy > \.tp-eyebrow$/;
+INTENT.push(
+	{ run: 'کروم ۱۴۴۰', key: EYEBROW, prop: 'font-size', ref: '11.84px', ours: '13.28px', why: W315 },
+	{ run: 'کروم ۱۴۴۰', key: EYEBROW, prop: 'line-height', ref: '22.496px', ours: '25.232px', why: W315 },
+	{ run: 'کروم ۳۹۰', key: EYEBROW, prop: 'font-size', ref: '11.84px', ours: '13.28px', why: W315 },
+	{ run: 'کروم ۳۹۰', key: EYEBROW, prop: 'line-height', ref: '22.496px', ours: '25.232px', why: W315 },
+	{ run: 'فایرفاکس ۱۴۴۰', key: EYEBROW, prop: 'font-size', ref: '11.8438px', ours: '13.2813px', why: W315 },
+	{ run: 'فایرفاکس ۱۴۴۰', key: EYEBROW, prop: 'line-height', ref: '22.5px', ours: '25.2333px', why: W315 }
+);
+
+/*
  * P5-D244 — کاشی‌های ستون کناری «عیناً کاشی `.neighbors` مرجع»اند: «پهنه‌های
  * طبیعی»، «محوطه‌های باستانی»، «روستاها»، «اطلاعات جغرافیایی»، «نشان‌ها» و هر
  * شبکهٔ رابطهٔ ستون کناری. مرجع این کارت‌ها را با `.grid` و `.geo-grid`

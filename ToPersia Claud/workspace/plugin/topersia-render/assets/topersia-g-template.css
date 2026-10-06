@@ -296,6 +296,12 @@ html .tp-page .tp-justify{text-align:justify;text-align-last:start;text-justify:
 /* ۴٫۴٫۳ — تیتر سربرگ عربی: همزه و سرکش «أ» در بلندی خط ۱٫۰۲ به برچسب نوعِ بالای تیتر
    می‌رسید (صفحۀ عربی شهر). عربی بالای خط جای بیشتری می‌خواهد؛ فارسی و انگلیسی همان. */
 html .tp-page .tp-hero h1:lang(ar){line-height:1.3}
+/* ۲ه٫۶ · P5-D315 — نام نوع فقط در eyebrow: حدود ۱۲٪ بزرگ‌تر از مرجع (.74 ← .83، با rem
+   موبایل به همان نسبت)؛ رنگ، خط تزئینی و جایگاه همان مرجع. فارسی و عربی بی فاصلۀ حروف —
+   فاصله اتصال خط را می‌شکند؛ انگلیسی همان .14em مرجع. */
+html body .tp-page .tp-eyebrow{font-size:calc(.83 * var(--tp-rem))}
+html .tp-page .tp-eyebrow:lang(fa),
+html .tp-page .tp-eyebrow:lang(ar){letter-spacing:0}
 html .tp-page .tp-justify h2,
 html .tp-page .tp-justify h3,
 html .tp-page .tp-justify h4,

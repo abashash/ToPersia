@@ -1065,6 +1065,23 @@ if ( ! function_exists( 'topersia_g_title' ) ) {
 	}
 }
 
+/**
+ * تیتر سربرگ (H1) — فقط نام، هر نوع و هر زبان.  ۲ه٫۶ · P5-D315
+ *
+ * قاعدۀ کشور (P5-D281) برای همه: نام کوتاه زبان صفحه (`name_{زبان}`)، وگرنه نام
+ * نمایشی. نام نوع فقط در eyebrow بالای تیتر است. نام نوعی که جزو خود داده است
+ * (مثلاً `name_fa` = «استان …») بریده نمی‌شود — فهرست و تصمیم با کاربر.
+ * فقط H1: `topersia_g_title()` (سرفصل‌ها، خبر، breadcrumb فهرست خبر، alt) دست نمی‌خورد.
+ */
+if ( ! function_exists( 'topersia_g_heading' ) ) {
+	function topersia_g_heading( $post_id ) {
+
+		$short = topersia_g_text( $post_id, 'name_' . topersia_g_page_lang() );
+
+		return '' !== $short ? $short : topersia_g_name( $post_id );
+	}
+}
+
 /* =========================================================================
    ۳ — تاریخ شمسی
    ========================================================================= */
@@ -1254,17 +1271,16 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 		 */
 		$names = array();
 		$here  = topersia_g_page_lang();
-		$title = topersia_g_title( $pid );
+		$title = topersia_g_heading( $pid );
 
 		/*
-		 * تیترِ «فقط نام» (P5-D281) نام رسمیِ زبان صفحه را در خود ندارد —
-		 * «ایران» نه «جمهوری اسلامی ایران» — پس آن هم در همین ردیف می‌آید.
+		 * تیترِ «فقط نام» (P5-D281، از ۲ه٫۶ همۀ نوع‌ها · P5-D315) نام رسمیِ زبان صفحه
+		 * را در خود ندارد — «ایران» نه «جمهوری اسلامی ایران» — پس آن هم در همین ردیف
+		 * می‌آید، مگر همان تیتر باشد.
 		 */
-		$keep_here = 'name' === topersia_g_type_row( $pid )['title'];
-
 		foreach ( array( 'fa', 'en', 'ar' ) as $code ) {
 
-			if ( '' === $official[ $code ] || ( $code === $here && ( ! $keep_here || $official[ $code ] === $title ) ) ) {
+			if ( '' === $official[ $code ] || ( $code === $here && $official[ $code ] === $title ) ) {
 				continue;
 			}
 
