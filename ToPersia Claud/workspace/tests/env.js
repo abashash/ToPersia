@@ -1,7 +1,7 @@
 /**
  * محیط محلی از یک فایل — P5-D285 (فاز ۰ب٫۱). همان tests/env.json که env.php می‌خواند.
  *
- *   const ENV = require( './env.js' );   // ENV.base · ENV.wp · ENV.root · ENV.php · ENV.mysql · ENV.workspace
+ *   const ENV = require( './env.js' );   // ENV.base · ENV.wp · ENV.root · ENV.php · ENV.mysql · ENV.dbPort · ENV.workspace
  *
  * متغیر محیطی `TP_ENV` فایل دیگری را جایگزین می‌کند.
  */
@@ -20,5 +20,6 @@ module.exports = {
 	workspace: trim( raw.workspace ),
 	php:       process.env.TP_PHP || raw.php,
 	mysql:     process.env.TP_MYSQL || raw.mysql,
+	dbPort:    String( process.env.TP_DB_PORT || raw.db_port || 3306 ),   /* ۰ب٫۵ */
 	wpCli:     raw.wp_cli,
 };

@@ -55,6 +55,23 @@ function tp_dup_files() {
 	return $out;
 }
 
+/** همۀ پوشه‌های زیر پوشۀ Duplicator — پوشۀ خالی بومی (tmp/import) هم.  ۰ب٫۵ */
+function tp_dup_dirs() {
+	$root = wp_normalize_path( DUPLICATOR_SSDIR_PATH );
+	$out  = array();
+	if ( ! is_dir( $root ) ) {
+		return $out;
+	}
+	$it = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $root, FilesystemIterator::SKIP_DOTS ), RecursiveIteratorIterator::SELF_FIRST );
+	foreach ( $it as $d ) {
+		if ( $d->isDir() ) {
+			$out[] = ltrim( substr( wp_normalize_path( $d->getPathname() ), strlen( $root ) ), '/' );
+		}
+	}
+	sort( $out );
+	return $out;
+}
+
 if ( 'snapshot' === $cmd ) {
 	$rows = $wpdb->get_results( "SELECT id, data FROM {$entities} ORDER BY id", ARRAY_A );
 	echo wp_json_encode( array(
@@ -62,6 +79,7 @@ if ( 'snapshot' === $cmd ) {
 		'floor'    => (int) $wpdb->get_var( "SELECT COALESCE( MAX(id), 0 ) FROM {$backups}" ),
 		'at'       => time(),
 		'files'    => tp_dup_files(),
+		'dirs'     => tp_dup_dirs(),
 	) );
 	exit( 0 );
 }
@@ -134,6 +152,7 @@ if ( 'sweep' === $cmd ) {
 	}
 	$root    = wp_normalize_path( DUPLICATOR_SSDIR_PATH );
 	$keep    = array_flip( $snap['files'] );
+	$kdirs   = array_flip( isset( $snap['dirs'] ) ? (array) $snap['dirs'] : array() );
 	$removed = array();
 	foreach ( tp_dup_files() as $rel ) {
 		/* فقط پرونده‌ای که پس از عکس ساخته یا نوشته شد — نه پروندۀ هم‌زمان کس دیگر پیش از آزمون */
@@ -156,7 +175,8 @@ if ( 'sweep' === $cmd ) {
 				break;
 			}
 		}
-		if ( ! $had && 2 === count( (array) scandir( $d->getPathname() ) ) ) {
+		/* پوشه‌ای که در عکس بود (حتی خالی، مثل tmp/import خود Duplicator) هرگز — ۰ب٫۵: جاروب پیشین آن را برداشته بود */
+		if ( ! $had && ! isset( $kdirs[ $rel ] ) && 2 === count( (array) scandir( $d->getPathname() ) ) ) {
 			rmdir( $d->getPathname() );
 			$removed[] = $rel . '/';
 		}

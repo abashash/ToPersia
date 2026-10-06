@@ -84,7 +84,7 @@ function head( t ) { console.log( '\n' + t + '\n' + '─'.repeat( 78 ) ); }
 const sleep = ms => new Promise( r => setTimeout( r, ms ) );
 
 function sql( q ) {
-	return execFileSync( MYSQL, [ '-uroot', '--default-character-set=utf8mb4', '-N', '-B', 'topersia_local', '-e', q ], { encoding: 'utf8' } );
+	return execFileSync( MYSQL, [ '-uroot', '-h127.0.0.1', '-P' + ENV.dbPort, '--default-character-set=utf8mb4', '-N', '-B', 'topersia_local', '-e', q ], { encoding: 'utf8' } );
 }
 function maxId() { return parseInt( sql( `SELECT COALESCE(MAX(id),0) FROM ${ TABLE }` ).trim(), 10 ) || 0; }
 

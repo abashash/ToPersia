@@ -15,7 +15,7 @@
 | workspace | `C:\wamp64\www\topersia\ToPersia Claud\workspace` — نام پوشه فاصله دارد؛ همه‌جا در نقل‌قول |
 | **مسیرها از یک فایل** | **`tests/env.json`** (P5-D285) — هر آزمون PHP با `tests/env.php` (`TP_WP_DIR` · `TP_BASE_URL` · `TP_HOST` · `TP_ROOT` · `TP_PHP` · `TP_MYSQL` · `TP_WP_CLI`)، هر آزمون node با `tests/env.js`. مسیر ثابت ننویس؛ نگهبان «فقط topersia.local» سیاست است و در کد می‌ماند |
 | PHP | `C:\wamp64\bin\php\php8.3.28\php.exe` — **نه** نسخهٔ scratchpad |
-| پایگاه‌داده | `topersia_local` روی **MySQL 8.4.7** (۳۳۰۶)؛ MariaDB 11.4.9 روی ۳۳۰۷ هست ولی خالی. زنده MariaDB 10.11 — جابه‌جایی با تصمیم کاربر (۰ب٫۱) |
+| پایگاه‌داده | از ۶ اکتبر `topersia_local` روی **MariaDB 10.11.19** (۳۳۰۷، سرویس `wampmariadb64` در WampServer 3.4.2) — هم‌ارز زنده (۰ب٫۵ · P5-D309)؛ `DB_HOST` محلی `127.0.0.1:3307`. پایگاه MySQL 8.4.7 (۳۳۰۶) تا پایان ۲د دست‌نخورده برای بازگشت (`DB_HOST` به `localhost`). کلاینت و درگاه آزمون‌ها از `tests/env.json` (`mysql` · `db_port`) |
 | WP-CLI | `C:\wamp64\bin\wp-cli\wp-cli.phar` 2.12.0 — `php wp-cli.phar --path="C:/wamp64/www/topersia/geo" --url=http://topersia.local …` |
 | مرورگر آزمون | کروم، از راه CDP (`tests/cdp.js`) |
 | مرورگر کاربر | **فایرفاکس ۱۵۶** — چیزی که کروم می‌بیند لزوماً چیزی نیست که کاربر می‌بیند |
