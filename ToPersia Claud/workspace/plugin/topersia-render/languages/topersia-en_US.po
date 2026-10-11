@@ -1598,6 +1598,10 @@ msgstr "Provincial capital"
 msgid "مرکز استان و شهرهای %s"
 msgstr "The provincial capital and the cities of %s"
 
+#: includes/topersia-g-relreg.php
+msgid "مرکز شهرستان"
+msgstr "County seat"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "مرکز: %s"

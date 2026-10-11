@@ -258,33 +258,33 @@
     "tp_water_body": {
         "posts": 1,
         "with_place_parent": 1,
-        "with_geo_card": 0,
-        "geo_card_with_parent_tile": 0,
-        "parent_but_no_geo_card": 1,
+        "with_geo_card": 1,
+        "geo_card_with_parent_tile": 1,
+        "parent_but_no_geo_card": 0,
         "no_parent": 0
     },
     "tp_mountain": {
         "posts": 1,
         "with_place_parent": 1,
-        "with_geo_card": 0,
-        "geo_card_with_parent_tile": 0,
-        "parent_but_no_geo_card": 1,
+        "with_geo_card": 1,
+        "geo_card_with_parent_tile": 1,
+        "parent_but_no_geo_card": 0,
         "no_parent": 0
     },
     "tp_village": {
         "posts": 1,
         "with_place_parent": 1,
-        "with_geo_card": 0,
-        "geo_card_with_parent_tile": 0,
-        "parent_but_no_geo_card": 1,
+        "with_geo_card": 1,
+        "geo_card_with_parent_tile": 1,
+        "parent_but_no_geo_card": 0,
         "no_parent": 0
     },
     "tp_desert": {
         "posts": 1,
         "with_place_parent": 1,
-        "with_geo_card": 0,
-        "geo_card_with_parent_tile": 0,
-        "parent_but_no_geo_card": 1,
+        "with_geo_card": 1,
+        "geo_card_with_parent_tile": 1,
+        "parent_but_no_geo_card": 0,
         "no_parent": 0
     },
     "tp_island": {
@@ -306,15 +306,15 @@
     "tp_city": {
         "posts": 30,
         "with_place_parent": 28,
-        "with_geo_card": 0,
-        "geo_card_with_parent_tile": 0,
-        "parent_but_no_geo_card": 28,
+        "with_geo_card": 28,
+        "geo_card_with_parent_tile": 28,
+        "parent_but_no_geo_card": 0,
         "no_parent": 2
     },
     "tp_province": {
         "posts": 30,
         "with_place_parent": 0,
-        "with_geo_card": 2,
+        "with_geo_card": 4,
         "geo_card_with_parent_tile": 0,
         "parent_but_no_geo_card": 0,
         "no_parent": 30

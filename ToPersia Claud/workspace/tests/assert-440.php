@@ -175,7 +175,7 @@ t( 'کاشی: نوع‌های مختلف — برچسب همان نام نوع �
 	&& topersia_g_kind_label( 23 ) !== topersia_g_kind_label( 24 ) );
 
 t( 'کاشی: «اطلاعات جغرافیایی» و «نشان‌ها» هم همین کاشی‌اند',
-	false !== strpos( r( 20, 'tp_facts' ), '<div class="tp-tiles" data-tp-tiles><a class="tp-tile"><span class="tp-tile__k">نوع اقلیم</span><b>نیمه‌خشک</b></a>' )
+	false !== strpos( r( 20, 'tp_facts' ), '<a class="tp-tile"><span class="tp-tile__k">نوع اقلیم</span><b>نیمه‌خشک</b></a>' )
 	&& false !== strpos( r( 20, 'tp_badges' ), '<div class="tp-tiles" data-tp-tiles><a class="tp-tile"><b>شهر خلاق یونسکو</b></a>' ) );
 
 t( 'کاشی: سه ستون minmax(0,1fr)؛ دوستونهٔ جایگزین؛ هیچ واژه‌ای وسط نمی‌شکند؛ hidden پنهان  P5-D244',
@@ -184,8 +184,9 @@ t( 'کاشی: سه ستون minmax(0,1fr)؛ دوستونهٔ جایگزین؛ ه
 	&& (bool) preg_match( '/html \.tp-page \.tp-tile\{[^}]*word-break:normal;overflow-wrap:normal;hyphens:none;/', $css440 )
 	&& false !== strpos( $css440, 'html .tp-page .tp-tile[hidden]{display:none}' ) );
 
-t( 'کاشی: سرریز ← دوستونه با ResizeObserver (فقط تغییر پهنا) و پس از رسیدن قلم؛ «بیشتر» دستهٔ بعدی و پس از آخرین دسته برداشته  P5-D244',
-	false !== strpos( $js440, "if ( ! tile.hidden && tile.scrollWidth > tile.clientWidth + 1 ) {\n\t\t\t\tgrid.classList.add( 'tp-tiles--2' );" )
+t( 'کاشی: بیش از دو خط (از ارتفاع واقعی ÷ ارتفاع خط) یا واژهٔ ناشکستنیِ سرریز ← کل همان کارت دوستونه، با ResizeObserver (فقط تغییر پهنا) و پس از رسیدن قلم؛ «بیشتر» دستهٔ بعدی و پس از آخرین دسته برداشته  P5-D244 · P5-D344',
+	false !== strpos( $js440, 'if ( lineCount( texts[ j ] ) > 2 ) {' ) && false !== strpos( $js440, 'return Math.round( el.getBoundingClientRect().height / lh );' )
+	&& false !== strpos( $js440, "if ( tile.scrollWidth > tile.clientWidth + 1 ) {\n\t\t\t\tgrid.classList.add( 'tp-tiles--2' );" )
 	&& false !== strpos( $js440, 'new ResizeObserver(' ) && false !== strpos( $js440, 'if ( w && seen[ i ] !== w ) {' )
 	&& false !== strpos( $js440, 'document.fonts.ready.then( all );' )
 	&& false !== strpos( $js440, "var step  = parseInt( btn.getAttribute( 'data-tp-step' ), 10 ) || Infinity;" )

@@ -259,6 +259,44 @@ if ( ! function_exists( 'topersia_g_geo_parent_tiles' ) ) {
 }
 
 /**
+ * کاشی‌های مرکزیت برای کارت «اطلاعات جغرافیایی».  P5-D342
+ *
+ * استان: «مرکز استان: {شهر}» از رابطۀ مرکز (۹۶، همان گروه `capital`). شهر: «مرکز شهرستان: {شهرستان}» از رابطۀ ۹۷ فقط وقتی داده دارد
+ * (شهرستان صفحه ندارد ← کاشی بی پیوند). «شهر مرکز استان است» روی کاشی استان برچسب می‌شود (`topersia_g_geo_parent_tiles`).
+ *
+ * @param int $pid پست.
+ * @return array<int,array{label:string,name:string,url:string}>
+ */
+if ( ! function_exists( 'topersia_g_geo_center_tiles' ) ) {
+	function topersia_g_geo_center_tiles( $pid ) {
+
+		$pid   = absint( $pid );
+		$type  = (string) get_post_type( $pid );
+		$tiles = array();
+
+		if ( 'tp_province' === $type ) {
+
+			$cap = absint( topersia_g_capital_id( $pid ) );
+
+			if ( $cap ) {
+				$view    = topersia_g_view_id( $cap );
+				$tiles[] = array( 'label' => __( 'مرکز استان', 'topersia' ), 'name' => topersia_g_name( $view ), 'url' => topersia_g_public_url( $view ) );
+			}
+		}
+
+		if ( 'tp_city' === $type ) {
+
+			foreach ( topersia_g_rel_ids( $pid, array( array( 'id' => 97, 'dir' => 'parents' ) ) ) as $county ) {
+				$tiles[] = array( 'label' => __( 'مرکز شهرستان', 'topersia' ), 'name' => topersia_g_name( $county ), 'url' => topersia_g_public_url( $county ) );
+				break;
+			}
+		}
+
+		return $tiles;
+	}
+}
+
+/**
  * [tp_route_cities] — باکس «شهرهای مسیر» زیر نقشه: پیوند ایستگاه‌ها به ترتیب مسیر، فقط منتشرشده‌ها.  P5-D340
  *
  * ترتیب و فیلتر از `topersia_p9_stops()` هسته (`route_stops_order`، منتشرشده در زبان جاری). رابطۀ ۱۷۳ فراداده

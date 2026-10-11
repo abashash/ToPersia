@@ -2379,16 +2379,23 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		$taken  = array_merge( topersia_g_stat_keys( $pid ), array( 'geo_coordinates', 'best_season' ) );
 		$fields = topersia_g_zone_fields( $pid, 'card', $taken );
 
-		/* کاشی‌های `.neighbors` مرجع: نام فیلد بالا، مقدار پررنگ.  P5-D244 */
-		if ( $fields ) {
+		/*
+		 * کاشی‌های `.neighbors` مرجع: نام فیلد بالا، مقدار پررنگ.  P5-D244
+		 * پیش از آن‌ها کاشی‌های والد مکانی R01 (استان، شهر، روستا — بی کشور، بی همتا) و مرکزیت (مرکز استان؛ مرکز شهرستان فقط
+		 * با داده)، با پیوند. کارت برای هر نوعی که والد مکانی یا مرکزیت دارد ساخته می‌شود، حتی بی فیلد ناحیۀ card؛ فیلد دیگری
+		 * به آن اضافه نمی‌شود.  P5-D339 · P5-D342
+		 */
+		$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
 
-			/* والد مکانی R01 (استان، شهر، روستا — بی کشور) اول، به‌شکل کاشی با پیوند؛ فقط در کارتی که از پیش هست  P5-D339 */
-			$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
+		if ( function_exists( 'topersia_g_geo_center_tiles' ) ) {
+			$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
+		}
 
-			foreach ( $fields as $name => $raw ) {
-				$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
-			}
+		foreach ( $fields as $name => $raw ) {
+			$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
+		}
 
+		if ( $tiles ) {
 			$body .= topersia_g_tiles( $tiles );
 		}
 
@@ -3795,33 +3802,15 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 
 		if ( 'routes' === $key ) {
 
-			/* شهرهای همین موجودیت: برای استان زنجیرۀ ۷۲→۷۳، برای شهر خودش. */
-			$type  = function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '';
-			$local = array();
-
-			if ( 'tp_province' === $type ) {
-				$local = topersia_g_chain_ids( $pid, array(
-					array( 'id' => 72, 'dir' => 'children' ),
-					array( 'id' => 73, 'dir' => 'children' ),
-				) );
-			} elseif ( 'tp_city' === $type ) {
-				$local = array( $pid );
-			}
-
+			/*
+			 * کاشی مسیر فقط نام است — سطر دوم (شهر یا ایستگاه) برداشته شد.  P5-D343
+			 * نام از همان تابعِ نام (`official_name_{زبان}` · `name_{زبان}` اگر فیلدش را دارد، وگرنه عنوان پست)؛
+			 * FIELDMAP برای نوع مسیر فیلد نام کوتاه ندارد، پس عنوان پست.
+			 */
 			$tiles = array();
 
 			foreach ( $result['items'] as $item ) {
-
-				$via = array();
-
-				if ( $local ) {
-					$on_route = topersia_g_rel_ids( $item['id'], array( array( 'id' => 173, 'dir' => 'children' ) ) );
-					foreach ( array_intersect( $on_route, $local ) as $city ) {
-						$via[] = topersia_g_name( topersia_g_view_id( $city ) );
-					}
-				}
-
-				$tiles[] = array( 'name' => $item['name'], 'sub' => implode( ' · ', $via ), 'url' => $item['url'] );
+				$tiles[] = array( 'name' => $item['name'], 'url' => $item['url'] );
 			}
 
 			return topersia_g_section( 'tp-routes', $title, $kick, topersia_g_tiles( $tiles, $shown ), 'tp-rail-card', '', '',

@@ -1393,8 +1393,9 @@ t( 'کارت: هم‌مرزها `.tp-neighbors` با جهتِ مشتق از مخ
 	false !== strpos( $p20, '<div class="tp-neighbors"><a href="https://topersia.com/yazd-province/"><span class="tp-n-dir">شرق</span><b>یزد</b></a>' ) );
 
 /* ۴٫۳٫۰ بند ۰: مسیر صفحه دارد و پیوند می‌گیرد. ۴٫۴٫۱: کاشی P5-D244 — نام، زیرش شهرهای همین استان.  P5-D269 */
-t( 'کارت: مسیرها کاشی `.tp-tile` با شهرهای همین استان زیر نام، با پیوند  P5-D269',
-	false !== strpos( $p20, '<div class="tp-tiles" data-tp-tiles><a href="https://topersia.com/silk-road/" class="tp-tile"><b>راه ابریشم</b><span class="tp-tile__sub">کاشان · نطنز</span></a>' )
+t( 'کارت: مسیرها کاشی `.tp-tile` فقط نام، با پیوند — بی سطر دوم (شهر/ایستگاه)  P5-D269 · P5-D343',
+	false !== strpos( $p20, '<div class="tp-tiles" data-tp-tiles><a href="https://topersia.com/silk-road/" class="tp-tile"><b>راه ابریشم</b></a>' )
+	&& 1 === preg_match( '#<section id="tp-routes".*?</section>#su', $p20, $rtq ) && false === strpos( $rtq[0], 'tp-tile__sub' )
 	&& false === strpos( $p20, 'class="tp-routes"' ),
 	preg_match( '#<section id="tp-routes".*?</section>#su', $p20, $rtm ) ? mb_substr( $rtm[0], 0, 400 ) : 'بخش مسیرها نیست' );
 

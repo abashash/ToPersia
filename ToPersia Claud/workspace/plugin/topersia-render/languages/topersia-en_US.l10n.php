@@ -402,6 +402,7 @@ return array (
     'مرور اقلیم' => 'Climate overview',
     'مرکز استان' => 'Provincial capital',
     'مرکز استان و شهرهای %s' => 'The provincial capital and the cities of %s',
+    'مرکز شهرستان' => 'County seat',
     'مرکز: %s' => 'Capital: %s',
     'مرکزیت' => 'Capital of',
     'مساحت' => 'Area',

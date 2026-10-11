@@ -13,7 +13,8 @@ foreach ( get_post_types( array( 'public' => true ) ) as $t ) {
 	foreach ( $ids as $id ) {
 		$places = topersia_g_crumb_places( $id );
 		$taken  = array_merge( topersia_g_stat_keys( $id ), array( 'geo_coordinates', 'best_season' ) );
-		$card   = (bool) topersia_g_zone_fields( $id, 'card', $taken );
+		$fields = (bool) topersia_g_zone_fields( $id, 'card', $taken );
+		$card   = $fields || $places || ( function_exists( 'topersia_g_geo_center_tiles' ) && topersia_g_geo_center_tiles( $id ) );   /* P5-D342: والد یا مرکزیت ← کارت ساخته می‌شود */
 		if ( $places ) { $r['with_place_parent']++; } else { $r['no_parent']++; }
 		if ( $card ) { $r['with_geo_card']++; }
 		if ( $card && $places ) { $r['geo_card_with_parent_tile']++; }

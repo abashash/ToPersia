@@ -1547,14 +1547,28 @@
 		} );
 	} );
 
-	/* ══ کاشی‌های ستون کناری — P5-D244 ══════════════════════════════════
-	   سه ستون، مثل «استان‌های هم‌مرز». اگر در یک کارت حتی یک کاشی سرریز کند
-	   — نامی که با `word-break:normal` و بی‌خط‌تیره نمی‌تواند وسط واژه بشکند —
-	   همان کارت دو ستونه می‌شود. هر بار در سه ستون سنجیده می‌شود، پس با
-	   پهن‌تر شدن ستون به سه برمی‌گردد. ResizeObserver فقط تغییر پهنا را
-	   می‌شمارد تا عوض‌کردنِ ستون‌ها دور بی‌پایان نسازد؛ رسیدن قلم هم دوباره
-	   می‌سنجد، چون پهنای واژه با قلم عوض می‌شود.
+	/* ══ کاشی‌های ستون کناری — P5-D244 · P5-D344 ═════════════════════════
+	   پیش‌فرض سه ستون. اگر متنِ حتی یک کاشیِ یک کارت بیش از دو خط شد، کل همان
+	   کارت دوستونه می‌شود. شمارش خط از ارتفاع واقعی عنصر ÷ ارتفاع خط (نه از
+	   پهنا). واژه هرگز شکسته نمی‌شود (word-break:normal)؛ پس واژه‌ای که از پهنای
+	   کاشی بلندتر است سرریز می‌کند و آن هم دوستونه‌اش می‌کند (جایگزین معیار
+	   سرریزِ تنهای P5-D244: سرریز فقط نگهبان واژۀ ناشکستنی است). هر بار در
+	   سه ستون سنجیده می‌شود، پس با پهن‌تر شدن ستون به سه برمی‌گردد.
+	   ResizeObserver فقط تغییر پهنا را می‌شمارد تا عوض‌کردنِ ستون‌ها دور
+	   بی‌پایان نسازد؛ رسیدن قلم (`document.fonts.ready`) هم دوباره می‌سنجد.
 	   ────────────────────────────────────────────────────────────────── */
+	function lineCount( el ) {
+
+		var cs = window.getComputedStyle( el );
+		var lh = parseFloat( cs.lineHeight );
+
+		if ( ! lh ) {
+			lh = parseFloat( cs.fontSize ) * 1.3;
+		}
+
+		return Math.round( el.getBoundingClientRect().height / lh );
+	}
+
 	function fitTiles( grid ) {
 
 		grid.classList.remove( 'tp-tiles--2' );
@@ -1563,13 +1577,25 @@
 
 			var tile = grid.children[ i ];
 
-			if ( ! tile.hidden && tile.scrollWidth > tile.clientWidth + 1 ) {
+			if ( tile.hidden ) {
+				continue;
+			}
+
+			if ( tile.scrollWidth > tile.clientWidth + 1 ) {
 				grid.classList.add( 'tp-tiles--2' );
 				return;
 			}
+
+			var texts = tile.querySelectorAll( 'b, .tp-tile__k, .tp-tile__sub' );
+
+			for ( var j = 0; j < texts.length; j ++ ) {
+				if ( lineCount( texts[ j ] ) > 2 ) {
+					grid.classList.add( 'tp-tiles--2' );
+					return;
+				}
+			}
 		}
 	}
-
 	( function () {
 
 		var grids = page.querySelectorAll( '[data-tp-tiles]' );

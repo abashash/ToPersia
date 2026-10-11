@@ -1089,11 +1089,17 @@ const LANG_PAGES = [
 	{ url: ENV.base + '/ar/city/isfahan/', path: '/ar/city/isfahan/', lang: 'ar', dir: 'rtl', prefix: '/ar/' },
 ];
 
+/*
+ * `TP_ONLY=ff-sliders` — فقط سنجهٔ پیکان اسلایدرهای هارنس در فایرفاکس ۱۴۴۰ (برای بازاجرای دو شکست پیکان، بی اجرای ۱۷دقیقه‌ای کل مجموعه).
+ * شمارش و کد خروج همان است.
+ */
+const ONLY = process.env.TP_ONLY || '';
+
 ( async () => {
 
 	const hx = harness();
 
-	for ( const [ name, type ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ] ) {
+	for ( const [ name, type ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ].filter( b => ! ONLY || 'فایرفاکس' === b[0] ) ) {
 
 		const browser = await type.launch();
 		const mobile = 'کروم' === name
@@ -1103,18 +1109,18 @@ const LANG_PAGES = [
 		/* ── هارنس: همان استان، راست‌به‌چپ و چپ‌به‌راست — P5-D243 ── */
 		for ( const [ label, url ] of [ [ 'هارنس راست‌به‌چپ', hx.rtl ], [ 'هارنس چپ‌به‌راست', hx.ltr ] ] ) {
 			console.log( `\n${ name } — ${ label }\n` + '─'.repeat( 78 ) );
-			for ( const [ size, opts, touch ] of [ [ '۱۴۴۰', null, false ], [ '۳۹۰', mobile, true ] ] ) {
+			for ( const [ size, opts, touch ] of [ [ '۱۴۴۰', null, false ], [ '۳۹۰', mobile, true ] ].filter( z => ! ONLY || '۱۴۴۰' === z[0] ) ) {
 				const s = await open( browser, url, opts );
 				if ( ! await sliders( s.page, `${ name } ${ size }` ) ) { check( `${ name } ${ size }: دست‌کم یک اسلایدرِ لبریز سنجیده شد`, false ); }
-				await solo( s.page, `${ name } ${ size }`, touch );
-				if ( ! touch ) { await drag( s.page, `${ name } ${ size } ${ label }` ); }
+				if ( ! ONLY ) { await solo( s.page, `${ name } ${ size }`, touch ); }
+				if ( ! touch && ! ONLY ) { await drag( s.page, `${ name } ${ size } ${ label }` ); }
 				await s.ctx.close();
 			}
 		}
 
 		/* ── هارنس: چهارده روستا — «{N} مورد دیگر» و دوستونه، جایی که صفحهٔ محلی بیش از شش کاشی ندارد  P5-D244 ── */
 		console.log( `\n${ name } — هارنس چهارده روستا\n` + '─'.repeat( 78 ) );
-		for ( const [ size, opts ] of [ [ '۱۴۴۰', null ], [ '۳۹۰', mobile ] ] ) {
+		for ( const [ size, opts ] of [ [ '۱۴۴۰', null ], [ '۳۹۰', mobile ] ].filter( () => ! ONLY ) ) {
 			const s = await open( browser, hx.more, opts );
 			await more( s.page, `${ name } ${ size }` );
 			await tileFit( s.page, `${ name } ${ size }` );
@@ -1126,12 +1132,13 @@ const LANG_PAGES = [
 			const where = url.replace( /^https?:\/\/[^/]+/, '' );
 			console.log( `\n${ name } — ${ where }\n` + '─'.repeat( 78 ) );
 
-			const html = await ( await fetch( url ) ).text();
-			check( `${ name }: MapLibre در HTML اولیه نیست — فقط هنگام نیاز  §۱`, html.indexOf( 'maplibre-gl' ) < 0 );
+			const html = ONLY ? '' : await ( await fetch( url ) ).text();
+			if ( ! ONLY ) check( `${ name }: MapLibre در HTML اولیه نیست — فقط هنگام نیاز  §۱`, html.indexOf( 'maplibre-gl' ) < 0 );
 
 			/* دسکتاپ ۱۴۴۰ */
 			let s = await open( browser, url );
 			const n = await sliders( s.page, name + ' ۱۴۴۰' );
+			if ( ONLY ) { await s.ctx.close(); continue; }
 			if ( ! n ) { info( 'اسلایدرِ لبریز در ۱۴۴۰ نبود' ); }
 			await solo( s.page, name + ' ۱۴۴۰', false );
 			await drag( s.page, name + ' ۱۴۴۰' );
@@ -1168,7 +1175,7 @@ const LANG_PAGES = [
 		}
 
 		/* ── ۲٫۰٫۸ — ترجمه‌های واقعی: چپ‌به‌راست، راست‌به‌چپ عربی، شرط زبان WPML ── */
-		if ( ! process.argv.slice( 2 ).length ) {
+		if ( ! process.argv.slice( 2 ).length && ! ONLY ) {
 			console.log( `\n${ name } — ترجمه‌های واقعی #99 و #399\n` + '─'.repeat( 78 ) );
 			for ( const want of LANG_PAGES ) {
 				await langPage( browser, want.url, want, name );

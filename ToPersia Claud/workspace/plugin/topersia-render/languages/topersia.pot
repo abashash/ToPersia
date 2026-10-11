@@ -1597,6 +1597,10 @@ msgstr ""
 msgid "مرکز استان و شهرهای %s"
 msgstr ""
 
+#: includes/topersia-g-relreg.php
+msgid "مرکز شهرستان"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "مرکز: %s"

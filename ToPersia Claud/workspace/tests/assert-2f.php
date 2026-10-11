@@ -130,13 +130,28 @@ tp441_mut( 'شهر: کاشی استان با برچسب «مرکز استان» 
 	},
 	array( $f2_city, $f2_vill, $f2_prov ), array( array( 'کشور:ایران:p8001' ), array(), array( 'کشور:ایران:p8001' ) ) );
 
-/* نوع دارای والد مکانی ولی بی کارت «اطلاعات جغرافیایی» (بی فیلد ناحیهٔ card) ← کارت تازه ساخته نمی‌شود */
+/* نوع دارای والد مکانی ولی بی فیلد ناحیهٔ card ← کارت ساخته می‌شود، با فقط کاشی والد (فیلد دیگری نمی‌آید) — P5-D342 */
 $f2_world( $f2_reg );
 unset( $GLOBALS['tp_meta'][8005]['climate_type'] );
-$f2_nocard = array( $f2_geo( 8005 ), topersia_g_geo_parent_tiles( 8005 ) );
-tp441_mut( 'نوعی که والد مکانی دارد ولی کارت «اطلاعات جغرافیایی» ندارد: کارت تازه ساخته نمی‌شود (فقط فهرستش گزارش می‌شود: scripts/relations-gaps-2f.php)',
-	function ( $x ) { return '' === $x[0] && 1 === count( $x[1] ); },
-	$f2_nocard, array( '<section id="tp-geo">', array() ) );
+$f2_nocard = array( $f2_geo( 8005 ), $f2_tile_names( $f2_geo( 8005 ) ) );
+tp441_mut( 'نوعی که والد مکانی دارد ولی فیلد card ندارد (گاوخونی، شهر، روستا، کوه، بیابان): کارت «اطلاعات جغرافیایی» ساخته می‌شود و فقط کاشی والد دارد؛ کاشی دیگری نمی‌آید',
+	function ( $x ) { return '' !== $x[0] && array( 'استان:اصفهان:p8002' ) === $x[1]; },
+	$f2_nocard, array( '', array() ) );
+
+/* مرکزیت: استان ← «مرکز استان: شهر» از رابطهٔ ۹۶ (کاشی با پیوند)؛ شهرِ مرکز استان ← برچسب روی کاشی استان؛ مرکز شهرستان فقط با داده (۹۷)، بی پیوند */
+$f2_world( $f2_reg );
+$GLOBALS['tp_rel']['97'] = array( 'children' => array( 8003 => array( 8004 ) ), 'parents' => array( 8004 => array( 8003 ) ) );
+$f2_center_prov = $f2_tile_names( $f2_geo( 8002 ) );
+$f2_center_city = $f2_geo( 8004 );
+$f2_center_tiles = array_map( function ( $t ) { return $t['label'] . ':' . $t['name'] . ':' . ( '' === $t['url'] ? '-' : 'link' ); }, topersia_g_geo_center_tiles( 8004 ) );
+$f2_world( $f2_reg );
+$f2_center_none = topersia_g_geo_center_tiles( 8004 );
+tp441_mut( 'مرکزیت در همان کارت: صفحهٔ استان کاشی «مرکز استان: شهر آزمون» با پیوند؛ شهرِ مرکز استان ← برچسب «مرکز استان» روی کاشی استان؛ مرکز شهرستان فقط وقتی داده دارد (بی پیوند چون شهرستان صفحه ندارد)',
+	function ( $x ) {
+		return in_array( 'مرکز استان:شهر آزمون:p8004', $x[0], true ) && false !== strpos( $x[1], 'tp-tile__k">مرکز استان</span><b>اصفهان</b>' )
+			&& array( 'مرکز شهرستان:شهرستان آزمون:-' ) === $x[2] && array() === $x[3];
+	},
+	array( $f2_center_prov, $f2_center_city, $f2_center_tiles, $f2_center_none ), array( array(), '', array(), array( 'x' ) ) );
 
 /* ── مسیر راهنما = BreadcrumbList (D338) ─────────────────────────────── */
 $f2_world( $f2_reg );
