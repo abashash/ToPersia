@@ -2533,7 +2533,13 @@ if ( ! function_exists( 'topersia_g_sc_weather' ) ) {
 			return '';
 		}
 
+		/*
+		 * مختصات از تابع مرکزی هسته (۲ه٫۵ · P5-D314): دهدهی، درجه-دقیقه-ثانیه، رقم فارسی،
+		 * GeoJSON ← «lat, lng» دهدهی؛ نامعتبر یا بیرون از ایران ← کارت هوا نمی‌آید.
+		 * بی هستۀ ۴٫۱۳٫۲ همان رشتۀ خام (رفتار پیشین).
+		 */
 		$coords = topersia_g_text( $pid, 'geo_coordinates' );
+		$coords = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : $coords;
 
 		if ( '' === $coords ) {
 			return '';
@@ -2669,6 +2675,10 @@ if ( ! function_exists( 'topersia_g_sc_map' ) ) {
 			return '';
 		}
 
+		/* data-tp-coords دهدهیِ نرمال‌شده (جاوااسکریپت نقشه فقط «lat, lng» می‌خواند)؛ متن دیدنی همان خام  ۲ه٫۵ */
+		$coords_attr = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : '';
+		$coords_attr = '' !== $coords_attr ? $coords_attr : $coords;
+
 		$uid = 'tpmap' . $pid;
 
 		/*
@@ -2706,7 +2716,7 @@ if ( ! function_exists( 'topersia_g_sc_map' ) ) {
 		 */
 		$live = topersia_g_map_attr( $pid );
 
-		$body = '<div class="tp-map-inner" data-tp-map data-tp-coords="' . esc_attr( $coords ) . '"' . $live . '>'
+		$body = '<div class="tp-map-inner" data-tp-map data-tp-coords="' . esc_attr( $coords_attr ) . '"' . $live . '>'
 			. ( '' !== $live ? '<div class="tp-map-live" data-tp-map-live aria-hidden="true"></div>' : '' )
 			. '<svg class="tp-map-svg" viewBox="0 0 320 230" role="img" aria-label="'
 			. esc_attr__( 'نمای شماتیک نقشه', 'topersia' ) . '">'
@@ -6363,7 +6373,7 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 				. '<div class="tp-modal__pin"></div>'
 				/* نقشۀ تعاملی — فقط با کلیک «باز کردن نقشۀ کامل» بار می‌شود.  P5-D241 */
 				. ( '' !== topersia_g_map_attr( $post_id )
-					? '<div class="tp-map-live tp-map-live--full" data-tp-map-full data-tp-coords="' . esc_attr( $coords ) . '"' . topersia_g_map_attr( $post_id ) . '></div>'
+					? '<div class="tp-map-live tp-map-live--full" data-tp-map-full data-tp-coords="' . esc_attr( function_exists( 'topersia_geo_attr' ) && '' !== topersia_geo_attr( $coords ) ? topersia_geo_attr( $coords ) : $coords ) . '"' . topersia_g_map_attr( $post_id ) . '></div>'
 					: '' )
 				. '</div>'
 				. '<div class="tp-modal__meta">'

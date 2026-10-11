@@ -155,3 +155,46 @@ tp441_mut( 'برچسب «همه …» هر بخش کارتی از جدول: رو
 		return true;
 	},
 	$zones24, str_replace( "'villages'    => 'همه روستاها ←',", '', $zones24 ) );
+
+/* ══ ۲ه٫۵ — مختصات: یک تابع مرکزی (P5-D314) ═════════════════════════════ */
+
+echo "\nفاز ۲ه — ۲ه٫۵ هوا از مختصات  P5-D314\n" . str_repeat( '─', 78 ) . "\n";
+
+$geo_file = dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-geo.php';
+$geo_src  = is_file( $geo_file ) ? file_get_contents( $geo_file ) : '';
+require_once $geo_file;
+
+$geo_cases = array(
+	'dec'    => topersia_geo_point( '32.6539, 51.6660' ),
+	'dms'    => topersia_geo_point( '32°20′N, 52°47′E' ),
+	'dms3'   => topersia_geo_point( "32° 20' 15\" N 52° 47' E" ),
+	'fa'     => topersia_geo_point( '۳۲٫۶۵۳۹، ۵۱٫۶۶۶۰' ),
+	'swap'   => topersia_geo_point( '52°47′E, 32°20′N' ),
+	'poly'   => topersia_geo_point( '{"type":"Polygon","coordinates":[[[52.0,32.0],[53.0,32.0],[53.0,33.0],[52.0,33.0],[52.0,32.0]]]}' ),
+	'json'   => topersia_geo_point( '{"lat":35.7,"lng":51.4}' ),
+	'list'   => topersia_geo_point( '32.1,52.1; 32.3,52.1; 32.3,52.5' ),
+	'paris'  => topersia_geo_point( '48.8566, 2.3522' ),
+	'empty'  => topersia_geo_point( '' ),
+	'junk'   => topersia_geo_point( 'نامشخص' ),
+	'attr'   => topersia_geo_attr( '32°20′N, 52°47′E' ),
+);
+
+tp441_mut( 'topersia_geo_point: دهدهی، درجه-دقیقه-ثانیه (گاوخونی «32°20′N, 52°47′E»)، رقم فارسی، جهت‌های جابه‌جا، GeoJSON و فهرست ← مرکز هندسی؛ بیرون از ایران و نامعتبر ← null',
+	function ( $c ) {
+		return array( 'lat' => 32.6539, 'lng' => 51.666 ) === $c['dec'] && array( 'lat' => 32.333333, 'lng' => 52.783333 ) === $c['dms']
+			&& array( 'lat' => 32.3375, 'lng' => 52.783333 ) === $c['dms3'] && $c['fa'] === $c['dec'] && $c['swap'] === $c['dms']
+			&& array( 'lat' => 32.5, 'lng' => 52.5 ) === $c['poly'] && array( 'lat' => 35.7, 'lng' => 51.4 ) === $c['json']
+			&& array( 'lat' => 32.233333, 'lng' => 52.233333 ) === $c['list']
+			&& null === $c['paris'] && null === $c['empty'] && null === $c['junk'] && '32.333333, 52.783333' === $c['attr'];
+	},
+	$geo_cases, array_merge( $geo_cases, array( 'dms' => null ) ) );
+
+tp441_mut( 'هوا و نقشه از همین تابع: کارت هوا و data-tp-coords نقشه «lat, lng» دهدهیِ نرمال‌شده‌اند؛ REST هوا هر قالبی را می‌پذیرد؛ نقطۀ نامعتبر ← کارت هوا نه',
+	function ( $x ) {
+		$wx  = tp2c_body( $x[0], 'topersia_g_sc_weather' );
+		$map = tp2c_body( $x[0], 'topersia_g_sc_map' );
+		$rst = tp2c_body( $x[1], 'topersia_g_wx_rest' );
+		return false !== strpos( $wx, 'topersia_geo_attr(' ) && false !== strpos( $map, 'topersia_geo_attr(' ) && false !== strpos( $rst, 'topersia_geo_point(' );
+	},
+	array( $zones2c, file_get_contents( TP_PLUGIN_DIR . '/includes/topersia-g-weather.php' ) ),
+	array( str_replace( 'topersia_geo_attr(', 'esc_attr(', $zones2c ), file_get_contents( TP_PLUGIN_DIR . '/includes/topersia-g-weather.php' ) ) );
