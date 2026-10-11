@@ -212,6 +212,7 @@ return array(
 	'پایتخت'                          => array( 'en' => 'Capital', 'ar' => 'العاصمة' ),
 	'استان‌ها'                        => array( 'en' => 'Provinces', 'ar' => 'المحافظات' ),
 	'اطلاعات سفر'                     => array( 'en' => 'Travel information', 'ar' => 'معلومات السفر' ),
+	'شهرهای مسیر'                     => array( 'en' => 'Cities on the route', 'ar' => 'مدن المسار' ),
 	'مرکز استان'                      => array( 'en' => 'Provincial capital', 'ar' => 'مركز المحافظة' ),
 	'شهرها'                           => array( 'en' => 'Cities', 'ar' => 'المدن' ),
 	'مرکز استان و شهرهای %s'          => array( 'en' => 'The provincial capital and the cities of %s', 'ar' => 'مركز المحافظة ومدن %s' ),

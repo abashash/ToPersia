@@ -304,12 +304,17 @@ async function liveDesktopChecks( page ) {
 		a.click(); await __tp.wait( 1200 );
 		const s = __tp.state();
 		s.header = __tp.realHeader();
-		s.sectionTop = Math.round( document.getElementById( id ).getBoundingClientRect().top * 10 ) / 10;
+		const tgt = document.getElementById( id );
+		s.sectionTop = Math.round( tgt.getBoundingClientRect().top * 10 ) / 10;
 		s.id = id;
+		/* بخشِ ستون کناریِ چسبان (۲و) به بالای نوار نمی‌رسد؛ شرط: در دید، زیر نوار */
+		s.pinned = false;
+		for ( let p = tgt; p && p !== document.body; p = p.parentElement ) { if ( 'sticky' === getComputedStyle( p ).position ) { s.pinned = true; } }
+		s.visible = tgt.getBoundingClientRect().top >= s.top + s.h - 2 && tgt.getBoundingClientRect().bottom <= innerHeight;
 		return s;
 	})()` );
 	check( 'پیوند نوار: بالای بخش درست زیر نوار — هدرِ واقعی + نوار',
-		near( anchor.sectionTop, anchor.header + anchor.h, 1.5 ) && near( anchor.top, anchor.header, 1 ), JSON.stringify( anchor ) );
+		near( anchor.top, anchor.header, 1 ) && ( anchor.pinned ? anchor.visible : near( anchor.sectionTop, anchor.header + anchor.h, 1.5 ) ), JSON.stringify( anchor ) );
 }
 
 /* ═══ دسکتاپ — نوار بخش‌ها و هدر چسبان  P5-D223 ═══════════════════════ */

@@ -659,7 +659,16 @@ async function snav( browser, url, tag, width, reduced ) {
 		requestAnimationFrame( tick );
 		document.querySelector( '.tp-snav a[href="' + h + '"]' ).click();
 	}, href );
-	await page.waitForTimeout( 2000 );
+	/* اسکرولِ نرمِ صفحهٔ ۱۲هزار پیکسلی روی ماشین کند بیش از ۲ ثانیه می‌کشد: تا آرام‌شدنِ اسکرول (۶۰۰ms بی‌حرکت، سقف ۸ ثانیه) صبر، نه زمان ثابت */
+	await page.evaluate( () => new Promise( done => {
+		let last = -1, since = Date.now(); const t0 = Date.now();
+		( function poll() {
+			const y = Math.round( window.pageYOffset );
+			if ( y !== last ) { last = y; since = Date.now(); }
+			if ( Date.now() - since > 600 && Date.now() - t0 > 900 || Date.now() - t0 > 8000 ) { done(); return; }
+			setTimeout( poll, 100 );
+		} )();
+	} ) );
 
 	const r = await page.evaluate( h => {
 		const sec   = document.querySelector( h );

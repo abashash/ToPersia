@@ -1184,6 +1184,10 @@ msgstr "County"
 msgid "شهرها"
 msgstr "Cities"
 
+#: includes/topersia-g-relreg.php
+msgid "شهرهای مسیر"
+msgstr "Cities on the route"
+
 #: includes/topersia-g-zones.php
 msgid "شهریور"
 msgstr "Shahrivar"

@@ -238,11 +238,11 @@ tp441_mut( 'JSON-LD: والدِ پیش‌نویس (کشورِ استان) نه �
 	function ( $g ) { $j = wp_json_encode( $g ); return false === strpos( $j, 'ایران' ) && false === strpos( $j, '/iran/' ) && ! isset( $g[1]['containedInPlace'] ) && 2 === count( $g[0]['itemListElement'] ); },
 	$ldDraft442, $ldRaw442 );
 
-tp441_mut( 'JSON-LD: والدِ منتشرشده می‌ماند — همان پله‌ها و ریشه و برگِ خودِ موتور (خانه › ایران › استان اصفهان)، شماره‌ها از نو، containedInPlace همان والد',
+tp441_mut( 'JSON-LD: BreadcrumbList بی کشور (خانه › استان اصفهان؛ D338) ولی containedInPlace همان والد (کشور) می‌ماند — نامرئی؛ شماره‌ها از نو',
 	function ( $g ) {
 		$names = array_map( function ( $i ) { return $i['name']; }, $g[0]['itemListElement'] );
-		return array( 'خانه', 'ایران', 'استان اصفهان' ) === $names && 'https://topersia.com/iran/' === $g[0]['itemListElement'][1]['item']
-			&& array( '@id' => topersia_schema_uid( 10 ) ) === $g[1]['containedInPlace'] && array( 1, 2, 3 ) === array_column( $g[0]['itemListElement'], 'position' );
+		return array( 'خانه', 'استان اصفهان' ) === $names && false === strpos( wp_json_encode( $g[0] ), '/iran/' )
+			&& isset( $g[1]['containedInPlace'] ) && array( '@id' => topersia_schema_uid( 10 ) ) === $g[1]['containedInPlace'] && array( 1, 2 ) === array_column( $g[0]['itemListElement'], 'position' );
 	},
 	$ldPub442, $ldDraft442 );
 

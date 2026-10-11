@@ -1184,6 +1184,10 @@ msgstr "مقاطعة"
 msgid "شهرها"
 msgstr "المدن"
 
+#: includes/topersia-g-relreg.php
+msgid "شهرهای مسیر"
+msgstr "مدن المسار"
+
 #: includes/topersia-g-zones.php
 msgid "شهریور"
 msgstr "شهريور"

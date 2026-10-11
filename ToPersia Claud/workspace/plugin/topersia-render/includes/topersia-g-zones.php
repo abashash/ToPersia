@@ -1549,6 +1549,14 @@ if ( ! function_exists( 'topersia_g_crumb_chain' ) ) {
 		$chain = array();
 		$cur   = $pid;
 
+		/*
+		 * با ثبت‌نامۀ زندۀ رابطه (جت‌انجین): زنجیرۀ کامل والدهای مکانی R01 برای هر نوع — همان که BreadcrumbList می‌خواند.
+		 * بی ثبت‌نامه (آزمون بی جت‌انجین): گروه دستی `crumbs`.  ۲و٫۲ · D338
+		 */
+		if ( function_exists( 'topersia_g_crumb_places' ) && topersia_g_relreg() ) {
+			return topersia_g_crumb_places( $pid );
+		}
+
 		if ( ! empty( $group['rels'] ) ) {
 
 			foreach ( $group['rels'] as $spec ) {
@@ -1570,7 +1578,10 @@ if ( ! function_exists( 'topersia_g_crumb_chain' ) ) {
 			}
 		}
 
-		return array_map( 'topersia_g_view_id', array_reverse( $chain ) );
+		/* کشور در مسیر راهنما نیست (D338)؛ فقط در containedInPlace اسکیما می‌ماند */
+		return array_values( array_filter( array_map( 'topersia_g_view_id', array_reverse( $chain ) ), function ( $id ) {
+			return 'tp_country' !== get_post_type( $id );
+		} ) );
 	}
 }
 
@@ -1644,7 +1655,14 @@ if ( ! function_exists( 'topersia_g_schema_graph' ) ) {
 		$ancestors = array();
 		$cur       = $post_id;
 
-		if ( is_array( $config ) && ! empty( $config['parents'] ) && is_array( $config['parents'] ) ) {
+		if ( function_exists( 'topersia_g_place_chain' ) && topersia_g_relreg() ) {
+
+			/* مسیر راهنمای HTML و BreadcrumbList یک زنجیره‌اند: نزدیک‌ترین نیا اول؛ بی‌صفحه نمی‌آید  D338 */
+			$ancestors = array_reverse( array_values( array_filter( topersia_g_place_chain( $post_id ), function ( $id ) {
+				return '' !== topersia_g_public_url( $id );
+			} ) ) );   /* نزدیک‌ترین نیا اول، با کشور */
+
+		} elseif ( is_array( $config ) && ! empty( $config['parents'] ) && is_array( $config['parents'] ) ) {
 
 			foreach ( $config['parents'] as $step ) {
 
@@ -1684,7 +1702,11 @@ if ( ! function_exists( 'topersia_g_schema_graph' ) ) {
 					$items[] = $list[0];
 				}
 
+				/* BreadcrumbList = مسیر راهنمای HTML: بی کشور (D338) */
 				foreach ( array_reverse( $ancestors ) as $view ) {
+					if ( 'tp_country' === get_post_type( $view ) ) {
+						continue;
+					}
 					$items[] = array( '@type' => 'ListItem', 'name' => $name( $view ), 'item' => (string) get_permalink( $view ) );
 				}
 
@@ -2360,7 +2382,8 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		/* کاشی‌های `.neighbors` مرجع: نام فیلد بالا، مقدار پررنگ.  P5-D244 */
 		if ( $fields ) {
 
-			$tiles = array();
+			/* والد مکانی R01 (استان، شهر، روستا — بی کشور) اول، به‌شکل کاشی با پیوند؛ فقط در کارتی که از پیش هست  P5-D339 */
+			$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
 
 			foreach ( $fields as $name => $raw ) {
 				$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
@@ -4462,13 +4485,14 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
 		$type = function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '';
 
 		/*
-		 * «دربارۀ استان اصفهان» — نه «پاسخ مستقیم».  P5-D224
-		 * نام از همان تابعِ تیتر سربرگ می‌آید، پس دو جا هرگز واگرا نمی‌شوند.
+		 * «دربارۀ تالاب گاوخونی» — نه «پاسخ مستقیم»، نه «دربارۀ پهنه آبی تالاب گاوخونی».  P5-D224 · P5-D341
+		 * نام از همان تابعِ H1 سربرگ (`topersia_g_heading`) می‌آید، پس دو جا هرگز واگرا نمی‌شوند؛
+		 * نام نوعی که خودِ نامِ ذخیره‌شده دارد (مثلاً «استان تهران») بریده نمی‌شود.
 		 */
 		$about = sprintf(
-			/* translators: %s: نام کامل موجودیت، مثل «استان اصفهان» */
+			/* translators: %s: نام موجودیت، مثل «تالاب گاوخونی» — بی نام نوعی که رندر اضافه می‌کرد  P5-D341 */
 			__( 'دربارۀ %s', 'topersia' ),
-			topersia_g_title( $pid )
+			topersia_g_heading( $pid )
 		);
 
 		/* بدنۀ «درباره» تراز دوطرفه است؛ سرفصل‌های درونش نه.  P5-D270 */

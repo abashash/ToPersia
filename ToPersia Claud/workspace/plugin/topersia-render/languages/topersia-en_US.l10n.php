@@ -302,6 +302,7 @@ return array (
     'شهر خلاق یونسکو' => 'UNESCO Creative City',
     'شهرستان' => 'County',
     'شهرها' => 'Cities',
+    'شهرهای مسیر' => 'Cities on the route',
     'شهریور' => 'Shahrivar',
     'شور' => 'Saline',
     'شکوفه' => 'Blossom',

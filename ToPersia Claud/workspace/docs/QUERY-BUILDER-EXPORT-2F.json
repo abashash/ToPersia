@@ -1,0 +1,444 @@
+{
+    "_meta": {
+        "note": "خروجی کامل Queryهای D1–D6 پیش از هر تصمیم حذف (۲و، P5-D336). حذف فقط با تأیید کاربر.",
+        "source": "جدول jet_post_types status=query، وردپرس محلی",
+        "exported": "2026-10-12"
+    },
+    "queries": [
+        {
+            "id": "164",
+            "slug": null,
+            "status": "query",
+            "labels": {
+                "name": "D1 — World Heritage"
+            },
+            "args": {
+                "query_type": "posts",
+                "posts": {
+                    "orderby": [
+                        {
+                            "_id": 658754,
+                            "collapsed": false,
+                            "orderby": "title",
+                            "order": "ASC"
+                        }
+                    ],
+                    "meta_query": [
+                        {
+                            "_id": 437186,
+                            "collapsed": false,
+                            "key": "world_heritage",
+                            "compare": "=",
+                            "type": "CHAR",
+                            "value": "true",
+                            "exclude_empty": false
+                        }
+                    ],
+                    "tax_query": [],
+                    "date_query": [],
+                    "post_type": [
+                        "tp_monument",
+                        "tp_religious_site",
+                        "tp_protected_area",
+                        "tp_natural_feature",
+                        "tp_ancient_site",
+                        "tp_landscape",
+                        "tp_desert",
+                        "tp_forest_plain"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "posts_per_page": "-1"
+                },
+                "__dynamic_posts": {
+                    "meta_query": {
+                        "437186": []
+                    },
+                    "tax_query": [],
+                    "date_query": []
+                },
+                "show_preview": false,
+                "cache_query": false,
+                "api_endpoint": false,
+                "avoid_duplicates": false,
+                "preview_page": null,
+                "preview_page_title": null,
+                "preview_query_string": null,
+                "query_id": null,
+                "description": "فهرست پویای آثار میراث جهانی یونسکو برای صفحهٔ D1",
+                "api_namespace": null,
+                "api_path": null,
+                "api_access": null,
+                "api_access_cap": null,
+                "api_access_role": [],
+                "api_schema": [
+                    {
+                        "arg": "",
+                        "value": ""
+                    }
+                ],
+                "cache_expires": 0
+            },
+            "meta_fields": []
+        },
+        {
+            "id": "165",
+            "slug": null,
+            "status": "query",
+            "labels": {
+                "name": "D2 — Intangible Heritage"
+            },
+            "args": {
+                "query_type": "posts",
+                "posts": {
+                    "orderby": [
+                        {
+                            "_id": 658754,
+                            "collapsed": false,
+                            "orderby": "title",
+                            "order": "ASC"
+                        }
+                    ],
+                    "meta_query": [
+                        {
+                            "_id": 437186,
+                            "collapsed": false,
+                            "key": "intangible_heritage_designation",
+                            "compare": "=",
+                            "type": "CHAR",
+                            "value": "true",
+                            "exclude_empty": false
+                        }
+                    ],
+                    "tax_query": [],
+                    "date_query": [],
+                    "post_type": [
+                        "tp_handicraft",
+                        "tp_ritual"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "posts_per_page": "-1"
+                },
+                "__dynamic_posts": {
+                    "meta_query": {
+                        "437186": []
+                    },
+                    "tax_query": [],
+                    "date_query": []
+                },
+                "show_preview": false,
+                "cache_query": false,
+                "api_endpoint": false,
+                "avoid_duplicates": false,
+                "preview_page": null,
+                "preview_page_title": null,
+                "preview_query_string": null,
+                "query_id": null,
+                "description": "",
+                "api_namespace": null,
+                "api_path": null,
+                "api_access": null,
+                "api_access_cap": null,
+                "api_access_role": [],
+                "api_schema": [
+                    {
+                        "arg": "",
+                        "value": ""
+                    }
+                ],
+                "cache_expires": 0
+            },
+            "meta_fields": []
+        },
+        {
+            "id": "166",
+            "slug": null,
+            "status": "query",
+            "labels": {
+                "name": "D3 — Geopark"
+            },
+            "args": {
+                "query_type": "posts",
+                "posts": {
+                    "orderby": [
+                        {
+                            "_id": 658754,
+                            "collapsed": false,
+                            "orderby": "title",
+                            "order": "ASC"
+                        }
+                    ],
+                    "meta_query": [
+                        {
+                            "_id": 437186,
+                            "collapsed": false,
+                            "key": "geopark",
+                            "compare": "=",
+                            "type": "CHAR",
+                            "value": "true",
+                            "exclude_empty": false
+                        }
+                    ],
+                    "tax_query": [],
+                    "date_query": [],
+                    "post_type": [
+                        "tp_protected_area"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "posts_per_page": "-1"
+                },
+                "__dynamic_posts": {
+                    "meta_query": {
+                        "437186": []
+                    },
+                    "tax_query": [],
+                    "date_query": []
+                },
+                "show_preview": false,
+                "cache_query": false,
+                "api_endpoint": false,
+                "avoid_duplicates": false,
+                "preview_page": null,
+                "preview_page_title": null,
+                "preview_query_string": null,
+                "query_id": null,
+                "description": "",
+                "api_namespace": null,
+                "api_path": null,
+                "api_access": null,
+                "api_access_cap": null,
+                "api_access_role": [],
+                "api_schema": [
+                    {
+                        "arg": "",
+                        "value": ""
+                    }
+                ],
+                "cache_expires": 0
+            },
+            "meta_fields": []
+        },
+        {
+            "id": "167",
+            "slug": null,
+            "status": "query",
+            "labels": {
+                "name": "D4 — Biosphere Reserve"
+            },
+            "args": {
+                "query_type": "posts",
+                "posts": {
+                    "orderby": [
+                        {
+                            "_id": 658754,
+                            "collapsed": false,
+                            "orderby": "title",
+                            "order": "ASC"
+                        }
+                    ],
+                    "meta_query": [
+                        {
+                            "_id": 437186,
+                            "collapsed": false,
+                            "key": "biosphere_reserve",
+                            "compare": "=",
+                            "type": "CHAR",
+                            "value": "true",
+                            "exclude_empty": false
+                        }
+                    ],
+                    "tax_query": [],
+                    "date_query": [],
+                    "post_type": [
+                        "tp_protected_area",
+                        "tp_water_body",
+                        "tp_desert",
+                        "tp_forest_plain"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "posts_per_page": "-1"
+                },
+                "__dynamic_posts": {
+                    "meta_query": {
+                        "437186": []
+                    },
+                    "tax_query": [],
+                    "date_query": []
+                },
+                "show_preview": false,
+                "cache_query": false,
+                "api_endpoint": false,
+                "avoid_duplicates": false,
+                "preview_page": null,
+                "preview_page_title": null,
+                "preview_query_string": null,
+                "query_id": null,
+                "description": "",
+                "api_namespace": null,
+                "api_path": null,
+                "api_access": null,
+                "api_access_cap": null,
+                "api_access_role": [],
+                "api_schema": [
+                    {
+                        "arg": "",
+                        "value": ""
+                    }
+                ],
+                "cache_expires": 0
+            },
+            "meta_fields": []
+        },
+        {
+            "id": "168",
+            "slug": null,
+            "status": "query",
+            "labels": {
+                "name": "D5 — Creative City"
+            },
+            "args": {
+                "query_type": "posts",
+                "posts": {
+                    "orderby": [
+                        {
+                            "_id": 658754,
+                            "collapsed": false,
+                            "orderby": "title",
+                            "order": "ASC"
+                        }
+                    ],
+                    "meta_query": [
+                        {
+                            "_id": 437186,
+                            "collapsed": false,
+                            "key": "unesco_creative_city",
+                            "compare": "=",
+                            "type": "CHAR",
+                            "value": "true",
+                            "exclude_empty": false
+                        }
+                    ],
+                    "tax_query": [],
+                    "date_query": [],
+                    "post_type": [
+                        "tp_city"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "posts_per_page": "-1"
+                },
+                "__dynamic_posts": {
+                    "meta_query": {
+                        "437186": []
+                    },
+                    "tax_query": [],
+                    "date_query": []
+                },
+                "show_preview": false,
+                "cache_query": false,
+                "api_endpoint": false,
+                "avoid_duplicates": false,
+                "preview_page": null,
+                "preview_page_title": null,
+                "preview_query_string": null,
+                "query_id": null,
+                "description": "",
+                "api_namespace": null,
+                "api_path": null,
+                "api_access": null,
+                "api_access_cap": null,
+                "api_access_role": [],
+                "api_schema": [
+                    {
+                        "arg": "",
+                        "value": ""
+                    }
+                ],
+                "cache_expires": 0
+            },
+            "meta_fields": []
+        },
+        {
+            "id": "169",
+            "slug": null,
+            "status": "query",
+            "labels": {
+                "name": "D6 — National Monument"
+            },
+            "args": {
+                "query_type": "posts",
+                "posts": {
+                    "orderby": [
+                        {
+                            "_id": 658754,
+                            "collapsed": false,
+                            "orderby": "title",
+                            "order": "ASC"
+                        }
+                    ],
+                    "meta_query": [
+                        {
+                            "_id": 437186,
+                            "collapsed": false,
+                            "key": "national_monument",
+                            "compare": "=",
+                            "type": "CHAR",
+                            "value": "true",
+                            "exclude_empty": false
+                        }
+                    ],
+                    "tax_query": [],
+                    "date_query": [],
+                    "post_type": [
+                        "tp_protected_area",
+                        "tp_natural_feature",
+                        "tp_mountain",
+                        "tp_desert",
+                        "tp_forest_plain"
+                    ],
+                    "post_status": [
+                        "publish"
+                    ],
+                    "posts_per_page": "-1"
+                },
+                "__dynamic_posts": {
+                    "meta_query": {
+                        "437186": []
+                    },
+                    "tax_query": [],
+                    "date_query": []
+                },
+                "show_preview": false,
+                "cache_query": false,
+                "api_endpoint": false,
+                "avoid_duplicates": false,
+                "preview_page": null,
+                "preview_page_title": null,
+                "preview_query_string": null,
+                "query_id": null,
+                "description": "",
+                "api_namespace": null,
+                "api_path": null,
+                "api_access": null,
+                "api_access_cap": null,
+                "api_access_role": [],
+                "api_schema": [
+                    {
+                        "arg": "",
+                        "value": ""
+                    }
+                ],
+                "cache_expires": 0
+            },
+            "meta_fields": []
+        }
+    ]
+}

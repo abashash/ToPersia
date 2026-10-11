@@ -1183,6 +1183,10 @@ msgstr ""
 msgid "شهرها"
 msgstr ""
 
+#: includes/topersia-g-relreg.php
+msgid "شهرهای مسیر"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "شهریور"
 msgstr ""

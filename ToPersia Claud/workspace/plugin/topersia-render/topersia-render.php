@@ -244,7 +244,7 @@ if ( topersia_render_ready() && function_exists( 'topersia_render_settings_menu'
    المنتور اسکلت چیدمان می‌سازد؛ این دو فایل محتوای هر ناحیه را.  P5-D147
    ------------------------------------------------------------------------- */
 
-foreach ( array( 'includes/topersia-g-core.php', 'includes/topersia-g-map.php', 'includes/topersia-g-weather.php', 'includes/topersia-g-zones.php', 'includes/topersia-g-ai.php', 'includes/topersia-g-news.php', 'includes/topersia-g-gallery-agg.php' ) as $topersia_g_file ) {
+foreach ( array( 'includes/topersia-g-core.php', 'includes/topersia-g-map.php', 'includes/topersia-g-weather.php', 'includes/topersia-g-zones.php', 'includes/topersia-g-ai.php', 'includes/topersia-g-news.php', 'includes/topersia-g-gallery-agg.php', 'includes/topersia-g-relreg.php' ) as $topersia_g_file ) {
 
 	$topersia_g_path = topersia_render_path() . $topersia_g_file;
 

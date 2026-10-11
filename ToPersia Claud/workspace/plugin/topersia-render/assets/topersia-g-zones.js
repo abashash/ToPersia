@@ -495,6 +495,18 @@
 			var aim    = -1;
 			var steadyAt = 0;
 
+			/* بخشِ ستون کناریِ چسبان (sticky) هرگز بالای نوار نمی‌رسد: اگر در دید است نمی‌رویم، وگرنه یک‌بار — نه تعقیبِ بی‌پایان */
+			function pinned() {
+				for ( var p = el; p && p !== document.body; p = p.parentElement ) {
+					if ( 'sticky' === window.getComputedStyle( p ).position ) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			var pin = pinned();
+
 			function want() {
 				return Math.max( 0, Math.round( el.getBoundingClientRect().top + ( window.pageYOffset || 0 )
 					- ( Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) ) ) );
@@ -508,7 +520,15 @@
 
 				var y = want();
 
-				if ( Math.abs( y - aim ) > 2 ) {
+				if ( pin && aim < 0 ) {
+					var r  = el.getBoundingClientRect();
+					var by = Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight );
+					if ( r.top >= by && r.bottom <= window.innerHeight ) {
+						return;
+					}
+				}
+
+				if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {
 					aim    = y;
 					steadyAt = 0;
 					window.scrollTo( { top: y, behavior: calm() ? 'auto' : 'smooth' } );
