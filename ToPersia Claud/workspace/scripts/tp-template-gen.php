@@ -1046,6 +1046,10 @@ html .tp-page .tp-hero h1:lang(ar){line-height:1.3}
    موبایل به همان نسبت)؛ رنگ، خط تزئینی و جایگاه همان مرجع. فارسی و عربی بی فاصلۀ حروف —
    فاصله اتصال خط را می‌شکند؛ انگلیسی همان .14em مرجع. */
 html body .tp-page .tp-eyebrow{font-size:calc(.83 * var(--tp-rem))}
+/* ۲ه٫۴ · P5-D313 — «همه … ←» کنار عنوان کارتِ ستون کناری. پیوند پیش از h3 در سربرگ می‌نشیند و به لبۀ پایانی شناور است تا سربرگ مرجع (بلوکی، بی flex) و h3 دست نخورند؛
+   ظاهر همان «همه …» سرفصل بخش‌های اصلی (.tp-section-head .tp-more). */
+html .tp-page .tp-rail-card__head .tp-more--rail{margin-inline-start:10px;color:var(--tp-primary-text);font-weight:800;font-size:calc(.74 * var(--tp-rem));line-height:1.7;white-space:nowrap;text-decoration:none}
+html .tp-page .tp-rail-card__head .tp-more--rail:hover{color:var(--tp-brand-2)}
 html .tp-page .tp-eyebrow:lang(fa),
 html .tp-page .tp-eyebrow:lang(ar){letter-spacing:0}
 html .tp-page .tp-justify h2,

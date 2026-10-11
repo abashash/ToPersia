@@ -370,7 +370,7 @@ function tp_at_world( $mode ) {
 		}
 		if ( 'empty' !== $mode && isset( $FIELDS[ $type ] ) ) {
 			foreach ( $FIELDS[ $type ] as $name => $f ) {
-				$value = tp_at_value( $f, $title, in_array( $mode, array( 'rich', 'obj' ), true ) ? false : $mode );
+				$value = tp_at_value( $f, $title, in_array( $mode, array( 'rich', 'obj', 'many' ), true ) ? false : $mode );
 				/*
 				 * obj: همان دادهٔ پر، ولی هر آرایهٔ کلیددار شیء است — شکلِ
 				 * متایی که با json_decode بی‌`true` ساخته و ذخیره شده. PHP
@@ -399,13 +399,20 @@ function tp_at_world( $mode ) {
 	 */
 	$hidden = array( array( 'draft', '' ), array( 'private', '' ), array( 'pending', '' ), array( 'publish', 'رمز' ) );
 
+	/* ۲ه٫۴ · P5-D313 — «many»: ده عضوِ منتشرشده برای هر رابطه، تا هر بخش کارتی از سقفش (هشت اسلایدر · شش کاشی) بگذرد */
+	$per = 'many' === $mode ? 10 : 1;
+
 	foreach ( $mains as $type => $pid ) {
 		foreach ( $RELS as $rid => $r ) {
 			if ( $r['parent'] === $type ) {
-				$other = isset( $TYPES[ $r['child'] ] ) ? $make( $r['child'], 'فرزند ' . $rid ) : 0;
+				for ( $k = 0; $k < $per; $k++ ) {
+				$other = isset( $TYPES[ $r['child'] ] ) ? $make( $r['child'], 'فرزند ' . $rid . ( $k ? ' · ' . ( $k + 1 ) : '' ) ) : 0;
 				if ( $other ) {
 					$GLOBALS['tp_rel'][ $rid ]['children'][ $pid ][]  = (string) $other;
 					$GLOBALS['tp_rel'][ $rid ]['parents'][ $other ][] = (string) $pid;
+				}
+				}
+				if ( $other ) {
 					foreach ( $hidden as $h ) {
 						$ghost = $make( $r['child'], 'TPHIDDEN ' . $h[0] . ' ' . $rid, $h[0], $h[1] );
 						$GLOBALS['tp_rel'][ $rid ]['children'][ $pid ][]  = (string) $ghost;
@@ -414,10 +421,14 @@ function tp_at_world( $mode ) {
 				}
 			}
 			if ( $r['child'] === $type ) {
-				$other = isset( $TYPES[ $r['parent'] ] ) ? $make( $r['parent'], 'والد ' . $rid ) : 0;
+				for ( $k = 0; $k < $per; $k++ ) {
+				$other = isset( $TYPES[ $r['parent'] ] ) ? $make( $r['parent'], 'والد ' . $rid . ( $k ? ' · ' . ( $k + 1 ) : '' ) ) : 0;
 				if ( $other ) {
 					$GLOBALS['tp_rel'][ $rid ]['children'][ $other ][] = (string) $pid;
 					$GLOBALS['tp_rel'][ $rid ]['parents'][ $pid ][]    = (string) $other;
+				}
+				}
+				if ( $other ) {
 					foreach ( $hidden as $h ) {
 						$ghost = $make( $r['parent'], 'TPHIDDEN ' . $h[0] . ' ' . $rid, $h[0], $h[1] );
 						$GLOBALS['tp_rel'][ $rid ]['children'][ $ghost ][] = (string) $pid;
@@ -489,7 +500,56 @@ function tp_at_order_bad( $html ) {
 	return $bad;
 }
 
-foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj' ) as $mode ) {
+/**
+ * ۲ه٫۴ · P5-D313 — «همه …» برای هر بخش کارتی که عضو بیشتری از نمایش دارد.
+ *
+ * اسلایدرها هشت کارت، کاشی‌های ستون کناری شش (`topersia_g_list_cap`). برای هر ناحیۀ
+ * اسلایدر/کاشیِ صفحه: اعضای منتشرشده > سقف ← پیوندِ `data-tp-list-open` به `#tp-list-<کلید>` و
+ * پنجرۀ همان شناسه با `data-tp-total` برابر شمار اعضا؛ ≤ سقف ← نه پیوند نه پنجره. شمارندهٔ
+ * بخش‌های سنجیده‌شده در `$GLOBALS['tp_at_more']` تا ادعا تهی نماند.
+ */
+function tp_at_more_bad( $pid, $html ) {
+
+	$bad  = array();
+	$rail = array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' );
+
+	foreach ( topersia_g_layout( $pid ) as $zones ) {
+		foreach ( $zones as $z ) {
+
+			$fn  = isset( $z['fn'] ) ? $z['fn'] : '';
+			$key = isset( $z['atts']['rel'] ) ? (string) $z['atts']['rel'] : '';
+
+			if ( '' === $key || ! ( 'topersia_g_sc_slider' === $fn || ( 'topersia_g_sc_relgrid' === $fn && in_array( $key, $rail, true ) ) ) ) {
+				continue;
+			}
+
+			$res = topersia_g_rel_items( $pid, $key, 0 );
+			$tot = (int) $res['total'];
+			$cap = topersia_g_list_cap( $key );
+
+			if ( ! $tot ) {
+				continue;
+			}
+
+			$link  = false !== strpos( $html, 'href="#tp-list-' . $key . '"' ) && false !== strpos( $html, 'data-tp-list-open' );
+			$modal = (bool) preg_match( '~id="tp-list-' . preg_quote( $key, '~' ) . '"[^>]*data-tp-total="(\d+)"~', $html, $m );
+
+			$GLOBALS['tp_at_more']['sections'] = ( isset( $GLOBALS['tp_at_more']['sections'] ) ? $GLOBALS['tp_at_more']['sections'] : 0 ) + 1;
+
+			if ( $tot > $cap ) {
+				$GLOBALS['tp_at_more']['over'] = ( isset( $GLOBALS['tp_at_more']['over'] ) ? $GLOBALS['tp_at_more']['over'] : 0 ) + 1;
+				if ( ! $link ) { $bad[] = $key . ': ' . $tot . ' عضو > سقف ' . $cap . ' ولی پیوند «همه …» نیست'; }
+				if ( ! $modal || (int) $m[1] !== $tot ) { $bad[] = $key . ': پنجرۀ فهرست نیست یا شمارش با ' . $tot . ' برابر نیست'; }
+			} elseif ( $link || $modal ) {
+				$bad[] = $key . ': ' . $tot . ' عضو ≤ سقف ' . $cap . ' ولی پیوند یا پنجره آمده';
+			}
+		}
+	}
+
+	return $bad;
+}
+
+foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj', 'many' ) as $mode ) {
 
 	$mains = tp_at_world( $mode );
 
@@ -554,6 +614,14 @@ foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj' ) as $mode ) {
 					if ( 0 !== strpos( (string) $html, '<div class="tp-page">' ) ) {
 						tp_at_note( 'Shape', 'صفحه با پوستهٔ .tp-page شروع نشد', '-' );
 					}
+					/* ۲ه٫۴ · P5-D313 — هر بخش کارتی با اعضای بیش از سقف: پیوند «همه …» و پنجرۀ فهرست با همان شمار؛ زیر سقف: نه پنجره */
+					if ( 'many' === $mode ) {
+						foreach ( tp_at_more_bad( $pid, $html ) as $why ) {
+							tp_at_note( 'More', $why, 'P5-D313' );
+						}
+						$GLOBALS['tp_at_many_html'][ $type ] = $html;
+						$GLOBALS['tp_at_many_pid'][ $type ]  = $pid;
+					}
 					/* ۲ج٫۱ — ترتیب و بی‌خالیِ ناحیه‌ها؛ در «پر» که بیشترین ناحیه را دارد */
 					if ( 'rich' === $mode ) {
 						foreach ( tp_at_order_bad( $html ) as $why ) {
@@ -583,6 +651,27 @@ if ( '' === $tp_order_real || tp_at_order_bad( $tp_order_real ) || ! tp_at_order
 }
 
 /*
+ * ۲ه٫۴ — شمارنده‌ها پیش از جهش (جهش خودش تابع را صدا می‌زند) و جهش‌ها: بی پیوند، بی پنجره و شمار نادرست
+ * باید ایراد بگیرند. ادعا تهی نماند: همهٔ نوع‌ها در «many» رندر شده‌اند و دست‌کم ده بخش از سقف گذشته و
+ * سنجیده شده.
+ */
+$tp_more_stat = isset( $GLOBALS['tp_at_more'] ) ? $GLOBALS['tp_at_more'] : array( 'sections' => 0, 'over' => 0 );
+$tp_many_all  = isset( $GLOBALS['tp_at_many_html'] ) ? $GLOBALS['tp_at_many_html'] : array();
+$tp_many_pid  = isset( $GLOBALS['tp_at_many_pid']['tp_province'] ) ? $GLOBALS['tp_at_many_pid']['tp_province'] : 0;
+$tp_many_html = isset( $tp_many_all['tp_province'] ) ? $tp_many_all['tp_province'] : '';
+
+if ( count( $tp_many_all ) !== count( $TYPES ) || ! isset( $tp_more_stat['over'] ) || $tp_more_stat['over'] < 10 ) {
+	tp_at_note( 'Mutant', 'ادعای «همه …» تهی ماند: ' . count( $tp_many_all ) . ' نوع در «many»، ' . ( isset( $tp_more_stat['over'] ) ? $tp_more_stat['over'] : 0 ) . ' بخش بیش از سقف', 'P5-D313' );
+}
+
+if ( ! $tp_many_pid || '' === $tp_many_html || tp_at_more_bad( $tp_many_pid, $tp_many_html )
+	|| ! tp_at_more_bad( $tp_many_pid, str_replace( 'data-tp-list-open', 'data-x', $tp_many_html ) )
+	|| ! tp_at_more_bad( $tp_many_pid, preg_replace( '~id="tp-list-villages"~', 'id="x-villages"', $tp_many_html ) )
+	|| ! tp_at_more_bad( $tp_many_pid, preg_replace( '~(id="tp-list-villages"[^>]*data-tp-total=")\d+~', '${1}3', $tp_many_html ) ) ) {
+	tp_at_note( 'Mutant', 'ادعای «همه …» جهش (بی پیوند · بی پنجره · شمار نادرست) را نگرفت', 'P5-D313' );
+}
+
+/*
  * حکم.
  *
  *   empty · rich · odd · obj   هیچ چیز — نه خطا، نه هشدار، نه اخطار
@@ -608,6 +697,8 @@ $result = array(
 	'renders'  => $renders,
 	'problems' => $fail,
 	'soft'     => $soft,
+	'more'     => $tp_more_stat,
+	'manyTypes' => count( $tp_many_all ),
 	'modes'    => array_keys( $sizes ),
 	'sizes'    => $sizes,
 );
@@ -630,6 +721,7 @@ foreach ( $by as $k => $where ) {
 }
 
 if ( ! $by ) {
+	echo '✓ ۲ه٫۴ «همه …»: ', $result['manyTypes'], ' نوع در «many» · ', $tp_more_stat['sections'], ' بخش سنجیده · ', $tp_more_stat['over'], " بخش بیش از سقف — هر کدام پیوند و پنجرهٔ هم‌شمار؛ زیر سقف بی پنجره؛ جهش‌ها گرفته شد\n";
 	echo "✓ خالی · پر · ناجور · شیء — هیچ خطا، هشدار یا اخطاری\n";
 	echo '✓ آرایه در همه‌جا — هیچ خطای مرگبار (', $soft, " هشدارِ تبدیل آرایه، بی‌حکم)\n";
 }

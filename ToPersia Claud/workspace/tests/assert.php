@@ -2078,9 +2078,9 @@ foreach ( json_decode( $skin_src, true )['post_types'] as $at_pt ) {
 	}
 }
 
-t( 'همهٔ نوع‌ها: مهار هر نوع عمومی tp_ اسکین را پوشش می‌دهد، در هر پنج حالت',
+t( 'همهٔ نوع‌ها: مهار هر نوع عمومی tp_ اسکین را پوشش می‌دهد، در هر حالت دادهٔ مهار (پنج پایه و «many»)',
 	is_array( $at ) && $at_public === $at['types']
-	&& array( 'empty', 'rich', 'odd', 'arr', 'obj' ) === $at['modes'],
+	&& array( 'empty', 'rich', 'odd', 'arr', 'obj', 'many' ) === $at['modes'],
 	is_array( $at ) ? $at['types'] . '/' . $at_public . ' · ' . implode( ',', $at['modes'] ) : substr( (string) $at_json, 0, 300 ) );
 
 t( 'همهٔ نوع‌ها: هر نوع عمومی، حتی با متا و رابطهٔ خالی، بی‌خطا رندر می‌شود',

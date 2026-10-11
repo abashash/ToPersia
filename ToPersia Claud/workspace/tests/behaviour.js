@@ -436,6 +436,44 @@ async function more( page, tag ) {
 		&& steps.slice( 1 ).every( ( s, i ) => s.shown - steps[ i ].shown === Math.min( 6, steps[ i ].total - steps[ i ].shown ) )
 		&& ! steps[ steps.length - 1 ].btn && steps[ steps.length - 1 ].shown === steps[0].total;
 	check( `${ tag } #${ id }: شش پیدا؛ هر ضربه N = کمینهٔ شش و باقی‌مانده؛ پس از آخرین دسته دکمه نیست  P5-D244`, ok, JSON.stringify( steps ) );
+
+	/*
+	 * ۲ه٫۴ · P5-D313 — همان کارت: پیوند «همه …» کنار عنوان، پنجرۀ فهرست با همۀ اعضا و جست‌وجو.
+	 * باز با کلیک، شمار برابر همهٔ کاشی‌ها، جست‌وجو فیلتر می‌کند، Esc می‌بندد و فوکوس به پیوند برمی‌گردد.
+	 */
+	const link = page.locator( `#${ id } .tp-rail-card__head [data-tp-list-open]` );
+	if ( ! await link.count() ) { check( `${ tag } #${ id }: پیوند «همه …» کنار عنوان هست`, false, 'پیوند نیست' ); return; }
+	const total = steps[0].total;
+	const shape = await page.evaluate( i => {
+		const h = document.getElementById( i ).querySelector( '.tp-rail-card__head' );
+		const a = h.querySelector( '[data-tp-list-open]' ), t = h.querySelector( 'h3' );
+		const ra = a.getBoundingClientRect(), rt = t.getBoundingClientRect(), rh = h.getBoundingClientRect();
+		/* سربرگ مرجع flex با space-between است: نمایشش با سربرگ کارت‌های بی پیوند یکی بماند، h3 پیش از پیوند در DOM، و پیوند در انتهای سطر */
+		const other = [ ...document.querySelectorAll( '.tp-rail-card__head' ) ].find( x => x !== h && ! x.querySelector( '[data-tp-list-open]' ) );
+		const rtl   = 'rtl' === getComputedStyle( h ).direction;
+		return {
+			sameRow: ra.top < rt.bottom && ra.bottom > rt.top, inside: ra.left >= rh.left - 1 && ra.right <= rh.right + 1,
+			hStyle: getComputedStyle( h ).display, refStyle: other ? getComputedStyle( other ).display : 'flex',
+			afterH3: !! ( t.compareDocumentPosition( a ) & Node.DOCUMENT_POSITION_FOLLOWING ),
+			atEnd: rtl ? ra.left < rt.left : ra.left > rt.left, ctl: a.getAttribute( 'aria-controls' )
+		};
+	}, id );
+	await link.scrollIntoViewIfNeeded();
+	await link.click();
+	const modal = page.locator( '#' + shape.ctl );
+	await modal.waitFor( { state: 'visible', timeout: 15000 } );
+	const all = await modal.evaluate( m => ( { n: m.querySelectorAll( '.tp-list__item' ).length, tot: parseInt( m.getAttribute( 'data-tp-total' ), 10 ) } ) );
+	const q = modal.locator( '[data-tp-list-q]' );
+	const firstName = await modal.locator( '.tp-list__item b' ).first().textContent();
+	await q.fill( firstName.trim().slice( 0, 3 ) );
+	await page.waitForTimeout( 250 );
+	const found = await modal.evaluate( m => [ ...m.querySelectorAll( '.tp-list__item' ) ].filter( li => ! li.hidden && 'none' !== getComputedStyle( li ).display ).length );
+	await page.keyboard.press( 'Escape' );
+	await page.waitForTimeout( 300 );
+	const closed = await modal.isHidden();
+	check( `${ tag } #${ id }: «همه …» پس از h3 در DOM، هم‌ردیف و در انتهای سطرِ سربرگ (display سربرگ مرجع بی‌تغییر)؛ پنجره ${ all.n } از ${ total } عضو، جست‌وجو فیلتر می‌کند، Esc می‌بندد  P5-D313`,
+		shape.sameRow && shape.inside && shape.hStyle === shape.refStyle && shape.afterH3 && shape.atEnd && all.n === total && all.tot === total && found >= 1 && found <= all.n && closed,
+		JSON.stringify( { shape, all, found, closed } ) );
 }
 
 /*

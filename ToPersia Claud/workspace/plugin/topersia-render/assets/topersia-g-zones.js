@@ -493,7 +493,7 @@
 			var token  = ++goingTo;
 			var began  = Date.now();
 			var aim    = -1;
-			var steady = 0;
+			var steadyAt = 0;
 
 			function want() {
 				return Math.max( 0, Math.round( el.getBoundingClientRect().top + ( window.pageYOffset || 0 )
@@ -510,16 +510,16 @@
 
 				if ( Math.abs( y - aim ) > 2 ) {
 					aim    = y;
-					steady = 0;
+					steadyAt = 0;
 					window.scrollTo( { top: y, behavior: calm() ? 'auto' : 'smooth' } );
 				} else if ( Math.abs( ( window.pageYOffset || 0 ) - aim ) <= 1 ) {
-					steady ++;
+					steadyAt = steadyAt || Date.now();
 				} else {
-					steady = 0;
+					steadyAt = 0;
 				}
 
-				/* رسیده و چند فریم ماندگار ← پایان؛ سقف ۱٫۸ ثانیه */
-				if ( steady < 8 && Date.now() - began < 1800 ) {
+				/* رسیده و حدود ۶۰۰ms آرام ← پایان (نه شمار فریم: روی ماشین کند فریم‌ها دیر می‌آیند)؛ سقف ۱٫۸ ثانیه */
+				if ( ( ! steadyAt || Date.now() - steadyAt <= 600 ) && Date.now() - began < 1800 ) {
 					window.requestAnimationFrame( step );
 				}
 			}

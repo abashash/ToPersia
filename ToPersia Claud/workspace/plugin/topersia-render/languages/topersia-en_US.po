@@ -2030,6 +2030,14 @@ msgstr "All photos →"
 msgid "همه جاذبه‌ها ←"
 msgstr "All attractions →"
 
+#: includes/topersia-g-zones.php
+msgid "همه روستاها ←"
+msgstr "All villages →"
+
+#: includes/topersia-g-zones.php
+msgid "همه زیرشاخه‌ها ←"
+msgstr "All sub-ranges →"
+
 #: includes/topersia-g-map.php
 msgid "همه شهرها ←"
 msgstr "All cities →"
@@ -2043,8 +2051,24 @@ msgid "همه محله‌ها ←"
 msgstr "All neighborhoods →"
 
 #: includes/topersia-g-zones.php
+msgid "همه محوطه‌های باستانی ←"
+msgstr "All ancient sites →"
+
+#: includes/topersia-g-zones.php
+msgid "همه مسیرها ←"
+msgstr "All routes →"
+
+#: includes/topersia-g-zones.php
 msgid "همه موارد ←"
 msgstr "All items →"
+
+#: includes/topersia-g-zones.php
+msgid "همه پهنه‌های طبیعی ←"
+msgstr "All natural areas →"
+
+#: includes/topersia-g-zones.php
+msgid "همه گذرهای مرزی ←"
+msgstr "All border crossings →"
 
 #: includes/topersia-g-zones.php
 msgid "هم‌مرزها"

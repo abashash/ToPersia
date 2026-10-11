@@ -85,14 +85,73 @@ tp441_mut( 'نوار پایین موبایل: ظاهر و پنهان‌شدن ب
 	},
 	array( $css2e, $js2e ), array( str_replace( 'html:root{scroll-behavior:auto}', '', $css2e ), $js2e ) );
 
-tp441_mut( 'goTo: هر ورودی کاربر (wheel · touchstart · keydown · mousedown) اسکرولِ در جریان را رها می‌کند و پس از رسیدن و چند فریم ماندگاری پایان می‌گیرد — صفحه به بخش برنمی‌گردد',
+tp441_mut( 'goTo: هر ورودی کاربر (wheel · touchstart · keydown · mousedown) اسکرولِ در جریان را رها می‌کند و پس از رسیدن و حدود ۶۰۰ms آرامش پایان می‌گیرد — صفحه به بخش برنمی‌گردد',
 	function ( $s ) {
 		return false !== strpos( $s, "[ 'wheel', 'touchstart', 'keydown', 'mousedown' ].forEach( function ( type ) {" )
 			&& false !== strpos( $s, "window.addEventListener( type, function () { goingTo ++; }, { passive: true } );" )
-			&& false !== strpos( $s, 'if ( steady < 8 && Date.now() - began < 1800 ) {' );
+			&& false !== strpos( $s, 'if ( ( ! steadyAt || Date.now() - steadyAt <= 600 ) && Date.now() - began < 1800 ) {' );
 	},
-	$js2e, str_replace( 'if ( steady < 8 && Date.now() - began < 1800 ) {', 'if ( Date.now() - began < 1800 ) {', $js2e ) );
+	$js2e, str_replace( 'if ( ( ! steadyAt || Date.now() - steadyAt <= 600 ) && Date.now() - began < 1800 ) {', 'if ( Date.now() - began < 1800 ) {', $js2e ) );
 
 tp441_mut( 'pick در قفلِ پس از کلیک خودش را برای پایان قفل زمان‌بندی می‌کند — بخش فعال با IntersectionObserver کهنه نمی‌ماند',
 	function ( $s ) { return false !== strpos( $s, 'lockTimer = window.setTimeout( later, lockUntil - Date.now() + 40 );' ); },
 	$js2e, str_replace( 'lockTimer = window.setTimeout( later, lockUntil - Date.now() + 40 );', '', $js2e ) );
+
+/* ══ ۲ه٫۴ — «همه …» برای هر بخش کارتی (P5-D313) ═════════════════════════ */
+
+echo "\nفاز ۲ه — ۲ه٫۴ «همه …» برای هر بخش کارتی  P5-D313\n" . str_repeat( '─', 78 ) . "\n";
+
+/* استان ۲۰ با N روستا — رابطۀ ۷۵ (استان←روستا) */
+$v24_rel   = $GLOBALS['tp_rel']['75'];
+$v24_posts = $GLOBALS['tp_posts'];
+$v24_set   = function ( $n ) use ( $v24_rel ) {
+	$kids = array( 25, 26 );
+	for ( $i = 0; $i < $n - 2; $i++ ) {
+		$id = 930 + $i;
+		$GLOBALS['tp_posts'][ $id ] = array( 'type' => 'tp_village', 'title' => 'روستای آزمون ' . ( $i + 1 ), 'url' => 'https://topersia.com/v' . $id . '/' );
+		$kids[] = $id;
+	}
+	$GLOBALS['tp_rel']['75'] = array( 'children' => array( 20 => $kids ), 'parents' => $v24_rel['parents'] );
+};
+$v24_page = function ( $n ) use ( $v24_set ) {
+	$v24_set( $n );
+	return array( 'grid' => r( 20, 'tp_relgrid', array( 'rel' => 'villages' ) ), 'page' => r( 20, 'tp_page' ) );
+};
+$v24_nine = $v24_page( 9 );
+$v24_six  = $v24_page( 6 );
+$v24_three = $v24_page( 3 );
+$GLOBALS['tp_rel']['75']   = $v24_rel;
+$GLOBALS['tp_posts']       = $v24_posts;
+
+tp441_mut( 'بخش کاشی ستون کناری با نُه عضو (بیش از شش کاشی): پیوند «همه روستاها ←» پس از عنوان (data-tp-list-open، aria-controls) و پنجرۀ فهرست tp-list-villages با نُه عضو در HTML صفحه؛ شش یا کمتر: نه پیوند نه پنجره',
+	function ( $x ) {
+		$link = '<a class="tp-more tp-more--rail" href="#tp-list-villages" role="button" aria-haspopup="dialog" aria-controls="tp-list-villages" data-tp-list-open>همه روستاها ←</a>';
+		return false !== strpos( $x[0]['grid'], $link ) && 1 === preg_match( '#<div class="tp-rail-card__head"><h3 id="tp-villagesTitle">[^<]*</h3><a class="tp-more tp-more--rail"[^>]*>[^<]*</a></div>#u', $x[0]['grid'] )
+			&& (bool) preg_match( '#id="tp-list-villages"[^>]*data-tp-total="9"#', $x[0]['page'] )
+			&& false === strpos( $x[1]['grid'], 'tp-more--rail' ) && false === strpos( $x[1]['page'], 'id="tp-list-villages"' )
+			&& false === strpos( $x[2]['grid'], 'tp-more--rail' ) && false === strpos( $x[2]['page'], 'id="tp-list-villages"' );
+	},
+	array( $v24_nine, $v24_six, $v24_three ),
+	array( array( 'grid' => $v24_six['grid'], 'page' => $v24_six['page'] ), $v24_nine, $v24_nine ) );
+
+$zones24 = file_get_contents( TP_PLUGIN_DIR . '/includes/topersia-g-zones.php' );
+
+tp441_mut( 'سقف هر بخش از یک تابع: اسلایدر هشت، کاشی‌های ستون کناری شش؛ پنجرۀ فهرست از ستون اصلی و ستون کناری هر دو جمع می‌شود',
+	function ( $s ) {
+		return false !== strpos( tp2c_body( $s, 'topersia_g_list_cap' ), "array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' )" )
+			&& false !== strpos( tp2c_body( $s, 'topersia_g_list_cap' ), ': topersia_g_slider_max();' )
+			&& false !== strpos( $s, "foreach ( array_merge( \$layout['main'], \$layout['rail'] ) as \$zone ) {" )
+			&& false !== strpos( tp2c_body( $s, 'topersia_g_list_modal' ), "\$res['total'] <= topersia_g_list_cap( \$key )" );
+	},
+	$zones24, str_replace( "foreach ( array_merge( \$layout['main'], \$layout['rail'] ) as \$zone ) {", "foreach ( \$layout['main'] as \$zone ) {", $zones24 ) );
+
+/* هر نوعِ بخش کارتی که کاشی‌اش بریده می‌شود برچسب «همه …» دارد — نه «همه موارد» عمومی */
+tp441_mut( 'برچسب «همه …» هر بخش کارتی از جدول: روستاها · پهنه‌های طبیعی · محوطه‌های باستانی · مسیرها · زیرشاخه‌ها · گذرهای مرزی (کاتالوگ سه‌زبانه)',
+	function ( $s ) {
+		$b = tp2c_body( $s, 'topersia_g_list_more' );
+		foreach ( array( 'همه روستاها ←', 'همه پهنه‌های طبیعی ←', 'همه محوطه‌های باستانی ←', 'همه مسیرها ←', 'همه زیرشاخه‌ها ←', 'همه گذرهای مرزی ←' ) as $l ) {
+			if ( false === strpos( $b, $l ) ) { return false; }
+		}
+		return true;
+	},
+	$zones24, str_replace( "'villages'    => 'همه روستاها ←',", '', $zones24 ) );
