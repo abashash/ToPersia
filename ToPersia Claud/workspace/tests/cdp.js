@@ -14,12 +14,16 @@ const os = require( 'node:os' );
 const fs = require( 'node:fs' );
 const path = require( 'node:path' );
 
-const READY_MS = 15000;
+/* TP_TIMEOUT_X — ضریب همۀ زمان‌های انتظارِ رانندهٔ کروم برای ماشین کند (پیش‌فرض ۱)؛ ۱۱ اکتبر: بارگذاری صفحه ۱۰ تا ۱۵ ثانیه شد و پروب ۲۰ ثانیه‌ای صفر متن می‌دید */
+const X        = Math.max( 1, parseFloat( process.env.TP_TIMEOUT_X ) || 1 );
+const READY_MS = 15000 * X;
 
 const FLAGS = [
 	'--headless',
 	'--disable-gpu',
 	'--no-sandbox',
+	/* بی پروکسی سیستم (VPN کاربر) — tests/pw.js */
+	'--no-proxy-server',
 	'--no-first-run',
 	'--no-default-browser-check',
 	'--disable-extensions',
@@ -144,7 +148,7 @@ function wrap( cdp, port, id ) {
 				const timer = setTimeout( () => {
 					cdp.off( 'Page.loadEventFired', done );
 					reject( new Error( 'صفحه بار نشد: ' + url ) );
-				}, timeoutMs || 15000 );
+				}, ( timeoutMs || 15000 ) * X );
 
 				function done() {
 					clearTimeout( timer );
@@ -170,7 +174,7 @@ function wrap( cdp, port, id ) {
 		 * روی ماشین کندتر بی‌صدا خالی برگشت.
 		 */
 		async waitValue( expression, timeoutMs ) {
-			const deadline = Date.now() + ( timeoutMs || 10000 );
+			const deadline = Date.now() + ( timeoutMs || 10000 ) * X;
 			for (;;) {
 				const value = await page.evaluate( expression );
 				if ( value ) { return value; }

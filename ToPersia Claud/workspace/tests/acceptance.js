@@ -32,7 +32,7 @@
 
 const path = require( 'path' );
 const fs   = require( 'fs' );
-const { chromium, firefox } = require( 'playwright' );
+const { chromium, firefox } = require( './pw.js' );
 
 const DIR = path.resolve( process.argv[2] || '.' );
 

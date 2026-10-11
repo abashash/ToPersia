@@ -21,7 +21,7 @@ const fs = require( 'node:fs' );
 const os = require( 'node:os' );
 const path = require( 'node:path' );
 const { execFileSync } = require( 'node:child_process' );
-const { chromium, firefox } = require( 'playwright' );
+const { chromium, firefox } = require( './pw.js' );
 const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 const WS   = path.resolve( __dirname, '..' );

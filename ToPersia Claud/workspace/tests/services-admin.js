@@ -29,7 +29,7 @@
 const fs = require( 'node:fs' );
 const path = require( 'node:path' );
 const { execFileSync } = require( 'node:child_process' );
-const { chromium, firefox } = require( 'playwright' );
+const { chromium, firefox } = require( './pw.js' );
 const ENV = require( './env.js' );
 
 const WS    = path.resolve( __dirname, '..' );

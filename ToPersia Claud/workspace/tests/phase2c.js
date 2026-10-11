@@ -16,7 +16,7 @@
  * کد خروج: ۰ سالم · ۱ افتادن.
  */
 
-const { chromium, firefox } = require( 'playwright' );
+const { chromium, firefox } = require( './pw.js' );
 const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 const { execFileSync } = require( 'child_process' );
 const path = require( 'path' );

@@ -48,7 +48,7 @@ const { execFileSync } = require( 'node:child_process' );
 
 let chromium, firefox;
 try {
-	( { chromium, firefox } = require( 'playwright' ) );
+	( { chromium, firefox } = require( './pw.js' ) );
 } catch ( e ) {
 	console.error( 'playwright پیدا نشد — NODE_PATH باید به node_modules کش npx برسد' );
 	process.exit( 2 );

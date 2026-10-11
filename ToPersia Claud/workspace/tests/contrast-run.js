@@ -17,7 +17,7 @@
 
 const { launch } = require( './cdp.js' );
 
-const PROBE_MS = 20000;
+const PROBE_MS = 20000 * Math.max( 1, parseFloat( process.env.TP_TIMEOUT_X ) || 1 );   /* ضریب ماشین کند — cdp.js */
 
 function fail( message ) {
 	process.stderr.write( message + '\n' );

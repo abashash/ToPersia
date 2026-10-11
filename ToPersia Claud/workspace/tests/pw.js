@@ -1,0 +1,32 @@
+/**
+ * Playwright با پیش‌فرض‌های محیط محلی — هر آزمونِ مرورگری از این‌جا می‌گیرد، نه از `playwright`.
+ *
+ * بی پروکسی سیستم: کروم تنظیم پروکسی ویندوز را می‌خواند. ۱۱ اکتبر برنامهٔ VPN کاربر
+ * (happ-xray) پروکسی سیستم گذاشت و همهٔ درخواست‌های topersia.local با ۵۰۳ (بدنهٔ تهی،
+ * `proxy-connection: close`) برمی‌گشت، در حالی که curl سالم بود. آزمونی که فقط به
+ * topersia.local می‌رود هرگز نباید از پروکسی بگذرد: کروم `--no-proxy-server`، فایرفاکس
+ * `network.proxy.type = 0`.
+ */
+'use strict';
+
+const pw = require( 'playwright' );
+
+function patch( type, extra ) {
+
+	if ( type.__tpDirect ) {
+		return;
+	}
+
+	const launch = type.launch.bind( type );
+
+	type.launch = function ( options ) {
+		return launch( extra( options || {} ) );
+	};
+
+	type.__tpDirect = true;
+}
+
+patch( pw.chromium, o => Object.assign( {}, o, { args: [ '--no-proxy-server' ].concat( o.args || [] ) } ) );
+patch( pw.firefox, o => Object.assign( {}, o, { firefoxUserPrefs: Object.assign( { 'network.proxy.type': 0 }, o.firefoxUserPrefs || {} ) } ) );
+
+module.exports = pw;
