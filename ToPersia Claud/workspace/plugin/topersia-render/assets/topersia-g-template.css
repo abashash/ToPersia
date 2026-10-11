@@ -692,6 +692,31 @@ html .tp-page .tp-hero > .tp-hero__in{z-index:3}
    مقدار تازه‌ای نیست: همان سفیدِ ۷۶٪ که `.hero__alt` مرجع دارد. */
 .tp-page .tp-hero .tp-altnames{color:rgba(255,255,255,.76)}
 
+/* ─── جعبۀ کیفیت هوا (P5-D345) ───────────────────────────────────────────
+   اسکلت و دادۀ زنده هر دو یک ساختار و یک ارتفاع‌اند (CLS صفر). رنگ رده فقط از توکن --tp-aqi-N
+   (سه حالت، هر کدام ≥۴٫۵ روی --tp-bg و --tp-surface)؛ علاوه بر رنگ، برچسب متنی هست و خط کناری. */
+html .tp-page .tp-air{display:grid;gap:calc(.55 * var(--tp-rem));min-block-size:calc(6.4 * var(--tp-rem))}
+html .tp-page .tp-air__main{display:flex;align-items:baseline;flex-wrap:wrap;gap:calc(.2 * var(--tp-rem)) calc(.6 * var(--tp-rem));min-block-size:calc(3.2 * var(--tp-rem));padding-inline-start:calc(.7 * var(--tp-rem));border-inline-start:4px solid var(--tp-border)}
+html .tp-page .tp-air__idx{font-size:calc(1.9 * var(--tp-rem));line-height:1.1;font-weight:800;color:var(--tp-text)}
+html .tp-page .tp-air__unit{font-size:calc(.7 * var(--tp-rem));color:var(--tp-text);font-weight:700;letter-spacing:0}
+html .tp-page .tp-air__cat{flex-basis:100%;font-size:calc(.85 * var(--tp-rem));line-height:1.5;font-weight:800;color:var(--tp-text);min-block-size:calc(2.55 * var(--tp-rem))}
+html .tp-page .tp-air__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(.4 * var(--tp-rem));margin:0}
+html .tp-page .tp-air__list>div{display:flex;flex-direction:column;gap:2px;min-inline-size:0}
+html .tp-page .tp-air__list dt{font-size:calc(.68 * var(--tp-rem));line-height:1.4;color:var(--tp-text);font-weight:700}
+html .tp-page .tp-air__list dd{margin:0;font-size:calc(.74 * var(--tp-rem));line-height:1.5;font-weight:800;color:var(--tp-text);overflow-wrap:anywhere}
+html .tp-page .tp-air[data-tp-cat="1"] .tp-air__main{border-inline-start-color:var(--tp-aqi-1)}
+html .tp-page .tp-air[data-tp-cat="2"] .tp-air__main{border-inline-start-color:var(--tp-aqi-2)}
+html .tp-page .tp-air[data-tp-cat="3"] .tp-air__main{border-inline-start-color:var(--tp-aqi-3)}
+html .tp-page .tp-air[data-tp-cat="4"] .tp-air__main{border-inline-start-color:var(--tp-aqi-4)}
+html .tp-page .tp-air[data-tp-cat="5"] .tp-air__main{border-inline-start-color:var(--tp-aqi-5)}
+html .tp-page .tp-air[data-tp-cat="6"] .tp-air__main{border-inline-start-color:var(--tp-aqi-6)}
+html .tp-page .tp-air[data-tp-cat="1"] .tp-air__cat{color:var(--tp-aqi-1)}
+html .tp-page .tp-air[data-tp-cat="2"] .tp-air__cat{color:var(--tp-aqi-2)}
+html .tp-page .tp-air[data-tp-cat="3"] .tp-air__cat{color:var(--tp-aqi-3)}
+html .tp-page .tp-air[data-tp-cat="4"] .tp-air__cat{color:var(--tp-aqi-4)}
+html .tp-page .tp-air[data-tp-cat="5"] .tp-air__cat{color:var(--tp-aqi-5)}
+html .tp-page .tp-air[data-tp-cat="6"] .tp-air__cat{color:var(--tp-aqi-6)}
+html .tp-page .tp-air__model{margin:calc(.5 * var(--tp-rem)) 0 0}
 .tp-page .tp-wx-fx{
   position:absolute;inset:0;pointer-events:none;
   opacity:0;transition:opacity .6s linear;

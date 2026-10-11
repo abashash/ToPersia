@@ -244,7 +244,7 @@ if ( topersia_render_ready() && function_exists( 'topersia_render_settings_menu'
    المنتور اسکلت چیدمان می‌سازد؛ این دو فایل محتوای هر ناحیه را.  P5-D147
    ------------------------------------------------------------------------- */
 
-foreach ( array( 'includes/topersia-g-core.php', 'includes/topersia-g-map.php', 'includes/topersia-g-weather.php', 'includes/topersia-g-zones.php', 'includes/topersia-g-ai.php', 'includes/topersia-g-news.php', 'includes/topersia-g-gallery-agg.php', 'includes/topersia-g-relreg.php' ) as $topersia_g_file ) {
+foreach ( array( 'includes/topersia-g-core.php', 'includes/topersia-g-map.php', 'includes/topersia-g-weather.php', 'includes/topersia-g-zones.php', 'includes/topersia-g-ai.php', 'includes/topersia-g-news.php', 'includes/topersia-g-gallery-agg.php', 'includes/topersia-g-relreg.php', 'includes/topersia-g-air.php' ) as $topersia_g_file ) {
 
 	$topersia_g_path = topersia_render_path() . $topersia_g_file;
 
@@ -478,6 +478,8 @@ if ( ! function_exists( 'topersia_render_enqueue_assets' ) ) {
 			'TopersiaG',
 			array(
 				'rest'   => esc_url_raw( rest_url( 'topersia/v1/weather' ) ),
+				/* نقطۀ کیفیت هوا — جعبۀ زیر کارت آب‌وهوا  P5-D345 */
+				'air'    => esc_url_raw( rest_url( 'topersia/v1/air' ) ),
 				/* جدول قاعدۀ تاکردن جست‌وجو از هسته — پنجرۀ فهرست همان را اجرا می‌کند.  P5-D265 */
 				'fold'   => function_exists( 'topersia_search_fold_js_rules' ) ? topersia_search_fold_js_rules() : array(),
 				/* پیام‌های جاوااسکریپت و خطِ رقم به زبان صفحه  ۴٫۴٫۲ */

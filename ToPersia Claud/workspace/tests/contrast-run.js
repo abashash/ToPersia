@@ -47,6 +47,8 @@ async function readPage( browser, url ) {
 			await page.send( 'Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false } );
 			await page.navigate( url, 120000 );
 			await page.waitFor( 'document.fonts && document.fonts.status === "loaded"', 20000 );
+			/* جعبهٔ کیفیت هوا (P5-D345) دادهٔ زنده دارد: تا پر شدنش (یا برداشته‌شدن اسکلت پس از خطا) صبر، وگرنه رنگ رده سنجیده نمی‌شود */
+			await page.waitFor( '(function(){var a=document.querySelector("[data-tp-air]");return !a||!a.classList.contains("is-load")})()', 45000 ).catch( function () {} );
 			await page.evaluate( require( 'fs' ).readFileSync( require( 'path' ).join( __dirname, 'contrast-probe.js' ), 'utf8' ) + ';true' );
 		}
 

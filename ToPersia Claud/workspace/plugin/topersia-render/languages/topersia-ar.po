@@ -334,6 +334,10 @@ msgstr "أقسام هذه الصفحة"
 msgid "بخش‌های صفحه"
 msgstr "أقسام الصفحة"
 
+#: includes/topersia-g-air.php
+msgid "برآورد مدل CAMS"
+msgstr "تقدير نموذج CAMS"
+
 #: includes/topersia-g-zones.php
 msgid "برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید"
 msgstr "سجّل للوصول إلى مزيد من ميزات الذكاء الاصطناعي"
@@ -397,6 +401,10 @@ msgstr "إغلاق المعرض"
 #: includes/topersia-g-map.php
 msgid "بسته"
 msgstr "مغلق"
+
+#: includes/topersia-g-air.php
+msgid "بسیار ناسالم"
+msgstr "غير صحي جدًا"
 
 #: topersia-render.php
 msgid "بعدازظهر"
@@ -709,6 +717,10 @@ msgstr "مخرجات الذكاء الاصطناعي"
 msgid "خط"
 msgstr "الخط"
 
+#: includes/topersia-g-air.php
+msgid "خطرناک"
+msgstr "خطير"
+
 #: includes/topersia-g-zones.php
 msgid "خلاصه مقصد"
 msgstr "ملخص الوجهة"
@@ -733,6 +745,10 @@ msgstr "قراءة سهلة"
 msgid "خواندن آسان اعمال شد"
 msgstr "طُبِّقت القراءة السهلة"
 
+#: includes/topersia-g-air.php
+msgid "خوب"
+msgstr "جيد"
+
 #: includes/topersia-g-zones.php
 msgid "خوراک محلی"
 msgstr "المطبخ المحلي"
@@ -745,6 +761,11 @@ msgstr "يخنة (خورش)"
 #, php-format
 msgid "داده‌های هوا: %s"
 msgstr "بيانات الطقس: %s"
+
+#: includes/topersia-g-air.php
+#, php-format
+msgid "داده‌های هوا: %s · کیفیت هوا: CAMS، Open-Meteo"
+msgstr "بيانات الطقس: %s · جودة الهواء: CAMS، Open-Meteo"
 
 #: includes/topersia-g-map.php
 msgid "دامنۀ اینترنتی"
@@ -1108,6 +1129,14 @@ msgstr "خدمة الطقس غير متاحة."
 msgid "سرویس هوا موقتاً شلوغ است."
 msgstr "خدمة الطقس مشغولة مؤقتًا."
 
+#: includes/topersia-g-air.php
+msgid "سرویس کیفیت هوا خاموش است."
+msgstr "خدمة جودة الهواء متوقفة."
+
+#: includes/topersia-g-air.php
+msgid "سرویس کیفیت هوا در دسترس نیست."
+msgstr "خدمة جودة الهواء غير متاحة."
+
 #: includes/topersia-g-map.php
 msgid "سطح"
 msgstr "المستوى"
@@ -1271,6 +1300,10 @@ msgstr "التصوير"
 #: includes/topersia-g-map.php
 msgid "غار"
 msgstr "كهف"
+
+#: includes/topersia-g-air.php
+msgid "غبار"
+msgstr "الغبار"
 
 #: includes/topersia-g-zones.php
 msgid "غذای محلی"
@@ -1487,7 +1520,7 @@ msgstr "يجب ألا يقل نص المراجعة عن عشرة أحرف."
 
 #: includes/topersia-g-map.php
 msgid "متوسط"
-msgstr "متوسط"
+msgstr "معتدل"
 
 #: includes/topersia-g-zones.php
 msgid "محتوای زمانی با تاریخ صریح و لینک به منبع اصلی."
@@ -1814,6 +1847,14 @@ msgstr "ميلادي"
 #: includes/topersia-g-map.php
 msgid "مینیاتور"
 msgstr "المنمنمات"
+
+#: includes/topersia-g-air.php
+msgid "ناسالم"
+msgstr "غير صحي"
+
+#: includes/topersia-g-air.php
+msgid "ناسالم برای گروه‌های حساس"
+msgstr "غير صحي للفئات الحساسة"
 
 #: includes/topersia-g-map.php
 msgid "نام بومی"
@@ -2167,6 +2208,10 @@ msgstr "منتزه وطني"
 msgid "پاسخ سرویس هوا شکل مورد انتظار را ندارد."
 msgstr "أعادت خدمة الطقس استجابة غير متوقعة."
 
+#: includes/topersia-g-air.php
+msgid "پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد."
+msgstr "استجابة جودة الهواء ليست بالشكل المتوقع."
+
 #: includes/topersia-g-map.php
 msgid "پایان"
 msgstr "النهاية"
@@ -2390,6 +2435,10 @@ msgstr "تم النسخ ✓"
 #: includes/topersia-g-zones.php
 msgid "کپی نشانی"
 msgstr "نسخ الرابط"
+
+#: includes/topersia-g-air.php
+msgid "کیفیت هوا"
+msgstr "جودة الهواء"
 
 #: includes/topersia-g-map.php
 msgid "کیلومتر"

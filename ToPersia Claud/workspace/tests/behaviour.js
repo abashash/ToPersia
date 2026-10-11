@@ -65,6 +65,68 @@ async function open( browser, url, opts ) {
 	return { ctx, page };
 }
 
+/* ── P5-D345 کیفیت هوا: اسکلتِ هم‌اندازه، پر شدن پس از بارگذاری بی جابه‌جایی، خطا ← «—»، رنگ رده از توکن ── */
+async function airBox( browser, url, tag ) {
+
+	for ( const [ label, fail ] of [ [ 'پاسخ', false ], [ 'خطا', true ] ] ) {
+
+		const ctx = await browser.newContext( { viewport: { width: 1440, height: 900 } } );
+		await ctx.addInitScript( CLS_INIT );
+		await ctx.route( /topersia\.com/, r => r.abort() );
+		/* پاسخ تا لحظه‌ای که آزمون اسکلت را سنجید و آرامشِ صفحه (کارت هوا و …) را گرفت معلق می‌ماند؛ فقط جابه‌جاییِ همین پر شدن شمرده می‌شود */
+		let release;
+		const gate = new Promise( z => { release = z; } );
+		await ctx.route( /topersia\/v1\/air/, async r => {
+			await gate;
+			return fail ? r.abort() : r.fulfill( { status: 200, contentType: 'application/json', body: JSON.stringify( { aqi: 160, cat: 4, label: 'ناسالم', pm25: 55.4, pm10: 80.2, dust: 12, model: 'برآورد مدل CAMS' } ) } );
+		} );
+		const page = await ctx.newPage();
+		await page.goto( url, { waitUntil: 'load', timeout: 240000 } );
+
+		const box = page.locator( '[data-tp-air]' );
+
+		if ( ! await box.count() ) {
+			check( `${ tag } کیفیت هوا (${ label }): جعبه در صفحه هست`, false );
+			await ctx.close();
+			continue;
+		}
+
+		await page.waitForTimeout( 2500 );
+		const skel = await box.evaluate( e => ( { h: e.getBoundingClientRect().height, load: e.classList.contains( 'is-load' ), idx: e.querySelector( '[data-tp-air-idx]' ).textContent } ) );
+		const cls0 = await page.evaluate( () => window.__tpCls );
+		release();
+		await page.waitForFunction( () => ! document.querySelector( '[data-tp-air]' ).classList.contains( 'is-load' ), null, { timeout: 60000 } );
+		await page.waitForTimeout( 500 );
+		const after = await box.evaluate( e => {
+			const probe = document.createElement( 'span' );
+			probe.style.color = 'var(--tp-aqi-4)';
+			document.body.appendChild( probe );
+			const token = getComputedStyle( probe ).color;
+			probe.remove();
+			return {
+				h: e.getBoundingClientRect().height, idx: e.querySelector( '[data-tp-air-idx]' ).textContent, cat: e.querySelector( '[data-tp-air-cat]' ).textContent,
+				attr: e.getAttribute( 'data-tp-cat' ), pm: e.querySelector( '[data-tp-air-pm25]' ).textContent, dust: e.querySelector( '[data-tp-air-dust]' ).textContent,
+				color: getComputedStyle( e.querySelector( '[data-tp-air-cat]' ) ).color, token,
+				load: e.classList.contains( 'is-load' ),
+			};
+		} );
+		const cls = ( await page.evaluate( () => window.__tpCls ) ) - cls0;
+
+		check( `${ tag } کیفیت هوا (${ label }): پیش از پاسخ اسکلتِ «—» بود و پس از آن بی جابه‌جایی (ارتفاع ${ Math.round( skel.h ) }→${ Math.round( after.h ) }، CLS پر شدن ${ cls.toFixed( 5 ) })`,
+			skel.load && '—' === skel.idx && Math.abs( skel.h - after.h ) <= 1 && cls <= 0.0001, JSON.stringify( { skel, after, cls } ) );
+
+		if ( fail ) {
+			check( `${ tag } کیفیت هوا (خطا): همهٔ خانه‌ها «—» می‌مانند، بی رده و بی رنگ، و اسکلت برداشته می‌شود`,
+				! after.load && '—' === after.idx && '—' === after.cat && '—' === after.pm && '—' === after.dust && ! after.attr, JSON.stringify( after ) );
+		} else {
+			check( `${ tag } کیفیت هوا (پاسخ): ۱۶۰ ← «ناسالم» رده ۴؛ ذره‌ها با µg/m³؛ رنگ برچسب همان توکن --tp-aqi-4`,
+				'۱۶۰' === after.idx && 'ناسالم' === after.cat && '4' === after.attr && /۵۵\s*µg\/m³/.test( after.pm ) && /۱۲\s*µg\/m³/.test( after.dust ) && after.color === after.token, JSON.stringify( after ) );
+		}
+
+		await ctx.close();
+	}
+}
+
 /* ── P5-D243 اسلایدر ──────────────────────────────────────────────── */
 async function sliders( page, tag ) {
 
@@ -1099,7 +1161,7 @@ const ONLY = process.env.TP_ONLY || '';
 
 	const hx = harness();
 
-	for ( const [ name, type ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ].filter( b => ! ONLY || 'فایرفاکس' === b[0] ) ) {
+	for ( const [ name, type ] of [ [ 'کروم', chromium ], [ 'فایرفاکس', firefox ] ].filter( b => 'ff-sliders' !== ONLY || 'فایرفاکس' === b[0] ) ) {
 
 		const browser = await type.launch();
 		const mobile = 'کروم' === name
@@ -1107,7 +1169,7 @@ const ONLY = process.env.TP_ONLY || '';
 			: { viewport: { width: 390, height: 844 }, hasTouch: true };
 
 		/* ── هارنس: همان استان، راست‌به‌چپ و چپ‌به‌راست — P5-D243 ── */
-		for ( const [ label, url ] of [ [ 'هارنس راست‌به‌چپ', hx.rtl ], [ 'هارنس چپ‌به‌راست', hx.ltr ] ] ) {
+		for ( const [ label, url ] of [ [ 'هارنس راست‌به‌چپ', hx.rtl ], [ 'هارنس چپ‌به‌راست', hx.ltr ] ].filter( () => 'air' !== ONLY ) ) {
 			console.log( `\n${ name } — ${ label }\n` + '─'.repeat( 78 ) );
 			for ( const [ size, opts, touch ] of [ [ '۱۴۴۰', null, false ], [ '۳۹۰', mobile, true ] ].filter( z => ! ONLY || '۱۴۴۰' === z[0] ) ) {
 				const s = await open( browser, url, opts );
@@ -1131,6 +1193,11 @@ const ONLY = process.env.TP_ONLY || '';
 
 			const where = url.replace( /^https?:\/\/[^/]+/, '' );
 			console.log( `\n${ name } — ${ where }\n` + '─'.repeat( 78 ) );
+
+			if ( 'air' === ONLY ) {
+				await airBox( browser, url, name );
+				continue;
+			}
 
 			const html = ONLY ? '' : await ( await fetch( url ) ).text();
 			if ( ! ONLY ) check( `${ name }: MapLibre در HTML اولیه نیست — فقط هنگام نیاز  §۱`, html.indexOf( 'maplibre-gl' ) < 0 );
@@ -1168,6 +1235,8 @@ const ONLY = process.env.TP_ONLY || '';
 			await snav( browser, url, name, 1440, true );
 
 			/* انیمیشن هوا — حرکت روشن و کاهش حرکتِ سیستم */
+			await airBox( browser, url, name );
+
 			const on  = await weatherFx( browser, url, name, false );
 			const off = await weatherFx( browser, url, name, true );
 			check( `${ name }: انیمیشن هوا از پاسخ /weather روی سربرگ دیده می‌شود؛ با کاهش حرکت نه  §۳`,

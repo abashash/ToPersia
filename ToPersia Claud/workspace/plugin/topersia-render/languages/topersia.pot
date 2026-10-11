@@ -333,6 +333,10 @@ msgstr ""
 msgid "بخش‌های صفحه"
 msgstr ""
 
+#: includes/topersia-g-air.php
+msgid "برآورد مدل CAMS"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید"
 msgstr ""
@@ -395,6 +399,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "بسته"
+msgstr ""
+
+#: includes/topersia-g-air.php
+msgid "بسیار ناسالم"
 msgstr ""
 
 #: topersia-render.php
@@ -708,6 +716,10 @@ msgstr ""
 msgid "خط"
 msgstr ""
 
+#: includes/topersia-g-air.php
+msgid "خطرناک"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "خلاصه مقصد"
 msgstr ""
@@ -732,6 +744,10 @@ msgstr ""
 msgid "خواندن آسان اعمال شد"
 msgstr ""
 
+#: includes/topersia-g-air.php
+msgid "خوب"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "خوراک محلی"
 msgstr ""
@@ -743,6 +759,11 @@ msgstr ""
 #: includes/topersia-g-weather.php
 #, php-format
 msgid "داده‌های هوا: %s"
+msgstr ""
+
+#: includes/topersia-g-air.php
+#, php-format
+msgid "داده‌های هوا: %s · کیفیت هوا: CAMS، Open-Meteo"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1107,6 +1128,14 @@ msgstr ""
 msgid "سرویس هوا موقتاً شلوغ است."
 msgstr ""
 
+#: includes/topersia-g-air.php
+msgid "سرویس کیفیت هوا خاموش است."
+msgstr ""
+
+#: includes/topersia-g-air.php
+msgid "سرویس کیفیت هوا در دسترس نیست."
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "سطح"
 msgstr ""
@@ -1269,6 +1298,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "غار"
+msgstr ""
+
+#: includes/topersia-g-air.php
+msgid "غبار"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1814,6 +1847,14 @@ msgstr ""
 msgid "مینیاتور"
 msgstr ""
 
+#: includes/topersia-g-air.php
+msgid "ناسالم"
+msgstr ""
+
+#: includes/topersia-g-air.php
+msgid "ناسالم برای گروه‌های حساس"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "نام بومی"
 msgstr ""
@@ -2166,6 +2207,10 @@ msgstr ""
 msgid "پاسخ سرویس هوا شکل مورد انتظار را ندارد."
 msgstr ""
 
+#: includes/topersia-g-air.php
+msgid "پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد."
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "پایان"
 msgstr ""
@@ -2388,6 +2433,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "کپی نشانی"
+msgstr ""
+
+#: includes/topersia-g-air.php
+msgid "کیفیت هوا"
 msgstr ""
 
 #: includes/topersia-g-map.php

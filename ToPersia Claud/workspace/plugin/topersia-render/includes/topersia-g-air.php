@@ -1,0 +1,264 @@
+<?php
+/**
+ * کیفیت هوا — جعبه‌ای زیر کارت آب‌وهوا.  P5-D345 · P5-D346 (بخشی از فاز ۳ پیش از ۲د)
+ *
+ * منبع: Open-Meteo Air Quality (مدل CAMS) — endpoint و پارامترها فقط از مستند رسمی (قاعدۀ ۱۱):
+ *   https://air-quality-api.open-meteo.com/v1/air-quality ?latitude&longitude &current=us_aqi,pm10,pm2_5,dust
+ *   پاسخ: `current` = { time, interval (۳۶۰۰ ثانیه)، us_aqi، pm10، pm2_5، dust } — µg/m³ برای سه ذره.
+ * استفادۀ رایگان فقط غیرتجاری است و انتساب (CAMS و Open-Meteo) الزامی: با `site_is_commercial` روشن و بی کلید پولی
+ * ← سرویس خاموش و جعبه نمی‌آید (همان منطق `topersia_api()` هسته).
+ *
+ * سمت سرور، با کش مرکزی (P5-D250): کلید سلول ۰٫۲۵ درجه، تا پایان ساعت جاری؛ دادۀ کهنه به‌جای خطا.
+ * مختصات از تابع مرکزی `topersia_geo_point()` (۲ه٫۵). دادۀ زنده است و در HTML کش‌شده نمی‌آید: اسکلتِ هم‌اندازه
+ * در HTML و پر شدن پس از بارگذاری از REST (CLS صفر)؛ خطا ← «—».
+ *
+ * @package ToPersia_Render
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( ! defined( 'TP_AQ_ENDPOINT' ) ) {
+	define( 'TP_AQ_ENDPOINT', 'https://air-quality-api.open-meteo.com/v1/air-quality' );
+}
+
+/** رده‌ٔ US AQI (۱ تا ۶) از شاخص — حدّ ردۀ EPA: ۵۰ · ۱۰۰ · ۱۵۰ · ۲۰۰ · ۳۰۰. */
+if ( ! function_exists( 'topersia_g_aqi_cat' ) ) {
+	function topersia_g_aqi_cat( $aqi ) {
+
+		$aqi = (float) $aqi;
+
+		foreach ( array( 50 => 1, 100 => 2, 150 => 3, 200 => 4, 300 => 5 ) as $max => $cat ) {
+			if ( $aqi <= $max ) {
+				return $cat;
+			}
+		}
+
+		return 6;
+	}
+}
+
+/** برچسب هر رده به زبان صفحه — از کاتالوگ افزونه. */
+if ( ! function_exists( 'topersia_g_aqi_label' ) ) {
+	function topersia_g_aqi_label( $cat ) {
+
+		$map = array(
+			1 => __( 'خوب', 'topersia' ),
+			2 => __( 'متوسط', 'topersia' ),
+			3 => __( 'ناسالم برای گروه‌های حساس', 'topersia' ),
+			4 => __( 'ناسالم', 'topersia' ),
+			5 => __( 'بسیار ناسالم', 'topersia' ),
+			6 => __( 'خطرناک', 'topersia' ),
+		);
+
+		return isset( $map[ (int) $cat ] ) ? $map[ (int) $cat ] : $map[6];
+	}
+}
+
+/** سلول ۰٫۲۵ درجه — کلید کش و مختصات درخواست. */
+if ( ! function_exists( 'topersia_g_aq_cell' ) ) {
+	function topersia_g_aq_cell( $lat, $lng ) {
+		return array( number_format( round( (float) $lat * 4 ) / 4, 2, '.', '' ), number_format( round( (float) $lng * 4 ) / 4, 2, '.', '' ) );
+	}
+}
+
+/** آیا سرویس کیفیت هوا برای این سایت روشن و مجاز است (خاموشی مدیر، پرچم تجاری بی کلید پولی). */
+if ( ! function_exists( 'topersia_g_aq_enabled' ) ) {
+	function topersia_g_aq_enabled() {
+
+		if ( ! function_exists( 'topersia_api' ) ) {
+			return false;
+		}
+
+		$cfg = topersia_api( 'air_quality' );
+
+		/* «error» (آخرین فراخوانی ناموفق) خاموشی نیست: وگرنه پس از یک قطعی هرگز دوباره آزموده نمی‌شد؛ «off» (خاموش یا تجاری بی کلید پولی) و «nokey» خاموشی‌اند */
+		return ! empty( $cfg ) && in_array( isset( $cfg['status'] ) ? $cfg['status'] : '', array( 'active', 'error' ), true ) && ! empty( $cfg['enabled'] );
+	}
+}
+
+/**
+ * یک دریافت از Open-Meteo Air Quality برای یک سلول.
+ *
+ * @return array|WP_Error  value: aqi · pm25 · pm10 · dust · time
+ */
+if ( ! function_exists( 'topersia_g_aq_fetch' ) ) {
+	function topersia_g_aq_fetch( $cell ) {
+
+		$args = array(
+			'latitude'  => $cell[0],
+			'longitude' => $cell[1],
+			'current'   => 'us_aqi,pm10,pm2_5,dust',
+			'timezone'  => 'GMT',
+		);
+
+		/* ردۀ پولی (تجاری): مستند رسمی فقط پارامتر apikey و میزبان customer- می‌شناسد؛ کلید فقط سمت سرور از هسته */
+		$cfg = function_exists( 'topersia_api' ) ? topersia_api( 'air_quality' ) : array();
+		$url = TP_AQ_ENDPOINT;
+
+		if ( ! empty( $cfg['key'] ) ) {
+			$url             = str_replace( 'https://air-quality-api.', 'https://customer-air-quality-api.', TP_AQ_ENDPOINT );
+			$args['apikey']  = $cfg['key'];
+		}
+
+		$response = wp_remote_get( add_query_arg( $args, $url ), array( 'timeout' => 6, 'headers' => array( 'Accept' => 'application/json' ) ) );
+
+		if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+			return new WP_Error( 'tp_aq_upstream', __( 'سرویس کیفیت هوا در دسترس نیست.', 'topersia' ), array( 'status' => 503 ) );
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $response ), true );
+		$cur  = is_array( $body ) && isset( $body['current'] ) && is_array( $body['current'] ) ? $body['current'] : array();
+
+		if ( ! isset( $cur['us_aqi'] ) || ! is_numeric( $cur['us_aqi'] ) ) {
+			return new WP_Error( 'tp_aq_shape', __( 'پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد.', 'topersia' ), array( 'status' => 502 ) );
+		}
+
+		$num = function ( $k ) use ( $cur ) {
+			return isset( $cur[ $k ] ) && is_numeric( $cur[ $k ] ) ? round( (float) $cur[ $k ], 1 ) : null;
+		};
+
+		return array(
+			'aqi'  => (int) round( (float) $cur['us_aqi'] ),
+			'pm25' => $num( 'pm2_5' ),
+			'pm10' => $num( 'pm10' ),
+			'dust' => $num( 'dust' ),
+			'time' => isset( $cur['time'] ) ? (string) $cur['time'] : '',
+		);
+	}
+}
+
+/** کش مرکزی: کلید سلول، تا پایان ساعت؛ بی هسته همان دریافت بی کش. */
+if ( ! function_exists( 'topersia_g_aq_get' ) ) {
+	function topersia_g_aq_get( $lat, $lng ) {
+
+		$cell = topersia_g_aq_cell( $lat, $lng );
+
+		if ( function_exists( 'topersia_cache_remember' ) ) {
+			return topersia_cache_remember(
+				'air_quality',
+				array( $cell[0], $cell[1] ),
+				function () use ( $cell ) {
+					$out = topersia_g_aq_fetch( $cell );
+					return is_wp_error( $out ) ? $out : array( 'value' => $out, 'ttl' => 'hour' );   /* تا پایان ساعت جاری — قاعدۀ مرکزی کش */
+				},
+				array( 'provider' => 'open-meteo-aq', 'lang' => 'fa', 'keep' => 7200, 'stale_on_error' => true )
+			);
+		}
+
+		return topersia_g_aq_fetch( $cell );
+	}
+}
+
+/**
+ * پاسخ REST — `topersia/v1/air?lat&lng`.
+ *
+ * پاسخ: aqi · cat (۱–۶) · label (زبان نشانی) · pm25 · pm10 · dust · time · model · src.
+ */
+if ( ! function_exists( 'topersia_g_aq_rest' ) ) {
+	function topersia_g_aq_rest( $request ) {
+
+		$lat   = $request->get_param( 'lat' );
+		$lng   = $request->get_param( 'lng' );
+		$point = ( is_numeric( $lat ) && is_numeric( $lng ) && function_exists( 'topersia_geo_point' ) )
+			? topersia_geo_point( $lat . ', ' . $lng ) : null;
+
+		if ( ! $point ) {
+			return new WP_Error( 'tp_aq_coords', __( 'مختصات نامعتبر است.', 'topersia' ), array( 'status' => 400 ) );
+		}
+
+		if ( ! topersia_g_aq_enabled() ) {
+			return new WP_Error( 'tp_aq_off', __( 'سرویس کیفیت هوا خاموش است.', 'topersia' ), array( 'status' => 503 ) );
+		}
+
+		$out = topersia_g_aq_get( $point['lat'], $point['lng'] );
+
+		if ( is_wp_error( $out ) ) {
+			return $out;
+		}
+
+		$cat = topersia_g_aqi_cat( $out['aqi'] );
+
+		return rest_ensure_response( array(
+			'aqi'   => (int) $out['aqi'],
+			'cat'   => $cat,
+			'label' => topersia_g_aqi_label( $cat ),
+			'pm25'  => $out['pm25'],
+			'pm10'  => $out['pm10'],
+			'dust'  => $out['dust'],
+			'time'  => $out['time'],
+			'model' => __( 'برآورد مدل CAMS', 'topersia' ),
+		) );
+	}
+}
+
+/** انتسابِ زیر جعبه: داده‌های هوای کارت آب‌وهوا + کیفیت هوا. */
+if ( ! function_exists( 'topersia_g_aq_credit' ) ) {
+	function topersia_g_aq_credit() {
+
+		$wx = TP_Wx_Open_Meteo::NAME === topersia_g_wx_provider() ? 'Open-Meteo' : TP_Wx_Met_Norway::CREDIT;
+
+		return sprintf(
+			/* translators: %s: نام ارائه‌دهندۀ آب‌وهوا */
+			__( 'داده‌های هوا: %s · کیفیت هوا: CAMS، Open-Meteo', 'topersia' ),
+			$wx
+		);
+	}
+}
+
+/**
+ * [tp_air] — جعبۀ کیفیت هوا زیر کارت آب‌وهوا، برای هر نوعی که کارت هوا دارد (کشور ندارد). اسکلتِ هم‌اندازه؛ بی عدد.
+ */
+if ( ! function_exists( 'topersia_g_sc_air' ) ) {
+	function topersia_g_sc_air( $atts = array() ) {
+
+		$pid = topersia_g_pid( $atts );
+
+		if ( ! $pid || ! topersia_g_zone_on( $pid, 'tp-weather' ) || ! topersia_g_aq_enabled() ) {
+			return '';
+		}
+
+		/* همان مختصاتِ کارت هوا — تابع مرکزی؛ نامعتبر ← کارت هوا نیست و این هم نه */
+		$coords = topersia_g_text( $pid, 'geo_coordinates' );
+		$coords = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : $coords;
+
+		if ( '' === $coords ) {
+			return '';
+		}
+
+		$body = '<div class="tp-air is-load" data-tp-air data-tp-coords="' . esc_attr( $coords ) . '" aria-live="polite">'
+			. '<div class="tp-air__main"><b class="tp-air__idx" data-tp-air-idx>—</b>'
+			. '<span class="tp-air__unit" dir="ltr">US AQI</span>'
+			. '<span class="tp-air__cat" data-tp-air-cat>—</span></div>'
+			. '<dl class="tp-air__list">'
+			. '<div><dt dir="ltr">PM2.5</dt><dd data-tp-air-pm25>—</dd></div>'
+			. '<div><dt dir="ltr">PM10</dt><dd data-tp-air-pm10>—</dd></div>'
+			. '<div><dt>' . esc_html__( 'غبار', 'topersia' ) . '</dt><dd data-tp-air-dust>—</dd></div>'
+			. '</dl></div>'
+			. '<p class="tp-wx__src tp-air__model">' . esc_html__( 'برآورد مدل CAMS', 'topersia' ) . '</p>'
+			. '<p class="tp-wx__src tp-wx__credit">' . esc_html( topersia_g_aq_credit() ) . '</p>';
+
+		return topersia_g_section( 'tp-aqi', __( 'کیفیت هوا', 'topersia' ), 'AIR', $body );
+	}
+}
+
+if ( function_exists( 'add_shortcode' ) ) {
+	add_shortcode( 'tp_air', 'topersia_g_sc_air' );
+}
+
+if ( function_exists( 'add_action' ) ) {
+
+	add_action( 'rest_api_init', function () {
+
+		register_rest_route( 'topersia/v1', '/air', array(
+			'methods'             => 'GET',
+			'callback'            => 'topersia_g_aq_rest',
+			'permission_callback' => '__return_true',
+			'args'                => array(
+				'lat' => array( 'required' => true, 'type' => 'string' ),
+				'lng' => array( 'required' => true, 'type' => 'string' ),
+			),
+		) );
+	} );
+}

@@ -2284,4 +2284,58 @@
 			} );
 	} )();
 
+	/* ══ کیفیت هوا ══════════════════════════════════════════════════════
+	   دادۀ زنده است و در HTML کش‌شده نمی‌آید: اسکلتِ هم‌اندازه («—») سرِ جایش است و پس از
+	   بارگذاری از `topersia/v1/air` پر می‌شود — هیچ جابه‌جایی‌ای نیست (CLS صفر). خطا ← همان «—».
+	   رده، برچسب (زبان نشانی) و رنگ از پاسخ؛ رنگ با توکن `--tp-aqi-N` (کلاس رده).  P5-D345
+	   ────────────────────────────────────────────────────────────────── */
+	( function () {
+
+		var box = page.querySelector( '[data-tp-air]' );
+		var root = ( window.TopersiaG && window.TopersiaG.air ) || '';
+
+		if ( ! box || ! root || ! window.fetch ) {
+			return;
+		}
+
+		var ll = ( box.getAttribute( 'data-tp-coords' ) || '' ).split( ',' );
+
+		function done() {
+			box.classList.remove( 'is-load' );
+		}
+
+		function put( sel, text ) {
+			var el = box.querySelector( sel );
+			if ( el ) { el.textContent = text; }
+		}
+
+		function num( v ) {
+			return null === v || undefined === v ? '—' : digits( Math.round( v ) ) + ' µg/m³';
+		}
+
+		if ( ll.length < 2 ) {
+			done();
+			return;
+		}
+
+		fetch( root + '?lat=' + encodeURIComponent( ll[0].trim() ) + '&lng=' + encodeURIComponent( ll[1].trim() ) )
+			.then( function ( r ) { return r.ok ? r.json() : null; } )
+			.then( function ( d ) {
+
+				if ( ! d || 'number' !== typeof d.aqi ) {
+					done();
+					return;
+				}
+
+				box.setAttribute( 'data-tp-cat', d.cat );
+				put( '[data-tp-air-idx]', digits( d.aqi ) );
+				put( '[data-tp-air-cat]', d.label || '—' );
+				put( '[data-tp-air-pm25]', num( d.pm25 ) );
+				put( '[data-tp-air-pm10]', num( d.pm10 ) );
+				put( '[data-tp-air-dust]', num( d.dust ) );
+				done();
+			} )
+			.catch( done );
+	} )();
+
 }() );

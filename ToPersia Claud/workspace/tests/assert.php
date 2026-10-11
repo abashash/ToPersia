@@ -2162,6 +2162,7 @@ require __DIR__ . '/assert-2b.php';
 require __DIR__ . '/assert-2c.php';
 require __DIR__ . '/assert-2e.php';
 require __DIR__ . '/assert-2f.php';
+require __DIR__ . '/assert-2g.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

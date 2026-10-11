@@ -5536,6 +5536,7 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 				array( 'fn' => 'topersia_g_sc_map',       'id' => 'tp-map',     'nav' => 'نقشه' ),
 				array( 'fn' => 'topersia_g_sc_seasons',   'id' => 'tp-season',  'nav' => 'زمان سفر' ),
 				array( 'fn' => 'topersia_g_sc_weather',   'id' => 'tp-weather', 'nav' => '' ),
+				array( 'fn' => 'topersia_g_sc_air',       'id' => 'tp-aqi',     'nav' => '' ),   /* کیفیت هوا زیر کارت هوا — P5-D345 */
 				array( 'fn' => 'topersia_g_sc_audio',     'id' => 'tp-audio',   'nav' => 'روایت‌ها' ),   /* P5-D227 */
 				array( 'fn' => 'topersia_g_sc_facts',     'id' => 'tp-geo',     'nav' => 'جغرافیا' ),
 				array( 'fn' => 'topersia_g_sc_badges',    'id' => 'tp-badges',  'nav' => '' ),
@@ -5899,6 +5900,7 @@ if ( ! function_exists( 'topersia_g_section_icon' ) ) {
 			'tp-geo'         => 'globe',
 			'tp-season'      => 'cal',
 			'tp-weather'     => 'cloud',
+			'tp-aqi'         => 'wave',
 			'tp-badges'      => 'medal',
 			'tp-border'      => 'gate',
 			'tp-subranges'   => 'mount',
