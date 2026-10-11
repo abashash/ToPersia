@@ -1,0 +1,226 @@
+[
+    {
+        "id": 3267,
+        "class": "G",
+        "type": "tp_water_body",
+        "title": "تالاب بین‌المللی گاوخونی",
+        "http_len": 242485,
+        "related_published": 1,
+        "linked": 1,
+        "relations": [
+            {
+                "rel": 79,
+                "name": "",
+                "dir": "parents",
+                "published": 1,
+                "linked_in_html": 1
+            }
+        ]
+    },
+    {
+        "id": 3759,
+        "class": "G",
+        "type": "tp_province",
+        "title": "استان تهران",
+        "http_len": 290458,
+        "related_published": 6,
+        "linked": 6,
+        "relations": [
+            {
+                "rel": 71,
+                "name": "",
+                "dir": "parents",
+                "published": 1,
+                "linked_in_html": 1
+            },
+            {
+                "rel": 102,
+                "name": "",
+                "dir": "children",
+                "published": 5,
+                "linked_in_html": 5
+            }
+        ]
+    },
+    {
+        "id": 1981,
+        "class": "G",
+        "type": "tp_city",
+        "title": "أصفهان",
+        "http_len": 241430,
+        "related_published": 8,
+        "linked": 8,
+        "relations": [
+            {
+                "rel": 96,
+                "name": "",
+                "dir": "parents",
+                "published": 1,
+                "linked_in_html": 1
+            },
+            {
+                "rel": 108,
+                "name": "",
+                "dir": "children",
+                "published": 3,
+                "linked_in_html": 3
+            },
+            {
+                "rel": 129,
+                "name": "",
+                "dir": "children",
+                "published": 1,
+                "linked_in_html": 1
+            },
+            {
+                "rel": 269,
+                "name": "",
+                "dir": "parents",
+                "published": 3,
+                "linked_in_html": 3
+            }
+        ]
+    },
+    {
+        "id": 1944,
+        "class": "G",
+        "type": "tp_village",
+        "title": "ابیانه",
+        "http_len": 224608,
+        "related_published": 1,
+        "linked": 1,
+        "relations": [
+            {
+                "rel": 75,
+                "name": "",
+                "dir": "parents",
+                "published": 1,
+                "linked_in_html": 1
+            }
+        ]
+    },
+    {
+        "id": 2095,
+        "class": "G",
+        "type": "tp_country",
+        "title": "ایران",
+        "http_len": 334395,
+        "related_published": 31,
+        "linked": 31,
+        "relations": [
+            {
+                "rel": 71,
+                "name": "",
+                "dir": "children",
+                "published": 31,
+                "linked_in_html": 31
+            }
+        ]
+    },
+    {
+        "id": 1962,
+        "class": "A",
+        "type": "tp_monument",
+        "title": "کاروانسرای نیستانک",
+        "http_len": 222553,
+        "related_published": 0,
+        "linked": 0,
+        "relations": []
+    },
+    {
+        "id": 1954,
+        "class": "A",
+        "type": "tp_ancient_site",
+        "title": "قنات مزدآباد",
+        "http_len": 222658,
+        "related_published": 1,
+        "linked": 0,
+        "relations": [
+            {
+                "rel": 92,
+                "name": "",
+                "dir": "parents",
+                "published": 1,
+                "linked_in_html": 0
+            }
+        ]
+    },
+    {
+        "id": 1947,
+        "class": "A",
+        "type": "tp_mountain",
+        "title": "کوه کرکس",
+        "http_len": 215364,
+        "related_published": 1,
+        "linked": 1,
+        "relations": [
+            {
+                "rel": 78,
+                "name": "",
+                "dir": "parents",
+                "published": 1,
+                "linked_in_html": 1
+            }
+        ]
+    },
+    {
+        "id": 1965,
+        "class": "C",
+        "type": "tp_handicraft",
+        "title": "قلم‌زنی",
+        "http_len": 208927,
+        "related_published": 6,
+        "linked": 0,
+        "relations": [
+            {
+                "rel": 107,
+                "name": "",
+                "dir": "parents",
+                "published": 3,
+                "linked_in_html": 0
+            },
+            {
+                "rel": 108,
+                "name": "",
+                "dir": "parents",
+                "published": 3,
+                "linked_in_html": 0
+            }
+        ]
+    },
+    {
+        "id": 1967,
+        "class": "E",
+        "type": "tp_festival",
+        "title": "جشن گلاب‌گیری کاشان",
+        "http_len": 214817,
+        "related_published": 6,
+        "linked": 0,
+        "relations": [
+            {
+                "rel": 232,
+                "name": "",
+                "dir": "parents",
+                "published": 3,
+                "linked_in_html": 0
+            },
+            {
+                "rel": 233,
+                "name": "",
+                "dir": "parents",
+                "published": 3,
+                "linked_in_html": 0
+            }
+        ]
+    },
+    {
+        "id": 1968,
+        "class": "P",
+        "type": "tp_currency",
+        "title": "ریال ایران",
+        "http_len": 209318,
+        "related_published": 0,
+        "linked": 0,
+        "relations": []
+    }
+]

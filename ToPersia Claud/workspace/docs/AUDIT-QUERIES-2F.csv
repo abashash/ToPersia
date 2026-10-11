@@ -1,0 +1,7 @@
+﻿id,name,query_type,post_type,used_in_elementor_data,used_in_post_content,used_in_render_code
+164,"D1 — World Heritage",posts,tp_monument+tp_religious_site+tp_protected_area+tp_natural_feature+tp_ancient_site+tp_landscape+tp_desert+tp_forest_plain,0,0,0
+165,"D2 — Intangible Heritage",posts,tp_handicraft+tp_ritual,0,0,0
+166,"D3 — Geopark",posts,tp_protected_area,0,0,0
+167,"D4 — Biosphere Reserve",posts,tp_protected_area+tp_water_body+tp_desert+tp_forest_plain,0,0,0
+168,"D5 — Creative City",posts,tp_city,0,0,0
+169,"D6 — National Monument",posts,tp_protected_area+tp_natural_feature+tp_mountain+tp_desert+tp_forest_plain,0,0,0

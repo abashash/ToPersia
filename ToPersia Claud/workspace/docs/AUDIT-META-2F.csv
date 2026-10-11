@@ -1,0 +1,1311 @@
+﻿type,field,field_type,title,place,state
+tp_travel_etiquette,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_health_safety,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_historical_era,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_figure,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_ritual,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_ethnic_group,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_language,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_dance,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_music,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_costume,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_local_food,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_handicraft,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_landscape,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_protected_area,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_museum,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_natural_feature,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_ancient_site,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_religious_site,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_monument,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_forest_plain,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_border_crossing,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_district,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_water_body,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_mountain,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_village,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_desert,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_island,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_region,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_city,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_county,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_province,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_country,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_route,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_visa,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_currency,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_calendar,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_transport,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_festival,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_sports_event,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_religious_event,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_seasonal_event,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_designation,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tpc_news,name_fa,text,"نام (فارسی)",render-code,"جا دارد"
+tp_travel_etiquette,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_health_safety,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_historical_era,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_figure,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_ritual,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_ethnic_group,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_language,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_dance,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_music,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_costume,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_local_food,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_handicraft,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_landscape,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_protected_area,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_museum,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_natural_feature,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_ancient_site,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_religious_site,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_monument,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_forest_plain,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_border_crossing,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_district,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_water_body,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_mountain,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_village,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_desert,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_island,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_region,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_city,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_county,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_province,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_country,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_route,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_visa,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_currency,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_calendar,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_transport,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_festival,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_sports_event,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_religious_event,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_seasonal_event,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_designation,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tpc_news,name_en,text,"نام (انگلیسی)",render-code,"جا دارد"
+tp_travel_etiquette,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_health_safety,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_historical_era,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_figure,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_ritual,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_ethnic_group,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_language,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_dance,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_music,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_costume,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_local_food,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_handicraft,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_landscape,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_protected_area,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_museum,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_natural_feature,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_ancient_site,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_religious_site,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_monument,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_forest_plain,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_border_crossing,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_district,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_water_body,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_mountain,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_village,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_desert,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_island,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_region,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_city,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_county,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_province,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_country,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_route,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_visa,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_currency,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_calendar,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_transport,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_festival,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_sports_event,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_religious_event,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_seasonal_event,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_designation,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tpc_news,name_ar,text,"نام (عربی)",render-code,"جا دارد"
+tp_travel_etiquette,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_health_safety,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_historical_era,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_figure,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_ritual,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_ethnic_group,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_language,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_dance,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_music,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_costume,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_local_food,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_handicraft,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_landscape,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_protected_area,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_museum,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_natural_feature,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_ancient_site,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_religious_site,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_monument,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_forest_plain,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_border_crossing,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_district,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_water_body,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_mountain,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_village,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_desert,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_island,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_region,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_city,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_county,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_province,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_country,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_route,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_visa,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_currency,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_calendar,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_transport,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_festival,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_sports_event,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_religious_event,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_seasonal_event,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_designation,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tpc_news,name_local,textarea,"نام محلی / بومی",render-code,"جا دارد"
+tp_travel_etiquette,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_health_safety,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_historical_era,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_figure,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_ritual,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_ethnic_group,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_language,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_dance,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_music,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_costume,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_local_food,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_handicraft,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_landscape,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_protected_area,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_museum,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_natural_feature,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_ancient_site,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_religious_site,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_monument,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_forest_plain,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_border_crossing,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_district,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_water_body,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_mountain,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_village,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_desert,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_island,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_region,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_city,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_county,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_province,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_country,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_route,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_visa,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_currency,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_calendar,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_transport,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_festival,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_sports_event,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_religious_event,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_seasonal_event,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_designation,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tpc_news,alternative_names,textarea,"نام‌های دیگر",render-code,"جا دارد"
+tp_travel_etiquette,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_health_safety,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_historical_era,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_figure,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_ritual,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_ethnic_group,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_language,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_dance,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_music,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_costume,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_local_food,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_handicraft,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_landscape,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_protected_area,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_museum,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_natural_feature,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_ancient_site,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_religious_site,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_monument,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_forest_plain,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_border_crossing,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_district,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_water_body,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_mountain,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_village,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_desert,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_island,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_region,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_city,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_county,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_province,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_country,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_route,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_visa,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_currency,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_calendar,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_transport,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_festival,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_sports_event,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_religious_event,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_seasonal_event,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_designation,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tpc_news,short_summary,textarea,"خلاصهٔ کوتاه",render-code,"جا دارد"
+tp_travel_etiquette,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_health_safety,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_historical_era,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_figure,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_ritual,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_ethnic_group,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_language,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_dance,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_music,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_costume,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_local_food,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_handicraft,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_landscape,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_protected_area,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_museum,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_natural_feature,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_ancient_site,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_religious_site,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_monument,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_forest_plain,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_border_crossing,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_district,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_water_body,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_mountain,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_village,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_desert,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_island,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_region,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_city,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_county,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_province,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_country,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_route,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_visa,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_currency,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_calendar,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_transport,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_festival,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_sports_event,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_religious_event,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_seasonal_event,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_designation,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tpc_news,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_travel_etiquette,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_health_safety,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_historical_era,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_figure,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_ritual,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_ethnic_group,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_language,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_dance,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_music,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_costume,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_local_food,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_handicraft,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_landscape,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_protected_area,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_museum,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_natural_feature,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_ancient_site,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_religious_site,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_monument,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_forest_plain,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_border_crossing,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_district,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_water_body,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_mountain,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_village,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_desert,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_island,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_region,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_city,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_county,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_province,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_country,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_route,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_visa,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_currency,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_calendar,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_transport,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_festival,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_sports_event,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_religious_event,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_seasonal_event,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_designation,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tpc_news,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_travel_etiquette,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_health_safety,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_historical_era,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_figure,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_ritual,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_ethnic_group,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_language,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_dance,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_music,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_costume,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_local_food,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_handicraft,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_landscape,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_protected_area,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_museum,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_natural_feature,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_ancient_site,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_religious_site,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_monument,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_forest_plain,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_border_crossing,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_district,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_water_body,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_mountain,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_village,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_desert,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_island,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_region,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_city,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_county,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_province,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_country,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_route,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_visa,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_currency,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_calendar,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_transport,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_festival,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_sports_event,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_religious_event,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_seasonal_event,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_designation,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tpc_news,featured_image_gallery,gallery,"گالری تصاویر",render-code,"جا دارد"
+tp_travel_etiquette,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_health_safety,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_historical_era,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_figure,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_ritual,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_ethnic_group,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_language,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_dance,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_music,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_costume,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_local_food,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_handicraft,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_landscape,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_protected_area,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_museum,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_natural_feature,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_ancient_site,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_religious_site,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_monument,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_forest_plain,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_border_crossing,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_district,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_water_body,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_mountain,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_village,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_desert,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_island,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_region,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_city,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_county,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_province,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_country,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_route,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_visa,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_currency,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_calendar,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_transport,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_festival,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_sports_event,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_religious_event,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_seasonal_event,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_designation,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tpc_news,video_sample,text,"ویدیوی نمونه",render-code,"جا دارد"
+tp_travel_etiquette,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_health_safety,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_historical_era,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_figure,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_ritual,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_ethnic_group,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_language,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_dance,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_music,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_costume,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_local_food,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_handicraft,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_landscape,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_protected_area,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_museum,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_natural_feature,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_ancient_site,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_religious_site,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_monument,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_forest_plain,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_border_crossing,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_district,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_water_body,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_mountain,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_village,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_desert,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_island,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_region,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_city,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_county,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_province,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_country,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_route,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_visa,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_currency,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_calendar,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_transport,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_festival,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_sports_event,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_religious_event,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_seasonal_event,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_designation,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tpc_news,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_travel_etiquette,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_health_safety,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_historical_era,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_figure,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_ritual,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_ethnic_group,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_language,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_dance,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_music,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_costume,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_local_food,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_handicraft,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_landscape,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_protected_area,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_museum,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_natural_feature,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_ancient_site,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_religious_site,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_monument,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_forest_plain,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_border_crossing,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_district,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_water_body,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_mountain,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_village,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_desert,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_island,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_region,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_city,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_county,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_province,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_country,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_route,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_visa,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_currency,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_calendar,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_transport,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_festival,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_sports_event,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_religious_event,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_seasonal_event,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_designation,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tpc_news,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_travel_etiquette,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_health_safety,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_historical_era,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_figure,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_ritual,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_ethnic_group,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_language,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_dance,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_music,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_costume,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_local_food,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_handicraft,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_landscape,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_protected_area,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_museum,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_natural_feature,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_ancient_site,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_religious_site,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_monument,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_forest_plain,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_border_crossing,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_district,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_water_body,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_mountain,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_village,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_desert,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_island,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_region,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_city,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_county,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_province,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_country,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_route,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_visa,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_currency,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_calendar,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_transport,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_festival,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_sports_event,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_religious_event,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_seasonal_event,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_designation,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tpc_news,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_travel_etiquette,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_health_safety,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_historical_era,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_figure,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_ritual,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_ethnic_group,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_language,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_dance,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_music,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_costume,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_local_food,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_handicraft,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_landscape,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_protected_area,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_museum,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_natural_feature,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_ancient_site,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_religious_site,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_monument,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_forest_plain,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_border_crossing,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_district,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_water_body,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_mountain,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_village,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_desert,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_island,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_region,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_city,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_county,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_province,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_country,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_route,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_visa,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_currency,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_calendar,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_transport,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_festival,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_sports_event,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_religious_event,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_seasonal_event,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_designation,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tpc_news,external_reference_uri,text,"نشانی مرجع خارجی",render-code,"جا دارد"
+tp_travel_etiquette,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_health_safety,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_historical_era,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_figure,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_ritual,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_ethnic_group,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_language,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_dance,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_music,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_costume,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_local_food,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_handicraft,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_landscape,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_protected_area,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_museum,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_natural_feature,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_ancient_site,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_religious_site,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_monument,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_forest_plain,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_border_crossing,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_district,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_water_body,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_mountain,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_village,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_desert,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_island,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_region,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_city,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_county,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_province,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_country,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_route,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_visa,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_currency,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_calendar,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_transport,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_festival,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_sports_event,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_religious_event,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_seasonal_event,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_designation,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tpc_news,audio_narration,repeater,"روایت صوتی",render-code,"جا دارد"
+tp_travel_etiquette,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_health_safety,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_historical_era,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_figure,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_ritual,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_ethnic_group,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_language,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_dance,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_music,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_costume,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_local_food,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_handicraft,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_landscape,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_protected_area,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_museum,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_natural_feature,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_ancient_site,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_religious_site,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_monument,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_forest_plain,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_border_crossing,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_district,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_water_body,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_mountain,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_village,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_desert,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_island,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_region,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_city,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_county,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_province,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_country,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_route,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_visa,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_currency,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_calendar,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_transport,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_festival,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_sports_event,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_religious_event,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_seasonal_event,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_designation,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tpc_news,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_travel_etiquette,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_health_safety,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_historical_era,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_figure,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_ritual,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_ethnic_group,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_language,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_dance,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_music,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_costume,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_local_food,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_handicraft,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_landscape,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_protected_area,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_museum,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_natural_feature,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_ancient_site,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_religious_site,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_monument,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_forest_plain,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_border_crossing,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_district,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_water_body,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_mountain,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_village,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_desert,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_island,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_region,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_city,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_county,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_province,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_country,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_route,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_visa,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_currency,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_calendar,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_transport,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_festival,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_sports_event,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_religious_event,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_seasonal_event,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_designation,meta_title,text,"عنوان سئو",,فنی/داخلی
+tpc_news,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_travel_etiquette,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_health_safety,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_historical_era,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_figure,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_ritual,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_ethnic_group,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_language,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_dance,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_music,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_costume,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_local_food,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_handicraft,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_landscape,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_protected_area,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_museum,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_natural_feature,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_ancient_site,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_religious_site,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_monument,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_forest_plain,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_border_crossing,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_district,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_water_body,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_mountain,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_village,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_desert,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_island,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_region,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_city,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_county,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_province,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_country,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_route,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_visa,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_currency,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_calendar,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_transport,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_festival,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_sports_event,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_religious_event,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_seasonal_event,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_designation,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tpc_news,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_travel_etiquette,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_health_safety,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_historical_era,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_figure,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_ritual,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_ethnic_group,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_language,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_dance,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_music,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_costume,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_local_food,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_handicraft,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_landscape,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_protected_area,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_museum,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_natural_feature,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_ancient_site,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_religious_site,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_monument,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_forest_plain,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_border_crossing,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_district,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_water_body,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_mountain,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_village,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_desert,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_island,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_region,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_city,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_county,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_province,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_country,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_route,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_visa,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_currency,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_calendar,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_transport,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_festival,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_sports_event,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_religious_event,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_seasonal_event,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_designation,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tpc_news,ai_summary,textarea,"خلاصه برای هوش مصنوعی",render-code,"جا دارد"
+tp_travel_etiquette,source_references,repeater,منابع,render-code,"جا دارد"
+tp_health_safety,source_references,repeater,منابع,render-code,"جا دارد"
+tp_historical_era,source_references,repeater,منابع,render-code,"جا دارد"
+tp_figure,source_references,repeater,منابع,render-code,"جا دارد"
+tp_ritual,source_references,repeater,منابع,render-code,"جا دارد"
+tp_ethnic_group,source_references,repeater,منابع,render-code,"جا دارد"
+tp_language,source_references,repeater,منابع,render-code,"جا دارد"
+tp_dance,source_references,repeater,منابع,render-code,"جا دارد"
+tp_music,source_references,repeater,منابع,render-code,"جا دارد"
+tp_costume,source_references,repeater,منابع,render-code,"جا دارد"
+tp_local_food,source_references,repeater,منابع,render-code,"جا دارد"
+tp_handicraft,source_references,repeater,منابع,render-code,"جا دارد"
+tp_landscape,source_references,repeater,منابع,render-code,"جا دارد"
+tp_protected_area,source_references,repeater,منابع,render-code,"جا دارد"
+tp_museum,source_references,repeater,منابع,render-code,"جا دارد"
+tp_natural_feature,source_references,repeater,منابع,render-code,"جا دارد"
+tp_ancient_site,source_references,repeater,منابع,render-code,"جا دارد"
+tp_religious_site,source_references,repeater,منابع,render-code,"جا دارد"
+tp_monument,source_references,repeater,منابع,render-code,"جا دارد"
+tp_forest_plain,source_references,repeater,منابع,render-code,"جا دارد"
+tp_border_crossing,source_references,repeater,منابع,render-code,"جا دارد"
+tp_district,source_references,repeater,منابع,render-code,"جا دارد"
+tp_water_body,source_references,repeater,منابع,render-code,"جا دارد"
+tp_mountain,source_references,repeater,منابع,render-code,"جا دارد"
+tp_village,source_references,repeater,منابع,render-code,"جا دارد"
+tp_desert,source_references,repeater,منابع,render-code,"جا دارد"
+tp_island,source_references,repeater,منابع,render-code,"جا دارد"
+tp_region,source_references,repeater,منابع,render-code,"جا دارد"
+tp_city,source_references,repeater,منابع,render-code,"جا دارد"
+tp_county,source_references,repeater,منابع,render-code,"جا دارد"
+tp_province,source_references,repeater,منابع,render-code,"جا دارد"
+tp_country,source_references,repeater,منابع,render-code,"جا دارد"
+tp_route,source_references,repeater,منابع,render-code,"جا دارد"
+tp_visa,source_references,repeater,منابع,render-code,"جا دارد"
+tp_currency,source_references,repeater,منابع,render-code,"جا دارد"
+tp_calendar,source_references,repeater,منابع,render-code,"جا دارد"
+tp_transport,source_references,repeater,منابع,render-code,"جا دارد"
+tp_festival,source_references,repeater,منابع,render-code,"جا دارد"
+tp_sports_event,source_references,repeater,منابع,render-code,"جا دارد"
+tp_religious_event,source_references,repeater,منابع,render-code,"جا دارد"
+tp_seasonal_event,source_references,repeater,منابع,render-code,"جا دارد"
+tp_designation,source_references,repeater,منابع,render-code,"جا دارد"
+tpc_news,source_references,repeater,منابع,render-code,"جا دارد"
+tp_country,official_name_fa,text,"نام رسمی (فارسی)",fieldmap:names,"جا دارد"
+tp_country,official_name_en,text,"نام رسمی (انگلیسی)",fieldmap:names,"جا دارد"
+tp_country,official_name_ar,text,"نام رسمی (عربی)",fieldmap:names,"جا دارد"
+tp_country,geo_coordinates,text,"محدودهٔ جغرافیایی",fieldmap:card,"جا دارد"
+tp_country,population,number,جمعیت,fieldmap:card,"جا دارد"
+tp_country,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_country,official_language,text,"زبان رسمی",fieldmap:card,"جا دارد"
+tp_country,timezone,text,"منطقهٔ زمانی",fieldmap:card,"جا دارد"
+tp_country,currency_note,textarea,"یادداشت ارز",fieldmap:details,"جا دارد"
+tp_country,government_type,text,"نوع حکومت",fieldmap:card,"جا دارد"
+tp_country,neighboring_countries,textarea,"کشورهای همسایه",fieldmap:details,"جا دارد"
+tp_country,calling_code,text,"پیش‌شمارهٔ تلفن",fieldmap:card,"جا دارد"
+tp_country,best_season,select,"مناسب‌ترین فصل برای سفر",fieldmap:card,"جا دارد"
+tp_country,internet_tld,textarea,"دامنهٔ اینترنتی",fieldmap:card,"جا دارد"
+tp_region,region_classification,select,"نوع منطقه",fieldmap:card,"جا دارد"
+tp_region,geographic_boundary,textarea,"محدودهٔ جغرافیایی",fieldmap:details,"جا دارد"
+tp_region,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_region,climate_overview,textarea,"مرور اقلیم",fieldmap:details,"جا دارد"
+tp_region,historical_context,textarea,"زمینهٔ تاریخی",fieldmap:details,"جا دارد"
+tp_region,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_province,province_code,text,"کد استان",fieldmap:card,"جا دارد"
+tp_province,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_province,population,number,جمعیت,fieldmap:card,"جا دارد"
+tp_province,geo_boundary,textarea,"مختصات جغرافیایی",fieldmap:details,"جا دارد"
+tp_province,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_province,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_province,bordering_countries,textarea,"کشورهای هم‌مرز",fieldmap:details,"جا دارد"
+tp_province,climate_type,text,"نوع اقلیم",fieldmap:card,"جا دارد"
+tp_province,free_zone,switcher,"منطقهٔ آزاد",fieldmap:badge,"جا دارد"
+tp_city,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_city,population,number,جمعیت,fieldmap:card,"جا دارد"
+tp_city,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_city,elevation_m,number,"ارتفاع از سطح دریا (متر)",fieldmap:card,"جا دارد"
+tp_city,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_city,transport_access,textarea,"دسترسی و حمل‌ونقل",fieldmap:details,"جا دارد"
+tp_city,founded_year,text,"سال بنیان‌گذاری",fieldmap:card,"جا دارد"
+tp_city,airport_name,text,"نام فرودگاه",fieldmap:card,"جا دارد"
+tp_city,airport_iata,text,"کد فرودگاه",fieldmap:card,"جا دارد"
+tp_city,railway_station,switcher,"ایستگاه راه‌آهن",fieldmap:badge,"جا دارد"
+tp_city,unesco_creative_city,switcher,"شهر خلاق یونسکو",fieldmap:badge,"جا دارد"
+tp_city,free_zone,switcher,"منطقهٔ آزاد",fieldmap:badge,"جا دارد"
+tp_district,neighborhood_type,select,"نوع محله",fieldmap:card,"جا دارد"
+tp_district,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_district,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_village,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_village,tourism_target_village,switcher,"روستای هدف گردشگری",fieldmap:badge,"جا دارد"
+tp_village,population,number,جمعیت,fieldmap:card,"جا دارد"
+tp_village,elevation_m,number,"ارتفاع از سطح دریا (متر)",fieldmap:card,"جا دارد"
+tp_village,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_island,island_type,select,"نوع جزیره",fieldmap:card,"جا دارد"
+tp_island,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_island,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_island,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_island,access_method,textarea,"راه دسترسی",fieldmap:details,"جا دارد"
+tp_island,free_zone,switcher,"منطقهٔ آزاد",fieldmap:badge,"جا دارد"
+tp_mountain,mountain_type,select,"نوع عارضه",fieldmap:card,"جا دارد"
+tp_mountain,elevation_m,number,"ارتفاع (متر)",fieldmap:card,"جا دارد"
+tp_mountain,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_mountain,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_mountain,provinces_spanning,textarea,"استان‌های گسترده در آن",fieldmap:details,"جا دارد"
+tp_mountain,trekking_difficulty,select,"دشواری صعود",fieldmap:card,"جا دارد"
+tp_mountain,volcanic,switcher,آتشفشانی,fieldmap:badge,"جا دارد"
+tp_mountain,national_monument,switcher,"اثر طبیعی ملی",fieldmap:badge,"جا دارد"
+tp_mountain,national_monument_year,number,"سال ثبت اثر طبیعی ملی",fieldmap:skip,"جا دارد"
+tp_water_body,water_body_type,select,"نوع پهنهٔ آبی",fieldmap:card,"جا دارد"
+tp_water_body,geo_boundary,textarea,"مختصات جغرافیایی",fieldmap:details,"جا دارد"
+tp_water_body,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_water_body,provinces_spanning,textarea,"استان‌های گسترده در آن",fieldmap:details,"جا دارد"
+tp_water_body,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_water_body,length_km,number,"طول (کیلومتر)",fieldmap:card,"جا دارد"
+tp_water_body,max_depth_m,number,"حداکثر عمق (متر)",fieldmap:card,"جا دارد"
+tp_water_body,salinity_type,select,"نوع شوری",fieldmap:card,"جا دارد"
+tp_water_body,biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",fieldmap:badge,"جا دارد"
+tp_water_body,biosphere_year,number,"سال پیوستن به ذخیره‌گاه زیست‌کره",fieldmap:skip,"جا دارد"
+tp_water_body,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_desert,desert_type,select,"نوع کویر",fieldmap:card,"جا دارد"
+tp_desert,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_desert,geo_boundary,textarea,"محدودهٔ جغرافیایی",fieldmap:details,"جا دارد"
+tp_desert,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_desert,provinces_spanning,textarea,"استان‌های گسترده در آن",fieldmap:details,"جا دارد"
+tp_desert,max_temperature_c,number,"حداکثر دمای ثبت‌شده",fieldmap:card,"جا دارد"
+tp_desert,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_desert,world_heritage_year,number,"سال ثبت میراث جهانی",fieldmap:skip,"جا دارد"
+tp_desert,world_heritage_criteria,text,"معیار ثبت میراث جهانی",fieldmap:card,"جا دارد"
+tp_desert,biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",fieldmap:badge,"جا دارد"
+tp_desert,biosphere_year,number,"سال پیوستن به ذخیره‌گاه زیست‌کره",fieldmap:skip,"جا دارد"
+tp_desert,national_monument,switcher,"اثر طبیعی ملی",fieldmap:badge,"جا دارد"
+tp_desert,national_monument_year,number,"سال ثبت اثر طبیعی ملی",fieldmap:skip,"جا دارد"
+tp_desert,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_forest_plain,area_type,select,"نوع پهنه",fieldmap:card,"جا دارد"
+tp_forest_plain,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_forest_plain,geo_boundary,textarea,"محدودهٔ جغرافیایی",fieldmap:details,"جا دارد"
+tp_forest_plain,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_forest_plain,forest_type,select,"نوع جنگل",fieldmap:card,"جا دارد"
+tp_forest_plain,provinces_spanning,textarea,"استان‌های گسترده در آن",fieldmap:details,"جا دارد"
+tp_forest_plain,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_forest_plain,world_heritage_year,number,"سال ثبت میراث جهانی",fieldmap:skip,"جا دارد"
+tp_forest_plain,world_heritage_criteria,text,"معیار ثبت میراث جهانی",fieldmap:card,"جا دارد"
+tp_forest_plain,biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",fieldmap:badge,"جا دارد"
+tp_forest_plain,biosphere_year,number,"سال پیوستن به ذخیره‌گاه زیست‌کره",fieldmap:skip,"جا دارد"
+tp_forest_plain,national_monument_year,number,"سال ثبت اثر طبیعی ملی",fieldmap:skip,"جا دارد"
+tp_forest_plain,national_monument,switcher,"اثر طبیعی ملی",fieldmap:badge,"جا دارد"
+tp_forest_plain,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_border_crossing,crossing_type,select,"نوع گذرگاه",fieldmap:card,"جا دارد"
+tp_border_crossing,border_country,text,"کشور مقابل",fieldmap:card,"جا دارد"
+tp_border_crossing,status,select,وضعیت,fieldmap:card,"جا دارد"
+tp_border_crossing,operating_hours,textarea,"ساعات کاری",fieldmap:details,"جا دارد"
+tp_border_crossing,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_monument,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_monument,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_monument,venue_eligible,switcher,"قابلیت میزبانی رویداد",,بی‌جا
+tp_monument,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_monument,a1_classification,checkbox,"طبقه‌بندی عمومی جاذبه",,بی‌جا
+tp_monument,name_historical,text,"نام تاریخی",,بی‌جا
+tp_monument,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_monument,visiting_hours,textarea,"ساعات بازدید",,بی‌جا
+tp_monument,admission_fee,textarea,"هزینهٔ ورودی",,بی‌جا
+tp_monument,accessibility,textarea,"دسترسی معلولان",,بی‌جا
+tp_monument,restoration_status,select,"وضعیت مرمت",render-code,"جا دارد"
+tp_monument,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_monument,world_heritage_year,number,"سال ثبت جهانی",fieldmap:skip,"جا دارد"
+tp_monument,world_heritage_criteria,text,"معیارهای ثبت جهانی",fieldmap:card,"جا دارد"
+tp_monument,national_registration,switcher,"ثبت ملی",,بی‌جا
+tp_monument,address,text,نشانی,,بی‌جا
+tp_monument,construction_year,text,"سال ساخت",render-code,"جا دارد"
+tp_monument,architectural_style,text,"سبک معماری",render-code,"جا دارد"
+tp_monument,world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",,بی‌جا
+tp_monument,venue_capacity,number,"ظرفیت میزبانی",,بی‌جا
+tp_religious_site,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_religious_site,religion,text,"دین / مذهب",render-code,"جا دارد"
+tp_religious_site,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_religious_site,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_religious_site,name_religious,text,"نام مذهبی",,بی‌جا
+tp_religious_site,active_worship,switcher,"محل عبادت فعال",,بی‌جا
+tp_religious_site,active_pilgrimage,text,"زیارتگاه فعال",,بی‌جا
+tp_religious_site,dress_code_details,textarea,"جزئیات پوشش",,بی‌جا
+tp_religious_site,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_religious_site,visiting_hours,textarea,"ساعات بازدید",,بی‌جا
+tp_religious_site,admission_fee,textarea,"هزینهٔ ورودی",,بی‌جا
+tp_religious_site,photography_policy,select,"قوانین عکاسی",render-code,"جا دارد"
+tp_religious_site,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_religious_site,world_heritage_year,number,"سال ثبت میراث جهانی",fieldmap:skip,"جا دارد"
+tp_religious_site,world_heritage_criteria,text,"معیار ثبت میراث جهانی",fieldmap:card,"جا دارد"
+tp_religious_site,national_registration,switcher,"ثبت ملی",,بی‌جا
+tp_religious_site,address,text,نشانی,,بی‌جا
+tp_museum,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_museum,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_museum,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_museum,housed_in,textarea,"مستقر در بنای",,بی‌جا
+tp_museum,founded_year,text,"سال تأسیس",fieldmap:card,"جا دارد"
+tp_museum,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_museum,visiting_hours,textarea,"ساعات بازدید",,بی‌جا
+tp_museum,admission_fee,textarea,"هزینهٔ ورودی",,بی‌جا
+tp_museum,collection_categories,textarea,"دسته‌های مجموعه",,بی‌جا
+tp_museum,permanent_highlights,textarea,"آثار شاخص",,بی‌جا
+tp_museum,address,text,نشانی,,بی‌جا
+tp_protected_area,park_type,select,"نوع منطقه",render-code,"جا دارد"
+tp_protected_area,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_protected_area,geo_boundary,textarea,"محدودهٔ جغرافیایی",fieldmap:details,"جا دارد"
+tp_protected_area,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_protected_area,safety_link,textarea,"پیوند نکات ایمنی",,بی‌جا
+tp_protected_area,provinces_spanning,textarea,"استان‌های گسترده در آن",fieldmap:details,"جا دارد"
+tp_protected_area,managed_area,switcher,"منطقهٔ مدیریت‌شده",,بی‌جا
+tp_protected_area,entry_permit_required,switcher,"نیاز به مجوز ورود",,بی‌جا
+tp_protected_area,visiting_hours,textarea,"ساعات بازدید",,بی‌جا
+tp_protected_area,key_species,textarea,"گونه‌های شاخص",,بی‌جا
+tp_protected_area,geopark,switcher,"ژئوپارک جهانی",,بی‌جا
+tp_protected_area,geopark_year,number,"سال ثبت ژئوپارک",,بی‌جا
+tp_protected_area,biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",fieldmap:badge,"جا دارد"
+tp_protected_area,biosphere_year,number,"سال ثبت زیست‌کره",fieldmap:skip,"جا دارد"
+tp_protected_area,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_protected_area,world_heritage_year,number,"سال ثبت میراث جهانی",fieldmap:skip,"جا دارد"
+tp_protected_area,world_heritage_criteria,text,"معیار ثبت میراث جهانی",fieldmap:card,"جا دارد"
+tp_protected_area,national_monument_year,number,"سال ثبت اثر طبیعی ملی",fieldmap:skip,"جا دارد"
+tp_protected_area,national_monument,switcher,"اثر طبیعی ملی",fieldmap:badge,"جا دارد"
+tp_protected_area,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_protected_area,world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",,بی‌جا
+tp_protected_area,activities,textarea,"فعالیت‌های مجاز",,بی‌جا
+tp_protected_area,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_natural_feature,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_natural_feature,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_natural_feature,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_natural_feature,height_m,number,"ارتفاع (متر)",render-code,"جا دارد"
+tp_natural_feature,depth_m,number,"عمق (متر)",render-code,"جا دارد"
+tp_natural_feature,length_km,number,"طول (کیلومتر)",fieldmap:card,"جا دارد"
+tp_natural_feature,area_km2,number,"مساحت (کیلومتر مربع)",fieldmap:card,"جا دارد"
+tp_natural_feature,water_temperature,text,"دمای آب",,بی‌جا
+tp_natural_feature,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_natural_feature,safety_notes,textarea,"نکات ایمنی",,بی‌جا
+tp_natural_feature,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_natural_feature,world_heritage_year,number,"سال ثبت جهانی",fieldmap:skip,"جا دارد"
+tp_natural_feature,world_heritage_criteria,text,"معیارهای ثبت جهانی",fieldmap:card,"جا دارد"
+tp_natural_feature,national_registration,switcher,"ثبت ملی",,بی‌جا
+tp_natural_feature,national_monument,switcher,"اثر طبیعی ملی",fieldmap:badge,"جا دارد"
+tp_natural_feature,national_monument_year,number,"سال ثبت اثر طبیعی ملی",fieldmap:skip,"جا دارد"
+tp_natural_feature,address,text,نشانی,,بی‌جا
+tp_natural_feature,activities,textarea,"فعالیت‌های مجاز",,بی‌جا
+tp_ancient_site,geo_boundary,textarea,"مختصات جغرافیایی",fieldmap:details,"جا دارد"
+tp_ancient_site,excavation_status,select,"وضعیت کاوش",render-code,"جا دارد"
+tp_ancient_site,has_standing_structure,switcher,"دارای سازهٔ ایستاده",,بی‌جا
+tp_ancient_site,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_ancient_site,name_historical,text,"نام تاریخی",,بی‌جا
+tp_ancient_site,related_museum,textarea,"موزهٔ مرتبط",,بی‌جا
+tp_ancient_site,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_ancient_site,visiting_permit,switcher,"نیاز به مجوز بازدید",,بی‌جا
+tp_ancient_site,photography_policy,select,"قوانین عکاسی",render-code,"جا دارد"
+tp_ancient_site,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_ancient_site,world_heritage_year,number,"سال ثبت جهانی",fieldmap:skip,"جا دارد"
+tp_ancient_site,world_heritage_criteria,text,"معیارهای ثبت جهانی",fieldmap:card,"جا دارد"
+tp_ancient_site,national_registration,switcher,"ثبت ملی",,بی‌جا
+tp_ancient_site,address,text,نشانی,,بی‌جا
+tp_ancient_site,architectural_style,text,"سبک معماری",render-code,"جا دارد"
+tp_ancient_site,world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",,بی‌جا
+tp_ancient_site,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_landscape,landscape_type,select,"نوع منظر",render-code,"جا دارد"
+tp_landscape,geo_boundary,textarea,"محدودهٔ جغرافیایی",fieldmap:details,"جا دارد"
+tp_landscape,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_landscape,total_area_km2,number,"مساحت کل (کیلومتر مربع)",render-code,"جا دارد"
+tp_landscape,provinces_spanning,textarea,"استان‌های گسترده در آن",fieldmap:details,"جا دارد"
+tp_landscape,______________,checkbox,"طبقه‌بندی عمومی جاذبه",,فنی/داخلی
+tp_landscape,world_heritage,switcher,"میراث جهانی",fieldmap:badge,"جا دارد"
+tp_landscape,world_heritage_year,number,"سال ثبت جهانی",fieldmap:skip,"جا دارد"
+tp_landscape,world_heritage_criteria,text,"معیارهای ثبت جهانی",fieldmap:card,"جا دارد"
+tp_landscape,national_registration,switcher,"ثبت ملی",,بی‌جا
+tp_landscape,suggested_duration,select,"مدت زمان بازدید",render-code,"جا دارد"
+tp_landscape,world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",,بی‌جا
+tp_landscape,geo_coordinates,text,"مختصات جغرافیایی",fieldmap:card,"جا دارد"
+tp_handicraft,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_handicraft,materials,textarea,"مواد اولیه",,بی‌جا
+tp_handicraft,technique_summary,textarea,"خلاصهٔ تکنیک",,بی‌جا
+tp_handicraft,intangible_heritage_designation,switcher,"ثبت میراث ناملموس",,بی‌جا
+tp_handicraft,intangible_heritage_year,number,"سال ثبت ناملموس",render-code,"جا دارد"
+tp_handicraft,intangible_heritage_criteria,text,"معیارهای ثبت ناملموس",,بی‌جا
+tp_handicraft,intangible_heritage_status,select,"وضعیت ثبت ناملموس",render-code,"جا دارد"
+tp_local_food,classification_,select,طبقه‌بندی,render-code,"جا دارد"
+tp_local_food,main_ingredients,textarea,"مواد اصلی",,بی‌جا
+tp_local_food,recipe_content,wysiwyg,"دستور پخت",,بی‌جا
+tp_local_food,ritual_context_reference,textarea,"زمینهٔ آیینی",,بی‌جا
+tp_costume,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_costume,fabric_type,textarea,"نوع پارچه",,بی‌جا
+tp_costume,occasion,textarea,"مناسبت پوشیدن",,بی‌جا
+tp_costume,garment_components,textarea,"اجزای لباس",,بی‌جا
+tp_music,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_music,audio_sample,media,"نمونهٔ صوتی",,بی‌جا
+tp_music,related_instruments_reference,textarea,"سازهای مرتبط",,بی‌جا
+tp_music,ritual_context_reference,textarea,"زمینهٔ آیینی",,بی‌جا
+tp_dance,dance_type,select,"نوع رقص",render-code,"جا دارد"
+tp_dance,formation,textarea,"آرایش اجرا",,بی‌جا
+tp_dance,occasion,textarea,"مناسبت اجرا",,بی‌جا
+tp_dance,music_accompaniment_reference,textarea,"موسیقی همراه",,بی‌جا
+tp_dance,ritual_context_reference,textarea,"زمینهٔ آیینی",,بی‌جا
+tp_language,language_family,text,"خانواده زبانی",render-code,"جا دارد"
+tp_language,name_endonym,text,"نام بومی",render-code,"جا دارد"
+tp_language,script,text,"خط نگارش",render-code,"جا دارد"
+tp_language,speaker_estimate_iran,number,"تخمین گویشوران در ایران",render-code,"جا دارد"
+tp_language,is_official_language,switcher,"زبان رسمی",,بی‌جا
+tp_language,dialect_variants,textarea,"گونه‌های گویشی",,بی‌جا
+tp_language,ethnicity_reference,textarea,"اقوام گویشور",,بی‌جا
+tp_language,audio_sample,media,"نمونهٔ صوتی",,بی‌جا
+tp_ethnic_group,population_estimate,number,"تخمین جمعیت",render-code,"جا دارد"
+tp_ethnic_group,language_reference,textarea,"زبان‌های مرتبط",,بی‌جا
+tp_ritual,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_ritual,spatial_scope,select,"گسترهٔ جغرافیایی",render-code,"جا دارد"
+tp_ritual,calendar_timing,textarea,"زمان تقویمی",,بی‌جا
+tp_ritual,intangible_heritage_designation,switcher,"ثبت میراث ناملموس",,بی‌جا
+tp_ritual,intangible_heritage_year,number,"سال ثبت ناملموس",render-code,"جا دارد"
+tp_ritual,intangible_heritage_criteria,text,"معیارهای ثبت ناملموس",,بی‌جا
+tp_ritual,intangible_heritage_status,select,"وضعیت ثبت ناملموس",render-code,"جا دارد"
+tp_ritual,ceremonial_food_reference,textarea,"غذاهای مناسبتی",,بی‌جا
+tp_ritual,external_recognition_uris,textarea,"شناسایی فراملی",,بی‌جا
+tp_figure,classification,select,طبقه‌بندی,render-code,"جا دارد"
+tp_figure,birth_year_approx,text,"سال تولد (تقریبی)",render-code,"جا دارد"
+tp_figure,death_year_approx,text,"سال درگذشت (تقریبی)",render-code,"جا دارد"
+tp_figure,major_works,textarea,"آثار مهم",,بی‌جا
+tp_historical_era,start_year_approx,text,"سال آغاز (تقریبی)",render-code,"جا دارد"
+tp_historical_era,end_year_approx,text,"سال پایان (تقریبی)",render-code,"جا دارد"
+tp_historical_era,capital_reference,textarea,پایتخت‌ها,,بی‌جا
+tp_historical_era,predecessor_reference,text,"سلسلهٔ پیشین",,بی‌جا
+tp_historical_era,successor_reference,text,"سلسلهٔ پسین",,بی‌جا
+tp_health_safety,emergency_police,text,"شمارهٔ پلیس",render-code,"جا دارد"
+tp_health_safety,emergency_ambulance,text,"شمارهٔ اورژانس",render-code,"جا دارد"
+tp_health_safety,emergency_fire,text,"شمارهٔ آتش‌نشانی",render-code,"جا دارد"
+tp_health_safety,natural_hazard_summary,wysiwyg,"مخاطرات طبیعی",,بی‌جا
+tp_health_safety,general_safety_notes,wysiwyg,"نکات کلی ایمنی",,بی‌جا
+tp_health_safety,vaccination_recommendations,textarea,"توصیه‌های واکسیناسیون",,بی‌جا
+tp_health_safety,water_safety_note,textarea,"ایمنی آب آشامیدنی",,بی‌جا
+tp_health_safety,regional_health_notes,text,"نکات سلامت منطقه‌ای",,بی‌جا
+tp_health_safety,local_emergency_facilities,textarea,"مراکز درمانی محلی",,بی‌جا
+tp_health_safety,activity_specific_warnings,textarea,"هشدارهای فعالیت‌محور",,بی‌جا
+tp_travel_etiquette,dress_code_summary,wysiwyg,"خلاصهٔ قوانین پوشش",,بی‌جا
+tp_travel_etiquette,religious_site_etiquette,wysiwyg,"آداب اماکن مذهبی",,بی‌جا
+tp_travel_etiquette,social_customs_summary,wysiwyg,"آداب اجتماعی",,بی‌جا
+tp_travel_etiquette,tipping_guidance,textarea,"راهنمای انعام",,بی‌جا
+tp_travel_etiquette,photography_restrictions,textarea,"محدودیت‌های عکاسی",,بی‌جا
+tp_travel_etiquette,regional_etiquette_notes,textarea,"آداب منطقه‌ای",,بی‌جا
+tp_designation,page_title,text,"عنوان صفحه (لاتین)",,بی‌جا
+tp_designation,programme_code,select,"کد برنامه",render-code,"جا دارد"
+tp_designation,overview_text,wysiwyg,"متن اصلی صفحه",render-code,"جا دارد"
+tp_designation,awarding_body,text,"نهاد اعطاکننده",,بی‌جا
+tp_designation,programme_start_year,number,"سال آغاز برنامه",render-code,"جا دارد"
+tp_designation,hero_image,media,"تصویر شاخص",render-code,"جا دارد"
+tp_designation,meta_title,text,"عنوان سئو",,فنی/داخلی
+tp_designation,meta_description,textarea,"توضیح سئو",,فنی/داخلی
+tp_designation,entity_uid,text,"شناسهٔ یکتای موجودیت",render-code,"جا دارد"
+tp_designation,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",render-code,"جا دارد"
+tp_designation,content_status,select,"وضعیت اعتبار محتوا",render-code,"جا دارد"
+tp_designation,faq_items,repeater,"پرسش‌های متداول",render-code,"جا دارد"
+tp_route,classification,select,"طبقه‌بندی مسیر",render-code,"جا دارد"
+tp_route,best_season,select,"بهترین فصل سفر",fieldmap:card,"جا دارد"
+tp_route,total_distance_km,number,"مسافت کل (کیلومتر)",render-code,"جا دارد"
+tp_route,estimated_duration_days,number,"مدت پیشنهادی (روز)",render-code,"جا دارد"
+tp_route,route_stops_order,textarea,"ترتیب توقف‌های مسیر",,بی‌جا
+tp_route,route_stop_notes,repeater,"یادداشت توقف‌ها",,بی‌جا
+tp_route,difficulty_level,select,"سطح دشواری",render-code,"جا دارد"
+tp_visa,visa_types,repeater,"انواع روادید",,بی‌جا
+tp_visa,visa_policy_matrix,repeater,"ماتریس سیاست بر پایهٔ تابعیت",,بی‌جا
+tp_visa,guided_tour_note,wysiwyg,"قواعد تور اجباری",,بی‌جا
+tp_visa,free_zone_stay_days,number,"مدت معافیت در مناطق آزاد (روز)",render-code,"جا دارد"
+tp_visa,free_zone_mainland_allowed,switcher,"اجازهٔ ورود به سرزمین اصلی؟",,بی‌جا
+tp_visa,free_zone_excluded_iso,textarea,"کشورهای مستثنا (کد ISO)",,بی‌جا
+tp_visa,free_zone_note,wysiwyg,"توضیح رژیم مناطق آزاد",,بی‌جا
+tp_visa,application_process_summary,wysiwyg,"خلاصهٔ فرآیند درخواست",,بی‌جا
+tp_visa,application_steps,repeater,"مراحل گام‌به‌گام",,بی‌جا
+tp_visa,official_application_portal,text,"درگاه رسمی اصلی",,بی‌جا
+tp_visa,portal_links,repeater,"سایر درگاه‌های رسمی",,بی‌جا
+tp_visa,document_specs,repeater,"مشخصات فنی مدارک",,بی‌جا
+tp_visa,voa_entry_points,repeater,"مبادی صدور روادید فرودگاهی",,بی‌جا
+tp_visa,entry_points_reference,textarea,"سایر مبادی ورودی (ارجاع محتوایی)",,بی‌جا
+tp_visa,passport_validity_months,number,"حداقل اعتبار پاسپورت (ماه)",render-code,"جا دارد"
+tp_visa,insurance_required,switcher,"بیمهٔ سلامت ایرانی اجباری؟",,بی‌جا
+tp_visa,insurance_note,wysiwyg,"توضیح بیمهٔ اجباری",,بی‌جا
+tp_visa,passport_stamping_note,textarea,"سیاست مهر پاسپورت",,بی‌جا
+tp_visa,dual_nationality_note,wysiwyg,"قواعد دوتابعیتی",,بی‌جا
+tp_visa,restricted_entry_note,textarea,"محدودیت‌های مطلق ورود",,بی‌جا
+tp_visa,special_passport_note,wysiwyg,"معافیت پاسپورت‌های دیپلماتیک/خدمت",,بی‌جا
+tp_visa,extension_max_count,number,"حداکثر دفعات تمدید",,بی‌جا
+tp_visa,extension_days_each,number,"مدت هر تمدید (روز)",,بی‌جا
+tp_visa,max_total_stay_days,number,"حداکثر اقامت کل (روز)",render-code,"جا دارد"
+tp_visa,extension_info,wysiwyg,"تمدید و اضافه‌اقامت",,بی‌جا
+tp_visa,fee_currency,text,"واحد پول رسمی هزینه",,بی‌جا
+tp_visa,fee_policy_note,wysiwyg,"سیاست هزینه و پرداخت",,بی‌جا
+tp_visa,policy_change_log,repeater,"تاریخچهٔ تغییرات سیاست",,بی‌جا
+tp_currency,currency_iso_code,text,"کد ISO واحد پول",render-code,"جا دارد"
+tp_currency,currency_symbol,text,"نماد واحد پول",render-code,"جا دارد"
+tp_currency,currency_units,repeater,"واحدهای پولی در گردش",,بی‌جا
+tp_currency,unit_confusion_explainer,wysiwyg,"توضیح ریال در برابر تومان",,بی‌جا
+tp_currency,price_reading_rule,textarea,"قاعدهٔ خواندن قیمت",,بی‌جا
+tp_currency,redenomination_status,select,"وضعیت بازتعریف واحد پول",render-code,"جا دارد"
+tp_currency,redenomination_ratio,number,"نسبت تبدیل بازتعریف",,بی‌جا
+tp_currency,redenomination_law_date,date,"تاریخ لازم‌الاجرا شدن قانون",,بی‌جا
+tp_currency,redenomination_start_date,date,"آغاز دورهٔ گذار",,بی‌جا
+tp_currency,redenomination_end_date,date,"پایان دورهٔ گذار",,بی‌جا
+tp_currency,dual_pricing_active,switcher,"برچسب‌گذاری دوگانهٔ قیمت فعال؟",,بی‌جا
+tp_currency,redenomination_note,wysiwyg,"شرح کامل بازتعریف",,بی‌جا
+tp_currency,denominations,repeater,"اسکناس و مسکوکات",,بی‌جا
+tp_currency,international_card_status,select,"وضعیت کلی کارت‌های بین‌المللی",render-code,"جا دارد"
+tp_currency,card_acceptance_summary,textarea,"پاسخ صریح دربارهٔ کارت",,بی‌جا
+tp_currency,card_network_status,repeater,"وضعیت به‌ازای شبکهٔ کارت",,بی‌جا
+tp_currency,atm_usage_note,wysiwyg,"استفاده از خودپرداز",,بی‌جا
+tp_currency,domestic_network_note,wysiwyg,"شبکهٔ کارت داخلی",,بی‌جا
+tp_currency,tourist_card_available,switcher,"کارت گردشگری موجود است؟",,بی‌جا
+tp_currency,tourist_card_services,repeater,"سرویس‌های کارت گردشگری",,بی‌جا
+tp_currency,accepted_foreign_currencies,checkbox,"ارزهای قابل تبدیل",,بی‌جا
+tp_currency,banknote_condition_rule,textarea,"قاعدهٔ سلامت اسکناس",,بی‌جا
+tp_currency,exchange_channel_notes,wysiwyg,"کانال‌های تبدیل و رسید",,بی‌جا
+tp_currency,exchange_locations,repeater,"محل‌های تبدیل",,بی‌جا
+tp_currency,declaration_rules_note,wysiwyg,"قواعد اظهار ارز در گمرک",,بی‌جا
+tp_currency,rate_regime_note,wysiwyg,"رژیم نرخ ارز",,بی‌جا
+tp_currency,rate_reference_links,repeater,"ابزارهای نرخ زنده",,بی‌جا
+tp_currency,cash_recommendation_note,wysiwyg,"توصیهٔ میزان پول نقد",,بی‌جا
+tp_currency,daily_budget_bands,repeater,"بازه‌های بودجهٔ روزانه",,بی‌جا
+tp_currency,digital_payment_note,wysiwyg,"پرداخت دیجیتال داخلی",,بی‌جا
+tp_currency,regional_notes,repeater,"یادداشت‌های استانی",,بی‌جا
+tp_calendar,calendar_systems,repeater,"نظام‌های تقویمی",,بی‌جا
+tp_calendar,calendar_system_note,wysiwyg,"توضیح نظام تقویمی",,بی‌جا
+tp_calendar,national_holidays,repeater,"تعطیلات و مناسبت‌های رسمی",,بی‌جا
+tp_calendar,closure_impact_note,wysiwyg,"اثر تعطیلات بر خدمات",,بی‌جا
+tp_calendar,crowding_and_price_note,wysiwyg,"ازدحام و نوسان قیمت",,بی‌جا
+tp_calendar,best_worst_time_note,wysiwyg,"بهترین و بدترین زمان سفر",,بی‌جا
+tp_calendar,official_source_link,text,"نشانی منبع رسمی تقویم",,بی‌جا
+tp_calendar,annual_review_month,number,"ماه بازبینی سالانه",,بی‌جا
+tp_calendar,lunar_date_disclaimer,textarea,"هشدار تاریخ‌های قمری",,بی‌جا
+tp_transport,transport_modes,repeater,"حالت‌های حمل‌ونقل",,بی‌جا
+tp_transport,mode_choice_guide,wysiwyg,"راهنمای انتخاب حالت سفر",,بی‌جا
+tp_transport,intercity_bus_note,wysiwyg,"اتوبوس بین‌شهری",,بی‌جا
+tp_transport,rail_network_note,wysiwyg,"شبکهٔ ریلی",,بی‌جا
+tp_transport,air_travel_note,wysiwyg,"پرواز داخلی",,بی‌جا
+tp_transport,cities_with_metro,repeater,"شهرهای دارای حمل‌ونقل ریلی شهری",,بی‌جا
+tp_transport,booking_platforms,repeater,"پلتفرم‌های رزرو",,بی‌جا
+tp_transport,accessibility_note,wysiwyg,دسترس‌پذیری,,بی‌جا
+tp_transport,transport_etiquette_note,wysiwyg,"آداب حمل‌ونقل عمومی",,بی‌جا
+tp_transport,route_reference_note,textarea,"ارجاع به مسیرهای گردشگری",,بی‌جا
+tp_festival,is_recurring,switcher,"رویداد تکرارشونده است؟",,بی‌جا
+tp_festival,event_frequency,select,"دورهٔ تکرار",render-code,"جا دارد"
+tp_festival,calendar_timing,textarea,"زمان‌بندی تقویمی",,بی‌جا
+tp_festival,event_start_date,date,"تاریخ آغاز",,بی‌جا
+tp_festival,event_end_date,date,"تاریخ پایان",,بی‌جا
+tp_festival,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_festival,venue_name,text,"نام محل برگزاری",,بی‌جا
+tp_festival,organizer_name,text,برگزارکننده,,بی‌جا
+tp_festival,official_event_url,text,"نشانی رسمی رویداد",,بی‌جا
+tp_festival,program_highlights,repeater,"بخش‌های برنامه",,بی‌جا
+tp_festival,event_travel_impact,switcher,"اثرگذار بر برنامه‌ریزی سفر؟",,بی‌جا
+tp_festival,visa_info_link,text,"نشانی راهنمای ویزا",,بی‌جا
+tp_festival,admission_note,textarea,"شرایط ورود و بلیت",,بی‌جا
+tp_festival,tourist_suitability_note,textarea,"مناسب‌بودن برای گردشگر",,بی‌جا
+tp_sports_event,is_recurring,switcher,"رویداد تکرارشونده است؟",,بی‌جا
+tp_sports_event,event_frequency,select,"دورهٔ تکرار",render-code,"جا دارد"
+tp_sports_event,calendar_timing,textarea,"زمان‌بندی تقویمی",,بی‌جا
+tp_sports_event,event_start_date,date,"تاریخ آغاز",,بی‌جا
+tp_sports_event,event_end_date,date,"تاریخ پایان",,بی‌جا
+tp_sports_event,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_sports_event,venue_name,text,"نام محل برگزاری",,بی‌جا
+tp_sports_event,sport_type,select,"رشتهٔ ورزشی",render-code,"جا دارد"
+tp_sports_event,competition_level,select,"سطح رقابت",render-code,"جا دارد"
+tp_sports_event,traditional_sports_reference,repeater,"ریشهٔ ورزش بومی",,بی‌جا
+tp_sports_event,organizer_name,text,برگزارکننده,,بی‌جا
+tp_sports_event,official_event_url,text,"نشانی رسمی رویداد",,بی‌جا
+tp_sports_event,spectator_access_note,textarea,"دسترسی تماشاگر",,بی‌جا
+tp_religious_event,calendar_timing,textarea,"زمان‌بندی تقویمی",,بی‌جا
+tp_religious_event,calendar_system,select,"تقویم مبنا",render-code,"جا دارد"
+tp_religious_event,annual_date_rule,text,"قاعدهٔ تاریخ سالانه",,بی‌جا
+tp_religious_event,event_start_date,date,"تاریخ آغاز",,بی‌جا
+tp_religious_event,event_end_date,date,"تاریخ پایان",,بی‌جا
+tp_religious_event,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_religious_event,venue_name,text,"نام محل برگزاری",,بی‌جا
+tp_religious_event,ceremony_duration_days,number,"مدت مراسم (روز)",render-code,"جا دارد"
+tp_religious_event,crowd_scale,select,"گسترهٔ حضور",render-code,"جا دارد"
+tp_religious_event,public_participation_note,wysiwyg,"مشارکت عمومی و حضور بازدیدکننده",,بی‌جا
+tp_religious_event,visitor_etiquette_note,wysiwyg,"آداب حضور",,بی‌جا
+tp_religious_event,photography_policy,select,"سیاست عکاسی",render-code,"جا دارد"
+tp_religious_event,photography_note,textarea,"یادداشت عکاسی",,بی‌جا
+tp_religious_event,dress_code_note,textarea,"پوشش و ظاهر",,بی‌جا
+tp_religious_event,etiquette_link,text,"نشانی راهنمای آداب سفر",,بی‌جا
+tp_religious_event,safety_link,textarea,"نشانی راهنمای سلامت و ایمنی",,بی‌جا
+tp_seasonal_event,season,select,"فصل وقوع",render-code,"جا دارد"
+tp_seasonal_event,best_season,select,"بهترین فصل بازدید",fieldmap:card,"جا دارد"
+tp_seasonal_event,natural_phenomenon_type,select,"نوع پدیدهٔ طبیعی",render-code,"جا دارد"
+tp_seasonal_event,peak_start_week,number,"هفتهٔ آغاز اوج",,بی‌جا
+tp_seasonal_event,peak_end_week,number,"هفتهٔ پایان اوج",,بی‌جا
+tp_seasonal_event,peak_window_note,textarea,"شرح بازهٔ اوج",,بی‌جا
+tp_seasonal_event,calendar_timing,textarea,"زمان‌بندی تقویمی",,بی‌جا
+tp_seasonal_event,optimal_conditions,wysiwyg,"شرایط بهینهٔ مشاهده",,بی‌جا
+tp_seasonal_event,weather_dependency,select,"وابستگی به شرایط جوی",render-code,"جا دارد"
+tp_seasonal_event,predictability_note,textarea,"پایداری سال‌به‌سال",,بی‌جا
+tp_seasonal_event,viewing_points,repeater,"نقاط مشاهده",,بی‌جا
+tp_seasonal_event,nearby_park_reference,repeater,"ارجاع به منطقهٔ حفاظت‌شده",,بی‌جا
+tp_seasonal_event,safety_link,textarea,"نشانی راهنمای سلامت و ایمنی",,بی‌جا
+tpc_news,news_source_name,text,"نام منبع اصلی",render-code,"جا دارد"
+tpc_news,news_source_url,text,"پیوند منبع اصلی",render-code,"جا دارد"

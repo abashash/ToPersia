@@ -1,0 +1,140 @@
+﻿id,name,type,parent,child,parent_label,child_label,rows,parent_in_child_page,children_in_parent_page,in_schema_parents,parent_type_has_relmap,child_type_has_relmap
+71,,one_to_many,tp_country,tp_province,"استان‌های این کشور",کشور,33,crumbs,provinces,child,y,y
+72,,one_to_many,tp_province,tp_county,"شهرستان‌های این استان",استان,485,,,,y,n
+73,,one_to_many,tp_county,tp_city,"شهرهای این شهرستان",شهرستان,948,crumbs,,child,n,y
+74,,one_to_many,tp_city,tp_district,"محله‌های این شهر",شهر,0,crumbs,districts,child,y,y
+75,,one_to_many,tp_province,tp_village,"روستاهای این استان",استان,1,crumbs,villages,child,y,y
+76,,one_to_many,tp_county,tp_village,"روستاهای این شهرستان",شهرستان,0,crumbs,,,n,y
+77,,one_to_many,tp_province,tp_island,"جزیره‌های این استان",استان,0,crumbs,nature,child,y,y
+78,,one_to_many,tp_province,tp_mountain,"کوه‌های این استان",استان,1,crumbs,nature,child,y,y
+79,,one_to_many,tp_province,tp_water_body,"پهنه‌های آبی این استان",استان,1,crumbs,nature,child,y,y
+80,,one_to_many,tp_province,tp_desert,"کویرهای این استان",استان,1,crumbs,nature,child,y,y
+81,,one_to_many,tp_province,tp_forest_plain,"جنگل‌ها و دشت‌های این استان",استان,0,crumbs,nature,child,y,y
+82,,one_to_many,tp_province,tp_border_crossing,"گذرگاه‌های مرزی این استان",استان,0,crumbs,,child,y,y
+83,,one_to_many,tp_region,tp_province,"استان‌های این منطقه","منطقهٔ جغرافیایی",0,,provinces,,y,y
+84,,one_to_many,tp_city,tp_monument,"بناهای تاریخی این شهر",شهر,5,,attractions+ancient,child,y,n
+85,,one_to_many,tp_village,tp_monument,"بناهای تاریخی این روستا",روستا,0,,ancient,,y,n
+86,,one_to_many,tp_city,tp_religious_site,"مکان‌های مذهبی این شهر",شهر,1,,attractions+ancient,child,y,n
+87,,one_to_many,tp_village,tp_religious_site,"مکان‌های مذهبی این روستا",روستا,0,,ancient,,y,n
+88,,one_to_many,tp_city,tp_museum,"موزه‌های این شهر",شهر,0,,attractions+ancient,child,y,n
+89,,one_to_many,tp_province,tp_protected_area,"پارک‌های ملی این استان",استان,0,,nature,child,y,n
+90,,one_to_many,tp_province,tp_natural_feature,"عارضه‌های طبیعی این استان",استان,0,,nature,child,y,n
+91,,one_to_many,tp_city,tp_natural_feature,"عارضه‌های طبیعی این شهر",شهر,0,,nature,,y,n
+92,,one_to_many,tp_province,tp_ancient_site,"محوطه‌های باستانی این استان",استان,3,,ancient,child,y,n
+93,,one_to_many,tp_city,tp_ancient_site,"محوطه‌های باستانی این شهر",شهر,2,,attractions+ancient,,y,n
+94,,one_to_many,tp_province,tp_landscape,"مناظر فرهنگی این استان",استان,0,,nature,child,y,n
+95,,one_to_one,tp_country,tp_city,پایتخت,"پایتخت کشور",1,capital-of,capital,,y,y
+96,,one_to_one,tp_province,tp_city,"مرکز استان","مرکز این استان",4,capital-of,capital,,y,y
+97,,one_to_one,tp_county,tp_city,"مرکز شهرستان","مرکز این شهرستان",0,capital-of,,,n,y
+98,,one_to_many,tp_city,tp_village,"روستاهای نزدیک","نزدیک‌ترین شهر",0,crumbs,villages,,y,y
+100,,one_to_many,tp_city,tp_border_crossing,"گذرگاه‌های مرزی نزدیک","نزدیک‌ترین شهر",0,crumbs,border,,y,y
+101,,one_to_many,tp_mountain,tp_mountain,"قله‌های این رشته‌کوه","رشته‌کوه مادر",0,crumbs,subranges,,y,y
+102,,many_to_many,tp_province,tp_province,"استان‌های هم‌مرز","استان‌های هم‌مرز",29,neighbors,neighbors,,y,y
+103,,one_to_many,tp_protected_area,tp_natural_feature,"عارضه‌های طبیعی درون این منطقه","منطقهٔ حفاظت‌شدهٔ دربرگیرنده",0,,,,n,n
+105,,many_to_many,tp_landscape,tp_monument,"بناهای سازندهٔ این منظر","منظر فرهنگی دربرگیرنده",0,,,,n,n
+106,,many_to_many,tp_landscape,tp_natural_feature,"عارضه‌های سازندهٔ این منظر","منظر فرهنگی دربرگیرنده",0,,,,n,n
+107,,many_to_many,tp_province,tp_handicraft,"صنایع دستی رایج در این استان","محل رواج (استان)",9,,culture,child,y,n
+108,,many_to_many,tp_city,tp_handicraft,"صنایع دستی رایج در این شهر","محل رواج (شهر)",9,,culture,,y,n
+109,,many_to_many,tp_village,tp_handicraft,"صنایع دستی رایج در این روستا","محل رواج (روستا)",0,,culture,,y,n
+110,,many_to_many,tp_province,tp_local_food,"غذاهای محلی رایج در این استان","محل رواج (استان)",3,,culture,child,y,n
+111,,many_to_many,tp_city,tp_local_food,"غذاهای محلی رایج در این شهر","محل رواج (شهر)",0,,culture,,y,n
+112,,many_to_many,tp_village,tp_local_food,"غذاهای محلی رایج در این روستا","محل رواج (روستا)",0,,culture,,y,n
+113,,many_to_many,tp_province,tp_costume,"لباس‌های سنتی رایج در این استان","محل رواج (استان)",0,,culture,child,y,n
+114,,many_to_many,tp_city,tp_costume,"لباس‌های سنتی رایج در این شهر","محل رواج (شهر)",0,,culture,,y,n
+116,,many_to_many,tp_province,tp_music,"موسیقی‌های محلی رایج در این استان","محل رواج (استان)",0,,culture,child,y,n
+117,,many_to_many,tp_city,tp_music,"موسیقی‌های محلی رایج در این شهر","محل رواج (شهر)",0,,culture,,y,n
+118,,many_to_many,tp_village,tp_music,"موسیقی‌های محلی رایج در این روستا","محل رواج (روستا)",0,,culture,,y,n
+119,,many_to_many,tp_province,tp_dance,"رقص‌های محلی رایج در این استان","محل رواج (استان)",0,,culture,child,y,n
+120,,many_to_many,tp_city,tp_dance,"رقص‌های محلی رایج در این شهر","محل رواج (شهر)",0,,culture,,y,n
+121,,many_to_many,tp_village,tp_dance,"رقص‌های محلی رایج در این روستا","محل رواج (روستا)",0,,culture,,y,n
+122,,many_to_many,tp_province,tp_ritual,"آیین‌ها و مراسم رایج در این استان","محل رواج (استان)",0,,culture,child,y,n
+123,,many_to_many,tp_city,tp_ritual,"آیین‌ها و مراسم رایج در این شهر","محل رواج (شهر)",0,,culture,,y,n
+124,,many_to_many,tp_village,tp_ritual,"آیین‌ها و مراسم رایج در این روستا","محل رواج (روستا)",0,,culture,,y,n
+125,,many_to_many,tp_province,tp_handicraft,"صنایع دستی تولیدشده در این استان","محل تولید (استان)",0,,,,y,n
+126,,many_to_many,tp_city,tp_handicraft,"صنایع دستی تولیدشده در این شهر","محل تولید (شهر)",0,,culture,,y,n
+127,,many_to_many,tp_village,tp_handicraft,"صنایع دستی تولیدشده در این روستا","محل تولید (روستا)",0,,culture,,y,n
+128,,many_to_many,tp_province,tp_local_food,"غذاهای محلی تولیدشده در این استان","محل تولید (استان)",0,,,,y,n
+129,,many_to_many,tp_city,tp_local_food,"غذاهای محلی تولیدشده در این شهر","محل تولید (شهر)",3,,culture,,y,n
+130,,many_to_many,tp_village,tp_local_food,"غذاهای محلی تولیدشده در این روستا","محل تولید (روستا)",0,,culture,,y,n
+131,,many_to_many,tp_province,tp_language,"زبان‌ها و گویش‌های رایج در این استان","محل رواج (استان)",0,,culture,child,y,n
+132,,many_to_many,tp_city,tp_language,"زبان‌ها و گویش‌های رایج در این شهر","محل رواج (شهر)",0,,culture,,y,n
+133,,many_to_many,tp_ethnic_group,tp_handicraft,"صنایع دستی این قوم","قوم مرتبط",0,,,,n,n
+134,,many_to_many,tp_ethnic_group,tp_local_food,"غذاهای محلی این قوم","قوم مرتبط",0,,,,n,n
+135,,many_to_many,tp_ethnic_group,tp_music,"موسیقی‌های محلی این قوم","قوم مرتبط",0,,,,n,n
+136,,many_to_many,tp_ethnic_group,tp_dance,"رقص‌های محلی این قوم","قوم مرتبط",0,,,,n,n
+137,,many_to_many,tp_ethnic_group,tp_ritual,"آیین‌ها و مراسم این قوم","قوم مرتبط",0,,,,n,n
+138,,many_to_many,tp_ethnic_group,tp_costume,"پوشاک سنتی این قوم","قوم پوشنده",0,,,,n,n
+139,,many_to_many,tp_historical_era,tp_monument,"بناهای تاریخی این دوره","دورهٔ تاریخی",0,,,,n,n
+140,,many_to_many,tp_historical_era,tp_religious_site,"مکان‌های مذهبی این دوره","دورهٔ تاریخی",0,,,,n,n
+141,,many_to_many,tp_historical_era,tp_ancient_site,"محوطه‌های باستانی این دوره","دورهٔ تاریخی",0,,,,n,n
+142,,many_to_many,tp_historical_era,tp_figure,"شخصیت‌های تاریخی این دوره","دورهٔ تاریخی",0,,,,n,n
+143,,many_to_many,tp_historical_era,tp_city,"شهرها این دوره","دورهٔ تاریخی",0,ancient,,,n,y
+144,,many_to_many,tp_historical_era,tp_district,"محله‌ها این دوره","دورهٔ تاریخی",0,ancient,,,n,y
+145,,many_to_many,tp_historical_era,tp_landscape,"مناظر فرهنگی این دوره","دورهٔ تاریخی",0,,,,n,n
+146,,many_to_many,tp_figure,tp_monument,"بناهای ساخته‌شده توسط این شخصیت","بانی / سازنده",0,,,,n,n
+147,,many_to_many,tp_figure,tp_ancient_site,"محوطه‌های ساخته‌شده توسط این شخصیت","بانی / سازنده",0,,,,n,n
+148,,many_to_many,tp_figure,tp_monument,"بناهای تاریخی مرتبط با این شخصیت","شخصیت مرتبط",0,,,,n,n
+149,,many_to_many,tp_figure,tp_religious_site,"مکان‌های مذهبی مرتبط با این شخصیت","شخصیت مرتبط",0,,,,n,n
+150,,many_to_many,tp_figure,tp_ancient_site,"محوطه‌های باستانی مرتبط با این شخصیت","شخصیت مرتبط",0,,,,n,n
+151,,many_to_many,tp_figure,tp_city,"شهرها مرتبط با این شخصیت","شخصیت مرتبط",0,culture,,,n,y
+152,,many_to_many,tp_figure,tp_ritual,"آیین‌ها و مراسم مرتبط با این شخصیت","شخصیت مرتبط",0,,,,n,n
+153,,one_to_many,tp_city,tp_figure,"مشاهیر زادهٔ این شهر",زادگاه,0,,culture,child,y,n
+154,,one_to_many,tp_city,tp_figure,"مشاهیر درگذشته در این شهر","محل درگذشت",0,,culture,,y,n
+155,,one_to_many,tp_monument,tp_figure,"مدفونین در این بنا",آرامگاه,0,,,,n,n
+156,,many_to_many,tp_country,tp_health_safety,"اطلاعات سلامت و ایمنی این کشور","معتبر برای (کشور)",0,,practical,,y,n
+157,,many_to_many,tp_province,tp_health_safety,"اطلاعات سلامت و ایمنی این استان","معتبر برای (استان)",0,,practical,child,y,n
+158,,many_to_many,tp_city,tp_health_safety,"اطلاعات سلامت و ایمنی این شهر","معتبر برای (شهر)",0,,practical,,y,n
+159,,many_to_many,tp_country,tp_travel_etiquette,"اطلاعات فرهنگ سفر این کشور","معتبر برای (کشور)",0,,practical,,y,n
+160,,many_to_many,tp_province,tp_travel_etiquette,"اطلاعات فرهنگ سفر این استان","معتبر برای (استان)",0,,practical,child,y,n
+162,,many_to_many,tp_travel_etiquette,tp_religious_site,"مکان‌های مشمول این قوانین","قوانین رفتاری مرتبط",0,,,,n,n
+163,,many_to_many,tp_ethnic_group,tp_costume,"لباس‌های سنتی مرتبط با این قوم","قوم مرتبط",0,,,,n,n
+172,,many_to_many,tp_route,tp_province,"استان‌هایی که این مسیر از آن‌ها می‌گذرد","مسیرهای گردشگری عبوری از این استان",3,routes,,,n,y
+173,,many_to_many,tp_route,tp_city,"شهرهایی که این مسیر از آن‌ها می‌گذرد","مسیرهای گردشگری عبوری از این شهر",18,routes,,,n,y
+174,,many_to_many,tp_route,tp_village,"روستاهایی که این مسیر از آن‌ها می‌گذرد","مسیرهای گردشگری عبوری از این روستا",0,routes,,,n,y
+175,,many_to_many,tp_route,tp_island,"جزیره‌هایی که این مسیر از آن‌ها می‌گذرد","مسیرهای گردشگری عبوری از این جزیره",0,routes,,,n,y
+177,,many_to_many,tp_route,tp_border_crossing,"گذرگاه‌های مرزی که این مسیر به آن‌ها وصل می‌شود","مسیرهایی که به این گذرگاه وصل می‌شوند",0,routes,,,n,y
+185,,many_to_many,tp_country,tp_visa,"راهنمای ویزا و شرایط ورود",کشور,0,,practical,child,y,n
+226,,many_to_many,tp_country,tp_currency,"راهنمای ارز و روش‌های پرداخت",کشور,0,,practical,child,y,n
+227,,many_to_many,tp_province,tp_currency,"راهنمای ارز و روش‌های پرداخت",استان,0,,practical,,y,n
+228,,many_to_many,tp_country,tp_calendar,"تقویم و مناسبت‌های رسمی",کشور,0,,practical,,y,n
+229,,many_to_many,tp_province,tp_calendar,"تقویم و مناسبت‌های رسمی",استان,0,,practical,child,y,n
+230,,many_to_many,tp_city,tp_calendar,"تقویم و مناسبت‌های رسمی",شهر,0,,practical,,y,n
+231,,many_to_many,tp_calendar,tp_ritual,"آیین‌های اثرگذار بر برنامه‌ریزی سفر","تقویم و مناسبت‌های رسمی",0,,,,n,n
+232,,many_to_many,tp_province,tp_festival,"جشنواره و رویداد",استان,3,,culture,child,y,n
+233,,many_to_many,tp_city,tp_festival,"جشنواره و رویداد",شهر,3,,culture,,y,n
+234,,many_to_many,tp_village,tp_festival,"جشنواره و رویداد","روستا — منطقهٔ برگزاری",0,,culture,,y,n
+235,,many_to_many,tp_monument,tp_festival,"جشنواره و رویداد — محل برگزاری","بنای تاریخی",0,,,,n,n
+236,,many_to_many,tp_religious_site,tp_festival,"جشنواره و رویداد — محل برگزاری","مکان مذهبی",0,,,,n,n
+237,,many_to_many,tp_museum,tp_festival,"جشنواره و رویداد — محل برگزاری",موزه,0,,,,n,n
+238,,many_to_many,tp_protected_area,tp_festival,"جشنواره و رویداد — محل برگزاری","پارک ملی",0,,,,n,n
+239,,many_to_many,tp_village,tp_festival,"جشنواره و رویداد — محل برگزاری","روستا — محل دقیق برگزاری",0,,culture,,y,n
+240,,many_to_many,tp_ritual,tp_festival,"جشنواره و رویداد — نمونهٔ این آیین","آیین مرجع — این رویداد نمونهٔ آن است",0,,,,n,n
+241,,many_to_many,tp_ritual,tp_festival,"جشنواره و رویداد — گرامیداشت","آیین گرامی‌داشته‌شده",0,,,,n,n
+242,,many_to_many,tp_figure,tp_festival,"جشنواره و رویداد — گرامیداشت","شخصیت تاریخی",0,,,,n,n
+243,,many_to_many,tp_historical_era,tp_festival,"جشنواره و رویداد — گرامیداشت","دوره / سلسلهٔ تاریخی",0,,,,n,n
+244,,many_to_many,tp_calendar,tp_festival,"رویدادهای اثرگذار بر برنامه‌ریزی سفر","تقویم و مناسبت‌های رسمی",0,,,,n,n
+245,,many_to_many,tp_province,tp_sports_event,"رویداد ورزشی",استان,0,,culture,child,y,n
+246,,many_to_many,tp_city,tp_sports_event,"رویداد ورزشی",شهر,0,,culture,,y,n
+247,,many_to_many,tp_village,tp_sports_event,"رویداد ورزشی","روستا — منطقهٔ برگزاری",0,,culture,,y,n
+248,,many_to_many,tp_monument,tp_sports_event,"رویداد ورزشی — محل برگزاری","بنای تاریخی",0,,,,n,n
+249,,many_to_many,tp_religious_site,tp_sports_event,"رویداد ورزشی — محل برگزاری","مکان مذهبی",0,,,,n,n
+250,,many_to_many,tp_museum,tp_sports_event,"رویداد ورزشی — محل برگزاری",موزه,0,,,,n,n
+251,,many_to_many,tp_protected_area,tp_sports_event,"رویداد ورزشی — محل برگزاری","پارک ملی",0,,,,n,n
+252,,many_to_many,tp_village,tp_sports_event,"رویداد ورزشی — محل برگزاری","روستا — محل دقیق برگزاری",0,,culture,,y,n
+253,,many_to_many,tp_province,tp_religious_event,"مراسم مذهبی عمومی",استان,0,,culture,child,y,n
+254,,many_to_many,tp_city,tp_religious_event,"مراسم مذهبی عمومی",شهر,0,,culture,,y,n
+255,,many_to_many,tp_village,tp_religious_event,"مراسم مذهبی عمومی","روستا — منطقهٔ برگزاری",0,,culture,,y,n
+256,,many_to_many,tp_monument,tp_religious_event,"مراسم مذهبی عمومی — محل برگزاری","بنای تاریخی",0,,,,n,n
+257,,many_to_many,tp_religious_site,tp_religious_event,"مراسم مذهبی عمومی — محل برگزاری","مکان مذهبی",0,,,,n,n
+258,,many_to_many,tp_village,tp_religious_event,"مراسم مذهبی عمومی — محل برگزاری","روستا — محل دقیق برگزاری",0,,culture,,y,n
+259,,many_to_many,tp_ritual,tp_religious_event,"مراسم مذهبی عمومی — نمونهٔ این آیین","آیین مرجع — این مراسم نمونهٔ آن است",0,,,,n,n
+260,,many_to_many,tp_ritual,tp_religious_event,"مراسم مذهبی عمومی — گرامیداشت","آیین گرامی‌داشته‌شده",0,,,,n,n
+261,,many_to_many,tp_figure,tp_religious_event,"مراسم مذهبی عمومی — گرامیداشت","شخصیت تاریخی",0,,,,n,n
+262,,many_to_many,tp_historical_era,tp_religious_event,"مراسم مذهبی عمومی — گرامیداشت","دوره / سلسلهٔ تاریخی",0,,,,n,n
+263,,many_to_many,tp_province,tp_seasonal_event,"رویداد طبیعی و فصلی",استان,0,,culture,child,y,n
+264,,many_to_many,tp_city,tp_seasonal_event,"رویداد طبیعی و فصلی",شهر,0,,culture,,y,n
+265,,many_to_many,tp_village,tp_seasonal_event,"رویداد طبیعی و فصلی",روستا,0,,culture,,y,n
+268,,many_to_many,tpc_news,tp_province,"استان‌های مرتبط",خبر,3,,,,n,y
+269,,many_to_many,tpc_news,tp_city,"شهرهای مرتبط",خبر,9,,,,n,y
+270,,many_to_many,tpc_news,tp_village,"روستاهای مرتبط",خبر,0,,,,n,y
+271,,many_to_many,tpc_news,tp_island,"جزیره‌های مرتبط",خبر,0,,,,n,y
