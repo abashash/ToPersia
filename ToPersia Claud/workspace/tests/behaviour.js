@@ -27,7 +27,7 @@
  * درخواست به topersia.com بسته است. کد خروج: ۰ سالم · ۱ افتادن.
  */
 
-const { chromium, firefox } = require( 'playwright' );
+const { chromium, firefox } = require( './pw.js' );
 const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 const { execFileSync } = require( 'child_process' );
 const fs   = require( 'fs' );
@@ -536,7 +536,7 @@ async function mnav( page, tag ) {
 
 	const state = () => page.evaluate( () => {
 		const m = document.querySelector( '.tp-mnav' ), r = m.getBoundingClientRect(), cs = getComputedStyle( m );
-		return { gap: Math.round( innerHeight - r.bottom ), vis: cs.visibility, on: m.classList.contains( 'tp-mnav--on' ), y: Math.round( scrollY ), dur: cs.transitionDuration };
+		return { gap: Math.round( innerHeight - r.bottom ), vis: cs.visibility, on: m.classList.contains( 'tp-mnav--on' ), y: Math.round( scrollY ), dur: cs.transitionDuration, prop: cs.transitionProperty, op: cs.opacity };
 	} );
 
 	await page.evaluate( () => window.scrollTo( 0, 0 ) );
@@ -559,10 +559,109 @@ async function mnav( page, tag ) {
 
 	check( `${ tag }: نوار پایین بالای صفحه پنهان، زیر 24px هم پنهان  §۱۲`,
 		'hidden' === top.vis && top.gap < -40 && ! small.on && 'hidden' === small.vis, JSON.stringify( { top, small } ) );
-	check( `${ tag }: نخستین اسکرولِ بیش از 24px ← پیدا، با انیمیشن کوتاه، روی لبهٔ پایین  §۱۲`,
-		shown.on && 'visible' === shown.vis && Math.abs( shown.gap ) <= 1 && /0\.2s|200ms/.test( shown.dur ), JSON.stringify( { moving, shown } ) );
+	check( `${ tag }: نخستین اسکرولِ بیش از 24px ← پیدا، با انیمیشن کوتاه transform و opacity (۲ه٫۱)، روی لبهٔ پایین  §۱۲`,
+		shown.on && 'visible' === shown.vis && Math.abs( shown.gap ) <= 1 && /0\.24s|240ms/.test( shown.dur ) && /opacity/.test( shown.prop ) && '1' === shown.op && '0' === top.op, JSON.stringify( { moving, shown } ) );
 	check( `${ tag }: برگشتن به بالا ← همچنان پیدا  §۱۲`,
 		0 === back.y && back.on && 'visible' === back.vis && Math.abs( back.gap ) <= 1, JSON.stringify( back ) );
+}
+
+/* ── ۲ه٫۱ · P5-D310 — نوار بخش‌ها نرم ─────────────────────────────────
+   کلیک ← بخش زیر سربرگ و نوار با فاصلۀ درست؛ قرص فعال در چند فریم می‌لغزد و سپس
+   همان کلاس فعال مرجع؛ نوار افقی (جایی که جا نمی‌شود) در چند فریم پیوسته؛ کاهش حرکت
+   ← فوری و بی قرص؛ هیچ جابه‌جایی چیدمان (CLS) بی ورودی کاربر. */
+const CLS_INIT = () => {
+	window.__tpCls = 0;
+	try {
+		new PerformanceObserver( l => { for ( const e of l.getEntries() ) { if ( ! e.hadRecentInput ) { window.__tpCls += e.value; } } } )
+			.observe( { type: 'layout-shift', buffered: true } );
+	} catch ( e ) { window.__tpCls = -1; }
+};
+
+async function snav( browser, url, tag, width, reduced ) {
+
+	const ctx  = await browser.newContext( { viewport: { width, height: 900 }, reducedMotion: reduced ? 'reduce' : 'no-preference' } );
+	await ctx.addInitScript( CLS_INIT );
+	await ctx.route( /topersia\.com|picsum\.photos/, r => r.abort() );
+	const page = await ctx.newPage();
+	await page.goto( url, { waitUntil: 'load', timeout: 240000 } );
+	await page.waitForTimeout( 600 );
+
+	/* فقط بخش‌های ستون اصلی — ستون کناری چسبان است و بخشش زیر نوار نمی‌نشیند */
+	const links = await page.$$eval( '.tp-snav a[href^="#"]', as => as.map( a => a.getAttribute( 'href' ) ).filter( h => { const el = document.querySelector( h ); return el && el.closest( '.tp-main-col' ); } ) );
+	if ( links.length < 2 ) { info( `${ tag }: نوار بخش‌ها کمتر از دو پیوند ستون اصلی دارد — سنجیده نشد` ); await ctx.close(); return; }
+
+	/* پیوند سوم از آخر: دور از بالا، تا لغزش هم عمودی هم افقی باشد */
+	/* نوار جا می‌شود: دومین بخش ستون اصلی (دور از بالا و ته صفحه). نوار لبریز: پیوندی که از میانۀ نوار دورتر است، تا لغزش افقی لازم باشد */
+	const href = await page.evaluate( ( ls ) => {
+		const strip = document.querySelector( '.tp-snav__in' );
+		if ( ! strip || strip.scrollWidth <= strip.clientWidth + 1 ) { return ls[ 1 ]; }
+		const box = strip.getBoundingClientRect(), mid = box.left + box.width / 2, room = strip.scrollWidth - strip.clientWidth;
+		const rtl = 'rtl' === getComputedStyle( strip ).direction, lo = rtl ? -room : 0, hi = rtl ? 0 : room;
+		let best = ls[ 1 ], far = -1;
+		for ( const h of ls ) {
+			const r = document.querySelector( '.tp-snav a[href="' + h + '"]' ).getBoundingClientRect();
+			const to = Math.min( hi, Math.max( lo, strip.scrollLeft + ( r.left + r.width / 2 - mid ) ) );   /* جایی که لغزش واقعاً می‌رسد */
+			const d = Math.abs( to - strip.scrollLeft );
+			if ( d > far ) { far = d; best = h; }
+		}
+		return best;
+	}, links );
+
+	/* نمونه‌برداری هر فریم از scrollY، scrollLeft نوار و قرص لغزان، از لحظۀ کلیک */
+	await page.evaluate( h => {
+		window.__tpSamples = [];
+		window.__tpCls = 0;   /* فقط بازۀ همین تعامل */
+		const strip = document.querySelector( '.tp-snav__in' );
+		const t0 = performance.now();
+		const tick = () => {
+			const g = document.querySelector( '.tp-snav__ghost' );
+			window.__tpSamples.push( { t: Math.round( performance.now() - t0 ), y: Math.round( scrollY ), x: strip ? Math.round( strip.scrollLeft ) : 0, g: g ? g.style.transform : null } );
+			if ( performance.now() - t0 < 1600 ) { requestAnimationFrame( tick ); }
+		};
+		requestAnimationFrame( tick );
+		document.querySelector( '.tp-snav a[href="' + h + '"]' ).click();
+	}, href );
+	await page.waitForTimeout( 2000 );
+
+	const r = await page.evaluate( h => {
+		const sec   = document.querySelector( h );
+		const nav   = document.querySelector( '.tp-snav' );
+		const strip = document.querySelector( '.tp-snav__in' );
+		const link  = document.querySelector( '.tp-snav a[href="' + h + '"]' );
+		const s     = window.__tpSamples;
+		const ys    = [ ...new Set( s.map( p => p.y ) ) ];
+		const xs    = [ ...new Set( s.map( p => p.x ) ) ];
+		const gs    = s.filter( p => p.g ).map( p => p.g );
+		return {
+			gap: Math.round( sec.getBoundingClientRect().top - nav.getBoundingClientRect().bottom ),
+			left: Math.round( document.documentElement.scrollHeight - innerHeight - scrollY ),
+			active: link.classList.contains( 'tp-is-active' ),
+			ghostLeft: !! document.querySelector( '.tp-snav__ghost' ),
+			ys: ys.length, xs: xs.length, ghostFrames: gs.length, ghostMoves: new Set( gs ).size,
+			overflow: !! strip && strip.scrollWidth > strip.clientWidth + 1,
+			firstMove: ( s.find( p => p.y !== s[0].y ) || {} ).t,
+			cls: Math.round( window.__tpCls * 1000 ) / 1000,
+		};
+	}, href );
+
+	const sz = `${ tag } ${ width }${ reduced ? ' کاهش حرکت' : '' }`;
+	check( `${ sz }: کلیک «${ href }» ← بخش درست زیر نوار چسبان (فاصله ${ r.gap }px)، پیوند فعال، قرص پس از لغزش رفت  P5-D310`,
+		( Math.abs( r.gap ) <= 6 || ( r.left <= 2 && r.gap >= -6 ) ) && r.active && ! r.ghostLeft, JSON.stringify( r ) );
+
+	if ( reduced ) {
+		check( `${ sz }: بی حرکت — اسکرول در یک گام، بی قرص لغزان، نوار افقی یک‌باره`,
+			r.ys <= 2 && 0 === r.ghostFrames && r.xs <= 2, JSON.stringify( r ) );
+	} else {
+		check( `${ sz }: اسکرول نرم — بیش از سه موقعیت میانی پیش از رسیدن`, r.ys > 3, JSON.stringify( r ) );
+		if ( r.overflow ) {
+			check( `${ sz }: نوار افقی بخش فعال را در چند فریم پیوسته به دید می‌آورد (scrollLeft ${ r.xs } مقدار)، نه یک‌باره`, r.xs > 3, JSON.stringify( r ) );
+		} else {
+			check( `${ sz }: نشانگر فعال می‌لغزد — قرص در ${ r.ghostFrames } فریم با transform ${ r.ghostMoves } مقدار، نه پرش کلاس`,
+				r.ghostFrames >= 3 && r.ghostMoves >= 2, JSON.stringify( r ) );
+		}
+	}
+	check( `${ sz }: CLS صفر (بی ورودی کاربر)`, 0 === r.cls, JSON.stringify( r ) );
+	await ctx.close();
 }
 
 /* ── §۵ اشتراک و مهمان ─────────────────────────────────────────────── */
@@ -1008,6 +1107,11 @@ const LANG_PAGES = [
 			await phase2( s.page, name + ' ۳۹۰', true );
 			await share( s.page, name + ' ۳۹۰', true );
 			await s.ctx.close();
+
+			/* ۲ه٫۱ — نوار بخش‌ها نرم: ۱۴۴۰ (نوار جا می‌شود ← قرص لغزان)، ۹۰۰ (نوار لبریز ← لغزش افقی)، و کاهش حرکت */
+			await snav( browser, url, name, 1440, false );
+			await snav( browser, url, name, 900, false );
+			await snav( browser, url, name, 1440, true );
 
 			/* انیمیشن هوا — حرکت روشن و کاهش حرکتِ سیستم */
 			const on  = await weatherFx( browser, url, name, false );

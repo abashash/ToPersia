@@ -146,8 +146,15 @@ html .tp-page .tp-map-live .maplibregl-ctrl-attrib{font-size:11px}
    که اسکریپت راه‌انداز در head می‌گذارد: بی جاوااسکریپت نوار از آغاز پیداست
    و در نخستین رنگ‌آمیزی هم پرشی نیست. وزن (۰,۳,۱) بالاتر از (۰,۲,۱). */
 @media(max-width:720px){
-  html.tp-js .tp-page .tp-mnav{transform:translateY(calc(100% + 8px));visibility:hidden;transition:transform .2s ease-out,visibility 0s linear .2s}
-  html.tp-js .tp-page .tp-mnav.tp-mnav--on{transform:none;visibility:visible;transition:transform .2s ease-out,visibility 0s}
+  html.tp-js .tp-page .tp-mnav{transform:translateY(calc(100% + 8px));opacity:0;visibility:hidden;transition:transform .24s ease-out,opacity .24s ease-out,visibility 0s linear .24s}
+  html.tp-js .tp-page .tp-mnav.tp-mnav--on{transform:none;opacity:1;visibility:visible;transition:transform .24s ease-out,opacity .24s ease-out,visibility 0s}
+}
+/* ۲ه٫۱ · P5-D310 — ظاهر و پنهان شدن نوار پایین با transform و opacity (بی CLS: fixed است و جا نمی‌گیرد)؛
+   prefers-reduced-motion ← اسکرول صفحه و پیوندهای لنگری فوری (html:root از html مرجع سنگین‌تر) و نوار بی گذار. */
+@media(prefers-reduced-motion:reduce){
+  html:root{scroll-behavior:auto}
+  html.tp-js .tp-page .tp-mnav,
+  html.tp-js .tp-page .tp-mnav.tp-mnav--on{transition:none}
 }
 
 /* ═══ کاشی‌های ستون کناری — P5-D244 ════════════════════════════════════

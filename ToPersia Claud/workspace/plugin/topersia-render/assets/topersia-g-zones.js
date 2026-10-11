@@ -259,6 +259,15 @@
 	   فهرست بخش‌ها از خودِ پیوندهای نوار می‌آید، نه از یک آرایۀ ثابت:
 	   نوار را PHP از ناحیه‌هایی می‌سازد که واقعاً محتوا داشتند، پس هر
 	   فهرست ثابتی روی سیزده نوع پست غلط می‌شد.
+
+	   ۲ه٫۱ · P5-D310 — حرکت نرم، ظاهر ایستا عیناً مرجع:
+	   · کلیک ← scrollIntoView نرم؛ فاصلۀ سربرگ و نوار از scroll-margin-top بخش.
+	   · بخش فعال با IntersectionObserver روی یک خط درست زیر نوار؛ تغییرها در
+	     requestAnimationFrame جمع می‌شوند (بی لرزش در اسکرول تند).
+	   · نشانگر فعال می‌لغزد: قرصی همان شکل پیوند فعال از جای پیشین با transform به
+	     جای تازه می‌رود و پس از پایان کنار می‌رود — در حال سکون همان کلاس tp-is-active
+	     مرجع است، پس سبک‌های محاسبه‌شده با مرجع یکی می‌مانند.
+	   · prefers-reduced-motion ← همه فوری.
 	   ────────────────────────────────────────────────────────────────── */
 	( function () {
 
@@ -288,7 +297,13 @@
 
 		var lockUntil = 0;
 		var strip     = nav.querySelector( '.tp-snav__in' );
-		var calm      = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+		var calmQuery = window.matchMedia ? window.matchMedia( '(prefers-reduced-motion: reduce)' ) : null;
+		var current   = null;
+		var ghost     = null;
+
+		function calm() {
+			return !! ( calmQuery && calmQuery.matches );
+		}
 
 		/*
 		 * پیوند فعال به میانۀ نوار می‌آید — فقط افقی.  ۴٫۲٫۱ بند ۳
@@ -312,31 +327,97 @@
 				return;
 			}
 
-			strip.scrollTo( { left: strip.scrollLeft + delta, behavior: calm ? 'auto' : 'smooth' } );
+			strip.scrollTo( { left: strip.scrollLeft + delta, behavior: calm() ? 'auto' : 'smooth' } );
+		}
+
+		/*
+		 * قرص لغزان: هم‌شکل پیوند فعال پیشین (سبک محاسبه‌شدۀ همان)، درون نوار چسبان (جعبۀ
+		 * موقعیت‌دار) و زیر پیوندها؛ با transform از قاب پیشین به قاب تازه می‌رود و در
+		 * پایان کلاس فعال روی پیوند تازه می‌نشیند. فقط وقتی نوار افقی جا شده — وگرنه
+		 * لغزیدن نرم خود نوار (reveal) همان حرکت است.
+		 */
+		function slide( from, to, done ) {
+
+			if ( ghost ) {
+				ghost.remove();
+				ghost = null;
+			}
+
+			if ( calm() || ! from || ! to || from === to || ! strip || strip.scrollWidth > strip.clientWidth + 1 ) {
+				done();
+				return;
+			}
+
+			var base = nav.getBoundingClientRect();
+			var a    = from.getBoundingClientRect();
+			var b    = to.getBoundingClientRect();
+			var cs   = window.getComputedStyle( from );
+
+			ghost = document.createElement( 'span' );
+			ghost.className = 'tp-snav__ghost';
+			ghost.setAttribute( 'aria-hidden', 'true' );
+			ghost.style.cssText = 'position:absolute;pointer-events:none;top:' + ( b.top - base.top ) + 'px;left:' + ( b.left - base.left ) + 'px;'
+				+ 'width:' + b.width + 'px;height:' + b.height + 'px;border-radius:' + cs.borderRadius + ';background:' + cs.backgroundColor + ';box-shadow:' + cs.boxShadow + ';'
+				+ 'transform-origin:0 50%;transform:translateX(' + ( a.left - b.left ) + 'px) scaleX(' + ( b.width ? a.width / b.width : 1 ) + ');';
+			nav.insertBefore( ghost, nav.firstChild );
+
+			var end = function () {
+				if ( ! ghost ) { return; }
+				ghost.remove();
+				ghost = null;
+				done();
+			};
+
+			window.requestAnimationFrame( function () {
+				window.requestAnimationFrame( function () {
+					if ( ! ghost ) { return; }
+					ghost.style.transition = 'transform .28s cubic-bezier(.2,.7,.2,1)';
+					ghost.style.transform  = 'none';
+					ghost.addEventListener( 'transitionend', end, { once: true } );
+					window.setTimeout( end, 450 );
+				} );
+			} );
 		}
 
 		function setActive( id ) {
 
-			links.forEach( function ( a ) { a.classList.remove( 'tp-is-active' ); } );
-
 			var link = byId[ id ];
 
-			if ( ! link ) {
+			if ( ! link || link === current ) {
 				return;
 			}
 
-			link.classList.add( 'tp-is-active' );
+			var prev = current;
+			current  = link;
+
 			reveal( link );
+			slide( prev, link, function () {
+				if ( current !== link ) { return; }
+				links.forEach( function ( a ) { a.classList.toggle( 'tp-is-active', a === link ); } );
+			} );
+
+			/* پیوند پیشین فوراً عادی؛ قرص جای پس‌زمینه‌اش را تا پایان لغزش می‌گیرد */
+			if ( prev && prev !== link ) {
+				prev.classList.remove( 'tp-is-active' );
+			}
 		}
+		/* خط بخش فعال: هدر + نوار + کمی نفس — همان آستانۀ پیشین */
+		function line() {
+			return Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) + 24;
+		}
+
+		var lockTimer = 0;
 
 		function pick() {
 
+			/* قفلِ پس از کلیک: پایانش دوباره بسنج — IntersectionObserver فقط هنگام عبور خبر می‌دهد، نه با اتمام قفل */
 			if ( Date.now() < lockUntil ) {
+				window.clearTimeout( lockTimer );
+				lockTimer = window.setTimeout( later, lockUntil - Date.now() + 40 );
 				return;
 			}
 
-			/* بخشی فعال است که بالایش از زیرِ نوار گذشته — هدر + نوار + کمی نفس. */
-			var threshold = Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) + 24;
+			var threshold = line();
 			var bestId    = null;
 			var bestTop   = -Infinity;
 
@@ -359,45 +440,132 @@
 			setActive( bestId || ids[ 0 ] );
 		}
 
+		/* IntersectionObserver روی خط یک‌پیکسلی زیر نوار؛ هر عبور بخشی از خط ← یک pick در فریم بعد */
+		var queued = false;
+		function later() {
+			if ( ! queued ) {
+				queued = true;
+				window.requestAnimationFrame( function () { queued = false; pick(); } );
+			}
+		}
+
+		var io = null;
+		function observe() {
+
+			if ( ! ( 'IntersectionObserver' in window ) ) {
+				return false;
+			}
+
+			if ( io ) {
+				io.disconnect();
+			}
+
+			var top = Math.round( line() );
+			var bottom = Math.max( 0, window.innerHeight - top - 1 );
+
+			io = new IntersectionObserver( later, { rootMargin: '-' + top + 'px 0px -' + bottom + 'px 0px', threshold: 0 } );
+
+			ids.forEach( function ( id ) {
+				var el = document.getElementById( id );
+				if ( el ) { io.observe( el ); }
+			} );
+
+			return true;
+		}
+
+		/*
+		 * اسکرول نرم تا بخش، با فاصلۀ هدر چسبان و نوار — ۲ه٫۱ · P5-D310
+		 *
+		 * `scroll-margin-top` هنگام کلیک خوانده می‌شود، و بالای صفحه هدر وودمارت هنوز چسبان
+		 * نیست (--tp-snav-top صفر) — پس اسکرولِ نرم ۵۱ پیکسل کوتاه می‌رسید و بخش زیر هدر
+		 * می‌ماند (لنگر بومی هم همین‌طور بود). هدف را همین‌جا حساب می‌کنیم و تا پایان
+		 * اسکرول هر بار که هدر عوض شد دوباره نشانه می‌گیریم.
+		 */
+		var goingTo = 0;
+
+		/* هر ورودی کاربر اسکرولِ در جریان را رها می‌کند — صفحه را به بخش برنمی‌گردانیم */
+		[ 'wheel', 'touchstart', 'keydown', 'mousedown' ].forEach( function ( type ) {
+			window.addEventListener( type, function () { goingTo ++; }, { passive: true } );
+		} );
+
+		function goTo( el ) {
+
+			var token  = ++goingTo;
+			var began  = Date.now();
+			var aim    = -1;
+			var steady = 0;
+
+			function want() {
+				return Math.max( 0, Math.round( el.getBoundingClientRect().top + ( window.pageYOffset || 0 )
+					- ( Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) ) ) );
+			}
+
+			function step() {
+
+				if ( token !== goingTo ) {
+					return;
+				}
+
+				var y = want();
+
+				if ( Math.abs( y - aim ) > 2 ) {
+					aim    = y;
+					steady = 0;
+					window.scrollTo( { top: y, behavior: calm() ? 'auto' : 'smooth' } );
+				} else if ( Math.abs( ( window.pageYOffset || 0 ) - aim ) <= 1 ) {
+					steady ++;
+				} else {
+					steady = 0;
+				}
+
+				/* رسیده و چند فریم ماندگار ← پایان؛ سقف ۱٫۸ ثانیه */
+				if ( steady < 8 && Date.now() - began < 1800 ) {
+					window.requestAnimationFrame( step );
+				}
+			}
+
+			step();
+		}
+
 		links.forEach( function ( a ) {
-			a.addEventListener( 'click', function () {
+			a.addEventListener( 'click', function ( e ) {
 				var href = a.getAttribute( 'href' ) || '';
 				if ( '#' !== href.charAt( 0 ) ) { return; }
+				var el = document.getElementById( href.slice( 1 ) );
+				if ( ! el ) { return; }
+				e.preventDefault();
 				setActive( href.slice( 1 ) );
 				lockUntil = Date.now() + 1600;
+				goTo( el );
+				if ( window.history && window.history.replaceState ) {
+					window.history.replaceState( null, '', href );
+				}
 			} );
 		} );
 
 		window.addEventListener( 'hashchange', function () {
 			var id = ( location.hash || '' ).replace( '#', '' );
-			if ( id ) { setActive( id ); lockUntil = Date.now() + 1200; }
+			if ( id ) {
+				setActive( id );
+				lockUntil = Date.now() + 1200;
+				if ( byId[ id ] && document.getElementById( id ) ) { goTo( document.getElementById( id ) ); }
+			}
 		} );
 
-		var ticking = false;
+		/* بی IntersectionObserver همان شنوندۀ اسکرول پیشین */
+		if ( ! observe() ) {
+			window.addEventListener( 'scroll', later, { passive: true } );
+		}
 
-		window.addEventListener( 'scroll', function () {
+		window.addEventListener( 'resize', function () { lockUntil = 0; observe(); later(); }, { passive: true } );
 
-			if ( ticking ) {
-				return;
-			}
-
-			ticking = true;
-
-			window.requestAnimationFrame( function () {
-				pick();
-				ticking = false;
-			} );
-		}, { passive: true } );
-
-		window.addEventListener( 'resize', function () { lockUntil = 0; pick(); }, { passive: true } );
-
-		if ( location.hash ) {
+		if ( location.hash && byId[ location.hash.replace( '#', '' ) ] ) {
 			setActive( location.hash.replace( '#', '' ) );
 		} else {
 			pick();
 		}
 
-		window.addEventListener( 'load', pick, { once: true } );
+		window.addEventListener( 'load', function () { observe(); pick(); }, { once: true } );
 	} )();
 
 	/* ══ اسلایدرها — P5-D243 (جایگزین P5-D226) ══════════════════════════
@@ -1737,9 +1905,11 @@
 			if ( btn ) {
 
 				var key = btn.getAttribute( 'data-tp-go' );
+				/* ۲ه٫۱ · P5-D310 — با prefers-reduced-motion بی حرکت */
+				var how = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ? 'auto' : 'smooth';
 
 				if ( 'top' === key ) {
-					window.scrollTo( { top: 0, behavior: 'smooth' } );
+					window.scrollTo( { top: 0, behavior: how } );
 					return;
 				}
 
@@ -1752,7 +1922,7 @@
 				var el = document.getElementById( key );
 
 				if ( el ) {
-					el.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+					el.scrollIntoView( { behavior: how, block: 'start' } );
 				}
 
 				return;

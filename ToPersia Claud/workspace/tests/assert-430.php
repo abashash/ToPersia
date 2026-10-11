@@ -269,8 +269,8 @@ t( 'ذخیره و دنبال: API user-core؛ مهمان ← پنجرهٔ ورو
 
 $css430 = file_get_contents( TP_PLUGIN_DIR . 'assets/topersia-g-template.css' );
 t( 'نوار پایین: بالای صفحه پنهان، با نخستین اسکرولِ بیش از 24px پیدا و ماندگار  ۴٫۳٫۰ بند ۱۲',
-	false !== strpos( $css430, 'html.tp-js .tp-page .tp-mnav{transform:translateY(calc(100% + 8px));visibility:hidden;' )
-	&& false !== strpos( $css430, 'html.tp-js .tp-page .tp-mnav.tp-mnav--on{transform:none;visibility:visible;' )
+	false !== strpos( $css430, 'html.tp-js .tp-page .tp-mnav{transform:translateY(calc(100% + 8px));opacity:0;visibility:hidden;' )   /* ۲ه٫۱: transform و opacity */
+	&& false !== strpos( $css430, 'html.tp-js .tp-page .tp-mnav.tp-mnav--on{transform:none;opacity:1;visibility:visible;' )
 	&& (bool) preg_match( "/> 24 \) \{\s*mnav\.classList\.add\( 'tp-mnav--on' \);\s*window\.removeEventListener\( 'scroll', onScroll \);/", $src_js )
 	&& false !== strpos( file_get_contents( TP_PLUGIN_DIR . 'topersia-render.php' ), "document.documentElement.classList.add('tp-js')" ) );
 
