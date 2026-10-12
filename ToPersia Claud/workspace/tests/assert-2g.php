@@ -177,3 +177,7 @@ tp441_mut( 'چیدمان: «کیفیت هوا» (tp-aqi) بلافاصله پس �
 	},
 	array( $zones2g, file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-services.php' ) ),
 	array( str_replace( "'id' => 'tp-aqi'", "'id' => 'tp-x'", $zones2g ), file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-services.php' ) ) );
+
+tp441_mut( 'جعبهٔ هوا: متن لاتین (US AQI · PM2.5 · PM10) در `<span dir="ltr">` بی‌کلاس (همان شیوهٔ مجاز صفحه در راست‌به‌چپ؛ قاعدهٔ ۲٫۰٫۸ فقط dir وارونهٔ غیرمجاز را می‌گیرد)، نه روی عنصرهای ساختار',
+	function ( $x ) { return 3 === substr_count( $x, '<span dir="ltr">' ) && false === strpos( $x, '<dt dir=' ) && false === strpos( $x, 'tp-air__unit" dir=' ); },
+	$air_box, str_replace( '<span dir="ltr">US AQI</span>', '<span class="tp-air__unit" dir="ltr">US AQI</span>', $air_box ) );

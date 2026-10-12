@@ -65,6 +65,102 @@ async function open( browser, url, opts ) {
 	return { ctx, page };
 }
 
+/* ── P5-D346 نشانگرهای نقشه: خوشه، آیکون، پنجره، حالت تیره، زبان ── */
+async function mapPoints( browser, url, tag ) {
+
+	const ctx = await browser.newContext( { viewport: { width: 1440, height: 900 } } );
+	await ctx.route( /topersia\.com/, r => r.abort() );
+	const page = await ctx.newPage();
+	await page.goto( url, { waitUntil: 'load', timeout: 240000 } );
+
+	const opener = page.locator( '[data-tp-map-open]' ).first();
+
+	if ( ! await opener.count() ) {
+		info( `${ tag }: دکمهٔ نقشهٔ کامل نیست — نشانگر سنجیده نشد` );
+		await ctx.close();
+		return;
+	}
+
+	const cfg = await page.evaluate( () => { const m = document.querySelector( '[data-tp-map-full]' ); try { return JSON.parse( m.getAttribute( 'data-tp-map-cfg' ) ); } catch ( e ) { return {}; } } );
+
+	if ( ! cfg.points ) {
+		info( `${ tag }: این نوع نشانگر ندارد (points در پیکربندی نیست)` );
+		await ctx.close();
+		return;
+	}
+
+	const rest = await page.evaluate( async u => ( await ( await fetch( u ) ).json() ), cfg.points );
+	await opener.scrollIntoViewIfNeeded();
+	await opener.click();
+	await page.waitForFunction( () => { const b = document.querySelector( '[data-tp-map-full]' ); return b && b.tpMap && b.tpMap.getSource( 'tp-pts' ) && b.tpMap.isStyleLoaded(); }, null, { timeout: 120000 } );
+	await page.waitForTimeout( 1500 );
+
+	const st = await page.evaluate( () => {
+		const m = document.querySelector( '[data-tp-map-full]' ).tpMap;
+		const src = m.getSource( 'tp-pts' );
+		return {
+			cluster: !! ( src.serialize() || {} ).cluster, n: ( src.serialize().data.features || [] ).length,
+			layers: [ 'tp-pts-cluster', 'tp-pts-count', 'tp-pts-icon' ].map( l => !! m.getLayer( l ) ),
+			images: [ 'city', 'attraction', 'nature', 'district', 'village' ].map( f => m.hasImage( 'tp-fam-' + f ) ),
+			rendered: m.queryRenderedFeatures( { layers: [ 'tp-pts-cluster', 'tp-pts-icon' ] } ).length,
+		};
+	} );
+	check( `${ tag } نقشه: نشانگرها از map-points (${ rest.features.length }) با خوشه‌بندی داخلی، سه لایه و پنج آیکون خانواده؛ چیزی روی بوم دیده می‌شود`,
+		rest.features.length > 0 && st.cluster && st.n === rest.features.length && st.layers.every( Boolean ) && st.images.every( Boolean ) && st.rendered > 0, JSON.stringify( { st, rest: rest.features.length } ) );
+
+	/* کلیک خوشه ← بزرگ‌نمایی؛ کلیک نقطه ← پنجره */
+	const pick = ( layer ) => page.evaluate( ( l ) => {
+		const box = document.querySelector( '[data-tp-map-full]' ), m = box.tpMap;
+		const f = m.queryRenderedFeatures( { layers: [ l ] } )[ 0 ];
+		if ( ! f ) { return null; }
+		const p = m.project( f.geometry.coordinates ), r = m.getCanvas().getBoundingClientRect();
+		return { x: r.left + p.x, y: r.top + p.y, z: m.getZoom() };
+	}, layer );
+
+	const cl = await pick( 'tp-pts-cluster' );
+	if ( cl ) {
+		await page.mouse.click( cl.x, cl.y );
+		await page.waitForTimeout( 1500 );
+		const z = await page.evaluate( () => document.querySelector( '[data-tp-map-full]' ).tpMap.getZoom() );
+		check( `${ tag } نقشه: کلیک خوشه بزرگ‌نمایی می‌کند (${ cl.z.toFixed( 1 ) } ← ${ z.toFixed( 1 ) })`, z > cl.z + 0.4 );
+	} else {
+		info( `${ tag }: خوشه‌ای در دید نبود (همه نقطه‌اند)` );
+	}
+
+	let pt = await pick( 'tp-pts-icon' );
+	if ( ! pt ) {
+		await page.evaluate( () => { const m = document.querySelector( '[data-tp-map-full]' ).tpMap; m.jumpTo( { zoom: 13 } ); } );
+		await page.waitForTimeout( 1200 );
+		pt = await pick( 'tp-pts-icon' );
+	}
+
+	if ( pt ) {
+		await page.mouse.click( pt.x, pt.y );
+		await page.waitForSelector( '.maplibregl-popup .tp-mp__name', { timeout: 20000 } ).catch( () => {} );
+		const pop = await page.evaluate( () => {
+			const n = document.querySelector( '.maplibregl-popup .tp-mp__name' ), k = document.querySelector( '.maplibregl-popup .tp-mp__kind' );
+			return n ? { name: n.textContent, href: n.getAttribute( 'href' ) || '', kind: k ? k.textContent : '', bg: getComputedStyle( document.querySelector( '.maplibregl-popup-content' ) ).backgroundColor } : null;
+		} );
+		check( `${ tag } نقشه: کلیک نقطه پنجرهٔ کوچک با نام، نوع و پیوند به صفحهٔ همان موجودیت باز می‌کند («${ pop && pop.name }» · ${ pop && pop.kind })`,
+			pop && pop.name && pop.kind && /^https?:\/\//.test( pop.href ) && rest.features.some( f => f.properties.n === pop.name ), JSON.stringify( pop ) );
+	} else {
+		check( `${ tag } نقشه: دست‌کم یک نقطهٔ تکی برای کلیک پیدا شد`, false );
+	}
+
+	/* حالت‌ها: روز ← روشن؛ عصر و شب ← تیره؛ نشانگرها پس از عوض‌شدن سبک می‌مانند */
+	const flavors = [];
+	for ( const mode of [ 'dark', 'evening', 'light' ] ) {
+		await page.evaluate( m => document.documentElement.setAttribute( 'data-tp-mode', m ), mode );
+		await page.waitForFunction( () => { const b = document.querySelector( '[data-tp-map-full]' ); return b.tpMap.isStyleLoaded() && b.tpMap.getSource( 'tp-pts' ); }, null, { timeout: 60000 } );
+		await page.waitForTimeout( 800 );
+		flavors.push( await page.evaluate( () => { const b = document.querySelector( '[data-tp-map-full]' ); return { f: b.tpFlavor, bg: b.tpMap.getPaintProperty( b.tpMap.getStyle().layers[ 0 ].id, 'background-color' ), pts: !! b.tpMap.getLayer( 'tp-pts-icon' ) }; } ) );
+	}
+	check( `${ tag } نقشه: شب و عصر ← سبک تیره، روز ← روشن (رنگ زمینهٔ سبک عوض می‌شود)؛ نشانگرها پس از عوض‌شدن سبک می‌مانند`,
+		'dark' === flavors[0].f && 'dark' === flavors[1].f && 'light' === flavors[2].f && flavors[0].bg !== flavors[2].bg && flavors.every( x => x.pts ), JSON.stringify( flavors ) );
+
+	await ctx.close();
+}
+
 /* ── P5-D345 کیفیت هوا: اسکلتِ هم‌اندازه، پر شدن پس از بارگذاری بی جابه‌جایی، خطا ← «—»، رنگ رده از توکن ── */
 async function airBox( browser, url, tag ) {
 
@@ -1169,7 +1265,7 @@ const ONLY = process.env.TP_ONLY || '';
 			: { viewport: { width: 390, height: 844 }, hasTouch: true };
 
 		/* ── هارنس: همان استان، راست‌به‌چپ و چپ‌به‌راست — P5-D243 ── */
-		for ( const [ label, url ] of [ [ 'هارنس راست‌به‌چپ', hx.rtl ], [ 'هارنس چپ‌به‌راست', hx.ltr ] ].filter( () => 'air' !== ONLY ) ) {
+		for ( const [ label, url ] of [ [ 'هارنس راست‌به‌چپ', hx.rtl ], [ 'هارنس چپ‌به‌راست', hx.ltr ] ].filter( () => ! [ 'air', 'map', 'lang' ].includes( ONLY ) ) ) {
 			console.log( `\n${ name } — ${ label }\n` + '─'.repeat( 78 ) );
 			for ( const [ size, opts, touch ] of [ [ '۱۴۴۰', null, false ], [ '۳۹۰', mobile, true ] ].filter( z => ! ONLY || '۱۴۴۰' === z[0] ) ) {
 				const s = await open( browser, url, opts );
@@ -1194,8 +1290,17 @@ const ONLY = process.env.TP_ONLY || '';
 			const where = url.replace( /^https?:\/\/[^/]+/, '' );
 			console.log( `\n${ name } — ${ where }\n` + '─'.repeat( 78 ) );
 
+			if ( 'lang' === ONLY ) {
+				continue;
+			}
+
 			if ( 'air' === ONLY ) {
 				await airBox( browser, url, name );
+				continue;
+			}
+
+			if ( 'map' === ONLY ) {
+				await mapPoints( browser, url, name );
 				continue;
 			}
 
@@ -1236,6 +1341,7 @@ const ONLY = process.env.TP_ONLY || '';
 
 			/* انیمیشن هوا — حرکت روشن و کاهش حرکتِ سیستم */
 			await airBox( browser, url, name );
+			await mapPoints( browser, url, name );
 
 			const on  = await weatherFx( browser, url, name, false );
 			const off = await weatherFx( browser, url, name, true );
@@ -1244,7 +1350,7 @@ const ONLY = process.env.TP_ONLY || '';
 		}
 
 		/* ── ۲٫۰٫۸ — ترجمه‌های واقعی: چپ‌به‌راست، راست‌به‌چپ عربی، شرط زبان WPML ── */
-		if ( ! process.argv.slice( 2 ).length && ! ONLY ) {
+		if ( ! process.argv.slice( 2 ).length && ( ! ONLY || 'lang' === ONLY ) ) {
 			console.log( `\n${ name } — ترجمه‌های واقعی #99 و #399\n` + '─'.repeat( 78 ) );
 			for ( const want of LANG_PAGES ) {
 				await langPage( browser, want.url, want, name );
