@@ -221,3 +221,17 @@
 | `wp topersia geo-index` با زیرفرمان‌های `rebuild`، `verify`، `report` | `CORE/includes/topersia-geo-index.php:319-352` | `[VERIFIED]` |
 | `wp topersia i18n-gaps` | `CORE/includes/topersia-i18n-gaps.php:378` | `[VERIFIED]` |
 | کتابخانۀ AS: `wp action-scheduler …` | `CORE/vendor/action-scheduler/classes/abstracts/ActionScheduler.php:244-246` | `[VERIFIED]` |
+
+---
+
+## دور دوم (تطبیق با ممیزی مستقل ب)
+
+> منبع: **دور دوم** — `RECONCILE.md`.
+
+| مورد | اصلاح/افزوده | شاهد | برچسب |
+|---|---|---|---|
+| کپی نصب‌شده (§۱٫۲) | **کهنه:** از `b1ec34bb` کپی core و render هم‌بایت با workspace (`diff -rq` صفر، هر دو `4.13.1`/`4.5.1`)؛ user-core ۲ و AI ۳ پروندۀ غیرکد فرق دارند | `WP/wp-content/plugins/topersia-core/topersia-core.php:5` · `WP/wp-content/plugins/topersia-render/topersia-render.php:5` | `[VERIFIED]` |
+| JetReviews (§۶) | **اصلاح:** render فقط می‌خواند؛ نوشتن نظر از API JetReviews در user-core | `RENDER/includes/topersia-g-zones.php:4848,4859` · `UC/includes/class-topersia-review-form.php:205` | `[VERIFIED]` |
+| PHP زنده | `.htaccess` ریشه: `display_errors Off` · `log_errors Off` · `max_execution_time 600` (بلوک MultiPHP؛ ممکن است کهنه باشد) | `ROOT/.htaccess:50,52,53` | `[VERIFIED]` (پرونده) · مؤثر `[UNKNOWN]` |
+| `mbstring` | وردپرس فقط `mb_chr · mb_ord · mb_substr · mb_strlen` را جایگزین می‌کند | `WP/wp-includes/compat.php:126,196,272,354` | `[VERIFIED]` |
+| بی `uninstall.php` | core و render | (نبود پرونده) | `[VERIFIED]` |
