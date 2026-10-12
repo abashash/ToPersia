@@ -30,6 +30,14 @@
 
 **تاریخچه:** مخزن از درون‌ریزی ۱ اکتبر شروع می‌شود؛ برچسب‌های v4.1.0 تا v4.4.3 و commitهای پیش از آن نیستند. مبنای نسخۀ پیشین زیپ‌های `dist/` است، نه `git archive` برچسب؛ هستۀ ۴٫۱۰٫۰ «پیش از اصلاح» در `reference/topersia-core.php`.
 
+## رلهٔ محلی ⇄ ابری — OPS-D001…OPS-D008
+راهنما `docs/relay/RELAY.md` · نوبت `docs/relay/CURRENT.md` · ابزار `scripts/relay/tp-relay.php`.
+- «بخش محلی» CURRENT.md را در هر نقطهٔ عطف به‌روز نگه دار (وضعیت، قدم بعدی دقیق، قیدها) تا اگر سهمیه تمام شد کاربر با `to-cloud` بی تو تحویل دهد (OPS-D003). «بخش ابری» را ویرایش نکن.
+- پیش از کار موازی جدول lane را پر کن؛ دو طرف هم‌زمان روی یک پرونده نه (OPS-D005).
+- push شاخه‌های `relay/…` و `claude/…` مجاز است (اصلاح P5-D284 با OPS-D001؛ مخزن از ۵ اکتبر خصوصی است)؛ main فقط پایان دسته و پس از گیت‌ها.
+- برگشت کار ابری: `from-cloud` ← آزمون‌های «در انتظار تأیید محلی» ← `--gates --squash` ← commit دسته‌ای ← hash در docs/COMMIT-LOG.md (OPS-D004).
+- preflight همیشه سبز بماند (OPS-D006).
+
 ## اسکیل‌ها — قاعدۀ ۱۴ · P5-D286
 
 این سند، `docs/`، HANDOVER و قالب مرجع بر هر اسکیل مقدم‌اند؛ هیچ اسکیل طراحی صفحه‌ای را که مرجع دارد بازطراحی نمی‌کند. آغاز کار: `topersia-master-skill` · `topersia-project-context`. صفحۀ موجودیت: فقط سنجش (`web-design-guidelines` · `ui-ux-review` · `web-accessibility` · `design:accessibility-review`). المنتور: `topersia-elementor` · `topersia-ultimate-wordpress` — صفحۀ موجودیت یک ویجت `[tp_page]` می‌ماند. آزمون مرورگری `frontend-testing-and-qa` · خطا `debugging-and-error-recovery` · پیش از commit و پایان فاز `code-review-and-quality` · امنیت `security-and-hardening` · سئو و اسکیما `seo-geo-aeo-review` و `searchfit-seo`. جدول کامل: `docs/SPRINT-4.4-PHASES.md` بخش ۰.

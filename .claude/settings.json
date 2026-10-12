@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ \"$CLAUDE_CODE_REMOTE\" = \"true\" ] && php \"$CLAUDE_PROJECT_DIR/ToPersia Claud/workspace/scripts/relay/tp-relay.php\" session-start || true",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}
