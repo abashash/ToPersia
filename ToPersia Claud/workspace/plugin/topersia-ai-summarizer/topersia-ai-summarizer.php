@@ -37,6 +37,7 @@ require_once TP_AI_PATH . 'includes/class-tp-ai-shortcode.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-block.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-tracker.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-summary.php';
+require_once TP_AI_PATH . 'includes/class-tp-ai-generator.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-core-bridge.php';
 
 if ( is_admin() ) {
@@ -73,6 +74,7 @@ function tp_ai_init() {
 	TP_AI_Block::init();
 	TP_AI_Tracker::init();
 	TP_AI_Summary::init();
+	TP_AI_Generator::init(); // 1.3.0 · P5-D358: admin-only generation, queue job, auto-generate.
 	TP_AI_Core_Bridge::init();
 
 	// 1.2.2 · P5-D355: whenever the settings row is created or saved, keep it out of autoload.

@@ -22,6 +22,11 @@ class TP_AI_Admin {
 		add_action( 'add_meta_boxes', array( __CLASS__, 'meta_box' ) );
 		add_action( 'save_post', array( __CLASS__, 'save_meta' ) );
 		add_action( 'wp_ajax_tpas_test_key', array( __CLASS__, 'test_key' ) );
+		// 1.3.0 · P5-D358: the admin makes the summaries - metabox button, bulk action.
+		add_action( 'wp_ajax_tpas_admin_generate', array( __CLASS__, 'ajax_generate' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'metabox_assets' ) );
+		add_action( 'admin_init', array( __CLASS__, 'bulk_register' ) );
+		add_action( 'admin_notices', array( __CLASS__, 'bulk_notice' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( TP_AI_FILE ), array( __CLASS__, 'action_links' ) );
 	}
 
@@ -184,6 +189,203 @@ class TP_AI_Admin {
 		echo '<input type="checkbox" name="tpas_hide_panel" value="1"' . checked( $hide_panel, true, false ) . '> ';
 		esc_html_e( 'Hide on-page AI panel', 'topersia-ai-summarizer' );
 		echo '</label>';
+
+		self::meta_box_outputs( $post );
+	}
+
+	/**
+	 * Labels of the three states an output can be in.
+	 *
+	 * @return array
+	 */
+	public static function status_labels() {
+		return array(
+			'none'  => __( 'Not made', 'topersia-ai-summarizer' ),
+			'fresh' => __( 'Fresh', 'topersia-ai-summarizer' ),
+			'stale' => __( 'Stale', 'topersia-ai-summarizer' ),
+		);
+	}
+
+	/**
+	 * 1.3.0 · P5-D358: the state of each output type in this post's own
+	 * language, with a Generate / Regenerate button (admin AJAX, own nonce).
+	 *
+	 * @param WP_Post $post Current post.
+	 * @return void
+	 */
+	public static function meta_box_outputs( $post ) {
+		$labels = array(
+			'summary'   => __( 'Structured summary', 'topersia-ai-summarizer' ),
+			'keypoints' => __( 'Key points', 'topersia-ai-summarizer' ),
+			'plan'      => __( 'Travel plan', 'topersia-ai-summarizer' ),
+		);
+		$states = self::status_labels();
+		$lang   = TP_AI_Generator::post_lang( $post->ID );
+
+		echo '<div class="tpas-gen" data-post="' . esc_attr( (string) $post->ID ) . '" data-nonce="' . esc_attr( wp_create_nonce( 'tpas_admin_gen' ) ) . '" style="margin-top:12px;border-top:1px solid #dcdcde;padding-top:8px;">';
+		echo '<p style="margin:0 0 6px;"><strong>' . esc_html__( 'AI outputs', 'topersia-ai-summarizer' ) . '</strong> <code>' . esc_html( $lang ) . '</code></p>';
+
+		if ( ! TP_AI_Generator::eligible( $post->ID ) ) {
+			echo '<p class="description" style="margin:0;">' . esc_html__( 'Made once this post is published.', 'topersia-ai-summarizer' ) . '</p></div>';
+			return;
+		}
+
+		foreach ( TP_AI_Generator::types() as $type ) {
+			$status = TP_AI_Generator::status( $post->ID, $type, $lang );
+			echo '<p class="tpas-gen__row" data-type="' . esc_attr( $type ) . '" style="display:flex;gap:6px;align-items:center;justify-content:space-between;margin:0 0 6px;">';
+			echo '<span>' . esc_html( $labels[ $type ] ?? $type ) . ' · <span class="tpas-gen__status" data-status="' . esc_attr( $status ) . '">' . esc_html( $states[ $status ] ) . '</span></span>';
+			echo '<button type="button" class="button button-small tpas-gen__go">' . esc_html( 'none' === $status ? __( 'Generate', 'topersia-ai-summarizer' ) : __( 'Regenerate', 'topersia-ai-summarizer' ) ) . '</button>';
+			echo '</p>';
+		}
+
+		echo '<p class="tpas-gen__msg description" aria-live="polite" style="margin:0;"></p></div>';
+	}
+
+	/**
+	 * Script of the metabox button, on the post editor only.
+	 *
+	 * @param string $hook Admin page hook.
+	 * @return void
+	 */
+	public static function metabox_assets( $hook ) {
+		if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
+			return;
+		}
+
+		$file = TP_AI_PATH . 'assets/js/topersia-ai-metabox.js';
+
+		wp_enqueue_script( 'topersia-ai-metabox', TP_AI_URL . 'assets/js/topersia-ai-metabox.js', array(), is_file( $file ) ? filemtime( $file ) : TP_AI_VERSION, true );
+		wp_localize_script( 'topersia-ai-metabox', 'tpasGen', array(
+			'ajax'       => admin_url( 'admin-ajax.php' ),
+			'working'    => __( 'Generating…', 'topersia-ai-summarizer' ),
+			'done'       => __( 'Done.', 'topersia-ai-summarizer' ),
+			'error'      => __( 'Generation failed.', 'topersia-ai-summarizer' ),
+			'regenerate' => __( 'Regenerate', 'topersia-ai-summarizer' ),
+			'states'     => self::status_labels(),
+		) );
+	}
+
+	/**
+	 * Metabox button: make one output now, for a user who can edit the post.
+	 * 1.3.0 · P5-D358. Fresh outputs are rebuilt on purpose (the button says
+	 * so); the engine call counts against the daily caps.
+	 *
+	 * @return void
+	 */
+	public static function ajax_generate() {
+		check_ajax_referer( 'tpas_admin_gen', 'nonce' );
+
+		$post = absint( $_POST['post'] ?? 0 );
+		$type = sanitize_key( wp_unslash( $_POST['type'] ?? '' ) );
+
+		if ( ! $post || ! current_user_can( 'edit_post', $post ) ) {
+			wp_send_json_error( array( 'message' => 'Forbidden.' ), 403 );
+		}
+
+		if ( ! in_array( $type, TP_AI_Generator::types(), true ) ) {
+			wp_send_json_error( array( 'message' => 'Unknown output type.' ), 400 );
+		}
+
+		$r      = TP_AI_Generator::generate( $post, $type, TP_AI_Generator::post_lang( $post ), true );
+		$labels = self::status_labels();
+		$status = (string) ( $r['status'] ?? 'none' );
+		$data   = array(
+			'status' => $status,
+			'label'  => $labels[ $status ] ?? $status,
+		);
+
+		if ( empty( $r['ok'] ) ) {
+			$data['message'] = 'cap' === ( $r['skipped'] ?? '' ) ? __( 'Daily generation cap reached.', 'topersia-ai-summarizer' ) : (string) ( $r['message'] ?? '' );
+			wp_send_json_error( $data, 'cap' === ( $r['skipped'] ?? '' ) ? 429 : 200 );
+		}
+
+		wp_send_json_success( $data );
+	}
+
+	/**
+	 * «ساخت خلاصهٔ هوش مصنوعی» in the posts list of every enabled type.
+	 *
+	 * @return void
+	 */
+	public static function bulk_register() {
+		foreach ( array_map( 'sanitize_key', (array) TP_AI_Options::get_field( 'post_types', array() ) ) as $type ) {
+			add_filter( 'bulk_actions-edit-' . $type, array( __CLASS__, 'bulk_actions' ) );
+			add_filter( 'handle_bulk_actions-edit-' . $type, array( __CLASS__, 'bulk_handle' ), 10, 3 );
+		}
+	}
+
+	/**
+	 * Add the bulk action.
+	 *
+	 * @param array $actions Bulk actions.
+	 * @return array
+	 */
+	public static function bulk_actions( $actions ) {
+		$actions['tpas_generate'] = __( 'Generate AI summary', 'topersia-ai-summarizer' );
+
+		return $actions;
+	}
+
+	/**
+	 * Queue the selected posts (Action Scheduler of ToPersia Core, P5-D290),
+	 * each in its own language, without rebuilding fresh outputs, up to the
+	 * daily cap. No queue: a small batch now, the rest reported.
+	 *
+	 * @param string $redirect Redirect URL.
+	 * @param string $action   Chosen action.
+	 * @param int[]  $ids      Selected posts.
+	 * @return string
+	 */
+	public static function bulk_handle( $redirect, $action, $ids ) {
+		if ( 'tpas_generate' !== $action ) {
+			return $redirect;
+		}
+
+		$ids = array_values( array_filter( array_map( 'absint', (array) $ids ), function ( $id ) {
+			return $id && current_user_can( 'edit_post', $id );
+		} ) );
+
+		$out = TP_AI_Generator::enqueue( $ids, true );
+
+		return add_query_arg( array(
+			'tpas_q' => (int) $out['queued'],
+			'tpas_r' => (int) $out['ran'],
+			'tpas_f' => (int) $out['fresh'],
+			'tpas_c' => (int) $out['capped'],
+			'tpas_s' => (int) $out['skipped'],
+			'tpas_n' => TP_AI_Generator::queue_ready() ? 0 : 1,
+		), $redirect );
+	}
+
+	/**
+	 * Report of the bulk action.
+	 *
+	 * @return void
+	 */
+	public static function bulk_notice() {
+		if ( ! isset( $_GET['tpas_q'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- display only.
+			return;
+		}
+
+		$n = function ( $k ) {
+			return absint( $_GET[ $k ] ?? 0 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		};
+
+		$text = sprintf(
+			/* translators: 1: queued, 2: made now, 3: already fresh, 4: over the daily cap, 5: skipped */
+			__( 'AI summaries — queued: %1$d · made now: %2$d · already fresh: %3$d · over the daily cap: %4$d · skipped: %5$d', 'topersia-ai-summarizer' ),
+			$n( 'tpas_q' ),
+			$n( 'tpas_r' ),
+			$n( 'tpas_f' ),
+			$n( 'tpas_c' ),
+			$n( 'tpas_s' )
+		);
+
+		if ( $n( 'tpas_n' ) ) {
+			$text .= ' ' . __( 'The ToPersia Core queue is not available: only a small batch was made now.', 'topersia-ai-summarizer' );
+		}
+
+		echo '<div class="notice notice-info is-dismissible"><p>' . esc_html( $text ) . '</p></div>';
 	}
 
 	/**
@@ -647,6 +849,12 @@ class TP_AI_Admin {
 		}
 		self::select_row( __( 'Default output type', 'topersia-ai-summarizer' ), 'internal_default_type', $options['internal_default_type'], $type_labels );
 		self::checkbox_row( __( 'Auto-generate on first view', 'topersia-ai-summarizer' ), 'internal_auto_first', $options['internal_auto_first'] );
+
+		/* 1.3.0 · P5-D358: summaries are made by the admin only */
+		self::title_row( __( 'Who makes the summaries', 'topersia-ai-summarizer' ) );
+		self::checkbox_row( __( 'Allow visitor requests (later versions)', 'topersia-ai-summarizer' ), 'visitor_requests', $options['visitor_requests'] );
+		self::checkbox_row( __( 'Generate automatically after publishing or a content change', 'topersia-ai-summarizer' ), 'auto_generate', $options['auto_generate'] );
+		self::input_row( __( 'Admin generations per day', 'topersia-ai-summarizer' ), 'admin_daily_cap', (int) $options['admin_daily_cap'], __( 'Metabox, bulk action and automatic generation together. The site daily cap of ToPersia Render also applies.', 'topersia-ai-summarizer' ), 'number' );
 		self::select_row( __( 'Panel position', 'topersia-ai-summarizer' ), 'panel_position', $options['panel_position'], array(
 			'manual' => __( 'Manual (shortcode / block)', 'topersia-ai-summarizer' ),
 			'top'    => __( 'Top of content', 'topersia-ai-summarizer' ),

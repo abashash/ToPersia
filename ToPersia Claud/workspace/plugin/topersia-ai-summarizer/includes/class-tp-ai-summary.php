@@ -209,6 +209,48 @@ class TP_AI_Summary {
 			self::count_rebuild( $user_id );
 		}
 
+		$made = self::produce( $post, $type, $lang );
+
+		if ( empty( $made['ok'] ) ) {
+			wp_send_json_error( array( 'message' => (string) ( $made['message'] ?? '' ) ) );
+		}
+
+		wp_send_json_success( array(
+			'text'   => $made['text'],
+			'html'   => TP_AI_Render::format_ai_text( $made['text'] ),
+			'cached' => false,
+		) );
+	}
+
+	/**
+	 * Build one output now with the engine chosen in the settings, and store
+	 * it. 1.3.0 · P5-D358: shared by the editor request (handle_ajax) and the
+	 * admin paths (TP_AI_Generator: metabox, bulk action, queue). It checks no
+	 * permission and no cap - every caller gates first.
+	 *
+	 * @param int    $post Published post id.
+	 * @param string $type Output type.
+	 * @param string $lang Language code.
+	 * @return array { ok: bool, text?: string, message?: string, engine: 'ai'|'internal' }
+	 */
+	public static function produce( $post, $type, $lang ) {
+		if ( self::engine_is_internal() ) {
+			$engine = new TP_AI_Internal();
+			$text   = (string) $engine->generate( $type, TP_AI_Context::build( $post ) );
+
+			if ( '' === trim( $text ) ) {
+				return array( 'ok' => false, 'message' => 'Not enough content to summarize.', 'engine' => 'internal' );
+			}
+
+			self::store( $post, $type, $lang, $text, '', '', 'internal' );
+
+			return array( 'ok' => true, 'text' => $text, 'engine' => 'internal' );
+		}
+
+		if ( ! TP_AI_API::is_configured() ) {
+			return array( 'ok' => false, 'message' => 'No internal engine configured.', 'engine' => 'ai' );
+		}
+
 		// Build the prompt the user actually requested. The URL is the post's
 		// own permalink in the page language (WPML) - never the browser's.
 		$url_key   = self::post_url( $post, $lang );
@@ -253,22 +295,18 @@ class TP_AI_Summary {
 			);
 
 			if ( is_wp_error( $text ) ) {
-				wp_send_json_error( array( 'message' => $failed ? $failed['message'] : $text->get_error_message() ) );
+				return array( 'ok' => false, 'message' => $failed ? (string) $failed['message'] : $text->get_error_message(), 'engine' => 'ai' );
 			}
 
 			self::log_reply( $post, $type, $lang, false, $meta['provider'] ?? '', $meta['model'] ?? '' );
 
-			wp_send_json_success( array(
-				'text'   => $text,
-				'html'   => TP_AI_Render::format_ai_text( $text ),
-				'cached' => false,
-			) );
+			return array( 'ok' => true, 'text' => (string) $text, 'engine' => 'ai' );
 		}
 
 		$result = TP_AI_API::chat( $system, $user_full );
 
 		if ( ! $result['ok'] ) {
-			wp_send_json_error( array( 'message' => $result['message'] ) );
+			return array( 'ok' => false, 'message' => (string) $result['message'], 'engine' => 'ai' );
 		}
 
 		$text  = $result['data'];
@@ -278,11 +316,7 @@ class TP_AI_Summary {
 
 		self::log_reply( $post, $type, $lang, false, $label, $result['model'] ?? '' );
 
-		wp_send_json_success( array(
-			'text'   => $text,
-			'html'   => TP_AI_Render::format_ai_text( $text ),
-			'cached' => false,
-		) );
+		return array( 'ok' => true, 'text' => (string) $text, 'engine' => 'ai' );
 	}
 
 	/**

@@ -15,6 +15,10 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 	define( 'HOUR_IN_SECONDS', 3600 );
 }
 
+if ( ! defined( 'DAY_IN_SECONDS' ) ) {
+	define( 'DAY_IN_SECONDS', 86400 );
+}
+
 if ( ! defined( 'MINUTE_IN_SECONDS' ) ) {
 	define( 'MINUTE_IN_SECONDS', 60 );
 }
@@ -528,6 +532,13 @@ function wp_list_pluck( $list, $field, $index_key = null ) {
  * @return string
  */
 function add_query_arg( $key, $value = null, $url = '' ) {
+	if ( is_array( $key ) ) { // WordPress form: add_query_arg( array $args, string $url )
+		$url = (string) $value;
+		foreach ( $key as $k => $v ) {
+			$url = add_query_arg( $k, $v, $url );
+		}
+		return $url;
+	}
 	$separator = ( false === strpos( $url, '?' ) ) ? '?' : '&';
 	return $url . $separator . rawurlencode( (string) $key ) . '=' . rawurlencode( (string) $value );
 }
