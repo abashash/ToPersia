@@ -259,6 +259,63 @@ if ( ! function_exists( 'topersia_g_geo_parent_tiles' ) ) {
 }
 
 /**
+ * کاشی‌های مکان‌های مرتبط برای نوع‌های غیرمکانی (رویداد، جشن، شخصیت، غذا، …) در کارت «اطلاعات جغرافیایی».  P5-D348
+ *
+ * فقط وقتی نوع در زنجیرۀ مکانی نیست (استان/شهر/روستا… خودشان والد مکانی دارند) و والد مکانی R01 هم ندارد: هر رابطۀ زندۀ جت‌انجین
+ * که یک سویش استان، شهر یا روستا باشد (از ثبت‌نامه، هر دو سو)، منتشرشده و صفحه‌دار، به زبان صفحه. برچسب کاشی نوع مکان است
+ * (استان/شهر/روستا)؛ کشور و همتا نه. چیزی کپی یا حدس زده نمی‌شود — بی رابطه ← بی کاشی.
+ *
+ * @param int $pid پست.
+ * @return array<int,array{label:string,name:string,url:string}>
+ */
+if ( ! function_exists( 'topersia_g_geo_related_tiles' ) ) {
+	function topersia_g_geo_related_tiles( $pid ) {
+
+		$pid  = absint( $pid );
+		$type = (string) get_post_type( $pid );
+		$rank = topersia_g_place_rank();
+
+		if ( isset( $rank[ $type ] ) ) {
+			return array();
+		}
+
+		$want  = array( 'tp_province' => 1, 'tp_city' => 2, 'tp_village' => 3 );
+		$found = array();
+
+		foreach ( topersia_g_relreg_sides( $type ) as $side ) {
+
+			if ( ! isset( $want[ $side['other'] ] ) ) {
+				continue;
+			}
+
+			foreach ( topersia_g_rel_ids( $pid, array( array( 'id' => $side['id'], 'dir' => $side['dir'] ) ) ) as $other ) {
+
+				$view = topersia_g_view_id( $other );
+				$url  = topersia_g_public_url( $view );
+
+				if ( '' === $url || isset( $found[ $view ] ) ) {
+					continue;
+				}
+
+				$found[ $view ] = array( 'rank' => $want[ $side['other'] ], 'tile' => array( 'label' => topersia_g_kind_label( $view ), 'name' => topersia_g_name( $view ), 'url' => $url ) );
+			}
+		}
+
+		/* استان، سپس شهر، سپس روستا؛ هر دسته به ترتیب یافتن */
+		uasort( $found, function ( $a, $b ) {
+			return $a['rank'] <=> $b['rank'];
+		} );
+
+		$tiles = array();
+
+		foreach ( $found as $one ) {
+			$tiles[] = $one['tile'];
+		}
+
+		return $tiles;
+	}
+}
+/**
  * کاشی‌های مرکزیت برای کارت «اطلاعات جغرافیایی».  P5-D342
  *
  * استان: «مرکز استان: {شهر}» از رابطۀ مرکز (۹۶، همان گروه `capital`). شهر: «مرکز شهرستان: {شهرستان}» از رابطۀ ۹۷ فقط وقتی داده دارد
@@ -333,34 +390,9 @@ if ( ! function_exists( 'topersia_g_sc_route_cities' ) ) {
 	}
 }
 
-/** باکس شهرهای مسیر، بلافاصله پس از نقشه (فقط نوع مسیر). */
-if ( ! function_exists( 'topersia_g_relreg_layout' ) ) {
-	function topersia_g_relreg_layout( $layout, $post_id = 0 ) {
-
-		if ( ! $post_id || 'tp_route' !== get_post_type( $post_id ) || ! is_array( $layout ) ) {
-			return $layout;
-		}
-
-		$rail = isset( $layout['rail'] ) ? (array) $layout['rail'] : array();
-		$cut  = count( $rail );
-
-		foreach ( $rail as $i => $zone ) {
-			if ( isset( $zone['id'] ) && 'tp-map' === $zone['id'] ) {
-				$cut = $i + 1;
-				break;
-			}
-		}
-
-		array_splice( $rail, $cut, 0, array( array( 'fn' => 'topersia_g_sc_route_cities', 'atts' => array(), 'id' => 'tp-route-cities', 'nav' => '' ) ) );
-		$layout['rail'] = $rail;
-
-		return $layout;
-	}
-}
+/* باکس شهرهای مسیر در ثبت‌نامۀ پنل چپ (`includes/topersia-g-panel.php`) است، بلافاصله پس از مسیریابی؛ فقط نوع مسیر محتوا دارد.  P5-D347 */
 
 if ( function_exists( 'add_filter' ) ) {
-	add_filter( 'topersia_g_layout', 'topersia_g_relreg_layout', 20, 2 );
-
 	/* زنجیرۀ R01 برای نمایۀ مشتق مکانی هسته (استان و شهر هر پست) — P5-D334 */
 	add_filter( 'topersia_geo_index_chain', function ( $chain, $pid ) {
 		return function_exists( 'topersia_g_place_chain' ) ? topersia_g_place_chain( $pid ) : $chain;

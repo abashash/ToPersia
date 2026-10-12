@@ -771,6 +771,52 @@ html .tp-page .tp-mp__kind{font-size:calc(.74 * var(--tp-rem));line-height:1.4;c
   .tp-page .tp-wx-fx{display:none}
 }
 
+/* === Left panel order from the single registry (includes/topersia-g-panel.php) - P5-D347 ===
+   Mobile: right column first, then the left panel, visitor reviews last. Desktop: order only, same DOM. */
+@media(max-width:720px){
+html .tp-page.tp-page .tp-main-col>*{order:12}
+html .tp-page.tp-page .tp-rail>*{order:50}
+html .tp-page.tp-page #tp-ai{order:1}
+html .tp-page.tp-page #tp-map{order:20}
+html .tp-page.tp-page #tp-routing{order:21}
+html .tp-page.tp-page #tp-route-cities{order:22}
+html .tp-page.tp-page #tp-weather{order:23}
+html .tp-page.tp-page #tp-aqi{order:24}
+html .tp-page.tp-page #tp-season{order:25}
+html .tp-page.tp-page #tp-geo{order:26}
+html .tp-page.tp-page #tp-audio{order:80}
+html .tp-page.tp-page #tp-sources{order:90}
+html .tp-page.tp-page #tp-neighbors{order:40}
+html .tp-page.tp-page #tp-overview{order:2}
+html .tp-page.tp-page #tp-gallery{order:3}
+html .tp-page.tp-page #tp-attractions{order:4}
+html .tp-page.tp-page #tp-places{order:5}
+html .tp-page.tp-page #tp-culture{order:6}
+html .tp-page.tp-page #tp-news{order:7}
+html .tp-page.tp-page #tp-faq{order:10}
+html .tp-page.tp-page #tp-reviews{order:99}
+html .tp-page.tp-page #tp-badges{order:50}
+html .tp-page.tp-page #tp-nature{order:50}
+html .tp-page.tp-page #tp-ancient{order:50}
+html .tp-page.tp-page #tp-practical{order:50}
+html .tp-page.tp-page #tp-routes{order:50}
+}
+@media(min-width:721px){
+html .tp-page.tp-page .tp-rail>*{order:11}
+html .tp-page.tp-page #tp-actions{order:1}
+html .tp-page.tp-page #tp-ai{order:2}
+html .tp-page.tp-page #tp-map{order:3}
+html .tp-page.tp-page #tp-routing{order:4}
+html .tp-page.tp-page #tp-route-cities{order:5}
+html .tp-page.tp-page #tp-weather{order:7}
+html .tp-page.tp-page #tp-aqi{order:8}
+html .tp-page.tp-page #tp-season{order:6}
+html .tp-page.tp-page #tp-geo{order:9}
+html .tp-page.tp-page #tp-audio{order:12}
+html .tp-page.tp-page #tp-sources{order:13}
+html .tp-page.tp-page #tp-neighbors{order:10}
+}
+
 /* ═══ TP-ADDED-END ═════════════════════════════════════════════════ */
 
 html .tp-page *,html .tp-page *::before,html .tp-page *::after{box-sizing:border-box}

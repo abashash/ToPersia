@@ -629,7 +629,7 @@ msgstr "المهرجانات"
 msgid "جشنواره و رویداد"
 msgstr "مهرجان وفعالية"
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-panel.php
 msgid "جغرافیا"
 msgstr "الجغرافيا"
 
@@ -1033,7 +1033,7 @@ msgstr "اللغة الرسمية"
 msgid "زبان و پوشاک"
 msgstr "اللغة والأزياء"
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-panel.php
 msgid "زمان سفر"
 msgstr "وقت السفر"
 
