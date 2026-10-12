@@ -523,32 +523,38 @@ final class ToPersia_Auth {
 	 * نقش صریح داده می‌شود؛ اگر default_role سایت روزی عوض شود، کاربر تازه
 	 * نباید ناخواسته دسترسی بیشتری بگیرد.
 	 *
+	 * ۱٫۱۱٫۰ · P5-D354 — شماره هرگز در شناسۀ عمومی: نام ورود، نامک و ایمیل
+	 * تصادفی‌اند و نام نمایشی و nickname خنثی («مسافر ۴۸۲۱»). شماره فقط در
+	 * متای `_topersia_mobile` — همان که `find_user_by_mobile()` می‌خواند؛
+	 * پیداکردن حساب به نام ورود وابسته نیست.
+	 *
 	 * @param string $mobile شماره.
 	 * @return WP_User|null
 	 */
 	private function create_user( string $mobile ): ?WP_User {
 
-		$login = 'tp_' . $mobile;
-		$base  = $login;
-		$i     = 1;
+		if ( ! class_exists( 'ToPersia_Privacy' ) ) {
+			$this->log( 'ساخت حساب ناموفق: کلاس حریم خصوصی بار نشده', 'error' );
 
-		while ( username_exists( $login ) ) {
-			$login = $base . '_' . $i;
-			$i++;
+			return null;
 		}
 
-		/* دامنۀ .local غیرقابل‌ارسال است و بازیابی رمز و اعلان را ناممکن
-		   می‌کند. زیردامنۀ واقعی جایش را گرفت. */
-		$domain = apply_filters( 'topersia_user_email_domain', 'users.topersia.com' );
-		$email  = sanitize_email( $mobile . '@' . $domain );
-
-		$user_id = wp_create_user( $login, wp_generate_password( 32, true, true ), $email );
+		$user_id = wp_create_user( ToPersia_Privacy::random_login(), wp_generate_password( 32, true, true ), ToPersia_Privacy::random_email() );
 
 		if ( is_wp_error( $user_id ) ) {
 			$this->log( 'ساخت حساب ناموفق: ' . $user_id->get_error_message(), 'error' );
 
 			return null;
 		}
+
+		$neutral = ToPersia_Privacy::neutral_name( (int) $user_id, 'fa' );
+
+		wp_update_user( array(
+			'ID'            => $user_id,
+			'display_name'  => $neutral,
+			'nickname'      => $neutral,
+			'user_nicename' => ToPersia_Privacy::random_nicename(),
+		) );
 
 		$user = new WP_User( $user_id );
 		$user->set_role( 'subscriber' );

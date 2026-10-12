@@ -71,7 +71,8 @@ final class ToPersia_Reviews {
         if ($user_id <= 0) return ToPersia_I18n::t('reviews_guest_author', 'کاربر مهمان');
         $user = get_userdata($user_id);
         if (!$user) return ToPersia_I18n::t('reviews_deleted_author', 'کاربر حذف‌شده');
-        return $user->display_name ?: $user->user_login;
+        /* ۱٫۱۱٫۰ · P5-D354 — هرگز نام ورود؛ نام شماره‌دار ← نام خنثی */
+        return class_exists('ToPersia_Privacy') ? ToPersia_Privacy::public_name((string) $user->display_name, (int) $user->ID) : (string) $user->display_name;
     }
 
     /**

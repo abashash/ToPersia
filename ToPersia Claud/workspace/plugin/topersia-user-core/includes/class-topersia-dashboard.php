@@ -75,7 +75,8 @@ final class ToPersia_Dashboard {
         $last_name = (string) get_user_meta($user->ID, 'last_name', true);
         $name = trim($first_name . ' ' . $last_name);
         if ($name === '') {
-            $name = $user->display_name ?: $user->user_login;
+            /* ۱٫۱۱٫۰ · P5-D354 — هرگز نام ورود */
+            $name = class_exists('ToPersia_Privacy') ? ToPersia_Privacy::public_name((string) $user->display_name, (int) $user->ID) : (string) $user->display_name;
         }
 
         $mobile = (string) get_user_meta($user->ID, '_topersia_mobile', true);
@@ -112,7 +113,8 @@ final class ToPersia_Dashboard {
             'name'              => $name,
             'avatar'            => $avatar,
             'mobile'            => $mobile,
-            'email'             => $user->user_email,
+            /* ایمیل ساختگیِ حساب پیامکی نمایش داده نمی‌شود  ۱٫۱۱٫۰ */
+            'email'             => (class_exists('ToPersia_Privacy') && ToPersia_Privacy::synthetic_email((string) $user->user_email)) ? '' : $user->user_email,
             'country'           => $country,
             'language'          => $language,
             'travel_style'      => $travel_style,

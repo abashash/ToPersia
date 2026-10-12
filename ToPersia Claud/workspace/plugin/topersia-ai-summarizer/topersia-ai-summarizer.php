@@ -3,7 +3,7 @@
  * Plugin Name:       ToPersia AI Summarizer
  * Plugin URI:        https://topersia.com/
  * Description:       Dedicated for ToPersia: buttons that open AI assistants (ChatGPT, Perplexity, Claude, Grok, Copilot, Gemini, DeepSeek) with a ready structured-summary prompt, plus an on-page AI panel that generates summaries server-side from the current page.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            ToPersia
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TP_AI_VERSION', '1.2.1' );
+define( 'TP_AI_VERSION', '1.2.2' );
 define( 'TP_AI_FILE', __FILE__ );
 define( 'TP_AI_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TP_AI_URL', plugin_dir_url( __FILE__ ) );
@@ -75,6 +75,10 @@ function tp_ai_init() {
 	TP_AI_Summary::init();
 	TP_AI_Core_Bridge::init();
 
+	// 1.2.2 · P5-D355: whenever the settings row is created or saved, keep it out of autoload.
+	add_action( 'added_option', array( 'TP_AI_Options', 'no_autoload' ), 10, 1 );
+	add_action( 'updated_option', array( 'TP_AI_Options', 'no_autoload' ), 10, 1 );
+
 	if ( is_admin() ) {
 		TP_AI_Admin::init();
 	}
@@ -102,7 +106,7 @@ add_action( 'plugins_loaded', 'tp_ai_init_elementor', 20 );
  */
 function tp_ai_activate() {
 	if ( false === get_option( TP_AI_Options::OPTION_KEY ) ) {
-		add_option( TP_AI_Options::OPTION_KEY, TP_AI_Options::defaults() );
+		add_option( TP_AI_Options::OPTION_KEY, TP_AI_Options::defaults(), '', false ); // 1.2.2: keys never autoloaded.
 	}
 
 	TP_AI_DB::install();

@@ -640,6 +640,7 @@ function wp_nonce_field( $action = -1, $name = '_wpnonce', $referer = true, $ech
 }
 
 function wp_remote_post( $url, $args = array() ) {
+	$GLOBALS['tp_http_last'] = array( 'url' => $url, 'args' => $args ); // 1.2.2: what the prompt actually carried
 	if ( isset( $GLOBALS['tp_http_override'] ) ) {
 		$r = $GLOBALS['tp_http_override'];
 		if ( is_a( $r, 'WP_Error' ) ) {

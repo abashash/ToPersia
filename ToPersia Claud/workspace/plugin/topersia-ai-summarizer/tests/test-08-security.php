@@ -50,7 +50,9 @@ preg_match( '/data-tpas-json="([^"]*)"/', $panel, $pm );
 t( 'xss: data-tpas-json attribute does not break out', 1 === preg_match_all( '/class="tpas-ai"/', $panel ) );
 $cfg = json_decode( htmlspecialchars_decode( $pm[1] ), true );
 t( 'xss: config round-trips through esc_attr + json_decode', is_array( $cfg ) && 43 === $cfg['post'] );
-t( 'xss: hostile title preserved only as JSON text content', false !== strpos( $cfg['prompts']['summary'], 'alert(1)' ) );
+/* 1.2.2: the config no longer carries prompts at all (server-side only), so the
+   hostile title cannot be "preserved as JSON text" — it never leaves the server. */
+t( 'xss: hostile title preserved only as JSON text content', false === strpos( $panel, 'alert(1)' ) && false === strpos( $panel, '<script' ) );
 t( 'xss: no raw on* attribute is ever emitted', false === strpos( $panel, 'onclick=' ) && false === strpos( $panel, ' onerror=' ) );
 
 // ---- Formatter cannot inject markup ----------------------------------------
