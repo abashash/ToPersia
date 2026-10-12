@@ -90,3 +90,4 @@ node_modules/
 
 # WPML: صف ثبت رشتهٔ زمان‌اجرا (با هر نمایش صفحه عوض می‌شود؛ OPS-D008)
 /geo/wp-content/languages/wpml/queue/
+/geo/wp-content/uploads/elementor/css/
