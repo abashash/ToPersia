@@ -569,12 +569,19 @@ class TP_AI_Admin {
 		echo '<td>';
 		// 1.2.2 · P5-D355: write-only - the stored key is never printed; an
 		// empty field keeps it, and only the explicit box deletes it.
+		if ( TP_AI_Options::key_from_constant() ) {
+			// 1.2.3 · P5-D355: TOPERSIA_AI_API_KEY in wp-config wins; nothing is stored from this form.
+			echo '<span class="tpas-engine-key-const">' . esc_html__( 'Set in wp-config', 'topersia-ai-summarizer' ) . '</span>';
+			echo '</td>';
+			$has_key = false;
+		} else {
 		echo '<input type="password" name="' . $name_base . '[api_key]" value="" placeholder="' . esc_attr( $has_key ? __( 'Saved — type a new value to change it', 'topersia-ai-summarizer' ) : __( 'Paste API key', 'topersia-ai-summarizer' ) ) . '" autocomplete="new-password">';
 		if ( $has_key ) {
 			echo '<span class="tpas-engine-key-set">' . esc_html__( 'Key saved', 'topersia-ai-summarizer' ) . '</span>';
 			echo '<label class="tpas-engine-key-clear"><input type="checkbox" name="' . $name_base . '[api_key_clear]" value="1"> ' . esc_html__( 'Clear stored key', 'topersia-ai-summarizer' ) . '</label>';
 		}
 		echo '</td>';
+		}
 
 		echo '<td>';
 		echo '<input type="text" name="' . $name_base . '[model]" value="' . esc_attr( $row['model'] ?? '' ) . '">';
