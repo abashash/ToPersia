@@ -1,2 +1,0 @@
-<?php
-return ['items'=>['Review Stats'=>['saveStringInDb'=>true,'cmp'=>['jet-reviews',1],'names'=>[],'urls'=>[]],'Reviews'=>['saveStringInDb'=>true,'cmp'=>['jet-reviews',1],'names'=>[],'urls'=>[]],'Comments'=>['saveStringInDb'=>true,'cmp'=>['jet-reviews',1],'names'=>[],'urls'=>[]],'Review Types'=>['saveStringInDb'=>true,'cmp'=>['jet-reviews',1],'names'=>[],'urls'=>[]],'Settings'=>['saveStringInDb'=>true,'cmp'=>['WordPress',3],'names'=>[],'urls'=>[]]]];
