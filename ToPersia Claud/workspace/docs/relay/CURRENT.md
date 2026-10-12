@@ -9,7 +9,8 @@
 | طرف | مسیرهای در مالکیت | توضیح |
 |---|---|---|
 | ابری | `docs/AUDIT-2026-10/` | ممیزی ۲د، فقط کدخوانی — محلی به این پوشه دست نمی‌زند |
-| محلی هم‌زمان | `plugin/topersia-render` · `plugin/topersia-core` · `tests` · `scripts` (جز `scripts/relay`) | رفع‌ها و کار نقشه/هوا؛ ابری به این مسیرها دست نمی‌زند |
+| ابری ۲ (هم‌زمان) | `plugin/topersia-user-core/` · `plugin/topersia-ai-summarizer/` · `tests/assert-uc.php` | ممیزی/کار جلسهٔ ابری دوم — محلی به این مسیرها دست نمی‌زند |
+| محلی هم‌زمان | `plugin/topersia-render` · `plugin/topersia-core` · `tests` (جز `tests/assert-uc.php`) · `scripts` (جز `scripts/relay`) | رفع‌ها و کار نقشه/هوا؛ ابری به این مسیرها دست نمی‌زند |
 
 > دو طرف هم‌زمان روی یک پرونده کار نمی‌کنند. `from-cloud` هم‌پوشانی را گزارش می‌کند.
 
