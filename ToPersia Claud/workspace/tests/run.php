@@ -7,6 +7,7 @@
 require __DIR__ . '/stubs.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-map.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-weather.php';
+require TP_PLUGIN_DIR . 'includes/topersia-g-panel.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-zones.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-relreg.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-air.php';

@@ -1514,6 +1514,11 @@ html .tp-page .tp-mp__kind{font-size:calc(.74 * var(--tp-rem));line-height:1.4;c
 
 CSS;
 
+/* ترتیب پنل چپ از ثبت‌نامۀ واحد — P5-D347 (وزن بیشتر از بلوک `order` مرجع که پس از این بلوک می‌آید) */
+require_once $ROOT . '/plugin/topersia-render/includes/topersia-g-panel.php';
+$reset = str_replace( "/* ═══ TP-ADDED-END", topersia_g_panel_css() . "
+/* ═══ TP-ADDED-END", $reset );
+
 $head = "@charset \"UTF-8\";\n"
 	. "/* ==========================================================================\n"
 	. "   ToPersia — شیوه‌نامۀ قالب دستۀ G\n"

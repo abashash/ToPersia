@@ -628,7 +628,7 @@ msgstr ""
 msgid "جشنواره و رویداد"
 msgstr ""
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-panel.php
 msgid "جغرافیا"
 msgstr ""
 
@@ -1032,7 +1032,7 @@ msgstr ""
 msgid "زبان و پوشاک"
 msgstr ""
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-panel.php
 msgid "زمان سفر"
 msgstr ""
 

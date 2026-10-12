@@ -2391,6 +2391,11 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 			$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
 		}
 
+		/* نوع غیرمکانی بی والد مکانی: مکان‌های مرتبط از رابطه‌های موجود (استان/شهر/روستا).  P5-D348 */
+		if ( ! $tiles && function_exists( 'topersia_g_geo_related_tiles' ) ) {
+			$tiles = topersia_g_geo_related_tiles( $pid );
+		}
+
 		foreach ( $fields as $name => $raw ) {
 			$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
 		}
@@ -5460,7 +5465,7 @@ if ( ! function_exists( 'topersia_g_rel_zones' ) ) {
 			'practical'  => array( 'rail', 'topersia_g_sc_relgrid', 'tp-practical',  'اطلاعات سفر' ),
 			'border'     => array( 'rail', 'topersia_g_sc_relgrid', 'tp-border',     'گذرهای مرزی' ),
 			'subranges'  => array( 'rail', 'topersia_g_sc_relgrid', 'tp-subranges',  'زیرشاخه‌ها' ),
-			'capital-of' => array( 'rail', 'topersia_g_sc_relgrid', 'tp-capital-of', 'مرکزیت' ),
+			/* «مرکزیت» باکس جدا نیست؛ فقط کاشی درون «اطلاعات جغرافیایی» (`topersia_g_geo_center_tiles`).  P5-D348 */
 			'neighbors'  => array( 'rail', 'topersia_g_sc_relgrid', 'tp-neighbors',  'هم‌مرزها' ),
 			'routes'     => array( 'rail', 'topersia_g_sc_relgrid', 'tp-routes',     'مسیرها' ),
 		);
@@ -5473,6 +5478,42 @@ if ( ! function_exists( 'topersia_g_rel_zones' ) ) {
 	}
 }
 
+/**
+ * ورودی‌های ستون کناری برای `topersia_g_layout` — از ثبت‌نامۀ پنل چپ.  P5-D347
+ *
+ * @return array<int,array|string>
+ */
+if ( ! function_exists( 'topersia_g_panel_entries' ) ) {
+	function topersia_g_panel_entries() {
+
+		$tiles = array(
+			'neighbors',
+			array( 'fn' => 'topersia_g_sc_neighbor_names', 'id' => 'tp-neighbors', 'nav' => '' ),   /* کشورهای همسایه از فیلد متنی — جای «هم‌مرزها»؛ هیچ نوعی هر دو را ندارد.  P5-D281 */
+			array( 'fn' => 'topersia_g_sc_badges', 'id' => 'tp-badges', 'nav' => '' ),
+			'nature',
+			'ancient',
+			'villages',
+			'practical',
+			'routes',
+			'@rest',
+		);
+
+		$out = array();
+
+		foreach ( topersia_g_panel_registry() as $row ) {
+
+			if ( TOPERSIA_G_PANEL_TILES === $row['id'] ) {
+				$out = array_merge( $out, $tiles );
+				continue;
+			}
+
+			/* دکمه‌ها شناسۀ ناحیه ندارند (نوار بخش‌ها و ماتریس نوع‌ها آن را نمی‌شناسند) */
+			$out[] = array( 'fn' => $row['fn'], 'id' => 'tp-actions' === $row['id'] ? '' : $row['id'], 'nav' => $row['nav'] );
+		}
+
+		return $out;
+	}
+}
 /**
  * فهرست نواحی، به همان ترتیبی که در صفحه می‌نشینند.
  *
@@ -5521,7 +5562,6 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 		 */
 		$order = array(
 			'main' => array(
-				array( 'fn' => 'topersia_g_sc_ai',       'id' => 'tp-ai',       'nav' => 'خلاصه هوشمند' ),
 				array( 'fn' => 'topersia_g_sc_overview', 'id' => 'tp-overview', 'nav' => 'درباره' ),
 				array( 'fn' => 'topersia_g_sc_gallery',  'id' => 'tp-gallery',  'nav' => 'گالری' ),
 				'attractions',
@@ -5536,25 +5576,11 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 				array( 'fn' => 'topersia_g_sc_faq',     'id' => 'tp-faq',     'nav' => 'پرسش‌ها' ),
 				array( 'fn' => 'topersia_g_sc_reviews', 'id' => 'tp-reviews', 'nav' => 'نظرها' ),
 			),
-			'rail' => array(
-				array( 'fn' => 'topersia_g_sc_actionbar', 'id' => '',           'nav' => '' ),
-				array( 'fn' => 'topersia_g_sc_map',       'id' => 'tp-map',     'nav' => 'نقشه' ),
-				array( 'fn' => 'topersia_g_sc_seasons',   'id' => 'tp-season',  'nav' => 'زمان سفر' ),
-				array( 'fn' => 'topersia_g_sc_weather',   'id' => 'tp-weather', 'nav' => '' ),
-				array( 'fn' => 'topersia_g_sc_air',       'id' => 'tp-aqi',     'nav' => '' ),   /* کیفیت هوا زیر کارت هوا — P5-D345 */
-				array( 'fn' => 'topersia_g_sc_audio',     'id' => 'tp-audio',   'nav' => 'روایت‌ها' ),   /* P5-D227 */
-				array( 'fn' => 'topersia_g_sc_facts',     'id' => 'tp-geo',     'nav' => 'جغرافیا' ),
-				array( 'fn' => 'topersia_g_sc_badges',    'id' => 'tp-badges',  'nav' => '' ),
-				'nature',
-				'ancient',
-				'villages',
-				'practical',
-				'neighbors',
-				/* کشورهای همسایه از فیلد متنی — جای «هم‌مرزها»؛ هیچ نوعی هر دو را ندارد.  P5-D281 */
-				array( 'fn' => 'topersia_g_sc_neighbor_names', 'id' => 'tp-neighbors', 'nav' => '' ),
-				'routes',
-				array( 'fn' => 'topersia_g_sc_sources', 'id' => 'tp-sources', 'nav' => 'منابع' ),
-			),
+			/*
+			 * پنل چپ از ثبت‌نامۀ واحد (`topersia_g_panel_registry`): ترتیب DOM = ترتیب موبایل؛ دسکتاپ فقط با CSS order.
+			 * «باکس‌های کاشی هم‌جوار» جای نشانۀ `@tiles` می‌نشینند: هم‌مرزها اول، سپس باقی با ترتیب فعلی‌شان.  P5-D347
+			 */
+			'rail' => topersia_g_panel_entries(),
 		);
 
 		$layout = array( 'main' => array(), 'rail' => array() );
@@ -5564,6 +5590,12 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 			$named = array();
 
 			foreach ( $list as $entry ) {
+				if ( is_string( $entry ) && '@rest' !== $entry ) {
+					$named[ $entry ] = true;
+				}
+			}
+
+			foreach ( $list as $entry ) {
 
 				if ( is_array( $entry ) ) {
 					$entry['atts']     = array();
@@ -5571,7 +5603,18 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 					continue;
 				}
 
-				$named[ $entry ] = true;
+				if ( '@rest' === $entry ) {
+
+					/* آنچه نامش در فهرست مرجع نبود (گذر مرزی، زیرشاخه‌ها، …) همین‌جا، پیش از روایت — نه ته ستون */
+					foreach ( $rel[ $col ] as $key => $zone ) {
+						if ( empty( $named[ $key ] ) ) {
+							$named[ $key ]    = true;
+							$layout[ $col ][] = $zone;
+						}
+					}
+
+					continue;
+				}
 
 				if ( isset( $rel[ $col ][ $entry ] ) ) {
 					$layout[ $col ][] = $rel[ $col ][ $entry ];

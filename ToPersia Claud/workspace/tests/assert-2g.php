@@ -170,13 +170,15 @@ tp441_mut( 'شیوه‌نامهٔ جعبه: رنگ رده فقط از توکن -
 	},
 	$css2g, str_replace( 'color:var(--tp-aqi-3)}', 'color:#cc5500}', $css2g ) );
 
-tp441_mut( 'چیدمان: «کیفیت هوا» (tp-aqi) بلافاصله پس از کارت آب‌وهوا در ستون کنار؛ کشور از ماتریس خاموش دارد؛ سرویس در هستهٔ ردهٔ رایگان روشن (با پرچم تجاری و بی کلید پولی خودش off می‌شود)',
+$panel2g = file_get_contents( TP_PLUGIN_DIR . '/includes/topersia-g-panel.php' );
+$svc2g   = file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-services.php' );
+tp441_mut( 'چیدمان: «کیفیت هوا» (tp-aqi) بلافاصله پس از کارت آب‌وهوا در ثبت‌نامهٔ پنل چپ؛ کشور از ماتریس خاموش دارد؛ سرویس در هستهٔ ردهٔ رایگان روشن (با پرچم تجاری و بی کلید پولی خودش off می‌شود)',
 	function ( $x ) {
-		return 1 === preg_match( "/'id' => 'tp-weather', 'nav' => '' \),\s*array\( 'fn' => 'topersia_g_sc_air',\s*'id' => 'tp-aqi'/u", $x[0] )
-			&& false !== strpos( $x[0], "'off'   => array( 'tp-weather', 'tp-routing', 'tp-aqi' )," ) && false !== strpos( $x[1], "'provider' => 'open-meteo-aq', 'enabled' => true )" );
+		return 1 === preg_match( "/'id' => 'tp-weather'[^\n]*\n\s*array\( 'id' => 'tp-aqi'/u", $x[0] )
+			&& false !== strpos( $x[1], "'off'   => array( 'tp-weather', 'tp-routing', 'tp-aqi' )," ) && false !== strpos( $x[2], "'provider' => 'open-meteo-aq', 'enabled' => true )" );
 	},
-	array( $zones2g, file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-services.php' ) ),
-	array( str_replace( "'id' => 'tp-aqi'", "'id' => 'tp-x'", $zones2g ), file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-services.php' ) ) );
+	array( $panel2g, $zones2g, $svc2g ),
+	array( str_replace( "'id' => 'tp-aqi'", "'id' => 'tp-x'", $panel2g ), $zones2g, $svc2g ) );
 
 tp441_mut( 'جعبهٔ هوا: متن لاتین (US AQI · PM2.5 · PM10) در `<span dir="ltr">` بی‌کلاس (همان شیوهٔ مجاز صفحه در راست‌به‌چپ؛ قاعدهٔ ۲٫۰٫۸ فقط dir وارونهٔ غیرمجاز را می‌گیرد)، نه روی عنصرهای ساختار',
 	function ( $x ) { return 3 === substr_count( $x, '<span dir="ltr">' ) && false === strpos( $x, '<dt dir=' ) && false === strpos( $x, 'tp-air__unit" dir=' ); },

@@ -50,10 +50,7 @@ tp441_mut( 'پیوند بخش ستون کناریِ چسبان: اگر در دی
 	},
 	$js2f, str_replace( 'if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {', 'if ( Math.abs( y - aim ) > 2 ) {', $js2f ) );
 
-/* assert.php پیش‌تر `topersia_g_layout` را برای آزمون خودش خالی کرده؛ قلاب این ماژول را دوباره می‌گذاریم (در سایت از بارگذاری می‌ماند) */
-if ( empty( $GLOBALS['tp_filters']['topersia_g_layout'] ) || ! in_array( 'topersia_g_relreg_layout', $GLOBALS['tp_filters']['topersia_g_layout'], true ) ) {
-	$GLOBALS['tp_filters']['topersia_g_layout'][] = 'topersia_g_relreg_layout';
-}
+/* ثبت‌نامهٔ پنل چپ (includes/topersia-g-panel.php) جای باکس شهرهای مسیر را می‌دهد؛ دیگر قلابی نیست (P5-D347) */
 
 /* ── دنیای آزمون: کشور ۸۰۰۱ ← استان ۸۰۰۲ ← شهرستان (بی‌صفحه) ۸۰۰۳ ← شهر ۸۰۰۴ ← روستا ۸۰۰۹؛ آب ۸۰۰۵؛ بنا ۸۰۰۶؛ همجوار ۸۰۰۷ */
 $f2_keep_posts = $GLOBALS['tp_posts'];

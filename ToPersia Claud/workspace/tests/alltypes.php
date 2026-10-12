@@ -163,6 +163,7 @@ if ( ! function_exists( 'get_post_comments_feed_link' ) ) {
 
 require TP_PLUGIN_DIR . 'includes/topersia-g-map.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-weather.php';
+require TP_PLUGIN_DIR . 'includes/topersia-g-panel.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-zones.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-relreg.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-air.php';
@@ -460,10 +461,10 @@ $relmap  = topersia_g_relmap();
  * ناحیۀ ناشناس، ترتیب وارونه، یا بخشی بی هیچ محتوا = ایراد.
  */
 $TP_ORDER = array(
-	'main' => array( 'tp-ai', 'tp-overview', 'tp-gallery', 'tp-attractions', 'tp-places', 'tp-provinces', 'tp-districts', 'tp-programmes', 'tp-prog-', 'tp-culture', 'tp-news', 'tp-faq', 'tp-reviews' ),
-	'rail' => array( 'tp-actions', 'tp-map', 'tp-season', 'tp-weather', 'tp-audio', 'tp-geo', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-neighbors', 'tp-routes', 'tp-sources', 'tp-border', 'tp-subranges', 'tp-capital-of' ),
+	'main' => array( 'tp-overview', 'tp-gallery', 'tp-attractions', 'tp-places', 'tp-provinces', 'tp-districts', 'tp-programmes', 'tp-prog-', 'tp-culture', 'tp-news', 'tp-faq', 'tp-reviews' ),
+	/* پنل چپ: ترتیب DOM = ترتیب موبایل (P5-D347)؛ «مرکزیت» باکس جدا نیست (P5-D348) */
+	'rail' => array( 'tp-actions', 'tp-ai', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-routes', 'tp-border', 'tp-subranges', 'tp-audio', 'tp-sources' ),
 );
-
 function tp_at_order_bad( $html ) {
 
 	$bad = array();

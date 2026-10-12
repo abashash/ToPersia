@@ -195,7 +195,7 @@ t( 'رابطه: ۷۵ از طبیعت به روستاها رفت',
 	! in_array( 75, $pv_nature, true ) && 'children' === rd( 'tp_province', 'villages', 75 ) );
 
 /* گارد کلید بی‌صدا — دقیقاً همان اشتباهی که فهرست ثابت چیدمان می‌ساخت */
-$allowed = array_merge( array_keys( topersia_g_rel_zones() ), array( 'capital', 'crumbs' ) );
+$allowed = array_merge( array_keys( topersia_g_rel_zones() ), array( 'capital', 'crumbs', 'capital-of' ) );   /* «مرکزیت» باکس جدا نیست؛ کاشی درون «اطلاعات جغرافیایی» (P5-D348) */
 $orphan  = array();
 foreach ( $relmap as $pt => $groups ) {
 	foreach ( $groups as $g => $ignored ) {
@@ -210,7 +210,7 @@ $pg_prov = r( 20, 'tp_page' );
 $pg_city = r( 30, 'tp_page' );
 t( 'چیدمان: شهر بخش محله‌ها می‌گیرد — پیش از نقشهٔ نوع‌محور هرگز نمی‌گرفت',
 	false !== strpos( $pg_city, 'tp-districts' ) );
-t( 'چیدمان: شهر بخش مرکزیت می‌گیرد', false !== strpos( $pg_city, 'tp-capital-of' ) );
+t( 'چیدمان: شهر باکس جدای مرکزیت نمی‌گیرد — مرکزیت فقط کاشی درون «اطلاعات جغرافیایی» است (P5-D348)', false === strpos( $pg_city, 'tp-capital-of' ) );
 t( 'چیدمان: شهر بخش گذر مرزی می‌گیرد', false !== strpos( $pg_city, 'tp-border' ) );
 t( 'چیدمان: استان بخش روستاها گرفت', false !== strpos( $pg_prov, 'tp-villages' ) );
 /* بخش `#places` مرجع — مرکز استان و شهرستان‌ها با هم.  P5-D215 */
@@ -1365,12 +1365,12 @@ $sec_order = function ( $html, $col ) {
 	return $ids[1];
 };
 
-t( 'چیدمان: ستون اصلی ai · overview · gallery · attractions · places · culture · faq · reviews',
-	array( 'ai', 'overview', 'gallery', 'attractions', 'places', 'culture', 'faq', 'reviews' ) === $sec_order( $p20, 'main' ),
+t( 'چیدمان: ستون اصلی overview · gallery · attractions · places · culture · faq · reviews (ToPersia AI به پنل چپ رفت — P5-D347)',
+	array( 'overview', 'gallery', 'attractions', 'places', 'culture', 'faq', 'reviews' ) === $sec_order( $p20, 'main' ),
 	implode( ' · ', $sec_order( $p20, 'main' ) ) );
 
-t( 'چیدمان: ستون کناری به ترتیب بند ۲',
-	array( 'actions', 'map', 'season', 'weather', 'audio', 'geo', 'badges', 'nature', 'ancient', 'villages', 'practical', 'neighbors', 'routes', 'sources' ) === $sec_order( $p20, 'rail' ),
+t( 'چیدمان: پنل چپ — ترتیب DOM = ترتیب موبایل (ثبت‌نامهٔ واحد، P5-D347)',
+	array( 'actions', 'ai', 'map', 'weather', 'season', 'geo', 'neighbors', 'badges', 'nature', 'ancient', 'villages', 'practical', 'routes', 'audio', 'sources' ) === $sec_order( $p20, 'rail' ),
 	implode( ' · ', $sec_order( $p20, 'rail' ) ) );
 
 /* ── پوسته و سه کارتِ شکل‌دار ─────────────────────────────────── */
@@ -2164,6 +2164,7 @@ require __DIR__ . '/assert-2e.php';
 require __DIR__ . '/assert-2f.php';
 require __DIR__ . '/assert-2g.php';
 require __DIR__ . '/assert-2h.php';
+require __DIR__ . '/assert-2i.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────
