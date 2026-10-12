@@ -69,7 +69,7 @@ class TP_AI_Options {
 			'internal_default_type' => 'summary',
 			'internal_auto_first'  => 0,
 			// 1.3.0 · P5-D358: summaries are made by the site admin only.
-			'visitor_requests'     => 0,  // «اجازهٔ درخواست بازدیدکننده (نسخه‌های بعد)» — off: only an editor of the post generates.
+			'visitor_requests'     => 0,  // «اجازۀ درخواست بازدیدکننده (نسخه‌های بعد)» — off: only an editor of the post generates.
 			'auto_generate'        => 0,  // generate in the queue after publish / content change.
 			'admin_daily_cap'      => 50, // admin-side generations (metabox, bulk, auto) per day.
 			'panel_position'       => 'manual',

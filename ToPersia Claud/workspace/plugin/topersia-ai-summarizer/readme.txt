@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.2.3
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,20 @@ The key is stored in the `tpas_settings` option, never printed, and kept when yo
 Yes by default, with `rel="noopener nofollow"`, both configurable.
 
 == Changelog ==
+
+= 1.3.0 =
+* P5-D358 - the AI summary of a page is made by the site admin only, in WordPress, with the engine chosen in the settings. No visitor (guest or logged in) asks for a generation, so API tokens and cost do not grow with traffic.
+* `tpas_ai_generate` answers only a user who can `edit_post` that very post, with the `tpas_ai` nonce; a guest, a subscriber or an editor of another post gets 403 and no engine call. The rule runs at priority 0, before ToPersia Render's daily-cap gate, so a refused request is never counted.
+* New setting "Allow visitor requests (later versions)", off by default. While off, no other path generates: the page view no longer builds an internal-engine output, and the front-end script sends no generation request (`gen` in the panel config; `tpasFront.gen`). On, it restores the 1.2.x logged-in path.
+* Metabox "ToPersia AI": the state of each output type in this post's language (Not made · Fresh · Stale) and a Generate / Regenerate button (admin AJAX `tpas_admin_generate`, nonce `tpas_admin_gen`).
+* Bulk action "Generate AI summary" in the posts list of the enabled types: jobs in the ToPersia Core queue (Action Scheduler, P5-D290, hook `tpas_generate`), each post in its own language, no rebuild of a fresh output, up to the new "Admin generations per day" (default 50). Without the queue: a small batch now (3) and a report.
+* New setting "Generate automatically after publishing or a content change", off by default; on, the same queue and the same cap - never inline.
+* The site daily cap of ToPersia Render (work C) applies to every admin path too; an engine call is counted once, at the attempt.
+* An unpublished post or translation has no summary.
+* New stable read API `tpas_get_summary( $post_id, $type, $lang )` - stored outputs only, never an engine call or a job (see "Reading a summary").
+* `TP_AI_Summary::produce()` - the one place that builds an output with the configured engine; shared by the editor request and the admin paths.
+* Translations: fa_IR and ar for every new string.
+* Tests: tests/test-13-admin-only-130.php - each claim also runs against a mutant that must fail; earlier visitor-path claims run with the visitor option on.
 
 = 1.2.3 =
 * Security - P5-D355 (R56): the API key can be pinned in wp-config with `TOPERSIA_AI_API_KEY`; the constant wins over any stored key, the engine's key field then reads "Set in wp-config" and saving the settings stores nothing from the form. The key is no longer passed to the public `tpas_api_payload` filter in any of the three protocols: the filter runs without it (it still gets the body and a keyless endpoint) and the key is added to the request after it.

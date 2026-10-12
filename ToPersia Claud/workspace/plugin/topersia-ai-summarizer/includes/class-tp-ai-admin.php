@@ -303,7 +303,7 @@ class TP_AI_Admin {
 	}
 
 	/**
-	 * «ساخت خلاصهٔ هوش مصنوعی» in the posts list of every enabled type.
+	 * «ساخت خلاصۀ هوش مصنوعی» in the posts list of every enabled type.
 	 *
 	 * @return void
 	 */
