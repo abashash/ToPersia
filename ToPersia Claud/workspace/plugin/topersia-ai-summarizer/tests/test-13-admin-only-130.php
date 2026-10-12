@@ -281,3 +281,44 @@ t( 'P5-D358: tpas_get_summary() makes zero engine calls and queues nothing, ever
 	0 === $tp130_traffic && '' !== $m6 && $GLOBALS['tp_http_calls'] + $GLOBALS['tp130_replies'] >= 1 );
 $tp130_opts( array( 'visitor_requests' => 0, 'auto_generate' => 0 ) );
 $tp130_clear();
+
+/* ── بند ۴ — the visitor-side script sends no generation request ───────── */
+
+$tp130_js = (string) file_get_contents( TP_AI_PATH . 'assets/js/topersia-ai.js' );
+/** Inside generate(): the `gen` guard returns before any fetch(). */
+function tp130_js_guarded( $js ) {
+	if ( ! preg_match( '/function generate\(panel, type\) \{(.*?)\n\t\}\n/s', $js, $m ) ) {
+		return false;
+	}
+	$guard = strpos( $m[1], 'if (!cfgData.gen) {' );
+	$fetch = strpos( $m[1], 'fetch(' );
+	return false !== $guard && false !== $fetch && $guard < $fetch && 1 === preg_match( '/if \(!cfgData\.gen\) \{\s*return;\s*\}/', $m[1] );
+}
+$tp130_js_mut = str_replace( "if (!cfgData.gen) {\n\t\t\treturn;\n\t\t}", '', $tp130_js );
+t( 'P5-D358: topersia-ai.js - generate() returns before fetch() unless the panel says gen; mutant without the guard fails',
+	tp130_js_guarded( $tp130_js ) && $tp130_js_mut !== $tp130_js && ! tp130_js_guarded( $tp130_js_mut ) );
+t( 'P5-D358: topersia-ai.js - the (never offered) auto path needs gen too', false !== strpos( $tp130_js, 'if (config.auto && config.gen) {' ) );
+
+$tp130_panel_gen = function ( $who, $class = 'TP_AI_Render' ) {
+	$GLOBALS['tp_logged_in'] = 'guest' !== $who;
+	$GLOBALS['tp_cannot']    = 'editor' === $who ? array() : array( 'edit_post' => true );
+	$html = call_user_func( array( $class, 'panel_html' ), array( 'post_id' => 47 ) );
+	$GLOBALS['tp_logged_in'] = true;
+	$GLOBALS['tp_cannot']    = array();
+	if ( ! preg_match( '/data-tpas-json="([^"]*)"/', $html, $m ) ) {
+		return null;
+	}
+	$cfg = json_decode( htmlspecialchars_decode( $m[1] ), true );
+	return is_array( $cfg ) && isset( $cfg['gen'] ) ? (int) $cfg['gen'] : null;
+};
+t( 'P5-D358: panel config - a guest gets no panel, a subscriber gen 0, the editor of the post gen 1 (option off)',
+	null === $tp130_panel_gen( 'guest' ) && 0 === $tp130_panel_gen( 'subscriber' ) && 1 === $tp130_panel_gen( 'editor' ) );
+$m7 = tp130_mutant( 'class-tp-ai-render.php', 'TP_AI_Render', 'M7', "\$may_generate   = TP_AI_Summary::visitor_requests() ||", "\$may_generate   = true ||" );
+t( 'P5-D358: panel config - mutant that always allows gives a subscriber gen 1', '' !== $m7 && 1 === $tp130_panel_gen( 'subscriber', $m7 ) );
+$tp130_opts( array( 'visitor_requests' => 1 ) );
+t( 'P5-D358: panel config - option on -> a visitor gets gen 1 (later versions)', 1 === $tp130_panel_gen( 'subscriber' ) );
+$tp130_opts( array( 'visitor_requests' => 0 ) );
+
+$GLOBALS['tp_localized'] = array();
+TP_AI_Frontend::enqueue_assets();
+t( 'P5-D358: tpasFront.gen is 0 while visitor requests are off', isset( $GLOBALS['tp_localized']['tpasFront']['gen'] ) && 0 === $GLOBALS['tp_localized']['tpasFront']['gen'] );
