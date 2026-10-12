@@ -777,9 +777,9 @@ if ( ! function_exists( 'topersia_render_settings_page' ) ) {
 					<div class="tp-grid">
 						<div class="tp-card">
 							<h2><?php echo esc_html__( 'سقف روزانۀ تولید', 'topersia' ); ?></h2>
-							<p class="hint"><?php echo esc_html__( 'مهمان و ربات فقط خروجی ذخیره‌شده را می‌بینند و هیچ فراخوانی نمی‌سازند. تولید فقط برای کاربر واردشده است؛ خروجی هر پست، نوع و زبان یک‌بار ساخته و برای همه نگه داشته می‌شود و فقط تولیدِ تازه از سقف کم می‌کند. صفر یعنی بسته.', 'topersia' ); ?></p>
+							<p class="hint"><?php echo esc_html__( 'مهمان و ربات فقط خروجی ذخیره‌شده را می‌بینند و هیچ فراخوانی نمی‌سازند. تولید فعلاً فقط برای مدیر است (P5-D358)؛ خروجی هر پست، نوع و زبان یک‌بار ساخته و برای همه نگه داشته می‌شود و فقط تولیدِ تازه از سقف کم می‌کند. صفر یعنی بسته.', 'topersia' ); ?></p>
 							<?php foreach ( array(
-								'ai_user_daily' => array( esc_html__( 'سقف روزانۀ هر کاربر', 'topersia' ), 0, 1000 ),
+								'ai_user_daily' => array( esc_html__( 'سقف روزانۀ هر کاربر — فعلاً بی‌اثر، برای نسخه‌های بعد', 'topersia' ), 0, 1000 ),
 								'ai_site_daily' => array( esc_html__( 'سقف روزانۀ کل سایت', 'topersia' ), 0, 100000 ),
 							) as $tp_key => $tp_f ) : ?>
 								<div class="tp-field">

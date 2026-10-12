@@ -339,14 +339,6 @@ msgid "برآورد مدل CAMS"
 msgstr "CAMS model estimate"
 
 #: includes/topersia-g-zones.php
-msgid "برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید"
-msgstr "Sign up to access more AI features"
-
-#: includes/topersia-g-zones.php
-msgid "برای ساختن خلاصه، «خلاصه مقصد» را بزنید."
-msgstr "To create a summary, press “Destination summary”."
-
-#: includes/topersia-g-zones.php
 msgid "برای نوشتن نظر"
 msgstr "To write a review,"
 
@@ -573,10 +565,6 @@ msgstr "Could not submit."
 #: includes/topersia-g-zones.php
 msgid "ثبت نظر"
 msgstr "Submit review"
-
-#: includes/topersia-g-zones.php
-msgid "ثبت‌نام / ورود"
-msgstr "Sign up / Log in"
 
 #: includes/topersia-g-map.php
 msgid "جاده‌ای"
@@ -1056,6 +1044,10 @@ msgstr "High"
 #: includes/topersia-g-map.php
 msgid "زیرشاخه‌ها"
 msgstr "Sub-ranges"
+
+#: includes/topersia-g-ai.php
+msgid "ساختن خلاصه فعلاً فقط برای مدیر است."
+msgstr "Creating summaries is limited to administrators for now."
 
 #: topersia-render.php
 msgid "ساختن ممکن نشد."

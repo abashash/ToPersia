@@ -338,14 +338,6 @@ msgid "برآورد مدل CAMS"
 msgstr ""
 
 #: includes/topersia-g-zones.php
-msgid "برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید"
-msgstr ""
-
-#: includes/topersia-g-zones.php
-msgid "برای ساختن خلاصه، «خلاصه مقصد» را بزنید."
-msgstr ""
-
-#: includes/topersia-g-zones.php
 msgid "برای نوشتن نظر"
 msgstr ""
 
@@ -571,10 +563,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "ثبت نظر"
-msgstr ""
-
-#: includes/topersia-g-zones.php
-msgid "ثبت‌نام / ورود"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1054,6 +1042,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "زیرشاخه‌ها"
+msgstr ""
+
+#: includes/topersia-g-ai.php
+msgid "ساختن خلاصه فعلاً فقط برای مدیر است."
 msgstr ""
 
 #: topersia-render.php
