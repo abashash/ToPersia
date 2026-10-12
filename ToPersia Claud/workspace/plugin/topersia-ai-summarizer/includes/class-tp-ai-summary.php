@@ -159,6 +159,15 @@ class TP_AI_Summary {
 			wp_send_json_error( array( 'message' => 'No internal engine configured.' ) );
 		}
 
+		/*
+		 * 1.2.3 · P5-D356 (R53): the daily-cap gate (ToPersia Render) steps aside
+		 * whenever get_cached() returns anything - a stale row included - and so
+		 * never counts the rebuild that follows. The rebuild is counted here.
+		 */
+		if ( $cached ) {
+			self::count_rebuild( $user_id );
+		}
+
 		// Build the prompt the user actually requested. The URL is the post's
 		// own permalink in the page language (WPML) - never the browser's.
 		$url_key   = self::post_url( $post, $lang );
@@ -235,6 +244,31 @@ class TP_AI_Summary {
 		) );
 	}
 
+	/**
+	 * Counts a stale-output rebuild against the same daily caps the gate uses
+	 * (per user, per site) and refuses it with 429 once either is full.
+	 *
+	 * @param int $user_id Current user.
+	 * @return void
+	 */
+	private static function count_rebuild( $user_id ) {
+		if ( ! apply_filters( 'tpas_rebuild_counts_cap', true ) ) {
+			return; // The gate counts stale rebuilds itself.
+		}
+
+		if ( ! function_exists( 'topersia_g_ai_cap_check' ) || ! function_exists( 'topersia_g_ai_count' ) ) {
+			return;
+		}
+
+		$why = topersia_g_ai_cap_check( topersia_g_ai_user_used( $user_id ), topersia_g_ai_site_used(), topersia_g_ai_caps() );
+
+		if ( '' !== $why ) {
+			wp_send_json_error( array( 'cap' => $why, 'message' => 'Daily generation cap reached.' ), 429 );
+		}
+
+		topersia_g_ai_count( $user_id );
+	}
+
 	// -----------------------------------------------------------------
 	// Caching helpers
 	// -----------------------------------------------------------------
@@ -262,7 +296,7 @@ class TP_AI_Summary {
 				'model'    => (string) $row->model,
 				'created'  => strtotime( (string) $row->updated_at ),
 				/* هش محتوا پس از ساخت عوض شده؟  P5-D250 */
-				'stale'    => class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::is_stale( $post_id, $type, $lang ),
+				'stale'    => class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::is_stale( $post_id, $type, $lang, (string) ( $row->source ?? 'ai' ) ),
 			);
 		}
 
@@ -301,7 +335,8 @@ class TP_AI_Summary {
 
 		$cached = self::get_cached( $post_id, $type, $lang );
 
-		if ( $cached ) {
+		/* 1.2.3 (R54): ردیف داخلیِ کهنه از نو ساخته می‌شود — هزینه‌ای ندارد */
+		if ( $cached && empty( $cached['stale'] ) ) {
 			return (string) $cached['text'];
 		}
 
@@ -334,6 +369,10 @@ class TP_AI_Summary {
 
 		if ( $post_id ) {
 			TP_AI_DB::save_summary( $post_id, $type, $lang, $text, $provider, $model, $source );
+
+			if ( 'internal' === $source && class_exists( 'TP_AI_Core_Bridge' ) ) {
+				TP_AI_Core_Bridge::stamp( $post_id, $type, $lang ); // 1.2.3 (R54): ردیف داخلی هم هش می‌گیرد
+			}
 		}
 
 		$key = '_tpas_ai_' . $type . '_' . $lang;

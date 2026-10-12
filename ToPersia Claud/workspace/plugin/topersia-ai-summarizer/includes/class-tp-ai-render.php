@@ -283,6 +283,11 @@ class TP_AI_Render {
 
 		$cached = TP_AI_Summary::get_cached( $post_id, $default_type, $lang );
 
+		/* 1.2.3 (R54): خروجی داخلیِ کهنه به مهمان نمی‌رسد؛ از نو ساخته می‌شود */
+		if ( $cached && ! empty( $cached['stale'] ) && $serve_internal ) {
+			$cached = null;
+		}
+
 		// Internal engine: serve a real, server-side generated result
 		// immediately for whichever type is already cached - still only on
 		// a page where the panel is shown, never as a background/automatic
