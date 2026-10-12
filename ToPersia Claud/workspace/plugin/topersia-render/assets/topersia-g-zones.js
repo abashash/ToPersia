@@ -494,6 +494,9 @@
 			var began  = Date.now();
 			var aim    = -1;
 			var steadyAt = 0;
+			var lastY  = window.pageYOffset || 0;
+			var dir    = 0;
+			var aimedAt = 0;
 
 			/* بخشِ ستون کناریِ چسبان (sticky) هرگز بالای نوار نمی‌رسد: اگر در دید است نمی‌رویم، وگرنه یک‌بار — نه تعقیبِ بی‌پایان */
 			function pinned() {
@@ -518,6 +521,16 @@
 					return;
 				}
 
+				var here = window.pageYOffset || 0;
+
+				/* صفحه را کس دیگری (اسکریپت، نوار پیمایش…) از مسیر ما بیرون برد ← رها کن؛ تعقیب تنها برای تغییر قدِ هدر است نه بازگرداندن صفحه */
+				if ( aim >= 0 && ( ( dir && Date.now() - aimedAt > 400 && ( here - lastY ) * dir < -2 ) || ( steadyAt && Math.abs( here - lastY ) > 2 ) ) ) {
+					goingTo ++;
+					return;
+				}
+
+				lastY = here;
+
 				var y = want();
 
 				if ( pin && aim < 0 ) {
@@ -530,6 +543,8 @@
 
 				if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {
 					aim    = y;
+					aimedAt = Date.now();
+					dir    = y > here ? 1 : ( y < here ? -1 : 0 );
 					steadyAt = 0;
 					window.scrollTo( { top: y, behavior: calm() ? 'auto' : 'smooth' } );
 				} else if ( Math.abs( ( window.pageYOffset || 0 ) - aim ) <= 1 ) {
