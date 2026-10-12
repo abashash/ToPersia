@@ -285,8 +285,8 @@ t( 'منتشرشده: صفحۀ هم‌مرزِ فارسی اصفهان را یک
 
 $v441 = array(
 	'render'     => array( TP_PLUGIN_DIR . 'topersia-render.php', '4.5.1', array( '/^ \* Version:\s*(\S+)/m', "/define\( 'TOPERSIA_RENDER_VERSION', '([^']+)' \)/" ) ),
-	'user-core'  => array( dirname( TP_PLUGIN_DIR ) . '/topersia-user-core/topersia-user-core.php', '1.10.4', array( '/^ \* Version:\s*(\S+)/m', "/define\('TOPERSIA_USER_CORE_VERSION', '([^']+)'\)/" ) ),
-	'summarizer' => array( dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/topersia-ai-summarizer.php', '1.2.1', array( '/^\s*\*\s*Version:\s*(\S+)/m', "/define\(\s*'TP_AI_VERSION',\s*'([^']+)'/" ) ),
+	'user-core'  => array( dirname( TP_PLUGIN_DIR ) . '/topersia-user-core/topersia-user-core.php', '1.11.0', array( '/^ \* Version:\s*(\S+)/m', "/define\('TOPERSIA_USER_CORE_VERSION', '([^']+)'\)/" ) ),
+	'summarizer' => array( dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/topersia-ai-summarizer.php', '1.2.3', array( '/^\s*\*\s*Version:\s*(\S+)/m', "/define\(\s*'TP_AI_VERSION',\s*'([^']+)'/" ) ),
 	'core'       => array( dirname( TP_PLUGIN_DIR ) . '/topersia-core/topersia-core.php', '4.13.1', array(
 		'/^ \* Version:\s*(\S+)/m',
 		"/define\( 'TOPERSIA_CORE_VERSION', '([^']+)' \);/",

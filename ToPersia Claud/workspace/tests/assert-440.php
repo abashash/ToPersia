@@ -513,23 +513,7 @@ t( 'ۀ: مولد در پایان «هٔ»ِ توضیح‌های منتقل‌ش�
    مجموعهٔ خودش اجرا می‌شود. افتادن‌های پیش از ورود به workspace فهرست
    بسته‌اند و فقط گزارش می‌شوند؛ هر افتادنِ تازه، یا هر افتادن در گروه
    فاز ۱، این ادعا را می‌اندازد. */
-$ai_known440 = array(
-	/* «sanitize: temperature 7 -> 0.7» رفت: ۲٫۷ (۴٫۴٫۱) دما را درست کرد و آزمونش قاعدۀ تازه را می‌سنجد */
-	'get_icon: brand and neutral differ',
-	'panel: config has the three prompts',
-	'panel: config keeps placeholders replaced',
-	'panel: config exposes engine links',
-	'panel: disabled engine keeps key flag off',
-	'panel: no key -> state is nokey with a code block',
-	'panel: configured -> generate CTA',
-	'panel: configured -> key flag on',
-	'panel: auto flag on when configured',
-	'ajax: network error surfaced',
-	'ajax: rate limited after threshold',
-	'shortcode: [tpas_ai] renders the panel',
-	'xss: hostile title preserved only as JSON text content',
-	'xss: markdown link protocol stripped',
-);
+$ai_known440 = array();   /* ۱٫۲٫۳: مجموعهٔ خلاصه‌ساز کاملاً سبز است؛ فهرست افتادن‌های شناخته‌شده خالی */
 exec( escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( $root440 . '/plugin/topersia-ai-summarizer/tests/run.php' ) . ' 2>&1', $ai_out440 );
 $ai_group440 = '';
 $ai_new440   = array();
