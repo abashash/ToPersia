@@ -32,6 +32,26 @@ The AI wording (heading, structured prompt and panel UI) is provided out of the 
 * Auto-insertion by position with per-post override boxes in the editor
 * Anonymous click tracking (optional) with per-post and global totals
 
+= Who makes the summaries (1.3.0 · P5-D358) =
+
+Only the site admin, in WordPress, with the engine chosen in the settings. No visitor - guest or logged in - asks for a generation, so API tokens and cost stay under the admin's control.
+
+* Metabox "ToPersia AI" in the post editor: the state of each output type in this post's language (Not made · Fresh · Stale) and a Generate / Regenerate button.
+* Bulk action "Generate AI summary" in the posts list of every enabled type: jobs go to the ToPersia Core queue (Action Scheduler, group `topersia`, hook `tpas_generate`), each post in its own language, fresh outputs are not rebuilt, up to "Admin generations per day". Without the queue, a small batch runs at once and the rest is reported.
+* "Generate automatically after publishing or a content change" (off by default): the same queue, the same cap.
+* The site daily cap of ToPersia Render also applies to every admin path.
+* An unpublished post or translation has no summary.
+* `tpas_ai_generate` answers only a user who can `edit_post` that post (nonce `tpas_ai`); everyone else gets 403 before any engine call. "Allow visitor requests (later versions)" is off by default; while off, no other path generates and the front-end script sends no generation request.
+
+= Reading a summary: tpas_get_summary() =
+
+`tpas_get_summary( int $post_id, string $type = 'summary', string $lang = '' )` - the stable read API for themes and ToPersia Render.
+
+* `$type`: `summary`, `keypoints` or `plan`. `$lang`: a language code; empty = the post's own language (WPML).
+* Returns `array( 'text' => string, 'html' => string, 'stale' => bool, 'updated' => int )` or `null` (nothing stored, unknown type, unpublished post).
+* `html` is the formatted, escaped output; `stale` is true when the post content changed after the output was made - the caller decides whether to show it.
+* Reads the store only: it never generates, never calls an engine and never queues a job, whoever is viewing.
+
 =Filters=
 
 The plugin exposes filters such as `tpas_services`, `tpas_service_url`, `tpas_prompt`, `tpas_context`, `tpas_panel_html`, `tpas_buttons_html`, `tpas_api_payload`, `tpas_api_request_args` and more. See the code docblocks for details.

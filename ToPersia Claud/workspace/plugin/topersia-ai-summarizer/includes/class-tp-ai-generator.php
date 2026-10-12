@@ -301,3 +301,46 @@ class TP_AI_Generator {
 		self::enqueue( array( (int) $post_id ) );
 	}
 }
+
+if ( ! function_exists( 'tpas_get_summary' ) ) {
+	/**
+	 * The stored AI output of a post - the stable read API for ToPersia Render.
+	 * 1.3.0 · P5-D358.
+	 *
+	 * Reads the store only: it never generates, never calls an engine and
+	 * never queues anything, whoever is viewing. A missing output is null; an
+	 * output whose post content changed since it was made is returned with
+	 * `stale` true (the caller decides whether to show it).
+	 *
+	 * @param int    $post_id Post id (published; anything else is null).
+	 * @param string $type    summary · keypoints · plan.
+	 * @param string $lang    Language code; '' = the post's own language.
+	 * @return array|null { text: string, html: string, stale: bool, updated: int }
+	 */
+	function tpas_get_summary( $post_id, $type = 'summary', $lang = '' ) {
+		$post_id = absint( $post_id );
+		$type    = (string) $type;
+
+		if ( ! $post_id || ! in_array( $type, TP_AI_Options::panel_types(), true ) ) {
+			return null;
+		}
+
+		if ( ! TP_AI_Context::published_ids( array( $post_id ) ) ) {
+			return null; // An unpublished post (or translation) has no public summary.
+		}
+
+		$lang   = '' !== (string) $lang ? TP_AI_Localize::sanitize( (string) $lang ) : TP_AI_Generator::post_lang( $post_id );
+		$cached = TP_AI_Summary::get_cached( $post_id, $type, $lang );
+
+		if ( ! $cached || '' === trim( (string) ( $cached['text'] ?? '' ) ) ) {
+			return null;
+		}
+
+		return array(
+			'text'    => (string) $cached['text'],
+			'html'    => TP_AI_Render::format_ai_text( (string) $cached['text'] ),
+			'stale'   => ! empty( $cached['stale'] ),
+			'updated' => (int) ( $cached['created'] ?? 0 ),
+		);
+	}
+}

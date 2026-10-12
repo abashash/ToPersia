@@ -242,3 +242,42 @@ TP_AI_Generator::maybe_auto( 47, get_post( 47 ) );
 t( 'P5-D358: auto-generate on -> jobs in the same queue, never run inline', count( $GLOBALS['tp130_queue'] ) > 0 && 0 === $GLOBALS['tp_http_calls'] + $GLOBALS['tp130_replies'] );
 $tp130_opts( array( 'auto_generate' => 0 ) );
 $tp130_clear();
+
+/* ── بند ۳ — tpas_get_summary(): stored only, never an outside call ──────── */
+
+/** A renamed copy of tpas_get_summary() with one textual mutation. */
+function tp130_fn_mutant( $suffix, $from, $to ) {
+	$src = (string) file_get_contents( TP_AI_PATH . 'includes/class-tp-ai-generator.php' );
+	if ( ! preg_match( '/\tfunction tpas_get_summary\(.*?\n\t}\n/s', $src, $m ) || false === strpos( $m[0], $from ) ) {
+		return '';
+	}
+	$name = 'tpas_get_summary_' . $suffix;
+	eval( str_replace( array( 'function tpas_get_summary(', $from ), array( 'function ' . $name . '(', $to ), $m[0] ) );
+	return $name;
+}
+
+$tp130_opts( array( 'visitor_requests' => 1, 'auto_generate' => 1, 'admin_daily_cap' => 10 ) ); // every door open: still nothing may be made
+$tp130_clear();
+update_post_meta( 47, '_tpas_ai_summary_' . $tp130_lang, array( 'text' => 'Stored **summary**.', 'created' => $tp130_when = time() - 60 ) );
+tp130_reset();
+$GLOBALS['tp_logged_in'] = false; // a guest's page view
+$s_ok   = tpas_get_summary( 47, 'summary', $tp130_lang );
+$s_own  = tpas_get_summary( 47, 'summary' );
+$s_none = tpas_get_summary( 47, 'plan', $tp130_lang );
+$s_bad  = tpas_get_summary( 47, 'evil', $tp130_lang );
+$s_dft  = tpas_get_summary( 43, 'summary', $tp130_lang );
+$GLOBALS['tp_logged_in'] = true;
+$tp130_traffic = $GLOBALS['tp_http_calls'] + $GLOBALS['tp130_replies'] + count( $GLOBALS['tp130_queue'] );
+t( 'P5-D358: tpas_get_summary() is defined', function_exists( 'tpas_get_summary' ) );
+t( 'P5-D358: tpas_get_summary() returns the stored output (text, html, stale, updated); \'\' lang = the post\'s own',
+	is_array( $s_ok ) && 'Stored **summary**.' === $s_ok['text'] && false !== strpos( $s_ok['html'], '<strong>' ) && false === $s_ok['stale'] && $tp130_when === $s_ok['updated'] && $s_ok === $s_own );
+t( 'P5-D358: tpas_get_summary() - missing output, unknown type, unpublished post -> null', null === $s_none && null === $s_bad && null === $s_dft );
+$m6 = tp130_fn_mutant( 'M6', "if ( ! \$cached || '' === trim( (string) ( \$cached['text'] ?? '' ) ) ) {\n\t\t\treturn null;", "if ( ! \$cached || '' === trim( (string) ( \$cached['text'] ?? '' ) ) ) {\n\t\t\tTP_AI_Summary::produce( \$post_id, \$type, \$lang );\n\t\t\treturn null;" );
+tp130_reset();
+if ( '' !== $m6 ) {
+	call_user_func( $m6, 47, 'plan', $tp130_lang );
+}
+t( 'P5-D358: tpas_get_summary() makes zero engine calls and queues nothing, every option on; mutant that builds a missing output calls out',
+	0 === $tp130_traffic && '' !== $m6 && $GLOBALS['tp_http_calls'] + $GLOBALS['tp130_replies'] >= 1 );
+$tp130_opts( array( 'visitor_requests' => 0, 'auto_generate' => 0 ) );
+$tp130_clear();
