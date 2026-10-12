@@ -111,9 +111,16 @@
 				out.appendChild(toolbar);
 			}
 			var msg = panel.tpasMsg || {};
-			toolbar.innerHTML =
-				'<button type="button" class="tpas-ai__regenerate" data-tpas-action="generate">' + (msg.regenerate || '') + '</button>' +
-				'<button type="button" class="tpas-ai__btn--copy" data-tpas-action="copy">' + (msg.copy || '') + '</button>';
+			/* 1.2.3 (R24): labels are set as text, never parsed as markup */
+			toolbar.textContent = '';
+			[['tpas-ai__regenerate', 'generate', msg.regenerate], ['tpas-ai__btn--copy', 'copy', msg.copy]].forEach(function (def) {
+				var b = document.createElement('button');
+				b.type = 'button';
+				b.className = def[0];
+				b.setAttribute('data-tpas-action', def[1]);
+				b.textContent = def[2] || '';
+				toolbar.appendChild(b);
+			});
 		}
 
 		wirePanel(panel);
@@ -125,7 +132,12 @@
 			return;
 		}
 		textWrap.setAttribute('data-tpas-state', 'error');
-		textWrap.innerHTML = '<p class="tpas-ai__error">' + message + '</p>';
+		/* 1.2.3 · P5-D356 (R24): the message comes from the server / provider - text only */
+		var p = document.createElement('p');
+		p.className = 'tpas-ai__error';
+		p.textContent = String(message == null ? '' : message);
+		textWrap.textContent = '';
+		textWrap.appendChild(p);
 	}
 
 	function currentType(panel) {

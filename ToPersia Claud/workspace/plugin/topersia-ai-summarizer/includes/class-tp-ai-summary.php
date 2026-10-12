@@ -128,12 +128,12 @@ class TP_AI_Summary {
 		$cached = self::get_cached( $post, $type, $lang );
 
 		if ( $cached && empty( $cached['stale'] ) ) {
+			self::log_reply( $post, $type, $lang, true, $cached['provider'] ?? '', $cached['model'] ?? '' );
+
 			wp_send_json_success( array(
-				'text'     => $cached['text'],
-				'html'     => TP_AI_Render::format_ai_text( $cached['text'] ),
-				'cached'   => true,
-				'provider' => $cached['provider'] ?? '',
-				'model'    => $cached['model'] ?? '',
+				'text'   => $cached['text'],
+				'html'   => TP_AI_Render::format_ai_text( $cached['text'] ),
+				'cached' => true,
 			) );
 		}
 
@@ -146,12 +146,10 @@ class TP_AI_Summary {
 			}
 
 			wp_send_json_success( array(
-				'text'     => $text,
-				'html'     => TP_AI_Render::format_ai_text( $text ),
-				'cached'   => true,
-				'provider' => '',
-				'model'    => '',
-				'engine'   => 'internal',
+				'text'   => $text,
+				'html'   => TP_AI_Render::format_ai_text( $text ),
+				'cached' => true,
+				'engine' => 'internal',
 			) );
 		}
 
@@ -215,12 +213,12 @@ class TP_AI_Summary {
 				wp_send_json_error( array( 'message' => $failed ? $failed['message'] : $text->get_error_message() ) );
 			}
 
+			self::log_reply( $post, $type, $lang, false, $meta['provider'] ?? '', $meta['model'] ?? '' );
+
 			wp_send_json_success( array(
-				'text'     => $text,
-				'html'     => TP_AI_Render::format_ai_text( $text ),
-				'cached'   => false,
-				'provider' => $meta['provider'] ?? '',
-				'model'    => $meta['model'] ?? '',
+				'text'   => $text,
+				'html'   => TP_AI_Render::format_ai_text( $text ),
+				'cached' => false,
 			) );
 		}
 
@@ -235,13 +233,29 @@ class TP_AI_Summary {
 
 		self::store( $post, $type, $lang, $text, $label, $result['model'] ?? '' );
 
+		self::log_reply( $post, $type, $lang, false, $label, $result['model'] ?? '' );
+
 		wp_send_json_success( array(
-			'text'     => $text,
-			'html'     => TP_AI_Render::format_ai_text( $text ),
-			'cached'   => false,
-			'provider' => $label,
-			'model'    => $result['model'] ?? '',
+			'text'   => $text,
+			'html'   => TP_AI_Render::format_ai_text( $text ),
+			'cached' => false,
 		) );
+	}
+
+	/**
+	 * Server-side record of which engine answered. 1.2.3 · P5-D356 (A04): the
+	 * browser reply no longer names the provider or model (P5-D317 - no engine
+	 * choice is shown); the summaries table keeps both, and this line and the
+	 * action make them reachable for the site owner.
+	 *
+	 * @return void
+	 */
+	private static function log_reply( $post, $type, $lang, $cached, $provider, $model ) {
+		do_action( 'tpas_reply', (int) $post, (string) $type, (string) $lang, (bool) $cached, (string) $provider, (string) $model );
+
+		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
+			error_log( sprintf( 'tpas: post=%d type=%s lang=%s cached=%d provider=%s model=%s', $post, $type, $lang, $cached ? 1 : 0, $provider, $model ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
 	}
 
 	/**
