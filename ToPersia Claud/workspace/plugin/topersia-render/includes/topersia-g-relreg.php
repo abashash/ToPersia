@@ -360,6 +360,11 @@ if ( ! function_exists( 'topersia_g_relreg_layout' ) ) {
 
 if ( function_exists( 'add_filter' ) ) {
 	add_filter( 'topersia_g_layout', 'topersia_g_relreg_layout', 20, 2 );
+
+	/* زنجیرۀ R01 برای نمایۀ مشتق مکانی هسته (استان و شهر هر پست) — P5-D334 */
+	add_filter( 'topersia_geo_index_chain', function ( $chain, $pid ) {
+		return function_exists( 'topersia_g_place_chain' ) ? topersia_g_place_chain( $pid ) : $chain;
+	}, 10, 2 );
 }
 
 if ( function_exists( 'add_shortcode' ) ) {

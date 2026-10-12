@@ -2665,6 +2665,11 @@ if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 		$cfg['lang']   = topersia_g_page_lang();
 		$cfg['locale'] = topersia_g_map_locale();
 
+		/* نشانگرهای استان و شهر (شهرها، جاذبه‌ها، طبیعت · محله‌ها، روستاها) از نمایۀ مشتق هسته  P5-D346 */
+		if ( function_exists( 'topersia_g_map_points_on' ) && topersia_g_map_points_on( $post_id ) ) {
+			$cfg['points'] = esc_url_raw( add_query_arg( 'context', absint( $post_id ), rest_url( 'topersia/v1/map-points' ) ) );
+		}
+
 		return " data-tp-map-cfg='" . esc_attr( wp_json_encode( $cfg ) ) . "'";
 	}
 }

@@ -903,7 +903,8 @@ require_once __DIR__ . '/includes/topersia-cache.php';
 require_once __DIR__ . '/includes/topersia-fold.php';
 require_once __DIR__ . '/includes/topersia-pack.php';
 require_once __DIR__ . '/includes/topersia-i18n-gaps.php';   /* ۱۹-ز گزارش شکاف ترجمه — وصلۀ ۲ج و۱ · P5-D305 */
-require_once __DIR__ . '/includes/topersia-geo.php';         /* مختصات — یک تابع مرکزی برای هوا و نقشه — ۲ه٫۵ · P5-D314 */
+require_once __DIR__ . '/includes/topersia-geo.php';
+require_once __DIR__ . '/includes/topersia-geo-index.php';   /* نمایۀ مشتق مکانی — فقط محلی · P5-D334 */         /* مختصات — یک تابع مرکزی برای هوا و نقشه — ۲ه٫۵ · P5-D314 */
 
 /*
  * صف پس‌زمینۀ واحد — Action Scheduler 3.9.3 بسته‌بندی‌شده در خود هسته (P5-D290).

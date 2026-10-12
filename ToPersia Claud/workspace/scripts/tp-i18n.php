@@ -45,6 +45,7 @@ $FILES = array(
 	'includes/topersia-g-gallery-agg.php',
 	'includes/topersia-g-relreg.php',
 	'includes/topersia-g-air.php',
+	'includes/topersia-g-mappoints.php',
 	'templates/news-list.php',
 );
 

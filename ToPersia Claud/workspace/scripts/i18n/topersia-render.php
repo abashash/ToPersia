@@ -225,6 +225,7 @@ return array(
 	'سرویس کیفیت هوا در دسترس نیست.'  => array( 'en' => 'The air-quality service is unavailable.', 'ar' => 'خدمة جودة الهواء غير متاحة.' ),
 	'پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد.' => array( 'en' => 'The air-quality response has an unexpected shape.', 'ar' => 'استجابة جودة الهواء ليست بالشكل المتوقع.' ),
 	'سرویس کیفیت هوا خاموش است.'      => array( 'en' => 'The air-quality service is off.', 'ar' => 'خدمة جودة الهواء متوقفة.' ),
+	'زمینۀ نقشه نامعتبر است.'          => array( 'en' => 'The map context is invalid.', 'ar' => 'سياق الخريطة غير صالح.' ),
 	'مرکز شهرستان'                    => array( 'en' => 'County seat', 'ar' => 'مركز المقاطعة' ),
 	'شهرهای مسیر'                     => array( 'en' => 'Cities on the route', 'ar' => 'مدن المسار' ),
 	'مرکز استان'                      => array( 'en' => 'Provincial capital', 'ar' => 'مركز المحافظة' ),

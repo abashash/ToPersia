@@ -1,0 +1,162 @@
+{
+    "tp_festival": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_transport": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_calendar": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_currency": {
+        "posts": 2,
+        "valid": 0,
+        "absent": 2,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_route": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_designation": {
+        "posts": 6,
+        "valid": 0,
+        "absent": 6,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_travel_etiquette": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_health_safety": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_local_food": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_handicraft": {
+        "posts": 3,
+        "valid": 0,
+        "absent": 3,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_ancient_site": {
+        "posts": 3,
+        "valid": 3,
+        "absent": 0,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_religious_site": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_monument": {
+        "posts": 11,
+        "valid": 10,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_water_body": {
+        "posts": 1,
+        "valid": 1,
+        "absent": 0,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_mountain": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_village": {
+        "posts": 1,
+        "valid": 1,
+        "absent": 0,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_desert": {
+        "posts": 1,
+        "valid": 0,
+        "absent": 1,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_city": {
+        "posts": 114,
+        "valid": 12,
+        "absent": 101,
+        "outside": 0,
+        "invalid": 1,
+        "duplicate": 0
+    },
+    "tp_province": {
+        "posts": 31,
+        "valid": 31,
+        "absent": 0,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    },
+    "tp_country": {
+        "posts": 1,
+        "valid": 1,
+        "absent": 0,
+        "outside": 0,
+        "invalid": 0,
+        "duplicate": 0
+    }
+}

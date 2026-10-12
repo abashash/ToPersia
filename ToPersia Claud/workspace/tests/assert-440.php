@@ -489,8 +489,8 @@ $rest440 = array();
 foreach ( glob( TP_PLUGIN_DIR . 'includes/*.php' ) as $f ) {
 	$rest440 = array_merge( $rest440, preg_match_all( "/register_rest_route\( 'topersia\/v1', '([^']+)'/", file_get_contents( $f ), $rm ) ? $rm[1] : array() );
 }
-t( 'منتشرشده: تنها REST‌های هستهٔ نمایش `/weather` و `/air` است و فقط مختصات می‌گیرند — شناسهٔ پستی نیست که نشت کند  P5-D247 · P5-D345',
-	array( '/air', '/weather' ) === ( function () use ( $rest440 ) { $r = $rest440; sort( $r ); return $r; } )()
+t( 'منتشرشده: تنها REST‌های هستهٔ نمایش `/weather` و `/air` (مختصات) و `/map-points` (شناسهٔ پستِ منتشرشده؛ فقط منتشرشده برمی‌گرداند) است — شناسهٔ پستی نیست که نشت کند  P5-D247 · P5-D345',
+	array( '/air', '/map-points', '/weather' ) === ( function () use ( $rest440 ) { $r = $rest440; sort( $r ); return $r; } )()
 	&& (bool) preg_match( "/'args'\s*=> array\(\s*'coords' => array\( 'required' => true, 'type' => 'string' \),\s*\),/", file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-weather.php' ) )
 	&& (bool) preg_match( "/'args'\s*=> array\(\s*'lat' => array\( 'required' => true, 'type' => 'string' \),\s*'lng' => array\( 'required' => true, 'type' => 'string' \),\s*\),/", file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-air.php' ) ) );
 

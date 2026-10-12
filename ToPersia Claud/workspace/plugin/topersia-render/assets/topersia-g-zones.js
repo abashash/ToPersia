@@ -2074,6 +2074,12 @@
 			return ready;
 		}
 
+		/* حالت عصر و شب ← سبک تیرۀ Protomaps؛ روز ← روشن. حالت از `data-tp-mode` صفحه (همان کلید کاربر).  P5-D346 */
+		function flavorOf() {
+			var m = document.documentElement.getAttribute( 'data-tp-mode' ) || 'light';
+			return ( 'dark' === m || 'evening' === m ) ? 'dark' : 'light';
+		}
+
 		function style( cfg ) {
 
 			var base = new URL( cfg.base, location.href ).href;
@@ -2081,6 +2087,7 @@
 			return {
 				version: 8,
 				glyphs: base + 'fonts/{fontstack}/{range}.pbf',
+				/* اسپرایت فقط نمادهای جادّه/نشان است؛ نسخۀ تیره‌اش در بسته نیست و روشن برای هر دو سبک می‌ماند */
 				sprite: base + 'sprites/light',
 				sources: {
 					protomaps: {
@@ -2089,8 +2096,150 @@
 						attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">' + ( cfg.attribution || '© OpenStreetMap' ) + '</a>'
 					}
 				},
-				layers: window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( 'light' ), { lang: cfg.lang || 'fa' } )
+				layers: window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( flavorOf() ), { lang: cfg.lang || 'fa' } )
 			};
+		}
+
+		/* ── نشانگرها: آیکون هر خانواده، خوشه‌بندی داخلی GeoJSON خودِ MapLibre، پنجرۀ کوچک  P5-D346 ── */
+		var FAM = {
+			city:       'M3 21h18v-2H3v2zM5 19h2V9H5v10zm6 0h2V5h-2v14zm6 0h2v-7h-2v7z',
+			attraction: 'M12 2 2 8v2h20V8L12 2zM4 11v7h3v-7H4zm6.5 0v7h3v-7h-3zM17 11v7h3v-7h-3zM2 20v2h20v-2H2z',
+			nature:     'M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z',
+			district:   'M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z',
+			village:    'M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3z'
+		};
+
+		function famImage( fam, color, ratio ) {
+
+			var size = Math.round( 34 * ratio );
+			var cv   = document.createElement( 'canvas' );
+			cv.width = cv.height = size;
+
+			var c = cv.getContext( '2d' );
+			c.beginPath();
+			c.arc( size / 2, size / 2, size / 2 - 2 * ratio, 0, Math.PI * 2 );
+			c.fillStyle = color;
+			c.fill();
+			c.lineWidth = 2 * ratio;
+			c.strokeStyle = '#ffffff';
+			c.stroke();
+			c.save();
+			c.translate( size / 2 - 10 * ratio, size / 2 - 10 * ratio );
+			c.scale( 20 * ratio / 24, 20 * ratio / 24 );
+			c.fillStyle = '#ffffff';
+			c.fill( new Path2D( FAM[ fam ] ) );
+			c.restore();
+
+			return c.getImageData( 0, 0, size, size );
+		}
+
+		function safeUrl( u ) {
+			return /^(https?:)?\/\//.test( u ) || '/' === ( u || '' ).charAt( 0 ) ? u : '';
+		}
+
+		function popupNode( p ) {
+
+			var box = document.createElement( 'div' );
+			box.className = 'tp-mp';
+
+			if ( p.i && safeUrl( p.i ) ) {
+				var im = document.createElement( 'img' );
+				im.className = 'tp-mp__img';
+				im.alt       = '';
+				im.loading   = 'lazy';
+				im.src       = p.i;
+				box.appendChild( im );
+			}
+
+			var name = document.createElement( safeUrl( p.u ) ? 'a' : 'span' );
+			name.className   = 'tp-mp__name';
+			name.textContent = p.n || '';
+
+			if ( safeUrl( p.u ) ) {
+				name.setAttribute( 'href', p.u );
+			}
+
+			var kind = document.createElement( 'span' );
+			kind.className   = 'tp-mp__kind';
+			kind.textContent = p.t || '';
+
+			box.appendChild( name );
+			box.appendChild( kind );
+
+			return box;
+		}
+
+		function addPoints( map, ml, box, interactive ) {
+
+			var data = box.tpPoints;
+
+			if ( ! data || ! data.features || ! data.features.length || map.getSource( 'tp-pts' ) ) {
+				return;
+			}
+
+			var tint  = getComputedStyle( box ).getPropertyValue( '--tp-primary' ).trim() || '#0e7c74';
+			var ratio = window.devicePixelRatio >= 2 ? 2 : 1;
+
+			Object.keys( FAM ).forEach( function ( f ) {
+				if ( ! map.hasImage( 'tp-fam-' + f ) ) {
+					map.addImage( 'tp-fam-' + f, famImage( f, tint, ratio ), { pixelRatio: ratio } );
+				}
+			} );
+
+			map.addSource( 'tp-pts', { type: 'geojson', data: data, cluster: true, clusterRadius: 46, clusterMaxZoom: 11 } );
+
+			map.addLayer( { id: 'tp-pts-cluster', type: 'circle', source: 'tp-pts', filter: [ 'has', 'point_count' ],
+				paint: { 'circle-color': tint, 'circle-radius': [ 'step', [ 'get', 'point_count' ], 16, 10, 20, 50, 26 ], 'circle-stroke-width': 2, 'circle-stroke-color': '#ffffff' } } );
+			map.addLayer( { id: 'tp-pts-count', type: 'symbol', source: 'tp-pts', filter: [ 'has', 'point_count' ],
+				layout: { 'text-field': [ 'get', 'point_count_abbreviated' ], 'text-font': [ 'Noto Sans Medium' ], 'text-size': 13, 'text-allow-overlap': true },
+				paint: { 'text-color': '#ffffff' } } );
+			map.addLayer( { id: 'tp-pts-icon', type: 'symbol', source: 'tp-pts', filter: [ '!', [ 'has', 'point_count' ] ],
+				layout: { 'icon-image': [ 'concat', 'tp-fam-', [ 'get', 'k' ] ], 'icon-allow-overlap': true, 'icon-size': 1 } } );
+
+			if ( ! interactive ) {
+				return;
+			}
+
+			var pop = null;
+
+			map.on( 'click', 'tp-pts-cluster', function ( e ) {
+				var f = map.queryRenderedFeatures( e.point, { layers: [ 'tp-pts-cluster' ] } )[ 0 ];
+				map.getSource( 'tp-pts' ).getClusterExpansionZoom( f.properties.cluster_id ).then( function ( z ) {
+					map.easeTo( { center: f.geometry.coordinates, zoom: z } );
+				} ).catch( function () {} );
+			} );
+
+			map.on( 'click', 'tp-pts-icon', function ( e ) {
+
+				var f = e.features && e.features[0];
+
+				if ( ! f ) {
+					return;
+				}
+
+				if ( pop ) { pop.remove(); }
+
+				pop = new ml.Popup( { offset: 18, maxWidth: '240px' } ).setLngLat( f.geometry.coordinates.slice() ).setDOMContent( popupNode( f.properties ) ).addTo( map );
+			} );
+
+			[ 'tp-pts-cluster', 'tp-pts-icon' ].forEach( function ( id ) {
+				map.on( 'mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; } );
+				map.on( 'mouseleave', id, function () { map.getCanvas().style.cursor = ''; } );
+			} );
+		}
+
+		function loadPoints( map, ml, box, cfg, interactive ) {
+
+			if ( ! cfg.points || ! window.fetch ) {
+				return;
+			}
+
+			fetch( cfg.points ).then( function ( r ) { return r.ok ? r.json() : null; } ).then( function ( d ) {
+				if ( d && d.features ) {
+					box.tpPoints = d;
+					addPoints( map, ml, box, interactive );
+				}
+			} ).catch( function () {} );
 		}
 
 		/* یک نقشه با نشانگر؛ تعاملی فقط در مودال. قول با رویداد load وفا می‌شود. */
@@ -2120,8 +2269,26 @@
 					map.addControl( new ml.NavigationControl( { showCompass: false } ), 'top-left' );
 				}
 
+				box.tpFlavor = flavorOf();
+
+				/* تغییر حالت (روز · عصر · شب) در جا: سبک عوض می‌شود و نشانگرها (که با سبک می‌روند) از دادۀ همان دریافت دوباره می‌آیند */
+				if ( window.MutationObserver ) {
+					new MutationObserver( function () {
+						var f = flavorOf();
+						if ( f === box.tpFlavor ) {
+							return;
+						}
+						box.tpFlavor = f;
+						map.setStyle( style( cfg ), { diff: false } );   /* بازبارگذاری کامل ← رویداد style.load؛ با diff نشانگرها بی‌صدا حذف می‌شدند */
+						map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); } );
+					} ).observe( document.documentElement, { attributes: true, attributeFilter: [ 'data-tp-mode' ] } );
+				}
+
 				return new Promise( function ( ok ) {
-					map.once( 'load', function () { ok( map ); } );
+					map.once( 'load', function () {
+						loadPoints( map, ml, box, cfg, interactive );
+						ok( map );
+					} );
 				} );
 			} );
 		}

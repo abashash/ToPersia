@@ -309,7 +309,7 @@ t( 'نقشه: MapLibre نه در head — فقط در load() آداپتور، ک
 	&& false === strpos( file_get_contents( TP_PLUGIN_DIR . 'topersia-render.php' ), 'maplibre' ) );
 
 t( 'نقشه: برچسب به زبان صفحه با fallback به name، متن راست‌به‌چپ، انتساب «© OpenStreetMap»',
-	false !== strpos( $src_js, "window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( 'light' ), { lang: cfg.lang || 'fa' } )" )
+	false !== strpos( $src_js, "window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( flavorOf() ), { lang: cfg.lang || 'fa' } )" )
 	&& false !== strpos( $src_js, "ml.setRTLTextPlugin( b + 'mapbox-gl-rtl-text.js', true )" )
 	&& false !== strpos( $src_js, "url: 'pmtiles://' + cfg.tiles" ) && false !== strpos( $src_js, "'© OpenStreetMap'" ) );
 

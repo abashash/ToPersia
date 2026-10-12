@@ -717,6 +717,18 @@ html .tp-page .tp-air[data-tp-cat="4"] .tp-air__cat{color:var(--tp-aqi-4)}
 html .tp-page .tp-air[data-tp-cat="5"] .tp-air__cat{color:var(--tp-aqi-5)}
 html .tp-page .tp-air[data-tp-cat="6"] .tp-air__cat{color:var(--tp-aqi-6)}
 html .tp-page .tp-air__model{margin:calc(.5 * var(--tp-rem)) 0 0}
+/* ─── نشانگرهای نقشه: پنجرۀ کوچک (P5-D346) — از توکن‌های حالت، نه رنگ ثابت MapLibre ─── */
+html .tp-page .maplibregl-popup-content{background:var(--tp-surface);color:var(--tp-text);border-radius:12px;padding:10px;box-shadow:0 6px 24px rgba(0,0,0,.28)}
+html .tp-page .maplibregl-popup-anchor-top .maplibregl-popup-tip,html .tp-page .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,html .tp-page .maplibregl-popup-anchor-top-right .maplibregl-popup-tip{border-bottom-color:var(--tp-surface)}
+html .tp-page .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,html .tp-page .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,html .tp-page .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip{border-top-color:var(--tp-surface)}
+html .tp-page .maplibregl-popup-anchor-left .maplibregl-popup-tip{border-right-color:var(--tp-surface)}
+html .tp-page .maplibregl-popup-anchor-right .maplibregl-popup-tip{border-left-color:var(--tp-surface)}
+html .tp-page .maplibregl-popup-close-button{color:var(--tp-text);font-size:calc(1.2 * var(--tp-rem));padding:2px 8px}
+html .tp-page .tp-mp{display:grid;gap:6px;inline-size:min(220px,60vw);text-align:start}
+html .tp-page .tp-mp__img{inline-size:100%;block-size:calc(6.5 * var(--tp-rem));object-fit:cover;border-radius:8px;background:var(--tp-soft)}
+html .tp-page .tp-mp__name{font-size:calc(.92 * var(--tp-rem));font-weight:800;line-height:1.5;color:var(--tp-primary-text);text-decoration:none;overflow-wrap:anywhere}
+html .tp-page a.tp-mp__name:hover,html .tp-page a.tp-mp__name:focus-visible{text-decoration:underline}
+html .tp-page .tp-mp__kind{font-size:calc(.74 * var(--tp-rem));line-height:1.4;color:var(--tp-text)}
 .tp-page .tp-wx-fx{
   position:absolute;inset:0;pointer-events:none;
   opacity:0;transition:opacity .6s linear;

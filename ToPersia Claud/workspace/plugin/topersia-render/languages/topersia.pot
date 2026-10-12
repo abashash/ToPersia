@@ -1044,6 +1044,10 @@ msgstr ""
 msgid "زمینۀ تاریخی"
 msgstr ""
 
+#: includes/topersia-g-mappoints.php
+msgid "زمینۀ نقشه نامعتبر است."
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "زیاد"
 msgstr ""

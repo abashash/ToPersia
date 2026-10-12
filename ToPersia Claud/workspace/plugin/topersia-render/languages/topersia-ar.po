@@ -1045,6 +1045,10 @@ msgstr "الشتاء"
 msgid "زمینۀ تاریخی"
 msgstr "الخلفية التاريخية"
 
+#: includes/topersia-g-mappoints.php
+msgid "زمینۀ نقشه نامعتبر است."
+msgstr "سياق الخريطة غير صالح."
+
 #: includes/topersia-g-map.php
 msgid "زیاد"
 msgstr "مرتفع"

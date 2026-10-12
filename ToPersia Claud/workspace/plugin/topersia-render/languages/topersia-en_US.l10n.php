@@ -267,6 +267,7 @@ return array (
     'زمان سفر' => 'When to go',
     'زمستان' => 'Winter',
     'زمینۀ تاریخی' => 'Historical background',
+    'زمینۀ نقشه نامعتبر است.' => 'The map context is invalid.',
     'زیاد' => 'High',
     'زیرشاخه‌ها' => 'Sub-ranges',
     'ساختن ممکن نشد.' => 'Could not generate.',

@@ -1045,6 +1045,10 @@ msgstr "Winter"
 msgid "زمینۀ تاریخی"
 msgstr "Historical background"
 
+#: includes/topersia-g-mappoints.php
+msgid "زمینۀ نقشه نامعتبر است."
+msgstr "The map context is invalid."
+
 #: includes/topersia-g-map.php
 msgid "زیاد"
 msgstr "High"

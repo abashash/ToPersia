@@ -98,6 +98,23 @@ function topersia_geo_dms( $s ) {
  */
 function topersia_geo_point( $raw ) {
 
+	$p = topersia_geo_parse( $raw );
+
+	return 'valid' === $p['status'] ? array( 'lat' => $p['lat'], 'lng' => $p['lng'] ) : null;
+}
+
+/**
+ * تجزیۀ کامل: وضعیت (valid · absent · outside · invalid)، نقطه و نوع شکل (point · polygon · line · list).  P5-D334
+ *
+ * absent = تهی؛ invalid = متنی که هیچ قالبی نمی‌خواندش؛ outside = خوانده شد ولی بیرون از ایران.
+ *
+ * @param mixed $raw مقدار خام geo_coordinates.
+ * @return array status · kind · lat · lng
+ */
+function topersia_geo_parse( $raw ) {
+
+	$none = array( 'status' => 'absent', 'kind' => '', 'lat' => null, 'lng' => null );
+
 	if ( is_array( $raw ) || is_object( $raw ) ) {
 		$raw = wp_json_encode( $raw );
 	}
@@ -105,10 +122,11 @@ function topersia_geo_point( $raw ) {
 	$s = trim( topersia_geo_digits( wp_strip_all_tags( (string) $raw ) ) );
 
 	if ( '' === $s ) {
-		return null;
+		return $none;
 	}
 
 	$point = null;
+	$kind  = 'point';
 
 	if ( '{' === $s[0] || '[' === $s[0] ) {
 
@@ -118,6 +136,7 @@ function topersia_geo_point( $raw ) {
 		if ( is_array( $j ) ) {
 
 			if ( isset( $j['lat'] ) && ( isset( $j['lng'] ) || isset( $j['lon'] ) ) ) {
+				$kind  = 'point';
 				$point = array( (float) $j['lat'], (float) ( isset( $j['lng'] ) ? $j['lng'] : $j['lon'] ) );
 			} else {
 
@@ -126,8 +145,11 @@ function topersia_geo_point( $raw ) {
 				$t   = isset( $geo['type'] ) ? $geo['type'] : '';
 
 				if ( 'Point' === $t && is_array( $c ) && count( $c ) >= 2 ) {
+					$kind  = 'point';
 					$point = array( (float) $c[1], (float) $c[0] );
 				} elseif ( is_array( $c ) ) {
+
+					$kind = ( false !== strpos( (string) $t, 'Polygon' ) ) ? 'polygon' : 'line';
 
 					/* Polygon ← حلقۀ بیرونی؛ MultiPolygon ← نخستین چندضلعی؛ LineString ← خودش */
 					while ( is_array( $c ) && isset( $c[0] ) && is_array( $c[0] ) && isset( $c[0][0] ) && is_array( $c[0][0] ) ) {
@@ -151,7 +173,8 @@ function topersia_geo_point( $raw ) {
 	} elseif ( false !== strpos( $s, ';' ) || ( substr_count( $s, ',' ) > 1 && false === strpos( $s, '°' ) ) ) {
 
 		/* فهرست نقطه‌ها «lat,lng; lat,lng» ← مرکز هندسی شکل */
-		$pts = array();
+		$kind = 'list';
+		$pts  = array();
 
 		foreach ( preg_split( '/\s*;\s*|\s*\n\s*/', $s ) as $pair ) {
 
@@ -187,11 +210,15 @@ function topersia_geo_point( $raw ) {
 		}
 	}
 
-	if ( ! $point || ! is_finite( $point[0] ) || ! is_finite( $point[1] ) || ! topersia_geo_in_iran( $point[0], $point[1] ) ) {
-		return null;
+	if ( ! $point || ! is_finite( $point[0] ) || ! is_finite( $point[1] ) ) {
+		return array( 'status' => 'invalid', 'kind' => '', 'lat' => null, 'lng' => null );
 	}
 
-	return array( 'lat' => round( $point[0], 6 ), 'lng' => round( $point[1], 6 ) );
+	if ( ! topersia_geo_in_iran( $point[0], $point[1] ) ) {
+		return array( 'status' => 'outside', 'kind' => $kind, 'lat' => round( $point[0], 6 ), 'lng' => round( $point[1], 6 ) );
+	}
+
+	return array( 'status' => 'valid', 'kind' => $kind, 'lat' => round( $point[0], 6 ), 'lng' => round( $point[1], 6 ) );
 }
 
 /** نقطۀ یک پست از `geo_coordinates`. */

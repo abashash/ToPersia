@@ -166,6 +166,7 @@ require TP_PLUGIN_DIR . 'includes/topersia-g-weather.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-zones.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-relreg.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-air.php';
+require TP_PLUGIN_DIR . 'includes/topersia-g-mappoints.php';
 
 /* ── اسکین: نوع‌ها، فیلدها، رابطه‌ها ────────────────────────────────── */
 
