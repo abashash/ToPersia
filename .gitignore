@@ -91,3 +91,6 @@ node_modules/
 # WPML: صف ثبت رشتهٔ زمان‌اجرا (با هر نمایش صفحه عوض می‌شود؛ OPS-D008)
 /geo/wp-content/languages/wpml/queue/
 /geo/wp-content/uploads/elementor/css/
+
+# لاگ خام محلی (P5-D284): روی دیسک می‌ماند، در مخزن نه
+/ToPersia Claud/workspace/reference/topersia-log-*.txt
