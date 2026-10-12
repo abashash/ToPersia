@@ -148,6 +148,22 @@ class TP_AI_Options {
 	 *
 	 * @return void
 	 */
+	/**
+	 * Keep the settings row (it holds engine API keys) out of autoload, so the
+	 * keys are not pulled into memory on every request.  1.2.2 · P5-D355
+	 *
+	 * Hooked on added_option / updated_option and called on every schema
+	 * upgrade (TP_AI_DB::install()). Idempotent.
+	 *
+	 * @param string $option Option name (any; only ours is touched).
+	 * @return void
+	 */
+	public static function no_autoload( $option = self::OPTION_KEY ) {
+		if ( self::OPTION_KEY === $option && function_exists( 'wp_set_option_autoload' ) && false !== get_option( self::OPTION_KEY, false ) ) {
+			wp_set_option_autoload( self::OPTION_KEY, false );
+		}
+	}
+
 	public static function flush() {
 		self::$cache = null;
 	}
@@ -552,7 +568,11 @@ class TP_AI_Options {
 
 			$submitted_key = isset( $row['api_key'] ) ? trim( wp_unslash( $row['api_key'] ) ) : '';
 
-			if ( '' !== $submitted_key ) {
+			if ( ! empty( $row['api_key_clear'] ) ) {
+				// 1.2.2 · P5-D355: the only way to delete a stored key is the
+				// explicit "Clear stored key" box - an empty field keeps it.
+				$api_key = '';
+			} elseif ( '' !== $submitted_key ) {
 				$api_key = sanitize_text_field( $submitted_key );
 			} else {
 				// Keep the previously stored key for this exact row (a

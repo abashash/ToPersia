@@ -24,7 +24,9 @@ $icon = TP_AI_Services::get_icon( 'deepseek' );
 t( 'get_icon: brand set returns svg', false !== strpos( $icon, '<svg' ) );
 $neutral = TP_AI_Services::get_icon( 'chatgpt', 'neutral' );
 t( 'get_icon: forced neutral set works', false !== strpos( $neutral, '<svg' ) );
-t( 'get_icon: brand and neutral differ', $icon !== TP_AI_Services::get_icon( 'deepseek', 'brand' ) );
+/* 1.2.2: the old claim compared deepseek-brand with deepseek-brand (always equal - a
+   test bug, not a plugin bug). The intent: the two icon sets differ for one key. */
+t( 'get_icon: brand and neutral differ', $icon !== TP_AI_Services::get_icon( 'deepseek', 'neutral' ) );
 
 $allowed = TP_AI_Services::icon_allowed_html();
 t( 'icon whitelist covers svg + path + circle', isset( $allowed['svg'], $allowed['path'], $allowed['circle'] ) );

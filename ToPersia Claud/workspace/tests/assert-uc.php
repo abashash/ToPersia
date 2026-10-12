@@ -45,6 +45,7 @@ require $UC . 'includes/class-topersia-follow.php';
 require $UC . 'includes/class-topersia-auth.php';
 require $UC . 'includes/class-topersia-jetengine.php';
 require $UC . 'includes/class-topersia-reviews.php';
+require $UC . 'includes/class-topersia-privacy.php';
 
 $pass = 0;
 $fail = 0;
@@ -60,9 +61,9 @@ $src = function ( $rel ) use ( $UC ) { return (string) file_get_contents( $UC . 
 echo "\ntopersia-user-core ۱٫۱۰٫۰\n" . str_repeat( '─', 78 ) . "\n";
 
 /* ── نسخه ── */
-t( 'نسخه: سرآیند و ثابت 1.10.4',
-	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.10.4' )
-	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.10.4');" ) );
+t( 'نسخه: سرآیند و ثابت 1.11.0',
+	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.11.0' )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.11.0');" ) );
 
 /*
  * ── ۱٫۱۰٫۲ — جهت فرم ورود از زبان صفحه  SPRINT-4.4 ۲٫۰٫۸ ──
@@ -316,6 +317,212 @@ t( 'P5-D247 پنل: ذخیره‌ها و دنبال‌شده‌ها بی رمز�
 	&& false !== strpos( $src( 'includes/class-topersia-review-form.php' ), "'' !== (string) \$post->post_password" ) );
 
 list( $GLOBALS['tp_posts'], $GLOBALS['wpdb'], $GLOBALS['tp_filters'] ) = $keep_uc;
+
+
+/* ══ ۱٫۱۱٫۰ — امنیت: P5-D354 (R37) · P5-D355 (R38) ════════════════════
+   هر ادعا روی نسخهٔ منتشرشدهٔ پیشین (dist/topersia-user-core-1.10.4.zip) یا
+   روی جهشِ همین کلاس — بارشده زیر نام دیگر — باید بیفتد. */
+
+$uc_dist = function ( $ver, $rel ) {
+	$zip = new ZipArchive();
+	if ( true !== $zip->open( dirname( __DIR__ ) . '/dist/topersia-user-core-' . $ver . '.zip' ) ) {
+		return '';
+	}
+	$s = $zip->getFromName( 'topersia-user-core/' . $rel );
+	$zip->close();
+	return false === $s ? '' : (string) $s;
+};
+/* کلاس با یک جهش متنی، زیر نام تازه؛ '' اگر جهش جا نیفتاد */
+$uc_mutant = function ( $code, $class, $suffix, $from = '', $to = '' ) {
+	if ( '' !== $from && false === strpos( $code, $from ) ) {
+		return '';
+	}
+	$name = $class . '_' . $suffix;
+	$code = str_replace( array( 'final class ' . $class . ' ', 'class ' . $class . ' ' ), 'final class ' . $name . ' ', '' !== $from ? str_replace( $from, $to, $code ) : $code );
+	eval( '?>' . $code );
+	return class_exists( $name ) ? $name : '';
+};
+
+/* ── R37 — حساب تازه: شماره هرگز در نام ورود، نامک، نام نمایشی یا ایمیل ── */
+$uc_create = function ( $php ) {
+	if ( ! preg_match( '/private function create_user\( string \$mobile \): \?WP_User \{(.*?)\n\t\}/s', $php, $m ) ) {
+		return false;
+	}
+	$body = preg_replace( "#update_user_meta\( \\\$user_id, '_topersia_mobile', \\\$mobile \);#", '', $m[1] );
+	return false === strpos( $body, '$mobile' )
+		&& false !== strpos( $body, 'ToPersia_Privacy::random_login()' ) && false !== strpos( $body, 'ToPersia_Privacy::random_email()' )
+		&& false !== strpos( $body, "'display_name'  => \$neutral" ) && false !== strpos( $body, "'user_nicename' => ToPersia_Privacy::random_nicename()" )
+		&& 1 === substr_count( $m[1], "update_user_meta( \$user_id, '_topersia_mobile', \$mobile );" );
+};
+$auth_src = $src( 'includes/class-topersia-auth.php' );
+$auth_old = $uc_dist( '1.10.4', 'includes/class-topersia-auth.php' );
+t( 'R37 · P5-D354 حساب تازه: نام ورود، ایمیل و نامک تصادفی، نام نمایشی خنثی؛ شماره فقط در متای _topersia_mobile — جهش: ۱٫۱۰٫۴ (tp_{موبایل}) می‌افتد',
+	$uc_create( $auth_src ) && false !== strpos( $auth_old, "\$login = 'tp_' . \$mobile;" ) && ! $uc_create( $auth_old ) );
+
+t( 'R37: پیداکردن حساب از متای _topersia_mobile است، نه نام ورود — پس نام ورود تازه می‌تواند بی شماره باشد',
+	(bool) preg_match( "/private function find_user_by_mobile\( string \\\$mobile \): \?WP_User \{\s*\\\$users = get_users\(\s*array\(\s*'meta_key'\s*=> '_topersia_mobile',/", $auth_src )
+	&& false === strpos( $auth_src, "get_user_by( 'login'" ) );
+
+/* ── R37 — تشخیص شماره: رقم لاتین، فارسی، عربی؛ +98 · 0098 · tp_ ── */
+$phones = array( '09121234567', '+98 912 123 4567', '0098-912-1234567', '۰۹۱۲۱۲۳۴۵۶۷', '٠٩١٢١٢٣٤٥٦٧', '+۹۸۹۱۲۱۲۳۴۵۶۷', 'tp_09121234567', 'tp-09121234567', 'tp_09121234567_2', '9121234567', 'Ali 0912 123 4567' );
+$names  = array( 'علی رضایی', 'Ali Rezaei', 'مسافر ۴۸۲۱', 'Traveler 4821', '2026', '', 'tp-ab12cd34ef56', 'شمارهٔ ۱۲' );
+$uc_detect = function ( $class ) use ( $phones, $names ) {
+	$miss = array_filter( $phones, function ( $p ) use ( $class ) { return ! $class::looks_like_phone( $p ); } );
+	$false = array_filter( $names, function ( $n ) use ( $class ) { return $class::looks_like_phone( $n ); } );
+	return array( $miss, $false );
+};
+list( $miss, $falsepos ) = $uc_detect( 'ToPersia_Privacy' );
+$priv_src = $src( 'includes/class-topersia-privacy.php' );
+$m_digits = $uc_mutant( $priv_src, 'ToPersia_Privacy', 'MD', '$s = self::latin_digits( trim( $s ) );', '$s = trim( $s );' );
+list( $miss_m ) = $m_digits ? $uc_detect( $m_digits ) : array( array() );
+t( 'R37: شمارهٔ ایرانی با هر رقم و جداکننده و نام tp_<رقم> شناخته می‌شود، نام واقعی و نام خنثی نه — جهش بی تبدیل رقم فارسی/عربی می‌افتد',
+	! $miss && ! $falsepos && '' !== $m_digits && count( $miss_m ) >= 3,
+	'جا ماند: ' . implode( ' · ', $miss ) . ' | اشتباه: ' . implode( ' · ', $falsepos ) );
+
+/* ── R37 — نام خنثی از کاتالوگ، به زبان صفحه ── */
+$n_fa = ToPersia_Privacy::neutral_name( 7, 'fa' );
+$n_en = ToPersia_Privacy::neutral_name( 7, 'en' );
+$n_ar = ToPersia_Privacy::neutral_name( 7, 'ar' );
+$num  = ToPersia_Privacy::number( 7 );
+t( 'R37: نام خنثی — «مسافر ۴۸۲۱» · «Traveler 4821» · «مسافر ٤٨٢١»؛ پایدار؛ کلید traveler_name در واژه‌نامهٔ سه‌زبانه',
+	(bool) preg_match( '/^مسافر [۰-۹]{4}$/u', $n_fa ) && (bool) preg_match( '/^Traveler \d{4}$/', $n_en ) && (bool) preg_match( '/^مسافر [٠-٩]{4}$/u', $n_ar )
+	&& 'Traveler ' . $num === $n_en && $n_en === ToPersia_Privacy::neutral_name( 7, 'en' ) && 4 === strlen( $num )
+	&& isset( $dict['traveler_name'] ) && 'مسافر %s' === $dict['traveler_name']['fa'] && 'Traveler %s' === $dict['traveler_name']['en'] && 'مسافر %s' === $dict['traveler_name']['ar']
+	&& count( array_unique( array_map( array( 'ToPersia_Privacy', 'number' ), range( 1, 50 ) ) ) ) > 40 );
+
+/* ── R37 — دفاع دوم: get_the_author_display_name ── */
+$pub = function ( $class ) {
+	return 'Traveler ' . $class::number( 9 ) === $class::public_name( 'tp_09121234567', 9, 'en' )
+		&& 'مسافر ' . ToPersia_Privacy::local_digits( $class::number( 9 ), 'fa' ) === $class::public_name( '+98 912 123 4567', 9, 'fa' )
+		&& 'Traveler ' . $class::number( 9 ) === $class::public_name( 'مسافر ۱۲۳۴', 9, 'en' )
+		&& 'Ali Rezaei' === $class::public_name( 'Ali Rezaei', 9, 'en' );
+};
+$m_pub = $uc_mutant( $priv_src, 'ToPersia_Privacy', 'MP', "if ( '' === \$name || self::looks_like_phone( \$name ) || self::is_neutral( \$name ) ) {", 'if ( false ) {' );
+t( 'R37 دفاع دوم: فیلتر get_the_author_display_name نام شماره‌دار و نام خنثیِ ذخیره‌شده را به نام خنثیِ زبان صفحه برمی‌گرداند، نام واقعی را نه؛ جهش بی جای‌گزینی می‌افتد',
+	$pub( 'ToPersia_Privacy' ) && '' !== $m_pub && ! $pub( $m_pub )
+	&& false !== strpos( $priv_src, "add_filter( 'get_the_author_display_name', array( \$this, 'filter_author_name' ), 20, 2 );" )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "'class-topersia-privacy.php'," ) && false !== strpos( $src( 'topersia-user-core.php' ), "'ToPersia_Privacy'," ) );
+
+/* ── R37 — پنل و نظرها: هرگز نام ورود؛ نمایه: نام و نام خانوادگی یا خنثی ── */
+$rv_src = $src( 'includes/class-topersia-reviews.php' );
+$ds_src = $src( 'includes/class-topersia-dashboard.php' );
+$pf_src = $src( 'includes/class-topersia-profile.php' );
+t( 'R37: نظرهای من، پنل و نمایه هرگز نام ورود را نمایش نمی‌دهند؛ نمایه نام خالی یا شماره‌دار را خنثی می‌کند — جهش: ۱٫۱۰٫۴ می‌افتد',
+	false === strpos( $rv_src, 'user_login' ) && false === strpos( $ds_src, 'user_login' )
+	&& false !== strpos( $pf_src, "ToPersia_Privacy::public_name(trim(\$first_name . ' ' . \$last_name), \$user_id, 'fa')" )
+	&& false !== strpos( $uc_dist( '1.10.4', 'includes/class-topersia-reviews.php' ), '$user->display_name ?: $user->user_login' )
+	&& false !== strpos( $uc_dist( '1.10.4', 'includes/class-topersia-profile.php' ), "trim(\$first_name . ' ' . \$last_name) ?: wp_get_current_user()->display_name" ) );
+
+/* ── R37 — مهاجرت حساب‌های موجود: یک‌باره، دسته‌ای، idempotent؛ user_login هرگز ── */
+if ( ! function_exists( 'delete_transient' ) ) { function delete_transient( $k ) { unset( $GLOBALS['tp_transients'][ $k ] ); return true; } }
+if ( ! function_exists( 'sanitize_text_field' ) ) { function sanitize_text_field( $v ) { return trim( strip_tags( (string) $v ) ); } }
+if ( ! function_exists( 'update_option' ) ) { function update_option( $k, $v, $a = null ) { $GLOBALS['tp_options'][ $k ] = $v; return true; } }
+if ( ! function_exists( 'delete_option' ) ) { function delete_option( $k ) { unset( $GLOBALS['tp_options'][ $k ] ); return true; } }
+if ( ! function_exists( 'remove_filter' ) ) { function remove_filter() { return true; } }
+if ( ! function_exists( 'is_wp_error' ) ) { function is_wp_error( $x ) { return $x instanceof WP_Error; } }
+if ( ! function_exists( 'get_userdata' ) ) { function get_userdata( $id ) { return isset( $GLOBALS['tp_users'][ $id ] ) ? (object) ( $GLOBALS['tp_users'][ $id ] + array( 'ID' => $id ) ) : false; } }
+if ( ! function_exists( 'wp_update_user' ) ) {
+	function wp_update_user( $d ) {
+		$GLOBALS['tp_user_updates'][] = $d;
+		foreach ( $d as $k => $v ) { if ( 'ID' !== $k && 'nickname' !== $k ) { $GLOBALS['tp_users'][ $d['ID'] ][ $k ] = $v; } }
+		if ( isset( $d['nickname'] ) ) { $GLOBALS['tp_umeta'][ $d['ID'] ]['nickname'] = $d['nickname']; }
+		return $d['ID'];
+	}
+}
+if ( ! class_exists( 'TP_UC_WPDB_Users' ) ) {
+	class TP_UC_WPDB_Users {
+		public $users = 'wp_users';
+		public $sql   = array();
+		public function prepare( $q, ...$a ) { return vsprintf( str_replace( array( '%d', '%s' ), array( '%d', "'%s'" ), $q ), $a ); }
+		public function get_results( $q, $o = null ) {
+			$this->sql[] = $q;
+			preg_match( '/ID > (\d+) ORDER BY ID ASC LIMIT (\d+)/', $q, $m );
+			$ids = array_filter( array_keys( $GLOBALS['tp_users'] ), function ( $id ) use ( $m ) { return $id > (int) $m[1]; } );
+			sort( $ids );
+			return array_map( function ( $id ) { return array( 'ID' => $id ); }, array_slice( $ids, 0, (int) $m[2] ) );
+		}
+	}
+}
+$keep_mig = array( $GLOBALS['wpdb'] ?? null, $GLOBALS['tp_options'] ?? array(), $GLOBALS['tp_umeta'] ?? array() );
+$GLOBALS['tp_users'] = array();
+for ( $i = 1; $i <= 130; $i++ ) {     /* بیش از یک دسته (۱۰۰) */
+	$GLOBALS['tp_users'][ $i ] = 0 === $i % 3
+		? array( 'user_login' => 'admin' . $i, 'display_name' => 'Ali ' . $i, 'user_nicename' => 'ali-' . $i, 'user_email' => 'ali' . $i . '@example.com' )
+		: array( 'user_login' => 'tp_0912' . str_pad( (string) $i, 7, '0', STR_PAD_LEFT ), 'display_name' => 'tp_0912' . str_pad( (string) $i, 7, '0', STR_PAD_LEFT ), 'user_nicename' => 'tp_0912' . str_pad( (string) $i, 7, '0', STR_PAD_LEFT ), 'user_email' => '0912' . str_pad( (string) $i, 7, '0', STR_PAD_LEFT ) . '@users.topersia.com' );
+	$GLOBALS['tp_umeta'][ $i ]['nickname'] = $GLOBALS['tp_users'][ $i ]['display_name'];
+}
+$GLOBALS['wpdb']            = new TP_UC_WPDB_Users();
+$GLOBALS['tp_user_updates'] = array();
+$GLOBALS['tp_options']      = array();
+$GLOBALS['tp_transients']   = array();
+ToPersia_Privacy::maybe_migrate();
+$after_one = count( $GLOBALS['tp_user_updates'] );
+$done_one  = ToPersia_Privacy::MIGRATION_VERSION === ( $GLOBALS['tp_options'][ ToPersia_Privacy::MIGRATION_OPTION ] ?? '' );
+ToPersia_Privacy::maybe_migrate();
+ToPersia_Privacy::maybe_migrate();   /* سوم: تمام‌شده — هیچ کار */
+$mig_left = array_filter( $GLOBALS['tp_users'], function ( $u ) {
+	return ToPersia_Privacy::looks_like_phone( $u['display_name'] ) || ToPersia_Privacy::looks_like_phone( $u['user_nicename'] ) || ToPersia_Privacy::phone_email( $u['user_email'] );
+} );
+$mig_login = array_filter( $GLOBALS['tp_user_updates'], function ( $d ) { return isset( $d['user_login'] ); } );
+$mig_real  = $GLOBALS['tp_users'][3]['display_name'];
+t( 'R37 مهاجرت: دسته‌ای (۱۰۰)، شناسه‌محور، پس از تمام‌شدن هیچ کار؛ نام نمایشی، nickname، نامک و ایمیل شماره‌دار پاک؛ user_login دست‌نخورده؛ نام واقعی دست‌نخورده',
+	! $done_one && 100 > $after_one && ToPersia_Privacy::MIGRATION_VERSION === ( $GLOBALS['tp_options'][ ToPersia_Privacy::MIGRATION_OPTION ] ?? '' )
+	&& ! $mig_left && ! $mig_login && 87 === count( $GLOBALS['tp_user_updates'] ) && 'Ali 3' === $mig_real
+	&& 0 === strpos( (string) $GLOBALS['tp_users'][1]['user_login'], 'tp_0912' )
+	&& ! ToPersia_Privacy::looks_like_phone( (string) $GLOBALS['tp_umeta'][1]['nickname'] )
+	&& false === stripos( $priv_src, 'UPDATE {$wpdb->users}' ) && false === strpos( $priv_src, "'user_login' =>" )
+	&& (bool) preg_match( "/topersia_log\( 'مهاجرت شناسۀ عمومی بی شماره: ' \. \\\$fixed \. ' حساب'/u", $priv_src ),
+	'به‌روزشده ' . count( $GLOBALS['tp_user_updates'] ) . ' · مانده ' . count( $mig_left ) );
+$m_mig = $uc_mutant( $priv_src, 'ToPersia_Privacy', 'MM', "if ( self::looks_like_phone( (string) ( \$u['user_nicename'] ?? '' ) ) ) {", 'if ( false ) {' );
+t( 'R37 مهاجرت: جهش بی پاک‌سازی نامک (/author/<شماره>/) می‌افتد',
+	'' !== $m_mig && ! isset( $m_mig::fix_fields( 1, array( 'display_name' => 'x', 'user_nicename' => 'tp_09121234567', 'user_email' => 'a@b.c' ) )['user_nicename'] )
+	&& isset( ToPersia_Privacy::fix_fields( 1, array( 'display_name' => 'x', 'user_nicename' => 'tp_09121234567', 'user_email' => 'a@b.c' ) )['user_nicename'] ) );
+list( $GLOBALS['wpdb'], $GLOBALS['tp_options'], $GLOBALS['tp_umeta'] ) = $keep_mig;
+
+/* ── R38 · P5-D355 — کلید Mediana: فقط‌نوشتنی، پاک‌کردن صریح، بی autoload ── */
+$adm_src = $src( 'includes/class-topersia-admin.php' );
+$adm_old = $uc_dist( '1.10.4', 'includes/class-topersia-admin.php' );
+$uc_secret_html = function ( $php ) {
+	return false === strpos( $php, "esc_attr( get_option( 'topersia_mediana_api_key'" )
+		&& false !== strpos( $php, 'name="topersia_mediana_api_key" type="password" autocomplete="new-password" value=""' )
+		&& false !== strpos( $php, "__( 'ذخیره شده — برای تغییر مقدار تازه بنویس', 'topersia-user-core' )" )
+		&& false !== strpos( $php, 'name="topersia_mediana_api_key_clear"' );
+};
+t( 'R38 · P5-D355 پیشخوان: مقدار کلید Mediana هرگز در HTML؛ placeholder «ذخیره شده — …»؛ تیک پاک‌کردن — جهش: ۱٫۱۰٫۴ (مقدار در value) می‌افتد',
+	$uc_secret_html( $adm_src ) && false !== strpos( $adm_old, "value=\"<?php echo esc_attr( get_option( 'topersia_mediana_api_key', '' ) ); ?>\"" ) && ! $uc_secret_html( $adm_old ) );
+
+$adm_cls = $uc_mutant( $adm_src, 'ToPersia_Admin', 'Real' );
+$adm_mut = $uc_mutant( $adm_src, 'ToPersia_Admin', 'MK', "return '' === \$value ? \$old : \$value;", 'return $value;' );
+$uc_secret = function ( $class ) {
+	$keep = $GLOBALS['tp_options'] ?? array();
+	$GLOBALS['tp_options']['topersia_mediana_api_key'] = 'OLD-KEY';
+	$_POST = array();
+	$keep_ok  = 'OLD-KEY' === $class::sanitize_secret( '' );
+	$new_ok   = 'NEW-KEY' === $class::sanitize_secret( ' NEW-KEY ' );
+	$_POST    = array( 'topersia_mediana_api_key_clear' => '1' );
+	$clear_ok = '' === $class::sanitize_secret( '' );
+	$_POST    = array();
+	$GLOBALS['tp_options'] = $keep;
+	return $keep_ok && $new_ok && $clear_ok;
+};
+t( 'R38: ارسال خالی ← همان کلید؛ مقدار تازه ← جایگزین؛ فقط تیک «پاک‌کردن» ← تهی — جهش که خالی را ذخیره می‌کند می‌افتد',
+	'' !== $adm_cls && $uc_secret( $adm_cls ) && '' !== $adm_mut && ! $uc_secret( $adm_mut )
+	&& false !== strpos( $adm_src, "'sanitize_callback' => array( __CLASS__, 'sanitize_secret' )" ) );
+
+if ( ! function_exists( 'wp_set_option_autoload' ) ) {
+	function wp_set_option_autoload( $o, $a ) { $GLOBALS['tp_autoload'][ $o ] = $a; return true; }
+}
+$GLOBALS['tp_autoload'] = array();
+$adm_cls::secret_no_autoload( 'topersia_mediana_api_key' );
+$adm_cls::secret_no_autoload( 'topersia_account_page_url' );
+t( 'R38: کلید Mediana بی autoload — هنگام ساخت، ذخیره و ارتقا؛ گزینهٔ دیگر دست‌نخورده',
+	array( 'topersia_mediana_api_key' => false ) === $GLOBALS['tp_autoload']
+	&& false !== strpos( $adm_src, "add_action( 'added_option', array( __CLASS__, 'secret_no_autoload' ), 10, 1 );" )
+	&& false !== strpos( $adm_src, "add_action( 'updated_option', array( __CLASS__, 'secret_no_autoload' ), 10, 1 );" )
+	&& false !== strpos( $src( 'includes/class-topersia-db.php' ), "wp_set_option_autoload('topersia_mediana_api_key', false);" ) );
+
+t( 'R37/R38: حذف افزونه گزینه‌های مهاجرت را هم پاک می‌کند',
+	false !== strpos( $src( 'uninstall.php' ), "'topersia_user_core_pii_migration'," ) && false !== strpos( $src( 'uninstall.php' ), "'topersia_user_core_pii_cursor'," ) );
 
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );

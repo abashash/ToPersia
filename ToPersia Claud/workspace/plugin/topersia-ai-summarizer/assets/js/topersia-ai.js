@@ -153,7 +153,7 @@
 		data.set('post', cfgData.post || 0);
 		data.set('type', type || 'summary');
 		data.set('lang', cfgData.lang || 'en');
-		data.set('url', window.location.href);
+		// 1.2.2 · P5-D356: no page URL is sent - the server uses the post's own permalink.
 
 		fetch(cfg.ajax, {
 			method: 'POST',

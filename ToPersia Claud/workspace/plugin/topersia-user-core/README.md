@@ -1,4 +1,4 @@
-# ToPersia User Core 1.10.4
+# ToPersia User Core 1.11.0
 
 - Fullscreen frontend user dashboard with a site-independent shell.
 - Save, follow, reviews and the login/sign-up window belong to this plugin;
@@ -12,6 +12,14 @@
   post that is no longer published; the review row stays with "This item is no
   longer available". An unpublished translation never replaces the original.
 - SMS (OTP) login via the Mediana gateway, with a three-layer fail-closed rate limiter.
+- 1.11.0 (P5-D354): the mobile number is never part of a public identifier. New
+  SMS accounts get a random login, slug and e-mail and a neutral display name
+  ("Traveler 4821", per page language); the number lives only in the
+  `_topersia_mobile` meta, which is what login lookup reads. Existing accounts are
+  migrated once (display name, nickname, slug, e-mail; never `user_login`), and a
+  `get_the_author_display_name` filter neutralises any number-like name.
+- 1.11.0 (P5-D355): the Mediana key is write-only in the settings screen (never
+  printed, empty keeps it, explicit "clear" box) and not autoloaded.
 - Inline SVG icon set (21 icons); Font Awesome was removed in 1.9.6.
 - Icon colors inherit ToPersia Render design tokens via `currentColor`.
 - Built-in tabs and custom shortcode tabs are supported.

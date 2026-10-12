@@ -91,8 +91,18 @@ TP_AI_Shortcode::init();
 t( 'shortcodes: all four registered', isset( $GLOBALS['tp_shortcodes']['tpas'], $GLOBALS['tp_shortcodes']['topersia_ai'], $GLOBALS['tp_shortcodes']['tpas_ai'], $GLOBALS['tp_shortcodes']['topersia_ai_panel'] ) );
 $html = do_shortcode( '[tpas services="chatgpt,deepseek"]' );
 t( 'shortcode: [tpas] honors the services attribute', 2 === substr_count( $html, 'class="tpas__btn tpas__btn--' ) );
-$ph = do_shortcode( '[tpas_ai]' );
-t( 'shortcode: [tpas_ai] renders the panel', false !== strpos( $ph, 'data-tpas-json=' ) );
+/* 1.2.2: the panel is for logged-in users only (P5-D255; panel_html() checks
+   is_user_logged_in()) and this file runs logged out. Same claim, logged in;
+   plus the logged-out half, which is the actual guarantee. The stub
+   do_shortcode() also matched `[tpas_ai]` as `[tpas` + attributes (no word
+   boundary, unlike WordPress), so the registered callback is called directly. */
+$tp_was_logged = $GLOBALS['tp_logged_in'] ?? null;
+$GLOBALS['tp_logged_in'] = true;
+$ph = call_user_func( $GLOBALS['tp_shortcodes']['tpas_ai'], array() );
+$GLOBALS['tp_logged_in'] = false;
+$ph_guest = call_user_func( $GLOBALS['tp_shortcodes']['tpas_ai'], array() );
+if ( null === $tp_was_logged ) { unset( $GLOBALS['tp_logged_in'] ); } else { $GLOBALS['tp_logged_in'] = $tp_was_logged; }
+t( 'shortcode: [tpas_ai] renders the panel', false !== strpos( $ph, 'data-tpas-json=' ) && '' === trim( (string) $ph_guest ) );
 
 // Blocks.
 TP_AI_Block::register_blocks();

@@ -16,7 +16,7 @@ class TP_AI_DB {
 	/**
 	 * Schema version stored in options.
 	 */
-	const VERSION = '1.2.1';
+	const VERSION = '1.2.2';
 
 	/**
 	 * The 1.0 unique key that 1.1 replaced but dbDelta could not drop.
@@ -92,6 +92,11 @@ class TP_AI_DB {
 			KEY post_event (post_id, event_type),
 			KEY provider (provider)
 		) {$charset_collate};" );
+
+		// 1.2.2 · P5-D355: the settings row carries API keys - no autoload.
+		if ( class_exists( 'TP_AI_Options' ) ) {
+			TP_AI_Options::no_autoload();
+		}
 
 		self::drop_legacy_index();
 

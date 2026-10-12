@@ -26,6 +26,9 @@ final class ToPersia_Admin {
 	private function __construct() {
 		add_action( 'admin_menu', array( $this, 'menu' ), 999 );
 		add_action( 'admin_init', array( $this, 'settings' ) );
+		/* ۱٫۱۱٫۰ · P5-D355 — کلید Mediana بی autoload، هر بار که ساخته یا ذخیره شود */
+		add_action( 'added_option', array( __CLASS__, 'secret_no_autoload' ), 10, 1 );
+		add_action( 'updated_option', array( __CLASS__, 'secret_no_autoload' ), 10, 1 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
 	}
 
@@ -242,10 +245,11 @@ final class ToPersia_Admin {
 
 	public function settings(): void {
 
+		/* ۱٫۱۱٫۰ · P5-D355 — کلید فقط‌نوشتنی: خالی ← همان قبلی؛ پاک‌کردن فقط با تیک صریح */
 		register_setting(
 			'topersia_user_core',
 			'topersia_mediana_api_key',
-			array( 'type' => 'string', 'sanitize_callback' => static fn( $v ) => sanitize_text_field( (string) $v ) )
+			array( 'type' => 'string', 'sanitize_callback' => array( __CLASS__, 'sanitize_secret' ) )
 		);
 
 		register_setting(
@@ -265,6 +269,38 @@ final class ToPersia_Admin {
 			'topersia_user_tabs',
 			array( 'type' => 'array', 'sanitize_callback' => array( $this, 'sanitize_tabs' ) )
 		);
+	}
+
+	/**
+	 * کلید Mediana — فقط‌نوشتنی.  ۱٫۱۱٫۰ · P5-D355
+	 *
+	 * مقدار ذخیره‌شده هرگز به HTML نمی‌رود، پس فرم همیشه خالی برمی‌گردد:
+	 *   خالی                 ← همان مقدار قبلی می‌ماند
+	 *   مقدار تازه           ← جایگزین
+	 *   تیک «پاک‌کردن کلید»  ← تهی (تنها راه حذف)
+	 *
+	 * @param mixed $value ورودی فرم.
+	 * @return string
+	 */
+	public static function sanitize_secret( $value ): string {
+		$option = 'topersia_mediana_api_key';
+		$old    = (string) get_option( $option, '' );
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- نانس options.php پیش از sanitize سنجیده شده
+		if ( ! empty( $_POST[ $option . '_clear' ] ) ) {
+			return '';
+		}
+
+		$value = trim( sanitize_text_field( (string) $value ) );
+
+		return '' === $value ? $old : $value;
+	}
+
+	/** کلید در هر درخواست به حافظه نیاید.  ۱٫۱۱٫۰ */
+	public static function secret_no_autoload( string $option ): void {
+		if ( 'topersia_mediana_api_key' === $option && function_exists( 'wp_set_option_autoload' ) ) {
+			wp_set_option_autoload( $option, false );
+		}
 	}
 
 	public function sanitize_tabs( $input ): array {
@@ -529,9 +565,15 @@ final class ToPersia_Admin {
 							<p class="hint"><?php echo esc_html__( 'کلید فقط روی سرور استفاده می‌شود و هرگز به مرورگر نمی‌رود.', 'topersia-user-core' ); ?></p>
 
 							<div class="tp-field tp-field--stack">
+								<?php $tp_has_key = '' !== (string) get_option( 'topersia_mediana_api_key', '' ); ?>
 								<label for="tp_api">Mediana API Key</label>
-								<input id="tp_api" name="topersia_mediana_api_key" type="password" autocomplete="new-password"
-									value="<?php echo esc_attr( get_option( 'topersia_mediana_api_key', '' ) ); ?>">
+								<?php /* ۱٫۱۱٫۰ · P5-D355 — مقدار ذخیره‌شده هرگز چاپ نمی‌شود */ ?>
+								<input id="tp_api" name="topersia_mediana_api_key" type="password" autocomplete="new-password" value=""
+									placeholder="<?php echo esc_attr( $tp_has_key ? __( 'ذخیره شده — برای تغییر مقدار تازه بنویس', 'topersia-user-core' ) : __( 'کلید را وارد کنید', 'topersia-user-core' ) ); ?>">
+								<p class="note"><?php echo esc_html__( 'خالی بماند، کلید ذخیره‌شده عوض نمی‌شود. کلید هرگز در این صفحه نمایش داده نمی‌شود.', 'topersia-user-core' ); ?></p>
+								<?php if ( $tp_has_key ) : ?>
+									<label><input type="checkbox" name="topersia_mediana_api_key_clear" value="1"> <?php echo esc_html__( 'پاک‌کردن کلید ذخیره‌شده', 'topersia-user-core' ); ?></label>
+								<?php endif; ?>
 							</div>
 
 							<div class="tp-field tp-field--stack">

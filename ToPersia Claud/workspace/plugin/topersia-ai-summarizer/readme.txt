@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,13 @@ The key is stored in the `tpas_settings` option, never printed, and kept when yo
 Yes by default, with `rel="noopener nofollow"`, both configurable.
 
 == Changelog ==
+
+= 1.2.2 =
+* Security - P5-D356 (R36): generation requires a post id. A browser-sent URL is never trusted: without a post the request is rejected (400), with one it is ignored - the prompt only carries the post's own permalink in the page language (WPML `wpml_permalink`). The published, content-type, rate-limit and cache gates therefore run on every request. The panel no longer sends the page URL.
+* Security - P5-D356 (R47): the rate limiter's IP follows the same rule as ToPersia User Core - X-Forwarded-For only when the site declares TOPERSIA_TRUST_PROXY, otherwise REMOTE_ADDR; X-Real-IP and CF-Connecting-IP are never trusted.
+* Security - P5-D355 (R38): engine API keys are write-only in the settings screen (never printed; placeholder "Saved - type a new value to change it"; an empty field keeps the key; "Clear stored key" is the only way to delete it). The settings row that holds the keys is no longer autoloaded (on create, on save and on every schema upgrade).
+* A markdown link in model output keeps only its label; no target (javascript:, tracking URLs) is displayed or copied.
+* Tests: 13 of the 14 known failures were stale claims (panel contract since 1.1, rate-limit keys since 1.1, a tautological icon check, stub shortcode matching, cache order); they now assert the current behaviour with the reason in place. The 14th (markdown link target shown) was a real defect, fixed above.
 
 = 1.2.1 =
 * Text generation engine and key come only from this plugin's own settings: ToPersia Core's "External services" no longer has an ai.text row (the site owner's decision). The core stays the content-hash cache layer.

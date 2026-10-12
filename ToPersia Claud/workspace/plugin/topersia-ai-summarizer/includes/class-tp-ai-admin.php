@@ -142,7 +142,7 @@ class TP_AI_Admin {
 			'customProviders' => array( 'custom', 'azure' ),
 			'removeLabel'     => __( 'Remove', 'topersia-ai-summarizer' ),
 			'testLabel'       => __( 'Test', 'topersia-ai-summarizer' ),
-			'apiKeyPlaceholder' => __( 'Leave empty to keep the stored key', 'topersia-ai-summarizer' ),
+			'apiKeyPlaceholder' => __( 'Paste API key', 'topersia-ai-summarizer' ), // 1.2.2: a new row has no stored key.
 		) );
 	}
 
@@ -567,9 +567,12 @@ class TP_AI_Admin {
 		echo '</td>';
 
 		echo '<td>';
-		echo '<input type="password" name="' . $name_base . '[api_key]" placeholder="' . esc_attr( $has_key ? __( 'Leave empty to keep the stored key', 'topersia-ai-summarizer' ) : __( 'Paste API key', 'topersia-ai-summarizer' ) ) . '" autocomplete="off">';
+		// 1.2.2 · P5-D355: write-only - the stored key is never printed; an
+		// empty field keeps it, and only the explicit box deletes it.
+		echo '<input type="password" name="' . $name_base . '[api_key]" value="" placeholder="' . esc_attr( $has_key ? __( 'Saved — type a new value to change it', 'topersia-ai-summarizer' ) : __( 'Paste API key', 'topersia-ai-summarizer' ) ) . '" autocomplete="new-password">';
 		if ( $has_key ) {
 			echo '<span class="tpas-engine-key-set">' . esc_html__( 'Key saved', 'topersia-ai-summarizer' ) . '</span>';
+			echo '<label class="tpas-engine-key-clear"><input type="checkbox" name="' . $name_base . '[api_key_clear]" value="1"> ' . esc_html__( 'Clear stored key', 'topersia-ai-summarizer' ) . '</label>';
 		}
 		echo '</td>';
 

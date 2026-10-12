@@ -54,6 +54,8 @@ $tp_options = array(
 	'topersia_user_tabs',
 	'topersia_user_core_db_version',
 	'topersia_user_core_strings_fingerprint',
+	'topersia_user_core_pii_migration',   /* ۱٫۱۱٫۰ */
+	'topersia_user_core_pii_cursor',
 );
 
 foreach ( $tp_options as $tp_option ) {
