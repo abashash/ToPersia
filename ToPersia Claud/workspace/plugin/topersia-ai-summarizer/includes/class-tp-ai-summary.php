@@ -16,6 +16,11 @@ class TP_AI_Summary {
 	 * Register hooks.
 	 */
 	public static function init() {
+		/*
+		 * 1.3.0 · P5-D358: priority 0 - an unauthorized request is refused (403)
+		 * before ToPersia Render's daily-cap gate (priority 1) can count it.
+		 */
+		add_action( 'wp_ajax_tpas_ai_generate', array( __CLASS__, 'authorize' ), 0 );
 		add_action( 'wp_ajax_tpas_ai_generate', array( __CLASS__, 'handle_ajax' ) );
 		// wp_ajax_nopriv_tpas_ai_generate intentionally NOT registered: AI
 		// generation is authenticated-only (logged-in ToPersia users). See
@@ -82,9 +87,47 @@ class TP_AI_Summary {
 	}
 
 	/**
+	 * Whether visitors (not only editors of the post) may ask for a summary.
+	 * 1.3.0 · P5-D358: off by default - «نسخه‌های بعد». While off, nothing a
+	 * visitor does reaches an engine.
+	 *
+	 * @return bool
+	 */
+	public static function visitor_requests() {
+		return TP_AI_Options::just_flag( 'visitor_requests' );
+	}
+
+	/**
+	 * The editor-only rule for `tpas_ai_generate`. 1.3.0 · P5-D358.
+	 *
+	 * While visitor requests are off, only a user who can edit this very post
+	 * (with a valid `tpas_ai` nonce) passes; a guest, a subscriber or an editor
+	 * of another post gets 403 and no engine call. Runs at priority 0 and again
+	 * at the top of handle_ajax() (defense in depth).
+	 *
+	 * @return void
+	 */
+	public static function authorize() {
+		if ( self::visitor_requests() ) {
+			return; // The 1.2.x rules below (logged-in, nonce, rate limit) apply.
+		}
+
+		$post = absint( $_POST['post'] ?? 0 ); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verified just below.
+
+		if ( ! is_user_logged_in()
+			|| ! check_ajax_referer( 'tpas_ai', 'nonce', false )
+			|| ! $post
+			|| ! current_user_can( 'edit_post', $post ) ) {
+			wp_send_json_error( array( 'message' => 'Forbidden.' ), 403 );
+		}
+	}
+
+	/**
 	 * Process a generate or regenerate request from the front-end.
 	 */
 	public static function handle_ajax() {
+		self::authorize();
+
 		if ( ! is_user_logged_in() ) {
 			// No details beyond a generic rejection - do not reveal whether
 			// the nonce/post/etc. would otherwise have been valid.

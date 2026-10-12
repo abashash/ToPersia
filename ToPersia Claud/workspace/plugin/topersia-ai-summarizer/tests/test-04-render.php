@@ -52,7 +52,14 @@ t( 'panel: config carries no engine links (P5-D255)', ! isset( $cfg['links'] ) )
 t( 'panel: copy/regenerate/loading labels localized', isset( $cfg['msg']['copied'], $cfg['msg']['loading'], $cfg['msg']['error'] ) && ! empty( $cfg['msg']['error'] ) );
 t( 'panel: default type is summary', 'summary' === $cfg['default'] );
 t( 'panel: config carries no key flag at all', ! isset( $cfg['key'] ) );
-t( 'panel: no API key -> internal engine answers, never a raw-prompt block', false !== strpos( $panel, 'data-tpas-state="content"' ) && false === strpos( $panel, 'tpas-ai__prompt' ) );
+/* 1.3.0 · P5-D358: the page view builds nothing while visitor requests are off (default) */
+t( 'panel: visitor requests off -> the page view builds nothing (P5-D358)', false === strpos( $panel, 'data-tpas-state="content"' ) && false === strpos( $panel, 'tpas-ai__prompt' ) );
+update_option( TP_AI_Options::OPTION_KEY, array( 'visitor_requests' => 1 ) );
+TP_AI_Options::flush();
+$panel_v = TP_AI_Render::panel_html( array( 'post_id' => 42 ) );
+t( 'panel: visitor requests on + no API key -> internal engine answers, never a raw-prompt block', false !== strpos( $panel_v, 'data-tpas-state="content"' ) && false === strpos( $panel_v, 'tpas-ai__prompt' ) );
+update_option( TP_AI_Options::OPTION_KEY, array() );
+TP_AI_Options::flush();
 
 // Once configured, an uncached post shows the generate CTA instead.
 $GLOBALS['tp_posts'][44] = array( 'type' => 'post', 'title' => 'Kashan', 'content' => 'Kashan is a city in Isfahan province.' );

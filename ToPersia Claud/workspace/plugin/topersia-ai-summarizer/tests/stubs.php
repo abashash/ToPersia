@@ -582,7 +582,8 @@ function wp_generate_password( $length = 12, $special_chars = true, $extra_speci
 }
 
 function current_user_can( $cap, $args = null ) {
-	return true;
+	/* 1.3.0: $GLOBALS['tp_cannot'][ $cap ] = true denies one capability (a subscriber, a guest) */
+	return empty( $GLOBALS['tp_cannot'][ $cap ] );
 }
 
 /* ۱٫۱٫۱ — پنل خروجی را از ۱٫۱٫۰ به ورود وابسته کرد و stub جا مانده بود. */
@@ -641,6 +642,7 @@ function wp_nonce_field( $action = -1, $name = '_wpnonce', $referer = true, $ech
 
 function wp_remote_post( $url, $args = array() ) {
 	$GLOBALS['tp_http_last'] = array( 'url' => $url, 'args' => $args ); // 1.2.2: what the prompt actually carried
+	$GLOBALS['tp_http_calls'] = ( $GLOBALS['tp_http_calls'] ?? 0 ) + 1; // 1.3.0: every outbound engine call
 	if ( isset( $GLOBALS['tp_http_override'] ) ) {
 		$r = $GLOBALS['tp_http_override'];
 		if ( is_a( $r, 'WP_Error' ) ) {
