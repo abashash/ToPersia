@@ -33,7 +33,7 @@ $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 ) );
 t( 'ajax: cached response succeeds', is_array( $res ) && true === $res['ok'] );
 t( 'ajax: cached flags cached=true with text', is_array( $res ) && true === $res['data']['cached'] && 'Cached summary text.' === $res['data']['text'] );
-t( 'ajax: cache preserves provider', is_array( $res ) && 'DeepSeek' === $res['data']['provider'] );
+t( 'ajax: the browser reply carries no provider or model (1.2.3 · P5-D356)', is_array( $res ) && ! array_key_exists( 'provider', $res['data'] ) && ! array_key_exists( 'model', $res['data'] ) );
 
 unset( $GLOBALS['tp_http_override'] );
 

@@ -180,6 +180,101 @@ list( $r53b_out, $r53b_used ) = $tp123_run( 'TP_AI_Summary' );
 t( 'R53: a fresh cached output is served without touching the cap', array( 'ok', 'ok', 'ok' ) === $r53b_out && 0 === $r53b_used );
 $GLOBALS['wpdb'] = $tp123_keep_wpdb;
 
+/* ── R24 · A03 — error text is never parsed as markup (P5-D356) ───── */
+
+$tp123_js_dir = TP_AI_PATH . 'assets/js/';
+$tp123_bad_innerhtml = function ( $dir, $override = array() ) {
+	$bad = array();
+	foreach ( glob( $dir . '*.js' ) as $f ) {
+		$src = isset( $override[ basename( $f ) ] ) ? $override[ basename( $f ) ] : (string) file_get_contents( $f );
+		foreach ( preg_split( '/\R/', $src ) as $line ) {
+			if ( false !== strpos( $line, 'innerHTML' ) || false !== strpos( $line, 'insertAdjacentHTML' ) || false !== strpos( $line, 'outerHTML' ) || preg_match( '/\.html\s*\(/', $line ) ) {
+				// the one allowed sink: the server-escaped output (format_ai_text) in renderOutput()
+				if ( 'textWrap.innerHTML = html;' !== trim( $line ) ) {
+					$bad[] = basename( $f ) . ': ' . trim( $line );
+				}
+			}
+		}
+	}
+	return $bad;
+};
+$tp123_ai_js = (string) file_get_contents( $tp123_js_dir . 'topersia-ai.js' );
+$tp123_old_error = str_replace(
+	"var p = document.createElement('p');\n\t\tp.className = 'tpas-ai__error';\n\t\tp.textContent = String(message == null ? '' : message);\n\t\ttextWrap.textContent = '';\n\t\ttextWrap.appendChild(p);",
+	"textWrap.innerHTML = '<p class=\"tpas-ai__error\">' + message + '</p>';",
+	$tp123_ai_js
+);
+t( 'R24: no JS of the plugin builds markup from a message — the only innerHTML is the server-escaped output; mutant with the old showError fails',
+	array() === $tp123_bad_innerhtml( $tp123_js_dir ) && $tp123_old_error !== $tp123_ai_js && array() !== $tp123_bad_innerhtml( $tp123_js_dir, array( 'topersia-ai.js' => $tp123_old_error ) ) );
+
+$tp123_node = trim( (string) @shell_exec( 'command -v node 2>/dev/null' ) );
+if ( '' !== $tp123_node ) {
+	$driver = <<<'JS'
+const fs = require('fs'), vm = require('vm');
+function el(tag) { return { tag, children: [], attrs: {}, className: '', _text: '', innerHTML: '', _html: false,
+  set textContent(v) { this._text = String(v); this.children = []; }, get textContent() { return this._text; },
+  appendChild(c) { this.children.push(c); return c; }, setAttribute(k, v) { this.attrs[k] = v; },
+  querySelector() { return null; }, querySelectorAll() { return []; }, addEventListener() {}, classList: { toggle() {} } }; }
+const wrap = el('div'); const panel = el('div');
+panel.querySelector = (s) => (s === '.tpas-ai__out-text' ? wrap : null);
+const doc = { createElement: el, querySelectorAll() { return []; }, addEventListener() {}, readyState: 'complete', body: el('body'), documentElement: el('html') };
+const ctx = { document: doc, window: {}, TPAS_AI: {}, tpasAI: {}, console, fetch() { return Promise.reject(); }, URLSearchParams, navigator: {} };
+ctx.window = ctx; vm.createContext(ctx);
+let src = fs.readFileSync(process.argv[2], 'utf8');
+src = src.replace('\tready(function () {\n\t\tinitButtons();', '\twindow.__showError = showError;\n\tready(function () {\n\t\tinitButtons();');
+try { vm.runInContext(src, ctx); } catch (e) { console.log('LOAD:' + e.message); process.exit(0); }
+ctx.__showError(panel, '<img src=x onerror=alert(1)>');
+const para = wrap.children[0];
+console.log(JSON.stringify({ inner: wrap.innerHTML, text: para && para._text, cls: para && para.className, html: para && para.innerHTML }));
+JS;
+	$tmp = sys_get_temp_dir() . '/tp123-xss-' . getmypid() . '.js';
+	file_put_contents( $tmp, $driver );
+	$out = json_decode( trim( (string) shell_exec( 'node ' . escapeshellarg( $tmp ) . ' ' . escapeshellarg( $tp123_js_dir . 'topersia-ai.js' ) . ' 2>&1' ) ), true );
+	t( 'R24: showError() puts a hostile message into the DOM as text — no markup is parsed',
+		is_array( $out ) && '' === $out['inner'] && '<img src=x onerror=alert(1)>' === $out['text'] && 'tpas-ai__error' === $out['cls'] );
+	@unlink( $tmp );
+}
+
+/* ── A04 / P5-D317 — the reply names no provider or model; the server log does ── */
+
+update_option( TP_AI_Options::OPTION_KEY, array(
+	'internal_enabled'        => 1,
+	'internal_engines'        => array( array( 'id' => 'eng_a', 'provider' => 'deepseek', 'api_key' => 'sk-x', 'model' => '', 'base_url' => '' ) ),
+	'internal_default_engine' => 'eng_a',
+) );
+TP_AI_Options::flush();
+$tp123_logged = array();
+add_action( 'tpas_reply', function () use ( &$tp123_logged ) { $tp123_logged[] = func_get_args(); } );
+$tp123_reply = function ( $class ) use ( &$tp123_logged ) {
+	foreach ( array_keys( (array) ( $GLOBALS['tp_transients'] ?? array() ) ) as $k ) {
+		if ( 0 === strpos( $k, 'tpas_rt_' ) ) {
+			delete_transient( $k );
+		}
+	}
+	$tp123_logged = array();
+	update_post_meta( 47, '_tpas_ai_summary_en', array( 'text' => 'Cached.', 'provider' => 'DeepSeek', 'model' => 'deepseek-chat', 'created' => time() ) );
+	$a = tp_ajax( array( $class, 'handle_ajax' ), array( 'lang' => 'en', 'type' => 'summary', 'post' => '47' ) );
+	update_post_meta( 47, '_tpas_ai_summary_en', 'gone' );
+	$GLOBALS['tp_http_override'] = array( 'code' => 200, 'body' => json_encode( array( 'choices' => array( array( 'message' => array( 'content' => 'Fresh text.' ), 'finish_reason' => 'stop' ) ) ) ) );
+	$b = tp_ajax( array( $class, 'handle_ajax' ), array( 'lang' => 'en', 'type' => 'plan', 'post' => '47' ) );
+	return array( $a, $b );
+};
+call_user_func( function () use ( $tp123_reply, &$tp123_logged ) {
+	$GLOBALS['tp_hash'][47] = 'old';
+	list( $a, $b ) = $tp123_reply( 'TP_AI_Summary' );
+	$clean = is_array( $a ) && $a['ok'] && is_array( $b ) && $b['ok']
+		&& ! array_key_exists( 'provider', $a['data'] ) && ! array_key_exists( 'model', $a['data'] )
+		&& ! array_key_exists( 'provider', $b['data'] ) && ! array_key_exists( 'model', $b['data'] );
+	$logged = 2 === count( $tp123_logged ) && 'DeepSeek' === $tp123_logged[0][4] && 'deepseek-chat' === $tp123_logged[0][5] && 'plan' === $tp123_logged[1][1] && false === $tp123_logged[1][3];
+	$m = tp123_mutant( 'class-tp-ai-summary.php', 'TP_AI_Summary', 'M04', "'cached' => false,", "'cached' => false, 'provider' => 'leak'," );
+	$leaks = '' !== $m;
+	if ( $leaks ) {
+		list( , $b2 ) = $tp123_reply( $m );
+		$leaks = is_array( $b2 ) && array_key_exists( 'provider', $b2['data'] );
+	}
+	t( 'A04: cached and fresh replies carry no provider/model; both reach the tpas_reply log action; mutant that puts provider back fails', $clean && $logged && $leaks );
+} );
+
 /* ── constant — keep last (cannot be undefined) ──────────────────────── */
 
 update_option( TP_AI_Options::OPTION_KEY, array(
