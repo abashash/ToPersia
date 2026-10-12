@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  ToPersia — هستۀ نمایش
  * Description:  لایۀ نمایش ToPersia — قلم، پالت سه‌حالته، کلید حالت رنگ در سربرگ، و پنل نمایش و خوانایی. قلم و رنگ تم و صفحه‌ساز را تصاحب می‌کند تا یک مرجع واحد بماند.
- * Version:      4.5.0
+ * Version:      4.5.1
  * Requires PHP: 7.4
  * Text Domain:  topersia
  *
@@ -39,7 +39,7 @@ if ( function_exists( 'topersia_render_ready' ) || defined( 'TOPERSIA_RENDER_LOA
 define( 'TOPERSIA_RENDER_LOADED', __FILE__ );
 
 if ( ! defined( 'TOPERSIA_RENDER_VERSION' ) ) {
-	define( 'TOPERSIA_RENDER_VERSION', '4.5.0' );
+	define( 'TOPERSIA_RENDER_VERSION', '4.5.1' );
 }
 
 /** فلگ خاموش‌کننده — در wp-config.php می‌توان false کرد. P5-D137 */
@@ -244,7 +244,7 @@ if ( topersia_render_ready() && function_exists( 'topersia_render_settings_menu'
    المنتور اسکلت چیدمان می‌سازد؛ این دو فایل محتوای هر ناحیه را.  P5-D147
    ------------------------------------------------------------------------- */
 
-foreach ( array( 'includes/topersia-g-core.php', 'includes/topersia-g-map.php', 'includes/topersia-g-weather.php', 'includes/topersia-g-zones.php', 'includes/topersia-g-ai.php', 'includes/topersia-g-news.php', 'includes/topersia-g-gallery-agg.php' ) as $topersia_g_file ) {
+foreach ( array( 'includes/topersia-g-core.php', 'includes/topersia-g-map.php', 'includes/topersia-g-weather.php', 'includes/topersia-g-zones.php', 'includes/topersia-g-ai.php', 'includes/topersia-g-news.php', 'includes/topersia-g-gallery-agg.php', 'includes/topersia-g-relreg.php', 'includes/topersia-g-air.php', 'includes/topersia-g-mappoints.php' ) as $topersia_g_file ) {
 
 	$topersia_g_path = topersia_render_path() . $topersia_g_file;
 
@@ -478,6 +478,8 @@ if ( ! function_exists( 'topersia_render_enqueue_assets' ) ) {
 			'TopersiaG',
 			array(
 				'rest'   => esc_url_raw( rest_url( 'topersia/v1/weather' ) ),
+				/* نقطۀ کیفیت هوا — جعبۀ زیر کارت آب‌وهوا  P5-D345 */
+				'air'    => esc_url_raw( rest_url( 'topersia/v1/air' ) ),
 				/* جدول قاعدۀ تاکردن جست‌وجو از هسته — پنجرۀ فهرست همان را اجرا می‌کند.  P5-D265 */
 				'fold'   => function_exists( 'topersia_search_fold_js_rules' ) ? topersia_search_fold_js_rules() : array(),
 				/* پیام‌های جاوااسکریپت و خطِ رقم به زبان صفحه  ۴٫۴٫۲ */

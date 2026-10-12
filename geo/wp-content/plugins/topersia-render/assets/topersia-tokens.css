@@ -53,6 +53,8 @@
 :root,
 html[data-tp-mode="light"]{
   --tp-bg:#FAF7F1;            --tp-surface:#F4EFE6;
+  /* رده‌های US AQI (کیفیت هوا) — هر رنگ ≥۴٫۵ روی --tp-bg و --tp-surface  P5-D345 */
+  --tp-aqi-1:#227730;  --tp-aqi-2:#836407;  --tp-aqi-3:#aa4c0e;  --tp-aqi-4:#c72923;  --tp-aqi-5:#9945b5;  --tp-aqi-6:#c7235a;
   --tp-primary:#1C9E9A;       --tp-secondary:#2E6E8E;      --tp-accent:#D69C1E;
   --tp-success:#3F7D4E;       --tp-warning:#C9861A;        --tp-error:#B54145;
   --tp-text:#2A2A28;          --tp-text-strong:#2A2A28;    --tp-text-2:#6F6B64;
@@ -75,6 +77,8 @@ html[data-tp-mode="light"]{
 
 html[data-tp-mode="evening"]{
   --tp-bg:#F6EFE4;            --tp-surface:#EFE4D3;
+  /* رده‌های US AQI (کیفیت هوا) — هر رنگ ≥۴٫۵ روی --tp-bg و --tp-surface  P5-D345 */
+  --tp-aqi-1:#206f2d;  --tp-aqi-2:#795c06;  --tp-aqi-3:#a0480d;  --tp-aqi-4:#bf2722;  --tp-aqi-5:#9041aa;  --tp-aqi-6:#ba2154;
   --tp-primary:#AF5E35;       --tp-secondary:#4E6B52;      --tp-accent:#E1A62B;
   --tp-success:#5C8A5B;       --tp-warning:#CC7A2C;        --tp-error:#B24B4A;
   --tp-text:#332B26;          --tp-text-strong:#332B26;    --tp-text-2:#706156;
@@ -99,6 +103,8 @@ html[data-tp-mode="evening"]{
    هالۀ نوری می‌سازد، به‌ویژه برای آستیگمات. سرفصل‌ها روشن ماندند. P5-D155 */
 html[data-tp-mode="dark"]{
   --tp-bg:#11161B;            --tp-surface:#1B232B;
+  /* رده‌های US AQI (کیفیت هوا) — هر رنگ ≥۴٫۵ روی --tp-bg و --tp-surface  P5-D345 */
+  --tp-aqi-1:#39c651;  --tp-aqi-2:#f2b90d;  --tp-aqi-3:#ec6a13;  --tp-aqi-4:#e3635f;  --tp-aqi-5:#b676cb;  --tp-aqi-6:#e35f8b;
   --tp-primary:#27A59D;       --tp-secondary:#3D5E8C;      --tp-accent:#D4A63D;
   --tp-success:#4E9B69;       --tp-warning:#D18A2F;        --tp-error:#CC5A5F;
   --tp-text:#E6E1D9;          --tp-text-strong:#F2EEE7;    --tp-text-2:#B5B1AA;

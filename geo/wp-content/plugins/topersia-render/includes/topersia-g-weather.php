@@ -961,14 +961,24 @@ if ( ! function_exists( 'topersia_g_wx_rest' ) ) {
 	function topersia_g_wx_rest( $request ) {
 
 		$coords = (string) $request->get_param( 'coords' );
-		$parts  = array_map( 'trim', explode( ',', $coords ) );
 
-		if ( count( $parts ) < 2 || ! is_numeric( $parts[0] ) || ! is_numeric( $parts[1] ) ) {
-			return new WP_Error( 'tp_wx_coords', __( 'مختصات نامعتبر است.', 'topersia' ), array( 'status' => 400 ) );
+		/* هر قالبی که تابع مرکزی هسته می‌خواند (۲ه٫۵ · P5-D314)؛ بی آن یا نامعتبر ← همان تجزیۀ دهدهی پیشین */
+		$point = function_exists( 'topersia_geo_point' ) ? topersia_geo_point( $coords ) : null;
+
+		if ( $point ) {
+			$lat = (float) $point['lat'];
+			$lon = (float) $point['lng'];
+		} else {
+
+			$parts = array_map( 'trim', explode( ',', $coords ) );
+
+			if ( count( $parts ) < 2 || ! is_numeric( $parts[0] ) || ! is_numeric( $parts[1] ) ) {
+				return new WP_Error( 'tp_wx_coords', __( 'مختصات نامعتبر است.', 'topersia' ), array( 'status' => 400 ) );
+			}
+
+			$lat = (float) $parts[0];
+			$lon = (float) $parts[1];
 		}
-
-		$lat = (float) $parts[0];
-		$lon = (float) $parts[1];
 
 		if ( ! topersia_g_wx_in_bbox( $lat, $lon ) ) {
 			return new WP_Error( 'tp_wx_coords', __( 'مختصات بیرون از پهنۀ پوشش است.', 'topersia' ), array( 'status' => 400 ) );

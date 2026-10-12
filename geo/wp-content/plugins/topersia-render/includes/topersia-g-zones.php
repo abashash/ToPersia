@@ -76,12 +76,24 @@ if ( ! function_exists( 'topersia_g_in_default_lang' ) ) {
 			return $fn();
 		}
 
+		/*
+		 * پیش‌نمایش پیش‌نویس: WPML زبان پست پیش‌نمایش را بر هر تعویض زبان می‌نشاند
+		 * (WPML_Language_Resolution::current_lang_filter) و تعویض بی‌اثر می‌ماند — شمار
+		 * «استان‌ها» روی ترجمۀ پیش‌نویس ایران ۱ می‌شد. فقط در همین بازه خاموش.  P5-D306
+		 */
+		$no_preview = function_exists( 'add_filter' ) && add_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 );
+
 		do_action( 'wpml_switch_language', $default );
 
 		try {
 			return $fn();
 		} finally {
 			do_action( 'wpml_switch_language', $current );
+			if ( $no_preview ) {
+				remove_filter( 'wpml_should_filter_preview_lang', '__return_false', 99 );
+				/* بازگشت به زبان صفحه، با همان قاعدۀ پیش‌نمایش */
+				do_action( 'wpml_switch_language', $current );
+			}
 		}
 	}
 }
@@ -453,7 +465,7 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
  * پوستۀ یک بخش. بدنۀ خالی یعنی هیچ خروجی — نه سرفصل خالی.
  */
 if ( ! function_exists( 'topersia_g_section' ) ) {
-	function topersia_g_section( $id, $title, $kicker, $body, $class = 'tp-rail-card', $body_style = '', $after = '' ) {
+	function topersia_g_section( $id, $title, $kicker, $body, $class = 'tp-rail-card', $body_style = '', $after = '', $head_extra = '' ) {
 
 		$body = trim( (string) $body );
 
@@ -475,8 +487,13 @@ if ( ! function_exists( 'topersia_g_section' ) ) {
 
 		if ( '' !== (string) $title ) {
 
+			/*
+			 * پیوند «همه …» پس از h3: سربرگ مرجع flex با space-between است، پس عنوان در آغاز و
+			 * پیوند در انتهای سطر می‌نشیند؛ سبک سربرگ و h3 دست نخورد و ترتیب خواندن هم طبیعی است.  ۲ه٫۴
+			 */
 			$head = '<div class="tp-rail-card__head">'
 				. '<h3 id="' . esc_attr( $id ) . 'Title">' . esc_html( $title ) . '</h3>'
+				. $head_extra
 				. '</div>';
 		}
 
@@ -1053,6 +1070,23 @@ if ( ! function_exists( 'topersia_g_title' ) ) {
 	}
 }
 
+/**
+ * تیتر سربرگ (H1) — فقط نام، هر نوع و هر زبان.  ۲ه٫۶ · P5-D315
+ *
+ * قاعدۀ کشور (P5-D281) برای همه: نام کوتاه زبان صفحه (`name_{زبان}`)، وگرنه نام
+ * نمایشی. نام نوع فقط در eyebrow بالای تیتر است. نام نوعی که جزو خود داده است
+ * (مثلاً `name_fa` = «استان …») بریده نمی‌شود — فهرست و تصمیم با کاربر.
+ * فقط H1: `topersia_g_title()` (سرفصل‌ها، خبر، breadcrumb فهرست خبر، alt) دست نمی‌خورد.
+ */
+if ( ! function_exists( 'topersia_g_heading' ) ) {
+	function topersia_g_heading( $post_id ) {
+
+		$short = topersia_g_text( $post_id, 'name_' . topersia_g_page_lang() );
+
+		return '' !== $short ? $short : topersia_g_name( $post_id );
+	}
+}
+
 /* =========================================================================
    ۳ — تاریخ شمسی
    ========================================================================= */
@@ -1242,17 +1276,16 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 		 */
 		$names = array();
 		$here  = topersia_g_page_lang();
-		$title = topersia_g_title( $pid );
+		$title = topersia_g_heading( $pid );
 
 		/*
-		 * تیترِ «فقط نام» (P5-D281) نام رسمیِ زبان صفحه را در خود ندارد —
-		 * «ایران» نه «جمهوری اسلامی ایران» — پس آن هم در همین ردیف می‌آید.
+		 * تیترِ «فقط نام» (P5-D281، از ۲ه٫۶ همۀ نوع‌ها · P5-D315) نام رسمیِ زبان صفحه
+		 * را در خود ندارد — «ایران» نه «جمهوری اسلامی ایران» — پس آن هم در همین ردیف
+		 * می‌آید، مگر همان تیتر باشد.
 		 */
-		$keep_here = 'name' === topersia_g_type_row( $pid )['title'];
-
 		foreach ( array( 'fa', 'en', 'ar' ) as $code ) {
 
-			if ( '' === $official[ $code ] || ( $code === $here && ( ! $keep_here || $official[ $code ] === $title ) ) ) {
+			if ( '' === $official[ $code ] || ( $code === $here && $official[ $code ] === $title ) ) {
 				continue;
 			}
 
@@ -1516,6 +1549,14 @@ if ( ! function_exists( 'topersia_g_crumb_chain' ) ) {
 		$chain = array();
 		$cur   = $pid;
 
+		/*
+		 * با ثبت‌نامۀ زندۀ رابطه (جت‌انجین): زنجیرۀ کامل والدهای مکانی R01 برای هر نوع — همان که BreadcrumbList می‌خواند.
+		 * بی ثبت‌نامه (آزمون بی جت‌انجین): گروه دستی `crumbs`.  ۲و٫۲ · D338
+		 */
+		if ( function_exists( 'topersia_g_crumb_places' ) && topersia_g_relreg() ) {
+			return topersia_g_crumb_places( $pid );
+		}
+
 		if ( ! empty( $group['rels'] ) ) {
 
 			foreach ( $group['rels'] as $spec ) {
@@ -1537,7 +1578,10 @@ if ( ! function_exists( 'topersia_g_crumb_chain' ) ) {
 			}
 		}
 
-		return array_map( 'topersia_g_view_id', array_reverse( $chain ) );
+		/* کشور در مسیر راهنما نیست (D338)؛ فقط در containedInPlace اسکیما می‌ماند */
+		return array_values( array_filter( array_map( 'topersia_g_view_id', array_reverse( $chain ) ), function ( $id ) {
+			return 'tp_country' !== get_post_type( $id );
+		} ) );
 	}
 }
 
@@ -1611,7 +1655,14 @@ if ( ! function_exists( 'topersia_g_schema_graph' ) ) {
 		$ancestors = array();
 		$cur       = $post_id;
 
-		if ( is_array( $config ) && ! empty( $config['parents'] ) && is_array( $config['parents'] ) ) {
+		if ( function_exists( 'topersia_g_place_chain' ) && topersia_g_relreg() ) {
+
+			/* مسیر راهنمای HTML و BreadcrumbList یک زنجیره‌اند: نزدیک‌ترین نیا اول؛ بی‌صفحه نمی‌آید  D338 */
+			$ancestors = array_reverse( array_values( array_filter( topersia_g_place_chain( $post_id ), function ( $id ) {
+				return '' !== topersia_g_public_url( $id );
+			} ) ) );   /* نزدیک‌ترین نیا اول، با کشور */
+
+		} elseif ( is_array( $config ) && ! empty( $config['parents'] ) && is_array( $config['parents'] ) ) {
 
 			foreach ( $config['parents'] as $step ) {
 
@@ -1651,7 +1702,11 @@ if ( ! function_exists( 'topersia_g_schema_graph' ) ) {
 					$items[] = $list[0];
 				}
 
+				/* BreadcrumbList = مسیر راهنمای HTML: بی کشور (D338) */
 				foreach ( array_reverse( $ancestors ) as $view ) {
+					if ( 'tp_country' === get_post_type( $view ) ) {
+						continue;
+					}
 					$items[] = array( '@type' => 'ListItem', 'name' => $name( $view ), 'item' => (string) get_permalink( $view ) );
 				}
 
@@ -1865,6 +1920,13 @@ if ( ! function_exists( 'topersia_g_list_more' ) ) {
 			'provinces'   => 'همه استان‌ها ←',
 			'districts'   => 'همه محله‌ها ←',
 			'culture'     => 'همه فرهنگ ←',
+			/* بخش‌های ستون کناری که کاشی‌هایشان بریده می‌شود — ۲ه٫۴ · P5-D313 */
+			'villages'    => 'همه روستاها ←',
+			'nature'      => 'همه پهنه‌های طبیعی ←',
+			'ancient'     => 'همه محوطه‌های باستانی ←',
+			'routes'      => 'همه مسیرها ←',
+			'subranges'   => 'همه زیرشاخه‌ها ←',
+			'border'      => 'همه گذرهای مرزی ←',
 		);
 
 		if ( isset( $group['more'] ) && '' !== (string) $group['more'] ) {
@@ -1872,6 +1934,35 @@ if ( ! function_exists( 'topersia_g_list_more' ) ) {
 		}
 
 		return ( isset( $keys[ $key ] ) && '' !== $keys[ $key ] ) ? topersia_g_t( $keys[ $key ] ) : __( 'همه موارد ←', 'topersia' );
+	}
+}
+
+/**
+ * سقف کارتِ دیدنیِ هر بخش — بیش از آن «همه …» و پنجرۀ فهرست.  ۲ه٫۴ · P5-D313
+ * اسلایدرها هشت (P5-D276)؛ کاشی‌های ستون کناری شش (`topersia_g_tiles`).
+ */
+if ( ! function_exists( 'topersia_g_list_cap' ) ) {
+	function topersia_g_list_cap( $key ) {
+
+		return in_array( $key, array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' ), true ) ? 6 : topersia_g_slider_max();
+	}
+}
+
+/**
+ * پیوند «همه … ←» کنار عنوان کارتِ ستون کناری — فقط وقتی اعضا بیش از کاشی‌های دیدنی‌اند.
+ * همان `data-tp-list-open` اسلایدرها؛ جاوااسکریپت پنجره را باز می‌کند.  ۲ه٫۴ · P5-D313
+ */
+if ( ! function_exists( 'topersia_g_rail_more' ) ) {
+	function topersia_g_rail_more( $group, $key, $total, $shown ) {
+
+		if ( ! $shown || $total <= $shown ) {
+			return '';
+		}
+
+		$list = 'tp-list-' . $key;
+
+		return '<a class="tp-more tp-more--rail" href="#' . esc_attr( $list ) . '" role="button" aria-haspopup="dialog"'
+			. ' aria-controls="' . esc_attr( $list ) . '" data-tp-list-open>' . esc_html( topersia_g_list_more( $group, $key ) ) . '</a>';
 	}
 }
 
@@ -2288,15 +2379,23 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		$taken  = array_merge( topersia_g_stat_keys( $pid ), array( 'geo_coordinates', 'best_season' ) );
 		$fields = topersia_g_zone_fields( $pid, 'card', $taken );
 
-		/* کاشی‌های `.neighbors` مرجع: نام فیلد بالا، مقدار پررنگ.  P5-D244 */
-		if ( $fields ) {
+		/*
+		 * کاشی‌های `.neighbors` مرجع: نام فیلد بالا، مقدار پررنگ.  P5-D244
+		 * پیش از آن‌ها کاشی‌های والد مکانی R01 (استان، شهر، روستا — بی کشور، بی همتا) و مرکزیت (مرکز استان؛ مرکز شهرستان فقط
+		 * با داده)، با پیوند. کارت برای هر نوعی که والد مکانی یا مرکزیت دارد ساخته می‌شود، حتی بی فیلد ناحیۀ card؛ فیلد دیگری
+		 * به آن اضافه نمی‌شود.  P5-D339 · P5-D342
+		 */
+		$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
 
-			$tiles = array();
+		if ( function_exists( 'topersia_g_geo_center_tiles' ) ) {
+			$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
+		}
 
-			foreach ( $fields as $name => $raw ) {
-				$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
-			}
+		foreach ( $fields as $name => $raw ) {
+			$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
+		}
 
+		if ( $tiles ) {
 			$body .= topersia_g_tiles( $tiles );
 		}
 
@@ -2464,7 +2563,13 @@ if ( ! function_exists( 'topersia_g_sc_weather' ) ) {
 			return '';
 		}
 
+		/*
+		 * مختصات از تابع مرکزی هسته (۲ه٫۵ · P5-D314): دهدهی، درجه-دقیقه-ثانیه، رقم فارسی،
+		 * GeoJSON ← «lat, lng» دهدهی؛ نامعتبر یا بیرون از ایران ← کارت هوا نمی‌آید.
+		 * بی هستۀ ۴٫۱۳٫۲ همان رشتۀ خام (رفتار پیشین).
+		 */
 		$coords = topersia_g_text( $pid, 'geo_coordinates' );
+		$coords = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : $coords;
 
 		if ( '' === $coords ) {
 			return '';
@@ -2560,6 +2665,11 @@ if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 		$cfg['lang']   = topersia_g_page_lang();
 		$cfg['locale'] = topersia_g_map_locale();
 
+		/* نشانگرهای استان و شهر (شهرها، جاذبه‌ها، طبیعت · محله‌ها، روستاها) از نمایۀ مشتق هسته  P5-D346 */
+		if ( function_exists( 'topersia_g_map_points_on' ) && topersia_g_map_points_on( $post_id ) ) {
+			$cfg['points'] = esc_url_raw( add_query_arg( 'context', absint( $post_id ), rest_url( 'topersia/v1/map-points' ) ) );
+		}
+
 		return " data-tp-map-cfg='" . esc_attr( wp_json_encode( $cfg ) ) . "'";
 	}
 }
@@ -2600,6 +2710,10 @@ if ( ! function_exists( 'topersia_g_sc_map' ) ) {
 			return '';
 		}
 
+		/* data-tp-coords دهدهیِ نرمال‌شده (جاوااسکریپت نقشه فقط «lat, lng» می‌خواند)؛ متن دیدنی همان خام  ۲ه٫۵ */
+		$coords_attr = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : '';
+		$coords_attr = '' !== $coords_attr ? $coords_attr : $coords;
+
 		$uid = 'tpmap' . $pid;
 
 		/*
@@ -2637,7 +2751,7 @@ if ( ! function_exists( 'topersia_g_sc_map' ) ) {
 		 */
 		$live = topersia_g_map_attr( $pid );
 
-		$body = '<div class="tp-map-inner" data-tp-map data-tp-coords="' . esc_attr( $coords ) . '"' . $live . '>'
+		$body = '<div class="tp-map-inner" data-tp-map data-tp-coords="' . esc_attr( $coords_attr ) . '"' . $live . '>'
 			. ( '' !== $live ? '<div class="tp-map-live" data-tp-map-live aria-hidden="true"></div>' : '' )
 			. '<svg class="tp-map-svg" viewBox="0 0 320 230" role="img" aria-label="'
 			. esc_attr__( 'نمای شماتیک نقشه', 'topersia' ) . '">'
@@ -3693,36 +3807,19 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 
 		if ( 'routes' === $key ) {
 
-			/* شهرهای همین موجودیت: برای استان زنجیرۀ ۷۲→۷۳، برای شهر خودش. */
-			$type  = function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '';
-			$local = array();
-
-			if ( 'tp_province' === $type ) {
-				$local = topersia_g_chain_ids( $pid, array(
-					array( 'id' => 72, 'dir' => 'children' ),
-					array( 'id' => 73, 'dir' => 'children' ),
-				) );
-			} elseif ( 'tp_city' === $type ) {
-				$local = array( $pid );
-			}
-
+			/*
+			 * کاشی مسیر فقط نام است — سطر دوم (شهر یا ایستگاه) برداشته شد.  P5-D343
+			 * نام از همان تابعِ نام (`official_name_{زبان}` · `name_{زبان}` اگر فیلدش را دارد، وگرنه عنوان پست)؛
+			 * FIELDMAP برای نوع مسیر فیلد نام کوتاه ندارد، پس عنوان پست.
+			 */
 			$tiles = array();
 
 			foreach ( $result['items'] as $item ) {
-
-				$via = array();
-
-				if ( $local ) {
-					$on_route = topersia_g_rel_ids( $item['id'], array( array( 'id' => 173, 'dir' => 'children' ) ) );
-					foreach ( array_intersect( $on_route, $local ) as $city ) {
-						$via[] = topersia_g_name( topersia_g_view_id( $city ) );
-					}
-				}
-
-				$tiles[] = array( 'name' => $item['name'], 'sub' => implode( ' · ', $via ), 'url' => $item['url'] );
+				$tiles[] = array( 'name' => $item['name'], 'url' => $item['url'] );
 			}
 
-			return topersia_g_section( 'tp-routes', $title, $kick, topersia_g_tiles( $tiles, $shown ) );
+			return topersia_g_section( 'tp-routes', $title, $kick, topersia_g_tiles( $tiles, $shown ), 'tp-rail-card', '', '',
+				topersia_g_rail_more( $group, 'routes', count( $tiles ), $shown ) );
 		}
 
 		/*
@@ -3754,7 +3851,9 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 			'tp-' . $key,
 			isset( $group['title'] ) ? $group['title'] : '',
 			isset( $group['kicker'] ) ? $group['kicker'] : '',
-			topersia_g_tiles( $tiles, $shown )
+			topersia_g_tiles( $tiles, $shown ),
+			'tp-rail-card', '', '',
+			topersia_g_rail_more( $group, $key, count( $tiles ), $shown )
 		);
 	}
 }
@@ -4368,22 +4467,26 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
 
 		foreach ( topersia_g_zone_fields( $pid, 'card', array( 'geo_coordinates' ) ) as $name => $raw ) {
 
-			/* چیپ‌های مرجع متن خالص‌اند — «مساحت: ۱۰۷٬۰۱۸ km²». */
+			/*
+			 * چیپ‌های مرجع متن خالص‌اند — «مساحت: ۱۰۷٬۰۱۸ km²». در صفحۀ غیرفارسی تکۀ فارسیِ
+			 * مقدار (دامنۀ «.ایران») با زبان خودش — همان کاشی‌ها؛ فارسی بی‌تغییر.  P5-D278
+			 */
 			$chips .= '<span>' . esc_html( topersia_g_t( $map[ $name ]['label'] ) ) . ': '
-				. esc_html( trim( wp_strip_all_tags( topersia_g_value( $name, $raw ) ) ) )
+				. topersia_g_lang_runs( trim( wp_strip_all_tags( topersia_g_value( $name, $raw ) ) ) )
 				. '</span>';
 		}
 
 		$type = function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '';
 
 		/*
-		 * «دربارۀ استان اصفهان» — نه «پاسخ مستقیم».  P5-D224
-		 * نام از همان تابعِ تیتر سربرگ می‌آید، پس دو جا هرگز واگرا نمی‌شوند.
+		 * «دربارۀ تالاب گاوخونی» — نه «پاسخ مستقیم»، نه «دربارۀ پهنه آبی تالاب گاوخونی».  P5-D224 · P5-D341
+		 * نام از همان تابعِ H1 سربرگ (`topersia_g_heading`) می‌آید، پس دو جا هرگز واگرا نمی‌شوند؛
+		 * نام نوعی که خودِ نامِ ذخیره‌شده دارد (مثلاً «استان تهران») بریده نمی‌شود.
 		 */
 		$about = sprintf(
-			/* translators: %s: نام کامل موجودیت، مثل «استان اصفهان» */
+			/* translators: %s: نام موجودیت، مثل «تالاب گاوخونی» — بی نام نوعی که رندر اضافه می‌کرد  P5-D341 */
 			__( 'دربارۀ %s', 'topersia' ),
-			topersia_g_title( $pid )
+			topersia_g_heading( $pid )
 		);
 
 		/* بدنۀ «درباره» تراز دوطرفه است؛ سرفصل‌های درونش نه.  P5-D270 */
@@ -5109,13 +5212,24 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 		$ref    = topersia_g_text( $pid, 'external_reference_uri' );
 
 		/*
+		 * وضعیت راستی‌آزمایی هر زبان جداست (WPML 1.13: content_status «ignore»).
+		 * ترجمۀ بی مقدار «نیازمند راستی‌آزمایی» است و نه وضعیت اصل فارسی را
+		 * می‌گیرد نه تاریخ راستی‌آزمایی‌اش را (last_verified_date هنوز copy است).  P5-D308
+		 */
+		$own = '' !== $status;
+
+		if ( ! $own && topersia_g_default_id( $pid ) !== (int) $pid ) {
+			$status = 'needs_verification';
+		}
+
+		/*
 		 * تاریخ راستی‌آزمایی زیر مقدار «وضعیت محتوا»، در همان خانه — نشانِ
 		 * جداگانۀ «✓ آخرین راستی‌آزمایی: …» رفت. تاریخ نبود، فقط وضعیت.
 		 * `<time datetime>` تا تاریخ ماشین‌خوان هم باشد.  P5-D268
 		 */
 		if ( '' !== $status ) {
 
-			$raw  = trim( (string) topersia_g_raw( $pid, 'last_verified_date' ) );
+			$raw  = $own ? trim( (string) topersia_g_raw( $pid, 'last_verified_date' ) ) : '';
 			$when = topersia_g_date_fa( $raw );
 			$iso  = preg_match( '/^\d{4}-\d{2}-\d{2}/', $raw ) ? substr( $raw, 0, 10 )
 				: ( preg_match( '/^\d{9,11}$/', $raw ) ? gmdate( 'Y-m-d', (int) $raw ) : '' );
@@ -5427,6 +5541,7 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 				array( 'fn' => 'topersia_g_sc_map',       'id' => 'tp-map',     'nav' => 'نقشه' ),
 				array( 'fn' => 'topersia_g_sc_seasons',   'id' => 'tp-season',  'nav' => 'زمان سفر' ),
 				array( 'fn' => 'topersia_g_sc_weather',   'id' => 'tp-weather', 'nav' => '' ),
+				array( 'fn' => 'topersia_g_sc_air',       'id' => 'tp-aqi',     'nav' => '' ),   /* کیفیت هوا زیر کارت هوا — P5-D345 */
 				array( 'fn' => 'topersia_g_sc_audio',     'id' => 'tp-audio',   'nav' => 'روایت‌ها' ),   /* P5-D227 */
 				array( 'fn' => 'topersia_g_sc_facts',     'id' => 'tp-geo',     'nav' => 'جغرافیا' ),
 				array( 'fn' => 'topersia_g_sc_badges',    'id' => 'tp-badges',  'nav' => '' ),
@@ -5667,13 +5782,13 @@ if ( ! function_exists( 'topersia_g_sc_page' ) ) {
 		 * هر اسلایدرِ رابطه (اگر بیش از هشت عضو دارد — P5-D276)، فرهنگ، و هر
 		 * برنامۀ نشان.
 		 */
-		foreach ( $layout['main'] as $zone ) {
+		foreach ( array_merge( $layout['main'], $layout['rail'] ) as $zone ) {
 
 			if ( ! isset( $rendered[ $zone['id'] ] ) ) {
 				continue;
 			}
 
-			if ( in_array( $zone['fn'], array( 'topersia_g_sc_slider', 'topersia_g_sc_culture' ), true ) ) {
+			if ( in_array( $zone['fn'], array( 'topersia_g_sc_slider', 'topersia_g_sc_culture', 'topersia_g_sc_relgrid' ), true ) ) {
 				$modals .= topersia_g_safe( 'topersia_g_list_modal', array( $pid, isset( $zone['atts']['rel'] ) ? $zone['atts']['rel'] : 'culture' ), $pid, $notes );
 			} elseif ( 'topersia_g_sc_programmes' === $zone['fn'] ) {
 				$modals .= topersia_g_safe( 'topersia_g_programme_modals', array( $pid ), $pid, $notes );
@@ -5790,6 +5905,7 @@ if ( ! function_exists( 'topersia_g_section_icon' ) ) {
 			'tp-geo'         => 'globe',
 			'tp-season'      => 'cal',
 			'tp-weather'     => 'cloud',
+			'tp-aqi'         => 'wave',
 			'tp-badges'      => 'medal',
 			'tp-border'      => 'gate',
 			'tp-subranges'   => 'mount',
@@ -6131,15 +6247,20 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 
 			$res = topersia_g_rel_items( $post_id, $key, 0 );
 
-			/* هشت یا کمتر: همه در خودِ اسلایدرند — نه پیوند، نه مودال.  P5-D276 */
-			if ( $res['total'] <= topersia_g_slider_max() ) {
+			/* هشت یا کمتر در اسلایدر، شش یا کمتر در ستون کناری: همه دیده‌اند — نه پیوند، نه مودال.  P5-D276 · P5-D313 */
+			if ( $res['total'] <= topersia_g_list_cap( $key ) ) {
 				return '';
 			}
 
 			$items = array();
+			/* ستون کناری با اعضای ناهم‌نوع: برچسب نوع زیر هر نام؛ اسلایدرها همان رفتار پیشین (جمعیت یا بی برچسب) */
+			$mixed = 6 === topersia_g_list_cap( $key )
+				&& count( array_unique( array_map( function ( $i ) { return (string) ( isset( $i['kind'] ) ? $i['kind'] : '' ); }, $res['items'] ) ) ) > 1;
 
 			foreach ( $res['items'] as $item ) {
-				$items[] = array( 'name' => $item['name'], 'meta' => topersia_g_list_meta( $key, $item ), 'url' => $item['url'] );
+				$meta    = topersia_g_list_meta( $key, $item );
+				$meta    = ( '' === $meta && $mixed && ! empty( $item['kind'] ) ) ? (string) $item['kind'] : $meta;
+				$items[] = array( 'name' => $item['name'], 'meta' => $meta, 'url' => $item['url'] );
 			}
 
 			if ( $items ) {
@@ -6272,7 +6393,7 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 				. '<div class="tp-modal__pin"></div>'
 				/* نقشۀ تعاملی — فقط با کلیک «باز کردن نقشۀ کامل» بار می‌شود.  P5-D241 */
 				. ( '' !== topersia_g_map_attr( $post_id )
-					? '<div class="tp-map-live tp-map-live--full" data-tp-map-full data-tp-coords="' . esc_attr( $coords ) . '"' . topersia_g_map_attr( $post_id ) . '></div>'
+					? '<div class="tp-map-live tp-map-live--full" data-tp-map-full data-tp-coords="' . esc_attr( function_exists( 'topersia_geo_attr' ) && '' !== topersia_geo_attr( $coords ) ? topersia_geo_attr( $coords ) : $coords ) . '"' . topersia_g_map_attr( $post_id ) . '></div>'
 					: '' )
 				. '</div>'
 				. '<div class="tp-modal__meta">'

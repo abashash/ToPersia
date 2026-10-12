@@ -55,7 +55,7 @@ function topersia_services_catalog() {
 	return (array) apply_filters( 'topersia_services_catalog', array(
 		'ai.tts'          => array( 'label' => 'صدای هوش مصنوعی', 'purpose' => 'روایت و پادکست — فاز ۴', 'provider' => 'gemini-tts', 'enabled' => false ),
 		'weather'         => array( 'label' => 'هوا', 'purpose' => 'کارت «هوای این روزها» و انیمیشن سربرگ', 'provider' => 'met-norway', 'enabled' => true ),
-		'air_quality'     => array( 'label' => 'کیفیت هوا', 'purpose' => 'خانۀ کیفیت هوا — فاز ۳', 'provider' => 'open-meteo-aq', 'enabled' => false ),
+		'air_quality'     => array( 'label' => 'کیفیت هوا', 'purpose' => 'جعبۀ «کیفیت هوا» زیر کارت آب‌وهوا (US AQI · PM2.5 · PM10 · غبار)', 'provider' => 'open-meteo-aq', 'enabled' => true ),
 		'map.tiles'       => array( 'label' => 'کاشی نقشه', 'purpose' => 'نقشۀ خودمیزبان PMTiles', 'provider' => 'pmtiles', 'enabled' => true ),
 		'routing'         => array( 'label' => 'مسیریابی', 'purpose' => 'مسیر میان دو نقطه — فاز ۳', 'provider' => 'neshan-routing', 'enabled' => false ),
 		'distance_matrix' => array( 'label' => 'ماتریس فاصله', 'purpose' => 'فاصلۀ چند نقطه — فاز ۳', 'provider' => 'neshan-matrix', 'enabled' => false ),

@@ -259,6 +259,15 @@
 	   فهرست بخش‌ها از خودِ پیوندهای نوار می‌آید، نه از یک آرایۀ ثابت:
 	   نوار را PHP از ناحیه‌هایی می‌سازد که واقعاً محتوا داشتند، پس هر
 	   فهرست ثابتی روی سیزده نوع پست غلط می‌شد.
+
+	   ۲ه٫۱ · P5-D310 — حرکت نرم، ظاهر ایستا عیناً مرجع:
+	   · کلیک ← scrollIntoView نرم؛ فاصلۀ سربرگ و نوار از scroll-margin-top بخش.
+	   · بخش فعال با IntersectionObserver روی یک خط درست زیر نوار؛ تغییرها در
+	     requestAnimationFrame جمع می‌شوند (بی لرزش در اسکرول تند).
+	   · نشانگر فعال می‌لغزد: قرصی همان شکل پیوند فعال از جای پیشین با transform به
+	     جای تازه می‌رود و پس از پایان کنار می‌رود — در حال سکون همان کلاس tp-is-active
+	     مرجع است، پس سبک‌های محاسبه‌شده با مرجع یکی می‌مانند.
+	   · prefers-reduced-motion ← همه فوری.
 	   ────────────────────────────────────────────────────────────────── */
 	( function () {
 
@@ -288,7 +297,13 @@
 
 		var lockUntil = 0;
 		var strip     = nav.querySelector( '.tp-snav__in' );
-		var calm      = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+		var calmQuery = window.matchMedia ? window.matchMedia( '(prefers-reduced-motion: reduce)' ) : null;
+		var current   = null;
+		var ghost     = null;
+
+		function calm() {
+			return !! ( calmQuery && calmQuery.matches );
+		}
 
 		/*
 		 * پیوند فعال به میانۀ نوار می‌آید — فقط افقی.  ۴٫۲٫۱ بند ۳
@@ -312,31 +327,97 @@
 				return;
 			}
 
-			strip.scrollTo( { left: strip.scrollLeft + delta, behavior: calm ? 'auto' : 'smooth' } );
+			strip.scrollTo( { left: strip.scrollLeft + delta, behavior: calm() ? 'auto' : 'smooth' } );
+		}
+
+		/*
+		 * قرص لغزان: هم‌شکل پیوند فعال پیشین (سبک محاسبه‌شدۀ همان)، درون نوار چسبان (جعبۀ
+		 * موقعیت‌دار) و زیر پیوندها؛ با transform از قاب پیشین به قاب تازه می‌رود و در
+		 * پایان کلاس فعال روی پیوند تازه می‌نشیند. فقط وقتی نوار افقی جا شده — وگرنه
+		 * لغزیدن نرم خود نوار (reveal) همان حرکت است.
+		 */
+		function slide( from, to, done ) {
+
+			if ( ghost ) {
+				ghost.remove();
+				ghost = null;
+			}
+
+			if ( calm() || ! from || ! to || from === to || ! strip || strip.scrollWidth > strip.clientWidth + 1 ) {
+				done();
+				return;
+			}
+
+			var base = nav.getBoundingClientRect();
+			var a    = from.getBoundingClientRect();
+			var b    = to.getBoundingClientRect();
+			var cs   = window.getComputedStyle( from );
+
+			ghost = document.createElement( 'span' );
+			ghost.className = 'tp-snav__ghost';
+			ghost.setAttribute( 'aria-hidden', 'true' );
+			ghost.style.cssText = 'position:absolute;pointer-events:none;top:' + ( b.top - base.top ) + 'px;left:' + ( b.left - base.left ) + 'px;'
+				+ 'width:' + b.width + 'px;height:' + b.height + 'px;border-radius:' + cs.borderRadius + ';background:' + cs.backgroundColor + ';box-shadow:' + cs.boxShadow + ';'
+				+ 'transform-origin:0 50%;transform:translateX(' + ( a.left - b.left ) + 'px) scaleX(' + ( b.width ? a.width / b.width : 1 ) + ');';
+			nav.insertBefore( ghost, nav.firstChild );
+
+			var end = function () {
+				if ( ! ghost ) { return; }
+				ghost.remove();
+				ghost = null;
+				done();
+			};
+
+			window.requestAnimationFrame( function () {
+				window.requestAnimationFrame( function () {
+					if ( ! ghost ) { return; }
+					ghost.style.transition = 'transform .28s cubic-bezier(.2,.7,.2,1)';
+					ghost.style.transform  = 'none';
+					ghost.addEventListener( 'transitionend', end, { once: true } );
+					window.setTimeout( end, 450 );
+				} );
+			} );
 		}
 
 		function setActive( id ) {
 
-			links.forEach( function ( a ) { a.classList.remove( 'tp-is-active' ); } );
-
 			var link = byId[ id ];
 
-			if ( ! link ) {
+			if ( ! link || link === current ) {
 				return;
 			}
 
-			link.classList.add( 'tp-is-active' );
+			var prev = current;
+			current  = link;
+
 			reveal( link );
+			slide( prev, link, function () {
+				if ( current !== link ) { return; }
+				links.forEach( function ( a ) { a.classList.toggle( 'tp-is-active', a === link ); } );
+			} );
+
+			/* پیوند پیشین فوراً عادی؛ قرص جای پس‌زمینه‌اش را تا پایان لغزش می‌گیرد */
+			if ( prev && prev !== link ) {
+				prev.classList.remove( 'tp-is-active' );
+			}
 		}
+		/* خط بخش فعال: هدر + نوار + کمی نفس — همان آستانۀ پیشین */
+		function line() {
+			return Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) + 24;
+		}
+
+		var lockTimer = 0;
 
 		function pick() {
 
+			/* قفلِ پس از کلیک: پایانش دوباره بسنج — IntersectionObserver فقط هنگام عبور خبر می‌دهد، نه با اتمام قفل */
 			if ( Date.now() < lockUntil ) {
+				window.clearTimeout( lockTimer );
+				lockTimer = window.setTimeout( later, lockUntil - Date.now() + 40 );
 				return;
 			}
 
-			/* بخشی فعال است که بالایش از زیرِ نوار گذشته — هدر + نوار + کمی نفس. */
-			var threshold = Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) + 24;
+			var threshold = line();
 			var bestId    = null;
 			var bestTop   = -Infinity;
 
@@ -359,45 +440,167 @@
 			setActive( bestId || ids[ 0 ] );
 		}
 
+		/* IntersectionObserver روی خط یک‌پیکسلی زیر نوار؛ هر عبور بخشی از خط ← یک pick در فریم بعد */
+		var queued = false;
+		function later() {
+			if ( ! queued ) {
+				queued = true;
+				window.requestAnimationFrame( function () { queued = false; pick(); } );
+			}
+		}
+
+		var io = null;
+		function observe() {
+
+			if ( ! ( 'IntersectionObserver' in window ) ) {
+				return false;
+			}
+
+			if ( io ) {
+				io.disconnect();
+			}
+
+			var top = Math.round( line() );
+			var bottom = Math.max( 0, window.innerHeight - top - 1 );
+
+			io = new IntersectionObserver( later, { rootMargin: '-' + top + 'px 0px -' + bottom + 'px 0px', threshold: 0 } );
+
+			ids.forEach( function ( id ) {
+				var el = document.getElementById( id );
+				if ( el ) { io.observe( el ); }
+			} );
+
+			return true;
+		}
+
+		/*
+		 * اسکرول نرم تا بخش، با فاصلۀ هدر چسبان و نوار — ۲ه٫۱ · P5-D310
+		 *
+		 * `scroll-margin-top` هنگام کلیک خوانده می‌شود، و بالای صفحه هدر وودمارت هنوز چسبان
+		 * نیست (--tp-snav-top صفر) — پس اسکرولِ نرم ۵۱ پیکسل کوتاه می‌رسید و بخش زیر هدر
+		 * می‌ماند (لنگر بومی هم همین‌طور بود). هدف را همین‌جا حساب می‌کنیم و تا پایان
+		 * اسکرول هر بار که هدر عوض شد دوباره نشانه می‌گیریم.
+		 */
+		var goingTo = 0;
+
+		/* هر ورودی کاربر اسکرولِ در جریان را رها می‌کند — صفحه را به بخش برنمی‌گردانیم */
+		[ 'wheel', 'touchstart', 'keydown', 'mousedown' ].forEach( function ( type ) {
+			window.addEventListener( type, function () { goingTo ++; }, { passive: true } );
+		} );
+
+		function goTo( el ) {
+
+			var token  = ++goingTo;
+			var began  = Date.now();
+			var aim    = -1;
+			var steadyAt = 0;
+			var lastY  = window.pageYOffset || 0;
+			var dir    = 0;
+			var aimedAt = 0;
+
+			/* بخشِ ستون کناریِ چسبان (sticky) هرگز بالای نوار نمی‌رسد: اگر در دید است نمی‌رویم، وگرنه یک‌بار — نه تعقیبِ بی‌پایان */
+			function pinned() {
+				for ( var p = el; p && p !== document.body; p = p.parentElement ) {
+					if ( 'sticky' === window.getComputedStyle( p ).position ) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			var pin = pinned();
+
+			function want() {
+				return Math.max( 0, Math.round( el.getBoundingClientRect().top + ( window.pageYOffset || 0 )
+					- ( Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight ) ) ) );
+			}
+
+			function step() {
+
+				if ( token !== goingTo ) {
+					return;
+				}
+
+				var here = window.pageYOffset || 0;
+
+				/* صفحه را کس دیگری (اسکریپت، نوار پیمایش…) از مسیر ما بیرون برد ← رها کن؛ تعقیب تنها برای تغییر قدِ هدر است نه بازگرداندن صفحه */
+				if ( aim >= 0 && ( ( dir && Date.now() - aimedAt > 400 && ( here - lastY ) * dir < -2 ) || ( steadyAt && Math.abs( here - lastY ) > 2 ) ) ) {
+					goingTo ++;
+					return;
+				}
+
+				lastY = here;
+
+				var y = want();
+
+				if ( pin && aim < 0 ) {
+					var r  = el.getBoundingClientRect();
+					var by = Math.max( 0, snavTop ) + ( snavH > 0 ? snavH : nav.offsetHeight );
+					if ( r.top >= by && r.bottom <= window.innerHeight ) {
+						return;
+					}
+				}
+
+				if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {
+					aim    = y;
+					aimedAt = Date.now();
+					dir    = y > here ? 1 : ( y < here ? -1 : 0 );
+					steadyAt = 0;
+					window.scrollTo( { top: y, behavior: calm() ? 'auto' : 'smooth' } );
+				} else if ( Math.abs( ( window.pageYOffset || 0 ) - aim ) <= 1 ) {
+					steadyAt = steadyAt || Date.now();
+				} else {
+					steadyAt = 0;
+				}
+
+				/* رسیده و حدود ۶۰۰ms آرام ← پایان (نه شمار فریم: روی ماشین کند فریم‌ها دیر می‌آیند)؛ سقف ۱٫۸ ثانیه */
+				if ( ( ! steadyAt || Date.now() - steadyAt <= 600 ) && Date.now() - began < 1800 ) {
+					window.requestAnimationFrame( step );
+				}
+			}
+
+			step();
+		}
+
 		links.forEach( function ( a ) {
-			a.addEventListener( 'click', function () {
+			a.addEventListener( 'click', function ( e ) {
 				var href = a.getAttribute( 'href' ) || '';
 				if ( '#' !== href.charAt( 0 ) ) { return; }
+				var el = document.getElementById( href.slice( 1 ) );
+				if ( ! el ) { return; }
+				e.preventDefault();
 				setActive( href.slice( 1 ) );
 				lockUntil = Date.now() + 1600;
+				goTo( el );
+				if ( window.history && window.history.replaceState ) {
+					window.history.replaceState( null, '', href );
+				}
 			} );
 		} );
 
 		window.addEventListener( 'hashchange', function () {
 			var id = ( location.hash || '' ).replace( '#', '' );
-			if ( id ) { setActive( id ); lockUntil = Date.now() + 1200; }
+			if ( id ) {
+				setActive( id );
+				lockUntil = Date.now() + 1200;
+				if ( byId[ id ] && document.getElementById( id ) ) { goTo( document.getElementById( id ) ); }
+			}
 		} );
 
-		var ticking = false;
+		/* بی IntersectionObserver همان شنوندۀ اسکرول پیشین */
+		if ( ! observe() ) {
+			window.addEventListener( 'scroll', later, { passive: true } );
+		}
 
-		window.addEventListener( 'scroll', function () {
+		window.addEventListener( 'resize', function () { lockUntil = 0; observe(); later(); }, { passive: true } );
 
-			if ( ticking ) {
-				return;
-			}
-
-			ticking = true;
-
-			window.requestAnimationFrame( function () {
-				pick();
-				ticking = false;
-			} );
-		}, { passive: true } );
-
-		window.addEventListener( 'resize', function () { lockUntil = 0; pick(); }, { passive: true } );
-
-		if ( location.hash ) {
+		if ( location.hash && byId[ location.hash.replace( '#', '' ) ] ) {
 			setActive( location.hash.replace( '#', '' ) );
 		} else {
 			pick();
 		}
 
-		window.addEventListener( 'load', pick, { once: true } );
+		window.addEventListener( 'load', function () { observe(); pick(); }, { once: true } );
 	} )();
 
 	/* ══ اسلایدرها — P5-D243 (جایگزین P5-D226) ══════════════════════════
@@ -1359,14 +1562,28 @@
 		} );
 	} );
 
-	/* ══ کاشی‌های ستون کناری — P5-D244 ══════════════════════════════════
-	   سه ستون، مثل «استان‌های هم‌مرز». اگر در یک کارت حتی یک کاشی سرریز کند
-	   — نامی که با `word-break:normal` و بی‌خط‌تیره نمی‌تواند وسط واژه بشکند —
-	   همان کارت دو ستونه می‌شود. هر بار در سه ستون سنجیده می‌شود، پس با
-	   پهن‌تر شدن ستون به سه برمی‌گردد. ResizeObserver فقط تغییر پهنا را
-	   می‌شمارد تا عوض‌کردنِ ستون‌ها دور بی‌پایان نسازد؛ رسیدن قلم هم دوباره
-	   می‌سنجد، چون پهنای واژه با قلم عوض می‌شود.
+	/* ══ کاشی‌های ستون کناری — P5-D244 · P5-D344 ═════════════════════════
+	   پیش‌فرض سه ستون. اگر متنِ حتی یک کاشیِ یک کارت بیش از دو خط شد، کل همان
+	   کارت دوستونه می‌شود. شمارش خط از ارتفاع واقعی عنصر ÷ ارتفاع خط (نه از
+	   پهنا). واژه هرگز شکسته نمی‌شود (word-break:normal)؛ پس واژه‌ای که از پهنای
+	   کاشی بلندتر است سرریز می‌کند و آن هم دوستونه‌اش می‌کند (جایگزین معیار
+	   سرریزِ تنهای P5-D244: سرریز فقط نگهبان واژۀ ناشکستنی است). هر بار در
+	   سه ستون سنجیده می‌شود، پس با پهن‌تر شدن ستون به سه برمی‌گردد.
+	   ResizeObserver فقط تغییر پهنا را می‌شمارد تا عوض‌کردنِ ستون‌ها دور
+	   بی‌پایان نسازد؛ رسیدن قلم (`document.fonts.ready`) هم دوباره می‌سنجد.
 	   ────────────────────────────────────────────────────────────────── */
+	function lineCount( el ) {
+
+		var cs = window.getComputedStyle( el );
+		var lh = parseFloat( cs.lineHeight );
+
+		if ( ! lh ) {
+			lh = parseFloat( cs.fontSize ) * 1.3;
+		}
+
+		return Math.round( el.getBoundingClientRect().height / lh );
+	}
+
 	function fitTiles( grid ) {
 
 		grid.classList.remove( 'tp-tiles--2' );
@@ -1375,13 +1592,25 @@
 
 			var tile = grid.children[ i ];
 
-			if ( ! tile.hidden && tile.scrollWidth > tile.clientWidth + 1 ) {
+			if ( tile.hidden ) {
+				continue;
+			}
+
+			if ( tile.scrollWidth > tile.clientWidth + 1 ) {
 				grid.classList.add( 'tp-tiles--2' );
 				return;
 			}
+
+			var texts = tile.querySelectorAll( 'b, .tp-tile__k, .tp-tile__sub' );
+
+			for ( var j = 0; j < texts.length; j ++ ) {
+				if ( lineCount( texts[ j ] ) > 2 ) {
+					grid.classList.add( 'tp-tiles--2' );
+					return;
+				}
+			}
 		}
 	}
-
 	( function () {
 
 		var grids = page.querySelectorAll( '[data-tp-tiles]' );
@@ -1737,9 +1966,11 @@
 			if ( btn ) {
 
 				var key = btn.getAttribute( 'data-tp-go' );
+				/* ۲ه٫۱ · P5-D310 — با prefers-reduced-motion بی حرکت */
+				var how = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ? 'auto' : 'smooth';
 
 				if ( 'top' === key ) {
-					window.scrollTo( { top: 0, behavior: 'smooth' } );
+					window.scrollTo( { top: 0, behavior: how } );
 					return;
 				}
 
@@ -1752,7 +1983,7 @@
 				var el = document.getElementById( key );
 
 				if ( el ) {
-					el.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+					el.scrollIntoView( { behavior: how, block: 'start' } );
 				}
 
 				return;
@@ -1858,6 +2089,12 @@
 			return ready;
 		}
 
+		/* حالت عصر و شب ← سبک تیرۀ Protomaps؛ روز ← روشن. حالت از `data-tp-mode` صفحه (همان کلید کاربر).  P5-D346 */
+		function flavorOf() {
+			var m = document.documentElement.getAttribute( 'data-tp-mode' ) || 'light';
+			return ( 'dark' === m || 'evening' === m ) ? 'dark' : 'light';
+		}
+
 		function style( cfg ) {
 
 			var base = new URL( cfg.base, location.href ).href;
@@ -1865,6 +2102,7 @@
 			return {
 				version: 8,
 				glyphs: base + 'fonts/{fontstack}/{range}.pbf',
+				/* اسپرایت فقط نمادهای جادّه/نشان است؛ نسخۀ تیره‌اش در بسته نیست و روشن برای هر دو سبک می‌ماند */
 				sprite: base + 'sprites/light',
 				sources: {
 					protomaps: {
@@ -1873,8 +2111,150 @@
 						attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">' + ( cfg.attribution || '© OpenStreetMap' ) + '</a>'
 					}
 				},
-				layers: window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( 'light' ), { lang: cfg.lang || 'fa' } )
+				layers: window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( flavorOf() ), { lang: cfg.lang || 'fa' } )
 			};
+		}
+
+		/* ── نشانگرها: آیکون هر خانواده، خوشه‌بندی داخلی GeoJSON خودِ MapLibre، پنجرۀ کوچک  P5-D346 ── */
+		var FAM = {
+			city:       'M3 21h18v-2H3v2zM5 19h2V9H5v10zm6 0h2V5h-2v14zm6 0h2v-7h-2v7z',
+			attraction: 'M12 2 2 8v2h20V8L12 2zM4 11v7h3v-7H4zm6.5 0v7h3v-7h-3zM17 11v7h3v-7h-3zM2 20v2h20v-2H2z',
+			nature:     'M14 6l-3.75 5 2.85 3.8-1.6 1.2C9.81 13.75 7 10 7 10l-6 8h22L14 6z',
+			district:   'M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z',
+			village:    'M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3z'
+		};
+
+		function famImage( fam, color, ratio ) {
+
+			var size = Math.round( 34 * ratio );
+			var cv   = document.createElement( 'canvas' );
+			cv.width = cv.height = size;
+
+			var c = cv.getContext( '2d' );
+			c.beginPath();
+			c.arc( size / 2, size / 2, size / 2 - 2 * ratio, 0, Math.PI * 2 );
+			c.fillStyle = color;
+			c.fill();
+			c.lineWidth = 2 * ratio;
+			c.strokeStyle = '#ffffff';
+			c.stroke();
+			c.save();
+			c.translate( size / 2 - 10 * ratio, size / 2 - 10 * ratio );
+			c.scale( 20 * ratio / 24, 20 * ratio / 24 );
+			c.fillStyle = '#ffffff';
+			c.fill( new Path2D( FAM[ fam ] ) );
+			c.restore();
+
+			return c.getImageData( 0, 0, size, size );
+		}
+
+		function safeUrl( u ) {
+			return /^(https?:)?\/\//.test( u ) || '/' === ( u || '' ).charAt( 0 ) ? u : '';
+		}
+
+		function popupNode( p ) {
+
+			var box = document.createElement( 'div' );
+			box.className = 'tp-mp';
+
+			if ( p.i && safeUrl( p.i ) ) {
+				var im = document.createElement( 'img' );
+				im.className = 'tp-mp__img';
+				im.alt       = '';
+				im.loading   = 'lazy';
+				im.src       = p.i;
+				box.appendChild( im );
+			}
+
+			var name = document.createElement( safeUrl( p.u ) ? 'a' : 'span' );
+			name.className   = 'tp-mp__name';
+			name.textContent = p.n || '';
+
+			if ( safeUrl( p.u ) ) {
+				name.setAttribute( 'href', p.u );
+			}
+
+			var kind = document.createElement( 'span' );
+			kind.className   = 'tp-mp__kind';
+			kind.textContent = p.t || '';
+
+			box.appendChild( name );
+			box.appendChild( kind );
+
+			return box;
+		}
+
+		function addPoints( map, ml, box, interactive ) {
+
+			var data = box.tpPoints;
+
+			if ( ! data || ! data.features || ! data.features.length || map.getSource( 'tp-pts' ) ) {
+				return;
+			}
+
+			var tint  = getComputedStyle( box ).getPropertyValue( '--tp-primary' ).trim() || '#0e7c74';
+			var ratio = window.devicePixelRatio >= 2 ? 2 : 1;
+
+			Object.keys( FAM ).forEach( function ( f ) {
+				if ( ! map.hasImage( 'tp-fam-' + f ) ) {
+					map.addImage( 'tp-fam-' + f, famImage( f, tint, ratio ), { pixelRatio: ratio } );
+				}
+			} );
+
+			map.addSource( 'tp-pts', { type: 'geojson', data: data, cluster: true, clusterRadius: 46, clusterMaxZoom: 11 } );
+
+			map.addLayer( { id: 'tp-pts-cluster', type: 'circle', source: 'tp-pts', filter: [ 'has', 'point_count' ],
+				paint: { 'circle-color': tint, 'circle-radius': [ 'step', [ 'get', 'point_count' ], 16, 10, 20, 50, 26 ], 'circle-stroke-width': 2, 'circle-stroke-color': '#ffffff' } } );
+			map.addLayer( { id: 'tp-pts-count', type: 'symbol', source: 'tp-pts', filter: [ 'has', 'point_count' ],
+				layout: { 'text-field': [ 'get', 'point_count_abbreviated' ], 'text-font': [ 'Noto Sans Medium' ], 'text-size': 13, 'text-allow-overlap': true },
+				paint: { 'text-color': '#ffffff' } } );
+			map.addLayer( { id: 'tp-pts-icon', type: 'symbol', source: 'tp-pts', filter: [ '!', [ 'has', 'point_count' ] ],
+				layout: { 'icon-image': [ 'concat', 'tp-fam-', [ 'get', 'k' ] ], 'icon-allow-overlap': true, 'icon-size': 1 } } );
+
+			if ( ! interactive ) {
+				return;
+			}
+
+			var pop = null;
+
+			map.on( 'click', 'tp-pts-cluster', function ( e ) {
+				var f = map.queryRenderedFeatures( e.point, { layers: [ 'tp-pts-cluster' ] } )[ 0 ];
+				map.getSource( 'tp-pts' ).getClusterExpansionZoom( f.properties.cluster_id ).then( function ( z ) {
+					map.easeTo( { center: f.geometry.coordinates, zoom: z } );
+				} ).catch( function () {} );
+			} );
+
+			map.on( 'click', 'tp-pts-icon', function ( e ) {
+
+				var f = e.features && e.features[0];
+
+				if ( ! f ) {
+					return;
+				}
+
+				if ( pop ) { pop.remove(); }
+
+				pop = new ml.Popup( { offset: 18, maxWidth: '240px' } ).setLngLat( f.geometry.coordinates.slice() ).setDOMContent( popupNode( f.properties ) ).addTo( map );
+			} );
+
+			[ 'tp-pts-cluster', 'tp-pts-icon' ].forEach( function ( id ) {
+				map.on( 'mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; } );
+				map.on( 'mouseleave', id, function () { map.getCanvas().style.cursor = ''; } );
+			} );
+		}
+
+		function loadPoints( map, ml, box, cfg, interactive ) {
+
+			if ( ! cfg.points || ! window.fetch ) {
+				return;
+			}
+
+			fetch( cfg.points ).then( function ( r ) { return r.ok ? r.json() : null; } ).then( function ( d ) {
+				if ( d && d.features ) {
+					box.tpPoints = d;
+					addPoints( map, ml, box, interactive );
+				}
+			} ).catch( function () {} );
 		}
 
 		/* یک نقشه با نشانگر؛ تعاملی فقط در مودال. قول با رویداد load وفا می‌شود. */
@@ -1904,8 +2284,26 @@
 					map.addControl( new ml.NavigationControl( { showCompass: false } ), 'top-left' );
 				}
 
+				box.tpFlavor = flavorOf();
+
+				/* تغییر حالت (روز · عصر · شب) در جا: سبک عوض می‌شود و نشانگرها (که با سبک می‌روند) از دادۀ همان دریافت دوباره می‌آیند */
+				if ( window.MutationObserver ) {
+					new MutationObserver( function () {
+						var f = flavorOf();
+						if ( f === box.tpFlavor ) {
+							return;
+						}
+						box.tpFlavor = f;
+						map.setStyle( style( cfg ), { diff: false } );   /* بازبارگذاری کامل ← رویداد style.load؛ با diff نشانگرها بی‌صدا حذف می‌شدند */
+						map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); } );
+					} ).observe( document.documentElement, { attributes: true, attributeFilter: [ 'data-tp-mode' ] } );
+				}
+
 				return new Promise( function ( ok ) {
-					map.once( 'load', function () { ok( map ); } );
+					map.once( 'load', function () {
+						loadPoints( map, ml, box, cfg, interactive );
+						ok( map );
+					} );
 				} );
 			} );
 		}
@@ -2066,6 +2464,60 @@
 			.catch( function () {
 				if ( note ) { note.textContent = ''; }
 			} );
+	} )();
+
+	/* ══ کیفیت هوا ══════════════════════════════════════════════════════
+	   دادۀ زنده است و در HTML کش‌شده نمی‌آید: اسکلتِ هم‌اندازه («—») سرِ جایش است و پس از
+	   بارگذاری از `topersia/v1/air` پر می‌شود — هیچ جابه‌جایی‌ای نیست (CLS صفر). خطا ← همان «—».
+	   رده، برچسب (زبان نشانی) و رنگ از پاسخ؛ رنگ با توکن `--tp-aqi-N` (کلاس رده).  P5-D345
+	   ────────────────────────────────────────────────────────────────── */
+	( function () {
+
+		var box = page.querySelector( '[data-tp-air]' );
+		var root = ( window.TopersiaG && window.TopersiaG.air ) || '';
+
+		if ( ! box || ! root || ! window.fetch ) {
+			return;
+		}
+
+		var ll = ( box.getAttribute( 'data-tp-coords' ) || '' ).split( ',' );
+
+		function done() {
+			box.classList.remove( 'is-load' );
+		}
+
+		function put( sel, text ) {
+			var el = box.querySelector( sel );
+			if ( el ) { el.textContent = text; }
+		}
+
+		function num( v ) {
+			return null === v || undefined === v ? '—' : digits( Math.round( v ) ) + ' µg/m³';
+		}
+
+		if ( ll.length < 2 ) {
+			done();
+			return;
+		}
+
+		fetch( root + '?lat=' + encodeURIComponent( ll[0].trim() ) + '&lng=' + encodeURIComponent( ll[1].trim() ) )
+			.then( function ( r ) { return r.ok ? r.json() : null; } )
+			.then( function ( d ) {
+
+				if ( ! d || 'number' !== typeof d.aqi ) {
+					done();
+					return;
+				}
+
+				box.setAttribute( 'data-tp-cat', d.cat );
+				put( '[data-tp-air-idx]', digits( d.aqi ) );
+				put( '[data-tp-air-cat]', d.label || '—' );
+				put( '[data-tp-air-pm25]', num( d.pm25 ) );
+				put( '[data-tp-air-pm10]', num( d.pm10 ) );
+				put( '[data-tp-air-dust]', num( d.dust ) );
+				done();
+			} )
+			.catch( done );
 	} )();
 
 }() );
