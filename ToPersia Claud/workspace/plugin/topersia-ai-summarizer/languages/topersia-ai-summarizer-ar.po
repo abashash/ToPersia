@@ -468,3 +468,7 @@ msgstr "ألصق مفتاح API"
 #: includes/class-tp-ai-admin.php
 msgid "Key saved"
 msgstr "المفتاح محفوظ"
+
+#: includes/class-tp-ai-admin.php
+msgid "Set in wp-config"
+msgstr "معيّن في wp-config"

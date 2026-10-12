@@ -16,7 +16,7 @@ class TP_AI_DB {
 	/**
 	 * Schema version stored in options.
 	 */
-	const VERSION = '1.2.2';
+	const VERSION = '1.2.3';
 
 	/**
 	 * The 1.0 unique key that 1.1 replaced but dbDelta could not drop.

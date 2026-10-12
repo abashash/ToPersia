@@ -49,12 +49,12 @@ class TP_AI_Core_Bridge {
 		return '_tpas_hash_' . sanitize_key( $type ) . '_' . sanitize_key( $lang );
 	}
 
-	/** متای چکیدهٔ متن پست (post_content بی‌تگ) که خروجی با آن ساخته شد.  1.2.3 · P5-D356 (R55) */
+	/** متای چکیدۀ متن پست (post_content بی‌تگ) که خروجی با آن ساخته شد.  1.2.3 · P5-D356 (R55) */
 	public static function digest_key( $type, $lang ) {
 		return '_tpas_chash_' . sanitize_key( $type ) . '_' . sanitize_key( $lang );
 	}
 
-	/** چکیدهٔ متن پست — هش هسته فقط متاست، پس ویرایش خودِ متن را نمی‌بیند. */
+	/** چکیدۀ متن پست — هش هسته فقط متاست، پس ویرایش خودِ متن را نمی‌بیند. */
 	public static function content_digest( $post_id ) {
 		$post = get_post( $post_id );
 
@@ -62,7 +62,7 @@ class TP_AI_Core_Bridge {
 	}
 
 	/**
-	 * هش و چکیدهٔ امروز را برای این خروجی می‌نویسد (ردیف داخلی هم).
+	 * هش و چکیدۀ امروز را برای این خروجی می‌نویسد (ردیف داخلی هم).
 	 *
 	 * @param int         $post_id Post id.
 	 * @param string      $type    Output type.

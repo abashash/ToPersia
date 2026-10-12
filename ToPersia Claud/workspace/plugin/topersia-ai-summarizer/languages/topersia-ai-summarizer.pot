@@ -468,3 +468,7 @@ msgstr ""
 #: includes/class-tp-ai-admin.php
 msgid "Key saved"
 msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Set in wp-config"
+msgstr ""

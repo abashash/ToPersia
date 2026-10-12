@@ -468,3 +468,7 @@ msgstr "کلید API را وارد کنید"
 #: includes/class-tp-ai-admin.php
 msgid "Key saved"
 msgstr "کلید ذخیره شده است"
+
+#: includes/class-tp-ai-admin.php
+msgid "Set in wp-config"
+msgstr "تنظیم‌شده در wp-config"
