@@ -35,6 +35,8 @@ $gemini_ok  = function ( $src ) {
 t( 'gemini: key in the x-goog-api-key header, not in the URL (URLs are logged); a ?key= mutant fails',
 	$gemini_ok( $api_src ) && ! $gemini_ok( str_replace( "':generateContent';", "':generateContent?key=' . rawurlencode( \$key );", $api_src ) ) );
 
+update_option( TP_AI_Options::OPTION_KEY, array( 'internal_enabled' => 1, 'internal_engines' => array( array( 'id' => 'eng_a', 'provider' => 'openai', 'api_key' => 'sk-test-1234', 'model' => 'gpt-4o-mini', 'base_url' => '' ) ), 'internal_default_engine' => 'eng_a' ) );
+TP_AI_Options::flush();
 /* ---- 1.2.1: no ai.text in the core layer — the summarizer's own settings are the engine ---- */
 $opt_src    = (string) file_get_contents( dirname( __DIR__ ) . '/includes/class-tp-ai-options.php' );
 $bridge_src = (string) file_get_contents( dirname( __DIR__ ) . '/includes/class-tp-ai-core-bridge.php' );

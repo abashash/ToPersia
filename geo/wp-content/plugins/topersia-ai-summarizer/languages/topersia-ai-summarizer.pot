@@ -453,3 +453,22 @@ msgstr ""
 msgid "Override the per-language prompts that drive the AI panel and the assistant buttons."
 msgstr ""
 
+#: includes/class-tp-ai-admin.php
+msgid "Saved — type a new value to change it"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Clear stored key"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Paste API key"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Key saved"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Set in wp-config"
+msgstr ""

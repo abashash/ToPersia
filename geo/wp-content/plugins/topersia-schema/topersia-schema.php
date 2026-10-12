@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Schema Engine
  * Description: موتور دادۀ ساختاریافتۀ ToPersia — یک گراف JSON-LD واحد در هر صفحه، با @id مبتنی بر entity_uid برای بازشناسی میان‌زبانی و میان‌صفحه‌ای. معماری داده‌محور: افزودن موجودیت تازه یعنی افزودن یک بلوک به نقشه، نه نوشتن تابع. وابسته به افزونۀ ToPersia Core Functions.
- * Version: 1.2.0
+ * Version: 1.3.0
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-schema
@@ -77,6 +77,26 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
+ * 1.3.0 — P5-D357: رویداد با تاریخ واقعی.
+ *          • E1 tp_festival ← Festival · E3 tp_sports_event ← SportsEvent ·
+ *            E5 tp_religious_event ← Event، با سازندۀ topersia_schema_event —
+ *            فقط وقتی event_start_date معتبر (Y-m-d) است و پایان، یا آغاز اگر
+ *            پایان نیست، از امروزِ Asia/Tehran نگذشته.
+ *          • startDate · endDate (فقط معتبر و ≥ آغاز) · eventStatus EventScheduled ·
+ *            eventAttendanceMode OfflineEventAttendanceMode · location: Place با
+ *            name (venue_name، وگرنه نام شهر یا استان) و PostalAddress
+ *            (addressRegion استانِ زنجیره، addressLocality شهر، addressCountry IR)؛
+ *            @id مکان فقط اگر گرۀ همان مکان در گراف باشد.
+ *          • بی تاریخ، تاریخ نامعتبر، گذشته و E6 (فیلد تاریخ ندارد): همان Thing با
+ *            additionalType، بی‌تغییر.
+ *          • ترجمۀ بی تاریخ: هر دو تاریخ از پست زبان اصلی WPML
+ *            (wpml_default_language ← wpml_object_id).
+ *          • قاعدۀ رویداد قمری (E5): «Thing تا ورود تاریخ سال تازه» — تاریخ هر سال
+ *            دستی به‌روز می‌شود؛ تا دورۀ تازه وارد نشده، دورۀ گذشته Event منتشر
+ *            نمی‌شود و گره Thing می‌ماند.
+ *          • گراف کش نمی‌شود: هر درخواست از نو ساخته می‌شود و مرز «امروز» در همان
+ *            درخواست خوانده می‌شود. کش تمام‌صفحه اگر روزی آمد، TTL حداکثر یک روز.
+ *        — آزمون خودبسنده: tests/run.php (stub، هر ادعا با جهش).
  * 1.1.0 — افزوده شد بخش ۷: زبانۀ «شِما» در پنل مدیریت ToPersia.
  *          • نقشۀ موجودیت‌ها به‌صورت جدول خوانا — بدون بازکردن فایل.
  *          • فهرست نوع‌های پستی که هنوز در نقشه نیستند و هیچ JSON-LD
@@ -117,7 +137,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ این افزونه — زبانۀ تشخیص هسته این را می‌خواند. */
 if ( ! defined( 'TOPERSIA_SCHEMA_VERSION' ) ) {
-	define( 'TOPERSIA_SCHEMA_VERSION', '1.2.0' );
+	define( 'TOPERSIA_SCHEMA_VERSION', '1.3.0' );
 }
 
 /** حداقل نسخۀ هستۀ سازگار. */
@@ -253,7 +273,8 @@ function topersia_schema_map() {
 	 *                                   additionalProperty · sameAs  ← topersia_schema_place
 	 *   بقیه (Thing · Person · Language) name · description · image · sameAs ← topersia_schema_thing
 	 * رویدادها Thing با additionalType می‌مانند: Event بی startDate در Search Console
-	 * «نامعتبر» است و دادۀ ما تاریخ ماشین‌خوان ندارد (calendar_timing متن است).
+	 * «نامعتبر» است. از ۱٫۳٫۰ (P5-D357) E1 · E3 · E5 با event_start_date معتبر و
+	 * نگذشته Event می‌شوند (topersia_schema_event)؛ E6 فیلد تاریخ ندارد و Thing می‌ماند.
 	 *
 	 * زنجیرۀ نیاکان (BreadcrumbList و containedInPlace) از رابطه‌های JetEngine —
 	 * شناسه‌ها از Jetengine_Skin.json (export زنده). جهت فقط از parent_object و
@@ -281,6 +302,18 @@ function topersia_schema_map() {
 	};
 	$thing = function ( $type, $parents = array(), $extra = '' ) use ( $props ) {
 		return array_filter( array( 'type' => $type, 'additionalType' => $extra, 'props' => $props, 'builder' => 'topersia_schema_thing', 'parents' => $parents ) );
+	};
+
+	/*
+	 * رویداد با تاریخ — P5-D357 (۱٫۳٫۰). پیش‌فرض همان Thing با additionalType است؛
+	 * topersia_schema_event فقط با تاریخ معتبرِ نگذشته نوع را به event.type می‌برد.
+	 * رابطه‌ها از Jetengine_Skin.json: استان ← رویداد (parents[0]) و شهر ← رویداد.
+	 */
+	$event = function ( $type, $province_rel, $city_rel ) use ( $thing, $via_prov ) {
+		$config            = $thing( 'Thing', $via_prov( $province_rel ), 'https://schema.org/' . $type );
+		$config['builder'] = 'topersia_schema_event';
+		$config['event']   = array( 'type' => $type, 'city' => $city_rel );
+		return $config;
 	};
 
 	$map = array(
@@ -330,9 +363,9 @@ function topersia_schema_map() {
 		'tp_historical_era'  => $thing( 'Thing' ),                                                    /* C13 */
 
 		/* ─── E — رویداد ─── */
-		'tp_festival'        => $thing( 'Thing', $via_prov( 232 ), 'https://schema.org/Festival' ),     /* E1 */
-		'tp_sports_event'    => $thing( 'Thing', $via_prov( 245 ), 'https://schema.org/SportsEvent' ),  /* E3 */
-		'tp_religious_event' => $thing( 'Thing', $via_prov( 253 ), 'https://schema.org/Event' ),        /* E5 */
+		'tp_festival'        => $event( 'Festival', 232, 233 ),                                         /* E1 — استان 232 · شهر 233 */
+		'tp_sports_event'    => $event( 'SportsEvent', 245, 246 ),                                      /* E3 — استان 245 · شهر 246 */
+		'tp_religious_event' => $event( 'Event', 253, 254 ),                                            /* E5 — استان 253 · شهر 254 */
 		'tp_seasonal_event'  => $thing( 'Thing', $via_prov( 263 ), 'https://schema.org/Event' ),        /* E6 */
 
 		/* ─── P · D — سفر عملی و تعیین رسمی ─── */
@@ -870,6 +903,194 @@ function topersia_schema_thing( $node, $post_id, $config = array() ) {
 	return $node;
 }
 
+/**
+ * امروز به وقت Asia/Tehran (Y-m-d) — مرز «گذشته» رویداد، P5-D357.
+ *
+ * @param int|null $now  مُهر زمانی برای آزمون؛ تهی یعنی همین لحظه.
+ */
+function topersia_schema_today( $now = null ) {
+
+	$date = new DateTimeImmutable( '@' . ( null === $now ? time() : (int) $now ) );
+	$date = $date->setTimezone( new DateTimeZone( 'Asia/Tehran' ) );
+
+	return (string) apply_filters( 'topersia_schema_today', $date->format( 'Y-m-d' ) );
+}
+
+/** تاریخ Y-m-d معتبر، وگرنه رشتۀ خالی. JetEngine فیلد date بی is_timestamp را خام Y-m-d می‌نویسد. */
+function topersia_schema_ymd( $value ) {
+
+	$value = is_scalar( $value ) ? trim( (string) $value ) : '';
+
+	if ( ! preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/', $value, $m ) ) {
+		return '';
+	}
+
+	return checkdate( (int) $m[2], (int) $m[3], (int) $m[1] ) ? $value : '';
+}
+
+/** شناسۀ پست زبان اصلی WPML؛ بی WPML یا برای خودِ اصل، همان پست. */
+function topersia_schema_source_id( $post_id ) {
+
+	$default = apply_filters( 'wpml_default_language', null );
+
+	if ( ! $default ) {
+		return $post_id;
+	}
+
+	$source = absint( apply_filters( 'wpml_object_id', $post_id, get_post_type( $post_id ), false, $default ) );
+
+	return $source ? $source : $post_id;
+}
+
+/**
+ * تاریخ آغاز و پایان رویداد — P5-D357.
+ *
+ * ترجمه‌ای که تاریخ آغاز ندارد هر دو تاریخ را از پست زبان اصلی می‌خواند (دو
+ * تاریخ از یک منبع، تا آغازِ اصل با پایانِ ترجمه جفت نشود). پایان پیش از آغاز
+ * کنار می‌رود.
+ *
+ * @return array{start:string,end:string}
+ */
+function topersia_schema_event_dates( $post_id ) {
+
+	$source = $post_id;
+	$raw    = get_post_meta( $post_id, 'event_start_date', true );
+	$start  = topersia_schema_ymd( $raw );
+
+	if ( '' === trim( is_scalar( $raw ) ? (string) $raw : '' ) ) {
+
+		$original = topersia_schema_source_id( $post_id );
+
+		if ( $original !== $post_id ) {
+			$source = $original;
+			$start  = topersia_schema_ymd( get_post_meta( $original, 'event_start_date', true ) );
+		}
+	}
+
+	$end = topersia_schema_ymd( get_post_meta( $source, 'event_end_date', true ) );
+
+	if ( '' === $start || ( '' !== $end && $end < $start ) ) {
+		$end = '';
+	}
+
+	return array( 'start' => $start, 'end' => $end );
+}
+
+/**
+ * والد رویداد از یک رابطه، به زبان جاری و فقط منتشرشده.
+ *
+ * یال رابطه اگر روی ترجمه نیست از پست اصلی خوانده می‌شود.
+ */
+function topersia_schema_event_parent( $post_id, $relation_id ) {
+
+	if ( ! $relation_id || ! function_exists( 'jet_engine' ) ) {
+		return 0;
+	}
+
+	$relation = topersia_relation( $relation_id );
+
+	if ( ! $relation ) {
+		return 0;
+	}
+
+	$ids = $relation->get_parents( $post_id, 'ids' );
+
+	if ( empty( $ids ) ) {
+
+		$original = topersia_schema_source_id( $post_id );
+
+		if ( $original !== $post_id ) {
+			$ids = $relation->get_parents( $original, 'ids' );
+		}
+	}
+
+	if ( empty( $ids ) ) {
+		return 0;
+	}
+
+	$id   = absint( reset( $ids ) );
+	$view = absint( apply_filters( 'wpml_object_id', $id, get_post_type( $id ), true ) );
+
+	return ( $view && 'publish' === get_post_status( $view ) ) ? $view : 0;
+}
+
+/**
+ * location رویداد: Place با name و PostalAddress — P5-D357.
+ *
+ * name از venue_name همین پست (نه از اصل: نام فارسی روی صفحۀ دیگر نمی‌نشیند)،
+ * وگرنه نام شهر یا استان. @id فقط وقتی مکان خودِ شهر یا استان است؛
+ * topersia_schema_link_ids آن را اگر گره‌اش در گراف نباشد برمی‌دارد.
+ */
+function topersia_schema_event_location( $post_id, $config ) {
+
+	$province = topersia_schema_event_parent( $post_id, isset( $config['parents'][0]['relation'] ) ? $config['parents'][0]['relation'] : 0 );
+	$city     = topersia_schema_event_parent( $post_id, isset( $config['event']['city'] ) ? $config['event']['city'] : 0 );
+	$local    = $city ? $city : $province;
+	$venue    = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'venue_name', true ) ) );
+
+	$place = array( '@type' => 'Place' );
+
+	if ( '' !== $venue ) {
+		$place['name'] = $venue;
+	} elseif ( $local ) {
+		$place['@id']  = topersia_schema_uid( $local );
+		$place['name'] = topersia_schema_name( $local );
+	}
+
+	$place['address'] = array(
+		'@type'           => 'PostalAddress',
+		'addressLocality' => $city ? topersia_schema_name( $city ) : null,
+		'addressRegion'   => $province ? topersia_schema_name( $province ) : null,
+		'addressCountry'  => 'IR',
+	);
+
+	return $place;
+}
+
+/**
+ * سازندۀ رویداد E1 · E3 · E5 — P5-D357.
+ *
+ * Event فقط با startDate معتبر و دورۀ نگذشته؛ وگرنه همان Thing با additionalType
+ * (Event بی startDate یا با دورۀ گذشته در نتیجۀ غنی نامعتبر یا گمراه‌کننده است).
+ * رویداد قمری (E5): «Thing تا ورود تاریخ سال تازه».
+ * فقط ویژگی‌های مستند Event؛ offers · performer · organizer عمداً نیستند.
+ */
+function topersia_schema_event( $node, $post_id, $config = array() ) {
+
+	$node = topersia_schema_thing( $node, $post_id, $config );
+
+	if ( empty( $config['event']['type'] ) ) {
+		return $node;
+	}
+
+	$dates = topersia_schema_event_dates( $post_id );
+
+	if ( '' === $dates['start'] ) {
+		return $node;
+	}
+
+	$last = '' !== $dates['end'] ? $dates['end'] : $dates['start'];
+
+	if ( $last < topersia_schema_today() ) {
+		return $node;
+	}
+
+	$node['@type'] = $config['event']['type'];
+	unset( $node['additionalType'] );
+
+	$node['startDate'] = $dates['start'];
+
+	if ( '' !== $dates['end'] ) {
+		$node['endDate'] = $dates['end'];
+	}
+
+	$node['eventStatus']         = 'https://schema.org/EventScheduled';
+	$node['eventAttendanceMode'] = 'https://schema.org/OfflineEventAttendanceMode';
+	$node['location']            = topersia_schema_event_location( $post_id, $config );
+
+	return $node;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════
  *  بخش ۶ — ساخت و انتشار گراف
  * ═══════════════════════════════════════════════════════════════════════
@@ -975,7 +1196,37 @@ function topersia_schema_build( $post_id ) {
 		$graph[] = $faq;
 	}
 
-	return apply_filters( 'topersia_schema_graph', $graph, $post_id, $config );
+	$graph = apply_filters( 'topersia_schema_graph', $graph, $post_id, $config );
+
+	return topersia_schema_link_ids( $graph );
+}
+
+/**
+ * @id مکانِ رویداد فقط وقتی می‌ماند که گرۀ همان مکان در گراف باشد — P5-D357.
+ *
+ * پس از صافی topersia_schema_graph، تا گره‌ای که آن صافی برمی‌دارد ارجاع یتیم نگذارد.
+ */
+function topersia_schema_link_ids( $graph ) {
+
+	if ( ! is_array( $graph ) ) {
+		return $graph;
+	}
+
+	$ids = array();
+
+	foreach ( $graph as $node ) {
+		if ( is_array( $node ) && ! empty( $node['@id'] ) ) {
+			$ids[ $node['@id'] ] = true;
+		}
+	}
+
+	foreach ( $graph as $i => $node ) {
+		if ( is_array( $node ) && isset( $node['location']['@id'] ) && ! isset( $ids[ $node['location']['@id'] ] ) ) {
+			unset( $graph[ $i ]['location']['@id'] );
+		}
+	}
+
+	return $graph;
 }
 
 /** گراف را به JSON آماده برای انتشار تبدیل می‌کند. */

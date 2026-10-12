@@ -57,6 +57,11 @@ final class ToPersia_DB {
 
         update_option('topersia_user_core_db_version', TOPERSIA_USER_CORE_VERSION, false);
 
+        /* ۱٫۱۱٫۰ · P5-D355 — کلید پیامکِ ذخیره‌شده از autoload بیرون (ارتقا اجرای همین متد است) */
+        if (function_exists('wp_set_option_autoload') && false !== get_option('topersia_mediana_api_key', false)) {
+            wp_set_option_autoload('topersia_mediana_api_key', false);
+        }
+
         if (!wp_next_scheduled('topersia_user_core_prune')) {
             wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'topersia_user_core_prune');
         }

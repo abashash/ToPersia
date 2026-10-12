@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.2.1
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,26 @@ The key is stored in the `tpas_settings` option, never printed, and kept when yo
 Yes by default, with `rel="noopener nofollow"`, both configurable.
 
 == Changelog ==
+
+= 1.2.3 =
+* Security - P5-D355 (R56): the API key can be pinned in wp-config with `TOPERSIA_AI_API_KEY`; the constant wins over any stored key, the engine's key field then reads "Set in wp-config" and saving the settings stores nothing from the form. The key is no longer passed to the public `tpas_api_payload` filter in any of the three protocols: the filter runs without it (it still gets the body and a keyless endpoint) and the key is added to the request after it.
+* Security - P5-D356 (R53): rebuilding a stale output is counted against the daily per-user and per-site caps (the cap gate used to step aside whenever a stale row existed). The filter `tpas_rebuild_counts_cap` turns this off if the gate ever counts stale rebuilds itself.
+* Security - P5-D356 (R54): the internal engine's row is stamped with the content hash when saved, goes stale on an edit and is regenerated (before, it never went stale); an internal row that never had a hash is treated as stale. A stale internal output is no longer shown to visitors.
+* Security - P5-D356 (R55): the tag-stripped post_content is part of an output's freshness (own digest next to the core hash; a tag-only edit does not make it stale).
+* Security - P5-D356 (R24): an error message from the server or the provider is put into the panel as text, never parsed as markup; no JS of the plugin builds markup from a message.
+* Security - P5-D356 (A04): the browser reply no longer carries `provider` and `model` (P5-D317 - no engine is shown); they stay in the summaries table and reach the new `tpas_reply` action (and the debug log when WP_DEBUG_LOG is on).
+* Tests: tests/test-12-security-123.php - each claim also runs against a mutant that must fail.
+
+= 1.2.2 =
+* Security - P5-D356 (R36): generation requires a post id. A browser-sent URL is never trusted: without a post the request is rejected (400), with one it is ignored - the prompt only carries the post's own permalink in the page language (WPML `wpml_permalink`). The published, content-type, rate-limit and cache gates therefore run on every request. The panel no longer sends the page URL.
+* Security - P5-D356 (R47): the rate limiter's IP follows the same rule as ToPersia User Core - X-Forwarded-For only when the site declares TOPERSIA_TRUST_PROXY, otherwise REMOTE_ADDR; X-Real-IP and CF-Connecting-IP are never trusted.
+* Security - P5-D355 (R38): engine API keys are write-only in the settings screen (never printed; placeholder "Saved - type a new value to change it"; an empty field keeps the key; "Clear stored key" is the only way to delete it). The settings row that holds the keys is no longer autoloaded (on create, on save and on every schema upgrade).
+* A markdown link in model output keeps only its label; no target (javascript:, tracking URLs) is displayed or copied.
+* Tests: 13 of the 14 known failures were stale claims (panel contract since 1.1, rate-limit keys since 1.1, a tautological icon check, stub shortcode matching, cache order); they now assert the current behaviour with the reason in place. The 14th (markdown link target shown) was a real defect, fixed above.
+
+= 1.2.1 =
+* Text generation engine and key come only from this plugin's own settings: ToPersia Core's "External services" no longer has an ai.text row (the site owner's decision). The core stays the content-hash cache layer.
+* Lowest token use by default: 700 output tokens (was 1200), 8000 context characters (was 40000), 30-day cache (was 7; a content edit marks the output stale through the hash), no automatic first generation.
 
 = 1.1.1 =
 * Now a workspace project of ToPersia (third plugin, own version and zip).

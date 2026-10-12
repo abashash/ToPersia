@@ -68,6 +68,7 @@ final class ToPersia_I18n {
         'reviews_no_replies' => ['fa'=>'هنوز کسی پاسخ نداده است.','en'=>'No one has replied yet.','ar'=>'لم يرد أحد بعد.'],
         'reviews_view_entity' => ['fa'=>'مشاهده مورد بازبینی‌شده','en'=>'View reviewed item','ar'=>'عرض العنصر الذي تمت مراجعته'],
         'reviews_new_replies_badge' => ['fa'=>'پاسخ دریافت شده','en'=>'Replies received','ar'=>'تم استلام ردود'],
+        'traveler_name' => ['fa'=>'مسافر %s','en'=>'Traveler %s','ar'=>'مسافر %s'],
         'reviews_guest_author' => ['fa'=>'کاربر مهمان','en'=>'Guest user','ar'=>'مستخدم زائر'],
         'reviews_deleted_author' => ['fa'=>'کاربر حذف‌شده','en'=>'Deleted user','ar'=>'مستخدم محذوف'],
         'reviews_unavailable_entity' => ['fa'=>'این مطلب دیگر در دسترس نیست','en'=>'This item is no longer available','ar'=>'هذا المحتوى لم يعد متاحًا'],
@@ -279,6 +280,25 @@ final class ToPersia_I18n {
         $self = self::instance();
         $lang = self::current_language();
         $value = $self->strings[$key][$lang] ?? $default ?? $self->strings[$key]['fa'] ?? $key;
+
+        if (function_exists('apply_filters')) {
+            $translated = apply_filters('wpml_translate_single_string', $value, 'ToPersia User Core', $key . '_' . $lang);
+            if (is_string($translated) && $translated !== '') {
+                return $translated;
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * مقدار یک کلید به زبانی مشخص — نه زبان جاری. برای مقداری که ذخیره
+     * می‌شود (نام خنثیِ حساب به فارسی، `ToPersia_Privacy`).  ۱٫۱۱٫۰
+     */
+    public static function in(string $key, string $lang): string {
+        $self = self::instance();
+        $lang = in_array($lang, ['fa', 'en', 'ar'], true) ? $lang : 'en';
+        $value = $self->strings[$key][$lang] ?? $self->strings[$key]['fa'] ?? $key;
 
         if (function_exists('apply_filters')) {
             $translated = apply_filters('wpml_translate_single_string', $value, 'ToPersia User Core', $key . '_' . $lang);

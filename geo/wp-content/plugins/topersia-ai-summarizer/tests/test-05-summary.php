@@ -33,7 +33,7 @@ $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 ) );
 t( 'ajax: cached response succeeds', is_array( $res ) && true === $res['ok'] );
 t( 'ajax: cached flags cached=true with text', is_array( $res ) && true === $res['data']['cached'] && 'Cached summary text.' === $res['data']['text'] );
-t( 'ajax: cache preserves provider', is_array( $res ) && 'DeepSeek' === $res['data']['provider'] );
+t( 'ajax: the browser reply carries no provider or model (1.2.3 · P5-D356)', is_array( $res ) && ! array_key_exists( 'provider', $res['data'] ) && ! array_key_exists( 'model', $res['data'] ) );
 
 unset( $GLOBALS['tp_http_override'] );
 
@@ -57,7 +57,8 @@ t( 'ajax: non-array cache replaced on write', false !== strpos( (string) seriali
 
 // ---- Cache expiry -----------------------------------------------------------
 $key = '_tpas_ai_summary_en';
-update_post_meta( 42, $key, array( 'text' => 'Old', 'created' => time() - 200 * 3600 ) );
+/* 1.2.1: one hour past the configured cache hours (the default went 168 → 720) */
+update_post_meta( 42, $key, array( 'text' => 'Old', 'created' => time() - ( (int) TP_AI_Options::get_field( 'internal_cache_hours', 720 ) + 1 ) * 3600 ) );
 t( 'cache: expired entry returns null', null === TP_AI_Summary::get_cached( 42, 'summary', 'en', '' ) );
 t( 'cache: expired entry is purged', '' === get_post_meta( 42, $key, true ) );
 
@@ -79,9 +80,11 @@ $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 t( 'ajax: HTTP 401 surfaces the provider message', is_array( $res ) && false === $res['ok'] && false !== strpos( $res['data']['message'], 'Invalid API key' ) );
 
 $GLOBALS['tp_http_override'] = new WP_Error( 'boom', 'Connection refused' );
+/* 1.2.2: was `summary`, which the cache claims above already filled - a served
+   cache never reaches the network. `plan` has no cache, so the error surfaces. */
 $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 	'lang' => 'en',
-	'type' => 'summary',
+	'type' => 'plan',
 	'post' => '42',
 	'url'  => '',
 ) );
@@ -89,7 +92,10 @@ t( 'ajax: network error surfaced', is_array( $res ) && false === $res['ok'] && f
 unset( $GLOBALS['tp_http_override'] );
 
 // ---- Rate limiting ------------------------------------------------------------
-set_transient( 'tpas_rt_' . md5( '127.0.0.1' ), 10, 3600 );
+/* 1.2.2: the 1.0 key `tpas_rt_{md5(ip)}` no longer exists — since 1.1 the primary
+   layer is per user and type (`tpas_rt_u_{user}_{type}`), the secondary per IP
+   (`tpas_rt_ip_{md5(ip)}`, five times the limit). Same claim, current keys. */
+set_transient( 'tpas_rt_u_1_summary', 10, 3600 );
 $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 	'lang' => 'en',
 	'type' => 'summary',
@@ -97,7 +103,12 @@ $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 	'url'  => '',
 ) );
 t( 'ajax: rate limited after threshold', is_array( $res ) && false === $res['ok'] && false !== strpos( $res['data']['message'], 'Rate limit' ) );
-delete_transient( 'tpas_rt_' . md5( '127.0.0.1' ) );
+delete_transient( 'tpas_rt_u_1_summary' );
+
+set_transient( 'tpas_rt_ip_' . md5( '127.0.0.1' ), 50, 3600 );
+$res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array( 'lang' => 'en', 'type' => 'summary', 'post' => '42' ) );
+t( 'ajax: secondary IP layer limits at five times the user limit', is_array( $res ) && false === $res['ok'] && false !== strpos( $res['data']['message'], 'Rate limit' ) );
+delete_transient( 'tpas_rt_ip_' . md5( '127.0.0.1' ) );
 
 $res = tp_ajax( array( 'TP_AI_Summary', 'handle_ajax' ), array(
 	'lang' => 'en',

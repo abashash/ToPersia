@@ -453,3 +453,22 @@ msgstr "الحقول: {url}، {title}، {site}، {related} (علاقات JetEngi
 msgid "Override the per-language prompts that drive the AI panel and the assistant buttons."
 msgstr "تجاوز الموجّهات الخاصة بكل لغة التي تتحكم في لوحة الذكاء الاصطناعي وأزرار المساعد."
 
+#: includes/class-tp-ai-admin.php
+msgid "Saved — type a new value to change it"
+msgstr "محفوظ — اكتب قيمة جديدة لتغييره"
+
+#: includes/class-tp-ai-admin.php
+msgid "Clear stored key"
+msgstr "حذف المفتاح المحفوظ"
+
+#: includes/class-tp-ai-admin.php
+msgid "Paste API key"
+msgstr "ألصق مفتاح API"
+
+#: includes/class-tp-ai-admin.php
+msgid "Key saved"
+msgstr "المفتاح محفوظ"
+
+#: includes/class-tp-ai-admin.php
+msgid "Set in wp-config"
+msgstr "معيّن في wp-config"

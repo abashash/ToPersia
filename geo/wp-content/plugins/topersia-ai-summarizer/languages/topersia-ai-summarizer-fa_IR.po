@@ -453,3 +453,22 @@ msgstr "جای‌گذاری‌ها: {url}، {title}، {site}، {related} (ارت
 msgid "Override the per-language prompts that drive the AI panel and the assistant buttons."
 msgstr "لغو پرامپت‌های پیش‌فرض هر زبان که پنل هوش مصنوعی و دکمه‌های دستیار را هدایت می‌کنند."
 
+#: includes/class-tp-ai-admin.php
+msgid "Saved — type a new value to change it"
+msgstr "ذخیره شده — برای تغییر مقدار تازه بنویس"
+
+#: includes/class-tp-ai-admin.php
+msgid "Clear stored key"
+msgstr "پاک‌کردن کلید ذخیره‌شده"
+
+#: includes/class-tp-ai-admin.php
+msgid "Paste API key"
+msgstr "کلید API را وارد کنید"
+
+#: includes/class-tp-ai-admin.php
+msgid "Key saved"
+msgstr "کلید ذخیره شده است"
+
+#: includes/class-tp-ai-admin.php
+msgid "Set in wp-config"
+msgstr "تنظیم‌شده در wp-config"

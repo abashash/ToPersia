@@ -283,6 +283,11 @@ class TP_AI_Render {
 
 		$cached = TP_AI_Summary::get_cached( $post_id, $default_type, $lang );
 
+		/* 1.2.3 (R54): خروجی داخلیِ کهنه به مهمان نمی‌رسد؛ از نو ساخته می‌شود */
+		if ( $cached && ! empty( $cached['stale'] ) && $serve_internal ) {
+			$cached = null;
+		}
+
 		// Internal engine: serve a real, server-side generated result
 		// immediately for whichever type is already cached - still only on
 		// a page where the panel is shown, never as a background/automatic
@@ -434,6 +439,9 @@ class TP_AI_Render {
 		$text = (string) $text;
 		$text = wp_strip_all_tags( $text );
 		$text = html_entity_decode( $text, ENT_QUOTES, 'UTF-8' );
+		// 1.2.2: a markdown link keeps only its label - no target (javascript:,
+		// data:, tracking URLs) is ever displayed or copied from the panel.
+		$text = (string) preg_replace( '/\[([^\]\n]*)\]\((?:[^()\n]|\([^()\n]*\))*\)/u', '$1', $text );
 		$text = esc_html( $text );
 
 		$lines = preg_split( '/\r\n|\r|\n/', $text );

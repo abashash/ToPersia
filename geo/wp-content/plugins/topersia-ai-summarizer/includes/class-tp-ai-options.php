@@ -148,6 +148,22 @@ class TP_AI_Options {
 	 *
 	 * @return void
 	 */
+	/**
+	 * Keep the settings row (it holds engine API keys) out of autoload, so the
+	 * keys are not pulled into memory on every request.  1.2.2 · P5-D355
+	 *
+	 * Hooked on added_option / updated_option and called on every schema
+	 * upgrade (TP_AI_DB::install()). Idempotent.
+	 *
+	 * @param string $option Option name (any; only ours is touched).
+	 * @return void
+	 */
+	public static function no_autoload( $option = self::OPTION_KEY ) {
+		if ( self::OPTION_KEY === $option && function_exists( 'wp_set_option_autoload' ) && false !== get_option( self::OPTION_KEY, false ) ) {
+			wp_set_option_autoload( self::OPTION_KEY, false );
+		}
+	}
+
 	public static function flush() {
 		self::$cache = null;
 	}
@@ -351,6 +367,17 @@ class TP_AI_Options {
 	}
 
 	/**
+	 * Whether the API key is pinned by the TOPERSIA_AI_API_KEY constant.
+	 *
+	 * 1.2.3 · P5-D355: the wp-config constant wins over any stored option.
+	 *
+	 * @return bool
+	 */
+	public static function key_from_constant() {
+		return defined( 'TOPERSIA_AI_API_KEY' ) && '' !== trim( (string) constant( 'TOPERSIA_AI_API_KEY' ) );
+	}
+
+	/**
 	 * Resolves one engine row into a ready-to-call endpoint: provider
 	 * preset (or row overrides for "custom"/"azure"), protocol, and the
 	 * row's own API key.
@@ -405,7 +432,9 @@ class TP_AI_Options {
 			'label'    => $providers[ $provider ]['label'],
 			'base_url' => $base_url,
 			'model'    => $model,
-			'api_key'  => isset( $engine['api_key'] ) ? trim( (string) $engine['api_key'] ) : '',
+			'api_key'  => self::key_from_constant()
+				? trim( (string) constant( 'TOPERSIA_AI_API_KEY' ) )
+				: ( isset( $engine['api_key'] ) ? trim( (string) $engine['api_key'] ) : '' ),
 		);
 	}
 
@@ -552,7 +581,16 @@ class TP_AI_Options {
 
 			$submitted_key = isset( $row['api_key'] ) ? trim( wp_unslash( $row['api_key'] ) ) : '';
 
-			if ( '' !== $submitted_key ) {
+			if ( self::key_from_constant() ) {
+				// 1.2.3 · P5-D355: key lives in wp-config - store nothing
+				// from the form and leave any previously stored value as is.
+				$existing = self::engine_by_id( $id );
+				$api_key  = $existing && isset( $existing['api_key'] ) ? $existing['api_key'] : '';
+			} elseif ( ! empty( $row['api_key_clear'] ) ) {
+				// 1.2.2 · P5-D355: the only way to delete a stored key is the
+				// explicit "Clear stored key" box - an empty field keeps it.
+				$api_key = '';
+			} elseif ( '' !== $submitted_key ) {
 				$api_key = sanitize_text_field( $submitted_key );
 			} else {
 				// Keep the previously stored key for this exact row (a

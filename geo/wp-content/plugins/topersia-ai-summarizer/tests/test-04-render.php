@@ -38,15 +38,24 @@ preg_match( '/data-tpas-json="([^"]*)"/', $panel, $m );
 $cfg = json_decode( htmlspecialchars_decode( $m[1] ), true );
 t( 'panel: config parses as JSON', is_array( $cfg ) );
 t( 'panel: config has post + lang', 42 === $cfg['post'] && $lang === $cfg['lang'] );
-t( 'panel: config has the three prompts', isset( $cfg['prompts']['summary'], $cfg['prompts']['keypoints'], $cfg['prompts']['plan'] ) );
-t( 'panel: config keeps placeholders replaced', false !== strpos( $cfg['prompts']['summary'], 'permalink-42' ) );
-t( 'panel: config exposes engine links', ! empty( $cfg['links']['summary']['deepseek'] ) );
+/*
+ * 1.2.2 — the panel contract changed by design after these claims were written
+ * (class-tp-ai-render.php panel_html(): prompts are "used server-side only …
+ * never displayed", no copy-prompt/raw-prompt UI, `auto` is always 0, and with
+ * internal_enabled the internal engine answers instead of a "nokey" code block).
+ * P5-D255: no external-assistant links in the on-page component. The claims below
+ * assert the current contract — each one replaces the stale claim of the same slot.
+ */
+t( 'panel: config carries no prompt (server-side only)', ! isset( $cfg['prompts'] ) && false === strpos( $m[1], 'prompt' ) );
+t( 'panel: config carries no page URL either', false === strpos( htmlspecialchars_decode( $m[1] ), 'permalink-42' ) );
+t( 'panel: config carries no engine links (P5-D255)', ! isset( $cfg['links'] ) );
 t( 'panel: copy/regenerate/loading labels localized', isset( $cfg['msg']['copied'], $cfg['msg']['loading'], $cfg['msg']['error'] ) && ! empty( $cfg['msg']['error'] ) );
 t( 'panel: default type is summary', 'summary' === $cfg['default'] );
-t( 'panel: disabled engine keeps key flag off', isset( $cfg['key'] ) );
-t( 'panel: no key -> state is nokey with a code block', false !== strpos( $panel, 'data-tpas-state="nokey"' ) && false !== strpos( $panel, 'tpas-ai__prompt' ) );
+t( 'panel: config carries no key flag at all', ! isset( $cfg['key'] ) );
+t( 'panel: no API key -> internal engine answers, never a raw-prompt block', false !== strpos( $panel, 'data-tpas-state="content"' ) && false === strpos( $panel, 'tpas-ai__prompt' ) );
 
-// Once configured, the panel shows the generate CTA instead.
+// Once configured, an uncached post shows the generate CTA instead.
+$GLOBALS['tp_posts'][44] = array( 'type' => 'post', 'title' => 'Kashan', 'content' => 'Kashan is a city in Isfahan province.' );
 update_option( TP_AI_Options::OPTION_KEY, array(
 	'internal_engines'        => array(
 		array( 'id' => 'eng_test', 'provider' => 'deepseek', 'api_key' => 'sk-live', 'model' => '', 'base_url' => '' ),
@@ -54,11 +63,11 @@ update_option( TP_AI_Options::OPTION_KEY, array(
 	'internal_default_engine' => 'eng_test',
 ) );
 TP_AI_Options::flush();
-$panel_ready = TP_AI_Render::panel_html( array( 'post_id' => 42 ) );
+$panel_ready = TP_AI_Render::panel_html( array( 'post_id' => 44 ) );
 t( 'panel: configured -> generate CTA', false !== strpos( $panel_ready, 'data-tpas-state="generate"' ) );
-t( 'panel: configured -> key flag on', 1 === ( ( preg_match( '/"key":(\d+)/', $panel_ready, $km ) ) ? (int) $km[1] : -1 ) );
+t( 'panel: configured -> ready flag on', 1 === ( ( preg_match( '/&quot;ready&quot;:(\d+)/', $panel_ready, $km ) ) ? (int) $km[1] : -1 ) );
 
-// Auto-first only fires when configured.
+// Generation never starts on page load, even with internal_auto_first.
 update_option( TP_AI_Options::OPTION_KEY, array(
 	'internal_auto_first'     => 1,
 	'internal_engines'        => array(
@@ -67,8 +76,8 @@ update_option( TP_AI_Options::OPTION_KEY, array(
 	'internal_default_engine' => 'eng_test',
 ) );
 TP_AI_Options::flush();
-preg_match( '/"auto":(\d+)/', TP_AI_Render::panel_html( array( 'post_id' => 42 ) ), $am );
-t( 'panel: auto flag on when configured', isset( $am[1] ) && '1' === $am[1] );
+preg_match( '/&quot;auto&quot;:(\d+)/', TP_AI_Render::panel_html( array( 'post_id' => 44 ) ), $am );
+t( 'panel: auto stays 0 even with internal_auto_first (explicit request only)', isset( $am[1] ) && '0' === $am[1] );
 
 // Prompt building.
 $prompt = TP_AI_Render::build_prompt( 'X {url} Y {title} Z {site}', 'https://u/', 'T', 1, 'en' );

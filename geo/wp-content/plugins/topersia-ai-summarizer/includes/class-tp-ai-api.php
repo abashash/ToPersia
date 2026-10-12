@@ -40,6 +40,18 @@ class TP_AI_API {
 	}
 
 	/**
+	 * Endpoint without its secret, for public filters (1.2.3 · P5-D355).
+	 *
+	 * @param array $endpoint Resolved endpoint.
+	 * @return array
+	 */
+	private static function public_endpoint( array $endpoint ) {
+		unset( $endpoint['api_key'] );
+
+		return $endpoint;
+	}
+
+	/**
 	 * Resolved endpoint for a given engine (or the default one).
 	 *
 	 * @param string|array|null $engine Engine row id, ad-hoc row, or null for the default.
@@ -141,7 +153,7 @@ class TP_AI_API {
 		);
 
 		/** This filter is documented above in the original chat() body. */
-		$body = apply_filters( 'tpas_api_payload', $body, $endpoint, $key );
+		$body = apply_filters( 'tpas_api_payload', $body, self::public_endpoint( $endpoint ) );
 
 		$url = $is_azure
 			? $endpoint['base_url'] // Azure's admin-supplied URL is already the full deployment endpoint + api-version.
@@ -245,7 +257,7 @@ class TP_AI_API {
 			'max_tokens'  => $max_tokens,
 		);
 
-		$body = apply_filters( 'tpas_api_payload', $body, $endpoint, $key );
+		$body = apply_filters( 'tpas_api_payload', $body, self::public_endpoint( $endpoint ) );
 
 		$url = untrailingslashit( $endpoint['base_url'] ) . '/messages';
 
@@ -350,7 +362,7 @@ class TP_AI_API {
 			),
 		);
 
-		$body = apply_filters( 'tpas_api_payload', $body, $endpoint, $key );
+		$body = apply_filters( 'tpas_api_payload', $body, self::public_endpoint( $endpoint ) );
 
 		/*
 		 * کلید در سرآیند x-goog-api-key (همان SDK رسمی googleapis/python-genai)، نه در

@@ -96,20 +96,23 @@ class TP_AI_Summary {
 		$lang = self::sanitize_lang( wp_unslash( $_POST['lang'] ?? '' ) );
 		$type = self::sanitize_type( wp_unslash( $_POST['type'] ?? '' ) );
 		$post = absint( $_POST['post'] ?? 0 );
-		$url  = esc_url_raw( wp_unslash( $_POST['url'] ?? '' ) );
 
-		if ( ! $post && ! $url ) {
-			wp_send_json_error( array( 'message' => 'Missing post or URL.' ) );
+		// 1.2.2 · P5-D356 (R36): a post id is mandatory. A browser-sent URL is
+		// never trusted - without a post it is rejected (400), with one it is
+		// ignored: the prompt only ever carries the post's own permalink in the
+		// page language. Every gate below therefore runs on every request.
+		if ( ! $post ) {
+			wp_send_json_error( array( 'message' => 'Missing post.' ), 400 );
 		}
 
 		// A draft, private or password-protected post never becomes AI
 		// context: a logged-in user could post its id and read a summary of
 		// unpublished content. P5-D247
-		if ( $post && ! TP_AI_Context::published_ids( array( $post ) ) ) {
+		if ( ! TP_AI_Context::published_ids( array( $post ) ) ) {
 			wp_send_json_error( array( 'message' => 'Not available.' ), 404 );
 		}
 
-		if ( $post && ! self::content_type_allowed( $post ) ) {
+		if ( ! self::content_type_allowed( $post ) ) {
 			wp_send_json_error( array( 'message' => 'AI is not available for this content type.' ) );
 		}
 
@@ -125,12 +128,12 @@ class TP_AI_Summary {
 		$cached = self::get_cached( $post, $type, $lang );
 
 		if ( $cached && empty( $cached['stale'] ) ) {
+			self::log_reply( $post, $type, $lang, true, $cached['provider'] ?? '', $cached['model'] ?? '' );
+
 			wp_send_json_success( array(
-				'text'     => $cached['text'],
-				'html'     => TP_AI_Render::format_ai_text( $cached['text'] ),
-				'cached'   => true,
-				'provider' => $cached['provider'] ?? '',
-				'model'    => $cached['model'] ?? '',
+				'text'   => $cached['text'],
+				'html'   => TP_AI_Render::format_ai_text( $cached['text'] ),
+				'cached' => true,
 			) );
 		}
 
@@ -143,12 +146,10 @@ class TP_AI_Summary {
 			}
 
 			wp_send_json_success( array(
-				'text'     => $text,
-				'html'     => TP_AI_Render::format_ai_text( $text ),
-				'cached'   => true,
-				'provider' => '',
-				'model'    => '',
-				'engine'   => 'internal',
+				'text'   => $text,
+				'html'   => TP_AI_Render::format_ai_text( $text ),
+				'cached' => true,
+				'engine' => 'internal',
 			) );
 		}
 
@@ -156,8 +157,18 @@ class TP_AI_Summary {
 			wp_send_json_error( array( 'message' => 'No internal engine configured.' ) );
 		}
 
-		// Build the prompt the user actually requested.
-		$url_key   = $url ? $url : TP_AI_Render::current_url( $post );
+		/*
+		 * 1.2.3 · P5-D356 (R53): the daily-cap gate (ToPersia Render) steps aside
+		 * whenever get_cached() returns anything - a stale row included - and so
+		 * never counts the rebuild that follows. The rebuild is counted here.
+		 */
+		if ( $cached ) {
+			self::count_rebuild( $user_id );
+		}
+
+		// Build the prompt the user actually requested. The URL is the post's
+		// own permalink in the page language (WPML) - never the browser's.
+		$url_key   = self::post_url( $post, $lang );
 		$title     = TP_AI_Render::current_title( $post );
 		$base      = TP_AI_Prompt_Manager::get( $lang, $type );
 		$user_msg  = TP_AI_Render::build_prompt( $base, $url_key, $title, $post, $lang );
@@ -172,7 +183,7 @@ class TP_AI_Summary {
 		 * هر فراخوانی سرویس بیرونی از کش مرکزی هسته می‌گذرد (قاعدۀ ۰-۶): انبارۀ همین
 		 * جدول خلاصه‌ها، هش محتوای پست، خروجی گران. بی هسته، همان مسیر ۱٫۱٫۱.
 		 */
-		if ( $post && class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::cache_available() ) {
+		if ( class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::cache_available() ) {
 
 			$failed = null;
 			$meta   = array();
@@ -202,12 +213,12 @@ class TP_AI_Summary {
 				wp_send_json_error( array( 'message' => $failed ? $failed['message'] : $text->get_error_message() ) );
 			}
 
+			self::log_reply( $post, $type, $lang, false, $meta['provider'] ?? '', $meta['model'] ?? '' );
+
 			wp_send_json_success( array(
-				'text'     => $text,
-				'html'     => TP_AI_Render::format_ai_text( $text ),
-				'cached'   => false,
-				'provider' => $meta['provider'] ?? '',
-				'model'    => $meta['model'] ?? '',
+				'text'   => $text,
+				'html'   => TP_AI_Render::format_ai_text( $text ),
+				'cached' => false,
 			) );
 		}
 
@@ -222,13 +233,54 @@ class TP_AI_Summary {
 
 		self::store( $post, $type, $lang, $text, $label, $result['model'] ?? '' );
 
+		self::log_reply( $post, $type, $lang, false, $label, $result['model'] ?? '' );
+
 		wp_send_json_success( array(
-			'text'     => $text,
-			'html'     => TP_AI_Render::format_ai_text( $text ),
-			'cached'   => false,
-			'provider' => $label,
-			'model'    => $result['model'] ?? '',
+			'text'   => $text,
+			'html'   => TP_AI_Render::format_ai_text( $text ),
+			'cached' => false,
 		) );
+	}
+
+	/**
+	 * Server-side record of which engine answered. 1.2.3 · P5-D356 (A04): the
+	 * browser reply no longer names the provider or model (P5-D317 - no engine
+	 * choice is shown); the summaries table keeps both, and this line and the
+	 * action make them reachable for the site owner.
+	 *
+	 * @return void
+	 */
+	private static function log_reply( $post, $type, $lang, $cached, $provider, $model ) {
+		do_action( 'tpas_reply', (int) $post, (string) $type, (string) $lang, (bool) $cached, (string) $provider, (string) $model );
+
+		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
+			error_log( sprintf( 'tpas: post=%d type=%s lang=%s cached=%d provider=%s model=%s', $post, $type, $lang, $cached ? 1 : 0, $provider, $model ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
+	}
+
+	/**
+	 * Counts a stale-output rebuild against the same daily caps the gate uses
+	 * (per user, per site) and refuses it with 429 once either is full.
+	 *
+	 * @param int $user_id Current user.
+	 * @return void
+	 */
+	private static function count_rebuild( $user_id ) {
+		if ( ! apply_filters( 'tpas_rebuild_counts_cap', true ) ) {
+			return; // The gate counts stale rebuilds itself.
+		}
+
+		if ( ! function_exists( 'topersia_g_ai_cap_check' ) || ! function_exists( 'topersia_g_ai_count' ) ) {
+			return;
+		}
+
+		$why = topersia_g_ai_cap_check( topersia_g_ai_user_used( $user_id ), topersia_g_ai_site_used(), topersia_g_ai_caps() );
+
+		if ( '' !== $why ) {
+			wp_send_json_error( array( 'cap' => $why, 'message' => 'Daily generation cap reached.' ), 429 );
+		}
+
+		topersia_g_ai_count( $user_id );
 	}
 
 	// -----------------------------------------------------------------
@@ -258,7 +310,7 @@ class TP_AI_Summary {
 				'model'    => (string) $row->model,
 				'created'  => strtotime( (string) $row->updated_at ),
 				/* هش محتوا پس از ساخت عوض شده؟  P5-D250 */
-				'stale'    => class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::is_stale( $post_id, $type, $lang ),
+				'stale'    => class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::is_stale( $post_id, $type, $lang, (string) ( $row->source ?? 'ai' ) ),
 			);
 		}
 
@@ -297,7 +349,8 @@ class TP_AI_Summary {
 
 		$cached = self::get_cached( $post_id, $type, $lang );
 
-		if ( $cached ) {
+		/* 1.2.3 (R54): ردیف داخلیِ کهنه از نو ساخته می‌شود — هزینه‌ای ندارد */
+		if ( $cached && empty( $cached['stale'] ) ) {
 			return (string) $cached['text'];
 		}
 
@@ -330,6 +383,10 @@ class TP_AI_Summary {
 
 		if ( $post_id ) {
 			TP_AI_DB::save_summary( $post_id, $type, $lang, $text, $provider, $model, $source );
+
+			if ( 'internal' === $source && class_exists( 'TP_AI_Core_Bridge' ) ) {
+				TP_AI_Core_Bridge::stamp( $post_id, $type, $lang ); // 1.2.3 (R54): ردیف داخلی هم هش می‌گیرد
+			}
 		}
 
 		$key = '_tpas_ai_' . $type . '_' . $lang;
@@ -509,31 +566,50 @@ class TP_AI_Summary {
 	}
 
 	/**
-	 * Best-effort IP extraction for rate-limiting.
+	 * The post's own permalink, in the page language when WPML is active.
+	 * 1.2.2 · P5-D356 - replaces the browser-sent `url` in the prompt.
+	 *
+	 * @param int    $post_id Post id (already checked as published).
+	 * @param string $lang    Sanitised page language.
+	 * @return string
+	 */
+	public static function post_url( $post_id, $lang ) {
+		$url = (string) get_permalink( $post_id );
+
+		if ( '' !== $url && '' !== (string) $lang && function_exists( 'apply_filters' ) ) {
+			// WPML documented hook: the URL of the same content in another language.
+			$localized = apply_filters( 'wpml_permalink', $url, $lang );
+			if ( is_string( $localized ) && '' !== $localized ) {
+				$url = $localized;
+			}
+		}
+
+		return esc_url_raw( $url );
+	}
+
+	/**
+	 * Client IP for the secondary rate-limit layer.
+	 *
+	 * 1.2.2 · P5-D356 (R47): the same rule as topersia-user-core
+	 * (`ToPersia_Auth::ip_hash()`): X-Forwarded-For is spoofable and is read
+	 * only when the site explicitly declares TOPERSIA_TRUST_PROXY (behind a
+	 * known proxy); otherwise REMOTE_ADDR alone. CF-Connecting-IP / X-Real-IP
+	 * are never trusted.
 	 *
 	 * @return string
 	 */
 	private static function client_ip() {
-		$checks = array(
-			'HTTP_X_FORWARDED_FOR',
-			'HTTP_X_REAL_IP',
-			'HTTP_CF_CONNECTING_IP',
-			'REMOTE_ADDR',
-		);
+		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? trim( (string) wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 
-		foreach ( $checks as $header ) {
-			if ( empty( $_SERVER[ $header ] ) ) {
-				continue;
-			}
+		if ( defined( 'TOPERSIA_TRUST_PROXY' ) && TOPERSIA_TRUST_PROXY && ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+			$chain = explode( ',', (string) wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+			$first = trim( (string) reset( $chain ) );
 
-			$raw = explode( ',', wp_unslash( $_SERVER[ $header ] ) );
-			$ip  = trim( $raw[0] );
-
-			if ( filter_var( $ip, FILTER_VALIDATE_IP ) ) {
-				return $ip;
+			if ( filter_var( $first, FILTER_VALIDATE_IP ) ) {
+				$ip = $first;
 			}
 		}
 
-		return '';
+		return filter_var( $ip, FILTER_VALIDATE_IP ) ? $ip : '';
 	}
 }

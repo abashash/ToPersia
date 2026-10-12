@@ -28,7 +28,10 @@ final class ToPersia_Profile {
         update_user_meta($user_id, '_topersia_travel_style', $travel_style);
         wp_update_user([
             'ID' => $user_id,
-            'display_name' => trim($first_name . ' ' . $last_name) ?: wp_get_current_user()->display_name,
+            /* ۱٫۱۱٫۰ · P5-D354 — از نام و نام خانوادگی؛ خالی یا شماره‌دار ← نام خنثی */
+            'display_name' => class_exists('ToPersia_Privacy')
+                ? ToPersia_Privacy::public_name(trim($first_name . ' ' . $last_name), $user_id, 'fa')
+                : (trim($first_name . ' ' . $last_name) ?: wp_get_current_user()->display_name),
         ]);
 
         wp_send_json_success(['message' => ToPersia_I18n::t('success_saved')]);
