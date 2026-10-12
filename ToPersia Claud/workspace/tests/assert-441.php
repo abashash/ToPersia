@@ -93,14 +93,12 @@ tp441_mut( 'AI: عنوان یک بار؛ جملۀ منشأ یک بار زیر خ
 	$once441, $aiL441, str_replace( '</h2>', '</h2><p>خروجی از دادۀ ساختاریافتۀ همین صفحه ساخته می‌شود.</p>', $aiL441 ) );
 
 $guest441 = function ( $h ) {
-	return (bool) preg_match( '#<h2>[^<]+</h2><p class="tp-ai__cta-text">برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید</p><div class="tp-ai__actions"#u', $h )
-		&& (bool) preg_match( '#data-ai="copy">.*?</button><a class="tp-ai__signup" href="[^"]*redirect_to=[^"]+" data-tp-login="ai" rel="nofollow">ثبت‌نام / ورود</a></div>#su', $h )
-		&& 1 === substr_count( $h, 'data-tp-login=' )
-		&& false === strpos( $h, 'tp-ai__login' ) && false === strpos( $h, 'tp-ai__cta"' ) && false === strpos( $h, '>ورود</a>' );
+	return (bool) preg_match( '#<h2>[^<]+</h2><div class="tp-ai__actions"#u', $h )
+		&& false === strpos( $h, 'tp-ai__cta-text' ) && false === strpos( $h, 'tp-ai__signup' ) && false === strpos( $h, 'data-tp-login=' )
+		&& false === strpos( $h, 'tp-ai__login' ) && false === strpos( $h, '>ورود</a>' ) && false === strpos( $h, 'امکانات بیشتر' );
 };
-tp441_mut( 'AI: مهمان — دعوت زیر عنوان؛ یک دکمۀ «ثبت‌نام / ورود» در ردیف دکمه‌ها کنار «کپی خروجی»؛ پیوند متنیِ «ورود» نیست؛ ورود user-core با بازگشت  P5-D267',
-	$guest441, $aiG441, str_replace( 'ثبت‌نام / ورود</a>', 'ثبت‌نام / ورود</a><a class="tp-ai__login" href="#" data-tp-login="ai">ورود</a>', $aiG441 ) );
-
+tp441_mut( 'AI: مهمان — بی دعوت و بی دکمهٔ «ثبت‌نام / ورود»؛ فقط خروجی ذخیره‌شده و «کپی خروجی»  P5-D358 (برداشتهٔ P5-D267)',
+	$guest441, $aiG441, str_replace( '</h2>', '</h2><p class="tp-ai__cta-text">برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید</p>', $aiG441 ) );
 tp441_mut( 'AI: واردشده — هیچ دعوت و هیچ دکمۀ ثبت‌نام  P5-D267',
 	function ( $h ) { return '' !== $h && false === strpos( $h, 'tp-ai__cta-text' ) && false === strpos( $h, 'tp-ai__signup' ) && false === strpos( $h, 'امکانات بیشتر' ); },
 	$aiL441, str_replace( '</h2>', '</h2><p class="tp-ai__cta-text">برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید</p>', $aiL441 ) );

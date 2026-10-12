@@ -4,8 +4,8 @@
  *   node tests/panel-order-2i.js [--shots]
  *
  * برای هر نوع پستی که پست منتشرشدهٔ فارسی دارد (tests/panel-urls-2i.php؛ نوع‌های بی پست گزارش می‌شوند، نه سنجیده):
- *   دسکتاپ — باکس‌های ستون کناری از بالا به پایین = دکمه‌ها ← AI ← نقشه ← مسیریابی ← شهرهای مسیر ← بهترین زمان سفر ← هوا ← کیفیت هوا ←
- *            جغرافیا ← هم‌مرزها ← سایر کاشی‌ها ← روایت ← منابع؛ AI در ستون کناری است نه ستون اصلی.
+ *   دسکتاپ — باکس‌های ستون کناری از بالا به پایین = دکمه‌ها ← نقشه ← مسیریابی ← شهرهای مسیر ← بهترین زمان سفر ← هوا ← کیفیت هوا ←
+ *            جغرافیا ← هم‌مرزها ← سایر کاشی‌ها ← روایت ← منابع؛ AI (P5-D358) در ستون راست بلافاصله بالای «درباره» است، نه در پنل.
  *   موبایل — ستون راست (AI بالا) کامل پیش از پنل چپ؛ پنل: نقشه ← مسیریابی ← شهرهای مسیر ← هوا ← کیفیت هوا ← بهترین زمان ← جغرافیا ←
  *            هم‌مرزها ← سایر کاشی‌ها ← روایت ← منابع؛ نظرها آخر. بی اسکرول افقی صفحه؛ بی تکرار شناسه.
  * با --shots عکس ۱۴۴۰ و ۳۹۰ استان تهران، شهر اصفهان، گاوخونی و جادهٔ ابریشم در tests/.screens/2i/ (بیرون از git).
@@ -22,7 +22,7 @@ const WS    = path.resolve( __dirname, '..' );
 const SHOTS = process.argv.includes( '--shots' );
 const DIR   = path.join( WS, 'tests', '.screens', '2i' );
 
-const RAIL = [ 'tp-actions', 'tp-ai', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-season', 'tp-weather', 'tp-aqi', 'tp-geo', 'tp-neighbors', '@tiles', 'tp-audio', 'tp-sources' ];
+const RAIL = [ 'tp-actions', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-season', 'tp-weather', 'tp-aqi', 'tp-geo', 'tp-neighbors', '@tiles', 'tp-audio', 'tp-sources' ];
 const MOB  = [ 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', '@tiles', 'tp-audio', 'tp-sources' ];
 
 const rank = ( id, list ) => { const i = list.indexOf( id ); return i < 0 ? list.indexOf( '@tiles' ) : i; };
@@ -60,8 +60,8 @@ async function sample( browser, url, mobile ) {
 			const dr = d.rail.map( x => x.id || 'tp-actions' ).filter( x => x );
 			const dsorted = d.rail.slice().sort( ( a, b ) => a.top - b.top ).map( x => x.id || 'tp-actions' );
 			const want = dsorted.slice().sort( ( a, b ) => rank( a, RAIL ) - rank( b, RAIL ) );
-			check( JSON.stringify( dsorted ) === JSON.stringify( want ) && ! d.main.some( x => 'tp-ai' === x.id ) && ( ! dr.includes( 'tp-ai' ) || dsorted.indexOf( 'tp-ai' ) <= 1 ),
-				`${ type } ۱۴۴۰: پنل چپ ← ${ dsorted.join( ' · ' ) }؛ AI در پنل، نه ستون راست`, dsorted.join( ' ' ) + ' ≠ ' + want.join( ' ' ) );
+			check( JSON.stringify( dsorted ) === JSON.stringify( want ) && ! dsorted.includes( 'tp-ai' ) && ( ! d.main.some( x => 'tp-ai' === x.id ) || [ 'tp-ai', 'tp-overview' ].every( ( id, i ) => ( d.main.slice().sort( ( a, b ) => a.top - b.top )[ i ] || {} ).id === id ) ),
+				`${ type } ۱۴۴۰: پنل چپ ← ${ dsorted.join( ' · ' ) }؛ AI (اگر خروجی ذخیره دارد) در ستون راست بالای «درباره»، نه در پنل`, dsorted.join( ' ' ) + ' ≠ ' + want.join( ' ' ) );
 			check( 0 === d.dup.length && ! dsorted.includes( 'tp-capital-of' ), `${ type } ۱۴۴۰: بی شناسهٔ تکراری و بی باکس «مرکزیت»`, d.dup.join( ',' ) );
 
 			const m = await sample( browser, url, true );

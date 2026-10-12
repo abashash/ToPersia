@@ -4618,38 +4618,35 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 
 		$logged = function_exists( 'is_user_logged_in' ) && is_user_logged_in();
 
-		/* خروجیِ ذخیره‌شدۀ افزونه اول؛ فقط اگر نداشت، `ai_summary`.  ۴٫۲٫۱ بند ۱۰ */
+		/*
+		 * فقط خروجیِ ذخیره‌شده، برای هر بازدیدکننده — مهمان و واردشده.  P5-D358
+		 * خروجیِ ذخیره‌شدۀ خلاصه‌ساز اول (امروز `TP_AI_Summary::get_cached`؛ پس از ادغام جلسۀ ابری E `tpas_get_summary`)،
+		 * وگرنه `ai_summary` دستی؛ هیچ‌کدام نبود ← بلوک نمی‌آید. نه دکمۀ تولید، نه دعوت به ثبت‌نام برای AI، نه درخواست AJAX:
+		 * ویژگی‌های تولید (نانس و نشانی AJAX) چاپ نمی‌شوند، پس جاوااسکریپت صفحه چیزی نمی‌فرستد. تولید فقط مدیر، از پیشخوان.
+		 */
 		$ai      = topersia_g_ai_outputs( $pid );
 		$summary = isset( $ai['summary'] ) ? $ai['summary'] : topersia_g_text( $pid, 'ai_summary' );
 
-		/*
-		 * مهمان بی خروجیِ ذخیره‌شده: بخش نمی‌آید — بی‌داده، بی‌جعبه.
-		 * واردشده می‌تواند بسازد، پس بلوک برایش هست.
-		 */
-		if ( '' === $summary && ( ! $logged || ! class_exists( 'TP_AI_Summary' ) ) ) {
+		if ( '' === $summary ) {
 			return '';
 		}
 
 		$name = topersia_g_name( $pid );
 
-		/* برچسب‌ها و کلیدهای `data-ai` عیناً مرجع: summary · bullets · plan
-		   مهمان فقط خلاصه را دارد — خروجی‌های دیگر حتی در داده نمی‌آیند. */
+		/* برچسب‌ها و کلیدهای `data-ai` عیناً مرجع: summary · bullets · plan. مهمان فقط خلاصه را دارد؛ نکات و برنامۀ ذخیره‌شده برای واردشده. */
 		$data = array_filter( array(
 			'summary' => $summary,
 			'bullets' => $logged && isset( $ai['keypoints'] ) ? $ai['keypoints'] : '',
 			'plan'    => $logged && isset( $ai['plan'] ) ? $ai['plan'] : '',
 		) );
 
-		/*
-		 * مهمان فقط خروجیِ ذخیره‌شده را می‌بیند: همان خلاصه، و دکمۀ کپی.
-		 * نکات، برنامه و موتورها برای واردشده‌اند.  P5-D235
-		 */
-		$types = array( 'summary' => __( 'خلاصه مقصد', 'topersia' ) );
-
-		if ( $logged ) {
-			$types['bullets'] = __( 'نکات کلیدی', 'topersia' );
-			$types['plan']    = __( 'پیشنهاد برنامه سفر', 'topersia' );
-		}
+		/* دکمۀ هر نوع فقط وقتی خروجی ذخیره‌شده‌اش هست — دکمۀ بی خروجی بی‌کار می‌ماند */
+		$labels = array(
+			'summary' => __( 'خلاصه مقصد', 'topersia' ),
+			'bullets' => __( 'نکات کلیدی', 'topersia' ),
+			'plan'    => __( 'پیشنهاد برنامه سفر', 'topersia' ),
+		);
+		$types  = array_intersect_key( $labels, $data );
 
 		/* دکمه‌های نوع خروجی */
 		$buttons = '';
@@ -4670,7 +4667,6 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. esc_html__( 'کپی خروجی', 'topersia' ) . '</button>';
 
 		$url     = (string) get_permalink( $pid );
-		$invite  = '';
 		$engines = '';
 
 		if ( $logged ) {
@@ -4699,66 +4695,28 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 
 			$engines = '<div class="tp-ai__engines" role="group" aria-label="'
 				. esc_attr__( 'ادامه در موتور هوش مصنوعی', 'topersia' ) . '">' . $engines . '</div>';
-
-		} else {
-
-			/*
-			 * مهمان: زیر عنوان جملۀ دعوت، و **یک** دکمۀ «ثبت‌نام / ورود» با
-			 * --tp-accent و --tp-on-accent در همان ردیف دکمه‌ها، کنار «کپی
-			 * خروجی» — تا با دکمه‌های ثانویۀ فیروزه‌ای اشتباه نشود. پیوند
-			 * متنیِ جداگانۀ «ورود» رفت.  P5-D267
-			 *
-			 * مقصد: احراز هویت user-core با بازگشت به همین صفحه.
-			 * `data-tp-login` پنجرۀ user-core را باز می‌کند (همان یک فرم پیامکی
-			 * که هم ورود است هم ساخت حساب)؛ بی جاوااسکریپت، خودِ پیوند به
-			 * برگۀ حساب با redirect_to می‌رود. دو برگۀ جدا با فاز ۵ (P5-D257).
-			 */
-			$login = class_exists( 'ToPersia_Admin' ) && method_exists( 'ToPersia_Admin', 'account_url' )
-				? ToPersia_Admin::account_url()
-				: ( function_exists( 'wp_login_url' ) ? wp_login_url() : home_url( '/' ) );
-
-			$back     = esc_url( add_query_arg( 'redirect_to', rawurlencode( $url ), $login ) );
-			$invite   = '<p class="tp-ai__cta-text">' . esc_html__( 'برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید', 'topersia' ) . '</p>';
-			$buttons .= '<a class="tp-ai__signup" href="' . $back . '" data-tp-login="ai" rel="nofollow">' . esc_html__( 'ثبت‌نام / ورود', 'topersia' ) . '</a>';
-		}
-
-		/* واردشده: آنچه ذخیره نیست با کلیک ساخته می‌شود — نانس خودِ خلاصه‌ساز */
-		$gen = '';
-
-		if ( $logged && class_exists( 'TP_AI_Summary' ) && function_exists( 'wp_create_nonce' ) ) {
-			$gen = ' data-tp-ai-gen="' . esc_attr( wp_create_nonce( 'tpas_ai' ) ) . '"'
-				. ' data-tp-ai-post="' . esc_attr( $pid ) . '"'
-				. ' data-tp-ai-lang="' . esc_attr( topersia_g_ai_lang( $pid ) ) . '"'
-				. ' data-tp-ai-url="' . esc_url( $url ) . '"'
-				. ' data-tp-ai-ajax="' . esc_url( admin_url( 'admin-ajax.php' ) ) . '"';
 		}
 
 		$first_label = reset( $types );
-		$shown       = '' !== $summary ? $summary : esc_html__( 'برای ساختن خلاصه، «خلاصه مقصد» را بزنید.', 'topersia' );
 
 		/*
 		 * هر جمله یک بار.  P5-D267
 		 *   عنوان «این مقصد را در یک نگاه بفهمید» — کیکرِ تکراریِ بالایش رفت
-		 *   جملۀ منشأ — فقط پایینی، کوچک، زیر خروجی؛ «خروجی از دادۀ
-		 *   ساختاریافتۀ همین صفحه ساخته می‌شود» زیر عنوان رفت
-		 *   دعوت مهمان — زیر عنوان؛ واردشده هیچ دعوتی نمی‌بیند
+		 *   جملۀ منشأ — فقط پایینی، کوچک، زیر خروجی
 		 */
 		$body = '<div class="tp-ai">'
 			. '<h2>' . esc_html__( 'این مقصد را در یک نگاه بفهمید', 'topersia' ) . '</h2>'
-			. $invite
 			. '<div class="tp-ai__actions" role="group" aria-label="'
 			. esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>'
 			. $engines
 			. '<div class="tp-ai__out" data-tp-ai-out'
 			. " data-tp-ai='" . esc_attr( wp_json_encode( $data ) ) . "'"
-			. $gen
-			. ' aria-live="polite"><p class="tp-justify">' . esc_html( $shown ) . '</p>'
+			. ' aria-live="polite"><p class="tp-justify">' . esc_html( $summary ) . '</p>'
 			. '<div class="tp-ai__out-meta"><span>' . esc_html__( 'نوع خروجی:', 'topersia' )
 			. ' <strong data-tp-ai-type>' . esc_html( $first_label ) . '</strong></span></div></div>'
 			/* نیمۀ اولِ جملۀ مرجع برای ما هم راست است؛ نیمۀ دوم یادداشت ساخت بود. */
 			. '<p class="tp-ai__disclaimer">' . esc_html__( 'این خروجی صرفاً از دادۀ موجود همین صفحه ساخته شده است.', 'topersia' ) . '</p>'
 			. '</div>';
-
 		return '<section id="tp-ai" class="tp-section">' . $body . '</section>';
 	}
 }
@@ -5562,6 +5520,7 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 		 */
 		$order = array(
 			'main' => array(
+				array( 'fn' => 'topersia_g_sc_ai',       'id' => 'tp-ai',       'nav' => 'خلاصه هوشمند' ),   /* بلافاصله بالای «درباره …»؛ دسکتاپ و موبایل — P5-D358 */
 				array( 'fn' => 'topersia_g_sc_overview', 'id' => 'tp-overview', 'nav' => 'درباره' ),
 				array( 'fn' => 'topersia_g_sc_gallery',  'id' => 'tp-gallery',  'nav' => 'گالری' ),
 				'attractions',

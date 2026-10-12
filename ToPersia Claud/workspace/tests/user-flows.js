@@ -149,16 +149,13 @@ async function guest() {
 				};
 			} );
 
-			check( 'هوش مصنوعی مهمان: فقط خلاصهٔ ذخیره‌شده، بی نانس تولید، بی موتور؛ دعوت زیر سرفصل و یک دکمۀ «ثبت‌نام / ورود»  §۴ · P5-D235 · P5-D267',
-				ai && ! ai.nonce && 'summary' === ai.keys.join() && 'summary,copy' === ai.btns.join() && 0 === ai.engines
-				&& 'برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید' === ai.cta.trim()
-				&& 'ثبت‌نام / ورود' === ai.signup.trim() && 1 === ai.signups && ! ai.login, JSON.stringify( ai ) );
+			check( 'هوش مصنوعی مهمان: اگر بلوک هست فقط خلاصهٔ ذخیره‌شده — بی نانس، بی موتور، بی دعوت و بی دکمهٔ ثبت‌نام (P5-D358)؛ نیست ← هم بی‌خروجی  §۴',
+				! ai || ( ! ai.nonce && 'summary' === ai.keys.join() && 'summary,copy' === ai.btns.join() && 0 === ai.engines
+				&& '' === ai.cta.trim() && '' === ai.signup.trim() && 0 === ai.signups && ! ai.login ), JSON.stringify( ai ) );
 
 			/* کلیک روی هر دکمهٔ خروجی — باز هم هیچ درخواست تولیدی */
 			for ( const b of await page.$$( '[data-ai]:not([data-ai="copy"])' ) ) { await b.click(); }
 			await page.waitForTimeout( 400 );
-
-			await loginAsks( page, '.tp-ai__actions .tp-ai__signup', 'هوش مصنوعی', 'مهمان «ثبت‌نام / ورود» هوش مصنوعی' );
 
 			const rv = await page.evaluate( () => {
 				const s = document.getElementById( 'tp-reviews' );
@@ -193,7 +190,7 @@ async function guest() {
 	for ( const one of [ PROV, CITY ] ) {
 		const html = await ( await fetch( one.url, { headers: { 'User-Agent': BOT } } ) ).text();
 		check( `ربات ${ one.url.replace( /^https?:\/\/[^/]+/, '' ) }: فقط خروجی ذخیره‌شده، بی نانس تولید`,
-			/data-tp-ai-out/.test( html ) && ! /data-tp-ai-gen/.test( html ) && ! /tpas_ai/.test( html ) );
+			! /data-tp-ai-gen/.test( html ) && ! /tpas_ai/.test( html ) && ! /tp-ai__signup/.test( html ) );
 	}
 
 	const s1 = state();
@@ -234,8 +231,8 @@ async function member() {
 			cta: !! document.querySelector( '.tp-ai__cta, .tp-ai__cta-text, .tp-ai__signup' )
 		};
 	} );
-	check( 'واردشده: نانس تولید، سه خروجی، موتورها؛ بی دعوت و بی پنجرهٔ ورود  §۴',
-		me.logged && ! me.modal && me.nonce && 'summary,bullets,plan,copy' === me.btns.join() && me.engines > 0 && ! me.cta, JSON.stringify( me ) );
+	check( 'واردشده: بی نانس تولید (P5-D358)؛ دکمه‌ها فقط برای خروجی ذخیره‌شده، موتورها؛ بی دعوت و بی پنجرهٔ ورود  §۴',
+		me.logged && ! me.modal && ! me.nonce && me.btns.every( b => [ 'summary', 'bullets', 'plan', 'copy' ].includes( b ) ) && ( 0 === me.btns.length || me.engines > 0 ) && ! me.cta, JSON.stringify( me ) );
 
 	/* ── ذخیره ── */
 	let res = page.waitForResponse( r => isAction( r, 'topersia_save_place' ) );
@@ -280,41 +277,11 @@ async function member() {
 		check( 'نظر: یک ردیف در انتظار تأیید برای کاربر آزمون', 1 === mine.length && 0 === mine[0].approved, JSON.stringify( mine ) );
 	}
 
-	/* ── هوش مصنوعی: تولیدِ خروجیِ ذخیره‌نشده ── */
-	const aiState = async () => page.evaluate( () => {
-		const out = document.querySelector( '[data-tp-ai-out]' );
-		return Object.keys( JSON.parse( out.getAttribute( 'data-tp-ai' ) || '{}' ) );
-	} );
-	const have = await aiState();
-	const want = [ 'bullets', 'plan' ].find( k => have.indexOf( k ) < 0 );
-	const typeOf = k => ( 'bullets' === k ? 'keypoints' : k ) + ':fa';
-
-	if ( want ) {
-		const before = state();
-		res = page.waitForResponse( r => isAction( r, 'tpas_ai_generate' ) );
-		await page.click( `[data-ai="${ want }"]` );
-		body = await ( await res ).json();
-		await page.waitForTimeout( 300 );
-		const shown = ( await page.textContent( '[data-tp-ai-out] p' ) ).trim();
-		const after = state();
-		made.push( PROV.id + ':' + typeOf( want ).replace( ':fa', '' ) );
-		check( `هوش مصنوعی واردشده: «${ want }» سمت سرور با نانس ساخته شد، نشان داده شد، در کش مشترکِ (پست، نوع، زبان) نشست  §۴`,
-			body.success && shown.length > 20 && shown !== 'در حال ساختن…' && after.summaries.posts[ PROV.id ].indexOf( typeOf( want ) ) >= 0,
-			JSON.stringify( { body: { success: body.success, engine: body.data && body.data.engine }, shown: shown.slice( 0, 60 ), cache: after.summaries.posts[ PROV.id ] } ) );
-		check( 'سقف: یک واحد از مصرف امروزِ کاربر و سایت  §۴',
-			after.ai.user_used === before.ai.user_used + 1 && after.ai.site_used === before.ai.site_used + 1, JSON.stringify( [ before.ai, after.ai ] ) );
-		/* متنِ موتور داخلیِ خلاصه‌ساز — افزونهٔ جدا، بیرون از دامنهٔ ۴٫۳٫۰ */
-		warn( 'متن ساخته‌شده معنادار است — نه متای خام یا آرایهٔ سریال‌شدهٔ PHP (موتور داخلیِ خلاصه‌ساز)',
-			! /\ba:\d+:\{|Media Ids|Content Status/.test( shown ), shown.replace( /\s+/g, ' ' ).slice( 0, 160 ) );
-
-		const n = gen.length;
-		await page.click( '[data-ai="summary"]' );
-		await page.click( `[data-ai="${ want }"]` );
-		await page.waitForTimeout( 400 );
-		check( 'بار دوم از حافظهٔ همان صفحه — بی درخواست تازه', gen.length === n );
-	} else {
-		info( 'هر سه خروجی استان در کش است — تولید تازه‌ای نماند' );
-	}
+	/* ── هوش مصنوعی: واردشدهٔ عادی هم چیزی نمی‌سازد (P5-D358) — کلیک روی هر دکمه، صفر درخواست tpas_ai_generate ── */
+	const n0 = gen.length;
+	for ( const b of await page.$$( '[data-ai]:not([data-ai="copy"])' ) ) { await b.click(); }
+	await page.waitForTimeout( 400 );
+	check( 'هوش مصنوعی واردشده (غیرمدیر): صفر درخواست tpas_ai_generate — بار صفحه و کلیک روی هر دکمه  P5-D358', gen.length === n0 && 0 === n0, gen.join( ' | ' ) );
 
 	/* ── بار دوبارهٔ صفحه: وضعیت از سرور، خروجی ساخته‌شده از کش ──
 	   وضعیتِ ذخیره و دنبال پس از load از topersia_entity_state می‌آید (صفحه
@@ -333,50 +300,12 @@ async function member() {
 		note: ( document.querySelector( '#tp-reviews .tp-review-invite' ) || {} ).textContent || '',
 		form: !! document.querySelector( '#tp-reviews [data-tp-review-form]' ),
 		shownPublic: [ ...document.querySelectorAll( '#tp-reviews .tp-cmt p' ) ].some( p => /کاربر آزمونِ نسخهٔ محلی/.test( p.textContent ) ),
-		ai: Object.keys( JSON.parse( document.querySelector( '[data-tp-ai-out]' ).getAttribute( 'data-tp-ai' ) || '{}' ) )
 	} ) );
 	check( 'بار دوباره: ذخیره و دنبال‌کردن از سرور فشرده؛ نظر «پس از تأیید مدیر» و منتشرنشده',
 		st.success && st.data.saved && st.data.following && 'true' === again.save && 'true' === again.follow
 		&& ! again.form && /پس از تأیید مدیر/.test( again.note ) && ! again.shownPublic, JSON.stringify( { state: st, again } ) );
-	if ( want ) {
-		check( 'بار دوباره: خروجیِ ساخته‌شده از کش مشترک در دادهٔ صفحه', again.ai.indexOf( want ) >= 0, again.ai.join() );
-	}
 
-	/* ── سقف روزانه: مصرف روی سقف ← ۴۲۹، بی تولید ── */
-	head( `واردشده — سقف روزانه — ${ CITY.url.replace( /^https?:\/\/[^/]+/, '' ) }` );
-	const cityPage = await load( ctx, CITY.url );
-	const cityHave = await cityPage.evaluate( () => Object.keys( JSON.parse( document.querySelector( '[data-tp-ai-out]' ).getAttribute( 'data-tp-ai' ) || '{}' ) ) );
-	const cityWant = [ 'bullets', 'plan' ].find( k => cityHave.indexOf( k ) < 0 );
-
-	if ( cityWant ) {
-		const cap = state().ai.caps.user;
-		const prev = parseInt( php( [ 'tests/local-ai-used.php', String( cap ) ] ), 10 );
-		const before = state();
-		res = cityPage.waitForResponse( r => isAction( r, 'tpas_ai_generate' ) );
-		await cityPage.click( `[data-ai="${ cityWant }"]` );
-		let r = await res;
-		body = await r.json();
-		await cityPage.waitForTimeout( 300 );
-		const after = state();
-		check( `روی سقف (${ cap }): ۴۲۹ با پیام سقف کاربر، بی تولید، بی شمارش  §۴`,
-			429 === r.status() && body.data && 'user' === body.data.cap && /سقف روزان\u06C0 شما/.test( ( await cityPage.textContent( '[data-tp-ai-out] p' ) ) )
-			&& after.summaries.rows === before.summaries.rows && after.ai.user_used === cap && after.ai.site_used === before.ai.site_used,
-			JSON.stringify( { status: r.status(), body, before: before.ai, after: after.ai } ) );
-
-		php( [ 'tests/local-ai-used.php', String( prev ) ] );
-		res = cityPage.waitForResponse( x => isAction( x, 'tpas_ai_generate' ) );
-		await cityPage.click( `[data-ai="${ cityWant }"]` );
-		r = await res;
-		body = await r.json();
-		made.push( CITY.id + ':' + typeOf( cityWant ).replace( ':fa', '' ) );
-		const later = state();
-		check( 'زیر سقف: همان درخواست ساخته شد و یک واحد شمرده شد',
-			200 === r.status() && body.success && later.ai.user_used === prev + 1 && later.summaries.posts[ CITY.id ].indexOf( typeOf( cityWant ) ) >= 0,
-			JSON.stringify( { status: r.status(), used: later.ai, cache: later.summaries.posts[ CITY.id ] } ) );
-	} else {
-		info( 'هر سه خروجی شهر در کش است — سنجش سقف روی این اجرا ممکن نشد' );
-	}
-	await cityPage.close();
+	/* سقف روزانهٔ هر کاربر بی‌اثر است و تولید فقط مدیر (P5-D358) — سنجش سقف ۴۲۹ برداشته شد؛ گیت غیرمدیر در assert-440 (۴۰۳) */
 
 	/* ── پنل حساب: ذخیره‌شده‌ها و دنبال‌شده‌ها ── */
 	const account = await page.evaluate( () => window.ToPersiaUserCore.accountUrl );

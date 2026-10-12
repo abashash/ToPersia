@@ -223,10 +223,9 @@ t( 'AI: رندر هیچ‌جا internal_text صدا نمی‌زند؛ درواز
 
 $GLOBALS['tp_user'] = 0;
 $ai_g = r( 20, 'tp_ai' );
-t( 'AI: مهمان — دعوت به ثبت‌نام با پیوند ورود user-core و بازگشت به همین صفحه؛ بی نانس و بی موتور',
-	false !== strpos( $ai_g, 'برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید' )
-	&& false !== strpos( $ai_g, 'redirect_to=' . rawurlencode( 'https://topersia.com/isfahan-province/' ) )
-	&& false !== strpos( $ai_g, 'data-tp-login="ai"' ) && false === strpos( $ai_g, 'data-tp-ai-gen' )
+t( 'AI: مهمان — بی دعوت به ثبت‌نام و بی دکمهٔ ورود (P5-D358)؛ بی نانس و بی موتور',
+	false === strpos( $ai_g, 'امکانات بیشتر' )
+	&& false === strpos( $ai_g, 'data-tp-login="ai"' ) && false === strpos( $ai_g, 'data-tp-ai-gen' )
 	&& false === strpos( $ai_g, 'tp-ai__engine" href="https://chatgpt' ) );
 
 /* ── بند ۵ — نوار کنش  P5-D237 · P5-D238 · P5-D239 ───────────────── */

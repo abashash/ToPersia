@@ -8,8 +8,10 @@
 
 | طرف | مسیرهای در مالکیت | توضیح |
 |---|---|---|
-| ابری B | `docs/AUDIT-2026-10/` | ممیزی ۲د، فقط کدخوانی — محلی به این پوشه دست نمی‌زند |
-| ابری A | `plugin/topersia-user-core/` · `plugin/topersia-ai-summarizer/` · `tests/assert-uc.php` | کار امنیتی/ممیزی جلسهٔ ابری A — محلی دست نمی‌زند |
+| ابری B | `docs/AUDIT-2026-10/` | ممیزی ۲د — تمام شد؛ فعلاً جلسهٔ فعال نیست |
+| ابری A / C (تمام‌شده) | `plugin/topersia-user-core/` · `tests/assert-uc.php` | امنیت و سخت‌سازی خلاصه‌ساز — ادغام شد (۱٫۱۱٫۰ · ۱٫۲٫۳)؛ فعلاً جلسهٔ فعال نیست |
+| ابری E | `plugin/topersia-ai-summarizer/` | جلسهٔ ابری E روی خلاصه‌ساز (tpas_get_summary) — محلی دست نمی‌زند |
+| ابری D (تمام‌شده) | `plugin/topersia-schema/` | رویداد با تاریخ واقعی — ادغام شد (۱٫۳٫۰)؛ فعلاً جلسهٔ فعال نیست |
 | محلی | `plugin/topersia-render` · `plugin/topersia-core` · `tests` (جز `tests/assert-uc.php`) · `scripts` (جز `scripts/relay`) | جابه‌جایی باکس ToPersia AI در پنل چپ فقط در `topersia-render`؛ بخش محلی ۲د (LOCAL-QUERIES · DATA.md · inventory.json) شروع نشده؛ شاخهٔ `claude/tender-volta-apf3de` ادغام نمی‌شود |
 
 > دو طرف هم‌زمان روی یک پرونده کار نمی‌کنند. `from-cloud` هم‌پوشانی را گزارش می‌کند.
@@ -20,14 +22,20 @@
 
 ### وضعیت و انجام‌شده
 
-- ۱۳ اکتبر: رفع goTo `3a6c54e9` · نسخهٔ نصب core/render `b1ec34bb` · رله ۱٫۰٫۱ `dd121cf6` · ادغام ممیزی ابری `9ae7c73e` · lane `7f4fbe89`.
-- پرامت یکپارچه (۴ دسته، هر دسته یک commit و سطر COMMIT-LOG): **دستهٔ ۱ پنل چپ (layout) — در جریان**؛ سپس ۲ مسیریابی و محتوای نقشه، ۳ نقشهٔ آنلاین با پشتیبان آفلاین، ۴ هم‌ارزی زبان.
-- ممنوع: abzarwp (هیچ کاری) · ادغام `claude/tender-volta-apf3de` · بخش محلی ۲د · P5-D354…D356.
+- ۱۳ اکتبر: دستهٔ ۱ پنل چپ `149c79e2` (D347/D348) · OPS-D011 `65f1b1a3` · ادغام ابری: ممیزی `e1ca63e0`، امنیت/خلاصه‌ساز (cherry-pick `1c889de4`…`a77d2053` + آزمون `7ded731a`)، اسکیمای رویداد `e91eb2bb` · mirror نصب‌شده `d8710f38` · آزمون‌های محلی A/D `3919405e`.
+- **در جریان:** P5-D358 — بلوک AI به جای پیشین (ستون راست، بالای «درباره»؛ فقط خروجی ذخیره‌شده؛ بی تولید برای غیرمدیر) — کد و آزمون‌ها نوشته شد؛ آزمون مرورگر (panel-order · user-flows) در اجراست؛ commit «پنل چپ: خلاصهٔ AI به بالای درباره؛ بی درخواست بازدیدکننده — P5-D358» هنوز نه.
+- ممنوع: abzarwp (هیچ کاری) · ادغام `claude/tender-volta-apf3de` (تکراری؛ فقط cherry-pick ۵ commit انجام شد) · بخش محلی ۲د.
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
-1. دستهٔ ۱: ثبت‌نامهٔ واحد پنل چپ (`includes/topersia-g-panel.php`) ← ترتیب DOM = موبایل، دسکتاپ با CSS order از مولد قالب (`scripts/tp-template-gen.php`) ← AI به پنل چپ (دسکتاپ) ← حذف باکس «مرکزیت» ← کاشی مکان‌های مرتبط برای نوع‌های غیرمکانی ← آزمون ترتیب (alltypes + behaviour) ← عکس ۱۴۴۰ و ۳۹۰ ← commit scope layout.
-2. سپس دستهٔ ۲ (map)، ۳ (map)، ۴ (i18n)، و «پایان» پرامت.
+1. P5-D358: نتیجهٔ panel-order-2i.js و user-flows.js ← در صورت سبز: gates ← commit D358 ← mirror geo ← COMMIT-LOG.
+2. دسته‌های ۲ تا ۴ پرامت یکپارچه به ترتیب (۲ مسیریابی و محتوای نقشه + قلم Italic، ۳ نقشهٔ آنلاین با پشتیبان آفلاین، ۴ هم‌ارزی زبان)، سپس «پایان» (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، جدول تصمیم D349–D353).
+3. برای بعد از پرامت یکپارچه (ثبت‌شده، شروع نشده):
+   - render: نمایش تاریخ رویداد روی صفحهٔ E1 · E3 · E5 — گوگل Event را بی تاریخ دیدنی نمی‌پذیرد؛ پیش‌شرط فاز ۱۰.
+   - wpml-config: `event_start_date` و `event_end_date` ← copy.
+   - render: دروازهٔ سقف `topersia-g-ai.php:142-144` خروجی کهنه را بی شمارش رد می‌کند؛ اگر render خودش بشمارد، صافی `tpas_rebuild_counts_cap` ← false.
+   - core: `post_content` در `topersia_content_hash_compute`.
+   - زنده: تعریف `TOPERSIA_TRUST_PROXY` (کاربر).
 
 ### قیدها و تصمیم‌های مرتبط
 

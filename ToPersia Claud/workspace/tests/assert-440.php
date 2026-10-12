@@ -469,6 +469,7 @@ if ( ! function_exists( 'wp_send_json_error' ) ) {
 }
 $gate440 = array();
 $GLOBALS['tp_user'] = 7;
+$GLOBALS['tp_is_admin'] = true;   /* P5-D358: تولید فقط مدیر؛ دروازهٔ «منتشرشده» برای مدیر سنجیده می‌شود */
 foreach ( array( 'draft', 'private', 'pending', 'password' ) as $why ) {
 	$_POST = array( 'post' => (string) $hid440[ $why ][0], 'nonce' => 'x' );
 	try {
@@ -478,8 +479,21 @@ foreach ( array( 'draft', 'private', 'pending', 'password' ) as $why ) {
 		$gate440[ $why ] = $e->payload['status'];
 	}
 }
+$GLOBALS['tp_is_admin'] = false;
+$gate440_na = array();
+foreach ( array( 'draft', 'published' ) as $why ) {
+	$_POST = array( 'post' => (string) ( 'draft' === $why ? $hid440['draft'][0] : 20 ), 'nonce' => 'x' );
+	try {
+		topersia_g_ai_gate();
+		$gate440_na[ $why ] = 'رد نشد';
+	} catch ( TP440_Json_Exit $e ) {
+		$gate440_na[ $why ] = $e->payload['status'];
+	}
+}
 $_POST = array();
 $GLOBALS['tp_user'] = 0;
+t( 'AI: تولید برای غیرمدیر بسته است — کاربر واردشدهٔ عادی ۴۰۳ می‌گیرد (پست منتشرشده هم)، پیش از کش و سقف  P5-D358',
+	array( 'draft' => 403, 'published' => 403 ) === $gate440_na, wp_json_encode( $gate440_na ) );
 t( 'منتشرشده: دروازهٔ هوش مصنوعی شناسهٔ پیش‌نویس، خصوصی، در انتظار و رمزدار را ۴۰۴ می‌دهد — پیش از کش و سقف  P5-D247',
 	array( 'draft' => 404, 'private' => 404, 'pending' => 404, 'password' => 404 ) === $gate440, wp_json_encode( $gate440 ) );
 

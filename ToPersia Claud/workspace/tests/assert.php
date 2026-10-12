@@ -1365,12 +1365,12 @@ $sec_order = function ( $html, $col ) {
 	return $ids[1];
 };
 
-t( 'چیدمان: ستون اصلی overview · gallery · attractions · places · culture · faq · reviews (ToPersia AI به پنل چپ رفت — P5-D347)',
-	array( 'overview', 'gallery', 'attractions', 'places', 'culture', 'faq', 'reviews' ) === $sec_order( $p20, 'main' ),
+t( 'چیدمان: ستون اصلی ai · overview · gallery · attractions · places · culture · faq · reviews (AI بلافاصله بالای «درباره» — P5-D358)',
+	array( 'ai', 'overview', 'gallery', 'attractions', 'places', 'culture', 'faq', 'reviews' ) === $sec_order( $p20, 'main' ),
 	implode( ' · ', $sec_order( $p20, 'main' ) ) );
 
 t( 'چیدمان: پنل چپ — ترتیب DOM = ترتیب موبایل (ثبت‌نامهٔ واحد، P5-D347)',
-	array( 'actions', 'ai', 'map', 'weather', 'season', 'geo', 'neighbors', 'badges', 'nature', 'ancient', 'villages', 'practical', 'routes', 'audio', 'sources' ) === $sec_order( $p20, 'rail' ),
+	array( 'actions', 'map', 'weather', 'season', 'geo', 'neighbors', 'badges', 'nature', 'ancient', 'villages', 'practical', 'routes', 'audio', 'sources' ) === $sec_order( $p20, 'rail' ),
 	implode( ' · ', $sec_order( $p20, 'rail' ) ) );
 
 /* ── پوسته و سه کارتِ شکل‌دار ─────────────────────────────────── */
@@ -1716,10 +1716,10 @@ $GLOBALS['tp_ai_fake'] = array(); $GLOBALS['tp_ai_calls'] = array(); $GLOBALS['t
 list( $ai0, $ai0d ) = $ai_block();
 
 /* ۴٫۳٫۰: نکاتِ جایگزین از حقایق برداشته شد — «نکات» فقط خروجی هوش مصنوعی است. مهمان فقط خلاصه. */
-t( 'AI: مهمان، بی‌خروجیِ افزونه — خلاصه از ai_summary، بی‌نکات و بی‌برنامه، با دعوت به ثبت‌نام  بند ۱۰ · P5-D235',
+t( 'AI: مهمان، بی‌خروجیِ افزونه — خلاصه از ai_summary، بی‌نکات و بی‌برنامه، بی دعوت و بی دکمهٔ ثبت‌نام، بی نانس  بند ۱۰ · P5-D358',
 	$ai0d['summary'] === topersia_g_text( 20, 'ai_summary' ) && ! isset( $ai0d['bullets'] )
 	&& ! isset( $ai0d['plan'] ) && false === strpos( $ai0, 'data-ai="plan"' ) && false === strpos( $ai0, 'data-ai="bullets"' )
-	&& false !== strpos( $ai0, 'برای دسترسی به امکانات بیشتر هوش مصنوعی ثبت‌نام کنید' )
+	&& false === strpos( $ai0, 'امکانات بیشتر' ) && false === strpos( $ai0, 'tp-ai__signup' ) && false === strpos( $ai0, 'data-tp-ai-gen' )
 	&& array( '20/summary/fa', '20/keypoints/fa', '20/plan/fa' ) === $GLOBALS['tp_ai_calls'],
 	implode( ',', $GLOBALS['tp_ai_calls'] ) );
 
@@ -1749,9 +1749,9 @@ list( $ai3, $ai3d ) = $ai_block();
 $GLOBALS['tp_user'] = 7;
 list( $ai3u, $ai3ud ) = $ai_block();
 $GLOBALS['tp_user'] = 0;
-t( 'AI: رندر هرگز تولید نمی‌کند — موتور داخلی روشن، بی‌خلاصهٔ ذخیره: مهمان ai_summary، واردشده دکمهٔ ساختن  P5-D235',
+t( 'AI: رندر هرگز تولید نمی‌کند — موتور داخلی روشن، بی‌خلاصهٔ ذخیره: مهمان ai_summary، واردشده هم بی دکمهٔ ساختن و بی نانس  P5-D358',
 	$ai3d['summary'] === topersia_g_text( 20, 'ai_summary' ) && ! isset( $ai3d['bullets'] )
-	&& '• فقط نکته' === $ai3ud['bullets'] && false !== strpos( $ai3u, 'data-tp-ai-gen="' ) && false === strpos( $ai3, 'data-tp-ai-gen' )
+	&& '• فقط نکته' === $ai3ud['bullets'] && false === strpos( $ai3u, 'data-tp-ai-gen' ) && false === strpos( $ai3, 'data-tp-ai-gen' )
 	&& array() === $GLOBALS['tp_ai_generated'],
 	implode( ',', $GLOBALS['tp_ai_generated'] ) );
 
@@ -1762,7 +1762,21 @@ $GLOBALS['tp_meta'][20]['ai_summary'] = '';
 $ai4 = r( 20, 'tp_ai' );
 $GLOBALS['tp_meta'][20]['ai_summary'] = $ai_keep;
 
-t( 'AI: بی‌خلاصه — نه از افزونه نه از ai_summary — بخش نمی‌آید  بند ۱۰', '' === $ai4 );
+$GLOBALS['tp_meta'][20]['ai_summary'] = '';
+$GLOBALS['tp_user'] = 7;
+$ai4u = r( 20, 'tp_ai' );
+$GLOBALS['tp_user'] = 0;
+$GLOBALS['tp_meta'][20]['ai_summary'] = $ai_keep;
+
+t( 'AI: بی‌خلاصه — نه از افزونه نه از ai_summary — بخش نمی‌آید، برای مهمان و واردشده  بند ۱۰ · P5-D358', '' === $ai4 && '' === $ai4u );
+
+/* P5-D358: هیچ حالتی نانس، نشانی AJAX، دکمهٔ تولید یا دعوت چاپ نمی‌کند؛ صفحه برای مهمان و مشترک هیچ tpas_ai_generate نمی‌فرستد */
+$ai_all = array( $ai0, $ai2, $ai3, $ai3u );
+$ai_bad = function ( $list ) { return array_values( array_filter( $list, function ( $h ) { return false !== strpos( $h, 'data-tp-ai-gen' ) || false !== strpos( $h, 'data-tp-ai-ajax' ) || false !== strpos( $h, 'tpas_ai' ) || false !== strpos( $h, 'tp-ai__signup' ); } ) ); };
+t( 'AI: صفحه برای مهمان و مشترک هیچ درخواست tpas_ai_generate نمی‌فرستد — نه نانس، نه نشانی AJAX، نه دکمهٔ تولید؛ جهش: نانسی که چاپ شود گرفته می‌شود  P5-D358',
+	array() === $ai_bad( $ai_all ) && 1 === count( $ai_bad( array( $ai3u . ' data-tp-ai-gen="x"' ) ) )
+	&& false === strpos( file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), 'data-tp-ai-gen' ) && false !== strpos( $js_zones, "if ( ! nonce || ! window.fetch || btn.disabled ) {" ),
+	count( $ai_bad( $ai_all ) ) . ' حالت' );
 
 $js_media = preg_match( '#/\* ══ صوت و ویدیو — P5-D222.*?/\* ══ مودالِ فهرست#s', $js_zones, $jm9 ) ? $jm9[0] : '';
 

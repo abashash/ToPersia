@@ -461,9 +461,9 @@ $relmap  = topersia_g_relmap();
  * ناحیۀ ناشناس، ترتیب وارونه، یا بخشی بی هیچ محتوا = ایراد.
  */
 $TP_ORDER = array(
-	'main' => array( 'tp-overview', 'tp-gallery', 'tp-attractions', 'tp-places', 'tp-provinces', 'tp-districts', 'tp-programmes', 'tp-prog-', 'tp-culture', 'tp-news', 'tp-faq', 'tp-reviews' ),
+	'main' => array( 'tp-ai', 'tp-overview', 'tp-gallery', 'tp-attractions', 'tp-places', 'tp-provinces', 'tp-districts', 'tp-programmes', 'tp-prog-', 'tp-culture', 'tp-news', 'tp-faq', 'tp-reviews' ),
 	/* پنل چپ: ترتیب DOM = ترتیب موبایل (P5-D347)؛ «مرکزیت» باکس جدا نیست (P5-D348) */
-	'rail' => array( 'tp-actions', 'tp-ai', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-routes', 'tp-border', 'tp-subranges', 'tp-audio', 'tp-sources' ),
+	'rail' => array( 'tp-actions', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-routes', 'tp-border', 'tp-subranges', 'tp-audio', 'tp-sources' ),
 );
 function tp_at_order_bad( $html ) {
 

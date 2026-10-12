@@ -7,6 +7,8 @@
  *                  «تولید آنی» ۴٫۲٫۱ (`internal_text` در رندر) برداشته شد
  *   نقطۀ تولید     خودِ خلاصه‌ساز `wp_ajax_nopriv_tpas_ai_generate` ندارد
  *
+ * ۱۳ اکتبر · P5-D358: تولید برای غیرمدیر بسته؛ سقف کاربر بی‌اثر («برای نسخه‌های بعد»). متن زیر تاریخچۀ دورۀ پیشین است.
+ *
  * واردشده: تولید سمت سرور از نقطۀ خودِ خلاصه‌ساز (`tpas_ai_generate`،
  * نانس `tpas_ai`)، که کش مشترکِ (پست، نوع خروجی، زبان) دارد — یک‌بار
  * ساخته می‌شود و برای همه می‌ماند. این فایل پیش از آن، با اولویت ۱، دو
@@ -122,6 +124,14 @@ if ( ! function_exists( 'topersia_g_ai_gate' ) ) {
 			return;
 		}
 
+		/*
+		 * تولید برای غیرمدیر بسته است — هیچ بازدیدکننده‌ای (مهمان یا واردشده) خلاصه نمی‌سازد؛ بلوک صفحه هم دیگر نانس و دکمۀ تولید ندارد.
+		 * نقطۀ خودِ خلاصه‌ساز را مستقیم صدا بزنند هم همین‌جا پیش از هر شمارش و هر فراخوانی رد می‌شود. تولید فقط مدیر، از پیشخوان.  P5-D358
+		 */
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'ساختن خلاصه فعلاً فقط برای مدیر است.', 'topersia' ) ), 403 );
+		}
+
 		$post = isset( $_POST['post'] ) ? absint( $_POST['post'] ) : 0;
 		$type = isset( $_POST['type'] ) ? preg_replace( '/[^a-z_]/', '', strtolower( (string) wp_unslash( $_POST['type'] ) ) ) : '';
 		$lang = isset( $_POST['lang'] ) ? preg_replace( '/[^a-z0-9_-]/', '', strtolower( (string) wp_unslash( $_POST['lang'] ) ) ) : '';
@@ -143,8 +153,10 @@ if ( ! function_exists( 'topersia_g_ai_gate' ) ) {
 			return;
 		}
 
+		/* سقف هر کاربر بی‌اثر است («برای نسخه‌های بعد»)؛ فقط سقف کل سایت می‌سنجد.  P5-D358 */
 		$user = get_current_user_id();
-		$why  = topersia_g_ai_cap_check( topersia_g_ai_user_used( $user ), topersia_g_ai_site_used(), topersia_g_ai_caps() );
+		$caps = topersia_g_ai_caps();
+		$why  = topersia_g_ai_cap_check( 0, topersia_g_ai_site_used(), array( 'site' => $caps['site'], 'user' => PHP_INT_MAX ) );
 
 		if ( '' !== $why ) {
 			wp_send_json_error( array(

@@ -970,35 +970,27 @@ async function weatherFx( browser, url, tag, reduced ) {
 /* ── ۲٫۰٫۳ تا ۲٫۰٫۶ — بلوک AI، تاریخ راستی‌آزمایی، کاشی مسیر، تراز دوطرفه ── */
 async function phase2( page, tag, mobile ) {
 
-	/* P5-D267 — مهمان: هر جمله یک بار؛ یک دکمه کنار «کپی خروجی»؛ پنجرۀ user-core با بازگشت */
+	/* P5-D358 — بلوک AI فقط خروجی ذخیره‌شده را نشان می‌دهد: هر جمله یک بار؛ نه دعوت، نه دکمهٔ ثبت‌نام، نه نانس و دکمهٔ تولید؛ هیچ درخواست tpas_ai_generate */
 	const ai = await page.evaluate( () => {
 		const box = document.querySelector( '#tp-ai' );
 		if ( ! box ) { return null; }
-		const row = box.querySelector( '.tp-ai__actions' ), s = row && row.querySelector( '.tp-ai__signup' ), copy = row && row.querySelector( '[data-ai="copy"]' );
+		const res = performance.getEntriesByType( 'resource' ).map( r => r.name );
 		return {
 			h2: box.querySelectorAll( 'h2' ).length,
 			heading: ( box.textContent.match( /این مقصد را در یک نگاه بفهمید/g ) || [] ).length,
 			origin: ( box.textContent.match( /از دادۀ (?:موجود|ساختاریافتۀ) همین صفحه/g ) || [] ).length,
-			invite: !! box.querySelector( 'h2 + p.tp-ai__cta-text' ),
-			nextToCopy: !! ( s && copy && copy.nextElementSibling === s ),
-			sameRow: !! ( s && copy && Math.abs( s.getBoundingClientRect().top - copy.getBoundingClientRect().top ) <= 2 ),
-			login: box.querySelectorAll( '.tp-ai__login' ).length,
-			text: s ? s.textContent.trim() : ''
+			invite: !! box.querySelector( '.tp-ai__cta-text, .tp-ai__signup, .tp-ai__login, [data-tp-login]' ),
+			gen: !! box.querySelector( '[data-tp-ai-gen], [data-tp-ai-ajax]' ),
+			ajax: res.filter( n => /admin-ajax|tpas_ai_generate/.test( n ) ).length,
+			aboveAbout: !! ( document.querySelector( '#tp-overview' ) && box.nextElementSibling && box.nextElementSibling.id === 'tp-overview' ),
+			inMain: !! box.closest( '.tp-main-col' )
 		};
 	} );
 	if ( ! ai ) {
-		info( tag + ': بلوک AI ندارد' );
+		info( tag + ': بلوک AI ندارد (خروجی ذخیره‌شده‌ای نیست)' );
 	} else {
-		check( `${ tag }: AI — عنوان و جملۀ منشأ هر کدام یک بار؛ دعوت زیر عنوان؛ «ثبت‌نام / ورود» کنار «کپی خروجی» در همان ردیف؛ «ورود» متنی نیست  P5-D267`,
-			1 === ai.h2 && 1 === ai.heading && 1 === ai.origin && ai.invite && ai.nextToCopy && ( ai.sameRow || mobile ) && ! ai.login && 'ثبت‌نام / ورود' === ai.text, JSON.stringify( ai ) );
-		await page.evaluate( () => document.querySelector( '#tp-ai .tp-ai__signup' ).scrollIntoView( { block: 'center', behavior: 'instant' } ) );
-		await page.click( '#tp-ai .tp-ai__signup' );
-		await page.waitForTimeout( 300 );
-		const m = await page.evaluate( () => { const d = document.getElementById( 'tp-uc-login' ); return d ? { open: ! d.hidden, why: ( ( d.querySelector( '[data-tp-uc-reason]' ) || {} ).textContent || '' ).trim(), redirect: ( d.querySelector( '[data-tp-auth]' ) || { getAttribute: () => '' } ).getAttribute( 'data-tp-redirect' ) } : null; } );
-		check( `${ tag }: AI — «ثبت‌نام / ورود» پنجرۀ ورود/ثبت‌نام user-core را با بازگشت به همین صفحه باز می‌کند  P5-D267`,
-			!! m && m.open && m.redirect === page.url(), JSON.stringify( m ) );
-		await page.keyboard.press( 'Escape' );
-		await page.waitForTimeout( 150 );
+		check( `${ tag }: AI — عنوان و جملهٔ منشأ هر کدام یک بار؛ بی دعوت و بی دکمهٔ ثبت‌نام؛ بی نانس و دکمهٔ تولید؛ هیچ درخواست AJAX؛ ستون راست، بلافاصله بالای «درباره»  P5-D358`,
+			1 === ai.h2 && 1 === ai.heading && 1 === ai.origin && ! ai.invite && ! ai.gen && 0 === ai.ajax && ai.inMain && ai.aboveAbout, JSON.stringify( ai ) );
 	}
 
 	/* P5-D268 — تاریخ زیر مقدار «وضعیت محتوا»، در همان خانه */

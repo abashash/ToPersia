@@ -27,9 +27,9 @@ foreach ( $bad2i as $i => $row ) {
 	if ( 'tp-weather' === $row['id'] ) { $bad2i[ $i ]['d'] = 6; }
 }
 
-tp441_mut( 'پنل چپ، دسکتاپ: دکمه‌ها ← ToPersia AI ← نقشه ← مسیریابی ← شهرهای مسیر ← بهترین زمان سفر ← هوای این روزها ← کیفیت هوا ← اطلاعات جغرافیایی ← کاشی‌های هم‌جوار ← روایت ← منابع',
+tp441_mut( 'پنل چپ، دسکتاپ: دکمه‌ها ← نقشه ← مسیریابی ← شهرهای مسیر ← بهترین زمان سفر ← هوای این روزها ← کیفیت هوا ← اطلاعات جغرافیایی ← کاشی‌های هم‌جوار ← روایت ← منابع',
 	function ( $x ) use ( $seq ) {
-		return array( 'tp-actions', 'tp-ai', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-season', 'tp-weather', 'tp-aqi', 'tp-geo', TOPERSIA_G_PANEL_TILES, 'tp-audio', 'tp-sources' ) === $seq( $x, 'd' );
+		return array( 'tp-actions', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-season', 'tp-weather', 'tp-aqi', 'tp-geo', TOPERSIA_G_PANEL_TILES, 'tp-audio', 'tp-sources' ) === $seq( $x, 'd' );
 	},
 	$reg2i, $bad2i );
 
@@ -38,9 +38,9 @@ foreach ( $bad2i as $i => $row ) {
 	if ( 'tp-audio' === $row['id'] ) { $bad2i[ $i ]['m'] = 30; }
 }
 
-tp441_mut( 'پنل چپ، موبایل: AI بالا (جای پیشین)؛ نقشه ← مسیریابی ← شهرهای مسیر ← هوای این روزها ← کیفیت هوا ← بهترین زمان سفر ← اطلاعات جغرافیایی ← کاشی‌های هم‌جوار ← روایت ← منابع',
+tp441_mut( 'پنل چپ، موبایل: نقشه ← مسیریابی ← شهرهای مسیر ← هوای این روزها ← کیفیت هوا ← بهترین زمان سفر ← اطلاعات جغرافیایی ← کاشی‌های هم‌جوار ← روایت ← منابع',
 	function ( $x ) use ( $seq ) {
-		return array( 'tp-ai', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', TOPERSIA_G_PANEL_TILES, 'tp-audio', 'tp-sources' ) === $seq( $x, 'm' );
+		return array( 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', TOPERSIA_G_PANEL_TILES, 'tp-audio', 'tp-sources' ) === $seq( $x, 'm' );
 	},
 	$reg2i, $bad2i );
 
@@ -60,7 +60,7 @@ $main2i = topersia_g_panel_main_mobile();
 tp441_mut( 'موبایل: ستون راست کامل پیش از پنل چپ (پرسش‌ها پیش از نقشه)، و «نظر بازدیدکنندگان» پس از منابع آخرین است',
 	function ( $x ) use ( $reg2i ) {
 		$m = array();
-		foreach ( $reg2i as $r ) { if ( null !== $r['m'] && 'tp-ai' !== $r['id'] ) { $m[ $r['id'] ] = $r['m']; } }
+		foreach ( $reg2i as $r ) { if ( null !== $r['m'] ) { $m[ $r['id'] ] = $r['m']; } }
 		return $x['tp-faq'] < $m['tp-map'] && $x['tp-reviews'] > $m['tp-sources'] && $x['tp-news'] < $x['tp-faq'];
 	},
 	$main2i, array_merge( $main2i, array( 'tp-reviews' => 70 ) ) );
@@ -79,19 +79,18 @@ $gen2i = function ( $css ) use ( $reg2i ) {
 		&& false !== strpos( $m[1], '.tp-main-col>*{order:12}' );
 };
 tp441_mut( 'مولد قالب: بلوک order موبایل و دسکتاپ هر ردیف ثبت‌نامه را دارد (فقط CSS order؛ DOM تکراری نیست) و وزنش از بلوک order مرجع بیشتر است',
-	function ( $x ) use ( $gen2i ) { return $gen2i( $x[0] ) && false !== strpos( $x[0], 'html .tp-page.tp-page #tp-ai{order:' ); },
+	function ( $x ) use ( $gen2i ) { return $gen2i( $x[0] ) && false !== strpos( $x[0], 'html .tp-page.tp-page #tp-map{order:' ) && false === strpos( $x[0], 'html .tp-page.tp-page #tp-ai{order:' ); },
 	array( $css2i ), array( str_replace( '#tp-weather{order:7}', '#tp-weather{order:5}', $css2i ) ) );
 
 /* ── چیدمان صفحه ────────────────────────────────────────────────────── */
 $lay2i = topersia_g_layout( 20 );
-tp441_mut( 'ToPersia AI در پنل چپ، بلافاصله پس از دکمه‌ها (نه در ستون راست)؛ باکس «مرکزیت» در هیچ ستونی نیست',
+tp441_mut( 'P5-D358 — بلوک AI به جای پیشین: ستون راست، بلافاصله بالای «درباره …» (نه در پنل چپ)؛ باکس «مرکزیت» در هیچ ستونی نیست',
 	function ( $x ) {
 		$rail = array_map( function ( $z ) { return $z['id']; }, $x['rail'] );
 		$main = array_map( function ( $z ) { return $z['id']; }, $x['main'] );
-		return array( '', 'tp-ai' ) === array_slice( $rail, 0, 2 ) && ! in_array( 'tp-ai', $main, true ) && ! in_array( 'tp-capital-of', array_merge( $rail, $main ), true );
+		return array( 'tp-ai', 'tp-overview' ) === array_slice( $main, 0, 2 ) && ! in_array( 'tp-ai', $rail, true ) && ! in_array( 'tp-capital-of', array_merge( $rail, $main ), true );
 	},
-	$lay2i, array( 'main' => array( array( 'id' => 'tp-ai' ) ), 'rail' => array( array( 'id' => '' ), array( 'id' => 'tp-map' ), array( 'id' => 'tp-capital-of' ) ) ) );
-
+	$lay2i, array( 'main' => array( array( 'id' => 'tp-overview' ), array( 'id' => 'tp-ai' ) ), 'rail' => array( array( 'id' => '' ), array( 'id' => 'tp-ai' ), array( 'id' => 'tp-capital-of' ) ) ) );
 /* ── مکان‌های مرتبط برای نوع غیرمکانی ──────────────────────────────── */
 $rel2i = $f2_reg;
 $rel2i[7101] = array( 'id' => 7101, 'name' => 'province_festival', 'type' => 'many_to_many', 'parent' => 'tp_province', 'child' => 'tp_festival', 'parent_label' => 'جشن', 'child_label' => 'استان رایج' );
