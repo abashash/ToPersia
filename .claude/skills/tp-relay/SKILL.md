@@ -5,7 +5,7 @@ description: رلهٔ کار ToPersia بین Claude Code محلی (WAMP) و جل
 
 # tp-relay — نوبت‌دهی محلی ⇄ ابری
 
-مرجع: `ToPersia Claud/workspace/docs/relay/RELAY.md` (تصمیم‌های OPS-D001…OPS-D007).
+مرجع: `ToPersia Claud/workspace/docs/relay/RELAY.md` (تصمیم‌های OPS-D001…OPS-D009).
 ابزار: `php "ToPersia Claud/workspace/scripts/relay/tp-relay.php" <فرمان>` — از ریشهٔ مخزن.
 نوبت جاری: `ToPersia Claud/workspace/docs/relay/CURRENT.md` — دو بخش جدا؛ **هر طرف فقط بخش خودش را ویرایش می‌کند**.
 
@@ -31,5 +31,5 @@ description: رلهٔ کار ToPersia بین Claude Code محلی (WAMP) و جل
 
 - بخش محلی CURRENT.md را در هر نقطهٔ عطف به‌روز نگه دار (OPS-D003) — اگر سهمیه ناگهان تمام شد، کاربر بی تو تحویل می‌دهد و جلسهٔ ابری از «قدم بعدی» تو ادامه می‌دهد.
 - کار موازی (OPS-D005): پیش از تحویل، جدول lane را پر کن تا دو طرف روی یک پرونده نروند.
-- تحویل: کاربر (یا تو، اگر خواست) اجرا می‌کند `to-cloud [--task="…"]` — WIP روی `relay/…` commit و push می‌شود و `claude --cloud` باز می‌شود.
+- دو راه (OPS-D009): **کار موازی** ← جلسه را از claude.ai/code روی `main` باز کن و lane را صریح در دستورش بگو؛ `to-cloud` نه. **تحویل کار نیمه‌کاره** (سهمیه تمام می‌شود) ← `to-cloud --wip [--task="…"]` — WIP روی `relay/…` commit و push می‌شود و `claude --cloud` باز می‌شود؛ بی `--wip` درخت کثیف کد ۲ می‌دهد.
 - برگشت: `from-cloud` ← بازبینی روی `review/…` ← آزمون‌های «در انتظار تأیید محلی» ← `from-cloud <شاخه> --gates --squash` ← commit دسته‌ای و ثبت hash در `docs/COMMIT-LOG.md`.

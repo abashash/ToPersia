@@ -2,13 +2,13 @@
 declare( strict_types=1 );
 
 /**
- * tp-relay ۱٫۰٫۰ — رلهٔ کار بین Claude Code محلی (WAMP) و جلسهٔ ابری Claude Code.
- * تصمیم‌ها: OPS-D001 … OPS-D007 — راهنما: docs/relay/RELAY.md
+ * tp-relay ۱٫۰٫۱ — رلهٔ کار بین Claude Code محلی (WAMP) و جلسهٔ ابری Claude Code.
+ * تصمیم‌ها: OPS-D001 … OPS-D009 — راهنما: docs/relay/RELAY.md
  *
  * محلی — بی نیاز به هوش مصنوعی؛ وقتی سهمیهٔ هفتگی تمام شده هم کار می‌کند (OPS-D003):
  *   php tp-relay.php status [--fetch]
  *   php tp-relay.php preflight
- *   php tp-relay.php to-cloud [--task="…" | --task-file=PATH] [--all] [--no-launch] [--dry-run]
+ *   php tp-relay.php to-cloud [--task="…" | --task-file=PATH] [--all] [--wip] [--no-launch] [--dry-run]
  *   php tp-relay.php from-cloud [BRANCH] [--gates] [--squash]
  *   php tp-relay.php gates [--record]
  * ابری — از قلاب SessionStart در .claude/settings.json ریشه:
@@ -20,7 +20,7 @@ declare( strict_types=1 );
  * کد خروج: ۰ سالم · ۱ افتادن · ۲ ورودی یا محیط نادرست
  */
 
-const TP_RELAY_VERSION = '1.0.0';
+const TP_RELAY_VERSION = '1.0.1';
 const TP_WIN_ROOT      = 'C:/wamp64/www/topersia/'; // فقط برای سنجش طول مسیر در ویندوز
 
 $GLOBALS['tp_dry'] = false;
@@ -472,6 +472,19 @@ function cmd_to_cloud( array $opt ): int {
 		tp_err( 'تحویل متوقف شد: اول preflight را سبز کن (OPS-D006).' );
 		return 1;
 	}
+	// OPS-D009: to-cloud همهٔ تغییرهای پیگیری‌شده را برمی‌دارد و شاخه را عوض می‌کند؛ بی --wip فقط روی درخت تمیز
+	if ( empty( $opt['wip'] ) ) {
+		$tracked = 0;
+		foreach ( tp_dirty() as [ $xy ] ) {
+			if ( '??' !== $xy ) {
+				$tracked++;
+			}
+		}
+		if ( $tracked > 0 ) {
+			tp_err( "درخت کار تمیز نیست ({$tracked} پرونده). کار موازی: جلسه را از claude.ai/code روی main باز کن. تحویل همین کار نیمه‌کاره: --wip" );
+			return 2;
+		}
+	}
 	$from  = tp_branch();
 	$head  = tp_short();
 	$stamp = ( new DateTimeImmutable( 'now', new DateTimeZone( 'Asia/Tehran' ) ) )->format( 'Ymd-Hi' );
@@ -709,7 +722,7 @@ function cmd_session_start( array $opt ): int {
 	$envset = $ef ? "TP_ENV برای همهٔ فرمان‌ها به `{$tmp}` اشاره می‌کند." : "TP_ENV خودکار تنظیم نشد؛ آزمون‌ها را با `TP_ENV={$tmp}` اجرا کن.";
 
 	$ctx = <<<TXT
-حالت ابری ToPersia — رله ۱٫۰ (OPS-D001…OPS-D007) · شاخه: {$branch}
+حالت ابری ToPersia — رله ۱٫۰ (OPS-D001…OPS-D009) · شاخه: {$branch}
 
 ۱. اول بخوان: `{$ws}/CLAUDE.md` و `{$ws}/docs/relay/CURRENT.md`. کار این جلسه «دستور این جلسهٔ ابری» در بخش ابری است؛ اگر نوشته «(خالی)»، از «قدم بعدی» بخش محلی ادامه بده؛ اگر آن هم روشن نیست بپرس — حدس نزن.
 ۲. این ماشین کامپیوتر کاربر نیست: WAMP، MariaDB، topersia.local، کروم و فایرفاکس این‌جا نیستند. {$envset}
@@ -751,6 +764,7 @@ tp-relay {$v} — رلهٔ محلی ⇄ ابری ToPersia (docs/relay/RELAY.md)
   to-cloud                   WIP ← شاخهٔ relay/… ← push ← claude --cloud
       --task="…" | --task-file=PATH   دستور جلسه در بخش ابری CURRENT.md
       --all                  پروندهٔ تازهٔ بیرون از workspace هم
+      --wip                  تحویل کار نیمه‌کارهٔ درخت کثیف (بی آن، درخت کثیف کد ۲ می‌دهد — OPS-D009)
       --no-launch | --dry-run
   from-cloud [BRANCH]        بی شاخه: فهرست؛ با شاخه: بازبینی روی review/…
       --gates                گیت‌های محلی
