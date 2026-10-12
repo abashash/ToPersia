@@ -70,3 +70,37 @@
 | R48 | ورود پیامکی: سقف ۱۲۰ در ساعت برای کل سایت = قفل‌شدن ورود یا هزینۀ پیامک با چند IP | متوسط | کم | سقف‌های شماره/IP ← CAPTCHA/Turnstile قبل از ارسال، هشدار هزینه | شمار 429 در `topersia_log` | باز | UC | `[VERIFIED]` `UC/includes/class-topersia-auth.php:29-47` |
 | R49 | `tpas_track` بی‌ورود با نانس عمومی؛ `update_option('tpas_stats')` با autoload در هر کلیک — تقویت نوشتن | کم | متوسط | فعال‌بودن فقط با `track_clicks` ← شمارش دسته‌ای/ترنزینت | حجم `tpas_stats` | کاهش‌یافته | AI | `[VERIFIED]` `AI/includes/class-tp-ai-tracker.php:24-25,56` |
 | R50 | مستندات کهنه (`UC/ARCHITECTURE.md`) و ادعای P5-D317 (failover) | کم | زیاد | — ← به‌روزرسانی مستند | — | باز | UC+AI | `[VERIFIED]` `UC/includes/class-topersia-db.php:10-19` |
+
+---
+
+## ج — افزوده‌های دور دوم (تطبیق با ممیزی مستقل ب)
+
+> منبع: **دور دوم** — `RECONCILE.md` (۱۲ اکتبر ۲۰۲۶). هر ردیف در کد `main` دوباره سنجیده شد؛ شمارۀ «ب» شمارۀ ممیزی شاخۀ `claude/tender-volta-apf3de` است.
+
+| # | ریسک | شدت | احتمال | کاهش (هست ← باید) | تشخیص | وضعیت | مالک | شاهد و برچسب (دور دوم) |
+|---|---|---|---|---|---|---|---|---|
+| R51 | برچسب آب/دریا/دریاچه/جزیره/پلاک نقشه با قلم `Noto Sans Italic` که بازه‌های عربی‌اش تهی است ← «خلیج فارس»، «دریای خزر»، «کیش» در fa/ar نمایش داده نمی‌شوند | زیاد | زیاد | هیچ ← `italic: 'Noto Sans Regular'` در flavor (یک خط)، گارد assert | نگاه به صفحۀ کشور fa/ar | باز | RENDER | `[VERIFIED]` `RENDER/assets/map/basemaps.js:15` · `RENDER/assets/map/fonts/Noto Sans Italic/1536-1791.pbf` (۲۶ بایت) · `RENDER/assets/topersia-g-zones.js:2114` — دور دوم (ب: S04) |
+| R52 | `text-letter-spacing` (۰٫۱–۰٫۲) روی ۵ لایۀ برچسب در `lang=fa` — خلاف قاعدۀ پروژه | متوسط | زیاد | هیچ ← حذف کلید برای fa/ar پس از `layers()` | خروجی `basemaps.layers` | باز | RENDER | `[VERIFIED]` `RENDER/assets/map/basemaps.js:15` (خروجی اجرا) — دور دوم (ب: S04) |
+| R53 | دورزدن سقف روزانه با خروجی کهنه: دروازۀ render با هر ردیف کش (حتی کهنه) بی شمارش برمی‌گردد و `handle_ajax` همان را بازمی‌سازد | متوسط | زیاد | سقف ساعتی ← شمارش بازسازی کهنه | مقایسۀ شمارنده با ردیف‌ها | باز | RENDER+AI | `[VERIFIED]` `RENDER/includes/topersia-g-ai.php:142-144` · `AI/includes/class-tp-ai-summary.php:125-128` — دور دوم (ب: S14) |
+| R54 | ردیف موتور داخلی هش ندارد و هرگز کهنه نمی‌شود؛ چون `get_cached` به `source` نگاه نمی‌کند، متن داخلی پس از ویرایش پست هم جای LLM می‌نشیند | متوسط | متوسط | هیچ ← هش برای ردیف داخلی یا «بی هش = کهنه» | `SELECT source, COUNT(*)` و متای `_tpas_hash_*` | باز | AI | `[VERIFIED]` `AI/includes/class-tp-ai-summary.php:309,326` · `AI/includes/class-tp-ai-core-bridge.php:79,91-93` · `CORE/includes/topersia-cache.php:501-504` — دور دوم (ب: AI §۳ + الف: AI §۳) |
+| R55 | `post_content` و گزیده در هش محتوا نیستند (برای نوع‌های غیر `tp_*`) | کم | متوسط | فیلدهای صافی ← افزودن متن پست | — | باز | CORE | `[VERIFIED]` `CORE/includes/topersia-cache.php:76-103` — دور دوم (ب: AI §۳) |
+| R56 | کلید API به صافی عمومی `tpas_api_payload` داده می‌شود | متوسط | کم | — ← حذف `$key` از امضا | `grep tpas_api_payload` در افزونه‌های نصب‌شده | باز | AI | `[VERIFIED]` `AI/includes/class-tp-ai-api.php:144,248,353` — دور دوم (ب: AI §۴) |
+| R57 | `mb_strtolower` بی گارد در موتور داخلی؛ وردپرس جایگزینش را ندارد | متوسط | نامعلوم | — ← `function_exists` یا `strtolower` یونیکد | `php -m \| grep mbstring` زنده | نامعلوم | AI | `[VERIFIED]` `AI/includes/class-tp-ai-internal.php:346` · `WP/wp-includes/compat.php:126,196,272,354` · زنده `[UNKNOWN]` — دور دوم (ب: S10) |
+| R58 | `log_errors Off` و `display_errors Off` در `.htaccess` ریشه — خطای PHP زنده جایی ثبت نمی‌شود | زیاد | متوسط | `topersia_log` ← لاگ PHP در پروندۀ خصوصی | `php -i` روی میزبان | نامعلوم | کاربر | `[VERIFIED]` `ROOT/.htaccess:50,52` · مقدار مؤثر `[UNKNOWN]` — دور دوم (ب: S11) |
+| R59 | core و render `uninstall.php` ندارند (`topersia_log` · `topersia_cache` · `topersia_geo` می‌مانند) | کم | کم | — ← سیاست حذف داده | — | باز | CORE+RENDER | `[VERIFIED]` (نبود پرونده) — دور دوم (ب: S13) |
+| R60 | دو منطق «منتشرشده»: `is_live()` در user-core دروازۀ زبان WPML ندارد | متوسط | کم | `assert-uc.php` ← یک تابع عمومی | آزمون جهش زبان | باز | UC | `[VERIFIED]` `UC/includes/class-topersia-jetengine.php:88-92` · `RENDER/includes/topersia-g-zones.php:762` — دور دوم (ب: S17) |
+| R61 | پیشوند واقعی پایگاه‌داده در ۶ پروندۀ مخزن (کامنت، آزمون، و یک خروجی لاگ `.txt` در `reference/`) | کم | زیاد | — ← حذف؛ لاگ از git بیرون | `grep -rlF` با مقدار از متغیر (بی چاپ) | باز | UC+RENDER+کاربر | `[VERIFIED]` `UC/includes/class-topersia-reviews.php` · `UC/uninstall.php` · `RENDER/includes/topersia-g-zones.php:4845` · `tests/assert.php` · `tests/js-logger.js` · `REF/topersia-log-20260927-0659(1).txt` — دور دوم (ب: S18، گسترش) |
+| R62 | ورود فقط با شمارۀ ایران | متوسط | زیاد | — ← P5-D257 | — | باز (تصمیم) | UC | `[VERIFIED]` `UC/includes/class-topersia-auth.php:134-135` — دور دوم (ب: S22) |
+| R63 | نرخ‌سنج OTP با `REMOTE_ADDR`؛ پشت پراکسی همۀ کاربران یک IP ← سقف‌های IP و ۱۲۰ سایت مشترک | زیاد | نامعلوم | `TOPERSIA_TRUST_PROXY` (تعریف‌نشده در مخزن) ← تعریف روی زنده | `grep -c TOPERSIA_TRUST_PROXY wp-config.php` · ۴۲۹ در لاگ | نامعلوم | کاربر+UC | `[VERIFIED]` `UC/includes/class-topersia-auth.php:145-157` · زنده `[UNKNOWN]` — دور دوم (ب: S08) |
+| R64 | کادر ایران مستطیلی نقاط همسایه‌ها را می‌پذیرد | کم | متوسط | — ← چندضلعی مرز | — | باز | CORE | `[VERIFIED]` `CORE/includes/topersia-geo.php:24-26` — دور دوم (ب: S26) |
+| R65 | نانس مهمان روی صفحۀ کش‌شده (LiteSpeed) ← ورود و ردیاب بی‌صدا شکست می‌خورند | متوسط | نامعلوم | — ← تازه‌سازی نانس با JS | ۴۰۳ در `admin-ajax` | نامعلوم | AI+UC | `[INFERRED]` `AI/includes/class-tp-ai-frontend.php:50-54` · TTL زنده `[UNKNOWN]` — دور دوم (ب: S24) |
+| R66 | ارائه‌دهندۀ پیامک سخت‌کد و متن خطای ارائه‌دهنده به کاربر | کم | کم | — ← رابط ارائه‌دهنده با صافی | — | باز | UC | `[VERIFIED]` `UC/includes/class-topersia-auth.php:381` · `UC/includes/class-topersia-mediana-sms.php:31-36` — دور دوم (ب: USER §۲) |
+
+**اصلاح وضعیت ردیف‌های پیشین (دور دوم):**
+
+| # | اصلاح | شاهد |
+|---|---|---|
+| R41 | عنوان «هست» ← «هست در گذشته (یافتۀ ۲ج)، امروز نامعلوم»؛ برچسب وقوع امروز `[UNKNOWN]` | `RECONCILE.md` ناسازگاری ۲ |
+| R44 | باز ← **کاهش‌یافته**: از `b1ec34bb` کپی نصب‌شدۀ core و render هم‌بایت با workspace (`diff -rq` صفر)؛ user-core و AI فقط در پرونده‌های غیرکد فرق دارند | `[VERIFIED]` `WP/wp-content/plugins/topersia-core/topersia-core.php:5` |
+| R49 | افزوده: وجود/انتشار پست سنجیده نمی‌شود؛ متای `_tpas_clicks` هر شناسه‌ای نوشته می‌شود | `[VERIFIED]` `AI/includes/class-tp-ai-tracker.php:36-47` |
+| R14 | «باز» تأیید شد (ب «موکول» گذاشته بود؛ شمارنده‌های امروز غیراتمی‌اند) | `RECONCILE.md` ناسازگاری ۸ |

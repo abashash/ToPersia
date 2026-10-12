@@ -131,3 +131,16 @@
 | M4 | گواه نمایه با هر ذخیرۀ `tp_*` عوض می‌شود: کش `map.points` در سایتی با ویرایش‌های مکرر عملاً کارا نیست | `[INFERRED]` |
 | M5 | بدون قلاب رابطه، نمایۀ استان/شهر می‌تواند کهنه باشد؛ آزمون `verify` اثرانگشت آن را نمی‌گیرد چون از همان زنجیره می‌سازد | `[INFERRED]` |
 | M6 | سبک روشن در حالت عصر/شب (اسپرایت `light` برای هر دو) | `[VERIFIED]` |
+
+---
+
+## ۹ — دور دوم (تطبیق با ممیزی مستقل ب)
+
+> منبع: **دور دوم** — `RECONCILE.md` بخش ۳-الف. شمارۀ خط‌های `topersia-g-zones.js` در این پرونده بالای خط ~۵۲۰ امروز ۱۵ خط پایین‌ترند (`setRTLTextPlugin` ← `:2080`؛ `style()` ← `:2104-2114`).
+
+| مورد | اصلاح/افزوده | شاهد | برچسب |
+|---|---|---|---|
+| ردیف «فونت» §۳ | **اصلاح:** بازه‌های عربی فقط در `Regular` و `Medium` هست؛ در `Italic` پنج بازۀ عربی ۲۶–۲۸ بایت (تهی) و دو بازه بخشی | `MAP/fonts/Noto Sans Italic/` (`ls -l`) | `[VERIFIED]` |
+| لایه‌های Italic | `water_waterway_label` · `water_label_ocean` · `water_label_lakes` · `earth_label_islands` · `address_label` — در هر شش ترکیب fa/ar/en × light/dark | `MAP/basemaps.js:15` (اجرای Node) | `[VERIFIED]` |
+| `text-letter-spacing` | ۵ لایه (۴ لایۀ بالا + `places_subplace`) | همان | `[VERIFIED]` |
+| پیشنهاد (کدکس) | `italic: 'Noto Sans Regular'` در flavor پیش از `basemaps.layers` + حذف letter-spacing برای fa/ar + گارد assert با جهش | `RECONCILE.md` §۳-الف | `[VERIFIED]` (آزمون Node) |

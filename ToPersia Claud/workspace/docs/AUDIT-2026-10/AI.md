@@ -172,3 +172,19 @@
 ## ۱۰ — فهرست UNKNOWN این پرونده (برای اجرا در محلی)
 
 همان بندهای UNKNOWN بالا با فرمان‌هایشان در `LOCAL-QUERIES.md` (پرونده‌ای خودکار از همین ردیف‌ها) جمع شده‌اند.
+
+---
+
+## ۱۱ — دور دوم (تطبیق با ممیزی مستقل ب)
+
+> منبع: **دور دوم** — `RECONCILE.md` بخش‌های ۳-۰ و ۳-ج.
+
+| مورد | یافته | شاهد | برچسب |
+|---|---|---|---|
+| autoload `tpas_settings` | `add_option` بی پارامتر و Settings API ← وردپرس ۷٫۱٫۲ `auto` می‌نویسد که بارشونده است | `AI/topersia-ai-summarizer.php:104-105` · `WP/wp-includes/option.php:1069,1333-1338,3260` | `[VERIFIED]` |
+| کلید در صافی عمومی | `apply_filters( 'tpas_api_payload', $body, $endpoint, $key )` | `AI/includes/class-tp-ai-api.php:144,248,353` | `[VERIFIED]` |
+| دورزدن سقف روزانه با کهنه (R53) | دروازۀ render با هر ردیف کش برمی‌گردد؛ تولید کهنه را بازمی‌سازد | `RENDER/includes/topersia-g-ai.php:142-144` · `AI/includes/class-tp-ai-summary.php:125-128` | `[VERIFIED]` |
+| ردیف داخلی هرگز کهنه نمی‌شود (R54؛ ادغام با ردیف «ستون source» بخش ۳) | `store(…,'internal')` هش نمی‌نویسد؛ `is_stale` با هش تهی `false` | `AI/includes/class-tp-ai-summary.php:309,326` · `AI/includes/class-tp-ai-core-bridge.php:79,91-93` · `CORE/includes/topersia-cache.php:501-504` | `[VERIFIED]` |
+| `post_content` در هش نیست (R55) | عنوان + فیلدهای صافی | `CORE/includes/topersia-cache.php:76-103` | `[VERIFIED]` |
+| `mb_strtolower` بی گارد (R57) | — | `AI/includes/class-tp-ai-internal.php:346` | `[VERIFIED]` |
+| `tpas_track` بی سنجش پست | — | `AI/includes/class-tp-ai-tracker.php:36-47` | `[VERIFIED]` |

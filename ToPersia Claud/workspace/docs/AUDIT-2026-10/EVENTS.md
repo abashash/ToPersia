@@ -129,3 +129,17 @@
 | E3 | رابطۀ تقویم ← رویداد فقط به E1 وصل است؛ «تقویم» نمی‌تواند رویداد مذهبی/ورزشی/فصلی را اعلام کند | `[VERIFIED]` |
 | E4 | ۳۶ از ۳۸ رابطۀ رویداد صفر ردیف دارند و فقط ۱ جشنواره در پایگاه محلی بود؛ طراحی «تقویم اصلی» نمی‌تواند روی داده‌ی فعلی تست شود | `[INFERRED]` |
 | E5 | برون‌بری مرجع ۹ سپتامبر است؛ با ۴ رابطۀ تازه و احتمالاً فیلدهای تازه فاصله دارد | `[VERIFIED]` |
+
+---
+
+## دور دوم (تطبیق با ممیزی مستقل ب)
+
+> منبع: **دور دوم** — `RECONCILE.md` بخش ۳-ب.
+
+| مورد | یافته | شاهد | برچسب |
+|---|---|---|---|
+| قالب ذخیرۀ `event_start_date`/`event_end_date` | `is_timestamp` در export نیست ← JetEngine `false` و رشتۀ `Y-m-d` ذخیره می‌کند | `REF/Jetengine_Skin.json:1` · `WP/wp-content/plugins/jet-engine/includes/components/meta-boxes/post.php:598-612` | `[VERIFIED]` · مقدار پایگاه `[UNKNOWN]` |
+| شناسۀ فیلدها | E1 `8955` · E3 `5416` · E5 `6580`؛ E6 (`meta-42`) فیلد `date` ندارد | `REF/Jetengine_Skin.json:1` | `[VERIFIED]` |
+| P5-D214 | کهنه در نام (`next_*`) و در فرض («تاریخ ساخت‌یافته نه»)؛ کمبود واقعی: نمایش، JSON-LD، E6/P6 | `DOC/SPRINT-4.4-PHASES.md:1266` · `DOC/ARCH-RECONCILIATION-v1_0.md:71` | `[VERIFIED]` |
+| کامنت کهنۀ اسکیما | «دادۀ ما تاریخ ماشین‌خوان ندارد» | `SCHEMA/topersia-schema.php:255-256` | `[VERIFIED]` |
+| کمبودهای `Event` با `startDate` | نمایش تاریخ روی صفحه · سازندۀ `topersia_schema_event` · `location` با نشانی (از زنجیرۀ استان/شهر) · `eventStatus` · قاعدۀ تازگی (قمری) · WPML copy | `RECONCILE.md` §۳-ب | `[VERIFIED]` (نبود در کد) · قواعد گوگل `[INFERRED]` |

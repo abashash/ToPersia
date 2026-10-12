@@ -42,6 +42,12 @@
 
 ### انجام‌شده
 
+- **ممیزی ۲د — تطبیق دو دور (ابری B، فقط سند، ۱۲ اکتبر ۲۰۲۶).** دو ممیزی مستقل (الف `main` `9ae7c73e` · ب `claude/tender-volta-apf3de` `c3488880`، فقط خوانده شد) در کد `main` دوباره سنجیده شد؛ هیچ کدی عوض نشد.
+  - خروجی تازه: `docs/AUDIT-2026-10/RECONCILE.md` — ۲۴ یافتۀ «هر دو»، ۱۳ «فقط الف» تأییدشده + ۲ رد، ۱۹ «فقط ب» تأییدشده + ۲ رد، ۱۶ ناسازگاری با حکم، جدول «رد شده» (۶)، ۲۰ اقدام با مالک و اثر SEO · GEO · AEO · چندزبانه.
+  - افزوده‌های «دور دوم» به پرونده‌های `main`: `RISKS.md` (R51…R66 + اصلاح R14 · R41 · R44 · R49) · `MAP.md` §۹ · `EVENTS.md` · `AI.md` §۱۱ · `SYSTEM.md`.
+  - قطعی‌شده: (۱) قلم `Noto Sans Italic` در ۵ لایه (`water_waterway_label` · `water_label_ocean` · `water_label_lakes` · `earth_label_islands` · `address_label`) بازه‌های عربی ۲۶–۲۸ بایتی (تهی) دارد؛ اصلاح یک‌خطی `italic: 'Noto Sans Regular'` در flavor با Node آزموده شد (پیشنهاد برای کدکس). (۲) `event_start_date`/`event_end_date` نوع `date`، رشتۀ `Y-m-d`، فقط E1·E3·E5؛ P5-D214 در نام و فرض کهنه است. (۳) کلید AI در `tpas_settings` متن ساده، autoload (`auto`) و در صافی عمومی `tpas_api_payload`.
+  - یافتۀ تازۀ دور دوم: پیشوند پایگاه‌داده در ۶ پرونده (از جمله لاگ `.txt` در `reference/`)؛ R44 برای core/render کهنه است (`b1ec34bb`).
+
 - **ممیزی ۲د — بخش کدخوانی (فقط‌خواندنی، ۱۲ اکتبر ۲۰۲۶).** پوشۀ تازۀ `docs/AUDIT-2026-10/` با ۸ پرونده؛ هیچ کد، پایگاه‌داده یا تنظیمی عوض نشد:
   `AI.md` · `USER.md` · `EVENTS.md` · `FEATURE-MAP.md` · `RISKS.md` (کامل) · `SYSTEM.md` · `MAP.md` (فقط بخش کدخوانی) · `LOCAL-QUERIES.md` (کمکی؛ فهرست خودکار UNKNOWNها با فرمان محلی).
 - **شمار برچسب‌ها به تفکیک پرونده** (شمارش `grep` روی نشان‌های `[VERIFIED]` و … در ردیف‌ها):
@@ -64,6 +70,7 @@
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
+0. **همه:** ده اقدام اول `docs/AUDIT-2026-10/RECONCILE.md` §۸ (مالک هر کدام همان‌جا): R37 و کلید پیامک و R60 ← جلسۀ ابری UC؛ R36 · کلید AI · R53/R54 · R24 · نام ارائه‌دهنده ← جلسۀ ابری AI؛ قلم Italic/letter-spacing نقشه و نمایش تاریخ رویداد ← کدکس محلی (RENDER)؛ `Event` با `startDate` ← lane تازه برای `topersia-schema`؛ `TOPERSIA_TRUST_PROXY` زنده، R41، abzarwp، P5-D214 ← کاربر.
 1. **محلی:** `LOCAL-QUERIES.md` را از بالا اجرا کن (۵۸ مورد؛ هر کدام شناسۀ `LQ-…` و فرمان دارد) و نتیجه‌ها را در همان ردیف‌های `docs/AUDIT-2026-10/*.md` به‌جای `UNKNOWN` بنویس (برچسب `VERIFIED` با خروجی فرمان). هیچ مقدار کلید، رمز، شماره یا نام کاربر در خروجی نیاید؛ فقط نام و شمار.
 2. **محلی:** `DATA.md` و `inventory.json` با یک اسکریپت WP-CLI ساخته شوند (فهرست محتوا در `SPRINT-4.4-PHASES.md` بخش ۲د و افزودۀ ۲ج: نامک‌های ناهمخوان، ۲۵۰ ردیف یتیم WPML، گزارش شکاف ترجمه).
 3. **محلی:** بخش‌های پایگاه‌دادهای `SYSTEM.md` (نسخه‌های زنده، افزونه‌های فعال، AS کدام نسخه، WP-Cron، کش شیء، autoload، حجم جدول‌ها) و `MAP.md` (`iran.pmtiles`: سرآیند و متادیتا، پوشش `name:fa|ar|en` با اسکریپت `LQ-SCRIPT-NAMES`، Range/206، نمایه، پاسخ `/map-points`) تکمیل شود.
@@ -76,6 +83,10 @@
 
 | آزمون / کار | چرا لازم است | وضعیت |
 |---|---|---|
+| تطبیق ۲د — نمایش برچسب آب fa/ar | تأیید چشمی R51/R52 (صفحۀ کشور/استان ساحلی، کروم و فایرفاکس؛ `node tests/acceptance-shots.js`) | منتظر محلی |
+| تطبیق ۲د — داده و WPML رویداد | `wp post meta get <ID> event_start_date` (قالب) · شمار پرشده‌ها · `wp option get wpml-tm-custom-xml \| grep -c event_start_date` | منتظر محلی |
+| تطبیق ۲د — `tpas_settings` | طول و autoload (نه مقدار): پرس‌وجوی `RECONCILE.md` §۳-ج | منتظر محلی |
+| تطبیق ۲د — R61 لاگ در `reference/` | تصمیم کاربر: بیرون‌بردن `reference/topersia-log-20260927-0659(1).txt` از git و افزودن الگوی آن به `.gitignore` | منتظر کاربر |
 | `LOCAL-QUERIES.md` — SYSTEM (19 مورد: `LQ-SYSTEM-01…19`) | نسخه‌های زنده/محلی، افزونه‌های فعال، AS بارشده (`wp eval 'print_r(ActionScheduler_Versions::instance()->get_sources());'`)، WP-Cron (`wp config get DISABLE_WP_CRON`)، کش شیء (`wp cache type`)، autoload، حجم جدول‌ها | منتظر محلی |
 | `LOCAL-QUERIES.md` — MAP (9 مورد) | `pmtiles show geo/wp-content/uploads/tiles/iran.pmtiles` (+ `--metadata`)، سرآیند Range، شمار نمایه (`wp topersia geo-index report`)، پاسخ `/map-points`، پوشش `name:*` (`LQ-SCRIPT-NAMES`) | منتظر محلی |
 | `LOCAL-QUERIES.md` — AI (7 مورد) | موتور/مدل واقعی، شمار ردیف خلاصه‌ها و `source`، `tpas_settings.position` (دکمه‌های بیرونی روشن‌اند؟)، `topersia_services_usage`، دسترسی API از IP زنده | منتظر محلی |
