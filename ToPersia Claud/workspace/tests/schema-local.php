@@ -38,6 +38,8 @@ function t( $label, $ok, $note = '' ) {
 /* شاخۀ Place در Schema.org — نوع‌هایی که نقشه به کار می‌برد */
 $PLACE = array( 'Place', 'Country', 'State', 'City', 'AdministrativeArea', 'Landform', 'Mountain', 'BodyOfWater', 'LandmarksOrHistoricalBuildings', 'PlaceOfWorship', 'Museum', 'TouristAttraction' );
 $OTHER = array( 'Thing', 'Person', 'Language', 'TouristTrip' );
+/* P5-D357: رویدادهای E1 · E3 · E5 با تاریخ واقعی Event می‌شوند (سازندهٔ topersia_schema_event؛ بی تاریخ یا گذشته Thing می‌ماند) */
+$EVENT = array( 'Festival', 'SportsEvent', 'Event' );
 
 $types = array_values( array_filter( get_post_types( array( 'public' => true ) ), function ( $t ) {
 	return 0 === strpos( $t, 'tp_' ) && 'tp_county' !== $t;
@@ -57,7 +59,7 @@ t( 'پوشش: هر نوع عمومی موجودیت جز شهرستان نقشه
 /* نوع و سازنده از شاخۀ درست */
 $bad = array();
 foreach ( $map as $pt => $c ) {
-	$ok = in_array( $c['type'], $PLACE, true ) ? 'topersia_schema_place' === $c['builder'] : ( in_array( $c['type'], $OTHER, true ) && ( 'tp_route' === $pt || 'topersia_schema_thing' === $c['builder'] ) );
+	$ok = 'topersia_schema_event' === $c['builder'] ? in_array( $c['type'], array_merge( $EVENT, array( 'Thing' ) ), true ) : ( in_array( $c['type'], $PLACE, true ) ? 'topersia_schema_place' === $c['builder'] : ( in_array( $c['type'], $OTHER, true ) && ( 'tp_route' === $pt || 'topersia_schema_thing' === $c['builder'] ) ) );
 	if ( ! $ok ) { $bad[] = $pt . ':' . $c['type']; }
 }
 t( 'نوع هر گره از فهرست بستۀ Schema.org و سازندۀ همان شاخه (مکان ← place، بقیه ← thing)', ! $bad, implode( ', ', $bad ) );
