@@ -10,7 +10,7 @@
 |---|---|---|
 | ابری B | `docs/AUDIT-2026-10/` | ممیزی ۲د — تمام شد؛ فعلاً جلسهٔ فعال نیست |
 | ابری A / C (تمام‌شده) | `plugin/topersia-user-core/` · `tests/assert-uc.php` | امنیت و سخت‌سازی خلاصه‌ساز — ادغام شد (۱٫۱۱٫۰ · ۱٫۲٫۳)؛ فعلاً جلسهٔ فعال نیست |
-| ابری E | `plugin/topersia-ai-summarizer/` | جلسهٔ ابری E روی خلاصه‌ساز (tpas_get_summary) — محلی دست نمی‌زند |
+| ابری E (تمام‌شده) | `plugin/topersia-ai-summarizer/` | خلاصه‌ساز ۱٫۳٫۰ — ادغام شد؛ فعلاً جلسهٔ فعال نیست |
 | ابری D (تمام‌شده) | `plugin/topersia-schema/` | رویداد با تاریخ واقعی — ادغام شد (۱٫۳٫۰)؛ فعلاً جلسهٔ فعال نیست |
 | محلی | `plugin/topersia-render` · `plugin/topersia-core` · `tests` (جز `tests/assert-uc.php`) · `scripts` (جز `scripts/relay`) | جابه‌جایی باکس ToPersia AI در پنل چپ فقط در `topersia-render`؛ بخش محلی ۲د (LOCAL-QUERIES · DATA.md · inventory.json) شروع نشده؛ شاخهٔ `claude/tender-volta-apf3de` ادغام نمی‌شود |
 
@@ -32,13 +32,13 @@
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
-1. پرامت یکپارچه تمام شد؛ منتظر دستور کاربر (موارد منتظر: کلید ماهواره، تأیید نگاشت‌های OSM، برش PMTiles و مرز با اتصال سالم، Lighthouse با اتصال سالم) (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، جدول تصمیم D349–D353).
-3. برای بعد از پرامت یکپارچه (ثبت‌شده، شروع نشده):
-   - render: نمایش تاریخ رویداد روی صفحهٔ E1 · E3 · E5 — گوگل Event را بی تاریخ دیدنی نمی‌پذیرد؛ پیش‌شرط فاز ۱۰.
-   - wpml-config: `event_start_date` و `event_end_date` ← copy.
-   - render: دروازهٔ سقف `topersia-g-ai.php:142-144` خروجی کهنه را بی شمارش رد می‌کند؛ اگر render خودش بشمارد، صافی `tpas_rebuild_counts_cap` ← false.
-   - core: `post_content` در `topersia_content_hash_compute`.
-   - زنده: تعریف `TOPERSIA_TRUST_PROXY` (کاربر).
+۱۴ اکتبر — پس از پرامت یکپارچه: بندهای ۱ تا ۴ انجام شد (ادغام ابری E `f1163acd` + گارد OPS-D012 `a30bd59d` · میزبان‌های بیرونی و Lighthouse P5-D359 · تاریخ رویداد P5-D357). **بند ۵ (فقط با VPN) منتظر کاربر است:**
+
+1. کاربر VPN را روشن می‌کند و می‌گوید.
+2. `scripts/tp-boundaries.php` match ← build ← report (فقط `auto` و `confirmed` به GeoJSON؛ `suggested` و `none` در گزارش برای تأیید کاربر).
+3. `scripts/tp-tiles-update.php` با bbox تا ۴۲٫۵°N؛ سنجش اندازه، تفاوت پیش و پس، شمار pois تهران، هتل هالی، «دریای خزر» و «خلیج فارس» در fa و ar؛ جایگزینی پس از سنجش.
+4. کاربر VPN را خاموش می‌کند؛ `map-2j` و `map-3` دوباره بی VPN.
+5. ثبت‌شده برای بعد: render — دروازهٔ سقف `topersia-g-ai.php` / صافی `tpas_rebuild_counts_cap` (با 1.3.0 عملاً بی‌اثر: تولید فقط مدیر)؛ core — `post_content` در `topersia_content_hash_compute`؛ زنده — `TOPERSIA_TRUST_PROXY` (کاربر)؛ تصویر نمونهٔ picsum در بلوک «مگامنو» (#1935) پیش از راه‌اندازی.
 
 ### قیدها و تصمیم‌های مرتبط
 

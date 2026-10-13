@@ -4227,6 +4227,41 @@ function topersia_strip_wp_hints( $hints, $relation ) {
 }
 
 /**
+ * Google Fonts ← خاموش در صفحۀ عمومی — P5-D359.
+ *
+ * fonts.googleapis.com و fonts.gstatic.com از ایران گاهی ریست می‌شوند و هر شیوه‌نامۀ آن‌ها مسیر رندر را
+ * (و Lighthouse را) پشت یک میزبان ناپایدار می‌گذارد. قلم پروژه Peyda است و خودمیزبان (topersia-tokens)؛
+ * کیت المنتور فقط Roboto و Roboto Slab را پیش‌فرض می‌گذارد. پس:
+ *   ۱ المنتور — صافی `elementor/frontend/print_google_fonts` (همان که گزینۀ «Google Fonts» تنظیمات المنتور را می‌خواند)
+ *   ۲ هر افزونه یا پوسته‌ای که باز هم شیوه‌نامه‌ای از این دو میزبان صف کند — برچسب `<link>` برداشته می‌شود
+ *   ۳ نکتۀ preconnect / dns-prefetch به این دو میزبان
+ * پیشخوان و ویرایشگر المنتور دست‌نخورده‌اند (پیش‌نمایش قلم‌ها). برای روشن‌کردن دوباره: `add_filter( 'topersia_block_google_fonts', '__return_false' )`.
+ */
+function topersia_block_google_fonts() {
+	return ! is_admin() && (bool) apply_filters( 'topersia_block_google_fonts', true );
+}
+
+add_filter( 'elementor/frontend/print_google_fonts', function ( $print ) {
+	return topersia_block_google_fonts() ? false : $print;
+} );
+
+add_filter( 'style_loader_tag', function ( $tag, $handle, $href ) {
+	return ( topersia_block_google_fonts() && preg_match( '#^(https?:)?//fonts\.(googleapis|gstatic)\.com/#i', (string) $href ) ) ? '' : $tag;
+}, 10, 3 );
+
+add_filter( 'wp_resource_hints', function ( $hints, $relation ) {
+
+	if ( ! topersia_block_google_fonts() || ! in_array( $relation, array( 'preconnect', 'dns-prefetch', 'prefetch', 'preload' ), true ) ) {
+		return $hints;
+	}
+
+	return array_values( array_filter( (array) $hints, function ( $hint ) {
+		$url = is_array( $hint ) ? (string) ( $hint['href'] ?? '' ) : (string) $hint;
+		return ! preg_match( '#(^|//)fonts\.(googleapis|gstatic)\.com#i', $url );
+	} ) );
+}, 20, 2 );
+
+/**
  * اسکریپت ایموجی.
  *
  * هم یک درخواست اضافه است، هم Twemoji در فهرست شناسایی Wappalyzer ظاهر

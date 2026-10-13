@@ -154,6 +154,11 @@ msgstr "Ordibehesht"
 msgid "ارز و روش‌های پرداخت"
 msgstr "Currency and payment methods"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "از %1$s تا %2$s"
+msgstr "From %1$s to %2$s"
+
 #: includes/topersia-g-gallery-agg.php
 msgid "از پیش در صف است."
 msgstr "Already queued."
@@ -301,6 +306,10 @@ msgstr "Rebuild all"
 #: includes/topersia-g-map.php
 msgid "بازنشسته / منتفی"
 msgstr "Retired / not applicable"
+
+#: includes/topersia-g-zones.php
+msgid "بازه برگزاری"
+msgstr "Dates"
 
 #: topersia-render.php
 msgid "بازگرداندن به پیش‌فرض"
@@ -463,9 +472,22 @@ msgstr "More"
 msgid "بین‌المللی"
 msgstr "International"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "تا %s"
+msgstr "Until %s"
+
 #: includes/topersia-g-map.php
 msgid "تابستان"
 msgstr "Summer"
+
+#: includes/topersia-g-map.php
+msgid "تاریخ آغاز"
+msgstr "Start date"
+
+#: includes/topersia-g-map.php
+msgid "تاریخ پایان"
+msgstr "End date"
 
 #: includes/topersia-g-map.php
 msgid "تاریخی"

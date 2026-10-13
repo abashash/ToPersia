@@ -163,6 +163,9 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'currency_symbol'            => array( 'label' => 'نماد', 'unit' => '', 'kind' => 'text', 'zone' => 'stat' ),
 		'international_card_status'  => array( 'label' => 'کارت بین‌المللی', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '195' ),
 		'redenomination_status'      => array( 'label' => 'بازتعریف واحد پول', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '192' ),
+		/* تاریخ رویداد (E1 · E3 · E5) — مقدار خام Y-m-d یا زمان یونیکس؛ نمایش به زبان صفحه (topersia_g_date_fa) با <time datetime>.  P5-D357 */
+		'event_start_date'           => array( 'label' => 'تاریخ آغاز', 'unit' => '', 'kind' => 'date', 'zone' => 'card' ),
+		'event_end_date'             => array( 'label' => 'تاریخ پایان', 'unit' => '', 'kind' => 'date', 'zone' => 'card' ),
 		'event_frequency'            => array( 'label' => 'تکرار', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '213' ),
 		'sport_type'                 => array( 'label' => 'رشته', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '214' ),
 		'competition_level'          => array( 'label' => 'سطح', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '215' ),

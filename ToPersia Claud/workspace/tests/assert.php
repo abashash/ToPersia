@@ -118,8 +118,8 @@ t( 'صفحه: کویر بدون رابطه، نوار بخش کوتاه‌تری
 t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', false !== strpos( $page, 'tp-hero' ) && false !== strpos( $page, 'tp-stats' ) );
 
 /* پوشش نقشه */
-/* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است */
-$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone']; } );
+/* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است؛ kind=date تاریخ رویداد E1 · E3 · E5 (P5-D357) است، نه فیلد G */
+$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind']; } );
 $map_count = count( $g_map );
 t( 'نقشه: دقیقاً ۵۷ فیلد G (بیرون از ناحیۀ stat)', 57 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
@@ -2195,6 +2195,7 @@ require __DIR__ . '/assert-2i.php';
 require __DIR__ . '/assert-2j.php';
 require __DIR__ . '/assert-2k.php';
 require __DIR__ . '/assert-2l.php';
+require __DIR__ . '/assert-2m.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────
