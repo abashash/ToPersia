@@ -358,6 +358,66 @@ function topersia_i18n_gaps_card( $export, $nonce ) {
 
 /* ══ WP-CLI ═════════════════════════════════════════════════════════════ */
 
+/**
+ * هم‌ارزی زبان — P5-D349 (قاعدۀ دائمی): هر پست منتشرشدۀ فارسی در همۀ زبان‌های فعال WPML ترجمۀ **منتشرشده** دارد.
+ *
+ * گزارش شکاف (P5-D305) ترجمۀ پیش‌نویس را «موجود» می‌شمارد؛ این تابع معیار قاعده است: پست بی ترجمه (`missing`) و ترجمۀ
+ * منتشرنشده — پیش‌نویس، در انتظار، خصوصی (`unpublished`) — به تفکیک زبان و نوع. فقط خواندن؛ ترجمۀ انبوه نمی‌سازد.
+ *
+ * @param string $lang زبان؛ خالی = همۀ زبان‌های ترجمه.
+ * @param string $type نوع؛ خالی = همۀ نوع‌ها.
+ * @return array<string,array<string,array{missing:int[],unpublished:int[]}>> زبان ← نوع ← شناسه‌های پست فارسی
+ */
+function topersia_i18n_equivalence( $lang = '', $type = '' ) {
+
+	$langs = topersia_pack_tr_languages();
+	$langs = '' !== $lang ? array_values( array_intersect( $langs, array( $lang ) ) ) : $langs;
+	$types = '' !== $type ? array_intersect_key( topersia_pack_types(), array( $type => 1 ) ) : topersia_pack_types();
+	$out   = array();
+
+	foreach ( $langs as $code ) {
+
+		$out[ $code ] = array();
+
+		foreach ( array_keys( $types ) as $ptype ) {
+
+			$row = array( 'missing' => array(), 'unpublished' => array() );
+
+			foreach ( topersia_i18n_originals( $ptype ) as $id ) {
+
+				$tr = topersia_pack_tr_of( $id, $code );
+
+				if ( ! $tr || 'trash' === get_post_status( $tr ) ) {
+					$row['missing'][] = $id;
+				} elseif ( 'publish' !== get_post_status( $tr ) ) {
+					$row['unpublished'][] = $id;
+				}
+			}
+
+			if ( $row['missing'] || $row['unpublished'] ) {
+				$out[ $code ][ $ptype ] = $row;
+			}
+		}
+	}
+
+	return $out;
+}
+
+/** شمار هم‌ارزی هر زبان: بی ترجمه · منتشرنشده، و شمار پست‌های فارسیِ سنجیده. */
+function topersia_i18n_equivalence_counts( $eq ) {
+
+	$out = array();
+
+	foreach ( $eq as $lang => $types ) {
+		$out[ $lang ] = array( 'missing' => 0, 'unpublished' => 0, 'types' => count( $types ) );
+		foreach ( $types as $row ) {
+			$out[ $lang ]['missing']     += count( $row['missing'] );
+			$out[ $lang ]['unpublished'] += count( $row['unpublished'] );
+		}
+	}
+
+	return $out;
+}
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
 	/**
@@ -431,5 +491,44 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 		}
 
 		WP_CLI\Utils\format_items( in_array( $format, array( 'table', 'csv' ), true ) ? $format : 'table', $items, $columns );
+	} );
+
+	/**
+	 * هم‌ارزی زبان — P5-D349: هر پست منتشرشدۀ فارسی باید ترجمۀ منتشرشده در همۀ زبان‌های فعال داشته باشد.
+	 *
+	 * [--lang=<code>]
+	 * : فقط این زبان.
+	 *
+	 * [--format=<format>]
+	 * : table · json
+	 * ---
+	 * default: table
+	 * ---
+	 */
+	WP_CLI::add_command( 'topersia i18n-equiv', function ( $args, $assoc ) {
+
+		unset( $args );
+
+		$eq = topersia_i18n_equivalence( isset( $assoc['lang'] ) ? (string) $assoc['lang'] : '' );
+
+		if ( isset( $assoc['format'] ) && 'json' === $assoc['format'] ) {
+			WP_CLI::line( wp_json_encode( array( 'counts' => topersia_i18n_equivalence_counts( $eq ), 'equivalence' => $eq ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
+			return;
+		}
+
+		$items = array();
+
+		foreach ( $eq as $lang => $types ) {
+			foreach ( $types as $type => $row ) {
+				$items[] = array( 'lang' => $lang, 'type' => $type, 'missing' => count( $row['missing'] ), 'unpublished' => count( $row['unpublished'] ) );
+			}
+		}
+
+		if ( ! $items ) {
+			WP_CLI::success( 'هم‌ارزی کامل است: هر پست منتشرشدۀ فارسی در همۀ زبان‌ها ترجمۀ منتشرشده دارد.' );
+			return;
+		}
+
+		WP_CLI\Utils\format_items( 'table', $items, array( 'lang', 'type', 'missing', 'unpublished' ) );
 	} );
 }

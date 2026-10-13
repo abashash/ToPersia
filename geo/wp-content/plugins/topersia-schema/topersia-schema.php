@@ -77,7 +77,7 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
- * 1.3.0 — P5-D357: رویداد با تاریخ واقعی.
+ * 1.3.0 — P5-D357: رویداد با تاریخ واقعی. (۱۳ اکتبر · P5-D349: والد مکانیِ ترجمه که یال رابطه ندارد از پست زبان اصلی خوانده می‌شود — containedInPlace در /en/ و /ar/.)
  *          • E1 tp_festival ← Festival · E3 tp_sports_event ← SportsEvent ·
  *            E5 tp_religious_event ← Event، با سازندۀ topersia_schema_event —
  *            فقط وقتی event_start_date معتبر (Y-m-d) است و پایان، یا آغاز اگر
@@ -862,6 +862,16 @@ function topersia_schema_place( $node, $post_id, $config = array() ) {
 			}
 
 			$parents = $relation->get_parents( $current, 'ids' );
+
+			/* ترجمه یال رابطۀ خودش را ندارد (JetEngine یال را روی پست اصلی می‌گذارد): والد از پست زبان اصلی — P5-D349 */
+			if ( empty( $parents ) ) {
+
+				$origin = topersia_schema_source_id( $current );
+
+				if ( $origin !== $current ) {
+					$parents = $relation->get_parents( $origin, 'ids' );
+				}
+			}
 
 			if ( empty( $parents ) ) {
 				break;

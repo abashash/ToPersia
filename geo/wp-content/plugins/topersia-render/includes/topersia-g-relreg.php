@@ -134,7 +134,18 @@ if ( ! function_exists( 'topersia_g_place_parents' ) ) {
 				continue;
 			}
 
-			foreach ( topersia_g_rel_ids( $pid, array( array( 'id' => $side['id'], 'dir' => 'parents' ) ) ) as $parent ) {
+			$spec  = array( array( 'id' => $side['id'], 'dir' => 'parents' ) );
+			$found = topersia_g_rel_ids( $pid, $spec, false );
+
+			/*
+			 * ترجمه یال رابطۀ خودش را ندارد (JetEngine یال را روی پست فارسی می‌گذارد): والد مکانی از پست اصلی، و دروازۀ منتشرشده
+			 * شناسۀ نسخۀ زبان جاری را برمی‌گرداند — وگرنه شهر و روستا در /en/ و /ar/ بی استان و بی زنجیره می‌ماندند.  P5-D349
+			 */
+			if ( ! $found && function_exists( 'topersia_g_default_id' ) && topersia_g_default_id( $pid ) !== $pid ) {
+				$found = topersia_g_rel_ids( topersia_g_default_id( $pid ), $spec, false );
+			}
+
+			foreach ( $found as $parent ) {
 
 				$ptype = (string) get_post_type( $parent );
 
@@ -156,6 +167,11 @@ if ( ! function_exists( 'topersia_g_place_parents' ) ) {
 						}
 					}
 
+					continue;
+				}
+
+				/* والد صفحه‌دار: فقط اگر نسخۀ منتشرشدۀ زبان جاری هست (پیمودن بی دروازه بود تا شهرستان بی ترجمه راه را نبندد)  P5-D247 · P5-D349 */
+				if ( function_exists( 'topersia_g_published' ) && ! topersia_g_published( array( $parent ) ) ) {
 					continue;
 				}
 
