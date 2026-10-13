@@ -56,7 +56,9 @@ function topersia_services_catalog() {
 		'ai.tts'          => array( 'label' => 'صدای هوش مصنوعی', 'purpose' => 'روایت و پادکست — فاز ۴', 'provider' => 'gemini-tts', 'enabled' => false ),
 		'weather'         => array( 'label' => 'هوا', 'purpose' => 'کارت «هوای این روزها» و انیمیشن سربرگ', 'provider' => 'met-norway', 'enabled' => true ),
 		'air_quality'     => array( 'label' => 'کیفیت هوا', 'purpose' => 'جعبۀ «کیفیت هوا» زیر کارت آب‌وهوا (US AQI · PM2.5 · PM10 · غبار)', 'provider' => 'open-meteo-aq', 'enabled' => true ),
-		'map.tiles'       => array( 'label' => 'کاشی نقشه', 'purpose' => 'نقشۀ خودمیزبان PMTiles', 'provider' => 'pmtiles', 'enabled' => true ),
+		/* P5-D353: آنلاین اول (پیش‌فرض OpenFreeMap، بی کلید)، PMTiles خودمیزبان پشتیبان فوری؛ اولویت را انتخاب ارائه‌دهنده می‌دهد: «PMTiles» ← آفلاین اول */
+		'map.tiles'       => array( 'label' => 'کاشی نقشه', 'purpose' => 'نقشه: آنلاین اول، PMTiles خودمیزبان پشتیبان (یک درخواست آزمایشی، مهلت ۲٫۵ ثانیه، بی تلاش دوباره)', 'provider' => 'openfreemap', 'enabled' => true ),
+		'map.satellite'   => array( 'label' => 'ماهواره', 'purpose' => 'تصویر ماهواره‌ای سبک «ماهواره» (برچسب‌ها از PMTiles خودمان)؛ ارائه‌دهندۀ بی‌کلیدِ مجاز نیست', 'provider' => 'maptiler-sat', 'enabled' => false ),
 		'routing'         => array( 'label' => 'مسیریابی', 'purpose' => 'مسیر میان دو نقطه — فاز ۳', 'provider' => 'neshan-routing', 'enabled' => false ),
 		'distance_matrix' => array( 'label' => 'ماتریس فاصله', 'purpose' => 'فاصلۀ چند نقطه — فاز ۳', 'provider' => 'neshan-matrix', 'enabled' => false ),
 		'geocoding'       => array( 'label' => 'آدرس و آدرس معکوس', 'purpose' => 'نقطه ← آدرس، آدرس ← نقطه — فاز ۳', 'provider' => 'neshan-geocoding', 'enabled' => false ),
@@ -89,6 +91,8 @@ function topersia_services_core_adapters( $adapters ) {
 		'met-norway'       => array( 'service' => 'weather', 'label' => 'MET Norway', 'needs_key' => false, 'endpoint' => 'https://api.met.no/weatherapi/locationforecast/2.0/compact', 'free_commercial' => true, 'doc' => 'https://api.met.no/weatherapi/locationforecast/2.0/documentation', 'note' => 'CC BY 4.0 — User-Agent شناسا، Expires و If-Modified-Since (api.met.no/doc/TermsOfService)', 'test' => 'topersia_service_test_met' ),
 		'open-meteo'       => array( 'service' => 'weather', 'label' => 'Open-Meteo', 'needs_key' => false, 'key_const' => 'TOPERSIA_OPEN_METEO_API_KEY', 'endpoint' => 'https://api.open-meteo.com/v1/forecast', 'free_commercial' => false, 'doc' => 'https://open-meteo.com/en/terms', 'note' => 'ردۀ رایگان فقط غیرتجاری (CC BY 4.0)', 'test' => 'topersia_service_test_open_meteo' ),
 		'open-meteo-aq'    => array( 'service' => 'air_quality', 'label' => 'Open-Meteo Air Quality (CAMS)', 'needs_key' => false, 'key_const' => 'TOPERSIA_OPEN_METEO_API_KEY', 'endpoint' => 'https://air-quality-api.open-meteo.com/v1/air-quality', 'free_commercial' => false, 'doc' => 'https://open-meteo.com/en/docs/air-quality-api', 'note' => 'انتساب به CAMS و Open-Meteo لازم است', 'test' => 'topersia_service_test_open_meteo_aq' ),
+		'openfreemap'      => array( 'service' => 'map.tiles', 'label' => 'OpenFreeMap (آنلاین، بی کلید)', 'needs_key' => false, 'endpoint' => 'https://tiles.openfreemap.org', 'free_commercial' => true, 'extra' => array( 'style_light' => 'https://tiles.openfreemap.org/styles/liberty', 'style_dark' => 'https://tiles.openfreemap.org/styles/dark', 'probe_ms' => '2500', 'attribution' => 'OpenFreeMap © OpenMapTiles Data from OpenStreetMap' ), 'doc' => 'https://openfreemap.org/', 'note' => 'تجاری مجاز، بی کلید و بی سقف؛ از ایرانِ بی VPN باز می‌شود (آزموده ۱۳ اکتبر)؛ انتساب لازم' ),
+		'maptiler-sat'     => array( 'service' => 'map.satellite', 'label' => 'MapTiler — ماهواره (کلیددار)', 'needs_key' => true, 'key_const' => 'TOPERSIA_MAPTILER_API_KEY', 'endpoint' => 'https://api.maptiler.com/tiles/satellite-v4/{z}/{x}/{y}.jpg', 'free_commercial' => false, 'doc' => 'https://docs.maptiler.com/cloud/api/tiles/', 'note' => 'کلید تا گذاشتن در پیشخوان خاموش؛ کلید MapTiler کلید عمومیِ محدود به دامنه است و در نشانی کاشی به مرورگر می‌رود' ),
 		'pmtiles'          => array( 'service' => 'map.tiles', 'label' => 'PMTiles خودمیزبان', 'needs_key' => false, 'endpoint' => '', 'free_commercial' => true, 'extra' => array( 'path' => 'tiles/iran.pmtiles' ), 'doc' => 'https://docs.protomaps.com/pmtiles/', 'test' => 'topersia_service_test_pmtiles' ),
 		'neshan-routing'   => array( 'service' => 'routing', 'label' => 'نشان — مسیریابی', 'needs_key' => true, 'key_const' => 'TOPERSIA_NESHAN_API_KEY', 'endpoint' => 'https://api.neshan.org/v4/direction', 'free_commercial' => true, 'doc' => 'https://platform.neshan.org/docs/api/routing-category/routing/', 'test' => 'topersia_service_test_neshan' ),
 		'neshan-matrix'    => array( 'service' => 'distance_matrix', 'label' => 'نشان — ماتریس فاصله', 'needs_key' => true, 'key_const' => 'TOPERSIA_NESHAN_API_KEY', 'endpoint' => 'https://api.neshan.org/v1/distance-matrix', 'free_commercial' => true, 'doc' => 'https://platform.neshan.org/docs/api/routing-category/distance-matrix/', 'test' => 'topersia_service_test_neshan' ),
@@ -469,9 +473,89 @@ function topersia_service_test_pmtiles( $cfg ) {
 		fclose( $fh );
 	}
 
-	return array( 'ok' => 'PMTiles' === $head, 'message' => 'PMTiles' === $head ? 'پرونده هست · ' . size_format( filesize( $path ) ) : 'امضای PMTiles نیست' );
+	if ( 'PMTiles' !== $head ) {
+		return array( 'ok' => false, 'message' => 'امضای PMTiles نیست' );
+	}
+
+	$i = topersia_pmtiles_info( $path );
+
+	return array( 'ok' => true, 'message' => 'پرونده هست · ' . size_format( filesize( $path ) ) . ( ! empty( $i['built'] ) ? ' · ساخت ' . $i['built'] : '' ) . ( ! empty( $i['maxz'] ) ? ' · z' . $i['minz'] . '–' . $i['maxz'] : '' ) );
 }
 
+/**
+ * سرآیند و فرادادۀ یک پروندۀ PMTiles v3 — تاریخ ساخت، حجم، بازۀ بزرگنمایی، bbox؛ فقط خواندن.  P5-D353
+ *
+ * @param string $path مسیر پرونده.
+ * @return array<string,mixed> خالی اگر PMTiles نیست.
+ */
+function topersia_pmtiles_info( $path ) {
+
+	static $memo = array();
+
+	if ( ! is_file( $path ) || ! is_readable( $path ) ) {
+		return array();
+	}
+
+	$key = $path . '|' . filemtime( $path );
+
+	if ( isset( $memo[ $key ] ) ) {
+		return $memo[ $key ];
+	}
+
+	$fh = fopen( $path, 'rb' );
+	$h  = $fh ? (string) fread( $fh, 127 ) : '';
+
+	if ( strlen( $h ) < 127 || 'PMTiles' !== substr( $h, 0, 7 ) ) {
+		if ( $fh ) {
+			fclose( $fh );
+		}
+		return array();
+	}
+
+	$u64 = function ( $o ) use ( $h ) {
+		$a = unpack( 'P', substr( $h, $o, 8 ) );
+		return (int) $a[1];
+	};
+	$i32 = function ( $o ) use ( $h ) {
+		$a = unpack( 'l', substr( $h, $o, 4 ) );
+		return $a[1] / 1e7;
+	};
+
+	$info = array(
+		'size'   => (int) filesize( $path ),
+		'minz'   => ord( $h[100] ),
+		'maxz'   => ord( $h[101] ),
+		'bbox'   => array( $i32( 102 ), $i32( 106 ), $i32( 110 ), $i32( 114 ) ),
+		'built'  => '',
+		'osm'    => '',
+		'layers' => array(),
+	);
+
+	$mo = $u64( 24 );
+	$ml = $u64( 32 );
+
+	if ( $ml > 0 && $ml < 1048576 ) {
+		fseek( $fh, $mo );
+		$raw  = (string) fread( $fh, $ml );
+		$json = 2 === ord( $h[97] ) && function_exists( 'gzdecode' ) ? gzdecode( $raw ) : $raw;
+		$meta = is_string( $json ) ? json_decode( $json, true ) : null;
+
+		if ( is_array( $meta ) ) {
+			$info['built'] = isset( $meta['planetiler:buildtime'] ) ? substr( (string) $meta['planetiler:buildtime'], 0, 10 ) : '';
+			$info['osm']   = isset( $meta['planetiler:osm:osmosisreplicationtime'] ) ? substr( (string) $meta['planetiler:osm:osmosisreplicationtime'], 0, 10 ) : '';
+
+			foreach ( isset( $meta['vector_layers'] ) ? (array) $meta['vector_layers'] : array() as $l ) {
+				$info['layers'][] = isset( $l['id'] ) ? (string) $l['id'] : '';
+			}
+		}
+	}
+
+	fclose( $fh );
+
+	$memo[ $key ] = $info;
+
+	return $info;
+}
 /** ElevenLabs — فهرست مدل‌ها (GET v1/models)، کلید در سرآیند xi-api-key؛ بی هزینۀ تولید صدا. */
 function topersia_service_test_elevenlabs( $cfg ) {
 	$p   = wp_parse_url( (string) $cfg['endpoint'] );
@@ -950,6 +1034,16 @@ function topersia_services_row_html( $service, array $meta, array $adapters, $ca
 	foreach ( $cfg['fields'] as $k => $flabel ) {
 		$h .= '<textarea class="tp-svc-grow" rows="1" dir="ltr" name="' . esc_attr( $name ) . '[extra][' . esc_attr( $k ) . ']" placeholder="' . esc_attr( $flabel ) . '" aria-label="' . esc_attr( $flabel ) . '">' . esc_textarea( isset( $cfg['extra'][ $k ] ) && is_scalar( $cfg['extra'][ $k ] ) ? (string) $cfg['extra'][ $k ] : '' ) . '</textarea>';
 	}
+	/* P5-D353: ردیف PMTiles تاریخ ساخت، حجم و محدودۀ فایل فعلی را نشان می‌دهد (نسخه هم در نشانی کاشی برای شکستن کش است) */
+	if ( 'pmtiles' === $cfg['provider'] && ! empty( $cfg['extra']['path'] ) ) {
+		$up = wp_upload_dir( null, false );
+		$pi = topersia_pmtiles_info( trailingslashit( (string) $up['basedir'] ) . ltrim( (string) $cfg['extra']['path'], '/' ) );
+
+		if ( $pi ) {
+			$h .= '<span class="tp-svc-line description">' . topersia_services_bdi( 'ساخت ' . ( '' !== $pi['built'] ? $pi['built'] : '—' ) . ' · داده OSM ' . ( '' !== $pi['osm'] ? $pi['osm'] : '—' ) . ' · ' . size_format( $pi['size'] ) . ' · z' . $pi['minz'] . '–' . $pi['maxz'] . ' · bbox ' . implode( ',', array_map( function ( $n ) { return round( $n, 1 ); }, $pi['bbox'] ) ) ) . '</span>';
+		}
+	}
+
 	foreach ( $cfg['extra'] as $k => $v ) {
 		if ( isset( $cfg['fields'][ $k ] ) ) {
 			continue;

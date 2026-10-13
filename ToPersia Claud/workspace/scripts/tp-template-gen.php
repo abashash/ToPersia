@@ -1510,6 +1510,14 @@ html .tp-page .tp-mp__kind{font-size:calc(.74 * var(--tp-rem));line-height:1.4;c
   .tp-page .tp-wx-fx{display:none}
 }
 
+/* ─── انتخاب‌گر سبک نقشه در مودال (P5-D353): پایه · حمل‌ونقل و قطار · ماهواره ───────────────
+   فقط توکن؛ حالت فشرده با --tp-primary / --tp-on-primary، کنتراست در هر سه حالت از همان زوج. */
+html .tp-page .tp-map-styles{position:absolute;inset-block-end:calc(.8 * var(--tp-rem));inset-inline-start:calc(.8 * var(--tp-rem));z-index:5;display:flex;flex-wrap:wrap;gap:calc(.4 * var(--tp-rem))}
+html .tp-page .tp-map-styles button{padding:calc(.4 * var(--tp-rem)) calc(.9 * var(--tp-rem));border:1px solid var(--tp-border);border-radius:999px;background:var(--tp-surface);color:var(--tp-text);font:inherit;font-size:calc(.8 * var(--tp-rem));line-height:1.4;cursor:pointer}
+html .tp-page .tp-map-styles button[aria-pressed="true"]{background:var(--tp-primary);border-color:var(--tp-primary);color:var(--tp-on-primary);font-weight:700}
+html .tp-page .tp-map-styles button:hover{background:var(--tp-soft)}
+html .tp-page .tp-map-styles button[aria-pressed="true"]:hover{background:var(--tp-primary);color:var(--tp-on-primary)}
+
 /* ═══ TP-ADDED-END ═════════════════════════════════════════════════ */
 
 CSS;

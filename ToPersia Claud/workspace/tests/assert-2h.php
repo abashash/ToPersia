@@ -90,7 +90,7 @@ tp441_mut( 'نشانگر روی MapLibre موجود: خوشه‌بندی داخ�
 
 tp441_mut( 'سبک نقشه: روز ← روشن، عصر و شب ← تیره (Protomaps `dark`)؛ تغییر حالت در جا با MutationObserver روی data-tp-mode: سبک عوض و نشانگرها از همان دادهٔ دریافت‌شده دوباره می‌آیند؛ برچسب به زبان صفحه (lang سبک)',
 	function ( $s ) {
-		return false !== strpos( $s, "return ( 'dark' === m || 'evening' === m ) ? 'dark' : 'light';" ) && false !== strpos( $s, "window.basemaps.namedFlavor( flavorOf() )" ) && false !== strpos( $s, "layers: mapLayers( cfg.lang || 'fa' )" )
+		return false !== strpos( $s, "return ( 'dark' === m || 'evening' === m ) ? 'dark' : 'light';" ) && false !== strpos( $s, "window.basemaps.namedFlavor( flavorOf() )" ) && false !== strpos( $s, 'var lay  = mapLayers( lang );' )
 			&& false !== strpos( $s, "attributeFilter: [ 'data-tp-mode' ]" ) && false !== strpos( $s, "map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); addBound( map, ml, box ); } );" );
 	},
 	$js2h, str_replace( "'evening' === m", "'x' === m", $js2h ) );
