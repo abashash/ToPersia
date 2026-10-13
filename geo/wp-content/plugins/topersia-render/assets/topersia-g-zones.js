@@ -2394,7 +2394,7 @@
 			map.addLayer( { id: 'tp-pts-cluster', type: 'circle', source: 'tp-pts', filter: [ 'has', 'point_count' ],
 				paint: { 'circle-color': tint, 'circle-radius': [ 'step', [ 'get', 'point_count' ], 16, 10, 20, 50, 26 ], 'circle-stroke-width': 2, 'circle-stroke-color': '#ffffff' } } );
 			map.addLayer( { id: 'tp-pts-count', type: 'symbol', source: 'tp-pts', filter: [ 'has', 'point_count' ],
-				layout: { 'text-field': [ 'get', 'point_count_abbreviated' ], 'text-font': [ 'Noto Sans Medium' ], 'text-size': 13, 'text-allow-overlap': true },
+				layout: { 'text-field': [ 'get', 'point_count_abbreviated' ], 'text-font': [ 'Noto Sans Regular' ], 'text-size': 13, 'text-allow-overlap': true },
 				paint: { 'text-color': '#ffffff' } } );
 			map.addLayer( { id: 'tp-pts-icon', type: 'symbol', source: 'tp-pts', filter: [ '!', [ 'has', 'point_count' ] ],
 				layout: { 'icon-image': [ 'concat', 'tp-fam-', [ 'get', 'k' ] ], 'icon-allow-overlap': true, 'icon-size': 1 } } );
