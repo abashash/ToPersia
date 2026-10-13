@@ -1,0 +1,162 @@
+{
+    "ar": {
+        "tp_ancient_site": {
+            "missing": 3,
+            "unpublished": 0
+        },
+        "tp_calendar": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_city": {
+            "missing": 113,
+            "unpublished": 0
+        },
+        "tp_county": {
+            "missing": 29,
+            "unpublished": 0
+        },
+        "tp_currency": {
+            "missing": 2,
+            "unpublished": 0
+        },
+        "tp_desert": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_designation": {
+            "missing": 6,
+            "unpublished": 0
+        },
+        "tp_festival": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_handicraft": {
+            "missing": 3,
+            "unpublished": 0
+        },
+        "tp_health_safety": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_local_food": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_monument": {
+            "missing": 11,
+            "unpublished": 0
+        },
+        "tp_mountain": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_province": {
+            "missing": 30,
+            "unpublished": 0
+        },
+        "tp_religious_site": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_route": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_transport": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_travel_etiquette": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_village": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_water_body": {
+            "missing": 1,
+            "unpublished": 0
+        }
+    },
+    "en": {
+        "tp_ancient_site": {
+            "missing": 3,
+            "unpublished": 0
+        },
+        "tp_calendar": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_city": {
+            "missing": 113,
+            "unpublished": 0
+        },
+        "tp_county": {
+            "missing": 29,
+            "unpublished": 0
+        },
+        "tp_currency": {
+            "missing": 2,
+            "unpublished": 0
+        },
+        "tp_desert": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_designation": {
+            "missing": 6,
+            "unpublished": 0
+        },
+        "tp_festival": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_handicraft": {
+            "missing": 3,
+            "unpublished": 0
+        },
+        "tp_health_safety": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_local_food": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_monument": {
+            "missing": 11,
+            "unpublished": 0
+        },
+        "tp_mountain": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_province": {
+            "missing": 30,
+            "unpublished": 0
+        },
+        "tp_religious_site": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_transport": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_travel_etiquette": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_village": {
+            "missing": 1,
+            "unpublished": 0
+        },
+        "tp_water_body": {
+            "missing": 1,
+            "unpublished": 0
+        }
+    }
+}
