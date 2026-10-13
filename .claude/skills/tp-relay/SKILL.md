@@ -33,3 +33,4 @@ description: رلهٔ کار ToPersia بین Claude Code محلی (WAMP) و جل
 - کار موازی (OPS-D005): پیش از تحویل، جدول lane را پر کن تا دو طرف روی یک پرونده نروند.
 - دو راه (OPS-D009): **کار موازی** ← جلسه را از claude.ai/code روی `main` باز کن و lane را صریح در دستورش بگو؛ `to-cloud` نه. **تحویل کار نیمه‌کاره** (سهمیه تمام می‌شود) ← `to-cloud --wip [--task="…"]` — WIP روی `relay/…` commit و push می‌شود و `claude --cloud` باز می‌شود؛ بی `--wip` درخت کثیف کد ۲ می‌دهد.
 - برگشت: `from-cloud` ← بازبینی روی `review/…` ← آزمون‌های «در انتظار تأیید محلی» ← `from-cloud <شاخه> --gates --squash` ← commit دسته‌ای و ثبت hash در `docs/COMMIT-LOG.md`.
+- ادغام با cherry-pick (OPS-D012): فقط `git cherry-pick -n <پایه>..FETCH_HEAD` سپس `git commit` — cherry-pick بی `-n` قلاب گارد را اجرا نمی‌کند؛ commitهای شاخه را پیش از ادغام با قواعد `scripts/git-guard` (index موقت) بسنج.

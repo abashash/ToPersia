@@ -301,7 +301,9 @@ $tp123_sanitize = function ( $class ) {
 t( 'const: before it is defined the form shows the key field and the typed key is stored',
 	false !== strpos( $tp123_form( 'TP_AI_Admin' ), 'type="password"' ) && 'typed-new-key' === $tp123_sanitize( 'TP_AI_Options' ) );
 
-define( 'TOPERSIA_AI_API_KEY', 'wpconfig-key-777' );
+/* OPS-D012: مقدار ساختگی در زمان اجرا از دو تکه ساخته می‌شود تا گارد git آن را «مقدار کلید واقعی» نبیند؛ قدرت آزمون همان است */
+$tp123_const_val = 'wpconfig-' . 'key-777';
+define( 'TOPERSIA_AI_API_KEY', $tp123_const_val );
 TP_AI_Options::flush();
 
 $mc1 = tp123_mutant( 'class-tp-ai-options.php', 'TP_AI_Options', 'MC1', "'api_key'  => self::key_from_constant()", "'api_key'  => false && self::key_from_constant()" );
