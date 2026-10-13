@@ -26,12 +26,13 @@
 - P5-D358 `3076dee2` (+ mirror `9205b1d0`) — AI به جای پیشین؛ assert 506/0 · panel-order 63/0 · user-flows 41/0.
 - دستهٔ ۲ (map) `079616a7` (+ mirror `c0962b39`): مسیریابی D350 · مرز D351 (کد آماده؛ دادهٔ OSM بی VPN از ایران نیامد — `match`/`build` منتظر اتصال) · pois/Italic D352؛ assert 514/0 · map-2j 27/0 · گیت‌ها سبز.
 - دستهٔ ۳ (map) `701082c7` (+ mirror `c9a40467`): نقشهٔ آنلاین اول (OpenFreeMap) با پشتیبان آفلاین فوری، سبک‌ها، tp-tiles-update، sprite تیره D353؛ assert 522/0 · map-3 کروم ۱۸/۰ و فایرفاکس ۱۸/۰ · گیت‌ها سبز. **بی VPN ممکن نشد:** برش تازهٔ Protomaps (build.protomaps.com timeout) و ضبط Lighthouse (fonts.googleapis.com) — فایل PMTiles فعلی می‌ماند؛ «دریای خزر» تا برش با bbox ۴۲٫۵ دیده نمی‌شود.
-- **در جریان:** دستهٔ ۴ — هم‌ارزی زبان (D349): انتشار محلی ترجمه‌های en/ar ایران با needs_verification، گزارش شکاف ترجمه، زنجیرهٔ /en/ و /ar/ و containedInPlace.
+- دستهٔ ۴ (i18n) `47bd6444` (+ mirror `1f029166`): ایران en/ar، شمارندهٔ هم‌ارزی، زنجیرهٔ مکانی /en/ و /ar/ (D349)؛ assert 526/0 · lang-equiv-local 9/0.
+- «پایان»: behaviour کامل ۳۷۹ ✅ و ۱ ❌ آزمون-ساز (نقطهٔ زیر انتساب بلندتر آنلاین؛ اصلاح آزمون ← map ۱۴/۰)؛ acceptance ۰ ناهمخوان (۵۱۹ جفت × سه اجرا)؛ alltypes --all-php ۸٫۰ تا ۸٫۵ بی مشکل؛ PHPCompatibilityWP نصب نیست (گزارش)؛ HANDOVER فاز ۱۰ نوشته شد.
 - ممنوع: abzarwp (هیچ کاری) · ادغام `claude/tender-volta-apf3de` (تکراری؛ فقط cherry-pick ۵ commit انجام شد) · بخش محلی ۲د.
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
-1. دستهٔ ۴ (هم‌ارزی زبان)، سپس «پایان» (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، D349) (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، جدول تصمیم D349–D353).
+1. پرامت یکپارچه تمام شد؛ منتظر دستور کاربر (موارد منتظر: کلید ماهواره، تأیید نگاشت‌های OSM، برش PMTiles و مرز با اتصال سالم، Lighthouse با اتصال سالم) (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، جدول تصمیم D349–D353).
 3. برای بعد از پرامت یکپارچه (ثبت‌شده، شروع نشده):
    - render: نمایش تاریخ رویداد روی صفحهٔ E1 · E3 · E5 — گوگل Event را بی تاریخ دیدنی نمی‌پذیرد؛ پیش‌شرط فاز ۱۰.
    - wpml-config: `event_start_date` و `event_end_date` ← copy.

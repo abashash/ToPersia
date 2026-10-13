@@ -31,6 +31,8 @@ const TILES_MAX_LAT = ( () => { try { const fd = fs.openSync( path.join( ENV.wp,
 async function open( browser, url, mode ) {
 	const ctx = await browser.newContext( { viewport: { width: 1440, height: 900 } } );
 	const page = await ctx.newPage();
+	/* این آزمون نقشهٔ آفلاین (PMTiles) را می‌سنجد؛ از دستهٔ ۳ پیش‌فرض آنلاین اول است ← آنلاین در sessionStorage خاموش (آنلاین: tests/map-3.js) */
+	await page.addInitScript( () => { try { sessionStorage.setItem( 'tp-map-online', '0' ); } catch ( e ) {} } );
 	if ( mode ) { await page.addInitScript( m => { try { localStorage.setItem( 'tp-mode', m ); } catch ( e ) {} }, mode ); }
 	await page.goto( ENV.base + url, { waitUntil: 'load', timeout: 240000 } );
 	return { ctx, page };

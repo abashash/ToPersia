@@ -111,7 +111,10 @@ async function mapPoints( browser, url, tag ) {
 	/* کلیک خوشه ← بزرگ‌نمایی؛ کلیک نقطه ← پنجره */
 	const pick = ( layer ) => page.evaluate( ( l ) => {
 		const box = document.querySelector( '[data-tp-map-full]' ), m = box.tpMap;
-		const f = m.queryRenderedFeatures( { layers: [ l ] } )[ 0 ];
+		/* ویژگی‌ای که دور از لبه‌ها و زیر کنترل‌ها (انتساب پایین، دکمه‌های بالا) نیست؛ انتساب سبک آنلاین بلندتر است */
+		const r0 = m.getCanvas().getBoundingClientRect();
+		const all = m.queryRenderedFeatures( { layers: [ l ] } );
+		const f = all.find( q => { const t = m.project( q.geometry.coordinates ); return t.x > 90 && t.x < r0.width - 90 && t.y > 90 && t.y < r0.height - 90; } ) || all[ 0 ];
 		if ( ! f ) { return null; }
 		const p = m.project( f.geometry.coordinates ), r = m.getCanvas().getBoundingClientRect();
 		return { x: r.left + p.x, y: r.top + p.y, z: m.getZoom() };
