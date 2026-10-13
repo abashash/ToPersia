@@ -154,6 +154,11 @@ msgstr "أرديبهشت"
 msgid "ارز و روش‌های پرداخت"
 msgstr "العملة وطرق الدفع"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "از %1$s تا %2$s"
+msgstr "من %1$s إلى %2$s"
+
 #: includes/topersia-g-gallery-agg.php
 msgid "از پیش در صف است."
 msgstr "موجود في قائمة الانتظار مسبقاً."
@@ -301,6 +306,10 @@ msgstr "إعادة بناء الكل"
 #: includes/topersia-g-map.php
 msgid "بازنشسته / منتفی"
 msgstr "ملغى / غير منطبق"
+
+#: includes/topersia-g-zones.php
+msgid "بازه برگزاری"
+msgstr "موعد الفعالية"
 
 #: topersia-render.php
 msgid "بازگرداندن به پیش‌فرض"
@@ -463,9 +472,22 @@ msgstr "المزيد"
 msgid "بین‌المللی"
 msgstr "دولي"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "تا %s"
+msgstr "حتى %s"
+
 #: includes/topersia-g-map.php
 msgid "تابستان"
 msgstr "الصيف"
+
+#: includes/topersia-g-map.php
+msgid "تاریخ آغاز"
+msgstr "تاريخ البدء"
+
+#: includes/topersia-g-map.php
+msgid "تاریخ پایان"
+msgstr "تاريخ الانتهاء"
 
 #: includes/topersia-g-map.php
 msgid "تاریخی"

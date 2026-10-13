@@ -451,6 +451,10 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
 
 				return esc_html( topersia_g_glossary_label( $glossary, $raw ) );
 
+			case 'date':
+				/* تاریخ رویداد: متن به زبان صفحه + <time datetime> ماشین‌خوان؛ نامعتبر ← خالی.  P5-D357 */
+				return topersia_g_date_html( $raw );
+
 			case 'flag':
 				/* پرچم بیرون از «نشان‌ها» (کارت حقایق، «اطلاعات سفر») فقط روشن می‌آید: «بله».  P5-D279 */
 				return topersia_g_flag_on( $raw ) ? esc_html__( 'بله', 'topersia' ) : '';
@@ -1207,6 +1211,71 @@ if ( ! function_exists( 'topersia_g_date_fa' ) ) {
 }
 
 /**
+ * تاریخ Y-m-d یک فیلد date (رشتۀ Y-m-d یا زمان یونیکس) ← «2027-09-01»، یا رشتۀ خالی.  P5-D357
+ */
+if ( ! function_exists( 'topersia_g_date_iso' ) ) {
+	function topersia_g_date_iso( $value ) {
+
+		$value = trim( (string) $value );
+
+		if ( preg_match( '/^(\d{4})-(\d{2})-(\d{2})/', $value, $m ) ) {
+			return checkdate( (int) $m[2], (int) $m[3], (int) $m[1] ) ? $m[1] . '-' . $m[2] . '-' . $m[3] : '';
+		}
+
+		return preg_match( '/^\d{9,11}$/', $value ) ? gmdate( 'Y-m-d', (int) $value ) : '';
+	}
+}
+
+/** تاریخ به زبان صفحه داخل <time datetime> — نامعتبر ← ''.  P5-D357 */
+if ( ! function_exists( 'topersia_g_date_html' ) ) {
+	function topersia_g_date_html( $value ) {
+
+		$iso  = topersia_g_date_iso( $value );
+		$text = '' !== $iso ? topersia_g_date_fa( $iso ) : '';
+
+		return '' === $text ? '' : '<time datetime="' . esc_attr( $iso ) . '">' . esc_html( $text ) . '</time>';
+	}
+}
+
+/**
+ * سطر «بازه برگزاری» سربرگ رویدادها (E1 · E3 · E5) — جایگاه از CA-E: سربرگ و بلوک هویت.  P5-D357
+ *
+ * هر دو تاریخ ← «از … تا …»؛ فقط آغاز ← همان تاریخ؛ فقط پایان ← «تا …»؛ هیچ‌کدام ← ''، و چیزی نمی‌آید.
+ * قالب تاریخ از زبان صفحه است (فارسی شمسی؛ انگلیسی و عربی میلادی) — topersia_g_date_fa.
+ *
+ * @return string HTML، یا ''.
+ */
+if ( ! function_exists( 'topersia_g_event_when' ) ) {
+	function topersia_g_event_when( $pid ) {
+
+		if ( ! in_array( function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '', array( 'tp_festival', 'tp_sports_event', 'tp_religious_event' ), true ) ) {
+			return '';
+		}
+
+		$from = topersia_g_date_html( topersia_g_raw( $pid, 'event_start_date' ) );
+		$to   = topersia_g_date_html( topersia_g_raw( $pid, 'event_end_date' ) );
+
+		if ( '' !== $from && '' !== $to && $from === $to ) {
+			$to = '';
+		}
+
+		if ( '' === $from && '' === $to ) {
+			return '';
+		}
+
+		if ( '' !== $from && '' !== $to ) {
+			$text = sprintf( esc_html__( 'از %1$s تا %2$s', 'topersia' ), $from, $to );
+		} elseif ( '' !== $to ) {
+			$text = sprintf( esc_html__( 'تا %s', 'topersia' ), $to );
+		} else {
+			$text = $from;
+		}
+
+		return '<p class="tp-hero__alt tp-hero__when"><span class="tp-hero__when-k">' . esc_html__( 'بازه برگزاری', 'topersia' ) . ':</span> ' . $text . '</p>';
+	}
+}
+
+/**
  * نام رسمی موجودیت در سه زبان — official_name_* و در نبودش name_*، و اگر
  * خودِ پست ندارد، از نسخۀ WPML همان زبان.  ۴٫۴٫۲ — تا ۴٫۴٫۱ روی صفحۀ
  * انگلیسی عنوانِ انگلیسی جای «نام فارسی» می‌نشست.
@@ -1339,6 +1408,9 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 			$fa_names = topersia_g_foreign_text( implode( ' ', $others ) ) ? ' lang="fa" dir="rtl"' : '';
 			$out     .= '<p class="tp-altnames"' . $fa_names . '>' . esc_html( $fa_names ? topersia_g_fa( implode( '، ', $others ) ) : implode( $sep, $others ) ) . '</p>';
 		}
+
+		/* بازه برگزاری رویداد — بی تاریخ چیزی نمی‌آید.  P5-D357 */
+		$out .= topersia_g_event_when( $pid );
 
 		if ( '' !== $lead ) {
 			$out .= '<p class="tp-hero__lead">' . esc_html( $lead ) . '</p>';
