@@ -681,6 +681,10 @@ msgstr "Historic bathhouse"
 msgid "حمل‌ونقل عمومی"
 msgstr "Public transport"
 
+#: includes/topersia-g-zones.php
+msgid "حمل‌ونقل و قطار"
+msgstr "Transit and rail"
+
 #: topersia-render.php
 msgid "خاموش"
 msgstr "Off"
@@ -1109,6 +1113,10 @@ msgstr "Annual"
 msgid "سبک معماری"
 msgstr "Architectural style"
 
+#: includes/topersia-g-zones.php
+msgid "سبک نقشه"
+msgstr "Map style"
+
 #: includes/topersia-g-weather.php
 msgid "سرد"
 msgstr "Cold"
@@ -1505,6 +1513,10 @@ msgstr "June"
 msgctxt "ماه میلادی"
 msgid "ژوئیه"
 msgstr "July"
+
+#: includes/topersia-g-zones.php
+msgid "ماهواره"
+msgstr "Satellite"
 
 #: includes/topersia-g-map.php
 msgid "متر"
@@ -2239,6 +2251,10 @@ msgstr "End of page"
 #: includes/topersia-g-map.php
 msgid "پایتخت"
 msgstr "Capital"
+
+#: includes/topersia-g-zones.php
+msgid "پایه"
+msgstr "Standard"
 
 #: includes/topersia-g-map.php
 msgid "پاییز"

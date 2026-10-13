@@ -2128,24 +2128,151 @@
 			return ( 'dark' === m || 'evening' === m ) ? 'dark' : 'light';
 		}
 
-		function style( cfg ) {
+		/*
+		 * نقشۀ آنلاین با پشتیبان آفلاین — P5-D353
+		 * ترتیب پیش‌فرض: آنلاین اول (OpenFreeMap، بی کلید)، PMTiles خودمیزبان پشتیبان. هنگام ساخت نقشه **یک** درخواست آزمایشی (خودِ style آنلاین) با مهلت
+		 * کوتاه (cfg.online.probe_ms، ۲٫۵ ثانیه)؛ خطا، مهلت یا پاسخ غیر ۲۰۰ ← همان لحظه آفلاین، بی تلاش دوباره، بی پیام خطا. نتیجه در sessionStorage
+		 * (۰ ← صفحه‌های بعدیِ همین بازدید مستقیم آفلاین؛ بازدید بعدی دوباره یک بار می‌سنجد). هیچ درخواستی پیش از دیده‌شدن نقشه نیست (mount پس از دید).
+		 */
+		var ONLINE_KEY = 'tp-map-online';
+		var STYLE_KEY  = 'tp-map-style';
+		var onlineMemo = {};
+
+		function sget( k ) {
+			try { return window.sessionStorage.getItem( k ) || ''; } catch ( e ) { return ''; }
+		}
+
+		function sset( k, v ) {
+			try { window.sessionStorage.setItem( k, v ); } catch ( e ) {}
+		}
+
+		/* برچسب‌های سبک آنلاین به زبان صفحه با برگشت به name؛ فارسی و عربی بی letter-spacing */
+		function localize( st, lang ) {
+
+			( st.layers || [] ).forEach( function ( l ) {
+
+				if ( ! l.layout ) {
+					return;
+				}
+
+				if ( l.layout[ 'text-field' ] ) {
+					l.layout[ 'text-field' ] = [ 'coalesce', [ 'get', 'name:' + lang ], [ 'get', 'name' ] ];
+				}
+
+				if ( ( 'fa' === lang || 'ar' === lang ) && undefined !== l.layout[ 'text-letter-spacing' ] ) {
+					delete l.layout[ 'text-letter-spacing' ];
+				}
+			} );
+
+			return st;
+		}
+
+		function onlineStyle( cfg ) {
+
+			var o = cfg.online;
+
+			if ( ! o || 'offline-first' === cfg.order || '0' === sget( ONLINE_KEY ) || ! window.fetch ) {
+				return Promise.resolve( null );
+			}
+
+			var url = 'dark' === flavorOf() ? o.style_dark : o.style_light;
+
+			if ( onlineMemo[ url ] ) {
+				return Promise.resolve( localize( JSON.parse( onlineMemo[ url ] ), cfg.lang || 'fa' ) );
+			}
+
+			var ctl   = window.AbortController ? new AbortController() : null;
+			var timer = window.setTimeout( function () { if ( ctl ) { ctl.abort(); } }, parseInt( o.probe_ms, 10 ) || 2500 );
+
+			return window.fetch( url, { signal: ctl ? ctl.signal : undefined, credentials: 'omit' } ).then( function ( r ) {
+				window.clearTimeout( timer );
+				if ( ! r.ok ) { throw new Error( 'http' ); }
+				return r.json();
+			} ).then( function ( st ) {
+				sset( ONLINE_KEY, '1' );
+				onlineMemo[ url ] = JSON.stringify( st );
+				return localize( st, cfg.lang || 'fa' );
+			} ).catch( function () {
+				window.clearTimeout( timer );
+				sset( ONLINE_KEY, '0' );
+				return null;
+			} );
+		}
+
+		/* آفلاین: PMTiles خودمیزبان. kind: base · transit (خط آهن و ایستگاه برجسته) · labels (برچسب‌ها روی ماهواره) */
+		function offlineStyle( cfg, kind ) {
 
 			var base = new URL( cfg.base, location.href ).href;
+			var lang = cfg.lang || 'fa';
+			var lay  = mapLayers( lang );
+			var src  = {
+				protomaps: {
+					type: 'vector',
+					url: 'pmtiles://' + cfg.tiles,
+					attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">' + ( cfg.attribution || '© OpenStreetMap' ) + '</a>'
+				}
+			};
+
+			if ( 'transit' === kind ) {
+
+				lay = lay.map( function ( l ) {
+
+					if ( 'roads_rail' === l.id ) {
+						l.minzoom = 3;
+						l.paint = Object.assign( {}, l.paint, { 'line-color': '#B9871A', 'line-width': [ 'interpolate', [ 'linear' ], [ 'zoom' ], 3, 1.2, 8, 2.4, 14, 5 ], 'line-opacity': 1 } );
+						delete l.paint[ 'line-dasharray' ];
+					} else if ( 0 === ( l.id || '' ).indexOf( 'roads_' ) && 'line' === l.type ) {
+						l.paint = Object.assign( {}, l.paint, { 'line-opacity': 0.3 } );
+					} else if ( 'pois' === l.id ) {
+						l.filter = [ 'all', [ 'in', [ 'get', 'kind' ], [ 'literal', [ 'station', 'aerodrome' ] ] ], [ '>=', [ 'zoom' ], [ '+', [ 'get', 'min_zoom' ], 0 ] ] ];
+						l.layout = Object.assign( {}, l.layout, { 'text-size': [ 'interpolate', [ 'linear' ], [ 'zoom' ], 6, 11, 14, 14 ] } );
+					}
+
+					return l;
+				} );
+			}
+
+			if ( 'labels' === kind ) {
+
+				lay = lay.filter( function ( l ) { return 'symbol' === l.type; } ).map( function ( l ) {
+					l.paint = Object.assign( {}, l.paint, { 'text-color': '#ffffff', 'text-halo-color': 'rgba(0,0,0,.75)', 'text-halo-width': 1.4 } );
+					return l;
+				} );
+
+				src.sat = { type: 'raster', tiles: [ cfg.sat ], tileSize: 256, maxzoom: 19, attribution: '© MapTiler © OpenStreetMap contributors' };
+				lay.unshift( { id: 'tp-sat', type: 'raster', source: 'sat' } );
+			}
 
 			return {
 				version: 8,
 				glyphs: base + 'fonts/{fontstack}/{range}.pbf',
-				/* اسپرایت فقط نمادهای جادّه/نشان است؛ نسخۀ تیره‌اش در بسته نیست و روشن برای هر دو سبک می‌ماند */
-				sprite: base + 'sprites/light',
-				sources: {
-					protomaps: {
-						type: 'vector',
-						url: 'pmtiles://' + cfg.tiles,
-						attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">' + ( cfg.attribution || '© OpenStreetMap' ) + '</a>'
-					}
-				},
-				layers: mapLayers( cfg.lang || 'fa' )
+				/* اسپرایت نمادهای جادّه/نشان: نسخۀ تیره از منبع رسمی Protomaps basemaps-assets (v4)، خودمیزبان؛ P5-D353 */
+				sprite: base + 'sprites/' + ( 'dark' === flavorOf() ? 'dark' : 'light' ),
+				sources: src,
+				layers: lay
 			};
+		}
+
+		/* سبک انتخاب‌شده ← { style, online }؛ transit همیشه آفلاین (ارائه‌دهندۀ بی‌کلید ندارد)، satellite فقط با ارائه‌دهندۀ کلیددار پیکربندی‌شده */
+		function resolveStyle( cfg, sel ) {
+
+			if ( 'transit' === sel ) {
+				return Promise.resolve( { style: offlineStyle( cfg, 'transit' ), online: false, sel: sel } );
+			}
+
+			if ( 'satellite' === sel && cfg.sat ) {
+				return Promise.resolve( { style: offlineStyle( cfg, 'labels' ), online: true, sel: sel } );
+			}
+
+			return onlineStyle( cfg ).then( function ( st ) {
+				return st ? { style: st, online: true, sel: 'base' } : { style: offlineStyle( cfg, 'base' ), online: false, sel: 'base' };
+			} );
+		}
+
+		function savedSel( cfg ) {
+			var v = '';
+			try { v = window.localStorage.getItem( STYLE_KEY ) || ''; } catch ( e ) {}
+			return ( cfg.styles || [] ).indexOf( v ) >= 0 ? v : 'base';
 		}
 
 		/*
@@ -2382,9 +2509,13 @@
 
 			return load( cfg ).then( function ( ml ) {
 
+				return resolveStyle( cfg, interactive ? savedSel( cfg ) : 'base' ).then( function ( first ) {
+
+				box.tpOnline = first.online;
+
 				var map = new ml.Map( {
 					container: box,
-					style: style( cfg ),
+					style: first.style,
 					center: lnglat,
 					zoom: cfg.zoom || 8,
 					interactive: !! interactive,
@@ -2404,9 +2535,68 @@
 					map.addControl( new ml.NavigationControl( { showCompass: false } ), 'top-left' );
 				}
 
-				box.tpFlavor = flavorOf();
+				/*
+				 * اعمال یک سبک روی نقشۀ زنده — بارگذاری کامل ← style.load؛ نشانگرها و مرز از دادۀ همان دریافت دوباره می‌نشینند
+				 * (با diff نشانگرها بی‌صدا حذف می‌شدند). آنلاین که کاشی‌اش خطا بدهد یک‌بار فوری آفلاین می‌شود — بی پیام، بی تلاش دوباره.
+				 */
+				var fell = false;
 
-				/* تغییر حالت (روز · عصر · شب) در جا: سبک عوض می‌شود و نشانگرها (که با سبک می‌روند) از دادۀ همان دریافت دوباره می‌آیند */
+				function reapply() {
+					map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); addBound( map, ml, box ); } );
+				}
+
+				function fallBack() {
+
+					if ( fell || ! box.tpOnline ) {
+						return;
+					}
+
+					fell = true;
+					box.tpOnline = false;
+					sset( ONLINE_KEY, '0' );
+					map.setStyle( offlineStyle( cfg, 'base' ), { diff: false } );
+					reapply();
+				}
+
+				map.on( 'error', function ( e ) {
+					if ( box.tpOnline && e && e.error && ( e.sourceId || e.error.status >= 400 ) ) {
+						fallBack();
+					}
+				} );
+
+				function applySel( sel ) {
+					resolveStyle( cfg, sel ).then( function ( r ) {
+						box.tpOnline = r.online;
+						box.tpSel    = r.sel;
+						map.setStyle( r.style, { diff: false } );
+						reapply();
+						if ( box.tpStyleBtns ) {
+							Array.prototype.forEach.call( box.tpStyleBtns, function ( b ) { b.setAttribute( 'aria-pressed', b.getAttribute( 'data-style' ) === r.sel ? 'true' : 'false' ); } );
+						}
+					} );
+				}
+
+				box.tpFlavor = flavorOf();
+				box.tpSel    = first.sel;
+
+				/* انتخاب‌گر سبک: فقط نقشۀ تعاملی (مودال)؛ هر سبک فقط هنگام انتخاب بار می‌شود؛ انتخاب در localStorage */
+				if ( interactive ) {
+					var bar = box.parentNode ? box.parentNode.querySelector( '[data-tp-map-styles]' ) : null;
+
+					if ( bar ) {
+						box.tpStyleBtns = bar.querySelectorAll( 'button[data-style]' );
+						Array.prototype.forEach.call( box.tpStyleBtns, function ( b ) {
+							b.setAttribute( 'aria-pressed', b.getAttribute( 'data-style' ) === first.sel ? 'true' : 'false' );
+							b.addEventListener( 'click', function () {
+								var v = b.getAttribute( 'data-style' );
+								try { window.localStorage.setItem( STYLE_KEY, v ); } catch ( e ) {}
+								applySel( v );
+							} );
+						} );
+					}
+				}
+
+				/* تغییر حالت (روز · عصر · شب) در جا */
 				if ( window.MutationObserver ) {
 					new MutationObserver( function () {
 						var f = flavorOf();
@@ -2414,8 +2604,7 @@
 							return;
 						}
 						box.tpFlavor = f;
-						map.setStyle( style( cfg ), { diff: false } );   /* بازبارگذاری کامل ← رویداد style.load؛ با diff نشانگرها بی‌صدا حذف می‌شدند */
-						map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); addBound( map, ml, box ); } );
+						applySel( box.tpSel || 'base' );
 					} ).observe( document.documentElement, { attributes: true, attributeFilter: [ 'data-tp-mode' ] } );
 				}
 
@@ -2425,6 +2614,8 @@
 						loadBound( map, ml, box, cfg );
 						ok( map );
 					} );
+				} );
+
 				} );
 			} );
 		}

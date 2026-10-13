@@ -2613,22 +2613,55 @@ if ( ! function_exists( 'topersia_g_map_provider' ) ) {
 
 		if ( function_exists( 'wp_upload_dir' ) && function_exists( 'topersia_render_url' ) ) {
 
-			/* مسیر کاشی از «سرویس‌های خارجی» هسته (map.tiles) اگر ذخیره شده؛ خاموش ← بی نقشۀ زنده.  P5-D249 */
-			$layer = function_exists( 'topersia_g_layer' ) ? topersia_g_layer( 'map.tiles' ) : null;
-			$rel   = $layer && ! empty( $layer['extra']['path'] ) ? ltrim( (string) $layer['extra']['path'], '/' ) : 'tiles/iran.pmtiles';
+			/*
+			 * «سرویس‌های خارجی» هسته (map.tiles): ارائه‌دهندۀ آنلاین (پیش‌فرض OpenFreeMap) با PMTiles خودمیزبان پشتیبان؛ ارائه‌دهندۀ «pmtiles» ←
+			 * آفلاین اول. خاموش ← بی نقشۀ زنده. اولویت از پیشخوان قابل تنظیم است.  P5-D249 · P5-D353
+			 */
+			/* نه topersia_g_layer: آن فقط سطرِ ذخیره‌شده را می‌دهد؛ پیش‌فرض کاتالوگ (آنلاین اول) هم باید کار کند */
+			$layer = function_exists( 'topersia_api' ) ? topersia_api( 'map.tiles', false, true ) : null;
+			$layer = is_array( $layer ) && isset( $layer['provider'] ) ? $layer : null;
+			$prov  = $layer && ! empty( $layer['provider'] ) ? (string) $layer['provider'] : 'pmtiles';
+			$rel   = 'pmtiles' === $prov && $layer && ! empty( $layer['extra']['path'] ) ? ltrim( (string) $layer['extra']['path'], '/' ) : 'tiles/iran.pmtiles';
 			$up    = wp_upload_dir( null, false );
 			$file  = trailingslashit( (string) $up['basedir'] ) . $rel;
+			$on    = ! $layer || ! empty( $layer['enabled'] );
+			$have  = is_file( $file );
 
-			if ( ( ! $layer || ! empty( $layer['enabled'] ) ) && is_file( $file ) ) {
+			$online = array();
+
+			if ( $on && 'openfreemap' === $prov && $layer && ! empty( $layer['extra']['style_light'] ) && ! empty( $layer['extra']['style_dark'] ) ) {
+				$online = array(
+					'provider'    => 'openfreemap',
+					'style_light' => esc_url_raw( (string) $layer['extra']['style_light'] ),
+					'style_dark'  => esc_url_raw( (string) $layer['extra']['style_dark'] ),
+					'probe_ms'    => isset( $layer['extra']['probe_ms'] ) ? max( 500, min( 8000, (int) $layer['extra']['probe_ms'] ) ) : 2500,
+				);
+			}
+
+			if ( $on && ( $have || $online ) ) {
+
 				$cfg = array(
 					'name'        => 'maplibre-pmtiles',
 					'base'        => topersia_render_url() . 'assets/map/',
-					'tiles'       => set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . $rel ),
+					'tiles'       => $have ? set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . $rel ) . '?v=' . filemtime( $file ) : '',
 					'attribution' => __( '© مشارکت‌کنندگان OpenStreetMap', 'topersia' ),
+					'order'       => 'pmtiles' === $prov ? 'offline-first' : 'online-first',
+					'styles'      => $have ? array( 'base', 'transit' ) : array( 'base' ),
 				);
+
+				if ( $online ) {
+					$cfg['online'] = $online;
+				}
+
+				/* ماهواره: فقط با ارائه‌دهندۀ کلیددارِ پیکربندی‌شده و روشن؛ برچسب‌ها از PMTiles خودمان */
+				$sat = function_exists( 'topersia_api' ) ? topersia_api( 'map.satellite' ) : array();
+
+				if ( $have && is_array( $sat ) && isset( $sat['status'] ) && 'active' === $sat['status'] && ! empty( $sat['key'] ) && ! empty( $sat['endpoint'] ) ) {
+					$cfg['sat']      = esc_url_raw( add_query_arg( 'key', rawurlencode( (string) $sat['key'] ), (string) $sat['endpoint'] ) );
+					$cfg['styles'][] = 'satellite';
+				}
 			}
 		}
-
 		if ( function_exists( 'apply_filters' ) ) {
 			$cfg = (array) apply_filters( 'topersia_g_map_provider', $cfg );
 		}
@@ -2656,13 +2689,40 @@ if ( ! function_exists( 'topersia_g_map_zoom' ) ) {
 	}
 }
 
+/** انتخاب‌گر سبک نقشه در مودال: پایه · حمل‌ونقل و قطار · ماهواره (فقط سبک‌های موجود).  P5-D353 */
+if ( ! function_exists( 'topersia_g_map_style_bar' ) ) {
+	function topersia_g_map_style_bar( $post_id ) {
+
+		$cfg = topersia_g_map_provider();
+
+		if ( empty( $cfg['styles'] ) || count( $cfg['styles'] ) < 2 ) {
+			return '';
+		}
+
+		$labels = array(
+			'base'      => __( 'پایه', 'topersia' ),
+			'transit'   => __( 'حمل‌ونقل و قطار', 'topersia' ),
+			'satellite' => __( 'ماهواره', 'topersia' ),
+		);
+
+		$out = '';
+
+		foreach ( $cfg['styles'] as $key ) {
+			if ( isset( $labels[ $key ] ) ) {
+				$out .= '<button type="button" data-style="' . esc_attr( $key ) . '" aria-pressed="false">' . esc_html( $labels[ $key ] ) . '</button>';
+			}
+		}
+
+		return '<div class="tp-map-styles" data-tp-map-styles role="group" aria-label="' . esc_attr__( 'سبک نقشه', 'topersia' ) . '">' . $out . '</div>';
+	}
+}
 /** دادۀ نقشۀ زنده برای یک ظرف — یا رشتۀ خالی. */
 if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 	function topersia_g_map_attr( $post_id ) {
 
 		$cfg = topersia_g_map_provider();
 
-		if ( empty( $cfg['base'] ) || empty( $cfg['tiles'] ) ) {
+		if ( empty( $cfg['base'] ) || ( empty( $cfg['tiles'] ) && empty( $cfg['online'] ) ) ) {
 			return '';
 		}
 
@@ -6409,6 +6469,7 @@ if ( ! function_exists( 'topersia_g_modals' ) ) {
 				. ( '' !== topersia_g_map_attr( $post_id )
 					? '<div class="tp-map-live tp-map-live--full" data-tp-map-full data-tp-coords="' . esc_attr( function_exists( 'topersia_geo_attr' ) && '' !== topersia_geo_attr( $coords ) ? topersia_geo_attr( $coords ) : $coords ) . '"' . topersia_g_map_attr( $post_id ) . '></div>'
 					: '' )
+				. topersia_g_map_style_bar( $post_id )
 				. '</div>'
 				. '<div class="tp-modal__meta">'
 				. esc_html__( 'مختصات مرکز', 'topersia' ) . ': '

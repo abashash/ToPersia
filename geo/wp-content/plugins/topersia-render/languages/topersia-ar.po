@@ -681,6 +681,10 @@ msgstr "حمّام تاريخي"
 msgid "حمل‌ونقل عمومی"
 msgstr "النقل العام"
 
+#: includes/topersia-g-zones.php
+msgid "حمل‌ونقل و قطار"
+msgstr "النقل والقطارات"
+
 #: topersia-render.php
 msgid "خاموش"
 msgstr "إيقاف"
@@ -1109,6 +1113,10 @@ msgstr "سنوي"
 msgid "سبک معماری"
 msgstr "الطراز المعماري"
 
+#: includes/topersia-g-zones.php
+msgid "سبک نقشه"
+msgstr "نمط الخريطة"
+
 #: includes/topersia-g-weather.php
 msgid "سرد"
 msgstr "بارد"
@@ -1505,6 +1513,10 @@ msgstr "يونيو"
 msgctxt "ماه میلادی"
 msgid "ژوئیه"
 msgstr "يوليو"
+
+#: includes/topersia-g-zones.php
+msgid "ماهواره"
+msgstr "الأقمار الصناعية"
 
 #: includes/topersia-g-map.php
 msgid "متر"
@@ -2239,6 +2251,10 @@ msgstr "نهاية الصفحة"
 #: includes/topersia-g-map.php
 msgid "پایتخت"
 msgstr "العاصمة"
+
+#: includes/topersia-g-zones.php
+msgid "پایه"
+msgstr "أساسي"
 
 #: includes/topersia-g-map.php
 msgid "پاییز"

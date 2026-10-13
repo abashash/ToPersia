@@ -680,6 +680,10 @@ msgstr ""
 msgid "حمل‌ونقل عمومی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "حمل‌ونقل و قطار"
+msgstr ""
+
 #: topersia-render.php
 msgid "خاموش"
 msgstr ""
@@ -1108,6 +1112,10 @@ msgstr ""
 msgid "سبک معماری"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "سبک نقشه"
+msgstr ""
+
 #: includes/topersia-g-weather.php
 msgid "سرد"
 msgstr ""
@@ -1503,6 +1511,10 @@ msgstr ""
 #: includes/topersia-g-zones.php
 msgctxt "ماه میلادی"
 msgid "ژوئیه"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "ماهواره"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2237,6 +2249,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "پایتخت"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "پایه"
 msgstr ""
 
 #: includes/topersia-g-map.php

@@ -1,0 +1,3 @@
+Sprites (light + dark, v4) — protomaps/basemaps-assets (sprites/v4), downloaded 2026-10-13 via the official repository.
+License of the sprite directory (per the repository README): derived from MIT-licensed tangrams/icons — https://github.com/tangrams/icons/blob/master/LICENSE.md
+Copyright (c) Mapzen and contributors; MIT License. The dark sheets are the official dark-themed v4 sheets matching light.json layout.
