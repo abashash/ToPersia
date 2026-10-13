@@ -25,12 +25,13 @@
 - ۱۳ اکتبر: دستهٔ ۱ پنل چپ `149c79e2` (D347/D348) · OPS-D011 `65f1b1a3` · ادغام ابری: ممیزی `e1ca63e0`، امنیت/خلاصه‌ساز (cherry-pick `1c889de4`…`a77d2053` + آزمون `7ded731a`)، اسکیمای رویداد `e91eb2bb` · mirror نصب‌شده `d8710f38` · آزمون‌های محلی A/D `3919405e`.
 - P5-D358 `3076dee2` (+ mirror `9205b1d0`) — AI به جای پیشین؛ assert 506/0 · panel-order 63/0 · user-flows 41/0.
 - دستهٔ ۲ (map) `079616a7` (+ mirror `c0962b39`): مسیریابی D350 · مرز D351 (کد آماده؛ دادهٔ OSM بی VPN از ایران نیامد — `match`/`build` منتظر اتصال) · pois/Italic D352؛ assert 514/0 · map-2j 27/0 · گیت‌ها سبز.
-- **در جریان:** دستهٔ ۳ — نقشهٔ آنلاین با پشتیبان آفلاین (D353): آداپتور map.tiles، یک درخواست آزمایشی با مهلت ۲–۳ ثانیه و برگشت فوری، سبک پایه/حمل‌ونقل/ماهواره، tp-tiles-update، sprite تیره.
+- دستهٔ ۳ (map) `701082c7` (+ mirror `c9a40467`): نقشهٔ آنلاین اول (OpenFreeMap) با پشتیبان آفلاین فوری، سبک‌ها، tp-tiles-update، sprite تیره D353؛ assert 522/0 · map-3 کروم ۱۸/۰ و فایرفاکس ۱۸/۰ · گیت‌ها سبز. **بی VPN ممکن نشد:** برش تازهٔ Protomaps (build.protomaps.com timeout) و ضبط Lighthouse (fonts.googleapis.com) — فایل PMTiles فعلی می‌ماند؛ «دریای خزر» تا برش با bbox ۴۲٫۵ دیده نمی‌شود.
+- **در جریان:** دستهٔ ۴ — هم‌ارزی زبان (D349): انتشار محلی ترجمه‌های en/ar ایران با needs_verification، گزارش شکاف ترجمه، زنجیرهٔ /en/ و /ar/ و containedInPlace.
 - ممنوع: abzarwp (هیچ کاری) · ادغام `claude/tender-volta-apf3de` (تکراری؛ فقط cherry-pick ۵ commit انجام شد) · بخش محلی ۲د.
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
-1. دستهٔ ۳ (نقشهٔ آنلاین + پشتیبان آفلاین)، سپس ۴ (هم‌ارزی زبان)، سپس «پایان» (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، جدول تصمیم D349–D353).
+1. دستهٔ ۴ (هم‌ارزی زبان)، سپس «پایان» (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، D349) (behaviour/acceptance کامل، PHPCompatibilityWP، HANDOVER فاز ۱۰، جدول تصمیم D349–D353).
 3. برای بعد از پرامت یکپارچه (ثبت‌شده، شروع نشده):
    - render: نمایش تاریخ رویداد روی صفحهٔ E1 · E3 · E5 — گوگل Event را بی تاریخ دیدنی نمی‌پذیرد؛ پیش‌شرط فاز ۱۰.
    - wpml-config: `event_start_date` و `event_end_date` ← copy.
