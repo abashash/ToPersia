@@ -78,3 +78,8 @@
 | 69 | 2026-10-13 | `geo` | `1f029166` |  | نسخهٔ نصب‌شدهٔ render · core · schema پس از دستهٔ ۴ | ✅ |
 | 70 | 2026-10-13 | `docs` | `8bfd1b06` |  | پایان پرامت یکپارچه: HANDOVER فاز ۱۰ + اصلاح آزمون/نقشه؛ behaviour ۳۷۹ + map ۱۴/۰ · acceptance ۰ ناهمخوان · all-php ۸٫۰–۸٫۵ | ✅ |
 | 71 | 2026-10-13 | `geo` | `44a70cc2` |  | نسخهٔ نصب‌شدهٔ render پس از اصلاح‌های پایان | ✅ |
+| 72 | 2026-10-13 | `ai` | `f1163acd` |  | خلاصهٔ AI فقط به دست مدیر — P5-D358 — خلاصه‌ساز 1.3.0 (ابری E، cherry-pick -n)؛ render از tpas_get_summary؛ ai-admin-local کروم و فایرفاکس ۲۰/۰ · user-flows ۴۱/۰ · wpml-editor ۲/۰ | ✅ |
+| 73 | 2026-10-13 | `ops` | `a30bd59d` |  | گارد OPS-D012: کلید ساختگی آزمون در زمان اجرا؛ cherry-pick فقط -n؛ commitهای A و C سنجیده (فقط `43182e2a` یک خط define) | ✅ |
+| 74 | 2026-10-13 | `geo` | `ad4d66db` |  | نسخهٔ نصب‌شدهٔ render و خلاصه‌ساز 1.3.0 (با test-12 که تا امروز بی ردیابی بود) | ✅ |
+| 75 | 2026-10-14 | `render` | `1f28c6ba` |  | P5-D359 Google Fonts خاموش + ext-hosts؛ P5-D357 تاریخ رویداد؛ assert 531/0 · behaviour 380/0 · event-dates 43/0 · Lighthouse A/B سالم | ✅ |
+| 76 | 2026-10-14 | `geo` | `d2a02128` |  | نسخهٔ نصب‌شدهٔ render و core پس از P5-D359 | ✅ |
