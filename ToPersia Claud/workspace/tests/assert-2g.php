@@ -75,7 +75,7 @@ if ( ! function_exists( 'topersia_geo_point' ) ) { /* هسته در این مج�
 class TP2G_Req { public $p; function __construct( $p ) { $this->p = $p; } function get_param( $k ) { return isset( $this->p[ $k ] ) ? $this->p[ $k ] : null; } }
 if ( ! function_exists( 'topersia_api' ) ) {
 	/* همان قرارداد هسته: status · enabled — فقط برای این ادعاها؛ `configured` تهی تا لایهٔ هوا (topersia_g_layer) را عوض نکند */
-	function topersia_api( $service ) { return array( 'service' => $service, 'configured' => false, 'status' => isset( $GLOBALS['tp2g_status'] ) ? $GLOBALS['tp2g_status'] : 'active', 'enabled' => true, 'key' => '' ); }
+	function topersia_api( $service ) { return array( 'service' => $service, 'configured' => false, 'status' => isset( $GLOBALS['tp2g_status'] ) ? $GLOBALS['tp2g_status'] : 'active', 'enabled' => true, 'key' => '', 'extra' => isset( $GLOBALS['tp_services_nav'] ) && 'navigation' === $service ? $GLOBALS['tp_services_nav'] : array() ); }
 }
 $GLOBALS['tp_http'] = array( 'code' => 200, 'body' => '{"current":{"time":"t","us_aqi":160,"pm10":31.44,"pm2_5":12.66,"dust":72.0}}' );
 $GLOBALS['tp2g_status'] = 'active';

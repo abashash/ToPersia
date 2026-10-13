@@ -240,7 +240,7 @@ tp441_mut( 'نقشه: برچسب کاشی با lang سبک Protomaps، رابط 
 		foreach ( array( 'Map.Title', 'Marker.Title', 'NavigationControl.ZoomIn', 'NavigationControl.ZoomOut', 'AttributionControl.ToggleAttribution' ) as $k ) {
 			if ( ! preg_match( "/'" . preg_quote( $k, '/' ) . "'\s*=> __\(/", $loc ) ) { return false; }
 		}
-		return false !== strpos( $x[0], 'locale: cfg.locale || {}' ) && false !== strpos( $x[0], "{ lang: cfg.lang || 'fa' }" )
+		return false !== strpos( $x[0], 'locale: cfg.locale || {}' ) && false !== strpos( $x[0], "{ lang: lang }" ) && false !== strpos( $x[0], "mapLayers( cfg.lang || 'fa' )" )
 			&& false !== strpos( $x[1], "\$cfg['locale'] = topersia_g_map_locale();" ) && false !== strpos( $x[1], "'attribution' => __( '© مشارکت‌کنندگان OpenStreetMap', 'topersia' )" );
 	},
 	array( $jsz2c, $zones2c ), array( str_replace( 'locale: cfg.locale || {}', 'locale: {}', $jsz2c ), $zones2c ) );

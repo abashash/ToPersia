@@ -2675,6 +2675,18 @@ if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 			$cfg['points'] = esc_url_raw( add_query_arg( 'context', absint( $post_id ), rest_url( 'topersia/v1/map-points' ) ) );
 		}
 
+		/* مرز محدوده — GeoJSON مشتق از OSM (scripts/tp-boundaries.php)؛ فقط اگر فایلِ همین موجودیت هست.  P5-D351 */
+		$uid = function_exists( 'topersia_g_boundary_key' ) ? topersia_g_boundary_key( topersia_g_text( $post_id, 'entity_uid' ) ) : '';
+
+		if ( '' !== $uid && function_exists( 'wp_get_upload_dir' ) ) {
+			$up   = wp_get_upload_dir();
+			$file = trailingslashit( (string) $up['basedir'] ) . 'tiles/boundaries/' . $uid . '.geojson';
+
+			if ( is_file( $file ) ) {
+				$cfg['bound'] = set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . 'tiles/boundaries/' . $uid . '.geojson' ) . '?v=' . filemtime( $file );
+			}
+		}
+
 		return " data-tp-map-cfg='" . esc_attr( wp_json_encode( $cfg ) ) . "'";
 	}
 }
