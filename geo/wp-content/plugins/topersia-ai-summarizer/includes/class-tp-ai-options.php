@@ -68,6 +68,10 @@ class TP_AI_Options {
 			'internal_types'       => array( 'summary', 'keypoints', 'plan' ),
 			'internal_default_type' => 'summary',
 			'internal_auto_first'  => 0,
+			// 1.3.0 · P5-D358: summaries are made by the site admin only.
+			'visitor_requests'     => 0,  // «اجازۀ درخواست بازدیدکننده (نسخه‌های بعد)» — off: only an editor of the post generates.
+			'auto_generate'        => 0,  // generate in the queue after publish / content change.
+			'admin_daily_cap'      => 50, // admin-side generations (metabox, bulk, auto) per day.
 			'panel_position'       => 'manual',
 			// Analytics.
 			'analytics_enabled'    => 0,
@@ -512,7 +516,7 @@ class TP_AI_Options {
 		$radius           = isset( $input['radius'] ) ? absint( $input['radius'] ) : $defaults['radius'];
 		$output['radius'] = min( 40, $radius );
 
-		foreach ( array( 'show_on_archive', 'show_icons', 'copy_button', 'new_tab', 'nofollow', 'track_clicks', 'internal_enabled', 'internal_auto_first', 'analytics_enabled' ) as $flag ) {
+		foreach ( array( 'show_on_archive', 'show_icons', 'copy_button', 'new_tab', 'nofollow', 'track_clicks', 'internal_enabled', 'internal_auto_first', 'analytics_enabled', 'visitor_requests', 'auto_generate' ) as $flag ) {
 			$output[ $flag ] = empty( $input[ $flag ] ) ? 0 : 1;
 		}
 
@@ -533,6 +537,7 @@ class TP_AI_Options {
 		$output['internal_context_chars']  = isset( $input['internal_context_chars'] ) ? min( 200000, max( 1000, absint( $input['internal_context_chars'] ) ) ) : $defaults['internal_context_chars'];
 		$output['internal_cache_hours']    = isset( $input['internal_cache_hours'] ) ? min( 720, max( 1, absint( $input['internal_cache_hours'] ) ) ) : $defaults['internal_cache_hours'];
 		$output['internal_throttle']       = isset( $input['internal_throttle'] ) ? min( 100, max( 1, absint( $input['internal_throttle'] ) ) ) : $defaults['internal_throttle'];
+		$output['admin_daily_cap']         = isset( $input['admin_daily_cap'] ) ? min( 5000, absint( $input['admin_daily_cap'] ) ) : $defaults['admin_daily_cap'];
 
 		$types = isset( $input['internal_types'] ) ? (array) $input['internal_types'] : array();
 		$types = array_values( array_intersect( array_map( 'sanitize_key', $types ), self::panel_types() ) );

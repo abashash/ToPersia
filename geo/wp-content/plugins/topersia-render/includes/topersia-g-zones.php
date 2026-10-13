@@ -4625,8 +4625,8 @@ if ( ! function_exists( 'topersia_g_ai_icons' ) ) {
  *
  * فقط کش — همان مسیری که پنلِ خودِ افزونه می‌خواند:
  *   زبان     `TP_AI_Localize::for_post()`
- *   خواندن   `TP_AI_Summary::get_cached()` — بایگانیِ جدولِ خودش، بعد متای
- *            `_tpas_ai_{type}_{lang}`
+ *   خواندن   `tpas_get_summary( $id, $type, $lang )` (خلاصه‌ساز ۱٫۳٫۰؛ فقط خواندنی، بی تولید) — پیش از آن `TP_AI_Summary::get_cached()`
+ *            ← بایگانیِ جدولِ خودش، بعد متای `_tpas_ai_{type}_{lang}`
  *
  * «تولید آنی» ۴٫۲٫۱ (`internal_text()` در رندر) برداشته شد.  P5-D235
  * مهمان و ربات هیچ تولیدی نمی‌سازند؛ واردشده با کلیک، سمت سرور و با نانس
@@ -4642,7 +4642,10 @@ if ( ! function_exists( 'topersia_g_ai_outputs' ) ) {
 
 		$out = array();
 
-		if ( ! class_exists( 'TP_AI_Summary' ) || ! method_exists( 'TP_AI_Summary', 'get_cached' ) ) {
+		/* API پایدار خلاصه‌ساز ۱٫۳٫۰ — فقط خواندن، بی تولید و بی صف؛ نسخۀ پیشین آن: get_cached */
+		$stable = function_exists( 'tpas_get_summary' );
+
+		if ( ! $stable && ( ! class_exists( 'TP_AI_Summary' ) || ! method_exists( 'TP_AI_Summary', 'get_cached' ) ) ) {
 			return $out;
 		}
 
@@ -4650,7 +4653,7 @@ if ( ! function_exists( 'topersia_g_ai_outputs' ) ) {
 
 		foreach ( array( 'summary', 'keypoints', 'plan' ) as $type ) {
 
-			$row  = TP_AI_Summary::get_cached( $pid, $type, $lang );
+			$row  = $stable ? tpas_get_summary( $pid, $type, $lang ) : TP_AI_Summary::get_cached( $pid, $type, $lang );
 			$text = ( is_array( $row ) && isset( $row['text'] ) && is_scalar( $row['text'] ) ) ? (string) $row['text'] : '';
 			$text = topersia_g_ai_plain( $text );
 
@@ -4692,7 +4695,7 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 
 		/*
 		 * فقط خروجیِ ذخیره‌شده، برای هر بازدیدکننده — مهمان و واردشده.  P5-D358
-		 * خروجیِ ذخیره‌شدۀ خلاصه‌ساز اول (امروز `TP_AI_Summary::get_cached`؛ پس از ادغام جلسۀ ابری E `tpas_get_summary`)،
+		 * خروجیِ ذخیره‌شدۀ خلاصه‌ساز اول (`tpas_get_summary`؛ در نبودش `TP_AI_Summary::get_cached`)،
 		 * وگرنه `ai_summary` دستی؛ هیچ‌کدام نبود ← بلوک نمی‌آید. نه دکمۀ تولید، نه دعوت به ثبت‌نام برای AI، نه درخواست AJAX:
 		 * ویژگی‌های تولید (نانس و نشانی AJAX) چاپ نمی‌شوند، پس جاوااسکریپت صفحه چیزی نمی‌فرستد. تولید فقط مدیر، از پیشخوان.
 		 */

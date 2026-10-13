@@ -3,7 +3,7 @@
  * Plugin Name:       ToPersia AI Summarizer
  * Plugin URI:        https://topersia.com/
  * Description:       Dedicated for ToPersia: buttons that open AI assistants (ChatGPT, Perplexity, Claude, Grok, Copilot, Gemini, DeepSeek) with a ready structured-summary prompt, plus an on-page AI panel that generates summaries server-side from the current page.
- * Version:           1.2.3
+ * Version:           1.3.0
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            ToPersia
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TP_AI_VERSION', '1.2.3' );
+define( 'TP_AI_VERSION', '1.3.0' );
 define( 'TP_AI_FILE', __FILE__ );
 define( 'TP_AI_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TP_AI_URL', plugin_dir_url( __FILE__ ) );
@@ -37,6 +37,7 @@ require_once TP_AI_PATH . 'includes/class-tp-ai-shortcode.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-block.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-tracker.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-summary.php';
+require_once TP_AI_PATH . 'includes/class-tp-ai-generator.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-core-bridge.php';
 
 if ( is_admin() ) {
@@ -73,6 +74,7 @@ function tp_ai_init() {
 	TP_AI_Block::init();
 	TP_AI_Tracker::init();
 	TP_AI_Summary::init();
+	TP_AI_Generator::init(); // 1.3.0 · P5-D358: admin-only generation, queue job, auto-generate.
 	TP_AI_Core_Bridge::init();
 
 	// 1.2.2 · P5-D355: whenever the settings row is created or saved, keep it out of autoload.

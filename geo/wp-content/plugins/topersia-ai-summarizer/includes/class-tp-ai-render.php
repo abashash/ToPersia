@@ -234,6 +234,8 @@ class TP_AI_Render {
 		$enabled        = ! empty( $options['internal_enabled'] );
 		$tracking       = ! empty( $options['track_clicks'] );
 		$serve_internal = TP_AI_Summary::engine_is_internal();
+		/* 1.3.0 · P5-D358: only an editor of this post asks for a summary while visitor requests are off */
+		$may_generate   = TP_AI_Summary::visitor_requests() || ( $post_id && current_user_can( 'edit_post', $post_id ) );
 
 		$config = array(
 			'post'    => $post_id,
@@ -244,6 +246,7 @@ class TP_AI_Render {
 			// offered here, regardless of the internal_auto_first setting -
 			// the public component only ever generates on explicit request.
 			'auto'    => 0,
+			'gen'     => $may_generate ? 1 : 0,
 			'default' => $default_type,
 			'msg'     => array(
 				'copy'       => $strings['ai_copy'],
@@ -292,7 +295,8 @@ class TP_AI_Render {
 		// immediately for whichever type is already cached - still only on
 		// a page where the panel is shown, never as a background/automatic
 		// call triggered by this render.
-		if ( ! $cached && $serve_internal && 'summary' === $default_type ) {
+		// 1.3.0 · P5-D358: a page view never builds anything while visitor requests are off.
+		if ( ! $cached && $serve_internal && 'summary' === $default_type && TP_AI_Summary::visitor_requests() ) {
 			$text = TP_AI_Summary::internal_text( $post_id, $default_type, $lang );
 
 			if ( '' !== trim( (string) $text ) ) {

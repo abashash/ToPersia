@@ -15,6 +15,10 @@ if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
 	define( 'HOUR_IN_SECONDS', 3600 );
 }
 
+if ( ! defined( 'DAY_IN_SECONDS' ) ) {
+	define( 'DAY_IN_SECONDS', 86400 );
+}
+
 if ( ! defined( 'MINUTE_IN_SECONDS' ) ) {
 	define( 'MINUTE_IN_SECONDS', 60 );
 }
@@ -528,6 +532,13 @@ function wp_list_pluck( $list, $field, $index_key = null ) {
  * @return string
  */
 function add_query_arg( $key, $value = null, $url = '' ) {
+	if ( is_array( $key ) ) { // WordPress form: add_query_arg( array $args, string $url )
+		$url = (string) $value;
+		foreach ( $key as $k => $v ) {
+			$url = add_query_arg( $k, $v, $url );
+		}
+		return $url;
+	}
 	$separator = ( false === strpos( $url, '?' ) ) ? '?' : '&';
 	return $url . $separator . rawurlencode( (string) $key ) . '=' . rawurlencode( (string) $value );
 }
@@ -582,7 +593,8 @@ function wp_generate_password( $length = 12, $special_chars = true, $extra_speci
 }
 
 function current_user_can( $cap, $args = null ) {
-	return true;
+	/* 1.3.0: $GLOBALS['tp_cannot'][ $cap ] = true denies one capability (a subscriber, a guest) */
+	return empty( $GLOBALS['tp_cannot'][ $cap ] );
 }
 
 /* ۱٫۱٫۱ — پنل خروجی را از ۱٫۱٫۰ به ورود وابسته کرد و stub جا مانده بود. */
@@ -641,6 +653,7 @@ function wp_nonce_field( $action = -1, $name = '_wpnonce', $referer = true, $ech
 
 function wp_remote_post( $url, $args = array() ) {
 	$GLOBALS['tp_http_last'] = array( 'url' => $url, 'args' => $args ); // 1.2.2: what the prompt actually carried
+	$GLOBALS['tp_http_calls'] = ( $GLOBALS['tp_http_calls'] ?? 0 ) + 1; // 1.3.0: every outbound engine call
 	if ( isset( $GLOBALS['tp_http_override'] ) ) {
 		$r = $GLOBALS['tp_http_override'];
 		if ( is_a( $r, 'WP_Error' ) ) {

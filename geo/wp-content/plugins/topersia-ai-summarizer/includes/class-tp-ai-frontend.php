@@ -50,6 +50,7 @@ class TP_AI_Frontend {
 		wp_localize_script( 'topersia-ai', 'tpasFront', array(
 			'ajax'   => admin_url( 'admin-ajax.php' ),
 			'nonce'  => wp_create_nonce( 'tpas_ai' ),
+			'gen'    => TP_AI_Summary::visitor_requests() ? 1 : 0, // 1.3.0 · P5-D358: per-panel `gen` decides; this is the site switch.
 			'copied' => esc_html__( 'Copied to clipboard.', 'topersia-ai-summarizer' ),
 		) );
 

@@ -183,9 +183,6 @@ if ( ! function_exists( 'topersia_render_js_strings' ) ) {
 	function topersia_render_js_strings() {
 		return array(
 			'کپی شد ✓',
-			'در حال ساختن…',
-			'ساختن ممکن نشد.',
-			'ارتباط برقرار نشد. دوباره تلاش کنید.',
 			'به همۀ معیارها امتیاز بدهید.',
 			'متن نظر دست‌کم ده نویسه باشد.',
 			'ثبت ممکن نشد.',

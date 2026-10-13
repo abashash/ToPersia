@@ -1446,51 +1446,7 @@
 					return;
 				}
 
-				/*
-				 * ذخیره نیست: فقط واردشده می‌سازد، سمت سرور، از نقطۀ خودِ
-				 * خلاصه‌ساز با نانس — همان کش مشترکِ (پست، نوع، زبان) و سقف‌های
-				 * روزانه‌ای که «هستۀ نمایش» پیش از آن می‌سنجد.  ۴٫۳٫۰ بند ۴
-				 * مهمان این ویژگی را ندارد (`data-tp-ai-gen` برایش چاپ نمی‌شود).
-				 */
-				var nonce = out.getAttribute( 'data-tp-ai-gen' );
-
-				if ( ! nonce || ! window.fetch || btn.disabled ) {
-					return;
-				}
-
-				var form = new URLSearchParams();
-				form.set( 'action', 'tpas_ai_generate' );
-				form.set( 'nonce', nonce );
-				form.set( 'post', out.getAttribute( 'data-tp-ai-post' ) || '' );
-				form.set( 'type', 'bullets' === kind ? 'keypoints' : kind );
-				form.set( 'lang', out.getAttribute( 'data-tp-ai-lang' ) || 'fa' );
-				form.set( 'url', out.getAttribute( 'data-tp-ai-url' ) || location.href );
-
-				btn.disabled     = true;
-				body.textContent = t( 'در حال ساختن…' );
-				mark();
-
-				fetch( out.getAttribute( 'data-tp-ai-ajax' ) || '/wp-admin/admin-ajax.php', {
-					method: 'POST',
-					credentials: 'same-origin',
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-					body: form.toString()
-				} ).then( function ( r ) { return r.json(); } ).then( function ( r ) {
-
-					if ( r && r.success && r.data && r.data.text ) {
-						data[ kind ] = String( r.data.text )
-							.replace( /<[^>]*>/g, '' ).replace( /\*\*|__/g, '' )
-							.replace( /^[\t ]*[-*]\s+/gm, '• ' ).trim();
-						body.textContent = data[ kind ];
-						return;
-					}
-
-					body.textContent = ( r && r.data && r.data.message ) ? r.data.message : t( 'ساختن ممکن نشد.' );
-				} ).catch( function () {
-					body.textContent = t( 'ارتباط برقرار نشد. دوباره تلاش کنید.' );
-				} ).then( function () {
-					btn.disabled = false;
-				} );
+				/* خروجی ذخیره نیست ← کاری نمی‌کند: صفحه برای هیچ‌کس تولید نمی‌خواهد و هیچ درخواستی نمی‌فرستد؛ دکمۀ هر نوع فقط وقتی هست که خروجی ذخیره‌شده‌اش هست. تولید فقط مدیر از متاباکس «ToPersia AI».  P5-D358 */
 			} );
 		} );
 	} )();

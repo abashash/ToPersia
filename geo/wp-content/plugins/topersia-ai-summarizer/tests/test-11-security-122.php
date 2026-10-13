@@ -32,6 +32,7 @@ update_option( TP_AI_Options::OPTION_KEY, array(
 		array( 'id' => 'eng_test', 'provider' => 'deepseek', 'api_key' => 'sk-live', 'model' => '', 'base_url' => '' ),
 	),
 	'internal_default_engine' => 'eng_test',
+	'visitor_requests'        => 1, // 1.3.0: these 1.2.2 claims are about the visitor path (P5-D358 keeps it behind this option)
 ) );
 TP_AI_Options::flush();
 $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
