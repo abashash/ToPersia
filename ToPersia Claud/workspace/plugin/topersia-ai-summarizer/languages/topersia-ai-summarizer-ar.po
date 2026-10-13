@@ -472,3 +472,79 @@ msgstr "المفتاح محفوظ"
 #: includes/class-tp-ai-admin.php
 msgid "Set in wp-config"
 msgstr "معيّن في wp-config"
+
+#: includes/class-tp-ai-admin.php
+msgid "Not made"
+msgstr "لم يُنشأ"
+
+#: includes/class-tp-ai-admin.php
+msgid "Fresh"
+msgstr "حديث"
+
+#: includes/class-tp-ai-admin.php
+msgid "Stale"
+msgstr "قديم"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI outputs"
+msgstr "مخرجات الذكاء الاصطناعي"
+
+#: includes/class-tp-ai-admin.php
+msgid "Made once this post is published."
+msgstr "يُنشأ بعد نشر هذا المحتوى."
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate"
+msgstr "إنشاء"
+
+#: includes/class-tp-ai-admin.php
+msgid "Regenerate"
+msgstr "إعادة الإنشاء"
+
+#: includes/class-tp-ai-admin.php
+msgid "Generating…"
+msgstr "جارٍ الإنشاء…"
+
+#: includes/class-tp-ai-admin.php
+msgid "Done."
+msgstr "تم."
+
+#: includes/class-tp-ai-admin.php
+msgid "Generation failed."
+msgstr "فشل الإنشاء."
+
+#: includes/class-tp-ai-admin.php
+msgid "Daily generation cap reached."
+msgstr "تم بلوغ الحد اليومي للإنشاء."
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate AI summary"
+msgstr "إنشاء ملخص بالذكاء الاصطناعي"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI summaries — queued: %1$d · made now: %2$d · already fresh: %3$d · over the daily cap: %4$d · skipped: %5$d"
+msgstr "ملخصات الذكاء الاصطناعي — في الطابور: %1$d · أُنشئ الآن: %2$d · حديث مسبقًا: %3$d · فوق الحد اليومي: %4$d · تم تخطيه: %5$d"
+
+#: includes/class-tp-ai-admin.php
+msgid "The ToPersia Core queue is not available: only a small batch was made now."
+msgstr "طابور نواة ToPersia غير متاح: أُنشئت دفعة صغيرة الآن فقط."
+
+#: includes/class-tp-ai-admin.php
+msgid "Who makes the summaries"
+msgstr "من يُنشئ الملخصات"
+
+#: includes/class-tp-ai-admin.php
+msgid "Allow visitor requests (later versions)"
+msgstr "السماح بطلبات الزوار (إصدارات لاحقة)"
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate automatically after publishing or a content change"
+msgstr "إنشاء تلقائي بعد النشر أو تغيير المحتوى"
+
+#: includes/class-tp-ai-admin.php
+msgid "Admin generations per day"
+msgstr "عمليات الإنشاء من المدير يوميًا"
+
+#: includes/class-tp-ai-admin.php
+msgid "Metabox, bulk action and automatic generation together. The site daily cap of ToPersia Render also applies."
+msgstr "صندوق المقالة والإجراء الجماعي والإنشاء التلقائي معًا. ينطبق أيضًا الحد اليومي للموقع في ToPersia Render."

@@ -625,7 +625,6 @@ return array(
 	'دنبال می‌کنید'                            => array( 'en' => 'Following', 'ar' => 'تتابعه' ),
 	'دنبال‌کردن ممکن نشد.'                     => array( 'en' => 'Could not follow.', 'ar' => 'تعذّرت المتابعة.' ),
 	'ارتباط برقرار نشد.'                       => array( 'en' => 'Could not connect.', 'ar' => 'تعذّر الاتصال.' ),
-	'ارتباط برقرار نشد. دوباره تلاش کنید.'     => array( 'en' => 'Could not connect. Please try again.', 'ar' => 'تعذّر الاتصال. حاول مرة أخرى.' ),
 	'ToPersia را منبع ترجیحی گوگل کنید'        => array( 'en' => 'Make ToPersia a preferred source on Google', 'ar' => 'اجعل ToPersia مصدرًا مفضلًا في Google' ),
 	'مطالب ما را بیشتر در نتایج گوگل و AI Mode ببینید' => array( 'en' => 'See more of our content in Google results and AI Mode', 'ar' => 'شاهد المزيد من محتوانا في نتائج Google وAI Mode' ),
 
@@ -652,8 +651,6 @@ return array(
 	'ماهواره'   => array( 'en' => 'Satellite', 'ar' => 'الأقمار الصناعية' ),
 	'سبک نقشه'  => array( 'en' => 'Map style', 'ar' => 'نمط الخريطة' ),
 	'این خروجی صرفاً از دادۀ موجود همین صفحه ساخته شده است.' => array( 'en' => 'This output was generated only from the data on this page.', 'ar' => 'أُنشئت هذه المخرجات من بيانات هذه الصفحة فقط.' ),
-	'در حال ساختن…'                   => array( 'en' => 'Generating…', 'ar' => 'جارٍ الإنشاء…' ),
-	'ساختن ممکن نشد.'                 => array( 'en' => 'Could not generate.', 'ar' => 'تعذّر الإنشاء.' ),
 	'این محتوا در دسترس نیست.'        => array( 'en' => 'This content is not available.', 'ar' => 'هذا المحتوى غير متاح.' ),
 	'سقف روزانۀ شما برای تولید پر شده است؛ فردا دوباره امتحان کنید.' => array( 'en' => 'You have reached your daily generation limit; try again tomorrow.', 'ar' => 'بلغتَ حدك اليومي للإنشاء؛ حاول مجددًا غدًا.' ),
 	'سقف روزانۀ تولید سایت پر شده است؛ فردا دوباره امتحان کنید.' => array( 'en' => 'The site has reached its daily generation limit; try again tomorrow.', 'ar' => 'بلغ الموقع حده اليومي للإنشاء؛ حاول مجددًا غدًا.' ),

@@ -35,6 +35,7 @@ require_once TP_AI_PATH . 'includes/class-tp-ai-shortcode.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-block.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-tracker.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-summary.php';
+require_once TP_AI_PATH . 'includes/class-tp-ai-generator.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-core-bridge.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-admin.php';
 

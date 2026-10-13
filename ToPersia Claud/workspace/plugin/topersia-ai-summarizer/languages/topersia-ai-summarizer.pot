@@ -472,3 +472,79 @@ msgstr ""
 #: includes/class-tp-ai-admin.php
 msgid "Set in wp-config"
 msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Not made"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Fresh"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Stale"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "AI outputs"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Made once this post is published."
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Regenerate"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Generating…"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Done."
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Generation failed."
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Daily generation cap reached."
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate AI summary"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "AI summaries — queued: %1$d · made now: %2$d · already fresh: %3$d · over the daily cap: %4$d · skipped: %5$d"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "The ToPersia Core queue is not available: only a small batch was made now."
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Who makes the summaries"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Allow visitor requests (later versions)"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate automatically after publishing or a content change"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Admin generations per day"
+msgstr ""
+
+#: includes/class-tp-ai-admin.php
+msgid "Metabox, bulk action and automatic generation together. The site daily cap of ToPersia Render also applies."
+msgstr ""

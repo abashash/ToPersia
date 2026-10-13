@@ -472,3 +472,79 @@ msgstr "کلید ذخیره شده است"
 #: includes/class-tp-ai-admin.php
 msgid "Set in wp-config"
 msgstr "تنظیم‌شده در wp-config"
+
+#: includes/class-tp-ai-admin.php
+msgid "Not made"
+msgstr "ساخته نشده"
+
+#: includes/class-tp-ai-admin.php
+msgid "Fresh"
+msgstr "تازه"
+
+#: includes/class-tp-ai-admin.php
+msgid "Stale"
+msgstr "کهنه"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI outputs"
+msgstr "خروجی‌های هوش مصنوعی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Made once this post is published."
+msgstr "پس از انتشار این نوشته ساخته می‌شود."
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate"
+msgstr "ساخت"
+
+#: includes/class-tp-ai-admin.php
+msgid "Regenerate"
+msgstr "بازسازی"
+
+#: includes/class-tp-ai-admin.php
+msgid "Generating…"
+msgstr "در حال ساخت…"
+
+#: includes/class-tp-ai-admin.php
+msgid "Done."
+msgstr "انجام شد."
+
+#: includes/class-tp-ai-admin.php
+msgid "Generation failed."
+msgstr "ساخت ناموفق بود."
+
+#: includes/class-tp-ai-admin.php
+msgid "Daily generation cap reached."
+msgstr "سقف روزانۀ ساخت پر شده است."
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate AI summary"
+msgstr "ساخت خلاصۀ هوش مصنوعی"
+
+#: includes/class-tp-ai-admin.php
+msgid "AI summaries — queued: %1$d · made now: %2$d · already fresh: %3$d · over the daily cap: %4$d · skipped: %5$d"
+msgstr "خلاصه‌های هوش مصنوعی — در صف: %1$d · ساخته‌شده: %2$d · از پیش تازه: %3$d · بیرون از سقف روزانه: %4$d · ردشده: %5$d"
+
+#: includes/class-tp-ai-admin.php
+msgid "The ToPersia Core queue is not available: only a small batch was made now."
+msgstr "صف هستۀ ToPersia در دسترس نیست: فقط دستۀ کوچکی همین حالا ساخته شد."
+
+#: includes/class-tp-ai-admin.php
+msgid "Who makes the summaries"
+msgstr "چه کسی خلاصه‌ها را می‌سازد"
+
+#: includes/class-tp-ai-admin.php
+msgid "Allow visitor requests (later versions)"
+msgstr "اجازۀ درخواست بازدیدکننده (نسخه‌های بعد)"
+
+#: includes/class-tp-ai-admin.php
+msgid "Generate automatically after publishing or a content change"
+msgstr "ساخت خودکار پس از انتشار یا تغییر محتوا"
+
+#: includes/class-tp-ai-admin.php
+msgid "Admin generations per day"
+msgstr "ساخت به دست مدیر در روز"
+
+#: includes/class-tp-ai-admin.php
+msgid "Metabox, bulk action and automatic generation together. The site daily cap of ToPersia Render also applies."
+msgstr "متاباکس، کنش گروهی و ساخت خودکار با هم. سقف روزانۀ سایت در ToPersia Render هم برقرار است."

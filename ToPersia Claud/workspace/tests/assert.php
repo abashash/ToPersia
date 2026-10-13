@@ -1705,6 +1705,14 @@ if ( ! class_exists( 'TP_AI_Localize' ) ) {
 	}
 }
 
+/* خلاصه‌ساز ۱٫۳٫۰ — API پایدار فقط‌خواندنی؛ ساختگی همان فروشگاه را می‌خواند و می‌شمارد (P5-D358) */
+if ( ! function_exists( 'tpas_get_summary' ) ) {
+	function tpas_get_summary( $post_id, $type = 'summary', $lang = '' ) {
+		$GLOBALS['tp_ai_stable'][] = $post_id . '/' . $type . '/' . $lang;
+		return TP_AI_Summary::get_cached( $post_id, $type, $lang );
+	}
+}
+
 $ai_block = function () {
 	$h = r( 20, 'tp_ai' );
 	preg_match( "#data-tp-ai='([^']*)'#", $h, $m );
@@ -1722,6 +1730,11 @@ t( 'AI: مهمان، بی‌خروجیِ افزونه — خلاصه از ai_sum
 	&& false === strpos( $ai0, 'امکانات بیشتر' ) && false === strpos( $ai0, 'tp-ai__signup' ) && false === strpos( $ai0, 'data-tp-ai-gen' )
 	&& array( '20/summary/fa', '20/keypoints/fa', '20/plan/fa' ) === $GLOBALS['tp_ai_calls'],
 	implode( ',', $GLOBALS['tp_ai_calls'] ) );
+
+t( 'AI: بلوک از tpas_get_summary( $id, $type, $lang ) می‌خواند، نه get_cached؛ هر سه نوع به زبان همان پست؛ در نبود تابع، get_cached می‌ماند  P5-D358 · خلاصه‌ساز 1.3.0',
+	array( '20/summary/fa', '20/keypoints/fa', '20/plan/fa' ) === $GLOBALS['tp_ai_stable']
+	&& false !== strpos( file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), "\$row  = \$stable ? tpas_get_summary( \$pid, \$type, \$lang ) : TP_AI_Summary::get_cached( \$pid, \$type, \$lang );" ),
+	implode( ',', (array) $GLOBALS['tp_ai_stable'] ) );
 
 /* ۲ — افزونه هر سه را دارد: همه از افزونه، با «-» به «•» و بی‌«**» */
 $GLOBALS['tp_ai_fake'] = array( 20 => array(
@@ -1775,7 +1788,7 @@ $ai_all = array( $ai0, $ai2, $ai3, $ai3u );
 $ai_bad = function ( $list ) { return array_values( array_filter( $list, function ( $h ) { return false !== strpos( $h, 'data-tp-ai-gen' ) || false !== strpos( $h, 'data-tp-ai-ajax' ) || false !== strpos( $h, 'tpas_ai' ) || false !== strpos( $h, 'tp-ai__signup' ); } ) ); };
 t( 'AI: صفحه برای مهمان و مشترک هیچ درخواست tpas_ai_generate نمی‌فرستد — نه نانس، نه نشانی AJAX، نه دکمهٔ تولید؛ جهش: نانسی که چاپ شود گرفته می‌شود  P5-D358',
 	array() === $ai_bad( $ai_all ) && 1 === count( $ai_bad( array( $ai3u . ' data-tp-ai-gen="x"' ) ) )
-	&& false === strpos( file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), 'data-tp-ai-gen' ) && false !== strpos( $js_zones, "if ( ! nonce || ! window.fetch || btn.disabled ) {" ),
+	&& false === strpos( file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), 'data-tp-ai-gen' ) && false === strpos( $js_zones, 'tpas_ai_generate' ) && false === strpos( $js_zones, 'data-tp-ai-ajax' ),
 	count( $ai_bad( $ai_all ) ) . ' حالت' );
 
 $js_media = preg_match( '#/\* ══ صوت و ویدیو — P5-D222.*?/\* ══ مودالِ فهرست#s', $js_zones, $jm9 ) ? $jm9[0] : '';

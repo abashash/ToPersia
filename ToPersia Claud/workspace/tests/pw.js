@@ -19,8 +19,18 @@ function patch( type, extra ) {
 
 	const launch = type.launch.bind( type );
 
-	type.launch = function ( options ) {
-		return launch( extra( options || {} ) );
+	/* TP_TIMEOUT_X (ماشین کند): مهلت پیش‌فرض هر کنش و انتظار Playwright هم ضرب می‌شود، نه فقط مهلت‌های خودِ راننده */
+	const X = Math.max( 1, parseFloat( process.env.TP_TIMEOUT_X || '1' ) || 1 );
+
+	type.launch = async function ( options ) {
+		const browser = await launch( extra( options || {} ) );
+		if ( X > 1 ) {
+			const nc = browser.newContext.bind( browser );
+			browser.newContext = async function ( o ) { const c = await nc( o ); c.setDefaultTimeout( 30000 * X ); return c; };
+			const np = browser.newPage.bind( browser );
+			browser.newPage = async function ( o ) { const p = await np( o ); p.setDefaultTimeout( 30000 * X ); return p; };
+		}
+		return browser;
 	};
 
 	type.__tpDirect = true;

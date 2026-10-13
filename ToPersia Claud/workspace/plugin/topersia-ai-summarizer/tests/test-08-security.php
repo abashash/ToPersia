@@ -68,7 +68,17 @@ $_POST = array( 'nonce' => 'totally-bogus', 'lang' => 'en', 'type' => 'summary',
 try {
 	TP_AI_Summary::handle_ajax();
 } catch ( TP_Test_Ajax_Exit $e ) {}
-t( 'xss: bad nonce dies before any JSON is sent', null === $GLOBALS['tp_ajax'] );
+/* 1.3.0 · P5-D358: with visitor requests off (default) the editor-only rule answers first: 403 */
+t( 'xss: bad nonce -> 403 before any engine work (visitor requests off)', is_array( $GLOBALS['tp_ajax'] ) && 403 === $GLOBALS['tp_ajax']['status'] );
+update_option( TP_AI_Options::OPTION_KEY, array_merge( (array) get_option( TP_AI_Options::OPTION_KEY, array() ), array( 'visitor_requests' => 1 ) ) );
+TP_AI_Options::flush();
+$GLOBALS['tp_ajax'] = null;
+try {
+	TP_AI_Summary::handle_ajax();
+} catch ( TP_Test_Ajax_Exit $e ) {}
+t( 'xss: bad nonce dies before any JSON is sent (visitor requests on)', null === $GLOBALS['tp_ajax'] );
+update_option( TP_AI_Options::OPTION_KEY, array_merge( (array) get_option( TP_AI_Options::OPTION_KEY, array() ), array( 'visitor_requests' => 0 ) ) );
+TP_AI_Options::flush();
 
 $_POST = array( 'nonce' => wp_create_nonce( 'tpas_ai' ), 'lang' => 'en', 'type' => 'summary', 'post' => '42', 'url' => '' );
 $GLOBALS['tp_http_override'] = new WP_Error( 'network', 'nope' );

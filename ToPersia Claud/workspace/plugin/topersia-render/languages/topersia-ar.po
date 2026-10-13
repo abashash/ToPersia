@@ -138,10 +138,6 @@ msgstr "المتابعة في محرك ذكاء اصطناعي"
 msgid "ارتباط برقرار نشد."
 msgstr "تعذّر الاتصال."
 
-#: topersia-render.php
-msgid "ارتباط برقرار نشد. دوباره تلاش کنید."
-msgstr "تعذّر الاتصال. حاول مرة أخرى."
-
 #: includes/topersia-g-map.php
 msgid "ارتفاع"
 msgstr "الارتفاع"
@@ -783,10 +779,6 @@ msgstr "قيد الاستخدام"
 msgid "در حال به‌روزرسانی"
 msgstr "قيد التحديث"
 
-#: topersia-render.php
-msgid "در حال ساختن…"
-msgstr "جارٍ الإنشاء…"
-
 #: includes/topersia-g-map.php
 msgid "در حال کاوش"
 msgstr "قيد التنقيب"
@@ -1056,10 +1048,6 @@ msgstr "السلاسل الفرعية"
 #: includes/topersia-g-ai.php
 msgid "ساختن خلاصه فعلاً فقط برای مدیر است."
 msgstr "إنشاء الملخصات متاح للمدير فقط حالياً."
-
-#: topersia-render.php
-msgid "ساختن ممکن نشد."
-msgstr "تعذّر الإنشاء."
 
 #: includes/topersia-g-map.php
 msgid "ساز سنتی"

@@ -137,10 +137,6 @@ msgstr ""
 msgid "ارتباط برقرار نشد."
 msgstr ""
 
-#: topersia-render.php
-msgid "ارتباط برقرار نشد. دوباره تلاش کنید."
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "ارتفاع"
 msgstr ""
@@ -782,10 +778,6 @@ msgstr ""
 msgid "در حال به‌روزرسانی"
 msgstr ""
 
-#: topersia-render.php
-msgid "در حال ساختن…"
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "در حال کاوش"
 msgstr ""
@@ -1054,10 +1046,6 @@ msgstr ""
 
 #: includes/topersia-g-ai.php
 msgid "ساختن خلاصه فعلاً فقط برای مدیر است."
-msgstr ""
-
-#: topersia-render.php
-msgid "ساختن ممکن نشد."
 msgstr ""
 
 #: includes/topersia-g-map.php

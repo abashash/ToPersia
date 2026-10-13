@@ -156,6 +156,12 @@
 			return;
 		}
 
+		/* 1.3.0 · P5-D358: only an editor of this post (or, later, a visitor when the
+		   admin allows it) asks for a generation - otherwise no request at all. */
+		if (!cfgData.gen) {
+			return;
+		}
+
 		textWrap.setAttribute('data-tpas-state', 'loading');
 		textWrap.textContent = cfgData.msg.loading;
 
@@ -244,7 +250,7 @@
 			markType(panel, config.default || 'summary');
 			wirePanel(panel);
 
-			if (config.auto) {
+			if (config.auto && config.gen) {
 				setTimeout(function () {
 					generate(panel, currentType(panel));
 				}, 400);

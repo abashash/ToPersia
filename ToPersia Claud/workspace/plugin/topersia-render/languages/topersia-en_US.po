@@ -138,10 +138,6 @@ msgstr "Continue in an AI engine"
 msgid "ارتباط برقرار نشد."
 msgstr "Could not connect."
 
-#: topersia-render.php
-msgid "ارتباط برقرار نشد. دوباره تلاش کنید."
-msgstr "Could not connect. Please try again."
-
 #: includes/topersia-g-map.php
 msgid "ارتفاع"
 msgstr "Height"
@@ -783,10 +779,6 @@ msgstr "In use"
 msgid "در حال به‌روزرسانی"
 msgstr "Being updated"
 
-#: topersia-render.php
-msgid "در حال ساختن…"
-msgstr "Generating…"
-
 #: includes/topersia-g-map.php
 msgid "در حال کاوش"
 msgstr "Being excavated"
@@ -1056,10 +1048,6 @@ msgstr "Sub-ranges"
 #: includes/topersia-g-ai.php
 msgid "ساختن خلاصه فعلاً فقط برای مدیر است."
 msgstr "Creating summaries is limited to administrators for now."
-
-#: topersia-render.php
-msgid "ساختن ممکن نشد."
-msgstr "Could not generate."
 
 #: includes/topersia-g-map.php
 msgid "ساز سنتی"
