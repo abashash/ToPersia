@@ -60,7 +60,7 @@ function topersia_services_catalog() {
 		'routing'         => array( 'label' => 'مسیریابی', 'purpose' => 'مسیر میان دو نقطه — فاز ۳', 'provider' => 'neshan-routing', 'enabled' => false ),
 		'distance_matrix' => array( 'label' => 'ماتریس فاصله', 'purpose' => 'فاصلۀ چند نقطه — فاز ۳', 'provider' => 'neshan-matrix', 'enabled' => false ),
 		'geocoding'       => array( 'label' => 'آدرس و آدرس معکوس', 'purpose' => 'نقطه ← آدرس، آدرس ← نقطه — فاز ۳', 'provider' => 'neshan-geocoding', 'enabled' => false ),
-		'navigation'      => array( 'label' => 'پیوند مسیریابی', 'purpose' => 'دکمه‌های جعبۀ «مسیریابی» — فاز ۳', 'provider' => 'deep-links', 'enabled' => false ),
+		'navigation'      => array( 'label' => 'پیوند مسیریابی', 'purpose' => 'دکمه‌های جعبۀ «مسیریابی» — فاز ۳', 'provider' => 'deep-links', 'enabled' => true ),
 		'auth.google'     => array( 'label' => 'ورود با گوگل', 'purpose' => 'ورود و ثبت‌نام — فاز ۵', 'provider' => 'google-identity', 'enabled' => false ),
 	) );
 }
@@ -94,10 +94,19 @@ function topersia_services_core_adapters( $adapters ) {
 		'neshan-matrix'    => array( 'service' => 'distance_matrix', 'label' => 'نشان — ماتریس فاصله', 'needs_key' => true, 'key_const' => 'TOPERSIA_NESHAN_API_KEY', 'endpoint' => 'https://api.neshan.org/v1/distance-matrix', 'free_commercial' => true, 'doc' => 'https://platform.neshan.org/docs/api/routing-category/distance-matrix/', 'test' => 'topersia_service_test_neshan' ),
 		'neshan-geocoding' => array( 'service' => 'geocoding', 'label' => 'نشان — آدرس', 'needs_key' => true, 'key_const' => 'TOPERSIA_NESHAN_API_KEY', 'endpoint' => 'https://api.neshan.org/geocoding/v1/plus', 'free_commercial' => true, 'extra' => array( 'reverse' => 'https://api.neshan.org/v5/reverse' ), 'doc' => 'https://platform.neshan.org/docs/api/search-category/geocoding/', 'test' => 'topersia_service_test_neshan' ),
 		'deep-links'       => array( 'service' => 'navigation', 'label' => 'پیوند اپ مسیریابی', 'needs_key' => false, 'endpoint' => '', 'free_commercial' => true, 'extra' => array(
-			'google' => array( 'on' => false, 'pattern' => 'https://www.google.com/maps/dir/?api=1&destination={lat},{lng}' ),
-			'waze'   => array( 'on' => false, 'pattern' => 'https://waze.com/ul?ll={lat},{lng}&navigate=yes' ),
-			'neshan' => array( 'on' => false, 'pattern' => '' ),
-			'balad'  => array( 'on' => false, 'pattern' => '' ),
+			/*
+			 * الگوها فقط از مستند رسمی هر ارائه‌دهنده (قاعدۀ ۱۱)؛ `pattern` مختصات، `text` متن (نام + والد مکانی) با {q} = متنِ urlencode.
+			 * ارائه‌دهنده‌ای که حالت متنی را مستند نکرده `text` خالی دارد و در آن حالت نمی‌آید. مبدأ = مکان دستگاه که اپ مقصد خودش می‌گیرد.  P5-D350
+			 *   google  developers.google.com/maps/documentation/urls/get-started — «dir» با destination = «lat,lng» یا نام/نشانی
+			 *   waze    developers.google.com/waze/deeplinks — «ll» با navigate=yes؛ «q» جست‌وجوی متنی با navigate=yes
+			 *   neshan  github.com/NeshanMaps/Neshan-MCP (src/neshan_mcp/utils/deeplinks.py، سازمان رسمی نشان) — نمایش نقطه `https://nshn.ir/?lat=&lng=`؛
+			 *           مسیر بی origin و حالت متنی مستند نشده ← فقط مختصات و فقط نمایش نقطه
+			 *   balad   مستند رسمی یافت نشد ← خاموش تا کاربر مستند را بدهد
+			 */
+			'google' => array( 'on' => true, 'pattern' => 'https://www.google.com/maps/dir/?api=1&destination={lat},{lng}', 'text' => 'https://www.google.com/maps/dir/?api=1&destination={q}', 'doc' => 'https://developers.google.com/maps/documentation/urls/get-started' ),
+			'waze'   => array( 'on' => true, 'pattern' => 'https://waze.com/ul?ll={lat},{lng}&navigate=yes', 'text' => 'https://waze.com/ul?q={q}&navigate=yes', 'doc' => 'https://developers.google.com/waze/deeplinks' ),
+			'neshan' => array( 'on' => true, 'pattern' => 'https://nshn.ir/?lat={lat}&lng={lng}', 'text' => '', 'doc' => 'https://github.com/NeshanMaps/Neshan-MCP/blob/main/src/neshan_mcp/utils/deeplinks.py' ),
+			'balad'  => array( 'on' => false, 'pattern' => '', 'text' => '', 'doc' => '' ),
 		), 'doc' => 'SPRINT-4.4 بند ۳٫۲', 'note' => 'پیوند است، نه فراخوانی — آزمون اتصال ندارد' ),
 		'google-identity'  => array( 'service' => 'auth.google', 'label' => 'Google Identity', 'needs_key' => true, 'key_const' => 'TOPERSIA_GOOGLE_CLIENT_SECRET', 'endpoint' => '', 'free_commercial' => true, 'doc' => 'فاز ۵ — P5-D257', 'note' => 'فاز ۵' ),
 	) );

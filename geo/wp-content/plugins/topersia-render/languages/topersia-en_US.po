@@ -406,6 +406,10 @@ msgstr "Evening"
 msgid "بعدی"
 msgstr "Next"
 
+#: includes/topersia-g-routing.php
+msgid "بلد"
+msgstr "Balad"
+
 #: includes/topersia-g-zones.php
 msgid "بله"
 msgstr "Yes"
@@ -1684,6 +1688,10 @@ msgstr "Routes"
 msgid "مسیرهای گردشگری"
 msgstr "Tourist routes"
 
+#: includes/topersia-g-routing.php
+msgid "مسیریابی"
+msgstr "Directions"
+
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
 msgstr "Details"
@@ -1896,6 +1904,10 @@ msgstr "Be the first to write a review"
 msgid "نساجی سنتی"
 msgstr "Traditional textiles"
 
+#: includes/topersia-g-routing.php
+msgid "نشان"
+msgstr "Neshan"
+
 #: includes/topersia-g-zones.php
 msgid "نشانگر نقشه"
 msgstr "Map marker"
@@ -1931,6 +1943,10 @@ msgstr "people"
 #: includes/topersia-g-zones.php
 msgid "نقشه"
 msgstr "Map"
+
+#: includes/topersia-g-routing.php
+msgid "نقشه گوگل"
+msgstr "Google Maps"
 
 #: includes/topersia-g-zones.php
 #, php-format
@@ -2187,6 +2203,10 @@ msgstr "Video"
 #, php-format
 msgid "ویدیوی %s"
 msgstr "Video of %s"
+
+#: includes/topersia-g-routing.php
+msgid "ویز"
+msgstr "Waze"
 
 #: includes/topersia-g-zones.php
 msgid "ویزا و شرایط ورود"

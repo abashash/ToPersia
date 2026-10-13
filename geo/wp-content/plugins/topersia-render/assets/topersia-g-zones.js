@@ -1495,6 +1495,39 @@
 		} );
 	} )();
 
+	/* ══ مسیریابی — آخرین انتخاب اول  P5-D350 ═══════════════════════════════
+	   سایت موقعیت کاربر را نمی‌خواهد: مبدأ را اپِ مقصد از دستگاه می‌گیرد. تنها چیزِ نگه‌داشته‌شده نامِ آخرین دکمه در localStorage
+	   همین مرورگر است (داخل try/catch؛ بی آن، ترتیب سرور می‌ماند) — آن دکمه اول می‌نشیند. */
+	( function () {
+
+		var box = page.querySelector( '[data-tp-nav-box]' );
+		var KEY = 'tp-nav-last';
+
+		if ( ! box ) {
+			return;
+		}
+
+		function read() {
+			try { return window.localStorage.getItem( KEY ) || ''; } catch ( e ) { return ''; }
+		}
+
+		function write( v ) {
+			try { window.localStorage.setItem( KEY, v ); } catch ( e ) {}
+		}
+
+		var last = read();
+		var tile = last ? box.querySelector( 'a[data-tp-nav="' + last.replace( /[^a-z]/g, '' ) + '"]' ) : null;
+
+		if ( tile && box.firstElementChild !== tile ) {
+			box.insertBefore( tile, box.firstElementChild );
+		}
+
+		box.addEventListener( 'click', function ( e ) {
+			var a = e.target && e.target.closest ? e.target.closest( 'a[data-tp-nav]' ) : null;
+			if ( a ) { write( a.getAttribute( 'data-tp-nav' ) ); }
+		} );
+	} )();
+
 	/* ══ فرم نظر — P5-D234 ══════════════════════════════════════════════
 	   این فایل فقط فرم را می‌فرستد؛ نوشتن کارِ user-core است
 	   (`topersia_submit_review`، نانس خودش، همیشه در انتظار تأیید مدیر).
@@ -2111,8 +2144,36 @@
 						attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">' + ( cfg.attribution || '© OpenStreetMap' ) + '</a>'
 					}
 				},
-				layers: window.basemaps.layers( 'protomaps', window.basemaps.namedFlavor( flavorOf() ), { lang: cfg.lang || 'fa' } )
+				layers: mapLayers( cfg.lang || 'fa' )
 			};
+		}
+
+		/*
+		 * لایه‌های سبک — P5-D352
+		 *   قلم Italic: «Noto Sans Italic» بسته برای بازه‌های عربی ۲۶–۲۸ بایتی تهی است (آب، جزیره، آدرس) ← Regular؛ بی ایتالیک نمی‌ماند.
+		 *   letter-spacing: برای فارسی و عربی نه (حروف متصل را می‌گسلد)؛ لاتین همان.
+		 *   pois: سبک پیش‌فرض Protomaps فقط فهرست کوتاهی از kind را نشان می‌دهد و «هتل»، «مکان مذهبی» را نه؛ دسته‌های اصلی روشن می‌شوند —
+		 *   جاذبه، موزه، مکان مذهبی، پارک، هتل، رستوران و کافه، فرودگاه، ایستگاه — با برچسب به زبان صفحه، در هر سه حالت رنگ (پالت flavor).
+		 */
+		var POI_KINDS = [ 'attraction', 'museum', 'place_of_worship', 'park', 'hotel', 'restaurant', 'cafe', 'aerodrome', 'station' ];
+
+		function mapLayers( lang ) {
+
+			var flavor = Object.assign( {}, window.basemaps.namedFlavor( flavorOf() ) );
+			flavor.italic = 'Noto Sans Regular';
+
+			return window.basemaps.layers( 'protomaps', flavor, { lang: lang } ).map( function ( layer ) {
+
+				if ( ( 'fa' === lang || 'ar' === lang ) && layer.layout && undefined !== layer.layout[ 'text-letter-spacing' ] ) {
+					delete layer.layout[ 'text-letter-spacing' ];
+				}
+
+				if ( 'pois' === layer.id ) {
+					layer.filter = [ 'all', [ 'in', [ 'get', 'kind' ], [ 'literal', POI_KINDS ] ], [ '>=', [ 'zoom' ], [ '+', [ 'get', 'min_zoom' ], 0 ] ] ];
+				}
+
+				return layer;
+			} );
 		}
 
 		/* ── نشانگرها: آیکون هر خانواده، خوشه‌بندی داخلی GeoJSON خودِ MapLibre، پنجرۀ کوچک  P5-D346 ── */
@@ -2257,6 +2318,65 @@
 			} ).catch( function () {} );
 		}
 
+		/*
+		 * مرز محدوده — P5-D351. GeoJSON ساده‌شدۀ همان موجودیت (لایۀ مشتق از OpenStreetMap، scripts/tp-boundaries.php) فقط وقتی
+		 * سرور می‌داند فایلش هست (cfg.bound) و فقط وقتی نقشه در دید است (mount پس از IntersectionObserver / کلیک)؛ خط مرز و پرشدگی کم‌رنگ
+		 * با رنگ برند صفحه؛ نقشه روی همان محدوده تنظیم می‌شود. روی هر دو سبک (آنلاین و آفلاین) و پس از تغییر حالت رنگ دوباره می‌نشیند.
+		 */
+		function addBound( map, ml, box ) {
+
+			var d = box.tpBound;
+
+			if ( ! d ) {
+				return;
+			}
+
+			var tint = getComputedStyle( box ).getPropertyValue( '--tp-hover' ).trim() || getComputedStyle( box ).getPropertyValue( '--tp-primary' ).trim() || '#177E7A';
+
+			if ( ! map.getSource( 'tp-bound' ) ) {
+				map.addSource( 'tp-bound', { type: 'geojson', data: d, attribution: '© OpenStreetMap contributors' } );
+			}
+
+			if ( ! map.getLayer( 'tp-bound-fill' ) ) {
+				map.addLayer( { id: 'tp-bound-fill', type: 'fill', source: 'tp-bound', paint: { 'fill-color': tint, 'fill-opacity': 0.08 } } );
+				map.addLayer( { id: 'tp-bound-line', type: 'line', source: 'tp-bound', paint: { 'line-color': tint, 'line-width': 2, 'line-opacity': 0.85 }, layout: { 'line-join': 'round' } } );
+			}
+		}
+
+		function boundsOf( d ) {
+
+			var b = [ 180, 90, -180, -90 ];
+
+			( function walk( c ) {
+				if ( 'number' === typeof c[ 0 ] ) {
+					b = [ Math.min( b[ 0 ], c[ 0 ] ), Math.min( b[ 1 ], c[ 1 ] ), Math.max( b[ 2 ], c[ 0 ] ), Math.max( b[ 3 ], c[ 1 ] ) ];
+					return;
+				}
+				c.forEach( walk );
+			}( ( d.geometry || d.features[ 0 ].geometry ).coordinates ) );
+
+			return b;
+		}
+
+		function loadBound( map, ml, box, cfg ) {
+
+			if ( ! cfg.bound || ! window.fetch ) {
+				return;
+			}
+
+			fetch( cfg.bound ).then( function ( r ) { return r.ok ? r.json() : null; } ).then( function ( d ) {
+				if ( ! d ) {
+					return;
+				}
+				box.tpBound = d;
+				addBound( map, ml, box );
+				try {
+					var b = boundsOf( d );
+					map.fitBounds( [ [ b[ 0 ], b[ 1 ] ], [ b[ 2 ], b[ 3 ] ] ], { padding: 24, duration: 0, maxZoom: 12 } );
+				} catch ( e ) {}
+			} ).catch( function () {} );
+		}
+
 		/* یک نقشه با نشانگر؛ تعاملی فقط در مودال. قول با رویداد load وفا می‌شود. */
 		function mount( box, cfg, lnglat, interactive ) {
 
@@ -2295,13 +2415,14 @@
 						}
 						box.tpFlavor = f;
 						map.setStyle( style( cfg ), { diff: false } );   /* بازبارگذاری کامل ← رویداد style.load؛ با diff نشانگرها بی‌صدا حذف می‌شدند */
-						map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); } );
+						map.once( 'style.load', function () { addPoints( map, ml, box, interactive ); addBound( map, ml, box ); } );
 					} ).observe( document.documentElement, { attributes: true, attributeFilter: [ 'data-tp-mode' ] } );
 				}
 
 				return new Promise( function ( ok ) {
 					map.once( 'load', function () {
 						loadPoints( map, ml, box, cfg, interactive );
+						loadBound( map, ml, box, cfg );
 						ok( map );
 					} );
 				} );
