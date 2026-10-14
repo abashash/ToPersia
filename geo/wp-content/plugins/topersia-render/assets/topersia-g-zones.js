@@ -2102,6 +2102,26 @@
 			try { window.sessionStorage.setItem( k, v ); } catch ( e ) {}
 		}
 
+		/*
+		 * خلیج فارس در هر زبانی که داده‌اش نام دیگری دارد — «الخليج العربي» در name و name:ar داده OSM — برچسب سایت است.  P5-D364
+		 * عارضه را با کلید پایدار می‌شناسیم (name:en = Persian Gulf یا name:fa یا name:latin)، نه با موقعیت؛ هر دو سبک (آفلاین و آنلاین) از همین
+		 * یک تابع می‌گذرند. متن‌ها با escape یونیکد تا کاتالوگ رشته‌های فارسیِ رابط (tp-i18n) آن‌ها را رشتۀ رابط نگیرد: برچسب نقشه داده است، نه رابط.
+		 */
+		var GULF_NAME = { fa: '\u062e\u0644\u06cc\u062c \u0641\u0627\u0631\u0633', en: 'Persian Gulf', ar: '\u0627\u0644\u062e\u0644\u064a\u062c \u0627\u0644\u0641\u0627\u0631\u0633\u064a' };
+
+		/* text-field نوع `formatted` است: شاخۀ جایگزین format می‌شود؛ سبک آنلاین که text-field ساده دارد، شاخۀ اصلی هم format می‌شود تا هر دو شاخه هم‌نوع باشند */
+		function gulfWrap( field, lang, plain ) {
+			return [ 'case',
+				[ 'any',
+					[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ],
+					[ '==', [ 'get', 'name:latin' ], 'Persian Gulf' ],
+					[ '==', [ 'get', 'name:fa' ], GULF_NAME.fa ]
+				],
+				[ 'format', GULF_NAME[ lang ] || GULF_NAME.en, {} ],
+				plain ? [ 'format', field, {} ] : field
+			];
+		}
+
 		/* برچسب‌های سبک آنلاین به زبان صفحه با برگشت به name؛ فارسی و عربی بی letter-spacing */
 		function localize( st, lang ) {
 
@@ -2112,7 +2132,7 @@
 				}
 
 				if ( l.layout[ 'text-field' ] ) {
-					l.layout[ 'text-field' ] = [ 'coalesce', [ 'get', 'name:' + lang ], [ 'get', 'name' ] ];
+					l.layout[ 'text-field' ] = gulfWrap( [ 'coalesce', [ 'get', 'name:' + lang ], [ 'get', 'name' ] ], lang, true );
 				}
 
 				if ( ( 'fa' === lang || 'ar' === lang ) && undefined !== l.layout[ 'text-letter-spacing' ] ) {
@@ -2249,6 +2269,11 @@
 
 				if ( ( 'fa' === lang || 'ar' === lang ) && layer.layout && undefined !== layer.layout[ 'text-letter-spacing' ] ) {
 					delete layer.layout[ 'text-letter-spacing' ];
+				}
+
+				/* فقط برچسب‌های آب: برخی لایه‌های دیگر text-field با «zoom» در سطح بالا دارند و case دورشان سبک را نامعتبر می‌کند */
+				if ( 0 === ( layer.id || '' ).indexOf( 'water' ) && layer.layout && layer.layout[ 'text-field' ] ) {
+					layer.layout[ 'text-field' ] = gulfWrap( layer.layout[ 'text-field' ], lang );
 				}
 
 				if ( 'pois' === layer.id ) {
