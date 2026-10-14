@@ -84,3 +84,4 @@
 | 75 | 2026-10-14 | `render` | `1f28c6ba` |  | P5-D359 Google Fonts خاموش + ext-hosts؛ P5-D357 تاریخ رویداد؛ assert 531/0 · behaviour 380/0 · event-dates 43/0 · Lighthouse A/B سالم | ✅ |
 | 76 | 2026-10-14 | `geo` | `d2a02128` |  | نسخهٔ نصب‌شدهٔ render و core پس از P5-D359 | ✅ |
 | 77 | 2026-10-15 | `map` | (این commit) |  | بند ۵ با VPN: tp-boundaries (POST urlencoded + آینه‌ها)، نگاشت OSM `reference/osm-boundary-map.csv`، tests/pmtiles-probe.js، .gitignore کاشی و مرز؛ PMTiles ۲۰۲۶۱۰۱۳ تا ۴۲٫۵°N؛ map-2j 29/0 · map-3 18/0 کروم و فایرفاکس | ✅ |
+| 78 | 2026-10-15 | `docs` | `73e0f8ce` |  | P5-D362: بلوک HTML مگامنو #1935 پاک (پشتیبان JSON بیرون از git)، مورد منو → کشوی عادی، picsum در پایگاه و ext-hosts صفر؛ behaviour 380/0 · menu-shots 4/0 | ✅ |
