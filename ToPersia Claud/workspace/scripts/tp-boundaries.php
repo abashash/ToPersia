@@ -1,113 +1,60 @@
 <?php
 /**
- * مرز محدوده از OpenStreetMap — دستهٔ ۲ پرامت یکپارچه · P5-D351.  بازتولیدپذیر؛ فقط محلی؛ هیچ فیلد یا متای تازه در پایگاه‌داده.
+ * مرز محدوده از OpenStreetMap — P5-D351 · بازنویسی P5-D363.  بازتولیدپذیر؛ فقط محلی؛ هیچ فیلد یا متای تازه در پایگاه
  *
- *   php wp-cli.phar --path=… eval-file scripts/tp-boundaries.php match     ← reference/osm-boundary-map.csv (پیشنهاد؛ پست‌ها فقط خوانده می‌شوند)
- *   php wp-cli.phar --path=… eval-file scripts/tp-boundaries.php build     ← GeoJSON ساده‌شده برای ردیف‌های auto/confirmed در uploads/tiles/boundaries/
- *   php wp-cli.phar --path=… eval-file scripts/tp-boundaries.php report    ← شمارش و موارد نامطمئن
+ *   wp eval-file scripts/tp-boundaries.php fetch            ← یک پرس‌وجوی Overpass برای همهٔ مرزهای اداری و چندضلعی‌های place=city|town ایران → کش محلی (تنها گام شبکه برای match)
+ *   wp eval-file scripts/tp-boundaries.php match            ← آفلاین، روی کش: reference/osm-boundary-map.csv
+ *   wp eval-file scripts/tp-boundaries.php build [province|city|all] [force]   ← دسته‌ای (چند شناسه در هر پرس‌وجو)؛ GeoJSON ساده‌شده
+ *   wp eval-file scripts/tp-boundaries.php report           ← شمارش، suggested با نام استان والد، ۲۰ شهر none مهم‌تر
  *
- * منبع: داده‌های OpenStreetMap از Overpass API (© OpenStreetMap contributors, ODbL) — جایگزین مستقیم «برش Geofabrik + osmium» که روی ویندوز و بی VPN ممکن نبود.
- * وضعیت ۱۳ اکتبر از ایرانِ بی VPN: Geofabrik، Nominatim و polygons.openstreetmap.fr باز نشدند؛ Overpass یک بار باز شد ولی POST چهار آینه
- * (overpass-api.de · lz4 · kumi · private.coffee) همه بی پاسخ ماند. اسکریپت بی تغییر و تکرارپذیر است: با اتصال سالم `match` و `build` را اجرا کنید.
+ * کش و خروجی همه بیرون از git: `uploads/tiles/boundaries-cache/` (پاسخ خام Overpass + شکست‌های build با علت) و `uploads/tiles/boundaries/`.
  *
- * نگاشت موجودیت ← شناسهٔ OSM: `reference/osm-boundary-map.csv` (entity_uid, osm_type, osm_id, روش تطبیق, وضعیت). تطبیق خودکار فقط پیشنهاد است:
- * وضعیت `auto` = نام فارسی دقیقاً یکی و ردهٔ درست؛ `suggested` = نامطمئن (به GeoJSON نمی‌رسد تا کاربر `confirmed` بنویسد)؛ `none` = پیدا نشد.
- * خروجی لایهٔ مشتق و بازساختنی است (REQ-D-05)، هر موجودیت یک GeoJSON ساده‌شده (هدف زیر ~۵۰KB).
+ * قواعد (P5-D363):
+ *   استان   `province_code` پایگاه کد آماری ملی است (۰۱…۳۹)، نه ISO 3166-2؛ پس جدول ثابت `reference/province-iso.csv` (entity_uid ← IR-xx)
+ *           و تطبیق با برچسب ISO3166-2 رابطهٔ admin_level=4 در کش — یکتا ← auto، وگرنه none.
+ *   شهر     نامزد فقط مرز اداری (جز سطح ۴) یا چندضلعی place=city|town هم‌نام باشد، و مرکزش (out center) درون GeoJSON استان والد
+ *           (والد از رابطهٔ شمول خودِ داده)؛ یک نامزد ← auto · چند ← suggested · صفر ← none؛ GeoJSON والد نبود ← suggested.
+ *   پهنهٔ طبیعی (آب · بیابان · کوه · جنگل · پارک · جزیره · منطقه · عارضه) ← skip.
+ *   confirmed (دست کاربر) هرگز بازنویسی نمی‌شود؛ به GeoJSON فقط auto و confirmed می‌رسد.
+ * منبع: OpenStreetMap contributors, ODbL. POST آینه‌ها urlencoded (چندبخشی ← ۴۰۰).
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 if ( 'local' !== wp_get_environment_type() ) { echo "فقط محلی\n"; return; }
 
-$cmd  = isset( $args[0] ) ? $args[0] : 'report';
-$root = dirname( __DIR__ );
-$csv  = $root . '/reference/osm-boundary-map.csv';
-$up   = wp_get_upload_dir();
-$out  = trailingslashit( $up['basedir'] ) . 'tiles/boundaries/';
-$bbox = '25,44,40.5,63.5';
-$AREA = array( 'tp_province' => array( 'rel', 4 ), 'tp_water_body' => array( 'any', 0 ), 'tp_desert' => array( 'any', 0 ), 'tp_mountain' => array( 'any', 0 ), 'tp_forest_plain' => array( 'any', 0 ), 'tp_protected_area' => array( 'any', 0 ), 'tp_island' => array( 'any', 0 ), 'tp_region' => array( 'any', 0 ), 'tp_natural_feature' => array( 'any', 0 ), 'tp_city' => array( 'rel', 8 ) );
+require_once __DIR__ . '/lib/tp-boundaries-lib.php';
 
-/* ── ابزار ───────────────────────────────────────────────────────── */
-function tpb_overpass( $ql, $tries = 4 ) {
-	/* آینه‌ها یک‌درمیان؛ POST به‌صورت urlencoded (چندبخشی را Overpass با ۴۰۰ رد می‌کند)؛ گواهی از بستهٔ وردپرس وقتی php.ini ندارد */
+$cmd   = isset( $args[0] ) ? $args[0] : 'report';
+$root  = dirname( __DIR__ );
+$csv   = $root . '/reference/osm-boundary-map.csv';
+$isocv = $root . '/reference/province-iso.csv';
+$up    = wp_get_upload_dir();
+$out   = trailingslashit( $up['basedir'] ) . 'tiles/boundaries/';
+$cache = trailingslashit( $up['basedir'] ) . 'tiles/boundaries-cache/';
+$AREA  = array( 'tp_province', 'tp_city' );
+$SKIP  = array( 'tp_water_body', 'tp_desert', 'tp_mountain', 'tp_forest_plain', 'tp_protected_area', 'tp_island', 'tp_region', 'tp_natural_feature' );
+
+/* ── شبکه ────────────────────────────────────────────────────────── */
+function tpb_overpass( $ql, $tries = 4, $timeout = 180 ) {
+	/* آینه‌ها یک‌درمیان؛ گواهی از بستهٔ وردپرس وقتی php.ini ندارد */
 	$mirrors = array( 'https://overpass-api.de/api/interpreter', 'https://lz4.overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter' );
 	$ca      = defined( 'ABSPATH' ) && is_file( ABSPATH . WPINC . '/certificates/ca-bundle.crt' ) ? ABSPATH . WPINC . '/certificates/ca-bundle.crt' : '';
+	$last    = array( 'code' => 0, 'body' => '' );
 	for ( $i = 0; $i < $tries; $i++ ) {
 		$ch  = curl_init( $mirrors[ $i % count( $mirrors ) ] );
-		$opt = array( CURLOPT_POST => true, CURLOPT_POSTFIELDS => http_build_query( array( 'data' => $ql ) ), CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 120, CURLOPT_USERAGENT => 'ToPersia-local-boundary-script/1.0', CURLOPT_PROXY => '' );
+		$opt = array( CURLOPT_POST => true, CURLOPT_POSTFIELDS => http_build_query( array( 'data' => $ql ) ), CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => $timeout, CURLOPT_USERAGENT => 'ToPersia-local-boundary-script/1.1', CURLOPT_PROXY => '' );
 		if ( '' !== $ca && ! ini_get( 'curl.cainfo' ) ) { $opt[ CURLOPT_CAINFO ] = $ca; }
 		curl_setopt_array( $ch, $opt );
 		$body = curl_exec( $ch );
 		$code = (int) curl_getinfo( $ch, CURLINFO_HTTP_CODE );
 		curl_close( $ch );
+		$last = array( 'code' => $code, 'body' => (string) $body );
 		if ( 200 === $code && $body ) {
 			$j = json_decode( $body, true );
-			if ( is_array( $j ) && isset( $j['elements'] ) ) { return $j['elements']; }
+			if ( is_array( $j ) && isset( $j['elements'] ) ) { return array( $j['elements'], $last ); }
 		}
 		sleep( 3 * ( $i + 1 ) );
 	}
-	return null;
-}
-function tpb_key( $uid ) {
-	$path = (string) preg_replace( '~^https?://[^/]+/e/~', '', trim( (string) $uid ) );
-	return preg_match( '~^[a-z0-9-]+(/[a-z0-9-]+)*$~', $path ) ? str_replace( '/', '__', $path ) : '';
-}
-function tpb_norm( $s ) {
-	$s = str_replace( array( 'ي', 'ك', "\u{200C}", 'ۀ', 'ة' ), array( 'ی', 'ک', ' ', 'ه', 'ه' ), (string) $s );
-	$s = preg_replace( '/^(استان|شهرستان|شهر|دریاچه|تالاب|کویر|رشته‌?کوه|جزیره|منطقه حفاظت شده|پارک ملی)\s+/u', '', trim( $s ) );
-	return trim( preg_replace( '/\s+/u', ' ', $s ) );
-}
-function tpb_ring( $ways ) {
-	/* وصل‌کردن راه‌های یک رابطه به حلقه‌های بسته */
-	$rings = array();
-	$ways  = array_values( array_filter( $ways, function ( $w ) { return count( $w ) > 1; } ) );
-	while ( $ways ) {
-		$ring = array_shift( $ways );
-		$safe = 0;
-		while ( $ring[0] !== $ring[ count( $ring ) - 1 ] && $ways && $safe++ < 5000 ) {
-			$end = $ring[ count( $ring ) - 1 ];
-			$hit = false;
-			foreach ( $ways as $k => $w ) {
-				if ( $w[0] === $end ) { $ring = array_merge( $ring, array_slice( $w, 1 ) ); $hit = true; }
-				elseif ( $w[ count( $w ) - 1 ] === $end ) { $ring = array_merge( $ring, array_slice( array_reverse( $w ), 1 ) ); $hit = true; }
-				if ( $hit ) { unset( $ways[ $k ] ); $ways = array_values( $ways ); break; }
-			}
-			if ( ! $hit ) { break; }
-		}
-		if ( count( $ring ) > 3 && $ring[0] === $ring[ count( $ring ) - 1 ] ) { $rings[] = $ring; }
-	}
-	return $rings;
-}
-function tpb_dp( $pts, $eps ) {
-	$n = count( $pts );
-	if ( $n < 3 ) { return $pts; }
-	$keep = array_fill( 0, $n, false );
-	$keep[0] = $keep[ $n - 1 ] = true;
-	$stack = array( array( 0, $n - 1 ) );
-	while ( $stack ) {
-		list( $a, $b ) = array_pop( $stack );
-		$dmax = 0; $idx = 0;
-		$dx = $pts[ $b ][0] - $pts[ $a ][0]; $dy = $pts[ $b ][1] - $pts[ $a ][1]; $len = sqrt( $dx * $dx + $dy * $dy );
-		for ( $i = $a + 1; $i < $b; $i++ ) {
-			$d = $len > 0 ? abs( $dy * $pts[ $i ][0] - $dx * $pts[ $i ][1] + $pts[ $b ][0] * $pts[ $a ][1] - $pts[ $b ][1] * $pts[ $a ][0] ) / $len : sqrt( pow( $pts[ $i ][0] - $pts[ $a ][0], 2 ) + pow( $pts[ $i ][1] - $pts[ $a ][1], 2 ) );
-			if ( $d > $dmax ) { $dmax = $d; $idx = $i; }
-		}
-		if ( $dmax > $eps ) { $keep[ $idx ] = true; $stack[] = array( $a, $idx ); $stack[] = array( $idx, $b ); }
-	}
-	$o = array();
-	foreach ( $pts as $i => $p ) { if ( $keep[ $i ] ) { $o[] = $p; } }
-	return $o;
-}
-function tpb_geojson( $rings, $limit = 50000 ) {
-	$eps = 0.0005;
-	for ( $k = 0; $k < 14; $k++ ) {
-		$polys = array();
-		foreach ( $rings as $r ) {
-			$s = tpb_dp( $r, $eps );
-			if ( count( $s ) >= 4 ) { $polys[] = array( array_map( function ( $p ) { return array( round( $p[0], 4 ), round( $p[1], 4 ) ); }, $s ) ); }
-		}
-		$js = wp_json_encode( array( 'type' => 'Feature', 'properties' => new stdClass(), 'geometry' => array( 'type' => 'MultiPolygon', 'coordinates' => $polys ) ) );
-		if ( strlen( $js ) <= $limit || $k === 13 ) { return array( $js, count( $polys ), $eps ); }
-		$eps *= 1.7;
-	}
+	return array( null, $last );
 }
 function tpb_rows( $csv ) {
 	$rows = array();
@@ -119,86 +66,142 @@ function tpb_rows( $csv ) {
 	}
 	return $rows;
 }
+function tpb_cache_elements( $cache ) {
+	$f = $cache . 'overpass-iran.json';
+	if ( ! is_file( $f ) ) { return null; }
+	$j = json_decode( (string) file_get_contents( $f ), true );
+	return is_array( $j ) && isset( $j['elements'] ) ? $j['elements'] : null;
+}
+function tpb_province_of( $pid ) {
+	if ( ! function_exists( 'topersia_g_place_parents' ) ) { return 0; }
+	foreach ( topersia_g_place_parents( $pid ) as $p ) { if ( 'tp_province' === get_post_type( $p['id'] ) ) { return (int) $p['id']; } }
+	return 0;
+}
+
+/* ── fetch ───────────────────────────────────────────────────────── */
+if ( 'fetch' === $cmd ) {
+	if ( ! is_dir( $cache ) ) { mkdir( $cache, 0777, true ); }
+	/* bbox به‌جای area: سبک‌تر برای سرور (area روی کل کشور بارها 504 داد)؛ مرز ایران ≈ ۲۵–۴۰٫۱°N · ۴۳٫۹–۶۳٫۴°E */
+	$ql = '[out:json][timeout:300][bbox:25,43.9,40.1,63.4];'
+		. '(rel["boundary"="administrative"]["admin_level"~"^(4|8)$"]["name"];rel["place"~"^(city|town)$"]["name"];way["place"~"^(city|town)$"]["name"];);out tags center;';
+	echo "یک پرس‌وجو به Overpass (چند دقیقه)…\n";
+	list( $el, $raw ) = tpb_overpass( $ql, 8, 330 );
+	if ( null === $el ) { file_put_contents( $cache . 'fetch-failed-' . gmdate( 'Ymd-His' ) . '.txt', 'HTTP ' . $raw['code'] . "\n" . substr( $raw['body'], 0, 4000 ) ); echo "✗ پرس‌وجو شکست خورد (HTTP {$raw['code']})؛ پاسخ خام در کش ذخیره شد\n"; return; }
+	file_put_contents( $cache . 'overpass-iran.json', json_encode( array( 'fetched' => gmdate( 'c' ), 'elements' => $el ), JSON_UNESCAPED_UNICODE ) );
+	$c = array();
+	foreach ( $el as $e ) { $k = $e['type'] . ':' . ( isset( $e['tags']['boundary'] ) ? 'admin' . ( isset( $e['tags']['admin_level'] ) ? $e['tags']['admin_level'] : '' ) : ( isset( $e['tags']['place'] ) ? 'place=' . $e['tags']['place'] : '?' ) ); $c[ $k ] = ( isset( $c[ $k ] ) ? $c[ $k ] : 0 ) + 1; }
+	ksort( $c );
+	echo 'کش نوشته شد: ' . count( $el ) . ' عنصر · ' . json_encode( $c ) . "\n";
+	return;
+}
 
 /* ── match ───────────────────────────────────────────────────────── */
 if ( 'match' === $cmd ) {
 	do_action( 'wpml_switch_language', 'fa' );
-	$old  = tpb_rows( $csv );
-	$prov = tpb_overpass( "[out:json][timeout:120];rel[\"boundary\"=\"administrative\"][\"admin_level\"=\"4\"][\"ISO3166-2\"~\"^IR-\"]({$bbox});out tags;" );
-	echo 'استان‌های OSM: ' . ( null === $prov ? 'شکست' : count( $prov ) ) . "\n";
-	$byname = array();
-	foreach ( (array) $prov as $e ) {
-		foreach ( array( 'name', 'name:fa' ) as $k ) { if ( ! empty( $e['tags'][ $k ] ) ) { $byname[ tpb_norm( $e['tags'][ $k ] ) ][ $e['id'] ] = true; } }
-	}
+	$els = tpb_cache_elements( $cache );
+	if ( null === $els ) { echo "کش Overpass نیست — نخست `fetch` (با اتصال)\n"; return; }
+	$old = tpb_rows( $csv );
+	$iso = array();
+	foreach ( tpb_rows( $isocv ) as $uid => $r ) { $iso[ tpb_key( $uid ) ] = $r['ISO3166-2']; }
+	$prov_name = array();
 	$rows = array();
-	foreach ( $AREA as $type => $cfg ) {
+
+	/* استان‌ها پیش از شهرها: والد شهر GeoJSON استان است */
+	foreach ( array_merge( array( 'tp_province' ), array( 'tp_city' ), $SKIP ) as $type ) {
 		$ids = get_posts( array( 'post_type' => $type, 'post_status' => 'publish', 'numberposts' => -1, 'suppress_filters' => false, 'orderby' => 'ID', 'order' => 'ASC' ) );
 		foreach ( $ids as $p ) {
 			$uid = (string) get_post_meta( $p->ID, 'entity_uid', true );
-			if ( '' === $uid ) { continue; }
-			if ( isset( $old[ $uid ] ) && in_array( $old[ $uid ]['status'], array( 'confirmed' ), true ) ) { $rows[ $uid ] = $old[ $uid ]; continue; }
+			if ( '' === $uid || '' === tpb_key( $uid ) ) { continue; }
+			if ( isset( $old[ $uid ] ) && 'confirmed' === $old[ $uid ]['status'] ) { $rows[ $uid ] = $old[ $uid ]; continue; }
 			$name = tpb_norm( (string) get_post_meta( $p->ID, 'official_name_fa', true ) ?: (string) get_post_meta( $p->ID, 'name_fa', true ) ?: $p->post_title );
-			$row  = array( 'entity_uid' => $uid, 'osm_type' => '', 'osm_id' => '', 'method' => 'none', 'status' => 'none', 'post_type' => $type, 'name_fa' => $name );
-			if ( 'tp_province' === $type ) {
-				if ( isset( $byname[ $name ] ) && 1 === count( $byname[ $name ] ) ) { $row = array_merge( $row, array( 'osm_type' => 'relation', 'osm_id' => (string) key( $byname[ $name ] ), 'method' => 'admin_level=4+ISO3166-2+exact-name', 'status' => 'auto' ) ); }
+			$row  = array( 'entity_uid' => $uid, 'osm_type' => '', 'osm_id' => '', 'method' => '', 'status' => 'none', 'post_type' => $type, 'name_fa' => $name, 'parent_province' => '' );
+
+			if ( in_array( $type, $SKIP, true ) ) {
+				$row['status'] = 'skip'; $row['method'] = 'natural-area';
+			} elseif ( 'tp_province' === $type ) {
+				$code = isset( $iso[ tpb_key( $uid ) ] ) ? $iso[ tpb_key( $uid ) ] : '';
+				if ( '' === $code ) { $row['method'] = 'not-in-province-iso.csv'; }
+				else { list( $st, $el, $how ) = tpb_province_match( $code, $els, $name ); $row['status'] = $st; $row['method'] = $how; if ( $el ) { $row['osm_type'] = $el['type']; $row['osm_id'] = (string) $el['id']; } }
 			} else {
-				$q  = "[out:json][timeout:60];(rel[\"name\"=\"{$name}\"][\"type\"~\"multipolygon|boundary\"]({$bbox});way[\"name\"=\"{$name}\"][\"natural\"~\"water|wood|scrub|sand|bare_rock|wetland|coastline\"]({$bbox});way[\"name\"=\"{$name}\"][\"place\"~\"island|islet\"]({$bbox}););out tags;";
-				$el = tpb_overpass( $q );
-				echo '.'; flush();
-				sleep( 1 );
-				if ( is_array( $el ) && $el ) {
-					usort( $el, function ( $a, $b ) { return ( 'relation' === $b['type'] ) <=> ( 'relation' === $a['type'] ); } );
-					$best = $el[0];
-					$row  = array_merge( $row, array( 'osm_type' => $best['type'], 'osm_id' => (string) $best['id'], 'method' => 'exact-name+class(' . count( $el ) . ' candidates)', 'status' => 1 === count( $el ) ? 'auto' : 'suggested' ) );
-				}
+				$pp   = tpb_province_of( $p->ID );
+				$pu   = $pp ? (string) get_post_meta( $pp, 'entity_uid', true ) : '';
+				$pf   = $pu && is_file( $out . tpb_key( $pu ) . '.geojson' ) ? (string) file_get_contents( $out . tpb_key( $pu ) . '.geojson' ) : '';
+				$row['parent_province'] = $pp ? tpb_norm( get_the_title( $pp ) ) : '';
+				list( $st, $el, $how ) = tpb_classify_city( $name, $els, $pf );
+				$row['status'] = $st; $row['method'] = $how;
+				if ( $el ) { $row['osm_type'] = $el['type']; $row['osm_id'] = (string) $el['id']; }
 			}
-			if ( isset( $old[ $uid ] ) && 'none' !== $old[ $uid ]['status'] && 'none' === $row['status'] ) { $row = $old[ $uid ]; }
 			$rows[ $uid ] = $row;
 		}
 	}
 	if ( ! is_dir( dirname( $csv ) ) ) { mkdir( dirname( $csv ), 0777, true ); }
 	$fh = fopen( $csv, 'w' );
-	fputcsv( $fh, array( 'entity_uid', 'osm_type', 'osm_id', 'method', 'status', 'post_type', 'name_fa' ), ',', '"', '\\' );
-	foreach ( $rows as $r ) { fputcsv( $fh, array( $r['entity_uid'], $r['osm_type'], $r['osm_id'], $r['method'], $r['status'], $r['post_type'], $r['name_fa'] ), ',', '"', '\\' ); }
+	fputcsv( $fh, array( 'entity_uid', 'osm_type', 'osm_id', 'method', 'status', 'post_type', 'name_fa', 'parent_province' ), ',', '"', '\\' );
+	foreach ( $rows as $r ) { fputcsv( $fh, array( $r['entity_uid'], $r['osm_type'], $r['osm_id'], $r['method'], $r['status'], $r['post_type'], $r['name_fa'], isset( $r['parent_province'] ) ? $r['parent_province'] : '' ), ',', '"', '\\' ); }
 	fclose( $fh );
 	echo 'CSV: ' . count( $rows ) . " ردیف\n";
 	$cmd = 'report';
 }
 
-/* ── build ───────────────────────────────────────────────────────── */
+/* ── build — دسته‌ای ─────────────────────────────────────────────── */
 if ( 'build' === $cmd ) {
-	$rows = tpb_rows( $csv );
+	$scope = isset( $args[1] ) && in_array( $args[1], array( 'province', 'city', 'all' ), true ) ? $args[1] : 'all';
+	$force = in_array( 'force', $args, true );
+	$rows  = tpb_rows( $csv );
 	if ( ! is_dir( $out ) ) { mkdir( $out, 0777, true ); }
-	$done = 0; $fail = 0; $bytes = array();
+	if ( ! is_dir( $cache . 'fail' ) ) { mkdir( $cache . 'fail', 0777, true ); }
+	$todo = array(); $done = 0; $fail = 0; $bytes = array();
 	foreach ( $rows as $uid => $r ) {
 		if ( ! in_array( $r['status'], array( 'auto', 'confirmed' ), true ) || '' === $r['osm_id'] || '' === tpb_key( $uid ) ) { continue; }
-		if ( is_file( $out . tpb_key( $uid ) . '.geojson' ) && ! in_array( 'force', $args, true ) ) { $done++; $bytes[] = filesize( $out . tpb_key( $uid ) . '.geojson' ); continue; }
-		$el = tpb_overpass( "[out:json][timeout:180];{$r['osm_type']}({$r['osm_id']});out geom;" );
-		sleep( 3 );
-		$rings = array();
-		if ( is_array( $el ) && $el ) {
-			$e = $el[0];
-			if ( 'way' === $e['type'] && ! empty( $e['geometry'] ) ) {
-				$pts = array_map( function ( $g ) { return array( $g['lon'], $g['lat'] ); }, $e['geometry'] );
-				$rings = tpb_ring( array( $pts ) );
-			} elseif ( 'relation' === $e['type'] ) {
-				$ways = array();
-				foreach ( (array) $e['members'] as $m ) {
-					if ( 'way' === $m['type'] && 'inner' !== ( isset( $m['role'] ) ? $m['role'] : '' ) && ! empty( $m['geometry'] ) ) {
-						$ways[] = array_map( function ( $g ) { return array( $g['lon'], $g['lat'] ); }, $m['geometry'] );
-					}
-				}
-				$rings = tpb_ring( $ways );
-			}
-		}
-		if ( ! $rings ) { $fail++; echo "✗ {$uid} {$r['name_fa']} — هندسه ساخته نشد\n"; continue; }
-		list( $js, $n, $eps ) = tpb_geojson( $rings );
-		file_put_contents( $out . tpb_key( $uid ) . '.geojson', $js );
-		$bytes[] = strlen( $js );
-		$done++;
-		echo "✓ {$uid} {$r['name_fa']} — {$n} حلقه · " . strlen( $js ) . " بایت\n";
+		if ( 'province' === $scope && 'tp_province' !== $r['post_type'] ) { continue; }
+		if ( 'city' === $scope && 'tp_city' !== $r['post_type'] ) { continue; }
+		$f = $out . tpb_key( $uid ) . '.geojson';
+		if ( is_file( $f ) && ! $force ) { $done++; $bytes[] = filesize( $f ); continue; }
+		$todo[ $r['osm_type'] . ':' . $r['osm_id'] ] = array( 'uid' => $uid, 'row' => $r );
 	}
-	echo "ساخته/موجود: {$done} · شکست: {$fail} · میانه: " . ( $bytes ? (int) ( array_sum( $bytes ) / count( $bytes ) ) : 0 ) . " بایت · بیشینه: " . ( $bytes ? max( $bytes ) : 0 ) . "\n";
+	/* چند شناسه در هر پرس‌وجو: ۶ تا؛ استان‌ها (حجیم) ۳ تا */
+	$batches = array(); $cur = array(); $curn = 0;
+	foreach ( $todo as $k => $t ) {
+		$cap = 'tp_province' === $t['row']['post_type'] ? 3 : 6;
+		if ( $curn >= $cap ) { $batches[] = $cur; $cur = array(); $curn = 0; }
+		$cur[ $k ] = $t; $curn++;
+	}
+	if ( $cur ) { $batches[] = $cur; }
+	foreach ( $batches as $b ) {
+		$rel = array(); $way = array();
+		foreach ( $b as $k => $t ) { list( $ty, $id ) = explode( ':', $k ); if ( 'way' === $ty ) { $way[] = $id; } else { $rel[] = $id; } }
+		$ql = '[out:json][timeout:300];(' . ( $rel ? 'rel(id:' . implode( ',', $rel ) . ');' : '' ) . ( $way ? 'way(id:' . implode( ',', $way ) . ');' : '' ) . ');out geom;';
+		list( $els, $raw ) = tpb_overpass( $ql, 4, 320 );
+		sleep( 2 );
+		$by = array();
+		foreach ( (array) $els as $e ) { $by[ $e['type'] . ':' . $e['id'] ] = $e; }
+		foreach ( $b as $k => $t ) {
+			$uid = $t['uid']; $r = $t['row']; $why = array();
+			if ( null === $els ) { $why[] = 'batch-query-failed:HTTP ' . $raw['code']; file_put_contents( $cache . 'fail/batch-' . md5( $ql ) . '.txt', 'HTTP ' . $raw['code'] . "\n" . substr( $raw['body'], 0, 8000 ) ); }
+			elseif ( ! isset( $by[ $k ] ) ) { $why[] = 'element-missing-in-response'; }
+			else {
+				$ways = tpb_element_ways( $by[ $k ], $missing );
+				if ( $missing ) { $why[] = 'member_without_geometry:' . $missing; }
+				$ringwhy = array();
+				$rings = tpb_ring( $ways, $ringwhy );
+				$why = array_merge( $why, array_map( function ( $x ) { return is_string( $x ) ? $x : (string) $x; }, array_values( $ringwhy ) ) );
+				if ( isset( $ringwhy['short_way'] ) ) { $why[] = 'short_way:' . $ringwhy['short_way']; }
+			}
+			if ( empty( $rings ) || null === $els || ! isset( $by[ $k ] ) ) {
+				$fail++;
+				if ( isset( $by[ $k ] ) ) { file_put_contents( $cache . 'fail/' . str_replace( ':', '-', $k ) . '.json', json_encode( array( 'uid' => $uid, 'why' => $why, 'element' => $by[ $k ] ), JSON_UNESCAPED_UNICODE ) ); }
+				echo "✗ {$uid} {$r['name_fa']} — هندسه ساخته نشد (" . implode( ' · ', array_unique( $why ) ) . ")\n";
+				unset( $rings );
+				continue;
+			}
+			list( $js, $n ) = tpb_geojson( $rings );
+			file_put_contents( $out . tpb_key( $uid ) . '.geojson', $js );
+			$bytes[] = strlen( $js ); $done++;
+			echo "✓ {$uid} {$r['name_fa']} — {$n} حلقه · " . strlen( $js ) . ' بایت' . ( $why ? ' · ' . implode( ' · ', $why ) : '' ) . "\n";
+			unset( $rings );
+		}
+	}
+	echo "ساخته/موجود: {$done} · شکست: {$fail} · میانه: " . ( $bytes ? (int) ( array_sum( $bytes ) / count( $bytes ) ) : 0 ) . ' بایت · بیشینه: ' . ( $bytes ? max( $bytes ) : 0 ) . " بایت\n";
 	$cmd = 'report';
 }
 
@@ -208,5 +211,20 @@ if ( 'report' === $cmd ) {
 	$c = array();
 	foreach ( $rows as $r ) { $c[ $r['post_type'] ][ $r['status'] ] = ( isset( $c[ $r['post_type'] ][ $r['status'] ] ) ? $c[ $r['post_type'] ][ $r['status'] ] : 0 ) + 1; }
 	foreach ( $c as $t => $v ) { echo str_pad( $t, 22 ) . json_encode( $v ) . "\n"; }
-	foreach ( $rows as $r ) { if ( 'suggested' === $r['status'] || ( 'none' === $r['status'] && 'tp_province' === $r['post_type'] ) ) { echo "تأیید/بررسی کاربر: {$r['entity_uid']} {$r['post_type']} «{$r['name_fa']}» ← {$r['osm_type']}/{$r['osm_id']} ({$r['status']})\n"; } }
+	foreach ( $rows as $r ) { if ( 'suggested' === $r['status'] ) { echo "suggested | {$r['name_fa']} | استان: " . ( isset( $r['parent_province'] ) ? $r['parent_province'] : '' ) . " | {$r['osm_type']}/{$r['osm_id']} | {$r['method']}\n"; } }
+	foreach ( $rows as $r ) { if ( 'none' === $r['status'] && 'tp_province' === $r['post_type'] ) { echo "none-province | {$r['name_fa']} | {$r['method']}\n"; } }
+
+	/* ۲۰ شهر none مهم‌تر: ترتیب خودِ سایت (topersia_g_sort_entities — display_priority نزولی، جانشین جمعیت، الفبا) */
+	$none = array();
+	foreach ( $rows as $uid => $r ) { if ( 'none' === $r['status'] && 'tp_city' === $r['post_type'] ) { $none[ $uid ] = $r; } }
+	if ( $none && function_exists( 'topersia_g_sort_entities' ) ) {
+		$byid = array();
+		foreach ( $none as $uid => $r ) {
+			$q = get_posts( array( 'post_type' => 'tp_city', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => false, 'meta_key' => 'entity_uid', 'meta_value' => $uid ) );
+			if ( $q ) { $byid[ $q[0] ] = $r; }
+		}
+		$order = topersia_g_sort_entities( array_keys( $byid ) );
+		echo 'none-city (۲۰ نخست به ترتیب سایت؛ display_priority هنوز خالی است ← جمعیت، سپس الفبا): ' . count( $none ) . " کل\n";
+		foreach ( array_slice( $order, 0, 20 ) as $i => $id ) { echo '  ' . ( $i + 1 ) . ' | ' . $byid[ $id ]['name_fa'] . ' | استان: ' . $byid[ $id ]['parent_province'] . ' | ' . $byid[ $id ]['method'] . "\n"; }
+	}
 }

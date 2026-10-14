@@ -43,3 +43,11 @@ tp441_mut( 'بلوک AI: در صفحه شاخهٔ تولید نیست — جاو
 			&& false !== strpos( $zn2m, "\$stable = function_exists( 'tpas_get_summary' );" );
 	},
 	$js2m, $js2m . "\nform.set( 'action', 'tpas_ai_generate' );" );
+
+tp441_mut( 'خلیج فارس در هر زبان: عارضه با کلید پایدار (name:en · name:latin · name:fa)، نه موقعیت؛ هر دو سبک (آفلاین: فقط لایه‌های water؛ آنلاین: همهٔ نمادها) از gulfWrap؛ شاخهٔ جایگزین format؛ متن‌ها با escape یونیکد  P5-D364',
+	function ( $x ) {
+		return false !== strpos( $x, "[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ]" ) && false !== strpos( $x, "[ '==', [ 'get', 'name:latin' ], 'Persian Gulf' ]" ) && false !== strpos( $x, "[ '==', [ 'get', 'name:fa' ], GULF_NAME.fa ]" )
+			&& false !== strpos( $x, "[ 'format', GULF_NAME[ lang ] || GULF_NAME.en, {} ]," ) && false !== strpos( $x, "gulfWrap( [ 'coalesce', [ 'get', 'name:' + lang ], [ 'get', 'name' ] ], lang, true )" )
+			&& false !== strpos( $x, "0 === ( layer.id || '' ).indexOf( 'water' )" ) && false !== strpos( $x, "ar: '\u0627\u0644\u062e\u0644\u064a\u062c \u0627\u0644\u0641\u0627\u0631\u0633\u064a'" );
+	},
+	$js2m, str_replace( "[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ],", '', $js2m ) );

@@ -1,149 +1,149 @@
-entity_uid,osm_type,osm_id,method,status,post_type,name_fa
-http://topersia.local/e/province/east-azerbaijan,relation,2232180,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"آذربایجان شرقی"
-http://topersia.local/e/province/west-azerbaijan,relation,241593,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"آذربایجان غربی"
-http://topersia.local/e/province/ardabil,relation,269635,admin_level=4+ISO3166-2+exact-name,auto,tp_province,اردبیل
-http://topersia.local/e/province/isfahan,relation,241475,admin_level=4+ISO3166-2+exact-name,auto,tp_province,اصفهان
-http://topersia.local/e/province/alborz,relation,1015996,admin_level=4+ISO3166-2+exact-name,auto,tp_province,البرز
-http://topersia.local/e/province/ilam,relation,229766,admin_level=4+ISO3166-2+exact-name,auto,tp_province,ایلام
-http://topersia.local/e/province/bushehr,relation,269575,admin_level=4+ISO3166-2+exact-name,auto,tp_province,بوشهر
-http://topersia.local/e/province/chaharmahal-and-bakhtiari,relation,230033,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"چهارمحال و بختیاری"
-http://topersia.local/e/province/south-khorasan,relation,537658,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"خراسان جنوبی"
-http://topersia.local/e/province/razavi-khorasan,relation,537657,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"خراسان رضوی"
-http://topersia.local/e/province/north-khorasan,relation,225444,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"خراسان شمالی"
-http://topersia.local/e/province/khuzestan,relation,3661581,admin_level=4+ISO3166-2+exact-name,auto,tp_province,خوزستان
-http://topersia.local/e/province/zanjan,relation,241473,admin_level=4+ISO3166-2+exact-name,auto,tp_province,زنجان
-http://topersia.local/e/province/semnan,relation,241474,admin_level=4+ISO3166-2+exact-name,auto,tp_province,سمنان
-http://topersia.local/e/province/sistan-and-baluchestan,relation,537693,admin_level=4+ISO3166-2+exact-name,auto,tp_province,"سیستان و بلوچستان"
-http://topersia.local/e/province/fars,relation,255446,admin_level=4+ISO3166-2+exact-name,auto,tp_province,فارس
-http://topersia.local/e/province/qazvin,relation,241471,admin_level=4+ISO3166-2+exact-name,auto,tp_province,قزوین
-http://topersia.local/e/province/qom,relation,537702,admin_level=4+ISO3166-2+exact-name,auto,tp_province,قم
-http://topersia.local/e/province/kurdistan,relation,241546,admin_level=4+ISO3166-2+exact-name,auto,tp_province,کردستان
-http://topersia.local/e/province/kerman,relation,229593,admin_level=4+ISO3166-2+exact-name,auto,tp_province,کرمان
-http://topersia.local/e/province/kermanshah,relation,241037,admin_level=4+ISO3166-2+exact-name,auto,tp_province,کرمانشاه
-http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,,,none,none,tp_province,"کهگیلویه و بویراحمد"
-http://topersia.local/e/province/golestan,relation,269903,admin_level=4+ISO3166-2+exact-name,auto,tp_province,گلستان
-http://topersia.local/e/province/gilan,relation,241472,admin_level=4+ISO3166-2+exact-name,auto,tp_province,گیلان
-http://topersia.local/e/province/lorestan,relation,229893,admin_level=4+ISO3166-2+exact-name,auto,tp_province,لرستان
-http://topersia.local/e/province/mazandaran,relation,269900,admin_level=4+ISO3166-2+exact-name,auto,tp_province,مازندران
-http://topersia.local/e/province/markazi,relation,229958,admin_level=4+ISO3166-2+exact-name,auto,tp_province,مرکزی
-http://topersia.local/e/province/hormozgan,relation,3385992,admin_level=4+ISO3166-2+exact-name,auto,tp_province,هرمزگان
-http://topersia.local/e/province/hamadan,relation,241038,admin_level=4+ISO3166-2+exact-name,auto,tp_province,همدان
-http://topersia.local/e/province/yazd,relation,3300249,admin_level=4+ISO3166-2+exact-name,auto,tp_province,یزد
-https://topersia.com/e/province/tehran-province,relation,537701,admin_level=4+ISO3166-2+exact-name,auto,tp_province,تهران
-https://topersia.com/e/water-body/gavkhouni-lake-and-marshes-of-the-lower-zaindeh-rud,,,none,none,tp_water_body,گاوخونی
-https://topersia.com/e/desert/maranjab-desert,,,none,none,tp_desert,مرنجاب
-https://topersia.com/e/mountain/mount-karkas,,,none,none,tp_mountain,"کوه کرکس"
-http://topersia.local/e/city/sarakhs,relation,17341091,"exact-name+class(1 candidates)",auto,tp_city,سرخس
-http://topersia.local/e/city/mashhad,,,none,none,tp_city,مشهد
-http://topersia.local/e/city/sabzevar,,,none,none,tp_city,سبزوار
-http://topersia.local/e/city/damghan,,,none,none,tp_city,دامغان
-http://topersia.local/e/city/ray,,,none,none,tp_city,ری
-http://topersia.local/e/city/qazvin,,,none,none,tp_city,قزوین
-http://topersia.local/e/city/soltaniyeh,,,none,none,tp_city,سلطانیه
-http://topersia.local/e/city/tabriz,,,none,none,tp_city,تبریز
-http://topersia.local/e/city/semnan,,,none,none,tp_city,سمنان
-http://topersia.local/e/city/ardestan,,,none,none,tp_city,اردستان
-http://topersia.local/e/city/dowlatabad-isfahan,relation,8321763,"exact-name+class(10 candidates)",suggested,tp_city,"دولت آباد"
-http://topersia.local/e/city/chadegan,,,none,none,tp_city,چادگان
-http://topersia.local/e/city/dehaqan,relation,14148145,"exact-name+class(1 candidates)",auto,tp_city,دهاقان
-http://topersia.local/e/city/falavarjan,relation,12387154,"exact-name+class(1 candidates)",auto,tp_city,فلاورجان
-http://topersia.local/e/city/daran,relation,16699893,"exact-name+class(1 candidates)",auto,tp_city,داران
-http://topersia.local/e/city/fereydunshahr,,,none,none,tp_city,"فریدون شهر"
-http://topersia.local/e/city/golpayegan,,,none,none,tp_city,گلپایگان
-http://topersia.local/e/city/harand,,,none,none,tp_city,هرند
-http://topersia.local/e/city/isfahan,,,none,none,tp_city,اصفهان
-http://topersia.local/e/city/nikabad,,,none,none,tp_city,"نیک آباد"
-http://topersia.local/e/city/kashan,,,none,none,tp_city,کاشان
-http://topersia.local/e/city/khansar,,,none,none,tp_city,خوانسار
-http://topersia.local/e/city/khomeyni-shahr,,,none,none,tp_city,"خمینی شهر"
-http://topersia.local/e/city/khur,,,none,none,tp_city,خور
-http://topersia.local/e/city/tudeshk,,,none,none,tp_city,تودشک
-http://topersia.local/e/city/zarrin-shahr,,,none,none,tp_city,"زرین شهر"
-http://topersia.local/e/city/mobarakeh,relation,16053464,"exact-name+class(1 candidates)",auto,tp_city,مبارکه
-http://topersia.local/e/city/najafabad,relation,8688409,"exact-name+class(2 candidates)",suggested,tp_city,"نجف آباد"
-http://topersia.local/e/city/natanz,,,none,none,tp_city,نطنز
-http://topersia.local/e/city/semirom,relation,14151493,"exact-name+class(1 candidates)",auto,tp_city,سمیرم
-http://topersia.local/e/city/shahin-shahr,relation,6606071,"exact-name+class(1 candidates)",auto,tp_city,"شاهین شهر"
-http://topersia.local/e/city/shahreza,,,none,none,tp_city,شهرضا
-http://topersia.local/e/city/tiran,relation,17231559,"exact-name+class(1 candidates)",auto,tp_city,تیران
-http://topersia.local/e/city/varzaneh,relation,16027282,"exact-name+class(1 candidates)",auto,tp_city,ورزنه
-http://topersia.local/e/city/aran-va-bidgol,,,none,none,tp_city,"آران و بیدگل"
-http://topersia.local/e/city/abu-zeydabad,,,none,none,tp_city,ابوزیدآباد
-http://topersia.local/e/city/sefidshahr,,,none,none,tp_city,سفیدشهر
-http://topersia.local/e/city/nushabad,relation,14121536,"exact-name+class(1 candidates)",auto,tp_city,"نوش آباد"
-http://topersia.local/e/city/zavareh,,,none,none,tp_city,زواره
-http://topersia.local/e/city/mahabad-isfahan,,,none,none,tp_city,مهاباد
-http://topersia.local/e/city/eziyeh,,,none,none,tp_city,اژیه
-http://topersia.local/e/city/baharestan,relation,8321592,"exact-name+class(11 candidates)",suggested,tp_city,بهارستان
-http://topersia.local/e/city/hasanabad-isfahan,relation,8672480,"exact-name+class(7 candidates)",suggested,tp_city,"حسن آباد"
-http://topersia.local/e/city/ziyar,,,none,none,tp_city,زیار
-http://topersia.local/e/city/sagzi,relation,12978204,"exact-name+class(1 candidates)",auto,tp_city,سجزی
-http://topersia.local/e/city/qehjavarestan,relation,12468420,"exact-name+class(1 candidates)",auto,tp_city,قهجاورستان
-http://topersia.local/e/city/kuhpayeh,,,none,none,tp_city,کوهپایه
-http://topersia.local/e/city/mohammadabad-isfahan,relation,9990854,"exact-name+class(8 candidates)",suggested,tp_city,محمدآباد
-http://topersia.local/e/city/nasrabad-isfahan,relation,8688413,"exact-name+class(5 candidates)",suggested,tp_city,نصرآباد
-http://topersia.local/e/city/habibabad,relation,14125996,"exact-name+class(1 candidates)",auto,tp_city,"حبیب آباد"
-http://topersia.local/e/city/khurzuq,relation,14125179,"exact-name+class(1 candidates)",auto,tp_city,خورزوق
-http://topersia.local/e/city/dastgerd,relation,14125251,"exact-name+class(1 candidates)",auto,tp_city,دستگرد
-http://topersia.local/e/city/shapourabad,relation,14125997,"exact-name+class(1 candidates)",auto,tp_city,شاپورآباد
-http://topersia.local/e/city/komeshcheh,relation,14125995,"exact-name+class(2 candidates)",suggested,tp_city,کمشچه
-http://topersia.local/e/city/buin-va-miandasht,,,none,none,tp_city,"بوئین و میاندشت"
-http://topersia.local/e/city/afus,relation,12978217,"exact-name+class(1 candidates)",auto,tp_city,افوس
-http://topersia.local/e/city/rezvanshahr-isfahan,relation,8669979,"exact-name+class(1 candidates)",auto,tp_city,رضوانشهر
-http://topersia.local/e/city/asgaran,,,none,none,tp_city,عسگران
-http://topersia.local/e/city/rozveh,relation,12978219,"exact-name+class(1 candidates)",auto,tp_city,رزوه
-http://topersia.local/e/city/dorcheh-piaz,,,none,none,tp_city,"درچه پیاز"
-http://topersia.local/e/city/asgharabad,relation,12400413,"exact-name+class(1 candidates)",auto,tp_city,اصغرآباد
-http://topersia.local/e/city/kushk,relation,9990847,"exact-name+class(3 candidates)",suggested,tp_city,کوشک
-http://topersia.local/e/city/jandaq,,,none,none,tp_city,جندق
-http://topersia.local/e/city/farrokhi,,,none,none,tp_city,فرخی
-http://topersia.local/e/city/golshan,relation,8321882,"exact-name+class(3 candidates)",suggested,tp_city,گلشن
-http://topersia.local/e/city/hanna,relation,8688190,"exact-name+class(2 candidates)",suggested,tp_city,حنا
-http://topersia.local/e/city/vanak,relation,8321834,"exact-name+class(1 candidates)",auto,tp_city,ونک
-http://topersia.local/e/city/komeh,relation,14151496,"exact-name+class(1 candidates)",auto,tp_city,کمه
-http://topersia.local/e/city/gaz,,,none,none,tp_city,گز
-http://topersia.local/e/city/gorgab,relation,16347723,"exact-name+class(1 candidates)",auto,tp_city,گرگاب
-http://topersia.local/e/city/meymeh-isfahan,relation,14122346,"exact-name+class(1 candidates)",auto,tp_city,میمه
-http://topersia.local/e/city/vazvan,relation,14122390,"exact-name+class(1 candidates)",auto,tp_city,وزوان
-http://topersia.local/e/city/lay-bid,relation,18436632,"exact-name+class(1 candidates)",auto,tp_city,"لای بید"
-http://topersia.local/e/city/manzariyeh,relation,8669593,"exact-name+class(4 candidates)",suggested,tp_city,منظریه
-http://topersia.local/e/city/damaneh,,,none,none,tp_city,دامنه
-http://topersia.local/e/city/barf-anbar,,,none,none,tp_city,"برف انبار"
-http://topersia.local/e/city/abrisham,relation,12390844,"exact-name+class(1 candidates)",auto,tp_city,ابریشم
-http://topersia.local/e/city/imanshahr,,,none,none,tp_city,ایمانشهر
-http://topersia.local/e/city/baharan-shahr,relation,12390517,"exact-name+class(1 candidates)",auto,tp_city,"بهاران شهر"
-http://topersia.local/e/city/pir-bakran,relation,12390656,"exact-name+class(1 candidates)",auto,tp_city,پیربکران
-http://topersia.local/e/city/zazeran,relation,12388033,"exact-name+class(1 candidates)",auto,tp_city,زازران
-http://topersia.local/e/city/qahderijan,relation,12387178,"exact-name+class(1 candidates)",auto,tp_city,قهدریجان
-http://topersia.local/e/city/kelishad-va-sudarjan,,,none,none,tp_city,"کلیشاد و سودرجان"
-http://topersia.local/e/city/barzok,relation,14086699,"exact-name+class(1 candidates)",auto,tp_city,برزک
-http://topersia.local/e/city/jowshaqan-e-qali,relation,14089836,"exact-name+class(1 candidates)",auto,tp_city,"جوشقان قالی"
-http://topersia.local/e/city/qamsar,relation,14089835,"exact-name+class(1 candidates)",auto,tp_city,قمصر
-http://topersia.local/e/city/kamu-va-chugan,relation,14089837,"exact-name+class(1 candidates)",auto,tp_city,"کامو و چوگان"
-http://topersia.local/e/city/meshkat,relation,12978212,"exact-name+class(1 candidates)",auto,tp_city,مشکات
-http://topersia.local/e/city/niasar,,,none,none,tp_city,نیاسر
-http://topersia.local/e/city/guged,,,none,none,tp_city,گوگد
-http://topersia.local/e/city/golshahr,relation,8670199,"exact-name+class(5 candidates)",suggested,tp_city,گلشهر
-http://topersia.local/e/city/sedeh-lenjan,relation,15743379,"exact-name+class(1 candidates)",auto,tp_city,"سده لنجان"
-http://topersia.local/e/city/chamgordan,,,none,none,tp_city,چمگردان
-http://topersia.local/e/city/varnamkhast,,,none,none,tp_city,ورنامخواست
-http://topersia.local/e/city/fuladshahr,relation,6557105,"exact-name+class(1 candidates)",auto,tp_city,فولادشهر
-http://topersia.local/e/city/bagh-e-bahadoran,,,none,none,tp_city,"باغ بهادران"
-http://topersia.local/e/city/chermahin,,,none,none,tp_city,چرمهین
-http://topersia.local/e/city/zayandeh-rud,relation,2437046,"exact-name+class(5 candidates)",suggested,tp_city,"زاینده رود"
-http://topersia.local/e/city/dizicheh,,,none,none,tp_city,دیزیچه
-http://topersia.local/e/city/talkhuncheh,relation,15389867,"exact-name+class(1 candidates)",auto,tp_city,طالخونچه
-http://topersia.local/e/city/karkevand,,,none,none,tp_city,کرکوند
-http://topersia.local/e/city/zibashahr,relation,8672495,"exact-name+class(3 candidates)",suggested,tp_city,زیباشهر
-http://topersia.local/e/city/majlesi,,,none,none,tp_city,مجلسی
-http://topersia.local/e/city/naein,,,none,none,tp_city,نائین
-http://topersia.local/e/city/bafran,,,none,none,tp_city,بافران
-http://topersia.local/e/city/anarak,,,none,none,tp_city,انارک
-http://topersia.local/e/city/goldasht,relation,16646155,"exact-name+class(1 candidates)",auto,tp_city,گلدشت
-http://topersia.local/e/city/jowzdan,relation,15576375,"exact-name+class(1 candidates)",auto,tp_city,جوزدان
-http://topersia.local/e/city/kahriz-sang,,,none,none,tp_city,کهریزسنگ
-http://topersia.local/e/city/alavijeh,,,none,none,tp_city,علویجه
-http://topersia.local/e/city/dehaq,,,none,none,tp_city,دهق
-http://topersia.local/e/city/badrud,,,none,none,tp_city,بادرود
-http://topersia.local/e/city/tarq-rud,,,none,none,tp_city,"طرق رود"
-http://topersia.local/e/city/khaledabad,,,none,none,tp_city,خالدآباد
+entity_uid,osm_type,osm_id,method,status,post_type,name_fa,parent_province
+http://topersia.local/e/province/east-azerbaijan,relation,241472,ISO3166-2=IR-01,auto,tp_province,"آذربایجان شرقی",
+http://topersia.local/e/province/west-azerbaijan,relation,269900,ISO3166-2=IR-02,auto,tp_province,"آذربایجان غربی",
+http://topersia.local/e/province/ardabil,relation,2232180,ISO3166-2=IR-03,auto,tp_province,اردبیل,
+http://topersia.local/e/province/isfahan,relation,241593,ISO3166-2=IR-04,auto,tp_province,اصفهان,
+http://topersia.local/e/province/alborz,relation,1015996,"ISO3166-2=IR-32 not in OSM; exact-name match has ISO3166-2=IR-30",suggested,tp_province,البرز,
+http://topersia.local/e/province/ilam,relation,241037,ISO3166-2=IR-05,auto,tp_province,ایلام,
+http://topersia.local/e/province/bushehr,relation,3661581,ISO3166-2=IR-06,auto,tp_province,بوشهر,
+http://topersia.local/e/province/chaharmahal-and-bakhtiari,relation,229593,ISO3166-2=IR-08,auto,tp_province,"چهارمحال و بختیاری",
+http://topersia.local/e/province/south-khorasan,relation,537658,ISO3166-2=IR-29,auto,tp_province,"خراسان جنوبی",
+http://topersia.local/e/province/razavi-khorasan,relation,1015996,ISO3166-2=IR-30,auto,tp_province,"خراسان رضوی",
+http://topersia.local/e/province/north-khorasan,relation,225444,"ISO3166-2=IR-31 not in OSM; exact-name match has ISO3166-2=IR-28",suggested,tp_province,"خراسان شمالی",
+http://topersia.local/e/province/khuzestan,relation,241475,ISO3166-2=IR-10,auto,tp_province,خوزستان,
+http://topersia.local/e/province/zanjan,relation,537693,ISO3166-2=IR-11,auto,tp_province,زنجان,
+http://topersia.local/e/province/semnan,relation,241546,ISO3166-2=IR-12,auto,tp_province,سمنان,
+http://topersia.local/e/province/sistan-and-baluchestan,relation,241038,ISO3166-2=IR-13,auto,tp_province,"سیستان و بلوچستان",
+http://topersia.local/e/province/fars,relation,230033,ISO3166-2=IR-14,auto,tp_province,فارس,
+http://topersia.local/e/province/qazvin,relation,225444,ISO3166-2=IR-28,auto,tp_province,قزوین,
+http://topersia.local/e/province/qom,relation,241471,ISO3166-2=IR-26,auto,tp_province,قم,
+http://topersia.local/e/province/kurdistan,relation,229766,ISO3166-2=IR-16,auto,tp_province,کردستان,
+http://topersia.local/e/province/kerman,relation,229893,ISO3166-2=IR-15,auto,tp_province,کرمان,
+http://topersia.local/e/province/kermanshah,relation,241478,ISO3166-2=IR-17,auto,tp_province,کرمانشاه,
+http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,relation,269575,ISO3166-2=IR-18,auto,tp_province,"کهگیلویه و بویراحمد",
+http://topersia.local/e/province/golestan,relation,269903,ISO3166-2=IR-27,auto,tp_province,گلستان,
+http://topersia.local/e/province/gilan,relation,241473,ISO3166-2=IR-19,auto,tp_province,گیلان,
+http://topersia.local/e/province/lorestan,relation,241474,ISO3166-2=IR-20,auto,tp_province,لرستان,
+http://topersia.local/e/province/mazandaran,relation,3300249,ISO3166-2=IR-21,auto,tp_province,مازندران,
+http://topersia.local/e/province/markazi,relation,3385992,ISO3166-2=IR-22,auto,tp_province,مرکزی,
+http://topersia.local/e/province/hormozgan,relation,537701,ISO3166-2=IR-23,auto,tp_province,هرمزگان,
+http://topersia.local/e/province/hamadan,relation,269635,ISO3166-2=IR-24,auto,tp_province,همدان,
+http://topersia.local/e/province/yazd,relation,537702,ISO3166-2=IR-25,auto,tp_province,یزد,
+https://topersia.com/e/province/tehran-province,relation,255446,ISO3166-2=IR-07,auto,tp_province,تهران,
+http://topersia.local/e/city/sarakhs,,,"no-candidate-inside-parent (4 elsewhere)",none,tp_city,سرخس,"خراسان رضوی"
+http://topersia.local/e/city/mashhad,relation,5725142,exact-name+admin+inside-parent,auto,tp_city,مشهد,"خراسان رضوی"
+http://topersia.local/e/city/sabzevar,relation,9476668,exact-name+admin+inside-parent,auto,tp_city,سبزوار,"خراسان رضوی"
+http://topersia.local/e/city/damghan,relation,17341143,exact-name+admin+inside-parent,auto,tp_city,دامغان,سمنان
+http://topersia.local/e/city/ray,relation,8775293,exact-name+admin+inside-parent,auto,tp_city,ری,تهران
+http://topersia.local/e/city/qazvin,relation,6792037,exact-name+admin+inside-parent,auto,tp_city,قزوین,قزوین
+http://topersia.local/e/city/soltaniyeh,,,no-candidate,none,tp_city,سلطانیه,زنجان
+http://topersia.local/e/city/tabriz,relation,6564175,exact-name+admin+inside-parent,auto,tp_city,تبریز,"آذربایجان شرقی"
+http://topersia.local/e/city/semnan,relation,8199817,exact-name+admin+inside-parent,auto,tp_city,سمنان,سمنان
+http://topersia.local/e/city/ardestan,relation,8814068,"exact-name+admin+inside-parent (2 in parent; one administrative)",auto,tp_city,اردستان,اصفهان
+http://topersia.local/e/city/dowlatabad-isfahan,relation,14125744,exact-name+admin+inside-parent,auto,tp_city,"دولت آباد",اصفهان
+http://topersia.local/e/city/chadegan,,,no-candidate,none,tp_city,چادگان,اصفهان
+http://topersia.local/e/city/dehaqan,,,no-candidate,none,tp_city,دهاقان,اصفهان
+http://topersia.local/e/city/falavarjan,relation,12387154,exact-name+admin+inside-parent,auto,tp_city,فلاورجان,اصفهان
+http://topersia.local/e/city/daran,,,"no-candidate-inside-parent (1 elsewhere)",none,tp_city,داران,اصفهان
+http://topersia.local/e/city/fereydunshahr,,,no-candidate,none,tp_city,"فریدون شهر",اصفهان
+http://topersia.local/e/city/golpayegan,relation,6767955,exact-name+admin+inside-parent,auto,tp_city,گلپایگان,اصفهان
+http://topersia.local/e/city/harand,,,no-candidate,none,tp_city,هرند,اصفهان
+http://topersia.local/e/city/isfahan,relation,6566419,exact-name+admin+inside-parent,auto,tp_city,اصفهان,اصفهان
+http://topersia.local/e/city/nikabad,,,no-candidate,none,tp_city,"نیک آباد",اصفهان
+http://topersia.local/e/city/kashan,relation,8900220,exact-name+admin+inside-parent,auto,tp_city,کاشان,اصفهان
+http://topersia.local/e/city/khansar,,,no-candidate,none,tp_city,خوانسار,اصفهان
+http://topersia.local/e/city/khomeyni-shahr,relation,8209097,exact-name+admin+inside-parent,auto,tp_city,"خمینی شهر",اصفهان
+http://topersia.local/e/city/khur,,,no-candidate,none,tp_city,خور,اصفهان
+http://topersia.local/e/city/tudeshk,,,no-candidate,none,tp_city,تودشک,اصفهان
+http://topersia.local/e/city/zarrin-shahr,relation,6639261,exact-name+admin+inside-parent,auto,tp_city,"زرین شهر",اصفهان
+http://topersia.local/e/city/mobarakeh,relation,11285221,exact-name+admin+inside-parent,auto,tp_city,مبارکه,اصفهان
+http://topersia.local/e/city/najafabad,relation,12742531,exact-name+admin+inside-parent,auto,tp_city,"نجف آباد",اصفهان
+http://topersia.local/e/city/natanz,,,no-candidate,none,tp_city,نطنز,اصفهان
+http://topersia.local/e/city/semirom,,,no-candidate,none,tp_city,سمیرم,اصفهان
+http://topersia.local/e/city/shahin-shahr,relation,6606071,exact-name+admin+inside-parent,auto,tp_city,"شاهین شهر",اصفهان
+http://topersia.local/e/city/shahreza,relation,14145156,exact-name+admin+inside-parent,auto,tp_city,شهرضا,اصفهان
+http://topersia.local/e/city/tiran,,,no-candidate,none,tp_city,تیران,اصفهان
+http://topersia.local/e/city/varzaneh,relation,16027282,exact-name+admin+inside-parent,auto,tp_city,ورزنه,اصفهان
+http://topersia.local/e/city/aran-va-bidgol,relation,14121460,exact-name+admin+inside-parent,auto,tp_city,"آران و بیدگل",اصفهان
+http://topersia.local/e/city/abu-zeydabad,,,no-candidate,none,tp_city,ابوزیدآباد,اصفهان
+http://topersia.local/e/city/sefidshahr,,,no-candidate,none,tp_city,سفیدشهر,اصفهان
+http://topersia.local/e/city/nushabad,,,no-candidate,none,tp_city,"نوش آباد",اصفهان
+http://topersia.local/e/city/zavareh,,,no-candidate,none,tp_city,زواره,اصفهان
+http://topersia.local/e/city/mahabad-isfahan,,,"no-candidate-inside-parent (1 elsewhere)",none,tp_city,مهاباد,اصفهان
+http://topersia.local/e/city/eziyeh,,,no-candidate,none,tp_city,اژیه,اصفهان
+http://topersia.local/e/city/baharestan,relation,12980954,exact-name+admin+inside-parent,auto,tp_city,بهارستان,اصفهان
+http://topersia.local/e/city/hasanabad-isfahan,relation,17559692,exact-name+admin+inside-parent,auto,tp_city,"حسن آباد",اصفهان
+http://topersia.local/e/city/ziyar,,,no-candidate,none,tp_city,زیار,اصفهان
+http://topersia.local/e/city/sagzi,,,no-candidate,none,tp_city,سجزی,اصفهان
+http://topersia.local/e/city/qehjavarestan,,,no-candidate,none,tp_city,قهجاورستان,اصفهان
+http://topersia.local/e/city/kuhpayeh,,,no-candidate,none,tp_city,کوهپایه,اصفهان
+http://topersia.local/e/city/mohammadabad-isfahan,,,"no-candidate-inside-parent (6 elsewhere)",none,tp_city,محمدآباد,اصفهان
+http://topersia.local/e/city/nasrabad-isfahan,,,"no-candidate-inside-parent (2 elsewhere)",none,tp_city,نصرآباد,اصفهان
+http://topersia.local/e/city/habibabad,,,no-candidate,none,tp_city,"حبیب آباد",اصفهان
+http://topersia.local/e/city/khurzuq,,,no-candidate,none,tp_city,خورزوق,اصفهان
+http://topersia.local/e/city/dastgerd,way,524898276,exact-name+place+inside-parent,auto,tp_city,دستگرد,اصفهان
+http://topersia.local/e/city/shapourabad,,,no-candidate,none,tp_city,شاپورآباد,اصفهان
+http://topersia.local/e/city/komeshcheh,relation,16817692,exact-name+admin+inside-parent,auto,tp_city,کمشچه,اصفهان
+http://topersia.local/e/city/buin-va-miandasht,,,no-candidate,none,tp_city,"بوئین و میاندشت",اصفهان
+http://topersia.local/e/city/afus,,,no-candidate,none,tp_city,افوس,اصفهان
+http://topersia.local/e/city/rezvanshahr-isfahan,,,no-candidate,none,tp_city,رضوانشهر,اصفهان
+http://topersia.local/e/city/asgaran,,,no-candidate,none,tp_city,عسگران,اصفهان
+http://topersia.local/e/city/rozveh,,,no-candidate,none,tp_city,رزوه,اصفهان
+http://topersia.local/e/city/dorcheh-piaz,,,no-candidate,none,tp_city,"درچه پیاز",اصفهان
+http://topersia.local/e/city/asgharabad,,,no-candidate,none,tp_city,اصغرآباد,اصفهان
+http://topersia.local/e/city/kushk,,,"no-candidate-inside-parent (1 elsewhere)",none,tp_city,کوشک,اصفهان
+http://topersia.local/e/city/jandaq,,,no-candidate,none,tp_city,جندق,اصفهان
+http://topersia.local/e/city/farrokhi,,,no-candidate,none,tp_city,فرخی,اصفهان
+http://topersia.local/e/city/golshan,,,no-candidate,none,tp_city,گلشن,اصفهان
+http://topersia.local/e/city/hanna,,,"no-candidate-inside-parent (1 elsewhere)",none,tp_city,حنا,اصفهان
+http://topersia.local/e/city/vanak,,,no-candidate,none,tp_city,ونک,اصفهان
+http://topersia.local/e/city/komeh,,,no-candidate,none,tp_city,کمه,اصفهان
+http://topersia.local/e/city/gaz,,,no-candidate,none,tp_city,گز,اصفهان
+http://topersia.local/e/city/gorgab,relation,16347723,"exact-name+admin+inside-parent (2 in parent; one administrative)",auto,tp_city,گرگاب,اصفهان
+http://topersia.local/e/city/meymeh-isfahan,,,no-candidate,none,tp_city,میمه,اصفهان
+http://topersia.local/e/city/vazvan,,,no-candidate,none,tp_city,وزوان,اصفهان
+http://topersia.local/e/city/lay-bid,relation,18436632,exact-name+admin+inside-parent,auto,tp_city,"لای بید",اصفهان
+http://topersia.local/e/city/manzariyeh,,,"no-candidate-inside-parent (1 elsewhere)",none,tp_city,منظریه,اصفهان
+http://topersia.local/e/city/damaneh,,,no-candidate,none,tp_city,دامنه,اصفهان
+http://topersia.local/e/city/barf-anbar,,,no-candidate,none,tp_city,"برف انبار",اصفهان
+http://topersia.local/e/city/abrisham,relation,12390844,exact-name+admin+inside-parent,auto,tp_city,ابریشم,اصفهان
+http://topersia.local/e/city/imanshahr,,,no-candidate,none,tp_city,ایمانشهر,اصفهان
+http://topersia.local/e/city/baharan-shahr,,,no-candidate,none,tp_city,"بهاران شهر",اصفهان
+http://topersia.local/e/city/pir-bakran,,,no-candidate,none,tp_city,پیربکران,اصفهان
+http://topersia.local/e/city/zazeran,,,no-candidate,none,tp_city,زازران,اصفهان
+http://topersia.local/e/city/qahderijan,relation,12387178,exact-name+admin+inside-parent,auto,tp_city,قهدریجان,اصفهان
+http://topersia.local/e/city/kelishad-va-sudarjan,,,no-candidate,none,tp_city,"کلیشاد و سودرجان",اصفهان
+http://topersia.local/e/city/barzok,,,no-candidate,none,tp_city,برزک,اصفهان
+http://topersia.local/e/city/jowshaqan-e-qali,,,no-candidate,none,tp_city,"جوشقان قالی",اصفهان
+http://topersia.local/e/city/qamsar,way,504349368,exact-name+place+inside-parent,auto,tp_city,قمصر,اصفهان
+http://topersia.local/e/city/kamu-va-chugan,,,no-candidate,none,tp_city,"کامو و چوگان",اصفهان
+http://topersia.local/e/city/meshkat,,,no-candidate,none,tp_city,مشکات,اصفهان
+http://topersia.local/e/city/niasar,relation,9209813,exact-name+admin+inside-parent,auto,tp_city,نیاسر,اصفهان
+http://topersia.local/e/city/guged,,,no-candidate,none,tp_city,گوگد,اصفهان
+http://topersia.local/e/city/golshahr,relation,16027281,exact-name+admin+inside-parent,auto,tp_city,گلشهر,اصفهان
+http://topersia.local/e/city/sedeh-lenjan,relation,15743379,exact-name+admin+inside-parent,auto,tp_city,"سده لنجان",اصفهان
+http://topersia.local/e/city/chamgordan,,,no-candidate,none,tp_city,چمگردان,اصفهان
+http://topersia.local/e/city/varnamkhast,,,no-candidate,none,tp_city,ورنامخواست,اصفهان
+http://topersia.local/e/city/fuladshahr,relation,6557105,exact-name+admin+inside-parent,auto,tp_city,فولادشهر,اصفهان
+http://topersia.local/e/city/bagh-e-bahadoran,,,no-candidate,none,tp_city,"باغ بهادران",اصفهان
+http://topersia.local/e/city/chermahin,,,no-candidate,none,tp_city,چرمهین,اصفهان
+http://topersia.local/e/city/zayandeh-rud,relation,14409498,exact-name+admin+inside-parent,auto,tp_city,"زاینده رود",اصفهان
+http://topersia.local/e/city/dizicheh,relation,16612734,exact-name+admin+inside-parent,auto,tp_city,دیزیچه,اصفهان
+http://topersia.local/e/city/talkhuncheh,relation,15389867,exact-name+admin+inside-parent,auto,tp_city,طالخونچه,اصفهان
+http://topersia.local/e/city/karkevand,,,no-candidate,none,tp_city,کرکوند,اصفهان
+http://topersia.local/e/city/zibashahr,way,452973306,exact-name+place+inside-parent,auto,tp_city,زیباشهر,اصفهان
+http://topersia.local/e/city/majlesi,relation,15100601,exact-name+admin+inside-parent,auto,tp_city,مجلسی,اصفهان
+http://topersia.local/e/city/naein,,,no-candidate,none,tp_city,نائین,اصفهان
+http://topersia.local/e/city/bafran,,,no-candidate,none,tp_city,بافران,اصفهان
+http://topersia.local/e/city/anarak,,,no-candidate,none,tp_city,انارک,اصفهان
+http://topersia.local/e/city/goldasht,relation,16783015,exact-name+admin+inside-parent,auto,tp_city,گلدشت,اصفهان
+http://topersia.local/e/city/jowzdan,relation,15576375,"exact-name+admin+inside-parent (2 in parent; one administrative)",auto,tp_city,جوزدان,اصفهان
+http://topersia.local/e/city/kahriz-sang,,,no-candidate,none,tp_city,کهریزسنگ,اصفهان
+http://topersia.local/e/city/alavijeh,,,no-candidate,none,tp_city,علویجه,اصفهان
+http://topersia.local/e/city/dehaq,way,1426652204,exact-name+place+inside-parent,auto,tp_city,دهق,اصفهان
+http://topersia.local/e/city/badrud,relation,9265624,exact-name+admin+inside-parent,auto,tp_city,بادرود,اصفهان
+http://topersia.local/e/city/tarq-rud,,,no-candidate,none,tp_city,"طرق رود",اصفهان
+http://topersia.local/e/city/khaledabad,,,no-candidate,none,tp_city,خالدآباد,اصفهان
+https://topersia.com/e/water-body/gavkhouni-lake-and-marshes-of-the-lower-zaindeh-rud,,,natural-area,skip,tp_water_body,گاوخونی,
+https://topersia.com/e/desert/maranjab-desert,,,natural-area,skip,tp_desert,مرنجاب,
+https://topersia.com/e/mountain/mount-karkas,,,natural-area,skip,tp_mountain,"کوه کرکس",

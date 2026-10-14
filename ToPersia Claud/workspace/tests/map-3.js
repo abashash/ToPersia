@@ -21,9 +21,18 @@ const check = ( ok, label, note ) => { n++; if ( ! ok ) { bad++; } console.log( 
 
 const ONLINE = /tiles\.openfreemap\.org|fonts\.openfreemap\.org/;
 
+/* سرور آنلاین ساختگی — نتیجهٔ probe از شبکهٔ واقعی نیاید (probe ۲٫۵ ثانیه‌ای روی اتصال سرد گاهی رد می‌شد):
+ *   موفق  ← هر style (روشن یا تیره) با پاسخ ۲۰۰ و یک لایهٔ نماد؛ هر درخواست دیگر به این میزبان قطع
+ *   ناموفق ← مسیر «شکست» پایین‌تر با route خودش (خطا · مهلت · ۵۰۰) این را می‌پوشاند (آخرین route برنده است)
+ * خودِ مهلت و منطق probe در نقشه دست‌نخورده است. */
+const STUB = { version: 8, name: 'stub', sources: { ofm: { type: 'geojson', data: { type: 'FeatureCollection', features: [] } } },
+	layers: [ { id: 'bg', type: 'background', paint: { 'background-color': '#eee' } }, { id: 'lbl', type: 'symbol', source: 'ofm', layout: { 'text-field': [ 'get', 'name' ] } } ] };
+
 async function ctxPage( browser, mode ) {
 	const ctx = await browser.newContext( { viewport: { width: 1440, height: 700 } } );
 	const page = await ctx.newPage();
+	await page.route( /tiles\.openfreemap\.org\/styles\//, r => r.fulfill( { status: 200, contentType: 'application/json', body: JSON.stringify( STUB ) } ) );
+	await page.route( /(tiles|fonts)\.openfreemap\.org\/(?!styles\/)/, r => r.abort() );
 	if ( mode ) { await page.addInitScript( m => { try { if ( ! localStorage.getItem( 'tp-mode' ) ) { localStorage.setItem( 'tp-mode', m ); } } catch ( e ) {} }, mode ); }
 	const reqs = [];
 	page.on( 'request', r => { if ( ONLINE.test( r.url() ) ) { reqs.push( r.url() ); } } );
