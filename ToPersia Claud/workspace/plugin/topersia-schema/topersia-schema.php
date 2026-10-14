@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Schema Engine
  * Description: موتور دادۀ ساختاریافتۀ ToPersia — یک گراف JSON-LD واحد در هر صفحه، با @id مبتنی بر entity_uid برای بازشناسی میان‌زبانی و میان‌صفحه‌ای. معماری داده‌محور: افزودن موجودیت تازه یعنی افزودن یک بلوک به نقشه، نه نوشتن تابع. وابسته به افزونۀ ToPersia Core Functions.
- * Version: 1.3.0
+ * Version: 1.3.1
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-schema
@@ -77,6 +77,13 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
+ * 1.3.1 — P5-D357 (پیگیری): organizer و sameAs رویداد، فقط وقتی گره Event است (Thing بی‌تغییر).
+ *          • organizer ← Organization با name از organizer_name همان پست؛ ترجمۀ بی مقدار
+ *            organizer نمی‌گیرد (نام فارسی روی صفحۀ انگلیسی نه).
+ *          • official_event_url ← sameAs، فقط URL معتبر https با دامنه‌ای جز topersia.com
+ *            (و زیردامنه‌هایش)؛ ترجمۀ بی مقدار از پست اصلی می‌خواند (نشانی وابسته به زبان
+ *            نیست). اگر external_reference_uri هم sameAs داده، هر دو در آرایه می‌آیند.
+ *          • هیچ‌کدام نبود ← هیچ‌کدام نمی‌آید.
  * 1.3.0 — P5-D357: رویداد با تاریخ واقعی. (۱۳ اکتبر · P5-D349: والد مکانیِ ترجمه که یال رابطه ندارد از پست زبان اصلی خوانده می‌شود — containedInPlace در /en/ و /ar/.)
  *          • E1 tp_festival ← Festival · E3 tp_sports_event ← SportsEvent ·
  *            E5 tp_religious_event ← Event، با سازندۀ topersia_schema_event —
@@ -137,7 +144,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ این افزونه — زبانۀ تشخیص هسته این را می‌خواند. */
 if ( ! defined( 'TOPERSIA_SCHEMA_VERSION' ) ) {
-	define( 'TOPERSIA_SCHEMA_VERSION', '1.3.0' );
+	define( 'TOPERSIA_SCHEMA_VERSION', '1.3.1' );
 }
 
 /** حداقل نسخۀ هستۀ سازگار. */
@@ -1063,7 +1070,8 @@ function topersia_schema_event_location( $post_id, $config ) {
  * Event فقط با startDate معتبر و دورۀ نگذشته؛ وگرنه همان Thing با additionalType
  * (Event بی startDate یا با دورۀ گذشته در نتیجۀ غنی نامعتبر یا گمراه‌کننده است).
  * رویداد قمری (E5): «Thing تا ورود تاریخ سال تازه».
- * فقط ویژگی‌های مستند Event؛ offers · performer · organizer عمداً نیستند.
+ * فقط ویژگی‌های مستند Event؛ offers · performer عمداً نیستند. organizer و sameAs
+ * (۱٫۳٫۱) فقط روی همین گره Event و فقط از دادۀ خودِ پست.
  */
 function topersia_schema_event( $node, $post_id, $config = array() ) {
 
@@ -1098,7 +1106,79 @@ function topersia_schema_event( $node, $post_id, $config = array() ) {
 	$node['eventAttendanceMode'] = 'https://schema.org/OfflineEventAttendanceMode';
 	$node['location']            = topersia_schema_event_location( $post_id, $config );
 
+	$organizer = topersia_schema_event_organizer( $post_id );
+
+	if ( ! empty( $organizer ) ) {
+		$node['organizer'] = $organizer;
+	}
+
+	$official = topersia_schema_event_official_url( $post_id );
+
+	if ( '' !== $official ) {
+		$existing = isset( $node['sameAs'] ) ? (array) $node['sameAs'] : array();
+
+		if ( ! in_array( $official, $existing, true ) ) {
+			$existing[] = $official;
+		}
+
+		$node['sameAs'] = 1 === count( $existing ) ? $existing[0] : array_values( $existing );
+	}
+
 	return $node;
+}
+
+/**
+ * برگزارکنندۀ رویداد — Organization با name از organizer_name همان پست (۱٫۳٫۱).
+ * بی بازگشت به پست اصلی: نام به زبان صفحه است و ترجمۀ بی مقدار نباید نام فارسی بگیرد.
+ */
+function topersia_schema_event_organizer( $post_id ) {
+
+	$raw  = get_post_meta( $post_id, 'organizer_name', true );
+	$name = is_scalar( $raw ) ? trim( wp_strip_all_tags( (string) $raw ) ) : '';
+
+	if ( '' === $name ) {
+		return array();
+	}
+
+	return array( '@type' => 'Organization', 'name' => $name );
+}
+
+/**
+ * نشانی رسمی رویداد برای sameAs (۱٫۳٫۱): https معتبر، بی نام‌کاربری، دامنه‌ای جز
+ * topersia.com و زیردامنه‌هایش. نشانی وابسته به زبان نیست: ترجمۀ بی مقدار از اصل.
+ */
+function topersia_schema_event_official_url( $post_id ) {
+
+	$raw  = get_post_meta( $post_id, 'official_event_url', true );
+	$text = is_scalar( $raw ) ? (string) $raw : '';
+
+	if ( '' === trim( $text ) ) {
+		$original = topersia_schema_source_id( $post_id );
+
+		if ( $original !== $post_id ) {
+			$raw = get_post_meta( $original, 'official_event_url', true );
+		}
+	}
+
+	$url = is_scalar( $raw ) ? trim( (string) $raw ) : '';
+
+	if ( '' === $url || ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
+		return '';
+	}
+
+	$parts = parse_url( $url );
+	$host  = isset( $parts['host'] ) ? strtolower( rtrim( $parts['host'], '.' ) ) : '';
+
+	if ( ! is_array( $parts ) || 'https' !== strtolower( (string) $parts['scheme'] ) || '' === $host
+		|| isset( $parts['user'] ) || isset( $parts['pass'] ) || false === strpos( $host, '.' ) ) {
+		return '';
+	}
+
+	if ( 'topersia.com' === $host || '.topersia.com' === substr( $host, -13 ) ) {
+		return '';
+	}
+
+	return esc_url_raw( $url );
 }
 
 /* ═══════════════════════════════════════════════════════════════════════

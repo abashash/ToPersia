@@ -187,6 +187,98 @@ function tps_cases() {
 			return tps_is_thing( tps_entity( 31 ), 'https://schema.org/Festival' );
 		},
 
+		'organizer_present' => function () {
+			tps_festival( 1, array( 'event_start_date' => '2026-11-01', 'organizer_name' => 'وزارت میراث' ) );
+			$o = tps_entity( 1 )['organizer'];
+			return 'Organization' === $o['@type'] && 'وزارت میراث' === $o['name'] && 2 === count( $o );
+		},
+
+		'organizer_absent' => function () {
+			tps_festival( 1, array( 'event_start_date' => '2026-11-01' ) );
+			tps_festival( 2, array( 'event_start_date' => '2026-11-01', 'organizer_name' => '  ' ) );
+			return ! isset( tps_entity( 1 )['organizer'] ) && ! isset( tps_entity( 2 )['organizer'] );
+		},
+
+		'same_as_valid' => function () {
+			tps_festival( 1, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'https://rosewater.example.ir/fest?y=1' ) );
+			return 'https://rosewater.example.ir/fest?y=1' === tps_entity( 1 )['sameAs'];
+		},
+
+		'same_as_invalid' => function () {
+			foreach ( array( 'not a url', 'rosewater.example.ir', 'ftp://example.ir/x', 'https:///x', 'javascript:alert(1)', 'https://u:p@example.ir/', 'https://localhost/' ) as $i => $bad ) {
+				tps_festival( 1 + $i, array( 'event_start_date' => '2026-11-01', 'official_event_url' => $bad ) );
+				if ( isset( tps_entity( 1 + $i )['sameAs'] ) ) {
+					return false;
+				}
+			}
+			return true;
+		},
+
+		'same_as_http' => function () {
+			tps_festival( 1, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'http://rosewater.example.ir/' ) );
+			return ! isset( tps_entity( 1 )['sameAs'] );
+		},
+
+		'same_as_own_domain' => function () {
+			foreach ( array( 'https://topersia.com/x', 'https://www.topersia.com/x', 'https://EN.ToPersia.com./x' ) as $i => $own ) {
+				tps_festival( 1 + $i, array( 'event_start_date' => '2026-11-01', 'official_event_url' => $own ) );
+				if ( isset( tps_entity( 1 + $i )['sameAs'] ) ) {
+					return false;
+				}
+			}
+			tps_festival( 9, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'https://nottopersia.com/x' ) );
+			return 'https://nottopersia.com/x' === tps_entity( 9 )['sameAs'];
+		},
+
+		'same_as_merges_reference' => function () {
+			tps_festival( 1, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'https://rosewater.example.ir/', 'external_reference_uri' => 'https://fa.wikipedia.org/wiki/x' ) );
+			tps_festival( 2, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'https://fa.wikipedia.org/wiki/x', 'external_reference_uri' => 'https://fa.wikipedia.org/wiki/x' ) );
+			return array( 'https://fa.wikipedia.org/wiki/x', 'https://rosewater.example.ir/' ) === tps_entity( 1 )['sameAs']
+				&& 'https://fa.wikipedia.org/wiki/x' === tps_entity( 2 )['sameAs'];
+		},
+
+		'thing_no_organizer_sameas' => function () {
+			$m = array( 'organizer_name' => 'وزارت', 'official_event_url' => 'https://rosewater.example.ir/' );
+			tps_festival( 1, array( 'event_start_date' => '2026-09-01' ) + $m );
+			tps_festival( 2, $m );
+			tps_post( 8, 'tp_seasonal_event', array( 'event_start_date' => '2026-12-01' ) + $m );
+			foreach ( array( 1, 2, 8 ) as $id ) {
+				$e = tps_entity( $id );
+				if ( 'Thing' !== $e['@type'] || isset( $e['organizer'] ) || isset( $e['sameAs'] ) ) {
+					return false;
+				}
+			}
+			return true;
+		},
+
+		'translation_no_organizer' => function () {
+			tps_wpml_on();
+			tps_festival( 30, array( 'event_start_date' => '2026-11-01', 'organizer_name' => 'وزارت میراث' ) );
+			tps_post( 31, 'tp_festival', array( 'entity_uid' => 'https://topersia.com/id/ev-30', 'event_start_date' => '2026-11-01' ) );
+			tps_post( 32, 'tp_festival', array( 'entity_uid' => 'https://topersia.com/id/ev-30', 'event_start_date' => '2026-11-01', 'organizer_name' => 'Ministry' ) );
+			$GLOBALS['tps_tr'][31] = 30;
+			$GLOBALS['tps_tr'][32] = 30;
+			return ! isset( tps_entity( 31 )['organizer'] ) && 'Ministry' === tps_entity( 32 )['organizer']['name'];
+		},
+
+		'translation_url_from_original' => function () {
+			tps_wpml_on();
+			tps_festival( 30, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'https://rosewater.example.ir/' ) );
+			tps_post( 31, 'tp_festival', array( 'entity_uid' => 'https://topersia.com/id/ev-30', 'event_start_date' => '2026-11-01' ) );
+			tps_post( 32, 'tp_festival', array( 'entity_uid' => 'https://topersia.com/id/ev-30', 'event_start_date' => '2026-11-01', 'official_event_url' => 'https://own.example.ir/' ) );
+			$GLOBALS['tps_tr'][31] = 30;
+			$GLOBALS['tps_tr'][32] = 30;
+			return 'https://rosewater.example.ir/' === tps_entity( 31 )['sameAs'] && 'https://own.example.ir/' === tps_entity( 32 )['sameAs'];
+		},
+
+		'translation_bad_original_url' => function () {
+			tps_wpml_on();
+			tps_festival( 30, array( 'event_start_date' => '2026-11-01', 'official_event_url' => 'http://rosewater.example.ir/' ) );
+			tps_post( 31, 'tp_festival', array( 'entity_uid' => 'https://topersia.com/id/ev-30', 'event_start_date' => '2026-11-01' ) );
+			$GLOBALS['tps_tr'][31] = 30;
+			return ! isset( tps_entity( 31 )['sameAs'] );
+		},
+
 		'tehran_today' => function () {
 			$GLOBALS['tps_filters'] = array();
 			return '2026-10-13' === topersia_schema_today( strtotime( '2026-10-12 21:00:00 UTC' ) )
@@ -241,6 +333,23 @@ $mutations = array(
 	array( 'translation_dates', "\$end = topersia_schema_ymd( get_post_meta( \$source,", "\$end = topersia_schema_ymd( get_post_meta( \$post_id," ),
 	array( 'translation_dates', "\$ids = \$relation->get_parents( \$original, 'ids' );", '' ),
 	array( 'translation_own_date', "if ( '' === trim( is_scalar( \$raw ) ? (string) \$raw : '' ) ) {", 'if ( true ) {' ),
+	array( 'organizer_present', "\$node['organizer'] = \$organizer;", '' ),
+	array( 'organizer_present', "array( '@type' => 'Organization', 'name' => \$name )", "array( '@type' => 'Person', 'name' => \$name )" ),
+	array( 'organizer_absent', "if ( '' === \$name ) {\n\t\treturn array();", "if ( false ) {\n\t\treturn array();" ),
+	array( 'thing_no_organizer_sameas', "\$organizer = topersia_schema_event_organizer( \$post_id );\n\n\tif ( ! empty( \$organizer ) ) {\n\t\t\$node['organizer'] = \$organizer;\n\t}", "" ),
+	array( 'same_as_valid', "\$node['sameAs'] = 1 === count( \$existing ) ? \$existing[0] : array_values( \$existing );", "" ),
+	array( 'same_as_invalid', "! filter_var( \$url, FILTER_VALIDATE_URL )", "false" ),
+	array( 'same_as_invalid', "isset( \$parts['user'] ) || isset( \$parts['pass'] ) || false === strpos( \$host, '.' )", "false" ),
+	array( 'same_as_http', "'https' !== strtolower( (string) \$parts['scheme'] )", "false" ),
+	array( 'same_as_own_domain', "'topersia.com' === \$host || ", "" ),
+	array( 'same_as_own_domain', "'.topersia.com' === substr( \$host, -13 )", "false" ),
+	array( 'same_as_own_domain', "rtrim( \$parts['host'], '.' )", "\$parts['host']" ),
+	array( 'same_as_merges_reference', "! in_array( \$official, \$existing, true )", "true" ),
+	array( 'same_as_merges_reference', "\$existing = isset( \$node['sameAs'] ) ? (array) \$node['sameAs'] : array();", "\$existing = array();" ),
+	array( 'translation_no_organizer', "\$raw  = get_post_meta( \$post_id, 'organizer_name', true );", "\$raw  = get_post_meta( topersia_schema_source_id( \$post_id ), 'organizer_name', true );" ),
+	array( 'translation_url_from_original', "if ( \$original !== \$post_id ) {\n\t\t\t\$raw = get_post_meta( \$original, 'official_event_url', true );", "if ( false ) {\n\t\t\t\$raw = get_post_meta( \$original, 'official_event_url', true );" ),
+	array( 'translation_url_from_original', "if ( '' === trim( \$text ) ) {", 'if ( true ) {' ),
+	array( 'translation_bad_original_url', "\$url = is_scalar( \$raw ) ? trim( (string) \$raw ) : '';", "\$url = 'https://x.example.ir/';" ),
 	array( 'tehran_today', "new DateTimeZone( 'Asia/Tehran' )", "new DateTimeZone( 'UTC' )" ),
 );
 
