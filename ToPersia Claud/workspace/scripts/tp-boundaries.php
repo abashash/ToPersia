@@ -27,9 +27,14 @@ $AREA = array( 'tp_province' => array( 'rel', 4 ), 'tp_water_body' => array( 'an
 
 /* ── ابزار ───────────────────────────────────────────────────────── */
 function tpb_overpass( $ql, $tries = 4 ) {
+	/* آینه‌ها یک‌درمیان؛ POST به‌صورت urlencoded (چندبخشی را Overpass با ۴۰۰ رد می‌کند)؛ گواهی از بستهٔ وردپرس وقتی php.ini ندارد */
+	$mirrors = array( 'https://overpass-api.de/api/interpreter', 'https://lz4.overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter' );
+	$ca      = defined( 'ABSPATH' ) && is_file( ABSPATH . WPINC . '/certificates/ca-bundle.crt' ) ? ABSPATH . WPINC . '/certificates/ca-bundle.crt' : '';
 	for ( $i = 0; $i < $tries; $i++ ) {
-		$ch = curl_init( 'https://overpass-api.de/api/interpreter' );
-		curl_setopt_array( $ch, array( CURLOPT_POST => true, CURLOPT_POSTFIELDS => array( 'data' => $ql ), CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 180, CURLOPT_USERAGENT => 'ToPersia-local-boundary-script/1.0', CURLOPT_PROXY => '' ) );
+		$ch  = curl_init( $mirrors[ $i % count( $mirrors ) ] );
+		$opt = array( CURLOPT_POST => true, CURLOPT_POSTFIELDS => http_build_query( array( 'data' => $ql ) ), CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 120, CURLOPT_USERAGENT => 'ToPersia-local-boundary-script/1.0', CURLOPT_PROXY => '' );
+		if ( '' !== $ca && ! ini_get( 'curl.cainfo' ) ) { $opt[ CURLOPT_CAINFO ] = $ca; }
+		curl_setopt_array( $ch, $opt );
 		$body = curl_exec( $ch );
 		$code = (int) curl_getinfo( $ch, CURLINFO_HTTP_CODE );
 		curl_close( $ch );
@@ -37,7 +42,7 @@ function tpb_overpass( $ql, $tries = 4 ) {
 			$j = json_decode( $body, true );
 			if ( is_array( $j ) && isset( $j['elements'] ) ) { return $j['elements']; }
 		}
-		sleep( 6 * ( $i + 1 ) );
+		sleep( 3 * ( $i + 1 ) );
 	}
 	return null;
 }
@@ -139,7 +144,8 @@ if ( 'match' === $cmd ) {
 			} else {
 				$q  = "[out:json][timeout:60];(rel[\"name\"=\"{$name}\"][\"type\"~\"multipolygon|boundary\"]({$bbox});way[\"name\"=\"{$name}\"][\"natural\"~\"water|wood|scrub|sand|bare_rock|wetland|coastline\"]({$bbox});way[\"name\"=\"{$name}\"][\"place\"~\"island|islet\"]({$bbox}););out tags;";
 				$el = tpb_overpass( $q );
-				sleep( 2 );
+				echo '.'; flush();
+				sleep( 1 );
 				if ( is_array( $el ) && $el ) {
 					usort( $el, function ( $a, $b ) { return ( 'relation' === $b['type'] ) <=> ( 'relation' === $a['type'] ); } );
 					$best = $el[0];

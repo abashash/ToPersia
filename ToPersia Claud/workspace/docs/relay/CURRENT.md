@@ -32,13 +32,10 @@
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
-۱۴ اکتبر — پس از پرامت یکپارچه: بندهای ۱ تا ۴ انجام شد (ادغام ابری E `f1163acd` + گارد OPS-D012 `a30bd59d` · میزبان‌های بیرونی و Lighthouse P5-D359 · تاریخ رویداد P5-D357). **بند ۵ (فقط با VPN) منتظر کاربر است:**
-
-1. کاربر VPN را روشن می‌کند و می‌گوید.
-2. `scripts/tp-boundaries.php` match ← build ← report (فقط `auto` و `confirmed` به GeoJSON؛ `suggested` و `none` در گزارش برای تأیید کاربر).
-3. `scripts/tp-tiles-update.php` با bbox تا ۴۲٫۵°N؛ سنجش اندازه، تفاوت پیش و پس، شمار pois تهران، هتل هالی، «دریای خزر» و «خلیج فارس» در fa و ar؛ جایگزینی پس از سنجش.
-4. کاربر VPN را خاموش می‌کند؛ `map-2j` و `map-3` دوباره بی VPN.
-5. ثبت‌شده برای بعد: render — دروازهٔ سقف `topersia-g-ai.php` / صافی `tpas_rebuild_counts_cap` (با 1.3.0 عملاً بی‌اثر: تولید فقط مدیر)؛ core — `post_content` در `topersia_content_hash_compute`؛ زنده — `TOPERSIA_TRUST_PROXY` (کاربر)؛ تصویر نمونهٔ picsum در بلوک «مگامنو» (#1935) پیش از راه‌اندازی.
+۱۵ اکتبر — بند ۵ با VPN انجام شد و VPN خاموش است:
+- مرز OSM: `match` ← ۷۱ ردیف auto (۳۰ استان + ۴۱ شهر)، ۱۴ شهر suggested، ۶۲ none؛ `build` ← ۶۶ GeoJSON (۶۶۷ KB، بیرون از git: `uploads/tiles/boundaries/`)؛ شکست هندسه: لرستان · مرکزی · دهاقان · اصغرآباد · میمه. ردیف‌های suggested و none **منتظر تأیید کاربر** (`reference/osm-boundary-map.csv`؛ برای تأیید `confirmed` بنویس و `build` را دوباره بزن).
+- کاشی: `iran.pmtiles` ساخت ۲۰۲۶۱۰۱۳، bbox تا ۴۲٫۵°N، ۷۰۵ MB؛ پیشین `iran-20260328.pmtiles` کنارش (بیرون از git).
+- بعدی: تأیید ردیف‌های مرز توسط کاربر؛ تصمیم دربارهٔ برچسب عربی «الخليج العربي» (داده OSM)؛ هتل هالی در کاشی‌ها نیست؛ picsum در «مگامنو»؛ `TOPERSIA_TRUST_PROXY` (کاربر).
 
 ### قیدها و تصمیم‌های مرتبط
 

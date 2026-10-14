@@ -83,3 +83,4 @@
 | 74 | 2026-10-13 | `geo` | `ad4d66db` |  | نسخهٔ نصب‌شدهٔ render و خلاصه‌ساز 1.3.0 (با test-12 که تا امروز بی ردیابی بود) | ✅ |
 | 75 | 2026-10-14 | `render` | `1f28c6ba` |  | P5-D359 Google Fonts خاموش + ext-hosts؛ P5-D357 تاریخ رویداد؛ assert 531/0 · behaviour 380/0 · event-dates 43/0 · Lighthouse A/B سالم | ✅ |
 | 76 | 2026-10-14 | `geo` | `d2a02128` |  | نسخهٔ نصب‌شدهٔ render و core پس از P5-D359 | ✅ |
+| 77 | 2026-10-15 | `map` | (این commit) |  | بند ۵ با VPN: tp-boundaries (POST urlencoded + آینه‌ها)، نگاشت OSM `reference/osm-boundary-map.csv`، tests/pmtiles-probe.js، .gitignore کاشی و مرز؛ PMTiles ۲۰۲۶۱۰۱۳ تا ۴۲٫۵°N؛ map-2j 29/0 · map-3 18/0 کروم و فایرفاکس | ✅ |

@@ -39,7 +39,9 @@
 **/*secret*.sql
 
 # Large map data kept locally
-/geo/wp-content/uploads/tiles/iran.pmtiles
+/geo/wp-content/uploads/tiles/*.pmtiles
+/geo/wp-content/uploads/tiles/*.part
+/geo/wp-content/uploads/tiles/boundaries/
 
 
 # WordPress runtime / temporary files
