@@ -1276,6 +1276,52 @@ if ( ! function_exists( 'topersia_g_event_when' ) ) {
 }
 
 /**
+ * کاشی‌های «برگزارکننده» و «وب‌سایت رسمی» رویداد — کارت حقایق، کنار کاشی‌های تاریخ.  P5-D361
+ *
+ * شرط نمایش دقیقاً شرط اسکیما (topersia-schema 1.3.1) است تا دو قاعده از هم جدا نشوند:
+ *   برگزارکننده  `topersia_schema_event_organizer()`: متای organizer_name همان پست؛ ترجمۀ بی مقدار ← هیچ
+ *   وب‌سایت رسمی `topersia_schema_event_official_url()`: ترجمۀ بی‌مقدار از پست اصلی؛ فقط https معتبر، بی نام‌کاربری، دامنه‌ای جز topersia.com
+ * اسکیما نبود ← همان قاعده با کدِ کوتاه این‌جا. هر کاشی فقط با مقدار می‌آید، چه گره Event باشد چه Thing؛ پیوند بیرونی rel="noopener" و متن پیوند نام دامنه.
+ *
+ * @return array[] کاشی‌ها برای topersia_g_tiles
+ */
+if ( ! function_exists( 'topersia_g_event_extra_tiles' ) ) {
+	function topersia_g_event_extra_tiles( $pid ) {
+
+		$tiles = array();
+
+		if ( function_exists( 'topersia_schema_event_organizer' ) ) {
+			$org  = topersia_schema_event_organizer( $pid );
+			$name = isset( $org['name'] ) ? (string) $org['name'] : '';
+		} else {
+			$raw  = get_post_meta( $pid, 'organizer_name', true );
+			$name = is_scalar( $raw ) ? trim( wp_strip_all_tags( (string) $raw ) ) : '';
+		}
+
+		if ( '' !== $name ) {
+			$tiles[] = array( 'label' => __( 'برگزارکننده', 'topersia' ), 'name' => topersia_g_lang_runs( $name ), 'raw' => true );
+		}
+
+		if ( function_exists( 'topersia_schema_event_official_url' ) ) {
+			$url = (string) topersia_schema_event_official_url( $pid );
+		} else {
+			$url = trim( (string) get_post_meta( $pid, 'official_event_url', true ) );
+			$p   = parse_url( $url );
+			$ok  = filter_var( $url, FILTER_VALIDATE_URL ) && is_array( $p ) && 'https' === strtolower( (string) ( isset( $p['scheme'] ) ? $p['scheme'] : '' ) ) && ! isset( $p['user'] ) && ! isset( $p['pass'] ) && false !== strpos( (string) ( isset( $p['host'] ) ? $p['host'] : '' ), '.' ) && 'topersia.com' !== strtolower( (string) $p['host'] );
+			$url = $ok ? $url : '';
+		}
+
+		if ( '' !== $url ) {
+			$host    = (string) preg_replace( '/^www\./i', '', strtolower( (string) parse_url( $url, PHP_URL_HOST ) ) );
+			/* خودِ کاشی پیوند است (<a> تودرتو نامعتبر است و مرورگر می‌شکندش)؛ متن پیوند نام دامنه است */
+			$tiles[] = array( 'label' => __( 'وب‌سایت رسمی', 'topersia' ), 'name' => '<span class="tp-lat" dir="ltr">' . esc_html( $host ) . '</span>', 'raw' => true, 'url' => $url, 'attrs' => ' rel="noopener"' );
+		}
+
+		return $tiles;
+	}
+}
+
+/**
  * نام رسمی موجودیت در سه زبان — official_name_* و در نبودش name_*، و اگر
  * خودِ پست ندارد، از نسخۀ WPML همان زبان.  ۴٫۴٫۲ — تا ۴٫۴٫۱ روی صفحۀ
  * انگلیسی عنوانِ انگلیسی جای «نام فارسی» می‌نشست.
@@ -2471,6 +2517,9 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		foreach ( $fields as $name => $raw ) {
 			$tiles[] = array( 'label' => topersia_g_t( $map[ $name ]['label'] ), 'name' => topersia_g_value( $name, $raw ), 'raw' => true );
 		}
+
+		/* برگزارکنندۀ رویداد و وب‌سایت رسمی — بعد از کاشی‌های تاریخ.  P5-D361 */
+		$tiles = array_merge( $tiles, topersia_g_event_extra_tiles( $pid ) );
 
 		if ( $tiles ) {
 			$body .= topersia_g_tiles( $tiles );
@@ -3799,7 +3848,7 @@ if ( ! function_exists( 'topersia_g_tile_place' ) ) {
  * «مسیرهای گردشگری» همین کاشی است با خطی **زیر** نام (`sub`: ایستگاه‌ها یا
  * شهر) به‌جای برچسب بالا — همان ستون‌ها، همان وسط‌چین.  P5-D269
  *
- * @param array $tiles هر عضو: label · name · sub · url · raw (نامِ ازپیش‌گریزخورده).
+ * @param array $tiles هر عضو: label · name · sub · url · raw (نامِ ازپیش‌گریزخورده) · attrs (ویژگی‌های <a> از پیش گریزخورده، مثل rel).
  * @return string
  */
 if ( ! function_exists( 'topersia_g_tiles' ) ) {
@@ -3818,7 +3867,7 @@ if ( ! function_exists( 'topersia_g_tiles' ) ) {
 			$name  = empty( $tile['raw'] ) ? esc_html( $name ) : $name;
 
 			$out .= topersia_g_a_open( isset( $tile['url'] ) ? $tile['url'] : '',
-					' class="tp-tile"' . ( $shown && $n > $shown ? ' hidden data-tp-rest-item' : '' ) )
+					' class="tp-tile"' . ( isset( $tile['attrs'] ) ? (string) $tile['attrs'] : '' ) . ( $shown && $n > $shown ? ' hidden data-tp-rest-item' : '' ) )
 				. ( '' !== $label ? '<span class="tp-tile__k">' . esc_html( $label ) . '</span>' : '' )
 				. '<b>' . $name . '</b>'
 				. ( '' !== $sub ? '<span class="tp-tile__sub">' . esc_html( $sub ) . '</span>' : '' )

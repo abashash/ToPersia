@@ -363,6 +363,10 @@ msgstr "مثلج"
 msgid "برنامه‌ریزی نشده"
 msgstr "غير مخطط"
 
+#: includes/topersia-g-zones.php
+msgid "برگزارکننده"
+msgstr "الجهة المنظِّمة"
+
 #: includes/topersia-g-map.php
 msgid "برگ‌ریزان"
 msgstr "تساقط الأوراق"
@@ -2188,6 +2192,10 @@ msgstr "سجّل الدخول أو أنشئ حسابًا"
 #: includes/topersia-g-map.php
 msgid "والیبال"
 msgstr "الكرة الطائرة"
+
+#: includes/topersia-g-zones.php
+msgid "وب‌سایت رسمی"
+msgstr "الموقع الرسمي"
 
 #: includes/topersia-g-map.php
 msgid "ورزش آبی"

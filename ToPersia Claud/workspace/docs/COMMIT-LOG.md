@@ -86,3 +86,4 @@
 | 77 | 2026-10-15 | `map` | (این commit) |  | بند ۵ با VPN: tp-boundaries (POST urlencoded + آینه‌ها)، نگاشت OSM `reference/osm-boundary-map.csv`، tests/pmtiles-probe.js، .gitignore کاشی و مرز؛ PMTiles ۲۰۲۶۱۰۱۳ تا ۴۲٫۵°N؛ map-2j 29/0 · map-3 18/0 کروم و فایرفاکس | ✅ |
 | 78 | 2026-10-15 | `docs` | `73e0f8ce` |  | P5-D362: بلوک HTML مگامنو #1935 پاک (پشتیبان JSON بیرون از git)، مورد منو → کشوی عادی، picsum در پایگاه و ext-hosts صفر؛ behaviour 380/0 · menu-shots 4/0 | ✅ |
 | 79 | 2026-10-15 | `map` | `f19dd40e` |  | P5-D363 مرز: بازنویسی tp-boundaries (ISO، والد استان، کش یک‌جا، build دسته‌ای)، جدول province-iso، CSV تازه؛ P5-D364 خلیج فارس؛ map-3 قطعی؛ assert 540/0 · map-gulf 12/0 · map-3 36/0 · map-2j 29/0 | ✅ |
+| 80 | 2026-10-15 | `ai` | `3e603896` |  | P5-D361: ادغام ابری F (schema 1.3.1، cherry-pick -n) و کاشی‌های «برگزارکننده» و «وب‌سایت رسمی»؛ event-organizer 18/0 · event-dates 43/0 · assert 541/0 · behaviour 380/0 | ✅ |
