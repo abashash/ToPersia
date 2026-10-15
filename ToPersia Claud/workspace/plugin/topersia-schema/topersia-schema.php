@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Schema Engine
  * Description: موتور دادۀ ساختاریافتۀ ToPersia — یک گراف JSON-LD واحد در هر صفحه، با @id مبتنی بر entity_uid برای بازشناسی میان‌زبانی و میان‌صفحه‌ای. معماری داده‌محور: افزودن موجودیت تازه یعنی افزودن یک بلوک به نقشه، نه نوشتن تابع. وابسته به افزونۀ ToPersia Core Functions.
- * Version: 1.3.1
+ * Version: 1.3.2
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-schema
@@ -77,6 +77,14 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
+ * 1.3.2 — SCHEMA-PARITY (ممیزی ۱۵ اکتبر) — JSON-LD همان چیزی که صفحه نشان می‌دهد:
+ *          • S5 ریشۀ BreadcrumbList: name «ToPersia» (متن پیوند اول مسیر راهنمای HTML)
+ *            و item خانۀ زبان جاری (wpml_home_url) — نه «خانه» و دامنۀ ثابت.
+ *          • S4 WebPage.lastReviewed ← last_verified_date (Y-m-d)، فقط وقتی همین زبان
+ *            content_status خودش را دارد (همان شرط `<time>` بلوک شناسه)؛ dateModified می‌ماند.
+ *          • S1 · S2 (دروازۀ زبان description · abstract · caption · FAQ · location.name، و
+ *            abstract از متن باکس AI) در صافی topersia_schema_graph هستۀ نمایش است
+ *            (topersia_g_schema_parity) — دروازۀ زبان و خلاصه‌ساز آن‌جا زندگی می‌کنند.
  * 1.3.1 — P5-D357 (پیگیری): organizer و sameAs رویداد، فقط وقتی گره Event است (Thing بی‌تغییر).
  *          • organizer ← Organization با name از organizer_name همان پست؛ ترجمۀ بی مقدار
  *            organizer نمی‌گیرد (نام فارسی روی صفحۀ انگلیسی نه).
@@ -144,7 +152,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ این افزونه — زبانۀ تشخیص هسته این را می‌خواند. */
 if ( ! defined( 'TOPERSIA_SCHEMA_VERSION' ) ) {
-	define( 'TOPERSIA_SCHEMA_VERSION', '1.3.1' );
+	define( 'TOPERSIA_SCHEMA_VERSION', '1.3.2' );
 }
 
 /** حداقل نسخۀ هستۀ سازگار. */
@@ -559,6 +567,42 @@ function topersia_schema_website() {
 }
 
 /**
+ * خانۀ زبان جاری — همان پیوند «ToPersia» مسیر راهنمای HTML (`home_url( '/' )`
+ * که WPML به زبان صفحه می‌برد).  ۱٫۳٫۲ · SCHEMA-PARITY S5
+ */
+function topersia_schema_home() {
+
+	$home = function_exists( 'home_url' ) ? home_url( '/' ) : TOPERSIA_SITE_ID . '/';
+	$home = apply_filters( 'wpml_home_url', $home );
+
+	return is_string( $home ) && '' !== $home ? $home : TOPERSIA_SITE_ID . '/';
+}
+
+/**
+ * تاریخ راستی‌آزمایی برای WebPage.lastReviewed (Y-m-d) — ۱٫۳٫۲ · SCHEMA-PARITY S4.
+ *
+ * همان شرط بلوک شناسه: فقط وقتی همین زبان content_status خودش را دارد (ترجمۀ
+ * بی وضعیت «نیازمند راستی‌آزمایی» است و تاریخ اصل را نمی‌گیرد — P5-D308).
+ */
+function topersia_schema_reviewed( $post_id ) {
+
+	$status = get_post_meta( $post_id, 'content_status', true );
+
+	if ( ! is_scalar( $status ) || '' === trim( (string) $status ) ) {
+		return '';
+	}
+
+	$raw = get_post_meta( $post_id, 'last_verified_date', true );
+	$raw = is_scalar( $raw ) ? trim( (string) $raw ) : '';
+
+	if ( preg_match( '/^(\d{4})-(\d{2})-(\d{2})/', $raw, $m ) ) {
+		return checkdate( (int) $m[2], (int) $m[3], (int) $m[1] ) ? substr( $raw, 0, 10 ) : '';
+	}
+
+	return preg_match( '/^\d{9,11}$/', $raw ) ? gmdate( 'Y-m-d', (int) $raw ) : '';
+}
+
+/**
  * BreadcrumbList از زنجیرۀ روابط JetEngine.
  *
  * چرا از روابط و نه از parent/child وردپرس: سلسله‌مراتب این پروژه در روابط
@@ -576,8 +620,8 @@ function topersia_schema_breadcrumb( $post_id, $config ) {
 	$items[] = array(
 		'@type'    => 'ListItem',
 		'position' => $pos ++,
-		'name'     => __( 'خانه', 'topersia-schema' ),
-		'item'     => TOPERSIA_SITE_ID,
+		'name'     => 'ToPersia',
+		'item'     => topersia_schema_home(),
 	);
 
 	// زنجیرۀ نیاکان را از پایین به بالا بپیما، بعد معکوس کن.
@@ -1247,6 +1291,12 @@ function topersia_schema_build( $post_id ) {
 
 	if ( $modified ) {
 		$webpage['dateModified'] = $modified;
+	}
+
+	$reviewed = topersia_schema_reviewed( $post_id );
+
+	if ( '' !== $reviewed ) {
+		$webpage['lastReviewed'] = $reviewed;
 	}
 
 	/*
