@@ -44,7 +44,10 @@ const check = ( ok, label, note ) => { n++; if ( ! ok ) { bad++; } console.log( 
 				}
 				const r = await page.evaluate( () => {
 					const links = [ ...document.querySelectorAll( '.wd-sub-menu a, .sub-sub-menu a' ) ].filter( a => a.offsetParent !== null );
+					const navItems = [ ...document.querySelectorAll( '.wd-nav-main > li > a, .mobile-nav .wd-nav-mobile > li > a, .mobile-nav .menu > li > a' ) ].map( a => a.textContent.trim() );
 					return {
+						navItems,
+						popup: document.querySelectorAll( '.wd-nav-main [aria-haspopup], .wd-nav-main .wd-dropdown-menu, .wd-nav-main .menu-item-has-children, .mobile-nav .menu-item-has-children' ).length,
 						links: links.length,
 						imgs: [ ...document.querySelectorAll( '.wd-dropdown-menu img, .wd-sub-menu img, .mobile-nav img' ) ].length,
 						mega: !! document.querySelector( '.wd-dropdown-menu .wd-nav-mega, .menu-mega-dropdown .container' ),
@@ -52,7 +55,7 @@ const check = ( ok, label, note ) => { n++; if ( ! ok ) { bad++; } console.log( 
 					};
 				} );
 				await page.screenshot( { path: path.join( SHOT, `${ tag }.png` ) } );
-				check( 0 === ext.length && ! r.overflow, `${ lang } @${ w }: بی درخواست picsum، بی سرریز افقی؛ زیرمنو: ${ r.links } پیوند، ${ r.imgs } تصویر، مگامنو: ${ r.mega }`, JSON.stringify( [ ext, r ] ) );
+				check( 0 === ext.length && ! r.overflow && ! r.navItems.some( t => /مقاصد و جغرافیا/.test( t ) ) && 0 === r.popup && r.navItems.length >= 5, `${ lang } @${ w }: بی picsum، بی سرریز؛ منو بی «مقاصد و جغرافیا» و بی کشو/فلش زیرمنو (aria-haspopup و has-children صفر)؛ ${ r.navItems.length } مورد؛ زیرمنو: ${ r.links } پیوند، ${ r.imgs } تصویر، مگامنو: ${ r.mega }`, JSON.stringify( [ ext, r ] ) );
 				await ctx.close();
 			}
 		}
