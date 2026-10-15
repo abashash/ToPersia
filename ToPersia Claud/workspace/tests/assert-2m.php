@@ -51,3 +51,13 @@ tp441_mut( 'خلیج فارس در هر زبان: عارضه با کلید پا�
 			&& false !== strpos( $x, "0 === ( layer.id || '' ).indexOf( 'water' )" ) && false !== strpos( $x, "ar: '\u0627\u0644\u062e\u0644\u064a\u062c \u0627\u0644\u0641\u0627\u0631\u0633\u064a'" );
 	},
 	$js2m, str_replace( "[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ],", '', $js2m ) );
+
+tp441_mut( 'برگزارکننده و وب‌سایت رسمی (کارت حقایق): شرط نمایش همان تابع‌های اسکیما با function_exists؛ هر کاشی فقط با مقدار؛ خودِ کاشی پیوند با rel=noopener و متن پیوند نام دامنه (نه <a> تودرتو)؛ پس از کاشی‌های تاریخ  P5-D361',
+	function ( $x ) {
+		return false !== strpos( $x, "function_exists( 'topersia_schema_event_organizer' )" ) && false !== strpos( $x, "function_exists( 'topersia_schema_event_official_url' )" )
+			&& false !== strpos( $x, '$org  = topersia_schema_event_organizer( $pid );' ) && false !== strpos( $x, '$url = (string) topersia_schema_event_official_url( $pid );' )
+			&& false !== strpos( $x, "'url' => \$url, 'attrs' => ' rel=\"noopener\"' )" ) && false !== strpos( $x, "if ( '' !== \$name ) {" ) && false !== strpos( $x, "if ( '' !== \$url ) {" )
+			&& false !== strpos( $x, '$tiles = array_merge( $tiles, topersia_g_event_extra_tiles( $pid ) );' ) && false !== strpos( $x, "isset( \$tile['attrs'] ) ? (string) \$tile['attrs'] : ''" )
+			&& false === strpos( $x, '<a class="tp-lat" dir="ltr" href="\' . esc_url( $url )' );
+	},
+	$zn2m, str_replace( "'url' => \$url, 'attrs' => ' rel=\"noopener\"' )", "'url' => \$url )", $zn2m ) );

@@ -362,6 +362,10 @@ msgstr ""
 msgid "برنامه‌ریزی نشده"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "برگزارکننده"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "برگ‌ریزان"
 msgstr ""
@@ -2186,6 +2190,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "والیبال"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "وب‌سایت رسمی"
 msgstr ""
 
 #: includes/topersia-g-map.php

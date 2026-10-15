@@ -363,6 +363,10 @@ msgstr "Snowy"
 msgid "برنامه‌ریزی نشده"
 msgstr "Not planned"
 
+#: includes/topersia-g-zones.php
+msgid "برگزارکننده"
+msgstr "Organizer"
+
 #: includes/topersia-g-map.php
 msgid "برگ‌ریزان"
 msgstr "Autumn foliage"
@@ -2188,6 +2192,10 @@ msgstr "log in or sign up"
 #: includes/topersia-g-map.php
 msgid "والیبال"
 msgstr "Volleyball"
+
+#: includes/topersia-g-zones.php
+msgid "وب‌سایت رسمی"
+msgstr "Official website"
 
 #: includes/topersia-g-map.php
 msgid "ورزش آبی"
