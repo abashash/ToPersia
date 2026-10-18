@@ -106,3 +106,10 @@ tp441_mut( 'اندازه‌های میانی WebP (A3): فقط image/jpeg ← im
 			&& false !== strpos( $x, "'image/webp' === \$mime_type ? (int) apply_filters( 'topersia_webp_quality', 70 )" ) && false !== strpos( $x, "apply_filters( 'topersia_webp_subsizes', true )" );
 	},
 	$core2m, str_replace( "apply_filters( 'topersia_webp_quality', 70 )", "apply_filters( 'topersia_webp_quality', 82 )", $core2m ) );
+
+tp441_mut( 'preload وزن متن قلم (A4): فقط یک وزن (۴۰۰، یا پروندهٔ قلم متغیر)، type=font/woff2 و crossorigin، نشانی از topersia_render_font_url، بی تنظیم قلم هیچ؛ در wp_head  P5-D366',
+	function ( $x ) {
+		return false !== strpos( $x, "'font_variable', 0 ) ? 'font_woff2' : 'font_w400'" ) && false !== strpos( $x, 'as="font" type="font/woff2"' ) && false !== strpos( $x, ' crossorigin data-tp-preload="font"' )
+			&& false !== strpos( $x, "\$href = topersia_render_font_url( \$file );" ) && false !== strpos( $x, "add_action( 'wp_head', 'topersia_render_preload_font', 3 );" ) && 1 === substr_count( $x, 'data-tp-preload="font"' );
+	},
+	$rn2m, str_replace( ' crossorigin data-tp-preload="font"', ' data-tp-preload="font"', $rn2m ) );

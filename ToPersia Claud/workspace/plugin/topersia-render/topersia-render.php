@@ -644,6 +644,39 @@ if ( topersia_render_ready() ) {
 	add_action( 'wp_head', 'topersia_render_preload_hero', 2 );
 }
 
+/**
+ * preload وزن متن (۴۰۰) قلم سایت — PERF A4 · P5-D366.
+ *
+ * تعریف‌های قلم فقط وقتی مرورگر متنی با آن وزن را رنگ می‌کند شروع به دانلود می‌کنند؛ وزن ۴۰۰ متن همه‌جا را می‌گیرد،
+ * پس زودتر خواستنش جهش قلم (FOUT) را پیش از نخستین رنگ‌آمیزی کم می‌کند. فقط یک وزن (بیش‌ازحد preload خودش رقابت می‌سازد).
+ * `crossorigin` برای قلم الزامی است، وگرنه مرورگر دوبار می‌گیرد. قلم متغیر: همان یک پرونده. بدون تنظیم قلم ← هیچ.
+ *
+ * @return void
+ */
+if ( ! function_exists( 'topersia_render_preload_font' ) ) {
+	function topersia_render_preload_font() {
+
+		if ( '' === trim( (string) topersia_render_option( 'font_name', '' ) ) ) {
+			return;
+		}
+
+		$key  = (int) topersia_render_option( 'font_variable', 0 ) ? 'font_woff2' : 'font_w400';
+		$file = trim( (string) topersia_render_option( $key, '' ) );
+
+		if ( '' === $file ) {
+			return;
+		}
+
+		$href = topersia_render_font_url( $file );
+
+		echo '<link rel="preload" as="font" type="font/woff2" href="' . esc_url( $href ) . '" crossorigin data-tp-preload="font">' . "\n";
+	}
+}
+
+if ( topersia_render_ready() ) {
+	add_action( 'wp_head', 'topersia_render_preload_font', 3 );
+}
+
 /* -------------------------------------------------------------------------
    کلید حالت رنگ — در سربرگ  ·  P5-D159
    ------------------------------------------------------------------------- */
