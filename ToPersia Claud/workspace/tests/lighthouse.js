@@ -381,10 +381,12 @@ function row( r ) {
 		srt:  r.audits['server-response-time'] ? r.audits['server-response-time'].numericValue : NaN,
 		/* عنصر LCP (LQ-PERF-02): نشانگر و برش HTML همان گره، برای شمارش رایج‌ترین در اجراها */
 		lcpEl: ( () => {
-			try {
-				const it = r.audits['largest-contentful-paint-element'].details.items[ 0 ].items[ 0 ].node;
-				return ( it.selector || '?' ) + ' ← ' + String( it.snippet || '' ).slice( 0, 70 );
-			} catch ( e ) { return '?'; }
+			/* ساختار details بین نسخه‌ها فرق می‌کند: نخستین گره‌ای که selector دارد */
+			const find = ( o ) => { if ( ! o || 'object' !== typeof o ) { return null; } if ( o.selector || ( o.type === 'node' && o.snippet ) ) { return o; } for ( const k of Object.keys( o ) ) { const f = find( o[ k ] ); if ( f ) { return f; } } return null; };
+			/* Lighthouse ۱۳: عنصر LCP در insight «lcp-discovery» است (audit قدیمی largest-contentful-paint-element نیست) */
+			const src = r.audits[ 'lcp-discovery-insight' ] || r.audits[ 'largest-contentful-paint-element' ];
+			const n = find( src && src.details );
+			return n ? ( n.selector || '?' ) + ' ← ' + String( n.snippet || '' ).replace( /\s+/g, ' ' ).slice( 0, 80 ) : '?';
 		} )(),
 	};
 }

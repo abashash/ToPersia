@@ -4441,6 +4441,41 @@ function topersia_drop_block_styles() {
 	wp_dequeue_style( 'classic-theme-styles' );
 }
 
+/**
+ * دارایی‌های بی‌مصرفِ صفحۀ موجودیت — A1 · P5-D366 (PERF.md §۶).
+ *
+ * روی صفحۀ هر نوع `tp_` قالب ما هیچ‌کدام از اینها را مصرف نمی‌کند: بلوک نظر بازدیدکنندگان (P5-D318) و فرم نظر
+ * از جدول و REST خودمان می‌خوانند و می‌نویسند، و Query Builder فقط سمت سرور خوانده می‌شود:
+ *   • JetReviews: `jet-reviews-frontend` (CSS و JS) · `jet-vue` · `photoswipe` · `photoswipe-ui-default` — حدود ۲۰۰KB gzip و TBT
+ *   • JetEngine: `jet-engine-frontend` (CSS مسدودکننده)
+ *   • Elementor: `elementor-icons` (CSS + eicons.woff2 ۱۰۸KB)
+ * فقط روی `is_singular()` با نوع `tp_…`؛ صفحه‌های دیگر سایت (هر ویجت JetReviews/JetEngine جای دیگر) دست‌نخورده‌اند. وابستگیِ مشترکِ اسکریپت
+ * دیگری (مثل wp-api-fetch) خودِ وردپرس برمی‌گرداند. فهرست از صافی `topersia_unused_entity_assets`؛ خاموش با `topersia_drop_unused_assets` ← false.
+ */
+add_action( 'wp_enqueue_scripts', 'topersia_drop_unused_entity_assets', PHP_INT_MAX );
+add_action( 'wp_footer', 'topersia_drop_unused_entity_assets', 1 );
+add_action( 'wp_print_footer_scripts', 'topersia_drop_unused_entity_assets', 1 );   /* JetReviews پس از wp_footer دوباره صف می‌کند (چاپ قالب‌های Vue) */
+
+function topersia_drop_unused_entity_assets() {
+
+	if ( is_admin() || ! is_singular() || 0 !== strpos( (string) get_post_type(), 'tp_' ) || ! apply_filters( 'topersia_drop_unused_assets', true ) ) {
+		return;
+	}
+
+	$assets = apply_filters( 'topersia_unused_entity_assets', array(
+		'styles'  => array( 'jet-reviews-frontend', 'photoswipe', 'photoswipe-default-skin', 'jet-engine-frontend', 'elementor-icons' ),
+		'scripts' => array( 'jet-reviews-frontend', 'jet-vue', 'photoswipe', 'photoswipe-ui-default' ),
+	) );
+
+	foreach ( (array) $assets['styles'] as $h ) {
+		wp_dequeue_style( $h );
+	}
+
+	foreach ( (array) $assets['scripts'] as $h ) {
+		wp_dequeue_script( $h );
+	}
+}
+
 /** فهرست کاربران از REST API — مسیر رایج کشف نام کاربری ادمین. */
 add_filter( 'rest_endpoints', 'topersia_block_user_enumeration' );
 
