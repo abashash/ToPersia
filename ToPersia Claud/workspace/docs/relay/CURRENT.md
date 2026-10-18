@@ -56,6 +56,15 @@
   - `docs/AUDIT-2026-10/SCHEMA-PARITY.md` — ۴۱ نوع `topersia_schema_map()`: جدول ویژگی × دیدنی/ناپیدا، هم‌خوانی چندزبانه، واجد بودن نتیجهٔ غنی و استناد AI، اقدام S1–S13. P5-D361 تأیید شد (organizer و official_event_url شاخهٔ `clever-mendel-dnee8k` در render `main` نیستند).
   - یافته‌های مهم: (۱) JSON-LD دروازهٔ زبان P5-D278 را ندارد ← متن فارسی ترجمه‌نشده در /en/ و /ar/ منتشر می‌شود ولی روی صفحه نیست؛ (۲) `WebPage.abstract` از `ai_summary` و باکس دیدنی از خروجی خلاصه‌ساز؛ (۳) `venue_name` ناپیدا؛ (۴) JetReviews (Vue + PhotoSwipe) و CSS جت‌انجین روی هر صفحهٔ المنتوری بی‌مصرف؛ (۵) مبنای Lighthouse پیش از P5-D359 است و با تصویرهای 403 ضبط شده — باید دوباره ضبط شود.
   - گیت‌های ابری (`gates --record`) سبز؛ نتیجه در `GATES.md`.
+- **ابری H — هم‌خوانی اسکیما با صفحه (SCHEMA-PARITY S1 · S2 · S4 · S5، ۱۵ اکتبر ۲۰۲۶).** مبنا `main` `aca9bf0c` (پس از ادغام F، P5-D361). سند: `docs/AUDIT-2026-10/SCHEMA-PARITY.md` از شاخهٔ `claude/blissful-edison-ksh1si` خوانده شد (در main نیست).
+  - **render — فقط صافی گراف:** `topersia_g_schema_graph()` در پایان `topersia_g_schema_parity()` را صدا می‌زند (+ کمکی‌های `topersia_g_schema_captions()` · `topersia_g_schema_reviewed()`؛ همه در `topersia-g-zones.php`). نسخهٔ render بالا نرفت؛ سربرگ، قلم و enqueue دست نخورد.
+    - S1: در صفحهٔ غیرفارسی description موجودیت، WebPage.description، abstract، caption هر ImageObject، پرسش/پاسخ FAQ و location.name از `topersia_g_untranslated()` می‌گذرند؛ ترجمه‌نشده ← حذف. FAQ: اول دروازهٔ کل ریپیتر (`topersia_g_raw( 'faq_items' )` همان `[tp_faq]`)، سپس هر آیتم؛ بی آیتم ← گرهٔ FAQPage حذف.
+    - S2: WebPage.abstract = متن باکس AI (`topersia_g_ai_outputs()['summary']`، وگرنه `topersia_g_text( 'ai_summary' )`)؛ باکس خالی ← abstract نیست.
+    - S4: WebPage.lastReviewed = همان `datetime` بلوک `[tp_sources]` (فقط با content_status خودِ همین زبان)؛ dateModified می‌ماند.
+  - **topersia-schema 1.3.2** (changelog در سربرگ): S5 ریشهٔ BreadcrumbList «ToPersia» + `wpml_home_url` (`topersia_schema_home()`)؛ S4 پایهٔ lastReviewed در موتور (`topersia_schema_reviewed()`، تاریخ نامعتبر نه). آزمون خودبسندهٔ افزونه (`plugin/topersia-schema/tests/run.php`) دو مورد تازه با پنج جهش و stub `home_url`.
+  - **آزمون:** `tests/assert-parity.php` (ثبت یک‌خطی در `assert.php` پس از assert-442). **`tests/assert-442.php` از پیش وجود داشت** (ادعاهای ۴٫۴٫۲ و BreadcrumbList با «خانه») — بازنویسی نشد؛ پروندهٔ تازه نام دیگر گرفت. S1/S2/S4/S5 در fa · en · ar با `tp441_mut`؛ S1 علاوه بر آن هر شش ویژگی جدا جهش دارد؛ جهش منبع (خاموش‌کردن دروازه در `$gate` و caption) آزمون را انداخت و برگردانده شد. S4/S5 موتور با اجرای `run.php` افزونه در فرایند جدا.
+  - **محدودیت دروازه (همان رفتار صفحه):** در /ar/ متن فارسیِ بی حرف ویژهٔ فارسی (پ چ ژ گ ی ک) عربی شمرده می‌شود و هم در صفحه و هم در JSON-LD می‌ماند — هم‌خوان است ولی LQ-SCH-01 باید آن را جدا بشمارد.
+  - گیت‌های ابری سبز (`GATES.md`).
 
 - **ممیزی ۲د — تطبیق دو دور (ابری B، فقط سند، ۱۲ اکتبر ۲۰۲۶).** دو ممیزی مستقل (الف `main` `9ae7c73e` · ب `claude/tender-volta-apf3de` `c3488880`، فقط خوانده شد) در کد `main` دوباره سنجیده شد؛ هیچ کدی عوض نشد.
   - خروجی تازه: `docs/AUDIT-2026-10/RECONCILE.md` — ۲۴ یافتۀ «هر دو»، ۱۳ «فقط الف» تأییدشده + ۲ رد، ۱۹ «فقط ب» تأییدشده + ۲ رد، ۱۶ ناسازگاری با حکم، جدول «رد شده» (۶)، ۲۰ اقدام با مالک و اثر SEO · GEO · AEO · چندزبانه.
@@ -86,6 +95,8 @@
 ### قدم بعدی (دقیق و اجراشدنی)
 
 - **ابری G ← کدکس محلی (lane render/core):** (الف) PERF A0: ضبط دوبارهٔ مبنای Lighthouse با تصویر واقعی سربرگ و ثبت عنصر LCP؛ سپس A1 (dequeue شرطی JetReviews/JetEngine/eicons روی نوع‌های `tp_`) و A2–A4 با `--ab` و بودجهٔ P5-D264، یکی‌یکی. (ب) SCHEMA S1 (دروازهٔ زبان در صافی `topersia_g_schema_graph`) و S2 (`abstract` از منبع باکس AI) با ادعا و جهش در `assert-442.php`؛ S3 همراه ادغام P5-D361. (ج) UNKNOWNهای `LQ-PERF-01…08` و `LQ-SCH-01…06` را به `LOCAL-QUERIES.md` بیفزا و اجرا کن. (د) کاربر: تنظیم‌های B1–B6 و S6 (hreflang) — فقط با پشتیبان.
+- **ادغام ابری H:** `from-cloud` شاخهٔ `claude/blissful-gauss-relegk` ← آزمون‌های «در انتظار تأیید محلی» (ردیف‌های H) ← cherry-pick -n + commit (OPS-D012). هم‌پوشانی: فقط تابع صافی گراف در `topersia-g-zones.php` با lane محلی render — بخش سربرگ/قلم/enqueue کدکس دست نخورده. نسخهٔ render را خودِ دستهٔ محلی بالا ببرد. سطر `assert-parity.php` را به جدول CLAUDE.md (زیر assert-442) بیفزا.
+- بعد از ادغام: S3 (دیدنی‌کردن venue_name/organizer_name) و S6…S13 سند SCHEMA-PARITY.
 
 0. **همه:** ده اقدام اول `docs/AUDIT-2026-10/RECONCILE.md` §۸ (مالک هر کدام همان‌جا): R37 و کلید پیامک و R60 ← جلسۀ ابری UC؛ R36 · کلید AI · R53/R54 · R24 · نام ارائه‌دهنده ← جلسۀ ابری AI؛ قلم Italic/letter-spacing نقشه و نمایش تاریخ رویداد ← کدکس محلی (RENDER)؛ `Event` با `startDate` ← lane تازه برای `topersia-schema`؛ `TOPERSIA_TRUST_PROXY` زنده، R41، abzarwp، P5-D214 ← کاربر.
 1. **محلی:** `LOCAL-QUERIES.md` را از بالا اجرا کن (۵۸ مورد؛ هر کدام شناسۀ `LQ-…` و فرمان دارد) و نتیجه‌ها را در همان ردیف‌های `docs/AUDIT-2026-10/*.md` به‌جای `UNKNOWN` بنویس (برچسب `VERIFIED` با خروجی فرمان). هیچ مقدار کلید، رمز، شماره یا نام کاربر در خروجی نیاید؛ فقط نام و شمار.
@@ -106,6 +117,9 @@
 | ابری G — SCHEMA: متن فارسی در JSON-LD /en/ و /ar/ | `LQ-SCH-01` — `php tests/render-local.php` + شمار نویسهٔ عربی‌خط در ld+json | منتظر محلی |
 | ابری G — SCHEMA: hreflang، entity_uid، ویکی‌داده، جمعیت/مساحت، meta_description | `LQ-SCH-02…06` در `SCHEMA-PARITY.md` §۶ | منتظر محلی |
 | ابری G — هیچ آزمون مرورگری، Lighthouse یا `*-local.php` در ابر اجرا نشد | هر عدد کارایی در `PERF.md` نقل از `tests/RESULT-lighthouse.txt` است، نه سنجش این جلسه | — |
+| H — LQ-SCH-01 | `php tests/render-local.php` روی /en/ و /ar/ استان اصفهان؛ از بلوک `application/ld+json` شمار حروف فارسی: `grep -oP '[\x{0600}-\x{06FF}]'` و جدا حروف ویژهٔ فارسی `[پچژگیک]` — در /en/ باید صفر (جز نام‌ها)، در /ar/ صفر حرف ویژهٔ فارسی؛ پیش و پس از ادغام | منتظر محلی |
+| H — JSON-LD سه زبان | همان صفحه در fa/en/ar: ریشهٔ BreadcrumbList «ToPersia» و `item` خانهٔ همان زبان (`/en/` · `/ar/`)؛ `lastReviewed` = `datetime` تگ `<time class="tp-uid__date">`؛ `abstract` = متن باکس AI؛ نبود FAQPage وقتی FAQ صفحه نیست | منتظر محلی |
+| H — schema-local · alltypes | `php tests/schema-local.php` و `php tests/alltypes.php --all-php` با schema 1.3.2 | منتظر محلی |
 | تطبیق ۲د — نمایش برچسب آب fa/ar | تأیید چشمی R51/R52 (صفحۀ کشور/استان ساحلی، کروم و فایرفاکس؛ `node tests/acceptance-shots.js`) | منتظر محلی |
 | تطبیق ۲د — داده و WPML رویداد | `wp post meta get <ID> event_start_date` (قالب) · شمار پرشده‌ها · `wp option get wpml-tm-custom-xml \| grep -c event_start_date` | منتظر محلی |
 | تطبیق ۲د — `tpas_settings` | طول و autoload (نه مقدار): پرس‌وجوی `RECONCILE.md` §۳-ج | منتظر محلی |

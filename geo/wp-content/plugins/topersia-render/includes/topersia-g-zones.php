@@ -1900,7 +1900,140 @@ if ( ! function_exists( 'topersia_g_schema_graph' ) ) {
 			}
 		}
 
-		return $graph;
+		return topersia_g_schema_parity( $graph, $post_id );
+	}
+}
+
+/**
+ * هم‌خوانی JSON-LD با صفحه — SCHEMA-PARITY S1 · S2 · S4 (P5-D278).
+ *
+ *   S1  دروازۀ زبان: description (موجودیت و WebPage)، abstract، caption هر
+ *       ImageObject، پرسش و پاسخ FAQ و location.name همان `topersia_g_untranslated()`
+ *       صفحه را می‌گیرند؛ ترجمه‌نشده ← ویژگی برداشته؛ FAQ بی پرسش ← گره برداشته
+ *   S2  WebPage.abstract = متن باکس AI (خروجی ذخیره‌شدۀ خلاصه‌ساز، وگرنه
+ *       `ai_summary` از دروازه)؛ باکس خالی ← abstract نیست
+ *   S4  WebPage.lastReviewed = همان تاریخ `<time>` بلوک شناسه؛ dateModified می‌ماند
+ *       (S5، ریشۀ BreadcrumbList، در خودِ موتور شِما است و این صافی آن را نگه می‌دارد)
+ *
+ * @param array $graph   گراف پس از دروازۀ انتشار.
+ * @param int   $post_id پست.
+ * @return array
+ */
+if ( ! function_exists( 'topersia_g_schema_parity' ) ) {
+	function topersia_g_schema_parity( $graph, $post_id ) {
+
+		$gate = function ( $key, $value ) {
+			return ! is_string( $value ) || '' === trim( $value ) || topersia_g_untranslated( $key, $value );
+		};
+
+		foreach ( $graph as $i => $node ) {
+
+			if ( ! is_array( $node ) || empty( $node['@type'] ) ) {
+				continue;
+			}
+
+			$type = $node['@type'];
+
+			if ( 'FAQPage' === $type ) {
+
+				$kept = array();
+
+				/* همان دروازۀ `[tp_faq]` (topersia_g_rows ← topersia_g_raw): ریپیتر به زبان دیگر در صفحۀ غیرفارسی خالی است */
+				$rows = topersia_g_raw( $post_id, 'faq_items' );
+
+				if ( ! empty( $rows ) && isset( $node['mainEntity'] ) && is_array( $node['mainEntity'] ) ) {
+					foreach ( $node['mainEntity'] as $q ) {
+						$name   = isset( $q['name'] ) ? $q['name'] : '';
+						$answer = isset( $q['acceptedAnswer']['text'] ) ? $q['acceptedAnswer']['text'] : '';
+						if ( ! $gate( 'faq_items', $name ) && ! $gate( 'faq_items', $answer ) ) {
+							$kept[] = $q;
+						}
+					}
+				}
+
+				if ( $kept ) {
+					$graph[ $i ]['mainEntity'] = $kept;
+				} else {
+					unset( $graph[ $i ] );
+				}
+				continue;
+			}
+
+			if ( 'WebPage' === $type ) {
+
+				$box = topersia_g_ai_outputs( $post_id );
+				$box = isset( $box['summary'] ) ? $box['summary'] : topersia_g_text( $post_id, 'ai_summary' );
+
+				if ( $gate( 'ai_summary', $box ) ) {
+					unset( $graph[ $i ]['abstract'] );
+				} else {
+					$graph[ $i ]['abstract'] = $box;
+				}
+
+				$reviewed = topersia_g_schema_reviewed( $post_id );
+
+				if ( '' !== $reviewed ) {
+					$graph[ $i ]['lastReviewed'] = $reviewed;
+				} else {
+					unset( $graph[ $i ]['lastReviewed'] );
+				}
+			}
+
+			if ( isset( $node['description'] ) && $gate( 'WebPage' === $type ? 'meta_description' : 'short_summary', $node['description'] ) ) {
+				unset( $graph[ $i ]['description'] );
+			}
+
+			if ( isset( $node['location']['name'] ) && $gate( 'venue_name', $node['location']['name'] ) ) {
+				unset( $graph[ $i ]['location']['name'] );
+			}
+
+			if ( isset( $graph[ $i ] ) ) {
+				$graph[ $i ] = topersia_g_schema_captions( $graph[ $i ] );
+			}
+		}
+
+		return array_values( $graph );
+	}
+}
+
+/** caption هر ImageObject (alt پیوست) از دروازۀ زبان — بازگشتی.  S1 */
+if ( ! function_exists( 'topersia_g_schema_captions' ) ) {
+	function topersia_g_schema_captions( $node ) {
+
+		foreach ( $node as $k => $v ) {
+			if ( is_array( $v ) ) {
+				$node[ $k ] = topersia_g_schema_captions( $v );
+			}
+		}
+
+		if ( isset( $node['@type'], $node['caption'] ) && 'ImageObject' === $node['@type']
+			&& ( ! is_string( $node['caption'] ) || topersia_g_untranslated( 'caption', $node['caption'] ) ) ) {
+			unset( $node['caption'] );
+		}
+
+		return $node;
+	}
+}
+
+/**
+ * تاریخ دیدنی راستی‌آزمایی (Y-m-d) — همان شرط و همان `datetime` بلوک شناسه:
+ * فقط با وضعیت محتوای خودِ همین زبان و تاریخی که نمایش داده می‌شود.  S4 · P5-D268 · P5-D308
+ */
+if ( ! function_exists( 'topersia_g_schema_reviewed' ) ) {
+	function topersia_g_schema_reviewed( $post_id ) {
+
+		if ( '' === topersia_g_text( $post_id, 'content_status' ) ) {
+			return '';
+		}
+
+		$raw = trim( (string) topersia_g_raw( $post_id, 'last_verified_date' ) );
+
+		if ( '' === topersia_g_date_fa( $raw ) ) {
+			return '';
+		}
+
+		return preg_match( '/^\d{4}-\d{2}-\d{2}/', $raw ) ? substr( $raw, 0, 10 )
+			: ( preg_match( '/^\d{9,11}$/', $raw ) ? gmdate( 'Y-m-d', (int) $raw ) : '' );
 	}
 }
 

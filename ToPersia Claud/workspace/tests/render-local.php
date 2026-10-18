@@ -137,9 +137,9 @@ foreach ( (array) ( $pub_real['@graph'] ?? array() ) as $node ) {
 	if ( isset( $node['containedInPlace'] ) ) { $placed = $node['containedInPlace']; }
 }
 
-mut( 'JSON-LD شهر: استانِ منتشرشده می‌ماند — BreadcrumbList همان پله‌های موتور (خانه › استان › شهر؛ شهرستانِ بی‌صفحه skip) و containedInPlace همان استان',
-	function ( $r ) use ( $prov_uid ) { return array( 'خانه', 'استان آزمون ۴۴۲', 'شهر آزمون ۴۴۲' ) === $r[0] && array( '@id' => $prov_uid ) === $r[1]; },
-	array( $crumbs, $placed ), array( array( 'خانه', 'شهر آزمون ۴۴۲' ), null ), implode( ' › ', $crumbs ) );
+mut( 'JSON-LD شهر: استانِ منتشرشده می‌ماند — BreadcrumbList همان پله‌های موتور (ToPersia › استان › شهر؛ شهرستانِ بی‌صفحه skip) و containedInPlace همان استان',
+	function ( $r ) use ( $prov_uid ) { return array( 'ToPersia', 'استان آزمون ۴۴۲', 'شهر آزمون ۴۴۲' ) === $r[0] && array( '@id' => $prov_uid ) === $r[1]; },
+	array( $crumbs, $placed ), array( array( 'ToPersia', 'شهر آزمون ۴۴۲' ), null ), implode( ' › ', $crumbs ) );
 
 /* ══ کاتالوگ روی وردپرس واقعی ══════════════════════════════════════════ */
 section( 'کاتالوگ `topersia` روی وردپرس ۷' );
@@ -198,8 +198,8 @@ $h_ar = $hero( '/ar/province/isfahan/' );
  * ترجمه‌های محلیِ ۴٫۴٫۱ فیلدهای copy نداشتند و تیتر به عنوان پست («Isfahan
  * Province») می‌افتاد — زنده چنین نیست (WPML copy را روی ترجمه می‌نشاند).
  */
-mut( 'صفحه: /en/ «Province» + «Isfahan»، /ar/ «محافظة» + «أصفهان»، فارسی «استان» + «استان اصفهان» — بی پیشوندِ فارسی روی ترجمه',
-	function ( $r ) { return array( 'Province', 'Isfahan' ) === $r[1] && array( 'محافظة', 'أصفهان' ) === $r[2] && array( 'استان', 'استان اصفهان' ) === $r[0]; },
+mut( 'صفحه: /en/ «Province» + «Isfahan»، /ar/ «محافظة» + «أصفهان»، فارسی «استان» + «اصفهان» (تیتر فقط‌نام، P5-D281) — بی پیشوندِ فارسی روی ترجمه',
+	function ( $r ) { return array( 'Province', 'Isfahan' ) === $r[1] && array( 'محافظة', 'أصفهان' ) === $r[2] && array( 'استان', 'اصفهان' ) === $r[0]; },
 	array( $h_fa, $h_en, $h_ar ), array( $h_fa, array( 'استان', 'استان Isfahan' ), array( 'استان', 'استان أصفهان' ) ),
 	wp_json_encode( array( $h_fa, $h_en, $h_ar ), JSON_UNESCAPED_UNICODE ) );
 

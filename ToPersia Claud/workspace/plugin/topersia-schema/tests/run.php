@@ -47,6 +47,16 @@ function tps_entity( $post_id ) {
 	return array();
 }
 
+/** گره‌ای از گراف با @type. */
+function tps_node( $post_id, $type ) {
+	foreach ( topersia_schema_build( $post_id ) as $node ) {
+		if ( isset( $node['@type'] ) && $type === $node['@type'] ) {
+			return $node;
+		}
+	}
+	return array();
+}
+
 /** جشنوارۀ آزمون با استان ۱۰ (رابطۀ ۲۳۲) و شهر ۲۰ (رابطۀ ۲۳۳). */
 function tps_festival( $id, $meta, $venue = true ) {
 	tps_post( 10, 'tp_province', array( 'name_fa' => 'اصفهان', 'entity_uid' => 'https://topersia.com/id/prov-10' ) );
@@ -285,6 +295,35 @@ function tps_cases() {
 				&& '2026-10-12' === topersia_schema_today( strtotime( '2026-10-12 20:00:00 UTC' ) );
 		},
 
+		/* ۱٫۳٫۲ · SCHEMA-PARITY S5 — ریشۀ BreadcrumbList = پیوند «ToPersia» خانۀ زبان جاری، در هر سه زبان */
+		'breadcrumb_root_lang' => function () {
+			$ok = true;
+			foreach ( array( 'fa' => 'https://topersia.test/', 'en' => 'https://topersia.test/en/', 'ar' => 'https://topersia.test/ar/' ) as $lang => $home ) {
+				$GLOBALS['tps_filters'] = array();
+				add_filter( 'wpml_current_language', function () use ( $lang ) {
+					return $lang;
+				} );
+				add_filter( 'wpml_home_url', function ( $url ) use ( $lang ) {
+					return 'fa' === $lang ? $url : $url . $lang . '/';
+				} );
+				tps_post( 40, 'tp_city', array( 'name_' . $lang => 'Kashan-' . $lang ) );
+				$root = tps_node( 40, 'BreadcrumbList' )['itemListElement'][0];
+				$ok   = $ok && 'ToPersia' === $root['name'] && $home === $root['item'] && 1 === $root['position'];
+			}
+			return $ok;
+		},
+
+		/* ۱٫۳٫۲ · SCHEMA-PARITY S4 — lastReviewed از last_verified_date، فقط با وضعیت خودِ همین زبان؛ dateModified می‌ماند */
+		'last_reviewed' => function () {
+			tps_post( 40, 'tp_city', array( 'content_status' => 'verified', 'last_verified_date' => '2026-09-20' ) );
+			tps_post( 41, 'tp_city', array( 'last_verified_date' => '2026-09-20' ) );
+			tps_post( 42, 'tp_city', array( 'content_status' => 'verified', 'last_verified_date' => '2026-02-30' ) );
+			$a = tps_node( 40, 'WebPage' );
+			return '2026-09-20' === $a['lastReviewed'] && isset( $a['dateModified'] )
+				&& ! isset( tps_node( 41, 'WebPage' )['lastReviewed'] )
+				&& ! isset( tps_node( 42, 'WebPage' )['lastReviewed'] );
+		},
+
 		'place_untouched' => function () {
 			tps_post( 40, 'tp_city', array( 'event_start_date' => '2026-11-01', 'geo_coordinates' => '33.98, 51.43' ) );
 			$e = tps_entity( 40 );
@@ -350,6 +389,11 @@ $mutations = array(
 	array( 'translation_url_from_original', "if ( \$original !== \$post_id ) {\n\t\t\t\$raw = get_post_meta( \$original, 'official_event_url', true );", "if ( false ) {\n\t\t\t\$raw = get_post_meta( \$original, 'official_event_url', true );" ),
 	array( 'translation_url_from_original', "if ( '' === trim( \$text ) ) {", 'if ( true ) {' ),
 	array( 'translation_bad_original_url', "\$url = is_scalar( \$raw ) ? trim( (string) \$raw ) : '';", "\$url = 'https://x.example.ir/';" ),
+	array( 'breadcrumb_root_lang', "'name'     => 'ToPersia',", "'name'     => __( 'خانه', 'topersia-schema' )," ),
+	array( 'breadcrumb_root_lang', "\$home = apply_filters( 'wpml_home_url', \$home );", '' ),
+	array( 'last_reviewed', "\$webpage['lastReviewed'] = \$reviewed;", '' ),
+	array( 'last_reviewed', "if ( ! is_scalar( \$status ) || '' === trim( (string) \$status ) ) {", 'if ( false ) {' ),
+	array( 'last_reviewed', "return checkdate( (int) \$m[2], (int) \$m[3], (int) \$m[1] ) ? substr( \$raw, 0, 10 ) : '';", 'return substr( $raw, 0, 10 );' ),
 	array( 'tehran_today', "new DateTimeZone( 'Asia/Tehran' )", "new DateTimeZone( 'UTC' )" ),
 );
 

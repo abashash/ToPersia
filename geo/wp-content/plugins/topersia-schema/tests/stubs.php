@@ -79,6 +79,9 @@ function get_the_title( $id ) {
 function get_permalink( $id ) {
 	return 'https://topersia.test/p/' . (int) $id . '/';
 }
+function home_url( $path = '/' ) {
+	return 'https://topersia.test' . $path;
+}
 function get_post_modified_time( $format, $gmt, $id ) {
 	return '2026-10-01T00:00:00+00:00';
 }
