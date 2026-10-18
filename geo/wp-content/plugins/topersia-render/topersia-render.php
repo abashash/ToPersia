@@ -588,64 +588,7 @@ if ( topersia_render_ready() ) {
 }
 
 /**
- * preload تصویر سربرگ (عنصر LCP) — PERF A2 · P5-D366.
- *
- * `src` و `srcset` و `sizes` عیناً همان‌هایی‌اند که `[tp_hero]` با
- * `wp_get_attachment_image( …, 'full' )` و `topersia_g_hero_sizes()` می‌نویسد؛ ناهمخوانی یعنی دوبار بارگیری.
- * تصویر سربرگ را از همان دروازۀ فیلد می‌خواند (`topersia_g_raw`)، پس زبان دیگر و
- * پیش‌نویس را رعایت می‌کند. فقط صفحۀ تکی موجودیت `tp_`.
- *
- * @return void
- */
-if ( ! function_exists( 'topersia_render_preload_hero' ) ) {
-	function topersia_render_preload_hero() {
-
-		if ( ! function_exists( 'is_singular' ) || ! is_singular() || ! function_exists( 'topersia_g_raw' ) ) {
-			return;
-		}
-
-		$pid = (int) get_queried_object_id();
-
-		if ( ! $pid || 0 !== strpos( (string) get_post_type( $pid ), 'tp_' ) ) {
-			return;
-		}
-
-		$hero = topersia_g_raw( $pid, 'hero_image' );
-
-		if ( ! topersia_g_filled( $hero ) ) {
-			return;
-		}
-
-		$id  = is_array( $hero ) ? absint( reset( $hero ) ) : absint( $hero );
-		$src = $id ? wp_get_attachment_image_src( $id, 'full' ) : false;
-
-		if ( ! $src ) {
-			return;
-		}
-
-		$srcset = (string) wp_get_attachment_image_srcset( $id, 'full' );
-		$sizes  = function_exists( 'topersia_g_hero_sizes' ) ? topersia_g_hero_sizes() : (string) wp_get_attachment_image_sizes( $id, 'full' );
-
-		echo '<link rel="preload" as="image" href="' . esc_url( $src[0] ) . '"';
-
-		if ( '' !== $srcset ) {
-			echo ' imagesrcset="' . esc_attr( $srcset ) . '"';
-
-			if ( '' !== $sizes ) {
-				echo ' imagesizes="' . esc_attr( $sizes ) . '"';
-			}
-		}
-
-		echo " fetchpriority=\"high\" data-tp-preload=\"hero\">\n";
-	}
-}
-
-if ( topersia_render_ready() ) {
-	add_action( 'wp_head', 'topersia_render_preload_hero', 2 );
-}
-
-/**
- * preload وزن متن (۴۰۰) قلم سایت — PERF A4 · P5-D366.
+ * preload وزن متن (۴۰۰) قلم سایت — PERF A4 · P5-D366 (A2 در دستۀ ۱۰ برگشت).
  *
  * تعریف‌های قلم فقط وقتی مرورگر متنی با آن وزن را رنگ می‌کند شروع به دانلود می‌کنند؛ وزن ۴۰۰ متن همه‌جا را می‌گیرد،
  * پس زودتر خواستنش جهش قلم (FOUT) را پیش از نخستین رنگ‌آمیزی کم می‌کند. فقط یک وزن (بیش‌ازحد preload خودش رقابت می‌سازد).
