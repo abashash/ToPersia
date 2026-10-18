@@ -355,3 +355,29 @@ const tile = (lon, lat, z) => { const n = 2 ** z, r = lat * Math.PI / 180;
 | LQ-SCH-04 | پوشش `external_reference_uri` | ۴۲ از ۲۱۹ پر؛ ویکی‌داده ۳۶ |
 | LQ-SCH-05 | `population` / `area_km2` | population: city=۱۷ · country=۳ · province=۳۳ · village=۱ — area_km2: city=۱۲ · country=۳ · province=۳۳ · water_body=۱ (غیر کشور/شهر: روستا و پهنهٔ آبی هر کدام یک) |
 | LQ-SCH-06 | دارای هر دو (meta_description و خلاصه‌ساز) | ۵۳ دارای meta_description؛ ۳ دارای هر دو |
+
+
+## SCALE.md §۸ — LQ-SCALE-01…18 — اجرا شد ۱۸ اکتبر ۲۰۲۶ (فقط خواندنی، محلی)
+
+اجراکننده: `scripts/local/tp-lq-scale.php` (پایگاه‌داده؛ `SAVEQUERIES` فقط در همان فرایند، wp-config و تنظیمات دست‌نخورده) + `curl` برای ۱۰ و ۱۱ + `ls` برای ۱۲. خروجی هیچ پیشوند جدول، مقدار گزینه یا نام کاربر ندارد. تفسیر و مقایسه با برآورد: `SCALE.md` §۹.
+
+| شناسه | نتیجه |
+|---|---|
+| LQ-SCALE-01 | `posts` ۱٬۶۴۶ ردیف (۲۱۹ منتشرشدهٔ `tp_`) · `postmeta` ۱۳٬۵۳۱ · `options` ۶۸۸. بزرگ‌ترین جدول‌ها: `icl_translate` ۳۶٬۵۴۰ ردیف/۸٫۰MB · `icl_strings` ۱۰٬۴۸۳/۶٫۸MB · `postmeta` ۶٫۴MB · `options` ۳٫۲MB · `posts` ۱٫۹MB · `icl_string_translations` ۱٫۸MB · `topersia_log` ۲٬۷۴۲/۱٫۳MB |
+| LQ-SCALE-02 | `jet_rel_default` ۱٬۵۷۸ ردیف؛ بیشینه به ازای `rel_id`: ۷۳=۹۴۸ · ۷۲=۴۸۵ · ۷۱=۳۳ · ۱۰۲=۲۹ · ۱۷۳=۱۸ · ۱۰۸=۹؛ `jet_rel_default_meta` ۰ |
+| LQ-SCALE-03 | استان اصفهان fa ۱٬۲۷۷ پرس‌وجو · ۲٫۱۷ ثانیه · ۱۴۷ KB؛ en ۱۴۹ · ۰٫۳۲ ثانیه · ۶۱ KB؛ شهر اصفهان fa ۷۰ · ۰٫۲۷ ثانیه · ۴۰ KB؛ en ۵۴ · ۰٫۱۲ ثانیه · ۲۰ KB (کش شیء سرد؛ `do_shortcode('[tp_page id=…]')` در WP-CLI) |
+| LQ-SCALE-04 | استان fa: ۱۶ الگوی یکتا، ۱٬۲۶۱ تکرار اضافه؛ ۶۹۱× `jet_rel_default WHERE rel_id AND parent_object_id` · ۱۶۴× `posts WHERE ID` · ۱۶۳× `postmeta WHERE post_id IN (یک شناسه)`؛ کندترین تک‌پرس‌وجو ۴ms. شهر fa: ۱۴ الگو، ۵۶ تکرار (۱۹× رابطه). Query Monitor نصب نیست؛ به‌جای آن `SAVEQUERIES` |
+| LQ-SCALE-05 | `WP_Object_Cache` (درون‌فرایند)، بی کش پایدار؛ `wp_using_ext_object_cache` نادرست |
+| LQ-SCALE-06 | autoload: ۴۰۸ گزینه · ۵۱۴ KB. ده بزرگ: `_icl_cache`=۱۰۱٫۸ · `rewrite_rules`=۹۲٫۶ · `icl_sitepress_settings`=۴۶٫۷ · `xts-woodmart-options`=۳۹٫۷ · `rank-math-options-titles`=۳۸٫۹ · `otgs-installer-log`=۲۵٫۳ · `whb_default_header`=۲۴٫۰ · `_transient_wp_core_block_css_files`=۲۳٫۲ · `icl_st_settings`=۲۰٫۳ · `jet-reviews-settings`=۱۴٫۲ (KB) |
+| LQ-SCALE-07 | هر چهار الگو `type=ref key=meta_key Extra=Using where`: `entity_uid` rows≈۱٬۵۰۹ · `name_fa IN` ≈۱٬۵۰۳ · `_tp_news_ancestor` ۶ · کلید برنامه `world_heritage='true'` ۱۵. ردیف هر کلید: `_tp_search_fold`=۱٬۵۲۰ · `entity_uid`=۱٬۵۰۹ · `name_fa`=۱٬۵۰۳ · `name_en`=۱٬۴۹۸ · `name_ar`=۴۹ · `official_name_fa`=۳ · `_tp_news_ancestor`=۶ · `_tp_content_hash`=۰ |
+| LQ-SCALE-08 | «اصفهان»: ۰٫۰۱۸–۰٫۰۳۹ ثانیه، ۲۲ یافته. `EXPLAIN`: `posts` range ۲۵۱ ردیف (`type_status_author`) ‖ `icl_translations` eq_ref ‖ زیرپرس‌وجوی `_tp_search_fold` (`index_subquery`، ۳ ردیف) |
+| LQ-SCALE-09 | MariaDB ۱۰٫۱۱٫۱۹؛ `innodb_ft_min_token_size=1`؛ افزونهٔ `ngram` **نیست** |
+| LQ-SCALE-10 | نمایهٔ `sitemap_index.xml`: ۱۹ نقشهٔ فرعی، `tp_county` **۰**؛ `rank-math-options-sitemap`: `pt_tp_county_sitemap='off'` · `pt_tp_county_html_sitemap='on'` · `pt_tp_city_sitemap='on'`؛ ماژول `sitemap` فعال |
+| LQ-SCALE-11 | `tp_city-sitemap.xml`: ۲۰۰ · ۳۶٬۵۸۱ بایت · ۳٫۶ ثانیه (یک درخواست؛ پاک‌کردن کش نقشه انجام نشد چون تنظیم را عوض می‌کرد) · ۱۱۶ نشانی |
+| LQ-SCALE-12 | فقط `ls`: `overpass-iran.json` ۱٬۰۶۸٬۲۳۳ بایت؛ دو پروندهٔ `fetch-failed-*` ۷۰۴ بایت. **زمان/حافظهٔ `match` اجرا نشد**: `match` فایل مرجع و GeoJSON را بازنویسی می‌کند |
+| LQ-SCALE-13 | **اجرا نشد** — ویرایش متای جاذبه داده را عوض می‌کند |
+| LQ-SCALE-14 | منتشرشدهٔ `tp_` بی `_tp_content_hash`: **۲۱۹ از ۲۱۹** |
+| LQ-SCALE-15 | transient کش مرکزی (`tpc_`): ۲۱ ردیف · ۲۱ KB؛ کل transient: ۱۱۹ |
+| LQ-SCALE-16 | **اجرا نشد** — درون‌ریزی پروندهٔ آزمایشی داده می‌نویسد |
+| LQ-SCALE-17 | **اجرا نشد** — `geo-index rebuild` جدول نمایه را `TRUNCATE` می‌کند |
+| LQ-SCALE-18 | Action Scheduler: `complete=127 · failed=2 · pending=1`؛ `actionscheduler_logs` ۳۸۸ ردیف |
