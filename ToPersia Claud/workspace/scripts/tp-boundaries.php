@@ -33,6 +33,7 @@ $AREA  = array( 'tp_province', 'tp_city' );
 $SKIP  = array( 'tp_water_body', 'tp_desert', 'tp_mountain', 'tp_forest_plain', 'tp_protected_area', 'tp_island', 'tp_region', 'tp_natural_feature' );
 
 /* ── شبکه ────────────────────────────────────────────────────────── */
+if ( ! function_exists( 'tpb_overpass' ) ) {   /* include دوباره (آزمون سیم‌کشی) تعریف را تکرار نکند */
 function tpb_overpass( $ql, $tries = 4, $timeout = 180 ) {
 	/* آینه‌ها یک‌درمیان؛ گواهی از بستهٔ وردپرس وقتی php.ini ندارد */
 	$mirrors = array( 'https://overpass-api.de/api/interpreter', 'https://lz4.overpass-api.de/api/interpreter', 'https://overpass.private.coffee/api/interpreter' );
@@ -76,6 +77,7 @@ function tpb_province_of( $pid ) {
 	foreach ( topersia_g_place_parents( $pid ) as $p ) { if ( 'tp_province' === get_post_type( $p['id'] ) ) { return (int) $p['id']; } }
 	return 0;
 }
+}
 
 /* ── fetch ───────────────────────────────────────────────────────── */
 if ( 'fetch' === $cmd ) {
@@ -113,7 +115,7 @@ if ( 'match' === $cmd ) {
 			if ( '' === $uid || '' === tpb_key( $uid ) ) { continue; }
 			if ( isset( $old[ $uid ] ) && 'confirmed' === $old[ $uid ]['status'] ) { $rows[ $uid ] = $old[ $uid ]; continue; }
 			$name = tpb_norm( (string) get_post_meta( $p->ID, 'official_name_fa', true ) ?: (string) get_post_meta( $p->ID, 'name_fa', true ) ?: $p->post_title );
-			$row  = array( 'entity_uid' => $uid, 'osm_type' => '', 'osm_id' => '', 'method' => '', 'status' => 'none', 'post_type' => $type, 'name_fa' => $name, 'parent_province' => '' );
+			$row  = array( 'entity_uid' => $uid, 'osm_type' => '', 'osm_id' => '', 'method' => '', 'status' => 'none', 'post_type' => $type, 'name_fa' => $name, 'parent_province' => '', 'city_point' => '' );
 
 			if ( in_array( $type, $SKIP, true ) ) {
 				$row['status'] = 'skip'; $row['method'] = 'natural-area';
@@ -135,6 +137,25 @@ if ( 'match' === $cmd ) {
 				list( $st, $el, $how ) = tpb_classify_city( $name, $els, $pf );
 				$row['status'] = $st; $row['method'] = $how;
 				if ( $el ) { $row['osm_type'] = $el['type']; $row['osm_id'] = (string) $el['id']; }
+
+				/*
+				 * نگهبان نقطهٔ شهر (۱۸ اکتبر): geo_coordinates خودِ شهر، اگر هست، باید درون GeoJSON همان شهر باشد.
+				 * بیرون ← suggested (نه auto) و GeoJSON کهنه پاک می‌شود تا نقشه مرز غلط نکشد؛ بی GeoJSON ← pending؛ بی مختصات ← no-coords.
+				 */
+				$ll = trim( (string) get_post_meta( $p->ID, 'geo_coordinates', true ) );
+				$gf = $out . tpb_key( $uid ) . '.geojson';
+				if ( ! in_array( $row['status'], array( 'auto', 'confirmed' ), true ) && is_file( $gf ) ) { unlink( $gf ); echo "• GeoJSON کهنهٔ شهرِ بی تطبیق پاک شد: {$name}\n"; }
+				if ( '' === $ll ) { $row['city_point'] = 'no-coords'; }
+				elseif ( ! is_file( $gf ) ) { $row['city_point'] = 'pending'; }
+				else {
+					$in = tpb_center_inside( $ll, (string) file_get_contents( $gf ) );
+					if ( true === $in ) { $row['city_point'] = 'ok'; }
+					elseif ( false === $in && 'auto' === $row['status'] ) {
+						$row['city_point'] = 'FAIL'; $row['status'] = 'suggested'; $row['method'] .= ' · guard-city-point-outside-polygon (' . $ll . ')';
+						unlink( $gf );
+						echo "✗ نگهبان نقطهٔ شهر: «{$name}» ({$ll}) بیرون GeoJSON خودش — suggested و GeoJSON پاک شد\n";
+					} else { $row['city_point'] = false === $in ? 'outside (not auto)' : 'bad-coordinates'; }
+				}
 			}
 			$rows[ $uid ] = $row;
 		}
@@ -180,8 +201,8 @@ if ( 'match' === $cmd ) {
 
 	if ( ! is_dir( dirname( $csv ) ) ) { mkdir( dirname( $csv ), 0777, true ); }
 	$fh = fopen( $csv, 'w' );
-	fputcsv( $fh, array( 'entity_uid', 'osm_type', 'osm_id', 'method', 'status', 'post_type', 'name_fa', 'parent_province' ), ',', '"', '\\' );
-	foreach ( $rows as $r ) { fputcsv( $fh, array( $r['entity_uid'], $r['osm_type'], $r['osm_id'], $r['method'], $r['status'], $r['post_type'], $r['name_fa'], isset( $r['parent_province'] ) ? $r['parent_province'] : '' ), ',', '"', '\\' ); }
+	fputcsv( $fh, array( 'entity_uid', 'osm_type', 'osm_id', 'method', 'status', 'post_type', 'name_fa', 'parent_province', 'city_point' ), ',', '"', '\\' );
+	foreach ( $rows as $r ) { fputcsv( $fh, array( $r['entity_uid'], $r['osm_type'], $r['osm_id'], $r['method'], $r['status'], $r['post_type'], $r['name_fa'], isset( $r['parent_province'] ) ? $r['parent_province'] : '', isset( $r['city_point'] ) ? $r['city_point'] : '' ), ',', '"', '\\' ); }
 	fclose( $fh );
 	echo 'CSV: ' . count( $rows ) . " ردیف\n";
 	$cmd = 'report';
@@ -255,6 +276,9 @@ if ( 'report' === $cmd ) {
 	$c = array();
 	foreach ( $rows as $r ) { $c[ $r['post_type'] ][ $r['status'] ] = ( isset( $c[ $r['post_type'] ][ $r['status'] ] ) ? $c[ $r['post_type'] ][ $r['status'] ] : 0 ) + 1; }
 	foreach ( $c as $t => $v ) { echo str_pad( $t, 22 ) . json_encode( $v ) . "\n"; }
+	$cp = array();
+	foreach ( $rows as $r ) { if ( 'tp_city' === $r['post_type'] && in_array( $r['status'], array( 'auto', 'confirmed', 'suggested' ), true ) ) { $k = isset( $r['city_point'] ) && '' !== $r['city_point'] ? $r['city_point'] : '-'; $cp[ $k ] = ( isset( $cp[ $k ] ) ? $cp[ $k ] : 0 ) + 1; } }
+	if ( $cp ) { ksort( $cp ); echo 'نگهبان نقطهٔ شهر (شهرهای دارای تطبیق): ' . json_encode( $cp ) . "\n"; }
 	foreach ( $rows as $r ) { if ( 'suggested' === $r['status'] ) { echo "suggested | {$r['name_fa']} | استان: " . ( isset( $r['parent_province'] ) ? $r['parent_province'] : '' ) . " | {$r['osm_type']}/{$r['osm_id']} | {$r['method']}\n"; } }
 	foreach ( $rows as $r ) { if ( 'none' === $r['status'] && 'tp_province' === $r['post_type'] ) { echo "none-province | {$r['name_fa']} | {$r['method']}\n"; } }
 

@@ -59,6 +59,18 @@ try {
 	$skip = array_filter( $rows, function ( $r ) { return in_array( $r['post_type'], array( 'tp_water_body', 'tp_desert', 'tp_mountain' ), true ); } );
 	t( 'پهنه‌های طبیعی ← skip (نه none)', $skip && ! array_filter( $skip, function ( $r ) { return 'skip' !== $r['status']; } ), json_encode( array_column( $skip, 'status' ) ) );
 	t( 'گزارش match چاپ شد (شمارش وضعیت‌ها)', false !== strpos( $log, 'tp_city' ), substr( $log, 0, 120 ) );
+	/* نگهبان نقطهٔ شهر: GeoJSON ساختگی که مختصات کاشان را در بر ندارد ← suggested، فایل پاک؛ GeoJSON درست ← ok */
+	$kas_ok = $rows[ array_keys( array_filter( $rows, function ( $r ) { return 'tp_city' === $r['post_type'] && 'کاشان' === $r['name_fa']; } ) )[0] ]['city_point'];
+	file_put_contents( $bdir . 'city__kashan.geojson', json_encode( array( 'type' => 'Feature', 'properties' => new stdClass(), 'geometry' => array( 'type' => 'MultiPolygon', 'coordinates' => array( array( array( array( 70, 10 ), array( 71, 10 ), array( 71, 11 ), array( 70, 11 ), array( 70, 10 ) ) ) ) ) ) ) );
+	ob_start();
+	$args = array( 'match' );
+	include $root . '/scripts/tp-boundaries.php';
+	ob_end_clean();
+	$fh = fopen( $csv, 'r' ); $hd = fgetcsv( $fh, 0, ',', '"', '\\' ); $rows2 = array();
+	while ( ( $r = fgetcsv( $fh, 0, ',', '"', '\\' ) ) ) { if ( count( $r ) === count( $hd ) ) { $rows2[ $r[0] ] = array_combine( $hd, $r ); } }
+	fclose( $fh );
+	$k2 = array_values( array_filter( $rows2, function ( $r ) { return 'tp_city' === $r['post_type'] && 'کاشان' === $r['name_fa']; } ) )[0];
+	t( 'نگهبان نقطهٔ شهر — GeoJSON درست ← ok (' . $kas_ok . ')؛ GeoJSON که مختصات خودِ شهر را ندارد ← suggested با city_point=FAIL و فایل پاک', 'ok' === $kas_ok && 'suggested' === $k2['status'] && 'FAIL' === $k2['city_point'] && ! is_file( $bdir . 'city__kashan.geojson' ), json_encode( array( $kas_ok, $k2['status'], $k2['city_point'] ) ) );
 } finally {
 	foreach ( (array) glob( $bdir . '*.geojson' ) as $f ) { unlink( $f ); }
 	foreach ( (array) glob( $bk . '*.geojson' ) as $f ) { copy( $f, $bdir . basename( $f ) ); unlink( $f ); }

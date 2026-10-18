@@ -110,3 +110,11 @@ tp441_mut( 'مرز: دو نگهبان خودکار در match — ۱ شناسه�
 			&& false !== strpos( $x, "'/reference/province-osm.csv'" ) && false !== strpos( $x, "'osm_relation', 'ISO3166-2', 'name_fa'" ) && false === strpos( $x, 'province-iso.csv' ) && false === strpos( $x, 'tpb_province_match' );
 	},
 	$bsrc2, str_replace( 'tpb_duplicate_ids(', 'array_values(', $bsrc2 ) );
+
+$bsrc3 = file_get_contents( dirname( TP_PLUGIN_DIR, 2 ) . '/scripts/tp-boundaries.php' );
+tp441_mut( 'مرز: نگهبان نقطهٔ شهر — geo_coordinates خودِ شهر باید درون GeoJSON همان شهر باشد، وگرنه suggested (نه auto) و GeoJSON پاک؛ بی مختصات no-coords، بی GeoJSON pending؛ شهر بی تطبیق GeoJSON کهنه‌اش پاک می‌شود؛ ستون city_point در CSV',
+	function ( $x ) {
+		return false !== strpos( $x, "get_post_meta( \$p->ID, 'geo_coordinates', true )" ) && false !== strpos( $x, "\$row['city_point'] = 'FAIL'; \$row['status'] = 'suggested';" ) && false !== strpos( $x, 'guard-city-point-outside-polygon' )
+			&& false !== strpos( $x, "'no-coords'" ) && false !== strpos( $x, "'pending'" ) && false !== strpos( $x, 'GeoJSON کهنهٔ شهرِ بی تطبیق پاک شد' ) && false !== strpos( $x, "'parent_province', 'city_point' )" );
+	},
+	$bsrc3, str_replace( "\$row['status'] = 'suggested'; \$row['method'] .=", "\$row['method'] .=", $bsrc3 ) );
