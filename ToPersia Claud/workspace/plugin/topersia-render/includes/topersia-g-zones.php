@@ -646,11 +646,19 @@ if ( ! function_exists( 'topersia_g_sort_entities' ) ) {
 			return $ids;
 		}
 
-		$rank = array();
+		$rank  = array();
+		$views = array();
+
+		foreach ( $ids as $one ) {
+			$views[ $one ] = topersia_g_view_id( $one );
+		}
+
+		/* متای رتبه‌بندی همۀ اعضا یک‌جا، پیش از خواندن تک‌تک.  SC1 */
+		topersia_g_prime( $views );
 
 		foreach ( $ids as $one ) {
 
-			$view = topersia_g_view_id( $one );
+			$view = $views[ $one ];
 
 			$rank[ $one ] = array(
 				'priority' => (float) topersia_g_raw( $view, 'display_priority' ),
@@ -723,6 +731,97 @@ if ( ! function_exists( 'topersia_g_chain_ids' ) ) {
 
 		return $cur;
 	}
+}
+
+/**
+ * حافظۀ درون‌درخواستی SC1 — فقط برای همین درخواست؛ نه transient، نه option.
+ *
+ * دو چیز نگه می‌دارد: نتیجۀ پیمودن هر گروه با کلید (پست، گروه، زبان) و
+ * شناسه‌هایی که کش پست و متایشان پیش‌بارگذاری شده. با `clean_post_cache`
+ * خالی می‌شود تا ویرایش میان درخواست (WP-CLI، کرون) نتیجۀ کهنه ندهد.
+ *
+ * @param bool $reset خالی‌کردن (آزمون و قلاب).
+ * @return array
+ */
+if ( ! function_exists( 'topersia_g_memo_store' ) ) {
+	function &topersia_g_memo_store( $reset = false ) {
+
+		static $store = array( 'group' => array(), 'primed' => array() );
+
+		if ( $reset ) {
+			$store = array( 'group' => array(), 'primed' => array() );
+		}
+
+		return $store;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_memo_reset' ) ) {
+	function topersia_g_memo_reset() {
+		topersia_g_memo_store( true );
+	}
+}
+
+/**
+ * پرچم SC1: `$what` یکی از `group` (حافظۀ پیمایش) یا `prime` (پیش‌بارگذاری).
+ * پیش‌فرض روشن؛ صافی `topersia_g_sc1` فقط برای مقایسۀ پیش و پس و آزمون جهش.
+ */
+if ( ! function_exists( 'topersia_g_sc1_on' ) ) {
+	function topersia_g_sc1_on( $what ) {
+		return ! function_exists( 'apply_filters' ) || (bool) apply_filters( 'topersia_g_sc1', true, $what );
+	}
+}
+
+/**
+ * کش پست‌ها و متای همۀ اعضا را یک‌جا پر می‌کند، پیش از خواندن تک‌تک.
+ *
+ * هر شناسه در یک درخواست یک‌بار پیش‌بارگذاری می‌شود. خروجی را عوض نمی‌کند:
+ * همان `get_post` و `get_post_meta` بعدی از کش می‌خوانند.
+ *
+ * @param array $ids شناسه‌ها.
+ */
+if ( ! function_exists( 'topersia_g_prime' ) ) {
+	function topersia_g_prime( $ids ) {
+
+		if ( ! topersia_g_sc1_on( 'prime' ) ) {
+			return;
+		}
+
+		$store = &topersia_g_memo_store();
+		$new   = array();
+
+		foreach ( (array) $ids as $one ) {
+
+			$one = absint( $one );
+
+			if ( $one && ! isset( $store['primed'][ $one ] ) ) {
+				$new[ $one ] = $one;
+			}
+		}
+
+		if ( ! $new ) {
+			return;
+		}
+
+		foreach ( array_chunk( array_values( $new ), 500 ) as $chunk ) {
+
+			if ( function_exists( '_prime_post_caches' ) ) {
+				_prime_post_caches( $chunk, false, false );
+			}
+
+			if ( function_exists( 'update_meta_cache' ) ) {
+				update_meta_cache( 'post', $chunk );
+			}
+		}
+
+		foreach ( $new as $one ) {
+			$store['primed'][ $one ] = true;
+		}
+	}
+}
+
+if ( function_exists( 'add_action' ) ) {
+	add_action( 'clean_post_cache', 'topersia_g_memo_reset' );
 }
 
 /**
@@ -846,6 +945,10 @@ if ( ! function_exists( 'topersia_g_rel_ids' ) ) {
 					$ids[ $one ] = $one;
 				}
 			}
+		}
+
+		if ( $published ) {
+			topersia_g_prime( $ids );
 		}
 
 		return $published ? topersia_g_published( array_values( $ids ) ) : array_values( $ids );
@@ -3351,6 +3454,24 @@ if ( ! function_exists( 'topersia_g_place_counts' ) ) {
 if ( ! function_exists( 'topersia_g_group_ids' ) ) {
 	function topersia_g_group_ids( $post_id, $group ) {
 
+		/*
+		 * یک گروه تا چهار بار در یک درخواست پیموده می‌شد (SCALE.md SC1).
+		 * کلید: پست، گروه (روابط و زنجیره‌ها)، زبان؛ فقط تا پایان درخواست.
+		 */
+		$memo = topersia_g_sc1_on( 'group' );
+		$key  = '';
+
+		if ( $memo ) {
+
+			$lang  = function_exists( 'apply_filters' ) ? apply_filters( 'wpml_current_language', null ) : null;
+			$key   = absint( $post_id ) . '|' . md5( serialize( array( isset( $group['rels'] ) ? $group['rels'] : array(), isset( $group['chains'] ) ? $group['chains'] : array() ) ) ) . '|' . ( is_string( $lang ) ? $lang : '' );
+			$store = &topersia_g_memo_store();
+
+			if ( isset( $store['group'][ $key ] ) ) {
+				return $store['group'][ $key ];
+			}
+		}
+
 		$ids = empty( $group['rels'] ) ? array() : topersia_g_rel_ids( $post_id, $group['rels'] );
 
 		foreach ( empty( $group['chains'] ) ? array() : $group['chains'] as $chain ) {
@@ -3359,7 +3480,14 @@ if ( ! function_exists( 'topersia_g_group_ids' ) ) {
 			}
 		}
 
-		return array_values( array_unique( array_map( 'absint', $ids ) ) );
+		$ids = array_values( array_unique( array_map( 'absint', $ids ) ) );
+
+		if ( $memo ) {
+			$store = &topersia_g_memo_store();
+			$store['group'][ $key ] = $ids;
+		}
+
+		return $ids;
 	}
 }
 
@@ -3507,6 +3635,9 @@ if ( ! function_exists( 'topersia_g_rel_items' ) ) {
 		if ( $lead_id ) {
 			$ids = array_values( array_diff( $ids, array( $lead_id ) ) );
 		}
+
+		/* کش پست و متای همۀ اعضا پیش از مرتب‌سازی.  SC1 */
+		topersia_g_prime( $ids );
 
 		/* یک ترتیب برای همۀ کارت‌های موجودیت ماندگار.  P5-D211 */
 		$ids   = topersia_g_sort_entities( $ids );

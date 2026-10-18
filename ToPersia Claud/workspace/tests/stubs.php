@@ -319,10 +319,12 @@ class TP_Stub_Relation {
 	public $id;
 	public function __construct( $id ) { $this->id = (string) $id; }
 	public function get_children( $pid, $f = 'ids' ) {
+		$GLOBALS['tp_rel_calls'] = ( isset( $GLOBALS['tp_rel_calls'] ) ? $GLOBALS['tp_rel_calls'] : 0 ) + 1;
 		return isset( $GLOBALS['tp_rel'][ $this->id ]['children'][ $pid ] )
 			? $GLOBALS['tp_rel'][ $this->id ]['children'][ $pid ] : array();
 	}
 	public function get_parents( $pid, $f = 'ids' ) {
+		$GLOBALS['tp_rel_calls'] = ( isset( $GLOBALS['tp_rel_calls'] ) ? $GLOBALS['tp_rel_calls'] : 0 ) + 1;
 		return isset( $GLOBALS['tp_rel'][ $this->id ]['parents'][ $pid ] )
 			? $GLOBALS['tp_rel'][ $this->id ]['parents'][ $pid ] : array();
 	}
@@ -336,6 +338,8 @@ function topersia_render_ready() { return true; }
 function topersia_render_path() { return TP_PLUGIN_DIR; }
 
 function tp_do( $tag, $atts = array() ) {
+	/* هر فراخوانی یک «درخواست» است: حافظهٔ درون‌درخواستی SC1 با دادهٔ دستکاری‌شدهٔ آزمون کهنه نشود. */
+	if ( function_exists( 'topersia_g_memo_reset' ) ) { topersia_g_memo_reset(); }
 	if ( ! isset( $GLOBALS['tp_shortcode'][ $tag ] ) ) { return "‹شورت‌کد $tag ثبت نشده›"; }
 	return call_user_func( $GLOBALS['tp_shortcode'][ $tag ], $atts );
 }
