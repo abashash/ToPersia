@@ -10,8 +10,8 @@
  * کش و خروجی همه بیرون از git: `uploads/tiles/boundaries-cache/` (پاسخ خام Overpass + شکست‌های build با علت) و `uploads/tiles/boundaries/`.
  *
  * قواعد (P5-D363):
- *   استان   `province_code` پایگاه کد آماری ملی است (۰۱…۳۹)، نه ISO 3166-2؛ پس جدول ثابت `reference/province-iso.csv` (entity_uid ← IR-xx)
- *           و تطبیق با برچسب ISO3166-2 رابطهٔ admin_level=4 در کش — یکتا ← auto، وگرنه none.
+ *   استان   منبع اصلی نام است (اصلاحیه P5-D363): نام نرمال‌شدهٔ استان در رابطه‌های admin_level=4 ایران (ISO3166-2 خودِ OSM با «IR-») — یکتا ← auto، وگرنه none.
+ *           ISO3166-2 فقط از خود OSM ثبت می‌شود (reference/province-osm.csv)، نه از حافظه. دو نگهبان: شناسهٔ OSM تکراری ← none؛ مرز مرکز استان درون چندضلعی ← وگرنه none.
  *   شهر     نامزد فقط مرز اداری (جز سطح ۴) یا چندضلعی place=city|town هم‌نام باشد، و مرکزش (out center) درون GeoJSON استان والد
  *           (والد از رابطهٔ شمول خودِ داده)؛ یک نامزد ← auto · چند ← suggested · صفر ← none؛ GeoJSON والد نبود ← suggested.
  *   پهنهٔ طبیعی (آب · بیابان · کوه · جنگل · پارک · جزیره · منطقه · عارضه) ← skip.
@@ -26,7 +26,6 @@ require_once __DIR__ . '/lib/tp-boundaries-lib.php';
 $cmd   = isset( $args[0] ) ? $args[0] : 'report';
 $root  = dirname( __DIR__ );
 $csv   = $root . '/reference/osm-boundary-map.csv';
-$isocv = $root . '/reference/province-iso.csv';
 $up    = wp_get_upload_dir();
 $out   = trailingslashit( $up['basedir'] ) . 'tiles/boundaries/';
 $cache = trailingslashit( $up['basedir'] ) . 'tiles/boundaries-cache/';
@@ -101,10 +100,10 @@ if ( 'match' === $cmd ) {
 	$els = tpb_cache_elements( $cache );
 	if ( null === $els ) { echo "کش Overpass نیست — نخست `fetch` (با اتصال)\n"; return; }
 	$old = tpb_rows( $csv );
-	$iso = array();
-	foreach ( tpb_rows( $isocv ) as $uid => $r ) { $iso[ tpb_key( $uid ) ] = $r['ISO3166-2']; }
-	$prov_name = array();
-	$rows = array();
+	$rows     = array();
+	$osm_iso  = array();   /* uid ← ISO3166-2 خودِ رابطهٔ OSM (فقط برای ثبت) */
+	$prov_pid = array();   /* uid ← شناسهٔ پست استان */
+	$prov_ll  = array();   /* uid ← «lat, lng» مرکز استان از دادهٔ خودمان */
 
 	/* استان‌ها پیش از شهرها: والد شهر GeoJSON استان است */
 	foreach ( array_merge( array( 'tp_province' ), array( 'tp_city' ), $SKIP ) as $type ) {
@@ -119,9 +118,15 @@ if ( 'match' === $cmd ) {
 			if ( in_array( $type, $SKIP, true ) ) {
 				$row['status'] = 'skip'; $row['method'] = 'natural-area';
 			} elseif ( 'tp_province' === $type ) {
-				$code = isset( $iso[ tpb_key( $uid ) ] ) ? $iso[ tpb_key( $uid ) ] : '';
-				if ( '' === $code ) { $row['method'] = 'not-in-province-iso.csv'; }
-				else { list( $st, $el, $how ) = tpb_province_match( $code, $els, $name ); $row['status'] = $st; $row['method'] = $how; if ( $el ) { $row['osm_type'] = $el['type']; $row['osm_id'] = (string) $el['id']; } }
+				list( $st, $el, $how, $isoc ) = tpb_province_by_name( $name, $els );
+				$row['status'] = $st; $row['method'] = $how;
+				if ( $el ) { $row['osm_type'] = $el['type']; $row['osm_id'] = (string) $el['id']; $osm_iso[ $uid ] = $isoc; }
+				$prov_pid[ $uid ] = $p->ID;
+				$cap_id = function_exists( 'topersia_g_capital_id' ) ? (int) topersia_g_capital_id( $p->ID ) : 0;   /* پیش از حلقهٔ شهرها؛ مختصات مرکز برای نگهبان ۲ */
+				/* شهرِ «مرکز استان» اگر مختصات دارد (۱ از ۳۱ در پایگاه محلی)، وگرنه نقطهٔ خودِ استان (geo_coordinates همان پست) — منبع ثبت می‌شود */
+				$ll_cap = $cap_id ? (string) get_post_meta( $cap_id, 'geo_coordinates', true ) : '';
+				$ll_own = (string) get_post_meta( $p->ID, 'geo_coordinates', true );
+				$prov_ll[ $uid ] = '' !== $ll_cap ? array( $ll_cap, 'capital' ) : ( '' !== $ll_own ? array( $ll_own, 'province-point' ) : array( '', '' ) );
 			} else {
 				$pp   = tpb_province_of( $p->ID );
 				$pu   = $pp ? (string) get_post_meta( $pp, 'entity_uid', true ) : '';
@@ -134,6 +139,45 @@ if ( 'match' === $cmd ) {
 			$rows[ $uid ] = $row;
 		}
 	}
+	/* نگهبان‌های استان (P5-D363 اصلاحیه) — رد ← none و گزارش */
+	$guard = array();
+	$dups  = tpb_duplicate_ids( array_filter( $rows, function ( $r ) { return 'tp_province' === $r['post_type'] && in_array( $r['status'], array( 'auto', 'confirmed' ), true ); } ) );
+	foreach ( $dups as $id => $uids ) {
+		foreach ( $uids as $u ) {
+			if ( 'auto' === $rows[ $u ]['status'] ) { $rows[ $u ]['status'] = 'none'; $rows[ $u ]['method'] = 'guard1-duplicate-osm-id:' . $id; $rows[ $u ]['osm_type'] = ''; $rows[ $u ]['osm_id'] = ''; }
+			$guard[ $u ]['g1'] = 'FAIL dup ' . $id;
+		}
+		echo "✗ نگهبان ۱: شناسهٔ OSM {$id} برای چند استان: " . implode( ' · ', $uids ) . "\n";
+	}
+	foreach ( $rows as $uid => &$pr ) {
+		if ( 'tp_province' !== $pr['post_type'] ) { continue; }
+		if ( ! isset( $guard[ $uid ]['g1'] ) ) { $guard[ $uid ]['g1'] = 'ok'; }
+		$gf = $out . tpb_key( $uid ) . '.geojson';
+		if ( ! in_array( $pr['status'], array( 'auto', 'confirmed' ), true ) ) {
+			$guard[ $uid ]['g2'] = 'n/a';
+			if ( is_file( $gf ) ) { unlink( $gf ); echo "• GeoJSON کهنهٔ استانِ بی تطبیق پاک شد: {$pr['name_fa']}\n"; }
+			continue;
+		}
+		if ( ! is_file( $gf ) ) { $guard[ $uid ]['g2'] = 'pending (no GeoJSON yet)'; continue; }
+		list( $ll, $src ) = isset( $prov_ll[ $uid ] ) ? $prov_ll[ $uid ] : array( '', '' );
+		if ( '' === $ll ) { $guard[ $uid ]['g2'] = 'no-center-coordinates'; echo "• نگهبان ۲: مختصات مرکز استان در داده نیست: {$pr['name_fa']}\n"; continue; }
+		$in = tpb_center_inside( $ll, (string) file_get_contents( $gf ) );
+		$guard[ $uid ]['g2'] = ( true === $in ? 'ok' : ( false === $in ? 'FAIL center outside' : 'bad-coordinates' ) ) . ' (' . $src . ')';
+		if ( false === $in && 'auto' === $pr['status'] ) {
+			$pr['status'] = 'none'; $pr['method'] = 'guard2-center-outside-polygon'; unlink( $gf );
+			echo "✗ نگهبان ۲: مرکز استان ({$ll}) درون چندضلعی نیست: {$pr['name_fa']} — ردیف none و GeoJSON پاک شد\n";
+		}
+	}
+	unset( $pr );
+
+	/* reference/province-osm.csv — ISO3166-2 فقط از خود OSM */
+	$fp = fopen( $root . '/reference/province-osm.csv', 'w' );
+	fputcsv( $fp, array( 'entity_uid', 'osm_relation', 'ISO3166-2', 'name_fa', 'status', 'guard1_unique', 'guard2_center' ), ',', '"', '\\' );
+	foreach ( $rows as $uid => $r ) {
+		if ( 'tp_province' === $r['post_type'] ) { fputcsv( $fp, array( $uid, $r['osm_id'], isset( $osm_iso[ $uid ] ) && '' !== $r['osm_id'] ? $osm_iso[ $uid ] : '', $r['name_fa'], $r['status'], $guard[ $uid ]['g1'], $guard[ $uid ]['g2'] ), ',', '"', '\\' ); }
+	}
+	fclose( $fp );
+
 	if ( ! is_dir( dirname( $csv ) ) ) { mkdir( dirname( $csv ), 0777, true ); }
 	$fh = fopen( $csv, 'w' );
 	fputcsv( $fh, array( 'entity_uid', 'osm_type', 'osm_id', 'method', 'status', 'post_type', 'name_fa', 'parent_province' ), ',', '"', '\\' );

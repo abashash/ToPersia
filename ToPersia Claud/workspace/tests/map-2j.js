@@ -42,6 +42,9 @@ async function fullMap( page ) {
 	await page.evaluate( () => document.querySelector( '[data-tp-map-open]' ).scrollIntoView( { block: 'center', behavior: 'instant' } ) );
 	await page.click( '[data-tp-map-open]' );
 	await page.waitForFunction( () => { const x = document.querySelector( '[data-tp-map-full]' ); return x && x.tpMap && x.tpMap.isStyleLoaded(); }, null, { timeout: 120000 } );
+	/* مرز موجودیت (P5-D351) ناهمگام می‌رسد و نقشه را روی محدوده می‌بندد؛ jumpTo پیش از آن بعداً لغو می‌شد (از وقتی GeoJSON شهر اصفهان ساخته شد). پس نخست مرز نشسته و حرکت ایستاده. */
+	await page.waitForFunction( () => { const m = document.querySelector( '[data-tp-map-full]' ).tpMap; return m.getSource( 'tp-bound' ) && ! m.isMoving(); }, null, { timeout: 20000 } ).catch( () => {} );
+	await page.waitForTimeout( 1500 );
 }
 
 async function view( page, lat, lng, z ) {

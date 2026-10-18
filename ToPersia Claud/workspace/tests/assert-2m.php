@@ -61,3 +61,11 @@ tp441_mut( 'برگزارکننده و وب‌سایت رسمی (کارت حقا�
 			&& false === strpos( $x, '<a class="tp-lat" dir="ltr" href="\' . esc_url( $url )' );
 	},
 	$zn2m, str_replace( "'url' => \$url, 'attrs' => ' rel=\"noopener\"' )", "'url' => \$url )", $zn2m ) );
+
+tp441_mut( 'خط‌های مرز disputed پنهان در هر دو سبک: آفلاین فیلتر لایه‌های boundaries «بی disputed» (قدیمی‌شکل یا عبارت، بنا بر شکل فیلتر)؛ آنلاین لایهٔ فیلتر disputed == 1 پنهان؛ هر دو مسیر از hideDisputed  P5-D365',
+	function ( $x ) {
+		return false !== strpos( $x, 'function hideDisputed( layer )' ) && false !== strpos( $x, "'boundaries' === layer[ 'source-layer' ]" ) && false !== strpos( $x, "[ '!=', 'disputed', true ], [ '!=', 'disputed', 1 ]" )
+			&& false !== strpos( $x, "[ '!', [ 'to-boolean', [ 'get', 'disputed' ] ] ]" ) && false !== strpos( $x, "'boundary' === layer[ 'source-layer' ]" ) && false !== strpos( $x, "{ visibility: 'none' }" )
+			&& 2 === substr_count( $x, 'hideDisputed( ' ) - 1;
+	},
+	$js2m, str_replace( "[ '!=', 'disputed', true ], [ '!=', 'disputed', 1 ]", "[ '==', 'kind', 'x' ]", $js2m ) );

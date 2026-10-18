@@ -9,7 +9,8 @@
  *   • tpb_point_in_geojson             نقطه در چندضلعی (حلقهٔ بیرونی؛ سوراخ ندارد)
  *   • tpb_candidates                   نامزدهای یک شهر از کش Overpass — فقط مرز اداری یا چندضلعی place=city|town
  *   • tpb_classify_city                auto · suggested · none
- *   • tpb_province_match               استان با ISO3166-2
+ *   • tpb_province_by_name             استان با نام (ISO3166-2 فقط از خود OSM خوانده می‌شود)
+ *   • tpb_duplicate_ids · tpb_center_inside   دو نگهبان استان
  */
 if ( ! defined( 'TPB_LIB' ) ) {
 	define( 'TPB_LIB', 1 );
@@ -160,25 +161,37 @@ if ( ! defined( 'TPB_LIB' ) ) {
 	/* ── تطبیق ───────────────────────────────────────────────────────── */
 
 	/**
-	 * استان: ISO3166-2 ← عنصر admin_level=4 با همان برچسب؛ یکتا ← auto.
-	 * کدِ بی عنصر (برچسب OSM گاه با فهرست رسمی نمی‌خواند) و نام داده شد ← تطبیق دقیق نام میان رابطه‌های admin_level=4 با ISO3166-2 ایرانی؛
-	 * یکتا ← suggested (برای تأیید کاربر، نه auto)؛ وگرنه none.
+	 * استان: نام ← رابطهٔ admin_level=4 ایران در کش — منبع اصلی نام است، نه کد.  P5-D363 (اصلاحیه)
+	 *
+	 * «ایران» = رابطه‌ای که برچسب ISO3166-2 خودِ OSM با «IR-» شروع می‌شود (کش همسایه‌ها را هم دارد). نام نرمال‌شده (name:fa یا name؛ با و بدون «استان»،
+	 * نیم‌فاصله، ي/ك) باید با نام استان برابر و یکتا باشد؛ صفر یا بیش از یکی ← none. ISO3166-2 هرگز از حافظه یا فهرست بیرونی نمی‌آید:
+	 * همان برچسب OSM برگردانده می‌شود، فقط برای ثبت و مقایسه.
+	 *
+	 * @return array [وضعیت، عنصر یا null، روش، ISO3166-2 از OSM]
 	 */
-	function tpb_province_match( $iso, $elements, $name = '' ) {
-		$hit = array(); $lvl4 = array();
+	function tpb_province_by_name( $name, $elements ) {
+		$n = str_replace( ' ', '', tpb_norm( $name ) ); $hit = array();   /* فاصله‌ها حذف: «بویر احمد» در OSM و «بویراحمد» در داده */
 		foreach ( $elements as $e ) {
 			$t = isset( $e['tags'] ) ? $e['tags'] : array();
-			if ( 'relation' !== $e['type'] || '4' !== ( isset( $t['admin_level'] ) ? $t['admin_level'] : '' ) ) { continue; }
-			if ( $iso === ( isset( $t['ISO3166-2'] ) ? $t['ISO3166-2'] : '' ) ) { $hit[] = $e; }
-			if ( 0 === strpos( isset( $t['ISO3166-2'] ) ? $t['ISO3166-2'] : '', 'IR-' ) ) { $lvl4[] = $e; }
+			if ( 'relation' !== $e['type'] || '4' !== ( isset( $t['admin_level'] ) ? $t['admin_level'] : '' ) || 0 !== strpos( isset( $t['ISO3166-2'] ) ? $t['ISO3166-2'] : '', 'IR-' ) ) { continue; }
+			if ( in_array( $n, array_map( function ( $x ) { return str_replace( ' ', '', $x ); }, tpb_el_names( $e ) ), true ) ) { $hit[ $e['id'] ] = $e; }
 		}
-		if ( 1 === count( $hit ) ) { return array( 'auto', $hit[0], 'ISO3166-2=' . $iso ); }
-		if ( ! $hit && '' !== $name ) {
-			$n = tpb_norm( $name ); $by = array();
-			foreach ( $lvl4 as $e ) { if ( in_array( $n, tpb_el_names( $e ), true ) ) { $by[] = $e; } }
-			if ( 1 === count( $by ) ) { return array( 'suggested', $by[0], 'ISO3166-2=' . $iso . ' not in OSM; exact-name match has ISO3166-2=' . $by[0]['tags']['ISO3166-2'] ); }
-		}
-		return array( 'none', null, 'ISO3166-2=' . $iso . ' (' . count( $hit ) . ' hits)' );
+		if ( 1 === count( $hit ) ) { $e = reset( $hit ); return array( 'auto', $e, 'admin_level=4+exact-name', $e['tags']['ISO3166-2'] ); }
+		return array( 'none', null, 'exact-name (' . count( $hit ) . ' hits among IR-* admin_level=4)', '' );
+	}
+
+	/** نگهبان ۱: شناسهٔ OSM تکراری — [id ← فهرست uidها] فقط برای شناسه‌هایی که بیش از یک استان گرفته‌اند. */
+	function tpb_duplicate_ids( $rows ) {
+		$by = array();
+		foreach ( $rows as $uid => $r ) { if ( isset( $r['osm_id'] ) && '' !== $r['osm_id'] ) { $by[ $r['osm_id'] ][] = $uid; } }
+		return array_filter( $by, function ( $l ) { return count( $l ) > 1; } );
+	}
+
+	/** نگهبان ۲: «lat,lng» مرکز استان (از دادهٔ خودمان) درون چندضلعی همان استان؟ — true · false · null (مختصات نامعتبر) */
+	function tpb_center_inside( $latlng, $geojson ) {
+		$p = array_map( 'trim', explode( ',', (string) $latlng ) );
+		if ( 2 !== count( $p ) || ! is_numeric( $p[0] ) || ! is_numeric( $p[1] ) ) { return null; }
+		return tpb_point_in_geojson( (float) $p[1], (float) $p[0], $geojson );
 	}
 
 	/** مرکز عنصر: out center ← center.lat/lon؛ نقطه ← lat/lon؛ نبود ← null. */
