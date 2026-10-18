@@ -1302,6 +1302,14 @@ if ( ! function_exists( 'topersia_g_event_extra_tiles' ) ) {
 			$tiles[] = array( 'label' => __( 'برگزارکننده', 'topersia' ), 'name' => topersia_g_lang_runs( $name ), 'raw' => true );
 		}
 
+		/* محل برگزاری — venue_name همان پست (همان قاعدۀ اسکیما در topersia_schema_event_location)؛ ترجمۀ بی‌مقدار ← هیچ؛ S3 */
+		$venue = get_post_meta( $pid, 'venue_name', true );
+		$venue = is_scalar( $venue ) ? trim( wp_strip_all_tags( (string) $venue ) ) : '';
+
+		if ( '' !== $venue ) {
+			$tiles[] = array( 'label' => __( 'محل برگزاری', 'topersia' ), 'name' => topersia_g_lang_runs( $venue ), 'raw' => true );
+		}
+
 		if ( function_exists( 'topersia_schema_event_official_url' ) ) {
 			$url = (string) topersia_schema_event_official_url( $pid );
 		} else {

@@ -392,6 +392,7 @@ return array (
     'محتوای زمانی با تاریخ صریح و لینک به منبع اصلی.' => 'Time-sensitive content with explicit dates and links to the original source.',
     'محدود' => 'Limited',
     'محدودۀ جغرافیایی' => 'Geographic extent',
+    'محل برگزاری' => 'Venue',
     'محله' => 'Neighborhood',
     'محله‌ها' => 'Neighborhoods',
     'محلی' => 'Local',

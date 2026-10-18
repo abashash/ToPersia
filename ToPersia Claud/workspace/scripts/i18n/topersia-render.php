@@ -290,6 +290,7 @@ return array(
 	'نماد'                         => array( 'en' => 'Symbol', 'ar' => 'الرمز' ),
 	'کارت بین‌المللی'   => array( 'en' => 'International cards', 'ar' => 'البطاقات الدولية' ),
 	'بازتعریف واحد پول' => array( 'en' => 'Redenomination', 'ar' => 'إعادة تقييم العملة' ),
+	'محل برگزاری'                  => array( 'en' => 'Venue', 'ar' => 'مكان الفعالية' ),
 	'برگزارکننده'                  => array( 'en' => 'Organizer', 'ar' => 'الجهة المنظِّمة' ),
 	'وب‌سایت رسمی'                 => array( 'en' => 'Official website', 'ar' => 'الموقع الرسمي' ),
 	'تاریخ آغاز'                   => array( 'en' => 'Start date', 'ar' => 'تاريخ البدء' ),

@@ -69,3 +69,10 @@ tp441_mut( 'خط‌های مرز disputed پنهان در هر دو سبک: آف
 			&& 2 === substr_count( $x, 'hideDisputed( ' ) - 1;
 	},
 	$js2m, str_replace( "[ '!=', 'disputed', true ], [ '!=', 'disputed', 1 ]", "[ '==', 'kind', 'x' ]", $js2m ) );
+
+tp441_mut( 'محل برگزاری (S3): کاشی کنار «برگزارکننده» از venue_name همان پست (همان قاعدهٔ اسکیما: ترجمهٔ بی‌مقدار ← هیچ)، فقط با مقدار؛ برچسب در کاتالوگ  P5-D366',
+	function ( $x ) {
+		return false !== strpos( $x, "\$venue = get_post_meta( \$pid, 'venue_name', true );" ) && false !== strpos( $x, "__( 'محل برگزاری', 'topersia' )" ) && false !== strpos( $x, "if ( '' !== \$venue ) {" )
+			&& strpos( $x, "__( 'محل برگزاری', 'topersia' )" ) < strpos( $x, "__( 'وب‌سایت رسمی', 'topersia' )" ) && strpos( $x, "__( 'برگزارکننده', 'topersia' )" ) < strpos( $x, "__( 'محل برگزاری', 'topersia' )" );
+	},
+	$zn2m, str_replace( "if ( '' !== \$venue ) {", "if ( true ) {", $zn2m ) );

@@ -1560,6 +1560,10 @@ msgid "محدودۀ جغرافیایی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "محل برگزاری"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "محله"
 msgstr ""
 

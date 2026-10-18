@@ -42,9 +42,9 @@ $cases = array(
 	'only_e'  => array( 'tp_festival', 'Temp Event Dates OnlyEnd', array( 'event_end_date' => '2027-09-24' ), false ),
 	/* P5-D361 — برگزارکننده و وب‌سایت رسمی؛ تاریخ آینده تا گرهٔ Event بیاید. پنجم: متای هر زبان */
 	'org'     => array( 'tp_festival', 'Temp Event Org Full', array( 'event_start_date' => '2027-09-21', 'event_end_date' => '2027-09-24', 'official_event_url' => 'https://www.example.org/events/2027' ), true,
-		array( 'fa' => array( 'organizer_name' => 'سازمان آزمون' ), 'en' => array( 'organizer_name' => 'Test Organizer' ), 'ar' => array( 'organizer_name' => 'منظمة الاختبار' ) ) ),
+		array( 'fa' => array( 'organizer_name' => 'سازمان آزمون', 'venue_name' => 'میدان آزمون' ), 'en' => array( 'organizer_name' => 'Test Organizer', 'venue_name' => 'Test Square' ), 'ar' => array( 'organizer_name' => 'منظمة الاختبار', 'venue_name' => 'ساحة الاختبار' ) ) ),
 	'org_gap' => array( 'tp_festival', 'Temp Event Org Gap', array( 'event_start_date' => '2027-09-21', 'event_end_date' => '2027-09-24' ), true,
-		array( 'fa' => array( 'organizer_name' => 'سازمان آزمون', 'official_event_url' => 'https://gap.example.org/' ), 'ar' => array( 'organizer_name' => 'منظمة الاختبار' ) ), array( 'official_event_url' => 'translation-empty' ) ),
+		array( 'fa' => array( 'organizer_name' => 'سازمان آزمون', 'official_event_url' => 'https://gap.example.org/', 'venue_name' => 'میدان خالی‌ماندهٔ ترجمه' ), 'ar' => array( 'organizer_name' => 'منظمة الاختبار', 'venue_name' => 'ساحة الاختبار' ) ), array( 'official_event_url' => 'translation-empty' ) ),
 	'url_http' => array( 'tp_festival', 'Temp Event Url Http', array( 'event_start_date' => '2027-09-21', 'event_end_date' => '2027-09-24', 'official_event_url' => 'http://insecure.example.org/' ), true ),
 	'url_own'  => array( 'tp_festival', 'Temp Event Url Own', array( 'event_start_date' => '2027-09-21', 'event_end_date' => '2027-09-24', 'official_event_url' => 'https://www.topersia.com/festival/x/' ), true ),
 	'org_thing' => array( 'tp_religious_event', 'Temp Event Org Thing', array( 'event_start_date' => '2020-03-01', 'event_end_date' => '2020-03-02', 'official_event_url' => 'https://past.example.org/' ), true,

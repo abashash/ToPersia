@@ -25,7 +25,7 @@ const wp   = ( ...a ) => execFileSync( ENV.php, [ ...CLI, 'eval-file', 'tests/ev
 let bad = 0, n = 0;
 const check = ( ok, label, note ) => { n++; if ( ! ok ) { bad++; } console.log( ( ok ? '  ✅ ' : '  ❌ ' ) + label + ( ok ? '' : '   ← ' + ( note || '' ) ) ); };
 
-const LABEL = { org: /^(برگزارکننده|Organizer|الجهة المنظِّمة)$/, web: /^(وب‌سایت رسمی|Official website|الموقع الرسمي)$/ };
+const LABEL = { org: /^(برگزارکننده|Organizer|الجهة المنظِّمة)$/, web: /^(وب‌سایت رسمی|Official website|الموقع الرسمي)$/, venue: /^(محل برگزاری|Venue|مكان الفعالية)$/ };
 
 /* خواندن صفحه: کاشی‌ها و JSON-LD */
 const read = ( page, labels ) => page.evaluate( ( L ) => {
@@ -36,21 +36,22 @@ const read = ( page, labels ) => page.evaluate( ( L ) => {
 	} );
 	const all = [ ...document.querySelectorAll( '#tp-geo a, #tp-geo b, #tp-geo span, #tp-geo p, #tp-geo div' ) ];
 	const find = ( re ) => { const lab = all.find( e => e.children.length === 0 && re.test( e.textContent.trim() ) ); return lab ? lab.parentElement : null; };
-	const o = find( new RegExp( L.org ) ), w = find( new RegExp( L.web ) );
+	const o = find( new RegExp( L.org ) ), w = find( new RegExp( L.web ) ), v = find( new RegExp( L.venue ) );
 	const a = w && w.matches( 'a[href]' ) ? w : null;
 	const ld = [];
 	document.querySelectorAll( 'script[type="application/ld+json"]' ).forEach( s => { try { const j = JSON.parse( s.textContent ); ( j[ '@graph' ] || [ j ] ).forEach( x => ld.push( x ) ); } catch ( e ) {} } );
 	const main = ld.find( x => [].concat( x[ '@type' ] || [] ).some( t => /Event|Festival/.test( t ) ) ) || null;
 	return {
 		orgText: o ? o.textContent.replace( LabelStrip( L.org ), '' ).trim() : null,
+		venueText: v ? v.textContent.replace( LabelStrip( L.venue ), '' ).trim() : null,
 		webText: a ? ( a.querySelector( 'b' ) || a ).textContent.trim() : null, webHref: a ? a.getAttribute( 'href' ) : null, webRel: a ? a.getAttribute( 'rel' ) : null,
-		event: main ? { organizer: main.organizer ? main.organizer.name : null, sameAs: main.sameAs || null } : null,
+		event: main ? { organizer: main.organizer ? main.organizer.name : null, sameAs: main.sameAs || null, locName: main.location ? main.location.name || null : null, locId: main.location ? main.location[ '@id' ] || null : null } : null,
 		hasThing: ! main,
 		overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
 		body: document.body.innerText,
 	};
 	function LabelStrip( src ) { return new RegExp( src.replace( /^\^|\$$/g, '' ) ); }
-}, { org: LABEL.org.source, web: LABEL.web.source } );
+}, { org: LABEL.org.source, web: LABEL.web.source, venue: LABEL.venue.source } );
 
 /* همخوانی: JSON-LD ⇒ متن دیدنی */
 const consistent = ( r ) => {
@@ -58,7 +59,9 @@ const consistent = ( r ) => {
 	const orgOk = ! r.event.organizer || ( r.orgText && r.orgText.includes( r.event.organizer ) );
 	const sa = [].concat( r.event.sameAs || [] );
 	const sameOk = sa.every( u => u === r.webHref || /wikidata|wikipedia/.test( u ) );
-	return !! orgOk && sameOk;
+	/* location.name: بی @id یعنی از venue_name است ← باید همان متن «محل برگزاری» دیدنی باشد؛ با @id نام موجودیت مکانی است (در مسیر راهنما و عنوان دیدنی) */
+	const locOk = ! r.event.locName || !! r.event.locId || ( r.venueText && r.venueText.includes( r.event.locName ) );
+	return !! orgOk && sameOk && locOk;
 };
 
 ( async () => {
@@ -87,6 +90,8 @@ const consistent = ( r ) => {
 						`${ name } ${ lang }: کاشی برگزارکننده «${ want[ lang ] }» و «وب‌سایت رسمی» با متن پیوند نام دامنه (example.org)، rel=noopener`, JSON.stringify( [ r.orgText, r.webText, r.webHref, r.webRel ] ) );
 					check( r.event && r.event.organizer === want[ lang ] && [].concat( r.event.sameAs || [] ).includes( 'https://www.example.org/events/2027' ) && consistent( r ),
 						`${ name } ${ lang }: JSON-LD Event: organizer و sameAs ← همان متن و پیوندِ دیدنی روی صفحه`, JSON.stringify( r.event ) );
+					const wantV = { fa: 'میدان آزمون', en: 'Test Square', ar: 'ساحة الاختبار' }[ lang ];
+					check( r.venueText === wantV && r.event && r.event.locName === wantV && ! r.event.locId && consistent( r ), `${ name } ${ lang }: «محل برگزاری» «${ wantV }» کنار برگزارکننده؛ JSON-LD location.name همان متن دیدنی`, JSON.stringify( [ r.venueText, r.event && r.event.locName, r.event && r.event.locId ] ) );
 					if ( 'fa' === lang || 'en' === lang ) { check( ! r.overflow, `${ name } ${ lang } @1440: بی سرریز افقی`, '' ); }
 					if ( ARGS.shots && 'chromium' === name ) { await page.screenshot( { path: path.join( SHOT, `org-${ lang }-1440.png` ) } ); }
 				}
@@ -95,6 +100,7 @@ const consistent = ( r ) => {
 				let r = await go( 'org_gap', 'en' );
 				check( null === r.orgText && ! ( r.event && r.event.organizer ) && 'gap.example.org' === r.webText && [].concat( ( r.event || {} ).sameAs || [] ).includes( 'https://gap.example.org/' ) && consistent( r ),
 					`${ name } en: ترجمهٔ بی برگزارکننده ← بی کاشی و بی organizer؛ نشانی رسمی (ترجمه خالی) از اصل: کاشی و sameAs هر دو`, JSON.stringify( [ r.orgText, r.webText, r.event ] ) );
+				check( null === r.venueText && ! ( r.event && r.event.locName && ! r.event.locId ) && consistent( r ), `${ name } en: ترجمهٔ بی venue_name ← بی کاشی «محل برگزاری» و بی location.name برگرفته از آن (فقط نام موجودیت مکانی با @id)`, JSON.stringify( [ r.venueText, r.event && r.event.locName, r.event && r.event.locId ] ) );
 				r = await go( 'org_gap', 'fa' );
 				check( r.orgText === 'سازمان آزمون' && r.event && r.event.organizer === 'سازمان آزمون', `${ name } fa: همان رویداد روی اصل فارسی برگزارکننده دارد`, JSON.stringify( [ r.orgText, r.event ] ) );
 
@@ -110,8 +116,8 @@ const consistent = ( r ) => {
 
 				/* جهش: صفحه‌ای که JSON-LD organizer دارد ولی متنش روی صفحه نیست، رد می‌شود */
 				const good = await go( 'org', 'fa' );
-				check( consistent( good ) && ! consistent( Object.assign( {}, good, { orgText: null } ) ) && ! consistent( Object.assign( {}, good, { webHref: null } ) ),
-					`${ name }: جهش — بی متن برگزارکننده یا بی پیوند، تابع همخوانی رد می‌کند`, '' );
+				check( consistent( good ) && ! consistent( Object.assign( {}, good, { orgText: null } ) ) && ! consistent( Object.assign( {}, good, { webHref: null } ) ) && ! consistent( Object.assign( {}, good, { venueText: null } ) ),
+					`${ name }: جهش — بی متن برگزارکننده، بی پیوند یا بی «محل برگزاری»، تابع همخوانی رد می‌کند`, '' );
 
 				/* ۳۹۰ */
 				const m = await browser.newContext( { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 } );
