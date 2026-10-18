@@ -332,3 +332,26 @@ const tile = (lon, lat, z) => { const n = 2 ** z, r = lat * Math.PI / 180;
   console.table(stat);
 })();
 ```
+
+---
+
+## PERF.md §۸ · SCHEMA-PARITY.md §۶ — اجرا شد ۱۸ اکتبر ۲۰۲۶ (فقط خواندنی، محلی)
+
+اجراکننده‌ها: `scripts/local/tp-lq-perf-sch.php` (پایگاه‌داده) · `tests/lq-http.js` (مرورگر) · عنصر LCP از `tests/lighthouse.js` (A0). نتیجهٔ هر ردیف، همان لحظه.
+
+| شناسه | پرسش | نتیجه |
+|---|---|---|
+| LQ-PERF-01 | فهرست link/script استان و شهر | هر دو صفحه ۳۲ شیوه‌نامه و ۴۲ اسکریپت با src. مسدودکنندهٔ بی‌مصرف برای قالب ما: `jet-engine/frontend.css` · `jet-reviews.css` · `jet-reviews/photoswipe.css` · `elementor/frontend.min.css` (لازم) · jQuery و migrate در head؛ در پاورقی: `vue.min.js` · `photoswipe.min.js` · `jet-reviews-frontend.js` · `api-fetch` و وابستگی‌ها · Elementor Pro (frontend + elements-handlers) |
+| LQ-PERF-02 | عنصر LCP | در گزارش A0 همین دسته (`tests/lighthouse.js` اکنون «عنصر LCP» چاپ می‌کند) |
+| LQ-PERF-03 | آزمایهٔ `e_font_icon_svg` | `default` (یعنی تنظیم‌نشده) |
+| LQ-PERF-04 | وزن‌های Peyda | کلیدها پرشده: `font_w300 · w400 · w500 · w600 · w700 · w800`، `font_name`، `font_variable`، `font_stack`؛ `font_woff2` خالی |
+| LQ-PERF-05 | CSS المنتور | ۲ پرونده، ۱٬۳۰۹ بایت (`post-68.css` ۱٬۲۳۱ بایت) |
+| LQ-PERF-06 | جای کارت نقشه در ۳۹۰ | استان: top=۱۳٬۱۱۹px · شهر: top=۳٬۶۶۸px، innerHeight=۸۴۴ ← هر دو بیرون از ۲۰۰px؛ MapLibre در بار نخست سوار نمی‌شود |
+| LQ-PERF-07 | اندازهٔ DOM | استان ۱٬۷۲۳ عنصر · شهر ۸۹۸ (دسکتاپ و موبایل یکی) |
+| LQ-PERF-08 | پوسته و گزینه‌های وودمارت | Woodmart 8.5.7 (stylesheet=woodmart)؛ `font_awesome_css='not_use'` · `lazy_loading=false` · `styles_always_use=[]`؛ کلید `combined_*` نیست (CSS/JS ترکیبی خاموش) |
+| LQ-SCH-01 | نویسهٔ عربی‌خط در JSON-LD استان | fa ۱٬۳۳۸ از ۶٬۵۵۳ · en **۰** از ۳٬۴۴۴ · ar ۱۵۲ از ۳٬۴۰۷ (در ar عربیِ واقعی است — تفکیک فارسی/عربی در دستهٔ ۸) |
+| LQ-SCH-02 | hreflang و canonical | هیچ‌کدام در head هیچ زبانی (`link[rel=alternate][hreflang]` و `link[rel=canonical]` صفر؛ سایت محلی noindex است و Rank Math بی‌خروجی) |
+| LQ-SCH-03 | منتشرشده بی `entity_uid` | ۰ از ۲۱۹ پست `tp_` |
+| LQ-SCH-04 | پوشش `external_reference_uri` | ۴۲ از ۲۱۹ پر؛ ویکی‌داده ۳۶ |
+| LQ-SCH-05 | `population` / `area_km2` | population: city=۱۷ · country=۳ · province=۳۳ · village=۱ — area_km2: city=۱۲ · country=۳ · province=۳۳ · water_body=۱ (غیر کشور/شهر: روستا و پهنهٔ آبی هر کدام یک) |
+| LQ-SCH-06 | دارای هر دو (meta_description و خلاصه‌ساز) | ۵۳ دارای meta_description؛ ۳ دارای هر دو |

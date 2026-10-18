@@ -379,6 +379,13 @@ function row( r ) {
 		tbt:  r.audits['total-blocking-time'].numericValue,
 		fcp:  r.audits['first-contentful-paint'].numericValue,
 		srt:  r.audits['server-response-time'] ? r.audits['server-response-time'].numericValue : NaN,
+		/* عنصر LCP (LQ-PERF-02): نشانگر و برش HTML همان گره، برای شمارش رایج‌ترین در اجراها */
+		lcpEl: ( () => {
+			try {
+				const it = r.audits['largest-contentful-paint-element'].details.items[ 0 ].items[ 0 ].node;
+				return ( it.selector || '?' ) + ' ← ' + String( it.snippet || '' ).slice( 0, 70 );
+			} catch ( e ) { return '?'; }
+		} )(),
 	};
 }
 
@@ -575,6 +582,8 @@ async function measure( dirs ) {
 				+ pad( Math.round( m( 'perf' ) ), 8 ) + pad( Math.round( m( 'a11y' ) ), 7 ) + pad( Math.round( m( 'bp' ) ), 6 ) + pad( Math.round( m( 'seo' ) ), 6 )
 				+ pad( Math.round( m( 'lcp' ) ), 8 ) + pad( m( 'cls' ).toFixed( 3 ), 7 ) + pad( Math.round( m( 'tbt' ) ), 7 ) + pad( Math.round( m( 'fcp' ) ), 8 )
 				+ pad( Math.round( m( 'srt' ) ), 6 ) + rows.map( r => Math.round( r.perf ) ).join( ' · ' ) );
+			const lc = {}; rows.forEach( r => { lc[ r.lcpEl ] = ( lc[ r.lcpEl ] || 0 ) + 1; } );
+			console.log( '      عنصر LCP: ' + Object.entries( lc ).sort( ( a, b ) => b[ 1 ] - a[ 1 ] ).map( ( [ e, n ] ) => n + '× ' + e ).join( ' | ' ) );
 		}
 		const st = s.srv.stats;
 		console.log( '  سرور ایستا: ' + st.served + ' پاسخ · بیرون از نسخۀ ایستا: ' + st.misses.length + ( st.errors.length ? ' · خطا: ' + st.errors.length : '' )
