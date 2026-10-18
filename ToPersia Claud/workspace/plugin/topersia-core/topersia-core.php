@@ -4442,6 +4442,39 @@ function topersia_drop_block_styles() {
 }
 
 /**
+ * اندازه‌های میانی JPEG به‌صورت WebP — A3 · P5-D366 (PERF.md §۶).
+ *
+ * فقط برای اندازه‌هایی که وردپرس از این پس می‌سازد (بند ۵٫۸ به بعد `image_editor_output_format`)؛ پروندۀ اصلی
+ * جدا و دست‌نخورده می‌ماند، پس `full` همان JPEG است. PNG و SVG عوض نمی‌شود (لوگو و شفافیت). فقط اگر ویرایشگر
+ * تصویر سرور WebP بنویسد. خاموش با `add_filter( 'topersia_webp_subsizes', '__return_false' )`.
+ * بندانگشتی‌های موجود با `wp media regenerate` (فقط محلی) از نو ساخته می‌شوند.
+ */
+add_filter( 'image_editor_output_format', 'topersia_webp_subsizes', 10, 3 );
+
+function topersia_webp_subsizes( $formats, $filename = '', $mime_type = '' ) {
+
+	if ( ! is_array( $formats ) || 'image/jpeg' !== $mime_type || ! apply_filters( 'topersia_webp_subsizes', true ) ) {
+		return $formats;
+	}
+
+	if ( ! function_exists( 'wp_image_editor_supports' ) || ! wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) ) ) {
+		return $formats;
+	}
+
+	$formats['image/jpeg'] = 'image/webp';
+
+	return $formats;
+}
+
+/** کیفیت WebP — پیش‌فرض ۸۲ وردپرس روی GD از JPEG ۸۲ همین سایت سنگین‌تر درمی‌آید (۷۶۸×۴۸۰: ۱۲۹KB در برابر ۱۲۱KB)؛ ۷۰ ≈ ۹۷KB. */
+add_filter( 'wp_editor_set_quality', 'topersia_webp_quality', 99, 2 );
+
+function topersia_webp_quality( $quality, $mime_type = '' ) {
+
+	return 'image/webp' === $mime_type ? (int) apply_filters( 'topersia_webp_quality', 70 ) : $quality;
+}
+
+/**
  * دارایی‌های بی‌مصرفِ صفحۀ موجودیت — A1 · P5-D366 (PERF.md §۶).
  *
  * روی صفحۀ هر نوع `tp_` قالب ما هیچ‌کدام از اینها را مصرف نمی‌کند: بلوک نظر بازدیدکنندگان (P5-D318) و فرم نظر

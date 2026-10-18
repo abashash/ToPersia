@@ -82,10 +82,10 @@ $rn2m = file_get_contents( TP_PLUGIN_DIR . '/topersia-render.php' );
 tp441_mut( 'preload تصویر سربرگ (A2): فقط صفحهٔ تکی tp_ و فقط با تصویر از دروازهٔ فیلد؛ src · srcset · sizes از همان تابع‌های وردپرسِ <img> با اندازهٔ full (وگرنه دوبار بارگیری)؛ fetchpriority=high؛ در wp_head پس از اسکریپت راه‌انداز  P5-D366',
 	function ( $x ) {
 		return false !== strpos( $x, "0 !== strpos( (string) get_post_type( \$pid ), 'tp_' )" ) && false !== strpos( $x, "topersia_g_raw( \$pid, 'hero_image' )" ) && false !== strpos( $x, "wp_get_attachment_image_src( \$id, 'full' )" )
-			&& false !== strpos( $x, "wp_get_attachment_image_srcset( \$id, 'full' )" ) && false !== strpos( $x, "wp_get_attachment_image_sizes( \$id, 'full' )" ) && false !== strpos( $x, 'fetchpriority=\"high\"' )
+			&& false !== strpos( $x, "wp_get_attachment_image_srcset( \$id, 'full' )" ) && false !== strpos( $x, 'topersia_g_hero_sizes() : (string)' ) && false !== strpos( $x, 'fetchpriority=\"high\"' )
 			&& false !== strpos( $x, "add_action( 'wp_head', 'topersia_render_preload_hero', 2 );" );
 	},
-	$rn2m, str_replace( "wp_get_attachment_image_sizes( \$id, 'full' )", "wp_get_attachment_image_sizes( \$id, 'large' )", $rn2m ) );
+	$rn2m, str_replace( 'topersia_g_hero_sizes() : (string)', 'wp_get_attachment_image_sizes( 0 ) : (string)', $rn2m ) );
 
 tp441_mut( 'حذف دارایی‌های بی‌مصرف صفحهٔ موجودیت (A1): دسته‌های jet-reviews · photoswipe · jet-engine-frontend · elementor-icons در سه قلاب (enqueue، wp_footer و print_footer_scripts)، فقط روی صفحهٔ تکی tp_، قابل‌خاموش با صافی  P5-D366',
 	function ( $x ) {
@@ -93,3 +93,16 @@ tp441_mut( 'حذف دارایی‌های بی‌مصرف صفحهٔ موجودی
 			&& false !== strpos( $x, "add_action( 'wp_print_footer_scripts', 'topersia_drop_unused_entity_assets', 1 );" ) && false !== strpos( $x, "'topersia_drop_unused_assets'" ) && false !== strpos( $x, "'topersia_unused_entity_assets'" );
 	},
 	$core2m, str_replace( "add_action( 'wp_print_footer_scripts', 'topersia_drop_unused_entity_assets', 1 );", '', $core2m ) );
+
+tp441_mut( 'سربرگ تمام‌عرض (A3): sizes صریح از topersia_g_hero_sizes() (پیش‌فرض 100vw، صافی‌پذیر) هم در <img> هم در preload  P5-D366',
+	function ( $x ) {
+		return false !== strpos( $x, "'sizes'         => topersia_g_hero_sizes()," ) && false !== strpos( $x, "apply_filters( 'topersia_hero_sizes', '100vw' )" );
+	},
+	$zn2m, str_replace( "'sizes'         => topersia_g_hero_sizes(),", '', $zn2m ) );
+
+tp441_mut( 'اندازه‌های میانی WebP (A3): فقط image/jpeg ← image/webp با wp_image_editor_supports؛ کیفیت فقط برای image/webp و برابر ۷۰ (پیش‌فرض ۸۲ سنگین‌تر از JPEG درمی‌آید)؛ هر دو قابل‌خاموش  P5-D366',
+	function ( $x ) {
+		return false !== strpos( $x, "'image/jpeg' !== \$mime_type" ) && false !== strpos( $x, "array( 'mime_type' => 'image/webp' )" ) && false !== strpos( $x, "\$formats['image/jpeg'] = 'image/webp';" )
+			&& false !== strpos( $x, "'image/webp' === \$mime_type ? (int) apply_filters( 'topersia_webp_quality', 70 )" ) && false !== strpos( $x, "apply_filters( 'topersia_webp_subsizes', true )" );
+	},
+	$core2m, str_replace( "apply_filters( 'topersia_webp_quality', 70 )", "apply_filters( 'topersia_webp_quality', 82 )", $core2m ) );

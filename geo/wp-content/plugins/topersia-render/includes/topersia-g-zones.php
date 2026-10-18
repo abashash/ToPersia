@@ -1353,6 +1353,16 @@ if ( ! function_exists( 'topersia_g_official_names' ) ) {
    ۴ — شورت‌کدهای ناحیه
    ========================================================================= */
 
+/**
+ * `sizes` تصویر سربرگ — تمام‌عرض (A3 · P5-D366). پیش‌فرض وردپرس برای اندازۀ full «(max-width: 2560px) 100vw, 2560px» است
+ * و مرورگر را روی پهنای نمایشگر اطمینان نمی‌دهد؛ سربرگ همیشه عرض کامل صفحه است. preload همین مقدار را می‌گیرد.
+ */
+if ( ! function_exists( 'topersia_g_hero_sizes' ) ) {
+	function topersia_g_hero_sizes() {
+		return (string) apply_filters( 'topersia_hero_sizes', '100vw' );
+	}
+}
+
 /** [tp_hero] — تصویر، نام سه‌زبانه، نام محلی، خلاصه. */
 if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 	function topersia_g_sc_hero( $atts = array() ) {
@@ -1380,6 +1390,7 @@ if ( ! function_exists( 'topersia_g_sc_hero' ) ) {
 				'class'         => 'tp-hero__img',
 				'loading'       => 'eager',
 				'fetchpriority' => 'high',
+				'sizes'         => topersia_g_hero_sizes(),
 			);
 
 			/* alt پیوست به زبان دیگر ← نام موجودیت به زبان صفحه  P5-D278 */

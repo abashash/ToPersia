@@ -591,7 +591,7 @@ if ( topersia_render_ready() ) {
  * preload تصویر سربرگ (عنصر LCP) — PERF A2 · P5-D366.
  *
  * `src` و `srcset` و `sizes` عیناً همان‌هایی‌اند که `[tp_hero]` با
- * `wp_get_attachment_image( …, 'full' )` می‌نویسد؛ ناهمخوانی یعنی دوبار بارگیری.
+ * `wp_get_attachment_image( …, 'full' )` و `topersia_g_hero_sizes()` می‌نویسد؛ ناهمخوانی یعنی دوبار بارگیری.
  * تصویر سربرگ را از همان دروازۀ فیلد می‌خواند (`topersia_g_raw`)، پس زبان دیگر و
  * پیش‌نویس را رعایت می‌کند. فقط صفحۀ تکی موجودیت `tp_`.
  *
@@ -624,7 +624,7 @@ if ( ! function_exists( 'topersia_render_preload_hero' ) ) {
 		}
 
 		$srcset = (string) wp_get_attachment_image_srcset( $id, 'full' );
-		$sizes  = (string) wp_get_attachment_image_sizes( $id, 'full' );
+		$sizes  = function_exists( 'topersia_g_hero_sizes' ) ? topersia_g_hero_sizes() : (string) wp_get_attachment_image_sizes( $id, 'full' );
 
 		echo '<link rel="preload" as="image" href="' . esc_url( $src[0] ) . '"';
 
