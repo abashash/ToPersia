@@ -2122,10 +2122,39 @@
 			];
 		}
 
+		/*
+		 * خط‌های مرزِ disputed در هر دو سبک پنهان‌اند — ابوموسی و تنب‌ها فقط درون مرز ایران دیده شوند.  P5-D365
+		 * آفلاین (Protomaps، لایۀ boundaries): به فیلتر هر لایه «بی disputed» اضافه می‌شود؛ آنلاین (OpenFreeMap، لایۀ boundary): لایۀ ویژۀ
+		 * خط‌های disputed (فیلتر disputed == 1) پنهان می‌شود (لایه‌های دیگر آن‌ها را از پیش حذف می‌کنند). با کلید داده، نه موقعیت.
+		 */
+		function hideDisputed( layer ) {
+
+			if ( 'boundaries' === layer[ 'source-layer' ] ) {
+
+				/* فیلتر basemaps v4 قدیمی‌شکل است (["<=","kind_detail",2])؛ شکل را می‌شناسیم تا ترکیب نامعتبر نسازیم */
+				var f      = layer.filter;
+				var legacy = Array.isArray( f ) && ( 'string' === typeof f[ 1 ] || ( -1 !== [ 'all', 'any', 'none' ].indexOf( f[ 0 ] ) && Array.isArray( f[ 1 ] ) && 'string' === typeof f[ 1 ][ 1 ] ) );
+
+				if ( ! f ) {
+					layer.filter = [ '!', [ 'to-boolean', [ 'get', 'disputed' ] ] ];
+				} else if ( legacy ) {
+					layer.filter = [ 'all', f, [ '!=', 'disputed', true ], [ '!=', 'disputed', 1 ] ];
+				} else {
+					layer.filter = [ 'all', f, [ '!', [ 'to-boolean', [ 'get', 'disputed' ] ] ] ];
+				}
+			} else if ( 'boundary' === layer[ 'source-layer' ] && layer.filter && -1 !== JSON.stringify( layer.filter ).indexOf( '[\"==\",[\"get\",\"disputed\"],1]' ) ) {
+				layer.layout = Object.assign( {}, layer.layout, { visibility: 'none' } );
+			}
+
+			return layer;
+		}
+
 		/* برچسب‌های سبک آنلاین به زبان صفحه با برگشت به name؛ فارسی و عربی بی letter-spacing */
 		function localize( st, lang ) {
 
 			( st.layers || [] ).forEach( function ( l ) {
+
+				hideDisputed( l );
 
 				if ( ! l.layout ) {
 					return;
@@ -2266,6 +2295,8 @@
 			flavor.italic = 'Noto Sans Regular';
 
 			return window.basemaps.layers( 'protomaps', flavor, { lang: lang } ).map( function ( layer ) {
+
+				hideDisputed( layer );
 
 				if ( ( 'fa' === lang || 'ar' === lang ) && layer.layout && undefined !== layer.layout[ 'text-letter-spacing' ] ) {
 					delete layer.layout[ 'text-letter-spacing' ];
