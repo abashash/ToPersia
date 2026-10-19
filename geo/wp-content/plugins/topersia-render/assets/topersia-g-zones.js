@@ -142,10 +142,31 @@
 			return Math.max( 0, Math.round( bottom ) );
 		}
 
+		/*
+		 * همۀ خواندن‌ها اول، همۀ نوشتن‌ها بعد — P5-D370.  پیش از این `setProperty` وسطِ `offsetHeight` و
+		 * `getBoundingClientRect` بود: هر خواندنِ پس از نوشتن، محاسبۀ سبکِ کل صفحه را همان‌دم اجبار می‌کرد
+		 * (ردگیری موبایل ۴× کندتر: ۷ تا ۸ بار، ≈۱۰۵۰ms سبک در استان). حالا یک بار خوانده و یک بار نوشته می‌شود و
+		 * محاسبۀ سبک تا فریمِ بعد می‌ماند. مقادیر همان‌اند؛ فقط ترتیب عوض شده.
+		 */
 		function apply() {
 
+			/* ── خواندن ── */
 			var top = headerBottom();
+			var h   = nav ? nav.offsetHeight : 0;
+			var now = null;
 
+			if ( nav ) {
+
+				/* چسبیده یعنی جای طبیعیِ نوار از خطِ چسبیدن بالاتر رفته. */
+				var prev    = nav.previousElementSibling;
+				var natural = prev
+					? prev.getBoundingClientRect().bottom + ( parseFloat( window.getComputedStyle( nav ).marginTop ) || 0 )
+					: nav.getBoundingClientRect().top;
+
+				now = h > 0 && natural < top - 0.5;
+			}
+
+			/* ── نوشتن ── */
 			if ( top !== snavTop ) {
 				snavTop = top;
 				page.style.setProperty( '--tp-snav-top', top + 'px' );
@@ -157,19 +178,10 @@
 			}
 
 			/* روی موبایل نوار پنهان است و بلندی‌اش صفر — لنگرِ بخش فقط هدر.  P5-D228 */
-			var h = nav.offsetHeight;
-
 			if ( h !== snavH ) {
 				snavH = h;
 				page.style.setProperty( '--tp-snav-h', h + 'px' );
 			}
-
-			/* چسبیده یعنی جای طبیعیِ نوار از خطِ چسبیدن بالاتر رفته. */
-			var prev    = nav.previousElementSibling;
-			var natural = prev
-				? prev.getBoundingClientRect().bottom + ( parseFloat( window.getComputedStyle( nav ).marginTop ) || 0 )
-				: nav.getBoundingClientRect().top;
-			var now     = h > 0 && natural < top - 0.5;
 
 			if ( now !== stuck ) {
 				stuck = now;

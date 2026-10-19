@@ -113,3 +113,13 @@ tp441_mut( 'پیش‌بارگذاری اعضا (SC1 گام ۱): topersia_g_publi
 			&& false !== strpos( $x, "has_filter( 'jet-engine/relations/get-children' )" ) && false !== strpos( $x, "add_action( 'save_post', 'topersia_g_rel_memo_reset' );" ) && false !== strpos( $x, 'add_shortcode( $tag, topersia_g_sc_scope( $callback ) );' ) && false !== strpos( $x, 'if ( 0 === topersia_g_sc_depth( 0 ) ) {' );
 	},
 	$zn2m, str_replace( "topersia_g_prime( \$out );\n", '', $zn2m ) );
+
+tp441_mut( 'apply هدر/نوار بخش‌ها (P5-D370): همهٔ خواندن‌ها (headerBottom · offsetHeight · getBoundingClientRect) پیش از نخستین setProperty؛ نوشتن‌ها پس از آن — بی چیدمان اجباری میان نوشتن و خواندن',
+	function ( $x ) {
+		$a = strpos( $x, 'function apply() {' );
+		$r = strpos( $x, 'var h   = nav ? nav.offsetHeight : 0;', $a );
+		$n = strpos( $x, 'prev.getBoundingClientRect().bottom', $a );
+		$w = strpos( $x, "page.style.setProperty( '--tp-snav-top'", $a );
+		return false !== $a && false !== $r && false !== $n && false !== $w && $r < $w && $n < $w && false !== strpos( $x, "page.style.setProperty( '--tp-snav-h', h + 'px' );" ) && strpos( $x, 'nav.offsetHeight', $w ) === false;
+	},
+	$js2m, str_replace( 'var h   = nav ? nav.offsetHeight : 0;', 'var h   = 0;', str_replace( "page.style.setProperty( '--tp-snav-h', h + 'px' );", "page.style.setProperty( '--tp-snav-h', h + 'px' ); h = nav.offsetHeight;", $js2m ) ) );

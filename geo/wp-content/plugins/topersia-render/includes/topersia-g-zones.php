@@ -6833,6 +6833,44 @@ if ( ! function_exists( 'topersia_g_list_modal_html' ) ) {
 }
 
 /**
+ * هر شورت‌کدِ بیرونی یک «درخواست» تازه است برای حافظۀ رابطه‌های تهی — SC1 · P5-D369.
+ *
+ * حافظۀ `topersia_g_rel_known_empty` فقط درون یک رندر معتبر است؛ شورت‌کدِ تودرتو (`[tp_page]` که بخش‌ها را صدا می‌زند)
+ * آن را نگه می‌دارد، ولی هر شورت‌کدِ بیرونی تازه با حافظۀ خالی آغاز می‌شود. در یک بار نمایش صفحه فقط یکی بیرونی است؛
+ * در آزمون‌ها که هر فراخوانی دادۀ ساختگی را عوض می‌کند، هرگز کهنه نمی‌ماند.
+ */
+if ( ! function_exists( 'topersia_g_sc_scope' ) ) {
+	function topersia_g_sc_scope( $callback ) {
+
+		return function () use ( $callback ) {
+
+			if ( 0 === topersia_g_sc_depth( 0 ) ) {
+				topersia_g_rel_memo_reset();
+			}
+
+			topersia_g_sc_depth( 1 );
+
+			try {
+				return call_user_func_array( $callback, func_get_args() );
+			} finally {
+				topersia_g_sc_depth( -1 );
+			}
+		};
+	}
+}
+
+/** عمق تودرتویی شورت‌کدها — یک شمارنده برای همۀ برچسب‌ها (نه به ازای هر بسته). */
+if ( ! function_exists( 'topersia_g_sc_depth' ) ) {
+	function topersia_g_sc_depth( $delta ) {
+
+		static $depth = 0;
+
+		$depth += (int) $delta;
+
+		return $depth;
+	}
+}
+/**
  * مودال نقشه و مودال گالری.
  *
  * هیچ‌کدام دادۀ تازه نمی‌خواهند: نقشه همان مختصاتِ کارت نقشه را بزرگ
@@ -7068,7 +7106,7 @@ if ( ! function_exists( 'topersia_g_register' ) ) {
 				continue;
 			}
 
-			add_shortcode( $tag, $callback );
+			add_shortcode( $tag, topersia_g_sc_scope( $callback ) );
 		}
 	}
 }
