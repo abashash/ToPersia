@@ -55,6 +55,47 @@ foreach ( $pages as $name => $pid ) {
 	}
 }
 do_action( 'wpml_switch_language', 'fa' );
+
+/* حافظهٔ topersia_g_raw روی وردپرس واقعی (فقط خواندن): ابطال با رویدادهای وردپرس و هم‌ارزی با بی‌حافظه */
+if ( 'compare' === $mode && function_exists( 'topersia_g_raw_memo' ) && ! empty( $pages['province'] ) ) {
+
+	$reads = 0;
+	$spy   = function ( $v ) use ( &$reads ) { $reads++; return $v; };
+	add_filter( 'get_post_metadata', $spy, 10, 1 );
+	$pp = (int) $pages['province'];
+	topersia_g_rel_memo_reset();
+	topersia_g_raw( $pp, 'name_fa' ); $r1 = $reads;
+	topersia_g_raw( $pp, 'name_fa' ); $r2 = $reads;
+	do_action( 'clean_post_cache', $pp ); topersia_g_raw( $pp, 'name_fa' ); $r3 = $reads;
+	do_action( 'updated_post_meta', 1, $pp, 'x', 'y' ); topersia_g_raw( $pp, 'name_fa' ); $r4 = $reads;
+	remove_filter( 'get_post_metadata', $spy, 10 );
+
+	if ( 1 === $r1 && 1 === $r2 && 2 === $r3 && $r4 > $r3 ) { echo "  ✅ حافظهٔ raw: خواندن دوم بی get_post_meta؛ clean_post_cache و updated_post_meta دوباره می‌خوانند\n"; $ok++; }
+	else { echo "  ❌ حافظهٔ raw: شمار خواندن‌ها $r1 $r2 $r3 $r4\n"; $bad++; }
+
+	/* هم‌ارزی: هر جفت (پست، فیلد، زبان) با حافظه ≡ بی آن */
+	$keys = array( 'name_fa', 'official_name_fa', 'short_summary', 'hero_image', 'population', 'display_priority', 'featured_image_gallery', 'description' );
+	$ids  = array_map( 'intval', $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type LIKE 'tp\\_%' AND post_status='publish' ORDER BY ID LIMIT 60" ) );
+	$diff = 0; $n = 0;
+
+	foreach ( array( 'fa', 'en' ) as $lg ) {
+		do_action( 'wpml_switch_language', $lg );
+		foreach ( $ids as $i ) {
+			foreach ( $keys as $k ) {
+				topersia_g_rel_memo_reset();
+				add_filter( 'topersia_g_raw_memo', '__return_false' ); $a = topersia_g_raw( $i, $k ); remove_filter( 'topersia_g_raw_memo', '__return_false' );
+				$b = topersia_g_raw( $i, $k ); $c = topersia_g_raw( $i, $k ); $n++;
+				if ( $a !== $b || $b !== $c ) { $diff++; }
+			}
+		}
+	}
+
+	do_action( 'wpml_switch_language', 'fa' );
+
+	if ( 0 === $diff ) { echo "  ✅ حافظهٔ raw ≡ بی حافظه روی $n جفت (پست، فیلد، زبان)\n"; $ok++; }
+	else { echo "  ❌ حافظهٔ raw: $diff ناهمخوان از $n\n"; $bad++; }
+}
+
 echo "\n" . implode( "\n", $rows ) . "\n";
 echo "\nگذشته: $ok   افتاده: $bad\n";
 exit( $bad ? 1 : 0 );

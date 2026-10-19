@@ -136,6 +136,9 @@ function apply_filters( $tag, $value ) {
 	return $value;
 }
 
+/* SC1 گام ۳: حافظهٔ topersia_g_raw در آزمون‌های stub خاموش (آن‌ها دادهٔ ساختگی را میان فراخوانی‌ها عوض می‌کنند)؛ رفتارش در tests/sc1-parity-local.php روی وردپرس واقعی */
+if ( ! isset( $GLOBALS['tp_filters']['topersia_g_raw_memo'] ) ) { $GLOBALS['tp_filters']['topersia_g_raw_memo'][] = function () { return false; }; }
+
 function get_the_ID() { return $GLOBALS['tp_current']; }
 
 function get_post_meta( $id, $key, $single = true ) {

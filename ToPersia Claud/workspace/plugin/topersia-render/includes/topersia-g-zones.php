@@ -361,6 +361,54 @@ if ( ! function_exists( 'topersia_g_flag_on' ) ) {
 	}
 }
 
+/**
+ * حافظۀ درون‌درخواستیِ `topersia_g_raw` — SC1 گام ۳ · P5-D372 (شمارۀ تصمیم: P5-D372 برای زمان PHP نیز).
+ *
+ * کلید: (پست، فیلد، زبان صفحه). ۵۷٪ خواندن‌های استان اصفهان تکراری بود (۳٬۲۱۳ خواندن، ۱٬۳۶۷ یکتا). هیچ transient یا option
+ * تازه‌ای نیست؛ فقط تا پایان همین درخواست. با `clean_post_cache` و `updated_post_meta` / `added_post_meta` /
+ * `deleted_post_meta` همان پست خالی می‌شود، با هر شورت‌کدِ بیرونی همه (`topersia_g_rel_memo_reset`).
+ *
+ * @param int|string $post_id  پست.
+ * @param string     $key      فیلد (ساده‌ترین مسیر: خواندن).
+ * @param array|null $set      `array( 'v' => مقدار )` برای نوشتن.
+ * @param string     $op       '' | 'drop' (یک پست) | 'reset' (همه).
+ * @return array|null `array( 'v' => مقدار )` یا null.
+ */
+if ( ! function_exists( 'topersia_g_raw_memo' ) ) {
+	function topersia_g_raw_memo( $post_id, $key, $set = null, $op = '' ) {
+
+		static $memo = array();
+
+		if ( 'reset' === $op ) {
+			$memo = array();
+			return null;
+		}
+
+		if ( 'drop' === $op ) {
+			unset( $memo[ absint( $post_id ) ] );
+			return null;
+		}
+
+		$lang = function_exists( 'topersia_g_page_lang' ) ? topersia_g_page_lang() : '';
+		$mk   = $key . '|' . $lang;
+		$pid  = absint( $post_id );
+
+		if ( null !== $set ) {
+			$memo[ $pid ][ $mk ] = $set;
+			return $set;
+		}
+
+		return isset( $memo[ $pid ][ $mk ] ) ? $memo[ $pid ][ $mk ] : null;
+	}
+}
+
+if ( function_exists( 'add_action' ) ) {
+	add_action( 'clean_post_cache', function ( $post_id ) { topersia_g_raw_memo( $post_id, '', null, 'drop' ); } );
+	foreach ( array( 'updated_post_meta', 'added_post_meta', 'deleted_post_meta' ) as $tp_raw_hook ) {
+		add_action( $tp_raw_hook, function ( $meta_id, $post_id ) { topersia_g_raw_memo( $post_id, '', null, 'drop' ); }, 10, 2 );
+	}
+}
+
 /** متای خام — بدون پاک‌سازی، چون ریپیتر و گالری آرایه‌اند. */
 if ( ! function_exists( 'topersia_g_raw' ) ) {
 	function topersia_g_raw( $post_id, $key ) {
@@ -369,11 +417,22 @@ if ( ! function_exists( 'topersia_g_raw' ) ) {
 			return '';
 		}
 
+		$memo = ! function_exists( 'apply_filters' ) || apply_filters( 'topersia_g_raw_memo', true );   /* آزمون‌های stub دادۀ ساختگی را میان فراخوانی‌ها عوض می‌کنند */
+		$hit  = $memo ? topersia_g_raw_memo( $post_id, $key ) : null;
+
+		if ( null !== $hit ) {
+			return $hit['v'];
+		}
+
 		$value = get_post_meta( $post_id, $key, true );
 
 		/* ترجمه‌پذیرِ ترجمه‌نشده در صفحۀ غیرفارسی — خالی  P5-D278 */
 		if ( topersia_g_untranslated( $key, $value ) ) {
-			return is_array( $value ) ? array() : '';
+			$value = is_array( $value ) ? array() : '';
+		}
+
+		if ( $memo ) {
+			topersia_g_raw_memo( $post_id, $key, array( 'v' => $value ) );
 		}
 
 		return $value;
@@ -661,8 +720,28 @@ if ( ! function_exists( 'topersia_g_prime' ) ) {
 			 */
 			global $wpml_post_translations;
 
-			if ( count( $ids ) >= 6 && is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, 'prefetch_ids' ) ) {
+			if ( is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, 'prefetch_ids' ) ) {
 				$wpml_post_translations->prefetch_ids( $ids );
+
+				/*
+				 * نام رسمیِ هر عضو به دو زبان دیگر از ترجمه‌هایش می‌آید (`topersia_g_name_in`)؛ نوشته و متای آن‌ها هم یک‌جا.
+				 * `get_element_translations` پس از `prefetch_ids` از کش خودِ WPML می‌خواند (بی پرس‌وجو).  SC1 گام ۳
+				 */
+				if ( method_exists( $wpml_post_translations, 'get_element_translations' ) ) {
+
+					$sibs = array();
+
+					foreach ( $ids as $one ) {
+						foreach ( (array) $wpml_post_translations->get_element_translations( $one ) as $tid ) {
+							$tid = absint( $tid );
+							if ( $tid ) { $sibs[ $tid ] = $tid; }
+						}
+					}
+
+					if ( $sibs ) {
+						_prime_post_caches( array_values( $sibs ), false, true );
+					}
+				}
 			}
 		}
 	}
@@ -697,6 +776,7 @@ if ( ! function_exists( 'topersia_g_rel_known_empty' ) ) {
 if ( ! function_exists( 'topersia_g_rel_memo_reset' ) ) {
 	function topersia_g_rel_memo_reset() {
 		topersia_g_rel_known_empty( 0, 'children', 0, 'reset' );
+		topersia_g_raw_memo( 0, '', null, 'reset' );
 	}
 }
 
@@ -3684,8 +3764,10 @@ if ( ! function_exists( 'topersia_g_rel_items' ) ) {
 			$total ++;
 		}
 
-		/* SC1 گام ۲: رابطه‌های کارت‌ها پیش از ساخت، یک‌جا */
-		topersia_g_prefetch_items( array_map( 'topersia_g_view_id', $limit ? array_slice( $ids, 0, $limit ) : $ids ), $key );
+		/* SC1 گام ۲ و ۳: رابطه‌ها و تصویر کارت‌ها پیش از ساخت، یک‌جا */
+		$tp_views = array_map( 'topersia_g_view_id', $limit ? array_slice( $ids, 0, $limit ) : $ids );
+		topersia_g_prefetch_items( $tp_views, $key );
+		topersia_g_warm_card_images( $tp_views );
 
 		foreach ( $ids as $n => $one ) {
 
@@ -3701,6 +3783,39 @@ if ( ! function_exists( 'topersia_g_rel_items' ) ) {
 	}
 }
 
+/**
+ * تصویر کارتِ همۀ اعضا را پیش از ساخت کارت‌ها یک‌جا پیش‌خوانی می‌کند — SC1 گام ۳ · P5-D373.
+ *
+ * `topersia_g_card_image` فقط شناسۀ پیوست می‌دهد؛ ساخت `<img>` بعداً نوشتۀ پیوست، متایش (ابعاد، srcset) و ترجمۀ WPML Media
+ * هر پیوست را جدا می‌پرسید (استان اصفهان: ۴۶ نوشته، ۴۵ متا، ۱۰۷ جست‌وجوی ترجمه). اینجا شناسه‌ها از همان `topersia_g_card_image`
+ * (که `topersia_g_raw` را هم گرم می‌کند) جمع و با `topersia_g_prime` (نوشته + متا + `prefetch_ids` WPML) یک‌جا می‌آیند.
+ * خروجی عوض نمی‌شود؛ حدس نادرست فقط یک پرس‌وجوی اضافی است.
+ *
+ * @param array $views شناسۀ اعضا در زبان صفحه.
+ */
+if ( ! function_exists( 'topersia_g_warm_card_images' ) ) {
+	function topersia_g_warm_card_images( array $views ) {
+
+		if ( count( $views ) < 6 ) {
+			return;
+		}
+
+		$att = array();
+
+		foreach ( $views as $view ) {
+
+			$id = topersia_g_card_image( absint( $view ) );
+
+			if ( $id ) {
+				$att[ $id ] = $id;
+			}
+		}
+
+		if ( $att ) {
+			topersia_g_prime( array_values( $att ) );
+		}
+	}
+}
 /**
  * رابطه‌هایی که ساختنِ کارت هر عضو می‌خواند را برای همۀ اعضا با یک پرس‌وجوی `IN` به‌ازای هر رابطه می‌گیرد — SC1 گام ۲ · P5-D370.
  *
@@ -4470,6 +4585,15 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 			return $out;
 		}
 
+		/* نوشته، متا و ترجمۀ WPML همۀ پیوست‌ها یک‌جا، پیش از ساخت هر `<img>`.  SC1 گام ۳ · P5-D373 */
+		$all = array();
+
+		foreach ( $raw as $one ) {
+			$all[] = absint( is_array( $one ) && isset( $one['id'] ) ? $one['id'] : $one );
+		}
+
+		topersia_g_prime( $all );
+
 		foreach ( $raw as $attachment ) {
 
 			$attachment = absint( is_array( $attachment ) && isset( $attachment['id'] ) ? $attachment['id'] : $attachment );
@@ -4549,7 +4673,12 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 			$seen[ $shot['id'] ] = true;
 		}
 
-		foreach ( topersia_g_gallery_agg_stored( $pid ) as $row ) {
+		$rows = topersia_g_gallery_agg_stored( $pid );
+
+		/* صاحبان عکس و پیوندها یک‌جا (نوشته + متا + ترجمۀ WPML) پیش از حلقه؛ پیش از این هر ردیف جدا می‌پرسید.  SC1 گام ۳ · P5-D373 */
+		topersia_g_prime( array_merge( array_column( $rows, 'src' ), array_column( $rows, 'id' ) ) );
+
+		foreach ( $rows as $row ) {
 
 			if ( $room <= 0 ) {
 				break;

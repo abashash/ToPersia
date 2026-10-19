@@ -130,11 +130,11 @@ tp441_mut( 'apply هدر/نوار بخش‌ها (P5-D370): همهٔ خواندن
 
 tp441_mut( 'SC1 گام ۲: رابطه‌های کارت هر عضو (۸۴·۸۶·۸۸·۹۳ والد، ۹۷، گروه جاذبه/باستانی و جشنواره‌های فرهنگ) پیش از ساخت با topersia_g_prefetch_items یک‌جا گرفته می‌شود (حداقل ۶ عضو)؛ در topersia_g_rel_items پیش از حلقهٔ place_item؛ و جدول ترجمهٔ WPML با prefetch_ids خودِ WPML (حداقل ۶ شناسه، فقط اگر هست)  P5-D370',
 	function ( $x ) {
-		$p = strpos( $x, 'topersia_g_prefetch_items( array_map( \'topersia_g_view_id\'' );
+		$p = strpos( $x, 'topersia_g_prefetch_items( $tp_views, $key );' );
 		$l = strpos( $x, '$items[] = topersia_g_place_item(' );
 		return false !== strpos( $x, 'function topersia_g_prefetch_items( array $views, $key ) {' ) && false !== $p && false !== $l && $p < $l
 			&& false !== strpos( $x, 'count( $views ) < 6' ) && false !== strpos( $x, "array( 'id' => 97, 'dir' => 'children' )" ) && false !== strpos( $x, 'array( 84, 86, 88, 93 )' )
-			&& false !== strpos( $x, 'count( $ids ) >= 6 && is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, \'prefetch_ids\' )' );
+			&& false !== strpos( $x, 'is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, \'prefetch_ids\' )' );
 	},
 	$zn2m, str_replace( 'count( $views ) < 6', 'count( $views ) < 0', $zn2m ) );
 
@@ -177,3 +177,23 @@ tp441_mut( 'گالری تجمیعی ذخیره‌شده، صاحبان عکس ر
 		return false !== strpos( $x, "topersia_g_seen( array_column( \$out, 'src' ), 'shown' );" );
 	},
 	$ga2m, str_replace( "topersia_g_seen( array_column( \$out, 'src' ), 'shown' );", '', $ga2m ) );
+
+tp441_mut( 'SC1 گام ۳ — حافظهٔ topersia_g_raw: کلید (پست، فیلد، زبان صفحه)؛ بی transient و option؛ با clean_post_cache و updated/added/deleted_post_meta همان پست خالی؛ با هر شورت‌کد بیرونی همه؛ قابل‌خاموش با صافی topersia_g_raw_memo (آزمون‌های stub خاموشش می‌کنند)  P5-D373',
+	function ( $x ) {
+		$a = strpos( $x, 'function topersia_g_raw_memo(' );
+		$b = strpos( $x, 'function topersia_g_raw( $post_id, $key ) {' );
+		if ( false === $a || false === $b ) { return false; }
+		$mem = substr( $x, $a, $b - $a );
+		return false !== strpos( $mem, "\$mk   = \$key . '|' . \$lang;" ) && false !== strpos( $mem, 'topersia_g_page_lang()' ) && false !== strpos( $mem, "add_action( 'clean_post_cache'" )
+			&& false !== strpos( $mem, "'updated_post_meta', 'added_post_meta', 'deleted_post_meta'" ) && false === strpos( $mem, 'set_transient' ) && false === strpos( $mem, 'update_option' ) && false === strpos( $mem, 'wp_cache_set' )
+			&& false !== strpos( $x, "apply_filters( 'topersia_g_raw_memo', true )" ) && false !== strpos( $x, "topersia_g_raw_memo( 0, '', null, 'reset' );" );
+	},
+	$zn2m, str_replace( "'updated_post_meta', 'added_post_meta', 'deleted_post_meta'", "'updated_post_meta', 'added_post_meta'", $zn2m ) );
+
+tp441_mut( 'SC1 گام ۳ — پیش‌خوانی کارت‌ها: تصویر کارتِ همهٔ اعضا (topersia_g_warm_card_images، حداقل ۶ عضو) پیش از ساخت؛ نوشته و متای پیوست‌های گالری (own و تجمیعی) و صاحبان عکس با topersia_g_prime؛ ترجمه‌های هر عضو در زبان‌های دیگر (get_element_translations پس از prefetch_ids خودِ WPML)  P5-D373',
+	function ( $x ) {
+		return false !== strpos( $x, 'function topersia_g_warm_card_images( array $views ) {' ) && false !== strpos( $x, 'topersia_g_warm_card_images( $tp_views );' ) && false !== strpos( $x, 'count( $views ) < 6' )
+			&& false !== strpos( $x, "topersia_g_prime( array_merge( array_column( \$rows, 'src' ), array_column( \$rows, 'id' ) ) );" ) && false !== strpos( $x, 'topersia_g_prime( $all );' )
+			&& false !== strpos( $x, '$wpml_post_translations->get_element_translations( $one )' ) && false !== strpos( $x, '_prime_post_caches( array_values( $sibs ), false, true );' );
+	},
+	$zn2m, str_replace( 'topersia_g_prime( $all );', '', $zn2m ) );
