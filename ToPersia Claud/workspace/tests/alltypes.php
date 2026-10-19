@@ -351,6 +351,7 @@ function tp_at_world( $mode ) {
 	$GLOBALS['tp_posts'] = array();
 	$GLOBALS['tp_meta']  = array();
 	$GLOBALS['tp_rel']   = array();
+	if ( function_exists( 'topersia_g_rel_memo_reset' ) ) { topersia_g_rel_memo_reset(); }   /* SC1: تهیِ شناخته‌شدهٔ سناریوی پیشین */
 
 	/* هر رابطهٔ اسکین در سایت شیء دارد، حتی بی‌ردیف. */
 	foreach ( $RELS as $id => $r ) {

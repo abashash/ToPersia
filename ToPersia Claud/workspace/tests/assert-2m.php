@@ -105,3 +105,11 @@ tp441_mut( 'preload وزن متن قلم (A4): فقط یک وزن (۴۰۰، یا
 			&& false !== strpos( $x, "\$href = topersia_render_font_url( \$file );" ) && false !== strpos( $x, "add_action( 'wp_head', 'topersia_render_preload_font', 3 );" ) && 1 === substr_count( $x, 'data-tp-preload="font"' );
 	},
 	$rn2m, str_replace( ' crossorigin data-tp-preload="font"', ' data-tp-preload="font"', $rn2m ) );
+
+tp441_mut( 'پیش‌بارگذاری اعضا (SC1 گام ۱): topersia_g_published ورودی و خروجی را با _prime_post_caches (فقط ناموجودها؛ بی term) پر می‌کند؛ پله‌های زنجیره با یک پرس‌وجوی IN کش خودِ JetEngine را پر می‌کنند؛ رابطهٔ تهیِ شناخته‌شده در همین درخواست دوباره پرسیده نمی‌شود، مگر کسی فیلتر JetEngine را بگیرد؛ ابطال با save_post · deleted_post  P5-D369',
+	function ( $x ) {
+		return false !== strpos( $x, '_prime_post_caches( $ids, false, true )' ) && false !== strpos( $x, "topersia_g_prime( \$out );" ) && false !== strpos( $x, "topersia_g_prime( \$ids );" )
+			&& false !== strpos( $x, 'topersia_g_rel_prefetch( $cur, $spec );' ) && false !== strpos( $x, "'operator' => 'IN'" ) && false !== strpos( $x, "wp_cache_set( \$key, \$by[ \$one ], 'jet_engine_rel' )" )
+			&& false !== strpos( $x, "has_filter( 'jet-engine/relations/get-children' )" ) && false !== strpos( $x, "add_action( 'save_post', 'topersia_g_rel_memo_reset' );" ) && false !== strpos( $x, 'add_shortcode( $tag, topersia_g_sc_scope( $callback ) );' ) && false !== strpos( $x, 'if ( 0 === topersia_g_sc_depth( 0 ) ) {' );
+	},
+	$zn2m, str_replace( "topersia_g_prime( \$out );\n", '', $zn2m ) );

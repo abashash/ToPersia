@@ -624,6 +624,127 @@ if ( ! function_exists( 'topersia_g_public_url' ) ) {
 
 if ( ! function_exists( 'topersia_g_sort_entities' ) ) {
 	/**
+ * کش پست‌ها و متای اعضا را یک‌جا پر می‌کند — SC1 گام ۱ · P5-D369.
+ *
+ * پیش از این هر عضو با `get_post( ID )` و هر متا با `postmeta WHERE post_id IN (یک شناسه)` جدا خوانده می‌شد (استان اصفهان:
+ * ۱۶۴ + ۱۶۳ پرس‌وجو). `_prime_post_caches` فقط شناسه‌های ناموجود در کش را در دو پرس‌وجو می‌آورد؛ خروجی عوض نمی‌شود.
+ */
+if ( ! function_exists( 'topersia_g_prime' ) ) {
+	function topersia_g_prime( array $ids ) {
+
+		if ( ! function_exists( '_prime_post_caches' ) ) {
+			return;
+		}
+
+		$ids = array_values( array_filter( array_unique( array_map( 'absint', $ids ) ) ) );
+
+		if ( count( $ids ) > 1 ) {
+			_prime_post_caches( $ids, false, true );
+		}
+	}
+}
+
+/**
+ * رابطه‌ای که برای این (رابطه، جهت، شناسه) تهی بوده — درون همین درخواست.
+ *
+ * JetEngine نتیجۀ تهی را کش نمی‌کند (`! $children`)، پس هر بار دوباره می‌پرسد (SC13). با `$set = true` ثبت می‌شود؛
+ * با `$set = null` فقط خوانده می‌شود؛ `topersia_g_rel_memo_reset()` همه را پاک می‌کند.
+ */
+if ( ! function_exists( 'topersia_g_rel_known_empty' ) ) {
+	function topersia_g_rel_known_empty( $rel_id, $dir, $post_id, $set = null ) {
+
+		static $known = array();
+
+		if ( 'reset' === $set ) {
+			$known = array();
+			return false;
+		}
+
+		$key = absint( $rel_id ) . '|' . ( 'parents' === $dir ? 'p' : 'c' ) . '|' . absint( $post_id );
+
+		if ( true === $set ) {
+			$known[ $key ] = true;
+		}
+
+		return isset( $known[ $key ] );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_rel_memo_reset' ) ) {
+	function topersia_g_rel_memo_reset() {
+		topersia_g_rel_known_empty( 0, 'children', 0, 'reset' );
+	}
+}
+
+if ( function_exists( 'add_action' ) ) {
+	add_action( 'save_post', 'topersia_g_rel_memo_reset' );
+	add_action( 'deleted_post', 'topersia_g_rel_memo_reset' );
+}
+
+/**
+ * ردیف‌های یک رابطه برای چند شناسه را با یک پرس‌وجو می‌خواند و کش خودِ JetEngine را به ازای هر شناسه پر می‌کند.
+ *
+ * `get_children( یک شناسه )` بعد از آن بی پرس‌وجو می‌رسد و همان فیلترهای JetEngine را اجرا می‌کند؛ ردیف تهی به
+ * `topersia_g_rel_known_empty` می‌رود. اگر JetEngine متد یا کلید کش را نداشت، بی‌صدا هیچ نمی‌کند (رفتار پیشین).
+ */
+if ( ! function_exists( 'topersia_g_rel_prefetch' ) ) {
+	function topersia_g_rel_prefetch( array $parents, $spec ) {
+
+		$id  = isset( $spec['id'] ) ? absint( $spec['id'] ) : 0;
+		$dir = isset( $spec['dir'] ) ? $spec['dir'] : 'children';
+
+		if ( ! $id || ! function_exists( 'topersia_relation' ) || ! function_exists( 'wp_cache_get' ) || ! function_exists( 'wp_cache_set' ) ) {
+			return;
+		}
+
+		$relation = topersia_relation( $id );
+
+		if ( ! $relation || ! method_exists( $relation, 'get_items' ) || ! method_exists( $relation, 'get_cache_key' ) || ! method_exists( $relation, 'get_id' ) ) {
+			return;
+		}
+
+		$field = ( 'parents' === $dir ) ? 'child_object_id' : 'parent_object_id';
+		$todo  = array();
+
+		foreach ( array_unique( array_map( 'absint', $parents ) ) as $one ) {
+
+			$key = ( 'parents' === $dir ) ? $relation->get_cache_key( '0', $one ) : $relation->get_cache_key( $one, '0' );
+
+			if ( $one && ! topersia_g_rel_known_empty( $id, $dir, $one ) && ! wp_cache_get( $key, 'jet_engine_rel' ) ) {
+				$todo[] = $one;
+			}
+		}
+
+		if ( count( $todo ) < 2 ) {
+			return;
+		}
+
+		$rows = $relation->get_items( array(
+			array( 'field' => 'rel_id', 'value' => $relation->get_id() ),
+			array( 'field' => $field, 'value' => $todo, 'operator' => 'IN' ),
+		) );
+
+		$by = array();
+
+		foreach ( (array) $rows as $row ) {
+			if ( isset( $row[ $field ] ) ) {
+				$by[ absint( $row[ $field ] ) ][] = $row;
+			}
+		}
+
+		foreach ( $todo as $one ) {
+
+			if ( empty( $by[ $one ] ) ) {
+				topersia_g_rel_known_empty( $id, $dir, $one, true );
+				continue;
+			}
+
+			$key = ( 'parents' === $dir ) ? $relation->get_cache_key( '0', $one ) : $relation->get_cache_key( $one, '0' );
+			wp_cache_set( $key, $by[ $one ], 'jet_engine_rel' );
+		}
+	}
+}
+/**
 	 * ترتیب کارت‌های موجودیتِ ماندگار — یک قاعده برای همه.  P5-D211
 	 *
 	 *   ۱ `display_priority` نزولی
@@ -708,6 +829,10 @@ if ( ! function_exists( 'topersia_g_chain_ids' ) ) {
 
 			$next = array();
 
+			if ( count( $cur ) > 1 ) {
+				topersia_g_rel_prefetch( $cur, $spec );
+			}
+
 			foreach ( $cur as $one ) {
 				foreach ( topersia_g_rel_ids( $one, array( $spec ), $step === $last ) as $found ) {
 					$next[ $found ] = $found;
@@ -765,6 +890,8 @@ if ( ! function_exists( 'topersia_g_is_live' ) ) {
 if ( ! function_exists( 'topersia_g_published' ) ) {
 	function topersia_g_published( array $ids ) {
 
+		topersia_g_prime( $ids );
+
 		$out  = array();
 		$lang = function_exists( 'apply_filters' ) ? apply_filters( 'wpml_current_language', null ) : null;
 		$lang = ( is_string( $lang ) && '' !== $lang && 'all' !== $lang ) ? $lang : '';
@@ -791,6 +918,8 @@ if ( ! function_exists( 'topersia_g_published' ) ) {
 
 			$out[ $one ] = $one;
 		}
+
+		topersia_g_prime( $out );
 
 		return array_values( $out );
 	}
@@ -830,11 +959,17 @@ if ( ! function_exists( 'topersia_g_rel_ids' ) ) {
 				continue;
 			}
 
+			/* SC1: تهیِ ثبت‌شدۀ این درخواست دوباره پرسیده نمی‌شود (فقط اگر کسی فیلتر JetEngine را نگرفته) */
+			if ( topersia_g_rel_known_empty( $id, $dir, $post_id ) && ! ( function_exists( 'has_filter' ) && ( has_filter( 'jet-engine/relations/get-children' ) || has_filter( 'jet-engine/relations/get-parents' ) ) ) ) {
+				continue;
+			}
+
 			$found = ( 'parents' === $dir )
 				? $relation->get_parents( $post_id, 'ids' )
 				: $relation->get_children( $post_id, 'ids' );
 
 			if ( empty( $found ) || ! is_array( $found ) ) {
+				topersia_g_rel_known_empty( $id, $dir, $post_id, true );
 				continue;
 			}
 
