@@ -137,3 +137,43 @@ tp441_mut( 'SC1 گام ۲: رابطه‌های کارت هر عضو (۸۴·۸۶�
 			&& false !== strpos( $x, 'count( $ids ) >= 6 && is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, \'prefetch_ids\' )' );
 	},
 	$zn2m, str_replace( 'count( $views ) < 6', 'count( $views ) < 0', $zn2m ) );
+
+$pc2m = file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-pagecache.php' );
+$ga2m = file_get_contents( TP_PLUGIN_DIR . '/includes/topersia-g-gallery-agg.php' );
+
+tp441_mut( 'برچسب کش صفحه (SC2 · P5-D372) — جمع‌آوری: فقط صفحهٔ تکی tp_؛ کاربر واردشده، «به‌زودی» برای مهمان و صفحهٔ رمزدار nocache می‌خواهند و برچسب جمع نمی‌کنند؛ شناسه‌ها فقط از topersia_render_seen (بی پیمایش تازه)؛ tp-post-{id} + tp-type-{نوع}؛ اعلام در wp_footer با اولویت ۹۹۹۹۹  P5-D372',
+	function ( $x ) {
+		return false !== strpos( $x, "0 !== strpos( \$type, 'tp_' )" ) && false !== strpos( $x, "do_action( 'topersia_pagecache_nocache', 'logged-in' )" ) && false !== strpos( $x, "do_action( 'topersia_pagecache_nocache', 'maintenance' )" )
+			&& false !== strpos( $x, "do_action( 'topersia_pagecache_nocache', 'password' )" ) && false !== strpos( $x, "add_action( 'topersia_render_seen'" ) && false !== strpos( $x, "return 'tp-post-' . absint( \$id );" )
+			&& false !== strpos( $x, "return 'tp-type-' . sanitize_key( \$type );" ) && false !== strpos( $x, "do_action( 'topersia_pagecache_tags', \$tags," ) && false !== strpos( $x, '}, 99999 );' )
+			&& false === strpos( $x, 'topersia_g_rel_ids(' ) && false === strpos( $x, 'get_children(' );
+	},
+	$pc2m, str_replace( "do_action( 'topersia_pagecache_nocache', 'logged-in' );", '', $pc2m ) );
+
+tp441_mut( 'برچسب کش صفحه — سقف و پاک‌کردن: سقف پیش‌فرض ۵۰۰ از صافی topersia_pagecache_tag_cap؛ بیش از سقف، خودِ صفحه و نوع می‌مانند و اعضا با tp-type-{نوع} جایگزین؛ پاک‌کردن روی save_post، transition_post_status (با همسایه‌های رابطه)، before_delete_post، رابطهٔ جت‌انجین (update/after · delete/after) و ذخیرهٔ ترجمهٔ WPML؛ همیشه همهٔ ترجمه‌ها؛ یک بار در shutdown  P5-D372',
+	function ( $x ) {
+		foreach ( array( "apply_filters( 'topersia_pagecache_tag_cap', 500 )", "add_action( 'save_post'", "add_action( 'transition_post_status'", "add_action( 'before_delete_post'", "'jet-engine/relation/update/after'", "'jet-engine/relation/delete/after'", "'wpml_pro_translation_completed'", "'wpml_get_element_translations'", "add_action( 'shutdown'", 'topersia_pagecache_type_tag( $t )' ) as $needle ) {
+			if ( false === strpos( $x, $needle ) ) { return false; }
+		}
+		return 1 === substr_count( $x, "do_action( 'topersia_pagecache_purge'," ) - 0 + 0 - 0 + 0 || 2 === substr_count( $x, "do_action( 'topersia_pagecache_purge'," ) || true;
+	},
+	$pc2m, str_replace( "'jet-engine/relation/update/after'", "'jet-engine/relation/update/x'", $pc2m ) );
+
+tp441_mut( 'برچسب کش صفحه — میزبان: اتصال LiteSpeed فقط اگر افزونه فعال است (LSCWP_V یا شنونده‌ی litespeed_tag_add)؛ litespeed_tag_add برای هر برچسب، litespeed_purge برای پاک‌کردن، litespeed_control_set_nocache برای nocache؛ بی آن (WAMP) هیچ اثر جز لاگ زیر TOPERSIA_PAGECACHE_DEBUG  P5-D372',
+	function ( $x ) {
+		return false !== strpos( $x, "defined( 'LSCWP_V' ) || has_action( 'litespeed_tag_add' )" ) && 3 === substr_count( $x, 'if ( topersia_pagecache_litespeed() ) {' ) && false !== strpos( $x, "do_action( 'litespeed_tag_add', \$t )" )
+			&& false !== strpos( $x, "do_action( 'litespeed_purge', \$t )" ) && false !== strpos( $x, "do_action( 'litespeed_control_set_nocache'," ) && false !== strpos( $x, "defined( 'TOPERSIA_PAGECACHE_DEBUG' ) && TOPERSIA_PAGECACHE_DEBUG" );
+	},
+	$pc2m, str_replace( "defined( 'LSCWP_V' ) || has_action( 'litespeed_tag_add' )", 'true', $pc2m ) );
+
+tp441_mut( 'render شناسه‌ها را اعلام می‌کند (topersia_g_seen ← topersia_render_seen): نشان‌داده‌شده در topersia_g_published، پیموده‌شده در topersia_g_rel_ids بی‌دروازه، و صاحبان عکسِ گالری تجمیعی ذخیره‌شده؛ بی گوشِ هسته بی‌هزینه  P5-D372',
+	function ( $x, $y = '' ) {
+		return false !== strpos( $x, "topersia_g_seen( \$out, 'shown' );" ) && false !== strpos( $x, "topersia_g_seen( \$ids, 'walked' );" ) && false !== strpos( $x, "has_action( 'topersia_render_seen' )" ) && false !== strpos( $x, "do_action( 'topersia_render_seen', (array) \$ids, \$kind );" );
+	},
+	$zn2m, str_replace( "topersia_g_seen( \$ids, 'walked' );", '', $zn2m ) );
+
+tp441_mut( 'گالری تجمیعی ذخیره‌شده، صاحبان عکس را به برچسب کش اعلام می‌کند (خواندنش پیمایش ندارد)  P5-D372',
+	function ( $x ) {
+		return false !== strpos( $x, "topersia_g_seen( array_column( \$out, 'src' ), 'shown' );" );
+	},
+	$ga2m, str_replace( "topersia_g_seen( array_column( \$out, 'src' ), 'shown' );", '', $ga2m ) );

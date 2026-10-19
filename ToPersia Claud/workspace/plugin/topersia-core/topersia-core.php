@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Core Functions
  * Description: توابع اختصاصی سایت ToPersia — اسلاگ لاتین از نام انگلیسیِ کیوریت‌شده، شناسۀ یکتای موجودیت، ریدایرکت موجودیت‌های گراف‌فقط (G4)، منطق مسیرهای گردشگری (P9)، قاعدۀ سراسری وضعیت ردیف، یکپارچگی Rank Math، پنهان‌سازی مسیر نصب، کاهش اثر انگشت، و پنل تنظیمات و تشخیص. موتور دادۀ ساختاریافته در افزونۀ جداگانۀ topersia-schema است.
- * Version: 4.13.1
+ * Version: 4.14.0
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-core
@@ -40,6 +40,9 @@
  * ══════════════════════════════════════════════════════════════════════════
  *  Changelog
  * ══════════════════════════════════════════════════════════════════════════
+ * 4.14.0 — لایۀ برچسب کش صفحه (SC2 · P5-D301 · P5-D372): `includes/topersia-pagecache.php`. هر صفحۀ موجودیت `tp-post-{id}`
+ *          (خود، نیاکان، اعضای نشان‌داده‌شده، صاحبان عکس‌های گالری تجمیعی) و `tp-type-{نوع}` اعلام می‌کند؛ سقف ۵۰۰ و سرریز با برچسب نوع.
+ *          پاک‌کردن با ذخیره، تغییر وضعیت، حذف، رابطۀ جت‌انجین و ذخیرۀ ترجمۀ WPML؛ رابط عمومی + اتصال LiteSpeed فقط اگر فعال باشد.
  * 4.13.1 — وصلۀ ۲ج.
  *        — گزارش شکاف ترجمه (P5-D305): `wp topersia i18n-gaps` و برگۀ «شکاف‌ها» کنار
  *          درون‌ریزی ترجمه؛ در لحظه از داده، بی نوشتن؛ برون‌بری قالب فقط برای شکاف‌ها.
@@ -508,7 +511,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ هسته — افزونۀ شِما این را برای بررسی سازگاری می‌خواند. */
 if ( ! defined( 'TOPERSIA_CORE_VERSION' ) ) {
-	define( 'TOPERSIA_CORE_VERSION', '4.13.1' );
+	define( 'TOPERSIA_CORE_VERSION', '4.14.0' );
 }
 
 /** کلید تنها گزینۀ پایگاه‌داده — همه‌چیز در یک آرایۀ autoload ذخیره می‌شود. */
@@ -904,6 +907,7 @@ require_once __DIR__ . '/includes/topersia-fold.php';
 require_once __DIR__ . '/includes/topersia-pack.php';
 require_once __DIR__ . '/includes/topersia-i18n-gaps.php';   /* ۱۹-ز گزارش شکاف ترجمه — وصلۀ ۲ج و۱ · P5-D305 */
 require_once __DIR__ . '/includes/topersia-geo.php';
+require_once __DIR__ . '/includes/topersia-pagecache.php';   /* برچسب کش صفحه — مستقل از میزبان · SC2 · P5-D372 */
 require_once __DIR__ . '/includes/topersia-geo-index.php';   /* نمایۀ مشتق مکانی — فقط محلی · P5-D334 */         /* مختصات — یک تابع مرکزی برای هوا و نقشه — ۲ه٫۵ · P5-D314 */
 
 /*
@@ -1549,7 +1553,7 @@ function topersia_log_export_build( $filters = array() ) {
 	/* ── لایۀ یک: محیط ── */
 	$out  = "=== ToPersia — خروجی لاگ رویدادها ===\n";
 	$out .= topersia_log_export_line( 'تولید', gmdate( 'Y-m-d H:i' ) . ' UTC' );
-	$out .= topersia_log_export_line( 'هستۀ ToPersia', defined( 'TOPERSIA_CORE_VERSION' ) ? TOPERSIA_CORE_VERSION : '4.13.1' );
+	$out .= topersia_log_export_line( 'هستۀ ToPersia', defined( 'TOPERSIA_CORE_VERSION' ) ? TOPERSIA_CORE_VERSION : '4.14.0' );
 	$out .= topersia_log_export_line( 'WordPress', get_bloginfo( 'version' ) );
 	$out .= topersia_log_export_line( 'PHP', PHP_VERSION );
 	$out .= topersia_log_export_line( 'سایت', home_url( '/' ) );

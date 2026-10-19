@@ -624,6 +624,20 @@ if ( ! function_exists( 'topersia_g_public_url' ) ) {
 
 if ( ! function_exists( 'topersia_g_sort_entities' ) ) {
 	/**
+ * شناسه‌هایی که این رندر دید را به لایۀ برچسب کش صفحۀ هسته (topersia-pagecache) اعلام می‌کند — P5-D372.
+ *
+ * `shown` = نشان‌داده‌شده (کارت، جعبه، گالری)، `walked` = برای پیمودن خوانده‌شده (نیاکان، پلۀ میانی). هیچ پیمایش تازه‌ای
+ * نیست؛ فقط همان شناسه‌هایی که پیمایش‌های موجود می‌دهند. اگر کسی گوش نمی‌دهد (هسته نیست)، بی‌هزینه رد می‌شود.
+ */
+if ( ! function_exists( 'topersia_g_seen' ) ) {
+	function topersia_g_seen( $ids, $kind = 'shown' ) {
+
+		if ( function_exists( 'has_action' ) && has_action( 'topersia_render_seen' ) && $ids ) {
+			do_action( 'topersia_render_seen', (array) $ids, $kind );
+		}
+	}
+}
+/**
  * کش پست‌ها و متای اعضا را یک‌جا پر می‌کند — SC1 گام ۱ · P5-D369.
  *
  * پیش از این هر عضو با `get_post( ID )` و هر متا با `postmeta WHERE post_id IN (یک شناسه)` جدا خوانده می‌شد (استان اصفهان:
@@ -931,6 +945,8 @@ if ( ! function_exists( 'topersia_g_published' ) ) {
 
 		topersia_g_prime( $out );
 
+		topersia_g_seen( $out, 'shown' );
+
 		return array_values( $out );
 	}
 }
@@ -991,6 +1007,10 @@ if ( ! function_exists( 'topersia_g_rel_ids' ) ) {
 					$ids[ $one ] = $one;
 				}
 			}
+		}
+
+		if ( ! $published ) {
+			topersia_g_seen( $ids, 'walked' );   /* پیمودن — نیای مسیر راهنما و پلۀ میانی؛ P5-D372 */
 		}
 
 		return $published ? topersia_g_published( array_values( $ids ) ) : array_values( $ids );

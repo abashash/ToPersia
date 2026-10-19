@@ -186,6 +186,9 @@ if ( ! function_exists( 'topersia_g_gallery_agg_stored' ) ) {
 			}
 		}
 
+		/* صاحبان عکس‌ها در صفحه دیده می‌شوند، ولی گالریِ ذخیره‌شده پیمایشی ندارد؛ برچسب کش از همین‌جا.  P5-D372 */
+		topersia_g_seen( array_column( $out, 'src' ), 'shown' );
+
 		return $out;
 	}
 }
