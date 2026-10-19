@@ -61,9 +61,9 @@ $src = function ( $rel ) use ( $UC ) { return (string) file_get_contents( $UC . 
 echo "\ntopersia-user-core ۱٫۱۰٫۰\n" . str_repeat( '─', 78 ) . "\n";
 
 /* ── نسخه ── */
-t( 'نسخه: سرآیند و ثابت 1.11.0',
-	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.11.0' )
-	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.11.0');" ) );
+t( 'نسخه: سرآیند و ثابت 1.12.0',
+	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.12.0' )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.12.0');" ) );
 
 /*
  * ── ۱٫۱۰٫۲ — جهت فرم ورود از زبان صفحه  SPRINT-4.4 ۲٫۰٫۸ ──
@@ -228,8 +228,8 @@ t( 'ورود: بازگشت امن — همین میزبان بله، میزبا�
 	&& 'https://topersia.com/account/' === ToPersia_Auth::safe_redirect( '' ) );
 
 $js = $src( 'assets/js/user-core.js' );
-t( 'ورود: فرم پیامکی دستگیره دارد — تا ۱٫۹٫۱۲ نداشت',
-	false !== strpos( $js, "ajax('topersia_send_otp'" ) && false !== strpos( $js, "ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',redirect:back})" )
+t( 'ورود: فرم پیامکی دستگیره دارد — تا ۱٫۹٫۱۲ نداشت؛ از ۱٫۱۲ شمارهٔ بررسی هم می‌رود',
+	false !== strpos( $js, "ajax('topersia_send_otp'" ) && false !== strpos( $js, "ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',mobile:mobile?mobile.value:'',redirect:back})" )
 	&& false !== strpos( $js, "document.querySelectorAll('[data-tp-auth]').forEach(bindAuth);" ) );
 
 t( 'ورود: پنجرهٔ ورود/ثبت‌نام برای مهمان، با رویداد topersia:login-required و بازگشت به همین صفحه',
@@ -523,6 +523,53 @@ t( 'R38: کلید Mediana بی autoload — هنگام ساخت، ذخیره و 
 
 t( 'R37/R38: حذف افزونه گزینه‌های مهاجرت را هم پاک می‌کند',
 	false !== strpos( $src( 'uninstall.php' ), "'topersia_user_core_pii_migration'," ) && false !== strpos( $src( 'uninstall.php' ), "'topersia_user_core_pii_cursor'," ) );
+
+/* ── ۱٫۱۲ · P5-D375 — حریم خصوصی: OTP هش‌شده، درخواست حذف/صدور، ناشناس‌سازی. هر ادعا با جهش ── */
+$db_src   = $src( 'includes/class-topersia-db.php' );
+$auth_src = $src( 'includes/class-topersia-auth.php' );
+$dr_src   = $src( 'includes/class-topersia-data-requests.php' );
+$js_src   = $src( 'assets/js/user-core.js' );
+
+$otp_db_ok = function ( $x ) {
+	return false !== strpos( $x, "hash_hmac('sha256', 'tp-otp-mobile|' . \$mobile, wp_salt('auth'))" ) && false !== strpos( $x, "'mobile' => self::mobile_hash(\$mobile)," )
+		&& false !== strpos( $x, "WHERE mobile = %s AND purpose = %s ORDER BY id DESC LIMIT 1',\n            self::mobile_hash(\$mobile)," ) && false === strpos( $x, "'mobile' => \$mobile," );
+};
+t( 'OTP: شماره در جدول فقط HMAC با نمک سایت (۳۲ نویسهٔ هگز)؛ ورودی برای تطبیق هش می‌شود؛ شمارهٔ متن ساده در جدول نیست — جهش: ذخیرهٔ متن ساده می‌افتد',
+	$otp_db_ok( $db_src ) && ! $otp_db_ok( str_replace( "'mobile' => self::mobile_hash(\$mobile),", "'mobile' => \$mobile,", $db_src ) ) );
+
+$otp_auth_ok = function ( $x ) {
+	return false !== strpos( $x, "'mobile_h'   => ToPersia_DB::mobile_hash( \$mobile )," ) && false !== strpos( $x, 'hash_equals( (string) $payload[\'mobile_h\'], ToPersia_DB::mobile_hash( $mobile_in ) )' )
+		&& false !== strpos( $x, "unset( \$stored['mobile'] );" ) && false === strpos( $x, "'mobile'     => \$mobile," );
+};
+t( 'OTP: ترنزینت بی شمارهٔ متن ساده (mobile_h)؛ مرحلهٔ بررسی شمارهٔ ورودی را با hash_equals تطبیق می‌دهد؛ پیامک همان ورودی را می‌گیرد — جهش: بازگشت به mobile ساده می‌افتد',
+	$otp_auth_ok( $auth_src ) && ! $otp_auth_ok( str_replace( "'mobile_h'   => ToPersia_DB::mobile_hash( \$mobile ),", "'mobile'     => \$mobile,", $auth_src ) )
+	&& false !== strpos( $auth_src, '$provider->send_otp( $mobile, $otp,' ) && false !== strpos( $js_src, "mobile:mobile?mobile.value:'',redirect:back" ) );
+
+t( 'OTP: ردیف‌های قدیمی یک‌بار هش می‌شوند؛ کرون روزانه همیشه برقرار؛ ردیف منقضی (تأییدشده هم) پاک می‌شود',
+	false !== strpos( $db_src, 'function maybe_hash_otp_rows()' ) && false !== strpos( $db_src, "'topersia_user_core_otp_hashed'" ) && false !== strpos( $db_src, 'function ensure_cron()' )
+	&& false !== strpos( $db_src, "'DELETE FROM ' . \$table . ' WHERE expires_at < %s'" ) && false !== strpos( $src( 'topersia-user-core.php' ), 'ToPersia_DB::ensure_cron();' ) && false !== strpos( $src( 'uninstall.php' ), "'topersia_user_core_otp_hashed'," ) );
+
+$dr_ok = function ( $x ) {
+	return false !== strpos( $x, "add_filter( 'wp_privacy_personal_data_exporters'" ) && false !== strpos( $x, "add_filter( 'wp_privacy_personal_data_erasers'" ) && false !== strpos( $x, "public const ANON = 'tp-deleted';" )
+		&& false !== strpos( $x, "wp_create_user_request( \$user->user_email, self::action_name( \$type ), array( 'source' => 'topersia-panel' ), 'confirmed' )" )
+		&& false !== strpos( $x, 'hash_equals( $want, hash( \'sha256\', $token . wp_salt( \'nonce\' ) ) )' ) && false !== strpos( $x, "'manage_options', 'edit_posts', 'edit_pages', 'upload_files'" )
+		&& false !== strpos( $x, "UPDATE {\$wpdb->prefix}{\$t} SET author = %s WHERE author = %s" ) && false !== strpos( $x, "wp_delete_user( \$id );" ) && false !== strpos( $x, "'comment_author_email' => '', 'comment_author_url' => '', 'comment_author_IP' => ''" );
+};
+t( 'حذف و صدور: صدورکننده و پاک‌کننده در فهرست هسته؛ درخواست پنل با توکن یک‌بارمصرف (دومرحله‌ای) و در حالت تأییدشدهٔ user_request؛ حساب دارای دسترسی نه؛ نظرها ناشناس (tp-deleted، بی user_id/ایمیل/IP) و سپس حذف حساب — جهش: بی ناشناس‌سازی می‌افتد',
+	$dr_ok( $dr_src ) && ! $dr_ok( str_replace( 'SET author = %s WHERE author = %s', 'SET author2 = %s WHERE author = %s', $dr_src ) ) );
+
+$names = array();
+preg_match_all( "/'(fa|en|ar|tr|ru|de|fr|es|zh)' => '([^']+)',/u", substr( $dr_src, strpos( $dr_src, 'private const DELETED' ), 700 ), $mm );
+t( '«کاربر حذف‌شده» در نُه زبان خلاصه‌ساز (fa en ar tr ru de fr es zh)، همه متفاوت', 9 === count( array_unique( $mm[2] ) ) && 9 === count( $mm[1] ) );
+
+t( 'پنل: دکمهٔ درخواست نسخه و حذف حساب در تنظیمات، با واژه‌نامهٔ سه‌زبانه؛ حالت «درخواست ثبت‌شده» غیرفعال',
+	false !== strpos( $src( 'templates/dashboard.php' ), 'data-tp-dr="export"' ) && false !== strpos( $src( 'templates/dashboard.php' ), 'data-tp-dr="erase"' )
+	&& false !== strpos( $src( 'templates/dashboard.php' ), "ToPersia_Data_Requests::active_request(\$tp_dr_user, 'erase')" )
+	&& false !== strpos( $js_src, "ajax('topersia_data_request',{type:cur,step:'start'})" ) && false !== strpos( $js_src, "ajax('topersia_data_request',{type:cur,step:'confirm',token:token})" )
+	&& false !== strpos( $src( 'includes/class-topersia-i18n.php' ), "'dr_btn_erase' => ['fa'=>'درخواست حذف حساب','en'=>'Request account deletion','ar'=>'طلب حذف الحساب']" ) );
+
+t( 'خلاصه‌ساز: حذف افزونه _topersia_ai_daily کاربران را هم پاک می‌کند',
+	false !== strpos( (string) file_get_contents( dirname( $UC ) . '/topersia-ai-summarizer/uninstall.php' ), "delete_metadata( 'user', 0, '_topersia_ai_daily', '', true );" ) );
 
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );

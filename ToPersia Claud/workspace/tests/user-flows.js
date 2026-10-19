@@ -346,6 +346,33 @@ async function member() {
 	check( 'برداشتن ذخیره از صفحهٔ مکان ← ردیف جدول برداشته شد',
 		body.success && 'false' === await page.getAttribute( '[data-tp-save]', 'aria-pressed' ) && s.saved.indexOf( PROV.id ) < 0, JSON.stringify( { body, saved: s.saved } ) );
 
+	/* ── حریم خصوصی: درخواست صدور و حذف از پنل، با تأیید دومرحله‌ای — P5-D375 ── */
+	head( 'حریم خصوصی — پنل · تنظیمات' );
+	const dr = () => JSON.parse( php( [ 'tests/local-dr.php' ] ) );
+	await php( [ 'tests/local-dr.php', 'reset' ] );
+	page = await load( ctx, ENV.base + '/account/' );
+	const tab = page.locator( '[data-tp-tab="settings"]' ).first();
+	if ( await tab.count() ) { await tab.click(); }
+	await page.waitForSelector( '[data-tp-dr="export"]', { state: 'attached', timeout: 60000 } );
+	check( 'پنل: دکمه‌های «درخواست نسخه از داده‌ها» و «درخواست حذف حساب» هست و پیش از کلیک درخواستی نیست',
+		1 === await page.locator( '[data-tp-dr="export"]' ).count() && 1 === await page.locator( '[data-tp-dr="erase"]' ).count() && ! dr().export && ! dr().erase );
+	await page.click( '[data-tp-dr="export"]' );
+	await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
+	check( 'گام اول فقط پنجرهٔ تأیید را باز می‌کند؛ هنوز درخواستی ثبت نشده', ! dr().export );
+	await page.click( '#tp-dr-cancel' );
+	check( 'انصراف: پنجره بسته و بی درخواست', await page.locator( '#tp-dr-confirm' ).isHidden() && ! dr().export );
+	await page.click( '[data-tp-dr="export"]' );
+	await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
+	await page.click( '#tp-dr-confirm-btn' );
+	await page.waitForFunction( () => ( document.getElementById( 'tp-dr-message' ) || {} ).textContent, null, { timeout: 60000 } );
+	check( 'گام دوم: درخواست صدور داده ثبت شد (پیام موفق، دکمه غیرفعال)', dr().export && await page.locator( '[data-tp-dr="export"]' ).isDisabled() && /success/.test( await page.getAttribute( '#tp-dr-message', 'class' ) ) );
+	await page.click( '[data-tp-dr="erase"]' );
+	await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
+	await page.click( '#tp-dr-confirm-btn' );
+	await page.waitForFunction( () => /success/.test( ( document.getElementById( 'tp-dr-message' ) || {} ).className ), null, { timeout: 60000 } );
+	check( 'گام دوم: درخواست حذف حساب ثبت شد؛ حساب آزمون هنوز هست (اجرا با مدیر)', dr().erase && null !== JSON.parse( php( [ 'tests/local-state.php' ] ) ).user );
+	const rm = JSON.parse( php( [ 'tests/local-dr.php', 'reset' ] ) );
+	info( 'درخواست‌های آزمون برداشته شد: ' + rm.removed );
 	info( 'مصرف امروز کاربر آزمون در این اجرا: ' + s.ai.user_used + ' از ' + s.ai.caps.user + ' · سایت: ' + s.ai.site_used + ' از ' + s.ai.caps.site );
 	info( 'نظرِ در انتظار تأیید (می‌ماند تا مدیر ببیند): ' + JSON.stringify( s.reviews ) );
 

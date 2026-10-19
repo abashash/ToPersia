@@ -56,6 +56,7 @@ $tp_options = array(
 	'topersia_user_core_strings_fingerprint',
 	'topersia_user_core_pii_migration',   /* ۱٫۱۱٫۰ */
 	'topersia_user_core_pii_cursor',
+	'topersia_user_core_otp_hashed',   /* ۱٫۱۲٫۰ */
 );
 
 foreach ( $tp_options as $tp_option ) {

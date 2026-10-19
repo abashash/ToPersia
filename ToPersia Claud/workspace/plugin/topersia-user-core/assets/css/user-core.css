@@ -231,3 +231,9 @@ html.tp-uc-login-open,html.tp-uc-login-open body{overflow:hidden}
 .tp-follow-news a{color:var(--tp-user-active);text-decoration:none;font-weight:700}
 .tp-follow-news time{color:var(--tp-user-muted);font-size:12px}
 .tp-empty-icon svg{inline-size:30px;block-size:30px}
+
+.tp-dr-actions{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.tp-dr-confirm{border:1px solid var(--tp-user-border);border-radius:12px;padding:12px 14px;background:var(--tp-user-surface-2);margin:8px 0}
+.tp-dr-confirm p{margin:0 0 10px}
+.tp-btn-danger{background:#8a1c1c;color:#fff}
+.tp-btn-ghost{background:transparent;color:var(--tp-user-text);border:1px solid var(--tp-user-border)}

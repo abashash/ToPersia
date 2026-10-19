@@ -94,7 +94,7 @@
       if(verify)verify.addEventListener('click',function(){
         verify.disabled=true;say(T.otpChecking||'',true);
         var back=card.getAttribute('data-tp-redirect')||'';
-        ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',redirect:back}).then(function(r){
+        ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',mobile:mobile?mobile.value:'',redirect:back}).then(function(r){
           if(!r||!r.success){fail(r);verify.disabled=false;return;}
           window.location.href=(r.data&&r.data.redirect)||cfg.loginUrl||'/';
         }).catch(function(){fail();verify.disabled=false;});
@@ -179,5 +179,32 @@
         document.documentElement.appendChild(dash);
       }
     }
+
+    /* ── حذف حساب و صدور داده — تأیید دومرحله‌ای (۱٫۱۲٫۰ · P5-D375) ── */
+    (function(){
+      var card=document.querySelector('[data-tp-dr-card]');if(!card)return;
+      var box=document.getElementById('tp-dr-confirm'),txt=document.getElementById('tp-dr-confirm-text'),ok=document.getElementById('tp-dr-confirm-btn'),no=document.getElementById('tp-dr-cancel'),msg=document.getElementById('tp-dr-message');
+      var cur='',token='';
+      function say(t,good){if(!msg)return;msg.textContent=t||'';msg.className='tp-message'+(good?' success':' error');}
+      function reset(){cur='';token='';if(box)box.hidden=true;}
+      [].forEach.call(card.querySelectorAll('[data-tp-dr]'),function(b){
+        b.addEventListener('click',function(){
+          cur=b.getAttribute('data-tp-dr');say('',true);b.disabled=true;
+          ajax('topersia_data_request',{type:cur,step:'start'}).then(function(r){
+            if(!r||!r.success){say((r&&r.data&&r.data.message)||T.networkError||'Error',false);b.disabled=false;reset();return;}
+            token=r.data.token||'';if(txt)txt.textContent=r.data.message||'';if(box)box.hidden=false;b.disabled=false;
+          }).catch(function(){say(T.networkError||'Error',false);b.disabled=false;reset();});
+        });
+      });
+      if(no)no.addEventListener('click',function(){reset();say('',true);});
+      if(ok)ok.addEventListener('click',function(){
+        if(!cur||!token)return;ok.disabled=true;
+        ajax('topersia_data_request',{type:cur,step:'confirm',token:token}).then(function(r){
+          var good=!!(r&&r.success);say((r&&r.data&&r.data.message)||T.networkError||'Error',good);
+          if(good){var b=card.querySelector('[data-tp-dr="'+cur+'"]');if(b)b.disabled=true;}
+          reset();
+        }).catch(function(){say(T.networkError||'Error',false);reset();}).finally(function(){ok.disabled=false;});
+      });
+    })();
   });
 })();

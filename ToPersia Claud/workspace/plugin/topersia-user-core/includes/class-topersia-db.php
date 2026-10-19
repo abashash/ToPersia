@@ -2,6 +2,16 @@
 defined('ABSPATH') || exit;
 
 final class ToPersia_DB {
+    /**
+     * شماره در جدول OTP فقط به‌شکل HMAC با نمک سایت — ۱٫۱۱٫۱ · P5-D375.
+     *
+     * ۳۲ نویسۀ نخستِ HMAC-SHA256 (۱۲۸ بیت؛ ستون `mobile` همان varchar(32) پیشین است، پس ساختار جدول عوض نمی‌شود).
+     * ورودی پیش از هر مقایسه هش می‌شود؛ شمارۀ متن ساده هرگز به جدول نمی‌رسد. پیامک به مدیانا همان شمارۀ ورودی را می‌گیرد.
+     */
+    public static function mobile_hash(string $mobile): string {
+        return substr(hash_hmac('sha256', 'tp-otp-mobile|' . $mobile, wp_salt('auth')), 0, 32);
+    }
+
     public static function table_name(): string {
         global $wpdb;
         return $wpdb->prefix . 'topersia_otp_attempts';
@@ -91,6 +101,46 @@ final class ToPersia_DB {
     }
 
     /**
+     * ردیف‌های متن‌ساده‌ی پیشین را یک‌بار هش می‌کند (دسته‌ای)؛ سپس پرچم. شمارۀ ایرانی ۱۱ رقمی با ۰۹ آغاز می‌شود و
+     * هش ۳۲ نویسۀ هگز است؛ پس تشخیص دوگانه‌ی نمی‌ماند. ردیف‌های منقضی را کرون پاک می‌کند.  P5-D375
+     */
+    public static function maybe_hash_otp_rows(): void {
+        if ('1' === get_option('topersia_user_core_otp_hashed')) {
+            return;
+        }
+
+        global $wpdb;
+        $table = self::table_name();
+
+        /* نام جدول در برخی میزبان‌ها (lower_case_table_names=1، ویندوز) کوچک برمی‌گردد */
+        $found = $wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $wpdb->esc_like($table)));
+
+        if (!is_string($found) || 0 !== strcasecmp($found, $table)) {
+            return;
+        }
+
+        for ($i = 0; $i < 20; $i++) {
+            $rows = (array) $wpdb->get_results('SELECT id, mobile FROM ' . $table . " WHERE mobile REGEXP '^09[0-9]{9}$' LIMIT 500", ARRAY_A);
+
+            if (!$rows) {
+                update_option('topersia_user_core_otp_hashed', '1', false);
+                return;
+            }
+
+            foreach ($rows as $row) {
+                $wpdb->update($table, ['mobile' => self::mobile_hash((string) $row['mobile'])], ['id' => (int) $row['id']], ['%s'], ['%d']);
+            }
+        }
+    }
+
+    /** کرون روزانه همیشه برقرار است (نه فقط هنگام فعال‌سازی). */
+    public static function ensure_cron(): void {
+        if (!wp_next_scheduled('topersia_user_core_prune')) {
+            wp_schedule_event(time() + HOUR_IN_SECONDS, 'daily', 'topersia_user_core_prune');
+        }
+    }
+
+    /**
      * هرس رکوردهای منقضی.
      *
      * بدون این، جدول برای همیشه رشد می‌کند. رکورد تأییدشده هفت روز برای
@@ -109,12 +159,18 @@ final class ToPersia_DB {
             'DELETE FROM ' . $table . ' WHERE verified = 1 AND created_at < %s',
             gmdate('Y-m-d H:i:s', time() - 7 * DAY_IN_SECONDS)
         ));
+
+        /* ردیف منقضی: هر ردیفی که مهلتش یک ساعت پیش تمام شده، تأییدشده یا نه — P5-D375 */
+        $wpdb->query($wpdb->prepare(
+            'DELETE FROM ' . $table . ' WHERE expires_at < %s',
+            gmdate('Y-m-d H:i:s', time() - HOUR_IN_SECONDS)
+        ));
     }
 
     public static function create_attempt(string $mobile, string $purpose, string $expires_at, string $request_id = '', string $ip_hash = ''): int {
         global $wpdb;
         $wpdb->insert(self::table_name(), [
-            'mobile' => $mobile,
+            'mobile' => self::mobile_hash($mobile),
             'purpose' => $purpose,
             'created_at' => current_time('mysql', true),
             'expires_at' => $expires_at,
@@ -140,7 +196,7 @@ final class ToPersia_DB {
         global $wpdb;
         $row = $wpdb->get_row($wpdb->prepare(
             'SELECT * FROM ' . self::table_name() . ' WHERE mobile = %s AND purpose = %s ORDER BY id DESC LIMIT 1',
-            $mobile,
+            self::mobile_hash($mobile),
             $purpose
         ), ARRAY_A);
         return $row ?: null;

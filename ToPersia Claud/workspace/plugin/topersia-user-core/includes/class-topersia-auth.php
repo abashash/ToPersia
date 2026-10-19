@@ -398,8 +398,9 @@ final class ToPersia_Auth {
 		   اصلاً کدی برای بررسی وجود ندارد، پس سقف هرگز دور زده نمی‌شود. */
 		set_transient(
 			'tp_otp_' . $token,
+			/* شمارۀ متن ساده در ذخیره نمی‌ماند (نه جدول، نه ترنزینت)؛ تطبیق با هش، و شمارۀ ورودیِ مرحلۀ بررسی. P5-D375 */
 			array(
-				'mobile'     => $mobile,
+				'mobile_h'   => ToPersia_DB::mobile_hash( $mobile ),
 				'hash'       => $hash,
 				'tries'      => 0,
 				'attempt_id' => $attempt_id,
@@ -436,8 +437,21 @@ final class ToPersia_Auth {
 		$key     = 'tp_otp_' . $token;
 		$payload = get_transient( $key );
 
-		if ( ! is_array( $payload ) || empty( $payload['hash'] ) || empty( $payload['mobile'] ) ) {
+		if ( ! is_array( $payload ) || empty( $payload['hash'] ) || ( empty( $payload['mobile_h'] ) && empty( $payload['mobile'] ) ) ) {
 			wp_send_json_error( array( 'message' => self::msg( 'otp_expired', 'کد منقضی یا نامعتبر است.' ) ), 410 );
+		}
+
+		/*
+		 * شمارۀ این مرحله از ورودی می‌آید و با هشِ ذخیره‌شده تطبیق می‌خورد؛ ترنزینت‌های پیش از ۱٫۱۲ هنوز شمارۀ متن ساده دارند
+		 * (حداکثر چند دقیقه) و همان‌طور بررسی می‌شوند. P5-D375
+		 */
+		$mobile_in = $this->normalize_mobile( isset( $_POST['mobile'] ) ? sanitize_text_field( wp_unslash( $_POST['mobile'] ) ) : '' );
+
+		if ( ! empty( $payload['mobile_h'] ) ) {
+			if ( ! $this->valid_mobile( $mobile_in ) || ! hash_equals( (string) $payload['mobile_h'], ToPersia_DB::mobile_hash( $mobile_in ) ) ) {
+				wp_send_json_error( array( 'message' => self::msg( 'otp_invalid', 'کد تأیید معتبر نیست.' ) ), 422 );
+			}
+			$payload['mobile'] = $mobile_in;
 		}
 
 		/* سقف حدس — پیش از هر مقایسه‌ای، و شکست‌بسته. */
@@ -454,7 +468,12 @@ final class ToPersia_Auth {
 		}
 
 		$payload['tries'] = $tries + 1;
-		set_transient( $key, $payload, self::TTL );
+		$stored = $payload;
+		unset( $stored['mobile'] );   /* شمارۀ ورودی همین درخواست است، نه چیزی برای ذخیره (ترنزینت پیشین هم با اولین حدس بی‌شماره می‌شود) */
+		if ( empty( $stored['mobile_h'] ) && ! empty( $payload['mobile'] ) ) {
+			$stored['mobile_h'] = ToPersia_DB::mobile_hash( (string) $payload['mobile'] );
+		}
+		set_transient( $key, $stored, self::TTL );
 
 		$attempt_id = isset( $payload['attempt_id'] ) ? absint( $payload['attempt_id'] ) : 0;
 

@@ -355,6 +355,25 @@
         })();
         </script>
       </div>
+      <div class="tp-card" id="tp-dr-card" data-tp-dr-card>
+        <div class="tp-card-head"><h2><?php echo $tp('dr_title'); ?></h2></div>
+        <p class="hint"><?php echo $tp('dr_hint'); ?></p>
+        <?php
+        $tp_dr_user = wp_get_current_user();
+        $tp_dr_exp  = class_exists('ToPersia_Data_Requests') && ToPersia_Data_Requests::active_request($tp_dr_user, 'export');
+        $tp_dr_era  = class_exists('ToPersia_Data_Requests') && ToPersia_Data_Requests::active_request($tp_dr_user, 'erase');
+        ?>
+        <div class="tp-dr-actions">
+          <button class="tp-btn tp-btn-small" type="button" data-tp-dr="export"<?php echo $tp_dr_exp ? ' disabled' : ''; ?>><?php echo $tp($tp_dr_exp ? 'dr_pending' : 'dr_btn_export'); ?></button>
+          <button class="tp-btn tp-btn-small tp-btn-danger" type="button" data-tp-dr="erase"<?php echo $tp_dr_era ? ' disabled' : ''; ?>><?php echo $tp($tp_dr_era ? 'dr_pending' : 'dr_btn_erase'); ?></button>
+        </div>
+        <div class="tp-dr-confirm" id="tp-dr-confirm" hidden>
+          <p id="tp-dr-confirm-text"></p>
+          <button class="tp-btn tp-btn-small" type="button" id="tp-dr-confirm-btn"><?php echo $tp('dr_confirm_btn'); ?></button>
+          <button class="tp-btn tp-btn-small tp-btn-ghost" type="button" id="tp-dr-cancel"><?php echo $tp('dr_cancel'); ?></button>
+        </div>
+        <p class="tp-message" id="tp-dr-message" aria-live="polite"></p>
+      </div>
     </section><?php endif; ?>
 
 <?php foreach ($data['tabs'] as $id => $tab) : if (($tab['type'] ?? '') !== 'custom') continue; ?>

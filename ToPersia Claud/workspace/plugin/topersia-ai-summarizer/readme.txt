@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

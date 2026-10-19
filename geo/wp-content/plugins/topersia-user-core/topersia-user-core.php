@@ -3,7 +3,7 @@
  * Plugin Name: ToPersia User Core
  * Plugin URI: https://topersia.com/
  * Description: هسته اختصاصی حساب کاربری ToPersia با پنل تب‌محور، ماژول‌های مسافر و ساختار آماده توسعه.
- * Version: 1.11.0
+ * Version: 1.12.0
  * Requires at least: 6.4
  * Requires PHP: 8.0
  * Author: ToPersia
@@ -16,7 +16,7 @@ if (defined('TOPERSIA_USER_CORE_LOADED')) {
     return;
 }
 define('TOPERSIA_USER_CORE_LOADED', true);
-define('TOPERSIA_USER_CORE_VERSION', '1.11.0');
+define('TOPERSIA_USER_CORE_VERSION', '1.12.0');
 define('TOPERSIA_USER_CORE_FILE', __FILE__);
 define('TOPERSIA_USER_CORE_DIR', plugin_dir_path(__FILE__));
 define('TOPERSIA_USER_CORE_URL', plugin_dir_url(__FILE__));
@@ -24,6 +24,7 @@ define('TOPERSIA_USER_CORE_URL', plugin_dir_url(__FILE__));
 $tp_files = [
     'class-topersia-db.php',
     'class-topersia-privacy.php',
+    'class-topersia-data-requests.php',
     'class-topersia-sms-provider.php',
     'class-topersia-mediana-sms.php',
     'class-topersia-auth.php',
@@ -75,6 +76,8 @@ add_action('topersia_user_core_prune', static function (): void {
 add_action('plugins_loaded', static function (): void {
     if (class_exists('ToPersia_DB')) {
         ToPersia_DB::maybe_upgrade();
+        ToPersia_DB::maybe_hash_otp_rows();
+        ToPersia_DB::ensure_cron();
     }
 
     load_plugin_textdomain(
@@ -85,6 +88,7 @@ add_action('plugins_loaded', static function (): void {
 
     foreach ([
         'ToPersia_Privacy',
+        'ToPersia_Data_Requests',
         'ToPersia_Auth',
         'ToPersia_Profile',
         'ToPersia_Admin',

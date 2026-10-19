@@ -15,6 +15,9 @@ global $wpdb;
 delete_option( 'tpas_settings' );
 delete_option( 'tpas_stats' );
 
+// Per-user metadata: the daily AI quota counter (1.3.1, P5-D375).
+delete_metadata( 'user', 0, '_topersia_ai_daily', '', true );
+
 // Per-post metadata: visibility flags, click counts and AI caches.
 delete_post_meta_by_key( '_tpas_clicks' );
 delete_post_meta_by_key( '_tpas_hide_buttons' );
