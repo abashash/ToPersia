@@ -117,6 +117,10 @@ tp441_mut( 'پیش‌بارگذاری اعضا (SC1 گام ۱): topersia_g_publi
 tp441_mut( 'apply هدر/نوار بخش‌ها (P5-D370): همهٔ خواندن‌ها (headerBottom · offsetHeight · getBoundingClientRect) پیش از نخستین setProperty؛ نوشتن‌ها پس از آن — بی چیدمان اجباری میان نوشتن و خواندن',
 	function ( $x ) {
 		$a = strpos( $x, 'function apply() {' );
+		$e = strpos( $x, 'function settle()', $a );
+		if ( false === $a || false === $e ) { return false; }
+		$x = substr( $x, $a, $e - $a );
+		$a = 0;
 		$r = strpos( $x, 'var h   = nav ? nav.offsetHeight : 0;', $a );
 		$n = strpos( $x, 'prev.getBoundingClientRect().bottom', $a );
 		$w = strpos( $x, "page.style.setProperty( '--tp-snav-top'", $a );
