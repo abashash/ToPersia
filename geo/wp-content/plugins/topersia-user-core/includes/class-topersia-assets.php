@@ -46,7 +46,9 @@ final class ToPersia_Assets {
 
         wp_localize_script('topersia-user-core', 'ToPersiaUserCore', [
             'ajaxUrl'   => admin_url('admin-ajax.php'),
-            'nonce'     => wp_create_nonce('topersia_user_core'),
+            /* ۱٫۱۲٫۱ · P5-D374 — مهمان: بی نانس (HTML مهمان کش می‌شود)؛ از REST بی‌کش گرفته می‌شود. */
+            'nonce'     => is_user_logged_in() ? wp_create_nonce('topersia_user_core') : '',
+            'nonceUrl'  => esc_url_raw(rest_url('topersia/v1/uc-nonce')),
             'accountUrl'=> class_exists('ToPersia_Admin') ? ToPersia_Admin::account_url() : home_url('/'),
             'homeUrl'   => apply_filters('wpml_home_url', home_url('/')),
             'savedLabel' => class_exists('ToPersia_I18n') ? ToPersia_I18n::t('saved_badge') : 'Saved',

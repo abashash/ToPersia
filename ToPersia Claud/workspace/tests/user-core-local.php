@@ -43,6 +43,18 @@ $auth = ToPersia_Auth::instance();
 $nonce = wp_create_nonce( 'topersia_user_core' );
 $tbl = ToPersia_DB::table_name();
 $H = ToPersia_DB::mobile_hash( $mobile );
+/* سردشدن ۴۵ ثانیه‌ای و سقف‌ها: اجرای پیشین همین آزمون نباید این اجرا را ببندد (فقط ترنزینت‌های همین شمارهٔ ساختگی) */
+foreach ( array( $mobile, $other ) as $m ) { delete_transient( 'tp_otp_rl_' . hash( 'sha256', $m . wp_salt( 'nonce' ) ) ); }
+delete_transient( 'tp_otp_global' );
+delete_transient( 'tp_otp_ip_' . hash_hmac( 'sha256', '', wp_salt( 'auth' ) ) );
+
+echo "\nنانس مهمان — REST بی‌کش\n" . str_repeat( '─', 60 ) . "\n";
+wp_set_current_user( 0 );
+$rest = rest_do_request( new WP_REST_Request( 'GET', '/topersia/v1/uc-nonce' ) );
+$rd   = $rest->get_data();
+$rh   = $rest->get_headers();
+t( 'REST نانس: ۲۰۰ و نانس معتبرِ topersia_user_core برای مهمان', 200 === $rest->get_status() && ! empty( $rd['nonce'] ) && false !== wp_verify_nonce( $rd['nonce'], 'topersia_user_core' ), json_encode( $rd ) );
+t( 'REST نانس: Cache-Control no-store و X-LiteSpeed-Cache-Control: no-cache', false !== strpos( (string) ( $rh['Cache-Control'] ?? '' ), 'no-store' ) && 'no-cache' === ( $rh['X-LiteSpeed-Cache-Control'] ?? '' ), json_encode( $rh ) );
 
 echo "\nOTP — شماره فقط HMAC\n" . str_repeat( '─', 60 ) . "\n";
 $r = uc_call( array( $auth, 'send_otp' ), array( 'nonce' => $nonce, 'mobile' => $mobile ) );

@@ -3,7 +3,7 @@
  * Plugin Name:       ToPersia AI Summarizer
  * Plugin URI:        https://topersia.com/
  * Description:       Dedicated for ToPersia: buttons that open AI assistants (ChatGPT, Perplexity, Claude, Grok, Copilot, Gemini, DeepSeek) with a ready structured-summary prompt, plus an on-page AI panel that generates summaries server-side from the current page.
- * Version:           1.3.1
+ * Version:           1.3.2
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            ToPersia
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TP_AI_VERSION', '1.3.1' );
+define( 'TP_AI_VERSION', '1.3.2' );
 define( 'TP_AI_FILE', __FILE__ );
 define( 'TP_AI_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TP_AI_URL', plugin_dir_url( __FILE__ ) );

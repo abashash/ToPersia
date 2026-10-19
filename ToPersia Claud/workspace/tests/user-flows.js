@@ -193,6 +193,30 @@ async function guest() {
 			! /data-tp-ai-gen/.test( html ) && ! /tpas_ai/.test( html ) && ! /tp-ai__signup/.test( html ) );
 	}
 
+	/* ── P5-D374: نانس ورود در HTML مهمان نیست؛ هنگام «ارسال کد» از REST بی‌کش می‌آید ── */
+	head( 'مهمان — نانس ورود از REST بی‌کش' );
+	{
+		const browser = await chromium.launch();
+		const { ctx } = await context( browser );
+		const page = await load( ctx, PROV.url );
+		const n0 = await page.evaluate( () => ( { nonce: window.ToPersiaUserCore && window.ToPersiaUserCore.nonce, url: ( window.ToPersiaUserCore && window.ToPersiaUserCore.nonceUrl ) || '', tpas: ( window.tpasFront && window.tpasFront.nonce ) } ) );
+		check( 'HTML مهمان: ToPersiaUserCore.nonce و tpasFront.nonce تهی؛ نشانی REST نانس هست', '' === n0.nonce && '' === n0.tpas && /uc-nonce/.test( n0.url ), JSON.stringify( n0 ) );
+		const seen = [];
+		page.on( 'request', r => {
+			const u = r.url();
+			if ( /uc-nonce/.test( u ) ) { seen.push( 'GET nonce' ); }
+			if ( /admin-ajax/.test( u ) && 'POST' === r.method() && /topersia_send_otp/.test( r.postData() || '' ) ) { const m = ( r.postData() || '' ).match( /nonce=([0-9a-f]+)/ ); seen.push( 'POST send_otp nonce=' + ( m ? m[ 1 ].length : 0 ) ); }
+		} );
+		await page.evaluate( () => window.ToPersiaUserCore && window.ToPersiaUserCore.openLogin && window.ToPersiaUserCore.openLogin( { reason: 'review' } ) );
+		await page.waitForSelector( '#tp-uc-login:not([hidden]) #tp-mobile', { timeout: 60000 } );
+		await page.fill( '#tp-uc-login #tp-mobile', '09000000099' );
+		await page.click( '#tp-uc-login #tp-send-otp' );
+		await page.waitForTimeout( 6000 );
+		check( 'پیش از ارسال کد، نانس از REST گرفته می‌شود و POST با نانس پرمقدار می‌رود', 2 === seen.length && 'GET nonce' === seen[ 0 ] && ( ( seen[ 1 ] || '' ).match( /^POST send_otp nonce=(\d+)$/ ) || [ 0, 0 ] )[ 1 ] >= 8, JSON.stringify( seen ) );
+		await ctx.close();
+		await browser.close();
+	}
+
 	const s1 = state();
 	const lines = fs.readFileSync( PROBE, 'utf8' ).split( '\n' ).filter( Boolean );
 	const guestAi = lines.filter( l => /\tguest\t/.test( l ) && AI_HOSTS.test( l ) );
@@ -370,7 +394,7 @@ async function member() {
 	await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
 	await page.click( '#tp-dr-confirm-btn' );
 	await page.waitForFunction( () => /success/.test( ( document.getElementById( 'tp-dr-message' ) || {} ).className ), null, { timeout: 60000 } );
-	check( 'گام دوم: درخواست حذف حساب ثبت شد؛ حساب آزمون هنوز هست (اجرا با مدیر)', dr().erase && null !== JSON.parse( php( [ 'tests/local-state.php' ] ) ).user );
+	check( 'گام دوم: درخواست حذف حساب ثبت شد؛ حساب آزمون هنوز هست (اجرا با مدیر)', dr().erase && JSON.parse( php( [ 'tests/local-state.php' ] ) ).user > 0, JSON.stringify( [ await page.textContent( '#tp-dr-message' ), dr() ] ) );
 	const rm = JSON.parse( php( [ 'tests/local-dr.php', 'reset' ] ) );
 	info( 'درخواست‌های آزمون برداشته شد: ' + rm.removed );
 	info( 'مصرف امروز کاربر آزمون در این اجرا: ' + s.ai.user_used + ' از ' + s.ai.caps.user + ' · سایت: ' + s.ai.site_used + ' از ' + s.ai.caps.site );

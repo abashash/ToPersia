@@ -60,6 +60,37 @@ final class ToPersia_Auth {
 		add_action( 'wp_ajax_topersia_logout', array( $this, 'logout' ) );
 		add_shortcode( 'topersia_login', array( $this, 'login_shortcode' ) );
 		add_action( 'wp_footer', array( $this, 'login_modal' ), 20 );
+		add_action( 'rest_api_init', array( $this, 'register_rest' ) );
+	}
+
+	/**
+	 * نانسِ مهمان از یک نقطۀ REST بی‌کش — ۱٫۱۲٫۱ · P5-D374.
+	 *
+	 * HTML مهمان کش می‌شود (برچسب‌های `tp-post-…`)؛ نانس وردپرس ۱۲ تا ۲۴ ساعت اعتبار دارد و درون HTML کش‌شده منقضی می‌شد.
+	 * پس در HTML مهمان نیست و هنگام نیاز (شروع ورود با شماره) از همین‌جا گرفته می‌شود. پاسخ هرگز کش نمی‌شود:
+	 * `Cache-Control: no-store` و استثنای LiteSpeed (`X-LiteSpeed-Cache-Control: no-cache` + `litespeed_control_set_nocache`).
+	 */
+	public function register_rest(): void {
+
+		register_rest_route(
+			'topersia/v1',
+			'/uc-nonce',
+			array(
+				'methods'             => 'GET',
+				'permission_callback' => '__return_true',
+				'callback'            => function () {
+					do_action( 'topersia_pagecache_nocache', 'uc-nonce' );
+					do_action( 'litespeed_control_set_nocache', 'topersia: uc-nonce' );
+
+					$r = rest_ensure_response( array( 'nonce' => wp_create_nonce( 'topersia_user_core' ) ) );
+					$r->header( 'Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0' );
+					$r->header( 'Pragma', 'no-cache' );
+					$r->header( 'X-LiteSpeed-Cache-Control', 'no-cache' );
+
+					return $r;
+				},
+			)
+		);
 	}
 
 	/**

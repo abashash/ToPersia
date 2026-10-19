@@ -39,6 +39,28 @@ const path = require( 'path' );
 		const onlyUser = [ ...ul ].filter( x => ! gl.has( x ) ); const onlyGuest = [ ...gl ].filter( x => ! ul.has( x ) );
 		rows.push( { u, guest: g.length, user: l.length, found, onlyUser: onlyUser.length, onlyGuest: onlyGuest.length, sampleUser: onlyUser.slice( 0, 8 ).map( x => x.replace( /\s+/g, ' ' ).slice( 0, 110 ) ) } );
 	}
+
+	/* ── P5-D374: HTML مهمان هیچ nonce از کد ما ندارد (استان · شهر · جاذبه × fa · en · ar) ── */
+	const urls = JSON.parse( execFileSync( ENV.php || 'php', [ path.join( __dirname, 'local-urls.php' ) ], { encoding: 'utf8' } ) );
+	const OURS = /\b(tpasFront|ToPersiaUserCore|ToPersiaDisplaySync|TopersiaG|ToPersiaG|tpasAdmin|ToPersiaRender)\b[^;]{0,600}?["']?nonce["']?\s*[:=]\s*["'][0-9a-fA-F]{6,}["']/;
+	const THIRD = /(ElementorProFrontendConfig|elementorFrontendConfig|rankMath|wpApiSettings)[^;]{0,900}?["']nonce["']\s*:\s*["'][0-9a-fA-F]{6,}["']/g;
+	let bad = 0, checked = 0; const third = {};
+	for ( const [ page, langs ] of Object.entries( urls ) ) {
+		for ( const [ lang, u ] of Object.entries( langs ) ) {
+			const html = await ( await guest.request.get( u, { timeout: 240000 } ) ).text(); checked ++;
+			const m = html.match( OURS );
+			if ( m ) { bad ++; console.log( '  ❌ ' + page + ' ' + lang + ': nonce از کد ما در HTML مهمان — ' + m[ 0 ].replace( /[0-9a-fA-F]{6,}/g, '######' ).slice( 0, 140 ) ); }
+			( html.match( THIRD ) || [] ).forEach( x => { const k = x.slice( 0, x.search( /[ ={]/ ) ); third[ k ] = ( third[ k ] || 0 ) + 1; } );
+		}
+	}
+	console.log( bad ? '  ❌ nonce کد ما در HTML مهمان: ' + bad + ' از ' + checked + ' صفحه' : '  ✅ HTML مهمان ' + checked + ' صفحه (استان · شهر · جاذبه × fa · en · ar): هیچ nonce از کد ما نیست' );
+	console.log( '  · nonceِ شخص ثالث در HTML مهمان (دست نخورد): ' + ( Object.entries( third ).map( ( [ k, n ] ) => k + '×' + n ).join( ' · ' ) || 'هیچ' ) );
+	/* نقطهٔ REST نانس: بی‌کش */
+	const rr = await guest.request.get( ENV.base + '/wp-json/topersia/v1/uc-nonce', { timeout: 240000 } );
+	const rh = rr.headers(); const rj = await rr.json();
+	const restOk = rr.ok() && /^[0-9a-f]{8,}$/.test( rj.nonce || '' ) && /no-store/.test( rh[ 'cache-control' ] || '' ) && 'no-cache' === rh[ 'x-litespeed-cache-control' ];
+	console.log( ( restOk ? '  ✅' : '  ❌' ) + ' REST نانس مهمان: ' + rr.status() + ' · Cache-Control: ' + ( rh[ 'cache-control' ] || '-' ) + ' · X-LiteSpeed-Cache-Control: ' + ( rh[ 'x-litespeed-cache-control' ] || '-' ) );
+	if ( bad || ! restOk ) { process.exitCode = 1; }
 	await b.close();
 	for ( const r of rows ) {
 		console.log( r.u + ' | HTML مهمان ' + r.guest + ' بایت · کاربر ' + r.user + ' بایت | خطوط فقط‌کاربر ' + r.onlyUser + ' · فقط‌مهمان ' + r.onlyGuest );

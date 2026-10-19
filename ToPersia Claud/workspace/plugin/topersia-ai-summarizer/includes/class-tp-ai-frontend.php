@@ -49,7 +49,13 @@ class TP_AI_Frontend {
 
 		wp_localize_script( 'topersia-ai', 'tpasFront', array(
 			'ajax'   => admin_url( 'admin-ajax.php' ),
-			'nonce'  => wp_create_nonce( 'tpas_ai' ),
+			/*
+			 * 1.3.2 · P5-D374: no nonce in the guest HTML. Generation by a visitor is off (P5-D358) and the panel is for
+			 * logged-in users, so a guest never needs it - and a nonce printed into a page cached for guests expires
+			 * (12-24 h) inside the cached HTML. Logged-in pages are never cached and keep it. Guest click tracking
+			 * (`tpas_track`, off by default) therefore stays inactive: the script skips the request without a nonce.
+			 */
+			'nonce'  => is_user_logged_in() ? wp_create_nonce( 'tpas_ai' ) : '',
 			'gen'    => TP_AI_Summary::visitor_requests() ? 1 : 0, // 1.3.0 · P5-D358: per-panel `gen` decides; this is the site switch.
 			'copied' => esc_html__( 'Copied to clipboard.', 'topersia-ai-summarizer' ),
 		) );

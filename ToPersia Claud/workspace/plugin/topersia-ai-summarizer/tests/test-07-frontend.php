@@ -71,6 +71,14 @@ $GLOBALS['tp_enqueued'] = array('scripts'=>array(),'styles'=>array());
 TP_AI_Frontend::enqueue_assets();
 t( 'assets: css + js enqueued on singular', ! empty( $GLOBALS['tp_enqueued']['styles']['topersia-ai'] ) && ! empty( $GLOBALS['tp_enqueued']['scripts']['topersia-ai'] ) );
 t( 'assets: localized object present with nonce', isset( $GLOBALS['tp_localized']['tpasFront']['nonce'] ) && '' !== $GLOBALS['tp_localized']['tpasFront']['nonce'] );
+/* 1.3.2 · P5-D374: logged-out (guest HTML may be cached) - no nonce at all */
+$tp_was_logged2 = $GLOBALS['tp_logged_in'] ?? null;
+$GLOBALS['tp_logged_in'] = false;
+$GLOBALS['tp_localized'] = array();
+TP_AI_Frontend::enqueue_assets();
+t( 'assets: guest gets no nonce in the localized object (P5-D374)', isset( $GLOBALS['tp_localized']['tpasFront'] ) && '' === $GLOBALS['tp_localized']['tpasFront']['nonce'] );
+if ( null === $tp_was_logged2 ) { unset( $GLOBALS['tp_logged_in'] ); } else { $GLOBALS['tp_logged_in'] = $tp_was_logged2; }
+TP_AI_Frontend::enqueue_assets();
 t( 'assets: localized ajax url points to admin-ajax', false !== strpos( $GLOBALS['tp_localized']['tpasFront']['ajax'], 'admin-ajax.php' ) );
 
 $GLOBALS['tp_is_singular'] = false;

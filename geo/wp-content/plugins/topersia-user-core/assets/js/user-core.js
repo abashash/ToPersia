@@ -4,15 +4,29 @@
   ready(function(){
     var cfg=window.ToPersiaUserCore||{};
     var T=cfg.i18n||{};
+    /* ۱٫۱۲٫۱ · P5-D374 — نانس مهمان در HTML نیست؛ هنگام نیاز از REST بی‌کش گرفته و در حافظه نگه داشته می‌شود */
+    var nonceP=null;
+    function getNonce(){
+      if(cfg.nonce)return Promise.resolve(cfg.nonce);
+      if(!nonceP){
+        nonceP=fetch(cfg.nonceUrl||'',{credentials:'same-origin',cache:'no-store'})
+          .then(function(r){return r.json();})
+          .then(function(j){nonceP=null;cfg.nonce=(j&&j.nonce)||'';return cfg.nonce;})
+          .catch(function(e){nonceP=null;throw e;});
+      }
+      return nonceP;
+    }
     function ajax(action,data){
-      var payload=new URLSearchParams();payload.set('action',action);payload.set('nonce',cfg.nonce||'');
-      Object.keys(data||{}).forEach(function(k){
-        var v=data[k];
-        if(Array.isArray(v)){v.forEach(function(one){payload.append(k+'[]',one==null?'':one);});return;}
-        payload.set(k,v==null?'':v);
+      return getNonce().then(function(nonce){
+        var payload=new URLSearchParams();payload.set('action',action);payload.set('nonce',nonce||'');
+        Object.keys(data||{}).forEach(function(k){
+          var v=data[k];
+          if(Array.isArray(v)){v.forEach(function(one){payload.append(k+'[]',one==null?'':one);});return;}
+          payload.set(k,v==null?'':v);
+        });
+        return fetch(cfg.ajaxUrl||'',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:payload.toString(),credentials:'same-origin'})
+          .then(function(r){return r.json().catch(function(){throw new Error('HTTP '+r.status);});});
       });
-      return fetch(cfg.ajaxUrl||'',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},body:payload.toString(),credentials:'same-origin'})
-        .then(function(r){return r.json().catch(function(){throw new Error('HTTP '+r.status);});});
     }
     /* «هستۀ نمایش» و هر افزونۀ دیگر از همین در استفاده می‌کنند؛ نانس و
        نشانی یک‌جا می‌مانند.  ۱٫۱۰٫۰ */

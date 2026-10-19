@@ -61,9 +61,9 @@ $src = function ( $rel ) use ( $UC ) { return (string) file_get_contents( $UC . 
 echo "\ntopersia-user-core ۱٫۱۰٫۰\n" . str_repeat( '─', 78 ) . "\n";
 
 /* ── نسخه ── */
-t( 'نسخه: سرآیند و ثابت 1.12.0',
-	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.12.0' )
-	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.12.0');" ) );
+t( 'نسخه: سرآیند و ثابت 1.12.1',
+	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.12.1' )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.12.1');" ) );
 
 /*
  * ── ۱٫۱۰٫۲ — جهت فرم ورود از زبان صفحه  SPRINT-4.4 ۲٫۰٫۸ ──
@@ -570,6 +570,19 @@ t( 'پنل: دکمهٔ درخواست نسخه و حذف حساب در تنظی�
 
 t( 'خلاصه‌ساز: حذف افزونه _topersia_ai_daily کاربران را هم پاک می‌کند',
 	false !== strpos( (string) file_get_contents( dirname( $UC ) . '/topersia-ai-summarizer/uninstall.php' ), "delete_metadata( 'user', 0, '_topersia_ai_daily', '', true );" ) );
+
+/* ── ۱٫۱۲٫۱ · P5-D374 — نانس بیرون از HTML مهمان ── */
+$as_src = $src( 'includes/class-topersia-assets.php' );
+$nonce_ok = function ( $assets, $auth, $js ) {
+	return false !== strpos( $assets, "'nonce'     => is_user_logged_in() ? wp_create_nonce('topersia_user_core') : ''," ) && false !== strpos( $assets, "'nonceUrl'  => esc_url_raw(rest_url('topersia/v1/uc-nonce'))," )
+		&& false !== strpos( $auth, "'/uc-nonce'," ) && false !== strpos( $auth, "'permission_callback' => '__return_true'," ) && false !== strpos( $auth, "\$r->header( 'Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0' );" )
+		&& false !== strpos( $auth, "\$r->header( 'X-LiteSpeed-Cache-Control', 'no-cache' );" ) && false !== strpos( $auth, "do_action( 'litespeed_control_set_nocache', 'topersia: uc-nonce' );" )
+		&& false !== strpos( $js, 'function getNonce(){' ) && false !== strpos( $js, "fetch(cfg.nonceUrl||'',{credentials:'same-origin',cache:'no-store'})" ) && false !== strpos( $js, 'return getNonce().then(function(nonce){' );
+};
+t( 'نانس: در HTML مهمان نیست (فقط واردشده)؛ از REST بی‌کش (no-store + استثنای LiteSpeed) هنگام نیاز گرفته می‌شود و در حافظه می‌ماند — جهش: چاپ نانس برای همه می‌افتد',
+	$nonce_ok( $as_src, $auth_src, $js_src )
+	&& ! $nonce_ok( str_replace( "is_user_logged_in() ? wp_create_nonce('topersia_user_core') : ''", "wp_create_nonce('topersia_user_core')", $as_src ), $auth_src, $js_src )
+	&& ! $nonce_ok( $as_src, str_replace( "no-store, no-cache, must-revalidate, max-age=0", "public, max-age=600", $auth_src ), $js_src ) );
 
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );
