@@ -38,6 +38,8 @@ foreach ( $pages as $name => $pid ) {
 		$GLOBALS['post'] = get_post( $id ); setup_postdata( $GLOBALS['post'] );
 		if ( ! wp_using_ext_object_cache() ) { wp_cache_flush(); }
 		if ( function_exists( 'topersia_g_rel_memo_reset' ) ) { topersia_g_rel_memo_reset(); }
+		/* کش درون‌فرایندیِ خودِ JetEngine هم خالی: بی آن، هر صفحه از رابطه‌هایی بهره می‌برد که صفحهٔ پیشین پر کرده (سنجش سرد نمی‌ماند) */
+		if ( function_exists( 'jet_engine' ) && isset( jet_engine()->relations ) ) { foreach ( (array) jet_engine()->relations->get_active_relations() as $jr ) { if ( is_object( $jr ) && method_exists( $jr, 'reset_db_cache' ) ) { $jr->reset_db_cache(); } } }
 		$wpdb->queries = array(); $n0 = $wpdb->num_queries; $t0 = microtime( true );
 		$html = do_shortcode( '[tp_page id=' . $id . ']' );
 		$dt = microtime( true ) - $t0; $nq = $wpdb->num_queries - $n0; $db = 0; foreach ( $wpdb->queries as $q ) { $db += $q[1]; }

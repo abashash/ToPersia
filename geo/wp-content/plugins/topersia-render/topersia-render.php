@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  ToPersia — هستۀ نمایش
  * Description:  لایۀ نمایش ToPersia — قلم، پالت سه‌حالته، کلید حالت رنگ در سربرگ، و پنل نمایش و خوانایی. قلم و رنگ تم و صفحه‌ساز را تصاحب می‌کند تا یک مرجع واحد بماند.
- * Version:      4.5.2
+ * Version:      4.5.3
  * Requires PHP: 7.4
  * Text Domain:  topersia
  *
@@ -39,7 +39,7 @@ if ( function_exists( 'topersia_render_ready' ) || defined( 'TOPERSIA_RENDER_LOA
 define( 'TOPERSIA_RENDER_LOADED', __FILE__ );
 
 if ( ! defined( 'TOPERSIA_RENDER_VERSION' ) ) {
-	define( 'TOPERSIA_RENDER_VERSION', '4.5.2' );
+	define( 'TOPERSIA_RENDER_VERSION', '4.5.3' );
 }
 
 /** فلگ خاموش‌کننده — در wp-config.php می‌توان false کرد. P5-D137 */

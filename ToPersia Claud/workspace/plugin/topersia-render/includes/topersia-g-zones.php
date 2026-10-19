@@ -640,6 +640,16 @@ if ( ! function_exists( 'topersia_g_prime' ) ) {
 
 		if ( count( $ids ) > 1 ) {
 			_prime_post_caches( $ids, false, true );
+
+			/*
+			 * جدول ترجمۀ WPML هم یک‌جا: `prefetch_ids` همان کش خودِ هستۀ WPML است که فهرست نوشته‌هایش به‌کار می‌برد؛
+			 * `wpml_object_id` بعدی بی پرس‌وجو می‌خواند (پیش از این ۱۶۱ پرس‌وجو در استان). نبودش بی‌اثر است.
+			 */
+			global $wpml_post_translations;
+
+			if ( count( $ids ) >= 6 && is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, 'prefetch_ids' ) ) {
+				$wpml_post_translations->prefetch_ids( $ids );
+			}
 		}
 	}
 }
@@ -3654,6 +3664,9 @@ if ( ! function_exists( 'topersia_g_rel_items' ) ) {
 			$total ++;
 		}
 
+		/* SC1 گام ۲: رابطه‌های کارت‌ها پیش از ساخت، یک‌جا */
+		topersia_g_prefetch_items( array_map( 'topersia_g_view_id', $limit ? array_slice( $ids, 0, $limit ) : $ids ), $key );
+
 		foreach ( $ids as $n => $one ) {
 
 			if ( $limit && $n >= $limit ) {
@@ -3665,6 +3678,78 @@ if ( ! function_exists( 'topersia_g_rel_items' ) ) {
 		}
 
 		return array( 'items' => $items, 'total' => $total, 'group' => $group );
+	}
+}
+
+/**
+ * رابطه‌هایی که ساختنِ کارت هر عضو می‌خواند را برای همۀ اعضا با یک پرس‌وجوی `IN` به‌ازای هر رابطه می‌گیرد — SC1 گام ۲ · P5-D370.
+ *
+ * `topersia_g_place_item` برای هر عضو جدا می‌پرسد: شهرِ جاذبه (۸۴ · ۸۶ · ۸۸ · ۹۳، سوی والد)، مرکزِ شهرستان (۹۷)، و
+ * در `topersia_g_place_counts` رابطه‌های گروهِ جاذبه/باستانی و جشنواره‌های فرهنگ. اینجا همان فهرست‌ها یک‌جا پیش‌واکشی می‌شود
+ * (`topersia_g_rel_prefetch`: کش خودِ JetEngine را پر می‌کند و تهی‌ها را ثبت). فقط پیشنهادِ سرعت است: حدسِ نادرست فقط یک
+ * پرس‌وجوی بی‌مصرف است و خروجی هرگز عوض نمی‌شود.
+ *
+ * @param array  $views شناسۀ اعضا در زبان صفحه.
+ * @param string $key   کلید گروه (`places` · `attractions` · …).
+ */
+if ( ! function_exists( 'topersia_g_prefetch_items' ) ) {
+	function topersia_g_prefetch_items( array $views, $key ) {
+
+		/* چند عضو کم باشد، پیش‌واکشی از پرس‌وجوی جداگانه ارزان‌تر درنمی‌آید */
+		if ( count( $views ) < 6 || ! function_exists( 'topersia_g_rel_prefetch' ) ) {
+			return;
+		}
+
+		$need = array();
+		$add  = function ( $spec, $id ) use ( &$need ) {
+			$k = ( isset( $spec['id'] ) ? absint( $spec['id'] ) : 0 ) . '|' . ( isset( $spec['dir'] ) ? $spec['dir'] : 'children' );
+			$need[ $k ]['spec']       = $spec;
+			$need[ $k ]['ids'][ $id ] = $id;
+		};
+
+		foreach ( $views as $view ) {
+
+			$view = absint( $view );
+
+			if ( ! $view ) {
+				continue;
+			}
+
+			if ( 'places' !== $key ) {
+
+				if ( 'attractions' === $key ) {
+					foreach ( array( 84, 86, 88, 93 ) as $rid ) {
+						$add( array( 'id' => $rid, 'dir' => 'parents' ), $view );
+					}
+				}
+
+				continue;
+			}
+
+			$add( array( 'id' => 97, 'dir' => 'children' ), $view );
+
+			$spots = topersia_g_group( $view, 'attractions' );
+
+			if ( empty( $spots['rels'] ) && empty( $spots['chains'] ) ) {
+				$spots = topersia_g_group( $view, 'ancient' );
+			}
+
+			foreach ( empty( $spots['rels'] ) ? array() : $spots['rels'] as $spec ) {
+				$add( $spec, $view );
+			}
+
+			$culture = topersia_g_group( $view, 'culture' );
+
+			foreach ( empty( $culture['rels'] ) ? array() : $culture['rels'] as $spec ) {
+				if ( isset( $spec['fam'] ) && 'festivals' === $spec['fam'] ) {
+					$add( $spec, $view );
+				}
+			}
+		}
+
+		foreach ( $need as $one ) {
+			topersia_g_rel_prefetch( array_values( $one['ids'] ), $one['spec'] );
+		}
 	}
 }
 

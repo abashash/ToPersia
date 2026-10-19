@@ -127,3 +127,13 @@ tp441_mut( 'apply هدر/نوار بخش‌ها (P5-D370): همهٔ خواندن
 		return false !== $a && false !== $r && false !== $n && false !== $w && $r < $w && $n < $w && false !== strpos( $x, "page.style.setProperty( '--tp-snav-h', h + 'px' );" ) && strpos( $x, 'nav.offsetHeight', $w ) === false;
 	},
 	$js2m, str_replace( 'var h   = nav ? nav.offsetHeight : 0;', 'var h   = 0;', str_replace( "page.style.setProperty( '--tp-snav-h', h + 'px' );", "page.style.setProperty( '--tp-snav-h', h + 'px' ); h = nav.offsetHeight;", $js2m ) ) );
+
+tp441_mut( 'SC1 گام ۲: رابطه‌های کارت هر عضو (۸۴·۸۶·۸۸·۹۳ والد، ۹۷، گروه جاذبه/باستانی و جشنواره‌های فرهنگ) پیش از ساخت با topersia_g_prefetch_items یک‌جا گرفته می‌شود (حداقل ۶ عضو)؛ در topersia_g_rel_items پیش از حلقهٔ place_item؛ و جدول ترجمهٔ WPML با prefetch_ids خودِ WPML (حداقل ۶ شناسه، فقط اگر هست)  P5-D370',
+	function ( $x ) {
+		$p = strpos( $x, 'topersia_g_prefetch_items( array_map( \'topersia_g_view_id\'' );
+		$l = strpos( $x, '$items[] = topersia_g_place_item(' );
+		return false !== strpos( $x, 'function topersia_g_prefetch_items( array $views, $key ) {' ) && false !== $p && false !== $l && $p < $l
+			&& false !== strpos( $x, 'count( $views ) < 6' ) && false !== strpos( $x, "array( 'id' => 97, 'dir' => 'children' )" ) && false !== strpos( $x, 'array( 84, 86, 88, 93 )' )
+			&& false !== strpos( $x, 'count( $ids ) >= 6 && is_object( $wpml_post_translations ) && method_exists( $wpml_post_translations, \'prefetch_ids\' )' );
+	},
+	$zn2m, str_replace( 'count( $views ) < 6', 'count( $views ) < 0', $zn2m ) );
