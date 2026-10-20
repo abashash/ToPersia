@@ -120,4 +120,4 @@
 | 111 | 2026-10-20 | `feat` | `adfd485d` · `184fdef2` · `39cde9f2` · `aebf1d85` |  | بندهای ۶–۹ (P5-D385 مسیر · D386 کد استان · D387 نشانگر · D388 تصویر خبر) | ✅ |
 | 112 | 2026-10-20 | `feat` | `cea192cd` · `7a02263b` · `0138f8e1` |  | P5-D392 بی دستیار بیرونی (summarizer 1.4.1) · بند ۱۲ P5-D381 کیفیت هوا · رفع حافظهٔ رابطه (map-local) | ✅ |
 | 113 | 2026-10-20 | `chore` | `0deecf2f` · `3029b6c6` |  | mirror geo/ دستهٔ ۲۰ | ✅ |
-| 114 | 2026-10-20 | `docs` | `PENDING` |  | سند دستهٔ ۲۰: P5-D380…D392 در سند فاز، STATS-4-MATRIX (پیش‌نویس برای تأیید)، قاعدهٔ کپی نسخهٔ «پیش» Lighthouse؛ ابزارها stats4-matrix · ai-cost · map-legibility. گیت‌ها: assert ۶۰۵/۰ · behaviour ۳۸۰/۰ · contrast · acceptance ۰ ناهمخوان · alltypes ۸٫۰–۸٫۵ · نقشه · Lighthouse A/B آرام بودجه سبز | ✅ |
+| 114 | 2026-10-20 | `docs` | `f320b948` |  | سند دستهٔ ۲۰: P5-D380…D392 در سند فاز، STATS-4-MATRIX (پیش‌نویس برای تأیید)، قاعدهٔ کپی نسخهٔ «پیش» Lighthouse؛ ابزارها stats4-matrix · ai-cost · map-legibility. گیت‌ها: assert ۶۰۵/۰ · behaviour ۳۸۰/۰ · contrast · acceptance ۰ ناهمخوان · alltypes ۸٫۰–۸٫۵ · نقشه · Lighthouse A/B آرام بودجه سبز | ✅ |
