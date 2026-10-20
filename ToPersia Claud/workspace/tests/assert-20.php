@@ -34,3 +34,15 @@ tp441_mut( 'نشان فقط مختصات: استان ← مختصات مرکز �
 	array( $l20_prov, $l20_area, $l20_city ), array( array_diff_key( $l20_prov, array( 'neshan' => 1 ) ), $l20_area + array( 'neshan' => 'https://nshn.ir/?lat=32&lng=52' ), $l20_city ) );
 list( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'], $GLOBALS['tp_rel'] ) = $s20_keep;
 if ( null === $s20_keep[3] ) { unset( $GLOBALS['tp_filters']['topersia_g_relreg'] ); } else { $GLOBALS['tp_filters']['topersia_g_relreg'] = $s20_keep[3]; }
+
+/* ══ P5-D384 — «همه …» برای هر اسلایدر کارتی، هر شماری ══════════════════════════════════ */
+$a20_page = r( 20, 'tp_page' );
+$a20_rail = r( 20, 'tp_relgrid', array( 'rel' => 'villages' ) );
+tp441_mut( 'اسلایدر کارتی سه‌عضوی (جاذبه‌ها) دکمهٔ «همه …» و پنجرهٔ فهرست با جست‌وجو دارد؛ کاشی ستون کناری بی تغییر (شش یا کمتر ← بی پیوند)  P5-D384',
+	function ( $x ) {
+		return 3 === topersia_g_rel_items( 20, 'attractions', 0 )['total']
+			&& false !== strpos( $x[0], 'href="#tp-list-attractions" role="button" aria-haspopup="dialog" aria-controls="tp-list-attractions" data-tp-list-open' )
+			&& 1 === preg_match( '#id="tp-list-attractions"[^>]*>.*?data-tp-list-q#su', $x[0] )
+			&& false === strpos( $x[1], 'data-tp-list-open' );
+	},
+	array( $a20_page, $a20_rail ), array( str_replace( 'aria-controls="tp-list-attractions" data-tp-list-open', 'x', $a20_page ), $a20_rail ) );

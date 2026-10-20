@@ -1101,19 +1101,19 @@ $list_open = array(
 );
 
 /*
- * P5-D276: اسلایدرِ بیش از هشت عضو (شهرها — چهارده) پیوند و مودال می‌گیرد،
- * هشت یا کمتر (جاذبه‌ها — سه) هیچ‌کدام؛ فرهنگ شبکه است و همیشه دارد.
+ * P5-D384 (جایگزین P5-D276): هر اسلایدر کارتی، هر شماری، پیوند و مودال می‌گیرد — شهرها (چهارده) و
+ * جاذبه‌ها (سه) هر دو؛ فرهنگ شبکه است و همیشه دارد. جهش: «فقط بیش از هشت» جاذبه را بی مودال می‌گذارد.
  */
 $list_bad = array();
 foreach ( $list_open as $lk => $label ) {
-	$want   = 'attractions' === $lk ? 0 : 1;
+	$want   = 1;
 	$opener = '<a class="tp-more" href="#tp-list-' . $lk . '" role="button" aria-haspopup="dialog" aria-controls="tp-list-' . $lk . '" data-tp-list-open>' . $label . '</a>';
 	if ( $want !== substr_count( $p20_all, $opener ) ) { $list_bad[] = $lk . ': بازکننده'; }
 	if ( $want !== substr_count( $p20_all, '<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-' . $lk . '" role="dialog" aria-modal="true"' ) ) { $list_bad[] = $lk . ': مودال'; }
 }
 
-t( 'فهرست: «همه شهرها / فرهنگ ←» هر کدام یک مودال؛ جاذبه‌های سه‌تایی نه پیوند نه مودال — شاسیِ گالری  P5-D221 · P5-D276',
-	! $list_bad, implode( ' · ', $list_bad ) );
+t( 'فهرست: «همه شهرها / جاذبه‌ها / فرهنگ ←» هر کدام یک مودال — جاذبه‌های سه‌تایی هم (هر شماری) — شاسیِ گالری  P5-D221 · P5-D384',
+	! $list_bad && 3 === topersia_g_rel_items( 20, 'attractions', 0 )['total'], implode( ' · ', $list_bad ) );
 
 $list_places = preg_match( '#<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-places".*?</div></div>(?=<div class="tp-gallery-modal|$)#su', $p20_all, $lpm ) ? $lpm[0] : '';
 
@@ -1134,8 +1134,9 @@ t( 'فهرست: همهٔ چهارده شهر — بیش از هشتِ اسلای
 t( 'فهرست: فرهنگ به خانواده‌ها گروه می‌شود  P5-D221',
 	(bool) preg_match( '#id="tp-list-culture".*?<div class="tp-list__block"><h4 class="tp-list__fam">صنایع دستی</h4><ul class="tp-list__grid"><li class="tp-list__item"><a class="tp-list__card" href="https://topersia.com/mina/"><b>میناکاری</b>#su', $p20_all ) );
 
-t( 'فهرست: پیام «موردی پیدا نشد» آماده و پنهان — یکی در هر مودال (شهرها، فرهنگ)  P5-D221',
-	2 === substr_count( $p20_all, '<p class="tp-list__empty" role="status" hidden>موردی پیدا نشد</p>' ) );
+t( 'فهرست: پیام «موردی پیدا نشد» آماده و پنهان — یکی در هر مودال (شهرها، جاذبه‌ها، فرهنگ)  P5-D221 · P5-D384',
+	substr_count( $p20_all, 'class="tp-gallery-modal tp-gallery-modal--list"' ) === substr_count( $p20_all, '<p class="tp-list__empty" role="status" hidden>موردی پیدا نشد</p>' )
+	&& substr_count( $p20_all, '<p class="tp-list__empty" role="status" hidden>موردی پیدا نشد</p>' ) >= 3 );
 
 t( 'فهرست: بی‌بخش، بی‌مودال — شهر بخشِ شهرها ندارد، مودالش هم نه  P5-D221 · P5-D192',
 	false === strpos( r( 30, 'tp_page' ), 'id="tp-list-places"' ) );

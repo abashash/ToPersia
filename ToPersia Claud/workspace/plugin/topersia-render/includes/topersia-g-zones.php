@@ -3911,13 +3911,17 @@ if ( ! function_exists( 'topersia_g_sc_slider' ) ) {
 			return '';
 		}
 
+		/*
+		 * P5-D384 (جایگزین «فقط بیش از هشت» P5-D276): همۀ اسلایدرهای کارتی، هر شماری، دکمۀ «همه …» و
+		 * پنجرۀ فهرست با جست‌وجو دارند. کاشی‌های ستون کناری بی تغییر (شش).
+		 */
 		$group         = $result['group'];
-		$group['more'] = $result['total'] > $max ? topersia_g_list_more( $group, $key ) : '';
+		$group['more'] = topersia_g_list_more( $group, $key );
 
 		/* `places` شناسۀ خودش را دارد چون در مرجع `#places` است، نه
 		   یکی از `#rel-*` ها.  P5-D215 */
 		return topersia_g_slider_section( 'tp-' . $key, 'tpsl' . $pid . preg_replace( '/[^a-z0-9]+/i', '', $key ),
-			$group, $result['items'], topersia_g_title( $pid ), '' !== $group['more'] ? 'tp-list-' . $key : '' );
+			$group, $result['items'], topersia_g_title( $pid ), 'tp-list-' . $key );
 	}
 }
 
@@ -4163,7 +4167,8 @@ if ( ! function_exists( 'topersia_g_sc_programmes' ) ) {
 				/* translators: %s: شمار اعضای برنامه */
 				$group['more'] = sprintf( __( 'همه %s مورد ←', 'topersia' ), topersia_g_fa( $total ) );
 				$group['hub']  = $prog['url'];
-			} elseif ( $total > $max ) {
+			} elseif ( $total > 0 ) {
+				/* P5-D384: هر شماری — دکمه و پنجرۀ فهرست (بالای صد عضو همان پیوند صفحۀ برنامه، P5-D276) */
 				$group['more'] = __( 'همه موارد ←', 'topersia' );
 				$list          = $ids['list'];
 			}
@@ -4176,7 +4181,7 @@ if ( ! function_exists( 'topersia_g_sc_programmes' ) ) {
 	}
 }
 
-/** مودالِ فهرست هر برنامه با بیش از هشت و تا صد عضو.  P5-D276 */
+/** مودالِ فهرست هر برنامه تا صد عضو، هر شماری.  P5-D276 · P5-D384 */
 if ( ! function_exists( 'topersia_g_programme_modals' ) ) {
 	function topersia_g_programme_modals( $pid ) {
 
@@ -4191,7 +4196,7 @@ if ( ! function_exists( 'topersia_g_programme_modals' ) ) {
 			$ids   = topersia_g_programme_ids( $prog['code'], $first );
 			$first = false;
 
-			if ( $total <= topersia_g_slider_max() || $total > topersia_g_programme_list_max() ) {
+			if ( $total < 1 || $total > topersia_g_programme_list_max() ) {
 				continue;
 			}
 
@@ -6907,8 +6912,10 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 
 			$res = topersia_g_rel_items( $post_id, $key, 0 );
 
-			/* هشت یا کمتر در اسلایدر، شش یا کمتر در ستون کناری: همه دیده‌اند — نه پیوند، نه مودال.  P5-D276 · P5-D313 */
-			if ( $res['total'] <= topersia_g_list_cap( $key ) ) {
+			/* اسلایدر کارتی: هر شماری مودال دارد (P5-D384). کاشی ستون کناری بی تغییر: شش یا کمتر ← همه دیده‌اند، نه پیوند، نه مودال (P5-D313). */
+			$rail = 6 === topersia_g_list_cap( $key );
+
+			if ( $res['total'] < 1 || ( $rail && $res['total'] <= topersia_g_list_cap( $key ) ) ) {
 				return '';
 			}
 

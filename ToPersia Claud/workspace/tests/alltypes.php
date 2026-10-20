@@ -542,9 +542,12 @@ function tp_at_more_bad( $pid, $html ) {
 
 			$GLOBALS['tp_at_more']['sections'] = ( isset( $GLOBALS['tp_at_more']['sections'] ) ? $GLOBALS['tp_at_more']['sections'] : 0 ) + 1;
 
-			if ( $tot > $cap ) {
+			/* P5-D384: اسلایدر کارتی هر شماری پیوند و پنجره دارد؛ کاشی ستون کناری فقط بیش از شش (P5-D313) */
+			$slider = 'topersia_g_sc_slider' === $fn;
+
+			if ( $slider || $tot > $cap ) {
 				$GLOBALS['tp_at_more']['over'] = ( isset( $GLOBALS['tp_at_more']['over'] ) ? $GLOBALS['tp_at_more']['over'] : 0 ) + 1;
-				if ( ! $link ) { $bad[] = $key . ': ' . $tot . ' عضو > سقف ' . $cap . ' ولی پیوند «همه …» نیست'; }
+				if ( ! $link ) { $bad[] = $key . ': ' . $tot . ' عضو (اسلایدر یا > سقف ' . $cap . ') ولی پیوند «همه …» نیست'; }
 				if ( ! $modal || (int) $m[1] !== $tot ) { $bad[] = $key . ': پنجرۀ فهرست نیست یا شمارش با ' . $tot . ' برابر نیست'; }
 			} elseif ( $link || $modal ) {
 				$bad[] = $key . ': ' . $tot . ' عضو ≤ سقف ' . $cap . ' ولی پیوند یا پنجره آمده';

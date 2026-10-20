@@ -94,14 +94,14 @@ $GLOBALS['tp_meta'][20] = $meta20_keep;
 $list_att = preg_match( '#<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-attractions".*?</div></div>(?=<div class="tp-gallery-modal|$)#su', $p20_430, $mm ) ? $mm[0] : '';
 $list_cul = preg_match( '#<div class="tp-gallery-modal tp-gallery-modal--list" id="tp-list-culture".*?</div></div>(?=<div class="tp-gallery-modal|$)#su', $p20_430, $mm ) ? $mm[0] : '';
 
-/* سه جاذبۀ دادۀ آزمون از سقف هشت (P5-D276) کمترند و مودال نمی‌گیرند؛ برچسب کارت فهرست از همان تابعی است که مودال می‌خواند. */
+/* سه جاذبۀ دادۀ آزمون — از P5-D384 هر شماری مودال دارد؛ برچسب کارت فهرست از همان تابعی است که مودال می‌خواند. */
 $att_tags = array();
 foreach ( topersia_g_rel_items( 20, 'attractions', 0 )['items'] as $one ) {
 	$att_tags[ $one['name'] ] = topersia_g_list_meta( 'attractions', $one );
 }
 
 t( 'فهرست: جاذبه ← شهرش، نه برچسب نوع  ۴٫۳٫۰ بند ۱۰',
-	'' === $list_att && isset( $att_tags['میدان نقش جهان'] ) && 'کاشان' === $att_tags['میدان نقش جهان']
+	false !== strpos( $list_att, '<b>میدان نقش جهان</b><span class="tp-list__tag">کاشان</span>' ) && isset( $att_tags['میدان نقش جهان'] ) && 'کاشان' === $att_tags['میدان نقش جهان']
 	&& ! in_array( 'بنای تاریخی', $att_tags, true ), wp_json_encode( $att_tags, JSON_UNESCAPED_UNICODE ) );
 
 t( 'فهرست: فرهنگ ← خانواده‌اش',
