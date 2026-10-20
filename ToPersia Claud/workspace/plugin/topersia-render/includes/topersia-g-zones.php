@@ -2900,15 +2900,24 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		 * با داده)، با پیوند. کارت برای هر نوعی که والد مکانی یا مرکزیت دارد ساخته می‌شود، حتی بی فیلد ناحیۀ card؛ فیلد دیگری
 		 * به آن اضافه نمی‌شود.  P5-D339 · P5-D342
 		 */
-		$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
+		if ( 'tp_route' === get_post_type( $pid ) ) {
 
-		if ( function_exists( 'topersia_g_geo_center_tiles' ) ) {
-			$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
-		}
+			/* مسیر گردشگری: «استان‌های مسیر» (والد R01 ایستگاه‌ها، یکتا، به ترتیب مسیر)، نه نام شهرهای ایستگاه —
+			   شهرها فقط در «شهرهای مسیر».  P5-D385 */
+			$tiles = function_exists( 'topersia_g_route_province_tiles' ) ? topersia_g_route_province_tiles( $pid ) : array();
 
-		/* نوع غیرمکانی بی والد مکانی: مکان‌های مرتبط از رابطه‌های موجود (استان/شهر/روستا).  P5-D348 */
-		if ( ! $tiles && function_exists( 'topersia_g_geo_related_tiles' ) ) {
-			$tiles = topersia_g_geo_related_tiles( $pid );
+		} else {
+
+			$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
+
+			if ( function_exists( 'topersia_g_geo_center_tiles' ) ) {
+				$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
+			}
+
+			/* نوع غیرمکانی بی والد مکانی: مکان‌های مرتبط از رابطه‌های موجود (استان/شهر/روستا).  P5-D348 */
+			if ( ! $tiles && function_exists( 'topersia_g_geo_related_tiles' ) ) {
+				$tiles = topersia_g_geo_related_tiles( $pid );
+			}
 		}
 
 		foreach ( $fields as $name => $raw ) {

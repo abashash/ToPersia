@@ -162,6 +162,10 @@ msgstr ""
 msgid "استان"
 msgstr ""
 
+#: includes/topersia-g-relreg.php
+msgid "استان مسیر"
+msgstr ""
+
 #: topersia-render.php
 msgid "استاندارد"
 msgstr ""

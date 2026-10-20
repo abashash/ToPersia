@@ -49,6 +49,7 @@ return array (
     'از %s رأی' . "\0" . 'از %s رأی' => 'from %s vote' . "\0" . 'from %s votes',
     'از پیش در صف است.' => 'Already queued.',
     'استان' => 'Province',
+    'استان مسیر' => 'Route province',
     'استاندارد' => 'Standard',
     'استانی' => 'Provincial',
     'استان‌ها' => 'Provinces',

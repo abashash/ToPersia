@@ -163,6 +163,10 @@ msgstr "Already queued."
 msgid "استان"
 msgstr "Province"
 
+#: includes/topersia-g-relreg.php
+msgid "استان مسیر"
+msgstr "Route province"
+
 #: topersia-render.php
 msgid "استاندارد"
 msgstr "Standard"

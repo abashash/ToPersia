@@ -163,6 +163,10 @@ msgstr "موجود في قائمة الانتظار مسبقاً."
 msgid "استان"
 msgstr "محافظة"
 
+#: includes/topersia-g-relreg.php
+msgid "استان مسیر"
+msgstr "محافظة على المسار"
+
 #: topersia-render.php
 msgid "استاندارد"
 msgstr "قياسي"

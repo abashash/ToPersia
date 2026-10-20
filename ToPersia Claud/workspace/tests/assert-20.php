@@ -10,6 +10,38 @@
 
 echo "\nدستهٔ ۲۰ — ایرادهای صفحهٔ موجودیت  P5-D380…P5-D390\n" . str_repeat( '─', 78 ) . "\n";
 
+/* ══ P5-D385 — مسیر گردشگری: «استان‌های مسیر» در «اطلاعات جغرافیایی»، نه شهرهای ایستگاه ══════ */
+
+$r20_keep = array( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'], $GLOBALS['tp_rel'], isset( $GLOBALS['tp_filters']['topersia_g_relreg'] ) ? $GLOBALS['tp_filters']['topersia_g_relreg'] : null, isset( $GLOBALS['tp442_stops'] ) ? $GLOBALS['tp442_stops'] : null );
+$f2_world( $f2_reg );
+$f2_post( 8300, 'tp_route', 'مسیر آزمون' );
+$f2_post( 8302, 'tp_city', 'شهر دوم' );
+$f2_post( 8303, 'tp_city', 'شهر چهارم' );
+$f2_post( 8304, 'tp_county', 'شهرستان همجوار' );
+$GLOBALS['tp_rel']['7002']['children'][8007] = array( 8304 );
+$GLOBALS['tp_rel']['7002']['parents'][8304]  = array( 8007 );
+$GLOBALS['tp_rel']['7003']['children'][8304] = array( 8303 );
+$GLOBALS['tp_rel']['7003']['parents'][8303]  = array( 8304 );
+$GLOBALS['tp442_stops'] = array(
+	array( 'position' => 1, 'id' => 8004, 'title' => 'شهر آزمون', 'url' => '', 'note' => '' ),
+	array( 'position' => 2, 'id' => 8303, 'title' => 'شهر چهارم', 'url' => '', 'note' => '' ),
+	array( 'position' => 3, 'id' => 8302, 'title' => 'شهر دوم', 'url' => '', 'note' => '' ),
+	array( 'position' => 4, 'id' => 8004, 'title' => 'شهر آزمون', 'url' => '', 'note' => '' ),
+);
+$r20_geo  = $f2_geo( 8300 );
+$r20_box  = r( 8300, 'tp_route_cities' );
+$r20_old  = '<section id="tp-geo"><a href="https://topersia.com/p8004/" class="tp-tile"><span class="tp-tile__k">شهر</span><b>شهر آزمون</b></a></section>';
+tp441_mut( 'مسیر گردشگری: «اطلاعات جغرافیایی» = «استان‌های مسیر» (والد R01 ایستگاه‌ها، یکتا، به ترتیب مسیر)، بی نام شهر ایستگاه؛ شهرها فقط در «شهرهای مسیر»  P5-D385',
+	function ( $x ) use ( $f2_tile_names, $r20_box ) {
+		return array( 'استان مسیر:اصفهان:p8002', 'استان مسیر:استان همجوار:p8007' ) === $f2_tile_names( $x )
+			&& false === strpos( $x, 'شهر آزمون' ) && false === strpos( $x, 'شهر چهارم' ) && false === strpos( $x, 'شهر دوم' )
+			&& false !== strpos( $r20_box, '<b>شهر آزمون</b>' ) && false !== strpos( $r20_box, '<b>شهر چهارم</b>' );
+	},
+	$r20_geo, $r20_old, implode( ' | ', $f2_tile_names( $r20_geo ) ) );
+list( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'], $GLOBALS['tp_rel'] ) = $r20_keep;
+if ( null === $r20_keep[3] ) { unset( $GLOBALS['tp_filters']['topersia_g_relreg'] ); } else { $GLOBALS['tp_filters']['topersia_g_relreg'] = $r20_keep[3]; }
+if ( null === $r20_keep[4] ) { unset( $GLOBALS['tp442_stops'] ); } else { $GLOBALS['tp442_stops'] = $r20_keep[4]; }
+
 /* ══ P5-D383 — نشان فقط مختصات: نقطه‌ای ← خودش؛ استان ← مرکز استان؛ پهنهٔ دیگر ← نماینده یا هیچ ══════ */
 
 $s20_keep = array( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'], $GLOBALS['tp_rel'], isset( $GLOBALS['tp_filters']['topersia_g_relreg'] ) ? $GLOBALS['tp_filters']['topersia_g_relreg'] : null );

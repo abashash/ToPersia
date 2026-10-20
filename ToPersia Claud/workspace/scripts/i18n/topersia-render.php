@@ -228,6 +228,7 @@ return array(
 	'زمینۀ نقشه نامعتبر است.'          => array( 'en' => 'The map context is invalid.', 'ar' => 'سياق الخريطة غير صالح.' ),
 	'مرکز شهرستان'                    => array( 'en' => 'County seat', 'ar' => 'مركز المقاطعة' ),
 	'شهرهای مسیر'                     => array( 'en' => 'Cities on the route', 'ar' => 'مدن المسار' ),
+	'استان مسیر'                      => array( 'en' => 'Route province', 'ar' => 'محافظة على المسار' ),   /* P5-D385 */
 	'مرکز استان'                      => array( 'en' => 'Provincial capital', 'ar' => 'مركز المحافظة' ),
 	'شهرها'                           => array( 'en' => 'Cities', 'ar' => 'المدن' ),
 	'مرکز استان و شهرهای %s'          => array( 'en' => 'The provincial capital and the cities of %s', 'ar' => 'مركز المحافظة ومدن %s' ),
