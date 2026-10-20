@@ -9,6 +9,10 @@
  * ← سرویس خاموش و جعبه نمی‌آید (همان منطق `topersia_api()` هسته).
  *
  * سمت سرور، با کش مرکزی (P5-D250): کلید سلول ۰٫۲۵ درجه، تا پایان ساعت جاری؛ دادۀ کهنه به‌جای خطا.
+ * P5-D381: «برآورد مدل CAMS · میانگین ۲۴ ساعت» — us_aqi خودِ Open-Meteo برای ذرات میانگین غلتان ۲۴ ساعت گذشته است (مستند رسمی:
+ * «Particulate Matter (PM) uses a rolling average over the preceding 24 hours»)؛ مقدار pm2_5/pm10/dust در `current` لحظه‌ای است، پس سه
+ * عدد ذره از میانگین ۲۴ مقدار ساعتیِ گذشته (`hourly` با `past_days=1`) ساخته می‌شود تا با برچسب بخواند. بی اعشار. نقطه: نام همان
+ * نقطه («برای شهر …»؛ استان ← مرکز استان). ساعت به‌روزرسانی به وقت ایران. صافی `topersia_g_air_enabled` جعبه را برای نوع یا موجودیت خاموش می‌کند.
  * مختصات از تابع مرکزی `topersia_geo_point()` (۲ه٫۵). دادۀ زنده است و در HTML کش‌شده نمی‌آید: اسکلتِ هم‌اندازه
  * در HTML و پر شدن پس از بارگذاری از REST (CLS صفر)؛ خطا ← «—».
  *
@@ -89,8 +93,11 @@ if ( ! function_exists( 'topersia_g_aq_fetch' ) ) {
 		$args = array(
 			'latitude'  => $cell[0],
 			'longitude' => $cell[1],
-			'current'   => 'us_aqi,pm10,pm2_5,dust',
-			'timezone'  => 'GMT',
+			'current'       => 'us_aqi,pm10,pm2_5,dust',
+			'hourly'        => 'pm10,pm2_5,dust',
+			'past_days'     => 1,
+			'forecast_days' => 1,
+			'timezone'      => 'GMT',
 		);
 
 		/* ردۀ پولی (تجاری): مستند رسمی فقط پارامتر apikey و میزبان customer- می‌شناسد؛ کلید فقط سمت سرور از هسته */
@@ -115,17 +122,72 @@ if ( ! function_exists( 'topersia_g_aq_fetch' ) ) {
 			return new WP_Error( 'tp_aq_shape', __( 'پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد.', 'topersia' ), array( 'status' => 502 ) );
 		}
 
-		$num = function ( $k ) use ( $cur ) {
-			return isset( $cur[ $k ] ) && is_numeric( $cur[ $k ] ) ? round( (float) $cur[ $k ], 1 ) : null;
+		$hourly = is_array( $body ) && isset( $body['hourly'] ) && is_array( $body['hourly'] ) ? $body['hourly'] : array();
+		$now    = isset( $cur['time'] ) ? (string) $cur['time'] : '';
+
+		/* میانگین ۲۴ ساعت تا ساعت جاری (P5-D381)؛ بی دادۀ ساعتی ← همان مقدار لحظه‌ای */
+		$mean = function ( $k ) use ( $cur, $hourly, $now ) {
+			return topersia_g_aq_mean24( isset( $hourly['time'] ) ? (array) $hourly['time'] : array(), isset( $hourly[ $k ] ) ? (array) $hourly[ $k ] : array(), $now,
+				isset( $cur[ $k ] ) && is_numeric( $cur[ $k ] ) ? (float) $cur[ $k ] : null );
 		};
 
 		return array(
 			'aqi'  => (int) round( (float) $cur['us_aqi'] ),
-			'pm25' => $num( 'pm2_5' ),
-			'pm10' => $num( 'pm10' ),
-			'dust' => $num( 'dust' ),
-			'time' => isset( $cur['time'] ) ? (string) $cur['time'] : '',
+			'pm25' => $mean( 'pm2_5' ),
+			'pm10' => $mean( 'pm10' ),
+			'dust' => $mean( 'dust' ),
+			'time' => $now,
+			'avg'  => 24,
 		);
+	}
+}
+
+/**
+ * میانگین ۲۴ مقدار ساعتیِ پایان‌یافته تا `$now` (زمان‌ها ISO به GMT) — خالص، برای آزمون. بی اعشار.  P5-D381
+ *
+ * @return int|null
+ */
+if ( ! function_exists( 'topersia_g_aq_mean24' ) ) {
+	function topersia_g_aq_mean24( array $times, array $values, $now, $fallback = null ) {
+
+		$take = array();
+
+		foreach ( $times as $i => $t ) {
+			if ( '' !== (string) $now && strcmp( (string) $t, (string) $now ) > 0 ) {
+				continue;
+			}
+			if ( isset( $values[ $i ] ) && is_numeric( $values[ $i ] ) ) {
+				$take[] = (float) $values[ $i ];
+			}
+		}
+
+		$take = array_slice( $take, -24 );
+
+		if ( count( $take ) >= 12 ) {
+			return (int) round( array_sum( $take ) / count( $take ) );
+		}
+
+		return null === $fallback ? null : (int) round( (float) $fallback );
+	}
+}
+
+/** ساعت به‌روزرسانی به وقت ایران («۱۴:۰۰») از زمان GMT پاسخ، رقم به زبان صفحه.  P5-D381 */
+if ( ! function_exists( 'topersia_g_aq_time_ir' ) ) {
+	function topersia_g_aq_time_ir( $gmt ) {
+
+		$gmt = trim( (string) $gmt );
+
+		if ( '' === $gmt ) {
+			return '';
+		}
+
+		try {
+			$d = new DateTimeImmutable( $gmt, new DateTimeZone( 'UTC' ) );
+		} catch ( Exception $e ) {
+			return '';
+		}
+
+		return topersia_g_fa( $d->setTimezone( new DateTimeZone( 'Asia/Tehran' ) )->format( 'H:i' ) );
 	}
 }
 
@@ -138,7 +200,7 @@ if ( ! function_exists( 'topersia_g_aq_get' ) ) {
 		if ( function_exists( 'topersia_cache_remember' ) ) {
 			return topersia_cache_remember(
 				'air_quality',
-				array( $cell[0], $cell[1] ),
+				array( $cell[0], $cell[1], 'avg24' ),   /* شکل پاسخ عوض شد (P5-D381) ← کلید تازه */
 				function () use ( $cell ) {
 					$out = topersia_g_aq_fetch( $cell );
 					return is_wp_error( $out ) ? $out : array( 'value' => $out, 'ttl' => 'hour' );   /* تا پایان ساعت جاری — قاعدۀ مرکزی کش */
@@ -188,7 +250,9 @@ if ( ! function_exists( 'topersia_g_aq_rest' ) ) {
 			'pm10'  => $out['pm10'],
 			'dust'  => $out['dust'],
 			'time'  => $out['time'],
-			'model' => __( 'برآورد مدل CAMS', 'topersia' ),
+			/* translators: %s: ساعت به وقت ایران */
+			'updated' => '' !== topersia_g_aq_time_ir( $out['time'] ) ? sprintf( __( 'به‌روزرسانی %s به وقت ایران', 'topersia' ), topersia_g_aq_time_ir( $out['time'] ) ) : '',
+			'model' => __( 'برآورد مدل CAMS · میانگین ۲۴ ساعت', 'topersia' ),
 		) );
 	}
 }
@@ -219,13 +283,34 @@ if ( ! function_exists( 'topersia_g_sc_air' ) ) {
 			return '';
 		}
 
-		/* همان مختصاتِ کارت هوا — تابع مرکزی؛ نامعتبر ← کارت هوا نیست و این هم نه */
-		$coords = topersia_g_text( $pid, 'geo_coordinates' );
+		$type = (string) get_post_type( $pid );
+
+		/* صافی خاموشی جعبه برای نوع یا موجودیت — P5-D381 */
+		if ( function_exists( 'apply_filters' ) && ! apply_filters( 'topersia_g_air_enabled', true, $pid, $type ) ) {
+			return '';
+		}
+
+		/* نقطه: استان ← مرکز استان (رابطۀ ۹۶)؛ هر نوع دیگر ← مختصات خودش. نام نقطه کنار عدد — P5-D381 */
+		$at = $pid;
+
+		if ( 'tp_province' === $type && function_exists( 'topersia_g_capital_id' ) && topersia_g_capital_id( $pid ) ) {
+			$at = (int) topersia_g_view_id( topersia_g_capital_id( $pid ) );
+		}
+
+		$coords = topersia_g_text( $at, 'geo_coordinates' );
 		$coords = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : $coords;
 
 		if ( '' === $coords ) {
 			return '';
 		}
+
+		/* نامی که خودش نوع را دارد («شهر اصفهان») دوباره پیشوند نمی‌گیرد */
+		$at_name = topersia_g_name( $at );
+		$for     = 'tp_city' === get_post_type( $at ) && 0 !== strpos( $at_name, (string) topersia_g_kind_label( $at ) )
+			/* translators: %s: نام شهر */
+			? sprintf( __( 'برای شهر %s', 'topersia' ), $at_name )
+			/* translators: %s: نام مکان */
+			: sprintf( __( 'برای %s', 'topersia' ), $at_name );
 
 		$body = '<div class="tp-air is-load" data-tp-air data-tp-coords="' . esc_attr( $coords ) . '" aria-live="polite">'
 			. '<div class="tp-air__main"><b class="tp-air__idx" data-tp-air-idx>—</b>'
@@ -236,7 +321,9 @@ if ( ! function_exists( 'topersia_g_sc_air' ) ) {
 			. '<div><dt><span dir="ltr">PM10</span></dt><dd data-tp-air-pm10>—</dd></div>'
 			. '<div><dt>' . esc_html__( 'غبار', 'topersia' ) . '</dt><dd data-tp-air-dust>—</dd></div>'
 			. '</dl></div>'
-			. '<p class="tp-wx__src tp-air__model">' . esc_html__( 'برآورد مدل CAMS', 'topersia' ) . '</p>'
+			. '<p class="tp-wx__src tp-air__model">' . esc_html__( 'برآورد مدل CAMS · میانگین ۲۴ ساعت', 'topersia' )
+			. ' · <span data-tp-air-for>' . esc_html( $for ) . '</span>'
+			. ' · <span data-tp-air-time>—</span></p>'
 			. '<p class="tp-wx__src tp-wx__credit">' . esc_html( topersia_g_aq_credit() ) . '</p>';
 
 		return topersia_g_section( 'tp-aqi', __( 'کیفیت هوا', 'topersia' ), 'AIR', $body );
@@ -245,6 +332,76 @@ if ( ! function_exists( 'topersia_g_sc_air' ) ) {
 
 if ( function_exists( 'add_shortcode' ) ) {
 	add_shortcode( 'tp_air', 'topersia_g_sc_air' );
+}
+
+/**
+ * برگۀ تشخیصی کیفیت هوا در پیشخوان — فقط مدیر (`manage_options`).  P5-D381
+ *
+ * AQI، رده و PM2.5 (میانگین ۲۴ ساعت) و ساعت به وقت ایران برای ده شهر، از همان مسیر سرور (کش مرکزی، سلول ۰٫۲۵ درجه).
+ * مختصات مرکز شهرها ثابت (برای سنجش مدل، نه دادۀ صفحه). فقط خواندن؛ هیچ تنظیمی نمی‌نویسد.
+ */
+if ( ! function_exists( 'topersia_g_aq_diag_cities' ) ) {
+	function topersia_g_aq_diag_cities() {
+		return array(
+			'تهران'    => array( 35.6892, 51.3890 ),
+			'مشهد'     => array( 36.2605, 59.6168 ),
+			'اصفهان'   => array( 32.6539, 51.6660 ),
+			'شیراز'    => array( 29.5918, 52.5837 ),
+			'تبریز'    => array( 38.0800, 46.2919 ),
+			'اهواز'    => array( 31.3183, 48.6706 ),
+			'کرج'      => array( 35.8400, 50.9391 ),
+			'قم'       => array( 34.6399, 50.8759 ),
+			'کرمانشاه' => array( 34.3142, 47.0650 ),
+			'زاهدان'   => array( 29.4963, 60.8629 ),
+		);
+	}
+}
+
+if ( ! function_exists( 'topersia_g_aq_diag_page' ) ) {
+	function topersia_g_aq_diag_page() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'دسترسی ندارید.', 'topersia' ), 403 );
+		}
+
+		echo '<div class="wrap"><h1>' . esc_html__( 'کیفیت هوا — تشخیص', 'topersia' ) . '</h1>';
+
+		if ( ! topersia_g_aq_enabled() ) {
+			echo '<p>' . esc_html__( 'سرویس کیفیت هوا خاموش است.', 'topersia' ) . '</p></div>';
+			return;
+		}
+
+		echo '<p>' . esc_html__( 'برآورد مدل CAMS · میانگین ۲۴ ساعت — همان دادۀ جعبۀ صفحه، از کش مرکزی.', 'topersia' ) . '</p>';
+		echo '<table class="widefat striped" style="max-inline-size:760px"><thead><tr><th>' . esc_html__( 'شهر', 'topersia' ) . '</th><th>US AQI</th><th>'
+			. esc_html__( 'رده', 'topersia' ) . '</th><th>PM2.5 (µg/m³)</th><th>' . esc_html__( 'ساعت (وقت ایران)', 'topersia' ) . '</th></tr></thead><tbody>';
+
+		foreach ( topersia_g_aq_diag_cities() as $city => $ll ) {
+
+			$out = topersia_g_aq_get( $ll[0], $ll[1] );
+
+			if ( is_wp_error( $out ) || ! is_array( $out ) ) {
+				echo '<tr><td>' . esc_html( $city ) . '</td><td colspan="4">' . esc_html( is_wp_error( $out ) ? $out->get_error_message() : '—' ) . '</td></tr>';
+				continue;
+			}
+
+			$cat = topersia_g_aqi_cat( $out['aqi'] );
+
+			echo '<tr><td>' . esc_html( $city ) . '</td><td>' . esc_html( topersia_g_fa( (string) (int) $out['aqi'] ) ) . '</td><td>' . esc_html( topersia_g_aqi_label( $cat ) )
+				. '</td><td>' . esc_html( null === $out['pm25'] ? '—' : topersia_g_fa( (string) (int) $out['pm25'] ) ) . '</td><td>' . esc_html( topersia_g_aq_time_ir( isset( $out['time'] ) ? $out['time'] : '' ) ) . '</td></tr>';
+		}
+
+		echo '</tbody></table></div>';
+	}
+}
+
+if ( function_exists( 'add_action' ) ) {
+	add_action( 'admin_menu', function () {
+		if ( function_exists( 'topersia_admin_page' ) ) {
+			add_submenu_page( 'topersia', esc_html__( 'کیفیت هوا — تشخیص', 'topersia' ), esc_html__( 'کیفیت هوا (تشخیص)', 'topersia' ), 'manage_options', 'topersia-air-diag', 'topersia_g_aq_diag_page' );
+		} else {
+			add_submenu_page( 'topersia-render', esc_html__( 'کیفیت هوا — تشخیص', 'topersia' ), esc_html__( 'کیفیت هوا (تشخیص)', 'topersia' ), 'manage_options', 'topersia-air-diag', 'topersia_g_aq_diag_page' );
+		}
+	}, 20 );
 }
 
 if ( function_exists( 'add_action' ) ) {

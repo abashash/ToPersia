@@ -20,57 +20,12 @@ class TP_AI_Services {
 	 * @return array
 	 */
 	public static function get_all() {
-		$services = array(
-			'chatgpt'    => array(
-				'label'   => 'ChatGPT',
-				'url'     => 'https://chatgpt.com/?q=%s',
-				'color'   => '#0f9d78',
-				'prefill' => true,
-			),
-			'perplexity' => array(
-				'label'   => 'Perplexity',
-				'url'     => 'https://www.perplexity.ai/search/new?q=%s',
-				'color'   => '#1f8f96',
-				'prefill' => true,
-			),
-			'claude'     => array(
-				'label'   => 'Claude',
-				'url'     => 'https://claude.ai/new?q=%s',
-				'color'   => '#c1622f',
-				'prefill' => true,
-			),
-			'grok'       => array(
-				'label'   => 'Grok',
-				'url'     => 'https://grok.com/?q=%s',
-				'color'   => '#3d3d3d',
-				'prefill' => true,
-			),
-			'copilot'    => array(
-				'label'   => 'Copilot',
-				'url'     => 'https://copilot.microsoft.com/?q=%s',
-				'color'   => '#1a6dd4',
-				'prefill' => true,
-			),
-			'gemini'     => array(
-				'label'   => 'Gemini',
-				'url'     => 'https://gemini.google.com/app?q=%s',
-				'color'   => '#3367d6',
-				'prefill' => false,
-			),
-			'deepseek'   => array(
-				'label'   => 'DeepSeek',
-				'url'     => 'https://chat.deepseek.com/?q=%s',
-				'color'   => '#1744a6',
-				'prefill' => false,
-			),
-		);
-
-		/**
-		 * Filter the list of available AI services.
-		 *
-		 * @param array $services Service definitions keyed by slug.
+		/*
+		 * 1.4.1 · P5-D392 (P5-D255 · H03 ممیزی ۲د): هیچ پیوند دستیار بیرونی (ChatGPT · Claude · Gemini · Copilot ·
+		 * Perplexity · Grok · DeepSeek …) در خروجی عمومی. فهرست خالی است و صافی `tpas_services` هم برداشته شد تا
+		 * افزونۀ دیگری نتواند دوباره پیوند بیفزاید. کلاس برای سازگاری (رهگیر، پیشخوان) می‌ماند.
 		 */
-		return apply_filters( 'tpas_services', $services );
+		return array();
 	}
 
 	/**

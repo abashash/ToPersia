@@ -130,10 +130,6 @@ msgstr "الأخبار"
 msgid "اخبار %s"
 msgstr "أخبار %s"
 
-#: includes/topersia-g-zones.php
-msgid "ادامه در موتور هوش مصنوعی"
-msgstr "المتابعة في محرك ذكاء اصطناعي"
-
 #: topersia-render.php
 msgid "ارتباط برقرار نشد."
 msgstr "تعذّر الاتصال."
@@ -167,6 +163,10 @@ msgstr "موجود في قائمة الانتظار مسبقاً."
 msgid "استان"
 msgstr "محافظة"
 
+#: includes/topersia-g-relreg.php
+msgid "استان مسیر"
+msgstr "محافظة على المسار"
+
 #: topersia-render.php
 msgid "استاندارد"
 msgstr "قياسي"
@@ -194,6 +194,10 @@ msgstr "إسفند"
 #: includes/topersia-g-zones.php
 msgid "اشتراک"
 msgstr "مشاركة"
+
+#: includes/topersia-g-air.php
+msgid "اصفهان"
+msgstr "أصفهان"
 
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
@@ -238,6 +242,10 @@ msgstr "يُحفظ اختيارك على هذا الجهاز."
 #: topersia-render.php
 msgid "اندازۀ متن"
 msgstr "حجم النص"
+
+#: includes/topersia-g-air.php
+msgid "اهواز"
+msgstr "الأهواز"
 
 #: includes/topersia-g-map.php
 msgid "اورژانس"
@@ -340,8 +348,22 @@ msgid "بخش‌های صفحه"
 msgstr "أقسام الصفحة"
 
 #: includes/topersia-g-air.php
-msgid "برآورد مدل CAMS"
-msgstr "تقدير نموذج CAMS"
+msgid "برآورد مدل CAMS · میانگین ۲۴ ساعت"
+msgstr "تقدير نموذج CAMS · متوسط 24 ساعة"
+
+#: includes/topersia-g-air.php
+msgid "برآورد مدل CAMS · میانگین ۲۴ ساعت — همان دادۀ جعبۀ صفحه، از کش مرکزی."
+msgstr "تقدير نموذج CAMS · متوسط 24 ساعة — البيانات نفسها في صندوق الصفحة، من الذاكرة المركزية."
+
+#: includes/topersia-g-air.php
+#, php-format
+msgid "برای %s"
+msgstr "لـ %s"
+
+#: includes/topersia-g-air.php
+#, php-format
+msgid "برای شهر %s"
+msgstr "لمدينة %s"
 
 #: includes/topersia-g-zones.php
 msgid "برای نوشتن نظر"
@@ -452,6 +474,11 @@ msgstr "بهمن"
 msgid "به‌روز"
 msgstr "محدَّث"
 
+#: includes/topersia-g-air.php
+#, php-format
+msgid "به‌روزرسانی %s به وقت ایران"
+msgstr "آخر تحديث %s بتوقيت إيران"
+
 #: includes/topersia-g-weather.php
 msgid "به‌روزرسانی: چند دقیقه پیش"
 msgstr "حُدِّث قبل دقائق"
@@ -504,6 +531,10 @@ msgstr "أرض رطبة"
 #: includes/topersia-g-map.php
 msgid "تبدیل متن به گفتار"
 msgstr "تحويل النص إلى كلام"
+
+#: includes/topersia-g-air.php
+msgid "تبریز"
+msgstr "تبريز"
 
 #: includes/topersia-g-map.php
 msgid "تخصصی"
@@ -558,6 +589,10 @@ msgstr "أُعيدت الإعدادات إلى الوضع الافتراضي"
 #: includes/topersia-g-map.php
 msgid "تنگه / دره"
 msgstr "مضيق / وادٍ"
+
+#: includes/topersia-g-air.php
+msgid "تهران"
+msgstr "طهران"
 
 #: topersia-render.php
 msgid "توقف حرکت و پخش خودکار"
@@ -827,11 +862,6 @@ msgstr "نبذة"
 
 #: includes/topersia-g-zones.php
 #, php-format
-msgid "دربارۀ %1$s بر پایۀ این صفحه توضیح بده: %2$s"
-msgstr "اشرح %1$s استنادًا إلى هذه الصفحة: %2$s"
-
-#: includes/topersia-g-zones.php
-#, php-format
 msgid "دربارۀ %s"
 msgstr "نبذة عن %s"
 
@@ -959,6 +989,10 @@ msgstr "تم التحقق منه"
 msgid "راه دسترسی"
 msgstr "طريق الوصول"
 
+#: includes/topersia-g-air.php
+msgid "رده"
+msgstr "الفئة"
+
 #: includes/topersia-g-map.php
 msgid "رزمی"
 msgstr "فنون قتالية"
@@ -1031,6 +1065,10 @@ msgstr "حدث رياضي"
 msgid "ریلی"
 msgstr "سككي"
 
+#: includes/topersia-g-air.php
+msgid "زاهدان"
+msgstr "زاهدان"
+
 #: includes/topersia-g-map.php
 msgid "زاگرسی"
 msgstr "زاغروسي"
@@ -1082,6 +1120,10 @@ msgstr "آلة تقليدية"
 #: includes/topersia-g-map.php
 msgid "ساعات کاری"
 msgstr "ساعات العمل"
+
+#: includes/topersia-g-air.php
+msgid "ساعت (وقت ایران)"
+msgstr "الساعة (توقيت إيران)"
 
 #: includes/topersia-g-map.php
 msgid "سال آغاز برنامه"
@@ -1255,6 +1297,10 @@ msgstr "الإزهار"
 msgid "شکوفۀ نمک"
 msgstr "زهرة الملح"
 
+#: includes/topersia-g-air.php
+msgid "شیراز"
+msgstr "شيراز"
+
 #: includes/topersia-g-map.php
 msgid "شیرین"
 msgstr "عذب"
@@ -1427,6 +1473,10 @@ msgstr "حلقة بودكاست"
 #: includes/topersia-g-map.php
 msgid "قله"
 msgstr "قمة"
+
+#: includes/topersia-g-air.php
+msgid "قم"
+msgstr "قم"
 
 #: includes/topersia-g-zones.php
 msgid "قوم / فرهنگ"
@@ -1726,6 +1776,10 @@ msgstr "الاتجاهات"
 msgid "مشخصات"
 msgstr "التفاصيل"
 
+#: includes/topersia-g-air.php
+msgid "مشهد"
+msgstr "مشهد"
+
 #: includes/topersia-g-zones.php
 msgid "مطالب"
 msgstr "المحتوى"
@@ -1813,10 +1867,6 @@ msgstr "هجرة الطيور"
 #: includes/topersia-g-zones.php
 msgid "مهر"
 msgstr "مهر"
-
-#: includes/topersia-g-zones.php
-msgid "موتور:"
-msgstr "المحرك:"
 
 #: includes/topersia-g-map.php
 msgid "موتورسواری و اتومبیل‌رانی"
@@ -2418,6 +2468,14 @@ msgstr "رمز المحافظة"
 msgid "کد فرودگاه"
 msgstr "رمز المطار"
 
+#: includes/topersia-g-air.php
+msgid "کرج"
+msgstr "كرج"
+
+#: includes/topersia-g-air.php
+msgid "کرمانشاه"
+msgstr "كرمانشاه"
+
 #: includes/topersia-g-map.php
 msgid "کشتی"
 msgstr "المصارعة"
@@ -2493,6 +2551,14 @@ msgstr "نسخ الرابط"
 #: includes/topersia-g-air.php
 msgid "کیفیت هوا"
 msgstr "جودة الهواء"
+
+#: includes/topersia-g-air.php
+msgid "کیفیت هوا (تشخیص)"
+msgstr "جودة الهواء (تشخيص)"
+
+#: includes/topersia-g-air.php
+msgid "کیفیت هوا — تشخیص"
+msgstr "جودة الهواء — تشخيص"
 
 #: includes/topersia-g-map.php
 msgid "کیلومتر"

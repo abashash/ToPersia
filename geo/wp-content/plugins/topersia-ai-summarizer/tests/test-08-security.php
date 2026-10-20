@@ -94,7 +94,7 @@ unset( $GLOBALS['tp_http_override'] );
 update_option( TP_AI_Options::OPTION_KEY, 'oops-this-is-a-string' );
 TP_AI_Options::flush();
 $g = TP_AI_Options::get();
-t( 'robustness: non-array option falls back to defaults array', is_array( $g ) && 7 === count( $g['services'] ) );
+t( 'robustness: non-array option falls back to defaults array', is_array( $g ) && array() === $g['services'] && isset( $g['post_types'] ) );   /* P5-D392: services default is empty */
 
 // ---- JS data attributes never reflect the raw language value ---------------
 $html = TP_AI_Render::buttons_html( array( 'post_id' => 42 ) );

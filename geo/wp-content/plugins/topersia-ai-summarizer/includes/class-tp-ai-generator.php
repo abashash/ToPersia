@@ -19,6 +19,15 @@ class TP_AI_Generator {
 	/** Action Scheduler hook - one job per (post, type, lang). */
 	const JOB = 'tpas_generate';
 
+	/** 1.4.0 · P5-D382 - one job per (post, lang) for all three types: auto-generation after publish/save. */
+	const JOB_POST = 'tpas_generate_post';
+
+	/** Retries of a failed post job, with a growing delay (15 min · 30 · 60 · 120 · 240). */
+	const RETRIES = 5;
+
+	/** One-time switch of auto_generate to on for installs older than 1.4.0 (no autoload). */
+	const AUTO_MIGRATED = 'tpas_auto_on_140';
+
 	/** Items run at once when the bulk action finds no queue. */
 	const BATCH = 3;
 
@@ -28,7 +37,9 @@ class TP_AI_Generator {
 	 */
 	public static function init() {
 		add_action( self::JOB, array( __CLASS__, 'run_job' ), 10, 3 );
+		add_action( self::JOB_POST, array( __CLASS__, 'run_post_job' ), 10, 3 );
 		add_action( 'save_post', array( __CLASS__, 'maybe_auto' ), 30, 2 );
+		add_action( 'init', array( __CLASS__, 'migrate_auto' ), 20 );
 	}
 
 	// -----------------------------------------------------------------
@@ -277,15 +288,22 @@ class TP_AI_Generator {
 	}
 
 	/**
-	 * «ساخت خودکار پس از انتشار یا تغییر محتوا» - off by default. When on, a
-	 * published post's non-fresh outputs go to the same queue, under the same
-	 * cap. Never run inline: no queue, no generation.
+	 * «ساخت خودکار پس از انتشار یا تغییر محتوا» — 1.4.0 · P5-D382: on by default.
+	 *
+	 * Publishing or saving any language version by a user who may edit that post
+	 * puts ONE job in the queue for that post and its language, covering all three
+	 * types. Nothing is queued when every type is still fresh (the source-text hash
+	 * did not change). Never run inline: no queue, no generation - a save never
+	 * waits for or breaks on an engine. A bulk import that saves posts only fills
+	 * the queue. No public (REST / AJAX) path reaches this.
 	 *
 	 * @param int     $post_id Post id.
 	 * @param WP_Post $post    Post object.
 	 * @return void
 	 */
 	public static function maybe_auto( $post_id, $post = null ) {
+		$post_id = (int) $post_id;
+
 		if ( ! TP_AI_Options::just_flag( 'auto_generate' ) ) {
 			return;
 		}
@@ -294,11 +312,112 @@ class TP_AI_Generator {
 			return;
 		}
 
-		if ( ! self::queue_ready() ) {
+		if ( ! current_user_can( 'edit_post', $post_id ) || ! self::eligible( $post_id ) || ! self::queue_ready() ) {
 			return;
 		}
 
-		self::enqueue( array( (int) $post_id ) );
+		self::queue_post( $post_id, self::post_lang( $post_id ) );
+	}
+
+	/**
+	 * Queue the post job when some type is not fresh.
+	 *
+	 * @param int    $post_id Post id.
+	 * @param string $lang    Language code.
+	 * @param int    $attempt Retry number.
+	 * @param int    $delay   Seconds from now.
+	 * @return int Queue id, 0 when nothing to do or already pending.
+	 */
+	public static function queue_post( $post_id, $lang, $attempt = 0, $delay = 0 ) {
+		$todo = false;
+
+		foreach ( TP_AI_Options::panel_types() as $type ) {
+			if ( 'fresh' !== self::status( $post_id, $type, $lang ) ) {
+				$todo = true;
+				break;
+			}
+		}
+
+		if ( ! $todo || ! self::queue_ready() ) {
+			return 0;
+		}
+
+		return (int) topersia_queue_add( self::JOB_POST, array( (int) $post_id, (string) $lang, (int) $attempt ), (int) $delay );
+	}
+
+	/** Seconds until 00:10 tomorrow (site time) plus a small spread per post. */
+	public static function until_tomorrow( $post_id ) {
+		$tz  = function_exists( 'wp_timezone' ) ? wp_timezone() : new DateTimeZone( 'UTC' );
+		$now = new DateTimeImmutable( 'now', $tz );
+		$at  = $now->setTime( 0, 10 )->modify( '+1 day' );
+
+		return max( 60, $at->getTimestamp() - $now->getTimestamp() ) + ( absint( $post_id ) % 600 );
+	}
+
+	/**
+	 * The post job: every non-fresh type of one post in one language. A full
+	 * daily cap moves the job to tomorrow; an engine error retries later with a
+	 * growing delay (RETRIES times); fresh types are skipped.
+	 *
+	 * @param int    $post_id Post id.
+	 * @param string $lang    Language code.
+	 * @param int    $attempt Retry number.
+	 * @return array per type: ok · fresh · cap · error
+	 */
+	public static function run_post_job( $post_id, $lang = '', $attempt = 0 ) {
+		$post_id = (int) $post_id;
+		$lang    = '' !== (string) $lang ? (string) $lang : self::post_lang( $post_id );
+		$attempt = (int) $attempt;
+		$out     = array();
+
+		if ( ! self::eligible( $post_id ) ) {
+			return $out;
+		}
+
+		foreach ( TP_AI_Options::panel_types() as $type ) {
+			$r = self::generate( $post_id, $type, $lang );
+
+			if ( ! empty( $r['skipped'] ) && 'fresh' === $r['skipped'] ) {
+				$out[ $type ] = 'fresh';
+			} elseif ( ! empty( $r['skipped'] ) && 'cap' === $r['skipped'] ) {
+				$out[ $type ] = 'cap';
+			} else {
+				$out[ $type ] = empty( $r['ok'] ) ? 'error' : 'ok';
+			}
+		}
+
+		if ( in_array( 'cap', $out, true ) ) {
+			self::queue_post( $post_id, $lang, $attempt, self::until_tomorrow( $post_id ) );
+		} elseif ( in_array( 'error', $out, true ) && $attempt < self::RETRIES ) {
+			self::queue_post( $post_id, $lang, $attempt + 1, 900 * ( 2 ** $attempt ) );
+		}
+
+		if ( function_exists( 'topersia_log' ) && ( in_array( 'error', $out, true ) || in_array( 'cap', $out, true ) ) ) {
+			topersia_log( 'خلاصه‌ساز: کار خودکار کامل نشد', 'notice', 'ai', array( 'post' => $post_id, 'lang' => $lang, 'attempt' => $attempt, 'result' => $out ) );
+		}
+
+		return $out;
+	}
+
+	/**
+	 * 1.4.0 · P5-D382 - auto-generation is on by default: an install that saved
+	 * the old default (off) is switched on once. The admin can turn it off again.
+	 *
+	 * @return void
+	 */
+	public static function migrate_auto() {
+		if ( false !== get_option( self::AUTO_MIGRATED, false ) ) {
+			return;
+		}
+
+		$stored = get_option( TP_AI_Options::OPTION_KEY, array() );
+
+		if ( is_array( $stored ) && array_key_exists( 'auto_generate', $stored ) && empty( $stored['auto_generate'] ) ) {
+			$stored['auto_generate'] = 1;
+			update_option( TP_AI_Options::OPTION_KEY, $stored, false );
+		}
+
+		add_option( self::AUTO_MIGRATED, '1', '', 'no' );
 	}
 }
 

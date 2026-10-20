@@ -113,7 +113,7 @@ if ( ! function_exists( 'topersia_queue_add' ) ) {
 				return 0; // pending duplicate
 			}
 		}
-		$GLOBALS['tp130_queue'][] = array( $hook, $args );
+		$GLOBALS['tp130_queue'][] = array( $hook, $args, (int) $delay );
 		return count( $GLOBALS['tp130_queue'] );
 	}
 }
@@ -226,9 +226,10 @@ tp130_reset();
 $tp130_draft = TP_AI_Generator::generate( 43, 'summary', 'en', true );
 t( 'P5-D358: an unpublished post (translation) gets no summary, zero calls', false === $tp130_draft['ok'] && 0 === $GLOBALS['tp_http_calls'] + $GLOBALS['tp130_replies'] );
 
-/* auto-generate: off by default -> queue empty; on -> the same queue */
+/* auto-generate: 1.4.0 · P5-D382 on by default (P5-D358 had it off); switched off -> queue empty; on -> the same queue */
 $tp130_clear();
-t( 'P5-D358: auto-generate is off by default', 0 === TP_AI_Options::defaults()['auto_generate'] );
+t( 'P5-D382: auto-generate is on by default (1.4.0)', 1 === TP_AI_Options::defaults()['auto_generate'] );
+$tp130_opts( array( 'auto_generate' => 0 ) );
 TP_AI_Generator::maybe_auto( 47, get_post( 47 ) );
 $tp130_off = count( $GLOBALS['tp130_queue'] );
 $m5 = tp130_mutant( 'class-tp-ai-generator.php', 'TP_AI_Generator', 'M5', "if ( ! TP_AI_Options::just_flag( 'auto_generate' ) ) {", 'if ( false ) {' );

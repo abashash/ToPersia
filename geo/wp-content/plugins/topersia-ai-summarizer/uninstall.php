@@ -14,6 +14,7 @@ global $wpdb;
 
 delete_option( 'tpas_settings' );
 delete_option( 'tpas_stats' );
+delete_option( 'tpas_auto_on_140' );   // 1.4.0 · P5-D382
 
 // Per-user metadata: the daily AI quota counter (1.3.1, P5-D375).
 delete_metadata( 'user', 0, '_topersia_ai_daily', '', true );

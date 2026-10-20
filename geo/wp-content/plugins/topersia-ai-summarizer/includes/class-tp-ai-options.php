@@ -39,7 +39,7 @@ class TP_AI_Options {
 			// External buttons.
 			'heading'              => '',
 			'prompt'               => '',
-			'services'             => array( 'chatgpt', 'perplexity', 'claude', 'grok', 'copilot', 'gemini', 'deepseek' ),
+			'services'             => array(),   // 1.4.1 · P5-D392: no outside-assistant links.
 			'post_types'           => self::default_post_types(),
 			'position'             => 'after_thumbnail',
 			'show_on_archive'      => 0,
@@ -70,7 +70,7 @@ class TP_AI_Options {
 			'internal_auto_first'  => 0,
 			// 1.3.0 · P5-D358: summaries are made by the site admin only.
 			'visitor_requests'     => 0,  // «اجازۀ درخواست بازدیدکننده (نسخه‌های بعد)» — off: only an editor of the post generates.
-			'auto_generate'        => 0,  // generate in the queue after publish / content change.
+			'auto_generate'        => 1,  // 1.4.0 · P5-D382: on by default - generate in the queue after publish / content change.
 			'admin_daily_cap'      => 50, // admin-side generations (metabox, bulk, auto) per day.
 			'panel_position'       => 'manual',
 			// Analytics.
@@ -464,14 +464,7 @@ class TP_AI_Options {
 			? sanitize_textarea_field( wp_unslash( $input['prompt'] ) )
 			: '';
 
-		$valid_services = array_keys( TP_AI_Services::get_all() );
-		$services       = isset( $input['services'] ) ? (array) $input['services'] : array();
-		$services       = array_map( 'sanitize_key', $services );
-		$output['services'] = array_values( array_intersect( $services, $valid_services ) );
-
-		if ( empty( $output['services'] ) ) {
-			$output['services'] = $defaults['services'];
-		}
+		$output['services'] = array();   // 1.4.1 · P5-D392
 
 		$valid_types = get_post_types( array( 'public' => true ) );
 		$types       = isset( $input['post_types'] ) ? (array) $input['post_types'] : array();

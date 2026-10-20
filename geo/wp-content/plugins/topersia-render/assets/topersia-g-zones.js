@@ -2420,8 +2420,17 @@
 			map.addLayer( { id: 'tp-pts-count', type: 'symbol', source: 'tp-pts', filter: [ 'has', 'point_count' ],
 				layout: { 'text-field': [ 'get', 'point_count_abbreviated' ], 'text-font': [ 'Noto Sans Regular' ], 'text-size': 13, 'text-allow-overlap': true },
 				paint: { 'text-color': '#ffffff' } } );
+			/*
+			 * نام نشانگر — خوانا و بی هم‌پوشانی (P5-D387): زیر نماد، قلم همان سبک (Noto Sans Regular — بازۀ عربی دارد، P5-D352)،
+			 * هاله به رنگ سطح و متن به رنگ متنِ حالت جاری؛ نامی که جا ندارد پنهان می‌شود (`text-optional`) نه روی دیگری.
+			 */
+			var ink  = getComputedStyle( box ).getPropertyValue( '--tp-text' ).trim() || '#1f2a2e';
+			var halo = getComputedStyle( box ).getPropertyValue( '--tp-surface' ).trim() || '#ffffff';
 			map.addLayer( { id: 'tp-pts-icon', type: 'symbol', source: 'tp-pts', filter: [ '!', [ 'has', 'point_count' ] ],
-				layout: { 'icon-image': [ 'concat', 'tp-fam-', [ 'get', 'k' ] ], 'icon-allow-overlap': true, 'icon-size': 1 } } );
+				layout: { 'icon-image': [ 'concat', 'tp-fam-', [ 'get', 'k' ] ], 'icon-allow-overlap': true, 'icon-size': 1,
+					'text-field': [ 'get', 'n' ], 'text-font': [ 'Noto Sans Regular' ], 'text-size': 12.5, 'text-anchor': 'top', 'text-offset': [ 0, 1.35 ],
+					'text-max-width': 9, 'text-optional': true, 'text-allow-overlap': false, 'text-ignore-placement': false, 'text-padding': 3 },
+				paint: { 'text-color': ink, 'text-halo-color': halo, 'text-halo-width': 1.6, 'text-halo-blur': 0.3 } } );
 
 			if ( ! interactive ) {
 				return;
@@ -2851,6 +2860,8 @@
 				put( '[data-tp-air-pm25]', num( d.pm25 ) );
 				put( '[data-tp-air-pm10]', num( d.pm10 ) );
 				put( '[data-tp-air-dust]', num( d.dust ) );
+				/* ساعت به‌روزرسانی به وقت ایران (P5-D381)؛ متن کامل از سرور به زبان صفحه */
+				put( '[data-tp-air-time]', d.updated || '—' );
 				done();
 			} )
 			.catch( done );

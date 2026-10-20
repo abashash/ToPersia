@@ -43,6 +43,47 @@ if ( ! function_exists( 'topersia_g_routing_fa_title' ) ) {
 }
 
 /**
+ * نقطۀ نمایندۀ یک پست برای ارائه‌دهنده‌ای که فقط مختصات می‌پذیرد (نشان).  P5-D383
+ *
+ * نشان جست‌وجوی متنی ندارد (Neshan-MCP فقط پیوند نقطه دارد)، پس پهنه هم باید نقطه بدهد:
+ *   نوع نقطه‌ای      مختصات خودش
+ *   شهر              مختصات شهر (نوع نقطه‌ای است)
+ *   استان            مختصات مرکز استان (رابطۀ ۹۶، `topersia_g_capital_id`)
+ *   پهنۀ دیگر        مختصات نماینده اگر در `geo_coordinates` خودش نقطه است؛ وگرنه هیچ — بی نشان
+ * هرگز مرکز هندسی پهنه حساب نمی‌شود.
+ *
+ * @return array{lat:float,lng:float}|array{}
+ */
+if ( ! function_exists( 'topersia_g_routing_point' ) ) {
+	function topersia_g_routing_point( $pid ) {
+
+		$pid = absint( $pid );
+
+		if ( ! $pid || ! function_exists( 'topersia_geo_parse' ) ) {
+			return array();
+		}
+
+		$from = $pid;
+
+		if ( 'tp_province' === ( function_exists( 'get_post_type' ) ? get_post_type( $pid ) : '' ) ) {
+			$from = function_exists( 'topersia_g_capital_id' ) ? absint( topersia_g_capital_id( $pid ) ) : 0;
+		}
+
+		if ( ! $from ) {
+			return array();
+		}
+
+		$geo = topersia_geo_parse( topersia_g_text( $from, 'geo_coordinates' ) );
+
+		if ( is_array( $geo ) && isset( $geo['status'], $geo['kind'], $geo['lat'], $geo['lng'] ) && 'valid' === $geo['status'] && 'point' === $geo['kind'] ) {
+			return array( 'lat' => (float) $geo['lat'], 'lng' => (float) $geo['lng'] );
+		}
+
+		return array();
+	}
+}
+
+/**
  * مقصد این پست: `array( 'mode' => 'coords', 'lat' => , 'lng' => )` یا `array( 'mode' => 'text', 'q' => )` یا خالی (باکس نمی‌آید).
  *
  * @param int $pid پست.
@@ -68,11 +109,15 @@ if ( ! function_exists( 'topersia_g_routing_target' ) ) {
 		$parents = function_exists( 'topersia_g_crumb_places' ) ? topersia_g_crumb_places( $pid ) : array();
 		$parent  = $parents ? topersia_g_routing_fa_title( end( $parents ) ) : '';
 
+		$point = topersia_g_routing_point( $pid );
+
 		if ( '' === $self || '' === $parent ) {
-			return array();
+			/* بی متن: فقط ارائه‌دهندۀ مختصاتی (نشان) با نقطۀ نماینده، اگر هست.  P5-D383 */
+			return $point ? array( 'mode' => 'text', 'q' => '', 'point' => $point ) : array();
 		}
 
-		return array( 'mode' => 'text', 'q' => $self . '، ' . $parent );
+		/* Google و Waze همان متن (P5-D350)؛ نشان نقطۀ نماینده (P5-D383) */
+		return array( 'mode' => 'text', 'q' => $self . '، ' . $parent, 'point' => $point );
 	}
 }
 
@@ -116,7 +161,15 @@ if ( ! function_exists( 'topersia_g_routing_links' ) ) {
 				$url     = str_replace( array( '{lat}', '{lng}' ), array( rtrim( rtrim( sprintf( '%.7F', $target['lat'] ), '0' ), '.' ), rtrim( rtrim( sprintf( '%.7F', $target['lng'] ), '0' ), '.' ) ), $pattern );
 			} else {
 				$pattern = isset( $row['text'] ) ? (string) $row['text'] : '';
-				$url     = str_replace( '{q}', rawurlencode( (string) $target['q'] ), $pattern );
+				$url     = '' !== (string) $target['q'] ? str_replace( '{q}', rawurlencode( (string) $target['q'] ), $pattern ) : '';
+
+				/* ارائه‌دهنده‌ای که فقط مختصات می‌پذیرد (نشان) ← نقطۀ نماینده، اگر هست.  P5-D383 */
+				if ( '' === $pattern && ! empty( $target['point'] ) && ! empty( $row['pattern'] ) ) {
+					$pattern = (string) $row['pattern'];
+					$url     = str_replace( array( '{lat}', '{lng}' ), array( rtrim( rtrim( sprintf( '%.7F', $target['point']['lat'] ), '0' ), '.' ), rtrim( rtrim( sprintf( '%.7F', $target['point']['lng'] ), '0' ), '.' ) ), $pattern );
+				} elseif ( '' === $url ) {
+					$pattern = '';
+				}
 			}
 
 			if ( '' !== $pattern && 0 === strpos( $url, 'https://' ) ) {

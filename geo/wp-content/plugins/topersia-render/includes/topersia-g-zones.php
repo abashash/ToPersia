@@ -783,6 +783,13 @@ if ( ! function_exists( 'topersia_g_rel_memo_reset' ) ) {
 if ( function_exists( 'add_action' ) ) {
 	add_action( 'save_post', 'topersia_g_rel_memo_reset' );
 	add_action( 'deleted_post', 'topersia_g_rel_memo_reset' );
+	/*
+	 * نوشتن یا پاک‌کردن رابطه با API جت‌انجین (بی ذخیرۀ پست) هم حافظه را باطل می‌کند — وگرنه «تهی»ِ ثبت‌شده هنگام
+	 * ذخیرۀ پستِ تازه (پیش از نوشتن رابطه) تا پایان درخواست می‌ماند و زنجیرۀ مکانی و نمایۀ مکانی همان پست خالی می‌شد.
+	 * یافتۀ map-local (دستۀ ۲۰، پاسخ معمار بند ۵).
+	 */
+	add_action( 'jet-engine/relation/update/after', 'topersia_g_rel_memo_reset', 1, 0 );
+	add_action( 'jet-engine/relation/delete/after', 'topersia_g_rel_memo_reset', 1, 0 );
 }
 
 /**
@@ -2813,7 +2820,8 @@ if ( ! function_exists( 'topersia_g_stat_keys' ) ) {
 		 * ترتیب از لایۀ دادۀ مرجع می‌آید: مرکز · کد · مساحت · جمعیت.
 		 * `P5-D208` (مرکز · جمعیت · مساحت · اقلیم) لغو شد.  P5-D215
 		 */
-		$order = array( 'province_code', 'area_km2', 'population', 'climate_type', 'elevation_m', 'founded_year' );
+		/* P5-D386: کد استان از هر نمایش بیرون است (فیلد و داده می‌ماند). */
+		$order = array( 'area_km2', 'population', 'climate_type', 'elevation_m', 'founded_year' );
 
 		$ranked = array();
 
@@ -2900,15 +2908,24 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		 * با داده)، با پیوند. کارت برای هر نوعی که والد مکانی یا مرکزیت دارد ساخته می‌شود، حتی بی فیلد ناحیۀ card؛ فیلد دیگری
 		 * به آن اضافه نمی‌شود.  P5-D339 · P5-D342
 		 */
-		$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
+		if ( 'tp_route' === get_post_type( $pid ) ) {
 
-		if ( function_exists( 'topersia_g_geo_center_tiles' ) ) {
-			$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
-		}
+			/* مسیر گردشگری: «استان‌های مسیر» (والد R01 ایستگاه‌ها، یکتا، به ترتیب مسیر)، نه نام شهرهای ایستگاه —
+			   شهرها فقط در «شهرهای مسیر».  P5-D385 */
+			$tiles = function_exists( 'topersia_g_route_province_tiles' ) ? topersia_g_route_province_tiles( $pid ) : array();
 
-		/* نوع غیرمکانی بی والد مکانی: مکان‌های مرتبط از رابطه‌های موجود (استان/شهر/روستا).  P5-D348 */
-		if ( ! $tiles && function_exists( 'topersia_g_geo_related_tiles' ) ) {
-			$tiles = topersia_g_geo_related_tiles( $pid );
+		} else {
+
+			$tiles = function_exists( 'topersia_g_geo_parent_tiles' ) ? topersia_g_geo_parent_tiles( $pid ) : array();
+
+			if ( function_exists( 'topersia_g_geo_center_tiles' ) ) {
+				$tiles = array_merge( $tiles, topersia_g_geo_center_tiles( $pid ) );
+			}
+
+			/* نوع غیرمکانی بی والد مکانی: مکان‌های مرتبط از رابطه‌های موجود (استان/شهر/روستا).  P5-D348 */
+			if ( ! $tiles && function_exists( 'topersia_g_geo_related_tiles' ) ) {
+				$tiles = topersia_g_geo_related_tiles( $pid );
+			}
 		}
 
 		foreach ( $fields as $name => $raw ) {
@@ -3911,13 +3928,17 @@ if ( ! function_exists( 'topersia_g_sc_slider' ) ) {
 			return '';
 		}
 
+		/*
+		 * P5-D384 (جایگزین «فقط بیش از هشت» P5-D276): همۀ اسلایدرهای کارتی، هر شماری، دکمۀ «همه …» و
+		 * پنجرۀ فهرست با جست‌وجو دارند. کاشی‌های ستون کناری بی تغییر (شش).
+		 */
 		$group         = $result['group'];
-		$group['more'] = $result['total'] > $max ? topersia_g_list_more( $group, $key ) : '';
+		$group['more'] = topersia_g_list_more( $group, $key );
 
 		/* `places` شناسۀ خودش را دارد چون در مرجع `#places` است، نه
 		   یکی از `#rel-*` ها.  P5-D215 */
 		return topersia_g_slider_section( 'tp-' . $key, 'tpsl' . $pid . preg_replace( '/[^a-z0-9]+/i', '', $key ),
-			$group, $result['items'], topersia_g_title( $pid ), '' !== $group['more'] ? 'tp-list-' . $key : '' );
+			$group, $result['items'], topersia_g_title( $pid ), 'tp-list-' . $key );
 	}
 }
 
@@ -4163,7 +4184,8 @@ if ( ! function_exists( 'topersia_g_sc_programmes' ) ) {
 				/* translators: %s: شمار اعضای برنامه */
 				$group['more'] = sprintf( __( 'همه %s مورد ←', 'topersia' ), topersia_g_fa( $total ) );
 				$group['hub']  = $prog['url'];
-			} elseif ( $total > $max ) {
+			} elseif ( $total > 0 ) {
+				/* P5-D384: هر شماری — دکمه و پنجرۀ فهرست (بالای صد عضو همان پیوند صفحۀ برنامه، P5-D276) */
 				$group['more'] = __( 'همه موارد ←', 'topersia' );
 				$list          = $ids['list'];
 			}
@@ -4176,7 +4198,7 @@ if ( ! function_exists( 'topersia_g_sc_programmes' ) ) {
 	}
 }
 
-/** مودالِ فهرست هر برنامه با بیش از هشت و تا صد عضو.  P5-D276 */
+/** مودالِ فهرست هر برنامه تا صد عضو، هر شماری.  P5-D276 · P5-D384 */
 if ( ! function_exists( 'topersia_g_programme_modals' ) ) {
 	function topersia_g_programme_modals( $pid ) {
 
@@ -4191,7 +4213,7 @@ if ( ! function_exists( 'topersia_g_programme_modals' ) ) {
 			$ids   = topersia_g_programme_ids( $prog['code'], $first );
 			$first = false;
 
-			if ( $total <= topersia_g_slider_max() || $total > topersia_g_programme_list_max() ) {
+			if ( $total < 1 || $total > topersia_g_programme_list_max() ) {
 				continue;
 			}
 
@@ -5232,35 +5254,8 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
  *
  * اگر هیچ خلاصه‌ای نباشد، بخش نمی‌آید.
  *
- * دکمه‌های موتور پیوند بیرونی‌اند، نه دکمۀ جاوااسکریپتی: کاربر از صفحه
- * می‌رود، و `<a>` کلیک میانی و برگۀ تازه را خودش می‌داند.
+ * پیوندهای «موتور:» (ChatGPT · Claude · Gemini · Copilot) و `topersia_g_ai_engines()` / `topersia_g_ai_icons()` برداشته شد — P5-D382 · P5-D255.
  */
-if ( ! function_exists( 'topersia_g_ai_engines' ) ) {
-	function topersia_g_ai_engines() {
-
-		return array(
-			'ChatGPT' => 'https://chatgpt.com/?q=%s',
-			'Claude'  => 'https://claude.ai/new?q=%s',
-			'Gemini'  => 'https://gemini.google.com/app?q=%s',
-			'Copilot' => 'https://copilot.microsoft.com/?q=%s',
-		);
-	}
-}
-
-if ( ! function_exists( 'topersia_g_ai_icons' ) ) {
-	function topersia_g_ai_icons() {
-
-		$open = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"'
-			. ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
-
-		return array(
-			'ChatGPT' => $open . '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg>',
-			'Claude'  => $open . '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
-			'Gemini'  => $open . '<path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>',
-			'Copilot' => $open . '<circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M8.5 14c1 1.5 6 1.5 7 0"/></svg>',
-		);
-	}
-}
 
 /**
  * خروجی‌های ذخیره‌شدۀ افزونۀ `topersia-ai-summarizer` برای یک پست.  ۴٫۲٫۱ بند ۱۰ · ۴٫۳٫۰ بند ۴
@@ -5333,9 +5328,11 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			return '';
 		}
 
-		$logged = function_exists( 'is_user_logged_in' ) && is_user_logged_in();
-
 		/*
+		 * P5-D382 (جایگزین بخش نمایش P5-D358): خلاصه · نکات کلیدی · پیشنهاد سفر برای همۀ بازدیدکننده‌ها — مهمان هم —
+		 * در HTML سرور؛ نوعی که خروجی ذخیره‌شده ندارد دکمه نمی‌گیرد. پیوندهای «موتور:» حذف شد (P5-D255).
+		 * تولید فقط در صف پس‌زمینۀ خلاصه‌ساز، پس از انتشار یا ذخیرۀ ویرایشگر — هیچ مسیر عمومی تولید را آغاز نمی‌کند.
+		 *
 		 * فقط خروجیِ ذخیره‌شده، برای هر بازدیدکننده — مهمان و واردشده.  P5-D358
 		 * خروجیِ ذخیره‌شدۀ خلاصه‌ساز اول (`tpas_get_summary`؛ در نبودش `TP_AI_Summary::get_cached`)،
 		 * وگرنه `ai_summary` دستی؛ هیچ‌کدام نبود ← بلوک نمی‌آید. نه دکمۀ تولید، نه دعوت به ثبت‌نام برای AI، نه درخواست AJAX:
@@ -5348,13 +5345,11 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			return '';
 		}
 
-		$name = topersia_g_name( $pid );
-
-		/* برچسب‌ها و کلیدهای `data-ai` عیناً مرجع: summary · bullets · plan. مهمان فقط خلاصه را دارد؛ نکات و برنامۀ ذخیره‌شده برای واردشده. */
+		/* برچسب‌ها و کلیدهای `data-ai` عیناً مرجع: summary · bullets · plan — برای همه (P5-D382). */
 		$data = array_filter( array(
 			'summary' => $summary,
-			'bullets' => $logged && isset( $ai['keypoints'] ) ? $ai['keypoints'] : '',
-			'plan'    => $logged && isset( $ai['plan'] ) ? $ai['plan'] : '',
+			'bullets' => isset( $ai['keypoints'] ) ? $ai['keypoints'] : '',
+			'plan'    => isset( $ai['plan'] ) ? $ai['plan'] : '',
 		) );
 
 		/* دکمۀ هر نوع فقط وقتی خروجی ذخیره‌شده‌اش هست — دکمۀ بی خروجی بی‌کار می‌ماند */
@@ -5383,37 +5378,6 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>'
 			. esc_html__( 'کپی خروجی', 'topersia' ) . '</button>';
 
-		$url     = (string) get_permalink( $pid );
-		$engines = '';
-
-		if ( $logged ) {
-
-			/*
-			 * پرسشی که موتور با آن باز می‌شود: نام موجودیت و نشانی همین صفحه.
-			 * بی‌نشانی، موتور نمی‌داند دربارۀ کدام صفحه حرف می‌زنیم.
-			 */
-			$prompt = sprintf(
-				/* translators: 1: نام موجودیت 2: نشانی صفحه */
-				esc_html__( 'دربارۀ %1$s بر پایۀ این صفحه توضیح بده: %2$s', 'topersia' ),
-				$name,
-				$url
-			);
-
-			$icons   = topersia_g_ai_icons();
-			$engines = '<span class="tp-ai__engines-label">' . esc_html__( 'موتور:', 'topersia' ) . '</span>';
-
-			foreach ( topersia_g_ai_engines() as $engine => $pattern ) {
-
-				$engines .= '<a class="tp-ai__engine" href="'
-					. esc_url( sprintf( $pattern, rawurlencode( $prompt ) ) ) . '"'
-					. ' target="_blank" rel="nofollow noopener">'
-					. $icons[ $engine ] . esc_html( $engine ) . '</a>';
-			}
-
-			$engines = '<div class="tp-ai__engines" role="group" aria-label="'
-				. esc_attr__( 'ادامه در موتور هوش مصنوعی', 'topersia' ) . '">' . $engines . '</div>';
-		}
-
 		$first_label = reset( $types );
 
 		/*
@@ -5425,7 +5389,6 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. '<h2>' . esc_html__( 'این مقصد را در یک نگاه بفهمید', 'topersia' ) . '</h2>'
 			. '<div class="tp-ai__actions" role="group" aria-label="'
 			. esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>'
-			. $engines
 			. '<div class="tp-ai__out" data-tp-ai-out'
 			. " data-tp-ai='" . esc_attr( wp_json_encode( $data ) ) . "'"
 			. ' aria-live="polite"><p class="tp-justify">' . esc_html( $summary ) . '</p>'
@@ -6011,7 +5974,7 @@ if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
 
 			/* G — همان قاعدۀ P5-D215 (مرکز · کد · مساحت · جمعیت)، هر نوع آنچه دارد */
 			'tp_region'          => array( 'stats' => array( 'region_classification', 'count:provinces' ) ),
-			'tp_province'        => array( 'stats' => array( 'capital', 'province_code', 'area_km2', 'population', 'climate_type' ) ),
+			'tp_province'        => array( 'stats' => array( 'capital', 'area_km2', 'population', 'climate_type' ) ),   /* P5-D386: بی کد استان */
 			'tp_district'        => array( 'stats' => array( 'neighborhood_type' ), 'scope' => 'point' ),
 			'tp_village'         => array( 'stats' => array( 'population', 'elevation_m' ), 'scope' => 'point' ),
 			'tp_island'          => array( 'stats' => array( 'island_type', 'area_km2' ) ),
@@ -6966,8 +6929,10 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 
 			$res = topersia_g_rel_items( $post_id, $key, 0 );
 
-			/* هشت یا کمتر در اسلایدر، شش یا کمتر در ستون کناری: همه دیده‌اند — نه پیوند، نه مودال.  P5-D276 · P5-D313 */
-			if ( $res['total'] <= topersia_g_list_cap( $key ) ) {
+			/* اسلایدر کارتی: هر شماری مودال دارد (P5-D384). کاشی ستون کناری بی تغییر: شش یا کمتر ← همه دیده‌اند، نه پیوند، نه مودال (P5-D313). */
+			$rail = 6 === topersia_g_list_cap( $key );
+
+			if ( $res['total'] < 1 || ( $rail && $res['total'] <= topersia_g_list_cap( $key ) ) ) {
 				return '';
 			}
 

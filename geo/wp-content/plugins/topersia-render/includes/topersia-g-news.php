@@ -269,7 +269,9 @@ if ( ! function_exists( 'topersia_g_news_card' ) ) {
 		 * CSS، ابعاد صریحِ پرونده از وردپرس)؛ srcset خودِ وردپرس و `sizes`
 		 * همان دو پهنا. بی‌تصویر، همان جعبۀ آیکون با همان اندازه.  SPRINT-4.4 ۱٫۵
 		 */
-		$thumb = function_exists( 'get_the_post_thumbnail' ) ? (string) get_the_post_thumbnail( $news_id, 'medium', array(
+		/* P5-D388: `hero_image` خودِ خبر ← تصویر شاخص ← آیکون؛ همان اندازه‌ها (همان دروازۀ کارت‌ها، `topersia_g_card_image()`) */
+		$img   = topersia_g_card_image( $news_id );
+		$thumb = ( $img && function_exists( 'wp_get_attachment_image' ) ) ? (string) wp_get_attachment_image( $img, 'medium', false, array(
 			'alt'      => '',
 			'loading'  => 'lazy',
 			'decoding' => 'async',

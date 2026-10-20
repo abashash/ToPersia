@@ -406,6 +406,64 @@ if ( ! function_exists( 'topersia_g_sc_route_cities' ) ) {
 	}
 }
 
+/**
+ * کاشی‌های «استان‌های مسیر» برای کارت «اطلاعات جغرافیایی» نوع مسیر گردشگری.  P5-D385
+ *
+ * والد R01 (استان) هر ایستگاه، یکتا، به ترتیب مسیر (`topersia_p9_stops()` هسته). نام شهرهای ایستگاه این‌جا
+ * نمی‌آید — شهرها فقط در باکس «شهرهای مسیر» (`topersia_g_sc_route_cities`). استانِ بی‌صفحه یا منتشرنشده نه.
+ *
+ * @param int $pid پست مسیر.
+ * @return array<int,array{label:string,name:string,url:string}>
+ */
+if ( ! function_exists( 'topersia_g_route_province_tiles' ) ) {
+	function topersia_g_route_province_tiles( $pid ) {
+
+		$pid = absint( $pid );
+
+		if ( ! $pid || 'tp_route' !== get_post_type( $pid ) || ! function_exists( 'topersia_p9_stops' ) ) {
+			return array();
+		}
+
+		$seen  = array();
+		$tiles = array();
+
+		foreach ( (array) topersia_p9_stops( $pid ) as $stop ) {
+
+			$id = isset( $stop['id'] ) ? absint( $stop['id'] ) : 0;
+
+			if ( ! $id ) {
+				continue;
+			}
+
+			$prov = 0;
+
+			/* خود ایستگاه استان است، یا نخستین استان زنجیرۀ R01 آن */
+			if ( 'tp_province' === get_post_type( $id ) ) {
+				$prov = $id;
+			} else {
+				foreach ( topersia_g_place_chain( $id ) as $up ) {
+					if ( 'tp_province' === get_post_type( $up ) ) {
+						$prov = (int) $up;
+						break;
+					}
+				}
+			}
+
+			$prov = $prov ? (int) topersia_g_view_id( $prov ) : 0;
+			$url  = $prov ? topersia_g_public_url( $prov ) : '';
+
+			if ( ! $prov || '' === $url || isset( $seen[ $prov ] ) ) {
+				continue;
+			}
+
+			$seen[ $prov ] = 1;
+			$tiles[]       = array( 'label' => __( 'استان مسیر', 'topersia' ), 'name' => topersia_g_name( $prov ), 'url' => $url );
+		}
+
+		return $tiles;
+	}
+}
+
 /* باکس شهرهای مسیر در ثبت‌نامۀ پنل چپ (`includes/topersia-g-panel.php`) است، بلافاصله پس از مسیریابی؛ فقط نوع مسیر محتوا دارد.  P5-D347 */
 
 if ( function_exists( 'add_filter' ) ) {
