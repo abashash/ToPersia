@@ -44,15 +44,20 @@ const path = require( 'path' );
 	const urls = JSON.parse( execFileSync( ENV.php || 'php', [ path.join( __dirname, 'local-urls.php' ) ], { encoding: 'utf8' } ) );
 	const OURS = /\b(tpasFront|ToPersiaUserCore|ToPersiaDisplaySync|TopersiaG|ToPersiaG|tpasAdmin|ToPersiaRender)\b[^;]{0,600}?["']?nonce["']?\s*[:=]\s*["'][0-9a-fA-F]{6,}["']/;
 	const THIRD = /(ElementorProFrontendConfig|elementorFrontendConfig|rankMath|wpApiSettings)[^;]{0,900}?["']nonce["']\s*:\s*["'][0-9a-fA-F]{6,}["']/g;
-	let bad = 0, checked = 0; const third = {};
+	let bad = 0, checked = 0, gravG = 0, gravU = 0; const third = {};
 	for ( const [ page, langs ] of Object.entries( urls ) ) {
 		for ( const [ lang, u ] of Object.entries( langs ) ) {
 			const html = await ( await guest.request.get( u, { timeout: 240000 } ) ).text(); checked ++;
+			const htmlU = await ( await user.request.get( u, { timeout: 240000 } ) ).text();
+			if ( /gravatar/i.test( html ) ) { gravG ++; console.log( '  ❌ gravatar در HTML مهمان: ' + page + ' ' + lang ); }
+			if ( /gravatar/i.test( htmlU ) ) { gravU ++; console.log( '  ❌ gravatar در HTML واردشده: ' + page + ' ' + lang ); }
 			const m = html.match( OURS );
 			if ( m ) { bad ++; console.log( '  ❌ ' + page + ' ' + lang + ': nonce از کد ما در HTML مهمان — ' + m[ 0 ].replace( /[0-9a-fA-F]{6,}/g, '######' ).slice( 0, 140 ) ); }
 			( html.match( THIRD ) || [] ).forEach( x => { const k = x.slice( 0, x.search( /[ ={]/ ) ); third[ k ] = ( third[ k ] || 0 ) + 1; } );
 		}
 	}
+	console.log( ( gravG || gravU ? '  ❌' : '  ✅' ) + ' «gravatar» در HTML ' + checked + ' صفحه — مهمان: ' + gravG + '، واردشده: ' + gravU );
+	if ( gravG || gravU ) { process.exitCode = 1; }
 	console.log( bad ? '  ❌ nonce کد ما در HTML مهمان: ' + bad + ' از ' + checked + ' صفحه' : '  ✅ HTML مهمان ' + checked + ' صفحه (استان · شهر · جاذبه × fa · en · ar): هیچ nonce از کد ما نیست' );
 	console.log( '  · nonceِ شخص ثالث در HTML مهمان (دست نخورد): ' + ( Object.entries( third ).map( ( [ k, n ] ) => k + '×' + n ).join( ' · ' ) || 'هیچ' ) );
 	/* نقطهٔ REST نانس: بی‌کش */

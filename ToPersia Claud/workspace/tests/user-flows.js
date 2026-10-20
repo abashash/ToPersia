@@ -370,6 +370,34 @@ async function member() {
 	check( 'برداشتن ذخیره از صفحهٔ مکان ← ردیف جدول برداشته شد',
 		body.success && 'false' === await page.getAttribute( '[data-tp-save]', 'aria-pressed' ) && s.saved.indexOf( PROV.id ) < 0, JSON.stringify( { body, saved: s.saved } ) );
 
+	/* ── عکس نمایه: بارگذاری از پنل، بی gravatar — P5-D377 ── */
+	head( 'عکس نمایه — بارگذاری محلی، بی gravatar' );
+	{
+		const avDir = path.join( ENV.wp, 'wp-content', 'uploads', 'topersia-avatars' );
+		const files = () => ( fs.existsSync( avDir ) ? fs.readdirSync( avDir ).filter( x => /\.webp$/.test( x ) ) : [] );
+		const before = files().length;
+		const grav = [];
+		ctx.on( 'request', r => { if ( /gravatar/i.test( r.url() ) ) { grav.push( r.url() ); } } );
+		const sample = path.join( require( 'os' ).tmpdir(), 'tp-avatar-flow.jpg' );
+		php( [ '-r', '$i=imagecreatetruecolor(500,300);imagefilledrectangle($i,0,0,500,300,imagecolorallocate($i,30,120,90));imagejpeg($i,$argv[1],90);', sample ] );
+		page = await load( ctx, ENV.base + '/account/' );
+		const ptab = page.locator( '[data-tp-tab="profile"]' ).first();
+		if ( await ptab.count() ) { await ptab.click(); }
+		await page.waitForSelector( '#tp-avatar-file', { state: 'attached', timeout: 60000 } );
+		const src0 = await page.getAttribute( '.tp-avatar-big', 'src' );
+		check( 'پیش از بارگذاری: شمایل خنثی از افزونه (نه gravatar)، ابعاد صریح', /assets\/img\/avatar-/.test( src0 ) && '96' === await page.getAttribute( '.tp-avatar-big', 'width' ) && '96' === await page.getAttribute( '.tp-avatar-big', 'height' ), src0 );
+		await page.setInputFiles( '#tp-avatar-file', sample );
+		await page.waitForFunction( () => /topersia-avatars\/[a-f0-9]{24}-96\.webp/.test( ( document.querySelector( '.tp-avatar-big' ) || {} ).src || '' ), null, { timeout: 90000 } );
+		check( 'پس از بارگذاری: نشانی عکس WebP در uploads/topersia-avatars با نام تصادفی', files().length === before + 2, files().join( ',' ) );
+		const src1 = await page.getAttribute( '.tp-avatar-big', 'src' );
+		const ok = await page.evaluate( async u => { const r = await fetch( u, { cache: 'no-store' } ); return [ r.status, r.headers.get( 'content-type' ) ]; }, src1 );
+		check( 'فایل عکس خوانده می‌شود (image/webp)', 200 === ok[ 0 ] && /image\/webp/.test( ok[ 1 ] ), JSON.stringify( ok ) );
+		await page.click( '#tp-avatar-remove' );
+		await page.waitForFunction( () => /assets\/img\/avatar-/.test( ( document.querySelector( '.tp-avatar-big' ) || {} ).src || '' ), null, { timeout: 60000 } );
+		check( 'حذف عکس: فایل‌ها پاک شد و شمایل خنثی برگشت', files().length === before, files().join( ',' ) );
+		check( 'هیچ درخواستی به gravatar رفت', 0 === grav.length, grav.join( ' ' ) );
+		fs.unlinkSync( sample );
+	}
 	/* ── حریم خصوصی: درخواست صدور و حذف از پنل، با تأیید دومرحله‌ای — P5-D375 ── */
 	head( 'حریم خصوصی — پنل · تنظیمات' );
 	const dr = () => JSON.parse( php( [ 'tests/local-dr.php' ] ) );

@@ -237,3 +237,4 @@ html.tp-uc-login-open,html.tp-uc-login-open body{overflow:hidden}
 .tp-dr-confirm p{margin:0 0 10px}
 .tp-btn-danger{background:#8a1c1c;color:#fff}
 .tp-btn-ghost{background:transparent;color:var(--tp-user-text);border:1px solid var(--tp-user-border)}
+.tp-avatar-row{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}.tp-avatar-big{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid var(--tp-user-border);flex:none}.tp-avatar-ctl{flex:1 1 220px;min-width:0}.tp-avatar-ctl .tp-hint{margin:0 0 10px;color:var(--tp-user-muted);font-size:13px;line-height:1.7}

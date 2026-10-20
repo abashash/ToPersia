@@ -1,7 +1,7 @@
 <div class="tp-dashboard tp-dashboard--fullscreen" dir="<?php echo esc_attr($tp_dir); ?>" data-tp-dashboard data-tp-fullscreen="1" data-tp-lang="<?php echo esc_attr($tp_lang); ?>" data-tp-default-tab="<?php echo esc_attr((string)$data['default_tab']); ?>">
   <div class="tp-appbar">
     <div class="tp-appbar-side tp-appbar-user">
-      <img src="<?php echo esc_url($data['avatar']); ?>" alt="" loading="lazy">
+      <img src="<?php echo esc_url($data['avatar']); ?>" alt="" width="44" height="44" loading="lazy" data-tp-avatar-img>
       <div class="tp-user-meta">
         <strong><?php echo esc_html($data['name']); ?></strong>
         <span><?php echo esc_html($data['email']); ?></span>
@@ -74,6 +74,19 @@
 
 <?php if (isset($data['tabs']['profile'])) : ?><section id="tp-panel-profile" class="tp-tab-panel<?php echo $data['default_tab'] === 'profile' ? ' active' : ''; ?>" data-tp-panel="profile" role="tabpanel"<?php echo $data['default_tab'] === 'profile' ? '' : ' hidden'; ?> >
       <div class="tp-section-title"><span class="tp-eyebrow">PROFILE</span><h2><?php echo $tp('profile_title'); ?></h2><p><?php echo $tp('profile_desc'); ?></p></div>
+      <div class="tp-card tp-avatar-card" id="tp-avatar-card" data-tp-avatar-card>
+        <div class="tp-card-head"><h2><?php echo $tp('avatar_title'); ?></h2></div>
+        <div class="tp-avatar-row">
+          <img src="<?php echo esc_url($data['avatar']); ?>" alt="" width="96" height="96" data-tp-avatar-img class="tp-avatar-big">
+          <div class="tp-avatar-ctl">
+            <p class="tp-hint"><?php echo $tp('avatar_hint'); ?></p>
+            <input type="file" id="tp-avatar-file" accept="image/jpeg,image/png,image/webp" hidden>
+            <button class="tp-btn tp-btn-small" type="button" id="tp-avatar-choose"><?php echo $tp('avatar_choose'); ?></button>
+            <button class="tp-btn tp-btn-small tp-btn-ghost" type="button" id="tp-avatar-remove"><?php echo $tp('avatar_remove'); ?></button>
+            <p class="tp-message" id="tp-avatar-message" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
       <form id="tp-profile-form" class="tp-card">
         <div class="tp-form-grid">
           <div class="tp-field"><label for="tp-first-name"><?php echo $tp('first_name'); ?></label><input id="tp-first-name" name="first_name" value="<?php echo esc_attr((string) get_user_meta(get_current_user_id(), 'first_name', true)); ?>"></div>

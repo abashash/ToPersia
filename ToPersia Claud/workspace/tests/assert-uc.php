@@ -61,9 +61,9 @@ $src = function ( $rel ) use ( $UC ) { return (string) file_get_contents( $UC . 
 echo "\ntopersia-user-core ۱٫۱۰٫۰\n" . str_repeat( '─', 78 ) . "\n";
 
 /* ── نسخه ── */
-t( 'نسخه: سرآیند و ثابت 1.12.1',
-	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.12.1' )
-	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.12.1');" ) );
+t( 'نسخه: سرآیند و ثابت 1.13.0',
+	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.13.0' )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.13.0');" ) );
 
 /*
  * ── ۱٫۱۰٫۲ — جهت فرم ورود از زبان صفحه  SPRINT-4.4 ۲٫۰٫۸ ──
@@ -584,6 +584,53 @@ t( 'نانس: در HTML مهمان نیست (فقط واردشده)؛ از REST 
 	&& ! $nonce_ok( str_replace( "is_user_logged_in() ? wp_create_nonce('topersia_user_core') : ''", "wp_create_nonce('topersia_user_core')", $as_src ), $auth_src, $js_src )
 	&& ! $nonce_ok( $as_src, str_replace( "no-store, no-cache, must-revalidate, max-age=0", "public, max-age=600", $auth_src ), $js_src ) );
 
+/* ── ۱٫۱۳٫۰ · P5-D376 — OTP تأییدشده ۲۴ ساعت ── */
+$db_src = $src( 'includes/class-topersia-db.php' );
+$otp_ok = function ( $db ) {
+	return 2 === substr_count( $db, "time() - DAY_IN_SECONDS)\n        ));" ) && false === strpos( $db, '7 * DAY_IN_SECONDS' );
+};
+t( 'OTP: تأییدشده و تأییدنشده هر دو حداکثر ۲۴ ساعت (نه ۷ روز) — جهش: برگشت به ۷ روز می‌افتد',
+	$otp_ok( $db_src ) && ! $otp_ok( str_replace( "verified = 1 AND created_at < %s',\n            gmdate('Y-m-d H:i:s', time() - DAY_IN_SECONDS)", "verified = 1 AND created_at < %s',\n            gmdate('Y-m-d H:i:s', time() - 7 * DAY_IN_SECONDS)", $db_src ) ) );
+
+/* ── ۱٫۱۳٫۰ · P5-D377 — آواتار محلی ── */
+$av_src = $src( 'includes/class-topersia-avatar.php' );
+$av_ok = function ( $a ) {
+	return false !== strpos( $a, "add_filter( 'pre_get_avatar_data', array( \$this, 'pre_get_avatar_data' ), 5, 2 );" )
+		&& false !== strpos( $a, "\$args['url']          = '' !== \$url ? \$url : self::default_url( \$uid );" ) && false !== strpos( $a, "\$args['found_avatar'] = true;" )
+		&& false !== strpos( $a, "array( 'image/jpeg', 'image/png', 'image/webp' )" ) && false !== strpos( $a, 'const MAX_BYTE = 2097152;' )
+		&& false !== strpos( $a, "'topersia_user_core'" ) && false !== strpos( $a, 'get_current_user_id()' ) && false !== strpos( $a, 'bin2hex( random_bytes( 12 ) )' )
+		&& false !== strpos( $a, "\$ed->save( \$dest, 'image/webp' )" ) && false !== strpos( $a, 'maybe_exif_rotate' ) && false !== strpos( $a, "add_action( 'delete_user'" )
+		&& false === stripos( $a, 'gravatar.com/avatar' ) && false === strpos( $a, "update_option( 'show_avatars'" ) && false === strpos( $a, 'wp_insert_attachment' );
+};
+t( 'آواتار: pre_get_avatar_data (gravatar هرگز ساخته نمی‌شود)، فقط JPG/PNG/WebP ≤ ۲MB، nonce و فقط خود کاربر، WebP بازکدگذاری‌شده با نام تصادفی، پاک‌شدن با حذف حساب، بی دست‌زدن به show_avatars و کتابخانهٔ رسانه — جهش: SVG/GIF و حذف قلاب می‌افتد',
+	$av_ok( $av_src )
+	&& ! $av_ok( str_replace( "'image/jpeg', 'image/png', 'image/webp' )", "'image/jpeg', 'image/png', 'image/webp', 'image/gif' )", $av_src ) )
+	&& ! $av_ok( str_replace( "add_filter( 'pre_get_avatar_data', array", "add_filter( 'zz_pre_get_avatar_data', array", $av_src ) )
+	&& ! $av_ok( $av_src . "\nupdate_option( 'show_avatars', 0 );\n" ) );
+
+$dr_src = $src( 'includes/class-topersia-data-requests.php' );
+t( 'آواتار: پاک‌کننده فایل را پیش از متا پاک می‌کند، برون‌بر آواتار و آخرین ورود را می‌آورد، متاها در فهرست و uninstall',
+	false !== strpos( $dr_src, 'ToPersia_Avatar::delete_files_for( $id );' ) && false !== strpos( $dr_src, "\$row( 'avatar', ToPersia_Avatar::photo_url(" ) && false !== strpos( $dr_src, "'_topersia_avatar', '_topersia_last_login', '_topersia_inactive'," )
+	&& false !== strpos( $src( 'uninstall.php' ), "'_topersia_avatar'," ) && false !== strpos( $src( 'uninstall.php' ), "'topersia_user_core_inactivity'" ) && false !== strpos( $src( 'uninstall.php' ), "'topersia-avatars/'" ) );
+$tpl = $src( 'templates/dashboard.php' );
+t( 'آواتار: پنل — ابعاد صریح width/height (بی CLS) و کنترل بارگذاری/حذف',
+	false !== strpos( $tpl, 'class="tp-avatar-big"' ) && false !== strpos( $tpl, 'width="96" height="96"' ) && false !== strpos( $tpl, 'id="tp-avatar-file"' ) && false !== strpos( $tpl, 'accept="image/jpeg,image/png,image/webp"' ) );
+
+/* ── ۱٫۱۳٫۰ · P5-D377 — غیرفعال‌سازی ۲۴ ماهه ── */
+$in_src = $src( 'includes/class-topersia-inactivity.php' );
+$in_ok = function ( $i ) {
+	return false !== strpos( $i, "add_action( 'wp_login', array( __CLASS__, 'on_login' ), 10, 2 );" ) && false !== strpos( $i, "apply_filters( 'topersia_user_core_inactive_months', 24 )" )
+		&& false !== strpos( $i, "add_option( self::SINCE, \$v, '', 'no' );" ) && false !== strpos( $i, "'manage_options', 'edit_posts', 'edit_pages', 'upload_files'" )
+		&& false !== strpos( $i, 'const BATCH      = 200;' ) && false !== strpos( $i, "'daily', self::HOOK" ) && false !== strpos( $i, "delete_user_meta( \$id, self::FLAG );" )
+		&& false !== strpos( $i, "do_action( 'topersia_pagecache_purge'" ) && false !== strpos( $i, "array( 'count' => \$total )" ) && false === strpos( $i, 'wp_delete_user' );
+};
+t( 'غیرفعال‌سازی: wp_login (هر دو مسیر ورود)، ۲۴ ماه با صافی، مبنا بی autoload، دسته ۲۰۰، روزانه، نقش‌های ویرایشی هرگز، ورود فوراً فعال، کش با topersia_pagecache_purge، لاگ فقط شمار، هرگز حذف — جهش: حذف حساب یا حذف استثنا می‌افتد',
+	$in_ok( $in_src )
+	&& ! $in_ok( str_replace( "'manage_options', 'edit_posts', 'edit_pages', 'upload_files'", "'manage_options'", $in_src ) )
+	&& ! $in_ok( $in_src . "\nwp_delete_user( 1 );" )
+	&& ! $in_ok( str_replace( "'wp_login'", "'wp_login_x'", $in_src ) ) );
+t( 'غیرفعال‌سازی: افزونه کرون را غیرفعال می‌کند و اثر عمومی (نام خنثی، آواتار خنثی، ۴۰۴ بایگانی نویسنده) پیوسته است',
+	false !== strpos( $db_src, "wp_clear_scheduled_hook('topersia_user_core_inactivity');" ) && false !== strpos( $in_src, "add_filter( 'jet-reviews/user-manager/raw-user-data'" ) && false !== strpos( $in_src, '$wp_query->set_404();' ) && false !== strpos( $av_src, 'ToPersia_Inactivity::is_inactive( $uid )' ) );
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );
 exit( $fail ? 1 : 0 );

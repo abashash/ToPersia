@@ -87,6 +87,7 @@ final class ToPersia_DB {
      */
     public static function deactivate(): void {
         wp_clear_scheduled_hook('topersia_user_core_prune');
+        wp_clear_scheduled_hook('topersia_user_core_inactivity');
     }
 
     /**
@@ -143,8 +144,9 @@ final class ToPersia_DB {
     /**
      * هرس رکوردهای منقضی.
      *
-     * بدون این، جدول برای همیشه رشد می‌کند. رکورد تأییدشده هفت روز برای
-     * حسابرسی می‌ماند، رکورد تأییدنشده یک روز.
+     * بدون این، جدول برای همیشه رشد می‌کند. هر دو رکورد (تأییدشده و تأییدنشده) حداکثر ۲۴ ساعت می‌مانند
+     * (P5-D376؛ پیش‌تر تأییدشده ۷ روز). هیچ محدودیت نرخی پنجره‌ای بیش از یک ساعت ندارد
+     * و از این جدول نمی‌خواند — ترنزینت است.
      */
     public static function prune(): void {
         global $wpdb;
@@ -157,7 +159,7 @@ final class ToPersia_DB {
 
         $wpdb->query($wpdb->prepare(
             'DELETE FROM ' . $table . ' WHERE verified = 1 AND created_at < %s',
-            gmdate('Y-m-d H:i:s', time() - 7 * DAY_IN_SECONDS)
+            gmdate('Y-m-d H:i:s', time() - DAY_IN_SECONDS)
         ));
 
         /* ردیف منقضی: هر ردیفی که مهلتش یک ساعت پیش تمام شده، تأییدشده یا نه — P5-D375 */

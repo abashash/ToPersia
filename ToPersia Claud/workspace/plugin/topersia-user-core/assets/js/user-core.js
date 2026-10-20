@@ -28,6 +28,12 @@
           .then(function(r){return r.json().catch(function(){throw new Error('HTTP '+r.status);});});
       });
     }
+    function upload(action,file){
+      return getNonce().then(function(nonce){
+        var fd=new FormData();fd.append('action',action);fd.append('nonce',nonce||'');if(file)fd.append('avatar',file);
+        return fetch(cfg.ajaxUrl||'',{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){return r.json().catch(function(){throw new Error('HTTP '+r.status);});});
+      });
+    }
     /* «هستۀ نمایش» و هر افزونۀ دیگر از همین در استفاده می‌کنند؛ نانس و
        نشانی یک‌جا می‌مانند.  ۱٫۱۰٫۰ */
     cfg.call=ajax;
@@ -152,6 +158,14 @@
     }
 
     var logout=document.getElementById('tp-logout');if(logout){logout.addEventListener('click',function(){logout.disabled=true;ajax('topersia_logout',{}).then(function(r){if(r.success)window.location.href=r.data.redirect;}).catch(function(){logout.disabled=false;});});}
+    /* عکس نمایه — P5-D377 */
+    (function(){var card=document.querySelector('[data-tp-avatar-card]');if(!card)return;var f=document.getElementById('tp-avatar-file'),pick=document.getElementById('tp-avatar-choose'),rm=document.getElementById('tp-avatar-remove');
+      function show(u){[].forEach.call(document.querySelectorAll('[data-tp-avatar-img]'),function(i){i.src=u;});}
+      function done(r){setMessage('tp-avatar-message',(r.data&&r.data.message)||'',!!r.success);if(r.success&&r.data&&r.data.url)show(r.data.url);}
+      pick.addEventListener('click',function(){f.click();});
+      f.addEventListener('change',function(){var file=f.files&&f.files[0];if(!file)return;pick.disabled=true;upload('topersia_avatar_upload',file).then(done).catch(function(){setMessage('tp-avatar-message','Error',false);}).finally(function(){pick.disabled=false;f.value='';});});
+      rm.addEventListener('click',function(){rm.disabled=true;ajax('topersia_avatar_delete',{}).then(done).catch(function(){setMessage('tp-avatar-message','Error',false);}).finally(function(){rm.disabled=false;});});
+    })();
     var profile=document.getElementById('tp-profile-form');if(profile){profile.addEventListener('submit',function(e){e.preventDefault();var btn=profile.querySelector('button[type="submit"]');if(btn)btn.disabled=true;var d={};new FormData(profile).forEach(function(v,k){d[k]=v;});ajax('topersia_save_profile',d).then(function(r){setMessage('tp-profile-message',(r.data&&r.data.message)||'',!!r.success);if(r.success&&d.language){document.documentElement.setAttribute('data-tp-user-lang',d.language);}}).catch(function(){setMessage('tp-profile-message','Error',false);}).finally(function(){if(btn)btn.disabled=false;});});}
     /* تمام‌صفحه — سه پله، چون position:fixed اگر یکی از نیاکان
        transform یا filter یا contain داشته باشد، به آن نیا قفل می‌شود

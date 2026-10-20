@@ -43,7 +43,7 @@ final class ToPersia_Data_Requests {
 	private const META = array(
 		'_topersia_mobile', '_topersia_country', '_topersia_language', '_topersia_travel_style', '_topersia_display_prefs',
 		'_topersia_trips_count', '_topersia_saved_entities', '_topersia_saved_count', '_topersia_saved_wpml_normalized',
-		'_topersia_followed', '_topersia_ai_daily',
+		'_topersia_followed', '_topersia_ai_daily', '_topersia_avatar', '_topersia_last_login', '_topersia_inactive',
 	);
 
 	public static function instance(): self {
@@ -148,6 +148,20 @@ final class ToPersia_Data_Requests {
 
 		if ( ! ( class_exists( 'ToPersia_Privacy' ) && ToPersia_Privacy::synthetic_email( (string) $user->user_email ) ) ) {
 			$profile[] = $row( 'email', $user->user_email );
+		}
+
+		if ( class_exists( 'ToPersia_Avatar' ) && ToPersia_Avatar::record( $id ) ) {
+			$profile[] = $row( 'avatar', ToPersia_Avatar::photo_url( $id, 256 ) );
+		}
+
+		$ll = (int) get_user_meta( $id, '_topersia_last_login', true );
+
+		if ( $ll > 0 ) {
+			$profile[] = $row( 'last_login', gmdate( 'Y-m-d H:i:s', $ll ) . ' UTC' );
+		}
+
+		if ( '1' === (string) get_user_meta( $id, '_topersia_inactive', true ) ) {
+			$profile[] = $row( 'inactive', 'yes' );
 		}
 
 		$items[] = array( 'group_id' => 'topersia-profile', 'group_label' => 'ToPersia — نمایه', 'item_id' => 'user-' . $id, 'data' => $profile );
@@ -298,6 +312,11 @@ final class ToPersia_Data_Requests {
 
 		/* نظرها: ناشناس */
 		self::anonymize_reviews( $id );
+
+		/* فایل آواتار، پیش از پاک‌شدن متای آن */
+		if ( class_exists( 'ToPersia_Avatar' ) ) {
+			ToPersia_Avatar::delete_files_for( $id );
+		}
 
 		/* متاها: فهرست شناخته‌شده + هر متای `_topersia_…` دیگر */
 		foreach ( self::META as $key ) {

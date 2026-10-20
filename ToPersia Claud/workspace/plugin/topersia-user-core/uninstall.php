@@ -57,6 +57,7 @@ $tp_options = array(
 	'topersia_user_core_pii_migration',   /* ۱٫۱۱٫۰ */
 	'topersia_user_core_pii_cursor',
 	'topersia_user_core_otp_hashed',   /* ۱٫۱۲٫۰ */
+	'topersia_uc_inactivity_since',    /* ۱٫۱۳٫۰ */
 );
 
 foreach ( $tp_options as $tp_option ) {
@@ -86,6 +87,9 @@ $tp_user_meta = array(
 	'_topersia_saved_count',
 	'_topersia_saved_wpml_normalized',
 	'_topersia_followed',
+	'_topersia_avatar',      /* ۱٫۱۳٫۰ */
+	'_topersia_last_login',
+	'_topersia_inactive',
 );
 
 foreach ( $tp_user_meta as $tp_meta_key ) {
@@ -123,6 +127,20 @@ delete_transient( 'tp_otp_global' );
    غیرفعال‌شده هم ممکن است، و در آن مسیر قلاب غیرفعال‌سازی اجرا
    نمی‌شود. پس دوباره پاک می‌شود — این عمل idempotent است. */
 wp_clear_scheduled_hook( 'topersia_user_core_prune' );
+wp_clear_scheduled_hook( 'topersia_user_core_inactivity' );
+
+/* ── ۵ب) فایل‌های آواتار (۱٫۱۳٫۰) ── پوشۀ ما در uploads، با نام تصادفی. */
+$tp_up  = wp_upload_dir( null, false );
+$tp_dir = trailingslashit( (string) $tp_up['basedir'] ) . 'topersia-avatars/';
+
+if ( is_dir( $tp_dir ) ) {
+	foreach ( (array) glob( $tp_dir . '*' ) as $tp_f ) {
+		if ( is_file( $tp_f ) ) {
+			wp_delete_file( $tp_f );
+		}
+	}
+	@rmdir( $tp_dir ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+}
 
 /* ── ۶) کش ──────────────────────────────────────────────────────
    وگرنه تا پایان درخواست، گزینه‌های پاک‌شده از کش خوانده می‌شوند. */
