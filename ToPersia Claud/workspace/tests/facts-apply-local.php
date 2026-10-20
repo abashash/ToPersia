@@ -15,7 +15,7 @@ function t( $label, $ok, $note = '' ) { if ( $ok ) { $GLOBALS['fa_t'][0]++; echo
 
 echo "apply · rollback — P5-D394\n";
 $GLOBALS['tpft_created'] = array(); $rels = array();
-$tpft_files = function () { return array_merge( (array) glob( tpf_uploads() . 'facts-logs/*.json' ), (array) glob( tpf_uploads() . 'facts-backup/*.sql' ) ); };
+$tpft_files = function () { return array_merge( (array) glob( tpf_private( 'facts-logs' ) . '*.json' ), (array) glob( tpf_private( 'facts-backup' ) . '*.sql' ) ); };
 $tpft_before = $tpft_files();   /* هر لاگ و پشتیبانی که آزمون (و جهش‌ها) می‌سازد در پایان پاک می‌شود */   /* eval-file در دامنهٔ تابع اجرا می‌شود — global ساده به متغیر دیگری می‌رسید و پاک‌سازی هیچ نمی‌کرد */
 function mk( $type, $uid, $meta ) {
 	$id = wp_insert_post( array( 'post_type' => $type, 'post_status' => 'publish', 'post_title' => 'tp-test facts ' . $uid ) );
@@ -121,6 +121,7 @@ try {
 	if ( function_exists( 'topersia_geo_index_rebuild' ) ) { topersia_geo_index_rebuild(); }
 }
 t( 'پاک‌سازی: هیچ پست آزمون (نشان facts) نماند', 0 === (int) $GLOBALS['wpdb']->get_var( "SELECT COUNT(*) FROM {$GLOBALS['wpdb']->postmeta} WHERE meta_key='_tp_test_marker' AND meta_value='facts'" ) );
+t( 'پشتیبان و لاگ بیرون از ریشهٔ وب (نه زیر پوشهٔ والد ABSPATH)، با .htaccess ردِ همه', 0 !== strpos( wp_normalize_path( tpf_private( 'facts-backup' ) ), wp_normalize_path( dirname( untrailingslashit( ABSPATH ) ) ) . '/' ) && is_file( tpf_private( 'facts-backup' ) . '.htaccess' ) );
 t( 'پاک‌سازی: هیچ لاگ یا پشتیبان آزمون نماند', array() === array_diff( $tpft_files(), $tpft_before ) );
 $g = $GLOBALS['fa_t'];
 echo "\n  گذشته: {$g[0]}   افتاده: {$g[1]}\n";

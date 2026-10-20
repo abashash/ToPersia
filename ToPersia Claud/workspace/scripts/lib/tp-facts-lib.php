@@ -13,9 +13,24 @@
 if ( ! defined( 'TPF_LIB' ) ) {
 	define( 'TPF_LIB', 1 );
 
-	function tpf_uploads() {
-		$up = wp_get_upload_dir();
-		return trailingslashit( $up['basedir'] ) . 'tiles/';
+	/**
+	 * جای پشتیبان و لاگ — بیرون از ریشهٔ وب (پشتیبان کل postmeta است).
+	 * ثابت TOPERSIA_PRIVATE_DIR برنده؛ وگرنه کنار ریشهٔ وب: ABSPATH = …/public_html/geo/ ← …/tp-private/ (محلی C:/wamp64/www/tp-private/).
+	 * هر زیرپوشه .htaccess و web.config «ردِ همه» دارد، برای روزی که پوشه زیر ریشهٔ وبِ دیگری بیفتد؛ پرونده‌ها 0600.
+	 */
+	function tpf_private( $sub ) {
+		$base = defined( 'TOPERSIA_PRIVATE_DIR' ) ? (string) TOPERSIA_PRIVATE_DIR : dirname( untrailingslashit( ABSPATH ), 2 ) . '/tp-private';
+		$dir  = trailingslashit( $base ) . $sub . '/';
+		wp_mkdir_p( $dir );
+		if ( ! is_file( $dir . '.htaccess' ) ) { file_put_contents( $dir . '.htaccess', "<IfModule mod_authz_core.c>\nRequire all denied\n</IfModule>\n<IfModule !mod_authz_core.c>\nDeny from all\n</IfModule>\n" ); }
+		if ( ! is_file( $dir . 'web.config' ) ) { file_put_contents( $dir . 'web.config', '<?xml version="1.0"?><configuration><system.webServer><authorization><deny users="*" /></authorization></system.webServer></configuration>' ); }
+		if ( ! is_file( $dir . 'index.php' ) ) { file_put_contents( $dir . 'index.php', "<?php\n// Silence is golden.\n" ); }
+		return $dir;
+	}
+
+	/** نام پرونده: زمان + ۳۲ هگز تصادفی (حدس‌ناپذیر). */
+	function tpf_fname( $prefix, $ext ) {
+		return $prefix . gmdate( 'Ymd-His' ) . '-' . bin2hex( random_bytes( 16 ) ) . '.' . $ext;
 	}
 
 	/** CSV ← آرایهٔ ردیف‌ها با کلید ستون (BOM برداشته). */
@@ -158,11 +173,9 @@ if ( ! defined( 'TPF_LIB' ) ) {
 	/** پشتیبان SQL: کل postmeta و کل جدول رابطهٔ جت‌انجین — بیرون از git. */
 	function tpf_backup() {
 		global $wpdb;
-		$dir = tpf_uploads() . 'facts-backup/';
-		wp_mkdir_p( $dir );
-		file_put_contents( $dir . 'index.php', "<?php\n// Silence is golden.\n" );
-		$f  = $dir . 'facts-backup-' . gmdate( 'Ymd-His' ) . '-' . substr( md5( uniqid( '', true ) ), 0, 6 ) . '.sql';
+		$f  = tpf_private( 'facts-backup' ) . tpf_fname( 'facts-backup-', 'sql' );
 		$fh = fopen( $f, 'w' );
+		@chmod( $f, 0600 );   // phpcs:ignore WordPress.PHP.NoSilencedErrors -- ویندوز chmod را نادیده می‌گیرد
 		fwrite( $fh, "-- ToPersia facts backup (P5-D394) " . gmdate( 'c' ) . "\n-- بازیابی: wp db query < این پرونده — یا scripts/tp-facts.php rollback <log> (دقیق‌تر)\nSET NAMES utf8mb4;\n" );
 		foreach ( array( $wpdb->postmeta => 'meta_id', $wpdb->prefix . 'jet_rel_default' => '_ID' ) as $table => $pk ) {
 			fwrite( $fh, "\n-- {$table}\n" );
@@ -225,10 +238,9 @@ if ( ! defined( 'TPF_LIB' ) ) {
 				$res['log'][] = array( 'kind' => 'source', 'post' => $pid, 'existed' => $x[0], 'old' => $x[1], 'added' => $added );
 			}
 			tpf_after( array_keys( $res['posts'] ), $res['log'] );
-			$lf = tpf_uploads() . 'facts-logs/';
-			wp_mkdir_p( $lf );
-			$res['logfile'] = $lf . 'facts-apply-' . gmdate( 'Ymd-His' ) . '-' . substr( md5( uniqid( '', true ) ), 0, 6 ) . '.json';   /* یکتا — اجرای هم‌ثانیه لاگ پیشین را بازنویسی نکند */
+			$res['logfile'] = tpf_private( 'facts-logs' ) . tpf_fname( 'facts-apply-', 'json' );   /* یکتا و حدس‌ناپذیر */
 			file_put_contents( $res['logfile'], wp_json_encode( array( 'when' => gmdate( 'c' ), 'backup' => $res['backup'], 'writes' => $res['log'] ), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) );
+			@chmod( $res['logfile'], 0600 );   // phpcs:ignore WordPress.PHP.NoSilencedErrors
 			if ( function_exists( 'topersia_log' ) ) { topersia_log( 'عددهای پایهٔ ویکی‌داده نوشته شد (P5-D394)', 'notice', 'import', array( 'writes' => count( $res['log'] ), 'posts' => count( $res['posts'] ), 'log' => basename( $res['logfile'] ) ) ); }
 		}
 		return $res;

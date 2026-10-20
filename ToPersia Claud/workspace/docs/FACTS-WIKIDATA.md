@@ -72,7 +72,7 @@
 
 ## گام ۳ — `apply` (پیاده و اجرا شد — دستهٔ ۲۲ب · P5-D394، ۲۰ اکتبر)
 
-**اجرا:** ۳۸۳ ردیف تأییدشده نوشته شد — `external_reference_uri` ۲۷ جایگزینی + ۱۰۶ پرکردن · `geo_coordinates` ۸۸ · `population` ۷۷ · `elevation_m` ۷۸ · `area_km2` ۱ پرکردن + ۲ جایگزینی (تهران، یزد) · رابطهٔ ۹۶ ‏۴؛ و ۳۱۶ ردیف `source_references`. اجرای دوباره: همه `skip-same` (idempotent). پشتیبان `uploads/tiles/facts-backup/facts-backup-20261020-103202-cfaa07.sql` · لاگ `uploads/tiles/facts-logs/facts-apply-20261020-103207-86670a.json` · برگشت `wp eval-file scripts/tp-facts.php rollback <لاگ>` (مقدار و رابطه به پیش؛ ردیف منبع بازنشسته، نه حذف — محافظ ردیف هسته). وارسی: ۳۱ از ۳۱ QID استان «استان ایران» در ویکی‌داده؛ `sameAs` پنج استان نمونه درست. پوشش اندازه‌گیری‌شده پس از نوشتن عیناً همان ستون «پس» جدول بالاست.
+**اجرا:** ۳۸۳ ردیف تأییدشده نوشته شد — `external_reference_uri` ۲۷ جایگزینی + ۱۰۶ پرکردن · `geo_coordinates` ۸۸ · `population` ۷۷ · `elevation_m` ۷۸ · `area_km2` ۱ پرکردن + ۲ جایگزینی (تهران، یزد) · رابطهٔ ۹۶ ‏۴؛ و ۳۱۶ ردیف `source_references`. اجرای دوباره: همه `skip-same` (idempotent). پشتیبان `tp-private/facts-backup/facts-backup-20261020-103202-897247b5….sql` · لاگ `tp-private/facts-logs/facts-apply-20261020-103207-29bfe3b6….json` (کنار ریشهٔ وب، نه زیر آن؛ ثابت `TOPERSIA_PRIVATE_DIR` برنده؛ .htaccess و web.config ردِ همه؛ نام ۳۲ هگز تصادفی — یافتهٔ بازبینی امنیتی پس از commit `562ab7b3`، که آن‌ها را زیر uploads گذاشته بود) · برگشت `wp eval-file scripts/tp-facts.php rollback <لاگ>` (مقدار و رابطه به پیش؛ ردیف منبع بازنشسته، نه حذف — محافظ ردیف هسته). وارسی: ۳۱ از ۳۱ QID استان «استان ایران» در ویکی‌داده؛ `sameAs` پنج استان نمونه درست. پوشش اندازه‌گیری‌شده پس از نوشتن عیناً همان ستون «پس» جدول بالاست.
 
 طرح اولیه (برای سابقه):
 
