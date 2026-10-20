@@ -3,7 +3,10 @@
  * نشانگرهای نقشه — REST `topersia/v1/map-points?context={post_id}`.  P5-D334 · P5-D346
  *
  * از نمایۀ مشتق مکانی هسته (`topersia_geo` — استان و شهر از زنجیرۀ R01) می‌خواند، نه از متا و نه از رابطۀ زنده:
- *   زمینۀ استان ← شهرها · جاذبه‌ها · طبیعت      زمینۀ شهر ← جاذبه‌ها · محله‌ها · روستاها
+ *   P5-D387 — فقط یک سطح پایین‌تر:
+ *     استان ← شهرها      شهر ← جاذبه‌ها و طبیعتِ درون شهر (نه آنچه زیر روستای همان شهر است)
+ *     محله و روستا ← جاذبه‌های خودش (والد R01 نزدیکِ جاذبه همان محله یا روستاست)
+ *   (پیش از آن: استان ← شهرها · جاذبه‌ها · طبیعت؛ شهر ← جاذبه‌ها · محله‌ها · روستاها — P5-D334)
  * فقط منتشرشده‌ها، نام و نشانی و برچسب نوع به زبان صفحه (شناسۀ نسخۀ همان زبان)، با کش مرکزی (کلید: زمینه، زبان، گواه تازگی
  * نمایه؛ ابطال خودکار با هر نوشتن در نمایه). خروجی GeoJSON برای خوشه‌بندی داخلی MapLibre — کتابخانۀ تازه‌ای نیست.
  * مسیریابی، نشان و «نزدیک من» در این دسته ساخته نمی‌شوند.
@@ -37,9 +40,12 @@ if ( ! function_exists( 'topersia_g_map_families' ) ) {
 if ( ! function_exists( 'topersia_g_map_context_families' ) ) {
 	function topersia_g_map_context_families( $type ) {
 
+		/* P5-D387: یک سطح پایین‌تر. `own` = فقط آنچه والد R01 نزدیکش خودِ زمینه است؛ `inside` = بیرون‌گذاشتن آنچه زیر روستاست */
 		$map = array(
-			'tp_province' => array( 'scope' => 'province', 'families' => array( 'city', 'attraction', 'nature' ) ),
-			'tp_city'     => array( 'scope' => 'city', 'families' => array( 'attraction', 'district', 'village' ) ),
+			'tp_province' => array( 'scope' => 'province', 'families' => array( 'city' ) ),
+			'tp_city'     => array( 'scope' => 'city', 'families' => array( 'attraction', 'nature' ), 'inside' => true ),
+			'tp_district' => array( 'scope' => 'up', 'families' => array( 'attraction' ), 'own' => true ),
+			'tp_village'  => array( 'scope' => 'up', 'families' => array( 'attraction' ), 'own' => true ),
 		);
 
 		return isset( $map[ $type ] ) ? $map[ $type ] : null;
@@ -79,9 +85,28 @@ if ( ! function_exists( 'topersia_g_map_points_build' ) ) {
 		$features = array();
 		$cap      = 400;
 
+		/* محله و روستا ستون خودشان را در نمایه ندارند: نامزدها از شهرِ بالادستشان (وگرنه استان)، سپس صافی والد نزدیک */
+		$scope = $def['scope'];
+		$at    = $base;
+
+		if ( 'up' === $scope ) {
+			$scope = '';
+			foreach ( array_reverse( topersia_g_place_chain( $base ) ) as $up ) {
+				$ut = (string) get_post_type( $up );
+				if ( 'tp_city' === $ut || 'tp_province' === $ut ) {
+					$scope = 'tp_city' === $ut ? 'city' : 'province';
+					$at    = function_exists( 'topersia_g_default_id' ) ? (int) topersia_g_default_id( $up ) : (int) $up;
+					break;
+				}
+			}
+			if ( '' === $scope ) {
+				return array( 'type' => 'FeatureCollection', 'features' => array() );
+			}
+		}
+
 		foreach ( $def['families'] as $fam ) {
 
-			$rows = topersia_geo_index_context( $def['scope'], $base, isset( $fams[ $fam ] ) ? $fams[ $fam ] : array(), $cap );
+			$rows = topersia_geo_index_context( $scope, $at, isset( $fams[ $fam ] ) ? $fams[ $fam ] : array(), ! empty( $def['own'] ) || ! empty( $def['inside'] ) ? 2000 : $cap );
 
 			foreach ( $rows as $row ) {
 
@@ -93,6 +118,21 @@ if ( ! function_exists( 'topersia_g_map_points_build' ) ) {
 
 				if ( ! $live ) {
 					continue;
+				}
+
+				/* والد R01 نزدیک (جزئی‌ترین) — P5-D387 */
+				if ( ! empty( $def['own'] ) || ! empty( $def['inside'] ) ) {
+					$near = topersia_g_place_parents( (int) $row['post_id'], 0, true );
+					$near = $near ? reset( $near ) : null;
+					$nid  = $near ? ( function_exists( 'topersia_g_default_id' ) ? (int) topersia_g_default_id( $near['id'] ) : (int) $near['id'] ) : 0;
+
+					if ( ! empty( $def['own'] ) && $nid !== (int) $base ) {
+						continue;
+					}
+
+					if ( ! empty( $def['inside'] ) && $nid && 'tp_village' === get_post_type( $nid ) ) {
+						continue;
+					}
 				}
 
 				$view = (int) $live[0];

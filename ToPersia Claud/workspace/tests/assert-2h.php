@@ -58,16 +58,19 @@ tp441_mut( 'زنجیرهٔ R01 نمایه را افزونهٔ نمایش می‌
 	array( $rr2h, $idx2h ), array( str_replace( "'topersia_geo_index_chain'", "'x_chain'", $rr2h ), $idx2h ) );
 
 /* ── REST و خانواده‌ها ──────────────────────────────────────────────── */
-tp441_mut( 'map-points: زمینهٔ استان ← شهرها · جاذبه‌ها · طبیعت؛ زمینهٔ شهر ← جاذبه‌ها · محله‌ها · روستاها (از ستون province_id یا city_id نمایه)؛ هر نوع دیگر ← بی نشانگر؛ فقط منتشرشده با شناسهٔ نسخهٔ زبان صفحه؛ کش مرکزی با کلید زمینه · زبان · گواه نمایه؛ حداکثر ۴۰۰',
+/* P5-D387 (جایگزین بخش زمینهٔ P5-D334): فقط یک سطح پایین‌تر */
+tp441_mut( 'map-points: یک سطح پایین‌تر — استان ← شهرها؛ شهر ← جاذبه‌ها و طبیعتِ درون شهر (نه زیر روستا)؛ محله و روستا ← جاذبه‌های خودش (والد R01 نزدیک)؛ از نمایه، فقط منتشرشده، کش با گواه نمایه  P5-D387',
 	function ( $s ) {
-		return 1 === preg_match( "/'tp_province' => array\( 'scope' => 'province', 'families' => array\( 'city', 'attraction', 'nature' \) \)/", $s )
-			&& 1 === preg_match( "/'tp_city'\s+=> array\( 'scope' => 'city', 'families' => array\( 'attraction', 'district', 'village' \) \)/", $s )
+		return 1 === preg_match( "/'tp_province' => array\( 'scope' => 'province', 'families' => array\( 'city' \) \)/", $s )
+			&& 1 === preg_match( "/'tp_city'\s+=> array\( 'scope' => 'city', 'families' => array\( 'attraction', 'nature' \), 'inside' => true \)/", $s )
+			&& 1 === preg_match( "/'tp_district' => array\( 'scope' => 'up', 'families' => array\( 'attraction' \), 'own' => true \)/", $s )
+			&& 1 === preg_match( "/'tp_village'\s+=> array\( 'scope' => 'up', 'families' => array\( 'attraction' \), 'own' => true \)/", $s )
+			&& false !== strpos( $s, "if ( ! empty( \$def['own'] ) && \$nid !== (int) \$base ) {" ) && false !== strpos( $s, "'tp_village' === get_post_type( \$nid )" )
 			&& false !== strpos( $s, "topersia_g_published( array( (int) \$row['post_id'] ) )" ) && false !== strpos( $s, "array( \$ctx, topersia_g_page_lang(), topersia_geo_index_stamp() )" )
 			&& false !== strpos( $s, "'topersia/v1', '/map-points'" ) && false !== strpos( $s, '$cap      = 400;' )
 			&& false !== strpos( $s, "'publish' !== get_post_status( \$ctx )" ) && false === strpos( $s, 'get_post_meta' ) && false === strpos( $s, 'update_post_meta' );
 	},
-	$mp2h, str_replace( "'tp_city'     => array( 'scope' => 'city', 'families' => array( 'attraction', 'district', 'village' ) )", "'tp_city'     => array( 'scope' => 'city', 'families' => array( 'attraction', 'district', 'village', 'city' ) )", $mp2h ) );
-
+	$mp2h, str_replace( "'tp_province' => array( 'scope' => 'province', 'families' => array( 'city' ) )", "'tp_province' => array( 'scope' => 'province', 'families' => array( 'city', 'attraction', 'nature' ) )", $mp2h ) );
 tp441_mut( 'پیکربندی نقشه فقط برای استان و شهر نشانی نشانگر می‌گیرد (`points`)، از نمایه؛ مسیریابی و نشان و /nearby ساخته نشده',
 	function ( $x ) {
 		return false !== strpos( $x[0], "\$cfg['points'] = esc_url_raw( add_query_arg( 'context', absint( \$post_id ), rest_url( 'topersia/v1/map-points' ) ) );" )
