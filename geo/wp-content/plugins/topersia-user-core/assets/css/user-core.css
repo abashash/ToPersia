@@ -221,6 +221,14 @@ html:root .tp-uc-login__box h2{margin:0 0 6px;padding-inline-end:40px;font-size:
 html:root .tp-uc-login__reason{margin:0 0 4px;font-weight:700;color:var(--tp-user-active)}
 html:root .tp-uc-login__reason:empty{display:none}
 html:root .tp-uc-login .tp-auth-card{max-inline-size:none;margin:12px 0 0}
+/* ۱٫۱۴٫۰ · LOGIN.md §۶ — زبانه‌های «موبایل ایران | ایمیل»؛ هدف لمسی ≥ ۴۴px؛ انتخاب با قاب و زمینه، نه فقط رنگ متن (P5-D188) */
+html:root .tp-auth-tabs{display:flex;gap:4px;padding:4px;margin:4px 0 12px;border:1px solid var(--tp-user-border);border-radius:14px;background:var(--tp-user-surface-2)}
+html:root .tp-auth-tab{flex:1 1 0;min-block-size:44px;padding:8px 10px;border:0;border-radius:10px;background:transparent;color:var(--tp-user-text);font:inherit;font-weight:700;cursor:pointer}
+html:root .tp-auth-tab[aria-selected="true"]{background:var(--tp-user-bg);color:var(--tp-user-text-strong);box-shadow:inset 0 0 0 2px var(--tp-user-primary)}
+html:root .tp-auth-tab:focus-visible{outline:3px solid var(--tp-user-hover);outline-offset:2px}
+html:root .tp-auth-panel[hidden]{display:none}
+html:root .tp-identity-row{border-block-start:1px solid var(--tp-user-divider);padding-block-start:14px;margin-block-start:14px}
+html:root .tp-identity-row .tp-btn{margin-block-end:10px}
 html.tp-uc-login-open,html.tp-uc-login-open body{overflow:hidden}
 .tp-follow-list{display:flex;flex-direction:column;gap:14px}
 .tp-follow-card{border:1px solid var(--tp-user-border);background:var(--tp-user-surface);border-radius:18px;padding:16px 18px}

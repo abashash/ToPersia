@@ -101,26 +101,75 @@
     function bindAuth(card){
       if(card.getAttribute('data-tp-bound'))return;card.setAttribute('data-tp-bound','1');
       var mobile=card.querySelector('#tp-mobile'),send=card.querySelector('#tp-send-otp'),box=card.querySelector('#tp-otp-box'),code=card.querySelector('#tp-otp'),verify=card.querySelector('#tp-verify-otp'),msg=card.querySelector('#tp-auth-message');
-      var token='';
+      var email=card.querySelector('#tp-email'),sendMail=card.querySelector('#tp-send-email');
+      var tabs=[].slice.call(card.querySelectorAll('[data-tp-method][role="tab"]'));
+      var token='',method=card.getAttribute('data-tp-default-method')||'mobile';
       function say(text,ok){if(!msg)return;msg.textContent=text||'';msg.className='tp-message'+(ok?' success':' error');}
       function fail(r){say((r&&r.data&&r.data.message)||T.networkError||'Error',false);}
+      /* ۱٫۱۴٫۰ · LOGIN.md §۶ — دو کانال در زبانه؛ پیش‌فرض از زبان صفحه، ترجیح کاربر در localStorage */
+      function setMethod(m,focus,save){
+        if(m!=='mobile'&&m!=='email')return;
+        method=m;token='';
+        tabs.forEach(function(t){var on=t.getAttribute('data-tp-method')===m;t.setAttribute('aria-selected',on?'true':'false');t.setAttribute('tabindex',on?'0':'-1');});
+        [].forEach.call(card.querySelectorAll('[data-tp-method-panel]'),function(p){p.hidden=p.getAttribute('data-tp-method-panel')!==m;});
+        if(box)box.classList.add('tp-hidden');if(code)code.value='';say('',true);
+        if(save){try{window.localStorage.setItem('tp-login-method',m);}catch(_e){}}
+        if(focus){var f=m==='email'?email:mobile;if(f)f.focus();}
+      }
+      try{var pref=window.localStorage.getItem('tp-login-method');if(pref==='mobile'||pref==='email')setMethod(pref,false,false);}catch(_e){}
+      tabs.forEach(function(t){
+        t.addEventListener('click',function(){setMethod(t.getAttribute('data-tp-method'),true,true);});
+        t.addEventListener('keydown',function(e){
+          /* جهت از صفحه (P5-D243): در راست‌به‌چپ «بعدی» = فلش چپ */
+          var rtl=window.getComputedStyle(card).direction==='rtl',i=tabs.indexOf(t),n=i;
+          if(e.key==='ArrowRight')n=rtl?i-1:i+1;if(e.key==='ArrowLeft')n=rtl?i+1:i-1;if(e.key==='Home')n=0;if(e.key==='End')n=tabs.length-1;
+          if(n===i)return;e.preventDefault();n=(n+tabs.length)%tabs.length;tabs[n].focus();setMethod(tabs[n].getAttribute('data-tp-method'),false,true);
+        });
+      });
+      function sent(r){
+        if(!r||!r.success){fail(r);return;}
+        token=r.data.token||'';if(box)box.classList.remove('tp-hidden');say(r.data.message||'',true);if(code)code.focus();
+      }
       if(send)send.addEventListener('click',function(){
         send.disabled=true;say(T.otpSending||'',true);
-        ajax('topersia_send_otp',{mobile:mobile?mobile.value:''}).then(function(r){
-          if(!r||!r.success){fail(r);return;}
-          token=r.data.token||'';if(box)box.classList.remove('tp-hidden');say(r.data.message||'',true);if(code)code.focus();
-        }).catch(function(){fail();}).finally(function(){send.disabled=false;});
+        ajax('topersia_send_otp',{mobile:mobile?mobile.value:''}).then(sent).catch(function(){fail();}).finally(function(){send.disabled=false;});
+      });
+      if(sendMail)sendMail.addEventListener('click',function(){
+        sendMail.disabled=true;say(T.otpSending||'',true);
+        ajax('topersia_email_code_send',{email:email?email.value:'',lang:cfg.lang||''}).then(sent).catch(function(){fail();}).finally(function(){sendMail.disabled=false;});
       });
       if(verify)verify.addEventListener('click',function(){
         verify.disabled=true;say(T.otpChecking||'',true);
         var back=card.getAttribute('data-tp-redirect')||'';
-        ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',mobile:mobile?mobile.value:'',redirect:back}).then(function(r){
+        var call=method==='email'
+          ?ajax('topersia_email_code_verify',{token:token,otp:code?code.value:'',email:email?email.value:'',redirect:back,lang:cfg.lang||''})
+          :ajax('topersia_verify_otp',{token:token,otp:code?code.value:'',mobile:mobile?mobile.value:'',redirect:back});
+        call.then(function(r){
           if(!r||!r.success){fail(r);verify.disabled=false;return;}
           window.location.href=(r.data&&r.data.redirect)||cfg.loginUrl||'/';
         }).catch(function(){fail();verify.disabled=false;});
       });
+      card.tpFocus=function(){var f=method==='email'?email:mobile;if(f)f.focus();};
     }
     document.querySelectorAll('[data-tp-auth]').forEach(bindAuth);
+
+    /* ══ پیوند شناسۀ دوم از پنل (ایمیل یا موبایل) — ۱٫۱۴٫۰ · LOGIN.md §۲-پ ══ */
+    [].forEach.call(document.querySelectorAll('[data-tp-ident]'),function(row){
+      var kind=row.getAttribute('data-tp-ident'),input=row.querySelector('[data-tp-ident-input]'),sendB=row.querySelector('[data-tp-ident-send]'),box=row.querySelector('[data-tp-ident-box]'),codeI=row.querySelector('[data-tp-ident-code]'),ok=row.querySelector('[data-tp-ident-verify]');
+      var token='';
+      function say(t,good){setMessage('tp-ident-message',t,good);}
+      function fail(r){say((r&&r.data&&r.data.message)||T.networkError||'Error',false);}
+      sendB.addEventListener('click',function(){
+        sendB.disabled=true;say(T.otpSending||'',true);
+        var call=kind==='email'?ajax('topersia_email_code_send',{email:input.value,purpose:'link',lang:cfg.lang||''}):ajax('topersia_send_otp',{mobile:input.value,purpose:'link'});
+        call.then(function(r){if(!r||!r.success){fail(r);return;}token=r.data.token||'';box.classList.remove('tp-hidden');say(r.data.message||'',true);codeI.focus();}).catch(function(){fail();}).finally(function(){sendB.disabled=false;});
+      });
+      ok.addEventListener('click',function(){
+        ok.disabled=true;say(T.otpChecking||'',true);
+        var call=kind==='email'?ajax('topersia_email_code_verify',{token:token,otp:codeI.value,email:input.value,lang:cfg.lang||''}):ajax('topersia_verify_otp',{token:token,otp:codeI.value,mobile:input.value});
+        call.then(function(r){if(!r||!r.success){fail(r);ok.disabled=false;return;}say((r.data&&r.data.message)||'',true);window.setTimeout(function(){window.location.reload();},900);}).catch(function(){fail();ok.disabled=false;});
+      });
+    });
 
     /* ══ پنجرۀ ورود/ثبت‌نام ═════════════════════════════════════════
        فقط برای مهمان چاپ می‌شود. «هستۀ نمایش» با رویداد
@@ -140,7 +189,7 @@
         last=document.activeElement;
         modal.hidden=false;
         document.documentElement.classList.add('tp-uc-login-open');
-        var f=modal.querySelector('#tp-mobile');if(f)f.focus();
+        if(card&&card.tpFocus)card.tpFocus();
       };
       var close=function(){
         modal.hidden=true;

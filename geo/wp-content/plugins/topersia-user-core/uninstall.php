@@ -90,6 +90,8 @@ $tp_user_meta = array(
 	'_topersia_avatar',      /* ۱٫۱۳٫۰ */
 	'_topersia_last_login',
 	'_topersia_inactive',
+	'_topersia_email_verified',   /* ۱٫۱۴٫۰ */
+	'_topersia_mobile_verified',
 );
 
 foreach ( $tp_user_meta as $tp_meta_key ) {
@@ -121,6 +123,17 @@ $wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 );
 
 delete_transient( 'tp_otp_global' );
+
+/* ۱٫۱۴٫۰ — کانال ایمیل (tp_ec_*) و سقف ارسال سایت (tp_mail_cap_*) */
+$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+	$wpdb->prepare(
+		"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s OR option_name LIKE %s",
+		$wpdb->esc_like( '_transient_tp_ec_' ) . '%',
+		$wpdb->esc_like( '_transient_timeout_tp_ec_' ) . '%',
+		$wpdb->esc_like( '_transient_tp_mail_cap_' ) . '%',
+		$wpdb->esc_like( '_transient_timeout_tp_mail_cap_' ) . '%'
+	)
+);
 
 /* ── ۵) کرون ────────────────────────────────────────────────────
    غیرفعال‌سازی این کار را انجام می‌دهد، ولی حذفِ یک افزونۀ از پیش

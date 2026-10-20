@@ -102,6 +102,11 @@ final class ToPersia_Privacy {
 		return (bool) preg_match( '/(?:^|\D)(?:\+98|0098|98|0)?9\d{9}(?:\D|$)/', (string) $compact );
 	}
 
+	/** آیا رشته نشانی ایمیل دارد؟ (هر جای رشته؛ «＠» تمام‌پهنا هم) — ۱٫۱۴٫۰ */
+	public static function looks_like_email( string $s ): bool {
+		return (bool) preg_match( '/[^\s@＠]+[@＠][^\s@＠]+\.[^\s@＠]{2,}/u', $s );
+	}
+
 	/** نام خنثیِ ساختۀ همین کلاس؟ (هر زبان، هر رقم) */
 	public static function is_neutral( string $s ): bool {
 		foreach ( array( 'fa', 'en', 'ar' ) as $lang ) {
@@ -152,7 +157,8 @@ final class ToPersia_Privacy {
 		$lang = '' !== $lang ? $lang : self::lang();
 		$name = trim( $name );
 
-		if ( '' === $name || self::looks_like_phone( $name ) || self::is_neutral( $name ) ) {
+		/* ۱٫۱۴٫۰ — ایمیل هم هرگز نام عمومی نیست (ورود ایمیلی، P5-D391 · تعمیم P5-D354) */
+		if ( '' === $name || self::looks_like_phone( $name ) || self::looks_like_email( $name ) || self::is_neutral( $name ) ) {
 			return $user_id > 0 ? self::neutral_name( $user_id, $lang ) : '';
 		}
 
