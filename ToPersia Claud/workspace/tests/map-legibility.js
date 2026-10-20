@@ -5,7 +5,7 @@
  *
  * برای هر سبک × حالت رنگ (light · evening · dark) × بزرگنمایی (۶ · ۹ · ۱۲) روی استان اصفهان (fa):
  *   متن   هر لایهٔ نماد دارای text-field: تضاد text-color با text-halo-color (هاله بی‌پهنا ← با زمینه) — هدف ≥ ۴٫۵:۱
- *   راه   هر لایهٔ خطی راه (نام لایه road/highway/transportation/roads): تضاد line-color با رنگ زمینه — هدف ≥ ۳:۱
+ *   راه   هر لایهٔ خطی جاده (نام لایه road/highway/transportation/roads؛ بی روکش، تونل، اسکله، باند فرودگاه و ریل — راه نیستند): تضاد line-color با زمینه — هدف ≥ ۳:۱
  * رنگ از getPaintProperty با ارزیاب کوچک (literal · rgb/hsl/hex · interpolate/step روی zoom · case/match ← نخستین شاخه).
  * --legible=1 پیش‌نمایش پیشنهادی را با `localStorage.tp-map-legible=1` روشن می‌کند (فقط اگر رندر آن را بشناسد).
  * --shots=DIR از هر ترکیب (و fa/ar، ۱۴۴۰ و ۳۹۰، استان و شهر اصفهان) عکس نقشه می‌گیرد.
@@ -62,7 +62,7 @@ const MEASURE = ( zz ) => {
 			const back = hw > 0 && hc ? over( hc, bg ) : bg;
 			text.push( { id: l.id, r: Math.round( ratio( over( tc, back ), back ) * 100 ) / 100, halo: hw } );
 		}
-		if ( 'line' === l.type && /road|highway|transportation|roads/.test( l.id ) && ! /casing|tunnel/.test( l.id ) ) {
+		if ( 'line' === l.type && /road|highway|transportation|roads/.test( l.id ) && ! /casing|tunnel|pier|runway|rail|hatching/.test( l.id ) ) {
 			const lc = parse( ev( m.getPaintProperty( l.id, 'line-color' ) ) );
 			if ( lc ) { road.push( { id: l.id, r: Math.round( ratio( over( lc, bg ), bg ) * 100 ) / 100, w: ev( m.getPaintProperty( l.id, 'line-width' ) ) } ); }
 		}
