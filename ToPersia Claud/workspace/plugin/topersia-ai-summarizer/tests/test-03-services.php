@@ -1,32 +1,24 @@
 <?php
 /**
- * Assistant registry and outbound URLs.
+ * Assistant registry — 1.4.1 · P5-D392: empty. No outside-assistant link (ChatGPT, Claude, Gemini,
+ * Copilot, Perplexity, Grok, DeepSeek, …) may reach public output; the `tpas_services` filter is gone
+ * so no other plugin can add them back.
  *
  * @package TP_AI_Summarizer_Tests
  */
 
 group( 'Services' );
 
-$all = TP_AI_Services::get_all();
+t( 'P5-D392: no assistant registered', array() === TP_AI_Services::get_all() );
 
-t( 'exactly seven assistants registered', 7 === count( $all ) );
-foreach ( array( 'chatgpt', 'perplexity', 'claude', 'grok', 'copilot', 'gemini', 'deepseek' ) as $slug ) {
-	t( "assistant {$slug} present with label/URL/color", isset( $all[ $slug ]['label'], $all[ $slug ]['url'], $all[ $slug ]['color'] ) );
-}
+add_filter( 'tpas_services', function ( $s ) {
+	$s['chatgpt'] = array( 'label' => 'ChatGPT', 'url' => 'https://chatgpt.com/?q=%s', 'color' => '#000', 'prefill' => true );
+	return $s;
+} );
+t( 'P5-D392: the tpas_services filter cannot add an assistant back', array() === TP_AI_Services::get_all() );
 
-t( 'deepseek points to chat.deepseek.com', false !== strpos( $all['deepseek']['url'], 'chat.deepseek.com' ) );
-
-$url = TP_AI_Services::build_url( 'deepseek', 'Hello world' );
-t( 'build_url: prompt is URL-encoded once', false !== strpos( $url, 'Hello%20world' ) && false === strpos( $url, ' ' ) );
 t( 'build_url: unknown slug returns empty', '' === TP_AI_Services::build_url( 'nope', 'x' ) );
-
-$icon = TP_AI_Services::get_icon( 'deepseek' );
-t( 'get_icon: brand set returns svg', false !== strpos( $icon, '<svg' ) );
-$neutral = TP_AI_Services::get_icon( 'chatgpt', 'neutral' );
-t( 'get_icon: forced neutral set works', false !== strpos( $neutral, '<svg' ) );
-/* 1.2.2: the old claim compared deepseek-brand with deepseek-brand (always equal - a
-   test bug, not a plugin bug). The intent: the two icon sets differ for one key. */
-t( 'get_icon: brand and neutral differ', $icon !== TP_AI_Services::get_icon( 'deepseek', 'neutral' ) );
+t( 'P5-D392: build_url for a former assistant returns empty', '' === TP_AI_Services::build_url( 'chatgpt', 'x' ) && '' === TP_AI_Services::build_url( 'deepseek', 'x' ) );
 
 $allowed = TP_AI_Services::icon_allowed_html();
 t( 'icon whitelist covers svg + path + circle', isset( $allowed['svg'], $allowed['path'], $allowed['circle'] ) );

@@ -13,21 +13,21 @@ $GLOBALS['tp_current'] = 42;
 $buttons = TP_AI_Render::buttons_html( array( 'post_id' => 42 ) );
 
 t( 'buttons: renders for the seeded post', '' !== $buttons );
-t( 'buttons: contains chatgpt link', false !== strpos( $buttons, 'chatgpt.com' ) );
-t( 'buttons: contains deepseek link', false !== strpos( $buttons, 'chat.deepseek.com' ) );
-t( 'buttons: seven assistant anchors', 7 === substr_count( $buttons, 'class="tpas__btn tpas__btn--' ) );
-t( 'buttons: prompt carries the current URL', false !== strpos( $buttons, rawurlencode( 'https://example.test/permalink-42/' ) ) );
-t( 'buttons: rel contains noopener+nofollow', 1 === preg_match( '/rel="noopener nofollow noreferrer"/', $buttons ) );
+/* 1.4.1 · P5-D392: no outside-assistant link of any kind — only the «copy prompt» button */
+$tp392_hosts = '~chatgpt\.com|claude\.ai|gemini\.google|copilot\.microsoft|perplexity\.ai/search|grok\.com|chat\.deepseek\.com~';
+t( 'P5-D392: buttons: no outside-assistant link (none of the seven hosts, no tpas__btn-- anchor)', 0 === preg_match( $tp392_hosts, $buttons ) && 0 === substr_count( $buttons, 'class="tpas__btn tpas__btn--' ) && false === strpos( $buttons, '<a ' ) );
+t( 'P5-D392: mutation check — a stray assistant anchor is caught', 1 === preg_match( $tp392_hosts, $buttons . '<a href="https://chatgpt.com/?q=x">' ) );
+t( 'buttons: the copied prompt carries the current URL', false !== strpos( $buttons, 'https://example.test/permalink-42/' ) );
 t( 'buttons: heading id matches aria-labelledby', 1 === preg_match( '/id="tpas-heading-\d+"[^>]*aria-labelledby="tpas-heading-\d+"/', $buttons ) || false !== strpos( $buttons, 'aria-labelledby' ) );
 t( 'buttons: copy button included by default', false !== strpos( $buttons, 'tpas__copy' ) );
 
 $sel = TP_AI_Render::buttons_html( array( 'post_id' => 42, 'services' => array( 'chatgpt' ), 'copy_button' => 0 ) );
-t( 'buttons: service filter works', 1 === substr_count( $sel, 'tpas__btn--' ) && false === strpos( $sel, 'tpas__copy' ) );
+t( 'P5-D392: an explicit assistant list (shortcode, block, widget) still renders no link — without copy, nothing', '' === $sel );
 
 t( 'buttons: unknown service silently skipped', false === strpos( TP_AI_Render::buttons_html( array( 'post_id' => 42, 'services' => array( 'bogus' ) ) ), 'tpas__btn--' ) );
 
 // Empty services returns nothing.
-t( 'buttons: empty list renders nothing', '' === TP_AI_Render::buttons_html( array( 'post_id' => 42, 'services' => array() ) ) );
+t( 'buttons: copy off renders nothing', '' === TP_AI_Render::buttons_html( array( 'post_id' => 42, 'services' => array(), 'copy_button' => 0 ) ) );
 
 $lang = TP_AI_Localize::for_post( 42 );
 $panel = TP_AI_Render::panel_html( array( 'post_id' => 42 ) );

@@ -22,8 +22,8 @@ foreach ( $expect_keys as $k ) {
 }
 t( 'defaults contain every required key', empty( $missing ), implode( ',', $missing ) );
 
-t( 'all seven assistants enabled by default', 7 === count( $defaults['services'] ) );
-t( 'deepseek is enabled by default', in_array( 'deepseek', $defaults['services'], true ) );
+/* 1.4.1 · P5-D392: no outside-assistant links — the default list is empty */
+t( 'P5-D392: no assistant enabled by default', array() === $defaults['services'] );
 t( 'no internal engines configured by default', array() === $defaults['internal_engines'] );
 
 t( 'get() merges stored value over defaults', 'test' === ( function () {
@@ -109,7 +109,7 @@ $clean = TP_AI_Options::sanitize( array(
 ) );
 t( 'sanitize: script tag stripped from heading', false === strpos( $clean['heading'], '<script' ) && false !== strpos( $clean['heading'], '<b>' ) );
 t( 'sanitize: prompt trimmed', "Prompt\nwith newlines" === $clean['prompt'] );
-t( 'sanitize: unknown service dropped', 2 === count( $clean['services'] ) && ! in_array( 'not-a-service', $clean['services'], true ) );
+t( 'P5-D392: sanitize: any submitted assistant is dropped (the option is gone)', array() === $clean['services'] );
 t( 'sanitize: unknown post type dropped', array( 'post', 'page' ) === $clean['post_types'] );
 t( 'sanitize: position whitelisted', 'both' === $clean['position'] );
 t( 'sanitize: panel position whitelisted', 'top' === $clean['panel_position'] );

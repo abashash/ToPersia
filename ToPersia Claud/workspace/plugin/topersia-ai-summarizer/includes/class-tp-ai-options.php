@@ -39,7 +39,7 @@ class TP_AI_Options {
 			// External buttons.
 			'heading'              => '',
 			'prompt'               => '',
-			'services'             => array( 'chatgpt', 'perplexity', 'claude', 'grok', 'copilot', 'gemini', 'deepseek' ),
+			'services'             => array(),   // 1.4.1 · P5-D392: no outside-assistant links.
 			'post_types'           => self::default_post_types(),
 			'position'             => 'after_thumbnail',
 			'show_on_archive'      => 0,
@@ -464,14 +464,7 @@ class TP_AI_Options {
 			? sanitize_textarea_field( wp_unslash( $input['prompt'] ) )
 			: '';
 
-		$valid_services = array_keys( TP_AI_Services::get_all() );
-		$services       = isset( $input['services'] ) ? (array) $input['services'] : array();
-		$services       = array_map( 'sanitize_key', $services );
-		$output['services'] = array_values( array_intersect( $services, $valid_services ) );
-
-		if ( empty( $output['services'] ) ) {
-			$output['services'] = $defaults['services'];
-		}
+		$output['services'] = array();   // 1.4.1 · P5-D392
 
 		$valid_types = get_post_types( array( 'public' => true ) );
 		$types       = isset( $input['post_types'] ) ? (array) $input['post_types'] : array();

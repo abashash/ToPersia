@@ -622,8 +622,6 @@ class TP_AI_Admin {
 	 */
 	protected static function buttons_section() {
 		$options = TP_AI_Options::get();
-		$all     = TP_AI_Services::get_all();
-
 		echo '<table class="form-table" role="presentation">';
 		self::title_row( __( 'AI Assistant buttons', 'topersia-ai-summarizer' ) );
 
@@ -641,16 +639,7 @@ class TP_AI_Admin {
 			__( 'Placeholders: {url}, {title}, {site}.', 'topersia-ai-summarizer' )
 		);
 
-		echo '<tr><th scope="row">' . esc_html__( 'Assistants', 'topersia-ai-summarizer' ) . '</th><td>';
-		echo '<span class="tpas-chips">';
-		foreach ( $all as $slug => $service ) {
-			$checked = in_array( $slug, (array) $options['services'], true );
-			echo '<label class="tpas-chip">';
-			echo '<input type="checkbox" name="tpas_settings[services][]" value="' . esc_attr( $slug ) . '"' . checked( $checked, true, false ) . '>';
-			echo wp_kses( TP_AI_Services::get_icon( $slug ), TP_AI_Services::icon_allowed_html() );
-			echo esc_html( $service['label'] ) . '</label>';
-		}
-		echo '</span></td></tr>';
+		/* 1.4.1 · P5-D392: گزینۀ «دستیارها» برداشته شد — هیچ پیوند دستیار بیرونی */
 
 		self::post_types_row( $options );
 		self::select_row( __( 'Position', 'topersia-ai-summarizer' ), 'position', $options['position'], array(

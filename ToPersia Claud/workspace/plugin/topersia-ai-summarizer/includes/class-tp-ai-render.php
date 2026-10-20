@@ -61,12 +61,11 @@ class TP_AI_Render {
 
 		$prompt = self::build_prompt( $template, $url, $title, $post_id, $lang );
 
-		$services = array_values( array_filter( (array) $args['services'] ) );
-		if ( empty( $services ) ) {
+		/* 1.4.1 · P5-D392: هیچ پیوند دستیار بیرونی — فقط دکمۀ «کپی پرامت» اگر روشن است؛ وگرنه هیچ */
+		if ( empty( $args['copy_button'] ) ) {
 			return '';
 		}
 
-		$all     = TP_AI_Services::get_all();
 		$style   = in_array( $args['style'], array( 'outline', 'filled', 'minimal' ), true ) ? $args['style'] : 'filled';
 		$align   = in_array( $args['align'], array( 'start', 'center', 'end' ), true ) ? $args['align'] : 'start';
 		$layout  = in_array( $args['layout'], array( 'stretch', 'inline' ), true ) ? $args['layout'] : 'stretch';
@@ -107,43 +106,6 @@ class TP_AI_Render {
 		$html  = '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" style="' . esc_attr( $inline_style ) . '" data-tpas-tracking="' . ( $track ? '1' : '0' ) . '">';
 		$html .= '<p class="tpas__heading" id="' . esc_attr( $heading_id ) . '">' . wp_kses( $heading, TP_AI_Options::heading_allowed_html() ) . '</p>';
 		$html .= '<div class="tpas__buttons" role="group" aria-labelledby="' . esc_attr( $heading_id ) . '">';
-
-		foreach ( $services as $key ) {
-			$key = sanitize_key( $key );
-
-			if ( ! isset( $all[ $key ] ) ) {
-				continue;
-			}
-
-			$link = TP_AI_Services::build_url( $key, $prompt );
-
-			if ( ! $link ) {
-				continue;
-			}
-
-			$label = $all[ $key ]['label'];
-
-			$html .= '<a class="tpas__btn tpas__btn--' . esc_attr( $key ) . '"';
-			$html .= ' href="' . esc_url( $link ) . '"';
-			$html .= ' rel="' . esc_attr( implode( ' ', $rel ) ) . '"';
-
-			if ( $new_tab ) {
-				$html .= ' target="_blank"';
-			}
-
-			$html .= ' data-tpas-service="' . esc_attr( $key ) . '"';
-			$html .= ' data-tpas-post="' . esc_attr( (string) $post_id ) . '"';
-			$html .= ' style="' . esc_attr( '--tpas-brand:' . $all[ $key ]['color'] ) . '"';
-			/* translators: %s: name of the AI assistant, e.g. ChatGPT. */
-			$html .= ' aria-label="' . esc_attr( sprintf( __( 'Summarize this page with %s', 'topersia-ai-summarizer' ), $label ) ) . '">';
-
-			if ( ! empty( $args['show_icons'] ) ) {
-				$html .= '<span class="tpas__icon">' . wp_kses( TP_AI_Services::get_icon( $key ), TP_AI_Services::icon_allowed_html() ) . '</span>';
-			}
-
-			$html .= '<span class="tpas__label">' . esc_html( $label ) . '</span>';
-			$html .= '</a>';
-		}
 
 		if ( ! empty( $args['copy_button'] ) ) {
 			$html .= '<button type="button" class="tpas__btn tpas__copy" data-tpas-prompt="' . esc_attr( $prompt ) . '">';

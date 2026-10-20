@@ -72,15 +72,7 @@ class TP_AI_Elementor_Widget extends \Elementor\Widget_Base {
 			)
 		);
 
-		$this->add_control(
-			'services',
-			array(
-				'label'       => __( 'Assistants (comma separated)', 'topersia-ai-summarizer' ),
-				'type'        => \Elementor\Controls_Manager::TEXT,
-				'default'     => '',
-				'condition'   => array( 'mode' => 'buttons' ),
-			)
-		);
+		/* 1.4.1 · P5-D392: کنترل «دستیارها» برداشته شد — هیچ پیوند دستیار بیرونی */
 
 		$this->end_controls_section();
 	}
@@ -97,13 +89,6 @@ class TP_AI_Elementor_Widget extends \Elementor\Widget_Base {
 			return;
 		}
 
-		$args = array();
-
-		if ( ! empty( $settings['services'] ) ) {
-			$services = str_replace( ' ', '', (string) $settings['services'] );
-			$args['services'] = array_values( array_filter( array_map( 'sanitize_key', explode( ',', $services ) ) ) );
-		}
-
-		echo TP_AI_Render::buttons_html( $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted markup.
+		echo TP_AI_Render::buttons_html(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Trusted markup.
 	}
 }

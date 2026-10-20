@@ -14,15 +14,8 @@
 	var ToggleControl = wp.components.ToggleControl;
 	var registerBlockType = wp.blocks.registerBlockType;
 
-	var SERVICES = [
-		{ label: 'ChatGPT', value: 'chatgpt' },
-		{ label: 'Perplexity', value: 'perplexity' },
-		{ label: 'Claude', value: 'claude' },
-		{ label: 'Grok', value: 'grok' },
-		{ label: 'Copilot', value: 'copilot' },
-		{ label: 'Gemini', value: 'gemini' },
-		{ label: 'DeepSeek', value: 'deepseek' }
-	];
+	/* 1.4.1 · P5-D392: هیچ دستیار بیرونی — بلوک فقط دکمۀ «کپی پرامت» دارد */
+	var SERVICES = [];
 
 	registerBlockType('tpas/buttons', {
 		title: __('ToPersia AI buttons', 'topersia-ai-summarizer'),

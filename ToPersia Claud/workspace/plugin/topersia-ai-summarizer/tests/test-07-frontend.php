@@ -98,7 +98,7 @@ t( 'assets: archive with show_on_archive loads js', ! empty( $GLOBALS['tp_enqueu
 TP_AI_Shortcode::init();
 t( 'shortcodes: all four registered', isset( $GLOBALS['tp_shortcodes']['tpas'], $GLOBALS['tp_shortcodes']['topersia_ai'], $GLOBALS['tp_shortcodes']['tpas_ai'], $GLOBALS['tp_shortcodes']['topersia_ai_panel'] ) );
 $html = do_shortcode( '[tpas services="chatgpt,deepseek"]' );
-t( 'shortcode: [tpas] honors the services attribute', 2 === substr_count( $html, 'class="tpas__btn tpas__btn--' ) );
+t( 'P5-D392: shortcode [tpas services="chatgpt,deepseek"] renders no assistant link', 0 === substr_count( $html, 'class="tpas__btn tpas__btn--' ) && false === strpos( $html, 'chatgpt.com' ) && false === strpos( $html, 'deepseek.com' ) );
 /* 1.2.2: the panel is for logged-in users only (P5-D255; panel_html() checks
    is_user_logged_in()) and this file runs logged out. Same claim, logged in;
    plus the logged-out half, which is the actual guarantee. The stub
@@ -116,7 +116,7 @@ t( 'shortcode: [tpas_ai] renders the panel', false !== strpos( $ph, 'data-tpas-j
 TP_AI_Block::register_blocks();
 t( 'blocks: both block types registered', ! empty( $GLOBALS['tp_blocks']['tpas/buttons'] ) && ! empty( $GLOBALS['tp_blocks']['tpas/panel'] ) );
 $bh = TP_AI_Block::render_buttons( array( 'services' => array( 'gemini' ) ) );
-t( 'block: buttons callback honors attributes', 1 === substr_count( $bh, 'gemini.google.com' ) );
+t( 'P5-D392: block buttons with an assistant attribute render no assistant link', false === strpos( $bh, 'gemini.google.com' ) && 0 === substr_count( $bh, 'tpas__btn--' ) );
 $bp = TP_AI_Block::render_panel( array( 'types' => array( 'plan' ), 'default_type' => 'plan' ) );
 preg_match( '/data-tpas-json="([^"]*)"/', $bp, $bpm );
 $bc = json_decode( htmlspecialchars_decode( $bpm[1] ), true );

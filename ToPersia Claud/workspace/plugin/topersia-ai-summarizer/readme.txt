@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,9 @@ The key is stored in the `tpas_settings` option, never printed, and kept when yo
 Yes by default, with `rel="noopener nofollow"`, both configurable.
 
 == Changelog ==
+
+= 1.4.1 =
+* P5-D392 - no outside-assistant link (ChatGPT, Claude, Gemini, Copilot, Perplexity, Grok, DeepSeek) in any public output: the registry is empty and the tpas_services filter is gone; the buttons component keeps only «Copy prompt»; the Assistants option is removed from the settings, the block editor and the Elementor widget.
 
 = 1.4.0 =
 * P5-D382 - automatic generation is on by default: publishing or saving any language version by a user who may edit the post puts one job in the ToPersia Core queue (Action Scheduler) for that post and language, covering summary, key points and travel plan. Nothing is queued when the source text did not change. A full daily cap moves the job to the next day; an engine error retries later with a growing delay; a save never waits for an engine. No public path starts a generation.

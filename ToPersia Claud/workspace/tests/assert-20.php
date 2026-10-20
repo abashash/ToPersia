@@ -101,3 +101,25 @@ tp441_mut( 'اسلایدر کارتی سه‌عضوی (جاذبه‌ها) دکم
 			&& false === strpos( $x[1], 'data-tp-list-open' );
 	},
 	array( $a20_page, $a20_rail ), array( str_replace( 'aria-controls="tp-list-attractions" data-tp-list-open', 'x', $a20_page ), $a20_rail ) );
+
+/* ══ P5-D392 — هیچ پیوند دستیار بیرونی در خروجی عمومی هیچ افزونه‌ای ══════════════════════ */
+$x20_hosts = '~https?://(?:www\.)?(?:chatgpt\.com|chat\.openai\.com|claude\.ai/new|gemini\.google\.com/app|copilot\.microsoft\.com|perplexity\.ai/search|grok\.com|chat\.deepseek\.com)~';
+$x20_scan  = function ( $extra = '' ) use ( $x20_hosts ) {
+	$hit = array();
+	$it  = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( dirname( TP_PLUGIN_DIR ), FilesystemIterator::SKIP_DOTS ) );
+	foreach ( $it as $file ) {
+		$p = str_replace( chr( 92 ), '/', (string) $file );
+		if ( ! preg_match( '/\.(php|js)$/', $p ) || preg_match( '~/(tests|vendor|node_modules|languages)/~', $p ) ) { continue; }
+		if ( preg_match( $x20_hosts, (string) file_get_contents( $p ) ) ) { $hit[] = basename( $p ); }
+	}
+	if ( '' !== $extra && preg_match( $x20_hosts, $extra ) ) { $hit[] = 'mutant'; }
+	return $hit;
+};
+tp441_mut( 'هیچ پیوند دستیار بیرونی (ChatGPT · Claude · Gemini · Copilot · Perplexity · Grok · DeepSeek) در کد هیچ افزونهٔ ToPersia (render · user-core · خلاصه‌ساز · core · schema)؛ فهرست دستیار خلاصه‌ساز خالی و بی صافی  P5-D392',
+	function ( $hits ) { return array() === $hits && array() === TP_AI_Services_get_all_safe(); },
+	$x20_scan(), $x20_scan( '<a href="https://chatgpt.com/?q=x">' ) );
+function TP_AI_Services_get_all_safe() {
+	$f = dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/includes/class-tp-ai-services.php';
+	$s = is_file( $f ) ? (string) file_get_contents( $f ) : '';
+	return ( false !== strpos( $s, "public static function get_all() {" ) && 1 === preg_match( '/public static function get_all\(\) \{.*?return array\(\);\s*\}/s', $s ) && false === strpos( $s, "apply_filters( 'tpas_services'" ) ) ? array() : array( 'x' );
+}
