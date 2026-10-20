@@ -175,7 +175,8 @@ t( 'کاشی: نوع‌های مختلف — برچسب همان نام نوع �
 	&& topersia_g_kind_label( 23 ) !== topersia_g_kind_label( 24 ) );
 
 t( 'کاشی: «اطلاعات جغرافیایی» و «نشان‌ها» هم همین کاشی‌اند',
-	false !== strpos( r( 20, 'tp_facts' ), '<a class="tp-tile"><span class="tp-tile__k">نوع اقلیم</span><b>نیمه‌خشک</b></a>' )
+	/* P5-D386: کد استان از آمار رفت، اقلیم به آمار آمد؛ «اطلاعات جغرافیایی» مرکز استان را کاشی می‌کند */
+	false !== strpos( r( 20, 'tp_facts' ), 'class="tp-tile"><span class="tp-tile__k">مرکز استان</span><b>شهر اصفهان</b></a>' )
 	&& false !== strpos( r( 20, 'tp_badges' ), '<div class="tp-tiles" data-tp-tiles><a class="tp-tile"><b>شهر خلاق یونسکو</b></a>' ) );
 
 t( 'کاشی: سه ستون minmax(0,1fr)؛ دوستونهٔ جایگزین؛ هیچ واژه‌ای وسط نمی‌شکند؛ hidden پنهان  P5-D244',

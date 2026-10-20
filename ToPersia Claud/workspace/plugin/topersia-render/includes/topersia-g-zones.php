@@ -2813,7 +2813,8 @@ if ( ! function_exists( 'topersia_g_stat_keys' ) ) {
 		 * ترتیب از لایۀ دادۀ مرجع می‌آید: مرکز · کد · مساحت · جمعیت.
 		 * `P5-D208` (مرکز · جمعیت · مساحت · اقلیم) لغو شد.  P5-D215
 		 */
-		$order = array( 'province_code', 'area_km2', 'population', 'climate_type', 'elevation_m', 'founded_year' );
+		/* P5-D386: کد استان از هر نمایش بیرون است (فیلد و داده می‌ماند). */
+		$order = array( 'area_km2', 'population', 'climate_type', 'elevation_m', 'founded_year' );
 
 		$ranked = array();
 
@@ -5966,7 +5967,7 @@ if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
 
 			/* G — همان قاعدۀ P5-D215 (مرکز · کد · مساحت · جمعیت)، هر نوع آنچه دارد */
 			'tp_region'          => array( 'stats' => array( 'region_classification', 'count:provinces' ) ),
-			'tp_province'        => array( 'stats' => array( 'capital', 'province_code', 'area_km2', 'population', 'climate_type' ) ),
+			'tp_province'        => array( 'stats' => array( 'capital', 'area_km2', 'population', 'climate_type' ) ),   /* P5-D386: بی کد استان */
 			'tp_district'        => array( 'stats' => array( 'neighborhood_type' ), 'scope' => 'point' ),
 			'tp_village'         => array( 'stats' => array( 'population', 'elevation_m' ), 'scope' => 'point' ),
 			'tp_island'          => array( 'stats' => array( 'island_type', 'area_km2' ) ),
