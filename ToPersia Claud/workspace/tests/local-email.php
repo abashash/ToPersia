@@ -26,7 +26,7 @@ $mk_mail = function ( $s ) use ( $uniq ) { return $uniq . '-' . $s . '@example.o
 echo "ورود ایمیلی روی وردپرس واقعی — P5-D391\n";
 
 try {
-	le_t( 'ثابت‌های SMTP محلی تعریف نشده‌اند (ارسال واقعی خاموش)؛ نسخهٔ افزونه 1.14.0', ! ToPersia_Mailer::configured() && '1.14.0' === TOPERSIA_USER_CORE_VERSION );
+	le_t( 'ثابت‌های SMTP محلی تعریف نشده‌اند (ارسال واقعی خاموش)؛ نسخهٔ افزونه 1.14.1', ! ToPersia_Mailer::configured() && '1.14.1' === TOPERSIA_USER_CORE_VERSION );
 
 	/* ── ثبت‌نام = ورود ── */
 	$e1 = $mk_mail( 'new' );

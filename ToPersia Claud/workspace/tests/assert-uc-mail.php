@@ -87,7 +87,7 @@ class ToPersia_DB {
 	public static function increment_attempt( $id ) {}
 	public static function mark_verified( $id ) {}
 }
-class ToPersia_Mediana_SMS { public function send_otp( $to, $otp, $p ) { $GLOBALS['SMS'][] = array( $to, $otp ); return array( 'success' => true, 'message' => '', 'request_id' => 'r1' ); } }
+class ToPersia_Mediana_SMS { public function send_otp( $to, $otp, $p ) { usleep( (int) ( $GLOBALS['SMS_LAT'] ?? 0 ) ); $GLOBALS['SMS'][] = array( $to, $otp ); return array( 'success' => true, 'message' => '', 'request_id' => 'r1' ); } }
 class ToPersia_Admin { public static function account_url() { return 'https://topersia.com/account/'; } }
 
 require $UC . 'includes/class-topersia-i18n.php';
@@ -277,8 +277,40 @@ $M8 = $mutant( 'includes/class-topersia-auth.php', 'ToPersia_Auth', 'M8', "		if 
 $s_m8 = '' !== $M8 ? $sms( $M8, '09120000004' ) : array();
 t( 'جهش پیامک: ۴۰۳ برای حساب دارای دسترسی — آزمون می‌گیرد', '' !== $M8 && $s_m8 && false === $s_m8[0] );
 t( 'پیامک: کد با random_int و صفر پیشین، هش HMAC (نه wp_hash_password)',
-	false !== strpos( $src( 'includes/class-topersia-auth.php' ), '$hash = self::code_hash( $token, $otp );' ) && false === strpos( $src( 'includes/class-topersia-auth.php' ), 'wp_hash_password( $otp )' )
+	false !== strpos( $src( 'includes/class-topersia-auth.php' ), '$real = self::code_hash( $token, $otp );' ) && false === strpos( $src( 'includes/class-topersia-auth.php' ), 'wp_hash_password( $otp )' )
 	&& false === strpos( $src( 'includes/class-topersia-auth.php' ), 'wp_rand( 100000, 999999 )' ) );
+
+/* ── ۵ب. زمان پاسخ یکسان — ۱٫۱۴٫۱ (دستهٔ ۲۳) ───────────────────────
+   مدیانا با تأخیر ۶۰ms شبیه‌سازی می‌شود. شاخهٔ بی پیامک (حساب دارای دسترسی) باید همان کارها و همان تأخیر را داشته باشد:
+   میانهٔ اختلاف در ۲۰ اجرای یک‌درمیان < ۲۰ms. جهش: حذف تأخیرِ همسان ← اختلاف ≈ ۶۰ms ← آزمون می‌افتد. */
+$GLOBALS['SMS_LAT'] = 60000;
+$timed = function ( $class, $mobile ) {
+	$keep = $GLOBALS['T']['tp_sms_lat'] ?? null; $GLOBALS['T'] = array(); if ( null !== $keep ) { $GLOBALS['T']['tp_sms_lat'] = $keep; }
+	$_POST = array( 'nonce' => 'good-nonce', 'mobile' => $mobile ); $_SERVER = array( 'REMOTE_ADDR' => '198.51.100.' . random_int( 1, 250 ) );
+	$t0 = microtime( true );
+	try { $class::instance()->send_otp(); } catch ( TP_Json $j ) { /* پاسخ */ }
+	return ( microtime( true ) - $t0 ) * 1000;
+};
+$median = function ( array $v ) { sort( $v ); $n = count( $v ); return $n % 2 ? $v[ intdiv( $n, 2 ) ] : ( $v[ $n / 2 - 1 ] + $v[ $n / 2 ] ) / 2; };
+$gap = function ( $class ) use ( $timed, $median ) {
+	$timed( $class, '09128880000' );   /* گرم‌کردن: میانگین تأخیر واقعی ثبت می‌شود */
+	$a = $b = array();
+	for ( $i = 0; $i < 20; $i++ ) {
+		$a[] = $timed( $class, '0912777' . sprintf( '%04d', $i ) );   /* حساب عادی (شمارهٔ بی حساب) */
+		$b[] = $timed( $class, '09120000004' );                       /* حساب دارای دسترسی */
+	}
+	return array( $median( $a ), $median( $b ), abs( $median( $a ) - $median( $b ) ) );
+};
+$g_ok = $gap( 'ToPersia_Auth' );
+$M11  = $mutant( 'includes/class-topersia-auth.php', 'ToPersia_Auth', 'M11', "			self::mimic_provider_latency();\n", '' );
+$g_m  = '' !== $M11 ? $gap( $M11 ) : array( 0, 0, 0 );
+$GLOBALS['SMS_LAT'] = 0;
+t( sprintf( 'زمان پاسخ پیامک: میانهٔ عادی %.1fms ≈ دارای دسترسی %.1fms (اختلاف %.1fms < ۲۰ در ۲۰ اجرا)', $g_ok[0], $g_ok[1], $g_ok[2] ), $g_ok[2] < 20 && $g_ok[0] > 55, json_encode( $g_ok ) );
+t( sprintf( 'جهش: حذف تأخیر همسان ← اختلاف %.1fms (≥ ۴۰) — آزمون می‌گیرد', $g_m[2] ), '' !== $M11 && $g_m[2] >= 40, json_encode( $g_m ) );
+t( 'شاخهٔ بی پیامک همان کارها را می‌کند: ساخت کد، هر دو هش، ردیف سابقهٔ تلاش، ترنزینت، تأخیر تصادفی؛ بی شاخهٔ زودرس',
+	false !== strpos( $src( 'includes/class-topersia-auth.php' ), '$dumm = self::dummy_hash();' ) && false !== strpos( $src( 'includes/class-topersia-auth.php' ), 'self::mimic_provider_latency();' )
+	&& 1 === substr_count( $src( 'includes/class-topersia-auth.php' ), 'ToPersia_DB::create_attempt(' ) && 1 === substr_count( $src( 'includes/class-topersia-auth.php' ), 'self::jitter();' )
+	&& false !== strpos( $src( 'includes/class-topersia-auth.php' ), 'usleep( random_int( 0, 40000 ) );' ) );
 
 /* ── ۶. Origin و Sec-Fetch-Site ──────────────────────────────────── */
 $orig = function ( $class, $h ) { $_SERVER = $h; return $class::origin_ok(); };

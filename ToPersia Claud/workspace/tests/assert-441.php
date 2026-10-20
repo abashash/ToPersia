@@ -283,7 +283,7 @@ t( 'منتشرشده: صفحۀ هم‌مرزِ فارسی اصفهان را یک
 
 $v441 = array(
 	'render'     => array( TP_PLUGIN_DIR . 'topersia-render.php', '4.5.5', array( '/^ \* Version:\s*(\S+)/m', "/define\( 'TOPERSIA_RENDER_VERSION', '([^']+)' \)/" ) ),
-	'user-core'  => array( dirname( TP_PLUGIN_DIR ) . '/topersia-user-core/topersia-user-core.php', '1.14.0', array( '/^ \* Version:\s*(\S+)/m', "/define\('TOPERSIA_USER_CORE_VERSION', '([^']+)'\)/" ) ),
+	'user-core'  => array( dirname( TP_PLUGIN_DIR ) . '/topersia-user-core/topersia-user-core.php', '1.14.1', array( '/^ \* Version:\s*(\S+)/m', "/define\('TOPERSIA_USER_CORE_VERSION', '([^']+)'\)/" ) ),
 	'summarizer' => array( dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/topersia-ai-summarizer.php', '1.4.1', array( '/^\s*\*\s*Version:\s*(\S+)/m', "/define\(\s*'TP_AI_VERSION',\s*'([^']+)'/" ) ),
 	'core'       => array( dirname( TP_PLUGIN_DIR ) . '/topersia-core/topersia-core.php', '4.14.0', array(
 		'/^ \* Version:\s*(\S+)/m',
@@ -304,3 +304,17 @@ foreach ( $v441 as $name => $spec ) {
 }
 t( 'نسخه: چهار پروژهٔ ما — هر جا که نسخه نوشته شده یکی (هسته: سربرگ، ثابت، برون‌بری لاگ)',
 	array() === $vbad441, implode( ' · ', $vbad441 ) );
+
+/* ── P5-D380 (دستهٔ ۲۳): خوانایی نقشه پیش‌فرض دائمی است، بی پرچم localStorage؛ هر دو مسیر سبک (آنلاین/Protomaps و آفلاین) ── */
+$zjs23  = file_get_contents( TP_PLUGIN_DIR . 'assets/topersia-g-zones.js' );
+$leg23  = function ( $js ) {
+	return false !== strpos( $js, 'var MAP_LEGIBLE = true;' ) && false === strpos( $js, 'tp-map-legible' ) && false === strpos( $js, 'legibleOn' )
+		&& 2 === substr_count( $js, 'if ( MAP_LEGIBLE ) {' ) && false !== strpos( $js, "'text-halo-width': 1.6" )
+		&& false !== strpos( $js, "( dark ? '#a9d3f5' : '#1b4a72' )" ) && false !== strpos( $js, 'widen( w )' );
+};
+t( 'خوانایی نقشه: روشن به‌صورت ثابت MAP_LEGIBLE (تنها نقطهٔ خاموش‌کردن)، هالهٔ ۱٫۶px، آب آبی، پهنای راه؛ در هر دو مسیر سبک؛ پرچم localStorage برداشته — جهش: پرچم قدیمی یا خاموش می‌افتد',
+	$leg23( $zjs23 ) && ! $leg23( str_replace( 'var MAP_LEGIBLE = true;', 'var MAP_LEGIBLE = false;', $zjs23 ) ) && ! $leg23( $zjs23 . "\nlocalStorage.getItem( 'tp-map-legible' );" )
+	&& ! $leg23( str_replace( 'if ( MAP_LEGIBLE ) {', 'if ( false ) {', $zjs23 ) ) );
+$mlt23 = file_get_contents( __DIR__ . '/map-legibility.js' );
+t( 'خوانایی نقشه: tests/map-legibility.js گیت است — هدف متن ≥ ۴٫۵ و راه ≥ ۳، ۱۸ ترکیب، کد خروج ۱ زیر هدف و ۲ برای ناقص',
+	false !== strpos( $mlt23, 't.r < 4.5' ) && false !== strpos( $mlt23, 't.r < 3' ) && false !== strpos( $mlt23, 'STYLES.length * 3 * 3' ) && false !== strpos( $mlt23, 'process.exit( bad ? 1 : ( table.length === EXPECT ? 0 : 2 ) )' ) && false === strpos( $mlt23, 'tp-map-legible' ) );

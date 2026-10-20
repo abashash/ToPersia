@@ -3,7 +3,7 @@
  * Plugin Name: ToPersia User Core
  * Plugin URI: https://topersia.com/
  * Description: هسته اختصاصی حساب کاربری ToPersia با پنل تب‌محور، ماژول‌های مسافر و ساختار آماده توسعه.
- * Version: 1.14.0
+ * Version: 1.14.1
  * Requires at least: 6.4
  * Requires PHP: 8.0
  * Author: ToPersia
@@ -16,7 +16,7 @@ if (defined('TOPERSIA_USER_CORE_LOADED')) {
     return;
 }
 define('TOPERSIA_USER_CORE_LOADED', true);
-define('TOPERSIA_USER_CORE_VERSION', '1.14.0');
+define('TOPERSIA_USER_CORE_VERSION', '1.14.1');
 define('TOPERSIA_USER_CORE_FILE', __FILE__);
 define('TOPERSIA_USER_CORE_DIR', plugin_dir_path(__FILE__));
 define('TOPERSIA_USER_CORE_URL', plugin_dir_url(__FILE__));

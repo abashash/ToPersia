@@ -61,9 +61,9 @@ $src = function ( $rel ) use ( $UC ) { return (string) file_get_contents( $UC . 
 echo "\ntopersia-user-core ۱٫۱۰٫۰\n" . str_repeat( '─', 78 ) . "\n";
 
 /* ── نسخه ── */
-t( 'نسخه: سرآیند و ثابت 1.14.0',
-	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.14.0' )
-	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.14.0');" ) );
+t( 'نسخه: سرآیند و ثابت 1.14.1',
+	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.14.1' )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.14.1');" ) );
 
 /*
  * ── ۱٫۱۰٫۲ — جهت فرم ورود از زبان صفحه  SPRINT-4.4 ۲٫۰٫۸ ──

@@ -1,13 +1,16 @@
 /**
- * خوانایی نقشه — سنجش عددی و عکس پیش/پس (P5-D380، دستهٔ ۲۰ بند ۱۰ — پیش‌نمایش)  (فقط topersia.local)
+ * خوانایی نقشه — سنجش عددی و عکس (P5-D380؛ از دستهٔ ۲۳ پیش‌فرض دائمی و جزو گیت‌ها)  (فقط topersia.local)
  *
- *   node tests/map-legibility.js [--styles=offline,online] [--shots=DIR] [--legible=0|1] [--only=chromium]
+ *   node tests/map-legibility.js [--styles=offline,online] [--shots=DIR]
+ *
+ * گیت: کد خروج ۰ فقط وقتی هر ۱۸ ترکیب (دو سبک × سه حالت × سه بزرگنمایی) سنجیده شده و هیچ‌کدام زیر هدف نیست؛
+ * ۱ = زیر هدف؛ ۲ = ترکیبی سنجیده نشد (سبک آنلاین در دسترس نبود) — «سبز» نیست.
  *
  * برای هر سبک × حالت رنگ (light · evening · dark) × بزرگنمایی (۶ · ۹ · ۱۲) روی استان اصفهان (fa):
  *   متن   هر لایهٔ نماد دارای text-field: تضاد text-color با text-halo-color (هاله بی‌پهنا ← با زمینه) — هدف ≥ ۴٫۵:۱
  *   راه   هر لایهٔ خطی جاده (نام لایه road/highway/transportation/roads؛ بی روکش، تونل، اسکله، باند فرودگاه و ریل — راه نیستند): تضاد line-color با زمینه — هدف ≥ ۳:۱
  * رنگ از getPaintProperty با ارزیاب کوچک (literal · rgb/hsl/hex · interpolate/step روی zoom · case/match ← نخستین شاخه).
- * --legible=1 پیش‌نمایش پیشنهادی را با `localStorage.tp-map-legible=1` روشن می‌کند (فقط اگر رندر آن را بشناسد).
+ * پرچم پیش‌نمایش (localStorage) برداشته شد؛ خوانایی در خود رندر روشن است (`MAP_LEGIBLE` در topersia-g-zones.js).
  * --shots=DIR از هر ترکیب (و fa/ar، ۱۴۴۰ و ۳۹۰، استان و شهر اصفهان) عکس نقشه می‌گیرد.
  */
 'use strict';
@@ -19,7 +22,7 @@ const ENV = require( './env.js' );
 const ARGS = Object.fromEntries( process.argv.slice( 2 ).map( a => a.replace( /^--/, '' ).split( '=' ) ) );
 const STYLES = ( ARGS.styles || 'offline,online' ).split( ',' );
 const X = Number( process.env.TP_TIMEOUT_X || 1 );
-const LEG = '1' === ARGS.legible;
+const EXPECT = STYLES.length * 3 * 3;
 const SHOTS = ARGS.shots || '';
 
 const MEASURE = ( zz ) => {
@@ -72,7 +75,7 @@ const MEASURE = ( zz ) => {
 
 async function open( browser, style, mode, lang, w, url ) {
 	const ctx = await browser.newContext( { viewport: { width: w, height: 900 } } );
-	await ctx.addInitScript( ( [ online, mode, leg ] ) => { try { sessionStorage.setItem( 'tp-map-online', online ? '1' : '0' ); localStorage.setItem( 'tp-mode', mode ); localStorage.setItem( 'tp-map-legible', leg ? '1' : '0' ); } catch ( e ) {} }, [ 'online' === style, mode, LEG ] );
+	await ctx.addInitScript( ( [ online, mode ] ) => { try { sessionStorage.setItem( 'tp-map-online', online ? '1' : '0' ); localStorage.setItem( 'tp-mode', mode ); } catch ( e ) {} }, [ 'online' === style, mode ] );
 	const page = await ctx.newPage();
 	page.setDefaultTimeout( 240000 * X );
 	await page.goto( ENV.base + ( 'ar' === lang ? '/ar' : '' ) + url, { waitUntil: 'load' } );
@@ -84,7 +87,7 @@ async function open( browser, style, mode, lang, w, url ) {
 }
 
 ( async () => {
-	console.log( 'START ' + new Date().toISOString() + ( LEG ? ' — پیش‌نمایش خوانایی روشن' : ' — وضع فعلی' ) );
+	console.log( 'START ' + new Date().toISOString() );
 	const browser = await chromium.launch();
 	const table = [];
 	try {
@@ -130,7 +133,8 @@ async function open( browser, style, mode, lang, w, url ) {
 			}
 		}
 	} finally { await browser.close(); }
-	fs.writeFileSync( path.join( __dirname, '.map-legibility-' + ( LEG ? 'after' : 'before' ) + '.json' ), JSON.stringify( table, null, 1 ) );
+	fs.writeFileSync( path.join( __dirname, '.map-legibility-current.json' ), JSON.stringify( table, null, 1 ) );
 	const bad = table.filter( t => t.tbad || t.rbad ).length;
-	console.log( `\nEND ${ new Date().toISOString() } — ترکیب‌ها: ${ table.length } · زیر هدف: ${ bad }` );
+	console.log( `\nEND ${ new Date().toISOString() } — ترکیب‌ها: ${ table.length } · زیر هدف: ${ bad }` + ( table.length === EXPECT ? '' : ` · انتظار ${ EXPECT } — ناقص` ) );
+	process.exit( bad ? 1 : ( table.length === EXPECT ? 0 : 2 ) );
 } )();
