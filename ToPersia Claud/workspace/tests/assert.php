@@ -1466,14 +1466,14 @@ t( 'geo: کارت جغرافیا دیگر فیلدهای details را ندارد
 t( 'ai: بی‌ai_summary بخش نمی‌آید',
 	'' === r( 40, 'tp_ai' ) && '' !== r( 20, 'tp_ai' ) );
 
-/* ۴٫۳٫۰ بند ۴: موتورها فقط برای واردشده؛ مهمان جایشان دعوت به ثبت‌نام می‌بیند.  P5-D235 */
+/* P5-D382 · P5-D255: پیوندهای «موتور:» کاملاً حذف — نه برای مهمان، نه برای واردشده. */
 $GLOBALS['tp_user'] = 7;
 $ai_in = r( 20, 'tp_ai' );
 $GLOBALS['tp_user'] = 0;
-t( 'ai: دکمهٔ موتور — فقط واردشده — همان موتور را با نشانی همین صفحه باز می‌کند؛ مهمان نه',
-	false !== strpos( $ai_in, 'https://claude.ai/new?q=' )
-	&& false !== strpos( $ai_in, rawurlencode( 'https://topersia.com/isfahan-province/' ) )
-	&& false === strpos( $p20, 'https://claude.ai/new?q=' ) && false === strpos( $p20, 'class="tp-ai__engine" href="https://chatgpt' ) );
+$no_engine = function ( $h ) { return false === strpos( $h, 'tp-ai__engine' ) && false === strpos( $h, 'claude.ai/new' ) && false === strpos( $h, 'chatgpt.com' ) && false === strpos( $h, 'gemini.google' ) && false === strpos( $h, 'copilot.microsoft' ); };
+t( 'ai: هیچ پیوند «موتور:» (ChatGPT · Claude · Gemini · Copilot) — نه واردشده، نه مهمان؛ تابع‌ها هم نیستند  P5-D382 — جهش: پیوند بازگردانده می‌افتد',
+	'' !== $ai_in && $no_engine( $ai_in ) && $no_engine( $p20 ) && ! function_exists( 'topersia_g_ai_engines' )
+	&& ! $no_engine( $ai_in . '<a class="tp-ai__engine" href="https://claude.ai/new?q=x">' ) );
 
 /* «برنامهٔ سفر فقط اگر فیلدش هست» — و در export هیچ فیلد برنامه‌ای نیست. */
 $skin_src = file_get_contents( dirname( __DIR__ ) . '/reference/Jetengine_Skin.json' );
@@ -1762,8 +1762,8 @@ list( $ai3, $ai3d ) = $ai_block();
 $GLOBALS['tp_user'] = 7;
 list( $ai3u, $ai3ud ) = $ai_block();
 $GLOBALS['tp_user'] = 0;
-t( 'AI: رندر هرگز تولید نمی‌کند — موتور داخلی روشن، بی‌خلاصهٔ ذخیره: مهمان ai_summary، واردشده هم بی دکمهٔ ساختن و بی نانس  P5-D358',
-	$ai3d['summary'] === topersia_g_text( 20, 'ai_summary' ) && ! isset( $ai3d['bullets'] )
+t( 'AI: رندر هرگز تولید نمی‌کند — موتور داخلی روشن، بی‌خلاصهٔ ذخیره: ai_summary؛ نکات ذخیره‌شده برای مهمان و واردشده یکسان (P5-D382)؛ بی دکمهٔ ساختن و بی نانس  P5-D358',
+	$ai3d['summary'] === topersia_g_text( 20, 'ai_summary' ) && '• فقط نکته' === ( $ai3d['bullets'] ?? '' ) && $ai3d === $ai3ud
 	&& '• فقط نکته' === $ai3ud['bullets'] && false === strpos( $ai3u, 'data-tp-ai-gen' ) && false === strpos( $ai3, 'data-tp-ai-gen' )
 	&& array() === $GLOBALS['tp_ai_generated'],
 	implode( ',', $GLOBALS['tp_ai_generated'] ) );

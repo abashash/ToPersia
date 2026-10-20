@@ -129,10 +129,6 @@ msgstr ""
 msgid "اخبار %s"
 msgstr ""
 
-#: includes/topersia-g-zones.php
-msgid "ادامه در موتور هوش مصنوعی"
-msgstr ""
-
 #: topersia-render.php
 msgid "ارتباط برقرار نشد."
 msgstr ""
@@ -822,11 +818,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "درباره"
-msgstr ""
-
-#: includes/topersia-g-zones.php
-#, php-format
-msgid "دربارۀ %1$s بر پایۀ این صفحه توضیح بده: %2$s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1811,10 +1802,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "مهر"
-msgstr ""
-
-#: includes/topersia-g-zones.php
-msgid "موتور:"
 msgstr ""
 
 #: includes/topersia-g-map.php

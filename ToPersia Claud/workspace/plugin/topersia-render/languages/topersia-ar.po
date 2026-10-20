@@ -130,10 +130,6 @@ msgstr "الأخبار"
 msgid "اخبار %s"
 msgstr "أخبار %s"
 
-#: includes/topersia-g-zones.php
-msgid "ادامه در موتور هوش مصنوعی"
-msgstr "المتابعة في محرك ذكاء اصطناعي"
-
 #: topersia-render.php
 msgid "ارتباط برقرار نشد."
 msgstr "تعذّر الاتصال."
@@ -824,11 +820,6 @@ msgstr "مهدد"
 #: includes/topersia-g-zones.php
 msgid "درباره"
 msgstr "نبذة"
-
-#: includes/topersia-g-zones.php
-#, php-format
-msgid "دربارۀ %1$s بر پایۀ این صفحه توضیح بده: %2$s"
-msgstr "اشرح %1$s استنادًا إلى هذه الصفحة: %2$s"
 
 #: includes/topersia-g-zones.php
 #, php-format
@@ -1813,10 +1804,6 @@ msgstr "هجرة الطيور"
 #: includes/topersia-g-zones.php
 msgid "مهر"
 msgstr "مهر"
-
-#: includes/topersia-g-zones.php
-msgid "موتور:"
-msgstr "المحرك:"
 
 #: includes/topersia-g-map.php
 msgid "موتورسواری و اتومبیل‌رانی"

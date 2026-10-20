@@ -151,8 +151,9 @@ async function guest() {
 				};
 			} );
 
-			check( 'هوش مصنوعی مهمان: اگر بلوک هست فقط خلاصهٔ ذخیره‌شده — بی نانس، بی موتور، بی دعوت و بی دکمهٔ ثبت‌نام (P5-D358)؛ نیست ← هم بی‌خروجی  §۴',
-				! ai || ( ! ai.nonce && 'summary' === ai.keys.join() && 'summary,copy' === ai.btns.join() && 0 === ai.engines
+			/* P5-D382: مهمان هم هر سه خروجی ذخیره‌شده (خلاصه · نکات · برنامه) را می‌بیند؛ دکمهٔ هر نوع فقط با خروجی؛ پیوند «موتور:» هیچ */
+			check( 'هوش مصنوعی مهمان: خروجی‌های ذخیره‌شده (هر نوعی که هست، خلاصه اول) با دکمهٔ همان نوع — بی نانس، بی موتور، بی دعوت و بی دکمهٔ ثبت‌نام (P5-D382 · P5-D358)؛ نیست ← هم بی‌خروجی  §۴',
+				! ai || ( ! ai.nonce && 'summary' === ai.keys[ 0 ] && ai.keys.every( k => [ 'summary', 'bullets', 'plan' ].includes( k ) ) && ai.keys.concat( 'copy' ).join() === ai.btns.join() && 0 === ai.engines
 				&& '' === ai.cta.trim() && '' === ai.signup.trim() && 0 === ai.signups && ! ai.login ), JSON.stringify( ai ) );
 
 			/* کلیک روی هر دکمهٔ خروجی — باز هم هیچ درخواست تولیدی */
@@ -258,8 +259,8 @@ async function member() {
 			cta: !! document.querySelector( '.tp-ai__cta, .tp-ai__cta-text, .tp-ai__signup' )
 		};
 	} );
-	check( 'واردشده: بی نانس تولید (P5-D358)؛ دکمه‌ها فقط برای خروجی ذخیره‌شده، موتورها؛ بی دعوت و بی پنجرهٔ ورود  §۴',
-		me.logged && ! me.modal && ! me.nonce && me.btns.every( b => [ 'summary', 'bullets', 'plan', 'copy' ].includes( b ) ) && ( 0 === me.btns.length || me.engines > 0 ) && ! me.cta, JSON.stringify( me ) );
+	check( 'واردشده: بی نانس تولید (P5-D358)؛ دکمه‌ها فقط برای خروجی ذخیره‌شده؛ هیچ پیوند «موتور:» (P5-D382)؛ بی دعوت و بی پنجرهٔ ورود  §۴',
+		me.logged && ! me.modal && ! me.nonce && me.btns.every( b => [ 'summary', 'bullets', 'plan', 'copy' ].includes( b ) ) && 0 === me.engines && ! me.cta, JSON.stringify( me ) );
 
 	/* ── ذخیره ── */
 	let res = page.waitForResponse( r => isAction( r, 'topersia_save_place' ) );

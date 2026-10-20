@@ -5232,35 +5232,8 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
  *
  * اگر هیچ خلاصه‌ای نباشد، بخش نمی‌آید.
  *
- * دکمه‌های موتور پیوند بیرونی‌اند، نه دکمۀ جاوااسکریپتی: کاربر از صفحه
- * می‌رود، و `<a>` کلیک میانی و برگۀ تازه را خودش می‌داند.
+ * پیوندهای «موتور:» (ChatGPT · Claude · Gemini · Copilot) و `topersia_g_ai_engines()` / `topersia_g_ai_icons()` برداشته شد — P5-D382 · P5-D255.
  */
-if ( ! function_exists( 'topersia_g_ai_engines' ) ) {
-	function topersia_g_ai_engines() {
-
-		return array(
-			'ChatGPT' => 'https://chatgpt.com/?q=%s',
-			'Claude'  => 'https://claude.ai/new?q=%s',
-			'Gemini'  => 'https://gemini.google.com/app?q=%s',
-			'Copilot' => 'https://copilot.microsoft.com/?q=%s',
-		);
-	}
-}
-
-if ( ! function_exists( 'topersia_g_ai_icons' ) ) {
-	function topersia_g_ai_icons() {
-
-		$open = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"'
-			. ' stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
-
-		return array(
-			'ChatGPT' => $open . '<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg>',
-			'Claude'  => $open . '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
-			'Gemini'  => $open . '<path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg>',
-			'Copilot' => $open . '<circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M8.5 14c1 1.5 6 1.5 7 0"/></svg>',
-		);
-	}
-}
 
 /**
  * خروجی‌های ذخیره‌شدۀ افزونۀ `topersia-ai-summarizer` برای یک پست.  ۴٫۲٫۱ بند ۱۰ · ۴٫۳٫۰ بند ۴
@@ -5333,9 +5306,11 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			return '';
 		}
 
-		$logged = function_exists( 'is_user_logged_in' ) && is_user_logged_in();
-
 		/*
+		 * P5-D382 (جایگزین بخش نمایش P5-D358): خلاصه · نکات کلیدی · پیشنهاد سفر برای همۀ بازدیدکننده‌ها — مهمان هم —
+		 * در HTML سرور؛ نوعی که خروجی ذخیره‌شده ندارد دکمه نمی‌گیرد. پیوندهای «موتور:» حذف شد (P5-D255).
+		 * تولید فقط در صف پس‌زمینۀ خلاصه‌ساز، پس از انتشار یا ذخیرۀ ویرایشگر — هیچ مسیر عمومی تولید را آغاز نمی‌کند.
+		 *
 		 * فقط خروجیِ ذخیره‌شده، برای هر بازدیدکننده — مهمان و واردشده.  P5-D358
 		 * خروجیِ ذخیره‌شدۀ خلاصه‌ساز اول (`tpas_get_summary`؛ در نبودش `TP_AI_Summary::get_cached`)،
 		 * وگرنه `ai_summary` دستی؛ هیچ‌کدام نبود ← بلوک نمی‌آید. نه دکمۀ تولید، نه دعوت به ثبت‌نام برای AI، نه درخواست AJAX:
@@ -5348,13 +5323,11 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			return '';
 		}
 
-		$name = topersia_g_name( $pid );
-
-		/* برچسب‌ها و کلیدهای `data-ai` عیناً مرجع: summary · bullets · plan. مهمان فقط خلاصه را دارد؛ نکات و برنامۀ ذخیره‌شده برای واردشده. */
+		/* برچسب‌ها و کلیدهای `data-ai` عیناً مرجع: summary · bullets · plan — برای همه (P5-D382). */
 		$data = array_filter( array(
 			'summary' => $summary,
-			'bullets' => $logged && isset( $ai['keypoints'] ) ? $ai['keypoints'] : '',
-			'plan'    => $logged && isset( $ai['plan'] ) ? $ai['plan'] : '',
+			'bullets' => isset( $ai['keypoints'] ) ? $ai['keypoints'] : '',
+			'plan'    => isset( $ai['plan'] ) ? $ai['plan'] : '',
 		) );
 
 		/* دکمۀ هر نوع فقط وقتی خروجی ذخیره‌شده‌اش هست — دکمۀ بی خروجی بی‌کار می‌ماند */
@@ -5383,37 +5356,6 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>'
 			. esc_html__( 'کپی خروجی', 'topersia' ) . '</button>';
 
-		$url     = (string) get_permalink( $pid );
-		$engines = '';
-
-		if ( $logged ) {
-
-			/*
-			 * پرسشی که موتور با آن باز می‌شود: نام موجودیت و نشانی همین صفحه.
-			 * بی‌نشانی، موتور نمی‌داند دربارۀ کدام صفحه حرف می‌زنیم.
-			 */
-			$prompt = sprintf(
-				/* translators: 1: نام موجودیت 2: نشانی صفحه */
-				esc_html__( 'دربارۀ %1$s بر پایۀ این صفحه توضیح بده: %2$s', 'topersia' ),
-				$name,
-				$url
-			);
-
-			$icons   = topersia_g_ai_icons();
-			$engines = '<span class="tp-ai__engines-label">' . esc_html__( 'موتور:', 'topersia' ) . '</span>';
-
-			foreach ( topersia_g_ai_engines() as $engine => $pattern ) {
-
-				$engines .= '<a class="tp-ai__engine" href="'
-					. esc_url( sprintf( $pattern, rawurlencode( $prompt ) ) ) . '"'
-					. ' target="_blank" rel="nofollow noopener">'
-					. $icons[ $engine ] . esc_html( $engine ) . '</a>';
-			}
-
-			$engines = '<div class="tp-ai__engines" role="group" aria-label="'
-				. esc_attr__( 'ادامه در موتور هوش مصنوعی', 'topersia' ) . '">' . $engines . '</div>';
-		}
-
 		$first_label = reset( $types );
 
 		/*
@@ -5425,7 +5367,6 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. '<h2>' . esc_html__( 'این مقصد را در یک نگاه بفهمید', 'topersia' ) . '</h2>'
 			. '<div class="tp-ai__actions" role="group" aria-label="'
 			. esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>'
-			. $engines
 			. '<div class="tp-ai__out" data-tp-ai-out'
 			. " data-tp-ai='" . esc_attr( wp_json_encode( $data ) ) . "'"
 			. ' aria-live="polite"><p class="tp-justify">' . esc_html( $summary ) . '</p>'

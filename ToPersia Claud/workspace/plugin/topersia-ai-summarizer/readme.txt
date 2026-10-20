@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.3.2
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,9 @@ The key is stored in the `tpas_settings` option, never printed, and kept when yo
 Yes by default, with `rel="noopener nofollow"`, both configurable.
 
 == Changelog ==
+
+= 1.4.0 =
+* P5-D382 - automatic generation is on by default: publishing or saving any language version by a user who may edit the post puts one job in the ToPersia Core queue (Action Scheduler) for that post and language, covering summary, key points and travel plan. Nothing is queued when the source text did not change. A full daily cap moves the job to the next day; an engine error retries later with a growing delay; a save never waits for an engine. No public path starts a generation.
 
 = 1.3.0 =
 * P5-D358 - the AI summary of a page is made by the site admin only, in WordPress, with the engine chosen in the settings. No visitor (guest or logged in) asks for a generation, so API tokens and cost do not grow with traffic.
