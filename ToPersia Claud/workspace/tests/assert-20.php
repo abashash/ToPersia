@@ -10,6 +10,29 @@
 
 echo "\nدستهٔ ۲۰ — ایرادهای صفحهٔ موجودیت  P5-D380…P5-D390\n" . str_repeat( '─', 78 ) . "\n";
 
+/* ══ P5-D388 — تصویر خبر ══════════════════════════════════════════════ */
+
+$GLOBALS['tp_posts'][90] = array( 'type' => 'tpc_news', 'title' => 'خبر آزمون', 'url' => 'https://topersia.com/news/test/' );
+$GLOBALS['tp_meta'][90]  = array( 'hero_image' => '501', '_thumbnail_id' => '502', 'short_summary' => 'خلاصهٔ خبر.' );
+$n20_hero  = topersia_g_news_card( 90 );
+unset( $GLOBALS['tp_meta'][90]['hero_image'] );
+$n20_thumb = topersia_g_news_card( 90 );
+unset( $GLOBALS['tp_meta'][90]['_thumbnail_id'] );
+$n20_none  = topersia_g_news_card( 90 );
+$GLOBALS['tp_meta'][90]['hero_image']    = '501';
+$GLOBALS['tp_meta'][90]['_thumbnail_id'] = '502';
+/* رفتار پیشین (فقط تصویر شاخص) — جهش */
+$n20_old = (string) get_the_post_thumbnail( 90, 'medium', array( 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '(max-width: 720px) 88px, 112px' ) );
+$n20_claim = function ( $hero_html ) use ( $n20_thumb, $n20_none ) {
+	return false !== strpos( $hero_html, 'uploads/501.jpg' ) && false === strpos( $hero_html, 'uploads/502.jpg' )
+		&& false !== strpos( $hero_html, 'sizes="(max-width: 720px) 88px, 112px"' ) && false !== strpos( $hero_html, 'loading="lazy"' ) && 1 === preg_match( '/<img width="\d+" height="\d+"/', $hero_html )
+		&& false !== strpos( $n20_thumb, 'uploads/502.jpg' )
+		&& false === strpos( $n20_none, '<img' ) && false !== strpos( $n20_none, '<svg viewBox="0 0 24 24"' );
+};
+tp441_mut( 'خبر: تصویر از hero_image خودِ خبر، نبود ← تصویر شاخص، نبود ← آیکون؛ همان اندازه‌ها (sizes، lazy، ابعاد صریح)  P5-D388',
+	$n20_claim, $n20_hero, $n20_old );
+unset( $GLOBALS['tp_posts'][90], $GLOBALS['tp_meta'][90] );
+
 /* ══ P5-D385 — مسیر گردشگری: «استان‌های مسیر» در «اطلاعات جغرافیایی»، نه شهرهای ایستگاه ══════ */
 
 $r20_keep = array( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'], $GLOBALS['tp_rel'], isset( $GLOBALS['tp_filters']['topersia_g_relreg'] ) ? $GLOBALS['tp_filters']['topersia_g_relreg'] : null, isset( $GLOBALS['tp442_stops'] ) ? $GLOBALS['tp442_stops'] : null );
