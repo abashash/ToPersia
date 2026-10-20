@@ -4,7 +4,10 @@
  *
  *   wp eval-file scripts/tp-facts.php match     ← تطبیق QID، دریافت مقدارها، reference/facts-proposed.csv + خلاصه
  *   wp eval-file scripts/tp-facts.php report    ← شمارها و پوشش پیش/پس از روی همان CSV (آفلاین)
- *   wp eval-file scripts/tp-facts.php apply     ← قفل: فقط پس از تأیید کاربر روی CSV (ستون approved = yes) پیاده می‌شود
+ *   wp eval-file scripts/tp-facts.php mark      ← ستون approved را با قاعدهٔ تأییدشدهٔ کاربر پر می‌کند (دستهٔ ۲۲ب)
+ *   wp eval-file scripts/tp-facts.php apply dry-run | apply   ← فقط approved؛ پشتیبان؛ لاگ؛ شمار انتظار ۳۸۳ وگرنه توقف
+ *   wp eval-file scripts/tp-facts.php rollback <لاگ>          ← برگشت از لاگ
+ *   wp eval-file scripts/tp-facts.php verify    ← QID استان‌ها (P31) و sameAs JSON-LD پنج استان نمونه
  *
  * منبع ذخیره‌شده فقط ویکی‌داده (CC0): P625 مختصات · P1082 جمعیت با P585 (سال) و ارجاعش · P2046 مساحت · P2044 ارتفاع · P36 مرکز استان.
  * OSM فقط برای تطبیق و سنجش (تگ wikidata عنصرِ همان شناسه‌ای که reference/osm-boundary-map.csv دارد، از کش Overpass محلی)، هرگز منبع مقدار.
@@ -486,9 +489,63 @@ if ( 'report' === $cmd ) {
 	return;
 }
 
-if ( 'apply' === $cmd ) {
-	echo "قفل: apply فقط پس از تأیید کاربر روی reference/facts-proposed.csv پیاده و اجرا می‌شود (P5-D393 گام ۳).\n";
+/* ══ mark · apply · rollback · verify — P5-D394 (دستهٔ ۲۲ب) ══════════════════════════ */
+require_once __DIR__ . '/lib/tp-facts-lib.php';
+
+if ( 'mark' === $cmd ) {
+	list( $h, $rows ) = tpf_csv_load( $csv );
+	$n = tpf_mark( $rows );
+	tpf_csv_save( $csv, $h, $rows );
+	echo 'approved: yes=' . $n['yes'] . ' · yes-replace=' . $n['yes-replace'] . ' · جمع ' . ( $n['yes'] + $n['yes-replace'] ) . "\n";
 	return;
 }
 
-echo "match · report · apply\n";
+if ( 'apply' === $cmd ) {
+	$dry = isset( $args[1] ) && in_array( $args[1], array( 'dry-run', 'dry', '--dry-run' ), true );
+	list( $h, $rows ) = tpf_csv_load( $csv );
+	$res = tpf_apply( $rows, array( 'dry' => $dry, 'backup' => true, 'expect' => 383 ) );
+	if ( isset( $res['error'] ) ) { echo '✗ ' . $res['error'] . "\n"; return; }
+	echo ( $dry ? "dry-run (هیچ نوشتنی نشد):\n" : "اجرای واقعی:\n" );
+	if ( $dry ) { foreach ( $res['lines'] as $l ) { echo '  ' . $l . "\n"; } }
+	ksort( $res['by'] );
+	foreach ( $res['by'] as $k => $v ) { echo '  ' . $k . ' = ' . $v . "\n"; }
+	if ( ! $dry ) { echo "پشتیبان: {$res['backup']}\nلاگ: {$res['logfile']}\nبرگشت: wp eval-file scripts/tp-facts.php rollback \"{$res['logfile']}\"\n"; }
+	return;
+}
+
+if ( 'rollback' === $cmd ) {
+	$lf = isset( $args[1] ) ? $args[1] : '';
+	if ( '' === $lf || ! is_file( $lf ) ) { echo "rollback <مسیر لاگ>\n"; return; }
+	echo wp_json_encode( tpf_rollback( $lf ), JSON_UNESCAPED_UNICODE ) . "\n";
+	return;
+}
+
+if ( 'verify' === $cmd ) {
+	$prov = array();
+	foreach ( get_posts( array( 'post_type' => 'tp_province', 'post_status' => 'publish', 'numberposts' => -1, 'suppress_filters' => false, 'lang' => 'fa' ) ) as $p ) { $prov[ $p->ID ] = array( get_the_title( $p ), tpf_qid( get_post_meta( $p->ID, 'external_reference_uri', true ) ), get_permalink( $p ) ); }
+	$qs = array_values( array_unique( array_filter( array_column( $prov, 1 ) ) ) );
+	$res = tpf_sparql( 'SELECT ?item ?label ?root WHERE { VALUES ?item { ' . implode( ' ', array_map( function ( $q ) { return 'wd:' . $q; }, $qs ) ) . ' } OPTIONAL { ?item rdfs:label ?label FILTER( lang( ?label ) = "en" ) } OPTIONAL { ?item wdt:P31/wdt:P279* wd:Q1344695 . BIND( "yes" AS ?root ) } }', 'verify' . substr( md5( implode( ',', $qs ) ), 0, 6 ) );
+	$ok = array(); $lab = array();
+	foreach ( tpf_rows( $res ) as $r ) { $q = tpf_q( $r['item'] ); if ( ! empty( $r['root'] ) ) { $ok[ $q ] = 1; } if ( ! empty( $r['label'] ) ) { $lab[ $q ] = $r['label']; } }
+	$good = 0; $bad = array();
+	foreach ( $prov as $id => $x ) { if ( isset( $ok[ $x[1] ] ) ) { $good++; } else { $bad[] = $x[0] . ' ' . $x[1] . ' (' . ( $lab[ $x[1] ] ?? '?' ) . ')'; } }
+	echo 'استان ایران (P31/P279* = Q1344695): ' . $good . ' از ' . count( $prov ) . "\n";
+	foreach ( $bad as $b ) { echo '  ✗ ' . $b . "\n"; }
+	foreach ( array( 'گیلان', 'مازندران', 'گلستان', 'البرز', 'آذربایجان شرقی' ) as $name ) {
+		foreach ( $prov as $id => $x ) {
+			if ( tpb_norm( $x[0] ) !== tpb_norm( $name ) ) { continue; }
+			$c = curl_init( $x[2] );
+			curl_setopt_array( $c, array( CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 120, CURLOPT_FOLLOWLOCATION => true, CURLOPT_HTTPHEADER => array( 'Accept-Encoding: identity' ), CURLOPT_PROXY => '' ) );
+			$html = (string) curl_exec( $c );
+			curl_close( $c );
+			preg_match_all( '~<script type="application/ld\+json"[^>]*>(.*?)</script>~s', $html, $m );
+			$same = array();
+			foreach ( $m[1] as $js ) { $j = json_decode( $js, true ); $walk = function ( $n ) use ( &$walk, &$same ) { if ( is_array( $n ) ) { foreach ( $n as $k => $v ) { if ( 'sameAs' === $k ) { foreach ( (array) $v as $u ) { $same[] = $u; } } else { $walk( $v ); } } } }; $walk( $j ); }
+			$want = 'https://www.wikidata.org/wiki/' . $x[1];
+			echo '  ' . $name . ' ' . $x[1] . ' (' . ( $lab[ $x[1] ] ?? '?' ) . '): sameAs=' . wp_json_encode( $same ) . ' ' . ( in_array( $want, $same, true ) ? '✓' : '✗' ) . ' · ' . strlen( $html ) . " بایت\n";
+		}
+	}
+	return;
+}
+
+echo "match · report · mark · apply [dry-run] · rollback <log> · verify\n";

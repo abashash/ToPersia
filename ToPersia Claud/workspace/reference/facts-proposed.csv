@@ -4,103 +4,103 @@ https://topersia.com/e/country/islamic-republic-of-iran,tp_country,ایران,Q7
 https://topersia.com/e/country/islamic-republic-of-iran,tp_country,ایران,Q794,data,auto,"GeoJSON استان نیست",area_km2,1648195,1648195,same,P2046,,,2026-10-20,
 https://topersia.com/e/province/tehran-province,tp_province,"استان تهران",Q590866,data,auto,"درون استان ✓",geo_coordinates,"35.7117, 51.4069","35.7117, 51.407",same,P625,,,2026-10-20,
 https://topersia.com/e/province/tehran-province,tp_province,"استان تهران",Q590866,data,auto,"درون استان ✓",population,13267637,13267637,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-https://topersia.com/e/province/tehran-province,tp_province,"استان تهران",Q590866,data,auto,"درون استان ✓",area_km2,13670,18814,diff,P2046,,,2026-10-20,
+https://topersia.com/e/province/tehran-province,tp_province,"استان تهران",Q590866,data,auto,"درون استان ✓",area_km2,13670,18814,diff,P2046,,,2026-10-20,yes-replace
 https://topersia.com/e/province/tehran-province,tp_province,"استان تهران",Q590866,data,auto,"درون استان ✓","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q3616)",P36,,,2026-10-20,
-http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182802,https://www.wikidata.org/wiki/Q170568,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182802,https://www.wikidata.org/wiki/Q170568,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)",geo_coordinates,"31.9,54.4","31.8948, 54.357",same,P625,,,2026-10-20,
 http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)",population,1156000,1138533,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)",area_km2,76469,129285,diff,P2046,,,2026-10-20,
+http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)",area_km2,76469,129285,diff,P2046,,,2026-10-20,yes-replace
 http://topersia.local/e/province/yazd,tp_province,یزد,Q170568,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182802 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q182394)",P36,,,2026-10-20,
-http://topersia.local/e/province/hamadan,tp_province,همدان,Q187373,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182662 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182662,https://www.wikidata.org/wiki/Q187373,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/hamadan,tp_province,همدان,Q187373,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182662 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182662,https://www.wikidata.org/wiki/Q187373,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/hamadan,tp_province,همدان,Q187373,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182662 (data)",geo_coordinates,"34.8,48.5","34.7982, 48.5146",same,P625,,,2026-10-20,
 http://topersia.local/e/province/hamadan,tp_province,همدان,Q187373,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182662 (data)",population,1756000,1738234,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/hamadan,tp_province,همدان,Q187373,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182662 (data)",area_km2,19368,19368,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/hamadan,tp_province,همدان,Q187373,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182662 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q28587)",P36,,,2026-10-20,
-http://topersia.local/e/province/hormozgan,tp_province,هرمزگان,Q633659,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q483369 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q483369,https://www.wikidata.org/wiki/Q633659,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/hormozgan,tp_province,هرمزگان,Q633659,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q483369 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q483369,https://www.wikidata.org/wiki/Q633659,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/hormozgan,tp_province,هرمزگان,Q633659,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q483369 (data)",geo_coordinates,"27.2,56.3","27.1884, 56.2768",same,P625,,,2026-10-20,
 http://topersia.local/e/province/hormozgan,tp_province,هرمزگان,Q633659,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q483369 (data)",population,1806000,1776415,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/hormozgan,tp_province,هرمزگان,Q633659,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q483369 (data)",area_km2,70669,70697,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/hormozgan,tp_province,هرمزگان,Q633659,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q483369 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q154814)",P36,,,2026-10-20,
-http://topersia.local/e/province/markazi,tp_province,مرکزی,Q134417,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q179825 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q179825,https://www.wikidata.org/wiki/Q134417,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/markazi,tp_province,مرکزی,Q134417,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q179825 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q179825,https://www.wikidata.org/wiki/Q134417,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/markazi,tp_province,مرکزی,Q134417,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q179825 (data)",geo_coordinates,"34.583,49.683","34.618611, 49.944167",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/markazi,tp_province,مرکزی,Q134417,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q179825 (data)",population,1436000,1429475,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/markazi,tp_province,مرکزی,Q134417,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q179825 (data)",area_km2,29130,29127,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/markazi,tp_province,مرکزی,Q134417,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q179825 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q212628)",P36,,,2026-10-20,
-http://topersia.local/e/province/mazandaran,tp_province,مازندران,Q308864,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170251 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q170251,https://www.wikidata.org/wiki/Q308864,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/mazandaran,tp_province,مازندران,Q308864,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170251 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q170251,https://www.wikidata.org/wiki/Q308864,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/mazandaran,tp_province,مازندران,Q308864,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170251 (data)",geo_coordinates,"36.5,53.0","36.5656, 53.0588",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/mazandaran,tp_province,مازندران,Q308864,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170251 (data)",population,3302000,3283582,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/mazandaran,tp_province,مازندران,Q308864,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170251 (data)",area_km2,23701,23842,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/mazandaran,tp_province,مازندران,Q308864,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170251 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q168843)",P36,,,2026-10-20,
-http://topersia.local/e/province/lorestan,tp_province,لرستان,Q1131727,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182603 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182603,https://www.wikidata.org/wiki/Q1131727,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/lorestan,tp_province,لرستان,Q1131727,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182603 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182603,https://www.wikidata.org/wiki/Q1131727,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/lorestan,tp_province,لرستان,Q1131727,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182603 (data)",geo_coordinates,"33.5,48.4","33.4871, 48.3538",same,P625,,,2026-10-20,
 http://topersia.local/e/province/lorestan,tp_province,لرستان,Q1131727,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182603 (data)",population,1784000,1760649,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/lorestan,tp_province,لرستان,Q1131727,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182603 (data)",area_km2,28294,28294,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/lorestan,tp_province,لرستان,Q1131727,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182603 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q502212)",P36,,,2026-10-20,
-http://topersia.local/e/province/gilan,tp_province,گیلان,Q928828,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170186 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q170186,https://www.wikidata.org/wiki/Q928828,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/gilan,tp_province,گیلان,Q928828,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170186 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q170186,https://www.wikidata.org/wiki/Q928828,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/gilan,tp_province,گیلان,Q928828,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170186 (data)",geo_coordinates,"37.28,49.59","37.2774, 49.589",same,P625,,,2026-10-20,
 http://topersia.local/e/province/gilan,tp_province,گیلان,Q928828,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170186 (data)",population,2546000,2530696,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/gilan,tp_province,گیلان,Q928828,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170186 (data)",area_km2,14042,14042,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/gilan,tp_province,گیلان,Q928828,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q170186 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q178373)",P36,,,2026-10-20,
-http://topersia.local/e/province/golestan,tp_province,گلستان,Q170041,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173500 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q173500,https://www.wikidata.org/wiki/Q170041,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/golestan,tp_province,گلستان,Q170041,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173500 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q173500,https://www.wikidata.org/wiki/Q170041,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/golestan,tp_province,گلستان,Q170041,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173500 (data)",geo_coordinates,"37.0,55.0","36.8393, 54.4444",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/golestan,tp_province,گلستان,Q170041,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173500 (data)",population,1893000,1868819,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/golestan,tp_province,گلستان,Q170041,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173500 (data)",area_km2,20195,20367,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/golestan,tp_province,گلستان,Q170041,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173500 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q188155)",P36,,,2026-10-20,
-http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,tp_province,"کهگیلویه و بویراحمد",Q180068,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182721 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182721,https://www.wikidata.org/wiki/Q180068,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,tp_province,"کهگیلویه و بویراحمد",Q180068,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182721 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182721,https://www.wikidata.org/wiki/Q180068,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,tp_province,"کهگیلویه و بویراحمد",Q180068,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182721 (data)",geo_coordinates,"30.7,51.6","30.833333, 50.666667",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,tp_province,"کهگیلویه و بویراحمد",Q180068,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182721 (data)",population,728000,713052,diff,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,tp_province,"کهگیلویه و بویراحمد",Q180068,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182721 (data)",area_km2,15504,15504,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/kohgiluyeh-and-boyer-ahmad,tp_province,"کهگیلویه و بویراحمد",Q180068,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182721 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q383129)",P36,,,2026-10-20,
-http://topersia.local/e/province/kermanshah,tp_province,کرمانشاه,Q174010,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182587 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182587,https://www.wikidata.org/wiki/Q174010,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/kermanshah,tp_province,کرمانشاه,Q174010,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182587 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182587,https://www.wikidata.org/wiki/Q174010,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/kermanshah,tp_province,کرمانشاه,Q174010,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182587 (data)",geo_coordinates,"34.3,47.1","34.3, 47.066667",same,P625,,,2026-10-20,
 http://topersia.local/e/province/kermanshah,tp_province,کرمانشاه,Q174010,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182587 (data)",population,2003000,1952434,diff,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/kermanshah,tp_province,کرمانشاه,Q174010,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182587 (data)",area_km2,24998,25009,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/kermanshah,tp_province,کرمانشاه,Q174010,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182587 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q180078)",P36,,,2026-10-20,
-http://topersia.local/e/province/kerman,tp_province,کرمان,Q165352,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q210797 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q210797,https://www.wikidata.org/wiki/Q165352,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/kerman,tp_province,کرمان,Q165352,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q210797 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q210797,https://www.wikidata.org/wiki/Q165352,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/kerman,tp_province,کرمان,Q165352,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q210797 (data)",geo_coordinates,"30.3,57.1","29.21, 57.07",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/kerman,tp_province,کرمان,Q165352,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q210797 (data)",population,3184000,3164718,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/kerman,tp_province,کرمان,Q165352,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q210797 (data)",area_km2,183285,180726,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/kerman,tp_province,کرمان,Q165352,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q210797 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q171714)",P36,,,2026-10-20,
-http://topersia.local/e/province/kurdistan,tp_province,کردستان,Q134386,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182795 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182795,https://www.wikidata.org/wiki/Q134386,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/kurdistan,tp_province,کردستان,Q134386,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182795 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182795,https://www.wikidata.org/wiki/Q134386,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/kurdistan,tp_province,کردستان,Q134386,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182795 (data)",geo_coordinates,"35.3,47.0","35.727778, 46.966944",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/kurdistan,tp_province,کردستان,Q134386,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182795 (data)",population,1614000,1603011,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/kurdistan,tp_province,کردستان,Q134386,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182795 (data)",area_km2,29137,29137,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/kurdistan,tp_province,کردستان,Q134386,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182795 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q272093)",P36,,,2026-10-20,
-http://topersia.local/e/province/qom,tp_province,قم,Q131664,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q222180 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q222180,https://www.wikidata.org/wiki/Q131664,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/qom,tp_province,قم,Q131664,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q222180 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q222180,https://www.wikidata.org/wiki/Q131664,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/qom,tp_province,قم,Q131664,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q222180 (data)",geo_coordinates,"34.667,50.833","34.6456, 50.8798",same,P625,,,2026-10-20,
 http://topersia.local/e/province/qom,tp_province,قم,Q131664,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q222180 (data)",population,1300000,1292283,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/qom,tp_province,قم,Q131664,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q222180 (data)",area_km2,11526,11526,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/qom,tp_province,قم,Q131664,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q222180 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q170573)",P36,,,2026-10-20,
-http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182580,https://www.wikidata.org/wiki/Q1105893,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182580,https://www.wikidata.org/wiki/Q1105893,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)",geo_coordinates,"36.3,50.0","36.2693, 50.0029",same,P625,,,2026-10-20,
 http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)",population,1284000,1273761,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)",area_km2,15549,15567,same,P2046,,,2026-10-20,
-http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)","rel:96 (مرکز استان)",,http://topersia.local/e/city/qazvin,fill,P36,,,2026-10-20,
+http://topersia.local/e/province/qazvin,tp_province,قزوین,Q1105893,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182580 (data)","rel:96 (مرکز استان)",,http://topersia.local/e/city/qazvin,fill,P36,,,2026-10-20,yes
 http://topersia.local/e/province/fars,tp_province,فارس,Q1004666,data,auto,"درون استان ✓",geo_coordinates,"29.6,52.5","29.625, 52.531667",same,P625,,,2026-10-20,
 http://topersia.local/e/province/fars,tp_province,فارس,Q1004666,data,auto,"درون استان ✓",population,4904000,4851274,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/fars,tp_province,فارس,Q1004666,data,auto,"درون استان ✓",area_km2,122608,122608,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/fars,tp_province,فارس,Q1004666,data,auto,"درون استان ✓","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q6397066)",P36,,,2026-10-20,
-http://topersia.local/e/province/sistan-and-baluchestan,tp_province,"سیستان و بلوچستان",Q939575,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q180773 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q180773,https://www.wikidata.org/wiki/Q939575,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/sistan-and-baluchestan,tp_province,"سیستان و بلوچستان",Q939575,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q180773 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q180773,https://www.wikidata.org/wiki/Q939575,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/sistan-and-baluchestan,tp_province,"سیستان و بلوچستان",Q939575,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q180773 (data)",geo_coordinates,"29.5,60.9","29.4924, 60.8669",same,P625,,,2026-10-20,
 http://topersia.local/e/province/sistan-and-baluchestan,tp_province,"سیستان و بلوچستان",Q939575,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q180773 (data)",population,2777000,2775014,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/sistan-and-baluchestan,tp_province,"سیستان و بلوچستان",Q939575,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q180773 (data)",area_km2,180726,181785,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/sistan-and-baluchestan,tp_province,"سیستان و بلوچستان",Q939575,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q180773 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q140561)",P36,,,2026-10-20,
-http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182726,https://www.wikidata.org/wiki/Q168949,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182726,https://www.wikidata.org/wiki/Q168949,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)",geo_coordinates,"35.6,53.4","35.234444, 53.920556",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)",population,715000,702360,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)",area_km2,97491,97491,same,P2046,,,2026-10-20,
-http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)","rel:96 (مرکز استان)",,http://topersia.local/e/city/semnan,fill,P36,,,2026-10-20,
-http://topersia.local/e/province/zanjan,tp_province,زنجان,Q146726,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182797 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182797,https://www.wikidata.org/wiki/Q146726,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/semnan,tp_province,سمنان,Q168949,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182726 (data)","rel:96 (مرکز استان)",,http://topersia.local/e/city/semnan,fill,P36,,,2026-10-20,yes
+http://topersia.local/e/province/zanjan,tp_province,زنجان,Q146726,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182797 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182797,https://www.wikidata.org/wiki/Q146726,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/zanjan,tp_province,زنجان,Q146726,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182797 (data)",geo_coordinates,"36.7,48.5","36.6751, 48.4845",same,P625,,,2026-10-20,
 http://topersia.local/e/province/zanjan,tp_province,زنجان,Q146726,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182797 (data)",population,1103000,1057461,diff,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/zanjan,tp_province,زنجان,Q146726,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182797 (data)",area_km2,21773,21773,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/zanjan,tp_province,زنجان,Q146726,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182797 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q146699)",P36,,,2026-10-20,
-http://topersia.local/e/province/khuzestan,tp_province,خوزستان,Q241119,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182597 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182597,https://www.wikidata.org/wiki/Q241119,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/khuzestan,tp_province,خوزستان,Q241119,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182597 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182597,https://www.wikidata.org/wiki/Q241119,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/khuzestan,tp_province,خوزستان,Q241119,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182597 (data)",geo_coordinates,"31.3,48.7","31.3273, 48.694",same,P625,,,2026-10-20,
 http://topersia.local/e/province/khuzestan,tp_province,خوزستان,Q241119,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182597 (data)",population,4725000,4710509,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/khuzestan,tp_province,خوزستان,Q241119,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182597 (data)",area_km2,64055,64055,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/khuzestan,tp_province,خوزستان,Q241119,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182597 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q170366)",P36,,,2026-10-20,
-http://topersia.local/e/province/north-khorasan,tp_province,"خراسان شمالی",Q180075,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q193188 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q193188,https://www.wikidata.org/wiki/Q180075,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/north-khorasan,tp_province,"خراسان شمالی",Q180075,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q193188 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q193188,https://www.wikidata.org/wiki/Q180075,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/north-khorasan,tp_province,"خراسان شمالی",Q180075,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q193188 (data)",geo_coordinates,"37.5,57.3","37.4761, 57.3317",same,P625,,,2026-10-20,
 http://topersia.local/e/province/north-khorasan,tp_province,"خراسان شمالی",Q180075,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q193188 (data)",population,868000,863092,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/north-khorasan,tp_province,"خراسان شمالی",Q180075,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q193188 (data)",area_km2,28434,28434,same,P2046,,,2026-10-20,
@@ -108,28 +108,28 @@ http://topersia.local/e/province/north-khorasan,tp_province,"خراسان شما
 http://topersia.local/e/province/razavi-khorasan,tp_province,"خراسان رضوی",Q587090,data,auto,"درون استان ✓",geo_coordinates,"36.3,59.6","35.772528, 58.785194",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/razavi-khorasan,tp_province,"خراسان رضوی",Q587090,data,auto,"درون استان ✓",population,6444000,6434501,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/razavi-khorasan,tp_province,"خراسان رضوی",Q587090,data,auto,"درون استان ✓",area_km2,118884,118884,same,P2046,,,2026-10-20,
-http://topersia.local/e/province/razavi-khorasan,tp_province,"خراسان رضوی",Q587090,data,auto,"درون استان ✓","rel:96 (مرکز استان)",,http://topersia.local/e/city/mashhad,fill,P36,,,2026-10-20,
-http://topersia.local/e/province/south-khorasan,tp_province,"خراسان جنوبی",Q171551,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q194415 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q194415,https://www.wikidata.org/wiki/Q171551,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/razavi-khorasan,tp_province,"خراسان رضوی",Q587090,data,auto,"درون استان ✓","rel:96 (مرکز استان)",,http://topersia.local/e/city/mashhad,fill,P36,,,2026-10-20,yes
+http://topersia.local/e/province/south-khorasan,tp_province,"خراسان جنوبی",Q171551,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q194415 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q194415,https://www.wikidata.org/wiki/Q171551,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/south-khorasan,tp_province,"خراسان جنوبی",Q171551,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q194415 (data)",geo_coordinates,"32.9,59.2","32.8653, 59.2164",same,P625,,,2026-10-20,
 http://topersia.local/e/province/south-khorasan,tp_province,"خراسان جنوبی",Q171551,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q194415 (data)",population,786000,768898,diff,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/south-khorasan,tp_province,"خراسان جنوبی",Q171551,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q194415 (data)",area_km2,151913,151913,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/south-khorasan,tp_province,"خراسان جنوبی",Q171551,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q194415 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q193806)",P36,,,2026-10-20,
-http://topersia.local/e/province/chaharmahal-and-bakhtiari,tp_province,"چهارمحال و بختیاری",Q171702,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182668 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182668,https://www.wikidata.org/wiki/Q171702,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/chaharmahal-and-bakhtiari,tp_province,"چهارمحال و بختیاری",Q171702,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182668 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182668,https://www.wikidata.org/wiki/Q171702,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/chaharmahal-and-bakhtiari,tp_province,"چهارمحال و بختیاری",Q171702,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182668 (data)",geo_coordinates,"32.0,50.5","32.3275, 50.8546",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/chaharmahal-and-bakhtiari,tp_province,"چهارمحال و بختیاری",Q171702,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182668 (data)",population,973000,947763,diff,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/chaharmahal-and-bakhtiari,tp_province,"چهارمحال و بختیاری",Q171702,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182668 (data)",area_km2,16332,16332,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/chaharmahal-and-bakhtiari,tp_province,"چهارمحال و بختیاری",Q171702,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182668 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q386649)",P36,,,2026-10-20,
-http://topersia.local/e/province/bushehr,tp_province,بوشهر,Q132945,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182799 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182799,https://www.wikidata.org/wiki/Q132945,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/bushehr,tp_province,بوشهر,Q132945,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182799 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182799,https://www.wikidata.org/wiki/Q132945,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/bushehr,tp_province,بوشهر,Q132945,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182799 (data)",geo_coordinates,"28.9,50.8","28.9184, 50.8382",same,P625,,,2026-10-20,
 http://topersia.local/e/province/bushehr,tp_province,بوشهر,Q132945,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182799 (data)",population,1174000,1163400,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/bushehr,tp_province,بوشهر,Q132945,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182799 (data)",area_km2,22743,22743,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/bushehr,tp_province,بوشهر,Q132945,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182799 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q158928)",P36,,,2026-10-20,
-http://topersia.local/e/province/ilam,tp_province,ایلام,Q170570,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182765 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182765,https://www.wikidata.org/wiki/Q170570,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/ilam,tp_province,ایلام,Q170570,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182765 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q182765,https://www.wikidata.org/wiki/Q170570,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/ilam,tp_province,ایلام,Q170570,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182765 (data)",geo_coordinates,"33.6,46.4","33.6384, 46.4226",same,P625,,,2026-10-20,
 http://topersia.local/e/province/ilam,tp_province,ایلام,Q170570,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182765 (data)",population,591000,580158,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/ilam,tp_province,ایلام,Q170570,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182765 (data)",area_km2,20133,20133,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/ilam,tp_province,ایلام,Q170570,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q182765 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q499470)",P36,,,2026-10-20,
-http://topersia.local/e/province/alborz,tp_province,البرز,Q392522,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q1425882 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q1425882,https://www.wikidata.org/wiki/Q392522,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/alborz,tp_province,البرز,Q392522,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q1425882 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q1425882,https://www.wikidata.org/wiki/Q392522,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/alborz,tp_province,البرز,Q392522,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q1425882 (data)",geo_coordinates,"35.933,50.9","36.011111, 50.809444",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/alborz,tp_province,البرز,Q392522,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q1425882 (data)",population,2730000,2712400,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/alborz,tp_province,البرز,Q392522,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q1425882 (data)",area_km2,5833,5833,same,P2046,,,2026-10-20,
@@ -138,329 +138,329 @@ http://topersia.local/e/province/isfahan,tp_province,اصفهان,Q1367759,data,
 http://topersia.local/e/province/isfahan,tp_province,اصفهان,Q1367759,data,auto,"درون استان ✓",population,5120850,5120850,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/isfahan,tp_province,اصفهان,Q1367759,data,auto,"درون استان ✓",area_km2,107018,107029,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/isfahan,tp_province,اصفهان,Q1367759,data,auto,"درون استان ✓","rel:96 (مرکز استان)",http://topersia.local/e/city/isfahan,http://topersia.local/e/city/isfahan,same,P36,,,2026-10-20,
-http://topersia.local/e/province/ardabil,tp_province,اردبیل,Q134228,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173438 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q173438,https://www.wikidata.org/wiki/Q134228,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/ardabil,tp_province,اردبیل,Q134228,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173438 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q173438,https://www.wikidata.org/wiki/Q134228,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/ardabil,tp_province,اردبیل,Q134228,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173438 (data)",geo_coordinates,"38.433,48.1","38.2514, 48.2973",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/ardabil,tp_province,اردبیل,Q134228,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173438 (data)",population,1284000,1270420,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/ardabil,tp_province,اردبیل,Q134228,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173438 (data)",area_km2,17800,17800,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/ardabil,tp_province,اردبیل,Q134228,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q173438 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q180103)",P36,,,2026-10-20,
-http://topersia.local/e/province/west-azerbaijan,tp_province,"آذربایجان غربی",Q134411,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184098 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q184098,https://www.wikidata.org/wiki/Q134411,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/west-azerbaijan,tp_province,"آذربایجان غربی",Q134411,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184098 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q184098,https://www.wikidata.org/wiki/Q134411,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/west-azerbaijan,tp_province,"آذربایجان غربی",Q134411,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184098 (data)",geo_coordinates,"37.5,45.1","37.5528, 45.0759",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/west-azerbaijan,tp_province,"آذربایجان غربی",Q134411,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184098 (data)",population,3278000,3265219,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/west-azerbaijan,tp_province,"آذربایجان غربی",Q134411,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184098 (data)",area_km2,37437,37437,same,P2046,,,2026-10-20,
 http://topersia.local/e/province/west-azerbaijan,tp_province,"آذربایجان غربی",Q134411,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184098 (data)","rel:96 (مرکز استان)",,,"none (شهر مرکز با این QID در داده نیست: Q179665)",P36,,,2026-10-20,
-http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q184096,https://www.wikidata.org/wiki/Q176081,diff,QID,,,2026-10-20,
+http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)",external_reference_uri,https://www.wikidata.org/wiki/Q184096,https://www.wikidata.org/wiki/Q176081,diff,QID,,,2026-10-20,yes-replace
 http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)",geo_coordinates,"37.9,46.3","38.0766, 46.28",diff,P625,,,2026-10-20,
 http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)",population,3925000,3909652,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)",area_km2,45650,45650,same,P2046,,,2026-10-20,
-http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)","rel:96 (مرکز استان)",,http://topersia.local/e/city/tabriz,fill,P36,,,2026-10-20,
-http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4357699,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.526944, 52.212778",fill,P625,,,2026-10-20,
+http://topersia.local/e/province/east-azerbaijan,tp_province,"آذربایجان شرقی",Q176081,name+P31+P131,auto,"درون استان ✓ · QID داده نادرست: Q184096 (data)","rel:96 (مرکز استان)",,http://topersia.local/e/city/tabriz,fill,P36,,,2026-10-20,yes
+http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4357699,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.526944, 52.212778",fill,P625,,,2026-10-20,yes
 http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",population,,4081,fill,P1082,2006,,2026-10-20,
-http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",elevation_m,,999,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614183,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.448889, 52.493611",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",population,,8320,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",elevation_m,,978,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q639119,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.379722, 52.3725",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,15744,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1215,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1764166,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.079722, 51.436667",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",population,,11838,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",elevation_m,,898,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1764096,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.126389, 51.351667",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",population,,5804,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",elevation_m,,883,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1764159,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.904167, 51.768889",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",population,,5976,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",elevation_m,,941,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2431335,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"34.0575, 51.482778",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,65404,fill,P1082,2016,,2026-10-20,
-http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,909,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2718227,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.220556, 50.315",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",population,,21883,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",elevation_m,,2248,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/mahabad-isfahan,tp_city,مهاباد,Q4357699,name+P31+P131,auto,"درون استان ✓",elevation_m,,999,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614183,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.448889, 52.493611",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",population,,8320,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/zavareh,tp_city,زواره,Q2614183,name+P31+P131,auto,"درون استان ✓",elevation_m,,978,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q639119,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.379722, 52.3725",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,15744,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/ardestan,tp_city,اردستان,Q639119,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1215,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1764166,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.079722, 51.436667",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",population,,11838,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/nushabad,tp_city,نوش‌آباد,Q1764166,name+P31+P131,auto,"درون استان ✓",elevation_m,,898,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1764096,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.126389, 51.351667",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",population,,5804,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/sefidshahr,tp_city,سفیدشهر,Q1764096,name+P31+P131,auto,"درون استان ✓",elevation_m,,883,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1764159,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.904167, 51.768889",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",population,,5976,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/abu-zeydabad,tp_city,ابوزیدآباد,Q1764159,name+P31+P131,auto,"درون استان ✓",elevation_m,,941,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2431335,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"34.0575, 51.482778",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,65404,fill,P1082,2016,,2026-10-20,yes
+http://topersia.local/e/city/aran-va-bidgol,tp_city,"آران و بیدگل",Q2431335,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,909,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2718227,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.220556, 50.315",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",population,,21883,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/khansar,tp_city,خوانسار,Q2718227,name+P31+P131,auto,"درون استان ✓",elevation_m,,2248,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/kamu-va-chugan,tp_city,"کامو و چوگان",,,none,,,,,none,,,,2026-10-20,
-http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765512,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.753333, 51.431944",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,3877,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1914,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/jowshaqan-e-qali,tp_city,"جوشقان قالی",Q17173916,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q17173916,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/jowshaqan-e-qali,tp_city,"جوشقان قالی",Q17173916,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.5858, 51.2114",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/jowshaqan-e-qali,tp_city,"جوشقان قالی",Q17173916,name+P31+P131,auto,"درون استان ✓",population,,4181,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/barzok,tp_city,برزک,Q4358742,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4358742,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/barzok,tp_city,برزک,Q4358742,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.783333, 51.233333",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/barzok,tp_city,برزک,Q4358742,name+P31+P131,auto,"درون استان ✓",population,,4588,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q240475,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765512,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.753333, 51.431944",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,3877,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/qamsar,tp_city,قمصر,Q765512,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1914,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/jowshaqan-e-qali,tp_city,"جوشقان قالی",Q17173916,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q17173916,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/jowshaqan-e-qali,tp_city,"جوشقان قالی",Q17173916,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.5858, 51.2114",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/jowshaqan-e-qali,tp_city,"جوشقان قالی",Q17173916,name+P31+P131,auto,"درون استان ✓",population,,4181,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/barzok,tp_city,برزک,Q4358742,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4358742,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/barzok,tp_city,برزک,Q4358742,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.783333, 51.233333",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/barzok,tp_city,برزک,Q4358742,name+P31+P131,auto,"درون استان ✓",population,,4588,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q240475,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"33.9825, 51.4325","33.988056, 51.4425",same,P625,,,2026-10-20,
 http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,304487,304487,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,,21,fill,P2046,,,2026-10-20,
-http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,942,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4359629,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.972778, 51.148889",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,2319,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1636,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613865,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.176667, 51.265",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",population,,5357,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",elevation_m,,866,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,,21,fill,P2046,,,2026-10-20,yes
+http://topersia.local/e/city/kashan,tp_city,کاشان,Q240475,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,942,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4359629,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.972778, 51.148889",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,2319,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/niasar,tp_city,نیاسر,Q4359629,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1636,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613865,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.176667, 51.265",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",population,,5357,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/meshkat,tp_city,مشکات,Q2613865,name+P31+P131,auto,"درون استان ✓",elevation_m,,866,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/sagzi,tp_city,سجزی,,,none,,,,,none,,,,2026-10-20,
 http://topersia.local/e/city/ziyar,tp_city,زیار,,,none,,,,,none,,,,2026-10-20,
-http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4371130,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.138611, 52.626667",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,4478,fill,P1082,2016,,2026-10-20,
-http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1488,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/tudeshk,tp_city,تودشک,Q4362517,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4362517,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/tudeshk,tp_city,تودشک,Q4362517,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.7208, 52.6708",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/tudeshk,tp_city,تودشک,Q4362517,name+P31+P131,auto,"درون استان ✓",population,,4275,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q430773,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.488056, 51.773056",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,79023,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1562,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/eziyeh,tp_city,اژیه,Q4357694,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4357694,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/eziyeh,tp_city,اژیه,Q4357694,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.440278, 52.379722",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/eziyeh,tp_city,اژیه,Q4357694,name+P31+P131,auto,"درون استان ✓",population,,3156,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/isfahan,tp_city,اصفهان,Q42053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q42053,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4371130,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.138611, 52.626667",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,4478,fill,P1082,2016,,2026-10-20,yes
+http://topersia.local/e/city/hasanabad-isfahan,tp_city,حسن‌آباد,Q4371130,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1488,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/tudeshk,tp_city,تودشک,Q4362517,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4362517,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/tudeshk,tp_city,تودشک,Q4362517,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.7208, 52.6708",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/tudeshk,tp_city,تودشک,Q4362517,name+P31+P131,auto,"درون استان ✓",population,,4275,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q430773,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.488056, 51.773056",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,79023,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/baharestan,tp_city,بهارستان,Q430773,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1562,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/eziyeh,tp_city,اژیه,Q4357694,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4357694,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/eziyeh,tp_city,اژیه,Q4357694,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.440278, 52.379722",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/eziyeh,tp_city,اژیه,Q4357694,name+P31+P131,auto,"درون استان ✓",population,,3156,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/isfahan,tp_city,اصفهان,Q42053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q42053,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/isfahan,tp_city,اصفهان,Q42053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"32.6653, 51.6703","32.6525, 51.674722",same,P625,,,2026-10-20,
 http://topersia.local/e/city/isfahan,tp_city,اصفهان,Q42053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,1961260,1961260,same,P1082,2016,https://www.citypopulation.de/Iran-MajorCities.html,2026-10-20,
 http://topersia.local/e/city/isfahan,tp_city,اصفهان,Q42053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,551,493.82,diff,P2046,,,2026-10-20,
 http://topersia.local/e/city/isfahan,tp_city,اصفهان,Q42053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,1574,1574,same,P2044,,,2026-10-20,
-http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q514633,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.562222, 52.437222",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",population,,7829,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",elevation_m,,1519,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q514633,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.562222, 52.437222",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",population,,7829,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/harand,tp_city,هرند,Q514633,name+P31+P131,auto,"درون استان ✓",elevation_m,,1519,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/varzaneh,tp_city,ورزنه,Q2613914,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",external_reference_uri,,https://www.wikidata.org/wiki/Q2613914,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/varzaneh,tp_city,ورزنه,Q2613914,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",geo_coordinates,,"32.419444, 52.648056",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/varzaneh,tp_city,ورزنه,Q2613914,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",population,,12714,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/varzaneh,tp_city,ورزنه,Q2613914,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",elevation_m,,1477,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4371518,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.303056, 52.205833",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",population,,4364,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",elevation_m,,1570,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4371518,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.303056, 52.205833",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",population,,4364,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/nikabad,tp_city,نیک‌آباد,Q4371518,name+P31+P131,auto,"درون استان ✓",elevation_m,,1570,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/nasrabad-isfahan,tp_city,نصرآباد,Q2614683,"name+P31+P131 (چند نامزد: Q2614683 · Q16895685 · Q112916786)",suggested,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614683,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/nasrabad-isfahan,tp_city,نصرآباد,Q2614683,"name+P31+P131 (چند نامزد: Q2614683 · Q16895685 · Q112916786)",suggested,"درون استان ✓",geo_coordinates,,"32.279444, 52.063056",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/nasrabad-isfahan,tp_city,نصرآباد,Q2614683,"name+P31+P131 (چند نامزد: Q2614683 · Q16895685 · Q112916786)",suggested,"درون استان ✓",population,,5751,fill,P1082,2006,,2026-10-20,
 http://topersia.local/e/city/nasrabad-isfahan,tp_city,نصرآباد,Q2614683,"name+P31+P131 (چند نامزد: Q2614683 · Q16895685 · Q112916786)",suggested,"درون استان ✓",elevation_m,,1615,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/mohammadabad-isfahan,tp_city,محمدآباد,Q4365097,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4365097,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/mohammadabad-isfahan,tp_city,محمدآباد,Q4365097,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.3236, 52.1861",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4357648,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.715, 52.438889",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",population,,5518,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",elevation_m,,1796,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q3926338,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.7039, 51.8381",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",population,,9712,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",elevation_m,,1539,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2687381,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.505278, 50.462778",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,9904,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1774,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2687385,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.475556, 50.3525",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",population,,6012,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",elevation_m,,1793,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720421,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.453611, 50.288333",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,58936,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1830,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/barf-anbar,tp_city,برف‌انبار,Q2407865,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407865,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/barf-anbar,tp_city,برف‌انبار,Q2407865,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.972222, 50.151667",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/barf-anbar,tp_city,برف‌انبار,Q2407865,name+P31+P131,auto,"درون استان ✓",population,,5382,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2321858,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.941111, 50.121111",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",population,,13603,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",elevation_m,,2490,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407798,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.988611, 50.4125",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",population,,20078,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",elevation_m,,2249,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/damaneh,tp_city,دامنه,Q4364180,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4364180,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/damaneh,tp_city,دامنه,Q4364180,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.0175, 50.488889",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/damaneh,tp_city,دامنه,Q4364180,name+P31+P131,auto,"درون استان ✓",population,,4366,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614223,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.554167, 51.525",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",population,,25635,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",elevation_m,,1693,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614246,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.576667, 51.455",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,34226,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1614,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2351813,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.6025, 51.496944",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",population,,7962,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",elevation_m,,1606,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614187,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.468611, 51.557778",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",population,,13469,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",elevation_m,,1757,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/baharan-shahr,tp_city,"بهاران شهر",Q2614238,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614238,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/baharan-shahr,tp_city,"بهاران شهر",Q2614238,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.688611, 51.788333",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/baharan-shahr,tp_city,"بهاران شهر",Q2614238,name+P31+P131,auto,"درون استان ✓",population,,11284,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613888,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.474444, 51.477222",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",population,,14633,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",elevation_m,,1630,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614216,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.555, 51.573056",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,22429,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1606,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2421737,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.555278, 51.509722",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,37704,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1612,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/golshan,tp_city,گلشن,Q16046467,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q16046467,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/golshan,tp_city,گلشن,Q16046467,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.5511, 51.4641",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/golshan,tp_city,گلشن,Q16046467,name+P31+P131,auto,"درون استان ✓",population,,5437,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2630618,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.94, 51.647778",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",population,,17945,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",elevation_m,,2038,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/rozveh,tp_city,رزوه,Q2407813,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407813,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/rozveh,tp_city,رزوه,Q2407813,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.836111, 50.568889",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/rozveh,tp_city,رزوه,Q2407813,name+P31+P131,auto,"درون استان ✓",population,,4332,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2717325,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.768333, 50.628611",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",population,,9924,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",elevation_m,,2066,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407921,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.073611, 50.164722",fill,P625,,,2026-10-20,
+http://topersia.local/e/city/mohammadabad-isfahan,tp_city,محمدآباد,Q4365097,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4365097,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/mohammadabad-isfahan,tp_city,محمدآباد,Q4365097,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.3236, 52.1861",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4357648,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.715, 52.438889",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",population,,5518,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/kuhpayeh,tp_city,کوهپایه,Q4357648,name+P31+P131,auto,"درون استان ✓",elevation_m,,1796,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q3926338,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.7039, 51.8381",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",population,,9712,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/qehjavarestan,tp_city,قهجاورستان,Q3926338,name+P31+P131,auto,"درون استان ✓",elevation_m,,1539,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2687381,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.505278, 50.462778",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,9904,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/golshahr,tp_city,گلشهر,Q2687381,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1774,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2687385,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.475556, 50.3525",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",population,,6012,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/guged,tp_city,گوگد,Q2687385,name+P31+P131,auto,"درون استان ✓",elevation_m,,1793,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720421,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.453611, 50.288333",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,58936,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/golpayegan,tp_city,گلپایگان,Q720421,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1830,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/barf-anbar,tp_city,برف‌انبار,Q2407865,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407865,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/barf-anbar,tp_city,برف‌انبار,Q2407865,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.972222, 50.151667",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/barf-anbar,tp_city,برف‌انبار,Q2407865,name+P31+P131,auto,"درون استان ✓",population,,5382,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2321858,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.941111, 50.121111",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",population,,13603,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/fereydunshahr,tp_city,فریدون‌شهر,Q2321858,name+P31+P131,auto,"درون استان ✓",elevation_m,,2490,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407798,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.988611, 50.4125",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",population,,20078,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/daran,tp_city,داران,Q2407798,name+P31+P131,auto,"درون استان ✓",elevation_m,,2249,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/damaneh,tp_city,دامنه,Q4364180,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4364180,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/damaneh,tp_city,دامنه,Q4364180,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.0175, 50.488889",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/damaneh,tp_city,دامنه,Q4364180,name+P31+P131,auto,"درون استان ✓",population,,4366,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614223,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.554167, 51.525",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",population,,25635,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/kelishad-va-sudarjan,tp_city,"کلیشاد و سودرجان",Q2614223,name+P31+P131,auto,"درون استان ✓",elevation_m,,1693,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614246,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.576667, 51.455",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,34226,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/qahderijan,tp_city,قهدریجان,Q2614246,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1614,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2351813,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.6025, 51.496944",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",population,,7962,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/zazeran,tp_city,زازران,Q2351813,name+P31+P131,auto,"درون استان ✓",elevation_m,,1606,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614187,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.468611, 51.557778",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",population,,13469,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/pir-bakran,tp_city,پیربکران,Q2614187,name+P31+P131,auto,"درون استان ✓",elevation_m,,1757,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/baharan-shahr,tp_city,"بهاران شهر",Q2614238,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614238,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/baharan-shahr,tp_city,"بهاران شهر",Q2614238,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.688611, 51.788333",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/baharan-shahr,tp_city,"بهاران شهر",Q2614238,name+P31+P131,auto,"درون استان ✓",population,,11284,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613888,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.474444, 51.477222",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",population,,14633,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/imanshahr,tp_city,ایمانشهر,Q2613888,name+P31+P131,auto,"درون استان ✓",elevation_m,,1630,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614216,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.555, 51.573056",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,22429,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/abrisham,tp_city,ابریشم,Q2614216,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1606,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2421737,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.555278, 51.509722",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,37704,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/falavarjan,tp_city,فلاورجان,Q2421737,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1612,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/golshan,tp_city,گلشن,Q16046467,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q16046467,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/golshan,tp_city,گلشن,Q16046467,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.5511, 51.4641",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/golshan,tp_city,گلشن,Q16046467,name+P31+P131,auto,"درون استان ✓",population,,5437,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2630618,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.94, 51.647778",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",population,,17945,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/dehaqan,tp_city,دهاقان,Q2630618,name+P31+P131,auto,"درون استان ✓",elevation_m,,2038,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/rozveh,tp_city,رزوه,Q2407813,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407813,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/rozveh,tp_city,رزوه,Q2407813,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.836111, 50.568889",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/rozveh,tp_city,رزوه,Q2407813,name+P31+P131,auto,"درون استان ✓",population,,4332,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2717325,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.768333, 50.628611",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",population,,9924,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/chadegan,tp_city,چادگان,Q2717325,name+P31+P131,auto,"درون استان ✓",elevation_m,,2066,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2407921,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.073611, 50.164722",fill,P625,,,2026-10-20,yes
 http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",population,,9933,fill,P1082,2006,,2026-10-20,
-http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",elevation_m,,2423,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/afus,tp_city,افوس,Q4365366,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4365366,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/afus,tp_city,افوس,Q4365366,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.023056, 50.0925",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/afus,tp_city,افوس,Q4365366,name+P31+P131,auto,"درون استان ✓",population,,3696,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
+http://topersia.local/e/city/buin-va-miandasht,tp_city,"بوئین و میاندشت",Q2407921,name+P31+P131,auto,"درون استان ✓",elevation_m,,2423,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/afus,tp_city,افوس,Q4365366,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4365366,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/afus,tp_city,افوس,Q4365366,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.023056, 50.0925",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/afus,tp_city,افوس,Q4365366,name+P31+P131,auto,"درون استان ✓",population,,3696,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
 http://topersia.local/e/city/komeshcheh,tp_city,کمشچه,Q4358642,"name+P31+P131 (چند نامزد: Q4358642 · Q16893600)",suggested,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4358642,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/komeshcheh,tp_city,کمشچه,Q4358642,"name+P31+P131 (چند نامزد: Q4358642 · Q16893600)",suggested,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.905278, 51.809722",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/komeshcheh,tp_city,کمشچه,Q4358642,"name+P31+P131 (چند نامزد: Q4358642 · Q16893600)",suggested,"درون استان ✓ · درون شهر ✓",population,,5100,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2352917,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.843333, 51.743056",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",population,,5915,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",elevation_m,,1567,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2352917,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.843333, 51.743056",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",population,,5915,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/shapourabad,tp_city,شاپورآباد,Q2352917,name+P31+P131,auto,"درون استان ✓",elevation_m,,1567,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/dastgerd,tp_city,دستگرد,Q2613871,"name+P31+P131 (چند نامزد: Q2613871 · Q5866279 · Q16954553)",suggested,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613871,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/dastgerd,tp_city,دستگرد,Q2613871,"name+P31+P131 (چند نامزد: Q2613871 · Q5866279 · Q16954553)",suggested,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.801944, 51.663611",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/dastgerd,tp_city,دستگرد,Q2613871,"name+P31+P131 (چند نامزد: Q2613871 · Q5866279 · Q16954553)",suggested,"درون استان ✓ · درون شهر ✓",population,,17775,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/dastgerd,tp_city,دستگرد,Q2613871,"name+P31+P131 (چند نامزد: Q2613871 · Q5866279 · Q16954553)",suggested,"درون استان ✓ · درون شهر ✓",elevation_m,,1569,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2620521,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.778056, 51.645833",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",population,,29154,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",elevation_m,,1563,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614193,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.831667, 51.776111",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",population,,9491,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",elevation_m,,1560,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2616779,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.799722, 51.695556",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,40945,fill,P1082,2016,,2026-10-20,
-http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1569,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80822,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.945833, 51.871944",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",population,,7164,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",elevation_m,,1859,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/shahreza,tp_city,شهرضا,Q765571,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765571,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2620521,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.778056, 51.645833",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",population,,29154,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/khurzuq,tp_city,خورزوق,Q2620521,name+P31+P131,auto,"درون استان ✓",elevation_m,,1563,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614193,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.831667, 51.776111",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",population,,9491,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/habibabad,tp_city,حبیب‌آباد,Q2614193,name+P31+P131,auto,"درون استان ✓",elevation_m,,1560,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2616779,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.799722, 51.695556",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,40945,fill,P1082,2016,,2026-10-20,yes
+http://topersia.local/e/city/dowlatabad-isfahan,tp_city,دولت‌آباد,Q2616779,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1569,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80822,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.945833, 51.871944",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",population,,7164,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/manzariyeh,tp_city,منظریه,Q80822,name+P31+P131,auto,"درون استان ✓",elevation_m,,1859,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/shahreza,tp_city,شهرضا,Q765571,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765571,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/shahreza,tp_city,شهرضا,Q765571,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"32.0122, 51.8594","32.008889, 51.864167",same,P625,,,2026-10-20,
 http://topersia.local/e/city/shahreza,tp_city,شهرضا,Q765571,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,134952,134952,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/shahreza,tp_city,شهرضا,Q765571,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1822,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/shahreza,tp_city,شهرضا,Q765571,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1822,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/lay-bid,tp_city,"لای بید",Q5812633,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",external_reference_uri,,https://www.wikidata.org/wiki/Q5812633,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/lay-bid,tp_city,"لای بید",Q5812633,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",geo_coordinates,,"33.4589, 50.6933",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/lay-bid,tp_city,"لای بید",Q5812633,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",population,,1832,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80820,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.416667, 51.179722",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",population,,5952,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",elevation_m,,1971,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80810,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.446111, 51.168333",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",population,,5651,fill,P1082,2016,,2026-10-20,
-http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",elevation_m,,2005,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80820,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.416667, 51.179722",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",population,,5952,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/vazvan,tp_city,وزوان,Q80820,name+P31+P131,auto,"درون استان ✓",elevation_m,,1971,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80810,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.446111, 51.168333",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",population,,5651,fill,P1082,2016,,2026-10-20,yes
+http://topersia.local/e/city/meymeh-isfahan,tp_city,میمه,Q80810,name+P31+P131,auto,"درون استان ✓",elevation_m,,2005,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/gorgab,tp_city,گرگاب,,,none,,,,,none,,,,2026-10-20,
-http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80825,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.804722, 51.620833",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",population,,24433,fill,P1082,2016,,2026-10-20,
-http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",elevation_m,,1581,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q862105,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.857778, 51.552778",fill,P625,,,2026-10-20,
+http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80825,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.804722, 51.620833",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",population,,24433,fill,P1082,2016,,2026-10-20,yes
+http://topersia.local/e/city/gaz,tp_city,گز,Q80825,name+P31+P131,auto,"درون استان ✓",elevation_m,,1581,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q862105,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.857778, 51.552778",fill,P625,,,2026-10-20,yes
 http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,173329,173329,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1591,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/komeh,tp_city,کمه,Q81015,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81015,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/komeh,tp_city,کمه,Q81015,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.068333, 51.592778",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/komeh,tp_city,کمه,Q81015,name+P31+P131,auto,"درون استان ✓",population,,2184,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/vanak,tp_city,ونک,Q80815,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80815,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/vanak,tp_city,ونک,Q80815,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.5275, 51.325556",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/vanak,tp_city,ونک,Q80815,name+P31+P131,auto,"درون استان ✓",population,,1665,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80821,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.198889, 51.724722",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",population,,4922,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",elevation_m,,2323,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2718234,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.414167, 51.569444",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",population,,26942,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",elevation_m,,2400,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81030,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.705833, 51.977778",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",population,,3023,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",elevation_m,,1001,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/shahin-shahr,tp_city,شاهین‌شهر,Q862105,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1591,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/komeh,tp_city,کمه,Q81015,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81015,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/komeh,tp_city,کمه,Q81015,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.068333, 51.592778",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/komeh,tp_city,کمه,Q81015,name+P31+P131,auto,"درون استان ✓",population,,2184,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/vanak,tp_city,ونک,Q80815,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80815,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/vanak,tp_city,ونک,Q80815,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.5275, 51.325556",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/vanak,tp_city,ونک,Q80815,name+P31+P131,auto,"درون استان ✓",population,,1665,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80821,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.198889, 51.724722",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",population,,4922,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/hanna,tp_city,حنا,Q80821,name+P31+P131,auto,"درون استان ✓",elevation_m,,2323,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2718234,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"31.414167, 51.569444",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",population,,26942,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/semirom,tp_city,سمیرم,Q2718234,name+P31+P131,auto,"درون استان ✓",elevation_m,,2400,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81030,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.705833, 51.977778",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",population,,3023,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/khaledabad,tp_city,خالدآباد,Q81030,name+P31+P131,auto,"درون استان ✓",elevation_m,,1001,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/tarq-rud,tp_city,طرق‌رود,,,none,,,,,none,,,,2026-10-20,
-http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80818,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.690833, 52.008611",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,14723,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,989,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q124669,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.511111, 51.918056",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",population,,14122,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",elevation_m,,1637,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80818,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.690833, 52.008611",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,14723,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/badrud,tp_city,بادرود,Q80818,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,989,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q124669,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.511111, 51.918056",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",population,,14122,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/natanz,tp_city,نطنز,Q124669,name+P31+P131,auto,"درون استان ✓",elevation_m,,1637,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/dehaq,tp_city,دهق,Q2614267,"name+P31+P131 (چند نامزد: Q2614267 · Q5832164)",suggested,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614267,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/dehaq,tp_city,دهق,Q2614267,"name+P31+P131 (چند نامزد: Q2614267 · Q5832164)",suggested,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"33.104444, 50.958889",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/dehaq,tp_city,دهق,Q2614267,"name+P31+P131 (چند نامزد: Q2614267 · Q5832164)",suggested,"درون استان ✓ · درون شهر ✓",population,,8272,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/dehaq,tp_city,دهق,Q2614267,"name+P31+P131 (چند نامزد: Q2614267 · Q5832164)",suggested,"درون استان ✓ · درون شهر ✓",area_km2,,0.01,fill,P2046,,,2026-10-20,
 http://topersia.local/e/city/dehaq,tp_city,دهق,Q2614267,"name+P31+P131 (چند نامزد: Q2614267 · Q5832164)",suggested,"درون استان ✓ · درون شهر ✓",elevation_m,,1949,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613921,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.052778, 51.0825",fill,P625,,,2026-10-20,
+http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2613921,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.052778, 51.0825",fill,P625,,,2026-10-20,yes
 http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",population,,15550,fill,P1082,2020,,2026-10-20,
-http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",elevation_m,,1851,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81020,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.626667, 51.480833",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",population,,10442,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",elevation_m,,1603,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81027,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.556667, 51.3725",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,6998,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1626,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/alavijeh,tp_city,علویجه,Q2613921,name+P31+P131,auto,"درون استان ✓",elevation_m,,1851,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81020,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.626667, 51.480833",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",population,,10442,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/kahriz-sang,tp_city,کهریزسنگ,Q81020,name+P31+P131,auto,"درون استان ✓",elevation_m,,1603,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81027,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.556667, 51.3725",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,6998,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/jowzdan,tp_city,جوزدان,Q81027,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1626,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/goldasht,tp_city,گلدشت,Q80824,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",external_reference_uri,,https://www.wikidata.org/wiki/Q80824,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/goldasht,tp_city,گلدشت,Q80824,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",geo_coordinates,,"32.626667, 51.439167",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/goldasht,tp_city,گلدشت,Q80824,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",population,,25235,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/goldasht,tp_city,گلدشت,Q80824,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",elevation_m,,1608,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/najafabad,tp_city,نجف‌آباد,Q721198,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q721198,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/najafabad,tp_city,نجف‌آباد,Q721198,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q721198,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/najafabad,tp_city,نجف‌آباد,Q721198,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"32.6331, 51.3650","32.634722, 51.365278",same,P625,,,2026-10-20,
 http://topersia.local/e/city/najafabad,tp_city,نجف‌آباد,Q721198,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,235281,235281,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/najafabad,tp_city,نجف‌آباد,Q721198,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1648,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/bafran,tp_city,بافران,Q6416954,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q6416954,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/bafran,tp_city,بافران,Q6416954,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.8378, 53.1419",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/bafran,tp_city,بافران,Q6416954,name+P31+P131,auto,"درون استان ✓",population,,1978,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720388,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.86, 53.0875",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",population,,27379,fill,P1082,2016,https://www.citypopulation.de/en/iran/esfahan/n%C4%81%C4%ABn/1013031435__n%C4%81%C4%ABn/,2026-10-20,
-http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",elevation_m,,1564,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2664768,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.310833, 53.699444",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",population,,1903,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",elevation_m,,1472,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/najafabad,tp_city,نجف‌آباد,Q721198,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1648,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/bafran,tp_city,بافران,Q6416954,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q6416954,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/bafran,tp_city,بافران,Q6416954,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.8378, 53.1419",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/bafran,tp_city,بافران,Q6416954,name+P31+P131,auto,"درون استان ✓",population,,1978,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720388,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.86, 53.0875",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",population,,27379,fill,P1082,2016,https://www.citypopulation.de/en/iran/esfahan/n%C4%81%C4%ABn/1013031435__n%C4%81%C4%ABn/,2026-10-20,yes
+http://topersia.local/e/city/naein,tp_city,نائین,Q720388,name+P31+P131,auto,"درون استان ✓",elevation_m,,1564,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2664768,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.310833, 53.699444",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",population,,1903,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/anarak,tp_city,انارک,Q2664768,name+P31+P131,auto,"درون استان ✓",elevation_m,,1472,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/majlesi,tp_city,مجلسی,,,none,,,,,none,,,,2026-10-20,
-http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80830,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.383333, 51.566944",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,10200,fill,P1082,2016,https://amar.org.ir/Portals/0/PropertyAgent/6200/Files/34204/401-10-03.pdf,2026-10-20,
-http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1665,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81234,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.345, 51.446944",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",population,,7058,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",elevation_m,,1685,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80814,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.262778, 51.562222",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,9924,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1708,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80830,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.383333, 51.566944",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,10200,fill,P1082,2016,https://amar.org.ir/Portals/0/PropertyAgent/6200/Files/34204/401-10-03.pdf,2026-10-20,yes
+http://topersia.local/e/city/zibashahr,tp_city,زیباشهر,Q80830,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1665,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81234,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.345, 51.446944",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",population,,7058,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/karkevand,tp_city,کرکوند,Q81234,name+P31+P131,auto,"درون استان ✓",elevation_m,,1685,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80814,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.262778, 51.562222",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,9924,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/talkhuncheh,tp_city,طالخونچه,Q80814,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1708,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/dizicheh,tp_city,دیزیچه,Q81029,"name+P31+P131 (چند نامزد: Q81029 · Q16962013)",suggested,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81029,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/dizicheh,tp_city,دیزیچه,Q81029,"name+P31+P131 (چند نامزد: Q81029 · Q16962013)",suggested,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.383333, 51.514722",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/dizicheh,tp_city,دیزیچه,Q81029,"name+P31+P131 (چند نامزد: Q81029 · Q16962013)",suggested,"درون استان ✓ · درون شهر ✓",population,,18935,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
@@ -469,139 +469,139 @@ http://topersia.local/e/city/mobarakeh,tp_city,مبارکه,Q81440,name+P31+P131
 http://topersia.local/e/city/mobarakeh,tp_city,مبارکه,Q81440,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",geo_coordinates,,"32.346389, 51.504444",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/mobarakeh,tp_city,مبارکه,Q81440,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",population,,69449,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/mobarakeh,tp_city,مبارکه,Q81440,name+P31+P131,suggested,"درون استان ✓ · نقطه بیرون از GeoJSON شهر",elevation_m,,1674,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81028,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.377778, 51.318056",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,19101,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1717,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765759,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.389722, 51.376667",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,55817,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1705,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80828,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.392778, 51.293611",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,9463,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1679,fill,P2044,,,2026-10-20,
+http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81028,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.377778, 51.318056",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,19101,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/sedeh-lenjan,tp_city,"سده لنجان",Q81028,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1717,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765759,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.389722, 51.376667",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,55817,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/zarrin-shahr,tp_city,زرین‌شهر,Q765759,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1705,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80828,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.392778, 51.293611",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,9463,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/zayandeh-rud,tp_city,زاینده‌رود,Q80828,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1679,fill,P2044,,,2026-10-20,yes
 http://topersia.local/e/city/chermahin,tp_city,چرمهین,Q81021,"name+P31+P131 (چند نامزد: Q81021 · Q16890198)",suggested,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81021,fill,QID,,,2026-10-20,
 http://topersia.local/e/city/chermahin,tp_city,چرمهین,Q81021,"name+P31+P131 (چند نامزد: Q81021 · Q16890198)",suggested,"درون استان ✓",geo_coordinates,,"32.3375, 51.195833",fill,P625,,,2026-10-20,
 http://topersia.local/e/city/chermahin,tp_city,چرمهین,Q81021,"name+P31+P131 (چند نامزد: Q81021 · Q16890198)",suggested,"درون استان ✓",population,,13732,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/chermahin,tp_city,چرمهین,Q81021,"name+P31+P131 (چند نامزد: Q81021 · Q16890198)",suggested,"درون استان ✓",elevation_m,,1798,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/bagh-e-bahadoran,tp_city,"باغ بهادران",Q76939,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q76939,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/bagh-e-bahadoran,tp_city,"باغ بهادران",Q76939,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.377222, 51.188056",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/bagh-e-bahadoran,tp_city,"باغ بهادران",Q76939,name+P31+P131,auto,"درون استان ✓",population,,10279,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80816,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.486667, 51.396667",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,88426,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1660,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80812,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.356389, 51.378611",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",population,,18700,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",elevation_m,,1702,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81019,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.393333, 51.340833",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",population,,15574,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",elevation_m,,1674,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/farrokhi,tp_city,فرخی,Q4811590,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4811590,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/farrokhi,tp_city,فرخی,Q4811590,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.8447, 54.9464",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/farrokhi,tp_city,فرخی,Q4811590,name+P31+P131,auto,"درون استان ✓",population,,2968,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4372887,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.041667, 54.415278",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",population,,4665,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",elevation_m,,970,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2409254,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.775, 55.083333",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",population,,6765,fill,P1082,2016,,2026-10-20,
-http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",elevation_m,,831,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614242,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.615278, 51.555556",fill,P625,,,2026-10-20,
+http://topersia.local/e/city/bagh-e-bahadoran,tp_city,"باغ بهادران",Q76939,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q76939,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/bagh-e-bahadoran,tp_city,"باغ بهادران",Q76939,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.377222, 51.188056",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/bagh-e-bahadoran,tp_city,"باغ بهادران",Q76939,name+P31+P131,auto,"درون استان ✓",population,,10279,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80816,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.486667, 51.396667",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,,88426,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/fuladshahr,tp_city,فولادشهر,Q80816,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1660,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80812,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.356389, 51.378611",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",population,,18700,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/varnamkhast,tp_city,ورنامخواست,Q80812,name+P31+P131,auto,"درون استان ✓",elevation_m,,1702,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81019,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.393333, 51.340833",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",population,,15574,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/chamgordan,tp_city,چمگردان,Q81019,name+P31+P131,auto,"درون استان ✓",elevation_m,,1674,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/farrokhi,tp_city,فرخی,Q4811590,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4811590,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/farrokhi,tp_city,فرخی,Q4811590,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.8447, 54.9464",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/farrokhi,tp_city,فرخی,Q4811590,name+P31+P131,auto,"درون استان ✓",population,,2968,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4372887,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.041667, 54.415278",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",population,,4665,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/jandaq,tp_city,جندق,Q4372887,name+P31+P131,auto,"درون استان ✓",elevation_m,,970,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2409254,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"33.775, 55.083333",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",population,,6765,fill,P1082,2016,,2026-10-20,yes
+http://topersia.local/e/city/khur,tp_city,خور,Q2409254,name+P31+P131,auto,"درون استان ✓",elevation_m,,831,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614242,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.615278, 51.555556",fill,P625,,,2026-10-20,yes
 http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",population,,43183,fill,P1082,2006,,2026-10-20,
-http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",elevation_m,,1581,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720001,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.685556, 51.536111",fill,P625,,,2026-10-20,
+http://topersia.local/e/city/dorcheh-piaz,tp_city,درچه‌پیاز,Q2614242,name+P31+P131,auto,"درون استان ✓",elevation_m,,1581,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720001,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,,"32.685556, 51.536111",fill,P625,,,2026-10-20,yes
 http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,247128,247128,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1595,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614211,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.6425, 51.499722",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",population,,13248,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",elevation_m,,1598,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/asgharabad,tp_city,اصغرآباد,Q3624950,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q3624950,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/asgharabad,tp_city,اصغرآباد,Q3624950,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.6525, 51.480278",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/asgharabad,tp_city,اصغرآباد,Q3624950,name+P31+P131,auto,"درون استان ✓",population,,6876,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/asgaran,tp_city,عسگران,Q4359620,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4359620,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/asgaran,tp_city,عسگران,Q4359620,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.864167, 50.853333",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/asgaran,tp_city,عسگران,Q4359620,name+P31+P131,auto,"درون استان ✓",population,,4858,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/rezvanshahr-isfahan,tp_city,رضوانشهر,Q81024,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81024,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/rezvanshahr-isfahan,tp_city,رضوانشهر,Q81024,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.705556, 51.103889",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2633350,fill,QID,,,2026-10-20,
-http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.7026, 51.1537",fill,P625,,,2026-10-20,
-http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",population,,21703,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",elevation_m,,1799,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/semnan,tp_city,سمنان,Q203045,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q203045,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/khomeyni-shahr,tp_city,خمینی‌شهر,Q720001,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1595,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2614211,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.6425, 51.499722",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",population,,13248,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/kushk,tp_city,کوشک,Q2614211,name+P31+P131,auto,"درون استان ✓",elevation_m,,1598,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/asgharabad,tp_city,اصغرآباد,Q3624950,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q3624950,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/asgharabad,tp_city,اصغرآباد,Q3624950,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.6525, 51.480278",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/asgharabad,tp_city,اصغرآباد,Q3624950,name+P31+P131,auto,"درون استان ✓",population,,6876,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/asgaran,tp_city,عسگران,Q4359620,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4359620,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/asgaran,tp_city,عسگران,Q4359620,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.864167, 50.853333",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/asgaran,tp_city,عسگران,Q4359620,name+P31+P131,auto,"درون استان ✓",population,,4858,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/rezvanshahr-isfahan,tp_city,رضوانشهر,Q81024,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q81024,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/rezvanshahr-isfahan,tp_city,رضوانشهر,Q81024,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.705556, 51.103889",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q2633350,fill,QID,,,2026-10-20,yes
+http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.7026, 51.1537",fill,P625,,,2026-10-20,yes
+http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",population,,21703,fill,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,yes
+http://topersia.local/e/city/tiran,tp_city,تیران,Q2633350,name+P31+P131,auto,"درون استان ✓",elevation_m,,1799,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/semnan,tp_city,سمنان,Q203045,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q203045,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/semnan,tp_city,سمنان,Q203045,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,0,"35.583333, 53.383333",diff,P625,,,2026-10-20,
 http://topersia.local/e/city/semnan,tp_city,سمنان,Q203045,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,0,185129,diff,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/semnan,tp_city,سمنان,Q203045,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1148,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80053,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/semnan,tp_city,سمنان,Q203045,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1148,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q80053,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"38.0667, 46.3000","38.073889, 46.296111",same,P625,,,2026-10-20,
 http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,1558693,1558693,same,P1082,2016,https://www.amar.org.ir/english,2026-10-20,
 http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,324,324,same,P2046,,,2026-10-20,
-http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1340,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4531,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/tabriz,tp_city,تبریز,Q80053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1340,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4531,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"36.4344, 48.7944","36.434722, 48.7975",same,P625,,,2026-10-20,
 http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",population,7638,7638,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",area_km2,0,7.9,diff,P2046,,,2026-10-20,
-http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",elevation_m,,1784,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q181578,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/soltaniyeh,tp_city,سلطانیه,Q4531,name+P31+P131,auto,"درون استان ✓",elevation_m,,1784,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q181578,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"36.2854, 50.0041","36.285437, 50.0041",same,P625,,,2026-10-20,
 http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,402748,402748,same,P1082,2016,https://www.citypopulation.de/Iran-MajorCities.html,2026-10-20,
 http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,65,64.13,same,P2046,,,2026-10-20,
-http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1302,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/ray,tp_city,ری,Q636188,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q636188,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/qazvin,tp_city,قزوین,Q181578,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1302,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/ray,tp_city,ری,Q636188,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q636188,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/ray,tp_city,ری,Q636188,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"35.5975, 51.4344","35.5975, 51.434444",same,P625,,,2026-10-20,
 http://topersia.local/e/city/ray,tp_city,ری,Q636188,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,0,250000,diff,P1082,1996,,2026-10-20,
-http://topersia.local/e/city/ray,tp_city,ری,Q636188,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1180,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720053,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/ray,tp_city,ری,Q636188,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1180,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q720053,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"36.1683, 54.3481","36.168056, 54.348056",same,P625,,,2026-10-20,
 http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,59106,59106,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
 http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,21,21,same,P2046,,,2026-10-20,
-http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1154,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/sabzevar,tp_city,سبزوار,Q765553,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765553,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/damghan,tp_city,دامغان,Q720053,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,1154,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/sabzevar,tp_city,سبزوار,Q765553,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765553,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/sabzevar,tp_city,سبزوار,Q765553,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"36.2125, 57.6819","36.2125, 57.681944",same,P625,,,2026-10-20,
 http://topersia.local/e/city/sabzevar,tp_city,سبزوار,Q765553,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,243700,243700,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/abadi/CN95_HouseholdPopulationVillage_09.xlsx,2026-10-20,
-http://topersia.local/e/city/sabzevar,tp_city,سبزوار,Q765553,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,974,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q121157,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/sabzevar,tp_city,سبزوار,Q765553,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,974,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q121157,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",geo_coordinates,"36.2975, 59.6059","36.297494, 59.605923",same,P625,,,2026-10-20,
 http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",population,3001184,3001184,same,P1082,2016,https://www.citypopulation.de/Iran-MajorCities.html,2026-10-20,
 http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",area_km2,351,328,diff,P2046,,,2026-10-20,
-http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,982,fill,P2044,,,2026-10-20,
-http://topersia.local/e/city/sarakhs,tp_city,سرخس,Q765536,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765536,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/mashhad,tp_city,مشهد,Q121157,name+P31+P131,auto,"درون استان ✓ · درون شهر ✓",elevation_m,,982,fill,P2044,,,2026-10-20,yes
+http://topersia.local/e/city/sarakhs,tp_city,سرخس,Q765536,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q765536,fill,QID,,,2026-10-20,yes
 http://topersia.local/e/city/sarakhs,tp_city,سرخس,Q765536,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"36.5376, 61.1612","36.545, 61.157778",same,P625,,,2026-10-20,
 http://topersia.local/e/city/sarakhs,tp_city,سرخس,Q765536,name+P31+P131,auto,"درون استان ✓",population,42179,42179,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/population-urban-95.xlsx,2026-10-20,
-http://topersia.local/e/city/sarakhs,tp_city,سرخس,Q765536,name+P31+P131,auto,"درون استان ✓",elevation_m,,276,fill,P2044,,,2026-10-20,
-https://topersia.com/e/village/abyaneh,tp_village,ابیانه,Q336409,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q336409,fill,QID,,,2026-10-20,
+http://topersia.local/e/city/sarakhs,tp_city,سرخس,Q765536,name+P31+P131,auto,"درون استان ✓",elevation_m,,276,fill,P2044,,,2026-10-20,yes
+https://topersia.com/e/village/abyaneh,tp_village,ابیانه,Q336409,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q336409,fill,QID,,,2026-10-20,yes
 https://topersia.com/e/village/abyaneh,tp_village,ابیانه,Q336409,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"33.5867, 51.5900","33.585278, 51.592222",same,P625,,,2026-10-20,
 https://topersia.com/e/village/abyaneh,tp_village,ابیانه,Q336409,name+P31+P131,auto,"درون استان ✓",population,301,301,same,P1082,2016,https://www.amar.org.ir/Portals/0/census/1395/results/abadi/CN95_HouseholdPopulationVillage_10.xlsx,2026-10-20,
 https://topersia.com/e/village/abyaneh,tp_village,ابیانه,Q336409,name+P31+P131,auto,"درون استان ✓",elevation_m,2100,2208,diff,P2044,,,2026-10-20,
 https://topersia.com/e/mountain/mount-karkas,tp_mountain,"کوه کرکس",,,none,,,,,none,,,,2026-10-20,
 https://topersia.com/e/water-body/gavkhouni-lake-and-marshes-of-the-lower-zaindeh-rud,tp_water_body,"تالاب بین‌المللی گاوخونی",,,none,,,,,none,,,,2026-10-20,
-https://topersia.com/e/desert/maranjab-desert,tp_desert,"کویر مرنجاب",Q1107362,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1107362,fill,QID,,,2026-10-20,
-https://topersia.com/e/desert/maranjab-desert,tp_desert,"کویر مرنجاب",Q1107362,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.184722, 51.660833",fill,P625,,,2026-10-20,
+https://topersia.com/e/desert/maranjab-desert,tp_desert,"کویر مرنجاب",Q1107362,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1107362,fill,QID,,,2026-10-20,yes
+https://topersia.com/e/desert/maranjab-desert,tp_desert,"کویر مرنجاب",Q1107362,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"34.184722, 51.660833",fill,P625,,,2026-10-20,yes
 https://topersia.com/e/monument/neyestanak-caravanserai,tp_monument,"کاروانسرای نیستانک",,,none,,,,,none,,,,2026-10-20,
-https://topersia.com/e/monument/kuhpayeh-caravanserai,tp_monument,"کاروانسرای کوهپایه",Q5906011,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q5906011,fill,QID,,,2026-10-20,
+https://topersia.com/e/monument/kuhpayeh-caravanserai,tp_monument,"کاروانسرای کوهپایه",Q5906011,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q5906011,fill,QID,,,2026-10-20,yes
 https://topersia.com/e/monument/kuhpayeh-caravanserai,tp_monument,"کاروانسرای کوهپایه",Q5906011,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"32.7134, 52.4358","32.713361, 52.435806",same,P625,,,2026-10-20,
-https://topersia.com/e/monument/gaz-caravanserai,tp_monument,"کاروانسرای گز",Q5871566,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q5871566,fill,QID,,,2026-10-20,
+https://topersia.com/e/monument/gaz-caravanserai,tp_monument,"کاروانسرای گز",Q5871566,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q5871566,fill,QID,,,2026-10-20,yes
 https://topersia.com/e/monument/gaz-caravanserai,tp_monument,"کاروانسرای گز",Q5871566,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"32.8094, 51.6093","32.809278, 51.609306",same,P625,,,2026-10-20,
 https://topersia.com/e/monument/mahyar-caravanserai,tp_monument,"کاروانسرای مهیار",,,none,,,,,none,,,,2026-10-20,
 https://topersia.com/e/monument/gabr-abad-caravanserai,tp_monument,"کاروانسرای گبرآباد",,,none,,,,,none,,,,2026-10-20,
 https://topersia.com/e/monument/amin-abad-caravanserai,tp_monument,"کاروانسرای امین‌آباد",,,none,,,,,none,,,,2026-10-20,
 https://topersia.com/e/monument/maranjab-caravanserai,tp_monument,"کاروانسرای مرنجاب",,,none,,,,,none,,,,2026-10-20,
 https://topersia.com/e/monument/sheikhali-khan-caravanserai,tp_monument,"کاروانسرای شیخعلی‌خان",,,none,,,,,none,,,,2026-10-20,
-https://topersia.com/e/monument/fin-garden,tp_monument,"باغ فین",Q1415856,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1415856,fill,QID,,,2026-10-20,
+https://topersia.com/e/monument/fin-garden,tp_monument,"باغ فین",Q1415856,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1415856,fill,QID,,,2026-10-20,yes
 https://topersia.com/e/monument/fin-garden,tp_monument,"باغ فین",Q1415856,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"33.9463, 51.3725","33.946278, 51.372611",same,P625,,,2026-10-20,
 https://topersia.com/e/monument/chehel-sotoun-garden,tp_monument,"باغ چهل‌ستون",,,none,,,,,none,,,,2026-10-20,
-https://topersia.com/e/monument/naqsh-e-jahan-square,tp_monument,"میدان نقش جهان",Q4519,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4519,fill,QID,,,2026-10-20,
-https://topersia.com/e/monument/naqsh-e-jahan-square,tp_monument,"میدان نقش جهان",Q4519,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.658222, 51.677333",fill,P625,,,2026-10-20,
-https://topersia.com/e/religious-site/jameh-mosque-of-isfahan,tp_religious_site,"مسجد جامع اصفهان",Q1256501,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1256501,fill,QID,,,2026-10-20,
-https://topersia.com/e/religious-site/jameh-mosque-of-isfahan,tp_religious_site,"مسجد جامع اصفهان",Q1256501,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.669722, 51.685278",fill,P625,,,2026-10-20,
-https://topersia.com/e/archaeological-site/mozdabad-qanat,tp_ancient_site,"قنات مزدآباد",Q5879041,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q5879041,fill,QID,,,2026-10-20,
+https://topersia.com/e/monument/naqsh-e-jahan-square,tp_monument,"میدان نقش جهان",Q4519,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q4519,fill,QID,,,2026-10-20,yes
+https://topersia.com/e/monument/naqsh-e-jahan-square,tp_monument,"میدان نقش جهان",Q4519,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.658222, 51.677333",fill,P625,,,2026-10-20,yes
+https://topersia.com/e/religious-site/jameh-mosque-of-isfahan,tp_religious_site,"مسجد جامع اصفهان",Q1256501,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q1256501,fill,QID,,,2026-10-20,yes
+https://topersia.com/e/religious-site/jameh-mosque-of-isfahan,tp_religious_site,"مسجد جامع اصفهان",Q1256501,name+P31+P131,auto,"درون استان ✓",geo_coordinates,,"32.669722, 51.685278",fill,P625,,,2026-10-20,yes
+https://topersia.com/e/archaeological-site/mozdabad-qanat,tp_ancient_site,"قنات مزدآباد",Q5879041,name+P31+P131,auto,"درون استان ✓",external_reference_uri,,https://www.wikidata.org/wiki/Q5879041,fill,QID,,,2026-10-20,yes
 https://topersia.com/e/archaeological-site/mozdabad-qanat,tp_ancient_site,"قنات مزدآباد",Q5879041,name+P31+P131,auto,"درون استان ✓",geo_coordinates,"33.2591, 51.6007","33.259083, 51.600667",same,P625,,,2026-10-20,
 https://topersia.com/e/archaeological-site/vazvan-qanat,tp_ancient_site,"قنات وزوان",,,none,,,,,none,,,,2026-10-20,
 https://topersia.com/e/archaeological-site/moon-qanat,tp_ancient_site,"قنات ماه",,,none,,,,,none,,,,2026-10-20,
