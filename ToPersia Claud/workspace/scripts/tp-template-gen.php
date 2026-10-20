@@ -1518,6 +1518,12 @@ html .tp-page .tp-map-styles button[aria-pressed="true"]{background:var(--tp-pri
 html .tp-page .tp-map-styles button:hover{background:var(--tp-soft)}
 html .tp-page .tp-map-styles button[aria-pressed="true"]:hover{background:var(--tp-primary);color:var(--tp-on-primary)}
 
+/* ─── چهار خانۀ ثابت آمار (P5-D395): مقدار یک خط، بلند با «…» (متن کامل در title)؛ ارتفاع ردیف ثابت، بی CLS.
+   خانۀ بی‌مقدار «—» با همان اندازه، رنگ متن دوم (عدد بزرگ، بالای ۱۴px — P5-D184). ─── */
+html .tp-page .tp-stat{min-width:0}
+html .tp-page .tp-stat .tp-stat__v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html .tp-page .tp-stat--none .tp-stat__v{color:var(--tp-text-2);font-weight:700}
+
 /* ═══ TP-ADDED-END ═════════════════════════════════════════════════ */
 
 CSS;

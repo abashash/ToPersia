@@ -2664,6 +2664,14 @@ if ( ! function_exists( 'topersia_g_key_fact' ) ) {
 if ( ! function_exists( 'topersia_g_stat_plan' ) ) {
 	function topersia_g_stat_plan( $post_id ) {
 
+		/* P5-D395: نوع STAT_CELLS همیشه همان چهار کلید را می‌گیرد، چه داده باشد چه نه */
+		$cells = topersia_g_stat_cells();
+		$ptype = function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '';
+
+		if ( isset( $cells[ $ptype ] ) ) {
+			return array_column( $cells[ $ptype ], 'key' );
+		}
+
 		$row = topersia_g_type_row( $post_id );
 
 		/* بی سطر در ماتریس (نوع آینده): قاعدۀ پیشین. سطرِ `stats` خالی یعنی بی کارت آمار. */
@@ -2685,6 +2693,120 @@ if ( ! function_exists( 'topersia_g_stat_plan' ) ) {
 		}
 
 		return $plan;
+	}
+}
+
+/** نشان خانۀ بی‌مقدار — فقط در [tp_stats] (لایۀ نمایش). P5-D395 */
+if ( ! defined( 'TOPERSIA_STAT_NONE' ) ) {
+	define( 'TOPERSIA_STAT_NONE', '—' );
+}
+
+/**
+ * خانه‌های مشتق P5-D395 — array( برچسب، مقدار آمادۀ چاپ ) · null (نبود) · false (کلید مشتق نیست).
+ * مقدار هرگز «—» نیست: نبود همیشه null است.
+ */
+if ( ! function_exists( 'topersia_g_stat_derived' ) ) {
+	function topersia_g_stat_derived( $post_id, $key ) {
+
+		if ( 0 === strpos( $key, 'parent:' ) ) {
+
+			$want = 'tp_' . substr( $key, 7 );
+			$cur  = absint( $post_id );
+			$seen = array( $cur => 1 );
+
+			/* زنجیرۀ مکانی با پله‌های بی‌صفحه (شهرستان) — همان قاعدۀ topersia_g_place_chain */
+			for ( $guard = 0; $guard < 6 && $cur; $guard++ ) {
+				$ups = topersia_g_place_parents( $cur, 0, true );
+				if ( ! $ups ) {
+					break;
+				}
+				$cur = (int) $ups[0]['id'];
+				if ( isset( $seen[ $cur ] ) ) {
+					break;
+				}
+				$seen[ $cur ] = 1;
+				if ( $want === get_post_type( $cur ) ) {
+					$view = topersia_g_view_id( $cur );
+					$url  = topersia_g_public_url( $view );
+					$name = topersia_g_name( $view );
+					if ( '' === trim( (string) $name ) ) {
+						return null;
+					}
+					return array( topersia_g_stat_label( $key ), '' !== $url ? '<a href="' . esc_url( $url ) . '">' . esc_html( $name ) . '</a>' : esc_html( $name ) );
+				}
+			}
+
+			return null;
+		}
+
+		if ( 'distance:capital' === $key ) {
+
+			$me = function_exists( 'topersia_geo_point' ) ? topersia_geo_point( topersia_g_text( $post_id, 'geo_coordinates' ) ) : null;
+
+			if ( ! $me ) {
+				return null;
+			}
+
+			foreach ( topersia_g_place_chain( $post_id ) as $up ) {
+				if ( 'tp_province' === get_post_type( $up ) ) {
+					$cap = topersia_g_capital_id( $up );
+					$cp  = $cap && topersia_g_default_id( $cap ) !== topersia_g_default_id( $post_id ) ? topersia_geo_point( topersia_g_text( $cap, 'geo_coordinates' ) ) : null;
+					if ( ! $cp ) {
+						return null;
+					}
+					$dl = deg2rad( $cp['lat'] - $me['lat'] );
+					$dn = deg2rad( $cp['lng'] - $me['lng'] );
+					$h  = sin( $dl / 2 ) ** 2 + cos( deg2rad( $me['lat'] ) ) * cos( deg2rad( $cp['lat'] ) ) * sin( $dn / 2 ) ** 2;
+					$km = (int) round( 2 * 6371.0 * asin( min( 1, sqrt( $h ) ) ) );
+					return array( topersia_g_stat_label( $key ), topersia_g_fa( topersia_g_sep( (string) max( 1, $km ) ) ) . ' <i class="tp-u">km</i>' );
+				}
+			}
+
+			return null;
+		}
+
+		if ( 'meta:verified' === $key ) {
+			$html = topersia_g_date_html( (string) topersia_g_raw( $post_id, 'last_verified_date' ) );
+			return '' !== $html ? array( topersia_g_stat_label( $key ), $html ) : null;
+		}
+
+		if ( 'meta:sources' === $key ) {
+			$n = 0;
+			foreach ( (array) topersia_g_rows( $post_id, 'source_references' ) as $row ) {
+				if ( is_array( $row ) && 'not_applicable' !== ( $row['source_row_status'] ?? '' )
+					&& ( '' !== trim( (string) ( $row['source_name'] ?? '' ) ) || '' !== trim( (string) ( $row['source_url'] ?? '' ) ) ) ) {
+					$n++;
+				}
+			}
+			return $n ? array( topersia_g_stat_label( $key ), esc_html( topersia_g_fa( $n ) ) ) : null;
+		}
+
+		if ( 'meta:languages' === $key ) {
+			$type = 'post_' . get_post_type( $post_id );
+			$trid = function_exists( 'apply_filters' ) ? apply_filters( 'wpml_element_trid', null, topersia_g_default_id( $post_id ), $type ) : null;
+			$n    = 'publish' === get_post_status( topersia_g_default_id( $post_id ) ) ? 1 : 0;
+			if ( $trid ) {
+				$n = 0;
+				foreach ( (array) apply_filters( 'wpml_get_element_translations', null, $trid, $type ) as $tr ) {
+					if ( is_object( $tr ) && ! empty( $tr->element_id ) && 'publish' === get_post_status( (int) $tr->element_id ) ) {
+						$n++;
+					}
+				}
+			}
+			return $n ? array( topersia_g_stat_label( $key ), esc_html( topersia_g_fa( $n ) ) ) : null;
+		}
+
+		if ( 'meta:related' === $key ) {
+			$ids = array();
+			foreach ( topersia_g_relreg_sides( (string) get_post_type( $post_id ) ) as $side ) {
+				foreach ( topersia_g_rel_ids( $post_id, array( array( 'id' => $side['id'], 'dir' => $side['dir'] ) ) ) as $id ) {
+					$ids[ (int) $id ] = 1;
+				}
+			}
+			return $ids ? array( topersia_g_stat_label( $key ), esc_html( topersia_g_fa( count( $ids ) ) ) ) : null;
+		}
+
+		return false;
 	}
 }
 
@@ -2742,6 +2864,12 @@ if ( ! function_exists( 'topersia_g_stat_cell' ) ) {
 			);
 		}
 
+		$derived = topersia_g_stat_derived( $post_id, $key );
+
+		if ( false !== $derived ) {
+			return $derived;
+		}
+
 		if ( 0 === strpos( $key, 'count:' ) ) {
 
 			$labels = array( 'provinces' => __( 'شمار استان‌ها', 'topersia' ) );
@@ -2777,12 +2905,18 @@ if ( ! function_exists( 'topersia_g_stat_cell' ) ) {
 		 * بالای TOPERSIA_STAT_MAX نویسه در ۳۹۰ دو خط می‌شد («شهرستان کاشان،
 		 * به‌ویژه قمصر و نیاسر» سه خط، هر دو مرورگر).
 		 */
-		if ( ! in_array( $map[ $key ]['kind'], array( 'number', 'year' ), true )
-			&& ( function_exists( 'mb_strlen' ) ? mb_strlen( $plain, 'UTF-8' ) : strlen( $plain ) ) > TOPERSIA_STAT_MAX ) {
+		/*
+		 * P5-D395: خانه ثابت است، پس مقدار بلند دیگر جایش را به نامزد بعدی نمی‌دهد — یک خط با «…» (CSS) و متن کامل
+		 * در title؛ ارتفاع ردیف ثابت می‌ماند.
+		 */
+		if ( '' === $plain ) {
 			return null;
 		}
 
-		return '' === $plain ? null : array( topersia_g_t( $map[ $key ]['label'] ), $value );
+		$long = ! in_array( $map[ $key ]['kind'], array( 'number', 'year' ), true )
+			&& ( function_exists( 'mb_strlen' ) ? mb_strlen( $plain, 'UTF-8' ) : strlen( $plain ) ) > TOPERSIA_STAT_MAX;
+
+		return array( topersia_g_t( $map[ $key ]['label'] ), $value, $long ? $plain : '' );
 	}
 }
 
@@ -2791,8 +2925,9 @@ if ( ! function_exists( 'topersia_g_stat_keys' ) ) {
 
 		/* نوعِ ماتریس‌دار: فقط فیلدهای همان خانه‌ها — کارت حقایق بقیه را می‌گیرد. */
 		if ( null !== topersia_g_type_row( $post_id )['stats'] ) {
-			return array_values( array_filter( topersia_g_stat_plan( $post_id ), function ( $key ) {
-				return 'capital' !== $key && 0 !== strpos( $key, 'count:' );
+			/* فقط فیلدهای دارای مقدار — خانۀ «—» فیلدی را از کارت حقایق نمی‌گیرد (که آن‌جا هم تهی است) */
+			return array_values( array_filter( topersia_g_stat_plan( $post_id ), function ( $key ) use ( $post_id ) {
+				return false === strpos( $key, ':' ) && 'capital' !== $key && null !== topersia_g_stat_cell( $post_id, $key );
 			} ) );
 		}
 
@@ -2847,33 +2982,44 @@ if ( ! function_exists( 'topersia_g_sc_stats' ) ) {
 			return '';
 		}
 
-		/* مختصات زیر نقشه می‌نشیند و بهترین فصل در جدول فصل‌ها. */
-		$cells = array();
+		/*
+		 * مختصات زیر نقشه می‌نشیند و بهترین فصل در جدول فصل‌ها.
+		 * P5-D395: همیشه همان چهار خانه به همان ترتیب؛ بی‌مقدار ← «—» با aria-label «نامشخص». «—» فقط همین‌جا
+		 * (لایۀ نمایش) ساخته می‌شود — topersia_g_stat_cell() برای نبود null می‌دهد، پس به داده، JSON-LD، متا، هوش
+		 * مصنوعی یا نمایۀ جستجو نمی‌رسد.
+		 */
+		$plan = topersia_g_stat_plan( $pid );
+		$out  = '';
+		$n    = 0;
 
-		foreach ( topersia_g_stat_plan( $pid ) as $key ) {
+		foreach ( $plan as $key ) {
 
 			$cell = topersia_g_stat_cell( $pid, $key );
 
-			if ( null !== $cell ) {
-				$cells[] = $cell;
+			if ( null === $cell ) {
+				/* نوع بی سطر STAT_CELLS (قاعدۀ پیشین) جای خالی نمی‌گیرد */
+				if ( ! isset( topersia_g_stat_cells()[ (string) get_post_type( $pid ) ] ) ) {
+					continue;
+				}
+				$n++;
+				$out .= '<div class="tp-stat tp-stat--none" role="listitem" data-tp-k="' . esc_attr( $key ) . '">'
+					. '<span class="tp-stat__k">' . esc_html( topersia_g_stat_label( $key ) ) . '</span>'
+					. '<b class="tp-stat__v" role="img" aria-label="' . esc_attr__( 'نامشخص', 'topersia' ) . '">' . TOPERSIA_STAT_NONE . '</b></div>';
+				continue;
 			}
+
+			$n++;
+			$out .= '<div class="tp-stat" role="listitem" data-tp-k="' . esc_attr( $key ) . '">'
+				. '<span class="tp-stat__k">' . esc_html( $cell[0] ) . '</span>'
+				. '<b class="tp-stat__v"' . ( ! empty( $cell[2] ) ? ' title="' . esc_attr( $cell[2] ) . '"' : '' ) . '>' . $cell[1] . '</b></div>';
 		}
 
-		if ( empty( $cells ) ) {
+		if ( 0 === $n ) {
 			return '';
 		}
 
-		$out = '';
-
-		foreach ( $cells as $cell ) {
-
-			$out .= '<div class="tp-stat" role="listitem">'
-				. '<span class="tp-stat__k">' . esc_html( $cell[0] ) . '</span>'
-				. '<b class="tp-stat__v">' . $cell[1] . '</b></div>';
-		}
-
-		/* شمار خانه‌ها برای شبکه — کمتر از چهار، بی جای خالی.  P5-D275 */
-		return '<div class="tp-wrap tp-stats-wrap"><div class="tp-stats" role="list" data-tp-n="' . count( $cells ) . '" aria-label="'
+		/* شمار خانه‌ها برای شبکه — نوع STAT_CELLS همیشه ۴ (P5-D395)؛ نوع بی سطر همان قاعدۀ پیشین */
+		return '<div class="tp-wrap tp-stats-wrap"><div class="tp-stats" role="list" data-tp-n="' . $n . '" aria-label="'
 			. esc_attr__( 'اطلاعات کلیدی', 'topersia' ) . '">' . $out . '</div></div>';
 	}
 }
@@ -5942,8 +6088,8 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
  *   off    شناسۀ ناحیه‌هایی که این نوع نمی‌گیرد، حتی با داده
  *   on     ناحیه‌های اختیاری (`topersia_g_optin_zones()`) که این نوع می‌گیرد
  *   title  'kind' پیش‌فرض (نوع + نام: «استان اصفهان») · 'name' فقط نام کوتاه
- *   stats  خانه‌های کارت آمار سربرگ به ترتیب اولویت؛ چهار نخستینِ دارای
- *          داده می‌آیند (`topersia_g_stat_cell()`)
+ *   stats  چهار خانۀ ثابت کارت آمار سربرگ — از topersia_g_stat_cells()، نه این‌جا
+ *          (P5-D395: همیشه همان چهار، به همان ترتیب؛ بی‌مقدار ← «—»)
  *   scope  'area' پهنه‌ای · 'point' نقطه‌ای — جعبۀ مسیریابی فاز ۳ (P5-D253)
  *
  * نظر بازدیدکنندگان این‌جا نیست: منبعش پیکربندی نوع‌به‌نوع JetReviews در
@@ -5962,62 +6108,64 @@ if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
 				'title' => 'name',
 				'off'   => array( 'tp-weather', 'tp-routing', 'tp-aqi' ),
 				'on'    => array( 'tp-programmes' ),
-				/* منطقۀ زمانی («+۰۳:۳۰ UTC (IRST)») در ۳۹۰ فایرفاکس دو خط شد — به کارت حقایق، نه آمار */
-				'stats' => array( 'population', 'area_km2', 'count:provinces', 'official_language', 'calling_code' ),
 			),
 
 			/* P5-D282 — نام فرودگاه به «اطلاعات سفر»؛ خانۀ آزاد تا کیفیت هوای فاز ۳ ارتفاع */
 			'tp_city' => array(
-				'stats' => array( 'area_km2', 'population', 'elevation_m', 'founded_year' ),
 				'scope' => 'point',
 			),
 
-			/* G — همان قاعدۀ P5-D215 (مرکز · کد · مساحت · جمعیت)، هر نوع آنچه دارد */
-			'tp_region'          => array( 'stats' => array( 'region_classification', 'count:provinces' ) ),
-			'tp_province'        => array( 'stats' => array( 'capital', 'area_km2', 'population', 'climate_type' ) ),   /* P5-D386: بی کد استان */
-			'tp_district'        => array( 'stats' => array( 'neighborhood_type' ), 'scope' => 'point' ),
-			'tp_village'         => array( 'stats' => array( 'population', 'elevation_m' ), 'scope' => 'point' ),
-			'tp_island'          => array( 'stats' => array( 'island_type', 'area_km2' ) ),
-			'tp_mountain'        => array( 'stats' => array( 'elevation_m', 'mountain_type', 'trekking_difficulty' ) ),
-			'tp_water_body'      => array( 'stats' => array( 'water_body_type', 'area_km2', 'length_km', 'max_depth_m', 'salinity_type' ) ),
-			'tp_desert'          => array( 'stats' => array( 'desert_type', 'area_km2', 'max_temperature_c' ) ),
-			'tp_forest_plain'    => array( 'stats' => array( 'area_type', 'forest_type', 'area_km2' ) ),
-			'tp_border_crossing' => array( 'stats' => array( 'crossing_type', 'border_country', 'status' ), 'scope' => 'point' ),
+			/* G — خانه‌های آمار هر نوع در topersia_g_stat_cells() (P5-D395) */
+			'tp_region'          => array(),
+			'tp_province'        => array(),
+			'tp_district'        => array( 'scope' => 'point' ),
+			'tp_village'         => array( 'scope' => 'point' ),
+			'tp_island'          => array(),
+			'tp_mountain'        => array(),
+			'tp_water_body'      => array(),
+			'tp_desert'          => array(),
+			'tp_forest_plain'    => array(),
+			'tp_border_crossing' => array( 'scope' => 'point' ),
 
 			/* A — جاذبه‌ها؛ Spatial Scope از CA-A (A9 و A13 پهنه، بقیه نقطه) */
-			'tp_monument'        => array( 'stats' => array( 'classification', 'construction_year', 'suggested_duration', 'restoration_status', 'architectural_style' ), 'scope' => 'point' ),
-			'tp_religious_site'  => array( 'stats' => array( 'classification', 'religion', 'suggested_duration', 'photography_policy' ), 'scope' => 'point' ),
-			'tp_ancient_site'    => array( 'stats' => array( 'excavation_status', 'architectural_style', 'suggested_duration' ), 'scope' => 'point' ),
-			'tp_natural_feature' => array( 'stats' => array( 'classification', 'height_m', 'depth_m', 'length_km', 'area_km2', 'suggested_duration' ), 'scope' => 'point' ),
-			'tp_museum'          => array( 'stats' => array( 'classification', 'founded_year', 'suggested_duration' ), 'scope' => 'point' ),
-			'tp_protected_area'  => array( 'stats' => array( 'park_type', 'area_km2', 'suggested_duration' ) ),
-			'tp_landscape'       => array( 'stats' => array( 'landscape_type', 'total_area_km2', 'suggested_duration' ) ),
+			'tp_monument'        => array( 'scope' => 'point' ),
+			'tp_religious_site'  => array( 'scope' => 'point' ),
+			'tp_ancient_site'    => array( 'scope' => 'point' ),
+			'tp_natural_feature' => array( 'scope' => 'point' ),
+			'tp_museum'          => array( 'scope' => 'point' ),
+			'tp_protected_area'  => array(),
+			'tp_landscape'       => array(),
 
 			/* C · D · E · P — مکان نیستند: بی جعبۀ مسیریابی */
-			'tp_handicraft'       => array( 'stats' => array( 'classification', 'intangible_heritage_year', 'intangible_heritage_status' ), 'scope' => 'none' ),
-			'tp_local_food'       => array( 'stats' => array( 'classification_' ), 'scope' => 'none' ),
-			'tp_costume'          => array( 'stats' => array( 'classification' ), 'scope' => 'none' ),
-			'tp_music'            => array( 'stats' => array( 'classification' ), 'scope' => 'none' ),
-			'tp_dance'            => array( 'stats' => array( 'dance_type' ), 'scope' => 'none' ),
-			'tp_language'         => array( 'stats' => array( 'language_family', 'script', 'speaker_estimate_iran', 'name_endonym' ), 'scope' => 'none' ),
-			'tp_ethnic_group'     => array( 'stats' => array( 'population_estimate' ), 'scope' => 'none' ),
-			'tp_ritual'           => array( 'stats' => array( 'classification', 'spatial_scope', 'intangible_heritage_year', 'intangible_heritage_status' ), 'scope' => 'none' ),
-			'tp_figure'           => array( 'stats' => array( 'classification', 'birth_year_approx', 'death_year_approx' ), 'scope' => 'none' ),
-			'tp_historical_era'   => array( 'stats' => array( 'start_year_approx', 'end_year_approx' ), 'scope' => 'none' ),
-			'tp_designation'      => array( 'stats' => array( 'programme_start_year' ), 'scope' => 'none' ),
-			'tp_route'            => array( 'stats' => array( 'total_distance_km', 'estimated_duration_days', 'difficulty_level', 'classification' ), 'scope' => 'none' ),
-			'tp_visa'             => array( 'stats' => array( 'max_total_stay_days', 'passport_validity_months', 'free_zone_stay_days' ), 'scope' => 'none' ),
-			'tp_currency'         => array( 'stats' => array( 'currency_iso_code', 'currency_symbol', 'international_card_status', 'redenomination_status' ), 'scope' => 'none' ),
-			'tp_health_safety'    => array( 'stats' => array( 'emergency_police', 'emergency_ambulance', 'emergency_fire' ), 'scope' => 'none' ),
-			'tp_travel_etiquette' => array( 'stats' => array(), 'scope' => 'none' ),   /* همه wysiwyg — بی خانۀ کوتاه */
-			'tp_calendar'         => array( 'stats' => array(), 'scope' => 'none' ),
-			'tp_transport'        => array( 'stats' => array(), 'scope' => 'none' ),
+			'tp_handicraft'       => array( 'scope' => 'none' ),
+			'tp_local_food'       => array( 'scope' => 'none' ),
+			'tp_costume'          => array( 'scope' => 'none' ),
+			'tp_music'            => array( 'scope' => 'none' ),
+			'tp_dance'            => array( 'scope' => 'none' ),
+			'tp_language'         => array( 'scope' => 'none' ),
+			'tp_ethnic_group'     => array( 'scope' => 'none' ),
+			'tp_ritual'           => array( 'scope' => 'none' ),
+			'tp_figure'           => array( 'scope' => 'none' ),
+			'tp_historical_era'   => array( 'scope' => 'none' ),
+			'tp_designation'      => array( 'scope' => 'none' ),
+			'tp_route'            => array( 'scope' => 'none' ),
+			'tp_visa'             => array( 'scope' => 'none' ),
+			'tp_currency'         => array( 'scope' => 'none' ),
+			'tp_health_safety'    => array( 'scope' => 'none' ),
+			'tp_travel_etiquette' => array( 'scope' => 'none' ),
+			'tp_calendar'         => array( 'scope' => 'none' ),
+			'tp_transport'        => array( 'scope' => 'none' ),
 			/* محل برگزاری متن آزاد و اغلب بلند است — در آمار نه (P5-D282، یافتۀ ۲ج٫۱ در ۳۹۰) */
-			'tp_festival'         => array( 'stats' => array( 'event_frequency' ), 'scope' => 'none' ),
-			'tp_sports_event'     => array( 'stats' => array( 'sport_type', 'competition_level', 'event_frequency' ), 'scope' => 'none' ),
-			'tp_religious_event'  => array( 'stats' => array( 'calendar_system', 'ceremony_duration_days', 'crowd_scale' ), 'scope' => 'none' ),
-			'tp_seasonal_event'   => array( 'stats' => array( 'natural_phenomenon_type', 'season', 'weather_dependency' ), 'scope' => 'none' ),
+			'tp_festival'         => array( 'scope' => 'none' ),
+			'tp_sports_event'     => array( 'scope' => 'none' ),
+			'tp_religious_event'  => array( 'scope' => 'none' ),
+			'tp_seasonal_event'   => array( 'scope' => 'none' ),
 		);
+
+		/* خانه‌های آمار از STAT_CELLS — تنها منبع (P5-D395) */
+		foreach ( topersia_g_stat_cells() as $t => $cells ) {
+			$rows[ $t ] = ( isset( $rows[ $t ] ) ? $rows[ $t ] : array() ) + array( 'stats' => array_column( $cells, 'key' ) );
+		}
 
 		if ( function_exists( 'apply_filters' ) ) {
 			$rows = apply_filters( 'topersia_g_type_matrix', $rows );
@@ -6025,6 +6173,132 @@ if ( ! function_exists( 'topersia_g_type_matrix' ) ) {
 
 		return $rows;
 	}
+}
+
+/**
+ * چهار خانۀ ثابت زیر سربرگ — STAT_CELLS.  P5-D395 (دستۀ ۲۴؛ جایگزین P5-D275 و P5-D390)
+ *
+ * هر نوع از ۴۱ نوع همیشه دقیقاً همین ۴ خانه را دارد، به همین ترتیب — نه کمتر، نه بیشتر؛ خانۀ بی‌مقدار «—» با
+ * aria-label «نامشخص» (فقط در [tp_stats]؛ هرگز داده، JSON-LD، متا، هوش مصنوعی یا نمایۀ جستجو). اولویت انتخاب
+ * (docs/STATS-4-MATRIX.md): (الف) مشتق مکانی · (ب) فیلد الزامی بستۀ درون‌ریزی (بخش ج — `req`) · (ج) پرکاربردترین
+ * فیلد کوتاه · خانۀ عمومی. هرگز نام نوع، بهترین فصل یا کد استان.
+ *
+ *   نام فیلد           برچسب و قالب از FIELDMAP (عدد با واحد کوتاه · سال · واژه‌نامه · متن)
+ *   capital            مرکز استان (رابطۀ یک‌به‌یک، با پیوند)          count:provinces   شمار استان‌ها
+ *   parent:province    استان (زنجیرۀ مکانی، با پیوند)                 parent:city       شهر (با پیوند)
+ *   parent:county      شهرستان (صفحه ندارد — فقط نام)                  distance:capital  فاصلۀ خط مستقیم تا مرکز استان
+ *   meta:verified      آخرین بازبینی (last_verified_date)               meta:sources      شمار منبع‌های فعال
+ *   meta:languages     شمار زبان‌های منتشرشدۀ همین صفحه                 meta:related      شمار مکان‌های مرتبط منتشرشده
+ *
+ * @return array نوع ← فهرست چهارتایی از array( 'key' => …, 'req' => bool )
+ */
+if ( ! function_exists( 'topersia_g_stat_cells' ) ) {
+	function topersia_g_stat_cells() {
+
+		$c = static function ( ...$keys ) {
+			return array_map( static function ( $k ) {
+				$req = '!' === substr( $k, -1 );
+				return array( 'key' => rtrim( $k, '!' ), 'req' => $req );
+			}, $keys );
+		};
+
+		/* «!» = الزامی در بستۀ درون‌ریزی تازه (STATS-4-MATRIX بخش ج) */
+		return array(
+			'tp_country'          => $c( 'count:provinces', 'population!', 'area_km2!', 'official_language!' ),
+			'tp_city'             => $c( 'parent:province', 'parent:county', 'area_km2!', 'population!' ),
+			'tp_region'           => $c( 'region_classification!', 'count:provinces', 'meta:related', 'meta:sources' ),
+			'tp_province'         => $c( 'capital', 'area_km2!', 'population!', 'climate_type!' ),
+			'tp_district'         => $c( 'parent:province', 'parent:city', 'neighborhood_type!', 'distance:capital' ),
+			'tp_village'          => $c( 'parent:province', 'distance:capital', 'population!', 'elevation_m!' ),
+			'tp_island'           => $c( 'parent:province', 'island_type!', 'area_km2!', 'distance:capital' ),
+			'tp_mountain'         => $c( 'parent:province', 'elevation_m!', 'mountain_type!', 'trekking_difficulty!' ),
+			'tp_water_body'       => $c( 'parent:province', 'distance:capital', 'water_body_type!', 'area_km2!' ),
+			'tp_desert'           => $c( 'parent:province', 'desert_type!', 'area_km2!', 'max_temperature_c!' ),
+			'tp_forest_plain'     => $c( 'parent:province', 'area_type!', 'forest_type!', 'area_km2!' ),
+			'tp_border_crossing'  => $c( 'parent:province', 'crossing_type!', 'border_country!', 'status!' ),
+			'tp_monument'         => $c( 'classification!', 'construction_year!', 'suggested_duration!', 'restoration_status!' ),
+			'tp_religious_site'   => $c( 'parent:province', 'parent:city', 'classification!', 'religion!' ),
+			'tp_ancient_site'     => $c( 'parent:province', 'distance:capital', 'excavation_status!', 'architectural_style!' ),
+			'tp_natural_feature'  => $c( 'classification!', 'height_m!', 'depth_m!', 'length_km!' ),
+			'tp_museum'           => $c( 'parent:city', 'classification!', 'founded_year!', 'suggested_duration!' ),
+			'tp_protected_area'   => $c( 'parent:province', 'park_type!', 'area_km2!', 'suggested_duration!' ),
+			'tp_landscape'        => $c( 'parent:province', 'landscape_type!', 'total_area_km2!', 'suggested_duration!' ),
+			'tp_handicraft'       => $c( 'classification!', 'intangible_heritage_year!', 'intangible_heritage_status!', 'meta:related' ),
+			'tp_local_food'       => $c( 'classification_!', 'meta:related', 'meta:sources', 'meta:languages' ),
+			'tp_costume'          => $c( 'classification!', 'meta:related', 'meta:sources', 'meta:languages' ),
+			'tp_music'            => $c( 'classification!', 'meta:related', 'meta:sources', 'meta:languages' ),
+			'tp_dance'            => $c( 'dance_type!', 'meta:related', 'meta:sources', 'meta:languages' ),
+			'tp_language'         => $c( 'language_family!', 'script!', 'speaker_estimate_iran!', 'name_endonym!' ),
+			'tp_ethnic_group'     => $c( 'population_estimate!', 'meta:related', 'meta:sources', 'meta:languages' ),
+			'tp_ritual'           => $c( 'classification!', 'spatial_scope!', 'intangible_heritage_year!', 'intangible_heritage_status!' ),
+			'tp_figure'           => $c( 'classification!', 'birth_year_approx!', 'death_year_approx!', 'meta:related' ),
+			'tp_historical_era'   => $c( 'start_year_approx!', 'end_year_approx!', 'meta:related', 'meta:sources' ),
+			'tp_designation'      => $c( 'programme_start_year!', 'meta:related', 'meta:sources', 'meta:languages' ),
+			'tp_route'            => $c( 'total_distance_km!', 'estimated_duration_days!', 'difficulty_level!', 'classification!' ),
+			'tp_visa'             => $c( 'max_total_stay_days!', 'passport_validity_months!', 'free_zone_stay_days!', 'meta:verified' ),
+			'tp_currency'         => $c( 'currency_iso_code!', 'currency_symbol!', 'international_card_status!', 'redenomination_status!' ),
+			'tp_health_safety'    => $c( 'emergency_police!', 'emergency_ambulance!', 'emergency_fire!', 'meta:verified' ),
+			'tp_travel_etiquette' => $c( 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ),
+			'tp_calendar'         => $c( 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ),
+			'tp_transport'        => $c( 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ),
+			'tp_festival'         => $c( 'event_frequency!', 'event_start_date', 'event_end_date', 'meta:related' ),
+			'tp_sports_event'     => $c( 'sport_type!', 'competition_level!', 'event_frequency!', 'event_start_date' ),
+			'tp_religious_event'  => $c( 'calendar_system!', 'ceremony_duration_days!', 'crowd_scale!', 'event_start_date' ),
+			'tp_seasonal_event'   => $c( 'natural_phenomenon_type!', 'season!', 'weather_dependency!', 'meta:related' ),
+		);
+	}
+}
+
+/** برچسب خانۀ مشتق (msgid فارسی) — خانۀ فیلد برچسبش را از FIELDMAP می‌گیرد. */
+if ( ! function_exists( 'topersia_g_stat_label' ) ) {
+	function topersia_g_stat_label( $key ) {
+
+		$derived = array(
+			'parent:province'  => __( 'استان', 'topersia' ),
+			'parent:county'    => __( 'شهرستان', 'topersia' ),
+			'parent:city'      => __( 'شهر', 'topersia' ),
+			'distance:capital' => __( 'فاصله تا مرکز استان', 'topersia' ),
+			'meta:verified'    => __( 'آخرین بازبینی', 'topersia' ),
+			'meta:sources'     => __( 'منبع‌ها', 'topersia' ),
+			'meta:languages'   => __( 'زبان‌ها', 'topersia' ),
+			'meta:related'     => __( 'مکان‌های مرتبط', 'topersia' ),
+		);
+
+		if ( 0 === strpos( $key, 'count:' ) ) {
+			return __( 'شمار استان‌ها', 'topersia' );   /* تنها گروه شمار (count:provinces) */
+		}
+
+		if ( isset( $derived[ $key ] ) ) {
+			return $derived[ $key ];
+		}
+
+		if ( 'capital' === $key ) {
+			return __( 'مرکز', 'topersia' );
+		}
+
+		$map = topersia_g_map();
+
+		return isset( $map[ $key ] ) ? topersia_g_t( $map[ $key ]['label'] ) : '';
+	}
+}
+
+/** فیلدهای الزامی بستۀ درون‌ریزی هر نوع (بخش ج) — همان STAT_CELLS، تنها منبع.  P5-D395 بند ۳ */
+if ( ! function_exists( 'topersia_g_stat_required_fields' ) ) {
+	function topersia_g_stat_required_fields( $req, $post_type ) {
+
+		$cells = topersia_g_stat_cells();
+
+		foreach ( isset( $cells[ $post_type ] ) ? $cells[ $post_type ] : array() as $cell ) {
+			if ( $cell['req'] ) {
+				$req[] = $cell['key'];
+			}
+		}
+
+		return array_values( array_unique( (array) $req ) );
+	}
+}
+if ( function_exists( 'add_filter' ) ) {
+	add_filter( 'topersia_pack_required_fields', 'topersia_g_stat_required_fields', 10, 2 );
 }
 
 /**

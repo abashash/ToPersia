@@ -54,6 +54,10 @@ msgstr ""
 msgid "آتش‌نشانی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "آخرین بازبینی"
+msgstr ""
+
 #: includes/topersia-g-gallery-agg.php
 #, php-format
 msgid "آخرین بازسازی همه: %s"
@@ -1084,6 +1088,10 @@ msgstr ""
 msgid "زبان و پوشاک"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "زبان‌ها"
+msgstr ""
+
 #: includes/topersia-g-panel.php
 msgid "زمان سفر"
 msgstr ""
@@ -1382,6 +1390,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "غرب"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "فاصله تا مرکز استان"
 msgstr ""
 
 #: topersia-render.php
@@ -1701,6 +1713,10 @@ msgstr ""
 msgid "مرور اقلیم"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "مرکز"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "مرکز استان"
 msgstr ""
@@ -1827,6 +1843,10 @@ msgstr ""
 msgid "منبع اصلی:"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "منبع‌ها"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr ""
@@ -1919,6 +1939,10 @@ msgstr ""
 msgid "مکان مذهبی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "مکان‌های مرتبط"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "میراث جهانی"
 msgstr ""
@@ -1957,6 +1981,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "نام فرودگاه"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "نامشخص"
 msgstr ""
 
 #: includes/topersia-g-map.php

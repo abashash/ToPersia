@@ -736,4 +736,13 @@ return array(
 	'تنظیمات به پیش‌فرض بازگشت'           => array( 'en' => 'Settings reset to default', 'ar' => 'أُعيدت الإعدادات إلى الوضع الافتراضي' ),
 	'انتخاب شما روی همین دستگاه ذخیره می‌شود.' => array( 'en' => 'Your choice is saved on this device.', 'ar' => 'يُحفظ اختيارك على هذا الجهاز.' ),
 	'پرش به محتوای اصلی'                  => array( 'en' => 'Skip to main content', 'ar' => 'الانتقال إلى المحتوى الرئيسي' ),
+
+	/* ── چهار خانهٔ ثابت آمار — P5-D395 ── */
+	'فاصله تا مرکز استان'                 => array( 'en' => 'To provincial capital', 'ar' => 'المسافة إلى مركز المحافظة' ),
+	'آخرین بازبینی'                       => array( 'en' => 'Last reviewed', 'ar' => 'آخر مراجعة' ),
+	'منبع‌ها'                             => array( 'en' => 'Sources', 'ar' => 'المصادر' ),
+	'زبان‌ها'                             => array( 'en' => 'Languages', 'ar' => 'اللغات' ),
+	'مکان‌های مرتبط'                      => array( 'en' => 'Related places', 'ar' => 'أماكن ذات صلة' ),
+	'نامشخص'                              => array( 'en' => 'Unknown', 'ar' => 'غير معروف' ),
+	'مرکز'                                => array( 'en' => 'Capital', 'ar' => 'المركز' ),
 );

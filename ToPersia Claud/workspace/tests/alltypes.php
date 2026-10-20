@@ -467,6 +467,33 @@ $TP_ORDER = array(
 	/* پنل چپ: ترتیب DOM = ترتیب موبایل (P5-D347)؛ «مرکزیت» باکس جدا نیست (P5-D348) */
 	'rail' => array( 'tp-actions', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-routes', 'tp-border', 'tp-subranges', 'tp-audio', 'tp-sources' ),
 );
+/** P5-D395 — ایرادهای کارت آمار یک نوع: شمار، کلید و ترتیب STAT_CELLS، data-tp-n، و «—» فقط با aria-label «نامشخص». */
+function tp_at_four_bad( $type, $html ) {
+	$cells = topersia_g_stat_cells();
+	if ( ! isset( $cells[ $type ] ) ) {
+		return array( $type . ' در STAT_CELLS نیست' );
+	}
+	$want = array_column( $cells[ $type ], 'key' );
+	$bad  = array();
+	preg_match_all( '~<div class="tp-stat( tp-stat--none)?" role="listitem" data-tp-k="([^"]+)">(.*?)</div>~su', $html, $m );
+	if ( $want !== $m[2] ) {
+		$bad[] = $type . ': خانه‌ها ' . implode( ',', $m[2] ) . ' ← انتظار ' . implode( ',', $want );
+	}
+	if ( 4 !== count( $want ) || false === strpos( $html, 'data-tp-n="4"' ) || 4 !== substr_count( $html, 'role="listitem"' ) ) {
+		$bad[] = $type . ': دقیقاً ۴ نیست';
+	}
+	foreach ( $m[3] as $i => $inner ) {
+		$none = ' tp-stat--none' === $m[1][ $i ];
+		if ( $none && false === strpos( $inner, 'role="img" aria-label="نامشخص">—</b>' ) ) {
+			$bad[] = $type . '.' . $m[2][ $i ] . ': «—» بی aria-label «نامشخص»';
+		}
+		if ( ! $none && preg_match( '~<b class="tp-stat__v"[^>]*>\s*—\s*</b>~u', $inner ) ) {
+			$bad[] = $type . '.' . $m[2][ $i ] . ': «—» در خانهٔ دارای مقدار';
+		}
+	}
+	return $bad;
+}
+
 function tp_at_order_bad( $html ) {
 
 	$bad = array();
@@ -618,6 +645,13 @@ foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj', 'many' ) as $mode ) {
 					preg_match( '/TPHIDDEN [a-z]+ \d+/', $html, $leak );
 					tp_at_note( 'Leak', 'پست منتشرنشده در خروجی: ' . ( $leak ? $leak[0] : 'TPHIDDEN' ), '-' );
 				}
+				/* P5-D395 — هر نوع دقیقاً همان ۴ خانهٔ STAT_CELLS به همان ترتیب، در هر حالت داده؛ بی‌مقدار «—» با aria-label */
+				if ( 'tp_stats' === $call[0] && isset( topersia_g_stat_cells()[ $type ] ) ) {   /* شهرستان صفحه ندارد — جزو ۴۱ نوع نیست */
+					foreach ( tp_at_four_bad( $type, (string) $html ) as $why ) {
+						tp_at_note( 'Four', $why, 'P5-D395' );
+					}
+					$GLOBALS['tp_at_four'][ $type ][ $mode ] = (string) $html;
+				}
 				if ( 'tp_page' === $call[0] ) {
 					$sizes[ $mode ][ $type ] = strlen( (string) $html );
 					if ( 0 !== strpos( (string) $html, '<div class="tp-page">' ) ) {
@@ -647,6 +681,28 @@ foreach ( array( 'empty', 'rich', 'odd', 'arr', 'obj', 'many' ) as $mode ) {
 }
 
 $GLOBALS['tp_at_ctx'] = array( 'mode' => '-', 'type' => '-', 'tag' => 'done' );
+
+/* P5-D395 — پوشش و جهش ادعای «دقیقاً ۴»: هر ۴۱ نوع، حالت تهی همهٔ ۴ «—»؛ HTML با یک خانه کم، یکی بیش، یا ترتیب وارونه باید ایراد بگیرد */
+$tp_four_cells = topersia_g_stat_cells();
+$tp_four_miss  = array_diff( array_keys( $tp_four_cells ), array_keys( (array) ( $GLOBALS['tp_at_four'] ?? array() ) ) );
+if ( 41 !== count( $tp_four_cells ) || $tp_four_miss ) {
+	tp_at_note( 'Four', 'STAT_CELLS ' . count( $tp_four_cells ) . ' نوع؛ رندرنشده: ' . implode( ' ', $tp_four_miss ), 'P5-D395' );
+}
+foreach ( (array) ( $GLOBALS['tp_at_four'] ?? array() ) as $tp_t => $tp_modes ) {
+	/* حالت تهی: هر خانه «—» جز «زبان‌ها» — صفحهٔ منتشرشده دست‌کم یک زبان دارد */
+	$tp_four_want = count( array_diff( array_column( $tp_four_cells[ $tp_t ], 'key' ), array( 'meta:languages' ) ) );
+	if ( isset( $tp_modes['empty'] ) && $tp_four_want !== substr_count( $tp_modes['empty'], 'tp-stat--none' ) ) {
+		tp_at_note( 'Four', $tp_t . ': حالت تهی ' . substr_count( $tp_modes['empty'], 'tp-stat--none' ) . ' خانهٔ «—» به‌جای ' . $tp_four_want, 'P5-D395' );
+	}
+}
+$tp_four_src = (string) ( $GLOBALS['tp_at_four']['tp_city']['rich'] ?? '' );
+$tp_four_one = preg_replace( '~<div class="tp-stat[^"]*" role="listitem" data-tp-k="[^"]+">.*?</b></div>~su', '', $tp_four_src, 1 );
+$tp_four_add = str_replace( '</div></div>', '<div class="tp-stat" role="listitem" data-tp-k="elevation_m"><span class="tp-stat__k">x</span><b class="tp-stat__v">1</b></div></div></div>', $tp_four_src );
+preg_match_all( '~<div class="tp-stat[^"]*" role="listitem" data-tp-k="[^"]+">.*?</b></div>~su', $tp_four_src, $tp_four_m );
+$tp_four_rev = str_replace( implode( '', $tp_four_m[0] ), implode( '', array_reverse( $tp_four_m[0] ) ), $tp_four_src );
+if ( '' === $tp_four_src || tp_at_four_bad( 'tp_city', $tp_four_src ) || ! tp_at_four_bad( 'tp_city', $tp_four_one ) || ! tp_at_four_bad( 'tp_city', $tp_four_add ) || ! tp_at_four_bad( 'tp_city', $tp_four_rev ) ) {
+	tp_at_note( 'Mutant', 'ادعای «دقیقاً ۴ خانه به همان ترتیب» جهش (کم · بیش · وارونه) را نگرفت', 'P5-D395' );
+}
 
 /* جهش ادعای ترتیب: صفحۀ استان با ستون اصلیِ وارونه و یک بخش خالی باید ایراد بگیرد */
 $tp_order_real = isset( $GLOBALS['tp_at_orders']['tp_province'] ) ? $GLOBALS['tp_at_orders']['tp_province'] : '';
@@ -731,6 +787,7 @@ foreach ( $by as $k => $where ) {
 
 if ( ! $by ) {
 	echo '✓ ۲ه٫۴ «همه …»: ', $result['manyTypes'], ' نوع در «many» · ', $tp_more_stat['sections'], ' بخش سنجیده · ', $tp_more_stat['over'], " بخش بیش از سقف — هر کدام پیوند و پنجرهٔ هم‌شمار؛ زیر سقف بی پنجره؛ جهش‌ها گرفته شد\n";
+	echo '✓ P5-D395 چهار خانهٔ ثابت: ', count( (array) ( $GLOBALS['tp_at_four'] ?? array() ) ), " نوع × شش حالت داده — هر کدام دقیقاً همان ۴ خانهٔ STAT_CELLS به همان ترتیب، «—» با aria-label؛ جهش کم · بیش · وارونه گرفته شد\n";
 	echo "✓ خالی · پر · ناجور · شیء — هیچ خطا، هشدار یا اخطاری\n";
 	echo '✓ آرایه در همه‌جا — هیچ خطای مرگبار (', $soft, " هشدارِ تبدیل آرایه، بی‌حکم)\n";
 }

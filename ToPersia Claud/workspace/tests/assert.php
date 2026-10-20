@@ -133,7 +133,8 @@ t( 'نقشه: سیزده فیلد choice در G', 13 === $choice, "شمار: {$c
 $mx_bad = array();
 foreach ( topersia_g_type_matrix() as $mx_type => $mx_row ) {
 	foreach ( isset( $mx_row['stats'] ) ? $mx_row['stats'] : array() as $mx_key ) {
-		if ( 'capital' === $mx_key || 0 === strpos( $mx_key, 'count:' ) ) { continue; }
+		/* P5-D395: خانه‌های مشتق (زنجیرهٔ مکانی، فاصله، خانهٔ عمومی) فیلد نیستند */
+		if ( 'capital' === $mx_key || 0 === strpos( $mx_key, 'count:' ) || in_array( $mx_key, array( 'parent:province', 'parent:county', 'parent:city', 'distance:capital', 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ), true ) ) { continue; }
 		$mx_f = isset( topersia_g_map()[ $mx_key ] ) ? topersia_g_map()[ $mx_key ] : null;
 		if ( ! $mx_f ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' نیست'; continue; }
 		if ( 'flag' === $mx_f['kind'] ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' پرچم است'; }
@@ -142,6 +143,48 @@ foreach ( topersia_g_type_matrix() as $mx_type => $mx_row ) {
 }
 t( 'ماتریس: هر کلید آمارِ هر نوع فیلد نقشه است، نه پرچم، و choice واژه‌نامۀ همان نوع را دارد  P5-D275 · P5-D282',
 	count( topersia_g_type_matrix() ) >= 41 && ! $mx_bad, implode( ' · ', $mx_bad ) );
+
+/* ── P5-D395 — چهار خانهٔ ثابت (STAT_CELLS): هر ۴۱ نوع دقیقاً ۴ کلید یکتا؛ هرگز نوع، بهترین فصل یا کد استان؛ جهش کم/بیش ── */
+$sc_ok = function ( $cells ) {
+	$bad = array();
+	foreach ( $cells as $t => $list ) {
+		$keys = array_column( $list, 'key' );
+		if ( 4 !== count( $keys ) || 4 !== count( array_unique( $keys ) ) ) { $bad[] = $t . ' ' . count( $keys ); }
+		if ( array_intersect( $keys, array( 'best_season', 'province_code', 'post_type', 'type' ) ) ) { $bad[] = $t . ' ممنوع'; }
+	}
+	foreach ( array( 'tp_travel_etiquette', 'tp_calendar', 'tp_transport' ) as $t ) {
+		if ( ! isset( $cells[ $t ] ) || array( 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ) !== array_column( $cells[ $t ], 'key' ) ) { $bad[] = $t . ' خانهٔ عمومی نیست'; }
+	}
+	return 41 === count( $cells ) && ! $bad ? '' : implode( ' · ', $bad ) . ' (' . count( $cells ) . ')';
+};
+$sc_real  = topersia_g_stat_cells();
+$sc_less  = $sc_real; array_pop( $sc_less['tp_city'] );
+$sc_more  = $sc_real; $sc_more['tp_city'][] = array( 'key' => 'elevation_m', 'req' => false );
+$sc_dup   = $sc_real; $sc_dup['tp_city'][3] = $sc_dup['tp_city'][2];
+$sc_bad   = $sc_real; $sc_bad['tp_province'][3] = array( 'key' => 'province_code', 'req' => false );
+t( 'P5-D395: STAT_CELLS — ۴۱ نوع، هر کدام دقیقاً ۴ کلید یکتا، بی نوع/بهترین فصل/کد استان؛ سه نوع بی فیلد کوتاه خانهٔ عمومی دارند — جهش کم · بیش · تکراری · کد استان می‌افتد',
+	'' === $sc_ok( $sc_real ) && '' !== $sc_ok( $sc_less ) && '' !== $sc_ok( $sc_more ) && '' !== $sc_ok( $sc_dup ) && '' !== $sc_ok( $sc_bad ), $sc_ok( $sc_real ) );
+$sc_plan_bad = array();
+foreach ( $sc_real as $t => $list ) {
+	$mx = topersia_g_type_matrix();
+	if ( ! isset( $mx[ $t ]['stats'] ) || array_column( $list, 'key' ) !== $mx[ $t ]['stats'] ) { $sc_plan_bad[] = $t; }
+}
+t( 'P5-D395: ماتریس stats همان STAT_CELLS است (تنها منبع)؛ فیلدهای الزامی بسته از همان (صافی topersia_pack_required_fields)',
+	! $sc_plan_bad && array( 'area_km2', 'population' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_city' )
+	&& array() === apply_filters( 'topersia_pack_required_fields', array(), 'tp_calendar' ), implode( ' ', $sc_plan_bad ) );
+$sc_src  = (string) file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' );
+/* بدنهٔ یک تابع، بی توضیح‌ها (توضیح‌ها «—» نگارشی دارند) */
+$sc_body = function ( $name, $src = null ) use ( $sc_src ) {
+	return preg_match( '/function ' . $name . '\(.*?\n\t}\n}/s', null === $src ? $sc_src : $src, $m ) ? preg_replace( '#/\*.*?\*/#s', '', $m[0] ) : '';
+};
+$sc_none = function ( $src ) use ( $sc_body ) {
+	/* «—» فقط در لایهٔ نمایش: ثابت در [tp_stats]؛ داده‌دهنده‌ها (cell · derived) برای نبود null می‌دهند و «—» نمی‌سازند */
+	return 1 === substr_count( $src, "define( 'TOPERSIA_STAT_NONE', '—' );" ) && 3 === substr_count( $src, 'TOPERSIA_STAT_NONE' )   /* defined · define · تنها مصرف در [tp_stats] */
+		&& false !== strpos( $sc_body( 'topersia_g_sc_stats', $src ), 'TOPERSIA_STAT_NONE' )
+		&& false === strpos( $sc_body( 'topersia_g_stat_cell', $src ), '—' ) && false === strpos( $sc_body( 'topersia_g_stat_derived', $src ), '—' );
+};
+t( 'P5-D395: «—» فقط در [tp_stats] (لایهٔ نمایش)؛ topersia_g_stat_cell و خانه‌های مشتق برای نبود null می‌دهند — جهش: «—» در داده‌دهنده می‌افتد',
+	$sc_none( $sc_src ) && ! $sc_none( str_replace( "		if ( '' === \$plain ) {\n			return null;\n		}", "		if ( '' === \$plain ) {\n			return array( '', '—' );\n		}", $sc_src ) ) );
 
 /* نقشهٔ رابطه — گام ۱ · تولیدشده با scripts/tp-relmap-gen.php از Jetengine_Skin.json */
 $relmap = topersia_g_relmap();

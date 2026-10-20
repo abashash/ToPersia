@@ -452,6 +452,17 @@ function topersia_pack_schema( $post_type ) {
 		}
 	}
 
+	/*
+	 * P5-D395 بند ۳ — فیلدهای خانه‌های آمار سربرگ (STATS-4-MATRIX بخش ج) در بستۀ درون‌ریزی الزامی‌اند. فهرست
+	 * از رندر (`topersia_g_stat_cells()`) با صافی می‌آید — تنها منبع. «الزامی» در بسته فقط برای پست تازه (create)
+	 * سنجیده می‌شود؛ پست‌های موجود دست نمی‌خورند.
+	 */
+	foreach ( (array) apply_filters( 'topersia_pack_required_fields', array(), $post_type ) as $req ) {
+		if ( isset( $fields[ $req ] ) ) {
+			$fields[ $req ]['required'] = true;
+		}
+	}
+
 	$relations = topersia_pack_relations( $post_type );
 
 	$cache[ $post_type ] = array(
