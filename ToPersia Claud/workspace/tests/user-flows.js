@@ -2,6 +2,7 @@
  * جریان‌های کاربر آزمون — ۴٫۳٫۰ پذیرش، روی topersia.local.
  *
  *   node tests/user-flows.js
+ *   TP_UF_BROWSER=firefox node tests/user-flows.js   ← جریان واردشده و نانس مهمان در فایرفاکس (پیش‌فرض کروم؛ ۱۹ب)
  *
  *   مهمان      ذخیره، دنبال‌کردن، نظر و «ورود / ثبت‌نام»ِ هوش مصنوعی ← پنجرهٔ
  *              ورود user-core با دلیل. شمار فراخوانی تولید هوش مصنوعی هنگام
@@ -30,6 +31,7 @@ const fs = require( 'node:fs' );
 const path = require( 'node:path' );
 const { execFileSync } = require( 'node:child_process' );
 const { chromium, firefox } = require( './pw.js' );
+const MAIN = 'firefox' === process.env.TP_UF_BROWSER ? firefox : chromium;   /* مرورگر جریان واردشده — ۱۹ب */
 const ENV = require( './env.js' );   /* مسیرها و نشانی پایه — tests/env.json (P5-D285) */
 
 const WS    = path.resolve( __dirname, '..' );
@@ -196,7 +198,7 @@ async function guest() {
 	/* ── P5-D374: نانس ورود در HTML مهمان نیست؛ هنگام «ارسال کد» از REST بی‌کش می‌آید ── */
 	head( 'مهمان — نانس ورود از REST بی‌کش' );
 	{
-		const browser = await chromium.launch();
+		const browser = await MAIN.launch();
 		const { ctx } = await context( browser );
 		const page = await load( ctx, PROV.url );
 		const n0 = await page.evaluate( () => ( { nonce: window.ToPersiaUserCore && window.ToPersiaUserCore.nonce, url: ( window.ToPersiaUserCore && window.ToPersiaUserCore.nonceUrl ) || '', tpas: ( window.tpasFront && window.tpasFront.nonce ) } ) );
@@ -235,8 +237,9 @@ async function guest() {
 async function member() {
 
 	const login = JSON.parse( php( [ 'tests/local-login.php' ] ) );
-	const browser = await chromium.launch();
+	const browser = await MAIN.launch();
 	const { ctx, gen } = await context( browser, login.cookies );
+	info( 'مرورگر جریان واردشده: ' + ( MAIN === firefox ? 'فایرفاکس' : 'کروم' ) );
 	const s0 = state();
 
 	head( `واردشده — کاربر آزمون #${ login.user } — ${ PROV.url.replace( /^https?:\/\/[^/]+/, '' ) }` );
@@ -375,6 +378,7 @@ async function member() {
 	{
 		const avDir = path.join( ENV.wp, 'wp-content', 'uploads', 'topersia-avatars' );
 		const files = () => ( fs.existsSync( avDir ) ? fs.readdirSync( avDir ).filter( x => /\.webp$/.test( x ) ) : [] );
+		php( [ 'tests/local-av-reset.php' ] );   /* سقف ده بارگذاری در ساعت — اجرای پشت‌سرهم آزمون */
 		const before = files().length;
 		const grav = [];
 		ctx.on( 'request', r => { if ( /gravatar/i.test( r.url() ) ) { grav.push( r.url() ); } } );
@@ -413,16 +417,24 @@ async function member() {
 	check( 'گام اول فقط پنجرهٔ تأیید را باز می‌کند؛ هنوز درخواستی ثبت نشده', ! dr().export );
 	await page.click( '#tp-dr-cancel' );
 	check( 'انصراف: پنجره بسته و بی درخواست', await page.locator( '#tp-dr-confirm' ).isHidden() && ! dr().export );
-	await page.click( '[data-tp-dr="export"]' );
-	await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
-	await page.click( '#tp-dr-confirm-btn' );
-	await page.waitForFunction( () => ( document.getElementById( 'tp-dr-message' ) || {} ).textContent, null, { timeout: 60000 } );
-	check( 'گام دوم: درخواست صدور داده ثبت شد (پیام موفق، دکمه غیرفعال)', dr().export && await page.locator( '[data-tp-dr="export"]' ).isDisabled() && /success/.test( await page.getAttribute( '#tp-dr-message', 'class' ) ) );
-	await page.click( '[data-tp-dr="erase"]' );
-	await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
-	await page.click( '#tp-dr-confirm-btn' );
-	await page.waitForFunction( () => /success/.test( ( document.getElementById( 'tp-dr-message' ) || {} ).className ), null, { timeout: 60000 } );
-	check( 'گام دوم: درخواست حذف حساب ثبت شد؛ حساب آزمون هنوز هست (اجرا با مدیر)', dr().erase && JSON.parse( php( [ 'tests/local-state.php' ] ) ).user > 0, JSON.stringify( [ await page.textContent( '#tp-dr-message' ), dr() ] ) );
+	/* ۱۹ب — بی انتظار زمانی و بی تکیه بر کلاس پیام (پیام پیش از پاسخ «success» تهی می‌گیرد — علت ناپایداری):
+	   منتظر خودِ پاسخ گام «confirm» همان نوع درخواست می‌مانیم، سپس دکمهٔ غیرفعال. */
+	const drStep = ( type, step ) => r => /admin-ajax\.php/.test( r.url() ) && 'POST' === r.request().method()
+		&& /(^|&)action=topersia_data_request(&|$)/.test( r.request().postData() || '' ) && new RegExp( '(^|&)type=' + type + '(&|$)' ).test( r.request().postData() || '' )
+		&& new RegExp( '(^|&)step=' + step + '(&|$)' ).test( r.request().postData() || '' );
+	const drRequest = async type => {
+		const [ startRes ] = await Promise.all( [ page.waitForResponse( drStep( type, 'start' ), { timeout: 90000 } ), page.click( '[data-tp-dr="' + type + '"]' ) ] );
+		const start = await startRes.json();
+		await page.waitForSelector( '#tp-dr-confirm:not([hidden])', { timeout: 60000 } );
+		const [ confRes ] = await Promise.all( [ page.waitForResponse( drStep( type, 'confirm' ), { timeout: 90000 } ), page.click( '#tp-dr-confirm-btn' ) ] );
+		const conf = await confRes.json();
+		await page.waitForFunction( t => { const b = document.querySelector( '[data-tp-dr="' + t + '"]' ); return b && b.disabled && document.getElementById( 'tp-dr-confirm' ).hidden; }, type, { timeout: 60000 } );
+		return { start: !! start.success, conf: !! conf.success, msg: ( conf.data && conf.data.message ) || '' };
+	};
+	const ex = await drRequest( 'export' );
+	check( 'گام دوم: درخواست صدور داده ثبت شد (پاسخ موفق، دکمه غیرفعال)', ex.start && ex.conf && dr().export && await page.locator( '[data-tp-dr="export"]' ).isDisabled() && /success/.test( await page.getAttribute( '#tp-dr-message', 'class' ) ), JSON.stringify( [ ex, dr() ] ) );
+	const er = await drRequest( 'erase' );
+	check( 'گام دوم: درخواست حذف حساب ثبت شد؛ حساب آزمون هنوز هست (اجرا با مدیر)', er.start && er.conf && dr().erase && JSON.parse( php( [ 'tests/local-state.php' ] ) ).user > 0, JSON.stringify( [ er, dr() ] ) );
 	const rm = JSON.parse( php( [ 'tests/local-dr.php', 'reset' ] ) );
 	info( 'درخواست‌های آزمون برداشته شد: ' + rm.removed );
 	info( 'مصرف امروز کاربر آزمون در این اجرا: ' + s.ai.user_used + ' از ' + s.ai.caps.user + ' · سایت: ' + s.ai.site_used + ' از ' + s.ai.caps.site );
