@@ -86,8 +86,11 @@ async function view( page, lat, lng, z ) {
 			if ( 'fa' === lang ) {
 				( { ctx, page } = await open( browser, '/water-body/gavkhouni-lake/' ) );
 				const wb = await page.evaluate( () => [ ...document.querySelectorAll( '#tp-routing a[data-tp-nav]' ) ].map( a => [ a.dataset.tpNav, decodeURIComponent( a.href ) ] ) );
-				check( 2 === wb.length && 'google,waze' === wb.map( c => c[ 0 ] ).join() && /destination=.+،.+/.test( wb[ 0 ][ 1 ] ) && /q=.+،.+&navigate=yes/.test( wb[ 1 ][ 1 ] ) && ! /destination=\d/.test( wb[ 0 ][ 1 ] ),
-					'گاوخونی (پهنه): فقط Google و Waze با متن «نام، والد مکانی» — نه مرکز هندسی', JSON.stringify( wb ) );
+				/* P5-D383: Google و Waze همان متن «نام، والد مکانی» (P5-D350، نه مرکز هندسی)؛ نشان فقط مختصات — نقطهٔ نماینده‌ای که خودِ geo_coordinates گاوخونی دارد */
+				const gav = await page.evaluate( () => { const p = ( document.querySelector( '[data-tp-coords]' ) || {} ).getAttribute ? document.querySelector( '[data-tp-coords]' ).getAttribute( 'data-tp-coords' ) : ''; return p; } );
+				check( 3 === wb.length && 'google,waze,neshan' === wb.map( c => c[ 0 ] ).join() && /destination=.+،.+/.test( wb[ 0 ][ 1 ] ) && /q=.+،.+&navigate=yes/.test( wb[ 1 ][ 1 ] ) && ! /destination=\d/.test( wb[ 0 ][ 1 ] )
+					&& /^https:\/\/nshn\.ir\/\?lat=-?\d+(\.\d+)?&lng=-?\d+(\.\d+)?$/.test( wb[ 2 ][ 1 ] ),
+					'گاوخونی (پهنه): Google و Waze با متن «نام، والد مکانی» — نه مرکز هندسی؛ نشان با نقطهٔ نماینده (P5-D383)', JSON.stringify( [ wb, gav ] ) );
 				await ctx.close();
 				( { ctx, page } = await open( browser, '/country/islamic-republic-of-iran/' ) );
 				check( 0 === await page.locator( '#tp-routing' ).count(), 'کشور: باکس مسیریابی ندارد', '' );
