@@ -139,3 +139,27 @@ tp441_mut( 'حافظهٔ «رابطهٔ تهی» درون درخواست با je
 		&& false !== strpos( $x[3], "add_action( 'jet-engine/relation/update/after', 'topersia_g_rel_memo_reset', 1, 0 );" ) && false !== strpos( $x[3], "add_action( 'jet-engine/relation/delete/after', 'topersia_g_rel_memo_reset', 1, 0 );" ); },
 	array( $m20_before, $m20_after_up, $m20_after_del, $m20_src ), array( true, true, true, str_replace( "'jet-engine/relation/update/after', 'topersia_g_rel_memo_reset'", "'x'", $m20_src ) ) );
 topersia_g_rel_memo_reset();
+
+/* ══ P5-D381 — کیفیت هوا: میانگین ۲۴ ساعت، ساعت ایران، نام نقطه، استان ← مرکز، صافی خاموشی ══════ */
+$q20_t = array(); $q20_v = array();
+for ( $i = 0; $i < 30; $i++ ) { $q20_t[] = gmdate( 'Y-m-d\TH:00', strtotime( '2026-10-19 00:00 UTC' ) + $i * 3600 ); $q20_v[] = $i < 6 ? 1000 : 10; }
+$q20_mean = topersia_g_aq_mean24( $q20_t, $q20_v, '2026-10-20T05:00', 99 );         /* ۲۴ ساعت تا ۰۵:۰۰ = ساعت ۶…۲۹ → همه ۱۰ */
+$q20_few  = topersia_g_aq_mean24( array_slice( $q20_t, 0, 5 ), array_slice( $q20_v, 0, 5 ), '2026-10-19T04:00', 41.6 );
+$q20_ir   = topersia_g_aq_time_ir( '2026-10-20T05:00' );                             /* +۳:۳۰ */
+$q20_keep = array( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'] );
+$GLOBALS['tp_meta'][ topersia_g_capital_id( 20 ) ]['geo_coordinates'] = '32.6539, 51.6660';   /* مرکز استان با مختصات؛ بی آن جعبه نمی‌آید (درست) */
+$q20_prov = r( 20, 'tp_air' );
+$q20_want = array( topersia_geo_attr( topersia_g_text( topersia_g_capital_id( 20 ), 'geo_coordinates' ) ), topersia_g_name( topersia_g_capital_id( 20 ) ) );
+$GLOBALS['tp_filters']['topersia_g_air_enabled'][] = function ( $on, $pid, $type ) { return 'tp_province' === $type ? false : $on; };
+$q20_off  = r( 20, 'tp_air' );
+array_pop( $GLOBALS['tp_filters']['topersia_g_air_enabled'] );
+list( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'] ) = $q20_keep;
+tp441_mut( 'کیفیت هوا: میانگین ۲۴ مقدار ساعتیِ تا ساعت جاری، بی اعشار (کمتر از ۱۲ ساعت ← مقدار لحظه‌ای)؛ ساعت به وقت ایران؛ استان ← مختصات و نام مرکز استان («برای شهر …»)؛ صافی topersia_g_air_enabled جعبه را خاموش می‌کند  P5-D381',
+	function ( $x ) {
+		return 10 === $x[0] && 42 === $x[1] && '۰۸:۳۰' === $x[2]
+			&& false !== strpos( $x[3], 'data-tp-coords="' . $x[5][0] . '"' )
+			/* «برای شهر …»؛ نامی که خودش «شهر» دارد دوباره پیشوند نمی‌گیرد */
+			&& false !== strpos( $x[3], '<span data-tp-air-for>برای ' . ( 0 === strpos( $x[5][1], 'شهر' ) ? '' : 'شهر ' ) . $x[5][1] . '</span>' ) && false === strpos( $x[3], 'شهر شهر' )
+			&& '' === $x[4];
+	},
+	array( $q20_mean, $q20_few, $q20_ir, $q20_prov, $q20_off, $q20_want ), array( 207, 42, '۰۵:۰۰', $q20_prov, $q20_prov, $q20_want ) );

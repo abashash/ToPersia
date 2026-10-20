@@ -2860,6 +2860,8 @@
 				put( '[data-tp-air-pm25]', num( d.pm25 ) );
 				put( '[data-tp-air-pm10]', num( d.pm10 ) );
 				put( '[data-tp-air-dust]', num( d.dust ) );
+				/* ساعت به‌روزرسانی به وقت ایران (P5-D381)؛ متن کامل از سرور به زبان صفحه */
+				put( '[data-tp-air-time]', d.updated || '—' );
 				done();
 			} )
 			.catch( done );

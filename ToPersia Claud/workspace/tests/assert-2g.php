@@ -61,7 +61,9 @@ $up2g = topersia_g_aq_fetch( array( '32.25', '52.75' ) );
 $url2g = $GLOBALS['tp_http_log'][0];
 tp441_mut( 'دریافت: endpoint و پارامترها عیناً مستند رسمی (air-quality-api.open-meteo.com/v1/air-quality · latitude · longitude · current=us_aqi,pm10,pm2_5,dust)؛ شاخص و ذره‌ها خوانده می‌شود؛ شکل ناجور ← ۵۰۲، خطای بالادست ← ۵۰۳',
 	function ( $x ) {
-		return 79 === $x[0]['aqi'] && 12.7 === $x[0]['pm25'] && 31.4 === $x[0]['pm10'] && 72.0 === $x[0]['dust']
+		/* P5-D381: بی دادهٔ ساعتی ← همان مقدار لحظه‌ای، بی اعشار؛ نشانی hourly و past_days=1 هم دارد (میانگین ۲۴ ساعت) */
+		return 79 === $x[0]['aqi'] && 13 === $x[0]['pm25'] && 31 === $x[0]['pm10'] && 72 === $x[0]['dust'] && 24 === $x[0]['avg']
+			&& 1 === preg_match( '/hourly=pm10(,|%2C)pm2_5(,|%2C)dust/', $x[3] ) && false !== strpos( $x[3], 'past_days=1' )
 			&& is_wp_error( $x[1] ) && 'tp_aq_shape' === $x[1]->get_error_code() && is_wp_error( $x[2] ) && 'tp_aq_upstream' === $x[2]->get_error_code()
 			&& 0 === strpos( $x[3], 'https://air-quality-api.open-meteo.com/v1/air-quality' )
 			&& false !== strpos( $x[3], 'latitude=32.25' ) && false !== strpos( $x[3], 'longitude=52.75' ) && false !== strpos( $x[3], 'current=us_aqi' ) && false !== strpos( $x[3], 'pm10' ) && false !== strpos( $x[3], 'dust' )
@@ -92,7 +94,7 @@ $GLOBALS['tp2g_status'] = 'active';
 tp441_mut( 'REST هوا: پاسخ aqi · cat (۴ برای ۱۶۰) · label · pm25 · pm10 · dust · model؛ مختصات نامعتبر یا بیرون از ایران ← ۴۰۰؛ خاموش (off · nokey) ← ۵۰۳ «tp_aq_off»؛ error دوباره آزموده می‌شود',
 	function ( $x ) {
 		$code = function ( $e ) { return is_wp_error( $e ) ? $e->get_error_code() : ''; };
-		return 160 === $x[0]['aqi'] && 4 === $x[0]['cat'] && 'ناسالم' === $x[0]['label'] && 12.7 === $x[0]['pm25'] && 'برآورد مدل CAMS' === $x[0]['model']
+		return 160 === $x[0]['aqi'] && 4 === $x[0]['cat'] && 'ناسالم' === $x[0]['label'] && 13 === $x[0]['pm25'] && 'برآورد مدل CAMS · میانگین ۲۴ ساعت' === $x[0]['model'] && array_key_exists( 'updated', $x[0] )
 			&& 'tp_aq_coords' === $code( $x[1] ) && 'tp_aq_coords' === $code( $x[2] ) && 'tp_aq_off' === $code( $x[3] ) && 'tp_aq_off' === $code( $x[4] ) && is_array( $x[5] )
 			&& false === strpos( wp_json_encode( $x[0] ), 'apikey' );
 	},
@@ -119,11 +121,12 @@ $GLOBALS['tp_meta']  = $f2g_keep[1];
 tp441_mut( 'جعبهٔ کیفیت هوا: اسکلتِ هم‌ساختار و بی هیچ عدد (فقط «—»، پر شدن پس از بارگذاری)، مختصات نرمال‌شدهٔ DMS، «برآورد مدل CAMS» و انتساب «داده‌های هوا: MET Norway · کیفیت هوا: CAMS، Open-Meteo»؛ کشور و بی‌مختصات و خاموش ندارند',
 	function ( $x ) {
 		return false !== strpos( $x[0], '<div class="tp-air is-load" data-tp-air data-tp-coords="32.333333, 52.783333"' )
-			&& 5 === substr_count( $x[0], '>—<' ) && ! preg_match( '/>[^<]*[0-9۰-۹][^<]*</u', preg_replace( '/PM2\.5|PM10/', '', $x[0] ) )
-			&& false !== strpos( $x[0], 'برآورد مدل CAMS' ) && false !== strpos( $x[0], 'داده‌های هوا: MET Norway · کیفیت هوا: CAMS، Open-Meteo' )
+			/* P5-D381: پنج عدد و ساعت «—» تا پاسخ REST؛ برچسب مدل (با «۲۴ ساعت») و نام نقطه جدا */
+			&& 6 === substr_count( $x[0], '>—<' ) && ! preg_match( '/>[^<]*[0-9۰-۹][^<]*</u', preg_replace( '/PM2\.5|PM10|میانگین ۲۴ ساعت/u', '', $x[0] ) )
+			&& false !== strpos( $x[0], 'برآورد مدل CAMS · میانگین ۲۴ ساعت' ) && false !== strpos( $x[0], '<span data-tp-air-for>برای تالاب آزمون هوا</span>' ) && false !== strpos( $x[0], '<span data-tp-air-time>—</span>' ) && false !== strpos( $x[0], 'داده‌های هوا: MET Norway · کیفیت هوا: CAMS، Open-Meteo' )
 			&& '' === $x[1] && '' === $x[2] && '' === $x[3]
 			&& false !== strpos( $x[4], 'id="tp-weather"' ) && strpos( $x[4], 'id="tp-weather"' ) < strpos( $x[4], 'id="tp-aqi"' )
-			&& false !== strpos( $x[5], 'Weather data: MET Norway · Air quality: CAMS, Open-Meteo' ) && false !== strpos( $x[5], 'CAMS model estimate' ) && false !== strpos( $x[5], '>Dust<' );
+			&& false !== strpos( $x[5], 'Weather data: MET Norway · Air quality: CAMS, Open-Meteo' ) && false !== strpos( $x[5], 'CAMS model estimate · 24-hour average' ) && false !== strpos( $x[5], '>Dust<' );
 	},
 	array( $air_box, $air_country, $air_nocoord, $air_off, $air_page, $air_en ), array( str_replace( 'data-tp-air', 'x', $air_box ), 'x', '', '', $air_page, $air_en ) );
 
