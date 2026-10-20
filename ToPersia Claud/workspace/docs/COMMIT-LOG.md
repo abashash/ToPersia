@@ -129,4 +129,7 @@
 | 120 | 2026-10-20 | `docs` | `fbbeb8c1` |  | ردیف‌های ۱۱۷–۱۲۰ | ✅ |
 | 121 | 2026-10-20 | `feat` | `1148e644` |  | دستهٔ ۲۳: P5-D380 خوانایی نقشه پیش‌فرض دائمی (MAP_LEGIBLE؛ پرچم localStorage برداشته؛ map-legibility گیت: ۱۸ ترکیب ۰ زیر هدف) + user-core 1.14.1 زمان پاسخ یکسان پیامک. گیت‌ها: preflight · php -l · assert ۶۰۷/۰ · assert-uc ۵۸/۰ (mail ۴۴/۰) · alltypes · map-local ۱۱/۰ · map-gulf ۱۲/۰ · map-disputed ۴/۰ · map-gulf-live ۳۶/۰ · acceptance ۰ ناهمخوان · contrast سبز · user-flows ۶۳/۰ · Lighthouse A/B (اجرای ۵تایی یک خانه −۴ نوفه؛ ۹تایی +۰ +۰ +۲ +۰) · کاناری سالم | ✅ |
 | 122 | 2026-10-20 | `chore` | `46f58730` |  | mirror geo/ | ✅ |
-| 123 | 2026-10-20 | `docs` | (این commit) |  | ردیف‌های ۱۲۰–۱۲۳ | ✅ |
+| 123 | 2026-10-20 | `docs` | `29ef8b71` |  | ردیف‌های ۱۲۰–۱۲۳ | ✅ |
+| 124 | 2026-10-20 | `feat` | `b4a12fde` |  | دستهٔ ۲۴ (P5-D395): چهار خانهٔ ثابت زیر سربرگ — STAT_CELLS برای ۴۱ نوع، «—» با aria-label فقط در [tp_stats]، الزامی بخش (ج) در بستهٔ درون‌ریزی، گزارش خانهٔ خالی (۱۸۳ پست · رد گیت راه‌اندازی ۷۷ · فقط گزارش)؛ رفع جملهٔ CLAUDE.md دستهٔ ۲۳ (P5-D200). گیت‌ها: preflight · php -l · assert ۶۱۰/۰ · assert-uc ۵۸/۰ · alltypes · stats4-local ۴/۰ · pack-local ۴۲/۰ · render-local ۶/۰ · schema-local ۴/۰ · acceptance ۰ ناهمخوان (هارنس و محلی) · contrast سبز (با خانهٔ «—») · Lighthouse A/B ۹تایی بی افت بیش از ۲، CLS بی تغییر · کاناری سالم. core-local یک افتادن پیشین (میزبان کیفیت هوا اکنون مجاز است) | ✅ |
+| 125 | 2026-10-20 | `chore` | `0caa10c4` |  | mirror geo/ | ✅ |
+| 126 | 2026-10-20 | `docs` | (این commit) |  | ردیف‌های ۱۲۳–۱۲۶ | ✅ |
