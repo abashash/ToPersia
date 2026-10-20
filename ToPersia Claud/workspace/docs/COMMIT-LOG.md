@@ -121,3 +121,4 @@
 | 112 | 2026-10-20 | `feat` | `cea192cd` · `7a02263b` · `0138f8e1` |  | P5-D392 بی دستیار بیرونی (summarizer 1.4.1) · بند ۱۲ P5-D381 کیفیت هوا · رفع حافظهٔ رابطه (map-local) | ✅ |
 | 113 | 2026-10-20 | `chore` | `0deecf2f` · `3029b6c6` |  | mirror geo/ دستهٔ ۲۰ | ✅ |
 | 114 | 2026-10-20 | `docs` | `f320b948` |  | سند دستهٔ ۲۰: P5-D380…D392 در سند فاز، STATS-4-MATRIX (پیش‌نویس برای تأیید)، قاعدهٔ کپی نسخهٔ «پیش» Lighthouse؛ ابزارها stats4-matrix · ai-cost · map-legibility. گیت‌ها: assert ۶۰۵/۰ · behaviour ۳۸۰/۰ · contrast · acceptance ۰ ناهمخوان · alltypes ۸٫۰–۸٫۵ · نقشه · Lighthouse A/B آرام بودجه سبز | ✅ |
+| 115 | 2026-10-20 | `feat` | `PENDING` |  | دستهٔ ۲۲ (P5-D393) گام ۱–۲ و ۴: scripts/tp-facts.php (match · report؛ apply قفل)، reference/facts-proposed.csv (۶۰۶ ردیف؛ auto ۱۳۸ · suggested ۱۰ · none ۱۸ موجودیت)، docs/FACTS-WIKIDATA.md؛ یافته: ۲۷ QID استان نادرست در داده؛ **هیچ نوشتن در پایگاه‌داده** — منتظر تأیید کاربر | ✅ |
