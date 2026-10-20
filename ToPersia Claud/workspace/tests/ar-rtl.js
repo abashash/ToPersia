@@ -17,7 +17,8 @@ const { execFileSync } = require( 'child_process' );
 const path = require( 'path' );
 const ARGS = Object.fromEntries( process.argv.slice( 2 ).map( a => a.replace( /^--/, '' ).split( '=' ) ) );
 const X = Number( process.env.TP_TIMEOUT_X || 1 );
-let bad = 0, n = 0;
+let bad = 0, n = 0, skip = 0;
+const skipped = ( label, why ) => { skip++; console.log( '  ⚪ سنجیده نشد — ' + label + ': ' + why ); };
 const check = ( ok, label, note ) => { n++; if ( ! ok ) { bad++; } console.log( ( ok ? '  ✅ ' : '  ❌ ' ) + label + ( ok || ! note ? '' : '   ← ' + note ) ); };
 const URLS = JSON.parse( execFileSync( ENV.php || 'php', [ path.join( __dirname, 'local-urls.php' ) ], { encoding: 'utf8' } ) );
 
@@ -147,12 +148,12 @@ async function slider( page ) {
 					check( 0 === diff.length, `${ name } ${ w } ${ kind }: هیچ کلاس tp- در ar کمتر از fa راست‌به‌چپ نیست`, diff.slice( 0, 6 ).join( ' · ' ) );
 					if ( note.length ) { console.log( '     · تفاوت عمدی (ar راست‌به‌چپ، fa طراحی مرجع): ' + note.slice( 0, 4 ).join( ' · ' ) ); }
 					if ( ar.pop && ! ar.pop.found ) {
-						console.log( '     · پاپ‌آپ نقشه سنجیده نشد: ' + ar.pop.why );
+						skipped( `${ name } ${ w } ${ kind } /ar/ پاپ‌آپ نقشه`, ar.pop.why );
 					} else if ( ar.pop ) {
 						check( 0 === ar.pop.offend.length && ar.pop.found, `${ name } ${ w } ${ kind } /ar/: پاپ‌آپ نشانگر نقشه راست‌به‌چپ`, ar.pop.offend.slice( 0, 4 ).join( ' · ' ) );
 					}
 					if ( ! ar.slider || ! res.fa.slider ) {
-						console.log( '     · فلش اسلایدر مقایسه نشد: ' + ( ar.slider ? '' : 'ar ' ) + ( res.fa.slider ? '' : 'fa ' ) + 'اسلایدر دوکارته ندارد (داده)' );
+						skipped( `${ name } ${ w } ${ kind } فلش اسلایدر ar/fa`, ( ar.slider ? '' : 'ar ' ) + ( res.fa.slider ? '' : 'fa ' ) + 'اسلایدر دوکارته ندارد (داده)' );
 					}
 					if ( ar.slider && res.fa.slider ) {
 						check( ar.slider.nextLeft === res.fa.slider.nextLeft && ar.slider.next === res.fa.slider.next, `${ name } ${ w } ${ kind }: فلش اسلایدر ar همان fa («بعدی» ${ ar.slider.next } سمت ${ ar.slider.nextLeft ? 'چپ' : 'راست' })`, JSON.stringify( [ res.fa.slider, ar.slider ] ) );
@@ -161,6 +162,7 @@ async function slider( page ) {
 			}
 		} finally { await browser.close(); }
 	}
-	console.log( `\nEND ${ new Date().toISOString() } — گذشته: ${ n - bad }   افتاده: ${ bad }` );
+	/* سنجیده‌نشده هرگز «گذشت» شمرده نمی‌شود — جدا گزارش می‌شود (دستهٔ ۲۰، پاسخ معمار بند ۶) */
+	console.log( `\nEND ${ new Date().toISOString() } — گذشته: ${ n - bad }   افتاده: ${ bad }   سنجیده‌نشده: ${ skip }` );
 	process.exit( bad ? 1 : 0 );
 } )();
