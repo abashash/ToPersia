@@ -55,6 +55,10 @@ msgstr "Fire temple"
 msgid "آتش‌نشانی"
 msgstr "Fire service"
 
+#: includes/topersia-g-zones.php
+msgid "آخرین بازبینی"
+msgstr "Last reviewed"
+
 #: includes/topersia-g-gallery-agg.php
 #, php-format
 msgid "آخرین بازسازی همه: %s"
@@ -1085,6 +1089,10 @@ msgstr "Official language"
 msgid "زبان و پوشاک"
 msgstr "Language and dress"
 
+#: includes/topersia-g-zones.php
+msgid "زبان‌ها"
+msgstr "Languages"
+
 #: includes/topersia-g-panel.php
 msgid "زمان سفر"
 msgstr "When to go"
@@ -1384,6 +1392,10 @@ msgstr "Ceremonial food"
 #: includes/topersia-g-zones.php
 msgid "غرب"
 msgstr "West"
+
+#: includes/topersia-g-zones.php
+msgid "فاصله تا مرکز استان"
+msgstr "To provincial capital"
 
 #: topersia-render.php
 msgid "فاصلۀ متن"
@@ -1702,6 +1714,10 @@ msgstr "Restored"
 msgid "مرور اقلیم"
 msgstr "Climate overview"
 
+#: includes/topersia-g-zones.php
+msgid "مرکز"
+msgstr "Capital"
+
 #: includes/topersia-g-map.php
 msgid "مرکز استان"
 msgstr "Provincial capital"
@@ -1828,6 +1844,10 @@ msgstr "Best season to travel"
 msgid "منبع اصلی:"
 msgstr "Original source:"
 
+#: includes/topersia-g-zones.php
+msgid "منبع‌ها"
+msgstr "Sources"
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr "Outdated"
@@ -1920,6 +1940,10 @@ msgstr "Not applicable"
 msgid "مکان مذهبی"
 msgstr "Religious site"
 
+#: includes/topersia-g-zones.php
+msgid "مکان‌های مرتبط"
+msgstr "Related places"
+
 #: includes/topersia-g-map.php
 msgid "میراث جهانی"
 msgstr "World Heritage"
@@ -1959,6 +1983,10 @@ msgstr "Official Persian name"
 #: includes/topersia-g-map.php
 msgid "نام فرودگاه"
 msgstr "Airport"
+
+#: includes/topersia-g-zones.php
+msgid "نامشخص"
+msgstr "Unknown"
 
 #: includes/topersia-g-map.php
 msgid "نامنظم"
