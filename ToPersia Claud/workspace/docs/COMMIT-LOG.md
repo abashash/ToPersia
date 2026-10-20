@@ -126,4 +126,7 @@
 | 117 | 2026-10-20 | `fix` | `e8d3667a` |  | بازبینی امنیتی ۲۲ب: پشتیبان (کل postmeta) و لاگ از uploads به `tp-private/` کنار ریشهٔ وب (ثابت TOPERSIA_PRIVATE_DIR)، .htaccess/web.config ردِ همه، نام تصادفی ۳۲ هگز، 0600؛ پرونده‌های اجرای واقعی منتقل شد؛ دانلود ۴۰۳. facts-apply ۲۳/۰ | ✅ |
 | 118 | 2026-10-20 | `feat` | `98cf3177` |  | دستهٔ ۲۱ (P5-D391 · P5-D377): user-core 1.14.0 ورود با کد ایمیلی — ToPersia_Mailer (SMTP از ثابت‌ها، بی ثابت‌ها هیچ ارسال، سقف ≤ ۸۰٪ میزبان)، ToPersia_Email_Code (HMAC، سقف‌ها، پاسخ یکسان)، پیامک همسان، Origin/Sec-Fetch-Site، پیوند شناسه ۳۰ روزه، زبانه‌های ARIA، برون‌بر/پاک‌کننده، PRIVACY-DRAFT. گیت‌ها: preflight · php -l · assert ۶۰۵/۰ · assert-uc ۵۸/۰ (assert-uc-mail ۴۱/۰ با جهش) · alltypes · local-email ۱۶/۰ · user-flows ۶۳/۰ · acceptance ۰ ناهمخوان · contrast سبز · Lighthouse A/B بی افت بیش از ۲ (robocopy + cmp) · کاناری ۱۶ سالم | ✅ |
 | 119 | 2026-10-20 | `chore` | `059d3b36` |  | mirror geo/ user-core 1.14.0 | ✅ |
-| 120 | 2026-10-20 | `docs` | (این commit) |  | ردیف‌های ۱۱۷–۱۲۰ | ✅ |
+| 120 | 2026-10-20 | `docs` | `fbbeb8c1` |  | ردیف‌های ۱۱۷–۱۲۰ | ✅ |
+| 121 | 2026-10-20 | `feat` | `1148e644` |  | دستهٔ ۲۳: P5-D380 خوانایی نقشه پیش‌فرض دائمی (MAP_LEGIBLE؛ پرچم localStorage برداشته؛ map-legibility گیت: ۱۸ ترکیب ۰ زیر هدف) + user-core 1.14.1 زمان پاسخ یکسان پیامک. گیت‌ها: preflight · php -l · assert ۶۰۷/۰ · assert-uc ۵۸/۰ (mail ۴۴/۰) · alltypes · map-local ۱۱/۰ · map-gulf ۱۲/۰ · map-disputed ۴/۰ · map-gulf-live ۳۶/۰ · acceptance ۰ ناهمخوان · contrast سبز · user-flows ۶۳/۰ · Lighthouse A/B (اجرای ۵تایی یک خانه −۴ نوفه؛ ۹تایی +۰ +۰ +۲ +۰) · کاناری سالم | ✅ |
+| 122 | 2026-10-20 | `chore` | `46f58730` |  | mirror geo/ | ✅ |
+| 123 | 2026-10-20 | `docs` | (این commit) |  | ردیف‌های ۱۲۰–۱۲۳ | ✅ |
