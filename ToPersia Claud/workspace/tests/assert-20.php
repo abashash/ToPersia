@@ -123,3 +123,19 @@ function TP_AI_Services_get_all_safe() {
 	$s = is_file( $f ) ? (string) file_get_contents( $f ) : '';
 	return ( false !== strpos( $s, "public static function get_all() {" ) && 1 === preg_match( '/public static function get_all\(\) \{.*?return array\(\);\s*\}/s', $s ) && false === strpos( $s, "apply_filters( 'tpas_services'" ) ) ? array() : array( 'x' );
 }
+
+/* ══ P5-D334 بازبینی (map-local) — حافظهٔ «تهی» رابطه با نوشتن/پاک‌کردن رابطهٔ جت‌انجین باطل می‌شود ══════ */
+topersia_g_rel_memo_reset();
+topersia_g_rel_known_empty( 84, 'parents', 9999, true );
+$m20_before = topersia_g_rel_known_empty( 84, 'parents', 9999 );
+topersia_g_rel_memo_reset();   /* همان callback ثبت‌شده روی jet-engine/relation/update/after (stub رویداد ندارد) */
+$m20_after_up = topersia_g_rel_known_empty( 84, 'parents', 9999 );
+topersia_g_rel_known_empty( 84, 'parents', 9999, true );
+topersia_g_rel_memo_reset();   /* همان callback ثبت‌شده روی jet-engine/relation/delete/after */
+$m20_after_del = topersia_g_rel_known_empty( 84, 'parents', 9999 );
+$m20_src = file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' );
+tp441_mut( 'حافظهٔ «رابطهٔ تهی» درون درخواست با jet-engine/relation/update/after و delete/after پاک می‌شود — زنجیرهٔ مکانیِ پستِ تازه پس از نوشتن رابطه درست است (علت افتادن map-local)',
+	function ( $x ) { return true === $x[0] && false === $x[1] && false === $x[2]
+		&& false !== strpos( $x[3], "add_action( 'jet-engine/relation/update/after', 'topersia_g_rel_memo_reset', 1, 0 );" ) && false !== strpos( $x[3], "add_action( 'jet-engine/relation/delete/after', 'topersia_g_rel_memo_reset', 1, 0 );" ); },
+	array( $m20_before, $m20_after_up, $m20_after_del, $m20_src ), array( true, true, true, str_replace( "'jet-engine/relation/update/after', 'topersia_g_rel_memo_reset'", "'x'", $m20_src ) ) );
+topersia_g_rel_memo_reset();

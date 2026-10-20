@@ -783,6 +783,13 @@ if ( ! function_exists( 'topersia_g_rel_memo_reset' ) ) {
 if ( function_exists( 'add_action' ) ) {
 	add_action( 'save_post', 'topersia_g_rel_memo_reset' );
 	add_action( 'deleted_post', 'topersia_g_rel_memo_reset' );
+	/*
+	 * نوشتن یا پاک‌کردن رابطه با API جت‌انجین (بی ذخیرۀ پست) هم حافظه را باطل می‌کند — وگرنه «تهی»ِ ثبت‌شده هنگام
+	 * ذخیرۀ پستِ تازه (پیش از نوشتن رابطه) تا پایان درخواست می‌ماند و زنجیرۀ مکانی و نمایۀ مکانی همان پست خالی می‌شد.
+	 * یافتۀ map-local (دستۀ ۲۰، پاسخ معمار بند ۵).
+	 */
+	add_action( 'jet-engine/relation/update/after', 'topersia_g_rel_memo_reset', 1, 0 );
+	add_action( 'jet-engine/relation/delete/after', 'topersia_g_rel_memo_reset', 1, 0 );
 }
 
 /**
