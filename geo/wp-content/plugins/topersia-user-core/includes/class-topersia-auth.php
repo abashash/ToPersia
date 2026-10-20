@@ -534,25 +534,28 @@ final class ToPersia_Auth {
 
 		$token = wp_generate_password( 32, false, false );
 
+		/*
+		 * ۱٫۱۴٫۱ · زمان پاسخ یکسان (دستۀ ۲۳): شاخۀ «بی پیامک» (حساب دارای دسترسی یا شمارۀ مال حساب دیگر) همان کارهای شاخۀ
+		 * عادی را می‌کند — ساخت کد، هر دو هش، رد پیامک (تأخیر همسان با میانگین تأخیر واقعی مدیانا)، ردیف سابقۀ تلاش و
+		 * نوشتن ترنزینت (با هش بی‌جفت) — و فقط پیامک نمی‌فرستد؛ به‌علاوه تأخیر تصادفی کوچک روی هر پاسخ موفق.
+		 */
+		$otp  = self::new_code();
+		$real = self::code_hash( $token, $otp );
+		$dumm = self::dummy_hash();
+		$hash = $silent ? $dumm : $real;
+
 		if ( $silent ) {
 			$this->log( 'login' === $purpose ? 'درخواست کد برای حساب دارای دسترسی — پیامکی نرفت' : 'پیوند شماره‌ای که مال حساب دیگری است — پیامکی نرفت', 'error', array( 'user' => (int) $existing->ID ) );
-
-			set_transient( 'tp_otp_' . $token, array( 'mobile_h' => ToPersia_DB::mobile_hash( $mobile ), 'hash' => self::dummy_hash(), 'tries' => 0, 'attempt_id' => 0, 'purpose' => $purpose, 'uid' => $uid ), self::TTL );
-
-			wp_send_json_success(
-				array(
-					'token'     => $token,
-					'expiresIn' => self::TTL,
-					'message'   => self::msg( 'otp_sent', 'کد تأیید ارسال شد.' ),
-				)
-			);
+			self::mimic_provider_latency();
+			$result = array( 'success' => true, 'message' => '', 'request_id' => '' );
+		} else {
+			$t0       = microtime( true );
+			$provider = new ToPersia_Mediana_SMS();
+			$result   = $provider->send_otp( $mobile, $otp, (string) get_option( 'topersia_mediana_pattern_code', '' ) );
+			if ( $result['success'] ) {
+				self::note_provider_latency( ( microtime( true ) - $t0 ) * 1000 );
+			}
 		}
-
-		$otp  = self::new_code();
-		$hash = self::code_hash( $token, $otp );
-
-		$provider = new ToPersia_Mediana_SMS();
-		$result   = $provider->send_otp( $mobile, $otp, (string) get_option( 'topersia_mediana_pattern_code', '' ) );
 
 		if ( ! $result['success'] ) {
 			$this->log( 'ارسال پیامک ناموفق: ' . $result['message'], 'error' );
@@ -583,6 +586,8 @@ final class ToPersia_Auth {
 			self::TTL
 		);
 
+		self::jitter();
+
 		wp_send_json_success(
 			array(
 				'token'     => $token,
@@ -590,6 +595,33 @@ final class ToPersia_Auth {
 				'message'   => self::msg( 'otp_sent', 'کد تأیید ارسال شد.' ),
 			)
 		);
+	}
+
+	/** تأخیر تصادفی کوچک (۰ تا ۴۰ms) روی هر پاسخ موفق — نوفۀ مشترک شاخه‌ها. */
+	private static function jitter(): void {
+		usleep( random_int( 0, 40000 ) );
+	}
+
+	/** میانگین متحرک تأخیر فراخوانی واقعی مدیانا (ms) — شاخۀ بی پیامک همین‌قدر معطل می‌شود. */
+	private static function note_provider_latency( float $ms ): void {
+		$old = get_transient( 'tp_sms_lat' );
+		$ms  = min( 5000.0, max( 0.0, $ms ) );
+		set_transient( 'tp_sms_lat', is_numeric( $old ) ? ( 0.7 * (float) $old + 0.3 * $ms ) : $ms, 6 * HOUR_IN_SECONDS );
+	}
+
+	private static function mimic_provider_latency(): void {
+		$lat = get_transient( 'tp_sms_lat' );
+		$ms  = is_numeric( $lat ) ? min( 5000.0, (float) $lat ) : 300.0;   /* هنوز پیامی نرفته: پیش‌فرض ۳۰۰ms */
+		$end = microtime( true ) + $ms / 1000;
+
+		/* usleep در ویندوز به گام ~۱۵ms گرد می‌شود و تأخیر واقعی (که همان را اندازه گرفته) را بی‌تقارن می‌کرد؛ بخش آخر با انتظار فعال */
+		if ( $ms > 20 ) {
+			usleep( (int) ( 1000 * ( $ms - 20 ) ) );
+		}
+
+		while ( microtime( true ) < $end ) {
+			// انتظار فعال، حداکثر ~۲۰ms
+		}
 	}
 
 	/* ==================================================================

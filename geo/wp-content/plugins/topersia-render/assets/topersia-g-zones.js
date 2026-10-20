@@ -2161,6 +2161,52 @@
 			return layer;
 		}
 
+		/*
+		 * خوانایی نقشه — P5-D380 (دستۀ ۲۳؛ نسخۀ «پس» را کاربر تأیید کرد — پیش‌فرض دائمی، بی پرچم localStorage).
+		 * برچسب: رنگ متن و هالۀ تو‌پر ۱٫۶px به رنگ زمینۀ همان حالت (تضاد ≥ ۴٫۵:۱)، آب آبی خوانا؛ راه: رنگ به تفکیک درجه
+		 * با تضاد ≥ ۳:۱ با زمینه و پهنای ۱٫۲ برابر؛ جاده‌های فرعی کم‌رنگ‌تر از این نمی‌شوند. عدد هدف هر ۱۸ ترکیب
+		 * (دو سبک × سه حالت × سه بزرگنمایی) را tests/map-legibility.js می‌سنجد و جزو گیت‌هاست.
+		 * راه برگشت: MAP_LEGIBLE = false (تنها نقطۀ خاموش‌کردن).
+		 */
+		var MAP_LEGIBLE = true;
+
+		/* پهنا ×۱٫۲ — عبارت zoom باید سطح بالا بماند، پس خروجی‌های عددی interpolate/step ضرب می‌شوند، نه خود عبارت */
+		function widen( w ) {
+			if ( 'number' === typeof w ) { return w * 1.2; }
+			if ( ! Array.isArray( w ) ) { return w; }
+			var c = w.slice(), i;
+			if ( 0 === String( c[ 0 ] ).indexOf( 'interpolate' ) ) { for ( i = 4; i < c.length; i += 2 ) { c[ i ] = widen( c[ i ] ); } return c; }
+			if ( 'step' === c[ 0 ] ) { for ( i = 2; i < c.length; i += 2 ) { c[ i ] = widen( c[ i ] ); } return c; }
+			return w;
+		}
+
+		function legible( layer, dark ) {
+
+			var id = layer.id || '';
+
+			if ( 'symbol' === layer.type && layer.layout && layer.layout[ 'text-field' ] ) {
+				var water = /water|ocean|lake|river|sea/.test( id );
+				layer.paint = Object.assign( {}, layer.paint, {
+					'text-color': water ? ( dark ? '#a9d3f5' : '#1b4a72' ) : ( dark ? '#eef2f0' : '#1c2427' ),
+					'text-halo-color': dark ? '#141c1f' : '#ffffff',
+					'text-halo-width': 1.6,
+					'text-halo-blur': 0.2
+				} );
+			}
+
+			if ( 'line' === layer.type && /road|highway|transportation/.test( id ) && ! /casing|tunnel|pier|runway|rail/.test( id ) ) {
+				var major = /motorway|trunk|primary|highway_major/.test( id );
+				var mid   = /secondary|tertiary/.test( id );
+				var w     = layer.paint && undefined !== layer.paint[ 'line-width' ] ? layer.paint[ 'line-width' ] : 1;
+				layer.paint = Object.assign( {}, layer.paint, {
+					'line-color': major ? ( dark ? '#dd9a62' : '#a8521f' ) : ( mid ? ( dark ? '#b9b2a6' : '#6f6455' ) : ( dark ? '#8f897f' : '#857a6c' ) ),
+					'line-width': widen( w )
+				} );
+			}
+
+			return layer;
+		}
+
 		/* برچسب‌های سبک آنلاین به زبان صفحه با برگشت به name؛ فارسی و عربی بی letter-spacing */
 		function localize( st, lang ) {
 
@@ -2180,6 +2226,11 @@
 					delete l.layout[ 'text-letter-spacing' ];
 				}
 			} );
+
+			if ( MAP_LEGIBLE ) {
+				var dk = 'dark' === flavorOf();
+				( st.layers || [] ).forEach( function ( l ) { legible( l, dk ); } );
+			}
 
 			return st;
 		}
@@ -2317,6 +2368,10 @@
 				/* فقط برچسب‌های آب: برخی لایه‌های دیگر text-field با «zoom» در سطح بالا دارند و case دورشان سبک را نامعتبر می‌کند */
 				if ( 0 === ( layer.id || '' ).indexOf( 'water' ) && layer.layout && layer.layout[ 'text-field' ] ) {
 					layer.layout[ 'text-field' ] = gulfWrap( layer.layout[ 'text-field' ], lang );
+				}
+
+				if ( MAP_LEGIBLE ) {
+					legible( layer, 'dark' === flavorOf() );
 				}
 
 				if ( 'pois' === layer.id ) {
