@@ -78,10 +78,11 @@ $box_none  = r( 8020, 'tp_routing' );
 tp441_mut( 'باکس مسیریابی: شهر و پهنهٔ آبی دارند (کاشی فقط نام، هر دکمه data-tp-nav، باز در برگهٔ تازه با rel=noopener)؛ صفحهٔ کشور ندارد (ماتریس)؛ بی مقصد باکسی نیست',
 	function ( $x ) {
 		return false !== strpos( $x[0], 'id="tp-routing"' ) && 3 === substr_count( $x[0], 'data-tp-nav="' ) && false !== strpos( $x[0], 'target="_blank" rel="noopener nofollow"' )
-			&& false !== strpos( $x[1], 'id="tp-routing"' ) && 2 === substr_count( $x[1], 'data-tp-nav="' ) && false === strpos( $x[1], 'neshan' )
+			/* P5-D383: پهنهٔ آبی با مختصات نماینده در geo_coordinates ← نشان با همان نقطه؛ Google و Waze همان متن (P5-D350) */
+			&& false !== strpos( $x[1], 'id="tp-routing"' ) && 3 === substr_count( $x[1], 'data-tp-nav="' ) && false !== strpos( $x[1], 'https://nshn.ir/?lat=32&amp;lng=52' ) && false !== strpos( $x[1], 'destination=' ) && false === strpos( $x[1], 'destination=32' )
 			&& false === strpos( $x[2], 'id="tp-routing"' ) && '' === trim( $x[3] ) && false === strpos( $x[0], '<svg' );
 	},
-	array( $box_point, $box_area, $page_ctry, $box_none ), array( str_replace( 'data-tp-nav="google"', 'x', $box_point ), $box_area . 'data-tp-nav="neshan"', 'id="tp-routing"', 'x' ) );
+	array( $box_point, $box_area, $page_ctry, $box_none ), array( str_replace( 'data-tp-nav="google"', 'x', $box_point ), preg_replace( '#<a [^>]*data-tp-nav="neshan"[^>]*>.*?</a>#u', '', $box_area ), 'id="tp-routing"', 'x' ) );
 
 tp441_mut( 'مسیریابی: موقعیت کاربر خواسته نمی‌شود و نگه داشته نمی‌شود — نه geolocation در JS، نه مبدأ در نشانی؛ آخرین انتخاب فقط localStorage (در try/catch) و دکمهٔ آن اول',
 	function ( $x ) {
