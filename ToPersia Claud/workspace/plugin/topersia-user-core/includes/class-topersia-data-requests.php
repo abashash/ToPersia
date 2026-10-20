@@ -44,6 +44,7 @@ final class ToPersia_Data_Requests {
 		'_topersia_mobile', '_topersia_country', '_topersia_language', '_topersia_travel_style', '_topersia_display_prefs',
 		'_topersia_trips_count', '_topersia_saved_entities', '_topersia_saved_count', '_topersia_saved_wpml_normalized',
 		'_topersia_followed', '_topersia_ai_daily', '_topersia_avatar', '_topersia_last_login', '_topersia_inactive',
+		'_topersia_email_verified', '_topersia_mobile_verified',   /* ۱٫۱۴٫۰ */
 	);
 
 	public static function instance(): self {
@@ -152,6 +153,14 @@ final class ToPersia_Data_Requests {
 
 		if ( class_exists( 'ToPersia_Avatar' ) && ToPersia_Avatar::record( $id ) ) {
 			$profile[] = $row( 'avatar', ToPersia_Avatar::photo_url( $id, 256 ) );
+		}
+
+		/* ۱٫۱۴٫۰ — زمان تأیید ایمیل و موبایل (ورود ایمیلی، LOGIN.md §۸-ب) */
+		foreach ( array( '_topersia_email_verified' => 'email_verified', '_topersia_mobile_verified' => 'mobile_verified' ) as $key => $label ) {
+			$at = (int) get_user_meta( $id, $key, true );
+			if ( $at > 0 ) {
+				$profile[] = $row( $label, gmdate( 'Y-m-d H:i:s', $at ) . ' UTC' );
+			}
 		}
 
 		$ll = (int) get_user_meta( $id, '_topersia_last_login', true );
@@ -303,6 +312,17 @@ final class ToPersia_Data_Requests {
 		if ( $keys && self::table_exists( ToPersia_DB::table_name() ) ) {
 			$in = implode( ',', array_fill( 0, count( $keys ), '%s' ) );
 			$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . ToPersia_DB::table_name() . " WHERE mobile IN ($in)", ...$keys ) );
+		}
+
+		/* ۱٫۱۴٫۰ — ترنزینت‌های کانال ایمیل (کلید از HMAC نشانی؛ کد، آخرین توکن، سهمیه) */
+		if ( class_exists( 'ToPersia_Privacy' ) && class_exists( 'ToPersia_Email_Code' ) && ! ToPersia_Privacy::synthetic_email( (string) $user->user_email ) ) {
+			$ek = ToPersia_Email_Code::key_of( strtolower( (string) $user->user_email ) );
+			$tk = get_transient( 'tp_ec_latest_' . $ek );
+			if ( is_string( $tk ) && '' !== $tk ) {
+				delete_transient( 'tp_ec_' . $tk );
+			}
+			delete_transient( 'tp_ec_latest_' . $ek );
+			delete_transient( 'tp_ec_rl_' . $ek );
 		}
 
 		/* ذخیره‌ها */

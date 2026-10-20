@@ -46,6 +46,9 @@ final class ToPersia_Auth {
 	/** عمر کد. */
 	private const TTL = 300;
 
+	/** فاصلۀ لازم میان دو تغییر یک شناسه (P5-D391 بند ۳ — ۳۰ روز). */
+	public const CHANGE_GAP = 30 * DAY_IN_SECONDS;
+
 	private static ?self $instance = null;
 
 	public static function instance(): self {
@@ -151,7 +154,107 @@ final class ToPersia_Auth {
 	private function nonce_ok(): bool {
 		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
 
-		return (bool) wp_verify_nonce( $nonce, 'topersia_user_core' );
+		return (bool) wp_verify_nonce( $nonce, 'topersia_user_core' ) && self::origin_ok();
+	}
+
+	/**
+	 * CSRF ورود — P5-D391 بند ۴: نانس uc-nonce (دستۀ ۱۸) می‌ماند و توکن دومی ساخته نمی‌شود؛ به‌علاوه
+	 * اگر مرورگر `Origin` یا `Sec-Fetch-Site` فرستاد، باید همین میزبان باشد. بی سرآیند ← فقط نانس.
+	 * روی send و verify هر دو کانال (پیامک و ایمیل).
+	 */
+	public static function origin_ok(): bool {
+
+		$sfs = isset( $_SERVER['HTTP_SEC_FETCH_SITE'] ) ? strtolower( trim( (string) wp_unslash( $_SERVER['HTTP_SEC_FETCH_SITE'] ) ) ) : '';
+
+		if ( '' !== $sfs && 'same-origin' !== $sfs ) {
+			return false;
+		}
+
+		$origin = isset( $_SERVER['HTTP_ORIGIN'] ) ? trim( (string) wp_unslash( $_SERVER['HTTP_ORIGIN'] ) ) : '';
+
+		if ( '' === $origin ) {
+			return true;
+		}
+
+		$o = parse_url( $origin );
+
+		if ( ! is_array( $o ) || empty( $o['scheme'] ) || empty( $o['host'] ) ) {
+			return false;   /* از جمله «null» — سند sandbox یا file */
+		}
+
+		$port = static function ( array $u ): int {
+			return isset( $u['port'] ) ? (int) $u['port'] : ( 'https' === strtolower( (string) $u['scheme'] ) ? 443 : 80 );
+		};
+
+		foreach ( array_unique( array( home_url( '/' ), function_exists( 'site_url' ) ? site_url( '/' ) : home_url( '/' ) ) ) as $base ) {
+			$b = parse_url( (string) $base );
+			if ( is_array( $b ) && ! empty( $b['host'] ) && ! empty( $b['scheme'] )
+				&& strtolower( (string) $b['scheme'] ) === strtolower( (string) $o['scheme'] )
+				&& strtolower( (string) $b['host'] ) === strtolower( (string) $o['host'] )
+				&& $port( $b ) === $port( $o ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/* ── کد یک‌بارمصرف: ساخت و هش — مشترک دو کانال ───────────────────── */
+
+	/** شش رقم با صفر پیشین — فضای کامل ۰۰۰۰۰۰ تا ۹۹۹۹۹۹ (LOGIN.md §۳-الف). */
+	public static function new_code(): string {
+		return str_pad( (string) random_int( 0, 999999 ), 6, '0', STR_PAD_LEFT );
+	}
+
+	/**
+	 * HMAC کد با نمک سایت و توکن همان درخواست — کد خام هرگز ذخیره نمی‌شود؛ مقایسه با hash_equals (ثابت‌زمان).
+	 * توکن در پیام است، پس هش یک کد برای توکن دیگر به کار نمی‌آید.
+	 */
+	public static function code_hash( string $token, string $code ): string {
+		return hash_hmac( 'sha256', 'tp-code|' . $token . '|' . $code, (string) wp_salt( 'auth' ) );
+	}
+
+	public static function code_matches( string $stored, string $token, string $code ): bool {
+		if ( '' !== $stored && '$' === $stored[0] ) {
+			return wp_check_password( $code, $stored );   /* ترنزینت پیش از ۱٫۱۴ (حداکثر چند دقیقه) */
+		}
+		return '' !== $stored && hash_equals( $stored, self::code_hash( $token, $code ) );
+	}
+
+	/** هش بی‌جفت — برای پاسخ یکسان وقتی کدی فرستاده نمی‌شود؛ هیچ کدی با آن نمی‌خواند. */
+	public static function dummy_hash(): string {
+		return hash_hmac( 'sha256', 'tp-dummy|' . bin2hex( random_bytes( 16 ) ), (string) wp_salt( 'auth' ) );
+	}
+
+	/** قفل یکتایی ساخت/پیوند شناسه (LOGIN.md §۱۰ گام ۵) — دو درخواست هم‌زمان یک حساب. */
+	public static function lock( string $ident ): bool {
+		global $wpdb;
+		if ( ! isset( $wpdb ) || ! is_object( $wpdb ) || ! method_exists( $wpdb, 'get_var' ) ) {
+			return true;
+		}
+		return '1' === (string) $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK(%s, 5)', 'tp_ident_' . substr( hash( 'sha256', $ident ), 0, 40 ) ) );
+	}
+
+	public static function unlock( string $ident ): void {
+		global $wpdb;
+		if ( isset( $wpdb ) && is_object( $wpdb ) && method_exists( $wpdb, 'get_var' ) ) {
+			$wpdb->get_var( $wpdb->prepare( 'SELECT RELEASE_LOCK(%s)', 'tp_ident_' . substr( hash( 'sha256', $ident ), 0, 40 ) ) );
+		}
+	}
+
+	/** نشست پس از کد درست — هر دو کانال. */
+	public static function start_session( WP_User $user, bool $remember ): void {
+		wp_set_current_user( $user->ID );
+		wp_set_auth_cookie( $user->ID, $remember, is_ssl() );
+
+		/* بدون این، WPML و افزونه‌های امنیتی و گزارش ورود این رویداد را اصلاً نمی‌بینند. */
+		do_action( 'wp_login', $user->user_login, $user );
+	}
+
+	/** آیا تغییر این شناسه زودتر از ۳۰ روز پس از تغییر قبلی است؟ (شناسۀ تازه — بی مقدار پیشین — آزاد است) */
+	public static function change_too_soon( int $user_id, string $meta ): bool {
+		$at = (int) get_user_meta( $user_id, $meta, true );
+		return $at > 0 && ( time() - $at ) < self::CHANGE_GAP;
 	}
 
 	private function normalize_mobile( string $mobile ): string {
@@ -173,6 +276,10 @@ final class ToPersia_Auth {
 	 *
 	 * @return string
 	 */
+	public static function client_ip_hash(): string {
+		return self::instance()->ip_hash();
+	}
+
 	private function ip_hash(): string {
 		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
 
@@ -360,13 +467,18 @@ final class ToPersia_Auth {
 	 * @return bool
 	 */
 	private function may_use_otp( WP_User $user ): bool {
+		return ! self::privileged( $user );
+	}
+
+	/** حساب دارای دسترسی — از هر دو کانال کد رد می‌شود؛ بازنشانی گذرواژه فقط برای همین‌ها (ToPersia_Mailer). */
+	public static function privileged( WP_User $user ): bool {
 		foreach ( array( 'manage_options', 'edit_posts', 'edit_pages', 'upload_files' ) as $cap ) {
 			if ( user_can( $user, $cap ) ) {
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	/* ==================================================================
@@ -386,18 +498,33 @@ final class ToPersia_Auth {
 			wp_send_json_error( array( 'message' => self::msg( 'invalid_mobile', 'شماره موبایل معتبر نیست.' ) ), 422 );
 		}
 
-		/* اگر شماره به حسابی با دسترسی تعلق دارد، همین‌جا رد می‌شود تا
-		   پیامکی هم فرستاده نشود. */
-		$existing = $this->find_user_by_mobile( $mobile );
+		/* ۱٫۱۴٫۰ — پیوند شمارۀ دوم به حساب واردشده (LOGIN.md §۲-پ) */
+		$purpose = isset( $_POST['purpose'] ) && 'link' === sanitize_key( wp_unslash( $_POST['purpose'] ) ) ? 'link' : 'login';
+		$uid     = get_current_user_id();
 
-		if ( $existing && ! $this->may_use_otp( $existing ) ) {
-			$this->log( 'درخواست کد برای حساب دارای دسترسی رد شد', 'error', array( 'user' => $existing->ID ) );
+		if ( 'link' === $purpose ) {
 
-			wp_send_json_error(
-				array( 'message' => self::msg( 'use_normal_login', 'این حساب باید از فرم ورود عادی وارد شود.' ) ),
-				403
-			);
+			if ( $uid <= 0 ) {
+				wp_send_json_error( array( 'message' => self::msg( 'login_required', 'برای ادامه وارد حساب شوید.' ) ), 401 );
+			}
+
+			if ( self::privileged( wp_get_current_user() ) ) {
+				wp_send_json_error( array( 'message' => self::msg( 'use_normal_login', 'این حساب باید از فرم ورود عادی وارد شود.' ) ), 403 );
+			}
+
+			if ( '' !== (string) get_user_meta( $uid, '_topersia_mobile', true ) && self::change_too_soon( $uid, '_topersia_mobile_verified' ) ) {
+				wp_send_json_error( array( 'message' => self::msg( 'identity_cooldown', 'این شناسه کمتر از ۳۰ روز پیش تغییر کرده است. بعداً دوباره تلاش کنید.' ) ), 429 );
+			}
 		}
+
+		/*
+		 * ۱٫۱۴٫۰ · P5-D391 بند ۳ — پاسخ یکسان (LOGIN.md §۳-ب): شمارۀ حساب دارای دسترسی، یا شماره‌ای که در پیوند مال
+		 * حساب دیگری است، همان پاسخ «کد فرستاده شد» و همان مصرف سهمیه را می‌گیرد — ولی پیامکی نمی‌رود و توکنش با
+		 * هش بی‌جفت است، پس بررسی هرگز موفق نمی‌شود. تا ۱٫۱۳ این‌جا ۴۰۳ «ورود عادی» بود: شمارش حساب‌های مدیر.
+		 */
+		$existing = $this->find_user_by_mobile( $mobile );
+		$silent   = ( 'login' === $purpose && $existing && ! $this->may_use_otp( $existing ) )
+			|| ( 'link' === $purpose && $existing && (int) $existing->ID !== $uid );
 
 		$blocked = $this->rate_limited( $mobile );
 
@@ -405,9 +532,24 @@ final class ToPersia_Auth {
 			wp_send_json_error( array( 'message' => $blocked ), 429 );
 		}
 
-		$otp   = (string) wp_rand( 100000, 999999 );
-		$hash  = wp_hash_password( $otp );
 		$token = wp_generate_password( 32, false, false );
+
+		if ( $silent ) {
+			$this->log( 'login' === $purpose ? 'درخواست کد برای حساب دارای دسترسی — پیامکی نرفت' : 'پیوند شماره‌ای که مال حساب دیگری است — پیامکی نرفت', 'error', array( 'user' => (int) $existing->ID ) );
+
+			set_transient( 'tp_otp_' . $token, array( 'mobile_h' => ToPersia_DB::mobile_hash( $mobile ), 'hash' => self::dummy_hash(), 'tries' => 0, 'attempt_id' => 0, 'purpose' => $purpose, 'uid' => $uid ), self::TTL );
+
+			wp_send_json_success(
+				array(
+					'token'     => $token,
+					'expiresIn' => self::TTL,
+					'message'   => self::msg( 'otp_sent', 'کد تأیید ارسال شد.' ),
+				)
+			);
+		}
+
+		$otp  = self::new_code();
+		$hash = self::code_hash( $token, $otp );
 
 		$provider = new ToPersia_Mediana_SMS();
 		$result   = $provider->send_otp( $mobile, $otp, (string) get_option( 'topersia_mediana_pattern_code', '' ) );
@@ -435,6 +577,8 @@ final class ToPersia_Auth {
 				'hash'       => $hash,
 				'tries'      => 0,
 				'attempt_id' => $attempt_id,
+				'purpose'    => $purpose,
+				'uid'        => $uid,
 			),
 			self::TTL
 		);
@@ -512,7 +656,7 @@ final class ToPersia_Auth {
 			ToPersia_DB::increment_attempt( $attempt_id );
 		}
 
-		if ( ! wp_check_password( (string) $otp, $payload['hash'] ) ) {
+		if ( ! self::code_matches( (string) $payload['hash'], $token, (string) $otp ) ) {
 			wp_send_json_error(
 				array(
 					'message' => self::msg( 'otp_wrong', 'کد تأیید اشتباه است.' ),
@@ -520,6 +664,11 @@ final class ToPersia_Auth {
 				),
 				422
 			);
+		}
+
+		/* ۱٫۱۴٫۰ — پیوند شمارۀ دوم: فقط همان حساب واردشده‌ای که کد را خواست */
+		if ( isset( $payload['purpose'] ) && 'link' === $payload['purpose'] ) {
+			$this->attach_mobile( (int) ( $payload['uid'] ?? 0 ), (string) $payload['mobile'], $key, $attempt_id );
 		}
 
 		$user = $this->find_user_by_mobile( (string) $payload['mobile'] );
@@ -541,7 +690,13 @@ final class ToPersia_Auth {
 		}
 
 		if ( ! $user ) {
-			$user = $this->create_user( (string) $payload['mobile'] );
+			/* قفل یکتایی: دو درخواست هم‌زمان برای یک شمارۀ نو یک حساب می‌سازند، نه دو (LOGIN.md §۱-ت) */
+			$locked = self::lock( 'm:' . (string) $payload['mobile'] );
+			$user   = $this->find_user_by_mobile( (string) $payload['mobile'] );
+			$user   = $user ?: $this->create_user( (string) $payload['mobile'] );
+			if ( $locked ) {
+				self::unlock( 'm:' . (string) $payload['mobile'] );
+			}
 
 			if ( ! $user ) {
 				wp_send_json_error( array( 'message' => self::msg( 'account_create_failed', 'ساخت حساب کاربری انجام نشد.' ) ), 500 );
@@ -552,12 +707,7 @@ final class ToPersia_Auth {
 
 		$remember = ! empty( $_POST['remember'] );
 
-		wp_set_current_user( $user->ID );
-		wp_set_auth_cookie( $user->ID, $remember, is_ssl() );
-
-		/* بدون این، WPML و افزونه‌های امنیتی و گزارش ورود این رویداد را
-		   اصلاً نمی‌بینند. */
-		do_action( 'wp_login', $user->user_login, $user );
+		self::start_session( $user, $remember );
 
 		$this->log( 'ورود با کد یک‌بارمصرف', 'info', array( 'user' => $user->ID ) );
 
@@ -610,8 +760,57 @@ final class ToPersia_Auth {
 		$user->set_role( 'subscriber' );
 
 		update_user_meta( $user_id, '_topersia_mobile', $mobile );
+		update_user_meta( $user_id, '_topersia_mobile_verified', time() );
 
 		return $user;
+	}
+
+	/**
+	 * پیوند شمارۀ تأییدشده به حساب واردشده — ۱٫۱۴٫۰ · LOGIN.md §۲-پ و §۲-ت.
+	 *
+	 * فقط همان حسابی که کد را خواست؛ شماره‌ای که مال حساب دیگری است هرگز پیوند نمی‌خورد (ادغام نه — فقط دستی با
+	 * پشتیبانی) و پاسخش همان «کد نامعتبر» است. فاصلۀ ۳۰ روز میان دو تغییر. همیشه با wp_send_json پایان می‌یابد.
+	 */
+	private function attach_mobile( int $uid, string $mobile, string $key, int $attempt_id ): void {
+
+		if ( $uid <= 0 || get_current_user_id() !== $uid ) {
+			delete_transient( $key );
+			wp_send_json_error( array( 'message' => self::msg( 'invalid_request', 'درخواست نامعتبر است.' ) ), 403 );
+		}
+
+		$locked = self::lock( 'm:' . $mobile );
+		$owner  = $this->find_user_by_mobile( $mobile );
+		$had    = (string) get_user_meta( $uid, '_topersia_mobile', true );
+
+		if ( ( $owner && (int) $owner->ID !== $uid ) || ( '' !== $had && $had !== $mobile && self::change_too_soon( $uid, '_topersia_mobile_verified' ) ) ) {
+			if ( $locked ) {
+				self::unlock( 'm:' . $mobile );
+			}
+			delete_transient( $key );
+			wp_send_json_error( array( 'message' => self::msg( 'otp_invalid', 'کد تأیید معتبر نیست.' ) ), 422 );
+		}
+
+		update_user_meta( $uid, '_topersia_mobile', $mobile );
+		update_user_meta( $uid, '_topersia_mobile_verified', time() );
+
+		if ( $locked ) {
+			self::unlock( 'm:' . $mobile );
+		}
+
+		delete_transient( $key );
+
+		if ( $attempt_id ) {
+			ToPersia_DB::mark_verified( $attempt_id );
+		}
+
+		/* اعلان امنیتی به ایمیل واقعی حساب، اگر هست (پیامک اعلان الگوی جدا در مدیانا ندارد) */
+		if ( '' !== $had && $had !== $mobile && class_exists( 'ToPersia_Email_Code' ) ) {
+			ToPersia_Email_Code::notify_change( $uid, 'mobile' );
+		}
+
+		$this->log( '' === $had ? 'شمارۀ موبایل به حساب افزوده شد' : 'شمارۀ موبایل حساب عوض شد', 'info', array( 'user' => $uid ) );
+
+		wp_send_json_success( array( 'message' => self::msg( 'identity_saved', 'شناسه تأیید و ذخیره شد.' ), 'reload' => true ) );
 	}
 
 	/* ==================================================================

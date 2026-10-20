@@ -61,9 +61,9 @@ $src = function ( $rel ) use ( $UC ) { return (string) file_get_contents( $UC . 
 echo "\ntopersia-user-core ۱٫۱۰٫۰\n" . str_repeat( '─', 78 ) . "\n";
 
 /* ── نسخه ── */
-t( 'نسخه: سرآیند و ثابت 1.13.0',
-	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.13.0' )
-	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.13.0');" ) );
+t( 'نسخه: سرآیند و ثابت 1.14.0',
+	false !== strpos( $src( 'topersia-user-core.php' ), ' * Version: 1.14.0' )
+	&& false !== strpos( $src( 'topersia-user-core.php' ), "define('TOPERSIA_USER_CORE_VERSION', '1.14.0');" ) );
 
 /*
  * ── ۱٫۱۰٫۲ — جهت فرم ورود از زبان صفحه  SPRINT-4.4 ۲٫۰٫۸ ──
@@ -102,7 +102,7 @@ $uc_login = function ( $tpl ) use ( $dict ) {
 	$bare = preg_replace( '#/\*.*?\*/#su', '', $bare );
 	preg_match_all( "/\\\$tp_t\\('([a-z_]+)'\\)/", $tpl, $km );
 	$keys_ok = $km[1] && ! array_filter( $km[1], function ( $k ) use ( $dict ) { return empty( $dict[ $k ]['fa'] ) || empty( $dict[ $k ]['en'] ) || empty( $dict[ $k ]['ar'] ); } );
-	return ! preg_match( '/[\x{0600}-\x{06FF}]/u', $bare ) && $keys_ok && 6 === count( array_unique( $km[1] ) );
+	return ! preg_match( '/[\x{0600}-\x{06FF}]/u', $bare ) && $keys_ok && 10 === count( array_unique( $km[1] ) );   /* ۱٫۱۴٫۰: زبانه‌های موبایل و ایمیل + برچسب ایمیل */
 };
 /* ۱٫۱۰٫۲ (همراه v4.4.1) از زیپ dist/ — برچسب‌های پیش از درون‌ریزی ۱ اکتبر در مخزن تازه نیستند (۰ب٫۲، P5-D284) */
 $uc_old = function ( $rel ) {
@@ -115,7 +115,7 @@ $uc_old = function ( $rel ) {
 	return false === $s ? '' : (string) $s;
 };
 $old_login = $uc_old( 'templates/login.php' );
-t( 'فرم ورود: هیچ متن فارسیِ ثابت — شش برچسب و دکمه از واژه‌نامۀ سه‌زبانه (fa · en · ar)؛ جهش — قالب ۱٫۱۰٫۲ — می‌افتد  ۱٫۱۰٫۳',
+t( 'فرم ورود: هیچ متن فارسیِ ثابت — ده برچسب، زبانه و دکمه از واژه‌نامۀ سه‌زبانه (fa · en · ar)؛ جهش — قالب ۱٫۱۰٫۲ — می‌افتد  ۱٫۱۰٫۳',
 	$uc_login( $src( 'templates/login.php' ) ) && false !== strpos( $old_login, 'tp-auth-card' ) && ! $uc_login( $old_login ) );
 
 $uc_auth = function ( $php ) use ( $dict ) {
@@ -397,7 +397,7 @@ $pub = function ( $class ) {
 		&& 'Traveler ' . $class::number( 9 ) === $class::public_name( 'مسافر ۱۲۳۴', 9, 'en' )
 		&& 'Ali Rezaei' === $class::public_name( 'Ali Rezaei', 9, 'en' );
 };
-$m_pub = $uc_mutant( $priv_src, 'ToPersia_Privacy', 'MP', "if ( '' === \$name || self::looks_like_phone( \$name ) || self::is_neutral( \$name ) ) {", 'if ( false ) {' );
+$m_pub = $uc_mutant( $priv_src, 'ToPersia_Privacy', 'MP', "if ( '' === \$name || self::looks_like_phone( \$name ) || self::looks_like_email( \$name ) || self::is_neutral( \$name ) ) {", 'if ( false ) {' );
 t( 'R37 دفاع دوم: فیلتر get_the_author_display_name نام شماره‌دار و نام خنثیِ ذخیره‌شده را به نام خنثیِ زبان صفحه برمی‌گرداند، نام واقعی را نه؛ جهش بی جای‌گزینی می‌افتد',
 	$pub( 'ToPersia_Privacy' ) && '' !== $m_pub && ! $pub( $m_pub )
 	&& false !== strpos( $priv_src, "add_filter( 'get_the_author_display_name', array( \$this, 'filter_author_name' ), 20, 2 );" )
@@ -631,6 +631,13 @@ t( 'غیرفعال‌سازی: wp_login (هر دو مسیر ورود)، ۲۴ م�
 	&& ! $in_ok( str_replace( "'wp_login'", "'wp_login_x'", $in_src ) ) );
 t( 'غیرفعال‌سازی: افزونه کرون را غیرفعال می‌کند و اثر عمومی (نام خنثی، آواتار خنثی، ۴۰۴ بایگانی نویسنده) پیوسته است',
 	false !== strpos( $db_src, "wp_clear_scheduled_hook('topersia_user_core_inactivity');" ) && false !== strpos( $in_src, "add_filter( 'jet-reviews/user-manager/raw-user-data'" ) && false !== strpos( $in_src, '$wp_query->set_404();' ) && false !== strpos( $av_src, 'ToPersia_Inactivity::is_inactive( $uid )' ) );
+/* ── ۱٫۱۴٫۰ · P5-D391 — ورود ایمیلی: فرایند جدا (stubهای خودش)؛ هر ادعای امنیتی با جهش ── */
+$mail_out = array();
+exec( escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( __DIR__ . '/assert-uc-mail.php' ) . ' 2>&1', $mail_out, $mail_code );
+$mail_sum = preg_grep( '/گذشته:/u', $mail_out );
+t( 'ورود ایمیلی (assert-uc-mail.php): هش کد، سقف‌ها، پاسخ یکسان، Origin، ارسال‌نشدن بی ثابت‌ها، پیوند ۳۰ روزه، قالب نامه — همه با جهش',
+	0 === $mail_code && $mail_sum, implode( ' | ', array_merge( preg_grep( '/❌|Fatal|Warning/u', $mail_out ), $mail_sum ) ) );
+
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );
 exit( $fail ? 1 : 0 );

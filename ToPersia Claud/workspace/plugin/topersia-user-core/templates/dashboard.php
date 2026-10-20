@@ -74,6 +74,26 @@
 
 <?php if (isset($data['tabs']['profile'])) : ?><section id="tp-panel-profile" class="tp-tab-panel<?php echo $data['default_tab'] === 'profile' ? ' active' : ''; ?>" data-tp-panel="profile" role="tabpanel"<?php echo $data['default_tab'] === 'profile' ? '' : ' hidden'; ?> >
       <div class="tp-section-title"><span class="tp-eyebrow">PROFILE</span><h2><?php echo $tp('profile_title'); ?></h2><p><?php echo $tp('profile_desc'); ?></p></div>
+      <?php /* ۱٫۱۴٫۰ · LOGIN.md §۲-پ — ایمیل و موبایل تأییدشده؛ پیوند و تغییر فقط با کد به شناسۀ تازه، فاصلۀ ۳۰ روز */ ?>
+      <div class="tp-card tp-identity-card" id="tp-identity-card">
+        <div class="tp-card-head"><h2><?php echo $tp('identity_title'); ?></h2></div>
+        <p class="tp-muted"><?php echo $tp('identity_desc'); ?></p>
+        <div class="tp-detail-list">
+          <div><span><?php echo $tp('mobile'); ?></span><strong dir="ltr"><?php echo esc_html($data['mobile'] ?: '—'); ?></strong></div>
+          <div><span><?php echo $tp('email'); ?></span><strong dir="ltr"><?php echo esc_html($data['email'] ?: '—'); ?></strong></div>
+        </div>
+        <?php foreach (['email' => ['identity_new_email', 'identity_change_email', 'email', 'email', 'email'], 'mobile' => ['identity_new_mobile', 'identity_change_mobile', 'tel', 'tel', 'numeric']] as $tp_kind => $tp_row) : ?>
+        <div class="tp-identity-row" data-tp-ident="<?php echo esc_attr($tp_kind); ?>">
+          <div class="tp-field"><label for="tp-ident-<?php echo esc_attr($tp_kind); ?>"><?php echo $tp($tp_row[0]); ?></label><input id="tp-ident-<?php echo esc_attr($tp_kind); ?>" type="<?php echo esc_attr($tp_row[2]); ?>" dir="ltr" autocomplete="<?php echo esc_attr($tp_row[3]); ?>" inputmode="<?php echo esc_attr($tp_row[4]); ?>" data-tp-ident-input></div>
+          <button class="tp-btn tp-btn-secondary" type="button" data-tp-ident-send><?php echo $tp($tp_row[1]); ?></button>
+          <div class="tp-hidden" data-tp-ident-box>
+            <div class="tp-field"><label for="tp-ident-<?php echo esc_attr($tp_kind); ?>-code"><?php echo $tp('otp_code'); ?></label><input id="tp-ident-<?php echo esc_attr($tp_kind); ?>-code" type="text" dir="ltr" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" data-tp-ident-code></div>
+            <button class="tp-btn" type="button" data-tp-ident-verify><?php echo $tp('verify_save'); ?></button>
+          </div>
+        </div>
+        <?php endforeach; ?>
+        <div id="tp-ident-message" class="tp-message" aria-live="polite"></div>
+      </div>
       <div class="tp-card tp-avatar-card" id="tp-avatar-card" data-tp-avatar-card>
         <div class="tp-card-head"><h2><?php echo $tp('avatar_title'); ?></h2></div>
         <div class="tp-avatar-row">

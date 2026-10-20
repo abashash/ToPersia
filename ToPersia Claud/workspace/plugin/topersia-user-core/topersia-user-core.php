@@ -3,7 +3,7 @@
  * Plugin Name: ToPersia User Core
  * Plugin URI: https://topersia.com/
  * Description: هسته اختصاصی حساب کاربری ToPersia با پنل تب‌محور، ماژول‌های مسافر و ساختار آماده توسعه.
- * Version: 1.13.0
+ * Version: 1.14.0
  * Requires at least: 6.4
  * Requires PHP: 8.0
  * Author: ToPersia
@@ -16,7 +16,7 @@ if (defined('TOPERSIA_USER_CORE_LOADED')) {
     return;
 }
 define('TOPERSIA_USER_CORE_LOADED', true);
-define('TOPERSIA_USER_CORE_VERSION', '1.13.0');
+define('TOPERSIA_USER_CORE_VERSION', '1.14.0');
 define('TOPERSIA_USER_CORE_FILE', __FILE__);
 define('TOPERSIA_USER_CORE_DIR', plugin_dir_path(__FILE__));
 define('TOPERSIA_USER_CORE_URL', plugin_dir_url(__FILE__));
@@ -30,6 +30,8 @@ $tp_files = [
     'class-topersia-sms-provider.php',
     'class-topersia-mediana-sms.php',
     'class-topersia-auth.php',
+    'class-topersia-mailer.php',      /* ۱٫۱۴٫۰ · P5-D391 */
+    'class-topersia-email-code.php',
     'class-topersia-profile.php',
     'class-topersia-admin.php',
     'class-topersia-jetengine.php',
@@ -94,6 +96,8 @@ add_action('plugins_loaded', static function (): void {
         'ToPersia_Inactivity',
         'ToPersia_Avatar',
         'ToPersia_Auth',
+        'ToPersia_Mailer',
+        'ToPersia_Email_Code',
         'ToPersia_Profile',
         'ToPersia_Admin',
         'ToPersia_JetEngine',

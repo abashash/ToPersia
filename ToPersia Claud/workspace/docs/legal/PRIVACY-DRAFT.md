@@ -4,6 +4,7 @@
 
 - مانع: `L-2` در `docs/AUDIT-2026-10/LAUNCH.md` · مبنا: `main` `50b8dc4f` · ابری M، ۱۹ اکتبر ۲۰۲۶.
 - دستهٔ ۱۹ (P5-D376 · P5-D377، ۲۰ اکتبر ۲۰۲۶): فهرست داده و متن سه‌زبانه با رفتار واقعی user-core 1.13.0 (آواتار محلی، غیرفعال‌سازی ۲۴ ماهه، OTP تأییدشده ۲۴ ساعت) به‌روز شد؛ پاسخ‌های کاربر به Q1–Q12 اعمال شد (بخش ۳). `geo/` فقط خوانده شد. `abzarwp` کنار گذاشته شد.
+- دستهٔ ۲۱ (P5-D391، ۲۰ اکتبر ۲۰۲۶): ورود با کد ایمیلی (user-core 1.14.0) — ردیف‌های B18–B22 و بندهای ایمیل در هر سه متن؛ پردازندهٔ ایمیل = SMTP میزبان (cPanel)، نام و کشور میزبان `[تکمیل به دست کاربر]`.
 - هر جا داده یا مدرک نیست، جای خالی `[تکمیل به دست کاربر]` مانده است. هیچ ادعای حقوقی یا قانونی بی‌شاهد ساخته نشده.
 - شاهد = `پرونده:خط` نسبت به `ToPersia Claud/workspace/plugin/` (در جدول‌ها کوتاه‌شده: UC = `topersia-user-core`، AI = `topersia-ai-summarizer`، R = `topersia-render`، C = `topersia-core`). `[سنجیده‌نشده]` یعنی در کد ما نیست یا به تنظیم زندهٔ سایت بسته است.
 
@@ -55,6 +56,11 @@
 | B14 | پیوند «موتور هوش مصنوعی» (ChatGPT/Claude/Gemini/Copilot) فقط برای واردشده: پرسش شامل **نام موجودیت و نشانی صفحه** | ادامه در دستیار دلخواه | با کلیک، مرورگر کاربر به سایت دستیار می‌رود؛ داده‌ای از حساب کاربر در پرسش نیست | — | **بله — با کلیک کاربر** | R `includes/topersia-g-zones.php:5092-5102` · `:5230-5262` |
 | B16 | **عکس نمایه** (اختیاری): فایل WebP مربع ۲۵۶ و ۹۶ (EXIF/GPS پاک) | نمایش در پنل و نظرها | `uploads/topersia-avatars/<۲۴هگز-تصادفی>-{256,96}.webp` (بیرون از کتابخانهٔ رسانه) + `usermeta` `_topersia_avatar` (توکن و زمان) | تا حذف عکس یا حساب؛ جایگزینی فایل قبلی را پاک می‌کند | خیر | UC `class-topersia-avatar.php` |
 | B17 | **زمان آخرین ورود** و پرچم «غیرفعال» | قاعدهٔ حساب بی‌فعالیت ۲۴ ماهه | `usermeta` `_topersia_last_login` · `_topersia_inactive`؛ مبنای نصب: گزینهٔ بی‌autoload `topersia_uc_inactivity_since` | تا حذف حساب | خیر | UC `class-topersia-inactivity.php` |
+| B18 | **نشانی ایمیل** (ورود با کد ایمیلی، یا ایمیل دوم حساب پیامکی پس از تأیید) | ورود؛ اعلان امنیتی تغییر شناسه | `users.user_email` + `usermeta` `_topersia_email_verified` (زمان تأیید)؛ هرگز در نام ورود، نامک، نام نمایشی، نظر، REST یا JSON-LD | تا حذف حساب | خیر | UC `class-topersia-email-code.php` (`create_user` · `check`) · `class-topersia-privacy.php` (`looks_like_email`) |
+| B19 | کد ایمیلی: **HMAC کد با نمک سایت** و HMAC نشانی (نه نشانی، نه کد) در ترنزینت؛ پنج حدس | تطبیق کد | ترنزینت `tp_ec_<توکن>` · `tp_ec_latest_<HMAC>` | ۶۰۰ ثانیه؛ پس از استفاده حذف | خیر | UC `class-topersia-email-code.php` · `class-topersia-auth.php` (`code_hash`) |
+| B20 | شمارنده‌های نرخ ایمیل (کلید HMAC نشانی؛ IP هش‌شده) و سقف ارسال سایت | جلوگیری از بمباران ایمیل | ترنزینت `tp_ec_rl_*` · `tp_ec_ip_*` · `tp_ec_channel` · `tp_mail_cap_h/d` | ۱ ساعت تا ۱ روز | خیر | UC `class-topersia-email-code.php` (`rate`) · `class-topersia-mailer.php` (`reserve`) |
+| B21 | متن نامهٔ کد (کد، زبان) به سرور SMTP میزبان | تحویل نامه | **SMTP میزبان (cPanel)** `[تکمیل به دست کاربر — نام و کشور میزبان، DPA]`؛ بی پیکسل، بی پیوند ردیابی، بی تصویر | سمت میزبان [سنجیده‌نشده] | **بله — میزبان ایمیل** | UC `class-topersia-mailer.php` · `templates/email/` |
+| B22 | زمان تأیید موبایل `_topersia_mobile_verified` | قاعدهٔ ۳۰ روز میان دو تغییر شناسه | `usermeta` | تا حذف حساب | خیر | UC `class-topersia-auth.php` (`change_too_soon`) |
 | B15 | ردیف لاگ فنی: زمان، سطح، پیام، شناسهٔ کاربر، نشانی صفحه (برای رویداد ورود فقط شناسهٔ کاربر، نه شماره) | عیب‌یابی | جدول `{prefix}topersia_log` | قابل تنظیم `log_retain_days` و `log_max_rows`؛ مقدار پیش‌فرض [سنجیده‌نشده] | خیر | C `topersia-core.php:1072-1096` · `:1387-1404` · UC `class-topersia-auth.php:114-117` · `:477` |
 
 ### ۱٫۳ خلاصه‌ساز هوش مصنوعی — آیا دادهٔ بازدیدکننده به ارائه‌دهنده می‌رود؟
@@ -72,8 +78,8 @@
 - ~~Gravatar~~ — برداشته شد (۱٫۱۳٫۰).
 - شمارهٔ حساب در `usermeta` تا حذف حساب می‌ماند (شناسهٔ ورود است). حساب بی‌فعالیت ۲۴ ماه ← غیرفعال (نه حذف).
 - `uninstall.php` جدول‌های JetReviews را عمداً نگه می‌دارد (نظر کاربر پس از حذف افزونه می‌ماند).
-- ورود فقط با شمارهٔ ایران (`^09[0-9]{9}$`) — در متن صریح نوشته شد.
-- اعلان ایمیلی/پیامکی خارج از OTP نیست و `mail()` غیرفعال است: مسیر تماس ایمیل `privacy@topersia.com` است (صندوق باید ساخته شود).
+- ورود با موبایل فقط با شمارهٔ ایران (`^09[0-9]{9}$`)؛ از ۱٫۱۴٫۰ ورود با کد ایمیلی هم هست (هر نشانی معتبر؛ ثبت‌نام فقط با ایمیل مجاز).
+- ایمیل‌های سایت: فقط تراکنشی — کد ورود، «از ورود عادی استفاده کنید» (حساب دارای دسترسی)، «کسی خواست این نشانی را وصل کند»، و اعلان تغییر ایمیل/موبایل. بی بازاریابی. بی ثابت‌های SMTP (نسخهٔ محلی) هیچ نامه‌ای نمی‌رود. برون‌بر ایمیل واقعی و زمان‌های تأیید را می‌آورد؛ پاک‌کننده ترنزینت‌های ایمیل را هم پاک می‌کند. مسیر تماس `privacy@topersia.com` (صندوق باید ساخته شود).
 
 ---
 
@@ -95,7 +101,9 @@
 ## چه چیزی جمع می‌کنیم
 **اگر فقط صفحه‌ها را می‌خوانید (بدون حساب):** برای محدود‌کردن سوءاستفاده، از نشانی IP شما فقط یک «هش» (نشانهٔ غیرقابل‌برگشت) در حافظهٔ موقت می‌ماند، و آن هم هنگام درخواست کد ورود. ترجیح‌های نمایش (مثلاً حالت تیره، اندازهٔ متن)، نام آخرین دکمهٔ مسیریابی و سبک نقشه فقط در مرورگر خودتان ذخیره می‌شود و از آنجا نمی‌رود. شمارش بی‌نام کلیک روی دکمه‌های دستیار هوش مصنوعی انجام می‌شود، بدون IP و بدون اطلاعات مرورگر. برای آمار بازدید از Google Analytics 4 استفاده می‌کنیم (بخش «با چه کسانی به اشتراک می‌گذاریم» و جدول کوکی‌ها).
 
-**اگر حساب می‌سازید:** شمارهٔ موبایل ایران، که برای ارسال کد ورود لازم است؛ نامی که خودتان می‌نویسید (نام، نام خانوادگی)، کشور، زبان و سبک سفر (اختیاری)؛ عکس نمایه (اختیاری)؛ مکان‌های ذخیره‌شده و موجودیت‌هایی که دنبال می‌کنید؛ ترجیح‌های نمایش همگام‌شده؛ نظرهایی که می‌نویسید (امتیاز، عنوان، متن)؛ و زمان آخرین ورودتان (برای بند «حساب بی‌فعالیت»). نام ورود و ایمیل حساب تصادفی ساخته می‌شود و شمارهٔ شما هرگز در نام عمومی ظاهر نمی‌شود؛ نام نمایشی شما نام خودتان است یا اگر ننوشته باشید، یک نام خنثی مانند «مسافر ۴۸۲۱». ورود با موبایل فعلاً فقط با شمارهٔ ایران ممکن است.
+**اگر حساب می‌سازید:** شمارهٔ موبایل ایران یا نشانی ایمیل (یا هر دو)، که برای ارسال کد ورود لازم است؛ نامی که خودتان می‌نویسید (نام، نام خانوادگی)، کشور، زبان و سبک سفر (اختیاری)؛ عکس نمایه (اختیاری)؛ مکان‌های ذخیره‌شده و موجودیت‌هایی که دنبال می‌کنید؛ ترجیح‌های نمایش همگام‌شده؛ نظرهایی که می‌نویسید (امتیاز، عنوان، متن)؛ و زمان آخرین ورودتان (برای بند «حساب بی‌فعالیت»). نام ورود حساب تصادفی ساخته می‌شود و شماره و ایمیل شما هرگز در نام عمومی، نظرها یا دادهٔ ساخت‌یافتهٔ صفحه ظاهر نمی‌شود؛ نام نمایشی شما نام خودتان است یا اگر ننوشته باشید، یک نام خنثی مانند «مسافر ۴۸۲۱». ورود با موبایل فعلاً فقط با شمارهٔ ایران ممکن است؛ ورود با ایمیل برای هر نشانی معتبر. می‌توانید ایمیل و موبایل هر دو را به حساب بیفزایید؛ هر کدام با کدی که به خودِ آن فرستاده می‌شود تأیید می‌شود و هر ۳۰ روز یک بار قابل تغییر است.
+
+**ایمیل‌هایی که می‌فرستیم:** فقط ایمیل‌های لازم برای حساب — کد ورود، و هشدار امنیتی وقتی ایمیل یا موبایل حساب عوض می‌شود. هیچ ایمیل تبلیغاتی. در ایمیل‌ها پیکسل ردیابی، پیوند ردیابی‌شونده یا تصویر از جای دیگر نیست.
 
 **عکس نمایه:** اگر بگذارید، فایل روی همین سایت ذخیره می‌شود، نه در Gravatar یا سرویس دیگر. فقط JPG، PNG یا WebP تا ۲ مگابایت پذیرفته می‌شود و به یک تصویر مربع کوچک WebP تبدیل می‌شود؛ اطلاعات پنهان عکس (مثل موقعیت جغرافیایی و مشخصات دوربین) در این تبدیل پاک می‌شود. اگر عکس نگذارید، یک شمایل ساده با رنگی که از شناسهٔ حساب مشتق می‌شود نشان داده می‌شود.
 
@@ -103,7 +111,7 @@
 برای ورود امن با کد یک‌بارمصرف، جلوگیری از سوءاستفاده و ارسال انبوه پیامک، نمایش نمایه و فهرست‌های شخصی، انتشار نظرها پس از تأیید مدیر، حفظ ترجیح‌های نمایش شما بین دستگاه‌ها، و فهمیدن اینکه کدام صفحه‌ها خوانده می‌شوند.
 
 ## چه مدت نگه می‌داریم
-- کد یک‌بارمصرف: ۵ دقیقه. شمارهٔ شما در ثبت تلاش‌های ورود فقط به‌صورت هش (غیرقابل‌برگشت) می‌ماند.
+- کد یک‌بارمصرف: پیامک ۵ دقیقه، ایمیل ۱۰ دقیقه؛ خودِ کد فقط به‌صورت هش نگه داشته می‌شود. شمارهٔ شما در ثبت تلاش‌های ورود فقط به‌صورت هش (غیرقابل‌برگشت) می‌ماند؛ برای ورود ایمیلی سابقهٔ تلاشی در پایگاه‌داده نوشته نمی‌شود.
 - سابقهٔ تلاش ورود: اگر تأیید نشود حداکثر ۱ روز؛ اگر تأیید شود حداکثر ۲۴ ساعت؛ سپس حذف خودکار.
 - شمارنده‌های محدودسازی: تا یک ساعت.
 - شمارهٔ موبایل حساب، نمایه، عکس، مکان‌های ذخیره‌شده، دنبال‌شده‌ها و ترجیح‌ها: تا زمانی که حساب باقی است.
@@ -114,6 +122,7 @@
 
 ## با چه کسانی به اشتراک می‌گذاریم
 - **سرویس پیامک Mediana (ایران)**: شمارهٔ موبایل و کد، تنها برای ارسال کد ورود.
+- **سرور ایمیل میزبان سایت** ([تکمیل به دست کاربر — نام و کشور میزبان]): نشانی ایمیل و متن نامهٔ کد یا هشدار امنیتی، تنها برای تحویل همان نامه.
 - **Google Analytics 4** (از راه افزونهٔ Site Kit): آمار بازدید با کوکی‌های `_ga` و `_ga_<شناسه>`؛ داده‌ها ۱۴ ماه در Google می‌ماند. «Google signals» و شخصی‌سازی تبلیغ خاموش است.
 - **OpenFreeMap**: وقتی نقشهٔ تعاملی نمایش داده می‌شود، مرورگر شما مستقیماً به این سرویس درخواست می‌فرستد و نشانی IP و اطلاعات مرورگر شما را می‌بیند. اگر در دسترس نباشد، نقشهٔ ذخیره‌شده روی سرور خودمان استفاده می‌شود.
 - **سرویس‌های هوا (MET Norway، Open-Meteo)**: سرور ما برای مکان‌های سایت (نه مکان شما) داده می‌گیرد؛ چیزی از شما نمی‌رود.
@@ -159,7 +168,9 @@ This page explains what information ToPersia collects, why, how long it is kept 
 ## What we collect
 **If you only read pages (no account):** to limit abuse, we keep only a hash (an irreversible token) of your IP address in temporary storage, and only when a login code is requested. Your display preferences (for example dark mode, text size), the name of the last navigation button you used and your map style are stored only in your own browser and do not leave it. We count clicks on the AI-assistant buttons anonymously, without IP address or browser information. For visit statistics we use Google Analytics 4 (see "Who we share it with" and the cookie table).
 
-**If you create an account:** an Iranian mobile number, which is needed to send you a login code; the name you choose to give (first and last name), country, language and travel style (optional); a profile photo (optional); places you save and entities you follow; synchronised display preferences; reviews you write (ratings, title, text); and the time of your last login (for the "inactive account" rule below). The account's login name and email are generated randomly and your number never appears in your public name; your display name is the name you entered or, if you did not, a neutral one such as "Traveller 4821". Signing in with a mobile number currently works only with Iranian numbers.
+**If you create an account:** an Iranian mobile number or an email address (or both), which is needed to send you a login code; the name you choose to give (first and last name), country, language and travel style (optional); a profile photo (optional); places you save and entities you follow; synchronised display preferences; reviews you write (ratings, title, text); and the time of your last login (for the "inactive account" rule below). The account's login name is generated randomly and your number and email never appear in your public name, your reviews or the page's structured data; your display name is the name you entered or, if you did not, a neutral one such as "Traveller 4821". Signing in with a mobile number currently works only with Iranian numbers; signing in with email works with any valid address. You can add both an email and a mobile number to your account; each is confirmed with a code sent to it and can be changed once every 30 days.
+
+**Emails we send:** only emails your account needs — the login code, and a security notice when the account's email or mobile number changes. No marketing email. Our emails contain no tracking pixel, no tracked link and no remote image.
 
 **Profile photo:** if you add one, the file is stored on this site, not on Gravatar or any other service. Only JPG, PNG or WebP up to 2 MB is accepted and it is converted into a small square WebP image; hidden photo data (such as location and camera details) is removed in the conversion. If you add no photo, a plain icon whose colour is derived from your account ID is shown.
 
@@ -167,7 +178,7 @@ This page explains what information ToPersia collects, why, how long it is kept 
 To sign you in securely with a one-time code, to prevent abuse and mass SMS sending, to show your profile and personal lists, to publish reviews after moderation, to keep your display preferences across devices, and to understand which pages are read.
 
 ## How long we keep it
-- One-time code: 5 minutes. In login-attempt records your number is kept only as a hash (irreversible).
+- One-time code: 5 minutes by SMS, 10 minutes by email; the code itself is kept only as a hash. In login-attempt records your number is kept only as a hash (irreversible); no attempt record is written to the database for email login.
 - Login attempt record: at most 1 day if not verified; at most 24 hours if verified; then deleted automatically.
 - Rate-limit counters: up to one hour.
 - Account mobile number, profile, photo, saved places, followed entities and preferences: as long as the account exists.
@@ -178,6 +189,7 @@ To sign you in securely with a one-time code, to prevent abuse and mass SMS send
 
 ## Who we share it with
 - **SMS provider Mediana (Iran)**: your mobile number and the code, only to send the login code.
+- **Our hosting provider's email server** ([to be completed by the owner — host name and country]): your email address and the text of the code or security notice, only to deliver that email.
 - **Google Analytics 4** (through the Site Kit plugin): visit statistics using the cookies `_ga` and `_ga_<ID>`; data stays in Google for 14 months. Google signals and ad personalisation are off.
 - **OpenFreeMap**: when the interactive map is shown, your browser contacts this service directly, and it sees your IP address and browser information. If it is unreachable, a map stored on our own server is used instead.
 - **Weather services (MET Norway, Open-Meteo)**: our server requests data for places on the site (not your location); nothing about you is sent.
@@ -223,7 +235,9 @@ privacy@topersia.com
 ## ما الذي نجمعه
 **إذا كنت تتصفح الصفحات فقط (دون حساب):** للحد من إساءة الاستخدام نحتفظ فقط ببصمة مُجزّأة (hash) غير قابلة للعكس من عنوان IP الخاص بك في ذاكرة مؤقتة، وذلك فقط عند طلب رمز الدخول. تُحفَظ تفضيلات العرض (مثل الوضع الداكن وحجم النص) واسم آخر زر ملاحة استخدمته ونمط الخريطة في متصفحك أنت فقط ولا تغادره. نُحصي النقرات على أزرار المساعد الذكي دون الكشف عن الهوية، ودون عنوان IP أو معلومات المتصفح. ولإحصاءات الزيارة نستخدم Google Analytics 4 (انظر «مع من نشاركها» وجدول ملفات تعريف الارتباط).
 
-**إذا أنشأت حسابًا:** رقم هاتف محمول إيراني، وهو لازم لإرسال رمز الدخول؛ والاسم الذي تدخله بنفسك (الاسم والكنية)، والبلد واللغة ونمط السفر (اختياري)؛ وصورة الملف (اختيارية)؛ والأماكن التي تحفظها والجهات التي تتابعها؛ وتفضيلات العرض المتزامنة؛ والتقييمات التي تكتبها (التقدير والعنوان والنص)؛ ووقت آخر تسجيل دخول (لقاعدة «الحساب الخامل» أدناه). يُنشأ اسم الدخول والبريد الإلكتروني للحساب عشوائيًا، ولا يظهر رقمك أبدًا في الاسم العام؛ اسم العرض هو الاسم الذي كتبته، أو اسم محايد مثل «مسافر 4821» إن لم تكتب اسمًا. تسجيل الدخول بالهاتف المحمول يعمل حاليًا بالأرقام الإيرانية فقط.
+**إذا أنشأت حسابًا:** رقم هاتف محمول إيراني أو عنوان بريد إلكتروني (أو كلاهما)، وهو لازم لإرسال رمز الدخول؛ والاسم الذي تدخله بنفسك (الاسم والكنية)، والبلد واللغة ونمط السفر (اختياري)؛ وصورة الملف (اختيارية)؛ والأماكن التي تحفظها والجهات التي تتابعها؛ وتفضيلات العرض المتزامنة؛ والتقييمات التي تكتبها (التقدير والعنوان والنص)؛ ووقت آخر تسجيل دخول (لقاعدة «الحساب الخامل» أدناه). يُنشأ اسم الدخول للحساب عشوائيًا، ولا يظهر رقمك ولا بريدك أبدًا في الاسم العام أو التقييمات أو البيانات المنظمة للصفحة؛ اسم العرض هو الاسم الذي كتبته، أو اسم محايد مثل «مسافر 4821» إن لم تكتب اسمًا. تسجيل الدخول بالهاتف المحمول يعمل حاليًا بالأرقام الإيرانية فقط، وبالبريد الإلكتروني بأي عنوان صالح. يمكنك إضافة البريد والهاتف كليهما إلى حسابك؛ ويُؤكَّد كل منهما برمز يُرسل إليه، ويمكن تغيير كل منهما مرة كل 30 يومًا.
+
+**الرسائل التي نرسلها:** فقط ما يحتاجه حسابك — رمز الدخول، وتنبيه أمني عند تغيير بريد الحساب أو هاتفه. لا رسائل تسويقية. لا تحتوي رسائلنا على بكسل تتبع أو رابط متتبَّع أو صورة من مصدر خارجي.
 
 **صورة الملف:** إن أضفتها تُحفَظ على هذا الموقع، لا على Gravatar ولا أي خدمة أخرى. تُقبل فقط صيغ JPG وPNG وWebP حتى 2 ميغابايت، وتُحوَّل إلى صورة WebP مربعة صغيرة، وتُزال في هذا التحويل البيانات الخفية للصورة (كالموقع الجغرافي ومواصفات الكاميرا). وإن لم تضف صورة تظهر أيقونة بسيطة يُشتق لونها من معرّف حسابك.
 
@@ -231,7 +245,7 @@ privacy@topersia.com
 لتسجيل دخولك بأمان برمز لمرة واحدة، ومنع إساءة الاستخدام والإرسال الجماعي للرسائل النصية، وعرض ملفك وقوائمك الشخصية، ونشر التقييمات بعد موافقة المشرف، والحفاظ على تفضيلات العرض بين أجهزتك، ومعرفة الصفحات التي تُقرأ.
 
 ## مدة الاحتفاظ
-- رمز المرة الواحدة: 5 دقائق. وفي سجلات محاولات الدخول يُحفَظ رقمك على شكل بصمة مُجزّأة (غير قابلة للعكس) فقط.
+- رمز المرة الواحدة: 5 دقائق بالرسائل النصية و10 دقائق بالبريد؛ ولا يُحفَظ الرمز نفسه إلا على شكل بصمة مُجزّأة. وفي سجلات محاولات الدخول يُحفَظ رقمك على شكل بصمة مُجزّأة (غير قابلة للعكس) فقط؛ ولا يُكتب سجل محاولة في قاعدة البيانات للدخول بالبريد.
 - سجل محاولة الدخول: يوم واحد على الأكثر إن لم يُؤكَّد، و24 ساعة على الأكثر إن أُكِّد؛ ثم يُحذف تلقائيًا.
 - عدّادات تحديد المعدل: حتى ساعة واحدة.
 - رقم الهاتف والملف الشخصي والصورة والأماكن المحفوظة والمتابَعات والتفضيلات: ما دام الحساب قائمًا.
@@ -242,6 +256,7 @@ privacy@topersia.com
 
 ## مع من نشاركها
 - **مزوّد الرسائل النصية Mediana (إيران)**: رقم الهاتف والرمز، فقط لإرسال رمز الدخول.
+- **خادم البريد لدى مزوّد استضافة الموقع** ([يُستكمل من المالك — اسم المزوّد وبلده]): عنوان بريدك ونص رسالة الرمز أو التنبيه الأمني، فقط لتسليم تلك الرسالة.
 - **Google Analytics 4** (عبر إضافة Site Kit): إحصاءات الزيارة باستخدام ملفي `_ga` و`_ga_<المعرّف>`؛ وتبقى البيانات في Google مدة 14 شهرًا. إشارات Google (Google signals) وتخصيص الإعلانات متوقفان.
 - **OpenFreeMap**: عند عرض الخريطة التفاعلية يتصل متصفحك مباشرة بهذه الخدمة فترى عنوان IP ومعلومات متصفحك. إن تعذّر الوصول إليها تُستخدم خريطة مخزّنة على خادمنا.
 - **خدمات الطقس (MET Norway وOpen-Meteo)**: يطلب خادمنا بيانات أماكن الموقع (لا موقعك)؛ ولا يُرسَل أي شيء عنك.

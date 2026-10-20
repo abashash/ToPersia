@@ -234,6 +234,107 @@ async function guest() {
 	info( 'میزبان‌های بیرونی که سرور هنگام این بارها صدا زد: ' + ( hosts.join( '، ' ) || 'هیچ' ) );
 }
 
+/* ══ ورود ایمیلی — کاربر واقعی در مرورگر (۱٫۱۴٫۰ · P5-D391) ════════════
+   صفحهٔ انگلیسی (پیش‌فرض: زبانهٔ ایمیل). هیچ نامه‌ای نمی‌رود (ثابت‌های SMTP محلی نیستند)؛ کد از نامه خوانده نمی‌شود:
+   توکن از پاسخ AJAX مرورگر و کد شناخته‌شده با tests/local-email-code.php (HMAC) روی همان توکن می‌نشیند.
+   سناریو: زبانه و فلش‌ها · ارسال · کد غلط · منقضی · سقف · ثبت‌نام · ورود دوباره همان حساب. حساب در پایان پاک می‌شود. */
+async function emailFlow() {
+	const ec   = ( ...a ) => JSON.parse( php( [ 'tests/local-email-code.php' ].concat( a.map( String ) ) ) );
+	const uniq = 'tpuf' + Date.now().toString( 36 );
+	const mail = uniq + '@example.org';
+	const t0   = Math.floor( Date.now() / 1000 ) - 2;
+	const browser = await MAIN.launch();
+	try {
+		head( 'ورود ایمیلی — مهمان در مرورگر (en)' );
+		const EN = ENV.base + '/en/province/isfahan/';
+		const send = async ( page ) => {
+			const resP = page.waitForResponse( r => isAction( r, 'topersia_email_code_send' ), { timeout: 60000 } );
+			await page.click( '#tp-uc-login #tp-send-email' );
+			const res = await resP;
+			return { status: res.status(), body: await res.json().catch( () => ( {} ) ) };
+		};
+		const verify = async ( page, code ) => {
+			await page.fill( '#tp-uc-login #tp-otp', code );
+			const resP = page.waitForResponse( r => isAction( r, 'topersia_email_code_verify' ), { timeout: 60000 } );
+			await page.click( '#tp-uc-login #tp-verify-otp' );
+			const res = await resP;
+			await page.waitForTimeout( 400 );
+			return { status: res.status(), msg: await page.textContent( '#tp-uc-login #tp-auth-message' ) };
+		};
+		const openAt = async ( ctx ) => {
+			const page = await load( ctx, EN );
+			await page.evaluate( () => window.ToPersiaUserCore.openLogin( { reason: 'review' } ) );
+			await page.waitForSelector( '#tp-uc-login:not([hidden]) #tp-email', { timeout: 60000 } );
+			return page;
+		};
+
+		let { ctx } = await context( browser );
+		let page = await openAt( ctx );
+		const ui = await page.evaluate( () => {
+			const q = s => document.querySelector( '#tp-uc-login ' + s );
+			return { sel: q( '[aria-selected="true"]' ).getAttribute( 'data-tp-method' ), mobileHidden: q( '#tp-auth-panel-mobile' ).hidden, dir: q( '#tp-email' ).getAttribute( 'dir' ),
+				focus: document.activeElement && document.activeElement.id, tablist: !! q( '[role="tablist"][aria-label]' ), code: q( '#tp-otp' ).getAttribute( 'autocomplete' ) };
+		} );
+		check( 'صفحهٔ en: زبانهٔ ایمیل پیش‌فرض، پنل موبایل پنهان، ورودی ایمیل dir=ltr و فوکوس روی آن؛ الگوی ARIA tabs؛ کد one-time-code',
+			'email' === ui.sel && ui.mobileHidden && 'ltr' === ui.dir && 'tp-email' === ui.focus && ui.tablist && 'one-time-code' === ui.code, JSON.stringify( ui ) );
+		await page.focus( '#tp-uc-login #tp-auth-tab-email' );
+		await page.keyboard.press( 'ArrowLeft' );
+		const k1 = await page.evaluate( () => document.querySelector( '#tp-uc-login [aria-selected="true"]' ).getAttribute( 'data-tp-method' ) );
+		await page.keyboard.press( 'ArrowRight' );
+		const k2 = await page.evaluate( () => document.querySelector( '#tp-uc-login [aria-selected="true"]' ).getAttribute( 'data-tp-method' ) );
+		check( 'فلش‌ها جهت صفحه را می‌گیرند (ltr: چپ ← موبایل، راست ← ایمیل)  P5-D243', 'mobile' === k1 && 'email' === k2, k1 + '/' + k2 );
+
+		await page.fill( '#tp-uc-login #tp-email', mail );
+		let s = await send( page );
+		const shown = await page.textContent( '#tp-uc-login #tp-auth-message' );
+		check( 'ارسال کد: ۲۰۰ با توکن و پیام یکسان «اگر نشانی درست باشد…»؛ جعبهٔ کد باز شد', 200 === s.status && s.body.success && 32 === ( s.body.data.token || '' ).length && /If the address is valid/.test( shown || '' )
+			&& await page.isVisible( '#tp-uc-login #tp-otp' ), JSON.stringify( s ) );
+		ec( 'set', s.body.data.token, '135790' );
+		let v = await verify( page, '135792' );
+		check( 'کد غلط: ۴۲۲ و پیام خطا؛ هنوز مهمان', 422 === v.status && /incorrect/i.test( v.msg || '' ) && ! ( await ctx.cookies() ).some( c => /^wordpress_logged_in/.test( c.name ) ), JSON.stringify( v ) );
+		ec( 'expire', s.body.data.token );
+		v = await verify( page, '135790' );
+		check( 'کد منقضی: ۴۱۰ و پیام «منقضی»', 410 === v.status && /expired/i.test( v.msg || '' ), JSON.stringify( v ) );
+
+		ec( 'cap', mail );
+		s = await send( page );
+		check( 'سقف هر نشانی: ۴۲۹ با پیام «بعداً دوباره تلاش کنید»، بی توکن', 429 === s.status && ! s.body.success && /later/i.test( ( s.body.data || {} ).message || '' ), JSON.stringify( s ) );
+		ec( 'cleanup', uniq );
+
+		s = await send( page );
+		ec( 'set', s.body.data.token, '246801' );
+		await page.fill( '#tp-uc-login #tp-otp', '246801' );
+		const nav = page.waitForNavigation( { timeout: 120000 } ).catch( () => null );
+		await page.click( '#tp-uc-login #tp-verify-otp' );
+		await nav;
+		const logged = ( await ctx.cookies() ).some( c => /^wordpress_logged_in/.test( c.name ) );
+		const st1 = ec( 'state', mail, t0 );
+		check( 'ثبت‌نام با ایمیل: نشست ساخته شد و به همان صفحه برگشت؛ حساب مشترک تازه با نام خنثی و زمان تأیید', logged && /\/en\/province\/isfahan\//.test( page.url() ) && st1.user > 0 && 'subscriber' === st1.role && st1.neutral && st1.verified, JSON.stringify( [ logged, page.url(), st1 ] ) );
+		const html = await page.content();
+		check( 'صفحهٔ واردشده: ایمیل کاربر در HTML نیست (نام عمومی، JSON-LD، پنل)', ! html.includes( uniq ), '' );
+		await ctx.close();
+
+		( { ctx } = await context( browser ) );
+		page = await openAt( ctx );
+		await page.fill( '#tp-uc-login #tp-email', mail );
+		ec( 'cool', mail );
+		s = await send( page );
+		ec( 'set', s.body.data.token, '112358' );
+		await page.fill( '#tp-uc-login #tp-otp', '112358' );
+		const nav2 = page.waitForNavigation( { timeout: 120000 } ).catch( () => null );
+		await page.click( '#tp-uc-login #tp-verify-otp' );
+		await nav2;
+		const st2 = ec( 'state', mail, t0 );
+		check( 'ورود دوباره با همان ایمیل ← همان حساب', ( await ctx.cookies() ).some( c => /^wordpress_logged_in/.test( c.name ) ) && st2.user === st1.user, JSON.stringify( [ st1.user, st2.user ] ) );
+		check( 'هیچ ایمیلی از این ماشین نرفت: لاگ «فرستاده شد» صفر (ثبت‌شده‌ها: ' + st2.captured + ')', 0 === st2.sent, JSON.stringify( st2 ) );
+		await ctx.close();
+	} finally {
+		const rm = ec( 'cleanup', uniq );
+		info( 'حساب ایمیلی آزمون پاک شد: ' + rm.removed );
+		await browser.close();
+	}
+}
+
 /* ══ واردشده ════════════════════════════════════════════════════════ */
 async function member() {
 
@@ -453,6 +554,7 @@ const made = [];
 	const base = state();
 	try {
 		await guest();
+		await emailFlow();
 		await member();
 	} finally {
 		/* ذخیره و دنبال را خودِ جریان برگرداند؛ این‌جا خروجی‌های ساخته‌شده و

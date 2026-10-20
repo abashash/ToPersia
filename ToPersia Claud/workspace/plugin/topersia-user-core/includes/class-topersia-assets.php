@@ -62,6 +62,8 @@ final class ToPersia_Assets {
                می‌شود، پس همین مقدار هم با همان HTML کش می‌شود و هم‌خوان
                می‌ماند. */
             'loggedIn'  => is_user_logged_in(),
+            /* ۱٫۱۴٫۰ — زبان نامۀ کد ایمیلی = زبان صفحه (LOGIN.md §۳-پ)؛ HTML مهمان به ازای زبان کش می‌شود */
+            'lang'      => class_exists('ToPersia_I18n') ? ToPersia_I18n::current_language() : 'fa',
             'loginUrl'  => class_exists('ToPersia_Admin') ? ToPersia_Admin::account_url() : home_url('/'),
             'i18n'      => class_exists('ToPersia_I18n') ? [
                 'otpSending'    => ToPersia_I18n::t('otp_sending'),
