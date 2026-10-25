@@ -126,7 +126,7 @@ t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', fal
 
 /* پوشش نقشه */
 /* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است؛ kind=date تاریخ رویداد E1 · E3 · E5 (P5-D357) است، نه فیلد G */
-$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ); } );   /* P5-D450 جدا سنجیده می‌شود */
+$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ) && 'visit' !== $f['zone'] && empty( $f['b29'] ); } );   /* P5-D450 و فیلدهای بازگشتهٔ دستهٔ ۲۹ جدا سنجیده می‌شوند */
 $map_count = count( $g_map );
 t( 'نقشه: دقیقاً ۵۷ فیلد G (بیرون از ناحیۀ stat)', 57 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
@@ -2367,6 +2367,55 @@ t( 'F-15: کوه — خانهٔ چهارم «دشواری صعود» کلید tr
 	'trekking_difficulty' === $f15_cell[3] && $f15_has( $f15_skin, 'trekking_difficulty' ) && '42' === (string) ( topersia_g_map()['trekking_difficulty']['glossary'] ?? '' )
 	&& 'دشواری صعود' === topersia_g_stat_label( 'trekking_difficulty' ) && ! $f15_has( json_decode( str_replace( '"trekking_difficulty"', '"trek_difficulty"', wp_json_encode( $f15_skin ) ), true ), 'trekking_difficulty' ),
 	implode( ',', $f15_cell ) );
+/* ── دستهٔ ۲۹ بند ۱–۳: بلوک «بازدید» در «اطلاعات سفر» — فقط ردیف پر، هرگز «—»؛ گزینه با برچسب؛ ساعت جدول با جای
+   نشان باز/بسته؛ بلیت با «آخرین بررسی» و پنهان پس از ۱۸ ماه؛ فیلد ۴ خانه تکرار نمی‌شود؛ «نامعلوم» نمایش نیست ── */
+$b29_keep = $GLOBALS['tp_meta'][61] ?? array();
+$b29_now  = strtotime( '2026-10-26 12:00:00' );
+$GLOBALS['tp_meta'][61] = array_merge( $b29_keep, array(
+	'opening_hours_spec'   => array( 'item-0' => array( 'oh_day' => 'sat', 'oh_from' => '09:00', 'oh_to' => '17:30', 'oh_closed' => 'false' ), 'item-1' => array( 'oh_day' => 'fri', 'oh_from' => '', 'oh_to' => '', 'oh_closed' => 'true' ) ),
+	'ticket_price_foreign' => '5000000',
+	'ticket_price_local'   => '300000',
+	'ticket_price_checked' => '2026-06-01',
+	'best_time_of_day'     => array( 'early_morning', 'sunset' ),
+	'dress_requirement'    => 'chador',
+	'non_muslim_entry'     => 'unknown',
+	'wheelchair_access'    => 'unknown',
+	'photo_allowed'        => '',
+	'visiting_hours'       => 'هر روز جز تعطیلات',
+	'active_worship'       => 'false',
+	'suggested_duration'   => '1_2h',
+) );
+$b29     = topersia_g_visit_block( 61, $b29_now );
+$b29_old = ( function () use ( $b29_now ) { $GLOBALS['tp_meta'][61]['ticket_price_checked'] = '2024-12-01'; $h = topersia_g_visit_block( 61, $b29_now ); $GLOBALS['tp_meta'][61]['ticket_price_checked'] = '2026-06-01'; return $h; } )();
+$b29_card = r( 61, 'tp_relgrid', array( 'rel' => 'practical' ) );
+$GLOBALS['tp_meta'][61] = $b29_keep;
+$b29_cells = topersia_g_stat_keys( 61 );
+t( 'اطلاعات سفر (دستهٔ ۲۹): بلوک «بازدید» در کارت؛ ساعت جدول (شنبه ۰۹:۰۰–۱۷:۳۰ · جمعه بسته) با جای نشان پنهان و دادهٔ JS؛ گزینهٔ چندتایی با برچسب؛ «نامعلوم» و خالی و سوییچ خاموش نمی‌آیند؛ هیچ «—»',
+	false !== strpos( $b29_card, '<dl class="tp-visit">' ) && false !== strpos( $b29, '<span class="tp-open" data-tp-open hidden></span>' )
+	&& false !== strpos( $b29, '<th scope="row">شنبه</th><td><span dir="ltr">۰۹:۰۰–۱۷:۳۰</span></td>' ) && false !== strpos( $b29, '<th scope="row">جمعه</th><td>بسته</td>' )
+	&& false !== strpos( html_entity_decode( $b29, ENT_QUOTES ), '"d":"sat","f":"09:00","t":"17:30","c":0' )
+	&& false !== strpos( $b29, '<dd>صبح زود، غروب</dd>' ) && false !== strpos( $b29, '<dd>چادر لازم</dd>' )
+	&& false === strpos( $b29, 'نامعلوم' ) && false === strpos( $b29, '>عکاسی<' ) && false === strpos( $b29, 'محل عبادت فعال' ) && false === strpos( $b29, '—<' ),
+	$b29 );
+t( 'اطلاعات سفر (دستهٔ ۲۹): بهای بلیت یک ردیف (خارجی · داخلی، ریال) با «آخرین بررسی»؛ بررسیِ کهنه‌تر از ۱۸ ماه ← ردیف بلیت نیست — جهش',
+	false !== strpos( $b29, '<dt>بهای بلیت</dt>' ) && false !== strpos( $b29, 'خارجی: ۵٬۰۰۰٬۰۰۰ <i class="tp-u">ریال</i>' ) && false !== strpos( $b29, 'آخرین بررسی:' )
+	&& false === strpos( $b29_old, 'بهای بلیت' ) && false !== strpos( $b29_old, 'ساعت بازدید' ) );
+t( 'اطلاعات سفر (دستهٔ ۲۹ بند ۲): فیلدی که در ۴ خانهٔ سربرگ همین نوع است (مدت بازدید) در بلوک تکرار نمی‌شود',
+	in_array( 'suggested_duration', $b29_cells, true ) ? false === strpos( $b29, 'مدت بازدید' ) : false !== strpos( $b29, 'مدت بازدید' ), implode( ',', $b29_cells ) );
+/* دستهٔ ۲۹ بند ۲: نشان «ثبت ملی» (سوییچ روشن، بی سال) — خاموش ← نیست */
+$b29_bk = $GLOBALS['tp_meta'][61] ?? array();
+$GLOBALS['tp_meta'][61]['national_registration'] = 'true';
+$b29_on  = r( 61, 'tp_badges' );
+$GLOBALS['tp_meta'][61]['national_registration'] = 'false';
+$b29_off = r( 61, 'tp_badges' );
+$GLOBALS['tp_meta'][61] = $b29_bk;
+t( 'نشان «ثبت ملی» (دستهٔ ۲۹ بند ۲): سوییچ روشن ← کاشی نشان «ثبت ملی»؛ خاموش ← نیست — جهش', false !== strpos( $b29_on, '<b>ثبت ملی</b>' ) && false === strpos( $b29_off, 'ثبت ملی' ) );
+
+/* دستهٔ ۲۹ بند ۳: نشان باز/بسته سمت کاربر — منطقهٔ زمانی تهران، فقط با ردیف امروز؛ HTML سرور بی نتیجه (پنهان) */
+$b29_js = (string) file_get_contents( TP_PLUGIN_DIR . 'assets/topersia-g-zones.js' );
+t( 'باز/بسته (دستهٔ ۲۹ بند ۳): جاوااسکریپت با Intl و Asia/Tehran، بی ردیف امروز هیچ نشانی؛ سرور فقط جای پنهان می‌گذارد (HTML کش‌شده ثابت)',
+	false !== strpos( $b29_js, "timeZone: 'Asia/Tehran'" ) && false !== strpos( $b29_js, "if ( ! day || ! today.length ) {" ) && false !== strpos( $b29_js, 'badge.hidden = false;' )
+	&& false === strpos( (string) file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), "'باز است'" ) );
 /* ── P5-D450 (دستهٔ ۲۸ بند ۲ و ۳): هر فیلد تازه در FIELDMAP (برچسب، نوع، واژه‌نامه با نام)، کاتالوگ fa/en/ar،
    wpml-config (کپی/ترجمه)، و ★ در بستهٔ درون‌ریزی (هسته) — همه با scripts/lib/tp-p5d450.php یکی؛ رد/موکول‌ها نیستند ── */
 require_once __DIR__ . '/../scripts/lib/tp-p5d450.php';

@@ -952,6 +952,24 @@ html body .tp-page .tp-practical-grid a:hover{
 html body .tp-page .tp-neighbors a:hover .tp-n-dir,
 html body .tp-page .tp-practical-grid a:hover span{color:var(--tp-primary-text)}
 
+/* دستۀ ۲۹ — بلوک «بازدید» در «اطلاعات سفر»: فهرست برچسب/مقدار، جدول ساعت، نشان باز/بسته. برچسب ریز
+   از --tp-text (P5-D184)؛ رنگ‌ها فقط توکن. */
+html body .tp-page .tp-visit{margin:12px 0 0;display:grid;gap:10px}
+html body .tp-page .tp-practical-grid + .tp-visit{border-block-start:1px solid var(--tp-tile-border);padding-block-start:12px}
+html body .tp-page .tp-visit__row{display:grid;gap:2px}
+html body .tp-page .tp-visit dt{font-size:calc(.72 * var(--tp-rem));font-weight:700;color:var(--tp-text);margin:0}
+html body .tp-page .tp-visit dd{margin:0;color:var(--tp-text);font-size:calc(.86 * var(--tp-rem));line-height:1.7;white-space:pre-line;overflow-wrap:anywhere}
+html body .tp-page .tp-visit dd a{color:var(--tp-primary-text);text-decoration:underline;text-underline-offset:2px}
+html body .tp-page .tp-visit__list{margin:0;padding-inline-start:1.1em}
+html body .tp-page .tp-visit__note{display:block;font-size:calc(.72 * var(--tp-rem));color:var(--tp-text)}
+html body .tp-page .tp-hours{border-collapse:collapse;inline-size:100%;font-size:calc(.82 * var(--tp-rem))}
+html body .tp-page .tp-hours th,html body .tp-page .tp-hours td{padding:3px 0;text-align:start;font-weight:400;color:var(--tp-text);border-block-end:1px solid var(--tp-tile-border)}
+html body .tp-page .tp-hours th{font-weight:700;inline-size:45%}
+html body .tp-page .tp-open{display:inline-block;margin-block-end:6px;padding:2px 10px;border-radius:999px;font-size:calc(.72 * var(--tp-rem));font-weight:700;border:1px solid currentColor}
+html body .tp-page .tp-open[hidden]{display:none}
+html body .tp-page .tp-open--yes{color:var(--tp-primary-text)}
+html body .tp-page .tp-open--no{color:var(--tp-text)}
+
 /* خانواده‌های فرهنگ — هر عضو کاشی است، نه قرص گرادیانی.  P5-D245 */
 html body .tp-page .tp-culture-card .tp-culture-card__list a{
   background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);
