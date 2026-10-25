@@ -23,6 +23,29 @@
 
 const { launch } = require( './cdp.js' );
 
+/* داور لایهٔ بیرونی (P5-D228) — جدا تا پیش از هر صفحه روی نمونه‌های شناخته‌شده کالیبره شود (دستهٔ ۲۶ بند ۲). */
+function portalOk( r ) {
+	const kinds = [ r.mnav, r.sheet, r.modals ];
+	const total = kinds.reduce( ( a, k ) => a + k.n, 0 );
+	if ( ! total ) { return ! r.exists; }
+	return r.exists && 'contents' === r.display && r.pageFirst && kinds.every( k => k.n === k.in );
+}
+{
+	const k = ( n, i ) => ( { n, in: i } );
+	const ok = { exists: true, display: 'contents', pageFirst: true, mnav: k( 1, 1 ), sheet: k( 1, 1 ), modals: k( 6, 6 ) };
+	const cases = [
+		[ 'کامل', ok, true ],
+		[ 'بی مودال (برنامه/ثبت)', Object.assign( {}, ok, { modals: k( 0, 0 ) } ), true ],
+		[ 'هیچ (تقویم)', { exists: false, display: '', pageFirst: true, mnav: k( 0, 0 ), sheet: k( 0, 0 ), modals: k( 0, 0 ) }, true ],
+		[ 'جهش: مودال بیرون ظرف', Object.assign( {}, ok, { modals: k( 6, 5 ) } ), false ],
+		[ 'جهش: نوار بی ظرف', { exists: false, display: '', pageFirst: true, mnav: k( 1, 0 ), sheet: k( 0, 0 ), modals: k( 0, 0 ) }, false ],
+		[ 'جهش: ظرف جعبه می‌سازد', Object.assign( {}, ok, { display: 'block' } ), false ],
+		[ 'جهش: ظرف تهی', { exists: true, display: 'contents', pageFirst: true, mnav: k( 0, 0 ), sheet: k( 0, 0 ), modals: k( 0, 0 ) }, false ],
+	];
+	const bad = cases.filter( ( [ , r, want ] ) => portalOk( r ) !== want ).map( c => c[0] );
+	if ( bad.length ) { console.error( '  ✖ داور لایهٔ بیرونی نادرست: ' + bad.join( ' · ' ) ); process.exit( 2 ); }
+}
+
 const chrome = process.argv[2];
 const url    = process.argv[3];
 
@@ -196,17 +219,17 @@ const near = ( a, b, tol ) => Math.abs( a - b ) <= ( tol || 1 );
 			/* ── لایهٔ بیرونی — P5-D228 ── */
 			const portal = await page.evaluate( `(() => {
 				const p = document.querySelector( 'body > .tp-page.tp-portal' );
-				const inside = sel => document.querySelectorAll( sel ).length > 0
-					&& [].every.call( document.querySelectorAll( sel ), el => !! p && p.contains( el ) );
+				const kind = sel => { const a = [].slice.call( document.querySelectorAll( sel ) ); return { n: a.length, in: a.filter( el => !! p && p.contains( el ) ).length }; };
 				return {
 					exists: !! p, display: p ? getComputedStyle( p ).display : '',
-					mnav: inside( '.tp-mnav' ), sheet: inside( '.tp-sheet' ), modals: inside( '.tp-modal, .tp-gallery-modal' ),
+					mnav: kind( '.tp-mnav' ), sheet: kind( '.tp-sheet' ), modals: kind( '.tp-modal, .tp-gallery-modal' ),
 					pageFirst: document.querySelector( '.tp-page' ) !== p
 				};
 			})()` );
-			check( 'لایهٔ بیرونی: نوار پایین، برگهٔ بخش‌ها و همهٔ مودال‌ها در ظرفی در body — display:contents',
-				portal.exists && 'contents' === portal.display && portal.mnav && portal.sheet && portal.modals && portal.pageFirst,
-				JSON.stringify( portal ) );
+			/* صفحهٔ کم‌بخش (کمتر از دو بخش در ناوبری) نوار پایین و برگه ندارد و بی فهرست/گالری مودال ندارد —
+			   پس ادعا «هر چه هست در ظرف» است، نه «همه هست» (دستهٔ ۲۶ بند ۲). */
+			check( 'لایهٔ بیرونی: هر نوار پایین، برگهٔ بخش‌ها و مودالی که صفحه دارد در ظرفی در body — display:contents؛ بی هیچ‌کدام، بی ظرف',
+				portalOk( portal ), JSON.stringify( portal ) );
 
 			if ( vp.mobile ) {
 				await mobileChecks( page );
@@ -320,6 +343,15 @@ async function liveDesktopChecks( page ) {
 /* ═══ دسکتاپ — نوار بخش‌ها و هدر چسبان  P5-D223 ═══════════════════════ */
 async function desktopChecks( page ) {
 
+	/* صفحهٔ کم‌بخش (کمتر از دو بخش در ناوبری) نه نوار بخش‌ها دارد نه نوار پایین — هر دو از یک فهرست
+	   (`count( $nav ) > 1`)؛ پس سنجه‌های ناوبری بی‌موضوع‌اند، ولی یکی بی دیگری ایراد است (دستهٔ ۲۶ بند ۲). */
+	const navHere = await page.evaluate( '[ !! document.querySelector( ".tp-snav" ), !! document.querySelector( ".tp-mnav" ) ]' );
+	check( 'نوار بخش‌ها و نوار پایین با هم: هر دو یا هیچ‌کدام (کمتر از دو بخش)', navHere[0] === navHere[1], JSON.stringify( navHere ) );
+	if ( ! navHere[0] ) {
+		rows.push( '  · دسکتاپ: این صفحه کمتر از دو بخش دارد و نوار بخش‌ها ندارد — سنجه‌های نوار و هدر چسبان بی‌موضوع' );
+		return;
+	}
+
 	if ( LIVE ) {
 		return liveDesktopChecks( page );
 	}
@@ -427,6 +459,16 @@ async function desktopChecks( page ) {
 /* ═══ موبایل — ناوبری و چیدمان  P5-D228 · ۴٫۲٫۳ بند ۳ و ۴ ═══════════════ */
 async function mobileChecks( page ) {
 
+	/* صفحهٔ کم‌بخش (کمتر از دو بخش در ناوبری) نه نوار بخش‌ها دارد نه نوار پایین — هر دو از یک فهرست
+	   (`count( $nav ) > 1`)؛ پس سنجه‌های ناوبری بی‌موضوع‌اند، ولی یکی بی دیگری ایراد است (دستهٔ ۲۶ بند ۲). */
+	const navHere = await page.evaluate( '[ !! document.querySelector( ".tp-snav" ), !! document.querySelector( ".tp-mnav" ) ]' );
+	check( 'نوار بخش‌ها و نوار پایین با هم: هر دو یا هیچ‌کدام (کمتر از دو بخش)', navHere[0] === navHere[1], JSON.stringify( navHere ) );
+	navBlock: {
+	if ( ! navHere[1] ) {
+		rows.push( '  · موبایل: این صفحه کمتر از دو بخش دارد و نوار پایین و برگه ندارد — سنجه‌های ناوبری بی‌موضوع' );
+		break navBlock;
+	}
+
 	const m0 = await page.evaluate( `(async () => {
 		await __tp.go( 0 );
 		return {
@@ -518,6 +560,7 @@ async function mobileChecks( page ) {
 		sheet.open && sheet.items.length >= ( LIVE ? 2 : 8 ) && sheet.items.every( x => x.svg && '' !== x.label ), JSON.stringify( sheet.items.filter( x => ! x.svg || '' === x.label ) ) );
 	check( 'برگهٔ بخش‌ها: کلیک روی برچسب برگه را می‌بندد و بخش درست زیر هدر می‌نشیند',
 		sheet.closed && near( sheet.sectionTop, sheet.header, 1.5 ), JSON.stringify( { closed: sheet.closed, id: sheet.id, top: sheet.sectionTop, header: sheet.header } ) );
+	}
 
 	/* سرفصل‌ها: «همه … ←» در ردیفِ عنوان.  ۴٫۲٫۳ بند ۴ */
 	const heads = await page.evaluate( `(async () => {
@@ -551,6 +594,10 @@ async function mobileChecks( page ) {
 		}
 		return out;
 	})()` );
+	if ( LIVE && ! gaps.length ) {
+		rows.push( '  · موبایل: صفحه فقط یک باکس دارد — سنجهٔ فاصلهٔ دو باکس بی‌موضوع' );
+		return;
+	}
 	const tight = gaps.filter( g => g.gap < 16 );
 	check( 'موبایل: فاصلهٔ هر دو باکسِ پشت‌سرهم دست‌کم ۱۶ پیکسل — کل صفحه',
 		gaps.length >= ( LIVE ? 1 : 6 ) && ! tight.length, JSON.stringify( tight.length ? tight : { pairs: gaps.length, min: Math.min.apply( null, gaps.map( g => g.gap ) ) } ) );
