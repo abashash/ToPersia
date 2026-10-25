@@ -106,8 +106,8 @@ foreach ( $cells as $type => $list ) {
 	}
 }
 $city = topersia_pack_schema( 'tp_city' );
-s4( 'بستهٔ درون‌ریزی: هر فیلد «الزامی» STAT_CELLS در اسکیمای زندهٔ نوعش هست و required است (فقط پست تازه — topersia_pack_plan create)؛ elevation_m شهر الزامی نشد',
-	! $req_bad && ! empty( $city['fields']['area_km2']['required'] ) && empty( $city['fields']['elevation_m']['required'] ), implode( ' · ', $req_bad ) );
+s4( 'بستهٔ درون‌ریزی: هر فیلد «الزامی» STAT_CELLS در اسکیمای زندهٔ نوعش هست و required است (فقط پست تازه — topersia_pack_plan create)؛ founded_year شهر (بیرون از خانه‌ها) الزامی نشد؛ elevation_m شهر از F-10 الزامی',
+	! $req_bad && ! empty( $city['fields']['area_km2']['required'] ) && ! empty( $city['fields']['elevation_m']['required'] ) && isset( $city['fields']['founded_year'] ) && empty( $city['fields']['founded_year']['required'] ), implode( ' · ', $req_bad ) );
 
 $g = $GLOBALS['s4'];
 echo "\n  گذشته: {$g[0]}   افتاده: {$g[1]}\n";
