@@ -548,3 +548,19 @@ msgstr "عمليات الإنشاء من المدير يوميًا"
 #: includes/class-tp-ai-admin.php
 msgid "Metabox, bulk action and automatic generation together. The site daily cap of ToPersia Render also applies."
 msgstr "صندوق المقالة والإجراء الجماعي والإنشاء التلقائي معًا. ينطبق أيضًا الحد اليومي للموقع في ToPersia Render."
+
+#. translators: 1: items, 2: min items, 3: max items, 4: min characters, 5: max characters
+#: includes/class-tp-ai-admin.php
+#, php-format
+msgid "%1$d items (%2$d-%3$d, each %4$d-%5$d characters)"
+msgstr "%1$d عناصر (%2$d-%3$d، كل منها %4$d-%5$d حرفًا)"
+
+#. translators: 1: characters, 2: min, 3: max
+#: includes/class-tp-ai-admin.php
+#, php-format
+msgid "%1$d characters (%2$d-%3$d)"
+msgstr "%1$d حرفًا (%2$d-%3$d)"
+
+#: includes/class-tp-ai-admin.php
+msgid "Needs review — not shown on the page"
+msgstr "بحاجة إلى مراجعة — لا يظهر على الصفحة"

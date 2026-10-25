@@ -18,6 +18,11 @@ msgstr ""
 msgid "%1$s از %2$s"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%1$s° شمالی، %2$s° شرقی"
+msgstr ""
+
 #: includes/topersia-g-gallery-agg.php
 msgid "--post=<id> یا --all یا --queue"
 msgstr ""
@@ -662,6 +667,10 @@ msgstr ""
 msgid "جاذبه‌ها"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "جاذبه‌های دیگر"
+msgstr ""
+
 #: includes/topersia-g-map.php
 #, php-format
 msgid "جاذبه‌های شاخص %s"
@@ -1190,6 +1199,11 @@ msgstr ""
 
 #: includes/topersia-g-air.php
 msgid "ساعت (وقت ایران)"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "سال %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1725,6 +1739,10 @@ msgstr ""
 msgid "محوطه‌های باستانی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "مختصات"
+msgstr ""
+
 #: includes/topersia-g-weather.php
 msgid "مختصات بیرون از پهنۀ پوشش است."
 msgstr ""
@@ -1887,8 +1905,17 @@ msgstr ""
 msgid "معرق و خاتم"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "معیار %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "معیار ثبت میراث جهانی"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "معیارها:"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2343,6 +2370,10 @@ msgid "همه گذرهای مرزی ←"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "همۀ فرهنگ و رویداد"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
 msgstr ""
 
@@ -2416,6 +2447,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "وضعیت کاوش"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "وقت ایران (UTC%s)"
 msgstr ""
 
 #: includes/topersia-g-zones.php

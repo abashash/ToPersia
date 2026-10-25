@@ -434,7 +434,10 @@ if ( ! function_exists( 'tpas_get_summary' ) ) {
 	 * @param int    $post_id Post id (published; anything else is null).
 	 * @param string $type    summary · keypoints · plan.
 	 * @param string $lang    Language code; '' = the post's own language.
-	 * @return array|null { text: string, html: string, stale: bool, updated: int }
+	 * 1.5.0: `review` true when the output was flagged at generation or is outside
+	 * the length bounds now in force — the page must not show it; `chars` its length.
+	 *
+	 * @return array|null { text: string, html: string, stale: bool, updated: int, review: bool, chars: int }
 	 */
 	function tpas_get_summary( $post_id, $type = 'summary', $lang = '' ) {
 		$post_id = absint( $post_id );
@@ -460,6 +463,8 @@ if ( ! function_exists( 'tpas_get_summary' ) ) {
 			'html'    => TP_AI_Render::format_ai_text( (string) $cached['text'] ),
 			'stale'   => ! empty( $cached['stale'] ),
 			'updated' => (int) ( $cached['created'] ?? 0 ),
+			'review'  => TP_AI_Bounds::needs_review( $post_id, $type, $lang, (string) $cached['text'] ),
+			'chars'   => TP_AI_Bounds::chars( (string) $cached['text'] ),
 		);
 	}
 }

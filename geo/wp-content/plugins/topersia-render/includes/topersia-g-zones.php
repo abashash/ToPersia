@@ -3191,6 +3191,97 @@ if ( ! function_exists( 'topersia_g_sc_stats' ) ) {
 	}
 }
 
+/**
+ * دستۀ ۲۶ · F-05 — کارت «اطلاعات جغرافیایی» دست‌کم سه ردیف: اگر کاشی‌های کارت کمتر از سه‌اند، به این ترتیب
+ * از ردیف‌های مشتق اضافه می‌شود تا سه: کشور · استان · شهرستان · شهر (زنجیرۀ مکانی) · فاصله تا مرکز استان ·
+ * مختصات · ارتفاع از سطح دریا · منطقۀ زمانی. هر ردیف فقط با مقدار واقعی؛ برچسب تکراری نه؛ «—» هرگز.
+ * نوعی که نه کاشی دارد، نه مختصات، نه زنجیرۀ مکانی کارت تازه نمی‌گیرد (نوع غیرجغرافیایی — ارز، روادید، …).
+ * فقط نمایش است: JSON-LD و متا از این‌جا نمی‌خوانند.
+ *
+ * @param int   $pid   پست.
+ * @param array $tiles کاشی‌های کارت.
+ * @return array
+ */
+if ( ! function_exists( 'topersia_g_geo_fill_tiles' ) ) {
+	function topersia_g_geo_fill_tiles( $pid, $tiles ) {
+
+		$pid   = absint( $pid );
+		$tiles = (array) $tiles;
+
+		if ( count( $tiles ) >= 3 || ! apply_filters( 'topersia_g_geo_fill', true, $pid ) ) {
+			return $tiles;
+		}
+
+		$type  = (string) get_post_type( $pid );
+		$chain = function_exists( 'topersia_g_place_chain' ) ? (array) topersia_g_place_chain( $pid ) : array();
+		$me    = function_exists( 'topersia_geo_point' ) ? topersia_geo_point( topersia_g_text( $pid, 'geo_coordinates' ) ) : null;
+
+		if ( ! $tiles && ! $chain && ! $me ) {
+			return $tiles;
+		}
+
+		$have = array();
+		foreach ( $tiles as $t ) {
+			$have[ (string) ( isset( $t['label'] ) ? $t['label'] : '' ) ] = 1;
+			$have[ 'name:' . wp_strip_all_tags( (string) ( isset( $t['name'] ) ? $t['name'] : '' ) ) ] = 1;
+		}
+
+		$add = function ( $label, $name, $url = '', $raw = false ) use ( &$tiles, &$have ) {
+			$plain = trim( wp_strip_all_tags( (string) $name ) );
+			if ( count( $tiles ) >= 3 || '' === $plain || '—' === $plain || isset( $have[ $label ] ) || isset( $have[ 'name:' . $plain ] ) ) {
+				return;
+			}
+			$tiles[] = array( 'label' => $label, 'name' => (string) $name, 'url' => (string) $url ) + ( $raw ? array( 'raw' => true ) : array() );
+			$have[ $label ] = 1;
+			$have[ 'name:' . $plain ] = 1;
+		};
+
+		/* کشور، سپس استان · شهرستان · شهر از زنجیره (فقط منتشرشده) */
+		$by = array();
+		foreach ( $chain as $up ) {
+			$by[ (string) get_post_type( $up ) ] = $up;
+		}
+		foreach ( array( 'tp_country', 'tp_province', 'tp_county', 'tp_city' ) as $t ) {
+			if ( empty( $by[ $t ] ) || $t === $type || ! topersia_g_is_live( $by[ $t ] ) ) {
+				continue;
+			}
+			$view = topersia_g_view_id( $by[ $t ] );
+			$add( topersia_g_kind_label( $view ), topersia_g_name( $view ), topersia_g_public_url( $view ) );
+		}
+
+		/* فاصله تا مرکز استان — همان خانۀ مشتق P5-D395 */
+		if ( 'tp_province' !== $type && 'tp_country' !== $type && function_exists( 'topersia_g_stat_derived' ) ) {
+			$d = topersia_g_stat_derived( $pid, 'distance:capital' );
+			if ( is_array( $d ) ) {
+				$add( (string) $d[0], (string) $d[1], '', true );
+			}
+		}
+
+		/* مختصات */
+		if ( $me ) {
+			$dec = in_array( topersia_g_page_lang(), array( 'fa', 'ar' ), true ) ? '٫' : '.';
+			$num = function ( $v ) use ( $dec ) { return topersia_g_fa( str_replace( '.', $dec, number_format( (float) $v, 4, '.', '' ) ) ); };
+			/* translators: 1: عرض جغرافیایی, 2: طول جغرافیایی */
+			$add( __( 'مختصات', 'topersia' ), sprintf( __( '%1$s° شمالی، %2$s° شرقی', 'topersia' ), $num( $me['lat'] ), $num( $me['lng'] ) ) );
+		}
+
+		/* ارتفاع از سطح دریا */
+		$elev = trim( (string) topersia_g_raw( $pid, 'elevation_m' ) );
+		if ( '' !== $elev && is_numeric( function_exists( 'topersia_geo_digits' ) ? topersia_geo_digits( $elev ) : $elev ) ) {
+			$m = (int) round( (float) ( function_exists( 'topersia_geo_digits' ) ? topersia_geo_digits( $elev ) : $elev ) );
+			$add( __( 'ارتفاع از سطح دریا', 'topersia' ), topersia_g_fa( topersia_g_sep( (string) $m ) ) . ' ' . __( 'متر', 'topersia' ) );
+		}
+
+		/* منطقۀ زمانی — ایران بی ساعت تابستانی از ۱۴۰۱ (UTC+3:30) */
+		$iran = $me ? ( ! function_exists( 'topersia_geo_in_iran' ) || topersia_geo_in_iran( $me['lat'], $me['lng'] ) ) : ( ! empty( $by['tp_province'] ) || ! empty( $by['tp_country'] ) );
+		if ( $iran ) {
+			$add( __( 'منطقۀ زمانی', 'topersia' ), sprintf( __( 'وقت ایران (UTC%s)', 'topersia' ), topersia_g_fa( '+3:30' ) ) );
+		}
+
+		return $tiles;
+	}
+}
+
 /** [tp_facts] — هر فیلد کارتی که در آمار نیامده، و فهرست جزئیات. */
 if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 	function topersia_g_sc_facts( $atts = array() ) {
@@ -3213,6 +3304,11 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		 * ستون ۳۴۰ پیکسلی خوانده نمی‌شدند.
 		 */
 		$taken  = array_merge( topersia_g_stat_keys( $pid ), array( 'geo_coordinates', 'best_season' ) );
+
+		/* F-17 (دستۀ ۲۶): نشان «میراث جهانی» روشن ← معیارها با پیوند در همان نشان، نه دوباره این‌جا */
+		if ( topersia_g_flag_on( topersia_g_raw( $pid, 'world_heritage' ) ) ) {
+			$taken[] = 'world_heritage_criteria';
+		}
 		$fields = topersia_g_zone_fields( $pid, 'card', $taken );
 
 		/*
@@ -3248,11 +3344,68 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		/* برگزارکنندۀ رویداد و وب‌سایت رسمی — بعد از کاشی‌های تاریخ.  P5-D361 */
 		$tiles = array_merge( $tiles, topersia_g_event_extra_tiles( $pid ) );
 
+		/* دستۀ ۲۶ · F-05: کمتر از سه ردیف ← ردیف‌های مشتق تا سه (فقط مقدار واقعی؛ «—» هرگز) */
+		$tiles = topersia_g_geo_fill_tiles( $pid, $tiles );
+
 		if ( $tiles ) {
 			$body .= topersia_g_tiles( $tiles );
 		}
 
 		return topersia_g_section( 'tp-geo', 'اطلاعات جغرافیایی', 'GEO', $body );
+	}
+}
+
+/**
+ * دستۀ ۲۶ · F-17 — نشانی برگۀ «معیارهای ثبت میراث جهانی» در زبان صفحه (WPML). شناسۀ برگۀ فارسی در
+ * گزینۀ `topersia_wh_criteria_page` (scripts/tp-wh-criteria-page.php)؛ ترجمۀ منتشرنشده ← خالی (بی پیوند).
+ */
+if ( ! function_exists( 'topersia_g_wh_criteria_url' ) ) {
+	function topersia_g_wh_criteria_url() {
+		$id = absint( function_exists( 'get_option' ) ? get_option( 'topersia_wh_criteria_page', 0 ) : 0 );
+		if ( ! $id ) {
+			return '';
+		}
+		$lang = topersia_g_page_lang();
+		$tr   = absint( apply_filters( 'wpml_object_id', $id, 'page', false, $lang ) );
+		$tr   = $tr ? $tr : ( 'fa' === $lang ? $id : 0 );
+		if ( ! $tr || 'publish' !== get_post_status( $tr ) ) {
+			return '';
+		}
+		return (string) get_permalink( $tr );
+	}
+}
+
+/**
+ * دستۀ ۲۶ · F-17 — «معیار (i) (iv) …» از world_heritage_criteria؛ هر عدد رومی (i … x) پیوند به #criterion-…
+ * همان زبان؛ بی برگه، متن ساده. عدد ناشناخته کنار گذاشته می‌شود؛ بی معیار ← خالی.
+ */
+if ( ! function_exists( 'topersia_g_wh_criteria_links' ) ) {
+	function topersia_g_wh_criteria_links( $pid ) {
+		$raw = topersia_g_raw( $pid, 'world_heritage_criteria' );
+		$raw = is_scalar( $raw ) ? strtolower( (string) $raw ) : '';
+		if ( ! preg_match_all( '/\(\s*([ivx]+)\s*\)|\b(i{1,3}|iv|vi{0,3}|ix|x)\b/u', $raw, $m ) ) {
+			return '';
+		}
+		$ok   = array( 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x' );
+		$url  = topersia_g_wh_criteria_url();
+		$seen = array();
+		$out  = array();
+		foreach ( $m[0] as $k => $hit ) {
+			$r = '' !== $m[1][ $k ] ? $m[1][ $k ] : $m[2][ $k ];
+			if ( ! in_array( $r, $ok, true ) || isset( $seen[ $r ] ) ) {
+				continue;
+			}
+			$seen[ $r ] = 1;
+			/* translators: %s: شمارۀ رومی معیار */
+			$aria  = sprintf( __( 'معیار %s', 'topersia' ), $r );
+			$out[] = '' !== $url
+				? '<a href="' . esc_url( $url . '#criterion-' . $r ) . '" lang="en" dir="ltr" aria-label="' . esc_attr( $aria ) . '">(' . esc_html( $r ) . ')</a>'
+				: '<span lang="en" dir="ltr">(' . esc_html( $r ) . ')</span>';
+		}
+		if ( ! $out ) {
+			return '';
+		}
+		return esc_html( __( 'معیارها:', 'topersia' ) ) . ' ' . implode( ' ', $out );
 	}
 }
 
@@ -3290,7 +3443,16 @@ if ( ! function_exists( 'topersia_g_sc_badges' ) ) {
 				}
 			}
 
-			$tiles[] = array( 'label' => $year, 'name' => topersia_g_t( $field['label'] ) );
+			/* دستۀ ۲۶ · F-16: عدد سال برچسب «سال» می‌گیرد؛ کاشی (بی پیوند) گروه با نام کامل برای صفحه‌خوان */
+			$label   = '' !== $year ? sprintf( /* translators: %s: سال */ __( 'سال %s', 'topersia' ), $year ) : '';
+			$badge   = topersia_g_t( $field['label'] );
+			$tiles[] = array(
+				'label'   => $label,
+				'name'    => $badge,
+				'attrs'   => '' !== $label ? ' role="group" aria-label="' . esc_attr( $badge . '، ' . $label ) . '"' : '',
+				/* F-17: معیارهای میراث جهانی، هر عدد رومی پیوند به لنگر همان زبان در برگۀ معیارها */
+				'sub_raw' => 'world_heritage' === $name ? topersia_g_wh_criteria_links( $pid ) : '',
+			);
 		}
 
 		if ( ! $tiles ) {
@@ -4707,13 +4869,15 @@ if ( ! function_exists( 'topersia_g_tiles' ) ) {
 			$sub   = isset( $tile['sub'] ) ? (string) $tile['sub'] : '';
 			$name  = isset( $tile['name'] ) ? (string) $tile['name'] : '';
 			$name  = empty( $tile['raw'] ) ? esc_html( $name ) : $name;
+			/* دستۀ ۲۶ · F-17: کاشی‌ای که پیوند درونی دارد (sub_raw) خودش <a> نمی‌شود — پیوند در پیوند نامعتبر است */
+			$div   = ! empty( $tile['sub_raw'] );
+			$attrs = ' class="tp-tile"' . ( isset( $tile['attrs'] ) ? (string) $tile['attrs'] : '' ) . ( $shown && $n > $shown ? ' hidden data-tp-rest-item' : '' );
 
-			$out .= topersia_g_a_open( isset( $tile['url'] ) ? $tile['url'] : '',
-					' class="tp-tile"' . ( isset( $tile['attrs'] ) ? (string) $tile['attrs'] : '' ) . ( $shown && $n > $shown ? ' hidden data-tp-rest-item' : '' ) )
+			$out .= ( $div ? '<div' . $attrs . '>' : topersia_g_a_open( isset( $tile['url'] ) ? $tile['url'] : '', $attrs ) )
 				. ( '' !== $label ? '<span class="tp-tile__k">' . esc_html( $label ) . '</span>' : '' )
 				. '<b>' . $name . '</b>'
 				. ( '' !== $sub ? '<span class="tp-tile__sub">' . esc_html( $sub ) . '</span>' : '' )
-				. '</a>';
+				. ( $div ? '<span class="tp-tile__sub">' . $tile['sub_raw'] . '</span></div>' : '</a>' );
 		}
 
 		$rest = $shown ? max( 0, count( $tiles ) - $shown ) : 0;
@@ -5604,6 +5768,12 @@ if ( ! function_exists( 'topersia_g_ai_outputs' ) ) {
 		foreach ( array( 'summary', 'keypoints', 'plan' ) as $type ) {
 
 			$row  = $stable ? tpas_get_summary( $pid, $type, $lang ) : TP_AI_Summary::get_cached( $pid, $type, $lang );
+
+			/* خلاصه‌ساز ۱٫۵٫۰ (دستۀ ۲۶ · F-01): بیرون از سقف نویسه ← «نیازمند بازبینی» و روی صفحه نمی‌آید */
+			if ( is_array( $row ) && ! empty( $row['review'] ) ) {
+				continue;
+			}
+
 			$text = ( is_array( $row ) && isset( $row['text'] ) && is_scalar( $row['text'] ) ) ? (string) $row['text'] : '';
 			$text = topersia_g_ai_plain( $text );
 
@@ -5694,6 +5864,18 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 		$first_label = reset( $types );
 
 		/*
+		 * دستۀ ۲۶ · F-01 (P5-D382): هر سه خروجی در HTML سرور — هر کدام یک بند؛ فقط نخستین دیده می‌شود و
+		 * دکمه‌ها `hidden` را جابه‌جا می‌کنند. خزنده و بازدیدکنندۀ بی جاوااسکریپت متن هر سه را در سند دارند.
+		 */
+		$panels = '';
+		$first   = true;
+
+		foreach ( $data as $key => $text ) {
+			$panels .= '<p class="tp-justify" data-tp-ai-panel="' . esc_attr( $key ) . '"' . ( $first ? '' : ' hidden' ) . '>' . esc_html( $text ) . '</p>';
+			$first   = false;
+		}
+
+		/*
 		 * هر جمله یک بار.  P5-D267
 		 *   عنوان «این مقصد را در یک نگاه بفهمید» — کیکرِ تکراریِ بالایش رفت
 		 *   جملۀ منشأ — فقط پایینی، کوچک، زیر خروجی
@@ -5704,7 +5886,7 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>'
 			. '<div class="tp-ai__out" data-tp-ai-out'
 			. " data-tp-ai='" . esc_attr( wp_json_encode( $data ) ) . "'"
-			. ' aria-live="polite"><p class="tp-justify">' . esc_html( $summary ) . '</p>'
+			. ' aria-live="polite">' . $panels
 			. '<div class="tp-ai__out-meta"><span>' . esc_html__( 'نوع خروجی:', 'topersia' )
 			. ' <strong data-tp-ai-type>' . esc_html( $first_label ) . '</strong></span></div></div>'
 			/* نیمۀ اولِ جملۀ مرجع برای ما هم راست است؛ نیمۀ دوم یادداشت ساخت بود. */
@@ -6379,7 +6561,7 @@ if ( ! function_exists( 'topersia_g_stat_cells' ) ) {
 		/* «!» = فیلد الزامی در بستۀ درون‌ریزی تازه (فقط پست جدید — STATS-4-MATRIX بخش ج) */
 		return array(
 			'tp_country'          => $c( 'population!', 'area_km2!', 'official_language!', 'text:currency_note!' ),
-			'tp_city'             => $c( 'parent:province', 'parent:county', 'area_km2!', 'population!' ),
+			'tp_city'             => $c( 'parent:province', 'elevation_m!', 'area_km2!', 'population!' ),   /* F-10 (دستۀ ۲۶): شهرستان ← ارتفاع از سطح دریا */
 			'tp_region'           => $c( 'region_classification!', 'best_season!', 'names:83', 'text:climate_overview!' ),
 			'tp_province'         => $c( 'capital', 'area_km2!', 'population!', 'climate_type!' ),
 			'tp_district'         => $c( 'parent:province', 'parent:city', 'neighborhood_type!', 'distance:capital' ),
@@ -7438,10 +7620,36 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 			$mixed = 6 === topersia_g_list_cap( $key )
 				&& count( array_unique( array_map( function ( $i ) { return (string) ( isset( $i['kind'] ) ? $i['kind'] : '' ); }, $res['items'] ) ) ) > 1;
 
+			/*
+			 * دستۀ ۲۶ · F-02: «همۀ جاذبه‌ها» در صفحۀ استان به شهر بخش می‌شود — سرفصل نام شهر، شهرِ پرجاذبه‌تر
+			 * اول (برابر ← ترتیب نخستین دیدن)، جاذبۀ بی شهر در بخش پایانی. برچسب شهر زیر هر نام دیگر تکراری است.
+			 */
+			$by_city = (bool) apply_filters( 'topersia_g_list_by_city', 'attractions' === $key && 'tp_province' === ( function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '' ), $post_id, $key );
+			$cities  = array();
+
 			foreach ( $res['items'] as $item ) {
 				$meta    = topersia_g_list_meta( $key, $item );
 				$meta    = ( '' === $meta && $mixed && ! empty( $item['kind'] ) ) ? (string) $item['kind'] : $meta;
+
+				if ( $by_city ) {
+					$cities[ (string) ( isset( $item['place'] ) ? $item['place'] : '' ) ][] = array( 'name' => $item['name'], 'meta' => '', 'url' => $item['url'] );
+					continue;
+				}
+
 				$items[] = array( 'name' => $item['name'], 'meta' => $meta, 'url' => $item['url'] );
+			}
+
+			if ( $by_city ) {
+				$order = array_keys( $cities );
+				uksort( $cities, function ( $a, $b ) use ( $cities, $order ) {
+					if ( ( '' === $a ) !== ( '' === $b ) ) {
+						return '' === $a ? 1 : -1;
+					}
+					return count( $cities[ $b ] ) - count( $cities[ $a ] ) ?: array_search( $a, $order, true ) - array_search( $b, $order, true );
+				} );
+				foreach ( $cities as $city => $list ) {
+					$blocks[] = array( 'head' => '' !== $city ? $city : __( 'جاذبه‌های دیگر', 'topersia' ), 'items' => $list );
+				}
 			}
 
 			if ( $items ) {
@@ -7449,7 +7657,10 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 			}
 		}
 
-		return topersia_g_list_modal_html( 'tp-list-' . $key, isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '', $blocks );
+		/* دستۀ ۲۶ · F-03: پنجرۀ فرهنگ عنوان «همۀ …» می‌گیرد، نه همان سرفصل بخش */
+		$title = 'culture' === $key ? __( 'همۀ فرهنگ و رویداد', 'topersia' ) : ( isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '' );
+
+		return topersia_g_list_modal_html( 'tp-list-' . $key, $title, $blocks );
 	}
 }
 

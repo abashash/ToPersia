@@ -4,7 +4,7 @@ Tags: ai, ai-summarizer, chatgpt, perplexity, claude, grok, copilot, gemini, dee
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.4.1
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,9 @@ The key is stored in the `tpas_settings` option, never printed, and kept when yo
 Yes by default, with `rel="noopener nofollow"`, both configurable.
 
 == Changelog ==
+
+= 1.5.0 =
+* ToPersia batch 26 (F-01) - length bounds of the three public outputs: summary 250-450 characters, key points 4-6 items of 40-140 characters each, travel plan 200-400 characters (constants TPAS_SUMMARY_MIN/MAX, TPAS_KEYPOINTS_MIN/MAX, TPAS_KEYPOINT_MIN/MAX, TPAS_PLAN_MIN/MAX; define them in wp-config.php to tune). The prompt states the bound; an answer outside it is asked for once more, and if still outside it is stored with a «needs review» flag and `tpas_get_summary()` returns `review` true so the page does not show it. The editor metabox shows each output's character count and the flag.
 
 = 1.4.1 =
 * P5-D392 - no outside-assistant link (ChatGPT, Claude, Gemini, Copilot, Perplexity, Grok, DeepSeek) in any public output: the registry is empty and the tpas_services filter is gone; the buttons component keeps only «Copy prompt»; the Assistants option is removed from the settings, the block editor and the Elementor widget.

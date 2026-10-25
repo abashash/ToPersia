@@ -1410,8 +1410,13 @@
 			data = {};
 		}
 
-		var body  = out.querySelector( 'p' );
+		var body  = out.querySelector( 'p:not([hidden])' ) || out.querySelector( 'p' );
 		var label = out.querySelector( '[data-tp-ai-type]' );
+
+		/* دستۀ ۲۶ · F-01: هر نوع بند خودش را از سرور دارد */
+		var panel = function ( kind ) {
+			return out.querySelector( '[data-tp-ai-panel="' + kind + '"]' );
+		};
 
 		Array.prototype.forEach.call( page.querySelectorAll( '[data-ai]' ), function ( btn ) {
 
@@ -1451,6 +1456,15 @@
 						}
 					} );
 				};
+
+				if ( panel( kind ) ) {
+					Array.prototype.forEach.call( out.querySelectorAll( '[data-tp-ai-panel]' ), function ( p ) {
+						p.hidden = p !== panel( kind );
+					} );
+					body = panel( kind );
+					mark();
+					return;
+				}
 
 				if ( data[ kind ] ) {
 					body.textContent = data[ kind ];
