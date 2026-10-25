@@ -2312,6 +2312,16 @@ foreach ( $count_docs as $doc ) {
 t( 'سند: هیچ‌جا عدد آزمون صریح نوشته نشده  P5-D200',
 	empty( $counted ), implode( ' · ', $counted ) );
 
+/* ── گزارش دیداری (دستهٔ ۲۶ بند ۰): فقط topersia.local؛ «پیش» با robocopy /R:5 /W:2 و cmp هر پرونده؛ بازگشت workspace در finally ── */
+$vr_src = (string) @file_get_contents( __DIR__ . '/../scripts/visual-report.js' );
+$vr_ok  = function ( $s ) {
+	return false !== strpos( $s, "u.hostname !== ENV.host" )
+		&& false !== strpos( $s, "'/R:5', '/W:2'" )
+		&& false !== strpos( $s, '.equals( fs.readFileSync( d ) )' )
+		&& (bool) preg_match( '/\}\s*finally\s*\{[^}]*?if \( REF \) \{\s*try \{ restore\(\);/s', $s );
+};
+t( 'گزارش دیداری: فقط نشانی topersia.local؛ «پیش» با robocopy (تلاش دوباره) و cmp همهٔ پرونده‌ها؛ بازگشت workspace حتی با خطا — جهش: بی نگهبان میزبان یا بی cmp می‌افتد',
+	$vr_ok( $vr_src ) && ! $vr_ok( str_replace( 'u.hostname !== ENV.host', 'false', $vr_src ) ) && ! $vr_ok( str_replace( '.equals( fs.readFileSync( d ) )', '.length', $vr_src ) ) );
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );
 exit( $fail ? 1 : 0 );

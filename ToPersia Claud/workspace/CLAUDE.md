@@ -242,6 +242,16 @@ php tests/contrast.php --deep
 سهمیهٔ «یک‌بار در هر نشست» هم همان‌جا سنجیده می‌شود: کلید به وضعیت است،
 پس استان بارانی جلوی کویر برفی را نمی‌گیرد..
 
+### گزارش دیداری — استاندارد دائمی (کاربر، ۲۵ اکتبر)
+
+**هر دسته‌ای که تغییر دیدنی دارد** پیش از گزارش، «پیش» و «پس» را می‌گیرد و در گزارش چت پیوند `file://` برگه و نشانی محلی هر صفحه را می‌آورد. هیچ چیز روی اینترنت منتشر نمی‌شود.
+
+```bash
+node scripts/visual-report.js --batch=26 --phase=before --before-ref=HEAD --page=استان=http://topersia.local/province/isfahan/   # پیش از همگام‌سازی کد تازه
+node scripts/visual-report.js --batch=26 --phase=after  --page=استان=http://topersia.local/province/isfahan/
+```
+
+fa · en · ar (نشانی ترجمه از WPML؛ ترجمهٔ منتشرنشده «نیست» نوشته می‌شود) × ۱۴۴۰ و ۳۹۰ ← `tests/.screens/<دسته>/index.html` (بیرون از git). `--before-ref` افزونه‌های ما را در آن ref با همان روش A/B لایت‌هاوس (robocopy `/R:5 /W:2` + cmp همهٔ پرونده‌ها) در geo می‌نشاند و در پایان، حتی با خطا، workspace را با همان روش برمی‌گرداند. `@گزینشگر` پس از نشانی فقط از همان عنصر عکس می‌گیرد (`…/city/isfahan/@.tp-stats`).
 ### آزمون‌های مرورگری روی این ماشین — ۱۲ اکتبر
 
 - **همهٔ آزمون‌های مرورگری `require( './pw.js' )`** (نه `playwright`): کروم با `--no-proxy-server` و فایرفاکس با `network.proxy.type=0`. وقتی VPN پروکسی سیستم می‌گذارد، کروم برای topersia.local ۵۰۳ تهی (`proxy-connection: close`) می‌گیرد و curl سالم است؛ پیش از متهم‌کردن آپاچی همین را ببین. `tests/cdp.js` هم `--no-proxy-server` دارد.
