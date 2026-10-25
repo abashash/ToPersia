@@ -153,6 +153,8 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'emergency_ambulance'        => array( 'label' => 'اورژانس', 'unit' => '', 'kind' => 'latin', 'zone' => 'stat' ),
 		'emergency_fire'             => array( 'label' => 'آتش‌نشانی', 'unit' => '', 'kind' => 'latin', 'zone' => 'stat' ),
 		'programme_start_year'       => array( 'label' => 'سال آغاز برنامه', 'unit' => '', 'kind' => 'year', 'zone' => 'stat' ),
+		'programme_code'             => array( 'label' => 'برنامه', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '69' ),   /* P5-D398 */
+		'awarding_body'              => array( 'label' => 'نهاد اعطاکننده', 'unit' => '', 'kind' => 'text', 'zone' => 'stat' ),
 		'total_distance_km'          => array( 'label' => 'مسافت', 'unit' => 'کیلومتر', 'abbr' => 'km', 'kind' => 'number', 'zone' => 'stat' ),
 		'estimated_duration_days'    => array( 'label' => 'مدت پیشنهادی', 'unit' => 'روز', 'kind' => 'number', 'zone' => 'stat' ),
 		'difficulty_level'           => array( 'label' => 'دشواری', 'unit' => '', 'kind' => 'choice', 'zone' => 'stat', 'glossary' => '176' ),
@@ -408,6 +410,14 @@ if ( ! function_exists( 'topersia_g_glossary_fallback' ) ) {
 			'ceremonial'           => 'مراسمی',
 			'ritual'               => 'آیینی',
 			'wedding'              => 'عروسی',
+		),
+		'69' => array(   /* programme_code — شش برنامۀ تعیین رسمی (P5-D398) */
+			'world_heritage'       => 'میراث جهانی یونسکو',
+			'intangible_heritage'  => 'میراث ناملموس یونسکو',
+			'global_geopark'       => 'ژئوپارک جهانی یونسکو',
+			'biosphere_reserve'    => 'ذخیره‌گاه زیست‌کرۀ یونسکو',
+			'creative_city'        => 'شهر خلاق یونسکو',
+			'national_monument'    => 'اثر طبیعی ملی',
 		),
 		'66' => array(   /* c10_classification */
 			'nowruz_rituals'       => 'آیین‌های نوروزی',

@@ -303,6 +303,18 @@ function topersia_pack_length( $post_type, $key ) {
 	return isset( $rules['*'][ $key ] ) ? $rules['*'][ $key ] : array();
 }
 
+/**
+ * پیام روشنِ فیلد الزامی کم‌شده — کدام فیلد، و اگر برای خانۀ سربرگ است همین را بگوید.  P5-D398
+ */
+function topersia_pack_required_note( $key, $def ) {
+
+	$name = '«' . ( isset( $def['label'] ) ? $def['label'] : $key ) . '» (' . $key . ')';
+
+	return ! empty( $def['stat_required'] )
+		? 'فیلد ' . $name . ' کم است — یکی از چهار خانۀ ثابت زیر سربرگ این نوع از آن پر می‌شود؛ مقدار بنویس (نبودش «—» می‌ماند)'
+		: 'فیلد الزامی ' . $name . ' کم است — کلید یا مقدار در پرونده نیست';
+}
+
 /** تعریف یکدستِ یک فیلد (یا زیرفیلد) جت‌انجین. */
 function topersia_pack_field_def( $field, $post_type, $classes, $is_sub = false ) {
 
@@ -459,7 +471,8 @@ function topersia_pack_schema( $post_type ) {
 	 */
 	foreach ( (array) apply_filters( 'topersia_pack_required_fields', array(), $post_type ) as $req ) {
 		if ( is_string( $req ) && isset( $fields[ $req ] ) ) {   /* صافی از افزونۀ دیگر هم می‌آید: غیررشته (آرایه) isset را TypeError می‌کرد */
-			$fields[ $req ]['required'] = true;
+			$fields[ $req ]['required']      = true;
+			$fields[ $req ]['stat_required'] = true;   /* P5-D398: پیام خطا بگوید این فیلد خانۀ سربرگ است */
 		}
 	}
 
@@ -1704,6 +1717,7 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		if ( 'empty' === $in['status'] ) {
 			if ( 'create' === $plan['action'] && $def['required'] ) {
 				$row['status'] = 'required';
+				$row['note']   = topersia_pack_required_note( $key, $def );
 			}
 		} elseif ( in_array( $in['status'], array( 'ok', 'short' ), true ) ) {
 			if ( 'update' === $plan['action'] && topersia_pack_same( topersia_pack_current( $plan['target'], $key, $def ), $in['cmp'] ) ) {
@@ -1719,7 +1733,7 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 	if ( 'create' === $plan['action'] ) {
 		foreach ( $schema['fields'] as $key => $def ) {
 			if ( $def['required'] && ! isset( $plan['fields'][ $key ] ) ) {
-				$plan['fields'][ $key ] = array( 'status' => 'required', 'shown' => '', 'note' => 'کلید در پرونده نیست' );
+				$plan['fields'][ $key ] = array( 'status' => 'required', 'shown' => '', 'note' => topersia_pack_required_note( $key, $def ) );
 			}
 		}
 	}
