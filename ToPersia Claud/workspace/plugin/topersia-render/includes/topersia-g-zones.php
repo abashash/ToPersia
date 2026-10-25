@@ -481,7 +481,8 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
 		switch ( $kind ) {
 
 			case 'number':
-				$out = topersia_g_fa( topersia_g_sep( $raw ) );
+				/* دستۀ ۲۹ (بازبینی امنیتی): topersia_g_sep برای مقدار بی رقم همان خام را برمی‌گرداند — گریز HTML همیشه */
+				$out = esc_html( topersia_g_fa( topersia_g_sep( $raw ) ) );
 
 				if ( '' !== $unit ) {
 					$out .= ' <i class="tp-u">' . esc_html( topersia_g_t( $unit ) ) . '</i>';

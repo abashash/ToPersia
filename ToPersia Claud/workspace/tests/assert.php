@@ -2416,6 +2416,10 @@ $b29_js = (string) file_get_contents( TP_PLUGIN_DIR . 'assets/topersia-g-zones.j
 t( 'باز/بسته (دستهٔ ۲۹ بند ۳): جاوااسکریپت با Intl و Asia/Tehran، بی ردیف امروز هیچ نشانی؛ سرور فقط جای پنهان می‌گذارد (HTML کش‌شده ثابت)',
 	false !== strpos( $b29_js, "timeZone: 'Asia/Tehran'" ) && false !== strpos( $b29_js, "if ( ! day || ! today.length ) {" ) && false !== strpos( $b29_js, 'badge.hidden = false;' )
 	&& false === strpos( (string) file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), "'باز است'" ) );
+/* دستهٔ ۲۹ (بازبینی امنیتی): فیلد عددی با متن بی رقم — topersia_g_sep خام برمی‌گرداند؛ خروجی باید گریخته باشد */
+t( 'امنیت: مقدار فیلد عددی بی رقم (<script>) گریخته چاپ می‌شود — نه HTML خام',
+	false === strpos( topersia_g_value( 'ticket_price_local', '<img src=x onerror=alert>' ), '<img' )
+	&& false !== strpos( topersia_g_value( 'ticket_price_local', '<img src=x onerror=alert>' ), '&lt;img' ) );
 /* ── P5-D450 (دستهٔ ۲۸ بند ۲ و ۳): هر فیلد تازه در FIELDMAP (برچسب، نوع، واژه‌نامه با نام)، کاتالوگ fa/en/ar،
    wpml-config (کپی/ترجمه)، و ★ در بستهٔ درون‌ریزی (هسته) — همه با scripts/lib/tp-p5d450.php یکی؛ رد/موکول‌ها نیستند ── */
 require_once __DIR__ . '/../scripts/lib/tp-p5d450.php';
