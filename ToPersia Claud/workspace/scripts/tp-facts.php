@@ -8,6 +8,7 @@
  *   wp eval-file scripts/tp-facts.php apply dry-run | apply   ← فقط approved؛ پشتیبان؛ لاگ؛ شمار انتظار ۳۸۳ وگرنه توقف
  *   wp eval-file scripts/tp-facts.php rollback <لاگ>          ← برگشت از لاگ
  *   wp eval-file scripts/tp-facts.php verify    ← QID استان‌ها (P31) و sameAs JSON-LD پنج استان نمونه
+ *   wp eval-file scripts/tp-facts.php capitals  ← P5-D399: reference/province-capitals-proposed.csv (مرکز استان P36 ← P625)؛ فقط پیشنهاد
  *
  * منبع ذخیره‌شده فقط ویکی‌داده (CC0): P625 مختصات · P1082 جمعیت با P585 (سال) و ارجاعش · P2046 مساحت · P2044 ارتفاع · P36 مرکز استان.
  * OSM فقط برای تطبیق و سنجش (تگ wikidata عنصرِ همان شناسه‌ای که reference/osm-boundary-map.csv دارد، از کش Overpass محلی)، هرگز منبع مقدار.
@@ -548,4 +549,118 @@ if ( 'verify' === $cmd ) {
 	return;
 }
 
-echo "match · report · mark · apply [dry-run] · rollback <log> · verify\n";
+/*
+ * P5-D399 (دستهٔ ۲۶ بند ۱۱ · F-06) — مختصات استان = مختصات مرکز استان از ویکی‌داده (P36 ← P625، CC0).
+ * فقط مرحلهٔ «پیشنهاد»: reference/province-capitals-proposed.csv — هیچ نوشتنی. نوشتن پس از تأیید کاربر (پشتیبان بیرون
+ * ریشهٔ وب ← نوشتن ← rollback) در گامی جدا.
+ * ستون‌ها: QID استان · نام · QID مرکز (P36) · نام مرکز · مرکز در داده (رابطهٔ capital) · مختصات فعلی · پیشنهادی (P625 مرکز) ·
+ * فاصلهٔ تفاوت km · وضع (same < ۱ km · move · no-capital · no-coord) · منبع.
+ */
+if ( 'capitals' === $cmd ) {
+	$out  = $root . '/reference/province-capitals-proposed.csv';
+	$rows = array();
+	$qids = array();
+	foreach ( get_posts( array( 'post_type' => 'tp_province', 'numberposts' => -1, 'post_status' => 'publish', 'suppress_filters' => false, 'fields' => 'ids', 'orderby' => 'title', 'order' => 'ASC' ) ) as $pid ) {
+		$q = tpf_qid( get_post_meta( $pid, 'external_reference_uri', true ) );
+		$rows[ $pid ] = array( 'pid' => $pid, 'qid' => $q, 'name' => get_the_title( $pid ) );
+		if ( $q ) { $qids[ $q ] = $pid; }
+	}
+	$res = tpf_sparql( 'SELECT ?prov ?cap ?capLabel ?coord WHERE { VALUES ?prov { ' . implode( ' ', array_map( function ( $q ) { return 'wd:' . $q; }, array_keys( $qids ) ) ) . ' } '
+		. 'OPTIONAL { ?prov p:P36 ?st . ?st ps:P36 ?cap . FILTER NOT EXISTS { ?st pq:P582 ?end } OPTIONAL { ?cap wdt:P625 ?coord } '
+		. 'OPTIONAL { ?cap rdfs:label ?capLabel FILTER( lang( ?capLabel ) = "fa" ) } } }', 'capitals' );
+	if ( null === $res ) { echo "SPARQL در دسترس نیست — چیزی ساخته نشد\n"; return; }
+	$wd = array();
+	foreach ( tpf_rows( $res ) as $r ) {
+		$pq = tpf_q( $r['prov'] );
+		if ( empty( $r['cap'] ) ) { continue; }
+		$wd[ $pq ][ tpf_q( $r['cap'] ) ] = array( 'label' => $r['capLabel'] ?? '', 'coord' => $r['coord'] ?? '' );
+	}
+	$pt = function ( $wkt ) { return preg_match( '~Point\(([-0-9.]+) ([-0-9.]+)\)~', (string) $wkt, $m ) ? array( 'lat' => (float) $m[2], 'lng' => (float) $m[1] ) : null; };
+	$km = function ( $a, $b ) {
+		$dl = deg2rad( $b['lat'] - $a['lat'] ); $dn = deg2rad( $b['lng'] - $a['lng'] );
+		$h  = sin( $dl / 2 ) ** 2 + cos( deg2rad( $a['lat'] ) ) * cos( deg2rad( $b['lat'] ) ) * sin( $dn / 2 ) ** 2;
+		return 2 * 6371.0 * asin( min( 1, sqrt( $h ) ) );
+	};
+	$fh = fopen( $out, 'w' );
+	fwrite( $fh, "\xEF\xBB\xBF" );
+	fputcsv( $fh, array( 'province_qid', 'province', 'capital_qid', 'capital_wd', 'capital_in_data', 'current', 'proposed', 'diff_km', 'status', 'source', 'retrieved', 'approved' ) );
+	$sum = array();
+	foreach ( $rows as $pid => $r ) {
+		$cur   = function_exists( 'topersia_geo_point' ) ? topersia_geo_point( (string) get_post_meta( $pid, 'geo_coordinates', true ) ) : null;
+		$capid = function_exists( 'topersia_g_capital_id' ) ? absint( topersia_g_capital_id( $pid ) ) : 0;
+		$caps  = $wd[ $r['qid'] ] ?? array();
+		$cq    = $caps ? array_key_first( $caps ) : '';
+		$c     = $cq ? $caps[ $cq ] : array( 'label' => '', 'coord' => '' );
+		$prop  = $pt( $c['coord'] );
+		$d     = $cur && $prop ? $km( $cur, $prop ) : null;
+		$st    = ! $cq ? 'no-capital' : ( ! $prop ? 'no-coord' : ( null !== $d && $d < 1 ? 'same' : 'move' ) );
+		$st   .= count( $caps ) > 1 ? '+multi' : '';
+		$sum[ $st ] = ( $sum[ $st ] ?? 0 ) + 1;
+		fputcsv( $fh, array(
+			$r['qid'], $r['name'], $cq, $c['label'], $capid ? get_the_title( $capid ) : '',
+			$cur ? sprintf( '%.4f, %.4f', $cur['lat'], $cur['lng'] ) : '',
+			$prop ? sprintf( '%.4f, %.4f', $prop['lat'], $prop['lng'] ) : '',
+			null !== $d ? number_format( $d, 1, '.', '' ) : '',
+			$st, $cq ? 'https://www.wikidata.org/wiki/' . $cq . ' (P625) · P36 of https://www.wikidata.org/wiki/' . $r['qid'] : '', $NOW, '',
+		) );
+	}
+	fclose( $fh );
+	echo 'پیشنهاد: ' . $out . ' — ' . count( $rows ) . ' استان · ' . wp_json_encode( $sum ) . "\nهیچ چیز نوشته نشد (P5-D399: پس از تأیید کاربر).\n";
+	return;
+}
+
+/*
+ * P5-D399 — نوشتن فقط پس از تأیید کاربر: ستون approved ردیف (1 · yes · y · ✓). پشتیبان بیرون ریشهٔ وب
+ * (C:/wamp64/tp-backups/، نه زیر www) پیش از هر نوشتن؛ geo_coordinates استان و همگامی copy در WPML؛ شناسهٔ استان در
+ * گزینهٔ topersia_p5d399_applied (مسیریابی استان بی رابطهٔ مرکز از همین پس از نوشتن مختصات خودِ استان را می‌گیرد).
+ *   capitals-apply dry-run | capitals-apply    ·    capitals-rollback <پشتیبان>
+ */
+if ( 'capitals-apply' === $cmd || 'capitals-rollback' === $cmd ) {
+	$bak_dir = dirname( untrailingslashit( ABSPATH ), 3 ) . '/tp-backups/';
+	if ( 'capitals-rollback' === $cmd ) {
+		$file = isset( $args[1] ) ? (string) $args[1] : '';
+		$log  = is_file( $file ) ? json_decode( (string) file_get_contents( $file ), true ) : null;
+		if ( ! is_array( $log ) || empty( $log['rows'] ) ) { echo "پشتیبان نامعتبر\n"; return; }
+		$done = (array) get_option( 'topersia_p5d399_applied', array() );
+		foreach ( $log['rows'] as $r ) {
+			update_post_meta( (int) $r['pid'], 'geo_coordinates', (string) $r['prev'] );
+			do_action( 'wpml_sync_custom_field', (int) $r['pid'], 'geo_coordinates' );
+			$done = array_values( array_diff( array_map( 'intval', $done ), array( (int) $r['pid'] ) ) );
+		}
+		update_option( 'topersia_p5d399_applied', $done, false );
+		echo 'برگشت: ' . count( $log['rows'] ) . " استان\n";
+		return;
+	}
+	$dry = isset( $args[1] ) && 'dry-run' === $args[1];
+	$fh  = is_file( $root . '/reference/province-capitals-proposed.csv' ) ? fopen( $root . '/reference/province-capitals-proposed.csv', 'r' ) : false;
+	if ( ! $fh ) { echo "CSV نیست — اول capitals\n"; return; }
+	$h    = array_map( function ( $x ) { return preg_replace( '/^\xEF\xBB\xBF/', '', $x ); }, (array) fgetcsv( $fh ) );
+	$todo = array();
+	while ( false !== ( $row = fgetcsv( $fh ) ) ) {
+		$r = array_combine( $h, $row );
+		if ( ! in_array( strtolower( trim( (string) $r['approved'] ) ), array( '1', 'yes', 'y', '✓' ), true ) || '' === $r['proposed'] ) { continue; }
+		$ids = get_posts( array( 'post_type' => 'tp_province', 'numberposts' => -1, 'post_status' => 'publish', 'suppress_filters' => false, 'fields' => 'ids' ) );
+		foreach ( $ids as $pid ) {
+			if ( tpf_qid( get_post_meta( $pid, 'external_reference_uri', true ) ) === $r['province_qid'] ) {
+				$todo[] = array( 'pid' => $pid, 'name' => $r['province'], 'prev' => (string) get_post_meta( $pid, 'geo_coordinates', true ), 'new' => $r['proposed'] );
+			}
+		}
+	}
+	fclose( $fh );
+	echo ( $dry ? '[dry-run] ' : '' ) . count( $todo ) . " استانِ تأییدشده\n";
+	if ( $dry || ! $todo ) { return; }
+	wp_mkdir_p( $bak_dir );
+	$bak = $bak_dir . 'p5d399-' . gmdate( 'Ymd-His' ) . '.json';
+	if ( false === file_put_contents( $bak, wp_json_encode( array( 'at' => gmdate( 'c' ), 'rows' => $todo ), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) ) ) { echo "پشتیبان نوشته نشد — توقف\n"; return; }
+	$done = array_map( 'intval', (array) get_option( 'topersia_p5d399_applied', array() ) );
+	foreach ( $todo as $t ) {
+		update_post_meta( $t['pid'], 'geo_coordinates', $t['new'] );
+		do_action( 'wpml_sync_custom_field', $t['pid'], 'geo_coordinates' );
+		$done[] = (int) $t['pid'];
+	}
+	update_option( 'topersia_p5d399_applied', array_values( array_unique( $done ) ), false );
+	echo 'نوشته شد: ' . count( $todo ) . " · پشتیبان: {$bak}\n";
+	return;
+}
+
+echo "match · report · mark · apply [dry-run] · rollback <log> · verify · capitals · capitals-apply [dry-run] · capitals-rollback <پشتیبان>\n";

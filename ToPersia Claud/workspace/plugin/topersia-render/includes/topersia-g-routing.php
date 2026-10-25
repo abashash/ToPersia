@@ -67,6 +67,15 @@ if ( ! function_exists( 'topersia_g_routing_point' ) ) {
 
 		if ( 'tp_province' === ( function_exists( 'get_post_type' ) ? get_post_type( $pid ) : '' ) ) {
 			$from = function_exists( 'topersia_g_capital_id' ) ? absint( topersia_g_capital_id( $pid ) ) : 0;
+
+			/*
+			 * P5-D399 (دستۀ ۲۶ · F-06): مختصات استان = مختصات مرکز استان از ویکی‌داده. استانی که مختصاتش پس از تأیید
+			 * کاربر با `tp-facts.php capitals-apply` نوشته شده (گزینۀ topersia_p5d399_applied) و رابطۀ مرکز ندارد،
+			 * نقطۀ خودش را می‌گیرد. پیش از نوشتن، مختصات تقریبی استان هرگز مقصد مسیریابی نمی‌شود.
+			 */
+			if ( ! $from && in_array( $pid, array_map( 'absint', (array) ( function_exists( 'get_option' ) ? get_option( 'topersia_p5d399_applied', array() ) : array() ) ), true ) ) {
+				$from = $pid;
+			}
 		}
 
 		if ( ! $from ) {
