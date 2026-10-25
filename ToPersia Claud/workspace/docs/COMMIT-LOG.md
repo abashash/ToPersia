@@ -155,4 +155,6 @@
 | 146 | 2026-10-25 | `feat` | `b0bb76db` |  | بند ۱۱ (F-06 · P5-D399): پیشنهاد مختصات استان (CSV)؛ نوشتن پس از تأیید؛ آزمون مسیریابی استان | ✅ |
 | 147 | 2026-10-25 | `test` | `b0dbe6fb` |  | pack-local: required شهر + خانه‌های سربرگ | ✅ |
 | 148 | 2026-10-25 | `chore` | `0f56a779` |  | mirror geo/ — دستهٔ ۲۶. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · stats4-local · pack/render/schema/core-local · acceptance ۰ ناهمخوان · contrast هارنس و ۸ صفحهٔ محلی ۰ افتاده · behaviour ۱۲ افتادهٔ پیشین، همان پیش و پس (نه از این دسته) · Lighthouse A/B ۹تایی بی افت بیش از ۲ · کاناری سالم | ✅ |
-| 149 | 2026-10-25 | `docs` | (این commit) |  | ردیف‌های ۱۳۳–149 | ✅ |
+| 149 | 2026-10-25 | `docs` | `0bd32387` |  | ردیف‌های ۱۳۳–149 | ✅ |
+| 150 | 2026-10-25 | `docs` | `f49eda9a` |  | دستهٔ ۲۷ (فقط سند): ممیزی نمایش متا و روابط ۴۱ نوع — META-DISPLAY.md/.csv، به‌روزرسانی AUDIT-RELATIONS-2F، RELATIONS-2026-10-25.csv؛ گزارش دیداری مسجد جامع (tests/.screens/27) | ✅ |
+| 151 | 2026-10-25 | `docs` | (این commit) |  | ردیف‌های ۱۴۹–۱۵۱ | ✅ |
