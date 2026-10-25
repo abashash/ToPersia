@@ -334,7 +334,7 @@ section( 'JSON Schema — از همان تعریف‌ها' );
 $js       = topersia_pack_json_schema( 'tp_city' );
 $js_post  = $js['properties']['posts']['items']['properties'];
 $js_bs    = $js_post['fields']['properties']->best_season;
-$req_live = array_keys( array_filter( $expect_all, function ( $f ) use ( $ex ) { return ! empty( $f['is_required'] ) && ! isset( $ex[ $f['name'] ] ); } ) );
+$req_live = array_values( array_unique( array_merge( array_keys( array_filter( $expect_all, function ( $f ) use ( $ex ) { return ! empty( $f['is_required'] ) && ! isset( $ex[ $f['name'] ] ); } ) ), (array) apply_filters( 'topersia_pack_required_fields', array(), 'tp_city' ) ) ) );   /* + خانه‌های سربرگ (P5-D398 · F-10) */
 sort( $req_live );
 $req_js = $js_post['fields']['required'];
 sort( $req_js );
