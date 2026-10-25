@@ -342,21 +342,24 @@ if ( function_exists( 'add_shortcode' ) ) {
  */
 if ( ! function_exists( 'topersia_g_aq_diag_cities' ) ) {
 	function topersia_g_aq_diag_cities() {
+		/*
+		 * نام شهرها نام موجودیت است، نه رشتۀ رابط — در کاتالوگ نمی‌آیند (دستۀ ۲۸: msgid «اصفهان» با نام فارسی
+		 * داده در صفحۀ /en/ و /ar/ یکی می‌شد و آزمون «بی رشتۀ رابط فارسی» می‌افتاد). سه نام کنار مختصات.
+		 */
 		return array(
-			'تهران'    => array( 35.6892, 51.3890 ),
-			'مشهد'     => array( 36.2605, 59.6168 ),
-			'اصفهان'   => array( 32.6539, 51.6660 ),
-			'شیراز'    => array( 29.5918, 52.5837 ),
-			'تبریز'    => array( 38.0800, 46.2919 ),
-			'اهواز'    => array( 31.3183, 48.6706 ),
-			'کرج'      => array( 35.8400, 50.9391 ),
-			'قم'       => array( 34.6399, 50.8759 ),
-			'کرمانشاه' => array( 34.3142, 47.0650 ),
-			'زاهدان'   => array( 29.4963, 60.8629 ),
+			'تهران'    => array( 35.6892, 51.3890, 'Tehran', 'طهران' ),   /* i18n:skip */
+			'مشهد'     => array( 36.2605, 59.6168, 'Mashhad', 'مشهد' ),   /* i18n:skip */
+			'اصفهان'   => array( 32.6539, 51.6660, 'Isfahan', 'أصفهان' ),   /* i18n:skip */
+			'شیراز'    => array( 29.5918, 52.5837, 'Shiraz', 'شيراز' ),   /* i18n:skip */
+			'تبریز'    => array( 38.0800, 46.2919, 'Tabriz', 'تبريز' ),   /* i18n:skip */
+			'اهواز'    => array( 31.3183, 48.6706, 'Ahvaz', 'الأهواز' ),   /* i18n:skip */
+			'کرج'      => array( 35.8400, 50.9391, 'Karaj', 'كرج' ),   /* i18n:skip */
+			'قم'       => array( 34.6399, 50.8759, 'Qom', 'قم' ),   /* i18n:skip */
+			'کرمانشاه' => array( 34.3142, 47.0650, 'Kermanshah', 'كرمانشاه' ),   /* i18n:skip */
+			'زاهدان'   => array( 29.4963, 60.8629, 'Zahedan', 'زاهدان' ),   /* i18n:skip */
 		);
 	}
 }
-
 if ( ! function_exists( 'topersia_g_aq_diag_page' ) ) {
 	function topersia_g_aq_diag_page() {
 
@@ -375,7 +378,11 @@ if ( ! function_exists( 'topersia_g_aq_diag_page' ) ) {
 		echo '<table class="widefat striped" style="max-inline-size:760px"><thead><tr><th>' . esc_html__( 'شهر', 'topersia' ) . '</th><th>US AQI</th><th>'
 			. esc_html__( 'رده', 'topersia' ) . '</th><th>PM2.5 (µg/m³)</th><th>' . esc_html__( 'ساعت (وقت ایران)', 'topersia' ) . '</th></tr></thead><tbody>';
 
+		$loc = function_exists( 'get_user_locale' ) ? substr( (string) get_user_locale(), 0, 2 ) : 'fa';
+
 		foreach ( topersia_g_aq_diag_cities() as $city => $ll ) {
+
+			$city = 'fa' === $loc ? $city : ( 'ar' === $loc ? $ll[3] : $ll[2] );
 
 			$out = topersia_g_aq_get( $ll[0], $ll[1] );
 

@@ -310,9 +310,31 @@ function topersia_pack_required_note( $key, $def ) {
 
 	$name = '«' . ( isset( $def['label'] ) ? $def['label'] : $key ) . '» (' . $key . ')';
 
+	if ( ! empty( $def['p5d450_required'] ) ) {
+		return 'فیلد ' . $name . ' کم است — برای پست تازۀ این نوع الزامی است (P5-D450)؛ اگر نمی‌دانید «unknown» (نامعلوم) بنویسید';
+	}
+
 	return ! empty( $def['stat_required'] )
 		? 'فیلد ' . $name . ' کم است — یکی از چهار خانۀ ثابت زیر سربرگ این نوع از آن پر می‌شود؛ مقدار بنویس (نبودش «—» می‌ماند)'
 		: 'فیلد الزامی ' . $name . ' کم است — کلید یا مقدار در پرونده نیست';
+}
+
+/**
+ * P5-D450 · P5-D451 (دستۀ ۲۸) — فیلدها و رابطه‌های ★: الزامی فقط برای پست تازه در بستۀ درون‌ریزی. هر فیلد ★ گزینۀ
+ * «unknown» (نامعلوم) دارد تا ندانستن هم پاسخ باشد. رابطه با نام جت‌انجینش (labels.name). تعریف کامل فیلدها:
+ * scripts/lib/tp-p5d450.php — assert همین فهرست را با آن می‌سنجد.
+ *
+ * @return array نوع ← array( 'fields' => [], 'relations' => [] )
+ */
+function topersia_pack_p5d450_required() {
+	return array(
+		'tp_village'        => array( 'fields' => array( 'access_road_type' ), 'relations' => array() ),
+		'tp_desert'         => array( 'fields' => array( 'tour_required' ), 'relations' => array() ),
+		'tp_religious_site' => array( 'fields' => array( 'non_muslim_entry' ), 'relations' => array() ),
+		'tp_ritual'         => array( 'fields' => array( 'visitor_welcome' ), 'relations' => array() ),
+		'tp_route'          => array( 'fields' => array(), 'relations' => array( 'start_city', 'end_city' ) ),
+		'tp_ethnic_group'   => array( 'fields' => array(), 'relations' => array( 'main_provinces_reference' ) ),
+	);
 }
 
 /** تعریف یکدستِ یک فیلد (یا زیرفیلد) جت‌انجین. */
@@ -476,7 +498,22 @@ function topersia_pack_schema( $post_type ) {
 		}
 	}
 
+	/* P5-D450 ★ */
+	$p450 = topersia_pack_p5d450_required();
+	foreach ( ( $p450[ $post_type ]['fields'] ?? array() ) as $req ) {
+		if ( isset( $fields[ $req ] ) ) {
+			$fields[ $req ]['required']        = true;
+			$fields[ $req ]['p5d450_required'] = true;
+		}
+	}
+
 	$relations = topersia_pack_relations( $post_type );
+
+	foreach ( $relations as $rk => $rel ) {
+		if ( in_array( $rel['name'], $p450[ $post_type ]['relations'] ?? array(), true ) && 'parents' === $rel['direction'] ) {
+			$relations[ $rk ]['required'] = true;
+		}
+	}
 
 	$cache[ $post_type ] = array(
 		'post_type' => $post_type,
@@ -777,7 +814,8 @@ function topersia_pack_json_schema( $post_type ) {
 		}
 	}
 
-	$rels = array();
+	$rels    = array();
+	$rel_req = array();
 
 	foreach ( $schema['relations'] as $key => $rel ) {
 
@@ -799,6 +837,11 @@ function topersia_pack_json_schema( $post_type ) {
 
 		if ( $rel['max'] ) {
 			$rels[ $key ]['maxItems'] = $rel['max'];
+		}
+
+		if ( ! empty( $rel['required'] ) ) {   /* P5-D450 ★ */
+			$rels[ $key ]['minItems'] = 1;
+			$rel_req[]                 = (string) $key;
 		}
 	}
 
@@ -842,6 +885,7 @@ function topersia_pack_json_schema( $post_type ) {
 						'relations'      => array(
 							'type'                 => 'object',
 							'additionalProperties' => false,
+							'required'             => $rel_req,
 							'properties'           => (object) $rels,
 						),
 					),
@@ -1777,6 +1821,19 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		}
 
 		$plan['relations'][ $key ] = $rows;
+	}
+
+	/* P5-D450 ★ — رابطۀ الزامی پست تازه: دست‌کم یک مقصد پیداشده */
+	if ( 'create' === $plan['action'] ) {
+		foreach ( $schema['relations'] as $key => $rel ) {
+			if ( empty( $rel['required'] ) ) {
+				continue;
+			}
+			$found = array_filter( (array) ( $plan['relations'][ $key ] ?? array() ), function ( $r ) { return in_array( $r['status'], array( 'ok', 'same', 'pending' ), true ); } );
+			if ( ! $found ) {
+				$plan['relations'][ $key ][] = array( 'status' => 'required', 'target' => 0, 'name' => '', 'note' => 'رابطۀ الزامی «' . $rel['label'] . '» (' . $rel['name'] . ') کم است — برای پست تازۀ این نوع دست‌کم یک ' . $rel['target'] . ' (P5-D450)' );
+			}
+		}
 	}
 
 	return $plan;
