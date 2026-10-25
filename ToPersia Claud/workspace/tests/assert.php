@@ -1778,7 +1778,9 @@ if ( ! class_exists( 'TP_AI_Localize' ) ) {
 if ( ! function_exists( 'tpas_get_summary' ) ) {
 	function tpas_get_summary( $post_id, $type = 'summary', $lang = '' ) {
 		$GLOBALS['tp_ai_stable'][] = $post_id . '/' . $type . '/' . $lang;
-		return TP_AI_Summary::get_cached( $post_id, $type, $lang );
+		$row = TP_AI_Summary::get_cached( $post_id, $type, $lang );
+		/* خلاصه‌ساز ۱٫۵٫۰: review */
+		return is_array( $row ) ? $row + array( 'review' => ! empty( $GLOBALS['tp_ai_review'][ $post_id ][ $type ] ) ) : $row;
 	}
 }
 
@@ -1819,8 +1821,27 @@ t( 'AI: واردشده — خروجیِ افزونه جای هر سه دکمه �
 	'خلاصهٔ افزونه دربارهٔ اصفهان.' === $ai2d['summary']
 	&& "• میدان نقش جهان\n• سی‌وسه‌پل" === $ai2d['bullets'] && "روز اول: میدان\nروز دوم: کاخ‌ها" === $ai2d['plan']
 	&& false !== strpos( $ai2, '<button class="tp-ai__btn" type="button" data-ai="plan">پیشنهاد برنامه سفر</button>' )
-	&& false !== strpos( $ai2, '<p class="tp-justify">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' ),
+	&& false !== strpos( $ai2, '<p class="tp-justify" data-tp-ai-panel="summary">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' ),
 	json_encode( $ai2d, JSON_UNESCAPED_UNICODE ) );
+
+/* دستهٔ ۲۶ · F-01 (P5-D382): هر سه خروجی در HTML سرور — نه فقط در data-tp-ai؛ فقط نخستین دیده می‌شود */
+$ai_panels = function ( $h ) {
+	return false !== strpos( $h, '<p class="tp-justify" data-tp-ai-panel="summary">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' )
+		&& false !== strpos( $h, "<p class=\"tp-justify\" data-tp-ai-panel=\"bullets\" hidden>• میدان نقش جهان\n• سی‌وسه‌پل</p>" )
+		&& false !== strpos( $h, "<p class=\"tp-justify\" data-tp-ai-panel=\"plan\" hidden>روز اول: میدان\nروز دوم: کاخ‌ها</p>" );
+};
+t( 'AI (F-01): خلاصه، نکات و پیشنهاد سفر هر سه متن خوانا در HTML سرور (بند جدا، دومی و سومی hidden) — جهش: فقط بند خلاصه (رفتار پیشین) می‌افتد',
+	$ai_panels( $ai2 ) && ! $ai_panels( preg_replace( '#<p class="tp-justify" data-tp-ai-panel="(?:bullets|plan)" hidden>.*?</p>#su', '', $ai2 ) ) );
+
+/* خلاصه‌ساز ۱٫۵٫۰: خروجی «نیازمند بازبینی» (بیرون از سقف نویسه) روی صفحه نمی‌آید — همان خروجی با پرچم و بی آن */
+$GLOBALS['tp_ai_review'] = array( 20 => array( 'plan' => true ) );
+$GLOBALS['tp_user']      = 7;
+list( $ai2r )            = $ai_block();
+$GLOBALS['tp_user']      = 0;
+$GLOBALS['tp_ai_review'] = array();
+t( 'AI (F-01): خروجی با review=true (tpas_get_summary) نه بند دارد نه دکمه؛ همان خروجی بی پرچم هر دو را دارد',
+	false === strpos( $ai2r, 'data-tp-ai-panel="plan"' ) && false === strpos( $ai2r, 'data-ai="plan"' ) && false !== strpos( $ai2r, 'data-tp-ai-panel="bullets"' )
+	&& false !== strpos( $ai2, 'data-tp-ai-panel="plan"' ) && false !== strpos( $ai2, 'data-ai="plan"' ) );
 
 /* ۳ — افزونه خلاصه ندارد و موتور داخلی روشن است: فقط خلاصه ساخته می‌شود */
 $GLOBALS['tp_ai_fake'] = array( 20 => array( 'keypoints' => '- فقط نکته' ) );

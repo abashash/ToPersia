@@ -3,7 +3,7 @@
  * Plugin Name:       ToPersia AI Summarizer
  * Plugin URI:        https://topersia.com/
  * Description:       Dedicated for ToPersia: buttons that open AI assistants (ChatGPT, Perplexity, Claude, Grok, Copilot, Gemini, DeepSeek) with a ready structured-summary prompt, plus an on-page AI panel that generates summaries server-side from the current page.
- * Version:           1.4.1
+ * Version:           1.5.0
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            ToPersia
@@ -18,10 +18,30 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TP_AI_VERSION', '1.4.1' );
+define( 'TP_AI_VERSION', '1.5.0' );
 define( 'TP_AI_FILE', __FILE__ );
 define( 'TP_AI_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TP_AI_URL', plugin_dir_url( __FILE__ ) );
+
+/*
+ * 1.5.0 — length bounds of the public outputs (class-tp-ai-bounds.php). Tunable
+ * from wp-config.php: a constant already defined there wins.
+ */
+foreach ( array(
+	'TPAS_SUMMARY_MIN'   => 250,
+	'TPAS_SUMMARY_MAX'   => 450,
+	'TPAS_KEYPOINTS_MIN' => 4,
+	'TPAS_KEYPOINTS_MAX' => 6,
+	'TPAS_KEYPOINT_MIN'  => 40,
+	'TPAS_KEYPOINT_MAX'  => 140,
+	'TPAS_PLAN_MIN'      => 200,
+	'TPAS_PLAN_MAX'      => 400,
+) as $tpas_k => $tpas_v ) {
+	if ( ! defined( $tpas_k ) ) {
+		define( $tpas_k, $tpas_v );
+	}
+}
+unset( $tpas_k, $tpas_v );
 
 require_once TP_AI_PATH . 'includes/class-tp-ai-localize.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-options.php';
@@ -36,6 +56,7 @@ require_once TP_AI_PATH . 'includes/class-tp-ai-frontend.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-shortcode.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-block.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-tracker.php';
+require_once TP_AI_PATH . 'includes/class-tp-ai-bounds.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-summary.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-generator.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-core-bridge.php';

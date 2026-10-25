@@ -5604,6 +5604,12 @@ if ( ! function_exists( 'topersia_g_ai_outputs' ) ) {
 		foreach ( array( 'summary', 'keypoints', 'plan' ) as $type ) {
 
 			$row  = $stable ? tpas_get_summary( $pid, $type, $lang ) : TP_AI_Summary::get_cached( $pid, $type, $lang );
+
+			/* خلاصه‌ساز ۱٫۵٫۰ (دستۀ ۲۶ · F-01): بیرون از سقف نویسه ← «نیازمند بازبینی» و روی صفحه نمی‌آید */
+			if ( is_array( $row ) && ! empty( $row['review'] ) ) {
+				continue;
+			}
+
 			$text = ( is_array( $row ) && isset( $row['text'] ) && is_scalar( $row['text'] ) ) ? (string) $row['text'] : '';
 			$text = topersia_g_ai_plain( $text );
 
@@ -5694,6 +5700,18 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 		$first_label = reset( $types );
 
 		/*
+		 * دستۀ ۲۶ · F-01 (P5-D382): هر سه خروجی در HTML سرور — هر کدام یک بند؛ فقط نخستین دیده می‌شود و
+		 * دکمه‌ها `hidden` را جابه‌جا می‌کنند. خزنده و بازدیدکنندۀ بی جاوااسکریپت متن هر سه را در سند دارند.
+		 */
+		$panels = '';
+		$first   = true;
+
+		foreach ( $data as $key => $text ) {
+			$panels .= '<p class="tp-justify" data-tp-ai-panel="' . esc_attr( $key ) . '"' . ( $first ? '' : ' hidden' ) . '>' . esc_html( $text ) . '</p>';
+			$first   = false;
+		}
+
+		/*
 		 * هر جمله یک بار.  P5-D267
 		 *   عنوان «این مقصد را در یک نگاه بفهمید» — کیکرِ تکراریِ بالایش رفت
 		 *   جملۀ منشأ — فقط پایینی، کوچک، زیر خروجی
@@ -5704,7 +5722,7 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 			. esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>'
 			. '<div class="tp-ai__out" data-tp-ai-out'
 			. " data-tp-ai='" . esc_attr( wp_json_encode( $data ) ) . "'"
-			. ' aria-live="polite"><p class="tp-justify">' . esc_html( $summary ) . '</p>'
+			. ' aria-live="polite">' . $panels
 			. '<div class="tp-ai__out-meta"><span>' . esc_html__( 'نوع خروجی:', 'topersia' )
 			. ' <strong data-tp-ai-type>' . esc_html( $first_label ) . '</strong></span></div></div>'
 			/* نیمۀ اولِ جملۀ مرجع برای ما هم راست است؛ نیمۀ دوم یادداشت ساخت بود. */

@@ -233,12 +233,48 @@ class TP_AI_Admin {
 		foreach ( TP_AI_Generator::types() as $type ) {
 			$status = TP_AI_Generator::status( $post->ID, $type, $lang );
 			echo '<p class="tpas-gen__row" data-type="' . esc_attr( $type ) . '" style="display:flex;gap:6px;align-items:center;justify-content:space-between;margin:0 0 6px;">';
-			echo '<span>' . esc_html( $labels[ $type ] ?? $type ) . ' · <span class="tpas-gen__status" data-status="' . esc_attr( $status ) . '">' . esc_html( $states[ $status ] ) . '</span></span>';
+			echo '<span>' . esc_html( $labels[ $type ] ?? $type ) . ' · <span class="tpas-gen__status" data-status="' . esc_attr( $status ) . '">' . esc_html( $states[ $status ] ) . '</span>' . self::meta_box_count( $post->ID, $type, $lang ) . '</span>';
 			echo '<button type="button" class="button button-small tpas-gen__go">' . esc_html( 'none' === $status ? __( 'Generate', 'topersia-ai-summarizer' ) : __( 'Regenerate', 'topersia-ai-summarizer' ) ) . '</button>';
 			echo '</p>';
 		}
 
 		echo '<p class="tpas-gen__msg description" aria-live="polite" style="margin:0;"></p></div>';
+	}
+
+	/**
+	 * 1.5.0 — character count of a stored output against its bounds, and the
+	 * «needs review» mark (an output outside the bounds is not shown on the page).
+	 *
+	 * @param int    $post_id Post id.
+	 * @param string $type    Output type.
+	 * @param string $lang    Language code.
+	 * @return string HTML.
+	 */
+	public static function meta_box_count( $post_id, $type, $lang ) {
+		$cached = TP_AI_Summary::get_cached( (int) $post_id, (string) $type, (string) $lang );
+		$text   = is_array( $cached ) ? (string) ( $cached['text'] ?? '' ) : '';
+
+		if ( '' === trim( $text ) ) {
+			return '';
+		}
+
+		$lim = TP_AI_Bounds::limits();
+
+		if ( 'keypoints' === $type ) {
+			$items = TP_AI_Bounds::items( $text );
+			/* translators: 1: items, 2: min items, 3: max items, 4: min characters, 5: max characters */
+			$count = sprintf( __( '%1$d items (%2$d-%3$d, each %4$d-%5$d characters)', 'topersia-ai-summarizer' ), count( $items ), $lim['items'][0], $lim['items'][1], $lim['keypoints'][0], $lim['keypoints'][1] );
+		} else {
+			$b = $lim[ $type ] ?? $lim['summary'];
+			/* translators: 1: characters, 2: min, 3: max */
+			$count = sprintf( __( '%1$d characters (%2$d-%3$d)', 'topersia-ai-summarizer' ), TP_AI_Bounds::chars( $text ), $b[0], $b[1] );
+		}
+
+		$review = TP_AI_Bounds::needs_review( $post_id, $type, $lang, $text )
+			? ' · <strong class="tpas-gen__review" style="color:#b32d2e;">' . esc_html__( 'Needs review — not shown on the page', 'topersia-ai-summarizer' ) . '</strong>'
+			: '';
+
+		return ' · <span class="tpas-gen__count">' . esc_html( $count ) . '</span>' . $review;
 	}
 
 	/**

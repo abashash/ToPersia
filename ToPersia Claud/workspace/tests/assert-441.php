@@ -176,6 +176,7 @@ $just441 = function ( $pages ) {
 	$allowed = array(
 		'#^<article class="tp-longform tp-justify"#',
 		'#^<p class="tp-justify">#',
+		'#^<p class="tp-justify" data-tp-ai-panel="(?:summary|bullets|plan)"(?: hidden)?>#',   /* دستهٔ ۲۶ · F-01: هر خروجی AI بند خودش */
 	);
 	$seen = array();
 	foreach ( $pages as $h ) {
@@ -192,7 +193,7 @@ $just441 = function ( $pages ) {
 			if ( 0 === strpos( $hit[0], '<p' ) ) {
 				$before = substr( $h, max( 0, $hit[1] - 400 ), min( 400, $hit[1] ) );
 				if ( preg_match( '#</summary>$#', $before ) ) { $seen['faq'] = 1; }
-				elseif ( preg_match( '#aria-live="polite">$#', $before ) ) { $seen['ai'] = 1; }
+				elseif ( preg_match( '#aria-live="polite">$#', $before ) || ( false !== strpos( $hit[0], 'data-tp-ai-panel' ) && preg_match( '#data-tp-ai-panel="[a-z]+"(?: hidden)?>[^<]*</p>$#u', $before ) ) ) { $seen['ai'] = 1; }
 				elseif ( preg_match( '#</time>$#', $before ) || preg_match( '#</h3>$#', $before ) ) { $seen['news'] = 1; }
 				else { return false; }
 			} else {
@@ -284,7 +285,7 @@ t( 'منتشرشده: صفحۀ هم‌مرزِ فارسی اصفهان را یک
 $v441 = array(
 	'render'     => array( TP_PLUGIN_DIR . 'topersia-render.php', '4.5.5', array( '/^ \* Version:\s*(\S+)/m', "/define\( 'TOPERSIA_RENDER_VERSION', '([^']+)' \)/" ) ),
 	'user-core'  => array( dirname( TP_PLUGIN_DIR ) . '/topersia-user-core/topersia-user-core.php', '1.14.1', array( '/^ \* Version:\s*(\S+)/m', "/define\('TOPERSIA_USER_CORE_VERSION', '([^']+)'\)/" ) ),
-	'summarizer' => array( dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/topersia-ai-summarizer.php', '1.4.1', array( '/^\s*\*\s*Version:\s*(\S+)/m', "/define\(\s*'TP_AI_VERSION',\s*'([^']+)'/" ) ),
+	'summarizer' => array( dirname( TP_PLUGIN_DIR ) . '/topersia-ai-summarizer/topersia-ai-summarizer.php', '1.5.0', array( '/^\s*\*\s*Version:\s*(\S+)/m', "/define\(\s*'TP_AI_VERSION',\s*'([^']+)'/" ) ),
 	'core'       => array( dirname( TP_PLUGIN_DIR ) . '/topersia-core/topersia-core.php', '4.14.0', array(
 		'/^ \* Version:\s*(\S+)/m',
 		"/define\( 'TOPERSIA_CORE_VERSION', '([^']+)' \);/",

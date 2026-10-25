@@ -34,6 +34,10 @@ require_once TP_AI_PATH . 'includes/class-tp-ai-frontend.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-shortcode.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-block.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-tracker.php';
+foreach ( array( 'TPAS_SUMMARY_MIN' => 250, 'TPAS_SUMMARY_MAX' => 450, 'TPAS_KEYPOINTS_MIN' => 4, 'TPAS_KEYPOINTS_MAX' => 6, 'TPAS_KEYPOINT_MIN' => 40, 'TPAS_KEYPOINT_MAX' => 140, 'TPAS_PLAN_MIN' => 200, 'TPAS_PLAN_MAX' => 400 ) as $k => $v ) {
+	defined( $k ) || define( $k, $v );
+}
+require_once TP_AI_PATH . 'includes/class-tp-ai-bounds.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-summary.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-generator.php';
 require_once TP_AI_PATH . 'includes/class-tp-ai-core-bridge.php';

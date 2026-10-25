@@ -238,11 +238,18 @@ class TP_AI_Summary {
 			$engine = new TP_AI_Internal();
 			$text   = (string) $engine->generate( $type, TP_AI_Context::build( $post ) );
 
+			/* 1.5.0: outside the bounds -> made once more (the offline engine is deterministic, so this rarely helps) */
+			if ( '' !== trim( $text ) && empty( TP_AI_Bounds::check( $type, $text )['ok'] ) ) {
+				$again = (string) $engine->generate( $type, TP_AI_Context::build( $post ) );
+				$text  = '' !== trim( $again ) ? $again : $text;
+			}
+
 			if ( '' === trim( $text ) ) {
 				return array( 'ok' => false, 'message' => 'Not enough content to summarize.', 'engine' => 'internal' );
 			}
 
 			self::store( $post, $type, $lang, $text, '', '', 'internal' );
+			TP_AI_Bounds::flag( $post, $type, $lang, TP_AI_Bounds::check( $type, $text ) );
 
 			return array( 'ok' => true, 'text' => $text, 'engine' => 'internal' );
 		}
@@ -257,6 +264,7 @@ class TP_AI_Summary {
 		$title     = TP_AI_Render::current_title( $post );
 		$base      = TP_AI_Prompt_Manager::get( $lang, $type );
 		$user_msg  = TP_AI_Render::build_prompt( $base, $url_key, $title, $post, $lang );
+		$user_msg .= "\n\n" . TP_AI_Bounds::instruction( $type ); // 1.5.0: the bounds are stated in the prompt
 
 		// Attach the page context.
 		$context   = self::page_context( $post, $url_key );
@@ -276,7 +284,7 @@ class TP_AI_Summary {
 				'ai.text',
 				array( (int) $post, (string) $type ),
 				function () use ( $system, $user_full, &$failed, &$meta ) {
-					$r = TP_AI_API::chat( $system, $user_full );
+					$r = self::chat_bounded( $system, $user_full, $type );
 					if ( ! $r['ok'] ) {
 						$failed = $r;
 						return new WP_Error( 'tpas_ai', (string) $r['message'] );
@@ -299,11 +307,12 @@ class TP_AI_Summary {
 			}
 
 			self::log_reply( $post, $type, $lang, false, $meta['provider'] ?? '', $meta['model'] ?? '' );
+			TP_AI_Bounds::flag( $post, $type, $lang, TP_AI_Bounds::check( $type, (string) $text ) );
 
 			return array( 'ok' => true, 'text' => (string) $text, 'engine' => 'ai' );
 		}
 
-		$result = TP_AI_API::chat( $system, $user_full );
+		$result = self::chat_bounded( $system, $user_full, $type );
 
 		if ( ! $result['ok'] ) {
 			return array( 'ok' => false, 'message' => (string) $result['message'], 'engine' => 'ai' );
@@ -313,10 +322,39 @@ class TP_AI_Summary {
 		$label = $result['provider'] ?? '';
 
 		self::store( $post, $type, $lang, $text, $label, $result['model'] ?? '' );
+		TP_AI_Bounds::flag( $post, $type, $lang, TP_AI_Bounds::check( $type, (string) $text ) );
 
 		self::log_reply( $post, $type, $lang, false, $label, $result['model'] ?? '' );
 
 		return array( 'ok' => true, 'text' => (string) $text, 'engine' => 'ai' );
+	}
+
+	/**
+	 * 1.5.0 — one engine call; an answer outside the length bounds is asked for
+	 * once more with the miss stated. The second answer is kept whatever its
+	 * length (the caller flags it for review when still outside).
+	 *
+	 * @param string $system System message.
+	 * @param string $user   User message (already carrying the bounds).
+	 * @param string $type   Output type.
+	 * @return array TP_AI_API::chat() result.
+	 */
+	private static function chat_bounded( $system, $user, $type ) {
+		$r = TP_AI_API::chat( $system, $user );
+
+		if ( empty( $r['ok'] ) ) {
+			return $r;
+		}
+
+		$miss = TP_AI_Bounds::check( $type, (string) $r['data'] );
+
+		if ( ! empty( $miss['ok'] ) ) {
+			return $r;
+		}
+
+		$again = TP_AI_API::chat( $system, $user . "\n\n" . TP_AI_Bounds::instruction( $type, $miss ) );
+
+		return empty( $again['ok'] ) ? $r : $again;
 	}
 
 	/**
