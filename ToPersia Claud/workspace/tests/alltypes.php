@@ -689,8 +689,8 @@ if ( 41 !== count( $tp_four_cells ) || $tp_four_miss ) {
 	tp_at_note( 'Four', 'STAT_CELLS ' . count( $tp_four_cells ) . ' نوع؛ رندرنشده: ' . implode( ' ', $tp_four_miss ), 'P5-D395' );
 }
 foreach ( (array) ( $GLOBALS['tp_at_four'] ?? array() ) as $tp_t => $tp_modes ) {
-	/* حالت تهی: هر خانه «—» جز «زبان‌ها» — صفحهٔ منتشرشده دست‌کم یک زبان دارد */
-	$tp_four_want = count( array_diff( array_column( $tp_four_cells[ $tp_t ], 'key' ), array( 'meta:languages' ) ) );
+	/* حالت تهی: هر ۴ خانه «—» (P5-D398: دیگر خانهٔ شمار زبان/منبع نیست که همیشه مقدار داشته باشد) */
+	$tp_four_want = 4;
 	if ( isset( $tp_modes['empty'] ) && $tp_four_want !== substr_count( $tp_modes['empty'], 'tp-stat--none' ) ) {
 		tp_at_note( 'Four', $tp_t . ': حالت تهی ' . substr_count( $tp_modes['empty'], 'tp-stat--none' ) . ' خانهٔ «—» به‌جای ' . $tp_four_want, 'P5-D395' );
 	}

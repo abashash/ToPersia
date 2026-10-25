@@ -96,8 +96,12 @@ $req_bad = array();
 foreach ( $cells as $type => $list ) {
 	$schema = topersia_pack_schema( $type );
 	foreach ( $list as $cell ) {
-		if ( $cell['req'] && ( ! isset( $schema['fields'][ $cell['key'] ] ) || empty( $schema['fields'][ $cell['key'] ]['required'] ) ) ) {
+		$fld = topersia_g_stat_field_of( $cell['key'] );
+		if ( $cell['req'] && '' !== $fld && ( ! isset( $schema['fields'][ $fld ] ) || empty( $schema['fields'][ $fld ]['required'] ) ) ) {
 			$req_bad[] = $type . '.' . $cell['key'];
+		}
+		if ( ! $cell['req'] && '' !== $fld && isset( $schema['fields'][ $fld ] ) && ! empty( $schema['fields'][ $fld ]['stat_required'] ) ) {
+			$req_bad[] = $type . '.' . $cell['key'] . ' (الزامی بی علامت)';
 		}
 	}
 }

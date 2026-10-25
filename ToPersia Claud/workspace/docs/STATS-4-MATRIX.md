@@ -1,22 +1,36 @@
-# چهار خانهٔ ثابت زیر سربرگ — P5-D395 (پیاده شد؛ پیشینه: P5-D390)
+# چهار خانهٔ ثابت زیر سربرگ — P5-D395، اصلاح P5-D398 (پیاده شد؛ پیشینه: P5-D390)
 
-> **پیاده شد — دستهٔ ۲۴ (۲۰ اکتبر ۲۰۲۶).** متن پرامت دستهٔ ۲۴ ملاک است؛ جایگزین P5-D275 («کمتر از چهار، بی جای خالی») و P5-D390. پایین‌تر، از «پیشینه» به بعد، تحلیل پیش‌نویس دستهٔ ۲۰ برای سابقه مانده است.
+> **پیاده شد — دستهٔ ۲۴ و اصلاح ۲۴ب (۲۱ اکتبر ۲۰۲۶).** متن پرامت دستهٔ ۲۴ و ۲۴ب ملاک است؛ جایگزین P5-D275 و P5-D390. متن P5-D398 در مخزن نیست (سند تصمیم‌های ۲۱ اکتبر به مخزن نیامده) — قاعدهٔ آن همان است که پرامت ۲۴ب نوشته و این‌جا و در `CLAUDE.md` ثبت شد. پایین‌تر، از «پیشینه» به بعد، تحلیل پیش‌نویس دستهٔ ۲۰ برای سابقه مانده است.
 
 ## قاعده
 
-- هر نوع از ۴۱ نوع همیشه **دقیقاً همان ۴ خانه، به همان ترتیب** — نه کمتر، نه بیشتر؛ شهر با شهر، استان با استان. تنها منبع: `topersia_g_stat_cells()` در `plugin/topersia-render/includes/topersia-g-zones.php` (کلید، برچسب سه‌زبانه از کاتالوگ، قالب نمایش)؛ ستون `stats` ماتریس نوع از همان ساخته می‌شود.
-- اولویت انتخاب: (الف) مشتق مکانی (استان · شهرستان · شهر · فاصله تا مرکز استان) · (ب) فیلد الزامی بستهٔ درون‌ریزی (بخش ج) · (ج) پرکاربردترین فیلد کوتاه نوع · خانهٔ عمومی (آخرین بازبینی · شمار منبع‌ها · شمار زبان‌ها · شمار مکان‌های مرتبط). هرگز نام نوع، بهترین فصل یا کد استان.
-- **نبود مقدار:** خانه می‌ماند با «—» و `role="img" aria-label="نامشخص"` (fa · en · ar از کاتالوگ)؛ یک خط با «…» برای مقدار بلند (متن کامل در `title`) — ارتفاع ردیف ثابت. «—» فقط در لایهٔ نمایش (`[tp_stats]`، ثابت `TOPERSIA_STAT_NONE`) ساخته می‌شود: `topersia_g_stat_cell()` برای نبود `null` می‌دهد، پس به داده، JSON-LD، متا، ورودی هوش مصنوعی یا نمایهٔ جستجو نمی‌رسد (`tests/stats4-local.php` با جهش).
-- **الزامی در بسته:** خانه‌های ● همان بخش (ج) — `topersia_pack_schema()` آن‌ها را از صافی `topersia_pack_required_fields` الزامی می‌کند؛ «الزامی» فقط برای پست تازه (create) سنجیده می‌شود، پست‌های موجود دست نمی‌خورند.
-- بی فیلد، جدول یا ستون تازه؛ ارتفاع و تقویم ساخته نمی‌شود — فقط خانه‌های مشتق از رابطه‌ها، مختصات، `source_references`، WPML و `last_verified_date` موجود.
+- هر نوع از ۴۱ نوع همیشه **دقیقاً همان ۴ خانه، به همان ترتیب** — نه کمتر، نه بیشتر؛ شهر با شهر، استان با استان. تنها منبع: `topersia_g_stat_cells()` در `plugin/topersia-render/includes/topersia-g-zones.php`؛ ستون `stats` ماتریس نوع از همان ساخته می‌شود.
+- **P5-D398 (قاعدهٔ ثابت):** هیچ خانه‌ای «شمار منابع / شمار زبان‌ها / شمار استان‌ها یا مکان‌های مرتبط / آخرین بازبینی» نیست — این‌ها درباره‌ی سایت‌اند، نه موجودیت (فهرست ممنوع در `topersia_g_stat_banned()`؛ آزمون assert با جهش). «مکان مرتبط» فقط به‌صورت **نام** (مثل نام استان خاستگاه)، متن ساده بی پیوند. هرگز نام نوع یا کد استان؛ بهترین فصل فقط برای «منطقه» (جدول کاربر).
+- اولویت انتخاب: مشتق مکانی (استان · شهرستان · شهر · فاصله تا مرکز استان) · فیلد الزامی بستهٔ درون‌ریزی · پرکاربردترین فیلد کوتاه · فیلد متنی/فهرستی نوع (خط اول). **فقط فیلدهای موجود** — فیلد، جدول یا ستون تازه نیست.
+- **فیلد textarea/wysiwyg (`text:`):** اولین مورد یا خط اول، بی HTML، تا ۴۰ نویسه و سپس «…»؛ متن کامل در `title`؛ CSS یک خط با «…» — ارتفاع ردیف ثابت (CLS صفر). `list:` نام‌های ردیف ریپیتر (حداکثر ۳ + «…»)؛ `rows:` عدد (روز تعطیل رسمی = مجموع `nh_duration_days`، بی مدت = ۱)؛ `domain:` فقط دامنه؛ `names:`/`origin` نام موجودیت‌های منتشرشدهٔ رابطه (خاستگاه: «محل تولید»، وگرنه «محل رواج»). برچسب گزینهٔ فارسی در صفحهٔ غیرفارسی نمی‌آید (P5-D278).
+- **نبود مقدار:** خانه می‌ماند با «—» و `role="img" aria-label="نامشخص"` (fa · en · ar)؛ «—» فقط در لایهٔ نمایش (`[tp_stats]`، `TOPERSIA_STAT_NONE`) ساخته می‌شود و به داده، JSON-LD، متا، ورودی هوش مصنوعی یا نمایهٔ جستجو نمی‌رسد (`tests/stats4-local.php` با جهش).
+- **الزامی در بسته:** خانه‌های ● — `topersia_pack_schema()` آن‌ها را از صافی `topersia_pack_required_fields` الزامی می‌کند (فقط پست تازه؛ پست‌های موجود دست نمی‌خورند). پیام خطا: «فیلد «برچسب» (کلید) کم است — یکی از چهار خانهٔ ثابت زیر سربرگ …». خانه‌های رابطه‌ای (`names:` · `origin` · مشتق مکانی) فیلد نیستند و الزامی نمی‌شوند.
 
-## جدول نهایی — ۴۱ نوع × ۴ خانه (● = الزامی در بستهٔ درون‌ریزی تازه)
+## جایگزینی‌هایی که از جدول کاربر فرق دارند (فقط فیلد موجود — برای تأیید معمار)
+
+| نوع | خواستهٔ پرامت | وضع در داده | آنچه گذاشتم |
+|---|---|---|---|
+| قوم `tp_ethnic_group` | نام استان‌های اصلی · شهر یا منطقهٔ اصلی | **فیلد و رابطه‌ای به استان/شهر ندارد** (فقط `population_estimate` و `language_reference`؛ روابط ۱۳۳–۱۳۸ و ۱۶۳ همه به محتوای فرهنگی) | `names:134` غذاهای محلی · `names:133` صنایع‌دستی (نام‌ها) |
+| دورهٔ تاریخی `tp_historical_era` | «فیلدهای خود نوع؛ اگر معنادار نبود جایگزین» | آغاز و پایان الزامی؛ `capital_reference` · `predecessor_reference` · `successor_reference` | آغاز · پایان · `capital_reference` (پایتخت) · `successor_reference` (جانشین) |
+| برنامه/ثبت `tp_designation` | همان | `programme_start_year` · `programme_code` · `awarding_body` · `page_title` (فقط این چهار) | سال آغاز · برنامه · نهاد اعطاکننده · نام بین‌المللی (`page_title` لاتین است) |
+| روادید `tp_visa` | (نخواسته بود؛ خانهٔ چهارم «آخرین بازبینی» ممنوع شد) | `official_application_portal` | دامنهٔ درگاه رسمی درخواست |
+| سلامت و ایمنی `tp_health_safety` | همان | `vaccination_recommendations` | واکسیناسیون (خط اول) |
+| جشنواره `tp_festival` | همان | `venue_name` | محل برگزاری |
+| رویداد فصلی `tp_seasonal_event` | همان | `peak_window_note` | بازهٔ اوج |
+| صنایع‌دستی · غذا · پوشاک · موسیقی | «خاستگاه (نام استان از رابطه)» | رابطه‌ها: غذا/صنایع‌دستی «محل تولید» (۱۲۸/۱۲۵) و «محل رواج» (۱۱۰/۱۰۷)؛ پوشاک ۱۱۳؛ موسیقی ۱۱۶ — فقط استان | `origin`: «محل تولید»، وگرنه «محل رواج» |
+
+## جدول نهایی — ۴۱ نوع × ۴ خانه (● = فیلد الزامی در بستهٔ درون‌ریزی تازه)
 
 | نوع | خانهٔ ۱ | خانهٔ ۲ | خانهٔ ۳ | خانهٔ ۴ |
 |---|---|---|---|---|
-| `tp_country` | شمار استان‌ها `count:provinces` | جمعیت `population` ● | مساحت `area_km2` ● | زبان رسمی `official_language` ● |
+| `tp_country` | جمعیت `population` ● | مساحت `area_km2` ● | زبان رسمی `official_language` ● | واحد پول `text:currency_note` ● |
 | `tp_city` | استان `parent:province` | شهرستان `parent:county` | مساحت `area_km2` ● | جمعیت `population` ● |
-| `tp_region` | نوع منطقه `region_classification` ● | شمار استان‌ها `count:provinces` | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` |
+| `tp_region` | نوع منطقه `region_classification` ● | مناسب‌ترین فصل برای سفر `best_season` ● | استان‌ها `names:83` | اقلیم `text:climate_overview` ● |
 | `tp_province` | مرکز `capital` | مساحت `area_km2` ● | جمعیت `population` ● | نوع اقلیم `climate_type` ● |
 | `tp_district` | استان `parent:province` | شهر `parent:city` | نوع محله `neighborhood_type` ● | فاصله تا مرکز استان `distance:capital` |
 | `tp_village` | استان `parent:province` | فاصله تا مرکز استان `distance:capital` | جمعیت `population` ● | ارتفاع از سطح دریا `elevation_m` ● |
@@ -33,48 +47,48 @@
 | `tp_museum` | شهر `parent:city` | گونه `classification` ● | سال بنیان‌گذاری `founded_year` ● | مدت بازدید `suggested_duration` ● |
 | `tp_protected_area` | استان `parent:province` | نوع حفاظت `park_type` ● | مساحت `area_km2` ● | مدت بازدید `suggested_duration` ● |
 | `tp_landscape` | استان `parent:province` | نوع منظر `landscape_type` ● | مساحت `total_area_km2` ● | مدت بازدید `suggested_duration` ● |
-| `tp_handicraft` | گونه `classification` ● | سال ثبت یونسکو `intangible_heritage_year` ● | وضعیت ثبت `intangible_heritage_status` ● | مکان‌های مرتبط `meta:related` |
-| `tp_local_food` | گونه `classification_` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` |
-| `tp_costume` | گونه `classification` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` |
-| `tp_music` | گونه `classification` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` |
-| `tp_dance` | گونه `dance_type` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` |
+| `tp_handicraft` | گونه `classification` ● | خاستگاه `origin` | سال ثبت یونسکو `intangible_heritage_year` ● | وضعیت ثبت `intangible_heritage_status` ● |
+| `tp_local_food` | گونه `classification_` ● | مواد اصلی `text:main_ingredients` ● | خاستگاه `origin` | کاربرد آیینی `text:ritual_context_reference` ● |
+| `tp_costume` | گونه `classification` ● | جنس پارچه `text:fabric_type` ● | مناسبت `text:occasion` ● | خاستگاه `origin` |
+| `tp_music` | گونه `classification` ● | سازهای مرتبط `text:related_instruments_reference` ● | کاربرد آیینی `text:ritual_context_reference` ● | خاستگاه `origin` |
+| `tp_dance` | گونه `dance_type` ● | آرایش اجرا `text:formation` ● | مناسبت `text:occasion` ● | همراهی موسیقی `text:music_accompaniment_reference` ● |
 | `tp_language` | خانوادۀ زبانی `language_family` ● | خط `script` ● | گویشوران در ایران `speaker_estimate_iran` ● | نام بومی `name_endonym` ● |
-| `tp_ethnic_group` | جمعیت تخمینی `population_estimate` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` |
+| `tp_ethnic_group` | جمعیت تخمینی `population_estimate` ● | زبان `text:language_reference` ● | غذاهای محلی `names:134` | صنایع‌دستی `names:133` |
 | `tp_ritual` | گونه `classification` ● | گستره `spatial_scope` ● | سال ثبت یونسکو `intangible_heritage_year` ● | وضعیت ثبت `intangible_heritage_status` ● |
-| `tp_figure` | گونه `classification` ● | سال تولد `birth_year_approx` ● | سال درگذشت `death_year_approx` ● | مکان‌های مرتبط `meta:related` |
-| `tp_historical_era` | آغاز `start_year_approx` ● | پایان `end_year_approx` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` |
-| `tp_designation` | سال آغاز برنامه `programme_start_year` ● | مکان‌های مرتبط `meta:related` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` |
+| `tp_figure` | گونه `classification` ● | سال تولد `birth_year_approx` ● | سال درگذشت `death_year_approx` ● | آثار شاخص `text:major_works` ● |
+| `tp_historical_era` | آغاز `start_year_approx` ● | پایان `end_year_approx` ● | پایتخت `text:capital_reference` ● | جانشین `text:successor_reference` ● |
+| `tp_designation` | سال آغاز برنامه `programme_start_year` ● | برنامه `programme_code` ● | نهاد اعطاکننده `awarding_body` ● | نام بین‌المللی `text:page_title` ● |
 | `tp_route` | مسافت `total_distance_km` ● | مدت پیشنهادی `estimated_duration_days` ● | دشواری `difficulty_level` ● | گونه `classification` ● |
-| `tp_visa` | حداکثر اقامت `max_total_stay_days` ● | اعتبار گذرنامه `passport_validity_months` ● | اقامت در منطقۀ آزاد `free_zone_stay_days` ● | آخرین بازبینی `meta:verified` |
+| `tp_visa` | حداکثر اقامت `max_total_stay_days` ● | اعتبار گذرنامه `passport_validity_months` ● | اقامت در منطقۀ آزاد `free_zone_stay_days` ● | درگاه درخواست `domain:official_application_portal` ● |
 | `tp_currency` | کد ISO `currency_iso_code` ● | نماد `currency_symbol` ● | کارت بین‌المللی `international_card_status` ● | بازتعریف واحد پول `redenomination_status` ● |
-| `tp_health_safety` | پلیس `emergency_police` ● | اورژانس `emergency_ambulance` ● | آتش‌نشانی `emergency_fire` ● | آخرین بازبینی `meta:verified` |
-| `tp_travel_etiquette` | آخرین بازبینی `meta:verified` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` | مکان‌های مرتبط `meta:related` |
-| `tp_calendar` | آخرین بازبینی `meta:verified` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` | مکان‌های مرتبط `meta:related` |
-| `tp_transport` | آخرین بازبینی `meta:verified` | منبع‌ها `meta:sources` | زبان‌ها `meta:languages` | مکان‌های مرتبط `meta:related` |
-| `tp_festival` | تکرار `event_frequency` ● | تاریخ آغاز `event_start_date` | تاریخ پایان `event_end_date` | مکان‌های مرتبط `meta:related` |
+| `tp_health_safety` | پلیس `emergency_police` ● | اورژانس `emergency_ambulance` ● | آتش‌نشانی `emergency_fire` ● | واکسیناسیون `text:vaccination_recommendations` ● |
+| `tp_travel_etiquette` | انعام `text:tipping_guidance` ● | عکاسی `text:photography_restrictions` ● | پوشش `text:dress_code_summary` ● | آداب منطقه‌ای `text:regional_etiquette_notes` ● |
+| `tp_calendar` | نظام‌های تقویمی `list:calendar_systems:cs_system` ● | روز تعطیل رسمی `rows:national_holidays` ● | ماه بازبینی سالانه `num:annual_review_month` ● | منبع رسمی `domain:official_source_link` ● |
+| `tp_transport` | حالت‌های حمل‌ونقل `list:transport_modes:tm_mode` ● | شهرهای دارای مترو `rows:cities_with_metro` ● | دسترس‌پذیری `text:accessibility_note` ● | پلتفرم‌های رزرو `list:booking_platforms:bp_name` ● |
+| `tp_festival` | تکرار `event_frequency` ● | تاریخ آغاز `event_start_date` | تاریخ پایان `event_end_date` | محل برگزاری `text:venue_name` ● |
 | `tp_sports_event` | رشته `sport_type` ● | سطح `competition_level` ● | تکرار `event_frequency` ● | تاریخ آغاز `event_start_date` |
 | `tp_religious_event` | تقویم `calendar_system` ● | مدت مراسم `ceremony_duration_days` ● | گسترۀ حضور `crowd_scale` ● | تاریخ آغاز `event_start_date` |
-| `tp_seasonal_event` | پدیده `natural_phenomenon_type` ● | فصل `season` ● | وابستگی به هوا `weather_dependency` ● | مکان‌های مرتبط `meta:related` |
+| `tp_seasonal_event` | پدیده `natural_phenomenon_type` ● | فصل `season` ● | وابستگی به هوا `weather_dependency` ● | بازۀ اوج `text:peak_window_note` ● |
 
-## گزارش «خانهٔ خالی» — نسخهٔ محلی، ۲۰ اکتبر ۲۰۲۶ (پس از دادهٔ پایهٔ دستهٔ ۲۲ب)
+## گزارش «خانهٔ خالی» — نسخهٔ محلی، ۲۱ اکتبر ۲۰۲۶ (پس از P5-D398)
 
 ابزار: `php wp-cli.phar … eval-file scripts/tp-stats-empty.php [md] [all]` (فقط خواندنی). **گیت راه‌اندازی (فعلاً فقط گزارش): حداکثر ۱ خانهٔ «—» در هر پست منتشرشده** — ستون «رد گیت».
 
 | نوع | پست | ۰ «—» | ۱ | ۲ | ۳ | ۴ | رد گیت (> ۱) | «—» به تفکیک خانه |
 |---|---|---|---|---|---|---|---|---|
 | `tp_country` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
-| `tp_city` | 114 | 8 | 83 | 23 | 0 | 0 | 23 | مساحت 105 · جمعیت 24 |
+| `tp_city` | 114 | 2 | 87 | 24 | 1 | 0 | 25 | شهرستان 9 · مساحت 105 · جمعیت 24 |
 | `tp_region` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_province` | 31 | 1 | 5 | 25 | 0 | 0 | 25 | مرکز 26 · نوع اقلیم 29 |
 | `tp_district` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_village` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_island` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| `tp_mountain` | 1 | 0 | 1 | 0 | 0 | 0 | 0 | دشواری صعود 1 |
+| `tp_mountain` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_water_body` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
-| `tp_desert` | 1 | 0 | 0 | 1 | 0 | 0 | 1 | مساحت 1 · حداکثر دمای ثبت‌شده 1 |
+| `tp_desert` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_forest_plain` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_border_crossing` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| `tp_monument` | 11 | 0 | 0 | 1 | 8 | 2 | 11 | گونه 3 · سال ساخت 9 · مدت بازدید 11 · وضعیت مرمت 11 |
+| `tp_monument` | 11 | 1 | 0 | 1 | 8 | 1 | 10 | گونه 2 · سال ساخت 8 · مدت بازدید 10 · وضعیت مرمت 10 |
 | `tp_religious_site` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_ancient_site` | 3 | 0 | 0 | 3 | 0 | 0 | 3 | وضعیت کاوش 3 · سبک معماری 3 |
 | `tp_natural_feature` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
@@ -82,7 +96,7 @@
 | `tp_protected_area` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_landscape` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_handicraft` | 3 | 0 | 0 | 1 | 2 | 0 | 3 | گونه 2 · سال ثبت یونسکو 3 · وضعیت ثبت 3 |
-| `tp_local_food` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
+| `tp_local_food` | 1 | 0 | 1 | 0 | 0 | 0 | 0 | کاربرد آیینی 1 |
 | `tp_costume` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_music` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_dance` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
@@ -91,36 +105,64 @@
 | `tp_ritual` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_figure` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_historical_era` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| `tp_designation` | 6 | 0 | 0 | 6 | 0 | 0 | 6 | مکان‌های مرتبط 6 · منبع‌ها 6 |
+| `tp_designation` | 6 | 6 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_route` | 1 | 1 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_visa` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_currency` | 2 | 0 | 1 | 1 | 0 | 0 | 1 | نماد 1 · کارت بین‌المللی 1 · بازتعریف واحد پول 1 |
-| `tp_health_safety` | 1 | 0 | 1 | 0 | 0 | 0 | 0 | آخرین بازبینی 1 |
-| `tp_travel_etiquette` | 1 | 0 | 0 | 1 | 0 | 0 | 1 | آخرین بازبینی 1 · مکان‌های مرتبط 1 |
-| `tp_calendar` | 1 | 0 | 0 | 1 | 0 | 0 | 1 | آخرین بازبینی 1 · مکان‌های مرتبط 1 |
-| `tp_transport` | 1 | 0 | 0 | 1 | 0 | 0 | 1 | آخرین بازبینی 1 · مکان‌های مرتبط 1 |
+| `tp_health_safety` | 1 | 0 | 1 | 0 | 0 | 0 | 0 | واکسیناسیون 1 |
+| `tp_travel_etiquette` | 1 | 0 | 0 | 0 | 1 | 0 | 1 | انعام 1 · عکاسی 1 · آداب منطقه‌ای 1 |
+| `tp_calendar` | 1 | 0 | 0 | 0 | 1 | 0 | 1 | نظام‌های تقویمی 1 · روز تعطیل رسمی 1 · ماه بازبینی سالانه 1 |
+| `tp_transport` | 1 | 0 | 0 | 0 | 0 | 1 | 1 | حالت‌های حمل‌ونقل 1 · شهرهای دارای مترو 1 · دسترس‌پذیری 1 · پلتفرم‌های رزرو 1 |
 | `tp_festival` | 1 | 0 | 0 | 1 | 0 | 0 | 1 | تاریخ آغاز 1 · تاریخ پایان 1 |
 | `tp_sports_event` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_religious_event` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
 | `tp_seasonal_event` | 0 | 0 | 0 | 0 | 0 | 0 | 0 | — |
-| **همه** | 183 | 15 | 91 | 65 | 10 | 2 | **77** | |
+| **همه** | 183 | 17 | 95 | 56 | 13 | 2 | **71** | |
 
 **پست‌هایی که باید پر شوند** (خانه‌های «—»؛ تا ۸ در هر نوع):
 
-- `tp_city` (106): ری #140 (جمعیت) · سلطانیه #142 (مساحت) · سمنان #146 (مساحت، جمعیت) · اردستان #389 (مساحت) · دولت‌آباد #390 (مساحت) · چادگان #392 (مساحت) · دهاقان #393 (مساحت) · فلاورجان #394 (مساحت) · …
+- `tp_city` (112): سرخس #135 (شهرستان) · مشهد #136 (شهرستان) · سبزوار #138 (شهرستان) · دامغان #139 (شهرستان) · ری #140 (شهرستان، جمعیت) · قزوین #141 (شهرستان) · سلطانیه #142 (شهرستان، مساحت) · تبریز #144 (شهرستان) · …
 - `tp_province` (30): آذربایجان شرقی #96 (نوع اقلیم) · آذربایجان غربی #97 (مرکز، نوع اقلیم) · اردبیل #98 (مرکز، نوع اقلیم) · البرز #100 (مرکز، نوع اقلیم) · ایلام #101 (مرکز، نوع اقلیم) · بوشهر #102 (مرکز، نوع اقلیم) · چهارمحال و بختیاری #106 (مرکز، نوع اقلیم) · خراسان جنوبی #108 (مرکز، نوع اقلیم) · …
-- `tp_mountain` (1): کوه کرکس #1947 (دشواری صعود)
-- `tp_desert` (1): کویر مرنجاب #1945 (مساحت، حداکثر دمای ثبت‌شده)
-- `tp_monument` (11): میدان نقش جهان #1948 (گونه، سال ساخت، مدت بازدید، وضعیت مرمت) · باغ چهل‌ستون #1950 (گونه، سال ساخت، مدت بازدید، وضعیت مرمت) · باغ فین #1951 (گونه، مدت بازدید، وضعیت مرمت) · کاروانسرای شیخعلی‌خان #1955 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای مرنجاب #1956 (مدت بازدید، وضعیت مرمت) · کاروانسرای امین‌آباد #1957 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای گبرآباد #1958 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای مهیار #1959 (سال ساخت، مدت بازدید، وضعیت مرمت) · …
+- `tp_monument` (10): باغ چهل‌ستون #1950 (گونه، سال ساخت، مدت بازدید، وضعیت مرمت) · باغ فین #1951 (گونه، مدت بازدید، وضعیت مرمت) · کاروانسرای شیخعلی‌خان #1955 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای مرنجاب #1956 (مدت بازدید، وضعیت مرمت) · کاروانسرای امین‌آباد #1957 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای گبرآباد #1958 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای مهیار #1959 (سال ساخت، مدت بازدید، وضعیت مرمت) · کاروانسرای گز #1960 (سال ساخت، مدت بازدید، وضعیت مرمت) · …
 - `tp_ancient_site` (3): قنات ماه #1952 (وضعیت کاوش، سبک معماری) · قنات وزوان #1953 (وضعیت کاوش، سبک معماری) · قنات مزدآباد #1954 (وضعیت کاوش، سبک معماری)
 - `tp_handicraft` (3): خاتم‌کاری #1963 (سال ثبت یونسکو، وضعیت ثبت) · میناکاری #1964 (گونه، سال ثبت یونسکو، وضعیت ثبت) · قلم‌زنی #1965 (گونه، سال ثبت یونسکو، وضعیت ثبت)
-- `tp_designation` (6): میراث جهانی یونسکو در ایران #51 (مکان‌های مرتبط، منبع‌ها) · میراث فرهنگی ناملموس یونسکو در ایران #54 (مکان‌های مرتبط، منبع‌ها) · ژئوپارک‌های جهانی یونسکو در ایران #56 (مکان‌های مرتبط، منبع‌ها) · ذخیره‌گاه‌های زیست‌کره یونسکو در ایران #58 (مکان‌های مرتبط، منبع‌ها) · شهرهای خلاق یونسکو در ایران #61 (مکان‌های مرتبط، منبع‌ها) · آثار طبیعی ملی ایران #63 (مکان‌های مرتبط، منبع‌ها)
+- `tp_local_food` (1): گز #1966 (کاربرد آیینی)
 - `tp_currency` (2): ارز و روش‌های پرداخت در ایران #204 (نماد) · ریال ایران #1968 (کارت بین‌المللی، بازتعریف واحد پول)
-- `tp_health_safety` (1): شماره‌های اضطراری ایران #1970 (آخرین بازبینی)
-- `tp_travel_etiquette` (1): پوشش در اماکن عمومی ایران #1971 (آخرین بازبینی، مکان‌های مرتبط)
-- `tp_calendar` (1): تقویم رسمی ایران #1969 (آخرین بازبینی، مکان‌های مرتبط)
-- `tp_transport` (1): شبکۀ ریلی ایران #1972 (آخرین بازبینی، مکان‌های مرتبط)
+- `tp_health_safety` (1): شماره‌های اضطراری ایران #1970 (واکسیناسیون)
+- `tp_travel_etiquette` (1): پوشش در اماکن عمومی ایران #1971 (انعام، عکاسی، آداب منطقه‌ای)
+- `tp_calendar` (1): تقویم رسمی ایران #1969 (نظام‌های تقویمی، روز تعطیل رسمی، ماه بازبینی سالانه)
+- `tp_transport` (1): شبکۀ ریلی ایران #1972 (حالت‌های حمل‌ونقل، شهرهای دارای مترو، دسترس‌پذیری، پلتفرم‌های رزرو)
 - `tp_festival` (1): جشن گلاب‌گیری کاشان #1967 (تاریخ آغاز، تاریخ پایان)
+
+**فیلدهای کم‌مقدار (بیشترین کمبود اول) — برای فایل‌های درون‌ریزی:**
+
+| نوع | خانه | فیلد | الزامی در بسته | پست «—» | از پست |
+|---|---|---|---|---|---|
+| `tp_city` | مساحت | `area_km2` | بله | 105 | 114 |
+| `tp_province` | نوع اقلیم | `climate_type` | بله | 29 | 31 |
+| `tp_province` | مرکز | — (مشتق از رابطه/مختصات) | خیر | 26 | 31 |
+| `tp_city` | جمعیت | `population` | بله | 24 | 114 |
+| `tp_monument` | مدت بازدید | `suggested_duration` | بله | 10 | 11 |
+| `tp_monument` | وضعیت مرمت | `restoration_status` | بله | 10 | 11 |
+| `tp_city` | شهرستان | — (مشتق از رابطه/مختصات) | خیر | 9 | 114 |
+| `tp_monument` | سال ساخت | `construction_year` | بله | 8 | 11 |
+| `tp_ancient_site` | وضعیت کاوش | `excavation_status` | بله | 3 | 3 |
+| `tp_ancient_site` | سبک معماری | `architectural_style` | بله | 3 | 3 |
+| `tp_handicraft` | سال ثبت یونسکو | `intangible_heritage_year` | بله | 3 | 3 |
+| `tp_handicraft` | وضعیت ثبت | `intangible_heritage_status` | بله | 3 | 3 |
+| `tp_handicraft` | گونه | `classification` | بله | 2 | 3 |
+| `tp_monument` | گونه | `classification` | بله | 2 | 11 |
+| `tp_calendar` | نظام‌های تقویمی | `calendar_systems` | بله | 1 | 1 |
+| `tp_calendar` | روز تعطیل رسمی | `national_holidays` | بله | 1 | 1 |
+| `tp_calendar` | ماه بازبینی سالانه | `annual_review_month` | بله | 1 | 1 |
+| `tp_currency` | نماد | `currency_symbol` | بله | 1 | 2 |
+| `tp_currency` | کارت بین‌المللی | `international_card_status` | بله | 1 | 2 |
+| `tp_currency` | بازتعریف واحد پول | `redenomination_status` | بله | 1 | 2 |
+| `tp_festival` | تاریخ آغاز | `event_start_date` | خیر | 1 | 1 |
+| `tp_festival` | تاریخ پایان | `event_end_date` | خیر | 1 | 1 |
+| `tp_health_safety` | واکسیناسیون | `vaccination_recommendations` | بله | 1 | 1 |
+| `tp_local_food` | کاربرد آیینی | `ritual_context_reference` | بله | 1 | 1 |
+| `tp_transport` | حالت‌های حمل‌ونقل | `transport_modes` | بله | 1 | 1 |
 
 ---
 

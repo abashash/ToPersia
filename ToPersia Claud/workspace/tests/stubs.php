@@ -58,6 +58,14 @@ function esc_attr( $v ) { return htmlspecialchars( (string) $v, ENT_QUOTES, 'UTF
  * وردپرس `ltrim( $url )` می‌زند و PHP 8 همان‌جا TypeError می‌دهد — یعنی ۵۰۰.
  * آزمونی که از سایت مهربان‌تر است، خطای سایت را نمی‌بیند.
  */
+/* وردپرس: wp_parse_url مثل parse_url ولی با نشانی بی طرح هم کار می‌کند — stub همان‌قدر سخت‌گیر */
+function wp_parse_url( $url, $component = -1 ) {
+	$url = (string) $url;
+	$p   = parse_url( $url, $component );
+	if ( -1 === $component && false === $p ) { return false; }
+	return $p;
+}
+
 function esc_url( $v ) {
 	if ( '' === $v ) { return $v; }
 	return htmlspecialchars( str_replace( ' ', '%20', ltrim( $v ) ), ENT_QUOTES, 'UTF-8' );

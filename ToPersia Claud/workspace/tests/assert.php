@@ -134,7 +134,8 @@ $mx_bad = array();
 foreach ( topersia_g_type_matrix() as $mx_type => $mx_row ) {
 	foreach ( isset( $mx_row['stats'] ) ? $mx_row['stats'] : array() as $mx_key ) {
 		/* P5-D395: خانه‌های مشتق (زنجیرهٔ مکانی، فاصله، خانهٔ عمومی) فیلد نیستند */
-		if ( 'capital' === $mx_key || 0 === strpos( $mx_key, 'count:' ) || in_array( $mx_key, array( 'parent:province', 'parent:county', 'parent:city', 'distance:capital', 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ), true ) ) { continue; }
+		/* P5-D398: خانه‌های مشتق/متنی/فهرستی/رابطه‌ای فیلد ساده نیستند؛ فیلد پشتشان را آزمون ایستای P5-D395 و stats4-local می‌سنجد */
+		if ( 'capital' === $mx_key || 'origin' === $mx_key || false !== strpos( $mx_key, ':' ) ) { continue; }
 		$mx_f = isset( topersia_g_map()[ $mx_key ] ) ? topersia_g_map()[ $mx_key ] : null;
 		if ( ! $mx_f ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' نیست'; continue; }
 		if ( 'flag' === $mx_f['kind'] ) { $mx_bad[] = $mx_type . '.' . $mx_key . ' پرچم است'; }
@@ -150,10 +151,15 @@ $sc_ok = function ( $cells ) {
 	foreach ( $cells as $t => $list ) {
 		$keys = array_column( $list, 'key' );
 		if ( 4 !== count( $keys ) || 4 !== count( array_unique( $keys ) ) ) { $bad[] = $t . ' ' . count( $keys ); }
-		if ( array_intersect( $keys, array( 'best_season', 'province_code', 'post_type', 'type' ) ) ) { $bad[] = $t . ' ممنوع'; }
+		/* P5-D398: best_season فقط در تنها نوعی که جدول کاربر صریح خواسته (منطقه)؛ هرگز کد استان یا نام نوع */
+		if ( array_intersect( $keys, array_merge( 'tp_region' === $t ? array() : array( 'best_season' ), array( 'province_code', 'post_type', 'type' ) ) ) ) { $bad[] = $t . ' ممنوع'; }
 	}
-	foreach ( array( 'tp_travel_etiquette', 'tp_calendar', 'tp_transport' ) as $t ) {
-		if ( ! isset( $cells[ $t ] ) || array( 'meta:verified', 'meta:sources', 'meta:languages', 'meta:related' ) !== array_column( $cells[ $t ], 'key' ) ) { $bad[] = $t . ' خانهٔ عمومی نیست'; }
+	/* P5-D398: هیچ خانه‌ای شمار منبع/زبان/استان‌ یا مکان مرتبط/آخرین بازبینی نیست — درباره‌ی سایت‌اند، نه موجودیت */
+	foreach ( $cells as $t => $list ) {
+		foreach ( array_intersect( array_column( $list, 'key' ), topersia_g_stat_banned() ) as $k ) { $bad[] = $t . ' ممنوع ' . $k; }
+		foreach ( array_column( $list, 'key' ) as $k ) {
+			if ( 0 === strpos( $k, 'meta:' ) ) { $bad[] = $t . ' ' . $k; }
+		}
 	}
 	return 41 === count( $cells ) && ! $bad ? '' : implode( ' · ', $bad ) . ' (' . count( $cells ) . ')';
 };
@@ -162,8 +168,12 @@ $sc_less  = $sc_real; array_pop( $sc_less['tp_city'] );
 $sc_more  = $sc_real; $sc_more['tp_city'][] = array( 'key' => 'elevation_m', 'req' => false );
 $sc_dup   = $sc_real; $sc_dup['tp_city'][3] = $sc_dup['tp_city'][2];
 $sc_bad   = $sc_real; $sc_bad['tp_province'][3] = array( 'key' => 'province_code', 'req' => false );
-t( 'P5-D395: STAT_CELLS — ۴۱ نوع، هر کدام دقیقاً ۴ کلید یکتا، بی نوع/بهترین فصل/کد استان؛ سه نوع بی فیلد کوتاه خانهٔ عمومی دارند — جهش کم · بیش · تکراری · کد استان می‌افتد',
-	'' === $sc_ok( $sc_real ) && '' !== $sc_ok( $sc_less ) && '' !== $sc_ok( $sc_more ) && '' !== $sc_ok( $sc_dup ) && '' !== $sc_ok( $sc_bad ), $sc_ok( $sc_real ) );
+$sc_cnt   = $sc_real; $sc_cnt['tp_local_food'][1] = array( 'key' => 'meta:sources', 'req' => false );        /* جهش P5-D398: شمار منبع */
+$sc_cnt2  = $sc_real; $sc_cnt2['tp_region'][2] = array( 'key' => 'count:provinces', 'req' => false );        /* شمار استان‌ها */
+$sc_cnt3  = $sc_real; $sc_cnt3['tp_visa'][3] = array( 'key' => 'meta:verified', 'req' => false );         /* آخرین بازبینی */
+t( 'P5-D395: STAT_CELLS — ۴۱ نوع، هر کدام دقیقاً ۴ کلید یکتا، بی نوع/بهترین فصل/کد استان؛ هیچ خانه‌ای شمار منبع/زبان/استان/مکان مرتبط یا آخرین بازبینی نیست (P5-D398) — جهش کم · بیش · تکراری · کد استان · هر یک از آن کلیدهای ممنوع می‌افتد',
+	'' === $sc_ok( $sc_real ) && '' !== $sc_ok( $sc_less ) && '' !== $sc_ok( $sc_more ) && '' !== $sc_ok( $sc_dup ) && '' !== $sc_ok( $sc_bad )
+	&& '' !== $sc_ok( $sc_cnt ) && '' !== $sc_ok( $sc_cnt2 ) && '' !== $sc_ok( $sc_cnt3 ), $sc_ok( $sc_real ) );
 $sc_plan_bad = array();
 foreach ( $sc_real as $t => $list ) {
 	$mx = topersia_g_type_matrix();
@@ -171,7 +181,8 @@ foreach ( $sc_real as $t => $list ) {
 }
 t( 'P5-D395: ماتریس stats همان STAT_CELLS است (تنها منبع)؛ فیلدهای الزامی بسته از همان (صافی topersia_pack_required_fields)',
 	! $sc_plan_bad && array( 'area_km2', 'population' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_city' )
-	&& array() === apply_filters( 'topersia_pack_required_fields', array(), 'tp_calendar' ), implode( ' ', $sc_plan_bad ) );
+	&& array( 'calendar_systems', 'national_holidays', 'annual_review_month', 'official_source_link' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_calendar' )
+	&& array( 'tipping_guidance', 'photography_restrictions', 'dress_code_summary', 'regional_etiquette_notes' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_travel_etiquette' ), implode( ' ', $sc_plan_bad ) );
 $sc_src  = (string) file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' );
 /* بدنهٔ یک تابع، بی توضیح‌ها (توضیح‌ها «—» نگارشی دارند) */
 $sc_body = function ( $name, $src = null ) use ( $sc_src ) {

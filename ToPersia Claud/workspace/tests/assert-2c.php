@@ -373,8 +373,12 @@ tp441_mut( 'شمار گروه کارت آمار (count:provinces کشور و م�
 
 tp441_mut( 'فقط کارت آمار: فهرست، اسلایدر و پنجرۀ استان‌ها همچنان صفحه‌های همان زبان (P5-D247) — topersia_g_fact_count فقط یک بار صدا زده می‌شود؛ ماتریس جز count:provinces شمار رابطه‌ای ندارد',
 	function ( $s ) {
+		/* فهرست ممنوع P5-D398 (topersia_g_stat_banned) عمداً count:* را نام می‌برد؛ آن تابع کنار گذاشته می‌شود */
+		$s = preg_replace( '/function topersia_g_stat_banned\(\).*?
+	}
+}/s', '', $s );
 		return 1 === substr_count( $s, 'topersia_g_fact_count( $post_id, $group )' )
-			&& 2 === preg_match_all( "/'count:[a-z_]+'/", $s, $m ) && array( "'count:provinces'" ) === array_values( array_unique( $m[0] ) );
+			&& 0 === preg_match_all( "/'count:[a-z_]+'/", $s, $m );   /* P5-D398: هیچ خانه‌ای شمار رابطه‌ای نیست (count:provinces هم از جدول رفت؛ شاخهٔ stat_cell برای سازگاری می‌ماند) */
 	},
 	$zones2c, $zones2c . "\n// topersia_g_fact_count( \$post_id, \$group )" );
 /* ══ وصلۀ ۲ج و۳ — وضعیت راستی‌آزمایی هر زبان (P5-D308) ═════════════════ */

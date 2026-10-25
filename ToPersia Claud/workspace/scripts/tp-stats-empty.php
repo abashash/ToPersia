@@ -51,6 +51,18 @@ foreach ( $cells as $type => $list ) {
 	$rows[ $type ] = array( 'posts' => count( $ids ), 'dist' => $dist, 'per' => $per, 'need' => $need, 'keys' => $keys );
 }
 
+/* P5-D398 بند ۷ — فیلدهای الزامی با بیشترین کمبود: برای ساختن فایل‌های درون‌ریزی (کدام فیلد از کدام نوع بیشتر خالی است) */
+$short = array();
+foreach ( $rows as $t => $r ) {
+	foreach ( $cells[ $t ] as $cell ) {
+		$n = $r['per'][ $cell['key'] ] ?? 0;
+		if ( $n > 0 ) {
+			$short[] = array( 'type' => $t, 'key' => $cell['key'], 'field' => topersia_g_stat_field_of( $cell['key'] ), 'req' => $cell['req'], 'missing' => $n, 'posts' => $r['posts'] );
+		}
+	}
+}
+usort( $short, function ( $a, $b ) { return $b['missing'] <=> $a['missing'] ?: strcmp( $a['type'], $b['type'] ); } );
+
 $lab = function ( $k ) {
 	return topersia_g_stat_label( $k ) . ' (`' . $k . '`)';
 };
@@ -73,6 +85,10 @@ if ( $md ) {
 			$items[] = $p['title'] . ' #' . $p['id'] . ' (' . implode( '، ', array_map( 'topersia_g_stat_label', $p['miss'] ) ) . ')';
 		}
 		echo '- `' . $t . '` (' . count( $r['need'] ) . '): ' . implode( ' · ', $items ) . ( ! $all && count( $r['need'] ) > 8 ? ' · …' : '' ) . "\n";
+	}
+	echo "\n**فیلدهای کم‌مقدار (بیشترین کمبود اول) — برای فایل‌های درون‌ریزی:**\n\n| نوع | خانه | فیلد | الزامی در بسته | پست «—» | از پست |\n|---|---|---|---|---|---|\n";
+	foreach ( array_slice( $short, 0, $all ? 999 : 25 ) as $x ) {
+		echo '| `' . $x['type'] . '` | ' . topersia_g_stat_label( $x['key'] ) . ' | ' . ( '' === $x['field'] ? '— (مشتق از رابطه/مختصات)' : '`' . $x['field'] . '`' ) . ' | ' . ( $x['req'] ? 'بله' : 'خیر' ) . ' | ' . $x['missing'] . ' | ' . $x['posts'] . " |\n";
 	}
 	exit( 0 );
 }

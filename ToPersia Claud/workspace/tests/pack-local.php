@@ -784,6 +784,22 @@ t( 'برگرداندن ساخت: ترجمۀ en و هر دو پست فارسیِ 
 	&& array() === array_map( 'intval', (array) topersia_relation( 73 )->get_parents( $en_id, 'ids' ) ),
 	get_post_status( $en_id ) . ' · ' . get_post_status( $fa_id ) . ' · ' . get_post_status( $fa2_id ) . ' · ۷۳ ترجمه ' . wp_json_encode( topersia_relation( 73 )->get_parents( $en_id, 'ids' ) ) );
 
+/* ══ P5-D398 — فیلدهای خانه‌های ثابت سربرگ: الزامی فقط برای پست تازه، با پیام روشن ═════════════════════════ */
+section( 'فیلد الزامی خانهٔ سربرگ — پیام روشن' );
+
+$cal_file = function ( $title ) {
+	return wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => 'tp_calendar', 'language' => 'fa' ),
+		'posts' => array( array( 'entity_uid' => '', 'slug' => 'test-cal-398', 'language' => 'fa', 'translation_of' => '', 'title' => $title, 'fields' => array( 'name_fa' => $title ), 'relations' => array() ) ) ) );
+};
+$p_cal   = topersia_pack_plan_post( topersia_pack_parse( $cal_file( 'تقویم آزمون ۳۹۸' ) ), 0 );
+$missing = array_keys( array_filter( $p_cal['fields'], function ( $r ) { return 'required' === $r['status']; } ) );
+$notes   = implode( ' | ', array_map( function ( $k ) use ( $p_cal ) { return $p_cal['fields'][ $k ]['note'] ?? ''; }, $missing ) );
+t( 'پست تازهٔ تقویم بی فیلدهای خانه‌ها: چهار فیلد (نظام‌های تقویمی · تعطیلات · ماه بازبینی · منبع رسمی) «الزامی» و پیام هر کدام نام و کلید فیلد و «چهار خانهٔ ثابت» را می‌گوید',
+	'create' === $p_cal['action'] && 4 === count( array_intersect( $missing, array( 'calendar_systems', 'national_holidays', 'annual_review_month', 'official_source_link' ) ) )
+	&& 4 === substr_count( $notes, 'چهار خان' ) && false !== strpos( $notes, '(annual_review_month)' ), implode( ',', $missing ) . ' — ' . $notes );
+$sc_ok_before = topersia_pack_schema( 'tp_calendar' )['fields']['calendar_systems'];
+t( 'الزامی فقط در طرح ساخت: پست موجود (به‌روزرسانی) هیچ فیلدی را الزامی نمی‌کند — پست‌های پیشین دست نمی‌خورند',
+	! empty( $sc_ok_before['stat_required'] ) && ( function () use ( $json ) { $d = topersia_pack_parse( $json ); $p = topersia_pack_plan_post( $d, 0 ); return 'update' === $p['action'] && ! array_filter( $p['fields'], function ( $r ) { return 'required' === $r['status']; } ); } )() );
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $GLOBALS['pass'], $GLOBALS['fail'] );
 exit( $GLOBALS['fail'] ? 1 : 0 );
