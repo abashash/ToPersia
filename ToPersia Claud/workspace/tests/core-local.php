@@ -387,12 +387,28 @@ mut( 'شکاف دوم: اولی خاموش ← مصرف‌کننده پشتیب�
 topersia_services_save_row( 'weather' . TOPERSIA_SERVICES_ALT, array( 'remove' => 1 ) );
 topersia_services_save_row( 'weather', array( 'provider' => 'met-norway', 'enabled' => 1 ) );
 
-/* میزبان بسته با WP_HTTP_BLOCK_EXTERNAL (محلی: فقط api.open-meteo.com و api.met.no) */
+/*
+ * میزبان بسته با WP_HTTP_BLOCK_EXTERNAL.
+ * پیش از دستهٔ ۲۰ میزبان کیفیت هوا بسته بود و آزمون روی همان ساخته شده بود؛ با تأیید کیفیت هوا (P5-D381) میزبانش در
+ * WP_ACCESSIBLE_HOSTS آمد و فرض کهنه شد (دستهٔ ۲۵). حالا میزبان بسته را خودِ آزمون می‌سازد: همان آداپتور کیفیت هوا با نشانی
+ * `.test` که هرگز در فهرست مجاز نیست — پس بی وابستگی به فهرست مجاز محلی و بی هیچ درخواست شبکه‌ای (block_request پیش از DNS).
+ */
+$blocked_endpoint = 'https://tp-blocked-host.test';
+$blocked_adapters = function ( $adapters ) use ( $blocked_endpoint ) {
+	if ( isset( $adapters['open-meteo-aq'] ) ) {
+		$adapters['open-meteo-aq']['endpoint'] = $blocked_endpoint;
+	}
+	return $adapters;
+};
+add_filter( 'topersia_service_adapters', $blocked_adapters, 999 );
 $aq_cfg = topersia_api( 'air_quality' );
 $aq     = topersia_service_test( 'air_quality' );
-$aq_old = topersia_service_test_open_meteo_aq( $aq_cfg ) + array( 'tested' => true );   /* ۴٫۱۱٫۰ پیش از این بند: خودِ آزمون */
+remove_filter( 'topersia_service_adapters', $blocked_adapters, 999 );
+$aq_old = topersia_service_test_open_meteo_aq( array( 'endpoint' => $blocked_endpoint ) + (array) $aq_cfg ) + array( 'tested' => true );   /* ۴٫۱۱٫۰ پیش از این بند: خودِ آزمون بی دروازه */
 mut( 'آزمون اتصال: میزبانی که WP_HTTP_BLOCK_EXTERNAL بسته «آزموده نشد» با نام میزبان است، نه «✗ خطای شبکه»؛ جهش: فراخوانی مستقیم',
-	function ( $r ) { return false === $r['tested'] && false !== strpos( $r['message'], 'WP_HTTP_BLOCK_EXTERNAL' ); }, $aq, $aq_old, $aq['message'] );
+	function ( $r ) { return false === $r['tested'] && false !== strpos( $r['message'], 'WP_HTTP_BLOCK_EXTERNAL' ) && false !== strpos( $r['message'], 'tp-blocked-host.test' ); }, $aq, $aq_old, $aq['message'] );
+t( 'پیش‌شرط آزمون: ثابت WP_HTTP_BLOCK_EXTERNAL محلی روشن است و میزبان ساختگی در WP_ACCESSIBLE_HOSTS نیست (وگرنه ادعا بی‌معنا است)',
+	defined( 'WP_HTTP_BLOCK_EXTERNAL' ) && WP_HTTP_BLOCK_EXTERNAL && ( new WP_Http() )->block_request( $blocked_endpoint ) );
 
 /* ══ ۲٫۴ شهرستان  CA-G G4 ═════════════════════════════════════════════ */
 section( '۲٫۴ — شهرستان ← استان  CA-G G4' );

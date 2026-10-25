@@ -186,6 +186,17 @@ $sc_none = function ( $src ) use ( $sc_body ) {
 t( 'P5-D395: «—» فقط در [tp_stats] (لایهٔ نمایش)؛ topersia_g_stat_cell و خانه‌های مشتق برای نبود null می‌دهند — جهش: «—» در داده‌دهنده می‌افتد',
 	$sc_none( $sc_src ) && ! $sc_none( str_replace( "		if ( '' === \$plain ) {\n			return null;\n		}", "		if ( '' === \$plain ) {\n			return array( '', '—' );\n		}", $sc_src ) ) );
 
+/* ── P5-D395 (بازبینی دستهٔ ۲۵): خانهٔ مشتق والد فقط منتشرشده — زنجیرهٔ مکانی والد بی‌صفحه را هم می‌پیماید؛ و صافی الزامی بسته فقط رشته می‌پذیرد ── */
+$sd_ok = function ( $src, $core ) use ( $sc_body ) {
+	$b = $sc_body( 'topersia_g_stat_derived', $src );
+	return false !== strpos( $b, '! topersia_g_is_live( $cur ) || ( (int) $view !== (int) $cur && ! topersia_g_is_live( $view ) )' )
+		&& strpos( $b, 'topersia_g_is_live( $cur )' ) < strpos( $b, 'topersia_g_name( $view )' )
+		&& false !== strpos( $core, 'is_string( $req ) && isset( $fields[ $req ] )' );
+};
+$sd_core = (string) file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-pack.php' );
+t( 'P5-D395: خانهٔ والد (استان · شهرستان · شهر) پیش از خواندن نام، منتشرشدگی والد و ترجمهٔ همین زبان را می‌سنجد؛ صافی الزامی بسته غیررشته را نمی‌پذیرد — جهش: بی سنجش می‌افتد',
+	$sd_ok( $sc_src, $sd_core ) && ! $sd_ok( str_replace( '! topersia_g_is_live( $cur ) || ( (int) $view !== (int) $cur && ! topersia_g_is_live( $view ) )', 'false', $sc_src ), $sd_core )
+	&& ! $sd_ok( $sc_src, str_replace( 'is_string( $req ) && isset( $fields[ $req ] )', 'isset( $fields[ $req ] )', $sd_core ) ) );
 /* نقشهٔ رابطه — گام ۱ · تولیدشده با scripts/tp-relmap-gen.php از Jetengine_Skin.json */
 $relmap = topersia_g_relmap();
 t( 'رابطه: هر دوازده نوع پست نقشه دارند', 12 === count( $relmap ), 'شمار: ' . count( $relmap ) );

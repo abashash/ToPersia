@@ -2726,7 +2726,11 @@ if ( ! function_exists( 'topersia_g_stat_derived' ) ) {
 				}
 				$seen[ $cur ] = 1;
 				if ( $want === get_post_type( $cur ) ) {
+					/* فقط منتشرشده (P5-D247): زنجیرۀ مکانی والد بی‌صفحه را هم می‌پیماید، پس پیش‌نویس/خصوصی و ترجمۀ منتشرنشدۀ این زبان نام نمی‌دهد */
 					$view = topersia_g_view_id( $cur );
+					if ( ! topersia_g_is_live( $cur ) || ( (int) $view !== (int) $cur && ! topersia_g_is_live( $view ) ) ) {
+						return null;
+					}
 					$url  = topersia_g_public_url( $view );
 					$name = topersia_g_name( $view );
 					if ( '' === trim( (string) $name ) ) {
