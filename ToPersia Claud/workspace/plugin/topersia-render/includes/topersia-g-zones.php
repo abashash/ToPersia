@@ -3191,6 +3191,97 @@ if ( ! function_exists( 'topersia_g_sc_stats' ) ) {
 	}
 }
 
+/**
+ * دستۀ ۲۶ · F-05 — کارت «اطلاعات جغرافیایی» دست‌کم سه ردیف: اگر کاشی‌های کارت کمتر از سه‌اند، به این ترتیب
+ * از ردیف‌های مشتق اضافه می‌شود تا سه: کشور · استان · شهرستان · شهر (زنجیرۀ مکانی) · فاصله تا مرکز استان ·
+ * مختصات · ارتفاع از سطح دریا · منطقۀ زمانی. هر ردیف فقط با مقدار واقعی؛ برچسب تکراری نه؛ «—» هرگز.
+ * نوعی که نه کاشی دارد، نه مختصات، نه زنجیرۀ مکانی کارت تازه نمی‌گیرد (نوع غیرجغرافیایی — ارز، روادید، …).
+ * فقط نمایش است: JSON-LD و متا از این‌جا نمی‌خوانند.
+ *
+ * @param int   $pid   پست.
+ * @param array $tiles کاشی‌های کارت.
+ * @return array
+ */
+if ( ! function_exists( 'topersia_g_geo_fill_tiles' ) ) {
+	function topersia_g_geo_fill_tiles( $pid, $tiles ) {
+
+		$pid   = absint( $pid );
+		$tiles = (array) $tiles;
+
+		if ( count( $tiles ) >= 3 || ! apply_filters( 'topersia_g_geo_fill', true, $pid ) ) {
+			return $tiles;
+		}
+
+		$type  = (string) get_post_type( $pid );
+		$chain = function_exists( 'topersia_g_place_chain' ) ? (array) topersia_g_place_chain( $pid ) : array();
+		$me    = function_exists( 'topersia_geo_point' ) ? topersia_geo_point( topersia_g_text( $pid, 'geo_coordinates' ) ) : null;
+
+		if ( ! $tiles && ! $chain && ! $me ) {
+			return $tiles;
+		}
+
+		$have = array();
+		foreach ( $tiles as $t ) {
+			$have[ (string) ( isset( $t['label'] ) ? $t['label'] : '' ) ] = 1;
+			$have[ 'name:' . wp_strip_all_tags( (string) ( isset( $t['name'] ) ? $t['name'] : '' ) ) ] = 1;
+		}
+
+		$add = function ( $label, $name, $url = '', $raw = false ) use ( &$tiles, &$have ) {
+			$plain = trim( wp_strip_all_tags( (string) $name ) );
+			if ( count( $tiles ) >= 3 || '' === $plain || '—' === $plain || isset( $have[ $label ] ) || isset( $have[ 'name:' . $plain ] ) ) {
+				return;
+			}
+			$tiles[] = array( 'label' => $label, 'name' => (string) $name, 'url' => (string) $url ) + ( $raw ? array( 'raw' => true ) : array() );
+			$have[ $label ] = 1;
+			$have[ 'name:' . $plain ] = 1;
+		};
+
+		/* کشور، سپس استان · شهرستان · شهر از زنجیره (فقط منتشرشده) */
+		$by = array();
+		foreach ( $chain as $up ) {
+			$by[ (string) get_post_type( $up ) ] = $up;
+		}
+		foreach ( array( 'tp_country', 'tp_province', 'tp_county', 'tp_city' ) as $t ) {
+			if ( empty( $by[ $t ] ) || $t === $type || ! topersia_g_is_live( $by[ $t ] ) ) {
+				continue;
+			}
+			$view = topersia_g_view_id( $by[ $t ] );
+			$add( topersia_g_kind_label( $view ), topersia_g_name( $view ), topersia_g_public_url( $view ) );
+		}
+
+		/* فاصله تا مرکز استان — همان خانۀ مشتق P5-D395 */
+		if ( 'tp_province' !== $type && 'tp_country' !== $type && function_exists( 'topersia_g_stat_derived' ) ) {
+			$d = topersia_g_stat_derived( $pid, 'distance:capital' );
+			if ( is_array( $d ) ) {
+				$add( (string) $d[0], (string) $d[1], '', true );
+			}
+		}
+
+		/* مختصات */
+		if ( $me ) {
+			$dec = in_array( topersia_g_page_lang(), array( 'fa', 'ar' ), true ) ? '٫' : '.';
+			$num = function ( $v ) use ( $dec ) { return topersia_g_fa( str_replace( '.', $dec, number_format( (float) $v, 4, '.', '' ) ) ); };
+			/* translators: 1: عرض جغرافیایی, 2: طول جغرافیایی */
+			$add( __( 'مختصات', 'topersia' ), sprintf( __( '%1$s° شمالی، %2$s° شرقی', 'topersia' ), $num( $me['lat'] ), $num( $me['lng'] ) ) );
+		}
+
+		/* ارتفاع از سطح دریا */
+		$elev = trim( (string) topersia_g_raw( $pid, 'elevation_m' ) );
+		if ( '' !== $elev && is_numeric( function_exists( 'topersia_geo_digits' ) ? topersia_geo_digits( $elev ) : $elev ) ) {
+			$m = (int) round( (float) ( function_exists( 'topersia_geo_digits' ) ? topersia_geo_digits( $elev ) : $elev ) );
+			$add( __( 'ارتفاع از سطح دریا', 'topersia' ), topersia_g_fa( topersia_g_sep( (string) $m ) ) . ' ' . __( 'متر', 'topersia' ) );
+		}
+
+		/* منطقۀ زمانی — ایران بی ساعت تابستانی از ۱۴۰۱ (UTC+3:30) */
+		$iran = $me ? ( ! function_exists( 'topersia_geo_in_iran' ) || topersia_geo_in_iran( $me['lat'], $me['lng'] ) ) : ( ! empty( $by['tp_province'] ) || ! empty( $by['tp_country'] ) );
+		if ( $iran ) {
+			$add( __( 'منطقۀ زمانی', 'topersia' ), sprintf( __( 'وقت ایران (UTC%s)', 'topersia' ), topersia_g_fa( '+3:30' ) ) );
+		}
+
+		return $tiles;
+	}
+}
+
 /** [tp_facts] — هر فیلد کارتی که در آمار نیامده، و فهرست جزئیات. */
 if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 	function topersia_g_sc_facts( $atts = array() ) {
@@ -3247,6 +3338,9 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 
 		/* برگزارکنندۀ رویداد و وب‌سایت رسمی — بعد از کاشی‌های تاریخ.  P5-D361 */
 		$tiles = array_merge( $tiles, topersia_g_event_extra_tiles( $pid ) );
+
+		/* دستۀ ۲۶ · F-05: کمتر از سه ردیف ← ردیف‌های مشتق تا سه (فقط مقدار واقعی؛ «—» هرگز) */
+		$tiles = topersia_g_geo_fill_tiles( $pid, $tiles );
 
 		if ( $tiles ) {
 			$body .= topersia_g_tiles( $tiles );

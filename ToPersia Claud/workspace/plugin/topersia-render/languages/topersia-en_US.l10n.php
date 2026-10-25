@@ -9,6 +9,7 @@ return array (
   array (
     '#%1$d: %2$d عکس تجمیعی' => '#%1$d: %2$d aggregated photos',
     '%1$s از %2$s' => '%1$s of %2$s',
+    '%1$s° شمالی، %2$s° شرقی' => '%1$s° N, %2$s° E',
     '%s تصویر' . "\0" . '%s تصویر' => '%s image' . "\0" . '%s images',
     '%s جاذبه' . "\0" . '%s جاذبه' => '%s attraction' . "\0" . '%s attractions',
     '%s رویداد' . "\0" . '%s رویداد' => '%s event' . "\0" . '%s events',
@@ -434,6 +435,7 @@ return array (
     'محلی و بومی' => 'Regional folk',
     'محوطه باستانی' => 'Archaeological site',
     'محوطه‌های باستانی' => 'Archaeological sites',
+    'مختصات' => 'Coordinates',
     'مختصات بیرون از پهنۀ پوشش است.' => 'The coordinates are outside the covered area.',
     'مختصات جغرافیایی' => 'Geographic coordinates',
     'مختصات مرکز' => 'Center coordinates',
@@ -607,6 +609,7 @@ return array (
     'وضعیت محتوا' => 'Content status',
     'وضعیت مرمت' => 'Restoration status',
     'وضعیت کاوش' => 'Excavation status',
+    'وقت ایران (UTC%s)' => 'Iran time (UTC%s)',
     'ویدیو' => 'Video',
     'ویدیوی %s' => 'Video of %s',
     'ویز' => 'Waze',

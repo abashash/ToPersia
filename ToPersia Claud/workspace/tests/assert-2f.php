@@ -106,6 +106,10 @@ $f2_tile_names = function ( $html ) {
 	return array_map( function ( $x ) { return $x[2] . ':' . $x[3] . ':' . basename( rtrim( $x[1], '/' ) ); }, $m );
 };
 
+/* دستهٔ ۲۶ · F-05: کاشی‌های والد مکانی (P5-D339، بی کشور) جدا از پرکردن تا سه ردیف سنجیده می‌شوند — پرکردن این‌جا خاموش، پایین‌تر جدا */
+$f2_keep_fill = $GLOBALS['tp_filters']['topersia_g_geo_fill'] ?? null;
+$GLOBALS['tp_filters']['topersia_g_geo_fill'] = array( function () { return false; } );
+
 $f2_world( $f2_reg );
 $f2_water = $f2_tile_names( $f2_geo( 8005 ) );
 $f2_city  = $f2_tile_names( $f2_geo( 8004 ) );
@@ -263,6 +267,18 @@ tp441_mut( 'عنوان «دربارهٔ …»: فقط نام (همان H1)، ب�
 	array( $f2_n, $f2_about_bad, isset( $f2_keep_h[1] ) ? $f2_keep_h[1] : '' ), array( 42, array( 'x' ), 'دربارۀ تهران' ), implode( ' | ', array_slice( $f2_about_bad, 0, 2 ) ) );
 
 /* برگرداندن دنیای آزمون */
+/* F-05: پرکردن روشن — گاوخونی (یک کاشی استان) به سه ردیف می‌رسد: کشور از زنجیره، سپس مشتق‌ها؛ هیچ «—»؛ جهش: پرکردن خاموش ← یک ردیف */
+$f2_world( $f2_reg );
+unset( $GLOBALS['tp_filters']['topersia_g_geo_fill'] );
+$f2_fill_on = $f2_geo( 8005 );
+$GLOBALS['tp_filters']['topersia_g_geo_fill'] = array( function () { return false; } );
+$f2_fill_off = $f2_geo( 8005 );
+$f2_rows = function ( $h ) { return substr_count( $h, 'class="tp-tile"' ); };
+t( 'اطلاعات جغرافیایی (F-05): کمتر از سه ردیف ← ردیف‌های مشتق تا سه (استان، سپس کشور …)، بی «—» — جهش: بی پرکردن کمتر از سه',
+	$f2_rows( $f2_fill_on ) >= 3 && false !== strpos( $f2_fill_on, '>استان</span><b>اصفهان' ) && false !== strpos( $f2_fill_on, '<b>ایران</b>' )
+	&& false === strpos( $f2_fill_on, ">—<" ) && $f2_rows( $f2_fill_off ) < 3, $f2_rows( $f2_fill_on ) . '/' . $f2_rows( $f2_fill_off ) );
+if ( null === $f2_keep_fill ) { unset( $GLOBALS['tp_filters']['topersia_g_geo_fill'] ); } else { $GLOBALS['tp_filters']['topersia_g_geo_fill'] = $f2_keep_fill; }
+
 if ( null === $f2_keep_stops ) { unset( $GLOBALS['tp442_stops'] ); } else { $GLOBALS['tp442_stops'] = $f2_keep_stops; }
 $GLOBALS['tp_posts'] = $f2_keep_posts;
 $GLOBALS['tp_rel']   = $f2_keep_rel;

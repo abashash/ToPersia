@@ -18,6 +18,11 @@ msgstr ""
 msgid "%1$s از %2$s"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%1$s° شمالی، %2$s° شرقی"
+msgstr ""
+
 #: includes/topersia-g-gallery-agg.php
 msgid "--post=<id> یا --all یا --queue"
 msgstr ""
@@ -1729,6 +1734,10 @@ msgstr ""
 msgid "محوطه‌های باستانی"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "مختصات"
+msgstr ""
+
 #: includes/topersia-g-weather.php
 msgid "مختصات بیرون از پهنۀ پوشش است."
 msgstr ""
@@ -2424,6 +2433,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "وضعیت کاوش"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "وقت ایران (UTC%s)"
 msgstr ""
 
 #: includes/topersia-g-zones.php
