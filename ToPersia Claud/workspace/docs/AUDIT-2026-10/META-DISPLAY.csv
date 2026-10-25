@@ -1,0 +1,1269 @@
+﻿type,type_fa,field,field_type,title,filled,type_posts,of_183,pct_of_type,display,jsonld,wpml,suggestion
+tp_travel_etiquette,"آداب سفر",name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,name_fa,text,"نام (فارسی)",3,3,3/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",name_fa,text,"نام (فارسی)",3,3,3/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",name_fa,text,"نام (فارسی)",11,11,11/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,name_fa,text,"نام (فارسی)",114,114,114/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,name_fa,text,"نام (فارسی)",31,31,31/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,name_fa,text,"نام (فارسی)",2,2,2/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,name_fa,text,"نام (فارسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",name_fa,text,"نام (فارسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,name_fa,text,"نام (فارسی)",0,6,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",name_en,text,"نام (انگلیسی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",name_en,text,"نام (انگلیسی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,name_en,text,"نام (انگلیسی)",3,3,3/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",name_en,text,"نام (انگلیسی)",3,3,3/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",name_en,text,"نام (انگلیسی)",11,11,11/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,name_en,text,"نام (انگلیسی)",114,114,114/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,name_en,text,"نام (انگلیسی)",31,31,31/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,name_en,text,"نام (انگلیسی)",1,2,1/183,50%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,name_en,text,"نام (انگلیسی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,name_en,text,"نام (انگلیسی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,name_en,text,"نام (انگلیسی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",name_en,text,"نام (انگلیسی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,name_en,text,"نام (انگلیسی)",0,6,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",name_ar,text,"نام (عربی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",name_ar,text,"نام (عربی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",name_ar,text,"نام (عربی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,name_ar,text,"نام (عربی)",0,3,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",name_ar,text,"نام (عربی)",0,3,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",name_ar,text,"نام (عربی)",1,11,1/183,9%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,name_ar,text,"نام (عربی)",10,114,10/183,9%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,name_ar,text,"نام (عربی)",31,31,31/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,name_ar,text,"نام (عربی)",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,name_ar,text,"نام (عربی)",1,2,1/183,50%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,name_ar,text,"نام (عربی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,name_ar,text,"نام (عربی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,name_ar,text,"نام (عربی)",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",name_ar,text,"نام (عربی)",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,name_ar,text,"نام (عربی)",0,6,0/183,0%,"کد render (مستقیم)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_figure,چهره,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ritual,آیین,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ethnic_group,قوم,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_language,زبان,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_dance,رقص,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_music,موسیقی,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_costume,پوشاک,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_local_food,"خوراک محلی",name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_handicraft,صنایع‌دستی,name_local,textarea,"نام محلی / بومی",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_landscape,منظر,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_museum,موزه,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ancient_site,"محوطهٔ باستانی",name_local,textarea,"نام محلی / بومی",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_site,"مکان مذهبی",name_local,textarea,"نام محلی / بومی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_monument,"بنای تاریخی",name_local,textarea,"نام محلی / بومی",1,11,1/183,9%,"کد render (مستقیم)",نه,translate,—
+tp_forest_plain,"جنگل و دشت",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_border_crossing,"گذر مرزی",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_district,محله,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_water_body,"پهنهٔ آبی",name_local,textarea,"نام محلی / بومی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_mountain,کوه,name_local,textarea,"نام محلی / بومی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_village,روستا,name_local,textarea,"نام محلی / بومی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_desert,بیابان,name_local,textarea,"نام محلی / بومی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_island,جزیره,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_region,منطقه,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_city,شهر,name_local,textarea,"نام محلی / بومی",1,114,1/183,1%,"کد render (مستقیم)",نه,translate,—
+tp_province,استان,name_local,textarea,"نام محلی / بومی",1,31,1/183,3%,"کد render (مستقیم)",نه,translate,—
+tp_country,کشور,name_local,textarea,"نام محلی / بومی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_route,مسیر,name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_visa,روادید,name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_currency,ارز,name_local,textarea,"نام محلی / بومی",0,2,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_calendar,تقویم,name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_transport,حمل‌ونقل,name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_festival,جشنواره,name_local,textarea,"نام محلی / بومی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_sports_event,"رویداد ورزشی",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_event,"رویداد مذهبی",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_seasonal_event,"رویداد فصلی",name_local,textarea,"نام محلی / بومی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_designation,برنامه/ثبت,name_local,textarea,"نام محلی / بومی",0,6,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_travel_etiquette,"آداب سفر",alternative_names,textarea,"نام‌های دیگر",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",alternative_names,textarea,"نام‌های دیگر",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_figure,چهره,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ritual,آیین,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ethnic_group,قوم,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_language,زبان,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_dance,رقص,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_music,موسیقی,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_costume,پوشاک,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_local_food,"خوراک محلی",alternative_names,textarea,"نام‌های دیگر",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_handicraft,صنایع‌دستی,alternative_names,textarea,"نام‌های دیگر",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_landscape,منظر,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_museum,موزه,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ancient_site,"محوطهٔ باستانی",alternative_names,textarea,"نام‌های دیگر",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_site,"مکان مذهبی",alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_monument,"بنای تاریخی",alternative_names,textarea,"نام‌های دیگر",1,11,1/183,9%,"کد render (مستقیم)",نه,translate,—
+tp_forest_plain,"جنگل و دشت",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_border_crossing,"گذر مرزی",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_district,محله,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_water_body,"پهنهٔ آبی",alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_mountain,کوه,alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_village,روستا,alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_desert,بیابان,alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_island,جزیره,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_region,منطقه,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_city,شهر,alternative_names,textarea,"نام‌های دیگر",1,114,1/183,1%,"کد render (مستقیم)",نه,translate,—
+tp_province,استان,alternative_names,textarea,"نام‌های دیگر",2,31,2/183,6%,"کد render (مستقیم)",نه,translate,—
+tp_country,کشور,alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_route,مسیر,alternative_names,textarea,"نام‌های دیگر",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_visa,روادید,alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_currency,ارز,alternative_names,textarea,"نام‌های دیگر",0,2,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_calendar,تقویم,alternative_names,textarea,"نام‌های دیگر",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_transport,حمل‌ونقل,alternative_names,textarea,"نام‌های دیگر",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_festival,جشنواره,alternative_names,textarea,"نام‌های دیگر",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_sports_event,"رویداد ورزشی",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_event,"رویداد مذهبی",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_seasonal_event,"رویداد فصلی",alternative_names,textarea,"نام‌های دیگر",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_designation,برنامه/ثبت,alternative_names,textarea,"نام‌های دیگر",0,6,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_travel_etiquette,"آداب سفر",short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_health_safety,"سلامت و ایمنی",short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_historical_era,"دورهٔ تاریخی",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_figure,چهره,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_ritual,آیین,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_ethnic_group,قوم,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_language,زبان,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_dance,رقص,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_music,موسیقی,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_costume,پوشاک,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_local_food,"خوراک محلی",short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_handicraft,صنایع‌دستی,short_summary,textarea,"خلاصهٔ کوتاه",3,3,3/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_landscape,منظر,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_museum,موزه,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_ancient_site,"محوطهٔ باستانی",short_summary,textarea,"خلاصهٔ کوتاه",3,3,3/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_religious_site,"مکان مذهبی",short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_monument,"بنای تاریخی",short_summary,textarea,"خلاصهٔ کوتاه",11,11,11/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_forest_plain,"جنگل و دشت",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_border_crossing,"گذر مرزی",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_district,محله,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_water_body,"پهنهٔ آبی",short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_mountain,کوه,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_village,روستا,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_desert,بیابان,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_island,جزیره,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_region,منطقه,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_city,شهر,short_summary,textarea,"خلاصهٔ کوتاه",1,114,1/183,1%,"کد render (مستقیم)",بله,translate,—
+tp_province,استان,short_summary,textarea,"خلاصهٔ کوتاه",2,31,2/183,6%,"کد render (مستقیم)",بله,translate,—
+tp_country,کشور,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_route,مسیر,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_visa,روادید,short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_currency,ارز,short_summary,textarea,"خلاصهٔ کوتاه",1,2,1/183,50%,"کد render (مستقیم)",بله,translate,—
+tp_calendar,تقویم,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_transport,حمل‌ونقل,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_festival,جشنواره,short_summary,textarea,"خلاصهٔ کوتاه",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_sports_event,"رویداد ورزشی",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_religious_event,"رویداد مذهبی",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_seasonal_event,"رویداد فصلی",short_summary,textarea,"خلاصهٔ کوتاه",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_designation,برنامه/ثبت,short_summary,textarea,"خلاصهٔ کوتاه",0,6,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_travel_etiquette,"آداب سفر",overview_text,wysiwyg,"متن اصلی صفحه",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",overview_text,wysiwyg,"متن اصلی صفحه",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_figure,چهره,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ritual,آیین,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ethnic_group,قوم,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_language,زبان,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_dance,رقص,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_music,موسیقی,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_costume,پوشاک,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_local_food,"خوراک محلی",overview_text,wysiwyg,"متن اصلی صفحه",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_handicraft,صنایع‌دستی,overview_text,wysiwyg,"متن اصلی صفحه",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_landscape,منظر,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_museum,موزه,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ancient_site,"محوطهٔ باستانی",overview_text,wysiwyg,"متن اصلی صفحه",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_site,"مکان مذهبی",overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_monument,"بنای تاریخی",overview_text,wysiwyg,"متن اصلی صفحه",1,11,1/183,9%,"کد render (مستقیم)",نه,translate,—
+tp_forest_plain,"جنگل و دشت",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_border_crossing,"گذر مرزی",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_district,محله,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_water_body,"پهنهٔ آبی",overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_mountain,کوه,overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_village,روستا,overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_desert,بیابان,overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_island,جزیره,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_region,منطقه,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_city,شهر,overview_text,wysiwyg,"متن اصلی صفحه",10,114,10/183,9%,"کد render (مستقیم)",نه,translate,—
+tp_province,استان,overview_text,wysiwyg,"متن اصلی صفحه",31,31,31/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_country,کشور,overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_route,مسیر,overview_text,wysiwyg,"متن اصلی صفحه",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_visa,روادید,overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_currency,ارز,overview_text,wysiwyg,"متن اصلی صفحه",1,2,1/183,50%,"کد render (مستقیم)",نه,translate,—
+tp_calendar,تقویم,overview_text,wysiwyg,"متن اصلی صفحه",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_transport,حمل‌ونقل,overview_text,wysiwyg,"متن اصلی صفحه",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_festival,جشنواره,overview_text,wysiwyg,"متن اصلی صفحه",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_sports_event,"رویداد ورزشی",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_event,"رویداد مذهبی",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_seasonal_event,"رویداد فصلی",overview_text,wysiwyg,"متن اصلی صفحه",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_designation,برنامه/ثبت,overview_text,wysiwyg,"متن اصلی صفحه",6,6,6/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_travel_etiquette,"آداب سفر",hero_image,media,"تصویر شاخص",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_health_safety,"سلامت و ایمنی",hero_image,media,"تصویر شاخص",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_historical_era,"دورهٔ تاریخی",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_figure,چهره,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_ritual,آیین,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_ethnic_group,قوم,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_language,زبان,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_dance,رقص,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_music,موسیقی,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_costume,پوشاک,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_local_food,"خوراک محلی",hero_image,media,"تصویر شاخص",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_handicraft,صنایع‌دستی,hero_image,media,"تصویر شاخص",0,3,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_landscape,منظر,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_museum,موزه,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_ancient_site,"محوطهٔ باستانی",hero_image,media,"تصویر شاخص",0,3,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_religious_site,"مکان مذهبی",hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_monument,"بنای تاریخی",hero_image,media,"تصویر شاخص",1,11,1/183,9%,"کد render (مستقیم)",بله,copy,—
+tp_forest_plain,"جنگل و دشت",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_border_crossing,"گذر مرزی",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_district,محله,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_water_body,"پهنهٔ آبی",hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_mountain,کوه,hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_village,روستا,hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_desert,بیابان,hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_island,جزیره,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_region,منطقه,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_city,شهر,hero_image,media,"تصویر شاخص",10,114,10/183,9%,"کد render (مستقیم)",بله,copy,—
+tp_province,استان,hero_image,media,"تصویر شاخص",31,31,31/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_country,کشور,hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_route,مسیر,hero_image,media,"تصویر شاخص",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_visa,روادید,hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_currency,ارز,hero_image,media,"تصویر شاخص",1,2,1/183,50%,"کد render (مستقیم)",بله,copy,—
+tp_calendar,تقویم,hero_image,media,"تصویر شاخص",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_transport,حمل‌ونقل,hero_image,media,"تصویر شاخص",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_festival,جشنواره,hero_image,media,"تصویر شاخص",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_sports_event,"رویداد ورزشی",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_religious_event,"رویداد مذهبی",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_seasonal_event,"رویداد فصلی",hero_image,media,"تصویر شاخص",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_designation,برنامه/ثبت,hero_image,media,"تصویر شاخص",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_travel_etiquette,"آداب سفر",featured_image_gallery,gallery,"گالری تصاویر",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_health_safety,"سلامت و ایمنی",featured_image_gallery,gallery,"گالری تصاویر",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_historical_era,"دورهٔ تاریخی",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_figure,چهره,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_ritual,آیین,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_ethnic_group,قوم,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_language,زبان,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_dance,رقص,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_music,موسیقی,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_costume,پوشاک,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_local_food,"خوراک محلی",featured_image_gallery,gallery,"گالری تصاویر",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_handicraft,صنایع‌دستی,featured_image_gallery,gallery,"گالری تصاویر",0,3,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_landscape,منظر,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_museum,موزه,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_ancient_site,"محوطهٔ باستانی",featured_image_gallery,gallery,"گالری تصاویر",0,3,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_religious_site,"مکان مذهبی",featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_monument,"بنای تاریخی",featured_image_gallery,gallery,"گالری تصاویر",1,11,1/183,9%,"کد render (مستقیم)",نه,copy,—
+tp_forest_plain,"جنگل و دشت",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_border_crossing,"گذر مرزی",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_district,محله,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_water_body,"پهنهٔ آبی",featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_mountain,کوه,featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_village,روستا,featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_desert,بیابان,featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_island,جزیره,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_region,منطقه,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_city,شهر,featured_image_gallery,gallery,"گالری تصاویر",1,114,1/183,1%,"کد render (مستقیم)",نه,copy,—
+tp_province,استان,featured_image_gallery,gallery,"گالری تصاویر",1,31,1/183,3%,"کد render (مستقیم)",نه,copy,—
+tp_country,کشور,featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_route,مسیر,featured_image_gallery,gallery,"گالری تصاویر",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_visa,روادید,featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_currency,ارز,featured_image_gallery,gallery,"گالری تصاویر",0,2,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_calendar,تقویم,featured_image_gallery,gallery,"گالری تصاویر",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_transport,حمل‌ونقل,featured_image_gallery,gallery,"گالری تصاویر",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_festival,جشنواره,featured_image_gallery,gallery,"گالری تصاویر",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_sports_event,"رویداد ورزشی",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_religious_event,"رویداد مذهبی",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_seasonal_event,"رویداد فصلی",featured_image_gallery,gallery,"گالری تصاویر",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_designation,برنامه/ثبت,featured_image_gallery,gallery,"گالری تصاویر",0,6,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_travel_etiquette,"آداب سفر",video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_health_safety,"سلامت و ایمنی",video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_historical_era,"دورهٔ تاریخی",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_figure,چهره,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_ritual,آیین,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_ethnic_group,قوم,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_language,زبان,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_dance,رقص,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_music,موسیقی,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_costume,پوشاک,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_local_food,"خوراک محلی",video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_handicraft,صنایع‌دستی,video_sample,text,"ویدیوی نمونه",0,3,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_landscape,منظر,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_museum,موزه,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_ancient_site,"محوطهٔ باستانی",video_sample,text,"ویدیوی نمونه",0,3,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_religious_site,"مکان مذهبی",video_sample,text,"ویدیوی نمونه",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_monument,"بنای تاریخی",video_sample,text,"ویدیوی نمونه",1,11,1/183,9%,"کد render (مستقیم)",نه,copy,—
+tp_forest_plain,"جنگل و دشت",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_border_crossing,"گذر مرزی",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_district,محله,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_water_body,"پهنهٔ آبی",video_sample,text,"ویدیوی نمونه",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_mountain,کوه,video_sample,text,"ویدیوی نمونه",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_village,روستا,video_sample,text,"ویدیوی نمونه",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_desert,بیابان,video_sample,text,"ویدیوی نمونه",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_island,جزیره,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_region,منطقه,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_city,شهر,video_sample,text,"ویدیوی نمونه",1,114,1/183,1%,"کد render (مستقیم)",نه,copy,—
+tp_province,استان,video_sample,text,"ویدیوی نمونه",1,31,1/183,3%,"کد render (مستقیم)",نه,copy,—
+tp_country,کشور,video_sample,text,"ویدیوی نمونه",1,1,1/183,100%,"کد render (مستقیم)",نه,copy,—
+tp_route,مسیر,video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_visa,روادید,video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_currency,ارز,video_sample,text,"ویدیوی نمونه",0,2,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_calendar,تقویم,video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_transport,حمل‌ونقل,video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_festival,جشنواره,video_sample,text,"ویدیوی نمونه",0,1,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_sports_event,"رویداد ورزشی",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_religious_event,"رویداد مذهبی",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_seasonal_event,"رویداد فصلی",video_sample,text,"ویدیوی نمونه",0,0,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_designation,برنامه/ثبت,video_sample,text,"ویدیوی نمونه",0,6,0/183,0%,"کد render (مستقیم)",نه,copy,—
+tp_travel_etiquette,"آداب سفر",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,3,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,3,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,11,1/183,9%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,114,1/183,1%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",2,31,2/183,6%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,2,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,content_status,select,"وضعیت اعتبار محتوا",3,3,3/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",content_status,select,"وضعیت اعتبار محتوا",3,3,3/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",content_status,select,"وضعیت اعتبار محتوا",11,11,11/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,content_status,select,"وضعیت اعتبار محتوا",114,114,114/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,content_status,select,"وضعیت اعتبار محتوا",31,31,31/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,content_status,select,"وضعیت اعتبار محتوا",2,2,2/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,content_status,select,"وضعیت اعتبار محتوا",1,1,1/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",content_status,select,"وضعیت اعتبار محتوا",0,0,0/183,0%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,content_status,select,"وضعیت اعتبار محتوا",6,6,6/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,entity_uid,text,"شناسهٔ یکتای موجودیت",3,3,3/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",entity_uid,text,"شناسهٔ یکتای موجودیت",3,3,3/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",entity_uid,text,"شناسهٔ یکتای موجودیت",11,11,11/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,entity_uid,text,"شناسهٔ یکتای موجودیت",114,114,114/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,entity_uid,text,"شناسهٔ یکتای موجودیت",31,31,31/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,entity_uid,text,"شناسهٔ یکتای موجودیت",2,2,2/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,entity_uid,text,"شناسهٔ یکتای موجودیت",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",entity_uid,text,"شناسهٔ یکتای موجودیت",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,entity_uid,text,"شناسهٔ یکتای موجودیت",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,external_reference_uri,text,"نشانی مرجع خارجی",0,3,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",external_reference_uri,text,"نشانی مرجع خارجی",1,3,1/183,33%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",external_reference_uri,text,"نشانی مرجع خارجی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",external_reference_uri,text,"نشانی مرجع خارجی",4,11,4/183,36%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",external_reference_uri,text,"نشانی مرجع خارجی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,external_reference_uri,text,"نشانی مرجع خارجی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,external_reference_uri,text,"نشانی مرجع خارجی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,external_reference_uri,text,"نشانی مرجع خارجی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,external_reference_uri,text,"نشانی مرجع خارجی",98,114,98/183,86%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,external_reference_uri,text,"نشانی مرجع خارجی",31,31,31/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,external_reference_uri,text,"نشانی مرجع خارجی",1,1,1/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,external_reference_uri,text,"نشانی مرجع خارجی",0,2,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,external_reference_uri,text,"نشانی مرجع خارجی",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",external_reference_uri,text,"نشانی مرجع خارجی",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,external_reference_uri,text,"نشانی مرجع خارجی",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",audio_narration,repeater,"روایت صوتی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",audio_narration,repeater,"روایت صوتی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_figure,چهره,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ritual,آیین,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ethnic_group,قوم,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_language,زبان,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_dance,رقص,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_music,موسیقی,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_costume,پوشاک,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_local_food,"خوراک محلی",audio_narration,repeater,"روایت صوتی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_handicraft,صنایع‌دستی,audio_narration,repeater,"روایت صوتی",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_landscape,منظر,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_museum,موزه,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ancient_site,"محوطهٔ باستانی",audio_narration,repeater,"روایت صوتی",0,3,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_site,"مکان مذهبی",audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_monument,"بنای تاریخی",audio_narration,repeater,"روایت صوتی",1,11,1/183,9%,"کد render (مستقیم)",نه,translate,—
+tp_forest_plain,"جنگل و دشت",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_border_crossing,"گذر مرزی",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_district,محله,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_water_body,"پهنهٔ آبی",audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_mountain,کوه,audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_village,روستا,audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_desert,بیابان,audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_island,جزیره,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_region,منطقه,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_city,شهر,audio_narration,repeater,"روایت صوتی",1,114,1/183,1%,"کد render (مستقیم)",نه,translate,—
+tp_province,استان,audio_narration,repeater,"روایت صوتی",2,31,2/183,6%,"کد render (مستقیم)",نه,translate,—
+tp_country,کشور,audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_route,مسیر,audio_narration,repeater,"روایت صوتی",1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_visa,روادید,audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_currency,ارز,audio_narration,repeater,"روایت صوتی",0,2,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_calendar,تقویم,audio_narration,repeater,"روایت صوتی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_transport,حمل‌ونقل,audio_narration,repeater,"روایت صوتی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_festival,جشنواره,audio_narration,repeater,"روایت صوتی",0,1,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_sports_event,"رویداد ورزشی",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_event,"رویداد مذهبی",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_seasonal_event,"رویداد فصلی",audio_narration,repeater,"روایت صوتی",0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_designation,برنامه/ثبت,audio_narration,repeater,"روایت صوتی",0,6,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_travel_etiquette,"آداب سفر",faq_items,repeater,"پرسش‌های متداول",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_health_safety,"سلامت و ایمنی",faq_items,repeater,"پرسش‌های متداول",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_historical_era,"دورهٔ تاریخی",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_figure,چهره,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_ritual,آیین,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_ethnic_group,قوم,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_language,زبان,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_dance,رقص,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_music,موسیقی,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_costume,پوشاک,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_local_food,"خوراک محلی",faq_items,repeater,"پرسش‌های متداول",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_handicraft,صنایع‌دستی,faq_items,repeater,"پرسش‌های متداول",0,3,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_landscape,منظر,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_museum,موزه,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_ancient_site,"محوطهٔ باستانی",faq_items,repeater,"پرسش‌های متداول",0,3,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_religious_site,"مکان مذهبی",faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_monument,"بنای تاریخی",faq_items,repeater,"پرسش‌های متداول",1,11,1/183,9%,"کد render (مستقیم)",بله,translate,—
+tp_forest_plain,"جنگل و دشت",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_border_crossing,"گذر مرزی",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_district,محله,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_water_body,"پهنهٔ آبی",faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_mountain,کوه,faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_village,روستا,faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_desert,بیابان,faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_island,جزیره,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_region,منطقه,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_city,شهر,faq_items,repeater,"پرسش‌های متداول",1,114,1/183,1%,"کد render (مستقیم)",بله,translate,—
+tp_province,استان,faq_items,repeater,"پرسش‌های متداول",2,31,2/183,6%,"کد render (مستقیم)",بله,translate,—
+tp_country,کشور,faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_route,مسیر,faq_items,repeater,"پرسش‌های متداول",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_visa,روادید,faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_currency,ارز,faq_items,repeater,"پرسش‌های متداول",0,2,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_calendar,تقویم,faq_items,repeater,"پرسش‌های متداول",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_transport,حمل‌ونقل,faq_items,repeater,"پرسش‌های متداول",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_festival,جشنواره,faq_items,repeater,"پرسش‌های متداول",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_sports_event,"رویداد ورزشی",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_religious_event,"رویداد مذهبی",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_seasonal_event,"رویداد فصلی",faq_items,repeater,"پرسش‌های متداول",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_designation,برنامه/ثبت,faq_items,repeater,"پرسش‌های متداول",6,6,6/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_travel_etiquette,"آداب سفر",meta_title,text,"عنوان سئو",0,1,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",meta_title,text,"عنوان سئو",0,1,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",meta_title,text,"عنوان سئو",0,1,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,meta_title,text,"عنوان سئو",0,3,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",meta_title,text,"عنوان سئو",0,3,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",meta_title,text,"عنوان سئو",1,11,1/183,9%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,meta_title,text,"عنوان سئو",10,114,10/183,9%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,meta_title,text,"عنوان سئو",31,31,31/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,meta_title,text,"عنوان سئو",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,meta_title,text,"عنوان سئو",1,2,1/183,50%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,meta_title,text,"عنوان سئو",0,1,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,meta_title,text,"عنوان سئو",0,1,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,meta_title,text,"عنوان سئو",0,1,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",meta_title,text,"عنوان سئو",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,meta_title,text,"عنوان سئو",6,6,6/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",meta_description,textarea,"توضیح سئو",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",meta_description,textarea,"توضیح سئو",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",meta_description,textarea,"توضیح سئو",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,meta_description,textarea,"توضیح سئو",0,3,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",meta_description,textarea,"توضیح سئو",0,3,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",meta_description,textarea,"توضیح سئو",1,11,1/183,9%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,meta_description,textarea,"توضیح سئو",10,114,10/183,9%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,meta_description,textarea,"توضیح سئو",31,31,31/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,meta_description,textarea,"توضیح سئو",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,meta_description,textarea,"توضیح سئو",1,2,1/183,50%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,meta_description,textarea,"توضیح سئو",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,meta_description,textarea,"توضیح سئو",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,meta_description,textarea,"توضیح سئو",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",meta_description,textarea,"توضیح سئو",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,meta_description,textarea,"توضیح سئو",6,6,6/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_health_safety,"سلامت و ایمنی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_historical_era,"دورهٔ تاریخی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_figure,چهره,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ritual,آیین,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ethnic_group,قوم,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_language,زبان,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_dance,رقص,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_music,موسیقی,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_costume,پوشاک,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_local_food,"خوراک محلی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_handicraft,صنایع‌دستی,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,3,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_museum,موزه,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_natural_feature,"پدیدهٔ طبیعی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,3,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_site,"مکان مذهبی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,11,1/183,9%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_border_crossing,"گذر مرزی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_district,محله,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_mountain,کوه,ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_village,روستا,ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_island,جزیره,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_city,شهر,ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,114,1/183,1%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,ai_summary,textarea,"خلاصه برای هوش مصنوعی",2,31,2/183,6%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_country,کشور,ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_route,مسیر,ai_summary,textarea,"خلاصه برای هوش مصنوعی",1,1,1/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_visa,روادید,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,2,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_festival,جشنواره,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,1,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_sports_event,"رویداد ورزشی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_religious_event,"رویداد مذهبی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_seasonal_event,"رویداد فصلی",ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,ai_summary,textarea,"خلاصه برای هوش مصنوعی",0,6,0/183,0%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_travel_etiquette,"آداب سفر",source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_figure,چهره,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ritual,آیین,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ethnic_group,قوم,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_language,زبان,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_dance,رقص,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_music,موسیقی,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_costume,پوشاک,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_local_food,"خوراک محلی",source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_handicraft,صنایع‌دستی,source_references,repeater,منابع,3,3,3/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_landscape,منظر,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_museum,موزه,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_ancient_site,"محوطهٔ باستانی",source_references,repeater,منابع,3,3,3/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_religious_site,"مکان مذهبی",source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_monument,"بنای تاریخی",source_references,repeater,منابع,11,11,11/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_forest_plain,"جنگل و دشت",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_border_crossing,"گذر مرزی",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_district,محله,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_water_body,"پهنهٔ آبی",source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_mountain,کوه,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_village,روستا,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_desert,بیابان,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_island,جزیره,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_region,منطقه,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_city,شهر,source_references,repeater,منابع,98,114,98/183,86%,"کد render (مستقیم)",نه,translate,—
+tp_province,استان,source_references,repeater,منابع,3,31,3/183,10%,"کد render (مستقیم)",نه,translate,—
+tp_country,کشور,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_route,مسیر,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_visa,روادید,source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_currency,ارز,source_references,repeater,منابع,1,2,1/183,50%,"کد render (مستقیم)",نه,translate,—
+tp_calendar,تقویم,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_transport,حمل‌ونقل,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_festival,جشنواره,source_references,repeater,منابع,1,1,1/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_sports_event,"رویداد ورزشی",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_religious_event,"رویداد مذهبی",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_seasonal_event,"رویداد فصلی",source_references,repeater,منابع,0,0,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_designation,برنامه/ثبت,source_references,repeater,منابع,0,6,0/183,0%,"کد render (مستقیم)",نه,translate,—
+tp_country,کشور,official_name_fa,text,"نام رسمی (فارسی)",1,1,1/183,100%,names,نه,copy,—
+tp_country,کشور,official_name_en,text,"نام رسمی (انگلیسی)",1,1,1/183,100%,names,نه,copy,—
+tp_country,کشور,official_name_ar,text,"نام رسمی (عربی)",1,1,1/183,100%,names,نه,copy,—
+tp_country,کشور,geo_coordinates,text,"محدودهٔ جغرافیایی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_country,کشور,population,number,جمعیت,1,1,1/183,100%,"خانهٔ سربرگ 1",بله,copy,—
+tp_country,کشور,area_km2,number,"مساحت (کیلومتر مربع)",1,1,1/183,100%,"خانهٔ سربرگ 2",بله,copy,—
+tp_country,کشور,official_language,text,"زبان رسمی",1,1,1/183,100%,"خانهٔ سربرگ 3",نه,translate,—
+tp_country,کشور,timezone,text,"منطقهٔ زمانی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_country,کشور,currency_note,textarea,"یادداشت ارز",1,1,1/183,100%,"خانهٔ سربرگ 4",نه,translate,—
+tp_country,کشور,government_type,text,"نوع حکومت",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_country,کشور,neighboring_countries,textarea,"کشورهای همسایه",1,1,1/183,100%,neighbors,نه,translate,—
+tp_country,کشور,calling_code,text,"پیش‌شمارهٔ تلفن",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_country,کشور,best_season,select,"مناسب‌ترین فصل برای سفر",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_country,کشور,internet_tld,textarea,"دامنهٔ اینترنتی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_region,منطقه,region_classification,select,"نوع منطقه",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_region,منطقه,geographic_boundary,textarea,"محدودهٔ جغرافیایی",0,0,0/183,0%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_region,منطقه,geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_region,منطقه,climate_overview,textarea,"مرور اقلیم",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_region,منطقه,historical_context,textarea,"زمینهٔ تاریخی",0,0,0/183,0%,"مرور (متن بلند)",نه,translate,—
+tp_region,منطقه,best_season,select,"بهترین فصل سفر",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_province,استان,province_code,text,"کد استان",31,31,31/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_province,استان,area_km2,number,"مساحت (کیلومتر مربع)",31,31,31/183,100%,"خانهٔ سربرگ 2",بله,copy,—
+tp_province,استان,population,number,جمعیت,31,31,31/183,100%,"خانهٔ سربرگ 3",بله,copy,—
+tp_province,استان,geo_boundary,textarea,"مختصات جغرافیایی",3,31,3/183,10%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_province,استان,geo_coordinates,text,"مختصات جغرافیایی",31,31,31/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_province,استان,best_season,select,"بهترین فصل سفر",31,31,31/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_province,استان,bordering_countries,textarea,"کشورهای هم‌مرز",2,31,2/183,6%,"مرور (متن بلند)",نه,translate,—
+tp_province,استان,climate_type,text,"نوع اقلیم",2,31,2/183,6%,"خانهٔ سربرگ 4",نه,translate,—
+tp_province,استان,free_zone,switcher,"منطقهٔ آزاد",1,31,1/183,3%,"اطلاعات سفر",نه,copy,—
+tp_city,شهر,geo_coordinates,text,"مختصات جغرافیایی",98,114,98/183,86%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_city,شهر,population,number,جمعیت,92,114,92/183,81%,"خانهٔ سربرگ 4",بله,copy,—
+tp_city,شهر,area_km2,number,"مساحت (کیلومتر مربع)",11,114,11/183,10%,"خانهٔ سربرگ 3",بله,copy,—
+tp_city,شهر,elevation_m,number,"ارتفاع از سطح دریا (متر)",79,114,79/183,69%,"خانهٔ سربرگ 2",نه,copy,—
+tp_city,شهر,best_season,select,"بهترین فصل سفر",10,114,10/183,9%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_city,شهر,transport_access,textarea,"دسترسی و حمل‌ونقل",10,114,10/183,9%,"مرور (متن بلند)",نه,translate,—
+tp_city,شهر,founded_year,text,"سال بنیان‌گذاری",1,114,1/183,1%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_city,شهر,airport_name,text,"نام فرودگاه",1,114,1/183,1%,"اطلاعات سفر",نه,translate,—
+tp_city,شهر,airport_iata,text,"کد فرودگاه",1,114,1/183,1%,"اطلاعات سفر",نه,copy,—
+tp_city,شهر,railway_station,switcher,"ایستگاه راه‌آهن",1,114,1/183,1%,"اطلاعات سفر",نه,copy,—
+tp_city,شهر,unesco_creative_city,switcher,"شهر خلاق یونسکو",1,114,1/183,1%,نشان‌ها,نه,copy,—
+tp_city,شهر,free_zone,switcher,"منطقهٔ آزاد",1,114,1/183,1%,"اطلاعات سفر",نه,copy,—
+tp_district,محله,neighborhood_type,select,"نوع محله",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_district,محله,geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_district,محله,best_season,select,"بهترین فصل سفر",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_village,روستا,geo_coordinates,text,"مختصات جغرافیایی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_village,روستا,tourism_target_village,switcher,"روستای هدف گردشگری",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_village,روستا,population,number,جمعیت,1,1,1/183,100%,"خانهٔ سربرگ 3",بله,copy,—
+tp_village,روستا,elevation_m,number,"ارتفاع از سطح دریا (متر)",1,1,1/183,100%,"خانهٔ سربرگ 4",نه,copy,—
+tp_village,روستا,best_season,select,"بهترین فصل سفر",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_island,جزیره,island_type,select,"نوع جزیره",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_island,جزیره,area_km2,number,"مساحت (کیلومتر مربع)",0,0,0/183,0%,"خانهٔ سربرگ 3",بله,copy,—
+tp_island,جزیره,geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_island,جزیره,best_season,select,"بهترین فصل سفر",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_island,جزیره,access_method,textarea,"راه دسترسی",0,0,0/183,0%,"مرور (متن بلند)",نه,translate,—
+tp_island,جزیره,free_zone,switcher,"منطقهٔ آزاد",0,0,0/183,0%,"اطلاعات سفر",نه,copy,—
+tp_mountain,کوه,mountain_type,select,"نوع عارضه",1,1,1/183,100%,"خانهٔ سربرگ 3",نه,copy,—
+tp_mountain,کوه,elevation_m,number,"ارتفاع (متر)",1,1,1/183,100%,"خانهٔ سربرگ 2",نه,copy,—
+tp_mountain,کوه,geo_coordinates,text,"مختصات جغرافیایی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_mountain,کوه,best_season,select,"بهترین فصل سفر",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_mountain,کوه,provinces_spanning,textarea,"استان‌های گسترده در آن",1,1,1/183,100%,"مرور (متن بلند)",نه,translate,—
+tp_mountain,کوه,trekking_difficulty,select,"دشواری صعود",1,1,1/183,100%,"خانهٔ سربرگ 4",نه,copy,—
+tp_mountain,کوه,volcanic,switcher,آتشفشانی,1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_mountain,کوه,national_monument,switcher,"اثر طبیعی ملی",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_mountain,کوه,national_monument_year,number,"سال ثبت اثر طبیعی ملی",1,1,1/183,100%,"نه (FIELDMAP: skip)",نه,تعریف‌نشده,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_water_body,"پهنهٔ آبی",water_body_type,select,"نوع پهنهٔ آبی",1,1,1/183,100%,"خانهٔ سربرگ 3",نه,copy,—
+tp_water_body,"پهنهٔ آبی",geo_boundary,textarea,"مختصات جغرافیایی",1,1,1/183,100%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_water_body,"پهنهٔ آبی",best_season,select,"بهترین فصل سفر",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_water_body,"پهنهٔ آبی",provinces_spanning,textarea,"استان‌های گسترده در آن",1,1,1/183,100%,"مرور (متن بلند)",نه,translate,—
+tp_water_body,"پهنهٔ آبی",area_km2,number,"مساحت (کیلومتر مربع)",1,1,1/183,100%,"خانهٔ سربرگ 4",بله,copy,—
+tp_water_body,"پهنهٔ آبی",length_km,number,"طول (کیلومتر)",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_water_body,"پهنهٔ آبی",max_depth_m,number,"حداکثر عمق (متر)",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_water_body,"پهنهٔ آبی",salinity_type,select,"نوع شوری",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_water_body,"پهنهٔ آبی",biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_water_body,"پهنهٔ آبی",biosphere_year,number,"سال پیوستن به ذخیره‌گاه زیست‌کره",1,1,1/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_water_body,"پهنهٔ آبی",geo_coordinates,text,"مختصات جغرافیایی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_desert,بیابان,desert_type,select,"نوع کویر",1,1,1/183,100%,"خانهٔ سربرگ 2",نه,copy,—
+tp_desert,بیابان,area_km2,number,"مساحت (کیلومتر مربع)",1,1,1/183,100%,"خانهٔ سربرگ 3",بله,copy,—
+tp_desert,بیابان,geo_boundary,textarea,"محدودهٔ جغرافیایی",1,1,1/183,100%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_desert,بیابان,best_season,select,"بهترین فصل سفر",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_desert,بیابان,provinces_spanning,textarea,"استان‌های گسترده در آن",1,1,1/183,100%,"مرور (متن بلند)",نه,translate,—
+tp_desert,بیابان,max_temperature_c,number,"حداکثر دمای ثبت‌شده",1,1,1/183,100%,"خانهٔ سربرگ 4",نه,copy,—
+tp_desert,بیابان,world_heritage,switcher,"میراث جهانی",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_desert,بیابان,world_heritage_year,number,"سال ثبت میراث جهانی",1,1,1/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_desert,بیابان,world_heritage_criteria,text,"معیار ثبت میراث جهانی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_desert,بیابان,biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_desert,بیابان,biosphere_year,number,"سال پیوستن به ذخیره‌گاه زیست‌کره",1,1,1/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_desert,بیابان,national_monument,switcher,"اثر طبیعی ملی",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_desert,بیابان,national_monument_year,number,"سال ثبت اثر طبیعی ملی",1,1,1/183,100%,"نه (FIELDMAP: skip)",نه,تعریف‌نشده,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_desert,بیابان,geo_coordinates,text,"مختصات جغرافیایی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_forest_plain,"جنگل و دشت",area_type,select,"نوع پهنه",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_forest_plain,"جنگل و دشت",area_km2,number,"مساحت (کیلومتر مربع)",0,0,0/183,0%,"خانهٔ سربرگ 4",بله,copy,—
+tp_forest_plain,"جنگل و دشت",geo_boundary,textarea,"محدودهٔ جغرافیایی",0,0,0/183,0%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_forest_plain,"جنگل و دشت",best_season,select,"بهترین فصل سفر",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_forest_plain,"جنگل و دشت",forest_type,select,"نوع جنگل",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_forest_plain,"جنگل و دشت",provinces_spanning,textarea,"استان‌های گسترده در آن",0,0,0/183,0%,"مرور (متن بلند)",نه,translate,—
+tp_forest_plain,"جنگل و دشت",world_heritage,switcher,"میراث جهانی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_forest_plain,"جنگل و دشت",world_heritage_year,number,"سال ثبت میراث جهانی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_forest_plain,"جنگل و دشت",world_heritage_criteria,text,"معیار ثبت میراث جهانی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_forest_plain,"جنگل و دشت",biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_forest_plain,"جنگل و دشت",biosphere_year,number,"سال پیوستن به ذخیره‌گاه زیست‌کره",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_forest_plain,"جنگل و دشت",national_monument_year,number,"سال ثبت اثر طبیعی ملی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_forest_plain,"جنگل و دشت",national_monument,switcher,"اثر طبیعی ملی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_forest_plain,"جنگل و دشت",geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_border_crossing,"گذر مرزی",crossing_type,select,"نوع گذرگاه",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_border_crossing,"گذر مرزی",border_country,text,"کشور مقابل",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_border_crossing,"گذر مرزی",status,select,وضعیت,0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_border_crossing,"گذر مرزی",operating_hours,textarea,"ساعات کاری",0,0,0/183,0%,"مرور (متن بلند)",نه,translate,—
+tp_border_crossing,"گذر مرزی",geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_monument,"بنای تاریخی",classification,select,طبقه‌بندی,9,11,9/183,82%,"خانهٔ سربرگ 1",بله,copy,—
+tp_monument,"بنای تاریخی",geo_coordinates,text,"مختصات جغرافیایی",11,11,11/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_monument,"بنای تاریخی",venue_eligible,switcher,"قابلیت میزبانی رویداد",1,11,1/183,9%,نه,نه,تعریف‌نشده,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",best_season,select,"بهترین فصل بازدید",1,11,1/183,9%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_monument,"بنای تاریخی",a1_classification,checkbox,"طبقه‌بندی عمومی جاذبه",1,11,1/183,9%,نه,نه,تعریف‌نشده,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_monument,"بنای تاریخی",name_historical,text,"نام تاریخی",1,11,1/183,9%,نه,نه,تعریف‌نشده,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_monument,"بنای تاریخی",suggested_duration,select,"مدت زمان بازدید",1,11,1/183,9%,"خانهٔ سربرگ 3",نه,copy,—
+tp_monument,"بنای تاریخی",visiting_hours,textarea,"ساعات بازدید",1,11,1/183,9%,نه,نه,translate,"نمایش در «اطلاعات سفر» (بلوک بازدید)"
+tp_monument,"بنای تاریخی",admission_fee,textarea,"هزینهٔ ورودی",1,11,1/183,9%,نه,نه,translate,"نمایش در «اطلاعات سفر» (بلوک بازدید)"
+tp_monument,"بنای تاریخی",accessibility,textarea,"دسترسی معلولان",1,11,1/183,9%,نه,نه,تعریف‌نشده,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_monument,"بنای تاریخی",restoration_status,select,"وضعیت مرمت",1,11,1/183,9%,"خانهٔ سربرگ 4",نه,تعریف‌نشده,—
+tp_monument,"بنای تاریخی",world_heritage,switcher,"میراث جهانی",11,11,11/183,100%,نشان‌ها,نه,copy,—
+tp_monument,"بنای تاریخی",world_heritage_year,number,"سال ثبت جهانی",11,11,11/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_monument,"بنای تاریخی",world_heritage_criteria,text,"معیارهای ثبت جهانی",11,11,11/183,100%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_monument,"بنای تاریخی",national_registration,switcher,"ثبت ملی",1,11,1/183,9%,نه,نه,copy,"نمایش به‌صورت نشان یا کاشی «بله»"
+tp_monument,"بنای تاریخی",address,text,نشانی,1,11,1/183,9%,نه,بله,translate,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_monument,"بنای تاریخی",construction_year,text,"سال ساخت",3,11,3/183,27%,"خانهٔ سربرگ 2",نه,تعریف‌نشده,—
+tp_monument,"بنای تاریخی",architectural_style,text,"سبک معماری",1,11,1/183,9%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,تعریف‌نشده,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_monument,"بنای تاریخی",world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",11,11,11/183,100%,نه,نه,copy,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_monument,"بنای تاریخی",venue_capacity,number,"ظرفیت میزبانی",1,11,1/183,9%,نه,نه,تعریف‌نشده,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_religious_site,"مکان مذهبی",classification,select,طبقه‌بندی,1,1,1/183,100%,"خانهٔ سربرگ 3",بله,copy,—
+tp_religious_site,"مکان مذهبی",religion,text,"دین / مذهب",1,1,1/183,100%,"خانهٔ سربرگ 4",نه,تعریف‌نشده,—
+tp_religious_site,"مکان مذهبی",geo_coordinates,text,"مختصات جغرافیایی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_religious_site,"مکان مذهبی",best_season,select,"بهترین فصل بازدید",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_religious_site,"مکان مذهبی",name_religious,text,"نام مذهبی",1,1,1/183,100%,نه,نه,تعریف‌نشده,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_religious_site,"مکان مذهبی",active_worship,switcher,"محل عبادت فعال",1,1,1/183,100%,نه,نه,تعریف‌نشده,"نمایش به‌صورت نشان یا کاشی «بله»"
+tp_religious_site,"مکان مذهبی",active_pilgrimage,text,"زیارتگاه فعال",1,1,1/183,100%,نه,نه,تعریف‌نشده,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_religious_site,"مکان مذهبی",dress_code_details,textarea,"جزئیات پوشش",1,1,1/183,100%,نه,نه,تعریف‌نشده,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_religious_site,"مکان مذهبی",suggested_duration,select,"مدت زمان بازدید",1,1,1/183,100%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_religious_site,"مکان مذهبی",visiting_hours,textarea,"ساعات بازدید",1,1,1/183,100%,نه,نه,translate,"نمایش در «اطلاعات سفر» (بلوک بازدید)"
+tp_religious_site,"مکان مذهبی",admission_fee,textarea,"هزینهٔ ورودی",1,1,1/183,100%,نه,نه,translate,"نمایش در «اطلاعات سفر» (بلوک بازدید)"
+tp_religious_site,"مکان مذهبی",photography_policy,select,"قوانین عکاسی",1,1,1/183,100%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,copy,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_religious_site,"مکان مذهبی",world_heritage,switcher,"میراث جهانی",1,1,1/183,100%,نشان‌ها,نه,copy,—
+tp_religious_site,"مکان مذهبی",world_heritage_year,number,"سال ثبت میراث جهانی",1,1,1/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_religious_site,"مکان مذهبی",world_heritage_criteria,text,"معیار ثبت میراث جهانی",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_religious_site,"مکان مذهبی",national_registration,switcher,"ثبت ملی",1,1,1/183,100%,نه,نه,copy,"نمایش به‌صورت نشان یا کاشی «بله»"
+tp_religious_site,"مکان مذهبی",address,text,نشانی,1,1,1/183,100%,نه,بله,translate,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_museum,موزه,classification,select,طبقه‌بندی,0,0,0/183,0%,"خانهٔ سربرگ 2",بله,copy,—
+tp_museum,موزه,geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_museum,موزه,best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_museum,موزه,housed_in,textarea,"مستقر در بنای",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_museum,موزه,founded_year,text,"سال تأسیس",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_museum,موزه,suggested_duration,select,"مدت زمان بازدید",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_museum,موزه,visiting_hours,textarea,"ساعات بازدید",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_museum,موزه,admission_fee,textarea,"هزینهٔ ورودی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_museum,موزه,collection_categories,textarea,"دسته‌های مجموعه",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_museum,موزه,permanent_highlights,textarea,"آثار شاخص",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_museum,موزه,address,text,نشانی,0,0,0/183,0%,نه,بله,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",park_type,select,"نوع منطقه",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",area_km2,number,"مساحت (کیلومتر مربع)",0,0,0/183,0%,"خانهٔ سربرگ 3",بله,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",geo_boundary,textarea,"محدودهٔ جغرافیایی",0,0,0/183,0%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_protected_area,"منطقهٔ حفاظت‌شده",best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",safety_link,textarea,"پیوند نکات ایمنی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",provinces_spanning,textarea,"استان‌های گسترده در آن",0,0,0/183,0%,"مرور (متن بلند)",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",managed_area,switcher,"منطقهٔ مدیریت‌شده",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",entry_permit_required,switcher,"نیاز به مجوز ورود",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",visiting_hours,textarea,"ساعات بازدید",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",key_species,textarea,"گونه‌های شاخص",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",geopark,switcher,"ژئوپارک جهانی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",geopark_year,number,"سال ثبت ژئوپارک",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",biosphere_reserve,switcher,"ذخیره‌گاه زیست‌کره",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",biosphere_year,number,"سال ثبت زیست‌کره",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",world_heritage,switcher,"میراث جهانی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",world_heritage_year,number,"سال ثبت میراث جهانی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",world_heritage_criteria,text,"معیار ثبت میراث جهانی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",national_monument_year,number,"سال ثبت اثر طبیعی ملی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",national_monument,switcher,"اثر طبیعی ملی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",suggested_duration,select,"مدت زمان بازدید",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_protected_area,"منطقهٔ حفاظت‌شده",world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",activities,textarea,"فعالیت‌های مجاز",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_protected_area,"منطقهٔ حفاظت‌شده",geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",classification,select,طبقه‌بندی,0,0,0/183,0%,"خانهٔ سربرگ 1",بله,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",height_m,number,"ارتفاع (متر)",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,تعریف‌نشده,—
+tp_natural_feature,"پدیدهٔ طبیعی",depth_m,number,"عمق (متر)",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,تعریف‌نشده,—
+tp_natural_feature,"پدیدهٔ طبیعی",length_km,number,"طول (کیلومتر)",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",area_km2,number,"مساحت (کیلومتر مربع)",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",water_temperature,text,"دمای آب",0,0,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",suggested_duration,select,"مدت زمان بازدید",0,0,0/183,0%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",safety_notes,textarea,"نکات ایمنی",0,0,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",world_heritage,switcher,"میراث جهانی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",world_heritage_year,number,"سال ثبت جهانی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",world_heritage_criteria,text,"معیارهای ثبت جهانی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_natural_feature,"پدیدهٔ طبیعی",national_registration,switcher,"ثبت ملی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",national_monument,switcher,"اثر طبیعی ملی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_natural_feature,"پدیدهٔ طبیعی",national_monument_year,number,"سال ثبت اثر طبیعی ملی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",address,text,نشانی,0,0,0/183,0%,نه,بله,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_natural_feature,"پدیدهٔ طبیعی",activities,textarea,"فعالیت‌های مجاز",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",geo_boundary,textarea,"مختصات جغرافیایی",0,3,0/183,0%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_ancient_site,"محوطهٔ باستانی",excavation_status,select,"وضعیت کاوش",0,3,0/183,0%,"خانهٔ سربرگ 3",نه,تعریف‌نشده,—
+tp_ancient_site,"محوطهٔ باستانی",has_standing_structure,switcher,"دارای سازهٔ ایستاده",0,3,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",best_season,select,"بهترین فصل بازدید",0,3,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_ancient_site,"محوطهٔ باستانی",name_historical,text,"نام تاریخی",0,3,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",related_museum,textarea,"موزهٔ مرتبط",0,3,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",suggested_duration,select,"مدت زمان بازدید",0,3,0/183,0%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",visiting_permit,switcher,"نیاز به مجوز بازدید",0,3,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",photography_policy,select,"قوانین عکاسی",0,3,0/183,0%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",world_heritage,switcher,"میراث جهانی",3,3,3/183,100%,نشان‌ها,نه,copy,—
+tp_ancient_site,"محوطهٔ باستانی",world_heritage_year,number,"سال ثبت جهانی",3,3,3/183,100%,"نه (FIELDMAP: skip)",نه,copy,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_ancient_site,"محوطهٔ باستانی",world_heritage_criteria,text,"معیارهای ثبت جهانی",3,3,3/183,100%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_ancient_site,"محوطهٔ باستانی",national_registration,switcher,"ثبت ملی",0,3,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",address,text,نشانی,0,3,0/183,0%,نه,بله,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ancient_site,"محوطهٔ باستانی",architectural_style,text,"سبک معماری",0,3,0/183,0%,"خانهٔ سربرگ 4",نه,تعریف‌نشده,—
+tp_ancient_site,"محوطهٔ باستانی",world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",3,3,3/183,100%,نه,نه,copy,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_ancient_site,"محوطهٔ باستانی",geo_coordinates,text,"مختصات جغرافیایی",3,3,3/183,100%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_landscape,منظر,landscape_type,select,"نوع منظر",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_landscape,منظر,geo_boundary,textarea,"محدودهٔ جغرافیایی",0,0,0/183,0%,"مرور (متن بلند)",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_landscape,منظر,total_area_km2,number,"مساحت کل (کیلومتر مربع)",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_landscape,منظر,provinces_spanning,textarea,"استان‌های گسترده در آن",0,0,0/183,0%,"مرور (متن بلند)",نه,translate,—
+tp_landscape,منظر,______________,checkbox,"طبقه‌بندی عمومی جاذبه",0,0,0/183,0%,نه,نه,تعریف‌نشده,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_landscape,منظر,world_heritage,switcher,"میراث جهانی",0,0,0/183,0%,نشان‌ها,نه,copy,—
+tp_landscape,منظر,world_heritage_year,number,"سال ثبت جهانی",0,0,0/183,0%,"نه (FIELDMAP: skip)",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_landscape,منظر,world_heritage_criteria,text,"معیارهای ثبت جهانی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,translate,—
+tp_landscape,منظر,national_registration,switcher,"ثبت ملی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_landscape,منظر,suggested_duration,select,"مدت زمان بازدید",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_landscape,منظر,world_heritage_ref_number,text,"شمارهٔ مرجع یونسکو",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_landscape,منظر,geo_coordinates,text,"مختصات جغرافیایی",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_handicraft,صنایع‌دستی,classification,select,طبقه‌بندی,1,3,1/183,33%,"خانهٔ سربرگ 1",بله,copy,—
+tp_handicraft,صنایع‌دستی,materials,textarea,"مواد اولیه",3,3,3/183,100%,نه,نه,translate,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_handicraft,صنایع‌دستی,technique_summary,textarea,"خلاصهٔ تکنیک",3,3,3/183,100%,نه,نه,translate,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_handicraft,صنایع‌دستی,intangible_heritage_designation,switcher,"ثبت میراث ناملموس",0,3,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_handicraft,صنایع‌دستی,intangible_heritage_year,number,"سال ثبت ناملموس",0,3,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_handicraft,صنایع‌دستی,intangible_heritage_criteria,text,"معیارهای ثبت ناملموس",0,3,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_handicraft,صنایع‌دستی,intangible_heritage_status,select,"وضعیت ثبت ناملموس",0,3,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_local_food,"خوراک محلی",classification_,select,طبقه‌بندی,1,1,1/183,100%,"خانهٔ سربرگ 1",نه,تعریف‌نشده,—
+tp_local_food,"خوراک محلی",main_ingredients,textarea,"مواد اصلی",1,1,1/183,100%,"خانهٔ سربرگ 2",نه,translate,—
+tp_local_food,"خوراک محلی",recipe_content,wysiwyg,"دستور پخت",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_local_food,"خوراک محلی",ritual_context_reference,textarea,"زمینهٔ آیینی",0,1,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_costume,پوشاک,classification,select,طبقه‌بندی,0,0,0/183,0%,"خانهٔ سربرگ 1",بله,copy,—
+tp_costume,پوشاک,fabric_type,textarea,"نوع پارچه",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_costume,پوشاک,occasion,textarea,"مناسبت پوشیدن",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_costume,پوشاک,garment_components,textarea,"اجزای لباس",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_music,موسیقی,classification,select,طبقه‌بندی,0,0,0/183,0%,"خانهٔ سربرگ 1",بله,copy,—
+tp_music,موسیقی,audio_sample,media,"نمونهٔ صوتی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_music,موسیقی,related_instruments_reference,textarea,"سازهای مرتبط",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_music,موسیقی,ritual_context_reference,textarea,"زمینهٔ آیینی",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_dance,رقص,dance_type,select,"نوع رقص",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_dance,رقص,formation,textarea,"آرایش اجرا",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_dance,رقص,occasion,textarea,"مناسبت اجرا",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_dance,رقص,music_accompaniment_reference,textarea,"موسیقی همراه",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_dance,رقص,ritual_context_reference,textarea,"زمینهٔ آیینی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_language,زبان,language_family,text,"خانواده زبانی",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,translate,—
+tp_language,زبان,name_endonym,text,"نام بومی",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_language,زبان,script,text,"خط نگارش",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_language,زبان,speaker_estimate_iran,number,"تخمین گویشوران در ایران",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_language,زبان,is_official_language,switcher,"زبان رسمی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_language,زبان,dialect_variants,textarea,"گونه‌های گویشی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_language,زبان,ethnicity_reference,textarea,"اقوام گویشور",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_language,زبان,audio_sample,media,"نمونهٔ صوتی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ethnic_group,قوم,population_estimate,number,"تخمین جمعیت",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_ethnic_group,قوم,language_reference,textarea,"زبان‌های مرتبط",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_ritual,آیین,classification,select,طبقه‌بندی,0,0,0/183,0%,"خانهٔ سربرگ 1",بله,copy,—
+tp_ritual,آیین,spatial_scope,select,"گسترهٔ جغرافیایی",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_ritual,آیین,calendar_timing,textarea,"زمان تقویمی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ritual,آیین,intangible_heritage_designation,switcher,"ثبت میراث ناملموس",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ritual,آیین,intangible_heritage_year,number,"سال ثبت ناملموس",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_ritual,آیین,intangible_heritage_criteria,text,"معیارهای ثبت ناملموس",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ritual,آیین,intangible_heritage_status,select,"وضعیت ثبت ناملموس",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_ritual,آیین,ceremonial_food_reference,textarea,"غذاهای مناسبتی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_ritual,آیین,external_recognition_uris,textarea,"شناسایی فراملی",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_figure,چهره,classification,select,طبقه‌بندی,0,0,0/183,0%,"خانهٔ سربرگ 1",بله,copy,—
+tp_figure,چهره,birth_year_approx,text,"سال تولد (تقریبی)",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_figure,چهره,death_year_approx,text,"سال درگذشت (تقریبی)",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_figure,چهره,major_works,textarea,"آثار مهم",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",start_year_approx,text,"سال آغاز (تقریبی)",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",end_year_approx,text,"سال پایان (تقریبی)",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",capital_reference,textarea,پایتخت‌ها,0,0,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_historical_era,"دورهٔ تاریخی",predecessor_reference,text,"سلسلهٔ پیشین",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_historical_era,"دورهٔ تاریخی",successor_reference,text,"سلسلهٔ پسین",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",emergency_police,text,"شمارهٔ پلیس",1,1,1/183,100%,"خانهٔ سربرگ 1",نه,copy,—
+tp_health_safety,"سلامت و ایمنی",emergency_ambulance,text,"شمارهٔ اورژانس",1,1,1/183,100%,"خانهٔ سربرگ 2",نه,copy,—
+tp_health_safety,"سلامت و ایمنی",emergency_fire,text,"شمارهٔ آتش‌نشانی",1,1,1/183,100%,"خانهٔ سربرگ 3",نه,copy,—
+tp_health_safety,"سلامت و ایمنی",natural_hazard_summary,wysiwyg,"مخاطرات طبیعی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_health_safety,"سلامت و ایمنی",general_safety_notes,wysiwyg,"نکات کلی ایمنی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_health_safety,"سلامت و ایمنی",vaccination_recommendations,textarea,"توصیه‌های واکسیناسیون",0,1,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_health_safety,"سلامت و ایمنی",water_safety_note,textarea,"ایمنی آب آشامیدنی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_health_safety,"سلامت و ایمنی",regional_health_notes,text,"نکات سلامت منطقه‌ای",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_health_safety,"سلامت و ایمنی",local_emergency_facilities,textarea,"مراکز درمانی محلی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_health_safety,"سلامت و ایمنی",activity_specific_warnings,textarea,"هشدارهای فعالیت‌محور",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_travel_etiquette,"آداب سفر",dress_code_summary,wysiwyg,"خلاصهٔ قوانین پوشش",1,1,1/183,100%,"خانهٔ سربرگ 3",نه,translate,—
+tp_travel_etiquette,"آداب سفر",religious_site_etiquette,wysiwyg,"آداب اماکن مذهبی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_travel_etiquette,"آداب سفر",social_customs_summary,wysiwyg,"آداب اجتماعی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_travel_etiquette,"آداب سفر",tipping_guidance,textarea,"راهنمای انعام",0,1,0/183,0%,"خانهٔ سربرگ 1",نه,translate,—
+tp_travel_etiquette,"آداب سفر",photography_restrictions,textarea,"محدودیت‌های عکاسی",0,1,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_travel_etiquette,"آداب سفر",regional_etiquette_notes,textarea,"آداب منطقه‌ای",0,1,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_designation,برنامه/ثبت,page_title,text,"عنوان صفحه (لاتین)",6,6,6/183,100%,"خانهٔ سربرگ 4",نه,copy,—
+tp_designation,برنامه/ثبت,programme_code,select,"کد برنامه",6,6,6/183,100%,"خانهٔ سربرگ 2",نه,copy,—
+tp_designation,برنامه/ثبت,overview_text,wysiwyg,"متن اصلی صفحه",6,6,6/183,100%,"کد render (مستقیم)",نه,translate,—
+tp_designation,برنامه/ثبت,awarding_body,text,"نهاد اعطاکننده",6,6,6/183,100%,"خانهٔ سربرگ 3",نه,تعریف‌نشده,—
+tp_designation,برنامه/ثبت,programme_start_year,number,"سال آغاز برنامه",6,6,6/183,100%,"خانهٔ سربرگ 1",نه,تعریف‌نشده,—
+tp_designation,برنامه/ثبت,hero_image,media,"تصویر شاخص",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,—
+tp_designation,برنامه/ثبت,meta_title,text,"عنوان سئو",6,6,6/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,meta_description,textarea,"توضیح سئو",6,6,6/183,100%,"کد render (مستقیم)",بله,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,entity_uid,text,"شناسهٔ یکتای موجودیت",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,last_verified_date,date,"تاریخ آخرین راستی‌آزمایی",6,6,6/183,100%,"کد render (مستقیم)",بله,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,content_status,select,"وضعیت اعتبار محتوا",6,6,6/183,100%,"کد render (مستقیم)",بله,ignore,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_designation,برنامه/ثبت,faq_items,repeater,"پرسش‌های متداول",6,6,6/183,100%,"کد render (مستقیم)",بله,translate,—
+tp_route,مسیر,classification,select,"طبقه‌بندی مسیر",1,1,1/183,100%,"خانهٔ سربرگ 4",بله,copy,—
+tp_route,مسیر,best_season,select,"بهترین فصل سفر",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_route,مسیر,total_distance_km,number,"مسافت کل (کیلومتر)",1,1,1/183,100%,"خانهٔ سربرگ 1",بله,copy,—
+tp_route,مسیر,estimated_duration_days,number,"مدت پیشنهادی (روز)",1,1,1/183,100%,"خانهٔ سربرگ 2",نه,copy,—
+tp_route,مسیر,route_stops_order,textarea,"ترتیب توقف‌های مسیر",1,1,1/183,100%,نه,نه,تعریف‌نشده,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_route,مسیر,route_stop_notes,repeater,"یادداشت توقف‌ها",1,1,1/183,100%,نه,نه,translate,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_route,مسیر,difficulty_level,select,"سطح دشواری",1,1,1/183,100%,"خانهٔ سربرگ 3",بله,copy,—
+tp_visa,روادید,visa_types,repeater,"انواع روادید",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,visa_policy_matrix,repeater,"ماتریس سیاست بر پایهٔ تابعیت",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,guided_tour_note,wysiwyg,"قواعد تور اجباری",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,free_zone_stay_days,number,"مدت معافیت در مناطق آزاد (روز)",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_visa,روادید,free_zone_mainland_allowed,switcher,"اجازهٔ ورود به سرزمین اصلی؟",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,free_zone_excluded_iso,textarea,"کشورهای مستثنا (کد ISO)",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,free_zone_note,wysiwyg,"توضیح رژیم مناطق آزاد",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,application_process_summary,wysiwyg,"خلاصهٔ فرآیند درخواست",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,application_steps,repeater,"مراحل گام‌به‌گام",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,official_application_portal,text,"درگاه رسمی اصلی",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,copy,—
+tp_visa,روادید,portal_links,repeater,"سایر درگاه‌های رسمی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,document_specs,repeater,"مشخصات فنی مدارک",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,voa_entry_points,repeater,"مبادی صدور روادید فرودگاهی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,entry_points_reference,textarea,"سایر مبادی ورودی (ارجاع محتوایی)",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,passport_validity_months,number,"حداقل اعتبار پاسپورت (ماه)",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_visa,روادید,insurance_required,switcher,"بیمهٔ سلامت ایرانی اجباری؟",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,insurance_note,wysiwyg,"توضیح بیمهٔ اجباری",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,passport_stamping_note,textarea,"سیاست مهر پاسپورت",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,dual_nationality_note,wysiwyg,"قواعد دوتابعیتی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,restricted_entry_note,textarea,"محدودیت‌های مطلق ورود",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,special_passport_note,wysiwyg,"معافیت پاسپورت‌های دیپلماتیک/خدمت",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,extension_max_count,number,"حداکثر دفعات تمدید",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,extension_days_each,number,"مدت هر تمدید (روز)",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,max_total_stay_days,number,"حداکثر اقامت کل (روز)",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_visa,روادید,extension_info,wysiwyg,"تمدید و اضافه‌اقامت",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,fee_currency,text,"واحد پول رسمی هزینه",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,fee_policy_note,wysiwyg,"سیاست هزینه و پرداخت",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_visa,روادید,policy_change_log,repeater,"تاریخچهٔ تغییرات سیاست",0,0,0/183,0%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_currency,ارز,currency_iso_code,text,"کد ISO واحد پول",2,2,2/183,100%,"خانهٔ سربرگ 1",نه,copy,—
+tp_currency,ارز,currency_symbol,text,"نماد واحد پول",1,2,1/183,50%,"خانهٔ سربرگ 2",نه,copy,—
+tp_currency,ارز,currency_units,repeater,"واحدهای پولی در گردش",1,2,1/183,50%,نه,نه,translate,"نمایش به‌صورت فهرست در کارت ویژهٔ نوع"
+tp_currency,ارز,unit_confusion_explainer,wysiwyg,"توضیح ریال در برابر تومان",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,price_reading_rule,textarea,"قاعدهٔ خواندن قیمت",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,redenomination_status,select,"وضعیت بازتعریف واحد پول",1,2,1/183,50%,"خانهٔ سربرگ 4",نه,copy,—
+tp_currency,ارز,redenomination_ratio,number,"نسبت تبدیل بازتعریف",1,2,1/183,50%,نه,نه,copy,"نمایش در کارت «اطلاعات جغرافیایی/کلیدی» به‌صورت کاشی"
+tp_currency,ارز,redenomination_law_date,date,"تاریخ لازم‌الاجرا شدن قانون",0,2,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,redenomination_start_date,date,"آغاز دورهٔ گذار",0,2,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,redenomination_end_date,date,"پایان دورهٔ گذار",0,2,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,dual_pricing_active,switcher,"برچسب‌گذاری دوگانهٔ قیمت فعال؟",0,2,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,redenomination_note,wysiwyg,"شرح کامل بازتعریف",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,denominations,repeater,"اسکناس و مسکوکات",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,international_card_status,select,"وضعیت کلی کارت‌های بین‌المللی",1,2,1/183,50%,"خانهٔ سربرگ 3",نه,copy,—
+tp_currency,ارز,card_acceptance_summary,textarea,"پاسخ صریح دربارهٔ کارت",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,card_network_status,repeater,"وضعیت به‌ازای شبکهٔ کارت",1,2,1/183,50%,نه,نه,translate,"نمایش به‌صورت فهرست در کارت ویژهٔ نوع"
+tp_currency,ارز,atm_usage_note,wysiwyg,"استفاده از خودپرداز",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,domestic_network_note,wysiwyg,"شبکهٔ کارت داخلی",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,tourist_card_available,switcher,"کارت گردشگری موجود است؟",0,2,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,tourist_card_services,repeater,"سرویس‌های کارت گردشگری",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,accepted_foreign_currencies,checkbox,"ارزهای قابل تبدیل",0,2,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,banknote_condition_rule,textarea,"قاعدهٔ سلامت اسکناس",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,exchange_channel_notes,wysiwyg,"کانال‌های تبدیل و رسید",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,exchange_locations,repeater,"محل‌های تبدیل",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,declaration_rules_note,wysiwyg,"قواعد اظهار ارز در گمرک",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,rate_regime_note,wysiwyg,"رژیم نرخ ارز",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,rate_reference_links,repeater,"ابزارهای نرخ زنده",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,cash_recommendation_note,wysiwyg,"توصیهٔ میزان پول نقد",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,daily_budget_bands,repeater,"بازه‌های بودجهٔ روزانه",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,digital_payment_note,wysiwyg,"پرداخت دیجیتال داخلی",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_currency,ارز,regional_notes,repeater,"یادداشت‌های استانی",0,2,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_calendar,تقویم,calendar_systems,repeater,"نظام‌های تقویمی",0,1,0/183,0%,"خانهٔ سربرگ 1",نه,translate,—
+tp_calendar,تقویم,calendar_system_note,wysiwyg,"توضیح نظام تقویمی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_calendar,تقویم,national_holidays,repeater,"تعطیلات و مناسبت‌های رسمی",0,1,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_calendar,تقویم,closure_impact_note,wysiwyg,"اثر تعطیلات بر خدمات",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_calendar,تقویم,crowding_and_price_note,wysiwyg,"ازدحام و نوسان قیمت",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_calendar,تقویم,best_worst_time_note,wysiwyg,"بهترین و بدترین زمان سفر",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_calendar,تقویم,official_source_link,text,"نشانی منبع رسمی تقویم",1,1,1/183,100%,"خانهٔ سربرگ 4",نه,copy,—
+tp_calendar,تقویم,annual_review_month,number,"ماه بازبینی سالانه",0,1,0/183,0%,"خانهٔ سربرگ 3",نه,copy,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_calendar,تقویم,lunar_date_disclaimer,textarea,"هشدار تاریخ‌های قمری",1,1,1/183,100%,نه,نه,translate,"لازم نیست — فنی/سئو/داخلی (متا، شناسه، وضعیت)"
+tp_transport,حمل‌ونقل,transport_modes,repeater,"حالت‌های حمل‌ونقل",0,1,0/183,0%,"خانهٔ سربرگ 1",نه,translate,—
+tp_transport,حمل‌ونقل,mode_choice_guide,wysiwyg,"راهنمای انتخاب حالت سفر",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_transport,حمل‌ونقل,intercity_bus_note,wysiwyg,"اتوبوس بین‌شهری",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_transport,حمل‌ونقل,rail_network_note,wysiwyg,"شبکهٔ ریلی",1,1,1/183,100%,نه,نه,translate,"نمایش در «مرور» یا یک کارت متنی ویژهٔ نوع (متن بلند)"
+tp_transport,حمل‌ونقل,air_travel_note,wysiwyg,"پرواز داخلی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_transport,حمل‌ونقل,cities_with_metro,repeater,"شهرهای دارای حمل‌ونقل ریلی شهری",0,1,0/183,0%,"خانهٔ سربرگ 2",نه,translate,—
+tp_transport,حمل‌ونقل,booking_platforms,repeater,"پلتفرم‌های رزرو",0,1,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_transport,حمل‌ونقل,accessibility_note,wysiwyg,دسترس‌پذیری,0,1,0/183,0%,"خانهٔ سربرگ 3",نه,translate,—
+tp_transport,حمل‌ونقل,transport_etiquette_note,wysiwyg,"آداب حمل‌ونقل عمومی",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_transport,حمل‌ونقل,route_reference_note,textarea,"ارجاع به مسیرهای گردشگری",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_festival,جشنواره,is_recurring,switcher,"رویداد تکرارشونده است؟",1,1,1/183,100%,نه,نه,copy,"نمایش به‌صورت نشان یا کاشی «بله»"
+tp_festival,جشنواره,event_frequency,select,"دورهٔ تکرار",1,1,1/183,100%,"خانهٔ سربرگ 1",نه,copy,—
+tp_festival,جشنواره,calendar_timing,textarea,"زمان‌بندی تقویمی",1,1,1/183,100%,نه,نه,translate,"نمایش در کارت «اطلاعات کلیدی» (کاشی تاریخ/زمان)"
+tp_festival,جشنواره,event_start_date,date,"تاریخ آغاز",0,1,0/183,0%,"خانهٔ سربرگ 2",بله,copy,—
+tp_festival,جشنواره,event_end_date,date,"تاریخ پایان",0,1,0/183,0%,"خانهٔ سربرگ 3",بله,copy,—
+tp_festival,جشنواره,best_season,select,"بهترین فصل بازدید",1,1,1/183,100%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_festival,جشنواره,venue_name,text,"نام محل برگزاری",1,1,1/183,100%,"خانهٔ سربرگ 4",بله,translate,—
+tp_festival,جشنواره,organizer_name,text,برگزارکننده,0,1,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_festival,جشنواره,official_event_url,text,"نشانی رسمی رویداد",0,1,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_festival,جشنواره,program_highlights,repeater,"بخش‌های برنامه",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_festival,جشنواره,event_travel_impact,switcher,"اثرگذار بر برنامه‌ریزی سفر؟",0,1,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_festival,جشنواره,visa_info_link,text,"نشانی راهنمای ویزا",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_festival,جشنواره,admission_note,textarea,"شرایط ورود و بلیت",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_festival,جشنواره,tourist_suitability_note,textarea,"مناسب‌بودن برای گردشگر",0,1,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_sports_event,"رویداد ورزشی",is_recurring,switcher,"رویداد تکرارشونده است؟",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_sports_event,"رویداد ورزشی",event_frequency,select,"دورهٔ تکرار",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_sports_event,"رویداد ورزشی",calendar_timing,textarea,"زمان‌بندی تقویمی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_sports_event,"رویداد ورزشی",event_start_date,date,"تاریخ آغاز",0,0,0/183,0%,"خانهٔ سربرگ 4",بله,copy,—
+tp_sports_event,"رویداد ورزشی",event_end_date,date,"تاریخ پایان",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_sports_event,"رویداد ورزشی",best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_sports_event,"رویداد ورزشی",venue_name,text,"نام محل برگزاری",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_sports_event,"رویداد ورزشی",sport_type,select,"رشتهٔ ورزشی",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_sports_event,"رویداد ورزشی",competition_level,select,"سطح رقابت",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_sports_event,"رویداد ورزشی",traditional_sports_reference,repeater,"ریشهٔ ورزش بومی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_sports_event,"رویداد ورزشی",organizer_name,text,برگزارکننده,0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_sports_event,"رویداد ورزشی",official_event_url,text,"نشانی رسمی رویداد",0,0,0/183,0%,"کد render (مستقیم)",بله,copy,—
+tp_sports_event,"رویداد ورزشی",spectator_access_note,textarea,"دسترسی تماشاگر",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",calendar_timing,textarea,"زمان‌بندی تقویمی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",calendar_system,select,"تقویم مبنا",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_religious_event,"رویداد مذهبی",annual_date_rule,text,"قاعدهٔ تاریخ سالانه",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",event_start_date,date,"تاریخ آغاز",0,0,0/183,0%,"خانهٔ سربرگ 4",بله,copy,—
+tp_religious_event,"رویداد مذهبی",event_end_date,date,"تاریخ پایان",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",بله,copy,—
+tp_religious_event,"رویداد مذهبی",best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_religious_event,"رویداد مذهبی",venue_name,text,"نام محل برگزاری",0,0,0/183,0%,"کد render (مستقیم)",بله,translate,—
+tp_religious_event,"رویداد مذهبی",ceremony_duration_days,number,"مدت مراسم (روز)",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_religious_event,"رویداد مذهبی",crowd_scale,select,"گسترهٔ حضور",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_religious_event,"رویداد مذهبی",public_participation_note,wysiwyg,"مشارکت عمومی و حضور بازدیدکننده",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",visitor_etiquette_note,wysiwyg,"آداب حضور",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",photography_policy,select,"سیاست عکاسی",0,0,0/183,0%,"نه — zone «stat» ولی بیرون از ۴ خانهٔ ثابت",نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",photography_note,textarea,"یادداشت عکاسی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",dress_code_note,textarea,"پوشش و ظاهر",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",etiquette_link,text,"نشانی راهنمای آداب سفر",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_religious_event,"رویداد مذهبی",safety_link,textarea,"نشانی راهنمای سلامت و ایمنی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",season,select,"فصل وقوع",0,0,0/183,0%,"خانهٔ سربرگ 2",نه,copy,—
+tp_seasonal_event,"رویداد فصلی",best_season,select,"بهترین فصل بازدید",0,0,0/183,0%,"کارت «اطلاعات جغرافیایی»",نه,copy,—
+tp_seasonal_event,"رویداد فصلی",natural_phenomenon_type,select,"نوع پدیدهٔ طبیعی",0,0,0/183,0%,"خانهٔ سربرگ 1",نه,copy,—
+tp_seasonal_event,"رویداد فصلی",peak_start_week,number,"هفتهٔ آغاز اوج",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",peak_end_week,number,"هفتهٔ پایان اوج",0,0,0/183,0%,نه,نه,copy,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",peak_window_note,textarea,"شرح بازهٔ اوج",0,0,0/183,0%,"خانهٔ سربرگ 4",نه,translate,—
+tp_seasonal_event,"رویداد فصلی",calendar_timing,textarea,"زمان‌بندی تقویمی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",optimal_conditions,wysiwyg,"شرایط بهینهٔ مشاهده",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",weather_dependency,select,"وابستگی به شرایط جوی",0,0,0/183,0%,"خانهٔ سربرگ 3",نه,copy,—
+tp_seasonal_event,"رویداد فصلی",predictability_note,textarea,"پایداری سال‌به‌سال",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",viewing_points,repeater,"نقاط مشاهده",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",nearby_park_reference,repeater,"ارجاع به منطقهٔ حفاظت‌شده",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
+tp_seasonal_event,"رویداد فصلی",safety_link,textarea,"نشانی راهنمای سلامت و ایمنی",0,0,0/183,0%,نه,نه,translate,"لازم نیست تا داده بیاید؛ اگر تا راه‌اندازی هم خالی ماند، حذف از متاباکس"
