@@ -3384,7 +3384,14 @@ if ( ! function_exists( 'topersia_g_sc_badges' ) ) {
 				}
 			}
 
-			$tiles[] = array( 'label' => $year, 'name' => topersia_g_t( $field['label'] ) );
+			/* دستۀ ۲۶ · F-16: عدد سال برچسب «سال» می‌گیرد؛ کاشی (بی پیوند) گروه با نام کامل برای صفحه‌خوان */
+			$label   = '' !== $year ? sprintf( /* translators: %s: سال */ __( 'سال %s', 'topersia' ), $year ) : '';
+			$badge   = topersia_g_t( $field['label'] );
+			$tiles[] = array(
+				'label' => $label,
+				'name'  => $badge,
+				'attrs' => '' !== $label ? ' role="group" aria-label="' . esc_attr( $badge . '، ' . $label ) . '"' : '',
+			);
 		}
 
 		if ( ! $tiles ) {

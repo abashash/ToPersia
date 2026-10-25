@@ -305,6 +305,7 @@ return array (
     'سازهای مرتبط' => 'Related instruments',
     'ساعات کاری' => 'Opening hours',
     'ساعت (وقت ایران)' => 'Time (Iran)',
+    'سال %s' => 'Year %s',
     'سال آغاز برنامه' => 'Programme start',
     'سال بنیان‌گذاری' => 'Year founded',
     'سال تولد' => 'Born',

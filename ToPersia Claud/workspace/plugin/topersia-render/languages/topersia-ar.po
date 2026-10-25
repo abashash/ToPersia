@@ -1202,6 +1202,11 @@ msgstr "ساعات العمل"
 msgid "ساعت (وقت ایران)"
 msgstr "الساعة (توقيت إيران)"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "سال %s"
+msgstr "سنة %s"
+
 #: includes/topersia-g-map.php
 msgid "سال آغاز برنامه"
 msgstr "سنة بدء البرنامج"

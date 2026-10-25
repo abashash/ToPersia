@@ -7,6 +7,7 @@
   ✅ سال: بدون جداکننده (۲۰۱۶ نه ۲٬۰۱۶)
   ✅ نشان با سالش جفت می‌شود
   ✅ سوییچر نادرست نشان نمی‌سازد
+  ✅ نشان (F-16): «سال ۲۰۱۶» بالای نام، کاشی role=group با aria-label «میراث جهانی، سال …» — جهش: عدد تنها (رفتار پیشین) می‌افتد
   ✅ موجودیت بدون سوییچر روشن: بخش نشان‌ها کامل ناپدید
   ✅ لاتین: مونو و چپ‌به‌راست
   ✅ واژه‌نامه: «نمکی» چاپ می‌شود نه salt
@@ -21,9 +22,9 @@
   ✅ بخش بدون داده: رابطهٔ بی‌نتیجه ناپدید
   ✅ هر فیلد فقط یک‌جا: جمعیت در آمار هست و در حقایق نیست
 
-Warning: Undefined variable $p20 in C:\wamp64\www\topersia\ToPersia Claud\workspace\tests\assert.php on line 82
+Warning: Undefined variable $p20 in C:\wamp64\www\topersia\ToPersia Claud\workspace\tests\assert.php on line 86
 
-Deprecated: strpos(): Passing null to parameter #1 ($haystack) of type string is deprecated in C:\wamp64\www\topersia\ToPersia Claud\workspace\tests\assert.php on line 82
+Deprecated: strpos(): Passing null to parameter #1 ($haystack) of type string is deprecated in C:\wamp64\www\topersia\ToPersia Claud\workspace\tests\assert.php on line 86
   ✅ کد استان در هیچ نمایشی نیست (آمار، حقایق، کاشی، کل صفحه) ولی داده‌اش هست؛ اقلیم در آمار یا حقایق  P5-D386
   ✅ مختصات در آمار و حقایق نیست، زیر نقشه است
   ✅ برچسب: geo_boundary دیگر هم‌نام geo_coordinates نیست
@@ -709,4 +710,4 @@ SCHEMA-PARITY — JSON-LD هم‌خوان با صفحه (S1 · S2 · S4 · S5)
   ✅ F-15: کوه — خانهٔ چهارم «دشواری صعود» کلید trekking_difficulty، همان فیلد select جت‌انجین (واژه‌نامهٔ ۴۲) و همان مدخل FIELDMAP — جهش: نام دیگر در اسکین می‌افتد
   ✅ گزارش دیداری: فقط نشانی topersia.local؛ «پیش» با robocopy (تلاش دوباره) و cmp همهٔ پرونده‌ها؛ بازگشت workspace حتی با خطا — جهش: بی نگهبان میزبان یا بی cmp می‌افتد
 ──────────────────────────────────────────────────────────────────────────────
-  گذشته: 619   افتاده: 0
+  گذشته: 620   افتاده: 0

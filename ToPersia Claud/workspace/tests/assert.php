@@ -45,6 +45,10 @@ $badges_lut = r( 40, 'tp_badges' );
 t( 'سال: بدون جداکننده (۲۰۱۶ نه ۲٬۰۱۶)', false !== strpos( $badges_lut, '۲۰۱۶' ) && false === strpos( $badges_lut, '۲٬۰۱۶' ) );
 t( 'نشان با سالش جفت می‌شود', false !== strpos( $badges_lut, 'میراث جهانی' ) && false !== strpos( $badges_lut, '۱۳۸۵' ) );
 t( 'سوییچر نادرست نشان نمی‌سازد', false === strpos( $badges_lut, 'ذخیره‌گاه زیست‌کره' ) );
+/* دستهٔ ۲۶ · F-16: سال بالای نشان برچسب «سال» دارد و کاشی برای صفحه‌خوان نام کامل «نشان، سال …» */
+t( 'نشان (F-16): «سال ۲۰۱۶» بالای نام، کاشی role=group با aria-label «میراث جهانی، سال …» — جهش: عدد تنها (رفتار پیشین) می‌افتد',
+	(bool) preg_match( '#<a class="tp-tile" role="group" aria-label="میراث جهانی، سال [۰-۹]+"><span class="tp-tile__k">سال [۰-۹]+</span><b>میراث جهانی</b></a>#u', $badges_lut )
+	&& ! preg_match( '#<span class="tp-tile__k">سال [۰-۹]+</span><b>میراث جهانی#u', preg_replace( '#tp-tile__k">سال #u', 'tp-tile__k">', $badges_lut ) ) );
 /* کوه کرکس هیچ فیلد نشانی ندارد — نه روشن، نه خاموش. */
 t( 'موجودیت بدون سوییچر روشن: بخش نشان‌ها کامل ناپدید', '' === r( 24, 'tp_badges' ) );
 
