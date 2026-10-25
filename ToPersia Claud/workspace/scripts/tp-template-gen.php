@@ -924,6 +924,8 @@ html .tp-page a.tp-tile[href]:focus-visible{outline:2px solid var(--tp-primary-t
    بلندی خط ۱٫۲ مثل `.n-dir` مرجع — پذیرش با آن جفتش می‌کند)؛ روی هاور همان رنگ نام. */
 html .tp-page .tp-tile__sub{font-size:calc(.6 * var(--tp-rem));color:var(--tp-tile-text);font-weight:700;line-height:1.2}
 html .tp-page a.tp-tile[href]:hover .tp-tile__sub{color:var(--tp-primary-text)}
+html .tp-page .tp-tile__sub a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+html .tp-page .tp-tile__sub a:hover,html .tp-page .tp-tile__sub a:focus-visible{color:var(--tp-primary-text)}
 
 /* ═══ توکن کاشی برای همۀ کاشی‌ها — P5-D245 ═══════════════════════════════
    پس‌زمینه، قاب، متن، متن فرعی، هاور و شعاع همه از `--tp-tile-*` (کاشی روز

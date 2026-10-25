@@ -1905,8 +1905,17 @@ msgstr ""
 msgid "معرق و خاتم"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "معیار %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "معیار ثبت میراث جهانی"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "معیارها:"
 msgstr ""
 
 #: includes/topersia-g-map.php

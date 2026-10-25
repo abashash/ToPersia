@@ -47,7 +47,7 @@ t( 'نشان با سالش جفت می‌شود', false !== strpos( $badges_lut,
 t( 'سوییچر نادرست نشان نمی‌سازد', false === strpos( $badges_lut, 'ذخیره‌گاه زیست‌کره' ) );
 /* دستهٔ ۲۶ · F-16: سال بالای نشان برچسب «سال» دارد و کاشی برای صفحه‌خوان نام کامل «نشان، سال …» */
 t( 'نشان (F-16): «سال ۲۰۱۶» بالای نام، کاشی role=group با aria-label «میراث جهانی، سال …» — جهش: عدد تنها (رفتار پیشین) می‌افتد',
-	(bool) preg_match( '#<a class="tp-tile" role="group" aria-label="میراث جهانی، سال [۰-۹]+"><span class="tp-tile__k">سال [۰-۹]+</span><b>میراث جهانی</b></a>#u', $badges_lut )
+	(bool) preg_match( '#<(?:a|div) class="tp-tile" role="group" aria-label="میراث جهانی، سال [۰-۹]+"><span class="tp-tile__k">سال [۰-۹]+</span><b>میراث جهانی</b>#u', $badges_lut )
 	&& ! preg_match( '#<span class="tp-tile__k">سال [۰-۹]+</span><b>میراث جهانی#u', preg_replace( '#tp-tile__k">سال #u', 'tp-tile__k">', $badges_lut ) ) );
 /* کوه کرکس هیچ فیلد نشانی ندارد — نه روشن، نه خاموش. */
 t( 'موجودیت بدون سوییچر روشن: بخش نشان‌ها کامل ناپدید', '' === r( 24, 'tp_badges' ) );
@@ -2337,6 +2337,19 @@ foreach ( $count_docs as $doc ) {
 t( 'سند: هیچ‌جا عدد آزمون صریح نوشته نشده  P5-D200',
 	empty( $counted ), implode( ' · ', $counted ) );
 
+/* ── F-17 (دستهٔ ۲۶ بند ۱۰): معیارهای میراث جهانی در نشان؛ هر عدد رومی پیوند به لنگر برگهٔ معیارها؛ بی برگه، متن ساده ── */
+$f17_plain = r( 40, 'tp_badges' );
+$GLOBALS['tp_posts'][9940]           = array( 'type' => 'page', 'title' => 'معیارها', 'url' => 'https://topersia.test/world-heritage-criteria/' );
+$GLOBALS['tp_options']['topersia_wh_criteria_page'] = 9940;
+$f17_link  = r( 40, 'tp_badges' );
+$GLOBALS['tp_posts'][9940]['status'] = 'draft';
+$f17_draft = r( 40, 'tp_badges' );
+unset( $GLOBALS['tp_posts'][9940], $GLOBALS['tp_options']['topersia_wh_criteria_page'] );
+t( 'F-17: نشان میراث جهانی «معیارها: (vii) (viii)» — با برگه هر عدد پیوند به #criterion-… (کاشی div، نه پیوند در پیوند)؛ بی برگه یا برگهٔ منتشرنشده متن ساده',
+	false !== strpos( $f17_link, '<a href="https://topersia.test/world-heritage-criteria/#criterion-vii" lang="en" dir="ltr" aria-label="معیار vii">(vii)</a> <a href="https://topersia.test/world-heritage-criteria/#criterion-viii"' )
+	&& (bool) preg_match( '#<div class="tp-tile"[^>]*><span class="tp-tile__k">[^<]*</span><b>میراث جهانی</b><span class="tp-tile__sub">معیارها: #u', $f17_link )
+	&& false !== strpos( $f17_plain, '<span lang="en" dir="ltr">(vii)</span>' ) && false === strpos( $f17_plain, '#criterion-' )
+	&& false === strpos( $f17_draft, '#criterion-' ), $f17_link );
 /* ── F-15 (دستهٔ ۲۶ بند ۸): خانهٔ «دشواری صعود» کوه همان فیلد trekking_difficulty متاباکس G9 کوه (واژه‌نامهٔ ۴۲) ── */
 $f15_skin = json_decode( (string) file_get_contents( __DIR__ . '/../reference/Jetengine_Skin.json' ), true );
 $f15_has  = function ( $skin, $name ) {

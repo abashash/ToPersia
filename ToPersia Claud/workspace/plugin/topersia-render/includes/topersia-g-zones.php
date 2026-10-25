@@ -3304,6 +3304,11 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 		 * ستون ۳۴۰ پیکسلی خوانده نمی‌شدند.
 		 */
 		$taken  = array_merge( topersia_g_stat_keys( $pid ), array( 'geo_coordinates', 'best_season' ) );
+
+		/* F-17 (دستۀ ۲۶): نشان «میراث جهانی» روشن ← معیارها با پیوند در همان نشان، نه دوباره این‌جا */
+		if ( topersia_g_flag_on( topersia_g_raw( $pid, 'world_heritage' ) ) ) {
+			$taken[] = 'world_heritage_criteria';
+		}
 		$fields = topersia_g_zone_fields( $pid, 'card', $taken );
 
 		/*
@@ -3350,6 +3355,60 @@ if ( ! function_exists( 'topersia_g_sc_facts' ) ) {
 	}
 }
 
+/**
+ * دستۀ ۲۶ · F-17 — نشانی برگۀ «معیارهای ثبت میراث جهانی» در زبان صفحه (WPML). شناسۀ برگۀ فارسی در
+ * گزینۀ `topersia_wh_criteria_page` (scripts/tp-wh-criteria-page.php)؛ ترجمۀ منتشرنشده ← خالی (بی پیوند).
+ */
+if ( ! function_exists( 'topersia_g_wh_criteria_url' ) ) {
+	function topersia_g_wh_criteria_url() {
+		$id = absint( function_exists( 'get_option' ) ? get_option( 'topersia_wh_criteria_page', 0 ) : 0 );
+		if ( ! $id ) {
+			return '';
+		}
+		$lang = topersia_g_page_lang();
+		$tr   = absint( apply_filters( 'wpml_object_id', $id, 'page', false, $lang ) );
+		$tr   = $tr ? $tr : ( 'fa' === $lang ? $id : 0 );
+		if ( ! $tr || 'publish' !== get_post_status( $tr ) ) {
+			return '';
+		}
+		return (string) get_permalink( $tr );
+	}
+}
+
+/**
+ * دستۀ ۲۶ · F-17 — «معیار (i) (iv) …» از world_heritage_criteria؛ هر عدد رومی (i … x) پیوند به #criterion-…
+ * همان زبان؛ بی برگه، متن ساده. عدد ناشناخته کنار گذاشته می‌شود؛ بی معیار ← خالی.
+ */
+if ( ! function_exists( 'topersia_g_wh_criteria_links' ) ) {
+	function topersia_g_wh_criteria_links( $pid ) {
+		$raw = topersia_g_raw( $pid, 'world_heritage_criteria' );
+		$raw = is_scalar( $raw ) ? strtolower( (string) $raw ) : '';
+		if ( ! preg_match_all( '/\(\s*([ivx]+)\s*\)|\b(i{1,3}|iv|vi{0,3}|ix|x)\b/u', $raw, $m ) ) {
+			return '';
+		}
+		$ok   = array( 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x' );
+		$url  = topersia_g_wh_criteria_url();
+		$seen = array();
+		$out  = array();
+		foreach ( $m[0] as $k => $hit ) {
+			$r = '' !== $m[1][ $k ] ? $m[1][ $k ] : $m[2][ $k ];
+			if ( ! in_array( $r, $ok, true ) || isset( $seen[ $r ] ) ) {
+				continue;
+			}
+			$seen[ $r ] = 1;
+			/* translators: %s: شمارۀ رومی معیار */
+			$aria  = sprintf( __( 'معیار %s', 'topersia' ), $r );
+			$out[] = '' !== $url
+				? '<a href="' . esc_url( $url . '#criterion-' . $r ) . '" lang="en" dir="ltr" aria-label="' . esc_attr( $aria ) . '">(' . esc_html( $r ) . ')</a>'
+				: '<span lang="en" dir="ltr">(' . esc_html( $r ) . ')</span>';
+		}
+		if ( ! $out ) {
+			return '';
+		}
+		return esc_html( __( 'معیارها:', 'topersia' ) ) . ' ' . implode( ' ', $out );
+	}
+}
+
 /** [tp_badges] — سوییچرهای درست، جفت‌شده با سالشان. */
 if ( ! function_exists( 'topersia_g_sc_badges' ) ) {
 	function topersia_g_sc_badges( $atts = array() ) {
@@ -3388,9 +3447,11 @@ if ( ! function_exists( 'topersia_g_sc_badges' ) ) {
 			$label   = '' !== $year ? sprintf( /* translators: %s: سال */ __( 'سال %s', 'topersia' ), $year ) : '';
 			$badge   = topersia_g_t( $field['label'] );
 			$tiles[] = array(
-				'label' => $label,
-				'name'  => $badge,
-				'attrs' => '' !== $label ? ' role="group" aria-label="' . esc_attr( $badge . '، ' . $label ) . '"' : '',
+				'label'   => $label,
+				'name'    => $badge,
+				'attrs'   => '' !== $label ? ' role="group" aria-label="' . esc_attr( $badge . '، ' . $label ) . '"' : '',
+				/* F-17: معیارهای میراث جهانی، هر عدد رومی پیوند به لنگر همان زبان در برگۀ معیارها */
+				'sub_raw' => 'world_heritage' === $name ? topersia_g_wh_criteria_links( $pid ) : '',
 			);
 		}
 
@@ -4808,13 +4869,15 @@ if ( ! function_exists( 'topersia_g_tiles' ) ) {
 			$sub   = isset( $tile['sub'] ) ? (string) $tile['sub'] : '';
 			$name  = isset( $tile['name'] ) ? (string) $tile['name'] : '';
 			$name  = empty( $tile['raw'] ) ? esc_html( $name ) : $name;
+			/* دستۀ ۲۶ · F-17: کاشی‌ای که پیوند درونی دارد (sub_raw) خودش <a> نمی‌شود — پیوند در پیوند نامعتبر است */
+			$div   = ! empty( $tile['sub_raw'] );
+			$attrs = ' class="tp-tile"' . ( isset( $tile['attrs'] ) ? (string) $tile['attrs'] : '' ) . ( $shown && $n > $shown ? ' hidden data-tp-rest-item' : '' );
 
-			$out .= topersia_g_a_open( isset( $tile['url'] ) ? $tile['url'] : '',
-					' class="tp-tile"' . ( isset( $tile['attrs'] ) ? (string) $tile['attrs'] : '' ) . ( $shown && $n > $shown ? ' hidden data-tp-rest-item' : '' ) )
+			$out .= ( $div ? '<div' . $attrs . '>' : topersia_g_a_open( isset( $tile['url'] ) ? $tile['url'] : '', $attrs ) )
 				. ( '' !== $label ? '<span class="tp-tile__k">' . esc_html( $label ) . '</span>' : '' )
 				. '<b>' . $name . '</b>'
 				. ( '' !== $sub ? '<span class="tp-tile__sub">' . esc_html( $sub ) . '</span>' : '' )
-				. '</a>';
+				. ( $div ? '<span class="tp-tile__sub">' . $tile['sub_raw'] . '</span></div>' : '</a>' );
 		}
 
 		$rest = $shown ? max( 0, count( $tiles ) - $shown ) : 0;

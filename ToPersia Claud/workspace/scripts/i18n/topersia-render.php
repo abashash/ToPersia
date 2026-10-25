@@ -626,6 +626,8 @@ return array(
 	'وقت ایران (UTC%s)' => array( 'en' => 'Iran time (UTC%s)', 'ar' => 'توقيت إيران (UTC%s)' ),
 	'مختصات' => array( 'en' => 'Coordinates', 'ar' => 'الإحداثيات' ),
 	'سال %s' => array( 'en' => 'Year %s', 'ar' => 'سنة %s' ),
+	'معیار %s' => array( 'en' => 'Criterion %s', 'ar' => 'المعيار %s' ),
+	'معیارها:' => array( 'en' => 'Criteria:', 'ar' => 'المعايير:' ),
 	'همه فرهنگ ←'                     => array( 'en' => 'All culture →', 'ar' => 'كل الثقافة ←' ),
 	'گالری کامل %s'                   => array( 'en' => 'Full gallery of %s', 'ar' => 'المعرض الكامل لـ %s' ),
 	'نمای کامل تصویر'                 => array( 'en' => 'Full image view', 'ar' => 'عرض الصورة كاملة' ),

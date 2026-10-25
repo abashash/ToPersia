@@ -1906,9 +1906,18 @@ msgstr "Temple"
 msgid "معرق و خاتم"
 msgstr "Marquetry and inlay"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "معیار %s"
+msgstr "Criterion %s"
+
 #: includes/topersia-g-map.php
 msgid "معیار ثبت میراث جهانی"
 msgstr "World Heritage criteria"
+
+#: includes/topersia-g-zones.php
+msgid "معیارها:"
+msgstr "Criteria:"
 
 #: includes/topersia-g-map.php
 msgid "ملی"
