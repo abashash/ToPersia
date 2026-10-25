@@ -662,6 +662,10 @@ msgstr ""
 msgid "جاذبه‌ها"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+msgid "جاذبه‌های دیگر"
+msgstr ""
+
 #: includes/topersia-g-map.php
 #, php-format
 msgid "جاذبه‌های شاخص %s"

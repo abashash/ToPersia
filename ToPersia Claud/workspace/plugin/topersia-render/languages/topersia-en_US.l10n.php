@@ -172,6 +172,7 @@ return array (
     'ثبت نظر' => 'Submit review',
     'جاده‌ای' => 'Road',
     'جاذبه‌ها' => 'Attractions',
+    'جاذبه‌های دیگر' => 'Other attractions',
     'جاذبه‌های شاخص %s' => 'Top attractions of %s',
     'جاذبه‌های شاخص %s و شهرهایش' => 'Top attractions of %s and its cities',
     'جاذبه‌های منتخب' => 'Featured attractions',

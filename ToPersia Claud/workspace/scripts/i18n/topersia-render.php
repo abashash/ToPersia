@@ -464,6 +464,7 @@ return array(
 	'روستاها'                         => array( 'en' => 'Villages', 'ar' => 'القرى' ),
 	'جاذبه‌های منتخب'                 => array( 'en' => 'Featured attractions', 'ar' => 'أبرز المعالم' ),
 	'جاذبه‌های شاخص %s و شهرهایش'     => array( 'en' => 'Top attractions of %s and its cities', 'ar' => 'أبرز معالم %s ومدنها' ),
+	'جاذبه‌های دیگر' => array( 'en' => 'Other attractions', 'ar' => 'معالم أخرى' ),
 	'همه جاذبه‌ها ←'                  => array( 'en' => 'All attractions →', 'ar' => 'جميع المعالم ←' ),
 	'همه روستاها ←'                   => array( 'en' => 'All villages →', 'ar' => 'جميع القرى ←' ),
 	'همه پهنه‌های طبیعی ←'            => array( 'en' => 'All natural areas →', 'ar' => 'جميع المناطق الطبيعية ←' ),

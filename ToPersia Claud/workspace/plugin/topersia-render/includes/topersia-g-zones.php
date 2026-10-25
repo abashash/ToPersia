@@ -7456,10 +7456,36 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 			$mixed = 6 === topersia_g_list_cap( $key )
 				&& count( array_unique( array_map( function ( $i ) { return (string) ( isset( $i['kind'] ) ? $i['kind'] : '' ); }, $res['items'] ) ) ) > 1;
 
+			/*
+			 * دستۀ ۲۶ · F-02: «همۀ جاذبه‌ها» در صفحۀ استان به شهر بخش می‌شود — سرفصل نام شهر، شهرِ پرجاذبه‌تر
+			 * اول (برابر ← ترتیب نخستین دیدن)، جاذبۀ بی شهر در بخش پایانی. برچسب شهر زیر هر نام دیگر تکراری است.
+			 */
+			$by_city = (bool) apply_filters( 'topersia_g_list_by_city', 'attractions' === $key && 'tp_province' === ( function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '' ), $post_id, $key );
+			$cities  = array();
+
 			foreach ( $res['items'] as $item ) {
 				$meta    = topersia_g_list_meta( $key, $item );
 				$meta    = ( '' === $meta && $mixed && ! empty( $item['kind'] ) ) ? (string) $item['kind'] : $meta;
+
+				if ( $by_city ) {
+					$cities[ (string) ( isset( $item['place'] ) ? $item['place'] : '' ) ][] = array( 'name' => $item['name'], 'meta' => '', 'url' => $item['url'] );
+					continue;
+				}
+
 				$items[] = array( 'name' => $item['name'], 'meta' => $meta, 'url' => $item['url'] );
+			}
+
+			if ( $by_city ) {
+				$order = array_keys( $cities );
+				uksort( $cities, function ( $a, $b ) use ( $cities, $order ) {
+					if ( ( '' === $a ) !== ( '' === $b ) ) {
+						return '' === $a ? 1 : -1;
+					}
+					return count( $cities[ $b ] ) - count( $cities[ $a ] ) ?: array_search( $a, $order, true ) - array_search( $b, $order, true );
+				} );
+				foreach ( $cities as $city => $list ) {
+					$blocks[] = array( 'head' => '' !== $city ? $city : __( 'جاذبه‌های دیگر', 'topersia' ), 'items' => $list );
+				}
 			}
 
 			if ( $items ) {

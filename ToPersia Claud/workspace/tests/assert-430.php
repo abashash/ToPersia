@@ -100,8 +100,20 @@ foreach ( topersia_g_rel_items( 20, 'attractions', 0 )['items'] as $one ) {
 	$att_tags[ $one['name'] ] = topersia_g_list_meta( 'attractions', $one );
 }
 
+/* دستهٔ ۲۶ · F-02: در استان، «همهٔ جاذبه‌ها» به شهر بخش می‌شود — سرفصل نام شهر، پرجاذبه‌تر اول، بی برچسب تکراری زیر نام */
+$att_heads = preg_match_all( '#<h4 class="tp-list__fam">([^<]+)</h4>#u', $list_att, $hm ) ? $hm[1] : array();
+$att_kashan = preg_match( '#<h4 class="tp-list__fam">کاشان</h4><ul class="tp-list__grid">(.*?)</ul>#su', $list_att, $km ) ? $km[1] : '';
+t( 'فهرست (F-02): استان — هر شهر یک سرفصل، شهرِ پرجاذبه‌تر اول (کاشان ۲ · آران و بیدگل ۱)، جاذبه زیر شهر خودش و بی برچسب تکراری',
+	array( 'کاشان', 'آران و بیدگل' ) === $att_heads && false !== strpos( $att_kashan, '<b>میدان نقش جهان</b></a>' ) && false !== strpos( $att_kashan, '<b>مسجد جامع</b></a>' )
+	&& false === strpos( $list_att, 'tp-list__tag' ), wp_json_encode( $att_heads, JSON_UNESCAPED_UNICODE ) );
+$GLOBALS['tp_filters']['topersia_g_list_by_city'][] = function () { return false; };
+$att_city = topersia_g_list_modal( 20, 'attractions' );
+unset( $GLOBALS['tp_filters']['topersia_g_list_by_city'] );
+t( 'فهرست (F-02): جهش — بخش‌بندی خاموش (صافی topersia_g_list_by_city) ← همان داده بی سرفصل، با برچسب شهر زیر هر نام (رفتار پیشین)',
+	'' !== $att_city && false === strpos( $att_city, 'tp-list__fam' ) && false !== strpos( $att_city, '<b>میدان نقش جهان</b><span class="tp-list__tag">کاشان</span>' ) );
+
 t( 'فهرست: جاذبه ← شهرش، نه برچسب نوع  ۴٫۳٫۰ بند ۱۰',
-	false !== strpos( $list_att, '<b>میدان نقش جهان</b><span class="tp-list__tag">کاشان</span>' ) && isset( $att_tags['میدان نقش جهان'] ) && 'کاشان' === $att_tags['میدان نقش جهان']
+	true && isset( $att_tags['میدان نقش جهان'] ) && 'کاشان' === $att_tags['میدان نقش جهان']
 	&& ! in_array( 'بنای تاریخی', $att_tags, true ), wp_json_encode( $att_tags, JSON_UNESCAPED_UNICODE ) );
 
 t( 'فهرست: فرهنگ ← خانواده‌اش',
