@@ -26,16 +26,20 @@ foreach ( get_posts( array( 'post_type' => 'tp_province', 'numberposts' => -1, '
 	$want = $cap ? $pt( $cap ) : ( in_array( $pid, $applied, true ) ? $pt( $pid ) : null );
 	$got  = topersia_g_routing_point( $pid );
 	if ( $want ? ! $same( $want, $got ) : array() !== $got ) { $bad[] = get_the_title( $pid ); }
-	if ( ! $cap && ! in_array( $pid, $applied, true ) ) { $pending[] = get_the_title( $pid ); $probe = $probe ?: $pid; }
+	if ( ! $cap && ! in_array( $pid, $applied, true ) ) { $pending[] = get_the_title( $pid ); }
+	if ( ! $cap ) { $probe = $probe ?: $pid; }
 }
 $t( 'هر استان: نقطهٔ مسیریابی = مرکز استان (رابطه) یا، پس از نوشتن P5-D399، مختصات خودِ استان؛ پیش از آن هیچ — ' . $n . ' استان', ! $bad, implode( '، ', $bad ) );
 
 if ( $probe ) {
-	$on = function () use ( $probe ) { return array( $probe ); };
+	$on  = function () use ( $probe ) { return array( $probe ); };
+	$off = function () { return array(); };
 	add_filter( 'pre_option_topersia_p5d399_applied', $on );
 	$after = topersia_g_routing_point( $probe );
 	remove_filter( 'pre_option_topersia_p5d399_applied', $on );
+	add_filter( 'pre_option_topersia_p5d399_applied', $off );
 	$before = topersia_g_routing_point( $probe );
+	remove_filter( 'pre_option_topersia_p5d399_applied', $off );
 	$t( 'جهش: ' . get_the_title( $probe ) . ' (بی رابطهٔ مرکز) با «نوشته‌شده» نقطهٔ خودش را می‌گیرد، بی آن هیچ', $same( $after, $pt( $probe ) ) && array() === $before, wp_json_encode( array( $after, $before ) ) );
 }
 
