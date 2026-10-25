@@ -180,7 +180,7 @@ foreach ( $sc_real as $t => $list ) {
 	if ( ! isset( $mx[ $t ]['stats'] ) || array_column( $list, 'key' ) !== $mx[ $t ]['stats'] ) { $sc_plan_bad[] = $t; }
 }
 t( 'P5-D395: ماتریس stats همان STAT_CELLS است (تنها منبع)؛ فیلدهای الزامی بسته از همان (صافی topersia_pack_required_fields)',
-	! $sc_plan_bad && array( 'area_km2', 'population' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_city' )
+	! $sc_plan_bad && array( 'elevation_m', 'area_km2', 'population' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_city' )   /* F-10 */
 	&& array( 'calendar_systems', 'national_holidays', 'annual_review_month', 'official_source_link' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_calendar' )
 	&& array( 'tipping_guidance', 'photography_restrictions', 'dress_code_summary', 'regional_etiquette_notes' ) === apply_filters( 'topersia_pack_required_fields', array(), 'tp_travel_etiquette' ), implode( ' ', $sc_plan_bad ) );
 $sc_src  = (string) file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' );

@@ -6491,7 +6491,7 @@ if ( ! function_exists( 'topersia_g_stat_cells' ) ) {
 		/* «!» = فیلد الزامی در بستۀ درون‌ریزی تازه (فقط پست جدید — STATS-4-MATRIX بخش ج) */
 		return array(
 			'tp_country'          => $c( 'population!', 'area_km2!', 'official_language!', 'text:currency_note!' ),
-			'tp_city'             => $c( 'parent:province', 'parent:county', 'area_km2!', 'population!' ),
+			'tp_city'             => $c( 'parent:province', 'elevation_m!', 'area_km2!', 'population!' ),   /* F-10 (دستۀ ۲۶): شهرستان ← ارتفاع از سطح دریا */
 			'tp_region'           => $c( 'region_classification!', 'best_season!', 'names:83', 'text:climate_overview!' ),
 			'tp_province'         => $c( 'capital', 'area_km2!', 'population!', 'climate_type!' ),
 			'tp_district'         => $c( 'parent:province', 'parent:city', 'neighborhood_type!', 'distance:capital' ),
