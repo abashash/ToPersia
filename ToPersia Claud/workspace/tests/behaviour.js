@@ -880,7 +880,13 @@ async function share( page, tag, touch ) {
 	await page.locator( '[data-tp-share]' ).scrollIntoViewIfNeeded();
 
 	if ( ! touch ) {
-		/* دستهٔ ۲۸: چه چیزی واقعاً زیر نقطهٔ هاور است — اگر لایه‌ای رویش باشد، همان در گزارش می‌آید */
+		/*
+		 * دستهٔ ۲۸: scrollIntoViewIfNeeded دکمه را گاهی لبهٔ بالا (y≈۷۰) می‌گذاشت، زیر نوار بخش‌های چسبان؛ هاور روی
+		 * نوار می‌نشست و آزمون یک‌درمیان می‌افتاد. دکمه وسط دید، بی اسکرول نرم (قاعدهٔ CLAUDE.md).
+		 */
+		await page.$eval( '[data-tp-share]', b => { document.documentElement.style.scrollBehavior = 'auto'; b.scrollIntoView( { block: 'center', behavior: 'instant' } ); } );
+		await page.waitForTimeout( 400 );
+		/* چه چیزی واقعاً زیر نقطهٔ هاور است — اگر لایه‌ای رویش باشد، همان در گزارش می‌آید */
 		const under = await page.$eval( '[data-tp-share]', b => {
 			const r = b.getBoundingClientRect();
 			const e = document.elementFromPoint( r.left + r.width / 2, r.top + r.height / 2 );
