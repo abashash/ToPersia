@@ -2333,6 +2333,23 @@ foreach ( $count_docs as $doc ) {
 t( 'سند: هیچ‌جا عدد آزمون صریح نوشته نشده  P5-D200',
 	empty( $counted ), implode( ' · ', $counted ) );
 
+/* ── F-15 (دستهٔ ۲۶ بند ۸): خانهٔ «دشواری صعود» کوه همان فیلد trekking_difficulty متاباکس G9 کوه (واژه‌نامهٔ ۴۲) ── */
+$f15_skin = json_decode( (string) file_get_contents( __DIR__ . '/../reference/Jetengine_Skin.json' ), true );
+$f15_has  = function ( $skin, $name ) {
+	$hit = false;
+	$walk = function ( $a ) use ( &$walk, &$hit, $name ) {
+		if ( ! is_array( $a ) ) { return; }
+		if ( isset( $a['name'], $a['type'] ) && $name === $a['name'] && 'select' === $a['type'] && '42' === (string) ( $a['glossary_id'] ?? '' ) ) { $hit = true; }
+		foreach ( $a as $v ) { $walk( $v ); }
+	};
+	$walk( $skin );
+	return $hit;
+};
+$f15_cell = array_column( topersia_g_stat_cells()['tp_mountain'], 'key' );
+t( 'F-15: کوه — خانهٔ چهارم «دشواری صعود» کلید trekking_difficulty، همان فیلد select جت‌انجین (واژه‌نامهٔ ۴۲) و همان مدخل FIELDMAP — جهش: نام دیگر در اسکین می‌افتد',
+	'trekking_difficulty' === $f15_cell[3] && $f15_has( $f15_skin, 'trekking_difficulty' ) && '42' === (string) ( topersia_g_map()['trekking_difficulty']['glossary'] ?? '' )
+	&& 'دشواری صعود' === topersia_g_stat_label( 'trekking_difficulty' ) && ! $f15_has( json_decode( str_replace( '"trekking_difficulty"', '"trek_difficulty"', wp_json_encode( $f15_skin ) ), true ), 'trekking_difficulty' ),
+	implode( ',', $f15_cell ) );
 /* ── گزارش دیداری (دستهٔ ۲۶ بند ۰): فقط topersia.local؛ «پیش» با robocopy /R:5 /W:2 و cmp هر پرونده؛ بازگشت workspace در finally ── */
 $vr_src = (string) @file_get_contents( __DIR__ . '/../scripts/visual-report.js' );
 $vr_ok  = function ( $s ) {
