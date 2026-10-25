@@ -458,7 +458,7 @@ function topersia_pack_schema( $post_type ) {
 	 * سنجیده می‌شود؛ پست‌های موجود دست نمی‌خورند.
 	 */
 	foreach ( (array) apply_filters( 'topersia_pack_required_fields', array(), $post_type ) as $req ) {
-		if ( isset( $fields[ $req ] ) ) {
+		if ( is_string( $req ) && isset( $fields[ $req ] ) ) {   /* صافی از افزونۀ دیگر هم می‌آید: غیررشته (آرایه) isset را TypeError می‌کرد */
 			$fields[ $req ]['required'] = true;
 		}
 	}
