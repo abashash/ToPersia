@@ -621,6 +621,7 @@ return array(
 	'گالری تصاویر'                    => array( 'en' => 'Photo gallery', 'ar' => 'معرض الصور' ),
 	'تصاویر منتخب از جاذبه‌های %s'    => array( 'en' => 'Selected photos of the attractions of %s', 'ar' => 'صور مختارة من معالم %s' ),
 	'همه تصاویر ←'                    => array( 'en' => 'All photos →', 'ar' => 'جميع الصور ←' ),
+	'همۀ فرهنگ و رویداد' => array( 'en' => 'All culture and events', 'ar' => 'كل الثقافة والفعاليات' ),
 	'همه فرهنگ ←'                     => array( 'en' => 'All culture →', 'ar' => 'كل الثقافة ←' ),
 	'گالری کامل %s'                   => array( 'en' => 'Full gallery of %s', 'ar' => 'المعرض الكامل لـ %s' ),
 	'نمای کامل تصویر'                 => array( 'en' => 'Full image view', 'ar' => 'عرض الصورة كاملة' ),

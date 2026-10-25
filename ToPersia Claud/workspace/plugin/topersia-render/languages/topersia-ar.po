@@ -2348,6 +2348,10 @@ msgid "همه گذرهای مرزی ←"
 msgstr "جميع المعابر الحدودية ←"
 
 #: includes/topersia-g-zones.php
+msgid "همۀ فرهنگ و رویداد"
+msgstr "كل الثقافة والفعاليات"
+
+#: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
 msgstr "المجاورة"
 

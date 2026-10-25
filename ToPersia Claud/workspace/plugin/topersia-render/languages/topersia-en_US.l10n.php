@@ -587,6 +587,7 @@ return array (
     'همه موارد ←' => 'All items →',
     'همه پهنه‌های طبیعی ←' => 'All natural areas →',
     'همه گذرهای مرزی ←' => 'All border crossings →',
+    'همۀ فرهنگ و رویداد' => 'All culture and events',
     'هم‌مرزها' => 'Neighbors',
     'هنرمند' => 'Artist',
     'هنوز خبری برای این مکان نیست.' => 'No news for this place yet.',

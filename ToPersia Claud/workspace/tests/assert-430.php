@@ -116,6 +116,9 @@ t( 'فهرست: جاذبه ← شهرش، نه برچسب نوع  ۴٫۳٫۰ ب�
 	true && isset( $att_tags['میدان نقش جهان'] ) && 'کاشان' === $att_tags['میدان نقش جهان']
 	&& ! in_array( 'بنای تاریخی', $att_tags, true ), wp_json_encode( $att_tags, JSON_UNESCAPED_UNICODE ) );
 
+t( 'فهرست (F-03): عنوان پنجرهٔ فرهنگ «همۀ فرهنگ و رویداد» — نه سرفصل بخش؛ پنجرهٔ جاذبه همان سرفصل گروه',
+	false !== strpos( $list_cul, 'id="tp-list-culture-title">همۀ فرهنگ و رویداد<small' ) && false === strpos( $list_att, 'همۀ فرهنگ و رویداد' ) );
+
 t( 'فهرست: فرهنگ ← خانواده‌اش',
 	false !== strpos( $list_cul, '<b>میناکاری</b><span class="tp-list__tag">صنایع دستی</span>' ) );
 

@@ -7493,7 +7493,10 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 			}
 		}
 
-		return topersia_g_list_modal_html( 'tp-list-' . $key, isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '', $blocks );
+		/* دستۀ ۲۶ · F-03: پنجرۀ فرهنگ عنوان «همۀ …» می‌گیرد، نه همان سرفصل بخش */
+		$title = 'culture' === $key ? __( 'همۀ فرهنگ و رویداد', 'topersia' ) : ( isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '' );
+
+		return topersia_g_list_modal_html( 'tp-list-' . $key, $title, $blocks );
 	}
 }
 

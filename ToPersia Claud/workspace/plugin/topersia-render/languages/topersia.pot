@@ -2347,6 +2347,10 @@ msgid "همه گذرهای مرزی ←"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "همۀ فرهنگ و رویداد"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
 msgstr ""
 
