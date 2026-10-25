@@ -1393,6 +1393,57 @@
 		} );
 	} )();
 
+	/* ══ باز/بسته از ساعت بازدید — دستۀ ۲۹ ══════════════════════════════
+	   سمت کاربر تا HTML کش‌شده ثابت بماند: روز و ساعت همین لحظه به وقت تهران
+	   (Intl، Asia/Tehran)، ردیف همان روز از جدول. ردیف «تعطیل رسمی» دانسته
+	   نمی‌شود (تقویم رسمی در این‌جا نیست) و نادیده می‌ماند. بی ردیف برای امروز،
+	   یا مرورگر بی Intl ← هیچ نشانی (جای نشان hidden می‌ماند). */
+	( function () {
+
+		var table = page.querySelector( '[data-tp-hours]' );
+		var badge = page.querySelector( '[data-tp-open]' );
+
+		if ( ! table || ! badge || ! window.Intl || ! Intl.DateTimeFormat ) {
+			return;
+		}
+
+		var rows = [];
+
+		try {
+			rows = JSON.parse( table.getAttribute( 'data-tp-hours' ) || '[]' );
+		} catch ( err ) {
+			return;
+		}
+
+		var parts = {};
+
+		try {
+			new Intl.DateTimeFormat( 'en-US', { timeZone: 'Asia/Tehran', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' } )
+				.formatToParts( new Date() ).forEach( function ( p ) { parts[ p.type ] = p.value; } );
+		} catch ( err ) {
+			return;
+		}
+
+		var day = { Sat: 'sat', Sun: 'sun', Mon: 'mon', Tue: 'tue', Wed: 'wed', Thu: 'thu', Fri: 'fri' }[ parts.weekday ];
+		var now = ( parseInt( parts.hour, 10 ) % 24 ) * 60 + parseInt( parts.minute, 10 );
+		var min = function ( hm ) { var x = String( hm || '' ).split( ':' ); return parseInt( x[0], 10 ) * 60 + parseInt( x[1], 10 ); };
+		var today = rows.filter( function ( r ) { return r.d === day; } );
+
+		if ( ! day || ! today.length ) {
+			return;
+		}
+
+		var open = today.some( function ( r ) {
+			if ( r.c ) { return false; }
+			var a = min( r.f ), b = min( r.t );
+			return b > a ? ( now >= a && now < b ) : ( now >= a || now < b );   /* شب‌گذر: ۲۰:۰۰–۰۲:۰۰ */
+		} );
+
+		badge.textContent = open ? t( 'باز است' ) : t( 'بسته است' );
+		badge.classList.add( open ? 'tp-open--yes' : 'tp-open--no' );
+		badge.hidden = false;
+	} )();
+
 	/* ══ بلوک هوش مصنوعی ════════════════════════════════════════════════ */
 	( function () {
 
