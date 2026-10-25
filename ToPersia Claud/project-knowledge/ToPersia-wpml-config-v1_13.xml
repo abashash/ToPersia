@@ -303,6 +303,49 @@
     <custom-field action="copy">world_heritage_ref_number</custom-field>
     <custom-field action="copy">world_heritage_year</custom-field>
 
+    <!-- P5-D450 (دستهٔ ۲۸) -->
+    <custom-field action="copy">opening_hours_spec</custom-field>
+    <custom-field action="copy">ticket_price_foreign</custom-field>
+    <custom-field action="copy">ticket_price_local</custom-field>
+    <custom-field action="copy">ticket_price_checked</custom-field>
+    <custom-field action="copy">wheelchair_access</custom-field>
+    <custom-field action="copy">best_time_of_day</custom-field>
+    <custom-field action="copy">dress_requirement</custom-field>
+    <custom-field action="copy">photo_allowed</custom-field>
+    <custom-field action="copy">electric_plug</custom-field>
+    <custom-field action="copy">drive_side</custom-field>
+    <custom-field action="copy">typical_trip_days</custom-field>
+    <custom-field action="copy">metro_available</custom-field>
+    <custom-field action="copy">vibe_tags</custom-field>
+    <custom-field action="copy">access_road_type</custom-field>
+    <custom-field action="copy">homestay_available</custom-field>
+    <custom-field action="translate">ferry_ports</custom-field>
+    <custom-field action="copy">summit_route_hours</custom-field>
+    <custom-field action="copy">permit_required</custom-field>
+    <custom-field action="copy">swimming_allowed</custom-field>
+    <custom-field action="copy">tour_required</custom-field>
+    <custom-field action="copy">safe_months</custom-field>
+    <custom-field action="copy">trail_length_km</custom-field>
+    <custom-field action="copy">access_difficulty</custom-field>
+    <custom-field action="copy">permit_contact_url</custom-field>
+    <custom-field action="translate">viewpoints</custom-field>
+    <custom-field action="copy">visa_on_arrival</custom-field>
+    <custom-field action="copy">non_muslim_entry</custom-field>
+    <custom-field action="translate">prayer_times_closure</custom-field>
+    <custom-field action="copy">on_site_guide</custom-field>
+    <custom-field action="copy">audio_guide_languages</custom-field>
+    <custom-field action="copy">dietary_flags</custom-field>
+    <custom-field action="copy">worn_today</custom-field>
+    <custom-field action="copy">audience_participation</custom-field>
+    <custom-field action="copy">visitor_welcome</custom-field>
+    <custom-field action="copy">ticket_required</custom-field>
+    <custom-field action="translate">traffic_closure_note</custom-field>
+    <custom-field action="copy">ticket_url</custom-field>
+    <custom-field action="copy">last_observed_date</custom-field>
+    <custom-field action="copy">processing_days</custom-field>
+    <custom-field action="copy">ride_hailing_apps</custom-field>
+    <custom-field action="translate">gesture_warnings</custom-field>
+    <custom-field action="copy">tap_water_safe</custom-field>
   </custom-fields>
 
   <custom-fields-texts>

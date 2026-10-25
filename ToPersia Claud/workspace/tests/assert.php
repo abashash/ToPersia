@@ -126,7 +126,7 @@ t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', fal
 
 /* پوشش نقشه */
 /* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است؛ kind=date تاریخ رویداد E1 · E3 · E5 (P5-D357) است، نه فیلد G */
-$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind']; } );
+$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ); } );   /* P5-D450 جدا سنجیده می‌شود */
 $map_count = count( $g_map );
 t( 'نقشه: دقیقاً ۵۷ فیلد G (بیرون از ناحیۀ stat)', 57 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
@@ -2367,6 +2367,44 @@ t( 'F-15: کوه — خانهٔ چهارم «دشواری صعود» کلید tr
 	'trekking_difficulty' === $f15_cell[3] && $f15_has( $f15_skin, 'trekking_difficulty' ) && '42' === (string) ( topersia_g_map()['trekking_difficulty']['glossary'] ?? '' )
 	&& 'دشواری صعود' === topersia_g_stat_label( 'trekking_difficulty' ) && ! $f15_has( json_decode( str_replace( '"trekking_difficulty"', '"trek_difficulty"', wp_json_encode( $f15_skin ) ), true ), 'trekking_difficulty' ),
 	implode( ',', $f15_cell ) );
+/* ── P5-D450 (دستهٔ ۲۸ بند ۲ و ۳): هر فیلد تازه در FIELDMAP (برچسب، نوع، واژه‌نامه با نام)، کاتالوگ fa/en/ar،
+   wpml-config (کپی/ترجمه)، و ★ در بستهٔ درون‌ریزی (هسته) — همه با scripts/lib/tp-p5d450.php یکی؛ رد/موکول‌ها نیستند ── */
+require_once __DIR__ . '/../scripts/lib/tp-p5d450.php';
+$p450_f    = tp_p5d450_fields();
+$p450_g    = tp_p5d450_glossaries();
+$p450_xml  = (string) @file_get_contents( __DIR__ . '/../../project-knowledge/ToPersia-wpml-config-v1_13.xml' );
+$p450_core = (string) file_get_contents( dirname( TP_PLUGIN_DIR ) . '/topersia-core/includes/topersia-pack.php' );
+$p450_kind = array( 'select' => 'choice', 'checkbox' => 'choice', 'switcher' => 'flag', 'number' => 'number', 'date' => 'date', 'text' => 'text', 'url' => 'latin', 'textarea' => 'text', 'repeater' => 'repeater' );
+$p450_ok   = function ( $map, $xml, $core ) use ( $p450_f, $p450_g, $p450_kind ) {
+	$bad = array();
+	foreach ( $p450_f as $name => $d ) {
+		$m = $map[ $name ] ?? null;
+		if ( ! $m || empty( $m['p5d450'] ) || $m['label'] !== $d[1] || $m['kind'] !== $p450_kind[ $d[0] ] ) { $bad[] = 'map:' . $name; continue; }
+		if ( isset( $d[7] ) && is_string( $d[7] ) && ( ( $m['glossary'] ?? '' ) !== $d[7] || ! isset( $p450_g[ $d[7] ] ) ) ) { $bad[] = 'glossary:' . $name; }
+		$mode = 'textarea' === $d[0] || in_array( $name, array( 'ferry_ports', 'viewpoints', 'gesture_warnings' ), true ) ? 'translate' : 'copy';
+		if ( false === strpos( $xml, '<custom-field action="' . $mode . '">' . $name . '</custom-field>' ) ) { $bad[] = 'wpml:' . $name; }
+		if ( $d[6] && false === strpos( $core, "'" . $name . "'" ) ) { $bad[] = 'req:' . $name; }
+		if ( $d[6] && ! isset( $p450_g[ $d[7] ][3]['unknown'] ) ) { $bad[] = 'unknown:' . $name; }
+	}
+	foreach ( tp_p5d450_relations() as $rk => $r ) {
+		if ( $r[7] && false === strpos( $core, "'" . $rk . "'" ) ) { $bad[] = 'req-rel:' . $rk; }
+	}
+	foreach ( array( 'rate_snapshot', 'price_range_note', 'nearest_transit', 'emergency_numbers_ref', 'time_to_capital_hours', 'useful_phrases' ) as $no ) {
+		if ( isset( $map[ $no ] ) || isset( $p450_f[ $no ] ) || false !== strpos( $xml, '>' . $no . '<' ) ) { $bad[] = 'rejected:' . $no; }
+	}
+	return $bad;
+};
+$p450_map = topersia_g_map();
+$p450_mut = $p450_map; unset( $p450_mut['tour_required'] );
+t( 'P5-D450: ۴۲ فیلد تازه در FIELDMAP (برچسب، نوع، واژه‌نامه با نام)، wpml-config کپی/ترجمه، ★ در بستهٔ هسته با گزینهٔ «نامعلوم»؛ شش رد/موکول هیچ‌جا — جهش: فیلدِ جاافتاده یا XML بی آن می‌افتد',
+	42 === count( $p450_f ) && array() === $p450_ok( $p450_map, $p450_xml, $p450_core )
+	&& array() !== $p450_ok( $p450_mut, $p450_xml, $p450_core ) && array() !== $p450_ok( $p450_map, str_replace( '>tap_water_safe<', '>x<', $p450_xml ), $p450_core ),
+	implode( ' · ', $p450_ok( $p450_map, $p450_xml, $p450_core ) ) );
+$p450_lab = array();
+foreach ( $p450_g as $g ) { foreach ( $g[3] as $v => $lab ) { $p450_lab[] = $lab[0]; } }
+$p450_cat = include __DIR__ . '/../scripts/i18n/topersia-render.php';
+$p450_miss = array_values( array_filter( array_unique( array_merge( array_column( $p450_f, 1 ), $p450_lab ) ), function ( $fa ) use ( $p450_cat ) { return empty( $p450_cat[ $fa ]['en'] ) || empty( $p450_cat[ $fa ]['ar'] ) || preg_match( '/[پچژگکی]/u', $p450_cat[ $fa ]['ar'] ); } ) );
+t( 'P5-D450: برچسب هر فیلد و هر گزینهٔ واژه‌نامه در کاتالوگ با ترجمهٔ انگلیسی و عربی (عربی بی حرف ویژهٔ فارسی)', array() === $p450_miss, implode( ' · ', $p450_miss ) );
 /* ── گزارش دیداری (دستهٔ ۲۶ بند ۰): فقط topersia.local؛ «پیش» با robocopy /R:5 /W:2 و cmp هر پرونده؛ بازگشت workspace در finally ── */
 $vr_src = (string) @file_get_contents( __DIR__ . '/../scripts/visual-report.js' );
 $vr_ok  = function ( $s ) {

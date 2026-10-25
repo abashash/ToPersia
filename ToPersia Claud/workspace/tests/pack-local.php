@@ -800,6 +800,31 @@ t( 'پست تازهٔ تقویم بی فیلدهای خانه‌ها: چهار �
 $sc_ok_before = topersia_pack_schema( 'tp_calendar' )['fields']['calendar_systems'];
 t( 'الزامی فقط در طرح ساخت: پست موجود (به‌روزرسانی) هیچ فیلدی را الزامی نمی‌کند — پست‌های پیشین دست نمی‌خورند',
 	! empty( $sc_ok_before['stat_required'] ) && ( function () use ( $json ) { $d = topersia_pack_parse( $json ); $p = topersia_pack_plan_post( $d, 0 ); return 'update' === $p['action'] && ! array_filter( $p['fields'], function ( $r ) { return 'required' === $r['status']; } ); } )() );
+/* ══ P5-D450 (دستهٔ ۲۸) — ★ فیلد و رابطه: الزامی فقط برای پست تازه، با «نامعلوم» به‌عنوان پاسخ ═════════════════ */
+section( 'P5-D450 — ★ در بستهٔ درون‌ریزی' );
+
+$p450_file = function ( $type, $title, $fields, $rels = array() ) {
+	return wp_json_encode( array( 'meta' => array( 'schema' => TOPERSIA_PACK_SCHEMA, 'post_type' => $type, 'language' => 'fa' ),
+		'posts' => array( array( 'entity_uid' => '', 'slug' => '', 'language' => 'fa', 'translation_of' => '', 'title' => $title, 'fields' => (object) $fields, 'relations' => (object) $rels ) ) ) );
+};
+$p450_v0 = topersia_pack_plan_post( topersia_pack_parse( $p450_file( 'tp_village', 'روستای آزمون ۴۵۰', array( 'name_fa' => 'روستای آزمون ۴۵۰' ) ) ), 0 );
+$p450_v1 = topersia_pack_plan_post( topersia_pack_parse( $p450_file( 'tp_village', 'روستای آزمون ۴۵۰', array( 'name_fa' => 'روستای آزمون ۴۵۰', 'access_road_type' => 'unknown' ) ) ), 0 );
+$p450_note = (string) ( $p450_v0['fields']['access_road_type']['note'] ?? '' );
+t( 'P5-D450: روستای تازه بی access_road_type ← «الزامی» با پیام (نام فیلد، P5-D450، unknown)؛ با «unknown» پذیرفته',
+	'create' === $p450_v0['action'] && 'required' === ( $p450_v0['fields']['access_road_type']['status'] ?? '' )
+	&& false !== strpos( $p450_note, '(access_road_type)' ) && false !== strpos( $p450_note, 'P5-D450' ) && false !== strpos( $p450_note, 'unknown' )
+	&& 'ok' === ( $p450_v1['fields']['access_road_type']['status'] ?? '' ), $p450_note );
+
+$p450_r0 = topersia_pack_plan_post( topersia_pack_parse( $p450_file( 'tp_route', 'مسیر آزمون ۴۵۰', array( 'name_fa' => 'مسیر آزمون ۴۵۰' ) ) ), 0 );
+$p450_req = array();
+foreach ( $p450_r0['relations'] as $rk => $rows ) { foreach ( $rows as $row ) { if ( 'required' === $row['status'] ) { $p450_req[] = $row['note']; } } }
+$p450_js = topersia_pack_json_schema( 'tp_route' )['properties']['posts']['items']['properties']['relations'];
+t( 'P5-D450: مسیر تازه بی شهر آغاز و پایان ← دو رابطهٔ «الزامی» با نام start_city/end_city؛ JSON Schema هر دو را required با minItems ۱ دارد',
+	2 === count( $p450_req ) && false !== strpos( implode( ' ', $p450_req ), '(start_city)' ) && false !== strpos( implode( ' ', $p450_req ), '(end_city)' )
+	&& 2 === count( $p450_js['required'] ), implode( ' | ', $p450_req ) );
+
+$p450_u = topersia_pack_plan_post( topersia_pack_parse( $json ), 0 );   /* پست موجود (#399): هیچ ★ الزامی نمی‌شود */
+t( 'P5-D450: پست موجود (به‌روزرسانی) هیچ فیلد یا رابطهٔ ★ را الزامی نمی‌کند', 'update' === $p450_u['action'] && ! array_filter( $p450_u['fields'], function ( $r ) { return 'required' === $r['status']; } ) );
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $GLOBALS['pass'], $GLOBALS['fail'] );
 exit( $GLOBALS['fail'] ? 1 : 0 );
