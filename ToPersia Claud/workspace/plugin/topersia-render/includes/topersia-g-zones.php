@@ -3403,10 +3403,17 @@ if ( ! function_exists( 'topersia_g_wh_criteria_links' ) ) {
 				? '<a href="' . esc_url( $url . '#criterion-' . $r ) . '" lang="en" dir="ltr" aria-label="' . esc_attr( $aria ) . '">(' . esc_html( $r ) . ')</a>'
 				: '<span lang="en" dir="ltr">(' . esc_html( $r ) . ')</span>';
 		}
-		if ( ! $out ) {
-			return '';
+		$crit = $out ? esc_html( __( 'معیارها:', 'topersia' ) ) . ' ' . implode( ' ', $out ) : '';
+
+		/* دستۀ ۲۹ بند ۶: شمارۀ ثبت یونسکو (world_heritage_ref_number) — پیوند به صفحۀ همان اثر در whc.unesco.org */
+		$ref = preg_replace( '/[^0-9]/', '', (string) topersia_g_text( $pid, 'world_heritage_ref_number' ) );
+		if ( '' !== $ref ) {
+			/* translators: %s: شمارۀ ثبت */
+			$crit .= ( '' !== $crit ? '<br>' : '' ) . '<a href="' . esc_url( 'https://whc.unesco.org/en/list/' . $ref . '/' ) . '" rel="noopener" target="_blank">'
+				. esc_html( sprintf( __( 'شمارۀ ثبت %s', 'topersia' ), topersia_g_fa( $ref ) ) ) . '</a>';
 		}
-		return esc_html( __( 'معیارها:', 'topersia' ) ) . ' ' . implode( ' ', $out );
+
+		return $crit;
 	}
 }
 

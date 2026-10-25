@@ -2420,6 +2420,15 @@ t( 'باز/بسته (دستهٔ ۲۹ بند ۳): جاوااسکریپت با Int
 t( 'امنیت: مقدار فیلد عددی بی رقم (<script>) گریخته چاپ می‌شود — نه HTML خام',
 	false === strpos( topersia_g_value( 'ticket_price_local', '<img src=x onerror=alert>' ), '<img' )
 	&& false !== strpos( topersia_g_value( 'ticket_price_local', '<img src=x onerror=alert>' ), '&lt;img' ) );
+/* دستهٔ ۲۹ بند ۶: شمارهٔ ثبت یونسکو در نشان میراث جهانی؛ بی شماره ← نیست */
+$b29_wh = $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] ?? null;
+$GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = '1157';
+$b29_ref = r( 40, 'tp_badges' );
+$GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = '';
+$b29_noref = r( 40, 'tp_badges' );
+if ( null === $b29_wh ) { unset( $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] ); } else { $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = $b29_wh; }
+t( 'نشان میراث جهانی (دستهٔ ۲۹ بند ۶): «شمارۀ ثبت ۱۱۵۷» با پیوند whc.unesco.org/en/list/1157/؛ بی شماره ← نیست — جهش',
+	false !== strpos( $b29_ref, 'href="https://whc.unesco.org/en/list/1157/"' ) && false !== strpos( $b29_ref, 'شمارۀ ثبت ۱۱۵۷' ) && false === strpos( $b29_noref, 'whc.unesco.org/en/list' ) );
 /* ── P5-D450 (دستهٔ ۲۸ بند ۲ و ۳): هر فیلد تازه در FIELDMAP (برچسب، نوع، واژه‌نامه با نام)، کاتالوگ fa/en/ar،
    wpml-config (کپی/ترجمه)، و ★ در بستهٔ درون‌ریزی (هسته) — همه با scripts/lib/tp-p5d450.php یکی؛ رد/موکول‌ها نیستند ── */
 require_once __DIR__ . '/../scripts/lib/tp-p5d450.php';

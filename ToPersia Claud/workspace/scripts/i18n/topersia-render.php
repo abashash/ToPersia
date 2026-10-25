@@ -619,6 +619,7 @@ return array(
 	'معیار %s' => array( 'en' => 'Criterion %s', 'ar' => 'المعيار %s' ),
 	'معیارها:' => array( 'en' => 'Criteria:', 'ar' => 'المعايير:' ),
 	/* دستهٔ ۲۹ — بلوک «بازدید» و فیلدهای بازگشته */
+	'شمارۀ ثبت %s' => array( 'en' => 'Listing no. %s', 'ar' => 'رقم التسجيل %s' ),
 	'ساعات بازدید' => array( 'en' => 'Visiting hours', 'ar' => 'ساعات الزيارة' ),
 	'محل عبادت فعال' => array( 'en' => 'Active place of worship', 'ar' => 'مكان عبادة نشط' ),
 	'زیارتگاه فعال' => array( 'en' => 'Active pilgrimage site', 'ar' => 'مزار نشط' ),

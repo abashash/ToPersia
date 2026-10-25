@@ -1600,6 +1600,11 @@ msgid "شمار استان‌ها"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+#, php-format
+msgid "شمارۀ ثبت %s"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "شمال"
 msgstr ""
 

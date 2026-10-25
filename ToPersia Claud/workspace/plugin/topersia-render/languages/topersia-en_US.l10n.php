@@ -404,6 +404,7 @@ return array (
     'شخصیت تاریخی' => 'Historical figure',
     'شرق' => 'East',
     'شمار استان‌ها' => 'Provinces',
+    'شمارۀ ثبت %s' => 'Listing no. %s',
     'شمال' => 'North',
     'شمال‌شرق' => 'Northeast',
     'شمال‌غرب' => 'Northwest',
