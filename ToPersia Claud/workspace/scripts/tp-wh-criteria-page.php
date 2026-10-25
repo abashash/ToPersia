@@ -80,7 +80,9 @@ $text = array(
 
 $body = function ( $l ) use ( $text, $src, $roman ) {
 	$t = $text[ $l ];
-	$h = '<p>' . esc_html( $t['intro'] ) . ' <a href="' . esc_url( $src ) . '" rel="noopener">' . esc_html( $t['src'] ) . '</a></p>' . "\n";
+	/* دستهٔ ۲۸: قالب تیتر برگه را نشان نمی‌دهد — H1 درون محتوا */
+	$h = '<h1>' . esc_html( $t['title'] ) . '</h1>' . "
+" . '<p>' . esc_html( $t['intro'] ) . ' <a href="' . esc_url( $src ) . '" rel="noopener">' . esc_html( $t['src'] ) . '</a></p>' . "\n";
 	foreach ( $roman as $i => $r ) {
 		$h .= '<h2 id="criterion-' . $r . '">' . esc_html( sprintf( $t['head'], $r ) ) . '</h2>' . "\n" . '<p>' . esc_html( $t['items'][ $i ] ) . '</p>' . "\n";
 	}

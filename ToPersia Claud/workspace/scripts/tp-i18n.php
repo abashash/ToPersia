@@ -77,6 +77,7 @@ function tpi_unquote( $tok ) {
 function tpi_extract( $path ) {
 
 	$toks  = token_get_all( file_get_contents( $path ) );
+	$lines = file( $path );   /* خطِ دارای «i18n:skip» رشتهٔ رابط نیست (نام موجودیت در دادهٔ پیشخوان — دستهٔ ۲۸) */
 	$n     = count( $toks );
 	$plain = array();
 	$plur  = array();
@@ -126,7 +127,7 @@ function tpi_extract( $path ) {
 
 		if ( is_array( $t ) && T_CONSTANT_ENCAPSED_STRING === $t[0] && ! isset( $in_n[ $i ] ) ) {
 			$s = tpi_unquote( $t[1] );
-			if ( preg_match( '/[\x{0600}-\x{06FF}]/u', $s ) && ! tpi_skip( $s ) ) {
+			if ( preg_match( '/[\x{0600}-\x{06FF}]/u', $s ) && ! tpi_skip( $s ) && false === strpos( (string) ( $lines[ $t[2] - 1 ] ?? '' ), 'i18n:skip' ) ) {
 				$plain[ $s ] = isset( $plain[ $s ] ) ? $plain[ $s ] : $t[2];
 			}
 		}

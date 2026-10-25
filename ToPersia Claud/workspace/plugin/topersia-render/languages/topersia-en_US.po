@@ -212,10 +212,6 @@ msgstr "Esfand"
 msgid "اشتراک"
 msgstr "Share"
 
-#: includes/topersia-g-air.php
-msgid "اصفهان"
-msgstr "Isfahan"
-
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr "Geographic information"
@@ -267,10 +263,6 @@ msgstr "Text size"
 #: includes/topersia-g-zones.php
 msgid "انعام"
 msgstr "Tipping"
-
-#: includes/topersia-g-air.php
-msgid "اهواز"
-msgstr "Ahvaz"
 
 #: includes/topersia-g-map.php
 msgid "اورژانس"
@@ -565,10 +557,6 @@ msgstr "Wetland"
 msgid "تبدیل متن به گفتار"
 msgstr "Text to speech"
 
-#: includes/topersia-g-air.php
-msgid "تبریز"
-msgstr "Tabriz"
-
 #: includes/topersia-g-map.php
 msgid "تخصصی"
 msgstr "Technical"
@@ -622,10 +610,6 @@ msgstr "Settings reset to default"
 #: includes/topersia-g-map.php
 msgid "تنگه / دره"
 msgstr "Canyon / gorge"
-
-#: includes/topersia-g-air.php
-msgid "تهران"
-msgstr "Tehran"
 
 #: topersia-render.php
 msgid "توقف حرکت و پخش خودکار"
@@ -1134,10 +1118,6 @@ msgstr "Sports event"
 msgid "ریلی"
 msgstr "Rail"
 
-#: includes/topersia-g-air.php
-msgid "زاهدان"
-msgstr "Zahedan"
-
 #: includes/topersia-g-map.php
 msgid "زاگرسی"
 msgstr "Zagros"
@@ -1383,10 +1363,6 @@ msgstr "Blossom"
 msgid "شکوفۀ نمک"
 msgstr "Salt bloom"
 
-#: includes/topersia-g-air.php
-msgid "شیراز"
-msgstr "Shiraz"
-
 #: includes/topersia-g-map.php
 msgid "شیرین"
 msgstr "Fresh"
@@ -1571,10 +1547,6 @@ msgstr "Podcast episode"
 #: includes/topersia-g-map.php
 msgid "قله"
 msgstr "Peak"
-
-#: includes/topersia-g-air.php
-msgid "قم"
-msgstr "Qom"
 
 #: includes/topersia-g-zones.php
 msgid "قوم / فرهنگ"
@@ -1885,10 +1857,6 @@ msgstr "Directions"
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
 msgstr "Details"
-
-#: includes/topersia-g-air.php
-msgid "مشهد"
-msgstr "Mashhad"
 
 #: includes/topersia-g-zones.php
 msgid "مطالب"
@@ -2659,14 +2627,6 @@ msgstr "Province code"
 #: includes/topersia-g-map.php
 msgid "کد فرودگاه"
 msgstr "Airport code"
-
-#: includes/topersia-g-air.php
-msgid "کرج"
-msgstr "Karaj"
-
-#: includes/topersia-g-air.php
-msgid "کرمانشاه"
-msgstr "Kermanshah"
 
 #: includes/topersia-g-map.php
 msgid "کشتی"

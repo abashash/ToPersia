@@ -211,10 +211,6 @@ msgstr ""
 msgid "اشتراک"
 msgstr ""
 
-#: includes/topersia-g-air.php
-msgid "اصفهان"
-msgstr ""
-
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr ""
@@ -265,10 +261,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "انعام"
-msgstr ""
-
-#: includes/topersia-g-air.php
-msgid "اهواز"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -564,10 +556,6 @@ msgstr ""
 msgid "تبدیل متن به گفتار"
 msgstr ""
 
-#: includes/topersia-g-air.php
-msgid "تبریز"
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "تخصصی"
 msgstr ""
@@ -620,10 +608,6 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "تنگه / دره"
-msgstr ""
-
-#: includes/topersia-g-air.php
-msgid "تهران"
 msgstr ""
 
 #: topersia-render.php
@@ -1133,10 +1117,6 @@ msgstr ""
 msgid "ریلی"
 msgstr ""
 
-#: includes/topersia-g-air.php
-msgid "زاهدان"
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "زاگرسی"
 msgstr ""
@@ -1382,10 +1362,6 @@ msgstr ""
 msgid "شکوفۀ نمک"
 msgstr ""
 
-#: includes/topersia-g-air.php
-msgid "شیراز"
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "شیرین"
 msgstr ""
@@ -1569,10 +1545,6 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "قله"
-msgstr ""
-
-#: includes/topersia-g-air.php
-msgid "قم"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1883,10 +1855,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
-msgstr ""
-
-#: includes/topersia-g-air.php
-msgid "مشهد"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -2657,14 +2625,6 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "کد فرودگاه"
-msgstr ""
-
-#: includes/topersia-g-air.php
-msgid "کرج"
-msgstr ""
-
-#: includes/topersia-g-air.php
-msgid "کرمانشاه"
 msgstr ""
 
 #: includes/topersia-g-map.php

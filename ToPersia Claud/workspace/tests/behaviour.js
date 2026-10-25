@@ -880,9 +880,16 @@ async function share( page, tag, touch ) {
 	await page.locator( '[data-tp-share]' ).scrollIntoViewIfNeeded();
 
 	if ( ! touch ) {
+		/* دستهٔ ۲۸: چه چیزی واقعاً زیر نقطهٔ هاور است — اگر لایه‌ای رویش باشد، همان در گزارش می‌آید */
+		const under = await page.$eval( '[data-tp-share]', b => {
+			const r = b.getBoundingClientRect();
+			const e = document.elementFromPoint( r.left + r.width / 2, r.top + r.height / 2 );
+			return { inside: !! e && b.contains( e ), at: e ? e.tagName + '.' + String( e.className || '' ).slice( 0, 40 ) : '', y: Math.round( r.top ), vh: innerHeight, sy: Math.round( scrollY ) };
+		} );
 		await page.hover( '[data-tp-share]' );
 		await page.waitForTimeout( 150 );
 		const byHover = await panelShown();
+		if ( ! byHover ) { info( `${ tag }: اشتراک — زیر نقطهٔ هاور: ${ JSON.stringify( under ) } · :hover ${ JSON.stringify( await page.evaluate( () => [ ...document.querySelectorAll( ':hover' ) ].slice( -3 ).map( e => e.tagName + '.' + String( e.className || '' ).slice( 0, 30 ) ) ) ) }` ); }
 		await page.mouse.move( 5, 5 );
 		await page.waitForTimeout( 150 );
 		const gone = ! ( await panelShown() );

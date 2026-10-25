@@ -212,10 +212,6 @@ msgstr "إسفند"
 msgid "اشتراک"
 msgstr "مشاركة"
 
-#: includes/topersia-g-air.php
-msgid "اصفهان"
-msgstr "أصفهان"
-
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr "معلومات جغرافية"
@@ -267,10 +263,6 @@ msgstr "حجم النص"
 #: includes/topersia-g-zones.php
 msgid "انعام"
 msgstr "البقشيش"
-
-#: includes/topersia-g-air.php
-msgid "اهواز"
-msgstr "الأهواز"
 
 #: includes/topersia-g-map.php
 msgid "اورژانس"
@@ -565,10 +557,6 @@ msgstr "أرض رطبة"
 msgid "تبدیل متن به گفتار"
 msgstr "تحويل النص إلى كلام"
 
-#: includes/topersia-g-air.php
-msgid "تبریز"
-msgstr "تبريز"
-
 #: includes/topersia-g-map.php
 msgid "تخصصی"
 msgstr "تقني"
@@ -622,10 +610,6 @@ msgstr "أُعيدت الإعدادات إلى الوضع الافتراضي"
 #: includes/topersia-g-map.php
 msgid "تنگه / دره"
 msgstr "مضيق / وادٍ"
-
-#: includes/topersia-g-air.php
-msgid "تهران"
-msgstr "طهران"
 
 #: topersia-render.php
 msgid "توقف حرکت و پخش خودکار"
@@ -1134,10 +1118,6 @@ msgstr "حدث رياضي"
 msgid "ریلی"
 msgstr "سككي"
 
-#: includes/topersia-g-air.php
-msgid "زاهدان"
-msgstr "زاهدان"
-
 #: includes/topersia-g-map.php
 msgid "زاگرسی"
 msgstr "زاغروسي"
@@ -1383,10 +1363,6 @@ msgstr "الإزهار"
 msgid "شکوفۀ نمک"
 msgstr "زهرة الملح"
 
-#: includes/topersia-g-air.php
-msgid "شیراز"
-msgstr "شيراز"
-
 #: includes/topersia-g-map.php
 msgid "شیرین"
 msgstr "عذب"
@@ -1571,10 +1547,6 @@ msgstr "حلقة بودكاست"
 #: includes/topersia-g-map.php
 msgid "قله"
 msgstr "قمة"
-
-#: includes/topersia-g-air.php
-msgid "قم"
-msgstr "قم"
 
 #: includes/topersia-g-zones.php
 msgid "قوم / فرهنگ"
@@ -1885,10 +1857,6 @@ msgstr "الاتجاهات"
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
 msgstr "التفاصيل"
-
-#: includes/topersia-g-air.php
-msgid "مشهد"
-msgstr "مشهد"
 
 #: includes/topersia-g-zones.php
 msgid "مطالب"
@@ -2659,14 +2627,6 @@ msgstr "رمز المحافظة"
 #: includes/topersia-g-map.php
 msgid "کد فرودگاه"
 msgstr "رمز المطار"
-
-#: includes/topersia-g-air.php
-msgid "کرج"
-msgstr "كرج"
-
-#: includes/topersia-g-air.php
-msgid "کرمانشاه"
-msgstr "كرمانشاه"
 
 #: includes/topersia-g-map.php
 msgid "کشتی"
