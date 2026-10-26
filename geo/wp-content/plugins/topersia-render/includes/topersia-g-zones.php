@@ -481,7 +481,8 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
 		switch ( $kind ) {
 
 			case 'number':
-				$out = topersia_g_fa( topersia_g_sep( $raw ) );
+				/* دستۀ ۲۹ (بازبینی امنیتی): topersia_g_sep برای مقدار بی رقم همان خام را برمی‌گرداند — گریز HTML همیشه */
+				$out = esc_html( topersia_g_fa( topersia_g_sep( $raw ) ) );
 
 				if ( '' !== $unit ) {
 					$out .= ' <i class="tp-u">' . esc_html( topersia_g_t( $unit ) ) . '</i>';
@@ -3402,10 +3403,18 @@ if ( ! function_exists( 'topersia_g_wh_criteria_links' ) ) {
 				? '<a href="' . esc_url( $url . '#criterion-' . $r ) . '" lang="en" dir="ltr" aria-label="' . esc_attr( $aria ) . '">(' . esc_html( $r ) . ')</a>'
 				: '<span lang="en" dir="ltr">(' . esc_html( $r ) . ')</span>';
 		}
-		if ( ! $out ) {
-			return '';
+		$crit = $out ? esc_html( __( 'معیارها:', 'topersia' ) ) . ' ' . implode( ' ', $out ) : '';
+
+		/* دستۀ ۲۹ بند ۶: شمارۀ ثبت یونسکو (world_heritage_ref_number) — پیوند به صفحۀ همان اثر در whc.unesco.org */
+		/* «1372-003» = اثر ۱۳۷۲، جزء ۰۰۳ (اثر زنجیره‌ای) — پیوند به صفحۀ اثر، متن همان شماره */
+		$ref_raw = trim( (string) topersia_g_text( $pid, 'world_heritage_ref_number' ) );
+		if ( preg_match( '/^(\d+)(?:\s*[-‐–]\s*\d+)?$/u', $ref_raw, $rm ) ) {
+			/* translators: %s: شمارۀ ثبت */
+			$crit .= ( '' !== $crit ? '<br>' : '' ) . '<a href="' . esc_url( 'https://whc.unesco.org/en/list/' . $rm[1] . '/' ) . '" rel="noopener" target="_blank">'
+				. esc_html( sprintf( __( 'شمارۀ ثبت %s', 'topersia' ), topersia_g_fa( $ref_raw ) ) ) . '</a>';
 		}
-		return esc_html( __( 'معیارها:', 'topersia' ) ) . ' ' . implode( ' ', $out );
+
+		return $crit;
 	}
 }
 
@@ -4928,6 +4937,11 @@ if ( ! function_exists( 'topersia_g_practical_section' ) ) {
 			$body .= topersia_g_a_open( '' ) . esc_html( topersia_g_t( $map[ $name ]['label'] ) ) . ': ' . $value . '</a>';
 		}
 
+		$body = '' !== $body ? '<div class="tp-practical-grid">' . $body . '</div>' : '';
+
+		/* دستۀ ۲۹ — بلوک «بازدید» (P5-D450 و توضیح‌ها): فقط ردیف پر، هرگز «—» */
+		$body .= topersia_g_visit_block( $pid );
+
 		$group = isset( $result['group'] ) ? (array) $result['group'] : array();
 
 		/* نوعِ بی گروه رابطه (جزیره) همان نام بخش را می‌گیرد — یک منبع، P5-D233 */
@@ -4935,8 +4949,161 @@ if ( ! function_exists( 'topersia_g_practical_section' ) ) {
 			'tp-practical',
 			! empty( $group['title'] ) ? $group['title'] : topersia_g_rel_zones()['practical'][3],
 			'',
-			'' !== $body ? '<div class="tp-practical-grid">' . $body . '</div>' : ''
+			$body
 		);
+	}
+}
+
+/**
+ * دستۀ ۲۹ · P5-D450 — بلوک «بازدید» درون کارت «اطلاعات سفر»: فیلدهای ناحیۀ visit این پست، به ترتیب FIELDMAP.
+ *
+ * فقط ردیف پر (سوییچ فقط روشن)؛ هرگز «—». برچسب از کاتالوگ (fa · en · ar)، گزینه با برچسب انسانی از واژه‌نامه (با نام).
+ * فیلدی که در ۴ خانۀ سربرگ همین نوع است تکرار نمی‌شود. بهای بلیت یک ردیف است و فقط وقتی «تاریخ بررسی» دارد و
+ * کهنه‌تر از TOPERSIA_TICKET_MAX_AGE_MONTHS ماه نیست. ساعت بازدید جدول کوتاه است و نشان «باز/بسته» را جاوااسکریپت
+ * سمت کاربر می‌سازد (HTML کش‌شده ثابت می‌ماند). خالی ← رشتۀ خالی.
+ *
+ * @param int $pid پست.
+ * @return string HTML
+ */
+if ( ! defined( 'TOPERSIA_TICKET_MAX_AGE_MONTHS' ) ) {
+	define( 'TOPERSIA_TICKET_MAX_AGE_MONTHS', 18 );
+}
+if ( ! function_exists( 'topersia_g_visit_block' ) ) {
+	function topersia_g_visit_block( $pid, $now = null ) {
+
+		$map   = topersia_g_map();
+		$cells = function_exists( 'topersia_g_stat_keys' ) ? (array) topersia_g_stat_keys( $pid ) : array();
+		$rows  = '';
+		$row   = function ( $label, $html, $cls = '' ) {
+			return '<div class="tp-visit__row' . ( '' !== $cls ? ' ' . $cls : '' ) . '"><dt>' . esc_html( topersia_g_t( $label ) ) . '</dt><dd>' . $html . '</dd></div>';
+		};
+
+		foreach ( topersia_g_zone_fields( $pid, 'visit', $cells ) as $name => $raw ) {
+
+			$f = $map[ $name ];
+
+			if ( in_array( $name, array( 'ticket_price_local', 'ticket_price_checked' ), true ) ) {
+				continue;   /* با ticket_price_foreign یک ردیف */
+			}
+
+			if ( 'ticket_price_foreign' === $name ) {
+				$html = topersia_g_ticket_html( $pid, $now );
+				$rows .= '' !== $html ? $row( 'بهای بلیت', $html ) : '';
+				continue;
+			}
+
+			if ( 'opening_hours_spec' === $name ) {
+				$html = topersia_g_hours_html( $pid );
+				$rows .= '' !== $html ? $row( $f['label'], $html, 'tp-visit__row--hours' ) : '';
+				continue;
+			}
+
+			if ( 'repeater' === $f['kind'] ) {
+				$items = array();
+				foreach ( topersia_g_rows( $pid, $name ) as $r ) {
+					$vals = array_values( array_filter( array_map( function ( $v ) { return is_scalar( $v ) ? trim( wp_strip_all_tags( (string) $v ) ) : ''; }, (array) $r ), 'strlen' ) );
+					if ( 'viewpoints' === $name ) { $vals = array_slice( $vals, 0, 1 ); }   /* مختصات روی نقشه، نه در متن */
+					if ( $vals ) { $items[] = '<li>' . esc_html( topersia_g_fa( implode( ' — ', $vals ) ) ) . '</li>'; }
+				}
+				$rows .= $items ? $row( $f['label'], '<ul class="tp-visit__list">' . implode( '', $items ) . '</ul>' ) : '';
+				continue;
+			}
+
+			if ( 'choice' === $f['kind'] && is_array( $raw ) ) {
+				$keys = array_keys( array_filter( $raw, function ( $v ) { return true === $v || 'true' === $v; } ) );
+				$keys = $keys ? $keys : array_values( array_filter( $raw, 'is_string' ) );
+				$labs = array_values( array_filter( array_map( function ( $k ) use ( $f ) { return 'unknown' === $k ? '' : topersia_g_glossary_label( $f['glossary'], $k ); }, $keys ), 'strlen' ) );
+				$rows .= $labs ? $row( $f['label'], esc_html( implode( topersia_g_list_sep(), $labs ) ) ) : '';
+				continue;
+			}
+
+			if ( 'choice' === $f['kind'] && 'unknown' === (string) $raw ) {
+				continue;   /* «نامعلوم» پاسخ درون‌ریزی است، نه نمایش */
+			}
+
+			if ( 'latin' === $f['kind'] && preg_match( '#^https?://#i', trim( (string) $raw ) ) ) {
+				$url  = esc_url( trim( (string) $raw ) );
+				$host = preg_replace( '/^www\./', '', (string) wp_parse_url( $url, PHP_URL_HOST ) );
+				$rows .= ( '' !== $url && '' !== $host ) ? $row( $f['label'], '<a href="' . $url . '" rel="nofollow noopener" target="_blank"><span class="tp-lat" dir="ltr">' . esc_html( $host ) . '</span></a>' ) : '';
+				continue;
+			}
+
+			$html  = topersia_g_value( $name, $raw, $pid );
+			$rows .= '' !== trim( wp_strip_all_tags( $html ) ) ? $row( $f['label'], $html ) : '';
+		}
+
+		return '' !== $rows ? '<dl class="tp-visit">' . $rows . '</dl>' : '';
+	}
+}
+
+/** بهای بلیت (ریال) با «آخرین بررسی» — بی تاریخ بررسی یا کهنه‌تر از سقف: هیچ. */
+if ( ! function_exists( 'topersia_g_ticket_html' ) ) {
+	function topersia_g_ticket_html( $pid, $now = null ) {
+
+		$iso = function_exists( 'topersia_g_date_iso' ) ? topersia_g_date_iso( topersia_g_raw( $pid, 'ticket_price_checked' ) ) : '';
+
+		if ( '' === $iso ) {
+			return '';
+		}
+
+		$limit = strtotime( '-' . (int) TOPERSIA_TICKET_MAX_AGE_MONTHS . ' months', null === $now ? time() : (int) $now );
+
+		if ( strtotime( $iso ) < $limit ) {
+			return '';
+		}
+
+		$parts = array();
+
+		foreach ( array( 'ticket_price_foreign' => 'خارجی', 'ticket_price_local' => 'داخلی' ) as $key => $who ) {
+			$v = preg_replace( '/[^0-9]/', '', (string) topersia_g_raw( $pid, $key ) );
+			if ( '' !== $v ) {
+				$parts[] = esc_html( topersia_g_t( $who ) ) . ': ' . topersia_g_fa( topersia_g_sep( $v ) ) . ' <i class="tp-u">' . esc_html( topersia_g_t( 'ریال' ) ) . '</i>';
+			}
+		}
+
+		if ( ! $parts ) {
+			return '';
+		}
+
+		/* translators: %s: تاریخ */
+		return implode( '<br>', $parts ) . '<small class="tp-visit__note">' . sprintf( esc_html__( 'آخرین بررسی: %s', 'topersia' ), topersia_g_date_html( $iso ) ) . '</small>';
+	}
+}
+
+/** جدول ساعت بازدید + جای نشان «باز/بسته» (جاوااسکریپت، منطقۀ زمانی تهران). */
+if ( ! function_exists( 'topersia_g_hours_html' ) ) {
+	function topersia_g_hours_html( $pid ) {
+
+		$data = array();
+		$tr   = '';
+		$map  = topersia_g_map();
+
+		foreach ( topersia_g_rows( $pid, 'opening_hours_spec' ) as $r ) {
+
+			$day = isset( $r['oh_day'] ) ? (string) $r['oh_day'] : '';
+			if ( '' === $day ) {
+				continue;
+			}
+
+			$closed = topersia_g_flag_on( $r['oh_closed'] ?? '' );
+			$from   = preg_match( '/^\d{1,2}:\d{2}/', (string) ( $r['oh_from'] ?? '' ), $m1 ) ? $m1[0] : '';
+			$to     = preg_match( '/^\d{1,2}:\d{2}/', (string) ( $r['oh_to'] ?? '' ), $m2 ) ? $m2[0] : '';
+
+			if ( ! $closed && ( '' === $from || '' === $to ) ) {
+				continue;
+			}
+
+			$data[] = array( 'd' => $day, 'f' => $from, 't' => $to, 'c' => $closed ? 1 : 0 );
+			$tr    .= '<tr><th scope="row">' . esc_html( topersia_g_glossary_label( 'tp_weekday', $day ) ) . '</th><td>'
+				. ( $closed ? esc_html__( 'بسته', 'topersia' ) : '<span dir="ltr">' . esc_html( topersia_g_fa( $from . '–' . $to ) ) . '</span>' ) . '</td></tr>';
+		}
+
+		if ( '' === $tr ) {
+			return '';
+		}
+
+		return '<span class="tp-open" data-tp-open hidden></span>'
+			. "<table class=\"tp-hours\" data-tp-hours='" . esc_attr( wp_json_encode( $data ) ) . "'><tbody>" . $tr . '</tbody></table>';
 	}
 }
 

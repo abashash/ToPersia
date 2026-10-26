@@ -324,6 +324,41 @@ function tps_cases() {
 				&& ! isset( tps_node( 42, 'WebPage' )['lastReviewed'] );
 		},
 
+		'visit_props' => function () {
+			tps_post( 50, 'tp_religious_site', array(
+				'opening_hours_spec'   => array( 'item-0' => array( 'oh_day' => 'sat', 'oh_from' => '09:00', 'oh_to' => '17:30', 'oh_closed' => 'false' ), 'item-1' => array( 'oh_day' => 'fri', 'oh_closed' => 'true' ) ),
+				'ticket_price_foreign' => '5000000', 'ticket_price_checked' => '2026-06-01', 'wheelchair_access' => 'partial',
+			) );
+			$e = tps_entity( 50 );
+			return 1 === count( $e['openingHoursSpecification'] ) && 'https://schema.org/Saturday' === $e['openingHoursSpecification'][0]['dayOfWeek']
+				&& '09:00' === $e['openingHoursSpecification'][0]['opens'] && false === $e['isAccessibleForFree'] && ! isset( $e['offers'] )
+				&& 'Wheelchair accessible (partial)' === $e['amenityFeature'][0]['name'] && true === $e['amenityFeature'][0]['value'];
+		},
+
+		'visit_stale_unknown' => function () {
+			tps_post( 51, 'tp_monument', array( 'ticket_price_foreign' => '5000000', 'ticket_price_checked' => '2024-12-01', 'wheelchair_access' => 'unknown' ) );
+			tps_post( 52, 'tp_monument', array( 'ticket_price_foreign' => '5000000', 'wheelchair_access' => '' ) );
+			$a = tps_entity( 51 );
+			$b = tps_entity( 52 );
+			return ! isset( $a['isAccessibleForFree'] ) && ! isset( $a['amenityFeature'] ) && ! isset( $b['isAccessibleForFree'] ) && false === strpos( json_encode( $a ), 'unknown' );
+		},
+
+		'museum_languages' => function () {
+			tps_post( 53, 'tp_museum', array( 'audio_guide_languages' => array( 'fa', 'en' ) ) );
+			tps_post( 54, 'tp_local_food', array( 'dietary_flags' => array( 'vegetarian' ) ) );
+			$m = tps_entity( 53 );
+			$f = tps_entity( 54 );
+			return array( 'fa', 'en' ) === $m['availableLanguage'] && ! isset( $f['suitableForDiet'] );
+		},
+
+		'event_ticket' => function () {
+			tps_festival( 55, array( 'event_start_date' => '2026-11-01', 'ticket_required' => 'free', 'ticket_url' => 'https://tickets.example.org/rose' ) );
+			$e = tps_entity( 55 );
+			tps_festival( 56, array( 'event_start_date' => '2026-11-01', 'ticket_required' => 'unknown', 'ticket_url' => 'http://insecure.example.org/' ) );
+			$u = tps_entity( 56 );
+			return true === $e['isAccessibleForFree'] && 'https://tickets.example.org/rose' === $e['offers']['url'] && ! isset( $u['isAccessibleForFree'] ) && ! isset( $u['offers'] );
+		},
+
 		'place_untouched' => function () {
 			tps_post( 40, 'tp_city', array( 'event_start_date' => '2026-11-01', 'geo_coordinates' => '33.98, 51.43' ) );
 			$e = tps_entity( 40 );
@@ -343,6 +378,10 @@ function tps_child( $file ) {
 
 /** جهش‌ها: [ مورد هدف، متن، جای‌گزین ] */
 $mutations = array(
+	array( 'visit_props', "\$node['openingHoursSpecification'] = \$hours;", '' ),
+	array( 'visit_stale_unknown', 'if ( $checked >= $floor ) {', 'if ( true ) {' ),
+	array( 'museum_languages', "\$node['availableLanguage'] = \$on;", '' ),
+	array( 'event_ticket', "\$node['offers'] = array( '@type' => 'Offer', 'url' => \$ticket_url );", '' ),
 	array( 'future_event', "\$node['@type'] = \$config['event']['type'];", '' ),
 	array( 'future_event', "unset( \$node['additionalType'] );", '' ),
 	array( 'future_event', "\$node['eventStatus']         = 'https://schema.org/EventScheduled';", '' ),

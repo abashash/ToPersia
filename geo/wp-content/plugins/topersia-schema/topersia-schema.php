@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Schema Engine
  * Description: موتور دادۀ ساختاریافتۀ ToPersia — یک گراف JSON-LD واحد در هر صفحه، با @id مبتنی بر entity_uid برای بازشناسی میان‌زبانی و میان‌صفحه‌ای. معماری داده‌محور: افزودن موجودیت تازه یعنی افزودن یک بلوک به نقشه، نه نوشتن تابع. وابسته به افزونۀ ToPersia Core Functions.
- * Version: 1.3.2
+ * Version: 1.4.0
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-schema
@@ -152,7 +152,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ این افزونه — زبانۀ تشخیص هسته این را می‌خواند. */
 if ( ! defined( 'TOPERSIA_SCHEMA_VERSION' ) ) {
-	define( 'TOPERSIA_SCHEMA_VERSION', '1.3.2' );
+	define( 'TOPERSIA_SCHEMA_VERSION', '1.4.0' );
 }
 
 /** حداقل نسخۀ هستۀ سازگار. */
@@ -944,6 +944,76 @@ function topersia_schema_place( $node, $post_id, $config = array() ) {
 		$node['sameAs'] = esc_url_raw( $external );
 	}
 
+	return topersia_schema_visit( $node, $post_id );
+}
+
+/**
+ * ۱٫۴٫۰ — دستۀ ۲۹ · P5-D450: ویژگی‌های بازدید روی Place، فقط وقتی مقدار هست و همان روی صفحه دیده می‌شود
+ * (بلوک «بازدید» کارت «اطلاعات سفر»). «نامعلوم» و خالی هرگز. فقط ویژگی معتبرِ همان شاخه:
+ *
+ *   openingHoursSpecification   Place — از ردیف‌های opening_hours_spec (روز بسته و «تعطیل رسمی» نه)
+ *   isAccessibleForFree         Place — از بهای بلیت، فقط با «تاریخ بررسی» تازه‌تر از سقف ماه (همان قاعدۀ صفحه)؛
+ *                               offers روی Place معتبر نیست و نمی‌آید
+ *   amenityFeature              Place — دسترسی ویلچر (کامل/بخشی/ندارد)
+ *   availableLanguage           فقط گرۀ گردشگری (TouristAttraction در @type یا additionalType) — زبان‌های راهنمای صوتی
+ *
+ * suitableForDiet (Recipe/MenuItem)، homeLocation (Person) و آغاز/پایان TouristTrip روی شاخۀ این نوع‌ها
+ * معتبر نیستند و افزوده نمی‌شوند — همان قاعدۀ «فقط ویژگی معتبر» ۱٫۲٫۰.
+ */
+function topersia_schema_visit( $node, $post_id ) {
+
+	/* ساعت */
+	$days  = array( 'sat' => 'Saturday', 'sun' => 'Sunday', 'mon' => 'Monday', 'tue' => 'Tuesday', 'wed' => 'Wednesday', 'thu' => 'Thursday', 'fri' => 'Friday' );
+	$hours = array();
+	$rows  = get_post_meta( $post_id, 'opening_hours_spec', true );
+	foreach ( ( function_exists( 'topersia_active_rows' ) ? topersia_active_rows( is_array( $rows ) ? $rows : array() ) : ( is_array( $rows ) ? $rows : array() ) ) as $r ) {
+		$day    = (string) ( $r['oh_day'] ?? '' );
+		$closed = in_array( strtolower( (string) ( $r['oh_closed'] ?? '' ) ), array( '1', 'true', 'yes', 'on' ), true );
+		if ( $closed || ! isset( $days[ $day ] ) || ! preg_match( '/^\d{1,2}:\d{2}/', (string) ( $r['oh_from'] ?? '' ), $a ) || ! preg_match( '/^\d{1,2}:\d{2}/', (string) ( $r['oh_to'] ?? '' ), $b ) ) {
+			continue;
+		}
+		$hours[] = array( '@type' => 'OpeningHoursSpecification', 'dayOfWeek' => 'https://schema.org/' . $days[ $day ], 'opens' => $a[0], 'closes' => $b[0] );
+	}
+	if ( $hours ) {
+		$node['openingHoursSpecification'] = $hours;
+	}
+
+	/* بلیت — همان سقف ماه صفحه (TOPERSIA_TICKET_MAX_AGE_MONTHS در هستۀ نمایش؛ نبود ← ۱۸) */
+	$checked = topersia_schema_ymd( get_post_meta( $post_id, 'ticket_price_checked', true ) );
+	if ( '' !== $checked ) {
+		$months = defined( 'TOPERSIA_TICKET_MAX_AGE_MONTHS' ) ? (int) TOPERSIA_TICKET_MAX_AGE_MONTHS : 18;
+		$floor  = gmdate( 'Y-m-d', strtotime( topersia_schema_today() . ' -' . $months . ' months' ) );
+		if ( $checked >= $floor ) {
+			$prices = array();
+			foreach ( array( 'ticket_price_foreign', 'ticket_price_local' ) as $k ) {
+				$v = preg_replace( '/[^0-9]/', '', (string) get_post_meta( $post_id, $k, true ) );
+				if ( '' !== $v ) { $prices[] = (int) $v; }
+			}
+			if ( $prices ) {
+				$node['isAccessibleForFree'] = 0 === max( $prices );
+			}
+		}
+	}
+
+	/* ویلچر */
+	$wc  = (string) get_post_meta( $post_id, 'wheelchair_access', true );
+	$map = array( 'full' => array( 'Wheelchair accessible', true ), 'partial' => array( 'Wheelchair accessible (partial)', true ), 'none' => array( 'Wheelchair accessible', false ) );
+	if ( isset( $map[ $wc ] ) ) {
+		$node['amenityFeature'] = array( array( '@type' => 'LocationFeatureSpecification', 'name' => $map[ $wc ][0], 'value' => $map[ $wc ][1] ) );
+	}
+
+	/* زبان راهنمای صوتی — فقط گرۀ گردشگری */
+	$tourist = in_array( 'TouristAttraction', array( (string) ( $node['@type'] ?? '' ), basename( (string) ( $node['additionalType'] ?? '' ) ) ), true );
+	$langs   = get_post_meta( $post_id, 'audio_guide_languages', true );
+	if ( $tourist && is_array( $langs ) ) {
+		$on = array_keys( array_filter( $langs, function ( $v ) { return true === $v || 'true' === $v; } ) );
+		$on = $on ? $on : array_values( array_filter( $langs, 'is_string' ) );
+		$on = array_values( array_filter( $on, function ( $c ) { return (bool) preg_match( '/^[a-z]{2}$/', (string) $c ); } ) );
+		if ( $on ) {
+			$node['availableLanguage'] = $on;
+		}
+	}
+
 	return $node;
 }
 
@@ -1156,6 +1226,16 @@ function topersia_schema_event( $node, $post_id, $config = array() ) {
 		$node['organizer'] = $organizer;
 	}
 
+	/* ۱٫۴٫۰ (دستۀ ۲۹): ورودی جشنواره ← isAccessibleForFree؛ نشانی بلیت ورزشی ← offers.url (https معتبر، بیرون از topersia.com) */
+	$ticket = (string) get_post_meta( $post_id, 'ticket_required', true );
+	if ( 'free' === $ticket || 'ticket' === $ticket ) {
+		$node['isAccessibleForFree'] = 'free' === $ticket;
+	}
+	$ticket_url = topersia_schema_safe_url( get_post_meta( $post_id, 'ticket_url', true ) );
+	if ( '' !== $ticket_url ) {
+		$node['offers'] = array( '@type' => 'Offer', 'url' => $ticket_url );
+	}
+
 	$official = topersia_schema_event_official_url( $post_id );
 
 	if ( '' !== $official ) {
@@ -1169,6 +1249,30 @@ function topersia_schema_event( $node, $post_id, $config = array() ) {
 	}
 
 	return $node;
+}
+
+/** نشانی https معتبر، بی نام‌کاربری، بیرون از topersia.com — همان قاعدۀ official_event_url (۱٫۴٫۰). */
+function topersia_schema_safe_url( $raw ) {
+
+	$url = is_scalar( $raw ) ? trim( (string) $raw ) : '';
+
+	if ( '' === $url || ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
+		return '';
+	}
+
+	$parts = parse_url( $url );
+	$host  = isset( $parts['host'] ) ? strtolower( rtrim( $parts['host'], '.' ) ) : '';
+
+	if ( ! is_array( $parts ) || 'https' !== strtolower( (string) $parts['scheme'] ) || '' === $host
+		|| isset( $parts['user'] ) || isset( $parts['pass'] ) || false === strpos( $host, '.' ) ) {
+		return '';
+	}
+
+	if ( 'topersia.com' === $host || '.topersia.com' === substr( $host, -13 ) ) {
+		return '';
+	}
+
+	return esc_url_raw( $url );
 }
 
 /**
@@ -1204,25 +1308,7 @@ function topersia_schema_event_official_url( $post_id ) {
 		}
 	}
 
-	$url = is_scalar( $raw ) ? trim( (string) $raw ) : '';
-
-	if ( '' === $url || ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
-		return '';
-	}
-
-	$parts = parse_url( $url );
-	$host  = isset( $parts['host'] ) ? strtolower( rtrim( $parts['host'], '.' ) ) : '';
-
-	if ( ! is_array( $parts ) || 'https' !== strtolower( (string) $parts['scheme'] ) || '' === $host
-		|| isset( $parts['user'] ) || isset( $parts['pass'] ) || false === strpos( $host, '.' ) ) {
-		return '';
-	}
-
-	if ( 'topersia.com' === $host || '.topersia.com' === substr( $host, -13 ) ) {
-		return '';
-	}
-
-	return esc_url_raw( $url );
+	return topersia_schema_safe_url( $raw );   /* ۱٫۴٫۰: همان قاعده برای نشانی بلیت */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════

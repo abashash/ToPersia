@@ -395,7 +395,10 @@ if ( ! function_exists( 'topersia_g_sc_route_cities' ) ) {
 				continue;
 			}
 
-			$tiles[] = array( 'label' => topersia_g_fa( count( $tiles ) + 1 ), 'name' => topersia_g_name( $id ), 'url' => $url );
+			/* دستۀ ۲۹ بند ۶: یادداشت توقف (route_stop_notes) زیر نام — پیش‌تر فقط در JSON-LD بود */
+			$note    = isset( $stop['note'] ) ? trim( wp_strip_all_tags( (string) $stop['note'] ) ) : '';
+			$tiles[] = array( 'label' => topersia_g_fa( count( $tiles ) + 1 ), 'name' => topersia_g_name( $id ), 'url' => $url,
+				'sub' => '' !== $note ? ( mb_strlen( $note ) > 60 ? rtrim( mb_substr( $note, 0, 60 ) ) . '…' : $note ) : '' );
 		}
 
 		if ( ! $tiles ) {

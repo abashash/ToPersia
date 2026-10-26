@@ -72,6 +72,11 @@ msgstr ""
 msgid "آخرین بازسازی همه: %s"
 msgstr ""
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "آخرین بررسی: %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "آخرین مشاهده"
 msgstr ""
@@ -363,6 +368,10 @@ msgstr ""
 msgid "باز"
 msgstr ""
 
+#: topersia-render.php
+msgid "باز است"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "باز کردن نقشۀ کامل"
 msgstr ""
@@ -509,6 +518,10 @@ msgstr ""
 msgid "بسته"
 msgstr ""
 
+#: topersia-render.php
+msgid "بسته است"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "بسته‌بودن هنگام نماز"
 msgstr ""
@@ -555,6 +568,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "بهار"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "بهای بلیت"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -751,6 +768,10 @@ msgstr ""
 msgid "ثبت %s"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "ثبت ملی"
+msgstr ""
+
 #: topersia-render.php
 msgid "ثبت ممکن نشد."
 msgstr ""
@@ -911,6 +932,10 @@ msgid "حمل‌ونقل و قطار"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "خارجی"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "خاستگاه"
 msgstr ""
 
@@ -1000,6 +1025,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "خیر"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "داخلی"
 msgstr ""
 
 #: includes/topersia-g-weather.php
@@ -1105,7 +1134,7 @@ msgstr ""
 msgid "دسترسی ویلچر"
 msgstr ""
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
 msgstr ""
 
@@ -1366,6 +1395,10 @@ msgid "زمان صعود (ساعت)"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "زمان‌بندی تقویمی"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "زمستان"
 msgstr ""
 
@@ -1382,6 +1415,10 @@ msgid "زیاد"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "زیارتگاه فعال"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "زیرشاخه‌ها"
 msgstr ""
 
@@ -1395,6 +1432,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "سازهای مرتبط"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "ساعات بازدید"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1539,6 +1580,10 @@ msgid "شب"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "شبکۀ ریلی"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "شب‌گردی"
 msgstr ""
 
@@ -1552,6 +1597,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "شمار استان‌ها"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "شمارۀ ثبت %s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1624,6 +1674,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "شیرینی و حلوا"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "شیوۀ ساخت"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2011,6 +2065,10 @@ msgstr ""
 msgid "محل برگزاری"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "محل عبادت فعال"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "محله"
 msgstr ""
@@ -2291,6 +2349,10 @@ msgid "مواد اصلی"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "مواد اولیه"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "موتورسواری و اتومبیل‌رانی"
 msgstr ""
 
@@ -2379,6 +2441,10 @@ msgid "نام بین‌المللی"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "نام تاریخی"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "نام رسمی انگلیسی"
 msgstr ""
 
@@ -2392,6 +2458,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "نام فرودگاه"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "نام مذهبی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -2436,6 +2506,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "نشانگر نقشه"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "نشانی"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2907,7 +2981,7 @@ msgstr ""
 msgid "پهنه‌های طبیعی"
 msgstr ""
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-map.php
 msgid "پوشش"
 msgstr ""
 
