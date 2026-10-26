@@ -45,10 +45,10 @@ tp441_mut( 'کارت «اطلاعات جغرافیایی» کاشی‌های و�
 tp441_mut( 'پیوند بخش ستون کناریِ چسبان: اگر در دید است اسکرول نمی‌کند، وگرنه یک‌بار و بی تعقیب (بی تعقیبِ بی‌پایانِ هدفی که هرگز بالای نوار نمی‌رسد)',
 	function ( $s ) {
 		return false !== strpos( $s, "'sticky' === window.getComputedStyle( p ).position" )
-			&& false !== strpos( $s, 'if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {' )
+			&& false !== strpos( $s, 'if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 1 ) ) {' )
 			&& false !== strpos( $s, 'r.top >= by && r.bottom <= window.innerHeight' );
 	},
-	$js2f, str_replace( 'if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {', 'if ( Math.abs( y - aim ) > 2 ) {', $js2f ) );
+	$js2f, str_replace( 'if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 1 ) ) {', 'if ( Math.abs( y - aim ) > 1 ) {', $js2f ) );
 
 /* ثبت‌نامهٔ پنل چپ (includes/topersia-g-panel.php) جای باکس شهرهای مسیر را می‌دهد؛ دیگر قلابی نیست (P5-D347) */
 

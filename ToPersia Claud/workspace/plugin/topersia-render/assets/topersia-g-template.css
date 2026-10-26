@@ -216,6 +216,7 @@ html body .tp-page .tp-practical-grid a:hover span{color:var(--tp-primary-text)}
 /* دستۀ ۲۹ — بلوک «بازدید» در «اطلاعات سفر»: فهرست برچسب/مقدار، جدول ساعت، نشان باز/بسته. برچسب ریز
    از --tp-text (P5-D184)؛ رنگ‌ها فقط توکن. */
 html body .tp-page .tp-visit{margin:12px 0 0;display:grid;gap:10px}
+html body .tp-page .tp-visit:first-child{margin-block-start:0}
 html body .tp-page .tp-practical-grid + .tp-visit{border-block-start:1px solid var(--tp-tile-border);padding-block-start:12px}
 html body .tp-page .tp-visit__row{display:grid;gap:2px}
 html body .tp-page .tp-visit dt{font-size:calc(.72 * var(--tp-rem));font-weight:700;color:var(--tp-text);margin:0}

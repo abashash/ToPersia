@@ -553,7 +553,8 @@
 					}
 				}
 
-				if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 2 ) ) {
+				/* دستۀ ۲۹: آستانۀ ۲ پیکسل خطای ۲ پیکسلیِ قدِ نوارِ کهنه را نگه می‌داشت (بخش ۲ پیکسل زیر نوار) — ۱ */
+				if ( aim < 0 || ( ! pin && Math.abs( y - aim ) > 1 ) ) {
 					aim    = y;
 					aimedAt = Date.now();
 					dir    = y > here ? 1 : ( y < here ? -1 : 0 );

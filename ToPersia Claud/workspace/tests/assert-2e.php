@@ -54,7 +54,7 @@ $js2e = file_get_contents( TP_PLUGIN_DIR . '/assets/topersia-g-zones.js' );
 tp441_mut( 'کلیک نوار بخش‌ها: goTo() هدف را با هدر چسبان و نوار حساب می‌کند و تا پایان اسکرول دوباره نشانه می‌گیرد؛ scrollIntoView و لنگر بومی دیگر نیست (جهش: بازگشت به scrollIntoView)',
 	function ( $s ) {
 		return false !== strpos( $s, 'function goTo( el ) {' ) && false !== strpos( $s, "window.scrollTo( { top: y, behavior: calm() ? 'auto' : 'smooth' } );" )
-			&& false !== strpos( $s, 'Math.abs( y - aim ) > 2' ) && false !== strpos( $s, "\t\t\t\tgoTo( el );\n" )
+			&& false !== strpos( $s, 'Math.abs( y - aim ) > 1' ) && false !== strpos( $s, "\t\t\t\tgoTo( el );\n" )
 			&& false === strpos( $s, "el.scrollIntoView( { behavior: calm() ? 'auto' : 'smooth', block: 'start' } );" );
 	},
 	$js2e, str_replace( "\t\t\t\tgoTo( el );\n", "\t\t\t\tel.scrollIntoView( { behavior: calm() ? 'auto' : 'smooth', block: 'start' } );\n", $js2e ) );
