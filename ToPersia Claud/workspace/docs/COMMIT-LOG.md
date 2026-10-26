@@ -165,4 +165,12 @@
 | 156 | 2026-10-26 | `feat` | `46c1b6dc` |  | بند ۴: P5-D451 — ۱۲ رابطهٔ تازه، ۸ ادغام بی تلفات (۱۵۸۲ ردیف پیش و پس)؛ tests/p5d450-local.php | ✅ |
 | 157 | 2026-10-26 | `test` | `dcde0cb8` |  | بند ۵: هاور اشتراک — دکمه وسط دید | ✅ |
 | 158 | 2026-10-26 | `chore` | `ac156536` |  | mirror geo/ — دستهٔ ۲۸. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · stats4-local · pack/schema/render/core-local · p5d450-local · province-routing-local · acceptance ۰ ناهمخوان · behaviour ۰ افتاده · کاناری (فقط برگهٔ معیارها، عمدی). Lighthouse اجرا نشد: خروجی صفحه‌های اصفهان عوض نشد | ✅ |
-| 159 | 2026-10-26 | `docs` | (این commit) |  | ردیف‌های ۱۵۱–159 | ✅ |
+| 159 | 2026-10-26 | `docs` | `34570de6` |  | ردیف‌های ۱۵۱–159 | ✅ |
+| 160 | 2026-10-26 | `feat` | `cdf84058` |  | دستهٔ ۲۹ بند ۱ و ۲: بلوک «بازدید» در «اطلاعات سفر» (بلیت ۱۸ ماه، جدول ساعت)؛ ۷ فیلد stat گمشده و «ثبت ملی» | ✅ |
+| 161 | 2026-10-26 | `feat` | `1c98a8be` |  | بند ۳: نشان باز/بسته سمت کاربر (Asia/Tehran) | ✅ |
+| 162 | 2026-10-26 | `fix` | `a2a80208` |  | بازبینی امنیتی: esc_html خروجی فیلد عددی بی رقم (XSS ذخیره‌شده) | ✅ |
+| 163 | 2026-10-26 | `feat` | `f65726b4` |  | بند ۵: topersia-schema 1.4.0 — openingHoursSpecification · isAccessibleForFree · amenityFeature · availableLanguage · offers.url رویداد | ✅ |
+| 164 | 2026-10-26 | `feat` | `4d81684e` |  | بند ۶: شمارهٔ ثبت یونسکو در نشان، یادداشت توقف مسیر — پر و دیده‌نشده ۳۹ ← ۶ با دلیل | ✅ |
+| 165 | 2026-10-26 | `fix` | `bf98a546` |  | لنگر نوار بخش‌ها (آستانه ۱px)، شمارهٔ ثبت زنجیره‌ای، فاصلهٔ بلوک | ✅ |
+| 166 | 2026-10-26 | `chore` | `f4400a2f` |  | mirror geo/ — دستهٔ ۲۹. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · schema (۸ جهش تازه) · schema/render-local · acceptance ۰ ناهمخوان · contrast ۰ · behaviour ۰ · Lighthouse A/B ۹تایی بدترین −۲ (دو webp نبودِ uploads، همان در A و B) · کاناری سالم. بند ۴ (کارت ارز/روادید): دو چیدمان در tests/.screens/29/mockups — منتظر انتخاب کاربر | ✅ |
+| 167 | 2026-10-26 | `docs` | (این commit) |  | ردیف‌های ۱۵۹–167 | ✅ |
