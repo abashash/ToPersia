@@ -82,11 +82,13 @@ $l20_area = topersia_g_routing_links( $nav20['extra'], topersia_g_routing_target
 $l20_city = topersia_g_routing_links( $nav20['extra'], topersia_g_routing_target( 8004 ) );
 tp441_mut( 'نشان فقط مختصات: استان ← مختصات مرکز استان (رابطهٔ ۹۶)؛ شهر ← مختصات شهر؛ پهنهٔ بی نقطهٔ نماینده ← بی نشان؛ Google و Waze برای پهنه همان متن  P5-D383',
 	function ( $x ) {
-		return isset( $x[0]['neshan'] ) && 'https://nshn.ir/?lat=32.6539&lng=51.666' === $x[0]['neshan'] && ! isset( $x[0]['google'] ) /* استانِ بی والد R01 (جز کشور) متن ندارد ← Google و Waze مثل P5-D350 نیستند */
+		/* P5-D453 (دستهٔ ۳۰): استان ← همهٔ دکمه‌ها با مختصات مرکز استان، گوگل و ویز هم (پیش‌تر بی متن والد، فقط نشان) */
+		return isset( $x[0]['neshan'] ) && 'https://nshn.ir/?lat=32.6539&lng=51.666' === $x[0]['neshan']
+			&& 'https://www.google.com/maps/dir/?api=1&destination=32.6539,51.666' === ( $x[0]['google'] ?? '' ) && 'https://waze.com/ul?ll=32.6539,51.666&navigate=yes' === ( $x[0]['waze'] ?? '' )
 			&& ! isset( $x[1]['neshan'] ) && isset( $x[1]['google'], $x[1]['waze'] )
 			&& 'https://nshn.ir/?lat=32.6539&lng=51.666' === $x[2]['neshan'];
 	},
-	array( $l20_prov, $l20_area, $l20_city ), array( array_diff_key( $l20_prov, array( 'neshan' => 1 ) ), $l20_area + array( 'neshan' => 'https://nshn.ir/?lat=32&lng=52' ), $l20_city ) );
+	array( $l20_prov, $l20_area, $l20_city ), array( array_diff_key( $l20_prov, array( 'google' => 1 ) ), $l20_area + array( 'neshan' => 'https://nshn.ir/?lat=32&lng=52' ), $l20_city ) );
 list( $GLOBALS['tp_posts'], $GLOBALS['tp_meta'], $GLOBALS['tp_rel'] ) = $s20_keep;
 if ( null === $s20_keep[3] ) { unset( $GLOBALS['tp_filters']['topersia_g_relreg'] ); } else { $GLOBALS['tp_filters']['topersia_g_relreg'] = $s20_keep[3]; }
 
