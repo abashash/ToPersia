@@ -113,6 +113,18 @@ if ( ! function_exists( 'topersia_g_routing_target' ) ) {
 			}
 		}
 
+		/*
+		 * P5-D453 (دستۀ ۳۰): استان والد مکانی ندارد (کشور در زنجیره نیست)، پس حالت متنی برایش تهی بود و فقط «نشان»
+		 * می‌آمد. مقصد استان = مرکز استان (P5-D399: رابطۀ مرکز، یا مختصات نوشته‌شدۀ خودِ استان) — همه با lat,lng.
+		 * دیگر نوع‌ها بی تغییر.
+		 */
+		if ( 'tp_province' === ( function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '' ) ) {
+			$center = topersia_g_routing_point( $pid );
+			if ( $center ) {
+				return array( 'mode' => 'coords', 'lat' => (float) $center['lat'], 'lng' => (float) $center['lng'] );
+			}
+		}
+
 		/* پهنه‌ای یا بی مختصات: نام فارسی + نام والد مکانی (نزدیک‌ترین والد R01، بی کشور) */
 		$self    = topersia_g_routing_fa_title( $pid );
 		$parents = function_exists( 'topersia_g_crumb_places' ) ? topersia_g_crumb_places( $pid ) : array();
