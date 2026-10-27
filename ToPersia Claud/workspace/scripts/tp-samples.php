@@ -85,12 +85,15 @@ $samples = function () use ( $wpdb ) {
 	return $out;
 };
 
+/* نشانی زبانِ خودِ پست — get_permalink در wp-cli پیشوند زبان WPML را نمی‌گذارد */
+$tp_url = function ( $id, $l ) { do_action( 'wpml_switch_language', $l ); $u = get_permalink( $id ); do_action( 'wpml_switch_language', 'fa' ); return $u; };
+
 /* ══ list ══ */
 if ( 'list' === $cmd ) {
 	$s = $samples();
 	foreach ( array_keys( topersia_g_stat_cells() ) as $t ) {
 		$row = $s[ $t ] ?? array();
-		echo str_pad( $t, 22 ) . ' ' . implode( ' · ', array_map( function ( $l ) use ( $row ) { return $l . '=' . ( isset( $row[ $l ] ) ? $row[ $l ] . ' ' . get_permalink( $row[ $l ] ) : '—' ); }, array( 'fa', 'en', 'ar' ) ) ) . "\n";
+		echo str_pad( $t, 22 ) . ' ' . implode( ' · ', array_map( function ( $l ) use ( $row, $tp_url ) { return $l . '=' . ( isset( $row[ $l ] ) ? $row[ $l ] . ' ' . $tp_url( $row[ $l ], $l ) : '—' ); }, array( 'fa', 'en', 'ar' ) ) ) . "\n";
 	}
 	return;
 }
@@ -160,7 +163,7 @@ if ( 'seen' === $cmd ) {
 		return array( trim( preg_replace( '/\..*$/su', '', $p[1] ?? $p[0] ) ) );
 	};
 	$s = $samples();
-	$rows = array(); $acc = 0; $new = 0;
+	$rows = array(); $acc = 0; $new = 0; $def = 0;
 	foreach ( array_keys( topersia_g_stat_cells() ) as $type ) {
 		if ( empty( $s[ $type ]['fa'] ) ) { continue; }
 		$pid  = $s[ $type ]['fa'];
@@ -183,14 +186,16 @@ if ( 'seen' === $cmd ) {
 			foreach ( $nd as $x ) { $x = strtr( $x, $heh ); if ( false !== mb_strpos( $text, $x ) || false !== mb_strpos( $html, $x ) ) { $hit = true; break; } }
 			if ( $hit ) { continue; }
 			$c  = $csv[ $type . '.' . $k ] ?? array( 'display' => '', 'why' => '' );
-			$ok = 0 === mb_strpos( $c['why'], 'لازم نیست' ) || 0 === mb_strpos( $c['display'], 'نه (FIELDMAP: skip)' );
-			$ok ? $acc++ : $new++;
-			$rows[] = array( $type, $k, $d['label'] ?? '', $d['type'], $ok ? 'پذیرفته — ' . $c['why'] : 'یافته — ' . ( '' !== $c['display'] ? 'META-DISPLAY: ' . $c['display'] : 'نه در META-DISPLAY' ) );
+			/* پذیرفته فقط فنی یا FIELDMAP: skip؛ «لازم نیست تا داده بیاید» (دستهٔ ۲۷) با دادهٔ نمونه دیگر دلیل نیست — جدا، «جا ندارد» */
+			$ok    = 0 === mb_strpos( $c['why'], 'لازم نیست — فنی' ) || 0 === mb_strpos( $c['display'], 'نه (FIELDMAP: skip)' );
+			$wait  = ! $ok && 0 === mb_strpos( $c['why'], 'لازم نیست تا داده بیاید' );
+			$ok ? $acc++ : ( $wait ? $def++ : $new++ );
+			$rows[] = array( $type, $k, $d['label'] ?? '', $d['type'], $ok ? 'پذیرفته — ' . $c['why'] : ( $wait ? 'جا ندارد — دستهٔ ۲۷: «تا داده بیاید»' : 'یافته — ' . ( '' !== $c['display'] ? 'META-DISPLAY: ' . $c['display'] : 'نه در META-DISPLAY' ) ) );
 		}
 	}
 	echo "| نوع | فیلد | برچسب | گونه | وضع |\n|---|---|---|---|---|\n";
 	foreach ( $rows as $r ) { echo '| `' . $r[0] . '` | `' . $r[1] . '` | ' . $r[2] . ' | ' . $r[3] . ' | ' . $r[4] . " |\n"; }
-	echo "\nدیده‌نشده: " . count( $rows ) . ' · پذیرفته: ' . $acc . ' · یافته: ' . $new . "\n";
+	echo "\nدیده‌نشده: " . count( $rows ) . ' · پذیرفته: ' . $acc . ' · جا ندارد (دستهٔ ۲۷): ' . $def . ' · یافته: ' . $new . "\n";
 	return;
 }
 
@@ -282,7 +287,10 @@ $value = function ( $key, $d, $lang, $n, $type ) use ( &$value, $TXT, $SRC, $isa
 	if ( 'geo_coordinates' === $k ) { return sprintf( '%.4f, %.4f', 29.5 + fmod( $n * 0.73, 8 ), 48.5 + fmod( $n * 1.17, 12 ) ); }
 	if ( preg_match( '/iso|code$/', $k ) && 'programme_code' !== $k ) { return 'SMP'; }
 	if ( preg_match( '/^name_(fa|en|ar)$/', $k ) ) { return ''; }   /* از جدول نام */
-	$base = $TXT[ $lang ][0] . ' — ' . ( $d['label'] ?? $key );
+	if ( 'currency_symbol' === $k ) { return '€'; }
+	if ( false !== mb_strpos( (string) ( $d['label'] ?? '' ), 'لاتین' ) ) { return 'Sample ' . ucwords( str_replace( '_', ' ', $k ) ); }   /* فیلد لاتین (page_title) — دروازهٔ زبان P5-D278 لاتین را در هر سه زبان نگه می‌دارد */
+	/* برچسب فارسی فقط در متن فارسی؛ en و ar بی واژهٔ فارسی، وگرنه دروازهٔ زبان (topersia_g_foreign_text) خالی‌اش می‌کند */
+	$base = $TXT[ $lang ][0] . ' — ' . ( 'fa' === $lang ? ( $d['label'] ?? $key ) : ( 'en' === $lang ? ucfirst( str_replace( '_', ' ', $k ) ) : $TXT['ar'][0] ) );
 	if ( in_array( $t, array( 'textarea', 'wysiwyg' ), true ) ) { return $base . '. ' . $TXT[ $lang ][1]; }
 	return $base;
 };
@@ -369,9 +377,14 @@ foreach ( $made as $type => $pid ) {
 		if ( $single ) { $targets = array_values( array_filter( $targets, function ( $x ) use ( $obj ) { return ! $obj->get_parents( $x, 'ids' ); } ) ); }   /* هدف بی والد اول */
 		if ( isset( $made[ $r['target'] ] ) && $made[ $r['target'] ] !== $pid ) { array_unshift( $targets, $made[ $r['target'] ] ); }
 		$targets = array_slice( array_values( array_unique( array_diff( array_map( 'intval', $targets ), array( $pid ) ) ) ), 0, $want );
+		$rtype = $obj->get_args( 'type' );
 		foreach ( $targets as $tid ) {
+			/* پست واقعی فقط در چندبه‌چند، یا والد واقعی برای فرزند نمونه در یک‌به‌چند؛
+			   نمونه هرگز والد تکی پست واقعی نمی‌شود و یک‌به‌یکِ واقعی دست نمی‌خورد (دستهٔ ۳۰: آلودگی ۱۵ یال) */
+			$is_sample = (bool) get_post_meta( $tid, '_tp_sample', true );
+			if ( ! $is_sample && 'many_to_many' !== $rtype && ! ( 'parents' === $r['direction'] && 'one_to_many' === $rtype ) ) { continue; }
 			/* سوی دیگر یک‌به‌چند: والدِ تکی هدف را جابه‌جا نکن */
-			if ( 'children' === $r['direction'] && in_array( $obj->get_args( 'type' ), array( 'one_to_many', 'one_to_one' ), true ) && $obj->get_parents( $tid, 'ids' ) ) { continue; }
+			if ( 'children' === $r['direction'] && in_array( $rtype, array( 'one_to_many', 'one_to_one' ), true ) && $obj->get_parents( $tid, 'ids' ) ) { continue; }
 			'parents' === $r['direction'] ? $obj->update( $tid, $pid ) : $obj->update( $pid, $tid );
 			$linked++;
 		}
@@ -391,10 +404,15 @@ foreach ( $made as $type => $pid ) {
 				'post_content' => '<p>' . $TXT[ $l ][1] . '</p>', 'post_excerpt' => $TXT[ $l ][0] ) );
 			do_action( 'wpml_set_element_language_details', array( 'element_id' => $tr, 'element_type' => 'post_' . $type, 'trid' => $trid, 'language_code' => $l, 'source_language_code' => 'fa' ) );
 		}
+		if ( get_post_field( 'post_name', $tr ) !== get_post_field( 'post_name', $pid ) ) {
+			wp_update_post( array( 'ID' => $tr ) );   /* topersia_sync_translated_slug هسته: نامک ترجمه = نامک اصل (بی «-2») — پیش از نوشتن متا، چون WPML با ذخیره فیلدهای copy را از اصل می‌نشاند */
+		}
 		update_post_meta( $tr, '_tp_sample', 1 );
 		update_post_meta( $tr, 'rank_math_robots', array( 'noindex', 'nofollow' ) );
 		foreach ( $schema['fields'] as $key => $d ) {
-			if ( 'translate' === ( $d['wpml'] ?? '' ) ) {
+			if ( in_array( $key, array( 'external_reference_uri', 'route_stops_order' ), true ) ) { update_post_meta( $tr, $key, get_post_meta( $pid, $key, true ) ); continue; }
+			$own = 'translate' === ( $d['wpml'] ?? '' ) || ( '' === ( $d['wpml'] ?? '' ) && in_array( $d['type'], array( 'text', 'textarea', 'wysiwyg', 'repeater' ), true ) );
+			if ( $own ) {   /* translate، یا متنِ بی کلاس WPML = هر زبان مقدار خودش */
 				$v = $value( $key, $d, $l, $i + 1, $type );
 				if ( in_array( $key, array( 'name_fa', 'name_en', 'name_ar' ), true ) ) { $v = get_post_meta( $pid, $key, true ); }
 				if ( 'meta_title' === $key ) { $v = get_post_meta( $pid, 'name_' . $l, true ) . ( 'en' === $l ? ' — sample' : ' — نموذج' ); }

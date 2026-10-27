@@ -11,6 +11,8 @@
  * (@context، و @type در هر گره). «فنی» = excluded اسکیمای بسته + external_reference_uri (sameAs ساختگی گمراه می‌کند).
  */
 
+/* نشانی زبانِ خودِ پست — get_permalink در wp-cli پیشوند زبان WPML را نمی‌گذارد */
+$tp_url = function ( $id, $l ) { do_action( 'wpml_switch_language', $l ); $u = get_permalink( $id ); do_action( 'wpml_switch_language', 'fa' ); return $u; };
 $http = ! in_array( 'nohttp', (array) ( $args ?? array() ), true );
 $mdf  = '';
 foreach ( (array) ( $args ?? array() ) as $a ) { if ( 0 === strpos( $a, 'md=' ) ) { $mdf = substr( $a, 3 ); } }
@@ -71,10 +73,15 @@ foreach ( $types as $type ) {
 		if ( $c >= $need ) { continue; }
 		$pool = get_posts( array( 'post_type' => $r['target'], 'numberposts' => -1, 'post_status' => 'publish', 'fields' => 'ids', 'suppress_filters' => false ) );
 		$pool = array_diff( array_map( 'intval', $pool ), array( $pid ) );
-		$free = 'children' === $r['direction'] && in_array( $o->get_args( 'type' ), array( 'one_to_many', 'one_to_one' ), true )
+		$rt   = $o->get_args( 'type' );
+		$free = 'children' === $r['direction'] && in_array( $rt, array( 'one_to_many', 'one_to_one' ), true )
 			? array_filter( $pool, function ( $x ) use ( $o, $ids ) { return in_array( $x, array_map( 'intval', $ids ), true ) || ! $o->get_parents( $x, 'ids' ); } )
 			: $pool;
-		$why = count( $pool ) < $need ? 'هدف ' . $r['target'] . ' فقط ' . count( $pool ) . ' پست دارد' : ( count( $free ) < $need ? 'هر ' . $r['target'] . ' والد تکی دارد' : '' );
+		/* همان قاعدهٔ مولد: پست واقعی فقط در چندبه‌چند یا والد واقعی فرزندِ نمونه در یک‌به‌چند */
+		$real_ok = 'many_to_many' === $rt || ( 'parents' === $r['direction'] && 'one_to_many' === $rt );
+		if ( ! $real_ok ) { $free = array_filter( $free, function ( $x ) use ( $ids ) { return in_array( $x, array_map( 'intval', $ids ), true ) || get_post_meta( $x, '_tp_sample', true ); } ); }
+		$why = count( $pool ) < $need ? 'هدف ' . $r['target'] . ' فقط ' . count( $pool ) . ' پست دارد'
+			: ( count( $free ) < $need ? ( $real_ok ? 'هر ' . $r['target'] . ' والد تکی دارد' : 'تک‌والد: نمونه والد پست واقعی نمی‌شود و نمونهٔ آزاد ' . $r['target'] . ' کم است' ) : '' );
 		$lab = $type . ' → ' . $r['target'] . ' (' . $r['id'] . ' ' . $r['direction'] . '): ' . $c;
 		if ( $why && $c >= min( $need, count( $free ) ) ) { $accepted[] = $lab . ' — ' . $why; } else { $short[] = $lab; }
 	}
@@ -111,17 +118,30 @@ $t( '«در یک نگاه»: سه خروجی در بازه، هر زبان', ! $
 foreach ( $accepted as $a ) { echo '  · کمبود پذیرفته: ' . $a . "\n"; }
 
 /* صفحه‌ها */
-$dash = array(); $ld = array(); $bad = array(); $urls = array();
+$dash = array(); $ld = array(); $bad = array(); $urls = array(); $knownhit = array();
+/* ایراد رندر شناخته — گزارش دستهٔ ۳۰ (docs/AUDIT-2026-10/SAMPLES.md)؛ پس از رفع از این فهرست برود، وگرنه «کهنه» افتاده می‌شود */
+$known = array();
+foreach ( array( 'en', 'ar' ) as $kl ) {
+	$known[ $kl . ':tp_calendar:list:calendar_systems:cs_system' ] = 'برچسب گزینهٔ ریپیتر (topersia_g_stat_option_label) فارسی می‌ماند و دروازهٔ زبان خالی‌اش می‌کند';
+	$known[ $kl . ':tp_transport:list:transport_modes:tm_mode' ]   = 'همان';
+}
+/* همان بررسی: در صفحهٔ ar هر متن به خط عربی (حتی عربی درست، زیرفیلد متنی بی گزینه) خالی می‌شود */
+$known['ar:tp_transport:list:booking_platforms:bp_name'] = 'topersia_g_stat_option_label هر حرف U+0600–06FF را در صفحهٔ غیرفارسی «فارسی» می‌شمارد — متن عربی ar هم خالی می‌شود';
 if ( $http ) {
 	foreach ( $rows as $type => $r ) {
 		foreach ( $r['ids'] as $l => $id ) {
-			$u = get_permalink( $id );
+			$u = $tp_url( $id, $l );
 			$urls[ $type ][ $l ] = $u;
 			$res = wp_remote_get( $u, array( 'timeout' => 90, 'redirection' => 0, 'sslverify' => false ) );
 			$code = is_wp_error( $res ) ? $res->get_error_message() : wp_remote_retrieve_response_code( $res );
 			$html = is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res );
+			if ( ! preg_match( '#<html[^>]*\blang="' . $l . '#', $html ) ) { $bad[] = $type . ':' . $l . ' (زبان صفحه)'; continue; }
 			if ( 200 !== $code || false === strpos( $html, 'class="tp-stats"' ) ) { $bad[] = $type . ':' . $l . ' ' . $code; continue; }
-			if ( preg_match( '#<b class="tp-stat__v"[^>]*>\s*—\s*</b>#u', $html ) ) { $dash[] = $type . ':' . $l; }
+			preg_match_all( '#data-tp-k="([^"]+)"><span class="tp-stat__k">[^<]*</span><b class="tp-stat__v"[^>]*>\s*—\s*</b>#u', $html, $dm );
+			foreach ( $dm[1] as $ck ) {
+				$id3 = $l . ':' . $type . ':' . $ck;
+				if ( isset( $known[ $id3 ] ) ) { $knownhit[ $id3 ] = 1; } else { $dash[] = $id3; }
+			}
 			preg_match_all( '#<script type="application/ld\+json"[^>]*>(.*?)</script>#s', $html, $mm );
 			if ( ! $mm[1] ) { $ld[] = $type . ':' . $l . ' (هیچ)'; }
 			foreach ( $mm[1] as $j ) {
@@ -134,14 +154,18 @@ if ( $http ) {
 		}
 	}
 	$t( 'هر صفحه ۲۰۰ با ۴ خانه', ! $bad, implode( ' ', $bad ) );
-	$t( 'هیچ «—» در ۴ خانه (هر نوع، هر زبان)', ! $dash, implode( ' ', $dash ) );
+	$t( 'هیچ «—» در ۴ خانه (هر نوع، هر زبان) — جز ایراد شناختهٔ دلیل‌دار', ! $dash, implode( ' ', $dash ) );
+	$stale = array_diff_key( $known, $knownhit );
+	$t( 'فهرست ایراد شناخته کهنه نیست (هر مورد هنوز رخ می‌دهد)', ! $stale, implode( ' ', array_keys( $stale ) ) );
+	foreach ( $knownhit as $k => $x ) { echo '  · ایراد شناخته: ' . $k . ' — ' . $known[ $k ] . "
+"; }
 	$t( 'JSON-LD معتبر ساختاری (@context، @type هر گره)', ! $ld, implode( ' ', array_slice( $ld, 0, 20 ) ) );
 }
 
 if ( $mdf ) {
 	$o = "| نوع | fa | en | ar | پرشدن | رابطه (یال/رابطه‌ها) |\n|---|---|---|---|---|---|\n";
 	foreach ( $rows as $type => $r ) {
-		$cell = function ( $l ) use ( $r ) { return isset( $r['ids'][ $l ] ) ? '[' . $r['ids'][ $l ] . '](' . get_permalink( $r['ids'][ $l ] ) . ')' : '—'; };
+		$cell = function ( $l ) use ( $r, $tp_url ) { return isset( $r['ids'][ $l ] ) ? '[' . $r['ids'][ $l ] . '](' . $tp_url( $r['ids'][ $l ], $l ) . ')' : '—'; };
 		$o .= '| `' . $type . '` | ' . $cell( 'fa' ) . ' | ' . $cell( 'en' ) . ' | ' . $cell( 'ar' ) . ' | ' . $r['fill'] . '٪ (' . $r['n'] . ') | ' . $r['rel'] . ' / ' . $r['reln'] . " |\n";
 	}
 	file_put_contents( $mdf, $o . "\n" . ( $accepted ? "کمبود پذیرفتهٔ رابطه:\n\n- " . implode( "\n- ", $accepted ) . "\n" : '' ) );
