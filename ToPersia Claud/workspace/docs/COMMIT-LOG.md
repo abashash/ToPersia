@@ -180,4 +180,5 @@
 | 171 | 2026-10-27 | `fix` | `63a6d897` |  | بند ۲: نمونه والد تکی پست واقعی نمی‌شود؛ ۱۵ یال آلوده با پشتیبان پاک شد | ✅ |
 | 172 | 2026-10-27 | `docs` | `edd81537` |  | بند ۳: docs/AUDIT-2026-10/SAMPLES.md و SAMPLES-SEEN.md | ✅ |
 | 173 | 2026-10-27 | `chore` | `857eecee` |  | mirror geo/ — دستهٔ ۳۰. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · acceptance · contrast · behaviour · کاناری سالم | ✅ |
-| 174 | 2026-10-27 | `docs` | (این commit) |  | ردیف‌های ۱۶۸–۱۷۴ | ✅ |
+| 174 | 2026-10-27 | `docs` | `c6974491` |  | ردیف‌های ۱۶۸–۱۷۴ | ✅ |
+| 175 | 2026-10-27 | `feat` | `8bf0c8f0` |  | دستهٔ 31 الف: P5-D455 حذف مسیریابی استان + آزمون + جهش. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت امتیاز صفر؛ بیرون‌ازنسخه فقط دو webp گم‌شدهٔ شناخته) · کاناری سالم · samples-local | ✅ |
