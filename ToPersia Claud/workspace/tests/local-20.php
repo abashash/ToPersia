@@ -47,7 +47,7 @@ $pt  = topersia_g_routing_point( $prov );
 $cp  = $cap ? topersia_geo_parse( topersia_g_text( $cap, 'geo_coordinates' ) ) : null;
 t( 'نشان استان اصفهان ← مختصات مرکز استان', $cap && $pt && abs( $pt['lat'] - $cp['lat'] ) < 1e-6 && abs( $pt['lng'] - $cp['lng'] ) < 1e-6, wp_json_encode( array( $cap, $pt ) ) );
 $links = topersia_g_routing_links( topersia_api( 'navigation' )['extra'], topersia_g_routing_target( $prov ) );
-t( 'باکس مسیریابی استان: پیوند نشان با مختصات مرکز', isset( $links['neshan'] ) && false !== strpos( $links['neshan'], 'nshn.ir/?lat=' ), wp_json_encode( $links ) );
+t( 'باکس مسیریابی استان: نیست (P5-D455)؛ نقطهٔ مرکز استان در داده می‌ماند', array() === $links && $pt, wp_json_encode( $links ) );
 
 /* P5-D384 */
 $GLOBALS['post'] = get_post( $city ); setup_postdata( $GLOBALS['post'] );

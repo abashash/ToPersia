@@ -537,26 +537,35 @@ async function tileFit( page, tag ) {
 	const n = await page.$$eval( '[data-tp-tiles]', gs => gs.length );
 	if ( ! n ) { info( tag + ': کاشی ندارد' ); return; }
 
+	/* P5-D455: استان جعبهٔ مسیریابی ندارد — اولین شبکهٔ کاشی دیگر لزوماً سه‌ستونه نیست؛ اولین شبکهٔ سه‌ستونهٔ صفحه را برمی‌داریم */
+	const fit = await page.evaluate( () => {
+		const gs = [ ...document.querySelectorAll( '[data-tp-tiles]' ) ].filter( g => g.querySelector( '.tp-tile:not([hidden])' ) );
+		const g = gs.find( x => 3 === getComputedStyle( x ).gridTemplateColumns.split( ' ' ).length );
+		if ( g ) { g.setAttribute( 'data-tp-fit', '1' ); }
+		return !! g;
+	} );
+	if ( ! fit ) { info( tag + ': شبکهٔ سه‌ستونه ندارد' ); return; }
+
 	const cols = () => page.evaluate( () => {
-		const g = document.querySelector( '[data-tp-tiles]' ), t = g.querySelector( '.tp-tile:not([hidden])' ), cs = getComputedStyle( t );
+		const g = document.querySelector( '[data-tp-fit]' ), t = g.querySelector( '.tp-tile:not([hidden])' ), cs = getComputedStyle( t );
 		return { two: g.classList.contains( 'tp-tiles--2' ), cols: getComputedStyle( g ).gridTemplateColumns.split( ' ' ).length, wb: cs.wordBreak, ow: cs.overflowWrap, hy: cs.hyphens };
 	} );
 	/* پهنای شبکه عوض می‌شود تا ResizeObserver واقعی صدا بخورد — همان که با چرخاندن گوشی */
 	const nudge = d => page.evaluate( dd => {
-		const g = document.querySelector( '[data-tp-tiles]' );
+		const g = document.querySelector( '[data-tp-fit]' );
 		g.style.inlineSize = dd ? ( g.getBoundingClientRect().width - dd ) + 'px' : '';
 	}, d );
 
 	const before = await cols();
 	const keep = await page.evaluate( () => {
-		const b = document.querySelector( '[data-tp-tiles] .tp-tile:not([hidden]) b' ), k = b.textContent;
+		const b = document.querySelector( '[data-tp-fit] .tp-tile:not([hidden]) b' ), k = b.textContent;
 		b.textContent = 'ابرفرهنگستان\u200cشناسی\u200cترینان\u200cگونه\u200cوارهٔ\u200cناشکستنی';
 		return k;
 	} );
 	await nudge( 3 );
 	await page.waitForTimeout( 350 );
 	const over = await cols();
-	await page.evaluate( k => { document.querySelector( '[data-tp-tiles] .tp-tile:not([hidden]) b' ).textContent = k; }, keep );
+	await page.evaluate( k => { document.querySelector( '[data-tp-fit] .tp-tile:not([hidden]) b' ).textContent = k; }, keep );
 	await nudge( 0 );
 	await page.waitForTimeout( 350 );
 	const after = await cols();
