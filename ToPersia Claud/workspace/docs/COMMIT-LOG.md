@@ -182,3 +182,8 @@
 | 173 | 2026-10-27 | `chore` | `857eecee` |  | mirror geo/ — دستهٔ ۳۰. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · acceptance · contrast · behaviour · کاناری سالم | ✅ |
 | 174 | 2026-10-27 | `docs` | `c6974491` |  | ردیف‌های ۱۶۸–۱۷۴ | ✅ |
 | 175 | 2026-10-27 | `feat` | `8bf0c8f0` |  | دستهٔ 31 الف: P5-D455 حذف مسیریابی استان + آزمون + جهش. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت امتیاز صفر؛ بیرون‌ازنسخه فقط دو webp گم‌شدهٔ شناخته) · کاناری سالم · samples-local | ✅ |
+| 176 | 2026-10-28 | `fix` | `4c73cc1a` |  | دستهٔ 32 بند 1–3: برچسب گزینه به زبان صفحه، شمارهٔ یونسکو بی معیار، گالری با پیوست همان زبان | ✅ |
+| 177 | 2026-10-28 | `feat` | `bb4f7519` |  | بند 4: کلاس WPML برای ۲۸ فیلد + آزمون | ✅ |
+| 178 | 2026-10-28 | `feat` | `d86d2e80` |  | بند 5–7: remove، ویدیوی محلی، آزمون رفت‌وبرگشت (P5-D457) | ✅ |
+| 179 | 2026-10-28 | `feat` | `d2a7f666` |  | بند 8: P5-D456 درون‌ریز و کاناری یال‌ها | ✅ |
+| 180 | 2026-10-28 | `chore` | `2f7de030` |  | mirror geo/ — دستهٔ 32. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · wpml-class · roundtrip · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت ≤1؛ بیرون‌ازنسخه فقط چهار بندانگشتی نمونهٔ تقویم) · کاناری سالم (پست و یال) | ✅ |
