@@ -2769,7 +2769,7 @@ if ( ! function_exists( 'topersia_g_stat_title' ) ) {
 	}
 }
 
-/** برچسب گزینۀ یک زیرفیلد select ریپیتر — از اسکیمای بستۀ هسته؛ در صفحۀ غیرفارسی برچسب فارسی نمی‌آید (P5-D278). */
+/** برچسب گزینۀ یک زیرفیلد select ریپیتر — از اسکیمای بستۀ هسته؛ در صفحۀ غیرفارسی برچسب به زبان صفحه می‌آید و نشت زبان خالی می‌شود (P5-D278 · دستۀ 32). */
 if ( ! function_exists( 'topersia_g_stat_option_label' ) ) {
 	function topersia_g_stat_option_label( $type, $field, $sub, $value ) {
 
@@ -2793,9 +2793,44 @@ if ( ! function_exists( 'topersia_g_stat_option_label' ) ) {
 			}
 		}
 
-		$label = isset( $cache[ $ck ][ $value ] ) ? $cache[ $ck ][ $value ] : $value;
+		return topersia_g_option_label_lang( isset( $cache[ $ck ][ $value ] ) ? $cache[ $ck ][ $value ] : $value );
+	}
+}
 
-		if ( 'fa' !== topersia_g_page_lang() && preg_match( '/[\x{0600}-\x{06FF}]/u', $label ) ) {
+/**
+ * برچسب گزینه‌های ریپیترِ خانه‌های «در یک نگاه» (`list:…`) که از اسکیمای زنده می‌آیند و در کد جای دیگری نیستند —
+ * این فهرست آن‌ها را به کاتالوگ ترجمه می‌رساند (`scripts/tp-i18n.php`)؛ آزمون زنده می‌سنجد هر برچسب خانه ترجمه دارد.
+ */
+if ( ! function_exists( 'topersia_g_option_labels_i18n' ) ) {
+	function topersia_g_option_labels_i18n() {
+
+		return array(
+			'هوایی', 'ریلی', 'اتوبوس بین‌شهری', 'مترو', 'اتوبوس تندرو', 'تاکسی', 'تاکسی اینترنتی', 'کشتی و لنج', 'موضوعیت ندارد',
+			'هجری شمسی', 'هجری قمری', 'میلادی',
+		);
+	}
+}
+
+/**
+ * برچسب گزینه به زبان صفحه — دستۀ 32 · P5-D278 (اصلاح).
+ *
+ * برچسب فارسیِ واژه‌نامه/گزینه با کاتالوگ همان زبان ترجمه می‌شود (`topersia_g_t`). دروازه فقط نشت زبان را می‌گیرد:
+ * فارسی در en و ar، یا حرف و رقمِ ویژۀ فارسی در ar؛ متن عربیِ درست (مثل نام پلتفرم رزرو) می‌ماند.
+ * ترجمه‌نشده ← تهی (خانه «—» می‌ماند، نه برچسب زبان دیگر).
+ */
+if ( ! function_exists( 'topersia_g_option_label_lang' ) ) {
+	function topersia_g_option_label_lang( $label ) {
+
+		$label = (string) $label;
+		$lang  = topersia_g_page_lang();
+
+		if ( 'fa' === $lang || '' === $label ) {
+			return $label;
+		}
+
+		$label = topersia_g_t( $label );
+
+		if ( topersia_g_foreign_text( $label ) || ( 'ar' === $lang && preg_match( '/[\x{06F0}-\x{06F9}]/u', $label ) ) ) {
 			return '';
 		}
 
@@ -3384,8 +3419,9 @@ if ( ! function_exists( 'topersia_g_wh_criteria_links' ) ) {
 	function topersia_g_wh_criteria_links( $pid ) {
 		$raw = topersia_g_raw( $pid, 'world_heritage_criteria' );
 		$raw = is_scalar( $raw ) ? strtolower( (string) $raw ) : '';
+		/* دستۀ 32: نبودِ معیار رومی شمارۀ ثبت را پنهان نکند — دو بخش مستقل‌اند */
 		if ( ! preg_match_all( '/\(\s*([ivx]+)\s*\)|\b(i{1,3}|iv|vi{0,3}|ix|x)\b/u', $raw, $m ) ) {
-			return '';
+			$m = array( array(), array(), array() );
 		}
 		$ok   = array( 'i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x' );
 		$url  = topersia_g_wh_criteria_url();
@@ -5266,6 +5302,12 @@ if ( ! function_exists( 'topersia_g_sc_gallery' ) ) {
 
 			if ( ! $attachment ) {
 				continue;
+			}
+
+			/* دستۀ 32: متای گالری «copy» است و شناسۀ پیوند فارسی را به هر زبان می‌برد — پیوستِ همان زبان (alt و عنوان ترجمه‌شده)، و اگر نبود فارسی */
+			if ( function_exists( 'apply_filters' ) && 'fa' !== topersia_g_page_lang() ) {
+				$mapped     = absint( apply_filters( 'wpml_object_id', $attachment, 'attachment', true, topersia_g_page_lang() ) );
+				$attachment = $mapped ? $mapped : $attachment;
 			}
 
 			$img = function_exists( 'wp_get_attachment_image' )
