@@ -154,6 +154,14 @@ msgstr "طقسي"
 msgid "آیین‌های نوروزی"
 msgstr "طقوس النوروز"
 
+#: includes/topersia-g-zones.php
+msgid "اتوبوس بین‌شهری"
+msgstr "حافلة بين المدن"
+
+#: includes/topersia-g-zones.php
+msgid "اتوبوس تندرو"
+msgstr "حافلة سريعة"
+
 #: includes/topersia-g-map.php
 msgid "اثر طبیعی / ذخیره‌گاه"
 msgstr "أثر طبيعي / محمية"
@@ -669,6 +677,10 @@ msgstr "تاريخي"
 #: includes/topersia-g-map.php
 msgid "تالاب"
 msgstr "أرض رطبة"
+
+#: includes/topersia-g-zones.php
+msgid "تاکسی"
+msgstr "تاكسي"
 
 #: includes/topersia-g-map.php
 msgid "تاکسی اینترنتی"
@@ -2026,6 +2038,10 @@ msgstr "ماكسيم"
 msgid "متر"
 msgstr "متر"
 
+#: includes/topersia-g-zones.php
+msgid "مترو"
+msgstr "مترو"
+
 #: includes/topersia-g-map.php
 msgid "مترو دارد"
 msgstr "يوجد مترو"
@@ -2788,6 +2804,10 @@ msgstr "لا توجد أخبار عن هذا المكان بعد."
 msgid "هوای این روزها"
 msgstr "الطقس هذه الأيام"
 
+#: includes/topersia-g-zones.php
+msgid "هوایی"
+msgstr "جوي"
+
 #: includes/topersia-g-map.php
 msgid "هیرکانی"
 msgstr "هيركاني"
@@ -3113,6 +3133,10 @@ msgstr "رمز المطار"
 #: includes/topersia-g-map.php
 msgid "کشتی"
 msgstr "المصارعة"
+
+#: includes/topersia-g-zones.php
+msgid "کشتی و لنج"
+msgstr "عبارة وقارب"
 
 #: includes/topersia-g-zones.php
 msgid "کشور"
