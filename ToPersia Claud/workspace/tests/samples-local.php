@@ -114,19 +114,24 @@ $t( '۱۰۰٪ فیلدهای غیرفنی پر (ریپیتر: هر زیرفیل�
 $t( 'فیلدهای translate در en و ar پر', ! $trempty, implode( ' ', array_slice( $trempty, 0, 20 ) ) );
 $t( 'هر رابطه دست‌کم ۲ (یا سقف) — جز کمبود دلیل‌دار', ! $short, implode( ' · ', array_slice( $short, 0, 20 ) ) );
 $t( 'تصویر: سربرگ ۲۴۰۰×۱۲۰۰ WebP، ۶ گالری، alt سه‌زبانه', ! $img, implode( ' ', $img ) );
+/* دستهٔ 32 بند 5: ویدیوی نمونه پروندهٔ محلی است (پخش‌شدنی)، نه example.org */
+$vbad = array();
+foreach ( $rows as $type => $r ) {
+	foreach ( $r['ids'] as $l => $id ) {
+		$v = (string) get_post_meta( $id, 'video_sample', true );
+		$p = (string) parse_url( $v, PHP_URL_PATH );
+		$loc = $p ? wp_normalize_path( ABSPATH . ltrim( preg_replace( '#^/assets/#', 'wp-content/', $p ), '/' ) ) : '';
+		if ( false !== strpos( $v, 'example.org' ) || 'webm' !== pathinfo( $p, PATHINFO_EXTENSION ) || ! is_file( $loc ) ) { $vbad[] = $type . ':' . $l; }
+	}
+}
+$t( 'ویدیوی نمونه: پروندهٔ webm محلی که روی دیسک هست، نه example.org', ! $vbad, implode( ' ', array_slice( $vbad, 0, 10 ) ) );
 $t( '«در یک نگاه»: سه خروجی در بازه، هر زبان', ! $ai, implode( ' ', array_slice( $ai, 0, 20 ) ) );
 foreach ( $accepted as $a ) { echo '  · کمبود پذیرفته: ' . $a . "\n"; }
 
 /* صفحه‌ها */
-$dash = array(); $ld = array(); $bad = array(); $urls = array(); $knownhit = array();
-/* ایراد رندر شناخته — گزارش دستهٔ ۳۰ (docs/AUDIT-2026-10/SAMPLES.md)؛ پس از رفع از این فهرست برود، وگرنه «کهنه» افتاده می‌شود */
+$galbad = array(); $dash = array(); $ld = array(); $bad = array(); $urls = array(); $knownhit = array();
+/* دستهٔ 32: فهرست «ایراد رندر شناخته» خالی شد (گیت زبان برچسب گزینه را به زبان صفحه ترجمه می‌کند)؛ استثنای تازه نباید برگردد */
 $known = array();
-foreach ( array( 'en', 'ar' ) as $kl ) {
-	$known[ $kl . ':tp_calendar:list:calendar_systems:cs_system' ] = 'برچسب گزینهٔ ریپیتر (topersia_g_stat_option_label) فارسی می‌ماند و دروازهٔ زبان خالی‌اش می‌کند';
-	$known[ $kl . ':tp_transport:list:transport_modes:tm_mode' ]   = 'همان';
-}
-/* همان بررسی: در صفحهٔ ar هر متن به خط عربی (حتی عربی درست، زیرفیلد متنی بی گزینه) خالی می‌شود */
-$known['ar:tp_transport:list:booking_platforms:bp_name'] = 'topersia_g_stat_option_label هر حرف U+0600–06FF را در صفحهٔ غیرفارسی «فارسی» می‌شمارد — متن عربی ar هم خالی می‌شود';
 if ( $http ) {
 	foreach ( $rows as $type => $r ) {
 		foreach ( $r['ids'] as $l => $id ) {
@@ -142,6 +147,7 @@ if ( $http ) {
 				$id3 = $l . ':' . $type . ':' . $ck;
 				if ( isset( $known[ $id3 ] ) ) { $knownhit[ $id3 ] = 1; } else { $dash[] = $id3; }
 			}
+			if ( 'fa' !== $l && preg_match( '#alt="(?:Image|صورة) [0-9٠-٩]+"#u', $html ) ) { $galbad[] = $type . ':' . $l; }   /* دستهٔ 32 بند 3: پیوست ترجمهٔ همان زبان، نه «Image n» */
 			preg_match_all( '#<script type="application/ld\+json"[^>]*>(.*?)</script>#s', $html, $mm );
 			if ( ! $mm[1] ) { $ld[] = $type . ':' . $l . ' (هیچ)'; }
 			foreach ( $mm[1] as $j ) {
@@ -153,6 +159,7 @@ if ( $http ) {
 			}
 		}
 	}
+	$t( 'گالری en و ar شرح پیوستِ همان زبان را دارد، نه «Image n» (نگاشت wpml_object_id)', ! $galbad, implode( ' ', $galbad ) );
 	$t( 'هر صفحه ۲۰۰ با ۴ خانه', ! $bad, implode( ' ', $bad ) );
 	$t( 'هیچ «—» در ۴ خانه (هر نوع، هر زبان) — جز ایراد شناختهٔ دلیل‌دار', ! $dash, implode( ' ', $dash ) );
 	$stale = array_diff_key( $known, $knownhit );

@@ -5,8 +5,8 @@
  *   php wp-cli.phar --path=… --url=http://topersia.local eval-file scripts/tp-samples.php create
  *   … list
  *   … seen              ← «فیلد پر ولی دیده‌نشده» روی صفحهٔ fa هر نمونه (جدول md)
- *   … delete            ← فقط فهرست (dry-run): چه پاک می‌شود
- *   … delete confirm    ← پشتیبان بیرون از ریشهٔ وب (C:/wamp64/tp-backups/samples-*.json) ← پاک‌کردن کامل
+ *   … remove            ← پیش‌فرض dry-run: چه پاک می‌شود (نوشته، پیوست، رابطه از هر دو سو، trid، نمایهٔ جغرافیایی)
+ *   … remove confirm    ← پشتیبان بیرون از ریشهٔ وب (C:/wamp64/tp-backups/samples-*.json) ← پاک‌کردن کامل  (delete = همان)
  *
  * هر نمونه (پست فارسی، ترجمهٔ en و ar، و هر پیوست) فرادادهٔ `_tp_sample = 1` دارد و noindex (rank_math_robots).
  * عنوان نام واقعی یک مورد شناخته‌شده است، بی پیشوند «تست»؛ عدد و متن ساختگی‌اند و منبع هر نمونه «نمونه — حذف در
@@ -38,7 +38,7 @@ $NAMES = array(
 	'tp_water_body'       => array( array( 'تالاب انزلی', 'Anzali Lagoon', 'بحيرة أنزلي' ), array( 'دریاچهٔ ارومیه', 'Lake Urmia', 'بحيرة أرومية' ) ),
 	'tp_desert'           => array( array( 'کویر مرنجاب', 'Maranjab Desert', 'صحراء مرنجاب' ), array( 'دشت کویر', 'Dasht-e Kavir', 'دشت كوير' ) ),
 	'tp_forest_plain'     => array( array( 'جنگل ابر', 'Abr Forest', 'غابة أبر' ), array( 'دشت ارژن', 'Arzhan Plain', 'سهل أرجن' ) ),
-	'tp_border_crossing'  => array( array( 'مرز بازرگان', 'Bazargan Border Crossing', 'منفذ بازرگان' ), array( 'مرز آستارا', 'Astara Border Crossing', 'منفذ آستارا' ) ),
+	'tp_border_crossing'  => array( array( 'مرز بازرگان', 'Bazargan Border Crossing', 'منفذ بازارغان' ), array( 'مرز آستارا', 'Astara Border Crossing', 'منفذ آستارا' ) ),
 	'tp_monument'         => array( array( 'عالی‌قاپو', 'Ali Qapu', 'عالي قابو' ), array( 'برج آزادی', 'Azadi Tower', 'برج آزادي' ) ),
 	'tp_religious_site'   => array( array( 'مسجد شیخ لطف‌الله', 'Sheikh Lotfollah Mosque', 'مسجد الشيخ لطف الله' ), array( 'مسجد کبود تبریز', 'Blue Mosque of Tabriz', 'المسجد الأزرق في تبريز' ) ),
 	'tp_ancient_site'     => array( array( 'تخت سلیمان', 'Takht-e Soleyman', 'تخت سليمان' ), array( 'چغازنبیل', 'Chogha Zanbil', 'تشغا زنبيل' ) ),
@@ -98,32 +98,83 @@ if ( 'list' === $cmd ) {
 	return;
 }
 
-/* ══ delete ══ */
-if ( 'delete' === $cmd ) {
-	$ids = array_map( 'intval', $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_tp_sample'" ) );
-	$att = array_values( array_filter( $ids, function ( $i ) { return 'attachment' === get_post_type( $i ); } ) );
+/* ══ remove (delete = همان) — پاک‌کردن کامل نمونه‌ها؛ پیش‌فرض dry-run، با «confirm» اجرا ══
+ * نوشته‌ها و ترجمه‌ها، پیوست‌ها (و پرونده‌شان)، ردیف رابطه از هر دو سو، trid های WPML، نمایهٔ جغرافیایی و خلاصه‌های هوش
+ * مصنوعی. پیش از پاک‌کردن پشتیبان JSON بیرون ریشهٔ وب (TP_SAMPLES_BACKUP_DIR یا tp-backups). دستهٔ 32 بند 6 · P5-D457. */
+if ( in_array( $cmd, array( 'remove', 'delete' ), true ) ) {
+	$apply = $conf && ! in_array( '--dry-run', (array) $args, true );
+	$bdir  = getenv( 'TP_SAMPLES_BACKUP_DIR' ) ? trailingslashit( getenv( 'TP_SAMPLES_BACKUP_DIR' ) ) : $bak;
+	$flag  = array_map( 'intval', $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_tp_sample'" ) );
+	$ids   = $flag;
+	if ( $flag ) {   /* پیوست‌هایی که پدرشان نمونه است ولی نشان ندارند */
+		$ids = array_merge( $ids, array_map( 'intval', $wpdb->get_col( "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'attachment' AND post_parent IN (" . implode( ',', $flag ) . ')' ) ) );
+	}
+	$ids = array_values( array_unique( $ids ) );
+	if ( ! $ids ) { echo "نمونه‌ای نیست\n"; return; }
+	$in  = implode( ',', $ids );
+	$tbl = array( 'rel' => $wpdb->prefix . 'jet_rel_default', 'icl' => $wpdb->prefix . 'icl_translations', 'geo' => $wpdb->prefix . 'topersia_geo', 'ai' => $wpdb->prefix . 'topersia_ai_summaries' );
+	$type_of = $wpdb->get_results( "SELECT ID, post_type, post_title FROM {$wpdb->posts} WHERE ID IN ($in)", OBJECT_K );
+	$att = array_values( array_filter( $ids, function ( $i ) use ( $type_of ) { return isset( $type_of[ $i ] ) && 'attachment' === $type_of[ $i ]->post_type; } ) );
 	$pst = array_values( array_diff( $ids, $att ) );
-	echo 'پست: ' . count( $pst ) . ' · پیوست: ' . count( $att ) . "\n";
-	if ( ! $conf ) { echo "dry-run — با «delete confirm» پشتیبان و پاک‌کردن\n"; return; }
-	wp_mkdir_p( $bak );
-	$dump = array( 'at' => gmdate( 'c' ), 'posts' => array(), 'rel' => array() );
-	foreach ( $ids as $i ) {
-		$dump['posts'][ $i ] = array( 'post' => get_post( $i, ARRAY_A ), 'meta' => get_post_meta( $i ), 'file' => get_post_meta( $i, '_wp_attached_file', true ) );
+	$by  = array();
+	foreach ( $pst as $i ) { $by[ $type_of[ $i ]->post_type ] = ( $by[ $type_of[ $i ]->post_type ] ?? 0 ) + 1; }
+	$rels_rows = $wpdb->get_results( "SELECT * FROM {$tbl['rel']} WHERE parent_object_id IN ($in) OR child_object_id IN ($in)", ARRAY_A );
+	$real_touch = array(); $viol = array();
+	$active = function_exists( 'jet_engine' ) ? jet_engine()->relations->get_active_relations() : array();
+	foreach ( $rels_rows as $r ) {
+		$p = (int) $r['parent_object_id']; $c = (int) $r['child_object_id'];
+		$ps = in_array( $p, $ids, true ); $cs = in_array( $c, $ids, true );
+		if ( $ps && $cs ) { continue; }
+		$real = $ps ? $c : $p;
+		$real_touch[ $real ] = 1;
+		$ty = isset( $active[ (int) $r['rel_id'] ] ) ? (string) $active[ (int) $r['rel_id'] ]->get_args( 'type' ) : '?';
+		if ( 'many_to_many' !== $ty && ! ( 'one_to_many' === $ty && $cs ) ) { $viol[] = $r['rel_id'] . ':' . $p . '→' . $c . ' (' . $ty . ')'; }   /* P5-D456 */
 	}
-	if ( $ids ) {
-		$in = implode( ',', $ids );
-		$dump['rel'] = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}jet_rel_default WHERE parent_object_id IN ({$in}) OR child_object_id IN ({$in})", ARRAY_A );
-	}
-	$file = $bak . 'samples-' . gmdate( 'Ymd-His' ) . '.json';
+	$files = array(); $bytes = 0;
+	foreach ( $att as $i ) { $f = (string) get_post_meta( $i, '_wp_attached_file', true ); if ( '' !== $f ) { $files[ $f ] = 1; } }
+	$ud = wp_upload_dir();
+	foreach ( array_keys( $files ) as $f ) { $p = trailingslashit( $ud['basedir'] ) . $f; if ( is_file( $p ) ) { $bytes += filesize( $p ); } }
+	$icl = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$tbl['icl']} WHERE element_id IN ($in) AND element_type LIKE 'post\_%'" );
+	$geo = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$tbl['geo']} WHERE post_id IN ($in)" );
+	$aic = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$tbl['ai']} WHERE post_id IN ($in)" );
+	echo 'پست (همهٔ زبان‌ها): ' . count( $pst ) . ' · پیوست: ' . count( $att ) . ' (پروندهٔ یکتا ' . count( $files ) . '، ' . round( $bytes / 1048576, 1 ) . " MB)\n";
+	echo 'نوع‌ها: ' . count( $by ) . ' · ردیف رابطه: ' . count( $rels_rows ) . ' (با پست واقعی: ' . count( $real_touch ) . ' پست) · trid WPML: ' . $icl . ' · نمایهٔ جغرافیایی: ' . $geo . ' · خلاصهٔ هوش مصنوعی: ' . $aic . "\n";
+	if ( $viol ) { echo 'هشدار P5-D456 — یال تک‌والد/یک‌به‌یک با پست واقعی: ' . implode( ' ', array_slice( $viol, 0, 10 ) ) . "\n"; }
+	if ( ! $apply ) { echo "dry-run — چیزی پاک نشد؛ اجرا: remove confirm\n"; return; }
+
+	wp_mkdir_p( $bdir );
+	$dump = array( 'at' => gmdate( 'c' ), 'posts' => array(), 'rel' => $rels_rows, 'icl' => array(), 'geo' => array(), 'ai' => array(), 'files' => array_keys( $files ) );
+	foreach ( $ids as $i ) { $dump['posts'][ $i ] = array( 'post' => get_post( $i, ARRAY_A ), 'meta' => get_post_meta( $i ) ); }
+	$dump['icl'] = $wpdb->get_results( "SELECT * FROM {$tbl['icl']} WHERE element_id IN ($in) AND element_type LIKE 'post\_%'", ARRAY_A );
+	$dump['geo'] = $wpdb->get_results( "SELECT * FROM {$tbl['geo']} WHERE post_id IN ($in)", ARRAY_A );
+	$dump['ai']  = $wpdb->get_results( "SELECT * FROM {$tbl['ai']} WHERE post_id IN ($in)", ARRAY_A );
+	$file = $bdir . 'samples-' . gmdate( 'Ymd-His' ) . '.json';
 	if ( false === file_put_contents( $file, wp_json_encode( $dump, JSON_UNESCAPED_UNICODE ) ) ) { echo "پشتیبان نوشته نشد — توقف\n"; return; }
-	if ( $ids ) {
-		$wpdb->query( "DELETE FROM {$wpdb->prefix}jet_rel_default WHERE parent_object_id IN ({$in}) OR child_object_id IN ({$in})" );
-	}
+
+	$wpdb->query( "DELETE FROM {$tbl['rel']} WHERE parent_object_id IN ($in) OR child_object_id IN ($in)" );
+	$wpdb->query( "DELETE FROM {$tbl['ai']} WHERE post_id IN ($in)" );
+	$wpdb->query( "DELETE FROM {$tbl['geo']} WHERE post_id IN ($in)" );
 	foreach ( $pst as $i ) { wp_delete_post( $i, true ); }
 	foreach ( $att as $i ) {
 		$shared = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND meta_value = %s AND post_id <> %d", get_post_meta( $i, '_wp_attached_file', true ), $i ) );
 		if ( $shared ) { wp_delete_post( $i, true ); } else { wp_delete_attachment( $i, true ); }   /* ترجمهٔ پیوست همان پرونده را دارد */
 	}
+	$wpdb->query( "DELETE FROM {$tbl['icl']} WHERE element_id IN ($in) AND element_type LIKE 'post\_%'" );   /* trid بازمانده */
+	foreach ( array_keys( $real_touch ) as $rid ) { if ( function_exists( 'topersia_geo_index_put' ) && get_post( $rid ) ) { topersia_geo_index_put( $rid ); } }
+	/* کارهای صفِ خودِ نمونه‌ها (گالری تجمیعی) — نمونه رفته، کارش بی‌هدف است */
+	if ( function_exists( 'as_unschedule_all_actions' ) ) { foreach ( $pst as $i ) { as_unschedule_all_actions( 'topersia_gallery_agg_rebuild', array( 'post' => $i ), defined( 'TOPERSIA_QUEUE_GROUP' ) ? TOPERSIA_QUEUE_GROUP : '' ); } }
+	/* مشتق‌های پست واقعیِ درگیر: گالری تجمیعی (بازسازی همگام از شهر تا کشور، و کارهای صفِ همان پست‌ها برداشته) و هش محتوا (به رابطه‌ها وابسته است) */
+	if ( function_exists( 'topersia_g_gallery_agg_affected' ) ) {
+		$aff = array();
+		foreach ( array_keys( $real_touch ) as $rid ) { if ( get_post( $rid ) ) { foreach ( topersia_g_gallery_agg_affected( $rid ) as $a ) { $aff[ (int) $a ] = 1; } } }
+		$aff = array_keys( $aff );
+		usort( $aff, function ( $x, $y ) { return topersia_g_gallery_agg_rank( $x ) <=> topersia_g_gallery_agg_rank( $y ); } );
+		foreach ( $aff as $a ) { topersia_g_gallery_agg_rebuild( $a, false ); }
+		if ( function_exists( 'as_unschedule_all_actions' ) ) { foreach ( $aff as $a ) { as_unschedule_all_actions( 'topersia_gallery_agg_rebuild', array( 'post' => $a ), defined( 'TOPERSIA_QUEUE_GROUP' ) ? TOPERSIA_QUEUE_GROUP : '' ); } }
+	}
+	if ( function_exists( 'topersia_content_hash' ) ) { foreach ( array_keys( $real_touch ) as $rid ) { if ( get_post( $rid ) ) { topersia_content_hash( $rid, true ); } } }
+	if ( function_exists( 'topersia_geo_index_stamp' ) ) { topersia_geo_index_stamp( true ); }
+	clean_post_cache( 0 );
 	echo "پاک شد · پشتیبان: {$file}\n";
 	return;
 }
@@ -245,6 +296,24 @@ $image = function ( $w, $h, $label, $sub, $seed, $alt, $parent ) use ( $font ) {
 	return $aid;
 };
 
+/* ویدیوی نمونه: یک پروندهٔ webm کوچک محلی (scripts/samples/sample-video.webm)، یک پیوند مشترک برای همهٔ نمونه‌ها — دستهٔ 32 بند 5 */
+$video = function () {
+	static $url = null;
+	if ( null !== $url ) { return $url; }
+	$have = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => array( array( 'key' => '_tp_sample_video', 'value' => '1' ) ) ) );
+	if ( $have ) { return $url = (string) wp_get_attachment_url( $have[0] ); }
+	$src = __DIR__ . '/samples/sample-video.webm';
+	if ( ! is_file( $src ) ) { return $url = ''; }
+	$up   = wp_upload_dir();
+	$path = trailingslashit( $up['path'] ) . 'tp-sample-video.webm';
+	copy( $src, $path );
+	$aid = wp_insert_attachment( array( 'post_mime_type' => 'video/webm', 'post_title' => 'Sample video', 'post_status' => 'inherit', 'guid' => trailingslashit( $up['url'] ) . 'tp-sample-video.webm' ), $path );
+	update_attached_file( $aid, $path );
+	update_post_meta( $aid, '_tp_sample', 1 );
+	update_post_meta( $aid, '_tp_sample_video', 1 );
+	return $url = (string) wp_get_attachment_url( $aid );
+};
+
 /* مقدار ساختگی یک فیلد (یا زیرفیلد) از تعریف اسکیمای بسته */
 $isarr = array();   /* چک‌باکس جت‌انجین: is_array ← فهرست ساده، وگرنه value => 'true' */
 foreach ( (array) get_option( 'jet_engine_meta_boxes', array() ) as $box ) { foreach ( (array) ( $box['meta_fields'] ?? array() ) as $f ) { if ( 'checkbox' === ( $f['type'] ?? '' ) ) { $isarr[ $f['name'] ] = ! empty( $f['is_array'] ); } } }
@@ -314,6 +383,10 @@ foreach ( $types as $type ) {
 	$idx++;
 	if ( isset( $have[ $type ]['fa'] ) ) {   /* موجود: فقط فیلد غیرفنیِ خالی پر می‌شود (اسکیمای تازه‌تر) */
 		$pid = $made[ $type ] = $have[ $type ]['fa'];
+		foreach ( array( $pid, $have[ $type ]['en'] ?? 0, $have[ $type ]['ar'] ?? 0 ) as $vp ) {   /* ویدیوی نمونهٔ پیشین (example.org) ← پروندهٔ محلی؛ دستهٔ 32 بند 5 */
+			if ( $vp && false !== strpos( (string) get_post_meta( $vp, 'video_sample', true ), 'example.org' ) && $video() ) { update_post_meta( $vp, 'video_sample', $video() ); echo "~ {$type}.video_sample
+"; }
+		}
 		foreach ( topersia_pack_schema( $type )['fields'] as $key => $d ) {
 			if ( in_array( $key, array( 'external_reference_uri', 'name_fa', 'name_en', 'name_ar', 'meta_title', 'route_stops_order' ), true ) || in_array( $key, (array) ( topersia_pack_schema( $type )['excluded'] ?? array() ), true ) ) { continue; }
 			$cur = get_post_meta( $pid, $key, true );
@@ -354,7 +427,7 @@ foreach ( $types as $type ) {
 	$gal = array();
 	for ( $g = 1; $g <= 6; $g++ ) { $gal[] = $image( 1600, 1000, $nm[1] . ' ' . $g, str_replace( 'tp_', '', $type ), $idx * 10 + $g, $alt( $g ), $pid ); }
 	update_post_meta( $pid, 'featured_image_gallery', implode( ',', $gal ) );
-	update_post_meta( $pid, 'video_sample', 'https://example.org/sample/video.mp4' );
+	update_post_meta( $pid, 'video_sample', $video() );
 	update_post_meta( $pid, 'audio_narration', array( 'item-0' => array( 'audio_title' => $TXT['fa'][0], 'audio_source_type' => 'external_url', 'audio_external_url' => 'https://example.org/sample/audio.mp3', 'audio_duration' => '03:20', 'audio_transcript' => $TXT['fa'][1], 'audio_row_status' => 'active' ) ) );
 	wp_update_post( array( 'ID' => $pid ) );   /* entity_uid و قلاب‌های ذخیره */
 	if ( 'tp_route' === $type ) { update_post_meta( $pid, 'route_stop_notes', $value( 'route_stop_notes', $schema['fields']['route_stop_notes'], 'fa', $idx, $type ) ); }   /* هسته با ذخیره یادداشتِ توقفِ بیرون از ترتیب را بازنشسته می‌کند */
