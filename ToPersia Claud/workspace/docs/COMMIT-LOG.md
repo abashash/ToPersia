@@ -190,3 +190,5 @@
 | 181 | 2026-10-28 | `feat` | `f1f29c1d` |  | دستهٔ 33: P5-D454 «پاسخ کوتاه» روادید و ارز — سه زبان، موبایل، دسترس‌پذیری | ✅ |
 | 182 | 2026-10-28 | `chore` | `89b16c5d` |  | mirror geo/ — دستهٔ 33. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · quick-local · wpml-class · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت ≤1) · کاناری سالم (پست و یال) | ✅ |
 | 183 | 2026-10-28 | `docs` | `b2b29dab` |  | دستهٔ 33-ب: ممیزی فیلد و رابطهٔ دیده‌نشده (INVISIBLE-FIELDS.md و csv) — فقط‌خواندنی؛ گیت‌ها: preflight · assert | ✅ |
+| 184 | 2026-10-28 | `feat` | `e4bb6dc2` |  | دستهٔ 34: P5-D458 · D464 · D467 — هیرو کوتاه، چهار خانهٔ همیشه پر (۴۱ نمونه بی «—»؛ در دادهٔ واقعی ۶۹ از ۱۸۳ پست هنوز دست‌کم یک «—» دارند چون فیلد کوتاهِ دیگری ندارند)، بی تکرار؛ غذا · بنا · شهر · استان · کشور | ✅ |
+| 185 | 2026-10-28 | `chore` | `0b3fc53f` |  | mirror geo/ — دستهٔ 34. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · dedupe-local · quick-local · wpml-class · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت ≤۲) · کاناری سالم | ✅ |
