@@ -465,7 +465,7 @@ $relmap  = topersia_g_relmap();
 $TP_ORDER = array(
 	'main' => array( 'tp-quick', 'tp-ai', 'tp-overview', 'tp-gallery', 'tp-attractions', 'tp-places', 'tp-provinces', 'tp-districts', 'tp-programmes', 'tp-prog-', 'tp-culture', 'tp-news', 'tp-faq', 'tp-reviews' ),
 	/* پنل چپ: ترتیب DOM = ترتیب موبایل (P5-D347)؛ «مرکزیت» باکس جدا نیست (P5-D348) */
-	'rail' => array( 'tp-actions', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-routes', 'tp-border', 'tp-subranges', 'tp-audio', 'tp-sources' ),
+	'rail' => array( 'tp-actions', 'tp-map', 'tp-routing', 'tp-route-cities', 'tp-weather', 'tp-aqi', 'tp-season', 'tp-geo', 'tp-neighbors', 'tp-badges', 'tp-nature', 'tp-ancient', 'tp-villages', 'tp-practical', 'tp-routes', 'tp-districts', 'tp-border', 'tp-subranges', 'tp-audio', 'tp-sources' ),
 );
 /** P5-D395 — ایرادهای کارت آمار یک نوع: شمار، کلید و ترتیب STAT_CELLS، data-tp-n، و «—» فقط با aria-label «نامشخص». */
 function tp_at_four_bad( $type, $html ) {
@@ -476,7 +476,15 @@ function tp_at_four_bad( $type, $html ) {
 	$want = array_column( $cells[ $type ], 'key' );
 	$bad  = array();
 	preg_match_all( '~<div class="tp-stat( tp-stat--none)?" role="listitem" data-tp-k="([^"]+)">(.*?)</div>~su', $html, $m );
-	if ( $want !== $m[2] ) {
+	/* دستهٔ 34 · P5-D464: خانهٔ اصلیِ بی‌مقدار جایش را به نامزدی از همان پست می‌دهد (سربرگ همیشه پر)؛ جای خانهٔ پر و ترتیب ثابت می‌ماند.
+	   هر جا کلید جای خودش نیست باید خانهٔ دارای مقدارِ نامزد باشد (نه کلید اصلیِ جابه‌جا، نه «—») */
+	$pos_ok = 4 === count( $m[2] );
+	foreach ( $m[2] as $i => $k ) {
+		if ( ! isset( $want[ $i ] ) || ( $k !== $want[ $i ] && ( in_array( $k, $want, true ) || ' tp-stat--none' === $m[1][ $i ] ) ) ) {
+			$pos_ok = false;
+		}
+	}
+	if ( ! $pos_ok ) {
 		$bad[] = $type . ': خانه‌ها ' . implode( ',', $m[2] ) . ' ← انتظار ' . implode( ',', $want );
 	}
 	if ( 4 !== count( $want ) || false === strpos( $html, 'data-tp-n="4"' ) || 4 !== substr_count( $html, 'role="listitem"' ) ) {
@@ -519,7 +527,7 @@ function tp_at_order_bad( $html ) {
 			}
 
 			if ( $pos < $last ) {
-				$bad[] = $name . ': ' . $s[1] . ' پیش از جایگاهش';
+				$bad[] = $name . ': ' . $s[1] . ' پیش از جایگاهش (ترتیب واقعی: ' . implode( ',', array_map( function ( $q ) { return $q[1]; }, $secs ) ) . ')';
 			}
 
 			$last = max( $last, $pos );

@@ -909,6 +909,8 @@ return array(
 	'تاکسی' => array( 'en' => 'Taxi', 'ar' => 'تاكسي' ),
 	'کشتی و لنج' => array( 'en' => 'Ferry and dhow', 'ar' => 'عبارة وقارب' ),
 	/* ── «پاسخ کوتاه» روادید و ارز (دستهٔ 33 · P5-D454) ── */
+	'ساعت بازدید' => array( 'en' => 'Opening hours', 'ar' => 'ساعات الزيارة' ),
+	'نام‌های دیگر' => array( 'en' => 'Other names', 'ar' => 'أسماء أخرى' ),
 	'پاسخ کوتاه' => array( 'en' => 'Quick answers', 'ar' => 'إجابات سريعة' ),
 	'روادید لازم است؟' => array( 'en' => 'Do I need a visa?', 'ar' => 'هل أحتاج إلى تأشيرة؟' ),
 	'چند روز؟' => array( 'en' => 'How many days?', 'ar' => 'كم يومًا؟' ),

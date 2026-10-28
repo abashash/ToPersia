@@ -325,19 +325,34 @@ $GLOBALS['tp_ltr'] = true;
 $p440_ltr = r( 20, 'tp_page' );
 unset( $GLOBALS['tp_ltr'] );
 
-t( 'نام‌ها: راست‌به‌چپ «، » — hero__alt و tp-altnames، هر سطر یا «·» نام جدا  ۱٫۶',
+/* دستهٔ 34 · P5-D458: هیرو فقط یک خط کوتاه (تا TOPERSIA_HERO_LINE_MAX) دارد؛ نام‌های بیشتر در آغاز «درباره» (tp-names) */
+$ov440     = r( 20, 'tp_overview' );
+$ov440_ltr = ( function () { $GLOBALS['tp_ltr'] = true; $h = r( 20, 'tp_overview' ); unset( $GLOBALS['tp_ltr'] ); return $h; } )();
+
+t( 'نام‌ها: راست‌به‌چپ «، » — خط هیرو (hero__alt) نام‌های رسمی تا سقف؛ باقی در «درباره» با «، »؛ هیچ tp-altnames در هیرو  ۱٫۶ · P5-D458',
 	false !== strpos( $p440, '<p class="tp-hero__alt"><span lang="en" dir="ltr">Isfahan Province</span>، <em lang="ar">محافظة أصفهان</em></p>' )
-	&& false !== strpos( $p440, '<p class="tp-altnames">ایالت اصفهان، سپاهان، نصف جهان</p>' ) );
+	&& false === strpos( $p440, 'tp-altnames' )
+	&& false !== strpos( $ov440, '<p class="tp-names"><span class="tp-names__k">نام‌های دیگر:</span> <span>ایالت اصفهان</span>، <span>سپاهان</span>، <span>نصف جهان</span></p>' ) );
 
 t( 'نام‌ها: چپ‌به‌راست «, » — از جهت صفحه، نه زبان ثابت  ۱٫۶',
-	false !== strpos( $p440_ltr, '</span>, <em lang="ar">' ) && false !== strpos( $p440_ltr, '<p class="tp-altnames">ایالت اصفهان, سپاهان, نصف جهان</p>' ) );
+	false !== strpos( $p440_ltr, '</span>, <em lang="ar">' ) && false !== strpos( $ov440_ltr, '<span>ایالت اصفهان</span>, <span>سپاهان</span>, <span>نصف جهان</span>' ) );
 
 $GLOBALS['tp_meta'][20]['alternative_names'] = "اِصفَهان\nاِسپَهان";
-$alt440 = r( 20, 'tp_hero' );
+$alt440 = r( 20, 'tp_overview' );
 $GLOBALS['tp_meta'][20]['alternative_names'] = 'سپاهان · نصف جهان';
-t( 'نام‌ها: هر سطر alternative_names یک نام — «اِصفَهان، اِسپَهان»  ۱٫۶',
-	false !== strpos( $alt440, '<p class="tp-altnames">ایالت اصفهان، اِصفَهان، اِسپَهان</p>' ) );
+t( 'نام‌ها: هر سطر alternative_names یک نام — «اِصفَهان، اِسپَهان» (در «درباره»)  ۱٫۶',
+	false !== strpos( $alt440, '<span>ایالت اصفهان</span>، <span>اِصفَهان</span>، <span>اِسپَهان</span></p>' ) );
 
+/* هیرو: فقط برچسب نوع، عنوان و یک خط کوتاه — هیچ خلاصه (lead) یا نام محلی؛ هر نام تا سقف */
+$hero440 = r( 20, 'tp_hero' );
+$hero_text = function ( $h ) { return preg_match( '#<p class="tp-hero__alt">(.*?)</p>#su', $h, $m ) ? trim( wp_strip_all_tags( $m[1] ) ) : ''; };
+$hero_claim = function ( $h ) use ( $hero_text ) {
+	return 1 === substr_count( $h, '<h1>' ) && 1 === substr_count( $h, 'class="tp-eyebrow"' ) && substr_count( $h, '<p class="tp-hero__alt' ) <= 1
+		&& false === strpos( $h, 'tp-hero__lead' ) && false === strpos( $h, 'tp-altnames' )
+		&& defined( 'TOPERSIA_HERO_LINE_MAX' ) && 40 === TOPERSIA_HERO_LINE_MAX && mb_strlen( $hero_text( $h ) ) <= TOPERSIA_HERO_LINE_MAX + 3;
+};
+t( 'هیرو (P5-D458): فقط eyebrow، h1 و حداکثر یک خط هم‌اندازهٔ کاشی (≤ TOPERSIA_HERO_LINE_MAX نویسه)؛ نه lead، نه tp-altnames — جهش: خلاصه به هیرو برگردد می‌افتد',
+	$hero_claim( $hero440 ) && ! $hero_claim( str_replace( '</div></div></header>', '<p class="tp-hero__lead">خلاصهٔ بلند که نباید در هیرو باشد.</p></div></div></header>', $hero440 ) ) );
 /* ══ ۱٫۷ — دعوت هوش مصنوعی ══════════════════════════════════════════════ */
 
 /* ۴٫۴٫۱: دعوت مهمان یک دکمۀ «ثبت‌نام / ورود» در ردیف دکمه‌ها شد و «ورود» متنی رفت — P5-D267، در assert-441.php */

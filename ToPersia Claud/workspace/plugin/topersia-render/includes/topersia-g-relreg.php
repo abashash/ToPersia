@@ -267,6 +267,11 @@ if ( ! function_exists( 'topersia_g_geo_parent_tiles' ) ) {
 				$kind = __( 'مرکز استان', 'topersia' );
 			}
 
+			/* همین والد در یکی از خانه‌های سربرگ است ← در کاشی‌های چپ تکرار نمی‌شود.  P5-D464 */
+			if ( ! empty( topersia_g_stat_claims( $pid )[ 'parent:' . substr( (string) get_post_type( $id ), 3 ) ] ) ) {
+				continue;
+			}
+
 			$tiles[] = array( 'label' => $kind, 'name' => topersia_g_name( $id ), 'url' => topersia_g_public_url( $id ) );
 		}
 
@@ -309,7 +314,7 @@ if ( ! function_exists( 'topersia_g_geo_related_tiles' ) ) {
 				$view = topersia_g_view_id( $other );
 				$url  = topersia_g_public_url( $view );
 
-				if ( '' === $url || isset( $found[ $view ] ) ) {
+				if ( '' === $url || isset( $found[ $view ] ) || ( 'tp_province' === $side['other'] && ! empty( topersia_g_stat_claims( $pid )['origin'] ) ) ) {   /* خانۀ «خاستگاه» سربرگ استان‌ها را دارد (P5-D464) */
 					continue;
 				}
 
@@ -351,7 +356,7 @@ if ( ! function_exists( 'topersia_g_geo_center_tiles' ) ) {
 
 			$cap = absint( topersia_g_capital_id( $pid ) );
 
-			if ( $cap ) {
+			if ( $cap && empty( topersia_g_stat_claims( $pid )['capital'] ) ) {   /* خانۀ «مرکز» سربرگ همین است — تکرار نه (P5-D464) */
 				$view    = topersia_g_view_id( $cap );
 				$tiles[] = array( 'label' => __( 'مرکز استان', 'topersia' ), 'name' => topersia_g_name( $view ), 'url' => topersia_g_public_url( $view ) );
 			}

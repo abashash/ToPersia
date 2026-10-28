@@ -966,6 +966,10 @@ html body .tp-page .tp-visit__note{display:block;font-size:calc(.72 * var(--tp-r
 html body .tp-page .tp-hours{border-collapse:collapse;inline-size:100%;font-size:calc(.82 * var(--tp-rem))}
 html body .tp-page .tp-hours th,html body .tp-page .tp-hours td{padding:3px 0;text-align:start;font-weight:400;color:var(--tp-text);border-block-end:1px solid var(--tp-tile-border)}
 html body .tp-page .tp-hours th{font-weight:700;inline-size:45%}
+/* جدول دوستونۀ ساعت و بلیت (P5-D458 · دستۀ 34): ستون‌ها ثابت، متن بلند می‌شکند، بی سرریز افقی در ۳۹۰px و ستون ۳۴۰px */
+html body .tp-page .tp-hours{table-layout:fixed;max-inline-size:100%}
+html body .tp-page .tp-hours th,html body .tp-page .tp-hours td{overflow-wrap:anywhere;vertical-align:top}
+html body .tp-page .tp-hours td{inline-size:55%}
 html body .tp-page .tp-open{display:inline-block;margin-block-end:6px;padding:2px 10px;border-radius:999px;font-size:calc(.72 * var(--tp-rem));font-weight:700;border:1px solid currentColor}
 html body .tp-page .tp-open[hidden]{display:none}
 html body .tp-page .tp-open--yes{color:var(--tp-primary-text)}
@@ -1544,6 +1548,11 @@ html .tp-page .tp-map-styles button[aria-pressed="true"]:hover{background:var(--
 html .tp-page .tp-stat{min-width:0}
 html .tp-page .tp-stat .tp-stat__v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 html .tp-page .tp-stat--none .tp-stat__v{color:var(--tp-text-2);font-weight:700}
+
+/* ─── آغاز «درباره» (P5-D458 · دستۀ 34): خلاصۀ کوتاه و نام‌های دیگر که از هیرو آمدند؛ متن زیر ۱۴px از --tp-text (P5-D184) ─── */
+html .tp-page .tp-longform .tp-lead{margin:0 0 calc(.8 * var(--tp-rem));font-size:calc(1.02 * var(--tp-rem));font-weight:600;line-height:1.85;color:var(--tp-text-strong)}
+html .tp-page .tp-longform .tp-names{margin:0 0 calc(.9 * var(--tp-rem));font-size:calc(.9 * var(--tp-rem));line-height:1.7;color:var(--tp-text)}
+html .tp-page .tp-names__k{font-weight:700}
 
 /* ─── «پاسخ کوتاه» روادید و ارز (P5-D454 · دستۀ 33): سه کاشی پرسش ← پاسخ؛ dl/dt/dd معنایی، فقط توکن.
    متن زیر ۱۴px از --tp-text (P5-D184)؛ پاسخ بزرگ و پررنگ. موبایل: یک ستون. ─── */

@@ -28,7 +28,14 @@ foreach ( $cells as $type => $list ) {
 		$html = do_shortcode( '[tp_stats id="' . $pid . '"]' );
 		preg_match_all( '~<div class="tp-stat( tp-stat--none)?" role="listitem" data-tp-k="([^"]+)">(.*?)</div>~su', $html, $m );
 		$n++;
-		if ( $want !== $m[2] || false === strpos( $html, 'data-tp-n="4"' ) ) {
+		/* دستهٔ 34 · P5-D464: خانهٔ اصلیِ بی‌مقدار جایش را به نامزدِ دارای مقدار می‌دهد؛ جای خانه‌های پر و ترتیب ثابت؛ کلید اصلی جابه‌جا یا «—» وسط نامزد نمی‌آید */
+		$pos_ok = 4 === count( $m[2] );
+		foreach ( $m[2] as $i => $k ) {
+			if ( ! isset( $want[ $i ] ) || ( $k !== $want[ $i ] && ( in_array( $k, $want, true ) || ' tp-stat--none' === $m[1][ $i ] ) ) ) {
+				$pos_ok = false;
+			}
+		}
+		if ( ! $pos_ok || false === strpos( $html, 'data-tp-n="4"' ) ) {
 			$bad[] = $type . '#' . $pid . ' ' . implode( ',', $m[2] );
 		}
 		foreach ( $m[1] as $i => $none ) {

@@ -25,7 +25,7 @@ tp441_mut( 'تاریخ رویداد E1 · E3 · E5: سطر «بازه برگزا
 		return false !== strpos( $x, "array( 'tp_festival', 'tp_sports_event', 'tp_religious_event' ), true ) ) {\n\t\t\treturn '';" )
 			&& false !== strpos( $x, "topersia_g_date_html( topersia_g_raw( \$pid, 'event_start_date' ) )" ) && false !== strpos( $x, "topersia_g_date_html( topersia_g_raw( \$pid, 'event_end_date' ) )" )
 			&& false !== strpos( $x, "if ( '' === \$from && '' === \$to ) {\n\t\t\treturn '';" ) && false !== strpos( $x, "esc_html__( 'از %1\$s تا %2\$s', 'topersia' )" ) && false !== strpos( $x, "esc_html__( 'تا %s', 'topersia' )" )
-			&& false !== strpos( $x, '<time datetime="\' . esc_attr( $iso )' ) && false !== strpos( $x, '$out .= topersia_g_event_when( $pid );' );
+			&& false !== strpos( $x, '<time datetime="\' . esc_attr( $iso )' ) && false !== strpos( $x, '$line  = topersia_g_event_when( $pid );' );
 	},
 	$zn2m, str_replace( "if ( '' === \$from && '' === \$to ) {\n\t\t\treturn '';", "if ( false ) {\n\t\t\treturn '';", $zn2m ) );
 

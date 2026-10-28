@@ -11,6 +11,9 @@ $fail = 0;
 /* دامنه‌ای که هر قاعدهٔ g-zones.css زیرش می‌نشیند — P5-D201 */
 const TP_SCOPE = '.tp-page';
 
+/* دستهٔ 34 · P5-D464: آزمون‌های سازوکار کاشی و کارت جغرافیایی (پیش از assert-34) بی تکرارزدایی سربرگ؛ assert-34 فیلتر را برمی‌دارد */
+$GLOBALS['tp_filters']['topersia_g_stat_claims'][] = function () { return array(); };
+
 function t( $label, $ok, $note = '' ) {
 	global $pass, $fail;
 	if ( $ok ) { $pass ++; printf( "  ✅ %s\n", $label ); }
@@ -128,7 +131,7 @@ t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', fal
 /* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است؛ kind=date تاریخ رویداد E1 · E3 · E5 (P5-D357) است، نه فیلد G */
 $g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ) && 'visit' !== $f['zone'] && empty( $f['b29'] ); } );   /* P5-D450 و فیلدهای بازگشتهٔ دستهٔ ۲۹ جدا سنجیده می‌شوند */
 $map_count = count( $g_map );
-t( 'نقشه: دقیقاً ۵۷ فیلد G (بیرون از ناحیۀ stat)', 57 === $map_count, "شمار: {$map_count}" );
+t( 'نقشه: دقیقاً ۵۸ فیلد G (بیرون از ناحیۀ stat) — ۵۷ + ritual_context_reference (دستهٔ 34 · P5-D467: از سربرگ به «درباره»)', 58 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
 foreach ( $g_map as $f ) { if ( 'choice' === $f['kind'] ) { $choice ++; } }
 t( 'نقشه: سیزده فیلد choice در G', 13 === $choice, "شمار: {$choice}" );
@@ -1492,18 +1495,22 @@ t( 'نوار کنش: سه کنش با آیکون، بعد منبع ترجیحی�
 $ov20      = preg_match( '#<section id="tp-overview".*?</section>#su', $p20, $ovm ) ? $ovm[0] : '';
 /* ۴٫۴٫۱: بدنۀ «درباره» تراز دوطرفه است — کلاس tp-justify روی خودِ article.  P5-D270 */
 $ov20_body = preg_match( '#<article class="tp-longform tp-justify"[^>]*>(.*?)</article>#su', $ov20, $ovb ) ? $ovb[1] : '';
+/* دستهٔ 34 · P5-D458: آغاز بخش خلاصهٔ کوتاه (tp-lead) و نام‌های دیگر (tp-names) است؛ «متن اصلی» پس از آن */
+$ov20_intro = preg_match( '#^(?:<p class="tp-lead">.*?</p>)?(?:<p class="tp-names">.*?</p>)?#su', $ov20_body, $ovi ) ? $ovi[0] : '';
+$ov20_main  = substr( $ov20_body, strlen( $ov20_intro ) );
 
 t( 'درباره: متن از overview_text — کامل، با سرفصل‌های خودش یک پله پایین؛ بعد فیلدهای details  P5-D230',
-	0 === strpos( $ov20_body, '<p>استان اصفهان در <strong>مرکز فلات ایران</strong> است.</p><h3>جغرافیا و تقسیمات</h3><p>مرکز استان شهر اصفهان است.</p><ul><li>کاشان</li><li>نطنز</li></ul>' )
-	&& (bool) preg_match( "#</ul><h3>محدودۀ جغرافیایی</h3><p>از شمال#u", $ov20_body ),
+	0 === strpos( $ov20_main, '<p>استان اصفهان در <strong>مرکز فلات ایران</strong> است.</p><h3>جغرافیا و تقسیمات</h3><p>مرکز استان شهر اصفهان است.</p><ul><li>کاشان</li><li>نطنز</li></ul>' )
+	&& (bool) preg_match( "#</ul><h3>محدودۀ جغرافیایی</h3><p>از شمال#u", $ov20_main ),
 	mb_substr( strip_tags( $ov20_body ), 0, 60 ) );
 
-t( 'درباره: short_summary دیگر در این بخش نیست  P5-D230',
-	'' !== $ov20 && false === strpos( $ov20, 'سومین استان پهناور' ) && false === strpos( $ov20, 'itemprop="description"' ) );
+$ov_claim34 = function ( $x ) { return '' !== $x[0] && 0 === strpos( $x[1], '<p class="tp-lead">سومین استان پهناور' ) && false === strpos( $x[0], 'itemprop="description"' ) && false === strpos( $x[2], 'tp-hero__lead' ); };
+t( 'درباره: short_summary آغاز بخش است (p.tp-lead) — از هیرو آمد؛ بی itemprop؛ و هیرو دیگر lead ندارد — جهش: lead در هیرو می‌افتد  P5-D458',
+	$ov_claim34( array( $ov20, $ov20_body, r( 20, 'tp_hero' ) ) ) && ! $ov_claim34( array( $ov20, $ov20_main, r( 20, 'tp_hero' ) . '<p class="tp-hero__lead">x</p>' ) ) );
 
 t( 'درباره: هیچ class و id و style از متنِ چسبانده نمی‌ماند؛ سرفصل h2 متن در بخشِ h2 نمی‌نشیند  P5-D230 · P5-D180',
-	'' !== $ov20_body && ! preg_match( '#\s(class|id|style)=#', $ov20_body ) && false === strpos( $ov20_body, '<h2' )
-	&& false === strpos( $ov20_body, '<div' ) );
+	'' !== $ov20_main && ! preg_match( '#\s(class|id|style)=#', $ov20_main ) && false === strpos( $ov20_main, '<h2' )
+	&& false === strpos( $ov20_main, '<div' ) );
 
 $ov_keep = $GLOBALS['tp_meta'][20]['overview_text'];
 $ov_long = str_repeat( 'متنِ بلند بی‌کوتاه‌سازی. ', 900 );
@@ -1522,11 +1529,14 @@ t( 'درباره: script برداشته می‌شود و پیوند javascript �
 $ov30_details = r( 30, 'tp_overview' );
 $ta_keep      = $GLOBALS['tp_meta'][30]['transport_access'];
 unset( $GLOBALS['tp_meta'][30]['transport_access'] );
+$ov30_keep = array();
+foreach ( array( 'short_summary', 'name_local', 'alternative_names', 'name_fa', 'name_en', 'name_ar', 'official_name_fa', 'official_name_en', 'official_name_ar' ) as $ov30_k ) { if ( isset( $GLOBALS['tp_meta'][30][ $ov30_k ] ) ) { $ov30_keep[ $ov30_k ] = $GLOBALS['tp_meta'][30][ $ov30_k ]; unset( $GLOBALS['tp_meta'][30][ $ov30_k ] ); } }   /* دستهٔ 34: خلاصه و نام‌ها آغاز بخش‌اند؛ «هیچ‌کدام» یعنی همه نیز نباشند */
 $ov30_none    = r( 30, 'tp_overview' );
+foreach ( $ov30_keep as $ov30_k => $ov30_v ) { $GLOBALS['tp_meta'][30][ $ov30_k ] = $ov30_v; }
 $GLOBALS['tp_meta'][30]['transport_access'] = $ta_keep;
 
 t( 'درباره: بی‌متن اصلی، فقط details اگر پر است؛ هیچ‌کدام — بخش نمی‌آید  P5-D230 · P5-D192',
-	(bool) preg_match( '#<article class="tp-longform tp-justify"[^>]*><h3>دسترسی و حمل‌ونقل</h3><p>فرودگاه#u', $ov30_details )
+	(bool) preg_match( '#<article class="tp-longform tp-justify"[^>]*>(?:<p class="tp-lead">.*?</p>)?(?:<p class="tp-names">.*?</p>)?<h3>دسترسی و حمل‌ونقل</h3><p>فرودگاه#u', $ov30_details )
 	&& '' === $ov30_none );
 
 t( 'درباره: هیچ ::first-letter در شیوه‌نامه — حرفِ اولِ بزرگ رفت  P5-D230',
@@ -2294,6 +2304,7 @@ require __DIR__ . '/assert-2l.php';
 require __DIR__ . '/assert-2m.php';
 require __DIR__ . '/assert-2n.php';
 require __DIR__ . '/assert-33.php';
+require __DIR__ . '/assert-34.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────
@@ -2399,7 +2410,7 @@ t( 'اطلاعات سفر (دستهٔ ۲۹): بلوک «بازدید» در کا
 	&& false === strpos( $b29, 'نامعلوم' ) && false === strpos( $b29, '>عکاسی<' ) && false === strpos( $b29, 'محل عبادت فعال' ) && false === strpos( $b29, '—<' ),
 	$b29 );
 t( 'اطلاعات سفر (دستهٔ ۲۹): بهای بلیت یک ردیف (خارجی · داخلی، ریال) با «آخرین بررسی»؛ بررسیِ کهنه‌تر از ۱۸ ماه ← ردیف بلیت نیست — جهش',
-	false !== strpos( $b29, '<dt>بهای بلیت</dt>' ) && false !== strpos( $b29, 'خارجی: ۵٬۰۰۰٬۰۰۰ <i class="tp-u">ریال</i>' ) && false !== strpos( $b29, 'آخرین بررسی:' )
+	false !== strpos( $b29, '<dt>بهای بلیت</dt>' ) && false !== strpos( $b29, '<th scope="row">خارجی</th><td>۵٬۰۰۰٬۰۰۰ <i class="tp-u">ریال</i></td>' ) && false !== strpos( $b29, '<table class="tp-hours tp-ticket"><caption class="tp-vh">بهای بلیت</caption>' ) && false !== strpos( $b29, 'آخرین بررسی:' )
 	&& false === strpos( $b29_old, 'بهای بلیت' ) && false !== strpos( $b29_old, 'ساعت بازدید' ) );
 t( 'اطلاعات سفر (دستهٔ ۲۹ بند ۲): فیلدی که در ۴ خانهٔ سربرگ همین نوع است (مدت بازدید) در بلوک تکرار نمی‌شود',
 	in_array( 'suggested_duration', $b29_cells, true ) ? false === strpos( $b29, 'مدت بازدید' ) : false !== strpos( $b29, 'مدت بازدید' ), implode( ',', $b29_cells ) );
