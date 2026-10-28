@@ -80,7 +80,7 @@ if ( ! function_exists( 'topersia_g_panel_main_mobile' ) ) {
 	function topersia_g_panel_main_mobile() {
 
 		return array(
-			'tp-overview' => 2, 'tp-gallery' => 3, 'tp-attractions' => 4, 'tp-places' => 5, 'tp-culture' => 6, 'tp-news' => 7,
+			'tp-quick' => 1, 'tp-overview' => 2, 'tp-gallery' => 3, 'tp-attractions' => 4, 'tp-places' => 5, 'tp-culture' => 6, 'tp-news' => 7,
 			'tp-faq' => 10, 'tp-reviews' => 99,
 		);
 	}
