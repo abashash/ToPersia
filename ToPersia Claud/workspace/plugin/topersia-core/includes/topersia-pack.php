@@ -1807,6 +1807,20 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 				$res = array( 'status' => 'type', 'target' => 0, 'name' => $res['name'], 'note' => 'این رابطه ' . $rel['max'] . ' مقصد می‌گیرد' );
 			}
 
+			/*
+			 * P5-D456 (دستۀ 32 بند 8): درون‌ریز فرزندِ والد-یگانه یا یک‌به‌یکِ پست دیگر را به این پست نمی‌بندد — update() جت‌انجین
+			 * آن فرزند را از والد پیشین جدا می‌کند و یال واقعی بی‌صدا جابه‌جا می‌شود. مقصدِ دارای والدِ دیگر رد می‌شود (وضعیت type).
+			 */
+			if ( 'ok' === $res['status'] && $res['target'] && 'children' === $rel['direction'] ) {
+				$single = topersia_relation( $rel['id'] );
+				if ( $single && method_exists( $single, 'is_single_parent' ) && $single->is_single_parent() ) {
+					$owners = array_map( 'absint', (array) $single->get_parents( $res['target'], 'ids' ) );
+					if ( $owners && ! in_array( absint( $plan['target'] ), $owners, true ) ) {
+						$res = array( 'status' => 'type', 'target' => 0, 'name' => $res['name'], 'note' => 'این فرزند والد دیگری دارد؛ درون‌ریز یال والد-یگانه را جابه‌جا نمی‌کند (P5-D456)' );
+					}
+				}
+			}
+
 			if ( 'ok' === $res['status'] && $res['target'] && 'update' === $plan['action'] ) {
 				$object = topersia_relation( $rel['id'] );
 				if ( $object ) {

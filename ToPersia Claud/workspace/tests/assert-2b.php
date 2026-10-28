@@ -102,3 +102,13 @@ tp441_mut( 'دستور ثابت به سه زبان محتوا با شش قاعد
 			&& false !== strpos( $b, "'en' => \$en" ) && false !== strpos( $b, "'ar' => \$ar" );
 	},
 	$src2b, str_replace( 'هیچ نشانی تصویر، ویدیو یا پرونده‌ای ننویس', 'نشانی تصویر را بنویس', $src2b ) );
+
+/* دستهٔ 32 بند 8 · P5-D456 — درون‌ریز یال والد-یگانه/یک‌به‌یکِ پست دیگر را جابه‌جا نمی‌کند: مقصد دارای والد دیگر رد می‌شود (وضعیت type) */
+tp441_mut( 'درون‌ریز: مقصدِ فرزندِ والد-یگانه که والد دیگری دارد رد می‌شود، نه جابه‌جا — جهش: بی نگهبان می‌افتد  P5-D456',
+	function ( $s ) {
+		$b = tp2b_body( $s, 'topersia_pack_plan' );
+		if ( '' === $b ) { $b = $s; }
+		return false !== strpos( $s, 'P5-D456' ) && false !== strpos( $s, "is_single_parent() ) {\n\t\t\t\t\t\$owners = array_map( 'absint', (array) \$single->get_parents( \$res['target'], 'ids' ) );" )
+			&& false !== strpos( $s, 'این فرزند والد دیگری دارد' );
+	},
+	$src2b, str_replace( 'این فرزند والد دیگری دارد', 'x', $src2b ) );

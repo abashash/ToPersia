@@ -2429,6 +2429,23 @@ $b29_noref = r( 40, 'tp_badges' );
 if ( null === $b29_wh ) { unset( $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] ); } else { $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = $b29_wh; }
 t( 'نشان میراث جهانی (دستهٔ ۲۹ بند ۶): «شمارۀ ثبت ۱۱۵۷» با پیوند whc.unesco.org/en/list/1157/؛ بی شماره ← نیست — جهش',
 	false !== strpos( $b29_ref, 'href="https://whc.unesco.org/en/list/1157/"' ) && false !== strpos( $b29_ref, 'شمارۀ ثبت ۱۱۵۷-۰۰۲' ) && false === strpos( $b29_noref, 'whc.unesco.org/en/list' ) );
+/* دستهٔ 32 بند 2: شمارهٔ ثبت بی معیارهای رومی هم می‌آید (پیش‌تر بازگشت زودهنگام پنهانش می‌کرد) — جهش: با معیار خالی و شماره، خروجی تهی نباشد */
+$b32_cr = $GLOBALS['tp_meta'][40]['world_heritage_criteria'] ?? null;
+$b32_rf = $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] ?? null;
+$GLOBALS['tp_meta'][40]['world_heritage_criteria']   = '';
+$GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = '1157';
+$b32_ref_only = topersia_g_wh_criteria_links( 40 );
+$GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = '';
+$b32_none = topersia_g_wh_criteria_links( 40 );
+if ( null === $b32_cr ) { unset( $GLOBALS['tp_meta'][40]['world_heritage_criteria'] ); } else { $GLOBALS['tp_meta'][40]['world_heritage_criteria'] = $b32_cr; }
+if ( null === $b32_rf ) { unset( $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] ); } else { $GLOBALS['tp_meta'][40]['world_heritage_ref_number'] = $b32_rf; }
+t( 'میراث جهانی (دستهٔ 32 بند 2): شمارهٔ ثبت بی معیار رومی نمایش داده می‌شود؛ بی هر دو ← تهی',
+	false !== strpos( $b32_ref_only, 'whc.unesco.org/en/list/1157/' ) && false === strpos( $b32_ref_only, 'lang="en"' ) && '' === $b32_none );
+/* دستهٔ 32 بند 4: هر کلید FIELDMAP کلاس WPML (copy/translate/ignore) دارد — جهش: کلیدی بی کلاس می‌افتد (همهٔ فیلدهای اسکیمای زنده: tests/wpml-class-local.php) */
+$b32_xml = (string) @file_get_contents( __DIR__ . '/../../project-knowledge/ToPersia-wpml-config-v1_13.xml' );
+$b32_noc = function ( $xml ) { $bad = array(); foreach ( array_keys( topersia_g_map() ) as $k ) { if ( ! preg_match( '#<custom-field action="(?:copy|translate|ignore)">' . preg_quote( $k, '#' ) . '</custom-field>#', $xml ) ) { $bad[] = $k; } } return $bad; };
+t( 'WPML (دستهٔ 32 بند 4): هر کلید FIELDMAP کلاس دارد؛ بی کلاس شناسایی می‌شود',
+	'' !== $b32_xml && array() === $b32_noc( $b32_xml ) && array() !== $b32_noc( str_replace( '>religion<', '>x<', $b32_xml ) ) );
 /* ── P5-D450 (دستهٔ ۲۸ بند ۲ و ۳): هر فیلد تازه در FIELDMAP (برچسب، نوع، واژه‌نامه با نام)، کاتالوگ fa/en/ar،
    wpml-config (کپی/ترجمه)، و ★ در بستهٔ درون‌ریزی (هسته) — همه با scripts/lib/tp-p5d450.php یکی؛ رد/موکول‌ها نیستند ── */
 require_once __DIR__ . '/../scripts/lib/tp-p5d450.php';
