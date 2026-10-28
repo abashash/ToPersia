@@ -3,6 +3,8 @@
   ToPersia — پیکربندی سراسری WPML Custom Fields Translation
   نسخه: 1.13  |  مبنا: v1.12 (271 کلید)
 
+  دستهٔ ۳۲ بند ۴ (همین پرونده، بی تغییر شمارهٔ نسخه): ۲۸ کلید بی کلاس — ۱۱ translate و ۱۷ copy — تا هر فیلد کلاس WPML داشته باشد.
+
   تغییر این نسخه (وصلۀ ۲ج و۳ · P5-D308): content_status از copy به ignore —
   وضعیت راستی‌آزمایی هر زبان جدا می‌ماند؛ مقدار خالی در ترجمه یعنی
   needs_verification و نشان «راستی‌آزمایی‌شده» هر زبان فقط از وضعیت همان زبان.
@@ -346,6 +348,35 @@
     <custom-field action="copy">ride_hailing_apps</custom-field>
     <custom-field action="translate">gesture_warnings</custom-field>
     <custom-field action="copy">tap_water_safe</custom-field>
+    <!-- دستهٔ ۳۲ بند ۴: ۲۸ فیلد بی کلاس — متن خوانا ترجمه؛ کد، عدد، سال، سوییچ، گزینه، نشانی و شناسه کپی -->
+    <custom-field action="translate">awarding_body</custom-field>
+    <custom-field action="translate">name_historical</custom-field>
+    <custom-field action="translate">name_religious</custom-field>
+    <custom-field action="translate">architectural_style</custom-field>
+    <custom-field action="translate">religion</custom-field>
+    <custom-field action="translate">active_pilgrimage</custom-field>
+    <custom-field action="translate">water_temperature</custom-field>
+    <custom-field action="translate">safety_notes</custom-field>
+    <custom-field action="translate">related_museum</custom-field>
+    <custom-field action="translate">dress_code_details</custom-field>
+    <custom-field action="translate">accessibility</custom-field>
+    <custom-field action="copy">news_source_name</custom-field>
+    <custom-field action="copy">news_source_url</custom-field>
+    <custom-field action="copy">route_stops_order</custom-field>
+    <custom-field action="copy">programme_start_year</custom-field>
+    <custom-field action="copy">classification_</custom-field>
+    <custom-field action="copy">national_monument_year</custom-field>
+    <custom-field action="copy">height_m</custom-field>
+    <custom-field action="copy">depth_m</custom-field>
+    <custom-field action="copy">excavation_status</custom-field>
+    <custom-field action="copy">has_standing_structure</custom-field>
+    <custom-field action="copy">visiting_permit</custom-field>
+    <custom-field action="copy">active_worship</custom-field>
+    <custom-field action="copy">venue_eligible</custom-field>
+    <custom-field action="copy">a1_classification</custom-field>
+    <custom-field action="copy">restoration_status</custom-field>
+    <custom-field action="copy">construction_year</custom-field>
+    <custom-field action="copy">venue_capacity</custom-field>
   </custom-fields>
 
   <custom-fields-texts>
