@@ -75,6 +75,7 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'geographic_boundary'        => array( 'label' => 'محدودۀ جغرافیایی', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'climate_overview'           => array( 'label' => 'مرور اقلیم', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'historical_context'         => array( 'label' => 'زمینۀ تاریخی', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
+		'ritual_context_reference' => array( 'label' => 'کاربرد آیینی', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),   /* دستۀ 34 · P5-D467: از سربرگ آمد، در «درباره» می‌ماند */
 		'province_code'              => array( 'label' => 'کد استان', 'unit' => '', 'kind' => 'latin', 'zone' => 'skip' ),   /* P5-D386: فیلد و داده می‌ماند؛ هیچ‌جا نمایش داده نمی‌شود */
 		'geo_boundary'               => array( 'label' => 'محدودۀ جغرافیایی', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'bordering_countries'        => array( 'label' => 'کشورهای هم‌مرز', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),

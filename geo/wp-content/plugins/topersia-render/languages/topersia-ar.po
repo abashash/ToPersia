@@ -1485,6 +1485,10 @@ msgstr "ساعات"
 msgid "ساعت (وقت ایران)"
 msgstr "الساعة (توقيت إيران)"
 
+#: includes/topersia-g-zones.php
+msgid "ساعت بازدید"
+msgstr "ساعات الزيارة"
+
 #: includes/topersia-g-map.php
 msgid "ساعت بازدید (جدول)"
 msgstr "ساعات الزيارة"
@@ -2531,6 +2535,10 @@ msgstr "غير معروف"
 msgid "نامنظم"
 msgstr "غير منتظم"
 
+#: includes/topersia-g-zones.php
+msgid "نام‌های دیگر"
+msgstr "أسماء أخرى"
+
 #: includes/topersia-g-map.php
 msgid "نان سنتی"
 msgstr "خبز تقليدي"
@@ -3132,7 +3140,7 @@ msgstr "اليابانية"
 msgid "کاخ"
 msgstr "قصر"
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-map.php
 msgid "کاربرد آیینی"
 msgstr "الاستخدام الطقسي"
 
