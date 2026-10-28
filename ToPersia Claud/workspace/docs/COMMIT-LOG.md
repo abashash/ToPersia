@@ -187,3 +187,5 @@
 | 178 | 2026-10-28 | `feat` | `d86d2e80` |  | بند 5–7: remove، ویدیوی محلی، آزمون رفت‌وبرگشت (P5-D457) | ✅ |
 | 179 | 2026-10-28 | `feat` | `d2a7f666` |  | بند 8: P5-D456 درون‌ریز و کاناری یال‌ها | ✅ |
 | 180 | 2026-10-28 | `chore` | `2f7de030` |  | mirror geo/ — دستهٔ 32. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · wpml-class · roundtrip · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت ≤1؛ بیرون‌ازنسخه فقط چهار بندانگشتی نمونهٔ تقویم) · کاناری سالم (پست و یال) | ✅ |
+| 181 | 2026-10-28 | `feat` | `f1f29c1d` |  | دستهٔ 33: P5-D454 «پاسخ کوتاه» روادید و ارز — سه زبان، موبایل، دسترس‌پذیری | ✅ |
+| 182 | 2026-10-28 | `chore` | `89b16c5d` |  | mirror geo/ — دستهٔ 33. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · quick-local · wpml-class · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت ≤1) · کاناری سالم (پست و یال) | ✅ |
