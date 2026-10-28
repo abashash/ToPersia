@@ -194,8 +194,8 @@ $sc_body = function ( $name, $src = null ) use ( $sc_src ) {
 };
 $sc_none = function ( $src ) use ( $sc_body ) {
 	/* «—» فقط در لایهٔ نمایش: ثابت در [tp_stats]؛ داده‌دهنده‌ها (cell · derived) برای نبود null می‌دهند و «—» نمی‌سازند */
-	return 1 === substr_count( $src, "define( 'TOPERSIA_STAT_NONE', '—' );" ) && 3 === substr_count( $src, 'TOPERSIA_STAT_NONE' )   /* defined · define · تنها مصرف در [tp_stats] */
-		&& false !== strpos( $sc_body( 'topersia_g_sc_stats', $src ), 'TOPERSIA_STAT_NONE' )
+	return 1 === substr_count( $src, "define( 'TOPERSIA_STAT_NONE', '—' );" ) && 4 === substr_count( $src, 'TOPERSIA_STAT_NONE' )   /* defined · define · مصرف در [tp_stats] و «پاسخ کوتاه» (دستهٔ 33) — هر دو لایهٔ نمایش */
+		&& false !== strpos( $sc_body( 'topersia_g_sc_stats', $src ), 'TOPERSIA_STAT_NONE' ) && false !== strpos( $sc_body( 'topersia_g_sc_quick', $src ), 'TOPERSIA_STAT_NONE' )
 		&& false === strpos( $sc_body( 'topersia_g_stat_cell', $src ), '—' ) && false === strpos( $sc_body( 'topersia_g_stat_derived', $src ), '—' );
 };
 t( 'P5-D395: «—» فقط در [tp_stats] (لایهٔ نمایش)؛ topersia_g_stat_cell و خانه‌های مشتق برای نبود null می‌دهند — جهش: «—» در داده‌دهنده می‌افتد',
@@ -2293,6 +2293,7 @@ require __DIR__ . '/assert-20.php';
 require __DIR__ . '/assert-2l.php';
 require __DIR__ . '/assert-2m.php';
 require __DIR__ . '/assert-2n.php';
+require __DIR__ . '/assert-33.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

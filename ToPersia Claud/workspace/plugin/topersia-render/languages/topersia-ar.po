@@ -24,6 +24,11 @@ msgstr "%1$s من %2$s"
 msgid "%1$s° شمالی، %2$s° شرقی"
 msgstr "%1$s° شمالاً، %2$s° شرقاً"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s یورو"
+msgstr "%s يورو"
+
 #: includes/topersia-g-gallery-agg.php
 msgid "--post=<id> یا --all یا --queue"
 msgstr "--post=<id> أو --all أو --queue"
@@ -208,6 +213,11 @@ msgstr "العملة وطرق الدفع"
 #, php-format
 msgid "از %1$s تا %2$s"
 msgstr "من %1$s إلى %2$s"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "از %1$s تا %2$s یورو"
+msgstr "من %1$s إلى %2$s يورو"
 
 #: includes/topersia-g-gallery-agg.php
 msgid "از پیش در صف است."
@@ -444,6 +454,10 @@ msgstr "أقسام هذه الصفحة"
 #: includes/topersia-g-zones.php
 msgid "بخش‌های صفحه"
 msgstr "أقسام الصفحة"
+
+#: includes/topersia-g-zones.php
+msgid "بدون نیاز به روادید"
+msgstr "لا تأشيرة مطلوبة"
 
 #: includes/topersia-g-air.php
 msgid "برآورد مدل CAMS · میانگین ۲۴ ساعت"
@@ -1294,6 +1308,14 @@ msgstr "عاصفة رعدية"
 #: includes/topersia-g-zones.php
 msgid "رقص محلی"
 msgstr "رقص شعبي"
+
+#: includes/topersia-g-zones.php
+msgid "روادید فرودگاهی"
+msgstr "تأشيرة عند الوصول"
+
+#: includes/topersia-g-zones.php
+msgid "روادید لازم است؟"
+msgstr "هل أحتاج إلى تأشيرة؟"
 
 #: includes/topersia-g-map.php
 msgid "روادید هنگام ورود"
@@ -2264,6 +2286,10 @@ msgstr "المحتوى"
 msgid "مطالب ما را بیشتر در نتایج گوگل و AI Mode ببینید"
 msgstr "شاهد المزيد من محتوانا في نتائج Google وAI Mode"
 
+#: includes/topersia-g-zones.php
+msgid "معافیت فقط در مناطق آزاد"
+msgstr "إعفاء في المناطق الحرة فقط"
+
 #: includes/topersia-g-map.php
 msgid "معبد"
 msgstr "معبد"
@@ -2285,6 +2311,14 @@ msgstr "معايير التسجيل في التراث العالمي"
 msgid "معیارها:"
 msgstr "المعايير:"
 
+#: includes/topersia-g-zones.php
+msgid "ملزم به تور هدایت‌شده"
+msgstr "جولة مصحوبة بمرشد مطلوبة"
+
+#: includes/topersia-g-zones.php
+msgid "ملزم به روادید الکترونیکی پیشین"
+msgstr "تأشيرة إلكترونية مسبقة مطلوبة"
+
 #: includes/topersia-g-map.php
 msgid "ملی"
 msgstr "وطني"
@@ -2296,6 +2330,10 @@ msgstr "التخريم"
 #: includes/topersia-g-map.php
 msgid "ممنوع"
 msgstr "ممنوع"
+
+#: includes/topersia-g-zones.php
+msgid "ممنوع‌الورود"
+msgstr "الدخول ممنوع"
 
 #: includes/topersia-g-zones.php
 msgid "منابع"
@@ -2724,6 +2762,10 @@ msgid "هجری قمری"
 msgstr "هجري قمري"
 
 #: includes/topersia-g-zones.php
+msgid "هزینه؟"
+msgstr "كم التكلفة؟"
+
+#: includes/topersia-g-zones.php
 msgid "همراهی موسیقی"
 msgstr "المرافقة الموسيقية"
 
@@ -2819,6 +2861,10 @@ msgstr "الاعتماد على الطقس"
 #: includes/topersia-g-zones.php
 msgid "واتس‌اپ"
 msgstr "واتساب"
+
+#: includes/topersia-g-zones.php
+msgid "واحد"
+msgstr "الوحدة"
 
 #: includes/topersia-g-zones.php
 msgid "واحد پول"
@@ -2917,6 +2963,10 @@ msgstr "أعادت خدمة الطقس استجابة غير متوقعة."
 #: includes/topersia-g-air.php
 msgid "پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد."
 msgstr "استجابة جودة الهواء ليست بالشكل المتوقع."
+
+#: includes/topersia-g-zones.php
+msgid "پاسخ کوتاه"
+msgstr "إجابات سريعة"
 
 #: includes/topersia-g-map.php
 msgid "پایان"
@@ -3046,6 +3096,10 @@ msgstr "الطباعة بالقوالب (قلمكار)"
 msgid "چشمه"
 msgstr "ينبوع"
 
+#: includes/topersia-g-zones.php
+msgid "چند روز؟"
+msgstr "كم يومًا؟"
+
 #: includes/topersia-g-map.php
 msgid "چندرشته‌ای"
 msgstr "متعدد الرياضات"
@@ -3085,6 +3139,10 @@ msgstr "الاستخدام الطقسي"
 #: includes/topersia-g-map.php
 msgid "کارت بین‌المللی"
 msgstr "البطاقات الدولية"
+
+#: includes/topersia-g-zones.php
+msgid "کارت بین‌المللی کار می‌کند؟"
+msgstr "هل تعمل البطاقات الدولية؟"
 
 #: includes/topersia-g-map.php
 msgid "کاروانسرا"
@@ -3364,6 +3422,17 @@ msgstr[2] "معلمان"
 msgstr[3] "%s معالم"
 msgstr[4] "%s معلمًا"
 msgstr[5] "%s معلم"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s روز"
+msgid_plural "%s روز"
+msgstr[0] "%s يوم"
+msgstr[1] "يوم واحد"
+msgstr[2] "يومان"
+msgstr[3] "%s أيام"
+msgstr[4] "%s يومًا"
+msgstr[5] "%s يوم"
 
 #: includes/topersia-g-zones.php
 #, php-format

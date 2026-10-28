@@ -1545,6 +1545,17 @@ html .tp-page .tp-stat{min-width:0}
 html .tp-page .tp-stat .tp-stat__v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 html .tp-page .tp-stat--none .tp-stat__v{color:var(--tp-text-2);font-weight:700}
 
+/* ─── «پاسخ کوتاه» روادید و ارز (P5-D454 · دستۀ 33): سه کاشی پرسش ← پاسخ؛ dl/dt/dd معنایی، فقط توکن.
+   متن زیر ۱۴px از --tp-text (P5-D184)؛ پاسخ بزرگ و پررنگ. موبایل: یک ستون. ─── */
+html .tp-page .tp-quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(.8 * var(--tp-rem));margin:0}
+html .tp-page .tp-quick__q{background:var(--tp-surface);border:1px solid var(--tp-border);border-radius:var(--tp-r-lg);padding:calc(1 * var(--tp-rem)) calc(1.1 * var(--tp-rem));min-width:0}
+html .tp-page .tp-quick__q dt{margin:0 0 calc(.35 * var(--tp-rem));font-size:calc(.9 * var(--tp-rem));font-weight:700;color:var(--tp-text)}
+html .tp-page .tp-quick__q dd{margin:0;font-size:calc(1.15 * var(--tp-rem));font-weight:800;line-height:1.5;color:var(--tp-text-strong);overflow-wrap:anywhere}
+html .tp-page .tp-quick__none{color:var(--tp-text-2);font-weight:700}
+@media(max-width:720px){
+html .tp-page .tp-quick{grid-template-columns:1fr}
+}
+
 /* ═══ TP-ADDED-END ═════════════════════════════════════════════════ */
 
 CSS;

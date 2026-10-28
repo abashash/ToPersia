@@ -908,5 +908,24 @@ return array(
 	'اتوبوس تندرو' => array( 'en' => 'Bus rapid transit', 'ar' => 'حافلة سريعة' ),
 	'تاکسی' => array( 'en' => 'Taxi', 'ar' => 'تاكسي' ),
 	'کشتی و لنج' => array( 'en' => 'Ferry and dhow', 'ar' => 'عبارة وقارب' ),
+	/* ── «پاسخ کوتاه» روادید و ارز (دستهٔ 33 · P5-D454) ── */
+	'پاسخ کوتاه' => array( 'en' => 'Quick answers', 'ar' => 'إجابات سريعة' ),
+	'روادید لازم است؟' => array( 'en' => 'Do I need a visa?', 'ar' => 'هل أحتاج إلى تأشيرة؟' ),
+	'چند روز؟' => array( 'en' => 'How many days?', 'ar' => 'كم يومًا؟' ),
+	'هزینه؟' => array( 'en' => 'How much does it cost?', 'ar' => 'كم التكلفة؟' ),
+	'کارت بین‌المللی کار می‌کند؟' => array( 'en' => 'Do international cards work?', 'ar' => 'هل تعمل البطاقات الدولية؟' ),
+	'واحد' => array( 'en' => 'Unit', 'ar' => 'الوحدة' ),
+	'%s یورو' => array( 'en' => '%s EUR', 'ar' => '%s يورو' ),
+	'از %1$s تا %2$s یورو' => array( 'en' => 'From %1$s to %2$s EUR', 'ar' => 'من %1$s إلى %2$s يورو' ),
+	'%s روز' => array(
+		'en' => array( '%s day', '%s days' ),
+		'ar' => array( '%s يوم', 'يوم واحد', 'يومان', '%s أيام', '%s يومًا', '%s يوم' ),
+	),
+	'بدون نیاز به روادید' => array( 'en' => 'No visa required', 'ar' => 'لا تأشيرة مطلوبة' ),
+	'معافیت فقط در مناطق آزاد' => array( 'en' => 'Visa-free in free zones only', 'ar' => 'إعفاء في المناطق الحرة فقط' ),
+	'روادید فرودگاهی' => array( 'en' => 'Visa on arrival', 'ar' => 'تأشيرة عند الوصول' ),
+	'ملزم به روادید الکترونیکی پیشین' => array( 'en' => 'E-visa required in advance', 'ar' => 'تأشيرة إلكترونية مسبقة مطلوبة' ),
+	'ملزم به تور هدایت‌شده' => array( 'en' => 'Guided tour required', 'ar' => 'جولة مصحوبة بمرشد مطلوبة' ),
+	'ممنوع‌الورود' => array( 'en' => 'Entry prohibited', 'ar' => 'الدخول ممنوع' ),
 
 );

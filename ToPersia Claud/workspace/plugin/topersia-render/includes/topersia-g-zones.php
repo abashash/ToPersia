@@ -2807,6 +2807,8 @@ if ( ! function_exists( 'topersia_g_option_labels_i18n' ) ) {
 		return array(
 			'هوایی', 'ریلی', 'اتوبوس بین‌شهری', 'مترو', 'اتوبوس تندرو', 'تاکسی', 'تاکسی اینترنتی', 'کشتی و لنج', 'موضوعیت ندارد',
 			'هجری شمسی', 'هجری قمری', 'میلادی',
+			/* «پاسخ کوتاه» روادید: برچسب سیاست ماتریس (pc_policy_code) */
+			'بدون نیاز به روادید', 'معافیت فقط در مناطق آزاد', 'روادید فرودگاهی', 'ملزم به روادید الکترونیکی پیشین', 'ملزم به تور هدایت‌شده', 'ممنوع‌الورود',
 		);
 	}
 }
@@ -3172,6 +3174,209 @@ if ( ! function_exists( 'topersia_g_stat_keys' ) ) {
 		}
 
 		return array_slice( $ranked, 0, max( 0, $slots ) );
+	}
+}
+
+/**
+ * «پاسخ کوتاه» — دستۀ 33 · P5-D454 (چیدمان ب): بالای صفحۀ روادید و ارز، سه پرسش با کوتاه‌ترین پاسخ؛ HTML سرور.
+ *
+ *   روادید  «لازم است؟ · چند روز؟ · هزینه؟»
+ *   ارز     «کارت بین‌المللی کار می‌کند؟ · واحد · نماد»
+ *
+ * فقط از متای موجود، هیچ مقدار ساختگی و هیچ فیلد تازه. نبود ← «—» با aria-label «نامشخص».
+ *   لازم است؟  برچسب‌های متمایز کدِ سیاست در `visa_policy_matrix` (همان زبان صفحه، تا سه تا)؛ ماتریس نیست ← نامشخص
+ *   چند روز؟   `max_total_stay_days`؛ نبود: بازۀ `vt_stay_days` انواع روادید
+ *   هزینه؟     کمینۀ `pc_fee_min_eur` تا بیشینۀ `pc_fee_max_eur` ماتریس؛ همه صفر ← «رایگان»
+ *   کارت …؟    برچسب گزینۀ `international_card_status`
+ *   واحد       `cu_name` نخستین ردیف «واحد رسمی جاری» (legal_current)؛ نبود: نام خود پست
+ *   نماد       `currency_symbol`
+ */
+if ( ! function_exists( 'topersia_g_quick_rows' ) ) {
+	function topersia_g_quick_rows( $pid, $field ) {
+
+		$raw = topersia_g_raw( $pid, $field );
+
+		if ( ! is_array( $raw ) ) {
+			return array();
+		}
+
+		return array_values( array_filter( $raw, 'is_array' ) );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_quick_num' ) ) {
+	/** عددِ ایمن از یک مقدار متا؛ تهی ← null (صفر درست است و null نیست). */
+	function topersia_g_quick_num( $v ) {
+
+		$v = is_scalar( $v ) ? trim( (string) $v ) : '';
+
+		return ( '' !== $v && is_numeric( $v ) ) ? (float) $v : null;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_quick_days' ) ) {
+	function topersia_g_quick_days( $n ) {
+
+		$n = (int) round( $n );
+
+		return sprintf( _n( '%s روز', '%s روز', $n, 'topersia' ), topersia_g_fa( $n ) );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_quick_money' ) ) {
+	function topersia_g_quick_money( $n ) {
+
+		/* هزارگان و رقم به زبان صفحه (۳٬۰۰۰ · 3,000 · ٣٬٠٠٠) */
+		return topersia_g_fa( topersia_g_sep( rtrim( rtrim( number_format( (float) $n, 2, '.', '' ), '0' ), '.' ) ) );
+	}
+}
+
+/** برچسب گزینۀ یک select سطح‌بالا به زبان صفحه (کاتالوگ؛ نشت زبان ← تهی). */
+if ( ! function_exists( 'topersia_g_glossary_label_field' ) ) {
+	function topersia_g_glossary_label_field( $type, $field, $value ) {
+
+		static $cache = array();
+
+		$ck = $type . '|' . $field;
+
+		if ( ! isset( $cache[ $ck ] ) ) {
+			$cache[ $ck ] = array();
+			if ( function_exists( 'topersia_pack_schema' ) ) {
+				$def = topersia_pack_schema( $type );
+				foreach ( isset( $def['fields'][ $field ]['options'] ) ? (array) $def['fields'][ $field ]['options'] : array() as $opt ) {
+					if ( isset( $opt['value'], $opt['label'] ) ) {
+						$cache[ $ck ][ (string) $opt['value'] ] = (string) $opt['label'];
+					}
+				}
+			}
+		}
+
+		return isset( $cache[ $ck ][ $value ] ) ? topersia_g_option_label_lang( $cache[ $ck ][ $value ] ) : '';
+	}
+}
+
+/** @return array<int,array{0:string,1:string}> هر پرسش: [ متن پرسش، پاسخ آمادۀ چاپ — تهی = نامشخص ] */
+if ( ! function_exists( 'topersia_g_quick_cells' ) ) {
+	function topersia_g_quick_cells( $pid ) {
+
+		$type = function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '';
+
+		if ( 'tp_visa' === $type ) {
+
+			/* لازم است؟ */
+			$labels = array();
+			foreach ( topersia_g_quick_rows( $pid, 'visa_policy_matrix' ) as $row ) {
+				$code = isset( $row['pc_policy_code'] ) ? (string) $row['pc_policy_code'] : '';
+				if ( '' === $code || 'not_applicable' === $code ) {
+					continue;
+				}
+				$label = topersia_g_stat_option_label( $type, 'visa_policy_matrix', 'pc_policy_code', $code );
+				if ( '' !== $label ) {
+					$labels[ $label ] = true;
+				}
+			}
+			$labels = array_keys( $labels );
+			$need   = $labels ? implode( topersia_g_list_sep(), array_slice( $labels, 0, 3 ) ) . ( count( $labels ) > 3 ? ' …' : '' ) : '';
+
+			/* چند روز؟ */
+			$days = topersia_g_quick_num( topersia_g_raw( $pid, 'max_total_stay_days' ) );
+			$stay = null !== $days ? topersia_g_quick_days( $days ) : '';
+			if ( '' === $stay ) {
+				$vals = array();
+				foreach ( topersia_g_quick_rows( $pid, 'visa_types' ) as $row ) {
+					$d = isset( $row['vt_stay_days'] ) ? topersia_g_quick_num( $row['vt_stay_days'] ) : null;
+					if ( null !== $d ) {
+						$vals[] = $d;
+					}
+				}
+				if ( $vals ) {
+					$stay = min( $vals ) === max( $vals )
+						? topersia_g_quick_days( min( $vals ) )
+						: sprintf( __( 'از %1$s تا %2$s', 'topersia' ), topersia_g_quick_days( min( $vals ) ), topersia_g_quick_days( max( $vals ) ) );
+				}
+			}
+
+			/* هزینه؟ */
+			$all = array();
+			foreach ( topersia_g_quick_rows( $pid, 'visa_policy_matrix' ) as $row ) {
+				foreach ( array( 'pc_fee_min_eur', 'pc_fee_max_eur' ) as $fk ) {
+					$n = isset( $row[ $fk ] ) ? topersia_g_quick_num( $row[ $fk ] ) : null;
+					if ( null !== $n ) {
+						$all[] = $n;
+					}
+				}
+			}
+			$fee = '';
+			if ( $all ) {
+				$from = min( $all );
+				$to   = max( $all );
+				if ( 0.0 === $to ) {
+					$fee = __( 'رایگان', 'topersia' );
+				} elseif ( $from === $to ) {
+					$fee = sprintf( __( '%s یورو', 'topersia' ), topersia_g_quick_money( $from ) );
+				} else {
+					$fee = sprintf( __( 'از %1$s تا %2$s یورو', 'topersia' ), topersia_g_quick_money( $from ), topersia_g_quick_money( $to ) );
+				}
+			}
+
+			return array(
+				array( __( 'روادید لازم است؟', 'topersia' ), $need ),
+				array( __( 'چند روز؟', 'topersia' ), $stay ),
+				array( __( 'هزینه؟', 'topersia' ), $fee ),
+			);
+		}
+
+		if ( 'tp_currency' === $type ) {
+
+			$status = trim( (string) topersia_g_raw( $pid, 'international_card_status' ) );
+			$card   = '' !== $status ? topersia_g_glossary_label_field( $type, 'international_card_status', $status ) : '';
+
+			$unit = '';
+			foreach ( topersia_g_quick_rows( $pid, 'currency_units' ) as $row ) {
+				if ( isset( $row['cu_role'], $row['cu_name'] ) && 'legal_current' === $row['cu_role'] && '' !== trim( (string) $row['cu_name'] ) ) {
+					$unit = trim( wp_strip_all_tags( (string) $row['cu_name'] ) );
+					break;
+				}
+			}
+			if ( '' === $unit ) {
+				$unit = trim( (string) topersia_g_name( $pid ) );
+			}
+
+			return array(
+				array( __( 'کارت بین‌المللی کار می‌کند؟', 'topersia' ), $card ),
+				array( __( 'واحد', 'topersia' ), $unit ),
+				array( __( 'نماد', 'topersia' ), topersia_g_text( $pid, 'currency_symbol' ) ),
+			);
+		}
+
+		return array();
+	}
+}
+
+/** [tp_quick] — بخش «پاسخ کوتاه»؛ نوعِ بی پرسش ← هیچ. */
+if ( ! function_exists( 'topersia_g_sc_quick' ) ) {
+	function topersia_g_sc_quick( $atts = array() ) {
+
+		$pid   = topersia_g_pid( $atts );
+		$cells = $pid ? topersia_g_quick_cells( $pid ) : array();
+
+		if ( ! $cells ) {
+			return '';
+		}
+
+		$items = '';
+
+		foreach ( $cells as $cell ) {
+			$items .= '<div class="tp-quick__q"><dt>' . esc_html( $cell[0] ) . '</dt><dd>'
+				. ( '' !== trim( (string) $cell[1] )
+					? esc_html( $cell[1] )
+					: '<span class="tp-quick__none" role="img" aria-label="' . esc_attr__( 'نامشخص', 'topersia' ) . '">' . TOPERSIA_STAT_NONE . '</span>' )
+				. '</dd></div>';
+		}
+
+		return '<section id="tp-quick" class="tp-section" aria-labelledby="tp-quickTitle">'
+			. '<div class="tp-section-head"><div><h2 id="tp-quickTitle">' . esc_html__( 'پاسخ کوتاه', 'topersia' ) . '</h2></div></div>'
+			. '<dl class="tp-quick">' . $items . '</dl></section>';
 	}
 }
 
@@ -7086,8 +7291,14 @@ if ( ! function_exists( 'topersia_g_layout' ) ) {
 		 * گذر مرزی، …) ته همان ستون می‌آیند، به ترتیب جدول — پس نوع
 		 * پستی که ساختار دیگری دارد بی‌صدا بخشش را گم نمی‌کند.
 		 */
+		$quick = in_array( $type, array( 'tp_visa', 'tp_currency' ), true )
+			? array( array( 'fn' => 'topersia_g_sc_quick', 'id' => 'tp-quick', 'nav' => '' ) )
+			: array();
+
 		$order = array(
 			'main' => array(
+				/* پاسخ کوتاه — فقط روادید و ارز؛ بالای همه (دستۀ 33 · P5-D454) */
+				...$quick,
 				array( 'fn' => 'topersia_g_sc_ai',       'id' => 'tp-ai',       'nav' => 'خلاصه هوشمند' ),   /* بلافاصله بالای «درباره …»؛ دسکتاپ و موبایل — P5-D358 */
 				array( 'fn' => 'topersia_g_sc_overview', 'id' => 'tp-overview', 'nav' => 'درباره' ),
 				array( 'fn' => 'topersia_g_sc_gallery',  'id' => 'tp-gallery',  'nav' => 'گالری' ),
@@ -8193,6 +8404,7 @@ if ( ! function_exists( 'topersia_g_register' ) ) {
 			'tp_actionbar' => 'topersia_g_sc_actionbar',
 			'tp_crumbs'    => 'topersia_g_sc_crumbs',
 			'tp_stats'     => 'topersia_g_sc_stats',
+			'tp_quick'     => 'topersia_g_sc_quick',
 			'tp_facts'     => 'topersia_g_sc_facts',
 			'tp_badges'    => 'topersia_g_sc_badges',
 			'tp_seasons'   => 'topersia_g_sc_seasons',

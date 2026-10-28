@@ -24,6 +24,11 @@ msgstr "%1$s of %2$s"
 msgid "%1$s° شمالی، %2$s° شرقی"
 msgstr "%1$s° N, %2$s° E"
 
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s یورو"
+msgstr "%s EUR"
+
 #: includes/topersia-g-gallery-agg.php
 msgid "--post=<id> یا --all یا --queue"
 msgstr "--post=<id> or --all or --queue"
@@ -208,6 +213,11 @@ msgstr "Currency and payment methods"
 #, php-format
 msgid "از %1$s تا %2$s"
 msgstr "From %1$s to %2$s"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "از %1$s تا %2$s یورو"
+msgstr "From %1$s to %2$s EUR"
 
 #: includes/topersia-g-gallery-agg.php
 msgid "از پیش در صف است."
@@ -444,6 +454,10 @@ msgstr "Sections on this page"
 #: includes/topersia-g-zones.php
 msgid "بخش‌های صفحه"
 msgstr "Page sections"
+
+#: includes/topersia-g-zones.php
+msgid "بدون نیاز به روادید"
+msgstr "No visa required"
 
 #: includes/topersia-g-air.php
 msgid "برآورد مدل CAMS · میانگین ۲۴ ساعت"
@@ -1294,6 +1308,14 @@ msgstr "Thunderstorm"
 #: includes/topersia-g-zones.php
 msgid "رقص محلی"
 msgstr "Folk dance"
+
+#: includes/topersia-g-zones.php
+msgid "روادید فرودگاهی"
+msgstr "Visa on arrival"
+
+#: includes/topersia-g-zones.php
+msgid "روادید لازم است؟"
+msgstr "Do I need a visa?"
 
 #: includes/topersia-g-map.php
 msgid "روادید هنگام ورود"
@@ -2264,6 +2286,10 @@ msgstr "Content"
 msgid "مطالب ما را بیشتر در نتایج گوگل و AI Mode ببینید"
 msgstr "See more of our content in Google results and AI Mode"
 
+#: includes/topersia-g-zones.php
+msgid "معافیت فقط در مناطق آزاد"
+msgstr "Visa-free in free zones only"
+
 #: includes/topersia-g-map.php
 msgid "معبد"
 msgstr "Temple"
@@ -2285,6 +2311,14 @@ msgstr "World Heritage criteria"
 msgid "معیارها:"
 msgstr "Criteria:"
 
+#: includes/topersia-g-zones.php
+msgid "ملزم به تور هدایت‌شده"
+msgstr "Guided tour required"
+
+#: includes/topersia-g-zones.php
+msgid "ملزم به روادید الکترونیکی پیشین"
+msgstr "E-visa required in advance"
+
 #: includes/topersia-g-map.php
 msgid "ملی"
 msgstr "National"
@@ -2296,6 +2330,10 @@ msgstr "Filigree"
 #: includes/topersia-g-map.php
 msgid "ممنوع"
 msgstr "Prohibited"
+
+#: includes/topersia-g-zones.php
+msgid "ممنوع‌الورود"
+msgstr "Entry prohibited"
 
 #: includes/topersia-g-zones.php
 msgid "منابع"
@@ -2724,6 +2762,10 @@ msgid "هجری قمری"
 msgstr "Lunar Hijri"
 
 #: includes/topersia-g-zones.php
+msgid "هزینه؟"
+msgstr "How much does it cost?"
+
+#: includes/topersia-g-zones.php
 msgid "همراهی موسیقی"
 msgstr "Music accompaniment"
 
@@ -2819,6 +2861,10 @@ msgstr "Weather dependence"
 #: includes/topersia-g-zones.php
 msgid "واتس‌اپ"
 msgstr "WhatsApp"
+
+#: includes/topersia-g-zones.php
+msgid "واحد"
+msgstr "Unit"
 
 #: includes/topersia-g-zones.php
 msgid "واحد پول"
@@ -2917,6 +2963,10 @@ msgstr "The weather service returned an unexpected response."
 #: includes/topersia-g-air.php
 msgid "پاسخ سرویس کیفیت هوا شکل مورد انتظار را ندارد."
 msgstr "The air-quality response has an unexpected shape."
+
+#: includes/topersia-g-zones.php
+msgid "پاسخ کوتاه"
+msgstr "Quick answers"
 
 #: includes/topersia-g-map.php
 msgid "پایان"
@@ -3046,6 +3096,10 @@ msgstr "Qalamkar block printing"
 msgid "چشمه"
 msgstr "Spring"
 
+#: includes/topersia-g-zones.php
+msgid "چند روز؟"
+msgstr "How many days?"
+
 #: includes/topersia-g-map.php
 msgid "چندرشته‌ای"
 msgstr "Multi-sport"
@@ -3085,6 +3139,10 @@ msgstr "Ritual use"
 #: includes/topersia-g-map.php
 msgid "کارت بین‌المللی"
 msgstr "International cards"
+
+#: includes/topersia-g-zones.php
+msgid "کارت بین‌المللی کار می‌کند؟"
+msgstr "Do international cards work?"
 
 #: includes/topersia-g-map.php
 msgid "کاروانسرا"
@@ -3356,6 +3414,13 @@ msgid "%s جاذبه"
 msgid_plural "%s جاذبه"
 msgstr[0] "%s attraction"
 msgstr[1] "%s attractions"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s روز"
+msgid_plural "%s روز"
+msgstr[0] "%s day"
+msgstr[1] "%s days"
 
 #: includes/topersia-g-zones.php
 #, php-format
