@@ -5336,6 +5336,48 @@ if ( ! function_exists( 'topersia_g_tiles' ) ) {
 }
 
 /**
+ * آیکون هر کاشی «اطلاعات سفر» — از نوع هدف رابطه یا کلید فیلد؛ ناشناس ← سنجاق. دستۀ 35 · P5-D460
+ */
+if ( ! function_exists( 'topersia_g_trip_icon_for' ) ) {
+	function topersia_g_trip_icon_for( $key ) {
+
+		static $by = array(
+			'tp_currency' => 'coins', 'tp_visa' => 'passport', 'tp_health_safety' => 'shield', 'tp_travel_etiquette' => 'heart', 'tp_calendar' => 'cal',
+			'electric_plug' => 'plug', 'drive_side' => 'wheel', 'timezone' => 'clock', 'calling_code' => 'phone', 'free_zone' => 'tent',
+			'airport_name' => 'plane', 'airport_iata' => 'plane', 'railway_station' => 'train', 'metro_available' => 'metro', 'visa_on_arrival' => 'passport',
+		);
+
+		return isset( $by[ $key ] ) ? $by[ $key ] : 'pin';
+	}
+}
+
+/**
+ * یک کاشی «اطلاعات سفر»: آیکون SVG درون‌خط، مقدار کوتاه (پررنگ) و برچسب. مقدار خالی ← «—» با aria-label «نامشخص».
+ * بی جاوااسکریپت، بی کتابخانه؛ HTML سرور. پیوند فقط وقتی نشانی هست.
+ *
+ * @param string $icon  کلید topersia_g_icon.
+ * @param string $label برچسب (متن ساده).
+ * @param string $value مقدار — HTML گریختۀ آماده.
+ * @param string $url   نشانی اختیاری.
+ * @return string HTML
+ */
+if ( ! function_exists( 'topersia_g_trip_tile' ) ) {
+	function topersia_g_trip_tile( $icon, $label, $value, $url = '' ) {
+
+		$has = '' !== trim( wp_strip_all_tags( (string) $value ) );
+		$val = $has
+			? '<b class="tp-trip__v">' . $value . '</b>'
+			: '<b class="tp-trip__v tp-trip__v--none" role="img" aria-label="' . esc_attr__( 'نامشخص', 'topersia' ) . '">' . TOPERSIA_STAT_NONE . '</b>';
+
+		$in = '<span class="tp-trip__i" aria-hidden="true">' . topersia_g_icon( $icon ) . '</span>' . $val
+			. ( '' !== (string) $label ? '<span class="tp-trip__k">' . esc_html( $label ) . '</span>' : '' );
+
+		return '' !== (string) $url
+			? '<a class="tp-trip__t" role="listitem" href="' . esc_url( $url ) . '">' . $in . '</a>'
+			: '<div class="tp-trip__t" role="listitem">' . $in . '</div>';
+	}
+}
+/**
  * کارت «اطلاعات سفر» — `.practical-grid` مرجع.  P5-D233 · P5-D279 · P5-D282
  *
  * اول موردهای رابطه (سلامت، آداب، ارز، تقویم، ویزا — با ارث‌بری) با پیکان و
@@ -5350,32 +5392,63 @@ if ( ! function_exists( 'topersia_g_tiles' ) ) {
 if ( ! function_exists( 'topersia_g_practical_section' ) ) {
 	function topersia_g_practical_section( $pid, $result ) {
 
-		$map  = topersia_g_map();
-		$body = '';
+		$map   = topersia_g_map();
+		$type  = (string) get_post_type( $pid );
+		$tiles = '';
+		$seen  = array();   /* نوع هدفِ پیوندهای رابطه که کاشی گرفتند */
 
+		/* پیوند رابطه‌ها (ارز، روادید، سلامت، آداب، تقویم): کاشی با آیکون، نام هدف مقدار، نوع هدف برچسب */
 		foreach ( $result['items'] as $item ) {
-			$body .= topersia_g_a_open( $item['url'] ) . esc_html( $item['name'] )
-				. ' <span>→</span></a>';
+			$tid  = isset( $item['id'] ) ? absint( $item['id'] ) : 0;
+			$ptyp = $tid ? (string) get_post_type( $tid ) : '';
+			$seen[ $ptyp ] = true;
+			$tiles .= topersia_g_trip_tile( topersia_g_trip_icon_for( $ptyp ), $tid ? topersia_g_kind_label( $tid ) : '', esc_html( $item['name'] ), (string) $item['url'] );
 		}
 
-		$travel_skip = array_keys( topersia_g_stat_claims( $pid ) );
-		if ( 'tp_province' === get_post_type( $pid ) ) {
-			$travel_skip[] = 'free_zone';   /* در «اطلاعات جغرافیایی» است (P5-D458) */
+		$skip = array_keys( topersia_g_stat_claims( $pid ) );
+		if ( 'tp_province' === $type ) {
+			$skip[] = 'free_zone';   /* در «اطلاعات جغرافیایی» است (P5-D458) */
 		}
 
-		foreach ( topersia_g_zone_fields( $pid, 'travel', $travel_skip ) as $name => $raw ) {   /* آنچه خانۀ سربرگ برداشته تکرار نه (P5-D464) */
+		$fields = topersia_g_zone_fields( $pid, 'travel', $skip );   /* آنچه خانۀ سربرگ برداشته تکرار نه (P5-D464) */
 
-			$value = topersia_g_value( $name, $raw );
+		/* کشور: دوشاخه، سمت رانندگی، منطقۀ زمانی و روادید همیشه کاشی دارند — نبود مقدار «—» (نامشخص)؛ بی مقدار ساختگی */
+		$always = array();
+		if ( 'tp_country' === $type ) {
+			foreach ( array( 'electric_plug', 'drive_side', 'timezone' ) as $k ) {
+				if ( ! isset( $fields[ $k ] ) && empty( topersia_g_stat_claims( $pid )[ $k ] ) ) {
+					$always[ $k ] = '';
+				}
+			}
+		}
 
-			if ( '' === trim( wp_strip_all_tags( (string) $value ) ) ) {
+		$airport = isset( $fields['airport_name'] ) ? trim( wp_strip_all_tags( topersia_g_value( 'airport_name', $fields['airport_name'] ) ) ) : '';
+		$iata    = isset( $fields['airport_iata'] ) ? trim( wp_strip_all_tags( topersia_g_value( 'airport_iata', $fields['airport_iata'] ) ) ) : '';
+
+		foreach ( array_merge( $fields, $always ) as $name => $raw ) {
+
+			if ( 'airport_iata' === $name && '' !== $airport ) {
+				continue;   /* با نام فرودگاه یک کاشی */
+			}
+
+			$value = '' === $raw ? '' : topersia_g_value( $name, $raw );
+
+			if ( 'airport_name' === $name && '' !== $iata ) {
+				$value = esc_html( $airport ) . ' <span class="tp-lat" dir="ltr">(' . esc_html( $iata ) . ')</span>';
+			}
+
+			if ( '' !== $raw && '' === trim( wp_strip_all_tags( (string) $value ) ) ) {
 				continue;
 			}
 
-			$body .= topersia_g_a_open( '' ) . esc_html( topersia_g_t( $map[ $name ]['label'] ) ) . ': ' . $value . '</a>';
+			$tiles .= topersia_g_trip_tile( topersia_g_trip_icon_for( $name ), topersia_g_t( $map[ $name ]['label'] ), $value );
 		}
 
-		$body = '' !== $body ? '<div class="tp-practical-grid">' . $body . '</div>' : '';
+		if ( 'tp_country' === $type && empty( $seen['tp_visa'] ) ) {
+			$tiles .= topersia_g_trip_tile( 'passport', topersia_g_t( 'روادید' ), '' );
+		}
 
+		$body = '' !== $tiles ? '<div class="tp-trip" role="list">' . $tiles . '</div>' : '';
 		/* دستۀ ۲۹ — بلوک «بازدید» (P5-D450 و توضیح‌ها): فقط ردیف پر، هرگز «—» */
 		$body .= topersia_g_visit_block( $pid );
 
@@ -7886,6 +7959,20 @@ if ( ! function_exists( 'topersia_g_icon' ) ) {
 			/* نوعِ ردیف روایت — صدا و تصویر.  P5-D227 */
 			'audio'   => '<path d="M4 15v-2.5a8 8 0 0 1 16 0V15"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.6"/><rect x="16.5" y="14" width="4" height="6.5" rx="1.6"/>',
 			'video'   => '<rect x="3" y="5" width="18" height="14" rx="2.2"/><path d="M10 9.3v5.4l4.6-2.7z"/>',
+			/* «اطلاعات سفر» تصویری — دستۀ 35 · P5-D460 */
+			'plug'     => '<path d="M9 3v4M15 3v4M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/>',
+			'wheel'    => '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6V3M9.9 13.2L4 16.5M14.1 13.2L20 16.5"/>',
+			'clock'    => '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+			'phone'    => '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/>',
+			'passport' => '<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8.5 16.5h7"/>',
+			'coins'    => '<circle cx="9" cy="9" r="5.5"/><path d="M9 6.5v5M7 9h4M15 10.2a5.5 5.5 0 0 1-3.6 7.8"/>',
+			'plane'    => '<path d="M3 13l8-2V5.5a1.5 1.5 0 0 1 3 0V11l8 2v2l-8-1.5V18l2 1.5V21l-3.5-1L8.5 21v-1.5L10.5 18v-4.5L3 15z"/>',
+			'train'    => '<rect x="5" y="3" width="14" height="14" rx="3"/><path d="M5 11h14M9 21l2-4M15 21l-2-4"/>',
+			'metro'    => '<rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 12h16M8 21l2-3M16 21l-2-3M9 8h6"/>',
+			'tent'     => '<path d="M3 20L12 4l9 16zM12 4v16M9 20l3-6 3 6"/>',
+			'shield'   => '<path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+			'heart'    => '<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/>',
+			'car'      => '<path d="M4 15v-3l2-5h12l2 5v3zM4 15v3M20 15v3M7 12h10"/>',
 		);
 
 		if ( ! isset( $paths[ $key ] ) ) {
