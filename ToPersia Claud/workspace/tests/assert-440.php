@@ -196,9 +196,9 @@ t( 'کاشی: بیش از دو خط (از ارتفاع واقعی ÷ ارتفا�
 
 $rg_prac = r( 20, 'tp_relgrid', array( 'rel' => 'practical' ) );
 t( '«اطلاعات سفر» دو ستون می‌ماند و فقط توکن کاشی می‌گیرد  P5-D244',
-	false !== strpos( $rg_prac, '<div class="tp-practical-grid">' ) && false === strpos( $rg_prac, 'tp-tiles' )
-	&& false !== strpos( $css440, 'html .tp-page .tp-practical-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}' )
-	&& (bool) preg_match( '/html body \.tp-page \.tp-practical-grid a\{\s*background:var\(--tp-tile-bg\)/', $css440 ) );
+	false !== strpos( $rg_prac, '<div class="tp-trip" role="list">' ) && false === strpos( $rg_prac, 'tp-tiles' ) && false === strpos( $rg_prac, 'tp-practical-grid' )   /* دستهٔ 35: کاشی تصویری */
+	&& false !== strpos( $css440, 'html body .tp-page .tp-trip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:calc(.5 * var(--tp-rem));margin:0}' )
+	&& (bool) preg_match( '/html body \.tp-page \.tp-trip__t\{[^}]*background:var\(--tp-tile-bg\);border:1px solid var\(--tp-tile-border\);border-radius:var\(--tp-tile-radius\);color:var\(--tp-tile-text\)/', $css440 ) );
 
 /* ══ ۱٫۳ — توکن کاشی  P5-D245 ══════════════════════════════════════════ */
 

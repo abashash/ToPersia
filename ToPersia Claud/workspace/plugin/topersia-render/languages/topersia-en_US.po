@@ -1310,6 +1310,10 @@ msgid "رقص محلی"
 msgstr "Folk dance"
 
 #: includes/topersia-g-zones.php
+msgid "روادید"
+msgstr "Visa"
+
+#: includes/topersia-g-zones.php
 msgid "روادید فرودگاهی"
 msgstr "Visa on arrival"
 

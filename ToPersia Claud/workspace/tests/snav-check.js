@@ -896,7 +896,8 @@ async function commonChecks( page, vp ) {
 				return { card, before, hasAudio: !! audio, preload: audio && audio.getAttribute( 'preload' ), controls: !! ( audio && audio.controls ),
 					a, afterClose, b, galleryMedia, kinds, finalFrames: count() };
 			})()` );
-			const EMBED = /^https:\/\/www\.(?:youtube-nocookie\.com\/embed\/|aparat\.com\/video\/video\/embed\/videohash\/)/;
+			/* دستهٔ 32 بند 5: ویدیوی نمونه یک پروندهٔ webm محلی است (<video> درون شاسی) — همان شاسی؛ فقط نشانی رسانهٔ همین میزبان (uploads) هم پذیرفته است */
+const EMBED = /^(?:https:\/\/www\.(?:youtube-nocookie\.com\/embed\/|aparat\.com\/video\/video\/embed\/videohash\/)|https?:\/\/[^\/]+\/assets\/uploads\/[^?#]+\.(?:webm|mp4)(?:[?#].*)?$)/;
 			if ( LIVE && ! media.card ) {
 				rows.push( '  · روایت: این صفحه کارتِ روایت ندارد — سنجه‌های پخش بی‌موضوع' );
 				check( 'روایت: گالری هیچ رسانه‌ای ندارد  P5-D227', 0 === media.galleryMedia, JSON.stringify( media ) );

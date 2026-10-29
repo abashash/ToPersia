@@ -59,7 +59,7 @@ if ( ! function_exists( 'tp_p5d450_fields' ) ) {
 			'photo_allowed'        => array( 'select', 'عکاسی', 'Photography', 'التصوير', 'متن آزاد «سیاست عکاسی» برای توضیح می‌ماند.', $visit, false, 'tp_photo' ),
 
 			/* ── ویژۀ نوع ── */
-			'electric_plug'        => array( 'checkbox', 'دوشاخۀ برق', 'Electric plug type', 'نوع القابس الكهربائي', 'نوع دوشاخه‌های رایج (ایران: C و F، ۲۳۰ ولت).', array( 'tp_country' ), false, 'tp_plug' ),
+			'electric_plug'        => array( 'checkbox', 'دوشاخۀ برق', 'Electric plug type', 'نوع القابس الكهربائي', '', array( 'tp_country' ), false, 'tp_plug' ),
 			'drive_side'           => array( 'select', 'سمت رانندگی', 'Driving side', 'جهة القيادة', '', array( 'tp_country' ), false, 'tp_drive_side' ),
 			'typical_trip_days'    => array( 'number', 'روزهای معمول سفر', 'Typical trip length (days)', 'مدة الرحلة المعتادة (أيام)', 'چند روز برای دیدن این منطقه کافی است — فقط عدد.', array( 'tp_region' ), false ),
 			'metro_available'      => array( 'switcher', 'مترو دارد', 'Has a metro', 'يوجد مترو', '', array( 'tp_city' ), false ),

@@ -44,14 +44,14 @@ $use_ok = function ( $z, $r ) {
 		&& false !== strpos( $r, "empty( topersia_g_stat_claims( \$pid )['capital'] )" )                                              /* مرکز استان */
 		&& false !== strpos( $z, "empty( topersia_g_stat_claims( \$pid )['distance:capital'] )" )                                    /* فاصله تا مرکز استان */
 		&& false !== strpos( $z, "! empty( topersia_g_stat_claims( \$pid )[ 'parent:' . substr( \$t, 3 ) ] )" )                      /* والد زنجیره در پرکردن کارت */
-		&& false !== strpos( $z, "\$travel_skip = array_keys( topersia_g_stat_claims( \$pid ) );" );        /* فیلد اطلاعات سفر */
+		&& false !== strpos( $z, "\$skip = array_keys( topersia_g_stat_claims( \$pid ) );" );        /* فیلد اطلاعات سفر */
 };
 t( 'تکرار (P5-D464): هر مقدار خانه‌های سربرگ (والد مکانی · مرکز استان · فاصله تا مرکز · فیلد اطلاعات سفر) از کاشی‌های ستون چپ برداشته می‌شود — جهش: هر مصرف‌کننده بی نگهبان می‌افتد',
 	$claims_ok( $z34 ) && $use_ok( $z34, $r34 )
 	&& ! $use_ok( str_replace( "empty( topersia_g_stat_claims( \$pid )['distance:capital'] )", 'true', $z34 ), $r34 )
 	&& ! $use_ok( $z34, str_replace( "empty( topersia_g_stat_claims( \$pid )['capital'] )", 'true', $r34 ) )
 	&& ! $use_ok( $z34, str_replace( "! empty( topersia_g_stat_claims( \$pid )[ 'parent:' . substr( (string) get_post_type( \$id ), 3 ) ] )", 'false', str_replace( "topersia_g_stat_claims( \$pid )[ 'parent:' . substr( (string) get_post_type( \$id ), 3 ) ]", 'x', $r34 ) ) )
-	&& ! $use_ok( str_replace( "\$travel_skip = array_keys( topersia_g_stat_claims( \$pid ) );", "\$travel_skip = array();", $z34 ), $r34 )
+	&& ! $use_ok( str_replace( "\$skip = array_keys( topersia_g_stat_claims( \$pid ) );", "\$skip = array();", $z34 ), $r34 )
 	&& ! $claims_ok( str_replace( 'null === topersia_g_stat_cell( $pid, $cell )', 'false', $z34 ) ) );
 
 /* ادعای رفتاری با stub: خانهٔ دارای مقدار ← claim؛ خالی ← نه */
@@ -106,8 +106,8 @@ $GLOBALS['tp_posts'][9405] = array( 'type' => 'tp_province', 'title' => 'است�
 $GLOBALS['tp_meta'][9405]  = array( 'free_zone' => 'true' );
 $geo34 = r( 9405, 'tp_facts' );
 tp441_mut( 'استان (P5-D458): «منطقهٔ آزاد» کاشی «اطلاعات جغرافیایی» است؛ در «اطلاعات سفر» (کد) برای استان کنار گذاشته می‌شود — جهش: نگهبان برداشته شود می‌افتد',
-	function ( $x ) { return false !== strpos( $x[0], 'منطقۀ آزاد' ) && false !== strpos( $x[1], "\$travel_skip[] = 'free_zone';" ); },
-	array( $geo34, $z34 ), array( $geo34, str_replace( "\$travel_skip[] = 'free_zone';", '', $z34 ) ) );
+	function ( $x ) { return false !== strpos( $x[0], 'منطقۀ آزاد' ) && false !== strpos( $x[1], "\$skip[] = 'free_zone';" ); },
+	array( $geo34, $z34 ), array( $geo34, str_replace( "\$skip[] = 'free_zone';", '', $z34 ) ) );
 
 /* ── بند 7: کشور — واحد پول فقط نام ── */
 $GLOBALS['tp_posts'][9406] = array( 'type' => 'tp_country', 'title' => 'کشور آزمون', 'url' => 'https://topersia.com/c/t/' );

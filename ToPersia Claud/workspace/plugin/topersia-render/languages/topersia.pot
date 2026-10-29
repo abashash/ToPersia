@@ -1309,6 +1309,10 @@ msgid "رقص محلی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+msgid "روادید"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "روادید فرودگاهی"
 msgstr ""
 

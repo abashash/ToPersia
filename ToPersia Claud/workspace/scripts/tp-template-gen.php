@@ -1553,6 +1553,26 @@ html .tp-page .tp-stat--none .tp-stat__v{color:var(--tp-text-2);font-weight:700}
 html .tp-page .tp-longform .tp-lead{margin:0 0 calc(.8 * var(--tp-rem));font-size:calc(1.02 * var(--tp-rem));font-weight:600;line-height:1.85;color:var(--tp-text-strong)}
 html .tp-page .tp-longform .tp-names{margin:0 0 calc(.9 * var(--tp-rem));font-size:calc(.9 * var(--tp-rem));line-height:1.7;color:var(--tp-text)}
 html .tp-page .tp-names__k{font-weight:700}
+/* سربرگ فصلِ روشن‌شده: متن سفید روی زردِ تابستان ۳٫۲۱ بود (کنتراست دستۀ 35، صفحۀ نمونه‌ٔ کشور) — متن تیره از توکن؛ حالت تیره همان var(--tp-bg) می‌ماند */
+html body .tp-page .tp-season--summer.tp-has-on .tp-season__h{background:color-mix(in srgb, var(--tp-s-summer) 70%, #000)}
+html[data-tp-mode="dark"] body .tp-page .tp-season--summer.tp-has-on .tp-season__h{background:var(--tp-s-summer)}
+
+/* ─── «اطلاعات سفر» تصویری (P5-D460 · دستۀ 35): کاشی = آیکون SVG درون‌خط + مقدار کوتاه + برچسب؛ فقط توکن کاشی/پالت (سه حالت رنگ).
+   متن زیر ۱۴px از --tp-tile-text (P5-D184)؛ دو ستون، زیر ۳۶۰px یک ستون؛ متن بلند می‌شکند، بی سرریز افقی. ─── */
+html body .tp-page .tp-trip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:calc(.5 * var(--tp-rem));margin:0}
+html body .tp-page .tp-trip__t{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i v" "i k";column-gap:calc(.6 * var(--tp-rem));row-gap:2px;align-items:center;min-width:0;
+ padding:calc(.65 * var(--tp-rem)) calc(.75 * var(--tp-rem));background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius);color:var(--tp-tile-text);text-decoration:none}
+html body .tp-page .tp-trip__i{grid-area:i;display:grid;place-items:center;inline-size:34px;block-size:34px;border-radius:50%;background:var(--tp-soft);color:var(--tp-primary-text)}
+html body .tp-page .tp-trip__i svg{inline-size:20px;block-size:20px;display:block}
+html body .tp-page .tp-trip__v{grid-area:v;font-size:calc(.95 * var(--tp-rem));font-weight:800;line-height:1.4;color:var(--tp-tile-text);overflow-wrap:anywhere}
+html body .tp-page .tp-trip__v--none{font-weight:700}
+html body .tp-page .tp-trip__k{grid-area:k;font-size:calc(.72 * var(--tp-rem));line-height:1.4;color:var(--tp-tile-text);overflow-wrap:anywhere}
+html body .tp-page a.tp-trip__t:hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text)}
+html body .tp-page a.tp-trip__t:hover .tp-trip__v,html body .tp-page a.tp-trip__t:hover .tp-trip__k{color:var(--tp-primary-text)}
+html body .tp-page .tp-trip + .tp-visit{border-block-start:1px solid var(--tp-tile-border);padding-block-start:12px;margin-block-start:12px}
+@media(max-width:359px){
+html body .tp-page .tp-trip{grid-template-columns:1fr}
+}
 
 /* ─── «پاسخ کوتاه» روادید و ارز (P5-D454 · دستۀ 33): سه کاشی پرسش ← پاسخ؛ dl/dt/dd معنایی، فقط توکن.
    متن زیر ۱۴px از --tp-text (P5-D184)؛ پاسخ بزرگ و پررنگ. موبایل: یک ستون. ─── */

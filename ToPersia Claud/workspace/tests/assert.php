@@ -57,7 +57,7 @@ t( 'موجودیت بدون سوییچر روشن: بخش نشان‌ها کام
 
 /* لاتین */
 /* کد فرودگاه از ۲ج در «اطلاعات سفر» است، نه کارت حقایق — P5-D282 */
-t( 'لاتین: مونو و چپ‌به‌راست', false !== strpos( r( 30, 'tp_relgrid', array( 'rel' => 'practical' ) ), '<span class="tp-lat" dir="ltr">SYZ</span>' ) );
+t( 'لاتین: مونو و چپ‌به‌راست', false !== strpos( r( 30, 'tp_relgrid', array( 'rel' => 'practical' ) ), '<span class="tp-lat" dir="ltr">(SYZ)</span>' ) );   /* دستهٔ 35: کاشی فرودگاه «نام (کد)» */
 
 /* واژه‌نامه — P5-D169 */
 $facts_lut = r( 40, 'tp_facts' );
@@ -197,8 +197,8 @@ $sc_body = function ( $name, $src = null ) use ( $sc_src ) {
 };
 $sc_none = function ( $src ) use ( $sc_body ) {
 	/* «—» فقط در لایهٔ نمایش: ثابت در [tp_stats]؛ داده‌دهنده‌ها (cell · derived) برای نبود null می‌دهند و «—» نمی‌سازند */
-	return 1 === substr_count( $src, "define( 'TOPERSIA_STAT_NONE', '—' );" ) && 4 === substr_count( $src, 'TOPERSIA_STAT_NONE' )   /* defined · define · مصرف در [tp_stats] و «پاسخ کوتاه» (دستهٔ 33) — هر دو لایهٔ نمایش */
-		&& false !== strpos( $sc_body( 'topersia_g_sc_stats', $src ), 'TOPERSIA_STAT_NONE' ) && false !== strpos( $sc_body( 'topersia_g_sc_quick', $src ), 'TOPERSIA_STAT_NONE' )
+	return 1 === substr_count( $src, "define( 'TOPERSIA_STAT_NONE', '—' );" ) && 5 === substr_count( $src, 'TOPERSIA_STAT_NONE' )   /* defined · define · مصرف در [tp_stats]، «پاسخ کوتاه» (دستهٔ 33) و کاشی «اطلاعات سفر» (دستهٔ 35) — هر سه لایهٔ نمایش */
+		&& false !== strpos( $sc_body( 'topersia_g_sc_stats', $src ), 'TOPERSIA_STAT_NONE' ) && false !== strpos( $sc_body( 'topersia_g_sc_quick', $src ), 'TOPERSIA_STAT_NONE' ) && false !== strpos( $sc_body( 'topersia_g_trip_tile', $src ), 'TOPERSIA_STAT_NONE' )
 		&& false === strpos( $sc_body( 'topersia_g_stat_cell', $src ), '—' ) && false === strpos( $sc_body( 'topersia_g_stat_derived', $src ), '—' );
 };
 t( 'P5-D395: «—» فقط در [tp_stats] (لایهٔ نمایش)؛ topersia_g_stat_cell و خانه‌های مشتق برای نبود null می‌دهند — جهش: «—» در داده‌دهنده می‌افتد',
@@ -1457,13 +1457,9 @@ t( 'پوسته: main > wrap > crumb + content-grid > main-col + rail',
 	(bool) preg_match( '#<main id="tp-main" class="tp-main"><div class="tp-wrap"><p class="tp-crumb".*?<div class="tp-content-grid"><div class="tp-main-col">#s', $p20 ) );
 
 /* ۴٫۳٫۰: نام «اطلاعات سفر»، پیوند واقعی (بند ۰) و ارث‌بری از کشور (بند ۸) — ترتیب P5-D211 الفبایی */
-t( 'کارت: اطلاعات سفر `.tp-practical-grid` با پیکان و پیوند — خودِ استان + ارث از کشور  P5-D233',
-	false !== strpos( $p20, '<h3 id="tp-practicalTitle">اطلاعات سفر</h3>' )
-	&& false !== strpos( $p20, '<div class="tp-practical-grid">'
-		. '<a href="https://topersia.com/dress-code/">پوشش در اماکن عمومی <span>→</span></a>'
-		. '<a href="https://topersia.com/calendar/">تقویم رسمی ایران <span>→</span></a>'
-		. '<a href="https://topersia.com/health/">سلامت و ایمنی <span>→</span></a>'
-		. '<a href="https://topersia.com/currency/">واحد پول <span>→</span></a></div>' ) );
+t( 'کارت: اطلاعات سفر کاشی تصویری `.tp-trip` (آیکون SVG درون‌خط + نام + برچسب) با پیوند — خودِ استان + ارث از کشور  P5-D233 · P5-D460',
+	false !== strpos( $p20, '<h3 id="tp-practicalTitle">اطلاعات سفر</h3>' ) && false !== strpos( $p20, '<div class="tp-trip" role="list">' )
+	&& 4 === preg_match_all( '#<a class="tp-trip__t" role="listitem" href="https://topersia\.com/(?:dress-code|calendar|health|currency)/"><span class="tp-trip__i" aria-hidden="true"><svg [^>]*>.*?</svg></span><b class="tp-trip__v">(?:پوشش در اماکن عمومی|تقویم رسمی ایران|سلامت و ایمنی|واحد پول)</b>#su', $p20 ) );
 
 t( 'کارت: هم‌مرزها `.tp-neighbors` با جهتِ مشتق از مختصات',
 	false !== strpos( $p20, '<div class="tp-neighbors"><a href="https://topersia.com/yazd-province/"><span class="tp-n-dir">شرق</span><b>یزد</b></a>' ) );
@@ -2305,6 +2301,7 @@ require __DIR__ . '/assert-2m.php';
 require __DIR__ . '/assert-2n.php';
 require __DIR__ . '/assert-33.php';
 require __DIR__ . '/assert-34.php';
+require __DIR__ . '/assert-35.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

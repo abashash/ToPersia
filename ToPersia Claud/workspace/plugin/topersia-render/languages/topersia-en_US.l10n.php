@@ -332,6 +332,7 @@ return array (
     'رصد آسمان' => 'Stargazing',
     'رعدوبرق' => 'Thunderstorm',
     'رقص محلی' => 'Folk dance',
+    'روادید' => 'Visa',
     'روادید فرودگاهی' => 'Visa on arrival',
     'روادید لازم است؟' => 'Do I need a visa?',
     'روادید هنگام ورود' => 'Visa on arrival',
