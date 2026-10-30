@@ -56,7 +56,8 @@ function tpb_db() {
 	$host = $get( 'DB_HOST' );
 	$port = 3306;
 	if ( false !== strpos( $host, ':' ) ) { list( $host, $port ) = explode( ':', $host, 2 ); }
-	$db = array( 'name' => $get( 'DB_NAME' ), 'user' => $get( 'DB_USER' ), 'pass' => $get( 'DB_PASSWORD' ), 'host' => $host, 'port' => (int) $port );
+	$pre  = preg_match( '/\$table_prefix\s*=\s*[\'"]([^\'"]+)[\'"]/', $src, $pm ) ? $pm[1] : 'wp_';
+	$db = array( 'prefix' => $pre, 'name' => $get( 'DB_NAME' ), 'user' => $get( 'DB_USER' ), 'pass' => $get( 'DB_PASSWORD' ), 'host' => $host, 'port' => (int) $port );
 	if ( '' === $db['name'] || '' === $db['user'] ) { tpb_fail( 'wp-config.php خوانده نشد', 2 ); }
 	if ( 'topersia_local' !== $db['name'] || ! in_array( $db['host'], array( '127.0.0.1', 'localhost' ), true ) ) {
 		tpb_fail( 'فقط پایگاه‌دادهٔ محلی topersia_local', 2 );
@@ -81,16 +82,29 @@ function tpb_wp_cmd( array $args, $override = '', $plugins = false ) {
 	return array_merge( $cmd, $args );
 }
 
-/** اجرا و گرفتن خروجی (برای فرمان‌های کوچک). */
-function tpb_run( array $cmd, array $env = null, $stdin = null ) {
-	$p = proc_open( $cmd, array( 0 => array( 'pipe', 'r' ), 1 => array( 'pipe', 'w' ), 2 => array( 'pipe', 'w' ) ), $pipes, null, $env ?: tpb_env() );
+/**
+ * اجرا و گرفتن خروجی. خروجی در پروندهٔ موقت می‌رود (نه لوله) تا هم بن‌بست نشود هم مهلت اعمال شود.
+ * $timeout ثانیه (۰ = بی مهلت)؛ با گذشتن مهلت کل درخت فرایند کشته و کد ۱۲۴ برمی‌گردد.
+ */
+function tpb_run( array $cmd, array $env = null, $stdin = null, $timeout = 0 ) {
+	$o = tempnam( sys_get_temp_dir(), 'tpbo' ); $e = tempnam( sys_get_temp_dir(), 'tpbe' );
+	$p = proc_open( $cmd, array( 0 => array( 'pipe', 'r' ), 1 => array( 'file', $o, 'w' ), 2 => array( 'file', $e, 'w' ) ), $pipes, null, $env ?: tpb_env() );
 	if ( ! is_resource( $p ) ) { return array( 127, '', 'proc_open failed' ); }
 	if ( null !== $stdin ) { fwrite( $pipes[0], $stdin ); }
 	fclose( $pipes[0] );
-	$out = stream_get_contents( $pipes[1] );
-	$err = stream_get_contents( $pipes[2] );
-	fclose( $pipes[1] ); fclose( $pipes[2] );
-	return array( proc_close( $p ), $out, $err );
+	$dead = $timeout > 0 ? microtime( true ) + $timeout : 0;
+	$code = null;
+	while ( true ) {
+		$st = proc_get_status( $p );
+		if ( ! $st['running'] ) { $code = $st['exitcode']; break; }
+		if ( $dead && microtime( true ) > $dead ) { exec( 'taskkill /F /T /PID ' . (int) $st['pid'] . ' >NUL 2>&1' ); proc_terminate( $p ); $code = 124; break; }
+		usleep( 150000 );
+	}
+	$rc = proc_close( $p );
+	if ( null === $code || -1 === $code ) { $code = $rc; }
+	$out = (string) file_get_contents( $o ); $err = (string) file_get_contents( $e );
+	@unlink( $o ); @unlink( $e );
+	return array( $code, $out, $err );
 }
 
 /** خط‌های هشدار ثابت‌تعریف‌شدهٔ override را از خروجی بر می‌دارد. */

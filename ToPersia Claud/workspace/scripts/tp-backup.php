@@ -58,7 +58,7 @@ $facts     = tpb_eval_file( $fx_script, $tmp . '/facts.json' );
 /* ── ۲) خروجی پایگاه‌داده، فشرده، با پویش کلید ── */
 tpb_out( '۲) خروجی پایگاه‌داده (wp db export، فشرده)…' );
 $gz  = gzopen( $dir . '/db.sql.gz', 'wb6' );
-$pre  = 'jwWSU9v_';
+$pre  = $db['prefix'];
 $q    = function ( $l ) { return "'" . implode( "','", array_map( function ( $x ) { return str_replace( array( chr( 92 ), "'" ), array( chr( 92 ) . chr( 92 ), chr( 92 ) . "'" ), $x ); }, $l ) ) . "'"; };
 /* سه گذر: همه‌چیز جز options و usermeta ؛ options بی ردیف‌های رازدار ؛ usermeta بی نشست‌ها */
 $passes = array(

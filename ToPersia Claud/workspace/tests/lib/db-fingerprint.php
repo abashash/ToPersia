@@ -10,7 +10,7 @@
 global $wpdb;
 $wpdb->query( 'SET SESSION group_concat_max_len = 1073741824' );   /* وگرنه GROUP_CONCAT پیش‌فرض ۱۰۲۴ بایت می‌بُرد و چکسام بی‌معنی می‌شود */
 $out    = array( 'count' => array(), 'sum' => array(), 'options' => array(), 'real' => array() );
-$sumtab = array( 'posts', 'term_relationships', 'term_taxonomy', 'terms', 'jet_rel_default', 'topersia_geo', 'icl_translations', 'topersia_ai_summaries', 'comments' );
+$sumtab = array( 'posts', 'postmeta', 'term_relationships', 'term_taxonomy', 'terms', 'jet_rel_default', 'topersia_geo', 'icl_translations', 'topersia_ai_summaries', 'comments' );
 /* دستهٔ 37: پشتیبان ردیف‌های رازدار (کلید API · مجوز · نشست) را نمی‌برد؛ TP_FP_SCRUB = JSON { options: [نام…], usermeta: [کلید…] } همان ردیف‌ها را از شمارش و گزینه‌ها کنار می‌گذارد. بی متغیر، رفتار پیشین. */
 $scrub  = json_decode( (string) getenv( 'TP_FP_SCRUB' ), true );
 $sc_opt = is_array( $scrub ) && ! empty( $scrub['options'] ) ? array_map( 'strval', $scrub['options'] ) : array();
