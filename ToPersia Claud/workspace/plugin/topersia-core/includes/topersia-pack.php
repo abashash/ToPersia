@@ -1153,6 +1153,106 @@ function topersia_pack_description_word_cap( $description ) {
 
 	return 0;
 }
+/**
+ * P5-D481 — پستِ موجودیتی که یال رابطه دارد با حذف، یال‌هایش را می‌برد و جایگزینِ تازه‌ساخت آن‌ها را ندارد
+ * (ایران، ۳۰ اکتبر: ۳۴ یال رفت). تنها راه امن جایگزینی «به‌روزرسانی با entity_uid» است.
+ *
+ * پیش از حذف: شمار یال‌ها و عکس آن‌ها (تا ۵۰۰ یال) مستقیم در جدول لاگ، کانال `relations`، ردیفِ هشدار — مستقل از تنظیم
+ * لاگ (مثل ردیف برگشت درون‌ریزی). درون‌ریز بعدی با همین ردیف‌ها می‌فهمد پستِ هم‌نام یا هم‌نامک پیش‌تر یال داشته.
+ */
+function topersia_pack_edge_rows( $post_id ) {
+
+	global $wpdb;
+
+	$table = $wpdb->prefix . 'jet_rel_default';
+
+	if ( ! $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) ) {
+		return array();
+	}
+
+	return (array) $wpdb->get_results(
+		$wpdb->prepare( "SELECT rel_id, parent_object_id AS p, child_object_id AS c FROM {$table} WHERE parent_object_id = %d OR child_object_id = %d", $post_id, $post_id ),
+		ARRAY_A
+	);
+}
+
+function topersia_pack_log_relation_loss( $post_id, $post ) {
+
+	global $wpdb;
+
+	if ( ! $post || ! function_exists( 'topersia_is_entity' ) || ! topersia_is_entity( $post->post_type ) || ! function_exists( 'topersia_log_table' ) ) {
+		return;
+	}
+
+	$rows = topersia_pack_edge_rows( (int) $post_id );
+
+	if ( ! $rows ) {
+		return;
+	}
+
+	$wpdb->insert(
+		topersia_log_table(),
+		array(
+			'logged_at'  => current_time( 'mysql' ),
+			'level'      => 'warning',
+			'channel'    => 'relations',
+			'message'    => sprintf( 'حذف پستِ دارای یال رابطه #%d — %d یال', (int) $post_id, count( $rows ) ),
+			'context'    => wp_json_encode( array(
+				'post'  => (int) $post_id,
+				'type'  => (string) $post->post_type,
+				'slug'  => (string) $post->post_name,
+				'title' => (string) $post->post_title,
+				'uid'   => (string) get_post_meta( $post_id, 'entity_uid', true ),
+				'count' => count( $rows ),
+				'edges' => array_slice( $rows, 0, 500 ),
+			), JSON_UNESCAPED_UNICODE ),
+			'request_id' => function_exists( 'topersia_request_id' ) ? topersia_request_id() : '',
+			'user_id'    => function_exists( 'get_current_user_id' ) ? get_current_user_id() : 0,
+			'url'        => isset( $_SERVER['REQUEST_URI'] ) ? substr( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), 0, 255 ) : '',
+			'source'     => 'topersia-pack.php',
+		),
+		array( '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s' )
+	);
+}
+
+add_action( 'before_delete_post', 'topersia_pack_log_relation_loss', 5, 2 );
+
+/**
+ * هشدارهای P5-D481 برای پستِ تازه‌ساخت: (الف) پستِ هم‌نام/هم‌نامک با یال هست؛ (ب) پستِ هم‌نوع و هم‌نام/هم‌نامک/هم‌uid
+ * اخیراً حذف شده و یال داشته. هرگز مانع نیست.
+ *
+ * @return string[]
+ */
+function topersia_pack_replace_warnings( $type, $title, $slug, $uid, $same_ids ) {
+
+	global $wpdb;
+
+	$out = array();
+
+	foreach ( (array) $same_ids as $id ) {
+		$n = count( topersia_pack_edge_rows( (int) $id ) );
+		if ( $n ) {
+			$out[] = 'هشدار P5-D481: پست #' . (int) $id . ' ' . $n . ' یال رابطه دارد؛ حذف و ساخت پستِ تازه آن‌ها را می‌برد — به‌روزرسانی با entity_uid (یا slug) بنویس';
+		}
+	}
+
+	if ( function_exists( 'topersia_log_table' ) ) {
+		$rows = $wpdb->get_col( "SELECT context FROM " . topersia_log_table() . " WHERE channel = 'relations' AND message LIKE 'حذف پستِ دارای یال%' ORDER BY id DESC LIMIT 60" );
+		foreach ( (array) $rows as $json ) {
+			$c = json_decode( (string) $json, true );
+			if ( ! is_array( $c ) || ( isset( $c['type'] ) ? $c['type'] : '' ) !== $type ) {
+				continue;
+			}
+			$hit = ( '' !== $slug && isset( $c['slug'] ) && $c['slug'] === $slug ) || ( '' !== $uid && isset( $c['uid'] ) && $c['uid'] === $uid ) || ( '' !== $title && isset( $c['title'] ) && $c['title'] === $title );
+			if ( $hit ) {
+				$out[] = 'هشدار P5-D481: پستِ #' . (int) $c['post'] . ' با همین نام/نامک ' . (int) $c['count'] . ' یال رابطه داشت و حذف شده؛ پستِ تازه آن‌ها را ندارد — یال‌ها را با scripts/tp-repair-iran-edges.php (dry-run) از پشتیبان ترمیم کن';
+				break;
+			}
+		}
+	}
+
+	return $out;
+}
 function topersia_pack_words( $html ) {
 
 	$text = trim( wp_strip_all_tags( (string) $html ) );
@@ -1872,9 +1972,17 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 			$same = topersia_pack_by_name( $type, $title, $lang );
 			if ( $same ) {
 				$plan['problem'] = 'duplicate';
+				foreach ( topersia_pack_replace_warnings( $type, $title, $slug, (string) ( isset( $post['entity_uid'] ) ? $post['entity_uid'] : '' ), $same ) as $w ) {
+					$plan['notes'][] = $w;
+				}
 				$plan['notes'][] = 'همین نام در سایت: #' . implode( ' · #', array_slice( $same, 0, 5 ) ) . ' — برای به‌روزرسانی uid یا slug آن را بنویس؛ برای موجودیت تازۀ هم‌نام، slug تازه';
 				return $plan;
 			}
+		}
+
+		/* P5-D481: پستِ هم‌نامِ اخیراً حذف‌شده که یال داشت ← پستِ تازه یال‌هایش را ندارد (هشدار، نه مانع) */
+		foreach ( topersia_pack_replace_warnings( $type, $title, $slug, (string) ( isset( $post['entity_uid'] ) ? $post['entity_uid'] : '' ), array() ) as $w ) {
+			$plan['notes'][] = $w;
 		}
 
 		$plan['action'] = 'create';
