@@ -6580,11 +6580,16 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 
 		foreach ( $types as $key => $label ) {
 
+			/* P5-D466: الگوی tablist — نقش، aria-selected، فوکوس گردان (tabindex)، کلید جهت در جاوااسکریپت */
 			$buttons .= '<button class="tp-ai__btn' . ( $first ? ' tp-is-active' : '' ) . '"'
-				. ' type="button" data-ai="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</button>';
+				. ' type="button" role="tab" id="tp-ai-tab-' . esc_attr( $key ) . '" aria-controls="tp-ai-panel-' . esc_attr( $key ) . '"'
+				. ' aria-selected="' . ( $first ? 'true' : 'false' ) . '" tabindex="' . ( $first ? '0' : '-1' ) . '"'
+				. ' data-ai="' . esc_attr( $key ) . '">' . esc_html( $label ) . '</button>';
 
 			$first = false;
 		}
+
+		$buttons = '<div class="tp-ai__tabs" role="tablist" aria-label="' . esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>';
 
 		$buttons .= '<button class="tp-ai__btn tp-ai__btn--copy" type="button" data-ai="copy">'
 			. '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"'
@@ -6602,7 +6607,8 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 		$first   = true;
 
 		foreach ( $data as $key => $text ) {
-			$panels .= '<p class="tp-justify" data-tp-ai-panel="' . esc_attr( $key ) . '"' . ( $first ? '' : ' hidden' ) . '>' . esc_html( $text ) . '</p>';
+			$panels .= '<p class="tp-justify" role="tabpanel" id="tp-ai-panel-' . esc_attr( $key ) . '" aria-labelledby="tp-ai-tab-' . esc_attr( $key ) . '" tabindex="0"'
+				. ' data-tp-ai-panel="' . esc_attr( $key ) . '"' . ( $first ? '' : ' hidden' ) . '>' . esc_html( $text ) . '</p>';
 			$first   = false;
 		}
 
@@ -6613,8 +6619,7 @@ if ( ! function_exists( 'topersia_g_sc_ai' ) ) {
 		 */
 		$body = '<div class="tp-ai">'
 			. '<h2>' . esc_html__( 'این مقصد را در یک نگاه بفهمید', 'topersia' ) . '</h2>'
-			. '<div class="tp-ai__actions" role="group" aria-label="'
-			. esc_attr__( 'خروجی‌های هوش مصنوعی', 'topersia' ) . '">' . $buttons . '</div>'
+			. '<div class="tp-ai__actions">' . $buttons . '</div>'
 			. '<div class="tp-ai__out" data-tp-ai-out'
 			. " data-tp-ai='" . esc_attr( wp_json_encode( $data ) ) . "'"
 			. ' aria-live="polite">' . $panels
@@ -8287,6 +8292,25 @@ if ( ! function_exists( 'topersia_g_sc_culture' ) ) {
  *
  * نبود، خالی — نه «—» و نه «نامعلوم».
  */
+/**
+ * عدد مرتب‌سازی یک فیلد عددی (جمعیت · وسعت) — رشتۀ ارقام لاتین، یا خالی اگر نیست.  P5-D465
+ * فقط از فیلد موجود؛ مقدار ناموجود ← ''، و پنجره آن را آخر فهرست می‌گذارد.
+ */
+if ( ! function_exists( 'topersia_g_sort_num' ) ) {
+	function topersia_g_sort_num( $id, $field ) {
+
+		$raw = trim( (string) topersia_g_raw( (int) $id, $field ) );
+
+		if ( '' === $raw || ! preg_match( '/^[0-9۰-۹,٬.\s]+$/u', $raw ) ) {
+			return '';
+		}
+
+		$raw = strtr( $raw, array( '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9', '٬' => '', ',' => '', ' ' => '' ) );
+
+		return preg_match( '/^[0-9]+(\.[0-9]+)?$/', $raw ) ? $raw : '';
+	}
+}
+
 if ( ! function_exists( 'topersia_g_list_meta' ) ) {
 	function topersia_g_list_meta( $key, $item ) {
 
@@ -8379,6 +8403,10 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 			$by_city = (bool) apply_filters( 'topersia_g_list_by_city', 'attractions' === $key && 'tp_province' === ( function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '' ), $post_id, $key );
 			$cities  = array();
 
+			/* P5-D465: فقط کشور←استان‌ها و استان←شهرها مرتب‌سازی دارند */
+			$ptype    = function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '';
+			$sortable = ( 'provinces' === $key && 'tp_country' === $ptype ) || ( 'places' === $key && 'tp_province' === $ptype );
+
 			foreach ( $res['items'] as $item ) {
 				$meta    = topersia_g_list_meta( $key, $item );
 				$meta    = ( '' === $meta && $mixed && ! empty( $item['kind'] ) ) ? (string) $item['kind'] : $meta;
@@ -8388,7 +8416,14 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 					continue;
 				}
 
-				$items[] = array( 'name' => $item['name'], 'meta' => $meta, 'url' => $item['url'] );
+				$row = array( 'name' => $item['name'], 'meta' => $meta, 'url' => $item['url'] );
+
+				if ( $sortable ) {
+					$row['pop']  = topersia_g_sort_num( isset( $item['id'] ) ? $item['id'] : 0, 'population' );
+					$row['area'] = topersia_g_sort_num( isset( $item['id'] ) ? $item['id'] : 0, 'area_km2' );
+				}
+
+				$items[] = $row;
 			}
 
 			if ( $by_city ) {
@@ -8412,7 +8447,31 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 		/* دستۀ ۲۶ · F-03: پنجرۀ فرهنگ عنوان «همۀ …» می‌گیرد، نه همان سرفصل بخش */
 		$title = 'culture' === $key ? __( 'همۀ فرهنگ و رویداد', 'topersia' ) : ( isset( $group['title'] ) ? topersia_g_t( (string) $group['title'] ) : '' );
 
-		return topersia_g_list_modal_html( 'tp-list-' . $key, $title, $blocks );
+		return topersia_g_list_modal_html( 'tp-list-' . $key, $title, $blocks, ! empty( $sortable ) );
+	}
+}
+
+/**
+ * نوار مرتب‌سازی پنجرۀ فهرست — الفبا · جمعیت · وسعت.  P5-D465
+ * دکمه‌ها `aria-pressed`؛ حالت پیش‌فرض (ترتیب فعلی سرور) هیچ دکمه‌ای را فشرده نشان نمی‌دهد جز «پیش‌فرض».
+ * فهرست کامل در HTML سرور می‌ماند؛ فقط ترتیب را جاوااسکریپت عوض می‌کند.
+ */
+if ( ! function_exists( 'topersia_g_list_sortbar' ) ) {
+	function topersia_g_list_sortbar( $id ) {
+
+		$opts = array(
+			'default' => __( 'پیش‌فرض', 'topersia' ),
+			'alpha'   => __( 'الفبا', 'topersia' ),
+			'pop'     => __( 'جمعیت', 'topersia' ),
+			'area'    => __( 'وسعت', 'topersia' ),
+		);
+		$out  = '<div class="tp-list__sort" role="group" aria-label="' . esc_attr__( 'مرتب‌سازی', 'topersia' ) . '" data-tp-sort>';
+
+		foreach ( $opts as $k => $label ) {
+			$out .= '<button class="tp-list__sortbtn" type="button" data-tp-sort-by="' . esc_attr( $k ) . '" aria-pressed="' . ( 'default' === $k ? 'true' : 'false' ) . '">' . esc_html( $label ) . '</button>';
+		}
+
+		return $out . '</div>';
 	}
 }
 
@@ -8425,7 +8484,7 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
  * @return string HTML، یا خالی اگر عضوی نیست.
  */
 if ( ! function_exists( 'topersia_g_list_modal_html' ) ) {
-	function topersia_g_list_modal_html( $id, $title, $blocks ) {
+	function topersia_g_list_modal_html( $id, $title, $blocks, $sortable = false ) {
 
 		$total = 0;
 		$body  = '';
@@ -8447,7 +8506,13 @@ if ( ! function_exists( 'topersia_g_list_modal_html' ) ) {
 
 				/* نامِ تاشده با تابع هسته — پنجره عبارت را با همان جدول قاعده تا می‌کند.  P5-D265 */
 				$fold   = function_exists( 'topersia_g_fold' ) ? topersia_g_fold( $item['name'] ) : '';
-				$cards .= '<li class="tp-list__item"' . ( '' !== $fold ? ' data-tp-fold="' . esc_attr( $fold ) . '"' : '' ) . '>'
+				$sort_at = '';
+				if ( $sortable ) {
+					$sort_at = ( isset( $item['pop'] ) && '' !== $item['pop'] ? ' data-tp-pop="' . esc_attr( $item['pop'] ) . '"' : '' )
+						. ( isset( $item['area'] ) && '' !== $item['area'] ? ' data-tp-area="' . esc_attr( $item['area'] ) . '"' : '' );
+				}
+
+				$cards .= '<li class="tp-list__item"' . ( '' !== $fold ? ' data-tp-fold="' . esc_attr( $fold ) . '"' : '' ) . $sort_at . '>'
 					. ( '' !== (string) $item['url'] && '#' !== (string) $item['url']
 						? '<a class="tp-list__card" href="' . esc_url( $item['url'] ) . '">' . $inner . '</a>'
 						: '<span class="tp-list__card">' . $inner . '</span>' )
@@ -8485,6 +8550,7 @@ if ( ! function_exists( 'topersia_g_list_modal_html' ) ) {
 			. '<button class="tp-gallery-modal__close" type="button" data-tp-close'
 			. ' aria-label="' . esc_attr__( 'بستن فهرست', 'topersia' ) . '">&times;</button>'
 			. '</div>'
+			. ( $sortable ? topersia_g_list_sortbar( $id ) : '' )
 			. '<div class="tp-list__body">' . $body
 			. '<p class="tp-list__empty" role="status" hidden>' . esc_html__( 'موردی پیدا نشد', 'topersia' ) . '</p>'
 			. '</div></div>';

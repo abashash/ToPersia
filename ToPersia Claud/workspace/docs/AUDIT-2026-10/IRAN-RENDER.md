@@ -1,0 +1,59 @@
+# صفحهٔ ایران (fa) — کجا دیده می‌شود، چرا نه · دستهٔ 36-ج (۳۰ اکتبر ۲۰۲۶)
+
+> **پیش از هر تغییر نوشته شد، علت‌ها با پرونده:خط.** شاهد: رندر درون‌فرایندی `[tp_page]` پستِ ایران (#5483، نسخهٔ واردشده با داده‌ای که `short_summary` آن با v8 یکی است) با WP-CLI، پیش از اینکه پست از پیشخوان پاک شود (لاگ دسترسی: `post.php?post=5483&action=trash` ساعت ۱۵:۵۴ و `action=delete` ساعت ۱۵:۵۹ — کار شما در پیشخوان، نه ابزار من؛ بازگردانی نشد).
+> ⚠ **فایل v9 در `Downloads` نیست** (آخرین: v8) و پست ایران فعلاً در پایگاه‌داده نیست. جدول زیر روی داده‌ای است که رندر شد (هم‌خوان با v8)؛ پس از وارد کردن v9، `tests/iran-local.php` همین جدول را دوباره می‌سنجد.
+> شمار آزمون در این سند نیست (P5-D200).
+
+## ۱ — هر فیلد پرشده: کجا دیده می‌شود
+
+بخش‌های صفحه به ترتیب: `tp-ai` · `tp-overview` · `tp-faq` · `tp-actions` · `tp-map` · `tp-season` · `tp-geo` · `tp-neighbors` · `tp-practical` · `tp-sources`، و هیرو (پیش از بخش‌ها).
+
+| فیلد | دیده می‌شود؟ | کجا | منبع تصمیم (پرونده:خط) |
+|---|---|---|---|
+| `name_ar` | **نه** — فقط در `official_name_ar` («جمهورية إيران الإسلامية») که فیلد دیگری است | هیچ ناحیه‌ای؛ مصرف: JSON-LD `name` در /ar/، عنوان نسخهٔ عربی، جست‌وجو | `topersia-g-zones.php:1665` (`topersia_g_hero_names` فقط `official_name_*` + `name_local` + `alternative_names` را می‌خواند)؛ INVISIBLE-FIELDS: «پنهان به‌خاطر قاعده» |
+| `official_name_fa` | بله | زیرعنوان هیرو | `topersia-g-zones.php:1672-1686` |
+| `official_name_en` · `official_name_ar` | بله | «نام‌های دیگر» در آغاز `#tp-overview` | `topersia-g-zones.php:6367` (`topersia_g_overview_intro`) از `hero_names['rest']` |
+| `alternative_names` | بله | همان خط «نام‌های دیگر» | `topersia-g-zones.php:1690-1701` |
+| `calling_code` | بله (+۹۸) | `#tp-practical`، کاشی «پیش‌شمارهٔ تلفن» | `topersia-g-map.php:71` (`zone=travel`)؛ `topersia-g-zones.php:5412` (`topersia_g_practical_section`) |
+| `internet_tld` | بله (.ir) | `#tp-geo` و چیپ «درباره» | `topersia-g-map.php:73` (`zone=card`) |
+| `government_type` | بله | **هیرو، خانهٔ چهارم** (جای واحد پول) و چیپ «درباره» | `topersia-g-map.php:69` (`zone=card`)؛ خانهٔ چهارم از `topersia_g_stat_fill` |
+| `neighboring_countries` | بله | `#tp-neighbors` (و متن) | `topersia-g-map.php:70` (`zone=neighbors`)؛ `topersia-g-zones.php:7542` |
+| `best_season` | بله (بهار، پاییز) | `#tp-season` | `topersia-g-map.php:72` (`zone=card`، واژه‌نامه ۳۴) |
+| `electric_plug` · `drive_side` | بله | `#tp-practical` | `topersia-g-map.php` (`zone=travel`)؛ `topersia-g-zones.php:5412` |
+| `timezone` | **دوبار — ایراد** | هم `#tp-geo` («منطقهٔ زمانی: وقت ایران (UTC+۳:۳۰)») و هم `#tp-practical` («UTC+۳:۳۰») | `#tp-geo`: `topersia-g-zones.php:3637-3720` (ردیف مشتق `topersia_g_geo_fill_tiles`)؛ `#tp-practical`: `topersia-g-map.php:67` (`zone=travel`) + فهرست «همیشه کاشی» کشور (`topersia-g-zones.php` در `topersia_g_practical_section`) |
+| `currency_note` («ریال») | **بله ولی دفن‌شده** | `<h3>یادداشت ارز</h3><p>ریال</p>` در **انتهای** `#tp-overview`، پس از ۳۵ هزار نویسهٔ متن اصلی؛ نه در هیرو، نه کاشی | `topersia-g-map.php:68` (`zone=details`)؛ حلقهٔ `topersia-g-zones.php:6417` |
+| `short_summary` | **بله، کامل** | بند `p.tp-lead` در آغاز `#tp-overview` (۵۸۰ نویسه، بی سقف) | `topersia-g-zones.php:6367-6380`؛ از هیرو رفته (دستهٔ 34 · P5-D458، `topersia-g-zones.php:1765`) |
+| `population` · `area_km2` · `official_language` | بله | هیرو (سه خانهٔ اول) و چیپ‌های «درباره» | `topersia-g-zones.php:7318` (`topersia_g_stat_cells`: `population! · area_km2! · official_language! · currency:unit`) |
+
+**فیلدهای پرشده‌ای که دیده نمی‌شوند:** فقط `name_ar` (و همین‌طور `name_en`؛ هر دو «پنهان به‌خاطر قاعده»: متن هر زبان از ترجمهٔ همان زبان می‌آید، نه از فیلد). هیچ فیلد دیگری از فهرست شما «پرشده ولی نامرئی» نبود.
+
+## ۲ — واحد پول: چرا «—»/غایب بود
+
+- هیرو چهار خانه دارد: `population · area_km2 · official_language · currency:unit` (`topersia-g-zones.php:7318`).
+- خانهٔ `currency:unit` (`topersia-g-zones.php:3084`) از **دو منبع** می‌خواند: (۱) رابطهٔ ۲۲۶ کشور←ارز، ردیف «واحد رسمی جاری»؛ (۲) در نبودش **فقط** نامِ پیش از کد ISO در `currency_note` با regex `نام (XXX)` («ریال (IRR)» ← «ریال»).
+- ایران: رابطهٔ ۲۲۶ خالی بود (`relations` فایل: `"226": []`) و `currency_note` فقط «ریال» بود، **بی «(IRR)»** ← regex جور نشد ← `null` ← `topersia_g_stat_fill` (P5-D464) خانه را با نامزد بعدی (`government_type`) پر کرد. یعنی «—» نبود؛ خانه جابه‌جا شده بود.
+- **اصلاح:** اگر `currency_note` خودش فقط یک نام کوتاه است (≤۲۴ نویسه، یک یا دو واژه، بی نشانهٔ جمله) همان نام برگردد. ترتیب: رابطه ← «نام (کد)» ← یادداشتِ فقط‌نام ← نام ارز مرتبط. جمله‌ها همچنان «هیچ» می‌مانند (حدس نمی‌زنیم).
+
+## ۳ — خلاصهٔ کوتاه
+
+- در صفحه **آمده بود** (بند `p.tp-lead` آغاز «درباره»، کامل، بی هیچ سقف): `topersia-g-zones.php:6367-6380`. سقف طول هیرو (`TOPERSIA_HERO_LINE_MAX`، فقط برای خط نام‌های هیرو، `topersia-g-zones.php:1712`) روی این بند اثر ندارد.
+- هیرو عمداً خلاصه ندارد (D458: «بلند نشود»). اگر منظور خلاصه در هیرو بود، این تصمیم کاربر است؛ **کدی برای آن عوض نشد**. آزمون تازه تضمین می‌کند متن بلندتر از چند برابر سقف هیرو در «درباره» کامل و بی «…» بماند.
+- v8 این فیلد را ~۹۰ واژه آورده؛ مشخصات می‌گوید «بین ۱۵ تا ۳۰ کلمه» ← درون‌ریز حالا **هشدار** می‌دهد (بند ۶).
+
+## ۴ — منطقهٔ زمانی
+
+علت: دو منبع مستقل — `#tp-geo` (ردیف مشتق) و `#tp-practical` (فیلد `zone=travel` + کاشی «همیشه» برای کشور). اصلاح: `timezone` به ناحیهٔ `card` رفت (`topersia-g-map.php:67`) و از فهرست «همیشه کاشی» اطلاعات سفر برداشته شد؛ ردیف مشتق `#tp-geo` در حضور فیلد واقعی تکرار نمی‌شود (برچسب یکی است).
+
+## ۵ — نقشهٔ کشور
+
+- **مرز استان از کجا می‌آید:** `topersia_g_map_attr` (`topersia-g-zones.php:4180`) کلید فایل را از `entity_uid` می‌سازد (`topersia_g_boundary_key`، `topersia-g-routing.php:206`) و اگر `uploads/tiles/boundaries/<کلید>.geojson` باشد `cfg.bound` می‌دهد؛ جاوااسکریپت آن را می‌گیرد، خط دورش می‌کشد و `fitBounds` می‌زند (`topersia-g-zones.js:2742-2754`). فایل‌ها را `scripts/tp-boundaries.php build` از رابطه‌های OSM (Overpass، ODbL) می‌سازد (`reference/province-osm.csv`)؛ بیرون از git.
+- **چرا ایران مرز نداشت — دو علت:** (۱) `entity_uid` پست ایران **خالی** بود (`get_post_meta(5483,'entity_uid')` = ""؛ در حالی که نامک `iran` لاتین است و استان‌ها uid دارند) ← کلید فایل خالی ← `cfg.bound` ساخته نشد. علت خالی‌ماندن uid را بدون پست نمی‌توان ثابت کرد (هوک `topersia_fill_entity_uid`، `topersia-core.php:2299`، باید در `save_post` می‌ساخت)؛ (۲) فایل مرز کشور اصلاً وجود نداشت.
+- **اصلاح:** (الف) `topersia_g_map_attr` وقتی uid خالی است کلید را از «پایهٔ نشانی نوع + نامک» می‌سازد (`country__iran`)؛ (ب) فرمان تازهٔ `scripts/tp-boundaries.php country` مرز کشور را از **اجتماع مرز ۳۱ استان** می‌سازد: `uploads/tiles/boundaries/country__iran.geojson` — لایهٔ مشتق، بازسازی‌پذیر، بی فیلد.
+- **روش اجتماع و محدودیت:** مرز هر استان جداگانه ساده شده (Douglas-Peucker) و لبهٔ مشترک دو استان نقطه‌به‌نقطه یکی نیست؛ حذف لبه‌های مشترک ۱۸۱ حلقه با زبانهٔ داخلی می‌داد (امتحان شد). پس اجتماع **شطرنجی** است (سلول ۰٫۰۱° ≈ ۱ کیلومتر، پرکردن سوراخ‌های بسته، ردیابی مرز، ساده‌سازی): ۲ حلقه (سرزمین اصلی ۵۵۶۳ نقطه + یک جزیره)؛ مساحت اجتماع ≈ ۰٫۹٪ بیشتر از جمع استان‌ها؛ bbox ۴۴٫۰۳–۶۳٫۳۳ شرقی، ۲۴٫۸۴–۳۹٫۷۸ شمالی. دقت حدود نیم سلول — برای نقشهٔ کشور زیر یک پیکسل. اگر یک استان منتشرشده فایل مرز نداشته باشد، فرمان **متوقف می‌شود** و چیزی نمی‌نویسد.
+
+## ۶ — درون‌ریز
+
+سه هشدار (هیچ‌کدام مانع نیست؛ در `notes` برنامهٔ هر پست و در ردیف فیلد):
+1. بیش از نیمی از `source_url`ها یک دامنه‌اند — v8: ۱۰ ردیف منبع که ۶ تای آن `iranicaonline.org` است (بیش از نیمی).
+2. `source_name` سازمانی را می‌آورد که دامنهٔ نشانی همان ردیف با آن نمی‌خواند — v8: UNESCO · درگاه ملی آمار (Iran Data Portal) · ISAC شیکاگو · پژوهشگاه میراث فرهنگی همه با `iranicaonline.org`؛ FAO با `rch.ac.ir`؛ «پورتال گردشگری ایران (Visit Iran)» با `cambridge.org` — شش ردیف ناهمخوان. جدول سازمان‌ها کوچک و بسته است (UNESCO · ایرانیکا · بریتانیکا · ویکی‌پدیا · بانک جهانی · Factbook · مرکز آمار · Iran Data Portal · OSM · UNWTO · FAO · ISAC · Visit Iran · پژوهشگاه میراث فرهنگی)؛ نامی که در آن نیست هشدار نمی‌گیرد.
+3. فیلد متنی بلندتر از سقف واژهٔ نوشته‌شده در «توضیح» مشخصاتش («بین ۱۵ تا ۳۰ کلمه»، «حداکثر N کلمه»، «up to N words») — مثل `short_summary`.

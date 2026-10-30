@@ -570,13 +570,13 @@ async function mobileChecks( page ) {
 			if ( ! t || ! m || ! t.getClientRects().length ) { return null; }
 			const a = t.getBoundingClientRect(), b = m.getBoundingClientRect(), c = l ? l.getBoundingClientRect() : null;
 			return { id: ( h.closest( 'section' ) || {} ).id, sameRow: a.top < b.bottom && b.top < a.bottom,
-				h2Right: a.left >= b.right - 1, leadBelow: ! c || c.top >= Math.max( a.bottom, b.bottom ) - 1 };
+				h2Right: 'rtl' === getComputedStyle( h ).direction ? a.left >= b.right - 1 : a.right <= b.left + 1, leadBelow: ! c || c.top >= Math.max( a.bottom, b.bottom ) - 1 };
 		} ).filter( Boolean );
 	})()` );
 	if ( LIVE && ! heads.length ) {
 		rows.push( '  · موبایل: این صفحه هیچ «همه … ←» ندارد — سنجهٔ سرفصل بی‌موضوع' );
 	} else {
-		check( 'موبایل: هر «همه … ←» در ردیفِ عنوان — h2 راست، .more چپ، متن راهنما زیرشان',
+		check( 'موبایل: هر «همه … ←» در ردیفِ عنوان — h2 در سوی آغاز و .more در سوی پایان (راست‌به‌چپ: h2 راست)، متن راهنما زیرشان',
 			heads.length >= ( LIVE ? 1 : 2 ) && heads.every( x => x.sameRow && x.h2Right && x.leadBelow ), JSON.stringify( heads ) );
 	}
 
@@ -727,7 +727,7 @@ async function commonChecks( page, vp ) {
 				pick.el.scrollTo( { left: 0, behavior: 'auto' } ); await __tp.wait( 300 );
 				const s3 = st();
 				return {
-					rtl, nextText: pick.next.textContent, prevText: pick.prev.textContent,
+					lang: ( document.documentElement.lang || "fa" ).slice( 0, 2 ), rtl, nextText: pick.next.textContent, prevText: pick.prev.textContent,
 					nextLeft: rn.left < rp.left, domPrevFirst: pick.prev.nextElementSibling === pick.next,
 					aria: [ pick.prev.getAttribute( 'aria-label' ), pick.next.getAttribute( 'aria-label' ) ],
 					spanDir: getComputedStyle( pick.next.querySelector( 'span' ) ).direction,
@@ -739,7 +739,7 @@ async function commonChecks( page, vp ) {
 			} else {
 				check( 'اسلایدر: راست‌به‌چپ «بعدی» = «‹» سمت چپ، «قبلی» = «›» سمت راست (چپ‌به‌راست برعکس)؛ DOM همان ترتیب؛ نویسه در ltr  P5-D243',
 					( sl.rtl ? '‹' === sl.nextText && '›' === sl.prevText && sl.nextLeft : '›' === sl.nextText && '‹' === sl.prevText && ! sl.nextLeft )
-					&& sl.domPrevFirst && 'قبلی' === sl.aria[0] && 'بعدی' === sl.aria[1] && 'ltr' === sl.spanDir, JSON.stringify( sl ) );
+					&& sl.domPrevFirst && ( { fa: [ 'قبلی', 'بعدی' ], en: [ 'Previous', 'Next' ], ar: [ 'السابق', 'التالي' ] }[ sl.lang ] || [] ).join( '|' ) === sl.aria.join( '|' ) && 'ltr' === sl.spanDir, JSON.stringify( sl ) );
 				check( 'اسلایدر: «بعدی» کارت پنهانِ سمتِ پایانِ خط را پیش می‌آورد — راست‌به‌چپ محتوا به راست  P5-D243',
 					sl.rtl ? sl.moved > 20 : sl.moved < -20, JSON.stringify( sl ) );
 				check( 'اسلایدر: آغاز «قبلی» غیرفعال و «بعدی» فعال؛ پس از جلو رفتن «قبلی» فعال؛ پایان «بعدی» غیرفعال؛ بازگشت به آغاز باز «قبلی» غیرفعال  P5-D243',
@@ -793,6 +793,7 @@ async function commonChecks( page, vp ) {
 					prePrev: [ shots[ shots.length - 1 ].m, shots[ shots.length - 1 ].src ].every( u => pre.some( s => -1 !== s.indexOf( u ) ) ),
 					fit: getComputedStyle( box.querySelector( '.tp-solo__img' ) ).objectFit,
 					rtl: 'rtl' === getComputedStyle( box ).direction,
+					lang: ( document.documentElement.lang || 'fa' ).slice( 0, 2 ),
 					nextLeft: next.right < img.left + img.width / 2, prevRight: prev.left > img.left + img.width / 2,
 					nextText: nextB.textContent, prevText: prevB.textContent,
 					spanDir: getComputedStyle( nextB.querySelector( 'span' ) ).direction,
@@ -800,17 +801,18 @@ async function commonChecks( page, vp ) {
 					capBelow: capBox.top >= img.bottom - 1 && capBox.height > 0
 				};
 			})()` );
-			const faN = v => String( v ).replace( /[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[ d ] );
+			/* رقم از زبان صفحه، نه فرض فارسی (P5-D278): fa ← ۰–۹ · ar ← ٠–٩ · en ← لاتین */
+			const faN = v => String( v ).replace( /[0-9]/g, d => ( { fa: '۰۱۲۳۴۵۶۷۸۹', ar: '٠١٢٣٤٥٦٧٨٩' }[ solo.lang ] || '0123456789' )[ d ] );
 			if ( solo.none ) {
 				rows.push( '  · تمام‌صفحه: این صفحه گالری ندارد — سنجه‌های تمام‌صفحه بی‌موضوع' );
 			} else {
 			check( 'تمام‌صفحه: شمار «۱ / N»، عنوان و توضیحِ پیوست زیر عکس',
-				solo.shown && '۱ / ' + faN( solo.n ) === solo.first.count && solo.capBelow
+				solo.shown && faN( 1 ) + ' / ' + faN( solo.n ) === solo.first.count && solo.capBelow
 				&& ( LIVE ? solo.t0 === solo.first.title && solo.c0 === solo.first.cap
 					: 'میدان نقش جهان' === solo.first.title && 'میدان امام، ۱۶۰۲' === solo.first.cap ), JSON.stringify( solo.first ) );
 			check( 'تمام‌صفحه: کاشیِ موزاییکِ صفحه هم نمای تمام‌صفحه را در لایهٔ بیرونی باز می‌کند  P5-D228', solo.shown, JSON.stringify( solo.first ) );
 			check( 'تمام‌صفحه: بعدی ← «۲ / N»؛ قبل از اولی، آخری (چرخهٔ دوسر)',
-				'۲ / ' + faN( solo.n ) === solo.second.count && faN( solo.n ) + ' / ' + faN( solo.n ) === solo.wrapped.count,
+				faN( 2 ) + ' / ' + faN( solo.n ) === solo.second.count && faN( solo.n ) + ' / ' + faN( solo.n ) === solo.wrapped.count,
 				JSON.stringify( [ solo.second.count, solo.wrapped.count ] ) );
 			check( 'تمام‌صفحه: نسخهٔ ۱۰۲۴ کاشی همان لحظه، نسخهٔ کامل پس از decode جایش  P5-D226',
 				solo.fast && solo.swapped, JSON.stringify( { src0: solo.src0, fast: solo.fast, swapped: solo.swapped } ) );
@@ -833,7 +835,7 @@ async function commonChecks( page, vp ) {
 			await key( bwd[0], bwd[1], bwd[2] );
 			const k2 = await cnt();
 			check( 'تمام‌صفحه: راست‌به‌چپ ArrowLeft یکی جلو و ArrowRight یکی عقب (چپ‌به‌راست برعکس)  P5-D243',
-				'۱ / ' + faN( solo.n ) === k0 && '۲ / ' + faN( solo.n ) === k1 && k0 === k2, [ k0, k1, k2 ].join( ' → ' ) );
+				faN( 1 ) + ' / ' + faN( solo.n ) === k0 && faN( 2 ) + ' / ' + faN( solo.n ) === k1 && k0 === k2, [ k0, k1, k2 ].join( ' → ' ) );
 
 			/* هیچ گذار یا پویانماییِ گالری بیش از ۱۵۰ms نیست.  P5-D226 */
 			const dur = await page.evaluate( `(() => {
@@ -856,12 +858,13 @@ async function commonChecks( page, vp ) {
 				await page.send( 'Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 } );
 				const box = await page.evaluate( `(() => { const r = document.querySelector( '#tpGallerySolo .tp-solo__img' ).getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; })()` );
 				const before = await page.evaluate( `document.querySelector( '#tpGallerySolo [data-tp-solo-count]' ).textContent` );
-				await page.send( 'Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [ { x: box.x - 90, y: box.y } ] } );
-				await page.send( 'Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [ { x: box.x + 90, y: box.y + 4 } ] } );
+				const sw = solo.rtl ? 90 : -90;   /* «بعدی»: راست‌به‌چپ ← انگشت به راست، چپ‌به‌راست ← انگشت به چپ */
+				await page.send( 'Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [ { x: box.x - sw, y: box.y } ] } );
+				await page.send( 'Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [ { x: box.x + sw, y: box.y + 4 } ] } );
 				await page.send( 'Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] } );
 				await page.evaluate( '__tp.wait( 150 )' );
 				const after = await page.evaluate( `document.querySelector( '#tpGallerySolo [data-tp-solo-count]' ).textContent` );
-				check( 'تمام‌صفحه: کشیدنِ انگشت از چپ به راست = بعدی در راست‌به‌چپ — همان حرکت پیشین  P5-D243', before !== after && '۲ / ' + faN( solo.n ) === after, before + ' → ' + after );
+				check( 'تمام‌صفحه: کشیدنِ انگشت به سوی آغاز = بعدی (راست‌به‌چپ: از چپ به راست؛ چپ‌به‌راست برعکس)  P5-D243', before !== after && faN( 2 ) + ' / ' + faN( solo.n ) === after, before + ' → ' + after );
 			}
 
 			await key( 'Escape', 'Escape', 27 );

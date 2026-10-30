@@ -307,6 +307,10 @@ msgstr "المناخ"
 msgid "اقلیمی"
 msgstr "مناخي"
 
+#: includes/topersia-g-zones.php
+msgid "الفبا"
+msgstr "أبجدي"
+
 #: includes/topersia-g-map.php
 msgid "امامزاده"
 msgstr "مرقد إمامزاده"
@@ -2193,6 +2197,10 @@ msgid "مراسمی"
 msgstr "احتفالي"
 
 #: includes/topersia-g-zones.php
+msgid "مرتب‌سازی"
+msgstr "ترتيب حسب"
+
+#: includes/topersia-g-zones.php
 msgid "مرجع خارجی"
 msgstr "مرجع خارجي"
 
@@ -2914,6 +2922,10 @@ msgstr "دخول غير المسلمين"
 msgid "ورودی"
 msgstr "الدخول"
 
+#: includes/topersia-g-zones.php
+msgid "وسعت"
+msgstr "المساحة"
+
 #: includes/topersia-g-map.php
 msgid "وضعیت"
 msgstr "الحالة"
@@ -3087,6 +3099,10 @@ msgstr "برنامج رحلة مقترح"
 #: includes/topersia-g-map.php
 msgid "پیش‌شمارۀ تلفن"
 msgstr "رمز الاتصال الدولي"
+
+#: includes/topersia-g-zones.php
+msgid "پیش‌فرض"
+msgstr "الترتيب الأصلي"
 
 #: includes/topersia-g-map.php
 msgid "پیش‌نویس"

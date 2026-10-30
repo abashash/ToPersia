@@ -1199,12 +1199,12 @@ t( 'فهرست: سرِ چسبان با عنوان، شمار، جست‌وجو �
 
 /* ۴٫۳٫۰ بند ۱۰: برچسب نوعِ هم‌نوع‌ها رفت؛ شهر جمعیتش را با رقم فارسی و «نفر» می‌گیرد. */
 t( 'فهرست: همهٔ چهارده شهر — بیش از هشتِ اسلایدر — با پیوندِ HTML، نه JSON  P5-D221 · P5-D276',
-	14 === substr_count( $list_places, '<li class="tp-list__item">' )
+	14 === substr_count( $list_places, '<li class="tp-list__item"' )
 	&& false !== strpos( $list_places, '<a class="tp-list__card" href="https://topersia.com/kashan/"><b>کاشان</b><span class="tp-list__tag">۳۰۴٬۴۸۷ نفر</span></a>' )
 	&& false === strpos( $list_places, '<span class="tp-list__tag">شهر</span>' )
 	&& false === strpos( $list_places, '<span class="tp-list__tag">مرکز استان</span>' )
 	&& false === strpos( $list_places, 'data-tp-shots' ) && ! preg_match( '/data-tp-list="\s*[\[{]/', $list_places ),
-	substr_count( $list_places, '<li class="tp-list__item">' ) . ' عضو' );
+	substr_count( $list_places, '<li class="tp-list__item"' ) . ' عضو' );
 
 t( 'فهرست: فرهنگ به خانواده‌ها گروه می‌شود  P5-D221',
 	(bool) preg_match( '#id="tp-list-culture".*?<div class="tp-list__block"><h4 class="tp-list__fam">صنایع دستی</h4><ul class="tp-list__grid"><li class="tp-list__item"><a class="tp-list__card" href="https://topersia.com/mina/"><b>میناکاری</b>#su', $p20_all ) );
@@ -1830,18 +1830,18 @@ $GLOBALS['tp_user'] = 0;
 t( 'AI: واردشده — خروجیِ افزونه جای هر سه دکمه می‌نشیند — خلاصه، نکات، برنامه  بند ۱۰',
 	'خلاصهٔ افزونه دربارهٔ اصفهان.' === $ai2d['summary']
 	&& "• میدان نقش جهان\n• سی‌وسه‌پل" === $ai2d['bullets'] && "روز اول: میدان\nروز دوم: کاخ‌ها" === $ai2d['plan']
-	&& false !== strpos( $ai2, '<button class="tp-ai__btn" type="button" data-ai="plan">پیشنهاد برنامه سفر</button>' )
-	&& false !== strpos( $ai2, '<p class="tp-justify" data-tp-ai-panel="summary">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' ),
+	&& false !== strpos( $ai2, '<button class="tp-ai__btn" type="button" role="tab" id="tp-ai-tab-plan" aria-controls="tp-ai-panel-plan" aria-selected="false" tabindex="-1" data-ai="plan">پیشنهاد برنامه سفر</button>' )
+	&& false !== strpos( $ai2, '<p class="tp-justify" role="tabpanel" id="tp-ai-panel-summary" aria-labelledby="tp-ai-tab-summary" tabindex="0" data-tp-ai-panel="summary">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' ),
 	json_encode( $ai2d, JSON_UNESCAPED_UNICODE ) );
 
 /* دستهٔ ۲۶ · F-01 (P5-D382): هر سه خروجی در HTML سرور — نه فقط در data-tp-ai؛ فقط نخستین دیده می‌شود */
 $ai_panels = function ( $h ) {
-	return false !== strpos( $h, '<p class="tp-justify" data-tp-ai-panel="summary">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' )
-		&& false !== strpos( $h, "<p class=\"tp-justify\" data-tp-ai-panel=\"bullets\" hidden>• میدان نقش جهان\n• سی‌وسه‌پل</p>" )
-		&& false !== strpos( $h, "<p class=\"tp-justify\" data-tp-ai-panel=\"plan\" hidden>روز اول: میدان\nروز دوم: کاخ‌ها</p>" );
+	return false !== strpos( $h, '<p class="tp-justify" role="tabpanel" id="tp-ai-panel-summary" aria-labelledby="tp-ai-tab-summary" tabindex="0" data-tp-ai-panel="summary">خلاصهٔ افزونه دربارهٔ اصفهان.</p>' )
+		&& false !== strpos( $h, "<p class=\"tp-justify\" role=\"tabpanel\" id=\"tp-ai-panel-bullets\" aria-labelledby=\"tp-ai-tab-bullets\" tabindex=\"0\" data-tp-ai-panel=\"bullets\" hidden>• میدان نقش جهان\n• سی‌وسه‌پل</p>" )
+		&& false !== strpos( $h, "<p class=\"tp-justify\" role=\"tabpanel\" id=\"tp-ai-panel-plan\" aria-labelledby=\"tp-ai-tab-plan\" tabindex=\"0\" data-tp-ai-panel=\"plan\" hidden>روز اول: میدان\nروز دوم: کاخ‌ها</p>" );
 };
 t( 'AI (F-01): خلاصه، نکات و پیشنهاد سفر هر سه متن خوانا در HTML سرور (بند جدا، دومی و سومی hidden) — جهش: فقط بند خلاصه (رفتار پیشین) می‌افتد',
-	$ai_panels( $ai2 ) && ! $ai_panels( preg_replace( '#<p class="tp-justify" data-tp-ai-panel="(?:bullets|plan)" hidden>.*?</p>#su', '', $ai2 ) ) );
+	$ai_panels( $ai2 ) && ! $ai_panels( preg_replace( '#<p class="tp-justify"[^>]*data-tp-ai-panel="(?:bullets|plan)" hidden>.*?</p>#su', '', $ai2 ) ) );
 
 /* خلاصه‌ساز ۱٫۵٫۰: خروجی «نیازمند بازبینی» (بیرون از سقف نویسه) روی صفحه نمی‌آید — همان خروجی با پرچم و بی آن */
 $GLOBALS['tp_ai_review'] = array( 20 => array( 'plan' => true ) );
@@ -2302,6 +2302,8 @@ require __DIR__ . '/assert-2n.php';
 require __DIR__ . '/assert-33.php';
 require __DIR__ . '/assert-34.php';
 require __DIR__ . '/assert-35.php';
+require __DIR__ . '/assert-36.php';
+require __DIR__ . '/assert-36c.php';
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

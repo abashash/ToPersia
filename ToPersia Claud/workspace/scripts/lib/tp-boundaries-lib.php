@@ -241,4 +241,137 @@ if ( ! defined( 'TPB_LIB' ) ) {
 		if ( 1 === count( $adm ) ) { return array( 'auto', $adm[0]['el'], 'exact-name+admin+inside-parent (' . count( $in ) . ' in parent; one administrative)' ); }
 		return array( 'suggested', $in[0]['el'], count( $in ) . ' candidates inside parent' );
 	}
+
+	/**
+	 * اجتماع چندضلعی‌ها ← حلقه‌های بیرونی — مرز کشور از مرز ۳۱ استان.  دستهٔ 36-ج · P5-D479
+	 *
+	 * مرز استان‌ها جداگانه ساده شده‌اند (Douglas-Peucker)، پس لبهٔ مشترک دو استان نقطه‌به‌نقطه یکی نیست و
+	 * حذفِ لبه‌های مشترک حلقهٔ بیرونی را با شکاف و زبانهٔ داخلی می‌سازد. به‌جای آن: شطرنجی‌سازی روی شبکهٔ
+	 * $cell درجه (پیش‌فرض ۰٫۰۱ ≈ ۱ کیلومتر) ← پرکردن سوراخ‌های بسته (شکاف باریک میان استان‌ها) ← ردیابی مرز
+	 * بیرونی ← ساده‌سازی. جزیره‌ها حلقهٔ جدا می‌شوند. دقت ≈ نیم سلول؛ برای نقشهٔ کشور کمتر از یک پیکسل.
+	 * بی منبع تازه: فقط همان GeoJSONِ استان‌ها.
+	 *
+	 * @param array[] $geoms هر عضو Feature(Polygon|MultiPolygon) یا خودِ geometry
+	 * @return array[] حلقه‌های [ [lon,lat], … ] — بسته: نخست = آخر
+	 */
+	function tpb_union_raster( $geoms, $cell = 0.01, $fill_holes = true ) {
+
+		$polys = array();
+		$minx = $miny = INF; $maxx = $maxy = -INF;
+		foreach ( $geoms as $g ) {
+			$geom = isset( $g['geometry'] ) ? $g['geometry'] : $g;
+			if ( empty( $geom['type'] ) || empty( $geom['coordinates'] ) ) { continue; }
+			$list = 'Polygon' === $geom['type'] ? array( $geom['coordinates'] ) : $geom['coordinates'];
+			foreach ( $list as $poly ) {
+				$polys[] = $poly;
+				foreach ( $poly[0] as $p ) { $minx = min( $minx, $p[0] ); $maxx = max( $maxx, $p[0] ); $miny = min( $miny, $p[1] ); $maxy = max( $maxy, $p[1] ); }
+			}
+		}
+		if ( ! $polys ) { return array(); }
+
+		$x0 = floor( $minx / $cell ) * $cell - 2 * $cell;
+		$y0 = floor( $miny / $cell ) * $cell - 2 * $cell;
+		$W  = (int) ceil( ( $maxx - $x0 ) / $cell ) + 3;
+		$H  = (int) ceil( ( $maxy - $y0 ) / $cell ) + 3;
+		$rows = array_fill( 0, $H, str_repeat( "\0", $W ) );
+
+		/* پر کردن: خط‌پیمایی با قاعدهٔ زوج‌وفرد (سوراخ‌های خودِ چندضلعی هم درست) */
+		foreach ( $polys as $poly ) {
+			$xs = array();
+			foreach ( $poly as $ring ) {
+				$n = count( $ring );
+				for ( $i = 0; $i < $n - 1; $i++ ) {
+					list( $px, $py ) = $ring[ $i ]; list( $qx, $qy ) = $ring[ $i + 1 ];
+					if ( $py == $qy ) { continue; }
+					$ylo = min( $py, $qy ); $yhi = max( $py, $qy );
+					$r1 = (int) ceil( ( $ylo - $y0 ) / $cell - 0.5 );
+					$r2 = (int) ceil( ( $yhi - $y0 ) / $cell - 0.5 ) - 1;
+					for ( $r = max( 0, $r1 ); $r <= min( $H - 1, $r2 ); $r++ ) {
+						$yc = $y0 + ( $r + 0.5 ) * $cell;
+						$xs[ $r ][] = $px + ( $yc - $py ) * ( $qx - $px ) / ( $qy - $py );
+					}
+				}
+			}
+			foreach ( $xs as $r => $list ) {
+				sort( $list );
+				for ( $i = 0; $i + 1 < count( $list ); $i += 2 ) {
+					$c0 = max( 0, (int) ceil( ( $list[ $i ] - $x0 ) / $cell - 0.5 ) );
+					$c1 = min( $W - 1, (int) ceil( ( $list[ $i + 1 ] - $x0 ) / $cell - 0.5 ) - 1 );
+					if ( $c1 >= $c0 ) { $rows[ $r ] = substr_replace( $rows[ $r ], str_repeat( "\1", $c1 - $c0 + 1 ), $c0, $c1 - $c0 + 1 ); }
+				}
+			}
+		}
+
+		/* سوراخ‌های بسته: سلول تهی که از بیرون شبکه نمی‌رسد ← پر */
+		if ( $fill_holes ) {
+			$q = array();
+			for ( $c = 0; $c < $W; $c++ ) { foreach ( array( 0, $H - 1 ) as $r ) { if ( "\0" === $rows[ $r ][ $c ] ) { $rows[ $r ][ $c ] = "\2"; $q[] = array( $r, $c ); } } }
+			for ( $r = 0; $r < $H; $r++ ) { foreach ( array( 0, $W - 1 ) as $c ) { if ( "\0" === $rows[ $r ][ $c ] ) { $rows[ $r ][ $c ] = "\2"; $q[] = array( $r, $c ); } } }
+			for ( $h = 0; $h < count( $q ); $h++ ) {
+				list( $r, $c ) = $q[ $h ];
+				foreach ( array( array( $r - 1, $c ), array( $r + 1, $c ), array( $r, $c - 1 ), array( $r, $c + 1 ) ) as $nb ) {
+					if ( $nb[0] >= 0 && $nb[0] < $H && $nb[1] >= 0 && $nb[1] < $W && "\0" === $rows[ $nb[0] ][ $nb[1] ] ) { $rows[ $nb[0] ][ $nb[1] ] = "\2"; $q[] = $nb; }
+				}
+			}
+			unset( $q );
+			for ( $r = 0; $r < $H; $r++ ) { $rows[ $r ] = strtr( $rows[ $r ], "\0", "\1" ); }
+		}
+
+		/* لبه‌های جهت‌دار مرز (درون چپ) و پیمودن حلقه‌ها؛ در رأس دوگانه راست‌گردِ‌ترین */
+		$V    = $W + 1;
+		$out  = array();
+		$fill = function ( $r, $c ) use ( $rows, $H, $W ) { return $r >= 0 && $r < $H && $c >= 0 && $c < $W && "\1" === $rows[ $r ][ $c ]; };
+		for ( $r = 0; $r < $H; $r++ ) {
+			for ( $c = 0; $c < $W; $c++ ) {
+				if ( "\1" !== $rows[ $r ][ $c ] ) { continue; }
+				if ( ! $fill( $r - 1, $c ) ) { $out[ $r * $V + $c ][] = $r * $V + $c + 1; }
+				if ( ! $fill( $r, $c + 1 ) ) { $out[ $r * $V + $c + 1 ][] = ( $r + 1 ) * $V + $c + 1; }
+				if ( ! $fill( $r + 1, $c ) ) { $out[ ( $r + 1 ) * $V + $c + 1 ][] = ( $r + 1 ) * $V + $c; }
+				if ( ! $fill( $r, $c - 1 ) ) { $out[ ( $r + 1 ) * $V + $c ][] = $r * $V + $c; }
+			}
+		}
+		unset( $rows );
+		$xy    = function ( $v ) use ( $V, $x0, $y0, $cell ) { return array( intdiv( $v, $V ), $v % $V ); };   /* [r, c] */
+		$rings = array();
+		foreach ( array_keys( $out ) as $start ) {
+			while ( ! empty( $out[ $start ] ) ) {
+				$a = $start; $b = array_pop( $out[ $a ] );
+				$path = array( $a );
+				$guard = 0;
+				while ( true ) {
+					$path[] = $b;
+					if ( $b === $start || $guard++ > 5000000 ) { break; }
+					if ( empty( $out[ $b ] ) ) { break; }
+					if ( 1 === count( $out[ $b ] ) ) { $nx = array_pop( $out[ $b ] ); }
+					else {
+						list( $ar, $ac ) = $xy( $a ); list( $br, $bc ) = $xy( $b );
+						$din = array( $bc - $ac, $br - $ar ); $best = null; $bk = null; $bs = INF;
+						foreach ( $out[ $b ] as $k => $cand ) {
+							list( $cr, $cc ) = $xy( $cand ); $d = array( $cc - $bc, $cr - $br );
+							$cross = $din[0] * $d[1] - $din[1] * $d[0];
+							if ( $cross < $bs ) { $bs = $cross; $best = $cand; $bk = $k; }
+						}
+						unset( $out[ $b ][ $bk ] ); $nx = $best;
+					}
+					$a = $b; $b = $nx;
+				}
+				if ( $b !== $start || count( $path ) < 5 ) { continue; }
+				$ring = array();
+				$prev = null; $pd = null;
+				foreach ( $path as $i => $v ) {
+					list( $vr, $vc ) = $xy( $v );
+					$ring[] = array( round( $x0 + $vc * $cell, 6 ), round( $y0 + $vr * $cell, 6 ) );
+				}
+				/* رأس‌های هم‌خط حذف */
+				$slim = array();
+				$n = count( $ring );
+				for ( $i = 0; $i < $n - 1; $i++ ) {
+					$p0 = $ring[ ( $i + $n - 2 ) % ( $n - 1 ) ]; $p1 = $ring[ $i ]; $p2 = $ring[ $i + 1 ];
+					if ( abs( ( $p1[0] - $p0[0] ) * ( $p2[1] - $p1[1] ) - ( $p1[1] - $p0[1] ) * ( $p2[0] - $p1[0] ) ) > 1e-12 ) { $slim[] = $p1; }
+				}
+				if ( count( $slim ) >= 3 ) { $slim[] = $slim[0]; $rings[] = $slim; }
+			}
+		}
+		return $rings;
+	}
 }

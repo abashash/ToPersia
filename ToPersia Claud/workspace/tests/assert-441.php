@@ -176,7 +176,7 @@ $just441 = function ( $pages ) {
 	$allowed = array(
 		'#^<article class="tp-longform tp-justify"#',
 		'#^<p class="tp-justify">#',
-		'#^<p class="tp-justify" data-tp-ai-panel="(?:summary|bullets|plan)"(?: hidden)?>#',   /* دستهٔ ۲۶ · F-01: هر خروجی AI بند خودش */
+		'#^<p class="tp-justify" role="tabpanel" id="tp-ai-panel-(?:summary|bullets|plan)" aria-labelledby="tp-ai-tab-(?:summary|bullets|plan)" tabindex="0" data-tp-ai-panel="(?:summary|bullets|plan)"(?: hidden)?>#',   /* دستهٔ ۲۶ · F-01: هر خروجی AI بند خودش */
 	);
 	$seen = array();
 	foreach ( $pages as $h ) {

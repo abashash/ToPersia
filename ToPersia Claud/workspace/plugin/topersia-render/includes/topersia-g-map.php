@@ -64,7 +64,7 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'population'                 => array( 'label' => 'جمعیت', 'unit' => 'نفر', 'kind' => 'number', 'zone' => 'card' ),
 		'area_km2'                   => array( 'label' => 'مساحت', 'unit' => 'کیلومتر مربع', 'abbr' => 'km²', 'kind' => 'number', 'zone' => 'card' ),
 		'official_language'          => array( 'label' => 'زبان رسمی', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),
-		'timezone'                   => array( 'label' => 'منطقۀ زمانی', 'unit' => '', 'kind' => 'text', 'zone' => 'travel' ),
+		'timezone'                   => array( 'label' => 'منطقۀ زمانی', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),   /* دستۀ 36-ج: فقط «اطلاعات جغرافیایی»، نه «اطلاعات سفر» */
 		'currency_note'              => array( 'label' => 'یادداشت ارز', 'unit' => '', 'kind' => 'text', 'zone' => 'details' ),
 		'government_type'            => array( 'label' => 'نوع حکومت', 'unit' => '', 'kind' => 'text', 'zone' => 'card' ),
 		'neighboring_countries'      => array( 'label' => 'کشورهای همسایه', 'unit' => '', 'kind' => 'text', 'zone' => 'neighbors' ),

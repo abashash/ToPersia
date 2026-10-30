@@ -307,6 +307,10 @@ msgstr "Climate"
 msgid "اقلیمی"
 msgstr "Climatic"
 
+#: includes/topersia-g-zones.php
+msgid "الفبا"
+msgstr "Alphabetical"
+
 #: includes/topersia-g-map.php
 msgid "امامزاده"
 msgstr "Imamzadeh shrine"
@@ -2193,6 +2197,10 @@ msgid "مراسمی"
 msgstr "Ceremonial"
 
 #: includes/topersia-g-zones.php
+msgid "مرتب‌سازی"
+msgstr "Sort by"
+
+#: includes/topersia-g-zones.php
 msgid "مرجع خارجی"
 msgstr "External reference"
 
@@ -2914,6 +2922,10 @@ msgstr "Entry for non-Muslims"
 msgid "ورودی"
 msgstr "Admission"
 
+#: includes/topersia-g-zones.php
+msgid "وسعت"
+msgstr "Area"
+
 #: includes/topersia-g-map.php
 msgid "وضعیت"
 msgstr "Status"
@@ -3087,6 +3099,10 @@ msgstr "Suggested itinerary"
 #: includes/topersia-g-map.php
 msgid "پیش‌شمارۀ تلفن"
 msgstr "Calling code"
+
+#: includes/topersia-g-zones.php
+msgid "پیش‌فرض"
+msgstr "Default order"
 
 #: includes/topersia-g-map.php
 msgid "پیش‌نویس"

@@ -50,7 +50,7 @@ foreach ( $cases as $name => $id ) {
 		$wrong  = array_filter( $dm[1], function ( $a ) use ( $aria, $l ) { return $a !== $aria[ $l ]; } );
 		$t( "$name [$l]: $dashes «—» همه با aria-label «{$aria[$l]}»", ! $wrong, implode( ',', $wrong ) );
 		if ( 'tp_country' === $type ) {
-			$need = array( 'electric_plug' => 'plug', 'drive_side' => 'wheel', 'timezone' => 'clock' );
+			$need = array( 'electric_plug' => 'plug', 'drive_side' => 'wheel' );   /* دستهٔ 36-ج: منطقهٔ زمانی دیگر اینجا نیست */
 			$missing = array();
 			foreach ( $need as $k => $icon ) { if ( false === strpos( $sec, 'tp-trip__t' ) ) { $missing[] = $k; } }
 			$t( "$name [$l]: دوشاخه · سمت رانندگی · منطقهٔ زمانی کاشی دارند (دست‌کم ۳ کاشی)", $tiles >= 3 );

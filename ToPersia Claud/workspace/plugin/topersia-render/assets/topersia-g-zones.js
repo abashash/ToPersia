@@ -1364,6 +1364,65 @@
 			if ( q ) {
 				q.addEventListener( 'input', box.tpFilter );
 			}
+
+			/* مرتب‌سازی (P5-D465): فقط ترتیب DOM عوض می‌شود؛ همۀ عضوها و پیوندها از سرورند.
+			   ترتیب پیش‌فرض عکس گرفته می‌شود و با هر بازشدن برمی‌گردد. مقدار ناموجود آخر فهرست. */
+			var bar = box.querySelector( '[data-tp-sort]' );
+
+			if ( bar ) {
+
+				var lang  = document.documentElement.lang || 'fa';
+				var coll;
+
+				try { coll = new Intl.Collator( lang ); } catch ( err ) { coll = new Intl.Collator(); }
+
+				var lists_ul = [].slice.call( box.querySelectorAll( '.tp-list__grid' ) ).map( function ( ul ) {
+					return { ul: ul, base: [].slice.call( ul.children ) };
+				} );
+
+				var num = function ( li, attr ) {
+					var v = li.getAttribute( attr );
+					var n = null === v || '' === v ? NaN : parseFloat( v );
+					return n;
+				};
+
+				var name = function ( li ) {
+					var b = li.querySelector( 'b' );
+					return b ? b.textContent : li.textContent;
+				};
+
+				box.tpSort = function ( mode ) {
+
+					lists_ul.forEach( function ( g ) {
+
+						var rows = g.base.slice();
+
+						if ( 'alpha' === mode ) {
+							rows.sort( function ( a, b ) { return coll.compare( name( a ), name( b ) ); } );
+						} else if ( 'pop' === mode || 'area' === mode ) {
+							var attr = 'pop' === mode ? 'data-tp-pop' : 'data-tp-area';
+							rows = rows.map( function ( li, i ) { return { li: li, n: num( li, attr ), i: i }; } );
+							rows.sort( function ( a, b ) {
+								var an = isNaN( a.n ), bn = isNaN( b.n );
+								if ( an || bn ) { return an === bn ? a.i - b.i : ( an ? 1 : -1 ); }
+								return b.n - a.n || a.i - b.i;
+							} );
+							rows = rows.map( function ( r ) { return r.li; } );
+						}
+
+						rows.forEach( function ( li ) { g.ul.appendChild( li ); } );
+					} );
+
+					[].slice.call( bar.querySelectorAll( '[data-tp-sort-by]' ) ).forEach( function ( b ) {
+						b.setAttribute( 'aria-pressed', b.getAttribute( 'data-tp-sort-by' ) === mode ? 'true' : 'false' );
+					} );
+				};
+
+				bar.addEventListener( 'click', function ( e ) {
+					var b = e.target.closest ? e.target.closest( '[data-tp-sort-by]' ) : null;
+					if ( b ) { box.tpSort( b.getAttribute( 'data-tp-sort-by' ) ); }
+				} );
+			}
 		} );
 
 		/* `.more` پیوند است — به خودِ مودال؛ این‌جا جلوی پرش گرفته می‌شود. */
@@ -1388,6 +1447,7 @@
 
 			if ( q ) { q.value = ''; }
 			if ( box.tpFilter ) { box.tpFilter(); }
+			if ( box.tpSort ) { box.tpSort( 'default' ); }
 
 			box.scrollTop = 0;
 			openModal( box, q );
@@ -1505,6 +1565,8 @@
 					Array.prototype.forEach.call( page.querySelectorAll( '[data-ai]' ), function ( b ) {
 						if ( 'copy' !== b.getAttribute( 'data-ai' ) ) {
 							b.classList.toggle( 'tp-is-active', b === btn );
+							b.setAttribute( 'aria-selected', b === btn ? 'true' : 'false' );
+							b.setAttribute( 'tabindex', b === btn ? '0' : '-1' );
 						}
 					} );
 				};
@@ -1526,6 +1588,42 @@
 
 				/* خروجی ذخیره نیست ← کاری نمی‌کند: صفحه برای هیچ‌کس تولید نمی‌خواهد و هیچ درخواستی نمی‌فرستد؛ دکمۀ هر نوع فقط وقتی هست که خروجی ذخیره‌شده‌اش هست. تولید فقط مدیر از متاباکس «ToPersia AI».  P5-D358 */
 			} );
+		} );
+	} )();
+
+	/* ══ برگه‌های «در یک نگاه» — کلید جهت  P5-D466 ═══════════════════════════
+	   الگوی tablist: ←/→ از جهت واقعی صفحه (در راست‌به‌چپ «بعدی» سمت چپ است)، Home/End، فوکوس و انتخاب
+	   با هم. هر سه متن از سرورند؛ این‌جا فقط نمایش عوض می‌شود. */
+	( function () {
+
+		var list = page.querySelector( '.tp-ai__tabs[role="tablist"]' );
+
+		if ( ! list ) {
+			return;
+		}
+
+		list.addEventListener( 'keydown', function ( e ) {
+
+			var tabs = [].slice.call( list.querySelectorAll( '[role="tab"]' ) );
+			var i    = tabs.indexOf( document.activeElement );
+
+			if ( i < 0 || tabs.length < 2 ) {
+				return;
+			}
+
+			var rtl  = 'rtl' === window.getComputedStyle( list ).direction;
+			var next = i;
+
+			if ( 'ArrowRight' === e.key ) { next = rtl ? i - 1 : i + 1; }
+			else if ( 'ArrowLeft' === e.key ) { next = rtl ? i + 1 : i - 1; }
+			else if ( 'Home' === e.key ) { next = 0; }
+			else if ( 'End' === e.key ) { next = tabs.length - 1; }
+			else { return; }
+
+			e.preventDefault();
+			next = ( next + tabs.length ) % tabs.length;
+			tabs[ next ].focus();
+			tabs[ next ].click();
 		} );
 	} )();
 

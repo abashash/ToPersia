@@ -652,6 +652,19 @@ html .tp-page .tp-list__block:first-child .tp-list__fam{margin-top:0}
 .tp-page a.tp-list__card:hover .tp-list__tag,
 .tp-page a.tp-list__card:focus-visible .tp-list__tag{color:var(--tp-primary-text)}
 .tp-page .tp-list__empty{color:rgba(255,255,255,.72);text-align:center;padding:40px 0;margin:0}
+/* مرتب‌سازی پنجرۀ فهرست و برگه‌های «در یک نگاه» — دستۀ 36 · P5-D465 · P5-D466: توکن کاشی، هدف لمسی ≥۴۴ */
+.tp-page .tp-list__sort{display:flex;flex-wrap:wrap;gap:8px;max-inline-size:1400px;margin:0 auto 14px;padding-inline:0}
+html body .tp-page .tp-list__sortbtn{
+  min-block-size:44px;min-inline-size:44px;padding:0 16px;border-radius:var(--tp-tile-radius);
+  border:1px solid var(--tp-tile-border);background:var(--tp-tile-bg);color:var(--tp-tile-text);
+  font:inherit;font-size:calc(.85 * var(--tp-rem));font-weight:700;cursor:pointer;
+}
+html body .tp-page .tp-list__sortbtn:hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text)}
+html body .tp-page .tp-list__sortbtn[aria-pressed="true"]{background:var(--tp-primary);border-color:var(--tp-primary);color:var(--tp-on-primary)}
+html body .tp-page .tp-list__sortbtn:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
+html body .tp-page .tp-ai__btn{min-block-size:44px}
+html body .tp-page .tp-ai__tabs{display:contents}
+html body .tp-page .tp-ai__btn:focus-visible,html body .tp-page .tp-ai__out p:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
 @media(max-width:720px){
   .tp-page .tp-list__q{order:3;flex-basis:100%;max-inline-size:none}
   .tp-page .tp-list__grid{grid-template-columns:1fr}

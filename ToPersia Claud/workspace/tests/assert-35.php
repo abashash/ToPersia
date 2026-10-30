@@ -44,10 +44,11 @@ $GLOBALS['tp_meta'][9501]  = array( 'drive_side' => 'left', 'timezone' => '+03:3
 $c_data = topersia_g_practical_section( 9501, array( 'items' => array(), 'group' => array() ) );
 $cnt_none = function ( $h ) { return substr_count( $h, 'tp-trip__v--none' ); };
 $c_ok = function ( $x ) use ( $cnt_none ) {
-	return 4 === $cnt_none( $x[0] ) && 4 === substr_count( $x[0], '<svg' )                       /* دوشاخه · سمت · منطقه · روادید — همه «—» */
-		&& 2 === $cnt_none( $x[1] ) && false !== strpos( $x[1], '۰۳:۳۰' ) && 1 === preg_match( '#<b class="tp-trip__v">[^<]*</b><span class="tp-trip__k">منطقۀ زمانی</span>#u', $x[1] );
+	return 3 === $cnt_none( $x[0] ) && 3 === substr_count( $x[0], '<svg' )                       /* دوشاخه · سمت · روادید — همه «—»؛ منطقهٔ زمانی دیگر اینجا نیست (دستهٔ 36-ج) */
+		&& false === strpos( $x[0], 'منطقۀ زمانی' ) && false === strpos( $x[1], 'منطقۀ زمانی' ) && false === strpos( $x[1], '۰۳:۳۰' )
+		&& 2 === $cnt_none( $x[1] );                                                            /* با سمت رانندگی: دوشاخه و روادید «—» */
 };
-tp441_mut( 'کشور: بی داده چهار کاشی «—» (دوشاخه · سمت رانندگی · منطقهٔ زمانی · روادید)؛ با منطقهٔ زمانی و سمت رانندگی فقط دو «—» — جهش: «—» مقدار ساختگی بگیرد می‌افتد',
+tp441_mut( 'کشور: «اطلاعات سفر» بی داده سه کاشی «—» (دوشاخه · سمت رانندگی · روادید) و منطقهٔ زمانی در آن نیست؛ با سمت رانندگی فقط دو «—» — جهش: «—» مقدار ساختگی بگیرد می‌افتد',
 	$c_ok, array( $c_none, $c_data ), array( str_replace( 'tp-trip__v--none', 'x', $c_none ), $c_data ) );
 
 /* ── نوع دیگر: فقط فیلدهای سفرِ موجود، بی «—» ── */
@@ -74,9 +75,10 @@ t( 'اطلاعات سفر: بی جاوااسکریپت و بی data-tp-؛ جمل
 
 /* ── هر فیلد سفر یک جا: دوشاخه · سمت · منطقه · پیش‌شماره · مترو · روادید هنگام ورود در ناحیهٔ travel (نه card/visit) ── */
 $moved = true;
-foreach ( array( 'electric_plug', 'drive_side', 'timezone', 'calling_code', 'metro_available', 'visa_on_arrival', 'free_zone', 'airport_name', 'railway_station' ) as $k ) {
+foreach ( array( 'electric_plug', 'drive_side', 'calling_code', 'metro_available', 'visa_on_arrival', 'free_zone', 'airport_name', 'railway_station' ) as $k ) {
 	if ( 'travel' !== ( topersia_g_map()[ $k ]['zone'] ?? '' ) ) { $moved = false; }
 }
-t( 'FIELDMAP: فیلدهای سفر همه در ناحیهٔ travel‌اند — هر مقدار فقط در یک کارت (نه هم در «اطلاعات جغرافیایی»/«بازدید» و هم اینجا)', $moved );
+/* دستهٔ 36-ج: منطقهٔ زمانی فقط در «اطلاعات جغرافیایی» (ناحیهٔ card)، نه «اطلاعات سفر» */
+t( 'FIELDMAP: فیلدهای سفر همه در ناحیهٔ travel‌اند و منطقهٔ زمانی در card — هر مقدار فقط در یک کارت', $moved && 'card' === ( topersia_g_map()['timezone']['zone'] ?? '' ) );
 
 unset( $GLOBALS['tp_posts'][9501], $GLOBALS['tp_posts'][9502], $GLOBALS['tp_meta'][9501], $GLOBALS['tp_meta'][9502] );

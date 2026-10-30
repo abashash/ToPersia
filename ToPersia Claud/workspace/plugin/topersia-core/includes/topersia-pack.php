@@ -996,6 +996,141 @@ function topersia_pack_number_text( $value ) {
 }
 
 /** شمار واژه — فاصله جداکننده است، نیم‌فاصله نه. */
+/**
+ * دامنۀ یک نشانی، بی `www.` و با حروف کوچک — یا خالی.  دستۀ 36-ج
+ */
+function topersia_pack_host( $url ) {
+
+	$host = strtolower( (string) wp_parse_url( trim( (string) $url ), PHP_URL_HOST ) );
+
+	return (string) preg_replace( '/^www\./', '', $host );
+}
+
+/**
+ * سازمان‌های شناخته‌شده: نام (نام‌های مستعار) ← دامنه‌های شناخته. فقط برای هشدار «نام با نشانی نمی‌خواند».
+ * جدول عمداً کوچک و بسته است؛ نامی که در آن نیست هشدار نمی‌گیرد (نمی‌دانیم دامنه‌اش چیست).
+ */
+function topersia_pack_known_orgs() {
+
+	return array(
+		array( array( 'unesco', 'یونسکو' ), array( 'unesco.org' ) ),
+		array( array( 'iranica', 'ایرانیکا' ), array( 'iranicaonline.org', 'iranica.com' ) ),
+		array( array( 'britannica', 'بریتانیکا' ), array( 'britannica.com' ) ),
+		array( array( 'wikipedia', 'ویکی‌پدیا', 'ویکی پدیا' ), array( 'wikipedia.org' ) ),
+		array( array( 'world bank', 'بانک جهانی' ), array( 'worldbank.org' ) ),
+		array( array( 'factbook' ), array( 'cia.gov' ) ),
+		array( array( 'مرکز آمار ایران', 'statistical centre of iran', 'statistical center of iran' ), array( 'amar.org.ir' ) ),
+		array( array( 'iran data portal', 'درگاه ملی آمار' ), array( 'amar.org.ir', 'irandataportal.syr.edu' ) ),
+		array( array( 'openstreetmap' ), array( 'openstreetmap.org' ) ),
+		array( array( 'unwto', 'سازمان جهانی گردشگری' ), array( 'unwto.org', 'unwto.int' ) ),
+		array( array( 'fao', 'خواربار' ), array( 'fao.org' ) ),
+		array( array( 'isac', 'مؤسسه مطالعات کهن' ), array( 'isac.uchicago.edu', 'uchicago.edu' ) ),
+		array( array( 'visit iran', 'پورتال رسمی گردشگری ایران' ), array( 'visitiran.ir' ) ),
+		array( array( 'پژوهشگاه میراث فرهنگی' ), array( 'richt.ir', 'rch.ac.ir' ) ),
+	);
+}
+
+/**
+ * هشدار منبع‌ها — هرگز مانع نیست.  دستۀ 36-ج
+ *   الف) بیش از نیمی از `source_url`ها یک دامنه‌اند ← منبع‌ها متنوع نیستند.
+ *   ب) `source_name` سازمانی را می‌آورد که دامنۀ نشانی همان ردیف با آن نمی‌خواند.
+ *
+ * @param array $rows ردیف‌های source_references (source_name · source_url …)
+ * @return string[] هشدارها (متن فارسی)
+ */
+function topersia_pack_source_warnings( $rows ) {
+
+	$out   = array();
+	$hosts = array();
+	$n     = 0;
+
+	foreach ( (array) $rows as $i => $row ) {
+
+		if ( ! is_array( $row ) ) {
+			continue;
+		}
+
+		$host = topersia_pack_host( isset( $row['source_url'] ) ? $row['source_url'] : '' );
+
+		if ( '' === $host ) {
+			continue;
+		}
+
+		$n ++;
+		$hosts[ $host ] = ( isset( $hosts[ $host ] ) ? $hosts[ $host ] : 0 ) + 1;
+	}
+
+	if ( $n >= 2 ) {
+		arsort( $hosts );
+		$top = (string) key( $hosts );
+		if ( $hosts[ $top ] * 2 > $n ) {
+			$out[] = 'هشدار منبع: ' . $hosts[ $top ] . ' از ' . $n . ' نشانی منبع یک دامنه‌اند (' . $top . ') — منبع‌ها متنوع نیستند';
+		}
+	}
+
+	foreach ( (array) $rows as $i => $row ) {
+
+		if ( ! is_array( $row ) || empty( $row['source_name'] ) ) {
+			continue;
+		}
+
+		$host = topersia_pack_host( isset( $row['source_url'] ) ? $row['source_url'] : '' );
+		$name = function_exists( 'mb_strtolower' ) ? mb_strtolower( str_replace( "\u{200C}", ' ', (string) $row['source_name'] ), 'UTF-8' ) : strtolower( (string) $row['source_name'] );
+
+		if ( '' === $host ) {
+			continue;
+		}
+
+		foreach ( topersia_pack_known_orgs() as $org ) {
+
+			$hit = false;
+			foreach ( $org[0] as $alias ) {
+				if ( false !== strpos( $name, function_exists( 'mb_strtolower' ) ? mb_strtolower( $alias, 'UTF-8' ) : strtolower( $alias ) ) ) {
+					$hit = true;
+					break;
+				}
+			}
+
+			if ( ! $hit ) {
+				continue;
+			}
+
+			$ok = false;
+			foreach ( $org[1] as $dom ) {
+				if ( $host === $dom || ( strlen( $host ) > strlen( $dom ) && '.' . $dom === substr( $host, -( strlen( $dom ) + 1 ) ) ) ) {
+					$ok = true;
+					break;
+				}
+			}
+
+			if ( ! $ok ) {
+				$out[] = 'هشدار منبع: ردیف ' . ( (int) $i + 1 ) . ' — «' . trim( (string) $row['source_name'] ) . '» با دامنۀ نشانی (' . $host . ') نمی‌خواند؛ دامنۀ آن سازمان ' . implode( ' · ', $org[1] ) . ' است';
+			}
+
+			break;
+		}
+	}
+
+	return $out;
+}
+
+/**
+ * سقف واژۀ نوشته‌شده در «توضیح» مشخصات یک فیلد — «بین ۱۵ تا ۳۰ کلمه» ← ۳۰، «حداکثر ۵۰ کلمه» ← ۵۰؛ ۰ = ندارد.  دستۀ 36-ج
+ */
+function topersia_pack_description_word_cap( $description ) {
+
+	$d = strtr( (string) $description, array( '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9' ) );
+
+	if ( preg_match( '/(\d+)\s*(?:تا|to|-|–)\s*(\d+)\s*(?:کلمه|واژه|words?)/iu', $d, $m ) ) {
+		return max( (int) $m[1], (int) $m[2] );
+	}
+
+	if ( preg_match( '/(?:حداکثر|سقف|تا|max(?:imum)?|up to)\s*(\d+)\s*(?:کلمه|واژه|words?)/iu', $d, $m ) ) {
+		return (int) $m[1];
+	}
+
+	return 0;
+}
 function topersia_pack_words( $html ) {
 
 	$text = trim( wp_strip_all_tags( (string) $html ) );
@@ -1758,6 +1893,17 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		$in  = topersia_pack_value_in( $def, $value, $key );
 		$row = array( 'status' => $in['status'], 'shown' => topersia_pack_shown( $value ), 'note' => $in['note'] );
 
+		/* دستۀ 36-ج: متنی که از سقف واژۀ توضیح مشخصاتش بلندتر است — هشدار، نه مانع */
+		if ( is_string( $value ) && in_array( $in['status'], array( 'ok', 'short' ), true ) ) {
+			$cap = topersia_pack_description_word_cap( isset( $def['description'] ) ? $def['description'] : '' );
+			$wc  = $cap ? topersia_pack_words( $value ) : 0;
+			if ( $cap && $wc > $cap ) {
+				$warn = 'هشدار: ' . $wc . ' واژه؛ سقف مشخصات این فیلد ' . $cap . ' واژه است (مانع نیست)';
+				$row['note']      = '' === (string) $row['note'] ? $warn : $row['note'] . ' · ' . $warn;
+				$plan['notes'][] = '«' . $key . '»: ' . $warn;
+			}
+		}
+
 		if ( 'empty' === $in['status'] ) {
 			if ( 'create' === $plan['action'] && $def['required'] ) {
 				$row['status'] = 'required';
@@ -1772,6 +1918,13 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		}
 
 		$plan['fields'][ $key ] = $row;
+	}
+
+	/* دستۀ 36-ج: هشدار منبع‌ها (تنوع دامنه · نام با دامنه) — مانع نیست */
+	if ( isset( $fields['source_references'] ) && is_array( $fields['source_references'] ) ) {
+		foreach ( topersia_pack_source_warnings( $fields['source_references'] ) as $w ) {
+			$plan['notes'][] = $w;
+		}
 	}
 
 	if ( 'create' === $plan['action'] ) {

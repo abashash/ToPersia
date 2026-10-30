@@ -6,6 +6,7 @@
  *   wp eval-file scripts/tp-boundaries.php match            ← آفلاین، روی کش: reference/osm-boundary-map.csv
  *   wp eval-file scripts/tp-boundaries.php build [province|city|all] [force]   ← دسته‌ای (چند شناسه در هر پرس‌وجو)؛ GeoJSON ساده‌شده
  *   wp eval-file scripts/tp-boundaries.php report           ← شمارش، suggested با نام استان والد، ۲۰ شهر none مهم‌تر
+ *   wp eval-file scripts/tp-boundaries.php country [نامک]  ← مرز کشور = اجتماع GeoJSONِ استان‌ها (بی منبع تازه؛ country__<نامک>.geojson؛ ناقص ← توقف)  P5-D479
  *
  * کش و خروجی همه بیرون از git: `uploads/tiles/boundaries-cache/` (پاسخ خام Overpass + شکست‌های build با علت) و `uploads/tiles/boundaries/`.
  *
@@ -268,6 +269,36 @@ if ( 'build' === $cmd ) {
 	}
 	echo "ساخته/موجود: {$done} · شکست: {$fail} · میانه: " . ( $bytes ? (int) ( array_sum( $bytes ) / count( $bytes ) ) : 0 ) . ' بایت · بیشینه: ' . ( $bytes ? max( $bytes ) : 0 ) . " بایت\n";
 	$cmd = 'report';
+}
+
+/* ── country — مرز کشور از اجتماع مرز استان‌ها ────────────────────────────────
+ * wp eval-file scripts/tp-boundaries.php country [نامک=iran]
+ * منبعِ تازه ندارد: GeoJSONِ استان‌هایی که build ساخته؛ خروجی `country__<نامک>.geojson` در لایهٔ مشتق (بیرون از git،
+ * بی فیلد). اگر یکی از استان‌های منتشرشده فایل مرز ندارد، اجتماع «کامل» نیست ← گزارش و توقف (چیزی نوشته نمی‌شود).
+ * دستهٔ 36-ج · P5-D479 */
+if ( 'country' === $cmd ) {
+	$slug = isset( $args[1] ) && preg_match( '/^[a-z0-9-]+$/', (string) $args[1] ) ? (string) $args[1] : 'iran';
+	$miss = array(); $geoms = array(); $seen = array();
+	$provs = get_posts( array( 'post_type' => 'tp_province', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ) ) );
+	foreach ( $provs as $pid ) {
+		$key  = tpb_key( (string) get_post_meta( $pid, 'entity_uid', true ) );
+		if ( '' !== $key && isset( $seen[ $key ] ) ) { continue; }   /* ترجمه‌ها همان entity_uid را دارند */
+		$seen[ $key ] = 1;
+		$file = '' !== $key ? $out . $key . '.geojson' : '';
+		if ( '' === $file || ! is_file( $file ) ) { $miss[] = get_the_title( $pid ); continue; }
+		$geoms[] = json_decode( (string) file_get_contents( $file ), true );
+	}
+	if ( $miss || ! $geoms ) {
+		echo 'اجتماع کامل نیست — استان بی مرز: ' . implode( '، ', $miss ) . " — متوقف شد\n";
+		return;
+	}
+	$rings = tpb_union_raster( $geoms, 0.01 );
+	if ( ! $rings ) { echo "اجتماع خالی — متوقف شد\n"; return; }
+	list( $js, $n ) = tpb_geojson( $rings, 80000 );
+	$js = preg_replace( '/"properties":\{\}/', '"properties":{"source":"union of ' . count( $geoms ) . ' province boundaries (OpenStreetMap contributors, ODbL)","cell":0.01}', $js, 1 );
+	file_put_contents( $out . 'country__' . $slug . '.geojson', $js );
+	echo "✓ country__{$slug}.geojson — اجتماع " . count( $geoms ) . " استان · {$n} حلقه · " . strlen( $js ) . " بایت\n";
+	return;
 }
 
 /* ── report ──────────────────────────────────────────────────────── */
