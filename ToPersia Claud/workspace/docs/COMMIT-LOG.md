@@ -194,3 +194,10 @@
 | 185 | 2026-10-28 | `chore` | `0b3fc53f` |  | mirror geo/ — دستهٔ 34. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · dedupe-local · quick-local · wpml-class · stats4 · pack · acceptance · contrast · behaviour · user-flows · Lighthouse A/B (افت ≤۲) · کاناری سالم | ✅ |
 | 186 | 2026-10-29 | `feat` | `3540b783` |  | دستهٔ 35: P5-D460 «اطلاعات سفر» تصویری — کاشی آیکون SVG، سه زبان، سه حالت رنگ؛ رفع کنتراست سربرگ تابستان | ✅ |
 | 187 | 2026-10-29 | `chore` | `3ba378dc` |  | mirror geo/ — دستهٔ 35. گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples-local · dedupe/trip/quick-local · wpml-class · stats4 · pack · acceptance · contrast (۴ صفحه) · behaviour · user-flows · Lighthouse A/B (افت ≤۱) · کاناری سالم | ✅ |
+| 188 | 2026-10-30 | `docs` | `f83c0e07` |  | دستهٔ 36-ب: PUBLISH-READINESS.md — خبر/مقاله/سفرنامه/راهنما، پشتیبان، استقرار، انجماد ساختار (فقط‌خواندنی) | ✅ |
+| 189 | 2026-10-30 | `docs` | `017d9112` |  | دستهٔ 38: پیشنهاد انجماد ساختار — ۲۳۵ ردیف + STRUCTURE-LOCK.json (فقط‌خواندنی) | ✅ |
+| 190 | 2026-10-30 | `feat` | `1c782782` |  | دستهٔ 37 · P5-D475: tp-backup.php و tp-restore-test.php + BACKUP-RESTORE.md | ✅ |
+| 191 | 2026-10-30 | `feat` | `6d81072d` |  | دستهٔ 37: بازگردانی اثبات‌شده — اثر انگشت SQL، search-replace هسته، مهلت ۱۰ دقیقه، پاک‌سازی finally | ✅ |
+| 192 | 2026-10-30 | `docs` | `60f15859` |  | P5-D478: SECRETS-KEYS.md — ثابت wp-config پیش از گزینه؛ اتصال‌دهنده‌های AI وردپرس | ✅ |
+| 193 | 2026-10-30 | `wip` | `cbd11680` |  | wip/36: محافظ کار (شاخهٔ محلی) | ✅ |
+| 194 | 2026-10-30 | `feat` | `77168609` |  | دستهٔ 36 · P5-D465/466 مرتب‌سازی فهرست و برگه‌های در یک نگاه + 36-ج · P5-D479/480 ایران، منابع، هشدارهای درون‌ریز؛ گیت‌ها: preflight · php -l · assert · assert-uc · alltypes · samples · dedupe · trip · quick · wpml-class · stats4 · pack · iran-local · acceptance · contrast (۱۲۳ صفحه + ایران) · sort-tabs · behaviour · user-flows · canary · Lighthouse A/B · گزارش بصری | ✅ |
