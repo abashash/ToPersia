@@ -1,0 +1,2466 @@
+{
+ "_": "کلیدهای قفل‌شده — دستهٔ 38 · P5-D475+ . تولید از خواندن کد (render · schema · ai · core · user-core · tests) و پایگاه‌دادهٔ محلی؛ فقط‌خواندنی. تغییر نام یا حذف هر کلید/شناسه = تغییر مصرف‌کننده‌های نام‌برده و (با مقدار واقعی) مهاجرت داده.",
+ "generated": "2026-10-30T02:39:56.930Z",
+ "post_types": [
+  "tp_ancient_site",
+  "tp_border_crossing",
+  "tp_calendar",
+  "tp_city",
+  "tp_costume",
+  "tp_country",
+  "tp_county",
+  "tp_currency",
+  "tp_dance",
+  "tp_desert",
+  "tp_designation",
+  "tp_district",
+  "tp_ethnic_group",
+  "tp_festival",
+  "tp_figure",
+  "tp_forest_plain",
+  "tp_handicraft",
+  "tp_health_safety",
+  "tp_historical_era",
+  "tp_island",
+  "tp_landscape",
+  "tp_language",
+  "tp_local_food",
+  "tp_monument",
+  "tp_mountain",
+  "tp_museum",
+  "tp_music",
+  "tp_natural_feature",
+  "tp_protected_area",
+  "tp_province",
+  "tp_region",
+  "tp_religious_event",
+  "tp_religious_site",
+  "tp_ritual",
+  "tp_route",
+  "tp_seasonal_event",
+  "tp_sports_event",
+  "tp_transport",
+  "tp_travel_etiquette",
+  "tp_village",
+  "tp_visa",
+  "tp_water_body"
+ ],
+ "post_types_extra": [
+  "tpc_news (فقط محلی)"
+ ],
+ "fields": {
+  "name_fa": {
+   "consumers": [
+    "AI(core)",
+    "render",
+    "core",
+    "user-core",
+    "tests",
+    "search-fold"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "name_en": {
+   "consumers": [
+    "AI(core)",
+    "render",
+    "core",
+    "user-core",
+    "tests",
+    "search-fold"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "name_ar": {
+   "consumers": [
+    "AI(core)",
+    "render",
+    "user-core",
+    "tests",
+    "search-fold"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "name_local": {
+   "consumers": [
+    "render",
+    "user-core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "alternative_names": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "short_summary": {
+   "consumers": [
+    "AI(core)",
+    "JSON-LD",
+    "render",
+    "core",
+    "user-core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "overview_text": {
+   "consumers": [
+    "AI(core)",
+    "render",
+    "core",
+    "user-core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "hero_image": {
+   "consumers": [
+    "AI(core)",
+    "JSON-LD",
+    "render",
+    "core",
+    "user-core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "featured_image_gallery": {
+   "consumers": [
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "video_sample": {
+   "consumers": [
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "last_verified_date": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "content_status": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "entity_uid": {
+   "consumers": [
+    "AI(code)",
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "external_reference_uri": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "audio_narration": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "faq_items": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "meta_title": {
+   "consumers": [
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "meta_description": {
+   "consumers": [
+    "AI(core)",
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "ai_summary": {
+   "consumers": [
+    "AI(core)",
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "source_references": {
+   "consumers": [
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "official_name_fa": {
+   "consumers": [
+    "FIELDMAP:names",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "names",
+   "fieldmap_kind": "text"
+  },
+  "official_name_en": {
+   "consumers": [
+    "FIELDMAP:names",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": "names",
+   "fieldmap_kind": "text"
+  },
+  "official_name_ar": {
+   "consumers": [
+    "FIELDMAP:names",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "names",
+   "fieldmap_kind": "text"
+  },
+  "geo_coordinates": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "JSON-LD",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "latin"
+  },
+  "population": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "JSON-LD",
+    "render",
+    "core",
+    "hero-stat",
+    "tests",
+    "list-sort(دستهٔ 36)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number"
+  },
+  "area_km2": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "JSON-LD",
+    "render",
+    "core",
+    "hero-stat",
+    "tests",
+    "list-sort(دستهٔ 36)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number"
+  },
+  "official_language": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text"
+  },
+  "timezone": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "text"
+  },
+  "currency_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "render",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "government_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text"
+  },
+  "neighboring_countries": {
+   "consumers": [
+    "FIELDMAP:neighbors",
+    "tests"
+   ],
+   "fieldmap_zone": "neighbors",
+   "fieldmap_kind": "text"
+  },
+  "calling_code": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "latin"
+  },
+  "best_season": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "internet_tld": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "latin"
+  },
+  "region_classification": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "geographic_boundary": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "climate_overview": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "historical_context": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "province_code": {
+   "consumers": [
+    "FIELDMAP:skip",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "skip",
+   "fieldmap_kind": "latin"
+  },
+  "geo_boundary": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "bordering_countries": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "climate_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text"
+  },
+  "free_zone": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag"
+  },
+  "elevation_m": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number"
+  },
+  "transport_access": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "founded_year": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "year"
+  },
+  "airport_name": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "text"
+  },
+  "airport_iata": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "latin"
+  },
+  "railway_station": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag"
+  },
+  "unesco_creative_city": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag"
+  },
+  "neighborhood_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "tourism_target_village": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag"
+  },
+  "island_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "access_method": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "mountain_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "provinces_spanning": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "trekking_difficulty": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "volcanic": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "flag"
+  },
+  "national_monument": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag"
+  },
+  "national_monument_year": {
+   "consumers": [
+    "FIELDMAP:skip",
+    "tests"
+   ],
+   "fieldmap_zone": "skip",
+   "fieldmap_kind": "year"
+  },
+  "water_body_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "length_km": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number"
+  },
+  "max_depth_m": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number"
+  },
+  "salinity_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "biosphere_reserve": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag"
+  },
+  "biosphere_year": {
+   "consumers": [
+    "FIELDMAP:skip"
+   ],
+   "fieldmap_zone": "skip",
+   "fieldmap_kind": "year"
+  },
+  "desert_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "max_temperature_c": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number"
+  },
+  "world_heritage": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag"
+  },
+  "world_heritage_year": {
+   "consumers": [
+    "FIELDMAP:skip",
+    "tests"
+   ],
+   "fieldmap_zone": "skip",
+   "fieldmap_kind": "year"
+  },
+  "world_heritage_criteria": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "latin"
+  },
+  "area_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "forest_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "crossing_type": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "border_country": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text"
+  },
+  "status": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "AI(code)",
+    "render",
+    "core",
+    "user-core",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "choice"
+  },
+  "operating_hours": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "classification": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "JSON-LD",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "name_historical": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text"
+  },
+  "suggested_duration": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "visiting_hours": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "admission_fee": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "accessibility": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "restoration_status": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "national_registration": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag"
+  },
+  "address": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "construction_year": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "architectural_style": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "world_heritage_ref_number": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "religion": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "name_religious": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text"
+  },
+  "active_worship": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "flag"
+  },
+  "active_pilgrimage": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "dress_code_details": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "photography_policy": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "park_type": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "height_m": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "depth_m": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "excavation_status": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "landscape_type": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "total_area_km2": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "materials": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "technique_summary": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "intangible_heritage_year": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "year"
+  },
+  "intangible_heritage_status": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "classification_": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "ritual_context_reference": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "dance_type": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "language_family": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "name_endonym": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "script": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "render",
+    "core",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "speaker_estimate_iran": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "population_estimate": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "spatial_scope": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "calendar_timing": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "birth_year_approx": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "death_year_approx": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "start_year_approx": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "end_year_approx": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "emergency_police": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "latin"
+  },
+  "emergency_ambulance": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "latin"
+  },
+  "emergency_fire": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "latin"
+  },
+  "dress_code_summary": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "tipping_guidance": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "photography_restrictions": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "regional_etiquette_notes": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "page_title": {
+   "consumers": [
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "programme_code": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "render",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "awarding_body": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "programme_start_year": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "year"
+  },
+  "total_distance_km": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "JSON-LD",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "estimated_duration_days": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "route_stops_order": {
+   "consumers": [
+    "core"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "route_stop_notes": {
+   "consumers": [
+    "core"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "difficulty_level": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "JSON-LD",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "visa_types": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "visa_policy_matrix": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "free_zone_stay_days": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "passport_validity_months": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "max_total_stay_days": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "currency_iso_code": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "latin"
+  },
+  "currency_symbol": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "text"
+  },
+  "currency_units": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "redenomination_status": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "international_card_status": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "regional_notes": {
+   "consumers": [
+    "core"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "calendar_systems": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "national_holidays": {
+   "consumers": [
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "official_source_link": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "annual_review_month": {
+   "consumers": [
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "rail_network_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "AI(facts)"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text"
+  },
+  "event_frequency": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "event_start_date": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "JSON-LD",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "date"
+  },
+  "event_end_date": {
+   "consumers": [
+    "FIELDMAP:card",
+    "AI(facts)",
+    "JSON-LD",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "date"
+  },
+  "venue_name": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "organizer_name": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "official_event_url": {
+   "consumers": [
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": null,
+   "fieldmap_kind": null
+  },
+  "sport_type": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "competition_level": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "calendar_system": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "ceremony_duration_days": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "number"
+  },
+  "crowd_scale": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "season": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "natural_phenomenon_type": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "weather_dependency": {
+   "consumers": [
+    "FIELDMAP:stat",
+    "hero-stat"
+   ],
+   "fieldmap_zone": "stat",
+   "fieldmap_kind": "choice"
+  },
+  "opening_hours_spec": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "repeater"
+  },
+  "ticket_price_foreign": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number"
+  },
+  "ticket_price_local": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number"
+  },
+  "ticket_price_checked": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "date"
+  },
+  "wheelchair_access": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "best_time_of_day": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "dress_requirement": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "photo_allowed": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "electric_plug": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "choice"
+  },
+  "drive_side": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "choice"
+  },
+  "typical_trip_days": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number"
+  },
+  "metro_available": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag"
+  },
+  "vibe_tags": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "access_road_type": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "homestay_available": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "flag"
+  },
+  "ferry_ports": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "repeater"
+  },
+  "summit_route_hours": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number"
+  },
+  "permit_required": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "flag"
+  },
+  "swimming_allowed": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "tour_required": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "safe_months": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "trail_length_km": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number"
+  },
+  "access_difficulty": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "permit_contact_url": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "latin"
+  },
+  "viewpoints": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "repeater"
+  },
+  "visa_on_arrival": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag"
+  },
+  "non_muslim_entry": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "core",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "prayer_times_closure": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "on_site_guide": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "flag"
+  },
+  "audio_guide_languages": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "dietary_flags": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "render",
+    "hero-stat",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "worn_today": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "audience_participation": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "flag"
+  },
+  "visitor_welcome": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "core"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "ticket_required": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "traffic_closure_note": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "text"
+  },
+  "ticket_url": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "JSON-LD"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "latin"
+  },
+  "last_observed_date": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "date"
+  },
+  "processing_days": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number"
+  },
+  "ride_hailing_apps": {
+   "consumers": [
+    "FIELDMAP:visit"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  },
+  "gesture_warnings": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "repeater"
+  },
+  "tap_water_safe": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "choice"
+  }
+ },
+ "relations": {
+  "71": {
+   "parent": "tp_country",
+   "child": "tp_province",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld",
+    "tests"
+   ],
+   "real_edges": 33
+  },
+  "72": {
+   "parent": "tp_province",
+   "child": "tp_county",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 485
+  },
+  "73": {
+   "parent": "tp_county",
+   "child": "tp_city",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 948
+  },
+  "74": {
+   "parent": "tp_city",
+   "child": "tp_district",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "75": {
+   "parent": "tp_province",
+   "child": "tp_village",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 1
+  },
+  "77": {
+   "parent": "tp_province",
+   "child": "tp_island",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "78": {
+   "parent": "tp_province",
+   "child": "tp_mountain",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 1
+  },
+  "79": {
+   "parent": "tp_province",
+   "child": "tp_water_body",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 1
+  },
+  "80": {
+   "parent": "tp_province",
+   "child": "tp_desert",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 1
+  },
+  "81": {
+   "parent": "tp_province",
+   "child": "tp_forest_plain",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "82": {
+   "parent": "tp_province",
+   "child": "tp_border_crossing",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "84": {
+   "parent": "tp_city",
+   "child": "tp_monument",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 5
+  },
+  "86": {
+   "parent": "tp_city",
+   "child": "tp_religious_site",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 1
+  },
+  "88": {
+   "parent": "tp_city",
+   "child": "tp_museum",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "89": {
+   "parent": "tp_province",
+   "child": "tp_protected_area",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "90": {
+   "parent": "tp_province",
+   "child": "tp_natural_feature",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "92": {
+   "parent": "tp_province",
+   "child": "tp_ancient_site",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 3
+  },
+  "94": {
+   "parent": "tp_province",
+   "child": "tp_landscape",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "107": {
+   "parent": "tp_province",
+   "child": "tp_handicraft",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 9
+  },
+  "110": {
+   "parent": "tp_province",
+   "child": "tp_local_food",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 3
+  },
+  "113": {
+   "parent": "tp_province",
+   "child": "tp_costume",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "116": {
+   "parent": "tp_province",
+   "child": "tp_music",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "119": {
+   "parent": "tp_province",
+   "child": "tp_dance",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "122": {
+   "parent": "tp_province",
+   "child": "tp_ritual",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "131": {
+   "parent": "tp_province",
+   "child": "tp_language",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "153": {
+   "parent": "tp_city",
+   "child": "tp_figure",
+   "type": "one_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "157": {
+   "parent": "tp_province",
+   "child": "tp_health_safety",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "160": {
+   "parent": "tp_province",
+   "child": "tp_travel_etiquette",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "185": {
+   "parent": "tp_country",
+   "child": "tp_visa",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "226": {
+   "parent": "tp_country",
+   "child": "tp_currency",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "229": {
+   "parent": "tp_province",
+   "child": "tp_calendar",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "232": {
+   "parent": "tp_province",
+   "child": "tp_festival",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 3
+  },
+  "245": {
+   "parent": "tp_province",
+   "child": "tp_sports_event",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "253": {
+   "parent": "tp_province",
+   "child": "tp_religious_event",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "263": {
+   "parent": "tp_province",
+   "child": "tp_seasonal_event",
+   "type": "many_to_many",
+   "used_by": [
+    "json-ld"
+   ],
+   "real_edges": 0
+  },
+  "268": {
+   "parent": "tpc_news",
+   "child": "tp_province",
+   "type": "many_to_many",
+   "used_by": [
+    "render-news"
+   ],
+   "real_edges": 3
+  },
+  "269": {
+   "parent": "tpc_news",
+   "child": "tp_city",
+   "type": "many_to_many",
+   "used_by": [
+    "render-news"
+   ],
+   "real_edges": 9
+  },
+  "270": {
+   "parent": "tpc_news",
+   "child": "tp_village",
+   "type": "many_to_many",
+   "used_by": [
+    "render-news"
+   ],
+   "real_edges": 0
+  },
+  "271": {
+   "parent": "tpc_news",
+   "child": "tp_island",
+   "type": "many_to_many",
+   "used_by": [
+    "render-news"
+   ],
+   "real_edges": 0
+  }
+ },
+ "hero_stat_cells": {
+  "tp_country": [
+   "population",
+   "area_km2",
+   "official_language",
+   "currency:unit"
+  ],
+  "tp_city": [
+   "parent:province",
+   "elevation_m",
+   "area_km2",
+   "population"
+  ],
+  "tp_region": [
+   "region_classification",
+   "best_season",
+   "names:83",
+   "text:climate_overview"
+  ],
+  "tp_province": [
+   "capital",
+   "area_km2",
+   "population",
+   "climate_type"
+  ],
+  "tp_district": [
+   "parent:province",
+   "parent:city",
+   "neighborhood_type",
+   "distance:capital"
+  ],
+  "tp_village": [
+   "parent:province",
+   "distance:capital",
+   "population",
+   "elevation_m"
+  ],
+  "tp_island": [
+   "parent:province",
+   "island_type",
+   "area_km2",
+   "distance:capital"
+  ],
+  "tp_mountain": [
+   "parent:province",
+   "elevation_m",
+   "mountain_type",
+   "trekking_difficulty"
+  ],
+  "tp_water_body": [
+   "parent:province",
+   "distance:capital",
+   "water_body_type",
+   "area_km2"
+  ],
+  "tp_desert": [
+   "parent:province",
+   "desert_type",
+   "area_km2",
+   "max_temperature_c"
+  ],
+  "tp_forest_plain": [
+   "parent:province",
+   "area_type",
+   "forest_type",
+   "area_km2"
+  ],
+  "tp_border_crossing": [
+   "parent:province",
+   "crossing_type",
+   "border_country",
+   "status"
+  ],
+  "tp_monument": [
+   "classification",
+   "construction_year",
+   "suggested_duration",
+   "restoration_status"
+  ],
+  "tp_religious_site": [
+   "parent:province",
+   "parent:city",
+   "classification",
+   "religion"
+  ],
+  "tp_ancient_site": [
+   "parent:province",
+   "distance:capital",
+   "excavation_status",
+   "architectural_style"
+  ],
+  "tp_natural_feature": [
+   "classification",
+   "height_m",
+   "depth_m",
+   "length_km"
+  ],
+  "tp_museum": [
+   "parent:city",
+   "classification",
+   "founded_year",
+   "suggested_duration"
+  ],
+  "tp_protected_area": [
+   "parent:province",
+   "park_type",
+   "area_km2",
+   "suggested_duration"
+  ],
+  "tp_landscape": [
+   "parent:province",
+   "landscape_type",
+   "total_area_km2",
+   "suggested_duration"
+  ],
+  "tp_handicraft": [
+   "classification",
+   "origin",
+   "intangible_heritage_year",
+   "intangible_heritage_status"
+  ],
+  "tp_local_food": [
+   "classification_",
+   "text:main_ingredients",
+   "origin",
+   "dietary_flags"
+  ],
+  "tp_costume": [
+   "classification",
+   "text:fabric_type",
+   "text:occasion",
+   "origin"
+  ],
+  "tp_music": [
+   "classification",
+   "text:related_instruments_reference",
+   "text:ritual_context_reference",
+   "origin"
+  ],
+  "tp_dance": [
+   "dance_type",
+   "text:formation",
+   "text:occasion",
+   "text:music_accompaniment_reference"
+  ],
+  "tp_language": [
+   "language_family",
+   "script",
+   "speaker_estimate_iran",
+   "name_endonym"
+  ],
+  "tp_ethnic_group": [
+   "population_estimate",
+   "text:language_reference",
+   "names:134",
+   "names:133"
+  ],
+  "tp_ritual": [
+   "classification",
+   "spatial_scope",
+   "intangible_heritage_year",
+   "intangible_heritage_status"
+  ],
+  "tp_figure": [
+   "classification",
+   "birth_year_approx",
+   "death_year_approx",
+   "text:major_works"
+  ],
+  "tp_historical_era": [
+   "start_year_approx",
+   "end_year_approx",
+   "text:capital_reference",
+   "text:successor_reference"
+  ],
+  "tp_designation": [
+   "programme_start_year",
+   "programme_code",
+   "awarding_body",
+   "text:page_title"
+  ],
+  "tp_route": [
+   "total_distance_km",
+   "estimated_duration_days",
+   "difficulty_level",
+   "classification"
+  ],
+  "tp_visa": [
+   "max_total_stay_days",
+   "passport_validity_months",
+   "free_zone_stay_days",
+   "domain:official_application_portal"
+  ],
+  "tp_currency": [
+   "currency_iso_code",
+   "currency_symbol",
+   "international_card_status",
+   "redenomination_status"
+  ],
+  "tp_health_safety": [
+   "emergency_police",
+   "emergency_ambulance",
+   "emergency_fire",
+   "text:vaccination_recommendations"
+  ],
+  "tp_travel_etiquette": [
+   "text:tipping_guidance",
+   "text:photography_restrictions",
+   "text:dress_code_summary",
+   "text:regional_etiquette_notes"
+  ],
+  "tp_calendar": [
+   "list:calendar_systems:cs_system",
+   "rows:national_holidays",
+   "num:annual_review_month",
+   "domain:official_source_link"
+  ],
+  "tp_transport": [
+   "list:transport_modes:tm_mode",
+   "rows:cities_with_metro",
+   "text:accessibility_note",
+   "list:booking_platforms:bp_name"
+  ],
+  "tp_festival": [
+   "event_frequency",
+   "event_start_date",
+   "event_end_date",
+   "text:venue_name"
+  ],
+  "tp_sports_event": [
+   "sport_type",
+   "competition_level",
+   "event_frequency",
+   "event_start_date"
+  ],
+  "tp_religious_event": [
+   "calendar_system",
+   "ceremony_duration_days",
+   "crowd_scale",
+   "event_start_date"
+  ],
+  "tp_seasonal_event": [
+   "natural_phenomenon_type",
+   "season",
+   "weather_dependency",
+   "text:peak_window_note"
+  ]
+ },
+ "ai_inputs": [
+  "name_fa",
+  "name_en",
+  "name_ar",
+  "short_summary",
+  "overview_text",
+  "ai_summary",
+  "meta_description",
+  "hero_image"
+ ],
+ "list_sort_keys": [
+  "population",
+  "area_km2"
+ ],
+ "count": {
+  "fields": 207,
+  "relations": 39,
+  "post_types": 42
+ }
+}
