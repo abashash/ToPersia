@@ -11,18 +11,27 @@ global $wpdb;
 $wpdb->query( 'SET SESSION group_concat_max_len = 1073741824' );   /* وگرنه GROUP_CONCAT پیش‌فرض ۱۰۲۴ بایت می‌بُرد و چکسام بی‌معنی می‌شود */
 $out    = array( 'count' => array(), 'sum' => array(), 'options' => array(), 'real' => array() );
 $sumtab = array( 'posts', 'term_relationships', 'term_taxonomy', 'terms', 'jet_rel_default', 'topersia_geo', 'icl_translations', 'topersia_ai_summaries', 'comments' );
+/* دستهٔ 37: پشتیبان ردیف‌های رازدار (کلید API · مجوز · نشست) را نمی‌برد؛ TP_FP_SCRUB = JSON { options: [نام…], usermeta: [کلید…] } همان ردیف‌ها را از شمارش و گزینه‌ها کنار می‌گذارد. بی متغیر، رفتار پیشین. */
+$scrub  = json_decode( (string) getenv( 'TP_FP_SCRUB' ), true );
+$sc_opt = is_array( $scrub ) && ! empty( $scrub['options'] ) ? array_map( 'strval', $scrub['options'] ) : array();
+$sc_um  = is_array( $scrub ) && ! empty( $scrub['usermeta'] ) ? array_map( 'strval', $scrub['usermeta'] ) : array();
+$in_sql = function ( $list ) use ( $wpdb ) { return $list ? "('" . implode( "','", array_map( 'esc_sql', $list ) ) . "')" : "('')"; };
 foreach ( $wpdb->get_col( 'SHOW TABLES' ) as $t ) {
 	$short = substr( $t, strlen( $wpdb->prefix ) );
-	$out['count'][ $short ] = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$t`" );
+	$where = '';
+	/* در حالت پشتیبان ترنزینت‌ها هم بیرون‌اند: هر بوت وردپرس (مثلاً doing_cron) یکی می‌سازد و داده نیست */
+	if ( 'options' === $short && is_array( $scrub ) ) { $where = " WHERE option_name NOT LIKE '\_transient%' AND option_name NOT LIKE '\_site\_transient%'" . ( $sc_opt ? ' AND option_name NOT IN ' . $in_sql( $sc_opt ) : '' ); }
+	if ( 'usermeta' === $short && $sc_um ) { $where = ' WHERE meta_key NOT IN ' . $in_sql( $sc_um ); }
+	$out['count'][ $short ] = (int) $wpdb->get_var( "SELECT COUNT(*) FROM `$t`" . $where );
 	if ( in_array( $short, $sumtab, true ) ) {
 		$r = $wpdb->get_row( "CHECKSUM TABLE `$t`", ARRAY_N );
 		$out['sum'][ $short ] = $r ? (string) $r[1] : '';
 	}
 }
-$names = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name NOT LIKE '\\_transient%' AND option_name NOT LIKE '\\_site\\_transient%' AND option_name <> 'cron' ORDER BY option_name" );
+$names = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name NOT LIKE '\\_transient%' AND option_name NOT LIKE '\\_site\\_transient%' AND option_name <> 'cron'" . ( $sc_opt ? ' AND option_name NOT IN ' . $in_sql( $sc_opt ) : '' ) . ' ORDER BY option_name' );
 $out['options']['names']    = md5( implode( "\n", $names ) );
 $out['options']['count']    = count( $names );
-$out['options']['topersia'] = md5( (string) $wpdb->get_var( "SELECT GROUP_CONCAT(CONCAT(option_name,'=',MD5(option_value)) ORDER BY option_name SEPARATOR '|') FROM {$wpdb->options} WHERE option_name LIKE 'topersia\\_%' AND option_name NOT LIKE '%stamp%' AND option_name NOT LIKE '%transient%'" ) );
+$out['options']['topersia'] = md5( (string) $wpdb->get_var( "SELECT GROUP_CONCAT(CONCAT(option_name,'=',MD5(option_value)) ORDER BY option_name SEPARATOR '|') FROM {$wpdb->options} WHERE option_name LIKE 'topersia\\_%' AND option_name NOT LIKE '%stamp%' AND option_name NOT LIKE '%transient%'" . ( $sc_opt ? ' AND option_name NOT IN ' . $in_sql( $sc_opt ) : '' ) ) );
 $out['real'] = array(
 	'posts'     => (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type NOT IN ('revision','auto-draft') AND post_status <> 'auto-draft'" ),
 	'rel_total' => (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}jet_rel_default" ),
