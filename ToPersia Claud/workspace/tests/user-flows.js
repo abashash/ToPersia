@@ -214,7 +214,7 @@ async function guest() {
 		await page.waitForSelector( '#tp-uc-login:not([hidden]) #tp-mobile', { timeout: 60000 } );
 		await page.fill( '#tp-uc-login #tp-mobile', '09000000099' );
 		await page.click( '#tp-uc-login #tp-send-otp' );
-		await page.waitForTimeout( 6000 );
+		await page.waitForTimeout( 6000 * Math.max( 1, parseFloat( process.env.TP_TIMEOUT_X || '1' ) || 1 ) );   /* ماشین کند: POST پس از نانس بیش از ۶ ثانیه می‌کشد */
 		check( 'پیش از ارسال کد، نانس از REST گرفته می‌شود و POST با نانس پرمقدار می‌رود', 2 === seen.length && 'GET nonce' === seen[ 0 ] && ( ( seen[ 1 ] || '' ).match( /^POST send_otp nonce=(\d+)$/ ) || [ 0, 0 ] )[ 1 ] >= 8, JSON.stringify( seen ) );
 		await ctx.close();
 		await browser.close();

@@ -2850,6 +2850,11 @@ msgid "همۀ فرهنگ و رویداد"
 msgstr ""
 
 #: includes/topersia-g-zones.php
+#, php-format
+msgid "همۀ منابع (%s)"
+msgstr ""
+
+#: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
 msgstr ""
 

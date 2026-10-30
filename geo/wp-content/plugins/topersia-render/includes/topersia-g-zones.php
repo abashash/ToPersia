@@ -3100,6 +3100,14 @@ if ( ! function_exists( 'topersia_g_stat_derived' ) ) {
 				$name = $m[1];
 			}
 
+			/* یادداشتِ ارز فقط یک نام کوتاه است («ریال» — بی جمله، بی کد) ← خودِ آن نام. دستۀ 36-ج: ایران `currency_note` = «ریال» داشت و رابطۀ ۲۲۶ خالی بود؛ regex بالا «ریال (IRR)» می‌خواست ← «—». */
+			if ( '' === $name ) {
+				$plain = trim( wp_strip_all_tags( topersia_g_text( $post_id, 'currency_note' ) ) );
+				if ( '' !== $plain && ( function_exists( 'mb_strlen' ) ? mb_strlen( $plain, 'UTF-8' ) : strlen( $plain ) ) <= 24 && preg_match( '/^[^\s()،,.;:؛!؟?]+(?:\s[^\s()،,.;:؛!؟?]+)?$/u', $plain ) ) {
+					$name = $plain;
+				}
+			}
+
 			/* ردیف واحد در این زبان نیست: نام همان ارز مرتبط (در زبان صفحه) */
 			$name = '' !== $name ? $name : $first;
 
@@ -4188,6 +4196,17 @@ if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 
 		/* مرز محدوده — GeoJSON مشتق از OSM (scripts/tp-boundaries.php)؛ فقط اگر فایلِ همین موجودیت هست.  P5-D351 */
 		$uid = function_exists( 'topersia_g_boundary_key' ) ? topersia_g_boundary_key( topersia_g_text( $post_id, 'entity_uid' ) ) : '';
+
+		/*
+		 * entity_uid خالی (پستِ درون‌ریزی‌شده که هوک uid هنوز برایش اجرا نشده — ایران، دستۀ 36-ج) ← کلید از نوع و نامک:
+		 * `{پایۀ نشانی نوع}__{نامک}` — همان شکل کلید uid (`country__iran`). فقط وقتی فایلِ همین کلید هست اثر دارد.
+		 */
+		if ( '' === $uid && function_exists( 'get_post_type_object' ) && function_exists( 'get_post_field' ) ) {
+			$obj  = get_post_type_object( (string) get_post_type( $post_id ) );
+			$seg  = $obj && ! empty( $obj->rewrite['slug'] ) ? (string) $obj->rewrite['slug'] : '';
+			$slug = (string) get_post_field( 'post_name', $post_id );
+			$uid  = ( '' !== $seg && preg_match( '/^[a-z0-9-]+$/', $slug ) && preg_match( '/^[a-z0-9-]+$/', $seg ) ) ? $seg . '__' . $slug : '';
+		}
 
 		if ( '' !== $uid && function_exists( 'wp_get_upload_dir' ) ) {
 			$up   = wp_get_upload_dir();
@@ -5415,7 +5434,7 @@ if ( ! function_exists( 'topersia_g_practical_section' ) ) {
 		/* کشور: دوشاخه، سمت رانندگی، منطقۀ زمانی و روادید همیشه کاشی دارند — نبود مقدار «—» (نامشخص)؛ بی مقدار ساختگی */
 		$always = array();
 		if ( 'tp_country' === $type ) {
-			foreach ( array( 'electric_plug', 'drive_side', 'timezone' ) as $k ) {
+			foreach ( array( 'electric_plug', 'drive_side' ) as $k ) {
 				if ( ! isset( $fields[ $k ] ) && empty( topersia_g_stat_claims( $pid )[ $k ] ) ) {
 					$always[ $k ] = '';
 				}
@@ -7049,6 +7068,14 @@ if ( ! function_exists( 'topersia_g_sc_reviews' ) ) {
  * `entity_uid` نشانی‌ای است که صفحه ندارد و ۴۰۴ می‌داد؛ جای درستش فقط
  * `@id` گراف JSON-LD است که افزونۀ `topersia-schema` می‌سازد.
  */
+/** منابع: سقف ذخیره/نمایش و شمار دیدنی. P5-D480 */
+if ( ! defined( 'TOPERSIA_SOURCES_MAX' ) ) {
+	define( 'TOPERSIA_SOURCES_MAX', 30 );
+}
+if ( ! defined( 'TOPERSIA_SOURCES_VISIBLE' ) ) {
+	define( 'TOPERSIA_SOURCES_VISIBLE', 10 );
+}
+
 if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 	function topersia_g_sc_sources( $atts = array() ) {
 
@@ -7058,10 +7085,11 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 			return '';
 		}
 
-		$body = '';
-		$list = '';
+		$body  = '';
+		$items = array();
 
-		foreach ( topersia_g_rows( $pid, 'source_references' ) as $row ) {
+		/* P5-D480: تا ۳۰ ردیف؛ ۱۰ ردیف نخست دیده می‌شود و بقیه در «همۀ منابع» تاشو — همه در HTML سرور (خزنده و بی جاوااسکریپت). */
+		foreach ( array_slice( topersia_g_rows( $pid, 'source_references' ), 0, TOPERSIA_SOURCES_MAX ) as $row ) {
 
 			$name = isset( $row['source_name'] ) ? trim( wp_strip_all_tags( (string) $row['source_name'] ) ) : '';
 			$url  = isset( $row['source_url'] ) ? trim( (string) $row['source_url'] ) : '';
@@ -7072,13 +7100,19 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 
 			/* نام منبع در صفحۀ غیرفارسی — تکه‌های فارسی با زبان خودشان؛ رقم به زبان صفحه  P5-D278 */
 			$shown = topersia_g_lang_runs( $name );
-			$list .= '<li>' . ( '' !== $url
+			$items[] = '<li>' . ( '' !== $url
 				? '<a href="' . esc_url( $url ) . '" rel="nofollow noopener">' . $shown . '</a>'
 				: $shown ) . '</li>';
 		}
 
-		if ( '' !== $list ) {
-			$body .= '<ol>' . $list . '</ol>';
+		if ( $items ) {
+			$body .= '<ol>' . implode( '', array_slice( $items, 0, TOPERSIA_SOURCES_VISIBLE ) ) . '</ol>';
+		}
+
+		if ( count( $items ) > TOPERSIA_SOURCES_VISIBLE ) {
+			/* translators: %s: شمار همۀ منابع */
+			$body .= '<details class="tp-src__all"><summary>' . esc_html( sprintf( __( 'همۀ منابع (%s)', 'topersia' ), topersia_g_fa( count( $items ) ) ) ) . '</summary>'
+				. '<ol start="' . ( TOPERSIA_SOURCES_VISIBLE + 1 ) . '">' . implode( '', array_slice( $items, TOPERSIA_SOURCES_VISIBLE ) ) . '</ol></details>';
 		}
 
 		$rows   = '';

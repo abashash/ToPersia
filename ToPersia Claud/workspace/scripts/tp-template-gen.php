@@ -1403,6 +1403,12 @@ html body .tp-page .tp-list__sortbtn[aria-pressed="true"]{background:var(--tp-pr
 html body .tp-page .tp-list__sortbtn:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
 html body .tp-page .tp-ai__btn{min-block-size:44px}
 html body .tp-page .tp-ai__tabs{display:contents}
+/* «همۀ منابع» تاشو — دستۀ 36-ج · P5-D480: ۱۰ منبع دیدنی، بقیه در HTML سرور؛ توکن کاشی، هدف ≥۴۴ */
+html body .tp-page .tp-src__all{margin-top:12px}
+html body .tp-page .tp-src__all > summary{display:flex;align-items:center;min-block-size:44px;padding:0 14px;border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius);background:var(--tp-tile-bg);color:var(--tp-tile-text);font-weight:700;cursor:pointer}
+html body .tp-page .tp-src__all > summary:hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text)}
+html body .tp-page .tp-src__all > summary:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
+html body .tp-page .tp-src__all > ol{margin-top:10px}
 html body .tp-page .tp-ai__btn:focus-visible,html body .tp-page .tp-ai__out p:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
 @media(max-width:720px){
   .tp-page .tp-list__q{order:3;flex-basis:100%;max-inline-size:none}

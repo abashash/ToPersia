@@ -999,6 +999,19 @@ function topersia_pack_number_text( $value ) {
 /**
  * دامنۀ یک نشانی، بی `www.` و با حروف کوچک — یا خالی.  دستۀ 36-ج
  */
+function topersia_pack_registrable( $host ) {
+
+	$parts = explode( '.', (string) $host );
+	$n     = count( $parts );
+
+	if ( $n <= 2 ) {
+		return (string) $host;
+	}
+
+	/* ac.ir · co.uk · org.ir … سه برچسب */
+	return implode( '.', array_slice( $parts, in_array( $parts[ $n - 2 ], array( 'ac', 'co', 'org', 'gov', 'edu', 'com', 'net' ), true ) ? -3 : -2 ) );
+}
+
 function topersia_pack_host( $url ) {
 
 	$host = strtolower( (string) wp_parse_url( trim( (string) $url ), PHP_URL_HOST ) );
@@ -1057,7 +1070,8 @@ function topersia_pack_source_warnings( $rows ) {
 		}
 
 		$n ++;
-		$hosts[ $host ] = ( isset( $hosts[ $host ] ) ? $hosts[ $host ] : 0 ) + 1;
+		$reg           = topersia_pack_registrable( $host );
+		$hosts[ $reg ] = ( isset( $hosts[ $reg ] ) ? $hosts[ $reg ] : 0 ) + 1;
 	}
 
 	if ( $n >= 2 ) {
@@ -1119,7 +1133,15 @@ function topersia_pack_source_warnings( $rows ) {
  */
 function topersia_pack_description_word_cap( $description ) {
 
-	$d = strtr( (string) $description, array( '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9' ) );
+	/* جمله‌ای که از «حداقل/کمینه/at least/minimum» حرف می‌زند سقف نیست (مثل overview_text: «معمولاً ۳۰۰ تا ۷۰۰ کلمه» = کمینۀ طول) */
+	$kept = array();
+	foreach ( (array) preg_split( '/[.؛!؟
+]+/u', (string) $description ) as $sentence ) {
+		if ( ! preg_match( '/حداقل|کمینه|کمترین|at least|minimum|min\./iu', $sentence ) ) {
+			$kept[] = $sentence;
+		}
+	}
+	$d = strtr( implode( '. ', $kept ), array( '۰' => '0', '۱' => '1', '۲' => '2', '۳' => '3', '۴' => '4', '۵' => '5', '۶' => '6', '۷' => '7', '۸' => '8', '۹' => '9' ) );
 
 	if ( preg_match( '/(\d+)\s*(?:تا|to|-|–)\s*(\d+)\s*(?:کلمه|واژه|words?)/iu', $d, $m ) ) {
 		return max( (int) $m[1], (int) $m[2] );
@@ -1894,7 +1916,7 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		$row = array( 'status' => $in['status'], 'shown' => topersia_pack_shown( $value ), 'note' => $in['note'] );
 
 		/* دستۀ 36-ج: متنی که از سقف واژۀ توضیح مشخصاتش بلندتر است — هشدار، نه مانع */
-		if ( is_string( $value ) && in_array( $in['status'], array( 'ok', 'short' ), true ) ) {
+		if ( is_string( $value ) && empty( $def['min_words'] ) && in_array( $in['status'], array( 'ok', 'short' ), true ) ) {
 			$cap = topersia_pack_description_word_cap( isset( $def['description'] ) ? $def['description'] : '' );
 			$wc  = $cap ? topersia_pack_words( $value ) : 0;
 			if ( $cap && $wc > $cap ) {
@@ -1922,6 +1944,9 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 
 	/* دستۀ 36-ج: هشدار منبع‌ها (تنوع دامنه · نام با دامنه) — مانع نیست */
 	if ( isset( $fields['source_references'] ) && is_array( $fields['source_references'] ) ) {
+		if ( count( $fields['source_references'] ) > 30 ) {
+			$plan['notes'][] = 'هشدار منبع: ' . count( $fields['source_references'] ) . ' ردیف؛ صفحه فقط ۳۰ ردیف نخست را نشان می‌دهد (۱۰ دیدنی + بقیه تاشو) — مانع نیست';
+		}
 		foreach ( topersia_pack_source_warnings( $fields['source_references'] ) as $w ) {
 			$plan['notes'][] = $w;
 		}

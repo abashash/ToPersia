@@ -7068,6 +7068,14 @@ if ( ! function_exists( 'topersia_g_sc_reviews' ) ) {
  * `entity_uid` نشانی‌ای است که صفحه ندارد و ۴۰۴ می‌داد؛ جای درستش فقط
  * `@id` گراف JSON-LD است که افزونۀ `topersia-schema` می‌سازد.
  */
+/** منابع: سقف ذخیره/نمایش و شمار دیدنی. P5-D480 */
+if ( ! defined( 'TOPERSIA_SOURCES_MAX' ) ) {
+	define( 'TOPERSIA_SOURCES_MAX', 30 );
+}
+if ( ! defined( 'TOPERSIA_SOURCES_VISIBLE' ) ) {
+	define( 'TOPERSIA_SOURCES_VISIBLE', 10 );
+}
+
 if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 	function topersia_g_sc_sources( $atts = array() ) {
 
@@ -7077,10 +7085,11 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 			return '';
 		}
 
-		$body = '';
-		$list = '';
+		$body  = '';
+		$items = array();
 
-		foreach ( topersia_g_rows( $pid, 'source_references' ) as $row ) {
+		/* P5-D480: تا ۳۰ ردیف؛ ۱۰ ردیف نخست دیده می‌شود و بقیه در «همۀ منابع» تاشو — همه در HTML سرور (خزنده و بی جاوااسکریپت). */
+		foreach ( array_slice( topersia_g_rows( $pid, 'source_references' ), 0, TOPERSIA_SOURCES_MAX ) as $row ) {
 
 			$name = isset( $row['source_name'] ) ? trim( wp_strip_all_tags( (string) $row['source_name'] ) ) : '';
 			$url  = isset( $row['source_url'] ) ? trim( (string) $row['source_url'] ) : '';
@@ -7091,13 +7100,19 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 
 			/* نام منبع در صفحۀ غیرفارسی — تکه‌های فارسی با زبان خودشان؛ رقم به زبان صفحه  P5-D278 */
 			$shown = topersia_g_lang_runs( $name );
-			$list .= '<li>' . ( '' !== $url
+			$items[] = '<li>' . ( '' !== $url
 				? '<a href="' . esc_url( $url ) . '" rel="nofollow noopener">' . $shown . '</a>'
 				: $shown ) . '</li>';
 		}
 
-		if ( '' !== $list ) {
-			$body .= '<ol>' . $list . '</ol>';
+		if ( $items ) {
+			$body .= '<ol>' . implode( '', array_slice( $items, 0, TOPERSIA_SOURCES_VISIBLE ) ) . '</ol>';
+		}
+
+		if ( count( $items ) > TOPERSIA_SOURCES_VISIBLE ) {
+			/* translators: %s: شمار همۀ منابع */
+			$body .= '<details class="tp-src__all"><summary>' . esc_html( sprintf( __( 'همۀ منابع (%s)', 'topersia' ), topersia_g_fa( count( $items ) ) ) ) . '</summary>'
+				. '<ol start="' . ( TOPERSIA_SOURCES_VISIBLE + 1 ) . '">' . implode( '', array_slice( $items, TOPERSIA_SOURCES_VISIBLE ) ) . '</ol></details>';
 		}
 
 		$rows   = '';

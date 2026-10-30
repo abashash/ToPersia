@@ -56,7 +56,7 @@ const t = ( label, ok, note ) => { ok ? pass++ : fail++; console.log( '  ' + ( o
 					await page.waitForTimeout( 200 );
 				};
 				const press = async by => {
-					await page.evaluate( ( s, b ) => document.querySelector( s + ' [data-tp-sort-by="' + b + '"]' ).click(), p.sel, by );
+					await page.evaluate( ( { s, b } ) => document.querySelector( s + ' [data-tp-sort-by="' + b + '"]' ).click(), { s: p.sel, b: by } );
 					await page.waitForTimeout( 100 );
 				};
 
@@ -85,7 +85,7 @@ const t = ( label, ok, note ) => { ok ? pass++ : fail++; console.log( '  ' + ( o
 					const firstNaN = vals.findIndex( v => isNaN( v ) );
 					const tailOk = -1 === firstNaN || vals.slice( firstNaN ).every( v => isNaN( v ) );
 					const desc = vals.filter( v => ! isNaN( v ) ).every( ( v, i, a ) => 0 === i || a[ i - 1 ] >= v );
-					const pressed = await page.evaluate( ( q, b ) => document.querySelector( q + ' [data-tp-sort-by="' + b + '"]' ).getAttribute( 'aria-pressed' ), p.sel, by );
+					const pressed = await page.evaluate( ( { q, b } ) => document.querySelector( q + ' [data-tp-sort-by="' + b + '"]' ).getAttribute( 'aria-pressed' ), { q: p.sel, b: by } );
 					t( `${tag}: ${by} نزولی، ناموجود آخر، همان اعضا`, sameSet( s, base ) && tailOk && desc && 'true' === pressed, vals.slice( 0, 5 ).join( ',' ) );
 				}
 

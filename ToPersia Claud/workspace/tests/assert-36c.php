@@ -72,7 +72,7 @@ t( 'نقشهٔ کشور: بی entity_uid کلید مرز از «پایهٔ نو�
 /* ── درون‌ریز: هشدار منبع‌ها ── */
 /* پروندهٔ بسته stub آزمون‌های دیگر را بازتعریف می‌کند؛ فقط تابع‌های هشدار از متن برداشته می‌شوند */
 $pk36 = (string) file_get_contents( TP_PLUGIN_DIR . '../topersia-core/includes/topersia-pack.php' );
-foreach ( array( 'topersia_pack_host', 'topersia_pack_known_orgs', 'topersia_pack_source_warnings', 'topersia_pack_description_word_cap' ) as $fn36 ) {
+foreach ( array( 'topersia_pack_registrable', 'topersia_pack_host', 'topersia_pack_known_orgs', 'topersia_pack_source_warnings', 'topersia_pack_description_word_cap' ) as $fn36 ) {
 	if ( ! function_exists( $fn36 ) && preg_match( '/\x0Afunction ' . $fn36 . '\(.*?\x0A\}\x0A/s', $pk36, $m36 ) ) { eval( $m36[0] ); }
 }
 $src_clean = array(
@@ -90,6 +90,11 @@ $src_mis = array(
 	array( 'source_name' => 'مرکز آمار ایران', 'source_url' => 'https://www.amar.org.ir/' ),
 	array( 'source_name' => 'Britannica', 'source_url' => 'https://www.britannica.com/x' ),
 );
+$src_sub = array(
+	array( 'source_name' => 'UNESCO سایت‌ها', 'source_url' => 'https://whc.unesco.org/a' ), array( 'source_name' => 'UNESCO سایت ۲', 'source_url' => 'https://whc.unesco.org/b' ),
+	array( 'source_name' => 'UNESCO ناملموس', 'source_url' => 'https://ich.unesco.org/c' ), array( 'source_name' => 'Wikipedia', 'source_url' => 'https://en.wikipedia.org/d' ),
+);
+$w_sub = topersia_pack_source_warnings( $src_sub );
 $w_clean = topersia_pack_source_warnings( $src_clean );
 $w_same  = topersia_pack_source_warnings( $src_same );
 $w_mis   = topersia_pack_source_warnings( $src_mis );
@@ -98,21 +103,23 @@ $w_ok = function ( $x ) {
 		&& 1 === count( $x[1] ) && false !== strpos( $x[1][0], 'یک دامنه' )   /* ۳ از ۳ یک دامنه ← فقط هشدار الف (نام‌ها با دامنه می‌خوانند یا ناشناس‌اند) */
 		&& 1 === count( $x[2] ) && false !== strpos( $x[2][0], 'UNESCO' ) && false !== strpos( $x[2][0], 'unesco.org' );    /* یونسکو با دامنهٔ ایرانیکا ← هشدار ب */
 };
+t( 'درون‌ریز: هشدار الف بر پایهٔ دامنهٔ ثبت‌شده — whc. و ich.unesco.org با هم بیش از نیمی ← یک هشدار (unesco.org)', 1 === count( $w_sub ) && false !== strpos( $w_sub[0], 'unesco.org' ) && false !== strpos( $w_sub[0], '3 از 4' ) );
 tp441_mut( 'درون‌ریز: هشدار الف (بیش از نیمی از منبع‌ها یک دامنه) و ب (نام سازمان با دامنهٔ نشانی نمی‌خواند)؛ منابع درست بی هشدار؛ هیچ‌کدام مانع نیست — جهش: هشدار ب حذف شود می‌افتد',
 	$w_ok, array( $w_clean, $w_same, $w_mis ), array( $w_clean, $w_same, array() ) );
 
 /* ── درون‌ریز: سقف واژهٔ توضیح مشخصات ── */
 $cap_ok = function ( $x ) {
-	return 30 === $x[0] && 50 === $x[1] && 40 === $x[2] && 0 === $x[3];
+	return 30 === $x[0] && 50 === $x[1] && 40 === $x[2] && 0 === $x[3] && 0 === $x[4];   /* «حداقل … ۳۰۰ تا ۷۰۰» = کمینه، نه سقف */
 };
 $caps = array(
 	topersia_pack_description_word_cap( 'توضیح یک‌تا‌دو جمله‌ای ... بین ۱۵ تا ۳۰ کلمه. بدون تعریف و تمجید.' ),
 	topersia_pack_description_word_cap( 'حداکثر ۵۰ کلمه' ),
 	topersia_pack_description_word_cap( 'Short text, up to 40 words.' ),
 	topersia_pack_description_word_cap( 'متنی بی سقف' ),
+	topersia_pack_description_word_cap( 'بدنهٔ اصلی. حداقل طول بسته به موجودیت متفاوت است (معمولاً ۳۰۰ تا ۷۰۰ کلمه). با پاراگراف‌بندی منظم بنویسید.' ),
 );
 tp441_mut( 'درون‌ریز: سقف واژه از توضیح فیلد خوانده می‌شود — «بین ۱۵ تا ۳۰ کلمه» ← ۳۰ · «حداکثر ۵۰ کلمه» ← ۵۰ · «up to 40 words» ← ۴۰ · بی سقف ← ۰ — جهش: تنها کمینه خوانده شود می‌افتد',
-	$cap_ok, $caps, array( 15, 50, 40, 0 ) );
+	$cap_ok, $caps, array( 15, 50, 40, 0, 700 ) );
 
 $pack36 = (string) file_get_contents( TP_PLUGIN_DIR . '../topersia-core/includes/topersia-pack.php' );
 $hook_ok = function ( $src ) {
@@ -121,5 +128,22 @@ $hook_ok = function ( $src ) {
 };
 t( 'درون‌ریز: هر دو هشدار در برنامهٔ هر پست می‌نشینند (notes) و مانع نیستند — جهش: قلاب منبع‌ها حذف شود می‌افتد',
 	$hook_ok( $pack36 ) && ! $hook_ok( str_replace( 'topersia_pack_source_warnings( $fields[\'source_references\'] )', 'array()', $pack36 ) ) );
+
+/* ── منابع (P5-D480): تا ۳۰ ردیف، ۱۰ دیدنی، بقیه در «همهٔ منابع» تاشوی HTML سرور ── */
+$GLOBALS['tp_posts'][9603] = array( 'type' => 'tp_country', 'title' => 'کشور آزمون منابع', 'url' => 'https://topersia.com/country/src/' );
+$mk_src = function ( $n ) { $r = array(); for ( $i = 1; $i <= $n; $i++ ) { $r[] = array( 'source_name' => 'منبع ' . $i, 'source_url' => 'https://example' . $i . '.org/p' ); } return $r; };
+$sec36 = function ( $n ) use ( $mk_src ) { $GLOBALS['tp_meta'][9603] = array( 'source_references' => $mk_src( $n ) ); return topersia_g_sc_sources( array( 'id' => 9603 ) ); };
+$s5 = $sec36( 5 ); $s23 = $sec36( 23 ); $s40 = $sec36( 40 );
+$src_ok = function ( $x ) {
+	list( $a, $b, $c ) = $x;
+	$cnt = function ( $h, $re ) { return preg_match_all( $re, $h ); };
+	return 0 === strpos( $a, '<section' ) && 5 === $cnt( $a, '#<li><a href="https://example\d+\.org/p"#' ) && false === strpos( $a, 'tp-src__all' )          /* ≤۱۰: بی تاشو */
+		&& 1 === preg_match( '#<ol>(?:<li>.*?</li>){10}</ol><details class="tp-src__all"><summary>[^<]+</summary><ol start="11">(?:<li>.*?</li>){13}</ol></details>#su', $b )   /* ۲۳ ← ۱۰ + تاشوی ۱۳ */
+		&& 1 === preg_match( '#<ol>(?:<li>.*?</li>){10}</ol><details class="tp-src__all"><summary>[^<]+</summary><ol start="11">(?:<li>.*?</li>){20}</ol></details>#su', $c )   /* ۴۰ ← سقف ۳۰ کل */
+		&& 30 === $cnt( $c, '#<li><a href="https://example\d+\.org/p"#' ) && false === strpos( $c, 'example31.org' );
+};
+tp441_mut( 'منابع: ≤۱۰ بی تاشو؛ ۲۳ ردیف ← ۱۰ دیدنی + «همهٔ منابع» تاشوی ۱۳ ردیف (HTML سرور، ol start=11)؛ ۴۰ ردیف ← سقف ۳۰ — جهش: سقف ۳۰ حذف شود می‌افتد',
+	$src_ok, array( $s5, $s23, $s40 ), array( $s5, $s23, $sec36( 40 ) . str_repeat( '<li><a href="https://example99.org/p">x</a></li>', 5 ) ) );
+unset( $GLOBALS['tp_posts'][9603], $GLOBALS['tp_meta'][9603] );
 
 unset( $GLOBALS['tp_posts'][9601], $GLOBALS['tp_posts'][9602], $GLOBALS['tp_meta'][9601], $GLOBALS['tp_meta'][9602] );

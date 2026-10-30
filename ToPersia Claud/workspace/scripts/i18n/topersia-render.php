@@ -752,6 +752,7 @@ return array(
 	'الفبا'                              => array( 'en' => 'Alphabetical', 'ar' => 'أبجدي' ),
 	'وسعت'                               => array( 'en' => 'Area', 'ar' => 'المساحة' ),
 	'مرتب‌سازی'                          => array( 'en' => 'Sort by', 'ar' => 'ترتيب حسب' ),
+	'همۀ منابع (%s)'                    => array( 'en' => 'All sources (%s)', 'ar' => 'جميع المصادر (%s)' ),
 	'بستن فهرست'                      => array( 'en' => 'Close list', 'ar' => 'إغلاق القائمة' ),
 	'بستن پخش'                        => array( 'en' => 'Close player', 'ar' => 'إغلاق المشغل' ),
 	'بستن گالری'                      => array( 'en' => 'Close gallery', 'ar' => 'إغلاق المعرض' ),

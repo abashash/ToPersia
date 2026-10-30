@@ -324,7 +324,10 @@ async function liveDesktopChecks( page ) {
 		const links = [].slice.call( __tp.nav().querySelectorAll( 'a' ) );
 		const a = links.slice( 2 ).filter( fits )[0] || links[1];
 		const id = a.getAttribute( 'href' ).slice( 1 );
-		a.click(); await __tp.wait( 1200 );
+		a.click();
+		/* تا آرام‌شدن اسکرول (نه زمان ثابت): در صفحهٔ بسیار بلند (ایران، ۱۲ هزار پیکسل) اسکرول نرم بیش از ۲ ثانیه می‌کشد */
+		let last = -1, still = 0;
+		for ( let i = 0; i < 80 && still < 3; i++ ) { await __tp.wait( 150 ); still = Math.abs( scrollY - last ) < 1 ? still + 1 : 0; last = scrollY; }
 		const s = __tp.state();
 		s.header = __tp.realHeader();
 		const tgt = document.getElementById( id );
@@ -787,7 +790,7 @@ async function commonChecks( page, vp ) {
 				return {
 					shown: box.classList.contains( 'tp-show' ), first, second, wrapped, n: shots.length,
 					fast: src0 === ( shots[0].m || shots[0].src ) && ( ${ LIVE } || shots[0].m !== shots[0].src ), swapped, src0,
-					t0: shots[0].t || '', c0: shots[0].c || '',
+					t0: shots[0].t || '', c0: shots[0].c || '', n0: shots[0].n || '',   /* n = نام موجودیت منبع (عکس تجمیعی، P5-D274) */
 					loaded: im.naturalWidth, imgH: Math.round( img.height ),
 					preNext: [ shots[1].m, shots[1].src ].every( u => pre.some( s => -1 !== s.indexOf( u ) ) ),
 					prePrev: [ shots[ shots.length - 1 ].m, shots[ shots.length - 1 ].src ].every( u => pre.some( s => -1 !== s.indexOf( u ) ) ),
@@ -808,7 +811,7 @@ async function commonChecks( page, vp ) {
 			} else {
 			check( 'تمام‌صفحه: شمار «۱ / N»، عنوان و توضیحِ پیوست زیر عکس',
 				solo.shown && faN( 1 ) + ' / ' + faN( solo.n ) === solo.first.count && solo.capBelow
-				&& ( LIVE ? solo.t0 === solo.first.title && solo.c0 === solo.first.cap
+				&& ( LIVE ? solo.t0 === solo.first.title && ( solo.c0 === solo.first.cap || ( '' !== solo.n0 && -1 !== solo.first.cap.indexOf( solo.n0 ) ) )   /* عکس تجمیعی: زیرنویس = توضیح پیوست یا نام موجودیت منبع */
 					: 'میدان نقش جهان' === solo.first.title && 'میدان امام، ۱۶۰۲' === solo.first.cap ), JSON.stringify( solo.first ) );
 			check( 'تمام‌صفحه: کاشیِ موزاییکِ صفحه هم نمای تمام‌صفحه را در لایهٔ بیرونی باز می‌کند  P5-D228', solo.shown, JSON.stringify( solo.first ) );
 			check( 'تمام‌صفحه: بعدی ← «۲ / N»؛ قبل از اولی، آخری (چرخهٔ دوسر)',

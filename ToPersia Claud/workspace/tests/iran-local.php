@@ -58,6 +58,38 @@ $t( 'نقشه: فایل مرز کشور موجود و GeoJSON معتبر (MultiP
 	return $b[0] > 43.5 && $b[0] < 44.5 && $b[2] > 63 && $b[2] < 64 && $b[1] > 24 && $b[1] < 26 && $b[3] > 39.5 && $b[3] < 40.2;
 } )() );
 
+/* ── گالری تجمیعی (P5-D274) — کشور، استان، شهر: صفحه‌ای که دست‌کم یک فرزند با گالری دارد گالری غیرخالی دارد ── */
+$agg_check = function ( $pid, $stored = null ) {
+	$own    = topersia_g_gallery_own_ids( $pid );
+	$stored = null === $stored ? topersia_g_gallery_agg_stored( $pid ) : $stored;
+	$full   = array_merge( array_map( function ( $a ) use ( $pid ) { return array( 'id' => $a, 'src' => $pid ); }, $own ), $stored );
+	$kids   = 0;
+	foreach ( topersia_g_gallery_agg_children( $pid ) as $k ) { if ( topersia_g_gallery_own_ids( $k ) || topersia_g_gallery_agg_stored( $k ) ) { $kids++; } }
+	$ids    = array_column( $full, 'id' );
+	$room   = TOPERSIA_GALLERY_MAX - count( $own );
+	return array( 'ok' => $full && count( $full ) <= TOPERSIA_GALLERY_MAX && count( $ids ) === count( array_unique( $ids ) )        /* غیرخالی، سقف ۲۴، بی تکرار */
+		&& ( ! $kids || $room <= 0 || count( $stored ) > 0 ), 'kids' => $kids, 'own' => count( $own ), 'stored' => count( $stored ) );
+};
+foreach ( array( 'کشور ایران' => $id, 'استان اصفهان' => (int) $wpdb->get_var( "SELECT p.ID FROM {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} s ON s.post_id=p.ID AND s.meta_key='_tp_sample' WHERE p.post_type='tp_province' AND p.post_name='isfahan' AND p.post_status='publish' AND s.post_id IS NULL ORDER BY p.ID LIMIT 1" ), 'شهر اصفهان' => (int) $wpdb->get_var( "SELECT p.ID FROM {$wpdb->posts} p LEFT JOIN {$wpdb->postmeta} s ON s.post_id=p.ID AND s.meta_key='_tp_sample' WHERE p.post_type='tp_city' AND p.post_name='isfahan' AND p.post_status='publish' AND s.post_id IS NULL ORDER BY p.ID LIMIT 1" ) ) as $gname => $gid ) {
+	if ( ! $gid ) { echo "  · $gname: پست نیست — رد شد\n"; continue; }
+	$r = $agg_check( $gid );
+	$t( "گالری تجمیعی $gname: خود {$r['own']} + ذخیره‌شده {$r['stored']} (فرزندِ دارای گالری: {$r['kids']})؛ غیرخالی، ≤۲۴، بی تکرار؛ فرزندِ گالری‌دار ⇒ افزوده (مگر پر)", $r['ok'], json_encode( $r ) );
+	/* جهش: افزوده‌های ذخیره‌شده پاک شوند (لایهٔ مشتق ساخته نشده) ← وقتی فرزند گالری‌دار هست و جا هست باید بیفتد */
+	if ( $r['kids'] && TOPERSIA_GALLERY_MAX - $r['own'] > 0 ) {
+		$t( "  جهش: لایهٔ مشتق ساخته‌نشده برای $gname تشخیص داده می‌شود", ! $agg_check( $gid, array() )['ok'] );
+	}
+	$en = (int) apply_filters( 'wpml_object_id', $gid, get_post_type( $gid ), false, 'en' );
+	if ( $en ) {
+		do_action( 'wpml_switch_language', 'en' );
+		$p2 = get_post( $en ); $GLOBALS['post'] = $p2; setup_postdata( $p2 );
+		$n_en = preg_match_all( '/<img\b/', do_shortcode( '[tp_gallery id="' . $en . '"]' ) );
+		do_action( 'wpml_switch_language', 'fa' );
+		$p1 = get_post( $gid ); $GLOBALS['post'] = $p1; setup_postdata( $p1 );
+		$n_fa = preg_match_all( '/<img\b/', do_shortcode( '[tp_gallery id="' . $gid . '"]' ) );
+		$t( "  WPML: گالری نسخهٔ en همان fa است ($n_fa تصویر)", $n_en === $n_fa, "fa=$n_fa en=$n_en" );
+	}
+}
+
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );
 exit( $fail ? 1 : 0 );
