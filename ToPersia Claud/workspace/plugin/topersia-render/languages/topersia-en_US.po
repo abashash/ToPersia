@@ -473,6 +473,11 @@ msgstr "CAMS model estimate · 24-hour average — the same data as the page box
 
 #: includes/topersia-g-air.php
 #, php-format
+msgid "برای %1$s %2$s"
+msgstr "for %1$s %2$s"
+
+#: includes/topersia-g-air.php
+#, php-format
 msgid "برای %s"
 msgstr "for %s"
 
@@ -568,10 +573,6 @@ msgstr "Evening"
 #: includes/topersia-g-zones.php
 msgid "بعدی"
 msgstr "Next"
-
-#: includes/topersia-g-routing.php
-msgid "بلد"
-msgstr "Balad"
 
 #: includes/topersia-g-map.php
 msgid "بله"

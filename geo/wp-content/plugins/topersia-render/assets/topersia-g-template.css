@@ -670,6 +670,8 @@ html body .tp-page .tp-src__all > summary{display:flex;align-items:center;min-bl
 html body .tp-page .tp-src__all > summary:hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-hover);color:var(--tp-primary-text)}
 html body .tp-page .tp-src__all > summary:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
 html body .tp-page .tp-src__all > ol{margin-top:10px}
+/* مسیریابی: هدف لمسی ≥۴۴ — دستۀ 39 · P5-D462 */
+html body .tp-page #tp-routing .tp-tile{min-block-size:44px}
 html body .tp-page .tp-ai__btn:focus-visible,html body .tp-page .tp-ai__out p:focus-visible{outline:3px solid var(--tp-accent-strong);outline-offset:2px}
 @media(max-width:720px){
   .tp-page .tp-list__q{order:3;flex-basis:100%;max-inline-size:none}

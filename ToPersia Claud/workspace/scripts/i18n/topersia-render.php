@@ -230,6 +230,7 @@ return array(
 	/* کیفیت هوا — P5-D381 */
 	'برآورد مدل CAMS · میانگین ۲۴ ساعت' => array( 'en' => 'CAMS model estimate · 24-hour average', 'ar' => 'تقدير نموذج CAMS · متوسط 24 ساعة' ),
 	'برای شهر %s'                     => array( 'en' => 'for the city of %s', 'ar' => 'لمدينة %s' ),
+	'برای %1$s %2$s'                    => array( 'en' => 'for %1$s %2$s', 'ar' => 'لـ%1$s %2$s' ),
 	'برای %s'                         => array( 'en' => 'for %s', 'ar' => 'لـ %s' ),
 	'به‌روزرسانی %s به وقت ایران'     => array( 'en' => 'updated %s Iran time', 'ar' => 'آخر تحديث %s بتوقيت إيران' ),
 	'کیفیت هوا — تشخیص'               => array( 'en' => 'Air quality — diagnostics', 'ar' => 'جودة الهواء — تشخيص' ),
@@ -797,7 +798,6 @@ return array(
 	'نقشه گوگل' => array( 'en' => 'Google Maps', 'ar' => 'خرائط جوجل' ),
 	'ویز'       => array( 'en' => 'Waze', 'ar' => 'Waze' ),
 	'نشان'      => array( 'en' => 'Neshan', 'ar' => 'نشان' ),
-	'بلد'       => array( 'en' => 'Balad', 'ar' => 'بلد' ),
 	'مسیریابی'  => array( 'en' => 'Directions', 'ar' => 'الاتجاهات' ),
 	'پایه'      => array( 'en' => 'Standard', 'ar' => 'أساسي' ),
 	'حمل‌ونقل و قطار' => array( 'en' => 'Transit and rail', 'ar' => 'النقل والقطارات' ),

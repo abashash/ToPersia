@@ -145,8 +145,7 @@ if ( ! function_exists( 'topersia_g_routing_labels' ) ) {
 		return array(
 			'google' => __( 'نقشه گوگل', 'topersia' ),
 			'waze'   => __( 'ویز', 'topersia' ),
-			'neshan' => __( 'نشان', 'topersia' ),
-			'balad'  => __( 'بلد', 'topersia' ),
+			'neshan' => __( 'نشان', 'topersia' ),   /* بلد حذف شد — P5-D462: فقط این سه */
 		);
 	}
 }
@@ -169,7 +168,8 @@ if ( ! function_exists( 'topersia_g_routing_links' ) ) {
 
 		foreach ( $extra as $key => $row ) {
 
-			if ( ! is_array( $row ) || empty( $row['on'] ) ) {
+			/* فقط ارائه‌دهنده‌های برچسب‌دار (نشان · گوگل · ویز)؛ بلد حتی اگر در تنظیمات روشن مانده باشد نمی‌آید — P5-D462 */
+			if ( ! is_array( $row ) || empty( $row['on'] ) || ! array_key_exists( (string) $key, topersia_g_routing_labels() ) ) {
 				continue;
 			}
 

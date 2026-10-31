@@ -272,6 +272,44 @@ if ( ! function_exists( 'topersia_g_aq_credit' ) ) {
 }
 
 /**
+ * نقطۀ اندازه‌گیری کیفیت هوا برای یک پست — P5-D461 (دستۀ 39).
+ *
+ * ۱) خودِ پست اگر مختصات دارد (استان ← مرکز استان، رابطۀ ۹۶ — همان رفتار پیشین)؛
+ * ۲) وگرنه نزدیک‌ترین والد مکانی که مختصات دارد: شهر ← استان ← کشور (`topersia_g_place_chain`، از نزدیک به دور).
+ * منبع همچنان یکی است (Open-Meteo/CAMS، P5-D251)؛ والد فقط «برای چه جایی» را می‌گوید، نه منبع داده.
+ *
+ * @return array{at:int,owner:int,coords:string,fallback:bool}|array{} at = پستی که مختصاتش خوانده شد؛ owner = پستی که برچسب «برای …» می‌گیرد.
+ */
+if ( ! function_exists( 'topersia_g_air_at' ) ) {
+	function topersia_g_air_at( $pid ) {
+
+		$pid   = absint( $pid );
+		$chain = function_exists( 'topersia_g_place_chain' ) ? array_reverse( array_map( 'absint', (array) topersia_g_place_chain( $pid ) ) ) : array();
+
+		foreach ( array_merge( array( $pid ), $chain ) as $n => $id ) {
+
+			if ( ! $id ) {
+				continue;
+			}
+
+			$at = $id;
+
+			if ( 'tp_province' === get_post_type( $id ) && function_exists( 'topersia_g_capital_id' ) && topersia_g_capital_id( $id ) ) {
+				$at = (int) topersia_g_view_id( topersia_g_capital_id( $id ) );
+			}
+
+			$coords = topersia_g_text( $at, 'geo_coordinates' );
+			$coords = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : $coords;
+
+			if ( '' !== $coords ) {
+				return array( 'at' => $at, 'owner' => $n ? $id : $at, 'coords' => $coords, 'fallback' => $n > 0 );
+			}
+		}
+
+		return array();
+	}
+}
+/**
  * [tp_air] — جعبۀ کیفیت هوا زیر کارت آب‌وهوا، برای هر نوعی که کارت هوا دارد (کشور ندارد). اسکلتِ هم‌اندازه؛ بی عدد.
  */
 if ( ! function_exists( 'topersia_g_sc_air' ) ) {
@@ -290,27 +328,29 @@ if ( ! function_exists( 'topersia_g_sc_air' ) ) {
 			return '';
 		}
 
-		/* نقطه: استان ← مرکز استان (رابطۀ ۹۶)؛ هر نوع دیگر ← مختصات خودش. نام نقطه کنار عدد — P5-D381 */
-		$at = $pid;
+		/* نقطه: استان ← مرکز استان (رابطۀ ۹۶)؛ هر نوع دیگر ← مختصات خودش؛ بی داده ← نزدیک‌ترین والد (P5-D461). نام کنار عدد — P5-D381 */
+		$pt = topersia_g_air_at( $pid );
 
-		if ( 'tp_province' === $type && function_exists( 'topersia_g_capital_id' ) && topersia_g_capital_id( $pid ) ) {
-			$at = (int) topersia_g_view_id( topersia_g_capital_id( $pid ) );
-		}
-
-		$coords = topersia_g_text( $at, 'geo_coordinates' );
-		$coords = function_exists( 'topersia_geo_attr' ) ? topersia_geo_attr( $coords ) : $coords;
-
-		if ( '' === $coords ) {
+		if ( ! $pt ) {
 			return '';
 		}
 
-		/* نامی که خودش نوع را دارد («شهر اصفهان») دوباره پیشوند نمی‌گیرد */
+		$at     = $pt['owner'];
+		$coords = $pt['coords'];
+
+		/* نامی که خودش نوع را دارد («شهر اصفهان») دوباره پیشوند نمی‌گیرد؛ والدِ جایگزین «استان/کشور {نام}» */
 		$at_name = topersia_g_name( $at );
-		$for     = 'tp_city' === get_post_type( $at ) && 0 !== strpos( $at_name, (string) topersia_g_kind_label( $at ) )
+		$kind    = (string) topersia_g_kind_label( $at );
+		/* translators: %s: نام مکان */
+		$for = sprintf( __( 'برای %s', 'topersia' ), $at_name );
+
+		if ( ! $pt['fallback'] && 'tp_city' === get_post_type( $at ) && 0 !== strpos( $at_name, $kind ) ) {
 			/* translators: %s: نام شهر */
-			? sprintf( __( 'برای شهر %s', 'topersia' ), $at_name )
-			/* translators: %s: نام مکان */
-			: sprintf( __( 'برای %s', 'topersia' ), $at_name );
+			$for = sprintf( __( 'برای شهر %s', 'topersia' ), $at_name );
+		} elseif ( $pt['fallback'] && '' !== $kind && 0 !== strpos( $at_name, $kind ) ) {
+			/* translators: 1: نوع (استان/کشور) 2: نام والد */
+			$for = sprintf( __( 'برای %1$s %2$s', 'topersia' ), $kind, $at_name );
+		}
 
 		$body = '<div class="tp-air is-load" data-tp-air data-tp-coords="' . esc_attr( $coords ) . '" aria-live="polite">'
 			. '<div class="tp-air__main"><b class="tp-air__idx" data-tp-air-idx>—</b>'

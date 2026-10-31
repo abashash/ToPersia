@@ -472,6 +472,11 @@ msgstr ""
 
 #: includes/topersia-g-air.php
 #, php-format
+msgid "برای %1$s %2$s"
+msgstr ""
+
+#: includes/topersia-g-air.php
+#, php-format
 msgid "برای %s"
 msgstr ""
 
@@ -566,10 +571,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "بعدی"
-msgstr ""
-
-#: includes/topersia-g-routing.php
-msgid "بلد"
 msgstr ""
 
 #: includes/topersia-g-map.php

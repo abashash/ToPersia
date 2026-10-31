@@ -114,7 +114,7 @@ try {
 	$html_g = do_shortcode( '[tp_air id="' . $gav . '"]' );
 	$html_c = do_shortcode( '[tp_air id="' . $country . '"]' );
 	t( 'گاوخونی: اسکلت با مختصات نرمال‌شده و بی عدد؛ کشور: جعبه ندارد',
-		false !== strpos( $html_g, 'data-tp-coords="32.333333, 52.783333"' ) && 5 === substr_count( $html_g, '>—<' ) && '' === $html_c );
+		false !== strpos( $html_g, 'data-tp-coords="32.333333, 52.783333"' ) && 6 === substr_count( $html_g, '>—<' ) && '' === $html_c );
 	t( 'هیچ کلید یا apikey در پاسخ REST و HTML', false === strpos( wp_json_encode( $d ) . $html_g, 'apikey' ) && false === stripos( $html_g, 'api_key' ) );
 
 	/* پرچم تجاری روشن و بی کلید پولی ← خاموش */

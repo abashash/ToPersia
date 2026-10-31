@@ -473,6 +473,11 @@ msgstr "تقدير نموذج CAMS · متوسط 24 ساعة — البيانا�
 
 #: includes/topersia-g-air.php
 #, php-format
+msgid "برای %1$s %2$s"
+msgstr "لـ%1$s %2$s"
+
+#: includes/topersia-g-air.php
+#, php-format
 msgid "برای %s"
 msgstr "لـ %s"
 
@@ -568,10 +573,6 @@ msgstr "المساء"
 #: includes/topersia-g-zones.php
 msgid "بعدی"
 msgstr "التالي"
-
-#: includes/topersia-g-routing.php
-msgid "بلد"
-msgstr "بلد"
 
 #: includes/topersia-g-map.php
 msgid "بله"
