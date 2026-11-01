@@ -521,6 +521,10 @@ msgstr ""
 msgid "بزرگ‌نمایی"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "بسامد برق"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "بستن"
 msgstr ""
@@ -784,6 +788,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "تکرار"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "تکرارشونده"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1772,6 +1780,10 @@ msgid "طول مسیر پیاده‌روی (کیلومتر)"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "ظرفیت مکان"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "ظهر"
 msgstr ""
 
@@ -2575,6 +2587,10 @@ msgstr ""
 msgid "نساجی سنتی"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "نسبت حذف صفر"
+msgstr ""
+
 #: includes/topersia-g-routing.php
 msgid "نشان"
 msgstr ""
@@ -2781,6 +2797,10 @@ msgstr ""
 msgid "هجری قمری"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "هرتز"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "هزینه؟"
 msgstr ""
@@ -2954,6 +2974,14 @@ msgstr ""
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "وقت ایران (UTC%s)"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "ولت"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "ولتاژ برق"
 msgstr ""
 
 #: includes/topersia-g-map.php

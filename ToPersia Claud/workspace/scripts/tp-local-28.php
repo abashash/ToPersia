@@ -12,6 +12,7 @@
  */
 if ( 'local' !== wp_get_environment_type() ) { echo "فقط محلی\n"; return; }
 require_once __DIR__ . '/lib/tp-p5d450.php';
+require_once __DIR__ . '/lib/tp-p5d470.php';
 
 global $wpdb;
 $T     = $wpdb->prefix . 'jet_post_types';
@@ -120,7 +121,7 @@ $build = function ( $name, $d ) use ( $next_id, &$gid, $apply ) {
 	return $f;
 };
 $added = 0;
-foreach ( tp_p5d450_fields() as $name => $d ) {
+foreach ( tp_p5d450_all_fields() as $name => $d ) {
 	$shared = $d[5] === $visit_types;   /* گروه «بازدید»: یک متاباکس مشترک برای هفت نوع */
 	$targets = $shared ? array( $visit_key ) : array_map( function ( $t ) use ( $own ) { return $own[ $t ] ?? ''; }, $d[5] );
 	foreach ( $targets as $bk ) {
@@ -187,19 +188,19 @@ foreach ( tp_p5d451_merges() as $drop => $keep ) {
 echo "WPML\n";
 $s = get_option( 'icl_sitepress_settings' );
 if ( $do_f && is_array( $s ) ) {
-	foreach ( tp_p5d450_fields() as $name => $d ) {
+	foreach ( tp_p5d450_all_fields() as $name => $d ) {
 		$mode = in_array( $d[0], array( 'textarea' ), true ) || in_array( $name, array( 'ferry_ports', 'viewpoints', 'gesture_warnings' ), true ) ? 2 : 1;
 		$s['translation-management']['custom_fields_translation'][ $name ] = $mode;
 	}
 	if ( $apply ) { update_option( 'icl_sitepress_settings', $s ); }
-	$log( 'custom_fields_translation: ' . count( tp_p5d450_fields() ) . ' فیلد (۱ کپی · ۲ ترجمه)' );
+	$log( 'custom_fields_translation: ' . count( tp_p5d450_all_fields() ) . ' فیلد (۱ کپی · ۲ ترجمه)' );
 }
 
 /* ── ۶. پیکربندی WPML (wpml-config 1.13، گزینهٔ wpml-tm-custom-xml) — همان حالت‌های بالا ── */
 if ( $do_f ) {
 	$xml   = (string) get_option( 'wpml-tm-custom-xml', '' );
 	$lines = '';
-	foreach ( tp_p5d450_fields() as $name => $d ) {
+	foreach ( tp_p5d450_all_fields() as $name => $d ) {
 		if ( false !== strpos( $xml, '>' . $name . '</custom-field>' ) ) { continue; }
 		$mode   = in_array( $d[0], array( 'textarea' ), true ) || in_array( $name, array( 'ferry_ports', 'viewpoints', 'gesture_warnings' ), true ) ? 'translate' : 'copy';
 		$lines .= '    <custom-field action="' . $mode . '">' . $name . "</custom-field>\n";

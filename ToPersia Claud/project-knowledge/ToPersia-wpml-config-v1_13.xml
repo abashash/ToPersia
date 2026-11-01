@@ -348,6 +348,9 @@
     <custom-field action="copy">ride_hailing_apps</custom-field>
     <custom-field action="translate">gesture_warnings</custom-field>
     <custom-field action="copy">tap_water_safe</custom-field>
+    <!-- P5-D470 (دستهٔ 40): برق کشور — عدد، کپی -->
+    <custom-field action="copy">electric_voltage</custom-field>
+    <custom-field action="copy">electric_frequency</custom-field>
     <!-- دستهٔ ۳۲ بند ۴: ۲۸ فیلد بی کلاس — متن خوانا ترجمه؛ کد، عدد، سال، سوییچ، گزینه، نشانی و شناسه کپی -->
     <custom-field action="translate">awarding_body</custom-field>
     <custom-field action="translate">name_historical</custom-field>

@@ -238,6 +238,12 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'ride_hailing_apps'          => array( 'label' => 'تاکسی اینترنتی', 'unit' => '', 'kind' => 'choice', 'zone' => 'visit', 'glossary' => 'tp_ride_app', 'multiple' => true, 'p5d450' => true ),
 		'gesture_warnings'           => array( 'label' => 'اشاره‌های نابه‌جا', 'unit' => '', 'kind' => 'repeater', 'zone' => 'visit', 'p5d450' => true ),
 		'tap_water_safe'             => array( 'label' => 'آب لوله‌کشی', 'unit' => '', 'kind' => 'choice', 'zone' => 'visit', 'glossary' => 'tp_tap_water', 'p5d450' => true ),
+		/* دستۀ 40 · P5-D484/D485 — موج ۱: سه فیلد «باگ» (در اسکیمای زنده بود، نمایش نداشت) و برق کشور (P5-D470). فقط افزودن کلید؛ رندر از ناحیه، خالی‌امن. */
+		'is_recurring'               => array( 'label' => 'تکرارشونده', 'unit' => '', 'kind' => 'flag', 'zone' => 'card', 'p5d470' => true ),
+		'redenomination_ratio'       => array( 'label' => 'نسبت حذف صفر', 'unit' => '', 'kind' => 'number', 'zone' => 'travel', 'p5d470' => true ),
+		'venue_capacity'             => array( 'label' => 'ظرفیت مکان', 'unit' => 'نفر', 'kind' => 'number', 'zone' => 'visit', 'p5d470' => true ),
+		'electric_voltage'           => array( 'label' => 'ولتاژ برق', 'unit' => 'ولت', 'kind' => 'number', 'zone' => 'travel', 'p5d470' => true ),
+		'electric_frequency'         => array( 'label' => 'بسامد برق', 'unit' => 'هرتز', 'kind' => 'number', 'zone' => 'travel', 'p5d470' => true ),
 		);
 
 		/** اجازۀ افزودن فیلد بدون ویرایش این فایل. */

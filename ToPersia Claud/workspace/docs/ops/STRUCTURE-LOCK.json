@@ -1840,6 +1840,77 @@
    ],
    "fieldmap_zone": "visit",
    "fieldmap_kind": "choice"
+  },
+  "is_recurring": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_festival",
+    "tp_sports_event"
+   ]
+  },
+  "redenomination_ratio": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "number",
+   "jet_type": "number",
+   "wpml": "copy",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "venue_capacity": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "number",
+   "jet_type": "number",
+   "wpml": "copy",
+   "post_types": [
+    "tp_monument"
+   ]
+  },
+  "electric_voltage": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "number",
+   "jet_type": "number",
+   "wpml": "copy",
+   "post_types": [
+    "tp_country"
+   ]
+  },
+  "electric_frequency": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "number",
+   "jet_type": "number",
+   "wpml": "copy",
+   "post_types": [
+    "tp_country"
+   ]
   }
  },
  "relations": {
@@ -2459,8 +2530,9 @@
   "area_km2"
  ],
  "count": {
-  "fields": 207,
+  "fields": 212,
   "relations": 39,
   "post_types": 42
- }
+ },
+ "wave1": "دستهٔ 40 · P5-D484/D485 — پنج کلید موج ۱ (نام، نوع، کلاس WPML) قفل؛ نمایش لایهٔ قالب است و قفل نیست."
 }

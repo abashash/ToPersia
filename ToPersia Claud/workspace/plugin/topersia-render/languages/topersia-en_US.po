@@ -522,6 +522,10 @@ msgstr "Autumn foliage"
 msgid "بزرگ‌نمایی"
 msgstr "Zoom in"
 
+#: includes/topersia-g-map.php
+msgid "بسامد برق"
+msgstr "Mains frequency"
+
 #: includes/topersia-g-zones.php
 msgid "بستن"
 msgstr "Close"
@@ -786,6 +790,10 @@ msgstr "Tapsi"
 #: includes/topersia-g-map.php
 msgid "تکرار"
 msgstr "Frequency"
+
+#: includes/topersia-g-map.php
+msgid "تکرارشونده"
+msgstr "Recurring"
 
 #: includes/topersia-g-map.php
 msgid "تکمیل شده"
@@ -1773,6 +1781,10 @@ msgid "طول مسیر پیاده‌روی (کیلومتر)"
 msgstr "Trail length (km)"
 
 #: includes/topersia-g-map.php
+msgid "ظرفیت مکان"
+msgstr "Venue capacity"
+
+#: includes/topersia-g-map.php
 msgid "ظهر"
 msgstr "Midday"
 
@@ -2576,6 +2588,10 @@ msgstr "None"
 msgid "نساجی سنتی"
 msgstr "Traditional textiles"
 
+#: includes/topersia-g-map.php
+msgid "نسبت حذف صفر"
+msgstr "Redenomination ratio"
+
 #: includes/topersia-g-routing.php
 msgid "نشان"
 msgstr "Neshan"
@@ -2782,6 +2798,10 @@ msgstr "Solar Hijri"
 msgid "هجری قمری"
 msgstr "Lunar Hijri"
 
+#: includes/topersia-g-map.php
+msgid "هرتز"
+msgstr "Hz"
+
 #: includes/topersia-g-zones.php
 msgid "هزینه؟"
 msgstr "How much does it cost?"
@@ -2956,6 +2976,14 @@ msgstr "Excavation status"
 #, php-format
 msgid "وقت ایران (UTC%s)"
 msgstr "Iran time (UTC%s)"
+
+#: includes/topersia-g-map.php
+msgid "ولت"
+msgstr "V"
+
+#: includes/topersia-g-map.php
+msgid "ولتاژ برق"
+msgstr "Mains voltage"
 
 #: includes/topersia-g-map.php
 msgid "وگان"
