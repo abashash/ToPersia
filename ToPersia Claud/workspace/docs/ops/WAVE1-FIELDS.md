@@ -1,7 +1,7 @@
 # جدول فیلدهای موج ۱ — دستهٔ 40 · P5-D484 · P5-D485
 
 > نمایش لایهٔ قالب است؛ نام، نوع و کلاس WPML فیلد قفل است (`docs/ops/STRUCTURE-LOCK.json`). فقط محلی ساخته و سنجیده شد؛ چیزی روی سایت زنده نرفته.
-> دامنهٔ این دسته: سه فیلد باگ و برق کشور. `tp_currency` (۳۵ فیلد دیگر)، `tp_visa`، `last_verified_date`، هشدار شباهت و اندازهٔ AI → دستهٔ 41.
+> دستهٔ 40: سه فیلد باگ و برق کشور. دستهٔ 41: `tp_currency` و `tp_visa` (بخش ۵).
 
 ## ۱ — پنج فیلد این دسته
 
@@ -31,5 +31,48 @@
 
 | سقف | وضع |
 |---|---|
-| آکاردئون (`<details>`) ≤ ۶ در صفحه | بخش `details` فعلی `h3 + p` است، نه آکاردئون؛ پنج فیلد این دسته آکاردئون نمی‌سازند. تنها `<details>` های صفحه: پرسش‌های متداول (قاعدهٔ خودش) و «همهٔ منابع». سقف برای رندر آکاردئونیِ دستهٔ 41 است. |
-| کاشی رابطه ۱۲ + «همه» فقط با آرشیو | **هنوز اعمال نشده.** وضع فعلی `topersia_g_sc_relgrid`: شش کاشی دیدنی (`limit` پیش‌فرض ۶) و بقیه در HTML پنهان با دکمهٔ «بیشتر» (خزنده همه را می‌بیند). سقف ۱۲ با پیوند «همه» فقط وقتی آرشیو هست، تغییر رفتار است نه افزودن فیلد؛ پیشنهاد: دستهٔ 41 با فیلدهای `tp_currency` و `tp_visa` که کاشی‌ها را زیاد می‌کنند. |
+| آکاردئون (`<details>`) ≤ ۶ در صفحه | بخش `details` فعلی `h3 + p` است، نه آکاردئون؛ پنج فیلد این دسته آکاردئون نمی‌سازند. تنها `<details>` های صفحه: پرسش‌های متداول (قاعدهٔ خودش) و «همهٔ منابع». دستهٔ 41 هم آکاردئون نساخت (متن غنی زیر h3 و جدول)، پس سقف بی‌موضوع ماند. |
+| کاشی رابطه ۱۲ + «همه» فقط با آرشیو | **اعمال شد (P5-D490، دستهٔ 41):** ۱۲ کاشی دیدنی، بقیه در HTML پنهان با «بیشتر»؛ هیچ نوعی الان بایگانی ندارد، پس پیوندی هم نیست. |
+
+## ۵ — دستهٔ 41: ارز و روادید · P5-D491
+
+همهٔ فیلدها از قبل در متاباکس بودند؛ فیلد تازه‌ای ساخته نشد.
+
+| کلید | نوع پست | جت‌انجین | نوع رندر | ناحیه | WPML | برچسب |
+|---|---|---|---|---|---|---|
+| `unit_confusion_explainer` | `tp_currency` | wysiwyg | rich | details | translate | ریال و تومان |
+| `price_reading_rule` | `tp_currency` | textarea | text | details | translate | خواندن قیمت |
+| `redenomination_end_date` | `tp_currency` | date | date | card | copy | پایان دورۀ گذار |
+| `dual_pricing_active` | `tp_currency` | switcher | flag | travel | copy | قیمت دوگانه |
+| `redenomination_note` | `tp_currency` | wysiwyg | rich | details | translate | بازتعریف پول |
+| `denominations` | `tp_currency` | repeater | table | details | translate | اسکناس و مسکوک |
+| `card_acceptance_summary` | `tp_currency` | textarea | text | details | translate | پذیرش کارت |
+| `atm_usage_note` | `tp_currency` | wysiwyg | rich | details | translate | خودپرداز |
+| `domestic_network_note` | `tp_currency` | wysiwyg | rich | details | translate | شبکۀ کارت داخلی |
+| `tourist_card_available` | `tp_currency` | switcher | flag | travel | copy | کارت گردشگری |
+| `banknote_condition_rule` | `tp_currency` | textarea | text | details | translate | سلامت اسکناس |
+| `exchange_channel_notes` | `tp_currency` | wysiwyg | rich | details | translate | کانال‌های تبدیل و رسید |
+| `declaration_rules_note` | `tp_currency` | wysiwyg | rich | details | translate | اظهار ارز در گمرک |
+| `rate_regime_note` | `tp_currency` | wysiwyg | rich | details | translate | رژیم نرخ ارز |
+| `cash_recommendation_note` | `tp_currency` | wysiwyg | rich | details | translate | میزان پول نقد |
+| `daily_budget_bands` | `tp_currency` | repeater | table | details | translate | بودجۀ روزانه |
+| `digital_payment_note` | `tp_currency` | wysiwyg | rich | details | translate | پرداخت دیجیتال |
+| `regional_notes` | `tp_currency` | repeater | table | details | translate | یادداشت‌های استانی |
+| `guided_tour_note` | `tp_visa` | wysiwyg | rich | details | translate | تور اجباری |
+| `free_zone_mainland_allowed` | `tp_visa` | switcher | flag | travel | copy | ورود به سرزمین اصلی از منطقۀ آزاد |
+| `free_zone_excluded_iso` | `tp_visa` | textarea | iso | details | copy | کشورهای مستثنا از منطقۀ آزاد |
+| `free_zone_note` | `tp_visa` | wysiwyg | rich | details | translate | رژیم مناطق آزاد |
+| `application_process_summary` | `tp_visa` | wysiwyg | rich | details | translate | فرایند درخواست |
+| `voa_entry_points` | `tp_visa` | repeater | table | details | translate | مبادی صدور روادید فرودگاهی |
+| `entry_points_reference` | `tp_visa` | textarea | text | card | translate | سایر مبادی ورودی |
+| `insurance_required` | `tp_visa` | switcher | flag | travel | copy | بیمۀ اجباری |
+| `insurance_note` | `tp_visa` | wysiwyg | rich | details | translate | بیمۀ اجباری: توضیح |
+| `passport_stamping_note` | `tp_visa` | textarea | text | details | translate | مهر پاسپورت |
+| `dual_nationality_note` | `tp_visa` | wysiwyg | rich | details | translate | دوتابعیتی |
+| `restricted_entry_note` | `tp_visa` | textarea | text | details | translate | محدودیت‌های ورود |
+| `special_passport_note` | `tp_visa` | wysiwyg | rich | details | translate | پاسپورت دیپلماتیک و خدمت |
+| `extension_info` | `tp_visa` | wysiwyg | rich | details | translate | تمدید و اضافه‌اقامت |
+| `fee_currency` | `tp_visa` | text | latin | travel | copy | واحد پول هزینه |
+| `fee_policy_note` | `tp_visa` | wysiwyg | rich | details | translate | سیاست هزینه و پرداخت |
+
+در طرح هستند ولی نگاشت نشدند (نه در ستون DISPLAY پیشنهاد ساختار): `visa_types` · `visa_policy_matrix` · `currency_units` · `card_network_status` · `exchange_locations` · `tourist_card_services` · `rate_reference_links` · `application_steps` · `portal_links` · `document_specs` · `policy_change_log` · `official_application_portal` · `extension_max_count` · `extension_days_each` · `redenomination_law_date` · `redenomination_start_date` · `accepted_foreign_currencies`.

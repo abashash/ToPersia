@@ -78,7 +78,7 @@ $SRC = 'نمونه — حذف در صفر کردن';
 
 $samples = function () use ( $wpdb ) {
 	$out = array();
-	foreach ( $wpdb->get_results( "SELECT p.ID, p.post_type FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample' WHERE p.post_type <> 'attachment' AND p.post_status <> 'trash'", ARRAY_A ) as $r ) {
+	foreach ( $wpdb->get_results( "SELECT p.ID, p.post_type FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample' WHERE p.post_type <> 'attachment' AND p.post_status <> 'trash' AND NOT EXISTS ( SELECT 1 FROM {$wpdb->postmeta} e WHERE e.post_id = p.ID AND e.meta_key = '_tp_sample_empty' )", ARRAY_A ) as $r ) {
 		$lang = apply_filters( 'wpml_element_language_code', null, array( 'element_id' => (int) $r['ID'], 'element_type' => $r['post_type'] ) );
 		$out[ $r['post_type'] ][ $lang ?: 'fa' ] = (int) $r['ID'];
 	}
@@ -128,7 +128,7 @@ if ( in_array( $cmd, array( 'remove', 'delete' ), true ) ) {
 		$real = $ps ? $c : $p;
 		$real_touch[ $real ] = 1;
 		$ty = isset( $active[ (int) $r['rel_id'] ] ) ? (string) $active[ (int) $r['rel_id'] ]->get_args( 'type' ) : '?';
-		if ( 'many_to_many' !== $ty && ! ( 'one_to_many' === $ty && $cs ) ) { $viol[] = $r['rel_id'] . ':' . $p . '→' . $c . ' (' . $ty . ')'; }   /* P5-D456 */
+		$viol[] = $r['rel_id'] . ':' . $p . '→' . $c . ' (' . $ty . ')';   /* P5-D488: هر یال نمونه↔واقعی ناروا است */
 	}
 	$files = array(); $bytes = 0;
 	foreach ( $att as $i ) { $f = (string) get_post_meta( $i, '_wp_attached_file', true ); if ( '' !== $f ) { $files[ $f ] = 1; } }
@@ -139,7 +139,7 @@ if ( in_array( $cmd, array( 'remove', 'delete' ), true ) ) {
 	$aic = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$tbl['ai']} WHERE post_id IN ($in)" );
 	echo 'پست (همهٔ زبان‌ها): ' . count( $pst ) . ' · پیوست: ' . count( $att ) . ' (پروندهٔ یکتا ' . count( $files ) . '، ' . round( $bytes / 1048576, 1 ) . " MB)\n";
 	echo 'نوع‌ها: ' . count( $by ) . ' · ردیف رابطه: ' . count( $rels_rows ) . ' (با پست واقعی: ' . count( $real_touch ) . ' پست) · trid WPML: ' . $icl . ' · نمایهٔ جغرافیایی: ' . $geo . ' · خلاصهٔ هوش مصنوعی: ' . $aic . "\n";
-	if ( $viol ) { echo 'هشدار P5-D456 — یال تک‌والد/یک‌به‌یک با پست واقعی: ' . implode( ' ', array_slice( $viol, 0, 10 ) ) . "\n"; }
+	if ( $viol ) { echo 'هشدار P5-D488 — یال با پست واقعی: ' . implode( ' ', array_slice( $viol, 0, 10 ) ) . "\n"; }
 	if ( ! $apply ) { echo "dry-run — چیزی پاک نشد؛ اجرا: remove confirm\n"; return; }
 
 	wp_mkdir_p( $bdir );
@@ -250,7 +250,39 @@ if ( 'seen' === $cmd ) {
 	return;
 }
 
-if ( 'create' !== $cmd ) { echo "create · list · seen · delete [confirm]\n"; return; }
+/*
+ * P5-D488: نمونه فقط به نمونه می‌بندد، پس زنجیرهٔ مکانی شهر و روستا پلهٔ بی‌صفحهٔ شهرستان نمونه می‌خواهد (۷۲ استان←شهرستان · ۷۳ شهرستان←شهر · ۷۶ شهرستان←روستا).
+ * نشان `_tp_sample_empty` یعنی بیرون از فهرست نمونهٔ هر نوع؛ tp_county صفحه ندارد.
+ */
+$sample_county = function () use ( $wpdb, $samples ) {
+	$have = $samples();
+	$prv  = $have['tp_province'] ?? array();
+	if ( empty( $prv['fa'] ) ) { return; }
+	$links = array( 72 => array( 'tp_province', true ), 73 => array( 'tp_city', false ), 76 => array( 'tp_village', false ) );
+	foreach ( array( 'fa', 'en', 'ar' ) as $l ) {
+		$id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_county' JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = 'post_tp_county' AND t.language_code = %s WHERE p.post_status <> 'trash' LIMIT 1", $l ) );
+		if ( ! $id ) {
+			$id = (int) wp_insert_post( array( 'post_type' => 'tp_county', 'post_status' => 'publish', 'post_title' => 'fa' === $l ? 'شهرستان نمونه' : ( 'en' === $l ? 'Sample county' : 'مقاطعة نموذجية' ) ) );
+			$src = (int) $wpdb->get_var( "SELECT m.post_id FROM {$wpdb->postmeta} m JOIN {$wpdb->prefix}icl_translations t ON t.element_id = m.post_id AND t.element_type = 'post_tp_county' AND t.language_code = 'fa' WHERE m.meta_key = '_tp_sample_county' LIMIT 1" );
+			$trid = $src ? apply_filters( 'wpml_element_trid', null, $src, 'post_tp_county' ) : false;
+			do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_tp_county', 'trid' => $trid, 'language_code' => $l, 'source_language_code' => $src ? 'fa' : null ) );
+			update_post_meta( $id, '_tp_sample', 1 );
+			update_post_meta( $id, '_tp_sample_empty', 1 );
+			update_post_meta( $id, '_tp_sample_county', 1 );
+		}
+		foreach ( $links as $rid => $c ) {
+			$other = (int) ( $have[ $c[0] ][ $l ] ?? 0 );
+			$rel   = topersia_relation( $rid );
+			if ( ! $other || ! $rel ) { continue; }
+			if ( $c[1] ) { if ( ! in_array( $id, array_map( 'intval', (array) $rel->get_children( $other, 'ids' ) ), true ) ) { $rel->update( $other, $id ); } }
+			elseif ( ! $rel->get_parents( $other, 'ids' ) ) { $rel->update( $id, $other ); }
+		}
+		echo "شهرستان نمونه {$l}: #{$id}\n";
+	}
+};
+if ( 'county' === $cmd ) { $sample_county(); return; }
+
+if ( 'create' !== $cmd ) { echo "create · list · seen · county · delete [confirm]\n"; return; }
 
 /* ══ create ══ */
 $have  = $samples();
@@ -449,13 +481,12 @@ foreach ( $made as $type => $pid ) {
 		$single  = 'children' === $r['direction'] && in_array( $obj->get_args( 'type' ), array( 'one_to_many', 'one_to_one' ), true );
 		if ( $single ) { $targets = array_values( array_filter( $targets, function ( $x ) use ( $obj ) { return ! $obj->get_parents( $x, 'ids' ); } ) ); }   /* هدف بی والد اول */
 		if ( isset( $made[ $r['target'] ] ) && $made[ $r['target'] ] !== $pid ) { array_unshift( $targets, $made[ $r['target'] ] ); }
+		$targets = array_values( array_filter( $targets, function ( $x ) { return get_post_meta( $x, '_tp_sample', true ) && ! get_post_meta( $x, '_tp_sample_empty', true ); } ) );   /* P5-D488؛ نمونهٔ خالی بی یال */
 		$targets = array_slice( array_values( array_unique( array_diff( array_map( 'intval', $targets ), array( $pid ) ) ) ), 0, $want );
 		$rtype = $obj->get_args( 'type' );
 		foreach ( $targets as $tid ) {
-			/* پست واقعی فقط در چندبه‌چند، یا والد واقعی برای فرزند نمونه در یک‌به‌چند؛
-			   نمونه هرگز والد تکی پست واقعی نمی‌شود و یک‌به‌یکِ واقعی دست نمی‌خورد (دستهٔ ۳۰: آلودگی ۱۵ یال) */
-			$is_sample = (bool) get_post_meta( $tid, '_tp_sample', true );
-			if ( ! $is_sample && 'many_to_many' !== $rtype && ! ( 'parents' === $r['direction'] && 'one_to_many' === $rtype ) ) { continue; }
+			/* P5-D488: نمونه فقط به نمونه می‌بندد؛ هیچ یالی به پست واقعی، با هیچ نوع رابطه */
+			if ( ! get_post_meta( $tid, '_tp_sample', true ) ) { continue; }
 			/* سوی دیگر یک‌به‌چند: والدِ تکی هدف را جابه‌جا نکن */
 			if ( 'children' === $r['direction'] && in_array( $rtype, array( 'one_to_many', 'one_to_one' ), true ) && $obj->get_parents( $tid, 'ids' ) ) { continue; }
 			'parents' === $r['direction'] ? $obj->update( $tid, $pid ) : $obj->update( $pid, $tid );
@@ -502,3 +533,18 @@ foreach ( $made as $type => $pid ) {
 	$aistore( $pid, 'fa', (string) get_post_meta( $pid, 'name_fa', true ) );
 }
 echo 'نمونه‌ها: ' . count( $made ) . " نوع (fa · en · ar)\n";
+
+$sample_county();
+
+/* P5-D491: نمونهٔ خالی ارز و روادید — فقط عنوان؛ برای آزمودن خالی‌امن. بی یال و بی فیلد. */
+foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید' ) as $ty => $title ) {
+	$eid = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_empty' WHERE p.post_type = %s AND p.post_status <> 'trash' LIMIT 1", $ty ) );
+	if ( ! $eid ) {
+		$eid = (int) wp_insert_post( array( 'post_type' => $ty, 'post_status' => 'publish', 'post_title' => $title, 'post_name' => 'sample-empty-' . str_replace( 'tp_', '', $ty ) ) );
+		do_action( 'wpml_set_element_language_details', array( 'element_id' => $eid, 'element_type' => 'post_' . $ty, 'trid' => false, 'language_code' => 'fa' ) );
+		update_post_meta( $eid, '_tp_sample', 1 );
+		update_post_meta( $eid, '_tp_sample_empty', 1 );
+		update_post_meta( $eid, 'rank_math_robots', array( 'noindex', 'nofollow' ) );
+	}
+	echo "نمونهٔ خالی {$ty}: #{$eid}\n";
+}

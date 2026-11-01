@@ -337,6 +337,103 @@ function topersia_pack_p5d450_required() {
 	);
 }
 
+if ( ! defined( 'TOPERSIA_PACK_SIMILAR_MIN_WORDS' ) ) {
+	define( 'TOPERSIA_PACK_SIMILAR_MIN_WORDS', 20 );
+	define( 'TOPERSIA_PACK_SIMILAR_RATIO', 0.8 );
+}
+
+/** نوع‌هایی که تاریخ بازبینی و منبع در پست تازۀ بسته اجباری است؛ همان فهرست `topersia_g_verified_types` رندر.  P5-D492 */
+function topersia_pack_verified_types() {
+	return array( 'tp_currency', 'tp_visa' );
+}
+
+/**
+ * هشدار شباهت متنی بین فیلدهای متنی یک پست — هرگز مانع نیست.  P5-D493
+ * جاکارد شینگل سه‌واژه‌ای؛ فقط متن‌های حداقل TOPERSIA_PACK_SIMILAR_MIN_WORDS واژه، آستانۀ TOPERSIA_PACK_SIMILAR_RATIO.
+ *
+ * @param array $values کلید ← متن.
+ * @return string[] هشدارها
+ */
+function topersia_pack_similarity_notes( $values ) {
+
+	$sets = array();
+
+	foreach ( $values as $key => $text ) {
+
+		if ( ! is_string( $text ) ) {
+			continue;
+		}
+
+		$words = preg_split( '/[^\p{L}\p{N}]+/u', mb_strtolower( wp_strip_all_tags( $text ), 'UTF-8' ), -1, PREG_SPLIT_NO_EMPTY );
+
+		if ( count( $words ) < TOPERSIA_PACK_SIMILAR_MIN_WORDS ) {
+			continue;
+		}
+
+		$set = array();
+
+		for ( $i = 0, $n = count( $words ) - 2; $i < $n; $i++ ) {
+			$set[ $words[ $i ] . ' ' . $words[ $i + 1 ] . ' ' . $words[ $i + 2 ] ] = true;
+		}
+
+		$sets[ $key ] = $set;
+	}
+
+	$out  = array();
+	$keys = array_keys( $sets );
+
+	foreach ( $keys as $i => $a ) {
+		foreach ( array_slice( $keys, $i + 1 ) as $b ) {
+
+			$both = count( array_intersect_key( $sets[ $a ], $sets[ $b ] ) );
+			$all  = count( $sets[ $a ] ) + count( $sets[ $b ] ) - $both;
+
+			if ( $all && $both / $all >= TOPERSIA_PACK_SIMILAR_RATIO ) {
+				$out[] = 'هشدار شباهت: «' . $a . '» و «' . $b . '» ' . round( 100 * $both / $all ) . '٪ هم‌متن‌اند (مانع نیست)';
+			}
+		}
+	}
+
+	return $out;
+}
+
+/**
+ * هشدار «دو tp_currency با currency_iso_code یکسان» — مانع نیست. فقط اصل‌های زبان پیش‌فرض، بی نمونه.
+ *
+ * @return int[] شناسۀ ارزهای دیگر با همان کد.
+ */
+function topersia_pack_currency_iso_twins( $iso, $target = 0 ) {
+
+	global $wpdb;
+
+	$iso = trim( (string) $iso );
+
+	if ( '' === $iso ) {
+		return array();
+	}
+
+	$ids = $wpdb->get_col( $wpdb->prepare(
+		"SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = 'currency_iso_code'
+		 WHERE p.post_type = 'tp_currency' AND p.post_status NOT IN ( 'trash', 'auto-draft' ) AND LOWER( m.meta_value ) = LOWER( %s )
+		 AND NOT EXISTS ( SELECT 1 FROM {$wpdb->postmeta} s WHERE s.post_id = p.ID AND s.meta_key = '_tp_sample' )",
+		$iso
+	) );
+
+	$default = topersia_pack_default_language();
+	$out     = array();
+
+	foreach ( array_map( 'absint', $ids ) as $id ) {
+
+		$lang = apply_filters( 'wpml_element_language_code', null, array( 'element_id' => $id, 'element_type' => 'tp_currency' ) );
+
+		if ( $id !== (int) $target && ( ! $lang || $default === $lang ) ) {
+			$out[] = $id;
+		}
+	}
+
+	return $out;
+}
+
 /** تعریف یکدستِ یک فیلد (یا زیرفیلد) جت‌انجین. */
 function topersia_pack_field_def( $field, $post_type, $classes, $is_sub = false ) {
 
@@ -475,6 +572,11 @@ function topersia_pack_schema( $post_type ) {
 
 			$why = topersia_pack_excluded( $field );
 
+			/* ارز و روادید: تاریخ بازبینی از بسته می‌آید — P5-D492 */
+			if ( 'last_verified_date' === (string) $field['name'] && in_array( $post_type, topersia_pack_verified_types(), true ) ) {
+				$why = '';
+			}
+
 			if ( '' !== $why ) {
 				$excluded[ (string) $field['name'] ] = $why;
 				continue;
@@ -504,6 +606,14 @@ function topersia_pack_schema( $post_type ) {
 		if ( isset( $fields[ $req ] ) ) {
 			$fields[ $req ]['required']        = true;
 			$fields[ $req ]['p5d450_required'] = true;
+		}
+	}
+
+	if ( in_array( $post_type, topersia_pack_verified_types(), true ) ) {   /* P5-D492 */
+		foreach ( array( 'last_verified_date', 'source_references' ) as $req ) {
+			if ( isset( $fields[ $req ] ) ) {
+				$fields[ $req ]['required'] = true;
+			}
 		}
 	}
 
@@ -2048,6 +2158,25 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 		}
 
 		$plan['fields'][ $key ] = $row;
+	}
+
+	/* P5-D493: شباهت متنی بین فیلدهای یک پست — مانع نیست */
+	$tp_texts = array();
+	foreach ( $fields as $tp_k => $tp_v ) {
+		if ( isset( $schema['fields'][ $tp_k ]['type'] ) && in_array( $schema['fields'][ $tp_k ]['type'], array( 'text', 'textarea', 'wysiwyg' ), true ) ) {
+			$tp_texts[ $tp_k ] = $tp_v;
+		}
+	}
+	foreach ( topersia_pack_similarity_notes( $tp_texts ) as $w ) {
+		$plan['notes'][] = $w;
+	}
+
+	/* دو ارز با یک کد ISO (#204 در برابر #1968) — مانع نیست */
+	if ( 'tp_currency' === $data['meta']['post_type'] && isset( $fields['currency_iso_code'] ) ) {
+		$tp_twins = topersia_pack_currency_iso_twins( $fields['currency_iso_code'], isset( $plan['target'] ) ? $plan['target'] : 0 );
+		if ( $tp_twins ) {
+			$plan['notes'][] = 'هشدار: دو tp_currency با currency_iso_code یکسان (' . (string) $fields['currency_iso_code'] . ') — شناسۀ دیگر: ' . implode( '، ', $tp_twins );
+		}
 	}
 
 	/* دستۀ 36-ج: هشدار منبع‌ها (تنوع دامنه · نام با دامنه) — مانع نیست */

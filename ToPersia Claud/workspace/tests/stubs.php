@@ -153,6 +153,11 @@ function get_post_meta( $id, $key, $single = true ) {
 	return isset( $GLOBALS['tp_meta'][ $id ][ $key ] ) ? $GLOBALS['tp_meta'][ $id ][ $key ] : '';
 }
 
+/* وردپرس برای نوع بی بایگانی false می‌دهد؛ نشانی فقط اگر آزمون گذاشته باشد */
+function get_post_type_archive_link( $type ) {
+	return isset( $GLOBALS['tp_archive'][ $type ] ) ? $GLOBALS['tp_archive'][ $type ] : false;
+}
+
 function get_post_type( $id ) {
 	return isset( $GLOBALS['tp_posts'][ $id ]['type'] ) ? $GLOBALS['tp_posts'][ $id ]['type'] : '';
 }

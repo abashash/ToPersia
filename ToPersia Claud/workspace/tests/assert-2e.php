@@ -117,31 +117,35 @@ $v24_page = function ( $n ) use ( $v24_set ) {
 	$v24_set( $n );
 	return array( 'grid' => r( 20, 'tp_relgrid', array( 'rel' => 'villages' ) ), 'page' => r( 20, 'tp_page' ) );
 };
-$v24_nine = $v24_page( 9 );
-$v24_six  = $v24_page( 6 );
+$v24_nine = $v24_page( 14 );
+$GLOBALS['tp_archive']['tp_village'] = 'https://topersia.com/villages/';
+$v24_arch = $v24_page( 14 );
+$v24_six  = $v24_page( 12 );
+unset( $GLOBALS['tp_archive']['tp_village'] );
 $v24_three = $v24_page( 3 );
 $GLOBALS['tp_rel']['75']   = $v24_rel;
 $GLOBALS['tp_posts']       = $v24_posts;
 
-tp441_mut( 'بخش کاشی ستون کناری با نُه عضو (بیش از شش کاشی): پیوند «همه روستاها ←» پس از عنوان (data-tp-list-open، aria-controls) و پنجرۀ فهرست tp-list-villages با نُه عضو در HTML صفحه؛ شش یا کمتر: نه پیوند نه پنجره',
+tp441_mut( 'P5-D490 — کاشی ستون کناری با ۱۴ عضو: ۱۲ پیدا و بقیه با «بیشتر»؛ پیوند «همه روستاها ←» فقط وقتی نوع بایگانی دارد و به همان بایگانی، بی پنجرهٔ فهرست؛ ۱۲ یا کمتر: نه پیوند نه دکمه',
 	function ( $x ) {
-		$link = '<a class="tp-more tp-more--rail" href="#tp-list-villages" role="button" aria-haspopup="dialog" aria-controls="tp-list-villages" data-tp-list-open>همه روستاها ←</a>';
-		return false !== strpos( $x[0]['grid'], $link ) && 1 === preg_match( '#<div class="tp-rail-card__head"><h3 id="tp-villagesTitle">[^<]*</h3><a class="tp-more tp-more--rail"[^>]*>[^<]*</a></div>#u', $x[0]['grid'] )
-			&& (bool) preg_match( '#id="tp-list-villages"[^>]*data-tp-total="9"#', $x[0]['page'] )
-			&& false === strpos( $x[1]['grid'], 'tp-more--rail' ) && false === strpos( $x[1]['page'], 'id="tp-list-villages"' )
-			&& false === strpos( $x[2]['grid'], 'tp-more--rail' ) && false === strpos( $x[2]['page'], 'id="tp-list-villages"' );
+		$link = '<a class="tp-more tp-more--rail" href="https://topersia.com/villages/">همه روستاها ←</a>';
+		return false === strpos( $x[0]['grid'], 'tp-more--rail' ) && 2 === substr_count( $x[0]['grid'], 'data-tp-rest-item' ) && false !== strpos( $x[0]['grid'], 'data-tp-more data-tp-step="12" data-tp-rest="2"' )
+			&& false === strpos( $x[0]['page'], 'id="tp-list-villages"' )
+			&& false !== strpos( $x[1]['grid'], $link ) && 1 === preg_match( '#<div class="tp-rail-card__head"><h3 id="tp-villagesTitle">[^<]*</h3><a class="tp-more tp-more--rail"[^>]*>[^<]*</a></div>#u', $x[1]['grid'] )
+			&& false === strpos( $x[2]['grid'], 'tp-more--rail' ) && false === strpos( $x[2]['grid'], 'data-tp-more' )
+			&& false === strpos( $x[3]['grid'], 'tp-more--rail' ) && false === strpos( $x[3]['page'], 'id="tp-list-villages"' );
 	},
-	array( $v24_nine, $v24_six, $v24_three ),
-	array( array( 'grid' => $v24_six['grid'], 'page' => $v24_six['page'] ), $v24_nine, $v24_nine ) );
+	array( $v24_nine, $v24_arch, $v24_six, $v24_three ),
+	array( $v24_arch, $v24_nine, $v24_nine, $v24_nine ) );
 
 $zones24 = file_get_contents( TP_PLUGIN_DIR . '/includes/topersia-g-zones.php' );
 
-tp441_mut( 'سقف هر بخش از یک تابع: اسلایدر هشت، کاشی‌های ستون کناری شش؛ پنجرۀ فهرست از ستون اصلی و ستون کناری هر دو جمع می‌شود',
+tp441_mut( 'سقف هر بخش از یک تابع: اسلایدر هشت، کاشی‌های ستون کناری ۱۲ (P5-D490)؛ پنجرۀ فهرست از ستون اصلی و ستون کناری هر دو جمع می‌شود',
 	function ( $s ) {
-		return false !== strpos( tp2c_body( $s, 'topersia_g_list_cap' ), "array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' )" )
+		return false !== strpos( tp2c_body( $s, 'topersia_g_is_rail_list' ), "array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' )" )
 			&& false !== strpos( tp2c_body( $s, 'topersia_g_list_cap' ), ': topersia_g_slider_max();' )
 			&& false !== strpos( $s, "foreach ( array_merge( \$layout['main'], \$layout['rail'] ) as \$zone ) {" )
-			&& false !== strpos( tp2c_body( $s, 'topersia_g_list_modal' ), "\$res['total'] <= topersia_g_list_cap( \$key )" );
+			&& false !== strpos( tp2c_body( $s, 'topersia_g_list_modal' ), "topersia_g_is_rail_list( \$key )" );
 	},
 	$zones24, str_replace( "foreach ( array_merge( \$layout['main'], \$layout['rail'] ) as \$zone ) {", "foreach ( \$layout['main'] as \$zone ) {", $zones24 ) );
 

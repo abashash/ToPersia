@@ -156,9 +156,9 @@ for ( $i441 = 0; $i441 < 8; $i441 ++ ) {
 }
 $rt8_441 = r( 20, 'tp_relgrid', array( 'rel' => 'routes' ) );
 $GLOBALS['tp_rel'] = $keep_rel441;
-t( 'مسیرها: شش کاشی پیدا، بقیه `hidden`، دکمۀ «N مورد دیگر» — همان قاعدۀ P5-D244  P5-D269',
-	6 === preg_match_all( '#<a href="[^"]+" class="tp-tile"><b>#u', $rt8_441 ) && 3 === substr_count( $rt8_441, 'hidden data-tp-rest-item' )
-	&& false !== strpos( $rt8_441, 'data-tp-more data-tp-step="6" data-tp-rest="3"' ) );
+t( 'مسیرها: نُه کاشی زیر سقف ۱۲ (P5-D490) همه پیدا، نه `hidden` نه دکمه — همان قاعدۀ کاشی‌ها  P5-D269',
+	9 === preg_match_all( '#<a href="[^"]+" class="tp-tile"><b>#u', $rt8_441 ) && 0 === substr_count( $rt8_441, 'hidden data-tp-rest-item' )
+	&& false === strpos( $rt8_441, 'data-tp-more' ) );
 
 t( 'مسیرها: خطِ زیرِ نام متن ریز کاشی است (--tp-tile-text، P5-D184) با اندازه و بلندی خط برچسب کوچک (پذیرش با `.n-dir` مرجع جفتش می‌کند)؛ روی هاور رنگ نام  P5-D269',
 	false !== strpos( $css441, 'html .tp-page .tp-tile__sub{font-size:calc(.6 * var(--tp-rem));color:var(--tp-tile-text);font-weight:700;line-height:1.2}' )

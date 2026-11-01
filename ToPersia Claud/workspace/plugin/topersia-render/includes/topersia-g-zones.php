@@ -337,6 +337,10 @@ if ( ! function_exists( 'topersia_g_filled' ) ) {
 			return ! empty( $value );
 		}
 
+		if ( is_object( $value ) ) {
+			return false;   /* دادۀ ناجور: نه نمایش، نه خطای تبدیل */
+		}
+
 		$value = trim( (string) $value );
 
 		if ( '' === $value ) {
@@ -488,14 +492,23 @@ if ( ! function_exists( 'topersia_g_choice_labels' ) ) {
  * @return string HTML
  */
 if ( ! function_exists( 'topersia_g_value' ) ) {
-	function topersia_g_value( $name, $raw, $post_id = 0 ) {
+	function topersia_g_value( $name, $raw, $post_id = 0, $def = null ) {
+
+		if ( is_object( $raw ) ) {
+			return '';   /* دادۀ ناجور: هرگز خطای تبدیل به رشته */
+		}
 
 		$map   = topersia_g_map();
-		$field = isset( $map[ $name ] ) ? $map[ $name ] : array( 'kind' => 'text', 'unit' => '' );
+		$field = is_array( $def ) ? $def : ( isset( $map[ $name ] ) ? $map[ $name ] : array( 'kind' => 'text', 'unit' => '' ) );
 		$kind  = isset( $field['kind'] ) ? $field['kind'] : 'text';
 		$unit  = isset( $field['unit'] ) ? $field['unit'] : '';
 
 		if ( is_array( $raw ) ) {
+			/* جدول عمومی به متن خالص: هر ردیف یک تکه (خلاصه‌ساز و هر مصرف‌کنندۀ متنی) — P5-D491 */
+			if ( 'table' === $kind ) {
+				return esc_html( implode( topersia_g_list_sep(), array_map( function ( $cells ) { return implode( ' — ', array_filter( array_map( 'wp_strip_all_tags', $cells ), 'strlen' ) ); }, topersia_g_table_cells( $field, $raw, $post_id )[1] ) ) );
+			}
+
 			/* چندگزینه‌ای (checkbox): هر کلید با برچسب واژه‌نامه، نه کد خام (vegetarian) — دستۀ 34 */
 			if ( 'choice' === $kind ) {
 				return topersia_g_choice_labels( $field, $raw, $post_id );
@@ -511,6 +524,21 @@ if ( ! function_exists( 'topersia_g_value' ) ) {
 		}
 
 		switch ( $kind ) {
+
+			case 'rich':
+				/* متن غنی به متن خالص؛ HTML پاک‌شده فقط در نمای بخش (`topersia_g_rich_text`) — P5-D491 */
+				return esc_html( topersia_g_fa( trim( wp_strip_all_tags( $raw ) ) ) );
+
+			case 'iso':
+				/* فهرست کد ISO کشور ← نام به زبان صفحه؛ بی intl همان کد — P5-D491 */
+				$names = array();
+				foreach ( preg_split( '/[\s,;،]+/u', $raw, -1, PREG_SPLIT_NO_EMPTY ) as $code ) {
+					$code    = strtoupper( $code );
+					$shown   = class_exists( 'Locale' ) ? (string) Locale::getDisplayRegion( 'und-' . $code, topersia_g_page_lang() ) : '';
+					$none    = class_exists( 'Locale' ) ? (string) Locale::getDisplayRegion( 'und-ZZ', topersia_g_page_lang() ) : '';
+					$names[] = ( '' !== $shown && $none !== $shown ) ? $shown : $code;
+				}
+				return esc_html( implode( topersia_g_list_sep(), $names ) );
 
 			case 'number':
 				/* دستۀ ۲۹ (بازبینی امنیتی): topersia_g_sep برای مقدار بی رقم همان خام را برمی‌گرداند — گریز HTML همیشه */
@@ -602,6 +630,121 @@ if ( ! function_exists( 'topersia_g_section' ) ) {
 }
 
 /** فیلدهای یک ناحیه که این پست واقعاً دارد، به ترتیب نقشه. */
+if ( ! function_exists( 'topersia_g_table_cells' ) ) {
+	/**
+	 * جدول عمومیِ فیلد تکرارشونده از پیکربندی `cols` نقشه — بی کد ویژۀ هیچ فیلد.  P5-D491
+	 * ردیف فعال با همان قطبیت `topersia_active_rows`؛ «نامعلوم / موضوعیت ندارد» خالی؛ ردیف و ستون تماماً خالی می‌افتد.
+	 *
+	 * @return array array( برچسب ستون‌ها[], ردیف‌ها[][] )
+	 */
+	function topersia_g_table_cells( $field, $rows, $post_id = 0 ) {
+
+		$rows = function_exists( 'topersia_active_rows' ) ? topersia_active_rows( (array) $rows ) : (array) $rows;
+		$cols = isset( $field['cols'] ) ? (array) $field['cols'] : array();
+		$out  = array();
+		$used = array();
+
+		foreach ( $rows as $row ) {
+
+			$cells = array();
+
+			foreach ( $cols as $key => $col ) {
+				$v = is_array( $row ) && isset( $row[ $key ] ) && is_scalar( $row[ $key ] ) ? trim( (string) $row[ $key ] ) : '';
+				$v = in_array( $v, array( 'unknown', 'not_applicable' ), true ) ? '' : $v;
+				$cells[ $key ] = '' === $v ? '' : topersia_g_value( $key, $v, $post_id, $col + array( 'unit' => '' ) );
+				if ( '' !== trim( wp_strip_all_tags( $cells[ $key ] ) ) ) {
+					$used[ $key ] = true;
+				}
+			}
+
+			if ( array_filter( $cells, function ( $c ) { return '' !== trim( wp_strip_all_tags( $c ) ); } ) ) {
+				$out[] = $cells;
+			}
+		}
+
+		$labels = array();
+
+		foreach ( $cols as $key => $col ) {
+			if ( isset( $used[ $key ] ) ) {
+				$labels[ $key ] = topersia_g_t( $col['label'] );
+			}
+		}
+
+		foreach ( $out as $i => $cells ) {
+			$out[ $i ] = array_intersect_key( $cells, $labels );
+		}
+
+		return array( $labels, $out );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_table_html' ) ) {
+	/** جدول HTML سرور با caption و th؛ کشش افقی در ظرف خودش.  P5-D491 */
+	function topersia_g_table_html( $field, $rows, $post_id = 0 ) {
+
+		list( $labels, $cells ) = topersia_g_table_cells( $field, $rows, $post_id );
+
+		if ( ! $cells ) {
+			return '';
+		}
+
+		$head = '';
+
+		foreach ( $labels as $label ) {
+			$head .= '<th scope="col">' . esc_html( $label ) . '</th>';
+		}
+
+		$body = '';
+
+		foreach ( $cells as $row ) {
+			$body .= '<tr><td>' . implode( '</td><td>', $row ) . '</td></tr>';
+		}
+
+		return '<div class="tp-data-table" tabindex="0" role="group" aria-label="' . esc_attr( topersia_g_t( $field['label'] ) ) . '"><table><caption class="tp-vh">' . esc_html( topersia_g_t( $field['label'] ) ) . '</caption>'
+			. '<thead><tr>' . $head . '</tr></thead><tbody>' . $body . '</tbody></table></div>';
+	}
+}
+
+if ( ! function_exists( 'topersia_g_verified_types' ) ) {
+	/** نوع‌هایی که مهر «آخرین بازبینی و منبع» کنار بلوکشان می‌آید؛ همان فهرست `topersia_pack_verified_types` هسته.  P5-D492 */
+	function topersia_g_verified_types() {
+		return array( 'tp_currency', 'tp_visa' );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_verified_stamp' ) ) {
+	/**
+	 * خط «آخرین بازبینی · منبع» کنار بلوک. تاریخ فقط با وضعیت همین زبان (P5-D308)؛ هر دو خالی ← هیچ.  P5-D492
+	 */
+	function topersia_g_verified_stamp( $pid ) {
+
+		if ( ! in_array( (string) get_post_type( $pid ), topersia_g_verified_types(), true ) ) {
+			return '';
+		}
+
+		$iso   = topersia_g_schema_reviewed( $pid );
+		$parts = array();
+
+		if ( '' !== $iso ) {
+			$parts[] = esc_html__( 'آخرین بازبینی', 'topersia' ) . ': <time datetime="' . esc_attr( $iso ) . '">' . esc_html( topersia_g_date_fa( $iso ) ) . '</time>';
+		}
+
+		foreach ( topersia_g_rows( $pid, 'source_references' ) as $row ) {
+
+			$name = isset( $row['source_name'] ) ? trim( wp_strip_all_tags( (string) $row['source_name'] ) ) : '';
+			$url  = isset( $row['source_url'] ) ? trim( (string) $row['source_url'] ) : '';
+
+			if ( '' !== $name ) {
+				$shown   = topersia_g_lang_runs( $name );
+				$parts[] = esc_html__( 'منبع', 'topersia' ) . ': ' . ( '' !== $url ? '<a href="' . esc_url( $url ) . '" rel="nofollow noopener">' . $shown . '</a>' : $shown );
+				break;
+			}
+		}
+
+		return $parts ? '<p class="tp-verified">' . implode( ' · ', $parts ) . '</p>' : '';
+	}
+}
+
 if ( ! function_exists( 'topersia_g_zone_fields' ) ) {
 	function topersia_g_zone_fields( $post_id, $zone, $exclude = array() ) {
 
@@ -2339,7 +2482,8 @@ if ( ! function_exists( 'topersia_g_schema_reviewed' ) ) {
 			return '';
 		}
 
-		$raw = trim( (string) topersia_g_raw( $post_id, 'last_verified_date' ) );
+		$raw = topersia_g_raw( $post_id, 'last_verified_date' );
+		$raw = is_scalar( $raw ) ? trim( (string) $raw ) : '';
 
 		if ( '' === topersia_g_date_fa( $raw ) ) {
 			return '';
@@ -2555,31 +2699,52 @@ if ( ! function_exists( 'topersia_g_list_more' ) ) {
 }
 
 /**
- * سقف کارتِ دیدنیِ هر بخش — بیش از آن «همه …» و پنجرۀ فهرست.  ۲ه٫۴ · P5-D313
- * اسلایدرها هشت (P5-D276)؛ کاشی‌های ستون کناری شش (`topersia_g_tiles`).
+ * سقف کارتِ دیدنیِ هر بخش.  ۲ه٫۴ · P5-D313 · P5-D490
+ * اسلایدرها هشت (P5-D276) با پنجرۀ فهرست؛ کاشی رابطۀ ستون کناری ۱۲ (`TOPERSIA_REL_TILES_VISIBLE`) و بقیه با «بیشتر».
  */
+if ( ! defined( 'TOPERSIA_REL_TILES_VISIBLE' ) ) {
+	define( 'TOPERSIA_REL_TILES_VISIBLE', 12 );
+}
+
+if ( ! function_exists( 'topersia_g_is_rail_list' ) ) {
+	/** کلیدهایی که کاشی ستون کناری‌اند، نه اسلایدر. */
+	function topersia_g_is_rail_list( $key ) {
+		return in_array( $key, array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' ), true );
+	}
+}
+
 if ( ! function_exists( 'topersia_g_list_cap' ) ) {
 	function topersia_g_list_cap( $key ) {
 
-		return in_array( $key, array( 'villages', 'nature', 'ancient', 'routes', 'subranges', 'border' ), true ) ? 6 : topersia_g_slider_max();
+		return topersia_g_is_rail_list( $key ) ? TOPERSIA_REL_TILES_VISIBLE : topersia_g_slider_max();
 	}
 }
 
 /**
- * پیوند «همه … ←» کنار عنوان کارتِ ستون کناری — فقط وقتی اعضا بیش از کاشی‌های دیدنی‌اند.
- * همان `data-tp-list-open` اسلایدرها؛ جاوااسکریپت پنجره را باز می‌کند.  ۲ه٫۴ · P5-D313
+ * پیوند «همه … ←» کنار عنوان کارتِ ستون کناری — فقط وقتی اعضا بیش از کاشی‌های دیدنی‌اند
+ * و نوع هدف صفحۀ بایگانی دارد؛ بی بایگانی هیچ پیوندی نیست و بقیه با «بیشتر» باز می‌شوند.  P5-D490
  */
 if ( ! function_exists( 'topersia_g_rail_more' ) ) {
-	function topersia_g_rail_more( $group, $key, $total, $shown ) {
+	function topersia_g_rail_more( $group, $key, $total, $shown, $items = array() ) {
 
-		if ( ! $shown || $total <= $shown ) {
+		if ( ! $shown || $total <= $shown || ! function_exists( 'get_post_type_archive_link' ) ) {
 			return '';
 		}
 
-		$list = 'tp-list-' . $key;
+		$types = array();
 
-		return '<a class="tp-more tp-more--rail" href="#' . esc_attr( $list ) . '" role="button" aria-haspopup="dialog"'
-			. ' aria-controls="' . esc_attr( $list ) . '" data-tp-list-open>' . esc_html( topersia_g_list_more( $group, $key ) ) . '</a>';
+		foreach ( (array) $items as $item ) {
+			$types[ (string) get_post_type( isset( $item['id'] ) ? absint( $item['id'] ) : 0 ) ] = true;
+		}
+
+		/* اعضای ناهم‌نوع یک بایگانی ندارند */
+		$url = 1 === count( $types ) ? get_post_type_archive_link( (string) key( $types ) ) : false;
+
+		if ( ! $url ) {
+			return '';
+		}
+
+		return '<a class="tp-more tp-more--rail" href="' . esc_url( $url ) . '">' . esc_html( topersia_g_list_more( $group, $key ) ) . '</a>';
 	}
 }
 
@@ -5470,6 +5635,7 @@ if ( ! function_exists( 'topersia_g_practical_section' ) ) {
 		$body = '' !== $tiles ? '<div class="tp-trip" role="list">' . $tiles . '</div>' : '';
 		/* دستۀ ۲۹ — بلوک «بازدید» (P5-D450 و توضیح‌ها): فقط ردیف پر، هرگز «—» */
 		$body .= topersia_g_visit_block( $pid );
+		$body .= '' !== $body ? topersia_g_verified_stamp( $pid ) : '';   /* P5-D492 */
 
 		$group = isset( $result['group'] ) ? (array) $result['group'] : array();
 
@@ -5654,10 +5820,10 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 		 * مرجع می‌گفت دکمه «ادامه را همین‌جا بار می‌کند، نه اینکه کاربر
 		 * از صفحه برود» و در وردپرس یک درخواست REST می‌زند. تا آن نقطه
 		 * ساخته نشده، همه‌شان رندر می‌شوند و بقیه پنهان می‌مانند: خزنده
-		 * همه را می‌بیند، کاربر شش‌تای اول را، و دکمه بقیه را نشان
+		 * همه را می‌بیند، کاربر دوازده‌تای اول را (P5-D490)، و دکمه بقیه را نشان
 		 * می‌دهد بی‌هیچ رفت‌وبرگشتی.
 		 */
-		$shown  = isset( $atts['limit'] ) ? absint( $atts['limit'] ) : 6;
+		$shown  = isset( $atts['limit'] ) ? absint( $atts['limit'] ) : TOPERSIA_REL_TILES_VISIBLE;   /* P5-D490 */
 		$result = topersia_g_rel_items( $pid, $key, 0 );
 
 		/*
@@ -5720,7 +5886,7 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 			}
 
 			return topersia_g_section( 'tp-routes', $title, $kick, topersia_g_tiles( $tiles, $shown ), 'tp-rail-card', '', '',
-				topersia_g_rail_more( $group, 'routes', count( $tiles ), $shown ) );
+				topersia_g_rail_more( $group, 'routes', count( $tiles ), $shown, $result['items'] ) );
 		}
 
 		/*
@@ -5754,7 +5920,7 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 			isset( $group['kicker'] ) ? $group['kicker'] : '',
 			topersia_g_tiles( $tiles, $shown ),
 			'tp-rail-card', '', '',
-			topersia_g_rail_more( $group, $key, count( $tiles ), $shown )
+			topersia_g_rail_more( $group, $key, count( $tiles ), $shown, $result['items'] )
 		);
 	}
 }
@@ -6416,7 +6582,16 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
 
 		foreach ( topersia_g_zone_fields( $pid, 'details' ) as $name => $raw ) {
 
-			$text = trim( wp_strip_all_tags( topersia_g_value( $name, $raw ) ) );
+			/* متن غنی و جدول عمومی با ساختار خودشان — P5-D491 */
+			$kind = isset( $map[ $name ]['kind'] ) ? $map[ $name ]['kind'] : '';
+			$rich = 'table' === $kind ? topersia_g_table_html( $map[ $name ], $raw, $pid ) : ( 'rich' === $kind ? topersia_g_rich_text( $raw ) : '' );
+
+			if ( '' !== $rich ) {
+				$long .= '<h3>' . esc_html( topersia_g_t( $map[ $name ]['label'] ) ) . '</h3>' . $rich;
+				continue;
+			}
+
+			$text = trim( wp_strip_all_tags( topersia_g_value( $name, $raw, $pid ) ) );
 
 			if ( '' === $text ) {
 				continue;
@@ -6429,6 +6604,8 @@ if ( ! function_exists( 'topersia_g_sc_overview' ) ) {
 		if ( '' === $long && '' === $intro ) {
 			return '';
 		}
+
+		$long .= '' !== $long ? topersia_g_verified_stamp( $pid ) : '';   /* P5-D492 */
 
 		/* `.answer__meta` مرجع: چیپ‌های کوتاه از فیلدهای ناحیۀ `card`. */
 		$chips = '';
@@ -8418,16 +8595,14 @@ if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 
 			$res = topersia_g_rel_items( $post_id, $key, 0 );
 
-			/* اسلایدر کارتی: هر شماری مودال دارد (P5-D384). کاشی ستون کناری بی تغییر: شش یا کمتر ← همه دیده‌اند، نه پیوند، نه مودال (P5-D313). */
-			$rail = 6 === topersia_g_list_cap( $key );
-
-			if ( $res['total'] < 1 || ( $rail && $res['total'] <= topersia_g_list_cap( $key ) ) ) {
+			/* اسلایدر کارتی: هر شماری مودال دارد (P5-D384). کاشی ستون کناری پنجره ندارد (P5-D490) — پیشین: شش یا کمتر ← همه دیده‌اند، نه پیوند، نه مودال (P5-D313). */
+			if ( $res['total'] < 1 || topersia_g_is_rail_list( $key ) ) {
 				return '';
 			}
 
 			$items = array();
 			/* ستون کناری با اعضای ناهم‌نوع: برچسب نوع زیر هر نام؛ اسلایدرها همان رفتار پیشین (جمعیت یا بی برچسب) */
-			$mixed = 6 === topersia_g_list_cap( $key )
+			$mixed = topersia_g_is_rail_list( $key )
 				&& count( array_unique( array_map( function ( $i ) { return (string) ( isset( $i['kind'] ) ? $i['kind'] : '' ); }, $res['items'] ) ) ) > 1;
 
 			/*

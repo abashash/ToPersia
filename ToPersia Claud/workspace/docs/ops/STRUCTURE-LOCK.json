@@ -1338,10 +1338,17 @@
   },
   "regional_notes": {
    "consumers": [
-    "core"
+    "FIELDMAP:details",
+    "render",
+    "tests"
    ],
-   "fieldmap_zone": null,
-   "fieldmap_kind": null
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "table",
+   "jet_type": "repeater",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
   },
   "calendar_systems": {
    "consumers": [
@@ -1910,6 +1917,468 @@
    "wpml": "copy",
    "post_types": [
     "tp_country"
+   ]
+  },
+  "unit_confusion_explainer": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "price_reading_rule": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "redenomination_end_date": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "date",
+   "jet_type": "date",
+   "wpml": "copy",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "dual_pricing_active": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "redenomination_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "denominations": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "table",
+   "jet_type": "repeater",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "card_acceptance_summary": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "atm_usage_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "domestic_network_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "tourist_card_available": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "banknote_condition_rule": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "exchange_channel_notes": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "declaration_rules_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "rate_regime_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "cash_recommendation_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "daily_budget_bands": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "table",
+   "jet_type": "repeater",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "digital_payment_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_currency"
+   ]
+  },
+  "guided_tour_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "free_zone_mainland_allowed": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "free_zone_excluded_iso": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "iso",
+   "jet_type": "textarea",
+   "wpml": "copy",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "free_zone_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "application_process_summary": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "voa_entry_points": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "table",
+   "jet_type": "repeater",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "entry_points_reference": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "insurance_required": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "insurance_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "passport_stamping_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "dual_nationality_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "restricted_entry_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "special_passport_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "extension_info": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "fee_currency": {
+   "consumers": [
+    "FIELDMAP:travel",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "travel",
+   "fieldmap_kind": "latin",
+   "jet_type": "text",
+   "wpml": "copy",
+   "post_types": [
+    "tp_visa"
+   ]
+  },
+  "fee_policy_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_visa"
    ]
   }
  },
@@ -2530,9 +2999,9 @@
   "area_km2"
  ],
  "count": {
-  "fields": 212,
+  "fields": 245,
   "relations": 39,
   "post_types": 42
  },
- "wave1": "دستهٔ 40 · P5-D484/D485 — پنج کلید موج ۱ (نام، نوع، کلاس WPML) قفل؛ نمایش لایهٔ قالب است و قفل نیست."
+ "wave1": "دستهٔ 40 · P5-D484/D485 — پنج کلید موج ۱؛ دستهٔ 41 · P5-D491 — ۳۴ کلید tp_currency و tp_visa (نام، نوع، کلاس WPML) قفل؛ نمایش لایهٔ قالب است و قفل نیست."
 }

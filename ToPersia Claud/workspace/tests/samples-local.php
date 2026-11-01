@@ -35,7 +35,7 @@ $filled = function ( $v, $d ) {
 global $wpdb;
 $types = array_keys( topersia_g_stat_cells() );
 $smp   = array();
-foreach ( $wpdb->get_results( "SELECT p.ID, p.post_type FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample' WHERE p.post_type <> 'attachment' AND p.post_status = 'publish'", ARRAY_A ) as $r ) {
+foreach ( $wpdb->get_results( "SELECT p.ID, p.post_type FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample' AND NOT EXISTS ( SELECT 1 FROM {$wpdb->postmeta} e WHERE e.post_id = p.ID AND e.meta_key = '_tp_sample_empty' ) WHERE p.post_type <> 'attachment' AND p.post_status = 'publish'", ARRAY_A ) as $r ) {
 	$l = apply_filters( 'wpml_element_language_code', null, array( 'element_id' => (int) $r['ID'], 'element_type' => $r['post_type'] ) );
 	$smp[ $r['post_type'] ][ $l ?: 'fa' ] = (int) $r['ID'];
 }
@@ -77,11 +77,10 @@ foreach ( $types as $type ) {
 		$free = 'children' === $r['direction'] && in_array( $rt, array( 'one_to_many', 'one_to_one' ), true )
 			? array_filter( $pool, function ( $x ) use ( $o, $ids ) { return in_array( $x, array_map( 'intval', $ids ), true ) || ! $o->get_parents( $x, 'ids' ); } )
 			: $pool;
-		/* همان قاعدهٔ مولد: پست واقعی فقط در چندبه‌چند یا والد واقعی فرزندِ نمونه در یک‌به‌چند */
-		$real_ok = 'many_to_many' === $rt || ( 'parents' === $r['direction'] && 'one_to_many' === $rt );
-		if ( ! $real_ok ) { $free = array_filter( $free, function ( $x ) use ( $ids ) { return in_array( $x, array_map( 'intval', $ids ), true ) || get_post_meta( $x, '_tp_sample', true ); } ); }
+		/* همان قاعدهٔ مولد (P5-D488): نمونه فقط به نمونه می‌بندد */
+		$free = array_filter( $free, function ( $x ) use ( $ids ) { return in_array( $x, array_map( 'intval', $ids ), true ) || ( get_post_meta( $x, '_tp_sample', true ) && ! get_post_meta( $x, '_tp_sample_empty', true ) ); } );
 		$why = count( $pool ) < $need ? 'هدف ' . $r['target'] . ' فقط ' . count( $pool ) . ' پست دارد'
-			: ( count( $free ) < $need ? ( $real_ok ? 'هر ' . $r['target'] . ' والد تکی دارد' : 'تک‌والد: نمونه والد پست واقعی نمی‌شود و نمونهٔ آزاد ' . $r['target'] . ' کم است' ) : '' );
+			: ( count( $free ) < $need ? 'نمونه فقط به نمونه می‌بندد (P5-D488) و نمونهٔ آزاد ' . $r['target'] . ' کم است' : '' );
 		$lab = $type . ' → ' . $r['target'] . ' (' . $r['id'] . ' ' . $r['direction'] . '): ' . $c;
 		if ( $why && $c >= min( $need, count( $free ) ) ) { $accepted[] = $lab . ' — ' . $why; } else { $short[] = $lab; }
 	}

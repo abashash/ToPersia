@@ -544,9 +544,8 @@ function tp_at_order_bad( $html ) {
 /**
  * ۲ه٫۴ · P5-D313 — «همه …» برای هر بخش کارتی که عضو بیشتری از نمایش دارد.
  *
- * اسلایدرها هشت کارت، کاشی‌های ستون کناری شش (`topersia_g_list_cap`). برای هر ناحیۀ
- * اسلایدر/کاشیِ صفحه: اعضای منتشرشده > سقف ← پیوندِ `data-tp-list-open` به `#tp-list-<کلید>` و
- * پنجرۀ همان شناسه با `data-tp-total` برابر شمار اعضا؛ ≤ سقف ← نه پیوند نه پنجره. شمارندهٔ
+ * اسلایدرها هشت کارت با پیوندِ `data-tp-list-open` به `#tp-list-<کلید>` و پنجرۀ همان شناسه با
+ * `data-tp-total` برابر شمار اعضا؛ کاشی ستون کناری (۱۲، P5-D490) پنجره ندارد و در این جهان بی بایگانی پیوند هم نه. شمارندهٔ
  * بخش‌های سنجیده‌شده در `$GLOBALS['tp_at_more']` تا ادعا تهی نماند.
  */
 function tp_at_more_bad( $pid, $html ) {
@@ -577,15 +576,15 @@ function tp_at_more_bad( $pid, $html ) {
 
 			$GLOBALS['tp_at_more']['sections'] = ( isset( $GLOBALS['tp_at_more']['sections'] ) ? $GLOBALS['tp_at_more']['sections'] : 0 ) + 1;
 
-			/* P5-D384: اسلایدر کارتی هر شماری پیوند و پنجره دارد؛ کاشی ستون کناری فقط بیش از شش (P5-D313) */
+			/* P5-D384: اسلایدر کارتی هر شماری پیوند و پنجره دارد؛ کاشی ستون کناری هرگز (P5-D490) */
 			$slider = 'topersia_g_sc_slider' === $fn;
 
-			if ( $slider || $tot > $cap ) {
+			if ( $slider ) {
 				$GLOBALS['tp_at_more']['over'] = ( isset( $GLOBALS['tp_at_more']['over'] ) ? $GLOBALS['tp_at_more']['over'] : 0 ) + 1;
 				if ( ! $link ) { $bad[] = $key . ': ' . $tot . ' عضو (اسلایدر یا > سقف ' . $cap . ') ولی پیوند «همه …» نیست'; }
 				if ( ! $modal || (int) $m[1] !== $tot ) { $bad[] = $key . ': پنجرۀ فهرست نیست یا شمارش با ' . $tot . ' برابر نیست'; }
 			} elseif ( $link || $modal ) {
-				$bad[] = $key . ': ' . $tot . ' عضو ≤ سقف ' . $cap . ' ولی پیوند یا پنجره آمده';
+				$bad[] = $key . ': کاشی ستون کناری (' . $tot . ' عضو، سقف ' . $cap . ') ولی پیوند پنجره یا پنجره آمده';
 			}
 		}
 	}
@@ -733,14 +732,17 @@ $tp_many_all  = isset( $GLOBALS['tp_at_many_html'] ) ? $GLOBALS['tp_at_many_html
 $tp_many_pid  = isset( $GLOBALS['tp_at_many_pid']['tp_province'] ) ? $GLOBALS['tp_at_many_pid']['tp_province'] : 0;
 $tp_many_html = isset( $tp_many_all['tp_province'] ) ? $tp_many_all['tp_province'] : '';
 
-if ( count( $tp_many_all ) !== count( $TYPES ) || ! isset( $tp_more_stat['over'] ) || $tp_more_stat['over'] < 10 ) {
+if ( count( $tp_many_all ) !== count( $TYPES ) || ! isset( $tp_more_stat['over'] ) || $tp_more_stat['over'] < 3 ) {   /* از P5-D490 فقط اسلایدرها پنجره دارند */
 	tp_at_note( 'Mutant', 'ادعای «همه …» تهی ماند: ' . count( $tp_many_all ) . ' نوع در «many»، ' . ( isset( $tp_more_stat['over'] ) ? $tp_more_stat['over'] : 0 ) . ' بخش بیش از سقف', 'P5-D313' );
 }
 
+/* P5-D490: جهش روی نخستین پنجرهٔ فهرستِ همین صفحه — کاشی ستون کناری دیگر پنجره ندارد */
+$tp_many_list = preg_match( '~id="(tp-list-[a-z_-]+)"[^>]*data-tp-total="~', $tp_many_html, $tp_lm ) ? $tp_lm[1] : 'tp-list-none';
+
 if ( ! $tp_many_pid || '' === $tp_many_html || tp_at_more_bad( $tp_many_pid, $tp_many_html )
 	|| ! tp_at_more_bad( $tp_many_pid, str_replace( 'data-tp-list-open', 'data-x', $tp_many_html ) )
-	|| ! tp_at_more_bad( $tp_many_pid, preg_replace( '~id="tp-list-villages"~', 'id="x-villages"', $tp_many_html ) )
-	|| ! tp_at_more_bad( $tp_many_pid, preg_replace( '~(id="tp-list-villages"[^>]*data-tp-total=")\d+~', '${1}3', $tp_many_html ) ) ) {
+	|| ! tp_at_more_bad( $tp_many_pid, str_replace( 'id="' . $tp_many_list . '"', 'id="x-list"', $tp_many_html ) )
+	|| ! tp_at_more_bad( $tp_many_pid, preg_replace( '~(id="' . $tp_many_list . '"[^>]*data-tp-total=")\d+~', '${1}9999', $tp_many_html ) ) ) {
 	tp_at_note( 'Mutant', 'ادعای «همه …» جهش (بی پیوند · بی پنجره · شمار نادرست) را نگرفت', 'P5-D313' );
 }
 

@@ -73,6 +73,10 @@ msgstr "الإطفاء"
 msgid "آثار شاخص"
 msgstr "أبرز الأعمال"
 
+#: includes/topersia-g-zones.php
+msgid "آخرین بازبینی"
+msgstr "آخر مراجعة"
+
 #: includes/topersia-g-gallery-agg.php
 #, php-format
 msgid "آخرین بازسازی همه: %s"
@@ -209,6 +213,10 @@ msgstr "أرديبهشت"
 msgid "ارز و روش‌های پرداخت"
 msgstr "العملة وطرق الدفع"
 
+#: includes/topersia-g-map.php
+msgid "ارزش اسمی"
+msgstr "القيمة الاسمية"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "از %1$s تا %2$s"
@@ -223,7 +231,7 @@ msgstr "من %1$s إلى %2$s يورو"
 msgid "از پیش در صف است."
 msgstr "موجود في قائمة الانتظار مسبقاً."
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-map.php
 msgid "استان"
 msgstr "محافظة"
 
@@ -264,6 +272,10 @@ msgid "اسپانیایی"
 msgstr "الإسبانية"
 
 #: includes/topersia-g-map.php
+msgid "اسکناس و مسکوک"
+msgstr "الأوراق النقدية والعملات المعدنية"
+
+#: includes/topersia-g-map.php
 msgid "اشاره‌های نابه‌جا"
 msgstr "إيماءات يُستحسن تجنبها"
 
@@ -286,6 +298,10 @@ msgstr "معلومات إضافية"
 #: includes/topersia-g-zones.php
 msgid "اطلاعات کلیدی"
 msgstr "معلومات أساسية"
+
+#: includes/topersia-g-map.php
+msgid "اظهار ارز در گمرک"
+msgstr "الإقرار الجمركي بالعملة"
 
 #: includes/topersia-g-map.php
 msgid "اعتبار گذرنامه"
@@ -405,6 +421,10 @@ msgstr "سوق"
 
 #: includes/topersia-g-map.php
 msgid "بازتعریف واحد پول"
+msgstr "إعادة تقييم العملة"
+
+#: includes/topersia-g-map.php
+msgid "بازتعریف پول"
 msgstr "إعادة تقييم العملة"
 
 #: includes/topersia-g-zones.php
@@ -645,6 +665,10 @@ msgid "به‌روزرسانی: چند دقیقه پیش"
 msgstr "حُدِّث قبل دقائق"
 
 #: includes/topersia-g-map.php
+msgid "بودجۀ روزانه"
+msgstr "الميزانية اليومية"
+
+#: includes/topersia-g-map.php
 msgid "بومی و سنتی"
 msgstr "محلية وتقليدية"
 
@@ -667,6 +691,14 @@ msgstr "شجيرات صحراوية متناثرة"
 #: includes/topersia-g-zones.php
 msgid "بیشتر"
 msgstr "المزيد"
+
+#: includes/topersia-g-map.php
+msgid "بیمۀ اجباری"
+msgstr "التأمين الإلزامي"
+
+#: includes/topersia-g-map.php
+msgid "بیمۀ اجباری: توضیح"
+msgstr "التأمين الإلزامي: التفاصيل"
 
 #: includes/topersia-g-map.php
 msgid "بین‌المللی"
@@ -763,6 +795,10 @@ msgstr "تيليغرام"
 msgid "تمام سال"
 msgstr "طوال العام"
 
+#: includes/topersia-g-map.php
+msgid "تمدید و اضافه‌اقامت"
+msgstr "التمديد وتجاوز مدة الإقامة"
+
 #: topersia-render.php
 msgid "تنظیمات به پیش‌فرض بازگشت"
 msgstr "أُعيدت الإعدادات إلى الوضع الافتراضي"
@@ -770,6 +806,10 @@ msgstr "أُعيدت الإعدادات إلى الوضع الافتراضي"
 #: includes/topersia-g-map.php
 msgid "تنگه / دره"
 msgstr "مضيق / وادٍ"
+
+#: includes/topersia-g-map.php
+msgid "تور اجباری"
+msgstr "الجولة الإلزامية"
 
 #: includes/topersia-g-map.php
 msgid "تور یا راهنما لازم است"
@@ -936,6 +976,14 @@ msgid "حال‌وهوا"
 msgstr "الأجواء"
 
 #: includes/topersia-g-map.php
+msgid "حداقل (یورو)"
+msgstr "الحد الأدنى (يورو)"
+
+#: includes/topersia-g-map.php
+msgid "حداکثر (یورو)"
+msgstr "الحد الأقصى (يورو)"
+
+#: includes/topersia-g-map.php
 msgid "حداکثر اقامت"
 msgstr "أقصى مدة إقامة"
 
@@ -1051,9 +1099,17 @@ msgstr "قراءة سهلة"
 msgid "خواندن آسان اعمال شد"
 msgstr "طُبِّقت القراءة السهلة"
 
+#: includes/topersia-g-map.php
+msgid "خواندن قیمت"
+msgstr "قراءة الأسعار"
+
 #: includes/topersia-g-air.php
 msgid "خوب"
 msgstr "جيد"
+
+#: includes/topersia-g-map.php
+msgid "خودپرداز"
+msgstr "أجهزة الصراف الآلي"
 
 #: includes/topersia-g-zones.php
 msgid "خوراک محلی"
@@ -1120,6 +1176,10 @@ msgstr "في المناسبات"
 #: includes/topersia-g-map.php
 msgid "در معرض خطر"
 msgstr "مهدد"
+
+#: includes/topersia-g-map.php
+msgid "در گردش"
+msgstr "متداولة"
 
 #: includes/topersia-g-zones.php
 msgid "درباره"
@@ -1213,6 +1273,10 @@ msgstr "تعذّرت المتابعة."
 #: includes/topersia-g-map.php
 msgid "دو و میدانی"
 msgstr "ألعاب القوى"
+
+#: includes/topersia-g-map.php
+msgid "دوتابعیتی"
+msgstr "مزدوجو الجنسية"
 
 #: includes/topersia-g-zones.php
 msgid "دوره / سلسلۀ تاریخی"
@@ -1403,8 +1467,20 @@ msgid "رژیم غذایی"
 msgstr "ملاحظات غذائية"
 
 #: includes/topersia-g-map.php
+msgid "رژیم مناطق آزاد"
+msgstr "نظام المناطق الحرة"
+
+#: includes/topersia-g-map.php
+msgid "رژیم نرخ ارز"
+msgstr "نظام سعر الصرف"
+
+#: includes/topersia-g-map.php
 msgid "ریال"
 msgstr "ريال"
+
+#: includes/topersia-g-map.php
+msgid "ریال و تومان"
+msgstr "الريال والتومان"
 
 #: includes/topersia-g-map.php
 msgid "ریلی"
@@ -1556,6 +1632,10 @@ msgid "سالانه"
 msgstr "سنوي"
 
 #: includes/topersia-g-map.php
+msgid "سایر مبادی ورودی"
+msgstr "منافذ الدخول الأخرى"
+
+#: includes/topersia-g-map.php
 msgid "سبک معماری"
 msgstr "الطراز المعماري"
 
@@ -1600,6 +1680,10 @@ msgid "سطح"
 msgstr "المستوى"
 
 #: includes/topersia-g-map.php
+msgid "سطح بودجه"
+msgstr "مستوى الميزانية"
+
+#: includes/topersia-g-map.php
 msgid "سفالگری"
 msgstr "الفخار"
 
@@ -1610,6 +1694,10 @@ msgstr "بلغ الموقع حده اليومي للإنشاء؛ حاول مجد
 #: includes/topersia-g-ai.php
 msgid "سقف روزانۀ شما برای تولید پر شده است؛ فردا دوباره امتحان کنید."
 msgstr "بلغتَ حدك اليومي للإنشاء؛ حاول مجددًا غدًا."
+
+#: includes/topersia-g-map.php
+msgid "سلامت اسکناس"
+msgstr "حالة الأوراق النقدية"
 
 #: includes/topersia-g-zones.php
 msgid "سلامت و ایمنی"
@@ -1628,6 +1716,10 @@ msgid "سوارکاری"
 msgstr "الفروسية"
 
 #: includes/topersia-g-map.php
+msgid "سیاست هزینه و پرداخت"
+msgstr "سياسة الرسوم والدفع"
+
+#: includes/topersia-g-map.php
 msgid "شاعر"
 msgstr "شاعر"
 
@@ -1638,6 +1730,10 @@ msgstr "الليل"
 #: includes/topersia-g-map.php
 msgid "شبکۀ ریلی"
 msgstr "شبكة السكك الحديدية"
+
+#: includes/topersia-g-map.php
+msgid "شبکۀ کارت داخلی"
+msgstr "شبكة البطاقات المحلية"
 
 #: includes/topersia-g-map.php
 msgid "شب‌گردی"
@@ -1864,6 +1960,10 @@ msgstr "ملف مرفوع"
 msgid "فرانسوی"
 msgstr "الفرنسية"
 
+#: includes/topersia-g-map.php
+msgid "فرایند درخواست"
+msgstr "إجراءات الطلب"
+
 #: includes/topersia-g-weather.php
 msgid "فردا"
 msgstr "غدًا"
@@ -1964,6 +2064,10 @@ msgstr "قمة"
 #: includes/topersia-g-zones.php
 msgid "قوم / فرهنگ"
 msgstr "قومية / ثقافة"
+
+#: includes/topersia-g-map.php
+msgid "قیمت دوگانه"
+msgstr "التسعير المزدوج"
 
 #: includes/topersia-g-map.php
 msgid "لباس زنانه"
@@ -2082,6 +2186,10 @@ msgid "ماکسیم"
 msgstr "ماكسيم"
 
 #: includes/topersia-g-map.php
+msgid "مبادی صدور روادید فرودگاهی"
+msgstr "منافذ إصدار التأشيرة عند الوصول"
+
+#: includes/topersia-g-map.php
 msgid "متر"
 msgstr "متر"
 
@@ -2124,6 +2232,10 @@ msgstr "محدود"
 #: includes/topersia-g-map.php
 msgid "محدودۀ جغرافیایی"
 msgstr "النطاق الجغرافي"
+
+#: includes/topersia-g-map.php
+msgid "محدودیت‌های ورود"
+msgstr "قيود الدخول"
 
 #: includes/topersia-g-zones.php
 msgid "محل برگزاری"
@@ -2315,6 +2427,10 @@ msgstr "المحتوى"
 msgid "مطالب ما را بیشتر در نتایج گوگل و AI Mode ببینید"
 msgstr "شاهد المزيد من محتوانا في نتائج Google وAI Mode"
 
+#: includes/topersia-g-map.php
+msgid "معادل تومان"
+msgstr "ما يعادلها بالتومان"
+
 #: includes/topersia-g-zones.php
 msgid "معافیت فقط در مناطق آزاد"
 msgstr "إعفاء في المناطق الحرة فقط"
@@ -2380,6 +2496,10 @@ msgstr "المناسبة"
 msgid "مناسب‌ترین فصل برای سفر"
 msgstr "أفضل موسم للسفر"
 
+#: includes/topersia-g-zones.php
+msgid "منبع"
+msgstr "المصدر"
+
 #: includes/topersia-g-news.php
 msgid "منبع اصلی:"
 msgstr "المصدر الأصلي:"
@@ -2427,6 +2547,10 @@ msgstr "هجرة الطيور"
 #: includes/topersia-g-map.php
 msgid "مهر"
 msgstr "مهر"
+
+#: includes/topersia-g-map.php
+msgid "مهر پاسپورت"
+msgstr "ختم جواز السفر"
 
 #: includes/topersia-g-zones.php
 msgid "مواد اصلی"
@@ -2501,6 +2625,10 @@ msgid "میراث ناملموس یونسکو"
 msgstr "التراث غير المادي لليونسكو"
 
 #: includes/topersia-g-map.php
+msgid "میزان پول نقد"
+msgstr "مقدار النقد الموصى به"
+
+#: includes/topersia-g-map.php
 msgid "میلادی"
 msgstr "ميلادي"
 
@@ -2543,6 +2671,10 @@ msgstr "الاسم الرسمي بالفارسية"
 #: includes/topersia-g-map.php
 msgid "نام فرودگاه"
 msgstr "المطار"
+
+#: includes/topersia-g-map.php
+msgid "نام مبدأ"
+msgstr "المنفذ"
 
 #: includes/topersia-g-map.php
 msgid "نام مذهبی"
@@ -2703,6 +2835,10 @@ msgid "نوشیدنی محلی"
 msgstr "مشروب محلي"
 
 #: includes/topersia-g-map.php
+msgid "نوع"
+msgstr "النوع"
+
+#: includes/topersia-g-map.php
 msgid "نوع C"
 msgstr "النوع C"
 
@@ -2745,6 +2881,10 @@ msgstr "نوع الملوحة"
 #: includes/topersia-g-map.php
 msgid "نوع عارضه"
 msgstr "نوع المعلم"
+
+#: includes/topersia-g-map.php
+msgid "نوع مبدأ"
+msgstr "نوع المنفذ"
 
 #: includes/topersia-g-map.php
 msgid "نوع محله"
@@ -2916,6 +3056,14 @@ msgstr "الوحدة"
 msgid "واحد پول"
 msgstr "العملة"
 
+#: includes/topersia-g-map.php
+msgid "واحد پول هزینه"
+msgstr "عملة الرسوم"
+
+#: includes/topersia-g-map.php
+msgid "واحد چاپ‌شده"
+msgstr "الوحدة المطبوعة"
+
 #: includes/topersia-g-zones.php
 msgid "وارد شوید یا ثبت‌نام کنید"
 msgstr "سجّل الدخول أو أنشئ حسابًا"
@@ -2939,6 +3087,10 @@ msgstr "الرياضات المائية"
 #: includes/topersia-g-map.php
 msgid "ورزش زمستانی"
 msgstr "الرياضات الشتوية"
+
+#: includes/topersia-g-map.php
+msgid "ورود به سرزمین اصلی از منطقۀ آزاد"
+msgstr "الدخول إلى البر الرئيسي من المنطقة الحرة"
 
 #: includes/topersia-g-map.php
 msgid "ورود غیرمسلمان"
@@ -3027,8 +3179,16 @@ msgid "پاسخ کوتاه"
 msgstr "إجابات سريعة"
 
 #: includes/topersia-g-map.php
+msgid "پاسپورت دیپلماتیک و خدمت"
+msgstr "الجوازات الدبلوماسية وجوازات الخدمة"
+
+#: includes/topersia-g-map.php
 msgid "پایان"
 msgstr "النهاية"
+
+#: includes/topersia-g-map.php
+msgid "پایان دورۀ گذار"
+msgstr "نهاية الفترة الانتقالية"
 
 #: includes/topersia-g-zones.php
 msgid "پایان صفحه"
@@ -3055,12 +3215,20 @@ msgid "پذیرش محدود"
 msgstr "قبول محدود"
 
 #: includes/topersia-g-map.php
+msgid "پذیرش کارت"
+msgstr "قبول البطاقات"
+
+#: includes/topersia-g-map.php
 msgid "پذیرفته می‌شود"
 msgstr "مقبولة"
 
 #: includes/topersia-g-map.php
 msgid "پذیرفته نمی‌شود"
 msgstr "غير مقبولة"
+
+#: includes/topersia-g-map.php
+msgid "پرداخت دیجیتال"
+msgstr "الدفع الرقمي"
 
 #: includes/topersia-g-zones.php
 msgid "پرسش‌ها"
@@ -3207,6 +3375,10 @@ msgid "کارت بین‌المللی کار می‌کند؟"
 msgstr "هل تعمل البطاقات الدولية؟"
 
 #: includes/topersia-g-map.php
+msgid "کارت گردشگری"
+msgstr "بطاقة السياح"
+
+#: includes/topersia-g-map.php
 msgid "کاروانسرا"
 msgstr "خان القوافل"
 
@@ -3217,6 +3389,10 @@ msgstr "البلاط المزخرف"
 #: includes/topersia-g-map.php
 msgid "کامل"
 msgstr "كامل"
+
+#: includes/topersia-g-map.php
+msgid "کانال‌های تبدیل و رسید"
+msgstr "قنوات الصرف والإيصالات"
 
 #: topersia-render.php
 msgid "کاهش شدت رنگ و نور"
@@ -3237,6 +3413,10 @@ msgstr "غير منقَّب"
 #: includes/topersia-g-map.php
 msgid "کباب"
 msgstr "كباب"
+
+#: includes/topersia-g-map.php
+msgid "کد"
+msgstr "الرمز"
 
 #: includes/topersia-g-map.php
 msgid "کد ISO"
@@ -3265,6 +3445,10 @@ msgstr "دولة"
 #: includes/topersia-g-map.php
 msgid "کشور مقابل"
 msgstr "الدولة المقابلة"
+
+#: includes/topersia-g-map.php
+msgid "کشورهای مستثنا از منطقۀ آزاد"
+msgstr "الدول المستثناة من المنطقة الحرة"
 
 #: includes/topersia-g-map.php
 msgid "کشورهای همسایه"
@@ -3420,8 +3604,16 @@ msgid "گیاهی"
 msgstr "نباتي"
 
 #: includes/topersia-g-map.php
+msgid "یادداشت"
+msgstr "ملاحظة"
+
+#: includes/topersia-g-map.php
 msgid "یادداشت ارز"
 msgstr "ملاحظة حول العملة"
+
+#: includes/topersia-g-map.php
+msgid "یادداشت‌های استانی"
+msgstr "ملاحظات المحافظات"
 
 #: includes/topersia-g-map.php
 msgid "یک روز کامل"
