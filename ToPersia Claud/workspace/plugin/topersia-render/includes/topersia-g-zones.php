@@ -740,6 +740,20 @@ if ( ! function_exists( 'topersia_g_verified_types' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_is_stale' ) ) {
+	/** تاریخ بازبینی از آستانه گذشته؟ تاریخ خالی یا نامعتبر، آستانۀ صفر و تاریخ آینده هرگز.  P5-D497 */
+	function topersia_g_is_stale( $iso, $days, $now = 0 ) {
+
+		$time = '' !== (string) $iso ? strtotime( (string) $iso ) : false;
+
+		if ( false === $time || (int) $days <= 0 ) {
+			return false;
+		}
+
+		return ( ( $now ? $now : time() ) - $time ) > (int) $days * 86400;
+	}
+}
+
 if ( ! function_exists( 'topersia_g_verified_stamp' ) ) {
 	/**
 	 * خط «آخرین بازبینی · منبع» کنار بلوک. تاریخ فقط با وضعیت همین زبان (P5-D308)؛ هر دو خالی ← هیچ.  P5-D492
@@ -755,6 +769,10 @@ if ( ! function_exists( 'topersia_g_verified_stamp' ) ) {
 
 		if ( '' !== $iso ) {
 			$parts[] = esc_html__( 'آخرین بازبینی', 'topersia' ) . ': <time datetime="' . esc_attr( $iso ) . '">' . esc_html( topersia_g_date_fa( $iso ) ) . '</time>';
+
+			if ( topersia_g_is_stale( $iso, function_exists( 'topersia_render_setting' ) ? topersia_render_setting( 'stale_days_' . get_post_type( $pid ), 0 ) : 0 ) ) {
+				$parts[] = '<strong class="tp-verified__stale">' . esc_html__( 'ممکن است قدیمی باشد', 'topersia' ) . '</strong>';
+			}
 		}
 
 		foreach ( topersia_g_rows( $pid, 'source_references' ) as $row ) {

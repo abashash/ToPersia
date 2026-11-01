@@ -971,6 +971,7 @@ html body .tp-page .tp-data-table th,html body .tp-page .tp-data-table td{paddin
 html body .tp-page .tp-data-table th{font-weight:700}
 html body .tp-page .tp-verified{margin-block:12px 0;font-size:calc(.82 * var(--tp-rem));line-height:1.7;color:var(--tp-text)}
 html body .tp-page .tp-verified a{color:var(--tp-primary-text);text-decoration:underline;text-underline-offset:2px}
+html body .tp-page .tp-verified__stale{font-weight:600;color:var(--tp-text)}
 html body .tp-page .tp-hours{border-collapse:collapse;inline-size:100%;font-size:calc(.82 * var(--tp-rem))}
 html body .tp-page .tp-hours th,html body .tp-page .tp-hours td{padding:3px 0;text-align:start;font-weight:400;color:var(--tp-text);border-block-end:1px solid var(--tp-tile-border)}
 html body .tp-page .tp-hours th{font-weight:700;inline-size:45%}

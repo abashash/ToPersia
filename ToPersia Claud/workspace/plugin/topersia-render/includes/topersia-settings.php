@@ -27,9 +27,22 @@ if ( function_exists( 'topersia_render_settings_all' ) ) {
  *
  * @return array
  */
+if ( ! function_exists( 'topersia_render_stale_types' ) ) {
+	/** آستانۀ پیش‌فرض هشدار «ممکن است قدیمی باشد» به روز؛ صفر خاموش. پیشنهادی‌اند، نه مصوب.  P5-D497 */
+	function topersia_render_stale_types() {
+		return array( 'tp_currency' => 30, 'tp_visa' => 90 );
+	}
+}
+
 if ( ! function_exists( 'topersia_render_settings_defaults' ) ) {
 	function topersia_render_settings_defaults() {
-		return array(
+		$stale = array();
+
+		foreach ( topersia_render_stale_types() as $type => $days ) {
+			$stale[ 'stale_days_' . $type ] = $days;
+		}
+
+		return $stale + array(
 			'font_name'        => '',
 			'font_variable'    => 0,
 			'font_woff2'       => '',
@@ -204,6 +217,10 @@ if ( ! function_exists( 'topersia_render_settings_sanitize' ) ) {
 			'ai_user_daily'  => array( 0, 1000, 5 ),
 			'ai_site_daily'  => array( 0, 100000, 100 ),
 		);
+
+		foreach ( topersia_render_stale_types() as $type => $days ) {
+			$ranges[ 'stale_days_' . $type ] = array( 0, 3650, $days );
+		}
 
 		foreach ( $ranges as $key => $r ) {
 			$n             = isset( $input[ $key ] ) ? (int) $input[ $key ] : $r[2];
@@ -571,6 +588,7 @@ if ( ! function_exists( 'topersia_render_settings_page' ) ) {
 				<button type="button" role="tab" data-tp-tab="shape"  aria-selected="false"><?php echo esc_html__( 'شکل و ابعاد', 'topersia' ); ?></button>
 				<button type="button" role="tab" data-tp-tab="color"  aria-selected="false"><?php echo esc_html__( 'رنگ', 'topersia' ); ?></button>
 				<button type="button" role="tab" data-tp-tab="ai"     aria-selected="false"><?php echo esc_html__( 'هوش مصنوعی', 'topersia' ); ?></button>
+				<button type="button" role="tab" data-tp-tab="stale"  aria-selected="false"><?php echo esc_html__( 'تازگی داده', 'topersia' ); ?></button>
 				<button type="button" role="tab" data-tp-tab="bridge" aria-selected="false">
 					<?php echo esc_html__( 'پل تم', 'topersia' ); ?><?php echo $dead ? ' ●' : ''; ?>
 				</button>
@@ -789,6 +807,26 @@ if ( ! function_exists( 'topersia_render_settings_page' ) ) {
 											min="<?php echo (int) $tp_f[1]; ?>" max="<?php echo (int) $tp_f[2]; ?>" step="1"
 											name="topersia_render_settings[<?php echo esc_attr( $tp_key ); ?>]"
 											value="<?php echo esc_attr( (int) $o[ $tp_key ] ); ?>"> <?php echo esc_html__( 'بار در روز', 'topersia' ); ?>
+									</span>
+								</div>
+							<?php endforeach; ?>
+						</div>
+					</div>
+				</div>
+
+				<div class="tp-panel" data-tp-panel="stale" hidden>
+					<div class="tp-grid">
+						<div class="tp-card">
+							<h2><?php echo esc_html__( 'هشدار «ممکن است قدیمی باشد»', 'topersia' ); ?></h2>
+							<p class="hint"><?php echo esc_html__( 'از سن تاریخ بازبینی پست، کنار مهر بازبینی. این عددها پیشنهادی‌اند. صفر یعنی خاموش.', 'topersia' ); ?></p>
+							<?php foreach ( array_keys( topersia_render_stale_types() ) as $tp_type ) : $tp_key = 'stale_days_' . $tp_type; ?>
+								<div class="tp-field">
+									<label for="tp_<?php echo esc_attr( $tp_key ); ?>"><?php echo esc_html( function_exists( 'topersia_g_kind_labels' ) && isset( topersia_g_kind_labels()[ $tp_type ] ) ? topersia_g_kind_labels()[ $tp_type ] : $tp_type ); ?></label>
+									<span>
+										<input type="number" id="tp_<?php echo esc_attr( $tp_key ); ?>"
+											min="0" max="3650" step="1"
+											name="topersia_render_settings[<?php echo esc_attr( $tp_key ); ?>]"
+											value="<?php echo esc_attr( (int) $o[ $tp_key ] ); ?>"> <?php echo esc_html__( 'روز', 'topersia' ); ?>
 									</span>
 								</div>
 							<?php endforeach; ?>

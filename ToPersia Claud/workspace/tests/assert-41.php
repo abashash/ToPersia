@@ -158,9 +158,10 @@ tp441_mut( 'P5-D492: تاریخ بازبینی و منبع کنار هر دو ب
 $GLOBALS['tp_meta'][8101]['content_status'] = '';
 t( 'P5-D492 · P5-D308: ترجمهٔ بی وضعیت همین زبان تاریخ اصل را نشان نمی‌دهد؛ منبع می‌ماند',
 	false === strpos( r( 8101, 'tp_overview' ), '<time datetime="2026-10-20">' ) && false !== strpos( r( 8101, 'tp_overview' ), 'href="https://cbi.ir/"' ) );
+$GLOBALS['tp_meta'][8101]['content_status'] = 'needs_verification';
 t( 'P5-D492: نوع دیگر (استان) با همان تاریخ مهر نمی‌گیرد', false === strpos( r( 8104, 'tp_overview' ), 'tp-verified' ) );
 $w41_vol = function ( $src ) { return false === strpos( $src, 'volatility_flag' ); };
-tp441_mut( 'volatility_flag در طرح نیست، پس هشدار «ممکن است قدیمی باشد» هم ساخته نشد (P5-D492؛ پیشنهاد ۳۰ روز در گزارش) — جهش: کدی که نامش را بیاورد می‌افتد',
+tp441_mut( 'volatility_flag در طرح نیست و هشدار قدیمی‌بودن بی فیلد تازه از سن تاریخ می‌آید (P5-D497) — جهش: کدی که نامش را بیاورد می‌افتد',
 	$w41_vol, file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-zones.php' ), "'volatility_flag'" );
 
 /* ۷ — بی کد به‌ازای فیلد */

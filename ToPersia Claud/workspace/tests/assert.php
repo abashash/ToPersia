@@ -2308,6 +2308,7 @@ require __DIR__ . '/assert-39.php';
 require __DIR__ . '/assert-40.php';
 require __DIR__ . '/assert-41.php';
 require __DIR__ . '/assert-496.php';   /* P5-D496 · P5-D495 */
+require __DIR__ . '/assert-497.php';   /* P5-D497 */
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

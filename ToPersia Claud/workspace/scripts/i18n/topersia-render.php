@@ -989,6 +989,7 @@ return array(
 	'روادید فرودگاهی' => array( 'en' => 'Visa on arrival', 'ar' => 'تأشيرة عند الوصول' ),
 	'ملزم به روادید الکترونیکی پیشین' => array( 'en' => 'E-visa required in advance', 'ar' => 'تأشيرة إلكترونية مسبقة مطلوبة' ),
 	'ملزم به تور هدایت‌شده' => array( 'en' => 'Guided tour required', 'ar' => 'جولة مصحوبة بمرشد مطلوبة' ),
+	'ممکن است قدیمی باشد' => array( 'en' => 'May be out of date', 'ar' => 'قد تكون قديمة' ),
 	'ممنوع‌الورود' => array( 'en' => 'Entry prohibited', 'ar' => 'الدخول ممنوع' ),
 
 );

@@ -2481,6 +2481,10 @@ msgid "ممنوع‌الورود"
 msgstr "Entry prohibited"
 
 #: includes/topersia-g-zones.php
+msgid "ممکن است قدیمی باشد"
+msgstr "May be out of date"
+
+#: includes/topersia-g-zones.php
 msgid "منابع"
 msgstr "Sources"
 

@@ -620,6 +620,7 @@ return array (
     'ملیله' => 'Filigree',
     'ممنوع' => 'Prohibited',
     'ممنوع‌الورود' => 'Entry prohibited',
+    'ممکن است قدیمی باشد' => 'May be out of date',
     'منابع' => 'Sources',
     'منابع و راستی‌آزمایی' => 'Sources and verification',
     'مناسبت' => 'Occasion',
