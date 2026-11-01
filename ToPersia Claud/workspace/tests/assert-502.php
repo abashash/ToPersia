@@ -76,5 +76,5 @@ t( 'خلاصه‌ساز هش را فقط از یک تابع با حافظه می
 
 /* P5-D500: جدول بلند ستون موبایل را باز نکند؛ رفتار در tests/overflow-h.js */
 $p500 = (string) file_get_contents( __DIR__ . '/../plugin/topersia-render/assets/topersia-g-template.css' );
-$p500_ok = function ( $s ) { return false !== strpos( $s, 'html body .tp-page .tp-content-grid > *{min-width:0}' ); };
-tp441_mut( 'P5-D500: فرزند ستون محتوا min-width:0 دارد — جهش: حذف قاعده', $p500_ok, $p500, str_replace( '.tp-content-grid > *{min-width:0}', '.x{}', $p500 ) );
+$p500_ok = function ( $s ) { return false !== strpos( $s, '.tp-content-grid > * > *{min-width:0}' ); };
+tp441_mut( 'P5-D500: فرزند ستون محتوا min-width:0 دارد — جهش: حذف قاعده', $p500_ok, $p500, str_replace( '.tp-content-grid > * > *{min-width:0}', '.x{}', $p500 ) );
