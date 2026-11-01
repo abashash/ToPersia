@@ -1009,4 +1009,15 @@ return array(
 	'ممکن است قدیمی باشد' => array( 'en' => 'May be out of date', 'ar' => 'قد تكون قديمة' ),
 	'ممنوع‌الورود' => array( 'en' => 'Entry prohibited', 'ar' => 'الدخول ممنوع' ),
 
+	'بخش‌های برنامه' => array( 'en' => 'Programme highlights', 'ar' => 'أقسام البرنامج' ),
+	'بخش' => array( 'en' => 'Part', 'ar' => 'القسم' ),
+	'توضیح' => array( 'en' => 'Description', 'ar' => 'الوصف' ),
+	'اثرگذار بر برنامۀ سفر' => array( 'en' => 'Affects travel plans', 'ar' => 'يؤثر في خطة السفر' ),
+	'شرایط ورود و بلیت' => array( 'en' => 'Admission and tickets', 'ar' => 'شروط الدخول والتذاكر' ),
+	'مناسب‌بودن برای گردشگر' => array( 'en' => 'Suitability for tourists', 'ar' => 'الملاءمة للسياح' ),
+	'منطقۀ مدیریت‌شده' => array( 'en' => 'Managed area', 'ar' => 'منطقة مدارة' ),
+	'نیاز به مجوز ورود' => array( 'en' => 'Entry permit required', 'ar' => 'يلزم تصريح دخول' ),
+	'گونه‌های شاخص' => array( 'en' => 'Key species', 'ar' => 'الأنواع البارزة' ),
+	'ژئوپارک' => array( 'en' => 'Geopark', 'ar' => 'منتزه جيولوجي' ),
+	'فعالیت‌های مجاز' => array( 'en' => 'Permitted activities', 'ar' => 'الأنشطة المسموح بها' ),
 );

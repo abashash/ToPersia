@@ -133,10 +133,10 @@ t( 'بی کد به‌ازای فیلد: هیچ کلیدی در رندر نامی
 	array() === $w42_code( '' ) && array() !== $w42_code( "if ( 'air_travel_note' === \$name ) {}" ), implode( ' · ', $w42_code( '' ) ) );
 
 /* ۸ — بسته: فهرست گسترش یافته و هم‌خوان */
-$w42_five = "array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar' )";
+$w42_five = "array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' )";
 $w42_pack = function ( $s ) use ( $w42_five ) { return false !== strpos( $s, 'return ' . $w42_five . ';' ); };
 tp441_mut( 'بسته: تاریخ بازبینی و منبع برای این سه نوع هم اجباری؛ یک فهرست با رندر — جهش: نوعی حذف شود می‌افتد', $w42_pack, $w42_core, str_replace( "'tp_transport', ", '', $w42_core ) );
-t( 'فهرست رندر با هسته یکی است', topersia_g_verified_types() === array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar' ) );
+t( 'فهرست رندر با هسته یکی است', topersia_g_verified_types() === array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' ) );
 
 $GLOBALS['tp_posts'] = $keep42[0]; $GLOBALS['tp_meta'] = $keep42[1];
 if ( null === $keep42[2] ) { unset( $GLOBALS['tp_rel'] ); } else { $GLOBALS['tp_rel'] = $keep42[2]; }

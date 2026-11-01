@@ -964,6 +964,8 @@ html body .tp-page .tp-visit dd a{color:var(--tp-primary-text);text-decoration:u
 html body .tp-page .tp-visit__list{margin:0;padding-inline-start:1.1em}
 html body .tp-page .tp-visit__note{display:block;font-size:calc(.72 * var(--tp-rem));color:var(--tp-text)}
 /* P5-D491 جدول عمومی فیلد تکرارشونده — کشش افقی در ظرف خودش · P5-D492 مهر بازبینی */
+/* P5-D500 ستون تک موبایل 1fr است؛ بی min-width:0 جدول بلند ستون را باز می‌کند و کشش جدول بی‌اثر می‌شود */
+html body .tp-page .tp-content-grid > *{min-width:0}
 html body .tp-page .tp-data-table{max-inline-size:100%;overflow-x:auto;margin-block:8px 14px}
 html body .tp-page .tp-data-table:focus-visible{outline:2px solid var(--tp-primary);outline-offset:2px}
 html body .tp-page .tp-data-table table{border-collapse:collapse;inline-size:100%;font-size:calc(.86 * var(--tp-rem))}

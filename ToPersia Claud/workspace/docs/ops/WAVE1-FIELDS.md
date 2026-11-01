@@ -99,3 +99,23 @@
 | `crowding_and_price_note` | `tp_calendar` | wysiwyg | rich | details | translate | ازدحام و نوسان قیمت |
 | `best_worst_time_note` | `tp_calendar` | wysiwyg | rich | details | translate | بهترین و بدترین زمان سفر |
 | `lunar_date_disclaimer` | `tp_calendar` | textarea | text | details | translate | هشدار تاریخ‌های قمری |
+
+## ۷ — دستهٔ 43: جشنواره و منطقهٔ حفاظت‌شده · P5-D485
+
+ردیف DISPLAY پنج نوع باقی‌مانده: جشنواره ۱۳ · ورزشی ۶ · فصلی ۴ · مذهبی ۱۰ · حفاظت‌شده ۸ = ۴۱؛ یکتا ۲۰ کلید فیلد + ۱۸ رابطه = ۳۸، بالاتر از سقف ۳۵ بریف. پس فقط `tp_protected_area` و `tp_festival` اینجا ساخته شد؛ `tp_sports_event`، `tp_seasonal_event` و `tp_religious_event` به دستهٔ 44 رفت. `is_recurring` از دستهٔ 40 هست و تکرار نشد. مهر بازبینی و اجبار بسته برای این دو نوع هم روشن است (شرایط ورود، بلیت و مجوز حساس به زمان‌اند)؛ آستانهٔ تازگی برایشان تعریف نشد.
+
+| کلید | نوع پست | جت‌انجین | نوع رندر | ناحیه | WPML | برچسب |
+|---|---|---|---|---|---|---|
+| `program_highlights` | `tp_festival` | repeater | table | details | translate | بخش‌های برنامه |
+| `event_travel_impact` | `tp_festival` | switcher | flag | badge | copy | اثرگذار بر برنامهٔ سفر |
+| `admission_note` | `tp_festival` | textarea | text | details | translate | شرایط ورود و بلیت |
+| `tourist_suitability_note` | `tp_festival` | textarea | text | details | translate | مناسب‌بودن برای گردشگر |
+| `managed_area` | `tp_protected_area` | switcher | flag | badge | copy | منطقهٔ مدیریت‌شده |
+| `entry_permit_required` | `tp_protected_area` | switcher | flag | visit | copy | نیاز به مجوز ورود |
+| `key_species` | `tp_protected_area` | textarea | text | details | translate | گونه‌های شاخص |
+| `geopark` | `tp_protected_area` | switcher | flag | badge | copy | ژئوپارک |
+| `activities` | `tp_natural_feature`، `tp_protected_area` | textarea | text | details | translate | فعالیت‌های مجاز |
+
+سه نکتهٔ باز: `event_travel_impact` در TA-I18N رابطه به P6 است ولی در جت‌انجین سوییچ و در WPML copy؛ همان سوییچ نمایش داده شد. `key_species` در TA آرایهٔ متن است و در جت‌انجین textarea؛ متن ساده نمایش داده شد. `activities` کلید سراسری است، پس روی `tp_natural_feature` (ردیف ۸۶ پیشنهاد، همان برچسب) هم می‌آید.
+
+بخش «برنامه» پیشنهادی CSV برای `program_highlights` ناحیهٔ FIELDMAP نیست و `[tp_programmes]` اسلایدر نشان است؛ پس جدول در «درباره» آمد.

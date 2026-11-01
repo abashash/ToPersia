@@ -187,6 +187,10 @@ msgstr "Natural monument / reserve"
 msgid "اثر طبیعی ملی"
 msgstr "National natural monument"
 
+#: includes/topersia-g-map.php
+msgid "اثرگذار بر برنامۀ سفر"
+msgstr "Affects travel plans"
+
 #: includes/topersia-g-gallery-agg.php
 #, php-format
 msgid "اجرا: %d"
@@ -484,6 +488,10 @@ msgid "بالا"
 msgstr "Top"
 
 #: includes/topersia-g-map.php
+msgid "بخش"
+msgstr "Part"
+
+#: includes/topersia-g-map.php
 msgid "بخشی"
 msgstr "Partial"
 
@@ -494,6 +502,10 @@ msgstr "Sections"
 #: includes/topersia-g-zones.php
 msgid "بخش‌های این صفحه"
 msgstr "Sections on this page"
+
+#: includes/topersia-g-map.php
+msgid "بخش‌های برنامه"
+msgstr "Programme highlights"
 
 #: includes/topersia-g-zones.php
 msgid "بخش‌های صفحه"
@@ -838,6 +850,10 @@ msgstr "Mandatory tour"
 #: includes/topersia-g-map.php
 msgid "تور یا راهنما لازم است"
 msgstr "Guide or tour required"
+
+#: includes/topersia-g-map.php
+msgid "توضیح"
+msgstr "Description"
 
 #: includes/topersia-g-map.php
 msgid "توضیح نظام تقویمی"
@@ -1775,6 +1791,10 @@ msgstr "Nightlife"
 msgid "شخصیت تاریخی"
 msgstr "Historical figure"
 
+#: includes/topersia-g-map.php
+msgid "شرایط ورود و بلیت"
+msgstr "Admission and tickets"
+
 #: includes/topersia-g-zones.php
 msgid "شرق"
 msgstr "East"
@@ -2039,6 +2059,10 @@ msgstr "Seasonal"
 #: includes/topersia-g-map.php
 msgid "فعال"
 msgstr "Active"
+
+#: includes/topersia-g-map.php
+msgid "فعالیت‌های مجاز"
+msgstr "Permitted activities"
 
 #: includes/topersia-g-map.php
 msgid "فقط حیاط"
@@ -2541,6 +2565,10 @@ msgid "مناسبت"
 msgstr "Occasion"
 
 #: includes/topersia-g-map.php
+msgid "مناسب‌بودن برای گردشگر"
+msgstr "Suitability for tourists"
+
+#: includes/topersia-g-map.php
 msgid "مناسب‌ترین فصل برای سفر"
 msgstr "Best season to travel"
 
@@ -2579,6 +2607,10 @@ msgstr "Protected area"
 #: includes/topersia-g-map.php
 msgid "منطقۀ زمانی"
 msgstr "Time zone"
+
+#: includes/topersia-g-map.php
+msgid "منطقۀ مدیریت‌شده"
+msgstr "Managed area"
 
 #: includes/topersia-g-zones.php
 msgid "منظر فرهنگی"
@@ -2973,6 +3005,10 @@ msgstr "General safety notes"
 #: includes/topersia-g-zones.php
 msgid "نکات کلیدی"
 msgstr "Key points"
+
+#: includes/topersia-g-map.php
+msgid "نیاز به مجوز ورود"
+msgstr "Entry permit required"
 
 #: includes/topersia-g-map.php
 msgid "نیازمند بازبینی پس از اجلاس"
@@ -3419,6 +3455,10 @@ msgid "چینی"
 msgstr "Chinese"
 
 #: includes/topersia-g-map.php
+msgid "ژئوپارک"
+msgstr "Geopark"
+
+#: includes/topersia-g-map.php
 msgid "ژئوپارک جهانی یونسکو"
 msgstr "UNESCO Global Geopark"
 
@@ -3662,6 +3702,10 @@ msgstr "Wildflowers"
 #: includes/topersia-g-map.php
 msgid "گونه"
 msgstr "Type"
+
+#: includes/topersia-g-map.php
+msgid "گونه‌های شاخص"
+msgstr "Key species"
 
 #: includes/topersia-g-map.php
 msgid "گویشوران در ایران"

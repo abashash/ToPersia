@@ -186,6 +186,10 @@ msgstr ""
 msgid "اثر طبیعی ملی"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "اثرگذار بر برنامۀ سفر"
+msgstr ""
+
 #: includes/topersia-g-gallery-agg.php
 #, php-format
 msgid "اجرا: %d"
@@ -483,6 +487,10 @@ msgid "بالا"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "بخش"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "بخشی"
 msgstr ""
 
@@ -492,6 +500,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "بخش‌های این صفحه"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "بخش‌های برنامه"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -836,6 +848,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "تور یا راهنما لازم است"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "توضیح"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1774,6 +1790,10 @@ msgstr ""
 msgid "شخصیت تاریخی"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "شرایط ورود و بلیت"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "شرق"
 msgstr ""
@@ -2037,6 +2057,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "فعال"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "فعالیت‌های مجاز"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2540,6 +2564,10 @@ msgid "مناسبت"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "مناسب‌بودن برای گردشگر"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "مناسب‌ترین فصل برای سفر"
 msgstr ""
 
@@ -2577,6 +2605,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "منطقۀ زمانی"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "منطقۀ مدیریت‌شده"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -2971,6 +3003,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "نکات کلیدی"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "نیاز به مجوز ورود"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3418,6 +3454,10 @@ msgid "چینی"
 msgstr ""
 
 #: includes/topersia-g-map.php
+msgid "ژئوپارک"
+msgstr ""
+
+#: includes/topersia-g-map.php
 msgid "ژئوپارک جهانی یونسکو"
 msgstr ""
 
@@ -3660,6 +3700,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "گونه"
+msgstr ""
+
+#: includes/topersia-g-map.php
+msgid "گونه‌های شاخص"
 msgstr ""
 
 #: includes/topersia-g-map.php

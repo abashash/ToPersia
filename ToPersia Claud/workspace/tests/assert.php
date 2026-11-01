@@ -129,7 +129,7 @@ t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', fal
 
 /* پوشش نقشه */
 /* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است؛ kind=date تاریخ رویداد E1 · E3 · E5 (P5-D357) است، نه فیلد G */
-$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ) && empty( $f['p5d470'] ) && empty( $f['wave1'] ) && empty( $f['wave2'] ) && 'visit' !== $f['zone'] && empty( $f['b29'] ); } );   /* P5-D450 و فیلدهای بازگشتهٔ دستهٔ ۲۹ جدا سنجیده می‌شوند */
+$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ) && empty( $f['p5d470'] ) && empty( $f['wave1'] ) && empty( $f['wave2'] ) && empty( $f['wave2b'] ) && 'visit' !== $f['zone'] && empty( $f['b29'] ); } );   /* P5-D450 و فیلدهای بازگشتهٔ دستهٔ ۲۹ جدا سنجیده می‌شوند */
 $map_count = count( $g_map );
 t( 'نقشه: دقیقاً ۵۸ فیلد G (بیرون از ناحیۀ stat) — ۵۷ + ritual_context_reference (دستهٔ 34 · P5-D467: از سربرگ به «درباره»)', 58 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
@@ -2313,6 +2313,7 @@ require __DIR__ . '/assert-497.php';   /* P5-D497 */
 require __DIR__ . '/assert-42.php';    /* P5-D498 */
 require __DIR__ . '/assert-499.php';   /* P5-D499 */
 require __DIR__ . '/assert-502.php';   /* P5-D502 */
+require __DIR__ . '/assert-43.php';   /* P5-D485 دستهٔ 43 */
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

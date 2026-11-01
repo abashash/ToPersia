@@ -73,3 +73,8 @@ $p502_r = (string) file_get_contents( __DIR__ . '/../plugin/topersia-render/tope
 t( 'render هش را از حافظهٔ هسته می‌گیرد تا یک فایل دو بار هش نشود', false !== strpos( $p502_r, "function_exists( 'topersia_asset_hash_ver' )" ) );
 $p502_af = (string) file_get_contents( __DIR__ . '/../plugin/topersia-ai-summarizer/includes/class-tp-ai-frontend.php' ) . (string) file_get_contents( __DIR__ . '/../plugin/topersia-ai-summarizer/includes/class-tp-ai-admin.php' );
 t( 'خلاصه‌ساز هش را فقط از یک تابع با حافظه می‌گیرد', 1 === substr_count( $p502_af, 'function tp_ai_asset_ver( $file )' ) && 1 === substr_count( $p502_af, 'md5_file(' ) );
+
+/* P5-D500: جدول بلند ستون موبایل را باز نکند؛ رفتار در tests/overflow-h.js */
+$p500 = (string) file_get_contents( __DIR__ . '/../plugin/topersia-render/assets/topersia-g-template.css' );
+$p500_ok = function ( $s ) { return false !== strpos( $s, 'html body .tp-page .tp-content-grid > *{min-width:0}' ); };
+tp441_mut( 'P5-D500: فرزند ستون محتوا min-width:0 دارد — جهش: حذف قاعده', $p500_ok, $p500, str_replace( '.tp-content-grid > *{min-width:0}', '.x{}', $p500 ) );

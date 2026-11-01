@@ -297,6 +297,19 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'crowding_and_price_note' => array( 'label' => 'ازدحام و نوسان قیمت', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
 		'best_worst_time_note' => array( 'label' => 'بهترین و بدترین زمان سفر', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
 		'lunar_date_disclaimer' => array( 'label' => 'هشدار تاریخ‌های قمری', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2' => true ),
+		/* دستۀ 43 · P5-D485 — موج ۲، بقیه: tp_festival و tp_protected_area. فقط نگاشت؛ کدی به‌ازای فیلد نیست. */
+		'program_highlights' => array( 'label' => 'بخش‌های برنامه', 'unit' => '', 'kind' => 'table', 'zone' => 'details', 'wave2b' => true, 'cols' => array(
+			'ph_title'       => array( 'label' => 'بخش', 'kind' => 'text' ),
+			'ph_description' => array( 'label' => 'توضیح', 'kind' => 'text' ),
+		) ),
+		'event_travel_impact' => array( 'label' => 'اثرگذار بر برنامۀ سفر', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge', 'wave2b' => true ),
+		'admission_note' => array( 'label' => 'شرایط ورود و بلیت', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2b' => true ),
+		'tourist_suitability_note' => array( 'label' => 'مناسب‌بودن برای گردشگر', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2b' => true ),
+		'managed_area' => array( 'label' => 'منطقۀ مدیریت‌شده', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge', 'wave2b' => true ),
+		'entry_permit_required' => array( 'label' => 'نیاز به مجوز ورود', 'unit' => '', 'kind' => 'flag', 'zone' => 'visit', 'wave2b' => true ),
+		'key_species' => array( 'label' => 'گونه‌های شاخص', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2b' => true ),
+		'geopark' => array( 'label' => 'ژئوپارک', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge', 'wave2b' => true ),
+		'activities' => array( 'label' => 'فعالیت‌های مجاز', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2b' => true ),
 		/* P5-D491 — tp_visa */
 		'guided_tour_note' => array( 'label' => 'تور اجباری', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave1' => true ),
 		'free_zone_mainland_allowed' => array( 'label' => 'ورود به سرزمین اصلی از منطقۀ آزاد', 'unit' => '', 'kind' => 'flag', 'zone' => 'travel', 'wave1' => true ),

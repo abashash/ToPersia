@@ -2604,6 +2604,134 @@
    "post_types": [
     "tp_health_safety"
    ]
+  },
+  "program_highlights": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "table",
+   "jet_type": "repeater",
+   "wpml": "translate",
+   "post_types": [
+    "tp_festival"
+   ]
+  },
+  "event_travel_impact": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_festival"
+   ]
+  },
+  "admission_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_festival"
+   ]
+  },
+  "tourist_suitability_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_festival"
+   ]
+  },
+  "managed_area": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_protected_area"
+   ]
+  },
+  "entry_permit_required": {
+   "consumers": [
+    "FIELDMAP:visit",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "visit",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_protected_area"
+   ]
+  },
+  "key_species": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_protected_area"
+   ]
+  },
+  "geopark": {
+   "consumers": [
+    "FIELDMAP:badge",
+    "render",
+    "tests",
+    "programme-query"
+   ],
+   "fieldmap_zone": "badge",
+   "fieldmap_kind": "flag",
+   "jet_type": "switcher",
+   "wpml": "copy",
+   "post_types": [
+    "tp_protected_area"
+   ]
+  },
+  "activities": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_natural_feature",
+    "tp_protected_area"
+   ]
   }
  },
  "relations": {
@@ -3223,7 +3351,7 @@
   "area_km2"
  ],
  "count": {
-  "fields": 261,
+  "fields": 270,
   "relations": 39,
   "post_types": 42
  },

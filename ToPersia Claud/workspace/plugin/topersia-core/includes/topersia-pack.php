@@ -344,7 +344,7 @@ if ( ! defined( 'TOPERSIA_PACK_SIMILAR_MIN_WORDS' ) ) {
 
 /** نوع‌هایی که تاریخ بازبینی و منبع در پست تازۀ بسته اجباری است؛ همان فهرست `topersia_g_verified_types` رندر.  P5-D492 */
 function topersia_pack_verified_types() {
-	return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar' );
+	return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' );
 }
 
 /**

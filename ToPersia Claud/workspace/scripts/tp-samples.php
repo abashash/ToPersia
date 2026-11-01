@@ -537,7 +537,7 @@ echo 'نمونه‌ها: ' . count( $made ) . " نوع (fa · en · ar)\n";
 $sample_county();
 
 /* P5-D491 · P5-D498: نمونهٔ خالی — فقط عنوان؛ برای آزمودن خالی‌امن. بی یال و بی فیلد. */
-foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید', 'tp_health_safety' => 'نمونهٔ خالی سلامت', 'tp_transport' => 'نمونهٔ خالی حمل‌ونقل', 'tp_calendar' => 'نمونهٔ خالی تقویم' ) as $ty => $title ) {
+foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید', 'tp_health_safety' => 'نمونهٔ خالی سلامت', 'tp_transport' => 'نمونهٔ خالی حمل‌ونقل', 'tp_calendar' => 'نمونهٔ خالی تقویم', 'tp_festival' => 'نمونهٔ خالی جشنواره', 'tp_protected_area' => 'نمونهٔ خالی منطقهٔ حفاظت‌شده' ) as $ty => $title ) {
 	$trid = false;
 	foreach ( array( 'fa' => '', 'en' => 'Empty sample ', 'ar' => 'نموذج فارغ ' ) as $l => $prefix ) {
 		$eid = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_empty' JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = %s AND t.language_code = %s WHERE p.post_type = %s AND p.post_status <> 'trash' LIMIT 1", 'post_' . $ty, $l, $ty ) );
