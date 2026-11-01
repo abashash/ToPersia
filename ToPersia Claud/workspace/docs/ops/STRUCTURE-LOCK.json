@@ -2380,6 +2380,230 @@
    "post_types": [
     "tp_visa"
    ]
+  },
+  "activity_specific_warnings": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_health_safety"
+   ]
+  },
+  "air_travel_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_transport"
+   ]
+  },
+  "best_worst_time_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_calendar"
+   ]
+  },
+  "calendar_system_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_calendar"
+   ]
+  },
+  "closure_impact_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_calendar"
+   ]
+  },
+  "crowding_and_price_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_calendar"
+   ]
+  },
+  "general_safety_notes": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_health_safety"
+   ]
+  },
+  "intercity_bus_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_transport"
+   ]
+  },
+  "local_emergency_facilities": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_health_safety"
+   ]
+  },
+  "lunar_date_disclaimer": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_calendar"
+   ]
+  },
+  "mode_choice_guide": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_transport"
+   ]
+  },
+  "natural_hazard_summary": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_health_safety"
+   ]
+  },
+  "regional_health_notes": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text",
+   "jet_type": "text",
+   "wpml": "translate",
+   "post_types": [
+    "tp_health_safety"
+   ]
+  },
+  "route_reference_note": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_transport"
+   ]
+  },
+  "transport_etiquette_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_transport"
+   ]
+  },
+  "water_safety_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_health_safety"
+   ]
   }
  },
  "relations": {
@@ -2999,7 +3223,7 @@
   "area_km2"
  ],
  "count": {
-  "fields": 245,
+  "fields": 261,
   "relations": 39,
   "post_types": 42
  },

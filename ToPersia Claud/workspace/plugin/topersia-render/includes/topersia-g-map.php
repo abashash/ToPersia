@@ -278,6 +278,25 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 			'rn_g3_name' => array( 'label' => 'استان', 'kind' => 'text' ),
 			'rn_note'    => array( 'label' => 'یادداشت', 'kind' => 'text' ),
 		) ),
+		/* P5-D498 (دستۀ 42) — tp_health_safety */
+		'natural_hazard_summary' => array( 'label' => 'مخاطرات طبیعی', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'general_safety_notes' => array( 'label' => 'نکات کلی ایمنی', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'water_safety_note' => array( 'label' => 'ایمنی آب آشامیدنی', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2' => true ),
+		'regional_health_notes' => array( 'label' => 'نکات سلامت منطقه‌ای', 'unit' => '', 'kind' => 'text', 'zone' => 'card', 'wave2' => true ),
+		'local_emergency_facilities' => array( 'label' => 'مراکز درمانی محلی', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2' => true ),
+		'activity_specific_warnings' => array( 'label' => 'هشدارهای فعالیت‌محور', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2' => true ),
+		/* P5-D498 (دستۀ 42) — tp_transport */
+		'mode_choice_guide' => array( 'label' => 'راهنمای انتخاب حالت سفر', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'intercity_bus_note' => array( 'label' => 'اتوبوس بین‌شهری', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'air_travel_note' => array( 'label' => 'پرواز داخلی', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'transport_etiquette_note' => array( 'label' => 'آداب حمل‌ونقل عمومی', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'route_reference_note' => array( 'label' => 'ارجاع به مسیرهای گردشگری', 'unit' => '', 'kind' => 'text', 'zone' => 'card', 'wave2' => true ),
+		/* P5-D498 (دستۀ 42) — tp_calendar */
+		'calendar_system_note' => array( 'label' => 'توضیح نظام تقویمی', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'closure_impact_note' => array( 'label' => 'اثر تعطیلات بر خدمات', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'crowding_and_price_note' => array( 'label' => 'ازدحام و نوسان قیمت', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'best_worst_time_note' => array( 'label' => 'بهترین و بدترین زمان سفر', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2' => true ),
+		'lunar_date_disclaimer' => array( 'label' => 'هشدار تاریخ‌های قمری', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2' => true ),
 		/* P5-D491 — tp_visa */
 		'guided_tour_note' => array( 'label' => 'تور اجباری', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave1' => true ),
 		'free_zone_mainland_allowed' => array( 'label' => 'ورود به سرزمین اصلی از منطقۀ آزاد', 'unit' => '', 'kind' => 'flag', 'zone' => 'travel', 'wave1' => true ),

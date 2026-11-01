@@ -91,6 +91,10 @@ msgstr "Last checked: %s"
 msgid "آخرین مشاهده"
 msgstr "Last observed"
 
+#: includes/topersia-g-map.php
+msgid "آداب حمل‌ونقل عمومی"
+msgstr "Public transport etiquette"
+
 #: includes/topersia-g-zones.php
 msgid "آداب منطقه‌ای"
 msgstr "Regional etiquette"
@@ -163,13 +167,17 @@ msgstr "Ritual"
 msgid "آیین‌های نوروزی"
 msgstr "Nowruz rituals"
 
-#: includes/topersia-g-zones.php
+#: includes/topersia-g-map.php
 msgid "اتوبوس بین‌شهری"
 msgstr "Intercity bus"
 
 #: includes/topersia-g-zones.php
 msgid "اتوبوس تندرو"
 msgstr "Bus rapid transit"
+
+#: includes/topersia-g-map.php
+msgid "اثر تعطیلات بر خدمات"
+msgstr "Effect of holidays on services"
 
 #: includes/topersia-g-map.php
 msgid "اثر طبیعی / ذخیره‌گاه"
@@ -206,6 +214,10 @@ msgid "ارتفاع از سطح دریا"
 msgstr "Elevation"
 
 #: includes/topersia-g-map.php
+msgid "ارجاع به مسیرهای گردشگری"
+msgstr "Related tourist routes"
+
+#: includes/topersia-g-map.php
 msgid "اردیبهشت"
 msgstr "Ordibehesht"
 
@@ -230,6 +242,10 @@ msgstr "From %1$s to %2$s EUR"
 #: includes/topersia-g-gallery-agg.php
 msgid "از پیش در صف است."
 msgstr "Already queued."
+
+#: includes/topersia-g-map.php
+msgid "ازدحام و نوسان قیمت"
+msgstr "Crowding and price swings"
 
 #: includes/topersia-g-map.php
 msgid "استان"
@@ -362,6 +378,10 @@ msgstr "Italian"
 #: includes/topersia-g-map.php
 msgid "ایستگاه راه‌آهن"
 msgstr "Railway station"
+
+#: includes/topersia-g-map.php
+msgid "ایمنی آب آشامیدنی"
+msgstr "Drinking water safety"
 
 #: includes/topersia-g-zones.php
 msgid "ایمیل"
@@ -648,6 +668,10 @@ msgid "بهترین زمان سفر: %s"
 msgstr "Best time to visit: %s"
 
 #: includes/topersia-g-map.php
+msgid "بهترین و بدترین زمان سفر"
+msgstr "Best and worst times to travel"
+
+#: includes/topersia-g-map.php
 msgid "بهمن"
 msgstr "Bahman"
 
@@ -814,6 +838,10 @@ msgstr "Mandatory tour"
 #: includes/topersia-g-map.php
 msgid "تور یا راهنما لازم است"
 msgstr "Guide or tour required"
+
+#: includes/topersia-g-map.php
+msgid "توضیح نظام تقویمی"
+msgstr "About the calendar system"
 
 #: topersia-render.php
 msgid "توقف حرکت و پخش خودکار"
@@ -1353,6 +1381,10 @@ msgstr "Getting there"
 #: includes/topersia-g-map.php
 msgid "راهنما در محل هست"
 msgstr "Guide on site"
+
+#: includes/topersia-g-map.php
+msgid "راهنمای انتخاب حالت سفر"
+msgstr "Choosing how to travel"
 
 #: includes/topersia-g-map.php
 msgid "رایگان"
@@ -2269,6 +2301,10 @@ msgstr "Archaeological site"
 msgid "محوطه‌های باستانی"
 msgstr "Archaeological sites"
 
+#: includes/topersia-g-map.php
+msgid "مخاطرات طبیعی"
+msgstr "Natural hazards"
+
 #: includes/topersia-g-zones.php
 msgid "مختصات"
 msgstr "Coordinates"
@@ -2320,6 +2356,10 @@ msgstr "Public religious ceremony"
 #: includes/topersia-g-map.php
 msgid "مراسمی"
 msgstr "Ceremonial"
+
+#: includes/topersia-g-map.php
+msgid "مراکز درمانی محلی"
+msgstr "Local medical facilities"
 
 #: includes/topersia-g-zones.php
 msgid "مرتب‌سازی"
@@ -2918,6 +2958,14 @@ msgstr "Desert type"
 msgid "نوع گذرگاه"
 msgstr "Crossing type"
 
+#: includes/topersia-g-map.php
+msgid "نکات سلامت منطقه‌ای"
+msgstr "Regional health notes"
+
+#: includes/topersia-g-map.php
+msgid "نکات کلی ایمنی"
+msgstr "General safety notes"
+
 #: includes/topersia-g-zones.php
 msgid "نکات کلیدی"
 msgstr "Key points"
@@ -2949,6 +2997,14 @@ msgstr "Hz"
 #: includes/topersia-g-zones.php
 msgid "هزینه؟"
 msgstr "How much does it cost?"
+
+#: includes/topersia-g-map.php
+msgid "هشدار تاریخ‌های قمری"
+msgstr "Lunar date notice"
+
+#: includes/topersia-g-map.php
+msgid "هشدارهای فعالیت‌محور"
+msgstr "Activity-specific warnings"
 
 #: includes/topersia-g-zones.php
 msgid "همراهی موسیقی"
@@ -3245,6 +3301,10 @@ msgstr "Frequently asked questions"
 #: topersia-render.php
 msgid "پرش به محتوای اصلی"
 msgstr "Skip to main content"
+
+#: includes/topersia-g-map.php
+msgid "پرواز داخلی"
+msgstr "Domestic flights"
 
 #: includes/topersia-g-weather.php
 msgid "پس‌فردا"

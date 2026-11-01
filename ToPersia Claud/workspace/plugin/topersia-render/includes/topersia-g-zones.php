@@ -736,7 +736,7 @@ if ( ! function_exists( 'topersia_g_file_ver' ) ) {
 if ( ! function_exists( 'topersia_g_verified_types' ) ) {
 	/** نوع‌هایی که مهر «آخرین بازبینی و منبع» کنار بلوکشان می‌آید؛ همان فهرست `topersia_pack_verified_types` هسته.  P5-D492 */
 	function topersia_g_verified_types() {
-		return array( 'tp_currency', 'tp_visa' );
+		return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar' );
 	}
 }
 

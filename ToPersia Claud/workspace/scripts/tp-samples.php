@@ -536,15 +536,19 @@ echo 'نمونه‌ها: ' . count( $made ) . " نوع (fa · en · ar)\n";
 
 $sample_county();
 
-/* P5-D491: نمونهٔ خالی ارز و روادید — فقط عنوان؛ برای آزمودن خالی‌امن. بی یال و بی فیلد. */
-foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید' ) as $ty => $title ) {
-	$eid = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_empty' WHERE p.post_type = %s AND p.post_status <> 'trash' LIMIT 1", $ty ) );
-	if ( ! $eid ) {
-		$eid = (int) wp_insert_post( array( 'post_type' => $ty, 'post_status' => 'publish', 'post_title' => $title, 'post_name' => 'sample-empty-' . str_replace( 'tp_', '', $ty ) ) );
-		do_action( 'wpml_set_element_language_details', array( 'element_id' => $eid, 'element_type' => 'post_' . $ty, 'trid' => false, 'language_code' => 'fa' ) );
-		update_post_meta( $eid, '_tp_sample', 1 );
-		update_post_meta( $eid, '_tp_sample_empty', 1 );
-		update_post_meta( $eid, 'rank_math_robots', array( 'noindex', 'nofollow' ) );
+/* P5-D491 · P5-D498: نمونهٔ خالی — فقط عنوان؛ برای آزمودن خالی‌امن. بی یال و بی فیلد. */
+foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید', 'tp_health_safety' => 'نمونهٔ خالی سلامت', 'tp_transport' => 'نمونهٔ خالی حمل‌ونقل', 'tp_calendar' => 'نمونهٔ خالی تقویم' ) as $ty => $title ) {
+	$trid = false;
+	foreach ( array( 'fa' => '', 'en' => 'Empty sample ', 'ar' => 'نموذج فارغ ' ) as $l => $prefix ) {
+		$eid = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_empty' JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = %s AND t.language_code = %s WHERE p.post_type = %s AND p.post_status <> 'trash' LIMIT 1", 'post_' . $ty, $l, $ty ) );
+		if ( ! $eid ) {
+			$eid = (int) wp_insert_post( array( 'post_type' => $ty, 'post_status' => 'publish', 'post_title' => 'fa' === $l ? $title : $prefix . str_replace( 'tp_', '', $ty ), 'post_name' => 'sample-empty-' . str_replace( 'tp_', '', $ty ) ) );
+			do_action( 'wpml_set_element_language_details', array( 'element_id' => $eid, 'element_type' => 'post_' . $ty, 'trid' => $trid, 'language_code' => $l, 'source_language_code' => 'fa' === $l ? null : 'fa' ) );
+			update_post_meta( $eid, '_tp_sample', 1 );
+			update_post_meta( $eid, '_tp_sample_empty', 1 );
+			update_post_meta( $eid, 'rank_math_robots', array( 'noindex', 'nofollow' ) );
+		}
+		if ( 'fa' === $l ) { $trid = apply_filters( 'wpml_element_trid', null, $eid, 'post_' . $ty ); $fa_uid = get_post_meta( $eid, 'entity_uid', true ); } else { update_post_meta( $eid, 'entity_uid', $fa_uid ); }   /* شناسه در همهٔ زبان‌ها یکی است */
+		echo "نمونهٔ خالی {$ty} {$l}: #{$eid}\n";
 	}
-	echo "نمونهٔ خالی {$ty}: #{$eid}\n";
 }

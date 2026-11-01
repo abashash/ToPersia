@@ -76,3 +76,26 @@
 | `fee_policy_note` | `tp_visa` | wysiwyg | rich | details | translate | سیاست هزینه و پرداخت |
 
 در طرح هستند ولی نگاشت نشدند (نه در ستون DISPLAY پیشنهاد ساختار): `visa_types` · `visa_policy_matrix` · `currency_units` · `card_network_status` · `exchange_locations` · `tourist_card_services` · `rate_reference_links` · `application_steps` · `portal_links` · `document_specs` · `policy_change_log` · `official_application_portal` · `extension_max_count` · `extension_days_each` · `redenomination_law_date` · `redenomination_start_date` · `accepted_foreign_currencies`.
+
+## ۶ — دستهٔ 42: سلامت، حمل‌ونقل و تقویم · P5-D498
+
+همهٔ فیلدها از قبل در متاباکس بودند؛ فیلد تازه‌ای ساخته نشد. ردیف‌های DISPLAY پیشنهاد ساختار: سلامت ۶ · حمل‌ونقل ۵ · تقویم ۷ = ۱۸ (زیر سقف ~۴۵)، پس هر سه نوع در همین دسته آمد. دو ردیف تقویم رابطه‌اند (#231 · #244) نه فیلد و `relmap` این سه نوع گروهی ندارد؛ با قید «فقط FIELDMAP» ساخته نشدند.
+
+| کلید | نوع پست | جت‌انجین | نوع رندر | ناحیه | WPML | برچسب |
+|---|---|---|---|---|---|---|
+| `natural_hazard_summary` | `tp_health_safety` | wysiwyg | rich | details | translate | مخاطرات طبیعی |
+| `general_safety_notes` | `tp_health_safety` | wysiwyg | rich | details | translate | نکات کلی ایمنی |
+| `water_safety_note` | `tp_health_safety` | textarea | text | details | translate | ایمنی آب آشامیدنی |
+| `regional_health_notes` | `tp_health_safety` | text | text | card | translate | نکات سلامت منطقه‌ای |
+| `local_emergency_facilities` | `tp_health_safety` | textarea | text | details | translate | مراکز درمانی محلی |
+| `activity_specific_warnings` | `tp_health_safety` | textarea | text | details | translate | هشدارهای فعالیت‌محور |
+| `mode_choice_guide` | `tp_transport` | wysiwyg | rich | details | translate | راهنمای انتخاب حالت سفر |
+| `intercity_bus_note` | `tp_transport` | wysiwyg | rich | details | translate | اتوبوس بین‌شهری |
+| `air_travel_note` | `tp_transport` | wysiwyg | rich | details | translate | پرواز داخلی |
+| `transport_etiquette_note` | `tp_transport` | wysiwyg | rich | details | translate | آداب حمل‌ونقل عمومی |
+| `route_reference_note` | `tp_transport` | textarea | text | card | translate | ارجاع به مسیرهای گردشگری |
+| `calendar_system_note` | `tp_calendar` | wysiwyg | rich | details | translate | توضیح نظام تقویمی |
+| `closure_impact_note` | `tp_calendar` | wysiwyg | rich | details | translate | اثر تعطیلات بر خدمات |
+| `crowding_and_price_note` | `tp_calendar` | wysiwyg | rich | details | translate | ازدحام و نوسان قیمت |
+| `best_worst_time_note` | `tp_calendar` | wysiwyg | rich | details | translate | بهترین و بدترین زمان سفر |
+| `lunar_date_disclaimer` | `tp_calendar` | textarea | text | details | translate | هشدار تاریخ‌های قمری |
