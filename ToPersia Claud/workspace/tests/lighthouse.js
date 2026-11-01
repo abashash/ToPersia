@@ -37,6 +37,7 @@
 
 'use strict';
 
+const { compareRequests } = require( './lib/lh-compare.js' );
 const fs = require( 'node:fs' );
 const os = require( 'node:os' );
 const path = require( 'node:path' );
@@ -532,6 +533,19 @@ async function measure( dirs ) {
 	for ( const d of dirs ) {
 		const store = new Store( d, false );
 		sets.push( { store, srv: await serve( store, false ), rows: {} } );
+	}
+
+	/* P5-D496: فهرست درخواست دو نسخه پس از نرمال‌سازی ver= باید برابر باشد؛ پیش از مصرف زمان اجرا */
+	if ( sets.length > 1 ) {
+		const cmp = compareRequests( Object.keys( sets[0].store.m.entries ), Object.keys( sets[1].store.m.entries ) );
+		console.log( 'ver= نرمال شد: ' + cmp.normalized.length + ' درخواست' );
+		cmp.normalized.forEach( n => console.log( '  ' + n.a + ' ⇄ ' + n.b ) );
+		if ( ! cmp.equal ) {
+			console.log( 'فهرست درخواست‌ها جز ver= فرق دارد؛ مقایسه نمی‌شود (PERF.md):' );
+			cmp.onlyA.forEach( k => console.log( '  فقط A: ' + k ) );
+			cmp.onlyB.forEach( k => console.log( '  فقط B: ' + k ) );
+			process.exit( 1 );
+		}
 	}
 
 	const tmp = fs.mkdtempSync( path.join( os.tmpdir(), 'tp-lh-' ) );

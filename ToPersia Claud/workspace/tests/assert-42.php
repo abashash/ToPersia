@@ -108,9 +108,9 @@ $w42_empty_ok = function ( $html ) use ( $w42_map ) {
 };
 tp441_mut( 'خالی‌امن: نمونهٔ خالی هر نوع هیچ برچسب، مهر و «نامعلوم» نمی‌سازد — جهش: پست پر می‌افتد', $w42_empty_ok, $w42_empty, implode( '', $w42_all ) );
 
-/* ۵ — آستانه: این سه نوع پیش‌فرض خاموش؛ با تاریخ کهنه هم هشدار نیست */
+/* ۵ — آستانه P5-D502: این سه نوع پیش‌فرض دارند؛ با تاریخ کهنه هشدار، و مرزها در assert-502 */
 $GLOBALS['tp_meta'][8301]['last_verified_date'] = '2001-01-01';
-t( 'P5-D497: آستانهٔ این سه نوع پیشنهادی نگرفته و پیش‌فرض خاموش است', false === strpos( r( 8301, 'tp_overview' ), 'ممکن است قدیمی باشد' ) && 0 === topersia_render_settings_defaults()['stale_days_tp_health_safety'] );
+t( 'P5-D502: تاریخ کهنه روی این نوع هشدار می‌دهد', false !== strpos( r( 8301, 'tp_overview' ), 'ممکن است قدیمی باشد' ) );
 
 /* ۶ — سقف ۶ آکاردئون: این دسته آکاردئون نساخت؛ شمار روی خروجی واقعی */
 $w42_acc = function ( $h ) { return ( substr_count( $h, '<details' ) + substr_count( $h, 'tp-accordion' ) ) <= 6; };

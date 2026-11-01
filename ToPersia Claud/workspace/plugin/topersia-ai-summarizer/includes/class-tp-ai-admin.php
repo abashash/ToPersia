@@ -114,8 +114,8 @@ class TP_AI_Admin {
 		$js_file  = TP_AI_PATH . 'assets/js/topersia-ai-admin.js';
 
 		// Content-hash version busts caches only when the asset really changes (P5-D496).
-		$css_ver = is_file( $css_file ) ? substr( md5_file( $css_file ), 0, 10 ) : TP_AI_VERSION;
-		$js_ver  = is_file( $js_file ) ? substr( md5_file( $js_file ), 0, 10 ) : TP_AI_VERSION;
+		$css_ver = tp_ai_asset_ver( $css_file );
+		$js_ver  = tp_ai_asset_ver( $js_file );
 
 		wp_enqueue_style(
 			'topersia-ai-admin',
@@ -290,7 +290,7 @@ class TP_AI_Admin {
 
 		$file = TP_AI_PATH . 'assets/js/topersia-ai-metabox.js';
 
-		wp_enqueue_script( 'topersia-ai-metabox', TP_AI_URL . 'assets/js/topersia-ai-metabox.js', array(), is_file( $file ) ? substr( md5_file( $file ), 0, 10 ) : TP_AI_VERSION, true );
+		wp_enqueue_script( 'topersia-ai-metabox', TP_AI_URL . 'assets/js/topersia-ai-metabox.js', array(), tp_ai_asset_ver( $file ), true );
 		wp_localize_script( 'topersia-ai-metabox', 'tpasGen', array(
 			'ajax'       => admin_url( 'admin-ajax.php' ),
 			'working'    => __( 'Generating…', 'topersia-ai-summarizer' ),

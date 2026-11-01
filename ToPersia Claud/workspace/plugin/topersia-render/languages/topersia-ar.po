@@ -2361,6 +2361,10 @@ msgstr "احتفالي"
 msgid "مراکز درمانی محلی"
 msgstr "المرافق الطبية المحلية"
 
+#: includes/topersia-g-map.php
+msgid "مرتبط"
+msgstr "ذات صلة"
+
 #: includes/topersia-g-zones.php
 msgid "مرتب‌سازی"
 msgstr "ترتيب حسب"

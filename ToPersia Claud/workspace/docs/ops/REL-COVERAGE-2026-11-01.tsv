@@ -1,0 +1,145 @@
+رابطهٔ فعال: 143 · با یال: 139 · شکاف بی‌دلیل: 0
+رابطه	والد	فرزند	یال واقعی	یال نمونه	گروه والد	گروه فرزند	دلیل بی‌گروهی والد	دلیل بی‌گروهی فرزند
+71	tp_country	tp_province	31	3	provinces	crumbs		
+72	tp_province	tp_county	485	3	places+attractions	—		شهرستان صفحه ندارد (P5-D220)
+73	tp_county	tp_city	948	3	—	crumbs	شهرستان صفحه ندارد (P5-D220)	
+74	tp_city	tp_district	0	3	districts	crumbs		
+75	tp_province	tp_village	1	3	villages	crumbs		
+76	tp_county	tp_village	0	3	—	crumbs	شهرستان صفحه ندارد (P5-D220)	
+77	tp_province	tp_island	0	3	nature	crumbs		
+78	tp_province	tp_mountain	1	3	nature	crumbs		
+79	tp_province	tp_water_body	1	3	nature	crumbs		
+80	tp_province	tp_desert	1	3	nature	crumbs		
+81	tp_province	tp_forest_plain	0	3	nature	crumbs		
+82	tp_province	tp_border_crossing	0	3	—	crumbs	عمداً در استان نیست (P5-D170)	
+83	tp_region	tp_province	0	3	provinces	—		عمداً در استان نیست (P5-D170)
+84	tp_city	tp_monument	5	3	attractions+ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+85	tp_village	tp_monument	0	3	ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+86	tp_city	tp_religious_site	1	3	attractions+ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+87	tp_village	tp_religious_site	0	3	ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+88	tp_city	tp_museum	0	3	attractions+ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+89	tp_province	tp_protected_area	0	3	nature	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+90	tp_province	tp_natural_feature	0	3	nature	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+91	tp_city	tp_natural_feature	0	3	nature	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+92	tp_province	tp_ancient_site	3	3	ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+93	tp_city	tp_ancient_site	2	3	attractions+ancient	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+94	tp_province	tp_landscape	0	3	nature	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+95	tp_country	tp_city	1	3	capital	capital-of		
+96	tp_province	tp_city	8	3	capital	capital-of		
+97	tp_county	tp_city	0	0	—	capital-of	شهرستان صفحه ندارد (P5-D220)	
+98	tp_city	tp_village	0	3	villages	crumbs		
+100	tp_city	tp_border_crossing	0	3	border	crumbs		
+101	tp_mountain	tp_mountain	0	0	subranges+crumbs	subranges+crumbs		
+102	tp_province	tp_province	29	0	neighbors	neighbors		
+103	tp_protected_area	tp_natural_feature	0	3	related	related		
+105	tp_landscape	tp_monument	0	5	related	related		
+106	tp_landscape	tp_natural_feature	0	5	related	related		
+107	tp_province	tp_handicraft	9	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+108	tp_city	tp_handicraft	9	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+109	tp_village	tp_handicraft	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+110	tp_province	tp_local_food	3	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+111	tp_city	tp_local_food	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+112	tp_village	tp_local_food	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+113	tp_province	tp_costume	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+114	tp_city	tp_costume	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+116	tp_province	tp_music	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+117	tp_city	tp_music	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+118	tp_village	tp_music	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+119	tp_province	tp_dance	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+120	tp_city	tp_dance	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+121	tp_village	tp_dance	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+122	tp_province	tp_ritual	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+123	tp_city	tp_ritual	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+124	tp_village	tp_ritual	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+125	tp_province	tp_handicraft	0	5	—	—	عمداً در استان نیست (P5-D170)	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+126	tp_city	tp_handicraft	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+127	tp_village	tp_handicraft	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+128	tp_province	tp_local_food	0	5	—	—	عمداً در استان نیست (P5-D170)	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+129	tp_city	tp_local_food	3	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+130	tp_village	tp_local_food	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+131	tp_province	tp_language	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+132	tp_city	tp_language	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+133	tp_ethnic_group	tp_handicraft	0	5	related	related		
+134	tp_ethnic_group	tp_local_food	0	5	related	related		
+135	tp_ethnic_group	tp_music	0	5	related	related		
+136	tp_ethnic_group	tp_dance	0	5	related	related		
+137	tp_ethnic_group	tp_ritual	0	5	related	related		
+138	tp_ethnic_group	tp_costume	0	5	related	related		
+139	tp_historical_era	tp_monument	0	5	related	related		
+140	tp_historical_era	tp_religious_site	0	5	related	related		
+141	tp_historical_era	tp_ancient_site	0	5	related	related		
+142	tp_historical_era	tp_figure	0	5	related	related		
+143	tp_historical_era	tp_city	0	5	—	ancient	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)	
+144	tp_historical_era	tp_district	0	5	related	ancient		
+145	tp_historical_era	tp_landscape	0	5	related	related		
+146	tp_figure	tp_monument	0	5	related	related		
+147	tp_figure	tp_ancient_site	0	5	related	related		
+148	tp_figure	tp_monument	0	5	related	related		
+149	tp_figure	tp_religious_site	0	5	related	related		
+150	tp_figure	tp_ancient_site	0	5	related	related		
+152	tp_figure	tp_ritual	0	5	related	related		
+153	tp_city	tp_figure	0	3	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+154	tp_city	tp_figure	0	3	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+156	tp_country	tp_health_safety	1	5	practical	—		کشور عمداً کاشی نمی‌شود (P5-D348)
+157	tp_province	tp_health_safety	0	5	practical	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+158	tp_city	tp_health_safety	0	5	practical	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+159	tp_country	tp_travel_etiquette	1	5	practical	—		کشور عمداً کاشی نمی‌شود (P5-D348)
+160	tp_province	tp_travel_etiquette	0	5	practical	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+162	tp_travel_etiquette	tp_religious_site	0	5	related	related		
+172	tp_route	tp_province	3	5	—	routes	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)	
+173	tp_route	tp_city	18	5	—	routes	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)	
+174	tp_route	tp_village	0	5	—	routes	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)	
+175	tp_route	tp_island	0	5	related	routes		
+177	tp_route	tp_border_crossing	0	5	related	routes		
+185	tp_country	tp_visa	0	5	practical	—		کشور عمداً کاشی نمی‌شود (P5-D348)
+226	tp_country	tp_currency	2	5	practical	—		کشور عمداً کاشی نمی‌شود (P5-D348)
+227	tp_province	tp_currency	0	5	practical	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+228	tp_country	tp_calendar	1	5	practical	—		کشور عمداً کاشی نمی‌شود (P5-D348)
+229	tp_province	tp_calendar	0	5	practical	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+230	tp_city	tp_calendar	0	5	practical	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+231	tp_calendar	tp_ritual	0	5	related	related		
+232	tp_province	tp_festival	3	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+233	tp_city	tp_festival	3	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+234	tp_village	tp_festival	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+235	tp_monument	tp_festival	0	5	related	related		
+236	tp_religious_site	tp_festival	0	5	related	related		
+237	tp_museum	tp_festival	0	5	related	related		
+238	tp_protected_area	tp_festival	0	5	related	related		
+240	tp_ritual	tp_festival	0	5	related	related		
+242	tp_figure	tp_festival	0	5	related	related		
+243	tp_historical_era	tp_festival	0	5	related	related		
+244	tp_calendar	tp_festival	0	5	related	related		
+245	tp_province	tp_sports_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+246	tp_city	tp_sports_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+247	tp_village	tp_sports_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+248	tp_monument	tp_sports_event	0	5	related	related		
+249	tp_religious_site	tp_sports_event	0	5	related	related		
+250	tp_museum	tp_sports_event	0	5	related	related		
+251	tp_protected_area	tp_sports_event	0	5	related	related		
+253	tp_province	tp_religious_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+254	tp_city	tp_religious_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+255	tp_village	tp_religious_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+256	tp_monument	tp_religious_event	0	5	related	related		
+257	tp_religious_site	tp_religious_event	0	5	related	related		
+259	tp_ritual	tp_religious_event	0	5	related	related		
+261	tp_figure	tp_religious_event	0	5	related	related		
+262	tp_historical_era	tp_religious_event	0	5	related	related		
+263	tp_province	tp_seasonal_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+264	tp_city	tp_seasonal_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+265	tp_village	tp_seasonal_event	0	5	culture	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+268	tpc_news	tp_province	3	0	—	—	خبر قالب خودش را دارد	سطح اخبار مکان (topersia_g_news)
+269	tpc_news	tp_city	9	0	—	—	خبر قالب خودش را دارد	سطح اخبار مکان (topersia_g_news)
+270	tpc_news	tp_village	0	0	—	—	خبر قالب خودش را دارد	سطح اخبار مکان (topersia_g_news)
+271	tpc_news	tp_island	0	0	—	—	خبر قالب خودش را دارد	سطح اخبار مکان (topersia_g_news)
+293	tp_province	tp_city	0	5	related	related		
+294	tp_city	tp_route	0	3	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+295	tp_city	tp_route	0	3	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+296	tp_city	tp_handicraft	0	5	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+297	tp_city	tp_local_food	0	5	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+298	tp_city	tp_music	0	5	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+299	tp_monument	tp_figure	0	3	related	related		
+300	tp_historical_era	tp_monument	0	5	related	related		
+301	tp_historical_era	tp_ancient_site	0	5	related	related		
+302	tp_province	tp_ethnic_group	0	5	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+303	tp_province	tp_dance	0	5	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+304	tp_province	tp_language	0	5	related	—		کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)

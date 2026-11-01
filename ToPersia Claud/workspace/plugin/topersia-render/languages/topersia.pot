@@ -2360,6 +2360,10 @@ msgstr ""
 msgid "مراکز درمانی محلی"
 msgstr ""
 
+#: includes/topersia-g-map.php
+msgid "مرتبط"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "مرتب‌سازی"
 msgstr ""

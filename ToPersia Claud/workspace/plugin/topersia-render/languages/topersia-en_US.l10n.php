@@ -591,6 +591,7 @@ return array (
     'مراسم مذهبی عمومی' => 'Public religious ceremony',
     'مراسمی' => 'Ceremonial',
     'مراکز درمانی محلی' => 'Local medical facilities',
+    'مرتبط' => 'Related',
     'مرتب‌سازی' => 'Sort by',
     'مرجع خارجی' => 'External reference',
     'مرداد' => 'Mordad',

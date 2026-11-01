@@ -712,16 +712,22 @@ if ( ! function_exists( 'topersia_g_file_ver' ) ) {
 	 */
 	function topersia_g_file_ver( $file ) {
 
+		static $memo = array();
+
+		if ( isset( $memo[ $file ] ) ) {
+			return $memo[ $file ];
+		}
+
 		$size = (int) @filesize( $file );
 
 		if ( $size <= 20971520 ) {
-			return substr( (string) @md5_file( $file ), 0, 10 );
+			return $memo[ $file ] = substr( (string) @md5_file( $file ), 0, 10 );
 		}
 
 		$fh = @fopen( $file, 'rb' );
 
 		if ( ! $fh ) {
-			return (string) $size;
+			return $memo[ $file ] = (string) $size;
 		}
 
 		$head = (string) fread( $fh, 1048576 );
@@ -729,7 +735,7 @@ if ( ! function_exists( 'topersia_g_file_ver' ) ) {
 		$tail = (string) fread( $fh, 1048576 );
 		fclose( $fh );
 
-		return substr( md5( $size . $head . $tail ), 0, 10 );
+		return $memo[ $file ] = substr( md5( $size . $head . $tail ), 0, 10 );
 	}
 }
 
@@ -750,7 +756,8 @@ if ( ! function_exists( 'topersia_g_is_stale' ) ) {
 			return false;
 		}
 
-		return ( ( $now ? $now : time() ) - $time ) > (int) $days * 86400;
+		/* تاریخ بی ساعت است: روز آستانه تا پایانش تازه می‌ماند، نه تا ساعت اجرای درخواست */
+		return ( ( $now ? $now : time() ) - $time ) >= ( (int) $days + 1 ) * 86400;
 	}
 }
 
@@ -7780,6 +7787,7 @@ if ( ! function_exists( 'topersia_g_rel_zones' ) ) {
 			/* «مرکزیت» باکس جدا نیست؛ فقط کاشی درون «اطلاعات جغرافیایی» (`topersia_g_geo_center_tiles`).  P5-D348 */
 			'neighbors'  => array( 'rail', 'topersia_g_sc_relgrid', 'tp-neighbors',  'هم‌مرزها' ),
 			'routes'     => array( 'rail', 'topersia_g_sc_relgrid', 'tp-routes',     'مسیرها' ),
+			'related'    => array( 'rail', 'topersia_g_sc_relgrid', 'tp-related',    'مرتبط' ),   /* P5-D503 */
 		);
 
 		if ( function_exists( 'apply_filters' ) ) {
@@ -8276,6 +8284,7 @@ if ( ! function_exists( 'topersia_g_section_icon' ) ) {
 			'tp-nature'      => 'leaf',
 			'tp-ancient'     => 'column',
 			'tp-routes'      => 'route',
+			'tp-related'     => 'compass',
 			'tp-neighbors'   => 'compass',
 			'tp-audio'       => 'wave',
 			'tp-geo'         => 'globe',

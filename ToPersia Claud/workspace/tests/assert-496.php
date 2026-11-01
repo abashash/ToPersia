@@ -43,24 +43,30 @@ try {
 	t( 'render: در نبود فایل، نسخهٔ افزونه', TOPERSIA_RENDER_VERSION === topersia_render_asset_version( 'assets/no-such-file-496.css' ) );
 
 	/* فایل دادهٔ کوچک (مرز) و بزرگ (PMTiles) */
-	$s1 = topersia_g_file_ver( $v496_abs );
-	touch( $v496_abs, time() + 9000 ); clearstatcache();
-	$s2 = topersia_g_file_ver( $v496_abs );
-	file_put_contents( $v496_abs, 'z' . str_repeat( 'x', 1999 ) ); clearstatcache();
-	$s3 = topersia_g_file_ver( $v496_abs );
+	/* حافظهٔ درخواستی با مسیر است (assert-502)، پس هر جهش پروندهٔ جدا دارد */
+	$v496_new = function ( $name, $src = null, $bytes = null ) use ( $v496_abs, $v496_dir ) { $f = $v496_dir . '/' . $name; copy( null === $src ? $v496_abs : $src, $f ); if ( null !== $bytes ) { file_put_contents( $f, $bytes ); } clearstatcache(); return $f; };
+	$s1 = topersia_g_file_ver( $v496_new( 's1.json' ) );
+	$v496_f2 = $v496_new( 's2.json' ); touch( $v496_f2, time() + 9000 ); clearstatcache();
+	$s2 = topersia_g_file_ver( $v496_f2 );
+	$s3 = topersia_g_file_ver( $v496_new( 's3.json', null, 'z' . substr( (string) file_get_contents( $v496_abs ), 1 ) ) );
 	t( 'مرز: فایل کوچک هش کامل؛ جهش mtime ثابت، جهش بایت عوض', $s1 === $s2 && $s1 !== $s3 && 10 === strlen( $s1 ), "{$s1} · {$s2} · {$s3}" );
 
 	$big = $v496_dir . '/big.bin';
 	$fh  = fopen( $big, 'wb' ); ftruncate( $fh, 22 * 1048576 ); fclose( $fh );
+	$v496_big = function ( $name, $src, $at = null, $byte = '' ) use ( $v496_dir ) {
+		$f = $v496_dir . '/' . $name; copy( $src, $f );
+		if ( null !== $at ) { $fh = fopen( $f, 'r+b' ); fseek( $fh, $at, $at < 0 ? SEEK_END : SEEK_SET ); fwrite( $fh, $byte ); fclose( $fh ); }
+		clearstatcache();
+		return $f;
+	};
 	$b1 = topersia_g_file_ver( $big );
-	touch( $big, time() + 7000 ); clearstatcache();
-	$b2 = topersia_g_file_ver( $big );
-	$fh = fopen( $big, 'r+b' ); fwrite( $fh, 'H' ); fclose( $fh ); clearstatcache();
-	$b3 = topersia_g_file_ver( $big );
-	$fh = fopen( $big, 'r+b' ); fseek( $fh, 11 * 1048576 ); fwrite( $fh, 'M' ); fclose( $fh ); clearstatcache();
-	$b4 = topersia_g_file_ver( $big );
-	$fh = fopen( $big, 'r+b' ); fseek( $fh, -1, SEEK_END ); fwrite( $fh, 'T' ); fclose( $fh ); clearstatcache();
-	$b5 = topersia_g_file_ver( $big );
+	$v496_b2 = $v496_big( 'b2.bin', $big ); touch( $v496_b2, time() + 7000 ); clearstatcache();
+	$b2 = topersia_g_file_ver( $v496_b2 );
+	$v496_b3 = $v496_big( 'b3.bin', $big, 0, 'H' );
+	$b3 = topersia_g_file_ver( $v496_b3 );
+	$v496_b4 = $v496_big( 'b4.bin', $v496_b3, 11 * 1048576, 'M' );
+	$b4 = topersia_g_file_ver( $v496_b4 );
+	$b5 = topersia_g_file_ver( $v496_big( 'b5.bin', $v496_b4, -1, 'T' ) );
 	t( 'PMTiles: جهش mtime ثابت؛ بایت آغاز و پایان ver را عوض می‌کند؛ محدودیت ثبت‌شده: بایت میانی دیده نمی‌شود',
 		$b1 === $b2 && $b1 !== $b3 && $b3 === $b4 && $b4 !== $b5 );
 } finally {

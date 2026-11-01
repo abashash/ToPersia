@@ -28,9 +28,9 @@ if ( function_exists( 'topersia_render_settings_all' ) ) {
  * @return array
  */
 if ( ! function_exists( 'topersia_render_stale_types' ) ) {
-	/** آستانۀ پیش‌فرض هشدار «ممکن است قدیمی باشد» به روز؛ صفر خاموش. پیشنهادی‌اند، نه مصوب.  P5-D497 */
+	/** آستانۀ پیش‌فرض هشدار «ممکن است قدیمی باشد» به روز؛ صفر خاموش. قابل تغییر در تنظیمات.  P5-D497 · P5-D502 */
 	function topersia_render_stale_types() {
-		return array( 'tp_currency' => 30, 'tp_visa' => 90, 'tp_health_safety' => 0, 'tp_transport' => 0, 'tp_calendar' => 0 );
+		return array( 'tp_currency' => 30, 'tp_visa' => 90, 'tp_health_safety' => 180, 'tp_transport' => 90, 'tp_calendar' => 365 );
 	}
 }
 

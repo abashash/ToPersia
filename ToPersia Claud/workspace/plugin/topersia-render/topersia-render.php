@@ -149,6 +149,11 @@ if ( ! function_exists( 'topersia_render_asset_version' ) ) {
 			return TOPERSIA_RENDER_VERSION;
 		}
 
+		/* حافظۀ هسته: همان فایل در قلاب نسخۀ هسته دوباره هش نشود */
+		if ( function_exists( 'topersia_asset_hash_ver' ) ) {
+			return $memo[ $relative ] = topersia_asset_hash_ver( $full );
+		}
+
 		$hash = @md5_file( $full );
 
 		$memo[ $relative ] = ( false === $hash ) ? TOPERSIA_RENDER_VERSION : substr( $hash, 0, 10 );

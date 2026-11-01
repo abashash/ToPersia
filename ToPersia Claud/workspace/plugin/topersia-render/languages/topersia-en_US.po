@@ -2361,6 +2361,10 @@ msgstr "Ceremonial"
 msgid "مراکز درمانی محلی"
 msgstr "Local medical facilities"
 
+#: includes/topersia-g-map.php
+msgid "مرتبط"
+msgstr "Related"
+
 #: includes/topersia-g-zones.php
 msgid "مرتب‌سازی"
 msgstr "Sort by"

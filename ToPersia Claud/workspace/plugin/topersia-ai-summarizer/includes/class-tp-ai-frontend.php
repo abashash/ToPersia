@@ -10,6 +10,19 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Front-end output location and asset loading.
  */
+/** ver از هش محتوا (P5-D494)؛ حافظۀ درخواستی تا md5 تکراری نشود (دستۀ 43). */
+function tp_ai_asset_ver( $file ) {
+	static $memo = array();
+
+	if ( function_exists( 'topersia_asset_hash_ver' ) ) {
+		return topersia_asset_hash_ver( $file );
+	}
+	if ( ! isset( $memo[ $file ] ) ) {
+		$memo[ $file ] = is_file( $file ) ? substr( md5_file( $file ), 0, 10 ) : TP_AI_VERSION;
+	}
+	return $memo[ $file ];
+}
+
 class TP_AI_Frontend {
 
 	/**
@@ -29,8 +42,8 @@ class TP_AI_Frontend {
 		$js_file  = TP_AI_PATH . 'assets/js/topersia-ai.js';
 
 		// Content-hash version busts caches only when the asset really changes (P5-D496).
-		$css_ver = is_file( $css_file ) ? substr( md5_file( $css_file ), 0, 10 ) : TP_AI_VERSION;
-		$js_ver  = is_file( $js_file ) ? substr( md5_file( $js_file ), 0, 10 ) : TP_AI_VERSION;
+		$css_ver = tp_ai_asset_ver( $css_file );
+		$js_ver  = tp_ai_asset_ver( $js_file );
 
 		wp_register_style(
 			'topersia-ai',

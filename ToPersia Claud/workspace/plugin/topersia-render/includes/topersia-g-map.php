@@ -1404,6 +1404,44 @@ if ( ! function_exists( 'topersia_g_relmap' ) ) {
 
 		);
 
+		/*
+		 * گروه «مرتبط»: رابطه‌هایی که یال دارند و هیچ سطح دیگری نشانشان نمی‌دهد.  P5-D503
+		 * فقط داده است؛ کاشی‌ها از همان relgrid. گزارش و آزمون: scripts/tp-rel-coverage.php · tests/w43-rel-local.php
+		 */
+		$related = array(
+			'tp_protected_area' => array( array( 103, 'children' ), array( 238, 'children' ), array( 251, 'children' ) ),
+			'tp_natural_feature' => array( array( 103, 'parents' ), array( 106, 'parents' ) ),
+			'tp_landscape' => array( array( 105, 'children' ), array( 106, 'children' ), array( 145, 'parents' ) ),
+			'tp_monument' => array( array( 105, 'parents' ), array( 139, 'parents' ), array( 146, 'parents' ), array( 148, 'parents' ), array( 235, 'children' ), array( 248, 'children' ), array( 256, 'children' ), array( 299, 'children' ), array( 300, 'parents' ) ),
+			'tp_ethnic_group' => array( array( 133, 'children' ), array( 134, 'children' ), array( 135, 'children' ), array( 136, 'children' ), array( 137, 'children' ), array( 138, 'children' ) ),
+			'tp_handicraft' => array( array( 133, 'parents' ) ),
+			'tp_local_food' => array( array( 134, 'parents' ) ),
+			'tp_music' => array( array( 135, 'parents' ) ),
+			'tp_dance' => array( array( 136, 'parents' ) ),
+			'tp_ritual' => array( array( 137, 'parents' ), array( 152, 'parents' ), array( 231, 'parents' ), array( 240, 'children' ), array( 259, 'children' ) ),
+			'tp_costume' => array( array( 138, 'parents' ) ),
+			'tp_historical_era' => array( array( 139, 'children' ), array( 140, 'children' ), array( 141, 'children' ), array( 142, 'children' ), array( 144, 'children' ), array( 145, 'children' ), array( 243, 'children' ), array( 262, 'children' ), array( 300, 'children' ), array( 301, 'children' ) ),
+			'tp_religious_site' => array( array( 140, 'parents' ), array( 149, 'parents' ), array( 162, 'parents' ), array( 236, 'children' ), array( 249, 'children' ), array( 257, 'children' ) ),
+			'tp_ancient_site' => array( array( 141, 'parents' ), array( 147, 'parents' ), array( 150, 'parents' ), array( 301, 'parents' ) ),
+			'tp_figure' => array( array( 142, 'parents' ), array( 146, 'children' ), array( 147, 'children' ), array( 148, 'children' ), array( 149, 'children' ), array( 150, 'children' ), array( 152, 'children' ), array( 242, 'children' ), array( 261, 'children' ), array( 299, 'parents' ) ),
+			'tp_travel_etiquette' => array( array( 162, 'children' ) ),
+			'tp_route' => array( array( 175, 'children' ), array( 177, 'children' ) ),
+			'tp_calendar' => array( array( 231, 'children' ), array( 244, 'children' ) ),
+			'tp_festival' => array( array( 235, 'parents' ), array( 236, 'parents' ), array( 237, 'parents' ), array( 238, 'parents' ), array( 240, 'parents' ), array( 242, 'parents' ), array( 243, 'parents' ), array( 244, 'parents' ) ),
+			'tp_museum' => array( array( 237, 'children' ), array( 250, 'children' ) ),
+			'tp_sports_event' => array( array( 248, 'parents' ), array( 249, 'parents' ), array( 250, 'parents' ), array( 251, 'parents' ) ),
+			'tp_religious_event' => array( array( 256, 'parents' ), array( 257, 'parents' ), array( 259, 'parents' ), array( 261, 'parents' ), array( 262, 'parents' ) ),
+			'tp_province' => array( array( 293, 'children' ), array( 302, 'children' ), array( 303, 'children' ), array( 304, 'children' ) ),
+			'tp_city' => array( array( 293, 'parents' ), array( 294, 'children' ), array( 295, 'children' ), array( 296, 'children' ), array( 297, 'children' ), array( 298, 'children' ) ),
+		);
+
+		foreach ( $related as $type => $rels ) {
+			$map[ $type ]['related'] = array(
+				'title' => 'مرتبط',
+				'rels'  => array_map( function ( $r ) { return array( 'id' => $r[0], 'dir' => $r[1] ); }, $rels ),
+			);
+		}
+
 		if ( function_exists( 'apply_filters' ) ) {
 			$map = apply_filters( 'topersia_g_relmap', $map );
 		}

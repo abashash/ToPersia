@@ -217,7 +217,8 @@ t( 'P5-D395: خانهٔ والد (استان · شهرستان · شهر) پیش
 	&& ! $sd_ok( $sc_src, str_replace( 'is_string( $req ) && isset( $fields[ $req ] )', 'isset( $fields[ $req ] )', $sd_core ) ) );
 /* نقشهٔ رابطه — گام ۱ · تولیدشده با scripts/tp-relmap-gen.php از Jetengine_Skin.json */
 $relmap = topersia_g_relmap();
-t( 'رابطه: هر دوازده نوع پست نقشه دارند', 12 === count( $relmap ), 'شمار: ' . count( $relmap ) );
+$relmap_core = array_filter( $relmap, function ( $g ) { return array( 'related' ) !== array_keys( $g ); } );   /* نوعی که فقط «مرتبط» دارد (P5-D503) جدا */
+t( 'رابطه: هر دوازده نوع پست نقشه دارند', 12 === count( $relmap_core ), 'شمار: ' . count( $relmap_core ) );
 
 /** جهت یک رابطه در گروهی از یک نوع پست. */
 function rd( $pt, $group, $rel_id ) {
@@ -244,7 +245,7 @@ $pv_ids = array();
  * (۷۳ شهرستان→شهر است، نه استان→چیزی). شمردنشان این گارد را از معنا
  * می‌انداخت: دیگر «استان چند رابطه دارد» را نمی‌سنجید.
  */
-foreach ( $relmap['tp_province'] as $g ) {
+foreach ( array_diff_key( $relmap['tp_province'], array( 'related' => 1 ) ) as $g ) {
 
 	if ( isset( $g['rels'] ) ) {
 		foreach ( $g['rels'] as $s ) { $pv_ids[ (int) $s['id'] ] = 1; }
@@ -262,7 +263,7 @@ foreach ( $relmap['tp_province'] as $g ) {
 		$pv_ids[ (int) $first['id'] ] = 1;
 	}
 }
-t( 'رابطه: استان ۳۰ رابطه دارد، نه ۳۴', 30 === count( $pv_ids ), 'شمار: ' . count( $pv_ids ) );
+t( 'رابطه: استان ۳۰ رابطه دارد، نه ۳۴ (گروه «مرتبط» P5-D503 جدا)', 30 === count( $pv_ids ), 'شمار: ' . count( $pv_ids ) );
 t( 'رابطه: ۸۲ و ۸۳ و ۱۲۵ و ۱۲۸ عمداً در استان نیستند',
 	! isset( $pv_ids[82] ) && ! isset( $pv_ids[83] ) && ! isset( $pv_ids[125] ) && ! isset( $pv_ids[128] ) );
 $pv_nature = array_column( $relmap['tp_province']['nature']['rels'], 'id' );
@@ -2311,6 +2312,7 @@ require __DIR__ . '/assert-496.php';   /* P5-D496 · P5-D495 */
 require __DIR__ . '/assert-497.php';   /* P5-D497 */
 require __DIR__ . '/assert-42.php';    /* P5-D498 */
 require __DIR__ . '/assert-499.php';   /* P5-D499 */
+require __DIR__ . '/assert-502.php';   /* P5-D502 */
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

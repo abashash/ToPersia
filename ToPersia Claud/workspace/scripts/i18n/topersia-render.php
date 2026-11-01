@@ -472,6 +472,7 @@ return array(
 	'محله‌ها'                         => array( 'en' => 'Neighborhoods', 'ar' => 'الأحياء' ),
 	'جاذبه‌های شاخص %s'               => array( 'en' => 'Top attractions of %s', 'ar' => 'أبرز معالم %s' ),
 	'گذرهای مرزی'                     => array( 'en' => 'Border crossings', 'ar' => 'المنافذ الحدودية' ),
+	'مرتبط'                          => array( 'en' => 'Related', 'ar' => 'ذات صلة' ),
 	'زیرشاخه‌ها'                      => array( 'en' => 'Sub-ranges', 'ar' => 'السلاسل الفرعية' ),
 
 	/* ── نوار بخش‌ها، نوار پایین و برگۀ «بخش‌ها» ─────────────────── */
