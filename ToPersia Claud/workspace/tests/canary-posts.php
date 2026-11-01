@@ -22,6 +22,7 @@ if ( function_exists( 'jet_engine' ) && isset( jet_engine()->relations ) ) {
 }
 $edges = array();
 $bad   = array();
+$sr    = array();   /* دستهٔ 39-ب: هر یال نمونه↔واقعی، از هر نوع رابطه (تک‌والد و چندبه‌چند) */
 foreach ( $wpdb->get_results( "SELECT rel_id, parent_object_id p, child_object_id c FROM {$wpdb->prefix}jet_rel_default", ARRAY_A ) as $e ) {
 	$p  = (int) $e['p'];
 	$c  = (int) $e['c'];
@@ -29,13 +30,14 @@ foreach ( $wpdb->get_results( "SELECT rel_id, parent_object_id p, child_object_i
 	$cs = isset( $sample[ $c ] );
 	if ( ! $ps && ! $cs ) { $edges[ $e['rel_id'] . '|' . $p . '|' . $c ] = 1; continue; }
 	if ( $ps !== $cs ) {
-		$ty = $types[ (int) $e['rel_id'] ] ?? '?';
+		$sr[ $e['rel_id'] . '|' . $p . '|' . $c ] = 1;
+		$ty =$types[ (int) $e['rel_id'] ] ?? '?';
 		if ( 'many_to_many' !== $ty && ! ( 'one_to_many' === $ty && $cs ) ) { $bad[] = $e['rel_id'] . ':' . $p . '→' . $c . ' (' . $ty . ')'; }
 	}
 }
 
 if ( 'save' === $cmd ) {
-	file_put_contents( $file, serialize( array( 'posts' => $now, 'edges' => $edges ) ) );
+	file_put_contents( $file, serialize( array( 'posts' => $now, 'edges' => $edges, 'sr' => $sr ) ) );
 	echo count( $now ) . ' posts, ' . count( $edges ) . " edges saved\n";
 	exit( 0 );
 }
@@ -54,5 +56,12 @@ if ( isset( $saved['edges'] ) ) {
 	echo 'edges-gone: ' . ( $rg ? implode( ', ', array_slice( $rg, 0, 10 ) ) . ( count( $rg ) > 10 ? ' …' . count( $rg ) : '' ) : 'none' ) . "\n";
 	echo 'edges-new: ' . ( $rn ? implode( ', ', array_slice( $rn, 0, 10 ) ) . ( count( $rn ) > 10 ? ' …' . count( $rn ) : '' ) : 'none' ) . "\n";
 }
+/* یال نمونه↔واقعیِ تازه نسبت به ذخیره (پست نمونه به والد/فرزند واقعی وصل شده) ← خطا؛ رفتن یال فقط اطلاع */
+$srn = isset( $saved['sr'] ) ? array_keys( array_diff_key( $sr, $saved['sr'] ) ) : array();
+$srg = isset( $saved['sr'] ) ? array_keys( array_diff_key( $saved['sr'], $sr ) ) : array();
+if ( isset( $saved['sr'] ) ) {
+	echo 'sample-real-new: ' . ( $srn ? implode( ', ', array_slice( $srn, 0, 10 ) ) . ( count( $srn ) > 10 ? ' …' . count( $srn ) : '' ) : 'none' ) . "\n";
+	echo 'sample-real-gone: ' . ( $srg ? implode( ', ', array_slice( $srg, 0, 10 ) ) . ( count( $srg ) > 10 ? ' …' . count( $srg ) : '' ) : 'none' ) . " (اطلاع)\n";
+}
 echo 'single-parent-sample-edges: ' . ( $bad ? implode( ', ', array_slice( $bad, 0, 10 ) ) . ( count( $bad ) > 10 ? ' …' . count( $bad ) : '' ) : 'none' ) . "\n";
-if ( $gone || $bad || ( isset( $saved['edges'] ) && ( $rg || $rn ) ) ) { exit( 1 ); }
+if ( $gone || $bad || $srn || ( isset( $saved['edges'] ) && ( $rg || $rn ) ) ) { exit( 1 ); }
