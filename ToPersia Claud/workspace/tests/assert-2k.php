@@ -50,7 +50,7 @@ tp441_mut( 'پیکربندی سرور: order (آنلاین‌اول/آفلاین
 	function ( $x ) {
 		return false !== strpos( $x, "'order'       => 'pmtiles' === \$prov ? 'offline-first' : 'online-first'," ) && false !== strpos( $x, "'styles'      => \$have ? array( 'base', 'transit' ) : array( 'base' )," )
 			&& false !== strpos( $x, "'active' === \$sat['status'] && ! empty( \$sat['key'] )" ) && false !== strpos( $x, "\$cfg['styles'][] = 'satellite';" )
-			&& false !== strpos( $x, "'?v=' . filemtime( \$file )" ) && false !== strpos( $x, 'function topersia_g_map_style_bar( $post_id )' ) && false !== strpos( $x, 'data-tp-map-styles role="group"' )
+			&& false !== strpos( $x, "'?v=' . topersia_g_file_ver( \$file )" ) && false !== strpos( $x, 'function topersia_g_map_style_bar( $post_id )' ) && false !== strpos( $x, 'data-tp-map-styles role="group"' )
 			&& false !== strpos( $x, "topersia_api( 'map.tiles', false, true )" );
 	},
 	$zn2k, str_replace( "'order'       => 'pmtiles' === \$prov ? 'offline-first' : 'online-first',", '', $zn2k ) );

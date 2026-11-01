@@ -28,9 +28,9 @@ class TP_AI_Frontend {
 		$css_file = TP_AI_PATH . 'assets/css/topersia-ai.css';
 		$js_file  = TP_AI_PATH . 'assets/js/topersia-ai.js';
 
-		// filemtime-based version busts caches whenever the asset changes.
-		$css_ver = is_file( $css_file ) ? filemtime( $css_file ) : TP_AI_VERSION;
-		$js_ver  = is_file( $js_file ) ? filemtime( $js_file ) : TP_AI_VERSION;
+		// Content-hash version busts caches only when the asset really changes (P5-D496).
+		$css_ver = is_file( $css_file ) ? substr( md5_file( $css_file ), 0, 10 ) : TP_AI_VERSION;
+		$js_ver  = is_file( $js_file ) ? substr( md5_file( $js_file ), 0, 10 ) : TP_AI_VERSION;
 
 		wp_register_style(
 			'topersia-ai',

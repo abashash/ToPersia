@@ -4308,8 +4308,8 @@ function topersia_dequeue_wp_embed() {
  * نگه می‌دارد، نه اینکه بی‌نسخه شود؛ و دارایی محلی بی `ver=` هم زمان
  * پرونده می‌گیرد.
  */
-add_filter( 'script_loader_src', 'topersia_version_to_mtime', 100 );
-add_filter( 'style_loader_src', 'topersia_version_to_mtime', 100 );
+add_filter( 'script_loader_src', 'topersia_version_to_hash', 100 );
+add_filter( 'style_loader_src', 'topersia_version_to_hash', 100 );
 
 /**
  * ریشۀ نشانی سایت، بی پیشوند زبان — home_url() در صفحۀ /en/ پیشوند WPML
@@ -4340,7 +4340,20 @@ function topersia_asset_file( $src ) {
 	return '';
 }
 
-function topersia_version_to_mtime( $src ) {
+/** نسخۀ فایل از هش محتوا (P5-D496)؛ بی فایل، نسخۀ هسته. */
+function topersia_asset_hash_ver( $file ) {
+
+	static $memo = array();
+
+	if ( ! isset( $memo[ $file ] ) ) {
+		$hash          = is_file( $file ) ? md5_file( $file ) : false;
+		$memo[ $file ] = false === $hash ? TOPERSIA_CORE_VERSION : substr( $hash, 0, 10 );
+	}
+
+	return $memo[ $file ];
+}
+
+function topersia_version_to_hash( $src ) {
 
 	if ( is_admin() || ! is_string( $src ) || '' === $src ) {
 		return $src;
@@ -4357,7 +4370,7 @@ function topersia_version_to_mtime( $src ) {
 		return $src;
 	}
 
-	return add_query_arg( 'ver', filemtime( $file ), remove_query_arg( 'ver', $src ) );
+	return add_query_arg( 'ver', topersia_asset_hash_ver( $file ), remove_query_arg( 'ver', $src ) );
 }
 
 /**

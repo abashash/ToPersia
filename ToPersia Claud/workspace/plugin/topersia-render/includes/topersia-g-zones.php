@@ -705,6 +705,34 @@ if ( ! function_exists( 'topersia_g_table_html' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_file_ver' ) ) {
+	/**
+	 * نسخۀ نشانی فایل داده از محتوا، نه زمان ویرایش.  P5-D496
+	 * تا ۲۰ مگابایت هش کامل؛ بزرگ‌تر (PMTiles ۷۰۵ مگابایتی) اندازه و یک مگابایت آغاز و پایان، چون هش کامل هر صفحه ثانیه‌ها می‌برد.
+	 */
+	function topersia_g_file_ver( $file ) {
+
+		$size = (int) @filesize( $file );
+
+		if ( $size <= 20971520 ) {
+			return substr( (string) @md5_file( $file ), 0, 10 );
+		}
+
+		$fh = @fopen( $file, 'rb' );
+
+		if ( ! $fh ) {
+			return (string) $size;
+		}
+
+		$head = (string) fread( $fh, 1048576 );
+		fseek( $fh, -1048576, SEEK_END );
+		$tail = (string) fread( $fh, 1048576 );
+		fclose( $fh );
+
+		return substr( md5( $size . $head . $tail ), 0, 10 );
+	}
+}
+
 if ( ! function_exists( 'topersia_g_verified_types' ) ) {
 	/** نوع‌هایی که مهر «آخرین بازبینی و منبع» کنار بلوکشان می‌آید؛ همان فهرست `topersia_pack_verified_types` هسته.  P5-D492 */
 	function topersia_g_verified_types() {
@@ -4267,7 +4295,7 @@ if ( ! function_exists( 'topersia_g_map_provider' ) ) {
 				$cfg = array(
 					'name'        => 'maplibre-pmtiles',
 					'base'        => topersia_render_url() . 'assets/map/',
-					'tiles'       => $have ? set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . $rel ) . '?v=' . filemtime( $file ) : '',
+					'tiles'       => $have ? set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . $rel ) . '?v=' . topersia_g_file_ver( $file ) : '',
 					'attribution' => __( '© مشارکت‌کنندگان OpenStreetMap', 'topersia' ),
 					'order'       => 'pmtiles' === $prov ? 'offline-first' : 'online-first',
 					'styles'      => $have ? array( 'base', 'transit' ) : array( 'base' ),
@@ -4378,7 +4406,7 @@ if ( ! function_exists( 'topersia_g_map_attr' ) ) {
 			$file = trailingslashit( (string) $up['basedir'] ) . 'tiles/boundaries/' . $uid . '.geojson';
 
 			if ( is_file( $file ) ) {
-				$cfg['bound'] = set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . 'tiles/boundaries/' . $uid . '.geojson' ) . '?v=' . filemtime( $file );
+				$cfg['bound'] = set_url_scheme( trailingslashit( (string) $up['baseurl'] ) . 'tiles/boundaries/' . $uid . '.geojson' ) . '?v=' . topersia_g_file_ver( $file );
 			}
 		}
 

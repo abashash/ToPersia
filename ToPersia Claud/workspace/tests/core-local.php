@@ -482,7 +482,7 @@ $ver_claim = function ( $list ) {
 	if ( count( $list ) < 5 ) { return false; }
 	foreach ( $list as $src ) {
 		$file = topersia_asset_file( $src );
-		if ( ! preg_match( '/[?&]ver=(\d+)/', $src, $v ) || '' === $file || ! is_file( $file ) || (int) $v[1] !== filemtime( $file ) ) {
+		if ( ! preg_match( '/[?&]ver=([0-9a-f]{10})/', $src, $v ) || '' === $file || ! is_file( $file ) || $v[1] !== substr( md5_file( $file ), 0, 10 ) ) {
 			return false;
 		}
 	}
@@ -495,7 +495,7 @@ $old_mtime = function ( $src ) {
 	$path  = str_replace( array( '/' . TOPERSIA_ASSETS_PATH . '/', '/' . TOPERSIA_CORE_PATH . '/' ), array( '/wp-content/', '/wp-includes/' ), $clean );
 	return file_exists( untrailingslashit( ABSPATH ) . $path ) ? $src : remove_query_arg( 'ver', $src );
 };
-mut( 'هر <link> و <script> افزونه‌های ما در HTML استان، شهر و صفحۀ انگلیسی ?ver= دارد برابر زمان تغییر پرونده؛ جهش ۴٫۱۰٫۰ نسخه را برمی‌دارد',
+mut( 'هر <link> و <script> افزونه‌های ما در HTML استان، شهر و صفحۀ انگلیسی ?ver= دارد برابر هش محتوا (P5-D496) نسخه را برمی‌دارد',
 	$ver_claim, $assets, array_map( $old_mtime, $assets ), count( $assets ) . ' دارایی' );
 
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pass']}   افتاده: {$GLOBALS['fail']}\n";

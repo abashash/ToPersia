@@ -283,6 +283,19 @@ function tp_sensitive( array $paths ): array {
 	return array_values( array_filter( $paths, static fn( $p ) => (bool) preg_match( $re, $p ) ) );
 }
 
+/** P5-D495: هشدار پست غیرنمونه با entity_uid محلی؛ هرگز preflight را قرمز نمی‌کند (OPS-D006). بی وردپرس محلی، ساکت. */
+function tp_uid_host_warning(): void {
+	$w   = tp_workspace();
+	$env = json_decode( (string) @file_get_contents( "{$w}/tests/env.json" ), true );
+	if ( empty( $env['wp_cli'] ) || ! is_file( (string) $env['wp_cli'] ) || ! is_dir( (string) ( $env['wp'] ?? '' ) ) ) {
+		return;
+	}
+	[ $c, $o ] = tp_run( array( PHP_BINARY, $env['wp_cli'], '--path=' . $env['wp'], '--url=' . $env['base'], 'eval-file', 'scripts/tp-uid-hosts.php', 'count' ), $w );
+	if ( 0 === $c && (int) trim( $o ) > 0 ) {
+		tp_out( '⚠ پست غیرنمونه با entity_uid محلی: ' . (int) trim( $o ) . ' — گزارش: scripts/tp-uid-hosts.php · مانع راه‌اندازی LAUNCH H-11' );
+	}
+}
+
 function tp_preflight( bool $quiet_ok = false ): int {
 	if ( '' === tp_root() ) {
 		tp_err( '❌ این‌جا مخزن git نیست.' );
@@ -318,6 +331,9 @@ function tp_preflight( bool $quiet_ok = false ): int {
 	} elseif ( ! preg_match( '#github\.com[/:]#i', $url ) ) {
 		++$warn;
 		tp_out( '⚠ origin روی GitHub نیست: ' . trim( $url ) );
+	}
+	if ( ! $quiet_ok ) {
+		tp_uid_host_warning();
 	}
 	if ( 0 === $fail ) {
 		if ( ! $quiet_ok ) {

@@ -124,16 +124,22 @@ if ( ! function_exists( 'topersia_render_url' ) ) {
 }
 
 /**
- * نسخۀ فایل ایستا از روی زمان ویرایش.
+ * نسخۀ فایل ایستا: ده نویسۀ اول هش محتوا؛ بی فایل، نسخۀ افزونه.  P5-D496
  *
  * @param string $relative مسیر نسبی.
  * @return string
  */
 if ( ! function_exists( 'topersia_render_asset_version' ) ) {
 	function topersia_render_asset_version( $relative ) {
+		static $memo = array();
+
+		if ( isset( $memo[ $relative ] ) ) {
+			return $memo[ $relative ];
+		}
+
 		$base = topersia_render_path();
 
-		if ( '' === $base || ! function_exists( 'file_exists' ) || ! function_exists( 'filemtime' ) ) {
+		if ( '' === $base || ! function_exists( 'file_exists' ) || ! function_exists( 'md5_file' ) ) {
 			return TOPERSIA_RENDER_VERSION;
 		}
 
@@ -143,9 +149,11 @@ if ( ! function_exists( 'topersia_render_asset_version' ) ) {
 			return TOPERSIA_RENDER_VERSION;
 		}
 
-		$time = @filemtime( $full );
+		$hash = @md5_file( $full );
 
-		return ( false === $time ) ? TOPERSIA_RENDER_VERSION : (string) $time;
+		$memo[ $relative ] = ( false === $hash ) ? TOPERSIA_RENDER_VERSION : substr( $hash, 0, 10 );
+
+		return $memo[ $relative ];
 	}
 }
 

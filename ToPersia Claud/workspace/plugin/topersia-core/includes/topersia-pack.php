@@ -348,6 +348,14 @@ function topersia_pack_verified_types() {
 }
 
 /**
+ * میزبان entity_uid محلی است؟  P5-D495 — @id عمومی JSON-LD همین مقدار است.
+ */
+function topersia_pack_uid_is_local( $uid ) {
+	$host = strtolower( (string) wp_parse_url( (string) $uid, PHP_URL_HOST ) );
+	return '' !== $host && ( 'localhost' === $host || '127.0.0.1' === $host || (bool) preg_match( '/\.(local|localhost|test)$/', $host ) );
+}
+
+/**
  * هشدار شباهت متنی بین فیلدهای متنی یک پست — هرگز مانع نیست.  P5-D493
  * جاکارد شینگل سه‌واژه‌ای؛ فقط متن‌های حداقل TOPERSIA_PACK_SIMILAR_MIN_WORDS واژه، آستانۀ TOPERSIA_PACK_SIMILAR_RATIO.
  *
@@ -2169,6 +2177,13 @@ function topersia_pack_plan_post( $data, $index, $pending = array() ) {
 	}
 	foreach ( topersia_pack_similarity_notes( $tp_texts ) as $w ) {
 		$plan['notes'][] = $w;
+	}
+
+	/* P5-D495: مانع نیست؛ مانع راه‌اندازی در LAUNCH بند H-11 */
+	$tp_uid_target = ! empty( $plan['target'] ) ? (int) $plan['target'] : 0;
+	$tp_uid_value  = $tp_uid_target ? (string) get_post_meta( $tp_uid_target, 'entity_uid', true ) : ( isset( $post['entity_uid'] ) ? (string) $post['entity_uid'] : '' );
+	if ( topersia_pack_uid_is_local( $tp_uid_value ) && ! ( $tp_uid_target && get_post_meta( $tp_uid_target, '_tp_sample', true ) ) ) {
+		$plan['notes'][] = 'هشدار: پست غیرنمونه با entity_uid محلی (' . $tp_uid_value . ')؛ این مقدار @id عمومی JSON-LD است.';
 	}
 
 	/* دو ارز با یک کد ISO (#204 در برابر #1968) — مانع نیست */

@@ -1039,7 +1039,7 @@ t( 'اسلایدر: هر دکمه به شناسهٔ اسلایدرِ خودش و
  * ── هر دارایی نسخه می‌گیرد ──────────────────────────────────────
  *
  * سمتِ ما درست است و باید درست بماند: هر `wp_enqueue_*` پارامتر نسخه را
- * از `topersia_render_asset_version()` می‌گیرد که `filemtime` برمی‌گرداند.
+ * از `topersia_render_asset_version()` می‌گیرد که هش محتوا برمی‌گرداند (P5-D496).
  *
  * که روی سایت زنده `?ver=` دیده نمی‌شود، کارِ ما نیست — چیزی بیرون از
  * این افزونه آن را از **نشانیِ افزونه‌ها** برمی‌دارد. جزئیات در گزارش.
@@ -1055,7 +1055,7 @@ foreach ( $eq[0] as $call ) {
 	if ( false === strpos( $call, 'topersia_render_asset_version(' ) ) { $no_version ++; }
 }
 
-t( 'دارایی: هر enqueue نسخه را از filemtime می‌گیرد',
+t( 'دارایی: هر enqueue نسخه را از topersia_render_asset_version می‌گیرد',
 	$enqueue_calls >= 6 && 0 === $no_version,
 	'بدون نسخه: ' . $no_version . ' از ' . $enqueue_calls );
 
@@ -2307,6 +2307,7 @@ require __DIR__ . '/assert-36c.php';
 require __DIR__ . '/assert-39.php';
 require __DIR__ . '/assert-40.php';
 require __DIR__ . '/assert-41.php';
+require __DIR__ . '/assert-496.php';   /* P5-D496 · P5-D495 */
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────
