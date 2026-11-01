@@ -17,8 +17,8 @@ global $wpdb;
 $GLOBALS['tpc_t'] = array( 0, 0 );
 function t( $label, $ok, $note = '' ) { if ( $ok ) { $GLOBALS['tpc_t'][0]++; echo "  ✅ $label\n"; } else { $GLOBALS['tpc_t'][1]++; echo "  ❌ $label   ← $note\n"; } }
 
-$uid = function ( $u ) use ( $wpdb ) { return (int) $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='entity_uid' AND meta_value=%s LIMIT 1", $u ) ); };
-$prov = $uid( home_url( '/e/province/isfahan' ) ); $city = $uid( home_url( '/e/city/isfahan' ) );
+$uid = function ( $u ) { $found = topersia_uid_find_ids( $u ); return $found ? (int) $found[0] : 0; };
+$prov = $uid( 'province/isfahan' ); $city = $uid( 'city/isfahan' );
 $mon  = (int) $wpdb->get_var( "SELECT ID FROM {$wpdb->posts} WHERE post_type IN ('tp_monument','tp_ancient_site') AND post_status='publish' ORDER BY ID LIMIT 1" );
 
 /* برچسب‌های یک صفحه */

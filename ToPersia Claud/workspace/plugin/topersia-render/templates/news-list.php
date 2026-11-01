@@ -29,7 +29,7 @@ add_action( 'wp_head', function () use ( $tp_place, $tp_title ) {
 		'url'      => topersia_g_news_list_url( $tp_place, max( 1, (int) get_query_var( 'paged' ) ) ),
 	);
 
-	$about = trim( (string) get_post_meta( $tp_place, 'entity_uid', true ) );
+	$about = function_exists( 'topersia_schema_uid' ) ? (string) topersia_schema_uid( $tp_place ) : trim( (string) get_post_meta( $tp_place, 'entity_uid', true ) );   /* همان @id گراف.  P5-D499 */
 
 	if ( '' !== $about ) {
 		$ld['about'] = array( '@id' => $about );

@@ -860,9 +860,84 @@ if ( ! defined( 'TOPERSIA_AUTO_PROVINCE' ) ) {
 	define( 'TOPERSIA_AUTO_PROVINCE', (bool) topersia_setting( 'auto_province' ) );
 }
 
+/** مبدأ ثابت شناسۀ یکتا؛ به میزبان نصب وابسته نیست (P5-D499) — برای آزمون در wp-config قابل تغییر. */
+if ( ! defined( 'TOPERSIA_CANONICAL_ORIGIN' ) ) {
+	define( 'TOPERSIA_CANONICAL_ORIGIN', 'https://topersia.com' );
+}
+
 /** دامنۀ پایۀ شناسۀ یکتای موجودیت — بدون اسلش پایانی. */
 if ( ! defined( 'TOPERSIA_UID_BASE' ) ) {
-	define( 'TOPERSIA_UID_BASE', 'https://topersia.com/e' );
+	define( 'TOPERSIA_UID_BASE', rtrim( TOPERSIA_CANONICAL_ORIGIN, '/' ) . '/e' );
+}
+
+/**
+ * مسیر یک شناسۀ یکتا، بی میزبان: `province/isfahan`.  P5-D499
+ *
+ * نشانی `/e/` با هر میزبان و مسیر خالی همان مسیر را می‌دهند؛ نشانی بیرون از `/e/` مسیر ندارد (خالی).
+ * ورودی بی میزبان (نامک یا مسیر) همان می‌ماند، چون translation_of می‌تواند نامک باشد.
+ */
+function topersia_uid_path( $uid ) {
+
+	$uid = trim( (string) $uid );
+
+	if ( preg_match( '~^https?://[^/]+/e/(.+)$~i', $uid, $m ) ) {
+		return rtrim( $m[1], '/' );
+	}
+
+	if ( preg_match( '~^https?://~i', $uid ) ) {
+		return '';
+	}
+
+	return trim( (string) preg_replace( '~^/?e/~', '', $uid ), '/' );
+}
+
+/** شناسۀ یکتای کامل از مسیر یا از شناسۀ دیگری، همیشه با مبدأ ثابت؛ مسیر خالی ← خالی.  P5-D499 */
+function topersia_uid_build( $path ) {
+
+	$path = topersia_uid_path( $path );
+
+	return '' === $path ? '' : TOPERSIA_UID_BASE . '/' . $path;
+}
+
+/** کلید مقایسه: مسیر، و برای نشانی بیرون از `/e/` خود مقدار، تا دو نشانی متفاوت یکی نشوند.  P5-D499 */
+function topersia_uid_key( $uid ) {
+
+	$path = topersia_uid_path( $uid );
+
+	return '' === $path ? trim( (string) $uid ) : $path;
+}
+
+/**
+ * پست‌هایی که شناسه‌شان همین مسیر را دارد، با هر میزبان (همۀ زبان‌ها، چون entity_uid کلاس Copy است).  P5-D499
+ *
+ * @param string $uid شناسه یا مسیر.
+ * @return int[]
+ */
+function topersia_uid_find_ids( $uid ) {
+
+	global $wpdb;
+
+	$path = topersia_uid_path( $uid );
+
+	if ( '' === $path ) {
+		return array();
+	}
+
+	$rows = $wpdb->get_results( $wpdb->prepare(
+		"SELECT post_id, meta_value FROM {$wpdb->postmeta} WHERE meta_key = 'entity_uid' AND ( meta_value = %s OR meta_value LIKE %s )",
+		$path,
+		'%/e/' . $wpdb->esc_like( $path )
+	) );
+
+	$ids = array();
+
+	foreach ( (array) $rows as $row ) {
+		if ( topersia_uid_path( $row->meta_value ) === $path ) {
+			$ids[] = (int) $row->post_id;
+		}
+	}
+
+	return $ids;
 }
 
 /**
@@ -2334,7 +2409,7 @@ function topersia_fill_entity_uid( $post_id, $post, $update ) {
 	update_post_meta(
 		$post_id,
 		'entity_uid',
-		TOPERSIA_UID_BASE . '/' . $segment . '/' . $slug
+		topersia_uid_build( $segment . '/' . $slug )
 	);
 }
 

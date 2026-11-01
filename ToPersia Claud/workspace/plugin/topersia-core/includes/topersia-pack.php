@@ -1361,7 +1361,7 @@ function topersia_pack_replace_warnings( $type, $title, $slug, $uid, $same_ids )
 			if ( ! is_array( $c ) || ( isset( $c['type'] ) ? $c['type'] : '' ) !== $type ) {
 				continue;
 			}
-			$hit = ( '' !== $slug && isset( $c['slug'] ) && $c['slug'] === $slug ) || ( '' !== $uid && isset( $c['uid'] ) && $c['uid'] === $uid ) || ( '' !== $title && isset( $c['title'] ) && $c['title'] === $title );
+			$hit = ( '' !== $slug && isset( $c['slug'] ) && $c['slug'] === $slug ) || ( '' !== $uid && isset( $c['uid'] ) && topersia_uid_key( $c['uid'] ) === topersia_uid_key( $uid ) ) || ( '' !== $title && isset( $c['title'] ) && $c['title'] === $title );
 			if ( $hit ) {
 				$out[] = 'هشدار P5-D481: پستِ #' . (int) $c['post'] . ' با همین نام/نامک ' . (int) $c['count'] . ' یال رابطه داشت و حذف شده؛ پستِ تازه آن‌ها را ندارد — یال‌ها را با scripts/tp-repair-iran-edges.php (dry-run) از پشتیبان ترمیم کن';
 				break;
@@ -1778,7 +1778,7 @@ function topersia_pack_parse( $raw ) {
 		$keys  = array();
 
 		if ( ! empty( $post['entity_uid'] ) && is_string( $post['entity_uid'] ) ) {
-			$keys[] = 'uid:' . $plang . ':' . $post['entity_uid'];
+			$keys[] = 'uid:' . $plang . ':' . topersia_uid_key( $post['entity_uid'] );
 		}
 		if ( ! empty( $post['slug'] ) && is_string( $post['slug'] ) ) {
 			$keys[] = 'slug:' . $plang . ':' . $post['slug'];
@@ -1817,15 +1817,17 @@ function topersia_pack_find( $post_type, $uid, $slug, $lang ) {
 
 	$ids = array();
 
-	if ( is_string( $uid ) && '' !== $uid ) {
+	/* تطبیق فقط با مسیر؛ میزبان پرونده و میزبان ذخیره‌شده ممکن است فرق کنند.  P5-D499 */
+	$by_uid = is_string( $uid ) ? topersia_uid_find_ids( $uid ) : array();
+
+	if ( $by_uid ) {
 		$ids = get_posts( array(
 			'post_type'        => $post_type,
 			'post_status'      => topersia_pack_live_statuses(),
-			'numberposts'      => 20,
+			'numberposts'      => -1,
 			'fields'           => 'ids',
 			'suppress_filters' => true,
-			'meta_key'         => 'entity_uid', // phpcs:ignore WordPress.DB.SlowDBQuery
-			'meta_value'       => $uid,         // phpcs:ignore WordPress.DB.SlowDBQuery
+			'post__in'         => $by_uid,
 		) );
 	}
 

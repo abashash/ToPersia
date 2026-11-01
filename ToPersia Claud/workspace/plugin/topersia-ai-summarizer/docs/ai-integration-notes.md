@@ -22,11 +22,13 @@ types could otherwise collide on the same `@id`.
   Core helper - `topersia_entity_meta()` is for plain-text content fields).
 - Written once, by Core, on `save_post` (priority 1000), only on the
   **default-language** post. Immutable after that.
-- `TOPERSIA_UID_BASE` constant = `https://topersia.com/e`.
+- `TOPERSIA_UID_BASE` constant = `https://topersia.com/e`, built from
+  `TOPERSIA_CANONICAL_ORIGIN`. Use `topersia_uid_build()` and `topersia_uid_path()`
+  rather than comparing the host (P5-D499).
 - Read it the same way `topersia-schema` does (`topersia_schema_uid()`):
   `get_post_meta( $post_id, 'entity_uid', true )`.
 - The type segment can be parsed back out of an existing `entity_uid`
-  (`substr` after `TOPERSIA_UID_BASE . '/'`, first path segment) rather than
+  (first segment of `topersia_uid_path()`) rather than
   recomputed - see `TP_AI_Context::entity_type()`.
 
 ## Shared entity meta-box fields (real names)

@@ -119,7 +119,14 @@ class TP_AI_Context {
 	protected static function entity_uid( $post_id ) {
 		$uid = get_post_meta( $post_id, 'entity_uid', true );
 
-		return ( is_string( $uid ) && '' !== $uid ) ? $uid : null;
+		if ( ! is_string( $uid ) || '' === $uid ) {
+			return null;
+		}
+
+		// P5-D499: always the canonical origin, so a local host never reaches the provider.
+		$canonical = function_exists( 'topersia_uid_build' ) ? topersia_uid_build( $uid ) : '';
+
+		return '' !== $canonical ? $canonical : $uid;
 	}
 
 	/**
@@ -136,9 +143,8 @@ class TP_AI_Context {
 	 * @return string
 	 */
 	protected static function entity_type( \WP_Post $post, $uid ) {
-		if ( $uid && defined( 'TOPERSIA_UID_BASE' ) && 0 === strpos( $uid, TOPERSIA_UID_BASE . '/' ) ) {
-			$tail  = substr( $uid, strlen( TOPERSIA_UID_BASE ) + 1 );
-			$parts = explode( '/', $tail );
+		if ( $uid && function_exists( 'topersia_uid_path' ) ) {
+			$parts = explode( '/', topersia_uid_path( $uid ) );
 			if ( ! empty( $parts[0] ) ) {
 				return $parts[0];
 			}

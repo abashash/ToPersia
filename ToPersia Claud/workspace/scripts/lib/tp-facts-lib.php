@@ -83,7 +83,9 @@ if ( ! defined( 'TPF_LIB' ) ) {
 		static $memo = array();
 		if ( isset( $memo[ $uid ] ) ) { return $memo[ $uid ]; }
 		$def = apply_filters( 'wpml_default_language', null );
-		$ids = get_posts( array( 'post_type' => 'any', 'post_status' => 'any', 'numberposts' => 5, 'fields' => 'ids', 'meta_key' => 'entity_uid', 'meta_value' => $uid, 'suppress_filters' => false, 'lang' => $def ? $def : 'fa' ) );
+		$by  = topersia_uid_find_ids( $uid );   /* فقط با مسیر.  P5-D499 */
+		if ( ! $by ) { return $memo[ $uid ] = 0; }
+		$ids = get_posts( array( 'post_type' => 'any', 'post_status' => 'any', 'numberposts' => 5, 'fields' => 'ids', 'post__in' => $by, 'suppress_filters' => false, 'lang' => $def ? $def : 'fa' ) );
 		return $memo[ $uid ] = $ids ? (int) $ids[0] : 0;
 	}
 

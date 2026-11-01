@@ -2052,6 +2052,7 @@ if ( ! function_exists( 'topersia_g_sc_actionbar' ) ) {
 		}
 
 		$uid   = topersia_g_text( $pid, 'entity_uid' );
+		$uid   = function_exists( 'topersia_uid_build' ) && '' !== topersia_uid_build( $uid ) ? topersia_uid_build( $uid ) : $uid;   /* HTML عمومی با مبدأ ثابت.  P5-D499 */
 		$type  = function_exists( 'get_post_type' ) ? (string) get_post_type( $pid ) : '';
 		$url   = (string) get_permalink( $pid );
 		$title = topersia_g_title( $pid );

@@ -48,7 +48,7 @@ foreach ( $before as $rel_id => $list ) {
 		if ( ! $object ) { $st = 'no-relation'; }
 		elseif ( ! $op ) { $st = 'target-gone'; }
 		elseif ( $op->post_type !== $e['other']['type'] ) { $st = 'identity-mismatch'; $why = 'نوع ' . $op->post_type; }
-		elseif ( '' !== (string) $e['other']['uid'] && (string) get_post_meta( $other, 'entity_uid', true ) !== (string) $e['other']['uid'] ) { $st = 'identity-mismatch'; $why = 'entity_uid فرق دارد'; }
+		elseif ( '' !== (string) $e['other']['uid'] && topersia_uid_key( get_post_meta( $other, 'entity_uid', true ) ) !== topersia_uid_key( $e['other']['uid'] ) ) { $st = 'identity-mismatch'; $why = 'entity_uid فرق دارد'; }
 		else {
 			$exists = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}jet_rel_default WHERE rel_id=%d AND parent_object_id=%d AND child_object_id=%d", $rel_id, $new, $other ) );
 			if ( $exists ) { $st = 'exists'; }

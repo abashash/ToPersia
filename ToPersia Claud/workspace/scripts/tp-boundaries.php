@@ -62,7 +62,7 @@ function tpb_rows( $csv ) {
 	if ( is_file( $csv ) ) {
 		$fh = fopen( $csv, 'r' );
 		$hd = fgetcsv( $fh, 0, ',', '"', '\\' );
-		while ( ( $r = fgetcsv( $fh, 0, ',', '"', '\\' ) ) ) { if ( count( $r ) === count( $hd ) ) { $rows[ $r[0] ] = array_combine( $hd, $r ); } }
+		while ( ( $r = fgetcsv( $fh, 0, ',', '"', '\\' ) ) ) { if ( count( $r ) === count( $hd ) ) { $a = array_combine( $hd, $r ); $a['entity_uid'] = topersia_uid_build( $a['entity_uid'] ) ?: $a['entity_uid']; $rows[ $a['entity_uid'] ] = $a; } }
 		fclose( $fh );
 	}
 	return $rows;
@@ -114,6 +114,7 @@ if ( 'match' === $cmd ) {
 		foreach ( $ids as $p ) {
 			$uid = (string) get_post_meta( $p->ID, 'entity_uid', true );
 			if ( '' === $uid || '' === tpb_key( $uid ) ) { continue; }
+			$uid = topersia_uid_build( $uid );   /* کلید CSV با مبدأ ثابت.  P5-D499 */
 			if ( isset( $old[ $uid ] ) && 'confirmed' === $old[ $uid ]['status'] ) { $rows[ $uid ] = $old[ $uid ]; continue; }
 			$name = tpb_norm( (string) get_post_meta( $p->ID, 'official_name_fa', true ) ?: (string) get_post_meta( $p->ID, 'name_fa', true ) ?: $p->post_title );
 			$row  = array( 'entity_uid' => $uid, 'osm_type' => '', 'osm_id' => '', 'method' => '', 'status' => 'none', 'post_type' => $type, 'name_fa' => $name, 'parent_province' => '', 'city_point' => '' );
@@ -319,7 +320,8 @@ if ( 'report' === $cmd ) {
 	if ( $none && function_exists( 'topersia_g_sort_entities' ) ) {
 		$byid = array();
 		foreach ( $none as $uid => $r ) {
-			$q = get_posts( array( 'post_type' => 'tp_city', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => false, 'meta_key' => 'entity_uid', 'meta_value' => $uid ) );
+			$by = topersia_uid_find_ids( $uid );
+			$q  = $by ? get_posts( array( 'post_type' => 'tp_city', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => false, 'post__in' => $by ) ) : array();
 			if ( $q ) { $byid[ $q[0] ] = $r; }
 		}
 		$order = topersia_g_sort_entities( array_keys( $byid ) );

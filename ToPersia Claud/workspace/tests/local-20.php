@@ -7,11 +7,11 @@
 if ( ! defined( 'ABSPATH' ) || 'local' !== wp_get_environment_type() || false === strpos( home_url(), 'topersia.local' ) ) { fwrite( STDERR, "فقط نسخهٔ محلی\n" ); exit( 2 ); }
 $GLOBALS['l20'] = array( 0, 0 );
 function t( $label, $ok, $note = '' ) { if ( $ok ) { $GLOBALS['l20'][0]++; echo "  ✅ $label\n"; } else { $GLOBALS['l20'][1]++; echo "  ❌ $label   ← $note\n"; } }
-$uid = function ( $u ) { global $wpdb; return (int) $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='entity_uid' AND meta_value=%s LIMIT 1", $u ) ); };
+$uid = function ( $u ) { $found = topersia_uid_find_ids( $u ); return $found ? (int) $found[0] : 0; };
 
 echo "دستهٔ ۲۰ — محلی\n";
-$prov = $uid( home_url( '/e/province/isfahan' ) );
-$city = $uid( home_url( '/e/city/isfahan' ) );
+$prov = $uid( 'province/isfahan' );
+$city = $uid( 'city/isfahan' );
 $fams = function ( $fc ) { return array_count_values( array_map( function ( $f ) { return $f['properties']['k']; }, $fc['features'] ) ); };
 
 /* P5-D387 */

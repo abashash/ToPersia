@@ -18,7 +18,7 @@ if ( ! is_dir( $dir ) ) { mkdir( $dir, 0777, true ); }
 global $wpdb;
 if ( ! defined( 'SAVEQUERIES' ) ) { define( 'SAVEQUERIES', true ); }
 
-$uid = function ( $u ) use ( $wpdb ) { return (int) $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='entity_uid' AND meta_value=%s LIMIT 1", $u ) ); };
+$uid = function ( $u ) { $found = topersia_uid_find_ids( $u ); return $found ? (int) $found[0] : 0; };
 /* جاذبه‌ای که هر سه زبان را دارد؛ وگرنه نخستین */
 $mon = 0;
 foreach ( (array) $wpdb->get_col( "SELECT p.ID FROM {$wpdb->posts} p WHERE p.post_type IN ('tp_monument','tp_ancient_site') AND p.post_status='publish' ORDER BY p.ID" ) as $cand ) {
@@ -26,7 +26,7 @@ foreach ( (array) $wpdb->get_col( "SELECT p.ID FROM {$wpdb->posts} p WHERE p.pos
 	if ( 3 === $have ) { $mon = (int) $cand; break; }
 	if ( ! $mon ) { $mon = (int) $cand; }
 }
-$pages = array( 'province' => $uid( home_url( '/e/province/isfahan' ) ), 'city' => $uid( home_url( '/e/city/isfahan' ) ), 'monument' => $mon );
+$pages = array( 'province' => $uid( 'province/isfahan' ), 'city' => $uid( 'city/isfahan' ), 'monument' => $mon );
 
 $ok = 0; $bad = 0; $rows = array();
 foreach ( $pages as $name => $pid ) {

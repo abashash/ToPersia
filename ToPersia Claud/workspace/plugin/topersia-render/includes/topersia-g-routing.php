@@ -205,7 +205,7 @@ if ( ! function_exists( 'topersia_g_routing_links' ) ) {
 if ( ! function_exists( 'topersia_g_boundary_key' ) ) {
 	function topersia_g_boundary_key( $uid ) {
 
-		$path = (string) preg_replace( '~^https?://[^/]+/e/~', '', trim( (string) $uid ) );
+		$path = function_exists( 'topersia_uid_path' ) ? topersia_uid_path( $uid ) : (string) preg_replace( '~^https?://[^/]+/e/~', '', trim( (string) $uid ) );
 
 		return preg_match( '~^[a-z0-9-]+(/[a-z0-9-]+)*$~', $path ) ? str_replace( '/', '__', $path ) : '';
 	}

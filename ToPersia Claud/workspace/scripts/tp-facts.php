@@ -175,7 +175,7 @@ if ( 'match' === $cmd ) {
 	$ofile = $root . '/reference/osm-boundary-map.csv';
 	$rows = array_map( 'str_getcsv', file( $ofile ) );
 	$h = array_shift( $rows );
-	foreach ( $rows as $r ) { $a = array_combine( $h, $r ); if ( in_array( $a['status'], array( 'auto', 'confirmed' ), true ) && '' !== $a['osm_id'] ) { $osm[ $a['entity_uid'] ] = $a['osm_type'] . ':' . $a['osm_id']; } }
+	foreach ( $rows as $r ) { $a = array_combine( $h, $r ); if ( in_array( $a['status'], array( 'auto', 'confirmed' ), true ) && '' !== $a['osm_id'] ) { $osm[ topersia_uid_key( $a['entity_uid'] ) ] = $a['osm_type'] . ':' . $a['osm_id']; } }
 	$opc = trailingslashit( $up['basedir'] ) . 'tiles/boundaries-cache/overpass-iran.json';
 	$tagq = array();
 	if ( is_file( $opc ) ) {
@@ -183,7 +183,7 @@ if ( 'match' === $cmd ) {
 		foreach ( (array) $oj['elements'] as $e ) { if ( ! empty( $e['tags']['wikidata'] ) ) { $tagq[ $e['type'] . ':' . $e['id'] ] = tpf_qid( $e['tags']['wikidata'] ); } }
 	}
 	foreach ( $ents as $uid => &$e ) {
-		if ( '' === $e['qid'] && isset( $osm[ $uid ], $tagq[ $osm[ $uid ] ] ) && '' !== $tagq[ $osm[ $uid ] ] ) { $e['qid'] = $tagq[ $osm[ $uid ] ]; $e['method'] = 'osm-tag ' . $osm[ $uid ]; }
+		if ( '' === $e['qid'] && isset( $osm[ topersia_uid_key( $uid ) ], $tagq[ $osm[ topersia_uid_key( $uid ) ] ] ) && '' !== $tagq[ $osm[ topersia_uid_key( $uid ) ] ] ) { $e['qid'] = $tagq[ $osm[ topersia_uid_key( $uid ) ] ]; $e['method'] = 'osm-tag ' . $osm[ topersia_uid_key( $uid ) ]; }
 	}
 	unset( $e );
 
@@ -424,7 +424,13 @@ if ( 'report' === $cmd ) {
 	$rows = array_map( 'str_getcsv', file( $csv ) );
 	$h    = array_shift( $rows );
 	$h[0] = preg_replace( '/^\xEF\xBB\xBF/', '', $h[0] );
-	$rows = array_map( function ( $r ) use ( $h ) { return array_combine( $h, $r ); }, $rows );
+	$rows = array_map( function ( $r ) use ( $h ) {
+		$a = array_combine( $h, $r );
+		/* uid پرونده با مبدأ ثابت، تا با مقدار ذخیره‌شده یکی باشد.  P5-D499 */
+		$a['entity_uid'] = topersia_uid_build( $a['entity_uid'] ) ?: $a['entity_uid'];
+		if ( 0 === strpos( (string) $a['field'], 'rel:96' ) ) { $a['proposed'] = topersia_uid_build( $a['proposed'] ) ?: $a['proposed']; }
+		return $a;
+	}, $rows );
 	$st = array(); $act = array(); $diffs = array();
 	$ent = array();
 	foreach ( $rows as $r ) {
@@ -447,7 +453,8 @@ if ( 'report' === $cmd ) {
 	}
 	$uid2id = array(); $id2uid = array();
 	foreach ( array_keys( $ent ) as $uid ) {
-		$id = (int) $GLOBALS['wpdb']->get_var( $GLOBALS['wpdb']->prepare( "SELECT post_id FROM {$GLOBALS['wpdb']->postmeta} WHERE meta_key='entity_uid' AND meta_value=%s LIMIT 1", $uid ) );
+		$found = topersia_uid_find_ids( $uid );
+		$id = $found ? (int) $found[0] : 0;
 		$uid2id[ $uid ] = $id; $id2uid[ $id ] = $uid;
 	}
 	$geo_ok = function ( $v ) { return function_exists( 'topersia_geo_point' ) ? (bool) topersia_geo_point( (string) $v ) : '' !== trim( (string) $v ); };
@@ -458,7 +465,7 @@ if ( 'report' === $cmd ) {
 	$cap = function ( $uid, $after ) use ( $fill, $uid2id ) {
 		if ( $after && isset( $fill[ $uid ]['rel:96 (مرکز استان)'] ) ) { return $fill[ $uid ]['rel:96 (مرکز استان)']; }
 		$c = function_exists( 'topersia_g_capital_id' ) ? (int) topersia_g_capital_id( $uid2id[ $uid ] ) : 0;
-		return $c ? (string) get_post_meta( $c, 'entity_uid', true ) : '';
+		return $c ? (string) topersia_uid_build( get_post_meta( $c, 'entity_uid', true ) ) : '';
 	};
 	$cov = array();
 	foreach ( $ent as $uid => $x ) {

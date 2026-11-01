@@ -27,8 +27,8 @@ foreach ( $wpdb->get_col( $wpdb->prepare( "SELECT table_name FROM information_sc
 }
 
 /* LQ-SCALE-03 · 04 — پرس‌وجو، زمان، اندازهٔ HTML + تکراری/کند (SAVEQUERIES) */
-$uid_post = function ( $uid ) use ( $wpdb ) { return (int) $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='entity_uid' AND meta_value=%s LIMIT 1", $uid ) ); };
-$targets = array( 'استان اصفهان' => $uid_post( home_url( '/e/province/isfahan' ) ), 'شهر اصفهان' => $uid_post( home_url( '/e/city/isfahan' ) ) );
+$uid_post = function ( $uid ) { $found = topersia_uid_find_ids( $uid ); return $found ? (int) $found[0] : 0; };
+$targets = array( 'استان اصفهان' => $uid_post( 'province/isfahan' ), 'شهر اصفهان' => $uid_post( 'city/isfahan' ) );
 /* SAVEQUERIES ثابت است و در هر پرس‌وجو خوانده می‌شود؛ تعریف در زمان اجرا فقط در همین فرایند، wp-config دست نمی‌خورد */
 if ( ! defined( 'SAVEQUERIES' ) ) { define( 'SAVEQUERIES', true ); }
 $wpdb->save_queries = true;

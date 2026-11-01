@@ -199,6 +199,8 @@ foreach ( $tables as $table ) {
 		while ( $row = $q->fetch_assoc() ) {
 
 			$old = (string) $row['v'];
+			/* entity_uid مبدأ ثابت دارد و نباید با میزبان محلی بازنویسی شود.  P5-D499 */
+			if ( 'postmeta' === substr( $table, -8 ) && preg_match( '~^https?://[^/]+/e/[a-z0-9_/-]+$~', $old ) ) { continue; }
 			$new = tp_sr_value( $old, $PAIRS );
 
 			if ( $new === $old ) { continue; }

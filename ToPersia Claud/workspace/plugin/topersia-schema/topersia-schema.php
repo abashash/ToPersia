@@ -428,7 +428,10 @@ function topersia_schema_uid( $post_id ) {
 	$uid = get_post_meta( $post_id, 'entity_uid', true );
 
 	if ( ! empty( $uid ) ) {
-		return $uid;
+		// میزبان خروجی همیشه مبدأ ثابت است، مسیر دست‌نخورده (P5-D499).
+		$canonical = function_exists( 'topersia_uid_build' ) ? topersia_uid_build( $uid ) : '';
+
+		return '' !== $canonical ? $canonical : $uid;
 	}
 
 	// پشتیبان: اگر uid هنوز ساخته نشده، از permalink استفاده کن.
