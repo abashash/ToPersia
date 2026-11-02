@@ -40,7 +40,7 @@ if ( ! function_exists( 'tp_rel_cov_reason' ) ) {
 				$rels = (array) ( $g['rels'] ?? array() );
 				foreach ( (array) ( $g['chains'] ?? array() ) as $chain ) { $rels = array_merge( $rels, (array) $chain ); }
 				foreach ( $rels as $r ) {
-					if ( isset( $r['id'] ) ) { $groups[ (int) $r['id'] ][ $type ][ $key ] = $r['dir'] ?? ''; }
+					if ( isset( $r['id'] ) ) { $groups[ (int) $r['id'] ][ $type ][ $key ][] = $r['dir'] ?? ''; }
 				}
 			}
 		}
@@ -55,8 +55,9 @@ if ( ! function_exists( 'tp_rel_cov_reason' ) ) {
 				'c'      => $c,
 				'real'   => $edges[ $id ]['real'] ?? 0,
 				'sample' => $edges[ $id ]['sample'] ?? 0,
-				'gp'     => implode( '+', array_keys( $groups[ $id ][ $p ] ?? array() ) ),
-				'gc'     => implode( '+', array_keys( $groups[ $id ][ $c ] ?? array() ) ),
+				/* رابطهٔ هم‌نوع: هر سو فقط با جهت خودش پوشیده است */
+				'gp'     => implode( '+', array_keys( array_filter( $groups[ $id ][ $p ] ?? array(), function ( $d ) use ( $p, $c ) { return $p !== $c || array_intersect( array( 'children', '' ), $d ); } ) ) ),
+				'gc'     => implode( '+', array_keys( array_filter( $groups[ $id ][ $c ] ?? array(), function ( $d ) use ( $p, $c ) { return $p !== $c || array_intersect( array( 'parents', '' ), $d ); } ) ) ),
 				'wp'     => tp_rel_cov_reason( $id, $p, $c, $rank ),
 				'wc'     => tp_rel_cov_reason( $id, $c, $p, $rank ),
 			);

@@ -301,6 +301,11 @@ if ( ! in_array( '--write', $argv, true ) ) {
 }
 
 $src   = file_get_contents( $MAPF );
+/* P5-D503: بلوک دستی «مرتبط» درون همین تابع است و مولد آن را نمی‌سازد */
+if ( false !== strpos( $src, '$related = array(' ) && false === strpos( $out, '$related = array(' ) ) {
+	fwrite( STDERR, "نوشته نشد: بلوک «مرتبط» (P5-D503) را مولد نمی‌سازد و پاک می‌شد\n" );
+	exit( 2 );
+}
 $start = strpos( $src, $t . 'function topersia_g_relmap() {' );
 if ( false === $start ) {
 	fwrite( STDERR, "تابع پیدا نشد\n" );

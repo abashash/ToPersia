@@ -3024,10 +3024,12 @@ function topersia_pack_tr_parse( $raw ) {
 			continue;
 		}
 
-		if ( isset( $seen[ $ref ] ) ) {
-			$data['posts'][ $i ]['_dup_of'] = $seen[ $ref ];
+		$key = topersia_uid_key( $ref );   /* P5-D499: دو میزبان یا اسلش پایانی همان پست‌اند */
+
+		if ( isset( $seen[ $key ] ) ) {
+			$data['posts'][ $i ]['_dup_of'] = $seen[ $key ];
 		} else {
-			$seen[ $ref ] = $i;
+			$seen[ $key ] = $i;
 		}
 	}
 

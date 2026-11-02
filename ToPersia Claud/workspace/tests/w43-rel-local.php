@@ -31,15 +31,22 @@ foreach ( $map as $type => $groups ) {
 }
 $t( 'جهت هر ردیف «مرتبط» با ثبت‌نامهٔ جت‌انجین می‌خواند', $dirs_ok );
 
+/* جهت رابطهٔ هم‌نوع: حذف یک جهت باید شکاف بدهد؛ #102 استان↔استان */
+$rm = topersia_g_relmap();
+foreach ( $rm['tp_province'] as $gk => $g ) {
+	$rm['tp_province'][ $gk ]['rels'] = array_values( array_filter( (array) ( $g['rels'] ?? array() ), function ( $r ) { return ! ( 102 === (int) $r['id'] && 'parents' === ( $r['dir'] ?? '' ) ); } ) );
+}
+$t( 'جهش: حذف یک جهت رابطهٔ هم‌نوع #102 شکاف می‌شود', in_array( array( 102, 'tp_province', 'parents' ), tp_rel_cov_gaps( tp_rel_cov_rows( $rm ) ), true ), wp_json_encode( tp_rel_cov_rows( $rm )[102] ?? null ) );
+
 /* رندر: یال نمونه روی نمونه، صفحهٔ واقعی بی باکس */
 global $wpdb;
 $sample_cal = (int) $wpdb->get_var( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->prefix}jet_rel_default r ON r.parent_object_id = p.ID AND r.rel_id = 244 JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = 'post_tp_calendar' AND t.language_code = 'fa' WHERE p.post_type = 'tp_calendar' AND p.post_status = 'publish' LIMIT 1" );
-$get = function ( $path ) { return (string) wp_remote_retrieve_body( wp_remote_get( $path, array( 'timeout' => 120, 'sslverify' => false ) ) ); };
+$get = function ( $path ) { $r = wp_remote_get( $path, array( 'timeout' => 120, 'sslverify' => false ) ); return 200 === (int) wp_remote_retrieve_response_code( $r ) ? (string) wp_remote_retrieve_body( $r ) : ''; };
 $html = $sample_cal ? $get( get_permalink( $sample_cal ) ) : '';
-$t( 'تقویم نمونه باکس «مرتبط» را با کاشی نشان می‌دهد', false !== strpos( $html, 'id="tp-related"' ), "#{$sample_cal}" );
+$t( 'تقویم نمونه باکس «مرتبط» را نشان می‌دهد و مودال فهرست نمی‌سازد', get_post_meta( $sample_cal, '_tp_sample', true ) && false !== strpos( $html, 'id="tp-related"' ) && false === strpos( $html, 'tp-list-related' ), "#{$sample_cal}" );
 foreach ( array( '/city/isfahan/', '/province/isfahan/', '/monument/naqsh-e-jahan-square/', '/country/iran/', '/calendar/iran-official-calendar/' ) as $path ) {
 	$h = $get( home_url( $path ) );
-	$t( "صفحهٔ واقعی {$path} باکس «مرتبط» ندارد", '' !== $h && false === strpos( $h, 'id="tp-related"' ) );
+	$t( "صفحهٔ واقعی {$path} باکس «مرتبط» ندارد", false !== strpos( $h, 'tp-page' ) && false === strpos( $h, 'id="tp-related"' ) );
 }
 
 echo str_repeat( '─', 78 ) . "\n";

@@ -25,4 +25,16 @@ function compareRequests( a, b ) {
 	return { equal: ! onlyA.length && ! onlyB.length, onlyA, onlyB, normalized };
 }
 
-module.exports = { norm, compareRequests };
+/** کلید جفت‌شده با وضعیت متفاوت: دارایی شکسته امتیاز را جابه‌جا می‌کند و فهرست کلید آن را نمی‌بیند. */
+function statusDiffs( ea, eb ) {
+	const cmp = compareRequests( Object.keys( ea ), Object.keys( eb ) );
+	const moved = new Map( cmp.normalized.map( n => [ n.a, n.b ] ) );
+	const out = [];
+	for ( const a of Object.keys( ea ) ) {
+		const b = moved.has( a ) ? moved.get( a ) : a;
+		if ( eb[ b ] && ea[ a ].status !== eb[ b ].status ) { out.push( { key: a, a: ea[ a ].status, b: eb[ b ].status } ); }
+	}
+	return out;
+}
+
+module.exports = { norm, compareRequests, statusDiffs };

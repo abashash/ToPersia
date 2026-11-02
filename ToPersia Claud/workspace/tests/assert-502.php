@@ -24,10 +24,12 @@ t( 'LAUNCH H-1 شرط «TTL کش صفحه ≤ ۷ روز» را دارد', 1 === 
 
 /* نرمال‌سازی ver= */
 $p502_js = function ( $body ) {
-	$f = tempnam( sys_get_temp_dir(), 'lh' ) . '.js';
+	$t = tempnam( sys_get_temp_dir(), 'lh' );
+	$f = $t . '.js';
 	file_put_contents( $f, $body );
 	$o = (string) shell_exec( 'node ' . escapeshellarg( $f ) . ' 2>&1' );
 	@unlink( $f );
+	@unlink( $t );
 	return json_decode( $o, true );
 };
 $p502_lib = (string) file_get_contents( __DIR__ . '/lib/lh-compare.js' );
@@ -45,16 +47,19 @@ r.push( ! c( [ U + '?ver=a', U + '?ver=b' ], [ U + '?ver=a' ] ).equal );
 r.push( ! c( [ U + '?ver=a range=0-1' ], [ U + '?ver=b range=2-3' ] ).equal );
 r.push( ! c( [ U + '?server=1' ], [ U + '?server=2' ] ).equal );
 r.push( 0 === c( [ U + '?ver=a' ], [ U + '?ver=a' ] ).normalized.length );
+r.push( 1 === M.statusDiffs( { [ U + '?ver=a' ]: { status: 200 } }, { [ U + '?ver=b' ]: { status: 404 } } ).length );
+r.push( 0 === M.statusDiffs( { [ U + '?ver=a' ]: { status: 200 } }, { [ U + '?ver=b' ]: { status: 200 } } ).length );
 console.log( JSON.stringify( r ) );
 JS;
 $p502_lh = function ( $lib ) use ( $p502_js, $p502_cases ) {
 	$r = $p502_js( "const M = ( () => { const module = { exports: {} };\n{$lib}\nreturn module.exports; } )();\n{$p502_cases}" );
-	return is_array( $r ) && 9 === count( $r ) && ! in_array( false, $r, true );
+	return is_array( $r ) && 11 === count( $r ) && ! in_array( false, $r, true );
 };
 tp441_mut( 'lh-compare: فقط ver= نرمال می‌شود و گزارش می‌شود؛ ?v= و server= و range و شمار تکرار تفاوت واقعی‌اند — جهش: نرمال‌سازی هر پارامتر', $p502_lh, $p502_lib,
 	str_replace( '/([?&])ver=[^&\s]*/g', '/([?&])\w*ver=[^&\s]*/g', $p502_lib ) );
 $p502_src = (string) file_get_contents( __DIR__ . '/lighthouse.js' );
-$p502_wired = function ( $s ) { return false !== strpos( $s, "require( './lib/lh-compare.js' )" ) && false !== strpos( $s, 'compareRequests( Object.keys( sets[0].store.m.entries )' ) && false !== strpos( $s, 'process.exit( 1 )' ) && false !== strpos( $s, 'نرمال شد' ); };
+$p502_wired = function ( $s ) { return false !== strpos( $s, "require( './lib/lh-compare.js' )" ) && false !== strpos( $s, 'compareRequests( Object.keys( sets[0].store.m.entries )' ) && false !== strpos( $s, 'if ( ! cmp.equal ) {' ) && false !== strpos( $s, 'statusDiffs( sets[0]' ) && false !== strpos( $s, 'نرمال شد' ) && strpos( $s, 'process.exit( 1 )', strpos( $s, 'if ( ! cmp.equal ) {' ) ) < strpos( $s, 'statusDiffs( sets[0]' ); };
+tp441_mut( 'lighthouse.js: شرط توقف وارونه نشود — جهش: if ( cmp.equal )', $p502_wired, $p502_src, str_replace( 'if ( ! cmp.equal ) {', 'if ( cmp.equal ) {', $p502_src ) );
 tp441_mut( 'lighthouse.js پیش از اجرا مقایسه می‌کند، با تفاوت واقعی خارج می‌شود و می‌نویسد چه چیزی نرمال شد — جهش: حذف مقایسه', $p502_wired, $p502_src, str_replace( 'compareRequests( Object.keys( sets[0].store.m.entries )', '( Object.keys( sets[0].store.m.entries )', $p502_src ) );
 
 /* حافظهٔ هش ver: md5 تکراری در یک درخواست نیست؛ ver همچنان از محتوا */

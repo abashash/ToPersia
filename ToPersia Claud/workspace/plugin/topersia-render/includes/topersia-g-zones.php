@@ -8618,6 +8618,10 @@ if ( ! function_exists( 'topersia_g_list_meta' ) ) {
 if ( ! function_exists( 'topersia_g_list_modal' ) ) {
 	function topersia_g_list_modal( $post_id, $key ) {
 
+		if ( 'related' === $key ) {
+			return '';   /* P5-D503: این باکس دکمۀ بازکردن فهرست ندارد */
+		}
+
 		$group = topersia_g_group( $post_id, $key );
 
 		if ( empty( $group ) ) {

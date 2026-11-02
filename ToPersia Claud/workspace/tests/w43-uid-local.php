@@ -68,6 +68,11 @@ $t( 'JSON-LD صفحهٔ محلی @id با topersia.com می‌دهد و هیچ @
 	false !== strpos( $html, '"@id":"https:\/\/topersia.com\/e\/province\/isfahan"' ) || false !== strpos( $html, '"@id": "https://topersia.com/e/province/isfahan"' ) || false !== strpos( $html, '"https:\/\/topersia.com\/e\/province\/isfahan"' ) );
 $t( 'هیچ نشانی /e/ با میزبان محلی در HTML صفحه نیست', ! preg_match( '~topersia\.local(\\\\?/)e\\\\?/~', $html ) );
 
+/* تکراری پروندهٔ ترجمه بی میزبان */
+$tp = array( 'meta' => array( 'schema' => TOPERSIA_PACK_TR_SCHEMA, 'post_type' => 'tp_city', 'language' => 'en' ), 'posts' => array( array( 'translation_of' => 'http://topersia.local/e/city/x', 'title' => 'a' ), array( 'translation_of' => 'https://topersia.com/e/city/x', 'title' => 'b' ) ) );
+$tr = topersia_pack_tr_parse( wp_json_encode( $tp ) );
+$t( 'پروندهٔ ترجمه: دو میزبان یک مسیر تکراری است', is_array( $tr ) && isset( $tr['posts'][1]['_dup_of'] ), wp_json_encode( is_wp_error( $tr ) ? $tr->get_error_message() : $tr ) );
+
 echo str_repeat( '─', 78 ) . "\n";
 printf( "  گذشته: %d   افتاده: %d\n", $pass, $fail );
 exit( $fail ? 1 : 0 );

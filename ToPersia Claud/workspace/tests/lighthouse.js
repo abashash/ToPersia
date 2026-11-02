@@ -37,7 +37,7 @@
 
 'use strict';
 
-const { compareRequests } = require( './lib/lh-compare.js' );
+const { compareRequests, statusDiffs } = require( './lib/lh-compare.js' );
 const fs = require( 'node:fs' );
 const os = require( 'node:os' );
 const path = require( 'node:path' );
@@ -544,6 +544,12 @@ async function measure( dirs ) {
 			console.log( 'فهرست درخواست‌ها جز ver= فرق دارد؛ مقایسه نمی‌شود (PERF.md):' );
 			cmp.onlyA.forEach( k => console.log( '  فقط A: ' + k ) );
 			cmp.onlyB.forEach( k => console.log( '  فقط B: ' + k ) );
+			process.exit( 1 );
+		}
+		const st = statusDiffs( sets[0].store.m.entries, sets[1].store.m.entries );
+		if ( st.length ) {
+			console.log( 'وضعیت پاسخ دو نسخه فرق دارد؛ مقایسه نمی‌شود:' );
+			st.forEach( d => console.log( '  ' + d.a + ' ⇄ ' + d.b + ' ' + d.key ) );
 			process.exit( 1 );
 		}
 	}

@@ -26,7 +26,8 @@ const probe = () => {
 	window.scrollTo( { left: 200, top: 0, behavior: 'instant' } );
 	const moved = window.scrollX; window.scrollTo( { left: before, top: 0, behavior: 'instant' } );
 	const wide = [];
-	for ( const e of document.querySelectorAll( '.tp-page *' ) ) {
+	const nodes = document.querySelectorAll( '.tp-page *' );
+	for ( const e of nodes ) {
 		const r = e.getBoundingClientRect();
 		if ( ! r.width || ( r.right <= vw + .5 && r.left >= -.5 ) ) { continue; }
 		const s = getComputedStyle( e );
@@ -38,9 +39,9 @@ const probe = () => {
 		}
 		if ( ! clip ) { wide.push( e.tagName + '.' + String( e.className ).slice( 0, 40 ) + ' r=' + Math.round( r.right ) ); }
 	}
-	return { deSW: de.scrollWidth, deCW: de.clientWidth, bodySW: document.body.scrollWidth, moved, wide: wide.slice( 0, 5 ) };
+	return { n: nodes.length, deSW: de.scrollWidth, deCW: de.clientWidth, bodySW: document.body.scrollWidth, moved, wide: wide.slice( 0, 5 ) };
 };
-const verdict = r => r.deSW <= r.deCW && 0 === r.moved && 0 === r.wide.length;
+const verdict = r => r.n > 0 && r.deSW <= r.deCW && 0 === r.moved && 0 === r.wide.length;
 
 ( async () => {
 	let pass = 0, fail = 0;
@@ -68,13 +69,21 @@ const verdict = r => r.deSW <= r.deCW && 0 === r.moved && 0 === r.wide.length;
 			} );
 			const m1 = await page.evaluate( probe );
 			t( `${width} · جهش: عنصر پهن درون صفحه دیده می‌شود`, ! verdict( m1 ), JSON.stringify( m1 ) );
-			const m2 = await page.evaluate( () => {
-				document.documentElement.style.overflowX = 'visible'; document.body.style.overflowX = 'visible';
-				const d = document.createElement( 'div' ); d.style.cssText = 'position:absolute;left:0;top:0;width:900px;height:10px';
+			/* از نو، تا عنصر جهش قبل نماند؛ در راست‌به‌چپ بخش قابل پیمایش سمت چپ است */
+			await page.goto( BASE + PAGES['ایران'], { waitUntil: 'load' } );
+			t( `${width} · پیش از جهش دوم صفحه سالم است`, verdict( await page.evaluate( probe ) ) );
+			await page.evaluate( () => {
+				document.documentElement.style.setProperty( 'overflow-x', 'visible', 'important' );
+				document.body.style.setProperty( 'overflow-x', 'visible', 'important' );
+				const d = document.createElement( 'div' ); d.style.cssText = 'position:absolute;right:0;top:0;width:900px;height:10px';
 				document.body.appendChild( d );
-				return { deSW: document.documentElement.scrollWidth, deCW: document.documentElement.clientWidth };
 			} );
-			t( `${width} · جهش: بی برش ریشه سند سرریز می‌کند`, m2.deSW > m2.deCW, JSON.stringify( m2 ) );
+			const m2 = await page.evaluate( probe );
+			t( `${width} · جهش: بی برش ریشه سرریز سند دیده می‌شود`, m2.deSW > m2.deCW && ! verdict( m2 ), JSON.stringify( m2 ) );
+			await page.goto( BASE + PAGES['ایران'], { waitUntil: 'load' } );
+			await page.evaluate( () => document.querySelectorAll( '.tp-page' ).forEach( e => { e.className = 'x'; } ) );
+			const m3 = await page.evaluate( probe );
+			t( `${width} · جهش: صفحهٔ بی قالب ما سبز نمی‌شود`, 0 === m3.n && ! verdict( m3 ), JSON.stringify( m3 ) );
 			await ctx.close();
 		}
 	} finally {
