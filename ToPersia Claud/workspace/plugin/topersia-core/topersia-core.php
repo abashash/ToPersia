@@ -941,13 +941,13 @@ function topersia_uid_find_ids( $uid ) {
 }
 
 /**
- * دامنۀ ریشه برای @id های سراسری.
+ * دامنۀ ریشه برای @id های سراسری: همان مبدأ ثابت شناسۀ یکتا، بی اسلش پایانی (دستۀ 44).
  *
  * افزونۀ شِما هم همین را با گارد if(!defined) تعریف می‌کند، تا هر کدام
  * زودتر بارگذاری شد مقدار را بگذارد و تعارض پیش نیاید.
  */
 if ( ! defined( 'TOPERSIA_SITE_ID' ) ) {
-	define( 'TOPERSIA_SITE_ID', 'https://topersia.com' );
+	define( 'TOPERSIA_SITE_ID', rtrim( TOPERSIA_CANONICAL_ORIGIN, '/' ) );
 }
 
 /** نام واقعی پوشۀ نصب وردپرس — بخش ۱۱. */

@@ -283,7 +283,7 @@ class TP_AI_Summary {
 			$text   = topersia_cache_remember(
 				'ai.text',
 				array( (int) $post, (string) $type ),
-				function () use ( $system, $user_full, &$failed, &$meta ) {
+				function () use ( $system, $user_full, $type, &$failed, &$meta ) {
 					$r = self::chat_bounded( $system, $user_full, $type );
 					if ( ! $r['ok'] ) {
 						$failed = $r;

@@ -91,5 +91,39 @@ delete_post_meta( 47, TP_AI_Bounds::REVIEW . 'summary_' . $lang150 );
 $legacy = tpas_get_summary( 47, 'summary', $lang150 );
 t( 'stored before 1.5.0 (no flag) but outside the bounds now -> review = true', is_array( $legacy ) && true === $legacy['review'] );
 
+/*
+ * Batch 44 — the core-cache path. The test cache never runs its callback, so a copy of the class calls a
+ * local one that does. `$type` was outside the callback's `use`: a key-points answer inside its own bounds
+ * was measured as a summary, asked again, and the second answer replaced the good one.
+ */
+function tp150_remember( $service, $parts, $fetch, $args ) {
+	$r = $fetch();
+	return is_array( $r ) ? $r['value'] : $r;
+}
+$cache150 = array( "class_exists( 'TP_AI_Core_Bridge' ) && TP_AI_Core_Bridge::cache_available()" => 'true', 'topersia_cache_remember(' => 'tp150_remember(' );
+$S150c = tp150_class( 'C', $cache150 );
+$M150c = tp150_class( 'B2', $cache150 + array( 'use ( $system, $user_full, $type, &$failed, &$meta )' => 'use ( $system, $user_full, &$failed, &$meta )' ) );
+$kp_ok = $kp( 6, 100 );
+$warns = array();
+set_error_handler( function ( $no, $msg ) use ( &$warns ) { $warns[] = $msg; return true; } );
+tp130_reset();
+$GLOBALS['tp_http_override'] = array( 'code' => 200, 'body' => $body( $kp_ok ) );
+$kp_out   = '' !== $S150c ? call_user_func( array( $S150c, 'produce' ), 47, 'keypoints', $lang150 ) : array();
+$kp_calls = $GLOBALS['tp_http_calls'];
+$kp_warn  = $warns;
+$warns    = array();
+tp130_reset();
+$GLOBALS['tp_http_override'] = array( 'code' => 200, 'body' => $body( $kp_ok ) );
+if ( '' !== $M150c ) {
+	call_user_func( array( $M150c, 'produce' ), 47, 'keypoints', $lang150 );
+}
+$kp_m_calls = $GLOBALS['tp_http_calls'];
+$kp_m_warn  = $warns;
+restore_error_handler();
+t( 'core cache path: key points inside their bounds, outside the summary bounds -> one call, no PHP warning',
+	TP_AI_Bounds::check( 'keypoints', $kp_ok )['ok'] && ! TP_AI_Bounds::check( 'summary', $kp_ok )['ok'] && 1 === $kp_calls && ! $kp_warn && ! empty( $kp_out['ok'] ), 'calls ' . $kp_calls . ' ' . implode( ' | ', $kp_warn ) );
+t( 'mutant: $type outside the callback -> a warning and a second paid call', '' !== $M150c && 2 === $kp_m_calls && $kp_m_warn, 'calls ' . $kp_m_calls );
+delete_post_meta( 47, TP_AI_Bounds::REVIEW . 'keypoints_' . $lang150 );
+
 unset( $GLOBALS['tp_http_override'] );
 $clean();

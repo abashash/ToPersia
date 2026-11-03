@@ -167,7 +167,7 @@ if ( ! defined( 'TOPERSIA_SCHEMA_MIN_CORE' ) ) {
  * و گارد if(!defined) از تعارض جلوگیری می‌کند.
  */
 if ( ! defined( 'TOPERSIA_SITE_ID' ) ) {
-	define( 'TOPERSIA_SITE_ID', 'https://topersia.com' );
+	define( 'TOPERSIA_SITE_ID', defined( 'TOPERSIA_CANONICAL_ORIGIN' ) ? rtrim( TOPERSIA_CANONICAL_ORIGIN, '/' ) : 'https://topersia.com' );
 }
 
 /**

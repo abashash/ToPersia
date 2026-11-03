@@ -158,14 +158,23 @@ try {
 		$tabs = array_map( 'strtolower', array( $pre . 'posts', $pre . 'postmeta', $pre . 'options', $pre . 'termmeta' ) );
 		$old  = $man['home'];
 		$rows_before = $fp_now['count'];
+		/* P5-D499: میزبان uid روی کپی موقت ممکن است عوض شود (پشتیبان زنده)، مسیرش هرگز؛ تطبیق هم فقط با مسیر است */
+		$uid_sig = function () use ( $db, $tmpdb, $pre ) {
+			$mm  = rt_mysqli( $db );
+			$row = $mm->query( "SELECT COUNT(*), COALESCE( SUM( CRC32( SUBSTRING_INDEX( meta_value, '/e/', -1 ) ) ), 0 ) FROM `{$tmpdb}`.`{$pre}postmeta` WHERE meta_key = 'entity_uid' AND meta_value <> ''" )->fetch_row();
+			$mm->close();
+			return implode( ':', $row );
+		};
+		$uid_before = $uid_sig();
 		$r = tpb_run( tpb_wp_cmd( array_merge( array( 'search-replace', $old, $tmpurl ), $tabs, array( '--skip-columns=guid', '--report=false' ) ), $override ), null, null, $left() );
 		$chk = tpb_run( tpb_wp_cmd( array_merge( array( 'search-replace', $old, $tmpurl ), $tabs, array( '--skip-columns=guid', '--dry-run', '--format=count' ) ), $override ), null, null, $left() );
 		$left_n = (int) trim( tpb_clean( $chk[1] ) );
 		$h = trim( tpb_clean( tpb_run( tpb_wp_cmd( array( 'option', 'get', 'home' ), $override ), null, null, $left() )[1] ) );
 		$s = trim( tpb_clean( tpb_run( tpb_wp_cmd( array( 'option', 'get', 'siteurl' ), $override ), null, null, $left() )[1] ) );
 		$fp2 = tpb_eval_file( TP_WORKSPACE . '/tests/lib/db-fingerprint.php', $work . '/fp2.json', $override );
-		$go = rt_step( $steps, $ok, '۵ search-replace (posts · postmeta · options · termmeta): نشانی قدیم در آن‌ها نمانده؛ home و siteurl موقت‌اند؛ شمار ردیف هیچ جدولی عوض نشد',
-			0 === $r[0] && 0 === $left_n && 0 === strpos( $h, $tmpurl ) && 0 === strpos( $s, $tmpurl ) && $fp2['count'] === $rows_before, "exit={$r[0]} left={$left_n} home={$h} " . substr( tpb_clean( $r[1] . $r[2] ), 0, 200 ) );
+		$uid_after = $uid_sig();
+		$go = rt_step( $steps, $ok, '۵ search-replace (posts · postmeta · options · termmeta): نشانی قدیم در آن‌ها نمانده؛ home و siteurl موقت‌اند؛ شمار ردیف هیچ جدولی عوض نشد؛ مسیر entity_uid دست نخورد',
+			0 === $r[0] && 0 === $left_n && 0 === strpos( $h, $tmpurl ) && 0 === strpos( $s, $tmpurl ) && $fp2['count'] === $rows_before && $uid_before === $uid_after, "exit={$r[0]} left={$left_n} home={$h} uid={$uid_before}→{$uid_after} " . substr( tpb_clean( $r[1] . $r[2] ), 0, 200 ) );
 	}
 
 	/* ۶ — خواندن چند پست با WP-CLI از نسخهٔ بازگردانی‌شده، در برابر اصل */
