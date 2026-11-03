@@ -1113,4 +1113,14 @@ return array(
 	'آداب حضور' => array( 'en' => 'Attendance etiquette', 'ar' => 'آداب الحضور' ),
 	'یادداشت عکاسی' => array( 'en' => 'Photography note', 'ar' => 'ملاحظة عن التصوير' ),
 	'پوشش و ظاهر' => array( 'en' => 'Dress and appearance', 'ar' => 'اللباس والمظهر' ),
+	/* صفحهٔ اول، دستهٔ 45 */
+	'دسته‌های اصلی' => array( 'en' => 'Main categories', 'ar' => 'الفئات الرئيسية' ),
+	'غذا و صنایع‌دستی' => array( 'en' => 'Food and handicrafts', 'ar' => 'الطعام والحرف اليدوية' ),
+	'فرهنگ و تاریخ' => array( 'en' => 'Culture and history', 'ar' => 'الثقافة والتاريخ' ),
+	'اطلاعات کاربردی' => array( 'en' => 'Practical information', 'ar' => 'معلومات عملية' ),
+	'ارز' => array( 'en' => 'Currency', 'ar' => 'العملة' ),
+	'تازه‌ترین اخبار' => array( 'en' => 'Latest news', 'ar' => 'آخر الأخبار' ),
+	'حساب کاربری' => array( 'en' => 'Account', 'ar' => 'الحساب' ),
+	'ورود به پنل کاربری' => array( 'en' => 'Sign in to your panel', 'ar' => 'الدخول إلى لوحة المستخدم' ),
+	'با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید.' => array( 'en' => 'With an account you can save and follow places and leave comments.', 'ar' => 'بحساب المستخدم يمكنك حفظ الأماكن ومتابعتها وكتابة التعليقات.' ),
 );

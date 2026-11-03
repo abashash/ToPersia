@@ -261,6 +261,10 @@ msgstr "Related tourist routes"
 msgid "اردیبهشت"
 msgstr "Ordibehesht"
 
+#: includes/topersia-g-home.php
+msgid "ارز"
+msgstr "Currency"
+
 #: includes/topersia-g-zones.php
 msgid "ارز و روش‌های پرداخت"
 msgstr "Currency and payment methods"
@@ -350,6 +354,10 @@ msgstr "Travel information"
 #: includes/topersia-g-zones.php
 msgid "اطلاعات مکمل"
 msgstr "Additional information"
+
+#: includes/topersia-g-home.php
+msgid "اطلاعات کاربردی"
+msgstr "Practical information"
 
 #: includes/topersia-g-zones.php
 msgid "اطلاعات کلیدی"
@@ -454,6 +462,10 @@ msgstr "With permission"
 #: includes/topersia-g-map.php
 msgid "با بلیت جدا"
 msgstr "With a separate ticket"
+
+#: includes/topersia-g-home.php
+msgid "با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید."
+msgstr "With an account you can save and follow places and leave comments."
 
 #: includes/topersia-g-map.php
 msgid "با دعوت"
@@ -837,6 +849,10 @@ msgstr "End date"
 msgid "تاریخی"
 msgstr "Historical"
 
+#: includes/topersia-g-home.php
+msgid "تازه‌ترین اخبار"
+msgstr "Latest news"
+
 #: includes/topersia-g-map.php
 msgid "تالاب"
 msgstr "Wetland"
@@ -1151,6 +1167,10 @@ msgstr "Maximum depth"
 msgid "حرا (مانگرو)"
 msgstr "Mangrove"
 
+#: includes/topersia-g-home.php
+msgid "حساب کاربری"
+msgstr "Account"
+
 #: includes/topersia-g-map.php
 msgid "حضور بازدیدکننده"
 msgstr "Visitors"
@@ -1393,6 +1413,10 @@ msgstr "Wheelchair access"
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
 msgstr "Accessibility"
+
+#: includes/topersia-g-home.php
+msgid "دسته‌های اصلی"
+msgstr "Main categories"
 
 #: includes/topersia-g-map.php
 msgid "دشت"
@@ -2200,6 +2224,10 @@ msgstr "Cave"
 msgid "غبار"
 msgstr "Dust"
 
+#: includes/topersia-g-home.php
+msgid "غذا و صنایع‌دستی"
+msgstr "Food and handicrafts"
+
 #: includes/topersia-g-zones.php
 msgid "غذاهای محلی"
 msgstr "Local foods"
@@ -2263,6 +2291,10 @@ msgstr "Carpet and kilim"
 #: includes/topersia-g-zones.php
 msgid "فرهنگ سفر و آداب"
 msgstr "Travel etiquette"
+
+#: includes/topersia-g-home.php
+msgid "فرهنگ و تاریخ"
+msgstr "Culture and history"
 
 #: includes/topersia-g-map.php
 msgid "فرهنگ و رویداد"
@@ -3543,6 +3575,10 @@ msgstr "Winter sports"
 #: includes/topersia-g-map.php
 msgid "ورود به سرزمین اصلی از منطقۀ آزاد"
 msgstr "Mainland entry from the free zone"
+
+#: includes/topersia-g-home.php
+msgid "ورود به پنل کاربری"
+msgstr "Sign in to your panel"
 
 #: includes/topersia-g-map.php
 msgid "ورود غیرمسلمان"

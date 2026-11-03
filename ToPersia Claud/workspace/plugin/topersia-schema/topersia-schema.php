@@ -1491,6 +1491,33 @@ function topersia_schema_json( $post_id ) {
 	return $json ? $json : '';
 }
 
+/**
+ * گراف صفحۀ اول. SearchAction عمداً نیست: جست‌وجوی سراسری واقعی وجود ندارد.  دستۀ 45
+ */
+function topersia_schema_home_json( $post_id ) {
+
+	$home = topersia_schema_home();
+	$site = topersia_schema_website();
+	$page = array(
+		'@type'       => 'WebPage',
+		'@id'         => $home . '#webpage',
+		'url'         => $home,
+		'name'        => wp_strip_all_tags( (string) get_the_title( $post_id ) ),
+		'description' => wp_strip_all_tags( (string) get_post_field( 'post_excerpt', $post_id ) ),
+		'isPartOf'    => array( '@id' => $site['@id'] ),
+		'inLanguage'  => topersia_schema_lang(),
+	);
+	$data = topersia_schema_prune(
+		array(
+			'@context' => 'https://schema.org',
+			'@graph'   => array( topersia_schema_organization(), $site, $page ),
+		)
+	);
+	$json = wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_PRETTY_PRINT );
+
+	return $json ? $json : '';
+}
+
 /** انتشار گراف در head. */
 add_action( 'wp_head', 'topersia_schema_output', 5 );
 
@@ -1515,7 +1542,8 @@ function topersia_schema_output() {
 		return;
 	}
 
-	$json = topersia_schema_json( $post_id );
+	/* صفحۀ اول: Organization · WebSite · WebPage، بی SearchAction (جست‌وجوی سراسری نیست).  دستۀ 45 */
+	$json = ( 'page' === get_post_type( $post_id ) && is_front_page() ) ? topersia_schema_home_json( $post_id ) : topersia_schema_json( $post_id );
 
 	if ( '' === $json ) {
 		return;

@@ -48,6 +48,7 @@ $FILES = array(
 	'includes/topersia-g-routing.php',
 	'includes/topersia-g-air.php',
 	'includes/topersia-g-mappoints.php',
+	'includes/topersia-g-home.php',
 	'templates/news-list.php',
 );
 

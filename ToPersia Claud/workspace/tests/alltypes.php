@@ -168,6 +168,7 @@ require TP_PLUGIN_DIR . 'includes/topersia-g-zones.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-routing.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-relreg.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-air.php';
+require TP_PLUGIN_DIR . 'includes/topersia-g-home.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-mappoints.php';
 
 /* ── اسکین: نوع‌ها، فیلدها، رابطه‌ها ────────────────────────────────── */

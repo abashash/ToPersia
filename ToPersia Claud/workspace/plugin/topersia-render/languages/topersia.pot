@@ -260,6 +260,10 @@ msgstr ""
 msgid "اردیبهشت"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "ارز"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "ارز و روش‌های پرداخت"
 msgstr ""
@@ -348,6 +352,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "اطلاعات مکمل"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "اطلاعات کاربردی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -452,6 +460,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "با بلیت جدا"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -836,6 +848,10 @@ msgstr ""
 msgid "تاریخی"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "تازه‌ترین اخبار"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "تالاب"
 msgstr ""
@@ -1150,6 +1166,10 @@ msgstr ""
 msgid "حرا (مانگرو)"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "حساب کاربری"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "حضور بازدیدکننده"
 msgstr ""
@@ -1391,6 +1411,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "دسته‌های اصلی"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2199,6 +2223,10 @@ msgstr ""
 msgid "غبار"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "غذا و صنایع‌دستی"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "غذاهای محلی"
 msgstr ""
@@ -2261,6 +2289,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "فرهنگ سفر و آداب"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "فرهنگ و تاریخ"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3541,6 +3573,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "ورود به سرزمین اصلی از منطقۀ آزاد"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "ورود به پنل کاربری"
 msgstr ""
 
 #: includes/topersia-g-map.php

@@ -9164,6 +9164,7 @@ if ( ! function_exists( 'topersia_g_register' ) ) {
 			'tp_overview'  => 'topersia_g_sc_overview',
 			'tp_news'      => 'topersia_g_sc_news',
 			'tp_reviews'   => 'topersia_g_sc_reviews',
+			'tp_home'      => 'topersia_g_sc_home',
 		);
 
 		foreach ( $shortcodes as $tag => $callback ) {

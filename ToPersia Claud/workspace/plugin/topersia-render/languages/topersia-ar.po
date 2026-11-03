@@ -261,6 +261,10 @@ msgstr "مراجع المسارات السياحية"
 msgid "اردیبهشت"
 msgstr "أرديبهشت"
 
+#: includes/topersia-g-home.php
+msgid "ارز"
+msgstr "العملة"
+
 #: includes/topersia-g-zones.php
 msgid "ارز و روش‌های پرداخت"
 msgstr "العملة وطرق الدفع"
@@ -350,6 +354,10 @@ msgstr "معلومات السفر"
 #: includes/topersia-g-zones.php
 msgid "اطلاعات مکمل"
 msgstr "معلومات إضافية"
+
+#: includes/topersia-g-home.php
+msgid "اطلاعات کاربردی"
+msgstr "معلومات عملية"
 
 #: includes/topersia-g-zones.php
 msgid "اطلاعات کلیدی"
@@ -454,6 +462,10 @@ msgstr "بإذن"
 #: includes/topersia-g-map.php
 msgid "با بلیت جدا"
 msgstr "بتذكرة منفصلة"
+
+#: includes/topersia-g-home.php
+msgid "با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید."
+msgstr "بحساب المستخدم يمكنك حفظ الأماكن ومتابعتها وكتابة التعليقات."
 
 #: includes/topersia-g-map.php
 msgid "با دعوت"
@@ -837,6 +849,10 @@ msgstr "تاريخ الانتهاء"
 msgid "تاریخی"
 msgstr "تاريخي"
 
+#: includes/topersia-g-home.php
+msgid "تازه‌ترین اخبار"
+msgstr "آخر الأخبار"
+
 #: includes/topersia-g-map.php
 msgid "تالاب"
 msgstr "أرض رطبة"
@@ -1151,6 +1167,10 @@ msgstr "أقصى عمق"
 msgid "حرا (مانگرو)"
 msgstr "المانغروف (الحرا)"
 
+#: includes/topersia-g-home.php
+msgid "حساب کاربری"
+msgstr "الحساب"
+
 #: includes/topersia-g-map.php
 msgid "حضور بازدیدکننده"
 msgstr "الزوار"
@@ -1393,6 +1413,10 @@ msgstr "الوصول بالكرسي المتحرك"
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
 msgstr "إمكانية الوصول"
+
+#: includes/topersia-g-home.php
+msgid "دسته‌های اصلی"
+msgstr "الفئات الرئيسية"
 
 #: includes/topersia-g-map.php
 msgid "دشت"
@@ -2200,6 +2224,10 @@ msgstr "كهف"
 msgid "غبار"
 msgstr "الغبار"
 
+#: includes/topersia-g-home.php
+msgid "غذا و صنایع‌دستی"
+msgstr "الطعام والحرف اليدوية"
+
 #: includes/topersia-g-zones.php
 msgid "غذاهای محلی"
 msgstr "الأطعمة المحلية"
@@ -2263,6 +2291,10 @@ msgstr "السجاد والكليم"
 #: includes/topersia-g-zones.php
 msgid "فرهنگ سفر و آداب"
 msgstr "آداب السفر"
+
+#: includes/topersia-g-home.php
+msgid "فرهنگ و تاریخ"
+msgstr "الثقافة والتاريخ"
 
 #: includes/topersia-g-map.php
 msgid "فرهنگ و رویداد"
@@ -3543,6 +3575,10 @@ msgstr "الرياضات الشتوية"
 #: includes/topersia-g-map.php
 msgid "ورود به سرزمین اصلی از منطقۀ آزاد"
 msgstr "الدخول إلى البر الرئيسي من المنطقة الحرة"
+
+#: includes/topersia-g-home.php
+msgid "ورود به پنل کاربری"
+msgstr "الدخول إلى لوحة المستخدم"
 
 #: includes/topersia-g-map.php
 msgid "ورود غیرمسلمان"
