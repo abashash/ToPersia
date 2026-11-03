@@ -1,0 +1,292 @@
+رابطه	والد	فرزند	صفحه	گروه	fa	en	ar	یال واقعی	یال نمونه	بی عنوان چون
+71	tp_country	tp_province	tp_country	provinces	استان‌ها	Provinces	المحافظات	31	3	
+71	tp_country	tp_province	tp_province	crumbs	—	—	—	31	3	مسیر راهنما، بی سرفصل
+72	tp_province	tp_county	tp_province	places	شهرها	Cities	المدن	485	3	
+72	tp_province	tp_county	tp_province	attractions	جاذبه‌های منتخب	Featured attractions	أبرز المعالم	485	3	
+72	tp_province	tp_county	tp_county	—	—	—	—	485	3	شهرستان صفحه ندارد (P5-D220)
+73	tp_county	tp_city	tp_county	—	—	—	—	948	3	شهرستان صفحه ندارد (P5-D220)
+73	tp_county	tp_city	tp_city	crumbs	—	—	—	948	3	مسیر راهنما، بی سرفصل
+74	tp_city	tp_district	tp_city	districts	محله‌ها	Neighborhoods	الأحياء	0	3	
+74	tp_city	tp_district	tp_district	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+75	tp_province	tp_village	tp_province	villages	روستاها	Villages	القرى	1	3	
+75	tp_province	tp_village	tp_village	crumbs	—	—	—	1	3	مسیر راهنما، بی سرفصل
+76	tp_county	tp_village	tp_county	—	—	—	—	0	3	شهرستان صفحه ندارد (P5-D220)
+76	tp_county	tp_village	tp_village	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+77	tp_province	tp_island	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	0	3	
+77	tp_province	tp_island	tp_island	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+78	tp_province	tp_mountain	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	1	3	
+78	tp_province	tp_mountain	tp_mountain	crumbs	—	—	—	1	3	مسیر راهنما، بی سرفصل
+79	tp_province	tp_water_body	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	1	3	
+79	tp_province	tp_water_body	tp_water_body	crumbs	—	—	—	1	3	مسیر راهنما، بی سرفصل
+80	tp_province	tp_desert	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	1	3	
+80	tp_province	tp_desert	tp_desert	crumbs	—	—	—	1	3	مسیر راهنما، بی سرفصل
+81	tp_province	tp_forest_plain	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	0	3	
+81	tp_province	tp_forest_plain	tp_forest_plain	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+82	tp_province	tp_border_crossing	tp_province	—	—	—	—	0	3	عمداً در استان نیست (P5-D170)
+82	tp_province	tp_border_crossing	tp_border_crossing	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+83	tp_region	tp_province	tp_region	provinces	استان‌ها	Provinces	المحافظات	0	3	
+83	tp_region	tp_province	tp_province	—	—	—	—	0	3	عمداً در استان نیست (P5-D170)
+84	tp_city	tp_monument	tp_city	attractions	جاذبه‌های منتخب	Featured attractions	أبرز المعالم	5	3	
+84	tp_city	tp_monument	tp_city	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	5	3	
+84	tp_city	tp_monument	tp_monument	—	—	—	—	5	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+85	tp_village	tp_monument	tp_village	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	0	3	
+85	tp_village	tp_monument	tp_monument	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+86	tp_city	tp_religious_site	tp_city	attractions	جاذبه‌های منتخب	Featured attractions	أبرز المعالم	1	3	
+86	tp_city	tp_religious_site	tp_city	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	1	3	
+86	tp_city	tp_religious_site	tp_religious_site	—	—	—	—	1	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+87	tp_village	tp_religious_site	tp_village	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	0	3	
+87	tp_village	tp_religious_site	tp_religious_site	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+88	tp_city	tp_museum	tp_city	attractions	جاذبه‌های منتخب	Featured attractions	أبرز المعالم	0	3	
+88	tp_city	tp_museum	tp_city	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	0	3	
+88	tp_city	tp_museum	tp_museum	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+89	tp_province	tp_protected_area	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	0	3	
+89	tp_province	tp_protected_area	tp_protected_area	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+90	tp_province	tp_natural_feature	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	0	3	
+90	tp_province	tp_natural_feature	tp_natural_feature	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+91	tp_city	tp_natural_feature	tp_city	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	0	3	
+91	tp_city	tp_natural_feature	tp_natural_feature	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+92	tp_province	tp_ancient_site	tp_province	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	3	3	
+92	tp_province	tp_ancient_site	tp_ancient_site	—	—	—	—	3	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+93	tp_city	tp_ancient_site	tp_city	attractions	جاذبه‌های منتخب	Featured attractions	أبرز المعالم	2	3	
+93	tp_city	tp_ancient_site	tp_city	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	2	3	
+93	tp_city	tp_ancient_site	tp_ancient_site	—	—	—	—	2	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+94	tp_province	tp_landscape	tp_province	nature	پهنه‌های طبیعی	Natural areas	المناطق الطبيعية	0	3	
+94	tp_province	tp_landscape	tp_landscape	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+95	tp_country	tp_city	tp_country	capital	پایتخت	Capital	العاصمة	1	3	
+95	tp_country	tp_city	tp_city	capital-of	مرکزیت	Capital of	مركز لـ	1	3	
+96	tp_province	tp_city	tp_province	capital	مرکز استان	Provincial capital	مركز المحافظة	8	3	
+96	tp_province	tp_city	tp_city	capital-of	مرکزیت	Capital of	مركز لـ	8	3	
+97	tp_county	tp_city	tp_county	—	—	—	—	0	0	شهرستان صفحه ندارد (P5-D220)
+97	tp_county	tp_city	tp_city	capital-of	مرکزیت	Capital of	مركز لـ	0	0	
+98	tp_city	tp_village	tp_city	villages	روستاها	Villages	القرى	0	3	
+98	tp_city	tp_village	tp_village	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+100	tp_city	tp_border_crossing	tp_city	border	گذرهای مرزی	Border crossings	المنافذ الحدودية	0	3	
+100	tp_city	tp_border_crossing	tp_border_crossing	crumbs	—	—	—	0	3	مسیر راهنما، بی سرفصل
+101	tp_mountain	tp_mountain	tp_mountain	subranges	زیرشاخه‌ها	Sub-ranges	السلاسل الفرعية	0	0	
+101	tp_mountain	tp_mountain	tp_mountain	crumbs	—	—	—	0	0	مسیر راهنما، بی سرفصل
+102	tp_province	tp_province	tp_province	neighbors	استان‌های هم‌مرز	Neighboring provinces	المحافظات المجاورة	29	0	
+102	tp_province	tp_province	tp_province	neighbors	استان‌های هم‌مرز	Neighboring provinces	المحافظات المجاورة	29	0	
+103	tp_protected_area	tp_natural_feature	tp_protected_area	related	عارضه‌های طبیعی درون این منطقه	Natural features in this area	المعالم الطبيعية داخل هذه المنطقة	0	3	
+103	tp_protected_area	tp_natural_feature	tp_natural_feature	related	منطقۀ حفاظت‌شدۀ دربرگیرنده	Protected area containing it	المنطقة المحمية التي تضمه	0	3	
+105	tp_landscape	tp_monument	tp_landscape	related	بناهای سازندۀ این منظر	Monuments of this landscape	معالم هذا المنظر	0	5	
+105	tp_landscape	tp_monument	tp_monument	related	منظرهای فرهنگی این بنا	Cultural landscapes of this monument	المناظر الثقافية لهذا المعلم	0	5	
+106	tp_landscape	tp_natural_feature	tp_landscape	related	عارضه‌های سازندۀ این منظر	Natural features of this landscape	المعالم الطبيعية لهذا المنظر	0	5	
+106	tp_landscape	tp_natural_feature	tp_natural_feature	related	منظرهای فرهنگی دربرگیرنده	Cultural landscapes containing it	المناظر الثقافية التي تضمه	0	5	
+107	tp_province	tp_handicraft	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	9	5	
+107	tp_province	tp_handicraft	tp_handicraft	—	—	—	—	9	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+108	tp_city	tp_handicraft	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	9	5	
+108	tp_city	tp_handicraft	tp_handicraft	—	—	—	—	9	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+109	tp_village	tp_handicraft	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+109	tp_village	tp_handicraft	tp_handicraft	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+110	tp_province	tp_local_food	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	3	5	
+110	tp_province	tp_local_food	tp_local_food	—	—	—	—	3	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+111	tp_city	tp_local_food	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+111	tp_city	tp_local_food	tp_local_food	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+112	tp_village	tp_local_food	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+112	tp_village	tp_local_food	tp_local_food	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+113	tp_province	tp_costume	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+113	tp_province	tp_costume	tp_costume	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+114	tp_city	tp_costume	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+114	tp_city	tp_costume	tp_costume	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+116	tp_province	tp_music	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+116	tp_province	tp_music	tp_music	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+117	tp_city	tp_music	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+117	tp_city	tp_music	tp_music	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+118	tp_village	tp_music	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+118	tp_village	tp_music	tp_music	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+119	tp_province	tp_dance	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+119	tp_province	tp_dance	tp_dance	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+120	tp_city	tp_dance	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+120	tp_city	tp_dance	tp_dance	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+121	tp_village	tp_dance	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+121	tp_village	tp_dance	tp_dance	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+122	tp_province	tp_ritual	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+122	tp_province	tp_ritual	tp_ritual	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+123	tp_city	tp_ritual	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+123	tp_city	tp_ritual	tp_ritual	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+124	tp_village	tp_ritual	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+124	tp_village	tp_ritual	tp_ritual	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+125	tp_province	tp_handicraft	tp_province	—	—	—	—	0	5	عمداً در استان نیست (P5-D170)
+125	tp_province	tp_handicraft	tp_handicraft	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+126	tp_city	tp_handicraft	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+126	tp_city	tp_handicraft	tp_handicraft	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+127	tp_village	tp_handicraft	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+127	tp_village	tp_handicraft	tp_handicraft	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+128	tp_province	tp_local_food	tp_province	—	—	—	—	0	5	عمداً در استان نیست (P5-D170)
+128	tp_province	tp_local_food	tp_local_food	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+129	tp_city	tp_local_food	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	3	5	
+129	tp_city	tp_local_food	tp_local_food	—	—	—	—	3	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+130	tp_village	tp_local_food	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+130	tp_village	tp_local_food	tp_local_food	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+131	tp_province	tp_language	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+131	tp_province	tp_language	tp_language	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+132	tp_city	tp_language	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+132	tp_city	tp_language	tp_language	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+133	tp_ethnic_group	tp_handicraft	tp_ethnic_group	related	صنایع دستی این قوم	Handicrafts of this ethnic group	الحرف اليدوية لهذا القوم	0	5	
+133	tp_ethnic_group	tp_handicraft	tp_handicraft	related	اقوام مرتبط	Related ethnic groups	الأقوام ذات الصلة	0	5	
+134	tp_ethnic_group	tp_local_food	tp_ethnic_group	related	غذاهای محلی این قوم	Local food of this ethnic group	الأطعمة المحلية لهذا القوم	0	5	
+134	tp_ethnic_group	tp_local_food	tp_local_food	related	اقوام مرتبط	Related ethnic groups	الأقوام ذات الصلة	0	5	
+135	tp_ethnic_group	tp_music	tp_ethnic_group	related	موسیقی‌های محلی این قوم	Local music of this ethnic group	الموسيقى المحلية لهذا القوم	0	5	
+135	tp_ethnic_group	tp_music	tp_music	related	اقوام مرتبط	Related ethnic groups	الأقوام ذات الصلة	0	5	
+136	tp_ethnic_group	tp_dance	tp_ethnic_group	related	رقص‌های محلی این قوم	Local dances of this ethnic group	الرقصات المحلية لهذا القوم	0	5	
+136	tp_ethnic_group	tp_dance	tp_dance	related	اقوام مرتبط	Related ethnic groups	الأقوام ذات الصلة	0	5	
+137	tp_ethnic_group	tp_ritual	tp_ethnic_group	related	آیین‌ها و مراسم این قوم	Rituals and ceremonies of this ethnic group	طقوس ومراسم هذا القوم	0	5	
+137	tp_ethnic_group	tp_ritual	tp_ritual	related	اقوام مرتبط	Related ethnic groups	الأقوام ذات الصلة	0	5	
+138	tp_ethnic_group	tp_costume	tp_ethnic_group	related	پوشاک سنتی این قوم	Traditional dress of this ethnic group	الأزياء التقليدية لهذا القوم	0	5	
+138	tp_ethnic_group	tp_costume	tp_costume	related	اقوام مرتبط	Related ethnic groups	الأقوام ذات الصلة	0	5	
+139	tp_historical_era	tp_monument	tp_historical_era	related	بناهای تاریخی این دوره	Historic monuments of this era	المعالم التاريخية لهذه الحقبة	0	5	
+139	tp_historical_era	tp_monument	tp_monument	related	دوره‌های تاریخی این بنا	Historical eras of this monument	الحقب التاريخية لهذا المعلم	0	5	
+140	tp_historical_era	tp_religious_site	tp_historical_era	related	مکان‌های مذهبی این دوره	Religious sites of this era	المواقع الدينية لهذه الحقبة	0	5	
+140	tp_historical_era	tp_religious_site	tp_religious_site	related	دوره‌های تاریخی این مکان	Historical eras of this site	الحقب التاريخية لهذا الموقع	0	5	
+141	tp_historical_era	tp_ancient_site	tp_historical_era	related	محوطه‌های باستانی این دوره	Ancient sites of this era	المواقع الأثرية لهذه الحقبة	0	5	
+141	tp_historical_era	tp_ancient_site	tp_ancient_site	related	دوره‌های تاریخی این محوطه	Historical eras of this ancient site	الحقب التاريخية لهذا الموقع الأثري	0	5	
+142	tp_historical_era	tp_figure	tp_historical_era	related	شخصیت‌های تاریخی این دوره	Historical figures of this era	الشخصيات التاريخية لهذه الحقبة	0	5	
+142	tp_historical_era	tp_figure	tp_figure	related	دوره‌های تاریخی این شخصیت	Historical eras of this figure	الحقب التاريخية لهذه الشخصية	0	5	
+143	tp_historical_era	tp_city	tp_historical_era	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+143	tp_historical_era	tp_city	tp_city	ancient	محوطه‌های باستانی	Archaeological sites	المواقع الأثرية	0	5	
+144	tp_historical_era	tp_district	tp_historical_era	related	محله‌های این دوره	Districts of this era	أحياء هذه الحقبة	0	5	
+144	tp_historical_era	tp_district	tp_district	ancient	دوره‌های تاریخی این محله	Historical eras of this district	الحقب التاريخية لهذا الحي	0	5	
+145	tp_historical_era	tp_landscape	tp_historical_era	related	منظرهای فرهنگی این دوره	Cultural landscapes of this era	المناظر الثقافية لهذه الحقبة	0	5	
+145	tp_historical_era	tp_landscape	tp_landscape	related	دوره‌های تاریخی این منظر	Historical eras of this landscape	الحقب التاريخية لهذا المنظر	0	5	
+146	tp_figure	tp_monument	tp_figure	related	بناهای ساخته‌شده توسط این شخصیت	Monuments built by this figure	معالم شيدتها هذه الشخصية	0	5	
+146	tp_figure	tp_monument	tp_monument	related	بانی و سازنده	Founder and builder	المؤسس والباني	0	5	
+147	tp_figure	tp_ancient_site	tp_figure	related	محوطه‌های ساخته‌شده توسط این شخصیت	Sites built by this figure	مواقع شيدتها هذه الشخصية	0	5	
+147	tp_figure	tp_ancient_site	tp_ancient_site	related	بانی و سازنده	Founder and builder	المؤسس والباني	0	5	
+148	tp_figure	tp_monument	tp_figure	related	بناهای تاریخی مرتبط با این شخصیت	Historic monuments linked to this figure	معالم تاريخية مرتبطة بهذه الشخصية	0	5	
+148	tp_figure	tp_monument	tp_monument	related	شخصیت‌های مرتبط با این بنا	Figures linked to this monument	شخصيات مرتبطة بهذا المعلم	0	5	
+149	tp_figure	tp_religious_site	tp_figure	related	مکان‌های مذهبی مرتبط با این شخصیت	Religious sites linked to this figure	مواقع دينية مرتبطة بهذه الشخصية	0	5	
+149	tp_figure	tp_religious_site	tp_religious_site	related	شخصیت‌های مرتبط با این مکان	Figures linked to this site	شخصيات مرتبطة بهذا الموقع	0	5	
+150	tp_figure	tp_ancient_site	tp_figure	related	محوطه‌های باستانی مرتبط با این شخصیت	Ancient sites linked to this figure	مواقع أثرية مرتبطة بهذه الشخصية	0	5	
+150	tp_figure	tp_ancient_site	tp_ancient_site	related	شخصیت‌های مرتبط با این محوطه	Figures linked to this ancient site	شخصيات مرتبطة بهذا الموقع الأثري	0	5	
+152	tp_figure	tp_ritual	tp_figure	related	آیین‌ها و مراسم مرتبط با این شخصیت	Rituals linked to this figure	طقوس ومراسم مرتبطة بهذه الشخصية	0	5	
+152	tp_figure	tp_ritual	tp_ritual	related	شخصیت‌های مرتبط با این آیین	Figures linked to this ritual	شخصيات مرتبطة بهذا الطقس	0	5	
+153	tp_city	tp_figure	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	3	
+153	tp_city	tp_figure	tp_figure	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+154	tp_city	tp_figure	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	3	
+154	tp_city	tp_figure	tp_figure	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+156	tp_country	tp_health_safety	tp_country	practical	اطلاعات سفر	Travel information	معلومات السفر	1	5	
+156	tp_country	tp_health_safety	tp_health_safety	—	—	—	—	1	5	کشور عمداً کاشی نمی‌شود (P5-D348)
+157	tp_province	tp_health_safety	tp_province	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+157	tp_province	tp_health_safety	tp_health_safety	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+158	tp_city	tp_health_safety	tp_city	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+158	tp_city	tp_health_safety	tp_health_safety	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+159	tp_country	tp_travel_etiquette	tp_country	practical	اطلاعات سفر	Travel information	معلومات السفر	1	5	
+159	tp_country	tp_travel_etiquette	tp_travel_etiquette	—	—	—	—	1	5	کشور عمداً کاشی نمی‌شود (P5-D348)
+160	tp_province	tp_travel_etiquette	tp_province	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+160	tp_province	tp_travel_etiquette	tp_travel_etiquette	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+162	tp_travel_etiquette	tp_religious_site	tp_travel_etiquette	related	مکان‌های مشمول این قوانین	Sites covered by these rules	المواقع المشمولة بهذه القواعد	0	5	
+162	tp_travel_etiquette	tp_religious_site	tp_religious_site	related	آداب رفتاری این مکان	Etiquette rules for this site	قواعد السلوك في هذا الموقع	0	5	
+172	tp_route	tp_province	tp_route	—	—	—	—	3	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+172	tp_route	tp_province	tp_province	routes	مسیرهای گردشگری	Tourist routes	المسارات السياحية	3	5	
+173	tp_route	tp_city	tp_route	—	—	—	—	18	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+173	tp_route	tp_city	tp_city	routes	مسیرهای گردشگری	Tourist routes	المسارات السياحية	18	5	
+174	tp_route	tp_village	tp_route	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+174	tp_route	tp_village	tp_village	routes	مسیرهای گردشگری	Tourist routes	المسارات السياحية	0	5	
+175	tp_route	tp_island	tp_route	related	جزیره‌های این مسیر	Islands on this route	جزر هذا المسار	0	5	
+175	tp_route	tp_island	tp_island	routes	مسیرهای گردشگری	Tourist routes	المسارات السياحية	0	5	
+177	tp_route	tp_border_crossing	tp_route	related	گذرگاه‌های مرزی این مسیر	Border crossings on this route	المعابر الحدودية لهذا المسار	0	5	
+177	tp_route	tp_border_crossing	tp_border_crossing	routes	مسیرهای گردشگری	Tourist routes	المسارات السياحية	0	5	
+185	tp_country	tp_visa	tp_country	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+185	tp_country	tp_visa	tp_visa	—	—	—	—	0	5	کشور عمداً کاشی نمی‌شود (P5-D348)
+226	tp_country	tp_currency	tp_country	practical	اطلاعات سفر	Travel information	معلومات السفر	2	5	
+226	tp_country	tp_currency	tp_currency	—	—	—	—	2	5	کشور عمداً کاشی نمی‌شود (P5-D348)
+227	tp_province	tp_currency	tp_province	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+227	tp_province	tp_currency	tp_currency	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+228	tp_country	tp_calendar	tp_country	practical	اطلاعات سفر	Travel information	معلومات السفر	1	5	
+228	tp_country	tp_calendar	tp_calendar	—	—	—	—	1	5	کشور عمداً کاشی نمی‌شود (P5-D348)
+229	tp_province	tp_calendar	tp_province	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+229	tp_province	tp_calendar	tp_calendar	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+230	tp_city	tp_calendar	tp_city	practical	اطلاعات سفر	Travel information	معلومات السفر	0	5	
+230	tp_city	tp_calendar	tp_calendar	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+231	tp_calendar	tp_ritual	tp_calendar	related	آیین‌های اثرگذار بر برنامه‌ریزی سفر	Rituals that affect travel planning	طقوس تؤثر في تخطيط السفر	0	5	
+231	tp_calendar	tp_ritual	tp_ritual	related	تقویم‌های رسمی مرتبط	Related official calendars	التقاويم الرسمية ذات الصلة	0	5	
+232	tp_province	tp_festival	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	3	5	
+232	tp_province	tp_festival	tp_festival	—	—	—	—	3	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+233	tp_city	tp_festival	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	3	5	
+233	tp_city	tp_festival	tp_festival	—	—	—	—	3	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+234	tp_village	tp_festival	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+234	tp_village	tp_festival	tp_festival	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+235	tp_monument	tp_festival	tp_monument	related	جشنواره‌های برگزارشده در این بنا	Festivals held at this monument	مهرجانات تقام في هذا المعلم	0	5	
+235	tp_monument	tp_festival	tp_festival	related	بناهای تاریخی میزبان	Host monuments	المعالم التاريخية المضيفة	0	5	
+236	tp_religious_site	tp_festival	tp_religious_site	related	جشنواره‌های برگزارشده در این مکان	Festivals held at this site	مهرجانات تقام في هذا الموقع	0	5	
+236	tp_religious_site	tp_festival	tp_festival	related	مکان‌های مذهبی میزبان	Host religious sites	المواقع الدينية المضيفة	0	5	
+237	tp_museum	tp_festival	tp_museum	related	جشنواره‌های برگزارشده در این موزه	Festivals held at this museum	مهرجانات تقام في هذا المتحف	0	5	
+237	tp_museum	tp_festival	tp_festival	related	موزه‌های میزبان	Host museums	المتاحف المضيفة	0	5	
+238	tp_protected_area	tp_festival	tp_protected_area	related	جشنواره‌های این منطقه	Festivals in this area	المهرجانات في هذه المنطقة	0	5	
+238	tp_protected_area	tp_festival	tp_festival	related	مناطق حفاظت‌شدۀ میزبان	Host protected areas	المناطق المحمية المضيفة	0	5	
+240	tp_ritual	tp_festival	tp_ritual	related	جشنواره‌های نمونۀ این آیین	Festivals exemplifying this ritual	مهرجانات تجسد هذا الطقس	0	5	
+240	tp_ritual	tp_festival	tp_festival	related	آیین‌های مرجع این رویداد	Source rituals of this event	الطقوس المرجعية لهذه الفعالية	0	5	
+242	tp_figure	tp_festival	tp_figure	related	جشنواره‌های گرامیداشت این شخصیت	Festivals commemorating this figure	مهرجانات إحياء هذه الشخصية	0	5	
+242	tp_figure	tp_festival	tp_festival	related	شخصیت‌های گرامی‌داشته‌شده	Figures commemorated	الشخصيات المحتفى بها	0	5	
+243	tp_historical_era	tp_festival	tp_historical_era	related	جشنواره‌های گرامیداشت این دوره	Festivals commemorating this era	مهرجانات إحياء هذه الحقبة	0	5	
+243	tp_historical_era	tp_festival	tp_festival	related	دوره‌های گرامی‌داشته‌شده	Eras commemorated	الحقب المحتفى بها	0	5	
+244	tp_calendar	tp_festival	tp_calendar	related	رویدادهای اثرگذار بر برنامه‌ریزی سفر	Events that affect travel planning	فعاليات تؤثر في تخطيط السفر	0	5	
+244	tp_calendar	tp_festival	tp_festival	related	تقویم‌های رسمی مرتبط	Related official calendars	التقاويم الرسمية ذات الصلة	0	5	
+245	tp_province	tp_sports_event	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+245	tp_province	tp_sports_event	tp_sports_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+246	tp_city	tp_sports_event	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+246	tp_city	tp_sports_event	tp_sports_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+247	tp_village	tp_sports_event	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+247	tp_village	tp_sports_event	tp_sports_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+248	tp_monument	tp_sports_event	tp_monument	related	رویدادهای ورزشی برگزارشده در این بنا	Sports events held at this monument	فعاليات رياضية تقام في هذا المعلم	0	5	
+248	tp_monument	tp_sports_event	tp_sports_event	related	بناهای تاریخی میزبان	Host monuments	المعالم التاريخية المضيفة	0	5	
+249	tp_religious_site	tp_sports_event	tp_religious_site	related	رویدادهای ورزشی برگزارشده در این مکان	Sports events held at this site	فعاليات رياضية تقام في هذا الموقع	0	5	
+249	tp_religious_site	tp_sports_event	tp_sports_event	related	مکان‌های مذهبی میزبان	Host religious sites	المواقع الدينية المضيفة	0	5	
+250	tp_museum	tp_sports_event	tp_museum	related	رویدادهای ورزشی برگزارشده در این موزه	Sports events held at this museum	فعاليات رياضية تقام في هذا المتحف	0	5	
+250	tp_museum	tp_sports_event	tp_sports_event	related	موزه‌های میزبان	Host museums	المتاحف المضيفة	0	5	
+251	tp_protected_area	tp_sports_event	tp_protected_area	related	رویدادهای ورزشی این منطقه	Sports events in this area	الفعاليات الرياضية في هذه المنطقة	0	5	
+251	tp_protected_area	tp_sports_event	tp_sports_event	related	مناطق حفاظت‌شدۀ میزبان	Host protected areas	المناطق المحمية المضيفة	0	5	
+253	tp_province	tp_religious_event	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+253	tp_province	tp_religious_event	tp_religious_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+254	tp_city	tp_religious_event	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+254	tp_city	tp_religious_event	tp_religious_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+255	tp_village	tp_religious_event	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+255	tp_village	tp_religious_event	tp_religious_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+256	tp_monument	tp_religious_event	tp_monument	related	مراسم مذهبی برگزارشده در این بنا	Religious ceremonies held at this monument	مراسم دينية تقام في هذا المعلم	0	5	
+256	tp_monument	tp_religious_event	tp_religious_event	related	بناهای تاریخی میزبان	Host monuments	المعالم التاريخية المضيفة	0	5	
+257	tp_religious_site	tp_religious_event	tp_religious_site	related	مراسم مذهبی برگزارشده در این مکان	Religious ceremonies held at this site	مراسم دينية تقام في هذا الموقع	0	5	
+257	tp_religious_site	tp_religious_event	tp_religious_event	related	مکان‌های مذهبی میزبان	Host religious sites	المواقع الدينية المضيفة	0	5	
+259	tp_ritual	tp_religious_event	tp_ritual	related	مراسم مذهبی نمونۀ این آیین	Religious ceremonies exemplifying this ritual	مراسم دينية تجسد هذا الطقس	0	5	
+259	tp_ritual	tp_religious_event	tp_religious_event	related	آیین‌های مرجع این مراسم	Source rituals of this ceremony	الطقوس المرجعية لهذه المراسم	0	5	
+261	tp_figure	tp_religious_event	tp_figure	related	مراسم مذهبی گرامیداشت این شخصیت	Religious ceremonies commemorating this figure	مراسم دينية لإحياء هذه الشخصية	0	5	
+261	tp_figure	tp_religious_event	tp_religious_event	related	شخصیت‌های گرامی‌داشته‌شده	Figures commemorated	الشخصيات المحتفى بها	0	5	
+262	tp_historical_era	tp_religious_event	tp_historical_era	related	مراسم مذهبی گرامیداشت این دوره	Religious ceremonies commemorating this era	مراسم دينية لإحياء هذه الحقبة	0	5	
+262	tp_historical_era	tp_religious_event	tp_religious_event	related	دوره‌های گرامی‌داشته‌شده	Eras commemorated	الحقب المحتفى بها	0	5	
+263	tp_province	tp_seasonal_event	tp_province	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+263	tp_province	tp_seasonal_event	tp_seasonal_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+264	tp_city	tp_seasonal_event	tp_city	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+264	tp_city	tp_seasonal_event	tp_seasonal_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+265	tp_village	tp_seasonal_event	tp_village	culture	فرهنگ و رویداد	Culture and events	الثقافة والفعاليات	0	5	
+265	tp_village	tp_seasonal_event	tp_seasonal_event	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+268	tpc_news	tp_province	tpc_news	—	—	—	—	3	0	خبر قالب خودش را دارد
+268	tpc_news	tp_province	tp_province	—	—	—	—	3	0	سطح اخبار مکان (topersia_g_news)
+269	tpc_news	tp_city	tpc_news	—	—	—	—	9	0	خبر قالب خودش را دارد
+269	tpc_news	tp_city	tp_city	—	—	—	—	9	0	سطح اخبار مکان (topersia_g_news)
+270	tpc_news	tp_village	tpc_news	—	—	—	—	0	0	خبر قالب خودش را دارد
+270	tpc_news	tp_village	tp_village	—	—	—	—	0	0	سطح اخبار مکان (topersia_g_news)
+271	tpc_news	tp_island	tpc_news	—	—	—	—	0	0	خبر قالب خودش را دارد
+271	tpc_news	tp_island	tp_island	—	—	—	—	0	0	سطح اخبار مکان (topersia_g_news)
+293	tp_province	tp_city	tp_province	related	شهرهای دارای فرودگاه اصلی	Cities with the main airports	مدن المطارات الرئيسية	0	5	
+293	tp_province	tp_city	tp_city	related	فرودگاه اصلی این استان‌ها	Main airport for these provinces	المطار الرئيسي لهذه المحافظات	0	5	
+294	tp_city	tp_route	tp_city	related	مسیرهایی که از این شهر آغاز می‌شوند	Routes starting in this city	مسارات تبدأ من هذه المدينة	0	3	
+294	tp_city	tp_route	tp_route	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+295	tp_city	tp_route	tp_city	related	مسیرهایی که در این شهر پایان می‌یابند	Routes ending in this city	مسارات تنتهي في هذه المدينة	0	3	
+295	tp_city	tp_route	tp_route	—	—	—	—	0	3	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+296	tp_city	tp_handicraft	tp_city	related	صنایع دستی برای خرید در این شهر	Handicrafts to buy in this city	حرف يدوية للشراء في هذه المدينة	0	5	
+296	tp_city	tp_handicraft	tp_handicraft	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+297	tp_city	tp_local_food	tp_city	related	غذاهای محلی برای چشیدن در این شهر	Local food to taste in this city	أطعمة محلية للتذوق في هذه المدينة	0	5	
+297	tp_city	tp_local_food	tp_local_food	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+298	tp_city	tp_music	tp_city	related	موسیقی زنده در این شهر	Live music in this city	موسيقى حية في هذه المدينة	0	5	
+298	tp_city	tp_music	tp_music	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+299	tp_monument	tp_figure	tp_monument	related	آرامگاه این شخصیت‌ها	Resting place of these figures	مثوى هذه الشخصيات	0	3	
+299	tp_monument	tp_figure	tp_figure	related	آرامگاه این شخصیت	Resting place of this figure	مثوى هذه الشخصية	0	3	
+300	tp_historical_era	tp_monument	tp_historical_era	related	بناهای شاخص این دوره	Landmark monuments of this era	أبرز معالم هذه الحقبة	0	5	
+300	tp_historical_era	tp_monument	tp_monument	related	دوره‌هایی که این بنا شاخص آن‌هاست	Eras this monument is a landmark of	الحقب التي يعد هذا المعلم من أبرز معالمها	0	5	
+301	tp_historical_era	tp_ancient_site	tp_historical_era	related	محوطه‌های شاخص این دوره	Landmark sites of this era	أبرز المواقع الأثرية لهذه الحقبة	0	5	
+301	tp_historical_era	tp_ancient_site	tp_ancient_site	related	دوره‌هایی که این محوطه شاخص آن‌هاست	Eras this site is a landmark of	الحقب التي يعد هذا الموقع من أبرز مواقعها	0	5	
+302	tp_province	tp_ethnic_group	tp_province	related	اقوام ساکن این استان	Ethnic groups of this province	الأقوام في هذه المحافظة	0	5	
+302	tp_province	tp_ethnic_group	tp_ethnic_group	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+303	tp_province	tp_dance	tp_province	related	رقص‌های رایج در این استان	Dances of this province	الرقصات الشائعة في هذه المحافظة	0	5	
+303	tp_province	tp_dance	tp_dance	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)
+304	tp_province	tp_language	tp_province	related	زبان‌ها و گویش‌های رایج در این استان	Languages and dialects of this province	اللغات واللهجات الشائعة في هذه المحافظة	0	5	
+304	tp_province	tp_language	tp_language	—	—	—	—	0	5	کاشی مکان‌های مرتبط (topersia_g_geo_related_tiles)

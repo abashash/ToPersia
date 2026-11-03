@@ -86,7 +86,7 @@ t( 'هر فیلد فقط یک‌جا: جمعیت در آمار هست و در ح
 /* ترتیب لایهٔ دادهٔ مرجع: مرکز · کد · مساحت · جمعیت.  P5-D215 */
 /* P5-D386: کد استان از هر نمایش (آمار، حقایق، کاشی) بیرون است؛ فیلد و داده می‌ماند. */
 t( 'کد استان در هیچ نمایشی نیست (آمار، حقایق، کاشی، کل صفحه) ولی داده‌اش هست؛ اقلیم در آمار یا حقایق  P5-D386',
-	false === strpos( $stats_p, 'کد استان' ) && false === strpos( $facts_p, 'کد استان' ) && false === strpos( $p20, 'کد استان' )
+	false === strpos( $stats_p, 'کد استان' ) && false === strpos( $facts_p, 'کد استان' ) && false === strpos( r( 20, 'tp_page' ), 'کد استان' )
 	&& '' !== (string) topersia_g_raw( 20, 'province_code' ) && ( false !== strpos( $stats_p, 'نیمه‌خشک' ) || false !== strpos( $facts_p, 'نیمه‌خشک' ) )
 	&& 'skip' === topersia_g_map()['province_code']['zone'] );
 t( 'مختصات در آمار و حقایق نیست، زیر نقشه است', false === strpos( $stats_p, '32.6539' ) && false === strpos( $facts_p, '32.6539' ) && false !== strpos( r( 20, 'tp_map' ), '32.6539' ) );
@@ -129,7 +129,7 @@ t( 'صفحه: سربرگ و آمار داخل همین خروجی‌اند', fal
 
 /* پوشش نقشه */
 /* G همان ۵۷ فیلد است؛ ناحیۀ stat (۲ج٫۱) فیلدهای کوتاه نوع‌های دیگر برای کارت آمار است؛ kind=date تاریخ رویداد E1 · E3 · E5 (P5-D357) است، نه فیلد G */
-$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ) && empty( $f['p5d470'] ) && empty( $f['wave1'] ) && empty( $f['wave2'] ) && empty( $f['wave2b'] ) && 'visit' !== $f['zone'] && empty( $f['b29'] ); } );   /* P5-D450 و فیلدهای بازگشتهٔ دستهٔ ۲۹ جدا سنجیده می‌شوند */
+$g_map     = array_filter( topersia_g_map(), function ( $f ) { return 'stat' !== $f['zone'] && 'date' !== $f['kind'] && empty( $f['p5d450'] ) && empty( $f['p5d470'] ) && empty( $f['wave1'] ) && empty( $f['wave2'] ) && empty( $f['wave2b'] ) && empty( $f['wave2c'] ) && 'visit' !== $f['zone'] && empty( $f['b29'] ); } );   /* P5-D450 و فیلدهای بازگشتهٔ دستهٔ ۲۹ جدا سنجیده می‌شوند */
 $map_count = count( $g_map );
 t( 'نقشه: دقیقاً ۵۸ فیلد G (بیرون از ناحیۀ stat) — ۵۷ + ritual_context_reference (دستهٔ 34 · P5-D467: از سربرگ به «درباره»)', 58 === $map_count, "شمار: {$map_count}" );
 $choice = 0;
@@ -2314,6 +2314,7 @@ require __DIR__ . '/assert-42.php';    /* P5-D498 */
 require __DIR__ . '/assert-499.php';   /* P5-D499 */
 require __DIR__ . '/assert-502.php';   /* P5-D502 */
 require __DIR__ . '/assert-43.php';   /* P5-D485 دستهٔ 43 */
+require __DIR__ . '/assert-44.php';   /* P5-D485 · P5-D504 · P5-D505 دستهٔ 44 */
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

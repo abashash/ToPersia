@@ -67,6 +67,77 @@ if ( ! function_exists( 'tp_rel_cov_reason' ) ) {
 		return $rows;
 	}
 
+	/**
+	 * P5-D504: عنوان هر رابطه از هر سو، برای هر گروهی که نشانش می‌دهد. گروه «مرتبط» عنوان ردیف خودش را دارد و بقیه عنوان گروه.
+	 * $relmap و $cat برای جهش قابل جایگزینی‌اند. ستون why فقط برای سوی بی عنوان: دلیل مکتوب، یا خالی یعنی شکاف.
+	 */
+	function tp_rel_heading_rows( array $cat, $relmap = null ) {
+
+		$relmap = null === $relmap ? topersia_g_relmap() : $relmap;
+		$rows   = array();
+
+		foreach ( tp_rel_cov_rows( $relmap ) as $id => $r ) {
+			foreach ( array( 'children' => array( $r['p'], $r['gp'], $r['wp'] ), 'parents' => array( $r['c'], $r['gc'], $r['wc'] ) ) as $dir => $side ) {
+				list( $page, $groups, $why ) = $side;
+				foreach ( '' === $groups ? array( '' ) : explode( '+', $groups ) as $key ) {
+					$fa = '';
+					if ( 'related' === $key ) {
+						foreach ( (array) $relmap[ $page ]['related']['rels'] as $rel ) {
+							if ( (int) $rel['id'] === (int) $id && $rel['dir'] === $dir ) { $fa = (string) ( $rel['title'] ?? '' ); }
+						}
+					} elseif ( '' !== $key ) {
+						$fa = (string) ( $relmap[ $page ][ $key ]['title'] ?? '' );
+					}
+					$rows[] = array(
+						'id' => (int) $id, 'p' => $r['p'], 'c' => $r['c'], 'page' => $page, 'dir' => $dir, 'group' => $key,
+						'fa' => $fa, 'en' => '' === $fa ? '' : (string) ( $cat[ $fa ]['en'] ?? '' ), 'ar' => '' === $fa ? '' : (string) ( $cat[ $fa ]['ar'] ?? '' ),
+						'real' => $r['real'], 'sample' => $r['sample'],
+						'why' => 'crumbs' === $key ? 'مسیر راهنما، بی سرفصل' : ( '' === $key ? $why : '' ),
+					);
+				}
+			}
+		}
+
+		return $rows;
+	}
+
+	/** متن پروندهٔ docs/ops/REL-HEADINGS-2026-11.tsv از ردیف‌ها؛ یک منبع برای نوشتن و سنجیدن. */
+	function tp_rel_heading_tsv( array $rows ) {
+
+		$tsv = "رابطه\tوالد\tفرزند\tصفحه\tگروه\tfa\ten\tar\tیال واقعی\tیال نمونه\tبی عنوان چون\n";
+		foreach ( $rows as $r ) {
+			$tsv .= implode( "\t", array( $r['id'], $r['p'], $r['c'], $r['page'], '' === $r['group'] ? '—' : $r['group'], '' === $r['fa'] ? '—' : $r['fa'], '' === $r['en'] ? '—' : $r['en'], '' === $r['ar'] ? '—' : $r['ar'], $r['real'], $r['sample'], $r['why'] ) ) . "\n";
+		}
+		return $tsv;
+	}
+
+	/**
+	 * همان جدول بی دو ستون شمار یال (نهم و دهم). شمارها عکس لحظهٔ نوشتن‌اند و با هر یال محلی عوض می‌شوند؛
+	 * گیت فقط آنچه از کد می‌آید را می‌سنجد: سوها، گروه، عنوان سه‌زبانه و دلیل (بازبینی دستهٔ 44).
+	 */
+	function tp_rel_heading_shape( $tsv ) {
+
+		$out = array();
+		foreach ( explode( "\n", (string) $tsv ) as $line ) {
+			$c = explode( "\t", $line );
+			array_splice( $c, 8, 2 );
+			$out[] = implode( "\t", $c );
+		}
+		return implode( "\n", $out );
+	}
+
+	/** سوی با یال که نه عنوان کامل سه‌زبانه دارد و نه دلیل مکتوب. */
+	function tp_rel_heading_gaps( array $rows ) {
+
+		$gaps = array();
+		foreach ( $rows as $r ) {
+			if ( ! $r['real'] && ! $r['sample'] ) { continue; }
+			if ( '' !== $r['why'] ) { continue; }
+			if ( '' === $r['fa'] || '' === $r['en'] || '' === $r['ar'] ) { $gaps[] = $r['id'] . ':' . $r['page'] . ':' . $r['dir']; }
+		}
+		return $gaps;
+	}
+
 	/** رابطهٔ با یال که سویی بی گروه و بی دلیل دارد: [ [ id, نوع, جهت ], … ] */
 	function tp_rel_cov_gaps( array $rows ) {
 
@@ -77,5 +148,21 @@ if ( ! function_exists( 'tp_rel_cov_reason' ) ) {
 			if ( '' === $r['gc'] && '' === $r['wc'] ) { $gaps[] = array( $r['id'], $r['c'], 'parents' ); }
 		}
 		return $gaps;
+	}
+}
+
+/* بازبینی دستهٔ 44: یک تعریف برای گزارش آمادگی و آزمون‌ها. */
+if ( ! function_exists( 'tp_freeze_row_is_rel' ) ) {
+
+	/** ردیف DISPLAY در CSV انجماد فقط وقتی رابطه است که نامش «relNN» باشد (`rel92 parents (#92)`)؛ `related_museum` و `religious_site_etiquette` فیلدند. */
+	function tp_freeze_row_is_rel( $name ) {
+
+		return 1 === preg_match( '/^rel\d+\b/', (string) $name );
+	}
+
+	/** گونهٔ پست نمونه: شهرستان نمونه (`_tp_sample_county`) ستون خودش را دارد، هرچند نشان `_tp_sample_empty` هم دارد. */
+	function tp_sample_kind( $county, $empty ) {
+
+		return $county ? 'county' : ( $empty ? 'empty' : 'full' );
 	}
 }

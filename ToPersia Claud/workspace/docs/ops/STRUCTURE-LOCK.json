@@ -2732,6 +2732,146 @@
     "tp_natural_feature",
     "tp_protected_area"
    ]
+  },
+  "spectator_access_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_sports_event"
+   ]
+  },
+  "peak_start_week": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number",
+   "jet_type": "number",
+   "wpml": "copy",
+   "post_types": [
+    "tp_seasonal_event"
+   ]
+  },
+  "peak_end_week": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "number",
+   "jet_type": "number",
+   "wpml": "copy",
+   "post_types": [
+    "tp_seasonal_event"
+   ]
+  },
+  "optimal_conditions": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_seasonal_event"
+   ]
+  },
+  "predictability_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_seasonal_event"
+   ]
+  },
+  "annual_date_rule": {
+   "consumers": [
+    "FIELDMAP:card",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "card",
+   "fieldmap_kind": "text",
+   "jet_type": "text",
+   "wpml": "translate",
+   "post_types": [
+    "tp_religious_event"
+   ]
+  },
+  "public_participation_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_religious_event"
+   ]
+  },
+  "visitor_etiquette_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "rich",
+   "jet_type": "wysiwyg",
+   "wpml": "translate",
+   "post_types": [
+    "tp_religious_event"
+   ]
+  },
+  "photography_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_religious_event"
+   ]
+  },
+  "dress_code_note": {
+   "consumers": [
+    "FIELDMAP:details",
+    "render",
+    "tests"
+   ],
+   "fieldmap_zone": "details",
+   "fieldmap_kind": "text",
+   "jet_type": "textarea",
+   "wpml": "translate",
+   "post_types": [
+    "tp_religious_event"
+   ]
   }
  },
  "relations": {
@@ -3351,7 +3491,7 @@
   "area_km2"
  ],
  "count": {
-  "fields": 270,
+  "fields": 280,
   "relations": 39,
   "post_types": 42
  },

@@ -17,11 +17,12 @@ $w43_lock  = json_decode( (string) @file_get_contents( __DIR__ . '/../docs/ops/S
 $w43_cat   = include __DIR__ . '/../scripts/i18n/topersia-render.php';
 $w43_skin  = json_decode( (string) @file_get_contents( __DIR__ . '/../reference/Jetengine_Skin.json' ), true );
 
-/* ۱ — ردیف DISPLAY این دو نوع: کلید فیلد (is_recurring از دستهٔ 40) */
+/* ۱ — ردیف DISPLAY این دو نوع: کلید فیلد (is_recurring از دستهٔ 40). رابطه یا فیلد از tp_freeze_row_is_rel (بازبینی دستهٔ 44) */
+require_once dirname( __DIR__ ) . '/scripts/lib/tp-rel-coverage-lib.php';
 $w43_csv = array();
 foreach ( (array) file( __DIR__ . '/../docs/ops/STRUCTURE-FREEZE-PROPOSAL.csv' ) as $line ) {
 	$c = str_getcsv( $line );
-	if ( isset( $c[3] ) && 'DISPLAY' === $c[3] && in_array( $c[1], $w43_types, true ) && 0 !== strpos( $c[2], 'rel' ) && 'is_recurring' !== $c[2] ) { $w43_csv[ $c[2] ] = $c[1]; }
+	if ( isset( $c[3] ) && 'DISPLAY' === $c[3] && in_array( $c[1], $w43_types, true ) && ! tp_freeze_row_is_rel( $c[2] ) && 'is_recurring' !== $c[2] ) { $w43_csv[ $c[2] ] = $c[1]; }
 }
 $w43_jet = array();
 foreach ( (array) ( $w43_skin['meta_boxes'] ?? array() ) as $box ) {

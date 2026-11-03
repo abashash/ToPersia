@@ -20,12 +20,13 @@ $w42_cat   = include __DIR__ . '/../scripts/i18n/topersia-render.php';
 $w42_skin  = json_decode( (string) @file_get_contents( __DIR__ . '/../reference/Jetengine_Skin.json' ), true );
 $w42_core  = (string) @file_get_contents( __DIR__ . '/../plugin/topersia-core/includes/topersia-pack.php' );
 
-/* ۱ — ۱۸ ردیف DISPLAY: ۱۶ کلید فیلد + دو رابطه که ساخته نشد */
+/* ۱ — ۱۸ ردیف DISPLAY: ۱۶ کلید فیلد + دو رابطه که ساخته نشد. رابطه یا فیلد از tp_freeze_row_is_rel (بازبینی دستهٔ 44) */
+require_once dirname( __DIR__ ) . '/scripts/lib/tp-rel-coverage-lib.php';
 $w42_csv = array(); $w42_rels = array();
 foreach ( (array) file( __DIR__ . '/../docs/ops/STRUCTURE-FREEZE-PROPOSAL.csv' ) as $line ) {
 	$c = str_getcsv( $line );
 	if ( isset( $c[3] ) && 'DISPLAY' === $c[3] && in_array( $c[1], $w42_types, true ) ) {
-		if ( 0 === strpos( $c[2], 'rel' ) ) { $w42_rels[] = $c[2]; } else { $w42_csv[ $c[2] ] = $c[1]; }
+		if ( tp_freeze_row_is_rel( $c[2] ) ) { $w42_rels[] = $c[2]; } else { $w42_csv[ $c[2] ] = $c[1]; }
 	}
 }
 $w42_jet = array();
@@ -133,10 +134,10 @@ t( 'بی کد به‌ازای فیلد: هیچ کلیدی در رندر نامی
 	array() === $w42_code( '' ) && array() !== $w42_code( "if ( 'air_travel_note' === \$name ) {}" ), implode( ' · ', $w42_code( '' ) ) );
 
 /* ۸ — بسته: فهرست گسترش یافته و هم‌خوان */
-$w42_five = "array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' )";
+$w42_five = "array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' )";
 $w42_pack = function ( $s ) use ( $w42_five ) { return false !== strpos( $s, 'return ' . $w42_five . ';' ); };
 tp441_mut( 'بسته: تاریخ بازبینی و منبع برای این سه نوع هم اجباری؛ یک فهرست با رندر — جهش: نوعی حذف شود می‌افتد', $w42_pack, $w42_core, str_replace( "'tp_transport', ", '', $w42_core ) );
-t( 'فهرست رندر با هسته یکی است', topersia_g_verified_types() === array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' ) );
+t( 'فهرست رندر با هسته یکی است', topersia_g_verified_types() === array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' ) );
 
 $GLOBALS['tp_posts'] = $keep42[0]; $GLOBALS['tp_meta'] = $keep42[1];
 if ( null === $keep42[2] ) { unset( $GLOBALS['tp_rel'] ); } else { $GLOBALS['tp_rel'] = $keep42[2]; }

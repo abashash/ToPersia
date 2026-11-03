@@ -92,8 +92,16 @@ msgid "آخرین مشاهده"
 msgstr "آخر مشاهدة"
 
 #: includes/topersia-g-map.php
+msgid "آداب حضور"
+msgstr "آداب الحضور"
+
+#: includes/topersia-g-map.php
 msgid "آداب حمل‌ونقل عمومی"
 msgstr "آداب النقل العام"
+
+#: includes/topersia-g-map.php
+msgid "آداب رفتاری این مکان"
+msgstr "قواعد السلوك في هذا الموقع"
 
 #: includes/topersia-g-zones.php
 msgid "آداب منطقه‌ای"
@@ -114,6 +122,14 @@ msgstr "هادئ"
 #: includes/topersia-g-map.php
 msgid "آرامگاه"
 msgstr "ضريح"
+
+#: includes/topersia-g-map.php
+msgid "آرامگاه این شخصیت"
+msgstr "مثوى هذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "آرامگاه این شخصیت‌ها"
+msgstr "مثوى هذه الشخصيات"
 
 #: includes/topersia-g-zones.php
 msgid "آرایش اجرا"
@@ -162,6 +178,26 @@ msgstr "طقس عرقي"
 #: includes/topersia-g-map.php
 msgid "آیینی"
 msgstr "طقسي"
+
+#: includes/topersia-g-map.php
+msgid "آیین‌ها و مراسم این قوم"
+msgstr "طقوس ومراسم هذا القوم"
+
+#: includes/topersia-g-map.php
+msgid "آیین‌ها و مراسم مرتبط با این شخصیت"
+msgstr "طقوس ومراسم مرتبطة بهذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "آیین‌های اثرگذار بر برنامه‌ریزی سفر"
+msgstr "طقوس تؤثر في تخطيط السفر"
+
+#: includes/topersia-g-map.php
+msgid "آیین‌های مرجع این رویداد"
+msgstr "الطقوس المرجعية لهذه الفعالية"
+
+#: includes/topersia-g-map.php
+msgid "آیین‌های مرجع این مراسم"
+msgstr "الطقوس المرجعية لهذه المراسم"
 
 #: includes/topersia-g-map.php
 msgid "آیین‌های نوروزی"
@@ -343,6 +379,14 @@ msgstr "المناخ"
 msgid "اقلیمی"
 msgstr "مناخي"
 
+#: includes/topersia-g-map.php
+msgid "اقوام ساکن این استان"
+msgstr "الأقوام في هذه المحافظة"
+
+#: includes/topersia-g-map.php
+msgid "اقوام مرتبط"
+msgstr "الأقوام ذات الصلة"
+
 #: includes/topersia-g-zones.php
 msgid "الفبا"
 msgstr "أبجدي"
@@ -486,6 +530,10 @@ msgstr "حي تاريخي"
 #: includes/topersia-g-zones.php
 msgid "بالا"
 msgstr "الأعلى"
+
+#: includes/topersia-g-map.php
+msgid "بانی و سازنده"
+msgstr "المؤسس والباني"
 
 #: includes/topersia-g-map.php
 msgid "بخش"
@@ -637,6 +685,30 @@ msgstr "نعم"
 #: includes/topersia-g-map.php
 msgid "بلیت"
 msgstr "بتذكرة"
+
+#: includes/topersia-g-map.php
+msgid "بناهای تاریخی این دوره"
+msgstr "المعالم التاريخية لهذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "بناهای تاریخی مرتبط با این شخصیت"
+msgstr "معالم تاريخية مرتبطة بهذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "بناهای تاریخی میزبان"
+msgstr "المعالم التاريخية المضيفة"
+
+#: includes/topersia-g-map.php
+msgid "بناهای ساخته‌شده توسط این شخصیت"
+msgstr "معالم شيدتها هذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "بناهای سازندۀ این منظر"
+msgstr "معالم هذا المنظر"
+
+#: includes/topersia-g-map.php
+msgid "بناهای شاخص این دوره"
+msgstr "أبرز معالم هذه الحقبة"
 
 #: includes/topersia-g-zones.php
 msgid "بنای تاریخی"
@@ -823,6 +895,10 @@ msgstr "التقويم"
 msgid "تقویم و مناسبت‌های رسمی"
 msgstr "التقويم والمناسبات الرسمية"
 
+#: includes/topersia-g-map.php
+msgid "تقویم‌های رسمی مرتبط"
+msgstr "التقاويم الرسمية ذات الصلة"
+
 #: includes/topersia-g-zones.php
 msgid "تلگرام"
 msgstr "تيليغرام"
@@ -942,6 +1018,10 @@ msgstr "المد والجزر"
 msgid "جزیره"
 msgstr "جزيرة"
 
+#: includes/topersia-g-map.php
+msgid "جزیره‌های این مسیر"
+msgstr "جزر هذا المسار"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "جست‌وجو در %s"
@@ -962,6 +1042,34 @@ msgstr "المهرجانات"
 #: includes/topersia-g-zones.php
 msgid "جشنواره و رویداد"
 msgstr "مهرجان وفعالية"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های این منطقه"
+msgstr "المهرجانات في هذه المنطقة"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های برگزارشده در این بنا"
+msgstr "مهرجانات تقام في هذا المعلم"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های برگزارشده در این موزه"
+msgstr "مهرجانات تقام في هذا المتحف"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های برگزارشده در این مکان"
+msgstr "مهرجانات تقام في هذا الموقع"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های نمونۀ این آیین"
+msgstr "مهرجانات تجسد هذا الطقس"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های گرامیداشت این دوره"
+msgstr "مهرجانات إحياء هذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "جشنواره‌های گرامیداشت این شخصیت"
+msgstr "مهرجانات إحياء هذه الشخصية"
 
 #: includes/topersia-g-panel.php
 msgid "جغرافیا"
@@ -1263,6 +1371,10 @@ msgid "دریای عمان"
 msgstr "بحر عُمان"
 
 #: includes/topersia-g-map.php
+msgid "دسترسی تماشاگر"
+msgstr "وصول المتفرجين"
+
+#: includes/topersia-g-map.php
 msgid "دسترسی محدود"
 msgstr "وصول محدود"
 
@@ -1325,6 +1437,42 @@ msgstr "مزدوجو الجنسية"
 #: includes/topersia-g-zones.php
 msgid "دوره / سلسلۀ تاریخی"
 msgstr "حقبة / سلالة تاريخية"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های تاریخی این بنا"
+msgstr "الحقب التاريخية لهذا المعلم"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های تاریخی این شخصیت"
+msgstr "الحقب التاريخية لهذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های تاریخی این محله"
+msgstr "الحقب التاريخية لهذا الحي"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های تاریخی این محوطه"
+msgstr "الحقب التاريخية لهذا الموقع الأثري"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های تاریخی این منظر"
+msgstr "الحقب التاريخية لهذا المنظر"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های تاریخی این مکان"
+msgstr "الحقب التاريخية لهذا الموقع"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌های گرامی‌داشته‌شده"
+msgstr "الحقب المحتفى بها"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌هایی که این بنا شاخص آن‌هاست"
+msgstr "الحقب التي يعد هذا المعلم من أبرز معالمها"
+
+#: includes/topersia-g-map.php
+msgid "دوره‌هایی که این محوطه شاخص آن‌هاست"
+msgstr "الحقب التي يعد هذا الموقع من أبرز مواقعها"
 
 #: includes/topersia-g-map.php
 msgid "دورۀ آماده‌سازی"
@@ -1434,6 +1582,14 @@ msgstr "عاصفة رعدية"
 msgid "رقص محلی"
 msgstr "رقص شعبي"
 
+#: includes/topersia-g-map.php
+msgid "رقص‌های رایج در این استان"
+msgstr "الرقصات الشائعة في هذه المحافظة"
+
+#: includes/topersia-g-map.php
+msgid "رقص‌های محلی این قوم"
+msgstr "الرقصات المحلية لهذا القوم"
+
 #: includes/topersia-g-zones.php
 msgid "روادید"
 msgstr "التأشيرة"
@@ -1511,6 +1667,26 @@ msgid "رویداد ورزشی"
 msgstr "حدث رياضي"
 
 #: includes/topersia-g-map.php
+msgid "رویدادهای اثرگذار بر برنامه‌ریزی سفر"
+msgstr "فعاليات تؤثر في تخطيط السفر"
+
+#: includes/topersia-g-map.php
+msgid "رویدادهای ورزشی این منطقه"
+msgstr "الفعاليات الرياضية في هذه المنطقة"
+
+#: includes/topersia-g-map.php
+msgid "رویدادهای ورزشی برگزارشده در این بنا"
+msgstr "فعاليات رياضية تقام في هذا المعلم"
+
+#: includes/topersia-g-map.php
+msgid "رویدادهای ورزشی برگزارشده در این موزه"
+msgstr "فعاليات رياضية تقام في هذا المتحف"
+
+#: includes/topersia-g-map.php
+msgid "رویدادهای ورزشی برگزارشده در این مکان"
+msgstr "فعاليات رياضية تقام في هذا الموقع"
+
+#: includes/topersia-g-map.php
 msgid "رژیم غذایی"
 msgstr "ملاحظات غذائية"
 
@@ -1553,6 +1729,10 @@ msgstr "اللغة الرسمية"
 #: includes/topersia-g-zones.php
 msgid "زبان و پوشاک"
 msgstr "اللغة والأزياء"
+
+#: includes/topersia-g-map.php
+msgid "زبان‌ها و گویش‌های رایج در این استان"
+msgstr "اللغات واللهجات الشائعة في هذه المحافظة"
 
 #: includes/topersia-g-map.php
 msgid "زبان‌های راهنمای صوتی"
@@ -1792,6 +1972,34 @@ msgid "شخصیت تاریخی"
 msgstr "شخصية تاريخية"
 
 #: includes/topersia-g-map.php
+msgid "شخصیت‌های تاریخی این دوره"
+msgstr "الشخصيات التاريخية لهذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "شخصیت‌های مرتبط با این آیین"
+msgstr "شخصيات مرتبطة بهذا الطقس"
+
+#: includes/topersia-g-map.php
+msgid "شخصیت‌های مرتبط با این بنا"
+msgstr "شخصيات مرتبطة بهذا المعلم"
+
+#: includes/topersia-g-map.php
+msgid "شخصیت‌های مرتبط با این محوطه"
+msgstr "شخصيات مرتبطة بهذا الموقع الأثري"
+
+#: includes/topersia-g-map.php
+msgid "شخصیت‌های مرتبط با این مکان"
+msgstr "شخصيات مرتبطة بهذا الموقع"
+
+#: includes/topersia-g-map.php
+msgid "شخصیت‌های گرامی‌داشته‌شده"
+msgstr "الشخصيات المحتفى بها"
+
+#: includes/topersia-g-map.php
+msgid "شرایط بهینۀ مشاهده"
+msgstr "أفضل ظروف المشاهدة"
+
+#: includes/topersia-g-map.php
 msgid "شرایط ورود و بلیت"
 msgstr "شروط الدخول والتذاكر"
 
@@ -1847,6 +2055,10 @@ msgstr "مقاطعة"
 #: includes/topersia-g-map.php
 msgid "شهرها"
 msgstr "المدن"
+
+#: includes/topersia-g-map.php
+msgid "شهرهای دارای فرودگاه اصلی"
+msgstr "مدن المطارات الرئيسية"
 
 #: includes/topersia-g-zones.php
 msgid "شهرهای دارای مترو"
@@ -1908,6 +2120,14 @@ msgstr "صفحات الأخبار"
 msgid "صنایع دستی"
 msgstr "حرف يدوية"
 
+#: includes/topersia-g-map.php
+msgid "صنایع دستی این قوم"
+msgstr "الحرف اليدوية لهذا القوم"
+
+#: includes/topersia-g-map.php
+msgid "صنایع دستی برای خرید در این شهر"
+msgstr "حرف يدوية للشراء في هذه المدينة"
+
 #: includes/topersia-g-zones.php
 msgid "صنایع‌دستی"
 msgstr "الحرف اليدوية"
@@ -1939,6 +2159,14 @@ msgstr "الظهيرة"
 #: includes/topersia-g-zones.php
 msgid "عارضه طبیعی"
 msgstr "معلم طبيعي"
+
+#: includes/topersia-g-map.php
+msgid "عارضه‌های سازندۀ این منظر"
+msgstr "المعالم الطبيعية لهذا المنظر"
+
+#: includes/topersia-g-map.php
+msgid "عارضه‌های طبیعی درون این منطقه"
+msgstr "المعالم الطبيعية داخل هذه المنطقة"
 
 #: includes/topersia-g-map.php
 msgid "عربی"
@@ -1975,6 +2203,14 @@ msgstr "الغبار"
 #: includes/topersia-g-zones.php
 msgid "غذاهای محلی"
 msgstr "الأطعمة المحلية"
+
+#: includes/topersia-g-map.php
+msgid "غذاهای محلی این قوم"
+msgstr "الأطعمة المحلية لهذا القوم"
+
+#: includes/topersia-g-map.php
+msgid "غذاهای محلی برای چشیدن در این شهر"
+msgstr "أطعمة محلية للتذوق في هذه المدينة"
 
 #: includes/topersia-g-zones.php
 msgid "غذای محلی"
@@ -2041,6 +2277,10 @@ msgid "فرهنگی"
 msgstr "ثقافي"
 
 #: includes/topersia-g-map.php
+msgid "فرودگاه اصلی این استان‌ها"
+msgstr "المطار الرئيسي لهذه المحافظات"
+
+#: includes/topersia-g-map.php
 msgid "فروردین"
 msgstr "فروردين"
 
@@ -2100,6 +2340,10 @@ msgstr "فيسبوك"
 #: includes/topersia-g-map.php
 msgid "فیلسوف و عارف"
 msgstr "فيلسوف وعارف"
+
+#: includes/topersia-g-map.php
+msgid "قاعدۀ تاریخ سالانه"
+msgstr "قاعدة التاريخ السنوي"
 
 #: includes/topersia-g-map.php
 msgid "قانون تصویب شده"
@@ -2310,6 +2554,10 @@ msgid "محله‌ها"
 msgstr "الأحياء"
 
 #: includes/topersia-g-map.php
+msgid "محله‌های این دوره"
+msgstr "أحياء هذه الحقبة"
+
+#: includes/topersia-g-map.php
 msgid "محلی"
 msgstr "محلي"
 
@@ -2324,6 +2572,22 @@ msgstr "موقع أثري"
 #: includes/topersia-g-map.php
 msgid "محوطه‌های باستانی"
 msgstr "المواقع الأثرية"
+
+#: includes/topersia-g-map.php
+msgid "محوطه‌های باستانی این دوره"
+msgstr "المواقع الأثرية لهذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "محوطه‌های باستانی مرتبط با این شخصیت"
+msgstr "مواقع أثرية مرتبطة بهذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "محوطه‌های ساخته‌شده توسط این شخصیت"
+msgstr "مواقع شيدتها هذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "محوطه‌های شاخص این دوره"
+msgstr "أبرز المواقع الأثرية لهذه الحقبة"
 
 #: includes/topersia-g-map.php
 msgid "مخاطرات طبیعی"
@@ -2373,9 +2637,29 @@ msgstr "حديث"
 msgid "مراسم عزاداری"
 msgstr "مراسم العزاء"
 
+#: includes/topersia-g-map.php
+msgid "مراسم مذهبی برگزارشده در این بنا"
+msgstr "مراسم دينية تقام في هذا المعلم"
+
+#: includes/topersia-g-map.php
+msgid "مراسم مذهبی برگزارشده در این مکان"
+msgstr "مراسم دينية تقام في هذا الموقع"
+
 #: includes/topersia-g-zones.php
 msgid "مراسم مذهبی عمومی"
 msgstr "مناسبة دينية عامة"
+
+#: includes/topersia-g-map.php
+msgid "مراسم مذهبی نمونۀ این آیین"
+msgstr "مراسم دينية تجسد هذا الطقس"
+
+#: includes/topersia-g-map.php
+msgid "مراسم مذهبی گرامیداشت این دوره"
+msgstr "مراسم دينية لإحياء هذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "مراسم مذهبی گرامیداشت این شخصیت"
+msgstr "مراسم دينية لإحياء هذه الشخصية"
 
 #: includes/topersia-g-map.php
 msgid "مراسمی"
@@ -2479,9 +2763,21 @@ msgstr "المسارات"
 msgid "مسیرهای گردشگری"
 msgstr "المسارات السياحية"
 
+#: includes/topersia-g-map.php
+msgid "مسیرهایی که از این شهر آغاز می‌شوند"
+msgstr "مسارات تبدأ من هذه المدينة"
+
+#: includes/topersia-g-map.php
+msgid "مسیرهایی که در این شهر پایان می‌یابند"
+msgstr "مسارات تنتهي في هذه المدينة"
+
 #: includes/topersia-g-routing.php
 msgid "مسیریابی"
 msgstr "الاتجاهات"
+
+#: includes/topersia-g-map.php
+msgid "مشارکت عمومی و حضور بازدیدکننده"
+msgstr "المشاركة العامة وحضور الزوار"
 
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
@@ -2572,6 +2868,10 @@ msgstr "الملاءمة للسياح"
 msgid "مناسب‌ترین فصل برای سفر"
 msgstr "أفضل موسم للسفر"
 
+#: includes/topersia-g-map.php
+msgid "مناطق حفاظت‌شدۀ میزبان"
+msgstr "المناطق المحمية المضيفة"
+
 #: includes/topersia-g-zones.php
 msgid "منبع"
 msgstr "المصدر"
@@ -2605,6 +2905,10 @@ msgid "منطقۀ حفاظت‌شده"
 msgstr "منطقة محمية"
 
 #: includes/topersia-g-map.php
+msgid "منطقۀ حفاظت‌شدۀ دربرگیرنده"
+msgstr "المنطقة المحمية التي تضمه"
+
+#: includes/topersia-g-map.php
 msgid "منطقۀ زمانی"
 msgstr "المنطقة الزمنية"
 
@@ -2615,6 +2919,18 @@ msgstr "منطقة مدارة"
 #: includes/topersia-g-zones.php
 msgid "منظر فرهنگی"
 msgstr "منظر ثقافي"
+
+#: includes/topersia-g-map.php
+msgid "منظرهای فرهنگی این بنا"
+msgstr "المناظر الثقافية لهذا المعلم"
+
+#: includes/topersia-g-map.php
+msgid "منظرهای فرهنگی این دوره"
+msgstr "المناظر الثقافية لهذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "منظرهای فرهنگی دربرگیرنده"
+msgstr "المناظر الثقافية التي تضمه"
 
 #: includes/topersia-g-weather.php
 msgid "مه"
@@ -2661,12 +2977,20 @@ msgid "موزه"
 msgstr "متحف"
 
 #: includes/topersia-g-map.php
+msgid "موزه‌های میزبان"
+msgstr "المتاحف المضيفة"
+
+#: includes/topersia-g-map.php
 msgid "موزۀ عمومی"
 msgstr "متحف عام"
 
 #: includes/topersia-g-map.php
 msgid "موسیقی دستگاهی"
 msgstr "الموسيقى الكلاسيكية (الدستكاه)"
+
+#: includes/topersia-g-map.php
+msgid "موسیقی زنده در این شهر"
+msgstr "موسيقى حية في هذه المدينة"
 
 #: includes/topersia-g-zones.php
 msgid "موسیقی محلی"
@@ -2685,12 +3009,32 @@ msgid "موسیقی و آیین"
 msgstr "الموسيقى والطقوس"
 
 #: includes/topersia-g-map.php
+msgid "موسیقی‌های محلی این قوم"
+msgstr "الموسيقى المحلية لهذا القوم"
+
+#: includes/topersia-g-map.php
 msgid "موضوعیت ندارد"
 msgstr "لا ينطبق"
 
 #: includes/topersia-g-zones.php
 msgid "مکان مذهبی"
 msgstr "موقع ديني"
+
+#: includes/topersia-g-map.php
+msgid "مکان‌های مذهبی این دوره"
+msgstr "المواقع الدينية لهذه الحقبة"
+
+#: includes/topersia-g-map.php
+msgid "مکان‌های مذهبی مرتبط با این شخصیت"
+msgstr "مواقع دينية مرتبطة بهذه الشخصية"
+
+#: includes/topersia-g-map.php
+msgid "مکان‌های مذهبی میزبان"
+msgstr "المواقع الدينية المضيفة"
+
+#: includes/topersia-g-map.php
+msgid "مکان‌های مشمول این قوانین"
+msgstr "المواقع المشمولة بهذه القواعد"
 
 #: includes/topersia-g-map.php
 msgid "میراث جهانی"
@@ -3046,6 +3390,14 @@ msgstr "تنبيه التواريخ القمرية"
 msgid "هشدارهای فعالیت‌محور"
 msgstr "تحذيرات خاصة بالأنشطة"
 
+#: includes/topersia-g-map.php
+msgid "هفتۀ آغاز اوج"
+msgstr "أسبوع بداية الذروة"
+
+#: includes/topersia-g-map.php
+msgid "هفتۀ پایان اوج"
+msgstr "أسبوع نهاية الذروة"
+
 #: includes/topersia-g-zones.php
 msgid "همراهی موسیقی"
 msgstr "المرافقة الموسيقية"
@@ -3298,6 +3650,10 @@ msgstr "نهاية الصفحة"
 msgid "پایتخت"
 msgstr "العاصمة"
 
+#: includes/topersia-g-map.php
+msgid "پایداری سال‌به‌سال"
+msgstr "الثبات من عام إلى آخر"
+
 #: includes/topersia-g-zones.php
 msgid "پایه"
 msgstr "أساسي"
@@ -3383,6 +3739,10 @@ msgid "پهنه‌های طبیعی"
 msgstr "المناطق الطبيعية"
 
 #: includes/topersia-g-map.php
+msgid "پوشاک سنتی این قوم"
+msgstr "الأزياء التقليدية لهذا القوم"
+
+#: includes/topersia-g-map.php
 msgid "پوشش"
 msgstr "اللباس"
 
@@ -3393,6 +3753,10 @@ msgstr "لباس طويل"
 #: includes/topersia-g-map.php
 msgid "پوشش لازم"
 msgstr "اللباس المطلوب"
+
+#: includes/topersia-g-map.php
+msgid "پوشش و ظاهر"
+msgstr "اللباس والمظهر"
 
 #: includes/topersia-g-map.php
 msgid "پوشیدن امروز"
@@ -3676,6 +4040,10 @@ msgid "گذرگاه مرزی"
 msgstr "منفذ حدودي"
 
 #: includes/topersia-g-map.php
+msgid "گذرگاه‌های مرزی این مسیر"
+msgstr "المعابر الحدودية لهذا المسار"
+
+#: includes/topersia-g-map.php
 msgid "گردشگر همراه می‌شود"
 msgstr "يمكن للزوار المشاركة"
 
@@ -3722,6 +4090,10 @@ msgstr "ملاحظة"
 #: includes/topersia-g-map.php
 msgid "یادداشت ارز"
 msgstr "ملاحظة حول العملة"
+
+#: includes/topersia-g-map.php
+msgid "یادداشت عکاسی"
+msgstr "ملاحظة عن التصوير"
 
 #: includes/topersia-g-map.php
 msgid "یادداشت‌های استانی"

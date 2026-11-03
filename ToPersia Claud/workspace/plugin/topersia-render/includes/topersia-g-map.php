@@ -310,6 +310,17 @@ if ( ! function_exists( 'topersia_g_map' ) ) {
 		'key_species' => array( 'label' => 'گونه‌های شاخص', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2b' => true ),
 		'geopark' => array( 'label' => 'ژئوپارک', 'unit' => '', 'kind' => 'flag', 'zone' => 'badge', 'wave2b' => true ),
 		'activities' => array( 'label' => 'فعالیت‌های مجاز', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2b' => true ),
+		/* دستۀ 44 · P5-D485 — موج ۲، پایان: رویداد ورزشی، فصلی و مذهبی. فقط نگاشت؛ کدی به‌ازای فیلد نیست. */
+		'spectator_access_note' => array( 'label' => 'دسترسی تماشاگر', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2c' => true ),
+		'peak_start_week' => array( 'label' => 'هفتۀ آغاز اوج', 'unit' => '', 'kind' => 'number', 'zone' => 'card', 'wave2c' => true ),
+		'peak_end_week' => array( 'label' => 'هفتۀ پایان اوج', 'unit' => '', 'kind' => 'number', 'zone' => 'card', 'wave2c' => true ),
+		'optimal_conditions' => array( 'label' => 'شرایط بهینۀ مشاهده', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2c' => true ),
+		'predictability_note' => array( 'label' => 'پایداری سال‌به‌سال', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2c' => true ),
+		'annual_date_rule' => array( 'label' => 'قاعدۀ تاریخ سالانه', 'unit' => '', 'kind' => 'text', 'zone' => 'card', 'wave2c' => true ),
+		'public_participation_note' => array( 'label' => 'مشارکت عمومی و حضور بازدیدکننده', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2c' => true ),
+		'visitor_etiquette_note' => array( 'label' => 'آداب حضور', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave2c' => true ),
+		'photography_note' => array( 'label' => 'یادداشت عکاسی', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2c' => true ),
+		'dress_code_note' => array( 'label' => 'پوشش و ظاهر', 'unit' => '', 'kind' => 'text', 'zone' => 'details', 'wave2c' => true ),
 		/* P5-D491 — tp_visa */
 		'guided_tour_note' => array( 'label' => 'تور اجباری', 'unit' => '', 'kind' => 'rich', 'zone' => 'details', 'wave1' => true ),
 		'free_zone_mainland_allowed' => array( 'label' => 'ورود به سرزمین اصلی از منطقۀ آزاد', 'unit' => '', 'kind' => 'flag', 'zone' => 'travel', 'wave1' => true ),
@@ -1274,8 +1285,9 @@ if ( ! function_exists( 'topersia_g_relmap' ) ) {
 
 			'tp_district' => array(
 
+				/* رابطۀ ۱۴۴ والدش دورۀ تاریخی است، نه محوطه؛ عنوان پیشین «محوطه‌های باستانی» غلط بود (بازبینی دستۀ 44) */
 				'ancient' => array(
-					'title'  => 'محوطه‌های باستانی',
+					'title'  => 'دوره‌های تاریخی این محله',
 					'kicker' => 'HERITAGE',
 					'rels'   => array(
 						array( 'id' => 144, 'dir' => 'parents' ),
@@ -1419,39 +1431,161 @@ if ( ! function_exists( 'topersia_g_relmap' ) ) {
 
 		/*
 		 * گروه «مرتبط»: رابطه‌هایی که یال دارند و هیچ سطح دیگری نشانشان نمی‌دهد.  P5-D503
-		 * فقط داده است؛ کاشی‌ها از همان relgrid. گزارش و آزمون: scripts/tp-rel-coverage.php · tests/w43-rel-local.php
+		 * هر ردیف: شناسه، جهت و سرفصل خودش (P5-D504)؛ سرفصل با تعداد عوض نمی‌شود و به زبان‌ها از کاتالوگ می‌رود.
+		 * گزارش و آزمون: scripts/tp-rel-coverage.php · scripts/tp-rel-headings.php · tests/w43-rel-local.php · tests/w44-local.php
 		 */
 		$related = array(
-			'tp_protected_area' => array( array( 103, 'children' ), array( 238, 'children' ), array( 251, 'children' ) ),
-			'tp_natural_feature' => array( array( 103, 'parents' ), array( 106, 'parents' ) ),
-			'tp_landscape' => array( array( 105, 'children' ), array( 106, 'children' ), array( 145, 'parents' ) ),
-			'tp_monument' => array( array( 105, 'parents' ), array( 139, 'parents' ), array( 146, 'parents' ), array( 148, 'parents' ), array( 235, 'children' ), array( 248, 'children' ), array( 256, 'children' ), array( 299, 'children' ), array( 300, 'parents' ) ),
-			'tp_ethnic_group' => array( array( 133, 'children' ), array( 134, 'children' ), array( 135, 'children' ), array( 136, 'children' ), array( 137, 'children' ), array( 138, 'children' ) ),
-			'tp_handicraft' => array( array( 133, 'parents' ) ),
-			'tp_local_food' => array( array( 134, 'parents' ) ),
-			'tp_music' => array( array( 135, 'parents' ) ),
-			'tp_dance' => array( array( 136, 'parents' ) ),
-			'tp_ritual' => array( array( 137, 'parents' ), array( 152, 'parents' ), array( 231, 'parents' ), array( 240, 'children' ), array( 259, 'children' ) ),
-			'tp_costume' => array( array( 138, 'parents' ) ),
-			'tp_historical_era' => array( array( 139, 'children' ), array( 140, 'children' ), array( 141, 'children' ), array( 142, 'children' ), array( 144, 'children' ), array( 145, 'children' ), array( 243, 'children' ), array( 262, 'children' ), array( 300, 'children' ), array( 301, 'children' ) ),
-			'tp_religious_site' => array( array( 140, 'parents' ), array( 149, 'parents' ), array( 162, 'parents' ), array( 236, 'children' ), array( 249, 'children' ), array( 257, 'children' ) ),
-			'tp_ancient_site' => array( array( 141, 'parents' ), array( 147, 'parents' ), array( 150, 'parents' ), array( 301, 'parents' ) ),
-			'tp_figure' => array( array( 142, 'parents' ), array( 146, 'children' ), array( 147, 'children' ), array( 148, 'children' ), array( 149, 'children' ), array( 150, 'children' ), array( 152, 'children' ), array( 242, 'children' ), array( 261, 'children' ), array( 299, 'parents' ) ),
-			'tp_travel_etiquette' => array( array( 162, 'children' ) ),
-			'tp_route' => array( array( 175, 'children' ), array( 177, 'children' ) ),
-			'tp_calendar' => array( array( 231, 'children' ), array( 244, 'children' ) ),
-			'tp_festival' => array( array( 235, 'parents' ), array( 236, 'parents' ), array( 237, 'parents' ), array( 238, 'parents' ), array( 240, 'parents' ), array( 242, 'parents' ), array( 243, 'parents' ), array( 244, 'parents' ) ),
-			'tp_museum' => array( array( 237, 'children' ), array( 250, 'children' ) ),
-			'tp_sports_event' => array( array( 248, 'parents' ), array( 249, 'parents' ), array( 250, 'parents' ), array( 251, 'parents' ) ),
-			'tp_religious_event' => array( array( 256, 'parents' ), array( 257, 'parents' ), array( 259, 'parents' ), array( 261, 'parents' ), array( 262, 'parents' ) ),
-			'tp_province' => array( array( 293, 'children' ), array( 302, 'children' ), array( 303, 'children' ), array( 304, 'children' ) ),
-			'tp_city' => array( array( 293, 'parents' ), array( 294, 'children' ), array( 295, 'children' ), array( 296, 'children' ), array( 297, 'children' ), array( 298, 'children' ) ),
+			'tp_protected_area' => array(
+				array( 103, 'children', 'عارضه‌های طبیعی درون این منطقه' ),
+				array( 238, 'children', 'جشنواره‌های این منطقه' ),
+				array( 251, 'children', 'رویدادهای ورزشی این منطقه' ),
+			),
+			'tp_natural_feature' => array(
+				array( 103, 'parents', 'منطقۀ حفاظت‌شدۀ دربرگیرنده' ),
+				array( 106, 'parents', 'منظرهای فرهنگی دربرگیرنده' ),
+			),
+			'tp_landscape' => array(
+				array( 105, 'children', 'بناهای سازندۀ این منظر' ),
+				array( 106, 'children', 'عارضه‌های سازندۀ این منظر' ),
+				array( 145, 'parents', 'دوره‌های تاریخی این منظر' ),
+			),
+			'tp_monument' => array(
+				array( 105, 'parents', 'منظرهای فرهنگی این بنا' ),
+				array( 139, 'parents', 'دوره‌های تاریخی این بنا' ),
+				array( 146, 'parents', 'بانی و سازنده' ),
+				array( 148, 'parents', 'شخصیت‌های مرتبط با این بنا' ),
+				array( 235, 'children', 'جشنواره‌های برگزارشده در این بنا' ),
+				array( 248, 'children', 'رویدادهای ورزشی برگزارشده در این بنا' ),
+				array( 256, 'children', 'مراسم مذهبی برگزارشده در این بنا' ),
+				array( 299, 'children', 'آرامگاه این شخصیت‌ها' ),
+				array( 300, 'parents', 'دوره‌هایی که این بنا شاخص آن‌هاست' ),
+			),
+			'tp_ethnic_group' => array(
+				array( 133, 'children', 'صنایع دستی این قوم' ),
+				array( 134, 'children', 'غذاهای محلی این قوم' ),
+				array( 135, 'children', 'موسیقی‌های محلی این قوم' ),
+				array( 136, 'children', 'رقص‌های محلی این قوم' ),
+				array( 137, 'children', 'آیین‌ها و مراسم این قوم' ),
+				array( 138, 'children', 'پوشاک سنتی این قوم' ),
+			),
+			'tp_handicraft' => array(
+				array( 133, 'parents', 'اقوام مرتبط' ),
+			),
+			'tp_local_food' => array(
+				array( 134, 'parents', 'اقوام مرتبط' ),
+			),
+			'tp_music' => array(
+				array( 135, 'parents', 'اقوام مرتبط' ),
+			),
+			'tp_dance' => array(
+				array( 136, 'parents', 'اقوام مرتبط' ),
+			),
+			'tp_ritual' => array(
+				array( 137, 'parents', 'اقوام مرتبط' ),
+				array( 152, 'parents', 'شخصیت‌های مرتبط با این آیین' ),
+				array( 231, 'parents', 'تقویم‌های رسمی مرتبط' ),
+				array( 240, 'children', 'جشنواره‌های نمونۀ این آیین' ),
+				array( 259, 'children', 'مراسم مذهبی نمونۀ این آیین' ),
+			),
+			'tp_costume' => array(
+				array( 138, 'parents', 'اقوام مرتبط' ),
+			),
+			'tp_historical_era' => array(
+				array( 139, 'children', 'بناهای تاریخی این دوره' ),
+				array( 140, 'children', 'مکان‌های مذهبی این دوره' ),
+				array( 141, 'children', 'محوطه‌های باستانی این دوره' ),
+				array( 142, 'children', 'شخصیت‌های تاریخی این دوره' ),
+				array( 144, 'children', 'محله‌های این دوره' ),
+				array( 145, 'children', 'منظرهای فرهنگی این دوره' ),
+				array( 243, 'children', 'جشنواره‌های گرامیداشت این دوره' ),
+				array( 262, 'children', 'مراسم مذهبی گرامیداشت این دوره' ),
+				array( 300, 'children', 'بناهای شاخص این دوره' ),
+				array( 301, 'children', 'محوطه‌های شاخص این دوره' ),
+			),
+			'tp_religious_site' => array(
+				array( 140, 'parents', 'دوره‌های تاریخی این مکان' ),
+				array( 149, 'parents', 'شخصیت‌های مرتبط با این مکان' ),
+				array( 162, 'parents', 'آداب رفتاری این مکان' ),
+				array( 236, 'children', 'جشنواره‌های برگزارشده در این مکان' ),
+				array( 249, 'children', 'رویدادهای ورزشی برگزارشده در این مکان' ),
+				array( 257, 'children', 'مراسم مذهبی برگزارشده در این مکان' ),
+			),
+			'tp_ancient_site' => array(
+				array( 141, 'parents', 'دوره‌های تاریخی این محوطه' ),
+				array( 147, 'parents', 'بانی و سازنده' ),
+				array( 150, 'parents', 'شخصیت‌های مرتبط با این محوطه' ),
+				array( 301, 'parents', 'دوره‌هایی که این محوطه شاخص آن‌هاست' ),
+			),
+			'tp_figure' => array(
+				array( 142, 'parents', 'دوره‌های تاریخی این شخصیت' ),
+				array( 146, 'children', 'بناهای ساخته‌شده توسط این شخصیت' ),
+				array( 147, 'children', 'محوطه‌های ساخته‌شده توسط این شخصیت' ),
+				array( 148, 'children', 'بناهای تاریخی مرتبط با این شخصیت' ),
+				array( 149, 'children', 'مکان‌های مذهبی مرتبط با این شخصیت' ),
+				array( 150, 'children', 'محوطه‌های باستانی مرتبط با این شخصیت' ),
+				array( 152, 'children', 'آیین‌ها و مراسم مرتبط با این شخصیت' ),
+				array( 242, 'children', 'جشنواره‌های گرامیداشت این شخصیت' ),
+				array( 261, 'children', 'مراسم مذهبی گرامیداشت این شخصیت' ),
+				array( 299, 'parents', 'آرامگاه این شخصیت' ),
+			),
+			'tp_travel_etiquette' => array(
+				array( 162, 'children', 'مکان‌های مشمول این قوانین' ),
+			),
+			'tp_route' => array(
+				array( 175, 'children', 'جزیره‌های این مسیر' ),
+				array( 177, 'children', 'گذرگاه‌های مرزی این مسیر' ),
+			),
+			'tp_calendar' => array(
+				array( 231, 'children', 'آیین‌های اثرگذار بر برنامه‌ریزی سفر' ),
+				array( 244, 'children', 'رویدادهای اثرگذار بر برنامه‌ریزی سفر' ),
+			),
+			'tp_festival' => array(
+				array( 235, 'parents', 'بناهای تاریخی میزبان' ),
+				array( 236, 'parents', 'مکان‌های مذهبی میزبان' ),
+				array( 237, 'parents', 'موزه‌های میزبان' ),
+				array( 238, 'parents', 'مناطق حفاظت‌شدۀ میزبان' ),
+				array( 240, 'parents', 'آیین‌های مرجع این رویداد' ),
+				array( 242, 'parents', 'شخصیت‌های گرامی‌داشته‌شده' ),
+				array( 243, 'parents', 'دوره‌های گرامی‌داشته‌شده' ),
+				array( 244, 'parents', 'تقویم‌های رسمی مرتبط' ),
+			),
+			'tp_museum' => array(
+				array( 237, 'children', 'جشنواره‌های برگزارشده در این موزه' ),
+				array( 250, 'children', 'رویدادهای ورزشی برگزارشده در این موزه' ),
+			),
+			'tp_sports_event' => array(
+				array( 248, 'parents', 'بناهای تاریخی میزبان' ),
+				array( 249, 'parents', 'مکان‌های مذهبی میزبان' ),
+				array( 250, 'parents', 'موزه‌های میزبان' ),
+				array( 251, 'parents', 'مناطق حفاظت‌شدۀ میزبان' ),
+			),
+			'tp_religious_event' => array(
+				array( 256, 'parents', 'بناهای تاریخی میزبان' ),
+				array( 257, 'parents', 'مکان‌های مذهبی میزبان' ),
+				array( 259, 'parents', 'آیین‌های مرجع این مراسم' ),
+				array( 261, 'parents', 'شخصیت‌های گرامی‌داشته‌شده' ),
+				array( 262, 'parents', 'دوره‌های گرامی‌داشته‌شده' ),
+			),
+			'tp_province' => array(
+				array( 293, 'children', 'شهرهای دارای فرودگاه اصلی' ),
+				array( 302, 'children', 'اقوام ساکن این استان' ),
+				array( 303, 'children', 'رقص‌های رایج در این استان' ),
+				array( 304, 'children', 'زبان‌ها و گویش‌های رایج در این استان' ),
+			),
+			'tp_city' => array(
+				array( 293, 'parents', 'فرودگاه اصلی این استان‌ها' ),
+				array( 294, 'children', 'مسیرهایی که از این شهر آغاز می‌شوند' ),
+				array( 295, 'children', 'مسیرهایی که در این شهر پایان می‌یابند' ),
+				array( 296, 'children', 'صنایع دستی برای خرید در این شهر' ),
+				array( 297, 'children', 'غذاهای محلی برای چشیدن در این شهر' ),
+				array( 298, 'children', 'موسیقی زنده در این شهر' ),
+			),
 		);
 
 		foreach ( $related as $type => $rels ) {
 			$map[ $type ]['related'] = array(
 				'title' => 'مرتبط',
-				'rels'  => array_map( function ( $r ) { return array( 'id' => $r[0], 'dir' => $r[1] ); }, $rels ),
+				'rels'  => array_map( function ( $r ) { return array( 'id' => $r[0], 'dir' => $r[1], 'title' => $r[2] ); }, $rels ),
 			);
 		}
 

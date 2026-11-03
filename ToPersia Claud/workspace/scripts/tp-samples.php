@@ -259,10 +259,11 @@ $sample_county = function () use ( $wpdb, $samples ) {
 	$prv  = $have['tp_province'] ?? array();
 	if ( empty( $prv['fa'] ) ) { return; }
 	$links = array( 72 => array( 'tp_province', true ), 73 => array( 'tp_city', false ), 76 => array( 'tp_village', false ) );
+	$ids   = array();
 	foreach ( array( 'fa', 'en', 'ar' ) as $l ) {
 		$id = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_county' JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = 'post_tp_county' AND t.language_code = %s WHERE p.post_status <> 'trash' LIMIT 1", $l ) );
 		if ( ! $id ) {
-			$id = (int) wp_insert_post( array( 'post_type' => 'tp_county', 'post_status' => 'publish', 'post_title' => 'fa' === $l ? 'شهرستان نمونه' : ( 'en' === $l ? 'Sample county' : 'مقاطعة نموذجية' ) ) );
+			$id = (int) wp_insert_post( array( 'post_type' => 'tp_county', 'post_status' => 'publish', 'post_name' => 'sample-county', 'post_title' => 'fa' === $l ? 'شهرستان نمونه' : ( 'en' === $l ? 'Sample county' : 'مقاطعة نموذجية' ) ) );
 			$src = (int) $wpdb->get_var( "SELECT m.post_id FROM {$wpdb->postmeta} m JOIN {$wpdb->prefix}icl_translations t ON t.element_id = m.post_id AND t.element_type = 'post_tp_county' AND t.language_code = 'fa' WHERE m.meta_key = '_tp_sample_county' LIMIT 1" );
 			$trid = $src ? apply_filters( 'wpml_element_trid', null, $src, 'post_tp_county' ) : false;
 			do_action( 'wpml_set_element_language_details', array( 'element_id' => $id, 'element_type' => 'post_tp_county', 'trid' => $trid, 'language_code' => $l, 'source_language_code' => $src ? 'fa' : null ) );
@@ -277,7 +278,15 @@ $sample_county = function () use ( $wpdb, $samples ) {
 			if ( $c[1] ) { if ( ! in_array( $id, array_map( 'intval', (array) $rel->get_children( $other, 'ids' ) ), true ) ) { $rel->update( $other, $id ); } }
 			elseif ( ! $rel->get_parents( $other, 'ids' ) ) { $rel->update( $id, $other ); }
 		}
+		$ids[ $l ] = $id;
 		echo "شهرستان نمونه {$l}: #{$id}\n";
+	}
+	/* دستهٔ 44: uid در هر سه زبان یکی است. نامک فارسی و عربی لاتین نیست و topersia_fill_entity_uid آن را رد می‌کند، پس این‌جا پر می‌شود؛ نمونه از نو ساخته نمی‌شود. */
+	$uid = '';
+	foreach ( $ids as $id ) { $uid = '' !== $uid ? $uid : (string) get_post_meta( $id, 'entity_uid', true ); }
+	$uid = '' !== $uid ? $uid : topersia_uid_build( 'county/sample-county' );
+	foreach ( $ids as $l => $id ) {
+		if ( $uid !== (string) get_post_meta( $id, 'entity_uid', true ) ) { update_post_meta( $id, 'entity_uid', $uid ); echo "uid شهرستان نمونه {$l}: #{$id}\n"; }
 	}
 };
 if ( 'county' === $cmd ) { $sample_county(); return; }
@@ -537,7 +546,7 @@ echo 'نمونه‌ها: ' . count( $made ) . " نوع (fa · en · ar)\n";
 $sample_county();
 
 /* P5-D491 · P5-D498: نمونهٔ خالی — فقط عنوان؛ برای آزمودن خالی‌امن. بی یال و بی فیلد. */
-foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید', 'tp_health_safety' => 'نمونهٔ خالی سلامت', 'tp_transport' => 'نمونهٔ خالی حمل‌ونقل', 'tp_calendar' => 'نمونهٔ خالی تقویم', 'tp_festival' => 'نمونهٔ خالی جشنواره', 'tp_protected_area' => 'نمونهٔ خالی منطقهٔ حفاظت‌شده' ) as $ty => $title ) {
+foreach ( array( 'tp_currency' => 'نمونهٔ خالی ارز', 'tp_visa' => 'نمونهٔ خالی روادید', 'tp_health_safety' => 'نمونهٔ خالی سلامت', 'tp_transport' => 'نمونهٔ خالی حمل‌ونقل', 'tp_calendar' => 'نمونهٔ خالی تقویم', 'tp_festival' => 'نمونهٔ خالی جشنواره', 'tp_protected_area' => 'نمونهٔ خالی منطقهٔ حفاظت‌شده', 'tp_sports_event' => 'نمونهٔ خالی رویداد ورزشی', 'tp_seasonal_event' => 'نمونهٔ خالی رویداد فصلی', 'tp_religious_event' => 'نمونهٔ خالی مراسم مذهبی' ) as $ty => $title ) {
 	$trid = false;
 	foreach ( array( 'fa' => '', 'en' => 'Empty sample ', 'ar' => 'نموذج فارغ ' ) as $l => $prefix ) {
 		$eid = (int) $wpdb->get_var( $wpdb->prepare( "SELECT p.ID FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_tp_sample_empty' JOIN {$wpdb->prefix}icl_translations t ON t.element_id = p.ID AND t.element_type = %s AND t.language_code = %s WHERE p.post_type = %s AND p.post_status <> 'trash' LIMIT 1", 'post_' . $ty, $l, $ty ) );

@@ -26,7 +26,7 @@ foreach ( array( 'tp_festival' => 'festival', 'tp_protected_area' => 'protected-
 	$t( "{$type}: پست تازه بی تاریخ و منبع «الزامی خالی»؛ با هر دو نه — جهش: همان پرونده با دو فیلد",
 		in_array( 'last_verified_date', $req( $p0 ), true ) && in_array( 'source_references', $req( $p0 ), true ) && ! array_intersect( array( 'last_verified_date', 'source_references' ), $req( $p1 ) ), wp_json_encode( array( $req( $p0 ), $req( $p1 ) ) ) );
 }
-$t( 'نوع دیگر (رویداد ورزشی، دستهٔ 44): تاریخ بازبینی همچنان سامانه‌ای', isset( topersia_pack_schema( 'tp_sports_event' )['excluded']['last_verified_date'] ) );
+$t( 'نوع بیرون از فهرست (شهر): تاریخ بازبینی همچنان سامانه‌ای', isset( topersia_pack_schema( 'tp_city' )['excluded']['last_verified_date'] ) );
 
 /* نمونه‌ها: پر، خالی، و خروجی نقشه روی پست واقعی */
 $map = array_filter( topersia_g_map(), function ( $f ) { return ! empty( $f['wave2b'] ); } );

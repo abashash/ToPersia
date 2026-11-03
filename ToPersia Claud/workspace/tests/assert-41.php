@@ -187,7 +187,7 @@ tp441_mut( 'P5-D464 دست نخورد: کاشی ارز در صفحهٔ کشور 
 
 /* ۹ — بسته: کد؛ رفتار در w41-local */
 $w41_pack_ok = function ( $s ) {
-	return false !== strpos( $s, "return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' );" )
+	return false !== strpos( $s, "return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' );" )
 		&& false !== strpos( $s, "foreach ( array( 'last_verified_date', 'source_references' ) as \$req ) {" )
 		&& false !== strpos( $s, "'last_verified_date' === (string) \$field['name'] && in_array( \$post_type, topersia_pack_verified_types(), true )" )
 		&& false !== strpos( $s, 'topersia_pack_similarity_notes( $tp_texts )' )
@@ -195,7 +195,7 @@ $w41_pack_ok = function ( $s ) {
 };
 tp441_mut( 'بسته: تاریخ بازبینی و منبع برای پست تازهٔ ارز و روادید اجباری؛ هشدار شباهت و ISO دوگانه غیرمسدودکننده — جهش: هشدار حذف شود می‌افتد',
 	$w41_pack_ok, $w41_core, str_replace( 'دو tp_currency با currency_iso_code یکسان', 'x', $w41_core ) );
-t( 'یک فهرست نوع در رندر و هسته (مهر و اجبار بسته هم‌خوان)', topersia_g_verified_types() === array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' ) && false !== strpos( $w41_core, "array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' )" ) );
+t( 'یک فهرست نوع در رندر و هسته (مهر و اجبار بسته هم‌خوان)', topersia_g_verified_types() === array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' ) && false !== strpos( $w41_core, "array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' )" ) );
 
 /* ۱۰ — شیوه‌نامه: فقط توکن */
 $w41_css = function ( $s ) {

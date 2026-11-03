@@ -518,7 +518,7 @@ function tp_at_order_bad( $html ) {
 
 		foreach ( $secs as $s ) {
 
-			$id  = 0 === strpos( $s[1], 'tp-prog-' ) ? 'tp-prog-' : $s[1];
+			$id  = 0 === strpos( $s[1], 'tp-prog-' ) ? 'tp-prog-' : ( 0 === strpos( $s[1], 'tp-related-' ) ? 'tp-related' : $s[1] );   /* P5-D504 */
 			$pos = array_search( $id, $GLOBALS['TP_ORDER'][ $name ], true );
 
 			if ( false === $pos ) {

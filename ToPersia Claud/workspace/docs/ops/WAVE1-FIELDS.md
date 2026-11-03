@@ -119,3 +119,31 @@
 سه نکتهٔ باز: `event_travel_impact` در TA-I18N رابطه به P6 است ولی در جت‌انجین سوییچ و در WPML copy؛ همان سوییچ نمایش داده شد. `key_species` در TA آرایهٔ متن است و در جت‌انجین textarea؛ متن ساده نمایش داده شد. `activities` کلید سراسری است، پس روی `tp_natural_feature` (ردیف ۸۶ پیشنهاد، همان برچسب) هم می‌آید.
 
 بخش «برنامه» پیشنهادی CSV برای `program_highlights` ناحیهٔ FIELDMAP نیست و `[tp_programmes]` اسلایدر نشان است؛ پس جدول در «درباره» آمد.
+
+## ۸ — دستهٔ 44: رویداد ورزشی، فصلی و مذهبی · P5-D485
+
+آخرین سه نوع موج ۲. ردیف DISPLAY از `STRUCTURE-FREEZE-PROPOSAL.csv`:
+
+| نوع | فیلد | رابطه | DISPLAY | STORE-ONLY |
+|---|---:|---:|---:|---:|
+| `tp_sports_event` | ۲ (`is_recurring` از دستهٔ 40) | ۴ | ۶ | ۱ |
+| `tp_seasonal_event` | ۴ | ۰ | ۴ | ۱ |
+| `tp_religious_event` | ۵ | ۵ | ۱۰ | ۱ |
+| جمع | ۱۱ | ۹ | ۲۰ | ۳ |
+
+STORE-ONLY هر سه `ai_summary` است. ۱۰ کلید تازه ساخته شد و رابطه‌ها پیش‌تر در گروه «مرتبط» بودند (P5-D503). مهر بازبینی و اجبار بسته برای هر سه نوع روشن است، چون قاعدهٔ تاریخ، بازهٔ اوج و دسترسی تماشاگر حساس به زمان‌اند. آستانهٔ تازگی تعریف نشد، چون بریف عددی نداده است.
+
+| کلید | نوع پست | جت‌انجین | نوع رندر | ناحیه | WPML | برچسب |
+|---|---|---|---|---|---|---|
+| `spectator_access_note` | `tp_sports_event` | textarea | text | details | translate | دسترسی تماشاگر |
+| `peak_start_week` | `tp_seasonal_event` | number | number | card | copy | هفتهٔ آغاز اوج |
+| `peak_end_week` | `tp_seasonal_event` | number | number | card | copy | هفتهٔ پایان اوج |
+| `optimal_conditions` | `tp_seasonal_event` | wysiwyg | rich | details | translate | شرایط بهینهٔ مشاهده |
+| `predictability_note` | `tp_seasonal_event` | textarea | text | details | translate | پایداری سال‌به‌سال |
+| `annual_date_rule` | `tp_religious_event` | text | text | card | translate | قاعدهٔ تاریخ سالانه |
+| `public_participation_note` | `tp_religious_event` | wysiwyg | rich | details | translate | مشارکت عمومی و حضور بازدیدکننده |
+| `visitor_etiquette_note` | `tp_religious_event` | wysiwyg | rich | details | translate | آداب حضور |
+| `photography_note` | `tp_religious_event` | textarea | text | details | translate | یادداشت عکاسی |
+| `dress_code_note` | `tp_religious_event` | textarea | text | details | translate | پوشش و ظاهر |
+
+دو هفتهٔ اوج طبق CSV باید در بخش فصل‌ها به بازهٔ تاریخ تبدیل شوند. `seasons` ناحیهٔ FIELDMAP نیست و تبدیل کد ویژهٔ فیلد می‌خواهد، پس عدد خام در چیپ‌های «درباره» آمد. شکل نهایی با تصمیم کاربر است (`TA-I18N-DEVIATIONS.md`).

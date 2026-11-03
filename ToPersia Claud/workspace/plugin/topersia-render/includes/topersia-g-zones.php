@@ -742,7 +742,7 @@ if ( ! function_exists( 'topersia_g_file_ver' ) ) {
 if ( ! function_exists( 'topersia_g_verified_types' ) ) {
 	/** نوع‌هایی که مهر «آخرین بازبینی و منبع» کنار بلوکشان می‌آید؛ همان فهرست `topersia_pack_verified_types` هسته.  P5-D492 */
 	function topersia_g_verified_types() {
-		return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' );
+		return array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' );
 	}
 }
 
@@ -4713,9 +4713,10 @@ if ( ! function_exists( 'topersia_g_place_item' ) ) {
 /**
  * شمار جاذبه و رویدادِ یک شهر — برای پاورقی کارت مرجع.  P5-D215
  *
- * جاذبه از گروه `ancient` آن شهر می‌آید و رویداد از زیرخانوادۀ
- * `festivals` گروه `culture`. هیچ‌کدام فهرست دستی ندارند؛ همان نقشۀ
- * رابطه‌ای است که بقیۀ صفحه از آن می‌خواند.
+ * جاذبه از گروه `attractions` آن شهر می‌آید (نوعی که آن گروه را ندارد،
+ * `ancient` را می‌شمارد — P5-D220) و رویداد از زیرخانوادۀ `festivals`
+ * گروه `culture`. هیچ‌کدام فهرست دستی ندارند؛ همان نقشۀ رابطه‌ای است
+ * که بقیۀ صفحه از آن می‌خواند.
  *
  * صفر که باشد، آن `span` اصلاً نمی‌آید.
  */
@@ -5486,8 +5487,9 @@ if ( ! function_exists( 'topersia_g_bearing_label' ) ) {
  *
  * از رابطه‌های `crumbs` خودِ موجودیت، هر کدام جدا (نه زنجیرۀ پله‌به‌پله):
  * نخستین نیای منتشرشده‌ای که شهر یا شهرستان است. روستا شهرستانش را از
- * ۷۶ می‌گیرد. نوع‌های جاذبه در نقشۀ رابطه مدخل ندارند؛ برای آن‌ها همان
- * چهار رابطۀ جاذبه ← شهر. نبود، رشتۀ خالی — هیچ برچسبی.
+ * ۷۶ می‌گیرد. نوع‌های جاذبه در نقشۀ رابطه مدخل ندارند؛ برای هر کدام فقط
+ * رابطۀ جاذبه ← شهرِ نوع خودش (۸۴ بنا · ۸۶ مکان مذهبی · ۸۸ موزه · ۹۳ محوطه)،
+ * نه هر چهار برای هر کاشی (بازبینی دستۀ 44). نبود، رشتۀ خالی — هیچ برچسبی.
  */
 if ( ! function_exists( 'topersia_g_tile_place' ) ) {
 	function topersia_g_tile_place( $post_id ) {
@@ -5495,12 +5497,12 @@ if ( ! function_exists( 'topersia_g_tile_place' ) ) {
 		$group = topersia_g_group( $post_id, 'crumbs' );
 		$specs = empty( $group['rels'] ) ? array() : $group['rels'];
 
-		$specs = array_merge( $specs, array(
-			array( 'id' => 84, 'dir' => 'parents' ),
-			array( 'id' => 86, 'dir' => 'parents' ),
-			array( 'id' => 88, 'dir' => 'parents' ),
-			array( 'id' => 93, 'dir' => 'parents' ),
-		) );
+		$attraction = array( 'tp_monument' => 84, 'tp_religious_site' => 86, 'tp_museum' => 88, 'tp_ancient_site' => 93 );
+		$own        = function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '';
+
+		if ( isset( $attraction[ $own ] ) ) {
+			$specs[] = array( 'id' => $attraction[ $own ], 'dir' => 'parents' );
+		}
 
 		foreach ( $specs as $spec ) {
 			foreach ( topersia_g_rel_ids( $post_id, array( $spec ) ) as $up ) {
@@ -5857,6 +5859,98 @@ if ( ! function_exists( 'topersia_g_hours_html' ) ) {
 	}
 }
 
+/**
+ * کاشی عمومی اعضای یک بخش.  P5-D244
+ *   همه هم‌نوع   نام نوع تکرار نمی‌شود؛ جایش شهر یا شهرستان، نبود، هیچ
+ *   نوع‌ها مختلف  نام نوع
+ * برچسبِ ویژه («مرکز استان») همیشه همان خودش.
+ */
+if ( ! function_exists( 'topersia_g_rel_tiles' ) ) {
+	function topersia_g_rel_tiles( $items ) {
+
+		$types = array();
+
+		foreach ( $items as $item ) {
+			$types[ function_exists( 'get_post_type' ) ? (string) get_post_type( $item['id'] ) : '' ] = true;
+		}
+
+		$same  = 1 === count( $types );
+		$tiles = array();
+
+		foreach ( $items as $item ) {
+
+			$kind  = (string) $item['kind'];
+			$label = ( $same && $kind === topersia_g_kind_label( $item['id'] ) ) ? topersia_g_tile_place( $item['id'] ) : $kind;
+
+			$tiles[] = array( 'label' => $label, 'name' => $item['name'], 'url' => $item['url'] );
+		}
+
+		return $tiles;
+	}
+}
+
+/**
+ * گروه «مرتبط»: هر رابطه کارت و سرفصل خودش را دارد.  P5-D504
+ *
+ * سرفصل به زبان صفحه کلید است، پس رابطه‌های هم‌عنوان یک کارت می‌شوند و عنوانی در یک صفحه دو بار نمی‌آید.
+ * کارت نخست شناسۀ `tp-related` را دارد تا نوار بخش‌ها به آن برسد؛ کارت‌ها فرزند مستقیم ستون‌اند، چون چیدمان
+ * موبایل با `display:contents` روی همان ستون است. رابطۀ بی عضو کارت نمی‌سازد.
+ */
+if ( ! function_exists( 'topersia_g_related_cards' ) ) {
+	function topersia_g_related_cards( $pid, $shown ) {
+
+		$group = topersia_g_group( $pid, 'related' );
+		$cards = array();
+
+		foreach ( empty( $group['rels'] ) ? array() : $group['rels'] as $rel ) {
+
+			$ids = topersia_g_rel_ids( $pid, array( $rel ) );
+
+			if ( ! $ids ) {
+				continue;
+			}
+
+			$title = topersia_g_t( isset( $rel['title'] ) ? $rel['title'] : $group['title'] );
+
+			$cards[ $title ] = array_merge( isset( $cards[ $title ] ) ? $cards[ $title ] : array(), $ids );
+		}
+
+		if ( ! $cards ) {
+			return '';
+		}
+
+		$views = array_map( 'topersia_g_view_id', array_unique( array_map( 'absint', array_merge( ...array_values( $cards ) ) ) ) );
+		topersia_g_prefetch_items( $views, 'related' );
+		topersia_g_warm_card_images( $views );
+
+		$out = '';
+		$n   = 0;
+
+		foreach ( $cards as $title => $ids ) {
+
+			$items = array();
+
+			foreach ( topersia_g_sort_entities( array_values( array_unique( array_map( 'absint', $ids ) ) ) ) as $one ) {
+				$items[] = topersia_g_place_item( topersia_g_view_id( $one ), 'related', false );
+			}
+
+			$tiles = topersia_g_rel_tiles( $items );
+			$n ++;
+
+			$out .= topersia_g_section(
+				1 === $n ? 'tp-related' : 'tp-related-' . $n,
+				$title,
+				'',
+				topersia_g_tiles( $tiles, $shown ),
+				'tp-rail-card', '', '',
+				topersia_g_rail_more( $group, 'related', count( $tiles ), $shown, $items )
+			);
+		}
+
+		return $out;
+	}
+}
+
 /** [tp_relgrid rel="..."] — کاشی‌های ستون کناری با دکمۀ ادامه. */
 if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 	function topersia_g_sc_relgrid( $atts = array() ) {
@@ -5878,6 +5972,11 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 		 * می‌دهد بی‌هیچ رفت‌وبرگشتی.
 		 */
 		$shown  = isset( $atts['limit'] ) ? absint( $atts['limit'] ) : TOPERSIA_REL_TILES_VISIBLE;   /* P5-D490 */
+
+		if ( 'related' === $key ) {
+			return topersia_g_related_cards( $pid, $shown );   /* P5-D504 */
+		}
+
 		$result = topersia_g_rel_items( $pid, $key, 0 );
 
 		/*
@@ -5943,29 +6042,7 @@ if ( ! function_exists( 'topersia_g_sc_relgrid' ) ) {
 				topersia_g_rail_more( $group, 'routes', count( $tiles ), $shown, $result['items'] ) );
 		}
 
-		/*
-		 * برچسب کوچک کاشی.  P5-D244
-		 *   همه هم‌نوع   نام نوع تکرار نمی‌شود؛ جایش شهر یا شهرستان، نبود، هیچ
-		 *   نوع‌ها مختلف  نام نوع
-		 * برچسبِ ویژه («مرکز استان») همیشه همان خودش.
-		 */
-		$types = array();
-
-		foreach ( $result['items'] as $item ) {
-			$types[ function_exists( 'get_post_type' ) ? (string) get_post_type( $item['id'] ) : '' ] = true;
-		}
-
-		$same  = 1 === count( $types );
-		$tiles = array();
-
-		foreach ( $result['items'] as $item ) {
-
-			$kind  = (string) $item['kind'];
-			$label = ( $same && $kind === topersia_g_kind_label( $item['id'] ) ) ? topersia_g_tile_place( $item['id'] ) : $kind;
-
-			$tiles[] = array( 'label' => $label, 'name' => $item['name'], 'url' => $item['url'] );
-		}
-
+		$tiles = topersia_g_rel_tiles( $result['items'] );
 		$group = $result['group'];
 
 		return topersia_g_section(

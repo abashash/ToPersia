@@ -6,7 +6,7 @@
  */
 if ( 'local' !== wp_get_environment_type() ) { echo "{}"; exit( 2 ); }
 $out = array();
-foreach ( array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' ) as $type ) {
+foreach ( array( 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' ) as $type ) {
 	$ids = get_posts( array( 'post_type' => $type, 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_key' => '_tp_sample', 'meta_value' => 1 ) );
 	foreach ( $ids as $id ) {
 		if ( ! get_post_meta( $id, '_tp_sample_empty', true ) && 'fa' === apply_filters( 'wpml_element_language_code', null, array( 'element_id' => $id, 'element_type' => 'post_' . $type ) ) ) {

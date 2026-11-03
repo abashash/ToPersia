@@ -18,7 +18,7 @@ const BASE = env.base;
 const PAGES = { 'ایران': '/country/iran/', 'استان': '/province/isfahan/', 'شهر': '/city/isfahan/', 'نقش جهان': '/monument/naqsh-e-jahan-square/' };
 
 const samples = JSON.parse( execFileSync( env.php, [ env.wpCli, '--path=' + env.wp, '--url=' + BASE, 'eval-file', path.join( __dirname, 'overflow-h-urls.php' ) ], { encoding: 'utf8' } ).trim() );
-const WANT = [ 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area' ];
+const WANT = [ 'tp_currency', 'tp_visa', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_festival', 'tp_protected_area', 'tp_sports_event', 'tp_seasonal_event', 'tp_religious_event' ];
 
 const probe = () => {
 	const de = document.documentElement, vw = de.clientWidth;
@@ -47,7 +47,7 @@ const verdict = r => r.n > 0 && r.deSW <= r.deCW && 0 === r.moved && 0 === r.wid
 	let pass = 0, fail = 0;
 	const t = ( label, ok, note ) => { ok ? pass++ : fail++; console.log( '  ' + ( ok ? '✅' : '❌' ) + ' ' + label + ( ok || ! note ? '' : '   ← ' + note ) ); };
 	const missing = WANT.filter( k => ! samples[ k ] );
-	t( 'نمونهٔ هر هفت نوع پیدا شد', ! missing.length, missing.join( ' ' ) );
+	t( 'نمونهٔ هر نوع موج پیدا شد', ! missing.length, missing.join( ' ' ) );
 	const list = { ...PAGES };
 	for ( const k of WANT ) { if ( samples[ k ] ) { list[ k ] = samples[ k ]; } }
 
