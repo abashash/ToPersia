@@ -236,6 +236,22 @@
 			m.classList.add('tp-show');
 			undo.push(function () { m.classList.remove('tp-show'); });
 		});
+		/*
+		 * صفحۀ اول (دستۀ 47): پنجرۀ «همۀ استان‌ها»، پنجرۀ عکس و راهنمای نقشه هم پنهان ساخته می‌شوند —
+		 * همین‌جا باز می‌شوند تا روی زمینۀ خودشان سنجیده شوند. فقط سطح تازه؛ منطق سنجش دست نخورده.
+		 */
+		document.querySelectorAll('.tp-home-dlg').forEach(function (d) {
+			if (d.open || ! d.show) { return; }
+			d.show();
+			undo.push(function () { d.close(); });
+		});
+		document.querySelectorAll('.tp-home-map__tip[hidden]').forEach(function (t) {
+			var a = document.querySelector('.tp-home-map [data-tp-tip]');
+			if (! a) { return; }
+			t.textContent = a.getAttribute('data-tp-tip');
+			t.hidden = false;
+			undo.push(function () { t.hidden = true; });
+		});
 		return undo;
 	}
 

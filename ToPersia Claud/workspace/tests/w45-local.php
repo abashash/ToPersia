@@ -46,10 +46,12 @@ foreach ( $want as $l => $w ) {
 	t45( "$l: هیچ پیوندی به پست نمونه نمی‌رود (" . count( $m[1] ) . " پیوند)", ! $bad, implode( ' ', $bad ) );
 	$dead = array(); foreach ( array_unique( $m[1] ) as $u ) { if ( 0 === strpos( $u, '#' ) ) { if ( false === strpos( $h, 'id="' . substr( $u, 1 ) . '"' ) ) { $dead[] = $u; } continue; } list( $c ) = $get( preg_replace( '/#.*$/', '', html_entity_decode( $u ) ) ); if ( 200 !== $c ) { $dead[] = "$c $u"; } }
 	t45( "$l: هر پیوند (کارت، نقشه، راهنما، عکس، دعوت) ۲۰۰ است یا لنگرش در صفحه هست", ! $dead, implode( ' | ', $dead ) );
-	/* تصویرها: ≤ ۴۰، هر کدام ابعاد صریح، جز هیرو همه lazy */
+	/* تصویرها: هر کدام ابعاد صریح، جز هیرو همه lazy. سقف از هر بخش (دستۀ 47 بخش ۲، جای «≤ ۴۰» دستۀ 46): هیرو ۱ + استان ۳۱ + گروه جاذبه ۴ + مقصد ۱۲ + گالری ۸ + تصویر پنجره ۱ = ۵۷ */
+	$cap = array( 'tp-home-hero__img' => 1, 'tp-home-dest__img' => 12, 'tp-home-photo__img' => 8, 'tp-home-photodlg__img' => 1 ); $over = array();
+	preg_match_all( '#<img [^>]*class="([^"]*)"#', $body, $ic ); foreach ( array_count_values( $ic[1] ) as $k => $v ) { if ( isset( $cap[ $k ] ) && $v > $cap[ $k ] ) { $over[] = "$k=$v"; } }
 	preg_match_all( '#<img [^>]*>#', $body, $im ); $noimg = array();
 	foreach ( $im[0] as $t ) { $hero = false !== strpos( $t, 'tp-home-hero__img' ); if ( ! preg_match( '/ width="\d+"/', $t ) || ! preg_match( '/ height="\d+"/', $t ) || $hero !== ( false !== strpos( $t, 'fetchpriority="high"' ) ) || ( ! $hero && false === strpos( $t, 'loading="lazy"' ) ) ) { $noimg[] = substr( $t, 0, 90 ); } }
-	t45( "$l: " . count( $im[0] ) . " تصویر (≤ ۴۰)، همه با ابعاد؛ فقط هیرو fetchpriority، بقیه lazy", count( $im[0] ) <= 40 && ! $noimg, implode( ' | ', $noimg ) );
+	t45( "$l: " . count( $im[0] ) . " تصویر (≤ ۵۷، هر بخش زیر سقف خودش)، همه با ابعاد؛ فقط هیرو fetchpriority، بقیه lazy", count( $im[0] ) <= 57 && ! $over && ! $noimg, implode( ' | ', array_merge( $over, $noimg ) ) );
 	t45( "$l: در بدنۀ صفحۀ اول کادر جست‌وجو و فرم نیست و SearchAction در اسکیما نیست", '' !== $body && false === stripos( $body, '<form' ) && false === stripos( $body, 'role="search"' ) && false === stripos( $h, 'SearchAction' ) );
 	preg_match( '#<script type="application/ld\+json">(.*?)</script>#s', $h, $j );
 	$g = isset( $j[1] ) ? json_decode( $j[1], true ) : null; $types = $g ? array_column( $g['@graph'], '@type' ) : array();

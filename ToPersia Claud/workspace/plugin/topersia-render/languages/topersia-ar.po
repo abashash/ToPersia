@@ -1086,6 +1086,10 @@ msgstr "جزر هذا المسار"
 msgid "جست‌وجو در %s"
 msgstr "البحث في %s"
 
+#: includes/topersia-g-home.php
+msgid "جست‌وجوی استان"
+msgstr "البحث في المحافظات"
+
 #: includes/topersia-g-zones.php
 msgid "جست‌وجوی نام…"
 msgstr "البحث بالاسم…"
@@ -2890,6 +2894,14 @@ msgstr "الاتجاهات"
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr "المشاركة العامة وحضور الزوار"
 
+#: includes/topersia-g-home.php
+msgid "مشاهدۀ صفحه"
+msgstr "عرض الصفحة"
+
+#: includes/topersia-g-home.php
+msgid "مشاهدۀ همه"
+msgstr "عرض الكل"
+
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
 msgstr "التفاصيل"
@@ -4230,6 +4242,11 @@ msgstr "ملاحظة عن التصوير"
 msgid "یادداشت‌های استانی"
 msgstr "ملاحظات المحافظات"
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "یافته: %s"
+msgstr "النتائج: %s"
+
 #: includes/topersia-g-map.php
 msgid "یک روز کامل"
 msgstr "يوم كامل"
@@ -4269,6 +4286,17 @@ msgstr "من ٢ إلى ٤ ساعات"
 #: includes/topersia-g-map.php
 msgid "۳۰ تا ۶۰ دقیقه"
 msgstr "من ٣٠ إلى ٦٠ دقيقة"
+
+#: includes/topersia-g-home.php
+#, php-format
+msgid "%1$s از %2$s نظر"
+msgid_plural "%1$s از %2$s نظر"
+msgstr[0] "%1$s من %2$s مراجعة"
+msgstr[1] "%1$s من مراجعة واحدة"
+msgstr[2] "%1$s من مراجعتين"
+msgstr[3] "%1$s من %2$s مراجعات"
+msgstr[4] "%1$s من %2$s مراجعة"
+msgstr[5] "%1$s من %2$s مراجعة"
 
 #: includes/topersia-g-zones.php
 #, php-format
@@ -4313,6 +4341,17 @@ msgstr[2] "فعاليتان"
 msgstr[3] "%s فعاليات"
 msgstr[4] "%s فعالية"
 msgstr[5] "%s فعالية"
+
+#: includes/topersia-g-home.php
+#, php-format
+msgid "%s شهر"
+msgid_plural "%s شهر"
+msgstr[0] "%s مدينة"
+msgstr[1] "مدينة واحدة"
+msgstr[2] "مدينتان"
+msgstr[3] "%s مدن"
+msgstr[4] "%s مدينة"
+msgstr[5] "%s مدينة"
 
 #: includes/topersia-g-zones.php
 #, php-format

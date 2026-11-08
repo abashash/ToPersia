@@ -243,8 +243,9 @@ if ( ! function_exists( 'topersia_g_home_map' ) ) {
 	 * هر استان با صفحۀ منتشرشدۀ همین زبان پیوند می‌شود (aria-label نام)، بقیه بی‌پیوند و کم‌رنگ.
 	 *
 	 * @param array $by_slug نامک فارسی ← شناسۀ پست زبان جاری.
+	 * @param array $tips    شناسه ← متن راهنما («نام — N شهر · M جاذبه»)؛ دستۀ 47.
 	 */
-	function topersia_g_home_map( array $by_slug ) {
+	function topersia_g_home_map( array $by_slug, array $tips = array() ) {
 
 		$file = dirname( __DIR__ ) . '/assets/home/iran-provinces.svg';
 		$svg  = is_readable( $file ) ? (string) file_get_contents( $file ) : '';
@@ -264,7 +265,8 @@ if ( ! function_exists( 'topersia_g_home_map' ) ) {
 			if ( isset( $by_slug[ $slug ] ) ) {
 				$pid   = $by_slug[ $slug ];
 				$name  = (string) get_the_title( $pid );
-				$out  .= '<a class="tp-home-map__a" href="' . esc_url( get_permalink( $pid ) ) . '" aria-label="' . esc_attr( $name ) . '"><title>' . esc_html( $name ) . '</title><path d="' . esc_attr( $d ) . '"/></a>';
+				$tip   = isset( $tips[ $pid ] ) ? $tips[ $pid ] : $name;
+				$out  .= '<a class="tp-home-map__a" href="' . esc_url( get_permalink( $pid ) ) . '" aria-label="' . esc_attr( $tip ) . '" data-tp-tip="' . esc_attr( $tip ) . '"><title>' . esc_html( $name ) . '</title><path d="' . esc_attr( $d ) . '"/></a>';
 				$links ++;
 			} else {
 				$out .= '<path class="tp-home-map__off" d="' . esc_attr( $d ) . '"/>';
@@ -276,7 +278,111 @@ if ( ! function_exists( 'topersia_g_home_map' ) ) {
 		}
 
 		return '<figure class="tp-home-map"><svg class="tp-home-map__svg" viewBox="' . esc_attr( $vb[1] ) . '" role="group" aria-label="' . esc_attr__( 'نقشۀ استان‌های ایران', 'topersia' ) . '" focusable="false">' . $out . '</svg>'
+			. '<span class="tp-home-map__tip" role="tooltip" hidden></span>'
 			. '<figcaption class="tp-home-map__src">' . esc_html__( 'مرزها: OpenStreetMap contributors (ODbL)', 'topersia' ) . '</figcaption></figure>';
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_prov_counts' ) ) {
+	/**
+	 * شمار شهر و جاذبۀ منتشرشدۀ یک استان — همان گروه‌های «places» و «attractions» صفحۀ استان
+	 * (topersia_g_group_ids، زنجیرۀ ۷۲→۷۳→…)، پس عدد کاشی و صفحۀ استان هرگز واگرا نمی‌شوند.  دستۀ 47
+	 *
+	 * @return int[] [ شهر، جاذبه ]
+	 */
+	function topersia_g_home_prov_counts( $pid ) {
+
+		$out = array();
+
+		foreach ( array( 'places', 'attractions' ) as $key ) {
+			$group = function_exists( 'topersia_g_group' ) ? topersia_g_group( $pid, $key ) : array();
+			$out[] = ( $group && function_exists( 'topersia_g_group_ids' ) ) ? count( topersia_g_group_ids( $pid, $group ) ) : 0;
+		}
+
+		return $out;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_prov_label' ) ) {
+	/** «N شهر · M جاذبه» — صفر پنهان؛ هر دو صفر ← ''. */
+	function topersia_g_home_prov_label( array $c ) {
+
+		$parts = array();
+
+		if ( $c[0] > 0 ) {
+			/* translators: %s: شمار شهر */
+			$parts[] = sprintf( _n( '%s شهر', '%s شهر', $c[0], 'topersia' ), topersia_g_fa( $c[0] ) );
+		}
+		if ( $c[1] > 0 ) {
+			/* translators: %s: شمار جاذبه */
+			$parts[] = sprintf( _n( '%s جاذبه', '%s جاذبه', $c[1], 'topersia' ), topersia_g_fa( $c[1] ) );
+		}
+
+		return implode( ' · ', $parts );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_prov_all' ) ) {
+	/**
+	 * همۀ ۳۱ استان نقشه (نامک‌های `assets/home/iran-provinces.svg`) برای پنجرۀ «همۀ استان‌ها».
+	 * منتشرشده به زبان صفحه ← نام و پیوند؛ وگرنه نام پست فارسی منتشرشده با lang="fa"، کم‌رنگ و بی پیوند
+	 * (P5-D278: نام به زبان دیگر فقط با lang). مرتب با Collator زبان صفحه (فارسی: الفبای فارسی).
+	 *
+	 * @param array $by_slug نامک ← شناسۀ زبان جاری.
+	 * @return array[] هر عضو [ نام، نشانی یا ''، lang ]
+	 */
+	function topersia_g_home_prov_all( array $by_slug ) {
+
+		$file = dirname( __DIR__ ) . '/assets/home/iran-provinces.svg';
+		$svg  = is_readable( $file ) ? (string) file_get_contents( $file ) : '';
+
+		if ( ! preg_match_all( '#<path id="tp-prov-([a-z0-9-]+)"#', $svg, $m ) ) {
+			return array();
+		}
+
+		$lang = topersia_g_page_lang();
+		$rows = array();
+
+		foreach ( array_unique( $m[1] ) as $slug ) {
+
+			if ( isset( $by_slug[ $slug ] ) ) {
+				$rows[] = array( (string) get_the_title( $by_slug[ $slug ] ), (string) get_permalink( $by_slug[ $slug ] ), $lang );
+				continue;
+			}
+
+			$fa = topersia_g_in_default_lang( function () use ( $slug ) {
+				return topersia_g_published( get_posts( array( 'post_type' => 'tp_province', 'name' => $slug, 'post_status' => 'publish', 'has_password' => false, 'posts_per_page' => 1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ) ) ) );
+			} );
+
+			if ( $fa ) {
+				$rows[] = array( (string) get_the_title( (int) $fa[0] ), '', 'fa' );
+			}
+		}
+
+		$col = class_exists( 'Collator' ) ? new Collator( $lang ) : null;
+
+		usort( $rows, function ( $a, $b ) use ( $col ) {
+			return $col ? (int) $col->compare( $a[0], $b[0] ) : strcmp( $a[0], $b[0] );
+		} );
+
+		return $rows;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_rating' ) ) {
+	/** امتیاز واقعی JetReviews (topersia_g_reviews_data — همان بخش نظرها) فقط اگر نظر تأییدشده هست؛ وگرنه ''. */
+	function topersia_g_home_rating( $pid ) {
+
+		$r = function_exists( 'topersia_g_reviews_data' ) ? topersia_g_reviews_data( $pid ) : array();
+
+		if ( empty( $r['count'] ) || empty( $r['avg'] ) ) {
+			return '';
+		}
+
+		return '<span class="tp-home-dest__rate">' . topersia_g_icon( 'star' ) . '<span>'
+			/* translators: 1: میانگین امتیاز، 2: شمار نظر */
+			. esc_html( sprintf( _n( '%1$s از %2$s نظر', '%1$s از %2$s نظر', (int) $r['count'], 'topersia' ), topersia_g_fa( number_format_i18n( (float) $r['avg'], 1 ) ), topersia_g_fa( (int) $r['count'] ) ) )
+			. '</span></span>';
 	}
 }
 
@@ -331,7 +437,6 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		/* ── داده ── */
 		$provinces = topersia_g_home_by_title( topersia_g_home_real( array( 'tp_province' ) ) );
 		$cities    = topersia_g_home_with_image_first( topersia_g_home_real( array( 'tp_city' ) ) );
-		$country   = topersia_g_home_first( array( 'tp_country' ) );
 		$groups    = array();
 
 		foreach ( topersia_g_home_groups() as $key => $g ) {
@@ -390,7 +495,11 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		if ( $provinces ) {
 			$quick[] = array( '#tp-home-provinces', __( 'استان‌ها', 'topersia' ), 'column' );
 		}
-		if ( $cities ) {
+		/* مقاصد: تا ۱۲ شهر دارای تصویر، فقط اگر دست‌کم ۴ — همان شرطِ چاپ بخش، تا پیوند سریع به بخش پنهان نرود */
+		$dest = array_slice( array_values( array_filter( $cities, 'topersia_g_card_image' ) ), 0, 12 );
+		$dest = count( $dest ) >= 4 ? $dest : array();
+
+		if ( $dest ) {
 			$quick[] = array( '#tp-home-cities', __( 'شهرها', 'topersia' ), 'city' );
 		}
 		if ( $groups ) {
@@ -435,25 +544,73 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			$by_slug[ (string) get_post_field( 'post_name', $fa_id ? $fa_id : $id ) ] = $id;
 		}
 
+		/* کاشی هر استان منتشرشده در اسلایدر scroll-snap؛ «N شهر · M جاذبه» از رابطه‌های منتشرشده، صفر پنهان.  دستۀ 47 ب */
 		$prov_cards = '';
-		$shown      = array_slice( topersia_g_home_with_image_first( $provinces ), 0, 8 );
+		$tips       = array();
 
-		foreach ( topersia_g_home_by_title( $shown ) as $id ) {
-			$prov_cards .= topersia_g_home_card( $id );
+		foreach ( $provinces as $id ) {
+			$label        = topersia_g_home_prov_label( topersia_g_home_prov_counts( $id ) );
+			$tips[ $id ]  = (string) get_the_title( $id ) . ( '' !== $label ? ' — ' . $label : '' );
+			$prov_cards  .= topersia_g_home_card( $id, $label );
 		}
 
-		$map       = $provinces ? topersia_g_home_map( $by_slug ) : '';
+		$map       = $provinces ? topersia_g_home_map( $by_slug, $tips ) : '';
+		$arrows    = function_exists( 'topersia_g_arrows' ) ? topersia_g_arrows() : array( 'prev' => '‹', 'next' => '›' );
+		$all       = topersia_g_home_prov_all( $by_slug );
+		$all_li    = '';
+
+		foreach ( $all as $row ) {
+			$fold    = function_exists( 'topersia_search_fold' ) ? ' data-tp-fold="' . esc_attr( topersia_search_fold( $row[0] ) ) . '"' : '';
+			$all_li .= '' !== $row[1]
+				? '<li' . $fold . '><a href="' . esc_url( $row[1] ) . '">' . esc_html( $row[0] ) . '</a></li>'
+				: '<li class="tp-home-provall__off"' . $fold . '><span lang="' . esc_attr( $row[2] ) . '">' . esc_html( $row[0] ) . '</span></li>';
+		}
+
+		$dlg = '';
+
+		if ( '' !== $all_li ) {
+			/* translators: %s: شمار استان‌های یافته (JS جای‌گذاری می‌کند) */
+			$found = __( 'یافته: %s', 'topersia' );
+			$dlg   = '<dialog id="tp-home-provdlg" class="tp-home-dlg" aria-labelledby="tp-home-provdlgTitle">'
+				. '<div class="tp-home-dlg__head"><h2 id="tp-home-provdlgTitle">' . esc_html__( 'همۀ استان‌ها', 'topersia' ) . '</h2>'
+				. '<button type="button" class="tp-home-dlg__x" data-tp-close aria-label="' . esc_attr__( 'بستن', 'topersia' ) . '">×</button></div>'
+				. '<label class="tp-home-dlg__lab" for="tp-home-provq">' . esc_html__( 'جست‌وجوی استان', 'topersia' ) . '</label>'
+				. '<input id="tp-home-provq" class="tp-home-dlg__q" type="text" inputmode="search" autocomplete="off" aria-controls="tp-home-provlist">'
+				. '<p class="tp-home-dlg__n" aria-live="polite" data-tp-n="' . esc_attr( $found ) . '"></p>'
+				. '<ul id="tp-home-provlist" class="tp-home-provall">' . $all_li . '</ul></dialog>'
+				. '<noscript><ul class="tp-home-provall tp-home-provall--ns">' . $all_li . '</ul></noscript>';
+		}
+
 		$prov_body = '' !== $prov_cards ? '<div class="tp-home-prov' . ( '' !== $map ? '' : ' tp-home-prov--solo' ) . '">'
 			. ( '' !== $map ? '<div class="tp-home-prov__map"><h3 class="tp-home-sub">' . esc_html__( 'ایران روی نقشه', 'topersia' ) . '</h3>' . $map . '</div>' : '' )
-			. '<div class="tp-home-grid tp-home-grid--4">' . $prov_cards . '</div></div>' : '';
-		$prov_more = ( $country && count( $provinces ) > 8 ) ? array( get_permalink( $country ) . '#tp-provinces', __( 'همۀ استان‌ها', 'topersia' ) ) : array();
+			. '<div class="tp-home-prov__tiles"><div id="tp-home-provslide" class="tp-home-slider" tabindex="0" role="group" aria-label="' . esc_attr__( 'استان‌های ایران', 'topersia' ) . '">' . $prov_cards . '</div>'
+			. '<div class="tp-home-slider__nav">'
+			. '<button type="button" class="tp-home-slider__btn" data-tp-slide="-1" aria-controls="tp-home-provslide" aria-label="' . esc_attr__( 'قبلی', 'topersia' ) . '" hidden>' . esc_html( $arrows['prev'] ) . '</button>'
+			. '<button type="button" class="tp-home-slider__btn" data-tp-slide="1" aria-controls="tp-home-provslide" aria-label="' . esc_attr__( 'بعدی', 'topersia' ) . '" hidden>' . esc_html( $arrows['next'] ) . '</button>'
+			. ( '' !== $dlg ? '<button type="button" class="tp-home-slider__all" data-tp-provdlg aria-haspopup="dialog" aria-controls="tp-home-provdlg" hidden>' . esc_html__( 'همۀ استان‌ها', 'topersia' ) . '</button>' : '' )
+			. '</div></div></div>' . $dlg : '';
+		$prov_more = array();
 
-		/* ── ۴ محبوب‌ترین مقاصد ── */
+		/*
+		 * ── ۴ محبوب‌ترین مقاصد — دستۀ 47 پ: تا ۱۲ شهر منتشرشدۀ دارای تصویر (ترتیب: دارای تصویر، سپس شناسۀ کوچک‌تر —
+		 * display_priority دستۀ 48)، گرید دوردیفه با جریان ستونی و scroll-snap. کارت: تصویر، نام، short_summary
+		 * (FIELDMAP، از topersia_g_text و دروازۀ زبان)، امتیاز فقط با نظر واقعی JetReviews. کمتر از ۴ ← پنهان.
+		 */
 		$city_cards = '';
 
-		foreach ( array_slice( $cities, 0, 8 ) as $id ) {
-			$city_cards .= topersia_g_home_card( $id );
+		foreach ( $dest as $id ) {
+
+			$att  = topersia_g_card_image( $id );
+			$sum  = function_exists( 'topersia_g_text' ) ? trim( wp_strip_all_tags( topersia_g_text( $id, 'short_summary' ) ) ) : '';
+			$city_cards .= '<a class="tp-home-dest" href="' . esc_url( get_permalink( $id ) ) . '">'
+				. '<span class="tp-home-dest__media">' . topersia_g_home_img( $att, $id, 'medium_large', '(max-width: 600px) 70vw, 280px', 'tp-home-dest__img' ) . '</span>'
+				. '<span class="tp-home-dest__txt"><b class="tp-home-dest__name">' . esc_html( get_the_title( $id ) ) . '</b>'
+				. ( '' !== $sum ? '<span class="tp-home-dest__sum">' . esc_html( $sum ) . '</span>' : '' )
+				. topersia_g_home_rating( $id ) . '</span></a>';
 		}
+
+		$city_all  = function_exists( 'get_post_type_archive_link' ) ? get_post_type_archive_link( 'tp_city' ) : false;
+		$city_more = ( '' !== $city_cards && $city_all ) ? array( $city_all, __( 'مشاهدۀ همه', 'topersia' ) ) : array();
 
 		/* ── ۵ جاذبه‌ها ── */
 		$attr_cards = '';
@@ -514,9 +671,24 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 
 			$seen[ $att ] = true;
 			$n ++;
-			$photos .= '<a class="tp-home-photo" href="' . esc_url( get_permalink( $id ) ) . '">'
+			$full  = wp_get_attachment_image_src( $att, 'large' );
+			$desc  = function_exists( 'topersia_g_text' ) ? trim( wp_strip_all_tags( topersia_g_text( $id, 'short_summary' ) ) ) : '';
+			$photos .= '<a class="tp-home-photo" href="' . esc_url( get_permalink( $id ) ) . '" data-tp-title="' . esc_attr( get_the_title( $id ) ) . '" data-tp-desc="' . esc_attr( $desc ) . '"'
+				. ( $full ? ' data-tp-full="' . esc_url( $full[0] ) . '" data-tp-w="' . absint( $full[1] ) . '" data-tp-h="' . absint( $full[2] ) . '"' : '' ) . '>'
 				. topersia_g_home_img( $att, $id, 'medium_large', '(max-width: 600px) 50vw, 300px', 'tp-home-photo__img' )
 				. '<span class="tp-home-photo__cap">' . esc_html( get_the_title( $id ) ) . '</span></a>';
+		}
+
+		/* دستۀ 47 ث: کمتر از ۴ عکس یکتا ← بخش پنهان؛ پنجرۀ بومی <dialog> (پنجرۀ g-gallery به درگاه صفحۀ موجودیت بسته است). */
+		$photo_dlg = '';
+
+		if ( $n < 4 ) {
+			$photos = '';
+		} else {
+			$photo_dlg = '<dialog id="tp-home-photodlg" class="tp-home-dlg tp-home-photodlg" aria-labelledby="tp-home-photodlgTitle">'
+				. '<div class="tp-home-dlg__head"><h2 id="tp-home-photodlgTitle"></h2><button type="button" class="tp-home-dlg__x" data-tp-close aria-label="' . esc_attr__( 'بستن', 'topersia' ) . '">×</button></div>'
+				. '<img class="tp-home-photodlg__img" src="data:," alt="" width="1" height="1" loading="lazy" decoding="async"><p class="tp-home-photodlg__desc"></p>'
+				. '<a class="tp-home-photodlg__go">' . esc_html__( 'مشاهدۀ صفحه', 'topersia' ) . '</a></dialog>';
 		}
 
 		/* ── ۱۰ پرسش‌های متداول ── */
@@ -535,7 +707,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 				'post_type'        => 'tpc_news',
 				'post_status'      => 'publish',
 				'has_password'     => false,
-				'posts_per_page'   => 4,
+				'posts_per_page'   => 3,
 				'fields'           => 'ids',
 				'orderby'          => 'date',
 				'order'            => 'DESC',
@@ -551,6 +723,9 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			$news = '' !== $news ? '<div class="tp-news">' . $news . '</div>' : '';
 		}
 
+		$news_all  = ( '' !== $news && function_exists( 'get_post_type_archive_link' ) ) ? get_post_type_archive_link( 'tpc_news' ) : false;
+		$news_more = $news_all ? array( $news_all, __( 'مشاهدۀ همه', 'topersia' ) ) : array();
+
 		/* ── ۱۲ دعوت شیشه‌ای به پنل ── */
 		$panel = get_page_by_path( 'account' );
 		$panel = $panel ? (int) apply_filters( 'wpml_object_id', $panel->ID, 'page', false ) : 0;
@@ -563,15 +738,20 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 				. '<a class="tp-home-cta__btn" href="' . esc_url( get_permalink( $panel ) ) . '">' . esc_html__( 'ورود / ثبت‌نام', 'topersia' ) . '</a></section>';
 		}
 
+		/* دستۀ 47 ت — ردیف سه‌ستونه: راهنمای سفر | تازه‌ترین اخبار | پرسش‌های متداول؛ ستون خالی رندر نمی‌شود و بقیه پهن می‌شوند. */
+		$trio = topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-col' )
+			. topersia_g_home_section( 'tp-home-news', __( 'تازه‌ترین اخبار', 'topersia' ), $news, $news_more, 'tp-home-col' )
+			. topersia_g_home_section( 'tp-home-faq', __( 'پرسش‌های متداول', 'topersia' ), '' !== $faq ? '<div class="tp-home-faq">' . $faq . '</div>' : '', array(), 'tp-home-col' );
+		$trio = '' !== $trio ? '<div class="tp-home-trio tp-home-lazy">' . $trio . '</div>' : '';
+
 		$body = $stats
 			. topersia_g_home_section( 'tp-home-provinces', __( 'استان‌های ایران', 'topersia' ), $prov_body, $prov_more )
-			. topersia_g_home_section( 'tp-home-cities', __( 'محبوب‌ترین مقاصد', 'topersia' ), '' !== $city_cards ? '<div class="tp-home-rail">' . $city_cards . '</div>' : '', array(), 'tp-home-lazy' )
+			. topersia_g_home_section( 'tp-home-cities', __( 'محبوب‌ترین مقاصد', 'topersia' ), '' !== $city_cards ? '<div class="tp-home-destgrid" tabindex="0" role="group" aria-label="' . esc_attr__( 'محبوب‌ترین مقاصد', 'topersia' ) . '">' . $city_cards . '</div>' : '', $city_more, 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), '' !== $attr_cards ? '<div class="tp-home-grid tp-home-grid--4">' . $attr_cards . '</div>' : '', array(), 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-events', __( 'رویدادها و جشنواره‌ها', 'topersia' ), '' !== $event_rows ? '<ul class="tp-home-events">' . $event_rows . '</ul>' : '', array(), 'tp-home-lazy' )
-			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
+			. $trio
 			. topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? '<div class="tp-home-photos">' . $photos . '</div>' : '', array(), 'tp-home-lazy' )
-			. topersia_g_home_section( 'tp-home-faq', __( 'پرسش‌های متداول', 'topersia' ), '' !== $faq ? '<div class="tp-home-faq">' . $faq . '</div>' : '', array(), 'tp-home-lazy' )
-			. topersia_g_home_section( 'tp-home-news', __( 'تازه‌ترین اخبار', 'topersia' ), $news, array(), 'tp-home-lazy' )
+			. ( '' !== $photos ? $photo_dlg : '' )
 			. $cta;
 
 		return '<div class="tp-page tp-home"><main id="tp-main" class="tp-main">' . $hero . '<div class="tp-wrap tp-home-body">' . $body . '</div></main></div>';
@@ -595,6 +775,8 @@ if ( function_exists( 'add_action' ) ) {
 		}
 
 		wp_enqueue_style( 'topersia-g-home', topersia_render_url() . 'assets/topersia-g-home.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-home.css' ) );
+		/* دستۀ 47 — اسلایدر، پنجرۀ استان‌ها، راهنمای نقشه، پنجرۀ عکس؛ فقط صفحۀ اول، پاورقی، سقف ۴KB (assert-47). */
+		wp_enqueue_script( 'topersia-g-home', topersia_render_url() . 'assets/topersia-g-home.js', array( 'topersia-g-zones' ), topersia_render_asset_version( 'assets/topersia-g-home.js' ), true );
 	}, 22 );
 
 	add_action( 'wp_head', function () {

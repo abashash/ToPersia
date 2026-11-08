@@ -152,3 +152,53 @@ if ( function_exists( 'topersia_g_footer_credits_on' ) ) {
 /* ── ۱٫۵ هدر — فاصلۀ صفر با CSS ─────────────────────────────────────── */
 $w47_gap = function ( $c ) { return false !== strpos( $c, 'html .tp-page.tp-home > .tp-main{padding-block-start:0}' ); };
 tp441_mut( 'P5-D525: فاصلۀ هدر تا هیرو فقط با CSS صفحۀ اول — جهش: بی قاعده', $w47_gap, $w47_css, str_replace( 'padding-block-start:0}', 'padding-block-start:44px}', $w47_css ) );
+
+/* ══ بخش ۲ — صفحۀ اول طبق مرجع (فقط دادۀ واقعی) ═══════════════════════ */
+echo "\nدستۀ 47 بخش ۲ — صفحۀ اول\n" . str_repeat( '─', 78 ) . "\n";
+$w47_js = $w47_read( 'plugin/topersia-render/assets/topersia-g-home.js' );
+
+/* JS: سقف ۴KB، بی کتابخانه، فقط صفحۀ اول */
+$w47_jsok = function ( $j ) { return '' !== $j && strlen( $j ) <= 4096 && ! preg_match( '/\b(require|import)\s*\(|jQuery|\$\.\w+\(/', $j ); };
+tp441_mut( 'ب·JS: topersia-g-home.js ≤ ۴۰۹۶ بایت و بی کتابخانه — جهش: پرونده‌ای بزرگ‌تر از سقف', $w47_jsok, $w47_js, $w47_js . str_repeat( '/* x */', 120 ) );
+$w47_enq = function ( $s ) { $g = strpos( $s, "if ( ! topersia_g_home_is() || ! function_exists( 'topersia_render_url' ) ) {" ); $e = strpos( $s, "wp_enqueue_script( 'topersia-g-home'" ); return false !== $g && false !== $e && $e > $g && $e - $g < 900; };
+tp441_mut( 'ب·JS: فقط پشت topersia_g_home_is() بار می‌شود — جهش: بی نگهبان', $w47_enq, $w47_home, str_replace( '! topersia_g_home_is() ||', '', $w47_home ) );
+
+/* ب — راهنمای هر استان، شمار صفر پنهان، پنجرۀ ۳۱ استان */
+$w47_tip = function ( $s ) { return false !== strpos( $s, "data-tp-tip=\"' . esc_attr( \$tip )" ) || 1 === preg_match( '/data-tp-tip="\'\s*\.\s*esc_attr\(/', $s ); };
+tp441_mut( 'ب: هر پیوند استان روی نقشه data-tp-tip دارد — جهش: بی راهنما', $w47_tip, $w47_home, preg_replace( '/ data-tp-tip="\'\s*\.\s*esc_attr\([^)]*\)\s*\.\s*\'"/', '', $w47_home ) );
+if ( function_exists( 'topersia_g_home_prov_label' ) ) {
+	$w47_l0 = topersia_g_home_prov_label( array( 0, 3 ) );
+	$w47_l1 = topersia_g_home_prov_label( array( 2, 0 ) );
+	t( 'ب: «N شهر · M جاذبه» — شمار صفر پنهان؛ هر دو صفر ← خالی', '' === topersia_g_home_prov_label( array( 0, 0 ) ) && false === mb_strpos( $w47_l0, 'شهر' ) && false !== mb_strpos( $w47_l0, 'جاذبه' ) && false === mb_strpos( $w47_l1, 'جاذبه' ) && false === strpos( $w47_l0 . $w47_l1, '0' ), $w47_l0 . ' | ' . $w47_l1 );
+}
+$w47_zero = function ( $s ) { return 2 === preg_match_all( '/if \( \$c\[[01]\] > 0 \) \{/', $s ); };
+tp441_mut( 'ب: شمار صفر با شرط > 0 کنار می‌رود — جهش: شرط برداشته شود', $w47_zero, $w47_home, str_replace( 'if ( $c[0] > 0 ) {', 'if ( true ) {', $w47_home ) );
+if ( function_exists( 'topersia_g_home_prov_all' ) ) {
+	preg_match_all( '#<path id="tp-prov-([a-z0-9-]+)"#', $w47_read( 'plugin/topersia-render/assets/home/iran-provinces.svg' ), $w47_sm );
+	$w47_by  = array_flip( array_unique( $w47_sm[1] ) );
+	$w47_all = topersia_g_home_prov_all( array_map( function ( $i ) { return $i + 1; }, $w47_by ) );
+	t( 'ب: پنجرۀ «همۀ استان‌ها» = ۳۱ ردیف (از نقشه)، هر کدام با پیوند وقتی صفحه دارد', 31 === count( $w47_sm[1] ) && 31 === count( $w47_all ), count( $w47_all ) );
+}
+$w47_dlg = function ( $s ) { return false !== strpos( $s, '<dialog id="tp-home-provdlg"' ) && false !== strpos( $s, "'<noscript><ul class=\"tp-home-provall tp-home-provall--ns\">' . \$all_li . '</ul></noscript>'" ) && false !== strpos( $s, 'topersia_search_fold(' ); };
+tp441_mut( 'ب: <dialog> بومی با همان فهرست در noscript و کلید تاکردن هسته — جهش: بی noscript', $w47_dlg, $w47_home, str_replace( '<noscript>', '<div>', $w47_home ) );
+
+/* پ · ث — آستانه‌ها و بی نمونه */
+$w47_min = function ( $s ) { return false !== strpos( $s, 'count( $dest ) >= 4' ) && false !== strpos( $s, 'if ( $n < 4 ) {' ) && false !== strpos( $s, "array_filter( \$cities, 'topersia_g_card_image' ) ), 0, 12 )" ); };
+tp441_mut( 'پ·ث: مقاصد ≥ ۴ (سقف ۱۲، فقط دارای تصویر) و گالری ≥ ۴ عکس یکتا — جهش: آستانۀ گالری برداشته شود', $w47_min, $w47_home, str_replace( 'if ( $n < 4 ) {', 'if ( false ) {', $w47_home ) );
+$w47_real = function ( $s ) { return false === strpos( $s, '_tp_sample\', \'compare\' => \'EXISTS' ) && 2 <= substr_count( $s, "'key' => '_tp_sample', 'compare' => 'NOT EXISTS'" ); };
+tp441_mut( 'بی نمونه: پرسش‌های تازۀ صفحۀ اول _tp_sample را کنار می‌گذارند — جهش: NOT EXISTS برداشته شود', $w47_real, $w47_home, str_replace( "'key' => '_tp_sample', 'compare' => 'NOT EXISTS'", "'key' => '_tp_x', 'compare' => 'NOT EXISTS'", $w47_home ) );
+$w47_ext = function ( $s ) { return ! preg_match( '#<img[^>]+src=["\']https?://#i', $s ) && ! preg_match( '#https?://(?!schema\.org)[a-z0-9.-]+\.[a-z]{2,}/[^\'"]*\.(jpe?g|png|webp|avif|gif)#i', $s ); };
+tp441_mut( 'بی پیوند تصویر بیرونی در صفحۀ اول — جهش: <img src="https://…">', $w47_ext, $w47_home, $w47_home . "\n/* '<img src=\"https://example.com/a.jpg\">' */" );
+
+/* ت — ردیف سه‌ستونه؛ ج — بی صافی فصل (ممیزی P5-D522: تابستان و زمستان صفر) */
+$w47_trio = function ( $s ) { return false !== strpos( $s, "'<div class=\"tp-home-trio tp-home-lazy\">' . \$trio . '</div>'" ) && 3 === substr_count( $s, "'tp-home-col' )" ); };
+tp441_mut( 'ت: راهنما | اخبار | پرسش در یک ردیف؛ ستون خالی رندر نمی‌شود — جهش: بی ردیف', $w47_trio, $w47_home, str_replace( "'tp-home-col' )", "'' )", $w47_home ) );
+t( 'ج: صافی فصل ساخته نشد (ممیزی: کمتر از ۲ مورد در دست‌کم یک فصل)', false === strpos( $w47_home, 'best_season' ) );
+
+/* CSS — نیم‌هم‌پوشانی دقیق، توکن، بی letter-spacing */
+$w47_c2 = function ( $c ) { return 1 === preg_match( '/\.tp-home-stats\{[^}]*transform:translateY\(-50%\)/', $c ) && ! preg_match( '/#[0-9a-f]{3,8}\b/i', $c ) && ! preg_match( '/letter-spacing:(?!0[;}])/', $c ) && 1 === preg_match( '/\.tp-home-prov\{[^}]*align-items:stretch/', $c ); };
+tp441_mut( 'الف·ب CSS: نوار شمار translateY(-50%)، ستون‌ها stretch، بی رنگ خام و letter-spacing — جهش: رنگ خام', $w47_c2, $w47_css, $w47_css . "\nhtml .tp-page.tp-home .x{color:#ff0000}" );
+
+/* قاب فیلد جست‌وجوی پنجرۀ استان‌ها عنصر رابط است (۳٫۰ در برابر زمینه): از توکن متن، نه --tp-border تزئینی — کنتراست ۱٫۳۶ گرفته بود */
+$w47_fld = function ( $c ) { return 1 === preg_match( '/\.tp-home-dlg__q\{[^}]*border:1px solid var\(--tp-text(?:-2|-strong)?\)/', $c ); };
+tp441_mut( 'ب CSS: قاب فیلد جست‌وجوی پنجره از توکن متن — جهش: --tp-border', $w47_fld, $w47_css, str_replace( 'border:1px solid var(--tp-text-2);background:var(--tp-surface)', 'border:1px solid var(--tp-border);background:var(--tp-surface)', $w47_css ) );

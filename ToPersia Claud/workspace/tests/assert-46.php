@@ -103,15 +103,15 @@ $w46_mapf = function ( $s ) use ( $w46_svgf ) {
 tp441_mut( 'نقشه: فقط استانِ دارای صفحه پیوند و aria-label دارد، بقیه کم‌رنگ؛ هیچ پیوند ← هیچ نقشه — جهش: استان بی‌صفحه پنهان', $w46_mapf, $w46_src, str_replace( "\$out .= '<path class=\"tp-home-map__off\" d=\"' . esc_attr( \$d ) . '\"/>';", '', $w46_src ) );
 tp441_mut( 'نقشه: بی هیچ استان دارای صفحه، نقشه چاپ نمی‌شود — جهش: نقشۀ تهی', $w46_mapf, $w46_src, str_replace( "if ( ! \$links ) {\n\t\t\treturn '';", "if ( false ) {\n\t\t\treturn '';", $w46_src ) );
 
-/* ۵ — سقف‌ها: استان ۸، شهر ۸، رویداد ۴، عکس ۸، پرسش ۶. */
+/* ۵ — سقف‌ها: استان همه (اسلایدر · دستۀ 47 ب)، مقصد ۱۲ (دستۀ 47 پ)، رویداد ۴، عکس ۸، پرسش ۶. */
 $w46_caps = function ( $s ) {
-	return false !== strpos( $s, 'array_slice( topersia_g_home_with_image_first( $provinces ), 0, 8 )' )
-		&& false !== strpos( $s, 'array_slice( $cities, 0, 8 )' )
+	return false !== strpos( $s, 'foreach ( $provinces as $id ) {' )
+		&& false !== strpos( $s, "array_filter( \$cities, 'topersia_g_card_image' ) ), 0, 12 )" )
 		&& false !== strpos( $s, 'array_slice( array_keys( $events ), 0, 4 )' )
 		&& false !== strpos( $s, 'if ( $n >= 8 ) {' )
 		&& false !== strpos( $s, 'count( $items ) < 6' );
 };
-tp441_mut( 'سقف هر بخش (استان ۸ · شهر ۸ · رویداد ۴ · عکس ۸ · پرسش ۶) — جهش: سقف پرسش برداشته شود', $w46_caps, $w46_src, str_replace( 'count( $items ) < 6', 'true', $w46_src ) );
+tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۴ · عکس ۸ · پرسش ۶) — جهش: سقف پرسش برداشته شود', $w46_caps, $w46_src, str_replace( 'count( $items ) < 6', 'true', $w46_src ) );
 
 /* ۶ — رویداد فقط با تاریخ آغاز معتبر. */
 $w46_ev = function ( $s ) {
@@ -141,8 +141,10 @@ $w46_cssok = function ( $c ) {
 		}
 	}
 	$bare = preg_replace( '#/\*.*?\*/#s', '', preg_replace( '/\.tp-home-hero__scrim\{[^}]*\}/', '', $c ) );
+	/* دستۀ 47: جابه‌جایی ایستای نوار شمار (نیم‌هم‌پوشانی دقیق) و راهنمای نقشه حرکت نیست — فقط همین دو قاعده بیرون از سنجش حرکت. */
+	$still     = preg_replace( '/\.tp-home-(stats|map__tip)\{[^}]*\}/', '', $c );
 	$motion_ok = 0 === preg_match_all( '/transition|animation|transform:translate/', preg_replace( '/@media \(prefers-reduced-motion:no-preference\)\{.*?
-\}/s', '', $c ) );
+\}/s', '', $still ) );
 	return $ok_sel && $motion_ok
 		&& false !== strpos( $c, '@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)))' )
 		&& false !== strpos( $c, '@media (prefers-reduced-transparency:reduce)' )

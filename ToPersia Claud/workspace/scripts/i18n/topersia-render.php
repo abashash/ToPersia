@@ -26,6 +26,14 @@ return array(
 		'en' => array( '%s attraction', '%s attractions' ),
 		'ar' => array( '%s معلم', 'معلم واحد', 'معلمان', '%s معالم', '%s معلمًا', '%s معلم' ),
 	),
+	'%s شهر'     => array(
+		'en' => array( '%s city', '%s cities' ),
+		'ar' => array( '%s مدينة', 'مدينة واحدة', 'مدينتان', '%s مدن', '%s مدينة', '%s مدينة' ),
+	),
+	'%1$s از %2$s نظر' => array(
+		'en' => array( '%1$s from %2$s review', '%1$s from %2$s reviews' ),
+		'ar' => array( '%1$s من %2$s مراجعة', '%1$s من مراجعة واحدة', '%1$s من مراجعتين', '%1$s من %2$s مراجعات', '%1$s من %2$s مراجعة', '%1$s من %2$s مراجعة' ),
+	),
 	'%s رویداد'    => array(
 		'en' => array( '%s event', '%s events' ),
 		'ar' => array( '%s فعالية', 'فعالية واحدة', 'فعاليتان', '%s فعاليات', '%s فعالية', '%s فعالية' ),
@@ -1148,4 +1156,8 @@ return array(
 	'شماره‌های اضطراری' => array( 'en' => 'Emergency numbers', 'ar' => 'أرقام الطوارئ' ),
 	'ایران در تصویر' => array( 'en' => 'Iran in pictures', 'ar' => 'إيران بالصور' ),
 	'ورود / ثبت‌نام' => array( 'en' => 'Sign in / Register', 'ar' => 'الدخول / التسجيل' ),
+	'جست‌وجوی استان' => array( 'en' => 'Search provinces', 'ar' => 'البحث في المحافظات' ),
+	'یافته: %s' => array( 'en' => 'Found: %s', 'ar' => 'النتائج: %s' ),
+	'مشاهدۀ همه' => array( 'en' => 'View all', 'ar' => 'عرض الكل' ),
+	'مشاهدۀ صفحه' => array( 'en' => 'View page', 'ar' => 'عرض الصفحة' ),
 );

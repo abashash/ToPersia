@@ -32,6 +32,7 @@ $w45_nodigit = function ( $s ) {
 	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
 	$code = preg_replace( '#^\s*(\*|//).*$#m', '', $code );
 	$code = preg_replace( '/\}, \d+ \);/', '}, P );', $code );   /* اولویت قلاب وردپرس عدد آمار نیست — دستۀ 46 */
+	$code = preg_replace( '/\), 0, \d+ \);/', '), 0, N );', $code );   /* سقف array_slice عدد آمار نیست — دستۀ 47 */
 	return 0 === preg_match( '/(?<![\w$])\d{2,}(?![\w])/', $code );
 };
 tp441_mut( 'صفحهٔ اول عدد ثابت (آمار) ندارد — جهش: عدد در کد', $w45_nodigit, $w45_src, $w45_src . "\n\$x = 31;" );

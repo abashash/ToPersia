@@ -1085,6 +1085,10 @@ msgstr ""
 msgid "جست‌وجو در %s"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "جست‌وجوی استان"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "جست‌وجوی نام…"
 msgstr ""
@@ -2889,6 +2893,14 @@ msgstr ""
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "مشاهدۀ صفحه"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "مشاهدۀ همه"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "مشخصات"
 msgstr ""
@@ -4229,6 +4241,11 @@ msgstr ""
 msgid "یادداشت‌های استانی"
 msgstr ""
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "یافته: %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "یک روز کامل"
 msgstr ""
@@ -4269,6 +4286,13 @@ msgstr ""
 msgid "۳۰ تا ۶۰ دقیقه"
 msgstr ""
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "%1$s از %2$s نظر"
+msgid_plural "%1$s از %2$s نظر"
+msgstr[0] ""
+msgstr[1] ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%s تصویر"
@@ -4294,6 +4318,13 @@ msgstr[1] ""
 #, php-format
 msgid "%s رویداد"
 msgid_plural "%s رویداد"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/topersia-g-home.php
+#, php-format
+msgid "%s شهر"
+msgid_plural "%s شهر"
 msgstr[0] ""
 msgstr[1] ""
 
