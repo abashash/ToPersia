@@ -1123,4 +1123,11 @@ return array(
 	'حساب کاربری' => array( 'en' => 'Account', 'ar' => 'الحساب' ),
 	'ورود به پنل کاربری' => array( 'en' => 'Sign in to your panel', 'ar' => 'الدخول إلى لوحة المستخدم' ),
 	'با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید.' => array( 'en' => 'With an account you can save and follow places and leave comments.', 'ar' => 'بحساب المستخدم يمكنك حفظ الأماكن ومتابعتها وكتابة التعليقات.' ),
+	/* دستۀ 45 بخش الف·۲ — پاورقی؛ عیناً از docs/legal/PAGES-TEXT-2026-11-04.md بند ۰ */
+	'© %s ToPersia (توپرشیا). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به توپرشیا می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد.' => array( 'en' => '© %s ToPersia. All rights to this service (website and mobile apps) are reserved and belong to ToPersia. Copying, republishing, scraping or otherwise using the texts and content of this service, anywhere and in any form, without written permission is prohibited and will be pursued legally.', 'ar' => '© %s ToPersia (توبرشيا). جميع حقوق هذه الخدمة (الموقع وتطبيقات الجوال) محفوظة وتعود ملكيتها إلى ToPersia. يُحظر نسخ نصوص هذه الخدمة ومحتواها أو إعادة نشرها أو استخراجها آليًا أو استخدامها بأي شكل وفي أي مكان دون إذن كتابي، ويُلاحق مرتكب ذلك قانونيًا.' ),
+	'خدمات وب:' => array( 'en' => 'Web services:', 'ar' => 'خدمات الويب:' ),
+	'آمستریدا' => array( 'en' => 'Amesterida', 'ar' => 'أمستريدا' ),
+	'طراحی و اجرا:' => array( 'en' => 'Design & development:', 'ar' => 'التصميم والتنفيذ:' ),
+	'امیرعباس بشاش' => array( 'en' => 'Amirabbas Bashash', 'ar' => 'أمير عباس بشاش' ),
+	'صفحه‌های سایت' => array( 'en' => 'Site pages', 'ar' => 'صفحات الموقع' ),
 );

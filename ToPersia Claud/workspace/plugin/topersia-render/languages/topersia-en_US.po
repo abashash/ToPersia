@@ -37,6 +37,11 @@ msgstr "--post=<id> or --all or --queue"
 msgid "ToPersia را منبع ترجیحی گوگل کنید"
 msgstr "Make ToPersia a preferred source on Google"
 
+#: includes/topersia-g-legal.php
+#, php-format
+msgid "© %s ToPersia (توپرشیا). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به توپرشیا می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد."
+msgstr "© %s ToPersia. All rights to this service (website and mobile apps) are reserved and belong to ToPersia. Copying, republishing, scraping or otherwise using the texts and content of this service, anywhere and in any form, without written permission is prohibited and will be pursued legally."
+
 #: includes/topersia-g-zones.php
 msgid "© مشارکت‌کنندگان OpenStreetMap"
 msgstr "© OpenStreetMap contributors"
@@ -166,6 +171,10 @@ msgstr "Sunny"
 #: includes/topersia-g-map.php
 msgid "آلمانی"
 msgstr "German"
+
+#: includes/topersia-g-legal.php
+msgid "آمستریدا"
+msgstr "Amesterida"
 
 #: includes/topersia-g-zones.php
 msgid "آیین / مراسم سنتی"
@@ -406,6 +415,10 @@ msgstr "Imamzadeh shrine"
 #: includes/topersia-g-weather.php
 msgid "امروز"
 msgstr "Today"
+
+#: includes/topersia-g-legal.php
+msgid "امیرعباس بشاش"
+msgstr "Amirabbas Bashash"
 
 #: topersia-render.php
 msgid "انتخاب شما روی همین دستگاه ذخیره می‌شود."
@@ -1222,6 +1235,10 @@ msgstr "Language family"
 #: includes/topersia-g-map.php
 msgid "خاکی"
 msgstr "Dirt road"
+
+#: includes/topersia-g-legal.php
+msgid "خدمات وب:"
+msgstr "Web services:"
 
 #: includes/topersia-g-map.php
 msgid "خرداد"
@@ -2140,6 +2157,10 @@ msgstr "AI voice"
 msgid "صفحه‌های خبر"
 msgstr "News pages"
 
+#: includes/topersia-g-legal.php
+msgid "صفحه‌های سایت"
+msgstr "Site pages"
+
 #: includes/topersia-g-zones.php
 msgid "صنایع دستی"
 msgstr "Handicrafts"
@@ -2163,6 +2184,10 @@ msgstr "Nature"
 #: includes/topersia-g-map.php
 msgid "طبیعی"
 msgstr "Natural"
+
+#: includes/topersia-g-legal.php
+msgid "طراحی و اجرا:"
+msgstr "Design & development:"
 
 #: includes/topersia-g-map.php
 msgid "طول"

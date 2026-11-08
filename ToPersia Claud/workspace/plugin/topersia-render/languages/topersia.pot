@@ -36,6 +36,11 @@ msgstr ""
 msgid "ToPersia را منبع ترجیحی گوگل کنید"
 msgstr ""
 
+#: includes/topersia-g-legal.php
+#, php-format
+msgid "© %s ToPersia (توپرشیا). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به توپرشیا می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد."
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "© مشارکت‌کنندگان OpenStreetMap"
 msgstr ""
@@ -164,6 +169,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "آلمانی"
+msgstr ""
+
+#: includes/topersia-g-legal.php
+msgid "آمستریدا"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -404,6 +413,10 @@ msgstr ""
 
 #: includes/topersia-g-weather.php
 msgid "امروز"
+msgstr ""
+
+#: includes/topersia-g-legal.php
+msgid "امیرعباس بشاش"
 msgstr ""
 
 #: topersia-render.php
@@ -1220,6 +1233,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "خاکی"
+msgstr ""
+
+#: includes/topersia-g-legal.php
+msgid "خدمات وب:"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2139,6 +2156,10 @@ msgstr ""
 msgid "صفحه‌های خبر"
 msgstr ""
 
+#: includes/topersia-g-legal.php
+msgid "صفحه‌های سایت"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "صنایع دستی"
 msgstr ""
@@ -2161,6 +2182,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "طبیعی"
+msgstr ""
+
+#: includes/topersia-g-legal.php
+msgid "طراحی و اجرا:"
 msgstr ""
 
 #: includes/topersia-g-map.php

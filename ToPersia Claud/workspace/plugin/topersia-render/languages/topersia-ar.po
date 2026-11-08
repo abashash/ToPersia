@@ -37,6 +37,11 @@ msgstr "--post=<id> أو --all أو --queue"
 msgid "ToPersia را منبع ترجیحی گوگل کنید"
 msgstr "اجعل ToPersia مصدرًا مفضلًا في Google"
 
+#: includes/topersia-g-legal.php
+#, php-format
+msgid "© %s ToPersia (توپرشیا). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به توپرشیا می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد."
+msgstr "© %s ToPersia (توبرشيا). جميع حقوق هذه الخدمة (الموقع وتطبيقات الجوال) محفوظة وتعود ملكيتها إلى ToPersia. يُحظر نسخ نصوص هذه الخدمة ومحتواها أو إعادة نشرها أو استخراجها آليًا أو استخدامها بأي شكل وفي أي مكان دون إذن كتابي، ويُلاحق مرتكب ذلك قانونيًا."
+
 #: includes/topersia-g-zones.php
 msgid "© مشارکت‌کنندگان OpenStreetMap"
 msgstr "© مساهمو OpenStreetMap"
@@ -166,6 +171,10 @@ msgstr "مشمس"
 #: includes/topersia-g-map.php
 msgid "آلمانی"
 msgstr "الألمانية"
+
+#: includes/topersia-g-legal.php
+msgid "آمستریدا"
+msgstr "أمستريدا"
 
 #: includes/topersia-g-zones.php
 msgid "آیین / مراسم سنتی"
@@ -406,6 +415,10 @@ msgstr "مرقد إمامزاده"
 #: includes/topersia-g-weather.php
 msgid "امروز"
 msgstr "اليوم"
+
+#: includes/topersia-g-legal.php
+msgid "امیرعباس بشاش"
+msgstr "أمير عباس بشاش"
 
 #: topersia-render.php
 msgid "انتخاب شما روی همین دستگاه ذخیره می‌شود."
@@ -1222,6 +1235,10 @@ msgstr "العائلة اللغوية"
 #: includes/topersia-g-map.php
 msgid "خاکی"
 msgstr "ترابي"
+
+#: includes/topersia-g-legal.php
+msgid "خدمات وب:"
+msgstr "خدمات الويب:"
 
 #: includes/topersia-g-map.php
 msgid "خرداد"
@@ -2140,6 +2157,10 @@ msgstr "صوت بالذكاء الاصطناعي"
 msgid "صفحه‌های خبر"
 msgstr "صفحات الأخبار"
 
+#: includes/topersia-g-legal.php
+msgid "صفحه‌های سایت"
+msgstr "صفحات الموقع"
+
 #: includes/topersia-g-zones.php
 msgid "صنایع دستی"
 msgstr "حرف يدوية"
@@ -2163,6 +2184,10 @@ msgstr "الطبيعة"
 #: includes/topersia-g-map.php
 msgid "طبیعی"
 msgstr "طبيعي"
+
+#: includes/topersia-g-legal.php
+msgid "طراحی و اجرا:"
+msgstr "التصميم والتنفيذ:"
 
 #: includes/topersia-g-map.php
 msgid "طول"

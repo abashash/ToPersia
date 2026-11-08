@@ -6,6 +6,7 @@
  * جهش: عنصر پهن درون صفحه و برداشتن برش ریشه هر دو باید دیده شوند.
  *
  *   node tests/overflow-h.js
+ *   node tests/overflow-h.js --url=/terms/ --url=/en/terms/   (فقط همین نشانی‌ها؛ جهش‌ها همان)
  */
 'use strict';
 
@@ -46,10 +47,11 @@ const verdict = r => r.n > 0 && r.deSW <= r.deCW && 0 === r.moved && 0 === r.wid
 ( async () => {
 	let pass = 0, fail = 0;
 	const t = ( label, ok, note ) => { ok ? pass++ : fail++; console.log( '  ' + ( ok ? '✅' : '❌' ) + ' ' + label + ( ok || ! note ? '' : '   ← ' + note ) ); };
+	const only = process.argv.filter( a => a.startsWith( '--url=' ) ).map( a => a.slice( 6 ) );
 	const missing = WANT.filter( k => ! samples[ k ] );
-	t( 'نمونهٔ هر نوع موج پیدا شد', ! missing.length, missing.join( ' ' ) );
-	const list = { ...PAGES };
-	for ( const k of WANT ) { if ( samples[ k ] ) { list[ k ] = samples[ k ]; } }
+	if ( ! only.length ) { t( 'نمونهٔ هر نوع موج پیدا شد', ! missing.length, missing.join( ' ' ) ); }
+	const list = only.length ? Object.fromEntries( only.map( u => [ u, u ] ) ) : { ...PAGES };
+	if ( ! only.length ) { for ( const k of WANT ) { if ( samples[ k ] ) { list[ k ] = samples[ k ]; } } }
 
 	const b = await chromium.launch();
 	try {

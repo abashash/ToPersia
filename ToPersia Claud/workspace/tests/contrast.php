@@ -431,9 +431,13 @@ $failed_pages = array();
  * snav-check روی هر کدام، در حالت «صفحهٔ واقعی» (هدر واقعی وودمارت،
  * اسکرول واقعی چرخ، دادهٔ خودِ صفحه). کالیبراسیون همان است.
  */
+/* --page= صفحهٔ غیرنوعی (صفحهٔ اول، صفحه‌های ثابت): کنتراست سنجیده می‌شود، snav-check نه — نوار بخش‌ها
+ * و مودال فهرست فقط روی صفحهٔ موجودیت‌اند و کاوشگرش آن ساختار را فرض می‌کند (دستهٔ 46 · P5-D507). */
 $live_urls = array();
+$no_snav   = array();
 foreach ( $argv as $arg ) {
 	if ( 0 === strpos( $arg, '--url=' ) ) { $live_urls[] = substr( $arg, 6 ); }
+	if ( 0 === strpos( $arg, '--page=' ) ) { $live_urls[] = substr( $arg, 7 ); $no_snav[ substr( $arg, 7 ) ] = true; }
 }
 if ( $live_urls ) {
 	$pages = array();
@@ -484,6 +488,9 @@ if ( 2 === $motion['code'] ) { $wx_env ++; } elseif ( $motion['code'] ) { $wx_fa
 
 /* نوار بخش‌ها — هر اجرا، مثل دروازهٔ حرکت.  P5-D223 · روی نسخهٔ محلی: هر صفحه */
 foreach ( $live_urls ? $live_urls : array( tp_file_url( $snav_dir . '/province.html' ) ) as $snav_url ) {
+	if ( isset( $no_snav[ $snav_url ] ) ) { $wx_out[] = "
+  ▸ " . $snav_url . "
+  snav-check: بیرون از زنجیره — صفحهٔ غیرنوعی (--page)"; continue; }
 	$snav_run = tp_run_driver( 'snav-check.js', $chrome, $snav_url );
 	$wx_out[] = ( $live_urls ? "\n  ▸ " . $snav_url : '' ) . $snav_run['out'];
 	if ( 2 === $snav_run['code'] ) { $wx_env ++; } elseif ( $snav_run['code'] ) { $wx_fail ++; }

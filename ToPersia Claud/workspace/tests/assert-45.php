@@ -55,3 +55,58 @@ $w45_str = function ( $c ) {
 	return true;
 };
 tp441_mut( 'رشته‌های صفحهٔ اول انگلیسی و عربی دارند — جهش: یکی بی ترجمه', $w45_str, $w45_cat, array_diff_key( $w45_cat, array( 'ارز' => 1 ) ) );
+
+/* ─── بخش الف·۱–۲ — صفحه‌های ثابت و پاورقی ─── */
+$w45_legal = (string) @file_get_contents( $w45_root . '/plugin/topersia-render/includes/topersia-g-legal.php' );
+$w45_lp    = (string) @file_get_contents( $w45_root . '/scripts/tp-legal-pages.php' );
+
+$w45_lreg = function ( $loader ) use ( $w45_i18n ) {
+	return false !== strpos( $loader, "'includes/topersia-g-legal.php'" ) && false !== strpos( $w45_i18n, "'includes/topersia-g-legal.php'" );
+};
+tp441_mut( 'پاورقی بار و برای کاتالوگ اسکن می‌شود — جهش: بار نشود', $w45_lreg, $w45_loader, str_replace( ", 'includes/topersia-g-legal.php'", '', $w45_loader ) );
+
+$w45_ext = function ( $s ) {
+	return false !== strpos( $s, "\$ext  = ' target=\"_blank\" rel=\"noopener nofollow\"';" ) && 2 === substr_count( $s, '"\' . $ext . \'>\' . esc_html__(' );
+};
+tp441_mut( 'دو پیوند اعتبار _blank با noopener nofollow و لنگر فقط نام — جهش: بی nofollow', $w45_ext, $w45_legal, str_replace( 'rel="noopener nofollow"', 'rel="noopener"', $w45_legal ) );
+
+$w45_col2 = function ( $s ) {
+	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
+	return false === strpos( $code, "'copyrights2'" ) && false !== strpos( $code, "'copyrights' === \$slug" ) && false !== strpos( $code, 'is_admin()' );
+};
+tp441_mut( 'فقط ستون نخست کپی‌رایت وودمارت؛ ستون دوم (payments) دست نمی‌خورد — جهش: copyrights2 هم', $w45_col2, $w45_legal, str_replace( "if ( 'copyrights' === \$slug )", "if ( 'copyrights2' === \$slug ) { return ''; }\n\tif ( 'copyrights' === \$slug )", $w45_legal ) );
+
+$w45_year = function ( $s ) {
+	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
+	return false !== strpos( $code, "topersia_g_fa( wp_date( 'Y' ) )" ) && 0 === preg_match( '/(?<![\w$])20\d\d(?![\w])/', $code );
+};
+tp441_mut( 'سال پاورقی از ساعت سرور به خط زبان صفحه، بی سال ثابت — جهش: سال ثابت', $w45_year, $w45_legal, str_replace( "topersia_g_fa( wp_date( 'Y' ) )", "'2026'", $w45_legal ) );
+
+$w45_pub = function ( $s ) {
+	return false !== strpos( $s, 'topersia_g_published( array( $id ) )' ) && false !== strpos( $s, "'post_status'      => 'publish'" );
+};
+tp441_mut( 'پیوند پاورقی فقط به صفحۀ منتشرشدۀ زبان جاری — جهش: بی دروازه', $w45_pub, $w45_legal, str_replace( 'topersia_g_published( array( $id ) )', 'array( $id )', $w45_legal ) );
+
+$w45_fstr = function ( $c ) {
+	foreach ( array( 'خدمات وب:', 'آمستریدا', 'طراحی و اجرا:', 'امیرعباس بشاش', 'صفحه‌های سایت' ) as $k ) {
+		if ( empty( $c[ $k ]['en'] ) || empty( $c[ $k ]['ar'] ) ) { return false; }
+	}
+	foreach ( $c as $k => $v ) {
+		if ( 0 === strpos( $k, '© %s ToPersia' ) ) { return 0 === strpos( (string) $v['en'], '© %s ToPersia.' ) && 0 === strpos( (string) $v['ar'], '© %s ToPersia (توبرشيا).' ); }
+	}
+	return false;
+};
+tp441_mut( 'متن پاورقی سه‌زبانه در کاتالوگ — جهش: عربی کپی‌رایت نباشد', $w45_fstr, $w45_cat, array_map( function ( $v ) { return isset( $v['ar'] ) && 0 === strpos( (string) $v['ar'], '© %s' ) ? array( 'en' => $v['en'], 'ar' => '' ) : $v; }, $w45_cat ) );
+
+/* اسکریپت ساخت صفحه‌ها: فقط محلی، متن از دو فایل، یادداشت و GA و جای‌نگهدار. */
+$w45_lps = function ( $s ) {
+	return false !== strpos( $s, "'local' !== wp_get_environment_type()" )
+		&& false !== strpos( $s, "0 === strpos( \$ln, '>' )" )
+		&& false !== strpos( $s, "is_plugin_active( 'google-site-kit/google-site-kit.php' )" )
+		&& false !== strpos( $s, "! \$sitekit && false !== strpos( \$ln, 'Google Analytics' )" )
+		&& false !== strpos( $s, "(int) get_option( 'wp_page_for_privacy_policy' )" )
+		&& false !== strpos( $s, '$warn[]' );
+};
+tp441_mut( 'ساخت صفحه‌ها: خط یادداشت بیرون — جهش: یادداشت بماند', $w45_lps, $w45_lp, str_replace( "0 === strpos( \$ln, '>' ) || ", '', $w45_lp ) );
+tp441_mut( 'ساخت صفحه‌ها: بند GA فقط با Site Kit — جهش: همیشه بیاید', $w45_lps, $w45_lp, str_replace( "! \$sitekit && false !== strpos( \$ln, 'Google Analytics' )", 'false', $w45_lp ) );
+tp441_mut( 'ساخت صفحه‌ها: حریم خصوصی همان صفحۀ پیش‌نویس موجود — جهش: صفحۀ دوم با نامک', $w45_lps, $w45_lp, str_replace( "(int) get_option( 'wp_page_for_privacy_policy' )", "\$find( \$slug, 'fa' )", $w45_lp ) );
