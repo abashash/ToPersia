@@ -1157,4 +1157,12 @@ return array(
 	'یافته: %s' => array( 'en' => 'Found: %s', 'ar' => 'النتائج: %s' ),
 	'مشاهدۀ همه' => array( 'en' => 'View all', 'ar' => 'عرض الكل' ),
 	'مشاهدۀ صفحه' => array( 'en' => 'View page', 'ar' => 'عرض الصفحة' ),
+	/* آرشیو سراسری خبر /news/ — دستۀ 48 */
+	'اخبار گردشگری ایران' => array( 'en' => 'Iran travel news', 'ar' => 'أخبار السياحة في إيران' ),
+	'مکان‌های مرتبط' => array( 'en' => 'Related places', 'ar' => 'الأماكن ذات الصلة' ),
+	'منبع:' => array( 'en' => 'Source:', 'ar' => 'المصدر:' ),
+	'استان یا شهر' => array( 'en' => 'Province or city', 'ar' => 'المحافظة أو المدينة' ),
+	'همۀ مکان‌ها' => array( 'en' => 'All places', 'ar' => 'كل الأماكن' ),
+	'نمایش' => array( 'en' => 'Show', 'ar' => 'عرض' ),
+	'هنوز خبری منتشر نشده است.' => array( 'en' => 'No news has been published yet.', 'ar' => 'لم تُنشر أي أخبار بعد.' ),
 );

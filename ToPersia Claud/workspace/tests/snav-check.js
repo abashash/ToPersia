@@ -586,6 +586,7 @@ async function mobileChecks( page ) {
 	/* فاصلهٔ هر دو باکسِ پشت‌سرهم در کل صفحه.  ۴٫۲٫۳ بند ۳ */
 	const gaps = await page.evaluate( `(() => {
 		const grid = document.querySelector( '.tp-content-grid' );
+		if ( ! grid ) { return []; }   /* صفحۀ بی ستون محتوا (آرشیو خبر، صفحۀ اول) — بی‌موضوع، نه خطا.  دستۀ 48 */
 		const boxes = [].slice.call( grid.querySelectorAll( ':scope > .tp-main-col > *, :scope > .tp-rail > *' ) )
 			.filter( el => el.getClientRects().length && 'none' !== getComputedStyle( el ).display )
 			.map( el => ( { id: el.id || el.className, r: el.getBoundingClientRect() } ) )

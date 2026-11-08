@@ -1541,12 +1541,105 @@ function topersia_schema_home_json( $post_id ) {
 	return $json ? $json : '';
 }
 
+/**
+ * گراف آرشیو سراسری خبر /news/ — CollectionPage + ItemList از NewsArticle (SPRINT-4.4 فاز ۶٫۱، P5-D260 · دستۀ 48).
+ *
+ * فقط خبرهای همان صفحه (کوئری اصلی، که render به منتشرشده، هم‌زبان و غیرنمونه
+ * محدود کرده) و فقط وقتی صفحه noindex نیست (render: `topersia_g_news_archive_thin()`
+ * — پالایش‌شده یا زیر ۳ خبر). نام صفحه همان عنوان سند (`document_title_parts`).
+ *
+ * @param int[]  $ids  شناسۀ خبرهای صفحه، به ترتیب نمایش.
+ * @param string $url  نشانی canonical صفحه.
+ * @param int    $from جایگاه نخستین خبر (برای صفحۀ N).
+ */
+function topersia_schema_news_archive_json( $ids, $url, $from = 1 ) {
+
+	$ids = array_values( array_filter( array_map( 'absint', (array) $ids ) ) );
+
+	if ( ! $ids || '' === (string) $url ) {
+		return '';
+	}
+
+	$home  = topersia_schema_home();
+	$org   = topersia_schema_organization();
+	$site  = topersia_schema_website();
+	$parts = apply_filters( 'document_title_parts', array( 'title' => (string) post_type_archive_title( '', false ) ) );
+	$name  = wp_strip_all_tags( (string) ( is_array( $parts ) && isset( $parts['title'] ) ? $parts['title'] : '' ) );
+	$items = array();
+
+	foreach ( $ids as $i => $id ) {
+		$items[] = array(
+			'@type'    => 'ListItem',
+			'position' => (int) $from + $i,
+			'item'     => array(
+				'@type'         => 'NewsArticle',
+				'headline'      => wp_strip_all_tags( (string) get_the_title( $id ) ),
+				'url'           => (string) get_permalink( $id ),
+				'datePublished' => (string) get_post_time( 'c', true, $id ),
+				'dateModified'  => (string) get_post_modified_time( 'c', true, $id ),
+				'inLanguage'    => topersia_schema_lang(),
+				'publisher'     => array( '@id' => $org['@id'] ),
+			),
+		);
+	}
+
+	$graph = array(
+		$org,
+		$site,
+		array(
+			'@type'      => 'CollectionPage',
+			'@id'        => $url . '#webpage',
+			'url'        => $url,
+			'name'       => $name,
+			'isPartOf'   => array( '@id' => $site['@id'] ),
+			'inLanguage' => topersia_schema_lang(),
+			'breadcrumb' => array( '@id' => $url . '#breadcrumb' ),
+			'mainEntity' => array( '@id' => $url . '#list' ),
+		),
+		array(
+			'@type'           => 'ItemList',
+			'@id'             => $url . '#list',
+			'itemListOrder'   => 'https://schema.org/ItemListOrderDescending',
+			'numberOfItems'   => count( $items ),
+			'itemListElement' => $items,
+		),
+		array(
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $url . '#breadcrumb',
+			'itemListElement' => array(
+				array( '@type' => 'ListItem', 'position' => 1, 'name' => 'ToPersia', 'item' => $home ),
+				array( '@type' => 'ListItem', 'position' => 2, 'name' => $name, 'item' => $url ),
+			),
+		),
+	);
+
+	$json = wp_json_encode( topersia_schema_prune( array( '@context' => 'https://schema.org', '@graph' => $graph ) ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_PRETTY_PRINT );
+
+	return $json ? $json : '';
+}
+
 /** انتشار گراف در head. */
 add_action( 'wp_head', 'topersia_schema_output', 5 );
 
 function topersia_schema_output() {
 
 	if ( ! topersia_schema_core_ready() ) {
+		return;
+	}
+
+	/* آرشیو سراسری خبر: CollectionPage + ItemList — فقط وقتی نمایه‌پذیر است.  دستۀ 48 */
+	if ( is_post_type_archive( 'tpc_news' ) && ! is_feed() ) {
+		if ( function_exists( 'topersia_g_news_archive_thin' ) && ! topersia_g_news_archive_thin() ) {
+			global $wp_query;
+			$ids  = function_exists( 'topersia_g_published' ) ? topersia_g_published( array_map( 'absint', wp_list_pluck( (array) $wp_query->posts, 'ID' ) ) ) : array();
+			$per  = max( 1, (int) $wp_query->get( 'posts_per_page' ) );
+			$page = max( 1, (int) get_query_var( 'paged' ) );
+			$json = topersia_schema_news_archive_json( $ids, (string) ( function_exists( 'topersia_g_news_archive_url' ) ? topersia_g_news_archive_url( $page ) : get_post_type_archive_link( 'tpc_news' ) ), ( $page - 1 ) * $per + 1 );
+			if ( '' !== $json ) {
+				echo "\n<!-- ToPersia Structured Data -->\n";
+				echo '<script type="application/ld+json">' . "\n" . $json . "\n" . '</script>' . "\n";
+			}
+		}
 		return;
 	}
 

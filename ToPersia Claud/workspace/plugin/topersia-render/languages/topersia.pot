@@ -259,6 +259,10 @@ msgstr ""
 msgid "اخبار %s"
 msgstr ""
 
+#: includes/topersia-g-news.php
+msgid "اخبار گردشگری ایران"
+msgstr ""
+
 #: topersia-render.php
 msgid "ارتباط برقرار نشد."
 msgstr ""
@@ -315,6 +319,10 @@ msgstr ""
 
 #: includes/topersia-g-relreg.php
 msgid "استان مسیر"
+msgstr ""
+
+#: templates/news-archive.php
+msgid "استان یا شهر"
 msgstr ""
 
 #: topersia-render.php
@@ -2998,6 +3006,10 @@ msgstr ""
 msgid "منبع رسمی"
 msgstr ""
 
+#: includes/topersia-g-news.php
+msgid "منبع:"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr ""
@@ -3152,6 +3164,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "مکان‌های مذهبی میزبان"
+msgstr ""
+
+#: includes/topersia-g-news.php
+msgid "مکان‌های مرتبط"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3354,6 +3370,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "نمای کامل تصویر"
+msgstr ""
+
+#: templates/news-archive.php
+msgid "نمایش"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -3598,6 +3618,10 @@ msgstr ""
 msgid "همۀ منابع (%s)"
 msgstr ""
 
+#: templates/news-archive.php
+msgid "همۀ مکان‌ها"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
 msgstr ""
@@ -3608,6 +3632,10 @@ msgstr ""
 
 #: templates/news-list.php
 msgid "هنوز خبری برای این مکان نیست."
+msgstr ""
+
+#: templates/news-archive.php
+msgid "هنوز خبری منتشر نشده است."
 msgstr ""
 
 #: includes/topersia-g-zones.php

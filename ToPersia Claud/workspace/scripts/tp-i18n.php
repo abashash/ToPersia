@@ -51,6 +51,7 @@ $FILES = array(
 	'includes/topersia-g-home.php',
 	'includes/topersia-g-legal.php',
 	'templates/news-list.php',
+	'templates/news-archive.php',
 );
 
 $LOCALES = array(

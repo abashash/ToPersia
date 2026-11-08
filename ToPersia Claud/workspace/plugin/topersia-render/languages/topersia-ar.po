@@ -260,6 +260,10 @@ msgstr "الأخبار"
 msgid "اخبار %s"
 msgstr "أخبار %s"
 
+#: includes/topersia-g-news.php
+msgid "اخبار گردشگری ایران"
+msgstr "أخبار السياحة في إيران"
+
 #: topersia-render.php
 msgid "ارتباط برقرار نشد."
 msgstr "تعذّر الاتصال."
@@ -317,6 +321,10 @@ msgstr "محافظة"
 #: includes/topersia-g-relreg.php
 msgid "استان مسیر"
 msgstr "محافظة على المسار"
+
+#: templates/news-archive.php
+msgid "استان یا شهر"
+msgstr "المحافظة أو المدينة"
 
 #: topersia-render.php
 msgid "استاندارد"
@@ -2999,6 +3007,10 @@ msgstr "المصدر الأصلي:"
 msgid "منبع رسمی"
 msgstr "المصدر الرسمي"
 
+#: includes/topersia-g-news.php
+msgid "منبع:"
+msgstr "المصدر:"
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr "قديم"
@@ -3154,6 +3166,10 @@ msgstr "مواقع دينية مرتبطة بهذه الشخصية"
 #: includes/topersia-g-map.php
 msgid "مکان‌های مذهبی میزبان"
 msgstr "المواقع الدينية المضيفة"
+
+#: includes/topersia-g-news.php
+msgid "مکان‌های مرتبط"
+msgstr "الأماكن ذات الصلة"
 
 #: includes/topersia-g-map.php
 msgid "مکان‌های مشمول این قوانین"
@@ -3356,6 +3372,10 @@ msgstr "خريطة تخطيطية"
 #: includes/topersia-g-zones.php
 msgid "نمای کامل تصویر"
 msgstr "عرض الصورة كاملة"
+
+#: templates/news-archive.php
+msgid "نمایش"
+msgstr "عرض"
 
 #: includes/topersia-g-zones.php
 msgid "نمایش اطلاعات نشانگر"
@@ -3599,6 +3619,10 @@ msgstr "كل الثقافة والفعاليات"
 msgid "همۀ منابع (%s)"
 msgstr "جميع المصادر (%s)"
 
+#: templates/news-archive.php
+msgid "همۀ مکان‌ها"
+msgstr "كل الأماكن"
+
 #: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
 msgstr "المجاورة"
@@ -3610,6 +3634,10 @@ msgstr "فنان"
 #: templates/news-list.php
 msgid "هنوز خبری برای این مکان نیست."
 msgstr "لا توجد أخبار عن هذا المكان بعد."
+
+#: templates/news-archive.php
+msgid "هنوز خبری منتشر نشده است."
+msgstr "لم تُنشر أي أخبار بعد."
 
 #: includes/topersia-g-zones.php
 msgid "هوای این روزها"

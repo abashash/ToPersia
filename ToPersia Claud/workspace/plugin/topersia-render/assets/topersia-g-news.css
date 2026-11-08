@@ -1,0 +1,39 @@
+/* آرشیو سراسری خبر /news/ — SPRINT-4.4 فاز ۶٫۱ (P5-D260) · دستۀ 48
+   فقط توکن --tp-*؛ کاشی از توکن کاشی (P5-D245)؛ متن ریز --tp-tile-text (P5-D184)؛ متن پیوند --tp-primary-text (P5-D188).
+   فقط روی آرشیو بار می‌شود (topersia-g-news.php). */
+html .tp-page.tp-news-archive .tp-news-filter{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 20px}
+html .tp-page.tp-news-archive .tp-news-filter label{color:var(--tp-text);font-size:calc(.9 * var(--tp-rem))}
+html .tp-page.tp-news-archive .tp-news-filter select{box-sizing:border-box;flex:0 1 320px;inline-size:auto;max-inline-size:100%;min-block-size:44px;padding:8px 12px;
+  border-radius:var(--tp-tile-radius,12px);border:1px solid var(--tp-text-2);background:var(--tp-surface);color:var(--tp-text-strong);font:inherit;font-size:var(--tp-rem)}
+html .tp-page.tp-news-archive .tp-news-filter button{min-block-size:44px;padding:8px 18px;border-radius:var(--tp-tile-radius,12px);border:1px solid var(--tp-tile-border);
+  background:var(--tp-soft);color:var(--tp-primary-text);font:inherit;font-weight:700;cursor:pointer}
+html .tp-page.tp-news-archive .tp-news-filter button:hover{border-color:var(--tp-primary)}
+html .tp-page.tp-news-archive .tp-news-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,18px)}
+html .tp-page.tp-news-archive .tp-news-card{display:flex;flex-direction:column;overflow:hidden;border-radius:var(--tp-tile-radius,12px);
+  background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);box-shadow:var(--tp-shadow-soft)}
+html .tp-page.tp-news-archive .tp-news-card:hover{border-color:var(--tp-primary)}
+html .tp-page.tp-news-archive .tp-news-card__media{display:grid;place-items:center;aspect-ratio:16/10;overflow:hidden;background:var(--tp-surface-2,var(--tp-surface));color:var(--tp-tile-text)}
+html .tp-page.tp-news-archive .tp-news-card__media img{display:block;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover}
+html .tp-page.tp-news-archive .tp-news-card__media svg{inline-size:40px;block-size:40px}
+html .tp-page.tp-news-archive .tp-news-card__media--icon{aspect-ratio:auto;block-size:72px}
+html .tp-page.tp-news-archive .tp-news-card__body{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;padding:14px 16px 16px}
+html .tp-page.tp-news-archive .tp-news-card__title{margin:0;font-size:calc(1.02 * var(--tp-rem));line-height:1.6;font-weight:800}
+html .tp-page.tp-news-archive .tp-news-card__title a{color:var(--tp-text-strong);text-decoration:none}
+html .tp-page.tp-news-archive .tp-news-card__title a:hover{color:var(--tp-primary-text)}
+html .tp-page.tp-news-archive .tp-news-card__meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin:0;color:var(--tp-tile-text);font-size:calc(.8 * var(--tp-rem))}
+html .tp-page.tp-news-archive .tp-news-card__sum{margin:0;color:var(--tp-text);font-size:calc(.88 * var(--tp-rem));line-height:1.8}
+html .tp-page.tp-news-archive .tp-news-card__places{display:flex;flex-wrap:wrap;gap:6px;margin:auto 0 0;padding:4px 0 0;list-style:none}
+html .tp-page.tp-news-archive .tp-news-card__places a{display:inline-flex;align-items:center;min-block-size:32px;padding:4px 12px;border-radius:999px;
+  border:1px solid var(--tp-tile-border);background:var(--tp-soft);color:var(--tp-primary-text);font-size:calc(.8 * var(--tp-rem));text-decoration:none}
+html .tp-page.tp-news-archive .tp-news-card__places a:hover{border-color:var(--tp-primary)}
+html .tp-page.tp-news-archive :is(a,select,button):focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
+html .tp-page.tp-news-archive .tp-news-empty{padding:24px 0}
+@media (max-width:1024px){
+  html .tp-page.tp-news-archive .tp-news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  html .tp-page.tp-news-archive .tp-news-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:no-preference){
+  html .tp-page.tp-news-archive :is(.tp-news-card,.tp-news-card__places a){transition:border-color .2s}
+}

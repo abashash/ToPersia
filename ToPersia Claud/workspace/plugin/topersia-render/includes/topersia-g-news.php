@@ -304,6 +304,160 @@ if ( ! function_exists( 'topersia_g_news_title' ) ) {
 	}
 }
 
+/* ── آرشیو سراسری /news/ — SPRINT-4.4 فاز ۶٫۱ (P5-D260) · دستۀ 48 ──────────
+ *
+ * فقط خبر منتشرشده، بی‌گذرواژه، هم‌زبان و غیرنمونه (`_tp_sample`)؛ کوئری اصلی
+ * وردپرس خودش صفحه‌بندی و ۴۰۴ بیرون از بازه را می‌دهد. پالایش `?tp_place=`
+ * (استان یا شهر) همان تجمیع رو به نیای `topersia_g_news_query()` است، با
+ * noindex و canonical به نشانی بی‌پالایش. زیر ۳ خبر noindex, follow.
+ * تراشه‌های موضوع (`tpc_news_topic`) نیست — پرسش ۳ معمار هنوز باز است.
+ */
+
+/** شمار خبر در هر صفحۀ آرشیو. */
+if ( ! defined( 'TOPERSIA_NEWS_PER_PAGE' ) ) {
+	define( 'TOPERSIA_NEWS_PER_PAGE', 12 );
+}
+
+/** آیا این درخواست آرشیو سراسری خبر است. */
+if ( ! function_exists( 'topersia_g_news_is_archive' ) ) {
+	function topersia_g_news_is_archive() {
+		return topersia_g_news_on() && function_exists( 'is_post_type_archive' ) && is_post_type_archive( 'tpc_news' ) && ! is_feed();
+	}
+}
+
+/** مکان پالایش (شناسۀ منتشرشدۀ استان یا شهر) یا صفر. */
+if ( ! function_exists( 'topersia_g_news_filter_place' ) ) {
+	function topersia_g_news_filter_place() {
+		$id = absint( function_exists( 'get_query_var' ) ? get_query_var( 'tp_place' ) : 0 );
+		if ( ! $id || ! in_array( (string) get_post_type( $id ), array( 'tp_province', 'tp_city' ), true ) ) {
+			return 0;
+		}
+		return topersia_g_published( array( $id ) ) ? $id : 0;
+	}
+}
+
+/** شناسۀ همۀ خبرهای نمایش‌پذیر زبان جاری (اختیاری: فقط یک مکان) — منتشرشده و غیرنمونه. */
+if ( ! function_exists( 'topersia_g_news_archive_ids' ) ) {
+	function topersia_g_news_archive_ids( $place_id = 0 ) {
+
+		if ( $place_id ) {
+			$ids = topersia_g_news_query( $place_id, 0, 0 );
+			$ids = $ids['ids'];
+		} else {
+			$ids = get_posts( array(
+				'post_type'        => 'tpc_news',
+				'post_status'      => 'publish',
+				'has_password'     => false,
+				'posts_per_page'   => -1,
+				'fields'           => 'ids',
+				'no_found_rows'    => true,
+				'suppress_filters' => false,
+			) );
+		}
+
+		$out = array();
+		foreach ( topersia_g_published( array_map( 'absint', (array) $ids ) ) as $id ) {
+			if ( ! metadata_exists( 'post', $id, '_tp_sample' ) ) {
+				$out[] = $id;
+			}
+		}
+
+		return $out;
+	}
+}
+
+/** نشان مکان‌های مرتبط یک خبر با پیوند — از دروازۀ انتشار، به زبان جاری. */
+if ( ! function_exists( 'topersia_g_news_badges' ) ) {
+	function topersia_g_news_badges( $news_id ) {
+
+		$out = '';
+		foreach ( topersia_g_published( topersia_g_news_places( $news_id ) ) as $pid ) {
+			$out .= '<li><a href="' . esc_url( (string) get_permalink( $pid ) ) . '">' . esc_html( topersia_g_title( $pid ) ) . '</a></li>';
+		}
+
+		return '' !== $out ? '<ul class="tp-news-card__places" aria-label="' . esc_attr__( 'مکان‌های مرتبط', 'topersia' ) . '">' . $out . '</ul>' : '';
+	}
+}
+
+/**
+ * کارت آرشیو: تصویر، تیتر، خلاصه، تاریخ (هجری خورشیدی در fa، میلادی در en و ar —
+ * `topersia_g_date_fa()`)، منبع خبر و نشان مکان‌های مرتبط با پیوند.
+ * پیوند نشان‌ها درون پیوند کارت نمی‌نشیند؛ پس کارت `<article>` است، نه `<a>`.
+ */
+if ( ! function_exists( 'topersia_g_news_archive_card' ) ) {
+	function topersia_g_news_archive_card( $news_id ) {
+
+		$url  = (string) get_permalink( $news_id );
+		$date = (string) get_post_time( 'Y-m-d', false, $news_id );
+		$sum  = topersia_g_text( $news_id, 'short_summary' );
+		if ( '' === $sum && function_exists( 'get_the_excerpt' ) ) {
+			$sum = trim( wp_strip_all_tags( (string) get_the_excerpt( $news_id ) ) );
+		}
+		$src = trim( (string) topersia_g_text( $news_id, 'news_source_name' ) );
+		$img = topersia_g_card_image( $news_id );
+		$pic = ( $img && function_exists( 'wp_get_attachment_image' ) ) ? (string) wp_get_attachment_image( $img, 'medium_large', false, array(
+			'alt'      => '',
+			'loading'  => 'lazy',
+			'decoding' => 'async',
+			'sizes'    => '(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw',
+		) ) : '';
+		$cls = 'tp-news-card__media';
+		if ( '' === $pic ) {
+			$cls .= ' tp-news-card__media--icon';   /* بی تصویر: نوار کوتاه آیکون، نه جای خالی ۱۶:۱۰ */
+			$pic = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">'
+				. '<rect x="3" y="4" width="15" height="16" rx="2"/><path d="M18 8h3v10a2 2 0 0 1-2 2M7 8h7M7 12h7M7 16h4"/></svg>';
+		}
+
+		return '<article class="tp-news-card">'
+			. '<a class="' . esc_attr( $cls ) . '" href="' . esc_url( $url ) . '" tabindex="-1" aria-hidden="true">' . $pic . '</a>'
+			. '<div class="tp-news-card__body">'
+			. '<h2 class="tp-news-card__title"><a href="' . esc_url( $url ) . '">' . esc_html( get_the_title( $news_id ) ) . '</a></h2>'
+			. ( '' !== $date ? '<p class="tp-news-card__meta"><time datetime="' . esc_attr( $date ) . '">' . esc_html( topersia_g_date_fa( $date ) ) . '</time>'
+				. ( '' !== $src ? '<span class="tp-news-card__src">' . esc_html__( 'منبع:', 'topersia' ) . ' <bdi>' . esc_html( $src ) . '</bdi></span>' : '' ) . '</p>' : '' )
+			. ( '' !== $sum ? '<p class="tp-news-card__sum tp-justify">' . esc_html( $sum ) . '</p>' : '' )
+			. topersia_g_news_badges( $news_id )
+			. '</div></article>';
+	}
+}
+
+/** گزینه‌های پالایش: استان‌ها و شهرهای منتشرشده‌ای که دست‌کم یک خبر نمایش‌پذیر دارند. */
+if ( ! function_exists( 'topersia_g_news_filter_options' ) ) {
+	function topersia_g_news_filter_options() {
+
+		$pool = array( 'tp_province' => array(), 'tp_city' => array() );   /* استان‌ها پیش از شهرها */
+		foreach ( topersia_g_news_archive_ids() as $nid ) {
+			$ids = array_merge( topersia_g_news_places( $nid ), array_map( 'absint', (array) get_post_meta( $nid, '_tp_news_ancestor' ) ) );
+			foreach ( topersia_g_published( array_values( array_unique( array_filter( $ids ) ) ) ) as $pid ) {
+				$type = (string) get_post_type( $pid );
+				if ( in_array( $type, array( 'tp_province', 'tp_city' ), true ) ) {
+					$pool[ $type ][ $pid ] = topersia_g_title( $pid );
+				}
+			}
+		}
+		foreach ( $pool as $type => $list ) {
+			asort( $list );
+			$pool[ $type ] = $list;
+		}
+
+		return array_filter( $pool );
+	}
+}
+
+/** نشانی آرشیو، صفحۀ N (بی پالایش). */
+if ( ! function_exists( 'topersia_g_news_archive_url' ) ) {
+	function topersia_g_news_archive_url( $page = 1 ) {
+		$url = (string) get_post_type_archive_link( 'tpc_news' );
+		return ( $page > 1 && '' !== $url ) ? trailingslashit( $url ) . 'page/' . (int) $page . '/' : $url;
+	}
+}
+
+/** آیا آرشیو noindex است: پالایش‌شده یا کمتر از ۳ خبر نمایش‌پذیر. */
+if ( ! function_exists( 'topersia_g_news_archive_thin' ) ) {
+	function topersia_g_news_archive_thin() {
+		return topersia_g_news_filter_place() > 0 || count( topersia_g_news_archive_ids() ) < 3;
+	}
+}
+
 /* ── هوک‌ها — فقط وقتی tpc_news هست ──────────────────────────────── */
 
 if ( function_exists( 'add_action' ) ) {
@@ -523,4 +677,84 @@ if ( function_exists( 'add_action' ) ) {
 
 		return $content . '<div class="tp-page tp-news-extra">' . $src . topersia_g_gps_link() . '</div>';
 	}, 20 );
+
+	/* ── آرشیو سراسری /news/ (دستۀ 48) ── */
+	add_filter( 'query_vars', function ( $vars ) {
+		$vars[] = 'tp_place';
+		return $vars;
+	} );
+
+	/* کوئری اصلی: فقط نمایش‌پذیر، ۱۲ در صفحه؛ پالایش با post__in همان تجمیع. ۴۰۴ بیرون از بازه از خود وردپرس. */
+	add_action( 'pre_get_posts', function ( $q ) {
+		if ( is_admin() || ! $q->is_main_query() || ! $q->is_post_type_archive( 'tpc_news' ) || $q->is_feed() || ! topersia_g_news_on() ) {
+			return;
+		}
+		$q->set( 'posts_per_page', TOPERSIA_NEWS_PER_PAGE );
+		$q->set( 'post_status', 'publish' );
+		$q->set( 'has_password', false );
+		$q->set( 'orderby', 'date' );
+		$q->set( 'order', 'DESC' );
+		$q->set( 'meta_query', array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ) );
+		$place = absint( $q->get( 'tp_place' ) );
+		if ( $place ) {
+			$ids = in_array( (string) get_post_type( $place ), array( 'tp_province', 'tp_city' ), true ) ? topersia_g_news_archive_ids( $place ) : array();
+			$q->set( 'post__in', $ids ? $ids : array( 0 ) );
+		}
+	} );
+
+	add_filter( 'template_include', function ( $template ) {
+		if ( ! topersia_g_news_is_archive() ) {
+			return $template;
+		}
+		$file = topersia_render_path() . 'templates/news-archive.php';
+		return is_file( $file ) ? $file : $template;
+	}, 99 );
+
+	add_action( 'wp_enqueue_scripts', function () {
+		if ( topersia_g_news_is_archive() && function_exists( 'topersia_render_url' ) ) {
+			wp_enqueue_style( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-news.css' ) );
+		}
+	}, 30 );
+
+	add_filter( 'wp_robots', function ( $robots ) {
+		if ( topersia_g_news_is_archive() && topersia_g_news_archive_thin() ) {
+			unset( $robots['index'], $robots['max-image-preview'] );
+			$robots['noindex'] = true;
+			if ( empty( $robots['nofollow'] ) ) {
+				$robots['follow'] = true;
+			}
+		}
+		return $robots;
+	}, 99 );
+
+	add_filter( 'rank_math/frontend/robots', function ( $robots ) {
+		if ( topersia_g_news_is_archive() && topersia_g_news_archive_thin() ) {
+			$robots['index'] = 'noindex';
+			if ( ! isset( $robots['follow'] ) || 'nofollow' !== $robots['follow'] ) {
+				$robots['follow'] = 'follow';
+			}
+		}
+		return $robots;
+	}, 99 );
+
+	/* canonical: صفحۀ N خودش؛ پالایش‌شده به نشانی بی‌پالایش. */
+	$topersia_news_arch_url = function ( $url ) {
+		return topersia_g_news_is_archive() ? topersia_g_news_archive_url( topersia_g_news_filter_place() ? 1 : max( 1, (int) get_query_var( 'paged' ) ) ) : $url;
+	};
+	add_filter( 'get_canonical_url', $topersia_news_arch_url, 99 );
+	add_filter( 'rank_math/frontend/canonical', $topersia_news_arch_url, 99 );
+
+	$topersia_news_arch_title = function () {
+		$place = topersia_g_news_filter_place();
+		return $place ? topersia_g_news_title( $place ) : __( 'اخبار گردشگری ایران', 'topersia' );
+	};
+	add_filter( 'document_title_parts', function ( $parts ) use ( $topersia_news_arch_title ) {
+		if ( topersia_g_news_is_archive() ) {
+			$parts['title'] = $topersia_news_arch_title();
+		}
+		return $parts;
+	}, 99 );
+	add_filter( 'rank_math/frontend/title', function ( $title ) use ( $topersia_news_arch_title ) {
+		return topersia_g_news_is_archive() ? $topersia_news_arch_title() . ' | ' . get_bloginfo( 'name' ) : $title;
+	}, 99 );
 }
