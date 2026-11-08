@@ -1,0 +1,94 @@
+<?php
+/**
+ * دستۀ 48 — بخش ۱: اصلاح‌های صفحۀ اول (P5-D528 · P5-D529 · P5-D530 · P5-D531، گالری بی سوراخ).
+ * از assert.php بار می‌شود؛ خواندن کد با جهش. رفتار روی وردپرس واقعی: tests/w48-local.js.
+ */
+
+echo "\nدستۀ 48 — صفحۀ اول\n" . str_repeat( '─', 78 ) . "\n";
+
+$w48_root  = dirname( __DIR__ );
+$w48_read  = function ( $p ) use ( $w48_root ) { return (string) @file_get_contents( $w48_root . '/' . $p ); };
+$w48_home  = $w48_read( 'plugin/topersia-render/includes/topersia-g-home.php' );
+$w48_js    = $w48_read( 'plugin/topersia-render/assets/topersia-g-home.js' );
+$w48_css   = $w48_read( 'plugin/topersia-render/assets/topersia-g-home.css' );
+$w48_legal = $w48_read( 'plugin/topersia-render/includes/topersia-g-legal.php' );
+$w48_cat   = include $w48_root . '/scripts/i18n/topersia-render.php';
+
+/* ── P5-D529: هر اسلایدر یک ردیف، با نوار و دستگیرۀ صفحۀ موجودیت (P5-D243) ── */
+$w48_sl = function ( $s ) {
+	return false !== strpos( $s, "topersia_g_slider_bar( \$id, \$count )" )
+		&& 3 === preg_match_all( "/topersia_g_home_slider\( 'tp-home-(?:prov|dest|attr)slide'/", $s )
+		&& false === strpos( $s, 'data-tp-slide' ) && false === strpos( $s, 'tp-home-destgrid' ) && false === strpos( $s, 'tp-home-grid--4' );
+};
+tp441_mut( 'P5-D529: استان‌ها، مقاصد و جاذبه‌ها هر سه با topersia_g_home_slider و نوار topersia_g_slider_bar — جهش: گرید دوردیفۀ پیشین', $w48_sl, $w48_home,
+	str_replace( "topersia_g_home_slider( 'tp-home-attrslide'", "topersia_g_home_grid( 'tp-home-attrslide'", $w48_home ) );
+$w48_row = function ( $c ) {
+	return 1 === preg_match( '/\.tp-home-slider\{display:grid;grid-auto-flow:column;grid-template-rows:auto;/', $c )
+		&& false === strpos( $c, 'grid-template-rows:repeat(2' ) && false === strpos( $c, 'destgrid' );
+};
+tp441_mut( 'P5-D529 CSS: اسلایدر grid-template-rows:auto (یک ردیف)، بی repeat(2) — جهش: دوردیفه', $w48_row, $w48_css,
+	str_replace( 'grid-template-rows:auto;', 'grid-template-rows:repeat(2,auto);', $w48_css ) );
+$w48_bp = function ( $c ) {
+	foreach ( array( '1024', '768', '600' ) as $w ) {
+		if ( ! preg_match( '/@media \(max-width:' . $w . 'px\)\{[^@]*\.tp-home-slider[^{]*\{grid-auto-columns:/', $c ) ) { return false; }
+	}
+	return true;
+};
+tp441_mut( 'P5-D529 CSS: پهنای ستون اسلایدر در ۱۰۲۴، ۷۶۸ و ۶۰۰ — جهش: بند ۷۶۸ برداشته شود', $w48_bp, $w48_css,
+	preg_replace( '/@media \(max-width:768px\)\{[^@]*\}\n\}\n/', '', $w48_css ) );
+/* دستگیرۀ تکراری نه: home.js اسکرول نمی‌کند (topersia-g-zones.js همان کار را برای همۀ اسلایدرها می‌کند) */
+$w48_nodup = function ( $j ) { return '' !== $j && false === strpos( $j, 'scrollBy' ) && false === strpos( $j, 'data-tp-slide' ) && strlen( $j ) <= 4096; };
+tp441_mut( 'P5-D243: home.js دستگیرۀ اسلایدر ندارد (کد تکراری نه)، زیر ۴KB — جهش: scrollBy دوباره', $w48_nodup, $w48_js,
+	$w48_js . "\nbox.scrollBy( { left: 1 } );" );
+
+/* ── P5-D530: سه ستون هم‌ارتفاع ── */
+$w48_trio = function ( $c ) {
+	return 1 === preg_match( '/\.tp-home-trio\{display:grid;grid-auto-flow:column;grid-auto-columns:minmax\(0,1fr\);align-items:stretch;/', $c )
+		&& false !== strpos( $c, '.tp-home-trio > .tp-home-col{display:flex;flex-direction:column;' )
+		&& false !== strpos( $c, '.tp-home-trio > .tp-home-col > :last-child{flex:1 1 auto;align-content:start}' )
+		&& 1 === preg_match( '/@media \(max-width:900px\)\{[^@]*\.tp-home-trio\{display:flex;flex-direction:column;/', $c );
+};
+tp441_mut( 'P5-D530 CSS: ردیف سه‌ستونه grid stretch، ستون flex، پنل flex:1؛ زیر ۹۰۰ عمودی — جهش: align-items:flex-start', $w48_trio, $w48_css,
+	str_replace( 'grid-auto-columns:minmax(0,1fr);align-items:stretch;', 'grid-auto-columns:minmax(0,1fr);align-items:flex-start;', $w48_css ) );
+
+/* ── P5-D531: کادر حساب کاربری برداشته شد (کد، CSS، رشته) ── */
+$w48_acct = function ( $s ) { return false === strpos( $s, 'tp-home-account' ) && false === strpos( $s, 'tp-home-cta' ) && false === strpos( $s, "get_page_by_path( 'account' )" ); };
+tp441_mut( 'P5-D531: کادر حساب کاربری در PHP نیست — جهش: بخش #tp-home-account', $w48_acct, $w48_home, $w48_home . "\n'<section id=\"tp-home-account\">'" );
+t( 'P5-D531: بی قاعدۀ CSS کادر و بی رشتۀ بی‌مصرف آن در کاتالوگ', false === strpos( $w48_css, 'tp-home-cta' )
+	&& ! isset( $w48_cat['ورود / ثبت‌نام'] ) && ! isset( $w48_cat['با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید.'] ) );
+
+/* ── P5-D528: افزونه در پاورقی هیچ خروجی ندارد (پیش‌فرض «0») ── */
+$w48_foot = function ( $s ) {
+	return false !== strpos( $s, "get_option( 'topersia_footer_credits', '0' )" )
+		&& false !== strpos( $s, "return in_array( \$v, array( '1', 1, true, 'on', 'yes' ), true );" )
+		&& false !== strpos( $s, "if ( is_admin() || ! topersia_g_footer_credits_on() ) {\n\t\treturn \$value;" )
+		&& false !== strpos( $s, "if ( ! topersia_g_footer_credits_on() || ! wp_style_is( 'topersia-tokens', 'enqueued' ) ) {" );
+};
+tp441_mut( 'P5-D528: صافی woodmart_option و شیوه‌نامۀ پاورقی فقط با option «1»؛ پیش‌فرض «0» — جهش: پیش‌فرض «1»', $w48_foot, $w48_legal,
+	str_replace( "get_option( 'topersia_footer_credits', '0' )", "get_option( 'topersia_footer_credits', '1' )", $w48_legal ) );
+tp441_mut( 'P5-D528: خاموش ← مقدار خود وودمارت برمی‌گردد — جهش: صافی بی شرط', $w48_foot, $w48_legal,
+	str_replace( "if ( is_admin() || ! topersia_g_footer_credits_on() ) {", "if ( is_admin() ) {", $w48_legal ) );
+if ( function_exists( 'topersia_g_footer_credits_on' ) ) {
+	$w48_o = isset( $GLOBALS['tp_options'] ) ? $GLOBALS['tp_options'] : array();
+	unset( $GLOBALS['tp_options']['topersia_footer_credits'] );
+	$w48_def = topersia_g_footer_credits_on();
+	$GLOBALS['tp_options']['topersia_footer_credits'] = '0';
+	$w48_off = topersia_g_footer_credits_on();
+	$GLOBALS['tp_options']['topersia_footer_credits'] = '1';
+	$w48_on = topersia_g_footer_credits_on();
+	$GLOBALS['tp_options'] = $w48_o;
+	t( 'P5-D528: بی option خاموش، «0» خاموش، فقط «1» روشن', ! $w48_def && ! $w48_off && $w48_on );
+}
+
+/* ── گالری بی سوراخ: فقط ۴، ۵ یا ۸ عکس؛ عکس بزرگ فقط با ۵ ── */
+$w48_gal = function ( $s ) {
+	return false !== strpos( $s, '$n     = $n >= 8 ? 8 : ( $n >= 5 ? 5 : $n );' ) && false !== strpos( $s, "( 5 === \$n ? ' tp-home-photos--lead' : '' )" );
+};
+tp441_mut( 'گالری: شمار ۴/۵/۸ و کلاس --lead فقط با ۵ — جهش: بی گرد کردن', $w48_gal, $w48_home,
+	str_replace( '$n     = $n >= 8 ? 8 : ( $n >= 5 ? 5 : $n );', '', $w48_home ) );
+$w48_gcss = function ( $c ) {
+	return false !== strpos( $c, '.tp-home-photos--lead .tp-home-photo:first-child{grid-column:span 2;grid-row:span 2}' )
+		&& ! preg_match( '/\.tp-home-photo:first-child\{grid-column/', str_replace( '.tp-home-photos--lead .tp-home-photo:first-child{', '', $c ) );
+};
+tp441_mut( 'گالری CSS: عکس بزرگ فقط زیر --lead — جهش: عکس نخست همیشه بزرگ', $w48_gcss, $w48_css,
+	$w48_css . "\nhtml .tp-page.tp-home .tp-home-photo:first-child{grid-column:span 2}" );

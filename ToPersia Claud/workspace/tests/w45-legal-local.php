@@ -106,31 +106,17 @@ foreach ( array( 'terms', 'about', 'contact', 'privacy-policy' ) as $slug ) {
 			tL( "$l: ایمیل‌ها متن‌اند، نه پیوند و نه فرم", false !== strpos( $body, 'contact@topersia.com' ) && false === strpos( $body, 'mailto:' ) && false === stripos( $body, '<form' ) );
 		}
 
-		/* پاورقی */
-		$foot = preg_match( '#<div class="tp-footer">.*?</p></div>#s', $h, $fm ) ? $fm[0] : '';
-		tL( "$l: پاورقی هست", '' !== $foot );
-		$copy = preg_match( '#<p class="tp-footer__copy">(.*?)</p>#s', $foot, $cm ) ? $cm[1] : '';
-		$ph   = array( 'fa' => '{سال}', 'en' => '{year}', 'ar' => '{year}' );
-		tL( "$l: کپی‌رایت عیناً با سال سرور به خط زبان", '' !== $copy && false !== strpos( $copy, '© ' . $year( $l ) . ' ' ) && $in( str_replace( '© ' . $year( $l ), '© ' . $ph[ $l ], $copy ) ), $copy );
-		preg_match_all( '#<a href="(https://www\.(?:amesterida\.com|bashash\.ir)/)"([^>]*)>([^<]+)</a>#', $foot, $am, PREG_SET_ORDER );
-		$okc = 2 === count( $am );
-		foreach ( $am as $a ) { $okc = $okc && ' target="_blank" rel="noopener nofollow"' === $a[2] && $in( '[' . $a[3] . '](' . $a[1] . ')' ); }
-		tL( "$l: اعتبار: دو پیوند _blank با noopener nofollow، لنگر فقط نام", $okc );
-		preg_match_all( '#<nav class="tp-footer__nav"[^>]*><ul>(.*?)</ul></nav>#s', $foot, $nm );
-		preg_match_all( '#href="([^"]+)"#', $nm[1][0] ?? '', $lm );
-		$dead = array();
-		foreach ( $lm[1] as $u ) { if ( ( 'fa' === $l ) === ( false !== strpos( $u, '/en/' ) || false !== strpos( $u, '/ar/' ) ) || ( 'fa' !== $l && false === strpos( $u, "/$l/" ) ) ) { $dead[] = "زبان $u"; continue; } list( $c ) = $get( $u ); if ( 200 !== $c ) { $dead[] = "$c $u"; } }
-		tL( "$l: پیوند پاورقی: درباره · تماس · حریم خصوصی · شرایط، هم‌زبان و ۲۰۰", 4 === count( $lm[1] ) && ! $dead, implode( ' ', $dead ) . ' n=' . count( $lm[1] ) );
+		/* پاورقی: P5-D528 — افزونه هیچ خروجی ندارد (جای P5-D520) */
+		tL( "$l: پاورقی افزونه نیست — بی .tp-footer (متن کپی‌رایت از تنظیم خود وودمارت)", false === strpos( $h, 'class="tp-footer' ) );
 	}
 	$table[] = $row;
 }
 
-/* پاورقی روی صفحۀ موجودیت و صفحۀ اول هم */
+/* پاورقی روی صفحۀ موجودیت و صفحۀ اول هم — P5-D528: نیست */
 foreach ( array( '/', '/province/isfahan/', '/en/' ) as $u ) {
 	list( $c, $h ) = $get( home_url( $u ) );
-	tL( "پاورقی روی $u", 200 === $c && false !== strpos( $h, '<div class="tp-footer">' ) && 1 === substr_count( $h, '<div class="tp-footer">' ) );
+	tL( "بی پاورقی افزونه روی $u", 200 === $c && false === strpos( $h, 'class="tp-footer' ) );
 }
-
 echo "\nنامک · fa · en · ar\n";
 foreach ( $table as $r ) { echo '  ' . $r[0] . ' · #' . $r[1] . ' ' . $r[2] . ' · #' . $r[3] . ' ' . $r[4] . ' · #' . $r[5] . ' ' . $r[6] . "\n"; }
 echo str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['pL']}   افتاده: {$GLOBALS['fL']}\n";

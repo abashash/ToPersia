@@ -5,7 +5,7 @@
  *   node tests/w47-local.js --launch   ← جای‌نگهدار «[تکمیل …]» یا TODO در صفحۀ منتشرشده قرمز
  *
  * بخش ۱: نام برند در <title>، og و JSON-LD (P5-D518)؛ جملۀ abuse@ در شرایط و تماس و نبود «گزارش مشکل»
- * (P5-D524)؛ خط اعتبار پاورقی (P5-D520)؛ فاصلۀ لبۀ پایین هدر تا لبۀ بالای هیرو = ۰ در ۱۴۴۰ و ۳۹۰
+ * (P5-D524)؛ نبود پاورقی افزونه (P5-D528، جای P5-D520)؛ فاصلۀ لبۀ پایین هدر تا لبۀ بالای هیرو = ۰ در ۱۴۴۰ و ۳۹۰
  * با getBoundingClientRect (P5-D525) و جهش: padding برگردانده شود باید دیده شود.
  */
 'use strict';
@@ -58,9 +58,8 @@ const text   = h => decode( h.replace( /<script[\s\S]*?<\/script>|<style[\s\S]*?
 			const org = nodes.find( n => 'Organization' === n[ '@type' ] ), web = nodes.find( n => 'WebSite' === n[ '@type' ] );
 			const altOk = n => n && 'ToPersia' === n.name && JSON.stringify( n.alternateName ) === JSON.stringify( [ 'توپرشیا', 'توبيرشيا', 'توبرشيا' ] );
 			t( `${l} صفحۀ اول: Organization و WebSite — name ToPersia، alternateName [توپرشیا، توبيرشيا، توبرشيا]`, altOk( org ) && altOk( web ), JSON.stringify( { org, web } ).slice( 0, 300 ) );
-			const copy = text( ( h.match( /<p class="tp-footer__copy">([\s\S]*?)<\/p>/ ) || [] )[ 1 ] || '' );
-			t( `${l}: کپی‌رایت پاورقی با نام ${BRAND[ l ]}`, 'en' === l ? /^© \S+ ToPersia\./.test( copy ) && ! /توپرشیا|توبيرشيا|توبرشيا/.test( copy ) : copy.includes( `ToPersia (${BRAND[ l ]})` ) && ( copy.match( new RegExp( BRAND[ l ], 'g' ) ) || [] ).length >= 2, copy.slice( 0, 120 ) );
-			t( `${l}: خط اعتبار پاورقی هست (option topersia_footer_credits پیش‌فرض روشن — P5-D520)`, /<p class="tp-footer__credit">[\s\S]*?amesterida\.com[\s\S]*?bashash\.ir/.test( h ) );
+			/* P5-D520 جایگزین شد: P5-D528 — افزونه در پاورقی هیچ خروجی ندارد (option topersia_footer_credits پیش‌فرض «0») */
+			t( `${l}: پاورقی افزونه نیست — بی .tp-footer (P5-D528؛ متن کپی‌رایت از تنظیم خود وودمارت می‌آید و دست نمی‌خورد)`, ! /class="tp-footer/.test( h ) );
 		}
 
 		console.log( '\nبخش ۱ — «گزارش مشکل» (P5-D524) و جای‌نگهدار' );
@@ -138,18 +137,20 @@ const text   = h => decode( h.replace( /<script[\s\S]*?<\/script>|<style[\s\S]*?
 					return { sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth,
 						half: hero && st ? ( st.top + st.height / 2 ) - hero.bottom : null,
 						eq: mp && tl ? Math.abs( mp.height - tl.height ) : null, side: mp && tl ? Math.abs( mp.top - tl.top ) < 1 : null,
-						btns: [ ...document.querySelectorAll( '[data-tp-slide],[data-tp-provdlg]' ) ].filter( e => ! e.hidden ).length,
+						btns: [ ...document.querySelectorAll( '#tp-home-provslide + .tp-slider-bar button[data-target],[data-tp-provdlg]' ) ].filter( e => ! e.hidden ).length,
+						prov: document.querySelectorAll( '#tp-home-provslide > *' ).length,
 						js: !! [ ...document.scripts ].find( s => /topersia-g-home\.js/.test( s.src ) ) };
 				} );
 				t( `${w} · ${l}: بی سرریز افقی (${r.sw} ≤ ${r.cw})`, r.sw <= r.cw, JSON.stringify( r ) );
 				if ( 320 === w ) { continue; }
 				t( `${w} · ${l}: نوار شمار دقیقاً نیمه روی لبۀ هیرو (${r.half === null ? '—' : Math.round( r.half * 10 ) / 10}px)`, null === r.half || Math.abs( r.half ) <= 1, JSON.stringify( r ) );
 				if ( 1440 === w ) { t( `1440 · ${l}: ستون نقشه و ستون کاشی‌ها کنار هم و هم‌قد (اختلاف ${Math.round( r.eq )}px)`, r.side && r.eq <= 1, JSON.stringify( r ) ); }
-				t( `${w} · ${l}: JS صفحۀ اول بار شد و دکمه‌های اسلایدر و «همۀ استان‌ها» پیدا شدند`, r.js && 3 === r.btns, JSON.stringify( r ) );
+				t( `${w} · ${l}: JS صفحۀ اول بار شد و دکمه‌های اسلایدر و «همۀ استان‌ها» پیدا شدند`, r.js && ( r.prov >= 2 ? 3 : 1 ) === r.btns, JSON.stringify( r ) );
 				if ( 'fa' !== l ) { continue; }
 				const sl = await p.evaluate( async () => {
 					const box = document.getElementById( 'tp-home-provslide' ), x0 = box.scrollLeft;
-					document.querySelector( '[data-tp-slide="1"]' ).click();
+					const nx = document.querySelector( '[data-target="tp-home-provslide"][data-dir="1"]' );
+					if ( nx ) { nx.click(); }
 					await new Promise( z => setTimeout( z, 1200 ) );
 					return { x0, x1: box.scrollLeft, max: box.scrollWidth - box.clientWidth };
 				} );

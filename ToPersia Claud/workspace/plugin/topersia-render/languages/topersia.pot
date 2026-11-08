@@ -497,10 +497,6 @@ msgstr ""
 msgid "با بلیت جدا"
 msgstr ""
 
-#: includes/topersia-g-home.php
-msgid "با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید."
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "با دعوت"
 msgstr ""
@@ -1211,10 +1207,6 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "حرا (مانگرو)"
-msgstr ""
-
-#: includes/topersia-g-home.php
-msgid "حساب کاربری"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3676,10 +3668,6 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "ورزش زمستانی"
-msgstr ""
-
-#: includes/topersia-g-home.php
-msgid "ورود / ثبت‌نام"
 msgstr ""
 
 #: includes/topersia-g-map.php

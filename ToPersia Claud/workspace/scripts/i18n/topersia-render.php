@@ -1123,8 +1123,6 @@ return array(
 	'پوشش و ظاهر' => array( 'en' => 'Dress and appearance', 'ar' => 'اللباس والمظهر' ),
 	/* صفحهٔ اول، دستهٔ 45 */
 	'تازه‌ترین اخبار' => array( 'en' => 'Latest news', 'ar' => 'آخر الأخبار' ),
-	'حساب کاربری' => array( 'en' => 'Account', 'ar' => 'الحساب' ),
-	'با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید.' => array( 'en' => 'With an account you can save and follow places and leave comments.', 'ar' => 'بحساب المستخدم يمكنك حفظ الأماكن ومتابعتها وكتابة التعليقات.' ),
 	/* دستۀ 45 بخش الف·۲ — پاورقی؛ عیناً از docs/legal/PAGES-TEXT-2026-11-04.md بند ۰ */
 	'© %1$s ToPersia (%2$s). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به %2$s می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد.' => array( 'en' => '© %1$s %2$s. All rights to this service (website and mobile apps) are reserved and belong to %2$s. Copying, republishing, scraping or otherwise using the texts and content of this service, anywhere and in any form, without written permission is prohibited and will be pursued legally.', 'ar' => '© %1$s ToPersia (%2$s). جميع حقوق هذه الخدمة (الموقع وتطبيقات الجوال) محفوظة وتعود ملكيتها إلى %2$s. يُحظر نسخ نصوص هذه الخدمة ومحتواها أو إعادة نشرها أو استخراجها آليًا أو استخدامها بأي شكل وفي أي مكان دون إذن كتابي، ويُلاحق مرتكب ذلك قانونيًا.' ),
 	'خدمات وب:' => array( 'en' => 'Web services:', 'ar' => 'خدمات الويب:' ),
@@ -1155,7 +1153,6 @@ return array(
 	'آداب سفر' => array( 'en' => 'Travel etiquette', 'ar' => 'آداب السفر' ),
 	'شماره‌های اضطراری' => array( 'en' => 'Emergency numbers', 'ar' => 'أرقام الطوارئ' ),
 	'ایران در تصویر' => array( 'en' => 'Iran in pictures', 'ar' => 'إيران بالصور' ),
-	'ورود / ثبت‌نام' => array( 'en' => 'Sign in / Register', 'ar' => 'الدخول / التسجيل' ),
 	'جست‌وجوی استان' => array( 'en' => 'Search provinces', 'ar' => 'البحث في المحافظات' ),
 	'یافته: %s' => array( 'en' => 'Found: %s', 'ar' => 'النتائج: %s' ),
 	'مشاهدۀ همه' => array( 'en' => 'View all', 'ar' => 'عرض الكل' ),

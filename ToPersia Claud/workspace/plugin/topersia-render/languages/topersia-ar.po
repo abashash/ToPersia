@@ -498,10 +498,6 @@ msgstr "بإذن"
 msgid "با بلیت جدا"
 msgstr "بتذكرة منفصلة"
 
-#: includes/topersia-g-home.php
-msgid "با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید."
-msgstr "بحساب المستخدم يمكنك حفظ الأماكن ومتابعتها وكتابة التعليقات."
-
 #: includes/topersia-g-map.php
 msgid "با دعوت"
 msgstr "بدعوة"
@@ -1213,10 +1209,6 @@ msgstr "أقصى عمق"
 #: includes/topersia-g-map.php
 msgid "حرا (مانگرو)"
 msgstr "المانغروف (الحرا)"
-
-#: includes/topersia-g-home.php
-msgid "حساب کاربری"
-msgstr "الحساب"
 
 #: includes/topersia-g-map.php
 msgid "حضور بازدیدکننده"
@@ -3678,10 +3670,6 @@ msgstr "الرياضات المائية"
 #: includes/topersia-g-map.php
 msgid "ورزش زمستانی"
 msgstr "الرياضات الشتوية"
-
-#: includes/topersia-g-home.php
-msgid "ورود / ثبت‌نام"
-msgstr "الدخول / التسجيل"
 
 #: includes/topersia-g-map.php
 msgid "ورود به سرزمین اصلی از منطقۀ آزاد"

@@ -132,22 +132,7 @@ if ( $w47_launch ) {
 	echo '  ⚠ هشدار (بی --launch قرمز نیست): ' . count( $w47_found ) . " جای‌نگهدار در متن صفحۀ منتشرشونده — با --launch قرمز می‌شود\n";
 }
 
-/* ── ۱٫۴ پاورقی — فقط خط اعتبار با option ───────────────────────────── */
-$w47_cred = function ( $s ) {
-	return false !== strpos( $s, "( topersia_g_footer_credits_on() ? '<p class=\"tp-footer__credit\">' . \$credit . '</p>' : '' )" )
-		&& false !== strpos( $s, "get_option( 'topersia_footer_credits', '1' )" )
-		&& false !== strpos( $s, "'<p class=\"tp-footer__copy\">' . esc_html( \$copy ) . '</p>'" );
-};
-tp441_mut( 'P5-D520: خط اعتبار پاورقی با option topersia_footer_credits (پیش‌فرض روشن)؛ کپی‌رایت بی‌شرط — جهش: اعتبار بی شرط', $w47_cred, $w47_legal, str_replace( "( topersia_g_footer_credits_on() ? '<p class=\"tp-footer__credit\">' . \$credit . '</p>' : '' )", "'<p class=\"tp-footer__credit\">' . \$credit . '</p>'", $w47_legal ) );
-if ( function_exists( 'topersia_g_footer_credits_on' ) ) {
-	$w47_o = isset( $GLOBALS['tp_options'] ) ? $GLOBALS['tp_options'] : array();
-	$GLOBALS['tp_options']['topersia_footer_credits'] = '0';
-	$w47_off = topersia_g_footer_credits_on();
-	unset( $GLOBALS['tp_options']['topersia_footer_credits'] );
-	$w47_def = topersia_g_footer_credits_on();
-	$GLOBALS['tp_options'] = $w47_o;
-	t( 'P5-D520: option «0» خط اعتبار را برمی‌دارد؛ بی option روشن است', ! $w47_off && $w47_def );
-}
+/* ── ۱٫۴ پاورقی — P5-D520 با P5-D528 (دستۀ 48) جایگزین شد: افزونه در پاورقی هیچ خروجی ندارد؛ گارد در assert-48.php ── */
 
 /* ── ۱٫۵ هدر — فاصلۀ صفر با CSS ─────────────────────────────────────── */
 $w47_gap = function ( $c ) { return false !== strpos( $c, 'html .tp-page.tp-home > .tp-main{padding-block-start:0}' ); };

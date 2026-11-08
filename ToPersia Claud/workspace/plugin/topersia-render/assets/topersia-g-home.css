@@ -74,8 +74,6 @@ html .tp-page.tp-home .tp-home-lazy{content-visibility:auto;contain-intrinsic-si
 html .tp-page.tp-home .tp-home-sub{margin:0 0 12px;font-size:calc(1.1 * var(--tp-rem));color:var(--tp-text-strong)}
 html .tp-page.tp-home .tp-more{display:inline-flex;align-items:center;min-block-size:44px}
 
-html .tp-page.tp-home .tp-home-grid{display:grid;gap:clamp(12px,2vw,20px);grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
-html .tp-page.tp-home .tp-home-grid--4{grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr))}
 
 /* کارت تصویری — بی شیشه (کاشی تکراری) */
 html .tp-page.tp-home .tp-home-card{display:flex;flex-direction:column;overflow:hidden;border-radius:var(--tp-home-r);
@@ -109,19 +107,21 @@ html .tp-page.tp-home .tp-home-map__a:focus-visible{outline:none}
 html .tp-page.tp-home .tp-home-map__off{fill:color-mix(in srgb,var(--tp-text-2) 22%,var(--tp-surface))}
 html .tp-page.tp-home .tp-home-map__src{margin-block-start:8px;font-size:calc(.78 * var(--tp-rem));color:var(--tp-text)}
 
-/* ستون کاشی‌ها: اسلایدر scroll-snap دوردیفه، هم‌قد ستون نقشه (stretch) */
+/* اسلایدرهای صفحۀ اول — فقط یک ردیف، scroll-snap (P5-D529)؛ نوار و فلش‌ها از topersia_g_slider_bar() و topersia-g-zones.js (P5-D243) */
 html .tp-page.tp-home .tp-home-prov__tiles{display:flex;flex-direction:column;gap:12px;min-inline-size:0}
-html .tp-page.tp-home :is(.tp-home-slider,.tp-home-destgrid){display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);gap:clamp(10px,1.6vw,16px);
+html .tp-page.tp-home .tp-home-slider{display:grid;grid-auto-flow:column;grid-template-rows:auto;gap:clamp(10px,1.6vw,16px);grid-auto-columns:calc((100% - 3 * clamp(10px,1.6vw,16px)) / 4);
   overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;padding-block-end:6px}
-html .tp-page.tp-home .tp-home-slider{flex:1 1 auto;grid-auto-columns:calc((100% - 2 * clamp(10px,1.6vw,16px)) / 3)}
-html .tp-page.tp-home :is(.tp-home-slider,.tp-home-destgrid) > *{scroll-snap-align:start}
-html .tp-page.tp-home :is(.tp-home-slider,.tp-home-destgrid):focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
-html .tp-page.tp-home .tp-home-slider__nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-html .tp-page.tp-home :is(.tp-home-slider__btn,.tp-home-slider__all,.tp-home-dlg__x,.tp-home-photodlg__go){display:inline-flex;align-items:center;justify-content:center;
+html .tp-page.tp-home .tp-home-slider > *{scroll-snap-align:start}
+html .tp-page.tp-home .tp-home-slider:focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
+/* ستون کاشی‌ها هم‌قد ستون نقشه (stretch): دو کارت در دید، کارت کل ارتفاع ردیف را می‌گیرد و تصویر جای خالی را پر می‌کند */
+html .tp-page.tp-home .tp-home-prov__tiles .tp-home-slider{flex:1 1 auto;grid-auto-columns:calc((100% - clamp(10px,1.6vw,16px)) / 2)}
+html .tp-page.tp-home .tp-home-prov__tiles .tp-home-card__media{flex:1 1 auto;aspect-ratio:auto;min-block-size:140px}
+html .tp-page.tp-home .tp-home-prov__tiles .tp-slider-bar{margin-top:0}
+html .tp-page.tp-home :is(.tp-home-slider__all,.tp-home-dlg__x,.tp-home-photodlg__go){display:inline-flex;align-items:center;justify-content:center;
   min-block-size:44px;min-inline-size:44px;padding:8px 16px;border-radius:999px;font:inherit;font-size:var(--tp-rem);font-weight:700;cursor:pointer;text-decoration:none;
   background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-text-strong)}
-html .tp-page.tp-home .tp-home-slider__all{margin-inline-start:auto}
-html .tp-page.tp-home :is(.tp-home-slider__btn,.tp-home-slider__all,.tp-home-dlg__x,.tp-home-photodlg__go):hover{background:var(--tp-primary-text);border-color:var(--tp-primary-text);color:var(--tp-bg)}
+html .tp-page.tp-home .tp-home-slider__all{align-self:flex-end}
+html .tp-page.tp-home :is(.tp-home-slider__all,.tp-home-dlg__x,.tp-home-photodlg__go):hover{background:var(--tp-primary-text);border-color:var(--tp-primary-text);color:var(--tp-bg)}
 html .tp-page.tp-home :is(button,input):focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
 html .tp-page.tp-home [hidden]{display:none}
 
@@ -148,8 +148,7 @@ html .tp-page.tp-home .tp-home-photodlg__img{display:block;inline-size:100%;bloc
 html .tp-page.tp-home .tp-home-photodlg__desc{margin:12px 0;font-size:var(--tp-rem);line-height:1.9;color:var(--tp-text)}
 html .tp-page.tp-home .tp-home-photodlg__desc:empty{display:none}
 
-/* ۴ محبوب‌ترین مقاصد — گرید دوردیفه با جریان ستونی و scroll-snap */
-html .tp-page.tp-home .tp-home-destgrid{grid-auto-columns:calc((100% - 3 * clamp(10px,1.6vw,16px)) / 4)}
+/* ۴ محبوب‌ترین مقاصد — کارت در همان اسلایدر یک‌ردیفه */
 html .tp-page.tp-home .tp-home-dest{display:flex;flex-direction:column;overflow:hidden;border-radius:var(--tp-home-r);background:var(--tp-tile-bg);
   border:1px solid var(--tp-tile-border);color:var(--tp-text-strong);text-decoration:none;box-shadow:var(--tp-shadow-soft)}
 html .tp-page.tp-home .tp-home-dest__media{display:block;aspect-ratio:16/10;overflow:hidden;background:var(--tp-surface)}
@@ -162,9 +161,11 @@ html .tp-page.tp-home .tp-home-dest__rate svg{inline-size:18px;block-size:18px;f
 html .tp-page.tp-home .tp-home-dest:hover{border-color:var(--tp-primary)}
 html .tp-page.tp-home .tp-home-dest:hover .tp-home-dest__name{color:var(--tp-primary-text)}
 
-/* ت — ردیف سه‌ستونه؛ ستون خالی اصلاً رندر نمی‌شود و بقیه با flex پهن می‌شوند */
-html .tp-page.tp-home .tp-home-trio{display:flex;align-items:flex-start;gap:var(--tp-home-gap);margin:0 0 clamp(36px,6vw,64px)}
-html .tp-page.tp-home .tp-home-trio > .tp-home-col{flex:1 1 0;min-inline-size:0;margin:0}
+/* ت — ردیف سه‌ستونه هم‌ارتفاع (P5-D530): گرید stretch، هر ستون flex، پنل محتوا کل ارتفاع؛ باز شدن پرسش دو ستون دیگر را هم می‌کشد.
+   ستون خالی اصلاً رندر نمی‌شود و بقیه پهن می‌شوند. ردیف‌های درون پنل بالا می‌مانند (align-content:start). */
+html .tp-page.tp-home .tp-home-trio{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);align-items:stretch;gap:var(--tp-home-gap);margin:0 0 clamp(36px,6vw,64px)}
+html .tp-page.tp-home .tp-home-trio > .tp-home-col{display:flex;flex-direction:column;min-inline-size:0;margin:0}
+html .tp-page.tp-home .tp-home-trio > .tp-home-col > :last-child{flex:1 1 auto;align-content:start}
 html .tp-page.tp-home .tp-home-col .tp-news{grid-template-columns:1fr}
 
 /* ۶ رویدادها */
@@ -184,7 +185,8 @@ html .tp-page.tp-home .tp-home-guide__a:hover{border-color:var(--tp-primary);col
 /* ۹ ایران در تصویر */
 html .tp-page.tp-home .tp-home-photos{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(120px,16vw,200px)}
 html .tp-page.tp-home .tp-home-photo{position:relative;display:block;overflow:hidden;border-radius:var(--tp-tile-radius,12px);color:var(--tp-text-strong);text-decoration:none;background:var(--tp-surface)}
-html .tp-page.tp-home .tp-home-photo:first-child{grid-column:span 2;grid-row:span 2}
+/* عکس بزرگ فقط با ۵ عکس (--lead)؛ ۴ و ۸ گرید پر بی عکس بزرگ — PHP شمار را ۴/۵/۸ می‌کند (دستۀ 48 بند ۶) */
+html .tp-page.tp-home .tp-home-photos--lead .tp-home-photo:first-child{grid-column:span 2;grid-row:span 2}
 html .tp-page.tp-home .tp-home-photo__img{display:block;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover}
 /* نام زیر عکس روی نوار مات سطح، نه روی خود تصویر — کنتراست از توکن */
 html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;inset-block-end:8px;padding:4px 10px;border-radius:999px;
@@ -202,14 +204,6 @@ html .tp-page.tp-home .tp-home-faq__i summary::after{content:"";flex:0 0 auto;in
 html .tp-page.tp-home .tp-home-faq__i[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
 html .tp-page.tp-home .tp-home-faq__i p{margin:0;padding:0 16px 14px;line-height:1.95;color:var(--tp-text)}
 
-/* ۱۲ دعوت شیشه‌ای */
-html .tp-page.tp-home .tp-home-cta{display:grid;justify-items:center;gap:10px;margin:0 0 clamp(24px,4vw,40px);padding:clamp(22px,4vw,40px);
-  border-radius:var(--tp-home-r);text-align:center}
-html .tp-page.tp-home .tp-home-cta h2{margin:0;font-size:calc(1.4 * var(--tp-rem));color:var(--tp-text-strong);letter-spacing:0}
-html .tp-page.tp-home .tp-home-cta p{margin:0;color:var(--tp-text)}
-html .tp-page.tp-home .tp-home-cta__btn{display:inline-flex;align-items:center;min-block-size:44px;padding:10px 26px;border-radius:999px;
-  background:var(--tp-selected);color:var(--tp-on-selected);font-weight:800;text-decoration:none}
-html .tp-page.tp-home .tp-home-cta__btn:hover{background:var(--tp-hover);color:var(--tp-on-hover)}
 
 /* حرکت فقط وقتی کاربر کم نخواسته */
 @media (prefers-reduced-motion:no-preference){
@@ -218,10 +212,17 @@ html .tp-page.tp-home .tp-home-cta__btn:hover{background:var(--tp-hover);color:v
 }
 
 /* ── موبایل ───────────────────────────────────────────────────────────── */
+@media (max-width:1024px){
+  html .tp-page.tp-home .tp-home-slider{grid-auto-columns:calc((100% - 2 * clamp(10px,1.6vw,16px)) / 3)}
+}
 @media (max-width:900px){
   html .tp-page.tp-home .tp-home-prov{grid-template-columns:1fr}
-  html .tp-page.tp-home .tp-home-trio{flex-direction:column;align-items:stretch}
-  html .tp-page.tp-home .tp-home-destgrid{grid-auto-columns:calc((100% - 2 * clamp(10px,1.6vw,16px)) / 3)}
+  html .tp-page.tp-home .tp-home-trio{display:flex;flex-direction:column;align-items:stretch}
+  html .tp-page.tp-home .tp-home-prov__tiles .tp-home-slider{grid-auto-columns:calc((100% - 2 * clamp(10px,1.6vw,16px)) / 3)}
+  html .tp-page.tp-home .tp-home-prov__tiles .tp-home-card__media{flex:none;aspect-ratio:4/3;min-block-size:0}
+}
+@media (max-width:768px){
+  html .tp-page.tp-home :is(.tp-home-slider,.tp-home-prov__tiles .tp-home-slider){grid-auto-columns:calc((100% - clamp(10px,1.6vw,16px)) / 2)}
 }
 @media (max-width:600px){
   html .tp-page.tp-home .tp-home-hero{min-block-size:520px}
@@ -229,9 +230,8 @@ html .tp-page.tp-home .tp-home-cta__btn:hover{background:var(--tp-hover);color:v
   html .tp-page.tp-home .tp-home-hero__in{padding-block-end:156px}
   html .tp-page.tp-home .tp-home-quick__a{padding-inline:12px}
   html .tp-page.tp-home .tp-home-stats ul{grid-template-columns:repeat(2,minmax(0,1fr))}
-  html .tp-page.tp-home :is(.tp-home-grid,.tp-home-grid--4){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   html .tp-page.tp-home .tp-home-card__txt{padding:10px}
-  html .tp-page.tp-home :is(.tp-home-slider,.tp-home-destgrid){grid-auto-columns:72%}
+  html .tp-page.tp-home :is(.tp-home-slider,.tp-home-prov__tiles .tp-home-slider){grid-auto-columns:72%}
   html .tp-page.tp-home .tp-home-photos{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:140px}
-  html .tp-page.tp-home .tp-home-photo:first-child{grid-column:span 2;grid-row:span 1}
+  html .tp-page.tp-home .tp-home-photos--lead .tp-home-photo:first-child{grid-column:span 2;grid-row:span 1}
 }

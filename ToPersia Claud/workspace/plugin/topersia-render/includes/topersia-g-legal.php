@@ -2,6 +2,9 @@
 /**
  * پاورقی همۀ صفحه‌ها — کپی‌رایت، اعتبار و پیوند صفحه‌های ثابت.  دستۀ 45 بخش الف·۲
  *
+ * P5-D528 (دستۀ 48): افزونه در پاورقی هیچ خروجی ندارد. همۀ این پرونده پشت option `topersia_footer_credits`
+ * (پیش‌فرض «0») است؛ خاموش ← صافی woodmart_option مقدار خود وودمارت را دست‌نخورده برمی‌گرداند و شیوه‌نامه‌ای افزوده نمی‌شود.
+ *
  * متن عیناً از `docs/legal/PAGES-TEXT-2026-11-04.md` بند ۰ (منبع فارسی؛ en و ar در کاتالوگ).
  * سال از ساعت سرور، میلادی در هر سه زبان، رقم به خطِ زبان صفحه.
  * پیوند اعتبار `target="_blank" rel="noopener nofollow"`، لنگر فقط نام.
@@ -43,15 +46,14 @@ if ( ! function_exists( 'topersia_g_legal_page' ) ) {
 
 if ( ! function_exists( 'topersia_g_footer_credits_on' ) ) {
 	/**
-	 * خط اعتبار پاورقی («خدمات وب: … | طراحی و اجرا: …») — P5-D520 · دستۀ 47.
-	 * option `topersia_footer_credits` (پیش‌فرض روشن)؛ «0» یا false فقط همین یک خط را برمی‌دارد،
-	 * کپی‌رایت و پیوند صفحه‌ها و ساختار پاورقی وودمارت دست نمی‌خورند.
+	 * خروجی پاورقی افزونه (کپی‌رایت، خط اعتبار، پیوند صفحه‌ها) — P5-D528 جای P5-D520.
+	 * option `topersia_footer_credits` پیش‌فرض «0» (خاموش)؛ فقط «1» صریح آن را روشن می‌کند.
 	 */
 	function topersia_g_footer_credits_on() {
 
-		$v = function_exists( 'get_option' ) ? get_option( 'topersia_footer_credits', '1' ) : '1';
+		$v = function_exists( 'get_option' ) ? get_option( 'topersia_footer_credits', '0' ) : '0';
 
-		return ! in_array( $v, array( '0', 0, false, 'off', 'no' ), true );
+		return in_array( $v, array( '1', 1, true, 'on', 'yes' ), true );
 	}
 }
 
@@ -81,15 +83,15 @@ if ( ! function_exists( 'topersia_g_footer_html' ) ) {
 		return '<div class="tp-footer">'
 			. ( '' !== $links ? '<nav class="tp-footer__nav" aria-label="' . esc_attr__( 'صفحه‌های سایت', 'topersia' ) . '"><ul>' . $links . '</ul></nav>' : '' )
 			. '<p class="tp-footer__copy">' . esc_html( $copy ) . '</p>'
-			. ( topersia_g_footer_credits_on() ? '<p class="tp-footer__credit">' . $credit . '</p>' : '' )
+			. '<p class="tp-footer__credit">' . $credit . '</p>'
 			. '</div>';
 	}
 }
 
-/* ستون نخست کپی‌رایت وودمارت؛ نوار کپی‌رایت همیشه روشن. ستون دوم دست نمی‌خورد. */
+/* ستون نخست کپی‌رایت وودمارت — فقط با option روشن (P5-D528)؛ خاموش ← مقدار خود وودمارت. ستون دوم دست نمی‌خورد. */
 add_filter( 'woodmart_option', function ( $value, $slug ) {
 
-	if ( is_admin() ) {
+	if ( is_admin() || ! topersia_g_footer_credits_on() ) {
 		return $value;
 	}
 
@@ -107,7 +109,7 @@ add_filter( 'woodmart_option', function ( $value, $slug ) {
 /* چیدمان پاورقی — فقط توکن؛ بی پروندۀ تازه. هدف لمسی پیوند صفحه‌ها ≥ ۴۴px. */
 add_action( 'wp_enqueue_scripts', function () {
 
-	if ( ! wp_style_is( 'topersia-tokens', 'enqueued' ) ) {
+	if ( ! topersia_g_footer_credits_on() || ! wp_style_is( 'topersia-tokens', 'enqueued' ) ) {
 		return;
 	}
 

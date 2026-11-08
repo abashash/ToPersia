@@ -3,17 +3,11 @@
 	'use strict';
 	var d = document, home = d.querySelector( '.tp-home' );
 	if ( ! home ) { return; }
-	var rtl = 'rtl' === getComputedStyle( home ).direction, $ = function ( s, c ) { return ( c || home ).querySelector( s ); };
+	var $ = function ( s, c ) { return ( c || home ).querySelector( s ); };
 	function each( s, f, c ) { [].forEach.call( ( c || home ).querySelectorAll( s ), f ); }
 	function on( el, evs, f, o ) { evs.split( ' ' ).forEach( function ( e ) { el.addEventListener( e, f, o ); } ); }
 
-	each( '[data-tp-slide]', function ( b ) {
-		var box = d.getElementById( b.getAttribute( 'aria-controls' ) );
-		b.hidden = false;
-		on( b, 'click', function () {
-			box.scrollBy( { left: b.getAttribute( 'data-tp-slide' ) * ( rtl ? -1 : 1 ) * box.clientWidth * 0.8, behavior: matchMedia( '(prefers-reduced-motion: reduce)' ).matches ? 'auto' : 'smooth' } );
-		} );
-	} );
+	/* اسلایدرها: نوار topersia_g_slider_bar() و دستگیرۀ topersia-g-zones.js (P5-D243، P5-D529) — اینجا تکرار نمی‌شود. */
 
 	var h = function ( n ) { return '\\u' + ( '000' + n.toString( 16 ) ).slice( -4 ); };
 	var F = ( ( window.TopersiaG && TopersiaG.fold ) || [] ).map( function ( r ) {
