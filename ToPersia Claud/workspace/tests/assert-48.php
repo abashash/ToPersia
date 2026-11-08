@@ -131,3 +131,10 @@ $w48_ld = function ( $s ) {
 };
 tp441_mut( 'news اسکیما: CollectionPage + ItemList از NewsArticle در موتور topersia-schema، فقط نمایه‌پذیر — جهش: بی شرط noindex', $w48_ld, $w48_sch,
 	str_replace( "if ( function_exists( 'topersia_g_news_archive_thin' ) && ! topersia_g_news_archive_thin() ) {", 'if ( true ) {', $w48_sch ) );
+
+/* ── بخش ۳: سیاست خلیج فارس (P5-D526 · P5-D527) — گیت ایستا در فرایند جدا؛ محلی: همان پرونده زیر WP-CLI ── */
+$w48_php = defined( 'TP_PHP' ) ? TP_PHP : PHP_BINARY;
+exec( escapeshellarg( $w48_php ) . ' ' . escapeshellarg( $w48_root . '/tests/gulf-policy.php' ) . ' 2>&1', $w48_gp, $w48_gprc );
+$w48_gpf = preg_grep( '/❌/u', $w48_gp );
+t( 'خلیج فارس (tests/gulf-policy.php ایستا): رجیستری ده زبان، بی نام ممنوع در کد و کاتالوگ، مصرف‌کننده‌ها فقط از رجیستری — با جهش', 0 === $w48_gprc && ! $w48_gpf && preg_grep( '/گذشته: \d+   افتاده: 0/u', $w48_gp ),
+	implode( ' | ', $w48_gpf ) . ' rc=' . $w48_gprc );

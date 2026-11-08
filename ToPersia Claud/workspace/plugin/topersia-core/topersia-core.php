@@ -982,6 +982,7 @@ require_once __DIR__ . '/includes/topersia-fold.php';
 require_once __DIR__ . '/includes/topersia-pack.php';
 require_once __DIR__ . '/includes/topersia-i18n-gaps.php';   /* ۱۹-ز گزارش شکاف ترجمه — وصلۀ ۲ج و۱ · P5-D305 */
 require_once __DIR__ . '/includes/topersia-geo.php';
+require_once __DIR__ . '/includes/topersia-geo-names.php'; /* نام جغرافیایی رسمی — رجیستری خلیج فارس  P5-D526 */
 require_once __DIR__ . '/includes/topersia-pagecache.php';   /* برچسب کش صفحه — مستقل از میزبان · SC2 · P5-D372 */
 require_once __DIR__ . '/includes/topersia-geo-index.php';   /* نمایۀ مشتق مکانی — فقط محلی · P5-D334 */         /* مختصات — یک تابع مرکزی برای هوا و نقشه — ۲ه٫۵ · P5-D314 */
 require_once __DIR__ . '/includes/topersia-brand.php';      /* نام برند به زبان صفحه — P5-D518 · دستۀ 47 */

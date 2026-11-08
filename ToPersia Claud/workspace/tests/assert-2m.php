@@ -44,13 +44,15 @@ tp441_mut( 'بلوک AI: در صفحه شاخهٔ تولید نیست — جاو
 	},
 	$js2m, $js2m . "\nform.set( 'action', 'tpas_ai_generate' );" );
 
-tp441_mut( 'خلیج فارس در هر زبان: عارضه با کلید پایدار (name:en · name:latin · name:fa)، نه موقعیت؛ هر دو سبک (آفلاین: فقط لایه‌های water؛ آنلاین: همهٔ نمادها) از gulfWrap؛ شاخهٔ جایگزین format؛ متن‌ها با escape یونیکد  P5-D364',
+tp441_mut( 'خلیج فارس در هر زبان: نام فقط از رجیستری هسته (CFG.geo ← topersia_geo_map_labels)، بی نام نوشته در JS؛ عارضه با کلید پایدار رجیستری، نه موقعیت؛ هر دو سبک (آفلاین: فقط لایه‌های water؛ آنلاین: همهٔ نمادها) از gulfWrap؛ شاخهٔ جایگزین format  P5-D364 · P5-D526',
 	function ( $x ) {
-		return false !== strpos( $x, "[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ]" ) && false !== strpos( $x, "[ '==', [ 'get', 'name:latin' ], 'Persian Gulf' ]" ) && false !== strpos( $x, "[ '==', [ 'get', 'name:fa' ], GULF_NAME.fa ]" )
-			&& false !== strpos( $x, "[ 'format', GULF_NAME[ lang ] || GULF_NAME.en, {} ]," ) && false !== strpos( $x, "gulfWrap( [ 'coalesce', [ 'get', 'name:' + lang ], [ 'get', 'name' ] ], lang, true )" )
-			&& false !== strpos( $x, "0 === ( layer.id || '' ).indexOf( 'water' )" ) && false !== strpos( $x, "ar: '\u0627\u0644\u062e\u0644\u064a\u062c \u0627\u0644\u0641\u0627\u0631\u0633\u064a'" );
+		return false !== strpos( $x, "var GEO = ( CFG.geo && 'object' === typeof CFG.geo ) ? CFG.geo : {};" ) && false !== strpos( $x, "any.push( [ '==', [ 'get', k ], match[ k ] ] );" )
+			&& false !== strpos( $x, "out = [ 'case', any, [ 'format', name, {} ], out ];" ) && false !== strpos( $x, "gulfWrap( [ 'coalesce', [ 'get', 'name:' + lang ], [ 'get', 'name' ] ], lang, true )" )
+			&& false !== strpos( $x, "0 === ( layer.id || '' ).indexOf( 'water' )" ) && false === strpos( $x, 'GULF_NAME' ) && false === strpos( $x, "'Persian Gulf'" )
+			&& false === strpos( $x, '\u062e\u0644\u06cc\u062c' );
 	},
-	$js2m, str_replace( "[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ],", '', $js2m ) );
+	$js2m, $js2m . "
+var GULF_NAME = { en: 'Persian Gulf' };" );
 
 tp441_mut( 'برگزارکننده و وب‌سایت رسمی (کارت حقایق): شرط نمایش همان تابع‌های اسکیما با function_exists؛ هر کاشی فقط با مقدار؛ خودِ کاشی پیوند با rel=noopener و متن پیوند نام دامنه (نه <a> تودرتو)؛ پس از کاشی‌های تاریخ  P5-D361',
 	function ( $x ) {

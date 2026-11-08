@@ -860,6 +860,14 @@ if ( ! function_exists( 'topersia_g_glossary_label' ) ) {
 			return $value;
 		}
 
+		/* مقداری که شناسۀ رجیستری نام جغرافیایی است (persian_gulf) نامش را فقط از رجیستری هسته می‌گیرد، در هر زبان.  P5-D526 */
+		if ( function_exists( 'topersia_geo_name' ) ) {
+			$geo = topersia_geo_name( $value, function_exists( 'topersia_g_page_lang' ) ? topersia_g_page_lang() : 'fa' );
+			if ( '' !== $geo ) {
+				return $geo;
+			}
+		}
+
 		/*
 		 * زبان دیگر: ترجمۀ کاتالوگ به کلیدِ مقدار — برچسب جدول پشتیبان کلید
 		 * ترجمه است، نه برچسب زندۀ JetEngine، تا ویرایش برچسب در پیشخوان

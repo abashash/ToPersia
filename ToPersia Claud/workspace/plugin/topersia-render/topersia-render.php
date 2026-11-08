@@ -497,6 +497,8 @@ if ( ! function_exists( 'topersia_render_enqueue_assets' ) ) {
 				/* پیام‌های جاوااسکریپت و خطِ رقم به زبان صفحه  ۴٫۴٫۲ */
 				'i18n'   => topersia_render_js_i18n(),
 				'digits' => topersia_render_js_digits(),
+				/* نام رسمی عارضه‌ها روی نقشه — فقط از رجیستری هسته  P5-D526 */
+				'geo'    => function_exists( 'topersia_geo_map_labels' ) ? topersia_geo_map_labels() : array(),
 			)
 		);
 

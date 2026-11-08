@@ -2279,23 +2279,33 @@
 		}
 
 		/*
-		 * خلیج فارس در هر زبانی که داده‌اش نام دیگری دارد — «الخليج العربي» در name و name:ar داده OSM — برچسب سایت است.  P5-D364
-		 * عارضه را با کلید پایدار می‌شناسیم (name:en = Persian Gulf یا name:fa یا name:latin)، نه با موقعیت؛ هر دو سبک (آفلاین و آنلاین) از همین
-		 * یک تابع می‌گذرند. متن‌ها با escape یونیکد تا کاتالوگ رشته‌های فارسیِ رابط (tp-i18n) آن‌ها را رشتۀ رابط نگیرد: برچسب نقشه داده است، نه رابط.
+		 * نام رسمی عارضه‌ها روی نقشه — فقط از رجیستری هسته (`topersia_geo_map_labels()` → `TopersiaG.geo`).  P5-D526 · P5-D364
+		 * خلیج فارس در هر زبانی که داده‌اش نام دیگری دارد (نام ممنوع رجیستری در name و name:ar دادۀ OSM) برچسب سایت است.
+		 * عارضه با کلید پایدار رجیستری شناخته می‌شود (name:en · name:latin · name:fa)، نه با موقعیت؛ هر دو سبک (آفلاین و
+		 * آنلاین) از همین یک تابع می‌گذرند. نامی در این پرونده نوشته نمی‌شود؛ بی رجیستری، متن لایه دست نمی‌خورد.
+		 * text-field نوع `formatted` است: شاخۀ جایگزین format می‌شود؛ سبک آنلاین که text-field ساده دارد، شاخۀ اصلی هم
+		 * format می‌شود تا هر دو شاخه هم‌نوع باشند.
 		 */
-		var GULF_NAME = { fa: '\u062e\u0644\u06cc\u062c \u0641\u0627\u0631\u0633', en: 'Persian Gulf', ar: '\u0627\u0644\u062e\u0644\u064a\u062c \u0627\u0644\u0641\u0627\u0631\u0633\u064a' };
+		var GEO = ( CFG.geo && 'object' === typeof CFG.geo ) ? CFG.geo : {};
 
-		/* text-field نوع `formatted` است: شاخۀ جایگزین format می‌شود؛ سبک آنلاین که text-field ساده دارد، شاخۀ اصلی هم format می‌شود تا هر دو شاخه هم‌نوع باشند */
 		function gulfWrap( field, lang, plain ) {
-			return [ 'case',
-				[ 'any',
-					[ '==', [ 'get', 'name:en' ], 'Persian Gulf' ],
-					[ '==', [ 'get', 'name:latin' ], 'Persian Gulf' ],
-					[ '==', [ 'get', 'name:fa' ], GULF_NAME.fa ]
-				],
-				[ 'format', GULF_NAME[ lang ] || GULF_NAME.en, {} ],
-				plain ? [ 'format', field, {} ] : field
-			];
+
+			var out = field, wrapped = false;
+
+			Object.keys( GEO ).forEach( function ( id ) {
+				var f = GEO[ id ] || {}, names = f.names || {}, match = f.match || {}, name = names[ lang ] || names.en, any = [ 'any' ];
+				Object.keys( match ).forEach( function ( k ) { any.push( [ '==', [ 'get', k ], match[ k ] ] ); } );
+				if ( ! name || any.length < 2 ) {
+					return;
+				}
+				if ( ! wrapped && plain ) {
+					out = [ 'format', out, {} ];
+				}
+				wrapped = true;
+				out = [ 'case', any, [ 'format', name, {} ], out ];
+			} );
+
+			return out;
 		}
 
 		/*
