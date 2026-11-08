@@ -93,11 +93,11 @@ $w45_fstr = function ( $c ) {
 		if ( empty( $c[ $k ]['en'] ) || empty( $c[ $k ]['ar'] ) ) { return false; }
 	}
 	foreach ( $c as $k => $v ) {
-		if ( 0 === strpos( $k, '© %s ToPersia' ) ) { return 0 === strpos( (string) $v['en'], '© %s ToPersia.' ) && 0 === strpos( (string) $v['ar'], '© %s ToPersia (توبرشيا).' ); }
+		if ( 0 === strpos( $k, '© %1$s ToPersia (%2$s).' ) ) { return 0 === strpos( (string) $v['en'], '© %1$s %2$s.' ) && 0 === strpos( (string) $v['ar'], '© %1$s ToPersia (%2$s).' ) && 2 === substr_count( (string) $v['ar'], '%2$s' ); }
 	}
 	return false;
 };
-tp441_mut( 'متن پاورقی سه‌زبانه در کاتالوگ — جهش: عربی کپی‌رایت نباشد', $w45_fstr, $w45_cat, array_map( function ( $v ) { return isset( $v['ar'] ) && 0 === strpos( (string) $v['ar'], '© %s' ) ? array( 'en' => $v['en'], 'ar' => '' ) : $v; }, $w45_cat ) );
+tp441_mut( 'متن پاورقی سه‌زبانه در کاتالوگ — جهش: عربی کپی‌رایت نباشد', $w45_fstr, $w45_cat, array_map( function ( $v ) { return isset( $v['ar'] ) && is_string( $v['ar'] ) && 0 === strpos( $v['ar'], '© %1$s' ) ? array( 'en' => $v['en'], 'ar' => '' ) : $v; }, $w45_cat ) );
 
 /* اسکریپت ساخت صفحه‌ها: فقط محلی، متن از دو فایل، یادداشت و GA و جای‌نگهدار. */
 $w45_lps = function ( $s ) {

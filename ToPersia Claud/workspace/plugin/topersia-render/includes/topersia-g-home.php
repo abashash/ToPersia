@@ -424,7 +424,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			foreach ( $counts as $c ) {
 				$cells .= '<li class="tp-home-stats__i">' . topersia_g_icon( $c[2] ) . '<b>' . esc_html( topersia_g_fa( number_format_i18n( $c[0] ) ) ) . '</b><span>' . esc_html( $c[1] ) . '</span></li>';
 			}
-			$stats = '<section id="tp-home-stats" class="tp-home-stats tp-home-glass" aria-label="' . esc_attr__( 'ToPersia در یک نگاه', 'topersia' ) . '"><ul>' . $cells . '</ul></section>';
+			$stats = '<section id="tp-home-stats" class="tp-home-stats tp-home-glass" aria-label="' . esc_attr( sprintf( /* translators: %s: نام برند (P5-D518) */ __( '%s در یک نگاه', 'topersia' ), topersia_g_brand() ) ) . '"><ul>' . $cells . '</ul></section>';
 		}
 
 		/* ── ۳ استان‌ها + نقشه ── */

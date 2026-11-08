@@ -23,6 +23,16 @@ msgstr ""
 msgid "%1$s° شمالی، %2$s° شرقی"
 msgstr ""
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "%s در یک نگاه"
+msgstr ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s را منبع ترجیحی گوگل کنید"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%s یورو"
@@ -32,17 +42,9 @@ msgstr ""
 msgid "--post=<id> یا --all یا --queue"
 msgstr ""
 
-#: includes/topersia-g-home.php
-msgid "ToPersia در یک نگاه"
-msgstr ""
-
-#: includes/topersia-g-zones.php
-msgid "ToPersia را منبع ترجیحی گوگل کنید"
-msgstr ""
-
 #: includes/topersia-g-legal.php
 #, php-format
-msgid "© %s ToPersia (توپرشیا). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به توپرشیا می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد."
+msgid "© %1$s ToPersia (%2$s). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به %2$s می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد."
 msgstr ""
 
 #: includes/topersia-g-zones.php

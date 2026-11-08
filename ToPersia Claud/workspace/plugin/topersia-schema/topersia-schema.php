@@ -544,6 +544,17 @@ function topersia_schema_resolve( $spec, $post_id ) {
  * ═══════════════════════════════════════════════════════════════════════
  */
 
+/**
+ * alternateName برند — نام فارسی و عربی از هسته (topersia_brand_alternates · P5-D518).
+ * name همان «ToPersia» تنظیم سایت می‌ماند؛ بی هسته هیچ کلیدی افزوده نمی‌شود.
+ */
+function topersia_schema_brand_alt() {
+
+	$alt = function_exists( 'topersia_brand_alternates' ) ? array_values( array_filter( (array) topersia_brand_alternates(), 'is_string' ) ) : array();
+
+	return $alt ? array( 'alternateName' => $alt ) : array();
+}
+
 /** Organization — یک‌بار برای کل سایت. */
 function topersia_schema_organization() {
 
@@ -552,7 +563,7 @@ function topersia_schema_organization() {
 		'@id'   => TOPERSIA_SITE_ID . '/#organization',
 		'name'  => get_bloginfo( 'name' ),
 		'url'   => TOPERSIA_SITE_ID,
-	);
+	) + topersia_schema_brand_alt();
 }
 
 /** WebSite — با ارجاع به Organization. */
@@ -566,7 +577,7 @@ function topersia_schema_website() {
 		'description' => get_bloginfo( 'description' ),
 		'publisher'   => array( '@id' => TOPERSIA_SITE_ID . '/#organization' ),
 		'inLanguage'  => topersia_schema_lang(),
-	);
+	) + topersia_schema_brand_alt();
 }
 
 /**

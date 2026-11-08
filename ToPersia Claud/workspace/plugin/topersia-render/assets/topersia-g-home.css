@@ -9,6 +9,8 @@
 
 html .tp-page.tp-home{--tp-home-gap:clamp(16px,3vw,28px);--tp-home-r:var(--tp-r-lg,16px);padding-block-end:0}
 html .tp-page.tp-home .tp-home-body{padding-block:0 var(--tp-home-gap)}
+/* P5-D525 · دستۀ 47 — لبۀ پایین هدر = لبۀ بالای هیرو (۰px): فاصلۀ ۴۴px از padding-block .tp-main قالب موجودیت بود. */
+html .tp-page.tp-home > .tp-main{padding-block-start:0}
 
 /* ── شیشه ─────────────────────────────────────────────────────────────── */
 html .tp-page.tp-home .tp-home-glass,

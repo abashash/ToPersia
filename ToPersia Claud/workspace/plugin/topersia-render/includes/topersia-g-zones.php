@@ -62,6 +62,18 @@ if ( ! function_exists( 'topersia_g_page_lang' ) ) {
 }
 
 /**
+ * نام برند به زبان صفحه — P5-D518. منبع در هسته (topersia_brand_name)؛ بی هسته «ToPersia».
+ */
+if ( ! function_exists( 'topersia_g_brand' ) ) {
+	function topersia_g_brand( $lang = null ) {
+
+		$lang = ( null === $lang || '' === $lang ) ? topersia_g_page_lang() : $lang;
+
+		return function_exists( 'topersia_brand_name' ) ? topersia_brand_name( $lang ) : 'ToPersia';
+	}
+}
+
+/**
  * $fn در زبان پیش‌فرض WPML، و بازگرداندن زبان پیشین — حتی با خطا. فقط قلاب‌های
  * مستند WPML (wpml_default_language · wpml_current_language · wpml_switch_language).
  * گالری تجمیعی (۲ج٫۵) و آمار حقیقی (P5-D306) هر دو از این‌جا.
@@ -2154,7 +2166,7 @@ if ( ! function_exists( 'topersia_g_gps_link' ) ) {
 		return '<a class="tp-gps-btn" href="https://www.google.com/preferences/source?q=topersia.com"'
 			. ' rel="nofollow noopener" target="_blank">'
 			. $icon
-			. '<span class="tp-gps-btn__t">' . esc_html__( 'ToPersia را منبع ترجیحی گوگل کنید', 'topersia' ) . '</span>'
+			. '<span class="tp-gps-btn__t">' . esc_html( sprintf( /* translators: %s: نام برند (P5-D518) */ __( '%s را منبع ترجیحی گوگل کنید', 'topersia' ), topersia_g_brand() ) ) . '</span>'
 			. '<span class="tp-gps-btn__s">' . esc_html__( 'مطالب ما را بیشتر در نتایج گوگل و AI Mode ببینید', 'topersia' ) . '</span>'
 			. '</a>';
 	}

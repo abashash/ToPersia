@@ -1,0 +1,148 @@
+<?php
+/**
+ * دستۀ 47 — بخش ۱: بازدارنده‌های راه‌اندازی (P5-D518 · P5-D520 · P5-D524 · P5-D525).
+ * از assert.php بار می‌شود؛ خواندن کد و متن منبع با جهش. رفتار روی وردپرس واقعی: tests/w47-local.js.
+ *
+ *   php tests/assert.php --launch   ← جای‌نگهدار «[تکمیل …]» یا TODO در متن صفحۀ منتشرشونده قرمز است؛
+ *                                     بی آن فقط هشدار.
+ */
+
+echo "\nدستۀ 47 — بازدارنده‌های راه‌اندازی\n" . str_repeat( '─', 78 ) . "\n";
+
+$w47_root   = dirname( __DIR__ );
+$w47_read   = function ( $p ) use ( $w47_root ) { return (string) @file_get_contents( $w47_root . '/' . $p ); };
+$w47_brand  = $w47_read( 'plugin/topersia-core/includes/topersia-brand.php' );
+$w47_core   = $w47_read( 'plugin/topersia-core/topersia-core.php' );
+$w47_zones  = $w47_read( 'plugin/topersia-render/includes/topersia-g-zones.php' );
+$w47_home   = $w47_read( 'plugin/topersia-render/includes/topersia-g-home.php' );
+$w47_legal  = $w47_read( 'plugin/topersia-render/includes/topersia-g-legal.php' );
+$w47_schema = $w47_read( 'plugin/topersia-schema/topersia-schema.php' );
+$w47_css    = $w47_read( 'plugin/topersia-render/assets/topersia-g-home.css' );
+$w47_text   = $w47_read( 'docs/legal/PAGES-TEXT-2026-11-04.md' );
+$w47_prv    = $w47_read( 'docs/legal/PRIVACY-DRAFT.md' );
+$w47_cat    = include $w47_root . '/scripts/i18n/topersia-render.php';
+$w47_launch = in_array( '--launch', isset( $argv ) ? (array) $argv : array(), true );
+
+/* ── ۱٫۱ نام برند — یک منبع ─────────────────────────────────────────── */
+t( 'P5-D518: topersia_brand_name — fa «توپرشیا» · ar «توبرشيا» (بی «ي» میانی) · بقیه ToPersia',
+	function_exists( 'topersia_brand_name' ) && 'توپرشیا' === topersia_brand_name( 'fa' ) && 'توبرشيا' === topersia_brand_name( 'ar' )
+	&& 'ToPersia' === topersia_brand_name( 'en' ) && 'ToPersia' === topersia_brand_name( 'de' ) && array( 'توپرشیا', 'توبرشيا' ) === topersia_brand_alternates() );
+
+$w47_one = function ( $s ) {
+	return 1 === substr_count( $s, "'fa' => 'توپرشیا'" ) && 1 === substr_count( $s, "'ar' => 'توبرشيا'" ) && false === mb_strpos( $s, 'توبيرشيا' );
+};
+tp441_mut( 'P5-D518: نام فارسی و عربی فقط یک بار در ثابت مرکزی — جهش: املای پیشین «توبيرشيا»', $w47_one, $w47_brand, str_replace( "'ar' => 'توبرشيا'", "'ar' => 'توبيرشيا'", $w47_brand ) );
+
+$w47_req = function ( $s ) { return false !== strpos( $s, "require_once __DIR__ . '/includes/topersia-brand.php';" ); };
+tp441_mut( 'P5-D518: هسته پروندۀ برند را بار می‌کند — جهش: بی require', $w47_req, $w47_core, str_replace( "require_once __DIR__ . '/includes/topersia-brand.php';", '', $w47_core ) );
+
+/* هیچ کد نمایشی نام فارسی/عربی را خودش ننویسد؛ همه از topersia_g_brand(). */
+$w47_nolit = function ( $s ) {
+	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
+	return false === mb_strpos( $code, 'توپرشیا' ) && false === mb_strpos( $code, 'توبرشيا' );
+};
+$w47_render = $w47_zones . $w47_home . $w47_legal . $w47_schema;
+tp441_mut( 'P5-D518: render و schema نام برند را دستی نمی‌نویسند — جهش: «توپرشیا» در کد', $w47_nolit, $w47_render, $w47_render . "\n\$x = 'توپرشیا';" );
+
+$w47_use = function ( $s ) {
+	return false !== strpos( $s, "__( '%s در یک نگاه', 'topersia' ), topersia_g_brand() )" )
+		&& false !== strpos( $s, "__( '%s را منبع ترجیحی گوگل کنید', 'topersia' ), topersia_g_brand() )" )
+		&& (bool) preg_match( "/__\( '© %1\\\$s ToPersia \(%2\\\$s\)\. [^']*متعلق به %2\\\$s [^']*', 'topersia' \), \\\$year, topersia_g_brand\(\) \)/u", $s )
+		&& false !== strpos( $s, "return function_exists( 'topersia_brand_name' ) ? topersia_brand_name( \$lang ) : 'ToPersia';" );
+};
+tp441_mut( 'P5-D518: سه رشتۀ دیدنی (نوار شمار، منبع ترجیحی، کپی‌رایت) نام را از topersia_g_brand() می‌گیرند — جهش: کپی‌رایت با نام ثابت', $w47_use, $w47_render, str_replace( '$year, topersia_g_brand() )', "\$year, 'ToPersia' )", $w47_render ) );
+
+/* کاتالوگ: هیچ msgid یا ترجمه‌ای «ToPersia» را جز در «ToPersia (%2$s)» کپی‌رایت ندارد. */
+$w47_catok = function ( $c ) {
+	$bad = array();
+	foreach ( $c as $k => $v ) {
+		foreach ( array_merge( array( 'fa' => $k ), is_array( $v ) ? $v : array() ) as $l => $s ) {
+			if ( 'en' !== $l && false !== strpos( str_replace( 'ToPersia (%2$s)', '', ( is_array( $s ) ? json_encode( $s, JSON_UNESCAPED_UNICODE ) : (string) $s ) ), 'ToPersia' ) ) { $bad[] = "$l"; }
+		}
+	}
+	return array() === $bad;
+};
+tp441_mut( 'P5-D518: کاتالوگ render — fa و ar نام لاتین ندارند (جز «ToPersia (نام)» کپی‌رایت) — جهش: ترجمۀ عربی با ToPersia', $w47_catok, $w47_cat, array( 'x' => array( 'en' => 'x', 'ar' => 'اجعل ToPersia' ) ) + $w47_cat );
+
+/* عنوان و og در fa/ar: پسوند پس از جداکننده؛ og:site_name. اولویت ۹۹ پس از topersia_seo_title (۲۰). */
+$w47_rm = function ( $s ) {
+	foreach ( array( "'rank_math/frontend/title', 'topersia_brand_localize_title', 99", "'rank_math/opengraph/facebook/og_title', 'topersia_brand_localize_title', 99", "'rank_math/opengraph/twitter/twitter_title', 'topersia_brand_localize_title', 99", "'rank_math/opengraph/facebook/og_site_name', 'topersia_brand_site_name', 99" ) as $h ) {
+		if ( false === strpos( $s, "add_filter( $h );" ) ) { return false; }
+	}
+	return true;
+};
+tp441_mut( 'P5-D518: عنوان، og:title، twitter:title و og:site_name به زبان صفحه (Rank Math، اولویت ۹۹) — جهش: بی og:site_name', $w47_rm, $w47_brand, str_replace( "'rank_math/opengraph/facebook/og_site_name'", "'x'", $w47_brand ) );
+
+t( 'P5-D518: الگوی پسوند فقط نام پس از جداکننده را می‌گیرد، نه «© … ToPersia (…)»',
+	1 === preg_match( '/(\s[-—–|·]\s)ToPersia\s*$/u', 'شرایط و قوانین استفاده - ToPersia' ) && 1 === preg_match( '/(\s[-—–|·]\s)ToPersia\s*$/u', 'اصفهان — ToPersia' )
+	&& 0 === preg_match( '/(\s[-—–|·]\s)ToPersia\s*$/u', '© ۲۰۲۶ ToPersia (توپرشیا).' )
+	&& false !== strpos( $w47_brand, "preg_replace( '/(\\s[-—–|·]\\s)' . preg_quote( TOPERSIA_BRAND, '/' ) . '\\s*\$/u'" ) );
+
+$w47_alt = function ( $s ) {
+	return 2 === substr_count( $s, ') + topersia_schema_brand_alt();' )
+		&& false !== strpos( $s, "return \$alt ? array( 'alternateName' => \$alt ) : array();" )
+		&& false !== strpos( $s, "'name'  => get_bloginfo( 'name' )," );
+};
+tp441_mut( 'P5-D518: Organization و WebSite: name = ToPersia، alternateName = [توپرشیا، توبرشيا] از هسته — جهش: WebSite بی alternateName', $w47_alt, $w47_schema, preg_replace( '/\) \+ topersia_schema_brand_alt\(\);/', ');', $w47_schema, 1 ) );
+
+/* ── ۱٫۲ «گزارش مشکل» — P5-D524 ─────────────────────────────────────── */
+$w47_sent = array(
+	'fa' => 'برای گزارش خطا، محتوای ناقض حقوق یا درخواست حذف، به abuse@topersia.com ایمیل بفرستید.',
+	'en' => 'To report an error, infringing content or a removal request, email abuse@topersia.com.',
+	'ar' => 'للإبلاغ عن خطأ أو محتوى مخالف أو طلب حذف، راسلونا على abuse@topersia.com.',
+);
+$w47_rep = function ( $s ) use ( $w47_sent ) {
+	$body = preg_replace( '/^.*?(?=^## ۱\. شرایط)/msu', '', $s, 1 );   /* یادداشت‌های سرِ پرونده منتشر نمی‌شوند */
+	foreach ( $w47_sent as $x ) {
+		if ( 3 !== substr_count( $body, $x ) ) { return false; }   /* شرایط ۲ و ۱۳ · تماس */
+	}
+	return 0 === preg_match( '/گزارش مشکل|Report a problem|الإبلاغ عن مشكلة/u', $body );
+};
+tp441_mut( 'P5-D524: شرایط (بند ۲ و ۱۳) و تماس، سه زبان، عیناً جملۀ abuse@ — هیچ ارجاع «گزارش مشکل» در متن منتشرشونده — جهش: یک ارجاع بماند', $w47_rep, $w47_text, str_replace( 'أرسل ملاحظاتك وتصويباتك إلى', 'استخدم «الإبلاغ عن مشكلة» أو', $w47_text ) );
+
+/* نام برند در متن منتشرشوندۀ fa/ar (PAGES-TEXT بی بخش‌های انگلیسی + PRIVACY-DRAFT بخش ۲ بی en). */
+$w47_txtbrand = function ( $s ) {
+	$s = preg_replace( '/^.*?(?=^## ۱\. شرایط)/msu', '', $s, 1 );
+	$s = preg_replace( '/^### en$.*?(?=^### ar$)/msu', '', $s );           /* شرایط انگلیسی */
+	$s = preg_replace( '/^\*\*en[^\n]*\n(?:(?!\*\*ar)[^\n]*\n)*/mu', '', $s ); /* درباره و تماس انگلیسی */
+	$s = preg_replace( '/^\*\*en\*\* —[^\n]*$/mu', '', $s );                 /* عنوان انگلیسی صفحۀ اول */
+	return false === strpos( str_replace( array( 'ToPersia (توپرشیا)', 'ToPersia (توبرشيا)' ), '', $s ), 'ToPersia' );
+};
+$w47_prv2 = preg_match( '/^## بخش ۲ — .*?(?=^## بخش ۳ )/msu', $w47_prv, $w47_pm ) ? preg_replace( '/^### English \(en\)$.*?(?=^### العربية \(ar\)$)/msu', '', $w47_pm[0] ) : '';
+t( 'P5-D518: متن منتشرشوندۀ fa/ar نام بومی دارد (PAGES-TEXT بی بخش انگلیسی، PRIVACY بخش ۲ بی en) — جهش: «ToPersia» در متن فارسی',
+	$w47_txtbrand( $w47_text ) && '' !== $w47_prv2 && false === strpos( $w47_prv2, 'ToPersia' ) && ! $w47_txtbrand( str_replace( 'استفاده از توپرشیا', 'استفاده از ToPersia', $w47_text ) ) );
+
+/* ── ۱٫۳ جای‌نگهدار — گیت --launch ───────────────────────────────────── */
+$w47_ph = function ( $s ) {
+	preg_match_all( '/\[(?:تکمیل|to be completed|يُستكمل)[^\]]*\]|\bTODO\b/u', $s, $m );
+	return $m[0];
+};
+$w47_pub   = ( preg_match( '/^## ۱\. شرایط.*?(?=^## ۴\. )/msu', $w47_text, $w47_tm ) ? $w47_tm[0] : '' ) . "\n" . ( isset( $w47_pm[0] ) ? $w47_pm[0] : '' );
+$w47_found = $w47_ph( $w47_pub );
+t( 'گیت --launch: کاشف جای‌نگهدار کار می‌کند — جهش: «[تکمیل …]» و TODO دیده می‌شوند', 2 === count( $w47_ph( '[تکمیل به دست کاربر — x] TODO' ) ) && array() === $w47_ph( 'متن بی جای خالی' ) && '' !== trim( $w47_pub ) );
+if ( $w47_launch ) {
+	t( 'گیت --launch: هیچ «[تکمیل …]» یا TODO در صفحۀ منتشرشونده', array() === $w47_found, implode( ' · ', $w47_found ) );
+} elseif ( $w47_found ) {
+	echo '  ⚠ هشدار (بی --launch قرمز نیست): ' . count( $w47_found ) . " جای‌نگهدار در متن صفحۀ منتشرشونده — با --launch قرمز می‌شود\n";
+}
+
+/* ── ۱٫۴ پاورقی — فقط خط اعتبار با option ───────────────────────────── */
+$w47_cred = function ( $s ) {
+	return false !== strpos( $s, "( topersia_g_footer_credits_on() ? '<p class=\"tp-footer__credit\">' . \$credit . '</p>' : '' )" )
+		&& false !== strpos( $s, "get_option( 'topersia_footer_credits', '1' )" )
+		&& false !== strpos( $s, "'<p class=\"tp-footer__copy\">' . esc_html( \$copy ) . '</p>'" );
+};
+tp441_mut( 'P5-D520: خط اعتبار پاورقی با option topersia_footer_credits (پیش‌فرض روشن)؛ کپی‌رایت بی‌شرط — جهش: اعتبار بی شرط', $w47_cred, $w47_legal, str_replace( "( topersia_g_footer_credits_on() ? '<p class=\"tp-footer__credit\">' . \$credit . '</p>' : '' )", "'<p class=\"tp-footer__credit\">' . \$credit . '</p>'", $w47_legal ) );
+if ( function_exists( 'topersia_g_footer_credits_on' ) ) {
+	$w47_o = isset( $GLOBALS['tp_options'] ) ? $GLOBALS['tp_options'] : array();
+	$GLOBALS['tp_options']['topersia_footer_credits'] = '0';
+	$w47_off = topersia_g_footer_credits_on();
+	unset( $GLOBALS['tp_options']['topersia_footer_credits'] );
+	$w47_def = topersia_g_footer_credits_on();
+	$GLOBALS['tp_options'] = $w47_o;
+	t( 'P5-D520: option «0» خط اعتبار را برمی‌دارد؛ بی option روشن است', ! $w47_off && $w47_def );
+}
+
+/* ── ۱٫۵ هدر — فاصلۀ صفر با CSS ─────────────────────────────────────── */
+$w47_gap = function ( $c ) { return false !== strpos( $c, 'html .tp-page.tp-home > .tp-main{padding-block-start:0}' ); };
+tp441_mut( 'P5-D525: فاصلۀ هدر تا هیرو فقط با CSS صفحۀ اول — جهش: بی قاعده', $w47_gap, $w47_css, str_replace( 'padding-block-start:0}', 'padding-block-start:44px}', $w47_css ) );

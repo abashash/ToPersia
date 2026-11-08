@@ -838,7 +838,7 @@ return array(
 	'دنبال می‌کنید'                            => array( 'en' => 'Following', 'ar' => 'تتابعه' ),
 	'دنبال‌کردن ممکن نشد.'                     => array( 'en' => 'Could not follow.', 'ar' => 'تعذّرت المتابعة.' ),
 	'ارتباط برقرار نشد.'                       => array( 'en' => 'Could not connect.', 'ar' => 'تعذّر الاتصال.' ),
-	'ToPersia را منبع ترجیحی گوگل کنید'        => array( 'en' => 'Make ToPersia a preferred source on Google', 'ar' => 'اجعل ToPersia مصدرًا مفضلًا في Google' ),
+	'%s را منبع ترجیحی گوگل کنید'        => array( 'en' => 'Make %s a preferred source on Google', 'ar' => 'اجعل %s مصدرًا مفضلًا في Google' ),
 	'مطالب ما را بیشتر در نتایج گوگل و AI Mode ببینید' => array( 'en' => 'See more of our content in Google results and AI Mode', 'ar' => 'شاهد المزيد من محتوانا في نتائج Google وAI Mode' ),
 
 	/* ── هوش مصنوعی ─────────────────────────────────────────────── */
@@ -1118,7 +1118,7 @@ return array(
 	'حساب کاربری' => array( 'en' => 'Account', 'ar' => 'الحساب' ),
 	'با حساب کاربری می‌توانید مکان‌ها را ذخیره و دنبال کنید و نظر بدهید.' => array( 'en' => 'With an account you can save and follow places and leave comments.', 'ar' => 'بحساب المستخدم يمكنك حفظ الأماكن ومتابعتها وكتابة التعليقات.' ),
 	/* دستۀ 45 بخش الف·۲ — پاورقی؛ عیناً از docs/legal/PAGES-TEXT-2026-11-04.md بند ۰ */
-	'© %s ToPersia (توپرشیا). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به توپرشیا می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد.' => array( 'en' => '© %s ToPersia. All rights to this service (website and mobile apps) are reserved and belong to ToPersia. Copying, republishing, scraping or otherwise using the texts and content of this service, anywhere and in any form, without written permission is prohibited and will be pursued legally.', 'ar' => '© %s ToPersia (توبرشيا). جميع حقوق هذه الخدمة (الموقع وتطبيقات الجوال) محفوظة وتعود ملكيتها إلى ToPersia. يُحظر نسخ نصوص هذه الخدمة ومحتواها أو إعادة نشرها أو استخراجها آليًا أو استخدامها بأي شكل وفي أي مكان دون إذن كتابي، ويُلاحق مرتكب ذلك قانونيًا.' ),
+	'© %1$s ToPersia (%2$s). کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به %2$s می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد.' => array( 'en' => '© %1$s %2$s. All rights to this service (website and mobile apps) are reserved and belong to %2$s. Copying, republishing, scraping or otherwise using the texts and content of this service, anywhere and in any form, without written permission is prohibited and will be pursued legally.', 'ar' => '© %1$s ToPersia (%2$s). جميع حقوق هذه الخدمة (الموقع وتطبيقات الجوال) محفوظة وتعود ملكيتها إلى %2$s. يُحظر نسخ نصوص هذه الخدمة ومحتواها أو إعادة نشرها أو استخراجها آليًا أو استخدامها بأي شكل وفي أي مكان دون إذن كتابي، ويُلاحق مرتكب ذلك قانونيًا.' ),
 	'خدمات وب:' => array( 'en' => 'Web services:', 'ar' => 'خدمات الويب:' ),
 	'آمستریدا' => array( 'en' => 'Amesterida', 'ar' => 'أمستريدا' ),
 	'طراحی و اجرا:' => array( 'en' => 'Design & development:', 'ar' => 'التصميم والتنفيذ:' ),
@@ -1127,7 +1127,7 @@ return array(
 	/* دستۀ 46 بخش ب — صفحۀ اول تازه */
 	'ایران را کشف کنید' => array( 'en' => 'Discover Iran', 'ar' => 'اكتشف إيران' ),
 	'دسترسی سریع' => array( 'en' => 'Quick access', 'ar' => 'وصول سريع' ),
-	'ToPersia در یک نگاه' => array( 'en' => 'ToPersia at a glance', 'ar' => 'ToPersia في لمحة' ),
+	'%s در یک نگاه' => array( 'en' => '%s at a glance', 'ar' => '%s في لمحة' ),
 	'استان‌های ایران' => array( 'en' => 'Provinces of Iran', 'ar' => 'محافظات إيران' ),
 	'ایران روی نقشه' => array( 'en' => 'Iran on the map', 'ar' => 'إيران على الخريطة' ),
 	'نقشۀ استان‌های ایران' => array( 'en' => 'Map of the provinces of Iran', 'ar' => 'خريطة محافظات إيران' ),

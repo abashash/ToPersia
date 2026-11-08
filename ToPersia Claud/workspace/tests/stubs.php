@@ -40,6 +40,11 @@ if ( ! defined( 'TP_PLUGIN_DIR' ) ) {
 	unset( $tp_tries, $tp_one, $tp_found );
 }
 
+/* نام برند از همان منبع هسته — P5-D518 (دستۀ 47)؛ render بی آن «ToPersia» می‌دهد. */
+if ( is_readable( dirname( TP_PLUGIN_DIR ) . "/topersia-core/includes/topersia-brand.php" ) ) {
+	require_once dirname( TP_PLUGIN_DIR ) . "/topersia-core/includes/topersia-brand.php";
+}
+
 $GLOBALS['tp_meta']      = array();
 $GLOBALS['tp_posts']     = array();
 $GLOBALS['tp_shortcode'] = array();

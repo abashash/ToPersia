@@ -984,6 +984,7 @@ require_once __DIR__ . '/includes/topersia-i18n-gaps.php';   /* ۱۹-ز گزار
 require_once __DIR__ . '/includes/topersia-geo.php';
 require_once __DIR__ . '/includes/topersia-pagecache.php';   /* برچسب کش صفحه — مستقل از میزبان · SC2 · P5-D372 */
 require_once __DIR__ . '/includes/topersia-geo-index.php';   /* نمایۀ مشتق مکانی — فقط محلی · P5-D334 */         /* مختصات — یک تابع مرکزی برای هوا و نقشه — ۲ه٫۵ · P5-D314 */
+require_once __DIR__ . '/includes/topersia-brand.php';      /* نام برند به زبان صفحه — P5-D518 · دستۀ 47 */
 
 /*
  * صف پس‌زمینۀ واحد — Action Scheduler 3.9.3 بسته‌بندی‌شده در خود هسته (P5-D290).
