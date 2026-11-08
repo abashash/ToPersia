@@ -22,7 +22,7 @@
 
 ### وضعیت و انجام‌شده
 
-- **۴ تا ۸ نوامبر ۲۰۲۶ — دستهٔ 46 (مبنا `a89a6d2e`).** بخش الف (صفحه‌های ثابت سه‌زبانه و پاورقی) commit و push شد: `9a02b6e4`. بخش ب (بازطراحی صفحهٔ اول، P5-D513 تا P5-D515) در کار است: `assets/topersia-g-home.css`، `includes/topersia-g-home.php` بازنویسی، `assets/home/iran-provinces.svg` از `scripts/tp-home-map-svg.php`، تنظیم `home_hero_id`، FAQPage در `topersia_schema_home_json`، `tests/assert-46.php` و `w45-local` تازه. پشتیبان: `full-20261104-1422`. همگام‌سازی geo با `b20/swap.ps1 after` (حالا topersia-schema هم).
+- **۴ تا ۸ نوامبر ۲۰۲۶ — دستهٔ 46 (مبنا `a89a6d2e`).** بخش الف (صفحه‌های ثابت سه‌زبانه و پاورقی) commit و push شد: `9a02b6e4`. بخش ب (بازطراحی صفحهٔ اول، P5-D513 تا P5-D515) commit و push شد: `8f3a1473`: `assets/topersia-g-home.css`، `includes/topersia-g-home.php` بازنویسی، `assets/home/iran-provinces.svg` از `scripts/tp-home-map-svg.php`، تنظیم `home_hero_id`، FAQPage در `topersia_schema_home_json`، `tests/assert-46.php` و `w45-local` تازه. پشتیبان: `full-20261104-1422`. همگام‌سازی geo با `b20/swap.ps1 after` (حالا topersia-schema هم).
 - **۲ و ۳ نوامبر ۲۰۲۶ — دستهٔ 44: همهٔ گیت‌ها روی حالت نهایی سبز (`g44r3.sh`، ۳ نوامبر ۲۳:۴۵ تا ۲۳:۵۰)؛ سه commit روی `main`: `b8b9e910` · `9fc5a9b9` · همین `docs(log)`؛ push `main` پس از همین commit.** مبنا `ac6ce48e` (= origin/main پیش از دسته). لاگ دسته: `docs/ops/BATCH-44-LOG.md`؛ تاریخچهٔ دسته‌های پیشین: `docs/COMMIT-LOG.md` و `docs/ops/BATCH-4x-LOG.md`.
   - گام ۱: `TOPERSIA_SITE_ID` از `TOPERSIA_CANONICAL_ORIGIN` (هسته و شِما)؛ بستار `$type` خلاصه‌ساز؛ uid شهرستان نمونه (#5534 · #5536)؛ امضای uid در `tp-restore-test`؛ ادعاهای ردشدهٔ 43 در `docs/ops/BATCH-43-LOG.md`.
   - گام ۲ P5-D504: کارت و سرفصل خود هر رابطه در گروه «مرتبط»؛ جدول `docs/ops/REL-HEADINGS-2026-11.tsv`.
@@ -40,7 +40,7 @@
 
 ### قدم بعدی (دقیق و اجراشدنی)
 
-0. دستهٔ 46 بخش ب: گیت‌ها (`php -l`، assert، preflight، کاناری، `w45-local`، contrast `--page=` روی `/` `/en/` `/ar/`، overflow ۳۹۰ و ۳۲۰)، عکس «پس» در `tests/.screens/46`، سپس commit و push جدا. بعد بخش ج اگر بودجه ماند، زنجیرهٔ کامل یک بار و گزارش.
+0. ~~دستهٔ 46 بخش ب.~~ انجام شد: `8f3a1473`؛ زنجیرهٔ کامل ۸ نوامبر همه سبز؛ لاگ `docs/ops/BATCH-46-LOG.md`. بخش ج انجام نشد (بودجه) — نوبت بعد.
 1. ~~یافته‌های تأییدشدهٔ بازبینی فقط‌خواندنی دستهٔ 44 را اعمال کن.~~ انجام شد (۳ نوامبر).
 2. ~~زنجیرهٔ گیت‌ها (`g44.sh`) و `tp-type-readiness`.~~ انجام شد (۳ نوامبر؛ `contrast` جدا دوباره اجرا شد).
 3. ~~گزارش دیداری `tests/.screens/44`.~~ انجام شد (۳ نوامبر).
