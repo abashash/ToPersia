@@ -2,7 +2,8 @@
 /**
  * نام برند به زبان صفحه — P5-D518 (دستۀ 47). تنها منبع؛ هیچ جای دیگری نام فارسی یا عربی را ننویسد.
  *
- *   fa «توپرشیا» · ar «توبرشيا» (املای قطعی کاربر، ۸ نوامبر) · هر زبان دیگر «ToPersia».
+ *   fa «توپرشیا» · ar «توبيرشيا» (املای نهایی کاربر، اصلاح ۸ نوامبر) · هر زبان دیگر «ToPersia».
+ *   شکل «توبرشيا» فقط در alternateName اسکیما (topersia_brand_variants)، هرگز در متن نمایشی.
  *
  * فقط برای متن دیدنی (رشتۀ رابط، عنوان و متای صفحه، og:site_name). نامک، لوگو، نام کد، دامنه،
  * نام افزونه و تنظیمات وودمارت دست نمی‌خورند. اسکیما: name همیشه «ToPersia»، alternateName
@@ -18,11 +19,11 @@ if ( ! defined( 'TOPERSIA_BRAND' ) ) {
 }
 
 if ( ! function_exists( 'topersia_brand_names' ) ) {
-	/** زبان ← نام. عربی بی «ي» میانی. */
+	/** زبان ← نام نمایشی. عربی با «ي» میانی (اصلاح P5-D518). */
 	function topersia_brand_names() {
 		return array(
 			'fa' => 'توپرشیا',
-			'ar' => 'توبرشيا',
+			'ar' => 'توبيرشيا',
 		);
 	}
 }
@@ -83,9 +84,16 @@ if ( function_exists( 'add_filter' ) ) {
 	add_filter( 'rank_math/opengraph/facebook/og_site_name', 'topersia_brand_site_name', 99 );
 }
 
+if ( ! function_exists( 'topersia_brand_variants' ) ) {
+	/** شکل‌های دیگر نام که کاربر ممکن است بجوید — فقط alternateName، هرگز متن نمایشی. */
+	function topersia_brand_variants() {
+		return array( 'توبرشيا' );
+	}
+}
+
 if ( ! function_exists( 'topersia_brand_alternates' ) ) {
-	/** alternateName اسکیما — همۀ نام‌های غیرلاتین. */
+	/** alternateName اسکیما — نام‌های نمایشی غیرلاتین، سپس شکل‌های دیگر: [توپرشیا، توبيرشيا، توبرشيا]. */
 	function topersia_brand_alternates() {
-		return array_values( topersia_brand_names() );
+		return array_values( array_unique( array_merge( array_values( topersia_brand_names() ), topersia_brand_variants() ) ) );
 	}
 }

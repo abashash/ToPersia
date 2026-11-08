@@ -24,14 +24,14 @@ $w47_cat    = include $w47_root . '/scripts/i18n/topersia-render.php';
 $w47_launch = in_array( '--launch', isset( $argv ) ? (array) $argv : array(), true );
 
 /* ── ۱٫۱ نام برند — یک منبع ─────────────────────────────────────────── */
-t( 'P5-D518: topersia_brand_name — fa «توپرشیا» · ar «توبرشيا» (بی «ي» میانی) · بقیه ToPersia',
-	function_exists( 'topersia_brand_name' ) && 'توپرشیا' === topersia_brand_name( 'fa' ) && 'توبرشيا' === topersia_brand_name( 'ar' )
-	&& 'ToPersia' === topersia_brand_name( 'en' ) && 'ToPersia' === topersia_brand_name( 'de' ) && array( 'توپرشیا', 'توبرشيا' ) === topersia_brand_alternates() );
+t( 'P5-D518: topersia_brand_name — fa «توپرشیا» · ar «توبيرشيا» (اصلاح ۸ نوامبر) · بقیه ToPersia؛ alternateName [توپرشیا، توبيرشيا، توبرشيا]',
+	function_exists( 'topersia_brand_name' ) && 'توپرشیا' === topersia_brand_name( 'fa' ) && 'توبيرشيا' === topersia_brand_name( 'ar' )
+	&& 'ToPersia' === topersia_brand_name( 'en' ) && 'ToPersia' === topersia_brand_name( 'de' ) && array( 'توپرشیا', 'توبيرشيا', 'توبرشيا' ) === topersia_brand_alternates() );
 
 $w47_one = function ( $s ) {
-	return 1 === substr_count( $s, "'fa' => 'توپرشیا'" ) && 1 === substr_count( $s, "'ar' => 'توبرشيا'" ) && false === mb_strpos( $s, 'توبيرشيا' );
+	return 1 === substr_count( $s, "'fa' => 'توپرشیا'" ) && 1 === substr_count( $s, "'ar' => 'توبيرشيا'" ) && 1 === substr_count( $s, "return array( 'توبرشيا' );" );
 };
-tp441_mut( 'P5-D518: نام فارسی و عربی فقط یک بار در ثابت مرکزی — جهش: املای پیشین «توبيرشيا»', $w47_one, $w47_brand, str_replace( "'ar' => 'توبرشيا'", "'ar' => 'توبيرشيا'", $w47_brand ) );
+tp441_mut( 'P5-D518: نام نمایشی fa و ar فقط یک بار در ثابت مرکزی، «توبرشيا» فقط شکل دیگر — جهش: املای پیشین «توبرشيا» به‌جای نام نمایشی', $w47_one, $w47_brand, str_replace( "'ar' => 'توبيرشيا'", "'ar' => 'توبرشيا'", $w47_brand ) );
 
 $w47_req = function ( $s ) { return false !== strpos( $s, "require_once __DIR__ . '/includes/topersia-brand.php';" ); };
 tp441_mut( 'P5-D518: هسته پروندۀ برند را بار می‌کند — جهش: بی require', $w47_req, $w47_core, str_replace( "require_once __DIR__ . '/includes/topersia-brand.php';", '', $w47_core ) );
@@ -39,7 +39,7 @@ tp441_mut( 'P5-D518: هسته پروندۀ برند را بار می‌کند �
 /* هیچ کد نمایشی نام فارسی/عربی را خودش ننویسد؛ همه از topersia_g_brand(). */
 $w47_nolit = function ( $s ) {
 	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
-	return false === mb_strpos( $code, 'توپرشیا' ) && false === mb_strpos( $code, 'توبرشيا' );
+	return false === mb_strpos( $code, 'توپرشیا' ) && false === mb_strpos( $code, 'توبيرشيا' ) && false === mb_strpos( $code, 'توبرشيا' );
 };
 $w47_render = $w47_zones . $w47_home . $w47_legal . $w47_schema;
 tp441_mut( 'P5-D518: render و schema نام برند را دستی نمی‌نویسند — جهش: «توپرشیا» در کد', $w47_nolit, $w47_render, $w47_render . "\n\$x = 'توپرشیا';" );
@@ -83,7 +83,7 @@ $w47_alt = function ( $s ) {
 		&& false !== strpos( $s, "return \$alt ? array( 'alternateName' => \$alt ) : array();" )
 		&& false !== strpos( $s, "'name'  => get_bloginfo( 'name' )," );
 };
-tp441_mut( 'P5-D518: Organization و WebSite: name = ToPersia، alternateName = [توپرشیا، توبرشيا] از هسته — جهش: WebSite بی alternateName', $w47_alt, $w47_schema, preg_replace( '/\) \+ topersia_schema_brand_alt\(\);/', ');', $w47_schema, 1 ) );
+tp441_mut( 'P5-D518: Organization و WebSite: name = ToPersia، alternateName = [توپرشیا، توبيرشيا، توبرشيا] از هسته — جهش: WebSite بی alternateName', $w47_alt, $w47_schema, preg_replace( '/\) \+ topersia_schema_brand_alt\(\);/', ');', $w47_schema, 1 ) );
 
 /* ── ۱٫۲ «گزارش مشکل» — P5-D524 ─────────────────────────────────────── */
 $w47_sent = array(
@@ -106,11 +106,17 @@ $w47_txtbrand = function ( $s ) {
 	$s = preg_replace( '/^### en$.*?(?=^### ar$)/msu', '', $s );           /* شرایط انگلیسی */
 	$s = preg_replace( '/^\*\*en[^\n]*\n(?:(?!\*\*ar)[^\n]*\n)*/mu', '', $s ); /* درباره و تماس انگلیسی */
 	$s = preg_replace( '/^\*\*en\*\* —[^\n]*$/mu', '', $s );                 /* عنوان انگلیسی صفحۀ اول */
-	return false === strpos( str_replace( array( 'ToPersia (توپرشیا)', 'ToPersia (توبرشيا)' ), '', $s ), 'ToPersia' );
+	return false === strpos( str_replace( array( 'ToPersia (توپرشیا)', 'ToPersia (توبيرشيا)' ), '', $s ), 'ToPersia' );
 };
 $w47_prv2 = preg_match( '/^## بخش ۲ — .*?(?=^## بخش ۳ )/msu', $w47_prv, $w47_pm ) ? preg_replace( '/^### English \(en\)$.*?(?=^### العربية \(ar\)$)/msu', '', $w47_pm[0] ) : '';
 t( 'P5-D518: متن منتشرشوندۀ fa/ar نام بومی دارد (PAGES-TEXT بی بخش انگلیسی، PRIVACY بخش ۲ بی en) — جهش: «ToPersia» در متن فارسی',
 	$w47_txtbrand( $w47_text ) && '' !== $w47_prv2 && false === strpos( $w47_prv2, 'ToPersia' ) && ! $w47_txtbrand( str_replace( 'استفاده از توپرشیا', 'استفاده از ToPersia', $w47_text ) ) );
+
+/* اصلاح P5-D518 (۸ نوامبر): متن دیدنی عربی فقط «توبيرشيا»؛ «توبرشيا» فقط شکل دیگر alternateName در ثابت مرکزی. */
+$w47_cat_flat = json_encode( $w47_cat, JSON_UNESCAPED_UNICODE );
+$w47_noold = function ( $s ) { return false === mb_strpos( $s, 'توبرشيا' ); };
+tp441_mut( 'P5-D518 اصلاح: «توبرشيا» در هیچ متن دیدنی نیست (PAGES-TEXT، PRIVACY، کاتالوگ، render، schema) — جهش: املای پیشین در متن عربی', $w47_noold, $w47_text . $w47_prv . $w47_cat_flat . $w47_render, str_replace( 'ينشر توبيرشيا', 'ينشر توبرشيا', $w47_text ) . $w47_prv . $w47_cat_flat . $w47_render );
+t( 'P5-D518 اصلاح: متن عربی PAGES-TEXT و PRIVACY نام «توبيرشيا» را دارد', false !== mb_strpos( $w47_text, 'ينشر توبيرشيا' ) && false !== mb_strpos( $w47_prv, 'يجمعها توبيرشيا' ) );
 
 /* ── ۱٫۳ جای‌نگهدار — گیت --launch ───────────────────────────────────── */
 $w47_ph = function ( $s ) {

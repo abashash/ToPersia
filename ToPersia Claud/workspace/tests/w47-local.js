@@ -22,7 +22,8 @@ let pass = 0, fail = 0;
 const t = ( label, ok, note ) => { ok ? pass++ : fail++; console.log( '  ' + ( ok ? '✅' : '❌' ) + ' ' + label + ( ok || ! note ? '' : '   ← ' + note ) ); };
 const warn = s => console.log( '  ⚠ ' + s );
 
-const BRAND = { fa: 'توپرشیا', en: 'ToPersia', ar: 'توبرشيا' };
+const BRAND = { fa: 'توپرشیا', en: 'ToPersia', ar: 'توبيرشيا' };
+const OLD_AR = 'توبرشيا';   /* شکل دیگر — فقط در alternateName، هرگز در متن دیدنی (اصلاح P5-D518) */
 const PFX   = { fa: '', en: '/en', ar: '/ar' };
 const SENT  = {
 	fa: 'برای گزارش خطا، محتوای ناقض حقوق یا درخواست حذف، به abuse@topersia.com ایمیل بفرستید.',
@@ -47,15 +48,18 @@ const text   = h => decode( h.replace( /<script[\s\S]*?<\/script>|<style[\s\S]*?
 				const ogt   = decode( ( h.match( /<meta property="og:title" content="([^"]*)"/ ) || [] )[ 1 ] || '' );
 				const latin = 'en' !== l && /(^|\s)ToPersia(\s|$)/.test( title.replace( /ToPersia \([^)]*\)/, '' ) );
 				t( `${l} ${u}: <title> و og:title با «${BRAND[ l ]}»، og:site_name = «${BRAND[ l ]}»`, 200 === c && title.includes( BRAND[ l ] ) && ogt.includes( BRAND[ l ] ) && site === BRAND[ l ] && ! latin, `${c} title=${title} og=${ogt} site=${site}` );
+				/* اصلاح P5-D518: «توبرشيا» فقط در alternateName — نه در عنوان، متا، بدنه یا پاورقی (کل HTML جز JSON-LD). */
+				const vis = h.replace( /<script type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>/g, '' );
+				t( `${l} ${u}: املای پیشین «${OLD_AR}» در هیچ متن دیدنی و متا نیست`, ! vis.includes( OLD_AR ), ( vis.match( new RegExp( '.{0,40}' + OLD_AR + '.{0,40}' ) ) || [ '' ] )[ 0 ] );
 			}
 			const [ , h ] = await get( PFX[ l ] + '/' );
 			const lds = [ ...h.matchAll( /<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g ) ].map( m => { try { return JSON.parse( m[ 1 ] ); } catch ( e ) { return null; } } ).filter( Boolean );
 			const nodes = lds.flatMap( j => j[ '@graph' ] || [ j ] );
 			const org = nodes.find( n => 'Organization' === n[ '@type' ] ), web = nodes.find( n => 'WebSite' === n[ '@type' ] );
-			const altOk = n => n && 'ToPersia' === n.name && JSON.stringify( n.alternateName ) === JSON.stringify( [ 'توپرشیا', 'توبرشيا' ] );
-			t( `${l} صفحۀ اول: Organization و WebSite — name ToPersia، alternateName [توپرشیا، توبرشيا]`, altOk( org ) && altOk( web ), JSON.stringify( { org, web } ).slice( 0, 300 ) );
+			const altOk = n => n && 'ToPersia' === n.name && JSON.stringify( n.alternateName ) === JSON.stringify( [ 'توپرشیا', 'توبيرشيا', 'توبرشيا' ] );
+			t( `${l} صفحۀ اول: Organization و WebSite — name ToPersia، alternateName [توپرشیا، توبيرشيا، توبرشيا]`, altOk( org ) && altOk( web ), JSON.stringify( { org, web } ).slice( 0, 300 ) );
 			const copy = text( ( h.match( /<p class="tp-footer__copy">([\s\S]*?)<\/p>/ ) || [] )[ 1 ] || '' );
-			t( `${l}: کپی‌رایت پاورقی با نام ${BRAND[ l ]}`, 'en' === l ? /^© \S+ ToPersia\./.test( copy ) && ! /توپرشیا|توبرشيا/.test( copy ) : copy.includes( `ToPersia (${BRAND[ l ]})` ) && ( copy.match( new RegExp( BRAND[ l ], 'g' ) ) || [] ).length >= 2, copy.slice( 0, 120 ) );
+			t( `${l}: کپی‌رایت پاورقی با نام ${BRAND[ l ]}`, 'en' === l ? /^© \S+ ToPersia\./.test( copy ) && ! /توپرشیا|توبيرشيا|توبرشيا/.test( copy ) : copy.includes( `ToPersia (${BRAND[ l ]})` ) && ( copy.match( new RegExp( BRAND[ l ], 'g' ) ) || [] ).length >= 2, copy.slice( 0, 120 ) );
 			t( `${l}: خط اعتبار پاورقی هست (option topersia_footer_credits پیش‌فرض روشن — P5-D520)`, /<p class="tp-footer__credit">[\s\S]*?amesterida\.com[\s\S]*?bashash\.ir/.test( h ) );
 		}
 

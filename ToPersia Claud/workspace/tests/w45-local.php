@@ -10,7 +10,7 @@ $txt = (string) file_get_contents( dirname( __DIR__ ) . '/docs/legal/PAGES-TEXT-
 $want = array(
 	'fa' => array( '/', 'توپرشیا — دانشنامهٔ ایران', 'جغرافیا، تاریخ، فرهنگ و سفر ایران، با منبع و به چند زبان.' ),
 	'en' => array( '/en/', 'ToPersia — The Encyclopedia of Iran', "Iran's geography, history, culture and travel — sourced and multilingual." ),
-	'ar' => array( '/ar/', 'توبرشيا — موسوعة إيران', 'جغرافيا إيران وتاريخها وثقافتها والسفر إليها، بمصادر وبلغات متعددة.' ),
+	'ar' => array( '/ar/', 'توبيرشيا — موسوعة إيران', 'جغرافيا إيران وتاريخها وثقافتها والسفر إليها، بمصادر وبلغات متعددة.' ),
 );
 $sample = array_flip( array_map( function ( $id ) { return rtrim( get_permalink( $id ), '/' ); }, get_posts( array( 'post_type' => 'any', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids', 'meta_key' => '_tp_sample', 'suppress_filters' => true ) ) ) );
 $get = function ( $url ) {
