@@ -1507,10 +1507,22 @@ function topersia_schema_home_json( $post_id ) {
 		'isPartOf'    => array( '@id' => $site['@id'] ),
 		'inLanguage'  => topersia_schema_lang(),
 	);
+	$graph = array( topersia_schema_organization(), $site, $page );
+
+	/* FAQPage فقط از همان پرسش‌هایی که صفحۀ اول نشان می‌دهد (render: topersia_g_home_faq_items — دروازۀ انتشار و بی نمونه).  دستۀ 46 */
+	$faq = function_exists( 'topersia_g_home_faq_items' ) ? (array) topersia_g_home_faq_items() : array();
+	if ( $faq ) {
+		$qs = array();
+		foreach ( $faq as $it ) {
+			$qs[] = array( '@type' => 'Question', 'name' => (string) $it['q'], 'acceptedAnswer' => array( '@type' => 'Answer', 'text' => (string) $it['a'] ) );
+		}
+		$graph[] = array( '@type' => 'FAQPage', '@id' => $home . '#faq', 'isPartOf' => array( '@id' => $home . '#webpage' ), 'mainEntity' => $qs );
+	}
+
 	$data = topersia_schema_prune(
 		array(
 			'@context' => 'https://schema.org',
-			'@graph'   => array( topersia_schema_organization(), $site, $page ),
+			'@graph'   => $graph,
 		)
 	);
 	$json = wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_PRETTY_PRINT );

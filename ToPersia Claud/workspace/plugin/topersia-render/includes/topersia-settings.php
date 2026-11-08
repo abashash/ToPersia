@@ -59,6 +59,8 @@ if ( ! function_exists( 'topersia_render_settings_defaults' ) ) {
 			'border_width'     => 1,
 			'control_height'   => 42,
 			'container'        => 1222,
+			/* تصویر هیروی صفحۀ اول (شناسۀ پیوست)؛ صفر ← hero_image نخستین استان واقعی.  دستۀ 46 · P5-D513 */
+			'home_hero_id'     => 0,
 			'shadow'           => 'soft',
 			'default_mode'     => 'auto',
 			'own_typography'   => 1,
@@ -213,6 +215,7 @@ if ( ! function_exists( 'topersia_render_settings_sanitize' ) ) {
 			'border_width'   => array( 0, 4, 1 ),
 			'control_height' => array( 32, 60, 42 ),
 			'container'      => array( 960, 1600, 1222 ),
+			'home_hero_id'   => array( 0, 2147483647, 0 ),
 			/* صفر یعنی بسته؛ بیرون از بازه به پیش‌فرض برمی‌گردد.  P5-D235 */
 			'ai_user_daily'  => array( 0, 1000, 5 ),
 			'ai_site_daily'  => array( 0, 100000, 100 ),
@@ -520,7 +523,7 @@ if ( ! function_exists( 'topersia_render_settings_font_css' ) ) {
  * @return void
  */
 if ( ! function_exists( 'topersia_render_settings_number' ) ) {
-	function topersia_render_settings_number( $o, $key, $label, $min, $max ) {
+	function topersia_render_settings_number( $o, $key, $label, $min, $max, $unit = 'px' ) {
 		?>
 		<div class="tp-field">
 			<label for="tp_<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $label ); ?></label>
@@ -528,7 +531,7 @@ if ( ! function_exists( 'topersia_render_settings_number' ) ) {
 				<input type="number" id="tp_<?php echo esc_attr( $key ); ?>"
 					min="<?php echo (int) $min; ?>" max="<?php echo (int) $max; ?>" step="1"
 					name="topersia_render_settings[<?php echo esc_attr( $key ); ?>]"
-					value="<?php echo esc_attr( (int) $o[ $key ] ); ?>"> px
+					value="<?php echo esc_attr( (int) $o[ $key ] ); ?>"> <?php echo esc_html( $unit ); ?>
 			</span>
 			<p class="note"><?php printf( esc_html__( 'میان %1$s و %2$s', 'topersia' ), esc_html( $min ), esc_html( $max ) ); ?></p>
 		</div>
@@ -675,6 +678,7 @@ if ( ! function_exists( 'topersia_render_settings_page' ) ) {
 							<?php
 							topersia_render_settings_number( $o, 'control_height', esc_html__( 'ارتفاع دکمه و فرم', 'topersia' ), 32, 60 );
 							topersia_render_settings_number( $o, 'container', esc_html__( 'پهنای ظرف صفحه', 'topersia' ), 960, 1600 );
+							topersia_render_settings_number( $o, 'home_hero_id', esc_html__( 'تصویر هیروی صفحۀ اول (شناسۀ پیوست؛ ۰ = تصویر نخستین استان)', 'topersia' ), 0, 2147483647, '' );
 							?>
 							<div class="tp-field">
 								<label for="tp_shadow"><?php echo esc_html__( 'عمق سایه', 'topersia' ); ?></label>

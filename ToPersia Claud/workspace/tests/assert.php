@@ -2316,6 +2316,7 @@ require __DIR__ . '/assert-502.php';   /* P5-D502 */
 require __DIR__ . '/assert-43.php';   /* P5-D485 دستهٔ 43 */
 require __DIR__ . '/assert-44.php';   /* P5-D485 · P5-D504 · P5-D505 دستهٔ 44 */
 require __DIR__ . '/assert-45.php';   /* دستهٔ 45: صفحهٔ اول */
+require __DIR__ . '/assert-46.php';   /* دستۀ 46 بخش ب: صفحۀ اول تازه */
 
 /*
  * ── هیچ سندی عدد آزمون را صریح ننویسد ──────────────────────────

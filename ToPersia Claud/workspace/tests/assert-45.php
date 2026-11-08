@@ -31,6 +31,7 @@ tp441_mut( 'صفحهٔ اول از دروازهٔ مرکزی می‌گذرد —
 $w45_nodigit = function ( $s ) {
 	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
 	$code = preg_replace( '#^\s*(\*|//).*$#m', '', $code );
+	$code = preg_replace( '/\}, \d+ \);/', '}, P );', $code );   /* اولویت قلاب وردپرس عدد آمار نیست — دستۀ 46 */
 	return 0 === preg_match( '/(?<![\w$])\d{2,}(?![\w])/', $code );
 };
 tp441_mut( 'صفحهٔ اول عدد ثابت (آمار) ندارد — جهش: عدد در کد', $w45_nodigit, $w45_src, $w45_src . "\n\$x = 31;" );
@@ -43,18 +44,18 @@ tp441_mut( 'صفحهٔ اول و اسکیمایش کادر جست‌وجو و Se
 
 /* اسکیمای صفحهٔ اول فقط روی صفحهٔ اول. */
 $w45_sch = function ( $s ) {
-	return false !== strpos( $s, "'page' === get_post_type( \$post_id ) && is_front_page() ) ? topersia_schema_home_json( \$post_id )" ) && false !== strpos( $s, "'@graph'   => array( topersia_schema_organization(), \$site, \$page )" );
+	return false !== strpos( $s, "'page' === get_post_type( \$post_id ) && is_front_page() ) ? topersia_schema_home_json( \$post_id )" ) && false !== strpos( $s, "\$graph = array( topersia_schema_organization(), \$site, \$page );" ) && false !== strpos( $s, "'@graph'   => \$graph," );
 };
 tp441_mut( 'اسکیمای صفحهٔ اول: Organization · WebSite · WebPage فقط وقتی صفحهٔ اول است — جهش: برای هر صفحه', $w45_sch, $w45_schema, str_replace( "'page' === get_post_type( \$post_id ) && is_front_page() )", 'true )', $w45_schema ) );
 
 /* ترجمهٔ رشته‌های تازه. */
 $w45_str = function ( $c ) {
-	foreach ( array( 'دسته‌های اصلی', 'غذا و صنایع‌دستی', 'فرهنگ و تاریخ', 'اطلاعات کاربردی', 'ارز', 'تازه‌ترین اخبار', 'حساب کاربری', 'ورود به پنل کاربری' ) as $k ) {
+	foreach ( array( 'ایران را کشف کنید', 'ارز و پرداخت', 'استان‌های ایران', 'محبوب‌ترین مقاصد', 'تازه‌ترین اخبار', 'حساب کاربری', 'ورود / ثبت‌نام' ) as $k ) {
 		if ( empty( $c[ $k ]['en'] ) || empty( $c[ $k ]['ar'] ) ) { return false; }
 	}
 	return true;
 };
-tp441_mut( 'رشته‌های صفحهٔ اول انگلیسی و عربی دارند — جهش: یکی بی ترجمه', $w45_str, $w45_cat, array_diff_key( $w45_cat, array( 'ارز' => 1 ) ) );
+tp441_mut( 'رشته‌های صفحهٔ اول انگلیسی و عربی دارند — جهش: یکی بی ترجمه', $w45_str, $w45_cat, array_diff_key( $w45_cat, array( 'ارز و پرداخت' => 1 ) ) );
 
 /* ─── بخش الف·۱–۲ — صفحه‌های ثابت و پاورقی ─── */
 $w45_legal = (string) @file_get_contents( $w45_root . '/plugin/topersia-render/includes/topersia-g-legal.php' );
