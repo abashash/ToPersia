@@ -8208,7 +8208,7 @@ if ( ! function_exists( 'topersia_g_sc_page' ) ) {
 			}
 
 			$snav = '<nav class="tp-snav" aria-label="' . esc_attr__( 'ناوبری بخش‌های صفحه', 'topersia' ) . '">'
-				. '<div class="tp-wrap tp-snav__in">' . $links . '</div></nav>';
+				. '<div class="tp-wrap tp-snav__in" data-tp-no-prog>' . $links . '</div></nav>';   /* P5-D559: ناوبری چسبان، نه اسلایدر — مستثنا، نوار بومی پنهان */
 		}
 
 		/*

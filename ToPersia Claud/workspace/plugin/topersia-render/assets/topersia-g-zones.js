@@ -717,7 +717,7 @@
 
 		Array.prototype.forEach.call( page.querySelectorAll( '.tp-slider, .tp-home-slider, [data-tp-prog]' ), function ( el ) {
 
-			if ( el.nextElementSibling && el.nextElementSibling.classList.contains( 'tp-prog' ) ) {
+			if ( el.hasAttribute( 'data-tp-no-prog' ) || ( el.nextElementSibling && el.nextElementSibling.classList.contains( 'tp-prog' ) ) ) {   /* P5-D559 */
 				return;
 			}
 

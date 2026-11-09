@@ -412,7 +412,7 @@ if ( ! function_exists( 'topersia_g_news_chips' ) ) {
 		return '<nav class="tp-news-chips' . ( '' !== $mod ? ' tp-news-chips--' . esc_attr( $mod ) : '' ) . '" aria-label="' . esc_attr( $label ) . '" data-tp-news-chips data-tp-news-nav'
 			. ( '' !== $swap ? ' data-tp-news-swap="' . esc_attr( $swap ) . '"' : '' ) . '>'
 			. $btn( 'prev', $a['prev'], __( 'موضوع‌های قبلی', 'topersia' ) )
-			. '<ul class="tp-news-chips__list">' . $out . '</ul>'
+			. '<ul class="tp-news-chips__list" data-tp-no-prog>' . $out . '</ul>'   /* P5-D559: تراشه‌ها مستثنا — پیکان دارند */
 			. $btn( 'next', $a['next'], __( 'موضوع‌های بعدی', 'topersia' ) )
 			. '</nav>';
 	}

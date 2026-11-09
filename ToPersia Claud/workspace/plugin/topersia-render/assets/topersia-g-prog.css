@@ -6,8 +6,10 @@
  * فاصلۀ کارت تا نوار ≥ ۱۴px = padding پایین اسلایدر + margin نوار (w51-local می‌سنجد). جهت از اسلایدر.
  * رنگ فقط از توکن؛ عنصر رابط ≥ ۳ (کنتراست شست با سطح).
  */
-html .tp-page .tp-has-prog{scrollbar-width:none}
-html .tp-page .tp-has-prog::-webkit-scrollbar{display:none}
+/* P5-D559: نوار بومی همه‌جا پنهان (WebKit، Firefox، overlay). `:is(…, #tp-prog-none)` وزن شناسه می‌دهد تا هیچ قاعدۀ
+   ویژۀ صفحه (مثل `.tp-page.tp-home .tp-home-slider{scrollbar-width:thin}`) بر آن نچربد — دو نوار در ۱۴۴۰ از همین بود. */
+html .tp-page :is(.tp-has-prog,#tp-prog-none){scrollbar-width:none;-ms-overflow-style:none}
+html .tp-page :is(.tp-has-prog,#tp-prog-none)::-webkit-scrollbar{display:none;inline-size:0;block-size:0}
 html .tp-page .tp-has-prog.tp-is-dragging{scroll-snap-type:none;scroll-behavior:auto}
 
 html .tp-page .tp-prog{position:relative;box-sizing:border-box;block-size:20px;margin-block-start:4px;cursor:pointer;touch-action:none;user-select:none}

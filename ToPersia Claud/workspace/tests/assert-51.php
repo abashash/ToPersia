@@ -228,13 +228,29 @@ tp441_mut( 'P5-D550 JS: نوار زیر هر اسلایدر، همگام با ا
 t( 'P5-D550 JS: جهش — جهت ثابت (بی قرینۀ راست‌به‌چپ) می‌افتد', ! $w51_prog( str_replace( "'translateX(' + ( rtl() ? -1 : 1 ) *", "'translateX(' + 1 *", $w51_zjs ) ) );
 
 $w51_pc = function ( $c, $r ) {
-	return false !== strpos( $c, 'html .tp-page .tp-has-prog{scrollbar-width:none}' ) && false !== strpos( $c, '.tp-has-prog::-webkit-scrollbar{display:none}' )
+	return false !== strpos( $c, 'html .tp-page :is(.tp-has-prog,#tp-prog-none){scrollbar-width:none;' ) && false !== strpos( $c, ':is(.tp-has-prog,#tp-prog-none)::-webkit-scrollbar{display:none;' )
 		&& (bool) preg_match( '/\.tp-prog__thumb\{[^}]*inset-inline-start:0/', $c ) && (bool) preg_match( '/\.tp-prog__thumb\{[^}]*background:var\(--tp-primary\)/', $c )
 		&& 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', preg_replace( '#/\*.*?\*/#s', '', $c ) )
 		&& false !== strpos( $r, "\$url . 'assets/topersia-g-prog.css'," );
 };
 tp441_mut( 'P5-D550 CSS: نوار بومی فقط با tp-has-prog پنهان، شست منطقی (inset-inline-start)، رنگ فقط از توکن، بار با قالب — جهش: رنگ خام', function ( $c ) use ( $w51_pc, $w51_render ) { return $w51_pc( $c, $w51_render ); }, $w51_pcss,
 	str_replace( 'background:var(--tp-primary);', 'background:#0a6b5e;', $w51_pcss ) );
+
+/* ══ الحاقیه ب — یک نوار برای هر اسلایدر (P5-D559) ═══════════════════ */
+$w51_d559 = function ( $c, $js, $nui, $z ) {
+	return false !== strpos( $c, 'html .tp-page :is(.tp-has-prog,#tp-prog-none){scrollbar-width:none;' )   /* وزن شناسه: قاعدۀ ویژۀ صفحه (home thin) نمی‌چربد */
+		&& false !== strpos( $c, ':is(.tp-has-prog,#tp-prog-none)::-webkit-scrollbar{display:none;' )
+		&& false !== strpos( $js, "if ( el.hasAttribute( 'data-tp-no-prog' ) ||" )                            /* مستثنا نوار نمی‌گیرد */
+		&& false !== strpos( $nui, '<ul class="tp-news-chips__list" data-tp-no-prog>' )                         /* تراشه‌های اخبار مستثنا (خواستۀ کاربر) */
+		&& false !== strpos( $z, '<div class="tp-wrap tp-snav__in" data-tp-no-prog>' );                        /* ناوبری چسبان، نه اسلایدر */
+};
+$w51_zphp = $w51_read( 'plugin/topersia-render/includes/topersia-g-zones.php' );
+$w51_nui  = $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' );
+tp441_mut( 'P5-D559: نوار بومی با وزن شناسه پنهان؛ تراشه‌های اخبار و ناوبری بخش‌ها مستثنا — جهش: وزن شناسه برداشته (دو نوار در ۱۴۴۰ صفحۀ اول)',
+	function ( $c ) use ( $w51_d559, $w51_zjs, $w51_nui, $w51_zphp ) { return $w51_d559( $c, $w51_zjs, $w51_nui, $w51_zphp ); }, $w51_pcss,
+	str_replace( ':is(.tp-has-prog,#tp-prog-none)', '.tp-has-prog', $w51_pcss ) );
+t( 'P5-D559: جهش — تراشه‌های اخبار بی data-tp-no-prog می‌افتد', ! $w51_d559( $w51_pcss, $w51_zjs, str_replace( ' data-tp-no-prog>', '>', $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' ) ), $w51_zphp ) );
+t( 'P5-D559: جهش — JS مستثنا را نادیده بگیرد می‌افتد', ! $w51_d559( $w51_pcss, str_replace( "el.hasAttribute( 'data-tp-no-prog' ) ||", '', $w51_zjs ), $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' ), $w51_zphp ) );
 
 /* ══ الحاقیه الف — اخبار (P5-D556 · P5-D557 · P5-D558) ══════════════ */
 $w51_nui = $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' );
