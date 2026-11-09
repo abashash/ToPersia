@@ -523,6 +523,10 @@ msgstr "ممطر"
 msgid "بارش برف"
 msgstr "تساقط الثلوج"
 
+#: includes/topersia-g-news-ui.php
+msgid "بارگیری نشد؛ صفحه دوباره بار می‌شود."
+msgstr "تعذّر التحميل؛ سيُعاد تحميل الصفحة."
+
 #: topersia-render.php
 msgid "باریک"
 msgstr "ضيق"
@@ -574,6 +578,10 @@ msgstr "استعادة الوضع الافتراضي"
 #: includes/topersia-g-zones.php
 msgid "بازۀ اوج"
 msgstr "فترة الذروة"
+
+#: templates/news-archive.php
+msgid "بازۀ زمانی"
+msgstr "الفترة الزمنية"
 
 #: includes/topersia-g-zones.php
 msgid "باستانی"
@@ -1078,13 +1086,13 @@ msgstr "أبرز المعالم"
 msgid "جانشین"
 msgstr "الخلف"
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "جدیدترین"
 msgstr "الأحدث"
 
-#: templates/news-archive.php
-msgid "جدیدترین مطالب"
-msgstr "أحدث المقالات"
+#: templates/news-list.php
+msgid "جدیدترین خبرها"
+msgstr "أحدث الأخبار"
 
 #: includes/topersia-g-map.php
 msgid "جزر و مد"
@@ -1307,6 +1315,10 @@ msgstr "ترابي"
 msgid "خبرهای برگزیده"
 msgstr "أخبار مختارة"
 
+#: templates/news-single.php
+msgid "خبرهای مرتبط"
+msgstr "أخبار ذات صلة"
+
 #: templates/news-archive.php
 msgid "خبری با این پالایش نیست."
 msgstr "لا توجد أخبار تطابق هذه التصفية."
@@ -1509,6 +1521,10 @@ msgstr "الوصول بالكرسي المتحرك"
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
 msgstr "إمكانية الوصول"
+
+#: templates/news-archive.php
+msgid "دسته‌بندی‌ها"
+msgstr "التصنيفات"
 
 #: includes/topersia-g-map.php
 msgid "دشت"
@@ -2236,7 +2252,7 @@ msgstr "الحلويات والحلاوة"
 msgid "شیوۀ ساخت"
 msgstr "طريقة الصنع"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "شیوۀ نمایش"
 msgstr "طريقة العرض"
 
@@ -2256,7 +2272,7 @@ msgstr "صوت"
 msgid "صدای هوش مصنوعی"
 msgstr "صوت بالذكاء الاصطناعي"
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "صفحه‌های خبر"
 msgstr "صفحات الأخبار"
 
@@ -2513,7 +2529,7 @@ msgstr "صدر القانون"
 msgid "قبلی"
 msgstr "السابق"
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "قدیمی‌ترین"
 msgstr "الأقدم"
 
@@ -2951,6 +2967,10 @@ msgstr "الاتجاهات"
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr "المشاركة العامة وحضور الزوار"
 
+#: templates/news-archive.php
+msgid "مشاهده همه"
+msgstr "عرض الكل"
+
 #: includes/topersia-g-home.php
 msgid "مشاهدۀ صفحه"
 msgstr "عرض الصفحة"
@@ -3209,8 +3229,16 @@ msgid "موضوع‌ها"
 msgstr "المواضيع"
 
 #: includes/topersia-g-news-ui.php
+msgid "موضوع‌های بعدی"
+msgstr "المواضيع التالية"
+
+#: includes/topersia-g-news-ui.php
 msgid "موضوع‌های خبر"
 msgstr "مواضيع الأخبار"
+
+#: includes/topersia-g-news-ui.php
+msgid "موضوع‌های قبلی"
+msgstr "المواضيع السابقة"
 
 #: includes/topersia-g-zones.php
 msgid "مکان مذهبی"
@@ -3345,6 +3373,11 @@ msgstr "نتائج البحث"
 msgid "نتایج جست‌وجو برای «%s»"
 msgstr "نتائج البحث عن «%s»"
 
+#: includes/topersia-g-news-ui.php
+#, php-format
+msgid "نتیجه: %s"
+msgstr "النتائج: %s"
+
 #: templates/search-results.php
 msgid "نتیجه‌ای نیست."
 msgstr "لا توجد نتائج."
@@ -3447,7 +3480,7 @@ msgstr "الرمز"
 msgid "نمای بزرگ نقشۀ %s"
 msgstr "خريطة %s بحجم كبير"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "نمای شبکه‌ای"
 msgstr "عرض شبكي"
 
@@ -3455,7 +3488,7 @@ msgstr "عرض شبكي"
 msgid "نمای شماتیک نقشه"
 msgstr "خريطة تخطيطية"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "نمای فهرستی"
 msgstr "عرض قائمة"
 
@@ -3711,6 +3744,10 @@ msgstr "كل الأخبار"
 #: includes/topersia-g-home.php
 msgid "همۀ استان‌ها"
 msgstr "جميع المحافظات"
+
+#: includes/topersia-g-news-ui.php
+msgid "همۀ زمان‌ها"
+msgstr "كل الأوقات"
 
 #: includes/topersia-g-zones.php
 msgid "همۀ فرهنگ و رویداد"
@@ -4401,6 +4438,10 @@ msgstr "١٠٠٪"
 msgid "۱۱۵٪"
 msgstr "١١٥٪"
 
+#: includes/topersia-g-news-ui.php
+msgid "۱۲ ماه گذشته"
+msgstr "آخر 12 شهرًا"
+
 #: topersia-render.php
 msgid "۱۳۰٪"
 msgstr "١٣٠٪"
@@ -4416,6 +4457,14 @@ msgstr "من ٢ إلى ٤ ساعات"
 #: includes/topersia-g-map.php
 msgid "۳۰ تا ۶۰ دقیقه"
 msgstr "من ٣٠ إلى ٦٠ دقيقة"
+
+#: includes/topersia-g-news-ui.php
+msgid "۳۰ روز گذشته"
+msgstr "آخر 30 يومًا"
+
+#: includes/topersia-g-news-ui.php
+msgid "۷ روز گذشته"
+msgstr "آخر 7 أيام"
 
 #: includes/topersia-g-home.php
 #, php-format

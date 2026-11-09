@@ -523,6 +523,10 @@ msgstr "Rainy"
 msgid "بارش برف"
 msgstr "Snowfall"
 
+#: includes/topersia-g-news-ui.php
+msgid "بارگیری نشد؛ صفحه دوباره بار می‌شود."
+msgstr "Could not load; reloading the page."
+
 #: topersia-render.php
 msgid "باریک"
 msgstr "Narrow"
@@ -574,6 +578,10 @@ msgstr "Reset to default"
 #: includes/topersia-g-zones.php
 msgid "بازۀ اوج"
 msgstr "Peak window"
+
+#: templates/news-archive.php
+msgid "بازۀ زمانی"
+msgstr "Time range"
 
 #: includes/topersia-g-zones.php
 msgid "باستانی"
@@ -1078,13 +1086,13 @@ msgstr "Featured attractions"
 msgid "جانشین"
 msgstr "Successor"
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "جدیدترین"
 msgstr "Newest"
 
-#: templates/news-archive.php
-msgid "جدیدترین مطالب"
-msgstr "Latest stories"
+#: templates/news-list.php
+msgid "جدیدترین خبرها"
+msgstr "Latest news"
 
 #: includes/topersia-g-map.php
 msgid "جزر و مد"
@@ -1307,6 +1315,10 @@ msgstr "Dirt road"
 msgid "خبرهای برگزیده"
 msgstr "Featured news"
 
+#: templates/news-single.php
+msgid "خبرهای مرتبط"
+msgstr "Related news"
+
 #: templates/news-archive.php
 msgid "خبری با این پالایش نیست."
 msgstr "No news matches these filters."
@@ -1509,6 +1521,10 @@ msgstr "Wheelchair access"
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
 msgstr "Accessibility"
+
+#: templates/news-archive.php
+msgid "دسته‌بندی‌ها"
+msgstr "Categories"
 
 #: includes/topersia-g-map.php
 msgid "دشت"
@@ -2236,7 +2252,7 @@ msgstr "Sweets and halva"
 msgid "شیوۀ ساخت"
 msgstr "Technique"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "شیوۀ نمایش"
 msgstr "Layout"
 
@@ -2256,7 +2272,7 @@ msgstr "Audio"
 msgid "صدای هوش مصنوعی"
 msgstr "AI voice"
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "صفحه‌های خبر"
 msgstr "News pages"
 
@@ -2513,7 +2529,7 @@ msgstr "Law passed"
 msgid "قبلی"
 msgstr "Previous"
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "قدیمی‌ترین"
 msgstr "Oldest"
 
@@ -2951,6 +2967,10 @@ msgstr "Directions"
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr "Public participation and visitor attendance"
 
+#: templates/news-archive.php
+msgid "مشاهده همه"
+msgstr "View all"
+
 #: includes/topersia-g-home.php
 msgid "مشاهدۀ صفحه"
 msgstr "View page"
@@ -3209,8 +3229,16 @@ msgid "موضوع‌ها"
 msgstr "Topics"
 
 #: includes/topersia-g-news-ui.php
+msgid "موضوع‌های بعدی"
+msgstr "Next topics"
+
+#: includes/topersia-g-news-ui.php
 msgid "موضوع‌های خبر"
 msgstr "News topics"
+
+#: includes/topersia-g-news-ui.php
+msgid "موضوع‌های قبلی"
+msgstr "Previous topics"
 
 #: includes/topersia-g-zones.php
 msgid "مکان مذهبی"
@@ -3345,6 +3373,11 @@ msgstr "Search results"
 msgid "نتایج جست‌وجو برای «%s»"
 msgstr "Search results for “%s”"
 
+#: includes/topersia-g-news-ui.php
+#, php-format
+msgid "نتیجه: %s"
+msgstr "Results: %s"
+
 #: templates/search-results.php
 msgid "نتیجه‌ای نیست."
 msgstr "No results."
@@ -3447,7 +3480,7 @@ msgstr "Symbol"
 msgid "نمای بزرگ نقشۀ %s"
 msgstr "Large map of %s"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "نمای شبکه‌ای"
 msgstr "Grid view"
 
@@ -3455,7 +3488,7 @@ msgstr "Grid view"
 msgid "نمای شماتیک نقشه"
 msgstr "Schematic map"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "نمای فهرستی"
 msgstr "List view"
 
@@ -3711,6 +3744,10 @@ msgstr "All news"
 #: includes/topersia-g-home.php
 msgid "همۀ استان‌ها"
 msgstr "All provinces"
+
+#: includes/topersia-g-news-ui.php
+msgid "همۀ زمان‌ها"
+msgstr "Any time"
 
 #: includes/topersia-g-zones.php
 msgid "همۀ فرهنگ و رویداد"
@@ -4401,6 +4438,10 @@ msgstr "100%"
 msgid "۱۱۵٪"
 msgstr "115%"
 
+#: includes/topersia-g-news-ui.php
+msgid "۱۲ ماه گذشته"
+msgstr "Last 12 months"
+
 #: topersia-render.php
 msgid "۱۳۰٪"
 msgstr "130%"
@@ -4416,6 +4457,14 @@ msgstr "2–4 hours"
 #: includes/topersia-g-map.php
 msgid "۳۰ تا ۶۰ دقیقه"
 msgstr "30–60 minutes"
+
+#: includes/topersia-g-news-ui.php
+msgid "۳۰ روز گذشته"
+msgstr "Last 30 days"
+
+#: includes/topersia-g-news-ui.php
+msgid "۷ روز گذشته"
+msgstr "Last 7 days"
 
 #: includes/topersia-g-home.php
 #, php-format

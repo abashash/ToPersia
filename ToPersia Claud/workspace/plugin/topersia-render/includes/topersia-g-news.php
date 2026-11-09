@@ -661,7 +661,7 @@ if ( function_exists( 'add_action' ) ) {
 		$url  = trim( (string) get_post_meta( $id, 'news_source_url', true ) );
 		$src  = '';
 
-		if ( '' !== $name && '' !== $url ) {
+		if ( '' !== $name && '' !== $url && ! defined( 'TOPERSIA_NEWS_SINGLE_TPL' ) ) {   /* قالب تک‌خبر منبع را در سربرگ دارد (دستۀ 50) */
 			$src = '<p class="tp-news-source">' . esc_html__( 'منبع اصلی:', 'topersia' ) . ' '
 				. '<a href="' . esc_url( $url ) . '" rel="noopener nofollow" target="_blank">' . esc_html( $name ) . '</a></p>';
 		}
@@ -714,6 +714,10 @@ if ( function_exists( 'add_action' ) ) {
 		if ( 'old' === $args['tp_sort'] ) {
 			$q->set( 'order', 'ASC' );
 		}
+		if ( '' !== $args['tp_when'] ) {
+			/* بازۀ زمانی از post_date (P5-D542) — فقط مقدار فهرست بسته */
+			$q->set( 'date_query', array( array( 'column' => 'post_date', 'after' => topersia_g_news_when_map()[ $args['tp_when'] ], 'inclusive' => true ) ) );
+		}
 	} );
 
 	add_filter( 'template_include', function ( $template ) {
@@ -721,6 +725,15 @@ if ( function_exists( 'add_action' ) ) {
 			return $template;
 		}
 		$file = topersia_render_path() . 'templates/news-archive.php';
+		return is_file( $file ) ? $file : $template;
+	}, 99 );
+
+	/* تک‌خبر: قالب خود ما به سبک همۀ صفحه‌های خبر (P5-D541)؛ اسکیمای NewsArticle همان wp_head. */
+	add_filter( 'template_include', function ( $template ) {
+		if ( ! is_singular( 'tpc_news' ) || ! function_exists( 'topersia_g_news_hero' ) ) {
+			return $template;
+		}
+		$file = topersia_render_path() . 'templates/news-single.php';
 		return is_file( $file ) ? $file : $template;
 	}, 99 );
 

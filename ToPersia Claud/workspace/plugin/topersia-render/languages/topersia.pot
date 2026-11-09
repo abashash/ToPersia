@@ -522,6 +522,10 @@ msgstr ""
 msgid "بارش برف"
 msgstr ""
 
+#: includes/topersia-g-news-ui.php
+msgid "بارگیری نشد؛ صفحه دوباره بار می‌شود."
+msgstr ""
+
 #: topersia-render.php
 msgid "باریک"
 msgstr ""
@@ -572,6 +576,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "بازۀ اوج"
+msgstr ""
+
+#: templates/news-archive.php
+msgid "بازۀ زمانی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1077,12 +1085,12 @@ msgstr ""
 msgid "جانشین"
 msgstr ""
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "جدیدترین"
 msgstr ""
 
-#: templates/news-archive.php
-msgid "جدیدترین مطالب"
+#: templates/news-list.php
+msgid "جدیدترین خبرها"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1306,6 +1314,10 @@ msgstr ""
 msgid "خبرهای برگزیده"
 msgstr ""
 
+#: templates/news-single.php
+msgid "خبرهای مرتبط"
+msgstr ""
+
 #: templates/news-archive.php
 msgid "خبری با این پالایش نیست."
 msgstr ""
@@ -1507,6 +1519,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
+msgstr ""
+
+#: templates/news-archive.php
+msgid "دسته‌بندی‌ها"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2235,7 +2251,7 @@ msgstr ""
 msgid "شیوۀ ساخت"
 msgstr ""
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "شیوۀ نمایش"
 msgstr ""
 
@@ -2255,7 +2271,7 @@ msgstr ""
 msgid "صدای هوش مصنوعی"
 msgstr ""
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "صفحه‌های خبر"
 msgstr ""
 
@@ -2512,7 +2528,7 @@ msgstr ""
 msgid "قبلی"
 msgstr ""
 
-#: templates/news-list.php
+#: includes/topersia-g-news-ui.php
 msgid "قدیمی‌ترین"
 msgstr ""
 
@@ -2950,6 +2966,10 @@ msgstr ""
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr ""
 
+#: templates/news-archive.php
+msgid "مشاهده همه"
+msgstr ""
+
 #: includes/topersia-g-home.php
 msgid "مشاهدۀ صفحه"
 msgstr ""
@@ -3208,7 +3228,15 @@ msgid "موضوع‌ها"
 msgstr ""
 
 #: includes/topersia-g-news-ui.php
+msgid "موضوع‌های بعدی"
+msgstr ""
+
+#: includes/topersia-g-news-ui.php
 msgid "موضوع‌های خبر"
+msgstr ""
+
+#: includes/topersia-g-news-ui.php
+msgid "موضوع‌های قبلی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -3344,6 +3372,11 @@ msgstr ""
 msgid "نتایج جست‌وجو برای «%s»"
 msgstr ""
 
+#: includes/topersia-g-news-ui.php
+#, php-format
+msgid "نتیجه: %s"
+msgstr ""
+
 #: templates/search-results.php
 msgid "نتیجه‌ای نیست."
 msgstr ""
@@ -3446,7 +3479,7 @@ msgstr ""
 msgid "نمای بزرگ نقشۀ %s"
 msgstr ""
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "نمای شبکه‌ای"
 msgstr ""
 
@@ -3454,7 +3487,7 @@ msgstr ""
 msgid "نمای شماتیک نقشه"
 msgstr ""
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "نمای فهرستی"
 msgstr ""
 
@@ -3709,6 +3742,10 @@ msgstr ""
 
 #: includes/topersia-g-home.php
 msgid "همۀ استان‌ها"
+msgstr ""
+
+#: includes/topersia-g-news-ui.php
+msgid "همۀ زمان‌ها"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -4400,6 +4437,10 @@ msgstr ""
 msgid "۱۱۵٪"
 msgstr ""
 
+#: includes/topersia-g-news-ui.php
+msgid "۱۲ ماه گذشته"
+msgstr ""
+
 #: topersia-render.php
 msgid "۱۳۰٪"
 msgstr ""
@@ -4414,6 +4455,14 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "۳۰ تا ۶۰ دقیقه"
+msgstr ""
+
+#: includes/topersia-g-news-ui.php
+msgid "۳۰ روز گذشته"
+msgstr ""
+
+#: includes/topersia-g-news-ui.php
+msgid "۷ روز گذشته"
 msgstr ""
 
 #: includes/topersia-g-home.php

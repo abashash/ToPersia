@@ -85,7 +85,7 @@ t( 'گالری: گرید ۴/۵/۸ و --lead برداشته شد (دستۀ 49)', 
 
 /* ── بخش ۲: آرشیو سراسری /news/ (SPRINT-4.4 فاز ۶٫۱، P5-D260) ── */
 $w48_news  = $w48_read( 'plugin/topersia-render/includes/topersia-g-news.php' );
-$w48_ntpl  = $w48_read( 'plugin/topersia-render/templates/news-archive.php' );
+$w48_ntpl  = $w48_read( 'plugin/topersia-render/templates/news-archive.php' ) . $w48_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' );   /* دستۀ 50: سربرگ و ریشه جزء مشترک */
 $w48_ncss  = $w48_read( 'plugin/topersia-render/assets/topersia-g-news.css' );
 $w48_sch   = $w48_read( 'plugin/topersia-schema/topersia-schema.php' );
 $w48_q = function ( $s ) {
@@ -107,7 +107,7 @@ tp441_mut( 'news: نشان مکان‌های کارت از دروازۀ انتش
 	str_replace( 'foreach ( topersia_g_published( topersia_g_news_places( $news_id ) ) as $pid ) {', 'foreach ( topersia_g_news_places( $news_id ) as $pid ) {', $w48_news ) );
 $w48_tpl = function ( $s ) {
 	return false !== strpos( $s, '<nav class="tp-crumb"' ) && false !== strpos( $s, "topersia_g_news_archive_card( \$tp_one )" )
-		&& false !== strpos( $s, "__( 'هنوز خبری منتشر نشده است.', 'topersia' )" ) && false !== strpos( $s, "dir=\"<?php echo esc_attr( is_rtl() ? 'rtl' : 'ltr' ); ?>\"" )
+		&& false !== strpos( $s, "__( 'هنوز خبری منتشر نشده است.', 'topersia' )" ) && false !== strpos( $s, "' dir=\"' . esc_attr( is_rtl() ? 'rtl' : 'ltr' ) . '\" data-tp-news-base" )
 		&& ! preg_match( '/>\s*[\x{0600}-\x{06FF}][^<{]*</u', preg_replace( '/<\?php.*?\?>/s', '', $s ) );
 };
 tp441_mut( 'news قالب: مسیر راهنما، کارت، خالی امن، جهت از زبان، بی متن فارسی خام (همه از کاتالوگ) — جهش: متن خام', $w48_tpl, $w48_ntpl,

@@ -116,7 +116,7 @@ set_query_var( 'tp_sort', 'old' );
 $f1 = topersia_g_news_filtered() && topersia_g_news_archive_thin();
 set_query_var( 'tp_sort', '' );
 $f0 = topersia_g_news_filtered();
-tN( 'پالایش‌شده = noindex؛ بی‌پالایش نه؛ GET فقط', $f1 && ! $f0 && false !== strpos( $h, '<form class="tp-news-filter" method="get"' ) );
+tN( 'پالایش‌شده = noindex؛ بی‌پالایش نه؛ GET فقط', $f1 && ! $f0 && false !== strpos( $h, '<form id="tp-news-form" class="tp-news-filter" method="get"' ) );
 foreach ( array( 'tp_topic', 'tp_sort', 'tp_q', 'tp_kind' ) as $qv ) { $hasq = $hasq ?? false; $hasq = $hasq || false !== strpos( (string) topersia_g_news_archive_url( 1 ), $qv ); }
 tN( 'canonical پالایش‌شده = نشانی بی‌پالایش ' . topersia_g_news_archive_url( 1 ), ! $hasq && untrailingslashit( topersia_g_news_archive_url( 1 ) ) === untrailingslashit( $base ) );
 tN( 'مسیر راهنما: ToPersia › اخبار', 1 === preg_match( '#<nav class="tp-crumb"[^>]*>\s*<a href="' . preg_quote( home_url( '/' ), '#' ) . '">ToPersia</a><span>›</span>\s*<span aria-current="page">اخبار</span>#u', $h ) );

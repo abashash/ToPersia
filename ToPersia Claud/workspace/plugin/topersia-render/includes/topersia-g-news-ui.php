@@ -119,12 +119,14 @@ if ( ! function_exists( 'topersia_g_news_args' ) ) {
 		$kind  = (string) get_query_var( 'tp_kind' );
 		$topic = topersia_g_news_filter_topic();
 		$q     = trim( (string) preg_replace( '/\s+/u', ' ', sanitize_text_field( (string) get_query_var( 'tp_q' ) ) ) );
+		$when  = is_scalar( get_query_var( 'tp_when' ) ) ? (string) get_query_var( 'tp_when' ) : '';
 		return array(
 			'tp_place' => topersia_g_news_filter_place(),
 			'tp_kind'  => in_array( $kind, array_keys( topersia_g_news_relations() ), true ) ? $kind : '',
 			'tp_topic' => $topic ? $topic->slug : '',
 			'tp_q'     => function_exists( 'mb_substr' ) ? mb_substr( $q, 0, 80 ) : substr( $q, 0, 80 ),
 			'tp_sort'  => 'old' === get_query_var( 'tp_sort' ) ? 'old' : '',
+			'tp_when'  => isset( topersia_g_news_when_map()[ $when ] ) ? $when : '',   /* P5-D542 */
 		);
 	}
 }
@@ -136,7 +138,7 @@ if ( ! function_exists( 'topersia_g_news_filtered' ) ) {
 			return true;
 		}
 		/* مقدار نامعتبر (موضوع یا مکان ناموجود) هم پالایش است: نتیجۀ تهی، noindex، پیام «با این پالایش». */
-		foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort' ) as $qv ) {
+		foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as $qv ) {
 			$v = get_query_var( $qv );
 			if ( ! is_scalar( $v ) || ( '' !== trim( (string) $v ) && '0' !== (string) $v ) ) {
 				return true;
@@ -336,6 +338,19 @@ if ( ! function_exists( 'topersia_g_news_hero_image' ) ) {
 		} else {
 			$img = function_exists( 'topersia_g_home_hero_att' ) ? topersia_g_news_real_img( topersia_g_home_hero_att()[0] ) : 0;
 		}
+		return topersia_g_news_hero_img( $img );
+	}
+}
+
+
+/* ── اجزای مشترک همۀ صفحه‌های خبر — P5-D541 · دستۀ 50 ───────────────────
+ * /news/ · /{نوع}/{نامک}/news/ · تک‌خبر tpc_news همه از همین توابع: سربرگ،
+ * تراشه، فهرست کشویی، دکمۀ نما، صفحه‌بندی. بی کد تکراری در قالب‌ها.
+ */
+
+/** پیوست سربرگ تمام‌عرض؛ نبود ← تهی (سربرگ گرادیانی). */
+if ( ! function_exists( 'topersia_g_news_hero_img' ) ) {
+	function topersia_g_news_hero_img( $img ) {
 		return $img ? (string) wp_get_attachment_image( $img, 'full', false, array(
 			'alt'           => '',
 			'class'         => 'tp-news-hero__img',
@@ -344,6 +359,194 @@ if ( ! function_exists( 'topersia_g_news_hero_image' ) ) {
 			'fetchpriority' => 'high',
 			'sizes'         => '100vw',
 		) ) : '';
+	}
+}
+
+/**
+ * سربرگ مشترک: تصویر واقعی + پوشش تیره (P5-D187)، مسیر راهنما، H1، یک جمله، و افزودۀ اختیاری.
+ *
+ * @param string $img    خروجی topersia_g_news_hero_img() یا تهی
+ * @param array  $crumbs [ [ برچسب, نشانی یا تهی برای صفحۀ جاری ], … ]
+ */
+if ( ! function_exists( 'topersia_g_news_hero' ) ) {
+	function topersia_g_news_hero( $img, $crumbs, $title, $lead = '', $extra = '' ) {
+		$c = array();
+		foreach ( $crumbs as $cr ) {
+			$c[] = '' !== (string) $cr[1]
+				? '<a href="' . esc_url( $cr[1] ) . '">' . esc_html( $cr[0] ) . '</a>'
+				: '<span aria-current="page">' . esc_html( $cr[0] ) . '</span>';
+		}
+		return '<header class="tp-news-hero' . ( '' === $img ? ' tp-news-hero--art' : '' ) . '" data-tp-news-swap="hero">'
+			. $img
+			. '<span class="tp-news-hero__scrim" aria-hidden="true"></span>'
+			. '<div class="tp-wrap tp-news-hero__in">'
+			. '<nav class="tp-crumb" aria-label="' . esc_attr__( 'مسیر راهنما', 'topersia' ) . '">' . implode( "<span>›</span>\n", $c ) . '</nav>'
+			. '<h1>' . esc_html( $title ) . '</h1>'
+			. ( '' !== $lead ? '<p class="tp-news-hero__lead">' . esc_html( $lead ) . '</p>' : '' )
+			. $extra
+			. '</div></header>';
+	}
+}
+
+/**
+ * تراشه‌ها — یک خط افقی اسکرول‌شونده، هرگز دو خط (P5-D542)؛ بی شمار (P5-D544).
+ * پیکان‌های دسکتاپ پنهان‌اند تا JS سرریز را ببیند؛ بی JS خودِ نوار اسکرول می‌خورد.
+ *
+ * @param array  $items [ [ نام, نشانی, فعال؟, نامک ], … ] — کمتر از دو مورد ← هیچ
+ * @param string $swap  کلید ناحیۀ تعویض بی‌رفرش (تهی ← درون ناحیۀ دیگری است)
+ */
+if ( ! function_exists( 'topersia_g_news_chips' ) ) {
+	function topersia_g_news_chips( $items, $label, $swap = 'chips', $mod = '' ) {
+		if ( count( $items ) < 2 ) {
+			return '';
+		}
+		$a   = topersia_g_arrows();
+		$out = '';
+		foreach ( $items as $it ) {
+			$out .= '<li><a data-tp-topic="' . esc_attr( (string) $it[3] ) . '" href="' . esc_url( $it[1] ) . '"' . ( $it[2] ? ' aria-current="page"' : '' ) . '>' . esc_html( $it[0] ) . '</a></li>';
+		}
+		$btn = function ( $k, $txt, $aria ) {
+			return '<button type="button" class="tp-news-chips__nav tp-news-chips__nav--' . $k . '" data-tp-chips="' . $k . '" hidden aria-label="' . esc_attr( $aria ) . '"><span aria-hidden="true">' . esc_html( $txt ) . '</span></button>';
+		};
+		return '<nav class="tp-news-chips' . ( '' !== $mod ? ' tp-news-chips--' . esc_attr( $mod ) : '' ) . '" aria-label="' . esc_attr( $label ) . '" data-tp-news-chips data-tp-news-nav'
+			. ( '' !== $swap ? ' data-tp-news-swap="' . esc_attr( $swap ) . '"' : '' ) . '>'
+			. $btn( 'prev', $a['prev'], __( 'موضوع‌های قبلی', 'topersia' ) )
+			. '<ul class="tp-news-chips__list">' . $out . '</ul>'
+			. $btn( 'next', $a['next'], __( 'موضوع‌های بعدی', 'topersia' ) )
+			. '</nav>';
+	}
+}
+
+/**
+ * فهرست کشویی با برچسب — رنگ و پیکان از توکن (P5-D542).
+ *
+ * @param array $opts مقدار ← برچسب؛ یا برچسب گروه ← [ مقدار ← برچسب ]
+ */
+if ( ! function_exists( 'topersia_g_news_select' ) ) {
+	function topersia_g_news_select( $id, $name, $label, $opts, $value, $form = '' ) {
+		$opt = function ( $k, $v ) use ( $value ) {
+			return '<option value="' . esc_attr( (string) $k ) . '"' . selected( (string) $value, (string) $k, false ) . '>' . esc_html( $v ) . '</option>';
+		};
+		$o = '';
+		foreach ( $opts as $k => $v ) {
+			if ( is_array( $v ) ) {
+				$o .= '<optgroup label="' . esc_attr( (string) $k ) . '">';
+				foreach ( $v as $k2 => $v2 ) {
+					$o .= $opt( $k2, $v2 );
+				}
+				$o .= '</optgroup>';
+			} else {
+				$o .= $opt( $k, $v );
+			}
+		}
+		return '<div class="tp-news-filter__f"><label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>'
+			. '<span class="tp-news-sel"><select id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '"' . ( '' !== $form ? ' form="' . esc_attr( $form ) . '"' : '' ) . '>' . $o . '</select></span></div>';
+	}
+}
+
+/** گزینه‌های ترتیب — یک منبع برای دو قالب. */
+if ( ! function_exists( 'topersia_g_news_sort_options' ) ) {
+	function topersia_g_news_sort_options() {
+		return array( '' => __( 'جدیدترین', 'topersia' ), 'old' => __( 'قدیمی‌ترین', 'topersia' ) );
+	}
+}
+
+/** بازۀ زمانی مجاز ← عبارت date_query روی post_date (P5-D542). */
+if ( ! function_exists( 'topersia_g_news_when_map' ) ) {
+	function topersia_g_news_when_map() {
+		return array( '7d' => '7 days ago', '30d' => '30 days ago', '12m' => '12 months ago' );
+	}
+}
+
+/** برچسب‌های بازۀ زمانی به زبان صفحه. */
+if ( ! function_exists( 'topersia_g_news_when_options' ) ) {
+	function topersia_g_news_when_options() {
+		return array(
+			''    => __( 'همۀ زمان‌ها', 'topersia' ),
+			'7d'  => __( '۷ روز گذشته', 'topersia' ),
+			'30d' => __( '۳۰ روز گذشته', 'topersia' ),
+			'12m' => __( '۱۲ ماه گذشته', 'topersia' ),
+		);
+	}
+}
+
+/** دکمۀ شبکه/فهرست — پنهان تا JS، و بی شبکه هم پنهان. */
+if ( ! function_exists( 'topersia_g_news_view_toggle' ) ) {
+	function topersia_g_news_view_toggle() {
+		return '<div class="tp-news-view" role="group" aria-label="' . esc_attr__( 'شیوۀ نمایش', 'topersia' ) . '" hidden data-tp-news-view>'
+			. '<button type="button" data-tp-view="grid" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span class="tp-news-vh">' . esc_html__( 'نمای شبکه‌ای', 'topersia' ) . '</span></button>'
+			. '<button type="button" data-tp-view="list" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="5" cy="6" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="5" cy="18" r="1.2"/></svg><span class="tp-news-vh">' . esc_html__( 'نمای فهرستی', 'topersia' ) . '</span></button>'
+			. '</div>';
+	}
+}
+
+/** صفحه‌بندی؛ $link( صفحه ) ← نشانی با پالایش جاری. */
+if ( ! function_exists( 'topersia_g_news_pages' ) ) {
+	function topersia_g_news_pages( $pages, $paged, $link ) {
+		if ( $pages < 2 ) {
+			return '';
+		}
+		$out = '';
+		for ( $i = 1; $i <= $pages; $i ++ ) {
+			$out .= $i === $paged
+				? '<span aria-current="page">' . esc_html( topersia_g_fa( $i ) ) . '</span>'
+				: '<a href="' . esc_url( $link( $i ) ) . '">' . esc_html( topersia_g_fa( $i ) ) . '</a>';
+		}
+		return '<nav class="tp-news-pages" aria-label="' . esc_attr__( 'صفحه‌های خبر', 'topersia' ) . '" data-tp-news-nav>' . $out . '</nav>';
+	}
+}
+
+/** حالت قطعه (P5-D546): پاسخ فقط ناحیه‌های تعویض‌پذیر، بی سربرگ و پاورقی سایت. */
+if ( ! function_exists( 'topersia_g_news_partial' ) ) {
+	function topersia_g_news_partial() {
+		return '1' === (string) get_query_var( 'tp_partial' );
+	}
+}
+
+/** سرآیند پاسخ قطعه — هرگز نمایه نشود، هرگز در کش مشترک نماند. */
+if ( ! function_exists( 'topersia_g_news_partial_headers' ) ) {
+	function topersia_g_news_partial_headers() {
+		if ( ! headers_sent() ) {
+			header( 'X-Robots-Tag: noindex, nofollow' );
+			header( 'Cache-Control: no-store' );
+			header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
+		}
+	}
+}
+
+/** ویژگی‌های ناحیۀ نتیجه: پیام aria-live و عنوان سند، هر دو به زبان صفحه. */
+if ( ! function_exists( 'topersia_g_news_results_attrs' ) ) {
+	function topersia_g_news_results_attrs( $total ) {
+		/* translators: %s: شمار خبر */
+		$msg = sprintf( __( 'نتیجه: %s', 'topersia' ), topersia_g_fa( (int) $total ) );
+		return ' data-tp-news-swap="results" data-tp-news-msg="' . esc_attr( $msg ) . '" data-tp-news-title="' . esc_attr( wp_get_document_title() ) . '"';
+	}
+}
+
+/** ریشۀ صفحه: نشانی پایه برای JS، پیام خطای شبکه، جهت از زبان صفحه. */
+if ( ! function_exists( 'topersia_g_news_root_attrs' ) ) {
+	function topersia_g_news_root_attrs( $base ) {
+		return ' dir="' . esc_attr( is_rtl() ? 'rtl' : 'ltr' ) . '" data-tp-news-base="' . esc_attr( (string) wp_parse_url( $base, PHP_URL_PATH ) ) . '"'
+			. ' data-tp-news-err="' . esc_attr__( 'بارگیری نشد؛ صفحه دوباره بار می‌شود.', 'topersia' ) . '"';
+	}
+}
+
+/** خبرهای مرتبط با یک خبر: از مکان‌های منتشرشدۀ آن، بی خودش، تا $limit. */
+if ( ! function_exists( 'topersia_g_news_related' ) ) {
+	function topersia_g_news_related( $news_id, $limit = 4 ) {
+		$out = array();
+		foreach ( topersia_g_published( topersia_g_news_places( $news_id ) ) as $pid ) {
+			$q = topersia_g_news_query( $pid, $limit + 1, 0 );
+			foreach ( $q['ids'] as $id ) {
+				if ( (int) $id !== (int) $news_id && ! in_array( (int) $id, $out, true ) ) {
+					$out[] = (int) $id;
+				}
+			}
+			if ( count( $out ) >= $limit ) {
+				break;
+			}
+		}
+		return array_slice( $out, 0, $limit );
 	}
 }
 
@@ -379,16 +582,20 @@ if ( function_exists( 'add_action' ) ) {
 	}, 98 );
 
 	add_filter( 'query_vars', function ( $vars ) {
-		return array_merge( $vars, array( 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort' ) );
+		return array_merge( $vars, array( 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when', 'tp_partial' ) );
 	} );
 
 	add_action( 'wp_enqueue_scripts', function () {
 		$list = get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() );
-		if ( ! ( topersia_g_news_is_archive() || $list ) || ! function_exists( 'topersia_render_url' ) ) {
+		$one  = is_singular( 'tpc_news' );   /* تک‌خبر — همان سبک (P5-D541) */
+		if ( ! ( topersia_g_news_is_archive() || $list || $one ) || ! function_exists( 'topersia_render_url' ) ) {
 			return;
 		}
-		if ( $list ) {
+		if ( $list || $one ) {
 			wp_enqueue_style( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-news.css' ) );
+		}
+		if ( $one ) {
+			return;   /* تک‌خبر پالایش ندارد */
 		}
 		wp_enqueue_script( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.js', array(), topersia_render_asset_version( 'assets/topersia-g-news.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
 	}, 31 );

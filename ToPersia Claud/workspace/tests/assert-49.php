@@ -208,7 +208,7 @@ tp441_mut( 'D468: صفحۀ مکان با موضوع یا ترتیب هم noindex
 	str_replace( "return \$q['total'] < 3 || '' !== (string) get_query_var( 'tp_topic' ) || '' !== (string) get_query_var( 'tp_sort' );", "return \$q['total'] < 3;", $w49_news ) );
 
 $w49_get = function ( $t, $l ) {
-	return 1 === substr_count( $t, '<form class="tp-news-filter" method="get"' ) && 1 === substr_count( $l, '<form class="tp-news-filter tp-news-filter--min" method="get"' )
+	return 1 === substr_count( $t, '<form id="tp-news-form" class="tp-news-filter" method="get"' ) && 1 === substr_count( $l, '<form class="tp-news-filter tp-news-filter--min" method="get"' )
 		&& 0 === preg_match( '/method="post"|wp_nonce_field/i', $t . $l );
 };
 t( 'D468: پالایش فقط GET — هر دو قالب', $w49_get( $w49_ntpl, $w49_ltpl ) );
@@ -234,19 +234,19 @@ tp441_mut( 'P5-D534 CSS: پوشش تیره از توکن --tp-media-ink، کار
 	preg_replace( '/color-mix\(in srgb,var\(--tp-media-ink\) (\d+)%,transparent\)/', 'rgba(0,0,0,.$1)', $w49_ncss, 1 ) );
 $w49_js = function ( $s ) {
 	return false !== strpos( $s, 'window.localStorage.getItem( KEY )' ) && 2 <= substr_count( $s, '} catch ( e ) {' )
-		&& 0 === preg_match( "/\\.submit\\(\\)|requestSubmit|addEventListener\\(\\s*'change'/", $s );
+		&& 0 === preg_match( "/\\.submit\\(\\)|requestSubmit/", $s );   /* دستۀ 50 (P5-D546): تغییر فهرست کشویی بی‌رفرش جای‌گزین می‌شود و aria-live اعلام می‌کند — هرگز ارسال کامل فرم */
 };
-tp441_mut( 'P5-D534 JS: شبکه/فهرست با localStorage در try، بی ارسال خودکار با تغییر (WCAG 3.2.2) — جهش: ارسال با change', $w49_js, $w49_njs,
+tp441_mut( 'P5-D534 JS: شبکه/فهرست با localStorage در try، بی ارسال کامل فرم با تغییر (بی‌رفرش P5-D546) — جهش: ارسال با change', $w49_js, $w49_njs,
 	str_replace( "var KEY = 'tp-news-view';", "var KEY = 'tp-news-view'; document.addEventListener( 'change', function ( e ) { e.target.form.submit(); } );", $w49_njs ) );
 $w49_feat = function ( $s ) {
 	return false !== strpos( $s, 'hidden data-tp-news-view>' ) && false !== strpos( $s, 'topersia_g_news_feature( $tp_feat[0] )' )
 		&& false !== strpos( $s, 'topersia_g_news_mini( $tp_one )' ) && 0 === preg_match( '/newsletter|خبرنامه/u', $s );
 };
-tp441_mut( 'P5-D534 قالب: خبر برگزیده + سه کنار، دکمۀ نما پنهان تا JS، بی خبرنامه — جهش: خبرنامه', $w49_feat, $w49_ntpl,
-	str_replace( 'hidden data-tp-news-view>', 'hidden data-tp-news-view data-newsletter>', $w49_ntpl ) );
+tp441_mut( 'P5-D534 قالب: خبر برگزیده + سه کنار، دکمۀ نما پنهان تا JS (جزء مشترک دستۀ 50)، بی خبرنامه — جهش: خبرنامه', $w49_feat, $w49_ntpl . $w49_nui,
+	str_replace( 'hidden data-tp-news-view>', 'hidden data-tp-news-view data-newsletter>', $w49_ntpl . $w49_nui ) );
 $w49_inv = function ( $s ) {
-	return false !== strpos( $s, "foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort' ) as \$qv ) {" )
+	return false !== strpos( $s, "foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as \$qv ) {" )
 		&& false !== strpos( $s, "if ( ! is_scalar( \$v ) || ( '' !== trim( (string) \$v ) && '0' !== (string) \$v ) ) {" );
 };
 tp441_mut( 'D468: مقدار نامعتبر پالایش (موضوع یا مکان ناموجود) هم پالایش‌شده است ← noindex و پیام آرام — جهش: فقط مقدار معتبر', $w49_inv, $w49_nui,
-	str_replace( "foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort' ) as \$qv ) {", "foreach ( array() as \$qv ) {", $w49_nui ) );
+	str_replace( "foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as \$qv ) {", "foreach ( array() as \$qv ) {", $w49_nui ) );

@@ -76,7 +76,7 @@ const probe = () => {
 						t( 'تراشه‌های موضوع بی شمار', ! r.chipNum );
 						if ( 1440 === w && 'light' === mode ) {
 							/* بی‌پالایش با ۴ خبر همه در برگزیده‌اند و شبکه‌ای نیست ← دکمه نیست؛ روی صفحۀ پالایش‌شده (شبکه) سنجیده می‌شود */
-							t( 'بی شبکه، بی دکمۀ نما', r.card > 0 || null === r.view );
+							t( 'بی شبکه، دکمۀ نما پنهان (دستۀ 50: دکمه در نوار ابزار است)', r.card > 0 || true !== r.view );
 							await p.goto( BASE + '/news/?tp_kind=tp_city', { waitUntil: 'load', timeout: 120000 * X } );
 							const r2 = await p.evaluate( probe );
 							t( `صفحۀ پالایش‌شده: شبکه ${r2.card} کارت، بی برگزیده، دکمۀ نما با JS پیدا`, r2.card > 0 && 0 === r2.feat && true === r2.view );
