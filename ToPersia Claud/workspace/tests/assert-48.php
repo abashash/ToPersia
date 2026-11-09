@@ -89,13 +89,13 @@ $w48_ntpl  = $w48_read( 'plugin/topersia-render/templates/news-archive.php' ) . 
 $w48_ncss  = $w48_read( 'plugin/topersia-render/assets/topersia-g-news.css' );
 $w48_sch   = $w48_read( 'plugin/topersia-schema/topersia-schema.php' );
 $w48_q = function ( $s ) {
-	return false !== strpos( $s, "\$q->set( 'meta_query', array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ) );" )
+	return false !== strpos( $s, "\$q->set( 'meta_query', topersia_g_sample_mq() );" )   /* دستۀ 51 (P5-D548): یک منبع */
 		&& false !== strpos( $s, "\$q->set( 'post_status', 'publish' );" ) && false !== strpos( $s, "\$q->set( 'has_password', false );" )
-		&& false !== strpos( $s, "if ( ! metadata_exists( 'post', \$id, '_tp_sample' ) ) {" )
+		&& false !== strpos( $s, "if ( ! topersia_g_sample_hidden( \$id ) ) {" )
 		&& false !== strpos( $s, "foreach ( topersia_g_published( array_map( 'absint', (array) \$ids ) ) as \$id ) {" );
 };
 tp441_mut( 'news: کوئری اصلی آرشیو فقط منتشرشده، بی‌گذرواژه، غیرنمونه؛ شناسه‌ها از دروازۀ انتشار — جهش: بی شرط نمونه', $w48_q, $w48_news,
-	str_replace( "\$q->set( 'meta_query', array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ) );", '', $w48_news ) );
+	str_replace( "\$q->set( 'meta_query', topersia_g_sample_mq() );", '', $w48_news ) );
 $w48_thin = function ( $s ) {
 	return false !== strpos( $s, 'return topersia_g_news_filtered() || count( topersia_g_news_archive_ids() ) < 3;' )
 		&& 2 === substr_count( $s, 'topersia_g_news_is_archive() && topersia_g_news_archive_thin()' );

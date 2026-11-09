@@ -274,7 +274,8 @@ if ( ! function_exists( 'topersia_g_news_meta' ) ) {
 if ( ! function_exists( 'topersia_g_news_topic_badge' ) ) {
 	function topersia_g_news_topic_badge( $news_id ) {
 		$term = topersia_g_news_topic_of( $news_id );
-		return $term ? '<span class="tp-news-topic">' . esc_html( $term->name ) . '</span>' : '';
+		/* P5-D548: نشان «نمونۀ نمایشی» کنار موضوع (فقط حالت پیش‌نمایش) */
+		return ( $term ? '<span class="tp-news-topic">' . esc_html( $term->name ) . '</span>' : '' ) . topersia_g_demo_badge( $news_id );
 	}
 }
 

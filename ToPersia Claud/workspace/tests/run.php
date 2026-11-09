@@ -5,6 +5,7 @@
  */
 
 require __DIR__ . '/stubs.php';
+require TP_PLUGIN_DIR . 'includes/topersia-g-demo.php';   /* P5-D548 */
 require TP_PLUGIN_DIR . 'includes/topersia-g-map.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-weather.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-panel.php';

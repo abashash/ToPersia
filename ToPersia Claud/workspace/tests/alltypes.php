@@ -161,6 +161,7 @@ if ( ! function_exists( 'get_post_comments_feed_link' ) ) {
 	function get_post_comments_feed_link( $post_id = 0 ) { return get_permalink( $post_id ) . 'feed/'; }
 }
 
+require TP_PLUGIN_DIR . 'includes/topersia-g-demo.php';   /* P5-D548 */
 require TP_PLUGIN_DIR . 'includes/topersia-g-map.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-weather.php';
 require TP_PLUGIN_DIR . 'includes/topersia-g-panel.php';

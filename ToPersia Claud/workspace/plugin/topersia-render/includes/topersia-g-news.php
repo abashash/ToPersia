@@ -294,6 +294,7 @@ if ( ! function_exists( 'topersia_g_news_card' ) ) {
 
 		return '<a href="' . esc_url( (string) get_permalink( $news_id ) ) . '">'
 			. '<div class="tp-thumb">' . $thumb . '</div><div>'
+			. topersia_g_demo_badge( $news_id )
 			. '<h3>' . esc_html( get_the_title( $news_id ) ) . '</h3>'
 			. ( '' !== $date ? '<time datetime="' . esc_attr( $date ) . '">' . esc_html( topersia_g_date_fa( $date ) ) . '</time>' : '' )
 			/* متن خبر تراز دوطرفه.  P5-D270 */
@@ -362,7 +363,7 @@ if ( ! function_exists( 'topersia_g_news_archive_ids' ) ) {
 
 		$out = array();
 		foreach ( topersia_g_published( array_map( 'absint', (array) $ids ) ) as $id ) {
-			if ( ! metadata_exists( 'post', $id, '_tp_sample' ) ) {
+			if ( ! topersia_g_sample_hidden( $id ) ) {
 				$out[] = $id;
 			}
 		}
@@ -685,7 +686,7 @@ if ( function_exists( 'add_action' ) ) {
 		$q->set( 'has_password', false );
 		$q->set( 'orderby', 'date' );
 		$q->set( 'order', 'DESC' );
-		$q->set( 'meta_query', array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ) );
+		$q->set( 'meta_query', topersia_g_sample_mq() );
 		/* پالایش‌های P5-D468 — همه از یک منبع (topersia_g_news_args)، فقط GET. */
 		$args = topersia_g_news_args();
 		$pool = null;

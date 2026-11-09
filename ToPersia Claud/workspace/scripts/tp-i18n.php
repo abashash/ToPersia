@@ -37,6 +37,7 @@ $DOMAIN = 'topersia';
 $FILES = array(
 	'topersia-render.php',
 	'includes/topersia-g-core.php',
+	'includes/topersia-g-demo.php',
 	'includes/topersia-g-map.php',
 	'includes/topersia-g-weather.php',
 	'includes/topersia-g-zones.php',

@@ -1633,6 +1633,8 @@ function topersia_schema_output() {
 		if ( function_exists( 'topersia_g_news_archive_thin' ) && ! topersia_g_news_archive_thin() ) {
 			global $wp_query;
 			$ids  = function_exists( 'topersia_g_published' ) ? topersia_g_published( array_map( 'absint', wp_list_pluck( (array) $wp_query->posts, 'ID' ) ) ) : array();
+			/* P5-D548: پست نمایشی هرگز در اسکیما */
+			$ids  = function_exists( 'topersia_g_demo_strip' ) ? topersia_g_demo_strip( $ids ) : $ids;
 			$per  = max( 1, (int) $wp_query->get( 'posts_per_page' ) );
 			$page = max( 1, (int) get_query_var( 'paged' ) );
 			$json = topersia_schema_news_archive_json( $ids, (string) ( function_exists( 'topersia_g_news_archive_url' ) ? topersia_g_news_archive_url( $page ) : get_post_type_archive_link( 'tpc_news' ) ), ( $page - 1 ) * $per + 1 );
@@ -1656,6 +1658,11 @@ function topersia_schema_output() {
 
 	// صفحاتی که noindex‌اند نباید دادۀ ساختاریافته بدهند.
 	if ( 'tp_county' === get_post_type( $post_id ) ) {
+		return;
+	}
+
+	/* P5-D548: پست نمایشی هرگز در اسکیما */
+	if ( '1' === (string) get_post_meta( $post_id, '_tp_demo', true ) ) {
 		return;
 	}
 

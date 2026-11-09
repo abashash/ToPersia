@@ -64,6 +64,7 @@ ob_end_clean();
  */
 require_once $ROOT . '/plugin/topersia-core/includes/topersia-fold.php';
 require_once TP_PLUGIN_DIR . 'includes/topersia-g-core.php';
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-demo.php';   /* P5-D548 */
 $tp_g_js = '<script>var TopersiaG = ' . json_encode( array( 'rest' => '', 'fold' => topersia_search_fold_js_rules() ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ";</script>\n";
 
 $work = sys_get_temp_dir() . '/tp-contrast-' . getmypid();

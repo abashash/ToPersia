@@ -3512,6 +3512,10 @@ msgstr "العرض وسهولة القراءة"
 msgid "نمایش یا پنهان‌کردن منبع نقشه"
 msgstr "إظهار مصدر الخريطة أو إخفاؤه"
 
+#: includes/topersia-g-demo.php
+msgid "نمونۀ نمایشی"
+msgstr "نموذج للعرض"
+
 #: includes/topersia-g-map.php
 msgid "نمکی"
 msgstr "ملحي"

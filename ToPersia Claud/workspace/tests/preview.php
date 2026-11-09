@@ -22,6 +22,7 @@ ob_end_clean();
  */
 require_once dirname( __DIR__ ) . '/plugin/topersia-core/includes/topersia-fold.php';
 require_once TP_PLUGIN_DIR . 'includes/topersia-g-core.php';
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-demo.php';   /* P5-D548 */
 $tp_g_js = '<script>var TopersiaG = ' . json_encode( array( 'rest' => '', 'fold' => topersia_search_fold_js_rules() ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ";</script>\n";
 
 $dest = isset( $argv[1] ) ? rtrim( $argv[1], '/\\' ) : sys_get_temp_dir() . '/tp-preview';

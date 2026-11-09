@@ -74,10 +74,11 @@ tp441_mut( 'بخش بی‌داده پنهان است (بدنۀ خالی ← هی
 $w46_sample = function ( $s ) {
 	$code = preg_replace( '#/\*.*?\*/#s', '', $s );
 	$gp   = substr_count( $code, 'get_posts(' );
-	$smp  = substr_count( $code, "array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' )" );
+	/* دستۀ 51 (P5-D548): شرط نمونه یا عیناً، یا از یک منبع topersia_g_sample_mq() (نمایشی فقط با حالت پیش‌نمایش) */
+	$smp  = preg_match_all( '/\'meta_query\'\s*=>\s*(?:\$demo \? topersia_g_sample_mq\(\) : )?(?:topersia_g_sample_mq\(\)|array\( array\( \'key\' => \'_tp_sample\', \'compare\' => \'NOT EXISTS\' \) \))/', $code );
 	return $gp >= 2 && $gp === $smp && substr_count( $code, 'topersia_g_published(' ) >= $gp;
 };
-tp441_mut( 'هر پرسش صفحۀ اول نمونه را بیرون می‌گذارد و از دروازۀ انتشار می‌گذرد — جهش: پرسش اخبار بی شرط نمونه', $w46_sample, $w46_src, preg_replace( "/(tpc_news.*?)'meta_query'\s*=> array\( array\( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' \) \),/s", '$1', $w46_src ) );
+tp441_mut( 'هر پرسش صفحۀ اول نمونه را بیرون می‌گذارد و از دروازۀ انتشار می‌گذرد — جهش: پرسش اخبار بی شرط نمونه', $w46_sample, $w46_src, preg_replace( "/(tpc_news.*?)'meta_query'\s*=> topersia_g_sample_mq\(\),/s", '$1', $w46_src ) );
 $w46_nodirect = function ( $s ) {
 	return 0 === preg_match( '/get_post_meta\(\s*\$(id|pid|one)\b/', $s );
 };

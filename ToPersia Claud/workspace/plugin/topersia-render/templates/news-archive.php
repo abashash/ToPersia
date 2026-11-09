@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $wp_query;
 
 $tp_ids   = array_map( 'absint', wp_list_pluck( (array) $wp_query->posts, 'ID' ) );
-$tp_ids   = array_values( array_filter( topersia_g_published( $tp_ids ), function ( $id ) { return ! metadata_exists( 'post', $id, '_tp_sample' ); } ) );
+$tp_ids   = array_values( array_filter( topersia_g_published( $tp_ids ), function ( $id ) { return ! topersia_g_sample_hidden( $id ); } ) );
 $tp_paged = max( 1, (int) get_query_var( 'paged' ) );
 $tp_pages = (int) $wp_query->max_num_pages;
 $tp_total = (int) $wp_query->found_posts;

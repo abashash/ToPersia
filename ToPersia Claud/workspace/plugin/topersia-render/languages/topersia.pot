@@ -3511,6 +3511,10 @@ msgstr ""
 msgid "نمایش یا پنهان‌کردن منبع نقشه"
 msgstr ""
 
+#: includes/topersia-g-demo.php
+msgid "نمونۀ نمایشی"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "نمکی"
 msgstr ""

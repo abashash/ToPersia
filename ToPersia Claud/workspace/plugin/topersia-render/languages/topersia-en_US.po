@@ -3512,6 +3512,10 @@ msgstr "Display and readability"
 msgid "نمایش یا پنهان‌کردن منبع نقشه"
 msgstr "Show or hide map attribution"
 
+#: includes/topersia-g-demo.php
+msgid "نمونۀ نمایشی"
+msgstr "Demo sample"
+
 #: includes/topersia-g-map.php
 msgid "نمکی"
 msgstr "Salt"

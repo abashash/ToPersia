@@ -878,6 +878,7 @@ return array (
     'نمایش اطلاعات نشانگر' => 'Show marker details',
     'نمایش و خوانایی' => 'Display and readability',
     'نمایش یا پنهان‌کردن منبع نقشه' => 'Show or hide map attribution',
+    'نمونۀ نمایشی' => 'Demo sample',
     'نمکی' => 'Salt',
     'ننوشید' => 'Do not drink',
     'نهاد اعطاکننده' => 'Awarding body',

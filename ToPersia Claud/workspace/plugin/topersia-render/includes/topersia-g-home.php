@@ -17,7 +17,7 @@ if ( ! function_exists( 'topersia_g_home_real' ) ) {
 	 * @param int      $limit -1 همه.
 	 * @return int[]
 	 */
-	function topersia_g_home_real( array $types, $limit = -1 ) {
+	function topersia_g_home_real( array $types, $limit = -1, $demo = true ) {
 
 		$ids = get_posts( array(
 			'post_type'        => $types,
@@ -29,7 +29,8 @@ if ( ! function_exists( 'topersia_g_home_real' ) ) {
 			'order'            => 'ASC',
 			'no_found_rows'    => true,
 			'suppress_filters' => false,
-			'meta_query'       => array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ),
+			/* P5-D548: نمایشی فقط با حالت پیش‌نمایش؛ شمار آمار ($demo = false) همیشه واقعی */
+			'meta_query'       => $demo ? topersia_g_sample_mq() : array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ),
 		) );
 
 		return topersia_g_published( array_map( 'absint', (array) $ids ) );
@@ -184,7 +185,7 @@ if ( ! function_exists( 'topersia_g_home_card' ) ) {
 
 		return '<a class="tp-home-card" href="' . esc_url( $url ) . '">'
 			. '<span class="tp-home-card__media">' . ( '' !== $img ? $img : '<span class="tp-home-card__ph" aria-hidden="true"></span>' ) . '</span>'
-			. '<span class="tp-home-card__txt"><b class="tp-home-card__name">' . esc_html( $name ) . '</b>'
+			. '<span class="tp-home-card__txt">' . topersia_g_demo_badge( $pid ) . '<b class="tp-home-card__name">' . esc_html( $name ) . '</b>'
 			. ( '' !== $label ? '<span class="tp-home-card__k">' . esc_html( $label ) . '</span>' : '' ) . '</span></a>';
 	}
 }
@@ -218,12 +219,12 @@ if ( ! function_exists( 'topersia_g_home_counts' ) ) {
 		}
 
 		$rows = array(
-			array( count( topersia_g_home_real( array( 'tp_province' ) ) ), __( 'استان', 'topersia' ), 'column' ),
-			array( count( topersia_g_home_real( array( 'tp_city' ) ) ), __( 'شهر', 'topersia' ), 'city' ),
-			array( count( topersia_g_home_real( array( 'tp_village' ) ) ), __( 'روستا', 'topersia' ), 'home' ),
-			array( count( topersia_g_home_real( $attr ) ), __( 'جاذبه', 'topersia' ), 'gate' ),
-			array( count( topersia_g_home_real( array( 'tp_festival', 'tp_sports_event', 'tp_religious_event', 'tp_seasonal_event' ) ) ), __( 'رویداد', 'topersia' ), 'cal' ),
-			array( count( topersia_g_home_real( array( 'tp_route' ) ) ), __( 'مسیر گردشگری', 'topersia' ), 'route' ),
+			array( count( topersia_g_home_real( array( 'tp_province' ), -1, false ) ), __( 'استان', 'topersia' ), 'column' ),
+			array( count( topersia_g_home_real( array( 'tp_city' ), -1, false ) ), __( 'شهر', 'topersia' ), 'city' ),
+			array( count( topersia_g_home_real( array( 'tp_village' ), -1, false ) ), __( 'روستا', 'topersia' ), 'home' ),
+			array( count( topersia_g_home_real( $attr, -1, false ) ), __( 'جاذبه', 'topersia' ), 'gate' ),
+			array( count( topersia_g_home_real( array( 'tp_festival', 'tp_sports_event', 'tp_religious_event', 'tp_seasonal_event' ), -1, false ) ), __( 'رویداد', 'topersia' ), 'cal' ),
+			array( count( topersia_g_home_real( array( 'tp_route' ), -1, false ) ), __( 'مسیر گردشگری', 'topersia' ), 'route' ),
 		);
 
 		$rows = array_values( array_filter( $rows, function ( $r ) { return $r[0] >= 1; } ) );
@@ -489,7 +490,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 				'order'            => 'DESC',
 				'no_found_rows'    => true,
 				'suppress_filters' => false,
-				'meta_query'       => array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) ),
+				'meta_query'       => topersia_g_sample_mq(),
 			) ) ) );
 
 			foreach ( $ids as $one ) {
