@@ -5,6 +5,7 @@
 - مانع: `L-2` در `docs/AUDIT-2026-10/LAUNCH.md` · مبنا: `main` `50b8dc4f` · ابری M، ۱۹ اکتبر ۲۰۲۶.
 - دستهٔ ۱۹ (P5-D376 · P5-D377، ۲۰ اکتبر ۲۰۲۶): فهرست داده و متن سه‌زبانه با رفتار واقعی user-core 1.13.0 (آواتار محلی، غیرفعال‌سازی ۲۴ ماهه، OTP تأییدشده ۲۴ ساعت) به‌روز شد؛ پاسخ‌های کاربر به Q1–Q12 اعمال شد (بخش ۳). `geo/` فقط خوانده شد. `abzarwp` کنار گذاشته شد.
 - دستهٔ ۲۱ (P5-D391، ۲۰ اکتبر ۲۰۲۶): ورود با کد ایمیلی (user-core 1.14.0) — ردیف‌های B18–B22 و بندهای ایمیل در هر سه متن؛ پردازندهٔ ایمیل = SMTP میزبان (cPanel)، نام و کشور میزبان `[تکمیل به دست کاربر]`.
+- دستهٔ ۵۰ (P5-D543، ۹ نوامبر ۲۰۲۶): جای‌نگهدار مدت لاگ (۹۰ روز) و گیرندهٔ ایمیل (ارائه‌دهندهٔ میزبانی و ایمیل) با متن کاربر در هر سه زبان پر شد؛ بند «قوانین حاکم و اصول» افزوده شد. هیچ متن حقوقی دیگری عوض نشد.
 - هر جا داده یا مدرک نیست، جای خالی `[تکمیل به دست کاربر]` مانده است. هیچ ادعای حقوقی یا قانونی بی‌شاهد ساخته نشده.
 - شاهد = `پرونده:خط` نسبت به `ToPersia Claud/workspace/plugin/` (در جدول‌ها کوتاه‌شده: UC = `topersia-user-core`، AI = `topersia-ai-summarizer`، R = `topersia-render`، C = `topersia-core`). `[سنجیده‌نشده]` یعنی در کد ما نیست یا به تنظیم زندهٔ سایت بسته است.
 
@@ -117,12 +118,12 @@
 - شمارهٔ موبایل حساب، نمایه، عکس، مکان‌های ذخیره‌شده، دنبال‌شده‌ها و ترجیح‌ها: تا زمانی که حساب باقی است.
 - **حساب بی‌فعالیت:** اگر ۲۴ ماه وارد نشوید، حساب «غیرفعال» می‌شود، نه حذف: در جای عمومی دیده نمی‌شود (عکس و نامتان خنثی می‌شود؛ نظرهای منتشرشده با نام خنثی می‌مانند) و اعلان یا پیامکی نمی‌گیرد. با یک ورود دوباره فوراً فعال می‌شود. حذف کامل فقط با دکمهٔ «حذف حساب» در پنل یا درخواست ایمیلی شما انجام می‌شود.
 - نظرها: تا زمانی که مدیر حذف کند؛ با حذف حساب، نظر ناشناس می‌شود (متن می‌ماند، هر شناسه پاک می‌شود).
-- گزارش‌های فنی (فقط شناسهٔ کاربر، نه شماره): [تکمیل به دست کاربر — مدت؛ پرسش Q2]
+- گزارش‌های فنی (فقط شناسهٔ کاربر، نه شماره): لاگ‌های فنی سرور (نشانی IP، زمان، نشانی درخواست‌شده، مرورگر) برای امنیت و عیب‌یابی حداکثر ۹۰ روز نگه‌داری و سپس حذف یا ناشناس می‌شوند.
 - داده در Google Analytics: ۱۴ ماه.
 
 ## با چه کسانی به اشتراک می‌گذاریم
 - **سرویس پیامک Mediana (ایران)**: شمارهٔ موبایل و کد، تنها برای ارسال کد ورود.
-- **سرور ایمیل میزبان سایت** ([تکمیل به دست کاربر — نام و کشور میزبان]): نشانی ایمیل و متن نامهٔ کد یا هشدار امنیتی، تنها برای تحویل همان نامه.
+- **سرور ایمیل میزبان سایت** (ارائه‌دهندهٔ خدمات میزبانی و ایمیل که از طرف ما پیام‌ها را دریافت و نگه می‌دارد): نشانی ایمیل و متن نامهٔ کد یا هشدار امنیتی، تنها برای تحویل همان نامه.
 - **Google Analytics 4** (از راه افزونهٔ Site Kit): آمار بازدید با کوکی‌های `_ga` و `_ga_<شناسه>`؛ داده‌ها ۱۴ ماه در Google می‌ماند. «Google signals» و شخصی‌سازی تبلیغ خاموش است.
 - **OpenFreeMap**: وقتی نقشهٔ تعاملی نمایش داده می‌شود، مرورگر شما مستقیماً به این سرویس درخواست می‌فرستد و نشانی IP و اطلاعات مرورگر شما را می‌بیند. اگر در دسترس نباشد، نقشهٔ ذخیره‌شده روی سرور خودمان استفاده می‌شود.
 - **سرویس‌های هوا (MET Norway، Open-Meteo)**: سرور ما برای مکان‌های سایت (نه مکان شما) داده می‌گیرد؛ چیزی از شما نمی‌رود.
@@ -149,6 +150,9 @@
 | `_lscache_vary` | تنوع کش صفحه (فقط اگر افزونهٔ LiteSpeed Cache فعال باشد) | نشست مرورگر | اول |
 
 ذخیره در مرورگر (`localStorage`، `sessionStorage`) فقط در مرورگر خودتان می‌ماند و جایی ارسال نمی‌شود: ترجیح‌های نمایش (کلیدهای `tp-…`)، آخرین دکمهٔ مسیریابی، سبک نقشه، وضعیت آنلاین‌بودن نقشه، و نشانهٔ دیده‌شدن جلوهٔ هوا. هر زمان می‌توانید از تنظیمات مرورگر پاک کنید.
+
+## قوانین حاکم و اصول
+این سیاست بر پایهٔ قوانین جمهوری اسلامی ایران، از جمله فصل «حمایت از داده‌پیام‌های شخصی» قانون تجارت الکترونیکی (۱۳۸۲) و قانون جرایم رایانه‌ای (۱۳۸۸)، تنظیم شده است. با آنکه این قوانین الزام یکسانی با مقررات اروپایی ندارند، توپرشیا اصول پذیرفته‌شدهٔ جهانی را داوطلبانه رعایت می‌کند: شفافیت، محدودیت هدف، حداقل‌سازی داده، محدودیت مدت نگه‌داری، امنیت، و حق دسترسی، اصلاح و حذف. برای اعمال این حقوق به privacy@topersia.com ایمیل بفرستید.
 
 ## تماس
 privacy@topersia.com
@@ -184,12 +188,12 @@ To sign you in securely with a one-time code, to prevent abuse and mass SMS send
 - Account mobile number, profile, photo, saved places, followed entities and preferences: as long as the account exists.
 - **Inactive accounts:** if you do not sign in for 24 months your account becomes "inactive", not deleted: it is no longer shown publicly (your photo and name become neutral; published reviews stay under a neutral name) and receives no notifications or SMS. Signing in again re-activates it immediately. Complete deletion happens only through the "delete account" button in your panel or on your request by email.
 - Reviews: until an administrator removes them; when an account is deleted the review is made anonymous (the text stays, every identifier is removed).
-- Technical logs (user ID only, never the number): [to be completed by the owner — duration; question Q2]
+- Technical logs (user ID only, never the number): Technical server logs (IP address, time, requested URL, browser) are retained for security and troubleshooting for up to 90 days, then deleted or anonymised.
 - Data in Google Analytics: 14 months.
 
 ## Who we share it with
 - **SMS provider Mediana (Iran)**: your mobile number and the code, only to send the login code.
-- **Our hosting provider's email server** ([to be completed by the owner — host name and country]): your email address and the text of the code or security notice, only to deliver that email.
+- **Our hosting provider's email server** (our hosting and email service provider, which receives and stores messages on our behalf): your email address and the text of the code or security notice, only to deliver that email.
 - **Google Analytics 4** (through the Site Kit plugin): visit statistics using the cookies `_ga` and `_ga_<ID>`; data stays in Google for 14 months. Google signals and ad personalisation are off.
 - **OpenFreeMap**: when the interactive map is shown, your browser contacts this service directly, and it sees your IP address and browser information. If it is unreachable, a map stored on our own server is used instead.
 - **Weather services (MET Norway, Open-Meteo)**: our server requests data for places on the site (not your location); nothing about you is sent.
@@ -216,6 +220,9 @@ The site's cookie bar links to this page. These are the cookies the site sets:
 | `_lscache_vary` | page-cache variation (only if the LiteSpeed Cache plugin is active) | browser session | first |
 
 Browser storage (`localStorage`, `sessionStorage`) stays in your own browser and is not sent anywhere: display preferences (`tp-…` keys), last navigation button, map style, map online status, and a flag that the weather effect was already shown. You can clear it at any time in your browser settings.
+
+## Governing law and principles
+This policy is drafted under the laws of the Islamic Republic of Iran, including the chapter on the protection of personal data messages in the Electronic Commerce Law (2003) and the Computer Crimes Law (2009). Although these laws do not impose the same obligations as European regulations, ToPersia voluntarily follows widely accepted principles: transparency, purpose limitation, data minimisation, storage limitation, security, and rights of access, correction and deletion. To exercise these rights, email privacy@topersia.com.
 
 ## Contact
 privacy@topersia.com
@@ -251,12 +258,12 @@ privacy@topersia.com
 - رقم الهاتف والملف الشخصي والصورة والأماكن المحفوظة والمتابَعات والتفضيلات: ما دام الحساب قائمًا.
 - **الحساب الخامل:** إن لم تسجّل دخولك 24 شهرًا يصبح حسابك «خاملًا» لا محذوفًا: لا يظهر علنًا (تصبح صورتك واسمك محايدين وتبقى التقييمات المنشورة باسم محايد) ولا يتلقى إشعارات أو رسائل نصية. ويعود نشطًا فورًا بتسجيل دخول جديد. ولا يحدث الحذف الكامل إلا بزر «حذف الحساب» في لوحتك أو بطلبك عبر البريد الإلكتروني.
 - التقييمات: حتى يحذفها المشرف؛ وعند حذف الحساب يصبح التقييم مجهولًا (يبقى النص وتُزال كل المعرّفات).
-- السجلات التقنية (معرّف المستخدم فقط، دون الرقم): [يُستكمل من المالك — المدة؛ السؤال Q2]
+- السجلات التقنية (معرّف المستخدم فقط، دون الرقم): تُحفَظ سجلات الخادم التقنية (عنوان IP والوقت والعنوان المطلوب والمتصفح) لأغراض الأمن واستكشاف الأخطاء مدة أقصاها 90 يومًا ثم تُحذف أو تُجهَّل هويتها.
 - البيانات في Google Analytics: 14 شهرًا.
 
 ## مع من نشاركها
 - **مزوّد الرسائل النصية Mediana (إيران)**: رقم الهاتف والرمز، فقط لإرسال رمز الدخول.
-- **خادم البريد لدى مزوّد استضافة الموقع** ([يُستكمل من المالك — اسم المزوّد وبلده]): عنوان بريدك ونص رسالة الرمز أو التنبيه الأمني، فقط لتسليم تلك الرسالة.
+- **خادم البريد لدى مزوّد استضافة الموقع** (مزوّد خدمات الاستضافة والبريد الإلكتروني الذي يستقبل الرسائل ويخزّنها نيابةً عنا): عنوان بريدك ونص رسالة الرمز أو التنبيه الأمني، فقط لتسليم تلك الرسالة.
 - **Google Analytics 4** (عبر إضافة Site Kit): إحصاءات الزيارة باستخدام ملفي `_ga` و`_ga_<المعرّف>`؛ وتبقى البيانات في Google مدة 14 شهرًا. إشارات Google (Google signals) وتخصيص الإعلانات متوقفان.
 - **OpenFreeMap**: عند عرض الخريطة التفاعلية يتصل متصفحك مباشرة بهذه الخدمة فترى عنوان IP ومعلومات متصفحك. إن تعذّر الوصول إليها تُستخدم خريطة مخزّنة على خادمنا.
 - **خدمات الطقس (MET Norway وOpen-Meteo)**: يطلب خادمنا بيانات أماكن الموقع (لا موقعك)؛ ولا يُرسَل أي شيء عنك.
@@ -284,6 +291,9 @@ privacy@topersia.com
 
 يبقى التخزين في المتصفح (`localStorage` و`sessionStorage`) في متصفحك فقط ولا يُرسل إلى أي جهة: تفضيلات العرض (مفاتيح `tp-…`)، وآخر زر ملاحة، ونمط الخريطة، وحالة اتصال الخريطة، وعلامة أن مؤثر الطقس عُرض سابقًا. ويمكنك مسحه في أي وقت من إعدادات المتصفح.
 
+## القوانين الحاكمة والمبادئ
+صيغت هذه السياسة وفق قوانين جمهورية إيران الإسلامية، ومنها فصل حماية «رسائل البيانات» الشخصية في قانون التجارة الإلكترونية (2003) وقانون الجرائم المعلوماتية (2009). ورغم أن هذه القوانين لا تفرض الالتزامات نفسها المنصوص عليها في اللوائح الأوروبية، فإن توبيرشيا تلتزم طوعًا بالمبادئ المقبولة عالميًا: الشفافية وتحديد الغرض وتقليل البيانات وتحديد مدة الاحتفاظ والأمن وحقوق الاطلاع والتصحيح والحذف. لممارسة هذه الحقوق راسلونا على privacy@topersia.com.
+
 ## التواصل
 privacy@topersia.com
 
@@ -296,7 +306,7 @@ privacy@topersia.com
 | # | پرسش | وضعیت |
 |---|---|---|
 | Q1 | ناشر، تماس، مهلت پاسخ | ~~بسته~~ — امیرعباس بشاش (سایت شخصی `bashash.ir`، شرکت ثبت نشده؛ هنگام ثبت شرکت فقط سطر ناشر عوض می‌شود) · `privacy@topersia.com` · ۳۰ روز تمدیدپذیر با اطلاع (GDPR مادهٔ ۱۲(۳)). **پیش‌نیاز زنده:** صندوق `privacy@topersia.com` باید ساخته شود (`LAUNCH.md` ه) |
-| Q2 | مدت نگه‌داری **لاگ فنی** (`log_retain_days` · `log_max_rows`) و نظرها | **باز برای لاگ فنی.** حساب بی‌فعالیت: ۲۴ ماه ← غیرفعال (نه حذف)؛ نظر: تا حذف مدیر و با حذف حساب ناشناس (بسته) |
+| Q2 | مدت نگه‌داری **لاگ فنی** (`log_retain_days` · `log_max_rows`) و نظرها | ~~بسته برای لاگ فنی~~ — ۹۰ روز، سپس حذف یا ناشناس (P5-D543). حساب بی‌فعالیت: ۲۴ ماه ← غیرفعال (نه حذف)؛ نظر: تا حذف مدیر و با حذف حساب ناشناس (بسته) |
 | Q3 | حذف حساب و صدور داده | ~~بسته~~ (دستهٔ ۱۷) |
 | Q4 | افزونه‌های نصب‌شدهٔ زنده و ابزار آمار | **تصمیم:** Google Analytics 4 از راه Site Kit (نصب نشده؛ `LAUNCH.md` ه). Rank Math Analytics نه. **باز:** `wp plugin list` زنده برای اطمینان از نبود ابزار دیگر |
 | Q5 | Gravatar | ~~بسته~~ — حذف شد؛ آواتار محلی (دستهٔ ۱۹). `show_avatars` روشن می‌ماند |
