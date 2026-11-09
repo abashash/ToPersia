@@ -103,15 +103,14 @@ $w46_mapf = function ( $s ) use ( $w46_svgf ) {
 tp441_mut( 'نقشه: فقط استانِ دارای صفحه پیوند و aria-label دارد، بقیه کم‌رنگ؛ هیچ پیوند ← هیچ نقشه — جهش: استان بی‌صفحه پنهان', $w46_mapf, $w46_src, str_replace( "\$out .= '<path class=\"tp-home-map__off\" d=\"' . esc_attr( \$d ) . '\"/>';", '', $w46_src ) );
 tp441_mut( 'نقشه: بی هیچ استان دارای صفحه، نقشه چاپ نمی‌شود — جهش: نقشۀ تهی', $w46_mapf, $w46_src, str_replace( "if ( ! \$links ) {\n\t\t\treturn '';", "if ( false ) {\n\t\t\treturn '';", $w46_src ) );
 
-/* ۵ — سقف‌ها: استان همه (اسلایدر · دستۀ 47 ب)، مقصد ۱۲ (دستۀ 47 پ)، رویداد ۴، عکس ۱۲ در اسلایدر (دستۀ 49 بند ۲)، پرسش ۶. */
+/* ۵ — سقف‌ها: استان همه (اسلایدر · دستۀ 47 ب)، مقصد ۱۲ (دستۀ 47 پ)، رویداد ۴، عکس ۱۲ در اسلایدر (دستۀ 49 بند ۲). پرسش‌ها در دستۀ 50 رفت (P5-D539). */
 $w46_caps = function ( $s ) {
 	return false !== strpos( $s, 'foreach ( $provinces as $id ) {' )
 		&& false !== strpos( $s, "array_filter( \$cities, 'topersia_g_card_image' ) ), 0, 12 )" )
 		&& false !== strpos( $s, 'array_slice( array_keys( $events ), 0, 4 )' )
-		&& false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' )
-		&& false !== strpos( $s, 'count( $items ) < 6' );
+		&& false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' );
 };
-tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۴ · عکس ۱۲ · پرسش ۶) — جهش: سقف پرسش برداشته شود', $w46_caps, $w46_src, str_replace( 'count( $items ) < 6', 'true', $w46_src ) );
+tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۴ · عکس ۱۲) — جهش: سقف رویداد برداشته شود', $w46_caps, $w46_src, str_replace( 'array_slice( array_keys( $events ), 0, 4 )', 'array_keys( $events )', $w46_src ) );
 
 /* ۶ — رویداد فقط با تاریخ آغاز معتبر. */
 $w46_ev = function ( $s ) {
@@ -119,11 +118,8 @@ $w46_ev = function ( $s ) {
 };
 tp441_mut( 'رویداد بی event_start_date معتبر نمایش داده نمی‌شود — جهش: بی شرط', $w46_ev, $w46_src, str_replace( "if ( '' !== \$iso ) {", 'if ( true ) {', $w46_src ) );
 
-/* ۷ — FAQPage اسکیما فقط از همان آیتم‌های دیده‌شده. */
-$w46_faq = function ( $s ) {
-	return 1 === substr_count( $s, 'topersia_g_home_faq_items()' ) && false !== strpos( $s, "'@type' => 'FAQPage'" ) && false === strpos( $s, "get_post_meta( \$post_id, 'faq_items', true ) ) ) );\n\tif ( \$faq )" );
-};
-tp441_mut( 'FAQPage صفحۀ اول از همان topersia_g_home_faq_items صفحه — جهش: منبع دیگر', $w46_faq, $w46_sch, str_replace( 'topersia_g_home_faq_items()', 'topersia_g_home_faq_other()', $w46_sch ) );
+/* ۷ — FAQPage صفحۀ اول در دستۀ 50 برداشته شد (P5-D539)؛ حکم و جهشش در assert-50. FAQPage موجودیت (faq_items) دست نخورده. */
+t( 'P5-D539: اسکیمای صفحۀ اول بی FAQPage؛ FAQPage موجودیت از faq_items می‌ماند', false === strpos( $w46_sch, 'topersia_g_home_faq_items' ) && false !== strpos( $w46_sch, "'@type'      => 'FAQPage'" ) );
 
 /* ۸ — هیرو: تنها تصویر eager با fetchpriority؛ بقیه lazy با ابعاد. */
 $w46_img = function ( $s ) {

@@ -94,22 +94,15 @@ const probe = () => {
 					t( `${id}: کلیک «بعدی» scrollLeft را ${'rtl' === mv.dir ? 'منفی' : 'مثبت'} می‌برد (${mv.x0} ← ${Math.round( mv.x1 )})`, want && mv.dir === ( 'fa' === l ? 'rtl' : 'ltr' ), JSON.stringify( mv ) );
 					t( `${id}: پس از کلیک «قبلی» فعال؛ در پایان «بعدی» غیرفعال`, mv.prevOn && mv.endNextOff, JSON.stringify( mv ) );
 				}
-				/* P5-D530 — سه ستون */
+				/* P5-D530 · دستۀ 50 (P5-D539/D540) — ردیف پایانی دو ستون: ایران در تصویر | تازه‌ترین اخبار */
 				if ( r.trio.length ) {
 					await p.evaluate( () => document.querySelector( '.tp-home-trio' ).scrollIntoView( { behavior: 'instant', block: 'start' } ) );
 					await p.waitForTimeout( 500 );
 					const c0 = ( await p.evaluate( probe ) ).trio;
 					if ( w >= 900 ) {
 						const hs = c0.map( c => c.h ), tops = new Set( c0.map( c => c.top ) );
-						t( `P5-D530: سه ستون کنار هم و هم‌قد (${hs.join( ' · ' )})`, 3 === c0.length && 1 === tops.size && Math.max( ...hs ) - Math.min( ...hs ) <= 1, JSON.stringify( c0 ) );
-						const opened = await p.evaluate( () => { const d = document.querySelector( '.tp-home-trio details:not([open])' ); if ( ! d ) { return false; } d.open = true; return true; } );
-						if ( opened ) {
-							await p.waitForTimeout( 300 );
-							const c1 = ( await p.evaluate( probe ) ).trio, h1 = c1.map( c => c.h );
-							t( `P5-D530: پس از باز کردن پرسش هم هم‌قد (${h1.join( ' · ' )})`, Math.max( ...h1 ) - Math.min( ...h1 ) <= 1 && h1[ 0 ] >= hs[ 0 ], JSON.stringify( c1 ) );
-						} else {
-							t( 'P5-D530: پرسشی برای باز کردن نیست (آزموده نشد)', true );
-						}
+						t( `P5-D530: ${c0.length} ستون کنار هم و هم‌قد (${hs.join( ' · ' )})`, c0.length >= 1 && c0.length <= 2 && 1 === tops.size && Math.max( ...hs ) - Math.min( ...hs ) <= 1, JSON.stringify( c0 ) );
+						t( 'P5-D539: بی بخش «پرسش‌های متداول»', ! await p.evaluate( () => !! document.querySelector( '#tp-home-faq, .tp-home-faq' ) ) );
 					} else {
 						const tops = c0.map( c => c.top );
 						t( `P5-D530: زیر ۹۰۰ عمودی (top ${tops.join( ' < ' )})`, tops.every( ( v, i ) => 0 === i || v > tops[ i - 1 ] ) && new Set( c0.map( c => c.left ) ).size === 1, JSON.stringify( c0 ) );

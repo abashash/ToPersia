@@ -176,8 +176,9 @@ $w47_ext = function ( $s ) { return ! preg_match( '#<img[^>]+src=["\']https?://#
 tp441_mut( 'بی پیوند تصویر بیرونی در صفحۀ اول — جهش: <img src="https://…">', $w47_ext, $w47_home, $w47_home . "\n/* '<img src=\"https://example.com/a.jpg\">' */" );
 
 /* ت — ردیف سه‌ستونه؛ ج — بی صافی فصل (ممیزی P5-D522: تابستان و زمستان صفر) */
-$w47_trio = function ( $s ) { return false !== strpos( $s, "'<div class=\"tp-home-trio tp-home-lazy\">' . \$trio . '</div>'" ) && 3 === substr_count( $s, "'tp-home-col' )" ); };
-tp441_mut( 'ت: راهنما | اخبار | پرسش در یک ردیف؛ ستون خالی رندر نمی‌شود — جهش: بی ردیف', $w47_trio, $w47_home, str_replace( "'tp-home-col' )", "'' )", $w47_home ) );
+/* دستۀ 50 (P5-D539 · P5-D540): ردیف پایانی [ایران در تصویر | تازه‌ترین اخبار]؛ پرسش‌ها رفت، راهنما تمام‌عرض */
+$w47_trio = function ( $s ) { return false !== strpos( $s, "'<div class=\"tp-home-trio tp-home-lazy\">' . \$pair . '</div>'" ) && 2 === substr_count( $s, "'tp-home-col' )" ); };
+tp441_mut( 'ت: تصویر | اخبار در یک ردیف؛ ستون خالی رندر نمی‌شود — جهش: بی ردیف', $w47_trio, $w47_home, str_replace( "'tp-home-col' )", "'' )", $w47_home ) );
 t( 'ج: صافی فصل ساخته نشد (ممیزی: کمتر از ۲ مورد در دست‌کم یک فصل)', false === strpos( $w47_home, 'best_season' ) );
 
 /* CSS — نیم‌هم‌پوشانی دقیق، توکن، بی letter-spacing */

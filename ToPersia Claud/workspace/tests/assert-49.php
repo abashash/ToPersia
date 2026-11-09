@@ -69,7 +69,7 @@ tp441_mut( 'بند ۴: نوار شمار با هم‌پوشانی ثابت، ب�
 	str_replace( 'border-radius:var(--tp-home-r)}' . "\n" . 'html .tp-page.tp-home .tp-home-stats ul', 'border-radius:var(--tp-home-r);transform:translateY(-50%)}' . "\n" . 'html .tp-page.tp-home .tp-home-stats ul', $w49_css ) );
 $w49_cis = function ( $c ) {
 	return false !== strpos( $c, '.tp-home-lazy{content-visibility:auto;contain-intrinsic-size:auto 440px}' )
-		&& false !== strpos( $c, '.tp-home-lazy#tp-home-gallery{contain-intrinsic-size:auto 340px}' )
+		&& false !== strpos( $c, '.tp-home-lazy#tp-home-guide{contain-intrinsic-size:auto 240px}' )   /* دستۀ 50: گالری درون ردیف پایانی، راهنما تمام‌عرض */
 		&& false !== strpos( $c, '.tp-home-lazy#tp-home-events{contain-intrinsic-size:auto 260px}' )
 		&& 4 <= substr_count( $c, '.tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto ' )
 		&& false === strpos( $c, 'contain-intrinsic-size:640px' );

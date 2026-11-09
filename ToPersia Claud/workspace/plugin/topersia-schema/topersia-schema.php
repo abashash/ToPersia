@@ -1529,15 +1529,7 @@ function topersia_schema_home_json( $post_id ) {
 	);
 	$graph = array( topersia_schema_organization(), $site, $page );
 
-	/* FAQPage فقط از همان پرسش‌هایی که صفحۀ اول نشان می‌دهد (render: topersia_g_home_faq_items — دروازۀ انتشار و بی نمونه).  دستۀ 46 */
-	$faq = function_exists( 'topersia_g_home_faq_items' ) ? (array) topersia_g_home_faq_items() : array();
-	if ( $faq ) {
-		$qs = array();
-		foreach ( $faq as $it ) {
-			$qs[] = array( '@type' => 'Question', 'name' => (string) $it['q'], 'acceptedAnswer' => array( '@type' => 'Answer', 'text' => (string) $it['a'] ) );
-		}
-		$graph[] = array( '@type' => 'FAQPage', '@id' => $home . '#faq', 'isPartOf' => array( '@id' => $home . '#webpage' ), 'mainEntity' => $qs );
-	}
+	/* FAQPage صفحۀ اول برداشته شد — P5-D539 (بخش پرسش‌ها از صفحه رفت؛ اسکیما فقط آنچه دیده می‌شود). */
 
 	$data = topersia_schema_prune(
 		array(

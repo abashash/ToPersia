@@ -121,3 +121,35 @@ t( 'P5-D546: بی JS — پیوندهای واقعی و فرم GET؛ canonical �
 /* ── تصویر: خود خبر ← مکان ← گرادیان؛ هرگز نمونه ── */
 t( 'P5-D541: تصویر سربرگ تک‌خبر از زنجیرۀ خبر (خود ← مکان غیرنمونه)، نبود ← گرادیان', false !== strpos( $w50_one, 'topersia_g_news_hero_img( topersia_g_news_image( $tp_id ) )' ) && false !== strpos( $w50_ui, "'<header class=\"tp-news-hero' . ( '' === \$img ? ' tp-news-hero--art' : '' ) . '\"" ) );
 
+/* ── بخش ۳ — صفحۀ اول (P5-D539 · P5-D540) ── */
+$w50_home = $w50_read( 'plugin/topersia-render/includes/topersia-g-home.php' );
+$w50_hcss = $w50_read( 'plugin/topersia-render/assets/topersia-g-home.css' );
+$w50_sch  = $w50_read( 'plugin/topersia-schema/topersia-schema.php' );
+$w50_nofaq = function ( $h, $c, $s ) {
+	return false === strpos( $h, 'topersia_g_home_faq_items' ) && false === strpos( $h, 'tp-home-faq' ) && false === strpos( $h, "__( 'پرسش‌های متداول'" )
+		&& false === strpos( $c, 'tp-home-faq' )
+		&& false === strpos( $s, 'topersia_g_home_faq_items' ) && false === strpos( $s, "\$home . '#faq'" );
+};
+tp441_mut( 'P5-D539: «پرسش‌های متداول» و FAQPage صفحۀ اول نیست (render، CSS، اسکیما) — جهش: بخش پرسش برگردد', function ( $h ) use ( $w50_nofaq, $w50_hcss, $w50_sch ) { return $w50_nofaq( $h, $w50_hcss, $w50_sch ); }, $w50_home,
+	$w50_home . "\n/* topersia_g_home_section( 'tp-home-faq', __( 'پرسش‌های متداول', 'topersia' ) ) */" );
+tp441_mut( 'P5-D539: اسکیمای صفحۀ اول بی FAQPage — جهش: گره FAQPage صفحۀ اول', function ( $s ) use ( $w50_nofaq, $w50_home, $w50_hcss ) { return $w50_nofaq( $w50_home, $w50_hcss, $s ); }, $w50_sch,
+	$w50_sch . "\n\$graph[] = array( '@type' => 'FAQPage', '@id' => \$home . '#faq' );" );
+$w50_order = function ( $h ) {
+	$p = array();
+	foreach ( array( '$stats', "'tp-home-provinces'", "'tp-home-cities'", "'tp-home-attractions'", "'tp-home-events'", "'tp-home-guide'", '. $pair' ) as $k ) {
+		$p[] = strpos( $h, $k, (int) strpos( $h, '$body = $stats' ) );
+	}
+	$ok = ! in_array( false, $p, true );
+	for ( $i = 1; $ok && $i < count( $p ); $i++ ) {
+		$ok = $p[ $i ] > $p[ $i - 1 ];
+	}
+	$tiles = strpos( $h, "'<div class=\"tp-home-prov__tiles\">'" );
+	$map   = strpos( $h, "'<div class=\"tp-home-prov__map\">" );
+	$gal   = strpos( $h, "topersia_g_home_section( 'tp-home-gallery'" );
+	$nws   = strpos( $h, "topersia_g_home_section( 'tp-home-news'" );
+	return $ok && false !== $tiles && false !== $map && $tiles < $map && false !== $gal && false !== $nws && $gal < $nws
+		&& false !== strpos( $h, "\$quick[] = array( '#tp-home-news', __( 'اخبار', 'topersia' ), 'news' );" );
+};
+tp441_mut( 'P5-D540: ترتیب نمونه — آمار · [کاشی | نقشه] · مقاصد · جاذبه · رویداد · راهنما · [تصویر | اخبار]؛ پیوند سریع اخبار — جهش: نقشه پیش از کاشی', $w50_order, $w50_home,
+	str_replace( "'<div class=\"tp-home-prov__tiles\">'", "'<div class=\"tp-home-prov__tilesX\">'", $w50_home ) );
+t( 'P5-D540: ستون کاشی استان در آغاز سطر پهن‌تر (1.25fr · 1fr)', false !== strpos( $w50_hcss, '.tp-home-prov{display:grid;gap:var(--tp-home-gap);grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);' ) );

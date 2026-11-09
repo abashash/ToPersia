@@ -56,10 +56,9 @@ foreach ( $want as $l => $w ) {
 	t45( "$l: بدنۀ صفحۀ اول فقط یک فرم جست‌وجوی GET (name=s) دارد و SearchAction در اسکیما هست", 1 === substr_count( $body, '<form' ) && 1 === substr_count( $body, 'role="search"' ) && false !== strpos( $body, 'name="s"' ) && false !== stripos( $h, 'SearchAction' ) );
 	preg_match( '#<script type="application/ld\+json">(.*?)</script>#s', $h, $j );
 	$g = isset( $j[1] ) ? json_decode( $j[1], true ) : null; $types = $g ? array_column( $g['@graph'], '@type' ) : array();
-	$nfaq = substr_count( $body, '<details class="tp-home-faq__i"' );
-	$want_t = $nfaq ? array( 'Organization', 'WebSite', 'WebPage', 'FAQPage' ) : array( 'Organization', 'WebSite', 'WebPage' );
-	$qn = ( $g && $nfaq ) ? count( $g['@graph'][3]['mainEntity'] ) : 0;
-	t45( "$l: JSON-LD معتبر — " . implode( ' · ', $want_t ) . " و inLanguage={$l}؛ FAQPage فقط برای $nfaq پرسش دیده‌شده", $g && $want_t === $types && $g['@graph'][1]['inLanguage'] === $l && $g['@graph'][2]['inLanguage'] === $l && $qn === $nfaq );
+	/* P5-D539 (دستۀ 50): پرسش‌ها و FAQPage صفحۀ اول برداشته شد */
+	$want_t = array( 'Organization', 'WebSite', 'WebPage' );
+	t45( "$l: JSON-LD معتبر — " . implode( ' · ', $want_t ) . " و inLanguage={$l}؛ بی FAQPage و بی بخش پرسش", $g && $want_t === $types && $g['@graph'][1]['inLanguage'] === $l && $g['@graph'][2]['inLanguage'] === $l && false === strpos( $body, 'tp-home-faq' ) );
 }
 echo "\n" . str_repeat( '─', 78 ) . "\n  گذشته: {$GLOBALS['p45']}   افتاده: {$GLOBALS['f45']}\n";
 exit( $GLOBALS['f45'] ? 1 : 0 );

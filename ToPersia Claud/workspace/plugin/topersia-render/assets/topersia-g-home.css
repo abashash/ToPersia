@@ -77,7 +77,7 @@ html .tp-page.tp-home .tp-home-stats + .tp-home-sec{margin-block-start:clamp(20p
 /* جای‌نگه‌دار نزدیک بلندی واقعی هر بخش (اندازه‌گیری دستۀ 49)؛ «auto» بلندی رندرشده را به یاد می‌سپارد، پس CLS صفر */
 html .tp-page.tp-home .tp-home-lazy{content-visibility:auto;contain-intrinsic-size:auto 440px}
 html .tp-page.tp-home .tp-home-lazy#tp-home-events{contain-intrinsic-size:auto 260px}
-html .tp-page.tp-home .tp-home-lazy#tp-home-gallery{contain-intrinsic-size:auto 340px}
+html .tp-page.tp-home .tp-home-lazy#tp-home-guide{contain-intrinsic-size:auto 240px}
 html .tp-page.tp-home .tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto 640px}
 html .tp-page.tp-home .tp-home-sub{margin:0 0 12px;font-size:calc(1.1 * var(--tp-rem));color:var(--tp-text-strong)}
 html .tp-page.tp-home .tp-more{display:inline-flex;align-items:center;min-block-size:44px}
@@ -104,8 +104,8 @@ html .tp-page.tp-home .tp-home-card__k{font-size:calc(.84 * var(--tp-rem));color
 html .tp-page.tp-home .tp-home-card:hover{border-color:var(--tp-primary)}
 html .tp-page.tp-home .tp-home-card:hover .tp-home-card__name{color:var(--tp-primary-text)}
 
-/* ۳ استان‌ها + نقشه: دو ستون */
-html .tp-page.tp-home .tp-home-prov{display:grid;gap:var(--tp-home-gap);grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);align-items:stretch}
+/* ۳ استان‌ها + نقشه: دو ستون — کاشی‌ها در آغاز سطر، نقشه در پایان (P5-D540، مثل نمونه) */
+html .tp-page.tp-home .tp-home-prov{display:grid;gap:var(--tp-home-gap);grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:stretch}
 html .tp-page.tp-home .tp-home-prov--solo{grid-template-columns:1fr}
 html .tp-page.tp-home .tp-home-prov__map{display:flex;flex-direction:column;justify-content:center;padding:16px;border-radius:var(--tp-home-r);background:var(--tp-surface);border:1px solid var(--tp-border)}
 html .tp-page.tp-home .tp-home-map{position:relative;margin:0}
@@ -207,16 +207,6 @@ html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;ins
   background:var(--tp-bg);color:var(--tp-text-strong);font-size:calc(.84 * var(--tp-rem));font-weight:700;justify-self:start;inline-size:fit-content;max-inline-size:calc(100% - 16px);
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* ۱۰ پرسش‌ها — <details> با فلش */
-html .tp-page.tp-home .tp-home-faq{display:grid;gap:10px}
-html .tp-page.tp-home .tp-home-faq__i{border-radius:var(--tp-tile-radius,12px);background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border)}
-html .tp-page.tp-home .tp-home-faq__i summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-block-size:44px;padding:12px 16px;
-  cursor:pointer;list-style:none;font-weight:700;color:var(--tp-text-strong)}
-html .tp-page.tp-home .tp-home-faq__i summary::-webkit-details-marker{display:none}
-html .tp-page.tp-home .tp-home-faq__i summary::after{content:"";flex:0 0 auto;inline-size:9px;block-size:9px;border:solid var(--tp-primary-text);
-  border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px)}
-html .tp-page.tp-home .tp-home-faq__i[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
-html .tp-page.tp-home .tp-home-faq__i p{margin:0;padding:0 16px 14px;line-height:1.95;color:var(--tp-text)}
 
 
 /* حرکت فقط وقتی کاربر کم نخواسته */
