@@ -61,7 +61,7 @@ tp441_mut( 'P5-D542: پیکان فقط با سرریز، محوشدن لبه، �
 /* ── P5-D542: پنج پالایش + بازۀ زمانی از فهرست بسته روی post_date ── */
 $w50_five = function ( $a, $u, $n ) {
 	preg_match_all( "/topersia_g_news_select\( 'tp-news-(\w+)', 'tp_(\w+)'/", $a, $m );
-	$f = array_merge( $m[2], false !== strpos( $a, 'name="tp_q"' ) ? array( 'q' ) : array() );
+	$f = array_merge( $m[2], false !== strpos( $a, 'name="tp_q"' ) ? array( 'q' ) : array(), false !== strpos( $a, "topersia_g_loc_field( 'tp-news-place', \$tp_place," ) ? array( 'place' ) : array() );   /* P5-D549: مکان combobox متنی */
 	sort( $f );
 	return array( 'kind', 'place', 'q', 'sort', 'when' ) === $f
 		&& false !== strpos( $a, "'tp-news-form' ); // phpcs:ignore" ) && false !== strpos( $a, '<form id="tp-news-form"' )

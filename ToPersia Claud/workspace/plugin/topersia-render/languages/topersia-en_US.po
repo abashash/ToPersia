@@ -39,6 +39,11 @@ msgstr "%s min read"
 msgid "%s را منبع ترجیحی گوگل کنید"
 msgstr "Make %s a preferred source on Google"
 
+#: includes/topersia-g-loc.php
+#, php-format
+msgid "%s نتیجه"
+msgstr "%s results"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%s یورو"
@@ -88,6 +93,10 @@ msgstr "Fire service"
 #: includes/topersia-g-zones.php
 msgid "آثار شاخص"
 msgstr "Major works"
+
+#: includes/topersia-g-news.php
+msgid "آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع."
+msgstr "The latest Iran travel news, events and festivals, with dates and sources."
 
 #: includes/topersia-g-zones.php
 msgid "آخرین بازبینی"
@@ -327,7 +336,7 @@ msgstr "Province"
 msgid "استان مسیر"
 msgstr "Route province"
 
-#: templates/news-archive.php
+#: includes/topersia-g-loc.php
 msgid "استان یا شهر"
 msgstr "Province or city"
 
@@ -1251,6 +1260,11 @@ msgstr "Highest recorded temperature"
 msgid "حداکثر عمق"
 msgstr "Maximum depth"
 
+#: includes/topersia-g-loc.php
+#, php-format
+msgid "حذف پالایش مکان: %s"
+msgstr "Remove place filter: %s"
+
 #: includes/topersia-g-map.php
 msgid "حرا (مانگرو)"
 msgstr "Mangrove"
@@ -1525,6 +1539,10 @@ msgstr "Accessibility"
 #: templates/news-archive.php
 msgid "دسته‌بندی‌ها"
 msgstr "Categories"
+
+#: includes/topersia-g-loc.php
+msgid "دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید."
+msgstr "Type at least three characters; use the up and down keys to choose."
 
 #: includes/topersia-g-map.php
 msgid "دشت"
@@ -2705,10 +2723,6 @@ msgstr "Climbing permit required"
 msgid "محبوب‌ترین مقاصد"
 msgstr "Popular destinations"
 
-#: includes/topersia-g-zones.php
-msgid "محتوای زمانی با تاریخ صریح و لینک به منبع اصلی."
-msgstr "Time-sensitive content with explicit dates and links to the original source."
-
 #: includes/topersia-g-map.php
 msgid "محدود"
 msgstr "Limited"
@@ -3244,6 +3258,11 @@ msgstr "Previous topics"
 msgid "مکان مذهبی"
 msgstr "Religious site"
 
+#: includes/topersia-g-loc.php
+#, php-format
+msgid "مکانی با نام «%s» پیدا نشد."
+msgstr "No place named “%s” was found."
+
 #: includes/topersia-g-home.php
 msgid "مکان‌های مذهبی"
 msgstr "Religious sites"
@@ -3299,6 +3318,10 @@ msgstr "Unhealthy"
 #: includes/topersia-g-air.php
 msgid "ناسالم برای گروه‌های حساس"
 msgstr "Unhealthy for sensitive groups"
+
+#: includes/topersia-g-loc.php
+msgid "نام استان یا شهر"
+msgstr "Province or city name"
 
 #: includes/topersia-g-map.php
 msgid "نام بومی"
@@ -3761,10 +3784,6 @@ msgstr "All culture and events"
 #, php-format
 msgid "همۀ منابع (%s)"
 msgstr "All sources (%s)"
-
-#: templates/news-archive.php
-msgid "همۀ مکان‌ها"
-msgstr "All places"
 
 #: templates/news-archive.php
 msgid "همۀ نوع‌ها"

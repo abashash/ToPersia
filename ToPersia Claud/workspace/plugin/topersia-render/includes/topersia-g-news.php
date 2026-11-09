@@ -303,6 +303,13 @@ if ( ! function_exists( 'topersia_g_news_card' ) ) {
 	}
 }
 
+/** زیرعنوان خبرها — سربرگ /news/ و فهرست هر مکان، بخش خبر صفحۀ موجودیت، توضیح متا و og، اسکیما (P5-D554). */
+if ( ! function_exists( 'topersia_g_news_lead' ) ) {
+	function topersia_g_news_lead() {
+		return __( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع.', 'topersia' );
+	}
+}
+
 /** عنوان صفحۀ خبرها — «اخبار {نام کامل}». */
 if ( ! function_exists( 'topersia_g_news_title' ) ) {
 	function topersia_g_news_title( $place_id ) {
@@ -335,6 +342,10 @@ if ( ! function_exists( 'topersia_g_news_is_archive' ) ) {
 if ( ! function_exists( 'topersia_g_news_filter_place' ) ) {
 	function topersia_g_news_filter_place() {
 		$id = absint( function_exists( 'get_query_var' ) ? get_query_var( 'tp_place' ) : 0 );
+		/* P5-D549: بی JS نام در tp_loc می‌آید؛ همان fold، تطبیق دقیق */
+		if ( ! $id && function_exists( 'topersia_g_loc_resolve' ) && is_scalar( get_query_var( 'tp_loc' ) ) && '' !== trim( (string) get_query_var( 'tp_loc' ) ) ) {
+			$id = topersia_g_loc_resolve( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) );
+		}
 		if ( ! $id || ! in_array( (string) get_post_type( $id ), array( 'tp_province', 'tp_city' ), true ) ) {
 			return 0;
 		}
@@ -673,6 +684,7 @@ if ( function_exists( 'add_action' ) ) {
 	/* ── آرشیو سراسری /news/ (دستۀ 48) ── */
 	add_filter( 'query_vars', function ( $vars ) {
 		$vars[] = 'tp_place';
+		$vars[] = 'tp_loc';   /* P5-D549: نام مکان بی JS */
 		return $vars;
 	} );
 
@@ -692,8 +704,8 @@ if ( function_exists( 'add_action' ) ) {
 		$pool = null;
 		if ( $args['tp_place'] ) {
 			$pool = topersia_g_news_archive_ids( $args['tp_place'] );
-		} elseif ( absint( $q->get( 'tp_place' ) ) ) {
-			$pool = array();   /* مکان ناموجود یا منتشرنشده: هیچ، نه همه */
+		} elseif ( absint( $q->get( 'tp_place' ) ) || '' !== trim( (string) ( is_scalar( $q->get( 'tp_loc' ) ) ? $q->get( 'tp_loc' ) : 'x' ) ) ) {
+			$pool = array();   /* مکان ناموجود یا منتشرنشده، یا نامی که پیدا نشد (P5-D549): هیچ، نه همه */
 		}
 		if ( '' !== $args['tp_kind'] ) {
 			$kind = topersia_g_news_kind_ids( $args['tp_kind'] );
@@ -784,5 +796,9 @@ if ( function_exists( 'add_action' ) ) {
 	}, 99 );
 	add_filter( 'rank_math/frontend/title', function ( $title ) use ( $topersia_news_arch_title ) {
 		return topersia_g_news_is_archive() ? $topersia_news_arch_title() . ' | ' . get_bloginfo( 'name' ) : $title;
+	}, 99 );
+	/* توضیح متا (و og/twitter که از همان می‌خوانند) — P5-D554 */
+	add_filter( 'rank_math/frontend/description', function ( $desc ) {
+		return topersia_g_news_is_archive() ? topersia_g_news_lead() : $desc;
 	}, 99 );
 }

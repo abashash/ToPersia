@@ -123,3 +123,81 @@ if ( $w51_launch ) {
 } elseif ( $w51_bad ) {
 	echo '  ⚠ هشدار (بی --launch قرمز نیست): ' . implode( ' · ', $w51_bad ) . " — پایگاه‌داده فقط با --launch سنجیده می‌شود\n";
 }
+
+/* ══ بخش ۲ — فیلتر مکان (P5-D549) · متن‌ها (P5-D554) · برچسب حریم خصوصی ══ */
+$w51_loc   = $w51_read( 'plugin/topersia-render/includes/topersia-g-loc.php' );
+$w51_ljs   = $w51_read( 'plugin/topersia-render/assets/topersia-g-loc.js' );
+$w51_ncss  = $w51_read( 'plugin/topersia-render/assets/topersia-g-news.css' );
+$w51_arch  = $w51_read( 'plugin/topersia-render/templates/news-archive.php' );
+$w51_news  = $w51_read( 'plugin/topersia-render/includes/topersia-g-news.php' );
+$w51_zones = $w51_read( 'plugin/topersia-render/includes/topersia-g-zones.php' );
+$w51_list  = $w51_read( 'plugin/topersia-render/templates/news-list.php' );
+$w51_pages = $w51_read( 'docs/legal/PAGES-TEXT-2026-11-04.md' );
+$w51_priv  = $w51_read( 'docs/legal/PRIVACY-DRAFT.md' );
+
+$w51_rest = function ( $s ) {
+	return false !== strpos( $s, "foreach ( array( 'tp_province', 'tp_city' ) as \$type ) {" )
+		&& false !== strpos( $s, "'meta_query'       => array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) )," )
+		&& false !== strpos( $s, 'foreach ( topersia_g_published( array_map(' )
+		&& false !== strpos( $s, "define( 'TOPERSIA_LOC_MIN', 3 );" ) && false !== strpos( $s, "define( 'TOPERSIA_LOC_MAX', 8 );" )
+		&& false !== strpos( $s, "'methods'             => 'GET'," ) && false !== strpos( $s, 'topersia_g_loc_fold(' );
+};
+tp441_mut( 'P5-D549 REST: فقط استان سپس شهر، منتشرشدۀ هم‌زبان، غیرنمونه، ۳ نویسه، حداکثر ۸، GET فقط‌خواندنی، fold — جهش: بی دروازۀ منتشرشده', $w51_rest, $w51_loc,
+	str_replace( 'foreach ( topersia_g_published( array_map(', 'foreach ( ( array_map(', $w51_loc ) );
+t( 'P5-D549 REST: جهش — نمونه (بی شرط `_tp_sample`) می‌افتد', ! $w51_rest( str_replace( "array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) )", 'array()', $w51_loc ) ) );
+
+$w51_aria = function ( $s ) {
+	return false !== strpos( $s, ' role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="' )
+		&& false !== strpos( $s, 'role="listbox"' ) && false !== strpos( $s, 'aria-live="polite" data-tp-loc-live' )
+		&& false !== strpos( $s, 'name="tp_loc"' ) && false !== strpos( $s, 'data-tp-news-swap="loc"' ) && false !== strpos( $s, '<input type="hidden" name="tp_place"' );
+};
+tp441_mut( 'P5-D549 نشانه‌گذاری: combobox (expanded/controls) + listbox + aria-live؛ بی JS فیلد GET `tp_loc`؛ تراشه و tp_place در ناحیۀ جای‌گزینی — جهش: بی role', $w51_aria, $w51_loc,
+	str_replace( ' role="combobox"', '', $w51_loc ) );
+
+$w51_kbd = function ( $s ) {
+	foreach ( array( "'ArrowDown' === e.key", "'ArrowUp' === e.key", "'Enter' === e.key", "'Escape' === e.key", "setAttribute( 'aria-activedescendant'", "setAttribute( 'aria-expanded', 'true' )", 'var MIN   = 3;', 'f.requestSubmit();' ) as $n ) {
+		if ( false === strpos( $s, $n ) ) {
+			return false;
+		}
+	}
+	return 0 === preg_match( '/location\.(?:href\s*=(?!=)|reload|assign|replace)/', $s );
+};
+tp441_mut( 'P5-D549 JS: بالا/پایین/Enter/Esc، activedescendant، ۳ نویسه، انتخاب ← ارسال فرم بی‌رفرش (P5-D546)، بی تغییر location — جهش: بی Esc', $w51_kbd, $w51_ljs,
+	str_replace( "'Escape' === e.key", "'Esc_' === e.key", $w51_ljs ) );
+t( 'P5-D549 JS: جهش — بارگذاری دوباره با location.reload می‌افتد', ! $w51_kbd( $w51_ljs . "\nlocation.reload();" ) );
+
+$w51_tgt = function ( $c ) {
+	return (bool) preg_match( '/\.tp-loc__opt,\.tp-loc__none\{[^}]*min-block-size:44px/', $c ) && (bool) preg_match( '/\.tp-loc__chip\{[^}]*min-block-size:44px/', $c )
+		&& (bool) preg_match( '/:is\([^)]*\.tp-loc__in\)\{[^}]*min-block-size:44px/', $c );
+};
+tp441_mut( 'P5-D549 CSS: فیلد، گزینه و تراشه ≥ ۴۴px — جهش: گزینۀ ۳۲px', $w51_tgt, $w51_ncss,
+	str_replace( 'gap:12px;min-block-size:44px;padding-inline:12px', 'gap:12px;min-block-size:32px;padding-inline:12px', $w51_ncss ) );
+t( 'P5-D549 قالب: /news/ مکان را از combobox متنی می‌گیرد، نه فهرست کشویی',
+	false !== strpos( $w51_arch, "topersia_g_loc_field( 'tp-news-place', \$tp_place," ) && false === strpos( $w51_arch, "topersia_g_news_select( 'tp-news-place'" ) );
+
+/* متن‌ها — P5-D554 */
+$w51_old_lead = 'محتوای زمانی با تاریخ صریح و لینک به منبع اصلی.';
+$w51_lead = function ( $n, $z, $a, $l ) use ( $w51_old_lead ) {
+	return false !== strpos( $n, "return __( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع.', 'topersia' );" )
+		&& false !== strpos( $n, "add_filter( 'rank_math/frontend/description'" )
+		&& false !== strpos( $z, 'topersia_g_news_lead()' ) && false !== strpos( $a, 'topersia_g_news_lead()' ) && false !== strpos( $l, 'topersia_g_news_lead()' )
+		&& false === strpos( $z . $a . $l . $n, $w51_old_lead );
+};
+t( 'P5-D554: زیرعنوان /news/ از یک تابع (سربرگ، قالب، فهرست، متا Rank Math، اسکیما) و بی متن قدیم',
+	$w51_lead( $w51_news, $w51_zones, $w51_arch, $w51_list ) && false !== strpos( $w51_schema, "'description' => function_exists( 'topersia_g_news_lead' ) ? wp_strip_all_tags( topersia_g_news_lead() ) : ''," ) );
+t( 'P5-D554: جهش — متن قدیم در یک جا می‌افتد', ! $w51_lead( $w51_news, $w51_zones . $w51_old_lead, $w51_arch, $w51_list ) );
+
+$w51_home_t = function ( $s ) {
+	return false !== strpos( $s, '«مرجع جامع گردشگری ایران؛ از جاذبه‌های تاریخی و طبیعی تا اطلاعات کاربردی سفر.»' )
+		&& false !== strpos( $s, '«The comprehensive reference for travelling in Iran: provinces, cities, attractions, events and practical travel information.»' )
+		&& false !== strpos( $s, '«المرجع الشامل للسفر إلى إيران: المحافظات والمدن والمعالم والفعاليات ومعلومات السفر العملية.»' );
+};
+tp441_mut( 'P5-D554: جملۀ صفحۀ اول در منبع یکتا (PAGES-TEXT بخش ۴، سه زبان؛ tp-front-text.php می‌نویسد) — جهش: متن انگلیسی دیگر', $w51_home_t, $w51_pages,
+	str_replace( 'The comprehensive reference for travelling in Iran', 'Discover Iran', $w51_pages ) );
+
+$w51_pl = function ( $s ) {
+	return false !== strpos( $s, '- نشانی IP و اطلاعات درخواست:' ) && false !== strpos( $s, '- IP address and request information:' ) && false !== strpos( $s, '- عنوان IP ومعلومات الطلب:' )
+		&& false === strpos( $s, '- گزارش‌های فنی (فقط شناسهٔ کاربر' ) && false === strpos( $s, '- Technical logs (user ID only' ) && false === strpos( $s, '- السجلات التقنية (معرّف المستخدم فقط' );
+};
+tp441_mut( 'حریم خصوصی: برچسب «نشانی IP و اطلاعات درخواست» در سه زبان، برچسب قدیم هیچ‌جا — جهش: برچسب قدیم', $w51_pl, $w51_priv,
+	str_replace( '- IP address and request information:', '- Technical logs (user ID only, never the number):', $w51_priv ) );

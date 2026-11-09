@@ -8,9 +8,9 @@ $GLOBALS['p45'] = 0; $GLOBALS['f45'] = 0;
 function t45( $label, $ok, $note = '' ) { if ( $ok ) { $GLOBALS['p45']++; echo "  ✅ $label\n"; } else { $GLOBALS['f45']++; echo "  ❌ $label   $note\n"; } }
 $txt = (string) file_get_contents( dirname( __DIR__ ) . '/docs/legal/PAGES-TEXT-2026-11-04.md' );
 $want = array(
-	'fa' => array( '/', 'توپرشیا — دانشنامهٔ ایران', 'جغرافیا، تاریخ، فرهنگ و سفر ایران، با منبع و به چند زبان.' ),
-	'en' => array( '/en/', 'ToPersia — The Encyclopedia of Iran', "Iran's geography, history, culture and travel — sourced and multilingual." ),
-	'ar' => array( '/ar/', 'توبيرشيا — موسوعة إيران', 'جغرافيا إيران وتاريخها وثقافتها والسفر إليها، بمصادر وبلغات متعددة.' ),
+	'fa' => array( '/', 'توپرشیا — دانشنامهٔ ایران', 'مرجع جامع گردشگری ایران؛ از جاذبه‌های تاریخی و طبیعی تا اطلاعات کاربردی سفر.' ),   /* P5-D554 */
+	'en' => array( '/en/', 'ToPersia — The Encyclopedia of Iran', 'The comprehensive reference for travelling in Iran: provinces, cities, attractions, events and practical travel information.' ),
+	'ar' => array( '/ar/', 'توبيرشيا — موسوعة إيران', 'المرجع الشامل للسفر إلى إيران: المحافظات والمدن والمعالم والفعاليات ومعلومات السفر العملية.' ),
 );
 $sample = array_flip( array_map( function ( $id ) { return rtrim( get_permalink( $id ), '/' ); }, get_posts( array( 'post_type' => 'any', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids', 'meta_key' => '_tp_sample', 'suppress_filters' => true ) ) ) );
 $get = function ( $url ) {

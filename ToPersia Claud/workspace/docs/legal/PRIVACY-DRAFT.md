@@ -118,7 +118,7 @@
 - شمارهٔ موبایل حساب، نمایه، عکس، مکان‌های ذخیره‌شده، دنبال‌شده‌ها و ترجیح‌ها: تا زمانی که حساب باقی است.
 - **حساب بی‌فعالیت:** اگر ۲۴ ماه وارد نشوید، حساب «غیرفعال» می‌شود، نه حذف: در جای عمومی دیده نمی‌شود (عکس و نامتان خنثی می‌شود؛ نظرهای منتشرشده با نام خنثی می‌مانند) و اعلان یا پیامکی نمی‌گیرد. با یک ورود دوباره فوراً فعال می‌شود. حذف کامل فقط با دکمهٔ «حذف حساب» در پنل یا درخواست ایمیلی شما انجام می‌شود.
 - نظرها: تا زمانی که مدیر حذف کند؛ با حذف حساب، نظر ناشناس می‌شود (متن می‌ماند، هر شناسه پاک می‌شود).
-- گزارش‌های فنی (فقط شناسهٔ کاربر، نه شماره): لاگ‌های فنی سرور (نشانی IP، زمان، نشانی درخواست‌شده، مرورگر) برای امنیت و عیب‌یابی حداکثر ۹۰ روز نگه‌داری و سپس حذف یا ناشناس می‌شوند.
+- نشانی IP و اطلاعات درخواست: لاگ‌های فنی سرور (نشانی IP، زمان، نشانی درخواست‌شده، مرورگر) برای امنیت و عیب‌یابی حداکثر ۹۰ روز نگه‌داری و سپس حذف یا ناشناس می‌شوند.
 - داده در Google Analytics: ۱۴ ماه.
 
 ## با چه کسانی به اشتراک می‌گذاریم
@@ -188,7 +188,7 @@ To sign you in securely with a one-time code, to prevent abuse and mass SMS send
 - Account mobile number, profile, photo, saved places, followed entities and preferences: as long as the account exists.
 - **Inactive accounts:** if you do not sign in for 24 months your account becomes "inactive", not deleted: it is no longer shown publicly (your photo and name become neutral; published reviews stay under a neutral name) and receives no notifications or SMS. Signing in again re-activates it immediately. Complete deletion happens only through the "delete account" button in your panel or on your request by email.
 - Reviews: until an administrator removes them; when an account is deleted the review is made anonymous (the text stays, every identifier is removed).
-- Technical logs (user ID only, never the number): Technical server logs (IP address, time, requested URL, browser) are retained for security and troubleshooting for up to 90 days, then deleted or anonymised.
+- IP address and request information: Technical server logs (IP address, time, requested URL, browser) are retained for security and troubleshooting for up to 90 days, then deleted or anonymised.
 - Data in Google Analytics: 14 months.
 
 ## Who we share it with
@@ -258,7 +258,7 @@ privacy@topersia.com
 - رقم الهاتف والملف الشخصي والصورة والأماكن المحفوظة والمتابَعات والتفضيلات: ما دام الحساب قائمًا.
 - **الحساب الخامل:** إن لم تسجّل دخولك 24 شهرًا يصبح حسابك «خاملًا» لا محذوفًا: لا يظهر علنًا (تصبح صورتك واسمك محايدين وتبقى التقييمات المنشورة باسم محايد) ولا يتلقى إشعارات أو رسائل نصية. ويعود نشطًا فورًا بتسجيل دخول جديد. ولا يحدث الحذف الكامل إلا بزر «حذف الحساب» في لوحتك أو بطلبك عبر البريد الإلكتروني.
 - التقييمات: حتى يحذفها المشرف؛ وعند حذف الحساب يصبح التقييم مجهولًا (يبقى النص وتُزال كل المعرّفات).
-- السجلات التقنية (معرّف المستخدم فقط، دون الرقم): تُحفَظ سجلات الخادم التقنية (عنوان IP والوقت والعنوان المطلوب والمتصفح) لأغراض الأمن واستكشاف الأخطاء مدة أقصاها 90 يومًا ثم تُحذف أو تُجهَّل هويتها.
+- عنوان IP ومعلومات الطلب: تُحفَظ سجلات الخادم التقنية (عنوان IP والوقت والعنوان المطلوب والمتصفح) لأغراض الأمن واستكشاف الأخطاء مدة أقصاها 90 يومًا ثم تُحذف أو تُجهَّل هويتها.
 - البيانات في Google Analytics: 14 شهرًا.
 
 ## مع من نشاركها

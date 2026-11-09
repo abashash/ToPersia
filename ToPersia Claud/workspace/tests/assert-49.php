@@ -245,8 +245,8 @@ $w49_feat = function ( $s ) {
 tp441_mut( 'P5-D534 قالب: خبر برگزیده + سه کنار، دکمۀ نما پنهان تا JS (جزء مشترک دستۀ 50)، بی خبرنامه — جهش: خبرنامه', $w49_feat, $w49_ntpl . $w49_nui,
 	str_replace( 'hidden data-tp-news-view>', 'hidden data-tp-news-view data-newsletter>', $w49_ntpl . $w49_nui ) );
 $w49_inv = function ( $s ) {
-	return false !== strpos( $s, "foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as \$qv ) {" )
+	return false !== strpos( $s, "foreach ( array( 'tp_place', 'tp_loc', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as \$qv ) {" )
 		&& false !== strpos( $s, "if ( ! is_scalar( \$v ) || ( '' !== trim( (string) \$v ) && '0' !== (string) \$v ) ) {" );
 };
 tp441_mut( 'D468: مقدار نامعتبر پالایش (موضوع یا مکان ناموجود) هم پالایش‌شده است ← noindex و پیام آرام — جهش: فقط مقدار معتبر', $w49_inv, $w49_nui,
-	str_replace( "foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as \$qv ) {", "foreach ( array() as \$qv ) {", $w49_nui ) );
+	str_replace( "foreach ( array( 'tp_place', 'tp_loc', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as \$qv ) {", "foreach ( array() as \$qv ) {", $w49_nui ) );

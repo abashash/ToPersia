@@ -138,7 +138,7 @@ if ( ! function_exists( 'topersia_g_news_filtered' ) ) {
 			return true;
 		}
 		/* مقدار نامعتبر (موضوع یا مکان ناموجود) هم پالایش است: نتیجۀ تهی، noindex، پیام «با این پالایش». */
-		foreach ( array( 'tp_place', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as $qv ) {
+		foreach ( array( 'tp_place', 'tp_loc', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as $qv ) {
 			$v = get_query_var( $qv );
 			if ( ! is_scalar( $v ) || ( '' !== trim( (string) $v ) && '0' !== (string) $v ) ) {
 				return true;
@@ -599,5 +599,9 @@ if ( function_exists( 'add_action' ) ) {
 			return;   /* تک‌خبر پالایش ندارد */
 		}
 		wp_enqueue_script( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.js', array(), topersia_render_asset_version( 'assets/topersia-g-news.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		if ( topersia_g_news_is_archive() ) {
+			/* P5-D549: combobox مکان — فقط جایی که فیلد هست */
+			wp_enqueue_script( 'topersia-g-loc', topersia_render_url() . 'assets/topersia-g-loc.js', array(), topersia_render_asset_version( 'assets/topersia-g-loc.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		}
 	}, 31 );
 }

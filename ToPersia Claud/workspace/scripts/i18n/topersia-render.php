@@ -875,7 +875,7 @@ return array(
 	/* ── خبر ────────────────────────────────────────────────────── */
 	'اخبار %s'                                              => array( 'en' => '%s news', 'ar' => 'أخبار %s' ),
 	'فهرست اخبار %s'                                        => array( 'en' => 'All news about %s', 'ar' => 'كل أخبار %s' ),
-	'محتوای زمانی با تاریخ صریح و لینک به منبع اصلی.'      => array( 'en' => 'Time-sensitive content with explicit dates and links to the original source.', 'ar' => 'محتوى مرتبط بالوقت بتواريخ صريحة وروابط إلى المصدر الأصلي.' ),
+	'آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع.' => array( 'en' => 'The latest Iran travel news, events and festivals, with dates and sources.', 'ar' => 'آخر أخبار السياحة والفعاليات والمهرجانات في إيران، مع ذكر التاريخ والمصدر.' ),   /* P5-D554 */
 	'منبع اصلی:'                                            => array( 'en' => 'Original source:', 'ar' => 'المصدر الأصلي:' ),
 	'صفحه‌های خبر'                                          => array( 'en' => 'News pages', 'ar' => 'صفحات الأخبار' ),
 	'هنوز خبری برای این مکان نیست.'                         => array( 'en' => 'No news for this place yet.', 'ar' => 'لا توجد أخبار عن هذا المكان بعد.' ),
@@ -1161,7 +1161,6 @@ return array(
 	'اخبار گردشگری ایران' => array( 'en' => 'Iran travel news', 'ar' => 'أخبار السياحة في إيران' ),
 	'مکان‌های مرتبط' => array( 'en' => 'Related places', 'ar' => 'الأماكن ذات الصلة' ),
 	'استان یا شهر' => array( 'en' => 'Province or city', 'ar' => 'المحافظة أو المدينة' ),
-	'همۀ مکان‌ها' => array( 'en' => 'All places', 'ar' => 'كل الأماكن' ),
 	'نمایش' => array( 'en' => 'Show', 'ar' => 'عرض' ),
 	'هنوز خبری منتشر نشده است.' => array( 'en' => 'No news has been published yet.', 'ar' => 'لم تُنشر أي أخبار بعد.' ),
 	/* جست‌وجوی سراسری — P5-D536 · دستۀ 49 */
@@ -1210,4 +1209,10 @@ return array(
 	'خبرهای مرتبط' => array( 'en' => 'Related news', 'ar' => 'أخبار ذات صلة' ),
 	/* دستۀ 51 — حالت پیش‌نمایش نمایشی (P5-D548) */
 	'نمونۀ نمایشی' => array( 'en' => 'Demo sample', 'ar' => 'نموذج للعرض' ),
+	/* دستۀ 51 — فیلتر مکان combobox (P5-D549) */
+	'%s نتیجه' => array( 'en' => '%s results', 'ar' => '%s نتيجة' ),
+	'حذف پالایش مکان: %s' => array( 'en' => 'Remove place filter: %s', 'ar' => 'إزالة تصفية المكان: %s' ),
+	'دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید.' => array( 'en' => 'Type at least three characters; use the up and down keys to choose.', 'ar' => 'اكتب ثلاثة أحرف على الأقل؛ واستخدم مفتاحي الأعلى والأسفل للاختيار.' ),
+	'مکانی با نام «%s» پیدا نشد.' => array( 'en' => 'No place named “%s” was found.', 'ar' => 'لم يُعثر على مكان باسم «%s».' ),
+	'نام استان یا شهر' => array( 'en' => 'Province or city name', 'ar' => 'اسم المحافظة أو المدينة' ),
 );

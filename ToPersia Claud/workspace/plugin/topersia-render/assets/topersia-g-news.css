@@ -53,7 +53,7 @@ html .tp-page.tp-news-page .tp-news-chips__nav[hidden]{display:none}
 html .tp-page.tp-news-page .tp-news-filter__f{display:grid;gap:6px;min-inline-size:0}
 html .tp-page.tp-news-page .tp-news-filter__f label{color:var(--tp-text);font-size:calc(.88 * var(--tp-rem))}
 html .tp-page.tp-news-page .tp-news-sel{position:relative;display:block;min-inline-size:0}
-html .tp-page.tp-news-page :is(.tp-news-sel select,.tp-news-filter input[type="search"]){box-sizing:border-box;inline-size:100%;min-block-size:44px;block-size:auto;margin:0;
+html .tp-page.tp-news-page :is(.tp-news-sel select,.tp-news-filter input[type="search"],.tp-loc__in){box-sizing:border-box;inline-size:100%;min-block-size:44px;block-size:auto;margin:0;
   padding-block:8px;padding-inline:12px;border-radius:var(--tp-tile-radius,12px);border:1px solid var(--tp-text-2);background:var(--tp-surface);background-image:none;
   box-shadow:none;color:var(--tp-text-strong);font:inherit;font-size:var(--tp-rem);line-height:1.5}
 html .tp-page.tp-news-page .tp-news-sel select{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-inline-end:40px;cursor:pointer;text-overflow:ellipsis;white-space:nowrap}
@@ -61,7 +61,27 @@ html .tp-page.tp-news-page .tp-news-sel::after{content:"";position:absolute;inse
   background:var(--tp-text-strong);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5l4 4 4-4' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5l4 4 4-4' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
 html .tp-page.tp-news-page .tp-news-sel :is(option,optgroup){background:var(--tp-surface);color:var(--tp-text-strong)}
-html .tp-page.tp-news-page :is(.tp-news-sel select,.tp-news-filter input[type="search"]):hover{border-color:var(--tp-primary)}
+html .tp-page.tp-news-page :is(.tp-news-sel select,.tp-news-filter input[type="search"],.tp-loc__in):hover{border-color:var(--tp-primary)}
+
+/* ── فیلتر مکان: combobox متنی (P5-D549) — فهرست زیر فیلد، گزینه و تراشه ≥ ۴۴px ── */
+.tp-loc{position:relative}
+.tp-loc__box{position:relative}
+html .tp-page.tp-news-page .tp-loc__in::placeholder{color:var(--tp-text);opacity:1}
+.tp-loc__list{position:absolute;z-index:30;inset-inline:0;inset-block-start:calc(100% + 4px);margin:0;padding:4px;list-style:none;max-block-size:min(60vh,360px);overflow:auto;
+  background:var(--tp-surface);border:1px solid var(--tp-text-2);border-radius:var(--tp-tile-radius,12px);box-shadow:0 10px 28px color-mix(in srgb,var(--tp-text-strong) 18%,transparent)}
+.tp-loc__list[hidden]{display:none}
+.tp-loc__opt,.tp-loc__none{display:flex;align-items:center;justify-content:space-between;gap:12px;min-block-size:44px;padding-inline:12px;border-radius:8px;color:var(--tp-text-strong);cursor:pointer}
+.tp-loc__none{color:var(--tp-text);cursor:default}
+.tp-loc__opt:hover,.tp-loc__opt[aria-selected="true"]{background:var(--tp-bg);outline:2px solid var(--tp-primary);outline-offset:-2px}
+.tp-loc__type{flex:0 0 auto;color:var(--tp-text);font-size:calc(.85 * var(--tp-rem))}
+.tp-loc__chips{display:flex;flex-wrap:wrap;gap:6px}
+.tp-loc__chips:empty{display:none}
+.tp-loc__chip{display:inline-flex;align-items:center;gap:8px;min-block-size:44px;padding-inline:14px 10px;border-radius:999px;border:1px solid var(--tp-primary);
+  background:var(--tp-surface);color:var(--tp-text-strong);text-decoration:none}
+.tp-loc__chip:hover{background:var(--tp-bg)}
+.tp-loc__chip:focus-visible{outline:2px solid var(--tp-primary);outline-offset:2px}
+.tp-loc__x{display:inline-grid;place-items:center;inline-size:24px;block-size:24px;border-radius:50%;background:var(--tp-bg);color:var(--tp-text-strong);font-size:18px;line-height:1}
+.tp-loc__miss{margin:0;color:var(--tp-text);font-size:calc(.85 * var(--tp-rem))}
 
 /* ── پالایش: دسکتاپ یک ردیف هم‌اندازه؛ موبایل دو ستون ── */
 html .tp-page.tp-news-page .tp-news-filter{display:flex;align-items:flex-end;gap:12px;margin:0 0 20px}

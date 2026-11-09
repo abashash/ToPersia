@@ -38,6 +38,11 @@ msgstr ""
 msgid "%s را منبع ترجیحی گوگل کنید"
 msgstr ""
 
+#: includes/topersia-g-loc.php
+#, php-format
+msgid "%s نتیجه"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%s یورو"
@@ -86,6 +91,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "آثار شاخص"
+msgstr ""
+
+#: includes/topersia-g-news.php
+msgid "آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع."
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -326,7 +335,7 @@ msgstr ""
 msgid "استان مسیر"
 msgstr ""
 
-#: templates/news-archive.php
+#: includes/topersia-g-loc.php
 msgid "استان یا شهر"
 msgstr ""
 
@@ -1250,6 +1259,11 @@ msgstr ""
 msgid "حداکثر عمق"
 msgstr ""
 
+#: includes/topersia-g-loc.php
+#, php-format
+msgid "حذف پالایش مکان: %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "حرا (مانگرو)"
 msgstr ""
@@ -1523,6 +1537,10 @@ msgstr ""
 
 #: templates/news-archive.php
 msgid "دسته‌بندی‌ها"
+msgstr ""
+
+#: includes/topersia-g-loc.php
+msgid "دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2704,10 +2722,6 @@ msgstr ""
 msgid "محبوب‌ترین مقاصد"
 msgstr ""
 
-#: includes/topersia-g-zones.php
-msgid "محتوای زمانی با تاریخ صریح و لینک به منبع اصلی."
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "محدود"
 msgstr ""
@@ -3243,6 +3257,11 @@ msgstr ""
 msgid "مکان مذهبی"
 msgstr ""
 
+#: includes/topersia-g-loc.php
+#, php-format
+msgid "مکانی با نام «%s» پیدا نشد."
+msgstr ""
+
 #: includes/topersia-g-home.php
 msgid "مکان‌های مذهبی"
 msgstr ""
@@ -3297,6 +3316,10 @@ msgstr ""
 
 #: includes/topersia-g-air.php
 msgid "ناسالم برای گروه‌های حساس"
+msgstr ""
+
+#: includes/topersia-g-loc.php
+msgid "نام استان یا شهر"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3759,10 +3782,6 @@ msgstr ""
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "همۀ منابع (%s)"
-msgstr ""
-
-#: templates/news-archive.php
-msgid "همۀ مکان‌ها"
 msgstr ""
 
 #: templates/news-archive.php

@@ -34,7 +34,6 @@ $tp_total = (int) $wp_query->found_posts;
 $tp_args  = topersia_g_news_args();
 $tp_place = $tp_args['tp_place'];
 $tp_on    = topersia_g_news_filtered();
-$tp_opts  = topersia_g_news_filter_options();
 $tp_kinds = topersia_g_news_kind_options();
 $tp_tops  = topersia_g_news_topics();
 $tp_city  = topersia_g_news_city_chips( $tp_place );
@@ -61,11 +60,6 @@ $tp_city_items = array();
 foreach ( $tp_city as $tp_cid => $tp_cname ) {
 	$tp_city_items[] = array( $tp_cname, topersia_g_news_archive_link( 1, array( 'tp_place' => $tp_cid ) ), $tp_cid === $tp_place, '' );
 }
-$tp_places = array( '' => __( 'همۀ مکان‌ها', 'topersia' ) );
-$tp_group  = array( 'tp_province' => __( 'استان‌ها', 'topersia' ), 'tp_city' => __( 'شهرها', 'topersia' ) );
-foreach ( $tp_opts as $tp_type => $tp_list ) {
-	$tp_places[ $tp_group[ $tp_type ] ] = $tp_list;
-}
 
 if ( $tp_part ) {
 	topersia_g_news_partial_headers();
@@ -76,7 +70,7 @@ if ( $tp_part ) {
 ?>
 <div class="tp-page tp-news-page tp-news-archive"<?php echo topersia_g_news_root_attrs( $tp_base ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<main id="tp-main" class="tp-main">
-		<?php echo topersia_g_news_hero( topersia_g_news_hero_image( $tp_place ), $tp_crumbs, $tp_title, __( 'محتوای زمانی با تاریخ صریح و لینک به منبع اصلی.', 'topersia' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php echo topersia_g_news_hero( topersia_g_news_hero_image( $tp_place ), $tp_crumbs, $tp_title, topersia_g_news_lead() ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
 		<div class="tp-wrap">
 			<section id="tp-news" class="tp-section" aria-label="<?php echo esc_attr( $tp_title ); ?>">
@@ -99,9 +93,9 @@ if ( $tp_part ) {
 						<input id="tp-news-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">
 					</div>
 					<?php
-					if ( $tp_opts ) {
-						echo topersia_g_news_select( 'tp-news-place', 'tp_place', __( 'استان یا شهر', 'topersia' ), $tp_places, $tp_place ? (string) $tp_place : '' ); // phpcs:ignore WordPress.Security.EscapeOutput
-					}
+					/* P5-D549: combobox متنی، نه فهرست کشویی */
+					$tp_loc_raw = is_scalar( get_query_var( 'tp_loc' ) ) ? trim( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) ) : '';
+					echo topersia_g_loc_field( 'tp-news-place', $tp_place, topersia_g_news_archive_link( 1, array( 'tp_place' => '', 'tp_loc' => '' ) ), $tp_place ? '' : mb_substr( $tp_loc_raw, 0, 60 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 					if ( $tp_kinds ) {
 						echo topersia_g_news_select( 'tp-news-kind', 'tp_kind', __( 'نوع مکان', 'topersia' ), array_merge( array( '' => __( 'همۀ نوع‌ها', 'topersia' ) ), $tp_kinds ), $tp_args['tp_kind'] ); // phpcs:ignore WordPress.Security.EscapeOutput
 					}

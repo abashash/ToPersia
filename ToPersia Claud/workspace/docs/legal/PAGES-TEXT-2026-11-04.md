@@ -277,6 +277,6 @@ ToPersia is published by Amirabbas Bashash. Email corrections and feedback to co
 
 ## ۴. صفحهٔ اول — متن ثابت (فقط عنوان و جملهٔ معرفی؛ بقیه از داده)
 
-**fa** — عنوان: «توپرشیا — دانشنامهٔ ایران» · جمله: «جغرافیا، تاریخ، فرهنگ و سفر ایران، با منبع و به چند زبان.»
-**en** — «ToPersia — The Encyclopedia of Iran» · «Iran's geography, history, culture and travel — sourced and multilingual.»
-**ar** — «توبيرشيا — موسوعة إيران» · «جغرافيا إيران وتاريخها وثقافتها والسفر إليها، بمصادر وبلغات متعددة.»
+**fa** — عنوان: «توپرشیا — دانشنامهٔ ایران» · جمله: «مرجع جامع گردشگری ایران؛ از جاذبه‌های تاریخی و طبیعی تا اطلاعات کاربردی سفر.»
+**en** — «ToPersia — The Encyclopedia of Iran» · «The comprehensive reference for travelling in Iran: provinces, cities, attractions, events and practical travel information.»
+**ar** — «توبيرشيا — موسوعة إيران» · «المرجع الشامل للسفر إلى إيران: المحافظات والمدن والمعالم والفعاليات ومعلومات السفر العملية.»
