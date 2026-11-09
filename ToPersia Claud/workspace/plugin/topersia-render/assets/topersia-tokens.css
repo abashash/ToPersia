@@ -215,6 +215,17 @@ html[data-tp-mode="dark"]{
   --tp-s-winter-text:color-mix(in srgb, var(--tp-s-winter) 70%, var(--tp-text-strong));
 }
 
+/* جوهر پوشش تیرۀ روی رسانه — P5-D187 · دستۀ 49 (آرشیو خبر)
+   همان رنگ پوشش سربرگ مرجع (`.tp-hero__overlay`، rgb(5,13,11))، در هر سه
+   حالت یکی: پوشش روی عکس است نه روی زمینۀ صفحه، و متن رویش --tp-on-secondary
+   (سفید در هر سه حالت) است. شفافیت با color-mix در خود قاعده. */
+:root,
+html[data-tp-mode="light"],
+html[data-tp-mode="evening"],
+html[data-tp-mode="dark"]{
+  --tp-media-ink:#050D0B;
+}
+
 /* ==========================================================================
    ۲ج — کاشی · P5-D245
    مقادیر محاسبه‌شدۀ کاشی روزِ کارت «هوای این روزها» (`.tp-wx__day`)، با

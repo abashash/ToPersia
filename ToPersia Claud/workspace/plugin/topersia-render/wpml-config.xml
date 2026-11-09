@@ -1,6 +1,12 @@
 <wpml-config>
   <!-- P5-D300: گالری تجمیعی لایۀ مشتق روی پست زبان اصلی است — WPML رونوشت یا ترجمه‌اش نمی‌کند. -->
+  <!-- P5-D534 (دستۀ 49): زمان مطالعۀ خبر را هر ترجمه هنگام ذخیرۀ خودش از متن خودش می‌سازد. -->
   <custom-fields>
     <custom-field action="ignore">_tp_gallery_agg</custom-field>
+    <custom-field action="ignore">_tp_read_minutes</custom-field>
   </custom-fields>
+  <!-- P5-D534: موضوع خبر ترجمه‌پذیر (Translate)؛ هر زبان نام و نامک خودش را دارد. -->
+  <taxonomies>
+    <taxonomy translate="1">tpc_news_topic</taxonomy>
+  </taxonomies>
 </wpml-config>

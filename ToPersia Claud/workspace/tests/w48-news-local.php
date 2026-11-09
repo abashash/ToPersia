@@ -55,24 +55,70 @@ tN( 'گزینه‌های پالایش: استان‌ها پیش از شهرها�
 /* ── HTML واقعی ── */
 $base = home_url( '/news/' );
 list( $c, $h ) = $get( $base );
-preg_match_all( '#<article class="tp-news-card">(.*?)</article>#s', $h, $cards );
-tN( "/news/ ۲۰۰ و با قالب ما (" . count( $cards[1] ) . ' کارت)', 200 === $c && false !== strpos( $h, 'tp-news-archive' ) && false === strpos( $h, 'blog-post-loop' ) && count( $cards[1] ) === min( count( $ids ), TOPERSIA_NEWS_PER_PAGE ) );
+/* دستۀ 49 (P5-D534): برگزیده + سه کنار + شبکه — هر سه «کارت» شمرده می‌شوند */
+$items = function ( $html ) {
+	preg_match_all( '#<article class="tp-news-(feat|mini|card)">(.*?)</article>#s', $html, $m, PREG_SET_ORDER );
+	return $m;
+};
+$cards = $items( $h );
+$cards = array( array_column( $cards, 0 ), array_column( $cards, 2 ), array_column( $cards, 1 ) );
+tN( "/news/ ۲۰۰ و با قالب ما (" . count( $cards[1] ) . ' مورد: ' . implode( ',', array_count_values( $cards[2] ) ? array_map( function ( $k, $v ) { return "{$k}×{$v}"; }, array_keys( array_count_values( $cards[2] ) ), array_count_values( $cards[2] ) ) : array() ) . ')',
+	200 === $c && false !== strpos( $h, 'tp-news-archive' ) && false === strpos( $h, 'blog-post-loop' ) && count( $cards[1] ) === min( count( $ids ), TOPERSIA_NEWS_PER_PAGE )
+	&& ( count( $ids ) < 4 || ( 1 === count( array_keys( $cards[2], 'feat', true ) ) && 3 === count( array_keys( $cards[2], 'mini', true ) ) ) ) );
 $cok = true; $why = '';
-foreach ( $cards[1] as $k ) {
-	$ok = preg_match( '#<h2 class="tp-news-card__title"><a href="http[^"]+">[^<]+</a></h2>#', $k )
-		&& preg_match( '#<time datetime="\d{4}-\d{2}-\d{2}">[۰-۹]+ [^<]+ [۰-۹]{4}</time>#u', $k )
-		&& preg_match( '#<span class="tp-news-card__src">منبع: <bdi>[^<]+</bdi></span>#u', $k )
-		&& preg_match( '#<p class="tp-news-card__sum tp-justify">[^<]+</p>#', $k )
-		&& preg_match( '#<ul class="tp-news-card__places" aria-label="[^"]+"><li><a href="http#', $k )
-		&& preg_match( '#class="tp-news-card__media(?: tp-news-card__media--icon)?" href="http#', $k );
+foreach ( $cards[1] as $i => $k ) {
+	$t  = $cards[2][ $i ];
+	$ok = preg_match( '#<h3 class="tp-news-' . $t . '__title"><a href="http[^"]+">[^<]+</a></h3>#', $k )
+		&& preg_match( '#<time datetime="\d{4}-\d{2}-\d{2}">[۰-۹]+ [^<]+ [۰-۹]{4}</time><span class="tp-news-read">[۰-۹]+ دقیقه مطالعه</span>#u', $k )
+		&& preg_match( '#<p class="tp-news-' . $t . '__sum[^"]*">[^<]+</p>#', $k )
+		&& preg_match( '#<span class="tp-news-topic">[^<]+</span>#u', $k )
+		&& ! preg_match( '#<img[^>]+src="(?!' . preg_quote( content_url(), '#' ) . '|' . preg_quote( home_url( '/assets/' ), '#' ) . ')#', $k );
 	if ( ! $ok ) { $cok = false; $why = mb_substr( wp_strip_all_tags( $k ), 0, 120 ); }
 }
-tN( 'هر کارت: تصویر/آیکون، تیتر با پیوند، تاریخ خورشیدی، منبع، خلاصه، نشان مکان با پیوند', $cards[1] && $cok, $why );
-preg_match_all( '#<ul class="tp-news-card__places"[^>]*>(.*?)</ul>#s', $h, $pl );
-preg_match_all( '#href="([^"]+)"#', implode( '', $pl[1] ), $plu );
-$dead = array();
-foreach ( array_unique( $plu[1] ) as $u ) { list( $pc ) = $get( $u ); if ( 200 !== $pc ) { $dead[] = "$pc $u"; } }
-tN( 'پیوند نشان‌های مکان ۲۰۰ و بی ترجمۀ زبان دیگر (' . count( array_unique( $plu[1] ) ) . ')', $plu[1] && ! $dead && ! preg_grep( '#/(en|ar)/#', $plu[1] ), implode( ' ', $dead ) );
+tN( 'هر مورد: تیتر با پیوند، نشان موضوع، خلاصه، تاریخ خورشیدی، زمان مطالعه؛ تصویر فقط از همین سایت', $cards[1] && $cok, $why );
+/* تصویر هرگز نمونه (P5-D535): شناسۀ پیوست هر <img> از کلاس wp-image-N یا نشانی */
+preg_match_all( '#<img[^>]+src="([^"]+)"#', preg_match( '#<div class="tp-page tp-news-page tp-news-archive".*?</main>#s', $h, $bm0 ) ? $bm0[0] : '', $imgs );
+$smp = array();
+foreach ( array_unique( $imgs[1] ) as $u ) {
+	$att = attachment_url_to_postid( preg_replace( '#-\d+x\d+(?=\.\w+$)#', '', $u ) );
+	if ( $att && metadata_exists( 'post', $att, '_tp_sample' ) ) { $smp[] = $u; }
+}
+tN( 'هیچ تصویر صفحه (سربرگ، برگزیده، کارت) پیوست نمونه نیست (' . count( array_unique( $imgs[1] ) ) . ' تصویر)', $imgs[1] && ! $smp, implode( ' ', $smp ) );
+
+/* پالایش‌ها روی HTML واقعی (D468) */
+$terms = get_terms( array( 'taxonomy' => 'tpc_news_topic', 'hide_empty' => true ) );
+$tsl   = ( $terms && ! is_wp_error( $terms ) ) ? reset( $terms ) : null;
+if ( $tsl ) {
+	$want = get_posts( array( 'post_type' => 'tpc_news', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids', 'post__in' => $ids, 'tax_query' => array( array( 'taxonomy' => 'tpc_news_topic', 'field' => 'slug', 'terms' => $tsl->slug ) ) ) );
+	list( $ct, $ht ) = $get( add_query_arg( 'tp_topic', $tsl->slug, $base ) );
+	$it = $items( $ht );
+	$bad = array_filter( $it, function ( $m ) use ( $tsl ) { return false === strpos( $m[2], '<span class="tp-news-topic">' . esc_html( $tsl->name ) . '</span>' ); } );
+	tN( "پالایش موضوع «{$tsl->slug}»: " . count( $it ) . ' از ' . count( $want ) . '، همه همان نشان، بی برگزیده، تراشۀ فعال aria-current',
+		200 === $ct && count( $it ) === count( $want ) && ! $bad && false === strpos( $ht, 'tp-news-feat' ) && false !== strpos( $ht, "tp_topic=" . $tsl->slug . "\" aria-current=\"page\"" ) );
+} else {
+	tN( 'موضوع خبر هست (tp-news-topics.php apply)', false );
+}
+list( $co, $ho ) = $get( add_query_arg( array( 'tp_kind' => 'tp_city', 'tp_sort' => 'old' ), $base ) );
+preg_match_all( '#<time datetime="([^"]+)"#', implode( '', array_column( $items( $ho ), 0 ) ), $dt );
+$asc = $dt[1]; sort( $asc );
+list( , $hn ) = $get( add_query_arg( array( 'tp_kind' => 'tp_city' ), $base ) );
+preg_match_all( '#<time datetime="([^"]+)"#', implode( '', array_column( $items( $hn ), 0 ) ), $dn );
+$desc = $dn[1]; rsort( $desc );
+tN( 'ترتیب: «قدیمی‌ترین» صعودی و پیش‌فرض نزولی (' . count( $dt[1] ) . ')', 200 === $co && count( $dt[1] ) > 1 && $dt[1] === $asc && $dn[1] === $desc && $dt[1] !== $dn[1] );
+$word = '';
+foreach ( $ids as $nid ) { if ( preg_match( '/[\x{0600}-\x{06FF}]{5,}/u', get_the_title( $nid ), $wm ) ) { $word = $wm[0]; $hit = $nid; break; } }
+list( $cq, $hq ) = $get( add_query_arg( 'tp_q', $word, $base ) );
+tN( "جست‌وجو «{$word}»: خبر خودش در نتیجه", 200 === $cq && '' !== $word && false !== strpos( implode( '', array_column( $items( $hq ), 0 ) ), get_permalink( $hit ) ) );
+list( $cz, $hz ) = $get( add_query_arg( 'tp_topic', 'no-such-topic', $base ) );
+tN( 'موضوع ناموجود: صفر مورد و پیام آرام', 200 === $cz && ! $items( $hz ) && false !== strpos( $hz, 'خبری با این پالایش نیست.' ) );
+/* noindex و canonical پالایش‌شده: robots از صافی خود ما؛ canonical از تابع، چون Rank Math روی noindex آن را نمی‌نویسد */
+set_query_var( 'tp_sort', 'old' );
+$f1 = topersia_g_news_filtered() && topersia_g_news_archive_thin();
+set_query_var( 'tp_sort', '' );
+$f0 = topersia_g_news_filtered();
+tN( 'پالایش‌شده = noindex؛ بی‌پالایش نه؛ GET فقط', $f1 && ! $f0 && false !== strpos( $h, '<form class="tp-news-filter" method="get"' ) );
+foreach ( array( 'tp_topic', 'tp_sort', 'tp_q', 'tp_kind' ) as $qv ) { $hasq = $hasq ?? false; $hasq = $hasq || false !== strpos( (string) topersia_g_news_archive_url( 1 ), $qv ); }
+tN( 'canonical پالایش‌شده = نشانی بی‌پالایش ' . topersia_g_news_archive_url( 1 ), ! $hasq && untrailingslashit( topersia_g_news_archive_url( 1 ) ) === untrailingslashit( $base ) );
 tN( 'مسیر راهنما: ToPersia › اخبار', 1 === preg_match( '#<nav class="tp-crumb"[^>]*>\s*<a href="' . preg_quote( home_url( '/' ), '#' ) . '">ToPersia</a><span>›</span>\s*<span aria-current="page">اخبار</span>#u', $h ) );
 tN( 'بی نمونه و بی متن قالب وودمارت («Posted by»، «Continue reading»)', false === stripos( $h, 'Posted by' ) && false === stripos( $h, 'Continue reading' ) && ! preg_match( '#\bsample\b|lorem#i', wp_strip_all_tags( preg_replace( '#<script.*?</script>#s', '', $h ) ) ) );
 $j = $ld( $h );

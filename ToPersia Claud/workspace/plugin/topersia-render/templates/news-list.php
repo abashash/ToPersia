@@ -6,6 +6,8 @@
  * عنوان «اخبار {نام کامل}»؛ ده خبر در هر صفحه، تازه‌ترین اول، بی مرز
  * زمانی؛ کارت همان کارت بخش `#news`. زیر سه خبر noindex, follow — در
  * topersia-g-news.php. اسکیما: CollectionPage با about به @id موجودیت.
+ * دستۀ 49 (P5-D534): تراشۀ موضوع و ترتیب (GET؛ پالایش‌شده noindex با canonical
+ * بی‌پالایش) و پیوند «همۀ اخبار» به آرشیو /news/ (با پالایش همین مکان اگر استان یا شهر است).
  *
  * @package topersia-render
  */
@@ -16,7 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $tp_place = (int) get_queried_object_id();
 $tp_paged = max( 1, (int) get_query_var( 'paged' ) );
-$tp_q     = topersia_g_news_query( $tp_place, 10, 0, $tp_paged );
+$tp_topic = topersia_g_news_filter_topic();
+$tp_sort  = 'old' === get_query_var( 'tp_sort' ) ? 'old' : '';
+$tp_q     = topersia_g_news_query( $tp_place, 10, 0, $tp_paged, array( 'topic' => $tp_topic ? $tp_topic->slug : '', 'order' => 'old' === $tp_sort ? 'ASC' : 'DESC' ) );
+$tp_tops  = topersia_g_news_place_topics( $tp_place );
+$tp_link  = function ( $page, $topic ) use ( $tp_place, $tp_sort ) {
+	return add_query_arg( array_filter( array( 'tp_topic' => $topic, 'tp_sort' => $tp_sort ) ), topersia_g_news_list_url( $tp_place, $page ) );
+};
+$tp_arch  = in_array( (string) get_post_type( $tp_place ), array( 'tp_province', 'tp_city' ), true ) ? add_query_arg( 'tp_place', $tp_place, topersia_g_news_archive_url() ) : topersia_g_news_archive_url();
 $tp_pages = (int) ceil( $tp_q['total'] / 10 );
 $tp_title = topersia_g_news_title( $tp_place );
 
@@ -57,6 +66,29 @@ get_header();
 					<p class="tp-lead"><?php echo esc_html__( 'محتوای زمانی با تاریخ صریح و لینک به منبع اصلی.', 'topersia' ); ?></p>
 				</div></div>
 
+				<div class="tp-news-tools">
+					<?php if ( $tp_tops ) : ?>
+						<nav class="tp-news-chips" aria-label="<?php echo esc_attr__( 'موضوع‌ها', 'topersia' ); ?>">
+							<a href="<?php echo esc_url( $tp_link( 1, '' ) ); ?>"<?php echo $tp_topic ? '' : ' aria-current="page"'; ?>><?php echo esc_html__( 'همه', 'topersia' ); ?></a>
+							<?php foreach ( $tp_tops as $tp_t ) : ?>
+								<a href="<?php echo esc_url( $tp_link( 1, $tp_t->slug ) ); ?>"<?php echo ( $tp_topic && $tp_topic->term_id === $tp_t->term_id ) ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $tp_t->name ); ?></a>
+							<?php endforeach; ?>
+						</nav>
+					<?php endif; ?>
+					<form class="tp-news-filter tp-news-filter--min" method="get" action="<?php echo esc_url( topersia_g_news_list_url( $tp_place ) ); ?>" data-tp-news-filter>
+						<?php if ( $tp_topic ) : ?><input type="hidden" name="tp_topic" value="<?php echo esc_attr( $tp_topic->slug ); ?>"><?php endif; ?>
+						<div class="tp-news-filter__f">
+							<label for="tp-news-sort"><?php echo esc_html__( 'مرتب‌سازی', 'topersia' ); ?></label>
+							<select id="tp-news-sort" name="tp_sort">
+								<option value=""><?php echo esc_html__( 'جدیدترین', 'topersia' ); ?></option>
+								<option value="old"<?php selected( $tp_sort, 'old' ); ?>><?php echo esc_html__( 'قدیمی‌ترین', 'topersia' ); ?></option>
+							</select>
+						</div>
+						<div class="tp-news-filter__go"><button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button></div>
+					</form>
+					<a class="tp-more tp-news-all" href="<?php echo esc_url( $tp_arch ); ?>"><?php echo esc_html__( 'همۀ اخبار', 'topersia' ); ?></a>
+				</div>
+
 				<?php if ( $tp_q['ids'] ) : ?>
 					<div class="tp-news">
 						<?php foreach ( $tp_q['ids'] as $tp_one ) { echo topersia_g_news_card( $tp_one ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
@@ -71,7 +103,7 @@ get_header();
 							<?php if ( $tp_i === $tp_paged ) : ?>
 								<span aria-current="page"><?php echo esc_html( topersia_g_fa( $tp_i ) ); ?></span>
 							<?php else : ?>
-								<a href="<?php echo esc_url( topersia_g_news_list_url( $tp_place, $tp_i ) ); ?>"><?php echo esc_html( topersia_g_fa( $tp_i ) ); ?></a>
+								<a href="<?php echo esc_url( $tp_link( $tp_i, $tp_topic ? $tp_topic->slug : '' ) ); ?>"><?php echo esc_html( topersia_g_fa( $tp_i ) ); ?></a>
 							<?php endif; ?>
 						<?php endfor; ?>
 					</nav>

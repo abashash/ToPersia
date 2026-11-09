@@ -372,7 +372,7 @@ t( 'خبر: _tp_news_ancestor یک ردیف برای هر نیا، هنگام ذ
 
 t( 'خبر: /{rewrite}/{slug}/news/ و /page/N/ پیش از قاعدهٔ نوع؛ زیر ۳ خبر noindex؛ canonical خودِ صفحه  بند ۷٫۸',
 	false !== strpos( $news_src, "'^' . preg_quote( \$slug, '#' ) . '/([^/]+)/news(?:/page/([0-9]{1,}))?/?$'," )
-	&& false !== strpos( $news_src, "'top'" ) && false !== strpos( $news_src, "return \$q['total'] < 3;" )
+	&& false !== strpos( $news_src, "'top'" ) && false !== strpos( $news_src, "return \$q['total'] < 3 ||" )
 	&& false !== strpos( $news_src, "add_filter( 'rank_math/frontend/robots'" ) && false !== strpos( $news_src, "add_filter( 'get_canonical_url'" )
 	&& false !== strpos( $news_src, "add_filter( 'redirect_canonical'" ) && is_file( TP_PLUGIN_DIR . 'templates/news-list.php' ) );
 

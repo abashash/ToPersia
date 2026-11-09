@@ -29,6 +29,11 @@ msgstr "%1$s° شمالاً، %2$s° شرقاً"
 msgid "%s در یک نگاه"
 msgstr "%s في لمحة"
 
+#: includes/topersia-g-news-ui.php
+#, php-format
+msgid "%s دقیقه مطالعه"
+msgstr "%s دقيقة قراءة"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%s را منبع ترجیحی گوگل کنید"
@@ -1073,6 +1078,14 @@ msgstr "أبرز المعالم"
 msgid "جانشین"
 msgstr "الخلف"
 
+#: templates/news-list.php
+msgid "جدیدترین"
+msgstr "الأحدث"
+
+#: templates/news-archive.php
+msgid "جدیدترین مطالب"
+msgstr "أحدث المقالات"
+
 #: includes/topersia-g-map.php
 msgid "جزر و مد"
 msgstr "المد والجزر"
@@ -1093,6 +1106,10 @@ msgstr "بحث"
 #, php-format
 msgid "جست‌وجو در %s"
 msgstr "البحث في %s"
+
+#: templates/news-archive.php
+msgid "جست‌وجو در اخبار"
+msgstr "البحث في الأخبار"
 
 #: includes/topersia-g-search.php
 msgid "جست‌وجو در استان‌ها، شهرها، جاذبه‌ها…"
@@ -1285,6 +1302,14 @@ msgstr "العائلة اللغوية"
 #: includes/topersia-g-map.php
 msgid "خاکی"
 msgstr "ترابي"
+
+#: templates/news-archive.php
+msgid "خبرهای برگزیده"
+msgstr "أخبار مختارة"
+
+#: templates/news-archive.php
+msgid "خبری با این پالایش نیست."
+msgstr "لا توجد أخبار تطابق هذه التصفية."
 
 #: includes/topersia-g-legal.php
 msgid "خدمات وب:"
@@ -2167,6 +2192,10 @@ msgstr "مقاطعة"
 msgid "شهرها"
 msgstr "المدن"
 
+#: templates/news-archive.php
+msgid "شهرهای استان"
+msgstr "مدن المحافظة"
+
 #: includes/topersia-g-map.php
 msgid "شهرهای دارای فرودگاه اصلی"
 msgstr "مدن المطارات الرئيسية"
@@ -2206,6 +2235,10 @@ msgstr "الحلويات والحلاوة"
 #: includes/topersia-g-map.php
 msgid "شیوۀ ساخت"
 msgstr "طريقة الصنع"
+
+#: templates/news-archive.php
+msgid "شیوۀ نمایش"
+msgstr "طريقة العرض"
 
 #: includes/topersia-g-map.php
 msgid "صبح زود"
@@ -2479,6 +2512,10 @@ msgstr "صدر القانون"
 #: includes/topersia-g-zones.php
 msgid "قبلی"
 msgstr "السابق"
+
+#: templates/news-list.php
+msgid "قدیمی‌ترین"
+msgstr "الأقدم"
 
 #: includes/topersia-g-map.php
 msgid "قسمت پادکست"
@@ -3027,10 +3064,6 @@ msgstr "المصدر الأصلي:"
 msgid "منبع رسمی"
 msgstr "المصدر الرسمي"
 
-#: includes/topersia-g-news.php
-msgid "منبع:"
-msgstr "المصدر:"
-
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr "قديم"
@@ -3163,9 +3196,21 @@ msgstr "الموسيقى والطقوس"
 msgid "موسیقی‌های محلی این قوم"
 msgstr "الموسيقى المحلية لهذا القوم"
 
+#: includes/topersia-g-news-ui.php
+msgid "موضوع خبر"
+msgstr "موضوع الخبر"
+
 #: includes/topersia-g-map.php
 msgid "موضوعیت ندارد"
 msgstr "لا ينطبق"
+
+#: templates/news-list.php
+msgid "موضوع‌ها"
+msgstr "المواضيع"
+
+#: includes/topersia-g-news-ui.php
+msgid "موضوع‌های خبر"
+msgstr "مواضيع الأخبار"
 
 #: includes/topersia-g-zones.php
 msgid "مکان مذهبی"
@@ -3304,6 +3349,10 @@ msgstr "نتائج البحث عن «%s»"
 msgid "نتیجه‌ای نیست."
 msgstr "لا توجد نتائج."
 
+#: templates/news-archive.php
+msgid "نتیجۀ پالایش"
+msgstr "نتائج التصفية"
+
 #: includes/topersia-g-zones.php
 msgid "نخستین نظر را شما بنویسید"
 msgstr "كن أول من يكتب مراجعة"
@@ -3398,15 +3447,23 @@ msgstr "الرمز"
 msgid "نمای بزرگ نقشۀ %s"
 msgstr "خريطة %s بحجم كبير"
 
+#: templates/news-archive.php
+msgid "نمای شبکه‌ای"
+msgstr "عرض شبكي"
+
 #: includes/topersia-g-zones.php
 msgid "نمای شماتیک نقشه"
 msgstr "خريطة تخطيطية"
+
+#: templates/news-archive.php
+msgid "نمای فهرستی"
+msgstr "عرض قائمة"
 
 #: includes/topersia-g-zones.php
 msgid "نمای کامل تصویر"
 msgstr "عرض الصورة كاملة"
 
-#: templates/news-archive.php
+#: templates/news-list.php
 msgid "نمایش"
 msgstr "عرض"
 
@@ -3502,6 +3559,10 @@ msgstr "نوع المنطقة"
 msgid "نوع منظر"
 msgstr "نوع المشهد"
 
+#: templates/news-archive.php
+msgid "نوع مکان"
+msgstr "نوع المكان"
+
 #: includes/topersia-g-map.php
 msgid "نوع پهنه"
 msgstr "نوع الرقعة"
@@ -3582,6 +3643,10 @@ msgstr "أسبوع نهاية الذروة"
 msgid "همراهی موسیقی"
 msgstr "المرافقة الموسيقية"
 
+#: templates/news-list.php
+msgid "همه"
+msgstr "الكل"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "همه %s مورد ←"
@@ -3639,6 +3704,10 @@ msgstr "جميع المناطق الطبيعية ←"
 msgid "همه گذرهای مرزی ←"
 msgstr "جميع المعابر الحدودية ←"
 
+#: templates/news-list.php
+msgid "همۀ اخبار"
+msgstr "كل الأخبار"
+
 #: includes/topersia-g-home.php
 msgid "همۀ استان‌ها"
 msgstr "جميع المحافظات"
@@ -3655,6 +3724,10 @@ msgstr "جميع المصادر (%s)"
 #: templates/news-archive.php
 msgid "همۀ مکان‌ها"
 msgstr "كل الأماكن"
+
+#: templates/news-archive.php
+msgid "همۀ نوع‌ها"
+msgstr "كل الأنواع"
 
 #: includes/topersia-g-zones.php
 msgid "هم‌مرزها"
@@ -3825,6 +3898,14 @@ msgstr "إجابات سريعة"
 #: includes/topersia-g-map.php
 msgid "پاسپورت دیپلماتیک و خدمت"
 msgstr "الجوازات الدبلوماسية وجوازات الخدمة"
+
+#: templates/news-archive.php
+msgid "پالایش اخبار"
+msgstr "تصفية الأخبار"
+
+#: templates/news-archive.php
+msgid "پاک‌کردن پالایش"
+msgstr "مسح التصفية"
 
 #: includes/topersia-g-map.php
 msgid "پایان"
