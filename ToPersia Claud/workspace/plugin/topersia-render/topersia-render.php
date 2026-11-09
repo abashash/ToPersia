@@ -466,6 +466,14 @@ if ( ! function_exists( 'topersia_render_enqueue_assets' ) ) {
 			topersia_render_asset_version( 'assets/topersia-g-template.css' )
 		);
 
+		/* نوار پیشرفت اسکرول زیر هر اسلایدر — P5-D550؛ منطق در topersia-g-zones.js */
+		wp_enqueue_style(
+			'topersia-g-prog',
+			$url . 'assets/topersia-g-prog.css',
+			array( 'topersia-g-template' ),
+			topersia_render_asset_version( 'assets/topersia-g-prog.css' )
+		);
+
 		wp_add_inline_style( 'topersia-tokens', topersia_render_dynamic_css() );
 
 		wp_enqueue_script(

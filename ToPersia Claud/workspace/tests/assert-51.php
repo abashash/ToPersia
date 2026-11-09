@@ -201,3 +201,37 @@ $w51_pl = function ( $s ) {
 };
 tp441_mut( 'حریم خصوصی: برچسب «نشانی IP و اطلاعات درخواست» در سه زبان، برچسب قدیم هیچ‌جا — جهش: برچسب قدیم', $w51_pl, $w51_priv,
 	str_replace( '- IP address and request information:', '- Technical logs (user ID only, never the number):', $w51_priv ) );
+
+/* ══ بخش ۲ — نوار پیشرفت اسکرول (P5-D550) ══════════════════════════ */
+$w51_zjs  = $w51_read( 'plugin/topersia-render/assets/topersia-g-zones.js' );
+$w51_pcss = $w51_read( 'plugin/topersia-render/assets/topersia-g-prog.css' );
+$w51_prog = function ( $s ) {
+	foreach ( array(
+		"page.querySelectorAll( '.tp-slider, .tp-home-slider, [data-tp-prog]' )",   /* هر اسلایدر + اسلایدر تازه با ویژگی */
+		"bar.setAttribute( 'aria-hidden', 'true' );",
+		"el.classList.add( 'tp-has-prog' );",                                         /* نوار بومی فقط با JS پنهان */
+		'bar.hidden = d.max <= 1;',                                                     /* همه جا شد ← پنهان */
+		'Math.abs( el.scrollLeft ) / d.max',                                            /* جای کاربر مثل فلش‌ها (P5-D243) */
+		"'translateX(' + ( rtl() ? -1 : 1 ) *",                                         /* قرینه در راست‌به‌چپ */
+		"'rtl' === window.getComputedStyle( el ).direction",                            /* جهت از خود اسلایدر */
+		"el.addEventListener( 'scroll', later, { passive: true } );",
+		"el.classList.add( 'tp-is-dragging' );",                                        /* کشیدن شست = چسبیدن خاموش، همان کلاس P5-D277 */
+	) as $n ) {
+		if ( false === strpos( $s, $n ) ) {
+			return false;
+		}
+	}
+	return true;
+};
+tp441_mut( 'P5-D550 JS: نوار زیر هر اسلایدر، همگام با اسکرول، جهت از اسلایدر، پنهان وقتی همه جا شد، aria-hidden — جهش: نوار همیشه دیده', $w51_prog, $w51_zjs,
+	str_replace( 'bar.hidden = d.max <= 1;', 'bar.hidden = false;', $w51_zjs ) );
+t( 'P5-D550 JS: جهش — جهت ثابت (بی قرینۀ راست‌به‌چپ) می‌افتد', ! $w51_prog( str_replace( "'translateX(' + ( rtl() ? -1 : 1 ) *", "'translateX(' + 1 *", $w51_zjs ) ) );
+
+$w51_pc = function ( $c, $r ) {
+	return false !== strpos( $c, 'html .tp-page .tp-has-prog{scrollbar-width:none}' ) && false !== strpos( $c, '.tp-has-prog::-webkit-scrollbar{display:none}' )
+		&& (bool) preg_match( '/\.tp-prog__thumb\{[^}]*inset-inline-start:0/', $c ) && (bool) preg_match( '/\.tp-prog__thumb\{[^}]*background:var\(--tp-primary\)/', $c )
+		&& 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', preg_replace( '#/\*.*?\*/#s', '', $c ) )
+		&& false !== strpos( $r, "\$url . 'assets/topersia-g-prog.css'," );
+};
+tp441_mut( 'P5-D550 CSS: نوار بومی فقط با tp-has-prog پنهان، شست منطقی (inset-inline-start)، رنگ فقط از توکن، بار با قالب — جهش: رنگ خام', function ( $c ) use ( $w51_pc, $w51_render ) { return $w51_pc( $c, $w51_render ); }, $w51_pcss,
+	str_replace( 'background:var(--tp-primary);', 'background:#0a6b5e;', $w51_pcss ) );

@@ -701,6 +701,129 @@
 		} );
 	} )();
 
+	/* ══ نوار پیشرفت اسکرول زیر هر اسلایدر — P5-D550 ═══════════════════
+	   هر `.tp-slider` · `.tp-home-slider` · `[data-tp-prog]` (اسلایدر تازه فقط
+	   همین ویژگی را می‌گیرد) یک خواهر `.tp-prog` با شست سفارشی می‌گیرد و نوار
+	   بومی با `tp-has-prog` پنهان می‌شود — بی JS نوار بومی می‌ماند. جای کاربر
+	   مثل فلش‌ها با `Math.abs( scrollLeft )` (P5-D243)؛ شست با `inset-inline-start`
+	   و `translateX` قرینه در راست‌به‌چپ. همه جا شد ← نوار پنهان. کلیک روی
+	   خط و کشیدن شست اختیاری‌اند (فقط اشاره‌گر؛ صفحه‌کلید همان فلش‌ها و
+	   اسکرول بومی است، پس نوار aria-hidden است). کشیدن شست همان `tp-is-dragging`
+	   کشیدن موس را می‌گذارد تا چسبیدن خاموش باشد؛ با برداشتنش مرورگر به کارت می‌چسباند.
+	   ────────────────────────────────────────────────────────────────── */
+	( function () {
+
+		var calm = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
+
+		Array.prototype.forEach.call( page.querySelectorAll( '.tp-slider, .tp-home-slider, [data-tp-prog]' ), function ( el ) {
+
+			if ( el.nextElementSibling && el.nextElementSibling.classList.contains( 'tp-prog' ) ) {
+				return;
+			}
+
+			var bar   = document.createElement( 'div' );
+			var thumb = document.createElement( 'span' );
+			var pending = false, id = null, x0 = 0, s0 = 0;
+
+			bar.className = 'tp-prog';
+			bar.setAttribute( 'aria-hidden', 'true' );
+			bar.hidden = true;
+			thumb.className = 'tp-prog__thumb';
+			bar.appendChild( thumb );
+			el.parentNode.insertBefore( bar, el.nextSibling );
+			el.classList.add( 'tp-has-prog' );
+
+			function rtl() {
+				return 'rtl' === window.getComputedStyle( el ).direction;
+			}
+
+			/* اندازه‌ها: طول خط، طول شست، بیشینۀ اسکرول، فضای حرکت شست. */
+			function dims() {
+				var track = bar.clientWidth;
+				var max   = el.scrollWidth - el.clientWidth;
+				var tw    = Math.min( track, Math.max( 32, Math.round( track * el.clientWidth / Math.max( 1, el.scrollWidth ) ) ) );
+				return { max: max, tw: tw, room: Math.max( 1, track - tw ) };
+			}
+
+			function sync() {
+
+				pending = false;
+
+				var d = dims();
+				bar.style.direction = rtl() ? 'rtl' : 'ltr';
+				bar.hidden = d.max <= 1;
+				if ( bar.hidden ) {
+					return;
+				}
+
+				d = dims();   /* پس از آشکارشدن، طول خط واقعی است */
+				var f = Math.min( 1, Math.abs( el.scrollLeft ) / d.max );
+				thumb.style.inlineSize = d.tw + 'px';
+				thumb.style.transform  = 'translateX(' + ( rtl() ? -1 : 1 ) * Math.round( f * d.room ) + 'px)';
+			}
+
+			function later() {
+				if ( ! pending ) {
+					pending = true;
+					window.requestAnimationFrame( sync );
+				}
+			}
+
+			bar.addEventListener( 'pointerdown', function ( e ) {
+
+				if ( 0 !== e.button ) {
+					return;
+				}
+				e.preventDefault();
+
+				if ( e.target === thumb ) {
+					id = e.pointerId;
+					x0 = e.clientX;
+					s0 = el.scrollLeft;
+					bar.setPointerCapture( id );
+					bar.classList.add( 'tp-is-grab' );
+					el.classList.add( 'tp-is-dragging' );
+					return;
+				}
+
+				/* کلیک روی خط: مرکز شست به نقطۀ کلیک. */
+				var d   = dims();
+				var box = bar.getBoundingClientRect();
+				var off = ( rtl() ? box.right - e.clientX : e.clientX - box.left ) - d.tw / 2;
+				var f   = Math.max( 0, Math.min( 1, off / d.room ) );
+				el.scrollTo( { left: ( rtl() ? -1 : 1 ) * f * d.max, behavior: calm ? 'auto' : 'smooth' } );
+			} );
+
+			/* کشیدن شست: در هر دو جهت یک فرمول — scrollLeft راست‌به‌چپ از صفر رو به منفی است. */
+			bar.addEventListener( 'pointermove', function ( e ) {
+				if ( e.pointerId !== id ) {
+					return;
+				}
+				var d = dims();
+				el.scrollLeft = s0 + ( e.clientX - x0 ) * d.max / d.room;
+			} );
+
+			function end( e ) {
+				if ( e.pointerId !== id ) {
+					return;
+				}
+				id = null;
+				bar.classList.remove( 'tp-is-grab' );
+				el.classList.remove( 'tp-is-dragging' );
+			}
+
+			bar.addEventListener( 'pointerup', end );
+			bar.addEventListener( 'pointercancel', end );
+			el.addEventListener( 'scroll', later, { passive: true } );
+			window.addEventListener( 'resize', later, { passive: true } );
+			window.addEventListener( 'load', sync, { once: true } );
+			if ( window.ResizeObserver ) {
+				new window.ResizeObserver( later ).observe( el );
+			}
+			sync();
+		} );
+	} )();
+
 	/* ══ کشیدن اسلایدر با موس — P5-D277 ════════════════════════════════
 	   فقط موس (`pointerType`): لمس و صفحه‌کلید همان رفتار بومی‌اند. پنج
 	   پیکسل پیش از شروع، تا کلیکِ لرزان کلیک بماند. هنگام کشیدن چسبیدن

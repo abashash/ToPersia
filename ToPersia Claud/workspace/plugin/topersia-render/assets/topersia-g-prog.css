@@ -1,0 +1,22 @@
+/**
+ * نوار پیشرفت اسکرول زیر هر اسلایدر — P5-D550 · دستۀ 51.
+ *
+ * نشانه‌گذاری را topersia-g-zones.js می‌سازد (بی JS نوار بومی می‌ماند): هر `.tp-slider` · `.tp-home-slider` ·
+ * `[data-tp-prog]` کلاس `tp-has-prog` و یک خواهر `.tp-prog` پس از خود می‌گیرد. نوار بومی فقط با همان کلاس پنهان می‌شود.
+ * فاصلۀ کارت تا نوار ≥ ۱۴px = padding پایین اسلایدر + margin نوار (w51-local می‌سنجد). جهت از اسلایدر.
+ * رنگ فقط از توکن؛ عنصر رابط ≥ ۳ (کنتراست شست با سطح).
+ */
+html .tp-page .tp-has-prog{scrollbar-width:none}
+html .tp-page .tp-has-prog::-webkit-scrollbar{display:none}
+html .tp-page .tp-has-prog.tp-is-dragging{scroll-snap-type:none;scroll-behavior:auto}
+
+html .tp-page .tp-prog{position:relative;box-sizing:border-box;block-size:20px;margin-block-start:4px;cursor:pointer;touch-action:none;user-select:none}
+html .tp-page .tp-prog[hidden]{display:none}
+html .tp-page .tp-prog::before{content:"";position:absolute;inset-inline:0;inset-block-start:7px;block-size:6px;border-radius:999px;background:var(--tp-border)}
+html .tp-page .tp-prog__thumb{position:absolute;inset-inline-start:0;inset-block-start:7px;block-size:6px;min-inline-size:32px;border-radius:999px;
+  background:var(--tp-primary);will-change:transform;cursor:grab}
+html .tp-page .tp-prog.tp-is-grab .tp-prog__thumb{cursor:grabbing}
+@media (forced-colors:active){
+  html .tp-page .tp-prog::before{background:CanvasText;opacity:.4}
+  html .tp-page .tp-prog__thumb{background:Highlight}
+}
