@@ -1,0 +1,12 @@
+/**
+ * هاب عمومی نوع و برچسب — دستۀ 51 بخش ۴. باقی اجزا همان topersia-g-news.css (سربرگ، تراشه، پالایش، ردیف فعال، صفحه‌بندی).
+ * کاشی همان `.tp-tile` با توکن کاشی (P5-D245)؛ این‌جا فقط شبکۀ تمام‌عرض و اندازۀ خوانا. رنگ فقط از توکن.
+ */
+html .tp-page.tp-hub .tp-hub-list{margin-block-start:8px}
+html .tp-page.tp-hub .tp-hub-tiles .tp-tiles{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+html .tp-page.tp-hub .tp-hub-tiles .tp-tile{min-block-size:84px;padding:14px 12px;text-align:center}
+html .tp-page.tp-hub .tp-hub-tiles .tp-tile b{font-size:calc(1 * var(--tp-rem));line-height:1.45}
+html .tp-page.tp-hub .tp-hub-tiles .tp-tile__k{font-size:calc(.8125 * var(--tp-rem));color:var(--tp-tile-text)}
+@media (max-width:600px){
+  html .tp-page.tp-hub .tp-hub-tiles .tp-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+}

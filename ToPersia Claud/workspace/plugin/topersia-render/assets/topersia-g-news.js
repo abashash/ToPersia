@@ -143,16 +143,18 @@
 	/* مقدار فرم‌ها از نشانی — پس از «بازگشت» یا کلیک تراشه هم درست بماند */
 	function syncForms( url ) {
 		var p = url.searchParams;
+		/* نام پارامتر تراشه از ریشه (هاب: tp_facet)؛ پیش‌فرض موضوع خبر */
+		var cv = root.getAttribute( 'data-tp-news-chipvar' ) || 'tp_topic';
 		root.querySelectorAll( 'form[data-tp-news-filter]' ).forEach( function ( f ) {
-			var hid = f.querySelector( 'input[type="hidden"][name="tp_topic"]' );
-			if ( p.get( 'tp_topic' ) ) {
+			var hid = f.querySelector( 'input[type="hidden"][name="' + cv + '"]' );
+			if ( p.get( cv ) ) {
 				if ( ! hid ) {
 					hid = document.createElement( 'input' );
 					hid.type = 'hidden';
-					hid.name = 'tp_topic';
+					hid.name = cv;
 					f.insertBefore( hid, f.firstChild );
 				}
-				hid.value = p.get( 'tp_topic' );
+				hid.value = p.get( cv );
 			} else if ( hid ) {
 				hid.parentNode.removeChild( hid );
 			}

@@ -1620,12 +1620,95 @@ function topersia_schema_news_archive_json( $ids, $url, $from = 1 ) {
 	return $json ? $json : '';
 }
 
+/**
+ * گراف هاب نوع و برچسب — CollectionPage + ItemList + BreadcrumbList (دستۀ 51 بخش ۴).
+ * فقط موردهای همان صفحه، بی نمایشی، و فقط وقتی هاب نمایه‌پذیر است (render: `topersia_g_hub_thin()`).
+ *
+ * @param int[]  $ids  شناسه‌های صفحه، به ترتیب نمایش.
+ * @param string $url  نشانی canonical صفحه.
+ * @param int    $from جایگاه نخستین مورد.
+ * @param string $name عنوان (H1).
+ * @param string $desc جملۀ زیر عنوان.
+ */
+function topersia_schema_hub_json( $ids, $url, $from, $name, $desc ) {
+
+	$ids = array_values( array_filter( array_map( 'absint', (array) $ids ) ) );
+
+	if ( ! $ids || '' === (string) $url ) {
+		return '';
+	}
+
+	$org   = topersia_schema_organization();
+	$site  = topersia_schema_website();
+	$items = array();
+
+	foreach ( $ids as $i => $id ) {
+		$items[] = array(
+			'@type'    => 'ListItem',
+			'position' => (int) $from + $i,
+			'name'     => wp_strip_all_tags( (string) get_the_title( $id ) ),
+			'url'      => (string) get_permalink( $id ),
+		);
+	}
+
+	$graph = array(
+		$org,
+		$site,
+		array(
+			'@type'       => 'CollectionPage',
+			'@id'         => $url . '#webpage',
+			'url'         => $url,
+			'name'        => wp_strip_all_tags( (string) $name ),
+			'description' => wp_strip_all_tags( (string) $desc ),
+			'isPartOf'    => array( '@id' => $site['@id'] ),
+			'inLanguage'  => topersia_schema_lang(),
+			'breadcrumb'  => array( '@id' => $url . '#breadcrumb' ),
+			'mainEntity'  => array( '@id' => $url . '#list' ),
+		),
+		array(
+			'@type'           => 'ItemList',
+			'@id'             => $url . '#list',
+			'numberOfItems'   => count( $items ),
+			'itemListElement' => $items,
+		),
+		array(
+			'@type'           => 'BreadcrumbList',
+			'@id'             => $url . '#breadcrumb',
+			'itemListElement' => array(
+				array( '@type' => 'ListItem', 'position' => 1, 'name' => 'ToPersia', 'item' => topersia_schema_home() ),
+				array( '@type' => 'ListItem', 'position' => 2, 'name' => wp_strip_all_tags( (string) $name ), 'item' => $url ),
+			),
+		),
+	);
+
+	$json = wp_json_encode( topersia_schema_prune( array( '@context' => 'https://schema.org', '@graph' => $graph ) ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_PRETTY_PRINT );
+
+	return $json ? $json : '';
+}
+
 /** انتشار گراف در head. */
 add_action( 'wp_head', 'topersia_schema_output', 5 );
 
 function topersia_schema_output() {
 
 	if ( ! topersia_schema_core_ready() ) {
+		return;
+	}
+
+	/* هاب نوع و برچسب: CollectionPage + ItemList — فقط وقتی نمایه‌پذیر است.  دستۀ 51 بخش ۴ */
+	if ( function_exists( 'topersia_g_hub_is' ) && topersia_g_hub_is() ) {
+		if ( ! topersia_g_hub_thin() ) {
+			global $wp_query;
+			$ids  = topersia_g_published( array_map( 'absint', wp_list_pluck( (array) $wp_query->posts, 'ID' ) ) );
+			$ids  = function_exists( 'topersia_g_demo_strip' ) ? topersia_g_demo_strip( $ids ) : $ids;   /* P5-D548 */
+			$per  = max( 1, (int) $wp_query->get( 'posts_per_page' ) );
+			$page = max( 1, (int) get_query_var( 'paged' ) );
+			$json = topersia_schema_hub_json( $ids, topersia_g_hub_url( $page ), ( $page - 1 ) * $per + 1, topersia_g_hub_title(), topersia_g_hub_lead() );
+			if ( '' !== $json ) {
+				echo "\n<!-- ToPersia Structured Data -->\n";
+				echo '<script type="application/ld+json">' . "\n" . $json . "\n" . '</script>' . "\n";
+			}
+		}
 		return;
 	}
 

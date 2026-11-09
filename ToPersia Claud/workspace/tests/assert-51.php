@@ -296,3 +296,73 @@ $w51_h1 = function ( $n, $c ) {
 };
 tp441_mut( 'P5-D558: H1 «اخبار گردشگری %s» (پیش‌فرض ایران)، H1 و جمله وسط‌چین، مسیر راهنما آغاز خط — جهش: H1 آغازچین', function ( $c ) use ( $w51_h1, $w51_news ) { return $w51_h1( $w51_news, $c ); }, $w51_ncss,
 	str_replace( '.tp-news-hero h1{margin:0;text-align:center;', '.tp-news-hero h1{margin:0;', $w51_ncss ) );
+
+/* ══ الحاقیه ج — هاب عمومی نوع (بخش ۴) ══════════════════════════════ */
+$w51_hub  = $w51_read( 'plugin/topersia-render/includes/topersia-g-hub.php' );
+$w51_htpl = $w51_read( 'plugin/topersia-render/templates/hub-archive.php' );
+$w51_njs  = $w51_read( 'plugin/topersia-render/assets/topersia-g-news.js' );
+$w51_hcss = $w51_read( 'plugin/topersia-render/assets/topersia-g-hub.css' );
+
+t( 'هاب: ماژول در فهرست بارگذاری render', false !== strpos( $w51_render, "'includes/topersia-g-hub.php'" ) );
+
+/* رجیستری از ماتریس — نوع تازه = یک سطر؛ بی فهرست نام فیلد دستی */
+$w51_reg = function ( $s ) {
+	return false !== strpos( $s, 'foreach ( array_keys( topersia_g_type_matrix() ) as $type )' )
+		&& false !== strpos( $s, "topersia_pack_schema( \$type )" ) && false !== strpos( $s, "apply_filters( 'topersia_g_hub_registry', \$rows )" );
+};
+tp441_mut( 'هاب: رجیستری از ماتریس نوع و اسکیمای زنده — جهش: فهرست دستی', $w51_reg, $w51_hub,
+	str_replace( 'foreach ( array_keys( topersia_g_type_matrix() ) as $type )', "foreach ( array( 'tp_city', 'tp_province' ) as \$type )", $w51_hub ) );
+
+/* آرشیو روی همان نامک بازنویسی؛ نشانی صفحۀ تکی دست نمی‌خورد */
+$w51_arc = function ( $s ) { return false !== strpos( $s, "\$args['has_archive'] = \$slug;" ) && false === strpos( $s, "\$args['rewrite'] =" ); };
+tp441_mut( 'هاب: has_archive = نامک موجود، rewrite تکی بی تغییر — جهش: has_archive = true (نشانی /tp_city/)', $w51_arc, $w51_hub,
+	str_replace( "\$args['has_archive'] = \$slug;", "\$args['has_archive'] = true;", $w51_hub ) );
+
+/* noindex زیر ۳ مورد و هر حالت پالایش‌شده؛ canonical بی‌پالایش */
+$w51_thin = function ( $s ) {
+	return false !== strpos( $s, "define( 'TOPERSIA_HUB_MIN_INDEX', 3 )" )
+		&& false !== strpos( $s, 'return topersia_g_hub_filtered() || count( topersia_g_hub_pool() ) < TOPERSIA_HUB_MIN_INDEX;' )
+		&& false !== strpos( $s, 'topersia_g_hub_url( topersia_g_hub_filtered() ? 1 :' );
+};
+tp441_mut( 'هاب: noindex زیر ۳ و پالایش‌شده، canonical بی‌پالایش — جهش: پالایش‌شده نمایه‌پذیر', $w51_thin, $w51_hub,
+	str_replace( 'return topersia_g_hub_filtered() || count(', 'return count(', $w51_hub ) );
+
+/* JSON-LD: CollectionPage + ItemList + Breadcrumb فقط نمایه‌پذیر، بی نمایشی */
+$w51_hsch = function ( $s ) {
+	$b = (string) strstr( $s, "if ( function_exists( 'topersia_g_hub_is' ) && topersia_g_hub_is() ) {" );
+	$b = substr( $b, 0, (int) strpos( $b, 'return;' ) );
+	return '' !== $b && false !== strpos( $b, '! topersia_g_hub_thin()' ) && false !== strpos( $b, 'topersia_g_demo_strip( $ids )' )
+		&& false !== strpos( $s, 'function topersia_schema_hub_json(' );
+};
+tp441_mut( 'هاب: اسکیما فقط نمایه‌پذیر و بی پست نمایشی (P5-D548) — جهش: بی demo_strip', $w51_hsch, $w51_schema,
+	str_replace( "topersia_g_demo_strip( \$ids ) : \$ids;   /* P5-D548 */\n\t\t\t\$per", "\$ids : \$ids;\n\t\t\t\$per", $w51_schema ) );
+
+/* قالب: همان اجزای /news/ — تراشۀ فاست، ترتیب، فرم، combobox فقط با loc، ردیف فعال زیر فرم، صفحه‌بندی */
+$w51_htp = function ( $s ) {
+	return false !== strpos( $s, 'data-tp-news-chipvar="tp_facet"' ) && false !== strpos( $s, 'topersia_g_news_hero(' )
+		&& false !== strpos( $s, 'topersia_g_news_chips(' ) && false !== strpos( $s, "if ( \$tp_row['loc'] ) {" )
+		&& strpos( $s, '</form>' ) < strpos( $s, 'topersia_g_active_filters(' )
+		&& false !== strpos( $s, "topersia_g_news_pages( \$tp_pages, \$tp_paged, 'topersia_g_hub_link'" )
+		&& false !== strpos( $s, 'topersia_g_sample_hidden( $id )' );
+};
+tp441_mut( 'هاب: قالب با اجزای /news/ و ردیف فعال زیر فرم، نمایشی پنهان — جهش: combobox همیشه', $w51_htp, $w51_htpl,
+	str_replace( "if ( \$tp_row['loc'] ) {", 'if ( true ) {', $w51_htpl ) );
+
+/* JS: نام متغیر تراشه از ریشه، نه tp_topic ثابت */
+$w51_cv = function ( $s ) { return false !== strpos( $s, "root.getAttribute( 'data-tp-news-chipvar' ) || 'tp_topic'" ); };
+tp441_mut( 'هاب: تعویض بی‌رفرش متغیر تراشه را از ریشه می‌خواند — جهش: tp_topic ثابت', $w51_cv, $w51_njs,
+	str_replace( "root.getAttribute( 'data-tp-news-chipvar' ) || 'tp_topic'", "'tp_topic'", $w51_njs ) );
+
+/* H1 با %s برای هر نوع جز کشور؛ مقدار عددی جلوی نام (P5-D466) */
+$w51_ht = function ( $s ) {
+	preg_match_all( "/'(tp_[a-z_]+)'\s*=>\s*__\( '([^']*)', 'topersia' \)/u", (string) strstr( (string) strstr( $s, 'function topersia_g_hub_titles' ), 'function topersia_g_hub_registry', true ), $m, PREG_SET_ORDER );
+	$miss = 0;
+	foreach ( $m as $r ) {
+		$miss += ( 'tp_country' !== $r[1] && false === strpos( $r[2], '%s' ) ) ? 1 : 0;
+	}
+	return count( $m ) >= 41 && 0 === $miss;
+};
+tp441_mut( 'هاب: H1 هر نوع با %s (نام مکان) — جهش: «شهرهای ایران» ثابت', $w51_ht, $w51_hub,
+	preg_replace( "/'tp_city'(\s*)=> __\( '[^']*'/u", "'tp_city'\$1=> __( 'شهرهای ایران'", $w51_hub, 1 ) );
+t( 'هاب: در ترتیب معیار، مقدار عددی برچسب کاشی (P5-D466)', false !== strpos( $w51_hub, "if ( 'metric' === \$args['tp_sort'] && null !== topersia_g_hub_metric( \$id, \$row['metric'] ) )" ) );
+t( 'هاب: CSS فقط توکن رنگ', 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $w51_hcss ) && false === strpos( $w51_hcss, 'letter-spacing' ) );

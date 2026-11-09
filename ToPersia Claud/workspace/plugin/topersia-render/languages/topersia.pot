@@ -216,6 +216,11 @@ msgstr ""
 msgid "آیین‌ها و مراسم این قوم"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "آیین‌ها و مراسم سنتی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "آیین‌ها و مراسم مرتبط با این شخصیت"
 msgstr ""
@@ -303,6 +308,11 @@ msgstr ""
 msgid "ارز و روش‌های پرداخت"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "ارز و روش‌های پرداخت در %s"
+msgstr ""
+
 #: includes/topersia-g-home.php
 msgid "ارز و پرداخت"
 msgstr ""
@@ -351,6 +361,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "استان‌ها"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "استان‌های %s"
 msgstr ""
 
 #: includes/topersia-g-home.php
@@ -435,6 +450,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "اقوام مرتبط"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "اقوام و فرهنگ‌های %s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -768,6 +788,11 @@ msgstr ""
 msgid "بناها و میراث تاریخی"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "بناهای تاریخی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "بناهای تاریخی این دوره"
 msgstr ""
@@ -981,6 +1006,11 @@ msgstr ""
 msgid "تقویم و مناسبت‌های رسمی"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "تقویم و مناسبت‌های رسمی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "تقویم‌های رسمی مرتبط"
 msgstr ""
@@ -1066,6 +1096,11 @@ msgstr ""
 msgid "ثبت نظر"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "ثبت‌ها و تعیین‌های رسمی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "جاده‌ای"
 msgstr ""
@@ -1116,6 +1151,11 @@ msgstr ""
 msgid "جزیره"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جزیره‌های %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "جزیره‌های این مسیر"
 msgstr ""
@@ -1141,6 +1181,10 @@ msgstr ""
 msgid "جست‌وجو در سایت"
 msgstr ""
 
+#: templates/hub-archive.php
+msgid "جست‌وجو در فهرست"
+msgstr ""
+
 #: includes/topersia-g-news-ui.php
 #, php-format
 msgid "جست‌وجو: %s"
@@ -1164,6 +1208,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "جشنواره و رویداد"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جشنواره‌ها و رویدادهای %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1234,6 +1283,11 @@ msgstr ""
 msgid "جنگل/دشت"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جنگل‌ها و دشت‌های %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "جوشانده"
 msgstr ""
@@ -1297,6 +1351,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "حمل‌ونقل عمومی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "حمل‌ونقل عمومی %s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1594,6 +1653,11 @@ msgstr ""
 msgid "دوره / سلسلۀ تاریخی"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "دوره‌ها و سلسله‌های تاریخی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "دوره‌های تاریخی این بنا"
 msgstr ""
@@ -1750,6 +1814,11 @@ msgstr ""
 msgid "رقص‌های رایج در این استان"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "رقص‌های محلی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "رقص‌های محلی این قوم"
 msgstr ""
@@ -1806,6 +1875,11 @@ msgstr ""
 msgid "روستاها"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "روستاهای %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "روستای هدف گردشگری"
 msgstr ""
@@ -1840,6 +1914,16 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "رویدادهای اثرگذار بر برنامه‌ریزی سفر"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "رویدادهای طبیعی و فصلی %s"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "رویدادهای ورزشی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1900,6 +1984,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "زبان و پوشاک"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "زبان‌ها و گویش‌های %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2103,6 +2192,11 @@ msgstr ""
 msgid "سلامت و ایمنی"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "سلامت و ایمنی در %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "سمت رانندگی"
 msgstr ""
@@ -2141,6 +2235,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "شخصیت تاریخی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "شخصیت‌های تاریخی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2232,6 +2331,11 @@ msgstr ""
 msgid "شهرها"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "شهرهای %s"
+msgstr ""
+
 #: templates/news-archive.php
 msgid "شهرهای استان"
 msgstr ""
@@ -2304,12 +2408,21 @@ msgstr ""
 msgid "صفحه‌های سایت"
 msgstr ""
 
+#: templates/hub-archive.php
+msgid "صفحه‌های فهرست"
+msgstr ""
+
 #: templates/search-results.php
 msgid "صفحه‌های نتیجه"
 msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "صنایع دستی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "صنایع دستی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2360,6 +2473,11 @@ msgstr ""
 msgid "عارضه‌های سازندۀ این منظر"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "عارضه‌های طبیعی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "عارضه‌های طبیعی درون این منطقه"
 msgstr ""
@@ -2402,6 +2520,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "غذاهای محلی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "غذاهای محلی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2464,6 +2587,11 @@ msgstr ""
 msgid "فرهنگ سفر و آداب"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "فرهنگ سفر و آداب %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "فرهنگ و رویداد"
 msgstr ""
@@ -2523,6 +2651,11 @@ msgstr ""
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "فهرست اخبار %s"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "فهرست کامل %s، با پالایش و جست‌وجو."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2591,6 +2724,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "لباس مناسبتی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "لباس‌های سنتی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2757,6 +2895,11 @@ msgstr ""
 msgid "محله‌ها"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "محله‌های %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "محله‌های این دوره"
 msgstr ""
@@ -2775,6 +2918,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "محوطه‌های باستانی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "محوطه‌های باستانی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2851,6 +2999,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "مراسم مذهبی عمومی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "مراسم مذهبی عمومی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2971,6 +3124,11 @@ msgstr ""
 msgid "مسیرهای گردشگری"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "مسیرهای گردشگری %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "مسیرهایی که از این شهر آغاز می‌شوند"
 msgstr ""
@@ -3088,6 +3246,11 @@ msgstr ""
 msgid "مناسب‌ترین فصل برای سفر"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "مناطق جغرافیایی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "مناطق حفاظت‌شدۀ میزبان"
 msgstr ""
@@ -3140,6 +3303,11 @@ msgstr ""
 msgid "منظر فرهنگی"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "منظرهای فرهنگی %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "منظرهای فرهنگی این بنا"
 msgstr ""
@@ -3188,6 +3356,10 @@ msgstr ""
 msgid "مورد دیگر"
 msgstr ""
 
+#: templates/hub-archive.php
+msgid "موردی با این پالایش نیست."
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "موردی پیدا نشد"
 msgstr ""
@@ -3198,6 +3370,11 @@ msgstr ""
 
 #: includes/topersia-g-home.php
 msgid "موزه‌ها"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "موزه‌های %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3218,6 +3395,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "موسیقی محلی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "موسیقی محلی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3271,6 +3453,11 @@ msgstr ""
 
 #: includes/topersia-g-home.php
 msgid "مکان‌های مذهبی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "مکان‌های مذهبی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3786,9 +3973,22 @@ msgstr ""
 msgid "همۀ فرهنگ و رویداد"
 msgstr ""
 
+#: templates/hub-archive.php
+msgid "همۀ فصل‌ها"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "همۀ منابع (%s)"
+msgstr ""
+
+#: templates/hub-archive.php
+msgid "همۀ موارد"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "همۀ مکان‌ها و مطالب «%s» در یک جا."
 msgstr ""
 
 #: templates/news-archive.php
@@ -3809,6 +4009,10 @@ msgstr ""
 
 #: templates/news-archive.php
 msgid "هنوز خبری منتشر نشده است."
+msgstr ""
+
+#: templates/hub-archive.php
+msgid "هنوز موردی منتشر نشده است."
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -3941,12 +4145,22 @@ msgstr ""
 msgid "ویزا و شرایط ورود"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "ویزا و شرایط ورود به %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "پادشاه"
 msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "پارک ملی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "پارک‌های ملی و مناطق حفاظت‌شدۀ %s"
 msgstr ""
 
 #: includes/topersia-g-weather.php
@@ -3967,6 +4181,10 @@ msgstr ""
 
 #: templates/news-archive.php
 msgid "پالایش اخبار"
+msgstr ""
+
+#: templates/hub-archive.php
+msgid "پالایش فهرست"
 msgstr ""
 
 #: includes/topersia-g-news-ui.php
@@ -4075,6 +4293,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "پهنه آبی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "پهنه‌های آبی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -4261,6 +4484,10 @@ msgstr ""
 msgid "کشور مقابل"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+msgid "کشورها"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "کشورهای مستثنا از منطقۀ آزاد"
 msgstr ""
@@ -4305,12 +4532,22 @@ msgstr ""
 msgid "کوه"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "کوه‌های %s"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "کوچک‌نمایی"
 msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "کویر"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "کویرهای %s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -4380,6 +4617,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "گذرگاه مرزی"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "گذرگاه‌های مرزی %s"
 msgstr ""
 
 #: includes/topersia-g-map.php

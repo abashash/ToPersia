@@ -45,6 +45,7 @@ $FILES = array(
 	'includes/topersia-g-news.php',
 	'includes/topersia-g-news-ui.php',
 	'includes/topersia-g-loc.php',
+	'includes/topersia-g-hub.php',
 	'includes/topersia-g-gallery-agg.php',
 	'includes/topersia-g-relreg.php',
 	'includes/topersia-g-panel.php',
@@ -58,6 +59,7 @@ $FILES = array(
 	'templates/news-single.php',
 	'includes/topersia-g-search.php',
 	'templates/search-results.php',
+	'templates/hub-archive.php',
 );
 
 $LOCALES = array(

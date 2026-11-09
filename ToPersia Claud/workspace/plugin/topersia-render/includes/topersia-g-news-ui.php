@@ -581,7 +581,7 @@ if ( ! function_exists( 'topersia_g_news_view_toggle' ) ) {
 
 /** صفحه‌بندی؛ $link( صفحه ) ← نشانی با پالایش جاری. */
 if ( ! function_exists( 'topersia_g_news_pages' ) ) {
-	function topersia_g_news_pages( $pages, $paged, $link ) {
+	function topersia_g_news_pages( $pages, $paged, $link, $label = '' ) {
 		if ( $pages < 2 ) {
 			return '';
 		}
@@ -591,7 +591,7 @@ if ( ! function_exists( 'topersia_g_news_pages' ) ) {
 				? '<span aria-current="page">' . esc_html( topersia_g_fa( $i ) ) . '</span>'
 				: '<a href="' . esc_url( $link( $i ) ) . '">' . esc_html( topersia_g_fa( $i ) ) . '</a>';
 		}
-		return '<nav class="tp-news-pages" aria-label="' . esc_attr__( 'صفحه‌های خبر', 'topersia' ) . '" data-tp-news-nav>' . $out . '</nav>';
+		return '<nav class="tp-news-pages" aria-label="' . esc_attr( '' !== $label ? $label : __( 'صفحه‌های خبر', 'topersia' ) ) . '" data-tp-news-nav>' . $out . '</nav>';   /* هاب برچسب خودش را می‌دهد */
 	}
 }
 
