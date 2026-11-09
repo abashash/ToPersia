@@ -1592,7 +1592,7 @@ function topersia_schema_news_archive_json( $ids, $url, $from = 1 ) {
 			'@id'        => $url . '#webpage',
 			'url'        => $url,
 			'name'       => $name,
-			'description' => function_exists( 'topersia_g_news_lead' ) ? wp_strip_all_tags( topersia_g_news_lead() ) : '',
+			'description' => function_exists( 'topersia_g_news_lead' ) ? wp_strip_all_tags( topersia_g_news_lead( function_exists( 'topersia_g_news_filter_place' ) ? topersia_g_news_filter_place() : 0 ) ) : '',
 			'isPartOf'   => array( '@id' => $site['@id'] ),
 			'inLanguage' => topersia_schema_lang(),
 			'breadcrumb' => array( '@id' => $url . '#breadcrumb' ),

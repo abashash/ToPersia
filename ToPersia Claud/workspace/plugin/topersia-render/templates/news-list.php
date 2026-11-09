@@ -74,7 +74,7 @@ if ( $tp_part ) {
 <?php /* جهت از زبان صفحه، نه ثابت — نسخۀ انگلیسیِ این برگه چپ‌به‌راست است.  ۲٫۰٫۸ */ ?>
 <div class="tp-page tp-news-page tp-news-place"<?php echo topersia_g_news_root_attrs( $tp_base ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<main id="tp-main" class="tp-main">
-		<?php echo topersia_g_news_hero( topersia_g_news_hero_image( $tp_place ), $tp_crumbs, $tp_title, topersia_g_news_lead() ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php echo topersia_g_news_hero( topersia_g_news_hero_image( $tp_place ), $tp_crumbs, $tp_title, topersia_g_news_lead( $tp_place ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
 		<div class="tp-wrap">
 			<section id="tp-news" class="tp-section" aria-label="<?php echo esc_attr( $tp_title ); ?>">

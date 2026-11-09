@@ -875,7 +875,13 @@ return array(
 	/* ── خبر ────────────────────────────────────────────────────── */
 	'اخبار %s'                                              => array( 'en' => '%s news', 'ar' => 'أخبار %s' ),
 	'فهرست اخبار %s'                                        => array( 'en' => 'All news about %s', 'ar' => 'كل أخبار %s' ),
-	'آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع.' => array( 'en' => 'The latest Iran travel news, events and festivals, with dates and sources.', 'ar' => 'آخر أخبار السياحة والفعاليات والمهرجانات في إيران، مع ذكر التاريخ والمصدر.' ),   /* P5-D554 */
+	'آخرین اخبار گردشگری، رویدادها و جشنواره‌های %s.' => array( 'en' => 'The latest %s travel news, events and festivals.', 'ar' => 'آخر أخبار السياحة والفعاليات والمهرجانات في %s.' ),   /* P5-D558 */
+	'اخبار گردشگری %s' => array( 'en' => '%s travel news', 'ar' => 'أخبار السياحة في %s' ),   /* P5-D558 */
+	'ایران' => array( 'en' => 'Iran', 'ar' => 'إيران' ),
+	'حذف پالایش: %s' => array( 'en' => 'Remove filter: %s', 'ar' => 'إزالة التصفية: %s' ),   /* P5-D557 */
+	'پالایش‌های فعال' => array( 'en' => 'Active filters', 'ar' => 'عوامل التصفية النشطة' ),
+	'پاک‌کردن همه' => array( 'en' => 'Clear all', 'ar' => 'مسح الكل' ),
+	'جست‌وجو: %s' => array( 'en' => 'Search: %s', 'ar' => 'بحث: %s' ),
 	'منبع اصلی:'                                            => array( 'en' => 'Original source:', 'ar' => 'المصدر الأصلي:' ),
 	'صفحه‌های خبر'                                          => array( 'en' => 'News pages', 'ar' => 'صفحات الأخبار' ),
 	'هنوز خبری برای این مکان نیست.'                         => array( 'en' => 'No news for this place yet.', 'ar' => 'لا توجد أخبار عن هذا المكان بعد.' ),
@@ -1158,7 +1164,6 @@ return array(
 	'مشاهدۀ همه' => array( 'en' => 'View all', 'ar' => 'عرض الكل' ),
 	'مشاهدۀ صفحه' => array( 'en' => 'View page', 'ar' => 'عرض الصفحة' ),
 	/* آرشیو سراسری خبر /news/ — دستۀ 48 */
-	'اخبار گردشگری ایران' => array( 'en' => 'Iran travel news', 'ar' => 'أخبار السياحة في إيران' ),
 	'مکان‌های مرتبط' => array( 'en' => 'Related places', 'ar' => 'الأماكن ذات الصلة' ),
 	'استان یا شهر' => array( 'en' => 'Province or city', 'ar' => 'المحافظة أو المدينة' ),
 	'نمایش' => array( 'en' => 'Show', 'ar' => 'عرض' ),
@@ -1184,7 +1189,6 @@ return array(
 	'همۀ نوع‌ها' => array( 'en' => 'All types', 'ar' => 'كل الأنواع' ),
 	'جدیدترین' => array( 'en' => 'Newest', 'ar' => 'الأحدث' ),
 	'قدیمی‌ترین' => array( 'en' => 'Oldest', 'ar' => 'الأقدم' ),
-	'پاک‌کردن پالایش' => array( 'en' => 'Clear filters', 'ar' => 'مسح التصفية' ),
 	'شهرهای استان' => array( 'en' => 'Cities in the province', 'ar' => 'مدن المحافظة' ),
 	'خبرهای برگزیده' => array( 'en' => 'Featured news', 'ar' => 'أخبار مختارة' ),
 	'نتیجۀ پالایش' => array( 'en' => 'Filtered results', 'ar' => 'نتائج التصفية' ),
@@ -1203,7 +1207,6 @@ return array(
 	'۱۲ ماه گذشته' => array( 'en' => 'Last 12 months', 'ar' => 'آخر 12 شهرًا' ),
 	'نتیجه: %s' => array( 'en' => 'Results: %s', 'ar' => 'النتائج: %s' ),
 	'بارگیری نشد؛ صفحه دوباره بار می‌شود.' => array( 'en' => 'Could not load; reloading the page.', 'ar' => 'تعذّر التحميل؛ سيُعاد تحميل الصفحة.' ),
-	'دسته‌بندی‌ها' => array( 'en' => 'Categories', 'ar' => 'التصنيفات' ),
 	'جدیدترین خبرها' => array( 'en' => 'Latest news', 'ar' => 'أحدث الأخبار' ),
 	'مشاهده همه' => array( 'en' => 'View all', 'ar' => 'عرض الكل' ),
 	'خبرهای مرتبط' => array( 'en' => 'Related news', 'ar' => 'أخبار ذات صلة' ),
@@ -1211,7 +1214,6 @@ return array(
 	'نمونۀ نمایشی' => array( 'en' => 'Demo sample', 'ar' => 'نموذج للعرض' ),
 	/* دستۀ 51 — فیلتر مکان combobox (P5-D549) */
 	'%s نتیجه' => array( 'en' => '%s results', 'ar' => '%s نتيجة' ),
-	'حذف پالایش مکان: %s' => array( 'en' => 'Remove place filter: %s', 'ar' => 'إزالة تصفية المكان: %s' ),
 	'دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید.' => array( 'en' => 'Type at least three characters; use the up and down keys to choose.', 'ar' => 'اكتب ثلاثة أحرف على الأقل؛ واستخدم مفتاحي الأعلى والأسفل للاختيار.' ),
 	'مکانی با نام «%s» پیدا نشد.' => array( 'en' => 'No place named “%s” was found.', 'ar' => 'لم يُعثر على مكان باسم «%s».' ),
 	'نام استان یا شهر' => array( 'en' => 'Province or city name', 'ar' => 'اسم المحافظة أو المدينة' ),

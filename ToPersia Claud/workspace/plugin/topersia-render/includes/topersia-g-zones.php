@@ -7014,7 +7014,7 @@ if ( ! function_exists( 'topersia_g_sc_news' ) ) {
 		return '<section id="tp-news" class="tp-section">'
 			. '<div class="tp-section-head"><div><h2>'
 			. esc_html( '' !== $kind ? sprintf( /* translators: %s: نوع */ __( 'اخبار %s', 'topersia' ), $kind ) : __( 'اخبار', 'topersia' ) )
-			. '</h2><p class="tp-lead">' . esc_html( topersia_g_news_lead() ) . '</p></div></div>'
+			. '</h2><p class="tp-lead">' . esc_html( topersia_g_news_lead( $pid ) ) . '</p></div></div>'
 			. '<div class="tp-news">' . $rows . '</div>'
 			. '<div class="tp-news-more"><a href="' . esc_url( topersia_g_news_list_url( $pid ) ) . '">'
 			. esc_html( sprintf( /* translators: %s: نام کامل */ __( 'فهرست اخبار %s', 'topersia' ), topersia_g_title( $pid ) ) )

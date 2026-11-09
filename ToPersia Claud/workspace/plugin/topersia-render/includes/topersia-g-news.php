@@ -303,17 +303,25 @@ if ( ! function_exists( 'topersia_g_news_card' ) ) {
 	}
 }
 
-/** زیرعنوان خبرها — سربرگ /news/ و فهرست هر مکان، بخش خبر صفحۀ موجودیت، توضیح متا و og، اسکیما (P5-D554). */
-if ( ! function_exists( 'topersia_g_news_lead' ) ) {
-	function topersia_g_news_lead() {
-		return __( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع.', 'topersia' );
+/** نام مکان برای %s سربرگ خبرها — نام کامل به زبان صفحه؛ بی مکان «ایران» (P5-D558). */
+if ( ! function_exists( 'topersia_g_news_place_name' ) ) {
+	function topersia_g_news_place_name( $place_id = 0 ) {
+		$name = $place_id ? (string) topersia_g_title( (int) $place_id ) : '';
+		return '' !== $name ? $name : __( 'ایران', 'topersia' );
 	}
 }
 
-/** عنوان صفحۀ خبرها — «اخبار {نام کامل}». */
+/** زیرعنوان خبرها با نام مکان — سربرگ /news/ و فهرست هر مکان، بخش خبر صفحۀ موجودیت، هاب، توضیح متا و og، اسکیما (P5-D558). */
+if ( ! function_exists( 'topersia_g_news_lead' ) ) {
+	function topersia_g_news_lead( $place_id = 0 ) {
+		return sprintf( /* translators: %s: نام مکان (پیش‌فرض ایران) */ __( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های %s.', 'topersia' ), topersia_g_news_place_name( $place_id ) );
+	}
+}
+
+/** عنوان صفحۀ خبرها — «اخبار گردشگری {نام کامل}»؛ بی مکان «اخبار گردشگری ایران» (P5-D260 · P5-D558). */
 if ( ! function_exists( 'topersia_g_news_title' ) ) {
-	function topersia_g_news_title( $place_id ) {
-		return sprintf( /* translators: %s: نام کامل */ __( 'اخبار %s', 'topersia' ), topersia_g_title( $place_id ) );
+	function topersia_g_news_title( $place_id = 0 ) {
+		return sprintf( /* translators: %s: نام کامل مکان (پیش‌فرض ایران) */ __( 'اخبار گردشگری %s', 'topersia' ), topersia_g_news_place_name( $place_id ) );
 	}
 }
 
@@ -342,8 +350,8 @@ if ( ! function_exists( 'topersia_g_news_is_archive' ) ) {
 if ( ! function_exists( 'topersia_g_news_filter_place' ) ) {
 	function topersia_g_news_filter_place() {
 		$id = absint( function_exists( 'get_query_var' ) ? get_query_var( 'tp_place' ) : 0 );
-		/* P5-D549: بی JS نام در tp_loc می‌آید؛ همان fold، تطبیق دقیق */
-		if ( ! $id && function_exists( 'topersia_g_loc_resolve' ) && is_scalar( get_query_var( 'tp_loc' ) ) && '' !== trim( (string) get_query_var( 'tp_loc' ) ) ) {
+		/* P5-D549: بی JS نام در tp_loc می‌آید؛ همان fold، تطبیق دقیق. متن نوشته‌شده بر tp_place پیشین برنده است (P5-D557). */
+		if ( function_exists( 'topersia_g_loc_resolve' ) && is_scalar( get_query_var( 'tp_loc' ) ) && '' !== trim( (string) get_query_var( 'tp_loc' ) ) ) {
 			$id = topersia_g_loc_resolve( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) );
 		}
 		if ( ! $id || ! in_array( (string) get_post_type( $id ), array( 'tp_province', 'tp_city' ), true ) ) {
@@ -785,8 +793,7 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'rank_math/frontend/canonical', $topersia_news_arch_url, 99 );
 
 	$topersia_news_arch_title = function () {
-		$place = topersia_g_news_filter_place();
-		return $place ? topersia_g_news_title( $place ) : __( 'اخبار گردشگری ایران', 'topersia' );
+		return topersia_g_news_title( topersia_g_news_filter_place() );
 	};
 	add_filter( 'document_title_parts', function ( $parts ) use ( $topersia_news_arch_title ) {
 		if ( topersia_g_news_is_archive() ) {
@@ -797,8 +804,11 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'rank_math/frontend/title', function ( $title ) use ( $topersia_news_arch_title ) {
 		return topersia_g_news_is_archive() ? $topersia_news_arch_title() . ' | ' . get_bloginfo( 'name' ) : $title;
 	}, 99 );
-	/* توضیح متا (و og/twitter که از همان می‌خوانند) — P5-D554 */
+	/* توضیح متا (و og/twitter که از همان می‌خوانند) با نام مکان — P5-D558؛ فهرست خبر هر مکان هم */
 	add_filter( 'rank_math/frontend/description', function ( $desc ) {
-		return topersia_g_news_is_archive() ? topersia_g_news_lead() : $desc;
+		if ( topersia_g_news_is_archive() ) {
+			return topersia_g_news_lead( topersia_g_news_filter_place() );
+		}
+		return ( get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() ) ) ? topersia_g_news_lead( get_queried_object_id() ) : $desc;
 	}, 99 );
 }

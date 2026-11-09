@@ -167,24 +167,24 @@ tp441_mut( 'P5-D549 JS: بالا/پایین/Enter/Esc، activedescendant، ۳ ن
 t( 'P5-D549 JS: جهش — بارگذاری دوباره با location.reload می‌افتد', ! $w51_kbd( $w51_ljs . "\nlocation.reload();" ) );
 
 $w51_tgt = function ( $c ) {
-	return (bool) preg_match( '/\.tp-loc__opt,\.tp-loc__none\{[^}]*min-block-size:44px/', $c ) && (bool) preg_match( '/\.tp-loc__chip\{[^}]*min-block-size:44px/', $c )
+	return (bool) preg_match( '/\.tp-loc__opt,\.tp-loc__none\{[^}]*min-block-size:44px/', $c ) && (bool) preg_match( '/\.tp-actf__chip\{[^}]*min-block-size:44px/', $c )
 		&& (bool) preg_match( '/:is\([^)]*\.tp-loc__in\)\{[^}]*min-block-size:44px/', $c );
 };
 tp441_mut( 'P5-D549 CSS: فیلد، گزینه و تراشه ≥ ۴۴px — جهش: گزینۀ ۳۲px', $w51_tgt, $w51_ncss,
 	str_replace( 'gap:12px;min-block-size:44px;padding-inline:12px', 'gap:12px;min-block-size:32px;padding-inline:12px', $w51_ncss ) );
 t( 'P5-D549 قالب: /news/ مکان را از combobox متنی می‌گیرد، نه فهرست کشویی',
-	false !== strpos( $w51_arch, "topersia_g_loc_field( 'tp-news-place', \$tp_place," ) && false === strpos( $w51_arch, "topersia_g_news_select( 'tp-news-place'" ) );
+	false !== strpos( $w51_arch, "topersia_g_loc_field( 'tp-news-place', \$tp_place )" ) && false === strpos( $w51_arch, "topersia_g_news_select( 'tp-news-place'" ) );
 
 /* متن‌ها — P5-D554 */
 $w51_old_lead = 'محتوای زمانی با تاریخ صریح و لینک به منبع اصلی.';
 $w51_lead = function ( $n, $z, $a, $l ) use ( $w51_old_lead ) {
-	return false !== strpos( $n, "return __( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع.', 'topersia' );" )
-		&& false !== strpos( $n, "add_filter( 'rank_math/frontend/description'" )
-		&& false !== strpos( $z, 'topersia_g_news_lead()' ) && false !== strpos( $a, 'topersia_g_news_lead()' ) && false !== strpos( $l, 'topersia_g_news_lead()' )
-		&& false === strpos( $z . $a . $l . $n, $w51_old_lead );
+	return false !== strpos( $n, "__( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های %s.', 'topersia' ), topersia_g_news_place_name( \$place_id ) );" )   /* P5-D558 */
+		&& false !== strpos( $n, "add_filter( 'rank_math/frontend/description'" ) && false !== strpos( $n, 'return topersia_g_news_lead( topersia_g_news_filter_place() );' )
+		&& false !== strpos( $z, 'topersia_g_news_lead( $pid )' ) && false !== strpos( $a, 'topersia_g_news_lead( $tp_place )' ) && false !== strpos( $l, 'topersia_g_news_lead( $tp_place )' )
+		&& false === strpos( $z . $a . $l . $n, $w51_old_lead ) && 0 === preg_match( '/با ذکر تاریخ و منبع/u', $z . $a . $l . $n );
 };
-t( 'P5-D554: زیرعنوان /news/ از یک تابع (سربرگ، قالب، فهرست، متا Rank Math، اسکیما) و بی متن قدیم',
-	$w51_lead( $w51_news, $w51_zones, $w51_arch, $w51_list ) && false !== strpos( $w51_schema, "'description' => function_exists( 'topersia_g_news_lead' ) ? wp_strip_all_tags( topersia_g_news_lead() ) : ''," ) );
+t( 'P5-D558: زیرعنوان خبرها با نام مکان (%s) از یک تابع — سربرگ، قالب، فهرست مکان، بخش خبر موجودیت، متا Rank Math، اسکیما؛ بی «با ذکر تاریخ و منبع»',
+	$w51_lead( $w51_news, $w51_zones, $w51_arch, $w51_list ) && false !== strpos( $w51_schema, "'description' => function_exists( 'topersia_g_news_lead' ) ? wp_strip_all_tags( topersia_g_news_lead( function_exists( 'topersia_g_news_filter_place' ) ? topersia_g_news_filter_place() : 0 ) ) : ''," ) );
 t( 'P5-D554: جهش — متن قدیم در یک جا می‌افتد', ! $w51_lead( $w51_news, $w51_zones . $w51_old_lead, $w51_arch, $w51_list ) );
 
 $w51_home_t = function ( $s ) {
@@ -235,3 +235,48 @@ $w51_pc = function ( $c, $r ) {
 };
 tp441_mut( 'P5-D550 CSS: نوار بومی فقط با tp-has-prog پنهان، شست منطقی (inset-inline-start)، رنگ فقط از توکن، بار با قالب — جهش: رنگ خام', function ( $c ) use ( $w51_pc, $w51_render ) { return $w51_pc( $c, $w51_render ); }, $w51_pcss,
 	str_replace( 'background:var(--tp-primary);', 'background:#0a6b5e;', $w51_pcss ) );
+
+/* ══ الحاقیه الف — اخبار (P5-D556 · P5-D557 · P5-D558) ══════════════ */
+$w51_nui = $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' );
+$w51_top = function ( $u, $a ) {
+	return false !== strpos( $u, "define( 'TOPERSIA_NEWS_TOP_COL', 3 );" ) && false !== strpos( $u, "define( 'TOPERSIA_NEWS_TOP_COLS', 2 );" )
+		&& false !== strpos( $u, 'array_chunk( array_slice( $ids, 1, TOPERSIA_NEWS_TOP_COL * TOPERSIA_NEWS_TOP_COLS ), TOPERSIA_NEWS_TOP_COL )' )   /* ستون بی‌خبر ساخته نمی‌شود */
+		&& false !== strpos( $a, 'array_slice( $tp_ids, 0, topersia_g_news_top_max() )' ) && false !== strpos( $a, '$tp_grid  = array_slice( $tp_ids, count( $tp_feat ) );' )   /* بی تکرار در «جدیدترین» */
+		&& strpos( $a, 'topersia_g_news_top( $tp_feat )' ) < strpos( $a, '<div class="tp-news-filters">' )
+		&& strpos( $a, '<div class="tp-news-filters">' ) < strpos( $a, '<div class="tp-news-results"' );
+};
+tp441_mut( 'P5-D556: بالا = برگزیده + دو ستون × ۳ (ثابت)، بی تکرار در «جدیدترین»؛ ترتیب هیرو ← بالا ← پالایش ← نتایج — جهش: سه خبر', function ( $u ) use ( $w51_top, $w51_arch ) { return $w51_top( $u, $w51_arch ); }, $w51_nui,
+	str_replace( "define( 'TOPERSIA_NEWS_TOP_COLS', 2 );", "define( 'TOPERSIA_NEWS_TOP_COLS', 1 );", $w51_nui ) );
+t( 'P5-D556: جهش — پالایش پیش از بلوک بالا می‌افتد', ! $w51_top( $w51_nui, str_replace( '<?php echo topersia_g_news_top( $tp_feat ); // phpcs:ignore WordPress.Security.EscapeOutput ?>', '', $w51_arch ) . '<?php echo topersia_g_news_top( $tp_feat ); ?>' ) );
+
+if ( function_exists( 'topersia_g_news_top' ) ) {
+	$w51_t7 = topersia_g_news_top( array() );
+	t( 'P5-D556 رفتار: زیر دو خبر ظرف تهی (برای تعویض بی‌رفرش) و بی section', false !== strpos( $w51_t7, 'data-tp-news-swap="top"' ) && false === strpos( $w51_t7, '<section' ) );
+}
+
+$w51_actf = function ( $u, $a, $l ) {
+	return false !== strpos( $u, '<div class="tp-actf" data-tp-news-swap="active" hidden></div>' )   /* بی پالایش ← نیاید */
+		&& false !== strpos( $u, "esc_html__( 'پاک‌کردن همه', 'topersia' )" ) && false !== strpos( $u, 'data-tp-news-nav aria-label=' )
+		&& false !== strpos( $a, 'echo topersia_g_active_filters( topersia_g_news_active_items( $tp_args, $tp_kinds, $tp_tops ), $tp_base,' )
+		&& strpos( $a, '</form>' ) < strpos( $a, 'topersia_g_active_filters(' )   /* خطی جدا زیر کل بلوک پالایش */
+		&& false !== strpos( $l, "'<div class=\"tp-loc__keep\" data-tp-news-swap=\"loc\">' . \$keep . '</div>'" ) && false === strpos( $l, 'tp-loc__chip' );   /* combobox خالی و هم‌اندازه */
+};
+tp441_mut( 'P5-D557: ردیف پالایش‌های فعال جدا زیر کل بلوک، تراشۀ حذف‌شدنی + «پاک‌کردن همه»، بی پالایش پنهان؛ تراشه دیگر زیر combobox نیست — جهش: تراشه درون فیلد', function ( $l ) use ( $w51_actf, $w51_nui, $w51_arch ) { return $w51_actf( $w51_nui, $w51_arch, $l ); }, $w51_loc,
+	str_replace( "' . \$keep . '</div>'", "' . \$keep . '<a class=\"tp-loc__chip\"></a></div>'", $w51_loc ) );
+if ( function_exists( 'topersia_g_active_filters' ) ) {
+	$w51_af = topersia_g_active_filters( array( array( 'استان اصفهان', 'https://x.local/news/' ) ), 'https://x.local/news/' );
+	t( 'P5-D557 رفتار: یک پالایش ← یک تراشه + «پاک‌کردن همه»؛ هیچ ← پنهان',
+		1 === substr_count( $w51_af, 'class="tp-actf__chip"' ) && false !== strpos( $w51_af, 'tp-actf__clear' ) && false !== strpos( topersia_g_active_filters( array(), '/' ), ' hidden>' ) );
+}
+$w51_js_loc = function ( $s ) { return false !== strpos( $s, "el.value = el.name === 'tp_loc' ? '' : ( p.get( el.name ) || '' );" ); };
+tp441_mut( 'P5-D557 JS: پس از تعویض بی‌رفرش combobox خالی می‌ماند — جهش: tp_loc از نشانی پر می‌شود', $w51_js_loc, $w51_read( 'plugin/topersia-render/assets/topersia-g-news.js' ),
+	str_replace( "el.value = el.name === 'tp_loc' ? '' : ( p.get( el.name ) || '' );", "el.value = p.get( el.name ) || '';", $w51_read( 'plugin/topersia-render/assets/topersia-g-news.js' ) ) );
+
+$w51_h1 = function ( $n, $c ) {
+	return false !== strpos( $n, "__( 'اخبار گردشگری %s', 'topersia' ), topersia_g_news_place_name( \$place_id ) );" )
+		&& false !== strpos( $n, "return '' !== \$name ? \$name : __( 'ایران', 'topersia' );" )
+		&& (bool) preg_match( '/\.tp-news-hero h1\{[^}]*text-align:center/', $c ) && (bool) preg_match( '/\.tp-news-hero__lead\{[^}]*margin:10px auto 0;[^}]*text-align:center/', $c )
+		&& 0 === preg_match( '/\.tp-crumb\{[^}]*text-align:center/', $c );   /* مسیر راهنما آغاز خط می‌ماند */
+};
+tp441_mut( 'P5-D558: H1 «اخبار گردشگری %s» (پیش‌فرض ایران)، H1 و جمله وسط‌چین، مسیر راهنما آغاز خط — جهش: H1 آغازچین', function ( $c ) use ( $w51_h1, $w51_news ) { return $w51_h1( $w51_news, $c ); }, $w51_ncss,
+	str_replace( '.tp-news-hero h1{margin:0;text-align:center;', '.tp-news-hero h1{margin:0;', $w51_ncss ) );

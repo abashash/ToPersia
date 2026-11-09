@@ -61,7 +61,7 @@ tp441_mut( 'P5-D542: پیکان فقط با سرریز، محوشدن لبه، �
 /* ── P5-D542: پنج پالایش + بازۀ زمانی از فهرست بسته روی post_date ── */
 $w50_five = function ( $a, $u, $n ) {
 	preg_match_all( "/topersia_g_news_select\( 'tp-news-(\w+)', 'tp_(\w+)'/", $a, $m );
-	$f = array_merge( $m[2], false !== strpos( $a, 'name="tp_q"' ) ? array( 'q' ) : array(), false !== strpos( $a, "topersia_g_loc_field( 'tp-news-place', \$tp_place," ) ? array( 'place' ) : array() );   /* P5-D549: مکان combobox متنی */
+	$f = array_merge( $m[2], false !== strpos( $a, 'name="tp_q"' ) ? array( 'q' ) : array(), false !== strpos( $a, "topersia_g_loc_field( 'tp-news-place', \$tp_place )" ) ? array( 'place' ) : array() );   /* P5-D549: مکان combobox متنی */
 	sort( $f );
 	return array( 'kind', 'place', 'q', 'sort', 'when' ) === $f
 		&& false !== strpos( $a, "'tp-news-form' ); // phpcs:ignore" ) && false !== strpos( $a, '<form id="tp-news-form"' )
@@ -83,15 +83,13 @@ $w50_sel = function ( $c ) {
 tp441_mut( 'P5-D542: فهرست کشویی بی ظاهر مرورگر، پیکان SVG به رنگ توکن، گزینه خوانا در شب، ≥ ۴۴px — جهش: بی رنگ option', $w50_sel, $w50_css,
 	str_replace( '.tp-news-sel :is(option,optgroup){background:var(--tp-surface);color:var(--tp-text-strong)}', '', $w50_css ) );
 
-/* ── P5-D544: دسته‌بندی‌ها در آغاز، بی شمار ── */
-$w50_cats = function ( $a, $c ) {
-	$p = strpos( $a, '<nav class="tp-news-cats"' );
-	return false !== $p && $p < strpos( $a, '<ul class="tp-news-side">' ) && strpos( $a, '<ul class="tp-news-side">' ) < strpos( $a, 'topersia_g_news_feature( $tp_feat[0] )' )
-		&& 0 === preg_match( '/->count|tp-news-cats__n|topersia_g_fa\( count/', $a )
-		&& false !== strpos( $c, 'grid-template-columns:minmax(190px,.5fr) minmax(0,1fr) minmax(0,1.55fr)' );
+/* ── P5-D544 → P5-D556: بلوک «دسته‌بندی‌ها» کاملاً حذف (کد، CSS، رشته)؛ موضوع فقط در تراشه‌ها ── */
+$w50_cats = function ( $a, $c, $cat ) {
+	return false === strpos( $a, 'tp-news-cats' ) && false === strpos( $c, 'tp-news-cats' ) && false === strpos( $cat, "'دسته‌بندی‌ها' =>" );
 };
-tp441_mut( 'P5-D544: ستون «دسته‌بندی‌ها» در آغاز (RTL راست) پیش از کناری‌ها و برگزیده، بی شمار — جهش: با شمار', function ( $a ) use ( $w50_cats, $w50_css ) { return $w50_cats( $a, $w50_css ); }, $w50_arch,
-	str_replace( '<?php echo esc_html( $tp_it[0] ); ?></a>', '<?php echo esc_html( $tp_it[0] ); ?> <span class="tp-news-cats__n"><?php echo topersia_g_fa( count( $tp_ids ) ); ?></span></a>', $w50_arch ) );
+$w50_catf = (string) @file_get_contents( dirname( __DIR__ ) . '/scripts/i18n/topersia-render.php' );
+tp441_mut( 'P5-D556: بلوک «دسته‌بندی‌ها» نیست — نه در قالب، نه CSS، نه کاتالوگ — جهش: بازگشت nav.tp-news-cats', function ( $a ) use ( $w50_cats, $w50_css, $w50_catf ) { return $w50_cats( $a, $w50_css, $w50_catf ); }, $w50_arch,
+	$w50_arch . '<nav class="tp-news-cats" aria-labelledby="tp-news-cats-h"></nav>' );
 
 /* ── P5-D546: بی‌رفرش، با بهبود تدریجی ── */
 $w50_nr = function ( $s ) {

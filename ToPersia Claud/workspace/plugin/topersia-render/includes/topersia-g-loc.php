@@ -8,7 +8,7 @@
  *   بی JS  فیلد متنی `tp_loc` با GET؛ سرور با همان fold نام را دقیقاً تطبیق می‌دهد (topersia_g_loc_resolve) ← tp_place.
  *   با JS  assets/topersia-g-loc.js: role=combobox · aria-expanded/controls/activedescendant · listbox؛
  *          بالا/پایین/Enter/Esc؛ انتخاب ← tp_place پنهان + ارسال فرم (سازوکار بی‌رفرش P5-D546)؛
- *          تراشۀ حذف‌شدنی و tp_place پنهان در ناحیۀ `data-tp-news-swap="loc"` که با هر بار جای‌گزین می‌شود.
+ *          tp_place پنهان در ناحیۀ `data-tp-news-swap="loc"`؛ تراشۀ حذف‌شدنی در ردیف پالایش‌های فعال (P5-D557).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -122,23 +122,16 @@ if ( ! function_exists( 'topersia_g_loc_rest' ) ) {
 
 if ( ! function_exists( 'topersia_g_loc_field' ) ) {
 	/**
-	 * نشانه‌گذاری combobox درون فرم پالایش.
+	 * نشانه‌گذاری combobox درون فرم پالایش. فیلد پس از انتخاب خالی و هم‌اندازه می‌ماند (P5-D557):
+	 * تراشۀ مکان و پیام «پیدا نشد» در ردیف پالایش‌های فعال‌اند (topersia_g_active_filters)، نه زیر فیلد.
 	 *
-	 * @param string $id       شناسۀ input (پیشوند tp-)
-	 * @param int    $place    مکان انتخاب‌شده (tp_place) یا ۰
-	 * @param string $remove   نشانی همین صفحه بی پالایش مکان (پیوند تراشه)
-	 * @param string $missed   متن tp_loc که پیدا نشد ('' یعنی هیچ)
+	 * @param string $id    شناسۀ input (پیشوند tp-)
+	 * @param int    $place مکان انتخاب‌شده (tp_place) یا ۰ — فقط ورودی پنهان
 	 */
-	function topersia_g_loc_field( $id, $place, $remove, $missed = '' ) {
-		$list  = $id . '-list';
-		$hint  = $id . '-hint';
-		$name  = $place ? ( function_exists( 'topersia_g_name' ) ? topersia_g_name( $place ) : (string) get_the_title( $place ) ) : '';
-		$chip  = $place
-			? '<a class="tp-loc__chip" href="' . esc_url( $remove ) . '" data-tp-news-nav aria-label="' . esc_attr( sprintf( /* translators: %s: نام مکان */ __( 'حذف پالایش مکان: %s', 'topersia' ), $name ) ) . '">'
-				. '<span>' . esc_html( $name ) . '</span><span class="tp-loc__x" aria-hidden="true">×</span></a>'
-				. '<input type="hidden" name="tp_place" value="' . esc_attr( (string) $place ) . '">'
-			: '';
-		$miss  = '' !== $missed ? '<p class="tp-loc__miss" role="status">' . esc_html( sprintf( /* translators: %s: متن کاربر */ __( 'مکانی با نام «%s» پیدا نشد.', 'topersia' ), $missed ) ) . '</p>' : '';
+	function topersia_g_loc_field( $id, $place ) {
+		$list = $id . '-list';
+		$hint = $id . '-hint';
+		$keep = $place ? '<input type="hidden" name="tp_place" value="' . esc_attr( (string) (int) $place ) . '">' : '';
 
 		return '<div class="tp-news-filter__f tp-loc" data-tp-loc data-tp-loc-api="' . esc_url( rest_url( 'topersia/v1/places' ) ) . '"'
 			. ' data-tp-loc-none="' . esc_attr__( 'موردی پیدا نشد', 'topersia' ) . '"'
@@ -152,7 +145,7 @@ if ( ! function_exists( 'topersia_g_loc_field' ) ) {
 			. '</div>'
 			. '<p id="' . esc_attr( $hint ) . '" class="tp-news-vh">' . esc_html__( 'دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید.', 'topersia' ) . '</p>'
 			. '<p class="tp-news-vh" role="status" aria-live="polite" data-tp-loc-live></p>'
-			. '<div class="tp-loc__chips" data-tp-news-swap="loc">' . $chip . $miss . '</div>'
+			. '<div class="tp-loc__keep" data-tp-news-swap="loc">' . $keep . '</div>'
 			. '</div>';
 	}
 }

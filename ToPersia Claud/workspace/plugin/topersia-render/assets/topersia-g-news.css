@@ -16,8 +16,8 @@ html .tp-page.tp-news-page .tp-news-hero__in{padding-block:clamp(28px,4vw,48px)}
 html .tp-page.tp-news-page .tp-news-hero + .tp-wrap{padding-block-start:clamp(20px,2.4vw,32px)}
 html .tp-page.tp-news-page .tp-news-hero .tp-crumb{margin:0 0 12px;color:var(--tp-on-secondary)}
 html .tp-page.tp-news-page .tp-news-hero .tp-crumb :is(a,span){color:var(--tp-on-secondary)}
-html .tp-page.tp-news-page .tp-news-hero h1{margin:0;font-size:clamp(calc(1.7 * var(--tp-rem)),3.6vw,calc(2.6 * var(--tp-rem)));line-height:1.35;color:var(--tp-on-secondary);overflow-wrap:anywhere}
-html .tp-page.tp-news-page .tp-news-hero__lead{margin:10px 0 0;max-inline-size:60ch;font-size:calc(1.02 * var(--tp-rem));line-height:1.9;color:var(--tp-on-secondary)}
+html .tp-page.tp-news-page .tp-news-hero h1{margin:0;text-align:center;font-size:clamp(calc(1.7 * var(--tp-rem)),3.6vw,calc(2.6 * var(--tp-rem)));line-height:1.35;color:var(--tp-on-secondary);overflow-wrap:anywhere}
+html .tp-page.tp-news-page .tp-news-hero__lead{margin:10px auto 0;max-inline-size:60ch;text-align:center;font-size:calc(1.02 * var(--tp-rem));line-height:1.9;color:var(--tp-on-secondary)}
 
 /* ── بی فاصله از هدر — همان شیوۀ صفحۀ اول (P5-D525): لایۀ .tp-main قالب ۴۴px بالای سربرگ می‌گذاشت.  P5-D541 ── */
 html .tp-page.tp-news-page > .tp-main{padding-block-start:0}
@@ -74,14 +74,20 @@ html .tp-page.tp-news-page .tp-loc__in::placeholder{color:var(--tp-text);opacity
 .tp-loc__none{color:var(--tp-text);cursor:default}
 .tp-loc__opt:hover,.tp-loc__opt[aria-selected="true"]{background:var(--tp-bg);outline:2px solid var(--tp-primary);outline-offset:-2px}
 .tp-loc__type{flex:0 0 auto;color:var(--tp-text);font-size:calc(.85 * var(--tp-rem))}
-.tp-loc__chips{display:flex;flex-wrap:wrap;gap:6px}
-.tp-loc__chips:empty{display:none}
-.tp-loc__chip{display:inline-flex;align-items:center;gap:8px;min-block-size:44px;padding-inline:14px 10px;border-radius:999px;border:1px solid var(--tp-primary);
-  background:var(--tp-surface);color:var(--tp-text-strong);text-decoration:none}
-.tp-loc__chip:hover{background:var(--tp-bg)}
-.tp-loc__chip:focus-visible{outline:2px solid var(--tp-primary);outline-offset:2px}
-.tp-loc__x{display:inline-grid;place-items:center;inline-size:24px;block-size:24px;border-radius:50%;background:var(--tp-bg);color:var(--tp-text-strong);font-size:18px;line-height:1}
-.tp-loc__miss{margin:0;color:var(--tp-text);font-size:calc(.85 * var(--tp-rem))}
+.tp-loc__keep{display:none}
+
+/* ── ردیف پالایش‌های فعال — خطی جدا زیر کل بلوک پالایش (P5-D557) ── */
+html .tp-page .tp-actf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 20px}
+html .tp-page .tp-actf[hidden]{display:none}
+html .tp-page .tp-actf__list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+html .tp-page .tp-actf__list li{margin:0}
+html .tp-page .tp-actf__chip{display:inline-flex;align-items:center;gap:8px;min-block-size:44px;box-sizing:border-box;padding-inline:14px 10px;border-radius:999px;
+  border:1px solid var(--tp-primary);background:var(--tp-surface);color:var(--tp-text-strong);text-decoration:none}
+html .tp-page .tp-actf__chip:hover{background:var(--tp-bg)}
+html .tp-page .tp-actf__chip:focus-visible,html .tp-page .tp-actf__clear:focus-visible{outline:2px solid var(--tp-primary);outline-offset:2px}
+html .tp-page .tp-actf__x{display:inline-grid;place-items:center;inline-size:24px;block-size:24px;border-radius:50%;background:var(--tp-bg);color:var(--tp-text-strong);font-size:18px;line-height:1}
+html .tp-page .tp-actf__clear{display:inline-flex;align-items:center;min-block-size:44px;color:var(--tp-primary-text)}
+html .tp-page .tp-actf__miss{margin:0;color:var(--tp-text);font-size:calc(.88 * var(--tp-rem))}
 
 /* ── پالایش: دسکتاپ یک ردیف هم‌اندازه؛ موبایل دو ستون ── */
 html .tp-page.tp-news-page .tp-news-filter{display:flex;align-items:flex-end;gap:12px;margin:0 0 20px}
@@ -90,7 +96,6 @@ html .tp-page.tp-news-page .tp-news-filter__go{flex:0 0 auto;display:flex;flex-w
 html .tp-page.tp-news-page .tp-news-filter button{min-block-size:44px;margin:0;padding:8px 20px;border-radius:var(--tp-tile-radius,12px);border:1px solid var(--tp-primary-text);
   background:var(--tp-primary-text);color:var(--tp-bg);font:inherit;font-weight:700;cursor:pointer}
 html .tp-page.tp-news-page .tp-news-filter button:hover{background:var(--tp-text-strong);border-color:var(--tp-text-strong)}
-html .tp-page.tp-news-page .tp-news-filter__reset{display:inline-flex;align-items:center;min-block-size:44px;color:var(--tp-primary-text)}
 html .tp-page.tp-news-page .tp-news-filter--min{margin:0;gap:8px}
 html .tp-page.tp-news-page .tp-news-all{display:inline-flex;align-items:center;min-block-size:44px;white-space:nowrap}
 
@@ -102,13 +107,6 @@ html .tp-page.tp-news-page [data-tp-news-focus]{scroll-margin-block-start:160px}
 html .tp-page.tp-news-page [data-tp-news-focus]:focus{outline:none}
 
 /* ── دسته‌بندی‌ها: ستون آغاز، بی شمار (P5-D544) ── */
-html .tp-page.tp-news-page .tp-news-cats{align-self:start;padding:16px;border-radius:var(--tp-tile-radius,12px);background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);box-shadow:var(--tp-shadow-soft)}
-html .tp-page.tp-news-page .tp-news-cats__h{margin:0 0 8px;font-size:calc(1.05 * var(--tp-rem));color:var(--tp-text-strong)}
-html .tp-page.tp-news-page .tp-news-cats ul{display:grid;gap:2px;margin:0;padding:0;list-style:none}
-html .tp-page.tp-news-page .tp-news-cats li{margin:0}
-html .tp-page.tp-news-page .tp-news-cats a{display:flex;align-items:center;min-block-size:44px;padding:0 10px;border-radius:calc(var(--tp-tile-radius,12px) - 4px);color:var(--tp-text-strong);text-decoration:none}
-html .tp-page.tp-news-page .tp-news-cats a:hover{color:var(--tp-primary-text);background:var(--tp-surface)}
-html .tp-page.tp-news-page .tp-news-cats a[aria-current]{color:var(--tp-primary-text);font-weight:700;background:var(--tp-surface)}
 
 /* ── تک‌خبر ── */
 html .tp-page.tp-news-page .tp-news-hero__meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:14px 0 0}
@@ -125,9 +123,9 @@ html .tp-page.tp-news-page .tp-news-body a{color:var(--tp-primary-text)}
 html .tp-page.tp-news-page .tp-news-body img{max-inline-size:100%;block-size:auto}
 
 
-/* ── برگزیده (RTL: دسته‌ها راست · سه کناری · خبر بزرگ چپ — ساختار الگو، P5-D540) ── */
-html .tp-page.tp-news-page .tp-news-top{display:grid;grid-template-columns:minmax(190px,.5fr) minmax(0,1fr) minmax(0,1.55fr);gap:clamp(14px,1.6vw,20px);margin:0 0 clamp(28px,3vw,40px)}
-html .tp-page.tp-news-page .tp-news-top--nocats{grid-template-columns:minmax(0,1fr) minmax(0,1.55fr)}
+/* ── بالا (RTL: خبر بزرگ آغاز · دو ستون کناری، هر ستون ۳ — P5-D556؛ ستون بی‌خبر ساخته نمی‌شود) ── */
+html .tp-page.tp-news-page .tp-news-top{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(14px,1.6vw,20px);margin:0 0 clamp(28px,3vw,40px)}
+html .tp-page.tp-news-page .tp-news-top--1{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
 html .tp-page.tp-news-page .tp-news-feat{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-block-size:clamp(340px,34vw,460px);overflow:hidden;
   border-radius:var(--tp-tile-radius,12px);background:var(--tp-media-ink);color:var(--tp-on-secondary);box-shadow:var(--tp-shadow-soft)}
 html .tp-page.tp-news-page .tp-news-feat > img{position:absolute;inset:0;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover;z-index:-2}
@@ -199,12 +197,11 @@ html .tp-page.tp-news-page .tp-news-empty{padding:24px 0;color:var(--tp-text)}
 
 @media (max-width:1200px){
   html .tp-page.tp-news-page .tp-news-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  html .tp-page.tp-news-page .tp-news-top{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
-  html .tp-page.tp-news-page .tp-news-cats{grid-column:1 / -1;order:3}
-  html .tp-page.tp-news-page .tp-news-cats ul{display:flex;flex-wrap:wrap;gap:6px}
+  html .tp-page.tp-news-page .tp-news-top{grid-template-columns:repeat(2,minmax(0,1fr))}
+  html .tp-page.tp-news-page .tp-news-top > .tp-news-feat{grid-column:1 / -1}
 }
 @media (max-width:1024px){
-  html .tp-page.tp-news-page .tp-news-top,html .tp-page.tp-news-page .tp-news-top--nocats{grid-template-columns:minmax(0,1fr)}
+  html .tp-page.tp-news-page .tp-news-top,html .tp-page.tp-news-page .tp-news-top--1{grid-template-columns:minmax(0,1fr)}
   html .tp-page.tp-news-page .tp-news-feat{order:-1}
   html .tp-page.tp-news-page .tp-news-side{grid-auto-rows:auto}
 }
@@ -234,6 +231,6 @@ html .tp-page.tp-news-page .tp-news-empty{padding:24px 0;color:var(--tp-text)}
   html .tp-page.tp-news-page .tp-news-mini__media{flex-basis:88px;min-block-size:76px}
 }
 @media (prefers-reduced-motion:no-preference){
-  html .tp-page.tp-news-page :is(.tp-news-card,.tp-news-mini,.tp-news-chips a,.tp-news-cats a){transition:border-color .2s,color .2s}
+  html .tp-page.tp-news-page :is(.tp-news-card,.tp-news-mini,.tp-news-chips a){transition:border-color .2s,color .2s}
   html .tp-page.tp-news-page .tp-news-results > *{transition:opacity .15s}
 }

@@ -160,7 +160,8 @@
 				if ( ! el.name || el.type === 'hidden' || el.type === 'submit' || el.tagName === 'BUTTON' ) {
 					return;
 				}
-				el.value = p.get( el.name ) || '';
+				/* combobox مکان پس از هر بار خالی می‌ماند؛ مکان در ردیف پالایش‌های فعال است (P5-D557) */
+				el.value = el.name === 'tp_loc' ? '' : ( p.get( el.name ) || '' );
 				if ( el.tagName === 'SELECT' && el.selectedIndex < 0 ) {
 					el.selectedIndex = 0;
 				}

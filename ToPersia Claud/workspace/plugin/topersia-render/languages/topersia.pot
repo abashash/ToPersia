@@ -94,7 +94,8 @@ msgid "آثار شاخص"
 msgstr ""
 
 #: includes/topersia-g-news.php
-msgid "آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع."
+#, php-format
+msgid "آخرین اخبار گردشگری، رویدادها و جشنواره‌های %s."
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -274,7 +275,8 @@ msgid "اخبار %s"
 msgstr ""
 
 #: includes/topersia-g-news.php
-msgid "اخبار گردشگری ایران"
+#, php-format
+msgid "اخبار گردشگری %s"
 msgstr ""
 
 #: topersia-render.php
@@ -473,6 +475,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "ایتالیایی"
+msgstr ""
+
+#: includes/topersia-g-news.php
+msgid "ایران"
 msgstr ""
 
 #: includes/topersia-g-home.php
@@ -1135,6 +1141,11 @@ msgstr ""
 msgid "جست‌وجو در سایت"
 msgstr ""
 
+#: includes/topersia-g-news-ui.php
+#, php-format
+msgid "جست‌وجو: %s"
+msgstr ""
+
 #: includes/topersia-g-home.php
 msgid "جست‌وجوی استان"
 msgstr ""
@@ -1259,9 +1270,9 @@ msgstr ""
 msgid "حداکثر عمق"
 msgstr ""
 
-#: includes/topersia-g-loc.php
+#: includes/topersia-g-news-ui.php
 #, php-format
-msgid "حذف پالایش مکان: %s"
+msgid "حذف پالایش: %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1324,7 +1335,7 @@ msgstr ""
 msgid "خاکی"
 msgstr ""
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "خبرهای برگزیده"
 msgstr ""
 
@@ -1533,10 +1544,6 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
-msgstr ""
-
-#: templates/news-archive.php
-msgid "دسته‌بندی‌ها"
 msgstr ""
 
 #: includes/topersia-g-loc.php
@@ -3257,7 +3264,7 @@ msgstr ""
 msgid "مکان مذهبی"
 msgstr ""
 
-#: includes/topersia-g-loc.php
+#: includes/topersia-g-news-ui.php
 #, php-format
 msgid "مکانی با نام «%s» پیدا نشد."
 msgstr ""
@@ -3962,8 +3969,12 @@ msgstr ""
 msgid "پالایش اخبار"
 msgstr ""
 
-#: templates/news-archive.php
-msgid "پاک‌کردن پالایش"
+#: includes/topersia-g-news-ui.php
+msgid "پالایش‌های فعال"
+msgstr ""
+
+#: includes/topersia-g-news-ui.php
+msgid "پاک‌کردن همه"
 msgstr ""
 
 #: includes/topersia-g-map.php

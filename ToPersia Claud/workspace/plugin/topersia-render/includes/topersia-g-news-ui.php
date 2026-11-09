@@ -471,6 +471,104 @@ if ( ! function_exists( 'topersia_g_news_when_options' ) ) {
 	}
 }
 
+/** خبرهای بالای آرشیو: یک برگزیده + دو ستون کناری، هر ستون TOPERSIA_NEWS_TOP_COL خبر (P5-D556). */
+if ( ! defined( 'TOPERSIA_NEWS_TOP_COL' ) ) {
+	define( 'TOPERSIA_NEWS_TOP_COL', 3 );
+}
+if ( ! defined( 'TOPERSIA_NEWS_TOP_COLS' ) ) {
+	define( 'TOPERSIA_NEWS_TOP_COLS', 2 );
+}
+
+/** بیشینۀ خبرهای بالا (برگزیده + کناری‌ها). */
+if ( ! function_exists( 'topersia_g_news_top_max' ) ) {
+	function topersia_g_news_top_max() {
+		return 1 + TOPERSIA_NEWS_TOP_COL * TOPERSIA_NEWS_TOP_COLS;
+	}
+}
+
+/**
+ * بلوک بالا — برگزیده و ستون‌های کناری؛ ستون بی‌خبر اصلاً ساخته نمی‌شود (بی جای خالی).
+ * ظرف `data-tp-news-swap="top"` همیشه هست تا پالایش بی‌رفرش آن را خالی یا پر کند.
+ *
+ * @param int[] $ids خبرهای بالا به ترتیب (اولی برگزیده)؛ کمتر از دو ← بلوک تهی
+ */
+if ( ! function_exists( 'topersia_g_news_top' ) ) {
+	function topersia_g_news_top( $ids ) {
+		$ids = array_values( array_map( 'absint', (array) $ids ) );
+		if ( count( $ids ) < 2 ) {
+			return '<div class="tp-news-topwrap" data-tp-news-swap="top"></div>';
+		}
+		$cols = array_chunk( array_slice( $ids, 1, TOPERSIA_NEWS_TOP_COL * TOPERSIA_NEWS_TOP_COLS ), TOPERSIA_NEWS_TOP_COL );
+		$side = '';
+		foreach ( $cols as $col ) {
+			$side .= '<ul class="tp-news-side">';
+			foreach ( $col as $one ) {
+				$side .= topersia_g_news_mini( $one );
+			}
+			$side .= '</ul>';
+		}
+		return '<div class="tp-news-topwrap" data-tp-news-swap="top">'
+			. '<section class="tp-news-top tp-news-top--' . count( $cols ) . '" aria-labelledby="tp-news-top-h">'
+			. '<h2 id="tp-news-top-h" class="tp-news-vh">' . esc_html__( 'خبرهای برگزیده', 'topersia' ) . '</h2>'
+			. topersia_g_news_feature( $ids[0] ) . $side
+			. '</section></div>';
+	}
+}
+
+/**
+ * ردیف پالایش‌های فعال — خطی جدا زیر کل بلوک پالایش؛ هر پالایش یک تراشۀ حذف‌شدنی + «پاک‌کردن همه» (P5-D557).
+ * ظرف `data-tp-news-swap="active"` همیشه هست؛ بی پالایش ← پنهان و تهی. بی JS هم پیوندهای GET ساده‌اند.
+ *
+ * @param array  $items  [ [ برچسب, نشانی بی همین پالایش ], … ]
+ * @param string $clear  نشانی بی هیچ پالایش
+ * @param string $missed متن مکانی که پیدا نشد ('' هیچ)
+ */
+if ( ! function_exists( 'topersia_g_active_filters' ) ) {
+	function topersia_g_active_filters( $items, $clear, $missed = '' ) {
+		$out = '';
+		foreach ( (array) $items as $it ) {
+			$out .= '<li><a class="tp-actf__chip" href="' . esc_url( $it[1] ) . '" data-tp-news-nav aria-label="' . esc_attr( sprintf( /* translators: %s: پالایش */ __( 'حذف پالایش: %s', 'topersia' ), $it[0] ) ) . '">'
+				. '<span>' . esc_html( $it[0] ) . '</span><span class="tp-actf__x" aria-hidden="true">×</span></a></li>';
+		}
+		$miss = '' !== $missed ? '<p class="tp-actf__miss" role="status">' . esc_html( sprintf( /* translators: %s: متن کاربر */ __( 'مکانی با نام «%s» پیدا نشد.', 'topersia' ), $missed ) ) . '</p>' : '';
+		if ( '' === $out && '' === $miss ) {
+			return '<div class="tp-actf" data-tp-news-swap="active" hidden></div>';
+		}
+		return '<div class="tp-actf" data-tp-news-swap="active">'
+			. ( '' !== $out ? '<ul class="tp-actf__list" aria-label="' . esc_attr__( 'پالایش‌های فعال', 'topersia' ) . '">' . $out . '</ul>' : '' )
+			. $miss
+			. '<a class="tp-actf__clear" href="' . esc_url( $clear ) . '" data-tp-news-nav>' . esc_html__( 'پاک‌کردن همه', 'topersia' ) . '</a>'
+			. '</div>';
+	}
+}
+
+/** تراشه‌های پالایش فعال آرشیو خبر — مکان، نوع مکان، بازۀ زمانی، موضوع، جست‌وجو (ترتیب پالایش نیست). */
+if ( ! function_exists( 'topersia_g_news_active_items' ) ) {
+	function topersia_g_news_active_items( $args, $kinds, $topics ) {
+		$items = array();
+		$off   = array( 'tp_place' => '', 'tp_loc' => '' );
+		if ( $args['tp_place'] ) {
+			$items[] = array( topersia_g_title( $args['tp_place'] ), topersia_g_news_archive_link( 1, $off ) );
+		}
+		if ( '' !== $args['tp_kind'] && isset( $kinds[ $args['tp_kind'] ] ) ) {
+			$items[] = array( $kinds[ $args['tp_kind'] ], topersia_g_news_archive_link( 1, array( 'tp_kind' => '' ) ) );
+		}
+		$when = topersia_g_news_when_options();
+		if ( '' !== $args['tp_when'] && isset( $when[ $args['tp_when'] ] ) ) {
+			$items[] = array( $when[ $args['tp_when'] ], topersia_g_news_archive_link( 1, array( 'tp_when' => '' ) ) );
+		}
+		foreach ( (array) $topics as $t ) {
+			if ( $t->slug === $args['tp_topic'] ) {
+				$items[] = array( $t->name, topersia_g_news_archive_link( 1, array( 'tp_topic' => '' ) ) );
+			}
+		}
+		if ( '' !== $args['tp_q'] ) {
+			$items[] = array( sprintf( /* translators: %s: عبارت جست‌وجو */ __( 'جست‌وجو: %s', 'topersia' ), $args['tp_q'] ), topersia_g_news_archive_link( 1, array( 'tp_q' => '' ) ) );
+		}
+		return $items;
+	}
+}
+
 /** دکمۀ شبکه/فهرست — پنهان تا JS، و بی شبکه هم پنهان. */
 if ( ! function_exists( 'topersia_g_news_view_toggle' ) ) {
 	function topersia_g_news_view_toggle() {

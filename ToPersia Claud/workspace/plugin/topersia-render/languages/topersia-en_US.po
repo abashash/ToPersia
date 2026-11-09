@@ -95,8 +95,9 @@ msgid "آثار شاخص"
 msgstr "Major works"
 
 #: includes/topersia-g-news.php
-msgid "آخرین اخبار گردشگری، رویدادها و جشنواره‌های ایران، با ذکر تاریخ و منبع."
-msgstr "The latest Iran travel news, events and festivals, with dates and sources."
+#, php-format
+msgid "آخرین اخبار گردشگری، رویدادها و جشنواره‌های %s."
+msgstr "The latest %s travel news, events and festivals."
 
 #: includes/topersia-g-zones.php
 msgid "آخرین بازبینی"
@@ -275,8 +276,9 @@ msgid "اخبار %s"
 msgstr "%s news"
 
 #: includes/topersia-g-news.php
-msgid "اخبار گردشگری ایران"
-msgstr "Iran travel news"
+#, php-format
+msgid "اخبار گردشگری %s"
+msgstr "%s travel news"
 
 #: topersia-render.php
 msgid "ارتباط برقرار نشد."
@@ -475,6 +477,10 @@ msgstr "Ambulance"
 #: includes/topersia-g-map.php
 msgid "ایتالیایی"
 msgstr "Italian"
+
+#: includes/topersia-g-news.php
+msgid "ایران"
+msgstr "Iran"
 
 #: includes/topersia-g-home.php
 msgid "ایران در تصویر"
@@ -1136,6 +1142,11 @@ msgstr "Search provinces, cities, attractions…"
 msgid "جست‌وجو در سایت"
 msgstr "Search the site"
 
+#: includes/topersia-g-news-ui.php
+#, php-format
+msgid "جست‌وجو: %s"
+msgstr "Search: %s"
+
 #: includes/topersia-g-home.php
 msgid "جست‌وجوی استان"
 msgstr "Search provinces"
@@ -1260,10 +1271,10 @@ msgstr "Highest recorded temperature"
 msgid "حداکثر عمق"
 msgstr "Maximum depth"
 
-#: includes/topersia-g-loc.php
+#: includes/topersia-g-news-ui.php
 #, php-format
-msgid "حذف پالایش مکان: %s"
-msgstr "Remove place filter: %s"
+msgid "حذف پالایش: %s"
+msgstr "Remove filter: %s"
 
 #: includes/topersia-g-map.php
 msgid "حرا (مانگرو)"
@@ -1325,7 +1336,7 @@ msgstr "Language family"
 msgid "خاکی"
 msgstr "Dirt road"
 
-#: templates/news-archive.php
+#: includes/topersia-g-news-ui.php
 msgid "خبرهای برگزیده"
 msgstr "Featured news"
 
@@ -1535,10 +1546,6 @@ msgstr "Wheelchair access"
 #: includes/topersia-g-map.php
 msgid "دسترس‌پذیری"
 msgstr "Accessibility"
-
-#: templates/news-archive.php
-msgid "دسته‌بندی‌ها"
-msgstr "Categories"
 
 #: includes/topersia-g-loc.php
 msgid "دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید."
@@ -3258,7 +3265,7 @@ msgstr "Previous topics"
 msgid "مکان مذهبی"
 msgstr "Religious site"
 
-#: includes/topersia-g-loc.php
+#: includes/topersia-g-news-ui.php
 #, php-format
 msgid "مکانی با نام «%s» پیدا نشد."
 msgstr "No place named “%s” was found."
@@ -3963,9 +3970,13 @@ msgstr "Diplomatic and service passports"
 msgid "پالایش اخبار"
 msgstr "Filter news"
 
-#: templates/news-archive.php
-msgid "پاک‌کردن پالایش"
-msgstr "Clear filters"
+#: includes/topersia-g-news-ui.php
+msgid "پالایش‌های فعال"
+msgstr "Active filters"
+
+#: includes/topersia-g-news-ui.php
+msgid "پاک‌کردن همه"
+msgstr "Clear all"
 
 #: includes/topersia-g-map.php
 msgid "پایان"

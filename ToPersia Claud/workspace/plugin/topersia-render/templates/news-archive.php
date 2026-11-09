@@ -7,10 +7,10 @@
  * و بازۀ زمانی P5-D542 — همه GET. ساختار از الگو (P5-D540؛ فقط ساختار، رنگ و
  * اندازه از توکن سایت):
  *
- *   سربرگ        تصویر واقعی تمام‌عرض · مسیر راهنما · H1 · یک جمله — بی فاصله از هدر (P5-D541)
- *   نوار ابزار   تراشه‌های موضوع در یک خط اسکرولی · ترتیب · شبکه/فهرست
- *   پالایش       جست‌وجو · مکان · نوع · بازۀ زمانی (+ ترتیب در نوار) — یک ردیف هم‌اندازه
- *   برگزیده      دسته‌بندی‌ها (آغاز، بی شمار — P5-D544) · سه خبر کناری · خبر بزرگ با پوشش تیره
+ *   سربرگ        تصویر واقعی تمام‌عرض · مسیر راهنما (آغاز خط) · H1 و یک جمله وسط‌چین با نام مکان (P5-D558) — بی فاصله از هدر (P5-D541)
+ *   بالا         خبر برگزیده + دو ستون کناری، هر ستون ۳ (P5-D556) — فقط صفحۀ ۱ بی پالایش؛ تکراری در «جدیدترین» نمی‌آید
+ *   پالایش       تراشه‌های موضوع در یک خط اسکرولی · ترتیب · شبکه/فهرست؛ زیرش جست‌وجو · مکان (combobox) · نوع · بازۀ زمانی · «نمایش»
+ *   فعال         ردیف جدای تراشه‌های پالایش فعال + «پاک‌کردن همه» (P5-D557)؛ بی پالایش نمی‌آید
  *   جدیدترین     «مشاهده همه» روبه‌روی عنوان · شبکۀ چهارستونۀ کارت یکسان · صفحه‌بندی
  *
  * بی‌رفرش (P5-D546): topersia-g-news.js همین نشانی را با `tp_partial=1` می‌گیرد و فقط
@@ -37,9 +37,9 @@ $tp_on    = topersia_g_news_filtered();
 $tp_kinds = topersia_g_news_kind_options();
 $tp_tops  = topersia_g_news_topics();
 $tp_city  = topersia_g_news_city_chips( $tp_place );
-$tp_title = $tp_place ? topersia_g_news_title( $tp_place ) : __( 'اخبار گردشگری ایران', 'topersia' );
+$tp_title = topersia_g_news_title( $tp_place );
 $tp_base  = topersia_g_news_archive_url();
-$tp_feat  = ( ! $tp_on && 1 === $tp_paged && count( $tp_ids ) >= 4 ) ? array_slice( $tp_ids, 0, 4 ) : array();
+$tp_feat  = ( ! $tp_on && 1 === $tp_paged && count( $tp_ids ) >= 2 ) ? array_slice( $tp_ids, 0, topersia_g_news_top_max() ) : array();
 $tp_grid  = array_slice( $tp_ids, count( $tp_feat ) );
 $tp_part  = topersia_g_news_partial();
 
@@ -70,72 +70,57 @@ if ( $tp_part ) {
 ?>
 <div class="tp-page tp-news-page tp-news-archive"<?php echo topersia_g_news_root_attrs( $tp_base ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 	<main id="tp-main" class="tp-main">
-		<?php echo topersia_g_news_hero( topersia_g_news_hero_image( $tp_place ), $tp_crumbs, $tp_title, topersia_g_news_lead() ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<?php echo topersia_g_news_hero( topersia_g_news_hero_image( $tp_place ), $tp_crumbs, $tp_title, topersia_g_news_lead( $tp_place ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
 		<div class="tp-wrap">
 			<section id="tp-news" class="tp-section" aria-label="<?php echo esc_attr( $tp_title ); ?>">
 				<p class="tp-news-vh" role="status" aria-live="polite" data-tp-news-live></p>
 
-				<div class="tp-news-bar">
-					<?php echo topersia_g_news_chips( $tp_topic_items, __( 'موضوع‌ها', 'topersia' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-					<div class="tp-news-bar__tools">
-						<?php echo topersia_g_news_select( 'tp-news-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_news_sort_options(), $tp_args['tp_sort'], 'tp-news-form' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-						<?php echo topersia_g_news_view_toggle(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-					</div>
-				</div>
+				<?php echo topersia_g_news_top( $tp_feat ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
-				<form id="tp-news-form" class="tp-news-filter" method="get" action="<?php echo esc_url( $tp_base ); ?>" role="search" aria-label="<?php echo esc_attr__( 'پالایش اخبار', 'topersia' ); ?>" data-tp-news-filter>
-					<?php if ( '' !== $tp_args['tp_topic'] ) : ?>
-						<input type="hidden" name="tp_topic" value="<?php echo esc_attr( $tp_args['tp_topic'] ); ?>">
-					<?php endif; ?>
-					<div class="tp-news-filter__f tp-news-filter__f--q">
-						<label for="tp-news-q"><?php echo esc_html__( 'جست‌وجو در اخبار', 'topersia' ); ?></label>
-						<input id="tp-news-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">
+				<div class="tp-news-filters">
+					<div class="tp-news-bar">
+						<?php echo topersia_g_news_chips( $tp_topic_items, __( 'موضوع‌ها', 'topersia' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						<div class="tp-news-bar__tools">
+							<?php echo topersia_g_news_select( 'tp-news-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_news_sort_options(), $tp_args['tp_sort'], 'tp-news-form' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<?php echo topersia_g_news_view_toggle(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						</div>
 					</div>
-					<?php
-					/* P5-D549: combobox متنی، نه فهرست کشویی */
-					$tp_loc_raw = is_scalar( get_query_var( 'tp_loc' ) ) ? trim( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) ) : '';
-					echo topersia_g_loc_field( 'tp-news-place', $tp_place, topersia_g_news_archive_link( 1, array( 'tp_place' => '', 'tp_loc' => '' ) ), $tp_place ? '' : mb_substr( $tp_loc_raw, 0, 60 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
-					if ( $tp_kinds ) {
-						echo topersia_g_news_select( 'tp-news-kind', 'tp_kind', __( 'نوع مکان', 'topersia' ), array_merge( array( '' => __( 'همۀ نوع‌ها', 'topersia' ) ), $tp_kinds ), $tp_args['tp_kind'] ); // phpcs:ignore WordPress.Security.EscapeOutput
-					}
-					echo topersia_g_news_select( 'tp-news-when', 'tp_when', __( 'بازۀ زمانی', 'topersia' ), topersia_g_news_when_options(), $tp_args['tp_when'] ); // phpcs:ignore WordPress.Security.EscapeOutput
-					?>
-					<div class="tp-news-filter__go" data-tp-news-swap="go">
-						<button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button>
-						<?php if ( $tp_on ) : ?>
-							<a class="tp-news-filter__reset" href="<?php echo esc_url( $tp_base ); ?>" data-tp-news-nav><?php echo esc_html__( 'پاک‌کردن پالایش', 'topersia' ); ?></a>
+
+					<form id="tp-news-form" class="tp-news-filter" method="get" action="<?php echo esc_url( $tp_base ); ?>" role="search" aria-label="<?php echo esc_attr__( 'پالایش اخبار', 'topersia' ); ?>" data-tp-news-filter>
+						<?php if ( '' !== $tp_args['tp_topic'] ) : ?>
+							<input type="hidden" name="tp_topic" value="<?php echo esc_attr( $tp_args['tp_topic'] ); ?>">
 						<?php endif; ?>
-					</div>
-				</form>
+						<div class="tp-news-filter__f tp-news-filter__f--q">
+							<label for="tp-news-q"><?php echo esc_html__( 'جست‌وجو در اخبار', 'topersia' ); ?></label>
+							<input id="tp-news-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">
+						</div>
+						<?php
+						/* P5-D549: combobox متنی؛ پس از انتخاب خالی و هم‌اندازه می‌ماند — تراشه در ردیف فعال (P5-D557) */
+						echo topersia_g_loc_field( 'tp-news-place', $tp_place ); // phpcs:ignore WordPress.Security.EscapeOutput
+						if ( $tp_kinds ) {
+							echo topersia_g_news_select( 'tp-news-kind', 'tp_kind', __( 'نوع مکان', 'topersia' ), array_merge( array( '' => __( 'همۀ نوع‌ها', 'topersia' ) ), $tp_kinds ), $tp_args['tp_kind'] ); // phpcs:ignore WordPress.Security.EscapeOutput
+						}
+						echo topersia_g_news_select( 'tp-news-when', 'tp_when', __( 'بازۀ زمانی', 'topersia' ), topersia_g_news_when_options(), $tp_args['tp_when'] ); // phpcs:ignore WordPress.Security.EscapeOutput
+						?>
+						<div class="tp-news-filter__go">
+							<button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button>
+						</div>
+					</form>
+
+					<?php
+					$tp_loc_raw = is_scalar( get_query_var( 'tp_loc' ) ) ? trim( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) ) : '';
+					echo topersia_g_active_filters( topersia_g_news_active_items( $tp_args, $tp_kinds, $tp_tops ), $tp_base, ( ! $tp_place && '' !== $tp_loc_raw ) ? mb_substr( $tp_loc_raw, 0, 60 ) : '' ); // phpcs:ignore WordPress.Security.EscapeOutput
+					?>
+				</div>
 
 				<div class="tp-news-results"<?php echo topersia_g_news_results_attrs( $tp_total ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 					<?php echo topersia_g_news_chips( $tp_city_items, __( 'شهرهای استان', 'topersia' ), '', 'city' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
-					<?php if ( $tp_feat ) : ?>
-						<section class="tp-news-top<?php echo $tp_tops ? '' : ' tp-news-top--nocats'; ?>" aria-labelledby="tp-news-top-h">
-							<h2 id="tp-news-top-h" class="tp-news-vh" tabindex="-1" data-tp-news-focus><?php echo esc_html__( 'خبرهای برگزیده', 'topersia' ); ?></h2>
-							<?php if ( $tp_tops ) : ?>
-								<nav class="tp-news-cats" aria-labelledby="tp-news-cats-h" data-tp-news-nav>
-									<h3 id="tp-news-cats-h" class="tp-news-cats__h"><?php echo esc_html__( 'دسته‌بندی‌ها', 'topersia' ); ?></h3>
-									<ul>
-										<?php foreach ( array_slice( $tp_topic_items, 1 ) as $tp_it ) : ?>
-											<li><a href="<?php echo esc_url( $tp_it[1] ); ?>"<?php echo $tp_it[2] ? ' aria-current="page"' : ''; ?>><?php echo esc_html( $tp_it[0] ); ?></a></li>
-										<?php endforeach; ?>
-									</ul>
-								</nav>
-							<?php endif; ?>
-							<ul class="tp-news-side">
-								<?php foreach ( array_slice( $tp_feat, 1 ) as $tp_one ) { echo topersia_g_news_mini( $tp_one ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
-							</ul>
-							<?php echo topersia_g_news_feature( $tp_feat[0] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-						</section>
-					<?php endif; ?>
-
 					<?php if ( $tp_grid ) : ?>
 						<section class="tp-news-latest" aria-labelledby="tp-news-latest-h">
 							<div class="tp-news-latest__head">
-								<h2 id="tp-news-latest-h" tabindex="-1"<?php echo $tp_feat ? '' : ' data-tp-news-focus'; ?>><?php echo esc_html( $tp_on ? __( 'نتیجۀ پالایش', 'topersia' ) : __( 'جدیدترین خبرها', 'topersia' ) ); ?></h2>
+								<h2 id="tp-news-latest-h" tabindex="-1" data-tp-news-focus><?php echo esc_html( $tp_on ? __( 'نتیجۀ پالایش', 'topersia' ) : __( 'جدیدترین خبرها', 'topersia' ) ); ?></h2>
 								<?php if ( $tp_on ) : ?>
 									<a class="tp-more tp-news-all" href="<?php echo esc_url( $tp_base ); ?>" data-tp-news-nav><?php echo esc_html__( 'مشاهده همه', 'topersia' ); ?></a>
 								<?php endif; ?>
