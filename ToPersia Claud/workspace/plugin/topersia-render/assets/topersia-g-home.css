@@ -15,7 +15,7 @@ html .tp-page.tp-home > .tp-main{padding-block-start:0}
 /* ── شیشه ─────────────────────────────────────────────────────────────── */
 html .tp-page.tp-home .tp-home-glass,
 html body .whb-sticky-clone.whb-sticked .whb-general-header{
-  background:color-mix(in srgb,var(--tp-surface) 86%,transparent);
+  background:color-mix(in srgb,var(--tp-surface) var(--tp-home-glass-a,86%),transparent);
   -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
   border:1px solid color-mix(in srgb,var(--tp-bg) 70%,transparent);
   box-shadow:var(--tp-shadow-soft)}
@@ -27,6 +27,10 @@ html body .whb-sticky-clone.whb-sticked .whb-general-header{
   html .tp-page.tp-home .tp-home-glass,
   html body .whb-sticky-clone.whb-sticked .whb-general-header{background:var(--tp-surface);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
+
+/* کارت هیرو شیشه‌ای‌تر تا عکس پیدا باشد (خواست کاربر، دستۀ 50). ۶۸٪ کمینۀ امن است: حتی روی پیکسل تمام‌سیاه زیر کارت
+   کنتراست متن در روز ۵٫۷، عصر ۵٫۰ و شب ۶٫۰ (بدترین زیرینۀ شب: سفید زیر scrim ۰٫۲۸) — زیر ۶۵٪ عصر از ۴٫۵ می‌افتد. */
+html .tp-page.tp-home .tp-home-hero__card{--tp-home-glass-a:68%}
 
 /* ── ۱ هیرو ───────────────────────────────────────────────────────────── */
 html .tp-page.tp-home .tp-home-hero{position:relative;isolation:isolate;display:grid;align-items:center;
