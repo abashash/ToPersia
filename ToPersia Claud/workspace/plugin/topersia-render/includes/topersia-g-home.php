@@ -106,7 +106,12 @@ if ( ! function_exists( 'topersia_g_home_section' ) ) {
 			return '';
 		}
 
-		$link = ( ! empty( $more[0] ) && ! empty( $more[1] ) ) ? '<a class="tp-more" href="' . esc_url( $more[0] ) . '">' . esc_html( $more[1] ) . '</a>' : '';
+		/* P5-D533: دکمۀ بخش (پیوند «مشاهدۀ همه» یا دکمۀ پنجره، HTML ساختۀ همین پرونده) همیشه در ردیف عنوان، روبروی آن. */
+		if ( is_string( $more ) ) {
+			$link = $more;
+		} else {
+			$link = ( ! empty( $more[0] ) && ! empty( $more[1] ) ) ? '<a class="tp-more" href="' . esc_url( $more[0] ) . '">' . esc_html( $more[1] ) . '</a>' : '';
+		}
 
 		return '<section id="' . esc_attr( $id ) . '" class="tp-section tp-home-sec' . ( '' !== $class ? ' ' . esc_attr( $class ) : '' ) . '" aria-labelledby="' . esc_attr( $id ) . 'Title">'
 			. '<div class="tp-section-head"><div><h2 id="' . esc_attr( $id ) . 'Title">' . esc_html( $title ) . '</h2></div>' . $link . '</div>'
@@ -536,6 +541,8 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			. '<div class="tp-wrap tp-home-hero__in"><div class="tp-home-hero__card tp-home-glass">'
 			. '<h1 id="tp-home-h1">' . esc_html__( 'ایران را کشف کنید', 'topersia' ) . '</h1>'
 			. ( '' !== $intro ? '<p class="tp-home-hero__lead">' . esc_html( $intro ) . '</p>' : '' )
+			/* P5-D536: جعبۀ جست‌وجوی سراسری زیر زیرعنوان، مانند مرجع (docs/design/home/reference-image.png). */
+			. ( function_exists( 'topersia_g_search_form' ) ? topersia_g_search_form( 'tp-home-q', '', 'tp-home-search' ) : '' )
 			. ( '' !== $quick_html ? '<nav class="tp-home-quick" aria-label="' . esc_attr__( 'دسترسی سریع', 'topersia' ) . '">' . $quick_html . '</nav>' : '' )
 			. '</div></div></section>';
 
@@ -598,9 +605,9 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		$prov_body = '' !== $prov_cards ? '<div class="tp-home-prov' . ( '' !== $map ? '' : ' tp-home-prov--solo' ) . '">'
 			. ( '' !== $map ? '<div class="tp-home-prov__map"><h3 class="tp-home-sub">' . esc_html__( 'ایران روی نقشه', 'topersia' ) . '</h3>' . $map . '</div>' : '' )
 			. '<div class="tp-home-prov__tiles">' . topersia_g_home_slider( 'tp-home-provslide', __( 'استان‌های ایران', 'topersia' ), $prov_cards, count( $provinces ) )
-			. ( '' !== $dlg ? '<button type="button" class="tp-home-slider__all" data-tp-provdlg aria-haspopup="dialog" aria-controls="tp-home-provdlg" hidden>' . esc_html__( 'همۀ استان‌ها', 'topersia' ) . '</button>' : '' )
 			. '</div></div>' . $dlg : '';
-		$prov_more = array();
+		/* P5-D533: دکمۀ پنجرۀ «همۀ استان‌ها» در ردیف عنوان (بی JS پنهان؛ فهرست noscript جایش). */
+		$prov_more = ( '' !== $prov_body && '' !== $dlg ) ? '<button type="button" class="tp-home-slider__all" data-tp-provdlg aria-haspopup="dialog" aria-controls="tp-home-provdlg" hidden>' . esc_html__( 'همۀ استان‌ها', 'topersia' ) . '</button>' : array();
 
 		/*
 		 * ── ۴ محبوب‌ترین مقاصد — دستۀ 47 پ: تا ۱۲ شهر منتشرشدۀ دارای تصویر (ترتیب: دارای تصویر، سپس شناسۀ کوچک‌تر —
@@ -668,7 +675,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 
 		foreach ( $pool as $id ) {
 
-			if ( count( $picks ) >= 8 ) {
+			if ( count( $picks ) >= 12 ) {
 				break;
 			}
 
@@ -684,13 +691,8 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			$picks[]       = array( $id, $att );
 		}
 
-		/*
-		 * شمار عکس فقط ۴، ۵ یا ۸ تا گرید ۴ستونه (دسکتاپ) و ۲ستونه (موبایل) سوراخ نداشته باشد — دستۀ 48 بند ۶:
-		 * ۴ و ۸ بی عکس بزرگ؛ ۵ (از ۵ تا ۷) با عکس نخست ۲×۲ در دسکتاپ و تمام‌عرض در موبایل (کلاس --lead).
-		 */
-		$n     = count( $picks );
-		$n     = $n >= 8 ? 8 : ( $n >= 5 ? 5 : $n );
-		$picks = array_slice( $picks, 0, $n );
+		/* دستۀ 49 بند ۲: اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا (پیوست یکتا، هر عکس پیوند به موجودیت خودش)؛ گرید ۴/۵/۸ برداشته شد. */
+		$n = count( $picks );
 
 		foreach ( $picks as $pick ) {
 
@@ -764,7 +766,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), array(), 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-events', __( 'رویدادها و جشنواره‌ها', 'topersia' ), '' !== $event_rows ? '<ul class="tp-home-events">' . $event_rows . '</ul>' : '', array(), 'tp-home-lazy' )
 			. $trio
-			. topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? '<div class="tp-home-photos' . ( 5 === $n ? ' tp-home-photos--lead' : '' ) . '">' . $photos . '</div>' : '', array(), 'tp-home-lazy' )
+			. topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), $photos, $n ) : '', array(), 'tp-home-lazy' )
 			. ( '' !== $photos ? $photo_dlg : '' );
 
 		return '<div class="tp-page tp-home"><main id="tp-main" class="tp-main">' . $hero . '<div class="tp-wrap tp-home-body">' . $body . '</div></main></div>';
@@ -788,6 +790,8 @@ if ( function_exists( 'add_action' ) ) {
 		}
 
 		wp_enqueue_style( 'topersia-g-home', topersia_render_url() . 'assets/topersia-g-home.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-home.css' ) );
+		/* فرم جست‌وجوی هیرو — P5-D536 */
+		wp_enqueue_style( 'topersia-g-search', topersia_render_url() . 'assets/topersia-g-search.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-search.css' ) );
 		/* دستۀ 47 — اسلایدر، پنجرۀ استان‌ها، راهنمای نقشه، پنجرۀ عکس؛ فقط صفحۀ اول، پاورقی، سقف ۴KB (assert-47). */
 		wp_enqueue_script( 'topersia-g-home', topersia_render_url() . 'assets/topersia-g-home.js', array( 'topersia-g-zones' ), topersia_render_asset_version( 'assets/topersia-g-home.js' ), true );
 	}, 22 );

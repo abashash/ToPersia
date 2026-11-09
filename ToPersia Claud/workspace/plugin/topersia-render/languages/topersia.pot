@@ -1084,9 +1084,21 @@ msgstr ""
 msgid "جزیره‌های این مسیر"
 msgstr ""
 
+#: includes/topersia-g-search.php
+msgid "جست‌وجو"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "جست‌وجو در %s"
+msgstr ""
+
+#: includes/topersia-g-search.php
+msgid "جست‌وجو در استان‌ها، شهرها، جاذبه‌ها…"
+msgstr ""
+
+#: includes/topersia-g-search.php
+msgid "جست‌وجو در سایت"
 msgstr ""
 
 #: includes/topersia-g-home.php
@@ -2218,6 +2230,10 @@ msgstr ""
 msgid "صفحه‌های سایت"
 msgstr ""
 
+#: templates/search-results.php
+msgid "صفحه‌های نتیجه"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "صنایع دستی"
 msgstr ""
@@ -2272,6 +2288,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "عارضه‌های طبیعی درون این منطقه"
+msgstr ""
+
+#: templates/search-results.php
+msgid "عبارتی برای جست‌وجو بنویسید."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3268,6 +3288,19 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "ناوبری موبایل"
+msgstr ""
+
+#: templates/search-results.php
+msgid "نتایج جست‌وجو"
+msgstr ""
+
+#: templates/search-results.php
+#, php-format
+msgid "نتایج جست‌وجو برای «%s»"
+msgstr ""
+
+#: templates/search-results.php
+msgid "نتیجه‌ای نیست."
 msgstr ""
 
 #: includes/topersia-g-zones.php

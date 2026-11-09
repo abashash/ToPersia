@@ -181,8 +181,9 @@ tp441_mut( 'ت: راهنما | اخبار | پرسش در یک ردیف؛ ستو
 t( 'ج: صافی فصل ساخته نشد (ممیزی: کمتر از ۲ مورد در دست‌کم یک فصل)', false === strpos( $w47_home, 'best_season' ) );
 
 /* CSS — نیم‌هم‌پوشانی دقیق، توکن، بی letter-spacing */
-$w47_c2 = function ( $c ) { return 1 === preg_match( '/\.tp-home-stats\{[^}]*transform:translateY\(-50%\)/', $c ) && ! preg_match( '/#[0-9a-f]{3,8}\b/i', $c ) && ! preg_match( '/letter-spacing:(?!0[;}])/', $c ) && 1 === preg_match( '/\.tp-home-prov\{[^}]*align-items:stretch/', $c ); };
-tp441_mut( 'الف·ب CSS: نوار شمار translateY(-50%)، ستون‌ها stretch، بی رنگ خام و letter-spacing — جهش: رنگ خام', $w47_c2, $w47_css, $w47_css . "\nhtml .tp-page.tp-home .x{color:#ff0000}" );
+/* دستۀ 49 بند ۴: هم‌پوشانی ثابت نوار شمار جای translateY(-50%) را گرفت */
+$w47_c2 = function ( $c ) { return 1 === preg_match( '/\.tp-home-stats\{[^}]*margin:calc\(-1 \* var\(--tp-home-st-ov\)\) 0 0/', $c ) && ! preg_match( '/\.tp-home-stats\{[^}]*transform:/', $c ) && ! preg_match( '/#[0-9a-f]{3,8}\b/i', $c ) && ! preg_match( '/letter-spacing:(?!0[;}])/', $c ) && 1 === preg_match( '/\.tp-home-prov\{[^}]*align-items:stretch/', $c ); };
+tp441_mut( 'الف·ب CSS: نوار شمار هم‌پوشانی ثابت (بی translate)، ستون‌ها stretch، بی رنگ خام و letter-spacing — جهش: رنگ خام', $w47_c2, $w47_css, $w47_css . "\nhtml .tp-page.tp-home .x{color:#ff0000}" );
 
 /* قاب فیلد جست‌وجوی پنجرۀ استان‌ها عنصر رابط است (۳٫۰ در برابر زمینه): از توکن متن، نه --tp-border تزئینی — کنتراست ۱٫۳۶ گرفته بود */
 $w47_fld = function ( $c ) { return 1 === preg_match( '/\.tp-home-dlg__q\{[^}]*border:1px solid var\(--tp-text(?:-2|-strong)?\)/', $c ); };

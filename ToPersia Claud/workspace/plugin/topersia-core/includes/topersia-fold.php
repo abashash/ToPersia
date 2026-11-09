@@ -13,7 +13,7 @@
  * نقطۀ کد نگه می‌دارند تا هر سو الگوی خودش را از همان داده بسازد (PHP
  * `\x{…}`، جاوااسکریپت `\u…`). دو پیاده‌سازیِ قاعده نه.
  *
- * ذخیره: متای مکمل `_tp_search_fold` روی عنوان و خلاصه، در save_post.
+ * ذخیره: متای مکمل `_tp_search_fold` روی عنوان و نام‌های جایگزین (P5-D536)، در save_post.
  * ساختار تازه نیست جز این متا — و همین متا فقط محلی تا ممیزی پیوست الف
  * بند ۶ (`topersia_search_fold_enabled()`، مثل جدول کش هسته). بیرون از
  * local نه متا نوشته می‌شود نه جست‌وجوی سایت به آن نگاه می‌کند؛ تاکردن
@@ -146,10 +146,22 @@ function topersia_search_fold_js_rules() {
 }
 
 /**
- * متن جست‌وجوپذیر یک پست: عنوان و خلاصه.
+ * فیلدهای نام جایگزین که در نمایۀ تاشده می‌آیند — P5-D536 (دستۀ 49).
+ * هسته فهرست نام فیلد ندارد؛ render آن را از FIELDMAP (ناحیۀ names) و فیلدهای
+ * نام محلی و جایگزین می‌دهد (صافی `topersia_search_fold_fields`).
  *
- * خلاصه: `short_summary` موجودیت، و در نبودش چکیده. جداکنندۀ «|» پس از
- * تاکردن هم می‌ماند، تا تکه‌ای از پایان عنوان با آغاز خلاصه یک واژه نشود.
+ * @return string[]
+ */
+function topersia_search_fold_fields() {
+	return array_values( array_filter( array_map( 'strval', (array) apply_filters( 'topersia_search_fold_fields', array() ) ) ) );
+}
+
+/**
+ * متن جست‌وجوپذیر یک پست: عنوان و نام‌های جایگزین (P5-D536).
+ *
+ * هر نام یک تکه؛ چندنامی (خط، «،»، «,»، «·») تکه‌تکه. جداکنندۀ «|» پس از
+ * تاکردن هم می‌ماند، تا تکه‌ای از پایان یک نام با آغاز نام بعد یک واژه نشود.
+ * «—» (نامشخص خانۀ آمار، P5-D395) هرگز در نمایه نیست.
  */
 function topersia_search_fold_post( $post_id ) {
 
@@ -159,10 +171,22 @@ function topersia_search_fold_post( $post_id ) {
 		return '';
 	}
 
-	$summary = (string) get_post_meta( $post->ID, 'short_summary', true );
-	$summary = '' !== trim( $summary ) ? $summary : (string) $post->post_excerpt;
+	$parts = array( topersia_search_fold( wp_strip_all_tags( $post->post_title ) ) );
 
-	return topersia_search_fold( wp_strip_all_tags( $post->post_title ) ) . '|' . topersia_search_fold( wp_strip_all_tags( $summary ) );
+	foreach ( topersia_search_fold_fields() as $key ) {
+
+		$raw = get_post_meta( $post->ID, $key, true );
+		$raw = is_array( $raw ) ? implode( "\n", array_filter( $raw, 'is_scalar' ) ) : (string) $raw;
+
+		foreach ( preg_split( '/\R|[،,·]+/u', wp_strip_all_tags( $raw ) ) as $name ) {
+			$name = topersia_search_fold( trim( $name ) );
+			if ( '' !== $name && '—' !== $name && ! in_array( $name, $parts, true ) ) {
+				$parts[] = $name;
+			}
+		}
+	}
+
+	return implode( '|', $parts ) . ( 1 === count( $parts ) ? '|' : '' );
 }
 
 /** متای تاشده نوشته و خوانده شود؟ فقط محلی تا ممیزی پیوست الف بند ۶. */
@@ -193,15 +217,15 @@ function topersia_search_fold_save( $post_id, $post = null ) {
 add_action( 'save_post', 'topersia_search_fold_save', 30, 2 );
 
 /*
- * خلاصه متاست و با save_post همیشه همگام نیست (JetEngine متا را پس از
- * save_post هم می‌نویسد). تغییر خودِ short_summary هم متای تاشده را از نو
+ * نام‌ها متا هستند و با save_post همیشه همگام نیستند (JetEngine متا را پس از
+ * save_post هم می‌نویسد). تغییر خودِ هر فیلد نام هم متای تاشده را از نو
  * می‌سازد.
  */
 add_action( 'updated_post_meta', 'topersia_search_fold_meta_changed', 10, 3 );
 add_action( 'added_post_meta', 'topersia_search_fold_meta_changed', 10, 3 );
 
 function topersia_search_fold_meta_changed( $meta_id, $post_id, $meta_key ) {
-	if ( 'short_summary' === $meta_key ) {
+	if ( in_array( (string) $meta_key, topersia_search_fold_fields(), true ) ) {
 		topersia_search_fold_save( (int) $post_id );
 	}
 }
@@ -232,6 +256,11 @@ function topersia_search_fold_posts_search( $search, $query ) {
 		TOPERSIA_SEARCH_FOLD_META,
 		'%' . $wpdb->esc_like( $fold ) . '%'
 	);
+
+	/* جست‌وجوی سراسری render (P5-D536): فقط عنوان و نام جایگزین، یعنی فقط متای تاشده — متن و چکیده نه. */
+	if ( $query->get( 'tp_fold_only' ) ) {
+		return ' AND ( ' . $exists . ' ) ';
+	}
 
 	return preg_replace_callback(
 		'/^\s*AND\s*\(/',

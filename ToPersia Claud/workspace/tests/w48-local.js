@@ -62,10 +62,12 @@ const probe = () => {
 				t( 'P5-D531: کادر حساب کاربری نیست', ! r.acct );
 				t( 'P5-D528: پاورقی افزونه نیست', ! r.foot );
 				const ids = Object.keys( r.sliders );
-				t( `P5-D529: اسلایدرها پیدا شدند (${ids.join( '، ' ) || '—'})`, ids.length >= 1 && ids.every( id => /^tp-home-(prov|dest|attr)slide$/.test( id ) ), JSON.stringify( r.sliders ) );
+				t( `P5-D529: اسلایدرها پیدا شدند (${ids.join( '، ' ) || '—'})`, ids.length >= 1 && ids.every( id => /^tp-home-(prov|dest|attr|photo)slide$/.test( id ) ), JSON.stringify( r.sliders ) );
 				for ( const id of ids ) {
 					const s = r.sliders[ id ];
-					t( `${id}: یک ردیف — همۀ ${s.n} کارت top یکسان`, 1 === s.tops.length, s.tops.join( ' ' ) );
+					/* P5-D533 (دستۀ 49): استان‌ها از ۱۰۲۴ به بالا دو ردیف؛ بقیه همیشه یک ردیف */
+					const rows2 = 'tp-home-provslide' === id && w >= 1024;
+					t( `${id}: ${rows2 ? 'دو' : 'یک'} ردیف — ${s.n} کارت، top یکتا ${s.tops.length}`, rows2 ? ( s.n < 2 ? 1 === s.tops.length : 2 === s.tops.length ) : 1 === s.tops.length, s.tops.join( ' ' ) );
 					if ( s.n < 2 ) { t( `${id}: کمتر از ۲ کارت ← بی نوار`, null === s.bar ); continue; }
 					const prev = s.bar && s.bar.find( x => '-1' === x.dir ), next = s.bar && s.bar.find( x => '1' === x.dir );
 					t( `${id}: نوار با «قبلی» و «بعدی» و aria-label`, !! ( prev && next && prev.label && next.label && prev.label !== next.label ), JSON.stringify( s.bar ) );
@@ -113,16 +115,7 @@ const probe = () => {
 						t( `P5-D530: زیر ۹۰۰ عمودی (top ${tops.join( ' < ' )})`, tops.every( ( v, i ) => 0 === i || v > tops[ i - 1 ] ) && new Set( c0.map( c => c.left ) ).size === 1, JSON.stringify( c0 ) );
 					}
 				}
-				/* گالری — آخرین ردیف تک‌عکس نیست */
-				if ( r.photos.length ) {
-					await p.evaluate( () => document.getElementById( 'tp-home-gallery' ).scrollIntoView( { behavior: 'instant', block: 'start' } ) );
-					await p.waitForTimeout( 500 );
-					const ph = ( await p.evaluate( probe ) ).photos;
-					const rows = {};
-					ph.forEach( x => { rows[ x.top ] = ( rows[ x.top ] || 0 ) + 1; } );
-					const tops = Object.keys( rows ).map( Number ).sort( ( a, c ) => a - c ), last = rows[ tops[ tops.length - 1 ] ];
-					t( `گالری: ${ph.length} عکس، آخرین ردیف ${last} عکس — تک نیست`, [ 4, 5, 8 ].includes( ph.length ) && ( last >= 2 || 1 === tops.length ), JSON.stringify( rows ) );
-				}
+				/* گالری — دستۀ 49: اسلایدر یک‌ردیفه (در sliders بالا: tp-home-photoslide) */
 			}
 			t( `${w}: بی خطای JS`, ! errs.length, errs.join( ' | ' ) );
 			await ctx.close();

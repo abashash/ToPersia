@@ -24,7 +24,7 @@ tp441_mut( 'P5-D529: استان‌ها، مقاصد و جاذبه‌ها هر س
 	str_replace( "topersia_g_home_slider( 'tp-home-attrslide'", "topersia_g_home_grid( 'tp-home-attrslide'", $w48_home ) );
 $w48_row = function ( $c ) {
 	return 1 === preg_match( '/\.tp-home-slider\{display:grid;grid-auto-flow:column;grid-template-rows:auto;/', $c )
-		&& false === strpos( $c, 'grid-template-rows:repeat(2' ) && false === strpos( $c, 'destgrid' );
+		&& false === strpos( preg_replace( '/@media \(min-width:1024px\)\{.*?\n\}\n/s', '', $c ), 'grid-template-rows:repeat(2' ) && false === strpos( $c, 'destgrid' ); /* دستۀ 49: فقط استان‌ها در ≥ ۱۰۲۴ دو ردیف (P5-D533) */
 };
 tp441_mut( 'P5-D529 CSS: اسلایدر grid-template-rows:auto (یک ردیف)، بی repeat(2) — جهش: دوردیفه', $w48_row, $w48_css,
 	str_replace( 'grid-template-rows:auto;', 'grid-template-rows:repeat(2,auto);', $w48_css ) );
@@ -80,18 +80,8 @@ if ( function_exists( 'topersia_g_footer_credits_on' ) ) {
 	t( 'P5-D528: بی option خاموش، «0» خاموش، فقط «1» روشن', ! $w48_def && ! $w48_off && $w48_on );
 }
 
-/* ── گالری بی سوراخ: فقط ۴، ۵ یا ۸ عکس؛ عکس بزرگ فقط با ۵ ── */
-$w48_gal = function ( $s ) {
-	return false !== strpos( $s, '$n     = $n >= 8 ? 8 : ( $n >= 5 ? 5 : $n );' ) && false !== strpos( $s, "( 5 === \$n ? ' tp-home-photos--lead' : '' )" );
-};
-tp441_mut( 'گالری: شمار ۴/۵/۸ و کلاس --lead فقط با ۵ — جهش: بی گرد کردن', $w48_gal, $w48_home,
-	str_replace( '$n     = $n >= 8 ? 8 : ( $n >= 5 ? 5 : $n );', '', $w48_home ) );
-$w48_gcss = function ( $c ) {
-	return false !== strpos( $c, '.tp-home-photos--lead .tp-home-photo:first-child{grid-column:span 2;grid-row:span 2}' )
-		&& ! preg_match( '/\.tp-home-photo:first-child\{grid-column/', str_replace( '.tp-home-photos--lead .tp-home-photo:first-child{', '', $c ) );
-};
-tp441_mut( 'گالری CSS: عکس بزرگ فقط زیر --lead — جهش: عکس نخست همیشه بزرگ', $w48_gcss, $w48_css,
-	$w48_css . "\nhtml .tp-page.tp-home .tp-home-photo:first-child{grid-column:span 2}" );
+/* ── گالری: گرید ۴/۵/۸ دستۀ 48 جای خود را به اسلایدر یک‌ردیفۀ ۱۲تایی داد (دستۀ 49 بند ۲؛ آزمونش در assert-49) ── */
+t( 'گالری: گرید ۴/۵/۸ و --lead برداشته شد (دستۀ 49)', false === strpos( $w48_home, 'tp-home-photos--lead' ) && false === strpos( $w48_css, 'tp-home-photos' ) );
 
 /* ── بخش ۲: آرشیو سراسری /news/ (SPRINT-4.4 فاز ۶٫۱، P5-D260) ── */
 $w48_news  = $w48_read( 'plugin/topersia-render/includes/topersia-g-news.php' );

@@ -1503,12 +1503,21 @@ function topersia_schema_json( $post_id ) {
 }
 
 /**
- * گراف صفحۀ اول. SearchAction عمداً نیست: جست‌وجوی سراسری واقعی وجود ندارد.  دستۀ 45
+ * گراف صفحۀ اول. SearchAction فقط وقتی جست‌وجوی سراسری واقعی render هست (P5-D536 · دستۀ 49)؛
+ * نشانی همان فرم GET هیرو: خانۀ زبان جاری با ?s=.
  */
 function topersia_schema_home_json( $post_id ) {
 
 	$home = topersia_schema_home();
 	$site = topersia_schema_website();
+
+	if ( function_exists( 'topersia_g_search_form' ) ) {
+		$site['potentialAction'] = array(
+			'@type'       => 'SearchAction',
+			'target'      => array( '@type' => 'EntryPoint', 'urlTemplate' => add_query_arg( 's', '{search_term_string}', $home ) ),
+			'query-input' => 'required name=search_term_string',
+		);
+	}
 	$page = array(
 		'@type'       => 'WebPage',
 		'@id'         => $home . '#webpage',
@@ -1658,7 +1667,7 @@ function topersia_schema_output() {
 		return;
 	}
 
-	/* صفحۀ اول: Organization · WebSite · WebPage، بی SearchAction (جست‌وجوی سراسری نیست).  دستۀ 45 */
+	/* صفحۀ اول: Organization · WebSite (با SearchAction جست‌وجوی سراسری، P5-D536) · WebPage.  دستۀ 45 · 49 */
 	$json = ( 'page' === get_post_type( $post_id ) && is_front_page() ) ? topersia_schema_home_json( $post_id ) : topersia_schema_json( $post_id );
 
 	if ( '' === $json ) {

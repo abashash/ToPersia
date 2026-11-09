@@ -45,6 +45,7 @@ html .tp-page.tp-home .tp-home-hero__card{max-inline-size:760px;margin-inline:au
   border-radius:var(--tp-home-r);text-align:center;color:var(--tp-text-strong)}
 html .tp-page.tp-home .tp-home-hero__card h1{margin:0;font-size:clamp(calc(2 * var(--tp-rem)),5vw,calc(3.2 * var(--tp-rem)));line-height:1.25;color:var(--tp-text-strong);letter-spacing:0}
 html .tp-page.tp-home .tp-home-hero__lead{margin:12px 0 0;font-size:calc(1.08 * var(--tp-rem));line-height:1.9;color:var(--tp-text)}
+html .tp-page.tp-home .tp-home-search{margin-block-start:20px}
 html .tp-page.tp-home .tp-home-quick{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-block-start:22px}
 html .tp-page.tp-home .tp-home-quick__a{display:inline-flex;align-items:center;gap:8px;min-block-size:44px;padding:8px 16px;
   border-radius:999px;background:var(--tp-bg);border:1px solid var(--tp-border);color:var(--tp-text-strong);font-weight:700;text-decoration:none}
@@ -55,9 +56,11 @@ html .tp-page.tp-home .tp-home-quick__a:hover svg{stroke:var(--tp-bg)}
 html .tp-page.tp-home :is(a,summary):focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
 
 /* ── ۲ نوار شمار ──────────────────────────────────────────────────────── */
-/* دستۀ 47 الف — نیمی روی لبۀ هیرو، دقیقاً نصف بلندی خودش (translate درصدی از بلندی خود عنصر، هر شمار ردیف)؛
-   فضای نیمۀ دوم در جریان می‌ماند و فاصلۀ تا بخش بعد می‌شود. D514 دست نمی‌خورد. */
-html .tp-page.tp-home .tp-home-stats{position:relative;z-index:1;margin:0;transform:translateY(-50%);
+/* دستۀ 49 بند ۴ — روی لبۀ هیرو با هم‌پوشانی ثابت (--tp-home-st-ov)، نه translateY(-50%):
+   translate جای نیمۀ پایین را در جریان خالی می‌گذاشت و فاصلۀ تا استان‌ها نصف بلندی نوار می‌شد
+   (۵۰px دسکتاپ، ۸۸ تا ۱۲۶px موبایل). حالا فاصله فقط margin بخش بعد است. D514 دست نمی‌خورد. */
+html .tp-page.tp-home{--tp-home-st-ov:48px}
+html .tp-page.tp-home .tp-home-stats{position:relative;z-index:1;margin:calc(-1 * var(--tp-home-st-ov)) 0 0;
   padding:14px clamp(12px,2vw,24px);border-radius:var(--tp-home-r)}
 html .tp-page.tp-home .tp-home-stats ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin:0;padding:0;list-style:none}
 html .tp-page.tp-home .tp-home-stats__i{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:8px 10px}
@@ -68,11 +71,22 @@ html .tp-page.tp-home .tp-home-stats__i span{font-size:calc(.86 * var(--tp-rem))
 /* ── سرفصل و چیدمان بخش‌ها ───────────────────────────────────────────── */
 html .tp-page.tp-home .tp-home-sec{margin:0 0 clamp(36px,6vw,64px)}
 html .tp-page.tp-home .tp-home-sec .tp-section-head h2{letter-spacing:0}
-/* بی نوار شمار (داده کمتر از سه عدد) نخستین بخش به هیرو نچسبد */
-html .tp-page.tp-home .tp-home-body > .tp-home-sec:first-child{margin-block-start:clamp(28px,4vw,48px)}
-html .tp-page.tp-home .tp-home-lazy{content-visibility:auto;contain-intrinsic-size:auto 640px}
+/* بی نوار شمار (داده کمتر از سه عدد) نخستین بخش به هیرو نچسبد؛ با نوار شمار فاصله ≤ ۴۸px دسکتاپ و ≤ ۳۲px موبایل (دستۀ 49 بند ۴) */
+html .tp-page.tp-home .tp-home-body > .tp-home-sec:first-child{margin-block-start:clamp(20px,2.8vw,40px)}
+html .tp-page.tp-home .tp-home-stats + .tp-home-sec{margin-block-start:clamp(20px,2.8vw,40px)}
+/* جای‌نگه‌دار نزدیک بلندی واقعی هر بخش (اندازه‌گیری دستۀ 49)؛ «auto» بلندی رندرشده را به یاد می‌سپارد، پس CLS صفر */
+html .tp-page.tp-home .tp-home-lazy{content-visibility:auto;contain-intrinsic-size:auto 440px}
+html .tp-page.tp-home .tp-home-lazy#tp-home-events{contain-intrinsic-size:auto 260px}
+html .tp-page.tp-home .tp-home-lazy#tp-home-gallery{contain-intrinsic-size:auto 340px}
+html .tp-page.tp-home .tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto 640px}
 html .tp-page.tp-home .tp-home-sub{margin:0 0 12px;font-size:calc(1.1 * var(--tp-rem));color:var(--tp-text-strong)}
 html .tp-page.tp-home .tp-more{display:inline-flex;align-items:center;min-block-size:44px}
+/* P5-D533 — دکمۀ هر بخش (پیوند «مشاهدۀ همه» یا دکمۀ پنجره) همیشه در ردیف عنوان، روبروی آن، در هر پهنا؛
+   عنوان بلند می‌شکند، دکمه نه. ستونی‌شدن و گرید موبایلِ قالب اینجا کنار می‌رود. */
+html .tp-page.tp-home .tp-home-sec > div.tp-section-head{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:12px}
+html .tp-page.tp-home .tp-home-sec > div.tp-section-head > div{display:block;flex:1 1 auto;min-inline-size:0}
+html .tp-page.tp-home .tp-home-sec > div.tp-section-head h2{margin:0;overflow-wrap:anywhere}
+html .tp-page.tp-home .tp-home-sec > div.tp-section-head > :is(.tp-more,.tp-home-slider__all){flex:0 0 auto;white-space:nowrap;min-block-size:44px;margin:0}
 
 
 /* کارت تصویری — بی شیشه (کاشی تکراری) */
@@ -110,7 +124,11 @@ html .tp-page.tp-home .tp-home-map__src{margin-block-start:8px;font-size:calc(.7
 /* اسلایدرهای صفحۀ اول — فقط یک ردیف، scroll-snap (P5-D529)؛ نوار و فلش‌ها از topersia_g_slider_bar() و topersia-g-zones.js (P5-D243) */
 html .tp-page.tp-home .tp-home-prov__tiles{display:flex;flex-direction:column;gap:12px;min-inline-size:0}
 html .tp-page.tp-home .tp-home-slider{display:grid;grid-auto-flow:column;grid-template-rows:auto;gap:clamp(10px,1.6vw,16px);grid-auto-columns:calc((100% - 3 * clamp(10px,1.6vw,16px)) / 4);
-  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;padding-block-end:6px}
+  overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--tp-border) transparent;
+  padding:6px 6px 16px;margin-inline:-6px;scroll-padding-inline:6px}
+/* دستۀ 49 بند ۵ — ≥ ۱۴px میان کارت و نوار (۱۶px)، سایۀ کارت با ۶px فضا بریده نمی‌شود؛ نوار نازک */
+html .tp-page.tp-home .tp-home-slider::-webkit-scrollbar{block-size:6px}
+html .tp-page.tp-home .tp-home-slider::-webkit-scrollbar-thumb{border-radius:999px;background:var(--tp-border)}
 html .tp-page.tp-home .tp-home-slider > *{scroll-snap-align:start}
 html .tp-page.tp-home .tp-home-slider:focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
 /* ستون کاشی‌ها هم‌قد ستون نقشه (stretch): دو کارت در دید، کارت کل ارتفاع ردیف را می‌گیرد و تصویر جای خالی را پر می‌کند */
@@ -120,7 +138,6 @@ html .tp-page.tp-home .tp-home-prov__tiles .tp-slider-bar{margin-top:0}
 html .tp-page.tp-home :is(.tp-home-slider__all,.tp-home-dlg__x,.tp-home-photodlg__go){display:inline-flex;align-items:center;justify-content:center;
   min-block-size:44px;min-inline-size:44px;padding:8px 16px;border-radius:999px;font:inherit;font-size:var(--tp-rem);font-weight:700;cursor:pointer;text-decoration:none;
   background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-text-strong)}
-html .tp-page.tp-home .tp-home-slider__all{align-self:flex-end}
 html .tp-page.tp-home :is(.tp-home-slider__all,.tp-home-dlg__x,.tp-home-photodlg__go):hover{background:var(--tp-primary-text);border-color:var(--tp-primary-text);color:var(--tp-bg)}
 html .tp-page.tp-home :is(button,input):focus-visible{outline:2px solid var(--tp-primary);outline-offset:3px}
 html .tp-page.tp-home [hidden]{display:none}
@@ -182,11 +199,8 @@ html .tp-page.tp-home .tp-home-guide__a{display:grid;justify-items:center;gap:8p
 html .tp-page.tp-home .tp-home-guide__a svg{inline-size:30px;block-size:30px}
 html .tp-page.tp-home .tp-home-guide__a:hover{border-color:var(--tp-primary);color:var(--tp-primary-text)}
 
-/* ۹ ایران در تصویر */
-html .tp-page.tp-home .tp-home-photos{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:clamp(120px,16vw,200px)}
-html .tp-page.tp-home .tp-home-photo{position:relative;display:block;overflow:hidden;border-radius:var(--tp-tile-radius,12px);color:var(--tp-text-strong);text-decoration:none;background:var(--tp-surface)}
-/* عکس بزرگ فقط با ۵ عکس (--lead)؛ ۴ و ۸ گرید پر بی عکس بزرگ — PHP شمار را ۴/۵/۸ می‌کند (دستۀ 48 بند ۶) */
-html .tp-page.tp-home .tp-home-photos--lead .tp-home-photo:first-child{grid-column:span 2;grid-row:span 2}
+/* ۹ ایران در تصویر — اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا (دستۀ 49 بند ۲) */
+html .tp-page.tp-home .tp-home-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:var(--tp-tile-radius,12px);color:var(--tp-text-strong);text-decoration:none;background:var(--tp-surface);box-shadow:var(--tp-shadow-soft)}
 html .tp-page.tp-home .tp-home-photo__img{display:block;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover}
 /* نام زیر عکس روی نوار مات سطح، نه روی خود تصویر — کنتراست از توکن */
 html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;inset-block-end:8px;padding:4px 10px;border-radius:999px;
@@ -212,8 +226,15 @@ html .tp-page.tp-home .tp-home-faq__i p{margin:0;padding:0 16px 14px;line-height
 }
 
 /* ── موبایل ───────────────────────────────────────────────────────────── */
+/* P5-D533 — استان‌ها از ۱۰۲۴px به بالا دو ردیف (همان فلش‌های zones)، هم‌قد کارت نقشه؛ زیر آن یک ردیف. بقیۀ اسلایدرها همیشه یک ردیف. */
+@media (min-width:1024px){
+  html .tp-page.tp-home .tp-home-prov__tiles .tp-home-slider{grid-template-rows:repeat(2,minmax(0,1fr))}
+  html .tp-page.tp-home .tp-home-prov__tiles .tp-home-card__media{min-block-size:110px}
+  html .tp-page.tp-home .tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto 640px}
+}
 @media (max-width:1024px){
   html .tp-page.tp-home .tp-home-slider{grid-auto-columns:calc((100% - 2 * clamp(10px,1.6vw,16px)) / 3)}
+  html .tp-page.tp-home .tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto 900px}
 }
 @media (max-width:900px){
   html .tp-page.tp-home .tp-home-prov{grid-template-columns:1fr}
@@ -223,15 +244,19 @@ html .tp-page.tp-home .tp-home-faq__i p{margin:0;padding:0 16px 14px;line-height
 }
 @media (max-width:768px){
   html .tp-page.tp-home :is(.tp-home-slider,.tp-home-prov__tiles .tp-home-slider){grid-auto-columns:calc((100% - clamp(10px,1.6vw,16px)) / 2)}
+  /* موبایل: نوار اسکرول پنهان؛ فلش‌ها و لمس می‌مانند. فضای سایه می‌ماند. */
+  html .tp-page.tp-home .tp-home-slider{scrollbar-width:none;padding-block-end:10px}
+  html .tp-page.tp-home .tp-home-slider::-webkit-scrollbar{display:none}
+  html .tp-page.tp-home .tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto 1300px}
+  html .tp-page.tp-home{--tp-home-st-ov:40px}
 }
 @media (max-width:600px){
   html .tp-page.tp-home .tp-home-hero{min-block-size:520px}
-  /* نوار شمار دوستونه سه ردیف دارد (~۲۵۰px)؛ نیمه‌اش (~۱۲۶px) روی هیرو می‌نشیند — کارت هیرو بالاتر از آن بماند */
-  html .tp-page.tp-home .tp-home-hero__in{padding-block-end:156px}
+  /* نوار شمار فقط --tp-home-st-ov (۴۰px) روی هیرو می‌نشیند — کارت هیرو بالاتر از آن بماند */
+  html .tp-page.tp-home .tp-home-hero__in{padding-block-end:72px}
+  html .tp-page.tp-home .tp-home-trio.tp-home-lazy{contain-intrinsic-size:auto 1700px}
   html .tp-page.tp-home .tp-home-quick__a{padding-inline:12px}
   html .tp-page.tp-home .tp-home-stats ul{grid-template-columns:repeat(2,minmax(0,1fr))}
   html .tp-page.tp-home .tp-home-card__txt{padding:10px}
   html .tp-page.tp-home :is(.tp-home-slider,.tp-home-prov__tiles .tp-home-slider){grid-auto-columns:72%}
-  html .tp-page.tp-home .tp-home-photos{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:140px}
-  html .tp-page.tp-home .tp-home-photos--lead .tp-home-photo:first-child{grid-column:span 2;grid-row:span 1}
 }

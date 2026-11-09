@@ -33,15 +33,19 @@ $w45_nodigit = function ( $s ) {
 	$code = preg_replace( '#^\s*(\*|//).*$#m', '', $code );
 	$code = preg_replace( '/\}, \d+ \);/', '}, P );', $code );   /* اولویت قلاب وردپرس عدد آمار نیست — دستۀ 46 */
 	$code = preg_replace( '/\), 0, \d+ \);/', '), 0, N );', $code );   /* سقف array_slice عدد آمار نیست — دستۀ 47 */
+	$code = preg_replace( '/count\( \$picks \) >= \d+ \)/', 'count( $picks ) >= N )', $code );   /* سقف عکس‌های گالری عدد آمار نیست — دستۀ 49 */
 	return 0 === preg_match( '/(?<![\w$])\d{2,}(?![\w])/', $code );
 };
 tp441_mut( 'صفحهٔ اول عدد ثابت (آمار) ندارد — جهش: عدد در کد', $w45_nodigit, $w45_src, $w45_src . "\n\$x = 31;" );
-$w45_nosearch = function ( $s ) {
-	$s = preg_replace( '#/\*.*?\*/#s', '', $s );
-	$s = preg_replace( '#^\s*(\*|//).*$#m', '', $s );
-	return false === stripos( $s, 'SearchAction' ) && false === stripos( $s, 'type="search"' ) && false === stripos( $s, '<form' );
+/* P5-D536 (دستۀ 49) جای حکم دستۀ 45 را گرفت: جست‌وجوی سراسری واقعی هست، پس SearchAction فقط با همان دروازه. */
+$w45_search = function ( $s ) {
+	return false !== strpos( $s, "'SearchAction'" ) && false !== strpos( $s, "if ( function_exists( 'topersia_g_search_form' ) ) {" );
 };
-tp441_mut( 'صفحهٔ اول و اسکیمایش کادر جست‌وجو و SearchAction ندارند (جست‌وجوی سراسری نیست) — جهش: SearchAction', $w45_nosearch, $w45_src . "\n" . ( preg_match( '/function topersia_schema_home_json.*?\n}\n/s', $w45_schema, $w45_m ) ? $w45_m[0] : 'SearchAction' ), $w45_src . '<form role="search">' );
+tp441_mut( 'SearchAction اسکیمای صفحهٔ اول فقط وقتی جست‌وجوی سراسری render هست (P5-D536) — جهش: بی دروازه', $w45_search, ( preg_match( '/function topersia_schema_home_json.*?
+}
+/s', $w45_schema, $w45_m ) ? $w45_m[0] : '' ), str_replace( "if ( function_exists( 'topersia_g_search_form' ) ) {", 'if ( true ) {', ( preg_match( '/function topersia_schema_home_json.*?
+}
+/s', $w45_schema, $w45_m ) ? $w45_m[0] : '' ) ) );
 
 /* اسکیمای صفحهٔ اول فقط روی صفحهٔ اول. */
 $w45_sch = function ( $s ) {

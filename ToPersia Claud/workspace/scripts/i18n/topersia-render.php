@@ -1165,4 +1165,13 @@ return array(
 	'همۀ مکان‌ها' => array( 'en' => 'All places', 'ar' => 'كل الأماكن' ),
 	'نمایش' => array( 'en' => 'Show', 'ar' => 'عرض' ),
 	'هنوز خبری منتشر نشده است.' => array( 'en' => 'No news has been published yet.', 'ar' => 'لم تُنشر أي أخبار بعد.' ),
+	/* جست‌وجوی سراسری — P5-D536 · دستۀ 49 */
+	'جست‌وجو' => array( 'en' => 'Search', 'ar' => 'بحث' ),
+	'جست‌وجو در سایت' => array( 'en' => 'Search the site', 'ar' => 'البحث في الموقع' ),
+	'جست‌وجو در استان‌ها، شهرها، جاذبه‌ها…' => array( 'en' => 'Search provinces, cities, attractions…', 'ar' => 'ابحث في المحافظات والمدن والمعالم…' ),
+	'نتایج جست‌وجو' => array( 'en' => 'Search results', 'ar' => 'نتائج البحث' ),
+	'نتایج جست‌وجو برای «%s»' => array( 'en' => 'Search results for “%s”', 'ar' => 'نتائج البحث عن «%s»' ),
+	'عبارتی برای جست‌وجو بنویسید.' => array( 'en' => 'Type something to search for.', 'ar' => 'اكتب عبارة للبحث.' ),
+	'نتیجه‌ای نیست.' => array( 'en' => 'No results.', 'ar' => 'لا توجد نتائج.' ),
+	'صفحه‌های نتیجه' => array( 'en' => 'Result pages', 'ar' => 'صفحات النتائج' ),
 );

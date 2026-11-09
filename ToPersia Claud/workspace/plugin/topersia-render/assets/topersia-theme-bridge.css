@@ -171,3 +171,16 @@ html:root .whb-clone.whb-sticked:not(.tp-keep-bg){
   border-bottom:1px solid var(--tp-border) !important;
   box-shadow:var(--tp-g-shadow-sm);
 }
+
+/* ==========================================================================
+   ۶ — اندازۀ متن کپی‌رایت پاورقی وودمارت  ·  P5-D537 · دستۀ 49 بند ۶
+   فقط CSS؛ ساختار وودمارت و متن تنظیم خودش (copyrights) دست نمی‌خورد.
+   اندازه نسبت به پهنای ظرف پاورقی (cqi)، بین ۱۲ و ۱۴px: در دسکتاپ پهن متن
+   کنونی در یک خط جا می‌شود؛ هرگز nowrap نیست، پس هرگز سرریز افقی ندارد.
+   متن کنونی در ۱۲px نزدیک ۱۰۸۰px پهنا می‌خواهد؛ پس در ۷۶۸ دو خط و در ۳۹۰
+   بیش از دو خط می‌شود — بی کوتاه‌کردن متن (تنظیم کاربر) یک‌خط/دوخط ممکن نیست.
+   ========================================================================== */
+html:root .wd-copyrights > .container{container-type:inline-size}
+html:root .wd-copyrights :is(.wd-col-start,.wd-col-end) p{
+  font-size:clamp(12px,1.09cqi,14px);line-height:1.7;overflow-wrap:anywhere;
+}

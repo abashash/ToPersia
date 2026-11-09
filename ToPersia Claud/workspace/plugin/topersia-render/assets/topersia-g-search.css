@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* ==========================================================================
+   ToPersia — جست‌وجوی سراسری (P5-D536 · دستۀ 49): فرم هیروی صفحۀ اول و صفحۀ نتیجه.
+   فقط توکن‌های topersia-tokens.css؛ هدف لمسی ≥ ۴۴px؛ ویژگی منطقی (جهت از صفحه).
+   ========================================================================== */
+
+html .tp-page .tp-search{display:flex;align-items:stretch;gap:0;inline-size:100%;max-inline-size:620px;margin-inline:auto;
+  border-radius:999px;background:var(--tp-bg);border:1px solid var(--tp-border);box-shadow:var(--tp-shadow-soft);overflow:hidden}
+html .tp-page .tp-search__lab{position:absolute;inline-size:1px;block-size:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+html .tp-page .tp-search__q{flex:1 1 auto;min-inline-size:0;min-block-size:52px;margin:0;padding:8px 20px;border:0;border-radius:0;
+  background:transparent;color:var(--tp-text-strong);font:inherit;font-size:var(--tp-rem);text-align:start;box-shadow:none}
+html .tp-page .tp-search__q::placeholder{color:var(--tp-text);opacity:1}
+html .tp-page .tp-search__q::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+html .tp-page .tp-search__go{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-inline-size:56px;min-block-size:52px;margin:0;padding:0 16px;
+  border:0;border-radius:0;background:var(--tp-primary-text);color:var(--tp-bg);cursor:pointer}
+html .tp-page .tp-search__go svg{inline-size:22px;block-size:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+html .tp-page .tp-search__go:hover{background:var(--tp-text-strong)}
+html .tp-page .tp-search:focus-within{outline:2px solid var(--tp-primary);outline-offset:3px}
+html .tp-page .tp-search :is(input,button):focus-visible{outline:none}
+
+/* صفحۀ نتیجه */
+html .tp-page.tp-search-page .tp-section-head h1{margin:0;font-size:calc(1.5 * var(--tp-rem));color:var(--tp-text-strong);overflow-wrap:anywhere}
+html .tp-page.tp-search-page .tp-search--page{margin:0 0 24px;max-inline-size:none}
+html .tp-page.tp-search-page .tp-search-empty{margin:16px 0;color:var(--tp-text)}
+html .tp-page.tp-search-page .tp-search-pages{display:flex;flex-wrap:wrap;gap:8px;margin-block-start:24px}
+html .tp-page.tp-search-page .tp-search-pages > *{display:inline-flex;align-items:center;justify-content:center;min-inline-size:44px;min-block-size:44px;padding:0 12px;
+  border-radius:var(--tp-tile-radius,12px);background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-text-strong);text-decoration:none}
+html .tp-page.tp-search-page .tp-search-pages [aria-current]{background:var(--tp-primary-text);border-color:var(--tp-primary-text);color:var(--tp-bg)}

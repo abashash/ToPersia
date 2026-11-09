@@ -8289,6 +8289,7 @@ if ( ! function_exists( 'topersia_g_icon' ) ) {
 		static $paths = array(
 			/* نوار موبایل مرجع */
 			'top'     => '<path d="M12 19V5M5 12l7-7 7 7"/>',
+			'search'  => '<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/>',
 			'star'    => '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/>',
 			'pin'     => '<path d="M12 21s7-6.4 7-11a7 7 0 1 0-14 0c0 4.6 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/>',
 			'save'    => '<path d="M6 3h12v18l-6-4.5L6 21z"/>',

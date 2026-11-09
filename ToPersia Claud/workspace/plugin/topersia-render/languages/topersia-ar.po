@@ -1085,10 +1085,22 @@ msgstr "جزيرة"
 msgid "جزیره‌های این مسیر"
 msgstr "جزر هذا المسار"
 
+#: includes/topersia-g-search.php
+msgid "جست‌وجو"
+msgstr "بحث"
+
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "جست‌وجو در %s"
 msgstr "البحث في %s"
+
+#: includes/topersia-g-search.php
+msgid "جست‌وجو در استان‌ها، شهرها، جاذبه‌ها…"
+msgstr "ابحث في المحافظات والمدن والمعالم…"
+
+#: includes/topersia-g-search.php
+msgid "جست‌وجو در سایت"
+msgstr "البحث في الموقع"
 
 #: includes/topersia-g-home.php
 msgid "جست‌وجوی استان"
@@ -2219,6 +2231,10 @@ msgstr "صفحات الأخبار"
 msgid "صفحه‌های سایت"
 msgstr "صفحات الموقع"
 
+#: templates/search-results.php
+msgid "صفحه‌های نتیجه"
+msgstr "صفحات النتائج"
+
 #: includes/topersia-g-zones.php
 msgid "صنایع دستی"
 msgstr "حرف يدوية"
@@ -2274,6 +2290,10 @@ msgstr "المعالم الطبيعية لهذا المنظر"
 #: includes/topersia-g-map.php
 msgid "عارضه‌های طبیعی درون این منطقه"
 msgstr "المعالم الطبيعية داخل هذه المنطقة"
+
+#: templates/search-results.php
+msgid "عبارتی برای جست‌وجو بنویسید."
+msgstr "اكتب عبارة للبحث."
 
 #: includes/topersia-g-map.php
 msgid "عربی"
@@ -3270,6 +3290,19 @@ msgstr "التنقل بين أقسام الصفحة"
 #: includes/topersia-g-zones.php
 msgid "ناوبری موبایل"
 msgstr "التنقل على الجوال"
+
+#: templates/search-results.php
+msgid "نتایج جست‌وجو"
+msgstr "نتائج البحث"
+
+#: templates/search-results.php
+#, php-format
+msgid "نتایج جست‌وجو برای «%s»"
+msgstr "نتائج البحث عن «%s»"
+
+#: templates/search-results.php
+msgid "نتیجه‌ای نیست."
+msgstr "لا توجد نتائج."
 
 #: includes/topersia-g-zones.php
 msgid "نخستین نظر را شما بنویسید"
