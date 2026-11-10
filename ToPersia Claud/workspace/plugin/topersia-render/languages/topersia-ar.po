@@ -24,6 +24,11 @@ msgstr "%1$s من %2$s"
 msgid "%1$s° شمالی، %2$s° شرقی"
 msgstr "%1$s° شمالاً، %2$s° شرقاً"
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s در ایران"
+msgstr "%s في إيران"
+
 #: includes/topersia-g-home.php
 #, php-format
 msgid "%s در یک نگاه"
@@ -1153,6 +1158,11 @@ msgstr "أبرز المعالم"
 msgid "جانشین"
 msgstr "الخلف"
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جاها و تجربه‌هایی که بهترین زمان سفرشان %s است."
+msgstr "أماكن وتجارب أفضل وقت لزيارتها هو %s."
+
 #: includes/topersia-g-news-ui.php
 msgid "جدیدترین"
 msgstr "الأحدث"
@@ -1198,10 +1208,6 @@ msgstr "ابحث في المحافظات والمدن والمعالم…"
 #: includes/topersia-g-search.php
 msgid "جست‌وجو در سایت"
 msgstr "البحث في الموقع"
-
-#: templates/hub-archive.php
-msgid "جست‌وجو در فهرست"
-msgstr "البحث في القائمة"
 
 #: includes/topersia-g-news-ui.php
 #, php-format
@@ -2004,6 +2010,10 @@ msgstr "اللغة الرسمية"
 msgid "زبان و پوشاک"
 msgstr "اللغة والأزياء"
 
+#: includes/topersia-g-home.php
+msgid "زبان و گویش"
+msgstr "اللغة واللهجات"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "زبان‌ها و گویش‌های %s"
@@ -2303,10 +2313,6 @@ msgstr "الشرق"
 #: includes/topersia-g-zones.php
 msgid "شمار استان‌ها"
 msgstr "عدد المحافظات"
-
-#: includes/topersia-g-home.php
-msgid "شماره‌های اضطراری"
-msgstr "أرقام الطوارئ"
 
 #: includes/topersia-g-zones.php
 #, php-format
@@ -2677,8 +2683,8 @@ msgstr "كل أخبار %s"
 
 #: includes/topersia-g-hub.php
 #, php-format
-msgid "فهرست کامل %s، با پالایش و جست‌وجو."
-msgstr "القائمة الكاملة لـ%s، مع التصفية والبحث."
+msgid "فهرست کامل %s."
+msgstr "القائمة الكاملة لـ%s."
 
 #: includes/topersia-g-map.php
 msgid "فوتبال"
@@ -3995,10 +4001,6 @@ msgstr "كل الأوقات"
 msgid "همۀ فرهنگ و رویداد"
 msgstr "كل الثقافة والفعاليات"
 
-#: templates/hub-archive.php
-msgid "همۀ فصل‌ها"
-msgstr "كل الفصول"
-
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "همۀ منابع (%s)"
@@ -4204,10 +4206,6 @@ msgstr "الجوازات الدبلوماسية وجوازات الخدمة"
 #: templates/news-archive.php
 msgid "پالایش اخبار"
 msgstr "تصفية الأخبار"
-
-#: templates/hub-archive.php
-msgid "پالایش فهرست"
-msgstr "تصفية القائمة"
 
 #: includes/topersia-g-news-ui.php
 msgid "پالایش‌های فعال"
@@ -4644,6 +4642,10 @@ msgstr "المنافذ الحدودية"
 #: includes/topersia-g-zones.php
 msgid "گذرگاه مرزی"
 msgstr "منفذ حدودي"
+
+#: includes/topersia-g-home.php
+msgid "گذرگاه‌های مرزی"
+msgstr "المعابر الحدودية"
 
 #: includes/topersia-g-hub.php
 #, php-format

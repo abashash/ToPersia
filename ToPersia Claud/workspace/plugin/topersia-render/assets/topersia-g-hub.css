@@ -10,3 +10,6 @@ html .tp-page.tp-hub .tp-hub-tiles .tp-tile__k{font-size:calc(.8125 * var(--tp-r
 @media (max-width:600px){
   html .tp-page.tp-hub .tp-hub-tiles .tp-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 }
+/* P5-D566 — نمای فهرستی (دکمۀ شبکه/فهرست نوار ابزار): کاشی‌ها یک‌ستونه، متن از آغاز سطر */
+html .tp-page.tp-hub .tp-hub-tiles.tp-news-grid--rows .tp-tiles{grid-template-columns:1fr}
+html .tp-page.tp-hub .tp-hub-tiles.tp-news-grid--rows .tp-tile{min-block-size:56px;text-align:start}

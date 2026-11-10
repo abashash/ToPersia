@@ -23,6 +23,11 @@ msgstr ""
 msgid "%1$s° شمالی، %2$s° شرقی"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s در ایران"
+msgstr ""
+
 #: includes/topersia-g-home.php
 #, php-format
 msgid "%s در یک نگاه"
@@ -1152,6 +1157,11 @@ msgstr ""
 msgid "جانشین"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جاها و تجربه‌هایی که بهترین زمان سفرشان %s است."
+msgstr ""
+
 #: includes/topersia-g-news-ui.php
 msgid "جدیدترین"
 msgstr ""
@@ -1196,10 +1206,6 @@ msgstr ""
 
 #: includes/topersia-g-search.php
 msgid "جست‌وجو در سایت"
-msgstr ""
-
-#: templates/hub-archive.php
-msgid "جست‌وجو در فهرست"
 msgstr ""
 
 #: includes/topersia-g-news-ui.php
@@ -2003,6 +2009,10 @@ msgstr ""
 msgid "زبان و پوشاک"
 msgstr ""
 
+#: includes/topersia-g-home.php
+msgid "زبان و گویش"
+msgstr ""
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "زبان‌ها و گویش‌های %s"
@@ -2301,10 +2311,6 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "شمار استان‌ها"
-msgstr ""
-
-#: includes/topersia-g-home.php
-msgid "شماره‌های اضطراری"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -2676,7 +2682,7 @@ msgstr ""
 
 #: includes/topersia-g-hub.php
 #, php-format
-msgid "فهرست کامل %s، با پالایش و جست‌وجو."
+msgid "فهرست کامل %s."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -3994,10 +4000,6 @@ msgstr ""
 msgid "همۀ فرهنگ و رویداد"
 msgstr ""
 
-#: templates/hub-archive.php
-msgid "همۀ فصل‌ها"
-msgstr ""
-
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "همۀ منابع (%s)"
@@ -4202,10 +4204,6 @@ msgstr ""
 
 #: templates/news-archive.php
 msgid "پالایش اخبار"
-msgstr ""
-
-#: templates/hub-archive.php
-msgid "پالایش فهرست"
 msgstr ""
 
 #: includes/topersia-g-news-ui.php
@@ -4642,6 +4640,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "گذرگاه مرزی"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "گذرگاه‌های مرزی"
 msgstr ""
 
 #: includes/topersia-g-hub.php

@@ -9,8 +9,10 @@
  *   نشانی     آرشیو نوع روی همان rewrite base خودش (`has_archive` = نامک موجود؛ نشانی صفحۀ تکی دست نمی‌خورد):
  *             /province/ · /en/province/ · /ar/province/ · /province/page/2/
  *   برچسب     /tags/{slug}/ — حالت تاکسونومی همین هاب (tpc_tag، P5-D555)؛ همۀ نوع‌ها، تراشه = نوع محتوا
- *   اجزا      همان صفحۀ اخبار: سربرگ تمام‌عرض وسط‌چین با %s، تراشه‌های نخستین فاست واقعی نوع، combobox مکان،
- *             فصل (فقط اگر best_season)، ترتیب، جست‌وجو، کاشی، صفحه‌بندی، بی‌رفرش (topersia-g-news.js)
+ *   فصل       /season/{spring|summer|autumn|winter}/ — «حالت فصل» همین هاب (P5-D564): همۀ نوع‌های دارای best_season که آن فصل
+ *             (یا «تمام سال») را دارند؛ تراشه = نوع محتوا. پایه و نامک از topersia_g_season_slugs() (ترجمه‌پذیر با صافی)
+ *   اجزا      سربرگ تمام‌عرض وسط‌چین با %s؛ نوار ابزار فقط تراشه‌های یک‌خطی + مرتب‌سازی + «نمایش» + شبکه/فهرست —
+ *             بی ردیف فیلتر (P5-D566)؛ کاشی، صفحه‌بندی، بی‌رفرش (topersia-g-news.js)
  *   سئو       زیر ۳ مورد یا پالایش‌شده ← noindex و canonical بی‌پالایش؛ CollectionPage + ItemList + BreadcrumbList (topersia-schema)
  *   داده      فقط منتشرشده، زبان جاری، غیرنمونه (`topersia_g_published()` · `topersia_g_sample_mq()`)؛ نمایشی فقط در حالت پیش‌نمایش
  *
@@ -145,10 +147,57 @@ if ( ! function_exists( 'topersia_g_hub_registry' ) ) {
 	}
 }
 
+/**
+ * پایه و نامک صفحه‌های فصل به زبان صفحه — کلید «base» و چهار کلید فصل. پیش‌فرض همه‌جا لاتین؛
+ * ترجمه با صافی `topersia_g_season_slugs` (زبان ← آرایه) بی دست‌زدن به قاعدۀ بازنویسی (قاعده هر نامک را می‌پذیرد).
+ *
+ * @return array زبان ← [ base, spring, summer, autumn, winter ]
+ */
+if ( ! function_exists( 'topersia_g_season_slugs' ) ) {
+	function topersia_g_season_slugs() {
+		$one = array( 'base' => 'season', 'spring' => 'spring', 'summer' => 'summer', 'autumn' => 'autumn', 'winter' => 'winter' );
+		$all = array( 'fa' => $one, 'en' => $one, 'ar' => $one );
+		return function_exists( 'apply_filters' ) ? (array) apply_filters( 'topersia_g_season_slugs', $all ) : $all;
+	}
+}
+
+/** نشانی صفحۀ یک فصل به زبان جاری، صفحۀ N. */
+if ( ! function_exists( 'topersia_g_season_url' ) ) {
+	function topersia_g_season_url( $season, $page = 1 ) {
+		$all  = topersia_g_season_slugs();
+		$lang = function_exists( 'topersia_g_page_lang' ) ? (string) topersia_g_page_lang() : 'fa';
+		$map  = isset( $all[ $lang ] ) ? $all[ $lang ] : reset( $all );
+		if ( empty( $map[ $season ] ) || 'base' === $season ) {
+			return '';
+		}
+		return home_url( user_trailingslashit( $map['base'] . '/' . $map[ $season ] . ( $page > 1 ? '/page/' . (int) $page : '' ) ) );
+	}
+}
+
+/** فصل هاب جاری («حالت فصل») یا تهی — نامک نشانی به کلید فصل، در هر زبان. */
+if ( ! function_exists( 'topersia_g_hub_season' ) ) {
+	function topersia_g_hub_season() {
+		$slug = function_exists( 'get_query_var' ) && is_scalar( get_query_var( 'tp_season' ) ) ? sanitize_title( (string) get_query_var( 'tp_season' ) ) : '';
+		if ( '' === $slug || ( function_exists( 'is_feed' ) && is_feed() ) ) {
+			return '';
+		}
+		foreach ( topersia_g_season_slugs() as $map ) {
+			$key = array_search( $slug, (array) $map, true );
+			if ( false !== $key && 'base' !== $key ) {
+				return (string) $key;
+			}
+		}
+		return '';
+	}
+}
+
 /** نوع هاب جاری (آرشیو نوع) یا تهی. */
 if ( ! function_exists( 'topersia_g_hub_type' ) ) {
 	function topersia_g_hub_type() {
 		if ( ! function_exists( 'is_post_type_archive' ) || is_feed() ) {
+			return '';
+		}
+		if ( '' !== topersia_g_hub_season() ) {
 			return '';
 		}
 		foreach ( array_keys( topersia_g_hub_registry() ) as $type ) {
@@ -171,10 +220,10 @@ if ( ! function_exists( 'topersia_g_hub_term' ) ) {
 	}
 }
 
-/** آیا این درخواست هاب است (نوع یا برچسب). */
+/** آیا این درخواست هاب است (نوع، برچسب یا فصل). */
 if ( ! function_exists( 'topersia_g_hub_is' ) ) {
 	function topersia_g_hub_is() {
-		return '' !== topersia_g_hub_type() || null !== topersia_g_hub_term();
+		return '' !== topersia_g_hub_type() || null !== topersia_g_hub_term() || '' !== topersia_g_hub_season();
 	}
 }
 
@@ -182,7 +231,15 @@ if ( ! function_exists( 'topersia_g_hub_is' ) ) {
 if ( ! function_exists( 'topersia_g_hub_types' ) ) {
 	function topersia_g_hub_types() {
 		$type = topersia_g_hub_type();
-		return '' !== $type ? array( $type ) : array_keys( topersia_g_hub_registry() );
+		if ( '' !== $type ) {
+			return array( $type );
+		}
+		$reg = topersia_g_hub_registry();
+		/* حالت فصل: فقط نوع‌های دارای فیلد «بهترین فصل سفر» */
+		if ( '' !== topersia_g_hub_season() ) {
+			return array_keys( array_filter( $reg, function ( $row ) { return '' !== $row['season']; } ) );
+		}
+		return array_keys( $reg );
 	}
 }
 
@@ -209,7 +266,8 @@ if ( ! function_exists( 'topersia_g_hub_pool' ) ) {
 		static $memo = array();
 
 		$term = topersia_g_hub_term();
-		$key  = $term ? 't' . $term->term_id : implode( ',', topersia_g_hub_types() );
+		$seas = topersia_g_hub_season();
+		$key  = $term ? 't' . $term->term_id : ( '' !== $seas ? 's' . $seas : implode( ',', topersia_g_hub_types() ) );
 
 		if ( isset( $memo[ $key ] ) ) {
 			return $memo[ $key ];
@@ -232,6 +290,12 @@ if ( ! function_exists( 'topersia_g_hub_pool' ) ) {
 		}
 
 		$memo[ $key ] = topersia_g_published( array_map( 'absint', (array) get_posts( $args ) ) );
+
+		if ( '' !== $seas ) {
+			$memo[ $key ] = array_values( array_filter( $memo[ $key ], function ( $id ) use ( $seas ) {
+				return topersia_g_hub_in_season( $id, $seas );
+			} ) );
+		}
 
 		return $memo[ $key ];
 	}
@@ -320,6 +384,10 @@ if ( ! function_exists( 'topersia_g_hub_args' ) ) {
 		$q      = trim( (string) preg_replace( '/\s+/u', ' ', sanitize_text_field( (string) ( is_scalar( get_query_var( 'tp_q' ) ) ? get_query_var( 'tp_q' ) : '' ) ) ) );
 		$sort   = is_scalar( get_query_var( 'tp_sort' ) ) ? (string) get_query_var( 'tp_sort' ) : '';
 
+		/*
+		 * P5-D566: هاب ردیف فیلتر ندارد — مکان، فصل و جست‌وجو دیگر از رابط نمی‌آیند. پارامترشان در نشانی هنوز پذیرفته می‌شود
+		 * (پیوندهای کهنه نشکنند) و صفحه را noindex می‌کند؛ فصل جای خودش را دارد: /season/{فصل}/.
+		 */
 		return array(
 			'tp_place' => $row['loc'] && function_exists( 'topersia_g_news_filter_place' ) ? topersia_g_news_filter_place() : 0,
 			'tp_facet' => isset( topersia_g_hub_facet_options()[ $facet ] ) ? $facet : '',
@@ -364,6 +432,10 @@ if ( ! function_exists( 'topersia_g_hub_url' ) ) {
 	function topersia_g_hub_url( $page = 1 ) {
 		$term = topersia_g_hub_term();
 		$type = topersia_g_hub_type();
+		$seas = topersia_g_hub_season();
+		if ( '' !== $seas ) {
+			return topersia_g_season_url( $seas, $page );
+		}
 		$url  = $term ? get_term_link( $term ) : ( '' !== $type ? (string) get_post_type_archive_link( $type ) : '' );
 		$url  = is_wp_error( $url ) ? '' : (string) $url;
 		return ( $page > 1 && '' !== $url ) ? trailingslashit( $url ) . 'page/' . (int) $page . '/' : $url;
@@ -479,6 +551,11 @@ if ( ! function_exists( 'topersia_g_hub_title' ) ) {
 		if ( $term ) {
 			return (string) $term->name;
 		}
+		$seas = topersia_g_hub_season();
+		if ( '' !== $seas ) {
+			/* translators: %s: نام فصل */
+			return sprintf( __( '%s در ایران', 'topersia' ), (string) topersia_g_glossary_label( '34', $seas ) );
+		}
 		$type   = topersia_g_hub_type();
 		$titles = topersia_g_hub_titles();
 		$kinds  = topersia_g_kind_labels();
@@ -494,8 +571,13 @@ if ( ! function_exists( 'topersia_g_hub_lead' ) ) {
 			/* translators: %s: نام برچسب */
 			return sprintf( __( 'همۀ مکان‌ها و مطالب «%s» در یک جا.', 'topersia' ), topersia_g_hub_title() );
 		}
+		$seas = topersia_g_hub_season();
+		if ( '' !== $seas ) {
+			/* translators: %s: نام فصل */
+			return sprintf( __( 'جاها و تجربه‌هایی که بهترین زمان سفرشان %s است.', 'topersia' ), (string) topersia_g_glossary_label( '34', $seas ) );
+		}
 		/* translators: %s: عنوان هاب */
-		return sprintf( __( 'فهرست کامل %s، با پالایش و جست‌وجو.', 'topersia' ), topersia_g_hub_title( $place_id ) );
+		return sprintf( __( 'فهرست کامل %s.', 'topersia' ), topersia_g_hub_title( $place_id ) );
 	}
 }
 
@@ -581,7 +663,7 @@ if ( function_exists( 'add_action' ) ) {
 	}, 20, 2 );
 
 	add_filter( 'query_vars', function ( $vars ) {
-		return array_merge( $vars, array( 'tp_facet', 'season' ) );
+		return array_merge( $vars, array( 'tp_facet', 'season', 'tp_season' ) );
 	} );
 
 	/* یک‌بار بازسازی قاعده‌ها، فقط اگر امضای نامک‌ها عوض شود. */
@@ -594,7 +676,16 @@ if ( function_exists( 'add_action' ) ) {
 			}
 		}
 		$sig[] = taxonomy_exists( 'tpc_tag' ) ? 'tpc_tag' : '';
-		$sig   = md5( implode( '|', $sig ) . '|hub-v1' );
+		/* صفحه‌های فصل (P5-D564): قاعده هر نامک را می‌پذیرد؛ نامک ناشناس ← ۴۰۴ در pre_get_posts */
+		$bases = array();
+		foreach ( topersia_g_season_slugs() as $map ) {
+			$bases[] = preg_quote( (string) $map['base'], '#' );
+		}
+		$bases = implode( '|', array_unique( $bases ) );
+		add_rewrite_rule( '^(?:' . $bases . ')/([^/]+)/page/([0-9]+)/?$', 'index.php?tp_season=$matches[1]&paged=$matches[2]', 'top' );
+		add_rewrite_rule( '^(?:' . $bases . ')/([^/]+)/?$', 'index.php?tp_season=$matches[1]', 'top' );
+
+		$sig   = md5( implode( '|', $sig ) . '|' . $bases . '|hub-v2' );
 		if ( get_option( 'topersia_hub_rules' ) !== $sig ) {
 			flush_rewrite_rules( false );
 			update_option( 'topersia_hub_rules', $sig, false );
@@ -607,10 +698,21 @@ if ( function_exists( 'add_action' ) ) {
 			return;
 		}
 		$types = array_keys( topersia_g_hub_registry() );
-		if ( ! $q->is_post_type_archive( $types ) && ! $q->is_tax( 'tpc_tag' ) ) {
+		$raw   = (string) $q->get( 'tp_season' );
+		$seas  = topersia_g_hub_season();
+		if ( '' !== $raw && '' === $seas ) {
+			$q->set( 'post__in', array( 0 ) );   /* نامک فصل ناشناس ← ۴۰۴ در template_redirect پایین */
+			return;
+		}
+		if ( '' === $seas && ! $q->is_post_type_archive( $types ) && ! $q->is_tax( 'tpc_tag' ) ) {
 			return;
 		}
 		$ids = topersia_g_hub_ids();
+		if ( '' !== $seas ) {
+			$q->set( 'post_type', topersia_g_hub_types() );
+			$q->is_home    = false;
+			$q->is_archive = true;
+		}
 		if ( $q->is_tax( 'tpc_tag' ) ) {
 			$q->set( 'post_type', $types );
 		}
@@ -622,12 +724,23 @@ if ( function_exists( 'add_action' ) ) {
 		$q->set( 's', '' );
 	}, 20 );
 
+	/* نامک فصل ناشناس: کوئری خانه خودش ۴۰۴ نمی‌شود — این‌جا صریح. */
+	add_action( 'template_redirect', function () {
+		$raw = is_scalar( get_query_var( 'tp_season' ) ) ? (string) get_query_var( 'tp_season' ) : '';
+		if ( '' !== $raw && '' === topersia_g_hub_season() ) {
+			global $wp_query;
+			$wp_query->set_404();
+			status_header( 404 );
+			nocache_headers();
+		}
+	}, 1 );
+
 	/* هاب خالی (هیچ مورد) ← ۲۰۰ خالی‌امن، نه ۴۰۴؛ صفحۀ بیرون از بازه ← ۴۰۴ از خود وردپرس. */
 	add_filter( 'pre_handle_404', function ( $pre, $query ) {
 		if ( $pre || ! $query->is_main_query() || $query->get( 'paged' ) > 1 ) {
 			return $pre;
 		}
-		if ( $query->is_post_type_archive( array_keys( topersia_g_hub_registry() ) ) || $query->is_tax( 'tpc_tag' ) ) {
+		if ( $query->is_post_type_archive( array_keys( topersia_g_hub_registry() ) ) || $query->is_tax( 'tpc_tag' ) || '' !== topersia_g_hub_season() ) {
 			status_header( 200 );
 			return true;
 		}
@@ -649,9 +762,6 @@ if ( function_exists( 'add_action' ) ) {
 		wp_enqueue_style( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-news.css' ) );
 		wp_enqueue_style( 'topersia-g-hub', topersia_render_url() . 'assets/topersia-g-hub.css', array( 'topersia-g-news' ), topersia_render_asset_version( 'assets/topersia-g-hub.css' ) );
 		wp_enqueue_script( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.js', array(), topersia_render_asset_version( 'assets/topersia-g-news.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
-		if ( topersia_g_hub_row()['loc'] ) {
-			wp_enqueue_script( 'topersia-g-loc', topersia_render_url() . 'assets/topersia-g-loc.js', array(), topersia_render_asset_version( 'assets/topersia-g-loc.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
-		}
 	}, 31 );
 
 	add_filter( 'wp_robots', function ( $r ) {

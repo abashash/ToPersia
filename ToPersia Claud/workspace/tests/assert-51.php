@@ -337,16 +337,16 @@ $w51_hsch = function ( $s ) {
 tp441_mut( 'هاب: اسکیما فقط نمایه‌پذیر و بی پست نمایشی (P5-D548) — جهش: بی demo_strip', $w51_hsch, $w51_schema,
 	str_replace( "topersia_g_demo_strip( \$ids ) : \$ids;   /* P5-D548 */\n\t\t\t\$per", "\$ids : \$ids;\n\t\t\t\$per", $w51_schema ) );
 
-/* قالب: همان اجزای /news/ — تراشۀ فاست، ترتیب، فرم، combobox فقط با loc، ردیف فعال زیر فرم، صفحه‌بندی */
+/* قالب: همان اجزای /news/ — تراشۀ فاست، نوار ابزار (مرتب‌سازی · نمایش · شبکه/فهرست)، ردیف فعال زیر نوار، صفحه‌بندی؛ بی ردیف فیلتر (P5-D566 — assert-52) */
 $w51_htp = function ( $s ) {
 	return false !== strpos( $s, 'data-tp-news-chipvar="tp_facet"' ) && false !== strpos( $s, 'topersia_g_news_hero(' )
-		&& false !== strpos( $s, 'topersia_g_news_chips(' ) && false !== strpos( $s, "if ( \$tp_row['loc'] ) {" )
+		&& false !== strpos( $s, 'topersia_g_news_chips(' ) && false !== strpos( $s, 'topersia_g_news_view_toggle()' )
 		&& strpos( $s, '</form>' ) < strpos( $s, 'topersia_g_active_filters(' )
 		&& false !== strpos( $s, "topersia_g_news_pages( \$tp_pages, \$tp_paged, 'topersia_g_hub_link'" )
 		&& false !== strpos( $s, 'topersia_g_sample_hidden( $id )' );
 };
-tp441_mut( 'هاب: قالب با اجزای /news/ و ردیف فعال زیر فرم، نمایشی پنهان — جهش: combobox همیشه', $w51_htp, $w51_htpl,
-	str_replace( "if ( \$tp_row['loc'] ) {", 'if ( true ) {', $w51_htpl ) );
+tp441_mut( 'هاب: قالب با اجزای /news/ و ردیف فعال زیر نوار، نمایشی پنهان — جهش: نمایشی پنهان نشود', $w51_htp, $w51_htpl,
+	str_replace( 'topersia_g_sample_hidden( $id )', 'false', $w51_htpl ) );
 
 /* JS: نام متغیر تراشه از ریشه، نه tp_topic ثابت */
 $w51_cv = function ( $s ) { return false !== strpos( $s, "root.getAttribute( 'data-tp-news-chipvar' ) || 'tp_topic'" ); };
@@ -389,19 +389,19 @@ t( 'P5-D555: جهش — پاک‌ساز intval می‌افتد', ! $w51_tax( str
 t( 'P5-D555: سه متای واژه ثبت', false !== strpos( $w51_tagc, "'tp_is_experience'" ) && false !== strpos( $w51_tagc, "'tp_icon'" ) && false !== strpos( $w51_tagc, "'tp_sort'" ) && false !== strpos( $w51_tagc, "wp_verify_nonce(" ) );
 
 $w51_texp = function ( $s ) {
-	return false !== strpos( $s, "define( 'TOPERSIA_TAG_MIN_ITEMS', 2 )" ) && false !== strpos( $s, 'if ( $n < TOPERSIA_TAG_MIN_ITEMS ) {' )
+	return false !== strpos( $s, "define( 'TOPERSIA_TAG_MIN_ITEMS', 1 )" )   /* آستانه یک مورد — P5-D563 */ && false !== strpos( $s, 'if ( $n < TOPERSIA_TAG_MIN_ITEMS ) {' )
 		&& false !== strpos( $s, 'topersia_g_published( array_map(' ) && false !== strpos( $s, '! topersia_g_sample_hidden( $id )' );
 };
-tp441_mut( 'P5-D555: تجربه فقط با دست‌کم دو مورد دیدنی (منتشرشده، نمونۀ پنهان نه) — جهش: بی دروازۀ نمونه', $w51_texp, $w51_tagr,
+tp441_mut( 'P5-D555 · P5-D563: تجربه فقط با دست‌کم یک مورد دیدنی (منتشرشده، نمونۀ پنهان نه) — جهش: بی دروازۀ نمونه', $w51_texp, $w51_tagr,
 	str_replace( '! topersia_g_sample_hidden( $id )', 'true', $w51_tagr ) );
 t( 'P5-D555: بلوک «برچسب‌ها» پایان کارت منابع، بی برچسب هیچ', false !== strpos( $w51_zphp = $w51_read( 'plugin/topersia-render/includes/topersia-g-zones.php' ), '$out .= topersia_g_tags_html( $pid );' )
 	&& false !== strpos( $w51_tagr, "if ( is_wp_error( \$terms ) || ! \$terms ) {\n\t\t\treturn '';" ) );
 if ( function_exists( 'topersia_g_tags_html' ) ) {
 	t( 'P5-D555 رفتار: بی وردپرس/طبقه‌بندی ← تهی', '' === topersia_g_tags_html( 1 ) );
 }
-t( 'P5-D555: صفحۀ اول «کارها و تجربیات» از topersia_g_tag_experiences، تهی ← بخش نه', false !== strpos( $w51_home, "topersia_g_tag_experiences() : array() as \$e" ) && false !== strpos( $w51_home, "'' !== \$exp_html ?" ) );
-t( 'P5-D553: آیکون راهنما به هاب نوع، بی هاب ← پست', false !== strpos( $w51_home, "'' !== \$hub ? \$hub : get_permalink( \$one )" ) );
-t( 'P5-D551: شیشه روی پنل راهنما و تجربیات، ۳بعدی فقط بی کاهش حرکت', false !== strpos( $w51_home, '<nav class="tp-home-guide tp-home-glass"' ) && (bool) preg_match( '/prefers-reduced-motion:no-preference\)\{\s*html \.tp-page\.tp-home \.tp-home-guide\{perspective/', $w51_read( 'plugin/topersia-render/assets/topersia-g-home.css' ) ) );
+t( 'P5-D555: صفحۀ اول «کارها و تجربیات» از topersia_g_tag_experiences، تهی ← بخش نه', false !== strpos( $w51_home, "topersia_g_tag_experiences() : array(), 0, TOPERSIA_HOME_EXP_MAX ) as \$e" ) && false !== strpos( $w51_home, "'' !== \$exp_html ?" ) );
+t( 'P5-D553 · P5-D565: آیکون راهنما فقط به هاب نوع', false !== strpos( $w51_home, "\$guide[] = array( \$g[0], \$g[1], \$hub );" ) && false === strpos( $w51_home, 'get_permalink( $one )' ) );
+t( 'P5-D551 · P5-D570: شیشه روی پنل راهنما و تجربیات، بی ۳بعدی', false !== strpos( $w51_home, '<nav class="tp-home-guide tp-home-guide--nine tp-home-glass"' ) && false !== strpos( $w51_home, '<nav class="tp-home-guide tp-home-exp tp-home-glass"' ) && false === strpos( $w51_read( 'plugin/topersia-render/assets/topersia-g-home.css' ), 'perspective' ) );
 t( 'P5-D555: CSS برچسب فقط توکن', 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $w51_tcss ) && false === strpos( $w51_tcss, 'letter-spacing' ) );
 
 /* ── الحاقیۀ پ: ردیف سه‌ستونی صفحۀ اول (P5-D560) ─────────────────── */
@@ -414,10 +414,10 @@ t( 'P5-D560: render پروندۀ ردیف را بار می‌کند و صفحۀ 
 $w51_cols = function ( $s ) {
 	$e = strpos( $s, 'topersia_g_home_events_col(), topersia_g_home_trips_col(), topersia_g_home_seasons_col()' );   /* راست‌به‌چپ: رویداد | سفر | فصل */
 	return false !== $e && false !== strpos( $s, "if ( ! \$cols ) {\n\t\t\treturn '';" )                                  /* هر سه خالی ← ردیف نه */
-		&& 3 === substr_count( $s, "array( \$all, __( 'مشاهدۀ همه', 'topersia' ) )" )                                   /* هر پنل «مشاهدۀ همه» */
-		&& 3 === substr_count( $s, ", 'tp-home-col' );" );
+		&& 2 === substr_count( $s, "array( \$all, __( 'مشاهدۀ همه', 'topersia' ) )" )                                   /* دو پنل فهرست «مشاهدۀ همه»؛ کارت فصل خودش پیوند است (P5-D564) */
+		&& 3 === substr_count( $s, "'tp-home-col' );" );
 };
-tp441_mut( 'P5-D560: سه ستون رویداد | سفر | فصل، هر کدام پنل با «مشاهدۀ همه»، هر سه خالی ← ردیف پنهان — جهش: ترتیب فصل نخست', $w51_cols, $w51_row,
+tp441_mut( 'P5-D560: سه ستون رویداد | سفر | فصل، هر کدام پنل، هر سه خالی ← ردیف پنهان — جهش: ترتیب فصل نخست', $w51_cols, $w51_row,
 	str_replace( 'topersia_g_home_events_col(), topersia_g_home_trips_col(), topersia_g_home_seasons_col()', 'topersia_g_home_seasons_col(), topersia_g_home_events_col(), topersia_g_home_trips_col()', $w51_row ) );
 t( 'P5-D560: جهش — ردیف با یک ستون خالی پنهان می‌افتد', ! $w51_cols( str_replace( 'if ( ! $cols ) {', 'if ( count( $cols ) < 3 ) {', $w51_row ) ) );
 
@@ -425,24 +425,24 @@ $w51_ev = function ( $s ) {
 	return false !== strpos( $s, "if ( '' === \$start || ( '' !== \$end ? \$end : \$start ) < \$today ) {" )           /* بی تاریخ آغاز یا گذشته ← نه */
 		&& false !== strpos( $s, 'return strcmp( $a[0], $b[0] );' )                                                   /* نزدیک‌ترین نخست */
 		&& false !== strpos( $s, 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )' )
-		&& false !== strpos( $s, "define( 'TOPERSIA_HOME_ROW_ITEMS', 4 )" )
+		&& false !== strpos( $s, "define( 'TOPERSIA_HOME_ROW_ITEMS', 3 )" )
 		&& false !== strpos( $s, 'topersia_g_home_month_range( $d[0], $d[1] )' );
 };
-tp441_mut( 'P5-D560 رویداد: فقط event_start_date، گذشته نه، نزدیک‌ترین نخست، ۴ ردیف، زیرعنوان بازۀ ماه — جهش: رویداد گذشته هم', $w51_ev, $w51_row,
+tp441_mut( 'P5-D560 رویداد: فقط event_start_date، گذشته نه، نزدیک‌ترین نخست، ۳ ردیف (P5-D562)، زیرعنوان بازۀ ماه — جهش: رویداد گذشته هم', $w51_ev, $w51_row,
 	str_replace( " || ( '' !== \$end ? \$end : \$start ) < \$today", '', $w51_row ) );
 t( 'P5-D560 سفر: tp_route با «برنامۀ سفر پیشنهادی»، نشان نمونه در هر ردیف', false !== strpos( $w51_row, "topersia_g_home_real( array( 'tp_route' ), TOPERSIA_HOME_ROW_ITEMS )" )
 	&& false !== strpos( $w51_row, "__( 'برنامۀ سفر پیشنهادی', 'topersia' )" ) && false !== strpos( $w51_row, 'topersia_g_demo_badge( $id )' ) );
 
 $w51_sea = function ( $s ) {
-	return false !== strpos( $s, "foreach ( array( 'winter', 'autumn', 'summer', 'spring' ) as \$s ) {" )               /* از آغاز سطر: زمستان، پاییز، تابستان، بهار */
+	return false !== strpos( $s, "return array( 'spring', 'summer', 'autumn', 'winter' );" ) && false !== strpos( $s, 'foreach ( topersia_g_season_keys() as $s ) {' )   /* از آغاز سطر: بهار، تابستان، پاییز، زمستان — P5-D564 */
 		&& false !== strpos( $s, "if ( \$live < TOPERSIA_HOME_SEASONS_MIN ) {" ) && false !== strpos( $s, "define( 'TOPERSIA_HOME_SEASONS_MIN', 2 )" )
-		&& false !== strpos( $s, "topersia_g_hub_link_for( (string) key( \$st[1] ), array( 'season' => \$s ) )" )        /* هاب نوع چیره با ?season= */
+		&& false !== strpos( $s, "topersia_g_season_url( \$s ) : '';" ) && false === strpos( $s, "array( 'season' => \$s )" )   /* فقط صفحۀ همان فصل — P5-D564 */
 		&& false !== strpos( $s, 'tp-is-empty" aria-disabled="true">' ) && false === strpos( $s, 'tp-is-empty" href' )      /* فصل خالی بی پیوند */
 		&& false !== strpos( $s, "if ( ! topersia_g_hub_in_season( \$id, \$s ) ) {" )                                       /* همان قاعدۀ هاب (تمام سال در هر فصل) */
-		&& false !== strpos( $s, '$att  = $st[2] ? topersia_g_card_image( $st[2] ) : 0;' );                               /* عکس نخستین مورد، وگرنه گرادیان */
+		&& false !== strpos( $s, "topersia_g_season_art( \$s )" );                                                          /* تصویر SVG خود افزونه */
 };
-tp441_mut( 'P5-D560 فصل: ترتیب زمستان→بهار، هاب نوع چیره با ?season=، خالی کم‌رنگ و بی پیوند، کمتر از ۲ فصل ← ستون نه — جهش: ترتیب بهار نخست', $w51_sea, $w51_row,
-	str_replace( "array( 'winter', 'autumn', 'summer', 'spring' ) as \$s ) {", "array( 'spring', 'summer', 'autumn', 'winter' ) as \$s ) {", $w51_row ) );
+tp441_mut( 'P5-D560 · P5-D564 فصل: ترتیب بهار→زمستان، پیوند فقط /season/، خالی کم‌رنگ و بی پیوند، کمتر از ۲ فصل ← ستون نه — جهش: ترتیب زمستان نخست', $w51_sea, $w51_row,
+	str_replace( "return array( 'spring', 'summer', 'autumn', 'winter' );", "return array( 'winter', 'autumn', 'summer', 'spring' );", $w51_row ) );
 t( 'P5-D560 فصل: جهش — حد ستون برداشته می‌افتد', ! $w51_sea( str_replace( 'if ( $live < TOPERSIA_HOME_SEASONS_MIN ) {', 'if ( false ) {', $w51_row ) ) );
 
 $w51_rcss = function ( $c ) {
@@ -450,12 +450,12 @@ $w51_rcss = function ( $c ) {
 	$b = strpos( $c, '/* ۷ راهنمای سفر' );
 	$blk = ( false !== $a && false !== $b ) ? substr( $c, $a, $b - $a ) : '';
 	return '' !== $blk && 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $blk ) && false === strpos( $blk, 'letter-spacing' )
-		&& 4 === substr_count( $blk, '__ph{background:linear-gradient(180deg,var(--tp-s-' )                             /* گرادیان هر فصل از توکن */
+		&& 4 === preg_match_all( '/\.tp-home-season--(spring|summer|autumn|winter)\{--tp-ssn:var\(--tp-s-\1\);--tp-ssn-soft:var\(--tp-s-\1-soft\)\}/', $c )   /* رنگ تصویر هر فصل از توکن همان فصل */
 		&& false !== strpos( $blk, '.tp-home-season__cap{' ) && false !== strpos( $blk, 'background:var(--tp-bg);color:var(--tp-text-strong)' )   /* نام روی نوار سطح، نه روی عکس */
 		&& false !== strpos( $blk, '.tp-home-season.tp-is-empty{opacity:' )
 		&& false !== strpos( $c, 'grid-template-columns:repeat(4,minmax(0,1fr))' );
 };
-tp441_mut( 'P5-D560 CSS: فقط توکن، گرادیان فصل از --tp-s-*، نام روی نوار سطح، خالی کم‌رنگ — جهش: رنگ خام', $w51_rcss, $w51_hcs,
+tp441_mut( 'P5-D560 CSS: فقط توکن، رنگ تصویر فصل از --tp-s-*، نام روی نوار سطح، خالی کم‌رنگ — جهش: رنگ خام', $w51_rcss, $w51_hcs,
 	str_replace( '.tp-home-season.tp-is-empty{opacity:.55;', '.tp-home-season.tp-is-empty{opacity:.55;color:#777;', $w51_hcs ) );
 
 if ( function_exists( 'topersia_g_jalali' ) && function_exists( 'topersia_g_greg_months' ) ) {
@@ -472,15 +472,14 @@ $w51_zjs2 = $w51_read( 'plugin/topersia-render/assets/topersia-g-zones.js' );
 $w51_col = function ( $s ) {
 	return false !== strpos( $s, "topersia_g_home_real( array_keys( function_exists( 'topersia_g_hub_registry' ) ? topersia_g_hub_registry() : array() ), -1, false )" )   /* فقط واقعی، فقط نوع با صفحه */
 		&& false !== strpos( $s, "foreach ( array( 'hero', 'gallery' ) as \$pass ) {" ) && false !== strpos( $s, 'topersia_g_gallery_own_ids( $id )' )             /* hero سپس گالری */
-		&& false !== strpos( $s, "\$key[ \$att ]     = array( count( \$ids ) > 1 ? 1 : 0, \$turn[ \$ids[0] ], count( \$key ) );" )                               /* تک‌موجودیت پیش از مشترک، دورگردان */
 		&& false !== strpos( $s, '$keep  = $demo ? count( $picks ) : min( 3, intdiv( count( $picks ), $per ) ) * $per;' )                                       /* <۴ ← ۰ · ۴–۷ ← ۱ · ۸–۱۱ ← ۲ · ۱۲+ ← ۳ */
-		&& false !== strpos( $s, "\$per   = 4;" ) && false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' )
-		&& false !== strpos( $s, "topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), \$photos, \$slides ) . \$dots" );
+		&& false !== strpos( $s, "\$per   = 4;" ) && false !== strpos( $s, '$picks = topersia_g_home_photo_picks( $hero_att );' )
+		&& false !== strpos( $s, "topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), \$photos, \$slides ) : ''" );   /* بی نقطه — P5-D569 */
 };
-tp441_mut( 'P5-D561: عکس یکتای واقعی (hero سپس گالری، تک‌موجودیت پیش از مشترک)، اسلاید = کف(n/۴) تا ۳، نوار و فلش و نقطه — جهش: نمونه هم', $w51_col, $w51_home,
+tp441_mut( 'P5-D561 · P5-D569: عکس یکتای واقعی (hero سپس گالری)، اسلاید = کف(n/۴) تا ۳، نوار و فلش، بی نقطه — جهش: نمونه هم', $w51_col, $w51_home,
 	str_replace( 'topersia_g_hub_registry() : array() ), -1, false )', 'topersia_g_hub_registry() : array() ), -1, true )', $w51_home ) );
 t( 'P5-D561: جهش — اسلاید بی کف (۵ عکس، دو اسلاید ناقص) می‌افتد', ! $w51_col( str_replace( 'min( 3, intdiv( count( $picks ), $per ) ) * $per', 'count( $picks )', $w51_home ) ) );
-t( 'P5-D561: جهش — مشترک پیش از تک‌موجودیت می‌افتد', ! $w51_col( str_replace( 'count( $ids ) > 1 ? 1 : 0', 'count( $ids ) > 1 ? 0 : 1', $w51_home ) ) );
+t( 'P5-D569: جهش — نقطه‌ها برگردند می‌افتد', ! $w51_col( str_replace( '$photos, $slides ) : \'\'', '$photos, $slides ) . $dots : \'\'', $w51_home ) ) );
 
 $w51_ph = function ( $s ) {
 	return false !== strpos( $s, "while ( \$demo && count( \$cells ) < 3 * \$per ) {" )                                         /* جای‌نگهدار فقط در پیش‌نمایش */
@@ -497,26 +496,19 @@ $w51_alt = function ( $s ) {
 tp441_mut( 'P5-D561: alt واقعی؛ در fa/ar alt تماماً لاتین ← نام موجودیت — جهش: بی شرط لاتین', $w51_alt, $w51_home,
 	str_replace( "if ( '' === \$alt || \$latin || ", "if ( '' === \$alt || ", $w51_home ) );
 
+/* نقطه‌های کلاژ در دستۀ 52 برداشته شد (P5-D569) — نبودشان در render، CSS و JS */
 $w51_dots = function ( $j ) {
-	$a = strpos( $j, 'نقطه‌های اسلاید — P5-D561' );
-	$b = false !== $a ? strpos( $j, '} )();', $a ) : false;
-	$blk = false !== $b ? substr( $j, $a, $b - $a ) : '';
-	return '' !== $blk && false !== strpos( $blk, "'.tp-home-dots[data-tp-dots]'" ) && false === strpos( $blk, 'data-target' )   /* data-target را دستگیرۀ فلش می‌گیرد */
-		&& false !== strpos( $blk, "b.setAttribute( 'aria-current', k === i ? 'true' : 'false' );" )
-		&& false !== strpos( $blk, 'Math.abs( el.scrollLeft )' ) && false !== strpos( $blk, "behavior: calm ? 'auto' : 'smooth'" )
-		&& false !== strpos( $blk, 'nav.hidden = false;' );
+	return false === strpos( $j, 'tp-home-dots' ) && false === strpos( $j, 'data-tp-dots' );
 };
-tp441_mut( 'P5-D561 JS: نقطه‌ها در zones، data-tp-dots (نه data-target)، aria-current از اسکرول، کاهش حرکت، بی JS پنهان — جهش: data-target', $w51_dots, $w51_zjs2,
-	str_replace( "'.tp-home-dots[data-tp-dots]'", "'.tp-home-dots[data-target]'", $w51_zjs2 ) );
-t( 'P5-D561: نقطه فقط با دو اسلاید به بالا، بی JS hidden، data-tp-dots', false !== strpos( $w51_home, '$dots = $slides > 1 ? \'<div class="tp-home-dots" data-tp-dots="tp-home-photoslide"' ) && false !== strpos( $w51_home, '. $dots . \'</div>\' : \'\';' ) );
+tp441_mut( 'P5-D569: نقطه‌های کلاژ در zones.js نیست — جهش: نقطه برگردد', $w51_dots, $w51_zjs2, $w51_zjs2 . "\n/* '.tp-home-dots[data-tp-dots]' */" );
+t( 'P5-D569: نقطه در render و CSS هم نیست', $w51_dots( $w51_home ) && $w51_dots( $w51_hcs ) );
 
 $w51_ccss = function ( $c ) {
 	$a = strpos( $c, '/* ۹ب کلاژ (P5-D561)' );
 	$blk = false !== $a ? substr( $c, $a, (int) strpos( $c, "\n/*", $a + 5 ) - $a ) : '';
 	return '' !== $blk && 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $blk )
 		&& false !== strpos( $blk, '#tp-home-gallery .tp-home-slider{grid-auto-columns:100%;gap:0;flex:1 1 auto}' )   /* پنل هم‌قد ستون اخبار */
-		&& false !== strpos( $blk, '.tp-home-collage > :first-child{grid-row:1 / -1}' )
-		&& false !== strpos( $blk, '.tp-home-dots button{display:grid;place-items:center;inline-size:32px;block-size:32px;' );   /* هدف ≥ ۲۴ */
+		&& false !== strpos( $blk, '.tp-home-collage > :first-child{grid-row:1 / -1}' );
 };
-tp441_mut( 'P5-D561 CSS: کلاژ یک بزرگ + سه کوچک، اسلاید تمام‌پهنا و کش‌آمده، نقطه ۳۲px، فقط توکن — جهش: نقطه ۱۶px', $w51_ccss, $w51_hcs,
-	str_replace( 'inline-size:32px;block-size:32px;', 'inline-size:16px;block-size:16px;', $w51_hcs ) );
+tp441_mut( 'P5-D561 CSS: کلاژ یک بزرگ + سه کوچک، اسلاید تمام‌پهنا و کش‌آمده، فقط توکن — جهش: عکس بزرگ یک ردیف', $w51_ccss, $w51_hcs,
+	str_replace( '.tp-home-collage > :first-child{grid-row:1 / -1}', '.tp-home-collage > :first-child{grid-row:1}', $w51_hcs ) );

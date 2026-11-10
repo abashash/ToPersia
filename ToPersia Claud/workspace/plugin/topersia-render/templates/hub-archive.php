@@ -1,10 +1,10 @@
 <?php
 /**
- * هاب عمومی نوع و برچسب — /{نامک نوع}/ · /tags/{slug}/ — دستۀ 51 بخش ۴ و الحاقیۀ ج
+ * هاب عمومی نوع، برچسب و فصل — /{نامک نوع}/ · /tags/{slug}/ · /season/{فصل}/ — دستۀ 51 بخش ۴ و الحاقیۀ ج · دستۀ 52
  *
  * همان اجزای /news/ (P5-D541 · P5-D546 · P5-D557 · P5-D558)، از همان توابع topersia-g-news-ui:
  *   سربرگ   تصویر واقعی تمام‌عرض · مسیر راهنما · H1 و یک جمله وسط‌چین با نام مکان
- *   پالایش  تراشه‌های نخستین فاست واقعی (برچسب: نوع محتوا) · ترتیب؛ زیرش جست‌وجو · مکان · فصل · «نمایش»
+ *   نوار    تراشه‌های یک‌خطی نخستین فاست واقعی (برچسب و فصل: نوع محتوا) · مرتب‌سازی · «نمایش» · شبکه/فهرست — بی ردیف فیلتر (P5-D566)
  *   فعال    ردیف جدای پالایش‌های فعال + «پاک‌کردن همه»
  *   نتیجه   کاشی‌های `.tp-tile` (توکن کاشی) · صفحه‌بندی؛ خالی‌امن
  * کوئری اصلی (topersia-g-hub.php): شناسه‌های پالایش‌شده به ترتیب خودشان؛ نمایشی فقط در پیش‌نمایش.
@@ -75,31 +75,16 @@ if ( $tp_part ) {
 				<div class="tp-news-filters">
 					<div class="tp-news-bar">
 						<?php echo topersia_g_news_chips( $tp_chip_items, $tp_facet_lab ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						<?php /* P5-D566: بی ردیف فیلتر — فقط تراشه‌ها، مرتب‌سازی، «نمایش» و شبکه/فهرست (مثل اخبار استان) */ ?>
 						<div class="tp-news-bar__tools">
-							<?php echo topersia_g_news_select( 'tp-hub-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_hub_sort_options(), $tp_args['tp_sort'], 'tp-hub-form' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							<form id="tp-hub-form" class="tp-news-filter tp-news-filter--min" method="get" action="<?php echo esc_url( $tp_base ); ?>" data-tp-news-filter>
+								<?php if ( '' !== $tp_args['tp_facet'] ) : ?><input type="hidden" name="tp_facet" value="<?php echo esc_attr( $tp_args['tp_facet'] ); ?>"><?php endif; ?>
+								<?php echo topersia_g_news_select( 'tp-hub-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_hub_sort_options(), $tp_args['tp_sort'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<div class="tp-news-filter__go"><button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button></div>
+							</form>
+							<?php echo topersia_g_news_view_toggle(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 						</div>
 					</div>
-
-					<form id="tp-hub-form" class="tp-news-filter" method="get" action="<?php echo esc_url( $tp_base ); ?>" role="search" aria-label="<?php echo esc_attr__( 'پالایش فهرست', 'topersia' ); ?>" data-tp-news-filter>
-						<?php if ( '' !== $tp_args['tp_facet'] ) : ?>
-							<input type="hidden" name="tp_facet" value="<?php echo esc_attr( $tp_args['tp_facet'] ); ?>">
-						<?php endif; ?>
-						<div class="tp-news-filter__f tp-news-filter__f--q">
-							<label for="tp-hub-q"><?php echo esc_html__( 'جست‌وجو در فهرست', 'topersia' ); ?></label>
-							<input id="tp-hub-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">
-						</div>
-						<?php
-						if ( $tp_row['loc'] ) {
-							echo topersia_g_loc_field( 'tp-hub-place', $tp_place ); // phpcs:ignore WordPress.Security.EscapeOutput
-						}
-						if ( $tp_seas ) {
-							echo topersia_g_news_select( 'tp-hub-season', 'season', topersia_g_t( (string) $tp_map['best_season']['label'] ), array_merge( array( '' => __( 'همۀ فصل‌ها', 'topersia' ) ), $tp_seas ), $tp_args['season'] ); // phpcs:ignore WordPress.Security.EscapeOutput
-						}
-						?>
-						<div class="tp-news-filter__go">
-							<button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button>
-						</div>
-					</form>
 
 					<?php
 					$tp_loc_raw = is_scalar( get_query_var( 'tp_loc' ) ) ? trim( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) ) : '';
