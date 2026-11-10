@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" preserveAspectRatio="xMidYMid slice" class="tp-home-season__art" aria-hidden="true" focusable="false">
+<rect class="tp-ssn-sky" width="120" height="200"/>
+<circle class="tp-ssn-lite" cx="92" cy="40" r="11"/>
+<path class="tp-ssn-far" d="M-6 150L34 78l30 44 22-30 40 58z"/>
+<path class="tp-ssn-lite" d="M34 78l10 15-6-3-5 6-4-6-5 6zM86 92l9 13-5-3-4 5-4-5-4 4z"/>
+<path class="tp-ssn-mid" d="M0 150C30 138 60 142 90 148S112 152 120 148V200H0Z"/>
+<path class="tp-ssn-lite" d="M0 170C30 160 62 164 92 170S114 174 120 170V200H0Z"/>
+<path class="tp-ssn-near" d="M24 172l-10 0 10-16-7 0 9-15 9 15-7 0 10 16-10 0v8h-4zM94 176l-9 0 9-14-6 0 8-13 8 13-6 0 9 14-9 0v7h-4z"/>
+<g class="tp-ssn-lite"><circle cx="16" cy="30" r="1.6"/><circle cx="44" cy="48" r="1.6"/><circle cx="66" cy="24" r="1.6"/><circle cx="108" cy="70" r="1.6"/><circle cx="12" cy="74" r="1.6"/><circle cx="58" cy="66" r="1.6"/><circle cx="76" cy="52" r="1.4"/><circle cx="30" cy="58" r="1.4"/><circle cx="104" cy="18" r="1.4"/></g>
+</svg>

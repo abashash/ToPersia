@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" preserveAspectRatio="xMidYMid slice" class="tp-home-season__art" aria-hidden="true" focusable="false">
+<rect class="tp-ssn-sky" width="120" height="200"/>
+<circle class="tp-ssn-lite" cx="60" cy="62" r="24"/>
+<path class="tp-ssn-line" d="M60 24v-9M60 109v-9M22 62h-9M107 62h-9M33 35l-6-6M93 95l-6-6M33 89l-6 6M93 29l-6 6"/>
+<path class="tp-ssn-far" d="M0 122h120v78H0z"/>
+<path class="tp-ssn-mid" d="M0 136q10-6 20 0t20 0 20 0 20 0 20 0 20 0v64H0z"/>
+<path class="tp-ssn-near" d="M0 160q10-6 20 0t20 0 20 0 20 0 20 0 20 0v40H0z"/>
+<path class="tp-ssn-lite" d="M78 128V98l18 30z"/><path class="tp-ssn-sky" d="M75 128V104l-12 24z"/>
+<path class="tp-ssn-near" d="M58 130h44l-6 8H64z"/>
+<path class="tp-ssn-lite" d="M0 186q30-14 60-6t60-4v24H0z"/>
+</svg>

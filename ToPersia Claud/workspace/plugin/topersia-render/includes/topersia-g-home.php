@@ -205,6 +205,147 @@ if ( ! function_exists( 'topersia_g_home_groups' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_home_guide_types' ) ) {
+	/**
+	 * نُه نوع «راهنمای سفر» صفحۀ اول — نوع ← [ برچسب، آیکون ] (P5-D565). فقط نوع‌های موجود ماتریس.
+	 */
+	function topersia_g_home_guide_types() {
+		return array(
+			'tp_visa'             => array( __( 'روادید', 'topersia' ), 'passport' ),
+			'tp_currency'         => array( __( 'ارز و پرداخت', 'topersia' ), 'coins' ),
+			'tp_health_safety'    => array( __( 'سلامت و ایمنی', 'topersia' ), 'shield' ),
+			'tp_transport'        => array( __( 'حمل‌ونقل', 'topersia' ), 'car' ),
+			'tp_calendar'         => array( __( 'تقویم', 'topersia' ), 'cal' ),
+			'tp_travel_etiquette' => array( __( 'آداب سفر', 'topersia' ), 'heart' ),
+			'tp_border_crossing'  => array( __( 'گذرگاه‌های مرزی', 'topersia' ), 'gate' ),
+			'tp_language'         => array( __( 'زبان و گویش', 'topersia' ), 'chat' ),
+			'tp_local_food'       => array( __( 'غذاهای محلی', 'topersia' ), 'bag' ),
+		);
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_photo_pool' ) ) {
+	/**
+	 * عکس‌های یکتای «ایران در تصویر» (P5-D569): hero_image سپس گالری خود هر موجودیت منتشرشدۀ غیرنمونه.
+	 * عکس مشترک میان چند موجودیت فقط یک بار، به نام نخستین دارنده (hero بر گالری مقدم).
+	 *
+	 * @param int[] $real شناسۀ موجودیت‌ها.
+	 * @return array پیوست ← شناسۀ موجودیت دارنده
+	 */
+	function topersia_g_home_photo_pool( array $real ) {
+
+		$own = array();
+
+		if ( $real && function_exists( 'update_meta_cache' ) ) {
+			update_meta_cache( 'post', $real );
+		}
+
+		foreach ( array( 'hero', 'gallery' ) as $pass ) {
+			foreach ( $real as $id ) {
+
+				if ( 'hero' === $pass ) {
+					$hv   = topersia_g_raw( $id, 'hero_image' );
+					$hv   = is_array( $hv ) ? ( isset( $hv['id'] ) ? $hv['id'] : reset( $hv ) ) : $hv;
+					$list = is_scalar( $hv ) ? array( absint( $hv ) ) : array();
+				} else {
+					$list = function_exists( 'topersia_g_gallery_own_ids' ) ? topersia_g_gallery_own_ids( $id ) : array();
+				}
+
+				foreach ( $list as $att ) {
+					$att = absint( $att );
+					if ( $att && ! isset( $own[ $att ] ) && wp_attachment_is_image( $att ) ) {
+						$own[ $att ] = (int) $id;
+					}
+				}
+			}
+		}
+
+		return $own;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_photo_order' ) ) {
+	/**
+	 * چرخش ۲۴ساعته (P5-D569): ترتیب قطعی با بذر تاریخ روز — همان روز همیشه همان ترکیب، روز دیگر ترکیب دیگر.
+	 * هر موجودیت دست‌بالا $per_owner عکس، تا یک شهر همۀ اسلایدها را نگیرد. تابع خالص (آزمون با جهش تاریخ).
+	 *
+	 * @param array  $own  پیوست ← دارنده.
+	 * @param string $date Y-m-d به وقت سایت.
+	 * @return array[] هر عضو [ دارنده، پیوست ]
+	 */
+	function topersia_g_home_photo_order( array $own, $date, $max = TOPERSIA_HOME_PHOTOS_MAX, $per_owner = TOPERSIA_HOME_PHOTOS_PER_OWNER ) {
+
+		$atts = array_keys( $own );
+
+		usort( $atts, function ( $a, $b ) use ( $date ) {
+			return strcmp( md5( $date . ':' . $a ), md5( $date . ':' . $b ) );
+		} );
+
+		$used = array();
+		$out  = array();
+
+		foreach ( $atts as $att ) {
+			$o          = $own[ $att ];
+			$used[ $o ] = isset( $used[ $o ] ) ? $used[ $o ] + 1 : 1;
+			if ( $used[ $o ] > $per_owner ) {
+				continue;
+			}
+			$out[] = array( (int) $o, (int) $att );
+			if ( count( $out ) >= $max ) {
+				break;
+			}
+		}
+
+		return $out;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_today' ) ) {
+	/** تاریخ امروز به وقت سایت (صافی برای آزمون جهش تاریخ). */
+	function topersia_g_home_today() {
+		$d = function_exists( 'wp_date' ) ? (string) wp_date( 'Y-m-d' ) : gmdate( 'Y-m-d' );
+		return function_exists( 'apply_filters' ) ? (string) apply_filters( 'topersia_g_home_today', $d ) : $d;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_photo_picks' ) ) {
+	/**
+	 * گزینش امروز — کش transient به‌ازای زبان و تاریخ تا نیمه‌شب سایت؛ فردا کلید دیگر، پس ترکیب دیگر.
+	 * (کش صفحه: topersia_g_home_photo_ttl() ثانیۀ مانده تا نیمه‌شب را می‌دهد.)
+	 *
+	 * @return array[] [ دارنده، پیوست ]
+	 */
+	function topersia_g_home_photo_picks( $skip_att = 0 ) {
+
+		$date = topersia_g_home_today();
+		$key  = 'tp_home_ph_' . topersia_g_page_lang() . '_' . str_replace( '-', '', $date );
+		$hit  = function_exists( 'get_transient' ) ? get_transient( $key ) : false;
+
+		if ( ! is_array( $hit ) ) {
+			$real = topersia_g_home_real( array_keys( function_exists( 'topersia_g_hub_registry' ) ? topersia_g_hub_registry() : array() ), -1, false );
+			$own  = topersia_g_home_photo_pool( $real );
+			unset( $own[ absint( $skip_att ) ] );
+			$hit  = topersia_g_home_photo_order( $own, $date );
+			if ( function_exists( 'set_transient' ) ) {
+				set_transient( $key, $hit, topersia_g_home_photo_ttl() );
+			}
+		}
+
+		/* دارنده‌ای که از دیروقت پنهان شده، از کش بیرون می‌ماند */
+		return array_values( array_filter( $hit, function ( $p ) {
+			return is_array( $p ) && topersia_g_published( array( (int) $p[0] ) ) && ! topersia_g_sample_hidden( (int) $p[0] );
+		} ) );
+	}
+}
+
+if ( ! function_exists( 'topersia_g_home_photo_ttl' ) ) {
+	/** ثانیۀ مانده تا نیمه‌شب به وقت سایت (دست‌کم یک دقیقه). */
+	function topersia_g_home_photo_ttl() {
+		$now = function_exists( 'current_time' ) ? (int) current_time( 'timestamp' ) : time();
+		return max( MINUTE_IN_SECONDS, DAY_IN_SECONDS - ( $now % DAY_IN_SECONDS ) );
+	}
+}
+
 if ( ! function_exists( 'topersia_g_home_counts' ) ) {
 	/**
 	 * نوار شمار (P5-D514): فقط شمارش پست‌های واقعی منتشرشدۀ همین زبان؛ صفر پنهان؛
@@ -436,31 +577,18 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			}
 		}
 
-		$guide_types = array(
-			'tp_currency'         => array( __( 'ارز و پرداخت', 'topersia' ), 'coins' ),
-			'tp_visa'             => array( __( 'روادید', 'topersia' ), 'passport' ),
-			'tp_health_safety'    => array( __( 'سلامت و ایمنی', 'topersia' ), 'shield' ),
-			'tp_transport'        => array( __( 'حمل‌ونقل', 'topersia' ), 'car' ),
-			'tp_calendar'         => array( __( 'تقویم', 'topersia' ), 'cal' ),
-			'tp_travel_etiquette' => array( __( 'آداب سفر', 'topersia' ), 'heart' ),
-		);
-		$guide = array();
+		/*
+		 * P5-D565 — راهنمای سفر همیشه همین نُه آیکون، هر کدام به هاب نوع خودش (هاب خالی پیام آرام می‌دهد؛ نوع تازه ساخته نشده).
+		 * شش نوع راهنمای گروه P ماتریس (روادید · ارز · سلامت و ایمنی · حمل‌ونقل · تقویم · آداب سفر) + سه نوع موجودِ به‌کارِ مسافر
+		 * (گذرگاه‌های مرزی · زبان و گویش · غذاهای محلی). اقامت، اینترنت و سیم‌کارت، هزینۀ سفر و آب‌وهوا نوع ندارند.
+		 */
+		$guide_types = topersia_g_home_guide_types();
+		$guide       = array();
 
 		foreach ( $guide_types as $type => $g ) {
-
-			$one = topersia_g_home_first( array( $type ) );
-
-			if ( ! $one ) {
-				continue;
-			}
-
-			/* P5-D553: آیکون راهنما ← هاب همان نوع؛ بی هاب ← همان پست */
-			$hub     = function_exists( 'topersia_g_hub_link_for' ) ? topersia_g_hub_link_for( $type ) : '';
-			$guide[] = array( $g[0], $g[1], '' !== $hub ? $hub : get_permalink( $one ) );
-
-			/* شماره‌های اضطراری در همان پست سلامت و ایمنی؛ فقط اگر دست‌کم یکی پر است. */
-			if ( 'tp_health_safety' === $type && ( '' !== trim( (string) topersia_g_raw( $one, 'emergency_police' ) ) || '' !== trim( (string) topersia_g_raw( $one, 'emergency_ambulance' ) ) ) ) {
-				$guide[] = array( __( 'شماره‌های اضطراری', 'topersia' ), 'phone', get_permalink( $one ) . '#tp-practical' );
+			$hub = function_exists( 'topersia_g_hub_link_for' ) ? topersia_g_hub_link_for( $type ) : '';
+			if ( '' !== $hub ) {
+				$guide[] = array( $g[0], $g[1], $hub );
 			}
 		}
 
@@ -652,79 +780,23 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			$guide_html .= '<a class="tp-home-guide__a" href="' . esc_url( $g[2] ) . '">' . topersia_g_icon( $g[1] ) . '<span>' . esc_html( $g[0] ) . '</span></a>';
 		}
 
-		/* ── ۷ب کارها و تجربیات — واژه‌های tp_is_experience با دست‌کم دو مورد دیدنی (P5-D555)؛ هیچ ← بخش ساخته نمی‌شود ── */
+		/* ── ۷ب کارها و تجربیات — تا هشت واژۀ tp_is_experience با دست‌کم یک مورد دیدنی، دو ردیف چهارتایی (P5-D555 · P5-D563)؛ هیچ ← بخش ساخته نمی‌شود ── */
 		$exp_html = '';
 
-		foreach ( function_exists( 'topersia_g_tag_experiences' ) ? topersia_g_tag_experiences() : array() as $e ) {
+		foreach ( array_slice( function_exists( 'topersia_g_tag_experiences' ) ? topersia_g_tag_experiences() : array(), 0, TOPERSIA_HOME_EXP_MAX ) as $e ) {
 			$exp_html .= '<a class="tp-home-guide__a" href="' . esc_url( $e[1] ) . '">' . ( '' !== $e[2] ? topersia_g_icon( $e[2] ) : '' ) . '<span>' . esc_html( $e[0] ) . '</span>'
 				. '<small class="tp-home-exp__n">' . esc_html( topersia_g_fa( (int) $e[3] ) ) . '</small></a>';
 		}
 
 		/*
-		 * ── ۹ ایران در تصویر — کلاژ (P5-D561): عکس‌های یکتای واقعی — hero_image، سپس featured_image_gallery — از هر موجودیت
-		 * منتشرشدۀ غیرنمونه با صفحه؛ هر عکس پیوند به نخستین موجودیتی که آن را دارد (hero بر گالری مقدم)، عکسِ تک‌موجودیت پیش از مشترک،
-		 * بی تکرار تصویر هیرو صفحه.
+		 * ── ۹ ایران در تصویر — کلاژ (P5-D561 · P5-D569): عکس‌های یکتای واقعی — hero_image، سپس گالری خود — از هر موجودیت
+		 * منتشرشدۀ غیرنمونه با صفحه؛ عکس مشترک فقط یک بار و به نام نخستین دارنده؛ بی تکرار تصویر هیرو صفحه.
+		 * چرخش ۲۴ساعته: topersia_g_home_photo_picks() — بذر تاریخ روز سایت، کش تا نیمه‌شب، برای همه یکسان. بی نقطه؛ فلش و نوار می‌ماند.
 		 * هر اسلاید $per عکس (یک بزرگ + سه کوچک)؛ اسلایدها = کف(n / $per) تا سه: کمتر از $per ← پنهان، سپس ۱، ۲، ۳.
 		 * پیش‌نمایش نمایشی: جای خالی تا سه اسلاید با جای‌نگهدار SVG برچسب‌دار (هرگز عکس بیرونی) — P5-D548.
 		 */
 		$per   = 4;
-		$real  = topersia_g_home_real( array_keys( function_exists( 'topersia_g_hub_registry' ) ? topersia_g_hub_registry() : array() ), -1, false );
-		$own   = array();   /* پیوست ← موجودیت‌های دارندۀ آن، hero پیش از گالری */
-		$picks = array();
-
-		if ( $real && function_exists( 'update_meta_cache' ) ) {
-			update_meta_cache( 'post', $real );
-		}
-
-		foreach ( array( 'hero', 'gallery' ) as $pass ) {
-			foreach ( $real as $id ) {
-
-				if ( 'hero' === $pass ) {
-					$hv   = topersia_g_raw( $id, 'hero_image' );
-					$hv   = is_array( $hv ) ? ( isset( $hv['id'] ) ? $hv['id'] : reset( $hv ) ) : $hv;
-					$list = is_scalar( $hv ) ? array( absint( $hv ) ) : array();
-				} else {
-					$list = function_exists( 'topersia_g_gallery_own_ids' ) ? topersia_g_gallery_own_ids( $id ) : array();
-				}
-
-				foreach ( $list as $att ) {
-					if ( $att && $att !== $hero_att && ! in_array( $id, isset( $own[ $att ] ) ? $own[ $att ] : array(), true ) ) {
-						$own[ $att ][] = $id;
-					}
-				}
-			}
-		}
-
-		/*
-		 * عکسِ یک موجودیت پیش از عکسِ مشترک — پیوند و نامِ زیر عکس بی‌ابهام؛ مشترک فقط برای پرکردن اسلاید.
-		 * درون هر دسته دورگردان: نخستین عکس هر موجودیت، سپس دومین… — نه همۀ گالری یک شهر پشت هم.
-		 */
-		$turn = array();
-		$key  = array();
-
-		foreach ( $own as $att => $ids ) {
-			$turn[ $ids[0] ] = isset( $turn[ $ids[0] ] ) ? $turn[ $ids[0] ] + 1 : 0;
-			$key[ $att ]     = array( count( $ids ) > 1 ? 1 : 0, $turn[ $ids[0] ], count( $key ) );
-		}
-
-		uksort( $own, function ( $a, $b ) use ( $key ) {
-			return $key[ $a ] <=> $key[ $b ];
-		} );
-		$seen = array( $hero_att => true );
-
-		foreach ( $own as $att => $ids ) {
-
-			if ( count( $picks ) >= 12 ) {
-				break;
-			}
-
-			if ( ! $att || isset( $seen[ $att ] ) || ! wp_attachment_is_image( $att ) ) {
-				continue;
-			}
-
-			$seen[ $att ] = true;
-			$picks[]      = array( (int) $ids[0], (int) $att );
-		}
+		$picks = topersia_g_home_photo_picks( $hero_att );
 
 		$demo  = function_exists( 'topersia_demo_on' ) && topersia_demo_on();
 		$keep  = $demo ? count( $picks ) : min( 3, intdiv( count( $picks ), $per ) ) * $per;
@@ -751,17 +823,13 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		$n      = count( $cells );
 		$slides = intdiv( $n, $per );
 		$photos = '';
-		$dots   = '';
 
+		/* P5-D569: بی نقطه — فقط فلش و نوار پیشرفت topersia_g_slider_bar */
 		foreach ( array_chunk( array_slice( $cells, 0, $slides * $per ), $per ) as $k => $chunk ) {
 			/* translators: %s شمارۀ اسلاید */
 			$lbl     = sprintf( __( 'اسلاید %s', 'topersia' ), topersia_g_fa( $k + 1 ) );
 			$photos .= '<div class="tp-home-collage" role="group" aria-label="' . esc_attr( $lbl ) . '">' . implode( '', $chunk ) . '</div>';
-			$dots   .= '<button type="button" aria-label="' . esc_attr( $lbl ) . '" aria-current="' . ( 0 === $k ? 'true' : 'false' ) . '"></button>';
 		}
-
-		/* نقطه‌ها فقط با دو اسلاید به بالا؛ بی JS پنهان (topersia-g-home.js نشان می‌دهد) — فلش و نوار از topersia_g_slider_bar */
-		$dots = $slides > 1 ? '<div class="tp-home-dots" data-tp-dots="tp-home-photoslide" role="group" aria-label="' . esc_attr__( 'ایران در تصویر', 'topersia' ) . '" hidden>' . $dots . '</div>' : '';
 
 		$photo_dlg = '';
 
@@ -779,22 +847,26 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		/* کادر حساب کاربری انتهای صفحه برداشته شد — P5-D531. */
 
 		/*
-		 * P5-D540 — ترتیب و جای بخش‌ها مثل نمونه (فقط ساختار): آمار · [کاشی استان | نقشه] · مقاصد · جاذبه‌ها ·
-		 * [رویدادها | سفرهای آماده | فصل‌ها] (P5-D560) · راهنمای سفر تمام‌عرض · کارها و تجربیات · [ایران در تصویر | تازه‌ترین اخبار].
-		 * ستون خالی رندر نمی‌شود و دیگری پهن می‌شود.
+		 * P5-D562 — ردیف‌ها (فقط ساختار نمونه): آمار · [کاشی استان | نقشه] · [کارها و تجربیات | محبوب‌ترین مقاصد] ۱+۲ · جاذبه‌ها ·
+		 * [رویدادها | سفرهای آماده | فصل‌ها] ۱ : ۱ : ۱٫۵ · راهنمای سفر تمام‌عرض (۹ آیکون) ·
+		 * [ایران در تصویر | تازه‌ترین اخبار | مقالات گردشگری] ۲+۱+۱ هم‌ارتفاع. ستون خالی رندر نمی‌شود و بقیه پهن می‌شوند.
 		 */
-		$pair = topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), $photos, $slides ) . $dots : '', array(), 'tp-home-col' )
-			. topersia_g_home_section( 'tp-home-news', __( 'تازه‌ترین اخبار', 'topersia' ), $news, $news_more, 'tp-home-col' );
-		$pair = '' !== $pair ? '<div class="tp-home-trio tp-home-lazy">' . $pair . '</div>' : '';
+		$mag = topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), $photos, $slides ) : '', array(), 'tp-home-col' )
+			. topersia_g_home_section( 'tp-home-news', __( 'تازه‌ترین اخبار', 'topersia' ), $news, $news_more, 'tp-home-col' )
+			. ( function_exists( 'topersia_g_home_articles_col' ) ? topersia_g_home_articles_col() : '' );
+		$mag = '' !== $mag ? '<div class="tp-home-trio tp-home-mag tp-home-lazy">' . $mag . '</div>' : '';
+
+		$duo = topersia_g_home_section( 'tp-home-exp', __( 'کارها و تجربیات', 'topersia' ), '' !== $exp_html ? '<nav class="tp-home-guide tp-home-exp tp-home-glass" aria-label="' . esc_attr__( 'کارها و تجربیات', 'topersia' ) . '">' . $exp_html . '</nav>' : '', array(), 'tp-home-col' )
+			. topersia_g_home_section( 'tp-home-cities', __( 'محبوب‌ترین مقاصد', 'topersia' ), topersia_g_home_slider( 'tp-home-destslide', __( 'محبوب‌ترین مقاصد', 'topersia' ), $city_cards, count( $dest ) ), $city_more, 'tp-home-col' );
+		$duo = '' !== $duo ? '<div class="tp-home-trio tp-home-duo tp-home-lazy">' . $duo . '</div>' : '';
 
 		$body = $stats
 			. topersia_g_home_section( 'tp-home-provinces', __( 'استان‌های ایران', 'topersia' ), $prov_body, $prov_more )
-			. topersia_g_home_section( 'tp-home-cities', __( 'محبوب‌ترین مقاصد', 'topersia' ), topersia_g_home_slider( 'tp-home-destslide', __( 'محبوب‌ترین مقاصد', 'topersia' ), $city_cards, count( $dest ) ), $city_more, 'tp-home-lazy' )
+			. $duo
 			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), array(), 'tp-home-lazy' )
 			. $row3   /* 'tp-home-events' نخستین ستون ردیف سه‌ستونی — P5-D560 */
-			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide tp-home-glass" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
-			. topersia_g_home_section( 'tp-home-exp', __( 'کارها و تجربیات', 'topersia' ), '' !== $exp_html ? '<nav class="tp-home-guide tp-home-exp tp-home-glass" aria-label="' . esc_attr__( 'کارها و تجربیات', 'topersia' ) . '">' . $exp_html . '</nav>' : '', array(), 'tp-home-lazy' )
-			. $pair
+			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide tp-home-guide--nine tp-home-glass" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
+			. $mag
 			. ( '' !== $photos ? $photo_dlg : '' );
 
 		return '<div class="tp-page tp-home"><main id="tp-main" class="tp-main">' . $hero . '<div class="tp-wrap tp-home-body">' . $body . '</div></main></div>';

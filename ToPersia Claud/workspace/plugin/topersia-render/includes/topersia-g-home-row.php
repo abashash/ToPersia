@@ -2,10 +2,12 @@
 /**
  * ردیف سه‌ستونی صفحۀ اول — دستۀ 51 الحاقیۀ پ · P5-D560
  *
- *   (راست‌به‌چپ) رویدادها | سفرهای آماده | فصل‌ها — هر ستون پنل با سرفصل و «مشاهدۀ همه».
+ *   (راست‌به‌چپ) رویدادها | سفرهای آماده | فصل‌ها — هر ستون پنل با سرفصل و «مشاهدۀ همه»؛ ستون فصل پهن‌تر (۱ : ۱ : ۱٫۵ — P5-D562).
  *   رویداد: فقط با event_start_date، نزدیک‌ترین آینده نخست، زیرعنوان بازۀ ماه.
  *   سفر: tp_route، زیرعنوان «برنامۀ سفر پیشنهادی».
- *   فصل: چهار کارت بلند به ترتیب زمستان، پاییز، تابستان، بهار (از آغاز سطر)، پیوند به هاب با ?season=؛
+ *   هر ردیف فهرست بندانگشتی دارد: عکس خود مورد ← عکس نخستین مکان مرتبط (مسیر راهنما) ← آیکون روی گرادیان توکن؛ هرگز نشانی بیرونی.
+ *   فصل: چهار کارت بلند به ترتیب بهار، تابستان، پاییز، زمستان از آغاز سطر (P5-D564)، تصویر SVG خود افزونه
+ *        (assets/home/seasons/، رنگ از توکن فصل)، پیوند فقط به /season/{فصل}/؛
  *        فصل بی مورد کم‌رنگ و بی پیوند؛ کمتر از دو فصل دارای مورد ← ستون پنهان.
  *   بیش از دو ستون خالی (هر سه) ← کل ردیف پنهان؛ ستون خالی رندر نمی‌شود و بقیه پهن می‌شوند.
  *
@@ -19,7 +21,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'TOPERSIA_HOME_ROW_ITEMS' ) ) {
-	define( 'TOPERSIA_HOME_ROW_ITEMS', 4 );        /* ردیف هر فهرست و کارت فصل */
+	define( 'TOPERSIA_HOME_ROW_ITEMS', 3 );        /* ردیف هر فهرست — P5-D562 */
+}
+if ( ! defined( 'TOPERSIA_HOME_PHOTOS_MAX' ) ) {
+	define( 'TOPERSIA_HOME_PHOTOS_MAX', 12 );      /* عکس‌های «ایران در تصویر» — سه اسلاید چهارتایی (P5-D569) */
+	define( 'TOPERSIA_HOME_PHOTOS_PER_OWNER', 3 ); /* دست‌بالا از هر موجودیت */
+	define( 'TOPERSIA_HOME_EXP_MAX', 8 );          /* کارت‌های «کارها و تجربیات» — دو ردیف چهارتایی (P5-D563) */
 }
 if ( ! defined( 'TOPERSIA_HOME_SEASONS_MIN' ) ) {
 	define( 'TOPERSIA_HOME_SEASONS_MIN', 2 );      /* فصل دارای مورد کمتر ← ستون فصل پنهان */
@@ -78,12 +85,36 @@ if ( ! function_exists( 'topersia_g_home_month_range' ) ) {
 	}
 }
 
-/** یک ردیف فهرست ستون: نام (+ نشان نمونه) و زیرعنوان. */
+/** بندانگشتی ردیف: عکس خود مورد ← عکس نخستین مکان مرتبط ← آیکون روی گرادیان توکن (P5-D562). */
+if ( ! function_exists( 'topersia_g_home_thumb' ) ) {
+	function topersia_g_home_thumb( $id, $icon ) {
+
+		$owner = $id;
+		$att   = topersia_g_card_image( $id );
+
+		if ( ! $att && function_exists( 'topersia_g_crumb_chain' ) ) {
+			foreach ( (array) topersia_g_crumb_chain( $id ) as $place ) {
+				$att = topersia_g_card_image( $place );
+				if ( $att ) {
+					$owner = $place;
+					break;
+				}
+			}
+		}
+
+		$img = $att ? topersia_g_home_img( $att, $owner, 'medium', '96px', 'tp-home-event__img' ) : '';
+
+		return '<span class="tp-home-event__thumb"' . ( '' !== $img ? '' : ' aria-hidden="true"' ) . '>' . ( '' !== $img ? $img : topersia_g_icon( $icon ) ) . '</span>';
+	}
+}
+
+/** یک ردیف فهرست ستون: بندانگشتی، نام (+ نشان نمونه) و زیرعنوان. */
 if ( ! function_exists( 'topersia_g_home_row_li' ) ) {
-	function topersia_g_home_row_li( $id, $sub, $sub_html = '' ) {
+	function topersia_g_home_row_li( $id, $sub, $icon = 'cal' ) {
 		$badge = function_exists( 'topersia_g_demo_badge' ) ? topersia_g_demo_badge( $id ) : '';
-		return '<li><a class="tp-home-event" href="' . esc_url( get_permalink( $id ) ) . '"><b>' . esc_html( get_the_title( $id ) ) . '</b>' . $badge
-			. '<span class="tp-home-event__when">' . ( '' !== $sub_html ? $sub_html : esc_html( $sub ) ) . '</span></a></li>';
+		return '<li><a class="tp-home-event" href="' . esc_url( get_permalink( $id ) ) . '">' . topersia_g_home_thumb( $id, $icon )
+			. '<span class="tp-home-event__txt"><b>' . esc_html( get_the_title( $id ) ) . '</b>' . $badge
+			. '<span class="tp-home-event__when">' . esc_html( $sub ) . '</span></span></a></li>';
 	}
 }
 
@@ -127,7 +158,7 @@ if ( ! function_exists( 'topersia_g_home_trips_col' ) ) {
 
 		$rows = '';
 		foreach ( topersia_g_home_real( array( 'tp_route' ), TOPERSIA_HOME_ROW_ITEMS ) as $id ) {
-			$rows .= topersia_g_home_row_li( $id, __( 'برنامۀ سفر پیشنهادی', 'topersia' ) );
+			$rows .= topersia_g_home_row_li( $id, __( 'برنامۀ سفر پیشنهادی', 'topersia' ), 'route' );
 		}
 		if ( '' === $rows ) {
 			return '';
@@ -142,13 +173,13 @@ if ( ! function_exists( 'topersia_g_home_trips_col' ) ) {
 /**
  * شمار هر فصل از نوع‌های دارای best_season (هاب) — «تمام سال» در هر فصل.
  *
- * @return array فصل ← [ شمار, نوع ← شمار, نخستین مورد ]
+ * @return array فصل ← [ شمار, نوع ← شمار, نخستین مورد ] به ترتیب topersia_g_season_keys()
  */
 if ( ! function_exists( 'topersia_g_home_season_stats' ) ) {
 	function topersia_g_home_season_stats() {
 
 		$out = array();
-		foreach ( array( 'winter', 'autumn', 'summer', 'spring' ) as $s ) {
+		foreach ( topersia_g_season_keys() as $s ) {
 			$out[ $s ] = array( 0, array(), 0 );
 		}
 
@@ -180,7 +211,26 @@ if ( ! function_exists( 'topersia_g_home_season_stats' ) ) {
 	}
 }
 
-/** ستون فصل‌ها — چهار کارت بلند؛ عکس از نخستین مورد واقعی، وگرنه گرادیان توکن فصل + آیکون. */
+/** کلید فصل‌ها به ترتیب نمایش از آغاز سطر — بهار، تابستان، پاییز، زمستان (P5-D564). */
+if ( ! function_exists( 'topersia_g_season_keys' ) ) {
+	function topersia_g_season_keys() {
+		return array( 'spring', 'summer', 'autumn', 'winter' );
+	}
+}
+
+/** تصویر برداری یک فصل — پروندۀ خود افزونه، درون‌خطی تا رنگ از توکن فصل در هر سه حالت بیاید. */
+if ( ! function_exists( 'topersia_g_season_art' ) ) {
+	function topersia_g_season_art( $s ) {
+		static $memo = array();
+		if ( ! isset( $memo[ $s ] ) ) {
+			$file       = dirname( __DIR__ ) . '/assets/home/seasons/' . $s . '.svg';
+			$memo[ $s ] = ( in_array( $s, topersia_g_season_keys(), true ) && is_readable( $file ) ) ? trim( (string) file_get_contents( $file ) ) : '';
+		}
+		return $memo[ $s ];
+	}
+}
+
+/** ستون فصل‌ها — چهار کارت بلند با تصویر SVG خود افزونه؛ پیوند فقط به صفحۀ همان فصل. */
 if ( ! function_exists( 'topersia_g_home_seasons_col' ) ) {
 	function topersia_g_home_seasons_col() {
 
@@ -192,32 +242,21 @@ if ( ! function_exists( 'topersia_g_home_seasons_col' ) ) {
 			return '';
 		}
 
-		$icons = array( 'winter' => 'cloud', 'autumn' => 'leaf', 'summer' => 'spark', 'spring' => 'tp-season' );
 		$cards = '';
 
 		foreach ( $stats as $s => $st ) {
 
 			$name = (string) topersia_g_glossary_label( '34', $s );
-			$att  = $st[2] ? topersia_g_card_image( $st[2] ) : 0;
-			$art  = $att ? topersia_g_home_img( $att, $st[2], 'medium_large', '(max-width: 600px) 45vw, 160px', 'tp-home-season__img' )
-				: '<span class="tp-home-season__ph" aria-hidden="true">' . topersia_g_icon( $icons[ $s ] ) . '</span>';
-			$in   = '<span class="tp-home-season__media">' . $art . '</span><span class="tp-home-season__cap"><b>' . esc_html( $name ) . '</b>'
+			$in   = '<span class="tp-home-season__media">' . topersia_g_season_art( $s ) . '</span><span class="tp-home-season__cap"><b>' . esc_html( $name ) . '</b>'
 				. ( $st[0] ? '<small>' . esc_html( topersia_g_fa( $st[0] ) ) . '</small>' : '' ) . '</span>';
+			$url  = ( $st[0] && function_exists( 'topersia_g_season_url' ) ) ? topersia_g_season_url( $s ) : '';
 
-			if ( ! $st[0] ) {
-				$cards .= '<li><span class="tp-home-season tp-home-season--' . esc_attr( $s ) . ' tp-is-empty" aria-disabled="true">' . $in . '</span></li>';
-				continue;
-			}
-			arsort( $st[1] );
-			$url    = topersia_g_hub_link_for( (string) key( $st[1] ), array( 'season' => $s ) );
 			$cards .= '<li>' . ( '' !== $url
 				? '<a class="tp-home-season tp-home-season--' . esc_attr( $s ) . '" href="' . esc_url( $url ) . '">' . $in . '</a>'
-				: '<span class="tp-home-season tp-home-season--' . esc_attr( $s ) . '">' . $in . '</span>' ) . '</li>';
+				: '<span class="tp-home-season tp-home-season--' . esc_attr( $s ) . ' tp-is-empty" aria-disabled="true">' . $in . '</span>' ) . '</li>';
 		}
 
-		$all = topersia_g_hub_link_for( 'tp_seasonal_event' );
-		return topersia_g_home_section( 'tp-home-seasons', __( 'ایران در چهار فصل', 'topersia' ), '<ul class="tp-home-seasons">' . $cards . '</ul>',
-			'' !== $all ? array( $all, __( 'مشاهدۀ همه', 'topersia' ) ) : array(), 'tp-home-col' );
+		return topersia_g_home_section( 'tp-home-seasons', __( 'ایران در چهار فصل', 'topersia' ), '<ul class="tp-home-seasons">' . $cards . '</ul>', array(), 'tp-home-col' );
 	}
 }
 

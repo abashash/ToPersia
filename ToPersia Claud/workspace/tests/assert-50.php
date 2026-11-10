@@ -134,7 +134,8 @@ tp441_mut( 'P5-D539: اسکیمای صفحۀ اول بی FAQPage — جهش: گ�
 	$w50_sch . "\n\$graph[] = array( '@type' => 'FAQPage', '@id' => \$home . '#faq' );" );
 $w50_order = function ( $h ) {
 	$p = array();
-	foreach ( array( '$stats', "'tp-home-provinces'", "'tp-home-cities'", "'tp-home-attractions'", "'tp-home-events'", "'tp-home-guide'", '. $pair' ) as $k ) {
+	/* دستۀ 52 (P5-D562): مقاصد درون ردیف [تجربه‌ها | مقاصد] ($duo)؛ ردیف پایانی $mag */
+	foreach ( array( '$stats', "'tp-home-provinces'", '. $duo', "'tp-home-attractions'", "'tp-home-events'", "'tp-home-guide'", '. $mag' ) as $k ) {
 		$p[] = strpos( $h, $k, (int) strpos( $h, '$body = $stats' ) );
 	}
 	$ok = ! in_array( false, $p, true );
@@ -148,6 +149,6 @@ $w50_order = function ( $h ) {
 	return $ok && false !== $tiles && false !== $map && $tiles < $map && false !== $gal && false !== $nws && $gal < $nws
 		&& false !== strpos( $h, "\$quick[] = array( '#tp-home-news', __( 'اخبار', 'topersia' ), 'news' );" );
 };
-tp441_mut( 'P5-D540: ترتیب نمونه — آمار · [کاشی | نقشه] · مقاصد · جاذبه · رویداد · راهنما · [تصویر | اخبار]؛ پیوند سریع اخبار — جهش: نقشه پیش از کاشی', $w50_order, $w50_home,
+tp441_mut( 'P5-D540 · P5-D562: ترتیب — آمار · [کاشی | نقشه] · [تجربه‌ها | مقاصد] · جاذبه · رویداد · راهنما · [تصویر | اخبار | مقالات]؛ پیوند سریع اخبار — جهش: نقشه پیش از کاشی', $w50_order, $w50_home,
 	str_replace( "'<div class=\"tp-home-prov__tiles\">'", "'<div class=\"tp-home-prov__tilesX\">'", $w50_home ) );
 t( 'P5-D540: ستون کاشی استان در آغاز سطر پهن‌تر (1.25fr · 1fr)', false !== strpos( $w50_hcss, '.tp-home-prov{display:grid;gap:var(--tp-home-gap);grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);' ) );

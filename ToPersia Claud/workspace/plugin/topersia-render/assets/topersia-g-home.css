@@ -191,7 +191,7 @@ html .tp-page.tp-home .tp-home-col .tp-news{grid-template-columns:1fr}
 
 /* ۶ رویدادها */
 html .tp-page.tp-home .tp-home-events{display:grid;gap:10px;margin:0;padding:0;list-style:none;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
-html .tp-page.tp-home .tp-home-event{display:grid;gap:4px;min-block-size:44px;padding:14px 16px;border-radius:var(--tp-tile-radius,12px);
+html .tp-page.tp-home .tp-home-event{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:12px;min-block-size:44px;padding:10px 12px;border-radius:var(--tp-tile-radius,12px);
   background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-text-strong);text-decoration:none}
 html .tp-page.tp-home .tp-home-event__when{font-size:calc(.86 * var(--tp-rem));color:var(--tp-tile-text)}
 
@@ -204,13 +204,6 @@ html .tp-page.tp-home .tp-home-seasons{display:grid;grid-template-columns:repeat
 html .tp-page.tp-home .tp-home-season{position:relative;display:block;block-size:100%;min-block-size:240px;overflow:hidden;border-radius:var(--tp-tile-radius,12px);
   border:1px solid var(--tp-tile-border);background:var(--tp-tile-bg);color:var(--tp-text-strong);text-decoration:none}
 html .tp-page.tp-home .tp-home-season__media{position:absolute;inset:0;display:block}
-html .tp-page.tp-home .tp-home-season__img{display:block;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover}
-html .tp-page.tp-home .tp-home-season__ph{display:grid;place-items:center;inline-size:100%;block-size:100%}
-html .tp-page.tp-home .tp-home-season__ph svg{inline-size:34px;block-size:34px}
-html .tp-page.tp-home .tp-home-season--winter .tp-home-season__ph{background:linear-gradient(180deg,var(--tp-s-winter-soft),var(--tp-s-winter));color:var(--tp-s-winter-text)}
-html .tp-page.tp-home .tp-home-season--autumn .tp-home-season__ph{background:linear-gradient(180deg,var(--tp-s-autumn-soft),var(--tp-s-autumn));color:var(--tp-s-autumn-text)}
-html .tp-page.tp-home .tp-home-season--summer .tp-home-season__ph{background:linear-gradient(180deg,var(--tp-s-summer-soft),var(--tp-s-summer));color:var(--tp-s-summer-text)}
-html .tp-page.tp-home .tp-home-season--spring .tp-home-season__ph{background:linear-gradient(180deg,var(--tp-s-spring-soft),var(--tp-s-spring));color:var(--tp-s-spring-text)}
 /* نام روی نوار مات سطح، نه روی خود تصویر — کنتراست از توکن (همان الگوی .tp-home-photo__cap) */
 html .tp-page.tp-home .tp-home-season__cap{position:absolute;inset-inline:6px;inset-block-end:6px;display:grid;gap:0;justify-items:center;padding:4px 6px;border-radius:10px;
   background:var(--tp-bg);color:var(--tp-text-strong);font-size:calc(.86 * var(--tp-rem));text-align:center}
@@ -225,7 +218,8 @@ html .tp-page.tp-home .tp-home-guide{display:grid;gap:10px;grid-template-columns
 html .tp-page.tp-home .tp-home-guide__a{display:grid;justify-items:center;gap:8px;min-block-size:44px;padding:14px 8px;text-align:center;
   border-radius:var(--tp-tile-radius,12px);background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-text-strong);font-weight:700;text-decoration:none}
 html .tp-page.tp-home .tp-home-guide__a svg{inline-size:30px;block-size:30px}
-html .tp-page.tp-home .tp-home-guide__a:hover{border-color:var(--tp-primary);color:var(--tp-primary-text)}
+/* P5-D570 — بی کج‌شدن و بی جابه‌جایی: هاور فقط رنگ و سایۀ ملایم */
+html .tp-page.tp-home .tp-home-guide__a:hover{border-color:var(--tp-primary);color:var(--tp-primary-text);box-shadow:var(--tp-shadow-soft)}
 /* P5-D551 — یک شیشه برای هر پنل (راهنما · تجربیات)؛ کاشی‌های درون مات می‌مانند تا متن روی سطح ثابت باشد. */
 html .tp-page.tp-home .tp-home-guide.tp-home-glass{background:color-mix(in srgb,var(--tp-surface) var(--tp-home-glass-a,86%),transparent)}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
@@ -236,10 +230,6 @@ html .tp-page.tp-home .tp-home-guide.tp-home-glass{background:color-mix(in srgb,
 }
 /* تجربه — شمار مورد زیر نام (P5-D555) */
 html .tp-page.tp-home .tp-home-exp__n{font-size:calc(.8125 * var(--tp-rem));font-weight:400;color:var(--tp-tile-text)}
-@media (prefers-reduced-motion:no-preference){
-  html .tp-page.tp-home .tp-home-guide{perspective:700px}
-  html .tp-page.tp-home .tp-home-guide .tp-home-guide__a:hover{transform:translateY(-2px) rotateX(5deg);box-shadow:var(--tp-shadow-soft)}
-}
 
 /* ۹ ایران در تصویر — اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا (دستۀ 49 بند ۲) */
 html .tp-page.tp-home .tp-home-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:var(--tp-tile-radius,12px);color:var(--tp-text-strong);text-decoration:none;background:var(--tp-surface);box-shadow:var(--tp-shadow-soft)}
@@ -252,12 +242,6 @@ html .tp-page.tp-home .tp-home-collage > :first-child{grid-row:1 / -1}
 html .tp-page.tp-home .tp-home-collage .tp-home-photo{aspect-ratio:auto;block-size:100%;box-shadow:none}
 html .tp-page.tp-home .tp-home-photo--ph{background:var(--tp-tile-bg);border:1px dashed var(--tp-tile-border);color:var(--tp-tile-border)}
 html .tp-page.tp-home .tp-home-photo__svg{display:block;inline-size:100%;block-size:100%;fill:currentColor}
-html .tp-page.tp-home .tp-home-dots{display:flex;justify-content:center;gap:2px;margin-block-start:6px}
-html .tp-page.tp-home .tp-home-dots[hidden]{display:none}
-html .tp-page.tp-home .tp-home-dots button{display:grid;place-items:center;inline-size:32px;block-size:32px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
-html .tp-page.tp-home .tp-home-dots button::before{content:"";inline-size:10px;block-size:10px;border-radius:50%;border:2px solid var(--tp-primary);background:transparent}
-html .tp-page.tp-home .tp-home-dots button[aria-current="true"]::before{background:var(--tp-primary)}
-html .tp-page.tp-home .tp-home-dots button:focus-visible{outline:2px solid var(--tp-primary);outline-offset:1px}
 /* نام زیر عکس روی نوار مات سطح، نه روی خود تصویر — کنتراست از توکن */
 html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;inset-block-end:8px;padding:4px 10px;border-radius:999px;
   background:var(--tp-bg);color:var(--tp-text-strong);font-size:calc(.84 * var(--tp-rem));font-weight:700;justify-self:start;inline-size:fit-content;max-inline-size:calc(100% - 16px);
@@ -267,8 +251,8 @@ html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;ins
 
 /* حرکت فقط وقتی کاربر کم نخواسته */
 @media (prefers-reduced-motion:no-preference){
-  html .tp-page.tp-home :is(.tp-home-card,.tp-home-guide__a,.tp-home-quick__a,.tp-home-event){transition:border-color .2s,background-color .2s,color .2s,transform .2s}
-  html .tp-page.tp-home :is(.tp-home-card,.tp-home-guide__a):hover{transform:translateY(-2px)}
+  html .tp-page.tp-home :is(.tp-home-card,.tp-home-guide__a,.tp-home-quick__a,.tp-home-event){transition:border-color .2s,background-color .2s,color .2s,box-shadow .2s,transform .2s}
+  html .tp-page.tp-home .tp-home-card:hover{transform:translateY(-2px)}
 }
 
 /* ── موبایل ───────────────────────────────────────────────────────────── */
@@ -308,4 +292,73 @@ html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;ins
   html .tp-page.tp-home .tp-home-stats ul{grid-template-columns:repeat(2,minmax(0,1fr))}
   html .tp-page.tp-home .tp-home-card__txt{padding:10px}
   html .tp-page.tp-home :is(.tp-home-slider,.tp-home-prov__tiles .tp-home-slider){grid-auto-columns:72%}
+}
+
+/* ══ دستۀ 52 · P5-D562 تا P5-D570 ═══════════════════════════════════════
+   ردیف‌ها با واحد ستون برابر و span: [تجربه‌ها ۱ | مقاصد ۲] · [رویداد ۲ | سفر ۲ | فصل ۳] (۱ : ۱ : ۱٫۵) · [تصویر ۲ | اخبار ۱ | مقالات ۱].
+   ستون نبود ← بقیه خودبه‌خود پهن می‌شوند. زیر ۹۰۰px همه عمودی (قاعدۀ .tp-home-trio بالا). */
+@media (min-width:901px){
+  html .tp-page.tp-home .tp-home-duo > #tp-home-cities{grid-column:span 2}
+  html .tp-page.tp-home .tp-home-row3 > .tp-home-col{grid-column:span 2}
+  html .tp-page.tp-home .tp-home-row3 > #tp-home-seasons{grid-column:span 3}
+  html .tp-page.tp-home .tp-home-mag > #tp-home-gallery{grid-column:span 2}
+}
+html .tp-page.tp-home .tp-home-duo.tp-home-lazy{contain-intrinsic-size:auto 420px}
+/* مقاصد درون ستون دوسومی: سه کارت در دید؛ پهنای باریک‌تر همان قاعده‌های عمومی اسلایدر */
+@media (min-width:1025px){
+  html .tp-page.tp-home .tp-home-duo #tp-home-destslide{grid-auto-columns:calc((100% - 2 * clamp(10px,1.6vw,16px)) / 3)}
+}
+html .tp-page.tp-home .tp-home-duo #tp-home-destslide{flex:1 1 auto}
+html .tp-page.tp-home .tp-home-trio > #tp-home-cities > :last-child{flex:none}
+
+/* تجربه‌ها — هشت کارت، دو ردیف چهارتایی هم‌قد؛ موبایل دو ستون × چهار ردیف (P5-D563) */
+html .tp-page.tp-home .tp-home-exp{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:8px;padding:12px}
+html .tp-page.tp-home .tp-home-trio > .tp-home-col > .tp-home-exp{align-content:stretch}
+html .tp-page.tp-home .tp-home-exp .tp-home-guide__a{align-content:center;padding:10px 4px;font-size:calc(.875 * var(--tp-rem));overflow-wrap:anywhere}
+html .tp-page.tp-home .tp-home-exp .tp-home-exp__n{color:var(--tp-text)}
+
+/* راهنمای سفر — نُه آیکون در یک ردیف؛ موبایل ۳×۳ (P5-D565) */
+html .tp-page.tp-home .tp-home-guide--nine{grid-template-columns:repeat(9,minmax(0,1fr))}
+html .tp-page.tp-home .tp-home-guide--nine .tp-home-guide__a{align-content:start;padding-inline:4px;font-size:calc(.875 * var(--tp-rem));overflow-wrap:anywhere}
+
+/* ردیف فهرست با بندانگشتی — عکس خود مورد، یا مکان مرتبط، یا آیکون روی سطح توکن */
+html .tp-page.tp-home .tp-home-event__thumb{display:grid;place-items:center;inline-size:72px;aspect-ratio:4/3;overflow:hidden;border-radius:10px;
+  background:linear-gradient(135deg,var(--tp-surface),var(--tp-bg));border:1px solid var(--tp-tile-border)}
+html .tp-page.tp-home .tp-home-event__img{display:block;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover}
+html .tp-page.tp-home .tp-home-event__thumb svg{inline-size:26px;block-size:26px;fill:none;stroke:var(--tp-primary-text);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html .tp-page.tp-home .tp-home-event__txt{display:grid;gap:4px;min-inline-size:0}
+html .tp-page.tp-home .tp-home-row3 .tp-home-events{grid-auto-rows:minmax(0,1fr)}
+html .tp-page.tp-home .tp-home-trio > .tp-home-col > .tp-home-events{align-content:stretch}
+
+/* چهار فصل — تصویر برداری خود افزونه؛ رنگ هر لایه از توکن همان فصل، پس در روز، عصر و شب هماهنگ (P5-D564) */
+html .tp-page.tp-home .tp-home-season--spring{--tp-ssn:var(--tp-s-spring);--tp-ssn-soft:var(--tp-s-spring-soft)}
+html .tp-page.tp-home .tp-home-season--summer{--tp-ssn:var(--tp-s-summer);--tp-ssn-soft:var(--tp-s-summer-soft)}
+html .tp-page.tp-home .tp-home-season--autumn{--tp-ssn:var(--tp-s-autumn);--tp-ssn-soft:var(--tp-s-autumn-soft)}
+html .tp-page.tp-home .tp-home-season--winter{--tp-ssn:var(--tp-s-winter);--tp-ssn-soft:var(--tp-s-winter-soft)}
+html .tp-page.tp-home .tp-home-season__art{display:block;inline-size:100%;block-size:100%}
+html .tp-page.tp-home .tp-ssn-sky{fill:var(--tp-ssn-soft)}
+html .tp-page.tp-home .tp-ssn-far{fill:color-mix(in srgb,var(--tp-ssn) 30%,var(--tp-ssn-soft))}
+html .tp-page.tp-home .tp-ssn-mid{fill:color-mix(in srgb,var(--tp-ssn) 62%,var(--tp-ssn-soft))}
+html .tp-page.tp-home .tp-ssn-near{fill:var(--tp-ssn)}
+html .tp-page.tp-home .tp-ssn-lite{fill:var(--tp-bg)}
+html .tp-page.tp-home .tp-ssn-line{fill:none;stroke:var(--tp-ssn);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+@media (max-width:768px){
+  html .tp-page.tp-home .tp-home-guide--nine{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:600px){
+  html .tp-page.tp-home .tp-home-exp{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* ردیف ۲+۱+۱ هم‌ارتفاع (P5-D562): بلندی را نسبت ثابت کلاژ می‌دهد، نه اندازۀ ذاتی عکس؛ کارت‌های خبر و مقاله همان بلندی را پر می‌کنند.
+   اسلاید کناری از لبۀ پنل بیرون نمی‌زند (بی padding افقی). */
+html .tp-page.tp-home #tp-home-gallery .tp-home-slider{padding-inline:0;margin-inline:0;scroll-padding-inline:0}
+html .tp-page.tp-home .tp-home-collage{position:relative;block-size:auto;aspect-ratio:16/10;min-block-size:0}
+html .tp-page.tp-home .tp-home-collage .tp-home-photo__img{position:absolute;inset:0}
+@media (min-width:901px){
+  html .tp-page.tp-home .tp-home-mag .tp-news{grid-auto-rows:minmax(0,1fr)}
+  html .tp-page.tp-home .tp-home-trio.tp-home-mag > .tp-home-col > .tp-news{align-content:stretch}
+}
+@media (max-width:600px){
+  html .tp-page.tp-home .tp-home-collage{aspect-ratio:4/3;min-block-size:0}
 }

@@ -105,14 +105,14 @@ $w46_mapf = function ( $s ) use ( $w46_svgf ) {
 tp441_mut( 'نقشه: فقط استانِ دارای صفحه پیوند و aria-label دارد، بقیه کم‌رنگ؛ هیچ پیوند ← هیچ نقشه — جهش: استان بی‌صفحه پنهان', $w46_mapf, $w46_src, str_replace( "\$out .= '<path class=\"tp-home-map__off\" d=\"' . esc_attr( \$d ) . '\"/>';", '', $w46_src ) );
 tp441_mut( 'نقشه: بی هیچ استان دارای صفحه، نقشه چاپ نمی‌شود — جهش: نقشۀ تهی', $w46_mapf, $w46_src, str_replace( "if ( ! \$links ) {\n\t\t\treturn '';", "if ( false ) {\n\t\t\treturn '';", $w46_src ) );
 
-/* ۵ — سقف‌ها: استان همه (اسلایدر · دستۀ 47 ب)، مقصد ۱۲ (دستۀ 47 پ)، رویداد ۴، عکس ۱۲ در اسلایدر (دستۀ 49 بند ۲). پرسش‌ها در دستۀ 50 رفت (P5-D539). */
+/* ۵ — سقف‌ها: استان همه (اسلایدر · دستۀ 47 ب)، مقصد ۱۲ (دستۀ 47 پ)، رویداد ۳ (P5-D562)، عکس ۱۲ در اسلایدر (دستۀ 49 بند ۲ · ثابت در home-row). پرسش‌ها در دستۀ 50 رفت (P5-D539). */
 $w46_caps = function ( $s ) {
 	return false !== strpos( $s, 'foreach ( $provinces as $id ) {' )
 		&& false !== strpos( $s, "array_filter( \$cities, 'topersia_g_card_image' ) ), 0, 12 )" )
-		&& false !== strpos( $s, 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )' ) && false !== strpos( $s, "define( 'TOPERSIA_HOME_ROW_ITEMS', 4 )" )
-		&& false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' );
+		&& false !== strpos( $s, 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )' ) && false !== strpos( $s, "define( 'TOPERSIA_HOME_ROW_ITEMS', 3 )" )
+		&& false !== strpos( $s, "define( 'TOPERSIA_HOME_PHOTOS_MAX', 12 )" ) && false !== strpos( $s, 'if ( count( $out ) >= $max ) {' );
 };
-tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۴ · عکس ۱۲) — جهش: سقف رویداد برداشته شود', $w46_caps, $w46_src, str_replace( 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )', '$events', $w46_src ) );
+tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۳ · عکس ۱۲) — جهش: سقف رویداد برداشته شود', $w46_caps, $w46_src, str_replace( 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )', '$events', $w46_src ) );
 
 /* ۶ — رویداد فقط با تاریخ آغاز معتبر. */
 $w46_ev = function ( $s ) {

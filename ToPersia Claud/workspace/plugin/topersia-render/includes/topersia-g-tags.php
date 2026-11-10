@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'TOPERSIA_TAG_MIN_ITEMS' ) ) {
-	define( 'TOPERSIA_TAG_MIN_ITEMS', 2 );   /* کمتر ← کارت تجربه ساخته نمی‌شود */
+	define( 'TOPERSIA_TAG_MIN_ITEMS', 1 );   /* کمتر ← کارت تجربه ساخته نمی‌شود (P5-D563: آستانه یک مورد) */
 }
 
 /** شناسه‌های دیدنی یک واژه به زبان جاری. */

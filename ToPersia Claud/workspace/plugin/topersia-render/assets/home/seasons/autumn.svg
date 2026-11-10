@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200" preserveAspectRatio="xMidYMid slice" class="tp-home-season__art" aria-hidden="true" focusable="false">
+<rect class="tp-ssn-sky" width="120" height="200"/>
+<circle class="tp-ssn-lite" cx="30" cy="46" r="13"/>
+<path class="tp-ssn-far" d="M0 124C24 104 50 110 70 120S104 130 120 112V200H0Z"/>
+<path class="tp-ssn-mid" d="M0 156C28 138 58 144 84 152S110 158 120 150V200H0Z"/>
+<path class="tp-ssn-near" d="M0 180C32 168 64 172 92 178S114 182 120 178V200H0Z"/>
+<path class="tp-ssn-near" d="M28 160h4v-30h-4zM80 164h4v-40h-4z"/>
+<ellipse class="tp-ssn-mid" cx="30" cy="118" rx="13" ry="18"/><ellipse class="tp-ssn-near" cx="82" cy="108" rx="16" ry="24"/>
+<ellipse class="tp-ssn-far" cx="56" cy="134" rx="9" ry="13"/><path class="tp-ssn-near" d="M55 158h2.6v-14H55z"/>
+<g class="tp-ssn-near"><path d="M52 70q5-4 8 1q-5 4-8-1zM98 56q5-4 8 1q-5 4-8-1zM14 88q5-4 8 1q-5 4-8-1zM66 96q5-4 8 1q-5 4-8-1z"/></g>
+<g class="tp-ssn-lite"><path d="M20 190q5-4 8 1q-5 4-8-1zM60 192q5-4 8 1q-5 4-8-1zM100 188q5-4 8 1q-5 4-8-1z"/></g>
+</svg>

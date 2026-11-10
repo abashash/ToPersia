@@ -824,58 +824,6 @@
 		} );
 	} )();
 
-	/* ══ نقطه‌های اسلاید — P5-D561 ═════════════════════════════════════
-	   `.tp-home-dots[data-tp-dots]` (کلاژ «ایران در تصویر»): هر دکمه یک اسلاید
-	   تمام‌پهنا. کلیک ← همان اسلاید با scrollTo؛ اسکرول (فلش، کشیدن، لمس) ←
-	   aria-current. جای کاربر مثل فلش‌ها با `Math.abs( scrollLeft )` بر پهنای
-	   اسلاید (P5-D243). بی JS پنهان می‌ماند؛ فلش و نوار همان بالا. ویژگی data-tp-dots،
-	   نه ویژگی هدفِ فلش‌ها — دستگیرۀ فلش هر عنصر دارای آن را می‌گیرد و کلیک نقطه «قبلی» می‌شد.
-	   ────────────────────────────────────────────────────────────────── */
-	( function () {
-
-		var calm = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
-
-		Array.prototype.forEach.call( page.querySelectorAll( '.tp-home-dots[data-tp-dots]' ), function ( nav ) {
-
-			var el   = document.getElementById( nav.getAttribute( 'data-tp-dots' ) );
-			var btns = nav.querySelectorAll( 'button' );
-
-			if ( ! el || btns.length < 2 ) {
-				return;
-			}
-
-			function at() {
-				var w = el.firstElementChild ? el.firstElementChild.getBoundingClientRect().width : el.clientWidth;
-				return Math.min( btns.length - 1, Math.round( Math.abs( el.scrollLeft ) / Math.max( 1, w ) ) );
-			}
-
-			function sync() {
-				var i = at();
-				Array.prototype.forEach.call( btns, function ( b, k ) {
-					b.setAttribute( 'aria-current', k === i ? 'true' : 'false' );
-				} );
-			}
-
-			Array.prototype.forEach.call( btns, function ( b, k ) {
-				b.addEventListener( 'click', function () {
-					var c = el.children[ k ], edge = 'rtl' === window.getComputedStyle( el ).direction ? 'right' : 'left';
-					if ( ! c ) {
-						return;
-					}
-					/* مقصد = فاصلۀ آغاز اسلاید k از آغاز اسلاید نخست (علامت جهت را خودِ هندسه دارد)؛ رفتن نرم با scrollTo —
-					   scrollIntoView نرم با چسبیدن اجباری نیمه‌راه می‌ایستاد */
-					el.scrollTo( { left: c.getBoundingClientRect()[ edge ] - el.children[ 0 ].getBoundingClientRect()[ edge ], behavior: calm ? 'auto' : 'smooth' } );
-				} );
-			} );
-
-			el.addEventListener( 'scroll', function () {
-				window.requestAnimationFrame( sync );
-			}, { passive: true } );
-			nav.hidden = false;
-			sync();
-		} );
-	} )();
-
 	/* ══ کشیدن اسلایدر با موس — P5-D277 ════════════════════════════════
 	   فقط موس (`pointerType`): لمس و صفحه‌کلید همان رفتار بومی‌اند. پنج
 	   پیکسل پیش از شروع، تا کلیکِ لرزان کلیک بماند. هنگام کشیدن چسبیدن

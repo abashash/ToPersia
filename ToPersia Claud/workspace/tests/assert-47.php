@@ -177,8 +177,9 @@ tp441_mut( 'بی پیوند تصویر بیرونی در صفحۀ اول — ج�
 
 /* ت — ردیف سه‌ستونه؛ ج — بی صافی فصل (ممیزی P5-D522: تابستان و زمستان صفر) */
 /* دستۀ 50 (P5-D539 · P5-D540): ردیف پایانی [ایران در تصویر | تازه‌ترین اخبار]؛ پرسش‌ها رفت، راهنما تمام‌عرض */
-$w47_trio = function ( $s ) { return false !== strpos( $s, "'<div class=\"tp-home-trio tp-home-lazy\">' . \$pair . '</div>'" ) && 2 === substr_count( $s, "'tp-home-col' )" ); };
-tp441_mut( 'ت: تصویر | اخبار در یک ردیف؛ ستون خالی رندر نمی‌شود — جهش: بی ردیف', $w47_trio, $w47_home, str_replace( "'tp-home-col' )", "'' )", $w47_home ) );
+/* دستۀ 52 (P5-D562): ردیف پایانی [تصویر | اخبار | مقالات] و ردیف [تجربه‌ها | مقاصد] — چهار ستون tp-home-col در home.php */
+$w47_trio = function ( $s ) { return false !== strpos( $s, "'<div class=\"tp-home-trio tp-home-mag tp-home-lazy\">' . \$mag . '</div>'" ) && 4 === substr_count( $s, "'tp-home-col' )" ); };
+tp441_mut( 'ت: تصویر | اخبار | مقالات در یک ردیف؛ ستون خالی رندر نمی‌شود — جهش: بی ردیف', $w47_trio, $w47_home, str_replace( "'tp-home-col' )", "'' )", $w47_home ) );
 t( 'ج: صافی فصل ساخته نشد (ممیزی: کمتر از ۲ مورد در دست‌کم یک فصل)', false === strpos( $w47_home, 'best_season' ) );
 
 /* CSS — نیم‌هم‌پوشانی دقیق، توکن، بی letter-spacing */

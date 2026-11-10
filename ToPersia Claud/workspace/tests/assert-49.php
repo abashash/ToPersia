@@ -20,16 +20,16 @@ $w49_schema = $w49_read( 'plugin/topersia-schema/topersia-schema.php' );
 
 /* ── بند ۲: ایران در تصویر — اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا، فقط با ≥ ۴ ── */
 $w49_gal = function ( $s ) {
-	return false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' )
+	return false !== strpos( $s, '$max = TOPERSIA_HOME_PHOTOS_MAX,' ) && false !== strpos( $s, 'if ( count( $out ) >= $max ) {' )
 		&& false !== strpos( $s, "topersia_g_home_slider( 'tp-home-photoslide'" )
-		&& false !== strpos( $s, 'if ( ! $att || isset( $seen[ $att ] ) || ! wp_attachment_is_image( $att ) ) {' )
+		&& false !== strpos( $s, 'if ( $att && ! isset( $own[ $att ] ) && wp_attachment_is_image( $att ) ) {' )   /* یکتا: هر پیوست فقط یک بار (P5-D569) */
 		&& false !== strpos( $s, 'if ( $n < 4 ) {' )
 		&& 0 === preg_match( '/tp-home-photos(?!lide)/', $s );
 };
 tp441_mut( 'بند ۲: گالری اسلایدر tp-home-photoslide، سقف ۱۲، پیوست یکتا، کمتر از ۴ ← پنهان، بی گرید ۴/۵/۸ — جهش: سقف ۸', $w49_gal, $w49_home,
-	str_replace( 'if ( count( $picks ) >= 12 ) {', 'if ( count( $picks ) >= 8 ) {', $w49_home ) );
+	str_replace( '$max = TOPERSIA_HOME_PHOTOS_MAX,', '$max = 8,', $w49_home ) );
 tp441_mut( 'بند ۲: هر عکس یکتا — جهش: بی ردکردن تکرار', $w49_gal, $w49_home,
-	str_replace( '|| isset( $seen[ $att ] ) ', '', $w49_home ) );
+	str_replace( '! isset( $own[ $att ] ) && ', '', $w49_home ) );
 
 /* ── P5-D533: دکمۀ بخش در ردیف عنوان ── */
 $w49_btn = function ( $s ) {
