@@ -505,6 +505,10 @@ msgstr ""
 msgid "ایران در تصویر"
 msgstr ""
 
+#: includes/topersia-g-home-row.php
+msgid "ایران در چهار فصل"
+msgstr ""
+
 #: includes/topersia-g-home.php
 msgid "ایران را کشف کنید"
 msgstr ""
@@ -706,6 +710,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "برنامه‌ریزی نشده"
+msgstr ""
+
+#: includes/topersia-g-home-row.php
+msgid "برنامۀ سفر پیشنهادی"
 msgstr ""
 
 #: includes/topersia-g-tags.php
@@ -1912,7 +1920,7 @@ msgstr ""
 msgid "رویداد ورزشی"
 msgstr ""
 
-#: includes/topersia-g-home.php
+#: includes/topersia-g-home-row.php
 msgid "رویدادها و جشنواره‌ها"
 msgstr ""
 
@@ -2178,6 +2186,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "سفالگری"
+msgstr ""
+
+#: includes/topersia-g-home-row.php
+msgid "سفرهای آماده"
 msgstr ""
 
 #: includes/topersia-g-ai.php

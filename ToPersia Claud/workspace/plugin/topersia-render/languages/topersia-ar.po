@@ -506,6 +506,10 @@ msgstr "إيران"
 msgid "ایران در تصویر"
 msgstr "إيران بالصور"
 
+#: includes/topersia-g-home-row.php
+msgid "ایران در چهار فصل"
+msgstr "إيران في الفصول الأربعة"
+
 #: includes/topersia-g-home.php
 msgid "ایران را کشف کنید"
 msgstr "اكتشف إيران"
@@ -708,6 +712,10 @@ msgstr "البرنامج"
 #: includes/topersia-g-map.php
 msgid "برنامه‌ریزی نشده"
 msgstr "غير مخطط"
+
+#: includes/topersia-g-home-row.php
+msgid "برنامۀ سفر پیشنهادی"
+msgstr "برنامج رحلة مقترح"
 
 #: includes/topersia-g-tags.php
 msgid "برچسب‌ها"
@@ -1913,7 +1921,7 @@ msgstr "مناسبات موسمية ودينية"
 msgid "رویداد ورزشی"
 msgstr "حدث رياضي"
 
-#: includes/topersia-g-home.php
+#: includes/topersia-g-home-row.php
 msgid "رویدادها و جشنواره‌ها"
 msgstr "الفعاليات والمهرجانات"
 
@@ -2180,6 +2188,10 @@ msgstr "مستوى الميزانية"
 #: includes/topersia-g-map.php
 msgid "سفالگری"
 msgstr "الفخار"
+
+#: includes/topersia-g-home-row.php
+msgid "سفرهای آماده"
+msgstr "رحلات جاهزة"
 
 #: includes/topersia-g-ai.php
 msgid "سقف روزانۀ تولید سایت پر شده است؛ فردا دوباره امتحان کنید."

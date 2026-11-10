@@ -12,7 +12,8 @@ if ( ! function_exists( 'esc_html__' ) ) {
 }
 
 $w46_root = dirname( __DIR__ );
-$w46_src  = (string) @file_get_contents( $w46_root . '/plugin/topersia-render/includes/topersia-g-home.php' );
+$w46_src  = (string) @file_get_contents( $w46_root . '/plugin/topersia-render/includes/topersia-g-home.php' )
+	. (string) @file_get_contents( $w46_root . '/plugin/topersia-render/includes/topersia-g-home-row.php' );   /* رویدادها از دستۀ 51 پ در ردیف سه‌ستونی (P5-D560) */
 $w46_css  = (string) @file_get_contents( $w46_root . '/plugin/topersia-render/assets/topersia-g-home.css' );
 $w46_svgf = $w46_root . '/plugin/topersia-render/assets/home/iran-provinces.svg';
 $w46_svg  = (string) @file_get_contents( $w46_svgf );
@@ -108,16 +109,16 @@ tp441_mut( 'نقشه: بی هیچ استان دارای صفحه، نقشه چا
 $w46_caps = function ( $s ) {
 	return false !== strpos( $s, 'foreach ( $provinces as $id ) {' )
 		&& false !== strpos( $s, "array_filter( \$cities, 'topersia_g_card_image' ) ), 0, 12 )" )
-		&& false !== strpos( $s, 'array_slice( array_keys( $events ), 0, 4 )' )
+		&& false !== strpos( $s, 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )' ) && false !== strpos( $s, "define( 'TOPERSIA_HOME_ROW_ITEMS', 4 )" )
 		&& false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' );
 };
-tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۴ · عکس ۱۲) — جهش: سقف رویداد برداشته شود', $w46_caps, $w46_src, str_replace( 'array_slice( array_keys( $events ), 0, 4 )', 'array_keys( $events )', $w46_src ) );
+tp441_mut( 'سقف هر بخش (استان همه · مقصد ۱۲ · رویداد ۴ · عکس ۱۲) — جهش: سقف رویداد برداشته شود', $w46_caps, $w46_src, str_replace( 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )', '$events', $w46_src ) );
 
 /* ۶ — رویداد فقط با تاریخ آغاز معتبر. */
 $w46_ev = function ( $s ) {
-	return false !== strpos( $s, "topersia_g_date_iso( topersia_g_raw( \$id, 'event_start_date' ) )" ) && false !== strpos( $s, "if ( '' !== \$iso ) {" );
+	return false !== strpos( $s, "\$start = topersia_g_date_iso( topersia_g_raw( \$id, 'event_start_date' ) );" ) && false !== strpos( $s, "if ( '' === \$start || " );
 };
-tp441_mut( 'رویداد بی event_start_date معتبر نمایش داده نمی‌شود — جهش: بی شرط', $w46_ev, $w46_src, str_replace( "if ( '' !== \$iso ) {", 'if ( true ) {', $w46_src ) );
+tp441_mut( 'رویداد بی event_start_date معتبر نمایش داده نمی‌شود — جهش: بی شرط', $w46_ev, $w46_src, str_replace( "if ( '' === \$start || ", 'if ( false || ', $w46_src ) );
 
 /* ۷ — FAQPage صفحۀ اول در دستۀ 50 برداشته شد (P5-D539)؛ حکم و جهشش در assert-50. FAQPage موجودیت (faq_items) دست نخورده. */
 t( 'P5-D539: اسکیمای صفحۀ اول بی FAQPage؛ FAQPage موجودیت از faq_items می‌ماند', false === strpos( $w46_sch, 'topersia_g_home_faq_items' ) && false !== strpos( $w46_sch, "'@type'      => 'FAQPage'" ) );

@@ -403,3 +403,65 @@ t( 'P5-D555: صفحۀ اول «کارها و تجربیات» از topersia_g_ta
 t( 'P5-D553: آیکون راهنما به هاب نوع، بی هاب ← پست', false !== strpos( $w51_home, "'' !== \$hub ? \$hub : get_permalink( \$one )" ) );
 t( 'P5-D551: شیشه روی پنل راهنما و تجربیات، ۳بعدی فقط بی کاهش حرکت', false !== strpos( $w51_home, '<nav class="tp-home-guide tp-home-glass"' ) && (bool) preg_match( '/prefers-reduced-motion:no-preference\)\{\s*html \.tp-page\.tp-home \.tp-home-guide\{perspective/', $w51_read( 'plugin/topersia-render/assets/topersia-g-home.css' ) ) );
 t( 'P5-D555: CSS برچسب فقط توکن', 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $w51_tcss ) && false === strpos( $w51_tcss, 'letter-spacing' ) );
+
+/* ── الحاقیۀ پ: ردیف سه‌ستونی صفحۀ اول (P5-D560) ─────────────────── */
+$w51_row  = $w51_read( 'plugin/topersia-render/includes/topersia-g-home-row.php' );
+$w51_hcs  = $w51_read( 'plugin/topersia-render/assets/topersia-g-home.css' );
+t( 'P5-D560: render پروندۀ ردیف را بار می‌کند و صفحۀ اول آن را جای بخش رویداد تنها می‌نشاند', false !== strpos( $w51_render, "'includes/topersia-g-home-row.php'" )
+	&& false !== strpos( $w51_home, "\$row3 = function_exists( 'topersia_g_home_row3' ) ? topersia_g_home_row3() : '';" )
+	&& false === strpos( $w51_home, "topersia_g_home_section( 'tp-home-events'" ) );
+
+$w51_cols = function ( $s ) {
+	$e = strpos( $s, 'topersia_g_home_events_col(), topersia_g_home_trips_col(), topersia_g_home_seasons_col()' );   /* راست‌به‌چپ: رویداد | سفر | فصل */
+	return false !== $e && false !== strpos( $s, "if ( ! \$cols ) {\n\t\t\treturn '';" )                                  /* هر سه خالی ← ردیف نه */
+		&& 3 === substr_count( $s, "array( \$all, __( 'مشاهدۀ همه', 'topersia' ) )" )                                   /* هر پنل «مشاهدۀ همه» */
+		&& 3 === substr_count( $s, ", 'tp-home-col' );" );
+};
+tp441_mut( 'P5-D560: سه ستون رویداد | سفر | فصل، هر کدام پنل با «مشاهدۀ همه»، هر سه خالی ← ردیف پنهان — جهش: ترتیب فصل نخست', $w51_cols, $w51_row,
+	str_replace( 'topersia_g_home_events_col(), topersia_g_home_trips_col(), topersia_g_home_seasons_col()', 'topersia_g_home_seasons_col(), topersia_g_home_events_col(), topersia_g_home_trips_col()', $w51_row ) );
+t( 'P5-D560: جهش — ردیف با یک ستون خالی پنهان می‌افتد', ! $w51_cols( str_replace( 'if ( ! $cols ) {', 'if ( count( $cols ) < 3 ) {', $w51_row ) ) );
+
+$w51_ev = function ( $s ) {
+	return false !== strpos( $s, "if ( '' === \$start || ( '' !== \$end ? \$end : \$start ) < \$today ) {" )           /* بی تاریخ آغاز یا گذشته ← نه */
+		&& false !== strpos( $s, 'return strcmp( $a[0], $b[0] );' )                                                   /* نزدیک‌ترین نخست */
+		&& false !== strpos( $s, 'array_slice( $events, 0, TOPERSIA_HOME_ROW_ITEMS, true )' )
+		&& false !== strpos( $s, "define( 'TOPERSIA_HOME_ROW_ITEMS', 4 )" )
+		&& false !== strpos( $s, 'topersia_g_home_month_range( $d[0], $d[1] )' );
+};
+tp441_mut( 'P5-D560 رویداد: فقط event_start_date، گذشته نه، نزدیک‌ترین نخست، ۴ ردیف، زیرعنوان بازۀ ماه — جهش: رویداد گذشته هم', $w51_ev, $w51_row,
+	str_replace( " || ( '' !== \$end ? \$end : \$start ) < \$today", '', $w51_row ) );
+t( 'P5-D560 سفر: tp_route با «برنامۀ سفر پیشنهادی»، نشان نمونه در هر ردیف', false !== strpos( $w51_row, "topersia_g_home_real( array( 'tp_route' ), TOPERSIA_HOME_ROW_ITEMS )" )
+	&& false !== strpos( $w51_row, "__( 'برنامۀ سفر پیشنهادی', 'topersia' )" ) && false !== strpos( $w51_row, 'topersia_g_demo_badge( $id )' ) );
+
+$w51_sea = function ( $s ) {
+	return false !== strpos( $s, "foreach ( array( 'winter', 'autumn', 'summer', 'spring' ) as \$s ) {" )               /* از آغاز سطر: زمستان، پاییز، تابستان، بهار */
+		&& false !== strpos( $s, "if ( \$live < TOPERSIA_HOME_SEASONS_MIN ) {" ) && false !== strpos( $s, "define( 'TOPERSIA_HOME_SEASONS_MIN', 2 )" )
+		&& false !== strpos( $s, "topersia_g_hub_link_for( (string) key( \$st[1] ), array( 'season' => \$s ) )" )        /* هاب نوع چیره با ?season= */
+		&& false !== strpos( $s, 'tp-is-empty" aria-disabled="true">' ) && false === strpos( $s, 'tp-is-empty" href' )      /* فصل خالی بی پیوند */
+		&& false !== strpos( $s, "if ( ! topersia_g_hub_in_season( \$id, \$s ) ) {" )                                       /* همان قاعدۀ هاب (تمام سال در هر فصل) */
+		&& false !== strpos( $s, '$att  = $st[2] ? topersia_g_card_image( $st[2] ) : 0;' );                               /* عکس نخستین مورد، وگرنه گرادیان */
+};
+tp441_mut( 'P5-D560 فصل: ترتیب زمستان→بهار، هاب نوع چیره با ?season=، خالی کم‌رنگ و بی پیوند، کمتر از ۲ فصل ← ستون نه — جهش: ترتیب بهار نخست', $w51_sea, $w51_row,
+	str_replace( "array( 'winter', 'autumn', 'summer', 'spring' ) as \$s ) {", "array( 'spring', 'summer', 'autumn', 'winter' ) as \$s ) {", $w51_row ) );
+t( 'P5-D560 فصل: جهش — حد ستون برداشته می‌افتد', ! $w51_sea( str_replace( 'if ( $live < TOPERSIA_HOME_SEASONS_MIN ) {', 'if ( false ) {', $w51_row ) ) );
+
+$w51_rcss = function ( $c ) {
+	$a = strpos( $c, '/* ۶ب ردیف سه‌ستونی' );
+	$b = strpos( $c, '/* ۷ راهنمای سفر' );
+	$blk = ( false !== $a && false !== $b ) ? substr( $c, $a, $b - $a ) : '';
+	return '' !== $blk && 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $blk ) && false === strpos( $blk, 'letter-spacing' )
+		&& 4 === substr_count( $blk, '__ph{background:linear-gradient(180deg,var(--tp-s-' )                             /* گرادیان هر فصل از توکن */
+		&& false !== strpos( $blk, '.tp-home-season__cap{' ) && false !== strpos( $blk, 'background:var(--tp-bg);color:var(--tp-text-strong)' )   /* نام روی نوار سطح، نه روی عکس */
+		&& false !== strpos( $blk, '.tp-home-season.tp-is-empty{opacity:' )
+		&& false !== strpos( $c, 'grid-template-columns:repeat(4,minmax(0,1fr))' );
+};
+tp441_mut( 'P5-D560 CSS: فقط توکن، گرادیان فصل از --tp-s-*، نام روی نوار سطح، خالی کم‌رنگ — جهش: رنگ خام', $w51_rcss, $w51_hcs,
+	str_replace( '.tp-home-season.tp-is-empty{opacity:.55;', '.tp-home-season.tp-is-empty{opacity:.55;color:#777;', $w51_hcs ) );
+
+if ( function_exists( 'topersia_g_jalali' ) && function_exists( 'topersia_g_greg_months' ) ) {
+	require_once $w51_root . '/plugin/topersia-render/includes/topersia-g-home-row.php';
+	t( 'P5-D560 رفتار: بازۀ ماه — یک ماه', 'آذر ' . topersia_g_fa( 1405 ) === topersia_g_home_month_range( '2026-11-23', '' ) );
+	t( 'P5-D560 رفتار: بازۀ ماه — دو ماه یک سال', 'آذر – دی ' . topersia_g_fa( 1405 ) === topersia_g_home_month_range( '2026-11-23', '2026-12-25' ) );
+	t( 'P5-D560 رفتار: بازۀ ماه — دو سال', 'اسفند ' . topersia_g_fa( 1405 ) . ' – فروردین ' . topersia_g_fa( 1406 ) === topersia_g_home_month_range( '2027-03-01', '2027-04-05' ) );
+	t( 'P5-D560 رفتار: پایان پیش از آغاز ← فقط آغاز', 'آذر ' . topersia_g_fa( 1405 ) === topersia_g_home_month_range( '2026-11-23', '2026-11-01' ) );
+}

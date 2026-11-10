@@ -639,23 +639,8 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			$attr_cards .= topersia_g_home_card( $g[1][0], get_the_title( $g[1][0] ), get_permalink( $g[1][0] ), $g[0] );
 		}
 
-		/* ── ۶ رویدادها — فقط با تاریخ آغاز معتبر، نزدیک‌ترین نخست ── */
-		$events = array();
-
-		foreach ( topersia_g_home_real( array( 'tp_festival', 'tp_sports_event', 'tp_religious_event', 'tp_seasonal_event' ) ) as $id ) {
-			$iso = topersia_g_date_iso( topersia_g_raw( $id, 'event_start_date' ) );
-			if ( '' !== $iso ) {
-				$events[ $id ] = $iso;
-			}
-		}
-
-		asort( $events );
-		$event_rows = '';
-
-		foreach ( array_slice( array_keys( $events ), 0, 4 ) as $id ) {
-			$event_rows .= '<li><a class="tp-home-event" href="' . esc_url( get_permalink( $id ) ) . '"><b>' . esc_html( get_the_title( $id ) ) . '</b>'
-				. '<span class="tp-home-event__when">' . topersia_g_date_html( $events[ $id ] ) . '</span></a></li>';
-		}
+		/* ── ۶ ردیف سه‌ستونی رویدادها | سفرهای آماده | فصل‌ها — topersia-g-home-row.php (P5-D560) ── */
+		$row3 = function_exists( 'topersia_g_home_row3' ) ? topersia_g_home_row3() : '';
 
 		/* ── ۷ راهنمای سفر ── */
 		$guide_html = '';
@@ -733,8 +718,8 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 
 		/*
 		 * P5-D540 — ترتیب و جای بخش‌ها مثل نمونه (فقط ساختار): آمار · [کاشی استان | نقشه] · مقاصد · جاذبه‌ها ·
-		 * رویدادها · راهنمای سفر تمام‌عرض · [ایران در تصویر | تازه‌ترین اخبار]. «کارها و تجربیات»، «ایران در چهار فصل»
-		 * و «برنامۀ سفر» داده ندارند (کمتر از دو مورد واقعی برای هر کارت) ← ساخته نمی‌شوند. ستون خالی رندر نمی‌شود و دیگری پهن می‌شود.
+		 * [رویدادها | سفرهای آماده | فصل‌ها] (P5-D560) · راهنمای سفر تمام‌عرض · کارها و تجربیات · [ایران در تصویر | تازه‌ترین اخبار].
+		 * ستون خالی رندر نمی‌شود و دیگری پهن می‌شود.
 		 */
 		$pair = topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), $photos, $n ) : '', array(), 'tp-home-col' )
 			. topersia_g_home_section( 'tp-home-news', __( 'تازه‌ترین اخبار', 'topersia' ), $news, $news_more, 'tp-home-col' );
@@ -744,7 +729,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			. topersia_g_home_section( 'tp-home-provinces', __( 'استان‌های ایران', 'topersia' ), $prov_body, $prov_more )
 			. topersia_g_home_section( 'tp-home-cities', __( 'محبوب‌ترین مقاصد', 'topersia' ), topersia_g_home_slider( 'tp-home-destslide', __( 'محبوب‌ترین مقاصد', 'topersia' ), $city_cards, count( $dest ) ), $city_more, 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), array(), 'tp-home-lazy' )
-			. topersia_g_home_section( 'tp-home-events', __( 'رویدادها و جشنواره‌ها', 'topersia' ), '' !== $event_rows ? '<ul class="tp-home-events">' . $event_rows . '</ul>' : '', array(), 'tp-home-lazy' )
+			. $row3   /* 'tp-home-events' نخستین ستون ردیف سه‌ستونی — P5-D560 */
 			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide tp-home-glass" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-exp', __( 'کارها و تجربیات', 'topersia' ), '' !== $exp_html ? '<nav class="tp-home-guide tp-home-exp tp-home-glass" aria-label="' . esc_attr__( 'کارها و تجربیات', 'topersia' ) . '">' . $exp_html . '</nav>' : '', array(), 'tp-home-lazy' )
 			. $pair

@@ -1220,6 +1220,9 @@ return array(
 	/* دستۀ 51 الحاقیۀ ث — برچسب مشترک */
 	'برچسب‌ها' => array( 'en' => 'Tags', 'ar' => 'الوسوم' ),
 	'کارها و تجربیات' => array( 'en' => 'Things to do and experiences', 'ar' => 'أنشطة وتجارب' ),
+	'سفرهای آماده' => array( 'en' => 'Ready-made trips', 'ar' => 'رحلات جاهزة' ),
+	'برنامۀ سفر پیشنهادی' => array( 'en' => 'Suggested itinerary', 'ar' => 'برنامج رحلة مقترح' ),
+	'ایران در چهار فصل' => array( 'en' => 'Iran in four seasons', 'ar' => 'إيران في الفصول الأربعة' ),
 	/* دستۀ 51 بخش ۴ — هاب عمومی */
 	'کشورها' => array( 'en' => 'Countries', 'ar' => 'البلدان' ),
 	'مناطق جغرافیایی %s' => array( 'en' => 'Geographic regions of %s', 'ar' => 'المناطق الجغرافية في %s' ),
