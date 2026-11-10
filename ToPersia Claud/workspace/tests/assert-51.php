@@ -465,3 +465,58 @@ if ( function_exists( 'topersia_g_jalali' ) && function_exists( 'topersia_g_greg
 	t( 'P5-D560 رفتار: بازۀ ماه — دو سال', 'اسفند ' . topersia_g_fa( 1405 ) . ' – فروردین ' . topersia_g_fa( 1406 ) === topersia_g_home_month_range( '2027-03-01', '2027-04-05' ) );
 	t( 'P5-D560 رفتار: پایان پیش از آغاز ← فقط آغاز', 'آذر ' . topersia_g_fa( 1405 ) === topersia_g_home_month_range( '2026-11-23', '2026-11-01' ) );
 }
+
+/* ── الحاقیۀ ت: ایران در تصویر — کلاژ (P5-D561) ─────────────────── */
+$w51_home = $w51_read( 'plugin/topersia-render/includes/topersia-g-home.php' );
+$w51_zjs2 = $w51_read( 'plugin/topersia-render/assets/topersia-g-zones.js' );
+$w51_col = function ( $s ) {
+	return false !== strpos( $s, "topersia_g_home_real( array_keys( function_exists( 'topersia_g_hub_registry' ) ? topersia_g_hub_registry() : array() ), -1, false )" )   /* فقط واقعی، فقط نوع با صفحه */
+		&& false !== strpos( $s, "foreach ( array( 'hero', 'gallery' ) as \$pass ) {" ) && false !== strpos( $s, 'topersia_g_gallery_own_ids( $id )' )             /* hero سپس گالری */
+		&& false !== strpos( $s, "\$key[ \$att ]     = array( count( \$ids ) > 1 ? 1 : 0, \$turn[ \$ids[0] ], count( \$key ) );" )                               /* تک‌موجودیت پیش از مشترک، دورگردان */
+		&& false !== strpos( $s, '$keep  = $demo ? count( $picks ) : min( 3, intdiv( count( $picks ), $per ) ) * $per;' )                                       /* <۴ ← ۰ · ۴–۷ ← ۱ · ۸–۱۱ ← ۲ · ۱۲+ ← ۳ */
+		&& false !== strpos( $s, "\$per   = 4;" ) && false !== strpos( $s, 'if ( count( $picks ) >= 12 ) {' )
+		&& false !== strpos( $s, "topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), \$photos, \$slides ) . \$dots" );
+};
+tp441_mut( 'P5-D561: عکس یکتای واقعی (hero سپس گالری، تک‌موجودیت پیش از مشترک)، اسلاید = کف(n/۴) تا ۳، نوار و فلش و نقطه — جهش: نمونه هم', $w51_col, $w51_home,
+	str_replace( 'topersia_g_hub_registry() : array() ), -1, false )', 'topersia_g_hub_registry() : array() ), -1, true )', $w51_home ) );
+t( 'P5-D561: جهش — اسلاید بی کف (۵ عکس، دو اسلاید ناقص) می‌افتد', ! $w51_col( str_replace( 'min( 3, intdiv( count( $picks ), $per ) ) * $per', 'count( $picks )', $w51_home ) ) );
+t( 'P5-D561: جهش — مشترک پیش از تک‌موجودیت می‌افتد', ! $w51_col( str_replace( 'count( $ids ) > 1 ? 1 : 0', 'count( $ids ) > 1 ? 0 : 1', $w51_home ) ) );
+
+$w51_ph = function ( $s ) {
+	return false !== strpos( $s, "while ( \$demo && count( \$cells ) < 3 * \$per ) {" )                                         /* جای‌نگهدار فقط در پیش‌نمایش */
+		&& false !== strpos( $s, 'role="img" aria-label="\' . esc_attr__( \'نمونۀ نمایشی\', \'topersia\' )' )                      /* برچسب‌دار */
+		&& false !== strpos( $s, '<svg class="tp-home-photo__svg"' ) && 0 === preg_match( '/tp-home-photo--ph[^\n]*(src=|https?:)/', $s );   /* SVG درون‌خط، بی عکس بیرونی */
+};
+tp441_mut( 'P5-D561: جای‌نگهدار SVG برچسب‌دار فقط با پیش‌نمایش نمایشی — جهش: همیشه', $w51_ph, $w51_home,
+	str_replace( 'while ( $demo && count( $cells ) < 3 * $per ) {', 'while ( count( $cells ) < 3 * $per ) {', $w51_home ) );
+
+$w51_alt = function ( $s ) {
+	return false !== strpos( $s, "\$latin = 'en' !== topersia_g_page_lang() && ! preg_match( '/\p{Arabic}/u', \$alt );" )
+		&& false !== strpos( $s, "if ( '' === \$alt || \$latin || " );
+};
+tp441_mut( 'P5-D561: alt واقعی؛ در fa/ar alt تماماً لاتین ← نام موجودیت — جهش: بی شرط لاتین', $w51_alt, $w51_home,
+	str_replace( "if ( '' === \$alt || \$latin || ", "if ( '' === \$alt || ", $w51_home ) );
+
+$w51_dots = function ( $j ) {
+	$a = strpos( $j, 'نقطه‌های اسلاید — P5-D561' );
+	$b = false !== $a ? strpos( $j, '} )();', $a ) : false;
+	$blk = false !== $b ? substr( $j, $a, $b - $a ) : '';
+	return '' !== $blk && false !== strpos( $blk, "'.tp-home-dots[data-tp-dots]'" ) && false === strpos( $blk, 'data-target' )   /* data-target را دستگیرۀ فلش می‌گیرد */
+		&& false !== strpos( $blk, "b.setAttribute( 'aria-current', k === i ? 'true' : 'false' );" )
+		&& false !== strpos( $blk, 'Math.abs( el.scrollLeft )' ) && false !== strpos( $blk, "behavior: calm ? 'auto' : 'smooth'" )
+		&& false !== strpos( $blk, 'nav.hidden = false;' );
+};
+tp441_mut( 'P5-D561 JS: نقطه‌ها در zones، data-tp-dots (نه data-target)، aria-current از اسکرول، کاهش حرکت، بی JS پنهان — جهش: data-target', $w51_dots, $w51_zjs2,
+	str_replace( "'.tp-home-dots[data-tp-dots]'", "'.tp-home-dots[data-target]'", $w51_zjs2 ) );
+t( 'P5-D561: نقطه فقط با دو اسلاید به بالا، بی JS hidden، data-tp-dots', false !== strpos( $w51_home, '$dots = $slides > 1 ? \'<div class="tp-home-dots" data-tp-dots="tp-home-photoslide"' ) && false !== strpos( $w51_home, '. $dots . \'</div>\' : \'\';' ) );
+
+$w51_ccss = function ( $c ) {
+	$a = strpos( $c, '/* ۹ب کلاژ (P5-D561)' );
+	$blk = false !== $a ? substr( $c, $a, (int) strpos( $c, "\n/*", $a + 5 ) - $a ) : '';
+	return '' !== $blk && 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $blk )
+		&& false !== strpos( $blk, '#tp-home-gallery .tp-home-slider{grid-auto-columns:100%;gap:0;flex:1 1 auto}' )   /* پنل هم‌قد ستون اخبار */
+		&& false !== strpos( $blk, '.tp-home-collage > :first-child{grid-row:1 / -1}' )
+		&& false !== strpos( $blk, '.tp-home-dots button{display:grid;place-items:center;inline-size:32px;block-size:32px;' );   /* هدف ≥ ۲۴ */
+};
+tp441_mut( 'P5-D561 CSS: کلاژ یک بزرگ + سه کوچک، اسلاید تمام‌پهنا و کش‌آمده، نقطه ۳۲px، فقط توکن — جهش: نقطه ۱۶px', $w51_ccss, $w51_hcs,
+	str_replace( 'inline-size:32px;block-size:32px;', 'inline-size:16px;block-size:16px;', $w51_hcs ) );

@@ -384,6 +384,11 @@ msgstr ""
 msgid "اسفند"
 msgstr ""
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "اسلاید %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "اسنپ"
 msgstr ""

@@ -385,6 +385,11 @@ msgstr "المحافظات التي يمتد فيها"
 msgid "اسفند"
 msgstr "إسفند"
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "اسلاید %s"
+msgstr "الشريحة %s"
+
 #: includes/topersia-g-map.php
 msgid "اسنپ"
 msgstr "سناب"

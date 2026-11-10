@@ -104,6 +104,7 @@ return array (
     'استان‌های هم‌مرز' => 'Neighboring provinces',
     'استان‌های گسترده در آن' => 'Provinces it spans',
     'اسفند' => 'Esfand',
+    'اسلاید %s' => 'Slide %s',
     'اسنپ' => 'Snapp',
     'اسپانیایی' => 'Spanish',
     'اسکناس و مسکوک' => 'Banknotes and coins',

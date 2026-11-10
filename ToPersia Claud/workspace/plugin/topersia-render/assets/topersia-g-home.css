@@ -244,6 +244,20 @@ html .tp-page.tp-home .tp-home-exp__n{font-size:calc(.8125 * var(--tp-rem));font
 /* ۹ ایران در تصویر — اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا (دستۀ 49 بند ۲) */
 html .tp-page.tp-home .tp-home-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:var(--tp-tile-radius,12px);color:var(--tp-text-strong);text-decoration:none;background:var(--tp-surface);box-shadow:var(--tp-shadow-soft)}
 html .tp-page.tp-home .tp-home-photo__img{display:block;inline-size:100%;block-size:100%;max-inline-size:none;object-fit:cover}
+/* ۹ب کلاژ (P5-D561) — هر اسلاید تمام‌پهنای پنل: یک عکس بزرگ + سه کوچک؛ پنل هم‌قد ستون اخبار (اسلایدر کش می‌آید) */
+html .tp-page.tp-home #tp-home-gallery .tp-home-slider{grid-auto-columns:100%;gap:0;flex:1 1 auto}
+html .tp-page.tp-home .tp-home-trio > #tp-home-gallery > :last-child{flex:none}
+html .tp-page.tp-home .tp-home-collage{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:8px;block-size:100%;min-block-size:340px}
+html .tp-page.tp-home .tp-home-collage > :first-child{grid-row:1 / -1}
+html .tp-page.tp-home .tp-home-collage .tp-home-photo{aspect-ratio:auto;block-size:100%;box-shadow:none}
+html .tp-page.tp-home .tp-home-photo--ph{background:var(--tp-tile-bg);border:1px dashed var(--tp-tile-border);color:var(--tp-tile-border)}
+html .tp-page.tp-home .tp-home-photo__svg{display:block;inline-size:100%;block-size:100%;fill:currentColor}
+html .tp-page.tp-home .tp-home-dots{display:flex;justify-content:center;gap:2px;margin-block-start:6px}
+html .tp-page.tp-home .tp-home-dots[hidden]{display:none}
+html .tp-page.tp-home .tp-home-dots button{display:grid;place-items:center;inline-size:32px;block-size:32px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer}
+html .tp-page.tp-home .tp-home-dots button::before{content:"";inline-size:10px;block-size:10px;border-radius:50%;border:2px solid var(--tp-primary);background:transparent}
+html .tp-page.tp-home .tp-home-dots button[aria-current="true"]::before{background:var(--tp-primary)}
+html .tp-page.tp-home .tp-home-dots button:focus-visible{outline:2px solid var(--tp-primary);outline-offset:1px}
 /* نام زیر عکس روی نوار مات سطح، نه روی خود تصویر — کنتراست از توکن */
 html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;inset-block-end:8px;padding:4px 10px;border-radius:999px;
   background:var(--tp-bg);color:var(--tp-text-strong);font-size:calc(.84 * var(--tp-rem));font-weight:700;justify-self:start;inline-size:fit-content;max-inline-size:calc(100% - 16px);
@@ -283,6 +297,7 @@ html .tp-page.tp-home .tp-home-photo__cap{position:absolute;inset-inline:8px;ins
   html .tp-page.tp-home{--tp-home-st-ov:40px}
 }
 @media (max-width:600px){
+  html .tp-page.tp-home .tp-home-collage{min-block-size:280px}
   html .tp-page.tp-home .tp-home-seasons{grid-template-columns:repeat(2,minmax(0,1fr))}
   html .tp-page.tp-home .tp-home-season{min-block-size:180px}
   html .tp-page.tp-home .tp-home-hero{min-block-size:520px}

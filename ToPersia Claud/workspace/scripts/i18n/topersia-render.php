@@ -1223,6 +1223,7 @@ return array(
 	'سفرهای آماده' => array( 'en' => 'Ready-made trips', 'ar' => 'رحلات جاهزة' ),
 	'برنامۀ سفر پیشنهادی' => array( 'en' => 'Suggested itinerary', 'ar' => 'برنامج رحلة مقترح' ),
 	'ایران در چهار فصل' => array( 'en' => 'Iran in four seasons', 'ar' => 'إيران في الفصول الأربعة' ),
+	'اسلاید %s' => array( 'en' => 'Slide %s', 'ar' => 'الشريحة %s' ),
 	/* دستۀ 51 بخش ۴ — هاب عمومی */
 	'کشورها' => array( 'en' => 'Countries', 'ar' => 'البلدان' ),
 	'مناطق جغرافیایی %s' => array( 'en' => 'Geographic regions of %s', 'ar' => 'المناطق الجغرافية في %s' ),

@@ -121,12 +121,15 @@ if ( ! function_exists( 'topersia_g_home_section' ) ) {
 }
 
 if ( ! function_exists( 'topersia_g_home_alt' ) ) {
-	/** alt واقعی پیوست؛ خالی یا به زبان دیگر ← نام موجودیت به زبان صفحه (P5-D278). */
+	/** alt واقعی پیوست؛ خالی یا به زبان دیگر ← نام موجودیت به زبان صفحه (P5-D278 · P5-D561). */
 	function topersia_g_home_alt( $att, $pid ) {
 
 		$alt = trim( (string) get_post_meta( $att, '_wp_attachment_image_alt', true ) );
 
-		if ( '' === $alt || ( function_exists( 'topersia_g_foreign_text' ) && topersia_g_foreign_text( $alt ) ) ) {
+		/* P5-D561: در صفحۀ fa/ar، alt تماماً لاتین (متن انگلیسی کتابخانه) هم به زبان دیگر است */
+		$latin = 'en' !== topersia_g_page_lang() && ! preg_match( '/\p{Arabic}/u', $alt );
+
+		if ( '' === $alt || $latin || ( function_exists( 'topersia_g_foreign_text' ) && topersia_g_foreign_text( $alt ) ) ) {
 			$alt = (string) get_the_title( $pid );
 		}
 
@@ -657,50 +660,109 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 				. '<small class="tp-home-exp__n">' . esc_html( topersia_g_fa( (int) $e[3] ) ) . '</small></a>';
 		}
 
-		/* ── ۹ ایران در تصویر — hero_image موجودیت‌ها، هر عکس پیوند به همان؛ بی تکرار تصویر هیرو ── */
-		$photos = '';
-		$seen   = array( $hero_att => true );
-		$pool   = array_merge( $provinces, $cities );
-
-		foreach ( $groups as $g ) {
-			$pool = array_merge( $pool, $g[1] );
-		}
-
+		/*
+		 * ── ۹ ایران در تصویر — کلاژ (P5-D561): عکس‌های یکتای واقعی — hero_image، سپس featured_image_gallery — از هر موجودیت
+		 * منتشرشدۀ غیرنمونه با صفحه؛ هر عکس پیوند به نخستین موجودیتی که آن را دارد (hero بر گالری مقدم)، عکسِ تک‌موجودیت پیش از مشترک،
+		 * بی تکرار تصویر هیرو صفحه.
+		 * هر اسلاید $per عکس (یک بزرگ + سه کوچک)؛ اسلایدها = کف(n / $per) تا سه: کمتر از $per ← پنهان، سپس ۱، ۲، ۳.
+		 * پیش‌نمایش نمایشی: جای خالی تا سه اسلاید با جای‌نگهدار SVG برچسب‌دار (هرگز عکس بیرونی) — P5-D548.
+		 */
+		$per   = 4;
+		$real  = topersia_g_home_real( array_keys( function_exists( 'topersia_g_hub_registry' ) ? topersia_g_hub_registry() : array() ), -1, false );
+		$own   = array();   /* پیوست ← موجودیت‌های دارندۀ آن، hero پیش از گالری */
 		$picks = array();
 
-		foreach ( $pool as $id ) {
+		if ( $real && function_exists( 'update_meta_cache' ) ) {
+			update_meta_cache( 'post', $real );
+		}
+
+		foreach ( array( 'hero', 'gallery' ) as $pass ) {
+			foreach ( $real as $id ) {
+
+				if ( 'hero' === $pass ) {
+					$hv   = topersia_g_raw( $id, 'hero_image' );
+					$hv   = is_array( $hv ) ? ( isset( $hv['id'] ) ? $hv['id'] : reset( $hv ) ) : $hv;
+					$list = is_scalar( $hv ) ? array( absint( $hv ) ) : array();
+				} else {
+					$list = function_exists( 'topersia_g_gallery_own_ids' ) ? topersia_g_gallery_own_ids( $id ) : array();
+				}
+
+				foreach ( $list as $att ) {
+					if ( $att && $att !== $hero_att && ! in_array( $id, isset( $own[ $att ] ) ? $own[ $att ] : array(), true ) ) {
+						$own[ $att ][] = $id;
+					}
+				}
+			}
+		}
+
+		/*
+		 * عکسِ یک موجودیت پیش از عکسِ مشترک — پیوند و نامِ زیر عکس بی‌ابهام؛ مشترک فقط برای پرکردن اسلاید.
+		 * درون هر دسته دورگردان: نخستین عکس هر موجودیت، سپس دومین… — نه همۀ گالری یک شهر پشت هم.
+		 */
+		$turn = array();
+		$key  = array();
+
+		foreach ( $own as $att => $ids ) {
+			$turn[ $ids[0] ] = isset( $turn[ $ids[0] ] ) ? $turn[ $ids[0] ] + 1 : 0;
+			$key[ $att ]     = array( count( $ids ) > 1 ? 1 : 0, $turn[ $ids[0] ], count( $key ) );
+		}
+
+		uksort( $own, function ( $a, $b ) use ( $key ) {
+			return $key[ $a ] <=> $key[ $b ];
+		} );
+		$seen = array( $hero_att => true );
+
+		foreach ( $own as $att => $ids ) {
 
 			if ( count( $picks ) >= 12 ) {
 				break;
 			}
-
-			$hv   = topersia_g_raw( $id, 'hero_image' );
-			$hv   = is_array( $hv ) ? ( isset( $hv['id'] ) ? $hv['id'] : reset( $hv ) ) : $hv;
-			$att  = is_scalar( $hv ) ? absint( $hv ) : 0;
 
 			if ( ! $att || isset( $seen[ $att ] ) || ! wp_attachment_is_image( $att ) ) {
 				continue;
 			}
 
 			$seen[ $att ] = true;
-			$picks[]       = array( $id, $att );
+			$picks[]      = array( (int) $ids[0], (int) $att );
 		}
 
-		/* دستۀ 49 بند ۲: اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا (پیوست یکتا، هر عکس پیوند به موجودیت خودش)؛ گرید ۴/۵/۸ برداشته شد. */
-		$n = count( $picks );
+		$demo  = function_exists( 'topersia_demo_on' ) && topersia_demo_on();
+		$keep  = $demo ? count( $picks ) : min( 3, intdiv( count( $picks ), $per ) ) * $per;
+		$cells = array();
 
-		foreach ( $picks as $pick ) {
+		foreach ( array_slice( $picks, 0, $keep ) as $pick ) {
 
 			list( $id, $att ) = $pick;
-			$full  = wp_get_attachment_image_src( $att, 'large' );
-			$desc  = function_exists( 'topersia_g_text' ) ? trim( wp_strip_all_tags( topersia_g_text( $id, 'short_summary' ) ) ) : '';
-			$photos .= '<a class="tp-home-photo" href="' . esc_url( get_permalink( $id ) ) . '" data-tp-title="' . esc_attr( get_the_title( $id ) ) . '" data-tp-desc="' . esc_attr( $desc ) . '"'
+			$full    = wp_get_attachment_image_src( $att, 'large' );
+			$desc    = function_exists( 'topersia_g_text' ) ? trim( wp_strip_all_tags( topersia_g_text( $id, 'short_summary' ) ) ) : '';
+			$cells[] = '<a class="tp-home-photo" href="' . esc_url( get_permalink( $id ) ) . '" data-tp-title="' . esc_attr( get_the_title( $id ) ) . '" data-tp-desc="' . esc_attr( $desc ) . '"'
 				. ( $full ? ' data-tp-full="' . esc_url( $full[0] ) . '" data-tp-w="' . absint( $full[1] ) . '" data-tp-h="' . absint( $full[2] ) . '"' : '' ) . '>'
-				. topersia_g_home_img( $att, $id, 'medium_large', '(max-width: 600px) 50vw, 300px', 'tp-home-photo__img' )
+				. topersia_g_home_img( $att, $id, 'medium_large', '(max-width: 600px) 90vw, 420px', 'tp-home-photo__img' )
 				. '<span class="tp-home-photo__cap">' . esc_html( get_the_title( $id ) ) . '</span></a>';
 		}
 
+		while ( $demo && count( $cells ) < 3 * $per ) {
+			$cells[] = '<span class="tp-home-photo tp-home-photo--ph" role="img" aria-label="' . esc_attr__( 'نمونۀ نمایشی', 'topersia' ) . '">'
+				. '<svg class="tp-home-photo__svg" viewBox="0 0 4 3" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 3 1.4 1.4 2.3 2.3 3 1.6 4 2.6V3Z"/><circle cx="3" cy=".8" r=".4"/></svg>'
+				. '<span class="tp-home-photo__cap">' . esc_html__( 'نمونۀ نمایشی', 'topersia' ) . '</span></span>';
+		}
+
 		/* دستۀ 47 ث: کمتر از ۴ عکس یکتا ← بخش پنهان؛ پنجرۀ بومی <dialog> (پنجرۀ g-gallery به درگاه صفحۀ موجودیت بسته است). */
+		$n      = count( $cells );
+		$slides = intdiv( $n, $per );
+		$photos = '';
+		$dots   = '';
+
+		foreach ( array_chunk( array_slice( $cells, 0, $slides * $per ), $per ) as $k => $chunk ) {
+			/* translators: %s شمارۀ اسلاید */
+			$lbl     = sprintf( __( 'اسلاید %s', 'topersia' ), topersia_g_fa( $k + 1 ) );
+			$photos .= '<div class="tp-home-collage" role="group" aria-label="' . esc_attr( $lbl ) . '">' . implode( '', $chunk ) . '</div>';
+			$dots   .= '<button type="button" aria-label="' . esc_attr( $lbl ) . '" aria-current="' . ( 0 === $k ? 'true' : 'false' ) . '"></button>';
+		}
+
+		/* نقطه‌ها فقط با دو اسلاید به بالا؛ بی JS پنهان (topersia-g-home.js نشان می‌دهد) — فلش و نوار از topersia_g_slider_bar */
+		$dots = $slides > 1 ? '<div class="tp-home-dots" data-tp-dots="tp-home-photoslide" role="group" aria-label="' . esc_attr__( 'ایران در تصویر', 'topersia' ) . '" hidden>' . $dots . '</div>' : '';
+
 		$photo_dlg = '';
 
 		if ( $n < 4 ) {
@@ -721,7 +783,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		 * [رویدادها | سفرهای آماده | فصل‌ها] (P5-D560) · راهنمای سفر تمام‌عرض · کارها و تجربیات · [ایران در تصویر | تازه‌ترین اخبار].
 		 * ستون خالی رندر نمی‌شود و دیگری پهن می‌شود.
 		 */
-		$pair = topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), $photos, $n ) : '', array(), 'tp-home-col' )
+		$pair = topersia_g_home_section( 'tp-home-gallery', __( 'ایران در تصویر', 'topersia' ), '' !== $photos ? topersia_g_home_slider( 'tp-home-photoslide', __( 'ایران در تصویر', 'topersia' ), $photos, $slides ) . $dots : '', array(), 'tp-home-col' )
 			. topersia_g_home_section( 'tp-home-news', __( 'تازه‌ترین اخبار', 'topersia' ), $news, $news_more, 'tp-home-col' );
 		$pair = '' !== $pair ? '<div class="tp-home-trio tp-home-lazy">' . $pair . '</div>' : '';
 

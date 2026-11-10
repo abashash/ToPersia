@@ -385,6 +385,11 @@ msgstr "Provinces it spans"
 msgid "اسفند"
 msgstr "Esfand"
 
+#: includes/topersia-g-home.php
+#, php-format
+msgid "اسلاید %s"
+msgstr "Slide %s"
+
 #: includes/topersia-g-map.php
 msgid "اسنپ"
 msgstr "Snapp"
