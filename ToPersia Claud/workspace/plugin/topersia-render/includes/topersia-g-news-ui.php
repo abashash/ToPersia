@@ -602,7 +602,7 @@ if ( ! function_exists( 'topersia_g_news_partial' ) ) {
 	}
 }
 
-/** سرآیند پاسخ قطعه — هرگز نمایه نشود، هرگز در کش مشترک نماند. */
+/** سرآیند پاسخ قطعه — هرگز نمایه نشود، هرگز در کش مشترک نماند. همین‌جا پاسخ برای مسیر سبک ذخیره می‌شود (P5-D571). */
 if ( ! function_exists( 'topersia_g_news_partial_headers' ) ) {
 	function topersia_g_news_partial_headers() {
 		if ( ! headers_sent() ) {
@@ -610,6 +610,87 @@ if ( ! function_exists( 'topersia_g_news_partial_headers' ) ) {
 			header( 'Cache-Control: no-store' );
 			header( 'Content-Type: text/html; charset=' . get_option( 'blog_charset' ) );
 		}
+		topersia_frag_store_begin();
+	}
+}
+
+/* ── کش قطعۀ نتایج — P5-D571 (دستۀ 52 بند ۱۳) ─────────────────────────────
+ * بالا آمدن وردپرس با همۀ افزونه‌ها خودش چند ثانیه است؛ پس پاسخ `?tp_partial=1` یک بار ساخته و در پرونده گذاشته می‌شود
+ * و `fragment.php` (بی وردپرس) دفعۀ بعد همان را می‌دهد. کلید: میزبان + مسیر (زبان در مسیر است) + پارامترهای مجاز
+ * (`includes/topersia-frag-key.php`). ابطال: ذخیره/حذف/تغییر وضعیت هر پست `tp_`/`tpc_`، تغییر رابطۀ جت‌انجین،
+ * ویرایش واژه‌های موضوع و برچسب؛ و سقف عمر TOPERSIA_FRAG_TTL. فقط برای مهمان و فقط وقتی سایت پشت «به‌زودی» نیست.
+ */
+if ( ! function_exists( 'topersia_frag_dir' ) && is_readable( __DIR__ . '/topersia-frag-key.php' ) ) {
+	require_once __DIR__ . '/topersia-frag-key.php';
+}
+
+/** نشانی مسیر سبک، یا تهی اگر پرونده‌اش نیست. */
+if ( ! function_exists( 'topersia_frag_url' ) ) {
+	function topersia_frag_url() {
+		return ( function_exists( 'topersia_render_url' ) && function_exists( 'topersia_render_path' ) && is_file( topersia_render_path() . 'fragment.php' ) ) ? topersia_render_url() . 'fragment.php' : '';
+	}
+}
+
+/** آیا پاسخ این درخواست کش‌پذیر است: مهمان، سایت عمومی، نه ۴۰۴. */
+if ( ! function_exists( 'topersia_frag_cacheable' ) ) {
+	function topersia_frag_cacheable() {
+		if ( ! function_exists( 'topersia_frag_key' ) || ! defined( 'WP_CONTENT_DIR' ) ) {
+			return false;
+		}
+		if ( is_user_logged_in() || is_404() || '' !== (string) get_option( 'elementor_maintenance_mode_mode', '' ) ) {
+			return false;
+		}
+		return (bool) apply_filters( 'topersia_frag_cacheable', true );
+	}
+}
+
+/** آغاز ضبط پاسخ قطعه — در پایان، اگر ناحیۀ نتیجه دارد، در پرونده می‌رود. */
+if ( ! function_exists( 'topersia_frag_store_begin' ) ) {
+	function topersia_frag_store_begin() {
+
+		if ( ! topersia_frag_cacheable() ) {
+			return;
+		}
+
+		$uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '';   // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		$key = topersia_frag_key( isset( $_SERVER['HTTP_HOST'] ) ? (string) wp_unslash( $_SERVER['HTTP_HOST'] ) : '', (string) strtok( $uri, '?' ), wp_unslash( $_GET ) );   // phpcs:ignore WordPress.Security
+
+		if ( '' === $key ) {
+			return;
+		}
+
+		ob_start( function ( $html ) use ( $key ) {
+			if ( false !== strpos( $html, 'data-tp-news-swap="results"' ) ) {
+				$dir = topersia_frag_dir( WP_CONTENT_DIR );
+				if ( wp_mkdir_p( $dir ) ) {
+					$all = glob( $dir . '/*.html' );
+					if ( is_array( $all ) && count( $all ) > TOPERSIA_FRAG_MAX ) {
+						array_map( 'unlink', $all );
+					}
+					if ( ! is_file( $dir . '/index.html' ) ) {
+						file_put_contents( $dir . '/index.html', '' );
+					}
+					file_put_contents( $dir . '/' . $key . '.html', $html, LOCK_EX );
+				}
+			}
+			return $html;
+		} );
+	}
+}
+
+/** پاک‌کردن همۀ قطعه‌های کش‌شده (جز index.html). */
+if ( ! function_exists( 'topersia_frag_purge' ) ) {
+	function topersia_frag_purge() {
+		if ( ! function_exists( 'topersia_frag_dir' ) || ! defined( 'WP_CONTENT_DIR' ) ) {
+			return 0;
+		}
+		$n = 0;
+		foreach ( (array) glob( topersia_frag_dir( WP_CONTENT_DIR ) . '/*.html' ) as $file ) {
+			if ( 'index.html' !== basename( $file ) && @unlink( $file ) ) {   // phpcs:ignore WordPress.PHP.NoSilencedErrors
+				$n ++;
+			}
+		}
+		return $n;
 	}
 }
 
@@ -625,7 +706,9 @@ if ( ! function_exists( 'topersia_g_news_results_attrs' ) ) {
 /** ریشۀ صفحه: نشانی پایه برای JS، پیام خطای شبکه، جهت از زبان صفحه. */
 if ( ! function_exists( 'topersia_g_news_root_attrs' ) ) {
 	function topersia_g_news_root_attrs( $base ) {
+		$frag = ( function_exists( 'topersia_frag_url' ) && function_exists( 'topersia_frag_cacheable' ) && topersia_frag_cacheable() ) ? topersia_frag_url() : '';
 		return ' dir="' . esc_attr( is_rtl() ? 'rtl' : 'ltr' ) . '" data-tp-news-base="' . esc_attr( (string) wp_parse_url( $base, PHP_URL_PATH ) ) . '"'
+			. ( '' !== $frag ? ' data-tp-news-frag="' . esc_url( $frag ) . '"' : '' )   /* مسیر سبک قطعۀ نتایج — P5-D571 */
 			. ' data-tp-news-err="' . esc_attr__( 'بارگیری نشد؛ صفحه دوباره بار می‌شود.', 'topersia' ) . '"';
 	}
 }
@@ -686,6 +769,29 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'query_vars', function ( $vars ) {
 		return array_merge( $vars, array( 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when', 'tp_partial' ) );
 	} );
+
+	/* ابطال کش قطعه (P5-D571): هر تغییر محتوای موجودیت یا خبر/مقاله، رابطه، و واژه‌های موضوع/برچسب */
+	$topersia_frag_post = function ( $post_id ) {
+		$type = (string) get_post_type( $post_id );
+		if ( 0 === strpos( $type, 'tp_' ) || 0 === strpos( $type, 'tpc_' ) ) {
+			topersia_frag_purge();
+		}
+	};
+	add_action( 'save_post', $topersia_frag_post, 99 );
+	add_action( 'before_delete_post', $topersia_frag_post, 99 );
+	add_action( 'transition_post_status', function ( $new, $old, $post ) use ( $topersia_frag_post ) {
+		if ( $new !== $old && is_object( $post ) ) {
+			$topersia_frag_post( $post->ID );
+		}
+	}, 99, 3 );
+	foreach ( array( 'jet-engine/relation/update/after', 'jet-engine/relation/delete/after', 'edited_tpc_news_topic', 'created_tpc_news_topic', 'delete_tpc_news_topic', 'edited_tpc_tag', 'created_tpc_tag', 'delete_tpc_tag' ) as $topersia_frag_hook ) {
+		add_action( $topersia_frag_hook, 'topersia_frag_purge', 99, 0 );
+	}
+	add_action( 'set_object_terms', function ( $object_id, $terms, $tt_ids, $taxonomy ) {
+		if ( in_array( $taxonomy, array( 'tpc_news_topic', 'tpc_tag' ), true ) ) {
+			topersia_frag_purge();
+		}
+	}, 99, 4 );
 
 	add_action( 'wp_enqueue_scripts', function () {
 		$list = topersia_g_news_list_is() && is_singular( topersia_g_news_types() );

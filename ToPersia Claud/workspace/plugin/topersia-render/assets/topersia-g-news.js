@@ -11,6 +11,8 @@
  *    شمار را می‌گوید؛ تمرکز روی تراشه یا عنوان نتیجه می‌ماند. درخواست تازه قبلی را لغو می‌کند
  *    (AbortController — آخرین برنده است). خطای شبکه ← پیام و بارگذاری عادی همان نشانی.
  *    بی جاوااسکریپت پیوندها و فرم GET همان کار را می‌کنند.
+ * ۴. سرعت (P5-D571): قطعه نخست از مسیر سبک fragment.php (کش پرونده‌ای، بی وردپرس)، وگرنه از خود نشانی؛
+ *    پیش‌واکشی تراشه و صفحه با نشانگر/انگشت/تمرکز؛ جست‌وجو هنگام نوشتن با درنگ ۲۵۰ms؛ بی هیچ تأخیر ساختگی.
  */
 ( function () {
 	'use strict';
@@ -178,23 +180,77 @@
 		}
 	}
 
-	function load( href, push, focus ) {
-		var url  = new URL( href, window.location.href );
+	/* ── گرفتن قطعه — P5-D571 ──
+	   ۱. مسیر سبک (`data-tp-news-frag`، fragment.php بی وردپرس): پروندۀ کش همان پاسخ؛ نبود (۲۰۴) یا خطا ←
+	   ۲. همین نشانی با `tp_partial=1` (وردپرس می‌سازد و کش را پر می‌کند).
+	   نتیجه تا KEEP میلی‌ثانیه در حافظۀ همین صفحه می‌ماند: پیش‌واکشی تراشه و «بازگشت» دوباره سراغ سرور نمی‌روند. */
+	var KEEP = 120000, WAIT = 250, IDLE = 1500, WARM = 8, store = {};
+
+	function fetchPart( url, signal ) {
 		var part = new URL( url.href );
 		part.searchParams.set( 'tp_partial', '1' );
+		var frag = root.getAttribute( 'data-tp-news-frag' );
+		var wp   = function () {
+			return window.fetch( part.href, { credentials: 'same-origin', signal: signal } ).then( function ( r ) {
+				if ( ! r.ok ) {
+					throw new Error( 'HTTP ' + r.status );
+				}
+				return r.text();
+			} );
+		};
+		if ( ! frag ) {
+			return wp();
+		}
+		return window.fetch( frag + '?u=' + encodeURIComponent( url.pathname + url.search ), { credentials: 'same-origin', signal: signal } )
+			.then( function ( r ) {
+				return 200 === r.status ? r.text() : '';
+			} )
+			.catch( function ( e ) {
+				if ( e && e.name === 'AbortError' ) {
+					throw e;
+				}
+				return '';
+			} )
+			.then( function ( html ) {
+				return html && html.indexOf( 'data-tp-news-swap="results"' ) > -1 ? html : wp();
+			} );
+	}
+
+	function getPart( url, signal ) {
+		var k = url.pathname + url.search, hit = store[ k ], now = Date.now();
+		if ( hit && now - hit.t < KEEP ) {
+			return hit.p;
+		}
+		var p = fetchPart( url, signal );
+		store[ k ] = { p: p, t: now };
+		p.catch( function () {
+			if ( store[ k ] && store[ k ].p === p ) {
+				delete store[ k ];
+			}
+		} );
+		return p;
+	}
+
+	/* پیش‌واکشی: نشانگر یا انگشت روی تراشه/صفحه ← قطعه پیش از کلیک آماده است */
+	function prefetch( a ) {
+		if ( ! a || ! window.fetch || a.target === '_blank' ) {
+			return;
+		}
+		var url = new URL( a.href, window.location.href );
+		if ( same( url ) && url.href !== window.location.href ) {
+			getPart( url );
+		}
+	}
+
+	function load( href, push, focus ) {
+		var url  = new URL( href, window.location.href );
 		if ( ctrl ) {
 			ctrl.abort();
 		}
 		ctrl = typeof window.AbortController === 'function' ? new window.AbortController() : null;
 		var mine = ctrl;
 		busy( true );
-		window.fetch( part.href, { credentials: 'same-origin', signal: mine ? mine.signal : undefined } )
-			.then( function ( r ) {
-				if ( ! r.ok ) {
-					throw new Error( 'HTTP ' + r.status );
-				}
-				return r.text();
-			} )
+		getPart( url, mine ? mine.signal : undefined )
 			.then( function ( html ) {
 				if ( mine !== ctrl ) {
 					return;   /* درخواست تازه‌تری در راه است */
@@ -313,6 +369,54 @@
 			if ( same( url ) ) {
 				load( url.href, true, false );
 			}
+		} );
+
+		/* پیش‌واکشی تراشه و صفحه‌بندی با نشانگر، انگشت یا تمرکز صفحه‌کلید (P5-D571) */
+		var warm = function ( e ) {
+			var a = e.target && e.target.closest ? e.target.closest( '[data-tp-news-swap="chips"] a[href], .tp-news-pages a[href]' ) : null;
+			if ( a && ! a.hasAttribute( 'aria-current' ) ) {
+				prefetch( a );
+			}
+		};
+		root.addEventListener( 'mouseover', warm, { passive: true } );
+		root.addEventListener( 'touchstart', warm, { passive: true } );
+		root.addEventListener( 'focusin', warm );
+
+		/* گرم‌کردن کش: کمی پس از بار صفحه، تراشه‌ها یکی‌یکی (نه هم‌زمان) پیش‌واکشی می‌شوند تا نخستین کلیک هم از کش باشد.
+		   فقط با مسیر سبک، و نه وقتی کاربر صرفه‌جویی داده خواسته. */
+		window.setTimeout( function () {
+			var conn = window.navigator && window.navigator.connection;
+			if ( ! root.getAttribute( 'data-tp-news-frag' ) || ( conn && conn.saveData ) ) {
+				return;
+			}
+			var list = Array.prototype.slice.call( root.querySelectorAll( '[data-tp-news-swap="chips"] a[href]:not([aria-current])' ), 0, WARM );
+			( function next() {
+				var a = list.shift();
+				if ( a ) {
+					var url = new URL( a.href, window.location.href );
+					if ( same( url ) ) {
+						getPart( url ).then( next, next );
+					} else {
+						next();
+					}
+				}
+			}() );
+		}, IDLE );
+
+		/* جست‌وجو هنگام نوشتن، با درنگ WAIT میلی‌ثانیه؛ درخواست تازه قبلی را لغو می‌کند (AbortController در load) */
+		var typing = null;
+		root.addEventListener( 'input', function ( e ) {
+			var el = e.target;
+			if ( el.name !== 'tp_q' || ! el.form || ! el.form.hasAttribute( 'data-tp-news-filter' ) || ! window.fetch || ! window.history.pushState ) {
+				return;
+			}
+			window.clearTimeout( typing );
+			typing = window.setTimeout( function () {
+				var url = formUrl( el.form );
+				if ( same( url ) && url.href !== window.location.href ) {
+					load( url.href, true, false );
+				}
+			}, WAIT );
 		} );
 
 		if ( window.history.replaceState ) {
