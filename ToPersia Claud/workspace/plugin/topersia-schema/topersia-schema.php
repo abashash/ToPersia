@@ -1543,6 +1543,69 @@ function topersia_schema_home_json( $post_id ) {
 }
 
 /**
+ * گراف تک‌مقاله — Article (P5-D567). فقط ویژگی‌های دارای داده: تیتر، نشانی، تاریخ انتشار،
+ * dateModified از `article_updated_date` (اگر معتبر و دیرتر از انتشار؛ وگرنه زمان ویرایش پست)،
+ * نویسنده از `article_author_name` (Person) و ناشر = Organization سایت؛ about = @id مکان‌های مرتبط منتشرشده.
+ * بی AggregateRating و Review (P5-D510).
+ */
+function topersia_schema_article_json( $post_id ) {
+
+	$post_id = absint( $post_id );
+	$url     = (string) get_permalink( $post_id );
+
+	if ( ! $post_id || '' === $url || 'publish' !== get_post_status( $post_id ) ) {
+		return '';
+	}
+
+	$org  = topersia_schema_organization();
+	$site = topersia_schema_website();
+	$upd  = function_exists( 'topersia_g_article_updated' ) ? (string) topersia_g_article_updated( $post_id ) : '';
+	$auth = trim( wp_strip_all_tags( (string) get_post_meta( $post_id, 'article_author_name', true ) ) );
+	$sum  = function_exists( 'topersia_g_news_sum' ) ? wp_strip_all_tags( (string) topersia_g_news_sum( $post_id ) ) : '';
+	$img  = function_exists( 'topersia_g_news_image' ) ? (int) topersia_g_news_image( $post_id ) : 0;
+	$src  = $img ? wp_get_attachment_image_src( $img, 'full' ) : false;
+
+	$node = array(
+		'@type'            => 'Article',
+		'@id'              => $url . '#article',
+		'headline'         => wp_strip_all_tags( (string) get_the_title( $post_id ) ),
+		'url'              => $url,
+		'mainEntityOfPage' => $url,
+		'datePublished'    => (string) get_post_time( 'c', true, $post_id ),
+		'dateModified'     => '' !== $upd ? $upd : (string) get_post_modified_time( 'c', true, $post_id ),
+		'inLanguage'       => topersia_schema_lang(),
+		'isPartOf'         => array( '@id' => $site['@id'] ),
+		'publisher'        => array( '@id' => $org['@id'] ),
+		'author'           => '' !== $auth ? array( '@type' => 'Person', 'name' => $auth ) : array( '@id' => $org['@id'] ),
+	);
+
+	if ( '' !== $sum ) {
+		$node['description'] = $sum;
+	}
+	if ( $src ) {
+		$node['image'] = (string) $src[0];
+	}
+
+	$about = array();
+	if ( function_exists( 'topersia_g_content_as' ) ) {
+		$places = topersia_g_content_as( 'tpc_article', function () use ( $post_id ) {
+			return topersia_g_published( topersia_g_news_places( $post_id ) );
+		} );
+		foreach ( (array) $places as $pid ) {
+			$uid = metadata_exists( 'post', $pid, '_tp_sample' ) ? '' : (string) topersia_schema_uid( $pid );
+			if ( '' !== $uid ) {
+				$about[] = array( '@id' => $uid );
+			}
+		}
+	}
+	if ( $about ) {
+		$node['about'] = $about;
+	}
+
+	return (string) wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => array( $org, $site, $node ) ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_PRETTY_PRINT );
+}
+
+/**
  * گراف آرشیو سراسری خبر /news/ — CollectionPage + ItemList از NewsArticle (SPRINT-4.4 فاز ۶٫۱، P5-D260 · دستۀ 48).
  *
  * فقط خبرهای همان صفحه (کوئری اصلی، که render به منتشرشده، هم‌زبان و غیرنمونه
@@ -1573,7 +1636,7 @@ function topersia_schema_news_archive_json( $ids, $url, $from = 1 ) {
 			'@type'    => 'ListItem',
 			'position' => (int) $from + $i,
 			'item'     => array(
-				'@type'         => 'NewsArticle',
+				'@type'         => ( function_exists( 'topersia_g_news_is_article' ) && topersia_g_news_is_article() ) ? 'Article' : 'NewsArticle',   /* /articles/ — P5-D567 */
 				'headline'      => wp_strip_all_tags( (string) get_the_title( $id ) ),
 				'url'           => (string) get_permalink( $id ),
 				'datePublished' => (string) get_post_time( 'c', true, $id ),
@@ -1713,7 +1776,7 @@ function topersia_schema_output() {
 	}
 
 	/* آرشیو سراسری خبر: CollectionPage + ItemList — فقط وقتی نمایه‌پذیر است.  دستۀ 48 */
-	if ( is_post_type_archive( 'tpc_news' ) && ! is_feed() ) {
+	if ( is_post_type_archive( array( 'tpc_news', 'tpc_article' ) ) && ! is_feed() ) {
 		if ( function_exists( 'topersia_g_news_archive_thin' ) && ! topersia_g_news_archive_thin() ) {
 			global $wp_query;
 			$ids  = function_exists( 'topersia_g_published' ) ? topersia_g_published( array_map( 'absint', wp_list_pluck( (array) $wp_query->posts, 'ID' ) ) ) : array();
@@ -1747,6 +1810,16 @@ function topersia_schema_output() {
 
 	/* P5-D548: پست نمایشی هرگز در اسکیما */
 	if ( '1' === (string) get_post_meta( $post_id, '_tp_demo', true ) ) {
+		return;
+	}
+
+	/* تک‌مقاله: Article — P5-D567 */
+	if ( 'tpc_article' === get_post_type( $post_id ) ) {
+		$json = topersia_schema_article_json( $post_id );
+		if ( '' !== $json ) {
+			echo "\n<!-- ToPersia Structured Data -->\n";
+			echo '<script type="application/ld+json">' . "\n" . $json . "\n" . '</script>' . "\n";
+		}
 		return;
 	}
 

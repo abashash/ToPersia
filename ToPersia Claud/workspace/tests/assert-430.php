@@ -341,7 +341,7 @@ t( 'نقشه: خودمیزبان — کتابخانه، قلم‌ها (با با
 $news_src = file_get_contents( TP_PLUGIN_DIR . 'includes/topersia-g-news.php' );
 
 t( 'خبر: بی tpc_news هیچ بخشی — روی سایت زنده بی‌اثر',
-	'' === r( 20, 'tp_news' ) && false !== strpos( $news_src, "post_type_exists( 'tpc_news' )" ) );
+	'' === r( 20, 'tp_news' ) && false !== strpos( $news_src, 'post_type_exists( topersia_g_news_pt() )' ) && false !== strpos( $news_src, "return 'tpc_news';" ) );   /* نوع جاری، پیش‌فرض خبر — P5-D567 */
 
 t( 'خبر: تجمیع رو به بالا — شهر ← شهرستان (۷۳) ← استان (۷۲)',
 	array( 22, 20 ) === topersia_g_news_ancestors_of( 27 ) );
@@ -365,8 +365,8 @@ t( 'خبر: جای «NEWS» لاتین، تصویر شاخص یا آیکون  P5
 	false === strpos( $news20, 'NEWS' ) && 4 === substr_count( $news20, '<div class="tp-thumb"><svg' ) );
 
 t( 'خبر: _tp_news_ancestor یک ردیف برای هر نیا، هنگام ذخیره و تغییر رابطه — WPML ignore',
-	false !== strpos( $news_src, "add_post_meta( \$news_id, '_tp_news_ancestor', \$one );" )
-	&& false !== strpos( $news_src, "add_action( 'save_post_tpc_news'," )
+	false !== strpos( $news_src, 'add_post_meta( $news_id, topersia_g_news_anc_key(), $one );' ) && false !== strpos( $news_src, "'_tp_article_ancestor' : '_tp_news_ancestor';" )
+	&& false !== strpos( $news_src, "add_action( 'save_post_' . \$topersia_ct," )
 	&& false !== strpos( $news_src, "add_action( 'jet-engine/relation/update/after', \$topersia_news_rel_changed, 10, 4 );" )
 	&& false !== strpos( $news_src, "add_action( 'jet-engine/relation/delete/after', \$topersia_news_rel_changed, 10, 4 );" ) );
 

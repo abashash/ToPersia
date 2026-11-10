@@ -897,6 +897,11 @@ msgstr ""
 msgid "به‌روزرسانی %s به وقت ایران"
 msgstr ""
 
+#: includes/topersia-g-article.php
+#, php-format
+msgid "به‌روزرسانی: %s"
+msgstr ""
+
 #: includes/topersia-g-weather.php
 msgid "به‌روزرسانی: چند دقیقه پیش"
 msgstr ""
@@ -968,6 +973,14 @@ msgstr ""
 
 #: includes/topersia-g-home.php
 msgid "تازه‌ترین اخبار"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "تازه‌ترین خبرها"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "تازه‌ترین مقاله‌ها"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1166,8 +1179,12 @@ msgstr ""
 msgid "جدیدترین"
 msgstr ""
 
-#: templates/news-list.php
+#: includes/topersia-g-article.php
 msgid "جدیدترین خبرها"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "جدیدترین مقاله‌ها"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1421,7 +1438,7 @@ msgstr ""
 msgid "خبرهای برگزیده"
 msgstr ""
 
-#: templates/news-single.php
+#: includes/topersia-g-article.php
 msgid "خبرهای مرتبط"
 msgstr ""
 
@@ -1787,6 +1804,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "راهنما در محل هست"
+msgstr ""
+
+#: includes/topersia-g-news.php
+#, php-format
+msgid "راهنماها و مقاله‌های سفر به %s."
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2437,6 +2459,10 @@ msgstr ""
 
 #: templates/hub-archive.php
 msgid "صفحه‌های فهرست"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "صفحه‌های مقاله"
 msgstr ""
 
 #: templates/search-results.php
@@ -3172,7 +3198,7 @@ msgstr ""
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr ""
 
-#: templates/news-archive.php
+#: templates/article-archive.php
 msgid "مشاهده همه"
 msgstr ""
 
@@ -3223,6 +3249,23 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "معیارها:"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "مقالات"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "مقالات گردشگری"
+msgstr ""
+
+#: includes/topersia-g-news.php
+#, php-format
+msgid "مقالات گردشگری %s"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "مقاله‌های مرتبط"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -3383,7 +3426,7 @@ msgstr ""
 msgid "مورد دیگر"
 msgstr ""
 
-#: templates/hub-archive.php
+#: templates/article-archive.php
 msgid "موردی با این پالایش نیست."
 msgstr ""
 
@@ -3453,7 +3496,7 @@ msgstr ""
 msgid "موضوعیت ندارد"
 msgstr ""
 
-#: templates/news-list.php
+#: templates/article-archive.php
 msgid "موضوع‌ها"
 msgstr ""
 
@@ -3625,7 +3668,7 @@ msgstr ""
 msgid "نتیجه‌ای نیست."
 msgstr ""
 
-#: templates/news-archive.php
+#: templates/article-archive.php
 msgid "نتیجۀ پالایش"
 msgstr ""
 
@@ -3739,7 +3782,7 @@ msgstr ""
 msgid "نمای کامل تصویر"
 msgstr ""
 
-#: templates/news-list.php
+#: templates/article-archive.php
 msgid "نمایش"
 msgstr ""
 
@@ -3859,6 +3902,11 @@ msgstr ""
 msgid "نوع گذرگاه"
 msgstr ""
 
+#: includes/topersia-g-article.php
+#, php-format
+msgid "نویسنده: %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "نکات سلامت منطقه‌ای"
 msgstr ""
@@ -3923,7 +3971,7 @@ msgstr ""
 msgid "همراهی موسیقی"
 msgstr ""
 
-#: templates/news-list.php
+#: templates/article-archive.php
 msgid "همه"
 msgstr ""
 
@@ -3984,7 +4032,7 @@ msgstr ""
 msgid "همه گذرهای مرزی ←"
 msgstr ""
 
-#: templates/news-list.php
+#: includes/topersia-g-article.php
 msgid "همۀ اخبار"
 msgstr ""
 
@@ -3998,6 +4046,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "همۀ فرهنگ و رویداد"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "همۀ مقالات"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -4026,12 +4078,20 @@ msgstr ""
 msgid "هنرمند"
 msgstr ""
 
-#: templates/news-list.php
+#: includes/topersia-g-article.php
 msgid "هنوز خبری برای این مکان نیست."
 msgstr ""
 
-#: templates/news-archive.php
+#: includes/topersia-g-article.php
 msgid "هنوز خبری منتشر نشده است."
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "هنوز مقاله‌ای برای این مکان نیست."
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "هنوز مقاله‌ای منتشر نشده است."
 msgstr ""
 
 #: templates/hub-archive.php

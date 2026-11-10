@@ -43,7 +43,7 @@ $tp_page_link = function ( $page ) use ( $tp_link, $tp_topic ) {
 $tp_crumbs = array(
 	array( 'ToPersia', home_url( '/' ) ),
 	array( topersia_g_title( $tp_place ), (string) get_permalink( $tp_place ) ),
-	array( __( 'اخبار', 'topersia' ), '' ),
+	array( topersia_g_news_l( 'crumb' ), '' ),   /* خبر یا مقاله — همین قالب برای /…/articles/ هم (P5-D567) */
 );
 
 add_action( 'wp_head', function () use ( $tp_place, $tp_title ) {
@@ -96,18 +96,18 @@ if ( $tp_part ) {
 					<?php if ( $tp_q['ids'] ) : ?>
 						<section class="tp-news-latest" aria-labelledby="tp-news-latest-h">
 							<div class="tp-news-latest__head">
-								<h2 id="tp-news-latest-h" tabindex="-1" data-tp-news-focus><?php echo esc_html__( 'جدیدترین خبرها', 'topersia' ); ?></h2>
-								<a class="tp-more tp-news-all" href="<?php echo esc_url( $tp_arch ); ?>"><?php echo esc_html__( 'همۀ اخبار', 'topersia' ); ?></a>
+								<h2 id="tp-news-latest-h" tabindex="-1" data-tp-news-focus><?php echo esc_html( topersia_g_news_l( 'latest' ) ); ?></h2>
+								<a class="tp-more tp-news-all" href="<?php echo esc_url( $tp_arch ); ?>"><?php echo esc_html( topersia_g_news_l( 'all' ) ); ?></a>
 							</div>
 							<div class="tp-news-grid" data-tp-news-items>
 								<?php foreach ( $tp_q['ids'] as $tp_one ) { echo topersia_g_news_archive_card( $tp_one ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
 							</div>
 						</section>
 					<?php else : ?>
-						<p class="tp-lead tp-news-empty" tabindex="-1" data-tp-news-focus><?php echo esc_html__( 'هنوز خبری برای این مکان نیست.', 'topersia' ); ?></p>
+						<p class="tp-lead tp-news-empty" tabindex="-1" data-tp-news-focus><?php echo esc_html( topersia_g_news_l( 'empty' ) ); ?></p>
 					<?php endif; ?>
 
-					<?php echo topersia_g_news_pages( $tp_pages, $tp_paged, $tp_page_link ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<?php echo topersia_g_news_pages( $tp_pages, $tp_paged, $tp_page_link, topersia_g_news_l( 'pages' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 			</section>
 		</div>

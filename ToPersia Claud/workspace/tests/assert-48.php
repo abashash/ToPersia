@@ -116,7 +116,7 @@ $w48_tok = function ( $c ) { return '' !== $c && ! preg_match( '/#[0-9a-f]{3,8}\
 tp441_mut( 'news CSS: فقط توکن --tp-* (بی رنگ خام)، کاشی از توکن کاشی، بی letter-spacing — جهش: رنگ خام', $w48_tok, $w48_ncss,
 	str_replace( 'color:var(--tp-text-strong);font-size:calc(.92', 'color:#0a7;font-size:calc(.92', $w48_ncss ) );
 $w48_ld = function ( $s ) {
-	return false !== strpos( $s, 'function topersia_schema_news_archive_json(' ) && false !== strpos( $s, "'@type'         => 'NewsArticle'," )
+	return false !== strpos( $s, 'function topersia_schema_news_archive_json(' ) && false !== strpos( $s, "? 'Article' : 'NewsArticle'," )
 		&& false !== strpos( $s, "if ( function_exists( 'topersia_g_news_archive_thin' ) && ! topersia_g_news_archive_thin() ) {" );
 };
 tp441_mut( 'news اسکیما: CollectionPage + ItemList از NewsArticle در موتور topersia-schema، فقط نمایه‌پذیر — جهش: بی شرط noindex', $w48_ld, $w48_sch,

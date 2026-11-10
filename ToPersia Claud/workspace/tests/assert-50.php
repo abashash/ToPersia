@@ -39,7 +39,7 @@ $w50_gap = function ( $c, $a, $l, $o ) {
 };
 t( 'P5-D541: فاصلۀ صفر هدر تا سربرگ در هر سه صفحه (همان شیوۀ صفحۀ اول)', $w50_gap( $w50_css, $w50_arch, $w50_list, $w50_one ) );
 t( 'P5-D541: جهش — بی صفرکردن padding .tp-main می‌افتد', ! $w50_gap( str_replace( '> .tp-main{padding-block-start:0}', '> .tp-main{padding-block-start:44px}', $w50_css ), $w50_arch, $w50_list, $w50_one ) );
-t( 'P5-D541: تک‌خبر قالب خودش را می‌گیرد (template_include روی is_singular tpc_news)', false !== strpos( $w50_news, "\$file = topersia_render_path() . 'templates/news-single.php';" ) && false !== strpos( $w50_news, "if ( ! is_singular( 'tpc_news' ) || ! function_exists( 'topersia_g_news_hero' ) ) {" ) );
+t( 'P5-D541: تک‌خبر قالب خودش را می‌گیرد (template_include روی is_singular tpc_news)', false !== strpos( $w50_news, "\$file = topersia_render_path() . 'templates/news-single.php';" ) && false !== strpos( $w50_news, "if ( ! is_singular( topersia_g_content_types() ) || ! function_exists( 'topersia_g_news_hero' ) ) {" ) );
 t( 'P5-D541: منبع یک بار — صافی the_content در قالب تک‌خبر منبع را دوباره نمی‌افزاید', false !== strpos( $w50_news, "&& ! defined( 'TOPERSIA_NEWS_SINGLE_TPL' ) ) {" ) && false !== strpos( $w50_one, "define( 'TOPERSIA_NEWS_SINGLE_TPL', true );" ) );
 
 /* ── P5-D542: تراشه‌ها یک خط، هرگز دو خط ── */

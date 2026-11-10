@@ -46,7 +46,8 @@
   "tp_water_body"
  ],
  "post_types_extra": [
-  "tpc_news (فقط محلی)"
+  "tpc_news (فقط محلی)",
+  "tpc_article (فقط محلی — P5-D567؛ فیلدها article_author_name · article_updated_date · متای مشتق _tp_article_ancestor؛ رابطه‌ها tpc_article → tp_province · tp_city · tp_village · tp_island)"
  ],
  "fields": {
   "name_fa": {

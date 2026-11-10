@@ -898,6 +898,11 @@ msgstr "محدَّث"
 msgid "به‌روزرسانی %s به وقت ایران"
 msgstr "آخر تحديث %s بتوقيت إيران"
 
+#: includes/topersia-g-article.php
+#, php-format
+msgid "به‌روزرسانی: %s"
+msgstr "آخر تحديث: %s"
+
 #: includes/topersia-g-weather.php
 msgid "به‌روزرسانی: چند دقیقه پیش"
 msgstr "حُدِّث قبل دقائق"
@@ -970,6 +975,14 @@ msgstr "تاريخي"
 #: includes/topersia-g-home.php
 msgid "تازه‌ترین اخبار"
 msgstr "آخر الأخبار"
+
+#: includes/topersia-g-article.php
+msgid "تازه‌ترین خبرها"
+msgstr "آخر الأخبار"
+
+#: includes/topersia-g-article.php
+msgid "تازه‌ترین مقاله‌ها"
+msgstr "أحدث المقالات"
 
 #: includes/topersia-g-map.php
 msgid "تالاب"
@@ -1167,9 +1180,13 @@ msgstr "أماكن وتجارب أفضل وقت لزيارتها هو %s."
 msgid "جدیدترین"
 msgstr "الأحدث"
 
-#: templates/news-list.php
+#: includes/topersia-g-article.php
 msgid "جدیدترین خبرها"
 msgstr "أحدث الأخبار"
+
+#: includes/topersia-g-article.php
+msgid "جدیدترین مقاله‌ها"
+msgstr "أحدث المقالات"
 
 #: includes/topersia-g-map.php
 msgid "جزر و مد"
@@ -1422,7 +1439,7 @@ msgstr "ترابي"
 msgid "خبرهای برگزیده"
 msgstr "أخبار مختارة"
 
-#: templates/news-single.php
+#: includes/topersia-g-article.php
 msgid "خبرهای مرتبط"
 msgstr "أخبار ذات صلة"
 
@@ -1789,6 +1806,11 @@ msgstr "طريق الوصول"
 #: includes/topersia-g-map.php
 msgid "راهنما در محل هست"
 msgstr "يوجد دليل في الموقع"
+
+#: includes/topersia-g-news.php
+#, php-format
+msgid "راهنماها و مقاله‌های سفر به %s."
+msgstr "أدلة ومقالات للسفر إلى %s."
 
 #: includes/topersia-g-map.php
 msgid "راهنمای انتخاب حالت سفر"
@@ -2439,6 +2461,10 @@ msgstr "صفحات الموقع"
 #: templates/hub-archive.php
 msgid "صفحه‌های فهرست"
 msgstr "صفحات القائمة"
+
+#: includes/topersia-g-article.php
+msgid "صفحه‌های مقاله"
+msgstr "صفحات المقالات"
 
 #: templates/search-results.php
 msgid "صفحه‌های نتیجه"
@@ -3173,7 +3199,7 @@ msgstr "الاتجاهات"
 msgid "مشارکت عمومی و حضور بازدیدکننده"
 msgstr "المشاركة العامة وحضور الزوار"
 
-#: templates/news-archive.php
+#: templates/article-archive.php
 msgid "مشاهده همه"
 msgstr "عرض الكل"
 
@@ -3225,6 +3251,23 @@ msgstr "معايير التسجيل في التراث العالمي"
 #: includes/topersia-g-zones.php
 msgid "معیارها:"
 msgstr "المعايير:"
+
+#: includes/topersia-g-article.php
+msgid "مقالات"
+msgstr "المقالات"
+
+#: includes/topersia-g-article.php
+msgid "مقالات گردشگری"
+msgstr "مقالات السياحة"
+
+#: includes/topersia-g-news.php
+#, php-format
+msgid "مقالات گردشگری %s"
+msgstr "مقالات السياحة في %s"
+
+#: includes/topersia-g-article.php
+msgid "مقاله‌های مرتبط"
+msgstr "مقالات ذات صلة"
 
 #: includes/topersia-g-zones.php
 msgid "ملزم به تور هدایت‌شده"
@@ -3384,7 +3427,7 @@ msgstr "عنصر"
 msgid "مورد دیگر"
 msgstr "أخرى"
 
-#: templates/hub-archive.php
+#: templates/article-archive.php
 msgid "موردی با این پالایش نیست."
 msgstr "لا شيء يطابق هذه التصفية."
 
@@ -3454,7 +3497,7 @@ msgstr "موضوع الخبر"
 msgid "موضوعیت ندارد"
 msgstr "لا ينطبق"
 
-#: templates/news-list.php
+#: templates/article-archive.php
 msgid "موضوع‌ها"
 msgstr "المواضيع"
 
@@ -3626,7 +3669,7 @@ msgstr "النتائج: %s"
 msgid "نتیجه‌ای نیست."
 msgstr "لا توجد نتائج."
 
-#: templates/news-archive.php
+#: templates/article-archive.php
 msgid "نتیجۀ پالایش"
 msgstr "نتائج التصفية"
 
@@ -3740,7 +3783,7 @@ msgstr "عرض قائمة"
 msgid "نمای کامل تصویر"
 msgstr "عرض الصورة كاملة"
 
-#: templates/news-list.php
+#: templates/article-archive.php
 msgid "نمایش"
 msgstr "عرض"
 
@@ -3860,6 +3903,11 @@ msgstr "نوع الصحراء"
 msgid "نوع گذرگاه"
 msgstr "نوع المنفذ"
 
+#: includes/topersia-g-article.php
+#, php-format
+msgid "نویسنده: %s"
+msgstr "بقلم: %s"
+
 #: includes/topersia-g-map.php
 msgid "نکات سلامت منطقه‌ای"
 msgstr "ملاحظات صحية إقليمية"
@@ -3924,7 +3972,7 @@ msgstr "أسبوع نهاية الذروة"
 msgid "همراهی موسیقی"
 msgstr "المرافقة الموسيقية"
 
-#: templates/news-list.php
+#: templates/article-archive.php
 msgid "همه"
 msgstr "الكل"
 
@@ -3985,7 +4033,7 @@ msgstr "جميع المناطق الطبيعية ←"
 msgid "همه گذرهای مرزی ←"
 msgstr "جميع المعابر الحدودية ←"
 
-#: templates/news-list.php
+#: includes/topersia-g-article.php
 msgid "همۀ اخبار"
 msgstr "كل الأخبار"
 
@@ -4000,6 +4048,10 @@ msgstr "كل الأوقات"
 #: includes/topersia-g-zones.php
 msgid "همۀ فرهنگ و رویداد"
 msgstr "كل الثقافة والفعاليات"
+
+#: includes/topersia-g-article.php
+msgid "همۀ مقالات"
+msgstr "كل المقالات"
 
 #: includes/topersia-g-zones.php
 #, php-format
@@ -4027,13 +4079,21 @@ msgstr "المجاورة"
 msgid "هنرمند"
 msgstr "فنان"
 
-#: templates/news-list.php
+#: includes/topersia-g-article.php
 msgid "هنوز خبری برای این مکان نیست."
 msgstr "لا توجد أخبار عن هذا المكان بعد."
 
-#: templates/news-archive.php
+#: includes/topersia-g-article.php
 msgid "هنوز خبری منتشر نشده است."
 msgstr "لم تُنشر أي أخبار بعد."
+
+#: includes/topersia-g-article.php
+msgid "هنوز مقاله‌ای برای این مکان نیست."
+msgstr "لا توجد مقالات لهذا المكان بعد."
+
+#: includes/topersia-g-article.php
+msgid "هنوز مقاله‌ای منتشر نشده است."
+msgstr "لم تُنشر أي مقالات بعد."
 
 #: templates/hub-archive.php
 msgid "هنوز موردی منتشر نشده است."

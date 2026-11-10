@@ -4,6 +4,8 @@
   <custom-fields>
     <custom-field action="ignore">_tp_gallery_agg</custom-field>
     <custom-field action="ignore">_tp_read_minutes</custom-field>
+    <!-- P5-D567: نیای تجمیعی مقاله را هر ترجمه هنگام ذخیرۀ خودش می‌سازد (مثل _tp_news_ancestor). -->
+    <custom-field action="ignore">_tp_article_ancestor</custom-field>
   </custom-fields>
   <!-- P5-D534: موضوع خبر ترجمه‌پذیر (Translate)؛ هر زبان نام و نامک خودش را دارد. -->
   <taxonomies>

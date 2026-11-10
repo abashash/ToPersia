@@ -55,6 +55,8 @@ $FILES = array(
 	'includes/topersia-g-mappoints.php',
 	'includes/topersia-g-home.php',
 	'includes/topersia-g-home-row.php',
+	'includes/topersia-g-article.php',
+	'templates/article-archive.php',
 	'includes/topersia-g-legal.php',
 	'templates/news-list.php',
 	'templates/news-archive.php',

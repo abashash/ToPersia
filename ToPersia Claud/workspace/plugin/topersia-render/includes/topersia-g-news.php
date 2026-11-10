@@ -25,10 +25,71 @@ if ( ! defined( 'ABSPATH' ) && ! defined( 'TP_PLUGIN_DIR' ) ) {
 	return;
 }
 
-/** آیا مدل خبر روی این سایت هست. */
+/**
+ * نوع‌های محتوا (Content Type) که این مدل را دارند — خبر و، از دستۀ 52 (P5-D567)، مقالۀ گردشگری.
+ * مقاله هم‌مدل خبر است: همان رابطه‌ها با مکان، همان تجمیع نیا، همان موضوع و برچسب — با همین توابع.
+ */
+if ( ! function_exists( 'topersia_g_content_types' ) ) {
+	function topersia_g_content_types() {
+		return array( 'tpc_news', 'tpc_article' );
+	}
+}
+
+/**
+ * نوع محتوای جاری — «سوییچ نوع»: هر تابع `topersia_g_news_*` روی همین نوع کار می‌کند.
+ * صریح (topersia_g_content_as) بر خودکار مقدم است؛ خودکار: درخواست تک‌مقاله، آرشیو /articles/ یا فهرست مقاله‌های یک مکان.
+ */
+if ( ! function_exists( 'topersia_g_news_pt' ) ) {
+	function topersia_g_news_pt() {
+		if ( ! empty( $GLOBALS['tp_content_kind'] ) ) {
+			return (string) $GLOBALS['tp_content_kind'];
+		}
+		if ( function_exists( 'did_action' ) && did_action( 'parse_query' ) && function_exists( 'post_type_exists' ) && post_type_exists( 'tpc_article' )
+			&& ( is_singular( 'tpc_article' ) || is_post_type_archive( 'tpc_article' ) || get_query_var( 'tp_articles' ) ) ) {
+			return 'tpc_article';
+		}
+		return 'tpc_news';
+	}
+}
+
+/** اجرای یک تابع با نوع محتوای صریح؛ نوع پیشین پس از آن برمی‌گردد. */
+if ( ! function_exists( 'topersia_g_content_as' ) ) {
+	function topersia_g_content_as( $type, $fn ) {
+		$old = isset( $GLOBALS['tp_content_kind'] ) ? $GLOBALS['tp_content_kind'] : '';
+		$GLOBALS['tp_content_kind'] = in_array( $type, topersia_g_content_types(), true ) ? $type : 'tpc_news';
+		try {
+			return $fn();
+		} finally {
+			$GLOBALS['tp_content_kind'] = $old;
+		}
+	}
+}
+
+/** آیا نوع جاری مقاله است. */
+if ( ! function_exists( 'topersia_g_news_is_article' ) ) {
+	function topersia_g_news_is_article() {
+		return 'tpc_article' === topersia_g_news_pt();
+	}
+}
+
+/** کلید متای نیای تجمیعی نوع جاری. */
+if ( ! function_exists( 'topersia_g_news_anc_key' ) ) {
+	function topersia_g_news_anc_key() {
+		return topersia_g_news_is_article() ? '_tp_article_ancestor' : '_tp_news_ancestor';
+	}
+}
+
+/** آیا این درخواست فهرست خبرها یا مقاله‌های یک مکان است (/…/news/ · /…/articles/). */
+if ( ! function_exists( 'topersia_g_news_list_is' ) ) {
+	function topersia_g_news_list_is() {
+		return (bool) ( get_query_var( 'tp_news' ) || get_query_var( 'tp_articles' ) );
+	}
+}
+
+/** آیا مدل نوع محتوای جاری (خبر یا مقاله) روی این سایت هست. */
 if ( ! function_exists( 'topersia_g_news_on' ) ) {
 	function topersia_g_news_on() {
-		return function_exists( 'post_type_exists' ) && post_type_exists( 'tpc_news' );
+		return function_exists( 'post_type_exists' ) && post_type_exists( topersia_g_news_pt() );
 	}
 }
 
@@ -50,10 +111,12 @@ if ( ! function_exists( 'topersia_g_news_types' ) ) {
 if ( ! function_exists( 'topersia_g_news_relations' ) ) {
 	function topersia_g_news_relations() {
 
-		static $found = null;
+		static $memo = array();
 
-		if ( null !== $found ) {
-			return $found;
+		$pt = topersia_g_news_pt();
+
+		if ( isset( $memo[ $pt ] ) ) {
+			return $memo[ $pt ];
 		}
 
 		$found = array();
@@ -69,15 +132,17 @@ if ( ! function_exists( 'topersia_g_news_relations' ) ) {
 				$parent = (string) $rel->get_args( 'parent_object' );
 				$child  = str_replace( 'posts::', '', (string) $rel->get_args( 'child_object' ) );
 
-				if ( 'posts::tpc_news' === $parent && in_array( $child, topersia_g_news_types(), true ) ) {
+				if ( 'posts::' . $pt === $parent && in_array( $child, topersia_g_news_types(), true ) ) {
 					$found[ $child ] = (int) $id;
 				}
 			}
 		}
 
 		if ( function_exists( 'apply_filters' ) ) {
-			$found = (array) apply_filters( 'topersia_g_news_relations', $found );
+			$found = (array) apply_filters( 'topersia_g_news_relations', $found, $pt );
 		}
+
+		$memo[ $pt ] = $found;
 
 		return $found;
 	}
@@ -142,8 +207,17 @@ if ( ! function_exists( 'topersia_g_news_sync' ) ) {
 
 		$news_id = absint( $news_id );
 
-		if ( ! $news_id || 'tpc_news' !== get_post_type( $news_id ) ) {
+		$pt = (string) get_post_type( $news_id );
+
+		if ( ! $news_id || ! in_array( $pt, topersia_g_content_types(), true ) ) {
 			return array();
+		}
+
+		/* مقاله هم همین تابع — با سوییچ نوع خودش (P5-D567) */
+		if ( $pt !== topersia_g_news_pt() ) {
+			return topersia_g_content_as( $pt, function () use ( $news_id ) {
+				return topersia_g_news_sync( $news_id );
+			} );
 		}
 
 		$places = topersia_g_news_places( $news_id );
@@ -157,10 +231,10 @@ if ( ! function_exists( 'topersia_g_news_sync' ) ) {
 			}
 		}
 
-		delete_post_meta( $news_id, '_tp_news_ancestor' );
+		delete_post_meta( $news_id, topersia_g_news_anc_key() );
 
 		foreach ( $anc as $one ) {
-			add_post_meta( $news_id, '_tp_news_ancestor', $one );
+			add_post_meta( $news_id, topersia_g_news_anc_key(), $one );
 		}
 
 		return array_values( $anc );
@@ -207,13 +281,13 @@ if ( ! function_exists( 'topersia_g_news_query' ) ) {
 		}
 
 		$by_meta = get_posts( array(
-			'post_type'        => 'tpc_news',
+			'post_type'        => topersia_g_news_pt(),
 			'post_status'      => 'publish',
 			'has_password'     => false,
 			'posts_per_page'   => -1,
 			'fields'           => 'ids',
 			'no_found_rows'    => true,
-			'meta_key'         => '_tp_news_ancestor',
+			'meta_key'         => topersia_g_news_anc_key(),
 			'meta_value'       => (string) absint( $place_id ),
 		) );
 
@@ -225,7 +299,7 @@ if ( ! function_exists( 'topersia_g_news_query' ) ) {
 		}
 
 		$args = array(
-			'post_type'        => 'tpc_news',
+			'post_type'        => topersia_g_news_pt(),
 			'post_status'      => 'publish',
 			'has_password'     => false,
 			'post__in'         => $pool,
@@ -254,7 +328,7 @@ if ( ! function_exists( 'topersia_g_news_query' ) ) {
 /** نشانی صفحۀ خبرهای یک مکان. */
 if ( ! function_exists( 'topersia_g_news_list_url' ) ) {
 	function topersia_g_news_list_url( $place_id, $page = 1 ) {
-		$url = trailingslashit( (string) get_permalink( $place_id ) ) . 'news/';
+		$url = trailingslashit( (string) get_permalink( $place_id ) ) . ( topersia_g_news_is_article() ? 'articles/' : 'news/' );
 		return $page > 1 ? $url . 'page/' . (int) $page . '/' : $url;
 	}
 }
@@ -314,6 +388,9 @@ if ( ! function_exists( 'topersia_g_news_place_name' ) ) {
 /** زیرعنوان خبرها با نام مکان — سربرگ /news/ و فهرست هر مکان، بخش خبر صفحۀ موجودیت، هاب، توضیح متا و og، اسکیما (P5-D558). */
 if ( ! function_exists( 'topersia_g_news_lead' ) ) {
 	function topersia_g_news_lead( $place_id = 0 ) {
+		if ( topersia_g_news_is_article() ) {
+			return sprintf( /* translators: %s: نام مکان (پیش‌فرض ایران) */ __( 'راهنماها و مقاله‌های سفر به %s.', 'topersia' ), topersia_g_news_place_name( $place_id ) );
+		}
 		return sprintf( /* translators: %s: نام مکان (پیش‌فرض ایران) */ __( 'آخرین اخبار گردشگری، رویدادها و جشنواره‌های %s.', 'topersia' ), topersia_g_news_place_name( $place_id ) );
 	}
 }
@@ -321,6 +398,9 @@ if ( ! function_exists( 'topersia_g_news_lead' ) ) {
 /** عنوان صفحۀ خبرها — «اخبار گردشگری {نام کامل}»؛ بی مکان «اخبار گردشگری ایران» (P5-D260 · P5-D558). */
 if ( ! function_exists( 'topersia_g_news_title' ) ) {
 	function topersia_g_news_title( $place_id = 0 ) {
+		if ( topersia_g_news_is_article() ) {
+			return sprintf( /* translators: %s: نام کامل مکان (پیش‌فرض ایران) */ __( 'مقالات گردشگری %s', 'topersia' ), topersia_g_news_place_name( $place_id ) );
+		}
 		return sprintf( /* translators: %s: نام کامل مکان (پیش‌فرض ایران) */ __( 'اخبار گردشگری %s', 'topersia' ), topersia_g_news_place_name( $place_id ) );
 	}
 }
@@ -342,7 +422,7 @@ if ( ! defined( 'TOPERSIA_NEWS_PER_PAGE' ) ) {
 /** آیا این درخواست آرشیو سراسری خبر است. */
 if ( ! function_exists( 'topersia_g_news_is_archive' ) ) {
 	function topersia_g_news_is_archive() {
-		return topersia_g_news_on() && function_exists( 'is_post_type_archive' ) && is_post_type_archive( 'tpc_news' ) && ! is_feed();
+		return topersia_g_news_on() && function_exists( 'is_post_type_archive' ) && is_post_type_archive( topersia_g_news_pt() ) && ! is_feed();
 	}
 }
 
@@ -370,7 +450,7 @@ if ( ! function_exists( 'topersia_g_news_archive_ids' ) ) {
 			$ids = $ids['ids'];
 		} else {
 			$ids = get_posts( array(
-				'post_type'        => 'tpc_news',
+				'post_type'        => topersia_g_news_pt(),
 				'post_status'      => 'publish',
 				'has_password'     => false,
 				'posts_per_page'   => -1,
@@ -436,7 +516,7 @@ if ( ! function_exists( 'topersia_g_news_filter_options' ) ) {
 
 		$pool = array( 'tp_province' => array(), 'tp_city' => array() );   /* استان‌ها پیش از شهرها */
 		foreach ( topersia_g_news_archive_ids() as $nid ) {
-			$ids = array_merge( topersia_g_news_places( $nid ), array_map( 'absint', (array) get_post_meta( $nid, '_tp_news_ancestor' ) ) );
+			$ids = array_merge( topersia_g_news_places( $nid ), array_map( 'absint', (array) get_post_meta( $nid, topersia_g_news_anc_key() ) ) );
 			foreach ( topersia_g_published( array_values( array_unique( array_filter( $ids ) ) ) ) as $pid ) {
 				$type = (string) get_post_type( $pid );
 				if ( in_array( $type, array( 'tp_province', 'tp_city' ), true ) ) {
@@ -456,7 +536,7 @@ if ( ! function_exists( 'topersia_g_news_filter_options' ) ) {
 /** نشانی آرشیو، صفحۀ N (بی پالایش). */
 if ( ! function_exists( 'topersia_g_news_archive_url' ) ) {
 	function topersia_g_news_archive_url( $page = 1 ) {
-		$url = (string) get_post_type_archive_link( 'tpc_news' );
+		$url = (string) get_post_type_archive_link( topersia_g_news_pt() );
 		return ( $page > 1 && '' !== $url ) ? trailingslashit( $url ) . 'page/' . (int) $page . '/' : $url;
 	}
 }
@@ -473,11 +553,13 @@ if ( ! function_exists( 'topersia_g_news_archive_thin' ) ) {
 if ( function_exists( 'add_action' ) ) {
 
 	/* ذخیرۀ خبر: نیاها از نو.  دیرتر از JetEngine تا رابطه‌های فرم هم نشسته باشند. */
-	add_action( 'save_post_tpc_news', function ( $post_id ) {
-		if ( ! wp_is_post_revision( $post_id ) ) {
-			topersia_g_news_sync( $post_id );
-		}
-	}, 99 );
+	foreach ( topersia_g_content_types() as $topersia_ct ) {
+		add_action( 'save_post_' . $topersia_ct, function ( $post_id ) {
+			if ( ! wp_is_post_revision( $post_id ) ) {
+				topersia_g_news_sync( $post_id );
+			}
+		}, 99 );
+	}
 
 	/*
 	 * تغییر رابطه:
@@ -485,7 +567,7 @@ if ( function_exists( 'add_action' ) ) {
 	 *   رابطۀ سلسله‌مراتب    خبرهای مستقیمِ مکانِ فرزند از نو (بازمحاسبه وقتی
 	 *                         والد یک مکان عوض شود — بند ۷٫۶)
 	 */
-	$topersia_news_rel_changed = function ( $parent, $child, $x = null, $relation = null ) {
+	$topersia_news_rel_one = function ( $parent, $child, $x = null, $relation = null ) {
 
 		if ( ! topersia_g_news_on() || ! is_object( $relation ) || ! method_exists( $relation, 'get_id' ) ) {
 			return;
@@ -511,6 +593,17 @@ if ( function_exists( 'add_action' ) ) {
 		}
 	};
 
+	/* همان برای هر نوع محتوا (خبر، مقاله) — هر کدام با رابطه‌های خودش */
+	$topersia_news_rel_changed = function ( $parent, $child, $x = null, $relation = null ) use ( $topersia_news_rel_one ) {
+		foreach ( topersia_g_content_types() as $pt ) {
+			if ( post_type_exists( $pt ) ) {
+				topersia_g_content_as( $pt, function () use ( $topersia_news_rel_one, $parent, $child, $x, $relation ) {
+					$topersia_news_rel_one( $parent, $child, $x, $relation );
+				} );
+			}
+		}
+	};
+
 	add_action( 'jet-engine/relation/update/after', $topersia_news_rel_changed, 10, 4 );
 	add_action( 'jet-engine/relation/delete/after', $topersia_news_rel_changed, 10, 4 );
 
@@ -518,6 +611,7 @@ if ( function_exists( 'add_action' ) ) {
 
 	add_filter( 'query_vars', function ( $vars ) {
 		$vars[] = 'tp_news';
+		$vars[] = 'tp_articles';   /* فهرست مقاله‌های یک مکان — P5-D567 */
 		return $vars;
 	} );
 
@@ -546,10 +640,19 @@ if ( function_exists( 'add_action' ) ) {
 				'index.php?post_type=' . $type . '&' . $type . '=$matches[1]&name=$matches[1]&tp_news=1&paged=$matches[2]',
 				'top'
 			);
+
+			/* فهرست مقاله‌های همان مکان — /{rewrite}/{slug}/articles/ (P5-D567) */
+			if ( post_type_exists( 'tpc_article' ) ) {
+				add_rewrite_rule(
+					'^' . preg_quote( $slug, '#' ) . '/([^/]+)/articles(?:/page/([0-9]{1,}))?/?$',
+					'index.php?post_type=' . $type . '&' . $type . '=$matches[1]&name=$matches[1]&tp_articles=1&paged=$matches[2]',
+					'top'
+				);
+			}
 		}
 
 		/* یک‌بار بازسازی، فقط اگر امضای قاعده‌ها عوض شده باشد. */
-		$sig = md5( implode( '|', $sig ) . '|v1' );
+		$sig = md5( implode( '|', $sig ) . '|' . ( post_type_exists( 'tpc_article' ) ? 'a' : '' ) . '|v2' );
 
 		if ( get_option( 'topersia_news_rules' ) !== $sig ) {
 			flush_rewrite_rules( false );
@@ -559,7 +662,7 @@ if ( function_exists( 'add_action' ) ) {
 
 	add_filter( 'template_include', function ( $template ) {
 
-		if ( ! get_query_var( 'tp_news' ) || ! is_singular( topersia_g_news_types() ) ) {
+		if ( ! topersia_g_news_list_is() || ! is_singular( topersia_g_news_types() ) ) {
 			return $template;
 		}
 
@@ -570,7 +673,7 @@ if ( function_exists( 'add_action' ) ) {
 
 	/* زیر ۳ خبر: noindex, follow — هم هستۀ وردپرس، هم Rank Math.  بند ۷٫۸ */
 	$topersia_news_thin = function () {
-		if ( ! get_query_var( 'tp_news' ) || ! is_singular( topersia_g_news_types() ) ) {
+		if ( ! topersia_g_news_list_is() || ! is_singular( topersia_g_news_types() ) ) {
 			return false;
 		}
 		$q = topersia_g_news_query( get_queried_object_id(), 0, 0 );
@@ -607,7 +710,7 @@ if ( function_exists( 'add_action' ) ) {
 	 */
 	add_filter( 'redirect_canonical', function ( $redirect ) {
 
-		if ( ! get_query_var( 'tp_news' ) ) {
+		if ( ! topersia_g_news_list_is() ) {
 			return $redirect;
 		}
 
@@ -631,22 +734,22 @@ if ( function_exists( 'add_action' ) ) {
 	};
 
 	add_filter( 'get_canonical_url', function ( $url ) use ( $topersia_news_url ) {
-		return ( get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() ) ) ? $topersia_news_url() : $url;
+		return ( topersia_g_news_list_is() && is_singular( topersia_g_news_types() ) ) ? $topersia_news_url() : $url;
 	}, 99 );
 
 	add_filter( 'rank_math/frontend/canonical', function ( $url ) use ( $topersia_news_url ) {
-		return ( get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() ) ) ? $topersia_news_url() : $url;
+		return ( topersia_g_news_list_is() && is_singular( topersia_g_news_types() ) ) ? $topersia_news_url() : $url;
 	}, 99 );
 
 	add_filter( 'document_title_parts', function ( $parts ) {
-		if ( get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() ) ) {
+		if ( topersia_g_news_list_is() && is_singular( topersia_g_news_types() ) ) {
 			$parts['title'] = topersia_g_news_title( get_queried_object_id() );
 		}
 		return $parts;
 	}, 99 );
 
 	add_filter( 'rank_math/frontend/title', function ( $title ) {
-		return ( get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() ) )
+		return ( topersia_g_news_list_is() && is_singular( topersia_g_news_types() ) )
 			? topersia_g_news_title( get_queried_object_id() ) . ' | ' . get_bloginfo( 'name' )
 			: $title;
 	}, 99 );
@@ -672,7 +775,7 @@ if ( function_exists( 'add_action' ) ) {
 	/* صفحۀ هر خبر: منبع اصلی و دکمۀ منبع ترجیحی گوگل.  بند ۷٫۹ · P5-D207 */
 	add_filter( 'the_content', function ( $content ) {
 
-		if ( ! is_singular( 'tpc_news' ) || ! in_the_loop() || ! is_main_query() ) {
+		if ( ! is_singular( topersia_g_content_types() ) || ! in_the_loop() || ! is_main_query() ) {
 			return $content;
 		}
 
@@ -698,7 +801,7 @@ if ( function_exists( 'add_action' ) ) {
 
 	/* کوئری اصلی: فقط نمایش‌پذیر، ۱۲ در صفحه؛ پالایش مکان و نوع با post__in، موضوع با tax_query. ۴۰۴ بیرون از بازه از خود وردپرس. */
 	add_action( 'pre_get_posts', function ( $q ) {
-		if ( is_admin() || ! $q->is_main_query() || ! $q->is_post_type_archive( 'tpc_news' ) || $q->is_feed() || ! topersia_g_news_on() ) {
+		if ( is_admin() || ! $q->is_main_query() || ! $q->is_post_type_archive( topersia_g_content_types() ) || $q->is_feed() || ! topersia_g_news_on() ) {
 			return;
 		}
 		$q->set( 'posts_per_page', TOPERSIA_NEWS_PER_PAGE );
@@ -745,13 +848,14 @@ if ( function_exists( 'add_action' ) ) {
 		if ( ! topersia_g_news_is_archive() ) {
 			return $template;
 		}
-		$file = topersia_render_path() . 'templates/news-archive.php';
+		/* /articles/ نوار ابزار ساده دارد، بی ردیف فیلتر (P5-D566) — قالب خودش */
+		$file = topersia_render_path() . ( topersia_g_news_is_article() ? 'templates/article-archive.php' : 'templates/news-archive.php' );
 		return is_file( $file ) ? $file : $template;
 	}, 99 );
 
 	/* تک‌خبر: قالب خود ما به سبک همۀ صفحه‌های خبر (P5-D541)؛ اسکیمای NewsArticle همان wp_head. */
 	add_filter( 'template_include', function ( $template ) {
-		if ( ! is_singular( 'tpc_news' ) || ! function_exists( 'topersia_g_news_hero' ) ) {
+		if ( ! is_singular( topersia_g_content_types() ) || ! function_exists( 'topersia_g_news_hero' ) ) {
 			return $template;
 		}
 		$file = topersia_render_path() . 'templates/news-single.php';
@@ -809,6 +913,6 @@ if ( function_exists( 'add_action' ) ) {
 		if ( topersia_g_news_is_archive() ) {
 			return topersia_g_news_lead( topersia_g_news_filter_place() );
 		}
-		return ( get_query_var( 'tp_news' ) && is_singular( topersia_g_news_types() ) ) ? topersia_g_news_lead( get_queried_object_id() ) : $desc;
+		return ( topersia_g_news_list_is() && is_singular( topersia_g_news_types() ) ) ? topersia_g_news_lead( get_queried_object_id() ) : $desc;
 	}, 99 );
 }
