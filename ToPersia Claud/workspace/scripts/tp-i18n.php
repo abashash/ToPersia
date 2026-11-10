@@ -46,6 +46,7 @@ $FILES = array(
 	'includes/topersia-g-news-ui.php',
 	'includes/topersia-g-loc.php',
 	'includes/topersia-g-hub.php',
+	'includes/topersia-g-tags.php',
 	'includes/topersia-g-gallery-agg.php',
 	'includes/topersia-g-relreg.php',
 	'includes/topersia-g-panel.php',

@@ -1,0 +1,10 @@
+/**
+ * بلوک «برچسب‌ها» پایان کارت منابع — دستۀ 51 الحاقیۀ ث · P5-D555. فقط توکن؛ تراشه با توکن کاشی (P5-D245).
+ */
+html .tp-page .tp-tags{margin-block-start:16px;padding-block-start:14px;border-block-start:1px solid var(--tp-tile-border)}
+html .tp-page .tp-tags__h{margin:0 0 10px;font-size:calc(.9375 * var(--tp-rem));color:var(--tp-text-strong)}
+html .tp-page .tp-tags__list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+html .tp-page .tp-tags__a{display:inline-flex;align-items:center;min-block-size:36px;padding-inline:14px;border-radius:999px;
+  background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-tile-text);font-size:calc(.875 * var(--tp-rem));text-decoration:none}
+html .tp-page .tp-tags__a:hover{border-color:var(--tp-primary);color:var(--tp-primary-text)}
+html .tp-page .tp-tags__a:focus-visible{outline:2px solid var(--tp-primary);outline-offset:2px}

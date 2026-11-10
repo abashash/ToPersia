@@ -7494,6 +7494,11 @@ if ( ! function_exists( 'topersia_g_sc_sources' ) ) {
 			$out .= '<div class="tp-uid">' . $rows . '</div>';
 		}
 
+		/* «برچسب‌ها» پایان همین کارت — بخش تازه در پنل نه (جفت‌شدن پذیرش دست نمی‌خورد).  P5-D555 */
+		if ( function_exists( 'topersia_g_tags_html' ) ) {
+			$out .= topersia_g_tags_html( $pid );
+		}
+
 		return topersia_g_section( 'tp-sources', 'منابع و راستی‌آزمایی', 'PROVENANCE', $out );
 	}
 }

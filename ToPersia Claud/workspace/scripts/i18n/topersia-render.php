@@ -1217,6 +1217,9 @@ return array(
 	'دست‌کم سه نویسه بنویسید؛ با کلیدهای بالا و پایین انتخاب کنید.' => array( 'en' => 'Type at least three characters; use the up and down keys to choose.', 'ar' => 'اكتب ثلاثة أحرف على الأقل؛ واستخدم مفتاحي الأعلى والأسفل للاختيار.' ),
 	'مکانی با نام «%s» پیدا نشد.' => array( 'en' => 'No place named “%s” was found.', 'ar' => 'لم يُعثر على مكان باسم «%s».' ),
 	'نام استان یا شهر' => array( 'en' => 'Province or city name', 'ar' => 'اسم المحافظة أو المدينة' ),
+	/* دستۀ 51 الحاقیۀ ث — برچسب مشترک */
+	'برچسب‌ها' => array( 'en' => 'Tags', 'ar' => 'الوسوم' ),
+	'کارها و تجربیات' => array( 'en' => 'Things to do and experiences', 'ar' => 'أنشطة وتجارب' ),
 	/* دستۀ 51 بخش ۴ — هاب عمومی */
 	'کشورها' => array( 'en' => 'Countries', 'ar' => 'البلدان' ),
 	'مناطق جغرافیایی %s' => array( 'en' => 'Geographic regions of %s', 'ar' => 'المناطق الجغرافية في %s' ),

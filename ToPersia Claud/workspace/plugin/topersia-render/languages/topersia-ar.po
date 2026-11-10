@@ -709,6 +709,10 @@ msgstr "البرنامج"
 msgid "برنامه‌ریزی نشده"
 msgstr "غير مخطط"
 
+#: includes/topersia-g-tags.php
+msgid "برچسب‌ها"
+msgstr "الوسوم"
+
 #: includes/topersia-g-zones.php
 msgid "برگزارکننده"
 msgstr "الجهة المنظِّمة"
@@ -4416,6 +4420,10 @@ msgstr "هل تعمل البطاقات الدولية؟"
 #: includes/topersia-g-map.php
 msgid "کارت گردشگری"
 msgstr "بطاقة السياح"
+
+#: includes/topersia-g-home.php
+msgid "کارها و تجربیات"
+msgstr "أنشطة وتجارب"
 
 #: includes/topersia-g-map.php
 msgid "کاروانسرا"

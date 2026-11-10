@@ -202,6 +202,20 @@ html .tp-page.tp-home .tp-home-guide__a{display:grid;justify-items:center;gap:8p
   border-radius:var(--tp-tile-radius,12px);background:var(--tp-tile-bg);border:1px solid var(--tp-tile-border);color:var(--tp-text-strong);font-weight:700;text-decoration:none}
 html .tp-page.tp-home .tp-home-guide__a svg{inline-size:30px;block-size:30px}
 html .tp-page.tp-home .tp-home-guide__a:hover{border-color:var(--tp-primary);color:var(--tp-primary-text)}
+/* P5-D551 — یک شیشه برای هر پنل (راهنما · تجربیات)؛ کاشی‌های درون مات می‌مانند تا متن روی سطح ثابت باشد. */
+html .tp-page.tp-home .tp-home-guide.tp-home-glass{background:color-mix(in srgb,var(--tp-surface) var(--tp-home-glass-a,86%),transparent)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html .tp-page.tp-home .tp-home-guide.tp-home-glass{background:var(--tp-surface)}
+}
+@media (prefers-reduced-transparency:reduce){
+  html .tp-page.tp-home .tp-home-guide.tp-home-glass{background:var(--tp-surface)}
+}
+/* تجربه — شمار مورد زیر نام (P5-D555) */
+html .tp-page.tp-home .tp-home-exp__n{font-size:calc(.8125 * var(--tp-rem));font-weight:400;color:var(--tp-tile-text)}
+@media (prefers-reduced-motion:no-preference){
+  html .tp-page.tp-home .tp-home-guide{perspective:700px}
+  html .tp-page.tp-home .tp-home-guide .tp-home-guide__a:hover{transform:translateY(-2px) rotateX(5deg);box-shadow:var(--tp-shadow-soft)}
+}
 
 /* ۹ ایران در تصویر — اسلایدر یک‌ردیفه تا ۱۲ عکس یکتا (دستۀ 49 بند ۲) */
 html .tp-page.tp-home .tp-home-photo{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:var(--tp-tile-radius,12px);color:var(--tp-text-strong);text-decoration:none;background:var(--tp-surface);box-shadow:var(--tp-shadow-soft)}

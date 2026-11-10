@@ -708,6 +708,10 @@ msgstr ""
 msgid "برنامه‌ریزی نشده"
 msgstr ""
 
+#: includes/topersia-g-tags.php
+msgid "برچسب‌ها"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "برگزارکننده"
 msgstr ""
@@ -4414,6 +4418,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "کارت گردشگری"
+msgstr ""
+
+#: includes/topersia-g-home.php
+msgid "کارها و تجربیات"
 msgstr ""
 
 #: includes/topersia-g-map.php

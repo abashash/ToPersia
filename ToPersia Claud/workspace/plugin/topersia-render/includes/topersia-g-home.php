@@ -451,7 +451,9 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 				continue;
 			}
 
-			$guide[] = array( $g[0], $g[1], get_permalink( $one ) );
+			/* P5-D553: آیکون راهنما ← هاب همان نوع؛ بی هاب ← همان پست */
+			$hub     = function_exists( 'topersia_g_hub_link_for' ) ? topersia_g_hub_link_for( $type ) : '';
+			$guide[] = array( $g[0], $g[1], '' !== $hub ? $hub : get_permalink( $one ) );
 
 			/* شماره‌های اضطراری در همان پست سلامت و ایمنی؛ فقط اگر دست‌کم یکی پر است. */
 			if ( 'tp_health_safety' === $type && ( '' !== trim( (string) topersia_g_raw( $one, 'emergency_police' ) ) || '' !== trim( (string) topersia_g_raw( $one, 'emergency_ambulance' ) ) ) ) {
@@ -662,6 +664,14 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			$guide_html .= '<a class="tp-home-guide__a" href="' . esc_url( $g[2] ) . '">' . topersia_g_icon( $g[1] ) . '<span>' . esc_html( $g[0] ) . '</span></a>';
 		}
 
+		/* ── ۷ب کارها و تجربیات — واژه‌های tp_is_experience با دست‌کم دو مورد دیدنی (P5-D555)؛ هیچ ← بخش ساخته نمی‌شود ── */
+		$exp_html = '';
+
+		foreach ( function_exists( 'topersia_g_tag_experiences' ) ? topersia_g_tag_experiences() : array() as $e ) {
+			$exp_html .= '<a class="tp-home-guide__a" href="' . esc_url( $e[1] ) . '">' . ( '' !== $e[2] ? topersia_g_icon( $e[2] ) : '' ) . '<span>' . esc_html( $e[0] ) . '</span>'
+				. '<small class="tp-home-exp__n">' . esc_html( topersia_g_fa( (int) $e[3] ) ) . '</small></a>';
+		}
+
 		/* ── ۹ ایران در تصویر — hero_image موجودیت‌ها، هر عکس پیوند به همان؛ بی تکرار تصویر هیرو ── */
 		$photos = '';
 		$seen   = array( $hero_att => true );
@@ -735,7 +745,8 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			. topersia_g_home_section( 'tp-home-cities', __( 'محبوب‌ترین مقاصد', 'topersia' ), topersia_g_home_slider( 'tp-home-destslide', __( 'محبوب‌ترین مقاصد', 'topersia' ), $city_cards, count( $dest ) ), $city_more, 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), array(), 'tp-home-lazy' )
 			. topersia_g_home_section( 'tp-home-events', __( 'رویدادها و جشنواره‌ها', 'topersia' ), '' !== $event_rows ? '<ul class="tp-home-events">' . $event_rows . '</ul>' : '', array(), 'tp-home-lazy' )
-			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
+			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide tp-home-glass" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
+			. topersia_g_home_section( 'tp-home-exp', __( 'کارها و تجربیات', 'topersia' ), '' !== $exp_html ? '<nav class="tp-home-guide tp-home-exp tp-home-glass" aria-label="' . esc_attr__( 'کارها و تجربیات', 'topersia' ) . '">' . $exp_html . '</nav>' : '', array(), 'tp-home-lazy' )
 			. $pair
 			. ( '' !== $photos ? $photo_dlg : '' );
 

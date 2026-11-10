@@ -709,6 +709,10 @@ msgstr "Programme"
 msgid "برنامه‌ریزی نشده"
 msgstr "Not planned"
 
+#: includes/topersia-g-tags.php
+msgid "برچسب‌ها"
+msgstr "Tags"
+
 #: includes/topersia-g-zones.php
 msgid "برگزارکننده"
 msgstr "Organizer"
@@ -4416,6 +4420,10 @@ msgstr "Do international cards work?"
 #: includes/topersia-g-map.php
 msgid "کارت گردشگری"
 msgstr "Tourist card"
+
+#: includes/topersia-g-home.php
+msgid "کارها و تجربیات"
+msgstr "Things to do and experiences"
 
 #: includes/topersia-g-map.php
 msgid "کاروانسرا"

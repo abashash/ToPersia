@@ -366,3 +366,40 @@ tp441_mut( 'هاب: H1 هر نوع با %s (نام مکان) — جهش: «شه�
 	preg_replace( "/'tp_city'(\s*)=> __\( '[^']*'/u", "'tp_city'\$1=> __( 'شهرهای ایران'", $w51_hub, 1 ) );
 t( 'هاب: در ترتیب معیار، مقدار عددی برچسب کاشی (P5-D466)', false !== strpos( $w51_hub, "if ( 'metric' === \$args['tp_sort'] && null !== topersia_g_hub_metric( \$id, \$row['metric'] ) )" ) );
 t( 'هاب: CSS فقط توکن رنگ', 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $w51_hcss ) && false === strpos( $w51_hcss, 'letter-spacing' ) );
+
+/* ══ الحاقیه ث — برچسب مشترک tpc_tag (P5-D555) ═══════════════════════ */
+$w51_tagc = $w51_read( 'plugin/topersia-core/includes/topersia-tags.php' );
+$w51_tagr = $w51_read( 'plugin/topersia-render/includes/topersia-g-tags.php' );
+$w51_core = $w51_read( 'plugin/topersia-core/topersia-core.php' );
+$w51_tcss = $w51_read( 'plugin/topersia-render/assets/topersia-g-tags.css' );
+
+t( 'P5-D555: هسته و render هر دو پروندۀ برچسب را بار می‌کنند', false !== strpos( $w51_core, "require_once __DIR__ . '/includes/topersia-tags.php';" ) && false !== strpos( $w51_render, "'includes/topersia-g-tags.php'" ) );
+
+$w51_tax = function ( $s ) {
+	return false !== strpos( $s, "'hierarchical'      => false," )
+		&& false !== strpos( $s, "'rewrite'           => array( 'slug' => 'tags', 'with_front' => false" )   /* نه /tag/ وردپرس */
+		&& 4 === substr_count( $s, "=> 'edit_others_posts'," )                                                 /* فقط ویرایشگر و بالاتر */
+		&& false !== strpos( $s, "'local' === wp_get_environment_type()" )                                    /* فقط محلی تا ممیزی */
+		&& 0 === preg_match( "/'sanitize_callback' => '(intval|floatval|boolval)'/", $s );                    /* درونی PHP با ۴ آرگومان خطا */
+};
+tp441_mut( 'P5-D555: tpc_tag ناسلسله‌مراتبی، /tags/، فقط ویرایشگر، فقط محلی، پاک‌ساز بستار — جهش: نامک tag', $w51_tax, $w51_tagc,
+	str_replace( "array( 'slug' => 'tags',", "array( 'slug' => 'tag',", $w51_tagc ) );
+t( 'P5-D555: جهش — نویسنده هم بچسباند می‌افتد', ! $w51_tax( str_replace( "'assign_terms' => 'edit_others_posts',", "'assign_terms' => 'edit_posts',", $w51_tagc ) ) );
+t( 'P5-D555: جهش — پاک‌ساز intval می‌افتد', ! $w51_tax( str_replace( "'sanitize_callback' => function ( \$v ) { return (int) \$v; }", "'sanitize_callback' => 'intval'", $w51_tagc ) ) );
+t( 'P5-D555: سه متای واژه ثبت', false !== strpos( $w51_tagc, "'tp_is_experience'" ) && false !== strpos( $w51_tagc, "'tp_icon'" ) && false !== strpos( $w51_tagc, "'tp_sort'" ) && false !== strpos( $w51_tagc, "wp_verify_nonce(" ) );
+
+$w51_texp = function ( $s ) {
+	return false !== strpos( $s, "define( 'TOPERSIA_TAG_MIN_ITEMS', 2 )" ) && false !== strpos( $s, 'if ( $n < TOPERSIA_TAG_MIN_ITEMS ) {' )
+		&& false !== strpos( $s, 'topersia_g_published( array_map(' ) && false !== strpos( $s, '! topersia_g_sample_hidden( $id )' );
+};
+tp441_mut( 'P5-D555: تجربه فقط با دست‌کم دو مورد دیدنی (منتشرشده، نمونۀ پنهان نه) — جهش: بی دروازۀ نمونه', $w51_texp, $w51_tagr,
+	str_replace( '! topersia_g_sample_hidden( $id )', 'true', $w51_tagr ) );
+t( 'P5-D555: بلوک «برچسب‌ها» پایان کارت منابع، بی برچسب هیچ', false !== strpos( $w51_zphp = $w51_read( 'plugin/topersia-render/includes/topersia-g-zones.php' ), '$out .= topersia_g_tags_html( $pid );' )
+	&& false !== strpos( $w51_tagr, "if ( is_wp_error( \$terms ) || ! \$terms ) {\n\t\t\treturn '';" ) );
+if ( function_exists( 'topersia_g_tags_html' ) ) {
+	t( 'P5-D555 رفتار: بی وردپرس/طبقه‌بندی ← تهی', '' === topersia_g_tags_html( 1 ) );
+}
+t( 'P5-D555: صفحۀ اول «کارها و تجربیات» از topersia_g_tag_experiences، تهی ← بخش نه', false !== strpos( $w51_home, "topersia_g_tag_experiences() : array() as \$e" ) && false !== strpos( $w51_home, "'' !== \$exp_html ?" ) );
+t( 'P5-D553: آیکون راهنما به هاب نوع، بی هاب ← پست', false !== strpos( $w51_home, "'' !== \$hub ? \$hub : get_permalink( \$one )" ) );
+t( 'P5-D551: شیشه روی پنل راهنما و تجربیات، ۳بعدی فقط بی کاهش حرکت', false !== strpos( $w51_home, '<nav class="tp-home-guide tp-home-glass"' ) && (bool) preg_match( '/prefers-reduced-motion:no-preference\)\{\s*html \.tp-page\.tp-home \.tp-home-guide\{perspective/', $w51_read( 'plugin/topersia-render/assets/topersia-g-home.css' ) ) );
+t( 'P5-D555: CSS برچسب فقط توکن', 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $w51_tcss ) && false === strpos( $w51_tcss, 'letter-spacing' ) );
