@@ -414,6 +414,10 @@ msgstr ""
 msgid "اشتراک"
 msgstr ""
 
+#: includes/topersia-g-article.php
+msgid "اطلاعات بیشتر"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr ""
@@ -3337,6 +3341,10 @@ msgstr ""
 msgid "منبع رسمی"
 msgstr ""
 
+#: includes/topersia-g-article.php
+msgid "منبع و پیوند اصلی"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr ""
@@ -3490,6 +3498,10 @@ msgstr ""
 
 #: includes/topersia-g-news-ui.php
 msgid "موضوع خبر"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "موضوع و برچسب‌ها"
 msgstr ""
 
 #: includes/topersia-g-map.php

@@ -1291,4 +1291,7 @@ return array(
 	'صفحه‌های مقاله' => array( 'en' => 'Article pages', 'ar' => 'صفحات المقالات' ),
 	'به‌روزرسانی: %s' => array( 'en' => 'Updated: %s', 'ar' => 'آخر تحديث: %s' ),
 	'نویسنده: %s' => array( 'en' => 'By %s', 'ar' => 'بقلم: %s' ),
+	'موضوع و برچسب‌ها' => array( 'en' => 'Topic and tags', 'ar' => 'الموضوع والوسوم' ),
+	'منبع و پیوند اصلی' => array( 'en' => 'Source and original link', 'ar' => 'المصدر والرابط الأصلي' ),
+	'اطلاعات بیشتر' => array( 'en' => 'More information', 'ar' => 'معلومات إضافية' ),
 );

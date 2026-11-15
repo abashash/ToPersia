@@ -1,14 +1,16 @@
 <?php
 /**
- * تک‌خبر tpc_news — دستۀ 50 (P5-D541): همان سبک همۀ صفحه‌های خبر.
+ * صفحۀ تکی خبر `tpc_news` و مقاله `tpc_article` — دستۀ 50 (P5-D541) · دستۀ 52 (P5-D568 · P5-D567)
  *
- *   سربرگ     تصویر خود خبر ← تصویر مکان مرتبط (هرگز نمونه) ← گرادیان · مسیر راهنما · H1
- *             · موضوع، تاریخ، زمان مطالعه، منبع با پیوند بیرونی
- *   نشان‌ها    مکان‌های مرتبطِ منتشرشده، هر کدام پیوند
- *   متن       the_content — صافی همان پیوند منبع ترجیحی گوگل را می‌افزاید (منبع اینجا در سربرگ است)
- *   مرتبط     «خبرهای مرتبط» با همان کارت آرشیو؛ نبود ← پنهان
+ *   سربرگ        تصویر خود مطلب ← تصویر مکان مرتبط (هرگز نمونه) ← گرادیان · مسیر راهنما · H1 · خلاصه
+ *                · سطر وسط‌چین «موضوع · تاریخ · زمان مطالعه» با جداکننده (مقاله: به‌روزرسانی و نویسنده زیر آن)
+ *   دو ستون      ستون اصلی در آغاز سطر (راست در راست‌به‌چپ): متن، سپس نظرات — همان جزء صفحه‌های موجودیت
+ *                (`topersia_g_sc_reviews`؛ بی AggregateRating و Review — P5-D510 · P5-D234)
+ *                ستون کناری (`topersia_g_news_aside`): اشتراک/ذخیره/دنبال‌کردن · موضوع و برچسب‌ها · مکان‌های مرتبط ·
+ *                تازه‌ترین‌ها · «منبع و پیوند اصلی» در انتها. موبایل: ستون کناری زیر متن.
+ *   مرتبط        «خبرهای مرتبط» / «مقاله‌های مرتبط» — یک ردیف تمام‌عرض زیر هر دو ستون با همان کارت آرشیو؛ نبود ← پنهان
  *
- * اسکیما (NewsArticle) دست نخورد: همان wp_head موتور topersia-schema.
+ * «منبع اصلی» دیگر بالای متن نیست؛ فقط در انتهای ستون کناری. اسکیما: مقاله Article (topersia-schema)؛ خبر دست نخورد.
  *
  * @package topersia-render
  */
@@ -22,21 +24,16 @@ if ( ! defined( 'TOPERSIA_NEWS_SINGLE_TPL' ) ) {
 }
 
 $tp_id     = (int) get_queried_object_id();
-$tp_places = array_values( array_filter( topersia_g_published( topersia_g_news_places( $tp_id ) ), function ( $pid ) { return ! metadata_exists( 'post', $pid, '_tp_sample' ); } ) );
 $tp_rel    = topersia_g_news_related( $tp_id, 4 );
-$tp_src_n  = topersia_g_text( $tp_id, 'news_source_name' );
-$tp_src_u  = topersia_g_text( $tp_id, 'news_source_url' );
 $tp_crumbs = array(
 	array( 'ToPersia', home_url( '/' ) ),
-	array( __( 'اخبار', 'topersia' ), topersia_g_news_archive_url() ),
+	array( topersia_g_news_l( 'crumb' ), topersia_g_news_archive_url() ),
 	array( get_the_title( $tp_id ), '' ),
 );
 
-$tp_extra = '<div class="tp-news-hero__meta">' . topersia_g_news_topic_badge( $tp_id ) . topersia_g_news_meta( $tp_id, 'tp-news-hero__when' )
-	. ( '' !== $tp_src_n && '' !== $tp_src_u && wp_http_validate_url( $tp_src_u )
-		? '<p class="tp-news-source">' . esc_html__( 'منبع اصلی:', 'topersia' ) . ' <a href="' . esc_url( $tp_src_u ) . '" rel="noopener nofollow" target="_blank">' . esc_html( $tp_src_n ) . '</a></p>'
-		: '' )
-	. '</div>';
+$tp_extra = '<div class="tp-news-hero__meta">' . topersia_g_news_metaline( $tp_id ) . topersia_g_article_byline( $tp_id ) . '</div>';
+$tp_aside = topersia_g_news_aside( $tp_id );
+$tp_cmts  = function_exists( 'topersia_g_sc_reviews' ) ? topersia_g_sc_reviews( array( 'id' => $tp_id ) ) : '';
 
 get_header();
 
@@ -46,30 +43,30 @@ get_header();
 		<?php echo topersia_g_news_hero( topersia_g_news_hero_img( topersia_g_news_image( $tp_id ) ), $tp_crumbs, get_the_title( $tp_id ), topersia_g_news_sum( $tp_id ), $tp_extra ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
 		<div class="tp-wrap">
-			<?php if ( $tp_places ) : ?>
-				<nav class="tp-news-places" aria-label="<?php echo esc_attr__( 'مکان‌های مرتبط', 'topersia' ); ?>">
-					<ul>
-						<?php foreach ( $tp_places as $tp_pid ) : ?>
-							<li><a href="<?php echo esc_url( (string) get_permalink( $tp_pid ) ); ?>"><?php echo esc_html( topersia_g_title( $tp_pid ) ); ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-				</nav>
-			<?php endif; ?>
+			<div class="tp-news-cols<?php echo '' === $tp_aside ? ' tp-news-cols--solo' : ''; ?>">
+				<div class="tp-news-main">
+					<article class="tp-news-body">
+						<?php
+						while ( have_posts() ) {
+							the_post();
+							the_content();
+						}
+						?>
+					</article>
 
-			<article class="tp-news-body">
-				<?php
-				while ( have_posts() ) {
-					the_post();
-					the_content();
-				}
-				?>
-			</article>
+					<?php if ( '' !== $tp_cmts ) : ?>
+						<div class="tp-news-comments"><?php echo $tp_cmts; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+					<?php endif; ?>
+				</div>
+
+				<?php echo $tp_aside; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			</div>
 
 			<?php if ( $tp_rel ) : ?>
 				<section class="tp-news-latest tp-news-related" aria-labelledby="tp-news-rel-h">
 					<div class="tp-news-latest__head">
-						<h2 id="tp-news-rel-h"><?php echo esc_html__( 'خبرهای مرتبط', 'topersia' ); ?></h2>
-						<a class="tp-more tp-news-all" href="<?php echo esc_url( topersia_g_news_archive_url() ); ?>"><?php echo esc_html__( 'همۀ اخبار', 'topersia' ); ?></a>
+						<h2 id="tp-news-rel-h"><?php echo esc_html( topersia_g_news_l( 'related' ) ); ?></h2>
+						<a class="tp-more tp-news-all" href="<?php echo esc_url( topersia_g_news_archive_url() ); ?>"><?php echo esc_html( topersia_g_news_l( 'all' ) ); ?></a>
 					</div>
 					<div class="tp-news-grid">
 						<?php foreach ( $tp_rel as $tp_one ) { echo topersia_g_news_archive_card( $tp_one ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>

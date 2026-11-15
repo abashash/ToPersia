@@ -415,6 +415,10 @@ msgstr "إيماءات يُستحسن تجنبها"
 msgid "اشتراک"
 msgstr "مشاركة"
 
+#: includes/topersia-g-article.php
+msgid "اطلاعات بیشتر"
+msgstr "معلومات إضافية"
+
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr "معلومات جغرافية"
@@ -3338,6 +3342,10 @@ msgstr "المصدر الأصلي:"
 msgid "منبع رسمی"
 msgstr "المصدر الرسمي"
 
+#: includes/topersia-g-article.php
+msgid "منبع و پیوند اصلی"
+msgstr "المصدر والرابط الأصلي"
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr "قديم"
@@ -3492,6 +3500,10 @@ msgstr "الموسيقى المحلية لهذا القوم"
 #: includes/topersia-g-news-ui.php
 msgid "موضوع خبر"
 msgstr "موضوع الخبر"
+
+#: includes/topersia-g-article.php
+msgid "موضوع و برچسب‌ها"
+msgstr "الموضوع والوسوم"
 
 #: includes/topersia-g-map.php
 msgid "موضوعیت ندارد"

@@ -415,6 +415,10 @@ msgstr "Gestures to avoid"
 msgid "اشتراک"
 msgstr "Share"
 
+#: includes/topersia-g-article.php
+msgid "اطلاعات بیشتر"
+msgstr "More information"
+
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr "Geographic information"
@@ -3338,6 +3342,10 @@ msgstr "Original source:"
 msgid "منبع رسمی"
 msgstr "Official source"
 
+#: includes/topersia-g-article.php
+msgid "منبع و پیوند اصلی"
+msgstr "Source and original link"
+
 #: includes/topersia-g-map.php
 msgid "منسوخ"
 msgstr "Outdated"
@@ -3492,6 +3500,10 @@ msgstr "Local music of this ethnic group"
 #: includes/topersia-g-news-ui.php
 msgid "موضوع خبر"
 msgstr "News topic"
+
+#: includes/topersia-g-article.php
+msgid "موضوع و برچسب‌ها"
+msgstr "Topic and tags"
 
 #: includes/topersia-g-map.php
 msgid "موضوعیت ندارد"

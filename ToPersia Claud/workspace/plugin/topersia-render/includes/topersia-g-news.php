@@ -789,7 +789,8 @@ if ( function_exists( 'add_action' ) ) {
 				. '<a href="' . esc_url( $url ) . '" rel="noopener nofollow" target="_blank">' . esc_html( $name ) . '</a></p>';
 		}
 
-		return $content . '<div class="tp-page tp-news-extra">' . $src . topersia_g_gps_link() . '</div>';
+		/* قالب خود ما (P5-D568): منبع در انتهای ستون کناری و دکمۀ منبع ترجیحی در جعبۀ اشتراک است — این‌جا چیزی افزوده نمی‌شود */
+		return defined( 'TOPERSIA_NEWS_SINGLE_TPL' ) ? $content : $content . '<div class="tp-page tp-news-extra">' . $src . topersia_g_gps_link() . '</div>';
 	}, 20 );
 
 	/* ── آرشیو سراسری /news/ (دستۀ 48) ── */
