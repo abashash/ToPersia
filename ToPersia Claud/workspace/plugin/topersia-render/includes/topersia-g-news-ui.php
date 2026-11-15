@@ -652,6 +652,28 @@ if ( ! function_exists( 'topersia_frag_store_begin' ) ) {
 			return;
 		}
 
+		/*
+		 * کلید باید از همان ورودی‌هایی ساخته شود که رندر خوانده است (بازبینی امنیتی دستۀ 52): فقط GET، بی بدنۀ POST،
+		 * و هر متغیر پالایش که وردپرس دیده (get_query_var — از هر منبع) باید عیناً همان مقدار `$_GET` باشد؛
+		 * جست‌وجوی آزاد و نام مکان، از هر راهی آمده باشند، کش نمی‌شوند.
+		 */
+		if ( 'GET' !== ( isset( $_SERVER['REQUEST_METHOD'] ) ? (string) $_SERVER['REQUEST_METHOD'] : '' ) || ! empty( $_POST ) ) {   // phpcs:ignore WordPress.Security
+			return;
+		}
+		foreach ( array( 'tp_q', 'tp_loc' ) as $qv ) {
+			$v = get_query_var( $qv );
+			if ( ! is_scalar( $v ) || '' !== trim( (string) $v ) ) {
+				return;
+			}
+		}
+		foreach ( topersia_frag_params() as $qv ) {
+			$v   = get_query_var( $qv );
+			$raw = isset( $_GET[ $qv ] ) ? wp_unslash( $_GET[ $qv ] ) : '';   // phpcs:ignore WordPress.Security
+			if ( ! is_scalar( $v ) || ! is_scalar( $raw ) || trim( (string) $v ) !== trim( (string) $raw ) ) {
+				return;
+			}
+		}
+
 		$uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) wp_unslash( $_SERVER['REQUEST_URI'] ) : '';   // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		$key = topersia_frag_key( isset( $_SERVER['HTTP_HOST'] ) ? (string) wp_unslash( $_SERVER['HTTP_HOST'] ) : '', (string) strtok( $uri, '?' ), wp_unslash( $_GET ) );   // phpcs:ignore WordPress.Security
 
@@ -670,11 +692,36 @@ if ( ! function_exists( 'topersia_frag_store_begin' ) ) {
 					if ( ! is_file( $dir . '/index.html' ) ) {
 						file_put_contents( $dir . '/index.html', '' );
 					}
+					if ( is_file( $dir . '/off' ) ) {
+						return $html;   /* سایت در این میان پشت «به‌زودی» رفته */
+					}
 					file_put_contents( $dir . '/' . $key . '.html', $html, LOCK_EX );
 				}
 			}
 			return $html;
 		} );
+	}
+}
+
+/**
+ * نشان «خاموش» برای خواننده (fragment.php وردپرس ندارد و گزینه را نمی‌بیند): سایت پشت «به‌زودی» ← پروندۀ `off`
+ * و پاک‌شدن همۀ قطعه‌ها؛ سایت عمومی ← برداشتن نشان. هنگام تغییر گزینۀ حالت نگهداری صدا می‌شود.
+ */
+if ( ! function_exists( 'topersia_frag_gate' ) ) {
+	function topersia_frag_gate( $mode = null ) {
+		if ( ! function_exists( 'topersia_frag_dir' ) || ! defined( 'WP_CONTENT_DIR' ) ) {
+			return;
+		}
+		$mode = null === $mode ? (string) get_option( 'elementor_maintenance_mode_mode', '' ) : (string) $mode;
+		$dir  = topersia_frag_dir( WP_CONTENT_DIR );
+		topersia_frag_purge();
+		if ( '' !== $mode ) {
+			if ( wp_mkdir_p( $dir ) ) {
+				file_put_contents( $dir . '/off', '1' );
+			}
+		} elseif ( is_file( $dir . '/off' ) ) {
+			@unlink( $dir . '/off' );   // phpcs:ignore WordPress.PHP.NoSilencedErrors
+		}
 	}
 }
 
@@ -777,6 +824,27 @@ if ( function_exists( 'add_action' ) ) {
 			topersia_frag_purge();
 		}
 	};
+	/* حالت نگهداری («به‌زودی») عوض شد ← قطعه‌ها پاک و نشان خاموش/روشن برای fragment.php */
+	add_action( 'update_option_elementor_maintenance_mode_mode', function ( $old, $new ) {
+		topersia_frag_gate( is_scalar( $new ) ? (string) $new : '' );
+	}, 10, 2 );
+	add_action( 'add_option_elementor_maintenance_mode_mode', function ( $name, $value ) {
+		topersia_frag_gate( is_scalar( $value ) ? (string) $value : '' );
+	}, 10, 2 );
+	add_action( 'delete_option_elementor_maintenance_mode_mode', function () {
+		topersia_frag_gate( '' );
+	} );
+	/* نخستین بار پس از نصب، یا اگر گزینه بیرون از این قلاب‌ها عوض شده: وضعیت نشان با گزینه یکی شود */
+	add_action( 'init', function () {
+		if ( ! function_exists( 'topersia_frag_dir' ) || ! defined( 'WP_CONTENT_DIR' ) ) {
+			return;
+		}
+		$on = '' !== (string) get_option( 'elementor_maintenance_mode_mode', '' );
+		if ( $on !== is_file( topersia_frag_dir( WP_CONTENT_DIR ) . '/off' ) ) {
+			topersia_frag_gate();
+		}
+	}, 50 );
+
 	add_action( 'save_post', $topersia_frag_post, 99 );
 	add_action( 'before_delete_post', $topersia_frag_post, 99 );
 	add_action( 'transition_post_status', function ( $new, $old, $post ) use ( $topersia_frag_post ) {

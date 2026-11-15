@@ -9,7 +9,8 @@
  *
  * نبود، کهنه، کاربر واردشده یا هر ورودی ناجور ← ۲۰۴؛ مرورگر همان‌جا سراغ نشانی عادی می‌رود (که کش را هم پر می‌کند).
  * هیچ نامی از ورودی به مسیر پرونده نمی‌رسد — فقط md5. هیچ چیز نوشته نمی‌شود. پاسخ هرگز نمایه و هرگز در کش مشترک نمی‌ماند.
- * وقتی سایت پشت «به‌زودی» است نویسنده اصلاً پرونده نمی‌سازد، پس این‌جا چیزی برای مهمان نیست.
+ * وقتی سایت پشت «به‌زودی» است نویسنده پرونده نمی‌سازد، همۀ قطعه‌ها را پاک می‌کند و نشان `off` می‌گذارد؛
+ * این‌جا با دیدن همان نشان هیچ چیز نمی‌دهد (گزینۀ وردپرس از این‌جا دیده نمی‌شود).
  */
 
 require __DIR__ . '/includes/topersia-frag-key.php';
@@ -46,7 +47,13 @@ if ( ! is_array( $tp_parts ) || empty( $tp_parts['path'] ) ) {
 parse_str( isset( $tp_parts['query'] ) ? (string) $tp_parts['query'] : '', $tp_get );
 
 $tp_key  = topersia_frag_key( isset( $_SERVER['HTTP_HOST'] ) ? (string) $_SERVER['HTTP_HOST'] : '', (string) $tp_parts['path'], $tp_get );
-$tp_file = topersia_frag_dir( dirname( __DIR__, 2 ) ) . '/' . $tp_key . '.html';
+$tp_dir  = topersia_frag_dir( dirname( __DIR__, 2 ) );
+$tp_file = $tp_dir . '/' . $tp_key . '.html';
+
+/* نشان «خاموش»: سایت پشت «به‌زودی» است — حتی اگر پروندۀ کهنه‌ای مانده باشد، چیزی داده نمی‌شود */
+if ( is_file( $tp_dir . '/off' ) || 'GET' !== ( isset( $_SERVER['REQUEST_METHOD'] ) ? (string) $_SERVER['REQUEST_METHOD'] : '' ) ) {
+	$tp_miss();
+}
 
 if ( '' === $tp_key || ! is_file( $tp_file ) || filemtime( $tp_file ) < time() - TOPERSIA_FRAG_TTL ) {
 	$tp_miss();
