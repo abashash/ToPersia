@@ -129,21 +129,11 @@ const local = u => { try { return 'topersia.local' === new URL( u ).hostname; } 
 		t( w + ': هر اسلایدر دقیقاً یک نوار، نوار بومی پنهان', 0 === r.bad.length && r.bars === r.sliders, r.sliders + '/' + r.bars + ' ' + r.bad.join( ',' ) );
 		t( w + ': بی سرریز افقی', ! r.ov );
 		t( w + ': فصل خالی بی پیوند', r.empty );
-		t( w + ': نقطۀ کلاژ = شمار اسلاید (دو به بالا)', r.slides < 2 ? 0 === r.dots : r.dots === r.slides, r.slides + '/' + r.dots );
+		t( w + ': کلاژ بی نقطه (P5-D569 — دستۀ 52)', 0 === r.dots, r.slides + '/' + r.dots );
 		if ( 1440 === w ) {
 			t( '1440: ردیف سه‌ستونی هم‌قد', r.row.length > 0 && Math.max( ...r.row ) - Math.min( ...r.row ) <= 2, r.row.join( ',' ) );
 			t( '1440: ایران در تصویر هم‌قد ستون اخبار', r.pair[0] > 0 && Math.abs( r.pair[0] - r.pair[1] ) <= 2, r.pair.join( ',' ) );
 
-			/* نقطه ← اسلاید، و برگشت */
-			if ( r.slides > 1 ) {
-				const dot = async k => {
-					await p.evaluate( k => { const s = document.querySelector( '#tp-home-photoslide' ); s.scrollIntoView( { behavior: 'instant', block: 'center' } ); document.querySelectorAll( '.tp-home-dots button' )[ k ].click(); }, k );
-					await until( p, k => document.querySelectorAll( '.tp-home-dots button' )[ k ].getAttribute( 'aria-current' ) === 'true', k, 8000 );
-					await settle( 500 );
-					return p.evaluate( k => { const s = document.querySelector( '#tp-home-photoslide' ), c = s.children[ k ].getBoundingClientRect(), b = s.getBoundingClientRect(); return c.left >= b.left - 2 && c.right <= b.right + 2; }, k );
-				};
-				t( '1440: نقطۀ آخر ← اسلاید آخر، نقطۀ نخست ← برگشت', await dot( r.slides - 1 ) && await dot( 0 ) );
-			}
 			await p.screenshot( { path: path.join( SHOT, 'home-1440.png' ), fullPage: true } );
 		} else {
 			await p.screenshot( { path: path.join( SHOT, 'home-390.png' ), fullPage: true } );
@@ -167,7 +157,7 @@ const local = u => { try { return 'topersia.local' === new URL( u ).hostname; } 
 			if ( 200 !== s ) { bad.push( s + ' ' + u ); }
 		}
 		t( name[ k ] + ': ' + all.length + ' پیوند، همه ۲۰۰', all.length > 0 && 0 === bad.length, bad.slice( 0, 3 ).join( ' · ' ) );
-		if ( 'season' === k ) { t( 'کارت فصل با ?season=', all.every( u => /[?&]season=(spring|summer|autumn|winter)\b/.test( u ) ) ); }
+		if ( 'season' === k ) { t( 'کارت فصل فقط به /season/{فصل}/ (P5-D564 — دستۀ 52)', all.every( u => /\/season\/(spring|summer|autumn|winter)\/$/.test( u ) ) ); }
 	}
 
 	/* ── بازنویسی ── */
