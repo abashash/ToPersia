@@ -715,7 +715,9 @@
 
 		var calm = window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 
-		Array.prototype.forEach.call( page.querySelectorAll( '.tp-slider, .tp-home-slider, [data-tp-prog]' ), function ( el ) {
+		var PROG = '.tp-slider, .tp-home-slider, [data-tp-prog]';
+
+		function progMake( el ) {
 
 			if ( el.hasAttribute( 'data-tp-no-prog' ) || ( el.nextElementSibling && el.nextElementSibling.classList.contains( 'tp-prog' ) ) ) {   /* P5-D559 */
 				return;
@@ -821,7 +823,15 @@
 				new window.ResizeObserver( later ).observe( el );
 			}
 			sync();
-		} );
+		}
+
+		Array.prototype.forEach.call( page.querySelectorAll( PROG ), progMake );
+
+		/* صفحه‌های بی‌رفرش (تراشه‌های خبر و هاب) پس از تعویض ناحیه همین را صدا می‌زنند — P5-D579 */
+		window.TopersiaProg = function ( scope ) {
+			Array.prototype.forEach.call( ( scope || page ).querySelectorAll( PROG ), progMake );
+		};
+
 	} )();
 
 	/* ══ کشیدن اسلایدر با موس — P5-D277 ════════════════════════════════

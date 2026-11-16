@@ -207,7 +207,8 @@ $w51_zjs  = $w51_read( 'plugin/topersia-render/assets/topersia-g-zones.js' );
 $w51_pcss = $w51_read( 'plugin/topersia-render/assets/topersia-g-prog.css' );
 $w51_prog = function ( $s ) {
 	foreach ( array(
-		"page.querySelectorAll( '.tp-slider, .tp-home-slider, [data-tp-prog]' )",   /* هر اسلایدر + اسلایدر تازه با ویژگی */
+		"var PROG = '.tp-slider, .tp-home-slider, [data-tp-prog]';",                  /* هر اسلایدر + اسلایدر تازه با ویژگی */
+		'page.querySelectorAll( PROG ), progMake',                                    /* سازندۀ مشترک؛ صفحه‌های بی‌رفرش window.TopersiaProg (P5-D579) */
 		"bar.setAttribute( 'aria-hidden', 'true' );",
 		"el.classList.add( 'tp-has-prog' );",                                         /* نوار بومی فقط با JS پنهان */
 		'bar.hidden = d.max <= 1;',                                                     /* همه جا شد ← پنهان */
@@ -241,7 +242,7 @@ $w51_d559 = function ( $c, $js, $nui, $z ) {
 	return false !== strpos( $c, 'html .tp-page :is(.tp-has-prog,#tp-prog-none){scrollbar-width:none;' )   /* وزن شناسه: قاعدۀ ویژۀ صفحه (home thin) نمی‌چربد */
 		&& false !== strpos( $c, ':is(.tp-has-prog,#tp-prog-none)::-webkit-scrollbar{display:none;' )
 		&& false !== strpos( $js, "if ( el.hasAttribute( 'data-tp-no-prog' ) ||" )                            /* مستثنا نوار نمی‌گیرد */
-		&& false !== strpos( $nui, '<ul class="tp-news-chips__list" data-tp-no-prog>' )                         /* تراشه‌های اخبار مستثنا (خواستۀ کاربر) */
+		&& false !== strpos( $nui, '<ul class="tp-news-chips__list" data-tp-prog>' )                            /* P5-D579: تراشه‌ها دیگر مستثنا نیستند — همان نوار سفارشی زیر ردیف */
 		&& false !== strpos( $z, '<div class="tp-wrap tp-snav__in" data-tp-no-prog>' );                        /* ناوبری چسبان، نه اسلایدر */
 };
 $w51_zphp = $w51_read( 'plugin/topersia-render/includes/topersia-g-zones.php' );
@@ -249,7 +250,7 @@ $w51_nui  = $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' 
 tp441_mut( 'P5-D559: نوار بومی با وزن شناسه پنهان؛ تراشه‌های اخبار و ناوبری بخش‌ها مستثنا — جهش: وزن شناسه برداشته (دو نوار در ۱۴۴۰ صفحۀ اول)',
 	function ( $c ) use ( $w51_d559, $w51_zjs, $w51_nui, $w51_zphp ) { return $w51_d559( $c, $w51_zjs, $w51_nui, $w51_zphp ); }, $w51_pcss,
 	str_replace( ':is(.tp-has-prog,#tp-prog-none)', '.tp-has-prog', $w51_pcss ) );
-t( 'P5-D559: جهش — تراشه‌های اخبار بی data-tp-no-prog می‌افتد', ! $w51_d559( $w51_pcss, $w51_zjs, str_replace( ' data-tp-no-prog>', '>', $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' ) ), $w51_zphp ) );
+t( 'P5-D579: جهش — تراشه‌های اخبار بی data-tp-prog می‌افتد', ! $w51_d559( $w51_pcss, $w51_zjs, str_replace( ' data-tp-prog>', '>', $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' ) ), $w51_zphp ) );
 t( 'P5-D559: جهش — JS مستثنا را نادیده بگیرد می‌افتد', ! $w51_d559( $w51_pcss, str_replace( "el.hasAttribute( 'data-tp-no-prog' ) ||", '', $w51_zjs ), $w51_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' ), $w51_zphp ) );
 
 /* ══ الحاقیه الف — اخبار (P5-D556 · P5-D557 · P5-D558) ══════════════ */

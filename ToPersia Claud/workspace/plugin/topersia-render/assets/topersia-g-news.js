@@ -271,6 +271,9 @@
 				syncForms( url );
 				initChips();
 				applyView();
+				if ( window.TopersiaProg ) {
+					window.TopersiaProg( root );   /* نوار پیشرفت زیر ردیف تراشۀ تازه — P5-D579 */
+				}
 				busy( false );   /* ناحیۀ تازه: پایان بارگیری صریح اعلام می‌شود */
 				var res = root.querySelector( '[data-tp-news-swap="results"]' );
 				var t   = res.getAttribute( 'data-tp-news-title' );
@@ -370,6 +373,28 @@
 				load( url.href, true, false );
 			}
 		} );
+
+		/* موبایل: جست‌وجو و مکان هاب زیر یک دکمۀ «فیلتر» (P5-D575)؛ دسکتاپ همیشه در خط. بی JS دکمه پنهان و فیلدها دیدنی‌اند. */
+		var moreBtn = root.querySelector( '[data-tp-more-btn]' ), morePanel = root.querySelector( '[data-tp-more]' );
+		if ( moreBtn && morePanel && window.matchMedia ) {
+			var narrow = window.matchMedia( '(max-width: 720px)' );
+			var filled = function () {
+				return Array.prototype.some.call( morePanel.querySelectorAll( 'input' ), function ( i ) { return i.type !== 'hidden' && i.value !== ''; } );
+			};
+			var syncMore = function () {
+				moreBtn.hidden = ! narrow.matches;
+				morePanel.hidden = narrow.matches && 'true' !== moreBtn.getAttribute( 'aria-expanded' ) && ! filled();
+			};
+			moreBtn.addEventListener( 'click', function () {
+				var open = 'true' !== moreBtn.getAttribute( 'aria-expanded' );
+				moreBtn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+				morePanel.hidden = ! open;
+			} );
+			syncMore();
+			if ( narrow.addEventListener ) {
+				narrow.addEventListener( 'change', syncMore );
+			}
+		}
 
 		/* پیش‌واکشی تراشه و صفحه‌بندی با نشانگر، انگشت یا تمرکز صفحه‌کلید (P5-D571) */
 		var warm = function ( e ) {

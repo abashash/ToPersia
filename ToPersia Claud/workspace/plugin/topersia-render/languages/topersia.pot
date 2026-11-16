@@ -28,6 +28,16 @@ msgstr ""
 msgid "%s در ایران"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s در ایران: همۀ مکان‌ها و مطالب"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s در ایران؛ فهرست کامل مکان‌ها، راهنماها و اخبار"
+msgstr ""
+
 #: includes/topersia-g-home.php
 #, php-format
 msgid "%s در یک نگاه"
@@ -51,6 +61,16 @@ msgstr ""
 #: includes/topersia-g-zones.php
 #, php-format
 msgid "%s یورو"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s: فهرست کامل با جست‌وجو و فیلتر استان"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s؛ فهرست کامل به تفکیک استان و شهر"
 msgstr ""
 
 #: includes/topersia-g-gallery-agg.php
@@ -1208,7 +1228,7 @@ msgstr ""
 msgid "جزیره‌های این مسیر"
 msgstr ""
 
-#: includes/topersia-g-search.php
+#: templates/article-archive.php
 msgid "جست‌وجو"
 msgstr ""
 
@@ -1546,6 +1566,11 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "دانشمند"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "در %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2725,6 +2750,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "فیسبوک"
+msgstr ""
+
+#: templates/article-archive.php
+msgid "فیلتر"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -4075,7 +4104,12 @@ msgstr ""
 
 #: includes/topersia-g-hub.php
 #, php-format
-msgid "همۀ مکان‌ها و مطالب «%s» در یک جا."
+msgid "همۀ مکان‌ها و مطالب مرتبط با %s در ایران را یک‌جا ببینید؛ با استان، شهر و پیوند به صفحۀ کامل هر مورد."
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "همۀ مکان‌ها و مطالب مرتبط با %s در ایران، یک‌جا."
 msgstr ""
 
 #: templates/news-archive.php
@@ -4184,6 +4218,14 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "وسعت"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+msgid "وسعت: زیاد به کم"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+msgid "وسعت: کم به زیاد"
 msgstr ""
 
 #: includes/topersia-g-map.php

@@ -29,6 +29,16 @@ msgstr "%1$s° N, %2$s° E"
 msgid "%s در ایران"
 msgstr "%s in Iran"
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s در ایران: همۀ مکان‌ها و مطالب"
+msgstr "%s in Iran: all places and articles in one place"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s در ایران؛ فهرست کامل مکان‌ها، راهنماها و اخبار"
+msgstr "%s in Iran: places, guides and news"
+
 #: includes/topersia-g-home.php
 #, php-format
 msgid "%s در یک نگاه"
@@ -53,6 +63,16 @@ msgstr "%s results"
 #, php-format
 msgid "%s یورو"
 msgstr "%s EUR"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s: فهرست کامل با جست‌وجو و فیلتر استان"
+msgstr "%s: the full list, with search and a province filter"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "%s؛ فهرست کامل به تفکیک استان و شهر"
+msgstr "%s: full list by province and city"
 
 #: includes/topersia-g-gallery-agg.php
 msgid "--post=<id> یا --all یا --queue"
@@ -1209,7 +1229,7 @@ msgstr "Islands of %s"
 msgid "جزیره‌های این مسیر"
 msgstr "Islands on this route"
 
-#: includes/topersia-g-search.php
+#: templates/article-archive.php
 msgid "جست‌وجو"
 msgstr "Search"
 
@@ -1548,6 +1568,11 @@ msgstr "Internet domain"
 #: includes/topersia-g-map.php
 msgid "دانشمند"
 msgstr "Scholar"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "در %s"
+msgstr "in %s"
 
 #: includes/topersia-g-map.php
 msgid "در حال بازنگری"
@@ -2727,6 +2752,10 @@ msgstr "Hypersaline"
 #: includes/topersia-g-zones.php
 msgid "فیسبوک"
 msgstr "Facebook"
+
+#: templates/article-archive.php
+msgid "فیلتر"
+msgstr "Filter"
 
 #: includes/topersia-g-map.php
 msgid "فیلسوف و عارف"
@@ -4076,8 +4105,13 @@ msgstr "All items"
 
 #: includes/topersia-g-hub.php
 #, php-format
-msgid "همۀ مکان‌ها و مطالب «%s» در یک جا."
-msgstr "All places and content tagged “%s” in one place."
+msgid "همۀ مکان‌ها و مطالب مرتبط با %s در ایران را یک‌جا ببینید؛ با استان، شهر و پیوند به صفحۀ کامل هر مورد."
+msgstr "See every place and article about %s in Iran in one place, with its province, city and a link to the full page."
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "همۀ مکان‌ها و مطالب مرتبط با %s در ایران، یک‌جا."
+msgstr "Every place and article about %s in Iran, in one place."
 
 #: templates/news-archive.php
 msgid "همۀ نوع‌ها"
@@ -4186,6 +4220,14 @@ msgstr "Admission"
 #: includes/topersia-g-zones.php
 msgid "وسعت"
 msgstr "Area"
+
+#: includes/topersia-g-hub.php
+msgid "وسعت: زیاد به کم"
+msgstr "Area: largest first"
+
+#: includes/topersia-g-hub.php
+msgid "وسعت: کم به زیاد"
+msgstr "Area: smallest first"
 
 #: includes/topersia-g-map.php
 msgid "وضعیت"

@@ -205,16 +205,18 @@ t( 'بند ۱۱: فقط محلی — اسکریپت مدل دروازۀ محیط
 	&& false !== strpos( $w52_read( 'docs/ops/STRUCTURE-LOCK.json' ), 'tpc_article (فقط محلی' ) );
 
 /* ── بند ۱۲: هاب، برچسب، فصل و مقالات بی ردیف فیلتر ─────────────────────── */
+/* دستۀ 53 (P5-D575): جست‌وجو و ترکیب‌باکس مکان به همان خط نوار ابزار برگشتند؛ ردیف فیلتر چندلایه (فصل، نوع مکان، بازۀ زمانی) نه */
 $w52_bar = function ( $s ) {
-	return false === strpos( $s, 'topersia_g_loc_field(' ) && false === strpos( $s, 'name="tp_q"' ) && false === strpos( $s, "'season'," )   /* بی مکان، جست‌وجو، فصل */
+	return 1 === substr_count( $s, 'topersia_g_loc_field(' ) && 1 === substr_count( $s, 'name="tp_q"' ) && false === strpos( $s, "'season'," )
+		&& false === strpos( $s, "'tp_kind'" ) && false === strpos( $s, "'tp_when'" ) && 1 === substr_count( $s, '<form' )                 /* یک فرم، یک خط */
 		&& false !== strpos( $s, 'topersia_g_news_chips(' ) && false !== strpos( $s, "'tp_sort'" )
 		&& false !== strpos( $s, "esc_html__( 'نمایش', 'topersia' )" ) && false !== strpos( $s, 'topersia_g_news_view_toggle()' )
 		&& false !== strpos( $s, 'class="tp-news-filter tp-news-filter--min"' );
 };
-tp441_mut( 'بند ۱۲: هاب نوع/برچسب/فصل — فقط تراشه، مرتب‌سازی، «نمایش»، شبکه/فهرست — جهش: فیلد جست‌وجو برگردد', $w52_bar, $w52_htpl,
-	str_replace( '<div class="tp-news-filter__go">', '<input type="search" name="tp_q"><div class="tp-news-filter__go">', $w52_htpl ) );
-tp441_mut( 'بند ۱۲: /articles/ همان نوار ابزار — جهش: combobox مکان', $w52_bar, $w52_atpl,
-	str_replace( '<div class="tp-news-filter__go">', '<?php echo topersia_g_loc_field( "x", 0 ); ?><div class="tp-news-filter__go">', $w52_atpl ) );
+tp441_mut( 'بند ۱۲ · P5-D575: هاب نوع/برچسب/فصل — نوار یک‌خطی، بی ردیف فیلتر چندلایه — جهش: فهرست بازۀ زمانی برگردد', $w52_bar, $w52_htpl,
+	str_replace( '<div class="tp-news-filter__go">', "<?php echo topersia_g_news_select( 'x', 'tp_when', '', array(), '' ); ?><div class=\"tp-news-filter__go\">", $w52_htpl ) );
+tp441_mut( 'بند ۱۲ · P5-D575: /articles/ همان نوار ابزار — جهش: فرم دوم', $w52_bar, $w52_atpl,
+	str_replace( '<div class="tp-news-results"', '<form></form><div class="tp-news-results"', $w52_atpl ) );
 t( 'بند ۱۲: /news/ سراسری فیلترهای خودش را نگه داشته', false !== strpos( $w52_read( 'plugin/topersia-render/templates/news-archive.php' ), 'topersia_g_loc_field(' ) );
 
 /* ── بند ۱۳: مسیر سبک و کش قطعه ───────────────────────────────────────── */

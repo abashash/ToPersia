@@ -407,12 +407,12 @@ if ( ! function_exists( 'topersia_g_news_chips' ) ) {
 			$out .= '<li><a data-tp-topic="' . esc_attr( (string) $it[3] ) . '" href="' . esc_url( $it[1] ) . '"' . ( $it[2] ? ' aria-current="page"' : '' ) . '>' . esc_html( $it[0] ) . '</a></li>';
 		}
 		$btn = function ( $k, $txt, $aria ) {
-			return '<button type="button" class="tp-news-chips__nav tp-news-chips__nav--' . $k . '" data-tp-chips="' . $k . '" hidden aria-label="' . esc_attr( $aria ) . '"><span aria-hidden="true">' . esc_html( $txt ) . '</span></button>';
+			return '<button type="button" class="tp-news-chips__nav tp-news-chips__nav--' . $k . '" data-tp-chips="' . $k . '" hidden aria-label="' . esc_attr( $aria ) . '"><span aria-hidden="true" dir="ltr">' . esc_html( $txt ) . '</span></button>';   /* dir=ltr: نویسۀ ‹ › در متن راست‌به‌چپ آینه می‌شد و جهت فلش وارونه دیده می‌شد (P5-D579) */
 		};
 		return '<nav class="tp-news-chips' . ( '' !== $mod ? ' tp-news-chips--' . esc_attr( $mod ) : '' ) . '" aria-label="' . esc_attr( $label ) . '" data-tp-news-chips data-tp-news-nav'
 			. ( '' !== $swap ? ' data-tp-news-swap="' . esc_attr( $swap ) . '"' : '' ) . '>'
 			. $btn( 'prev', $a['prev'], __( 'موضوع‌های قبلی', 'topersia' ) )
-			. '<ul class="tp-news-chips__list" data-tp-no-prog>' . $out . '</ul>'   /* P5-D559: تراشه‌ها مستثنا — پیکان دارند */
+			. '<ul class="tp-news-chips__list" data-tp-prog>' . $out . '</ul>'   /* P5-D579: همان نوار پیشرفت سفارشی زیر ردیف تراشه (جایگزین استثنای P5-D559) */
 			. $btn( 'next', $a['next'], __( 'موضوع‌های بعدی', 'topersia' ) )
 			. '</nav>';
 	}

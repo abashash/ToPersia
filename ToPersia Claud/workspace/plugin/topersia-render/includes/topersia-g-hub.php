@@ -123,7 +123,7 @@ if ( ! function_exists( 'topersia_g_hub_registry' ) ) {
 
 			$def    = function_exists( 'topersia_pack_schema' ) ? topersia_pack_schema( $type ) : array();
 			$fields = array_keys( (array) ( isset( $def['fields'] ) ? $def['fields'] : array() ) );
-			$row    = array( 'slug' => trim( (string) $obj->rewrite['slug'], '/' ), 'facet' => '', 'season' => '', 'metric' => '', 'loc' => ! in_array( $type, array( 'tp_country', 'tp_region', 'tp_province' ), true ) );
+			$row    = array( 'slug' => trim( (string) $obj->rewrite['slug'], '/' ), 'facet' => '', 'season' => '', 'metric' => '', 'area' => '', 'loc' => ! in_array( $type, array( 'tp_country', 'tp_region', 'tp_province' ), true ) );
 
 			foreach ( $fields as $f ) {
 				$kind = isset( $map[ $f ]['kind'] ) ? $map[ $f ]['kind'] : '';
@@ -135,6 +135,10 @@ if ( ! function_exists( 'topersia_g_hub_registry' ) ) {
 				}
 				if ( 'number' === $kind && '' === $row['metric'] ) {
 					$row['metric'] = $f;
+				}
+				/* فیلد وسعت نوع — مرتب‌سازی «وسعت» (P5-D577) */
+				if ( '' === $row['area'] && in_array( $f, array( 'area_km2', 'total_area_km2' ), true ) ) {
+					$row['area'] = $f;
 				}
 			}
 
@@ -251,7 +255,7 @@ if ( ! function_exists( 'topersia_g_hub_row' ) ) {
 		if ( '' !== $type && isset( $reg[ $type ] ) ) {
 			return $reg[ $type ];
 		}
-		return array( 'slug' => '', 'facet' => 'post_type', 'season' => '', 'metric' => '', 'loc' => true );
+		return array( 'slug' => '', 'facet' => 'post_type', 'season' => '', 'metric' => '', 'area' => '', 'loc' => true );
 	}
 }
 
@@ -419,7 +423,12 @@ if ( ! function_exists( 'topersia_g_hub_sort_options' ) ) {
 	function topersia_g_hub_sort_options() {
 		$row = topersia_g_hub_row();
 		$out = array( '' => __( 'الفبا', 'topersia' ), 'new' => __( 'جدیدترین', 'topersia' ) );
-		if ( '' !== $row['metric'] ) {
+		/* P5-D577: وسعت در هر دو جهت، فقط برای نوع دارای فیلد وسعت */
+		if ( '' !== $row['area'] ) {
+			$out['area_desc'] = __( 'وسعت: زیاد به کم', 'topersia' );
+			$out['area_asc']  = __( 'وسعت: کم به زیاد', 'topersia' );
+		}
+		if ( '' !== $row['metric'] && $row['metric'] !== $row['area'] ) {
 			$map           = topersia_g_map();
 			$out['metric'] = isset( $map[ $row['metric'] ]['label'] ) ? topersia_g_t( (string) $map[ $row['metric'] ]['label'] ) : $row['metric'];
 		}
@@ -518,6 +527,21 @@ if ( ! function_exists( 'topersia_g_hub_ids' ) ) {
 			usort( $ids, function ( $a, $b ) {
 				return strcmp( (string) get_post_field( 'post_date', $b ), (string) get_post_field( 'post_date', $a ) ) ?: $b - $a;
 			} );
+		} elseif ( 'area_desc' === $args['tp_sort'] || 'area_asc' === $args['tp_sort'] ) {
+			/* وسعت: بی‌مقدار همیشه آخر، به ترتیب نام */
+			$pos = array_flip( topersia_g_home_by_title( $ids ) );
+			$asc = 'area_asc' === $args['tp_sort'];
+			usort( $ids, function ( $a, $b ) use ( $row, $pos, $asc ) {
+				$x = topersia_g_hub_metric( $a, $row['area'] );
+				$y = topersia_g_hub_metric( $b, $row['area'] );
+				if ( ( null === $x ) !== ( null === $y ) ) {
+					return null === $x ? 1 : -1;
+				}
+				if ( null === $x || $x === $y ) {
+					return $pos[ $a ] - $pos[ $b ];
+				}
+				return ( $asc ? $x < $y : $x > $y ) ? -1 : 1;
+			} );
 		} elseif ( 'metric' === $args['tp_sort'] ) {
 			/* بیشترین اول؛ بی مقدار آخر، به ترتیب نام */
 			$pos = array_flip( topersia_g_home_by_title( $ids ) );
@@ -544,12 +568,62 @@ if ( ! function_exists( 'topersia_g_hub_thin' ) ) {
 	}
 }
 
-/** H1 هاب — جمع نوع با نام مکان (P5-D558)؛ برچسب ← نام برچسب. */
+/** متن بلند اگر در سقف نویسه جا شد، وگرنه متن کوتاه (P5-D578: title ≤ ۶۰، description ≤ ۱۶۰). */
+if ( ! function_exists( 'topersia_g_hub_fit' ) ) {
+	function topersia_g_hub_fit( $long, $short, $max ) {
+		$len = function_exists( 'mb_strlen' ) ? mb_strlen( (string) $long ) : strlen( (string) $long );
+		return $len <= (int) $max ? (string) $long : (string) $short;
+	}
+}
+
+/** نام هاب بی افزوده — برچسب: نام واژه؛ فصل: نام فصل؛ نوع: جمع نوع با نام مکان («شهرهای ایران»). */
+if ( ! function_exists( 'topersia_g_hub_name' ) ) {
+	function topersia_g_hub_name( $place_id = 0 ) {
+		$term = topersia_g_hub_term();
+		if ( $term ) {
+			return (string) $term->name;
+		}
+		$seas = topersia_g_hub_season();
+		if ( '' !== $seas ) {
+			return (string) topersia_g_glossary_label( '34', $seas );
+		}
+		$type   = topersia_g_hub_type();
+		$titles = topersia_g_hub_titles();
+		$kinds  = topersia_g_kind_labels();
+		$tpl    = isset( $titles[ $type ] ) ? $titles[ $type ] : topersia_g_t( isset( $kinds[ $type ] ) ? $kinds[ $type ] : $type );
+		return sprintf( $tpl, topersia_g_news_place_name( $place_id ) );
+	}
+}
+
+/** عنوان سند (title) هاب با نام برند زبان صفحه — ≤ ۶۰ نویسه، وگرنه شکل کوتاه (P5-D578). */
+if ( ! function_exists( 'topersia_g_hub_doc_title' ) ) {
+	function topersia_g_hub_doc_title( $place_id = 0 ) {
+		$name  = topersia_g_hub_name( $place_id );
+		$brand = function_exists( 'topersia_g_brand' ) ? (string) topersia_g_brand() : 'ToPersia';
+		if ( topersia_g_hub_term() ) {
+			/* translators: %s: نام برچسب */
+			$long = sprintf( __( '%s در ایران؛ فهرست کامل مکان‌ها، راهنماها و اخبار', 'topersia' ), $name );
+			/* translators: %s: نام برچسب */
+			$short = sprintf( __( '%s در ایران', 'topersia' ), $name );
+		} elseif ( '' !== topersia_g_hub_season() ) {
+			$long  = topersia_g_hub_title( $place_id );
+			$short = $long;
+		} else {
+			/* translators: %s: جمع نوع با نام مکان، مثل «شهرهای ایران» */
+			$long  = sprintf( __( '%s؛ فهرست کامل به تفکیک استان و شهر', 'topersia' ), $name );
+			$short = $name;
+		}
+		return topersia_g_hub_fit( $long . ' | ' . $brand, topersia_g_hub_fit( $short . ' | ' . $brand, $short, 60 ), 60 );
+	}
+}
+
+/** H1 هاب (P5-D578) — برچسب: «%s در ایران: همۀ مکان‌ها و مطالب»؛ نوع: «%s: فهرست کامل با جست‌وجو و فیلتر استان». */
 if ( ! function_exists( 'topersia_g_hub_title' ) ) {
 	function topersia_g_hub_title( $place_id = 0 ) {
 		$term = topersia_g_hub_term();
 		if ( $term ) {
-			return (string) $term->name;
+			/* translators: %s: نام برچسب یا تجربه */
+			return sprintf( __( '%s در ایران: همۀ مکان‌ها و مطالب', 'topersia' ), (string) $term->name );
 		}
 		$seas = topersia_g_hub_season();
 		if ( '' !== $seas ) {
@@ -560,7 +634,8 @@ if ( ! function_exists( 'topersia_g_hub_title' ) ) {
 		$titles = topersia_g_hub_titles();
 		$kinds  = topersia_g_kind_labels();
 		$tpl    = isset( $titles[ $type ] ) ? $titles[ $type ] : topersia_g_t( isset( $kinds[ $type ] ) ? $kinds[ $type ] : $type );
-		return sprintf( $tpl, topersia_g_news_place_name( $place_id ) );
+		/* translators: %s: جمع نوع با نام مکان، مثل «شهرهای ایران» */
+		return sprintf( __( '%s: فهرست کامل با جست‌وجو و فیلتر استان', 'topersia' ), sprintf( $tpl, topersia_g_news_place_name( $place_id ) ) );
 	}
 }
 
@@ -569,7 +644,11 @@ if ( ! function_exists( 'topersia_g_hub_lead' ) ) {
 	function topersia_g_hub_lead( $place_id = 0 ) {
 		if ( topersia_g_hub_term() ) {
 			/* translators: %s: نام برچسب */
-			return sprintf( __( 'همۀ مکان‌ها و مطالب «%s» در یک جا.', 'topersia' ), topersia_g_hub_title() );
+			return topersia_g_hub_fit(
+				sprintf( __( 'همۀ مکان‌ها و مطالب مرتبط با %s در ایران را یک‌جا ببینید؛ با استان، شهر و پیوند به صفحۀ کامل هر مورد.', 'topersia' ), topersia_g_hub_name() ),
+				sprintf( __( 'همۀ مکان‌ها و مطالب مرتبط با %s در ایران، یک‌جا.', 'topersia' ), topersia_g_hub_name() ),
+				160
+			);
 		}
 		$seas = topersia_g_hub_season();
 		if ( '' !== $seas ) {
@@ -577,7 +656,7 @@ if ( ! function_exists( 'topersia_g_hub_lead' ) ) {
 			return sprintf( __( 'جاها و تجربه‌هایی که بهترین زمان سفرشان %s است.', 'topersia' ), (string) topersia_g_glossary_label( '34', $seas ) );
 		}
 		/* translators: %s: عنوان هاب */
-		return sprintf( __( 'فهرست کامل %s.', 'topersia' ), topersia_g_hub_title( $place_id ) );
+		return sprintf( __( 'فهرست کامل %s.', 'topersia' ), topersia_g_hub_name( $place_id ) );
 	}
 }
 
@@ -632,6 +711,76 @@ if ( ! function_exists( 'topersia_g_hub_active_items' ) ) {
 			$items[] = array( sprintf( /* translators: %s: عبارت جست‌وجو */ __( 'جست‌وجو: %s', 'topersia' ), $args['tp_q'] ), topersia_g_hub_link( 1, array( 'tp_q' => '' ) ) );
 		}
 		return $items;
+	}
+}
+
+/** نیای استان یک مورد (شناسۀ زبان جاری) از مسیر راهنما — رابطه، نه متن؛ نبود ← صفر. */
+if ( ! function_exists( 'topersia_g_hub_province_of' ) ) {
+	function topersia_g_hub_province_of( $id ) {
+		foreach ( (array) topersia_g_crumb_chain( $id ) as $pid ) {
+			if ( 'tp_province' === get_post_type( $pid ) ) {
+				return (int) $pid;
+			}
+		}
+		return 0;
+	}
+}
+
+/** پیوست عکس کاشی: عکس خود مورد ← عکس نخستین نیای دارای عکس (هرگز نمونه)؛ نبود ← صفر (آیکون نوع). */
+if ( ! function_exists( 'topersia_g_hub_card_image' ) ) {
+	function topersia_g_hub_card_image( $id ) {
+		$img = topersia_g_news_real_img( topersia_g_card_image( $id ) );
+		if ( $img ) {
+			return $img;
+		}
+		foreach ( (array) topersia_g_crumb_chain( $id ) as $pid ) {
+			$img = metadata_exists( 'post', $pid, '_tp_sample' ) ? 0 : topersia_g_news_real_img( topersia_g_card_image( $pid ) );
+			if ( $img ) {
+				return $img;
+			}
+		}
+		return 0;
+	}
+}
+
+/**
+ * کاشی هاب با عکس — همان کارت خبر (P5-D576): عکس ۱۶:۱۰ تنبل با ابعاد صریح، نام، و زیرعنوان
+ * «نوع · در استان X» (استان: فقط نوع؛ نام استان پیوند به صفحۀ همان استان). در ترتیب معیار/وسعت مقدار عددی هم می‌آید.
+ */
+if ( ! function_exists( 'topersia_g_hub_card' ) ) {
+	function topersia_g_hub_card( $id ) {
+
+		$row   = topersia_g_hub_row();
+		$args  = topersia_g_hub_args();
+		$type  = (string) get_post_type( $id );
+		$url   = (string) get_permalink( $id );
+		$kinds = topersia_g_kind_labels();
+		$img   = topersia_g_hub_card_image( $id );
+		$pic   = $img ? (string) wp_get_attachment_image( $img, 'medium_large', false, array( 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw' ) ) : '';
+		$parts = array();
+
+		if ( isset( $kinds[ $type ] ) ) {
+			$parts[] = esc_html( topersia_g_t( $kinds[ $type ] ) );
+		}
+		$prov = 'tp_province' === $type ? 0 : topersia_g_hub_province_of( $id );
+		if ( $prov ) {
+			/* translators: %s: نام کامل استان (پیوند) */
+			$parts[] = sprintf( esc_html__( 'در %s', 'topersia' ), '<a href="' . esc_url( (string) get_permalink( $prov ) ) . '">' . esc_html( topersia_g_title( $prov ) ) . '</a>' );
+		}
+		$field = in_array( $args['tp_sort'], array( 'area_desc', 'area_asc' ), true ) ? $row['area'] : ( 'metric' === $args['tp_sort'] ? $row['metric'] : '' );
+		if ( '' !== $field && null !== topersia_g_hub_metric( $id, $field ) ) {
+			$parts[] = esc_html( wp_strip_all_tags( (string) topersia_g_value( $field, topersia_g_raw( $id, $field ), $id ) ) );
+		}
+
+		return '<article class="tp-news-card tp-hub-card">'
+			. '<div class="tp-news-card__top">'
+			. '<a class="tp-news-card__media' . ( '' === $pic ? ' tp-news-card__media--icon' : '' ) . '" href="' . esc_url( $url ) . '" tabindex="-1" aria-hidden="true">' . ( '' !== $pic ? $pic : topersia_g_icon( 'pin' ) ) . '</a>'
+			. topersia_g_demo_badge( $id )
+			. '</div>'
+			. '<div class="tp-news-card__body">'
+			. '<h3 class="tp-news-card__title"><a href="' . esc_url( $url ) . '">' . esc_html( topersia_g_name( $id ) ) . '</a></h3>'
+			. ( $parts ? '<p class="tp-hub-card__sub">' . implode( '<span aria-hidden="true"> · </span>', $parts ) . '</p>' : '' )
+			. '</div></article>';
 	}
 }
 
@@ -762,6 +911,10 @@ if ( function_exists( 'add_action' ) ) {
 		wp_enqueue_style( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-news.css' ) );
 		wp_enqueue_style( 'topersia-g-hub', topersia_render_url() . 'assets/topersia-g-hub.css', array( 'topersia-g-news' ), topersia_render_asset_version( 'assets/topersia-g-hub.css' ) );
 		wp_enqueue_script( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.js', array(), topersia_render_asset_version( 'assets/topersia-g-news.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		/* P5-D575: ترکیب‌باکس مکان همان اخبار — فقط هابی که پالایش مکان دارد */
+		if ( topersia_g_hub_row()['loc'] ) {
+			wp_enqueue_script( 'topersia-g-loc', topersia_render_url() . 'assets/topersia-g-loc.js', array(), topersia_render_asset_version( 'assets/topersia-g-loc.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		}
 	}, 31 );
 
 	add_filter( 'wp_robots', function ( $r ) {
@@ -791,8 +944,9 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'get_canonical_url', $tp_hub_canon, 99 );
 	add_filter( 'rank_math/frontend/canonical', $tp_hub_canon, 99 );
 
+	/* عنوان سند: متن P5-D578 با نام برند زبان صفحه — فقط از همین صافی، نه تنظیم سراسری Rank Math */
 	$tp_hub_doc_title = function () {
-		return topersia_g_hub_title( topersia_g_hub_args()['tp_place'] );
+		return topersia_g_hub_doc_title( topersia_g_hub_args()['tp_place'] );
 	};
 	add_filter( 'document_title_parts', function ( $parts ) use ( $tp_hub_doc_title ) {
 		if ( topersia_g_hub_is() ) {
@@ -801,7 +955,7 @@ if ( function_exists( 'add_action' ) ) {
 		return $parts;
 	}, 99 );
 	add_filter( 'rank_math/frontend/title', function ( $t ) use ( $tp_hub_doc_title ) {
-		return topersia_g_hub_is() ? $tp_hub_doc_title() . ' | ' . get_bloginfo( 'name' ) : $t;
+		return topersia_g_hub_is() ? $tp_hub_doc_title() : $t;
 	}, 99 );
 	add_filter( 'rank_math/frontend/description', function ( $d ) {
 		return topersia_g_hub_is() ? topersia_g_hub_lead( topersia_g_hub_args()['tp_place'] ) : $d;

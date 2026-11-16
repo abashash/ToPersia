@@ -26,6 +26,7 @@ $tp_on    = topersia_g_news_filtered();
 $tp_title = topersia_g_news_title( 0 );
 $tp_base  = topersia_g_news_archive_url();
 $tp_part  = topersia_g_news_partial();
+$tp_loc_on = function_exists( 'topersia_g_loc_field' );
 
 $tp_topic_items = array( array( __( 'همه', 'topersia' ), topersia_g_news_archive_link( 1, array( 'tp_topic' => '' ) ), '' === $tp_args['tp_topic'], '' ) );
 foreach ( topersia_g_news_topics() as $tp_t ) {
@@ -57,6 +58,15 @@ if ( $tp_part ) {
 					<div class="tp-news-bar__tools">
 						<form class="tp-news-filter tp-news-filter--min" method="get" action="<?php echo esc_url( $tp_base ); ?>" data-tp-news-filter>
 							<?php if ( '' !== $tp_args['tp_topic'] ) : ?><input type="hidden" name="tp_topic" value="<?php echo esc_attr( $tp_args['tp_topic'] ); ?>"><?php endif; ?>
+							<?php /* P5-D575: جست‌وجو و مکان در همان خط؛ موبایل زیر دکمۀ «فیلتر» (بی JS همیشه دیدنی) */ ?>
+							<button type="button" class="tp-hub-more__btn" data-tp-more-btn aria-expanded="false" aria-controls="tp-hub-more" hidden><?php echo esc_html__( 'فیلتر', 'topersia' ); ?></button>
+							<div id="tp-hub-more" class="tp-hub-more" data-tp-more>
+								<div class="tp-news-filter__f tp-news-filter__f--q">
+									<label for="tp-hub-q"><?php echo esc_html__( 'جست‌وجو', 'topersia' ); ?></label>
+									<input id="tp-hub-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">
+								</div>
+								<?php if ( $tp_loc_on ) { echo topersia_g_loc_field( 'tp-hub-place', $tp_args['tp_place'] ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
+							</div>
 							<?php echo topersia_g_news_select( 'tp-news-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_news_sort_options(), $tp_args['tp_sort'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 							<div class="tp-news-filter__go"><button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button></div>
 						</form>
@@ -81,6 +91,9 @@ if ( $tp_part ) {
 						<p class="tp-lead tp-news-empty" tabindex="-1" data-tp-news-focus><?php echo esc_html( $tp_on ? __( 'موردی با این پالایش نیست.', 'topersia' ) : topersia_g_news_l( 'none' ) ); ?></p>
 					<?php endif; ?>
 
+					<?php
+					$tp_loc_raw = is_scalar( get_query_var( 'tp_loc' ) ) ? trim( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) ) : '';
+					?>
 					<?php echo topersia_g_news_pages( $tp_pages, $tp_paged, 'topersia_g_news_archive_link', topersia_g_news_l( 'pages' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 			</section>

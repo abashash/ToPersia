@@ -1265,7 +1265,6 @@ return array(
 	'رویدادهای ورزشی %s' => array( 'en' => 'Sports events in %s', 'ar' => 'الفعاليات الرياضية في %s' ),
 	'مراسم مذهبی عمومی %s' => array( 'en' => 'Public religious ceremonies in %s', 'ar' => 'المراسم الدينية العامة في %s' ),
 	'رویدادهای طبیعی و فصلی %s' => array( 'en' => 'Natural and seasonal events in %s', 'ar' => 'الأحداث الطبيعية والموسمية في %s' ),
-	'همۀ مکان‌ها و مطالب «%s» در یک جا.' => array( 'en' => 'All places and content tagged “%s” in one place.', 'ar' => 'كل الأماكن والمحتوى الموسوم بـ«%s» في مكان واحد.' ),
 	'فهرست کامل %s.' => array( 'en' => 'The full list of %s.', 'ar' => 'القائمة الكاملة لـ%s.' ),
 	/* دستۀ 52 — صفحۀ فصل و راهنمای سفر (P5-D564 · P5-D565) */
 	'%s در ایران' => array( 'en' => '%s in Iran', 'ar' => '%s في إيران' ),
@@ -1294,4 +1293,15 @@ return array(
 	'موضوع و برچسب‌ها' => array( 'en' => 'Topic and tags', 'ar' => 'الموضوع والوسوم' ),
 	'منبع و پیوند اصلی' => array( 'en' => 'Source and original link', 'ar' => 'المصدر والرابط الأصلي' ),
 	'اطلاعات بیشتر' => array( 'en' => 'More information', 'ar' => 'معلومات إضافية' ),
+	/* دستۀ 53 — هاب‌ها (P5-D575 تا P5-D578) */
+	'%s در ایران: همۀ مکان‌ها و مطالب' => array( 'en' => '%s in Iran: all places and articles in one place', 'ar' => '%s في إيران: كل الأماكن والمواد في مكان واحد' ),
+	'%s در ایران؛ فهرست کامل مکان‌ها، راهنماها و اخبار' => array( 'en' => '%s in Iran: places, guides and news', 'ar' => '%s في إيران: الأماكن والأدلة والأخبار' ),
+	'%s: فهرست کامل با جست‌وجو و فیلتر استان' => array( 'en' => '%s: the full list, with search and a province filter', 'ar' => '%s: القائمة الكاملة مع البحث والتصفية حسب المحافظة' ),
+	'%s؛ فهرست کامل به تفکیک استان و شهر' => array( 'en' => '%s: full list by province and city', 'ar' => '%s: القائمة الكاملة حسب المحافظة والمدينة' ),
+	'در %s' => array( 'en' => 'in %s', 'ar' => 'في %s' ),
+	'فیلتر' => array( 'en' => 'Filter', 'ar' => 'تصفية' ),
+	'همۀ مکان‌ها و مطالب مرتبط با %s در ایران را یک‌جا ببینید؛ با استان، شهر و پیوند به صفحۀ کامل هر مورد.' => array( 'en' => 'See every place and article about %s in Iran in one place, with its province, city and a link to the full page.', 'ar' => 'شاهد كل الأماكن والمواد المتعلقة بـ%s في إيران في مكان واحد، مع المحافظة والمدينة ورابط الصفحة الكاملة.' ),
+	'همۀ مکان‌ها و مطالب مرتبط با %s در ایران، یک‌جا.' => array( 'en' => 'Every place and article about %s in Iran, in one place.', 'ar' => 'كل الأماكن والمواد المتعلقة بـ%s في إيران في مكان واحد.' ),
+	'وسعت: زیاد به کم' => array( 'en' => 'Area: largest first', 'ar' => 'المساحة: من الأكبر إلى الأصغر' ),
+	'وسعت: کم به زیاد' => array( 'en' => 'Area: smallest first', 'ar' => 'المساحة: من الأصغر إلى الأكبر' ),
 );

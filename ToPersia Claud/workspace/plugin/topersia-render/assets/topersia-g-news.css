@@ -282,3 +282,10 @@ html .tp-page.tp-news-single :is(.tp-news-place,.tp-news-box a):focus-visible{ou
 }
 /* جعبۀ اشتراک همیشه نخستین جعبۀ ستون کناری (قالب موجودیت به آن order می‌دهد) */
 html .tp-page.tp-page.tp-news-single .tp-news-aside > #tp-actions{order:-1}
+
+/* P5-D579 — ردیف تراشه: [قبلی | فهرست | بعدی] و زیرش یک نوار پیشرفت سفارشی (همان P5-D550/D559). شبکۀ صریح تا با افزودن نوار، فلش‌ها جابه‌جا نشوند. */
+html .tp-page.tp-news-page .tp-news-chips{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center}
+html .tp-page.tp-news-page .tp-news-chips > .tp-news-chips__nav--prev{grid-column:1;grid-row:1}
+html .tp-page.tp-news-page .tp-news-chips > .tp-news-chips__list{grid-column:2;grid-row:1}
+html .tp-page.tp-news-page .tp-news-chips > .tp-news-chips__nav--next{grid-column:3;grid-row:1}
+html .tp-page.tp-news-page .tp-news-chips > .tp-prog{grid-column:1 / -1;grid-row:2;margin-block-start:6px}
