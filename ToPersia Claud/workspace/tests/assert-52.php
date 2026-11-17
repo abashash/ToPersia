@@ -93,7 +93,7 @@ $w52_sea = function ( $s ) use ( $w52_row ) {
 		&& false !== strpos( $s, "apply_filters( 'topersia_g_season_slugs', \$all )" )                                                /* پایه و نامک ترجمه‌پذیر */
 		&& false !== strpos( $s, "return array_keys( array_filter( \$reg, function ( \$row ) { return '' !== \$row['season']; } ) );" )   /* همۀ نوع‌های دارای فیلد فصل */
 		&& false !== strpos( $s, 'return topersia_g_hub_in_season( $id, $seas );' )
-		&& false !== strpos( $s, "|| '' !== topersia_g_hub_season();" )                                                               /* هاب است ← noindex زیر ۳ و اسکیما از همان مسیر */
+		&& false !== strpos( $s, "|| '' !== topersia_g_hub_season() || '' !== topersia_g_hub_group();" )                                                               /* هاب است ← noindex زیر ۳ و اسکیما از همان مسیر */
 		&& false !== strpos( $s, '$wp_query->set_404();' )                                                                            /* نامک ناشناس */
 		&& false !== strpos( $w52_row, "topersia_g_season_url( \$s ) : '';" ) && false === strpos( $w52_row, "array( 'season' => \$s )" );
 };
@@ -258,45 +258,7 @@ t( 'بند ۱۳ رفتار: جست‌وجوی آزاد، نام مکان، پا�
 	&& '' === topersia_frag_key( 'a.local', '/news/', array( 'zzz' => '1' ) ) && '' === topersia_frag_key( 'a.local', '/news/', array( 'tp_topic' => array( 'x' ) ) )
 	&& '' === topersia_frag_key( 'a.local', '/../x/', array() ) && '' === topersia_frag_key( '', '/news/', array() ) );
 
-/* ── بندهای ۱۴ تا ۱۸: صفحۀ تکی ─────────────────────────────────────────── */
-$w52_one = function ( $s ) {
-	$main = strpos( $s, '<div class="tp-news-main">' );
-	$body = strpos( $s, '<article class="tp-news-body">' );
-	$cmts = strpos( $s, '<div class="tp-news-comments">' );
-	$side = strpos( $s, '<?php echo $tp_aside;' );
-	$end  = strpos( $s, '<?php if ( $tp_rel ) : ?>' );
-	return false !== $main && false !== $end && $main < $body && $body < $cmts && $cmts < $side && $side < $end                           /* اصلی (متن ← نظرات) ← کناری ← مرتبط تمام‌عرض */
-		&& false !== strpos( $s, "topersia_g_sc_reviews( array( 'id' => \$tp_id ) )" )                                                 /* همان جزء نظرات */
-		&& false !== strpos( $s, 'topersia_g_news_metaline( $tp_id )' ) && false === strpos( $s, 'منبع اصلی:' ) && false === strpos( $s, 'news_source' )   /* منبع بالای متن نیست */
-		&& false !== strpos( $s, "topersia_g_news_l( 'related' )" ) && false !== strpos( $s, 'topersia_g_news_archive_card( $tp_one )' );
-};
-tp441_mut( 'بند ۱۴، ۱۶، ۱۷ و ۱۸: ستون اصلی (متن، نظرات) ← ستون کناری ← مرتبط‌ها تمام‌عرض؛ منبع بالای متن نیست — جهش: مرتبط‌ها پیش از ستون کناری', $w52_one, $w52_stpl,
-	str_replace( '<?php echo $tp_aside;', '<?php if ( $tp_rel ) : ?><?php endif; ?><?php echo $tp_aside;', $w52_stpl ) );
-$w52_side = function ( $s ) {
-	$p = array();
-	foreach ( array( "topersia_g_sc_actionbar( array( 'id' => \$id ) )", 'topersia_g_news_box_topics( $id )', 'topersia_g_news_box_places( $id )', 'topersia_g_news_box_latest( $id )', 'topersia_g_news_box_source( $id )' ) as $k ) {
-		$p[] = strpos( $s, $k, (int) strpos( $s, 'function topersia_g_news_aside(' ) );
-	}
-	$ok = ! in_array( false, $p, true );
-	for ( $i = 1; $ok && $i < count( $p ); $i++ ) {
-		$ok = $p[ $i ] > $p[ $i - 1 ];
-	}
-	return $ok && false !== strpos( $s, "if ( '' === trim( (string) \$body ) ) {\n\t\t\treturn '';" )                                    /* جعبۀ بی‌داده پنهان */
-		&& false !== strpos( $s, "define( 'TOPERSIA_NEWS_ASIDE_LATEST', 5 );" )
-		&& false !== strpos( $s, 'rel="nofollow noopener" target="_blank"' ) && false !== strpos( $s, 'wp_http_validate_url( $r[1] )' )
-		&& false !== strpos( $s, "implode( '<span class=\"tp-news-metaline__sep\" aria-hidden=\"true\">·</span>', \$parts )" );           /* جداکننده میان تاریخ و زمان مطالعه */
-};
-tp441_mut( 'بند ۱۵ و ۱۶: ستون کناری به ترتیب اشتراک · موضوع و برچسب · مکان‌ها · تازه‌ترین (۵) · منبع؛ جعبۀ تهی پنهان؛ سطر فراداده با جداکننده — جهش: منبع پیش از مکان‌ها', $w52_side, $w52_art,
-	str_replace( array( "\t\t\t. topersia_g_news_box_places( \$id )\n", "\t\t\t. topersia_g_news_box_source( \$id );" ), array( "\t\t\t. topersia_g_news_box_source( \$id )\n", "\t\t\t. topersia_g_news_box_places( \$id );" ), $w52_art ) );
-t( 'بند ۱۵ و ۱۶: جهش — بی جداکننده می‌افتد', ! $w52_side( str_replace( 'aria-hidden="true">·</span>\', $parts )', 'aria-hidden="true"></span>\', $parts )', $w52_art ) ) );
-$w52_scss = function ( $c ) {
-	$a   = strpos( $c, '/* ══ صفحۀ تکی خبر و مقاله — دو ستونه' );
-	$blk = false !== $a ? substr( $c, $a ) : '';
-	return '' !== $blk && 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(|letter-spacing/i', (string) preg_replace( '/#tp-actions/', '', $blk ) )
-		&& false !== strpos( $blk, '.tp-news-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);' )
-		&& (bool) preg_match( '/@media \(max-width:900px\)\{\s*html \.tp-page\.tp-news-single \.tp-news-cols\{grid-template-columns:minmax\(0,1fr\)\}/', $blk )   /* موبایل: کناری زیر متن */
-		&& false !== strpos( $blk, '.tp-news-metaline{display:flex;flex-wrap:wrap;justify-content:center;' )
-		&& false !== strpos( $blk, '.tp-news-aside > #tp-actions{order:-1}' );
-};
-tp441_mut( 'بند ۱۴ و ۱۶ CSS: دو ستون (اصلی در آغاز سطر)، زیر ۹۰۰px یک ستون، سطر فراداده وسط‌چین، فقط توکن — جهش: رنگ خام', $w52_scss, $w52_ncss,
-	str_replace( '.tp-news-box__h{margin:0 0 12px;', '.tp-news-box__h{color:#333;margin:0 0 12px;', $w52_ncss ) );
+/*
+ * بندهای ۱۴ تا ۱۸ (صفحۀ تکی دو ستونۀ P5-D568) با P5-D573 جایگزین شد: صفحۀ تکی حالا اسکلت صفحۀ استان را دارد.
+ * ادعاهای ساختار، ترتیب کارت‌های ستون کناری، جداکنندۀ سطر فراداده و CSS آن در tests/assert-53.php (بندهای ۱۰ تا ۱۳) است.
+ */

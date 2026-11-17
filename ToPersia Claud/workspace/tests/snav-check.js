@@ -276,7 +276,16 @@ async function liveDesktopChecks( page ) {
 
 	const wheel = dy => page.send( 'Input.dispatchMouseEvent', { type: 'mouseWheel', x: 720, y: 450, deltaX: 0, deltaY: dy } );
 
-	for ( let i = 0; i < 14; i++ ) { await wheel( 300 ); await page.evaluate( '__tp.wait( 140 )' ); }
+	/*
+	 * صفحۀ کوتاه (تک‌خبر، دستۀ 53): نوار چسبان با پایان `.tp-page` بیرون می‌رود — رفتار درست sticky. سنجش «زیر هدر»
+	 * فقط تا وقتی معنا دارد که ته صفحه هنوز از نوار دور است؛ پس چرخ پیش از رسیدن ته صفحه به بالای دید می‌ایستد.
+	 */
+	for ( let i = 0; i < 14; i++ ) {
+		const room = await page.evaluate( 'Math.round( __tp.page().getBoundingClientRect().bottom )' );
+		if ( room - 300 < 420 ) { break; }
+		await wheel( 300 );
+		await page.evaluate( '__tp.wait( 140 )' );
+	}
 	await page.evaluate( '__tp.wait( 1000 )' );
 
 	const down = await page.evaluate( '__tp.edge()' );
@@ -501,6 +510,8 @@ async function mobileChecks( page ) {
 		p.parentNode.insertBefore( host, p );
 		host.appendChild( p );
 		host.style.transform = 'translateZ(0)';
+		/* بی شیوه‌نامۀ المنتور (قالب تک‌خبر) ظرف e-con جعبۀ درون‌خطی می‌شود و transform رویش بی‌اثر است — شاهد هیچ نمی‌سنجید */
+		if ( 'inline' === getComputedStyle( host ).display ) { host.style.display = 'block'; }
 		const witness = document.createElement( 'div' );
 		witness.style.cssText = 'position:fixed;bottom:0;left:0;width:10px;height:10px';
 		p.appendChild( witness );

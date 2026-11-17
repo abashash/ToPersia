@@ -153,8 +153,12 @@ t( 'نحو: همهٔ پرونده‌های PHP', ! $bad_php, implode( ' · ', $b
 
 /* ── نظر — خانواده‌ها  P5-D234 ── */
 $fam = ToPersia_JetReviews_Setup::families();
-t( 'نظر: پنج خانواده با معیارهای مشخصات',
-	array( 'destination', 'nature', 'heritage', 'event', 'border' ) === array_keys( $fam )
+t( 'نظر: پنج خانوادۀ ستاره‌دار با معیارهای مشخصات، و خانوادۀ «خبر و مقاله» بی ستاره (P5-D574)',
+	array( 'destination', 'nature', 'heritage', 'event', 'border', 'content' ) === array_keys( $fam )
+	&& array( 'tpc_news', 'tpc_article' ) === $fam['content']['types'] && array() === $fam['content']['criteria'] && false === $fam['content']['stars']
+	&& ToPersia_JetReviews_Setup::starless( 'tpc_news' ) && ! ToPersia_JetReviews_Setup::starless( 'tp_city' )
+	&& ToPersia_JetReviews_Setup::allowed( 'tpc_article' ) && ! ToPersia_JetReviews_Setup::allowed( 'tp_county' )
+	&& array() === ToPersia_JetReviews_Setup::type_fields( 'tpc_news' )
 	&& array( 'جاذبه‌ها', 'دسترسی', 'اقامت و خدمات', 'مهمان‌نوازی' ) === $fam['destination']['criteria']
 	&& array( 'چشم‌انداز', 'دسترسی', 'ایمنی', 'امکانات' ) === $fam['nature']['criteria']
 	&& array( 'ارزش دیدن', 'نگهداری', 'دسترسی', 'خدمات بازدید' ) === $fam['heritage']['criteria']
@@ -190,6 +194,17 @@ t( 'ثبت نظر: امتیاز بیرون از ۱ تا ۵، معیار کم، �
 	&& ! ToPersia_Review_Form::prepare( 'tp_province', 99, 7, array( 5, 4, 3, 4 ), '', 'کوتاه' )['ok']
 	&& ! ToPersia_Review_Form::prepare( 'tp_province', 99, 7, array( 5, 4, 3, 4 ), '', str_repeat( 'ب', 3001 ) )['ok']
 	&& 'review_not_allowed' === ToPersia_Review_Form::prepare( 'tp_county', 99, 7, array( 5 ), '', 'متن کافی برای آزمون' )['error'] );
+
+/* خبر و مقاله: نظر بی ستاره — P5-D574 */
+$plain = ToPersia_Review_Form::prepare( 'tpc_news', 1975, 7, array( 5, 5 ), '', 'متن آزمونی دربارۀ این خبر، بی ستاره.' );
+t( 'ثبت نظر خبر/مقاله: بی امتیاز (rating صفر، بی rating_data)، در انتظار تأیید؛ متن کوتاه رد؛ نوع ستاره‌دار بی امتیاز هنوز رد',
+	$plain['ok'] && 0 === $plain['row']['rating'] && array() === unserialize( $plain['row']['rating_data'] ) && 0 === $plain['row']['approved'] && '7' === $plain['row']['author']
+	&& 'tpc_article-review-type' === ToPersia_Review_Form::prepare( 'tpc_article', 9, 7, array(), '', 'متن آزمونی کافی برای مقاله.' )['row']['type_slug']
+	&& ! ToPersia_Review_Form::prepare( 'tpc_news', 1975, 7, array(), '', 'کوتاه' )['ok']
+	&& ! ToPersia_Review_Form::prepare( 'tp_city', 9, 7, array(), '', 'متن کافی برای آزمون' )['ok'] );
+t( 'ذخیره و دنبال‌کردن: نوع موجودیت = هر tp_ و دو نوع tpc_news · tpc_article، نه نوع دیگر',
+	ToPersia_JetEngine::is_entity_type( 'tp_city' ) && ToPersia_JetEngine::is_entity_type( 'tpc_news' ) && ToPersia_JetEngine::is_entity_type( 'tpc_article' )
+	&& ! ToPersia_JetEngine::is_entity_type( 'post' ) && ! ToPersia_JetEngine::is_entity_type( 'tpc_tag' ) );
 
 $rf = $src( 'includes/class-topersia-review-form.php' );
 t( 'ثبت نظر: نانس، فقط واردشده، API دادهٔ JetReviews بی اعلان ایمیلی، شمار نویسه بی mbstring',

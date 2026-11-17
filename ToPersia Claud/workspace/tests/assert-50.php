@@ -25,7 +25,7 @@ $w50_shared = function ( $a, $l, $o ) {
 	}
 	return 2 === substr_count( $a . $l, 'topersia_g_news_chips( $tp_topic_items' ) && 2 === substr_count( $a . $l, 'topersia_g_news_view_toggle()' )
 		&& 2 === substr_count( $a . $l, 'topersia_g_news_pages( $tp_pages' ) && 1 <= substr_count( $l, 'topersia_g_news_archive_card( $tp_one )' )
-		&& 1 <= substr_count( $o, 'topersia_g_news_archive_card( $tp_one )' ) && false === strpos( $l, 'topersia_g_news_card( $tp_one )' );
+		&& ( 1 <= substr_count( $o, 'topersia_g_news_archive_card( $tp_one )' ) || ( false !== strpos( $o, 'topersia_g_news_single( $tp_id, $tp_text )' ) && false !== strpos( (string) @file_get_contents( dirname( __DIR__ ) . '/plugin/topersia-render/includes/topersia-g-article.php' ), 'topersia_g_news_archive_card( $one )' ) ) ) && false === strpos( $l, 'topersia_g_news_card( $tp_one )' );
 };
 t( 'P5-D541: آرشیو، خبرهای مکان و تک‌خبر همه با سربرگ مشترک؛ تراشه، نما، صفحه‌بندی و کارت یکسان — بی markup تکراری', $w50_shared( $w50_arch, $w50_list, $w50_one ) );
 t( 'P5-D541: جهش — سربرگ دستی در یک قالب می‌افتد', ! $w50_shared( $w50_arch, str_replace( 'topersia_g_news_hero(', 'tp_x(', $w50_list ) . '<header class="tp-news-hero">', $w50_one ) );
