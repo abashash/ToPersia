@@ -190,15 +190,18 @@ final class ToPersia_Review_Form {
 		$post    = get_post( $post_id );
 
 		/* منتشرشده و بی‌گذرواژه — P5-D247 */
+		/* خبر و مقاله «این مورد»، نه «این مکان» — دستۀ 53 بند ۱۲ب */
+		$item = ( $post && in_array( $post->post_type, array( 'tpc_news', 'tpc_article' ), true ) ) ? '_item' : '';
+
 		if ( ! $post || 'publish' !== $post->post_status || '' !== (string) $post->post_password || ! self::allowed( $post->post_type ) ) {
-			wp_send_json_error( array( 'message' => ToPersia_I18n::t( 'review_not_allowed' ) ), 400 );
+			wp_send_json_error( array( 'message' => ToPersia_I18n::t( 'review_not_allowed' . $item ) ), 400 );
 		}
 
 		$user_id   = get_current_user_id();
 		$canonical = self::canonical( (int) $post->ID, $post->post_type );
 
 		if ( self::user_has_review( $user_id, $canonical ) ) {
-			wp_send_json_error( array( 'message' => ToPersia_I18n::t( 'review_exists' ) ), 409 );
+			wp_send_json_error( array( 'message' => ToPersia_I18n::t( 'review_exists' . $item ) ), 409 );
 		}
 
 		$raw    = isset( $_POST['scores'] ) ? (array) wp_unslash( $_POST['scores'] ) : array();

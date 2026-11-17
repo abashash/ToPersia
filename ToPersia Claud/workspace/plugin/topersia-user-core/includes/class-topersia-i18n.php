@@ -159,6 +159,9 @@ final class ToPersia_I18n {
         'review_exists' => ['fa'=>'نظر شما برای این مکان پیش‌تر ثبت شده است.','en'=>'You have already reviewed this place.','ar'=>'لقد قيّمت هذا المكان من قبل.'],
         'review_invalid' => ['fa'=>'به همۀ معیارها امتیاز بدهید و متن نظر را بنویسید.','en'=>'Rate every criterion and write your review.','ar'=>'قيّم كل المعايير واكتب مراجعتك.'],
         'review_not_allowed' => ['fa'=>'برای این مکان نظر ثبت نمی‌شود.','en'=>'Reviews are not available for this place.','ar'=>'التقييمات غير متاحة لهذا المكان.'],
+        /* خبر و مقاله مکان نیستند (دستۀ 53 بند ۱۲ب) */
+        'review_exists_item' => ['fa'=>'نظر شما برای این مورد پیش‌تر ثبت شده است.','en'=>'You have already commented on this item.','ar'=>'لقد علّقت على هذا العنصر من قبل.'],
+        'review_not_allowed_item' => ['fa'=>'برای این مورد نظر ثبت نمی‌شود.','en'=>'Comments are not available for this item.','ar'=>'التعليقات غير متاحة لهذا العنصر.'],
 
         /* ۱٫۱۰٫۳ — فرم ورود پیامکی و پیام‌های مسیرش؛ تا ۱٫۱۰٫۲ روی صفحۀ انگلیسی و عربی فارسی بودند */
         'login_heading' => ['fa'=>'ورود به حساب کاربری','en'=>'Log in to your account','ar'=>'تسجيل الدخول إلى حسابك'],

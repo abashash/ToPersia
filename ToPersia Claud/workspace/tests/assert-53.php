@@ -432,3 +432,22 @@ tp441_mut( 'بند ۱۹ گرم‌کن: شمار ساخت فقط پس از نوش
 			&& (bool) preg_match( '/function topersia_frag_built\( \$place_id \) \{.*?topersia_g_news_filter_options\(\).*?if \( ! \$valid \) \{\s*return;/s', $s )
 			&& false === strpos( $s, "\xD9\xBE\xD8\xB1\xD8\xA8\xD8\xA7\xD8\xB2\xD8\xAF\xDB\x8C\xD8\xAF" );   /* واژۀ ممنوع بند ۱۹c، به بایت تا در خود آزمون هم نیاید */
 	}, $w53_nui, str_replace( 'if ( ! $valid ) {', 'if ( false ) {', $w53_nui ) );
+
+/* ── بند ۹ب و ۱۲ب (P5-D603) ─────────────────────────────────────────── */
+$w53_9b = function ( $s ) {
+	return false !== strpos( $s, "\$hub = function_exists( 'topersia_g_hub_link_for' ) ? topersia_g_hub_link_for( (string) get_post_type( \$g[1][0] ) ) : '';" )
+		&& false !== strpos( $s, "topersia_g_home_card( \$g[1][0], get_the_title( \$g[1][0] ), '' !== \$hub ? \$hub : get_permalink( \$g[1][0] ), \$g[0] );" );
+};
+tp441_mut( 'بند ۹ب: کارت هر نوع در اسلایدر جاذبه‌ها ← هاب همان نوع (بی هاب ← /attractions/)، نه نخستین مورد — جهش: پیوند به خود مورد', $w53_9b, $w53_home,
+	str_replace( "'' !== \$hub ? \$hub : get_permalink( \$g[1][0] )", 'get_permalink( $g[1][0] )', $w53_home ) );
+$w53_i18u = $w53_read( 'plugin/topersia-user-core/includes/class-topersia-i18n.php' );
+$w53_12b  = function ( $s ) use ( $w53_i18u ) {
+	return false !== strpos( $s, "in_array( \$post->post_type, array( 'tpc_news', 'tpc_article' ), true ) ) ? '_item' : '';" )
+		&& false !== strpos( $s, "ToPersia_I18n::t( 'review_not_allowed' . \$item )" ) && false !== strpos( $s, "ToPersia_I18n::t( 'review_exists' . \$item )" )
+		&& (bool) preg_match( "/'review_exists_item' => \['fa'=>'[^']*این مورد[^']*','en'=>'[^']*this item[^']*','ar'=>'[^']*هذا العنصر/u", $w53_i18u )
+		&& (bool) preg_match( "/'review_not_allowed_item' => \['fa'=>'[^']*این مورد[^']*','en'=>'[^']*this item[^']*','ar'=>'[^']*هذا العنصر/u", $w53_i18u )
+		&& ! preg_match( "/'review_(exists|not_allowed)_item' => \['fa'=>'[^']*مکان/u", $w53_i18u )
+		&& ! preg_match( "/'review_(exists|not_allowed)_item'[^\n]*'ar'=>'[^']*[پچژگکی]/u", $w53_i18u );
+};
+tp441_mut( 'بند ۱۲ب: پیام نظر تکراری و نوع بی‌نظر برای خبر/مقاله «این مورد» سه‌زبانه (عربی بی حرف ویژهٔ فارسی)؛ مکان‌ها همان «این مکان» — جهش: کلید مورد به کار نرود', $w53_12b, $w53_ucf,
+	str_replace( "'review_exists' . \$item", "'review_exists'", $w53_ucf ) );
