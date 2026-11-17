@@ -58,6 +58,7 @@ $FILES = array(
 	'includes/topersia-g-article.php',
 	'templates/article-archive.php',
 	'includes/topersia-g-legal.php',
+	'includes/topersia-g-footer.php',
 	'templates/news-list.php',
 	'templates/news-archive.php',
 	'templates/news-single.php',
