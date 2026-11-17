@@ -435,10 +435,6 @@ msgstr "إيماءات يُستحسن تجنبها"
 msgid "اشتراک"
 msgstr "مشاركة"
 
-#: includes/topersia-g-article.php
-msgid "اطلاعات بیشتر"
-msgstr "معلومات إضافية"
-
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr "معلومات جغرافية"
@@ -1172,6 +1168,11 @@ msgstr "معلم"
 #: includes/topersia-g-zones.php
 msgid "جاذبه‌ها"
 msgstr "المعالم"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جاذبه‌های %s"
+msgstr "معالم %s"
 
 #: includes/topersia-g-zones.php
 msgid "جاذبه‌های دیگر"
@@ -1987,6 +1988,11 @@ msgstr "حدث رياضي"
 msgid "رویدادها و جشنواره‌ها"
 msgstr "الفعاليات والمهرجانات"
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "رویدادهای %s"
+msgstr "فعاليات %s"
+
 #: includes/topersia-g-map.php
 msgid "رویدادهای اثرگذار بر برنامه‌ریزی سفر"
 msgstr "فعاليات تؤثر في تخطيط السفر"
@@ -2405,6 +2411,11 @@ msgstr "مدينة مبدعة لدى اليونسكو"
 #: includes/topersia-g-zones.php
 msgid "شهرستان"
 msgstr "مقاطعة"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "شهرستان %s"
+msgstr "مقاطعة %s"
 
 #: includes/topersia-g-map.php
 msgid "شهرها"
@@ -2929,6 +2940,10 @@ msgstr "مترو"
 #: includes/topersia-g-map.php
 msgid "مترو دارد"
 msgstr "يوجد مترو"
+
+#: includes/topersia-g-article.php
+msgid "متن"
+msgstr "النص"
 
 #: includes/topersia-g-zones.php
 msgid "متن نظر"
@@ -3769,6 +3784,14 @@ msgstr "مراجعتك"
 #: includes/topersia-g-zones.php
 msgid "نظر شما برای این مکان ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود."
 msgstr "تم استلام مراجعتك لهذا المكان؛ ستظهر بعد موافقة المشرف."
+
+#: includes/topersia-g-zones.php
+msgid "نظر شما ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود."
+msgstr "تم استلام تعليقك؛ سيظهر بعد موافقة المشرف."
+
+#: includes/topersia-g-zones.php
+msgid "نظرات"
+msgstr "التعليقات"
 
 #: includes/topersia-g-zones.php
 msgid "نظرها"
@@ -4959,6 +4982,17 @@ msgstr[2] "عنصران"
 msgstr[3] "%s عناصر"
 msgstr[4] "%s عنصرًا"
 msgstr[5] "%s عنصر"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s نظر"
+msgid_plural "%s نظر"
+msgstr[0] "%s تعليق"
+msgstr[1] "تعليق واحد"
+msgstr[2] "تعليقان"
+msgstr[3] "%s تعليقات"
+msgstr[4] "%s تعليقًا"
+msgstr[5] "%s تعليق"
 
 #: includes/topersia-g-zones.php
 #, php-format

@@ -1999,7 +1999,8 @@
 		}
 
 		var home   = bar.parentNode;
-		var crumb  = page.querySelector( '.tp-crumb' );
+		/* صفحۀ تکی خبر/مقاله: مسیر راهنما در سربرگ است؛ جای موبایل نوار = جای‌نگهدار آغاز main (P5-D573) */
+		var crumb  = page.querySelector( '[data-tp-actionbar-slot]' ) || page.querySelector( '.tp-crumb' );
 		var narrow = window.matchMedia( '(max-width: 720px)' );
 
 		function place() {

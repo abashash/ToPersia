@@ -244,16 +244,13 @@ html .tp-page.tp-news-single .tp-news-metaline{display:flex;flex-wrap:wrap;justi
 html .tp-page.tp-news-single .tp-news-metaline__topic{font-weight:700}
 html .tp-page.tp-news-single .tp-news-metaline__sep{opacity:.8}
 html .tp-page.tp-news-single .tp-news-byline{justify-content:center}
-html .tp-page.tp-news-single .tp-news-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,340px);gap:clamp(20px,3vw,36px);align-items:start;
-  margin:0 0 clamp(28px,3vw,40px)}
-html .tp-page.tp-news-single .tp-news-cols--solo{grid-template-columns:minmax(0,1fr)}
-html .tp-page.tp-news-single .tp-news-main{min-inline-size:0}
-html .tp-page.tp-news-single .tp-news-body{max-inline-size:none}
-html .tp-page.tp-news-single .tp-news-comments .tp-section{margin:0}
-html .tp-page.tp-news-single .tp-news-aside{display:grid;gap:16px;min-inline-size:0}
-html .tp-page.tp-news-single .tp-news-aside > *{margin:0}
-html .tp-page.tp-news-single .tp-news-box{padding:16px}
-html .tp-page.tp-news-single .tp-news-box__h{margin:0 0 12px;font-size:calc(1.05 * var(--tp-rem));line-height:1.5;color:var(--tp-text-strong)}
+/* P5-D573 — اسکلت همان صفحۀ استان است (.tp-content-grid · .tp-main-col · .tp-rail · .tp-rail-card از قالب موجودیت)؛
+   این‌جا فقط آنچه ویژۀ متن خبر و محتوای کارت‌هاست. شبکۀ دو ستونۀ جدای P5-D568 (.tp-news-cols) برداشته شد. */
+html .tp-page.tp-news-single .tp-news-body{max-inline-size:none;margin:0}
+html .tp-page.tp-news-single .tp-main-col .tp-news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+html .tp-page.tp-news-single .tp-actionbar-slot:empty{display:none}
+html .tp-page.tp-news-single .tp-content-grid{margin-block-start:clamp(16px,2vw,28px)}   /* جای مسیر راهنمای صفحۀ موجودیت (این‌جا در سربرگ است) */
+html .tp-page.tp-news-single .tp-rate--plain .tp-rate__count{margin:0 0 4px}
 html .tp-page.tp-news-single .tp-news-box ul,html .tp-page.tp-news-single .tp-news-box ol{margin:0;padding:0;list-style:none}
 html .tp-page.tp-news-single .tp-news-box__topics{margin-block-end:10px}
 html .tp-page.tp-news-single .tp-news-box .tp-tags{margin:0;padding:0;border:0}
@@ -277,11 +274,11 @@ html .tp-page.tp-news-single .tp-news-box__latest time{font-size:calc(.8125 * va
 html .tp-page.tp-news-single .tp-news-box--source ol{display:grid;gap:6px;list-style:decimal;padding-inline-start:20px;font-size:var(--tp-rem);color:var(--tp-text-strong)}
 html .tp-page.tp-news-single .tp-news-box--source a{color:var(--tp-primary-text);overflow-wrap:anywhere}
 html .tp-page.tp-news-single :is(.tp-news-place,.tp-news-box a):focus-visible{outline:2px solid var(--tp-primary);outline-offset:2px}
-@media (max-width:900px){
-  html .tp-page.tp-news-single .tp-news-cols{grid-template-columns:minmax(0,1fr)}
+@media (max-width:600px){
+  html .tp-page.tp-news-single .tp-main-col .tp-news-grid{grid-template-columns:minmax(0,1fr)}
 }
-/* جعبۀ اشتراک همیشه نخستین جعبۀ ستون کناری (قالب موجودیت به آن order می‌دهد) */
-html .tp-page.tp-page.tp-news-single .tp-news-aside > #tp-actions{order:-1}
+/* جعبۀ اشتراک همیشه نخستین کارت ستون کناری (قالب موجودیت به آن order:1 می‌دهد و کارت‌های این صفحه order ندارند) */
+html .tp-page.tp-page.tp-news-single .tp-rail > #tp-actions{order:-1}
 
 /* P5-D579 — ردیف تراشه: [قبلی | فهرست | بعدی] و زیرش یک نوار پیشرفت سفارشی (همان P5-D550/D559). شبکۀ صریح تا با افزودن نوار، فلش‌ها جابه‌جا نشوند. */
 html .tp-page.tp-news-page .tp-news-chips{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center}

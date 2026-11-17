@@ -1292,13 +1292,25 @@ return array(
 	'نویسنده: %s' => array( 'en' => 'By %s', 'ar' => 'بقلم: %s' ),
 	'موضوع و برچسب‌ها' => array( 'en' => 'Topic and tags', 'ar' => 'الموضوع والوسوم' ),
 	'منبع و پیوند اصلی' => array( 'en' => 'Source and original link', 'ar' => 'المصدر والرابط الأصلي' ),
-	'اطلاعات بیشتر' => array( 'en' => 'More information', 'ar' => 'معلومات إضافية' ),
 	/* دستۀ 53 — هاب‌ها (P5-D575 تا P5-D578) */
 	'%s در ایران: همۀ مکان‌ها و مطالب' => array( 'en' => '%s in Iran: all places and articles in one place', 'ar' => '%s في إيران: كل الأماكن والمواد في مكان واحد' ),
 	'%s در ایران؛ فهرست کامل مکان‌ها، راهنماها و اخبار' => array( 'en' => '%s in Iran: places, guides and news', 'ar' => '%s في إيران: الأماكن والأدلة والأخبار' ),
 	'%s: فهرست کامل با جست‌وجو و فیلتر استان' => array( 'en' => '%s: the full list, with search and a province filter', 'ar' => '%s: القائمة الكاملة مع البحث والتصفية حسب المحافظة' ),
 	'%s؛ فهرست کامل به تفکیک استان و شهر' => array( 'en' => '%s: full list by province and city', 'ar' => '%s: القائمة الكاملة حسب المحافظة والمدينة' ),
 	'در %s' => array( 'en' => 'in %s', 'ar' => 'في %s' ),
+	/* دستۀ 53 بندهای ۱۰ تا ۱۲ — صفحۀ تکی خبر/مقاله، نظر بی ستاره (P5-D573 · P5-D574) */
+	'متن' => array( 'en' => 'Text', 'ar' => 'النص' ),
+	'منبع' => array( 'en' => 'Source', 'ar' => 'المصدر' ),
+	'نظرات' => array( 'en' => 'Comments', 'ar' => 'التعليقات' ),
+	'نظر شما ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود.' => array( 'en' => 'Your comment has been received; it will appear after moderator approval.', 'ar' => 'تم استلام تعليقك؛ سيظهر بعد موافقة المشرف.' ),
+	'%s نظر' => array(
+		'en' => array( '%s comment', '%s comments' ),
+		'ar' => array( '%s تعليق', 'تعليق واحد', 'تعليقان', '%s تعليقات', '%s تعليقًا', '%s تعليق' ),
+	),
+	/* دستۀ 53 بند ۶ب و ۹ — شهرستان روستا، هاب‌های گروهی */
+	'شهرستان %s' => array( 'en' => '%s County', 'ar' => 'مقاطعة %s' ),
+	'جاذبه‌های %s' => array( 'en' => 'Attractions of %s', 'ar' => 'معالم %s' ),
+	'رویدادهای %s' => array( 'en' => 'Events in %s', 'ar' => 'فعاليات %s' ),
 	'فیلتر' => array( 'en' => 'Filter', 'ar' => 'تصفية' ),
 	'همۀ مکان‌ها و مطالب مرتبط با %s در ایران را یک‌جا ببینید؛ با استان، شهر و پیوند به صفحۀ کامل هر مورد.' => array( 'en' => 'See every place and article about %s in Iran in one place, with its province, city and a link to the full page.', 'ar' => 'شاهد كل الأماكن والمواد المتعلقة بـ%s في إيران في مكان واحد، مع المحافظة والمدينة ورابط الصفحة الكاملة.' ),
 	'همۀ مکان‌ها و مطالب مرتبط با %s در ایران، یک‌جا.' => array( 'en' => 'Every place and article about %s in Iran, in one place.', 'ar' => 'كل الأماكن والمواد المتعلقة بـ%s في إيران في مكان واحد.' ),

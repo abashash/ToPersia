@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ToPersia Schema Engine
  * Description: موتور دادۀ ساختاریافتۀ ToPersia — یک گراف JSON-LD واحد در هر صفحه، با @id مبتنی بر entity_uid برای بازشناسی میان‌زبانی و میان‌صفحه‌ای. معماری داده‌محور: افزودن موجودیت تازه یعنی افزودن یک بلوک به نقشه، نه نوشتن تابع. وابسته به افزونۀ ToPersia Core Functions.
- * Version: 1.4.0
+ * Version: 1.4.1
  * Requires PHP: 7.4
  * Author: ToPersia
  * Text Domain: topersia-schema
@@ -152,7 +152,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** نسخۀ این افزونه — زبانۀ تشخیص هسته این را می‌خواند. */
 if ( ! defined( 'TOPERSIA_SCHEMA_VERSION' ) ) {
-	define( 'TOPERSIA_SCHEMA_VERSION', '1.4.0' );
+	define( 'TOPERSIA_SCHEMA_VERSION', '1.4.1' );
 }
 
 /** حداقل نسخۀ هستۀ سازگار. */
@@ -1543,9 +1543,73 @@ function topersia_schema_home_json( $post_id ) {
 }
 
 /**
+ * واژه‌هایی که نام نویسنده را «نام سازمان» می‌کنند (fa · en · ar) — با صافی `topersia_schema_org_words` گسترش‌پذیر.
+ */
+function topersia_schema_org_words() {
+	$words = array(
+		'سازمان', 'اداره', 'وزارت', 'خبرگزاری', 'شرکت', 'مؤسسه', 'موسسه', 'بنیاد', 'دانشگاه', 'شهرداری', 'انجمن', 'مرکز', 'پژوهشگاه',
+		'ستاد', 'روزنامه', 'تحریریه', 'هیئت', 'گروه', 'تیم', 'پایگاه', 'کانون', 'اتحادیه', 'فدراسیون',
+		'organization', 'organisation', 'ministry', 'agency', 'company', 'foundation', 'institute', 'university', 'municipality',
+		'association', 'department', 'office', 'press', 'news', 'times', 'editorial', 'team', 'staff', 'inc', 'ltd', 'llc',
+		'وكالة', 'وزارة', 'مؤسسة', 'شركة', 'جامعة', 'هيئة', 'منظمة', 'بلدية', 'فريق', 'تحرير',
+	);
+	return function_exists( 'apply_filters' ) ? (array) apply_filters( 'topersia_schema_org_words', $words ) : $words;
+}
+
+/**
+ * آیا این نام، نام سازمان است نه شخص — نام برند سایت در هر سه زبان، یا نامی که یکی از واژه‌های سازمانی را دارد.
+ * واژه فقط به‌صورت واژۀ کامل شمرده می‌شود («Timeson» سازمان نیست).
+ */
+function topersia_schema_brand_names() {
+	$names = array( 'topersia' );
+	foreach ( function_exists( 'topersia_brand_names' ) ? (array) topersia_brand_names() : array() as $n ) {
+		$names[] = function_exists( 'mb_strtolower' ) ? mb_strtolower( (string) $n, 'UTF-8' ) : strtolower( (string) $n );
+	}
+	return array_values( array_unique( $names ) );
+}
+
+function topersia_schema_is_org_name( $name ) {
+
+	$name = trim( (string) $name );
+
+	if ( '' === $name ) {
+		return false;
+	}
+
+	$low = function_exists( 'mb_strtolower' ) ? mb_strtolower( $name, 'UTF-8' ) : strtolower( $name );
+
+	if ( in_array( $low, topersia_schema_brand_names(), true ) ) {
+		return true;
+	}
+
+	$tokens = preg_split( '/[^\p{L}\p{N}]+/u', $low, -1, PREG_SPLIT_NO_EMPTY );
+
+	return (bool) array_intersect( (array) $tokens, topersia_schema_org_words() );
+}
+
+/**
+ * نویسندۀ مقاله (دستۀ 53 بند ۱۴): خالی یا نام برند ← همان Organization سایت (`@id`)؛ نام سازمان دیگر ← Organization با همان نام؛
+ * فقط نام شخص ← Person.
+ *
+ * @param string $name مقدار `article_author_name`
+ * @param array  $org  گرۀ Organization سایت
+ */
+function topersia_schema_article_author( $name, $org ) {
+
+	$name = trim( wp_strip_all_tags( (string) $name ) );
+	$low  = function_exists( 'mb_strtolower' ) ? mb_strtolower( $name, 'UTF-8' ) : strtolower( $name );
+
+	if ( '' === $name || in_array( $low, topersia_schema_brand_names(), true ) ) {
+		return array( '@id' => $org['@id'] );
+	}
+
+	return array( '@type' => topersia_schema_is_org_name( $name ) ? 'Organization' : 'Person', 'name' => $name );
+}
+
+/**
  * گراف تک‌مقاله — Article (P5-D567). فقط ویژگی‌های دارای داده: تیتر، نشانی، تاریخ انتشار،
  * dateModified از `article_updated_date` (اگر معتبر و دیرتر از انتشار؛ وگرنه زمان ویرایش پست)،
- * نویسنده از `article_author_name` (Person) و ناشر = Organization سایت؛ about = @id مکان‌های مرتبط منتشرشده.
+ * نویسنده از `article_author_name` (نام شخص ← Person؛ نام سازمان یا خالی ← Organization — دستۀ 53 بند ۱۴) و ناشر = Organization سایت؛ about = @id مکان‌های مرتبط منتشرشده.
  * بی AggregateRating و Review (P5-D510).
  */
 function topersia_schema_article_json( $post_id ) {
@@ -1576,7 +1640,7 @@ function topersia_schema_article_json( $post_id ) {
 		'inLanguage'       => topersia_schema_lang(),
 		'isPartOf'         => array( '@id' => $site['@id'] ),
 		'publisher'        => array( '@id' => $org['@id'] ),
-		'author'           => '' !== $auth ? array( '@type' => 'Person', 'name' => $auth ) : array( '@id' => $org['@id'] ),
+		'author'           => topersia_schema_article_author( $auth, $org ),
 	);
 
 	if ( '' !== $sum ) {

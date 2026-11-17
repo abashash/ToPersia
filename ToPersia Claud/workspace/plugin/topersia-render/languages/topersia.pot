@@ -434,10 +434,6 @@ msgstr ""
 msgid "اشتراک"
 msgstr ""
 
-#: includes/topersia-g-article.php
-msgid "اطلاعات بیشتر"
-msgstr ""
-
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr ""
@@ -1170,6 +1166,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "جاذبه‌ها"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جاذبه‌های %s"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -1986,6 +1987,11 @@ msgstr ""
 msgid "رویدادها و جشنواره‌ها"
 msgstr ""
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "رویدادهای %s"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "رویدادهای اثرگذار بر برنامه‌ریزی سفر"
 msgstr ""
@@ -2403,6 +2409,11 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "شهرستان"
+msgstr ""
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "شهرستان %s"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -2927,6 +2938,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "مترو دارد"
+msgstr ""
+
+#: includes/topersia-g-article.php
+msgid "متن"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -3767,6 +3782,14 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "نظر شما برای این مکان ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود."
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "نظر شما ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود."
+msgstr ""
+
+#: includes/topersia-g-zones.php
+msgid "نظرات"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -4928,6 +4951,13 @@ msgstr[1] ""
 #, php-format
 msgid "%s مورد"
 msgid_plural "%s مورد"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s نظر"
+msgid_plural "%s نظر"
 msgstr[0] ""
 msgstr[1] ""
 

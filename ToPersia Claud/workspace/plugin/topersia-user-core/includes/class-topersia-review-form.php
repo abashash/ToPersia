@@ -45,6 +45,16 @@ final class ToPersia_Review_Form {
 		return class_exists( 'ToPersia_JetReviews_Setup' ) ? ToPersia_JetReviews_Setup::criteria( $post_type ) : array();
 	}
 
+	/** آیا این نوع‌پست نظر می‌گیرد — با ستاره یا بی آن (P5-D574). */
+	public static function allowed( string $post_type ): bool {
+		return class_exists( 'ToPersia_JetReviews_Setup' ) && ToPersia_JetReviews_Setup::allowed( $post_type );
+	}
+
+	/** آیا نظرِ این نوع‌پست بی ستاره است — خبر و مقاله (P5-D574). */
+	public static function starless( string $post_type ): bool {
+		return class_exists( 'ToPersia_JetReviews_Setup' ) && ToPersia_JetReviews_Setup::starless( $post_type );
+	}
+
 	/** آیا جدول‌های JetReviews هستند — بی‌حساسیت به حروف. */
 	public static function available(): bool {
 		return class_exists( 'ToPersia_Reviews' ) && ToPersia_Reviews::available() && class_exists( '\Jet_Reviews\Reviews\Data' );
@@ -107,7 +117,8 @@ final class ToPersia_Review_Form {
 
 		$criteria = self::criteria( $post_type );
 
-		if ( ! $criteria ) {
+		/* بی معیار فقط برای نوعِ بی ستاره پذیرفته است (خبر و مقاله)؛ امتیازِ فرستاده‌شده نادیده گرفته می‌شود. */
+		if ( ! self::allowed( $post_type ) || ( ! $criteria && ! self::starless( $post_type ) ) ) {
 			return array( 'ok' => false, 'error' => 'review_not_allowed' );
 		}
 
@@ -179,7 +190,7 @@ final class ToPersia_Review_Form {
 		$post    = get_post( $post_id );
 
 		/* منتشرشده و بی‌گذرواژه — P5-D247 */
-		if ( ! $post || 'publish' !== $post->post_status || '' !== (string) $post->post_password || ! self::criteria( $post->post_type ) ) {
+		if ( ! $post || 'publish' !== $post->post_status || '' !== (string) $post->post_password || ! self::allowed( $post->post_type ) ) {
 			wp_send_json_error( array( 'message' => ToPersia_I18n::t( 'review_not_allowed' ) ), 400 );
 		}
 

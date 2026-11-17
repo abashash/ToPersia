@@ -122,8 +122,8 @@ if ( ! function_exists( 'topersia_g_content_latest' ) ) {
 	}
 }
 
-/* ── صفحۀ تکی خبر و مقاله — دو ستونه (P5-D568 · دستۀ 52 بندهای ۱۴ تا ۱۸) ──────────────
- * ستون کناری به ترتیب: جعبۀ اشتراک/ذخیره/دنبال‌کردن همان صفحه‌های موجودیت (`topersia_g_sc_actionbar`، بی کد تازه) ·
+/* ── صفحۀ تکی خبر و مقاله — اسکلت صفحۀ استان (P5-D573، جایگزین چیدمان P5-D568) ──────────────
+ * ستون کناری (`aside.tp-rail`) به ترتیب: جعبۀ اشتراک/ذخیره/دنبال‌کردن همان صفحه‌های موجودیت (`topersia_g_sc_actionbar`، بی کد تازه) ·
  * موضوع و برچسب‌ها · مکان‌های مرتبط با کارت کوچک · تازه‌ترین‌ها (۵ مورد) · «منبع و پیوند اصلی». جعبۀ بی‌داده ساخته نمی‌شود.
  */
 
@@ -160,15 +160,16 @@ if ( ! function_exists( 'topersia_g_news_metaline' ) ) {
 	}
 }
 
-/** یک جعبۀ ستون کناری؛ بدنۀ تهی ← هیچ. */
+/**
+ * یک کارت ستون کناری — همان پوستۀ کارت صفحۀ موجودیت (`topersia_g_section`: section.tp-rail-card با سرفصل h3)؛
+ * شناسه `tp-{key}` لنگر نوار بخش‌هاست. بدنۀ تهی ← هیچ.  P5-D573
+ */
 if ( ! function_exists( 'topersia_g_news_box' ) ) {
 	function topersia_g_news_box( $key, $title, $body ) {
 		if ( '' === trim( (string) $body ) ) {
 			return '';
 		}
-		$hid = 'tp-news-box-' . $key;
-		return '<section class="tp-rail-card tp-news-box tp-news-box--' . esc_attr( $key ) . '" aria-labelledby="' . esc_attr( $hid ) . '">'
-			. '<h2 id="' . esc_attr( $hid ) . '" class="tp-news-box__h">' . esc_html( $title ) . '</h2>' . $body . '</section>';
+		return topersia_g_section( 'tp-' . $key, $title, '', $body, 'tp-rail-card tp-news-box tp-news-box--' . $key );
 	}
 }
 
@@ -213,7 +214,7 @@ if ( ! function_exists( 'topersia_g_news_box_places' ) ) {
 				. ( isset( $ref[ $type ] ) ? '<small>' . esc_html( topersia_g_t( $ref[ $type ] ) ) . '</small>' : '' ) . '</span></a></li>';
 		}
 
-		return topersia_g_news_box( 'places', __( 'مکان‌های مرتبط', 'topersia' ), '' !== $li ? '<ul class="tp-news-box__places">' . $li . '</ul>' : '' );
+		return topersia_g_news_box( 'rel-places', __( 'مکان‌های مرتبط', 'topersia' ), '' !== $li ? '<ul class="tp-news-box__places">' . $li . '</ul>' : '' );
 	}
 }
 
@@ -267,21 +268,120 @@ if ( ! function_exists( 'topersia_g_news_box_source' ) ) {
 			$items[] = '<li>' . ( $ok ? '<a href="' . esc_url( $r[1] ) . '" rel="nofollow noopener" target="_blank">' . $shown . '</a>' : $shown ) . '</li>';
 		}
 
-		return topersia_g_news_box( 'source', __( 'منبع و پیوند اصلی', 'topersia' ), $items ? '<div class="tp-sources-rail"><ol>' . implode( '', $items ) . '</ol></div>' : '' );
+		return topersia_g_news_box( 'sources', __( 'منبع و پیوند اصلی', 'topersia' ), $items ? '<div class="tp-sources-rail"><ol>' . implode( '', $items ) . '</ol></div>' : '' );
 	}
 }
 
-/** ستون کناری کامل صفحۀ تکی — ترتیب ثابت؛ تهی اگر هیچ جعبه‌ای نیست. */
-if ( ! function_exists( 'topersia_g_news_aside' ) ) {
-	function topersia_g_news_aside( $id ) {
+/**
+ * بخش‌های صفحۀ تکی به همان شکل `topersia_g_layout()` صفحۀ موجودیت (P5-D573): دو ستون `main` و `rail`،
+ * هر عضو [ id، nav (برچسب نوار بخش‌ها یا تهی)، html ]. فقط بخش دارای داده می‌آید.
+ *   main  متن (`#tp-text`) · نظرات (`#tp-reviews`، همان جزء صفحۀ استان، بی ستاره) · مرتبط‌ها (`#tp-rel-news`)
+ *   rail  اشتراک/ذخیره/دنبال‌کردن (`#tp-actions`) · موضوع و برچسب‌ها · مکان‌های مرتبط (`#tp-rel-places`) ·
+ *         تازه‌ترین‌ها · منبع (`#tp-sources`)
+ *
+ * @param int    $id      شناسۀ خبر یا مقاله
+ * @param string $content HTML متن (خروجی the_content)
+ */
+if ( ! function_exists( 'topersia_g_news_single_zones' ) ) {
+	function topersia_g_news_single_zones( $id, $content ) {
 
-		$out = ( function_exists( 'topersia_g_sc_actionbar' ) ? topersia_g_sc_actionbar( array( 'id' => $id ) ) : '' )
-			. topersia_g_news_box_topics( $id )
-			. topersia_g_news_box_places( $id )
-			. topersia_g_news_box_latest( $id )
-			. topersia_g_news_box_source( $id );
+		$rel   = topersia_g_news_related( $id, 4 );
+		$cards = '';
 
-		return '' !== $out ? '<aside class="tp-news-aside" aria-label="' . esc_attr__( 'اطلاعات بیشتر', 'topersia' ) . '">' . $out . '</aside>' : '';
+		foreach ( $rel as $one ) {
+			$cards .= topersia_g_news_archive_card( $one );
+		}
+
+		$text = '' !== trim( (string) $content )
+			? '<section id="tp-text" class="tp-section tp-news-text" aria-label="' . esc_attr__( 'متن', 'topersia' ) . '"><article class="tp-news-body">' . $content . '</article></section>'
+			: '';
+
+		$related = '' !== $cards
+			? '<section id="tp-rel-news" class="tp-section tp-news-related" aria-labelledby="tp-rel-newsTitle">'
+				. '<div class="tp-section-head"><div><h2 id="tp-rel-newsTitle">' . esc_html( topersia_g_news_l( 'related' ) ) . '</h2></div>'
+				. '<a class="tp-more tp-news-all" href="' . esc_url( topersia_g_news_archive_url() ) . '">' . esc_html( topersia_g_news_l( 'all' ) ) . '</a></div>'
+				. '<div class="tp-news-grid">' . $cards . '</div></section>'
+			: '';
+
+		$zones = array(
+			'main' => array(
+				array( 'tp-text', __( 'متن', 'topersia' ), $text ),
+				array( 'tp-reviews', __( 'نظرات', 'topersia' ), function_exists( 'topersia_g_sc_reviews' ) ? topersia_g_sc_reviews( array( 'id' => $id ) ) : '' ),
+				array( 'tp-rel-news', topersia_g_news_l( 'related' ), $related ),
+			),
+			'rail' => array(
+				array( 'tp-actions', '', function_exists( 'topersia_g_sc_actionbar' ) ? topersia_g_sc_actionbar( array( 'id' => $id ) ) : '' ),
+				array( 'tp-topics', '', topersia_g_news_box_topics( $id ) ),
+				array( 'tp-rel-places', __( 'مکان‌های مرتبط', 'topersia' ), topersia_g_news_box_places( $id ) ),
+				array( 'tp-latest', '', topersia_g_news_box_latest( $id ) ),
+				array( 'tp-sources', __( 'منبع', 'topersia' ), topersia_g_news_box_source( $id ) ),
+			),
+		);
+
+		foreach ( $zones as $col => $list ) {
+			$zones[ $col ] = array_values( array_filter( $list, function ( $z ) {
+				return '' !== trim( (string) $z[2] );
+			} ) );
+		}
+
+		return $zones;
+	}
+}
+
+/** ترتیب نوار بخش‌های صفحۀ تکی (P5-D573 بند ۱۱): متن · مکان‌های مرتبط · منبع · نظرات · مرتبط‌ها. */
+if ( ! function_exists( 'topersia_g_news_single_nav_order' ) ) {
+	function topersia_g_news_single_nav_order() {
+		return array( 'tp-text', 'tp-rel-places', 'tp-sources', 'tp-reviews', 'tp-rel-news' );
+	}
+}
+
+/**
+ * بدنۀ صفحۀ تکی خبر و مقاله زیر سربرگ — همان اسکلت `topersia_g_sc_page()` صفحۀ استان (P5-D573):
+ * `nav.tp-snav` ← `main.tp-main > .tp-wrap > .tp-content-grid > .tp-main-col + aside.tp-rail` ← نوار پایین موبایل و برگۀ بخش‌ها
+ * (`topersia_g_mobilebar`، همان تابع). جعبۀ اشتراک در موبایل با همان اسکریپت «نوار کنش» به آغاز `main` می‌آید
+ * (جای‌نگهدار `data-tp-actionbar-slot`؛ مسیر راهنمای این صفحه در سربرگ است و سربرگ دست نمی‌خورد).
+ */
+if ( ! function_exists( 'topersia_g_news_single' ) ) {
+	function topersia_g_news_single( $id, $content ) {
+
+		$zones    = topersia_g_news_single_zones( $id, $content );
+		$cols     = array( 'main' => '', 'rail' => '' );
+		$rendered = array();
+
+		foreach ( $zones as $col => $list ) {
+			foreach ( $list as $z ) {
+				$cols[ $col ]     .= $z[2];
+				$rendered[ $z[0] ] = array( 'col' => $col, 'nav' => $z[1] );
+			}
+		}
+
+		$nav = array();
+
+		foreach ( topersia_g_news_single_nav_order() as $zid ) {
+			if ( isset( $rendered[ $zid ] ) && '' !== $rendered[ $zid ]['nav'] ) {
+				$nav[ $zid ] = $rendered[ $zid ]['nav'];
+			}
+		}
+
+		$snav = '';
+
+		if ( count( $nav ) > 1 ) {
+			$links = '';
+			foreach ( $nav as $zid => $label ) {
+				$links .= '<a href="#' . esc_attr( $zid ) . '">' . topersia_g_icon( topersia_g_section_icon( $zid ) ) . esc_html( $label ) . '</a>';
+			}
+			$snav = '<nav class="tp-snav" aria-label="' . esc_attr__( 'ناوبری بخش‌های صفحه', 'topersia' ) . '">'
+				. '<div class="tp-wrap tp-snav__in" data-tp-no-prog>' . $links . '</div></nav>';
+		}
+
+		$body = '<main id="tp-main" class="tp-main"><div class="tp-wrap">'
+			. '<div class="tp-actionbar-slot" data-tp-actionbar-slot></div>'
+			. '<div class="tp-content-grid">'
+			. '<div class="tp-main-col">' . $cols['main'] . '</div>'
+			. ( '' !== $cols['rail'] ? '<aside class="tp-rail" aria-label="' . esc_attr__( 'اطلاعات مکمل', 'topersia' ) . '">' . $cols['rail'] . '</aside>' : '' )
+			. '</div></div></main>';
+
+		return $snav . $body . ( function_exists( 'topersia_g_mobilebar' ) ? topersia_g_mobilebar( $id, $nav, $rendered ) : '' );
 	}
 }
 

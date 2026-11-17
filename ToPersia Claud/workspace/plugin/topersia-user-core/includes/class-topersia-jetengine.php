@@ -77,6 +77,14 @@ final class ToPersia_JetEngine {
     }
 
     /**
+     * نوعِ «موجودیت» برای ذخیره و دنبال‌کردن: هر نوع `tp_` و دو نوع محتوای `tpc_news` · `tpc_article`
+     * (صفحۀ تکی‌شان همان جعبۀ اشتراک/ذخیره/دنبال‌کردن صفحۀ استان را دارد — P5-D573). یک منبع برای همۀ بررسی‌ها.
+     */
+    public static function is_entity_type(string $type): bool {
+        return str_starts_with($type, 'tp_') || in_array($type, array('tpc_news', 'tpc_article'), true);
+    }
+
+    /**
      * منتشرشده و بی‌گذرواژه — همان دو شرطِ دروازۀ مرکزیِ «هستۀ نمایش»
      * (`topersia_g_published`) برای یک پست.  P5-D247
      *
@@ -182,7 +190,7 @@ final class ToPersia_JetEngine {
 
         $by_id = [];
         foreach ($rows as $row) {
-            if ($row['post_id'] > 0 && $row['post_type'] !== '' && str_starts_with($row['post_type'], 'tp_')) {
+            if ($row['post_id'] > 0 && $row['post_type'] !== '' && self::is_entity_type($row['post_type'])) {
                 $by_id[$row['post_id']] = $row['post_type'];
             }
         }
@@ -290,7 +298,7 @@ final class ToPersia_JetEngine {
         $post_id = absint($atts['id']);
         $post = get_post($post_id);
 
-        if (!$post || !str_starts_with($post->post_type, 'tp_') || !self::is_live($post_id)) {
+        if (!$post || !self::is_entity_type($post->post_type) || !self::is_live($post_id)) {
             return '';
         }
 
@@ -326,7 +334,7 @@ final class ToPersia_JetEngine {
         $type = sanitize_key(wp_unslash($_POST['post_type'] ?? ''));
         $post = get_post($post_id);
 
-        if (!$post || !self::is_live($post_id) || $post->post_type !== $type || !str_starts_with($type, 'tp_')) {
+        if (!$post || !self::is_live($post_id) || $post->post_type !== $type || !self::is_entity_type($type)) {
             wp_send_json_error(['message' => ToPersia_I18n::t('invalid_entity', 'موجودیت معتبر نیست.')], 400);
         }
 

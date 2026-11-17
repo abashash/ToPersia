@@ -435,10 +435,6 @@ msgstr "Gestures to avoid"
 msgid "اشتراک"
 msgstr "Share"
 
-#: includes/topersia-g-article.php
-msgid "اطلاعات بیشتر"
-msgstr "More information"
-
 #: includes/topersia-g-zones.php
 msgid "اطلاعات جغرافیایی"
 msgstr "Geographic information"
@@ -1172,6 +1168,11 @@ msgstr "Attraction"
 #: includes/topersia-g-zones.php
 msgid "جاذبه‌ها"
 msgstr "Attractions"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "جاذبه‌های %s"
+msgstr "Attractions of %s"
 
 #: includes/topersia-g-zones.php
 msgid "جاذبه‌های دیگر"
@@ -1987,6 +1988,11 @@ msgstr "Sports event"
 msgid "رویدادها و جشنواره‌ها"
 msgstr "Events and festivals"
 
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "رویدادهای %s"
+msgstr "Events in %s"
+
 #: includes/topersia-g-map.php
 msgid "رویدادهای اثرگذار بر برنامه‌ریزی سفر"
 msgstr "Events that affect travel planning"
@@ -2405,6 +2411,11 @@ msgstr "UNESCO Creative City"
 #: includes/topersia-g-zones.php
 msgid "شهرستان"
 msgstr "County"
+
+#: includes/topersia-g-hub.php
+#, php-format
+msgid "شهرستان %s"
+msgstr "%s County"
 
 #: includes/topersia-g-map.php
 msgid "شهرها"
@@ -2929,6 +2940,10 @@ msgstr "Metro"
 #: includes/topersia-g-map.php
 msgid "مترو دارد"
 msgstr "Has a metro"
+
+#: includes/topersia-g-article.php
+msgid "متن"
+msgstr "Text"
 
 #: includes/topersia-g-zones.php
 msgid "متن نظر"
@@ -3769,6 +3784,14 @@ msgstr "Your review"
 #: includes/topersia-g-zones.php
 msgid "نظر شما برای این مکان ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود."
 msgstr "Your review of this place has been received; it will appear after moderator approval."
+
+#: includes/topersia-g-zones.php
+msgid "نظر شما ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود."
+msgstr "Your comment has been received; it will appear after moderator approval."
+
+#: includes/topersia-g-zones.php
+msgid "نظرات"
+msgstr "Comments"
 
 #: includes/topersia-g-zones.php
 msgid "نظرها"
@@ -4931,6 +4954,13 @@ msgid "%s مورد"
 msgid_plural "%s مورد"
 msgstr[0] "%s item"
 msgstr[1] "%s items"
+
+#: includes/topersia-g-zones.php
+#, php-format
+msgid "%s نظر"
+msgid_plural "%s نظر"
+msgstr[0] "%s comment"
+msgstr[1] "%s comments"
 
 #: includes/topersia-g-zones.php
 #, php-format

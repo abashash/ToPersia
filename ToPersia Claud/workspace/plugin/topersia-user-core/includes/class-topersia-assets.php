@@ -114,6 +114,11 @@ final class ToPersia_Assets {
                 $load = true;
             }
 
+            /* خبر و مقاله (`tpc_`) هم جعبۀ اشتراک/ذخیره/دنبال‌کردن و فرم نظر دارند — هر نوعی که نظر می‌گیرد. P5-D574 */
+            if (!$load && class_exists('ToPersia_JetReviews_Setup') && ToPersia_JetReviews_Setup::allowed((string) $post->post_type)) {
+                $load = true;
+            }
+
             if (!$load && did_action('elementor/loaded')) {
                 $elementor_data = get_post_meta($post->ID, '_elementor_data', true);
                 if (is_string($elementor_data) && $elementor_data !== '') {

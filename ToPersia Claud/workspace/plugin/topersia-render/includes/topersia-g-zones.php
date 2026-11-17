@@ -7239,6 +7239,17 @@ if ( ! function_exists( 'topersia_g_review_criteria' ) ) {
 	}
 }
 
+/** آیا نظرِ این نوع بی ستاره است (خبر و مقاله) — از user-core؛ بی آن، نه.  P5-D574 */
+if ( ! function_exists( 'topersia_g_review_plain' ) ) {
+	function topersia_g_review_plain( $post_id ) {
+
+		$type = function_exists( 'get_post_type' ) ? (string) get_post_type( $post_id ) : '';
+
+		return '' !== $type && class_exists( 'ToPersia_Review_Form' ) && method_exists( 'ToPersia_Review_Form', 'starless' )
+			&& (bool) ToPersia_Review_Form::starless( $type );
+	}
+}
+
 /**
  * فرم نظر برای واردشده، یا دعوت به ورود برای مهمان.  P5-D234
  *
@@ -7267,7 +7278,9 @@ if ( ! function_exists( 'topersia_g_review_form' ) ) {
 		$user      = function_exists( 'get_current_user_id' ) ? get_current_user_id() : 0;
 
 		if ( method_exists( 'ToPersia_Review_Form', 'user_has_review' ) && ToPersia_Review_Form::user_has_review( $user, $canonical ) ) {
-			return '<p class="tp-review-invite">' . esc_html__( 'نظر شما برای این مکان ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود.', 'topersia' ) . '</p>';
+			return '<p class="tp-review-invite">' . esc_html( $criteria
+				? __( 'نظر شما برای این مکان ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود.', 'topersia' )
+				: __( 'نظر شما ثبت شده است؛ پس از تأیید مدیر نمایش داده می‌شود.', 'topersia' ) ) . '</p>';
 		}
 
 		$rows = '';
@@ -7288,7 +7301,7 @@ if ( ! function_exists( 'topersia_g_review_form' ) ) {
 
 		return '<form class="tp-review-form" data-tp-review-form data-tp-post="' . esc_attr( $pid ) . '" novalidate>'
 			. '<h3 class="tp-review-form__title">' . esc_html__( 'نظر شما', 'topersia' ) . '</h3>'
-			. '<div class="tp-review-form__crit">' . $rows . '</div>'
+			. ( '' !== $rows ? '<div class="tp-review-form__crit">' . $rows . '</div>' : '' )   /* بی ستاره: بی ردیف معیار — P5-D574 */
 			. '<label class="tp-review-form__field"><span>' . esc_html__( 'عنوان (اختیاری)', 'topersia' ) . '</span>'
 			. '<input type="text" name="title" maxlength="120"></label>'
 			. '<label class="tp-review-form__field"><span>' . esc_html__( 'متن نظر', 'topersia' ) . '</span>'
@@ -7311,19 +7324,48 @@ if ( ! function_exists( 'topersia_g_sc_reviews' ) ) {
 		/* نوع‌های بی‌نظر (کشور، منطقه، شهرستان، صنایع دستی، خوراک، اطلاعاتی)
 		   بخش ندارند. معیار از user-core می‌آید؛ بی آن، فقط دادۀ موجود.  P5-D234 */
 		$criteria = topersia_g_review_criteria( $pid );
+		$plain    = topersia_g_review_plain( $pid );   /* خبر و مقاله: نظرِ بی ستاره — P5-D574 */
 
 		/* خواندن به شناسۀ زبان اصلی — نظر فارسی و انگلیسیِ یک مکان یکی است. */
 		$data  = topersia_g_reviews_data( topersia_g_canonical_id( $pid ) );
 		$count = isset( $data['count'] ) ? (int) $data['count'] : 0;
 
-		if ( ! $count && ! $criteria ) {
+		if ( ! $count && ! $criteria && ! $plain ) {
 			return '';
 		}
 
 		$head = '<div class="tp-section-head"><div><h2>'
-			. esc_html__( 'نظر بازدیدکنندگان', 'topersia' ) . '</h2></div></div>';
+			. esc_html( $plain ? __( 'نظرات', 'topersia' ) : __( 'نظر بازدیدکنندگان', 'topersia' ) ) . '</h2></div></div>';
 
-		$form = $criteria ? topersia_g_review_form( $pid, $criteria ) : '';
+		$form = ( $criteria || $plain ) ? topersia_g_review_form( $pid, $criteria ) : '';
+
+		/*
+		 * بی ستاره (P5-D574): همان بخش و همان فرم، بی امتیاز، بی میانگین، بی نمودار توزیع — فقط نام و متن.
+		 * اسکیما هم چیزی نمی‌گیرد (نه AggregateRating، نه Review).
+		 */
+		if ( $plain && $count ) {
+
+			$list = '';
+
+			foreach ( (array) $data['last'] as $one ) {
+				$author = isset( $one['author'] ) ? (string) $one['author'] : '';
+				$text   = isset( $one['text'] ) ? (string) $one['text'] : '';
+				if ( '' !== $text ) {
+					$list .= '<div class="tp-cmt">' . ( '' !== $author ? '<b>' . esc_html( $author ) . '</b>' : '' ) . '<p>' . esc_html( $text ) . '</p></div>';
+				}
+			}
+
+			return '<section id="tp-reviews" class="tp-section">' . $head
+				. '<div class="tp-rate tp-rate--plain">'
+				. '<p class="tp-rate__count">' . esc_html( sprintf(
+					/* translators: %s: شمار نظر */
+					_n( '%s نظر', '%s نظر', (int) $count, 'topersia' ),
+					topersia_g_fa( $count )
+				) ) . '</p>'
+				. ( '' !== $list ? '<div class="tp-rate__list">' . $list . '</div>' : '' )
+				. $form
+				. '</div></section>';
+		}
 
 		/* بی نظر: عنوان + «نخستین نظر را شما بنویسید» + فرم یا دعوت.  P5-D234 */
 		if ( ! $count ) {
@@ -8390,6 +8432,10 @@ if ( ! function_exists( 'topersia_g_section_icon' ) ) {
 			'tp-border'      => 'gate',
 			'tp-subranges'   => 'mount',
 			'tp-capital-of'  => 'city',
+			/* صفحۀ تکی خبر و مقاله — P5-D573 */
+			'tp-text'        => 'info',
+			'tp-rel-places'  => 'pin',
+			'tp-rel-news'    => 'news',
 		);
 
 		return isset( $map[ $id ] ) ? $map[ $id ] : 'list';

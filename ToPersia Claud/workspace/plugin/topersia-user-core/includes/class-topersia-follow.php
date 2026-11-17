@@ -73,13 +73,18 @@ final class ToPersia_Follow {
 		return in_array( self::canonical( $post_id, $type ), self::ids( $user_id ), true );
 	}
 
+	/** نوعِ دنبال‌کردنی — همان قاعدۀ ToPersia_JetEngine::is_entity_type() (بی آن کلاس: فقط `tp_`). P5-D573 */
+	private static function is_entity_type( string $type ): bool {
+		return class_exists( 'ToPersia_JetEngine' ) ? ToPersia_JetEngine::is_entity_type( $type ) : str_starts_with( $type, 'tp_' );
+	}
+
 	/** موجودیتِ منتشرشدۀ ToPersia، یا null. */
 	private static function entity( int $post_id, string $type ): ?WP_Post {
 
 		$post = get_post( $post_id );
 
 		/* منتشرشده و بی‌گذرواژه — P5-D247 */
-		if ( ! $post || 'publish' !== $post->post_status || '' !== (string) $post->post_password || ! str_starts_with( $post->post_type, 'tp_' ) ) {
+		if ( ! $post || 'publish' !== $post->post_status || '' !== (string) $post->post_password || ! self::is_entity_type( $post->post_type ) ) {
 			return null;
 		}
 
@@ -215,7 +220,7 @@ final class ToPersia_Follow {
 
 		foreach ( $posts as $post ) {
 
-			if ( ! str_starts_with( $post->post_type, 'tp_' ) ) {
+			if ( ! self::is_entity_type( $post->post_type ) ) {
 				continue;
 			}
 

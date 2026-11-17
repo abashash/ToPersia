@@ -81,7 +81,28 @@ final class ToPersia_JetReviews_Setup {
 				'types'    => array( 'tp_border_crossing' ),
 				'criteria' => array( 'سرعت تردد', 'امکانات', 'برخورد کارکنان' ),
 			),
+			/*
+			 * خبر و مقاله — نظرِ بی ستاره (P5-D574): فقط متن، بی معیار و بی امتیاز.
+			 * `stars` = false یعنی فرم ردیف معیار ندارد، `rating` صفر می‌ماند و نمایش ستاره/میانگین نمی‌آید.
+			 */
+			'content'     => array(
+				'label'    => 'خبر و مقاله',
+				'types'    => array( 'tpc_news', 'tpc_article' ),
+				'criteria' => array(),
+				'stars'    => false,
+			),
 		);
+	}
+
+	/** آیا این نوع‌پست نظر می‌گیرد (با ستاره یا بی آن). */
+	public static function allowed( string $post_type ): bool {
+		return '' !== self::family_of( $post_type );
+	}
+
+	/** آیا نظرِ این نوع‌پست بی ستاره است — فقط متن (P5-D574). */
+	public static function starless( string $post_type ): bool {
+		$family = self::family_of( $post_type );
+		return '' !== $family && isset( self::families()[ $family ]['stars'] ) && false === self::families()[ $family ]['stars'];
 	}
 
 	/** خانوادۀ یک نوع‌پست، یا رشتۀ خالی اگر نظر نمی‌گیرد. */
@@ -157,6 +178,8 @@ final class ToPersia_JetReviews_Setup {
 			'tp_sports_event'     => 'E3 — رویداد ورزشی',
 			'tp_religious_event'  => 'E5 — مراسم مذهبی عمومی',
 			'tp_seasonal_event'   => 'E6 — رویداد طبیعی و فصلی',
+			'tpc_news'            => 'N — خبر',
+			'tpc_article'         => 'N — مقاله',
 		);
 	}
 
