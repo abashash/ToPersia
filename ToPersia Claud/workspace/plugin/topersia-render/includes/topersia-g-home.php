@@ -771,8 +771,14 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		/* ── ۵ جاذبه‌ها ── */
 		$attr_cards = '';
 
+		/* P5-D603 — کارت هر نوع به هاب همان نوع (نوعِ موردِ نشان‌داده‌شده؛ گروه چندنوعی هاب یکتا ندارد)، نه به نخستین مورد؛
+		   نوع بی هاب ← هاب گروهی /attractions/، و تنها اگر آن هم نبود ← خود مورد. */
 		foreach ( $groups as $g ) {
-			$attr_cards .= topersia_g_home_card( $g[1][0], get_the_title( $g[1][0] ), get_permalink( $g[1][0] ), $g[0] );
+			$hub = function_exists( 'topersia_g_hub_link_for' ) ? topersia_g_hub_link_for( (string) get_post_type( $g[1][0] ) ) : '';
+			if ( '' === $hub && function_exists( 'topersia_g_hub_group_url' ) ) {
+				$hub = (string) topersia_g_hub_group_url( 'attractions' );
+			}
+			$attr_cards .= topersia_g_home_card( $g[1][0], get_the_title( $g[1][0] ), '' !== $hub ? $hub : get_permalink( $g[1][0] ), $g[0] );
 		}
 
 		/* «مشاهدۀ همه» ← هاب گروهی همۀ نوع‌های جاذبه (/attractions/) — دستۀ 53 بند ۹ */
