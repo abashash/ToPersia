@@ -385,13 +385,13 @@ tp441_mut( 'بند ۱۷: فقط تبلیغ فعالِ پر نمایش داده �
 
 $w53_ft_set( array( 'partners' => array( array( 'img' => 7, 'name' => 'Alpha', 'url' => 'https://alpha.example/' ), array(), array( 'img' => 8, 'name' => 'Beta', 'url' => '', 'dark' => 1 ) ) ) );
 $h = topersia_g_sc_footer_partners();
-$w53_okp = 2 === substr_count( $h, '<li class="tp-ft-row__item">' ) && false !== strpos( $h, 'همکاران ما' ) && 1 === substr_count( $h, 'rel="noopener"' )
+$w53_okp = 2 === substr_count( $h, '<li class="tp-ft-row__item">' ) && false !== strpos( $h, 'همکاران ما' ) && 1 === substr_count( $h, 'target="_blank" rel="noopener nofollow"' )
 	&& false !== strpos( $h, 'tp-ft-logo tp-ft-logo--dark' ) && false !== strpos( $h, 'alt="Alpha"' );
 $w53_ft_set( array() );
 $w53_okp = $w53_okp && '' === topersia_g_sc_footer_partners() && '' === topersia_g_sc_footer_social() && '' === topersia_g_sc_footer_ads();
-$w53_ft_set( array( 'social' => array( array( 'url' => 'https://www.instagram.com/x/' ), array( 'url' => 'ftp://bad' ), array( 'url' => 'https://t.me/x', 'label' => 'Telegram' ) ) ) );
+$w53_ft_set( array( 'social' => array( array( 'url' => 'https://www.instagram.com/x/' ), array( 'url' => 'ftp://bad' ), array( 'url' => 'https://t.me/x', 'label' => 'Telegram' ), array( 'url' => 'https://ble.ir/x', 'label' => 'Bale', 'icon' => 'bale', 'lib' => 'tp-svg' ), array( 'url' => 'https://rubika.ir/x', 'label' => 'Rubika', 'icon' => 'rubika', 'lib' => 'tp-svg' ) ) ) );
 $h = topersia_g_sc_footer_social();
-$w53_okp = $w53_okp && 2 === substr_count( $h, 'tp-ft-social__a' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
+$w53_okp = $w53_okp && 4 === substr_count( $h, 'tp-ft-social__a' ) && 2 === substr_count( $h, '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' ) && 2 === substr_count( $h, 'tp-ft-social__svg--brand' ) && false !== strpos( $h, 'fill="#0DCB9D"' ) && 21 === substr_count( $h, '<polygon fill=' ) && false === strpos( $h, 'javis' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
 $w53_ft_set( array( 'brand' => array( 'text_fa' => '' ) ) );
 $h = topersia_g_sc_footer_brand();
 $w53_okp = $w53_okp && false !== strpos( $h, 'توپرشیا مرجع جامع اطلاعات ایران' ) && false === strpos( $h, '<img' );
@@ -451,3 +451,7 @@ $w53_12b  = function ( $s ) use ( $w53_i18u ) {
 };
 tp441_mut( 'بند ۱۲ب: پیام نظر تکراری و نوع بی‌نظر برای خبر/مقاله «این مورد» سه‌زبانه (عربی بی حرف ویژهٔ فارسی)؛ مکان‌ها همان «این مکان» — جهش: کلید مورد به کار نرود', $w53_12b, $w53_ucf,
 	str_replace( "'review_exists' . \$item", "'review_exists'", $w53_ucf ) );
+
+tp441_mut( 'P5-D605 و D606: پیوند همکار noopener nofollow + _blank؛ بله و روبیکا SVG درون‌خطی با رنگ اصلی لوگو، بی وابستگی به قلم javis-fa — جهش: rel بی nofollow',
+	function ( $s ) { return false !== strpos( $s, 'target="_blank" rel="noopener nofollow">' ) && preg_match( "/'bale'\s+=> array\( /", $s ) && preg_match( "/'rubika'\s+=> array\( /", $s ) && false === strpos( $s, 'javisfa-' ); },
+	$w53_ft, str_replace( 'rel="noopener nofollow"', 'rel="noopener"', $w53_ft ) );

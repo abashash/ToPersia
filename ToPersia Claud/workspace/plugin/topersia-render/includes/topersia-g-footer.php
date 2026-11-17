@@ -97,7 +97,7 @@ if ( ! function_exists( 'topersia_g_ft_opts' ) ) {
 				'url'   => $url,
 				'label' => topersia_g_ft_text( isset( $s['label'] ) ? $s['label'] : '' ),
 				'icon'  => topersia_g_ft_text( isset( $s['icon'] ) ? $s['icon'] : '' ),
-				'lib'   => function_exists( 'sanitize_key' ) ? sanitize_key( isset( $s['lib'] ) ? $s['lib'] : '' ) : '',
+				'lib'   => (string) preg_replace( '/[^a-z0-9_\-]/', '', strtolower( (string) ( isset( $s['lib'] ) ? $s['lib'] : '' ) ) ),   /* همان قاعدۀ sanitize_key */
 			);
 		}
 
@@ -224,7 +224,7 @@ if ( ! function_exists( 'topersia_g_sc_footer_partners' ) ) {
 			$img   = topersia_g_ft_img( $p['img'], $alt, 'tp-ft-logo__img' );
 			$cls   = 'tp-ft-logo' . ( $p['dark'] ? ' tp-ft-logo--dark' : '' );
 			$inner = '' !== $p['url']
-				? '<a class="' . $cls . '" href="' . esc_url( $p['url'] ) . '" target="_blank" rel="noopener">' . $img . '</a>'
+				? '<a class="' . $cls . '" href="' . esc_url( $p['url'] ) . '" target="_blank" rel="noopener nofollow">' . $img . '</a>'
 				: '<span class="' . $cls . '">' . $img . '</span>';
 			$items .= '<li class="tp-ft-row__item">' . $inner . '</li>';
 		}
@@ -244,9 +244,29 @@ if ( ! function_exists( 'topersia_g_sc_footer_partners' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_ft_svg_icons' ) ) {
+	/**
+	 * آیکون‌های درون‌خطی شبکه‌هایی که Font Awesome ندارد (بله، روبیکا) با رنگ اصلی برند — کتابخانۀ «tp-svg»؛ پاورقی به مجموعۀ
+	 * قلم «javis-fa» المنتور وابسته نیست. شکل بله همان گلیف icon-10 آن مجموعه (مسیر در مختصات قلم، y رو به بالا) با تیک سفید؛
+	 * روبیکا شش‌ضلعی ۱۸ مثلث رنگی و مکعب سفید (نمونۀ رنگ از لوگوی اصلی که کاربر داد). رنگ‌ها رنگ خود لوگوست، مثل تصویر — نه توکن.
+	 * نام ← [ viewBox ، نشانه‌گذاری درونی ثابت ].
+	 */
+	function topersia_g_ft_svg_icons() {
+		return array(
+			'bale'   => array( '7.8 -504.1 489.8 489.8', '<circle cx="253" cy="-255" r="185" fill="#FFFFFF"/><path transform="scale(1 -1)" fill="#0DCB9D" d="M497 242c-1-8-2-18-3-26-1-8-4-16-6-24-2-10-6-18-10-28-3-7-7-15-11-22-4-7-8-13-12-20-4-7-9-13-14-20-6-6-11-12-18-18-7-7-16-15-25-22-7-5-15-10-24-15-8-5-18-10-28-14-11-4-22-8-32-11-10-2-20-4-29-5-19-3-37-3-55-1-16 1-33 5-48 10l-1 0c-76 22-139 84-162 160-5 16-9 33-9 51-3 17-2 33-2 49 0 14 0 27 0 40 0 14 0 28 0 41 0 12 0 24 0 36 0 12 0 24 0 35 0 12 0 24 0 35-1 9 2 18 9 24 7 6 17 9 26 5 6-1 11-4 15-8 18-11 35-24 52-36 1 1 3 2 4 3 7 5 14 9 21 13 8 4 15 8 23 11 8 3 16 6 24 9 9 2 18 4 28 6 9 2 19 3 30 3 12 1 25 1 37-1 9 0 19-1 28-4 63-13 120-52 154-107 15-24 27-50 33-78 2-11 4-21 4-31 2-14 2-27 1-40z m-91 107c-5 12-16 21-28 26-10 3-20 4-31 1-7-2-14-7-20-13-6-6-12-11-17-17-6-5-11-10-16-16-6-5-12-11-18-17-3-4-6-7-10-11-6-5-11-11-16-16-6-6-12-12-18-17-4-4-8-9-12-13-14 14-29 28-42 42-8 8-17 12-28 14-9 1-20-1-28-5-8-5-16-11-20-19-6-10-8-23-5-34 2-9 6-17 13-24 25-25 51-51 76-76 9-8 20-12 32-13 10-1 20 2 28 7 7 6 12 12 19 18 6 6 13 12 19 19 6 7 13 13 19 20 7 7 14 13 21 20 6 6 12 12 18 18 6 6 11 11 16 17 6 6 12 11 18 17 5 6 11 11 16 17 6 5 12 12 14 20 5 11 4 24 0 35z"/>' ),
+			'rubika' => array( '15 15 1050 1050', '<polygon fill="#B9CF06" points="309,138 540,15 540,272"/><polygon fill="#82B52A" points="540,15 771,138 540,272"/><polygon fill="#F3A928" points="309,138 540,272 309,406"/><polygon fill="#3AAE9A" points="771,138 540,272 771,406"/><polygon fill="#EE7518" points="309,138 77,282 309,406"/><polygon fill="#5DD4BE" points="771,138 1003,282 771,406"/><polygon fill="#E74F53" points="77,282 309,406 77,540"/><polygon fill="#7B4686" points="1003,282 771,406 1003,540"/><polygon fill="#7B4686" points="77,540 309,406 309,673"/><polygon fill="#4F3881" points="1003,540 771,406 771,673"/><polygon fill="#4F3881" points="77,540 309,673 77,800"/><polygon fill="#E74F53" points="1003,540 771,673 1003,800"/><polygon fill="#5DD4BE" points="77,800 309,673 309,940"/><polygon fill="#EE7518" points="1003,800 771,673 771,940"/><polygon fill="#3AAE9A" points="309,673 540,807 309,940"/><polygon fill="#F3A928" points="771,673 540,807 771,940"/><polygon fill="#82B52A" points="309,940 540,807 540,1065"/><polygon fill="#B9CF06" points="771,940 540,807 540,1065"/><polygon fill="#FCFCFC" points="540,272 771,406 540,540 309,406"/><polygon fill="#E2E2E2" points="309,406 540,540 540,807 309,673"/><polygon fill="#EEEEEE" points="540,540 771,406 771,673 540,807"/>' ),
+		);
+	}
+}
+
 if ( ! function_exists( 'topersia_g_ft_social_icon' ) ) {
 	/** آیکون شبکه با Icons_Manager المنتور؛ بی المنتور نخستین حرف نام. */
 	function topersia_g_ft_social_icon( $s, $label ) {
+
+		$svg = topersia_g_ft_svg_icons();
+		if ( 'tp-svg' === $s['lib'] && isset( $svg[ $s['icon'] ] ) ) {
+			return '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' . esc_attr( $svg[ $s['icon'] ][0] ) . '" aria-hidden="true" focusable="false">' . $svg[ $s['icon'] ][1] . '</svg>'   /* نشانه‌گذاری ثابت همین پرونده، نه ورودی */;
+		}
 
 		if ( '' !== $s['icon'] && class_exists( '\Elementor\Icons_Manager' ) ) {
 			ob_start();

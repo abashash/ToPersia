@@ -197,4 +197,6 @@ html:root [data-elementor-type="footer"] .tp-ft-social__a :is(svg,i){
   fill:currentColor;
   color:inherit;
 }
+/* بله و روبیکا با رنگ خود لوگو (P5-D606) — کمی بزرگ‌تر تا شکل رنگی در دایره خوانا بماند */
+html:root [data-elementor-type="footer"] .tp-ft-social__a .tp-ft-social__svg--brand{width:1.5rem;height:1.5rem}
 .tp-ft-social__ch{font-weight:700}
