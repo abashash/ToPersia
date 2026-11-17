@@ -423,3 +423,12 @@ tp441_mut( 'بند ۱۶ CSS پاورقی: محدود به [data-elementor-type="
 tp441_mut( 'بند ۱۶ توکن: --tp-ft-* در یک بلوک برای هر سه حالت — جهش: حالت تیره جا بماند',
 	function ( $s ) { return (bool) preg_match( '/html\[data-tp-mode="evening"\],\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', $s ); }, $w53_tok,
 	preg_replace( '/,\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', '{--tp-ft-bg:', $w53_tok ) );
+
+tp441_mut( 'بند ۱۹ گرم‌کن: شمار ساخت فقط پس از نوشتن واقعی قطعه (درون ob_start) و فقط برای مکانی که در پالایش است (پرکاربرد در کش، نه شمارندۀ بازدید) — جهش: بی اعتبارسنجی',
+	function ( $s ) {
+		$flat = (string) preg_replace( '/\s+/', ' ', $s );
+		return false !== strpos( $flat, "if ( false !== file_put_contents( \$dir . '/' . \$key . '.html', \$html, LOCK_EX ) && \$place ) { topersia_frag_built( \$place );" )
+			&& 1 === substr_count( $s, 'topersia_frag_built( $place )' )
+			&& (bool) preg_match( '/function topersia_frag_built\( \$place_id \) \{.*?topersia_g_news_filter_options\(\).*?if \( ! \$valid \) \{\s*return;/s', $s )
+			&& false === strpos( $s, "\xD9\xBE\xD8\xB1\xD8\xA8\xD8\xA7\xD8\xB2\xD8\xAF\xDB\x8C\xD8\xAF" );   /* واژۀ ممنوع بند ۱۹c، به بایت تا در خود آزمون هم نیاید */
+	}, $w53_nui, str_replace( 'if ( ! $valid ) {', 'if ( false ) {', $w53_nui ) );

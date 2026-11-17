@@ -681,13 +681,11 @@ if ( ! function_exists( 'topersia_frag_store_begin' ) ) {
 			return;
 		}
 
-		/* شمار ساخت قطعۀ هر مکان در کش برای گرم‌کردن (بند ۱۹؛ شمارندۀ بازدید نیست): فقط ساخت واقعی، نه درخواست خود گرم‌کن */
+		/* شمار ساخت قطعۀ هر مکان در کش برای گرم‌کردن (بند ۱۹؛ شمارندۀ بازدید نیست): فقط پس از نوشتن واقعی قطعه، و نه برای
+		   درخواست خود گرم‌کن (سرآیند X-TP-Warm فقط می‌تواند شمارش را حذف کند، نه بیفزاید). اعتبار مکان در topersia_frag_built. */
 		$place = ( isset( $_SERVER['HTTP_X_TP_WARM'] ) || ! function_exists( 'topersia_frag_built' ) ) ? 0 : absint( get_query_var( 'tp_place' ) );
-		if ( $place ) {
-			topersia_frag_built( $place );
-		}
 
-		ob_start( function ( $html ) use ( $key ) {
+		ob_start( function ( $html ) use ( $key, $place ) {
 			if ( false !== strpos( $html, 'data-tp-news-swap="results"' ) ) {
 				$dir = topersia_frag_dir( WP_CONTENT_DIR );
 				if ( wp_mkdir_p( $dir ) ) {
@@ -701,7 +699,9 @@ if ( ! function_exists( 'topersia_frag_store_begin' ) ) {
 					if ( is_file( $dir . '/off' ) ) {
 						return $html;   /* سایت در این میان پشت «به‌زودی» رفته */
 					}
-					file_put_contents( $dir . '/' . $key . '.html', $html, LOCK_EX );
+					if ( false !== file_put_contents( $dir . '/' . $key . '.html', $html, LOCK_EX ) && $place ) {
+						topersia_frag_built( $place );
+					}
 				}
 			}
 			return $html;
@@ -777,7 +777,18 @@ if ( ! function_exists( 'topersia_frag_built' ) ) {
 	/** یک ساخت قطعه برای مکان؛ فقط هنگام نبود پرونده صدا می‌شود، پس نوشتن option نادر است. سقف ۵۰ مکان. */
 	function topersia_frag_built( $place_id ) {
 		$place_id = absint( $place_id );
-		if ( ! $place_id ) {
+		if ( ! $place_id || ! function_exists( 'topersia_g_news_filter_options' ) ) {
+			return;
+		}
+		/* فقط مکانی که در پالایش هست (منتشرشده، با خبر) — شناسۀ دلخواه نشانی چیزی نمی‌نویسد */
+		$valid = false;
+		foreach ( (array) topersia_g_news_filter_options() as $list ) {
+			if ( is_array( $list ) && isset( $list[ $place_id ] ) ) {
+				$valid = true;
+				break;
+			}
+		}
+		if ( ! $valid ) {
 			return;
 		}
 		$builds = get_option( 'topersia_frag_builds', array() );
