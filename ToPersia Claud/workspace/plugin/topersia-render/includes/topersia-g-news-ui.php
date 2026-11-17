@@ -681,6 +681,12 @@ if ( ! function_exists( 'topersia_frag_store_begin' ) ) {
 			return;
 		}
 
+		/* شمار ساخت قطعۀ هر مکان در کش برای گرم‌کردن (بند ۱۹؛ شمارندۀ بازدید نیست): فقط ساخت واقعی، نه درخواست خود گرم‌کن */
+		$place = ( isset( $_SERVER['HTTP_X_TP_WARM'] ) || ! function_exists( 'topersia_frag_built' ) ) ? 0 : absint( get_query_var( 'tp_place' ) );
+		if ( $place ) {
+			topersia_frag_built( $place );
+		}
+
 		ob_start( function ( $html ) use ( $key ) {
 			if ( false !== strpos( $html, 'data-tp-news-swap="results"' ) ) {
 				$dir = topersia_frag_dir( WP_CONTENT_DIR );
@@ -737,8 +743,123 @@ if ( ! function_exists( 'topersia_frag_purge' ) ) {
 				$n ++;
 			}
 		}
+		if ( function_exists( 'topersia_frag_warm_schedule' ) ) {
+			topersia_frag_warm_schedule();
+		}
 		return $n;
 	}
+}
+
+/* ── گرم‌کردن کش قطعه پس از ابطال — دستۀ 53 بند ۱۹ ──────────────────────────
+ * ابطال (topersia_frag_purge) یک رویداد تکی WP-Cron سی ثانیه بعد می‌گذارد (تکراری‌ها یکی می‌شوند)؛ رویداد ترکیب‌های رایج را
+ * پشت‌سرهم و مهمان‌وار درخواست می‌کند تا نخستین بازدیدکننده قطعۀ ساخته‌شده بگیرد:
+ *   بی پالایش (هر سه زبان) · هر موضوع · ده مکانی که قطعه‌شان بیش از همه ساخته شده (topersia_frag_builds؛ بی آمار ← پرخبرترین‌ها).
+ * سایت پشت «به‌زودی» ← هیچ (قطعه آن‌جا کش نمی‌شود). هیچ درخواستی بیرون از home_url نمی‌رود.
+ */
+if ( ! defined( 'TOPERSIA_FRAG_WARM_MAX' ) ) {
+	define( 'TOPERSIA_FRAG_WARM_MAX', 30 );   /* سقف درخواست هر دور */
+}
+
+if ( ! function_exists( 'topersia_frag_warm_schedule' ) ) {
+	/** رویداد تکی گرم‌کردن، اگر هنوز در صف نیست. */
+	function topersia_frag_warm_schedule() {
+		if ( ! function_exists( 'wp_next_scheduled' ) || '' !== (string) get_option( 'elementor_maintenance_mode_mode', '' ) ) {
+			return false;
+		}
+		if ( wp_next_scheduled( 'topersia_frag_warm' ) ) {
+			return true;
+		}
+		return (bool) wp_schedule_single_event( time() + 30, 'topersia_frag_warm' );
+	}
+}
+
+if ( ! function_exists( 'topersia_frag_built' ) ) {
+	/** یک ساخت قطعه برای مکان؛ فقط هنگام نبود پرونده صدا می‌شود، پس نوشتن option نادر است. سقف ۵۰ مکان. */
+	function topersia_frag_built( $place_id ) {
+		$place_id = absint( $place_id );
+		if ( ! $place_id ) {
+			return;
+		}
+		$builds = get_option( 'topersia_frag_builds', array() );
+		$builds = is_array( $builds ) ? array_map( 'absint', $builds ) : array();
+		$builds[ $place_id ] = ( isset( $builds[ $place_id ] ) ? $builds[ $place_id ] : 0 ) + 1;
+		arsort( $builds );
+		update_option( 'topersia_frag_builds', array_slice( $builds, 0, 50, true ), false );
+	}
+}
+
+if ( ! function_exists( 'topersia_frag_warm_places' ) ) {
+	/** ده مکان رایج: از آمار ساخت قطعه، وگرنه مکان‌های پالایش به ترتیب شمار خبر. فقط منتشرشده. */
+	function topersia_frag_warm_places( $limit = 10 ) {
+		$builds = get_option( 'topersia_frag_builds', array() );
+		$ids  = is_array( $builds ) ? array_keys( $builds ) : array();
+		if ( count( $ids ) < $limit && function_exists( 'topersia_g_news_filter_options' ) ) {
+			$count = array();
+			foreach ( topersia_g_news_filter_options() as $list ) {
+				foreach ( array_keys( $list ) as $pid ) {
+					$count[ $pid ] = count( topersia_g_news_archive_ids( $pid ) );
+				}
+			}
+			arsort( $count );
+			$ids = array_merge( $ids, array_keys( $count ) );
+		}
+		$ids = array_values( array_unique( array_map( 'absint', $ids ) ) );
+		return array_slice( function_exists( 'topersia_g_published' ) ? topersia_g_published( $ids ) : $ids, 0, $limit );
+	}
+}
+
+if ( ! function_exists( 'topersia_frag_warm_urls' ) ) {
+	/** نشانی‌های گرم‌کردن، به ترتیب اولویت، با tp_partial=1. */
+	function topersia_frag_warm_urls() {
+		if ( ! function_exists( 'topersia_g_news_archive_url' ) ) {
+			return array();
+		}
+		$base = (string) topersia_g_news_archive_url();
+		if ( '' === $base ) {
+			return array();
+		}
+		$urls = array( add_query_arg( 'tp_partial', '1', $base ) );
+		foreach ( array( 'en', 'ar' ) as $lang ) {
+			$tr = (string) apply_filters( 'wpml_permalink', $base, $lang, true );
+			if ( '' !== $tr && $tr !== $base ) {
+				$urls[] = add_query_arg( 'tp_partial', '1', $tr );
+			}
+		}
+		if ( taxonomy_exists( 'tpc_news_topic' ) ) {
+			$terms = get_terms( array( 'taxonomy' => 'tpc_news_topic', 'hide_empty' => true, 'fields' => 'slugs' ) );
+			foreach ( is_array( $terms ) ? $terms : array() as $slug ) {
+				$urls[] = add_query_arg( array( 'tp_partial' => '1', 'tp_topic' => rawurlencode( (string) $slug ) ), $base );
+			}
+		}
+		foreach ( topersia_frag_warm_places() as $pid ) {
+			$urls[] = add_query_arg( array( 'tp_partial' => '1', 'tp_place' => (int) $pid ), $base );
+		}
+		$home = (string) wp_parse_url( home_url( '/' ), PHP_URL_HOST );
+		return array_slice( array_values( array_filter( array_unique( $urls ), function ( $u ) use ( $home ) {
+			return $home === (string) wp_parse_url( $u, PHP_URL_HOST );
+		} ) ), 0, TOPERSIA_FRAG_WARM_MAX );
+	}
+}
+
+if ( ! function_exists( 'topersia_frag_warm_run' ) ) {
+	/** دور گرم‌کردن — پشت‌سرهم، مهمان (بی کوکی)؛ برمی‌گرداند چند نشانی ۲۰۰ داد. */
+	function topersia_frag_warm_run() {
+		if ( '' !== (string) get_option( 'elementor_maintenance_mode_mode', '' ) ) {
+			return 0;
+		}
+		$ok = 0;
+		foreach ( topersia_frag_warm_urls() as $url ) {
+			$r = wp_remote_get( $url, array( 'timeout' => 20, 'redirection' => 0, 'sslverify' => false, 'headers' => array( 'X-TP-Warm' => '1' ) ) );
+			if ( ! is_wp_error( $r ) && 200 === (int) wp_remote_retrieve_response_code( $r ) ) {
+				$ok ++;
+			}
+		}
+		return $ok;
+	}
+}
+
+if ( function_exists( 'add_action' ) ) {
+	add_action( 'topersia_frag_warm', 'topersia_frag_warm_run' );
 }
 
 /** ویژگی‌های ناحیۀ نتیجه: پیام aria-live و عنوان سند، هر دو به زبان صفحه. */
