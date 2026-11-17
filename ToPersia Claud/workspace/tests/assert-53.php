@@ -347,3 +347,79 @@ $w53_auth = function ( $s ) {
 };
 tp441_mut( 'بند ۱۴: Article.author از یک تابع — Organization برای خالی/سازمان، Person فقط برای شخص؛ ناشر همان Organization سایت — جهش: همیشه Person', $w53_auth, $w53_sch,
 	str_replace( "'author'           => topersia_schema_article_author( \$auth, \$org ),", "'author'           => array( '@type' => 'Person', 'name' => \$auth ),", $w53_sch ) );
+
+/* ── بندهای ۱۶ و ۱۷: پاورقی المنتوری — چهار شورت‌کد، رنگ از توکن ───────── */
+$w53_ft    = $w53_read( 'plugin/topersia-render/includes/topersia-g-footer.php' );
+$w53_ftcss = $w53_read( 'plugin/topersia-render/assets/topersia-g-footer.css' );
+$w53_tok   = $w53_read( 'plugin/topersia-render/assets/topersia-tokens.css' );
+$w53_main  = $w53_read( 'plugin/topersia-render/topersia-render.php' );
+if ( ! function_exists( 'topersia_demo_on' ) ) {
+	require_once $w53_root . '/plugin/topersia-render/includes/topersia-g-demo.php';
+}
+if ( ! function_exists( 'topersia_g_sc_footer_ads' ) ) {
+	require_once $w53_root . '/plugin/topersia-render/includes/topersia-g-footer.php';
+}
+$w53_ft_prev = isset( $GLOBALS['tp_options']['topersia_footer_blocks'] ) ? $GLOBALS['tp_options']['topersia_footer_blocks'] : null;
+$w53_ft_set  = function ( $v ) { $GLOBALS['tp_options']['topersia_footer_blocks'] = $v; };
+$w53_ad      = function ( $i, $on = true ) { return array( 'img' => 100 + $i, 'url' => 'https://ad' . $i . '.example/', 'alt' => 'ad ' . $i, 'on' => $on ); };
+
+$w53_ok = true;
+for ( $n = 0; $n <= 4; $n++ ) {
+	$ads = array();
+	for ( $i = 0; $i < 4; $i++ ) {
+		$ads[] = $i < $n ? $w53_ad( $i ) : $w53_ad( $i, false );
+	}
+	$w53_ft_set( array( 'ads' => $ads, 'demo_ads' => 0 ) );
+	$h = topersia_g_sc_footer_ads();
+	$w53_ok = $w53_ok && ( 0 === $n ? '' === $h
+		: ( false !== strpos( $h, 'tp-ft-ads--n' . $n . '"' ) && $n === substr_count( $h, '<a class="tp-ft-ad"' )
+			&& $n === substr_count( $h, 'rel="sponsored noopener"' ) && $n === substr_count( $h, 'target="_blank"' ) && $n === substr_count( $h, 'tp-ft-ad__tag' )
+			&& false !== strpos( $h, 'width="' ) ) );
+}
+$w53_ft_set( array( 'ads' => array( array( 'img' => 0, 'url' => 'https://x.example/', 'on' => 1 ), array( 'img' => 5, 'url' => '', 'on' => 1 ), array( 'img' => 5, 'url' => 'javascript:alert(1)', 'on' => 1 ), $w53_ad( 3, false ) ), 'demo_ads' => 0 ) );
+$w53_ok = $w53_ok && '' === topersia_g_sc_footer_ads();
+t( 'بند ۱۷ [tp_footer_ads] رفتار: ۰ تا ۴ — صفر هیچ خروجی، n ← tp-ft-ads--n{n}، هر کدام sponsored noopener + _blank + «تبلیغ» + ابعاد؛ غیرفعال، بی تصویر، بی نشانی و javascript: کنار می‌روند؛ پیش‌نمایش خاموش ← بی نمونه', $w53_ok );
+tp441_mut( 'بند ۱۷: فقط تبلیغ فعالِ پر نمایش داده می‌شود — جهش: شرط «فعال» برداشته شود',
+	function ( $s ) { return false !== strpos( $s, "return \$a['on'] && \$a['img'] > 0 && '' !== \$a['url'];" ); }, $w53_ft,
+	str_replace( "return \$a['on'] && \$a['img'] > 0 && '' !== \$a['url'];", "return \$a['img'] > 0 && '' !== \$a['url'];", $w53_ft ) );
+
+$w53_ft_set( array( 'partners' => array( array( 'img' => 7, 'name' => 'Alpha', 'url' => 'https://alpha.example/' ), array(), array( 'img' => 8, 'name' => 'Beta', 'url' => '', 'dark' => 1 ) ) ) );
+$h = topersia_g_sc_footer_partners();
+$w53_okp = 2 === substr_count( $h, '<li class="tp-ft-row__item">' ) && false !== strpos( $h, 'همکاران ما' ) && 1 === substr_count( $h, 'rel="noopener"' )
+	&& false !== strpos( $h, 'tp-ft-logo tp-ft-logo--dark' ) && false !== strpos( $h, 'alt="Alpha"' );
+$w53_ft_set( array() );
+$w53_okp = $w53_okp && '' === topersia_g_sc_footer_partners() && '' === topersia_g_sc_footer_social() && '' === topersia_g_sc_footer_ads();
+$w53_ft_set( array( 'social' => array( array( 'url' => 'https://www.instagram.com/x/' ), array( 'url' => 'ftp://bad' ), array( 'url' => 'https://t.me/x', 'label' => 'Telegram' ) ) ) );
+$h = topersia_g_sc_footer_social();
+$w53_okp = $w53_okp && 2 === substr_count( $h, 'tp-ft-social__a' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
+$w53_ft_set( array( 'brand' => array( 'text_fa' => '' ) ) );
+$h = topersia_g_sc_footer_brand();
+$w53_okp = $w53_okp && false !== strpos( $h, 'توپرشیا مرجع جامع اطلاعات ایران' ) && false === strpos( $h, '<img' );
+$w53_ft_set( array( 'brand' => array( 'logo' => 9, 'text_fa' => 'متن ویژه' ) ) );
+$h = topersia_g_sc_footer_brand();
+$w53_okp = $w53_okp && false !== strpos( $h, 'متن ویژه' ) && false !== strpos( $h, 'tp-ft-brand__logo' );
+t( 'بند ۱۷ همکاران، شبکه‌ها، برند: بخش خالی ← هیچ خروجی؛ لوگوی بی تصویر کنار؛ لوگوی روشن tp-ft-logo--dark؛ برچسب شبکه از نام یا میزبان؛ فقط http(s)؛ متن برند از تنظیمات وگرنه پیش‌فرض کاتالوگ', $w53_okp );
+if ( null === $w53_ft_prev ) {
+	unset( $GLOBALS['tp_options']['topersia_footer_blocks'] );
+} else {
+	$w53_ft_set( $w53_ft_prev );
+}
+
+tp441_mut( 'بند ۱۷: چهار شورت‌کد ثبت و پرونده بار می‌شود؛ نمونۀ نمایشی فقط از topersia_demo_on — جهش: شرط پیش‌نمایش برداشته شود',
+	function ( $s ) use ( $w53_main ) {
+		return false !== strpos( $w53_main, "'includes/topersia-g-footer.php'" )
+			&& 4 === preg_match_all( "/add_shortcode\( 'tp_footer_(ads|brand|partners|social)'/", $s )
+			&& false !== strpos( $s, "return function_exists( 'topersia_demo_on' ) && topersia_demo_on();" );
+	}, $w53_ft, str_replace( "return function_exists( 'topersia_demo_on' ) && topersia_demo_on();", 'return true;', $w53_ft ) );
+
+$w53_ftok = function ( $css ) {
+	$body = preg_replace( '#/\*.*?\*/#s', '', $css );
+	return '' !== $body && false === strpos( $body, '!important' ) && ! preg_match( '/#[0-9a-fA-F]{3,8}\b|rgba?\(/', $body )
+		&& false !== strpos( $body, 'html:root [data-elementor-type="footer"]{' ) && false !== strpos( $body, 'var(--tp-ft-row-h)' )
+		&& preg_match( '/\.tp-ft-ads--n4\{--tp-ft-ad-cols:4/', $body ) && preg_match( '/@media \(max-width:767px\)\{\s*\.tp-ft-ads--n3,\.tp-ft-ads--n4\{--tp-ft-ad-cols:2/', $body );
+};
+tp441_mut( 'بند ۱۶ CSS پاورقی: محدود به [data-elementor-type="footer"]، بی !important، بی رنگ خام (فقط --tp-ft-*)، ردیف هم‌ارتفاع، ۴ ستون و ۲×۲ همراه — جهش: رنگ خام', $w53_ftok, $w53_ftcss,
+	str_replace( 'color:var(--tp-ft-link);', 'color:#7AD4CD;', $w53_ftcss ) );
+tp441_mut( 'بند ۱۶ توکن: --tp-ft-* در یک بلوک برای هر سه حالت — جهش: حالت تیره جا بماند',
+	function ( $s ) { return (bool) preg_match( '/html\[data-tp-mode="evening"\],\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', $s ); }, $w53_tok,
+	preg_replace( '/,\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', '{--tp-ft-bg:', $w53_tok ) );
