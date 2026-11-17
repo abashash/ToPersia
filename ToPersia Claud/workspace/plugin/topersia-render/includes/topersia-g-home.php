@@ -740,7 +740,12 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 			. ( '' !== $map ? '<div class="tp-home-prov__map"><h3 class="tp-home-sub">' . esc_html__( 'ایران روی نقشه', 'topersia' ) . '</h3>' . $map . '</div>' : '' )
 			. '</div>' . $dlg : '';
 		/* P5-D533: دکمۀ پنجرۀ «همۀ استان‌ها» در ردیف عنوان (بی JS پنهان؛ فهرست noscript جایش). */
-		$prov_more = ( '' !== $prov_body && '' !== $dlg ) ? '<button type="button" class="tp-home-slider__all" data-tp-provdlg aria-haspopup="dialog" aria-controls="tp-home-provdlg" hidden>' . esc_html__( 'همۀ استان‌ها', 'topersia' ) . '</button>' : array();
+		$prov_more = ( '' !== $prov_body && '' !== $dlg ) ? '<button type="button" class="tp-home-slider__all" data-tp-provdlg aria-haspopup="dialog" aria-controls="tp-home-provdlg" hidden>' . esc_html__( 'همۀ استان‌ها', 'topersia' ) . '</button>' : '';
+		/* «مشاهدۀ همه» ← هاب استان‌ها (/province/)؛ دکمۀ پنجرۀ جست‌وجو کنارش می‌ماند — دستۀ 53 بند ۹ */
+		$prov_all  = ( '' !== $prov_body && function_exists( 'topersia_g_hub_link_for' ) ) ? topersia_g_hub_link_for( 'tp_province' ) : '';
+		$prov_more = ( '' !== $prov_more || '' !== $prov_all )
+			? '<span class="tp-home-more">' . $prov_more . ( '' !== $prov_all ? '<a class="tp-more" href="' . esc_url( $prov_all ) . '">' . esc_html__( 'مشاهدۀ همه', 'topersia' ) . '</a>' : '' ) . '</span>'
+			: array();
 
 		/*
 		 * ── ۴ محبوب‌ترین مقاصد — دستۀ 47 پ: تا ۱۲ شهر منتشرشدۀ دارای تصویر (ترتیب: دارای تصویر، سپس شناسۀ کوچک‌تر —
@@ -769,6 +774,10 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		foreach ( $groups as $g ) {
 			$attr_cards .= topersia_g_home_card( $g[1][0], get_the_title( $g[1][0] ), get_permalink( $g[1][0] ), $g[0] );
 		}
+
+		/* «مشاهدۀ همه» ← هاب گروهی همۀ نوع‌های جاذبه (/attractions/) — دستۀ 53 بند ۹ */
+		$attr_all  = ( '' !== $attr_cards && function_exists( 'topersia_g_hub_group_url' ) ) ? topersia_g_hub_group_url( 'attractions' ) : '';
+		$attr_more = '' !== $attr_all ? array( $attr_all, __( 'مشاهدۀ همه', 'topersia' ) ) : array();
 
 		/* ── ۶ ردیف سه‌ستونی رویدادها | سفرهای آماده | فصل‌ها — topersia-g-home-row.php (P5-D560) ── */
 		$row3 = function_exists( 'topersia_g_home_row3' ) ? topersia_g_home_row3() : '';
@@ -863,7 +872,7 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		$body = $stats
 			. topersia_g_home_section( 'tp-home-provinces', __( 'استان‌های ایران', 'topersia' ), $prov_body, $prov_more )
 			. $duo
-			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), array(), 'tp-home-lazy' )
+			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), $attr_more, 'tp-home-lazy' )
 			. $row3   /* 'tp-home-events' نخستین ستون ردیف سه‌ستونی — P5-D560 */
 			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide tp-home-guide--nine tp-home-glass" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
 			. $mag

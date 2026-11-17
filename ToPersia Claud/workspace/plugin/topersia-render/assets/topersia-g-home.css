@@ -91,6 +91,9 @@ html .tp-page.tp-home .tp-home-sec > div.tp-section-head{display:flex;flex-direc
 html .tp-page.tp-home .tp-home-sec > div.tp-section-head > div{display:block;flex:1 1 auto;min-inline-size:0}
 html .tp-page.tp-home .tp-home-sec > div.tp-section-head h2{margin:0;overflow-wrap:anywhere}
 html .tp-page.tp-home .tp-home-sec > div.tp-section-head > :is(.tp-more,.tp-home-slider__all){flex:0 0 auto;white-space:nowrap;min-block-size:44px;margin:0}
+/* دستۀ 53 بند ۹ — دو دکمه در یک ردیف عنوان (پنجرۀ «همۀ استان‌ها» + «مشاهدۀ همه» ← هاب) */
+html .tp-page.tp-home .tp-home-sec > div.tp-section-head > .tp-home-more{display:inline-flex;flex:0 0 auto;align-items:center;gap:12px;white-space:nowrap}
+html .tp-page.tp-home .tp-home-more > :is(.tp-more,.tp-home-slider__all){min-block-size:44px;margin:0}
 
 
 /* کارت تصویری — بی شیشه (کاشی تکراری) */

@@ -195,13 +195,71 @@ if ( ! function_exists( 'topersia_g_hub_season' ) ) {
 	}
 }
 
+/**
+ * هاب‌های گروهی — چند نوع در یک هاب، با همان قالب و همان نوار ابزار یک‌خطی (دستۀ 53 بند ۹):
+ *   attractions  همۀ نوع‌های «جاذبه‌ها»ی صفحۀ اول (topersia_g_home_groups) — /attractions/
+ *   events       چهار نوع رویداد (topersia_g_home_event_types) — /events/
+ * تراشه = نوع محتوا (مثل برچسب و فصل). نامک با صافی `topersia_g_hub_groups` عوض‌شدنی است.
+ *
+ * @return array کلید ← [ slug, types, title (msgid با %s = نام مکان) ]
+ */
+if ( ! function_exists( 'topersia_g_hub_groups' ) ) {
+	function topersia_g_hub_groups() {
+		$attr = array();
+		foreach ( function_exists( 'topersia_g_home_groups' ) ? topersia_g_home_groups() : array() as $g ) {
+			$attr = array_merge( $attr, (array) $g[1] );
+		}
+		$rows = array(
+			'attractions' => array( 'slug' => 'attractions', 'types' => array_values( array_unique( $attr ) ), 'title' => __( 'جاذبه‌های %s', 'topersia' ) ),
+			'events'      => array( 'slug' => 'events', 'types' => function_exists( 'topersia_g_home_event_types' ) ? topersia_g_home_event_types() : array(), 'title' => __( 'رویدادهای %s', 'topersia' ) ),
+		);
+		return function_exists( 'apply_filters' ) ? (array) apply_filters( 'topersia_g_hub_groups', $rows ) : $rows;
+	}
+}
+
+/** گروه هاب جاری («حالت گروه») یا تهی. */
+if ( ! function_exists( 'topersia_g_hub_group' ) ) {
+	function topersia_g_hub_group() {
+		$key = function_exists( 'get_query_var' ) && is_scalar( get_query_var( 'tp_hubgroup' ) ) ? sanitize_key( (string) get_query_var( 'tp_hubgroup' ) ) : '';
+		if ( '' === $key || ( function_exists( 'is_feed' ) && is_feed() ) ) {
+			return '';
+		}
+		return isset( topersia_g_hub_groups()[ $key ] ) ? $key : '';
+	}
+}
+
+/** نشانی هاب یک گروه به زبان جاری، صفحۀ N — تهی اگر گروه نیست یا هیچ نوعش هاب ندارد. */
+if ( ! function_exists( 'topersia_g_hub_group_url' ) ) {
+	function topersia_g_hub_group_url( $key, $page = 1 ) {
+		$all = topersia_g_hub_groups();
+		if ( ! isset( $all[ $key ] ) || ! array_intersect( (array) $all[ $key ]['types'], array_keys( topersia_g_hub_registry() ) ) ) {
+			return '';
+		}
+		return home_url( user_trailingslashit( $all[ $key ]['slug'] . ( $page > 1 ? '/page/' . (int) $page : '' ) ) );
+	}
+}
+
+/** الگوی نام هاب (جمع با %s = نام مکان) — گروه، وگرنه نوع. */
+if ( ! function_exists( 'topersia_g_hub_tpl' ) ) {
+	function topersia_g_hub_tpl() {
+		$grp = topersia_g_hub_group();
+		if ( '' !== $grp ) {
+			return (string) topersia_g_hub_groups()[ $grp ]['title'];
+		}
+		$type   = topersia_g_hub_type();
+		$titles = topersia_g_hub_titles();
+		$kinds  = topersia_g_kind_labels();
+		return isset( $titles[ $type ] ) ? $titles[ $type ] : topersia_g_t( isset( $kinds[ $type ] ) ? $kinds[ $type ] : $type );
+	}
+}
+
 /** نوع هاب جاری (آرشیو نوع) یا تهی. */
 if ( ! function_exists( 'topersia_g_hub_type' ) ) {
 	function topersia_g_hub_type() {
 		if ( ! function_exists( 'is_post_type_archive' ) || is_feed() ) {
 			return '';
 		}
-		if ( '' !== topersia_g_hub_season() ) {
+		if ( '' !== topersia_g_hub_season() || '' !== topersia_g_hub_group() ) {
 			return '';
 		}
 		foreach ( array_keys( topersia_g_hub_registry() ) as $type ) {
@@ -227,7 +285,7 @@ if ( ! function_exists( 'topersia_g_hub_term' ) ) {
 /** آیا این درخواست هاب است (نوع، برچسب یا فصل). */
 if ( ! function_exists( 'topersia_g_hub_is' ) ) {
 	function topersia_g_hub_is() {
-		return '' !== topersia_g_hub_type() || null !== topersia_g_hub_term() || '' !== topersia_g_hub_season();
+		return '' !== topersia_g_hub_type() || null !== topersia_g_hub_term() || '' !== topersia_g_hub_season() || '' !== topersia_g_hub_group();
 	}
 }
 
@@ -239,6 +297,10 @@ if ( ! function_exists( 'topersia_g_hub_types' ) ) {
 			return array( $type );
 		}
 		$reg = topersia_g_hub_registry();
+		$grp = topersia_g_hub_group();
+		if ( '' !== $grp ) {
+			return array_values( array_intersect( (array) topersia_g_hub_groups()[ $grp ]['types'], array_keys( $reg ) ) );
+		}
 		/* حالت فصل: فقط نوع‌های دارای فیلد «بهترین فصل سفر» */
 		if ( '' !== topersia_g_hub_season() ) {
 			return array_keys( array_filter( $reg, function ( $row ) { return '' !== $row['season']; } ) );
@@ -271,7 +333,7 @@ if ( ! function_exists( 'topersia_g_hub_pool' ) ) {
 
 		$term = topersia_g_hub_term();
 		$seas = topersia_g_hub_season();
-		$key  = $term ? 't' . $term->term_id : ( '' !== $seas ? 's' . $seas : implode( ',', topersia_g_hub_types() ) );
+		$key  = $term ? 't' . $term->term_id : ( '' !== $seas ? 's' . $seas : ( '' !== topersia_g_hub_group() ? 'g' . topersia_g_hub_group() : implode( ',', topersia_g_hub_types() ) ) );
 
 		if ( isset( $memo[ $key ] ) ) {
 			return $memo[ $key ];
@@ -445,6 +507,9 @@ if ( ! function_exists( 'topersia_g_hub_url' ) ) {
 		if ( '' !== $seas ) {
 			return topersia_g_season_url( $seas, $page );
 		}
+		if ( '' !== topersia_g_hub_group() ) {
+			return topersia_g_hub_group_url( topersia_g_hub_group(), $page );
+		}
 		$url  = $term ? get_term_link( $term ) : ( '' !== $type ? (string) get_post_type_archive_link( $type ) : '' );
 		$url  = is_wp_error( $url ) ? '' : (string) $url;
 		return ( $page > 1 && '' !== $url ) ? trailingslashit( $url ) . 'page/' . (int) $page . '/' : $url;
@@ -587,11 +652,7 @@ if ( ! function_exists( 'topersia_g_hub_name' ) ) {
 		if ( '' !== $seas ) {
 			return (string) topersia_g_glossary_label( '34', $seas );
 		}
-		$type   = topersia_g_hub_type();
-		$titles = topersia_g_hub_titles();
-		$kinds  = topersia_g_kind_labels();
-		$tpl    = isset( $titles[ $type ] ) ? $titles[ $type ] : topersia_g_t( isset( $kinds[ $type ] ) ? $kinds[ $type ] : $type );
-		return sprintf( $tpl, topersia_g_news_place_name( $place_id ) );
+		return sprintf( topersia_g_hub_tpl(), topersia_g_news_place_name( $place_id ) );
 	}
 }
 
@@ -630,12 +691,8 @@ if ( ! function_exists( 'topersia_g_hub_title' ) ) {
 			/* translators: %s: نام فصل */
 			return sprintf( __( '%s در ایران', 'topersia' ), (string) topersia_g_glossary_label( '34', $seas ) );
 		}
-		$type   = topersia_g_hub_type();
-		$titles = topersia_g_hub_titles();
-		$kinds  = topersia_g_kind_labels();
-		$tpl    = isset( $titles[ $type ] ) ? $titles[ $type ] : topersia_g_t( isset( $kinds[ $type ] ) ? $kinds[ $type ] : $type );
 		/* translators: %s: جمع نوع با نام مکان، مثل «شهرهای ایران» */
-		return sprintf( __( '%s: فهرست کامل با جست‌وجو و فیلتر استان', 'topersia' ), sprintf( $tpl, topersia_g_news_place_name( $place_id ) ) );
+		return sprintf( __( '%s: فهرست کامل با جست‌وجو و فیلتر استان', 'topersia' ), sprintf( topersia_g_hub_tpl(), topersia_g_news_place_name( $place_id ) ) );
 	}
 }
 
@@ -726,6 +783,31 @@ if ( ! function_exists( 'topersia_g_hub_province_of' ) ) {
 	}
 }
 
+/**
+ * «شهرستان Y» یک روستا از رابطۀ شهرستان ← روستا (JetEngine #76) — رابطه، نه متن؛ فقط شهرستان منتشرشده
+ * و غیرنمونه (نمونه فقط در پیش‌نمایش). شهرستان صفحه ندارد، پس بی پیوند. نبود ← تهی.  دستۀ 53 بند ۶ب
+ */
+if ( ! function_exists( 'topersia_g_hub_county_of' ) ) {
+	function topersia_g_hub_county_of( $id ) {
+		if ( 'tp_village' !== get_post_type( $id ) ) {
+			return '';
+		}
+		$ids = array_values( array_filter( (array) topersia_g_rel_ids( $id, array( array( 'id' => 76, 'dir' => 'parents' ) ) ), function ( $c ) {
+			return ! topersia_g_sample_hidden( $c );
+		} ) );
+		if ( ! $ids ) {
+			return '';
+		}
+		$name = (string) topersia_g_name( (int) reset( $ids ) );
+		$word = (string) __( 'شهرستان', 'topersia' );
+		if ( '' === $name ) {
+			return '';
+		}
+		/* translators: %s: نام شهرستان */
+		return false !== strpos( $name, $word ) ? $name : sprintf( __( 'شهرستان %s', 'topersia' ), $name );
+	}
+}
+
 /** پیوست عکس کاشی: عکس خود مورد ← عکس نخستین نیای دارای عکس (هرگز نمونه)؛ نبود ← صفر (آیکون نوع). */
 if ( ! function_exists( 'topersia_g_hub_card_image' ) ) {
 	function topersia_g_hub_card_image( $id ) {
@@ -761,6 +843,10 @@ if ( ! function_exists( 'topersia_g_hub_card' ) ) {
 
 		if ( isset( $kinds[ $type ] ) ) {
 			$parts[] = esc_html( topersia_g_t( $kinds[ $type ] ) );
+		}
+		$county = topersia_g_hub_county_of( $id );
+		if ( '' !== $county ) {
+			$parts[] = esc_html( $county );
 		}
 		$prov = 'tp_province' === $type ? 0 : topersia_g_hub_province_of( $id );
 		if ( $prov ) {
@@ -812,7 +898,7 @@ if ( function_exists( 'add_action' ) ) {
 	}, 20, 2 );
 
 	add_filter( 'query_vars', function ( $vars ) {
-		return array_merge( $vars, array( 'tp_facet', 'season', 'tp_season' ) );
+		return array_merge( $vars, array( 'tp_facet', 'season', 'tp_season', 'tp_hubgroup' ) );
 	} );
 
 	/* یک‌بار بازسازی قاعده‌ها، فقط اگر امضای نامک‌ها عوض شود. */
@@ -834,7 +920,16 @@ if ( function_exists( 'add_action' ) ) {
 		add_rewrite_rule( '^(?:' . $bases . ')/([^/]+)/page/([0-9]+)/?$', 'index.php?tp_season=$matches[1]&paged=$matches[2]', 'top' );
 		add_rewrite_rule( '^(?:' . $bases . ')/([^/]+)/?$', 'index.php?tp_season=$matches[1]', 'top' );
 
-		$sig   = md5( implode( '|', $sig ) . '|' . $bases . '|hub-v2' );
+		/* هاب‌های گروهی (دستۀ 53 بند ۹) */
+		$gsig = '';
+		foreach ( topersia_g_hub_groups() as $gkey => $g ) {
+			$gslug = preg_quote( trim( (string) $g['slug'], '/' ), '#' );
+			add_rewrite_rule( '^' . $gslug . '/page/([0-9]+)/?$', 'index.php?tp_hubgroup=' . $gkey . '&paged=$matches[1]', 'top' );
+			add_rewrite_rule( '^' . $gslug . '/?$', 'index.php?tp_hubgroup=' . $gkey, 'top' );
+			$gsig .= $gkey . '=' . $gslug . ',';
+		}
+
+		$sig   = md5( implode( '|', $sig ) . '|' . $bases . '|' . $gsig . '|hub-v3' );
 		if ( get_option( 'topersia_hub_rules' ) !== $sig ) {
 			flush_rewrite_rules( false );
 			update_option( 'topersia_hub_rules', $sig, false );
@@ -853,11 +948,12 @@ if ( function_exists( 'add_action' ) ) {
 			$q->set( 'post__in', array( 0 ) );   /* نامک فصل ناشناس ← ۴۰۴ در template_redirect پایین */
 			return;
 		}
-		if ( '' === $seas && ! $q->is_post_type_archive( $types ) && ! $q->is_tax( 'tpc_tag' ) ) {
+		$grp = topersia_g_hub_group();
+		if ( '' === $seas && '' === $grp && ! $q->is_post_type_archive( $types ) && ! $q->is_tax( 'tpc_tag' ) ) {
 			return;
 		}
 		$ids = topersia_g_hub_ids();
-		if ( '' !== $seas ) {
+		if ( '' !== $seas || '' !== $grp ) {
 			$q->set( 'post_type', topersia_g_hub_types() );
 			$q->is_home    = false;
 			$q->is_archive = true;
@@ -889,7 +985,7 @@ if ( function_exists( 'add_action' ) ) {
 		if ( $pre || ! $query->is_main_query() || $query->get( 'paged' ) > 1 ) {
 			return $pre;
 		}
-		if ( $query->is_post_type_archive( array_keys( topersia_g_hub_registry() ) ) || $query->is_tax( 'tpc_tag' ) || '' !== topersia_g_hub_season() ) {
+		if ( $query->is_post_type_archive( array_keys( topersia_g_hub_registry() ) ) || $query->is_tax( 'tpc_tag' ) || '' !== topersia_g_hub_season() || '' !== topersia_g_hub_group() ) {
 			status_header( 200 );
 			return true;
 		}

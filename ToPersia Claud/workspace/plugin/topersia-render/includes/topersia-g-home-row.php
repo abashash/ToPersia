@@ -146,7 +146,8 @@ if ( ! function_exists( 'topersia_g_home_events_col' ) ) {
 			return '';
 		}
 
-		$all = topersia_g_hub_link_for( 'tp_festival' );
+		/* ستون هر چهار نوع رویداد را دارد ← هاب گروهی /events/، نه فقط جشنواره‌ها — دستۀ 53 بند ۹ */
+		$all = function_exists( 'topersia_g_hub_group_url' ) ? topersia_g_hub_group_url( 'events' ) : topersia_g_hub_link_for( 'tp_festival' );
 		return topersia_g_home_section( 'tp-home-events', __( 'رویدادها و جشنواره‌ها', 'topersia' ), '<ul class="tp-home-events">' . $rows . '</ul>',
 			'' !== $all ? array( $all, __( 'مشاهدۀ همه', 'topersia' ) ) : array(), 'tp-home-col' );
 	}
