@@ -223,9 +223,10 @@ if ( ! function_exists( 'topersia_g_sc_footer_partners' ) ) {
 			$alt   = '' !== $p['alt'] ? $p['alt'] : $p['name'];
 			$img   = topersia_g_ft_img( $p['img'], $alt, 'tp-ft-logo__img' );
 			$cls   = 'tp-ft-logo' . ( $p['dark'] ? ' tp-ft-logo--dark' : '' );
+			$sty   = ' style="--tp-lh:' . esc_attr( (string) topersia_g_ft_logo_scale( $p['img'] ) ) . '"';   /* اندازۀ اپتیکال — P5-D609 */
 			$inner = '' !== $p['url']
-				? '<a class="' . $cls . '" href="' . esc_url( $p['url'] ) . '" target="_blank" rel="noopener nofollow">' . $img . '</a>'
-				: '<span class="' . $cls . '">' . $img . '</span>';
+				? '<a class="' . $cls . '"' . $sty . ' href="' . esc_url( $p['url'] ) . '" target="_blank" rel="noopener nofollow">' . $img . '</a>'
+				: '<span class="' . $cls . '"' . $sty . '>' . $img . '</span>';
 			$items .= '<li class="tp-ft-row__item">' . $inner . '</li>';
 		}
 
@@ -294,15 +295,67 @@ if ( ! function_exists( 'topersia_g_ft_social_label' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_ft_brand_fill' ) ) {
+	/**
+	 * رنگ اصلی هر شبکه (P5-D610) — نام میزبان ← [ رنگ برند ، کاشی ]. رنگ نشانه همیشه رنگ خود برند است؛ اگر روی کاشی روشن
+	 * مشترک (#FFFFFF) کمتر از ۳:۱ دارد، کاشی تیره (--tp-ft-tile-dark) می‌گیرد — رنگ کاشی عوض می‌شود نه رنگ برند.
+	 * کنتراست هر جفت را گیت پاورقی در هر سه حالت می‌سنجد. بله و روبیکا (tp-svg) رنگ را در خود SVG دارند؛ رنگ این‌جا نمایندۀ
+	 * سنجش است (روبیکا چندرنگ؛ سبز چیرۀ لوگو).
+	 */
+	function topersia_g_ft_brand_fill( $s ) {
+		$map  = array(
+			'instagram.com'   => array( '#E4405F', 'l' ),
+			'facebook.com'    => array( '#1877F2', 'l' ),
+			'x.com'           => array( '#000000', 'l' ),
+			'twitter.com'     => array( '#000000', 'l' ),
+			'youtube.com'     => array( '#FF0000', 'l' ),
+			't.me'            => array( '#26A5E4', 'd' ),
+			'whatsapp.com'    => array( '#25D366', 'd' ),
+			'wa.me'           => array( '#25D366', 'd' ),
+			'linkedin.com'    => array( '#0A66C2', 'l' ),
+			'pinterest.com'   => array( '#E60023', 'l' ),
+			'tiktok.com'      => array( '#000000', 'l' ),
+			'medium.com'      => array( '#000000', 'l' ),
+			'tripadvisor.com' => array( '#34E0A1', 'd' ),
+			'tumblr.com'      => array( '#36465D', 'l' ),
+			'ble.ir'          => array( '#0DCB9D', 'd' ),
+			'rubika.ir'       => array( '#82B52A', 'd' ),
+		);
+		$host = preg_replace( '/^(www|m)\./', '', (string) wp_parse_url( $s['url'], PHP_URL_HOST ) );
+		foreach ( $map as $h => $c ) {
+			if ( $host === $h || substr( $host, -strlen( '.' . $h ) ) === '.' . $h ) {
+				return array( $c[0], 'd' === $c[1] ? 'var(--tp-ft-tile-dark)' : 'var(--tp-ft-tile)' );
+			}
+		}
+		return null;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_logo_scale' ) ) {
+	/**
+	 * اندازۀ اپتیکال هم‌وزن لوگوی همکار (P5-D609): لوگوی پهن کوتاه‌تر می‌نشیند تا سطح دیداری نزدیک لوگوی مربعی شود —
+	 * بلندی = بلندی کاشی × (۱ / نسبت)^۰٫۳۵، سقف ۱؛ پهنا را max-width:100% در CSS می‌بندد. نسبت از ابعاد پیوست.
+	 */
+	function topersia_g_ft_logo_scale( $id ) {
+		$m  = function_exists( 'wp_get_attachment_metadata' ) ? wp_get_attachment_metadata( $id ) : array();
+		$ar = ( is_array( $m ) && ! empty( $m['width'] ) && ! empty( $m['height'] ) ) ? $m['width'] / $m['height'] : 1;
+		return round( min( 1, pow( 1 / max( .2, $ar ), .35 ) ), 3 );
+	}
+}
+
 if ( ! function_exists( 'topersia_g_sc_footer_social' ) ) {
 	/** [tp_footer_social] — شبکه‌ها از option؛ بی شبکه ← هیچ خروجی. */
 	function topersia_g_sc_footer_social() {
 
 		$items = '';
 
-		foreach ( topersia_g_ft_opts()['social'] as $s ) {
+		$list = topersia_g_ft_opts()['social'];
+
+		foreach ( $list as $s ) {
 			$label  = topersia_g_ft_social_label( $s );
-			$items .= '<li class="tp-ft-row__item"><a class="tp-ft-social__a" href="' . esc_url( $s['url'] ) . '" target="_blank" rel="noopener me" aria-label="' . esc_attr( $label ) . '" title="' . esc_attr( $label ) . '">'
+			$fill   = topersia_g_ft_brand_fill( $s );
+			$style  = $fill ? ' style="--tp-soc:' . esc_attr( $fill[0] ) . ';--tp-soc-tile:' . esc_attr( $fill[1] ) . '"' : '';
+			$items .= '<li class="tp-ft-row__item"><a class="tp-ft-social__a' . ( $fill ? ' tp-ft-social__a--brand' : '' ) . '"' . $style . ' href="' . esc_url( $s['url'] ) . '" target="_blank" rel="noopener me" aria-label="' . esc_attr( $label ) . '" title="' . esc_attr( $label ) . '">'
 				. topersia_g_ft_social_icon( $s, $label ) . '</a></li>';
 		}
 
@@ -311,7 +364,7 @@ if ( ! function_exists( 'topersia_g_sc_footer_social' ) ) {
 		}
 
 		return '<section class="tp-ft tp-ft-social"><h2 class="tp-ft-h">' . esc_html__( 'شبکه‌های اجتماعی', 'topersia' ) . '</h2>'
-			. '<ul class="tp-ft-row" role="list">' . $items . '</ul></section>';
+			. '<ul class="tp-ft-row tp-ft-social__grid" role="list" style="--tp-ft-soc-cols:' . (int) ceil( count( $list ) / 2 ) . ';--tp-ft-soc-cols-s:' . (int) ceil( count( $list ) / 3 ) . '">' . $items . '</ul></section>';   /* دو ردیف هم‌شمار */
 	}
 }
 

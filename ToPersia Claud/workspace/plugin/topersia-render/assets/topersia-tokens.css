@@ -196,24 +196,39 @@ html[data-tp-mode="dark"]{
   --tp-s-winter:#5D93BF; --tp-s-winter-soft:#1A2833;
 }
 
-/* پاورقی المنتوری (#6128) — نوار سرمه‌ای ثابت برند در هر سه حالت.  دستۀ 53 بند ۱۶
-   زمینه عمداً با حالت عوض نمی‌شود (همان #092143 قالب)؛ متن و پیوند روی همین زمینه ≥ ۴٫۵،
-   نشان فوکوس و مرز ≥ ۳. کاشی لوگوی همکار سفید است تا لوگوی رنگی روی سرمه‌ای گم نشود. */
+/* پاورقی المنتوری (#6128) — هم‌رنگ سایت در هر سه حالت (P5-D608؛ جای نوار سرمه‌ای ثابت). #6128 هیچ رنگ ثابتی ندارد؛
+   زمینه همان --tp-surface-2 کاشی‌ها، متن و عنوان --tp-text و --tp-text-strong، پیوند --tp-primary-text، خط --tp-border حالت.
+   کاشی همکاران و شبکه‌ها در هر سه حالت یکسان است (P5-D609 · P5-D610): روشن #FFFFFF با قاب #DDD5C8؛ کاشی تیرۀ
+   شبکه‌ای که رنگ برندش روی سفید زیر ۳:۱ است #11161B (همان زمینۀ حالت تیره). */
 :root,
 html[data-tp-mode="light"],
 html[data-tp-mode="evening"],
 html[data-tp-mode="dark"]{
-  --tp-ft-bg:#092143;
-  --tp-ft-text:#E6EBF2;
-  --tp-ft-muted:#B8C4D4;
-  --tp-ft-head:#FFFFFF;
-  --tp-ft-link:#7AD4CD;
-  --tp-ft-link-hover:#FFFFFF;
-  --tp-ft-focus:#E1A62B;
-  --tp-ft-line:#2C4466;
+  --tp-ft-bg:var(--tp-surface-2);
+  --tp-ft-text:var(--tp-text);
+  --tp-ft-muted:var(--tp-text);
+  --tp-ft-head:var(--tp-text-strong);
+  --tp-ft-link:var(--tp-primary-text);
+  --tp-ft-link-hover:var(--tp-text-strong);
+  --tp-ft-focus:var(--tp-primary-text);
+  --tp-ft-line:var(--tp-border);
   --tp-ft-tile:#FFFFFF;
-  --tp-ft-tile-ink:#092143;
+  --tp-ft-tile-line:#DDD5C8;
+  --tp-ft-tile-ink:#2A2A28;
+  --tp-ft-tile-dark:#11161B;
+}
+/* ردیف شبکه‌ها و کاشی همکاران هماهنگ (P5-D610): در دسکتاپ بلندی کاشی همکار = دو ردیف شبکه + فاصله،
+   پس ردیف اول همکاران با بلوک دوردیفۀ شبکه‌ها هم‌لبه است. */
+:root{
   --tp-ft-row-h:44px;
+  --tp-ft-gap:8px;
+  --tp-ft-logo-h:64px;
+}
+@media (min-width:1025px){
+  :root{
+    --tp-ft-row-h:48px;
+    --tp-ft-logo-h:calc(2 * var(--tp-ft-row-h) + var(--tp-ft-gap));
+  }
 }
 
 /* متنِ فصل — نسخۀ «متن» هر رنگ فصل، همان الگوی ـtext پالت.  P5-D153

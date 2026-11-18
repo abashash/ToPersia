@@ -385,13 +385,14 @@ tp441_mut( 'بند ۱۷: فقط تبلیغ فعالِ پر نمایش داده �
 
 $w53_ft_set( array( 'partners' => array( array( 'img' => 7, 'name' => 'Alpha', 'url' => 'https://alpha.example/' ), array(), array( 'img' => 8, 'name' => 'Beta', 'url' => '', 'dark' => 1 ) ) ) );
 $h = topersia_g_sc_footer_partners();
-$w53_okp = 2 === substr_count( $h, '<li class="tp-ft-row__item">' ) && false !== strpos( $h, 'همکاران ما' ) && 1 === substr_count( $h, 'target="_blank" rel="noopener nofollow"' )
+$w53_okp = 2 === substr_count( $h, '<li class="tp-ft-row__item">' ) && 2 === substr_count( $h, 'style="--tp-lh:' ) && false !== strpos( $h, 'همکاران ما' ) && 1 === substr_count( $h, 'target="_blank" rel="noopener nofollow"' )
 	&& false !== strpos( $h, 'tp-ft-logo tp-ft-logo--dark' ) && false !== strpos( $h, 'alt="Alpha"' );
 $w53_ft_set( array() );
 $w53_okp = $w53_okp && '' === topersia_g_sc_footer_partners() && '' === topersia_g_sc_footer_social() && '' === topersia_g_sc_footer_ads();
 $w53_ft_set( array( 'social' => array( array( 'url' => 'https://www.instagram.com/x/' ), array( 'url' => 'ftp://bad' ), array( 'url' => 'https://t.me/x', 'label' => 'Telegram' ), array( 'url' => 'https://ble.ir/x', 'label' => 'Bale', 'icon' => 'bale', 'lib' => 'tp-svg' ), array( 'url' => 'https://rubika.ir/x', 'label' => 'Rubika', 'icon' => 'rubika', 'lib' => 'tp-svg' ) ) ) );
 $h = topersia_g_sc_footer_social();
-$w53_okp = $w53_okp && 4 === substr_count( $h, 'tp-ft-social__a' ) && 2 === substr_count( $h, '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' ) && 2 === substr_count( $h, 'tp-ft-social__svg--brand' ) && false !== strpos( $h, 'fill="#0DCB9D"' ) && 21 === substr_count( $h, '<polygon fill=' ) && false === strpos( $h, 'javis' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
+$w53_okp = $w53_okp && 4 === substr_count( $h, '<a class="tp-ft-social__a' )
+	&& false !== strpos( $h, 'style="--tp-ft-soc-cols:2;--tp-ft-soc-cols-s:2"' ) && false !== strpos( $h, '--tp-soc:#26A5E4;--tp-soc-tile:var(--tp-ft-tile-dark)' ) && false !== strpos( $h, '--tp-soc:#E4405F;--tp-soc-tile:var(--tp-ft-tile)' ) && 4 === substr_count( $h, 'tp-ft-social__a--brand' ) && 2 === substr_count( $h, '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' ) && 2 === substr_count( $h, 'tp-ft-social__svg--brand' ) && false !== strpos( $h, 'fill="#0DCB9D"' ) && 21 === substr_count( $h, '<polygon fill=' ) && false === strpos( $h, 'javis' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
 $w53_ft_set( array( 'brand' => array( 'text_fa' => '' ) ) );
 $h = topersia_g_sc_footer_brand();
 $w53_okp = $w53_okp && false !== strpos( $h, 'توپرشیا مرجع جامع اطلاعات ایران' ) && false === strpos( $h, '<img' );
@@ -423,6 +424,16 @@ tp441_mut( 'بند ۱۶ CSS پاورقی: محدود به [data-elementor-type="
 tp441_mut( 'بند ۱۶ توکن: --tp-ft-* در یک بلوک برای هر سه حالت — جهش: حالت تیره جا بماند',
 	function ( $s ) { return (bool) preg_match( '/html\[data-tp-mode="evening"\],\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', $s ); }, $w53_tok,
 	preg_replace( '/,\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', '{--tp-ft-bg:', $w53_tok ) );
+
+tp441_mut( 'دستۀ 53-پ پاورقی هم‌رنگ سایت: زمینه، متن و پیوند از توکن همان حالت (--tp-surface-2 · --tp-text · --tp-primary-text)، نه رنگ ثابت — جهش: زمینۀ سرمه‌ای ثابت',
+	function ( $s ) { return false !== strpos( $s, '--tp-ft-bg:var(--tp-surface-2);' ) && false !== strpos( $s, '--tp-ft-text:var(--tp-text);' ) && false !== strpos( $s, '--tp-ft-link:var(--tp-primary-text);' ); }, $w53_tok,
+	str_replace( '--tp-ft-bg:var(--tp-surface-2);', '--tp-ft-bg:#092143;', $w53_tok ) );
+tp441_mut( 'P5-D610 رنگ برند ثابت می‌ماند و کاشی عوض می‌شود: تلگرام، واتس‌اپ، تریپ‌ادوایزر، بله و روبیکا (زیر ۳:۱ روی سفید) کاشی تیره — جهش: تلگرام کاشی روشن',
+	function ( $s ) { foreach ( array( "'t.me'            => array( '#26A5E4', 'd' )", "'whatsapp.com'    => array( '#25D366', 'd' )", "'tripadvisor.com' => array( '#34E0A1', 'd' )", "'ble.ir'          => array( '#0DCB9D', 'd' )" ) as $n ) { if ( false === strpos( $s, $n ) ) { return false; } } return true; }, $w53_ft,
+	str_replace( "'t.me'            => array( '#26A5E4', 'd' )", "'t.me'            => array( '#26A5E4', 'l' )", $w53_ft ) );
+tp441_mut( 'دستۀ 53-پ شبکه‌ها: دو ردیف هم‌شمار (ستون = نیمۀ شمار، گرد به بالا) و رنگ برند فقط از نقشۀ ثابت — جهش: ستون = همۀ شمار',
+	function ( $s ) { return false !== strpos( $s, '(int) ceil( count( $list ) / 2 )' ) && false !== strpos( $s, '$fill   = topersia_g_ft_brand_fill( $s );' ); }, $w53_ft,
+	str_replace( '(int) ceil( count( $list ) / 2 )', 'count( $list )', $w53_ft ) );
 
 tp441_mut( 'بند ۱۹ گرم‌کن: شمار ساخت فقط پس از نوشتن واقعی قطعه (درون ob_start) و فقط برای مکانی که در پالایش است (پرکاربرد در کش، نه شمارندۀ بازدید) — جهش: بی اعتبارسنجی',
 	function ( $s ) {

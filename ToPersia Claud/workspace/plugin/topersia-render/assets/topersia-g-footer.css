@@ -146,49 +146,89 @@ html:root [data-elementor-type="footer"] .tp-ft-brand__text{
   list-style:none;
 }
 .tp-ft-row__item{margin:0;padding:0;list-style:none;min-width:0}
+/* --- همکاران (P5-D609): کاشی روشن یکسان در هر سه حالت، سه‌تایی وسط‌چین؛ ردیف ناقص هم وسط ------------- */
+html:root [data-elementor-type="footer"] :is(.tp-ft-partners,.tp-ft-social) .tp-ft-h{text-align:center}
+html:root [data-elementor-type="footer"] .tp-ft-partners .tp-ft-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+}
+html:root [data-elementor-type="footer"] .tp-ft-partners .tp-ft-row__item{
+  flex:0 0 calc((100% - 24px) / 3);
+  max-width:220px;
+}
 .tp-ft-logo{
   display:flex;
   align-items:center;
   justify-content:center;
-  height:var(--tp-ft-row-h);
-  padding:6px 12px;
+  width:100%;
+  height:var(--tp-ft-logo-h);
+  padding:10px;
   border-radius:var(--tp-control-radius);
+  border:1px solid var(--tp-ft-tile-line);
   background:var(--tp-ft-tile);
 }
-.tp-ft-logo--dark{background:transparent;border:1px solid var(--tp-ft-line)}
 .tp-ft-logo__img,
 html:root [data-elementor-type="footer"] .tp-ft-logo__img{
   display:block;
-  height:100%;
+  height:calc((var(--tp-ft-logo-h) - 22px) * var(--tp-lh,1));
   width:auto;
-  max-width:140px;
+  max-width:100%;
   object-fit:contain;
 }
 html:root [data-elementor-type="footer"] .tp-ft-logo--demo{
-  min-width:96px;
   background:transparent;
   border:1px dashed var(--tp-ft-line);
   color:var(--tp-ft-muted);
   font-size:.75rem;
 }
-html:root [data-elementor-type="footer"] a.tp-ft-logo:hover{text-decoration:none;outline:2px solid var(--tp-ft-link);outline-offset:2px}
+html:root [data-elementor-type="footer"] a.tp-ft-logo:hover{text-decoration:none;outline:2px solid var(--tp-ft-focus);outline-offset:2px}
 
+/* --- شبکه‌ها (P5-D610): دو ردیف متعادل وسط‌چین (ستون = نیمۀ شمار، از PHP)؛ زیر ۳۶۰ سه ردیف (۵+۵+۴)، بی یتیم --- */
+/* flex و نه grid: ردیف کوتاه آخر (۴ از ۵+۵+۴) هم وسط می‌نشیند؛ پهنای بیشینه شمار ستون را می‌سازد */
+html:root [data-elementor-type="footer"] .tp-ft-social__grid{
+  --tp-ft-soc-n:var(--tp-ft-soc-cols,7);
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:var(--tp-ft-gap);
+  max-width:calc(var(--tp-ft-soc-n) * var(--tp-ft-row-h) + (var(--tp-ft-soc-n) - 1) * var(--tp-ft-gap));
+  margin-inline:auto;
+}
+/* ردیف کپی‌رایت: ظرف wd-section-stretch وودمارت 100vw است؛ جایی که نوار اسکرول کلاسیک دارد (فایرفاکس رومیزی، کروم بی‌سر)
+   تا ۷٫۵px از هر سو بیرون می‌زند و در ۳۲۰ نویسۀ اول بریده می‌شد (-۴px). فاصلۀ درونی متن این را جذب می‌کند. */
+@media (max-width:767px){
+  html:root [data-elementor-type="footer"] .wd-section-stretch .wd-text-block{padding-inline:16px}
+}
+
+/* موبایل: ستون پاورقی ~۳۴۰px است و ۷ کاشی ۴۴px جا نمی‌شود — سه ردیف ۵+۵+۴ (بی یتیم) */
+@media (max-width:767px){
+  html:root [data-elementor-type="footer"] .tp-ft-social__grid{--tp-ft-soc-n:var(--tp-ft-soc-cols-s,5)}
+}
 html:root [data-elementor-type="footer"] .tp-ft-social__a{
   display:flex;
   align-items:center;
   justify-content:center;
   width:var(--tp-ft-row-h);
   height:var(--tp-ft-row-h);
-  border-radius:50%;
-  border:1px solid var(--tp-ft-line);
-  color:var(--tp-ft-link);
-  font-size:1.125rem;
+  border-radius:var(--tp-control-radius);
+  border:1px solid var(--tp-ft-tile-line);
+  background:var(--tp-ft-tile);
+  color:var(--tp-ft-tile-ink);
+  font-size:1.25rem;
   line-height:1;
 }
+/* رنگ برند روی کاشی روشن یا تیرۀ ثابت (از PHP) */
+html:root [data-elementor-type="footer"] .tp-ft-social__a--brand{
+  background:var(--tp-soc-tile);
+  color:var(--tp-soc);
+}
 html:root [data-elementor-type="footer"] .tp-ft-social__a:hover{
-  color:var(--tp-ft-tile-ink);
-  background:var(--tp-ft-link-hover);
+  color:var(--tp-soc,var(--tp-ft-tile-ink));
   text-decoration:none;
+  outline:2px solid var(--tp-ft-focus);
+  outline-offset:2px;
 }
 html:root [data-elementor-type="footer"] .tp-ft-social__a :is(svg,i){
   width:1em;
@@ -197,6 +237,9 @@ html:root [data-elementor-type="footer"] .tp-ft-social__a :is(svg,i){
   fill:currentColor;
   color:inherit;
 }
-/* بله و روبیکا با رنگ خود لوگو (P5-D606) — کمی بزرگ‌تر تا شکل رنگی در دایره خوانا بماند */
-html:root [data-elementor-type="footer"] .tp-ft-social__a .tp-ft-social__svg--brand{width:1.5rem;height:1.5rem}
+/* بله و روبیکا با رنگ خود لوگو (P5-D606) */
+html:root [data-elementor-type="footer"] .tp-ft-social__a .tp-ft-social__svg--brand{width:62%;height:62%}
 .tp-ft-social__ch{font-weight:700}
+
+/* --- خط‌های جداکنندۀ ظرف‌های #6128 (رنگ از داده برداشته شد — P5-D608) ----------------------------- */
+html:root [data-elementor-type="footer"] .e-con{border-color:var(--tp-ft-line)}
