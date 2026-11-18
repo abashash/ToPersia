@@ -1,0 +1,260 @@
+'use strict';
+/**
+ * گیت پاورقی — دستۀ 53-پ بند ۱۸ و P5-D606، روی نسخۀ محلی (کروم، Playwright از ./pw.js).
+ *
+ *   node tests/footer-gate.js            # همه
+ *   TP_TIMEOUT_X=3 node tests/footer-gate.js
+ *
+ * برای هر زبان (fa · en · ar) و هر شمار تبلیغ ۰ تا ۴ (جای نمونه در حالت پیش‌نمایش؛ گزینۀ demo_ads موقتاً، در پایان
+ * حتی با خطا برمی‌گردد) در ۳۹۰ و ۳۲۰:
+ *   ▸ هیچ شورت‌کد خام ([tp_footer… · [html_block) در صفحه
+ *   ▸ شمار خانۀ تبلیغ = همان شمار؛ هیچ سرریز افقی (scrollWidth و لبۀ هر عنصر پاورقی)
+ * در ۱۴۴۰، هر زبان:
+ *   ▸ نمایش آیکون شبکه‌ها (P5-D606): هر پیوند یا SVG با قاب ناصفر دارد، یا <i> با ::before غیرتهی و قلمِ بارگذاری‌شدۀ
+ *     همان خانواده؛ حرف جایگزین (tp-ft-social__ch) افتادن است
+ *   ▸ کنتراست متن پاورقی ≥ ۴٫۵ و آیکون تک‌رنگ ≥ ۳ در هر سه حالت (light · evening · dark)؛ لوگوی رنگی برند معاف (WCAG ۱٫۴٫۱۱)
+ * عکس هر ترکیب در tests/.screens/footer-gate/ (بیرون از git).
+ *
+ * کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
+ */
+const ENV  = require( './env.js' );
+const { chromium } = require( './pw.js' );
+const { execFileSync } = require( 'child_process' );
+const fs   = require( 'fs' );
+const path = require( 'path' );
+
+const X     = Math.max( 1, Number( process.env.TP_TIMEOUT_X || 1 ) );
+const SHOTS = path.join( __dirname, '.screens', 'footer-gate' );
+const LANGS = { fa: '/', en: '/en/', ar: '/ar/' };
+const MODES = [ 'light', 'evening', 'dark' ];
+
+if ( 'topersia.local' !== ENV.host ) {
+	console.error( 'فقط topersia.local' );
+	process.exit( 2 );
+}
+
+const php = args => execFileSync( ENV.php, args, { cwd: ENV.workspace, encoding: 'utf8', maxBuffer: 1 << 26 } );
+const wp  = code => php( [ ENV.wpCli, '--path=' + ENV.wp, '--url=' + ENV.base, 'eval', code ] );
+
+let fails = 0, passes = 0;
+const ok  = ( cond, msg ) => { if ( cond ) { passes++; console.log( '  ✅ ' + msg ); } else { fails++; console.log( '  ❌ ' + msg ); } };
+
+const setDemo = n => wp( '$o = get_option( "topersia_footer_blocks", array() ); $o = is_array( $o ) ? $o : array(); $o["demo_ads"] = ' + Number( n ) + '; update_option( "topersia_footer_blocks", $o, false );' );
+
+/* ── در صفحه ─────────────────────────────────────────────────────────── */
+function probeLayout() {
+	const foot = document.querySelector( '[data-elementor-type="footer"]' );
+	const html = document.documentElement.innerHTML;
+	const vw   = document.documentElement.clientWidth;
+	const bad  = [];
+	if ( foot ) {
+		/* فقط محتوای دیدنی (متن، تصویر، آیکون، پیوند) — ظرف‌های تمام‌عرض وودمارت (wd-section-stretch) عمداً با حاشیۀ منفی
+		   از لبه بیرون می‌زنند و بریده می‌شوند؛ سرریز واقعی را scrollWidth سند و لبۀ همین برگ‌ها می‌گیرد. */
+		/* لبۀ دیدنی: برای عنصر متنی گسترۀ خود نویسه‌ها (Range)، نه جعبه — ظرف wd-section-stretch وودمارت 100vw است و در
+		   کروم بی‌سر با نوار اسکرول کلاسیک ۱۵px از سند پهن‌تر، ولی متن وسط‌چین درونش بریده نمی‌شود. مرز = پهنای سند. */
+		const edge = Math.min( vw, document.documentElement.scrollWidth );
+		foot.querySelectorAll( 'img, svg, i, a, h1, h2, h3, h4, p, li, span, input, button' ).forEach( el => {
+			let r = el.getBoundingClientRect();
+			if ( ! r.width || ! r.height || 'hidden' === getComputedStyle( el ).visibility || el.closest( 'svg' ) !== el && el.closest( 'svg' ) ) { return; }
+			if ( [ ...el.childNodes ].some( n => 3 === n.nodeType && n.textContent.trim() ) && ! el.querySelector( 'img, svg, i' ) ) { const g = document.createRange(); g.selectNodeContents( el ); r = g.getBoundingClientRect(); }
+			if ( r.right > edge + 1 || r.left < -1 ) { bad.push( el.tagName.toLowerCase() + '.' + ( 'string' === typeof el.className ? el.className : '' ) + ' < ' + String( el.parentElement ? el.parentElement.className : '' ).slice( 0, 60 ) + ' ' + Math.round( r.left ) + '…' + Math.round( r.right ) + ' «' + ( el.textContent || '' ).trim().slice( 0, 20 ) + '»' ); }
+		} );
+	}
+	/* چیدمان همکاران و شبکه‌ها (P5-D609 · P5-D610): شمار هر ردیف و وسط‌چینی (فاصلۀ دو سوی ردیف از ظرف ≤ ۲px) */
+	const rowsOf = sel => {
+		const box = foot ? foot.querySelector( sel ) : null;
+		if ( ! box ) { return { rows: [], centred: false, sizes: [] }; }
+		const B = box.getBoundingClientRect(), by = {};
+		[ ...box.children ].forEach( c => { const r = c.getBoundingClientRect(); const k = Math.round( r.top ); ( by[ k ] = by[ k ] || [] ).push( r ); } );
+		const rows = Object.keys( by ).sort( ( a, b ) => a - b ).map( k => by[ k ] );
+		const centred = rows.every( rs => { const l = Math.min( ...rs.map( r => r.left ) ) - B.left, rr = B.right - Math.max( ...rs.map( r => r.right ) ); return Math.abs( l - rr ) <= 2; } );
+		return { rows: rows.map( rs => rs.length ), centred, sizes: [ ...new Set( rows.flat().map( r => Math.round( r.width ) + '×' + Math.round( r.height ) ) ) ] };
+	};
+	return {
+		partners: rowsOf( '.tp-ft-partners .tp-ft-row' ),
+		social:   rowsOf( '.tp-ft-social__grid' ),
+		foot:   !! foot,
+		raw:    /\[tp_footer|\[html_block/.test( html ),
+		scroll: document.documentElement.scrollWidth - vw,
+		ads:    foot ? foot.querySelectorAll( '.tp-ft-ad' ).length : -1,
+		parts:  foot ? [ 'tp-ft-brand', 'tp-ft-partners', 'tp-ft-social' ].filter( c => foot.querySelector( '.' + c ) ) : [],
+		bad:    bad.slice( 0, 6 ),
+	};
+}
+
+async function probeIcons() {
+	await document.fonts.ready;
+	const loaded = [ ...document.fonts ].filter( f => 'loaded' === f.status ).map( f => f.family.replace( /["']/g, '' ) );
+	const out = [];
+	document.querySelectorAll( '[data-elementor-type="footer"] .tp-ft-social__a' ).forEach( a => {
+		const name = a.getAttribute( 'aria-label' ) || a.href;
+		const svg  = a.querySelector( 'svg' );
+		const i    = a.querySelector( 'i' );
+		if ( a.querySelector( '.tp-ft-social__ch' ) ) { out.push( { name, ok: false, why: 'حرف جایگزین' } ); return; }
+		if ( svg ) {
+			const r = svg.getBoundingClientRect();
+			const shapes = svg.querySelectorAll( 'path,polygon,circle,use' ).length;
+			out.push( { name, ok: r.width >= 12 && r.height >= 12 && shapes > 0, why: 'svg ' + Math.round( r.width ) + '×' + Math.round( r.height ) + ' شکل ' + shapes, brand: svg.classList.contains( 'tp-ft-social__svg--brand' ) } );
+			return;
+		}
+		if ( i ) {
+			const b   = getComputedStyle( i, '::before' );
+			const fam = b.fontFamily.split( ',' )[0].replace( /["']/g, '' ).trim();
+			const r   = i.getBoundingClientRect();
+			const has = '' !== b.content && 'none' !== b.content && 'normal' !== b.content;
+			out.push( { name, ok: has && loaded.includes( fam ) && r.width > 0, why: 'i ' + fam + ( loaded.includes( fam ) ? ' بارگذاری‌شده' : ' بارگذاری‌نشده' ) + ' content=' + b.content } );
+			return;
+		}
+		out.push( { name, ok: false, why: 'بی آیکون' } );
+	} );
+	/* رنگ برند و دو ردیف هم‌شمار (خواست کاربر، دستۀ 53-پ) */
+	const as   = [ ...document.querySelectorAll( '[data-elementor-type="footer"] .tp-ft-social__a' ) ];
+	const tops = {};
+	as.forEach( a => { const t = Math.round( a.getBoundingClientRect().top ); tops[ t ] = ( tops[ t ] || 0 ) + 1; } );
+	const fill = as.filter( a => { const cs = getComputedStyle( a ); return a.classList.contains( 'tp-ft-social__a--brand' ) && ( 'none' !== cs.backgroundImage || ! /rgba\(0, 0, 0, 0\)|transparent/.test( cs.backgroundColor ) ); } ).length;
+	const logos = [ ...document.querySelectorAll( '[data-elementor-type="footer"] .tp-ft-logo' ) ].map( l => Math.round( l.getBoundingClientRect().height ) );
+	return { icons: out, rows: Object.values( tops ), fill, total: as.length, logoH: logos };
+}
+
+async function probeContrast( mode ) {
+	document.documentElement.setAttribute( 'data-tp-mode', mode );
+	await new Promise( r => setTimeout( r, 900 ) );
+	/* رنگ محاسبه‌شده: rgb()/rgba() یا color(srgb r g b / a) — color-mix (حالت سوم) به شکل دوم برمی‌گردد */
+	const rgb  = s => {
+		s = String( s );
+		let m = s.match( /rgba?\(([^)]+)\)/ );
+		if ( m ) { const a = m[1].split( /[\s,/]+/ ).filter( Boolean ).map( parseFloat ); return { r: a[0], g: a[1], b: a[2], a: a.length > 3 ? a[3] : 1 }; }
+		m = s.match( /color\(srgb\s+([^)]+)\)/ );
+		if ( m ) { const a = m[1].split( /[\s/]+/ ).filter( Boolean ).map( parseFloat ); return { r: a[0] * 255, g: a[1] * 255, b: a[2] * 255, a: a.length > 3 ? a[3] : 1 }; }
+		return null;
+	};
+	const lum  = c => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow( ( v + .055 ) / 1.055, 2.4 ); }; return .2126 * f( c.r ) + .7152 * f( c.g ) + .0722 * f( c.b ); };
+	const over = ( t, u ) => ( { r: t.r * t.a + u.r * ( 1 - t.a ), g: t.g * t.a + u.g * ( 1 - t.a ), b: t.b * t.a + u.b * ( 1 - t.a ), a: 1 } );
+	const bgOf = el => { const st = []; for ( let e = el; e; e = e.parentElement ) { const c = rgb( getComputedStyle( e ).backgroundColor ); if ( c && c.a > 0 ) { st.push( c ); if ( c.a >= 1 ) { break; } } } let base = { r: 255, g: 255, b: 255, a: 1 }; for ( let k = st.length - 1; k >= 0; k-- ) { base = over( st[ k ], base ); } return base; };
+	const ratio = ( a, b ) => { const L1 = lum( a ), L2 = lum( b ); return ( Math.max( L1, L2 ) + .05 ) / ( Math.min( L1, L2 ) + .05 ); };
+	const foot = document.querySelector( '[data-elementor-type="footer"]' );
+	const rows = [];
+	foot.querySelectorAll( '*' ).forEach( el => {
+		const r = el.getBoundingClientRect();
+		if ( ! r.width || ! r.height ) { return; }
+		const txt = [ ...el.childNodes ].filter( n => 3 === n.nodeType && n.textContent.trim() ).map( n => n.textContent.trim() ).join( ' ' );
+		const B = bgOf( el );
+		const tag = el.closest( 'h1,h2,h3,h4,.elementor-heading-title,.tp-ft-h' ) ? 'عنوان' : el.closest( '.tp-ft-brand' ) ? 'متن برند' : el.closest( '.tp-ft-ads' ) ? 'تبلیغ' : el.closest( 'a' ) ? 'پیوند' : 'متن';
+		if ( txt ) {
+			const fg = over( rgb( getComputedStyle( el ).color ), B );
+			rows.push( { kind: 'text', tag, sample: txt.slice( 0, 28 ), ratio: ratio( fg, B ), min: 4.5 } );
+		} else if ( el.matches( '.tp-ft-social__a--brand' ) ) {   /* P5-D610: رنگ برند روی کاشی خودش ≥ ۳:۱ */
+			const fg = rgb( getComputedStyle( el ).color ), T = bgOf( el );
+			rows.push( { kind: 'icon', tag: 'شبکه', sample: el.getAttribute( 'aria-label' ) || '', ratio: ratio( fg, T ), min: 3 } );
+		} else if ( el.matches( '.tp-ft-logo' ) ) {   /* کاشی همکار: یکسان در هر سه حالت */
+			rows.push( { kind: 'tile', tag: 'کاشی', sample: getComputedStyle( el ).backgroundColor, ratio: 99, min: 0 } );
+		} else if ( el.matches( '.tp-ft-social__a:not(.tp-ft-social__a--brand) > i, .tp-ft-social__a:not(.tp-ft-social__a--brand) > svg:not(.tp-ft-social__svg--brand)' ) ) {   /* آیکون رنگ برند = نشان تجاری، معاف (WCAG ۱٫۴٫۱۱) */
+			const fg = over( rgb( getComputedStyle( el ).color ), B );
+			rows.push( { kind: 'icon', sample: el.parentElement.getAttribute( 'aria-label' ) || '', ratio: ratio( fg, B ), min: 3 } );
+		}
+	} );
+	return rows.map( r => ( { ...r, ratio: Math.round( r.ratio * 100 ) / 100 } ) );
+}
+
+/* ── راننده ──────────────────────────────────────────────────────────── */
+( async () => {
+	let login, prev;
+	try {
+		login = JSON.parse( php( [ 'tests/local-login.php' ] ) );
+		prev  = wp( '$o = get_option( "topersia_footer_blocks", array() ); echo isset( $o["demo_ads"] ) ? (int) $o["demo_ads"] : 2;' ).trim();
+	} catch ( e ) {
+		console.error( 'محیط ناقص: ' + e.message );
+		process.exit( 2 );
+	}
+	fs.mkdirSync( SHOTS, { recursive: true } );
+	const browser = await chromium.launch();
+	const ctx     = await browser.newContext();
+	await ctx.addCookies( login.cookies );
+	const page = await ctx.newPage();
+	const go   = async ( url, w ) => {
+		await page.setViewportSize( { width: w, height: 900 } );
+		const res = await page.goto( url, { waitUntil: 'load', timeout: 180000 * X } );
+		await page.waitForTimeout( 800 * X );
+		return res ? res.status() : 0;
+	};
+	/* عکس پاورقی: پایین صفحه، صبر تا آرام‌شدن بارگذاری تنبل، سربرگ چسبان فقط هنگام عکس پنهان */
+	const shot = async file => {
+		await page.evaluate( () => window.scrollTo( { top: document.documentElement.scrollHeight, behavior: 'instant' } ) );
+		await page.waitForTimeout( 1500 * X );
+		await page.evaluate( () => window.scrollTo( { top: document.documentElement.scrollHeight, behavior: 'instant' } ) );
+		/* هر عنصر fixed/sticky بیرون از پاورقی (سربرگ، نوار مدیر، ناوبری بخش‌ها) فقط هنگام عکس display:none و سپس برمی‌گردد */
+		await page.evaluate( () => { const foot = document.querySelector( '[data-elementor-type="footer"]' ); document.querySelectorAll( 'body *' ).forEach( e => { if ( foot && foot.contains( e ) ) { return; } const p = getComputedStyle( e ).position; if ( 'fixed' === p || 'sticky' === p ) { e.setAttribute( 'data-tp-shot-hide', e.style.getPropertyValue( 'display' ) + '|' + e.style.getPropertyPriority( 'display' ) ); e.style.setProperty( 'display', 'none', 'important' ); } } ); } );
+		const f = await page.$( '[data-elementor-type="footer"]' );
+		if ( f ) { await f.screenshot( { path: file } ); }
+		await page.evaluate( () => document.querySelectorAll( '[data-tp-shot-hide]' ).forEach( e => { const [ v, p ] = e.getAttribute( 'data-tp-shot-hide' ).split( '|' ); if ( v ) { e.style.setProperty( 'display', v, p ); } else { e.style.removeProperty( 'display' ); } e.removeAttribute( 'data-tp-shot-hide' ); } ) );
+	};
+	console.log( 'START footer-gate ' + new Date().toISOString() );
+	try {
+		/* ۱) سرریز و شمار تبلیغ — ۰ تا ۴، سه زبان، ۳۹۰ و ۳۲۰ */
+		for ( let n = 0; n <= 4; n++ ) {
+			setDemo( n );
+			for ( const [ lang, p ] of Object.entries( LANGS ) ) {
+				for ( const w of [ 390, 320 ] ) {
+					const st = await go( ENV.base + p, w );
+					const L  = await page.evaluate( probeLayout );
+					ok( 200 === st && L.foot && ! L.raw && L.ads === n && 3 === L.parts.length && L.scroll <= 1 && ! L.bad.length,
+						`تبلیغ ${ n } · ${ lang } · ${ w }: وضعیت ${ st }، تبلیغ ${ L.ads }، بخش‌ها ${ L.parts.length }/۳، بی شورت‌کد خام ${ ! L.raw }، سرریز ${ L.scroll }px` + ( L.bad.length ? ' ← ' + L.bad.join( ' | ' ) : '' ) );
+					if ( 2 === n ) {   /* P5-D609 · P5-D610 — یک بار برای هر زبان و پهنا */
+						const wantS = [ 5, 5, 4 ];   /* موبایل: ۷ کاشی ۴۴px در ستون ~۳۴۰px جا نمی‌شود */
+						ok( L.social.rows.join() === wantS.join() && L.social.centred && L.partners.rows.join() === '3,2' && L.partners.centred && 1 === L.partners.sizes.length,
+							`چیدمان · ${ lang } · ${ w }: شبکه‌ها [${ L.social.rows }] (انتظار [${ wantS }]) وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }` );
+					}
+					if ( 'fa' === lang && ( 1 === n || 4 === n ) ) {
+						await shot( path.join( SHOTS, `fa-${ w }-ads${ n }.png` ) );
+					}
+				}
+			}
+		}
+		setDemo( prev );
+
+		/* ۲) آیکون‌ها و کنتراست — ۱۴۴۰ */
+		const table = {};
+		for ( const [ lang, p ] of Object.entries( LANGS ) ) {
+			await go( ENV.base + p, 1440 );
+			const L = await page.evaluate( probeLayout );
+			ok( L.social.rows.join() === '7,7' && L.social.centred && L.partners.rows.join() === '3,2' && L.partners.centred && 1 === L.partners.sizes.length,
+				`چیدمان · ${ lang } · ۱۴۴۰: شبکه‌ها [${ L.social.rows }] وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }` );
+			const P     = await page.evaluate( probeIcons );
+			const icons = P.icons;
+			const badI  = icons.filter( x => ! x.ok );
+			ok( icons.length >= 14 && ! badI.length, `آیکون شبکه‌ها · ${ lang }: ${ icons.length } پیوند، ${ icons.filter( x => x.brand ).length } لوگوی SVG رنگی، نمایش‌نیافته ${ badI.length }` + ( badI.length ? ' ← ' + badI.map( x => x.name + ' (' + x.why + ')' ).join( ' | ' ) : '' ) );
+			ok( P.fill === P.total && 2 === P.rows.length && Math.abs( P.rows[0] - P.rows[1] ) <= 1, `شبکه‌ها · ${ lang }: رنگ برند ${ P.fill }/${ P.total }، ردیف‌ها [${ P.rows.join( '، ' ) }]` );
+			ok( P.logoH.length >= 5 && P.logoH.every( h => h >= 80 ), `همکاران · ${ lang } · ۱۴۴۰: بلندی کاشی‌ها [${ P.logoH.join( '، ' ) }] ≥ ۸۰` );
+			for ( const mode of MODES ) {
+				const rows = await page.evaluate( probeContrast, mode );
+				table[ lang + ' · ' + mode ] = rows;
+				const low  = rows.filter( r => r.ratio < r.min );
+				const tiles = [ ...new Set( rows.filter( r => 'tile' === r.kind ).map( r => r.sample ) ) ];
+				ok( 1 === tiles.length, `کاشی همکاران · ${ lang } · ${ mode }: یک رنگ (${ tiles.join( ' / ' ) })` );
+				const minT = Math.min( ...rows.filter( r => 'text' === r.kind ).map( r => r.ratio ) );
+				const ic   = rows.filter( r => 'icon' === r.kind ).map( r => r.ratio );
+				const minI = ic.length ? Math.min( ...ic ) : '— (همه رنگ برند)';
+				ok( rows.length > 0 && ! low.length, `کنتراست پاورقی · ${ lang } · ${ mode }: ${ rows.length } مورد، کمینۀ متن ${ minT }، کمینۀ آیکون ${ minI }` + ( low.length ? ' ← ' + low.slice( 0, 5 ).map( r => r.kind + ' «' + r.sample + '» ' + r.ratio ).join( ' | ' ) : '' ) );
+				if ( 'fa' === lang ) {
+					await shot( path.join( SHOTS, `fa-1440-${ mode }.png` ) );
+				}
+			}
+		}
+		fs.writeFileSync( path.join( SHOTS, 'contrast.json' ), JSON.stringify( table, null, 1 ) );
+		/* ۳) عکس «پس» fa در ۳۹۰، سه حالت */
+		await go( ENV.base + '/', 390 );
+		for ( const mode of MODES ) {
+			await page.evaluate( m => document.documentElement.setAttribute( 'data-tp-mode', m ), mode );
+			await page.waitForTimeout( 900 );
+			await shot( path.join( SHOTS, `fa-390-${ mode }.png` ) );
+		}
+	} catch ( e ) {
+		fails++;
+		console.log( '  ❌ خطا: ' + ( e && e.message ? e.message : e ) );
+	} finally {
+		try { setDemo( prev ); } catch ( e ) { fails++; console.log( '  ❌ برگرداندن demo_ads نشد: ' + e.message ); }
+		await browser.close();
+	}
+	console.log( `END footer-gate — گذشته: ${ passes }   افتاده: ${ fails }` );
+	process.exit( fails ? 1 : 0 );
+} )();
