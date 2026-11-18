@@ -1,0 +1,1383 @@
+{
+    "post": 6128,
+    "type": "elementor_library/footer",
+    "post_modified": "2026-11-16 23:03:02",
+    "sha1": "8c1a423d9bea0de4e83536231c17cb3008af562c",
+    "elementor_data": [
+        {
+            "id": "465dde70",
+            "elType": "container",
+            "settings": {
+                "flex_direction": "column",
+                "flex_gap": {
+                    "column": "0",
+                    "row": "0",
+                    "isLinked": true,
+                    "unit": "px",
+                    "size": 0
+                },
+                "wd_section_stretch": "stretch",
+                "background_background": "classic",
+                "background_color": "#092143",
+                "wd_color_scheme": "light",
+                "scroll_y": -80
+            },
+            "elements": [
+                {
+                    "id": "4bd4feae",
+                    "elType": "container",
+                    "settings": {
+                        "wd_section_stretch": "stretch",
+                        "content_position": "top",
+                        "border_width": {
+                            "top": "0",
+                            "left": "0",
+                            "right": "0",
+                            "bottom": "1",
+                            "unit": "px",
+                            "isLinked": ""
+                        },
+                        "border_border": "solid",
+                        "border_color": "rgba(255, 255, 255, 0.1)",
+                        "structure": "40",
+                        "flex_gap": {
+                            "size": "0",
+                            "column": "0",
+                            "row": "0",
+                            "unit": "px",
+                            "isLinked": true
+                        },
+                        "padding": {
+                            "unit": "px",
+                            "top": "30",
+                            "right": "15",
+                            "bottom": "30",
+                            "left": "15",
+                            "isLinked": ""
+                        },
+                        "flex_direction": "row",
+                        "flex_wrap_tablet": "wrap",
+                        "scroll_y": "-80",
+                        "css_classes": "wd-template-12056",
+                        "content_width": "full"
+                    },
+                    "elements": [
+                        {
+                            "id": "78b0a135",
+                            "elType": "widget",
+                            "settings": {
+                                "icon_type": "icon",
+                                "alignment": "left",
+                                "btn_text": "",
+                                "image_size": "custom",
+                                "subtitle": "",
+                                "title": "محل تبلیفات",
+                                "btn_position": "hover",
+                                "image": {
+                                    "id": "",
+                                    "url": "http://topersia.local/geo/wp-content/plugins/elementor/assets/images/placeholder.png"
+                                },
+                                "title_size": "small",
+                                "image_alignment": "left",
+                                "woodmart_color_scheme": "light",
+                                "image_custom_dimension": {
+                                    "width": "50",
+                                    "height": "50"
+                                },
+                                "_border_width": {
+                                    "top": "0",
+                                    "left": "0",
+                                    "right": "1",
+                                    "bottom": "0",
+                                    "unit": "px",
+                                    "isLinked": ""
+                                },
+                                "_border_border": "solid",
+                                "_border_color": "rgba(255,255,255,0.1)",
+                                "content": "",
+                                "icon_text": "53",
+                                "scroll_y": "-80",
+                                "_border_width_tablet": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "0",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "isLinked": "1"
+                                },
+                                "_padding": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "15",
+                                    "bottom": "0",
+                                    "left": "15",
+                                    "isLinked": ""
+                                },
+                                "_padding_tablet": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "0",
+                                    "bottom": "0",
+                                    "left": "15",
+                                    "isLinked": ""
+                                },
+                                "_padding_mobile": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "0",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "isLinked": ""
+                                },
+                                "_element_width": "initial",
+                                "_element_custom_width": {
+                                    "unit": "%",
+                                    "size": "25",
+                                    "sizes": []
+                                },
+                                "_element_custom_width_tablet": {
+                                    "unit": "%",
+                                    "size": "50",
+                                    "sizes": []
+                                },
+                                "_element_custom_width_mobile": {
+                                    "unit": "%",
+                                    "size": "100",
+                                    "sizes": []
+                                }
+                            },
+                            "elements": [],
+                            "widgetType": "wd_infobox"
+                        },
+                        {
+                            "id": "10e87451",
+                            "elType": "widget",
+                            "settings": {
+                                "icon_type": "icon",
+                                "alignment": "left",
+                                "btn_text": "",
+                                "image_size": "custom",
+                                "subtitle": "",
+                                "title": "محل تبلیفات",
+                                "btn_position": "hover",
+                                "image": {
+                                    "id": "",
+                                    "url": "http://topersia.local/geo/wp-content/plugins/elementor/assets/images/placeholder.png"
+                                },
+                                "title_size": "small",
+                                "image_alignment": "left",
+                                "woodmart_color_scheme": "light",
+                                "image_custom_dimension": {
+                                    "width": "50",
+                                    "height": "50"
+                                },
+                                "_border_width": {
+                                    "top": "0",
+                                    "left": "0",
+                                    "right": "1",
+                                    "bottom": "0",
+                                    "unit": "px",
+                                    "isLinked": ""
+                                },
+                                "_border_border": "solid",
+                                "_border_color": "rgba(255,255,255,0.1)",
+                                "content": "",
+                                "icon_text": "53",
+                                "scroll_y": "-80",
+                                "_padding": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "15",
+                                    "bottom": "0",
+                                    "left": "15",
+                                    "isLinked": ""
+                                },
+                                "_padding_tablet": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "15",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "isLinked": ""
+                                },
+                                "_padding_mobile": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "0",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "isLinked": ""
+                                },
+                                "_element_width": "initial",
+                                "_element_custom_width": {
+                                    "unit": "%",
+                                    "size": "25",
+                                    "sizes": []
+                                },
+                                "_element_custom_width_tablet": {
+                                    "unit": "%",
+                                    "size": "50",
+                                    "sizes": []
+                                },
+                                "_element_custom_width_mobile": {
+                                    "unit": "%",
+                                    "size": "100",
+                                    "sizes": []
+                                },
+                                "_border_width_tablet": {
+                                    "unit": "px",
+                                    "top": "",
+                                    "right": "",
+                                    "bottom": "",
+                                    "left": "",
+                                    "isLinked": "1"
+                                },
+                                "_border_width_mobile": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "0",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "isLinked": "1"
+                                }
+                            },
+                            "elements": [],
+                            "widgetType": "wd_infobox"
+                        }
+                    ],
+                    "isInner": true
+                },
+                {
+                    "id": "54c5db08",
+                    "elType": "container",
+                    "settings": {
+                        "wd_section_stretch": "stretch",
+                        "content_position": "top",
+                        "border_width": {
+                            "top": "0",
+                            "left": "0",
+                            "right": "0",
+                            "bottom": "1",
+                            "unit": "px",
+                            "isLinked": ""
+                        },
+                        "border_border": "solid",
+                        "border_color": "rgba(255,255,255,0.1)",
+                        "woodmart_parallax": "0",
+                        "woodmart_gradient_switch": "no",
+                        "row_reverse_mobile": "0",
+                        "row_reverse_tablet": "0",
+                        "woodmart_disable_overflow": "0",
+                        "structure": "50",
+                        "background_background": "classic",
+                        "padding": {
+                            "unit": "px",
+                            "top": "40",
+                            "right": "15",
+                            "bottom": "40",
+                            "left": "15",
+                            "isLinked": ""
+                        },
+                        "flex_direction": "row",
+                        "flex_gap": {
+                            "size": "30",
+                            "column": "30",
+                            "row": "30",
+                            "unit": "px",
+                            "isLinked": "1"
+                        },
+                        "flex_direction_tablet": "column",
+                        "scroll_y": "-80",
+                        "flex_gap_mobile": {
+                            "column": "30",
+                            "row": "20",
+                            "isLinked": "",
+                            "unit": "px",
+                            "size": "30"
+                        },
+                        "css_classes": "wd-template-12056"
+                    },
+                    "elements": [
+                        {
+                            "id": "7ef5d516",
+                            "elType": "container",
+                            "settings": {
+                                "_column_size": "20",
+                                "width": {
+                                    "size": "66.7",
+                                    "unit": "%"
+                                },
+                                "width_tablet": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "width_mobile": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "column_sticky_offset": "50",
+                                "scroll_y": "-80",
+                                "content_width": "full",
+                                "flex_direction": "row",
+                                "flex_gap": {
+                                    "column": "",
+                                    "row": "",
+                                    "isLinked": "1",
+                                    "unit": "px",
+                                    "size": ""
+                                },
+                                "flex_wrap_mobile": "wrap",
+                                "flex_justify_content": "flex-start",
+                                "flex_direction_mobile": "column",
+                                "flex_wrap": "nowrap"
+                            },
+                            "elements": [
+                                {
+                                    "id": "16b8d8b4",
+                                    "elType": "widget",
+                                    "widgetType": "wd_toggle",
+                                    "settings": {
+                                        "element_title": "منوی اصلی",
+                                        "state": "static",
+                                        "state_tablet": "static",
+                                        "heading_spacing": {
+                                            "unit": "px",
+                                            "size": "10",
+                                            "sizes": []
+                                        },
+                                        "_element_width": "initial",
+                                        "_element_width_mobile": "inherit",
+                                        "_element_custom_width": {
+                                            "unit": "%",
+                                            "size": "25",
+                                            "sizes": []
+                                        },
+                                        "scroll_y": "-80"
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "2e7aa12e",
+                                            "elType": "container",
+                                            "settings": {
+                                                "_title": "Toggle content",
+                                                "content_width": "full",
+                                                "scroll_y": "-80"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "id": "64628a5",
+                                                    "elType": "container",
+                                                    "settings": {
+                                                        "scroll_y": "-80"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "id": "51e01936",
+                                                            "elType": "widget",
+                                                            "settings": {
+                                                                "label_color": "white",
+                                                                "title": "",
+                                                                "menu_items_repeater": [
+                                                                    {
+                                                                        "_id": "483100",
+                                                                        "title": "New York",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "836013",
+                                                                        "title": "London SF",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "9780604",
+                                                                        "title": "Cockfosters BP",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "8461032",
+                                                                        "title": "Los Angeles",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "4404594",
+                                                                        "title": "Chicago",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "6551616",
+                                                                        "title": "Las Vegas",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "scroll_y": "-80",
+                                                                "_element_custom_width_mobile": {
+                                                                    "unit": "%",
+                                                                    "size": "50",
+                                                                    "sizes": []
+                                                                },
+                                                                "link": {
+                                                                    "url": "",
+                                                                    "is_external": "",
+                                                                    "nofollow": "",
+                                                                    "custom_attributes": ""
+                                                                }
+                                                            },
+                                                            "elements": [],
+                                                            "widgetType": "wd_extra_menu_list"
+                                                        }
+                                                    ],
+                                                    "isInner": "1"
+                                                }
+                                            ],
+                                            "isInner": "1",
+                                            "isLocked": "1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "285d4de7",
+                                    "elType": "widget",
+                                    "widgetType": "wd_toggle",
+                                    "settings": {
+                                        "element_title": "درباره توپرشیا",
+                                        "state": "static",
+                                        "state_tablet": "static",
+                                        "heading_spacing": {
+                                            "unit": "px",
+                                            "size": "10",
+                                            "sizes": []
+                                        },
+                                        "_element_width": "initial",
+                                        "_element_width_mobile": "inherit",
+                                        "_element_custom_width": {
+                                            "unit": "%",
+                                            "size": "25",
+                                            "sizes": []
+                                        },
+                                        "scroll_y": "-80"
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "1cb429ef",
+                                            "elType": "container",
+                                            "settings": {
+                                                "_title": "Toggle content",
+                                                "content_width": "full",
+                                                "scroll_y": "-80"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "id": "285603c2",
+                                                    "elType": "container",
+                                                    "settings": {
+                                                        "flex_direction": "column",
+                                                        "scroll_y": "-80"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "id": "7cff5abe",
+                                                            "elType": "widget",
+                                                            "settings": {
+                                                                "label_color": "white",
+                                                                "title": "",
+                                                                "menu_items_repeater": [
+                                                                    {
+                                                                        "_id": "654765",
+                                                                        "title": "Privacy Policy",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "2021321",
+                                                                        "title": "Returns",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "8974701",
+                                                                        "title": "Terms &amp; Conditions",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "9028310",
+                                                                        "title": "Contact Us",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "5588742",
+                                                                        "title": "Latest News",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "6991707",
+                                                                        "title": "Our Sitemap",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "scroll_y": "-80",
+                                                                "_element_custom_width_mobile": {
+                                                                    "unit": "%",
+                                                                    "size": "50",
+                                                                    "sizes": []
+                                                                },
+                                                                "link": {
+                                                                    "url": "",
+                                                                    "is_external": "",
+                                                                    "nofollow": "",
+                                                                    "custom_attributes": ""
+                                                                }
+                                                            },
+                                                            "elements": [],
+                                                            "widgetType": "wd_extra_menu_list"
+                                                        }
+                                                    ],
+                                                    "isInner": "1"
+                                                }
+                                            ],
+                                            "isInner": "1",
+                                            "isLocked": "1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "3000eee8",
+                                    "elType": "widget",
+                                    "widgetType": "wd_toggle",
+                                    "settings": {
+                                        "element_title": "شرایط و تنظیمات",
+                                        "state": "static",
+                                        "state_tablet": "static",
+                                        "heading_spacing": {
+                                            "unit": "px",
+                                            "size": "10",
+                                            "sizes": []
+                                        },
+                                        "_element_width": "initial",
+                                        "_element_width_mobile": "inherit",
+                                        "_element_custom_width": {
+                                            "unit": "%",
+                                            "size": "25",
+                                            "sizes": []
+                                        },
+                                        "scroll_y": "-80"
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "5fe06817",
+                                            "elType": "container",
+                                            "settings": {
+                                                "_title": "Toggle content",
+                                                "content_width": "full",
+                                                "scroll_y": "-80"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "id": "17824163",
+                                                    "elType": "container",
+                                                    "settings": {
+                                                        "flex_direction": "column",
+                                                        "scroll_y": "-80"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "id": "c4a416d",
+                                                            "elType": "widget",
+                                                            "settings": {
+                                                                "label_color": "white",
+                                                                "title": "",
+                                                                "menu_items_repeater": [
+                                                                    {
+                                                                        "_id": "2248751",
+                                                                        "title": "New York",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "4031838",
+                                                                        "title": "London SF",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "9543047",
+                                                                        "title": "Cockfosters BP",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "8987574",
+                                                                        "title": "Los Angeles",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "6009657",
+                                                                        "title": "Chicago",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "7188240",
+                                                                        "title": "Las Vegas",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "scroll_y": "-80",
+                                                                "_element_custom_width_mobile": {
+                                                                    "unit": "%",
+                                                                    "size": "50",
+                                                                    "sizes": []
+                                                                },
+                                                                "link": {
+                                                                    "url": "",
+                                                                    "is_external": "",
+                                                                    "nofollow": "",
+                                                                    "custom_attributes": ""
+                                                                }
+                                                            },
+                                                            "elements": [],
+                                                            "widgetType": "wd_extra_menu_list"
+                                                        }
+                                                    ],
+                                                    "isInner": "1"
+                                                }
+                                            ],
+                                            "isInner": "1",
+                                            "isLocked": "1"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "7f15a3fb",
+                                    "elType": "widget",
+                                    "widgetType": "wd_toggle",
+                                    "settings": {
+                                        "element_title": "کاربران",
+                                        "state": "static",
+                                        "state_tablet": "static",
+                                        "heading_spacing": {
+                                            "unit": "px",
+                                            "size": "10",
+                                            "sizes": []
+                                        },
+                                        "_element_width": "initial",
+                                        "_element_width_mobile": "inherit",
+                                        "_element_custom_width": {
+                                            "unit": "%",
+                                            "size": "25",
+                                            "sizes": []
+                                        },
+                                        "scroll_y": "-80"
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "7aea5676",
+                                            "elType": "container",
+                                            "settings": {
+                                                "_title": "Toggle content",
+                                                "content_width": "full",
+                                                "scroll_y": "-80"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "id": "55447088",
+                                                    "elType": "container",
+                                                    "settings": {
+                                                        "flex_direction": "column",
+                                                        "scroll_y": "-80"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "id": "1dd76706",
+                                                            "elType": "widget",
+                                                            "settings": {
+                                                                "label_color": "white",
+                                                                "title": "",
+                                                                "menu_items_repeater": [
+                                                                    {
+                                                                        "_id": "3888589",
+                                                                        "title": "Privacy Policy",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "2156851",
+                                                                        "title": "Returns",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "8284116",
+                                                                        "title": "Terms &amp; Conditions",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "3707656",
+                                                                        "title": "Contact Us",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "3775346",
+                                                                        "title": "Latest News",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "_id": "7639555",
+                                                                        "title": "Our Sitemap",
+                                                                        "link": {
+                                                                            "url": "#",
+                                                                            "is_external": "",
+                                                                            "nofollow": "",
+                                                                            "custom_attributes": ""
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "scroll_y": "-80",
+                                                                "_element_custom_width": {
+                                                                    "unit": "%",
+                                                                    "size": "25",
+                                                                    "sizes": []
+                                                                },
+                                                                "_element_custom_width_mobile": {
+                                                                    "unit": "%",
+                                                                    "size": "50",
+                                                                    "sizes": []
+                                                                },
+                                                                "link": {
+                                                                    "url": "",
+                                                                    "is_external": "",
+                                                                    "nofollow": "",
+                                                                    "custom_attributes": ""
+                                                                }
+                                                            },
+                                                            "elements": [],
+                                                            "widgetType": "wd_extra_menu_list"
+                                                        }
+                                                    ],
+                                                    "isInner": "1"
+                                                }
+                                            ],
+                                            "isInner": "1",
+                                            "isLocked": "1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "isInner": "1"
+                        },
+                        {
+                            "id": "5db03d81",
+                            "elType": "container",
+                            "settings": {
+                                "_column_size": "20",
+                                "width": {
+                                    "size": "33.3",
+                                    "unit": "%"
+                                },
+                                "woodmart_text_align": "left",
+                                "width_tablet": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "width_mobile": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "woodmart_parallax": "0",
+                                "parallax_scroll": "no",
+                                "column_sticky_offset": "50",
+                                "scroll_y": "-80",
+                                "content_width": "full"
+                            },
+                            "elements": [
+                                {
+                                    "id": "6e091def",
+                                    "elType": "widget",
+                                    "widgetType": "wd_toggle",
+                                    "settings": {
+                                        "element_title": "توپرشیا",
+                                        "state": "static",
+                                        "state_tablet": "static",
+                                        "scroll_y": "-80"
+                                    },
+                                    "elements": [
+                                        {
+                                            "id": "189037f0",
+                                            "elType": "container",
+                                            "settings": {
+                                                "_title": "Toggle content",
+                                                "content_width": "full",
+                                                "scroll_y": "-80"
+                                            },
+                                            "elements": [
+                                                {
+                                                    "id": "43ad9f3",
+                                                    "elType": "container",
+                                                    "settings": {
+                                                        "flex_direction": "column",
+                                                        "scroll_y": "-80"
+                                                    },
+                                                    "elements": [
+                                                        {
+                                                            "id": "3d9e35b4",
+                                                            "elType": "widget",
+                                                            "settings": {
+                                                                "ids_size": "custom",
+                                                                "spacing": "20",
+                                                                "on_click": "links",
+                                                                "columns": {
+                                                                    "size": "2",
+                                                                    "unit": "px",
+                                                                    "sizes": []
+                                                                },
+                                                                "ids_custom_dimension": {
+                                                                    "width": "200",
+                                                                    "height": "65"
+                                                                },
+                                                                "custom_links": "#\n#",
+                                                                "scroll_y": "-80",
+                                                                "columns_tablet": {
+                                                                    "unit": "px",
+                                                                    "size": "2",
+                                                                    "sizes": []
+                                                                },
+                                                                "columns_mobile": {
+                                                                    "unit": "px",
+                                                                    "size": "2",
+                                                                    "sizes": []
+                                                                },
+                                                                "_element_width_tablet": "initial",
+                                                                "_element_width_mobile": "inherit",
+                                                                "_element_custom_width_tablet": {
+                                                                    "unit": "px",
+                                                                    "size": "340",
+                                                                    "sizes": []
+                                                                },
+                                                                "sync_parent_id": "wd_680f647a2ea8a",
+                                                                "sync_group_id": "group-1",
+                                                                "ids": [
+                                                                    {
+                                                                        "id": 1898,
+                                                                        "url": "http://topersia.local/assets/uploads/2026/09/Dashboard-header-logo.svg"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "elements": [],
+                                                            "widgetType": "wd_images_gallery"
+                                                        },
+                                                        {
+                                                            "id": "396786d",
+                                                            "elType": "widget",
+                                                            "settings": {
+                                                                "text": "<p>متن نمونه</p>",
+                                                                "scroll_y": "-80"
+                                                            },
+                                                            "elements": [],
+                                                            "widgetType": "wd_text_block"
+                                                        }
+                                                    ],
+                                                    "isInner": "1"
+                                                }
+                                            ],
+                                            "isInner": "1",
+                                            "isLocked": "1"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "isInner": "1"
+                        }
+                    ],
+                    "isInner": true
+                },
+                {
+                    "id": "30e46ba4",
+                    "elType": "container",
+                    "settings": {
+                        "structure": "30",
+                        "padding": {
+                            "unit": "px",
+                            "top": "30",
+                            "right": "0",
+                            "bottom": "30",
+                            "left": "0",
+                            "isLinked": ""
+                        },
+                        "flex_direction": "row",
+                        "flex_gap": {
+                            "size": "0",
+                            "column": "0",
+                            "row": "30",
+                            "unit": "px",
+                            "isLinked": ""
+                        },
+                        "flex_wrap_tablet": "wrap",
+                        "scroll_y": "-80",
+                        "flex_direction_mobile": "column",
+                        "css_classes": "wd-template-12056"
+                    },
+                    "elements": [
+                        {
+                            "id": "2111241e",
+                            "elType": "container",
+                            "settings": {
+                                "_column_size": "33",
+                                "width_tablet": {
+                                    "size": "50",
+                                    "unit": "%"
+                                },
+                                "width_mobile": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "column_sticky_offset": "50",
+                                "scroll_y": "-80",
+                                "content_width": "full",
+                                "flex_gap": {
+                                    "column": "15",
+                                    "row": "15",
+                                    "isLinked": "1",
+                                    "unit": "px",
+                                    "size": "15"
+                                },
+                                "padding": {
+                                    "unit": "px",
+                                    "top": "0",
+                                    "right": "30",
+                                    "bottom": "0",
+                                    "left": "0",
+                                    "isLinked": ""
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "45521719",
+                                    "elType": "widget",
+                                    "settings": {
+                                        "text": "<p>شریک های تجاری:</p>",
+                                        "typography_typography": "custom",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": "16",
+                                            "sizes": []
+                                        },
+                                        "text_color": "title",
+                                        "text_color_scheme": "light",
+                                        "scroll_y": "-80",
+                                        "text_alignment": "right"
+                                    },
+                                    "elements": [],
+                                    "widgetType": "wd_text_block"
+                                }
+                            ],
+                            "isInner": "1"
+                        },
+                        {
+                            "id": "4f17f37e",
+                            "elType": "container",
+                            "settings": {
+                                "_column_size": "33",
+                                "width_tablet": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "width_mobile": {
+                                    "size": "100",
+                                    "unit": "%"
+                                },
+                                "column_sticky_offset": "50",
+                                "scroll_y": "-80",
+                                "content_width": "full",
+                                "flex_gap": {
+                                    "column": "10",
+                                    "row": "10",
+                                    "isLinked": "1",
+                                    "unit": "px",
+                                    "size": "10"
+                                }
+                            },
+                            "elements": [
+                                {
+                                    "id": "49718dbd",
+                                    "elType": "widget",
+                                    "settings": {
+                                        "text": "<p>شبکه های اجتماعی:</p>",
+                                        "typography_typography": "custom",
+                                        "typography_font_size": {
+                                            "unit": "px",
+                                            "size": "16",
+                                            "sizes": []
+                                        },
+                                        "text_color": "title",
+                                        "text_color_scheme": "light",
+                                        "scroll_y": "-80",
+                                        "text_alignment": "right"
+                                    },
+                                    "elements": [],
+                                    "widgetType": "wd_text_block"
+                                },
+                                {
+                                    "id": "33a27e95",
+                                    "elType": "widget",
+                                    "settings": {
+                                        "social_icon_list": [
+                                            {
+                                                "social_icon": {
+                                                    "value": "fab fa-instagram",
+                                                    "library": "fa-brands"
+                                                },
+                                                "_id": "9780cde",
+                                                "link": {
+                                                    "url": "https://www.instagram.com/topersia_com/",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "53af7a2",
+                                                "social_icon": {
+                                                    "value": "fab fa-facebook",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.facebook.com/ToPersiaCom/",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "e6235a6",
+                                                "social_icon": {
+                                                    "value": "fab fa-x-twitter",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://x.com/ToPersia_com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "da987a8",
+                                                "social_icon": {
+                                                    "value": "fab fa-youtube",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.youtube.com/@ToPersia_com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "4d37355",
+                                                "social_icon": {
+                                                    "value": "fab fa-telegram",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://t.me/ToPersia_Com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "256b7d8",
+                                                "social_icon": {
+                                                    "value": "fab fa-whatsapp",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.whatsapp.com/channel/0029VbCvJnUDzgT8xw9c6026",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "abc982f",
+                                                "social_icon": {
+                                                    "value": "fab fa-linkedin",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.linkedin.com/company/topersia/",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "08e150f",
+                                                "social_icon": {
+                                                    "value": "fab fa-pinterest",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.pinterest.com/topersiacom/",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "bed93b7",
+                                                "social_icon": {
+                                                    "value": "fab fa-tiktok",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.tiktok.com/@topersia_com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "0f74a2b",
+                                                "social_icon": {
+                                                    "value": "fab fa-medium",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://medium.com/@topersia.com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "54558e5",
+                                                "social_icon": {
+                                                    "value": "javisfa javisfa-javis-fa-icon-10",
+                                                    "library": "javis-fa"
+                                                },
+                                                "link": {
+                                                    "url": "https://ble.ir/ToPersia_Com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "74d08c5",
+                                                "social_icon": {
+                                                    "value": "javisfa javisfa-javis-fa-icon-17",
+                                                    "library": "javis-fa"
+                                                },
+                                                "link": {
+                                                    "url": "https://rubika.ir/page/ToPersia_com",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "bba0d64",
+                                                "social_icon": {
+                                                    "value": "fab fa-tripadvisor",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.tripadvisor.com/Profile/ToPersia",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "e7c13ad",
+                                                "social_icon": {
+                                                    "value": "fab fa-tumblr",
+                                                    "library": "fa-brands"
+                                                },
+                                                "link": {
+                                                    "url": "https://www.tumblr.com/topersia",
+                                                    "is_external": "true",
+                                                    "nofollow": "",
+                                                    "custom_attributes": ""
+                                                }
+                                            },
+                                            {
+                                                "_id": "af30e9d",
+                                                "social_icon": {
+                                                    "value": "fab fa-threads",
+                                                    "library": "fa-brands"
+                                                }
+                                            }
+                                        ],
+                                        "icon_size": {
+                                            "unit": "px",
+                                            "size": 25,
+                                            "sizes": []
+                                        },
+                                        "scroll_y": -80
+                                    },
+                                    "elements": [],
+                                    "widgetType": "social-icons"
+                                }
+                            ],
+                            "isInner": "1"
+                        }
+                    ],
+                    "isInner": true
+                },
+                {
+                    "id": "2ca1426e",
+                    "elType": "container",
+                    "settings": {
+                        "flex_direction": "column",
+                        "content_width": "full",
+                        "flex_align_items": "center",
+                        "wd_section_stretch": "stretch",
+                        "border_border": "solid",
+                        "border_width": {
+                            "unit": "px",
+                            "top": "1",
+                            "right": "0",
+                            "bottom": "0",
+                            "left": "0",
+                            "isLinked": false
+                        },
+                        "border_color": "#FFFFFF26",
+                        "padding": {
+                            "unit": "px",
+                            "top": "20",
+                            "right": "0",
+                            "bottom": "20",
+                            "left": "0",
+                            "isLinked": false
+                        },
+                        "scroll_y": -80
+                    },
+                    "elements": [
+                        {
+                            "id": "57c86301",
+                            "elType": "widget",
+                            "settings": {
+                                "text": "<p>کلیۀ حقوق این سرویس (وب‌سایت و اپلیکیشن‌های موبایل) محفوظ و متعلق به <a href=\"https://topersia.com/\">توپرشیا </a>می‌باشد. کپی‌برداری، بازنشر، اسکرپ یا هر استفادۀ دیگر از متن‌ها و محتوای این سرویس، در هر جا و به هر شکل، بدون مجوز کتبی ممنوع است و پیگرد قانونی دارد.<br />© 2026-1405 <a href=\"https://topersia.com/\">ToPersia (توپرشیا)</a>.</p>",
+                                "scroll_y": -80,
+                                "text_alignment": "center"
+                            },
+                            "elements": [],
+                            "widgetType": "wd_text_block"
+                        }
+                    ],
+                    "isInner": true
+                }
+            ],
+            "isInner": false
+        }
+    ]
+}
