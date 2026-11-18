@@ -17,6 +17,7 @@ $w53_hcss = $w53_read( 'plugin/topersia-render/assets/topersia-g-hub.css' );
 $w53_ncss = $w53_read( 'plugin/topersia-render/assets/topersia-g-news.css' );
 $w53_njs  = $w53_read( 'plugin/topersia-render/assets/topersia-g-news.js' );
 $w53_nui  = $w53_read( 'plugin/topersia-render/includes/topersia-g-news-ui.php' );
+$w53_news = $w53_read( 'plugin/topersia-render/includes/topersia-g-news.php' );
 $w53_zjs  = $w53_read( 'plugin/topersia-render/assets/topersia-g-zones.js' );
 $w53_zon  = $w53_read( 'plugin/topersia-render/includes/topersia-g-zones.php' );
 $w53_home = $w53_read( 'plugin/topersia-render/includes/topersia-g-home.php' );
@@ -66,6 +67,19 @@ tp441_mut( 'بند ۲: هاب — تراشه‌ها · دکمۀ «فیلتر» �
 	str_replace( "topersia_g_loc_field( 'tp-hub-place'", "topersia_g_x( 'tp-hub-place'", $w53_htpl ) );
 t( 'بند ۲: /articles/ همان نوار — دکمۀ «فیلتر»، جست‌وجو و ترکیب‌باکس مکان (بازاستفاده، نه کد تازه)',
 	false !== strpos( $w53_atpl, 'data-tp-more-btn' ) && false !== strpos( $w53_atpl, 'name="tp_q"' ) && false !== strpos( $w53_atpl, "topersia_g_loc_field( 'tp-hub-place'" ) );
+/* شمار ۲۱: نوار /articles/ بی شیوه‌نامۀ هاب و اسکریپت مکان بار می‌شد ← «فیلتر»، جست‌وجو و مکان در دو خط و ترکیب‌باکس بی‌کار */
+$w53_aenq = function ( $s ) {
+	$a = strpos( $s, 'if ( topersia_g_news_is_article() ) {' );
+	return false !== $a && false !== strpos( $s, "wp_enqueue_style( 'topersia-g-hub'", $a ) && false !== strpos( $s, "wp_enqueue_script( 'topersia-g-loc'", $a );
+};
+tp441_mut( 'بند ۲: /articles/ شیوه‌نامۀ هاب و اسکریپت ترکیب‌باکس مکان را بار می‌کند — جهش: بی topersia-g-hub', $w53_aenq, $w53_news,
+	str_replace( "wp_enqueue_style( 'topersia-g-hub'", "wp_enqueue_style( 'topersia-g-x'", $w53_news ) );
+$w53_arow = function ( $c ) {
+	return false !== strpos( $c, '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr))' )
+		&& false !== strpos( $c, '.tp-page.tp-news-page .tp-hub-more{flex-wrap:nowrap}' ) && false !== strpos( $c, '.tp-news-bar > .tp-news-chips{min-inline-size:0}' );
+};
+tp441_mut( 'بند ۲ و ۵: /articles/ — جست‌وجو و مکان در یک خط (تراشه جا می‌دهد) و نمای فهرستی دو ستون (P5-D576) — جهش: فهرست یک ستون', $w53_arow, $w53_hcss,
+	str_replace( '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr))', '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:minmax(0,1fr)', $w53_hcss ) );
 $w53_more = function ( $j ) use ( $w53_hcss ) {
 	return false !== strpos( $j, "root.querySelector( '[data-tp-more-btn]' )" ) && false !== strpos( $j, "root.querySelector( '[data-tp-more]' )" )
 		&& false !== strpos( $w53_hcss, '.tp-hub-more[hidden]{display:none}' ) && false !== strpos( $w53_hcss, '.tp-hub-more__btn[hidden]{display:none}' );
@@ -97,8 +111,9 @@ tp441_mut( 'بند ۴: عکس مورد ← عکس نیا (نه نمونه) ← �
 
 /* ── بند ۵: فهرست دو ستونه ───────────────────────────────────────────── */
 $w53_rows = function ( $c ) {
-	return false !== strpos( $c, '.tp-hub-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}' )
-		&& (bool) preg_match( '/@media \(max-width:720px\)\{\s*html \.tp-page\.tp-news-page \.tp-hub-grid\.tp-news-grid--rows\{grid-template-columns:minmax\(0,1fr\)\}/', $c );
+	/* دستۀ ۵۳ شمار ۲۱: گزینشگر /articles/ در همان قاعده گروه شد */
+	return (bool) preg_match( '/\.tp-hub-grid\.tp-news-grid--rows,\s*html \.tp-page\.tp-article-archive \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\);grid-auto-rows:1fr\}/', $c )
+		&& (bool) preg_match( '/@media \(max-width:720px\)\{\s*html \.tp-page\.tp-news-page \.tp-hub-grid\.tp-news-grid--rows,\s*html \.tp-page\.tp-article-archive \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:minmax\(0,1fr\)\}/', $c );
 };
 tp441_mut( 'بند ۵: نمای فهرست — دسکتاپ ۲ ستون هم‌قد، موبایل ۱ ستون — جهش: دسکتاپ یک ستون', $w53_rows, $w53_hcss,
 	str_replace( '.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}', '.tp-news-grid--rows{grid-template-columns:repeat(1,minmax(0,1fr));grid-auto-rows:1fr}', $w53_hcss ) );

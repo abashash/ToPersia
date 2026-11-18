@@ -866,6 +866,11 @@ if ( function_exists( 'add_action' ) ) {
 	add_action( 'wp_enqueue_scripts', function () {
 		if ( topersia_g_news_is_archive() && function_exists( 'topersia_render_url' ) ) {
 			wp_enqueue_style( 'topersia-g-news', topersia_render_url() . 'assets/topersia-g-news.css', array( 'topersia-g-template' ), topersia_render_asset_version( 'assets/topersia-g-news.css' ) );
+			/* P5-D575: /articles/ همان نوار هاب (دکمۀ «فیلتر» · جست‌وجو · ترکیب‌باکس مکان) — همان شیوه‌نامه و همان اسکریپت مکان */
+			if ( topersia_g_news_is_article() ) {
+				wp_enqueue_style( 'topersia-g-hub', topersia_render_url() . 'assets/topersia-g-hub.css', array( 'topersia-g-news' ), topersia_render_asset_version( 'assets/topersia-g-hub.css' ) );
+				wp_enqueue_script( 'topersia-g-loc', topersia_render_url() . 'assets/topersia-g-loc.js', array(), topersia_render_asset_version( 'assets/topersia-g-loc.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+			}
 		}
 	}, 30 );
 

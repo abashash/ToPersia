@@ -28,10 +28,18 @@ html .tp-page.tp-news-page .tp-hub-card__sub{margin:0;font-size:calc(.875 * var(
 html .tp-page.tp-news-page .tp-hub-card__sub a{color:var(--tp-primary-text);text-decoration:underline;text-underline-offset:3px}
 html .tp-page.tp-news-page .tp-hub-card .tp-news-card__media--icon svg{inline-size:34px;block-size:34px;fill:none;stroke:var(--tp-primary-text);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 /* نمای فهرستی: دسکتاپ دو ستون هم‌تراز، موبایل یک ستون (P5-D576) */
-html .tp-page.tp-news-page .tp-hub-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}
-html .tp-page.tp-news-page .tp-hub-grid.tp-news-grid--rows .tp-news-card__top{flex:0 0 clamp(120px,34%,200px)}
+html .tp-page.tp-news-page .tp-hub-grid.tp-news-grid--rows,
+html .tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}
+html .tp-page.tp-news-page .tp-hub-grid.tp-news-grid--rows .tp-news-card__top,
+html .tp-page.tp-article-archive .tp-news-grid--rows .tp-news-card__top{flex:0 0 clamp(120px,34%,200px)}
+/* دسکتاپ: جست‌وجو و مکان هرگز از هم جدا نمی‌شوند؛ ردیف تراشه جا می‌دهد و خودش اسکرول می‌شود (/articles/) */
+@media (min-width:721px){
+  html .tp-page.tp-news-page .tp-hub-more{flex-wrap:nowrap}
+  html .tp-page.tp-news-page .tp-news-bar > .tp-news-chips{min-inline-size:0}
+}
 @media (max-width:720px){
-  html .tp-page.tp-news-page .tp-hub-grid.tp-news-grid--rows{grid-template-columns:minmax(0,1fr)}
+  html .tp-page.tp-news-page .tp-hub-grid.tp-news-grid--rows,
+  html .tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:minmax(0,1fr)}
   html .tp-page.tp-news-page .tp-hub-more{flex:1 1 100%}
   html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{flex:1 1 100%}
 }
