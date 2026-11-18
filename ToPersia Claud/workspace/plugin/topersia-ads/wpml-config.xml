@@ -1,0 +1,12 @@
+<wpml-config>
+  <!-- دستۀ 54 (P5-D621): تبلیغ یک پست است برای هر سه زبان — متن جایگزین هر زبان درون متای _tp_ad (alt.fa · alt.en · alt.ar)
+       و زبان هدف در langs[]؛ WPML نه ترجمه می‌سازد نه رونوشت. شمارنده‌ها مال همان یک پست‌اند. -->
+  <custom-types>
+    <custom-type translate="0">tp_ad</custom-type>
+  </custom-types>
+  <custom-fields>
+    <custom-field action="ignore">_tp_ad</custom-field>
+    <custom-field action="ignore">_tp_ad_imp</custom-field>
+    <custom-field action="ignore">_tp_ad_clk</custom-field>
+  </custom-fields>
+</wpml-config>

@@ -1,0 +1,520 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ToPersia Ads\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+"X-Generator: scripts/tp-ads-i18n.php\n"
+"X-Domain: topersia-ads\n"
+
+#: includes/tp-ads-admin.php
+#, php-format
+msgid "%s٪"
+msgstr "%s٪"
+
+#: topersia-ads.php
+msgid "ToPersia Ads فقط روی نسخۀ محلی روشن است تا ممیزی پیش از انتشار انجام شود."
+msgstr "لا يعمل ToPersia Ads إلا على النسخة المحلية حتى يُنجَز التدقيق السابق للإطلاق."
+
+#: includes/tp-ads-admin.php
+msgid "، "
+msgstr "، "
+
+#: includes/tp-ads-admin.php
+msgid "آمار بی‌نام است: فقط جمع روزانۀ نمایش و کلیک به‌ازای تبلیغ، جایگاه و زبان؛ هیچ IP، کوکی یا شناسۀ کاربر نگه داشته نمی‌شود. نمایش یعنی دست‌کم نیمی از واحد یک ثانیه دیده شد."
+msgstr "الإحصاءات مجهولة الهوية: مجاميع يومية فقط للظهور والنقر لكل إعلان وموضع ولغة؛ لا يُحفَظ أي عنوان IP أو ملف تعريف ارتباط أو معرّف مستخدم. الظهور يعني أن نصف الوحدة على الأقل كان مرئيًا لمدة ثانية."
+
+#: includes/tp-ads-pages.php
+msgid "ادامۀ متن"
+msgstr "بقية النص"
+
+#: includes/tp-ads-admin.php
+msgid "از"
+msgstr "من"
+
+#: includes/tp-ads-pages.php
+msgid "استان‌ها و پیشنهادها"
+msgstr "المحافظات والمقترحات"
+
+#: includes/tp-ads-pages.php
+msgid "اسپانسر انحصاری"
+msgstr "راعٍ حصري"
+
+#: includes/tp-ads-data.php
+msgid "العربية"
+msgstr "العربية"
+
+#: includes/tp-ads-data.php
+msgid "انتخاب تصویر"
+msgstr "اختيار صورة"
+
+#: includes/tp-ads-admin.php
+#, php-format
+msgid "انجام شد: %s تبلیغ."
+msgstr "تم: %s إعلان."
+
+#: includes/tp-ads-data.php
+msgid "اولویت (۰ عادی تا ۹ اسپانسر انحصاری)"
+msgstr "الأولوية (0 عادية حتى 9 راعٍ حصري)"
+
+#: includes/tp-ads-pages.php
+msgid "بخش‌های بعدی"
+msgstr "الأقسام التالية"
+
+#: includes/tp-ads-pages.php
+msgid "برای جایگاه آزاد، زمان‌بندی و پیشنهاد با ما تماس بگیرید."
+msgstr "تواصلوا معنا لمعرفة المواضع المتاحة والجدولة والعروض."
+
+#: includes/tp-ads-admin.php
+msgid "تا"
+msgstr "إلى"
+
+#: includes/tp-ads-pages.php
+msgid "تا رسیدن به شمار نمایش دیده‌شده (دست‌کم نیمی از تبلیغ، یک ثانیه)."
+msgstr "حتى بلوغ عدد محدد من مرات الظهور المرئي (نصف الإعلان على الأقل لمدة ثانية)."
+
+#: includes/tp-ads-pages.php
+msgid "تا رسیدن به شمار کلیک؛ کلیک ربات و تکراری شمرده نمی‌شود."
+msgstr "حتى بلوغ عدد محدد من النقرات؛ لا تُحتسب نقرات الروبوتات والنقرات المكررة."
+
+#: includes/tp-ads-data.php
+#, php-format
+msgid "تاکنون: %1$s نمایش · %2$s کلیک"
+msgstr "حتى الآن: %1$s ظهور · %2$s نقرة"
+
+#: includes/tp-ads-admin.php
+msgid "تبلیغ"
+msgstr "إعلان"
+
+#: includes/tp-ads-admin.php
+msgid "تبلیغ تازه"
+msgstr "إعلان جديد"
+
+#: includes/tp-ads-pages.php
+msgid "تبلیغ مستقیم در توپرشیا: جایگاه‌های ثابت در صفحه‌های مقصد، خبر، هاب و صفحۀ اول؛ بی پنجرۀ بازشو، بی تبلیغ چسبان در موبایل و حداکثر سه تبلیغ در هر صفحه. هر تبلیغ برچسب «تبلیغ» دارد و آمار نمایش و کلیک بی‌نام گزارش می‌شود."
+msgstr "الإعلان المباشر في ToPersia: مواضع ثابتة في صفحات الوجهات والأخبار والمحاور والصفحة الرئيسية؛ بلا نوافذ منبثقة، وبلا إعلانات ثابتة على الجوال، وثلاثة إعلانات على الأكثر في كل صفحة. يحمل كل إعلان وسم «إعلان»، وتُعرض إحصاءات الظهور والنقر بلا هوية."
+
+#: includes/tp-ads-admin.php
+msgid "تبلیغات"
+msgstr "الإعلانات"
+
+#: includes/tp-ads-admin.php
+msgid "تبلیغ‌دهنده"
+msgstr "المعلِن"
+
+#: includes/tp-ads-data.php
+msgid "تبلیغ‌ها"
+msgstr "الإعلانات"
+
+#: includes/tp-ads-data.php
+#, php-format
+msgid "تصویر %1$s برای «%2$s»"
+msgstr "صورة %1$s لـ«%2$s»"
+
+#: includes/tp-ads-data.php
+msgid "تصویرها (به‌ازای نسبت هر جایگاه)"
+msgstr "الصور (واحدة لكل نسبة موضع)"
+
+#: includes/tp-ads-pages.php
+msgid "تماس"
+msgstr "التواصل"
+
+#: includes/tp-ads-pages.php
+msgid "تماس برای تبلیغ"
+msgstr "تواصلوا معنا للإعلان"
+
+#: includes/tp-ads-pages.php
+msgid "تماس بگیرید."
+msgstr "تواصلوا معنا."
+
+#: includes/tp-ads-admin.php
+msgid "تمدید ۳۰ روز"
+msgstr "تمديد 30 يومًا"
+
+#: includes/tp-ads-admin.php
+msgid "تمدید ۷ روز"
+msgstr "تمديد 7 أيام"
+
+#: includes/tp-ads-data.php
+msgid "تنظیم کمپین"
+msgstr "إعدادات الحملة"
+
+#: includes/tp-ads-admin.php
+msgid "توقف"
+msgstr "إيقاف مؤقت"
+
+#: includes/tp-ads-pages.php
+msgid "جاذبه‌ها"
+msgstr "المعالم"
+
+#: includes/tp-ads-pages.php
+msgid "جاذبه‌ها و راهنما"
+msgstr "المعالم والدليل"
+
+#: includes/tp-ads-render.php
+msgid "جای تبلیغ"
+msgstr "مساحة إعلانية"
+
+#: includes/tp-ads-admin.php
+msgid "جایگاه"
+msgstr "الموضع"
+
+#: includes/tp-ads-render.php
+#, php-format
+msgid "جایگاه خالی: %s"
+msgstr "موضع فارغ: %s"
+
+#: includes/tp-ads-admin.php
+msgid "جایگاه‌ها"
+msgstr "المواضع"
+
+#: includes/tp-ads-admin.php
+msgid "جایگاه‌های خالی (برای فروش)"
+msgstr "مواضع فارغة (للبيع)"
+
+#: includes/tp-ads-data.php
+msgid "جست‌وجوی کمپین"
+msgstr "البحث في الحملات"
+
+#: includes/tp-ads-admin.php
+msgid "جمع بازه"
+msgstr "مجموع الفترة"
+
+#: includes/tp-ads-data.php
+msgid "خبر و مقاله"
+msgstr "الأخبار والمقالات"
+
+#: includes/tp-ads-admin.php
+msgid "دریافت CSV"
+msgstr "تنزيل CSV"
+
+#: includes/tp-ads-admin.php
+msgid "دسترسی ندارید."
+msgstr "ليست لديك صلاحية الوصول."
+
+#: includes/tp-ads-data.php
+msgid "دستگاه"
+msgstr "الجهاز"
+
+#: includes/tp-ads-data.php
+msgid "دست‌کم یک جایگاه"
+msgstr "موضع واحد على الأقل"
+
+#: includes/tp-ads-data.php
+msgid "دسکتاپ"
+msgstr "سطح المكتب"
+
+#: includes/tp-ads-pages.php
+msgid "دسکتاپ و موبایل"
+msgstr "سطح المكتب والجوال"
+
+#: includes/tp-ads-pages.php
+msgid "زبان (فارسی، انگلیسی، عربی)"
+msgstr "لغات (الفارسية والإنجليزية والعربية)"
+
+#: includes/tp-ads-data.php
+msgid "زبان‌ها"
+msgstr "اللغات"
+
+#: includes/tp-ads-admin.php
+msgid "زمانش گذشته"
+msgstr "انقضى وقتها"
+
+#: includes/tp-ads-pages.php
+msgid "زمانی"
+msgstr "زمني"
+
+#: includes/tp-ads-admin.php
+msgid "زمان‌بندی‌شده"
+msgstr "مجدولة"
+
+#: includes/tp-ads-logic.php
+msgid "زیر نوار ابزار هاب"
+msgstr "أسفل شريط أدوات المحور"
+
+#: includes/tp-ads-logic.php
+msgid "ستون کناری خبر و مقاله"
+msgstr "العمود الجانبي للأخبار والمقالات"
+
+#: includes/tp-ads-logic.php
+msgid "ستون کناری مقصد"
+msgstr "العمود الجانبي للوجهة"
+
+#: includes/tp-ads-pages.php
+msgid "سربرگ (بی تبلیغ)"
+msgstr "الترويسة (بلا إعلانات)"
+
+#: includes/tp-ads-pages.php
+msgid "سربرگ و درباره"
+msgstr "الترويسة والنبذة"
+
+#: includes/tp-ads-pages.php
+msgid "سربرگ و نوار ابزار"
+msgstr "الترويسة وشريط الأدوات"
+
+#: includes/tp-ads-pages.php
+msgid "سربرگ و ۳ بند نخست"
+msgstr "الترويسة وأول 3 فقرات"
+
+#: includes/tp-ads-data.php
+msgid "سقف نمایش (۰ = بی سقف)"
+msgstr "حد الظهور (0 = بلا حد)"
+
+#: includes/tp-ads-admin.php
+msgid "سقف پر شد"
+msgstr "بلغ الحد"
+
+#: includes/tp-ads-data.php
+msgid "سقف کلیک (۰ = بی سقف)"
+msgstr "حد النقرات (0 = بلا حد)"
+
+#: includes/tp-ads-data.php
+msgid "شروع"
+msgstr "البداية"
+
+#: includes/tp-ads-data.php
+msgid "شناسۀ پیوست"
+msgstr "معرّف المرفق"
+
+#: includes/tp-ads-data.php
+msgid "صفحۀ اول"
+msgstr "الصفحة الرئيسية"
+
+#: includes/tp-ads-pages.php
+msgid "صفحۀ مقصد"
+msgstr "صفحة الوجهة"
+
+#: includes/tp-ads-pages.php
+msgid "صفحۀ مقصد (استان، شهر، جاذبه و …)"
+msgstr "صفحات الوجهات (محافظة، مدينة، معلم …)"
+
+#: includes/tp-ads-pages.php
+msgid "عددها"
+msgstr "الأرقام"
+
+#: includes/tp-ads-data.php
+msgid "فارسی"
+msgstr "الفارسية"
+
+#: includes/tp-ads-admin.php
+msgid "فعال"
+msgstr "نشطة"
+
+#: includes/tp-ads-pages.php
+msgid "فقط دسکتاپ"
+msgstr "سطح المكتب فقط"
+
+#: includes/tp-ads-pages.php
+msgid "فقط عدد واقعی: شمار صفحه‌ها از خود سایت است؛ آمار بازدید پس از راه‌اندازی و فقط از سامانۀ شمارش بی‌نام همین سایت."
+msgstr "أرقام حقيقية فقط: عدد الصفحات من الموقع نفسه؛ وإحصاءات الزيارات بعد الإطلاق فقط، ومن نظام العدّ المجهول الهوية لهذا الموقع وحده."
+
+#: includes/tp-ads-pages.php
+msgid "قیمت:"
+msgstr "السعر:"
+
+#: includes/tp-ads-data.php
+#, php-format
+msgid "متن جایگزین تصویر (%s)"
+msgstr "النص البديل للصورة (%s)"
+
+#: includes/tp-ads-data.php
+msgid "متن جایگزین تصویر (الزامی برای هر زبان هدف)"
+msgstr "النص البديل للصورة (إلزامي لكل لغة مستهدفة)"
+
+#: includes/tp-ads-admin.php
+msgid "متوقف"
+msgstr "متوقفة"
+
+#: includes/tp-ads-pages.php
+msgid "مجله"
+msgstr "المجلة"
+
+#: includes/tp-ads-pages.php
+msgid "مدل‌های فروش"
+msgstr "نماذج البيع"
+
+#: includes/tp-ads-pages.php
+msgid "مرتبط‌ها"
+msgstr "ذات صلة"
+
+#: includes/tp-ads-data.php
+msgid "مقصد"
+msgstr "الوجهة"
+
+#: includes/tp-ads-data.php
+msgid "مقصد (نشانی کامل)"
+msgstr "الرابط الهدف (العنوان الكامل)"
+
+#: includes/tp-ads-data.php
+msgid "موبایل"
+msgstr "الجوال"
+
+#: includes/tp-ads-logic.php
+msgid "میان بخش‌های مقصد"
+msgstr "بين أقسام الوجهة"
+
+#: includes/tp-ads-logic.php
+msgid "میان صفحۀ اول"
+msgstr "وسط الصفحة الرئيسية"
+
+#: includes/tp-ads-logic.php
+msgid "میان متن خبر و مقاله"
+msgstr "داخل نص الأخبار والمقالات"
+
+#: includes/tp-ads-data.php
+msgid "نشانی مقصد (http یا https)"
+msgstr "عنوان الرابط الهدف (http أو https)"
+
+#: includes/tp-ads-admin.php
+msgid "نمایش"
+msgstr "مرات الظهور"
+
+#: includes/tp-ads-pages.php
+msgid "نمایش دیده‌شدۀ تبلیغ در ۳۰ روز گذشته"
+msgstr "مرات ظهور الإعلانات المرئية في آخر 30 يومًا"
+
+#: includes/tp-ads-pages.php
+msgid "نمایشی"
+msgstr "حسب الظهور"
+
+#: includes/tp-ads-admin.php
+msgid "نمونۀ نمایشی"
+msgstr "نموذج توضيحي"
+
+#: includes/tp-ads-data.php
+msgid "نمونۀ نمایشی — فقط در حالت پیش‌نمایش دیده می‌شود."
+msgstr "نموذج توضيحي — يظهر في وضع المعاينة فقط."
+
+#: includes/tp-ads-data.php
+msgid "نوع صفحه"
+msgstr "نوع الصفحة"
+
+#: includes/tp-ads-data.php
+msgid "هاب"
+msgstr "المحور"
+
+#: includes/tp-ads-pages.php
+msgid "هاب و فهرست خبر"
+msgstr "المحاور وقوائم الأخبار"
+
+#: includes/tp-ads-admin.php
+msgid "همه"
+msgstr "الكل"
+
+#: includes/tp-ads-admin.php
+msgid "همۀ جایگاه‌ها اکنون تبلیغ دارند."
+msgstr "كل المواضع فيها إعلان الآن."
+
+#: includes/tp-ads-admin.php
+msgid "هیچ تبلیغی با این پالایش نیست."
+msgstr "لا توجد إعلانات تطابق هذا التصفية."
+
+#: includes/tp-ads-admin.php
+msgid "هیچ کمپین فعالی تا ۷ روز آینده تمام نمی‌شود."
+msgstr "لا تنتهي أي حملة نشطة خلال الأيام السبعة القادمة."
+
+#: includes/tp-ads-data.php
+msgid "وزن (۱ تا ۱۰۰)"
+msgstr "الوزن (1 إلى 100)"
+
+#: includes/tp-ads-admin.php
+msgid "وضعیت"
+msgstr "الحالة"
+
+#: includes/tp-ads-data.php
+msgid "ویرایش کمپین"
+msgstr "تحرير الحملة"
+
+#: includes/tp-ads-admin.php
+msgid "پالایش"
+msgstr "تصفية"
+
+#: includes/tp-ads-logic.php
+msgid "پاورقی"
+msgstr "التذييل"
+
+#: includes/tp-ads-pages.php
+msgid "پاورقی همۀ صفحه‌ها"
+msgstr "تذييل كل الصفحات"
+
+#: includes/tp-ads-admin.php
+msgid "پایان"
+msgstr "النهاية"
+
+#: includes/tp-ads-data.php
+msgid "پایان باید پس از شروع باشد"
+msgstr "يجب أن تكون النهاية بعد البداية"
+
+#: includes/tp-ads-admin.php
+msgid "پایان نزدیک (۷ روز آینده)"
+msgstr "تنتهي قريبًا (الأيام السبعة القادمة)"
+
+#: includes/tp-ads-admin.php
+msgid "پایان‌یافته"
+msgstr "منتهية"
+
+#: includes/tp-ads-logic.php
+msgid "پیش از مرتبط‌ها"
+msgstr "قبل المحتوى ذي الصلة"
+
+#: includes/tp-ads-logic.php
+msgid "کارت میان فهرست هاب"
+msgstr "بطاقة داخل قائمة المحور"
+
+#: includes/tp-ads-pages.php
+msgid "کارت‌های بعدی (هر ۸ کارت یک جایگاه)"
+msgstr "البطاقات التالية (موضع واحد كل 8 بطاقات)"
+
+#: includes/tp-ads-admin.php
+msgid "کلیک"
+msgstr "النقرات"
+
+#: includes/tp-ads-pages.php
+msgid "کلیکی"
+msgstr "حسب النقر"
+
+#: includes/tp-ads-data.php
+msgid "کمپین تازه"
+msgstr "حملة جديدة"
+
+#: includes/tp-ads-data.php
+msgid "کمپین متوقف ماند؛ برای فعال‌شدن لازم است:"
+msgstr "بقيت الحملة متوقفة؛ لتفعيلها يلزم:"
+
+#: includes/tp-ads-data.php
+msgid "کمپینی نیست."
+msgstr "لا توجد حملات."
+
+#: includes/tp-ads-data.php
+msgid "کمپین‌ها"
+msgstr "الحملات"
+
+#: includes/tp-ads-admin.php
+msgid "گزارش"
+msgstr "التقرير"
+
+#: includes/tp-ads-admin.php
+msgid "گزارش تبلیغات"
+msgstr "تقرير الإعلانات"
+
+#: includes/tp-ads-data.php
+msgid "یادداشت داخلی"
+msgstr "ملاحظة داخلية"
+
+#: includes/tp-ads-pages.php
+msgid "یک جایگاه در یک بازه فقط برای یک برند."
+msgstr "موضع واحد لعلامة تجارية واحدة فقط خلال فترة محددة."
+
+#: includes/tp-ads-pages.php
+msgid "یک یا چند جایگاه برای بازه‌ای مشخص؛ شروع و پایان دقیق."
+msgstr "موضع واحد أو أكثر لفترة محددة، ببداية ونهاية دقيقتين."
+
+#: includes/tp-ads-pages.php
+msgid "۱ تا ۴ تبلیغ کنار هم"
+msgstr "من 1 إلى 4 إعلانات متجاورة"
+
+#: includes/tp-ads-pages.php
+msgid "۴ کارت"
+msgstr "4 بطاقات"

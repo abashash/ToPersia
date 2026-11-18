@@ -1,0 +1,17 @@
+/* ToPersia Ads — پیشخوان. جهت پیشخوان (بی dir ثابت)؛ فقط ویژگی منطقی. */
+.tp-ads-form fieldset{margin-block:12px;padding:8px 12px;border:1px solid #c3c4c7;border-radius:4px}
+.tp-ads-form legend{padding-inline:4px;font-weight:600}
+.tp-ads-form label{display:block;margin-block-end:4px}
+.tp-ads-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px 16px}
+.tp-ads-grid label{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tp-ads-img{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tp-ads-img input[type="number"]{inline-size:7em}
+.tp-ads-img img{border:1px solid #c3c4c7;border-radius:4px;object-fit:cover}
+.tp-ads-dim{color:#50575e;font-size:12px}
+.tp-ads-wrap .tp-ads-note{max-inline-size:70em;color:#3c434a}
+.tp-ads-filter{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-block:12px}
+.tp-ads-table{margin-block:12px}
+.tp-ads-table .tp-ads-num{text-align:end;white-space:nowrap}
+.tp-ads-list{list-style:disc;padding-inline-start:20px}
+.tp-ads-badge{display:inline-block;padding:0 6px;border:1px solid #996800;border-radius:999px;color:#614200;font-size:12px}
+.tp-ads-wrap h2{margin-block-start:24px}

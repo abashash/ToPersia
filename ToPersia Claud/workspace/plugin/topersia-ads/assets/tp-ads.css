@@ -1,0 +1,83 @@
+/* ToPersia Ads — دستۀ 54 بند ۸ (P5-D623 · D624). فقط توکن --tp-*؛ بی گرادیان، بی سایه، بی letter-spacing.
+   نسبت ثابت از --tp-ad-r و ابعاد صریح img ← CLS صفر. مرز موبایل 767px همان <source media> و topersia_ads_take(). */
+
+.tp-ad-slot{margin-block:24px;min-inline-size:0}
+.tp-ad-slot--hub-infeed,.tp-ad-slot--single-rail,.tp-ad-slot--entity-rail,.tp-ad-slot--entity-mid{margin-block:0}
+/* بند ۷ — هر جایگاه جز «زیر نوار ابزار هاب» بسته است تا tp-ads.js بازش کند: فقط یکسره زیر صفحه‌نمایش جاری
+   (نخستین صفحه‌نمایش موبایل بی تبلیغ، باز شدن بی CLS) و دست‌کم دو صفحه‌نمایش دور از واحد باز پیشین */
+.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top){display:none}
+/* نمای فهرست هاب: کارت میان فهرست هم‌اندازۀ کارت، نه پهنای کامل ردیف */
+@media (min-width:768px){
+  .tp-news-grid--rows > .tp-ad-slot--hub-infeed{max-inline-size:400px}
+}
+.tp-ad{position:relative;margin:0;max-inline-size:100%;--tp-ad-r:4 / 1}
+.tp-ad--r-wide{--tp-ad-r:4 / 1}
+.tp-ad--r-mwide{--tp-ad-r:2 / 1}
+.tp-ad--r-rect{--tp-ad-r:6 / 5}
+.tp-ad--r-card{--tp-ad-r:4 / 3}
+.tp-ad__a{display:block;position:relative;aspect-ratio:var(--tp-ad-r);overflow:hidden;border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius);background:var(--tp-tile-bg);color:var(--tp-tile-text);text-decoration:none;box-shadow:var(--tp-shadow-none,none)}
+.tp-ad__a:hover{border-color:var(--tp-border-2)}
+.tp-ad__a:focus-visible{outline:2px solid var(--tp-primary-text);outline-offset:2px}
+.tp-ad__a picture{display:block;inline-size:100%;block-size:100%}
+/* بالاتر از `.tp-news-body img{block-size:auto}` متن خبر و img سراسری پوسته — تصویر همیشه قاب ثابت را پر می‌کند */
+html body .tp-ad img.tp-ad__img,.tp-ad__img{display:block;inline-size:100%;max-inline-size:100%;block-size:100%;object-fit:cover;margin:0;border-radius:0}
+.tp-ad__tag{position:absolute;inset-block-start:8px;inset-inline-start:8px;padding:1px 8px;border:1px solid var(--tp-border);border-radius:999px;background:var(--tp-surface);color:var(--tp-text);font-size:12px;line-height:1.5;pointer-events:none}
+.tp-ad--demo .tp-ad__a{display:grid;place-items:center;border-style:dashed}
+.tp-ad__ph{color:var(--tp-tile-text);font-size:14px}
+.tp-ad--hub-infeed,.tp-ad--hub-infeed .tp-ad__a{block-size:100%}
+
+/* دید دستگاه — یک HTML برای همه (کش)؛ موبایل نسبت خودش را دارد */
+@media (max-width:767px){
+  .tp-ad--rm-mwide{--tp-ad-r:2 / 1}
+  .tp-ad--rm-card{--tp-ad-r:4 / 3}
+  .tp-ad--rm-wide{--tp-ad-r:4 / 1}
+  .tp-ad--desk,.tp-ad-slot:not(:has(.tp-ad:not(.tp-ad--desk))){display:none}
+}
+@media (min-width:768px){
+  .tp-ad--mob,.tp-ad-slot:not(:has(.tp-ad:not(.tp-ad--mob))){display:none}
+}
+
+/* ستون کناری خبر و مقاله — چسبان فقط دسکتاپ؛ ستون باید تا ته ردیف کشیده شود تا جای چسبیدن باشد */
+@media (min-width:1025px){
+  html .tp-page .tp-content-grid > .tp-rail:has(> .tp-ad-slot--single-rail){align-self:stretch}
+  html .tp-page .tp-rail > .tp-ad-slot--single-rail{position:sticky;inset-block-start:calc(var(--tp-header-h,64px) + 16px)}
+}
+/* ستون کناری مقصد پس از نقشه (ترتیب دسکتاپ با CSS، همان ثبت‌نامۀ پنل)؛ میانۀ ستون اصلی در موبایل پس از جاذبه‌ها */
+@media (min-width:721px){
+  html .tp-page.tp-page .tp-rail > .tp-ad-slot--entity-rail{order:3}
+}
+@media (max-width:720px){
+  html .tp-page.tp-page .tp-main-col > .tp-ad-slot--entity-mid{order:4}
+}
+
+/* جایگاه خالی — فقط برای مدیر تبلیغ (P5-D624)؛ جایگاه فقط دسکتاپ در موبایل پنهان */
+.tp-ad-empty{margin-block:16px;padding:12px 16px;border:2px dotted var(--tp-text-2);border-radius:var(--tp-tile-radius);background:transparent;color:var(--tp-text);font-size:14px;text-align:center}
+@media (max-width:767px){
+  .tp-ad-empty.tp-ad--desk{display:none}
+}
+
+/* صفحۀ فروش /advertise/ */
+.tp-adv{max-inline-size:var(--tp-content-w,1200px);margin-inline:auto;color:var(--tp-text)}
+.tp-adv__lead{font-size:1.125rem;line-height:1.9;max-inline-size:var(--tp-measure,70ch)}
+.tp-adv__s{margin-block:32px}
+.tp-adv__s h2{color:var(--tp-text-strong);margin-block:0 16px}
+.tp-adv__fig{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.tp-adv__fig li{display:grid;gap:4px;padding:16px;border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius);background:var(--tp-tile-bg);color:var(--tp-tile-text)}
+.tp-adv__fig strong{font-size:1.5rem;color:var(--tp-tile-text)}
+.tp-adv__note{color:var(--tp-text);font-size:14px}
+.tp-adv-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.tp-adv-map__p{margin:0;padding:12px;border:1px solid var(--tp-border);border-radius:var(--tp-tile-radius);background:var(--tp-surface)}
+.tp-adv-map__p figcaption{font-weight:700;margin-block-end:8px;color:var(--tp-text-strong)}
+.tp-adv-map__p ol{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.tp-adv-map__b{padding:8px 10px;border:1px solid var(--tp-border);border-radius:var(--tp-r-sm,8px);background:var(--tp-surface-2);color:var(--tp-text);font-size:14px}
+.tp-adv-map__b--ad{display:grid;gap:2px;border:2px dashed var(--tp-primary);background:var(--tp-surface)}
+.tp-adv-map__b--ad span{color:var(--tp-text);font-size:13px}
+.tp-adv__models{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0}
+.tp-adv__models div{padding:16px;border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius);background:var(--tp-tile-bg)}
+.tp-adv__models dt{font-weight:700;color:var(--tp-tile-text)}
+.tp-adv__models dd{margin:4px 0 0;color:var(--tp-tile-text);font-size:14px}
+.tp-adv__price{font-size:1.125rem}
+/* بالاتر از رنگ پیوند پوسته در متن برگه (همان الگوی img واحد) — متن دکمه همیشه --tp-on-primary روی --tp-primary */
+html body .tp-adv a.tp-adv__cta{display:inline-block;padding:10px 20px;border-radius:999px;background:var(--tp-primary);color:var(--tp-on-primary);font-weight:700;text-decoration:none}
+html body .tp-adv a.tp-adv__cta:hover{color:var(--tp-on-primary);text-decoration:underline}
+html body .tp-adv a.tp-adv__cta:focus-visible{outline:2px solid var(--tp-primary-text);outline-offset:2px}
