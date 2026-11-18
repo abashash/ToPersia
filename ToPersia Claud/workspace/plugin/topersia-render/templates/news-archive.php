@@ -115,6 +115,7 @@ if ( $tp_part ) {
 				</div>
 
 				<div class="tp-news-results"<?php echo topersia_g_news_results_attrs( $tp_total ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+					<?php echo topersia_g_ad_slot( 'hub-top' ); // phpcs:ignore WordPress.Security.EscapeOutput -- دستۀ 54 ?>
 					<?php echo topersia_g_news_chips( $tp_city_items, __( 'شهرهای استان', 'topersia' ), '', 'city' ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 
 					<?php if ( $tp_grid ) : ?>
@@ -126,7 +127,7 @@ if ( $tp_part ) {
 								<?php endif; ?>
 							</div>
 							<div class="tp-news-grid" data-tp-news-items>
-								<?php foreach ( $tp_grid as $tp_one ) { echo topersia_g_news_archive_card( $tp_one ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<?php echo implode( '', topersia_g_ad_feed( array_map( 'topersia_g_news_archive_card', $tp_grid ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput -- دستۀ 54 ?>
 							</div>
 						</section>
 					<?php elseif ( ! $tp_feat ) : ?>

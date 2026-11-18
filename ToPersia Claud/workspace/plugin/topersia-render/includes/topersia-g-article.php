@@ -293,7 +293,7 @@ if ( ! function_exists( 'topersia_g_news_single_zones' ) ) {
 		}
 
 		$text = '' !== trim( (string) $content )
-			? '<section id="tp-text" class="tp-section tp-news-text" aria-label="' . esc_attr__( 'متن', 'topersia' ) . '"><article class="tp-news-body">' . $content . '</article></section>'
+			? '<section id="tp-text" class="tp-section tp-news-text" aria-label="' . esc_attr__( 'متن', 'topersia' ) . '"><article class="tp-news-body">' . topersia_g_ad_inline( $content ) . '</article></section>'
 			: '';
 
 		$related = '' !== $cards
@@ -307,6 +307,7 @@ if ( ! function_exists( 'topersia_g_news_single_zones' ) ) {
 			'main' => array(
 				array( 'tp-text', __( 'متن', 'topersia' ), $text ),
 				array( 'tp-reviews', __( 'نظرات', 'topersia' ), function_exists( 'topersia_g_sc_reviews' ) ? topersia_g_sc_reviews( array( 'id' => $id ) ) : '' ),
+				array( 'tp-ad-single-end', '', topersia_g_ad_slot( 'single-end' ) ),   /* دستۀ 54 — پیش از «مرتبط‌ها» */
 				array( 'tp-rel-news', topersia_g_news_l( 'related' ), $related ),
 			),
 			'rail' => array(
@@ -315,6 +316,7 @@ if ( ! function_exists( 'topersia_g_news_single_zones' ) ) {
 				array( 'tp-rel-places', __( 'مکان‌های مرتبط', 'topersia' ), topersia_g_news_box_places( $id ) ),
 				array( 'tp-latest', '', topersia_g_news_box_latest( $id ) ),
 				array( 'tp-sources', __( 'منبع', 'topersia' ), topersia_g_news_box_source( $id ) ),
+				array( 'tp-ad-single-rail', '', topersia_g_ad_slot( 'single-rail' ) ),   /* دستۀ 54 — ته ستون، چسبان فقط دسکتاپ */
 			),
 		);
 

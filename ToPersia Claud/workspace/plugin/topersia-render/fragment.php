@@ -59,6 +59,13 @@ if ( '' === $tp_key || ! is_file( $tp_file ) || filemtime( $tp_file ) < time() -
 	$tp_miss();
 }
 
+$tp_html = (string) file_get_contents( $tp_file );
+
+/* دستۀ 54 (P5-D623): جایگاه تبلیغ چرخش ده‌دقیقه‌ای دارد — قطعه‌ای که در پنجرۀ دیگری ساخته شده کهنه است، نه «hit» */
+if ( preg_match( '/data-tp-adw="(\d+)"/', $tp_html, $tp_m ) && (int) $tp_m[1] !== (int) floor( time() / TOPERSIA_FRAG_AD_WINDOW ) ) {
+	$tp_miss();
+}
+
 header( 'Content-Type: text/html; charset=UTF-8' );
 header( 'X-TP-Frag: hit' );
-readfile( $tp_file );
+echo $tp_html; // phpcs:ignore WordPress.Security.EscapeOutput -- همان پروندۀ ساختۀ وردپرس

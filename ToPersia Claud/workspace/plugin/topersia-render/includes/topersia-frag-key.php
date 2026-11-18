@@ -12,6 +12,9 @@
 if ( ! defined( 'TOPERSIA_FRAG_TTL' ) ) {
 	define( 'TOPERSIA_FRAG_TTL', 21600 );  /* ثانیه (شش ساعت) — سقف عمر هر پرونده، جدا از ابطال هنگام ذخیره */
 }
+if ( ! defined( 'TOPERSIA_FRAG_AD_WINDOW' ) ) {
+	define( 'TOPERSIA_FRAG_AD_WINDOW', 600 );  /* دستۀ 54: همان TOPERSIA_ADS_WINDOW افزونۀ تبلیغ (assert-54 برابری را می‌پاید) — قطعۀ پنجرۀ دیگر = کهنه */
+}
 if ( ! defined( 'TOPERSIA_FRAG_MAX' ) ) {
 	define( 'TOPERSIA_FRAG_MAX', 400 );    /* بیش از این پرونده ← همه پاک */
 }

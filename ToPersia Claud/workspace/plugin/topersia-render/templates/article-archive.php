@@ -75,6 +75,7 @@ if ( $tp_part ) {
 				</div>
 
 				<div class="tp-news-results"<?php echo topersia_g_news_results_attrs( $tp_total ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+					<?php echo topersia_g_ad_slot( 'hub-top' ); // phpcs:ignore WordPress.Security.EscapeOutput -- دستۀ 54 ?>
 					<?php if ( $tp_ids ) : ?>
 						<section class="tp-news-latest" aria-labelledby="tp-news-latest-h">
 							<div class="tp-news-latest__head">
@@ -84,7 +85,7 @@ if ( $tp_part ) {
 								<?php endif; ?>
 							</div>
 							<div class="tp-news-grid" data-tp-news-items>
-								<?php foreach ( $tp_ids as $tp_one ) { echo topersia_g_news_archive_card( $tp_one ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<?php echo implode( '', topersia_g_ad_feed( array_map( 'topersia_g_news_archive_card', $tp_ids ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput -- دستۀ 54 ?>
 							</div>
 						</section>
 					<?php else : ?>

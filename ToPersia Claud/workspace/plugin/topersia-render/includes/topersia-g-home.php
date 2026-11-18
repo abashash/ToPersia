@@ -878,9 +878,11 @@ if ( ! function_exists( 'topersia_g_sc_home' ) ) {
 		$body = $stats
 			. topersia_g_home_section( 'tp-home-provinces', __( 'استان‌های ایران', 'topersia' ), $prov_body, $prov_more )
 			. $duo
+			. topersia_g_ad_slot( 'home-mid', 0 )   /* دستۀ 54 — میان صفحه؛ هیچ تبلیغی در هیرو و نخستین صفحه‌نمایش موبایل */
 			. topersia_g_home_section( 'tp-home-attractions', __( 'جاذبه‌ها', 'topersia' ), topersia_g_home_slider( 'tp-home-attrslide', __( 'جاذبه‌ها', 'topersia' ), $attr_cards, count( $groups ) ), $attr_more, 'tp-home-lazy' )
 			. $row3   /* 'tp-home-events' نخستین ستون ردیف سه‌ستونی — P5-D560 */
 			. topersia_g_home_section( 'tp-home-guide', __( 'راهنمای سفر به ایران', 'topersia' ), '' !== $guide_html ? '<nav class="tp-home-guide tp-home-guide--nine tp-home-glass" aria-label="' . esc_attr__( 'راهنمای سفر به ایران', 'topersia' ) . '">' . $guide_html . '</nav>' : '', array(), 'tp-home-lazy' )
+			. topersia_g_ad_slot( 'home-mid', 1 )
 			. $mag
 			. ( '' !== $photos ? $photo_dlg : '' );
 

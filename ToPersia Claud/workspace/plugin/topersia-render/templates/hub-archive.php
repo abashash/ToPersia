@@ -103,6 +103,7 @@ if ( $tp_part ) {
 				</div>
 
 				<div class="tp-news-results"<?php echo topersia_g_news_results_attrs( $tp_total ); // phpcs:ignore WordPress.Security.EscapeOutput ?>>
+					<?php echo topersia_g_ad_slot( 'hub-top' ); // phpcs:ignore WordPress.Security.EscapeOutput -- دستۀ 54 ?>
 					<?php if ( $tp_tiles ) : ?>
 						<section class="tp-hub-list" aria-labelledby="tp-hub-list-h">
 							<div class="tp-news-latest__head">
@@ -112,7 +113,7 @@ if ( $tp_part ) {
 								<?php endif; ?>
 							</div>
 							<div class="tp-news-grid tp-hub-grid" data-tp-news-items>
-								<?php echo implode( '', $tp_tiles ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<?php echo implode( '', topersia_g_ad_feed( $tp_tiles ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 							</div>
 						</section>
 					<?php else : ?>

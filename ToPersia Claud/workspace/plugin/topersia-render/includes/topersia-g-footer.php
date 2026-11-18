@@ -150,6 +150,12 @@ if ( ! function_exists( 'topersia_g_sc_footer_ads' ) ) {
 	/** [tp_footer_ads] — ۱ تا ۴ تبلیغ؛ صفر ← هیچ خروجی. */
 	function topersia_g_sc_footer_ads() {
 
+		/* دستۀ 54 (P5-D623): افزونۀ topersia-ads تبلیغ واقعی پاورقی را می‌دهد؛ null ← همان رفتار پیشین (گزینه و نمونۀ نمایشی) */
+		$pre = function_exists( 'apply_filters' ) ? apply_filters( 'topersia_g_footer_ads_pre', null ) : null;
+		if ( null !== $pre ) {
+			return (string) $pre;
+		}
+
 		$opts  = topersia_g_ft_opts();
 		$ads   = topersia_g_ft_ads( $opts );
 		$tag   = esc_html__( 'تبلیغ', 'topersia' );
@@ -157,7 +163,8 @@ if ( ! function_exists( 'topersia_g_sc_footer_ads' ) ) {
 
 		foreach ( $ads as $a ) {
 			$alt    = '' !== $a['alt'] ? $a['alt'] : __( 'تبلیغ', 'topersia' );
-			$items .= '<a class="tp-ft-ad" href="' . esc_url( $a['url'] ) . '" target="_blank" rel="sponsored noopener">'
+			/* دستۀ 54 بند ۸: data-nosnippet — متن تبلیغ وارد قطعۀ نتایج و خلاصه‌ساز نمی‌شود (همان نشانۀ topersia-ads) */
+			$items .= '<a class="tp-ft-ad" href="' . esc_url( $a['url'] ) . '" target="_blank" rel="sponsored noopener" data-nosnippet>'
 				. topersia_g_ft_img( $a['img'], $alt, 'tp-ft-ad__img' )
 				. '<span class="tp-ft-ad__tag">' . $tag . '</span></a>';
 		}
@@ -167,7 +174,7 @@ if ( ! function_exists( 'topersia_g_sc_footer_ads' ) ) {
 		if ( 0 === $n && topersia_g_ft_demo() ) {
 			$n = $opts['demo_ads'];
 			for ( $i = 0; $i < $n; $i++ ) {
-				$items .= '<div class="tp-ft-ad tp-ft-ad--demo"><span class="tp-ft-ad__ph">' . esc_html__( 'جای تبلیغ', 'topersia' ) . '</span>'
+				$items .= '<div class="tp-ft-ad tp-ft-ad--demo" data-nosnippet><span class="tp-ft-ad__ph">' . esc_html__( 'جای تبلیغ', 'topersia' ) . '</span>'
 					. '<span class="tp-ft-ad__tag">' . esc_html__( 'نمونۀ نمایشی', 'topersia' ) . '</span></div>';
 			}
 		}

@@ -37,6 +37,31 @@ if ( ! function_exists( 'topersia_g_fold' ) ) {
 	}
 }
 
+/**
+ * جایگاه تبلیغ — دستۀ 54 (P5-D621). render فقط قلاب را صدا می‌زند؛ تصمیم، تراکم و HTML در افزونۀ topersia-ads.
+ * افزونه نیست یا خاموش ← تهی و صفحه همان پیشین. $wrap: ظرف `.tp-wrap` برای جایگاهی که بیرون از ستون می‌نشیند (خانه).
+ */
+if ( ! function_exists( 'topersia_g_ad_slot' ) ) {
+	function topersia_g_ad_slot( $slot, $i = 0, $wrap = false ) {
+		$html = function_exists( 'apply_filters' ) ? (string) apply_filters( 'topersia_ad_slot', '', (string) $slot, (int) $i ) : '';
+		return ( '' !== $html && $wrap ) ? '<div class="tp-wrap">' . $html . '</div>' : $html;
+	}
+}
+
+/** تبلیغ میان متن (پس از بند سوم سطح بالا؛ متن کوتاه‌تر بی تبلیغ) — HTML متن ← همان متن با واحد. */
+if ( ! function_exists( 'topersia_g_ad_inline' ) ) {
+	function topersia_g_ad_inline( $html, $slot = 'single-inline' ) {
+		return function_exists( 'apply_filters' ) ? (string) apply_filters( 'topersia_ad_inline', (string) $html, (string) $slot ) : (string) $html;
+	}
+}
+
+/** کارت تبلیغ میان کارت‌های فهرست (هاب) — آرایۀ HTML کارت‌ها ← همان آرایه با واحدها؛ بی افزونه دست‌نخورده. */
+if ( ! function_exists( 'topersia_g_ad_feed' ) ) {
+	function topersia_g_ad_feed( array $cards, $slot = 'hub-infeed' ) {
+		return function_exists( 'apply_filters' ) ? array_values( (array) apply_filters( 'topersia_ad_feed', $cards, (string) $slot ) ) : $cards;
+	}
+}
+
 if ( function_exists( 'add_filter' ) ) {
 
 	/*
