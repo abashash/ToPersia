@@ -288,7 +288,7 @@ return array (
     'توضیح نظام تقویمی' => 'About the calendar system',
     'توقف حرکت و پخش خودکار' => 'Stop motion and autoplay',
     'تولیدشده با API' => 'Generated via API',
-    'توپرشیا مرجع جامع اطلاعات ایران و گردشگری ایران است؛ راهنمای استان‌ها، شهرها، روستاها، جزیره‌ها، جاذبه‌ها، رویدادها و برنامه‌ریزی سفر به ایران، به چند زبان و با ذکر منبع و به‌روزرسانی منظم.' => 'ToPersia is a comprehensive reference to Iran and travel in Iran: guides to provinces, cities, villages, islands, attractions, events and trip planning, in several languages, with sources and regular updates.',
+    'توپرشیا راهنمای جامع ایران است؛ از استان‌ها و شهرهای بزرگ تا روستاها و جزیره‌های کمتر دیده‌شده. جاذبه‌ها، رویدادها و اطلاعات کاربردی سفر را یک‌جا پیدا کنید و مسیرتان را با خیال راحت بچینید.' => 'ToPersia is your guide to Iran, from big cities and provinces to villages and little-known islands. Find attractions, events and practical travel information in one place, and plan your trip with confidence.',
     'تپسی' => 'Tapsi',
     'تکرار' => 'Frequency',
     'تکرارشونده' => 'Recurring',

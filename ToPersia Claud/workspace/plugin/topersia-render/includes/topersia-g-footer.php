@@ -188,12 +188,12 @@ if ( ! function_exists( 'topersia_g_ft_brand_text' ) ) {
 		if ( '' !== $own ) {
 			return $own;
 		}
-		return __( 'توپرشیا مرجع جامع اطلاعات ایران و گردشگری ایران است؛ راهنمای استان‌ها، شهرها، روستاها، جزیره‌ها، جاذبه‌ها، رویدادها و برنامه‌ریزی سفر به ایران، به چند زبان و با ذکر منبع و به‌روزرسانی منظم.', 'topersia' );
+		return __( 'توپرشیا راهنمای جامع ایران است؛ از استان‌ها و شهرهای بزرگ تا روستاها و جزیره‌های کمتر دیده‌شده. جاذبه‌ها، رویدادها و اطلاعات کاربردی سفر را یک‌جا پیدا کنید و مسیرتان را با خیال راحت بچینید.', 'topersia' );   /* P5-D616؛ ترجمه در کاتالوگ و WPML String Translation */
 	}
 }
 
 if ( ! function_exists( 'topersia_g_sc_footer_brand' ) ) {
-	/** [tp_footer_brand] — لوگو، نام و متن سئو. */
+	/** [tp_footer_brand] — لوگو (نام برند فقط متن جایگزین آن) و متن سئو؛ هیچ نوشته‌ای زیر لوگو نیست (P5-D616). */
 	function topersia_g_sc_footer_brand() {
 
 		$opts = topersia_g_ft_opts();
@@ -203,7 +203,6 @@ if ( ! function_exists( 'topersia_g_sc_footer_brand' ) ) {
 
 		return '<div class="tp-ft tp-ft-brand">'
 			. ( '' !== $logo ? '<a class="tp-ft-brand__home" href="' . esc_url( $home ) . '">' . $logo . '</a>' : '' )
-			. '<p class="tp-ft-brand__name">' . esc_html( $name ) . '</p>'
 			. '<p class="tp-ft-brand__text">' . esc_html( topersia_g_ft_brand_text( $opts ) ) . '</p>'
 			. '</div>';
 	}
@@ -250,12 +249,14 @@ if ( ! function_exists( 'topersia_g_ft_svg_icons' ) ) {
 	 * آیکون‌های درون‌خطی شبکه‌هایی که Font Awesome ندارد (بله، روبیکا) با رنگ اصلی برند — کتابخانۀ «tp-svg»؛ پاورقی به مجموعۀ
 	 * قلم «javis-fa» المنتور وابسته نیست. شکل بله همان گلیف icon-10 آن مجموعه (مسیر در مختصات قلم، y رو به بالا) با تیک سفید؛
 	 * روبیکا شش‌ضلعی ۱۸ مثلث رنگی و مکعب سفید (نمونۀ رنگ از لوگوی اصلی که کاربر داد). رنگ‌ها رنگ خود لوگوست، مثل تصویر — نه توکن.
-	 * نام ← [ viewBox ، نشانه‌گذاری درونی ثابت ].
+	 * از 53-ت (P5-D613): نشانۀ بله currentColor است (رنگ برند همان حالت از topersia_g_ft_brand_fill)، تیک سفید می‌ماند؛
+	 * روبیکا «تک‌رنگ‌پذیر» است: در حالت روشن و غروب مثلث‌ها currentColor می‌شوند (CSS) و مکعب (tp-ft-social__cube) سفید می‌ماند.
+	 * نام ← [ viewBox ، نشانه‌گذاری درونی ثابت ، تک‌رنگ‌پذیر؟ ].
 	 */
 	function topersia_g_ft_svg_icons() {
 		return array(
-			'bale'   => array( '7.8 -504.1 489.8 489.8', '<circle cx="253" cy="-255" r="185" fill="#FFFFFF"/><path transform="scale(1 -1)" fill="#0DCB9D" d="M497 242c-1-8-2-18-3-26-1-8-4-16-6-24-2-10-6-18-10-28-3-7-7-15-11-22-4-7-8-13-12-20-4-7-9-13-14-20-6-6-11-12-18-18-7-7-16-15-25-22-7-5-15-10-24-15-8-5-18-10-28-14-11-4-22-8-32-11-10-2-20-4-29-5-19-3-37-3-55-1-16 1-33 5-48 10l-1 0c-76 22-139 84-162 160-5 16-9 33-9 51-3 17-2 33-2 49 0 14 0 27 0 40 0 14 0 28 0 41 0 12 0 24 0 36 0 12 0 24 0 35 0 12 0 24 0 35-1 9 2 18 9 24 7 6 17 9 26 5 6-1 11-4 15-8 18-11 35-24 52-36 1 1 3 2 4 3 7 5 14 9 21 13 8 4 15 8 23 11 8 3 16 6 24 9 9 2 18 4 28 6 9 2 19 3 30 3 12 1 25 1 37-1 9 0 19-1 28-4 63-13 120-52 154-107 15-24 27-50 33-78 2-11 4-21 4-31 2-14 2-27 1-40z m-91 107c-5 12-16 21-28 26-10 3-20 4-31 1-7-2-14-7-20-13-6-6-12-11-17-17-6-5-11-10-16-16-6-5-12-11-18-17-3-4-6-7-10-11-6-5-11-11-16-16-6-6-12-12-18-17-4-4-8-9-12-13-14 14-29 28-42 42-8 8-17 12-28 14-9 1-20-1-28-5-8-5-16-11-20-19-6-10-8-23-5-34 2-9 6-17 13-24 25-25 51-51 76-76 9-8 20-12 32-13 10-1 20 2 28 7 7 6 12 12 19 18 6 6 13 12 19 19 6 7 13 13 19 20 7 7 14 13 21 20 6 6 12 12 18 18 6 6 11 11 16 17 6 6 12 11 18 17 5 6 11 11 16 17 6 5 12 12 14 20 5 11 4 24 0 35z"/>' ),
-			'rubika' => array( '15 15 1050 1050', '<polygon fill="#B9CF06" points="309,138 540,15 540,272"/><polygon fill="#82B52A" points="540,15 771,138 540,272"/><polygon fill="#F3A928" points="309,138 540,272 309,406"/><polygon fill="#3AAE9A" points="771,138 540,272 771,406"/><polygon fill="#EE7518" points="309,138 77,282 309,406"/><polygon fill="#5DD4BE" points="771,138 1003,282 771,406"/><polygon fill="#E74F53" points="77,282 309,406 77,540"/><polygon fill="#7B4686" points="1003,282 771,406 1003,540"/><polygon fill="#7B4686" points="77,540 309,406 309,673"/><polygon fill="#4F3881" points="1003,540 771,406 771,673"/><polygon fill="#4F3881" points="77,540 309,673 77,800"/><polygon fill="#E74F53" points="1003,540 771,673 1003,800"/><polygon fill="#5DD4BE" points="77,800 309,673 309,940"/><polygon fill="#EE7518" points="1003,800 771,673 771,940"/><polygon fill="#3AAE9A" points="309,673 540,807 309,940"/><polygon fill="#F3A928" points="771,673 540,807 771,940"/><polygon fill="#82B52A" points="309,940 540,807 540,1065"/><polygon fill="#B9CF06" points="771,940 540,807 540,1065"/><polygon fill="#FCFCFC" points="540,272 771,406 540,540 309,406"/><polygon fill="#E2E2E2" points="309,406 540,540 540,807 309,673"/><polygon fill="#EEEEEE" points="540,540 771,406 771,673 540,807"/>' ),
+			'bale'   => array( '7.8 -504.1 489.8 489.8', '<circle cx="253" cy="-255" r="185" fill="#FFFFFF"/><path transform="scale(1 -1)" fill="currentColor" d="M497 242c-1-8-2-18-3-26-1-8-4-16-6-24-2-10-6-18-10-28-3-7-7-15-11-22-4-7-8-13-12-20-4-7-9-13-14-20-6-6-11-12-18-18-7-7-16-15-25-22-7-5-15-10-24-15-8-5-18-10-28-14-11-4-22-8-32-11-10-2-20-4-29-5-19-3-37-3-55-1-16 1-33 5-48 10l-1 0c-76 22-139 84-162 160-5 16-9 33-9 51-3 17-2 33-2 49 0 14 0 27 0 40 0 14 0 28 0 41 0 12 0 24 0 36 0 12 0 24 0 35 0 12 0 24 0 35-1 9 2 18 9 24 7 6 17 9 26 5 6-1 11-4 15-8 18-11 35-24 52-36 1 1 3 2 4 3 7 5 14 9 21 13 8 4 15 8 23 11 8 3 16 6 24 9 9 2 18 4 28 6 9 2 19 3 30 3 12 1 25 1 37-1 9 0 19-1 28-4 63-13 120-52 154-107 15-24 27-50 33-78 2-11 4-21 4-31 2-14 2-27 1-40z m-91 107c-5 12-16 21-28 26-10 3-20 4-31 1-7-2-14-7-20-13-6-6-12-11-17-17-6-5-11-10-16-16-6-5-12-11-18-17-3-4-6-7-10-11-6-5-11-11-16-16-6-6-12-12-18-17-4-4-8-9-12-13-14 14-29 28-42 42-8 8-17 12-28 14-9 1-20-1-28-5-8-5-16-11-20-19-6-10-8-23-5-34 2-9 6-17 13-24 25-25 51-51 76-76 9-8 20-12 32-13 10-1 20 2 28 7 7 6 12 12 19 18 6 6 13 12 19 19 6 7 13 13 19 20 7 7 14 13 21 20 6 6 12 12 18 18 6 6 11 11 16 17 6 6 12 11 18 17 5 6 11 11 16 17 6 5 12 12 14 20 5 11 4 24 0 35z"/>' ),
+			'rubika' => array( '15 15 1050 1050', '<polygon fill="#B9CF06" points="309,138 540,15 540,272"/><polygon fill="#82B52A" points="540,15 771,138 540,272"/><polygon fill="#F3A928" points="309,138 540,272 309,406"/><polygon fill="#3AAE9A" points="771,138 540,272 771,406"/><polygon fill="#EE7518" points="309,138 77,282 309,406"/><polygon fill="#5DD4BE" points="771,138 1003,282 771,406"/><polygon fill="#E74F53" points="77,282 309,406 77,540"/><polygon fill="#7B4686" points="1003,282 771,406 1003,540"/><polygon fill="#7B4686" points="77,540 309,406 309,673"/><polygon fill="#4F3881" points="1003,540 771,406 771,673"/><polygon fill="#4F3881" points="77,540 309,673 77,800"/><polygon fill="#E74F53" points="1003,540 771,673 1003,800"/><polygon fill="#5DD4BE" points="77,800 309,673 309,940"/><polygon fill="#EE7518" points="1003,800 771,673 771,940"/><polygon fill="#3AAE9A" points="309,673 540,807 309,940"/><polygon fill="#F3A928" points="771,673 540,807 771,940"/><polygon fill="#82B52A" points="309,940 540,807 540,1065"/><polygon fill="#B9CF06" points="771,940 540,807 540,1065"/><polygon class="tp-ft-social__cube" fill="#FCFCFC" points="540,272 771,406 540,540 309,406"/><polygon class="tp-ft-social__cube" fill="#E2E2E2" points="309,406 540,540 540,807 309,673"/><polygon class="tp-ft-social__cube" fill="#EEEEEE" points="540,540 771,406 771,673 540,807"/>', true ),
 		);
 	}
 }
@@ -266,7 +267,8 @@ if ( ! function_exists( 'topersia_g_ft_social_icon' ) ) {
 
 		$svg = topersia_g_ft_svg_icons();
 		if ( 'tp-svg' === $s['lib'] && isset( $svg[ $s['icon'] ] ) ) {
-			return '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' . esc_attr( $svg[ $s['icon'] ][0] ) . '" aria-hidden="true" focusable="false">' . $svg[ $s['icon'] ][1] . '</svg>'   /* نشانه‌گذاری ثابت همین پرونده، نه ورودی */;
+			$mono = ! empty( $svg[ $s['icon'] ][2] ) ? ' tp-ft-social__svg--mono' : '';
+			return '<svg class="tp-ft-social__svg tp-ft-social__svg--brand' . $mono . '" viewBox="' . esc_attr( $svg[ $s['icon'] ][0] ) . '" aria-hidden="true" focusable="false">' . $svg[ $s['icon'] ][1] . '</svg>'   /* نشانه‌گذاری ثابت همین پرونده، نه ورودی */;
 		}
 
 		if ( '' !== $s['icon'] && class_exists( '\Elementor\Icons_Manager' ) ) {
@@ -297,34 +299,37 @@ if ( ! function_exists( 'topersia_g_ft_social_label' ) ) {
 
 if ( ! function_exists( 'topersia_g_ft_brand_fill' ) ) {
 	/**
-	 * رنگ اصلی هر شبکه (P5-D610) — نام میزبان ← [ رنگ برند ، کاشی ]. رنگ نشانه همیشه رنگ خود برند است؛ اگر روی کاشی روشن
-	 * مشترک (#FFFFFF) کمتر از ۳:۱ دارد، کاشی تیره (--tp-ft-tile-dark) می‌گیرد — رنگ کاشی عوض می‌شود نه رنگ برند.
-	 * کنتراست هر جفت را گیت پاورقی در هر سه حالت می‌سنجد. بله و روبیکا (tp-svg) رنگ را در خود SVG دارند؛ رنگ این‌جا نمایندۀ
-	 * سنجش است (روبیکا چندرنگ؛ سبز چیرۀ لوگو).
+	 * رنگ نشانۀ هر شبکه به ازای حالت (P5-D610 · P5-D613) — نام میزبان ← [ روشن و غروب ، تیره ]. کاشی در هر حالت یکی است
+	 * (--tp-ft-soc-tile = Background حالت: #FAF7F1 · #F6EFE4 · #11161B)؛ پس رنگ کاشی ثابت می‌ماند و رنگ نشانه نسخۀ حالت را
+	 * می‌گیرد: رنگ اصلی برند هر جا ≥ ۳:۱ است، وگرنه نسخۀ رسمی یا یک پلۀ تیره‌تر/روشن‌تر همان برند —
+	 *   روشن و غروب: تلگرام #0088CC · واتس‌اپ #128C7E · تریپ‌ادوایزر نشان سیاه رسمی · بله #079176 · روبیکا تک‌رنگ #4F3881 (بنفش لوگو)؛
+	 *   تیره: X و تیک‌تاک و مدیوم و تامبلر نشان سفید رسمی.
+	 * کمترین کنتراست جدول روی کاشی غروب ۳٫۴۱ (تلگرام) و روی کاشی تیره ۳٫۲۰ (لینکدین)؛ گیت پاورقی هر جفت را در هر سه حالت
+	 * می‌سنجد. روبیکا در حالت تیره چندرنگ خود لوگوست و #82B52A نمایندۀ سنجش است (سبز چیرۀ لوگو).
 	 */
 	function topersia_g_ft_brand_fill( $s ) {
 		$map  = array(
-			'instagram.com'   => array( '#E4405F', 'l' ),
-			'facebook.com'    => array( '#1877F2', 'l' ),
-			'x.com'           => array( '#000000', 'l' ),
-			'twitter.com'     => array( '#000000', 'l' ),
-			'youtube.com'     => array( '#FF0000', 'l' ),
-			't.me'            => array( '#26A5E4', 'd' ),
-			'whatsapp.com'    => array( '#25D366', 'd' ),
-			'wa.me'           => array( '#25D366', 'd' ),
-			'linkedin.com'    => array( '#0A66C2', 'l' ),
-			'pinterest.com'   => array( '#E60023', 'l' ),
-			'tiktok.com'      => array( '#000000', 'l' ),
-			'medium.com'      => array( '#000000', 'l' ),
-			'tripadvisor.com' => array( '#34E0A1', 'd' ),
-			'tumblr.com'      => array( '#36465D', 'l' ),
-			'ble.ir'          => array( '#0DCB9D', 'd' ),
-			'rubika.ir'       => array( '#82B52A', 'd' ),
+			'instagram.com'   => array( '#E4405F', '#E4405F' ),
+			'facebook.com'    => array( '#1877F2', '#1877F2' ),
+			'x.com'           => array( '#000000', '#FFFFFF' ),
+			'twitter.com'     => array( '#000000', '#FFFFFF' ),
+			'youtube.com'     => array( '#FF0000', '#FF0000' ),
+			't.me'            => array( '#0088CC', '#26A5E4' ),
+			'whatsapp.com'    => array( '#128C7E', '#25D366' ),
+			'wa.me'           => array( '#128C7E', '#25D366' ),
+			'linkedin.com'    => array( '#0A66C2', '#0A66C2' ),
+			'pinterest.com'   => array( '#E60023', '#E60023' ),
+			'tiktok.com'      => array( '#000000', '#FFFFFF' ),
+			'medium.com'      => array( '#000000', '#FFFFFF' ),
+			'tripadvisor.com' => array( '#000000', '#34E0A1' ),
+			'tumblr.com'      => array( '#36465D', '#FFFFFF' ),
+			'ble.ir'          => array( '#079176', '#0DCB9D' ),
+			'rubika.ir'       => array( '#4F3881', '#82B52A' ),
 		);
 		$host = preg_replace( '/^(www|m)\./', '', (string) wp_parse_url( $s['url'], PHP_URL_HOST ) );
 		foreach ( $map as $h => $c ) {
 			if ( $host === $h || substr( $host, -strlen( '.' . $h ) ) === '.' . $h ) {
-				return array( $c[0], 'd' === $c[1] ? 'var(--tp-ft-tile-dark)' : 'var(--tp-ft-tile)' );
+				return $c;
 			}
 		}
 		return null;
@@ -354,7 +359,7 @@ if ( ! function_exists( 'topersia_g_sc_footer_social' ) ) {
 		foreach ( $list as $s ) {
 			$label  = topersia_g_ft_social_label( $s );
 			$fill   = topersia_g_ft_brand_fill( $s );
-			$style  = $fill ? ' style="--tp-soc:' . esc_attr( $fill[0] ) . ';--tp-soc-tile:' . esc_attr( $fill[1] ) . '"' : '';
+			$style  = $fill ? ' style="--tp-soc-l:' . esc_attr( $fill[0] ) . ';--tp-soc-d:' . esc_attr( $fill[1] ) . '"' : '';
 			$items .= '<li class="tp-ft-row__item"><a class="tp-ft-social__a' . ( $fill ? ' tp-ft-social__a--brand' : '' ) . '"' . $style . ' href="' . esc_url( $s['url'] ) . '" target="_blank" rel="noopener me" aria-label="' . esc_attr( $label ) . '" title="' . esc_attr( $label ) . '">'
 				. topersia_g_ft_social_icon( $s, $label ) . '</a></li>';
 		}
@@ -364,7 +369,7 @@ if ( ! function_exists( 'topersia_g_sc_footer_social' ) ) {
 		}
 
 		return '<section class="tp-ft tp-ft-social"><h2 class="tp-ft-h">' . esc_html__( 'شبکه‌های اجتماعی', 'topersia' ) . '</h2>'
-			. '<ul class="tp-ft-row tp-ft-social__grid" role="list" style="--tp-ft-soc-cols:' . (int) ceil( count( $list ) / 2 ) . ';--tp-ft-soc-cols-s:' . (int) ceil( count( $list ) / 3 ) . '">' . $items . '</ul></section>';   /* دو ردیف هم‌شمار */
+			. '<ul class="tp-ft-row tp-ft-social__grid" role="list" style="--tp-ft-soc-cols:' . (int) min( 7, max( 1, (int) ceil( count( $list ) / 2 ) ) ) . '">' . $items . '</ul></section>';   /* دو ردیف هم‌شمار، سقف ۷ ستون در هر پهنا (P5-D615) */
 	}
 }
 

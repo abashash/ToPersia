@@ -407,13 +407,18 @@ $w53_okp = $w53_okp && '' === topersia_g_sc_footer_partners() && '' === topersia
 $w53_ft_set( array( 'social' => array( array( 'url' => 'https://www.instagram.com/x/' ), array( 'url' => 'ftp://bad' ), array( 'url' => 'https://t.me/x', 'label' => 'Telegram' ), array( 'url' => 'https://ble.ir/x', 'label' => 'Bale', 'icon' => 'bale', 'lib' => 'tp-svg' ), array( 'url' => 'https://rubika.ir/x', 'label' => 'Rubika', 'icon' => 'rubika', 'lib' => 'tp-svg' ) ) ) );
 $h = topersia_g_sc_footer_social();
 $w53_okp = $w53_okp && 4 === substr_count( $h, '<a class="tp-ft-social__a' )
-	&& false !== strpos( $h, 'style="--tp-ft-soc-cols:2;--tp-ft-soc-cols-s:2"' ) && false !== strpos( $h, '--tp-soc:#26A5E4;--tp-soc-tile:var(--tp-ft-tile-dark)' ) && false !== strpos( $h, '--tp-soc:#E4405F;--tp-soc-tile:var(--tp-ft-tile)' ) && 4 === substr_count( $h, 'tp-ft-social__a--brand' ) && 2 === substr_count( $h, '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' ) && 2 === substr_count( $h, 'tp-ft-social__svg--brand' ) && false !== strpos( $h, 'fill="#0DCB9D"' ) && 21 === substr_count( $h, '<polygon fill=' ) && false === strpos( $h, 'javis' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
+	&& false !== strpos( $h, 'style="--tp-ft-soc-cols:2"' ) && false === strpos( $h, 'soc-cols-s' ) && false !== strpos( $h, '--tp-soc-l:#0088CC;--tp-soc-d:#26A5E4' ) && false !== strpos( $h, '--tp-soc-l:#E4405F;--tp-soc-d:#E4405F' ) && false === strpos( $h, '--tp-soc-tile' ) && 4 === substr_count( $h, 'tp-ft-social__a--brand' )
+	&& 1 === substr_count( $h, '<svg class="tp-ft-social__svg tp-ft-social__svg--brand" viewBox="' ) && 1 === substr_count( $h, '<svg class="tp-ft-social__svg tp-ft-social__svg--brand tp-ft-social__svg--mono" viewBox="' ) && 2 === substr_count( $h, 'tp-ft-social__svg--brand' )
+	&& false !== strpos( $h, 'fill="currentColor" d="M497' ) && false === strpos( $h, 'fill="#0DCB9D"' ) && 18 === substr_count( $h, '<polygon fill=' ) && 3 === substr_count( $h, '<polygon class="tp-ft-social__cube" fill=' )
+	&& false === strpos( $h, 'javis' ) && false !== strpos( $h, 'aria-label="instagram.com"' ) && false !== strpos( $h, 'aria-label="Telegram"' ) && false === strpos( $h, 'ftp:' );
+$w53_ft_set( array( 'social' => array_fill( 0, 20, array( 'url' => 'https://www.instagram.com/x/' ) ) ) );
+$w53_okp = $w53_okp && false !== strpos( topersia_g_sc_footer_social(), 'style="--tp-ft-soc-cols:7"' );   /* ۲۰ شبکه: سقف ۷ ستون (P5-D615) */
 $w53_ft_set( array( 'brand' => array( 'text_fa' => '' ) ) );
 $h = topersia_g_sc_footer_brand();
-$w53_okp = $w53_okp && false !== strpos( $h, 'توپرشیا مرجع جامع اطلاعات ایران' ) && false === strpos( $h, '<img' );
+$w53_okp = $w53_okp && false !== strpos( $h, 'توپرشیا راهنمای جامع ایران است؛ از استان‌ها و شهرهای بزرگ تا روستاها و جزیره‌های کمتر دیده‌شده.' ) && false === strpos( $h, '<img' ) && false === strpos( $h, 'tp-ft-brand__name' );
 $w53_ft_set( array( 'brand' => array( 'logo' => 9, 'text_fa' => 'متن ویژه' ) ) );
 $h = topersia_g_sc_footer_brand();
-$w53_okp = $w53_okp && false !== strpos( $h, 'متن ویژه' ) && false !== strpos( $h, 'tp-ft-brand__logo' );
+$w53_okp = $w53_okp && false !== strpos( $h, 'متن ویژه' ) && false !== strpos( $h, 'tp-ft-brand__logo' ) && 1 === substr_count( $h, '<p' ) && false === strpos( $h, 'tp-ft-brand__name' );   /* P5-D616: زیر لوگو فقط متن */
 t( 'بند ۱۷ همکاران، شبکه‌ها، برند: بخش خالی ← هیچ خروجی؛ لوگوی بی تصویر کنار؛ لوگوی روشن tp-ft-logo--dark؛ برچسب شبکه از نام یا میزبان؛ فقط http(s)؛ متن برند از تنظیمات وگرنه پیش‌فرض کاتالوگ', $w53_okp );
 if ( null === $w53_ft_prev ) {
 	unset( $GLOBALS['tp_options']['topersia_footer_blocks'] );
@@ -440,15 +445,76 @@ tp441_mut( 'بند ۱۶ توکن: --tp-ft-* در یک بلوک برای هر س�
 	function ( $s ) { return (bool) preg_match( '/html\[data-tp-mode="evening"\],\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', $s ); }, $w53_tok,
 	preg_replace( '/,\s*html\[data-tp-mode="dark"\]\{\s*--tp-ft-bg:/', '{--tp-ft-bg:', $w53_tok ) );
 
-tp441_mut( 'دستۀ 53-پ پاورقی هم‌رنگ سایت: زمینه، متن و پیوند از توکن همان حالت (--tp-surface-2 · --tp-text · --tp-primary-text)، نه رنگ ثابت — جهش: زمینۀ سرمه‌ای ثابت',
-	function ( $s ) { return false !== strpos( $s, '--tp-ft-bg:var(--tp-surface-2);' ) && false !== strpos( $s, '--tp-ft-text:var(--tp-text);' ) && false !== strpos( $s, '--tp-ft-link:var(--tp-primary-text);' ); }, $w53_tok,
-	str_replace( '--tp-ft-bg:var(--tp-surface-2);', '--tp-ft-bg:#092143;', $w53_tok ) );
-tp441_mut( 'P5-D610 رنگ برند ثابت می‌ماند و کاشی عوض می‌شود: تلگرام، واتس‌اپ، تریپ‌ادوایزر، بله و روبیکا (زیر ۳:۱ روی سفید) کاشی تیره — جهش: تلگرام کاشی روشن',
-	function ( $s ) { foreach ( array( "'t.me'            => array( '#26A5E4', 'd' )", "'whatsapp.com'    => array( '#25D366', 'd' )", "'tripadvisor.com' => array( '#34E0A1', 'd' )", "'ble.ir'          => array( '#0DCB9D', 'd' )" ) as $n ) { if ( false === strpos( $s, $n ) ) { return false; } } return true; }, $w53_ft,
-	str_replace( "'t.me'            => array( '#26A5E4', 'd' )", "'t.me'            => array( '#26A5E4', 'l' )", $w53_ft ) );
-tp441_mut( 'دستۀ 53-پ شبکه‌ها: دو ردیف هم‌شمار (ستون = نیمۀ شمار، گرد به بالا) و رنگ برند فقط از نقشۀ ثابت — جهش: ستون = همۀ شمار',
-	function ( $s ) { return false !== strpos( $s, '(int) ceil( count( $list ) / 2 )' ) && false !== strpos( $s, '$fill   = topersia_g_ft_brand_fill( $s );' ); }, $w53_ft,
-	str_replace( '(int) ceil( count( $list ) / 2 )', 'count( $list )', $w53_ft ) );
+/* ── دستۀ 53-ت · P5-D612 تا P5-D616 ─────────────────────────────────── */
+$w53_hex = function ( $h ) { return array_map( function ( $i ) use ( $h ) { return hexdec( substr( $h, $i, 2 ) ) / 255; }, array( 1, 3, 5 ) ); };
+$w53_lum = function ( $h ) use ( $w53_hex ) { $c = array_map( function ( $v ) { return $v <= .03928 ? $v / 12.92 : pow( ( $v + .055 ) / 1.055, 2.4 ); }, $w53_hex( $h ) ); return .2126 * $c[0] + .7152 * $c[1] + .0722 * $c[2]; };
+$w53_cr  = function ( $a, $b ) use ( $w53_lum ) { $x = $w53_lum( $a ); $y = $w53_lum( $b ); return ( max( $x, $y ) + .05 ) / ( min( $x, $y ) + .05 ); };
+$w53_hue = function ( $h ) use ( $w53_hex ) { list( $r, $g, $b ) = $w53_hex( $h ); $mx = max( $r, $g, $b ); $d = $mx - min( $r, $g, $b ); if ( $d < 1e-6 ) { return -1; } $hu = $mx === $r ? fmod( ( $g - $b ) / $d, 6 ) : ( $mx === $g ? ( $b - $r ) / $d + 2 : ( $r - $g ) / $d + 4 ); return fmod( $hu * 60 + 360, 360 ); };
+/* رنگ پایۀ هر حالت از نخستین بلوک پالت (خط‌های --tp-bg و --tp-surface) */
+$w53_mode = function ( $tok, $mode, $var ) { return preg_match( '/html\[data-tp-mode="' . $mode . '"\]\{[^}]*?' . preg_quote( $var, '/' ) . ':(#[0-9A-Fa-f]{6});/', $tok, $m ) ? $m[1] : ''; };
+tp441_mut( 'P5-D612 پاورقی از پالت رسمی، بی رنگ‌مایۀ سبز: زمینه --tp-surface و کاشی شبکه --tp-bg همان حالت (نه --tp-surface-2)؛ رنگ هر دو در هر سه حالت بیرون از ۷۵ تا ۱۷۰ درجه، متن و پیوند از توکن — جهش: زمینه --tp-surface-2',
+	function ( $s ) use ( $w53_mode, $w53_hue ) {
+		if ( false === strpos( $s, '--tp-ft-bg:var(--tp-surface);' ) || false === strpos( $s, '--tp-ft-soc-tile:var(--tp-bg);' ) || false === strpos( $s, '--tp-ft-text:var(--tp-text);' ) || false === strpos( $s, '--tp-ft-link:var(--tp-primary-text);' ) ) {
+			return false;
+		}
+		if ( ! preg_match( '/--tp-ft-bg:[^;]*;.*?\}/s', $s, $blk ) || false !== strpos( $blk[0], 'surface-2' ) ) {
+			return false;
+		}
+		foreach ( array( 'light', 'evening', 'dark' ) as $m ) {
+			foreach ( array( '--tp-bg', '--tp-surface' ) as $v ) {
+				$c = $w53_mode( $s, $m, $v );
+				$h = '' === $c ? 999 : $w53_hue( $c );
+				if ( '' === $c || ( $h >= 75 && $h <= 170 ) ) {
+					return false;
+				}
+			}
+		}
+		return (bool) preg_match( '/--tp-ft-tile:#FAF7F1;\s*--tp-ft-tile-line:#DDD5C8;\s*--tp-ft-tile-ink:#2A2A28;/', $s );
+	}, $w53_tok, str_replace( '--tp-ft-bg:var(--tp-surface);', '--tp-ft-bg:var(--tp-surface-2);', $w53_tok ) );
+tp441_mut( 'P5-D613 کاشی شبکه‌ها در هر حالت یکی و رنگ هر برند ≥ ۳:۱ روی کاشی همان حالت (روشن #FAF7F1 و غروب #F6EFE4 با نسخۀ روشن، تیره #11161B با نسخۀ تیره) — جهش: تلگرام روشن همان #26A5E4',
+	function ( $s ) use ( $w53_cr, $w53_mode, $w53_tok, $w53_ftcss ) {
+		$tl = $w53_mode( $w53_tok, 'light', '--tp-bg' );
+		$te = $w53_mode( $w53_tok, 'evening', '--tp-bg' );
+		$td = $w53_mode( $w53_tok, 'dark', '--tp-bg' );
+		if ( ! preg_match_all( "/'([a-z.]+)'\s*=> array\( '(#[0-9A-F]{6})', '(#[0-9A-F]{6})' \)/", $s, $m, PREG_SET_ORDER ) || count( $m ) < 16 || '' === $tl . $te . $td ) {
+			return false;
+		}
+		foreach ( $m as $r ) {
+			if ( $w53_cr( $r[2], $tl ) < 3 || $w53_cr( $r[2], $te ) < 3 || $w53_cr( $r[3], $td ) < 3 ) {
+				return false;
+			}
+		}
+		$css = preg_replace( '#/\*.*?\*/#s', '', $w53_ftcss );
+		return false !== strpos( $css, 'background:var(--tp-ft-soc-tile);' ) && false !== strpos( $css, 'border:1px solid var(--tp-ft-soc-line);' ) && false === strpos( $css, '--tp-soc-tile' )
+			&& false !== strpos( $css, ':is(.tp-ft-social__a--brand,.tp-ft-social__a--brand:hover,.tp-ft-social__a--brand:focus-visible){color:var(--tp-soc-l)}' )
+			&& false !== strpos( $css, 'html[data-tp-mode="dark"]:root [data-elementor-type="footer"] :is(.tp-ft-social__a--brand,.tp-ft-social__a--brand:hover,.tp-ft-social__a--brand:focus-visible){color:var(--tp-soc-d)}' )
+			&& false !== strpos( $css, 'html:root:not([data-tp-mode="dark"]) [data-elementor-type="footer"] .tp-ft-social__svg--mono polygon:not(.tp-ft-social__cube){fill:currentColor}' );
+	}, $w53_ft, str_replace( "'t.me'            => array( '#0088CC', '#26A5E4' )", "'t.me'            => array( '#26A5E4', '#26A5E4' )", $w53_ft ) );
+tp441_mut( 'P5-D614 عنوان هر ستون پاورقی (همکاران، شبکه‌ها، ستون‌های منو) text-align:start، محتوا وسط — جهش: عنوان همکاران و شبکه‌ها وسط‌چین',
+	function ( $c ) {
+		$css = preg_replace( '#/\*.*?\*/#s', '', $c );
+		return false !== strpos( $css, 'html:root [data-elementor-type="footer"] :is(h1,h2,h3,h4,h5,h6,.title,.wd-el-toggle-title,.elementor-heading-title,.tp-ft-h){text-align:start}' )
+			&& ! preg_match( '/\.tp-ft-h\{text-align:center\}/', $css ) && preg_match( '/\.tp-ft-partners \.tp-ft-row\{[^}]*justify-content:center/', $css ) && preg_match( '/\.tp-ft-social__grid\{[^}]*justify-content:center/', $css );
+	}, $w53_ftcss, $w53_ftcss . "\nhtml:root [data-elementor-type=\"footer\"] :is(.tp-ft-partners,.tp-ft-social) .tp-ft-h{text-align:center}" );
+tp441_mut( 'P5-D615 شبکه‌ها همیشه ۲ ردیف ۷تایی (سقف ۷ ستون، بی قاعدۀ ۵+۵+۴) و هر ردیف همکاران = هر ردیف شبکه‌ها (یک --tp-ft-row-h با clamp) — جهش: کاشی همکار دو ردیف',
+	function ( $c ) use ( $w53_ft, $w53_tok ) {
+		$css = preg_replace( '#/\*.*?\*/#s', '', $c );
+		return false !== strpos( $w53_ft, '(int) min( 7, max( 1, (int) ceil( count( $list ) / 2 ) ) )' ) && false !== strpos( $w53_ft, '$fill   = topersia_g_ft_brand_fill( $s );' )
+			&& false === strpos( $css, 'soc-cols-s' ) && false === strpos( $css, '--tp-ft-logo-h' ) && false === strpos( $w53_tok, '--tp-ft-logo-h' )
+			&& (bool) preg_match( '/--tp-ft-row-h:clamp\(28px, calc\(\(100vw - 104px\) \/ 7\), 48px\);/', $w53_tok )
+			&& (bool) preg_match( '/\.tp-ft-logo\{[^}]*height:var\(--tp-ft-row-h\);/', $css )
+			&& (bool) preg_match( '/\.tp-ft-social__a\{[^}]*width:var\(--tp-ft-row-h\);\s*height:var\(--tp-ft-row-h\);[^}]*font-size:clamp\(/', $css )
+			&& (bool) preg_match( '/\.tp-ft-partners \.tp-ft-row\{[^}]*gap:var\(--tp-ft-gap\)/', $css ) && (bool) preg_match( '/\.tp-ft-social__grid\{[^}]*gap:var\(--tp-ft-gap\)/', $css );
+	}, $w53_ftcss, (string) preg_replace( '/(\.tp-ft-logo\{[^}]*height:)var\(--tp-ft-row-h\);/', '$1calc(2 * var(--tp-ft-row-h) + var(--tp-ft-gap));', $w53_ftcss ) );
+tp441_mut( 'P5-D616 جعبۀ برند: لوگو و متن از آغاز سطر به جهت زبان، بی نام زیر لوگو، متن پیش‌فرض تازه در کاتالوگ (en و ar عین متن کاربر) — جهش: جعبه وسط‌چین',
+	function ( $c ) use ( $w53_ft, $w53_root ) {
+		$css = preg_replace( '#/\*.*?\*/#s', '', $c );
+		$cat = (string) file_get_contents( $w53_root . '/scripts/i18n/topersia-render.php' );
+		return false !== strpos( $css, '.tp-ft-brand{display:flex;flex-direction:column;align-items:flex-start;text-align:start;gap:var(--tp-ft-stack)}' )
+			&& false === strpos( $css, 'tp-ft-brand__name' ) && false === strpos( $w53_ft, 'tp-ft-brand__name' )
+			&& false !== strpos( $cat, "'en' => 'ToPersia is your guide to Iran, from big cities and provinces to villages and little-known islands. Find attractions, events and practical travel information in one place, and plan your trip with confidence.'" )
+			&& false !== strpos( $cat, "'ar' => 'توبيرشيا دليلك إلى إيران، من المحافظات والمدن الكبرى إلى القرى والجزر الأقل شهرة. اعثر على المعالم والفعاليات ومعلومات السفر العملية في مكان واحد، وخطّط رحلتك بثقة.'" );
+	}, $w53_ftcss, str_replace( 'align-items:flex-start;text-align:start;gap:var(--tp-ft-stack)', 'align-items:center;text-align:center;gap:var(--tp-ft-stack)', $w53_ftcss ) );
 
 tp441_mut( 'بند ۱۹ گرم‌کن: شمار ساخت فقط پس از نوشتن واقعی قطعه (درون ob_start) و فقط برای مکانی که در پالایش است (پرکاربرد در کش، نه شمارندۀ بازدید) — جهش: بی اعتبارسنجی',
 	function ( $s ) {

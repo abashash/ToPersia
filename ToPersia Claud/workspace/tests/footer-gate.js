@@ -13,7 +13,13 @@
  *   ▸ نمایش آیکون شبکه‌ها (P5-D606): هر پیوند یا SVG با قاب ناصفر دارد، یا <i> با ::before غیرتهی و قلمِ بارگذاری‌شدۀ
  *     همان خانواده؛ حرف جایگزین (tp-ft-social__ch) افتادن است
  *   ▸ کنتراست متن پاورقی ≥ ۴٫۵ و آیکون تک‌رنگ ≥ ۳ در هر سه حالت (light · evening · dark)؛ لوگوی رنگی برند معاف (WCAG ۱٫۴٫۱۱)
- * عکس هر ترکیب در tests/.screens/footer-gate/ (بیرون از git).
+ * دستۀ 53-ت (P5-D612 تا P5-D616)، سه زبان × سه حالت:
+ *   ▸ بی رنگ‌مایۀ سبز: هیچ زمینه‌ای در پاورقی ۷۵ تا ۱۷۰ درجه نیست (تصویر و آیکون برند معاف)
+ *   ▸ کاشی شبکه‌ها و کاشی همکاران هر کدام یک رنگ در هر حالت؛ رنگ هر برند ≥ ۳:۱ روی کاشی همان حالت
+ *   ▸ شبکه‌ها [7,7] و همکاران [3,2] در ۳۲۰ · ۳۹۰ · ۷۶۸ · ۱۴۴۰، وسط‌چین؛ بلندی ردیف همکاران = بلندی ردیف شبکه‌ها
+ *   ▸ عنوان‌ها text-align:start و نویسه‌ها از لبۀ آغاز (fa و ar راست، en چپ)
+ *   ▸ جعبۀ برند فقط لوگو + یک بند متن، لوگو در لبۀ آغاز به جهت زبان؛ سرریز افقی در ۳۲۰ · ۳۹۰ · ۷۶۸
+ * عکس هر ترکیب در tests/.screens/footer-gate/ (بیرون از git)؛ «پس» fa در ۱۴۴۰ · ۷۶۸ · ۳۹۰ × سه حالت.
  *
  * کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
  */
@@ -39,7 +45,21 @@ const wp  = code => php( [ ENV.wpCli, '--path=' + ENV.wp, '--url=' + ENV.base, '
 let fails = 0, passes = 0;
 const ok  = ( cond, msg ) => { if ( cond ) { passes++; console.log( '  ✅ ' + msg ); } else { fails++; console.log( '  ❌ ' + msg ); } };
 
-const setDemo = n => wp( '$o = get_option( "topersia_footer_blocks", array() ); $o = is_array( $o ) ? $o : array(); $o["demo_ads"] = ' + Number( n ) + '; update_option( "topersia_footer_blocks", $o, false );' );
+/* P5-D615: شبکه‌ها دو ردیف ۷تایی در هر پهنا، همکاران ۳+۲، هر دو وسط؛ بلندی هر ردیف همکاران = بلندی هر ردیف شبکه‌ها */
+const layoutOk = ( L, lang, w ) => {
+	const ph = L.partners.heights, sh = L.social.heights;
+	const same = 1 === ph.length && 1 === sh.length && Math.abs( ph[0] - sh[0] ) <= 1;
+	ok( '7,7' === L.social.rows.join() && L.social.centred && '3,2' === L.partners.rows.join() && L.partners.centred && 1 === L.partners.sizes.length && same,
+		`چیدمان · ${ lang } · ${ w }: شبکه‌ها [${ L.social.rows }] (انتظار [7,7]) وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }؛ بلندی ردیف همکاران ${ ph.join( '/' ) } = شبکه‌ها ${ sh.join( '/' ) }` );
+};
+/* P5-D614: عنوان‌ها از لبۀ آغاز به جهت زبان (fa و ar راست، en چپ) */
+const headsOk = ( L, lang, w ) => {
+	const want = 'en' === lang ? 'ltr' : 'rtl';
+	const bad  = L.heads.filter( h => 'start' !== h.ta || h.dir !== want || ! h.atStart );
+	ok( L.heads.length >= 2 && ! bad.length, `جهت عنوان · ${ lang } · ${ w }: ${ L.heads.length } عنوان، جهت ${ want }، ناهمخوان ${ bad.length }` + ( bad.length ? ' ← ' + bad.slice( 0, 4 ).map( h => '«' + h.text + '» ' + h.ta + ' ' + h.dir + ' آغاز ' + h.atStart ).join( ' | ' ) : '' ) );
+};
+
+const setDemo = n =>wp( '$o = get_option( "topersia_footer_blocks", array() ); $o = is_array( $o ) ? $o : array(); $o["demo_ads"] = ' + Number( n ) + '; update_option( "topersia_footer_blocks", $o, false );' );
 
 /* ── در صفحه ─────────────────────────────────────────────────────────── */
 function probeLayout() {
@@ -68,9 +88,29 @@ function probeLayout() {
 		[ ...box.children ].forEach( c => { const r = c.getBoundingClientRect(); const k = Math.round( r.top ); ( by[ k ] = by[ k ] || [] ).push( r ); } );
 		const rows = Object.keys( by ).sort( ( a, b ) => a - b ).map( k => by[ k ] );
 		const centred = rows.every( rs => { const l = Math.min( ...rs.map( r => r.left ) ) - B.left, rr = B.right - Math.max( ...rs.map( r => r.right ) ); return Math.abs( l - rr ) <= 2; } );
-		return { rows: rows.map( rs => rs.length ), centred, sizes: [ ...new Set( rows.flat().map( r => Math.round( r.width ) + '×' + Math.round( r.height ) ) ) ] };
+		return { rows: rows.map( rs => rs.length ), centred, sizes: [ ...new Set( rows.flat().map( r => Math.round( r.width ) + '×' + Math.round( r.height ) ) ) ], heights: [ ...new Set( rows.flat().map( r => Math.round( r.height ) ) ) ] };
 	};
+	/* P5-D614 جهت عنوان: هر عنوان دیدنی پاورقی text-align:start و نویسه‌هایش از لبۀ آغاز جعبه (راست در rtl، چپ در ltr) */
+	const heads = foot ? [ ...foot.querySelectorAll( '.tp-ft-h, .wd-el-toggle-title' ) ].filter( h => h.getBoundingClientRect().width > 0 ).map( h => {
+		const cs = getComputedStyle( h ), B = h.getBoundingClientRect();
+		const tn = [ ...h.childNodes ].find( n => 3 === n.nodeType && n.textContent.trim() );
+		if ( ! tn ) { return { text: h.textContent.trim().slice( 0, 24 ), ta: cs.textAlign, dir: cs.direction, atStart: false }; }
+		const g = document.createRange(); g.selectNodeContents( tn ); const T = g.getBoundingClientRect();
+		const atStart = 'rtl' === cs.direction ? Math.abs( B.right - parseFloat( cs.paddingRight ) - parseFloat( cs.borderRightWidth ) - T.right ) <= 3 : Math.abs( T.left - B.left - parseFloat( cs.paddingLeft ) - parseFloat( cs.borderLeftWidth ) ) <= 3;
+		return { text: tn.textContent.trim().slice( 0, 24 ), ta: cs.textAlign, dir: cs.direction, atStart };
+	} ) : [];
+	/* P5-D616 جعبۀ برند: فقط لوگو و یک بند متن؛ لوگو در لبۀ آغاز (به جهت زبان) */
+	const bx = foot ? foot.querySelector( '.tp-ft-brand' ) : null;
+	let brand = null;
+	if ( bx && bx.getBoundingClientRect().width > 0 ) {
+		const B = bx.getBoundingClientRect(), lg = bx.querySelector( '.tp-ft-brand__logo' ), dir = getComputedStyle( bx ).direction;
+		const R = lg ? lg.getBoundingClientRect() : null;
+		brand = { kids: [ ...bx.children ].map( c => c.className ).join( ' + ' ), p: bx.querySelectorAll( 'p' ).length, name: !! bx.querySelector( '.tp-ft-brand__name' ), dir,
+			logoStart: R ? ( 'rtl' === dir ? Math.abs( B.right - R.right ) <= 2 : Math.abs( R.left - B.left ) <= 2 ) : false, ta: getComputedStyle( bx ).textAlign };
+	}
 	return {
+		heads,
+		brand,
 		partners: rowsOf( '.tp-ft-partners .tp-ft-row' ),
 		social:   rowsOf( '.tp-ft-social__grid' ),
 		foot:   !! foot,
@@ -134,6 +174,20 @@ async function probeContrast( mode ) {
 	const ratio = ( a, b ) => { const L1 = lum( a ), L2 = lum( b ); return ( Math.max( L1, L2 ) + .05 ) / ( Math.min( L1, L2 ) + .05 ); };
 	const foot = document.querySelector( '[data-elementor-type="footer"]' );
 	const rows = [];
+	/* P5-D612: هیچ زمینه‌ای در پاورقی رنگ‌مایۀ سبز (۷۵ تا ۱۷۰ درجه) ندارد — خود پاورقی و هر گره؛ تصویر (لوگو، تبلیغ) و
+	   آیکون برند (svg، i) معاف. رنگ‌مایه فقط وقتی معنا دارد که رنگ خاکستری محض نباشد (اختلاف بیشینه و کمینه ≥ ۱٪) */
+	const hueOf = c => { const r = c.r / 255, g = c.g / 255, b = c.b / 255, mx = Math.max( r, g, b ), d = mx - Math.min( r, g, b ); if ( d < .01 ) { return -1; } let h = mx === r ? ( ( g - b ) / d ) % 6 : mx === g ? ( b - r ) / d + 2 : ( r - g ) / d + 4; return ( h * 60 + 360 ) % 360; };
+	const green = [];
+	[ foot, ...foot.querySelectorAll( '*' ) ].forEach( el => {
+		if ( el.closest( 'svg' ) || el.matches( 'img, i, picture, video' ) ) { return; }
+		const c = rgb( getComputedStyle( el ).backgroundColor );
+		if ( ! c || c.a <= 0 ) { return; }
+		const h = hueOf( c );
+		if ( h >= 75 && h <= 170 ) { green.push( ( 'string' === typeof el.className ? el.className.split( ' ' )[0] : el.tagName ) + ' ' + getComputedStyle( el ).backgroundColor + ' ' + Math.round( h ) + '°' ); }
+	} );
+	/* P5-D613: کاشی شبکه‌ها در هر حالت یک زمینه و یک قاب */
+	const socTiles = [ ...new Set( [ ...foot.querySelectorAll( '.tp-ft-social__a' ) ].map( a => { const cs = getComputedStyle( a ); return cs.backgroundColor + ' / ' + cs.borderTopColor; } ) ) ];
+	rows.push( { kind: 'meta', green, socTiles, ratio: 99, min: 0 } );
 	foot.querySelectorAll( '*' ).forEach( el => {
 		const r = el.getBoundingClientRect();
 		if ( ! r.width || ! r.height ) { return; }
@@ -194,15 +248,14 @@ async function probeContrast( mode ) {
 		for ( let n = 0; n <= 4; n++ ) {
 			setDemo( n );
 			for ( const [ lang, p ] of Object.entries( LANGS ) ) {
-				for ( const w of [ 390, 320 ] ) {
+				for ( const w of [ 390, 320, 768 ] ) {
 					const st = await go( ENV.base + p, w );
 					const L  = await page.evaluate( probeLayout );
 					ok( 200 === st && L.foot && ! L.raw && L.ads === n && 3 === L.parts.length && L.scroll <= 1 && ! L.bad.length,
 						`تبلیغ ${ n } · ${ lang } · ${ w }: وضعیت ${ st }، تبلیغ ${ L.ads }، بخش‌ها ${ L.parts.length }/۳، بی شورت‌کد خام ${ ! L.raw }، سرریز ${ L.scroll }px` + ( L.bad.length ? ' ← ' + L.bad.join( ' | ' ) : '' ) );
-					if ( 2 === n ) {   /* P5-D609 · P5-D610 — یک بار برای هر زبان و پهنا */
-						const wantS = [ 5, 5, 4 ];   /* موبایل: ۷ کاشی ۴۴px در ستون ~۳۴۰px جا نمی‌شود */
-						ok( L.social.rows.join() === wantS.join() && L.social.centred && L.partners.rows.join() === '3,2' && L.partners.centred && 1 === L.partners.sizes.length,
-							`چیدمان · ${ lang } · ${ w }: شبکه‌ها [${ L.social.rows }] (انتظار [${ wantS }]) وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }` );
+					if ( 2 === n ) {   /* P5-D609 · P5-D615 — یک بار برای هر زبان و پهنا */
+						layoutOk( L, lang, w );
+						headsOk( L, lang, w );
 					}
 					if ( 'fa' === lang && ( 1 === n || 4 === n ) ) {
 						await shot( path.join( SHOTS, `fa-${ w }-ads${ n }.png` ) );
@@ -217,20 +270,26 @@ async function probeContrast( mode ) {
 		for ( const [ lang, p ] of Object.entries( LANGS ) ) {
 			await go( ENV.base + p, 1440 );
 			const L = await page.evaluate( probeLayout );
-			ok( L.social.rows.join() === '7,7' && L.social.centred && L.partners.rows.join() === '3,2' && L.partners.centred && 1 === L.partners.sizes.length,
-				`چیدمان · ${ lang } · ۱۴۴۰: شبکه‌ها [${ L.social.rows }] وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }` );
+			layoutOk( L, lang, 1440 );
+			headsOk( L, lang, 1440 );
+			const wantDir = 'en' === lang ? 'ltr' : 'rtl';
+			ok( !! L.brand && ! L.brand.name && 1 === L.brand.p && /^tp-ft-brand__home \+ tp-ft-brand__text$/.test( L.brand.kids ) && L.brand.dir === wantDir && L.brand.logoStart && 'start' === L.brand.ta,
+				`جعبۀ برند · ${ lang } (P5-D616): ${ L.brand ? 'فرزندان «' + L.brand.kids + '»، بند ' + L.brand.p + '، نام زیر لوگو ' + L.brand.name + '، جهت ' + L.brand.dir + ' (انتظار ' + wantDir + ')، لوگو در لبۀ آغاز ' + L.brand.logoStart + '، text-align ' + L.brand.ta : 'دیده نشد' }` );
 			const P     = await page.evaluate( probeIcons );
 			const icons = P.icons;
 			const badI  = icons.filter( x => ! x.ok );
 			ok( icons.length >= 14 && ! badI.length, `آیکون شبکه‌ها · ${ lang }: ${ icons.length } پیوند، ${ icons.filter( x => x.brand ).length } لوگوی SVG رنگی، نمایش‌نیافته ${ badI.length }` + ( badI.length ? ' ← ' + badI.map( x => x.name + ' (' + x.why + ')' ).join( ' | ' ) : '' ) );
 			ok( P.fill === P.total && 2 === P.rows.length && Math.abs( P.rows[0] - P.rows[1] ) <= 1, `شبکه‌ها · ${ lang }: رنگ برند ${ P.fill }/${ P.total }، ردیف‌ها [${ P.rows.join( '، ' ) }]` );
-			ok( P.logoH.length >= 5 && P.logoH.every( h => h >= 80 ), `همکاران · ${ lang } · ۱۴۴۰: بلندی کاشی‌ها [${ P.logoH.join( '، ' ) }] ≥ ۸۰` );
+			ok( P.logoH.length >= 5 && P.logoH.every( h => h <= 48 ) && 1 === new Set( P.logoH ).size, `همکاران · ${ lang } · ۱۴۴۰: بلندی کاشی‌ها [${ P.logoH.join( '، ' ) }] یکسان و ≤ ۴۸ (کوچک‌تر از ۱۰۴ پیشین — P5-D615)` );
 			for ( const mode of MODES ) {
 				const rows = await page.evaluate( probeContrast, mode );
 				table[ lang + ' · ' + mode ] = rows;
 				const low  = rows.filter( r => r.ratio < r.min );
 				const tiles = [ ...new Set( rows.filter( r => 'tile' === r.kind ).map( r => r.sample ) ) ];
 				ok( 1 === tiles.length, `کاشی همکاران · ${ lang } · ${ mode }: یک رنگ (${ tiles.join( ' / ' ) })` );
+				const meta = rows.find( r => 'meta' === r.kind ) || { green: [ 'بی سنجه' ], socTiles: [] };
+				ok( ! meta.green.length, `بی رنگ‌مایۀ سبز · ${ lang } · ${ mode } (P5-D612): زمینه‌های ۷۵ تا ۱۷۰ درجه ${ meta.green.length }` + ( meta.green.length ? ' ← ' + meta.green.slice( 0, 5 ).join( ' | ' ) : '' ) );
+				ok( 1 === meta.socTiles.length, `کاشی شبکه‌ها · ${ lang } · ${ mode } (P5-D613): یک زمینه و قاب (${ meta.socTiles.join( ' ، ' ) })` );
 				const minT = Math.min( ...rows.filter( r => 'text' === r.kind ).map( r => r.ratio ) );
 				const ic   = rows.filter( r => 'icon' === r.kind ).map( r => r.ratio );
 				const minI = ic.length ? Math.min( ...ic ) : '— (همه رنگ برند)';
@@ -241,12 +300,14 @@ async function probeContrast( mode ) {
 			}
 		}
 		fs.writeFileSync( path.join( SHOTS, 'contrast.json' ), JSON.stringify( table, null, 1 ) );
-		/* ۳) عکس «پس» fa در ۳۹۰، سه حالت */
-		await go( ENV.base + '/', 390 );
-		for ( const mode of MODES ) {
-			await page.evaluate( m => document.documentElement.setAttribute( 'data-tp-mode', m ), mode );
-			await page.waitForTimeout( 900 );
-			await shot( path.join( SHOTS, `fa-390-${ mode }.png` ) );
+		/* ۳) عکس «پس» fa در ۷۶۸ و ۳۹۰، سه حالت (۱۴۴۰ در بخش ۲) — دستۀ 53-ت بند ۱۰ */
+		for ( const w of [ 768, 390 ] ) {
+			await go( ENV.base + '/', w );
+			for ( const mode of MODES ) {
+				await page.evaluate( m => document.documentElement.setAttribute( 'data-tp-mode', m ), mode );
+				await page.waitForTimeout( 900 );
+				await shot( path.join( SHOTS, `fa-${ w }-${ mode }.png` ) );
+			}
 		}
 	} catch ( e ) {
 		fails++;

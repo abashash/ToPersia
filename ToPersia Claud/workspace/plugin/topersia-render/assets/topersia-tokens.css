@@ -196,15 +196,18 @@ html[data-tp-mode="dark"]{
   --tp-s-winter:#5D93BF; --tp-s-winter-soft:#1A2833;
 }
 
-/* پاورقی المنتوری (#6128) — هم‌رنگ سایت در هر سه حالت (P5-D608؛ جای نوار سرمه‌ای ثابت). #6128 هیچ رنگ ثابتی ندارد؛
-   زمینه همان --tp-surface-2 کاشی‌ها، متن و عنوان --tp-text و --tp-text-strong، پیوند --tp-primary-text، خط --tp-border حالت.
-   کاشی همکاران و شبکه‌ها در هر سه حالت یکسان است (P5-D609 · P5-D610): روشن #FFFFFF با قاب #DDD5C8؛ کاشی تیرۀ
-   شبکه‌ای که رنگ برندش روی سفید زیر ۳:۱ است #11161B (همان زمینۀ حالت تیره). */
+/* پاورقی المنتوری (#6128) — هم‌رنگ سایت در هر سه حالت (P5-D608)، همه از پالت رسمی (P5-D612 · دستۀ 53-ت):
+   زمینه Surface حالت (--tp-surface: #F4EFE6 · #EFE4D3 · #1B232B)، متن و عنوان --tp-text و --tp-text-strong، پیوند
+   --tp-primary-text، خط --tp-border. --tp-surface-2 کنار گذاشته شد: در حالت تیره #1e2927 (رنگ‌مایۀ سبز ~۱۶۹°) است.
+   کاشی شبکه‌ها در هر حالت یکی (P5-D613): Background همان حالت (--tp-bg) با قاب --tp-border؛ رنگ نشانه رنگ برند،
+   و اگر برندی روی کاشی آن حالت زیر ۳:۱ است نسخۀ همان حالت (جدول topersia_g_ft_brand_fill در PHP).
+   کاشی همکاران و برچسب تبلیغ در هر سه حالت روشن می‌ماند (P5-D609؛ لوگوها جوهر تیره دارند): Background و Border
+   حالت روشن پالت، ثابت (#FAF7F1 · #DDD5C8)، جوهر Text روشن (#2A2A28). */
 :root,
 html[data-tp-mode="light"],
 html[data-tp-mode="evening"],
 html[data-tp-mode="dark"]{
-  --tp-ft-bg:var(--tp-surface-2);
+  --tp-ft-bg:var(--tp-surface);
   --tp-ft-text:var(--tp-text);
   --tp-ft-muted:var(--tp-text);
   --tp-ft-head:var(--tp-text-strong);
@@ -212,23 +215,24 @@ html[data-tp-mode="dark"]{
   --tp-ft-link-hover:var(--tp-text-strong);
   --tp-ft-focus:var(--tp-primary-text);
   --tp-ft-line:var(--tp-border);
-  --tp-ft-tile:#FFFFFF;
+  --tp-ft-soc-tile:var(--tp-bg);
+  --tp-ft-soc-line:var(--tp-border);
+  --tp-ft-soc-ink:var(--tp-text-strong);
+  --tp-ft-tile:#FAF7F1;
   --tp-ft-tile-line:#DDD5C8;
   --tp-ft-tile-ink:#2A2A28;
-  --tp-ft-tile-dark:#11161B;
 }
-/* ردیف شبکه‌ها و کاشی همکاران هماهنگ (P5-D610): در دسکتاپ بلندی کاشی همکار = دو ردیف شبکه + فاصله،
-   پس ردیف اول همکاران با بلوک دوردیفۀ شبکه‌ها هم‌لبه است. */
+/* اندازه‌ها و فاصله‌های پاورقی (P5-D615) — شبکه‌ها همیشه ۲ ردیف ۷تایی و هر ردیف همکاران هم‌بلندی هر ردیف شبکه‌ها:
+   بلندی ردیف یک توکن است برای هر دو. clamp: هفت کاشی + شش فاصله در ستون پاورقی (۱۰۰vw منهای ~۵۰px فاصلۀ ظرف
+   تا ۱۰۲۴px) جا شود، با ۵۰px حاشیۀ ایمنی برای نوار اسکرول کلاسیک؛ کف ۲۸px (بالای ۲۴px هدف لمسی WCAG ۲٫۵٫۸)،
+   سقف ۴۸px. فاصلۀ ردیف‌ها، فاصلۀ درونی کاشی همکار و بلندی لوگوی برند هم همین‌جاست. */
 :root{
-  --tp-ft-row-h:44px;
-  --tp-ft-gap:8px;
-  --tp-ft-logo-h:64px;
-}
-@media (min-width:1025px){
-  :root{
-    --tp-ft-row-h:48px;
-    --tp-ft-logo-h:calc(2 * var(--tp-ft-row-h) + var(--tp-ft-gap));
-  }
+  --tp-ft-gap:6px;
+  --tp-ft-row-h:clamp(28px, calc((100vw - 104px) / 7), 48px);
+  --tp-ft-logo-pad:clamp(4px, calc(var(--tp-ft-row-h) / 8), 6px);
+  --tp-ft-logo-max:150px;
+  --tp-ft-brand-h:48px;
+  --tp-ft-stack:12px;
 }
 
 /* متنِ فصل — نسخۀ «متن» هر رنگ فصل، همان الگوی ـtext پالت.  P5-D153

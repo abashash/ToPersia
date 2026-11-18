@@ -1136,8 +1136,8 @@ msgid "تولیدشده با API"
 msgstr "Generated via API"
 
 #: includes/topersia-g-footer.php
-msgid "توپرشیا مرجع جامع اطلاعات ایران و گردشگری ایران است؛ راهنمای استان‌ها، شهرها، روستاها، جزیره‌ها، جاذبه‌ها، رویدادها و برنامه‌ریزی سفر به ایران، به چند زبان و با ذکر منبع و به‌روزرسانی منظم."
-msgstr "ToPersia is a comprehensive reference to Iran and travel in Iran: guides to provinces, cities, villages, islands, attractions, events and trip planning, in several languages, with sources and regular updates."
+msgid "توپرشیا راهنمای جامع ایران است؛ از استان‌ها و شهرهای بزرگ تا روستاها و جزیره‌های کمتر دیده‌شده. جاذبه‌ها، رویدادها و اطلاعات کاربردی سفر را یک‌جا پیدا کنید و مسیرتان را با خیال راحت بچینید."
+msgstr "ToPersia is your guide to Iran, from big cities and provinces to villages and little-known islands. Find attractions, events and practical travel information in one place, and plan your trip with confidence."
 
 #: includes/topersia-g-map.php
 msgid "تپسی"

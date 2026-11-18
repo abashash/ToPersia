@@ -1317,7 +1317,8 @@ return array(
 	'وسعت: زیاد به کم' => array( 'en' => 'Area: largest first', 'ar' => 'المساحة: من الأكبر إلى الأصغر' ),
 	'وسعت: کم به زیاد' => array( 'en' => 'Area: smallest first', 'ar' => 'المساحة: من الأصغر إلى الأكبر' ),
 	/* دستۀ 53 بند ۱۷ — پاورقی المنتوری (شورت‌کدها و صفحۀ پیشخوان) */
-	'توپرشیا مرجع جامع اطلاعات ایران و گردشگری ایران است؛ راهنمای استان‌ها، شهرها، روستاها، جزیره‌ها، جاذبه‌ها، رویدادها و برنامه‌ریزی سفر به ایران، به چند زبان و با ذکر منبع و به‌روزرسانی منظم.' => array( 'en' => 'ToPersia is a comprehensive reference to Iran and travel in Iran: guides to provinces, cities, villages, islands, attractions, events and trip planning, in several languages, with sources and regular updates.', 'ar' => 'توبيرشيا مرجع شامل عن إيران والسفر إليها: أدلة للمحافظات والمدن والقرى والجزر والمعالم والفعاليات وتخطيط الرحلات بعدة لغات، مع المصادر والتحديث المنتظم.' ),
+	/* 53-ت · P5-D616 — متن پیش‌فرض جعبۀ برند، عین متن کاربر در هر سه زبان */
+	'توپرشیا راهنمای جامع ایران است؛ از استان‌ها و شهرهای بزرگ تا روستاها و جزیره‌های کمتر دیده‌شده. جاذبه‌ها، رویدادها و اطلاعات کاربردی سفر را یک‌جا پیدا کنید و مسیرتان را با خیال راحت بچینید.' => array( 'en' => 'ToPersia is your guide to Iran, from big cities and provinces to villages and little-known islands. Find attractions, events and practical travel information in one place, and plan your trip with confidence.', 'ar' => 'توبيرشيا دليلك إلى إيران، من المحافظات والمدن الكبرى إلى القرى والجزر الأقل شهرة. اعثر على المعالم والفعاليات ومعلومات السفر العملية في مكان واحد، وخطّط رحلتك بثقة.' ),
 	'تبلیغ' => array( 'en' => 'Ad', 'ar' => 'إعلان' ),
 	'جای تبلیغ' => array( 'en' => 'Ad space', 'ar' => 'مساحة إعلانية' ),
 	'لوگوی نمونه' => array( 'en' => 'Sample logo', 'ar' => 'شعار نموذجي' ),
