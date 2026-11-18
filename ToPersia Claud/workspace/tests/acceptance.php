@@ -52,19 +52,55 @@ $ref  = preg_replace( '/<head>/', "<head>\n" . $host, $ref, 1 );
 
 file_put_contents( $DEST . '/reference.html', $ref );
 
-/* ۳ — Playwright */
-$pw = getenv( 'TP_PLAYWRIGHT' );
-
-if ( ! $pw ) {
-	$cache = getenv( 'LOCALAPPDATA' ) . '/npm-cache/_npx';
-	foreach ( (array) glob( $cache . '/*/node_modules/playwright/package.json' ) as $pkg ) {
-		$pw = dirname( dirname( $pkg ) );
-		break;
+/*
+ * ۳ — Playwright — P5-D620: کش npx ممکن است چند نسخه داشته باشد و نخستین آن (به ترتیب نام پوشه) لزوماً نسخه‌ای نیست
+ * که مرورگرش نصب است؛ ۵۳-پ با کش 1.66 بی مرورگر کد ۲ گرفت. پس هر نامزد را با browsers.json خودش می‌سنجیم: بازنگری
+ * (revision) کرومیوم، کرومیوم بی‌سر و فایرفاکس باید در پوشۀ مرورگرهای Playwright (PLAYWRIGHT_BROWSERS_PATH، وگرنه
+ * %LOCALAPPDATA%\ms-playwright) باشد؛ از نامزدهای کامل تازه‌ترین نسخه. TP_PLAYWRIGHT هنوز اگر داده شود برنده است.
+ */
+function tp_acc_playwright() {
+	$own = getenv( 'TP_PLAYWRIGHT' );
+	if ( $own ) {
+		return array( $own, '' );
 	}
+	$bdir  = getenv( 'PLAYWRIGHT_BROWSERS_PATH' );
+	$bdir  = $bdir && '0' !== $bdir ? $bdir : getenv( 'LOCALAPPDATA' ) . '/ms-playwright';
+	$cands = (array) glob( getenv( 'LOCALAPPDATA' ) . '/npm-cache/_npx/*/node_modules/playwright/package.json' );
+	foreach ( array_filter( explode( PATH_SEPARATOR, (string) getenv( 'NODE_PATH' ) ) ) as $np ) {
+		$cands[] = rtrim( $np, '/\\' ) . '/playwright/package.json';
+	}
+	$best = null;
+	$log  = array();
+	foreach ( array_unique( $cands ) as $pkg ) {
+		$nm  = dirname( dirname( $pkg ) );
+		$bj  = $nm . '/playwright-core/browsers.json';
+		$ver = is_file( $nm . '/playwright-core/package.json' ) ? (string) ( json_decode( (string) file_get_contents( $nm . '/playwright-core/package.json' ), true )['version'] ?? '' ) : '';
+		if ( ! is_file( $pkg ) || ! is_file( $bj ) || '' === $ver ) {
+			continue;
+		}
+		$miss = array();
+		foreach ( (array) ( json_decode( (string) file_get_contents( $bj ), true )['browsers'] ?? array() ) as $b ) {
+			if ( ! in_array( $b['name'] ?? '', array( 'chromium', 'chromium-headless-shell', 'firefox' ), true ) ) {
+				continue;
+			}
+			$rev = $b['revisionOverrides']['win64'] ?? $b['revision'];
+			$dir = str_replace( '-', '_', $b['name'] ) . '-' . $rev;
+			if ( ! is_dir( $bdir . '/' . $dir ) ) {
+				$miss[] = $dir;
+			}
+		}
+		$log[] = $ver . ( $miss ? ' — نیست: ' . implode( '، ', $miss ) : ' — کامل' ) . ' (' . $nm . ')';
+		if ( ! $miss && ( null === $best || version_compare( $ver, $best[1], '>' ) ) ) {
+			$best = array( $nm, $ver );
+		}
+	}
+	return $best ? $best : array( '', implode( "\n  ", $log ) );
 }
 
+list( $pw, $pw_why ) = tp_acc_playwright();
+
 if ( ! $pw || ! is_dir( $pw . '/playwright' ) ) {
-	fwrite( STDERR, "Playwright پیدا نشد. TP_PLAYWRIGHT را به پوشهٔ node_modules بده.\n" );
+	fwrite( STDERR, "Playwright با مرورگر نصب‌شده پیدا نشد. نامزدها:\n  " . ( '' !== $pw_why ? $pw_why : '(هیچ)' ) . "\nنصب: npx.cmd playwright install chromium firefox — یا TP_PLAYWRIGHT را به پوشۀ node_modules بده.\n" );
 	exit( 2 );
 }
 

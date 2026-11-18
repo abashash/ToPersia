@@ -547,3 +547,13 @@ tp441_mut( 'بند ۱۲ب: پیام نظر تکراری و نوع بی‌نظر 
 tp441_mut( 'P5-D605 و D606: پیوند همکار noopener nofollow + _blank؛ بله و روبیکا SVG درون‌خطی با رنگ اصلی لوگو، بی وابستگی به قلم javis-fa — جهش: rel بی nofollow',
 	function ( $s ) { return false !== strpos( $s, 'target="_blank" rel="noopener nofollow">' ) && preg_match( "/'bale'\s+=> array\( /", $s ) && preg_match( "/'rubika'\s+=> array\( /", $s ) && false === strpos( $s, 'javisfa-' ); },
 	$w53_ft, str_replace( 'rel="noopener nofollow"', 'rel="noopener"', $w53_ft ) );
+
+/* 53-ت · P5-D620 — acceptance.php نخستین پوشۀ کش npx را برنمی‌دارد؛ نامزدی که مرورگرهای همان نسخه‌اش نصب است (بی TP_PLAYWRIGHT) */
+$w53_acc = $w53_read( 'tests/acceptance.php' );
+tp441_mut( 'P5-D620 acceptance.php: Playwright تازه‌ترین نامزدی که chromium و chromium-headless-shell و firefox بازنگری browsers.json همان نسخه‌اش در پوشۀ مرورگرها هست، نه نخستین کش npx؛ بی TP_PLAYWRIGHT — جهش: نامزد بی سنجش مرورگر',
+	function ( $s ) {
+		return false !== strpos( $s, "/playwright-core/browsers.json'" ) && false !== strpos( $s, "\$b['revisionOverrides']['win64'] ?? \$b['revision']" )
+			&& false !== strpos( $s, "'/ms-playwright'" ) && false !== strpos( $s, "getenv( 'PLAYWRIGHT_BROWSERS_PATH' )" )
+			&& false !== strpos( $s, "if ( ! is_dir( \$bdir . '/' . \$dir ) ) {" ) && false !== strpos( $s, "version_compare( \$ver, \$best[1], '>' )" )
+			&& ! preg_match( '/as \$pkg \) \{\s*\$pw = dirname/', $s );
+	}, $w53_acc, str_replace( "if ( ! is_dir( \$bdir . '/' . \$dir ) ) {", 'if ( false ) {', $w53_acc ) );
