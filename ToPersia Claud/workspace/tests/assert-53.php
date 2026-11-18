@@ -557,3 +557,66 @@ tp441_mut( 'P5-D620 acceptance.php: Playwright تازه‌ترین نامزدی 
 			&& false !== strpos( $s, "if ( ! is_dir( \$bdir . '/' . \$dir ) ) {" ) && false !== strpos( $s, "version_compare( \$ver, \$best[1], '>' )" )
 			&& ! preg_match( '/as \$pkg \) \{\s*\$pw = dirname/', $s );
 	}, $w53_acc, str_replace( "if ( ! is_dir( \$bdir . '/' . \$dir ) ) {", 'if ( false ) {', $w53_acc ) );
+
+/* 53-ت · P5-D617 — منوهای واقعی پاورقی به جای پیوندهای نمایشی پوسته؛ رفتار روی وردپرس واقعی در tests/footer-gate.js */
+tp441_mut( 'P5-D617 [tp_footer_menu]: ثبت شورت‌کد؛ صفحه فقط از topersia_g_legal_page (نامک‌های about · contact · terms · privacy-policy · copyright)؛ هاب فقط با پست منتشرشدۀ همان زبان (topersia_g_home_real)؛ ستون بی پیوند ← هیچ خروجی — جهش: دروازۀ topersia_g_home_real برداشته شود',
+	function ( $s ) {
+		preg_match_all( "/array\( __\( '[^']+', 'topersia' \), 'page', '([a-z-]+)' \)/u", $s, $pg );
+		return false !== strpos( $s, "add_shortcode( 'tp_footer_menu', 'topersia_g_sc_footer_menu' );" )
+			&& false !== strpos( $s, "\$id = function_exists( 'topersia_g_legal_page' ) ? topersia_g_legal_page( \$key ) : 0;" )
+			&& false !== strpos( $s, "! topersia_g_home_real( \$types, 5 )" )
+			&& false !== strpos( $s, "if ( '' === \$items ) {" )
+			&& array( 'about', 'contact', 'terms', 'privacy-policy', 'copyright' ) === $pg[1];
+	}, $w53_ft, str_replace( "! topersia_g_home_real( \$types, 5 )", 'false', $w53_ft ) );
+tp441_mut( 'P5-D617 کش عنصر المنتور برای هر زبان جدا نیست: toggle با عنوان شناخته‌شده پویا (is_dynamic_content) و زنده کشیده می‌شود؛ toggle منوی بی پیوند پنهان (render_content نشان، should_render false) و شیوه‌نامۀ درونش با after_render می‌ماند — جهش: صافی is_dynamic_content ثبت نشود',
+	function ( $s ) {
+		return false !== strpos( $s, "add_filter( 'elementor/element/is_dynamic_content', function ( \$is, \$raw = array() ) {" )
+			&& false !== strpos( $s, "'wd_toggle' !== ( \$raw['widgetType'] ?? '' )" )
+			&& false !== strpos( $s, "isset( topersia_g_ft_toggle_titles()[ trim( (string) ( \$raw['settings']['element_title'] ?? '' ) ) ] )" )
+			&& false !== strpos( $s, "false === strpos( (string) \$html, 'tp-ft-menu__a' )" )
+			&& false !== strpos( $s, "add_filter( 'elementor/frontend/widget/should_render', function ( \$should, \$widget ) {" )
+			&& false !== strpos( $s, "add_action( 'elementor/frontend/widget/after_render', function ( \$widget ) {" );
+	}, $w53_ft, str_replace( "'elementor/element/is_dynamic_content'", "'elementor/element/tp_off'", $w53_ft ) );
+
+$w53_l10n = $GLOBALS['tp_l10n'] ?? null;
+$GLOBALS['tp_l10n'] = array( 'مقصدها' => 'Destinations', 'حقوقی' => '<b>Legal</b>' );
+$h = topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">  مقصدها </div><div class="tp-x"><div class="wd-el-toggle-title title">مقصدها</div></div>', ' مقصدها ' );
+$w53_okm = 1 === substr_count( $h, 'title">Destinations</div>' ) && 1 === substr_count( $h, 'title">مقصدها</div>' )   /* فقط نخستین عنوان */
+	&& '<div class="wd-el-toggle-title title">دیگر</div>' === topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">دیگر</div>', 'دیگر' )
+	&& false !== strpos( topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">حقوقی</div>', 'حقوقی' ), '&lt;b&gt;Legal&lt;/b&gt;' );
+$GLOBALS['tp_l10n'] = array();
+$w53_okm = $w53_okm && '<div class="wd-el-toggle-title title">مقصدها</div>' === topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">مقصدها</div>', 'مقصدها' );   /* فارسی دست‌نخورده */
+if ( null === $w53_l10n ) {
+	unset( $GLOBALS['tp_l10n'] );
+} else {
+	$GLOBALS['tp_l10n'] = $w53_l10n;
+}
+$w53_okm = $w53_okm && 'legal' === topersia_g_ft_toggle_menu_col( array( 'elements' => array( array( 'elType' => 'container', 'elements' => array( array( 'widgetType' => 'shortcode', 'settings' => array( 'shortcode' => '[tp_footer_menu col="legal"]' ) ) ) ) ) ) )
+	&& '' === topersia_g_ft_toggle_menu_col( array( 'elements' => array( array( 'widgetType' => 'shortcode', 'settings' => array( 'shortcode' => '[tp_footer_brand]' ) ) ) ) )
+	&& '' === topersia_g_ft_toggle_menu_col( array() )
+	&& null === topersia_g_ft_hidden_toggle( 'tp-w53-x' ) && '<link a>' === topersia_g_ft_hidden_toggle( 'tp-w53-x', '<link a>' ) && '<link a>' === topersia_g_ft_hidden_toggle( 'tp-w53-x' );
+t( 'P5-D617 رفتار: عنوان toggle از کاتالوگ فقط در نخستین div عنوان و با گریز HTML، عنوان ناشناخته و فارسی دست‌نخورده؛ کلید ستون از شورت‌کد فرزند در هر عمق، جعبۀ برند بی ستون؛ فهرست پنهان‌ها null تا نشان‌گذاری', $w53_okm );
+
+$w53_cat  = $w53_read( 'scripts/i18n/topersia-render.php' );
+$w53_fmct = function ( $cat ) use ( $w53_ft ) {
+	if ( ! preg_match( '/function topersia_g_ft_toggle_titles\(\).*?\n\t}\n/s', $w53_ft, $a ) || ! preg_match( '/function topersia_g_ft_menu_cols\(\).*?\n\t}\n/s', $w53_ft, $b ) ) {
+		return false;
+	}
+	preg_match_all( "/__\( '([^']+)', 'topersia' \)/u", $a[0] . $b[0], $m );
+	$keys = array_unique( $m[1] );
+	foreach ( $keys as $k ) {
+		if ( ! preg_match( "/\n\t'" . preg_quote( $k, '/' ) . "'\s*=> array\( 'en' => '([^']+)', 'ar' => '([^']+)' \),/u", $cat, $e ) || preg_match( '/[\x{0600}-\x{06FF}]/u', $e[1] ) || preg_match( '/[پچژگکی]/u', $e[2] ) ) {
+			return false;
+		}
+	}
+	return 20 === count( $keys );
+};
+tp441_mut( 'P5-D617 هر عنوان و برچسب منوی پاورقی (۲۰ رشته) در کاتالوگ با en لاتین و ar بی حرف ویژۀ فارسی؛ «توپرشیا» از topersia_g_brand — جهش: «حقوقی» از کاتالوگ بیفتد',
+	function ( $cat ) use ( $w53_fmct, $w53_ft ) { return $w53_fmct( $cat ) && false !== strpos( $w53_ft, "'توپرشیا'     => function_exists( 'topersia_g_brand' ) ? topersia_g_brand() : 'ToPersia'," ); },
+	$w53_cat, str_replace( "\n\t'حقوقی' => array(", "\n\t'حقوقی-' => array(", $w53_cat ) );
+tp441_mut( 'P5-D617 CSS منو از توکن: بلندی و اندازۀ قلم از --tp-ft-menu-h و --tp-ft-menu-fs (تعریف در topersia-tokens.css)، رنگ --tp-ft-link، text-align:start — جهش: اندازۀ قلم خام',
+	function ( $css ) use ( $w53_tok ) {
+		$b = preg_replace( '/\s+/', '', preg_replace( '#/\*.*?\*/#s', '', $css ) );
+		return (bool) preg_match( '/\.tp-ft-menu__a\{[^}]*min-block-size:var\(--tp-ft-menu-h\);font-size:var\(--tp-ft-menu-fs\);[^}]*text-align:start;color:var\(--tp-ft-link\);?\}/', $b )
+			&& preg_match( '/--tp-ft-menu-h:\d+px;/', $w53_tok ) && preg_match( '/--tp-ft-menu-fs:[\d.]+rem;/', $w53_tok );
+	}, $w53_ftcss, str_replace( 'font-size:var(--tp-ft-menu-fs);', 'font-size:15px;', $w53_ftcss ) );

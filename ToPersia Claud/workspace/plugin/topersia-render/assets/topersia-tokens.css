@@ -233,6 +233,8 @@ html[data-tp-mode="dark"]{
   --tp-ft-logo-max:150px;
   --tp-ft-brand-h:48px;
   --tp-ft-stack:12px;
+  --tp-ft-menu-h:32px;     /* پیوند منوی پاورقی (P5-D617): هدف لمسی ≥ ۲۴px، فاصلۀ سطرها همین بلندی است */
+  --tp-ft-menu-fs:.9375rem;
 }
 
 /* متنِ فصل — نسخۀ «متن» هر رنگ فصل، همان الگوی ـtext پالت.  P5-D153

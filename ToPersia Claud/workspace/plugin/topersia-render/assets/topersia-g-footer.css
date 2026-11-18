@@ -129,6 +129,19 @@ html:root [data-elementor-type="footer"] .tp-ft-brand__text{
   color:var(--tp-ft-text);
 }
 
+/* --- [tp_footer_menu] — منوی واقعی سه‌زبانه به جای پیوندهای نمایشی پوسته (P5-D617)؛ از آغاز سطر، بی بولت ---------- */
+.tp-ft-menu__list{display:flex;flex-direction:column;align-items:flex-start;margin:0;padding:0;list-style:none}
+html:root [data-elementor-type="footer"] .tp-ft-menu__item{margin:0;padding:0;list-style:none}
+html:root [data-elementor-type="footer"] .tp-ft-menu__a{
+  display:inline-flex;
+  align-items:center;
+  min-block-size:var(--tp-ft-menu-h);
+  font-size:var(--tp-ft-menu-fs);
+  line-height:1.4;
+  text-align:start;
+  color:var(--tp-ft-link);
+}
+
 /* --- ردیف هم‌ارتفاع همکاران و شبکه‌ها — یک توکن --tp-ft-row-h برای هر دو (P5-D615) ------------------- */
 .tp-ft-row{
   display:flex;

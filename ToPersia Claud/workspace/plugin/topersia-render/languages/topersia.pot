@@ -1094,6 +1094,10 @@ msgstr ""
 msgid "تلگرام"
 msgstr ""
 
+#: includes/topersia-g-footer.php
+msgid "تماس با ما"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "تمام سال"
 msgstr ""
@@ -1132,6 +1136,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "تولیدشده با API"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "توپرشیا"
 msgstr ""
 
 #: includes/topersia-g-footer.php
@@ -1246,6 +1254,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "جزیره"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "جزیره‌ها"
 msgstr ""
 
 #: includes/topersia-g-hub.php
@@ -1426,8 +1438,20 @@ msgstr ""
 msgid "حرا (مانگرو)"
 msgstr ""
 
+#: includes/topersia-g-footer.php
+msgid "حریم خصوصی"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "حضور بازدیدکننده"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "حق نشر"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "حقوقی"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -1640,6 +1664,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "درباره"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "درباره ما"
 msgstr ""
 
 #: includes/topersia-g-zones.php
@@ -2835,6 +2863,10 @@ msgstr ""
 msgid "قله"
 msgstr ""
 
+#: includes/topersia-g-footer.php
+msgid "قوانین و مقررات"
+msgstr ""
+
 #: includes/topersia-g-zones.php
 msgid "قوم / فرهنگ"
 msgstr ""
@@ -3366,6 +3398,10 @@ msgstr ""
 
 #: includes/topersia-g-article.php
 msgid "مقاله‌های مرتبط"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "مقصدها"
 msgstr ""
 
 #: includes/topersia-g-zones.php

@@ -19,6 +19,12 @@
  *   ▸ شبکه‌ها [7,7] و همکاران [3,2] در ۳۲۰ · ۳۹۰ · ۷۶۸ · ۱۴۴۰، وسط‌چین؛ بلندی ردیف همکاران = بلندی ردیف شبکه‌ها
  *   ▸ عنوان‌ها text-align:start و نویسه‌ها از لبۀ آغاز (fa و ar راست، en چپ)
  *   ▸ جعبۀ برند فقط لوگو + یک بند متن، لوگو در لبۀ آغاز به جهت زبان؛ سرریز افقی در ۳۲۰ · ۳۹۰ · ۷۶۸
+ * منوهای پاورقی (P5-D617)، سه زبان در ۱۴۴۰:
+ *   ▸ هیچ پیوند نمایشی پوسته (شهرهای دمو، href="#" یا تهی) و هیچ ویجت wd_extra_menu_list
+ *   ▸ عنوان هر ستون به زبان صفحه (کش عنصر المنتور برای هر زبان جدا نیست — toggle زنده کشیده می‌شود)
+ *   ▸ ستون‌ها و پیوندها همان خروجی topersia_g_ft_menu_url در همان زبان؛ ستون بی پیوند اصلاً نمی‌آید، هیچ toggle تهی
+ *   ▸ هر پیوند ۲۰۰ بی تغییر مسیر و پیشوند زبانش همان زبان صفحه؛ برچسب en لاتین، ar بی حرف ویژۀ فارسی
+ *   ▸ سمت سرور: اگر نخستین ستون (که شیوه‌نامۀ el-toggle وودمارت را می‌نویسد) پنهان شود، شیوه‌نامه می‌ماند — با جهش
  * عکس هر ترکیب در tests/.screens/footer-gate/ (بیرون از git)؛ «پس» fa در ۱۴۴۰ · ۷۶۸ · ۳۹۰ × سه حالت.
  *
  * کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
@@ -58,6 +64,18 @@ const headsOk = ( L, lang, w ) => {
 	const bad  = L.heads.filter( h => 'start' !== h.ta || h.dir !== want || ! h.atStart );
 	ok( L.heads.length >= 2 && ! bad.length, `جهت عنوان · ${ lang } · ${ w }: ${ L.heads.length } عنوان، جهت ${ want }، ناهمخوان ${ bad.length }` + ( bad.length ? ' ← ' + bad.slice( 0, 4 ).map( h => '«' + h.text + '» ' + h.ta + ' ' + h.dir + ' آغاز ' + h.atStart ).join( ' | ' ) : '' ) );
 };
+
+/* P5-D617: عنوان ستون به ترتیب dest · guide · about · legal — مستقل از کد، از کاتالوگ بازبینی‌شده */
+const MENU_COLS   = [ 'dest', 'guide', 'about', 'legal' ];
+const MENU_TITLES = {
+	fa: [ 'مقصدها', 'راهنمای سفر', 'توپرشیا', 'حقوقی' ],
+	en: [ 'Destinations', 'Travel guide', 'ToPersia', 'Legal' ],
+	ar: [ 'الوجهات', 'دليل السفر', 'توبيرشيا', 'قانوني' ],
+};
+/* خروجی سرور در هر زبان: ستون ← نشانی‌های زنده (topersia_g_ft_menu_url پس از wpml_switch_language) */
+const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( topersia_g_ft_menu_cols() as $k => $c ) { $o[ $k ] = array(); foreach ( $c[1] as $it ) { $u = topersia_g_ft_menu_url( $it[1], $it[2] ); if ( "" !== $u ) { $o[ $k ][] = $u; } } } echo wp_json_encode( $o );' ).trim() );
+/* سمت سرور: ستون dest تهی ساخته می‌شود؛ پاورقی بی آن کشیده می‌شود و شیوه‌نامۀ el-toggle باید بماند. mut = بی بازگرداندن after_render */
+const keepCss = mut => JSON.parse( wp( '$mut = ' + ( mut ? 1 : 0 ) + '; add_filter( "elementor/widget/render_content", function ( $h, $w ) { return ( "wd_toggle" === $w->get_name() && "dest" === topersia_g_ft_toggle_menu_col( (array) $w->get_raw_data() ) ) ? str_replace( "tp-ft-menu__a", "tp-ft-menu__x", $h ) : $h; }, 5, 2 ); if ( $mut ) { remove_all_actions( "elementor/frontend/widget/after_render" ); } $o = \\Elementor\\Plugin::$instance->frontend->get_builder_content_for_display( 6128 ); preg_match_all( "#wd-el-toggle-title[^>]*>\\s*([^<]*?)\\s*<#u", $o, $t ); echo wp_json_encode( array( "titles" => $t[1], "css" => preg_match_all( "#<link[^>]+id=\\"wd-el-toggle(-rtl)?-css\\"#", $o ), "raw" => false !== strpos( $o, "[tp_footer_menu" ) || false !== strpos( $o, "[elementor-element" ) ) );' ).trim().split( '\n' ).pop() );
 
 const setDemo = n =>wp( '$o = get_option( "topersia_footer_blocks", array() ); $o = is_array( $o ) ? $o : array(); $o["demo_ads"] = ' + Number( n ) + '; update_option( "topersia_footer_blocks", $o, false );' );
 
@@ -119,6 +137,30 @@ function probeLayout() {
 		ads:    foot ? foot.querySelectorAll( '.tp-ft-ad' ).length : -1,
 		parts:  foot ? [ 'tp-ft-brand', 'tp-ft-partners', 'tp-ft-social' ].filter( c => foot.querySelector( '.' + c ) ) : [],
 		bad:    bad.slice( 0, 6 ),
+	};
+}
+
+/* P5-D617 منوها: هر toggle پاورقی — عنوان، منو، پیوندها، پُری؛ و هر رد پیوند نمایشی پوسته */
+function probeMenus() {
+	const foot = document.querySelector( '[data-elementor-type="footer"]' );
+	if ( ! foot ) { return null; }
+	const DEMO = /New York|London|San Francisco|Cockfosters|Las Vegas|Los Angeles|Chicago|Paris|Berlin/i;
+	const toggles = [ ...foot.querySelectorAll( '.wd-el-toggle' ) ].map( t => {
+		const nav  = t.querySelector( 'nav.tp-ft-menu' );
+		const body = t.querySelector( '.wd-el-toggle-content-inner' );
+		return {
+			title:  ( ( t.querySelector( '.wd-el-toggle-title' ) || {} ).textContent || '' ).trim(),
+			menu:   !! nav,
+			label:  nav ? nav.getAttribute( 'aria-label' ) : '',
+			links:  nav ? [ ...nav.querySelectorAll( 'a.tp-ft-menu__a' ) ].map( a => ( { href: a.href, text: a.textContent.trim() } ) ) : [],
+			filled: !! ( body && body.querySelector( 'a[href], img, p, li' ) ),
+		};
+	} );
+	return {
+		toggles,
+		demo:   [ ...foot.querySelectorAll( '.wd-el-toggle a' ) ].filter( a => DEMO.test( a.textContent ) || ! a.getAttribute( 'href' ) || '#' === a.getAttribute( 'href' ).trim() ).map( a => '«' + a.textContent.trim().slice( 0, 24 ) + '» ' + a.getAttribute( 'href' ) ),
+		text:   DEMO.test( foot.textContent ),
+		legacy: foot.querySelectorAll( '[data-widget_type^="wd_extra_menu_list"]' ).length,
 	};
 }
 
@@ -244,6 +286,12 @@ async function probeContrast( mode ) {
 	};
 	console.log( 'START footer-gate ' + new Date().toISOString() );
 	try {
+		/* ۰) سمت سرور (P5-D617) — ستون نخست تهی: بی آن کشیده می‌شود و شیوه‌نامۀ el-toggle وودمارت می‌ماند؛ جهش بی after_render می‌افتد */
+		const K0 = keepCss( false ), K1 = keepCss( true );
+		ok( 1 === K0.css && ! K0.raw && ! K0.titles.includes( MENU_TITLES.fa[0] ) && K0.titles.includes( MENU_TITLES.fa[3] ),
+			`ستون نخست تهی (سرور): عنوان‌ها [${ K0.titles.join( '، ' ) }] بی «${ MENU_TITLES.fa[0] }»، شیوه‌نامۀ el-toggle ${ K0.css } (انتظار ۱)، شورت‌کد خام ${ K0.raw }` );
+		ok( 0 === K1.css, `جهش — بی بازگرداندن شیوه‌نامۀ ستون پنهان، شیوه‌نامه ${ K1.css } (انتظار ۰؛ پس آزمون بالا تمیز می‌دهد)` );
+
 		/* ۱) سرریز و شمار تبلیغ — ۰ تا ۴، سه زبان، ۳۹۰ و ۳۲۰ */
 		for ( let n = 0; n <= 4; n++ ) {
 			setDemo( n );
@@ -275,6 +323,35 @@ async function probeContrast( mode ) {
 			const wantDir = 'en' === lang ? 'ltr' : 'rtl';
 			ok( !! L.brand && ! L.brand.name && 1 === L.brand.p && /^tp-ft-brand__home \+ tp-ft-brand__text$/.test( L.brand.kids ) && L.brand.dir === wantDir && L.brand.logoStart && 'start' === L.brand.ta,
 				`جعبۀ برند · ${ lang } (P5-D616): ${ L.brand ? 'فرزندان «' + L.brand.kids + '»، بند ' + L.brand.p + '، نام زیر لوگو ' + L.brand.name + '، جهت ' + L.brand.dir + ' (انتظار ' + wantDir + ')، لوگو در لبۀ آغاز ' + L.brand.logoStart + '، text-align ' + L.brand.ta : 'دیده نشد' }` );
+			/* P5-D617 منوها — عنوان به زبان صفحه، همان پیوندهای سرور، ستون تهی نه، پیوند نمایشی نه، هر پیوند ۲۰۰ و هم‌زبان */
+			const M     = await page.evaluate( probeMenus );
+			const exp   = menuExpect( lang );
+			const T     = MENU_TITLES[ lang ];
+			const menus = M ? M.toggles.filter( t => t.menu ) : [];
+			const want  = MENU_COLS.filter( c => ( exp[ c ] || [] ).length );
+			const rows  = want.map( ( c, i ) => {
+				const t = menus[ i ] || { title: '', label: '', links: [] }, wt = T[ MENU_COLS.indexOf( c ) ];
+				return { c, ok: t.title === wt && t.label === wt && JSON.stringify( t.links.map( l => l.href ) ) === JSON.stringify( exp[ c ] ), got: t.title + ' (' + t.links.length + ')', wt, n: exp[ c ].length };
+			} );
+			ok( M && ! M.demo.length && ! M.text && 0 === M.legacy, `منو · ${ lang }: بی پیوند نمایشی (${ M ? M.demo.length : '—' }${ M && M.demo.length ? ' ← ' + M.demo.slice( 0, 4 ).join( ' | ' ) : '' })، بی متن شهرهای دمو ${ M ? ! M.text : '—' }، ویجت wd_extra_menu_list ${ M ? M.legacy : '—' }` );
+			ok( menus.length === want.length && rows.every( r => r.ok ),
+				`منو · ${ lang }: ستون‌ها [${ rows.map( r => r.wt + ' ' + r.n ).join( '، ' ) }] = صفحه [${ menus.map( t => t.title + ' ' + t.links.length ).join( '، ' ) }]` + ( rows.some( r => ! r.ok ) ? ' ← ناهمخوان ' + rows.filter( r => ! r.ok ).map( r => r.c + ': ' + r.got + ' ≠ ' + r.wt ).join( ' | ' ) : '' ) );
+			const others = M ? M.toggles.filter( t => ! t.menu ) : [];
+			ok( M && M.toggles.every( t => t.filled ) && others.every( t => t.title === T[2] ),
+				`منو · ${ lang }: هیچ toggle تهی (${ M ? M.toggles.filter( t => ! t.filled ).map( t => '«' + t.title + '»' ).join( ' ' ) || 'هیچ' : '—' })؛ toggle بی منو فقط جعبۀ برند «${ T[2] }» (${ others.map( t => '«' + t.title + '»' ).join( ' ' ) })` );
+			const script = 'en' === lang ? /^[\x20-\x7E]+$/ : /[؀-ۿ]/;
+			const links  = menus.flatMap( t => t.links.map( l => ( { ...l, col: t.title } ) ) );
+			const badL   = [];
+			for ( const l of links ) {
+				const u  = new URL( l.href );
+				const r  = await ctx.request.get( l.href, { maxRedirects: 0, timeout: 120000 * X } );
+				const pf = 'fa' === lang ? ! /^\/(en|ar)\//.test( u.pathname ) : u.pathname.startsWith( '/' + lang + '/' );
+				const tx = script.test( l.text ) && ! ( 'ar' === lang && /[پچژگکی]/.test( l.text ) );
+				if ( 200 !== r.status() || ! pf || ENV.host !== u.hostname || ! tx ) { badL.push( l.text + ' ' + u.pathname + ' ' + r.status() + ( pf ? '' : ' پیشوند' ) + ( tx ? '' : ' خط' ) ); }
+			}
+			ok( links.length > 0 && ! badL.length, `پیوند منو · ${ lang }: ${ links.length } پیوند، هر کدام ۲۰۰ بی تغییر مسیر، پیشوند ${ 'fa' === lang ? 'بی /en/ و /ar/' : '/' + lang + '/' }، برچسب به خط زبان` + ( badL.length ? ' ← ' + badL.join( ' | ' ) : '' ) );
+			console.log( '     پیوندهای نهایی ' + lang + ': ' + menus.map( t => t.title + ' ← ' + t.links.map( l => l.text + ' ' + new URL( l.href ).pathname ).join( '، ' ) ).join( ' ‖ ' ) );
+
 			const P     = await page.evaluate( probeIcons );
 			const icons = P.icons;
 			const badI  = icons.filter( x => ! x.ok );

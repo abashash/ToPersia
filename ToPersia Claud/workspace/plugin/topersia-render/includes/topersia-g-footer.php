@@ -2,8 +2,9 @@
 /**
  * پاورقی المنتوری (قالب #6128) — چهار شورت‌کد به جای ویجت‌های ایستا.  دستۀ 53 بند ۱۷
  *
- * [tp_footer_ads] · [tp_footer_brand] · [tp_footer_partners] · [tp_footer_social]
- * بقیۀ ساختار المنتور (ستون‌ها، منوها، کپی‌رایت) دست نمی‌خورد؛ این پرونده فقط محتوای این چهار جا را می‌سازد.
+ * [tp_footer_ads] · [tp_footer_brand] · [tp_footer_partners] · [tp_footer_social] · [tp_footer_menu col=…] (53-ت · P5-D617)
+ * بقیۀ ساختار المنتور (ستون‌ها، toggleها، کپی‌رایت) دست نمی‌خورد؛ این پرونده فقط محتوای این جاها را می‌سازد و عنوان toggleهای
+ * شناخته‌شده را به زبان صفحه ترجمه می‌کند (topersia_g_ft_toggle_titles).
  *
  * داده: option `topersia_footer_blocks` (بی autoload) — جدا از `topersia_footer_credits` پروندۀ legal (P5-D528).
  *   ads[4]{img,url,alt,on} · brand{logo,text_fa,text_en,text_ar} · partners[6]{img,name,url,alt,dark}
@@ -373,11 +374,244 @@ if ( ! function_exists( 'topersia_g_sc_footer_social' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_ft_toggle_titles' ) ) {
+	/**
+	 * عنوان ستون‌های پاورقی (P5-D617) — متن فارسی ذخیره‌شده در ویجت wd_toggle قالب #6128 ← عنوان به زبان صفحه.
+	 * قالب ترجمۀ WPML ندارد؛ پس عنوان در داده فارسی می‌ماند و این‌جا از کاتالوگ ترجمه می‌شود (صافی render_content پایین).
+	 * «توپرشیا» نام برند به زبان صفحه است (topersia_g_brand — P5-D518)، هم برای ستون منو و هم جعبۀ برند.
+	 *
+	 * @return array متن فارسی داده ← عنوان نمایشی
+	 */
+	function topersia_g_ft_toggle_titles() {
+		return array(
+			'مقصدها'      => __( 'مقصدها', 'topersia' ),
+			'راهنمای سفر' => __( 'راهنمای سفر', 'topersia' ),
+			'توپرشیا'     => function_exists( 'topersia_g_brand' ) ? topersia_g_brand() : 'ToPersia',
+			'حقوقی'       => __( 'حقوقی', 'topersia' ),
+		);
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_menu_cols' ) ) {
+	/**
+	 * چهار منوی پاورقی (P5-D617) به جای پیوندهای نمایشی پوسته — کلید ستون ← [ عنوان ، [ [ برچسب ، نوع منبع ، مقدار ] … ] ].
+	 *   type   هاب آرشیو نوع (get_post_type_archive_link، به زبان جاری از WPML)
+	 *   group  هاب گروهی (topersia_g_hub_group_url — /attractions/)
+	 *   page   صفحۀ ثابت با نامک لاتین (topersia_g_legal_page — ترجمۀ منتشرشدۀ زبان جاری)
+	 * پیوندی که مقصدش به زبان جاری نیست یا محتوای منتشرشده ندارد نوشته نمی‌شود (topersia_g_ft_menu_url)؛ «حق نشر» تا صفحه‌اش ساخته نشده پنهان است.
+	 *
+	 * @return array
+	 */
+	function topersia_g_ft_menu_cols() {
+		$t = topersia_g_ft_toggle_titles();
+		return array(
+			'dest'  => array( $t['مقصدها'], array(
+				array( __( 'استان‌ها', 'topersia' ), 'type', 'tp_province' ),
+				array( __( 'شهرها', 'topersia' ), 'type', 'tp_city' ),
+				array( __( 'روستاها', 'topersia' ), 'type', 'tp_village' ),
+				array( __( 'جزیره‌ها', 'topersia' ), 'type', 'tp_island' ),
+				array( __( 'جاذبه‌ها', 'topersia' ), 'group', 'attractions' ),
+			) ),
+			'guide' => array( $t['راهنمای سفر'], array(
+				array( __( 'روادید', 'topersia' ), 'type', 'tp_visa' ),
+				array( __( 'سلامت و ایمنی', 'topersia' ), 'type', 'tp_health_safety' ),
+				array( __( 'حمل‌ونقل', 'topersia' ), 'type', 'tp_transport' ),
+				array( __( 'ارز و پرداخت', 'topersia' ), 'type', 'tp_currency' ),
+				array( __( 'آداب سفر', 'topersia' ), 'type', 'tp_travel_etiquette' ),
+			) ),
+			'about' => array( $t['توپرشیا'], array(
+				array( __( 'درباره ما', 'topersia' ), 'page', 'about' ),
+				array( __( 'تماس با ما', 'topersia' ), 'page', 'contact' ),
+				array( __( 'اخبار', 'topersia' ), 'type', 'tpc_news' ),
+				array( __( 'مقالات', 'topersia' ), 'type', 'tpc_article' ),
+			) ),
+			'legal' => array( $t['حقوقی'], array(
+				array( __( 'قوانین و مقررات', 'topersia' ), 'page', 'terms' ),
+				array( __( 'حریم خصوصی', 'topersia' ), 'page', 'privacy-policy' ),
+				array( __( 'حق نشر', 'topersia' ), 'page', 'copyright' ),
+			) ),
+		);
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_menu_url' ) ) {
+	/**
+	 * نشانی یک پیوند منو به زبان جاری، یا تهی. هاب فقط وقتی نوشته می‌شود که دست‌کم یک پست منتشرشدۀ همین زبان دارد
+	 * (topersia_g_home_real — نمونۀ نمایشی فقط در پیش‌نمایش)؛ صفحه فقط وقتی ترجمۀ منتشرشدۀ همین زبان دارد.
+	 */
+	function topersia_g_ft_menu_url( $kind, $key ) {
+		if ( 'page' === $kind ) {
+			$id = function_exists( 'topersia_g_legal_page' ) ? topersia_g_legal_page( $key ) : 0;
+			return $id ? (string) get_permalink( $id ) : '';
+		}
+		$types = array();
+		$url   = '';
+		if ( 'type' === $kind && post_type_exists( $key ) ) {
+			$types = array( $key );
+			$url   = (string) get_post_type_archive_link( $key );
+		} elseif ( 'group' === $kind && function_exists( 'topersia_g_hub_groups' ) ) {
+			$all   = topersia_g_hub_groups();
+			$types = isset( $all[ $key ] ) ? array_values( array_filter( (array) $all[ $key ]['types'], 'post_type_exists' ) ) : array();
+			$url   = $types ? (string) topersia_g_hub_group_url( $key ) : '';
+		}
+		if ( '' === $url || ! $types || ! function_exists( 'topersia_g_home_real' ) || ! topersia_g_home_real( $types, 5 ) ) {
+			return '';
+		}
+		return $url;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_sc_footer_menu' ) ) {
+	/** [tp_footer_menu col="dest|guide|about|legal"] — یک منوی پاورقی؛ بی پیوند زنده ← هیچ خروجی (P5-D617). */
+	function topersia_g_sc_footer_menu( $atts = array() ) {
+
+		$atts = shortcode_atts( array( 'col' => '' ), (array) $atts, 'tp_footer_menu' );
+		$cols = topersia_g_ft_menu_cols();
+		$key  = sanitize_key( (string) $atts['col'] );
+
+		if ( ! isset( $cols[ $key ] ) ) {
+			return '';
+		}
+
+		$items = '';
+		foreach ( $cols[ $key ][1] as $it ) {
+			$url = topersia_g_ft_menu_url( $it[1], $it[2] );
+			if ( '' !== $url ) {
+				$items .= '<li class="tp-ft-menu__item"><a class="tp-ft-menu__a" href="' . esc_url( $url ) . '">' . esc_html( $it[0] ) . '</a></li>';
+			}
+		}
+
+		if ( '' === $items ) {
+			return '';
+		}
+
+		return '<nav class="tp-ft tp-ft-menu" aria-label="' . esc_attr( $cols[ $key ][0] ) . '"><ul class="tp-ft-menu__list" role="list">' . $items . '</ul></nav>';
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_toggle_title_html' ) ) {
+	/**
+	 * عنوان ویجت wd_toggle به زبان صفحه (P5-D617) — فقط متن درون نخستین div عنوان (.wd-el-toggle-title) عوض می‌شود و فقط
+	 * وقتی متن ذخیره‌شده یکی از کلیدهای topersia_g_ft_toggle_titles است؛ بقیۀ toggleها دست‌نخورده.
+	 */
+	function topersia_g_ft_toggle_title_html( $html, $raw ) {
+		$map = topersia_g_ft_toggle_titles();
+		$raw = trim( (string) $raw );
+		if ( ! isset( $map[ $raw ] ) || $map[ $raw ] === $raw ) {
+			return $html;
+		}
+		$out = preg_replace_callback(
+			'#(<div[^>]*\bclass="[^"]*\bwd-el-toggle-title\b[^"]*"[^>]*>)\s*' . preg_quote( $raw, '#' ) . '\s*(</div>)#u',
+			function ( $m ) use ( $map, $raw ) {
+				return $m[1] . esc_html( $map[ $raw ] ) . $m[2];
+			},
+			(string) $html,
+			1
+		);
+		return null === $out ? $html : $out;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_toggle_menu_col' ) ) {
+	/**
+	 * کلید ستون منوی درون یک toggle (P5-D617) — نخستین [tp_footer_menu col="…"] در فرزندان دادۀ خام، یا تهی.
+	 *
+	 * @param array $raw دادۀ خام المنتور (get_raw_data)
+	 */
+	function topersia_g_ft_toggle_menu_col( array $raw ) {
+		foreach ( (array) ( $raw['elements'] ?? array() ) as $child ) {
+			if ( ! is_array( $child ) ) {
+				continue;
+			}
+			$sc = (string) ( $child['settings']['shortcode'] ?? '' );
+			if ( 'shortcode' === ( $child['widgetType'] ?? '' ) && preg_match( '#\[tp_footer_menu\s+col=["\']?([a-z]+)#', $sc, $m ) ) {
+				return $m[1];
+			}
+			$deep = topersia_g_ft_toggle_menu_col( $child );
+			if ( '' !== $deep ) {
+				return $deep;
+			}
+		}
+		return '';
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_hidden_toggle' ) ) {
+	/**
+	 * فهرست toggleهای منوی تهیِ همین درخواست (P5-D617) — render_content نشان می‌گذارد، should_render پنهان می‌کند؛
+	 * چون صافی should_render متن ویجت را نمی‌بیند و قاب elementor-widget-container خروجی تهی را تهی نمی‌گذارد.
+	 * مقدار = برچسب‌های <link rel="stylesheet"> همان خروجی: وودمارت شیوه‌نامۀ el-toggle را فقط درون نخستین toggle
+	 * می‌نویسد؛ اگر همان پنهان شود، after_render همین برچسب‌ها را به جای ویجت می‌گذارد تا بقیۀ ستون‌ها بی‌شیوه نمانند.
+	 *
+	 * @param string      $id    شناسۀ ویجت
+	 * @param string|null $links null = فقط پرسش؛ رشته = نشان‌گذاری
+	 * @return string|null null یعنی پنهان نیست
+	 */
+	function topersia_g_ft_hidden_toggle( $id, $links = null ) {
+		static $hidden = array();
+		if ( null !== $links ) {
+			$hidden[ (string) $id ] = (string) $links;
+		}
+		return $hidden[ (string) $id ] ?? null;
+	}
+}
+
 if ( function_exists( 'add_shortcode' ) ) {
 	add_shortcode( 'tp_footer_ads', 'topersia_g_sc_footer_ads' );
 	add_shortcode( 'tp_footer_brand', 'topersia_g_sc_footer_brand' );
 	add_shortcode( 'tp_footer_partners', 'topersia_g_sc_footer_partners' );
 	add_shortcode( 'tp_footer_social', 'topersia_g_sc_footer_social' );
+	add_shortcode( 'tp_footer_menu', 'topersia_g_sc_footer_menu' );
+}
+
+if ( function_exists( 'add_filter' ) ) {
+
+	/*
+	 * کش عنصر المنتور (P5-D617): ویجت ناپویا یک بار برای هر پست ساخته و ذخیره می‌شود، نه برای هر زبان — پس عنوان
+	 * و پنهان‌شدن ستون باید هر بار زنده ساخته شوند. toggleی که عنوانش یکی از کلیدهای topersia_g_ft_toggle_titles است
+	 * پویا شمرده می‌شود؛ المنتور به جایش [elementor-element] می‌نشاند و در هر درخواست از نو می‌کشد.
+	 */
+	add_filter( 'elementor/element/is_dynamic_content', function ( $is, $raw = array() ) {
+		if ( $is || ! is_array( $raw ) || 'wd_toggle' !== ( $raw['widgetType'] ?? '' ) ) {
+			return $is;
+		}
+		return isset( topersia_g_ft_toggle_titles()[ trim( (string) ( $raw['settings']['element_title'] ?? '' ) ) ] ) ? true : $is;
+	}, 10, 2 );
+
+	add_filter( 'elementor/widget/render_content', function ( $html, $widget ) {
+		if ( ! is_object( $widget ) || ! method_exists( $widget, 'get_name' ) || 'wd_toggle' !== $widget->get_name() ) {
+			return $html;
+		}
+		/* ستون منویی که در زبان جاری هیچ پیوند زنده‌ای ندارد کلاً نمی‌آید — نه عنوانِ تنها (P5-D617). */
+		$col = method_exists( $widget, 'get_raw_data' ) ? topersia_g_ft_toggle_menu_col( (array) $widget->get_raw_data() ) : '';
+		if ( '' !== $col && false === strpos( (string) $html, 'tp-ft-menu__a' ) ) {
+			preg_match_all( '#<link\b[^>]*\brel=["\']stylesheet["\'][^>]*>#i', (string) $html, $lk );
+			topersia_g_ft_hidden_toggle( $widget->get_id(), implode( '', $lk[0] ) );
+			return '';
+		}
+		return topersia_g_ft_toggle_title_html( $html, $widget->get_settings( 'element_title' ) );
+	}, 10, 2 );
+
+	add_filter( 'elementor/frontend/widget/should_render', function ( $should, $widget ) {
+		if ( $should && is_object( $widget ) && method_exists( $widget, 'get_id' ) && null !== topersia_g_ft_hidden_toggle( $widget->get_id() ) ) {
+			return false;
+		}
+		return $should;
+	}, 10, 2 );
+}
+
+if ( function_exists( 'add_action' ) ) {
+	/* شیوه‌نامه‌ای که وودمارت درون toggle پنهان‌شده نوشته بود به جای همان ویجت (P5-D617) — برچسب‌ها خروجی خود وودمارت‌اند. */
+	add_action( 'elementor/frontend/widget/after_render', function ( $widget ) {
+		if ( ! is_object( $widget ) || ! method_exists( $widget, 'get_id' ) ) {
+			return;
+		}
+		$links = topersia_g_ft_hidden_toggle( $widget->get_id() );
+		if ( $links ) {
+			echo $links; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- برچسب link ساختۀ وودمارت (Parts_Css_Files)، نه ورودی کاربر.
+			topersia_g_ft_hidden_toggle( $widget->get_id(), '' );
+		}
+	} );
 }
 
 if ( function_exists( 'add_action' ) ) {

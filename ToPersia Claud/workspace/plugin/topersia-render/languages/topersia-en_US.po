@@ -1095,6 +1095,10 @@ msgstr "Related official calendars"
 msgid "تلگرام"
 msgstr "Telegram"
 
+#: includes/topersia-g-footer.php
+msgid "تماس با ما"
+msgstr "Contact us"
+
 #: includes/topersia-g-map.php
 msgid "تمام سال"
 msgstr "All year"
@@ -1134,6 +1138,10 @@ msgstr "Stop motion and autoplay"
 #: includes/topersia-g-map.php
 msgid "تولیدشده با API"
 msgstr "Generated via API"
+
+#: includes/topersia-g-footer.php
+msgid "توپرشیا"
+msgstr "ToPersia"
 
 #: includes/topersia-g-footer.php
 msgid "توپرشیا راهنمای جامع ایران است؛ از استان‌ها و شهرهای بزرگ تا روستاها و جزیره‌های کمتر دیده‌شده. جاذبه‌ها، رویدادها و اطلاعات کاربردی سفر را یک‌جا پیدا کنید و مسیرتان را با خیال راحت بچینید."
@@ -1248,6 +1256,10 @@ msgstr "Tides"
 #: includes/topersia-g-zones.php
 msgid "جزیره"
 msgstr "Island"
+
+#: includes/topersia-g-footer.php
+msgid "جزیره‌ها"
+msgstr "Islands"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -1427,9 +1439,21 @@ msgstr "Remove filter: %s"
 msgid "حرا (مانگرو)"
 msgstr "Mangrove"
 
+#: includes/topersia-g-footer.php
+msgid "حریم خصوصی"
+msgstr "Privacy"
+
 #: includes/topersia-g-map.php
 msgid "حضور بازدیدکننده"
 msgstr "Visitors"
+
+#: includes/topersia-g-footer.php
+msgid "حق نشر"
+msgstr "Copyright"
+
+#: includes/topersia-g-footer.php
+msgid "حقوقی"
+msgstr "Legal"
 
 #: includes/topersia-g-map.php
 msgid "حلال"
@@ -1642,6 +1666,10 @@ msgstr "In circulation"
 #: includes/topersia-g-zones.php
 msgid "درباره"
 msgstr "About"
+
+#: includes/topersia-g-footer.php
+msgid "درباره ما"
+msgstr "About us"
 
 #: includes/topersia-g-zones.php
 #, php-format
@@ -2836,6 +2864,10 @@ msgstr "Podcast episode"
 msgid "قله"
 msgstr "Peak"
 
+#: includes/topersia-g-footer.php
+msgid "قوانین و مقررات"
+msgstr "Terms of use"
+
 #: includes/topersia-g-zones.php
 msgid "قوم / فرهنگ"
 msgstr "Ethnic group / culture"
@@ -3368,6 +3400,10 @@ msgstr "%s travel articles"
 #: includes/topersia-g-article.php
 msgid "مقاله‌های مرتبط"
 msgstr "Related articles"
+
+#: includes/topersia-g-footer.php
+msgid "مقصدها"
+msgstr "Destinations"
 
 #: includes/topersia-g-zones.php
 msgid "ملزم به تور هدایت‌شده"
