@@ -108,6 +108,10 @@
 
 **عکس نمایه:** اگر بگذارید، فایل روی همین سایت ذخیره می‌شود، نه در Gravatar یا سرویس دیگر. فقط JPG، PNG یا WebP تا ۲ مگابایت پذیرفته می‌شود و به یک تصویر مربع کوچک WebP تبدیل می‌شود؛ اطلاعات پنهان عکس (مثل موقعیت جغرافیایی و مشخصات دوربین) در این تبدیل پاک می‌شود. اگر عکس نگذارید، یک شمایل ساده با رنگی که از شناسهٔ حساب مشتق می‌شود نشان داده می‌شود.
 
+> بند تبلیغات — دستهٔ ۵۴ (P5-D622): برای بازبینی مشاور حقوقی (پرسش Q15).
+
+**تبلیغات اختصاصی؛ آمار بی‌نام:** تبلیغ‌های این سایت را خودمان مستقیم می‌فروشیم و نشان می‌دهیم؛ هیچ شبکهٔ تبلیغاتی، اسکریپت تبلیغ بیرونی یا کوکی تبلیغاتی در کار نیست و تبلیغ بر اساس شما هدف‌گیری نمی‌شود (فقط بر اساس صفحه، زبان و نوع دستگاه). هر تبلیغ برچسب «تبلیغ» دارد. برای گزارش به تبلیغ‌دهنده فقط جمع روزانهٔ نمایش و کلیک هر تبلیغ به‌ازای جایگاه و زبان شمرده می‌شود — بی نشانی IP، بی کوکی و بی شناسهٔ کاربر — و این جمع‌ها ۱۳ ماه می‌مانند و پس از آن فقط جمع ماهانه. برای اینکه یک کلیک دو بار شمرده نشود، از نشانی IP و مرورگر شما یک هش (نشانهٔ غیرقابل‌برگشت) که هر روز عوض می‌شود حداکثر ۳۰ دقیقه در حافظهٔ موقت می‌ماند. با کلیک روی تبلیغ از راه نشانی `/ad-go/` همین سایت به سایت تبلیغ‌دهنده می‌روید و از آنجا قواعد همان سایت اعمال می‌شود.
+
 ## چرا جمع می‌کنیم
 برای ورود امن با کد یک‌بارمصرف، جلوگیری از سوءاستفاده و ارسال انبوه پیامک، نمایش نمایه و فهرست‌های شخصی، انتشار نظرها پس از تأیید مدیر، حفظ ترجیح‌های نمایش شما بین دستگاه‌ها، و فهمیدن اینکه کدام صفحه‌ها خوانده می‌شوند.
 
@@ -177,6 +181,10 @@ This page explains what information ToPersia collects, why, how long it is kept 
 **Emails we send:** only emails your account needs — the login code, and a security notice when the account's email or mobile number changes. No marketing email. Our emails contain no tracking pixel, no tracked link and no remote image.
 
 **Profile photo:** if you add one, the file is stored on this site, not on Gravatar or any other service. Only JPG, PNG or WebP up to 2 MB is accepted and it is converted into a small square WebP image; hidden photo data (such as location and camera details) is removed in the conversion. If you add no photo, a plain icon whose colour is derived from your account ID is shown.
+
+> Ads clause — batch 54 (P5-D622): for review by legal counsel (question Q15).
+
+**Our own ads; anonymous statistics:** we sell and show the ads on this site ourselves; there is no ad network, no external ad script and no advertising cookie, and ads are not targeted at you (only by page, language and device type). Every ad carries an “Ad” label. For advertiser reports we count only daily totals of impressions and clicks per ad, placement and language — no IP address, no cookie and no user ID — and keep these totals for 13 months, after which only monthly totals remain. To avoid counting one click twice, a hash (an irreversible token) of your IP address and browser, which changes every day, is kept in temporary storage for at most 30 minutes. When you click an ad you pass through this site’s `/ad-go/` address to the advertiser’s site, whose own rules then apply.
 
 ## Why we collect it
 To sign you in securely with a one-time code, to prevent abuse and mass SMS sending, to show your profile and personal lists, to publish reviews after moderation, to keep your display preferences across devices, and to understand which pages are read.
@@ -248,6 +256,10 @@ privacy@topersia.com
 
 **صورة الملف:** إن أضفتها تُحفَظ على هذا الموقع، لا على Gravatar ولا أي خدمة أخرى. تُقبل فقط صيغ JPG وPNG وWebP حتى 2 ميغابايت، وتُحوَّل إلى صورة WebP مربعة صغيرة، وتُزال في هذا التحويل البيانات الخفية للصورة (كالموقع الجغرافي ومواصفات الكاميرا). وإن لم تضف صورة تظهر أيقونة بسيطة يُشتق لونها من معرّف حسابك.
 
+> بند الإعلانات — الدفعة 54 (P5-D622): للمراجعة من المستشار القانوني (السؤال Q15).
+
+**إعلاناتنا الخاصة؛ إحصاءات مجهولة الهوية:** نبيع الإعلانات في هذا الموقع ونعرضها بأنفسنا مباشرة؛ لا توجد شبكة إعلانية ولا نص برمجي إعلاني خارجي ولا ملفات تعريف ارتباط إعلانية، ولا تُوجَّه الإعلانات إليك شخصيًا (بل حسب الصفحة واللغة ونوع الجهاز فقط). يحمل كل إعلان وسم «إعلان». ولتقارير المعلنين نُحصي فقط المجاميع اليومية للظهور والنقر لكل إعلان وموضع ولغة — دون عنوان IP ودون ملفات تعريف ارتباط ودون معرّف مستخدم — ونحتفظ بهذه المجاميع 13 شهرًا، ثم تبقى المجاميع الشهرية فقط. ولتجنّب احتساب النقرة الواحدة مرتين نحتفظ في ذاكرة مؤقتة، لمدة أقصاها 30 دقيقة، ببصمة مُجزّأة (hash) غير قابلة للعكس من عنوان IP ومتصفحك تتغير كل يوم. وعند النقر على إعلان تنتقل عبر العنوان `/ad-go/` في هذا الموقع إلى موقع المعلِن، وتسري عندها سياساته.
+
 ## لماذا نجمعه
 لتسجيل دخولك بأمان برمز لمرة واحدة، ومنع إساءة الاستخدام والإرسال الجماعي للرسائل النصية، وعرض ملفك وقوائمك الشخصية، ونشر التقييمات بعد موافقة المشرف، والحفاظ على تفضيلات العرض بين أجهزتك، ومعرفة الصفحات التي تُقرأ.
 
@@ -318,6 +330,7 @@ privacy@topersia.com
 | Q11 | ورود فقط با شمارهٔ ایران | ~~بسته~~ — در متن صریح نوشته شد؛ از ورود ایمیلی چیزی نیامده تا ساخته شود |
 | Q12 | چارچوب قانونی روی مخاطبان (ایران، اتحادیهٔ اروپا، ...) و رضایت/اعلان کوکی | **باز** — مشاور حقوقی. متن فقط به GDPR مادهٔ ۱۲(۳) اشاره دارد (بنا به خواست کاربر) |
 | Q13 | **تازه:** نوار کوکی وودمارت فقط «پذیرفتن» دارد (دکمهٔ رد ندارد)، و Site Kit کوکی‌های GA را پیش از پذیرش می‌گذارد | **باز** — مشاور حقوقی باید بگوید آیا برای مخاطبان هدف باید GA تا پذیرش بسته بماند |
+| Q15 | **تازه (دستهٔ ۵۴، P5-D622):** بند «تبلیغات اختصاصی؛ آمار بی‌نام» در هر سه زبان — آمار تجمیعی روزانه بی IP/کوکی/شناسه، ۱۳ ماه؛ هش روزانهٔ IP و مرورگر حداکثر ۳۰ دقیقه برای تکراری‌نشدن کلیک؛ گذر از `/ad-go/` | **باز** — مشاور حقوقی: آیا این هش اعلان یا رضایت جدا می‌خواهد؟ تا ممیزی، افزونه فقط محلی است |
 | Q14 | **تازه:** بند «بی‌فعالیت ۲۴ ماه» به‌جز پنهان‌شدن در جای عمومی هیچ اعلان یا پیامکی ندارد (در کد نیست) | آگاهی: اگر روزی اعلان ساخته شود باید از `ToPersia_Inactivity::can_notify()` بگذرد |
 
 ---
