@@ -16,7 +16,7 @@
  * دستۀ 53-ت (P5-D612 تا P5-D616)، سه زبان × سه حالت:
  *   ▸ بی رنگ‌مایۀ سبز: هیچ زمینه‌ای در پاورقی ۷۵ تا ۱۷۰ درجه نیست (تصویر و آیکون برند معاف)
  *   ▸ کاشی شبکه‌ها و کاشی همکاران هر کدام یک رنگ در هر حالت؛ رنگ هر برند ≥ ۳:۱ روی کاشی همان حالت
- *   ▸ شبکه‌ها [7,7] و همکاران [3,2] در ۳۲۰ · ۳۹۰ · ۷۶۸ · ۱۴۴۰، وسط‌چین؛ بلندی ردیف همکاران = بلندی ردیف شبکه‌ها
+ *   ▸ شبکه‌ها [7,7] و همکاران ردیف‌های سه‌تایی از شمار لوگوهای option (۵ ← [3,2]، ۶ ← [3,3]) در ۳۲۰ · ۳۹۰ · ۷۶۸ · ۱۴۴۰، وسط‌چین؛ بلندی ردیف همکاران = بلندی ردیف شبکه‌ها
  *   ▸ عنوان‌ها text-align:start و نویسه‌ها از لبۀ آغاز (fa و ar راست، en چپ)
  *   ▸ جعبۀ برند فقط لوگو + یک بند متن، لوگو در لبۀ آغاز به جهت زبان؛ سرریز افقی در ۳۲۰ · ۳۹۰ · ۷۶۸
  * منوهای پاورقی (P5-D617)، سه زبان در ۱۴۴۰:
@@ -51,12 +51,16 @@ const wp  = code => php( [ ENV.wpCli, '--path=' + ENV.wp, '--url=' + ENV.base, '
 let fails = 0, passes = 0;
 const ok  = ( cond, msg ) => { if ( cond ) { passes++; console.log( '  ✅ ' + msg ); } else { fails++; console.log( '  ❌ ' + msg ); } };
 
-/* P5-D615: شبکه‌ها دو ردیف ۷تایی در هر پهنا، همکاران ۳+۲، هر دو وسط؛ بلندی هر ردیف همکاران = بلندی هر ردیف شبکه‌ها */
+/* P5-D615: شبکه‌ها دو ردیف ۷تایی در هر پهنا، همکاران ردیف‌های سه‌تایی (P5-D609)، هر دو وسط؛ بلندی هر ردیف همکاران = بلندی هر ردیف شبکه‌ها.
+   شمار همکاران از option (لوگوی دارای تصویر)، نه عدد ثابت: ۵ لوگو ← [3,2]، ۶ ← [3,3]؛ لوگوی گم‌شده در خروجی هم می‌افتد */
+let PARTNERS = -1;
+const partnerRows = n => Array.from( { length: Math.ceil( n / 3 ) }, ( _, i ) => Math.min( 3, n - 3 * i ) ).join();
 const layoutOk = ( L, lang, w ) => {
 	const ph = L.partners.heights, sh = L.social.heights;
 	const same = 1 === ph.length && 1 === sh.length && Math.abs( ph[0] - sh[0] ) <= 1;
-	ok( '7,7' === L.social.rows.join() && L.social.centred && '3,2' === L.partners.rows.join() && L.partners.centred && 1 === L.partners.sizes.length && same,
-		`چیدمان · ${ lang } · ${ w }: شبکه‌ها [${ L.social.rows }] (انتظار [7,7]) وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }؛ بلندی ردیف همکاران ${ ph.join( '/' ) } = شبکه‌ها ${ sh.join( '/' ) }` );
+	const want = partnerRows( PARTNERS );
+	ok( '7,7' === L.social.rows.join() && L.social.centred && PARTNERS > 0 && want === L.partners.rows.join() && L.partners.centred && 1 === L.partners.sizes.length && same,
+		`چیدمان · ${ lang } · ${ w }: شبکه‌ها [${ L.social.rows }] (انتظار [7,7]) وسط ${ L.social.centred }؛ همکاران [${ L.partners.rows }] (انتظار [${ want }] از ${ PARTNERS } لوگو) وسط ${ L.partners.centred } کاشی ${ L.partners.sizes.join( '/' ) }؛ بلندی ردیف همکاران ${ ph.join( '/' ) } = شبکه‌ها ${ sh.join( '/' ) }` );
 };
 /* P5-D614: عنوان‌ها از لبۀ آغاز به جهت زبان (fa و ar راست، en چپ) */
 const headsOk = ( L, lang, w ) => {
@@ -258,6 +262,7 @@ async function probeContrast( mode ) {
 	try {
 		login = JSON.parse( php( [ 'tests/local-login.php' ] ) );
 		prev  = wp( '$o = get_option( "topersia_footer_blocks", array() ); echo isset( $o["demo_ads"] ) ? (int) $o["demo_ads"] : 2;' ).trim();
+		PARTNERS = Number( wp( 'echo count( array_filter( topersia_g_ft_opts()["partners"], function ( $p ) { return $p["img"] > 0; } ) );' ).trim() );
 	} catch ( e ) {
 		console.error( 'محیط ناقص: ' + e.message );
 		process.exit( 2 );
@@ -357,7 +362,7 @@ async function probeContrast( mode ) {
 			const badI  = icons.filter( x => ! x.ok );
 			ok( icons.length >= 14 && ! badI.length, `آیکون شبکه‌ها · ${ lang }: ${ icons.length } پیوند، ${ icons.filter( x => x.brand ).length } لوگوی SVG رنگی، نمایش‌نیافته ${ badI.length }` + ( badI.length ? ' ← ' + badI.map( x => x.name + ' (' + x.why + ')' ).join( ' | ' ) : '' ) );
 			ok( P.fill === P.total && 2 === P.rows.length && Math.abs( P.rows[0] - P.rows[1] ) <= 1, `شبکه‌ها · ${ lang }: رنگ برند ${ P.fill }/${ P.total }، ردیف‌ها [${ P.rows.join( '، ' ) }]` );
-			ok( P.logoH.length >= 5 && P.logoH.every( h => h <= 48 ) && 1 === new Set( P.logoH ).size, `همکاران · ${ lang } · ۱۴۴۰: بلندی کاشی‌ها [${ P.logoH.join( '، ' ) }] یکسان و ≤ ۴۸ (کوچک‌تر از ۱۰۴ پیشین — P5-D615)` );
+			ok( PARTNERS === P.logoH.length && P.logoH.every( h => h <= 48 ) && 1 === new Set( P.logoH ).size, `همکاران · ${ lang } · ۱۴۴۰: بلندی کاشی‌ها [${ P.logoH.join( '، ' ) }] یکسان و ≤ ۴۸ (کوچک‌تر از ۱۰۴ پیشین — P5-D615)` );
 			for ( const mode of MODES ) {
 				const rows = await page.evaluate( probeContrast, mode );
 				table[ lang + ' · ' + mode ] = rows;
