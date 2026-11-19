@@ -135,6 +135,143 @@ function tpb_secret_file( $name ) {
 	return (bool) preg_match( '/^(wp-config.*|\.env.*|.*\.(pem|key|p12|pfx|ppk)|id_(rsa|dsa|ecdsa|ed25519).*|\.htpasswd|\.git.*)$/i', $name );
 }
 
+/* ── دستهٔ 55 بند ۱ — پرونده‌های اجرای سایت (site.zip) و فهرست محتویات با sha256 هر پرونده ── */
+
+/** در ریشهٔ public_html فقط این‌ها پروندهٔ اجرای سایت‌اند؛ بقیه مخزن git (workspace · .git · .claude)، یادداشت یا لاگ. */
+const TPB_SITE_TOP = array( '.htaccess', 'index.php', 'robots.txt', '.well-known', 'geo' );
+
+/** پرونده‌ای از site.zip بیرون می‌ماند (جز رازها، که tpb_site_secret می‌سنجد): uploads (آرشیو جدا)، کش، صف، پشتیبان‌های دیگر، لاگ و دامپ. */
+function tpb_site_skip( $rel ) {
+	$base = basename( $rel );
+	return (bool) preg_match( '#^geo/wp-content/(uploads|cache|upgrade|upgrade-temp-backup|backups-dup-pro|backups-dup-lite|duplicator-backups|abzarwp-backups|languages/wpml/queue)(/|$)#i', $rel )
+		|| (bool) preg_match( '#(\.log|\.sql|\.sql\.gz|\.sql\.zip|\.daf|_archive\.zip)$#i', $base );
+}
+
+/**
+ * رازِ پرونده‌های سایت با نام **و** محتوا (اجرای نخست دستهٔ 55: صافی فقط‌نام دو بستهٔ گواهی عمومی cacert.pem و قالب
+ * wp-config-check.php دوپلیکیتور را هم انداخت — بی آن‌ها افزونه پس از بازگردانی ناقص است).
+ *   wp-config.php هر جا ← همیشه راز · .env* و id_* و .htpasswd و .key/.p12/.pfx/.ppk ← همیشه راز ·
+ *   .pem ← فقط اگر بلوک PRIVATE KEY دارد · wp-config-*.php دیگر ← فقط اگر DB_PASSWORD یا کلیدهای احراز با مقدارِ غیرِ نمونه دارد ·
+ *   .gitignore/.gitattributes/.gitkeep ← راز نیست.
+ */
+function tpb_site_secret( $rel, $abs ) {
+	$base = basename( $rel );
+	if ( ! tpb_secret_file( $base ) ) { return false; }
+	if ( preg_match( '/^\.git(ignore|attributes|keep)$/i', $base ) ) { return false; }
+	if ( 0 === strcasecmp( $base, 'wp-config.php' ) ) { return true; }
+	$src = is_file( $abs ) && filesize( $abs ) <= ( 4 << 20 ) ? (string) file_get_contents( $abs ) : '';
+	if ( preg_match( '/\.pem$/i', $base ) ) { return '' === $src || false !== stripos( $src, 'PRIVATE KEY' ); }
+	if ( preg_match( '/^wp-config.*\.php$/i', $base ) ) {
+		return '' === $src || (bool) preg_match( "/define\(\s*['\"](?:DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT)['\"]\s*,\s*['\"](?!password_here['\"]|put your unique phrase here['\"])[^'\"]+['\"]/i", $src );
+	}
+	return true;
+}
+
+/**
+ * پویش کلید روی پرونده‌های متنی سایت. الگوها همان چهار الگوی git-guard‌اند با دو سخت‌گیری که مقدارِ واقعی را از
+ * متنِ کدِ شخص ثالث جدا می‌کند (پیش‌پویش ۱۸ نوامبر): کلید OpenAI حروف بزرگ و کوچک و رقم با هم دارد (نام تصویرِ
+ * «c-sk-…-600x686» در دادهٔ نمونهٔ پوسته ندارد) و کلید خصوصی پس از سرآیند بدنهٔ base64 دارد (رشتهٔ سرآیند در phpseclib ندارد).
+ */
+function tpb_site_key_patterns() {
+	return array(
+		'کلید Google'     => '/AIza[0-9A-Za-z_-]{35}/',
+		'کلید OpenAI'     => '/(?<![A-Za-z0-9_\/-])sk-(?:proj-)?(?=[A-Za-z0-9_-]*[A-Z])(?=[A-Za-z0-9_-]*[a-z])(?=[A-Za-z0-9_-]*[0-9])[A-Za-z0-9_-]{20,}/',
+		'مقدار xi-api-key' => '/xi-api-key[\'"]?\s*(?::|=>?|,)\s*[\'"]?[A-Za-z0-9_]{20,}/',
+		'کلید خصوصی'      => '/-----BEGIN (?:[A-Z]+ )*PRIVATE KEY-----[\r\n]+[A-Za-z0-9+\/=]{40,}/',
+	);
+}
+
+/**
+ * نقشهٔ site.zip: [ مسیر درون آرشیو ⇒ مسیر روی دیسک ]. ریشهٔ public_html (TPB_SITE_TOP) با مسیر نسبی خودش،
+ * و تنظیمات محیط زیر env/ (php.ini · phpForApache.ini · بارگذار SourceGuardian که AbzarWP بی آن بالا نمی‌آید · vhost آپاچی).
+ * @return array [ map, skipped ⇒ [مسیر رازدار], missing ⇒ [پروندهٔ محیطِ نبود] ]
+ */
+function tpb_site_map() {
+	$root = rtrim( str_replace( '\\', '/', (string) realpath( TP_ROOT ) ), '/' );
+	$map  = array(); $skipped = array(); $missing = array();
+	foreach ( TPB_SITE_TOP as $top ) {
+		$abs = $root . '/' . $top;
+		if ( is_file( $abs ) ) { $map[ $top ] = $abs; continue; }
+		if ( ! is_dir( $abs ) ) { continue; }
+		$it = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $abs, FilesystemIterator::SKIP_DOTS ), RecursiveIteratorIterator::LEAVES_ONLY );
+		foreach ( $it as $f ) {
+			if ( ! $f->isFile() ) { continue; }
+			$rel = substr( str_replace( '\\', '/', $f->getPathname() ), strlen( $root ) + 1 );
+			if ( tpb_site_skip( $rel ) ) { continue; }
+			if ( tpb_site_secret( $rel, $f->getPathname() ) ) { $skipped[] = $rel; continue; }
+			$map[ $rel ] = $f->getPathname();
+		}
+	}
+	$php = dirname( TP_PHP );
+	$bin = dirname( dirname( $php ) );
+	$env = array(
+		'env/php/php.ini'              => $php . '/php.ini',
+		'env/php/phpForApache.ini'     => $php . '/phpForApache.ini',
+		'env/php/ext/ixed.8.3ts.win'   => $php . '/ext/ixed.8.3ts.win',
+		'env/apache/httpd-vhosts.conf' => (string) current( (array) glob( $bin . '/apache/*/conf/extra/httpd-vhosts.conf' ) ),
+	);
+	foreach ( $env as $rel => $abs ) { if ( '' !== $abs && is_file( $abs ) ) { $map[ $rel ] = $abs; } else { $missing[] = $rel; } }
+	ksort( $map, SORT_STRING );
+	return array( 'map' => $map, 'skipped' => $skipped, 'missing' => $missing );
+}
+
+/** فقط نام ثابت‌های wp-config (بی هیچ مقدار) — برای ساختن wp-config تازه هنگام بازگردانی. */
+function tpb_wp_config_names() {
+	$src = (string) file_get_contents( TP_WP_DIR . '/wp-config.php' );
+	preg_match_all( "/define\(\s*'([A-Z0-9_]+)'/", $src, $m );
+	return array_values( array_unique( $m[1] ) );
+}
+
+/** ناحیهٔ هر پرونده در site.zip برای شمار خلاصهٔ manifest. */
+function tpb_site_area( $rel ) {
+	if ( 0 === strpos( $rel, 'env/' ) ) { return 'env'; }
+	if ( preg_match( '#^geo/wp-content/(plugins|mu-plugins|themes|languages)/#', $rel, $m ) ) { return $m[1]; }
+	if ( 0 === strpos( $rel, 'geo/wp-content/' ) ) { return 'wp-content-other'; }
+	if ( 0 === strpos( $rel, 'geo/' ) ) { return 'core'; }
+	return 'root';
+}
+
+/**
+ * آرشیو zip از نقشهٔ [ مسیر درون آرشیو ⇒ مسیر روی دیسک ] با فهرست محتویات (sha256 و اندازهٔ هر پرونده).
+ * رسانه و پروندهٔ فشرده بی فشرده‌سازی؛ دستگیره‌ها هر ۴۰۰ پرونده بسته می‌شوند (سقف پرونده‌های باز ویندوز).
+ * هش پیش از افزودن گرفته می‌شود؛ اگر پرونده‌ای بین هش و نوشتن عوض شود، آزمون بازگردانی (sha256 هر پرونده) آن را می‌گیرد.
+ * @return array [ files, bytes, rows ⇒ [ [sha256, bytes, rel] ] ]
+ */
+function tpb_zip_map( $zp, array $map ) {
+	$store = '/\.(jpe?g|png|gif|webp|avif|mp4|webm|mp3|m4a|ogg|zip|gz|pmtiles|woff2?)$/i';
+	$zip   = new ZipArchive();
+	if ( true !== $zip->open( $zp, ZipArchive::CREATE | ZipArchive::OVERWRITE ) ) { tpb_fail( basename( $zp ) . ' ساخته نشد' ); }
+	$rows = array(); $bytes = 0; $batch = 0;
+	foreach ( $map as $rel => $abs ) {
+		$size   = filesize( $abs );
+		$rows[] = array( hash_file( 'sha256', $abs ), $size, $rel );
+		$zip->addFile( $abs, $rel );
+		$zip->setCompressionName( $rel, preg_match( $store, $rel ) ? ZipArchive::CM_STORE : ZipArchive::CM_DEFLATE );
+		$bytes += $size; $batch ++;
+		if ( $batch >= 400 ) {
+			if ( ! $zip->close() || true !== $zip->open( $zp ) ) { tpb_fail( basename( $zp ) . ' نوشته نشد' ); }
+			$batch = 0;
+		}
+	}
+	if ( ! $zip->close() ) { tpb_fail( basename( $zp ) . ' بسته نشد' ); }
+	$chk = new ZipArchive();
+	if ( true !== $chk->open( $zp, ZipArchive::CHECKCONS ) || $chk->numFiles !== count( $map ) ) { tpb_fail( basename( $zp ) . ' ناسازگار است' ); }
+	$chk->close();
+	return array( 'files' => count( $map ), 'bytes' => $bytes, 'rows' => $rows );
+}
+
+/** فهرست محتویات «آرشیو ⇥ sha256 ⇥ بایت ⇥ مسیر» (سطر اول سرآیند). @return array [ آرشیو ⇒ [ مسیر ⇒ [sha256, bytes] ] ] */
+function tpb_read_contents( $file ) {
+	$out = array();
+	if ( ! is_file( $file ) ) { return $out; }
+	foreach ( file( $file, FILE_IGNORE_NEW_LINES ) as $i => $line ) {
+		if ( 0 === $i || '' === $line ) { continue; }
+		$p = explode( "\t", $line, 4 );
+		if ( 4 === count( $p ) ) { $out[ $p[0] ][ $p[3] ] = array( $p[1], (int) $p[2] ); }
+	}
+	return $out;
+}
+
 /** فهرست بسته‌ها به‌ترتیب جدید ← قدیم: [ نام ⇒ زمان ]. */
 function tpb_packages( $root ) {
 	$out = array();

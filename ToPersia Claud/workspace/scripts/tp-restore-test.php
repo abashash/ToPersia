@@ -11,7 +11,9 @@
  *     نمایهٔ جغرافیایی، چکسام تجمیعی posts (و هش post_content) و postmeta، نسخهٔ WPML ·
  *   ۵ search-replace نشانی فقط روی posts · postmeta · options · termmeta (بی --precise؛ جدول‌های لاگ و صف رد) ·
  *   ۶ خواندن چند پست از نسخهٔ بازگردانی‌شده با WP-CLI و مقایسه با اصل ·
- *   ۷ آرشیو uploads را در پوشهٔ موقت باز کن و شمار/حجم را بسنج · ۸ پاک‌کردن (همیشه، در finally).
+ *   ۷ آرشیو uploads را در پوشهٔ موقت باز کن و شمار/حجم را بسنج (format 2: sha256 هر پرونده با contents.tsv) ·
+ *   ۷ب (format 2، دستهٔ 55) site.zip: شمار/حجم، sha256 هر پرونده، پرونده‌های کلیدی هست، wp-config نیست، نسخهٔ وردپرس = پایگاه ·
+ *   ۸ پاک‌کردن (همیشه، در finally).
  * اگر اجرای پیشین قطع شده باشد، موقت‌های بازمانده (topersia_rt_*، _rt-*) در آغاز پاک می‌شوند.
  * هم‌زمان با Lighthouse اجرا نمی‌شود. نتیجه: RESTORE-TEST.json کنار بسته؛ در موفقیت LAST-RESTORED.json.
  */
@@ -85,6 +87,34 @@ function rt_import( $db, $database, $gzfile, $deadline ) {
 	stream_get_contents( $pipes[1] ); fclose( $pipes[1] );
 	$code = proc_close( $p );
 	return array( $code, substr( (string) @file_get_contents( sys_get_temp_dir() . '/tp-rt-err.txt' ), 0, 200 ) );
+}
+
+/**
+ * باز کردن آرشیو در پوشهٔ موقت و سنجش شمار، حجم و (اگر فهرست باشد) sha256 هر پرونده.
+ * @return array [ ok, files, bytes, bad ⇒ شمار ناهمخوان/نبود, first ⇒ نخستین ناهمخوان ]
+ */
+function rt_unzip_check( $zipfile, $x, $expect, $list ) {
+	$z  = new ZipArchive();
+	$ok = true === $z->open( $zipfile, ZipArchive::CHECKCONS ) && $z->numFiles === $expect;
+	$cnt = 0; $bytes = 0; $bad = 0; $first = '';
+	if ( $ok ) {
+		@mkdir( $x, 0777, true );
+		$ok = $z->extractTo( $x );
+		$z->close();
+		$it = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $x, FilesystemIterator::SKIP_DOTS ) );
+		foreach ( $it as $f ) {
+			if ( ! $f->isFile() ) { continue; }
+			$cnt ++; $bytes += $f->getSize();
+			if ( null === $list ) { continue; }
+			$rel = substr( str_replace( '\\', '/', $f->getPathname() ), strlen( str_replace( '\\', '/', $x ) ) + 1 );
+			if ( ! isset( $list[ $rel ] ) || $list[ $rel ][0] !== hash_file( 'sha256', $f->getPathname() ) || $list[ $rel ][1] !== $f->getSize() ) {
+				$bad ++;
+				if ( '' === $first ) { $first = 'first=' . $rel; }
+			}
+		}
+		if ( null !== $list && count( $list ) !== $cnt ) { $bad += abs( count( $list ) - $cnt ); }
+	}
+	return array( 'ok' => $ok, 'files' => $cnt, 'bytes' => $bytes, 'bad' => $bad, 'first' => $first );
 }
 
 function rt_clean_up( $db, $tmpdb, $work, $keep ) {
@@ -197,20 +227,30 @@ try {
 		if ( $same ) { tpb_out( '      ' . implode( ' · ', $shown ) ); }
 	}
 
-	/* ۷ — uploads */
+	/* ۷ — uploads (و از format 2: sha256 هر پرونده با contents.tsv) */
+	$contents = tpb_read_contents( $dir . '/contents.tsv' );
 	if ( $go ) {
-		$z   = new ZipArchive();
-		$okz = true === $z->open( $dir . '/uploads.zip', ZipArchive::CHECKCONS ) && $z->numFiles === $man['uploads']['files'];
-		$cnt = 0; $bytes = 0;
-		if ( $okz ) {
-			$x = $work . '/uploads';
-			mkdir( $x );
-			$okz = $z->extractTo( $x );
-			$it  = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $x, FilesystemIterator::SKIP_DOTS ) );
-			foreach ( $it as $f ) { if ( $f->isFile() ) { $cnt ++; $bytes += $f->getSize(); } }
-			$z->close();
-		}
-		$go = rt_step( $steps, $ok, '۷ uploads.zip باز می‌شود؛ شمار پرونده و حجم = manifest', $okz && $cnt === $man['uploads']['files'] && $bytes === $man['uploads']['bytes'], "files={$cnt} bytes={$bytes}" );
+		$u   = rt_unzip_check( $dir . '/uploads.zip', $work . '/uploads', $man['uploads']['files'], isset( $contents['uploads.zip'] ) ? $contents['uploads.zip'] : null );
+		$sha = isset( $contents['uploads.zip'] ) ? " · sha256 هر پرونده = contents.tsv (ناهمخوان {$u['bad']})" : '';
+		$go  = rt_step( $steps, $ok, '۷ uploads.zip باز می‌شود؛ شمار پرونده و حجم = manifest' . $sha, $u['ok'] && $u['files'] === $man['uploads']['files'] && $u['bytes'] === $man['uploads']['bytes'] && 0 === $u['bad'], "files={$u['files']} bytes={$u['bytes']} bad={$u['bad']} {$u['first']}" );
+	}
+
+	/* ۷ب — site.zip (format 2): هسته، افزونه‌ها، پوسته‌ها، تنظیمات محیط؛ sha256 هر پرونده؛ پرونده‌های کلیدی هست و wp-config نیست */
+	if ( $go && isset( $man['site_files'], $contents['site.zip'] ) ) {
+		$sf   = $man['site_files'];
+		$x    = $work . '/site';
+		$u    = rt_unzip_check( $dir . '/site.zip', $x, $sf['files'], $contents['site.zip'] );
+		$must = array( 'geo/wp-includes/version.php', 'geo/wp-settings.php', 'geo/wp-content/plugins/topersia-core/topersia-core.php', 'geo/wp-content/plugins/topersia-render/topersia-render.php', 'geo/wp-content/themes/woodmart/style.css', '.htaccess', 'index.php', 'env/php/php.ini', 'env/wp-config.names.txt' );
+		$lack = array_values( array_filter( $must, function ( $p ) use ( $x ) { return ! is_file( $x . '/' . $p ); } ) );
+		$leak = is_file( $x . '/geo/wp-config.php' ) ? array( 'geo/wp-config.php' ) : array();
+		$wpv  = '';
+		if ( is_file( $x . '/geo/wp-includes/version.php' ) && preg_match( '/\$wp_version\s*=\s*\'([^\']+)\'/', (string) file_get_contents( $x . '/geo/wp-includes/version.php' ), $vm ) ) { $wpv = $vm[1]; }
+		$go = rt_step( $steps, $ok, '۷ب site.zip باز می‌شود؛ شمار و حجم = manifest · sha256 هر پرونده = contents.tsv · پرونده‌های کلیدی هست · wp-config نیست · نسخهٔ وردپرس پرونده‌ها = پایگاه‌داده (' . $wpv . ')',
+			$u['ok'] && $u['files'] === $sf['files'] && $u['bytes'] === $sf['bytes'] && 0 === $u['bad'] && ! $lack && ! $leak && $wpv === $man['wordpress'],
+			"files={$u['files']} bytes={$u['bytes']} bad={$u['bad']} {$u['first']} lack=" . implode( ',', $lack ) . ' leak=' . implode( ',', $leak ) . " wp={$wpv}" );
+		if ( $go ) { tpb_out( '      ' . implode( ' · ', array_map( function ( $k, $v ) { return $k . ' ' . $v; }, array_keys( $sf['by_area'] ), $sf['by_area'] ) ) . ' · PMTiles ' . count( $man['uploads']['pmtiles'] ) ); }
+	} elseif ( $go ) {
+		tpb_out( '  · بستهٔ format 1 (بی site.zip) — گام ۷ب ندارد' );
 	}
 
 	if ( microtime( true ) - $t0 > RT_LIMIT ) { rt_step( $steps, $ok, '۸ سقف زمان ۱۰ دقیقه', false, 'از مهلت گذشت' ); }
