@@ -2007,6 +2007,13 @@
 
 		function place() {
 
+			/* دستۀ 55 بند ۷: صفحۀ جای‌نگهدار (تک‌خبر/تک‌مقاله) — نوار در ستون کناری می‌ماند و جا و ظاهر هر دو پهنا را
+			   topersia-g-news.css می‌دهد (موبایل: rail با display:contents و order:-1 ← نخستین خانۀ شبکه، ظاهر نوار ساده).
+			   جابه‌جایی و عوض‌کردن کلاس پس از نخستین رنگ‌آمیزی CLS ۰٫۱۰۳ در ۳۹۰ بود. صفحۀ موجودیت (.tp-crumb) همان است. */
+			if ( crumb && crumb.hasAttribute( 'data-tp-actionbar-slot' ) ) {
+				return;
+			}
+
 			if ( narrow.matches ) {
 
 				if ( crumb && bar.nextSibling !== crumb ) {

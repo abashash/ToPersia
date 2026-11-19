@@ -83,8 +83,10 @@ if ( $tp_part ) {
 								<?php /* P5-D575: جست‌وجو و مکان در همان خط؛ موبایل زیر دکمۀ «فیلتر» (بی JS همیشه دیدنی).
 								   دستۀ 55 بند ۴: ویژگی ظرف data-tp-filter-panel است، نه data-tp-more — آن نشان دکمۀ «N مورد دیگر» در topersia-g-zones.js است
 								   که با کلیک روی خودِ عنصر (و هر فرزندش، از راه bubbling) آن را برمی‌دارد؛ برخورد نام، جعبۀ جست‌وجو و مکان را با نخستین کلیک حذف می‌کرد. */ ?>
-								<button type="button" class="tp-hub-more__btn" data-tp-more-btn aria-expanded="false" aria-controls="tp-hub-more" hidden><?php echo esc_html__( 'فیلتر', 'topersia' ); ?></button>
-								<div id="tp-hub-more" class="tp-hub-more" data-tp-filter-panel>
+								<?php /* دستۀ 55 بند ۷: data-tp-pre ← موبایل با html.tp-js همان وضعیت پس از news.js از نخستین رنگ‌آمیزی (دکمه دیدنی، ظرف بسته مگر پُر)؛
+								   پنهان‌شدن ظرف پس از رنگ‌آمیزی نتایج را ۹۱px بالا می‌کشید. «پُر» را CSS از ویژگی value سرور می‌خواند = همان filled() news.js. */ ?>
+								<button type="button" class="tp-hub-more__btn" data-tp-more-btn aria-expanded="false" aria-controls="tp-hub-more" hidden data-tp-pre><?php echo esc_html__( 'فیلتر', 'topersia' ); ?></button>
+								<div data-tp-pre id="tp-hub-more" class="tp-hub-more" data-tp-filter-panel>
 									<div class="tp-news-filter__f tp-news-filter__f--q">
 										<label for="tp-hub-q"><?php echo esc_html__( 'جست‌وجو', 'topersia' ); ?></label>
 										<input id="tp-hub-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">

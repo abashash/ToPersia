@@ -602,10 +602,12 @@ if ( ! function_exists( 'topersia_g_news_active_items' ) ) {
 	}
 }
 
-/** دکمۀ شبکه/فهرست — پنهان تا JS، و بی شبکه هم پنهان. */
+/** دکمۀ شبکه/فهرست — پنهان تا JS، و بی شبکه هم پنهان.
+ *  دستۀ 55 بند ۷: `data-tp-pre` — با `html.tp-js` و شبکه در صفحه، CSS از نخستین رنگ‌آمیزی نشانش می‌دهد (پیدا شدن پس از news.js
+ *  فرم پالایش را افقی جابه‌جا می‌کرد)؛ applyView آن را برمی‌دارد و از آن پس `hidden` حاکم است. */
 if ( ! function_exists( 'topersia_g_news_view_toggle' ) ) {
 	function topersia_g_news_view_toggle() {
-		return '<div class="tp-news-view" role="group" aria-label="' . esc_attr__( 'شیوۀ نمایش', 'topersia' ) . '" hidden data-tp-news-view>'
+		return '<div class="tp-news-view" role="group" aria-label="' . esc_attr__( 'شیوۀ نمایش', 'topersia' ) . '" data-tp-pre hidden data-tp-news-view>'
 			. '<button type="button" data-tp-view="grid" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span class="tp-news-vh">' . esc_html__( 'نمای شبکه‌ای', 'topersia' ) . '</span></button>'
 			. '<button type="button" data-tp-view="list" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="5" cy="6" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="5" cy="18" r="1.2"/></svg><span class="tp-news-vh">' . esc_html__( 'نمای فهرستی', 'topersia' ) . '</span></button>'
 			. '</div>';

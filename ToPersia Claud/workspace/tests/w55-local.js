@@ -421,6 +421,94 @@ async function more() {
 	}
 }
 
+/* ── بند ۷: CLS — منشأ هر جابه‌جایی و گیت ≤ ۰٫۱ ─────────────────────────────────
+ * فقط Chromium: فایرفاکس LayoutShift ندارد (PerformanceObserver «layout-shift» پشتیبانی نمی‌شود) — در گزارش گفته می‌شود.
+ * هاب‌ها و فهرست‌ها (شبکه و فهرست) و تک‌خبر/تک‌مقاله × ۱۴۴۰/۷۶۸/۳۹۰، مهمان: بارگذاری تا load + ۲s، سپس پیمایش تا پایین
+ *   با گام یک صفحه‌نمایش (instant، ۴۰۰ms درنگ). هر ورودی: زمان، مقدار، فاز، سه گرهٔ نخست با مستطیل پیش و پس.
+ * حکم: مجموع همهٔ ورودی‌ها بی ورودی کاربر ≤ ۰٫۱ (سخت‌گیرتر از بزرگ‌ترین پنجرهٔ جلسهٔ web-vitals، که جدا گزارش می‌شود). */
+const CLS_LIMIT = 0.1;
+const CLS_PAGES = [
+	{ k: 'هاب استان', u: '/province/', views: true },
+	{ k: 'هاب شهر', u: '/city/', views: true },
+	{ k: 'هاب جاذبه‌ها', u: '/attractions/', views: true },
+	{ k: 'خبرها', u: '/news/', views: true },
+	{ k: 'مقاله‌ها', u: '/articles/', views: true },
+	{ k: 'تک‌خبر', from: '/news/' },
+	{ k: 'تک‌مقاله', from: '/articles/' },
+];
+const CLS_INIT = () => {
+	window.__cls = [];
+	window.__clsPh = 'بارگذاری';
+	const nm = n => n && 1 === n.nodeType ? n.tagName.toLowerCase() + ( n.id ? '#' + n.id : '' ) + ( n.classList.length ? '.' + [ ...n.classList ].slice( 0, 3 ).join( '.' ) : '' ) : '#text';
+	const rc = r => r ? Math.round( r.x ) + ',' + Math.round( r.y ) + ' ' + Math.round( r.width ) + '×' + Math.round( r.height ) : '';
+	try {
+		new PerformanceObserver( l => {
+			for ( const e of l.getEntries() ) {
+				window.__cls.push( { t: Math.round( e.startTime ), v: e.value, inp: e.hadRecentInput, ph: window.__clsPh, src: ( e.sources || [] ).slice( 0, 3 ).map( s => ( { n: nm( s.node ), p: rc( s.previousRect ), c: rc( s.currentRect ) } ) ) } );
+			}
+		} ).observe( { type: 'layout-shift', buffered: true } );
+	} catch ( e ) { /* بی LayoutShift */ }
+};
+const sessionCls = es => {   /* بزرگ‌ترین پنجرهٔ جلسه (فاصلهٔ ۱s، سقف ۵s) — تعریف web-vitals */
+	let best = 0, cur = 0, first = 0, last = 0;
+	es.forEach( e => {
+		if ( cur && ( e.t - last > 1000 || e.t - first > 5000 ) ) { cur = 0; }
+		if ( ! cur ) { first = e.t; }
+		cur += e.v; last = e.t; best = Math.max( best, cur );
+	} );
+	return best;
+};
+const firstCard = html => ( html.match( /<h3 class="tp-news-card__title"><a href="([^"]+)"/ ) || [ '', '' ] )[1].replace( /&#038;|&amp;/g, '&' );
+async function cls() {
+	console.log( '\nبند ۷ — CLS: منشأ هر جابه‌جایی (Chromium؛ فایرفاکس LayoutShift ندارد) — حکم مجموع ≤ ' + CLS_LIMIT + '\n' + '─'.repeat( 78 ) );
+	const pages = [];
+	for ( const P of CLS_PAGES ) {
+		if ( ! P.from ) { pages.push( P ); continue; }
+		const u = firstCard( ( await get( P.from ) ).body.toString( 'utf8' ) );
+		if ( u ) { pages.push( { k: P.k, u: u.replace( /^https?:\/\/[^/]+/, '' ) } ); } else { console.log( `  ℹ️ ${ P.k }: کارتی در ${ P.from } نیست — سنجیده نشد` ); }
+	}
+	const origins = {};
+	const br = await chromium.launch();
+	try {
+		for ( const [ w, h ] of VIEWS ) {
+			for ( const P of pages ) {
+				for ( const view of P.views ? [ 'grid', 'list' ] : [ '' ] ) {
+					const ctx = await br.newContext( { viewport: { width: w, height: h } } );
+					if ( view ) { await ctx.addInitScript( v => { try { window.localStorage.setItem( 'tp-news-view', v ); } catch ( e ) { /* بی localStorage */ } }, view ); }
+					await ctx.addInitScript( CLS_INIT );
+					const page = await ctx.newPage();
+					page.setDefaultTimeout( 30000 * X );
+					const tag = `${ w } ${ P.k }${ view ? ' (' + ( 'list' === view ? 'فهرست' : 'شبکه' ) + ')' : '' }`;
+					try {
+						await page.goto( BASE + P.u, { waitUntil: 'load', timeout: 90000 * X } );
+						await wait( 2000 );
+						await page.evaluate( () => { window.__clsPh = 'پیمایش'; } );
+						const H = await page.evaluate( () => document.documentElement.scrollHeight );
+						for ( let y = 0; y < H; y += h ) {
+							await page.evaluate( yy => window.scrollTo( { top: yy, behavior: 'instant' } ), y );
+							await wait( 400 );
+						}
+						await wait( 600 );
+						const es = ( await page.evaluate( () => window.__cls ) ).filter( e => ! e.inp );
+						const sum = es.reduce( ( a, e ) => a + e.v, 0 ), ses = sessionCls( es );
+						es.forEach( e => e.src.slice( 0, 1 ).forEach( s => { const k = e.ph + ' · ' + s.n; origins[ k ] = origins[ k ] || { v: 0, pages: new Set(), ex: '' }; origins[ k ].v += e.v; origins[ k ].pages.add( tag ); origins[ k ].ex = origins[ k ].ex || `${ s.p } → ${ s.c }`; } ) );
+						const top = es.slice().sort( ( a, b ) => b.v - a.v ).slice( 0, 3 ).map( e => `${ e.v.toFixed( 3 ) }@${ e.t }ms ${ e.ph } ${ e.src.map( s => s.n + ' [' + s.p + ' → ' + s.c + ']' ).join( ' + ' ) }` ).join( ' | ' );
+						t( `chromium ${ tag }: CLS کل ${ sum.toFixed( 3 ) } ≤ ${ CLS_LIMIT } (پنجرهٔ جلسه ${ ses.toFixed( 3 ) })`, sum <= CLS_LIMIT, top || 'بی جابه‌جایی' );
+					} catch ( e ) {
+						t( `chromium ${ tag }: بی خطای اجرا`, false, String( e.message ).split( '\n' )[0] );
+					} finally {
+						await ctx.close();
+					}
+				}
+			}
+		}
+	} finally {
+		await br.close();
+	}
+	console.log( '\nمنشأ جابه‌جایی‌ها (فاز · گرهٔ نخست ← مجموع مقدار · شمار ترکیب · نمونهٔ مستطیل)' );
+	Object.entries( origins ).sort( ( a, b ) => b[1].v - a[1].v ).forEach( ( [ k, o ] ) => console.log( `  ${ o.v.toFixed( 3 ) } · ${ k } · ${ o.pages.size } ترکیب · ${ o.ex } · مثلاً ${ [ ...o.pages ].slice( 0, 3 ).join( '، ' ) }` ) );
+}
+
 /* ── بند ۶: وزن HTML · زمان قطعه · LCP (پیش/پس) — فقط گزارش، حکم نه ────────────────
  * node tests/w55-local.js --only=perf [--label=پیش]
  *   وزن   GET مهمان بی فشرده‌سازی (Accept-Encoding: identity): بایت HTML و gzip همان (zlib) · شمار کاشی صفحۀ ۱
@@ -504,6 +592,7 @@ async function perf() {
 	if ( want( 'search' ) ) { await search(); }
 	if ( want( 'list' ) ) { await list(); }
 	if ( want( 'more' ) ) { await more(); }
+	if ( want( 'cls' ) ) { await cls(); }
 	if ( ONLY.includes( 'perf' ) ) { await perf(); }   /* فقط با درخواست صریح — سنجش است، نه گیت */
 	console.log( '\n' + '─'.repeat( 78 ) + '\nدستۀ 55: ' + pass + ' گذشت · ' + fail + ' افتاد · ' + Math.round( ( Date.now() - t0 ) / 1000 ) + ' ثانیه' );
 	console.log( 'END w55-local' );

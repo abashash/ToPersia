@@ -46,6 +46,7 @@
 			return;
 		}
 		box.hidden = ! items;
+		box.removeAttribute( 'data-tp-pre' );   /* دستۀ 55 بند ۷: نمایش پیش از JS را CSS داشت؛ از این‌جا hidden حاکم است */
 		if ( ! items ) {
 			return;
 		}
@@ -472,6 +473,9 @@
 				}
 			} );
 			syncMore();
+			/* دستۀ 55 بند ۷: وضعیت پیش از JS (CSS با data-tp-pre) همین بود؛ از این‌جا hidden و aria-expanded حاکم‌اند */
+			moreBtn.removeAttribute( 'data-tp-pre' );
+			morePanel.removeAttribute( 'data-tp-pre' );
 			if ( narrow.addEventListener ) {
 				narrow.addEventListener( 'change', syncMore );
 			}

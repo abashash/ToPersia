@@ -285,3 +285,69 @@ $w55_fver = function ( $s ) {
 };
 tp441_mut( 'بند ۶: قطعۀ کش‌شده با تغییر کد سازنده (نسخه + زمان و اندازۀ قالب‌ها و includeها) یک بار پاک و گرم‌کردن در صف می‌شود — جهش: بی پاک‌کردن (نشانه‌گذاری کهنه پس از استقرار)', $w55_fver, $w55_nui6,
 	str_replace( "update_option( 'topersia_frag_ver', \$sig, true );\n\t\ttopersia_frag_purge();", "update_option( 'topersia_frag_ver', \$sig, true );", $w55_nui6 ) );
+
+/* ── بند ۷: CLS — نخستین رنگ‌آمیزی (پیش از اسکریپت‌های defer و zones.js) همان چیدمان پس از آن‌هاست ────────────────
+ * منشأها با مدرک در w55-local --only=cls (درنگ ۳ثانیه‌ای اسکریپت‌ها بدترین حالت را قطعی بازمی‌سازد). رفتار را آن آزمون می‌سنجد؛
+ * این‌جا فقط اینکه هر رفع سر جایش است و یک منبع دارد. */
+$w55_boot = $w55_read( $w55_r . 'topersia-render.php' );
+$w55_pcss = $w55_read( $w55_r . 'assets/topersia-g-prog.css' );
+$w55_c7_list = function ( $s ) {
+	return false !== strpos( $s, "if(g('news-view')==='list'&&window.MutationObserver){var q=function(){var e=document.querySelectorAll('[data-tp-news-items]:not(.tp-news-grid--rows)');" )
+		&& false !== strpos( $s, "o=new MutationObserver(q);o.observe(h,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',function(){q();o.disconnect()})}" )
+		&& 1 === preg_match( "/function topersia_render_boot_script\(\) \{.*?var h=document\.documentElement,g=function\(k\)\{return localStorage\.getItem\('tp-'\+k\)\};.*?g\('news-view'\)/s", $s );   /* همان کلید tp-news-view در news.js */
+};
+tp441_mut( 'بند ۷: نمای فهرستی پیش از رنگ‌آمیزی — اسکریپت <head> کلاس tp-news-grid--rows را با ناظر جهش همان لحظۀ درج پارسر می‌گذارد (همان کلید news.js) — جهش: بی observe (کلاس پس از رنگ‌آمیزی، CLS ۰٫۴۶)', $w55_c7_list, $w55_boot,
+	str_replace( 'o.observe(h,{childList:true,subtree:true});', '', $w55_boot ) );
+
+$w55_nui7 = $w55_read( $w55_r . 'includes/topersia-g-news-ui.php' );
+$w55_c7_view = function ( $j ) use ( $w55_nui7, $w55_ncss ) {
+	return false !== strpos( $w55_nui7, '" data-tp-pre hidden data-tp-news-view>' )
+		&& false !== strpos( $w55_ncss, 'html.tp-js .tp-page.tp-news-page:has([data-tp-news-items]) .tp-news-view[data-tp-pre]{display:inline-flex}' )
+		&& 1 === preg_match( "/function applyView\(\) \{.*?box\.hidden = ! items;\n\t\tbox\.removeAttribute\( 'data-tp-pre' \);/s", $j );
+};
+tp441_mut( 'بند ۷: دکمۀ شبکه/فهرست با html.tp-js و شبکه از نخستین رنگ‌آمیزی دیدنی؛ applyView نشان پیش را برمی‌دارد تا hidden حاکم شود — جهش: نشان می‌ماند (بی شبکه پس از پالایش هم دیده می‌شد)', $w55_c7_view, $w55_njs,
+	str_replace( "\t\tbox.removeAttribute( 'data-tp-pre' );", '', $w55_njs ) );
+
+$w55_c7_panel = function ( $j ) use ( $w55_hub, $w55_art, $w55_hcss ) {
+	foreach ( array( $w55_hub, $w55_art ) as $t ) {
+		if ( false === strpos( $t, 'aria-controls="tp-hub-more" hidden data-tp-pre>' ) || false === strpos( $t, '<div data-tp-pre id="tp-hub-more" class="tp-hub-more" data-tp-filter-panel>' ) ) {
+			return false;
+		}
+	}
+	return (bool) preg_match( '/@media \(max-width:720px\)\{[^@]*html\.tp-js \.tp-page\.tp-news-page \.tp-hub-more__btn\[data-tp-pre\]\{display:inline-flex\}\s*html\.tp-js \.tp-page\.tp-news-page \.tp-hub-more\[data-tp-pre\]:not\(:has\(input:not\(\[type="hidden"\]\):not\(\[value=""\]\)\)\)\{display:none\}/', $w55_hcss )
+		&& 1 === preg_match( "/syncMore\(\);\n.*?\n\t\t\tmoreBtn\.removeAttribute\( 'data-tp-pre' \);\n\t\t\tmorePanel\.removeAttribute\( 'data-tp-pre' \);/", $j )
+		&& false !== strpos( $j, "return i.type !== 'hidden' && i.value !== '';" );   /* «پُر» در CSS همان filled() */
+};
+tp441_mut( 'بند ۷: پنل فیلتر موبایل از نخستین رنگ‌آمیزی در وضعیت پس از news.js (دکمه دیدنی، ظرف بسته مگر ورودی دیدنی value داشته باشد)؛ news.js پس از syncMore نشان را برمی‌دارد — جهش: نشان ظرف می‌ماند (ظرف هرگز باز نمی‌شد)', $w55_c7_panel, $w55_njs,
+	str_replace( "\t\t\tmorePanel.removeAttribute( 'data-tp-pre' );", '', $w55_njs ) );
+
+$w55_c7_prog = function ( $c ) use ( $w55_tok, $w55_pcss ) {
+	return false !== strpos( $w55_tok, '--tp-prog-h:20px;' ) && false !== strpos( $w55_tok, '--tp-chips-prog-gap:6px;' )
+		&& false !== strpos( $w55_pcss, 'html .tp-page .tp-prog{position:relative;box-sizing:border-box;block-size:var(--tp-prog-h);' )
+		&& false !== strpos( $c, '.tp-news-chips > .tp-prog{grid-column:1 / -1;grid-row:2;margin-block-start:var(--tp-chips-prog-gap)}' )
+		&& false !== strpos( $c, 'html.tp-js .tp-page.tp-news-page .tp-news-chips:not(:has(> .tp-prog))::after{content:"";grid-column:1 / -1;grid-row:2;block-size:var(--tp-prog-h);margin-block-start:var(--tp-chips-prog-gap)}' );
+};
+tp441_mut( 'بند ۷: ردیف نوار پیشرفت تراشه پیش از ساخته‌شدنش در موبایل نگه داشته می‌شود؛ بلندی و فاصله یک منبع (توکن) برای نوار و جای آن — جهش: جای‌نگهدار با عدد خام', $w55_c7_prog, $w55_ncss,
+	str_replace( 'grid-row:2;block-size:var(--tp-prog-h);margin-block-start', 'grid-row:2;block-size:24px;margin-block-start', $w55_ncss ) );
+
+$w55_c7_bar = function ( $j ) use ( $w55_ncss ) {
+	return 1 === preg_match( "/function place\(\) \{\n.*?if \( crumb && crumb\.hasAttribute\( 'data-tp-actionbar-slot' \) \) \{\n\t+return;\n\t+\}\n\n\t+if \( narrow\.matches \) \{/s", $j )
+		&& false !== strpos( $j, "var crumb  = page.querySelector( '[data-tp-actionbar-slot]' ) || page.querySelector( '.tp-crumb' );" )   /* صفحۀ موجودیت همان */
+		&& (bool) preg_match( '/@media \(max-width:720px\)\{[^@]*html \.tp-page\.tp-page\.tp-news-single \.tp-rail > #tp-actions\{background:none;border:0;border-radius:0;overflow:visible;box-shadow:none;padding:0;margin:0 0 calc\(var\(--tp-news-bar-gap\) - var\(--tp-grid-row-gap-m\)\)\}/', $w55_ncss )
+		&& false !== strpos( $w55_ncss, 'html .tp-page.tp-news-single .tp-content-grid:has(> .tp-rail > #tp-actions){margin-block-start:0}' )
+		&& false !== strpos( $w55_ncss, '.tp-news-single .tp-rail > #tp-actions{order:-1}' );
+};
+tp441_mut( 'بند ۷: تک‌خبر/تک‌مقاله — zones.js نوار کنش را جابه‌جا و کلاسش را عوض نمی‌کند؛ جا (order:-1) و ظاهر موبایل از CSS — جهش: جابه‌جایی پس از رنگ‌آمیزی (CLS ۰٫۱۰۳ در ۳۹۰)', $w55_c7_bar, $w55_zjs,
+	str_replace( "if ( crumb && crumb.hasAttribute( 'data-tp-actionbar-slot' ) ) {\n\t\t\t\treturn;\n\t\t\t}\n\n", '', $w55_zjs ) );
+
+/* فاصلۀ نوار تا نخستین بخش = margin شبکه (همان پیش از بند ۷)؛ row-gap شبکه زیر خانۀ نوار با توکنی جبران می‌شود که باید
+   عیناً row-gap موبایل قالب مولد باشد — اگر یکی عوض شود و دیگری نه، بخش نخست بی‌صدا جابه‌جا می‌شود (۳۹۰: ۲۸px). */
+$w55_tmpl = $w55_read( $w55_r . 'assets/topersia-g-template.css' );
+$w55_c7_gap = function ( $t ) use ( $w55_tmpl, $w55_ncss ) {
+	return 1 === preg_match( '/@media\(max-width:720px\)\{\s*html \.tp-page div\.tp-content-grid\{row-gap:([0-9.]+px)\}/', $w55_tmpl, $m )
+		&& 1 === preg_match( '/--tp-grid-row-gap-m:([0-9.]+px);/', $t, $n ) && $m[1] === $n[1]
+		&& 1 === preg_match( '/--tp-news-bar-gap:(clamp\([^;]+\));/', $t, $g )
+		&& false !== strpos( $w55_ncss, 'html .tp-page.tp-news-single .tp-content-grid{margin-block-start:' . $g[1] . '}' );
+};
+tp441_mut( 'بند ۷: جبران row-gap زیر نوار کنش موبایل = همان row-gap قالب مولد (یک عدد در دو جا، برابری پاییده) — جهش: توکن ۲۴px', $w55_c7_gap, $w55_tok,
+	str_replace( '--tp-grid-row-gap-m:28px;', '--tp-grid-row-gap-m:24px;', $w55_tok ) );

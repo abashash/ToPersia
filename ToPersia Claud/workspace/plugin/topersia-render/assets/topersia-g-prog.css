@@ -12,7 +12,7 @@ html .tp-page :is(.tp-has-prog,#tp-prog-none){scrollbar-width:none;-ms-overflow-
 html .tp-page :is(.tp-has-prog,#tp-prog-none)::-webkit-scrollbar{display:none;inline-size:0;block-size:0}
 html .tp-page .tp-has-prog.tp-is-dragging{scroll-snap-type:none;scroll-behavior:auto}
 
-html .tp-page .tp-prog{position:relative;box-sizing:border-box;block-size:20px;margin-block-start:4px;cursor:pointer;touch-action:none;user-select:none}
+html .tp-page .tp-prog{position:relative;box-sizing:border-box;block-size:var(--tp-prog-h);margin-block-start:4px;cursor:pointer;touch-action:none;user-select:none}
 html .tp-page .tp-prog[hidden]{display:none}
 html .tp-page .tp-prog::before{content:"";position:absolute;inset-inline:0;inset-block-start:7px;block-size:6px;border-radius:999px;background:var(--tp-border)}
 html .tp-page .tp-prog__thumb{position:absolute;inset-inline-start:0;inset-block-start:7px;block-size:6px;min-inline-size:32px;border-radius:999px;

@@ -36,6 +36,10 @@ html .tp-page.tp-news-page .tp-hub-card .tp-news-card__media--icon svg{inline-si
 @media (max-width:720px){
   html .tp-page.tp-news-page .tp-hub-more{flex:1 1 100%}
   html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{flex:1 1 100%}
+  /* دستۀ 55 بند ۷ — همان وضعیت پس از news.js از نخستین رنگ‌آمیزی (html.tp-js یعنی JS اجرا خواهد شد): دکمۀ «فیلتر» دیدنی،
+     ظرف بسته مگر پُر — «پُر» همان filled() news.js: ورودی دیدنی با ویژگی value ناتهی از سرور. news.js پس از syncMore نشان data-tp-pre را برمی‌دارد. */
+  html.tp-js .tp-page.tp-news-page .tp-hub-more__btn[data-tp-pre]{display:inline-flex}
+  html.tp-js .tp-page.tp-news-page .tp-hub-more[data-tp-pre]:not(:has(input:not([type="hidden"]):not([value=""]))){display:none}
 }
 
 /* ══ دستۀ 55 بند ۶ — «نمایش بیشتر»: پیوند واقعی صفحۀ بعد (rel=next)؛ با JS کاشی‌ها به همین شبکه افزوده می‌شوند.

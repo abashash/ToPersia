@@ -236,14 +236,17 @@ $w54_gate_css = function ( $css ) {
 tp441_mut( 'بند ۷: جایگاه بسته تا tp-ads.js بازش کند (جز «زیر نوار ابزار هاب»)؛ کارت میان فهرست هم‌اندازۀ کارت — جهش: جایگاه از آغاز باز', $w54_gate_css, $w54_css,
 	str_replace( '.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top){display:none}', '', $w54_css ) );
 $w54_gate_js = function ( $s ) {
-	return false !== strpos( $s, 'GAP = 2' ) && false !== strpos( $s, "why = y < sy + vh ? 'screen' : ( ! o.side && null !== last && y - last < GAP * vh ? 'gap' : '' );" )
+	return false !== strpos( $s, 'GAP = 2' ) && false !== strpos( $s, 'EDGE = 32' ) && false !== strpos( $s, "why = y < sy + vh + EDGE ? 'screen' : ( ! o.side && null !== last && y - last < GAP * vh ? 'gap' : '' );" )
 		&& false !== strpos( $s, "s.setAttribute( 'data-tp-ad-off', why );" ) && false !== strpos( $s, 's.classList.add( ON );' )
 		&& false !== strpos( $s, '0.6 * window.innerWidth' ) && preg_match( '/MutationObserver\(.*?place\(\);\s*scan\(\);/s', $s );
 };
 tp441_mut( 'بند ۷: tp-ads.js — باز فقط یکسره زیر صفحه‌نمایش جاری (نخستین صفحه‌نمایش موبایل بی تبلیغ، بی CLS) و ≥ دو صفحه‌نمایش از واحد پیشین؛ ستون کناری بیرون؛ قطعۀ تازه هم — جهش: فاصلۀ یک صفحه‌نمایش', $w54_gate_js, $w54_js,
 	str_replace( 'GAP = 2', 'GAP = 1', $w54_js ) );
 tp441_mut( '  جهش دوم: بی شرط «زیر صفحه‌نمایش» ← باید بیفتد', $w54_gate_js, $w54_js,
-	str_replace( "why = y < sy + vh ? 'screen' : ", 'why = ', $w54_js ) );
+	str_replace( "why = y < sy + vh + EDGE ? 'screen' : ", 'why = ', $w54_js ) );
+/* دستۀ 55 بند ۷: لبۀ «زیر صفحه‌نمایش» حاشیۀ سایۀ کارت را می‌گیرد (کارت ۲px زیر لبه، سایه ۱۶px بالاتر ← CLS) */
+tp441_mut( '  جهش سوم: بی حاشیۀ EDGE (لبۀ خام صفحه‌نمایش) ← باید بیفتد', $w54_gate_js, $w54_js,
+	str_replace( "why = y < sy + vh + EDGE ? 'screen'", "why = y < sy + vh ? 'screen'", $w54_js ) );
 $w54_eager = function ( $s ) {
 	return false !== strpos( $s, "'lazy'  => 'hub-top' !== \$slot," );
 };

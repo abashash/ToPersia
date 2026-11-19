@@ -7,7 +7,8 @@
    ارسال گروهی با sendBeacon (text/plain) به REST بی‌نام با توکن روزانه؛ قطعۀ نتایجِ تازه با MutationObserver. */
 ( function () {
 	'use strict';
-	var C = window.TopersiaAds || {}, GAP = 2, TOP = 'tp-ad-slot--hub-top', ON = 'tp-ad-on';
+	/* EDGE: حاشیۀ سایۀ کارت پسین (دستۀ 55 بند ۷) */
+	var C = window.TopersiaAds || {}, GAP = 2, EDGE = 32, TOP = 'tp-ad-slot--hub-top', ON = 'tp-ad-on';
 	var abs = function ( e ) {
 		return e.getBoundingClientRect().top + window.scrollY;
 	};
@@ -34,7 +35,7 @@
 			if ( ! s.tpP && ! s.classList.contains( TOP ) ) {
 				s.tpP = 1;
 				y = pos( s );
-				why = y < sy + vh ? 'screen' : ( ! o.side && null !== last && y - last < GAP * vh ? 'gap' : '' );
+				why = y < sy + vh + EDGE ? 'screen' : ( ! o.side && null !== last && y - last < GAP * vh ? 'gap' : '' );
 				if ( why ) {
 					s.setAttribute( 'data-tp-ad-off', why );
 				} else {

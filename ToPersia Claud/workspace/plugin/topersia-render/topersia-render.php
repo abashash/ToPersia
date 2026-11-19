@@ -604,6 +604,10 @@ if ( ! function_exists( 'topersia_render_boot_script' ) ) {
 		echo "var p=g('spacing');if(p){h.setAttribute('data-spacing',p)}";
 		echo "var w=g('measure');if(w){h.setAttribute('data-measure',w)}";
 		echo "['contrast','calm','motion'].forEach(function(k){var v=g(k);if(v){h.setAttribute('data-'+k,v)}});";
+		/* دستۀ 55 بند ۷ — نمای فهرستی پیش از نخستین رنگ‌آمیزی: کلاس `tp-news-grid--rows` را news.js (defer) پس از رنگ‌آمیزی
+		   می‌گذاشت و همۀ کارت‌ها از شبکه به ردیف می‌پریدند (CLS تا ۰٫۴۶ در ۳۹۰). همان کلید localStorage news.js؛ ناظر جهش هر
+		   `[data-tp-news-items]` را همان لحظۀ درج پارسر می‌گیرد (ریزکار، پیش از به‌روزرسانی رندر) و در DOMContentLoaded کنار می‌رود. */
+		echo "if(g('news-view')==='list'&&window.MutationObserver){var q=function(){var e=document.querySelectorAll('[data-tp-news-items]:not(.tp-news-grid--rows)');for(var i=0;i<e.length;i++){e[i].classList.add('tp-news-grid--rows')}},o=new MutationObserver(q);o.observe(h,{childList:true,subtree:true});document.addEventListener('DOMContentLoaded',function(){q();o.disconnect()})}";
 		echo "}catch(e){}})();</script>\n";
 	}
 }

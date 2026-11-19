@@ -304,4 +304,24 @@ html .tp-page.tp-news-page .tp-news-chips{display:grid;grid-template-columns:aut
 html .tp-page.tp-news-page .tp-news-chips > .tp-news-chips__nav--prev{grid-column:1;grid-row:1}
 html .tp-page.tp-news-page .tp-news-chips > .tp-news-chips__list{grid-column:2;grid-row:1}
 html .tp-page.tp-news-page .tp-news-chips > .tp-news-chips__nav--next{grid-column:3;grid-row:1}
-html .tp-page.tp-news-page .tp-news-chips > .tp-prog{grid-column:1 / -1;grid-row:2;margin-block-start:6px}
+html .tp-page.tp-news-page .tp-news-chips > .tp-prog{grid-column:1 / -1;grid-row:2;margin-block-start:var(--tp-chips-prog-gap)}
+
+/* ══ دستۀ 55 بند ۷ — CLS: نخستین رنگ‌آمیزی همان چیدمان پس از اسکریپت‌هاست ══════════════════════════════
+   `html.tp-js` را اسکریپت درون‌خطی <head> می‌گذارد (topersia_render_boot_script)؛ یعنی JS اجرا خواهد شد. `data-tp-pre` را
+   news.js پس از نخستین همگام‌سازی برمی‌دارد. هر قاعده یک منشأ سنجیده در w55-local («بند ۷») است؛ اندازه از توکن،
+   و برای نوار کنش عیناً همان مقدارهای قالب (topersia-g-template.css، `.tp-actionbar` در موبایل) تا ظاهر یکی بماند. */
+/* دکمۀ شبکه/فهرست: news.js آن را پس از رنگ‌آمیزی آشکار می‌کرد و فرم پالایش در ۱۴۴۰ و ۷۶۸ افقی می‌پرید */
+html.tp-js .tp-page.tp-news-page:has([data-tp-news-items]) .tp-news-view[data-tp-pre]{display:inline-flex}
+@media (max-width:720px){
+  /* نوار پیشرفت تراشه‌ها را zones.js پس از محتوا می‌سازد: ردیف ۲ با همان بلندی تا ساخته شود (۳۹۰: نوار ابزار و نتایج ۳۲px پایین می‌رفتند) */
+  html.tp-js .tp-page.tp-news-page .tp-news-chips:not(:has(> .tp-prog))::after{content:"";grid-column:1 / -1;grid-row:2;block-size:var(--tp-prog-h);margin-block-start:var(--tp-chips-prog-gap)}
+  /* تک‌خبر و تک‌مقاله: نوار کنش در ستون کناری می‌ماند (rail با display:contents، order:-1 ← نخستین خانۀ شبکه) و zones.js
+     جابه‌جایش نمی‌کند؛ این‌جا همان ظاهر نوار سادۀ بالای محتوا (کلاس tp-actionbar قالب در موبایل): بی قاب کارت، بی padding،
+     شکاف و padding دکمه‌ها همان مقدار قالب. فاصله تا محتوا = همان margin شبکه که پیش‌تر با margin نوار فرو می‌ریخت؛
+     چون row-gap شبکه هم زیر این خانه می‌آید، margin پایین = فاصله منهای row-gap (منفی؛ فقط درون همان شکاف خالی). */
+  html .tp-page.tp-page.tp-news-single .tp-rail > #tp-actions{background:none;border:0;border-radius:0;overflow:visible;box-shadow:none;padding:0;margin:0 0 calc(var(--tp-news-bar-gap) - var(--tp-grid-row-gap-m))}
+  html .tp-page.tp-page.tp-news-single .tp-rail > #tp-actions .tp-actions{gap:8px}
+  html .tp-page.tp-page.tp-news-single .tp-rail > #tp-actions .tp-act{gap:calc(.2 * var(--tp-rem));padding:calc(.5 * var(--tp-rem)) calc(.3 * var(--tp-rem))}
+  html .tp-page.tp-page.tp-news-single .tp-rail > #tp-actions .tp-gps-btn{margin-block-start:calc(.55 * var(--tp-rem))}
+  html .tp-page.tp-news-single .tp-content-grid:has(> .tp-rail > #tp-actions){margin-block-start:0}
+}
