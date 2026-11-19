@@ -839,6 +839,7 @@ if ( ! function_exists( 'topersia_g_hub_card' ) ) {
 		$kinds = topersia_g_kind_labels();
 		$img   = topersia_g_hub_card_image( $id );
 		$pic   = $img ? (string) wp_get_attachment_image( $img, 'medium_large', false, array( 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async', 'sizes' => '(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 25vw' ) ) : '';
+		$sum   = function_exists( 'topersia_g_list_clip' ) ? topersia_g_list_clip( topersia_g_text( $id, 'short_summary' ) ) : '';
 		$parts = array();
 
 		if ( isset( $kinds[ $type ] ) ) {
@@ -866,6 +867,8 @@ if ( ! function_exists( 'topersia_g_hub_card' ) ) {
 			. '<div class="tp-news-card__body">'
 			. '<h3 class="tp-news-card__title"><a href="' . esc_url( $url ) . '">' . esc_html( topersia_g_name( $id ) ) . '</a></h3>'
 			. ( $parts ? '<p class="tp-hub-card__sub">' . implode( '<span aria-hidden="true"> · </span>', $parts ) . '</p>' : '' )
+			/* دستۀ 55 بند ۵: حداکثر دو سطر توضیح از «خلاصۀ کوتاه» short_summary (متاباکس مشترک، از دروازۀ زبان topersia_g_raw)؛ فقط در نمای فهرست دیده می‌شود */
+			. ( '' !== $sum ? '<p class="tp-news-card__sum">' . esc_html( $sum ) . '</p>' : '' )
 			. '</div></article>';
 	}
 }

@@ -504,6 +504,7 @@ if ( ! function_exists( 'topersia_g_news_archive_card' ) ) {
 			. '</div>'
 			. '<div class="tp-news-card__body">'
 			. '<h3 class="tp-news-card__title"><a href="' . esc_url( $url ) . '">' . esc_html( get_the_title( $news_id ) ) . '</a></h3>'
+			. topersia_g_news_card_sub( $news_id )   /* دستۀ 55 بند ۵: «موضوع · در مکان» ردیف فهرست */
 			. ( '' !== $sum ? '<p class="tp-news-card__sum">' . esc_html( $sum ) . '</p>' : '' )
 			. topersia_g_news_meta( $news_id, 'tp-news-card__meta' )
 			. '</div></article>';

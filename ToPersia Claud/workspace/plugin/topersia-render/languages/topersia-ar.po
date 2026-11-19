@@ -1622,7 +1622,7 @@ msgstr "نطاق الإنترنت"
 msgid "دانشمند"
 msgstr "عالِم"
 
-#: includes/topersia-g-hub.php
+#: includes/topersia-g-news-ui.php
 #, php-format
 msgid "در %s"
 msgstr "في %s"

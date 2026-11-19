@@ -74,12 +74,18 @@ $w53_aenq = function ( $s ) {
 };
 tp441_mut( 'بند ۲: /articles/ شیوه‌نامۀ هاب و اسکریپت ترکیب‌باکس مکان را بار می‌کند — جهش: بی topersia-g-hub', $w53_aenq, $w53_news,
 	str_replace( "wp_enqueue_style( 'topersia-g-hub'", "wp_enqueue_style( 'topersia-g-x'", $w53_news ) );
-$w53_arow = function ( $c ) {
-	return false !== strpos( $c, '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr))' )
+/* دستۀ 55 بند ۵: نمای فهرست همۀ هاب‌ها و فهرست‌های خبر/مقاله یک قاعدۀ مشترک در news.css شد (ظرف /articles/ هم .tp-news-page است)؛
+   ادعای دو ستون از hub.css به همان قاعده رفت، نه حذف */
+$w53_rows2 = '.tp-page.tp-news-page .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr))';
+$w53_arow = function ( $c ) use ( $w53_ncss, $w53_atpl, $w53_rows2 ) {
+	return false !== strpos( $w53_ncss, $w53_rows2 ) && false !== strpos( $w53_atpl, 'tp-news-page' )
 		&& false !== strpos( $c, '.tp-page.tp-news-page .tp-hub-more{flex-wrap:nowrap}' ) && false !== strpos( $c, '.tp-news-bar > .tp-news-chips{min-inline-size:0}' );
 };
-tp441_mut( 'بند ۲ و ۵: /articles/ — جست‌وجو و مکان در یک خط (تراشه جا می‌دهد) و نمای فهرستی دو ستون (P5-D576) — جهش: فهرست یک ستون', $w53_arow, $w53_hcss,
-	str_replace( '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr))', '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:minmax(0,1fr)', $w53_hcss ) );
+tp441_mut( 'بند ۲ و ۵: /articles/ — جست‌وجو و مکان در یک خط (تراشه جا می‌دهد) و نمای فهرستی دو ستون (P5-D576 · قاعدۀ مشترک دستۀ 55) — جهش: تراشه‌ها جا نمی‌دهند', $w53_arow, $w53_hcss,
+	str_replace( '.tp-news-bar > .tp-news-chips{min-inline-size:0}', '.tp-news-bar > .tp-news-chips{min-inline-size:auto}', $w53_hcss ) );
+tp441_mut( 'بند ۲ و ۵: /articles/ — نمای فهرستی دو ستون از قاعدۀ مشترک news.css — جهش: فهرست یک ستون', function ( $n ) use ( $w53_rows2 ) {
+	return false !== strpos( $n, $w53_rows2 );
+}, $w53_ncss, str_replace( $w53_rows2, '.tp-page.tp-news-page .tp-news-grid.tp-news-grid--rows{grid-template-columns:minmax(0,1fr)', $w53_ncss ) );
 $w53_more = function ( $j ) use ( $w53_hcss ) {
 	/* دستۀ 55 بند ۴: ظرف [data-tp-filter-panel]؛ [data-tp-more] فقط دکمۀ «N مورد دیگر» است (assert-55 برخورد را می‌پاید) */
 	return false !== strpos( $j, "root.querySelector( '[data-tp-more-btn]' )" ) && false !== strpos( $j, "root.querySelector( '[data-tp-filter-panel]' )" )
@@ -112,12 +118,14 @@ tp441_mut( 'بند ۴: عکس مورد ← عکس نیا (نه نمونه) ← �
 
 /* ── بند ۵: فهرست دو ستونه ───────────────────────────────────────────── */
 $w53_rows = function ( $c ) {
-	/* دستۀ ۵۳ شمار ۲۱: گزینشگر /articles/ در همان قاعده گروه شد */
-	return (bool) preg_match( '/\.tp-hub-grid\.tp-news-grid--rows,\s*html \.tp-page\.tp-article-archive \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\);grid-auto-rows:1fr\}/', $c )
-		&& (bool) preg_match( '/@media \(max-width:720px\)\{\s*html \.tp-page\.tp-news-page \.tp-hub-grid\.tp-news-grid--rows,\s*html \.tp-page\.tp-article-archive \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:minmax\(0,1fr\)\}/', $c );
+	/* دستۀ ۵۳ شمار ۲۱: گزینشگر /articles/ در همان قاعده گروه شد.
+	   دستۀ 55 بند ۵: «هم‌قد» (grid-auto-rows:1fr) کنار رفت — ردیف تحریریه با بندانگشتی ثابت قدش را از محتوا می‌گیرد (هدف زیر ۱۴۰px)؛
+	   قاعده به news.css رفت و هر چهار ظرف (.tp-news-page) را می‌پوشاند؛ دو ستون دسکتاپ و یک ستون ≤۷۲۰ همان می‌ماند */
+	return (bool) preg_match( '/html \.tp-page\.tp-news-page \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\);grid-auto-rows:auto;/', $c )
+		&& (bool) preg_match( '/@media \(max-width:720px\)\{\s*html \.tp-page\.tp-news-page \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:minmax\(0,1fr\)\}/', $c );
 };
-tp441_mut( 'بند ۵: نمای فهرست — دسکتاپ ۲ ستون هم‌قد، موبایل ۱ ستون — جهش: دسکتاپ یک ستون', $w53_rows, $w53_hcss,
-	str_replace( '.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr}', '.tp-news-grid--rows{grid-template-columns:repeat(1,minmax(0,1fr));grid-auto-rows:1fr}', $w53_hcss ) );
+tp441_mut( 'بند ۵: نمای فهرست — دسکتاپ ۲ ستون، موبایل ۱ ستون (قاعدۀ مشترک news.css، دستۀ 55) — جهش: دسکتاپ یک ستون', $w53_rows, $w53_ncss,
+	str_replace( '.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;', '.tp-news-grid--rows{grid-template-columns:repeat(1,minmax(0,1fr));grid-auto-rows:auto;', $w53_ncss ) );
 
 /* ── بند ۶ و ۶ب: زیرعنوان «نوع · شهرستان · در استان» ─────────────────── */
 $w53_sub = function ( $s ) {

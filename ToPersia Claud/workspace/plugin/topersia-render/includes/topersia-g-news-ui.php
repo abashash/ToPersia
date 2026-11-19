@@ -258,6 +258,39 @@ if ( ! function_exists( 'topersia_g_news_sum' ) ) {
 	}
 }
 
+/** متن کوتاه ردیف فهرست — حداکثر $max نویسه، بریده در مرز واژه با «…» (CSS دو سطر می‌بندد؛ این وزن HTML را کم نگه می‌دارد). دستۀ 55 بند ۵ */
+if ( ! function_exists( 'topersia_g_list_clip' ) ) {
+	function topersia_g_list_clip( $text, $max = 180 ) {
+		$text = trim( (string) preg_replace( '/\s+/u', ' ', (string) $text ) );
+		if ( mb_strlen( $text ) <= $max ) {
+			return $text;
+		}
+		$cut = mb_substr( $text, 0, $max );
+		$sp  = mb_strrpos( $cut, ' ' );
+		/* نشانه‌گذاری پایانی با regex یونیکد (U+060C ویرگول · U+061B نقطه‌ویرگول) — rtrim بایتی است و نویسۀ چندبایتی را می‌شکند */
+		$cut = ( false !== $sp && $sp > $max / 2 ) ? mb_substr( $cut, 0, $sp ) : $cut;
+		return (string) preg_replace( '/[\s,.:\x{060C}\x{061B}]+$/u', '', $cut ) . '…';
+	}
+}
+
+/** سطر «موضوع · در مکان» ردیف فهرست خبر/مقاله — همان الگوی «نوع · در استان X» کاشی هاب؛ نمای شبکه پنهانش می‌کند (موضوع روی عکس است). دستۀ 55 بند ۵ */
+if ( ! function_exists( 'topersia_g_news_card_sub' ) ) {
+	function topersia_g_news_card_sub( $news_id ) {
+		$parts = array();
+		$term  = topersia_g_news_topic_of( $news_id );
+		if ( $term ) {
+			$parts[] = esc_html( $term->name );
+		}
+		$places = topersia_g_published( topersia_g_news_places( $news_id ) );
+		if ( $places ) {
+			$pid = (int) reset( $places );
+			/* translators: %s: نام کامل مکان (پیوند) */
+			$parts[] = sprintf( esc_html__( 'در %s', 'topersia' ), '<a href="' . esc_url( (string) get_permalink( $pid ) ) . '">' . esc_html( topersia_g_title( $pid ) ) . '</a>' );
+		}
+		return $parts ? '<p class="tp-news-card__sub">' . implode( '<span aria-hidden="true"> · </span>', $parts ) . '</p>' : '';
+	}
+}
+
 /** سطر فراداده: تاریخ به زبان صفحه · زمان مطالعه. */
 if ( ! function_exists( 'topersia_g_news_meta' ) ) {
 	function topersia_g_news_meta( $news_id, $class ) {

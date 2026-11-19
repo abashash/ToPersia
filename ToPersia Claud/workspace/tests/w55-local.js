@@ -7,6 +7,7 @@
  *   کلیک، تایپ، blur، Escape، لمس (۷۶۸ و ۳۹۰ با hasTouch). هر کنش سه نمونه (۵۰ · ۳۰۰ · ۹۰۰ms): فیلد در DOM و دیدنی.
  *   ظرف «فیلتر» موبایل (≤۷۲۰) فقط با کلیک بیرون یا Escape بسته می‌شود؛ فهرست مکان هم. کالیبراسیون: همان آشکارساز
  *   روی صفحه‌ای که ظرف را با کلیک برمی‌دارد (رفتار پیش از رفع) باید «ناپدید» بگوید، وگرنه سبزِ بقیه معنا ندارد.
+ * ▸ list (بند ۵) — نمای فهرستی همۀ هاب‌ها و فهرست‌های خبر/مقاله: بندانگشتی توکن، ستون، دو سطر خلاصه، بلندی ردیف (هدف دسکتاپ < ۱۴۰px).
  *
  * یک زنجیره در هر زمان؛ هم‌زمان هیچ درخواست دیگری به سایت. کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
  */
@@ -245,10 +246,107 @@ async function headerSearch( page, b, w, touch ) {
 	t( `${ tag } Escape ← منو بسته؛ فیلد در DOM با مقدار`, ! await navOpen( page ) && e.found && 'اصفهان' === e.value, ( e.found ? 'در DOM' : 'از DOM رفت' ) + ' · «' + e.value + '»' );
 }
 
+/* ── بند ۵: نمای فهرستی تحریریه ─────────────────────────────────────────────
+ * انتخاب «فهرست» در localStorage (کلید tp-news-view، همان news.js) پیش از بارگذاری. هر صفحه، هر پهنا:
+ *   بندانگشتی دقیقاً توکن (۱۲۰×۹۰ بالای ۷۲۰، ۸۸×۶۶ تا ۷۲۰) · دو ستون / یک ستون · خلاصه حداکثر دو سطر ·
+ *   بلندی هر ردیف (جایگاه تبلیغ جدا: نسبت ۴:۳ خودش را دارد) — هدف دسکتاپ زیر ۱۴۰px · بی سرریز افقی.
+ *   نمای شبکه (بی انتخاب): سطر «نوع · در X» و خلاصه پنهان. */
+const LIST_PAGES = [
+	{ k: 'هاب جاذبه‌ها', u: '/attractions/' },
+	{ k: 'هاب شهر', u: '/city/' },
+	{ k: 'هاب استان', u: '/province/' },
+	{ k: 'خبر', u: '/news/' },
+	{ k: 'مقاله', u: '/articles/' },
+	{ k: 'خبر استان اصفهان', u: '/province/isfahan/news/' },
+];
+const ROWS = [];   /* برای جدول پایانی گزارش */
+const MEASURE = () => {
+	const grid = document.querySelector( '[data-tp-news-items]' );
+	if ( ! grid ) { return null; }
+	const px = v => parseFloat( v ) || 0;
+	const cards = Array.prototype.filter.call( grid.children, c => c.matches( '.tp-news-card' ) && c.getBoundingClientRect().height > 0 );
+	const ads   = Array.prototype.filter.call( grid.children, c => ! c.matches( '.tp-news-card' ) && c.getBoundingClientRect().height > 0 );
+	const lines = el => { if ( ! el ) { return 0; } const cs = getComputedStyle( el ); return 'none' === cs.display ? 0 : Math.round( el.getBoundingClientRect().height / px( cs.lineHeight ) ); };
+	const hs = cards.map( c => Math.round( c.getBoundingClientRect().height * 10 ) / 10 );
+	const thumbs = cards.map( c => { const m = c.querySelector( '.tp-news-card__media' ); if ( ! m ) { return ''; } const r = m.getBoundingClientRect(); return Math.round( r.width ) + '×' + Math.round( r.height ); } );
+	const lefts = new Set( cards.slice( 0, 6 ).map( c => Math.round( c.getBoundingClientRect().left ) ) );
+	const sum = cards.map( c => lines( c.querySelector( '.tp-news-card__sum' ) ) );
+	const sub = cards.map( c => { const s = c.querySelector( '.tp-news-card__sub, .tp-hub-card__sub' ); return s && 'none' !== getComputedStyle( s ).display ? s.textContent.trim() : ''; } );
+	const newsSub = cards.filter( c => { const s = c.querySelector( '.tp-news-card__sub' ); return s && 'none' !== getComputedStyle( s ).display; } ).length;
+	const hubSum  = cards.filter( c => { const s = c.matches( '.tp-hub-card' ) && c.querySelector( '.tp-news-card__sum' ); return s && 'none' !== getComputedStyle( s ).display; } ).length;
+	/* بالای کارت (بندانگشتی + نشان «نمونۀ نمایشی» در پیش‌نمایش) نباید از خود بندانگشتی بلندتر شود */
+	const topOver = Math.max( 0, ...cards.map( c => { const t = c.querySelector( '.tp-news-card__top' ), m = c.querySelector( '.tp-news-card__media' ); return t && m ? Math.round( t.getBoundingClientRect().height - m.getBoundingClientRect().height ) : 0; } ) );
+	const demo = cards.filter( c => c.querySelector( '.tp-demo-badge' ) ).length;
+	const sorted = hs.slice().sort( ( a, b ) => a - b );
+	return {
+		rows: grid.classList.contains( 'tp-news-grid--rows' ), n: cards.length, ads: ads.length,
+		max: sorted.length ? sorted[ sorted.length - 1 ] : 0, med: sorted.length ? sorted[ Math.floor( sorted.length / 2 ) ] : 0, min: sorted.length ? sorted[0] : 0,
+		thumbs: Array.from( new Set( thumbs ) ), cols: lefts.size, sumMax: Math.max( 0, ...sum ), subN: sub.filter( Boolean ).length, subEx: sub.find( Boolean ) || '',
+		newsSub, hubSum, topOver, demo,
+		over: document.documentElement.scrollWidth - window.innerWidth,
+	};
+};
+async function list() {
+	console.log( '\nبند ۵ — نمای فهرستی تحریریه: بندانگشتی ثابت، دو ستون/یک ستون، بلندی ردیف\n' + '─'.repeat( 78 ) );
+	for ( const [ name, type ] of [ [ 'chromium', chromium ], [ 'firefox', firefox ] ] ) {
+		const br = await type.launch();
+		try {
+			/* نمای شبکه (پیش‌فرض): خلاصۀ کاشی هاب و سطر تازۀ «موضوع · در X» خبر پنهان؛ زیرعنوان کاشی هاب (دستۀ ۵۳ بند ۶) در شبکه هم هست */
+			{
+				const ctx = await br.newContext( { viewport: { width: 1440, height: 900 } } );
+				const page = await ctx.newPage();
+				for ( const u of [ '/attractions/', '/news/' ] ) {
+					await page.goto( BASE + u, { waitUntil: 'load', timeout: 60000 * X } );
+					const g = await page.evaluate( MEASURE );
+					t( `${ name } 1440 شبکه (پیش‌فرض) ${ u }: نه فهرست؛ خلاصۀ کاشی هاب و «موضوع · در X» خبر پنهان`, !! g && ! g.rows && 0 === g.hubSum && 0 === g.newsSub, g ? `rows=${ g.rows } خلاصۀ هاب=${ g.hubSum } زیرعنوان خبر=${ g.newsSub }` : 'بی شبکه' );
+				}
+				await ctx.close();
+			}
+			for ( const [ w, h ] of VIEWS ) {
+				const ctx = await br.newContext( { viewport: { width: w, height: h } } );
+				await ctx.addInitScript( () => { try { window.localStorage.setItem( 'tp-news-view', 'list' ); } catch ( e ) { /* بی localStorage */ } } );
+				const page = await ctx.newPage();
+				page.setDefaultTimeout( 15000 * X );
+				const wide = w > NARROW;
+				const TW = wide ? 120 : 88, TH = wide ? 90 : 66;
+				for ( const P of LIST_PAGES ) {
+					const tag = `${ name } ${ w } ${ P.k }:`;
+					try {
+						await page.goto( BASE + P.u, { waitUntil: 'load', timeout: 60000 * X } );
+						await page.waitForSelector( '.tp-news-grid--rows', { timeout: 15000 * X } );
+						await page.evaluate( () => document.fonts && document.fonts.ready );
+						const m = await page.evaluate( MEASURE );
+						ROWS.push( Object.assign( { b: name, w, k: P.k }, m ) );
+						const thumbOk = m.thumbs.length > 0 && m.thumbs.every( s => s === TW + '×' + TH );
+						t( `${ tag } فهرست با ${ m.n } ردیف؛ بندانگشتی ${ TW }×${ TH } (توکن)`, m.rows && m.n > 0 && thumbOk, m.thumbs.join( ' ' ) );
+						t( `${ tag } ${ wide ? 'دو ستون' : 'یک ستون' }`, m.cols === ( wide && m.n > 1 ? 2 : 1 ), 'ستون: ' + m.cols );
+						t( `${ tag } خلاصه حداکثر دو سطر`, m.sumMax <= 2, 'بیشینه ' + m.sumMax );
+						t( `${ tag } بالای ردیف = خود بندانگشتی (نشان «نمونۀ نمایشی» روی آن، نه زیرش)`, m.topOver <= 1, `اضافه ${ m.topOver }px · ${ m.demo } ردیف نمایشی` );
+						t( `${ tag } بی سرریز افقی`, m.over <= 0, m.over + 'px' );
+						if ( wide ) {
+							t( `${ tag } بلندی ردیف زیر ۱۴۰px (بیشینه ${ m.max } · میانه ${ m.med })`, m.max > 0 && m.max < 140, `کمینه ${ m.min }` + ( m.ads ? ` · ${ m.ads } جایگاه تبلیغ جدا` : '' ) );
+						} else {
+							console.log( `  ℹ️ ${ tag } بلندی ردیف بیشینه ${ m.max } · میانه ${ m.med } · کمینه ${ m.min }` );
+						}
+					} catch ( e ) {
+						t( `${ tag } بی خطای اجرا`, false, String( e.message ).split( '\n' )[0] );
+					}
+				}
+				await ctx.close();
+			}
+		} finally {
+			await br.close();
+		}
+	}
+	console.log( '\nجدول بلندی ردیف (px) — مرورگر · پهنا · صفحه · ردیف · بیشینه · میانه · کمینه · بندانگشتی · ستون · «نوع · در X» (نمونه)' );
+	ROWS.forEach( r => console.log( `  ${ r.b } · ${ r.w } · ${ r.k } · ${ r.n } · ${ r.max } · ${ r.med } · ${ r.min } · ${ r.thumbs.join( '/' ) } · ${ r.cols } · نمایشی ${ r.demo } · ${ r.subN }/${ r.n } «${ r.subEx.replace( /\s+/g, ' ' ).slice( 0, 60 ) }»` ) );
+}
+
 ( async () => {
 	const t0 = Date.now();
 	console.log( 'START w55-local ' + new Date().toISOString() );
 	if ( want( 'search' ) ) { await search(); }
+	if ( want( 'list' ) ) { await list(); }
 	console.log( '\n' + '─'.repeat( 78 ) + '\nدستۀ 55: ' + pass + ' گذشت · ' + fail + ' افتاد · ' + Math.round( ( Date.now() - t0 ) / 1000 ) + ' ثانیه' );
 	console.log( 'END w55-local' );
 	process.exit( fail ? 1 : 0 );

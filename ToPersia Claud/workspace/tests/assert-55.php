@@ -151,3 +151,73 @@ $w55_abort = function ( $j ) {
 };
 tp441_mut( 'بند ۴: پاک‌کردن فیلد هنگامی که درخواست پیشین در راه است آن را لغو می‌کند — جهش: بی لغو (کد پیشین)', $w55_abort, $w55_njs,
 	preg_replace( '/\} else if \( ctrl \) \{.*?busy\( false \);\s*\}/s', '}', $w55_njs, 1 ) );
+
+/* ── بند ۵: نمای فهرستی تحریریه — همۀ هاب‌ها و فهرست‌های خبر/مقاله ─────────
+ * رفتار و بلندی ردیف روی نسخۀ محلی: w55-local --only=list */
+$w55_tok  = $w55_read( $w55_r . 'assets/topersia-tokens.css' );
+$w55_ncss = $w55_read( $w55_r . 'assets/topersia-g-news.css' );
+$w55_hcss = $w55_read( $w55_r . 'assets/topersia-g-hub.css' );
+$w55_toks = function ( $c ) {
+	return (bool) preg_match( '/:root\{[^}]*--tp-list-thumb-w:120px;[^}]*--tp-list-thumb-h:90px;[^}]*--tp-list-gap:[^}]*--tp-list-pad:/s', $c )
+		&& (bool) preg_match( '/@media \(max-width:720px\)\{\s*:root\{[^}]*--tp-list-thumb-w:88px;[^}]*--tp-list-thumb-h:66px;/s', $c );
+};
+tp441_mut( 'بند ۵: توکن بندانگشتی ۱۲۰×۹۰ دسکتاپ و ۸۸×۶۶ زیر ۷۲۰، با فاصله‌های ردیف — جهش: موبایل همان ۱۲۰', $w55_toks, $w55_tok,
+	str_replace( '--tp-list-thumb-w:88px;', '--tp-list-thumb-w:120px;', $w55_tok ) );
+
+$w55_rows = function ( $c ) use ( $w55_hcss ) {
+	$r = 'html .tp-page.tp-news-page .tp-news-grid';
+	return false !== strpos( $c, $r . '.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;gap:var(--tp-list-gap)}' )
+		&& false !== strpos( $c, $r . '--rows .tp-news-card__media{inline-size:var(--tp-list-thumb-w);block-size:var(--tp-list-thumb-h);' )
+		&& false !== strpos( $c, $r . '--rows .tp-news-card{flex-direction:row;align-items:flex-start;gap:var(--tp-list-inner);padding:var(--tp-list-pad)}' )
+		&& false !== strpos( $c, $r . '--rows .tp-news-card__title a{-webkit-line-clamp:1}' )
+		&& (bool) preg_match( '/@media \(max-width:720px\)\{\s*html \.tp-page\.tp-news-page \.tp-news-grid\.tp-news-grid--rows\{grid-template-columns:minmax\(0,1fr\)\}/', $c )
+		/* ردیف در موبایل افقی می‌ماند (قاعدۀ ستونی ۶۰۰px پیشین برداشته شد) و هیچ لایۀ دیگری (هاب، مقاله) 1fr یا بندانگشتی جدا ندارد */
+		&& ! preg_match( '/--rows \.tp-news-card\{flex-direction:column\}/', $c )
+		&& ! preg_match( '/news-grid--rows[^{]*\{[^}]*grid-auto-rows:1fr/', $c . $w55_hcss )
+		&& ! preg_match( '/news-grid--rows \.tp-news-card__top\{flex:0 0 clamp/', $c . $w55_hcss );
+};
+tp441_mut( 'بند ۵: یک قاعدۀ ردیف برای همۀ فهرست‌ها — دو ستون، ≤۷۲۰ یک ستون، بندانگشتی از توکن، عنوان یک‌سطری، بی 1fr — جهش: بازگشت grid-auto-rows:1fr', $w55_rows, $w55_ncss,
+	str_replace( 'grid-auto-rows:auto;gap:var(--tp-list-gap)}', 'grid-auto-rows:1fr;gap:var(--tp-list-gap)}', $w55_ncss ) );
+
+/* نشان «نمونۀ نمایشی» (پیش‌نمایش) در فهرست روی بندانگشتی — اجرای اول w55 list: زیرش ردیف را ۱۴۲٫۴px می‌کرد */
+$w55_badge = function ( $c ) use ( $w55_tok ) {
+	return false !== strpos( $c, '.tp-news-grid--rows .tp-news-card__top{position:relative}' )
+		&& false !== strpos( $c, '.tp-news-grid--rows .tp-news-card__top .tp-demo-badge{position:absolute;inset-block-end:var(--tp-list-badge-inset);inset-inline-start:var(--tp-list-badge-inset);' )
+		&& false !== strpos( $w55_tok, '--tp-list-badge-inset:' );
+};
+tp441_mut( 'بند ۵: نشان «نمونۀ نمایشی» در نمای فهرست روی گوشۀ بندانگشتی (بلندی ردیف را نمی‌افزاید)، فاصله از توکن — جهش: نشان در جریان عادی', $w55_badge, $w55_ncss,
+	str_replace( '.tp-demo-badge{position:absolute;', '.tp-demo-badge{position:static;', $w55_ncss ) );
+
+/* سطر «نوع · در X» یک‌سطری و خلاصه حداکثر دو سطر (قاعدۀ پایۀ کارت) در هر دو کارت؛ خلاصۀ هاب فقط در فهرست */
+$w55_hubsrc = $w55_read( $w55_r . 'includes/topersia-g-hub.php' );
+$w55_nwsrc  = $w55_read( $w55_r . 'includes/topersia-g-news.php' );
+$w55_cards  = function ( $h ) use ( $w55_nwsrc, $w55_ncss ) {
+	return false !== strpos( $h, "topersia_g_list_clip( topersia_g_text( \$id, 'short_summary' ) )" )
+		&& false !== strpos( $h, "'<p class=\"tp-news-card__sum\">' . esc_html( \$sum ) . '</p>'" )
+		&& false !== strpos( $w55_nwsrc, "topersia_g_news_card_sub( \$news_id )" )
+		&& false !== strpos( $w55_ncss, '.tp-news-card__sum{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;' )
+		&& false !== strpos( $w55_ncss, ':is(.tp-hub-card__sub,.tp-news-card__sub){display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;' )
+		&& false !== strpos( $w55_ncss, '.tp-news-grid:not(.tp-news-grid--rows) :is(.tp-news-card__sub,.tp-hub-card .tp-news-card__sum){display:none}' );
+};
+tp441_mut( 'بند ۵: کاشی هاب «خلاصۀ کوتاه» (دروازۀ زبان، بریده) و کارت خبر «موضوع · در مکان» دارد؛ دو سطر خلاصه، یک سطر زیرعنوان — جهش: خواندن مستقیم متا (دور زدن دروازه)', $w55_cards, $w55_hubsrc,
+	str_replace( "topersia_g_text( \$id, 'short_summary' )", "get_post_meta( \$id, 'short_summary', true )", $w55_hubsrc ) );
+
+/* بریدن متن ردیف: کوتاه دست نمی‌خورد؛ بلند ≤ سقف + «…»، در مرز واژه */
+$w55_clip = function ( callable $f ) {
+	$long = str_repeat( 'واژۀ آزمون ', 40 );
+	$out  = (string) $f( $long, 180 );
+	return 'متن کوتاه' === $f( 'متن   کوتاه', 180 )
+		&& '…' === mb_substr( $out, -1 ) && mb_strlen( $out ) <= 181
+		&& ' ' !== mb_substr( $out, -2, 1 ) && 0 === mb_strpos( $long, mb_substr( $out, 0, -1 ) );
+};
+/* news-ui در این فرایند بار نمی‌شود: بدنۀ خودِ تابع از سورس بیرون کشیده و به یک بستار تبدیل می‌شود (همان کد، نه رونوشت) */
+$w55_clipfn = function_exists( 'topersia_g_list_clip' ) ? 'topersia_g_list_clip' : null;
+if ( null === $w55_clipfn ) {
+	$w55_nui = $w55_read( $w55_r . 'includes/topersia-g-news-ui.php' );
+	if ( preg_match( '/function topersia_g_list_clip\( \$text, \$max = 180 \) \{\n(.*?)\n\t\}\n\}/s', $w55_nui, $w55_m ) ) {
+		$w55_clipfn = eval( 'return function ( $text, $max = 180 ) {' . $w55_m[1] . '};' );   // phpcs:ignore Squiz.PHP.Eval
+	}
+}
+tp441_mut( 'بند ۵: topersia_g_list_clip — متن کوتاه بی تغییر (فاصله‌ها یکی)، بلند حداکثر ۱۸۰ نویسه + «…» در مرز واژه — جهش: بریدن خام بی «…»', $w55_clip,
+	$w55_clipfn ? $w55_clipfn : function () { return ''; },
+	function ( $t, $m ) { return mb_substr( $t, 0, $m ); } );

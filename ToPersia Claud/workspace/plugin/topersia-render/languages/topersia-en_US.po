@@ -1622,7 +1622,7 @@ msgstr "Internet domain"
 msgid "دانشمند"
 msgstr "Scholar"
 
-#: includes/topersia-g-hub.php
+#: includes/topersia-g-news-ui.php
 #, php-format
 msgid "در %s"
 msgstr "in %s"

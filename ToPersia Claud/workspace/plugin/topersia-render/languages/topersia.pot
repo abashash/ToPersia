@@ -1621,7 +1621,7 @@ msgstr ""
 msgid "دانشمند"
 msgstr ""
 
-#: includes/topersia-g-hub.php
+#: includes/topersia-g-news-ui.php
 #, php-format
 msgid "در %s"
 msgstr ""
