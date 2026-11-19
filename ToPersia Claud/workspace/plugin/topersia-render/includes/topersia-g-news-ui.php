@@ -764,6 +764,22 @@ if ( ! function_exists( 'topersia_frag_gate' ) ) {
 	}
 }
 
+/** امضای کد سازندۀ قطعه — نسخۀ افزونه + زمان و اندازۀ قالب‌ها و includeهای فهرست (stat ارزان؛ بی هش محتوا در هر درخواست). */
+if ( ! function_exists( 'topersia_frag_code_sig' ) ) {
+	function topersia_frag_code_sig() {
+		if ( ! function_exists( 'topersia_render_path' ) || '' === (string) topersia_render_path() ) {
+			return '';
+		}
+		$base = topersia_render_path();
+		$sig  = defined( 'TOPERSIA_RENDER_VERSION' ) ? TOPERSIA_RENDER_VERSION : '';
+		foreach ( array( 'templates/hub-archive.php', 'templates/news-archive.php', 'templates/article-archive.php', 'templates/news-list.php', 'includes/topersia-g-hub.php', 'includes/topersia-g-news-ui.php', 'includes/topersia-g-news.php' ) as $rel ) {
+			$file = $base . $rel;
+			$sig .= '|' . ( is_file( $file ) ? filemtime( $file ) . ':' . filesize( $file ) : '-' );
+		}
+		return md5( $sig );
+	}
+}
+
 /** پاک‌کردن همۀ قطعه‌های کش‌شده (جز index.html). */
 if ( ! function_exists( 'topersia_frag_purge' ) ) {
 	function topersia_frag_purge() {
@@ -1009,6 +1025,16 @@ if ( function_exists( 'add_action' ) ) {
 			topersia_frag_gate();
 		}
 	}, 50 );
+	/* دستۀ 55 بند ۶: قطعۀ کش‌شده نشانه‌گذاری کد پیشین را دارد و با ذخیرۀ محتوا فقط باطل می‌شد، نه با استقرار کد تازه —
+	   امضای پرونده‌های سازندۀ قطعه (topersia_frag_code_sig) عوض شد ← یک بار همه پاک و گرم‌کردن در صف (همان topersia_frag_purge) */
+	add_action( 'init', function () {
+		$sig = topersia_frag_code_sig();
+		if ( '' === $sig || $sig === (string) get_option( 'topersia_frag_ver', '' ) ) {
+			return;
+		}
+		update_option( 'topersia_frag_ver', $sig, true );
+		topersia_frag_purge();
+	}, 51 );
 
 	add_action( 'save_post', $topersia_frag_post, 99 );
 	add_action( 'before_delete_post', $topersia_frag_post, 99 );

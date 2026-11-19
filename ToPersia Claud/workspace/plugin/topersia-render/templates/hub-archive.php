@@ -122,6 +122,12 @@ if ( $tp_part ) {
 						<p class="tp-lead tp-news-empty" tabindex="-1" data-tp-news-focus><?php echo esc_html( $tp_on ? __( 'موردی با این پالایش نیست.', 'topersia' ) : __( 'هنوز موردی منتشر نشده است.', 'topersia' ) ); ?></p>
 					<?php endif; ?>
 
+					<?php
+					/* دستۀ 55 بند ۶: «نمایش بیشتر» = پیوند واقعی صفحۀ بعد (بی JS و برای خزنده همان صفحۀ N)؛ news.js کاشی‌های آن را به همین شبکه می‌افزاید */
+					if ( $tp_tiles && $tp_paged < $tp_pages ) :
+						?>
+						<p class="tp-hub-loadmore" data-tp-load-more-box><a class="tp-hub-loadmore__a" href="<?php echo esc_url( topersia_g_hub_link( $tp_paged + 1 ) ); ?>" rel="next" data-tp-load-more data-tp-load-msg="<?php echo esc_attr__( 'موارد بیشتری به فهرست افزوده شد', 'topersia' ); ?>"><?php echo esc_html__( 'نمایش بیشتر', 'topersia' ); ?></a></p>
+					<?php endif; ?>
 					<?php echo topersia_g_news_pages( $tp_pages, $tp_paged, 'topersia_g_hub_link', __( 'صفحه‌های فهرست', 'topersia' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</div>
 			</section>

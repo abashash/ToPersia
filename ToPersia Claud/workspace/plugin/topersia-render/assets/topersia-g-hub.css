@@ -37,3 +37,12 @@ html .tp-page.tp-news-page .tp-hub-card .tp-news-card__media--icon svg{inline-si
   html .tp-page.tp-news-page .tp-hub-more{flex:1 1 100%}
   html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{flex:1 1 100%}
 }
+
+/* ══ دستۀ 55 بند ۶ — «نمایش بیشتر»: پیوند واقعی صفحۀ بعد (rel=next)؛ با JS کاشی‌ها به همین شبکه افزوده می‌شوند.
+   ظاهر کاشی (P5-D245): پس‌زمینه، قاب و شعاع از --tp-tile-*، متن --tp-primary-text، هدف لمسی ۴۴px. فاصله از --tp-list-gap. */
+html .tp-page.tp-news-page .tp-hub-loadmore{display:flex;justify-content:center;margin:calc(2 * var(--tp-list-gap)) 0 0}
+html .tp-page.tp-news-page .tp-hub-loadmore__a{display:inline-flex;align-items:center;justify-content:center;min-block-size:44px;min-inline-size:min(100%,240px);padding:0 calc(2 * var(--tp-list-gap));
+  border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius,12px);background:var(--tp-tile-bg);color:var(--tp-primary-text);font-weight:700;text-decoration:none}
+html .tp-page.tp-news-page .tp-hub-loadmore__a:hover{background:var(--tp-tile-hover-bg);color:var(--tp-primary-text)}
+html .tp-page.tp-news-page .tp-hub-loadmore__a:focus-visible{outline:2px solid var(--tp-primary-text);outline-offset:2px}
+html .tp-page.tp-news-page .tp-hub-loadmore__a[aria-busy="true"]{cursor:progress;pointer-events:none}

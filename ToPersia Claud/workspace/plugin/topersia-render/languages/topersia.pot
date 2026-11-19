@@ -3554,6 +3554,10 @@ msgstr ""
 msgid "مواد اولیه"
 msgstr ""
 
+#: templates/hub-archive.php
+msgid "موارد بیشتری به فهرست افزوده شد"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "موتورسواری و اتومبیل‌رانی"
 msgstr ""
@@ -3948,6 +3952,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "نمایش اطلاعات نشانگر"
+msgstr ""
+
+#: templates/hub-archive.php
+msgid "نمایش بیشتر"
 msgstr ""
 
 #: topersia-render.php

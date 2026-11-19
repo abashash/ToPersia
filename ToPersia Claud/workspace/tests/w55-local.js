@@ -342,11 +342,169 @@ async function list() {
 	ROWS.forEach( r => console.log( `  ${ r.b } · ${ r.w } · ${ r.k } · ${ r.n } · ${ r.max } · ${ r.med } · ${ r.min } · ${ r.thumbs.join( '/' ) } · ${ r.cols } · نمایشی ${ r.demo } · ${ r.subN }/${ r.n } «${ r.subEx.replace( /\s+/g, ' ' ).slice( 0, 60 ) }»` ) );
 }
 
+/* ── بند ۶: شمار هاب — گیت ─────────────────────────────────────────────────────
+ * HTTP (مهمان): /province/ همۀ موارد بی صفحه‌بندی و بی «نمایش بیشتر»؛ /province/page/2/ ← ۳۰۱ /province/؛
+ *   ?page=N ← ۳۰۱ /…/page/N/ با پالایش جاری؛ هاب‌های دیگر ۴۸ کاشی + <a href rel=next> به صفحۀ بعد؛ صفحۀ آخر بی دکمه.
+ * مرورگر: کلیک ← ۴۸ کارت تازه در همان شبکه، جایگاه تبلیغ تازه نه، فوکوس روی نخستین کارت تازه، اعلان زنده؛ Enter هم. */
+const PER = 48;
+const MORE_HUBS = [ { k: 'هاب شهر', u: '/city/' }, { k: 'هاب جاذبه‌ها', u: '/attractions/' } ];
+const tilesIn = html => ( html.match( /<article class="tp-news-card tp-hub-card">/g ) || [] ).length;
+const moreHref = html => { const m = html.match( /<a class="tp-hub-loadmore__a" href="([^"]+)" rel="next" data-tp-load-more/ ); return m ? m[1].replace( /&#038;|&amp;/g, '&' ) : ''; };
+const lastPage = html => { const n = ( html.match( /<nav class="tp-news-pages"[^>]*>(.*?)<\/nav>/s ) || [ '', '' ] )[1].match( /\/page\/(\d+)\//g ) || []; return n.reduce( ( a, s ) => Math.max( a, +s.replace( /\D/g, '' ) ), 1 ); };
+async function more() {
+	console.log( '\nبند ۶ — شمار هاب: استان همه، بقیه ۴۸ با «نمایش بیشتر» خزنده‌پذیر\n' + '─'.repeat( 78 ) );
+	{
+		const r = await get( '/province/' ), h = r.body.toString( 'utf8' ), n = tilesIn( h );
+		/* کل از data-tp-news-msg («نتیجه: ۳۱»، رقم فارسی) — همان found_posts کوئری */
+		const raw = ( h.match( /data-tp-news-msg="[^"]*?([۰-۹0-9]+)"/ ) || [ '', '' ] )[1];
+		const total = raw ? +raw.replace( /[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf( d ) ) : -1;
+		t( `هاب استان: همۀ موارد در یک صفحه (${ n } کاشی از ${ total }، ۳۱ استان)`, 200 === r.code && n >= 31 && n === total, `کاشی ${ n } · کل ${ total }` );
+		t( 'هاب استان: بی صفحه‌بندی و بی «نمایش بیشتر»', ! /class="tp-news-pages"/.test( h ) && ! /data-tp-load-more/.test( h ) );
+		const p2 = await get( '/province/page/2/' );
+		t( 'هاب استان: /province/page/2/ ← ۳۰۱ /province/ (بی نشانی دوم برای همان فهرست)', 301 === p2.code && /\/province\/$/.test( String( p2.headers.location || '' ) ), `${ p2.code } ${ p2.headers.location || '' }` );
+	}
+	for ( const H of MORE_HUBS ) {
+		const r = await get( H.u ), h = r.body.toString( 'utf8' ), n = tilesIn( h ), href = moreHref( h ), last = lastPage( h );
+		t( `${ H.k }: صفحۀ ۱ دقیقاً ${ PER } کاشی`, 200 === r.code && PER === n, String( n ) );
+		t( `${ H.k }: «نمایش بیشتر» = <a href> واقعی صفحۀ ۲ با rel=next؛ صفحه‌بندی پیوندی هم هست`, new RegExp( H.u.replace( /\//g, '\\/' ) + 'page\\/2\\/$' ).test( href ) && last >= 2, `${ href } · آخرین ${ last }` );
+		const q = await get( H.u + '?page=2&tp_q=' + encodeURIComponent( 'ا' ) );
+		const loc = decodeURIComponent( String( q.headers.location || '' ) );
+		t( `${ H.k }: ?page=2 ← ۳۰۱ ${ H.u }page/2/ با پالایش جاری`, 301 === q.code && loc.includes( H.u + 'page/2/' ) && loc.includes( 'tp_q=ا' ), `${ q.code } ${ loc }` );
+		const l = await get( H.u + 'page/' + last + '/' ), lh = l.body.toString( 'utf8' ), ln = tilesIn( lh );
+		t( `${ H.k }: صفحۀ آخر (${ last }) ۲۰۰، ۱ تا ${ PER } کاشی، بی «نمایش بیشتر»`, 200 === l.code && ln >= 1 && ln <= PER && ! /data-tp-load-more/.test( lh ), `${ l.code } · ${ ln } کاشی` );
+	}
+	const COUNT = () => { const i = document.querySelector( '[data-tp-news-items]' ); return i ? { cards: i.querySelectorAll( ':scope > .tp-news-card' ).length, other: i.querySelectorAll( ':scope > :not(.tp-news-card)' ).length } : { cards: -1, other: -1 }; };
+	for ( const [ name, type ] of [ [ 'chromium', chromium ], [ 'firefox', firefox ] ] ) {
+		const br = await type.launch();
+		try {
+			for ( const [ w, h ] of VIEWS ) {
+				const ctx = await br.newContext( { viewport: { width: w, height: h } } );
+				const page = await ctx.newPage();
+				page.setDefaultTimeout( 30000 * X );
+				const H = MORE_HUBS[0], tag = `${ name } ${ w } ${ H.k }:`;
+				try {
+					await page.goto( BASE + H.u, { waitUntil: 'load', timeout: 90000 * X } );
+					const a0 = await page.evaluate( COUNT );
+					const btn = await page.evaluate( () => { const a = document.querySelector( 'a[data-tp-load-more]' ); if ( ! a ) { return null; } a.scrollIntoView( { block: 'center', behavior: 'instant' } ); const r = a.getBoundingClientRect(); return { h: r.height, href: a.getAttribute( 'href' ) }; } );
+					t( `${ tag } «نمایش بیشتر» دیدنی، هدف لمسی ≥ ۴۴px`, !! btn && btn.h >= 44, btn ? btn.h + 'px' : 'نیست' );
+					if ( ! btn ) { continue; }
+					if ( 1440 === w ) {
+						await page.focus( 'a[data-tp-load-more]' );
+						await page.keyboard.press( 'Enter' );
+					} else {
+						await page.click( 'a[data-tp-load-more]' );
+					}
+					await page.waitForFunction( n => { const i = document.querySelector( '[data-tp-news-items]' ); return i && i.querySelectorAll( ':scope > .tp-news-card' ).length > n; }, a0.cards, { timeout: 60000 * X } );
+					await page.waitForFunction( () => ! document.querySelector( 'a[data-tp-load-more][aria-busy="true"]' ) );
+					const a1 = await page.evaluate( COUNT );
+					const st = await page.evaluate( () => {
+						const i = document.querySelector( '[data-tp-news-items]' ), cards = i.querySelectorAll( ':scope > .tp-news-card' );
+						const ae = document.activeElement, nx = document.querySelector( 'a[data-tp-load-more]' );
+						const live = document.querySelector( '[data-tp-news-live]' );
+						return { url: location.pathname, focusIdx: Array.prototype.indexOf.call( cards, ae && ae.closest ? ae.closest( '.tp-news-card' ) : null ), live: live ? live.textContent.trim() : '', next: nx ? nx.getAttribute( 'href' ) : '', over: document.documentElement.scrollWidth - window.innerWidth,
+							ids: Array.prototype.map.call( cards, c => ( c.querySelector( '.tp-news-card__title a' ) || {} ).href || '' ) };
+					} );
+					const uniq = new Set( st.ids ).size;
+					t( `${ tag } ${ 1440 === w ? 'Enter' : 'کلیک' } ← ${ a1.cards - a0.cards } کارت تازه در همان شبکه (${ a0.cards }→${ a1.cards })، بی تکرار`, a0.cards === PER && a1.cards > a0.cards && a1.cards - a0.cards <= PER && uniq === a1.cards, `یکتا ${ uniq }` );
+					t( `${ tag } جایگاه تبلیغ میان‌فهرستی صفحۀ بعد افزوده نشد`, a1.other === a0.other, `${ a0.other }→${ a1.other }` );
+					t( `${ tag } فوکوس روی نخستین کارت تازه؛ اعلان زنده؛ نشانی صفحه همان`, st.focusIdx === a0.cards && '' !== st.live && st.url === new URL( BASE + H.u ).pathname, `فوکوس ${ st.focusIdx } · «${ st.live }» · ${ st.url }` );
+					t( `${ tag } دکمه به صفحۀ بعدی رفت یا (صفحۀ آخر) برداشته شد؛ بی سرریز افقی`, ( '' === st.next || /\/page\/3\/$/.test( st.next ) ) && st.over <= 0, `${ st.next || 'برداشته شد' } · سرریز ${ st.over }` );
+				} catch ( e ) {
+					t( `${ tag } بی خطای اجرا`, false, String( e.message ).split( '\n' )[0] );
+				} finally {
+					await ctx.close();
+				}
+			}
+		} finally {
+			await br.close();
+		}
+	}
+}
+
+/* ── بند ۶: وزن HTML · زمان قطعه · LCP (پیش/پس) — فقط گزارش، حکم نه ────────────────
+ * node tests/w55-local.js --only=perf [--label=پیش]
+ *   وزن   GET مهمان بی فشرده‌سازی (Accept-Encoding: identity): بایت HTML و gzip همان (zlib) · شمار کاشی صفحۀ ۱
+ *   قطعه  ?tp_partial=1 از وردپرس (سه بار، میانه) و همان از مسیر سبک fragment.php (کش پرونده‌ای؛ ۲۰۴ = نبود)
+ *   LCP   PerformanceObserver (buffered) پس از load + ۱٫۵s، سه بار میانه — کروم و فایرفاکس × ۱۴۴۰ و ۳۹۰ */
+const PERF_PAGES = [
+	{ k: 'هاب استان', u: '/province/' },
+	{ k: 'هاب شهر', u: '/city/' },
+	{ k: 'هاب جاذبه‌ها', u: '/attractions/' },
+];
+const http = require( 'http' );
+const zlib = require( 'zlib' );
+const get = ( path, headers ) => new Promise( ( ok, no ) => {
+	const t = process.hrtime.bigint();
+	const r = http.get( { host: '127.0.0.1', port: 80, path, headers: Object.assign( { Host: ENV.host, 'Accept-Encoding': 'identity' }, headers || {} ) }, res => {
+		const parts = [];
+		res.on( 'data', c => parts.push( c ) );
+		res.on( 'end', () => ok( { code: res.statusCode, headers: res.headers, body: Buffer.concat( parts ), ms: Number( process.hrtime.bigint() - t ) / 1e6 } ) );
+	} );
+	r.on( 'error', no );
+	r.setTimeout( 90000 * X, () => r.destroy( new Error( 'timeout' ) ) );
+} );
+const med = a => { const s = a.slice().sort( ( x, y ) => x - y ); return s.length ? s[ Math.floor( s.length / 2 ) ] : 0; };
+async function perf() {
+	const label = ( process.argv.find( a => a.startsWith( '--label=' ) ) || '--label=' ).slice( 8 );
+	console.log( `\nبند ۶ — وزن HTML، زمان قطعه، LCP ${ label ? '(' + label + ')' : '' }\n` + '─'.repeat( 78 ) );
+	const fragPath = '/geo/wp-content/plugins/topersia-render/fragment.php';
+	for ( const P of PERF_PAGES ) {
+		const full = await get( P.u );
+		const html = full.body.toString( 'utf8' );
+		const tiles = ( html.match( /<article class="tp-news-card tp-hub-card">/g ) || [] ).length;
+		const pager = /class="tp-news-pages"/.test( html ), more = /data-tp-load-more/.test( html );
+		t( `${ P.k }: صفحۀ کامل ۲۰۰`, 200 === full.code, String( full.code ) );
+		const wp = [], fr = [];
+		let partBytes = 0, fragCode = 0;
+		for ( let i = 0; i < 3; i++ ) {
+			const p = await get( P.u + '?tp_partial=1' );
+			wp.push( p.ms );
+			partBytes = p.body.length;
+			const f = await get( fragPath + '?u=' + encodeURIComponent( P.u ) );
+			fr.push( f.ms );
+			fragCode = f.code;
+		}
+		console.log( `  📏 ${ label } · ${ P.k } · HTML ${ ( full.body.length / 1024 ).toFixed( 1 ) }KB (gzip ${ ( zlib.gzipSync( full.body ).length / 1024 ).toFixed( 1 ) }KB) · کاشی ${ tiles } · صفحه‌بندی ${ pager ? 'دارد' : 'ندارد' } · «نمایش بیشتر» ${ more ? 'دارد' : 'ندارد' } · قطعۀ وردپرس ${ ( partBytes / 1024 ).toFixed( 1 ) }KB میانۀ ${ Math.round( med( wp ) ) }ms · مسیر سبک ${ fragCode } میانۀ ${ Math.round( med( fr ) ) }ms` );
+	}
+	for ( const [ name, type ] of [ [ 'chromium', chromium ], [ 'firefox', firefox ] ] ) {
+		const br = await type.launch();
+		try {
+			for ( const [ w, h ] of [ [ 1440, 900 ], [ 390, 844 ] ] ) {
+				for ( const P of PERF_PAGES ) {
+					const lcp = [];
+					let el = '';
+					for ( let i = 0; i < 3; i++ ) {
+						const ctx = await br.newContext( { viewport: { width: w, height: h } } );
+						await ctx.addInitScript( () => {
+							window.__tpLcp = { t: 0, el: '' };
+							try {
+								new PerformanceObserver( l => { l.getEntries().forEach( e => { window.__tpLcp = { t: e.startTime, el: e.element ? ( e.element.tagName + '.' + String( e.element.className || '' ).split( ' ' )[0] ) : e.url || '' }; } ); } ).observe( { type: 'largest-contentful-paint', buffered: true } );
+							} catch ( e ) { /* مرورگر LCP ندارد */ }
+						} );
+						const page = await ctx.newPage();
+						await page.goto( BASE + P.u, { waitUntil: 'load', timeout: 90000 * X } );
+						await wait( 1500 );
+						const r = await page.evaluate( () => window.__tpLcp );
+						lcp.push( r.t );
+						el = r.el;
+						await ctx.close();
+					}
+					console.log( `  ⏱️ ${ label } · ${ name } ${ w } · ${ P.k } · LCP میانۀ ${ Math.round( med( lcp ) ) }ms (${ lcp.map( Math.round ).join( '/' ) }) · ${ el }` );
+				}
+			}
+		} finally {
+			await br.close();
+		}
+	}
+}
+
 ( async () => {
 	const t0 = Date.now();
 	console.log( 'START w55-local ' + new Date().toISOString() );
 	if ( want( 'search' ) ) { await search(); }
 	if ( want( 'list' ) ) { await list(); }
+	if ( want( 'more' ) ) { await more(); }
+	if ( ONLY.includes( 'perf' ) ) { await perf(); }   /* فقط با درخواست صریح — سنجش است، نه گیت */
 	console.log( '\n' + '─'.repeat( 78 ) + '\nدستۀ 55: ' + pass + ' گذشت · ' + fail + ' افتاد · ' + Math.round( ( Date.now() - t0 ) / 1000 ) + ' ثانیه' );
 	console.log( 'END w55-local' );
 	process.exit( fail ? 1 : 0 );

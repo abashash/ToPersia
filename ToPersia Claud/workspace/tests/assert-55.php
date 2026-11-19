@@ -221,3 +221,67 @@ if ( null === $w55_clipfn ) {
 tp441_mut( 'بند ۵: topersia_g_list_clip — متن کوتاه بی تغییر (فاصله‌ها یکی)، بلند حداکثر ۱۸۰ نویسه + «…» در مرز واژه — جهش: بریدن خام بی «…»', $w55_clip,
 	$w55_clipfn ? $w55_clipfn : function () { return ''; },
 	function ( $t, $m ) { return mb_substr( $t, 0, $m ); } );
+
+/* ── بند ۶: شمار هاب — استان همه (۳۱) بی صفحه‌بندی؛ بقیه ۴۸ با «نمایش بیشتر» = پیوند واقعی صفحۀ بعد ──
+ * hub.php در این فرایند بار نمی‌شود: تابع و ثابت‌ها از سورس خوانده و همان کد اجرا می‌شود (نه رونوشت). */
+$w55_hub_per = function ( $src ) {
+	if ( ! preg_match( "/define\( 'TOPERSIA_HUB_PER_PAGE', (\d+) \)/", $src, $pp ) || ! preg_match( "/define\( 'TOPERSIA_HUB_ALL_TYPES', '([a-z_,]+)' \)/", $src, $at )
+		|| ! preg_match( '/function topersia_g_hub_per_page\( \$type \) \{\n(.*?)\n\t\}\n\}/s', $src, $fb ) ) {
+		return null;
+	}
+	$body = str_replace( array( 'TOPERSIA_HUB_ALL_TYPES', 'TOPERSIA_HUB_PER_PAGE' ), array( var_export( $at[1], true ), $pp[1] ), $fb[1] );
+	return eval( 'return function ( $type ) {' . $body . '};' );   // phpcs:ignore Squiz.PHP.Eval
+};
+$w55_per = function ( $src ) use ( $w55_hub_per ) {
+	$f = $w55_hub_per( $src );
+	return $f && -1 === $f( 'tp_province' ) && 48 === $f( 'tp_city' ) && 48 === $f( 'tp_attraction' ) && 48 === $f( '' )
+		&& false !== strpos( $src, "\$q->set( 'posts_per_page', topersia_g_hub_per_page( '' === \$seas && '' === \$grp && \$q->is_post_type_archive() ? \$pt : '' ) );" );
+};
+tp441_mut( 'بند ۶: هاب استان همۀ موارد (-1، بی صفحه‌بندی)؛ هر هاب دیگر (نوع، گروه، فصل، برچسب) ۴۸ در صفحه؛ کوئری اصلی از همان تابع — جهش: استان هم ۴۸', $w55_per, $w55_hubsrc,
+	str_replace( "define( 'TOPERSIA_HUB_ALL_TYPES', 'tp_province' )", "define( 'TOPERSIA_HUB_ALL_TYPES', 'tp_none' )", $w55_hubsrc ) );
+
+$w55_redir = function ( $src ) {
+	return false !== strpos( $src, "add_action( 'template_redirect', function () {\n\t\tif ( ! topersia_g_hub_is() || topersia_g_news_partial() ) {\n\t\t\treturn;\n\t\t}\n\t\t\$want = isset( \$_GET['page'] ) && is_scalar( \$_GET['page'] ) ? absint( wp_unslash( \$_GET['page'] ) ) : 0;" )
+		&& false !== strpos( $src, "\$to   = \$all ? 1 : ( \$want ? \$want : \$now );" )
+		&& false !== strpos( $src, "if ( \$want || ( \$all && \$now > 1 ) ) {\n\t\t\twp_safe_redirect( topersia_g_hub_link( \$to ), 301 );\n\t\t\texit;" );
+};
+tp441_mut( 'بند ۶: ?page=N ← ۳۰۱ به نشانی خزنده‌پذیر /page/N/ با پالایش جاری؛ هاب استان /page/N/ ← صفحۀ ۱ (بی نشانی دوم)؛ درخواست قطعه دست نمی‌خورد — جهش: /province/page/2/ بی بازگردانی', $w55_redir, $w55_hubsrc,
+	str_replace( 'if ( $want || ( $all && $now > 1 ) ) {', 'if ( $want ) {', $w55_hubsrc ) );
+
+$w55_more = function ( $t ) {
+	$a = strpos( $t, 'if ( $tp_tiles && $tp_paged < $tp_pages ) :' );
+	$b = strpos( $t, '<a class="tp-hub-loadmore__a" href="<?php echo esc_url( topersia_g_hub_link( $tp_paged + 1 ) ); ?>" rel="next" data-tp-load-more data-tp-load-msg="<?php echo esc_attr__( \'موارد بیشتری به فهرست افزوده شد\', \'topersia\' ); ?>"><?php echo esc_html__( \'نمایش بیشتر\', \'topersia\' ); ?></a>' );
+	$c = strpos( $t, "topersia_g_news_pages( \$tp_pages, \$tp_paged, 'topersia_g_hub_link'" );
+	return false !== $a && false !== $b && false !== $c && $a < $b && $b < $c && false !== strpos( $t, 'data-tp-load-more-box' );
+};
+tp441_mut( 'بند ۶: «نمایش بیشتر» یک <a href> واقعی به صفحۀ بعد با rel="next" (بی JS و برای خزنده همان صفحۀ N)، فقط وقتی صفحۀ بعد هست، و صفحه‌بندی پیوندی هم می‌ماند — جهش: دکمۀ بی href', $w55_more, $w55_hub,
+	str_replace( '<a class="tp-hub-loadmore__a" href="<?php echo esc_url( topersia_g_hub_link( $tp_paged + 1 ) ); ?>" rel="next"', '<a class="tp-hub-loadmore__a" role="button"', $w55_hub ) );
+
+$w55_lm_js = function ( $j ) {
+	return 1 === preg_match( "/function loadMore\( a \) \{.*?getPart\( url \).*?if \( n\.matches\( '\.tp-news-card' \) \) \{\n\t+var c = items\.appendChild\( document\.importNode\( n, true \) \);.*?\[ '\[data-tp-load-more-box\]', '\.tp-news-pages' \]\.forEach.*?live\.textContent = a\.getAttribute\( 'data-tp-load-msg' \).*?\.catch\( function \(\) \{\n\t+window\.location\.assign\( url\.href \);/s", $j )
+		&& false !== strpos( $j, "a.hasAttribute( 'data-tp-load-more' ) && same( new URL( a.href, window.location.href ) )" );
+};
+tp441_mut( 'بند ۶: news.js «نمایش بیشتر» کارت‌های صفحۀ بعد را از مسیر قطعه به همان شبکه می‌افزاید (جایگاه تبلیغ میان‌فهرستی صفحۀ بعد نه)، دکمه و صفحه‌بندی را با نسخۀ تازه عوض می‌کند، اعلان زنده دارد و با خطا به همان نشانی می‌رود — جهش: افزودن هر فرزند', $w55_lm_js, $w55_njs,
+	str_replace( "if ( n.matches( '.tp-news-card' ) ) {", "if ( n.nodeType === 1 ) {", $w55_njs ) );
+
+$w55_lm_css = function ( $c ) {
+	if ( ! preg_match( '/\.tp-hub-loadmore__a\{([^}]*)\}/', $c, $m ) ) {
+		return false;
+	}
+	return false !== strpos( $m[1], 'min-block-size:44px' ) && false !== strpos( $m[1], 'border:1px solid var(--tp-tile-border)' )
+		&& false !== strpos( $m[1], 'border-radius:var(--tp-tile-radius,12px)' ) && false !== strpos( $m[1], 'background:var(--tp-tile-bg)' )
+		&& false !== strpos( $m[1], 'color:var(--tp-primary-text)' ) && ! preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $m[1] )
+		&& false !== strpos( $c, '.tp-hub-loadmore__a:hover{background:var(--tp-tile-hover-bg);color:var(--tp-primary-text)}' );
+};
+tp441_mut( 'بند ۶: «نمایش بیشتر» ظاهر کاشی (P5-D245) — پس‌زمینه، قاب، شعاع از --tp-tile-*، متن --tp-primary-text، هدف لمسی ۴۴px، بی رنگ خام — جهش: رنگ خام', $w55_lm_css, $w55_hcss,
+	str_replace( 'background:var(--tp-tile-bg);color:var(--tp-primary-text);font-weight:700;text-decoration:none}', 'background:#fff;color:#0a6;font-weight:700;text-decoration:none}', $w55_hcss ) );
+
+/* کش قطعه: با ذخیرۀ محتوا باطل می‌شد، نه با استقرار کد — حالا امضای پرونده‌های سازنده؛ گرم‌کردن (همان purge) دست‌نخورده */
+$w55_nui6 = $w55_read( $w55_r . 'includes/topersia-g-news-ui.php' );
+$w55_fver = function ( $s ) {
+	return false !== strpos( $s, "add_action( 'init', function () {\n\t\t\$sig = topersia_frag_code_sig();\n\t\tif ( '' === \$sig || \$sig === (string) get_option( 'topersia_frag_ver', '' ) ) {\n\t\t\treturn;\n\t\t}\n\t\tupdate_option( 'topersia_frag_ver', \$sig, true );\n\t\ttopersia_frag_purge();\n\t}, 51 );" )
+		&& 1 === preg_match( '/function topersia_frag_code_sig\(\) \{.*?\'templates\/hub-archive\.php\'.*?\'includes\/topersia-g-hub\.php\'.*?\'includes\/topersia-g-news-ui\.php\'.*?filemtime\( \$file \) \. \':\' \. filesize\( \$file \)/s', $s )
+		&& 1 === preg_match( '/function topersia_frag_purge\(\) \{.*?topersia_frag_warm_schedule\(\);/s', $s );
+};
+tp441_mut( 'بند ۶: قطعۀ کش‌شده با تغییر کد سازنده (نسخه + زمان و اندازۀ قالب‌ها و includeها) یک بار پاک و گرم‌کردن در صف می‌شود — جهش: بی پاک‌کردن (نشانه‌گذاری کهنه پس از استقرار)', $w55_fver, $w55_nui6,
+	str_replace( "update_option( 'topersia_frag_ver', \$sig, true );\n\t\ttopersia_frag_purge();", "update_option( 'topersia_frag_ver', \$sig, true );", $w55_nui6 ) );

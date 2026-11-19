@@ -3555,6 +3555,10 @@ msgstr "Main ingredients"
 msgid "مواد اولیه"
 msgstr "Materials"
 
+#: templates/hub-archive.php
+msgid "موارد بیشتری به فهرست افزوده شد"
+msgstr "More items were added to the list"
+
 #: includes/topersia-g-map.php
 msgid "موتورسواری و اتومبیل‌رانی"
 msgstr "Motorsport"
@@ -3950,6 +3954,10 @@ msgstr "Show"
 #: includes/topersia-g-zones.php
 msgid "نمایش اطلاعات نشانگر"
 msgstr "Show marker details"
+
+#: templates/hub-archive.php
+msgid "نمایش بیشتر"
+msgstr "Show more"
 
 #: topersia-render.php
 msgid "نمایش و خوانایی"

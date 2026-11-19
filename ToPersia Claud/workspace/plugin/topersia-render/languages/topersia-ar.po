@@ -3555,6 +3555,10 @@ msgstr "المكونات الرئيسية"
 msgid "مواد اولیه"
 msgstr "المواد الأولية"
 
+#: templates/hub-archive.php
+msgid "موارد بیشتری به فهرست افزوده شد"
+msgstr "أُضيفت عناصر أخرى إلى القائمة"
+
 #: includes/topersia-g-map.php
 msgid "موتورسواری و اتومبیل‌رانی"
 msgstr "رياضة المحركات"
@@ -3950,6 +3954,10 @@ msgstr "عرض"
 #: includes/topersia-g-zones.php
 msgid "نمایش اطلاعات نشانگر"
 msgstr "عرض معلومات العلامة"
+
+#: templates/hub-archive.php
+msgid "نمایش بیشتر"
+msgstr "عرض المزيد"
 
 #: topersia-render.php
 msgid "نمایش و خوانایی"

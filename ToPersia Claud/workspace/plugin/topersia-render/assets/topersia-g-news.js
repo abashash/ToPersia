@@ -311,6 +311,52 @@
 			} );
 	}
 
+	/* «نمایش بیشتر» هاب (دستۀ 55 بند ۶): صفحۀ بعد از همان مسیر قطعه (کش پرونده‌ای و گرم‌کردن، P5-D571) گرفته می‌شود و
+	   کاشی‌هایش به همین شبکه افزوده؛ جایگاه تبلیغ صفحۀ بعد تکرار نمی‌شود. پیوند و صفحه‌بندی با نسخۀ صفحۀ تازه جای‌گزین
+	   (آخرین صفحه ← بی پیوند). فوکوس روی نخستین کاشی تازه. خطا ← رفتن به همان پیوند واقعی. */
+	function loadMore( a ) {
+		var url   = new URL( a.href, window.location.href );
+		var items = root.querySelector( '[data-tp-news-items]' );
+		if ( ! items || 'true' === a.getAttribute( 'aria-busy' ) ) {
+			return;
+		}
+		a.setAttribute( 'aria-busy', 'true' );
+		getPart( url )
+			.then( function ( html ) {
+				var doc = new DOMParser().parseFromString( html, 'text/html' );
+				var src = doc.querySelector( '[data-tp-news-items]' );
+				if ( ! src ) {
+					throw new Error( 'no items' );
+				}
+				var first = null;
+				Array.prototype.forEach.call( src.children, function ( n ) {
+					if ( n.matches( '.tp-news-card' ) ) {
+						var c = items.appendChild( document.importNode( n, true ) );
+						first = first || c;
+					}
+				} );
+				var res = root.querySelector( '[data-tp-news-swap="results"]' );
+				[ '[data-tp-load-more-box]', '.tp-news-pages' ].forEach( function ( s ) {
+					var old = res ? res.querySelector( s ) : null, nn = doc.querySelector( s );
+					if ( old && nn ) {
+						old.parentNode.replaceChild( document.importNode( nn, true ), old );
+					} else if ( old ) {
+						old.parentNode.removeChild( old );
+					}
+				} );
+				if ( live ) {
+					live.textContent = a.getAttribute( 'data-tp-load-msg' ) || '';
+				}
+				var link = first ? first.querySelector( '.tp-news-card__title a' ) : null;
+				if ( link ) {
+					link.focus( { preventScroll: true } );
+				}
+			} )
+			.catch( function () {
+				window.location.assign( url.href );
+			} );
+	}
+
 	function init() {
 		root = document.querySelector( '.tp-news-page[data-tp-news-base]' );
 		if ( ! root ) {
@@ -340,6 +386,11 @@
 				return;
 			}
 			var a = e.target.closest( 'a[href]' );
+			if ( a && a.hasAttribute( 'data-tp-load-more' ) && same( new URL( a.href, window.location.href ) ) ) {
+				e.preventDefault();
+				loadMore( a );
+				return;
+			}
 			if ( ! a || ! ( a.hasAttribute( 'data-tp-news-nav' ) || a.closest( '[data-tp-news-nav]' ) ) || a.target === '_blank' ) {
 				return;
 			}
@@ -428,7 +479,7 @@
 
 		/* پیش‌واکشی تراشه و صفحه‌بندی با نشانگر، انگشت یا تمرکز صفحه‌کلید (P5-D571) */
 		var warm = function ( e ) {
-			var a = e.target && e.target.closest ? e.target.closest( '[data-tp-news-swap="chips"] a[href], .tp-news-pages a[href]' ) : null;
+			var a = e.target && e.target.closest ? e.target.closest( '[data-tp-news-swap="chips"] a[href], .tp-news-pages a[href], a[data-tp-load-more]' ) : null;
 			if ( a && ! a.hasAttribute( 'aria-current' ) ) {
 				prefetch( a );
 			}

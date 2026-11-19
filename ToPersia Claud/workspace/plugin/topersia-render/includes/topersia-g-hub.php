@@ -24,7 +24,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'TOPERSIA_HUB_PER_PAGE' ) ) {
-	define( 'TOPERSIA_HUB_PER_PAGE', 24 );
+	define( 'TOPERSIA_HUB_PER_PAGE', 48 );   /* دستۀ 55 بند ۶ (پیش‌تر ۲۴)؛ هاب استان همه، بی صفحه‌بندی — topersia_g_hub_per_page() */
+}
+if ( ! defined( 'TOPERSIA_HUB_ALL_TYPES' ) ) {
+	define( 'TOPERSIA_HUB_ALL_TYPES', 'tp_province' );   /* نوع‌هایی که هابشان همۀ موارد را در یک صفحه می‌دهد (۳۱ استان)، با ویرگول */
 }
 if ( ! defined( 'TOPERSIA_HUB_MIN_INDEX' ) ) {
 	define( 'TOPERSIA_HUB_MIN_INDEX', 3 );   /* کمتر از این ← noindex */
@@ -268,6 +271,13 @@ if ( ! function_exists( 'topersia_g_hub_type' ) ) {
 			}
 		}
 		return '';
+	}
+}
+
+/** کاشی هر صفحۀ هاب: نوع «همه در یک صفحه» (TOPERSIA_HUB_ALL_TYPES، استان) ← -1؛ بقیه (نوع، گروه، فصل، برچسب) ← TOPERSIA_HUB_PER_PAGE. دستۀ 55 بند ۶ */
+if ( ! function_exists( 'topersia_g_hub_per_page' ) ) {
+	function topersia_g_hub_per_page( $type ) {
+		return ( '' !== (string) $type && in_array( (string) $type, array_map( 'trim', explode( ',', TOPERSIA_HUB_ALL_TYPES ) ), true ) ) ? -1 : (int) TOPERSIA_HUB_PER_PAGE;
 	}
 }
 
@@ -965,12 +975,30 @@ if ( function_exists( 'add_action' ) ) {
 			$q->set( 'post_type', $types );
 		}
 		$q->set( 'post_status', 'publish' );
-		$q->set( 'posts_per_page', TOPERSIA_HUB_PER_PAGE );
+		$pt = $q->get( 'post_type' );
+		$pt = is_array( $pt ) ? ( 1 === count( $pt ) ? (string) reset( $pt ) : '' ) : (string) $pt;
+		$q->set( 'posts_per_page', topersia_g_hub_per_page( '' === $seas && '' === $grp && $q->is_post_type_archive() ? $pt : '' ) );
 		$q->set( 'post__in', $ids ? $ids : array( 0 ) );
 		$q->set( 'orderby', 'post__in' );
 		$q->set( 'meta_query', array() );
 		$q->set( 's', '' );
 	}, 20 );
+
+	/* دستۀ 55 بند ۶ — نشانی‌های صفحه: هاب «همه در یک صفحه» (استان) با /page/N/ ← صفحۀ ۱ (وگرنه همان ۳۱ مورد با نشانی دوم)؛
+	   ?page=N ← نشانی خزنده‌پذیر همان صفحه (/page/N/، canonical خودش)، با پالایش جاری. ۳۰۱. */
+	add_action( 'template_redirect', function () {
+		if ( ! topersia_g_hub_is() || topersia_g_news_partial() ) {
+			return;
+		}
+		$want = isset( $_GET['page'] ) && is_scalar( $_GET['page'] ) ? absint( wp_unslash( $_GET['page'] ) ) : 0;   // phpcs:ignore WordPress.Security.NonceVerification
+		$now  = max( 1, (int) get_query_var( 'paged' ) );
+		$all  = -1 === topersia_g_hub_per_page( topersia_g_hub_type() );
+		$to   = $all ? 1 : ( $want ? $want : $now );
+		if ( $want || ( $all && $now > 1 ) ) {
+			wp_safe_redirect( topersia_g_hub_link( $to ), 301 );
+			exit;
+		}
+	}, 2 );
 
 	/* نامک فصل ناشناس: کوئری خانه خودش ۴۰۴ نمی‌شود — این‌جا صریح. */
 	add_action( 'template_redirect', function () {
