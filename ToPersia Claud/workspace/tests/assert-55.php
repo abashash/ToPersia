@@ -351,3 +351,56 @@ $w55_c7_gap = function ( $t ) use ( $w55_tmpl, $w55_ncss ) {
 };
 tp441_mut( 'بند ۷: جبران row-gap زیر نوار کنش موبایل = همان row-gap قالب مولد (یک عدد در دو جا، برابری پاییده) — جهش: توکن ۲۴px', $w55_c7_gap, $w55_tok,
 	str_replace( '--tp-grid-row-gap-m:28px;', '--tp-grid-row-gap-m:24px;', $w55_tok ) );
+
+/* ── بند ۸: «بهترین فصل» تهی (P5-D633) ─────────────────────────────────
+ * ۵۲ ردیف پیش‌فرض «بهار» (۴۸ fa · ۲ en · ۲ ar؛ نه نمایشی، نه نمونه) با scripts/tp-season-null.php تهی شد؛ مقدار پیشین در
+ * docs/ops/backups/best-season-spring-pre-null-20261119.json. رفتار با تهی: نه فصلی جور، نه جدول فصل، نه «نامعلوم». */
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-hub.php';   /* تابع‌ها زیر function_exists؛ قلاب‌ها فقط ثبت می‌شوند */
+$w55_c8_ok = true;
+foreach ( array( 99801 => null, 99802 => '', 99803 => array() ) as $w55_id => $w55_v ) {
+	if ( null !== $w55_v ) {
+		$GLOBALS['tp_meta'][ $w55_id ]['best_season'] = $w55_v;
+	}
+	foreach ( array( 'spring', 'summer', 'autumn', 'winter' ) as $w55_s ) {
+		$w55_c8_ok = $w55_c8_ok && function_exists( 'topersia_g_hub_in_season' ) && ! topersia_g_hub_in_season( $w55_id, $w55_s );
+	}
+	$w55_c8_ok = $w55_c8_ok && function_exists( 'topersia_g_sc_seasons' ) && '' === topersia_g_sc_seasons( array( 'id' => $w55_id ) );
+}
+$GLOBALS['tp_meta'][99804]['best_season'] = 'autumn';
+t( 'بند ۸: فصل تهی (نبود متا · رشتۀ خالی · آرایۀ خالی) در هیچ فصلی نمی‌آید و [tp_seasons] هیچ خروجی ندارد (پنهان، نه «نامعلوم»)؛ «پاییز» هنوز پاییز است',
+	$w55_c8_ok && topersia_g_hub_in_season( 99804, 'autumn' ) && ! topersia_g_hub_in_season( 99804, 'spring' ) && '' !== topersia_g_sc_seasons( array( 'id' => 99804 ) ) );
+
+$w55_sn  = $w55_read( 'scripts/tp-season-null.php' );
+$w55_c8s = function ( $s ) {
+	$w = strpos( $s, "file_put_contents( \$tp_file, wp_json_encode( \$out" );
+	$d = strpos( $s, "delete_metadata_by_mid( 'post', (int) \$r->meta_id );" );
+	return false !== $w && false !== $d && $w < $d && false !== strpos( $s, "count( \$back['rows'] ) !== count( \$rows )" )
+		&& false !== strpos( $s, '! (int) $r->demo && ! (int) $r->sample && tp_sn_is_spring( $r->meta_value )' )
+		&& false !== strpos( $s, "'topersia.local' !== (string) wp_parse_url( home_url(), PHP_URL_HOST )" )
+		&& false !== strpos( $s, "metadata_exists( 'post', \$pid, 'best_season' )" );
+};
+tp441_mut( 'بند ۸: tp-season-null.php — پروندۀ پشتیبان پیش از هر حذف نوشته و بازخوانی می‌شود؛ نمایشی و نمونه بیرون؛ فقط topersia.local؛ برگرداندن مقدار تازه را بازنویسی نمی‌کند — جهش: نمونه هم تهی می‌شد',
+	$w55_c8s, $w55_sn, str_replace( '! (int) $r->demo && ! (int) $r->sample && ', '! (int) $r->demo && ', $w55_sn ) );
+
+/* شمارشگر --launch (بند ۸ هشدار؛ بند ۹ شمار تصویر مشترک و بی alt) — شمارشگر است، حکم نمی‌دهد */
+$w55_lc  = $w55_read( 'scripts/tp-launch-count.php' );
+$w55_c8l = function ( $s ) {
+	return false !== strpos( $s, 'const TP_LC_SHARED_MAX = 5;' ) && false !== strpos( $s, 'return $n > TP_LC_SHARED_MAX;' )
+		&& false !== strpos( $s, "array( 'key' => '_tp_demo', 'compare' => 'NOT EXISTS' )" ) && false !== strpos( $s, "array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' )" )
+		&& false !== strpos( $s, "'suppress_filters' => true," ) && false !== strpos( $s, "echo 'NO_SEASON '" ) && false !== strpos( $s, "echo 'SHARED '" ) && false !== strpos( $s, "echo 'NO_ALT '" );
+};
+tp441_mut( 'بند ۸ و ۹: tp-launch-count.php — موجودیت بی فصل، تصویر خود موجودیت در بیش از ۵ موجودیت، تصویر بی alt؛ هر سه زبان، بی نمایشی و نمونه — جهش: «۵ یا بیشتر» به جای «بیش از ۵»',
+	$w55_c8l, $w55_lc, str_replace( 'return $n > TP_LC_SHARED_MAX;', 'return $n >= TP_LC_SHARED_MAX;', $w55_lc ) );
+$w55_launch = in_array( '--launch', isset( $argv ) ? (array) $argv : array(), true );
+if ( $w55_launch && is_file( TP_WP_CLI ) ) {
+	$w55_lout = array();
+	exec( escapeshellarg( TP_PHP ) . ' ' . escapeshellarg( TP_WP_CLI ) . ' --path=' . escapeshellarg( TP_WP_DIR ) . ' --url=' . escapeshellarg( TP_BASE_URL ) . ' eval-file ' . escapeshellarg( $w55_root . '/scripts/tp-launch-count.php' ) . ' 2>&1', $w55_lout, $w55_lcode );
+	$w55_lout = array_values( preg_grep( '/^(NO_SEASON|SHARED|NO_ALT|SKIP)\b/', $w55_lout ) );
+	t( 'گیت --launch: شمارشگر بند ۸ و ۹ اجرا شد', 0 === (int) $w55_lcode && $w55_lout, implode( ' · ', $w55_lout ) );
+	foreach ( $w55_lout as $w55_l ) {
+		if ( preg_match( '/^(NO_SEASON|SHARED|NO_ALT) ([1-9][0-9]*) (.*)$/', $w55_l, $w55_m ) ) {
+			$w55_lbl = array( 'NO_SEASON' => 'موجودیت بی «بهترین فصل»', 'SHARED' => 'تصویر خود موجودیت در بیش از ۵ موجودیت', 'NO_ALT' => 'تصویر موجودیت بی alt' );
+			echo '  ⚠ هشدار --launch (شکست نیست): ' . $w55_lbl[ $w55_m[1] ] . ': ' . $w55_m[2] . ' — ' . $w55_m[3] . "\n";
+		}
+	}
+}

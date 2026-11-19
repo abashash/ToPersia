@@ -1,0 +1,424 @@
+{
+    "what": "best_season پیش‌فرض «بهار» پیش از تهی‌کردن — دستۀ 55 بند ۸ (P5-D633)",
+    "site": "http://topersia.local",
+    "created": "2026-11-19T23:48:47+00:00",
+    "restore": "php wp-cli.phar --path=… --url=http://topersia.local eval-file scripts/tp-season-null.php restore <this.json>",
+    "rows": [
+        {
+            "post_id": 135,
+            "meta_id": 1352,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 136,
+            "meta_id": 1389,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 138,
+            "meta_id": 1463,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 139,
+            "meta_id": 1496,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 140,
+            "meta_id": 1537,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 141,
+            "meta_id": 1574,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 142,
+            "meta_id": 1611,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 144,
+            "meta_id": 1644,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 146,
+            "meta_id": 1712,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 399,
+            "meta_id": 38468,
+            "type": "tp_city",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1980,
+            "meta_id": 38481,
+            "type": "tp_city",
+            "lang": "en",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1981,
+            "meta_id": 38488,
+            "type": "tp_city",
+            "lang": "ar",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1945,
+            "meta_id": 38538,
+            "type": "tp_desert",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1967,
+            "meta_id": 14077,
+            "type": "tp_festival",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1948,
+            "meta_id": 38679,
+            "type": "tp_monument",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1947,
+            "meta_id": 38626,
+            "type": "tp_mountain",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 96,
+            "meta_id": 329,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 97,
+            "meta_id": 362,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 98,
+            "meta_id": 395,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 99,
+            "meta_id": 428,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 100,
+            "meta_id": 461,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 101,
+            "meta_id": 494,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 102,
+            "meta_id": 527,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 106,
+            "meta_id": 593,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 108,
+            "meta_id": 626,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 110,
+            "meta_id": 659,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 111,
+            "meta_id": 692,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 112,
+            "meta_id": 721,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 113,
+            "meta_id": 754,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 115,
+            "meta_id": 791,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 116,
+            "meta_id": 824,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 117,
+            "meta_id": 857,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 118,
+            "meta_id": 890,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 119,
+            "meta_id": 923,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 120,
+            "meta_id": 952,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 121,
+            "meta_id": 989,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 122,
+            "meta_id": 1022,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 123,
+            "meta_id": 1055,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 124,
+            "meta_id": 1088,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 125,
+            "meta_id": 1117,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 127,
+            "meta_id": 1154,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 128,
+            "meta_id": 1187,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 129,
+            "meta_id": 1220,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 131,
+            "meta_id": 1249,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 132,
+            "meta_id": 1282,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 134,
+            "meta_id": 1315,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1978,
+            "meta_id": 21029,
+            "type": "tp_province",
+            "lang": "en",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1979,
+            "meta_id": 21028,
+            "type": "tp_province",
+            "lang": "ar",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 3759,
+            "meta_id": 34657,
+            "type": "tp_province",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1949,
+            "meta_id": 38731,
+            "type": "tp_religious_site",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 1944,
+            "meta_id": 38585,
+            "type": "tp_village",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        },
+        {
+            "post_id": 3267,
+            "meta_id": 28658,
+            "type": "tp_water_body",
+            "lang": "fa",
+            "status": "publish",
+            "meta_value": "spring"
+        }
+    ]
+}
