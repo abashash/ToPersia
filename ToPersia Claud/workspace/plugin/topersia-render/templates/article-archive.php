@@ -58,9 +58,10 @@ if ( $tp_part ) {
 					<div class="tp-news-bar__tools">
 						<form class="tp-news-filter tp-news-filter--min" method="get" action="<?php echo esc_url( $tp_base ); ?>" data-tp-news-filter>
 							<?php if ( '' !== $tp_args['tp_topic'] ) : ?><input type="hidden" name="tp_topic" value="<?php echo esc_attr( $tp_args['tp_topic'] ); ?>"><?php endif; ?>
-							<?php /* P5-D575: جست‌وجو و مکان در همان خط؛ موبایل زیر دکمۀ «فیلتر» (بی JS همیشه دیدنی) */ ?>
+							<?php /* P5-D575: جست‌وجو و مکان در همان خط؛ موبایل زیر دکمۀ «فیلتر» (بی JS همیشه دیدنی).
+							   دستۀ 55 بند ۴: ظرف data-tp-filter-panel، نه data-tp-more (نشان دکمۀ «N مورد دیگر» zones.js که با کلیک برداشته می‌شود). */ ?>
 							<button type="button" class="tp-hub-more__btn" data-tp-more-btn aria-expanded="false" aria-controls="tp-hub-more" hidden><?php echo esc_html__( 'فیلتر', 'topersia' ); ?></button>
-							<div id="tp-hub-more" class="tp-hub-more" data-tp-more>
+							<div id="tp-hub-more" class="tp-hub-more" data-tp-filter-panel>
 								<div class="tp-news-filter__f tp-news-filter__f--q">
 									<label for="tp-hub-q"><?php echo esc_html__( 'جست‌وجو', 'topersia' ); ?></label>
 									<input id="tp-hub-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">

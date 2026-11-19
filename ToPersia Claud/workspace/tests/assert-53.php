@@ -81,7 +81,8 @@ $w53_arow = function ( $c ) {
 tp441_mut( 'بند ۲ و ۵: /articles/ — جست‌وجو و مکان در یک خط (تراشه جا می‌دهد) و نمای فهرستی دو ستون (P5-D576) — جهش: فهرست یک ستون', $w53_arow, $w53_hcss,
 	str_replace( '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:repeat(2,minmax(0,1fr))', '.tp-page.tp-article-archive .tp-news-grid.tp-news-grid--rows{grid-template-columns:minmax(0,1fr)', $w53_hcss ) );
 $w53_more = function ( $j ) use ( $w53_hcss ) {
-	return false !== strpos( $j, "root.querySelector( '[data-tp-more-btn]' )" ) && false !== strpos( $j, "root.querySelector( '[data-tp-more]' )" )
+	/* دستۀ 55 بند ۴: ظرف [data-tp-filter-panel]؛ [data-tp-more] فقط دکمۀ «N مورد دیگر» است (assert-55 برخورد را می‌پاید) */
+	return false !== strpos( $j, "root.querySelector( '[data-tp-more-btn]' )" ) && false !== strpos( $j, "root.querySelector( '[data-tp-filter-panel]' )" )
 		&& false !== strpos( $w53_hcss, '.tp-hub-more[hidden]{display:none}' ) && false !== strpos( $w53_hcss, '.tp-hub-more__btn[hidden]{display:none}' );
 };
 tp441_mut( 'بند ۲ موبایل: جست‌وجو و مکان زیر یک دکمۀ «فیلتر» (بی JS همیشه دیدنی) — جهش: بی دکمه', $w53_more, $w53_njs,

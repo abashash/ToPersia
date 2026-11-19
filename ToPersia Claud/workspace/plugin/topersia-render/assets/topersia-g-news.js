@@ -142,8 +142,10 @@
 		return u;
 	}
 
-	/* مقدار فرم‌ها از نشانی — پس از «بازگشت» یا کلیک تراشه هم درست بماند */
-	function syncForms( url ) {
+	/* مقدار فرم‌ها از نشانی — پس از «بازگشت» یا کلیک تراشه هم درست بماند.
+	   keep (فقط مسیر «جست‌وجو هنگام نوشتن»): فیلدی که فوکوس دارد دست نمی‌خورد — پاسخ دیررس درخواست پیشین
+	   نویسه‌های تازۀ جست‌وجو یا متن در حال نوشتن مکان را پاک می‌کرد (دستۀ 55 بند ۴). */
+	function syncForms( url, keep ) {
 		var p = url.searchParams;
 		/* نام پارامتر تراشه از ریشه (هاب: tp_facet)؛ پیش‌فرض موضوع خبر */
 		var cv = root.getAttribute( 'data-tp-news-chipvar' ) || 'tp_topic';
@@ -161,7 +163,7 @@
 				hid.parentNode.removeChild( hid );
 			}
 			Array.prototype.forEach.call( f.elements, function ( el ) {
-				if ( ! el.name || el.type === 'hidden' || el.type === 'submit' || el.tagName === 'BUTTON' ) {
+				if ( ! el.name || el.type === 'hidden' || el.type === 'submit' || el.tagName === 'BUTTON' || ( keep && el === document.activeElement ) ) {
 					return;
 				}
 				/* combobox مکان پس از هر بار خالی می‌ماند؛ مکان در ردیف پالایش‌های فعال است (P5-D557) */
@@ -268,7 +270,7 @@
 				if ( push ) {
 					window.history.pushState( { tpNews: 1 }, '', url.href );
 				}
-				syncForms( url );
+				syncForms( url, push && false === focus );
 				initChips();
 				applyView();
 				if ( window.TopersiaProg ) {
@@ -375,7 +377,9 @@
 		} );
 
 		/* موبایل: جست‌وجو و مکان هاب زیر یک دکمۀ «فیلتر» (P5-D575)؛ دسکتاپ همیشه در خط. بی JS دکمه پنهان و فیلدها دیدنی‌اند. */
-		var moreBtn = root.querySelector( '[data-tp-more-btn]' ), morePanel = root.querySelector( '[data-tp-more]' );
+		/* دستۀ 55 بند ۴: ظرف data-tp-filter-panel است، نه data-tp-more (نشان دکمۀ «N مورد دیگر» zones.js که با کلیک حذف می‌شود).
+		   بستن فقط با کلیک بیرون یا Escape؛ کلیک، تایپ و blur درون ظرف هیچ‌گاه آن را نمی‌بندد. */
+		var moreBtn = root.querySelector( '[data-tp-more-btn]' ), morePanel = root.querySelector( '[data-tp-filter-panel]' );
 		if ( moreBtn && morePanel && window.matchMedia ) {
 			var narrow = window.matchMedia( '(max-width: 720px)' );
 			var filled = function () {
@@ -389,6 +393,32 @@
 				var open = 'true' !== moreBtn.getAttribute( 'aria-expanded' );
 				moreBtn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 				morePanel.hidden = ! open;
+			} );
+			var shut = function () {
+				if ( ! narrow.matches || 'true' !== moreBtn.getAttribute( 'aria-expanded' ) ) {
+					return false;
+				}
+				moreBtn.setAttribute( 'aria-expanded', 'false' );
+				morePanel.hidden = ! filled();
+				return true;
+			};
+			/* کلیک یا لمس بیرون از ظرف و دکمه */
+			document.addEventListener( 'pointerdown', function ( e ) {
+				if ( ! morePanel.contains( e.target ) && ! moreBtn.contains( e.target ) ) {
+					shut();
+				}
+			} );
+			/* Escape، مگر فهرست مکان باز باشد — آن Escape مال combobox است (topersia-g-loc.js، شنوندۀ document که پس از این اجرا می‌شود) */
+			root.addEventListener( 'keydown', function ( e ) {
+				if ( 'Escape' !== e.key || ! morePanel.contains( e.target ) || morePanel.querySelector( '.tp-loc__list:not([hidden])' ) ) {
+					return;
+				}
+				if ( e.target.classList.contains( 'tp-loc__in' ) && '' !== e.target.value ) {
+					return; /* Escape دوم combobox مکان مقدار را پاک می‌کند، نه ظرف را */
+				}
+				if ( shut() ) {
+					moreBtn.focus();
+				}
 			} );
 			syncMore();
 			if ( narrow.addEventListener ) {
@@ -438,8 +468,17 @@
 			window.clearTimeout( typing );
 			typing = window.setTimeout( function () {
 				var url = formUrl( el.form );
-				if ( same( url ) && url.href !== window.location.href ) {
+				if ( ! same( url ) ) {
+					return;
+				}
+				if ( url.href !== window.location.href ) {
 					load( url.href, true, false );
+				} else if ( ctrl ) {
+					/* فرم به وضعیت همین نشانی برگشت (مثلاً فیلد پاک شد) ← درخواست در راه دیگر معتبر نیست؛
+					   وگرنه پاسخش متن قبلی را به فیلد و نشانی برمی‌گرداند (دستۀ 55 بند ۴) */
+					ctrl.abort();
+					ctrl = null;
+					busy( false );
 				}
 			}, WAIT );
 		} );

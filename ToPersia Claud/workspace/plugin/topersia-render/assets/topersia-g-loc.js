@@ -202,14 +202,20 @@
 		}
 	} );
 
+	/* بستن فقط با کلیک بیرون یا Escape (دستۀ 55 بند ۴). کلیک یا لمس بیرون از ویجت فهرست را می‌بندد؛ فیلد هرگز پنهان نمی‌شود. */
+	document.addEventListener( 'pointerdown', function ( e ) {
+		Array.prototype.forEach.call( document.querySelectorAll( '[data-tp-loc]' ), function ( w ) {
+			var p = parts( w );
+			if ( p.list && ! p.list.hidden && ! w.contains( e.target ) ) {
+				close( p );
+			}
+		} );
+	} );
+	/* Tab به عنصری بیرون از ویجت هم «بیرون» است؛ blur بی مقصد (لمس جای خالی، عوض‌شدن پنجره) فهرست را نمی‌بندد. */
 	document.addEventListener( 'focusout', function ( e ) {
 		var w = widget( e.target );
-		if ( w && e.target.classList.contains( 'tp-loc__in' ) ) {
-			window.setTimeout( function () {
-				if ( ! w.contains( document.activeElement ) ) {
-					close( parts( w ) );
-				}
-			}, 120 );
+		if ( w && e.target.classList.contains( 'tp-loc__in' ) && e.relatedTarget && ! w.contains( e.relatedTarget ) ) {
+			close( parts( w ) );
 		}
 	} );
 }() );

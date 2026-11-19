@@ -1950,7 +1950,9 @@
 	 * N کمینۀ گام (شش) و باقی‌مانده است؛ پس از آخرین دسته دکمه برداشته
 	 * می‌شود. کاشی‌های تازه هم سنجیده می‌شوند.
 	 */
-	Array.prototype.forEach.call( page.querySelectorAll( '[data-tp-more]' ), function ( btn ) {
+	/* فقط خودِ دکمه (دستۀ 55 بند ۴): گزینشگر بازِ [data-tp-more] ظرف فیلتر هاب را هم می‌گرفت و کلیکِ ورودیِ درونش
+	   (bubbling) با «مورد پنهانی نمانده» ظرف را برمی‌داشت — جعبۀ جست‌وجو و مکان ناپدید می‌شد. */
+	Array.prototype.forEach.call( page.querySelectorAll( 'button[data-tp-more]' ), function ( btn ) {
 
 		btn.addEventListener( 'click', function () {
 
