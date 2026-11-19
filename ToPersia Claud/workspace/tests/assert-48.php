@@ -106,7 +106,8 @@ $w48_badge = function ( $s ) { return false !== strpos( $s, 'foreach ( topersia_
 tp441_mut( 'news: نشان مکان‌های کارت از دروازۀ انتشار (P5-D247) — جهش: بی دروازه', $w48_badge, $w48_news,
 	str_replace( 'foreach ( topersia_g_published( topersia_g_news_places( $news_id ) ) as $pid ) {', 'foreach ( topersia_g_news_places( $news_id ) as $pid ) {', $w48_news ) );
 $w48_tpl = function ( $s ) {
-	return false !== strpos( $s, '<nav class="tp-crumb"' ) && false !== strpos( $s, "topersia_g_news_archive_card( \$tp_one )" )
+	/* دستۀ 54: کارت‌های شبکه از قلاب تبلیغ میان فهرست می‌گذرند — همان کارت مشترک، با array_map */
+	return false !== strpos( $s, '<nav class="tp-crumb"' ) && ( false !== strpos( $s, "topersia_g_news_archive_card( \$tp_one )" ) || false !== strpos( $s, "topersia_g_ad_feed( array_map( 'topersia_g_news_archive_card', " ) )
 		&& false !== strpos( $s, "__( 'هنوز خبری منتشر نشده است.', 'topersia' )" ) && false !== strpos( $s, "' dir=\"' . esc_attr( is_rtl() ? 'rtl' : 'ltr' ) . '\" data-tp-news-base" )
 		&& ! preg_match( '/>\s*[\x{0600}-\x{06FF}][^<{]*</u', preg_replace( '/<\?php.*?\?>/s', '', $s ) );
 };
