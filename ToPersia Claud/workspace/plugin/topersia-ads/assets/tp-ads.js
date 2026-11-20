@@ -8,7 +8,7 @@
 ( function () {
 	'use strict';
 	/* EDGE: حاشیۀ سایۀ کارت پسین (دستۀ 55 بند ۷) */
-	var C = window.TopersiaAds || {}, GAP = 2, EDGE = 32, TOP = 'tp-ad-slot--hub-top', ON = 'tp-ad-on';
+	var C = window.TopersiaAds || {}, GAP = 2, EDGE = 32, TOP = 'tp-ad-slot--hub-top', ON = 'tp-ad-on', FEED = 'tp-ad-slot--hub-infeed';
 	var abs = function ( e ) {
 		return e.getBoundingClientRect().top + window.scrollY;
 	};
@@ -32,7 +32,7 @@
 			return a.y - b.y;
 		} ).forEach( function ( o ) {
 			var s = o.s, y, why, r;
-			if ( ! s.tpP && ! s.classList.contains( TOP ) ) {
+			if ( ! s.tpP && ! s.classList.contains( TOP ) && ! s.classList.contains( FEED ) ) {
 				s.tpP = 1;
 				y = pos( s );
 				why = y < sy + vh + EDGE ? 'screen' : ( ! o.side && null !== last && y - last < GAP * vh ? 'gap' : '' );

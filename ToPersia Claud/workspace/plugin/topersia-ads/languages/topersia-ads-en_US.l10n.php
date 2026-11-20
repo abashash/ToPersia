@@ -44,6 +44,7 @@ return array (
     'جاذبه‌ها و راهنما' => 'Attractions and guide',
     'جای تبلیغ' => 'Ad space',
     'جایگاه' => 'Placement',
+    'جایگاه تبلیغ · خالی' => 'Ad placement · empty',
     'جایگاه خالی: %s' => 'Empty placement: %s',
     'جایگاه‌ها' => 'Placements',
     'جایگاه‌های خالی (برای فروش)' => 'Empty placements (for sale)',

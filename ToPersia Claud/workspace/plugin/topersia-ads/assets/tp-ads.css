@@ -5,11 +5,11 @@
 .tp-ad-slot--hub-infeed,.tp-ad-slot--single-rail,.tp-ad-slot--entity-rail,.tp-ad-slot--entity-mid{margin-block:0}
 /* بند ۷ — هر جایگاه جز «زیر نوار ابزار هاب» بسته است تا tp-ads.js بازش کند: فقط یکسره زیر صفحه‌نمایش جاری
    (نخستین صفحه‌نمایش موبایل بی تبلیغ، باز شدن بی CLS) و دست‌کم دو صفحه‌نمایش دور از واحد باز پیشین */
-.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top){display:none}
-/* نمای فهرست هاب: کارت میان فهرست هم‌اندازۀ کارت، نه پهنای کامل ردیف */
-@media (min-width:768px){
-  .tp-news-grid--rows > .tp-ad-slot--hub-infeed{max-inline-size:400px}
-}
+.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top):not(.tp-ad-slot--hub-infeed){display:none}
+/* P5-D641: کارت میان‌فهرستی جای ثابت دارد (بی دروازۀ صفحه‌نمایش)؛ hidden = خانه‌ای که قاعده نمی‌دهد (tp-ads.js) */
+.tp-ad-slot[hidden]{display:none}
+/* نمای فهرست (P5-D641): کارت میان فهرست یک ردیف تمام‌عرض */
+.tp-news-grid--rows > .tp-ad-slot--hub-infeed{grid-column:1 / -1}
 .tp-ad{position:relative;margin:0;max-inline-size:100%;--tp-ad-r:4 / 1}
 .tp-ad--r-wide{--tp-ad-r:4 / 1}
 .tp-ad--r-mwide{--tp-ad-r:2 / 1}
@@ -31,10 +31,10 @@ html body .tp-ad img.tp-ad__img,.tp-ad__img{display:block;inline-size:100%;max-i
   .tp-ad--rm-mwide{--tp-ad-r:2 / 1}
   .tp-ad--rm-card{--tp-ad-r:4 / 3}
   .tp-ad--rm-wide{--tp-ad-r:4 / 1}
-  .tp-ad--desk,.tp-ad-slot:not(:has(.tp-ad:not(.tp-ad--desk))){display:none}
+  .tp-ad--desk,.tp-ad-slot:not(.tp-ad-slot--empty):not(:has(.tp-ad:not(.tp-ad--desk))){display:none}
 }
 @media (min-width:768px){
-  .tp-ad--mob,.tp-ad-slot:not(:has(.tp-ad:not(.tp-ad--mob))){display:none}
+  .tp-ad--mob,.tp-ad-slot:not(.tp-ad-slot--empty):not(:has(.tp-ad:not(.tp-ad--mob))){display:none}
 }
 
 /* ستون کناری خبر و مقاله — چسبان فقط دسکتاپ؛ ستون باید تا ته ردیف کشیده شود تا جای چسبیدن باشد */
@@ -51,6 +51,7 @@ html body .tp-ad img.tp-ad__img,.tp-ad__img{display:block;inline-size:100%;max-i
 }
 
 /* جایگاه خالی — فقط برای مدیر تبلیغ (P5-D624)؛ جایگاه فقط دسکتاپ در موبایل پنهان */
+.tp-ad-slot--empty .tp-ad-empty{margin:0;block-size:100%;display:grid;place-items:center;border-style:dashed}
 .tp-ad-empty{margin-block:16px;padding:12px 16px;border:2px dotted var(--tp-text-2);border-radius:var(--tp-tile-radius);background:transparent;color:var(--tp-text);font-size:14px;text-align:center}
 @media (max-width:767px){
   .tp-ad-empty.tp-ad--desk{display:none}

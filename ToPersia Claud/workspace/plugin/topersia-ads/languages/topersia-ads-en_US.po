@@ -162,6 +162,10 @@ msgid "جایگاه"
 msgstr "Placement"
 
 #: includes/tp-ads-render.php
+msgid "جایگاه تبلیغ · خالی"
+msgstr "Ad placement · empty"
+
+#: includes/tp-ads-render.php
 #, php-format
 msgid "جایگاه خالی: %s"
 msgstr "Empty placement: %s"

@@ -2,7 +2,7 @@
 /**
  * کاتالوگ ترجمۀ افزونۀ تبلیغ — دامنۀ `topersia-ads`.  دستۀ 54 (P5-D621) · قاعدۀ «هر افزونۀ ما سه‌زبانه»
  *
- *   php scripts/tp-ads-i18n.php            ← می‌سازد: languages/topersia-ads-{en_US,ar}.po · mo · l10n.php
+ *   php scripts/tp-ads-i18n.php            ← می‌سازد: languages/topersia-ads-{en_US,ar,ru_RU}.po · mo · l10n.php
  *   php scripts/tp-ads-i18n.php --check    ← فقط می‌سنجد؛ کد خروج ۱ اگر چیزی کم یا نادرست است
  *   php scripts/tp-ads-i18n.php --list     ← فهرست رشته‌های استخراج‌شده
  *
@@ -23,6 +23,8 @@ $DOMAIN = 'topersia-ads';
 $LOCALES = array(
 	'en_US' => array( 'key' => 'en', 'plural' => 'nplurals=2; plural=(n != 1);' ),
 	'ar'    => array( 'key' => 'ar', 'plural' => 'nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);' ),
+	/* دستۀ 56-الف (P5-D640): روسی جزئی — فقط مدخل‌های دارای 'ru'؛ نبودش خطا نیست، خط عربی در آن خطاست */
+	'ru_RU' => array( 'key' => 'ru', 'partial' => true, 'plural' => 'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);' ),
 );
 
 function tpa_unquote( $tok ) {
@@ -145,7 +147,7 @@ if ( in_array( '--list', $argv, true ) ) {
 /* ── سنجش جدول ── */
 $table    = is_file( $TABLE ) ? require $TABLE : array();
 $errors   = array();
-$messages = array( 'en_US' => array(), 'ar' => array() );
+$messages = array( 'en_US' => array(), 'ar' => array(), 'ru_RU' => array() );
 
 $ph = function ( $s ) {
 	preg_match_all( '/%(?:\d+\$)?[sd]/', $s, $m );
@@ -163,6 +165,12 @@ foreach ( $plain as $s => $w ) {
 	}
 	foreach ( $LOCALES as $loc => $cfg ) {
 		$tr = isset( $table[ $s ][ $cfg['key'] ] ) ? (string) $table[ $s ][ $cfg['key'] ] : '';
+		if ( '' === trim( $tr ) && ! empty( $cfg['partial'] ) ) {
+			continue;
+		}
+		if ( 'ru' === $cfg['key'] && preg_match( '/[\x{0600}-\x{06FF}]/u', $tr ) ) {
+			$errors[] = "روسی با خط عربی: {$src}";
+		}
 		if ( '' === trim( $tr ) ) {
 			$errors[] = "ترجمۀ {$cfg['key']} خالی: {$src}";
 			continue;

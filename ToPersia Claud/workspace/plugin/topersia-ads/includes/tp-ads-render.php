@@ -192,10 +192,19 @@ if ( ! function_exists( 'topersia_ads_unit' ) ) {
 if ( ! function_exists( 'topersia_ads_empty' ) ) {
 	/** نشانۀ «جایگاه خالی» — فقط برای مدیر تبلیغ، هرگز برای بازدیدکننده (P5-D624). */
 	function topersia_ads_empty( $slot ) {
+		$s = topersia_ads_slots()[ $slot ];
+		/* P5-D650 (دستۀ 56-الف): کارت میان‌فهرستی خالی — در پیش‌نمایش برای همه، در عمومی فقط مدیر وارد‌شده؛ نشانگر خط‌چین
+		   «جایگاه تبلیغ · خالی» در همان خانه (ظرف tp-ad-slot تا موتور مکان‌یابی و شبکه آن را خانه بشمارند). عموم: هیچ HTML، هیچ فاصله. */
+		if ( 'hub-infeed' === $slot ) {
+			if ( ! topersia_ads_demo() && ! current_user_can( TOPERSIA_ADS_CAP ) ) {
+				return '';
+			}
+			return '<div class="tp-ad-slot tp-ad-slot--hub-infeed tp-ad-slot--empty" data-nosnippet>'
+				. '<div class="tp-ad-empty tp-ad-empty--hub-infeed" role="note">' . esc_html__( 'جایگاه تبلیغ · خالی', 'topersia-ads' ) . '</div></div>';
+		}
 		if ( ! current_user_can( TOPERSIA_ADS_CAP ) ) {
 			return '';
 		}
-		$s = topersia_ads_slots()[ $slot ];
 		/* translators: %s: نام جایگاه */
 		return '<div class="tp-ad-empty tp-ad-empty--' . esc_attr( $slot ) . ( '' === $s['m'] ? ' tp-ad--desk' : '' ) . '" data-nosnippet role="note">'
 			. esc_html( sprintf( __( 'جایگاه خالی: %s', 'topersia-ads' ), __( $s['name'], 'topersia-ads' ) ) ) . '</div>';   // phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText
@@ -225,15 +234,18 @@ if ( ! function_exists( 'topersia_ads_slot_html' ) ) {
 		$plan = topersia_ads_plan( $all, $slot, topersia_ads_ctx( 'desktop', $i ), topersia_ads_ctx( 'mobile', $i ), '' !== $s['m'], $st['used'] );
 
 		foreach ( $plan as $row ) {
-			$vis = topersia_ads_take( $st['budget'], $row[1] );
+			/* P5-D641: میان‌فهرستی سقف خودش را دارد (۴) و از بودجۀ D623 نمی‌خورد (D639) */
+			$vis = empty( $s['density'] ) ? $row[1] : topersia_ads_take( $st['budget'], $row[1] );
 			if ( '' === $vis ) {
 				continue;
 			}
 			$unit = topersia_ads_unit( $row[0], $slot, $vis, $lang );
 			if ( '' === $unit ) {
 				/* تصویر پیوست پاک شده — بودجه برمی‌گردد */
-				$st['budget']['d'] += 'm' === $vis ? 0 : 1;
-				$st['budget']['m'] += 'd' === $vis ? 0 : 1;
+				if ( ! empty( $s['density'] ) ) {
+					$st['budget']['d'] += 'm' === $vis ? 0 : 1;
+					$st['budget']['m'] += 'd' === $vis ? 0 : 1;
+				}
 				continue;
 			}
 			$html               .= $unit;
@@ -399,6 +411,12 @@ add_action( 'wp_footer', function () {
 		'u' => esc_url_raw( rest_url( 'topersia-ads/v1/imp' ) ),
 		't' => topersia_ads_imp_token( (int) floor( time() / 86400 ), wp_salt( 'nonce' ) ),
 	) );
+	/* P5-D641 (دستۀ 56-الف بند ۳): بازچینی کارت میان‌فهرستی پس از پالایش، «نمایش بیشتر» و پنهان‌شدن کارت — پروندۀ جدا
+	   تا شمارندۀ نمایش زیر بودجۀ ۲ کیلوبایت بماند؛ همان اعداد PHP */
+	if ( 'hub' === topersia_ads_page() ) {
+		wp_enqueue_script( 'topersia-ads-feed', topersia_ads_url( 'assets/tp-ads-feed.js' ), array(), TOPERSIA_ADS_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
+		wp_localize_script( 'topersia-ads-feed', 'TopersiaAdsFeed', topersia_ads_feed_rule() );
+	}
 }, 5 );
 
 /* نشانۀ شمار واحدها برای آزمون و گزارش بند ۷ — فقط برای مدیر تبلیغ، در یادداشت HTML پایان صفحه */

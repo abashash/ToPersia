@@ -168,10 +168,25 @@ t( 'بند ۵ · ۶: جایگاه در صفحۀ نوع دیگر ← رد؛ مو�
 	&& ! topersia_ads_eligible( $w54_ad( 1 ), 'single-rail', $w54_ctx( array( 'page' => 'single', 'device' => 'mobile' ) ) )
 	&& topersia_ads_eligible( $w54_ad( 1 ), 'single-rail', $w54_ctx( array( 'page' => 'single' ) ) ) );
 $w54_empty = function ( $s ) use ( $w54_q ) {
-	return (bool) preg_match( '/function topersia_ads_empty\( \$slot \) \{\s*' . $w54_q( 'if ( ! current_user_can( TOPERSIA_ADS_CAP ) ) {' ) . "\s*return '';/", $s );
+	/* دستۀ 56-الف: نخست شاخۀ کارت میان‌فهرستی (P5-D650)، سپس همان شرط توان برای بقیۀ جایگاه‌ها */
+	return (bool) preg_match( '/function topersia_ads_empty\( \$slot \) \{.*?' . $w54_q( "if ( 'hub-infeed' === \$slot ) {" ) . '.*?\n\t\t\}\n\t\t' . $w54_q( 'if ( ! current_user_can( TOPERSIA_ADS_CAP ) ) {' ) . "\s*return '';/s", $s );
 };
 tp441_mut( 'بند ۶ · P5-D624: جایگاه خالی برای بازدیدکننده هیچ؛ نشانۀ نقطه‌چین فقط با توان manage_tp_ads — جهش: بی شرط توان', $w54_empty, $w54_render,
 	str_replace( 'if ( ! current_user_can( TOPERSIA_ADS_CAP ) ) {', 'if ( false ) {', $w54_render ) );
+/* دستۀ 56-الف (P5-D650): کارت میان‌فهرستی خالی — پیش‌نمایش برای همه، عمومی فقط مدیر؛ نشانگر «جایگاه تبلیغ · خالی» در ظرف tp-ad-slot */
+$w54_d650 = function ( $s ) {
+	return false !== strpos( $s, "if ( ! topersia_ads_demo() && ! current_user_can( TOPERSIA_ADS_CAP ) ) {
+				return '';" )
+		&& false !== strpos( $s, "<div class=\"tp-ad-slot tp-ad-slot--hub-infeed tp-ad-slot--empty\" data-nosnippet>" )
+		&& false !== strpos( $s, "esc_html__( 'جایگاه تبلیغ · خالی', 'topersia-ads' )" );
+};
+tp441_mut( 'P5-D650: کارت میان‌فهرستی خالی فقط در پیش‌نمایش یا برای مدیر، در خانۀ خودش — جهش: بی شرط مدیر', $w54_d650, $w54_render,
+	str_replace( 'if ( ! topersia_ads_demo() && ! current_user_can( TOPERSIA_ADS_CAP ) ) {', 'if ( ! topersia_ads_demo() ) {', $w54_render ) );
+$w54_d650_css = function ( $css ) {
+	return 2 === substr_count( $css, '.tp-ad-slot:not(.tp-ad-slot--empty):not(:has(.tp-ad:not(.tp-ad--' ) && ! preg_match( '/\.tp-ad-slot:not\(:has\(/', $css );
+};
+tp441_mut( 'P5-D650: نشانگر خالی در هر دو دستگاه دیده می‌شود (قاعدۀ پنهان‌کردن جایگاه بی واحد دستگاه آن را نمی‌گیرد) — جهش: بی استثنای --empty', $w54_d650_css, $w54_css,
+	str_replace( '.tp-ad-slot:not(.tp-ad-slot--empty):not(:has(', '.tp-ad-slot:not(:has(', $w54_css ) );
 
 /* بند ۶: دو تبلیغ هم‌رده و دو نوبت «کارت میان فهرست» — هر نوبت یک واحد برای هر دو دستگاه، در هر بازۀ ۱۰ دقیقه؛
    بذر دستگاه نباید هر دو را در نوبت نخست مصرف کند (هاب ۳۹۰ دستۀ 54). ردۀ بالاتر موبایل برنده می‌ماند. */
@@ -223,18 +238,53 @@ tp441_mut( 'بند ۷: پاورقی بیرون از بودجۀ تراکم (جا�
 $w54_p4 = '<p>1</p><blockquote><p>q</p></blockquote><p>2</p><ul><li><p>l</p></li></ul><p>3</p><p>4</p>';
 t( 'بند ۵ · ۷: میان متن پس از بند سوم سطح بالا (بند نقل‌قول و فهرست شمرده نمی‌شود)؛ کمتر از سه بند ← بی تبلیغ',
 	false !== strpos( topersia_ads_inline_insert( $w54_p4, '<X>' ), '<p>3</p><X><p>4</p>' ) && '<p>1</p><p>2</p>' === topersia_ads_inline_insert( '<p>1</p><p>2</p>', '<X>' ) );
-t( 'بند ۵: کارت میان فهرست پس از ۴ کارت و سپس هر ۸، نه ته فهرست',
-	array( 4, 12 ) === topersia_ads_feed_positions( 20 ) && array() === topersia_ads_feed_positions( 4 ) && array( 4 ) === topersia_ads_feed_positions( 5 ) );
+/* دستۀ 56-الف بند ۳ (P5-D641، جای D639): خانه‌های ۶، ۱۸، ۳۰، ۴۲؛ سقف ۴؛ هرگز آخرین خانه؛ زیر ۶ کارت هیچ */
+$w54_d641 = function () {
+	foreach ( range( 0, 120 ) as $k ) {
+		$p = topersia_ads_feed_positions( $k );
+		if ( count( $p ) > 4 || ( $p && max( $p ) >= $k ) || ( $k < 6 && $p ) ) {
+			return false;
+		}
+		foreach ( $p as $m => $b ) {
+			if ( 6 + 12 * $m !== $b + $m + 1 ) {
+				return false;   /* خانۀ آگهی m = کارت‌های پیش از آن + آگهی‌های پیش از آن + ۱ */
+			}
+		}
+	}
+	return array( 5, 16, 27, 38 ) === topersia_ads_feed_positions( 48 ) && array() === topersia_ads_feed_positions( 5 ) && array( 5 ) === topersia_ads_feed_positions( 6 )
+		&& array( 5 ) === topersia_ads_feed_positions( 16 ) && array( 5, 16 ) === topersia_ads_feed_positions( 17 );
+};
+t( 'P5-D641: کارت میان فهرست در خانه‌های ۶، ۱۸، ۳۰، ۴۲؛ سقف ۴؛ هرگز آخرین خانه؛ زیر ۶ کارت بی آگهی (۰ تا ۱۲۰ کارت)', $w54_d641() );
+$w54_logic_src = $w54_logic;
+tp441_mut( 'P5-D641: اعداد فقط از topersia_ads_feed_rule() و tp-ads-feed.js همان را از TopersiaAdsFeed می‌گیرد — جهش: خانۀ ۶ ← ۴',
+	function ( $s ) { return false !== strpos( $s, "return array( 'cells' => array( 6, 18, 30, 42 ), 'min' => 6 );" ); }, $w54_logic_src,
+	str_replace( 'array( 6, 18, 30, 42 )', 'array( 4, 18, 30, 42 )', $w54_logic_src ) );
+$w54_cap = function ( $render ) {
+	$s = topersia_ads_slots()['hub-infeed'];
+	return 4 === $s['max'] && false === $s['density']
+		&& false !== strpos( $render, "\$vis = empty( \$s['density'] ) ? \$row[1] : topersia_ads_take( \$st['budget'], \$row[1] );" );
+};
+tp441_mut( 'P5-D641 · D639: میان‌فهرستی سقف ۴ خودش را دارد و از بودجۀ تراکم D623 (۳/۲) نمی‌خورد — جهش: بودجه برای همه', $w54_cap, $w54_render,
+	str_replace( "\$vis = empty( \$s['density'] ) ? \$row[1] : topersia_ads_take(", "\$vis = topersia_ads_take(", $w54_render ) );
+$w54_feed_js = $w54_read( 'plugin/topersia-ads/assets/tp-ads-feed.js' );
+$w54_feed_ok = function ( $js ) use ( $w54_render ) {
+	$code = preg_replace( '#/\*.*?\*/#s', '', $js );
+	return false !== strpos( $code, "var R = window.TopersiaAdsFeed || {}, CELLS = R.cells || [], MIN = R.min || 0" ) && ! preg_match( '/\b(?:18|30|42)\b/', $code )
+		&& false !== strpos( $code, "e.matches( '.tp-news-card' )" ) && false !== strpos( $code, 'CELLS[ m ] - 1 - m' ) && false !== strpos( $code, 'before < cards.length' )
+		&& false !== strpos( $w54_render, "wp_localize_script( 'topersia-ads-feed', 'TopersiaAdsFeed', topersia_ads_feed_rule() );" );
+};
+tp441_mut( 'P5-D641: tp-ads-feed.js همان قاعده را روی کارت‌های دیده‌شده می‌چیند، عدد از TopersiaAdsFeed، فقط .tp-news-card شمرده می‌شود — جهش: عدد خام در JS', $w54_feed_ok, $w54_feed_js,
+	str_replace( 'CELLS = R.cells || []', 'CELLS = [ 6, 18, 30, 42 ]', $w54_feed_js ) );
 t( 'بند ۷: شمار واحد هر صفحه برای مدیر تبلیغ در یک توضیح HTML (page · d · m · footer)',
 	false !== strpos( $w54_render, '<!-- tp-ads page=' ) && false !== strpos( $w54_render, "' footer=' . (int) \$st['units']['footer']" ) );
 /* جای واحد: هر جایگاه جز «زیر نوار ابزار هاب» بسته رندر می‌شود و tp-ads.js فقط یکسره زیر صفحه‌نمایش و دو صفحه‌نمایش دور از واحد پیشین بازش می‌کند */
 $w54_gate_css = function ( $css ) {
 	$c = preg_replace( '#/\*.*?\*/#s', '', $css );
-	return false !== strpos( $c, '.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top){display:none}' )
-		&& false !== strpos( $c, '.tp-news-grid--rows > .tp-ad-slot--hub-infeed{max-inline-size:400px}' );
+	return false !== strpos( $c, '.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top):not(.tp-ad-slot--hub-infeed){display:none}' )
+		&& false !== strpos( $c, '.tp-news-grid--rows > .tp-ad-slot--hub-infeed{grid-column:1 / -1}' ) && false !== strpos( $c, '.tp-ad-slot[hidden]{display:none}' );
 };
-tp441_mut( 'بند ۷: جایگاه بسته تا tp-ads.js بازش کند (جز «زیر نوار ابزار هاب»)؛ کارت میان فهرست هم‌اندازۀ کارت — جهش: جایگاه از آغاز باز', $w54_gate_css, $w54_css,
-	str_replace( '.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top){display:none}', '', $w54_css ) );
+tp441_mut( 'بند ۷: جایگاه بسته تا tp-ads.js بازش کند (جز «زیر نوار ابزار هاب» و کارت میان‌فهرستی که جای ثابت P5-D641 دارد)؛ در نمای فهرست یک ردیف تمام‌عرض — جهش: جایگاه از آغاز باز', $w54_gate_css, $w54_css,
+	str_replace( '.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top):not(.tp-ad-slot--hub-infeed){display:none}', '', $w54_css ) );
 $w54_gate_js = function ( $s ) {
 	return false !== strpos( $s, 'GAP = 2' ) && false !== strpos( $s, 'EDGE = 32' ) && false !== strpos( $s, "why = y < sy + vh + EDGE ? 'screen' : ( ! o.side && null !== last && y - last < GAP * vh ? 'gap' : '' );" )
 		&& false !== strpos( $s, "s.setAttribute( 'data-tp-ad-off', why );" ) && false !== strpos( $s, 's.classList.add( ON );' )
@@ -410,7 +460,7 @@ $w54_i18n = escapeshellarg( $w54_root . '/scripts/tp-ads-i18n.php' ) . ' --check
 t( 'قاعدۀ سه‌زبانه: کاتالوگ topersia-ads (en_US · ar) کامل، جانشین‌ها همان، عربی بی حرف ویژۀ فارسی، خروجی با جدول یکی', 0 === tp_run_php( $w54_i18n ) );
 $w54_prev = getenv( 'TP_ADS_I18N_TABLE' );
 $w54_tmp  = sys_get_temp_dir() . '/tp-ads-i18n-mut-' . getmypid() . '.php';
-file_put_contents( $w54_tmp, str_replace( "'ar' => 'إعلان' )", "'ar' => 'یک آگهی' )", $w54_read( 'scripts/i18n/topersia-ads.php' ) ) );
+file_put_contents( $w54_tmp, str_replace( "'ar' => 'إعلان', ", "'ar' => 'یک آگهی', ", $w54_read( 'scripts/i18n/topersia-ads.php' ) ) );
 putenv( 'TP_ADS_I18N_TABLE=' . $w54_tmp );
 $w54_mut_code = tp_run_php( $w54_i18n );
 putenv( false === $w54_prev ? 'TP_ADS_I18N_TABLE' : 'TP_ADS_I18N_TABLE=' . $w54_prev );

@@ -54,7 +54,7 @@ if ( ! function_exists( 'topersia_ads_slots' ) ) {
 		return array(
 			'home-mid'      => array( 'name' => 'میان صفحۀ اول',          'd' => 'wide', 'm' => 'mwide', 'page' => 'home',   'max' => 2, 'density' => true ),
 			'hub-top'       => array( 'name' => 'زیر نوار ابزار هاب',       'd' => 'wide', 'm' => '',      'page' => 'hub',    'max' => 1, 'density' => true ),
-			'hub-infeed'    => array( 'name' => 'کارت میان فهرست هاب',      'd' => 'card', 'm' => 'card',  'page' => 'hub',    'max' => 2, 'density' => true ),
+			'hub-infeed'    => array( 'name' => 'کارت میان فهرست هاب',      'd' => 'card', 'm' => 'card',  'page' => 'hub',    'max' => 4, 'density' => false ),
 			'single-inline' => array( 'name' => 'میان متن خبر و مقاله',     'd' => 'wide', 'm' => 'mwide', 'page' => 'single', 'max' => 1, 'density' => true ),
 			'single-rail'   => array( 'name' => 'ستون کناری خبر و مقاله',   'd' => 'rect', 'm' => '',      'page' => 'single', 'max' => 1, 'density' => true ),
 			'single-end'    => array( 'name' => 'پیش از مرتبط‌ها',           'd' => 'wide', 'm' => 'mwide', 'page' => 'single', 'max' => 1, 'density' => true ),
@@ -385,13 +385,34 @@ if ( ! function_exists( 'topersia_ads_inline_insert' ) ) {
 }
 
 if ( ! function_exists( 'topersia_ads_feed_positions' ) ) {
-	/** جای کارت‌های میان فهرست: پس از ۴ کارت و سپس هر ۸ کارت، فقط پیش از کارت بعدی (نه ته فهرست). */
-	function topersia_ads_feed_positions( $count, $first = 4, $every = 8 ) {
-		$out = array();
-		for ( $p = (int) $first; $p < (int) $count; $p += (int) $every ) {
-			$out[] = $p;
+	/**
+	 * موتور مکان‌یابی میان‌فهرستی — P5-D641 (دستۀ 56-الف بند ۳؛ D639 را در اعداد جایگزین می‌کند).
+	 * آگهی در خانه‌های ۶، ۱۸، ۳۰، ۴۲ (شمارش از ۱، آگهی‌ها هم خانه‌اند؛ دورۀ ۱۲ هم‌تراز با ۲/۳/۴ ستون)؛
+	 * سقف ۴ در هر صفحه؛ هرگز آخرین خانه (پس از هر آگهی دست‌کم یک کارت)؛ صفحۀ زیر ۶ کارت بی آگهی.
+	 * خروجی: شمارۀ کارتی (از ۰) که آگهی پیش از آن می‌نشیند. tp-ads.js همین قاعده را روی کارت‌های دیده‌شده تکرار می‌کند
+	 * (assets/tp-ads-feed.js، TopersiaAdsFeed از topersia_ads_feed_rule()) — قاعدۀ دوم ننویس.
+	 */
+	function topersia_ads_feed_positions( $count ) {
+		$rule = topersia_ads_feed_rule();
+		$out  = array();
+		if ( (int) $count < $rule['min'] ) {
+			return $out;
+		}
+		foreach ( $rule['cells'] as $m => $cell ) {
+			$before = (int) $cell - 1 - $m;   /* کارت‌های پیش از این خانه */
+			if ( $before >= (int) $count ) {
+				break;
+			}
+			$out[] = $before;
 		}
 		return $out;
+	}
+}
+
+if ( ! function_exists( 'topersia_ads_feed_rule' ) ) {
+	/** تنها منبع اعداد P5-D641 — PHP و tp-ads-feed.js (TopersiaAdsFeed) هر دو از همین. */
+	function topersia_ads_feed_rule() {
+		return array( 'cells' => array( 6, 18, 30, 42 ), 'min' => 6 );
 	}
 }
 
