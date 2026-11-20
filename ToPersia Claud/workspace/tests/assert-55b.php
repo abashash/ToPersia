@@ -67,3 +67,31 @@ $w55b_sf_apply = function ( $s ) {
 tp441_mut( 'بند ۲: apply پیش از هر نوشتن پشتیبان می‌نویسد و بازمی‌خواند؛ فقط ردیف‌های best_season؛ check برای هر تعریف بی هدف کد ۱ — جهش: نوشتن پیش از پشتیبان',
 	$w55b_sf_apply, $w55b_sf,
 	preg_replace( "/(\t\\\$dump = array\()/", "\tupdate_option( TP_SF_OPTION, \$boxes );\n\$1", $w55b_sf, 1 ) );
+
+/* ── P5-D640: روسی زبان چهارم — رشتۀ پیش از ۵۵-ب در خط‌پایۀ ثابت بی ترجمه مجاز؛ هر رشتۀ تازه ru می‌خواهد ──────────────
+ * رفتار خودِ tp-i18n.php --check با خط‌پایه‌های گوناگون (TP_I18N_RU_BASELINE)؛ خروجی واقعی را assert-442 می‌سنجد. */
+$w55b_ru_base = json_decode( $w55b_read( 'scripts/i18n/ru-baseline.json' ), true );
+$w55b_ru_run  = function ( $base ) use ( $w55b_root ) {
+	if ( ! is_array( $base ) || ! $base ) {
+		return array( -1, '' );
+	}
+	$tmp = tempnam( sys_get_temp_dir(), 'tp55bru' ) . '.json';
+	file_put_contents( $tmp, json_encode( array_values( $base ), JSON_UNESCAPED_UNICODE ) );
+	putenv( 'TP_I18N_RU_BASELINE=' . $tmp );
+	exec( escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( $w55b_root . '/scripts/tp-i18n.php' ) . ' --check 2>&1', $out, $code );
+	putenv( 'TP_I18N_RU_BASELINE' );
+	@unlink( $tmp );
+	return array( (int) $code, implode( "\n", $out ) );
+};
+$w55b_ru_ok = function ( $base ) use ( $w55b_ru_run ) {
+	list( $code, $out ) = $w55b_ru_run( $base );
+	return 0 === $code && false !== strpos( $out, 'روسی' );
+};
+tp441_mut( 'P5-D640: روسی — رشتۀ بیرون از خط‌پایه بی ترجمۀ ru قرمز است («رشتۀ تازه») — جهش: خط‌پایه یک مدخل کم',
+	$w55b_ru_ok, $w55b_ru_base, is_array( $w55b_ru_base ) ? array_slice( $w55b_ru_base, 1 ) : array() );
+tp441_mut( 'P5-D640: خط‌پایۀ ru فقط کوتاه می‌شود — مدخل رشته‌ای که دیگر نیست قرمز است — جهش: یک مدخل ساختگی',
+	$w55b_ru_ok, $w55b_ru_base, is_array( $w55b_ru_base ) ? array_merge( $w55b_ru_base, array( 'رشتۀ ساختگی که در هیچ پرونده‌ای نیست ۵۵ب' ) ) : array() );
+$w55b_ru_new = is_array( $w55b_ru_base ) ? $w55b_ru_run( array_slice( $w55b_ru_base, 1 ) ) : array( -1, '' );
+t( 'P5-D640: پیام خطای رشتۀ تازه نام تصمیم را می‌برد (کاربر می‌داند چرا قرمز است)', false !== strpos( $w55b_ru_new[1], 'رشتۀ تازه، P5-D640' ), mb_substr( $w55b_ru_new[1], 0, 160 ) );
+$w55b_ru_po = $w55b_read( 'plugin/topersia-render/languages/topersia-ru_RU.po' );
+t( 'P5-D640: کاتالوگ ru_RU ساخته شده — سه شکل جمع روسی در سربرگ', false !== strpos( $w55b_ru_po, 'nplurals=3;' ) && is_file( $w55b_root . '/plugin/topersia-render/languages/topersia-ru_RU.mo' ) && is_file( $w55b_root . '/plugin/topersia-render/languages/topersia-ru_RU.l10n.php' ) );

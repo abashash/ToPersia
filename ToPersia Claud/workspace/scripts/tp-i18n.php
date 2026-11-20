@@ -70,7 +70,12 @@ $FILES = array(
 $LOCALES = array(
 	'en_US' => array( 'key' => 'en', 'lang' => 'en', 'plural' => 'nplurals=2; plural=(n != 1);', 'n' => 2 ),
 	'ar'    => array( 'key' => 'ar', 'lang' => 'ar', 'plural' => 'nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);', 'n' => 6 ),
+	/* P5-D640 — روسی زبان چهارم (LTR، /ru/). رشته‌های پیش از ۵۵-ب در خط‌پایۀ ثابت (ru-baseline.json) بی ترجمه مجازند و در
+	 * خروجی ru نمی‌آیند؛ هر رشتۀ تازه از این پس ru می‌خواهد (--check). */
+	'ru_RU' => array( 'key' => 'ru', 'lang' => 'ru', 'plural' => 'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);', 'n' => 3, 'partial' => true ),
 );
+/* TP_I18N_RU_BASELINE فقط برای آزمون جهش (assert-55b.php) — خط‌پایۀ کوتاه‌شده باید `--check` را بیندازد */
+$RU_BASELINE_FILE = getenv( 'TP_I18N_RU_BASELINE' ) ? getenv( 'TP_I18N_RU_BASELINE' ) : __DIR__ . '/i18n/ru-baseline.json';
 
 /* ── استخراج ─────────────────────────────────────────────────────────── */
 
@@ -182,6 +187,30 @@ $errors = array();
 $ARABIC_SCRIPT = '/[\x{0600}-\x{06FF}]/u';
 $PERSIAN_ONLY  = '/[پچژگکی]/u';
 
+/* خط‌پایۀ ru: فهرست ثابت msgidهای پیش از ۵۵-ب که هنوز ru ندارند. فقط کوتاه می‌شود — مدخلی که ru گرفت یا دیگر نیست قرمز است. */
+$ru_base = is_file( $RU_BASELINE_FILE ) ? json_decode( (string) file_get_contents( $RU_BASELINE_FILE ), true ) : array();
+$ru_base = is_array( $ru_base ) ? array_fill_keys( $ru_base, true ) : array();
+if ( in_array( '--ru-baseline', $argv, true ) ) {
+	/* فقط یک بار، هنگام آغاز ru (۵۵-ب): هر msgid امروزِ بی ru */
+	$list = array();
+	foreach ( array_merge( array_keys( $plain ), array_keys( $plur ) ) as $s ) {
+		if ( ! isset( $table[ $s ]['ru'] ) ) {
+			$list[] = $s;
+		}
+	}
+	sort( $list, SORT_STRING );
+	file_put_contents( __DIR__ . '/i18n/ru-baseline.json', json_encode( $list, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "\n" );
+	printf( "خط‌پایۀ ru: %d msgid\n", count( $list ) );
+	exit( 0 );
+}
+foreach ( array_keys( $ru_base ) as $s ) {
+	if ( ! isset( $plain[ $s ] ) && ! isset( $plur[ $s ] ) ) {
+		$errors[] = "مدخل کهنۀ خط‌پایۀ ru (رشته دیگر نیست): «{$s}»";
+	} elseif ( isset( $table[ $s ]['ru'] ) ) {
+		$errors[] = "مدخل کهنۀ خط‌پایۀ ru (ترجمه دارد؛ از خط‌پایه بردار): «{$s}»";
+	}
+}
+
 function tpi_placeholders( $s ) {
 	preg_match_all( '/%(?:\d+\$)?[sd]/', $s, $m );
 	$p = $m[0];
@@ -203,9 +232,15 @@ foreach ( $plain as $s => $where ) {
 
 		$tr = ( is_array( $row ) && isset( $row[ $cfg['key'] ] ) ) ? $row[ $cfg['key'] ] : '';
 
+		if ( ! empty( $cfg['partial'] ) && ! isset( $row[ $cfg['key'] ] ) && isset( $ru_base[ $s ] ) ) {
+			continue;   /* رشتۀ پیش از ۵۵-ب — در خط‌پایه */
+		}
 		if ( ! is_string( $tr ) || '' === trim( $tr ) ) {
-			$errors[] = "بی ترجمۀ {$cfg['key']}: «{$s}»  ({$where})";
+			$errors[] = "بی ترجمۀ {$cfg['key']}: «{$s}»  ({$where})" . ( ! empty( $cfg['partial'] ) ? ' — رشتۀ تازه، P5-D640' : '' );
 			continue;
+		}
+		if ( 'ru' === $cfg['key'] && preg_match( $ARABIC_SCRIPT, $tr ) ) {
+			$errors[] = "نویسۀ عربی‌خط در ترجمۀ روسی: «{$s}» ← «{$tr}»";
 		}
 		if ( tpi_placeholders( $s ) !== tpi_placeholders( $tr ) ) {
 			$errors[] = "جانشینِ ناهمخوان {$cfg['key']}: «{$s}» ← «{$tr}»";
@@ -229,6 +264,9 @@ foreach ( $plur as $s => $pair ) {
 
 		$forms = ( is_array( $row ) && isset( $row[ $cfg['key'] ] ) ) ? $row[ $cfg['key'] ] : null;
 
+		if ( ! empty( $cfg['partial'] ) && null === $forms && isset( $ru_base[ $s ] ) ) {
+			continue;
+		}
 		if ( ! is_array( $forms ) || count( $forms ) !== $cfg['n'] ) {
 			$errors[] = "جمعِ {$cfg['key']} باید {$cfg['n']} شکل داشته باشد: «{$s}»  ({$pair[2]})";
 			continue;
@@ -237,7 +275,7 @@ foreach ( $plur as $s => $pair ) {
 		foreach ( $forms as $f ) {
 			if ( ! is_string( $f ) || '' === trim( $f ) || array_diff( tpi_placeholders( $f ), tpi_placeholders( $s ) )
 				|| ( 'en' === $cfg['key'] && tpi_placeholders( $s ) !== tpi_placeholders( $f ) )
-				|| ( 'en' === $cfg['key'] && preg_match( $ARABIC_SCRIPT, $f ) )
+				|| ( in_array( $cfg['key'], array( 'en', 'ru' ), true ) && preg_match( $ARABIC_SCRIPT, $f ) )
 				|| ( 'ar' === $cfg['key'] && preg_match( $PERSIAN_ONLY, $f ) ) ) {
 				$errors[] = "شکل جمعِ نادرست {$cfg['key']}: «{$s}» ← «{$f}»";
 			}
@@ -290,7 +328,7 @@ function tpi_po( $locale, $cfg, $plain, $plur, $msgs ) {
 	foreach ( $plur as $s => $pair ) {
 		$out .= "\n#: {$pair[2]}\n#, php-format\n";
 		$out .= 'msgid ' . tpi_po_str( $pair[0] ) . "\n" . 'msgid_plural ' . tpi_po_str( $pair[1] ) . "\n";
-		$forms = $cfg && isset( $msgs[ $pair[0] . "\0" . $pair[1] ] ) ? explode( "\0", $msgs[ $pair[0] . "\0" . $pair[1] ] ) : array( '', '' );
+		$forms = $cfg && isset( $msgs[ $pair[0] . "\0" . $pair[1] ] ) ? explode( "\0", $msgs[ $pair[0] . "\0" . $pair[1] ] ) : array_fill( 0, $cfg ? $cfg['n'] : 2, '' );
 		foreach ( $forms as $k => $f ) {
 			$out .= 'msgstr[' . $k . '] ' . tpi_po_str( $f ) . "\n";
 		}
@@ -364,7 +402,7 @@ if ( in_array( '--check', $argv, true ) ) {
 		exit( 1 );
 	}
 
-	printf( "کاتالوگ سالم: %d رشته + %d جمع، هر کدام انگلیسی و عربی\n", count( $plain ), count( $plur ) );
+	printf( "کاتالوگ سالم: %d رشته + %d جمع، هر کدام انگلیسی و عربی؛ روسی %d (خط‌پایۀ پیش از ۵۵-ب: %d)\n", count( $plain ), count( $plur ), count( $messages['ru_RU'] ), count( $ru_base ) );
 	exit( 0 );
 }
 
