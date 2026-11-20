@@ -4,6 +4,8 @@
  *
  *   php scripts/tp-backup.php [--dir=C:/wamp64/tp-backups] [--no-prune] [--allow-unstable]
  *   php scripts/tp-backup.php --prune-only [--dry-run]
+ *   php scripts/tp-backup.php --as-check [--as-window=1800]   (فقط پیش‌بررسی Action Scheduler؛ کد ۰ آرام · ۵ ناپایدار؛ چیزی نمی‌نویسد)
+ *   پیش‌بررسی: --as-window=ثانیه (پیش‌فرض ۱۸۰۰) · --as-wait=ثانیه (پیش‌فرض ۶۰، بازسنجی هر ۱۵ ثانیه) · --allow-as-purge (با آگاهی ادامه)
  *
  * بسته (full-YYYYMMDD-HHMM/): db.sql.gz (wp db export، فشرده، single-transaction) · uploads.zip · fingerprint.json ·
  * manifest.json (sha256 و اندازه، نسخهٔ WPML، شمار پست هر نوع، شمار ردیف رابطه، اثر انگشت tests/lib/db-fingerprint.php).
@@ -33,6 +35,15 @@ function tpb_prune( $root, $dry ) {
 if ( ! empty( $opt['prune-only'] ) ) {
 	tpb_prune( $root, ! empty( $opt['dry-run'] ) );
 	exit( 0 );
+}
+
+/* ── پیش‌بررسی Action Scheduler (P5-D649 ب): پاک‌سازی خودکارش میان اثر انگشت پیش و پس کد ۴ می‌داد ── */
+tpb_out( '۰) پیش‌بررسی Action Scheduler…' );
+$as_ok = tpb_as_preflight( isset( $opt['as-window'] ) ? (int) $opt['as-window'] : 1800, isset( $opt['as-wait'] ) ? (int) $opt['as-wait'] : ( empty( $opt['as-check'] ) ? 60 : 0 ), __DIR__ . '/lib/tp-backup-as.php' );
+if ( ! empty( $opt['as-check'] ) ) { exit( $as_ok ? 0 : 5 ); }
+if ( ! $as_ok ) {
+	if ( empty( $opt['allow-as-purge'] ) ) { tpb_fail( 'Action Scheduler ناپایدار است؛ پشتیبان در میانه کد ۴ می‌داد — پس از پاک‌سازی دوباره اجرا کنید، یا --as-wait=ثانیه، یا با آگاهی --allow-as-purge', 5 ); }
+	tpb_out( '   --allow-as-purge: با آگاهی ادامه؛ اگر اثر انگشت عوض شد کد ۴ می‌گیرید' );
 }
 
 $db   = tpb_db();

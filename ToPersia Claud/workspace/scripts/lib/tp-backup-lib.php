@@ -307,3 +307,59 @@ function tpb_retention( $root, $daily = 7, $weekly = 4 ) {
 	if ( is_array( $lr ) && isset( $lr['package'], $pk[ $lr['package'] ] ) ) { $keep[ $lr['package'] ][] = 'آخرین بازگردانی موفق'; }
 	return array( 'keep' => $keep, 'drop' => array_values( array_diff( array_keys( $pk ), array_keys( $keep ) ) ) );
 }
+
+/**
+ * حکم پیش‌بررسی Action Scheduler (P5-D649 ب) — تابع خالص. $facts خروجی tp-backup-as.php؛ $window ثانیه‌هایی که پشتیبان طول می‌کشد.
+ * ناپایدار = ردیفی که اکنون یا درون پنجره مشمول پاک‌سازی خودکار می‌شود، یا اجرای in-progress گیرکرده (پاک‌ساز آن را failed می‌کند)؛
+ * هر کدام اثر انگشت را میان «پیش» و «پس» عوض می‌کند و کد ۴ می‌دهد. pending_due فقط هشدار است (اجرایش به درخواست وب نیاز دارد).
+ * بازگشت: [ 'stable' => bool, 'now' => n, 'soon' => n, 'stale' => n, 'pending_due' => n, 'next_in' => ثانیه تا نخستین مشمول‌شدن|null, 'lines' => [..] ]
+ */
+function tpb_as_verdict( array $facts, $window = 1800 ) {
+	$window = max( 0, (int) $window );
+	$now    = (int) ( $facts['now'] ?? time() );
+	$cut    = $now - (int) ( $facts['retention'] ?? 2678400 );
+	$n_now  = 0; $n_soon = 0; $first = null;
+	foreach ( (array) ( $facts['purgeable_last_attempt'] ?? array() ) as $ts ) {
+		$at = strtotime( $ts . ' UTC' );
+		if ( false === $at ) { continue; }
+		if ( $at <= $cut ) { $n_now++; continue; }
+		if ( $at <= $cut + $window ) { $n_soon++; }
+		if ( null === $first || $at < $first ) { $first = $at; }
+	}
+	$stale = (int) ( $facts['stale_in_progress'] ?? 0 );
+	$due   = (int) ( $facts['pending_due'] ?? 0 );
+	$lines = array();
+	if ( $n_now ) { $lines[] = "{$n_now} ردیف complete/canceled همین حالا مشمول پاک‌سازی خودکار است"; }
+	if ( $n_soon ) { $lines[] = "{$n_soon} ردیف دیگر طی " . (int) ( $window / 60 ) . ' دقیقهٔ آینده مشمول می‌شود'; }
+	if ( $stale ) { $lines[] = "{$stale} اجرای in-progress بیش از ۵ دقیقه مانده (پاک‌ساز failed می‌کند)"; }
+	if ( $due ) { $lines[] = "{$due} کار pending سررسیده (با درخواست وب بعدی اجرا می‌شود)"; }
+	return array(
+		'stable'      => ! $n_now && ! $n_soon && ! $stale,
+		'now'         => $n_now,
+		'soon'        => $n_soon,
+		'stale'       => $stale,
+		'pending_due' => $due,
+		'next_in'     => null === $first ? null : max( 0, $first - $cut ),
+		'lines'       => $lines,
+	);
+}
+
+/** پیش‌بررسی زنده: اگر ناپایدار بود تا $wait ثانیه هر ۱۵ ثانیه بازمی‌سنجد؛ هنوز ناپایدار ← false. */
+function tpb_as_preflight( $window, $wait, $script ) {
+	$deadline = time() + max( 0, (int) $wait );
+	$tmp      = sys_get_temp_dir() . '/tpb-as-' . getmypid() . '.json';
+	do {
+		$facts = tpb_eval_file( $script, $tmp );
+		@unlink( $tmp );
+		if ( empty( $facts['table'] ) ) { tpb_out( '   جدول Action Scheduler نیست — بی خطر' ); return true; }
+		$v = tpb_as_verdict( $facts, $window );
+		if ( $v['stable'] ) {
+			tpb_out( '   Action Scheduler آرام است' . ( null === $v['next_in'] ? '' : ' — نخستین ردیف مشمول پاک‌سازی ' . (int) ( $v['next_in'] / 60 ) . ' دقیقهٔ دیگر' ) . ( $v['pending_due'] ? ' · ' . $v['lines'][ count( $v['lines'] ) - 1 ] : '' ) );
+			return true;
+		}
+		foreach ( $v['lines'] as $l ) { tpb_out( '   ⚠ ' . $l ); }
+		if ( time() >= $deadline ) { return false; }
+		tpb_out( '   صبر ۱۵ ثانیه…' );
+		sleep( 15 );
+	} while ( true );
+}
