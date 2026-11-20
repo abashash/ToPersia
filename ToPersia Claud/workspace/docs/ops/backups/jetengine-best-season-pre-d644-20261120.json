@@ -1,0 +1,415 @@
+{
+    "what": "P5-D644 — تعریف پیشین best_season در jet_engine_meta_boxes",
+    "taken": "2026-11-20T06:38:47+00:00",
+    "sha1_option": "9cc189989127879430ee0d2c824e47a10703dfd1",
+    "defs": {
+        "meta-2": {
+            "12": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 3170,
+                "title": "مناسب‌ترین فصل برای سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "50%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل برای سفر به این کشور. برای ایران که تنوع اقلیمی زیادی دارد، معمولاً بهار و پاییز.",
+                "is_required": true,
+                "show_in_rest": true,
+                "is_multiple": true
+            }
+        },
+        "meta-3": {
+            "5": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 7414,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "100%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل برای سفر به این منطقه.",
+                "show_in_rest": true
+            }
+        },
+        "meta-4": {
+            "5": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 2116,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل برای سفر به این استان."
+            }
+        },
+        "meta-5": {
+            "4": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 3868,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل برای سفر به این شهر.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-6": {
+            "2": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 6966,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "33.33333%",
+                "isNested": false,
+                "glossary_id": "34",
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل بازدید از این محله."
+            }
+        },
+        "meta-7": {
+            "4": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 3626,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل بازدید.",
+                "show_in_rest": true
+            }
+        },
+        "meta-8": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 9234,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_required": true,
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل سفر. برای جزایر جنوبی معمولاً پاییز و زمستان."
+            }
+        },
+        "meta-9": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 7305,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_required": "",
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل صعود یا بازدید."
+            }
+        },
+        "meta-10": {
+            "2": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 1269,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_required": true,
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل بازدید."
+            }
+        },
+        "meta-11": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 6871,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "برای کویر معمولاً پاییز و زمستان. تابستان را جز در موارد خاص پیشنهاد نکنید.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-12": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 3126,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_required": true,
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل بازدید."
+            }
+        },
+        "meta-14": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 2311,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل بازدید.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-15": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 5031,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_required": true,
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل بازدید از این مکان مذهبی."
+            }
+        },
+        "meta-16": {
+            "2": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 7578,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل بازدید. برای موزه معمولاً تمام سال.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-17": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 9993,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_required": true,
+                "show_in_rest": true,
+                "description": "مناسب‌ترین فصل بازدید."
+            }
+        },
+        "meta-18": {
+            "2": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 2857,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل. برای آبشار معمولاً بهار، برای کلوت پاییز و زمستان.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-19": {
+            "3": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 1599,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل بازدید.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-20": {
+            "2": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 8897,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "25%",
+                "isNested": false,
+                "glossary_id": "34",
+                "description": "مناسب‌ترین فصل بازدید.",
+                "is_required": true,
+                "show_in_rest": true
+            }
+        },
+        "meta-34": {
+            "1": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "options_source": "glossary",
+                "id": 6133,
+                "title": "بهترین فصل سفر",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "50%",
+                "isNested": false,
+                "glossary_id": "34",
+                "is_multiple": "",
+                "is_required": true,
+                "show_in_rest": true,
+                "description": "بهترین فصل برای پیمودن کل مسیر، نه یک توقف خاص. اگر مسیر در همهٔ فصول قابل سفر است، «تمام سال» را انتخاب کن."
+            }
+        },
+        "meta-39": {
+            "5": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "id": 5737,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "50%",
+                "isNested": false,
+                "show_in_rest": true,
+                "description": "همان واژه‌نامهٔ سراسری best_season که در دسته‌های G و A استفاده می‌شود. واژه‌نامهٔ تازه ساخته نشود — این فیلد باید در کل پروژه یک نوع و یک واژه‌نامه داشته باشد.",
+                "options_source": "glossary",
+                "glossary_id": "34"
+            }
+        },
+        "meta-40": {
+            "5": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "id": 5227,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "50%",
+                "isNested": false,
+                "show_in_rest": true,
+                "description": "همان واژه‌نامهٔ سراسری best_season که در دسته‌های G و A استفاده می‌شود. واژه‌نامهٔ تازه ساخته نشود — این فیلد باید در کل پروژه یک نوع و یک واژه‌نامه داشته باشد.",
+                "options_source": "glossary",
+                "glossary_id": "34"
+            }
+        },
+        "meta-41": {
+            "5": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "id": 8386,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "50%",
+                "isNested": false,
+                "show_in_rest": true,
+                "description": "همان واژه‌نامهٔ سراسری best_season که در دسته‌های G و A استفاده می‌شود. واژه‌نامهٔ تازه ساخته نشود — این فیلد باید در کل پروژه یک نوع و یک واژه‌نامه داشته باشد.",
+                "options_source": "glossary",
+                "glossary_id": "34"
+            }
+        },
+        "meta-42": {
+            "1": {
+                "type": "select",
+                "options": [],
+                "repeater-fields": [],
+                "id": 5310,
+                "title": "بهترین فصل بازدید",
+                "name": "best_season",
+                "object_type": "field",
+                "width": "50%",
+                "isNested": false,
+                "show_in_rest": true,
+                "description": "همان واژه‌نامهٔ سراسری best_season که در دسته‌های G و A استفاده می‌شود. واژه‌نامهٔ تازه ساخته نشود — این فیلد باید در کل پروژه یک نوع و یک واژه‌نامه داشته باشد.",
+                "options_source": "glossary",
+                "glossary_id": "34"
+            }
+        }
+    }
+}
