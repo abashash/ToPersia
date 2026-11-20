@@ -20,10 +20,14 @@ html .tp-page.tp-hub .tp-hub-tiles.tp-news-grid--rows .tp-tile{min-block-size:56
 html .tp-page.tp-news-page .tp-hub-more{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
 html .tp-page.tp-news-page .tp-hub-more[hidden]{display:none}
 html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{min-inline-size:150px}
-html .tp-page.tp-news-page .tp-hub-more__btn{display:inline-flex;align-items:center;min-block-size:44px;padding:0 16px;border-radius:var(--tp-tile-radius,12px);
+/* دستۀ 55 بند ۱۳ — دکمۀ «فیلتر» درون فرم است و قاعدۀ دکمۀ ارسال (`.tp-news-filter button`) بر `.tp-hub-more__btn` می‌چربید: دکمه پرِ سبز
+   دکمۀ «نمایش» را می‌گرفت و در حالت باز متن --tp-primary-text روی همان پر نامرئی می‌شد. حالا با .tp-news-filter (یک کلاس بیشتر) ظاهر کاشی
+   خودش را دارد (P5-D245) و هاورش هم کاشی است — هاور دکمۀ ارسال (پر --tp-text-strong) دیگر به آن نمی‌رسد. */
+html .tp-page.tp-news-page .tp-news-filter .tp-hub-more__btn{display:inline-flex;align-items:center;min-block-size:44px;padding:0 16px;border-radius:var(--tp-tile-radius,12px);
   border:1px solid var(--tp-tile-border);background:var(--tp-tile-bg);color:var(--tp-text-strong);font:inherit;font-weight:700;cursor:pointer}
-html .tp-page.tp-news-page .tp-hub-more__btn[hidden]{display:none}
-html .tp-page.tp-news-page .tp-hub-more__btn[aria-expanded="true"]{border-color:var(--tp-primary);color:var(--tp-primary-text)}
+html .tp-page.tp-news-page .tp-news-filter .tp-hub-more__btn[hidden]{display:none}
+html .tp-page.tp-news-page .tp-news-filter .tp-hub-more__btn[aria-expanded="true"]{border-color:var(--tp-primary);color:var(--tp-primary-text)}
+html .tp-page.tp-news-page .tp-news-filter .tp-hub-more__btn:hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-primary);color:var(--tp-primary-text)}
 html .tp-page.tp-news-page .tp-hub-card__sub{margin:0;font-size:calc(.875 * var(--tp-rem));line-height:1.7;color:var(--tp-text)}
 html .tp-page.tp-news-page .tp-hub-card__sub a{color:var(--tp-primary-text);text-decoration:underline;text-underline-offset:3px}
 html .tp-page.tp-news-page .tp-hub-card .tp-news-card__media--icon svg{inline-size:34px;block-size:34px;fill:none;stroke:var(--tp-primary-text);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -36,6 +40,11 @@ html .tp-page.tp-news-page .tp-hub-card .tp-news-card__media--icon svg{inline-si
 @media (max-width:720px){
   html .tp-page.tp-news-page .tp-hub-more{flex:1 1 100%}
   html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{flex:1 1 100%}
+  /* دستۀ 55 بند ۱۳ — ردیف ابزار هرگز از لبۀ صفحه بیرون نمی‌زند (پیش‌تر در ۳۹۰ با ظرف باز «نمایش» و شبکه/فهرست بیرون از لبه، در ۳۲۰ حتی بسته؛
+     برش ریشه سرریز سند را پنهان می‌کرد). فرم پایۀ صفر می‌گیرد تا دکمۀ شبکه/فهرست کنارش بماند و خودش سطر می‌شکند؛ ظرف باز (پایۀ ۱۰۰٪)
+     سطر خودش را زیر «فیلتر» می‌گیرد — ترتیب دیداری همان ترتیب DOM و فوکوس؛ مرتب‌سازی با پایۀ صفر کوچک می‌شود و سطر بسته را نمی‌شکند. */
+  html .tp-page.tp-news-page .tp-news-bar__tools form.tp-news-filter--min{flex:1 1 0;min-inline-size:0;flex-wrap:wrap}
+  html .tp-page.tp-news-page .tp-news-bar__tools .tp-news-filter--min > .tp-news-filter__f{flex:1 1 0}
   /* دستۀ 55 بند ۷ — همان وضعیت پس از news.js از نخستین رنگ‌آمیزی (html.tp-js یعنی JS اجرا خواهد شد): دکمۀ «فیلتر» دیدنی،
      ظرف بسته مگر پُر — «پُر» همان filled() news.js: ورودی دیدنی با ویژگی value ناتهی از سرور. news.js پس از syncMore نشان data-tp-pre را برمی‌دارد. */
   html.tp-js .tp-page.tp-news-page .tp-hub-more__btn[data-tp-pre]{display:inline-flex}

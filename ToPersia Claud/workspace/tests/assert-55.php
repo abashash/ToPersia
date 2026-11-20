@@ -473,6 +473,26 @@ tp441_mut( 'بند ۱۰: صافی is_dynamic_content هر toggle دارای شو
 		return false !== strpos( $s, "return topersia_g_ft_toggle_has_sc( \$raw ) ? true : \$is;\n\t}, 10, 2 );" );
 	}, $w55_ft, str_replace( 'return topersia_g_ft_toggle_has_sc( $raw ) ? true : $is;', 'return $is;', $w55_ft ) );
 
+/* بند ۱۳ (یافتۀ عکس جست‌وجوی فوکوس ۳۹۰) — ردیف ابزار هاب و /articles/؛ رفتار در w55-local --only=toolbar (کروم و فایرفاکس، با کالیبراسیون) */
+$w55_c13_btn = function ( $c ) use ( $w55_ncss ) {
+	$p   = 'html .tp-page.tp-news-page .tp-news-filter .tp-hub-more__btn';
+	$hid = strpos( $c, $p . '[hidden]{display:none}' );
+	$pre = strpos( $c, 'html.tp-js .tp-page.tp-news-page .tp-hub-more__btn[data-tp-pre]{display:inline-flex}' );
+	return false !== strpos( $w55_ncss, 'html .tp-page.tp-news-page .tp-news-filter button{' )   /* رقیب: قاعدۀ دکمۀ ارسال */
+		&& false !== strpos( $c, $p . '{display:inline-flex;' ) && false !== strpos( $c, 'background:var(--tp-tile-bg);color:var(--tp-text-strong);' )
+		&& false !== strpos( $c, $p . '[aria-expanded="true"]{border-color:var(--tp-primary);color:var(--tp-primary-text)}' )
+		&& false !== strpos( $c, $p . ':hover{background:var(--tp-tile-hover-bg);border-color:var(--tp-primary);color:var(--tp-primary-text)}' )
+		&& false !== $hid && false !== $pre && $hid < $pre   /* هم‌وزن‌اند؛ نشان پیش ≤۷۲۰ باید پس از [hidden] بیاید */
+		&& ! preg_match( '/^html \.tp-page\.tp-news-page \.tp-hub-more__btn[\[{:]/m', $c );   /* قاعدۀ بی .tp-news-filter به دکمۀ ارسال می‌بازد */
+};
+tp441_mut( 'بند ۱۳: دکمۀ «فیلتر» ظاهر کاشی خودش را دارد (بسته · باز · هاور) و قاعدۀ دکمۀ ارسال بر آن نمی‌چربد؛ نشان پیش ≤۷۲۰ پس از [hidden] — جهش: گزینشگر بی .tp-news-filter (کد پیشین؛ متن حالت باز نامرئی)',
+	$w55_c13_btn, $w55_hcss, str_replace( '.tp-news-filter .tp-hub-more__btn', '.tp-hub-more__btn', $w55_hcss ) );
+$w55_c13_row = function ( $c ) {
+	return 1 === preg_match( '/@media \(max-width:720px\)\{[^@]*html \.tp-page\.tp-news-page \.tp-hub-more\{flex:1 1 100%\}[^@]*html \.tp-page\.tp-news-page \.tp-news-bar__tools form\.tp-news-filter--min\{flex:1 1 0;min-inline-size:0;flex-wrap:wrap\}\s*html \.tp-page\.tp-news-page \.tp-news-bar__tools \.tp-news-filter--min > \.tp-news-filter__f\{flex:1 1 0\}/', $c );
+};
+tp441_mut( 'بند ۱۳: ≤۷۲۰ فرم ابزار پایۀ صفر و شکستن سطر دارد، ظرف باز سطر خودش را می‌گیرد، مرتب‌سازی کوچک می‌شود — جهش: بی شکستن سطر (کد پیشین؛ «نمایش» و شبکه/فهرست بیرون از لبه)',
+	$w55_c13_row, $w55_hcss, str_replace( 'min-inline-size:0;flex-wrap:wrap}', 'min-inline-size:0}', $w55_hcss ) );
+
 /* شمارشگر --launch (بند ۸ هشدار؛ بند ۹ شمار تصویر مشترک و بی alt) — شمارشگر است، حکم نمی‌دهد */
 $w55_lc  = $w55_read( 'scripts/tp-launch-count.php' );
 $w55_c8l = function ( $s ) {

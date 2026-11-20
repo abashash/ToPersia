@@ -7,7 +7,10 @@
  *   کلیک، تایپ، blur، Escape، لمس (۷۶۸ و ۳۹۰ با hasTouch). هر کنش سه نمونه (۵۰ · ۳۰۰ · ۹۰۰ms): فیلد در DOM و دیدنی.
  *   ظرف «فیلتر» موبایل (≤۷۲۰) فقط با کلیک بیرون یا Escape بسته می‌شود؛ فهرست مکان هم. کالیبراسیون: همان آشکارساز
  *   روی صفحه‌ای که ظرف را با کلیک برمی‌دارد (رفتار پیش از رفع) باید «ناپدید» بگوید، وگرنه سبزِ بقیه معنا ندارد.
+ * ▸ toolbar (بند ۱۳، یافتۀ عکس) — ردیف ابزار /city/ و /articles/ در ۳۲۰ · ۳۹۰ · ۶۰۰ · ۷۲۰ · ۷۶۸: هر کنترل درون صفحه، بسته و با ظرف
+ *   «فیلتر» باز؛ متن «فیلتر» در سه حالت رنگ (بسته · باز · هاور) ≥ ۴٫۵. کالیبراسیون با CSS پیش از رفع.
  * ▸ list (بند ۵) — نمای فهرستی همۀ هاب‌ها و فهرست‌های خبر/مقاله: بندانگشتی توکن، ستون، دو سطر خلاصه، بلندی ردیف (هدف دسکتاپ < ۱۴۰px).
+ * ▸ shots (بند ۱۳، فقط با --only=shots) — عکس «پس» fa: هاب شهرها شبکه/فهرست، هاب خبر، جست‌وجوی فوکوس، فوتر × سه حالت ← tests/.screens/55/
  *
  * یک زنجیره در هر زمان؛ هم‌زمان هیچ درخواست دیگری به سایت. کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
  */
@@ -586,10 +589,204 @@ async function perf() {
 	}
 }
 
+/* ── بند ۱۳ (یافتۀ عکس جست‌وجوی فوکوس ۳۹۰): ردیف ابزار هاب و /articles/ ──────────────────────────────────
+ * هر کنترل دیدنی فرم و دکمۀ شبکه/فهرست درون [0, clientWidth] — بسته و با ظرف «فیلتر» باز؛ برش ریشه سرریز سند را پنهان
+ * می‌کند، پس overflow-h.js این را نمی‌دید. متن دکمۀ «فیلتر» در سه حالت رنگ، بسته · باز · هاور ≥ ۴٫۵ روی زمینۀ واقعی
+ * (رنگ‌های نیمه‌شفاف روی نیاکان ترکیب می‌شوند). کالیبراسیون: همان آشکارساز با CSS پیش از رفع باید هر دو را بیفتد. */
+const TB_PAGES = [ { k: 'هاب شهر', u: '/city/' }, { k: 'مقاله‌ها', u: '/articles/' } ];
+const TB_WIDTHS = [ 320, 390, 600, 720, 768 ];
+const TB_PRE_FIX = '@media (max-width:720px){html .tp-page.tp-news-page .tp-news-bar__tools form.tp-news-filter--min{flex:1 1 auto !important;flex-wrap:nowrap !important}}'
+	+ 'html .tp-page.tp-news-page .tp-news-filter .tp-hub-more__btn[aria-expanded="true"]{background:var(--tp-primary-text) !important}';
+const tbMeasure = page => page.evaluate( () => {
+	const f = document.querySelector( '[data-tp-filter-panel]' ).closest( 'form' ), cw = document.documentElement.clientWidth;
+	const els = [ ...f.querySelectorAll( 'input:not([type="hidden"]),select,button' ), document.querySelector( '.tp-news-view' ) ]
+		.filter( e => e && e.getBoundingClientRect().width > 0 && 'hidden' !== getComputedStyle( e ).visibility );
+	const out = els.filter( e => { const r = e.getBoundingClientRect(); return r.left < -0.5 || r.right > cw + 0.5; } )
+		.map( e => ( e.id || ( e.className || '' ).toString().split( ' ' )[0] || e.tagName ) + '@' + Math.round( e.getBoundingClientRect().left ) );
+	const parse = s => {
+		let m = String( s ).match( /rgba?\(([^)]+)\)/ );
+		if ( m ) { const p = m[1].split( /[\s,/]+/ ).filter( Boolean ).map( Number ); return [ p[0], p[1], p[2], p.length > 3 ? p[3] : 1 ]; }
+		m = String( s ).match( /color\(srgb ([^)]+)\)/ );
+		if ( m ) { const p = m[1].split( /[\s/]+/ ).filter( Boolean ).map( Number ); return [ p[0] * 255, p[1] * 255, p[2] * 255, p.length > 3 ? p[3] : 1 ]; }
+		return null;
+	};
+	const onto = ( a, b ) => { const al = a[3] + b[3] * ( 1 - a[3] ); return al ? [ 0, 1, 2 ].map( i => ( a[ i ] * a[3] + b[ i ] * b[3] * ( 1 - a[3] ) ) / al ).concat( al ) : [ 0, 0, 0, 0 ]; };
+	const lum = c => { const v = c.slice( 0, 3 ).map( x => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow( ( x + 0.055 ) / 1.055, 2.4 ); } ); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+	const btn = f.querySelector( '[data-tp-more-btn]' );
+	let ratio = null, pair = '';
+	if ( btn && btn.getBoundingClientRect().width ) {
+		const layers = [];
+		for ( let e = btn; e; e = e.parentElement ) { const c = parse( getComputedStyle( e ).backgroundColor ); if ( c && c[3] > 0 ) { layers.push( c ); if ( c[3] >= 1 ) { break; } } }
+		let bg = [ 255, 255, 255, 1 ];
+		for ( let i = layers.length - 1; i >= 0; i-- ) { bg = onto( layers[ i ], bg ); }
+		const fg = onto( parse( getComputedStyle( btn ).color ) || [ 0, 0, 0, 1 ], bg );
+		const a = lum( fg ), b = lum( bg );
+		ratio = Math.round( ( Math.max( a, b ) + 0.05 ) / ( Math.min( a, b ) + 0.05 ) * 100 ) / 100;
+		pair = getComputedStyle( btn ).color + ' / ' + getComputedStyle( btn ).backgroundColor;
+	}
+	return { out, ratio, pair, mode: document.documentElement.getAttribute( 'data-tp-mode' ) || '', open: ! f.querySelector( '[data-tp-filter-panel]' ).hidden };
+} );
+async function toolbar() {
+	console.log( '\nبند ۱۳ — ردیف ابزار هاب در موبایل: هیچ کنترلی بیرون از لبه؛ متن «فیلتر» خوانا در هر حالت\n' + '─'.repeat( 78 ) );
+	const BTN = '[data-tp-more-btn]';
+	const openPanel = async page => {
+		await center( page, BTN );
+		await page.click( BTN );
+		await page.mouse.move( 1, 1 );   /* اندازۀ «باز» بی هاور */
+		await wait( 400 );
+	};
+	for ( const [ name, type ] of [ [ 'chromium', chromium ], [ 'firefox', firefox ] ] ) {
+		const br = await type.launch();
+		try {
+			if ( 'chromium' === name ) {   /* کالیبراسیون: CSS پیش از رفع روی همان صفحه */
+				const ctx = await br.newContext( { viewport: { width: 390, height: 844 } } );
+				const page = await ctx.newPage();
+				page.setDefaultTimeout( 20000 * X );
+				await page.goto( BASE + '/city/', { waitUntil: 'load' } );
+				await page.addStyleTag( { content: TB_PRE_FIX } );
+				await openPanel( page );
+				const m = await tbMeasure( page );
+				t( `${ name } کالیبراسیون: با CSS پیش از رفع، آشکارساز کنترل بیرون از لبه و متن نامرئی «فیلتر» را می‌گیرد`, m.out.length > 0 && null !== m.ratio && m.ratio < 4.5, `بیرون: ${ m.out.join( ' ' ) || '—' } · نسبت ${ m.ratio }` );
+				await ctx.close();
+			}
+			for ( const w of TB_WIDTHS ) {
+				const ctx = await br.newContext( { viewport: { width: w, height: 844 } } );
+				const page = await ctx.newPage();
+				page.setDefaultTimeout( 20000 * X );
+				for ( const P of TB_PAGES ) {
+					const tag = `${ name } ${ w } ${ P.k }`;
+					try {
+						await page.goto( BASE + P.u, { waitUntil: 'load' } );
+						await wait( 300 );
+						const a = await tbMeasure( page );
+						t( `${ tag } بسته: همۀ کنترل‌ها درون صفحه`, 0 === a.out.length, a.out.join( ' ' ) || '—' );
+						if ( w <= NARROW ) {
+							await openPanel( page );
+							const o = await tbMeasure( page );
+							t( `${ tag } ظرف «فیلتر» باز: همۀ کنترل‌ها درون صفحه`, o.open && 0 === o.out.length, ( o.open ? 'باز' : 'بسته' ) + ' · ' + ( o.out.join( ' ' ) || '—' ) );
+						}
+					} catch ( e ) { t( `${ tag }: بی خطای اجرا`, false, String( e.message ).split( '\n' )[0] ); }
+				}
+				await ctx.close();
+			}
+			for ( const mode of [ 'light', 'evening', 'dark' ] ) {
+				const ctx = await br.newContext( { viewport: { width: 390, height: 844 } } );
+				await ctx.addInitScript( m => { try { window.localStorage.setItem( 'tp-mode', m ); } catch ( e ) { /* بی localStorage */ } }, mode );
+				const page = await ctx.newPage();
+				page.setDefaultTimeout( 20000 * X );
+				const tag = `${ name } 390 ${ mode } «فیلتر»`;
+				try {
+					await page.goto( BASE + '/city/', { waitUntil: 'load' } );
+					await page.mouse.move( 1, 1 );
+					await wait( 400 );
+					const c = await tbMeasure( page );
+					await openPanel( page );
+					const o = await tbMeasure( page );
+					await page.hover( BTN );
+					await wait( 400 );
+					const h = await tbMeasure( page );
+					const ok = [ c, o, h ].every( m => null !== m.ratio && m.ratio >= 4.5 );
+					t( `${ tag }: متن بسته · باز · هاور ≥ ۴٫۵`, mode === c.mode && ok, `حالت ${ c.mode } · بسته ${ c.ratio } · باز ${ o.ratio } · هاور ${ h.ratio } (${ h.pair })` );
+				} catch ( e ) { t( `${ tag }: بی خطای اجرا`, false, String( e.message ).split( '\n' )[0] ); }
+				await ctx.close();
+			}
+		} finally {
+			await br.close();
+		}
+	}
+}
+
+/* ── بند ۱۳: عکس «پس» فقط fa — فقط با --only=shots (سند است، نه گیت) ──────────────────────────────────
+ * هاب شهرها (شبکه و فهرست، انتخاب کاربر در localStorage tp-news-view)، هاب خبر، نوار جست‌وجوی هاب در حالت فوکوس
+ * (≤۷۲۰ نخست دکمۀ «فیلتر»)، فوتر × سه حالت رنگ (localStorage tp-mode، همان topersia-display.js) — ۱۴۴۰ · ۷۶۸ · ۳۹۰.
+ * ← tests/.screens/55/ (بیرون از git) با index.html. */
+async function shots() {
+	const fs   = require( 'fs' );
+	const path = require( 'path' );
+	const DIR  = path.join( __dirname, '.screens', '55' );
+	fs.mkdirSync( DIR, { recursive: true } );
+	console.log( '\nبند ۱۳ — عکس «پس» fa ← tests/.screens/55/\n' + '─'.repeat( 78 ) );
+	const rows = [];
+	const br   = await chromium.launch();
+	const open = async ( w, h, ls ) => {
+		const ctx = await br.newContext( { viewport: { width: w, height: h } } );
+		await ctx.addInitScript( kv => { try { Object.keys( kv ).forEach( k => window.localStorage.setItem( k, kv[ k ] ) ); } catch ( e ) { /* بی localStorage */ } }, ls );
+		const page = await ctx.newPage();
+		page.setDefaultTimeout( 30000 * X );
+		return { ctx, page };
+	};
+	/* بارگذاری تنبل: یک گذر تا پایین و برگشت، سپس آرام‌شدن */
+	const settlePage = async page => {
+		await page.evaluate( async () => { const H = document.documentElement.scrollHeight; for ( let y = 0; y < H; y += 700 ) { window.scrollTo( { top: y, behavior: 'instant' } ); await new Promise( r => setTimeout( r, 120 ) ); } window.scrollTo( { top: 0, behavior: 'instant' } ); } );
+		await wait( 1200 * X );
+	};
+	const hideFixed = ( page, keep ) => page.evaluate( k => { const kp = k ? document.querySelector( k ) : null; document.querySelectorAll( 'body *' ).forEach( e => { if ( kp && kp.contains( e ) ) { return; } const p = getComputedStyle( e ).position; if ( 'fixed' === p || 'sticky' === p ) { e.style.setProperty( 'display', 'none', 'important' ); } } ); }, keep );
+	try {
+		for ( const [ w, h ] of VIEWS ) {
+			/* هاب شهرها — شبکه و فهرست؛ هاب خبر */
+			for ( const [ name, u, ls ] of [ [ 'city-grid', '/city/', { 'tp-news-view': 'grid' } ], [ 'city-list', '/city/', { 'tp-news-view': 'list' } ], [ 'news-hub', '/news/', {} ] ] ) {
+				const { ctx, page } = await open( w, h, ls );
+				const st = ( await page.goto( BASE + u, { waitUntil: 'load', timeout: 120000 * X } ) ).status();
+				await settlePage( page );
+				const f = `${ name }-${ w }.png`;
+				await page.screenshot( { path: path.join( DIR, f ), fullPage: true } );
+				const view = await page.evaluate( () => document.querySelector( '.tp-news-grid--rows' ) ? 'list' : 'grid' );
+				rows.push( { name, w, url: BASE + u, f, note: name.startsWith( 'city' ) ? 'نما: ' + view : '' } );
+				t( `عکس ${ name } ${ w }: وضعیت ${ st }` + ( name.startsWith( 'city' ) ? `، نما ${ view }` : '' ), 200 === st && ( ! name.startsWith( 'city' ) || name.endsWith( view ) ) );
+				await ctx.close();
+			}
+			/* نوار جست‌وجوی هاب شهرها در حالت فوکوس (کلید Tab نه — کلیک واقعی، مثل کاربر) */
+			{
+				const { ctx, page } = await open( w, h, {} );
+				await page.goto( BASE + '/city/', { waitUntil: 'load', timeout: 120000 * X } );
+				await page.waitForSelector( '#tp-hub-q', { state: 'attached' } );
+				if ( w <= NARROW && ! ( await isOpen( page, '[data-tp-filter-panel]' ) ) ) {
+					await center( page, '[data-tp-more-btn]' );
+					await page.click( '[data-tp-more-btn]' );
+				}
+				await center( page, '#tp-hub-q' );
+				await page.click( '#tp-hub-q' );
+				await wait( 400 );
+				const focus = await page.evaluate( () => document.activeElement && 'tp-hub-q' === document.activeElement.id );
+				const f = `search-focus-${ w }.png`;
+				await page.screenshot( { path: path.join( DIR, f ) } );
+				rows.push( { name: 'search-focus', w, url: BASE + '/city/', f, note: 'فوکوس روی #tp-hub-q' } );
+				t( `عکس search-focus ${ w }: فیلد فوکوس دارد`, focus );
+				await ctx.close();
+			}
+			/* فوتر × سه حالت رنگ */
+			for ( const mode of [ 'light', 'evening', 'dark' ] ) {
+				const { ctx, page } = await open( w, h, { 'tp-mode': mode } );
+				await page.goto( BASE + '/', { waitUntil: 'load', timeout: 120000 * X } );
+				await settlePage( page );
+				await page.evaluate( () => window.scrollTo( { top: document.documentElement.scrollHeight, behavior: 'instant' } ) );
+				await wait( 1000 * X );
+				const got = await page.evaluate( () => document.documentElement.getAttribute( 'data-tp-mode' ) );
+				await hideFixed( page, '[data-elementor-type="footer"]' );
+				const foot = await page.$( '[data-elementor-type="footer"]' );
+				const f = `footer-${ mode }-${ w }.png`;
+				if ( foot ) { await foot.screenshot( { path: path.join( DIR, f ) } ); }
+				rows.push( { name: 'footer-' + mode, w, url: BASE + '/', f, note: 'data-tp-mode=' + got } );
+				t( `عکس footer ${ mode } ${ w }: حالت صفحه ${ got }`, !! foot && mode === got );
+				await ctx.close();
+			}
+		}
+	} finally {
+		await br.close();
+	}
+	const esc = s => String( s ).replace( /&/g, '&amp;' ).replace( /</g, '&lt;' );
+	fs.writeFileSync( path.join( DIR, 'index.html' ), '<!doctype html><meta charset="utf-8"><title>دستۀ 55 — پس</title><body dir="rtl" style="font-family:sans-serif">'
+		+ '<h1>دستۀ 55 — عکس «پس» (fa) · ' + esc( new Date().toISOString() ) + '</h1>'
+		+ rows.map( r => '<h2>' + esc( r.name ) + ' · ' + r.w + '</h2><p dir="ltr">' + esc( r.url ) + ( r.note ? ' — ' + esc( r.note ) : '' ) + '</p><a href="' + r.f + '"><img src="' + r.f + '" style="max-width:' + Math.min( r.w, 720 ) + 'px;border:1px solid #888"></a>' ).join( '' ) + '</body>' );
+	console.log( '  ← ' + path.join( DIR, 'index.html' ) );
+}
+
 ( async () => {
 	const t0 = Date.now();
 	console.log( 'START w55-local ' + new Date().toISOString() );
+	if ( ONLY.includes( 'shots' ) ) { await shots(); }   /* فقط با درخواست صریح — عکس «پس» بند ۱۳ */
 	if ( want( 'search' ) ) { await search(); }
+	if ( want( 'toolbar' ) ) { await toolbar(); }
 	if ( want( 'list' ) ) { await list(); }
 	if ( want( 'more' ) ) { await more(); }
 	if ( want( 'cls' ) ) { await cls(); }
