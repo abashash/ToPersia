@@ -309,6 +309,10 @@ msgstr "News"
 msgid "اخبار %s"
 msgstr "%s news"
 
+#: includes/topersia-g-footer.php
+msgid "اخبار و مقالات"
+msgstr "News and articles"
+
 #: includes/topersia-g-news.php
 #, php-format
 msgid "اخبار گردشگری %s"
@@ -843,6 +847,10 @@ msgstr "Ticket"
 msgid "بناها و میراث تاریخی"
 msgstr "Monuments and historic heritage"
 
+#: includes/topersia-g-footer.php
+msgid "بناهای تاریخی"
+msgstr "Historic monuments"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "بناهای تاریخی %s"
@@ -1312,6 +1320,10 @@ msgstr "Festivals"
 msgid "جشنواره و رویداد"
 msgstr "Festival and event"
 
+#: includes/topersia-g-footer.php
+msgid "جشنواره‌ها"
+msgstr "Festivals"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "جشنواره‌ها و رویدادهای %s"
@@ -1384,6 +1396,10 @@ msgstr "Forest"
 #: includes/topersia-g-zones.php
 msgid "جنگل/دشت"
 msgstr "Forest/Plain"
+
+#: includes/topersia-g-footer.php
+msgid "جنگل‌ها و دشت‌ها"
+msgstr "Forests and plains"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -2044,10 +2060,6 @@ msgstr "Seasonal and religious events"
 msgid "رویداد ورزشی"
 msgstr "Sports event"
 
-#: includes/topersia-g-footer.php
-msgid "رویدادها"
-msgstr "Events"
-
 #: includes/topersia-g-home-row.php
 msgid "رویدادها و جشنواره‌ها"
 msgstr "Events and festivals"
@@ -2065,6 +2077,14 @@ msgstr "Events that affect travel planning"
 #, php-format
 msgid "رویدادهای طبیعی و فصلی %s"
 msgstr "Natural and seasonal events in %s"
+
+#: includes/topersia-g-footer.php
+msgid "رویدادهای فصلی"
+msgstr "Seasonal events"
+
+#: includes/topersia-g-footer.php
+msgid "رویدادهای ورزشی"
+msgstr "Sports events"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -2464,6 +2484,10 @@ msgstr "Northwest"
 msgid "شنا"
 msgstr "Swimming"
 
+#: includes/topersia-g-footer.php
+msgid "شناسۀ پست موجودیت، نه هاب؛ هر زبان فقط نسخۀ منتشرشدۀ خودش را نشان می‌دهد."
+msgstr "Entity post ID, not a hub; each language shows only its own published version."
+
 #: includes/topersia-g-map.php
 msgid "شنبه"
 msgstr "Saturday"
@@ -2789,10 +2813,6 @@ msgstr "Season"
 #: includes/topersia-g-map.php
 msgid "فصلی"
 msgstr "Seasonal"
-
-#: includes/topersia-g-footer.php
-msgid "فصل‌ها"
-msgstr "Seasons"
 
 #: includes/topersia-g-map.php
 msgid "فعال"
@@ -3183,6 +3203,10 @@ msgstr "Modern"
 msgid "مراسم عزاداری"
 msgstr "Mourning ceremony"
 
+#: includes/topersia-g-footer.php
+msgid "مراسم مذهبی"
+msgstr "Religious ceremonies"
+
 #: includes/topersia-g-map.php
 msgid "مراسم مذهبی برگزارشده در این بنا"
 msgstr "Religious ceremonies held at this monument"
@@ -3539,6 +3563,10 @@ msgstr "Cultural landscapes of this era"
 msgid "منظرهای فرهنگی دربرگیرنده"
 msgstr "Cultural landscapes containing it"
 
+#: includes/topersia-g-footer.php
+msgid "منوی پاورقی"
+msgstr "Footer menu"
+
 #: includes/topersia-g-weather.php
 msgid "مه"
 msgstr "Fog"
@@ -3649,6 +3677,10 @@ msgstr "News topic"
 msgid "موضوع و برچسب‌ها"
 msgstr "Topic and tags"
 
+#: includes/topersia-g-footer.php
+msgid "موضوعات پرکاربرد"
+msgstr "Popular topics"
+
 #: includes/topersia-g-map.php
 msgid "موضوعیت ندارد"
 msgstr "Not applicable"
@@ -3706,6 +3738,10 @@ msgstr "Related places"
 #: includes/topersia-g-map.php
 msgid "مکان‌های مشمول این قوانین"
 msgstr "Sites covered by these rules"
+
+#: includes/topersia-g-footer.php
+msgid "میراث ثبت‌شده"
+msgstr "Listed heritage"
 
 #: includes/topersia-g-map.php
 msgid "میراث جهانی"
@@ -4221,6 +4257,10 @@ msgstr "All news"
 msgid "همۀ استان‌ها"
 msgstr "All provinces"
 
+#: includes/topersia-g-footer.php
+msgid "همۀ رویدادها"
+msgstr "All events"
+
 #: includes/topersia-g-news-ui.php
 msgid "همۀ زمان‌ها"
 msgstr "Any time"
@@ -4435,6 +4475,10 @@ msgstr "King"
 msgid "پارک ملی"
 msgstr "National park"
 
+#: includes/topersia-g-footer.php
+msgid "پارک‌های ملی"
+msgstr "National parks"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "پارک‌های ملی و مناطق حفاظت‌شدۀ %s"
@@ -4572,6 +4616,10 @@ msgstr "Text column width"
 msgid "پهنه آبی"
 msgstr "Water body"
 
+#: includes/topersia-g-footer.php
+msgid "پهنه‌های آبی"
+msgstr "Lakes and waters"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "پهنه‌های آبی %s"
@@ -4621,9 +4669,17 @@ msgstr "Default order"
 msgid "پیش‌نویس"
 msgstr "Draft"
 
+#: includes/topersia-g-footer.php
+msgid "پیوند"
+msgstr "Link"
+
 #: includes/topersia-g-zones.php
 msgid "پیوندها"
 msgstr "Links"
+
+#: includes/topersia-g-footer.php
+msgid "پیوندهای ویژه"
+msgstr "Featured links"
 
 #: includes/topersia-g-map.php
 msgid "چادر لازم"
@@ -4817,6 +4873,10 @@ msgstr "Synagogue"
 msgid "کوه"
 msgstr "Mountain"
 
+#: includes/topersia-g-footer.php
+msgid "کوه‌ها"
+msgstr "Mountains"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "کوه‌های %s"
@@ -4829,6 +4889,10 @@ msgstr "Zoom out"
 #: includes/topersia-g-zones.php
 msgid "کویر"
 msgstr "Desert"
+
+#: includes/topersia-g-footer.php
+msgid "کویرها"
+msgstr "Deserts"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -4928,6 +4992,10 @@ msgstr "Dust"
 #: includes/topersia-g-weather.php
 msgid "گرم"
 msgstr "Hot"
+
+#: includes/topersia-g-footer.php
+msgid "گروه"
+msgstr "Group"
 
 #: includes/topersia-g-map.php
 msgid "گستره"

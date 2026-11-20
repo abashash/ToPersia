@@ -25,6 +25,11 @@
  *   ▸ ستون‌ها و پیوندها همان خروجی topersia_g_ft_menu_url در همان زبان؛ ستون بی پیوند اصلاً نمی‌آید، هیچ toggle تهی
  *   ▸ هر پیوند ۲۰۰ بی تغییر مسیر و پیشوند زبانش همان زبان صفحه؛ برچسب en لاتین، ar بی حرف ویژۀ فارسی
  *   ▸ سمت سرور: اگر نخستین ستون (که شیوه‌نامۀ el-toggle وودمارت را می‌نویسد) پنهان شود، شیوه‌نامه می‌ماند — با جهش
+ * رجیستری پاورقی (دستۀ 55-ب بند ۳ · P5-D643)، سه زبان در ۱۴۴۰:
+ *   ▸ حداکثر پنج ستون منو، هر ستون حداکثر TOPERSIA_FOOTER_COL_MAX (۸) پیوند؛ گروه‌ها و پیوندها همان سهم سرور (topersia_g_ft_share)
+ *   ▸ هر گروهی جز گروه هم‌نام toggle سرعنوان <p> دیدنی بلافاصله پیش از فهرستش و aria-labelledby همان؛ هیچ فهرست تهی
+ *   ▸ هیچ پیوند /advertise/ در پاورقی؛ شمار پیوند منو هر زبان در menu-counts.json؛ fa دست‌کم ۳۰
+ *   ▸ ۳۹۰، fa: هر toggle منو آکاردئون — بسته تا کلیک، با کلیک پیوندهایش دیدنی
  * عکس هر ترکیب در tests/.screens/footer-gate/ (بیرون از git)؛ «پس» fa در ۱۴۴۰ · ۷۶۸ · ۳۹۰ × سه حالت.
  *
  * کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
@@ -49,6 +54,7 @@ const php = args => execFileSync( ENV.php, args, { cwd: ENV.workspace, encoding:
 const wp  = code => php( [ ENV.wpCli, '--path=' + ENV.wp, '--url=' + ENV.base, 'eval', code ] );
 
 let fails = 0, passes = 0;
+const COUNTS = {};   /* شمار پیوند منو هر زبان (P5-D643) ← SHOTS/menu-counts.json برای گزارش */
 const ok  = ( cond, msg ) => { if ( cond ) { passes++; console.log( '  ✅ ' + msg ); } else { fails++; console.log( '  ❌ ' + msg ); } };
 
 /* P5-D615: شبکه‌ها دو ردیف ۷تایی در هر پهنا، همکاران ردیف‌های سه‌تایی (P5-D609)، هر دو وسط؛ بلندی هر ردیف همکاران = بلندی هر ردیف شبکه‌ها.
@@ -69,16 +75,18 @@ const headsOk = ( L, lang, w ) => {
 	ok( L.heads.length >= 2 && ! bad.length, `جهت عنوان · ${ lang } · ${ w }: ${ L.heads.length } عنوان، جهت ${ want }، ناهمخوان ${ bad.length }` + ( bad.length ? ' ← ' + bad.slice( 0, 4 ).map( h => '«' + h.text + '» ' + h.ta + ' ' + h.dir + ' آغاز ' + h.atStart ).join( ' | ' ) : '' ) );
 };
 
-/* P5-D617: عنوان ستون به ترتیب dest · guide · about · legal — مستقل از کد، از کاتالوگ بازبینی‌شده */
-const MENU_COLS   = [ 'dest', 'guide', 'about', 'legal' ];
+/* P5-D617 · P5-D643: عنوان ستون به ترتیب dest · guide · season · about · legal — مستقل از کد، از کاتالوگ بازبینی‌شده */
+const MENU_COLS   = [ 'dest', 'guide', 'season', 'about', 'legal' ];
 const MENU_TITLES = {
-	fa: [ 'مقصدها', 'راهنمای سفر', 'دربارۀ توپرشیا', 'حقوقی' ],
-	en: [ 'Destinations', 'Travel guide', 'About ToPersia', 'Legal' ],
-	ar: [ 'الوجهات', 'دليل السفر', 'عن توبيرشيا', 'قانوني' ],
+	fa: [ 'مقصدها', 'راهنمای سفر', 'ایران در چهار فصل', 'دربارۀ توپرشیا', 'حقوقی' ],
+	en: [ 'Destinations', 'Travel guide', 'Iran in four seasons', 'About ToPersia', 'Legal' ],
+	ar: [ 'الوجهات', 'دليل السفر', 'إيران في الفصول الأربعة', 'عن توبيرشيا', 'قانوني' ],
 };
-/* خروجی سرور در هر زبان: ستون ← نشانی‌های زنده (topersia_g_ft_menu_url پس از wpml_switch_language). در WP-CLI home_url با
-   تعویض زبان عوض نمی‌شود؛ wpml_permalink همان تبدیل صفحه را می‌دهد و روی نشانی ازپیش‌زبان‌دار بی‌اثر است (دستۀ 55 بند ۱۰). */
-const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( topersia_g_ft_menu_cols() as $k => $c ) { $o[ $k ] = array(); foreach ( $c[1] as $it ) { $u = topersia_g_ft_menu_url( $it[1], $it[2] ); if ( "" !== $u ) { $o[ $k ][] = apply_filters( "wpml_permalink", $u, "' + lang + '" ); } } } echo wp_json_encode( $o );' ).trim() );
+const COL_MAX = 8, COLS_MAX = 5, FA_MIN = 30;   /* TOPERSIA_FOOTER_COL_MAX · پنج toggle · هدف «دست‌کم ۳۰ پیوند واقعی در fa» */
+/* خروجی سرور در هر زبان: ستون ← { u: نشانی‌ها، g: گروه‌های دارای پیوند } — همان رجیستری، همان سهم topersia_g_ft_share و همان
+   برش شورت‌کد، پس از wpml_switch_language. در WP-CLI home_url با تعویض زبان عوض نمی‌شود؛ wpml_permalink همان تبدیل صفحه را
+   می‌دهد و روی نشانی ازپیش‌زبان‌دار بی‌اثر است (دستۀ 55 بند ۱۰). */
+const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( topersia_g_ft_menu_cols() as $k => $c ) { $l = array(); foreach ( $c[1] as $g ) { $l[ $g ] = topersia_g_ft_links( $g ); } $t = topersia_g_ft_share( array_map( "count", $l ) ); $o[ $k ] = array( "u" => array(), "g" => array() ); foreach ( $l as $g => $ls ) { foreach ( array_slice( $ls, 0, $t[ $g ] ) as $it ) { $o[ $k ]["u"][] = apply_filters( "wpml_permalink", $it[1], "' + lang + '" ); } if ( $t[ $g ] > 0 ) { $o[ $k ]["g"][] = $g; } } } echo wp_json_encode( $o );' ).trim().split( '\n' ).pop() );
 /* سمت سرور: ستون dest تهی ساخته می‌شود؛ پاورقی بی آن کشیده می‌شود و شیوه‌نامۀ el-toggle باید بماند. mut = بی بازگرداندن after_render */
 const keepCss = mut => JSON.parse( wp( '$mut = ' + ( mut ? 1 : 0 ) + '; add_filter( "elementor/widget/render_content", function ( $h, $w ) { return ( "wd_toggle" === $w->get_name() && "dest" === topersia_g_ft_toggle_menu_col( (array) $w->get_raw_data() ) ) ? str_replace( "tp-ft-menu__a", "tp-ft-menu__x", $h ) : $h; }, 5, 2 ); if ( $mut ) { remove_all_actions( "elementor/frontend/widget/after_render" ); } $o = \\Elementor\\Plugin::$instance->frontend->get_builder_content_for_display( 6128 ); preg_match_all( "#wd-el-toggle-title[^>]*>\\s*([^<]*?)\\s*<#u", $o, $t ); echo wp_json_encode( array( "titles" => $t[1], "css" => preg_match_all( "#<link[^>]+id=\\"wd-el-toggle(-rtl)?-css\\"#", $o ), "raw" => false !== strpos( $o, "[tp_footer_menu" ) || false !== strpos( $o, "[elementor-element" ) ) );' ).trim().split( '\n' ).pop() );
 
@@ -160,10 +168,19 @@ function probeMenus() {
 			links:  nav ? [ ...nav.querySelectorAll( 'a.tp-ft-menu__a' ) ].map( a => ( { href: a.href, text: a.textContent.trim() } ) ) : [],
 			filled: !! ( body && body.querySelector( 'a[href], img, p, li' ) ),
 			brand:  !! t.querySelector( '.tp-ft-brand' ),
+			/* P5-D643: هر فهرست گروه — شمار پیوند، و سرعنوانش (aria-labelledby ← p.tp-ft-menu__h دیدنی، درست پیش از فهرست) */
+			groups: nav ? [ ...nav.querySelectorAll( 'ul.tp-ft-menu__list' ) ].map( u => {
+				const id = u.getAttribute( 'aria-labelledby' ) || '';
+				const h  = id ? nav.querySelector( '#' + CSS.escape( id ) ) : null;
+				return { g: u.getAttribute( 'data-tp-ft-group' ) || '', n: u.querySelectorAll( 'a.tp-ft-menu__a' ).length, id, head: h ? h.textContent.trim() : '',
+					headOk: ! id || ( !! h && h.matches( 'p.tp-ft-menu__h' ) && /^tp-/.test( id ) && h.nextElementSibling === u && '' !== h.textContent.trim() && 'none' !== getComputedStyle( h ).display ) };
+			} ) : [],
+			heads:  nav ? nav.querySelectorAll( 'p.tp-ft-menu__h' ).length : 0,
 		};
 	} );
 	return {
 		toggles,
+		advert: [ ...foot.querySelectorAll( 'a[href]' ) ].filter( a => /\/advertise\/?$/.test( new URL( a.href, location.href ).pathname ) ).map( a => a.textContent.trim().slice( 0, 24 ) ),
 		demo:   [ ...foot.querySelectorAll( '.wd-el-toggle a' ) ].filter( a => DEMO.test( a.textContent ) || ! a.getAttribute( 'href' ) || '#' === a.getAttribute( 'href' ).trim() ).map( a => '«' + a.textContent.trim().slice( 0, 24 ) + '» ' + a.getAttribute( 'href' ) ),
 		text:   DEMO.test( foot.textContent ),
 		legacy: foot.querySelectorAll( '[data-widget_type^="wd_extra_menu_list"]' ).length,
@@ -295,7 +312,7 @@ async function probeContrast( mode ) {
 	try {
 		/* ۰) سمت سرور (P5-D617) — ستون نخست تهی: بی آن کشیده می‌شود و شیوه‌نامۀ el-toggle وودمارت می‌ماند؛ جهش بی after_render می‌افتد */
 		const K0 = keepCss( false ), K1 = keepCss( true );
-		ok( 1 === K0.css && ! K0.raw && ! K0.titles.includes( MENU_TITLES.fa[0] ) && K0.titles.includes( MENU_TITLES.fa[3] ),
+		ok( 1 === K0.css && ! K0.raw && ! K0.titles.includes( MENU_TITLES.fa[0] ) && K0.titles.includes( MENU_TITLES.fa[ MENU_TITLES.fa.length - 1 ] ),
 			`ستون نخست تهی (سرور): عنوان‌ها [${ K0.titles.join( '، ' ) }] بی «${ MENU_TITLES.fa[0] }»، شیوه‌نامۀ el-toggle ${ K0.css } (انتظار ۱)، شورت‌کد خام ${ K0.raw }` );
 		ok( 0 === K1.css, `جهش — بی بازگرداندن شیوه‌نامۀ ستون پنهان، شیوه‌نامه ${ K1.css } (انتظار ۰؛ پس آزمون بالا تمیز می‌دهد)` );
 
@@ -335,19 +352,33 @@ async function probeContrast( mode ) {
 			const exp   = menuExpect( lang );
 			const T     = MENU_TITLES[ lang ];
 			const menus = M ? M.toggles.filter( t => t.menu ) : [];
-			const want  = MENU_COLS.filter( c => ( exp[ c ] || [] ).length );
+			const want  = MENU_COLS.filter( c => exp[ c ] && exp[ c ].u.length );
 			const rows  = want.map( ( c, i ) => {
-				const t = menus[ i ] || { title: '', label: '', links: [] }, wt = T[ MENU_COLS.indexOf( c ) ];
-				return { c, ok: t.title === wt && t.label === wt && JSON.stringify( t.links.map( l => l.href ) ) === JSON.stringify( exp[ c ] ), got: t.title + ' (' + t.links.length + ')', wt, n: exp[ c ].length };
+				const t = menus[ i ] || { title: '', label: '', links: [], groups: [] }, wt = T[ MENU_COLS.indexOf( c ) ];
+				return { c, ok: t.title === wt && t.label === wt && JSON.stringify( t.links.map( l => l.href ) ) === JSON.stringify( exp[ c ].u ) && JSON.stringify( t.groups.map( g => g.g ) ) === JSON.stringify( exp[ c ].g ),
+					got: t.title + ' (' + t.links.length + ' · ' + t.groups.map( g => g.g ).join( '+' ) + ')', wt: wt + ' (' + exp[ c ].u.length + ' · ' + exp[ c ].g.join( '+' ) + ')', n: exp[ c ].u.length };
 			} );
+			/* P5-D643 — سقف ستون و پیوند، سرعنوان گروه، فهرست تهی نه، /advertise/ نه؛ گروه هم‌نام toggle بی سرعنوان، بقیه با سرعنوان */
+			const grpBad = menus.flatMap( t => t.groups.filter( g => ! g.headOk || ! g.n || ( g.id ? g.head === t.title : false ) ).map( g => t.title + '/' + g.g + ( g.n ? '' : ' تهی' ) + ( g.headOk ? '' : ' سرعنوان ' + ( g.id || '—' ) ) ) );
+			const headN  = menus.reduce( ( s, t ) => s + t.groups.filter( g => g.id ).length, 0 );
+			ok( M && menus.length <= COLS_MAX && menus.every( t => t.links.length <= COL_MAX ) && ! grpBad.length && menus.every( t => t.heads === t.groups.filter( g => g.id ).length ) && ! M.advert.length,
+				`رجیستری · ${ lang } (P5-D643): ${ menus.length } ستون (≤ ${ COLS_MAX })، پیوند هر ستون [${ menus.map( t => t.links.length ).join( '، ' ) }] (≤ ${ COL_MAX })، ${ headN } سرعنوان گروه با aria-labelledby، ناهمخوان ${ grpBad.length }، پیوند /advertise/ ${ M ? M.advert.length : '—' }` + ( grpBad.length ? ' ← ' + grpBad.slice( 0, 5 ).join( ' | ' ) : '' ) );
+			const total  = menus.reduce( ( s, t ) => s + t.links.length, 0 );
+			COUNTS[ lang ] = { total, cols: Object.fromEntries( menus.map( t => [ t.title, t.links.length ] ) ), groups: Object.fromEntries( menus.flatMap( t => t.groups.map( g => [ g.g, g.n ] ) ) ) };
+			if ( 'fa' === lang ) {
+				ok( total >= FA_MIN, `شمار پیوند واقعی منو · fa: ${ total } (هدف ≥ ${ FA_MIN })` );
+			} else {
+				console.log( `     شمار پیوند منو · ${ lang }: ${ total } (با ترجمۀ بیشتر خودکار رشد می‌کند)` );
+			}
 			ok( M && ! M.demo.length && ! M.text && 0 === M.legacy, `منو · ${ lang }: بی پیوند نمایشی (${ M ? M.demo.length : '—' }${ M && M.demo.length ? ' ← ' + M.demo.slice( 0, 4 ).join( ' | ' ) : '' })، بی متن شهرهای دمو ${ M ? ! M.text : '—' }، ویجت wd_extra_menu_list ${ M ? M.legacy : '—' }` );
 			ok( menus.length === want.length && rows.every( r => r.ok ),
 				`منو · ${ lang }: ستون‌ها [${ rows.map( r => r.wt + ' ' + r.n ).join( '، ' ) }] = صفحه [${ menus.map( t => t.title + ' ' + t.links.length ).join( '، ' ) }]` + ( rows.some( r => ! r.ok ) ? ' ← ناهمخوان ' + rows.filter( r => ! r.ok ).map( r => r.c + ': ' + r.got + ' ≠ ' + r.wt ).join( ' | ' ) : '' ) );
 			const others = M ? M.toggles.filter( t => ! t.menu ) : [];
 			/* دستۀ 55 بند ۱۰: جعبۀ برند از محتوایش (.tp-ft-brand) شناخته می‌شود، نه از عنوان — عنوانش انتخاب کاربر است و در ذخیرۀ
 			   #6128 تهی شد؛ فقط نباید هم‌نام ستون «دربارۀ توپرشیا» باشد (خواستۀ بند ۱۰: دوتایی نشود). */
-			ok( M && M.toggles.every( t => t.filled ) && 1 === others.length && others.every( t => t.brand && t.title !== T[2] ),
-				`منو · ${ lang }: هیچ toggle تهی (${ M ? M.toggles.filter( t => ! t.filled ).map( t => '«' + t.title + '»' ).join( ' ' ) || 'هیچ' : '—' })؛ toggle بی منو فقط یک جعبۀ برند، نه هم‌نام «${ T[2] }» (${ others.map( t => '«' + t.title + '» برند ' + t.brand ).join( ' | ' ) })` );
+			const tAbout = T[ MENU_COLS.indexOf( 'about' ) ];
+			ok( M && M.toggles.every( t => t.filled ) && 1 === others.length && others.every( t => t.brand && t.title !== tAbout ),
+				`منو · ${ lang }: هیچ toggle تهی (${ M ? M.toggles.filter( t => ! t.filled ).map( t => '«' + t.title + '»' ).join( ' ' ) || 'هیچ' : '—' })؛ toggle بی منو فقط یک جعبۀ برند، نه هم‌نام «${ tAbout }» (${ others.map( t => '«' + t.title + '» برند ' + t.brand ).join( ' | ' ) })` );
 			const script = 'en' === lang ? /^[\x20-\x7E]+$/ : /[؀-ۿ]/;
 			const links  = menus.flatMap( t => t.links.map( l => ( { ...l, col: t.title } ) ) );
 			const badL   = [];
@@ -386,6 +417,27 @@ async function probeContrast( mode ) {
 			}
 		}
 		fs.writeFileSync( path.join( SHOTS, 'contrast.json' ), JSON.stringify( table, null, 1 ) );
+		fs.writeFileSync( path.join( SHOTS, 'menu-counts.json' ), JSON.stringify( COUNTS, null, 1 ) );
+		console.log( '     شمار پیوند منو: ' + Object.entries( COUNTS ).map( ( [ l, c ] ) => l + ' ' + c.total ).join( ' · ' ) );
+
+		/* ۲ب) موبایل آکاردئون (P5-D643) — fa در ۳۹۰: هر toggle منو (wd-state-closed-sm) بسته تا کلیک؛ کلیک سر ← همۀ پیوندهایش دیدنی */
+		await go( ENV.base + '/', 390 );
+		const acc = () => page.evaluate( () => [ ...document.querySelectorAll( '[data-elementor-type="footer"] .wd-el-toggle' ) ].filter( t => t.querySelector( 'nav.tp-ft-menu' ) ).map( t => {
+			const a = [ ...t.querySelectorAll( 'a.tp-ft-menu__a' ) ];
+			return { title: ( ( t.querySelector( '.wd-el-toggle-title' ) || {} ).textContent || '' ).trim(), n: a.length, seen: a.filter( x => x.getBoundingClientRect().height > 0 && 'hidden' !== getComputedStyle( x ).visibility ).length };
+		} ) );
+		const A0 = await acc(), A1 = [];
+		for ( let i = 0; i < A0.length; i++ ) {
+			const head = page.locator( '[data-elementor-type="footer"] .wd-el-toggle:has(nav.tp-ft-menu) .wd-el-toggle-head' ).nth( i );
+			await head.evaluate( e => e.scrollIntoView( { behavior: 'instant', block: 'center' } ) );
+			await head.click();
+			await page.waitForTimeout( 800 * X );
+			A1.push( ( await acc() )[ i ] );
+			await head.click();
+			await page.waitForTimeout( 600 * X );
+		}
+		ok( A0.length > 0 && A0.every( t => 0 === t.seen ) && A1.length === A0.length && A1.every( t => t.n > 0 && t.seen === t.n ),
+			`آکاردئون موبایل · fa · ۳۹۰: ${ A0.length } ستون؛ پیش از کلیک دیدنی [${ A0.map( t => t.seen ).join( '، ' ) }] (انتظار ۰)؛ پس از کلیک [${ A1.map( t => t.title + ' ' + t.seen + '/' + t.n ).join( '، ' ) }]` );
 		/* ۳) عکس «پس» fa در ۷۶۸ و ۳۹۰، سه حالت (۱۴۴۰ در بخش ۲) — دستۀ 53-ت بند ۱۰ */
 		for ( const w of [ 768, 390 ] ) {
 			await go( ENV.base + '/', w );

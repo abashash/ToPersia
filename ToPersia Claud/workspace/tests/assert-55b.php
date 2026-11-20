@@ -196,3 +196,76 @@ tp441_mut( 'بند ۱: /news/ شیوه‌نامۀ هاب (دکمه و لایۀ �
 	function ( $s ) {
 		return 1 === preg_match( "/if \( topersia_g_news_is_archive\(\) && ! topersia_g_news_is_article\(\) \) \{.*?wp_enqueue_style\( 'topersia-g-hub',[^\n]*\n\t\t\}\n\t\}, 31 \);/s", $s );
 	}, $w55b_nui, preg_replace( "/\t\t\twp_enqueue_style\( 'topersia-g-hub',[^\n]*\n(\t\t\}\n\t\}, 31 \);)/", '$1', $w55b_nui ) );
+
+/* ── بند ۳ (P5-D643): رجیستری منوی پاورقی ─────────────────────────────────────────────
+ * ساختار رجیستری و ستون‌ها در assert-55 (بند ۱۰) و کاتالوگ چهارزبانه در assert-53؛ رفتار روی وردپرس واقعی (پیوند مرده، ستون خالی،
+ * شمار هر زبان، fa ≥ ۳۰) در tests/footer-gate.js. */
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-home.php';
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-footer.php';
+$w55b_ft  = $w55b_read( $w55b_r . 'includes/topersia-g-footer.php' );
+$w55b_fn  = function ( $s, $sig ) {
+	return preg_match( '/function ' . preg_quote( $sig, '/' ) . ' \{.*?\n\t}\n/s', $s, $m ) ? $m[0] : '';
+};
+
+t( 'بند ۳: سهم ستون نوبتی — هر گروه دارای پیوند دست‌کم یک خانه، جمع هرگز بیش از ۸، گروه تهی صفر',
+	array( 'seasons' => 2, 'events' => 2, 'exp' => 2, 'picks' => 2 ) === topersia_g_ft_share( array( 'seasons' => 4, 'events' => 5, 'exp' => 6, 'picks' => 8 ) )
+	&& array( 'dest' => 8 ) === topersia_g_ft_share( array( 'dest' => 13 ) )
+	&& array( 'about' => 2, 'news' => 6 ) === topersia_g_ft_share( array( 'about' => 2, 'news' => 7 ) )
+	&& array( 'a' => 0, 'b' => 3 ) === topersia_g_ft_share( array( 'a' => 0, 'b' => 3 ) )
+	&& array( 'seasons' => 1, 'events' => 1, 'exp' => 1, 'picks' => 1 ) === topersia_g_ft_share( array( 'seasons' => 1, 'events' => 1, 'exp' => 1, 'picks' => 1 ) ) );
+tp441_mut( 'بند ۳: سهم از TOPERSIA_FOOTER_COL_MAX (۸) و نوبتی؛ شورت‌کد هر گروه را به سهمش می‌بُرد — جهش: بی سقف ستون',
+	function ( $s ) use ( $w55b_fn ) {
+		$sh = $w55b_fn( $s, 'topersia_g_ft_share( array $have )' );
+		$sc = $w55b_fn( $s, 'topersia_g_sc_footer_menu( $atts = array() )' );
+		return 8 === TOPERSIA_FOOTER_COL_MAX && false !== strpos( $s, "define( 'TOPERSIA_FOOTER_COL_MAX', 8 );" )
+			&& false !== strpos( $sh, '$left = TOPERSIA_FOOTER_COL_MAX;' ) && false !== strpos( $sh, 'if ( $left > 0 && $take[ $g ] < $n ) {' )
+			&& false !== strpos( $sc, "\$take = topersia_g_ft_share( array_map( 'count', \$lists ) );" ) && false !== strpos( $sc, 'foreach ( array_slice( $links, 0, $take[ $g ] ) as $it ) {' );
+	}, $w55b_ft, str_replace( 'foreach ( array_slice( $links, 0, $take[ $g ] ) as $it ) {', 'foreach ( $links as $it ) {', $w55b_ft ) );
+
+$w55b_o = topersia_g_ft_opts( array(
+	'off'   => array( 'type:tp_village', 'bogus:x', 'type:tp_village', array( 'type:tp_island' ), 'page:copyright' ),
+	'picks' => array( 5, '5', '7', 0, '', 'x', 9, 10, 11, 12, 13, 14, 15, 16 ),
+) );
+t( 'بند ۳: گزینۀ off فقط شناسۀ شناختۀ رجیستری، یکتا؛ picks تا ۸ شناسۀ یکتا و نا‌صفر؛ بی ورودی هر دو تهی',
+	array( 'type:tp_village', 'page:copyright' ) === $w55b_o['off'] && array( 5, 7, 9, 10, 11, 12, 13, 14 ) === $w55b_o['picks']
+	&& array() === topersia_g_ft_opts( array() )['off'] && array() === topersia_g_ft_opts( array() )['picks'], wp_json_encode( array( $w55b_o['off'], $w55b_o['picks'] ) ) );
+tp441_mut( 'بند ۳: پیشخوان — خاموش = سطرهای فرستاده منهای تیک‌خورده، سپس پاک‌کن opts؛ هر سطر رجیستری یک تیک «نمایش» و ۸ خانۀ «پیوندهای ویژه» — جهش: خاموش از همۀ سطرها',
+	function ( $s ) use ( $w55b_fn ) {
+		$sv = $w55b_fn( $s, 'topersia_g_ft_admin_save()' );
+		$pg = $w55b_fn( $s, 'topersia_g_ft_admin_page()' );
+		return false !== strpos( $sv, 'return empty( $show[ $id ] ); } ) );' ) && false !== strpos( $sv, '$opts = topersia_g_ft_opts( $in );' ) && false !== strpos( $sv, "check_admin_referer( 'topersia_footer_save' );" )
+			&& false !== strpos( $pg, '<input type="hidden" name="tp_ft[rows][]" value="\' . esc_attr( $r[\'id\'] ) . \'">' )
+			&& false !== strpos( $pg, "\$cb( 'tp_ft[show][' . \$r['id'] . ']', ! in_array( \$r['id'], \$o['off'], true ) )" )
+			&& false !== strpos( $pg, 'for ( $i = 0; $i < TOPERSIA_FOOTER_PICKS; $i++ ) {' );
+	}, $w55b_ft, str_replace( 'return empty( $show[ $id ] ); } ) );', 'return true; } ) );', $w55b_ft ) );
+
+tp441_mut( 'بند ۳: «پیوند واقعی» — هاب با topersia_g_home_real( …, false )، فصل با _tp_sample NOT EXISTS، واژه و موضوع و برگزیده با شمار بی نمونه؛ برگزیده فقط موجودیت منتشرشدۀ همین زبان — جهش: صافی نمونه باز',
+	function ( $s ) use ( $w55b_fn ) {
+		$pk = $w55b_fn( $s, 'topersia_g_ft_picks( $opts = null )' );
+		return false !== strpos( $w55b_fn( $s, 'topersia_g_ft_real_mq()' ), "return array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) );" )
+			&& false !== strpos( $w55b_fn( $s, 'topersia_g_ft_real_count( array $ids )' ), "! metadata_exists( 'post', (int) \$id, '_tp_sample' )" )
+			&& false !== strpos( $w55b_fn( $s, 'topersia_g_ft_exp( $min = 1 )' ), 'topersia_g_ft_real_count( topersia_g_tag_items( $t->term_id ) ) >= max( 1, (int) $min )' )
+			&& false !== strpos( $w55b_fn( $s, 'topersia_g_ft_topics( $min = 1 )' ), 'topersia_g_ft_real_count( array_intersect(' )
+			&& false !== strpos( $pk, "foreach ( topersia_g_published( array_map( 'absint', (array) \$opts['picks'] ) ) as \$id ) {" )
+			&& false !== strpos( $pk, '1 === topersia_g_ft_real_count( array( $id ) )' );
+	}, $w55b_ft, str_replace( "'compare' => 'NOT EXISTS' ) );\n\t}", "'compare' => 'EXISTS' ) );\n\t}", $w55b_ft ) );
+
+tp441_mut( 'بند ۳: پیوند تکراری، تهی یا بیرون از میزبان سایت نمی‌آید؛ سطر خاموش پیشخوان رد می‌شود — جهش: بی حذف تکراری',
+	function ( $s ) use ( $w55b_fn ) {
+		$l = $w55b_fn( $s, 'topersia_g_ft_links( $group )' );
+		return false !== strpos( $l, "|| in_array( \$r['id'], \$opts['off'], true ) ||" )
+			&& false !== strpos( $l, "if ( '' === \$it[0] || '' === \$it[1] || isset( \$seen[ \$it[1] ] ) || ( '' !== \$home && \$host !== (string) wp_parse_url( \$home, PHP_URL_HOST ) ) ) {" );
+	}, $w55b_ft, str_replace( '|| isset( $seen[ $it[1] ] ) ', '', $w55b_ft ) );
+
+tp441_mut( 'بند ۳: گروهی که عنوانش عنوان toggle نیست سرعنوان <p> با شناسۀ tp- و فهرست aria-labelledby دارد؛ گروه تهی هیچ — جهش: بی aria-labelledby',
+	function ( $s ) use ( $w55b_fn ) {
+		$sc = $w55b_fn( $s, 'topersia_g_sc_footer_menu( $atts = array() )' );
+		return false !== strpos( $sc, "\$hid   = 'tp-ft-g-' . \$g;" ) && false !== strpos( $sc, '<p class="tp-ft-menu__h" id="\' . esc_attr( $hid ) . \'">' )
+			&& false !== strpos( $sc, 'aria-labelledby="\' . esc_attr( $hid ) . \'"' ) && false !== strpos( $sc, "if ( '' === \$items ) {\n\t\t\t\tcontinue;" );
+	}, $w55b_ft, str_replace( ' aria-labelledby="\' . esc_attr( $hid ) . \'"', '', $w55b_ft ) );
+
+$w55b_fcss = $w55b_read( $w55b_r . 'assets/topersia-g-footer.css' );
+tp441_mut( 'بند ۳: سرعنوان گروه از توکن پاورقی (--tp-ft-head · --tp-ft-menu-fs · --tp-ft-stack)، بی رنگ خام — جهش: رنگ خام',
+	function ( $c ) {
+		return 1 === preg_match( '/\.tp-ft-menu \.tp-ft-menu__h\{\s*margin:var\(--tp-ft-stack\) 0 0;\s*font-size:var\(--tp-ft-menu-fs\);\s*font-weight:700;\s*line-height:1\.4;\s*color:var\(--tp-ft-head\);\s*\}/', $c );
+	}, $w55b_fcss, str_replace( "font-weight:700;\n  line-height:1.4;\n  color:var(--tp-ft-head);", "font-weight:700;\n  line-height:1.4;\n  color:#333;", $w55b_fcss ) );

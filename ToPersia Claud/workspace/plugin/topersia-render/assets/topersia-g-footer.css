@@ -141,6 +141,16 @@ html:root [data-elementor-type="footer"] .tp-ft-menu__a{
   text-align:start;
   color:var(--tp-ft-link);
 }
+/* سرعنوان گروه درون ستون (دستۀ 55-ب بند ۳ · P5-D643) — «رویدادها و جشنواره‌ها»، «اخبار و مقالات» …؛ گروه هم‌نام toggle سرعنوان ندارد */
+html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__h{
+  margin:var(--tp-ft-stack) 0 0;
+  font-size:var(--tp-ft-menu-fs);
+  font-weight:700;
+  line-height:1.4;
+  color:var(--tp-ft-head);
+}
+html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__h:first-child{margin-block-start:0}
+html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__list + .tp-ft-menu__list{margin-block-start:var(--tp-ft-stack)}
 
 /* --- ردیف هم‌ارتفاع همکاران و شبکه‌ها — یک توکن --tp-ft-row-h برای هر دو (P5-D615) ------------------- */
 .tp-ft-row{
