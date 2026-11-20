@@ -1675,6 +1675,10 @@ msgstr ""
 msgid "دربارۀ %s"
 msgstr ""
 
+#: includes/topersia-g-footer.php
+msgid "دربارۀ توپرشیا"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "درجۀ سانتی‌گراد"
 msgstr ""
@@ -2041,6 +2045,10 @@ msgstr ""
 
 #: includes/topersia-g-zones.php
 msgid "رویداد ورزشی"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "رویدادها"
 msgstr ""
 
 #: includes/topersia-g-home-row.php
@@ -2783,6 +2791,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "فصلی"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "فصل‌ها"
 msgstr ""
 
 #: includes/topersia-g-map.php

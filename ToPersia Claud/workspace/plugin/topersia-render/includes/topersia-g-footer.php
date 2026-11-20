@@ -385,7 +385,7 @@ if ( ! function_exists( 'topersia_g_ft_toggle_titles' ) ) {
 	/**
 	 * عنوان ستون‌های پاورقی (P5-D617) — متن فارسی ذخیره‌شده در ویجت wd_toggle قالب #6128 ← عنوان به زبان صفحه.
 	 * قالب ترجمۀ WPML ندارد؛ پس عنوان در داده فارسی می‌ماند و این‌جا از کاتالوگ ترجمه می‌شود (صافی render_content پایین).
-	 * «توپرشیا» نام برند به زبان صفحه است (topersia_g_brand — P5-D518)، هم برای ستون منو و هم جعبۀ برند.
+	 * ستونی که در داده «توپرشیا» نام دارد «دربارۀ توپرشیا» نشان داده می‌شود تا با نام برند در جعبۀ برند دوتایی نشود (دستۀ 55 بند ۱۰).
 	 *
 	 * @return array متن فارسی داده ← عنوان نمایشی
 	 */
@@ -393,7 +393,7 @@ if ( ! function_exists( 'topersia_g_ft_toggle_titles' ) ) {
 		return array(
 			'مقصدها'      => __( 'مقصدها', 'topersia' ),
 			'راهنمای سفر' => __( 'راهنمای سفر', 'topersia' ),
-			'توپرشیا'     => function_exists( 'topersia_g_brand' ) ? topersia_g_brand() : 'ToPersia',
+			'توپرشیا'     => __( 'دربارۀ توپرشیا', 'topersia' ),
 			'حقوقی'       => __( 'حقوقی', 'topersia' ),
 		);
 	}
@@ -405,26 +405,23 @@ if ( ! function_exists( 'topersia_g_ft_menu_cols' ) ) {
 	 *   type   هاب آرشیو نوع (get_post_type_archive_link، به زبان جاری از WPML)
 	 *   group  هاب گروهی (topersia_g_hub_group_url — /attractions/)
 	 *   page   صفحۀ ثابت با نامک لاتین (topersia_g_legal_page — ترجمۀ منتشرشدۀ زبان جاری)
+	 *   season صفحۀ فصل جاری (/season/{فصل}/، topersia_g_ft_season_url) — فهرست فصل‌ها صفحۀ جدا ندارد
 	 * پیوندی که مقصدش به زبان جاری نیست یا محتوای منتشرشده ندارد نوشته نمی‌شود (topersia_g_ft_menu_url)؛ «حق نشر» تا صفحه‌اش ساخته نشده پنهان است.
+	 * دستۀ 55 بند ۱۰: هیچ مقصد کاشی صفحۀ اول (topersia_g_ft_home_tiles) و هیچ آیتم منوی اصلی تکرار نمی‌شود — منوی اصلی امروز
+	 * فقط پیوند «#» دارد. «نقشۀ سایت» صفحۀ واقعی ندارد و نیامد. ستون حقوقی (و حق نشر) دست‌نخورده.
 	 *
 	 * @return array
 	 */
 	function topersia_g_ft_menu_cols() {
-		$t = topersia_g_ft_toggle_titles();
-		return array(
+		$t    = topersia_g_ft_toggle_titles();
+		$cols = array(
 			'dest'  => array( $t['مقصدها'], array(
-				array( __( 'استان‌ها', 'topersia' ), 'type', 'tp_province' ),
-				array( __( 'شهرها', 'topersia' ), 'type', 'tp_city' ),
 				array( __( 'روستاها', 'topersia' ), 'type', 'tp_village' ),
 				array( __( 'جزیره‌ها', 'topersia' ), 'type', 'tp_island' ),
-				array( __( 'جاذبه‌ها', 'topersia' ), 'group', 'attractions' ),
 			) ),
 			'guide' => array( $t['راهنمای سفر'], array(
-				array( __( 'روادید', 'topersia' ), 'type', 'tp_visa' ),
-				array( __( 'سلامت و ایمنی', 'topersia' ), 'type', 'tp_health_safety' ),
-				array( __( 'حمل‌ونقل', 'topersia' ), 'type', 'tp_transport' ),
-				array( __( 'ارز و پرداخت', 'topersia' ), 'type', 'tp_currency' ),
-				array( __( 'آداب سفر', 'topersia' ), 'type', 'tp_travel_etiquette' ),
+				array( __( 'رویدادها', 'topersia' ), 'group', 'events' ),
+				array( __( 'فصل‌ها', 'topersia' ), 'season', 'now' ),
 			) ),
 			'about' => array( $t['توپرشیا'], array(
 				array( __( 'درباره ما', 'topersia' ), 'page', 'about' ),
@@ -438,6 +435,78 @@ if ( ! function_exists( 'topersia_g_ft_menu_cols' ) ) {
 				array( __( 'حق نشر', 'topersia' ), 'page', 'copyright' ),
 			) ),
 		);
+		$tiles = topersia_g_ft_home_tiles();
+		foreach ( $cols as $k => $col ) {
+			$cols[ $k ][1] = array_values( array_filter( $col[1], function ( $it ) use ( $tiles ) {
+				return ! in_array( $it[1] . ':' . $it[2], $tiles, true );
+			} ) );
+		}
+		return $cols;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_home_tiles' ) ) {
+	/**
+	 * مقصد ثابت کاشی‌های صفحۀ اول (دستۀ 55 بند ۱۰) به شکل «نوع منبع:مقدار» منوی پاورقی — پاورقی هیچ‌کدام را تکرار نمی‌کند:
+	 * کاشی استان‌ها و «همۀ استان‌ها» · کارت «محبوب‌ترین مقاصد» و «همۀ شهرها» · «مشاهدۀ همه»ی جاذبه‌ها (/attractions/) ·
+	 * نُه کاشی «راهنمای سفر» (topersia_g_home_guide_types). کاشی «کارها و تجربیات» به برچسب می‌رود که پاورقی ندارد.
+	 *
+	 * @return string[]
+	 */
+	function topersia_g_ft_home_tiles() {
+		$keys = array( 'type:tp_province', 'type:tp_city', 'group:attractions' );
+		foreach ( array_keys( function_exists( 'topersia_g_home_guide_types' ) ? topersia_g_home_guide_types() : array() ) as $type ) {
+			$keys[] = 'type:' . $type;
+		}
+		return $keys;
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_season_now' ) ) {
+	/** فصل امروز به تقویم شمسی (فروردین تا خرداد بهار …)، از topersia_g_home_today (صافی آزمون). */
+	function topersia_g_ft_season_now() {
+		$d = function_exists( 'topersia_g_home_today' ) ? topersia_g_home_today() : gmdate( 'Y-m-d' );
+		$p = array_map( 'intval', explode( '-', $d ) + array( 0, 1, 1 ) );
+		$j = function_exists( 'topersia_g_jalali' ) && $p[0] > 0 ? topersia_g_jalali( $p[0], max( 1, min( 12, $p[1] ) ), max( 1, min( 31, $p[2] ) ) ) : array( 0, 1, 1 );
+		$k = array( 'spring', 'summer', 'autumn', 'winter' );
+		return $k[ intdiv( max( 1, min( 12, (int) $j[1] ) ) - 1, 3 ) ];
+	}
+}
+
+if ( ! function_exists( 'topersia_g_ft_season_url' ) ) {
+	/**
+	 * نشانی صفحۀ فصل جاری به زبان جاری، فقط اگر دست‌کم یک موجودیت منتشرشدۀ همین زبان در آن فصل (یا «تمام سال») هست — همان
+	 * قاعدۀ کارت فصل صفحۀ اول (topersia_g_hub_in_season، نمایشی فقط در پیش‌نمایش)؛ وگرنه تهی.
+	 */
+	function topersia_g_ft_season_url() {
+		if ( ! function_exists( 'topersia_g_hub_registry' ) || ! function_exists( 'topersia_g_hub_in_season' ) || ! function_exists( 'topersia_g_season_url' ) ) {
+			return '';
+		}
+		$s     = topersia_g_ft_season_now();
+		$types = array_keys( array_filter( topersia_g_hub_registry(), function ( $row ) { return '' !== $row['season']; } ) );
+		if ( ! $types ) {
+			return '';
+		}
+		$ids = get_posts( array(
+			'post_type'        => $types,
+			'post_status'      => 'publish',
+			'has_password'     => false,
+			'posts_per_page'   => 20,
+			'fields'           => 'ids',
+			'no_found_rows'    => true,
+			'suppress_filters' => false,
+			'meta_query'       => array_merge( topersia_g_sample_mq(), array( array(
+				'relation' => 'OR',
+				array( 'key' => 'best_season', 'value' => $s, 'compare' => 'LIKE' ),
+				array( 'key' => 'best_season', 'value' => 'all_year', 'compare' => 'LIKE' ),
+			) ) ),
+		) );
+		foreach ( topersia_g_published( array_map( 'absint', (array) $ids ) ) as $id ) {
+			if ( topersia_g_hub_in_season( $id, $s ) ) {
+				return (string) topersia_g_season_url( $s );
+			}
+		}
+		return '';
 	}
 }
 
@@ -447,6 +516,9 @@ if ( ! function_exists( 'topersia_g_ft_menu_url' ) ) {
 	 * (topersia_g_home_real — نمونۀ نمایشی فقط در پیش‌نمایش)؛ صفحه فقط وقتی ترجمۀ منتشرشدۀ همین زبان دارد.
 	 */
 	function topersia_g_ft_menu_url( $kind, $key ) {
+		if ( 'season' === $kind ) {
+			return topersia_g_ft_season_url();
+		}
 		if ( 'page' === $kind ) {
 			$id = function_exists( 'topersia_g_legal_page' ) ? topersia_g_legal_page( $key ) : 0;
 			return $id ? (string) get_permalink( $id ) : '';
@@ -543,6 +615,29 @@ if ( ! function_exists( 'topersia_g_ft_toggle_menu_col' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_ft_toggle_has_sc' ) ) {
+	/**
+	 * آیا درون این toggle یکی از شورت‌کدهای پاورقی ما ([tp_footer_…]) هست؟ (دستۀ 55 بند ۱۰)
+	 * toggle جعبۀ برند عنوانی از نقشۀ عنوان‌ها ندارد (عنوانش در ذخیرۀ کاربر تهی است) ولی خروجی‌اش زبان‌به‌زبان فرق دارد.
+	 *
+	 * @param array $raw دادۀ خام المنتور (get_raw_data)
+	 */
+	function topersia_g_ft_toggle_has_sc( array $raw ) {
+		foreach ( (array) ( $raw['elements'] ?? array() ) as $child ) {
+			if ( ! is_array( $child ) ) {
+				continue;
+			}
+			if ( 'shortcode' === ( $child['widgetType'] ?? '' ) && false !== strpos( (string) ( $child['settings']['shortcode'] ?? '' ), '[tp_footer_' ) ) {
+				return true;
+			}
+			if ( topersia_g_ft_toggle_has_sc( $child ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+}
+
 if ( ! function_exists( 'topersia_g_ft_hidden_toggle' ) ) {
 	/**
 	 * فهرست toggleهای منوی تهیِ همین درخواست (P5-D617) — render_content نشان می‌گذارد، should_render پنهان می‌کند؛
@@ -577,12 +672,18 @@ if ( function_exists( 'add_filter' ) ) {
 	 * کش عنصر المنتور (P5-D617): ویجت ناپویا یک بار برای هر پست ساخته و ذخیره می‌شود، نه برای هر زبان — پس عنوان
 	 * و پنهان‌شدن ستون باید هر بار زنده ساخته شوند. toggleی که عنوانش یکی از کلیدهای topersia_g_ft_toggle_titles است
 	 * پویا شمرده می‌شود؛ المنتور به جایش [elementor-element] می‌نشاند و در هر درخواست از نو می‌کشد.
+	 * دستۀ 55 بند ۱۰: toggleی که شورت‌کد پاورقی ما را دارد هم (جعبۀ برند، که عنوانش تهی شد) — اگر یک toggle از کش بیاید،
+	 * شیوه‌نامۀ el-toggle وودمارت درون HTML کش‌شده‌اش هست ولی وودمارت در این درخواست چاپ‌شدنش را ثبت نکرده، پس نخستین
+	 * toggle زنده آن را دوباره می‌نویسد (دو برچسب link). همه زنده ← یک بار.
 	 */
 	add_filter( 'elementor/element/is_dynamic_content', function ( $is, $raw = array() ) {
 		if ( $is || ! is_array( $raw ) || 'wd_toggle' !== ( $raw['widgetType'] ?? '' ) ) {
 			return $is;
 		}
-		return isset( topersia_g_ft_toggle_titles()[ trim( (string) ( $raw['settings']['element_title'] ?? '' ) ) ] ) ? true : $is;
+		if ( isset( topersia_g_ft_toggle_titles()[ trim( (string) ( $raw['settings']['element_title'] ?? '' ) ) ] ) ) {
+			return true;
+		}
+		return topersia_g_ft_toggle_has_sc( $raw ) ? true : $is;
 	}, 10, 2 );
 
 	add_filter( 'elementor/widget/render_content', function ( $html, $widget ) {

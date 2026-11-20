@@ -72,12 +72,13 @@ const headsOk = ( L, lang, w ) => {
 /* P5-D617: عنوان ستون به ترتیب dest · guide · about · legal — مستقل از کد، از کاتالوگ بازبینی‌شده */
 const MENU_COLS   = [ 'dest', 'guide', 'about', 'legal' ];
 const MENU_TITLES = {
-	fa: [ 'مقصدها', 'راهنمای سفر', 'توپرشیا', 'حقوقی' ],
-	en: [ 'Destinations', 'Travel guide', 'ToPersia', 'Legal' ],
-	ar: [ 'الوجهات', 'دليل السفر', 'توبيرشيا', 'قانوني' ],
+	fa: [ 'مقصدها', 'راهنمای سفر', 'دربارۀ توپرشیا', 'حقوقی' ],
+	en: [ 'Destinations', 'Travel guide', 'About ToPersia', 'Legal' ],
+	ar: [ 'الوجهات', 'دليل السفر', 'عن توبيرشيا', 'قانوني' ],
 };
-/* خروجی سرور در هر زبان: ستون ← نشانی‌های زنده (topersia_g_ft_menu_url پس از wpml_switch_language) */
-const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( topersia_g_ft_menu_cols() as $k => $c ) { $o[ $k ] = array(); foreach ( $c[1] as $it ) { $u = topersia_g_ft_menu_url( $it[1], $it[2] ); if ( "" !== $u ) { $o[ $k ][] = $u; } } } echo wp_json_encode( $o );' ).trim() );
+/* خروجی سرور در هر زبان: ستون ← نشانی‌های زنده (topersia_g_ft_menu_url پس از wpml_switch_language). در WP-CLI home_url با
+   تعویض زبان عوض نمی‌شود؛ wpml_permalink همان تبدیل صفحه را می‌دهد و روی نشانی ازپیش‌زبان‌دار بی‌اثر است (دستۀ 55 بند ۱۰). */
+const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( topersia_g_ft_menu_cols() as $k => $c ) { $o[ $k ] = array(); foreach ( $c[1] as $it ) { $u = topersia_g_ft_menu_url( $it[1], $it[2] ); if ( "" !== $u ) { $o[ $k ][] = apply_filters( "wpml_permalink", $u, "' + lang + '" ); } } } echo wp_json_encode( $o );' ).trim() );
 /* سمت سرور: ستون dest تهی ساخته می‌شود؛ پاورقی بی آن کشیده می‌شود و شیوه‌نامۀ el-toggle باید بماند. mut = بی بازگرداندن after_render */
 const keepCss = mut => JSON.parse( wp( '$mut = ' + ( mut ? 1 : 0 ) + '; add_filter( "elementor/widget/render_content", function ( $h, $w ) { return ( "wd_toggle" === $w->get_name() && "dest" === topersia_g_ft_toggle_menu_col( (array) $w->get_raw_data() ) ) ? str_replace( "tp-ft-menu__a", "tp-ft-menu__x", $h ) : $h; }, 5, 2 ); if ( $mut ) { remove_all_actions( "elementor/frontend/widget/after_render" ); } $o = \\Elementor\\Plugin::$instance->frontend->get_builder_content_for_display( 6128 ); preg_match_all( "#wd-el-toggle-title[^>]*>\\s*([^<]*?)\\s*<#u", $o, $t ); echo wp_json_encode( array( "titles" => $t[1], "css" => preg_match_all( "#<link[^>]+id=\\"wd-el-toggle(-rtl)?-css\\"#", $o ), "raw" => false !== strpos( $o, "[tp_footer_menu" ) || false !== strpos( $o, "[elementor-element" ) ) );' ).trim().split( '\n' ).pop() );
 
@@ -158,6 +159,7 @@ function probeMenus() {
 			label:  nav ? nav.getAttribute( 'aria-label' ) : '',
 			links:  nav ? [ ...nav.querySelectorAll( 'a.tp-ft-menu__a' ) ].map( a => ( { href: a.href, text: a.textContent.trim() } ) ) : [],
 			filled: !! ( body && body.querySelector( 'a[href], img, p, li' ) ),
+			brand:  !! t.querySelector( '.tp-ft-brand' ),
 		};
 	} );
 	return {
@@ -342,8 +344,10 @@ async function probeContrast( mode ) {
 			ok( menus.length === want.length && rows.every( r => r.ok ),
 				`منو · ${ lang }: ستون‌ها [${ rows.map( r => r.wt + ' ' + r.n ).join( '، ' ) }] = صفحه [${ menus.map( t => t.title + ' ' + t.links.length ).join( '، ' ) }]` + ( rows.some( r => ! r.ok ) ? ' ← ناهمخوان ' + rows.filter( r => ! r.ok ).map( r => r.c + ': ' + r.got + ' ≠ ' + r.wt ).join( ' | ' ) : '' ) );
 			const others = M ? M.toggles.filter( t => ! t.menu ) : [];
-			ok( M && M.toggles.every( t => t.filled ) && others.every( t => t.title === T[2] ),
-				`منو · ${ lang }: هیچ toggle تهی (${ M ? M.toggles.filter( t => ! t.filled ).map( t => '«' + t.title + '»' ).join( ' ' ) || 'هیچ' : '—' })؛ toggle بی منو فقط جعبۀ برند «${ T[2] }» (${ others.map( t => '«' + t.title + '»' ).join( ' ' ) })` );
+			/* دستۀ 55 بند ۱۰: جعبۀ برند از محتوایش (.tp-ft-brand) شناخته می‌شود، نه از عنوان — عنوانش انتخاب کاربر است و در ذخیرۀ
+			   #6128 تهی شد؛ فقط نباید هم‌نام ستون «دربارۀ توپرشیا» باشد (خواستۀ بند ۱۰: دوتایی نشود). */
+			ok( M && M.toggles.every( t => t.filled ) && 1 === others.length && others.every( t => t.brand && t.title !== T[2] ),
+				`منو · ${ lang }: هیچ toggle تهی (${ M ? M.toggles.filter( t => ! t.filled ).map( t => '«' + t.title + '»' ).join( ' ' ) || 'هیچ' : '—' })؛ toggle بی منو فقط یک جعبۀ برند، نه هم‌نام «${ T[2] }» (${ others.map( t => '«' + t.title + '» برند ' + t.brand ).join( ' | ' ) })` );
 			const script = 'en' === lang ? /^[\x20-\x7E]+$/ : /[؀-ۿ]/;
 			const links  = menus.flatMap( t => t.links.map( l => ( { ...l, col: t.title } ) ) );
 			const badL   = [];

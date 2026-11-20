@@ -1676,6 +1676,10 @@ msgstr "About us"
 msgid "دربارۀ %s"
 msgstr "About %s"
 
+#: includes/topersia-g-footer.php
+msgid "دربارۀ توپرشیا"
+msgstr "About ToPersia"
+
 #: includes/topersia-g-map.php
 msgid "درجۀ سانتی‌گراد"
 msgstr "°C"
@@ -2043,6 +2047,10 @@ msgstr "Seasonal and religious events"
 #: includes/topersia-g-zones.php
 msgid "رویداد ورزشی"
 msgstr "Sports event"
+
+#: includes/topersia-g-footer.php
+msgid "رویدادها"
+msgstr "Events"
 
 #: includes/topersia-g-home-row.php
 msgid "رویدادها و جشنواره‌ها"
@@ -2785,6 +2793,10 @@ msgstr "Season"
 #: includes/topersia-g-map.php
 msgid "فصلی"
 msgstr "Seasonal"
+
+#: includes/topersia-g-footer.php
+msgid "فصل‌ها"
+msgstr "Seasons"
 
 #: includes/topersia-g-map.php
 msgid "فعال"

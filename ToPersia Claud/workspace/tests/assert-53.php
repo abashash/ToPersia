@@ -618,10 +618,10 @@ $w53_fmct = function ( $cat ) use ( $w53_ft ) {
 			return false;
 		}
 	}
-	return 20 === count( $keys );
+	return 15 === count( $keys );   /* دستۀ 55 بند ۱۰: کاشی‌های صفحۀ اول بیرون، رویدادها و فصل‌ها و عنوان «دربارۀ توپرشیا» درون */
 };
-tp441_mut( 'P5-D617 هر عنوان و برچسب منوی پاورقی (۲۰ رشته) در کاتالوگ با en لاتین و ar بی حرف ویژۀ فارسی؛ «توپرشیا» از topersia_g_brand — جهش: «حقوقی» از کاتالوگ بیفتد',
-	function ( $cat ) use ( $w53_fmct, $w53_ft ) { return $w53_fmct( $cat ) && false !== strpos( $w53_ft, "'توپرشیا'     => function_exists( 'topersia_g_brand' ) ? topersia_g_brand() : 'ToPersia'," ); },
+tp441_mut( 'P5-D617 هر عنوان و برچسب منوی پاورقی در کاتالوگ با en لاتین و ar بی حرف ویژۀ فارسی؛ ستون «توپرشیا» با عنوان «دربارۀ توپرشیا» (دستۀ 55 بند ۱۰) — جهش: «حقوقی» از کاتالوگ بیفتد',
+	function ( $cat ) use ( $w53_fmct, $w53_ft ) { return $w53_fmct( $cat ) && false !== strpos( $w53_ft, "'توپرشیا'     => __( 'دربارۀ توپرشیا', 'topersia' )," ); },
 	$w53_cat, str_replace( "\n\t'حقوقی' => array(", "\n\t'حقوقی-' => array(", $w53_cat ) );
 tp441_mut( 'P5-D617 CSS منو از توکن: بلندی و اندازۀ قلم از --tp-ft-menu-h و --tp-ft-menu-fs (تعریف در topersia-tokens.css)، رنگ --tp-ft-link، text-align:start — جهش: اندازۀ قلم خام',
 	function ( $css ) use ( $w53_tok ) {

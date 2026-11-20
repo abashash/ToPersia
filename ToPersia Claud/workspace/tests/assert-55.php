@@ -402,6 +402,77 @@ tp441_mut( 'بند ۹: جایگزین تصویر از زنجیرۀ نیا (کا�
 t( 'بند ۹: بی ثابت پیش‌نمایش، جایگزین مشترک خاموش است (همان مقدار topersia_demo_on)',
 	function_exists( 'topersia_g_shared_fallback_on' ) && false === topersia_g_shared_fallback_on() && topersia_g_shared_fallback_on() === topersia_demo_on() );
 
+/* ── بند ۱۰: منوی پاورقی (۶٫۱) — بی تکرار کاشی صفحۀ اول؛ «دربارۀ توپرشیا»؛ حقوقی دست‌نخورده ──────────
+ * رفتار روی وردپرس واقعی (هر زبان، ستون بی پیوند پنهان): tests/footer-gate.js. */
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-home.php';     /* topersia_g_home_guide_types — فقط تعریف تابع */
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-footer.php';
+$w55_ft   = $w55_read( $w55_r . 'includes/topersia-g-footer.php' );
+$w55_c10  = function ( $s ) {
+	if ( ! preg_match( '/function topersia_g_ft_menu_cols\(\) \{.*?\n\t}\n/s', $s, $b ) ) {
+		return false;
+	}
+	preg_match_all( "/array\( __\( '[^']+', 'topersia' \), '([a-z]+)', '([a-z_-]+)' \)/u", $b[0], $m, PREG_SET_ORDER );
+	$tiles = topersia_g_ft_home_tiles();
+	foreach ( $m as $it ) {
+		if ( in_array( $it[1] . ':' . $it[2], $tiles, true ) ) {
+			return false;
+		}
+	}
+	return count( $m ) > 0 && false !== strpos( $b[0], "return ! in_array( \$it[1] . ':' . \$it[2], \$tiles, true );" )
+		&& false !== strpos( $b[0], "\t\t\t'legal' => array( \$t['حقوقی'], array(\n\t\t\t\tarray( __( 'قوانین و مقررات', 'topersia' ), 'page', 'terms' ),\n\t\t\t\tarray( __( 'حریم خصوصی', 'topersia' ), 'page', 'privacy-policy' ),\n\t\t\t\tarray( __( 'حق نشر', 'topersia' ), 'page', 'copyright' ),\n\t\t\t) )," );
+};
+tp441_mut( 'بند ۱۰: هیچ آیتم منوی پاورقی مقصد کاشی صفحۀ اول نیست (استان، شهر، /attractions/، نُه نوع راهنما) و صافی زمان اجرا هم همین را می‌گیرد؛ ستون حقوقی (و حق نشر) عیناً همان — جهش: «روادید» به ستون راهنما برگردد',
+	$w55_c10, $w55_ft, str_replace( "array( __( 'رویدادها', 'topersia' ), 'group', 'events' ),", "array( __( 'روادید', 'topersia' ), 'type', 'tp_visa' ),\n\t\t\t\tarray( __( 'رویدادها', 'topersia' ), 'group', 'events' ),", $w55_ft ) );
+
+$w55_cols = topersia_g_ft_menu_cols();
+$w55_keys = array();
+foreach ( $w55_cols as $w55_k => $w55_c ) {
+	$w55_keys[ $w55_k ] = array_map( function ( $it ) { return $it[1] . ':' . $it[2]; }, $w55_c[1] );
+}
+$w55_tl = topersia_g_ft_home_tiles();
+t( 'بند ۱۰: ستون‌ها — مقصدها: روستاها · جزیره‌ها؛ راهنمای سفر: رویدادها · فصل‌ها؛ دربارۀ توپرشیا: درباره ما · تماس · اخبار · مقالات؛ حقوقی بی تغییر — و فهرست کاشی‌ها نُه نوع راهنما را دارد',
+	array( 'type:tp_village', 'type:tp_island' ) === $w55_keys['dest'] && array( 'group:events', 'season:now' ) === $w55_keys['guide']
+	&& array( 'page:about', 'page:contact', 'type:tpc_news', 'type:tpc_article' ) === $w55_keys['about']
+	&& array( 'page:terms', 'page:privacy-policy', 'page:copyright' ) === $w55_keys['legal']
+	&& 'دربارۀ توپرشیا' === $w55_cols['about'][0] && 'دربارۀ توپرشیا' === topersia_g_ft_toggle_titles()['توپرشیا']
+	&& 12 === count( $w55_tl ) && in_array( 'type:tp_visa', $w55_tl, true ) && in_array( 'type:tp_local_food', $w55_tl, true ),
+	wp_json_encode( $w55_keys ) );
+
+/* فصل امروز به تقویم شمسی — مرز هر فصل (۱ فروردین · ۱ تیر · ۱ مهر · ۱ دی ۱۴۰۵) و روز پیش از آن */
+$w55_today_prev = $GLOBALS['tp_filters']['topersia_g_home_today'] ?? null;
+$w55_sn_ok      = true;
+foreach ( array( '2026-03-20' => 'winter', '2026-03-21' => 'spring', '2026-06-21' => 'spring', '2026-06-22' => 'summer', '2026-09-22' => 'summer', '2026-09-23' => 'autumn', '2026-11-19' => 'autumn', '2026-12-21' => 'autumn', '2026-12-22' => 'winter' ) as $w55_d => $w55_want ) {
+	$GLOBALS['tp_filters']['topersia_g_home_today'] = array( function () use ( $w55_d ) { return $w55_d; } );
+	$w55_sn_ok = $w55_sn_ok && $w55_want === topersia_g_ft_season_now();
+}
+if ( null === $w55_today_prev ) {
+	unset( $GLOBALS['tp_filters']['topersia_g_home_today'] );
+} else {
+	$GLOBALS['tp_filters']['topersia_g_home_today'] = $w55_today_prev;
+}
+t( 'بند ۱۰: «فصل‌ها» به صفحۀ فصل جاری شمسی می‌رود — مرز ۱ فروردین، ۱ تیر، ۱ مهر و ۱ دی درست', $w55_sn_ok );
+tp441_mut( 'بند ۱۰: پیوند فصل فقط وقتی دست‌کم یک موجودیت منتشرشدۀ همین زبان در آن فصل (یا تمام سال) هست — نمایشی فقط در پیش‌نمایش؛ وگرنه ستون بی آن — جهش: بی سنجش فصل',
+	function ( $s ) {
+		return false !== strpos( $s, "if ( 'season' === \$kind ) {\n\t\t\treturn topersia_g_ft_season_url();" )
+			&& false !== strpos( $s, "'meta_query'       => array_merge( topersia_g_sample_mq(), array( array(" )
+			&& false !== strpos( $s, "foreach ( topersia_g_published( array_map( 'absint', (array) \$ids ) ) as \$id ) {\n\t\t\tif ( topersia_g_hub_in_season( \$id, \$s ) ) {" );
+	}, $w55_ft, str_replace( 'if ( topersia_g_hub_in_season( $id, $s ) ) {', 'if ( true ) {', $w55_ft ) );
+
+/* toggle جعبۀ برند (عنوانش در ذخیرۀ کاربر تهی شد) هم پویاست — وگرنه از کش عنصر می‌آید و شیوه‌نامۀ el-toggle دو بار چاپ می‌شود */
+$w55_tg_brand = array( 'widgetType' => 'wd_toggle', 'settings' => array( 'element_title' => '' ), 'elements' => array(
+	array( 'elType' => 'container', 'elements' => array( array( 'widgetType' => 'shortcode', 'settings' => array( 'shortcode' => '[tp_footer_brand]' ) ) ) ),
+) );
+$w55_tg_plain = array( 'widgetType' => 'wd_toggle', 'settings' => array( 'element_title' => 'دیگر' ), 'elements' => array(
+	array( 'widgetType' => 'shortcode', 'settings' => array( 'shortcode' => '[gallery]' ) ),
+	array( 'widgetType' => 'text-editor', 'settings' => array( 'editor' => '[tp_footer_brand]' ) ),
+) );
+t( 'بند ۱۰: topersia_g_ft_toggle_has_sc — شورت‌کد [tp_footer_…] در ویجت shortcode، حتی تودرتو، آری؛ شورت‌کد دیگر یا متن در ویجت دیگر، نه',
+	true === topersia_g_ft_toggle_has_sc( $w55_tg_brand ) && false === topersia_g_ft_toggle_has_sc( $w55_tg_plain ) && false === topersia_g_ft_toggle_has_sc( array() ) );
+tp441_mut( 'بند ۱۰: صافی is_dynamic_content هر toggle دارای شورت‌کد پاورقی را پویا می‌کند، نه فقط عنوان‌های نقشه — جهش: فقط نقشۀ عنوان (کد پیشین؛ دو برچسب el-toggle)',
+	function ( $s ) {
+		return false !== strpos( $s, "return topersia_g_ft_toggle_has_sc( \$raw ) ? true : \$is;\n\t}, 10, 2 );" );
+	}, $w55_ft, str_replace( 'return topersia_g_ft_toggle_has_sc( $raw ) ? true : $is;', 'return $is;', $w55_ft ) );
+
 /* شمارشگر --launch (بند ۸ هشدار؛ بند ۹ شمار تصویر مشترک و بی alt) — شمارشگر است، حکم نمی‌دهد */
 $w55_lc  = $w55_read( 'scripts/tp-launch-count.php' );
 $w55_c8l = function ( $s ) {
