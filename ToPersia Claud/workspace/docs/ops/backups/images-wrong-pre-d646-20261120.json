@@ -1,0 +1,47 @@
+{
+    "when": "2026-11-20T17:48:27+00:00",
+    "meta": {
+        "1948:hero_image": {
+            "exists": true,
+            "value": "3762"
+        },
+        "1948:_thumbnail_id": {
+            "exists": true,
+            "value": "3762"
+        },
+        "1945:hero_image": {
+            "exists": true,
+            "value": "3762"
+        },
+        "1945:_thumbnail_id": {
+            "exists": true,
+            "value": "3762"
+        },
+        "204:hero_image": {
+            "exists": true,
+            "value": "190"
+        },
+        "204:_thumbnail_id": {
+            "exists": true,
+            "value": "190"
+        }
+    },
+    "alt": {
+        "86": {
+            "exists": false,
+            "value": ""
+        },
+        "4266": {
+            "exists": true,
+            "value": ""
+        },
+        "4267": {
+            "exists": true,
+            "value": ""
+        },
+        "3762": {
+            "exists": false,
+            "value": ""
+        }
+    }
+}

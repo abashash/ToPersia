@@ -60,3 +60,14 @@ tp441_mut( 'P5-D649 ب: tp-backup پیش از ساخت پوشهٔ بسته پی�
 			&& false !== strpos( $s, "if ( ! empty( \$opt['as-check'] ) ) { exit( \$as_ok ? 0 : 5 ); }" );
 	}, $w55d_bk, str_replace( 'tpb_as_preflight(', 'tpb_as_preflight_off(', $w55d_bk ) );
 t( 'P5-D649 ب: واقعیت‌یاب AS فقط SELECT می‌زند (هیچ INSERT/UPDATE/DELETE/DROP)', 1 === preg_match( '/SELECT COUNT/', $w55d_fs ) && 0 === preg_match( '/\b(INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE)\b/i', $w55d_fs ) );
+
+/* ── بند ۵ (P5-D646): اصلاح تصویر — نخست پشتیبان نوشته و بازخوانده می‌شود، سپس پاک (نه جایگزین)؛ alt تصویر ترکیبی «تصویرسازی» دارد ── */
+$w55d_if = (string) @file_get_contents( dirname( __DIR__ ) . '/scripts/tp-image-fix.php' );
+tp441_mut( 'P5-D646: tp-image-fix پیش از پاک‌کردن پشتیبان می‌نویسد و بازمی‌خواند، فقط delete_post_meta (بی update_post_meta تصویر)، فقط topersia.local، alt #3762 واژهٔ «تصویرسازی» دارد — جهش: پاک‌کردن پیش از پشتیبان می‌افتد',
+	function ( $s ) {
+		$w = strpos( $s, 'file_put_contents( $file' );
+		$d = strpos( $s, 'delete_post_meta( $pid, $k );' );
+		return false !== $w && false !== $d && $w < $d && false !== strpos( $s, "'topersia.local' !== wp_parse_url" )
+			&& false !== strpos( $s, 'پشتیبان خوانده‌شده با دادهٔ زنده یکی نیست' ) && 0 === preg_match( '/update_post_meta\( \$pid/', $s )
+			&& 1 === preg_match( "/3762 => '[^']*تصویرسازی/u", $s );
+	}, $w55d_if, str_replace( 'file_put_contents( $file', 'xx_removed( $file', $w55d_if ) );
