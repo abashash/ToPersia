@@ -436,7 +436,7 @@ foreach ( topersia_g_ft_registry() as $w55_r10 ) {
 }
 $w55_tl  = topersia_g_ft_home_tiles();
 $w55_ids = array_merge( ...array_values( $w55_keys ) );
-t( 'بند ۱۰ · P5-D643: پنج ستون (مقصدها · راهنمای سفر · ایران در چهار فصل با رویدادها، تجربه‌ها و پیوندهای ویژه · دربارۀ توپرشیا با اخبار و مقالات · حقوقی)؛ «مقصدها» با محبوب‌ترین مقاصد، روستاها و جزیره‌ها؛ راهنما نُه نوع صفحۀ اول + مسیر و صنایع‌دستی؛ چهار فصل؛ شناسه‌ها یکتا؛ بی /advertise/؛ حقوقی بی تغییر — کاشی‌ها ۱۱ (بی /city/)',
+t( 'بند ۱۰ · P5-D643: پنج ستون (مقصدها · راهنمای سفر · کاوش در ایران با گروه‌های چهار فصل و رویدادها، تجربه‌ها و پیوندهای ویژه · دربارۀ توپرشیا با اخبار و مقالات · حقوقی)؛ «مقصدها» با محبوب‌ترین مقاصد، روستاها و جزیره‌ها؛ راهنما نُه نوع صفحۀ اول + مسیر و صنایع‌دستی؛ چهار فصل؛ شناسه‌ها یکتا؛ بی /advertise/؛ حقوقی بی تغییر — کاشی‌ها ۱۱ (بی /city/)',
 	array( 'dest' => array( 'dest' ), 'guide' => array( 'guide' ), 'season' => array( 'seasons', 'events', 'exp', 'picks' ), 'about' => array( 'about', 'news' ), 'legal' => array( 'legal' ) ) === array_map( function ( $c ) { return $c[1]; }, $w55_cols )
 	&& array( 'type:tp_city', 'type:tp_village', 'type:tp_island' ) === array_slice( $w55_keys['dest'], 0, 3 ) && 13 === count( $w55_keys['dest'] )
 	&& array_merge( array_map( function ( $t ) { return 'type:' . $t; }, array_keys( topersia_g_home_guide_types() ) ), array( 'type:tp_route', 'type:tp_handicraft' ) ) === $w55_keys['guide']
@@ -444,7 +444,7 @@ t( 'بند ۱۰ · P5-D643: پنج ستون (مقصدها · راهنمای سف
 	&& array( 'page:about', 'page:contact' ) === $w55_keys['about'] && array( 'type:tpc_news', 'type:tpc_article', 'topics:tpc_news_topic' ) === $w55_keys['news']
 	&& array( 'page:terms', 'page:privacy-policy', 'page:copyright' ) === $w55_keys['legal']
 	&& count( $w55_ids ) === count( array_unique( $w55_ids ) ) && false === strpos( implode( ' ', $w55_ids ), 'advertise' )
-	&& 'دربارۀ توپرشیا' === $w55_cols['about'][0] && 'دربارۀ توپرشیا' === topersia_g_ft_toggle_titles()['توپرشیا'] && 'ایران در چهار فصل' === $w55_cols['season'][0]
+	&& 'دربارۀ توپرشیا' === $w55_cols['about'][0] && 'دربارۀ توپرشیا' === topersia_g_ft_toggle_titles()['توپرشیا'] && 'کاوش در ایران' === $w55_cols['season'][0] && 'چهار فصل' === topersia_g_ft_groups()['seasons'][0] && 'کاوش در ایران' !== topersia_g_ft_groups()['seasons'][0]
 	&& 11 === count( $w55_tl ) && in_array( 'type:tp_visa', $w55_tl, true ) && in_array( 'type:tp_local_food', $w55_tl, true ) && ! in_array( 'type:tp_city', $w55_tl, true ),
 	wp_json_encode( $w55_keys ) );
 

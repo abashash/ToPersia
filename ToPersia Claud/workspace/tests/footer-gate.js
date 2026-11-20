@@ -78,9 +78,9 @@ const headsOk = ( L, lang, w ) => {
 /* P5-D617 · P5-D643: عنوان ستون به ترتیب dest · guide · season · about · legal — مستقل از کد، از کاتالوگ بازبینی‌شده */
 const MENU_COLS   = [ 'dest', 'guide', 'season', 'about', 'legal' ];
 const MENU_TITLES = {
-	fa: [ 'مقصدها', 'راهنمای سفر', 'ایران در چهار فصل', 'دربارۀ توپرشیا', 'حقوقی' ],
-	en: [ 'Destinations', 'Travel guide', 'Iran in four seasons', 'About ToPersia', 'Legal' ],
-	ar: [ 'الوجهات', 'دليل السفر', 'إيران في الفصول الأربعة', 'عن توبيرشيا', 'قانوني' ],
+	fa: [ 'مقصدها', 'راهنمای سفر', 'کاوش در ایران', 'دربارۀ توپرشیا', 'حقوقی' ],
+	en: [ 'Destinations', 'Travel guide', 'Explore Iran', 'About ToPersia', 'Legal' ],
+	ar: [ 'الوجهات', 'دليل السفر', 'استكشف إيران', 'عن توبيرشيا', 'قانوني' ],
 };
 const COL_MAX = 8, COLS_MAX = 5, FA_MIN = 30;   /* TOPERSIA_FOOTER_COL_MAX · پنج toggle · هدف «دست‌کم ۳۰ پیوند واقعی در fa» */
 /* خروجی سرور در هر زبان: ستون ← { u: نشانی‌ها، g: گروه‌های دارای پیوند } — همان رجیستری، همان سهم topersia_g_ft_share و همان

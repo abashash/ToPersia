@@ -412,7 +412,7 @@ if ( ! function_exists( 'topersia_g_ft_toggle_titles' ) ) {
 		return array(
 			'مقصدها'      => __( 'مقصدها', 'topersia' ),
 			'راهنمای سفر' => __( 'راهنمای سفر', 'topersia' ),
-			'ایران در چهار فصل' => __( 'ایران در چهار فصل', 'topersia' ),
+			'کاوش در ایران' => __( 'کاوش در ایران', 'topersia' ),   /* دستۀ 55-د (P5-D649): پیش‌تر «ایران در چهار فصل»؛ آن عنوان حالا سرعنوان گروه فصل‌هاست */
 			'توپرشیا'     => __( 'دربارۀ توپرشیا', 'topersia' ),
 			'حقوقی'       => __( 'حقوقی', 'topersia' ),
 		);
@@ -442,7 +442,7 @@ if ( ! function_exists( 'topersia_g_ft_groups' ) ) {
 		return array(
 			'dest'    => array( $t['مقصدها'], 'dest' ),
 			'guide'   => array( $t['راهنمای سفر'], 'guide' ),
-			'seasons' => array( $t['ایران در چهار فصل'], 'season' ),
+			'seasons' => array( __( 'چهار فصل', 'topersia' ), 'season' ),   /* سرعنوان گروه نخست ستون «کاوش در ایران» (P5-D649) */
 			'events'  => array( __( 'رویدادها و جشنواره‌ها', 'topersia' ), 'season' ),
 			'exp'     => array( __( 'کارها و تجربیات', 'topersia' ), 'season' ),
 			'picks'   => array( __( 'پیوندهای ویژه', 'topersia' ), 'season' ),
@@ -747,10 +747,11 @@ if ( ! function_exists( 'topersia_g_ft_menu_cols' ) ) {
 	 * @return array
 	 */
 	function topersia_g_ft_menu_cols() {
-		$cols = array();
+		$cols   = array();
+		$titles = array( 'season' => topersia_g_ft_toggle_titles()['کاوش در ایران'] );   /* عنوان ستون جدا از سرعنوان گروه نخستش «چهار فصل» (P5-D649) */
 		foreach ( topersia_g_ft_groups() as $g => $def ) {
 			if ( ! isset( $cols[ $def[1] ] ) ) {
-				$cols[ $def[1] ] = array( $def[0], array() );
+				$cols[ $def[1] ] = array( isset( $titles[ $def[1] ] ) ? $titles[ $def[1] ] : $def[0], array() );
 			}
 			$cols[ $def[1] ][1][] = $g;
 		}

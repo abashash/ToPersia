@@ -4705,6 +4705,10 @@ msgstr "متعدد الرياضات"
 msgid "چندسالانه"
 msgstr "كل بضع سنوات"
 
+#: includes/topersia-g-footer.php
+msgid "چهار فصل"
+msgstr "الفصول الأربعة"
+
 #: includes/topersia-g-map.php
 msgid "چهارشنبه"
 msgstr "الأربعاء"
@@ -4772,6 +4776,10 @@ msgstr "قنوات الصرف والإيصالات"
 #: topersia-render.php
 msgid "کاهش شدت رنگ و نور"
 msgstr "تخفيف شدة الألوان والإضاءة"
+
+#: includes/topersia-g-footer.php
+msgid "کاوش در ایران"
+msgstr "استكشف إيران"
 
 #: includes/topersia-g-map.php
 msgid "کاوش مقطعی"

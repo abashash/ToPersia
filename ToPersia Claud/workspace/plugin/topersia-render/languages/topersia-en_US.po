@@ -4705,6 +4705,10 @@ msgstr "Multi-sport"
 msgid "چندسالانه"
 msgstr "Every few years"
 
+#: includes/topersia-g-footer.php
+msgid "چهار فصل"
+msgstr "Four seasons"
+
 #: includes/topersia-g-map.php
 msgid "چهارشنبه"
 msgstr "Wednesday"
@@ -4772,6 +4776,10 @@ msgstr "Exchange channels and receipts"
 #: topersia-render.php
 msgid "کاهش شدت رنگ و نور"
 msgstr "Reduce color and brightness"
+
+#: includes/topersia-g-footer.php
+msgid "کاوش در ایران"
+msgstr "Explore Iran"
 
 #: includes/topersia-g-map.php
 msgid "کاوش مقطعی"

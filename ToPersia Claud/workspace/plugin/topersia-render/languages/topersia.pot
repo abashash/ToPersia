@@ -4704,6 +4704,10 @@ msgstr ""
 msgid "چندسالانه"
 msgstr ""
 
+#: includes/topersia-g-footer.php
+msgid "چهار فصل"
+msgstr ""
+
 #: includes/topersia-g-map.php
 msgid "چهارشنبه"
 msgstr ""
@@ -4770,6 +4774,10 @@ msgstr ""
 
 #: topersia-render.php
 msgid "کاهش شدت رنگ و نور"
+msgstr ""
+
+#: includes/topersia-g-footer.php
+msgid "کاوش در ایران"
 msgstr ""
 
 #: includes/topersia-g-map.php

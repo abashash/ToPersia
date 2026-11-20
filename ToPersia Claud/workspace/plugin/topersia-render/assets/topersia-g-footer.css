@@ -256,3 +256,25 @@ html:root:not([data-tp-mode="dark"]) [data-elementor-type="footer"] .tp-ft-socia
 
 /* --- خط‌های جداکنندۀ ظرف‌های #6128 (رنگ از داده برداشته شد — P5-D608) ----------------------------- */
 html:root [data-elementor-type="footer"] .e-con{border-color:var(--tp-ft-line)}
+
+/* --- ترازبندی ردیف‌های منوی پاورقی میان ستون‌ها (دستۀ 55-د بند ۶ · P5-D649) — ستون‌ها کنار هم‌اند (≥ ۱۰۲۴؛ زیر آن آکاردئون) -------------
+   هر پیوند دقیقاً یک گام --tp-ft-menu-h بلندی دارد (عنوان دوسطری با line-height کوچک در همان گام می‌نشیند) و سرعنوان گروه دو گام؛
+   پس بلندی هر ستون مضرب یک گام است و ردیف‌های ستون‌های هم‌جوار روی یک شبکۀ عمودی می‌نشینند. پهنای ستون‌ها دست نمی‌خورد. */
+@media (min-width:1024px){
+  html:root [data-elementor-type="footer"] .tp-ft-menu__a{
+    display:flex;   /* نه inline-flex: دوسطری‌شدن پیوند خط پایه را جابه‌جا نکند */
+    block-size:var(--tp-ft-menu-h);
+    min-block-size:0;
+    line-height:1.15;
+    overflow-wrap:anywhere;
+  }
+  html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__h{
+    display:flex;
+    align-items:center;
+    box-sizing:border-box;
+    block-size:calc(2 * var(--tp-ft-menu-h));
+    margin:0;
+    line-height:1.15;
+  }
+  html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__list + .tp-ft-menu__list{margin-block-start:0}
+}
