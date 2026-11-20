@@ -7,6 +7,7 @@
  *
  *   node tests/overflow-h.js
  *   node tests/overflow-h.js --url=/terms/ --url=/en/terms/   (فقط همین نشانی‌ها؛ جهش‌ها همان)
+ *   node tests/overflow-h.js --widths=768,390,320             (پهنای بیشتر؛ پیش‌فرض ۳۹۰ و ۳۲۰ — دستۀ 55-ب بند ۶؛ جهش ۹۰۰px در هر پهنای زیر ۹۰۰ می‌افتد)
  */
 'use strict';
 
@@ -55,7 +56,8 @@ const verdict = r => r.n > 0 && r.deSW <= r.deCW && 0 === r.moved && 0 === r.wid
 
 	const b = await chromium.launch();
 	try {
-		for ( const width of [ 390, 320 ] ) {
+		const widthsArg = ( process.argv.find( a => a.startsWith( '--widths=' ) ) || '' ).slice( 9 ).split( ',' ).map( Number ).filter( w => w >= 280 && w < 900 );
+		for ( const width of ( widthsArg.length ? widthsArg : [ 390, 320 ] ) ) {
 			const ctx = await b.newContext( { viewport: { width, height: 800 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 } );
 			const page = await ctx.newPage();
 			for ( const [ name, url ] of Object.entries( list ) ) {
