@@ -382,6 +382,26 @@ $w55_c8s = function ( $s ) {
 tp441_mut( 'بند ۸: tp-season-null.php — پروندۀ پشتیبان پیش از هر حذف نوشته و بازخوانی می‌شود؛ نمایشی و نمونه بیرون؛ فقط topersia.local؛ برگرداندن مقدار تازه را بازنویسی نمی‌کند — جهش: نمونه هم تهی می‌شد',
 	$w55_c8s, $w55_sn, str_replace( '! (int) $r->demo && ! (int) $r->sample && ', '! (int) $r->demo && ', $w55_sn ) );
 
+/* ── بند ۹: تصویر مشترک (P5-D634) ─────────────────────────────────────
+ * منشأ: پیوست #50 (درون‌ریزی نخست، دادۀ واقعی) تصویر خود ۴۲ موجودیت است؛ و جایگزین زنجیرۀ نیا (کاشی هاب، بندانگشتی ردیف خانه)
+ * همان عکس استان را روی شهرهای بی عکس هم می‌نشاند. جایگزین مشترک فقط در پیش‌نمایش؛ بیرون از آن آیکون خنثی. داده دست نخورد. */
+$w55_demo = $w55_read( $w55_r . 'includes/topersia-g-demo.php' );
+$w55_hrow = $w55_read( $w55_r . 'includes/topersia-g-home-row.php' );
+$w55_c9   = function ( $hub ) use ( $w55_demo, $w55_hrow ) {
+	$g = strpos( $w55_demo, 'function topersia_g_shared_fallback_on() {' );
+	$a = strpos( $hub, 'function topersia_g_hub_card_image( $id ) {' );
+	$b = false !== $a ? strpos( $hub, 'topersia_g_crumb_chain( $id )', $a ) : false;
+	$c = false !== $a ? strpos( $hub, 'if ( $img || ! topersia_g_shared_fallback_on() ) {', $a ) : false;
+	return false !== $g && false !== strpos( substr( $w55_demo, $g, 80 ), 'return topersia_demo_on();' )
+		&& false !== $b && false !== $c && $c < $b
+		&& false !== strpos( $w55_hrow, "if ( ! \$att && function_exists( 'topersia_g_crumb_chain' ) && topersia_g_shared_fallback_on() ) {" )
+		&& 1 === substr_count( $w55_hrow, 'topersia_g_crumb_chain(' );   /* تنها فراخوانی زنجیره همان شاخۀ دروازه‌دار */
+};
+tp441_mut( 'بند ۹: جایگزین تصویر از زنجیرۀ نیا (کاشی هاب و بندانگشتی ردیف) فقط از دروازۀ topersia_g_shared_fallback_on() = topersia_demo_on() می‌گذرد؛ بیرون از پیش‌نمایش آیکون — جهش: کاشی هاب بی دروازه (عکس استان روی شهرها)',
+	$w55_c9, $w55_hubsrc, str_replace( 'if ( $img || ! topersia_g_shared_fallback_on() ) {', 'if ( $img ) {', $w55_hubsrc ) );
+t( 'بند ۹: بی ثابت پیش‌نمایش، جایگزین مشترک خاموش است (همان مقدار topersia_demo_on)',
+	function_exists( 'topersia_g_shared_fallback_on' ) && false === topersia_g_shared_fallback_on() && topersia_g_shared_fallback_on() === topersia_demo_on() );
+
 /* شمارشگر --launch (بند ۸ هشدار؛ بند ۹ شمار تصویر مشترک و بی alt) — شمارشگر است، حکم نمی‌دهد */
 $w55_lc  = $w55_read( 'scripts/tp-launch-count.php' );
 $w55_c8l = function ( $s ) {

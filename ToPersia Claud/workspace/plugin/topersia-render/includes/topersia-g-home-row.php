@@ -85,14 +85,14 @@ if ( ! function_exists( 'topersia_g_home_month_range' ) ) {
 	}
 }
 
-/** بندانگشتی ردیف: عکس خود مورد ← عکس نخستین مکان مرتبط ← آیکون روی گرادیان توکن (P5-D562). */
+/** بندانگشتی ردیف: عکس خود مورد ← فقط در پیش‌نمایش عکس نخستین مکان مرتبط (دستۀ 55 بند ۹) ← آیکون روی گرادیان توکن (P5-D562). */
 if ( ! function_exists( 'topersia_g_home_thumb' ) ) {
 	function topersia_g_home_thumb( $id, $icon ) {
 
 		$owner = $id;
 		$att   = topersia_g_card_image( $id );
 
-		if ( ! $att && function_exists( 'topersia_g_crumb_chain' ) ) {
+		if ( ! $att && function_exists( 'topersia_g_crumb_chain' ) && topersia_g_shared_fallback_on() ) {
 			foreach ( (array) topersia_g_crumb_chain( $id ) as $place ) {
 				$att = topersia_g_card_image( $place );
 				if ( $att ) {

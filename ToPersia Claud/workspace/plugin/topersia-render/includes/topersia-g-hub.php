@@ -818,11 +818,11 @@ if ( ! function_exists( 'topersia_g_hub_county_of' ) ) {
 	}
 }
 
-/** پیوست عکس کاشی: عکس خود مورد ← عکس نخستین نیای دارای عکس (هرگز نمونه)؛ نبود ← صفر (آیکون نوع). */
+/** پیوست عکس کاشی: عکس خود مورد ← فقط در پیش‌نمایش عکس نخستین نیای دارای عکس (هرگز نمونه؛ دستۀ 55 بند ۹)؛ نبود ← صفر (آیکون نوع). */
 if ( ! function_exists( 'topersia_g_hub_card_image' ) ) {
 	function topersia_g_hub_card_image( $id ) {
 		$img = topersia_g_news_real_img( topersia_g_card_image( $id ) );
-		if ( $img ) {
+		if ( $img || ! topersia_g_shared_fallback_on() ) {
 			return $img;
 		}
 		foreach ( (array) topersia_g_crumb_chain( $id ) as $pid ) {

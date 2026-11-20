@@ -33,6 +33,17 @@ if ( ! function_exists( 'topersia_demo_on' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_shared_fallback_on' ) ) {
+	/**
+	 * تصویر جایگزینِ مشترک (عکس نیا برای موجودیتِ بی عکس) مجاز است؟ فقط در پیش‌نمایش — P5-D634 · دستۀ 55 بند ۹.
+	 * بیرون از پیش‌نمایش کارت بی عکس آیکون خنثی می‌گیرد: یک عکس استان روی ۱۰۴ کارت شهر همه را یکسان نشان می‌داد.
+	 * تنها دروازه؛ topersia_g_hub_card_image و topersia_g_home_thumb هر دو از همین می‌گذرند.
+	 */
+	function topersia_g_shared_fallback_on() {
+		return topersia_demo_on();
+	}
+}
+
 if ( ! function_exists( 'topersia_g_is_demo' ) ) {
 	/** این پست نمایشی است (متای _tp_demo)؟ مستقل از روشن بودن حالت. */
 	function topersia_g_is_demo( $id ) {
