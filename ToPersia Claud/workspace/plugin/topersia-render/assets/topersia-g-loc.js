@@ -1,7 +1,7 @@
 /**
  * فیلتر مکان — combobox متنی (P5-D549 · دستۀ 51). نشانه‌گذاری: topersia_g_loc_field() در topersia-g-loc.php.
  *
- * پس از ۳ نویسه از REST فقط‌خواندنی (حداکثر ۸، استان‌ها اول، نوع کنار هر نتیجه) فهرست می‌سازد.
+ * پس از ۳ نویسه از REST فقط‌خواندنی (حداکثر ۸ شهر، نوع کنار هر نتیجه؛ با استانِ select فقط همان استان — P5-D642) فهرست می‌سازد.
  * کلیدها: پایین/بالا جابه‌جایی (aria-activedescendant)، Enter انتخاب، Esc بستن و بار دوم پاک‌کردن.
  * انتخاب ← tp_place پنهان در ناحیۀ `data-tp-news-swap="loc"` + ارسال فرم؛ topersia-g-news.js همان ارسال را
  * بی‌رفرش انجام می‌دهد (P5-D546) و ناحیۀ loc را با تراشۀ حذف‌شدنی از پاسخ سرور جای‌گزین می‌کند.
@@ -25,6 +25,11 @@
 			live:  w.querySelector( '[data-tp-loc-live]' ),
 			swap:  w.querySelector( '[data-tp-news-swap="loc"]' )
 		};
+	}
+
+	/* select استانِ همان فرم (P5-D642) */
+	function prov( p ) {
+		return p.input && p.input.form ? p.input.form.querySelector( '[data-tp-loc-prov-sel]' ) : null;
 	}
 
 	function opts( p ) {
@@ -103,6 +108,10 @@
 		var mine = ctrl;
 		var u = new URL( w.getAttribute( 'data-tp-loc-api' ), window.location.href );
 		u.searchParams.set( 'q', q );
+		var sel = prov( p );
+		if ( sel && sel.value ) {
+			u.searchParams.set( 'prov', sel.value );   /* P5-D642: فقط شهرهای استان برگزیده */
+		}
 		window.fetch( u.href, { credentials: 'same-origin', signal: mine ? mine.signal : undefined } )
 			.then( function ( r ) {
 				if ( ! r.ok ) {
@@ -201,6 +210,24 @@
 			pick( w, parts( w ), li );
 		}
 	} );
+
+	/* P5-D642: استان عوض شد ← شهر پیشین (tp_place پنهان و متن نیمه‌نوشته) کنار می‌رود تا نشانی استانِ تازه را بگیرد.
+	   capture روی document: پیش از شنوندۀ change ریشه در topersia-g-news.js اجرا می‌شود که همان دم فرم را می‌فرستد. */
+	document.addEventListener( 'change', function ( e ) {
+		var sel = e.target;
+		if ( ! sel || ! sel.hasAttribute || ! sel.hasAttribute( 'data-tp-loc-prov-sel' ) || ! sel.form ) {
+			return;
+		}
+		Array.prototype.forEach.call( sel.form.querySelectorAll( '[data-tp-loc]' ), function ( w ) {
+			var p   = parts( w );
+			var hid = p.swap ? p.swap.querySelector( 'input[name="tp_place"]' ) : null;
+			if ( hid ) {
+				hid.parentNode.removeChild( hid );
+			}
+			p.input.value = '';
+			close( p );
+		} );
+	}, true );
 
 	/* بستن فقط با کلیک بیرون یا Escape (دستۀ 55 بند ۴). کلیک یا لمس بیرون از ویجت فهرست را می‌بندد؛ فیلد هرگز پنهان نمی‌شود. */
 	document.addEventListener( 'pointerdown', function ( e ) {

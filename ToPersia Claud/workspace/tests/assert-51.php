@@ -136,13 +136,15 @@ $w51_pages = $w51_read( 'docs/legal/PAGES-TEXT-2026-11-04.md' );
 $w51_priv  = $w51_read( 'docs/legal/PRIVACY-DRAFT.md' );
 
 $w51_rest = function ( $s ) {
-	return false !== strpos( $s, "foreach ( array( 'tp_province', 'tp_city' ) as \$type ) {" )
+	/* دستۀ 55-ب بند ۱ (P5-D642): فهرست ردیف‌ها نوع‌به‌نوع (استان سپس شهر)؛ combobox فقط شهر — استان در select جدا */
+	return false !== strpos( $s, "return array_merge( topersia_g_loc_rows( 'tp_province' ), topersia_g_loc_rows( 'tp_city' ) );" )
+		&& false !== strpos( $s, "foreach ( topersia_g_loc_rows( 'tp_city' ) as \$row ) {" )
 		&& false !== strpos( $s, "'meta_query'       => array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) )," )
 		&& false !== strpos( $s, 'foreach ( topersia_g_published( array_map(' )
 		&& false !== strpos( $s, "define( 'TOPERSIA_LOC_MIN', 3 );" ) && false !== strpos( $s, "define( 'TOPERSIA_LOC_MAX', 8 );" )
 		&& false !== strpos( $s, "'methods'             => 'GET'," ) && false !== strpos( $s, 'topersia_g_loc_fold(' );
 };
-tp441_mut( 'P5-D549 REST: فقط استان سپس شهر، منتشرشدۀ هم‌زبان، غیرنمونه، ۳ نویسه، حداکثر ۸، GET فقط‌خواندنی، fold — جهش: بی دروازۀ منتشرشده', $w51_rest, $w51_loc,
+tp441_mut( 'P5-D549 · P5-D642 REST: فقط شهر (استان در select جدا)، منتشرشدۀ هم‌زبان، غیرنمونه، ۳ نویسه، حداکثر ۸، GET فقط‌خواندنی، fold — جهش: بی دروازۀ منتشرشده', $w51_rest, $w51_loc,
 	str_replace( 'foreach ( topersia_g_published( array_map(', 'foreach ( ( array_map(', $w51_loc ) );
 t( 'P5-D549 REST: جهش — نمونه (بی شرط `_tp_sample`) می‌افتد', ! $w51_rest( str_replace( "array( array( 'key' => '_tp_sample', 'compare' => 'NOT EXISTS' ) )", 'array()', $w51_loc ) ) );
 

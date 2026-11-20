@@ -377,10 +377,6 @@ msgstr "Province"
 msgid "استان مسیر"
 msgstr "Route province"
 
-#: includes/topersia-g-loc.php
-msgid "استان یا شهر"
-msgstr "Province or city"
-
 #: topersia-render.php
 msgid "استاندارد"
 msgstr "Standard"
@@ -3747,10 +3743,6 @@ msgstr "Unhealthy for sensitive groups"
 msgid "نام"
 msgstr "Name"
 
-#: includes/topersia-g-loc.php
-msgid "نام استان یا شهر"
-msgstr "Province or city name"
-
 #: includes/topersia-g-map.php
 msgid "نام بومی"
 msgstr "Endonym"
@@ -3774,6 +3766,10 @@ msgstr "Official Arabic name"
 #: includes/topersia-g-map.php
 msgid "نام رسمی فارسی"
 msgstr "Official Persian name"
+
+#: includes/topersia-g-loc.php
+msgid "نام شهر"
+msgstr "City name"
 
 #: includes/topersia-g-map.php
 msgid "نام فرودگاه"
@@ -4221,7 +4217,7 @@ msgstr "Our partners"
 msgid "همۀ اخبار"
 msgstr "All news"
 
-#: includes/topersia-g-home.php
+#: includes/topersia-g-loc.php
 msgid "همۀ استان‌ها"
 msgstr "All provinces"
 

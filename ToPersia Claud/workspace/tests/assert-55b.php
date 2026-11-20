@@ -95,3 +95,104 @@ $w55b_ru_new = is_array( $w55b_ru_base ) ? $w55b_ru_run( array_slice( $w55b_ru_b
 t( 'P5-D640: پیام خطای رشتۀ تازه نام تصمیم را می‌برد (کاربر می‌داند چرا قرمز است)', false !== strpos( $w55b_ru_new[1], 'رشتۀ تازه، P5-D640' ), mb_substr( $w55b_ru_new[1], 0, 160 ) );
 $w55b_ru_po = $w55b_read( 'plugin/topersia-render/languages/topersia-ru_RU.po' );
 t( 'P5-D640: کاتالوگ ru_RU ساخته شده — سه شکل جمع روسی در سربرگ', false !== strpos( $w55b_ru_po, 'nplurals=3;' ) && is_file( $w55b_root . '/plugin/topersia-render/languages/topersia-ru_RU.mo' ) && is_file( $w55b_root . '/plugin/topersia-render/languages/topersia-ru_RU.l10n.php' ) );
+
+/* ── بند ۱ (P5-D642): فیلتر موبایل — لایۀ شناور زیر دکمه، استان (select) و شهر (combobox) جدا ──────────────
+ * رفتار در مرورگر: w55-local --only=toolbar (کروم و فایرفاکس، چهار پهنا، fa/en/ar) و --only=search. این‌جا فقط کد، هر ادعا با جهش. */
+$w55b_r   = 'plugin/topersia-render/';
+$w55b_tpl = array(
+	'hub-archive.php'     => array( $w55b_read( $w55b_r . 'templates/hub-archive.php' ), 'tp-hub-sort' ),
+	'article-archive.php' => array( $w55b_read( $w55b_r . 'templates/article-archive.php' ), 'tp-news-sort' ),
+	'news-archive.php'    => array( $w55b_read( $w55b_r . 'templates/news-archive.php' ), 'tp-news-sort' ),
+);
+$w55b_inpanel = function ( $t, $sort ) {
+	$pan = strpos( $t, 'data-tp-filter-panel>' );
+	$srt = strpos( $t, "topersia_g_news_select( '" . $sort . "'" );
+	$go  = strpos( $t, '<div class="tp-news-filter__go">' );
+	$end = strpos( $t, '</form>' );
+	return false !== $pan && false !== $srt && false !== $go && false !== $end && $pan < $srt && $srt < $go && $go < $end;
+};
+foreach ( $w55b_tpl as $w55b_n => $w55b_t ) {
+	tp441_mut( 'بند ۱: ' . $w55b_n . ' — مرتب‌سازی و «نمایش» درون ظرف [data-tp-filter-panel] (ردیف «مرتب‌سازی | نمایش» لایۀ شناور) — جهش: مرتب‌سازی بیرون از ظرف',
+		function ( $t ) use ( $w55b_inpanel, $w55b_t ) { return $w55b_inpanel( $t, $w55b_t[1] ); }, $w55b_t[0],
+		str_replace( "topersia_g_news_select( '" . $w55b_t[1] . "'", "topersia_g_news_select( 'tp-x-sort'", $w55b_t[0] ) );
+}
+
+$w55b_loc = $w55b_read( $w55b_r . 'includes/topersia-g-loc.php' );
+tp441_mut( 'بند ۱: دو فیلد جدا — select استان (name=tp_prov، «همۀ استان‌ها») و combobox فقط شهر با برچسب «شهر» و نگه‌دار «نام شهر»؛ استان جاری در ناحیۀ جای‌گزینی — جهش: بی name=tp_prov',
+	function ( $s ) {
+		return false !== strpos( $s, '" name="tp_prov" data-tp-loc-prov-sel>' ) && false !== strpos( $s, "esc_html__( 'همۀ استان‌ها', 'topersia' )" )
+			&& false !== strpos( $s, "esc_html__( 'شهر', 'topersia' ) . '</label>'" ) && false !== strpos( $s, "esc_attr__( 'نام شهر', 'topersia' )" )
+			&& false !== strpos( $s, '<span hidden data-tp-loc-prov="' ) && false === strpos( $s, "'نام استان یا شهر'" );
+	}, $w55b_loc, str_replace( '" name="tp_prov" data-tp-loc-prov-sel>', '" data-tp-loc-prov-sel>', $w55b_loc ) );
+$w55b_prov_ok = function ( $s ) {
+	return false !== strpos( $s, "if ( \$prov && topersia_g_loc_prov_of( \$row['id'] ) !== \$prov ) {\n\t\t\t\tcontinue;" )
+		&& false !== strpos( $s, "'prov' => array( 'required' => false, 'type' => 'integer', 'default' => 0 )," )
+		&& false !== strpos( $s, "if ( \$prov && ( 'tp_province' !== get_post_type( \$prov ) || ! topersia_g_published( array( \$prov ) ) ) ) {" )
+		&& false !== strpos( $s, "( ! \$prov || topersia_g_loc_prov_of( \$row['id'] ) === \$prov )" );
+};
+tp441_mut( 'بند ۱: REST و تطبیق بی JS فقط شهرهای استان برگزیده؛ prov ناموجود یا منتشرنشده نادیده (۰) — جهش: بی پالایش استان در جست‌وجو',
+	$w55b_prov_ok, $w55b_loc, str_replace( "if ( \$prov && topersia_g_loc_prov_of( \$row['id'] ) !== \$prov ) {\n\t\t\t\tcontinue;", "if ( false ) {\n\t\t\t\tcontinue;", $w55b_loc ) );
+t( 'بند ۱: جهش — prov بی دروازۀ منتشرشده می‌افتد', ! $w55b_prov_ok( str_replace( ' || ! topersia_g_published( array( $prov ) )', '', $w55b_loc ) ) );
+
+$w55b_news = $w55b_read( $w55b_r . 'includes/topersia-g-news.php' );
+tp441_mut( 'بند ۱: بی JS — استان برگزیده و شهرِ بیرون از آن ← پالایش استان (شهر پیشین کنار می‌رود)؛ tp_prov متغیر پرس‌وجوست — جهش: شهر بیرون از استان می‌ماند',
+	function ( $s ) {
+		return false !== strpos( $s, "} elseif ( \$prov && ( ! \$id || topersia_g_loc_prov_of( \$id ) !== \$prov ) ) {\n\t\t\t\$id = \$prov;" )
+			&& false !== strpos( $s, "\$vars[] = 'tp_prov';" );
+	}, $w55b_news, str_replace( '( ! $id || topersia_g_loc_prov_of( $id ) !== $prov )', '( ! $id )', $w55b_news ) );
+
+$w55b_njs = $w55b_read( $w55b_r . 'assets/topersia-g-news.js' );
+tp441_mut( 'بند ۱: نشانی بی‌رفرش فقط tp_place — tp_prov حذف و (بی شهر) به tp_place تبدیل؛ کلید کش قطعه همان فهرست بسته می‌ماند — جهش: tp_prov در نشانی می‌ماند',
+	function ( $j ) {
+		return false !== strpos( $j, "u.searchParams.delete( 'tp_prov' );" ) && false !== strpos( $j, "if ( prov && ! u.searchParams.get( 'tp_place' ) ) {\n\t\t\tu.searchParams.set( 'tp_place', prov );" );
+	}, $w55b_njs, str_replace( "u.searchParams.delete( 'tp_prov' );", '', $w55b_njs ) );
+$w55b_focus = function ( $j ) {
+	return false !== strpos( $j, "if ( open && first() ) {\n\t\t\t\t\tfirst().focus();" )
+		&& false !== strpos( $j, 'moreBtn.focus();   /* فوکوس هرگز روی عنصر پنهان نمی‌ماند */' )
+		&& false !== strpos( $j, "if ( ! morePanel.contains( e.target ) && ! moreBtn.contains( e.target ) ) {\n\t\t\t\t\tshut( false );" )
+		&& false !== strpos( $j, "if ( 'Escape' !== e.key || ( ! morePanel.contains( e.target ) && e.target !== moreBtn ) || morePanel.querySelector( '.tp-loc__list:not([hidden])' ) ) {" );
+};
+tp441_mut( 'بند ۱: باز ← فوکوس نخستین فیلد؛ بستن (Escape · «نمایش» · کلیک بیرون با فوکوس درون) ← فوکوس به دکمه؛ کلیک درون هرگز نمی‌بندد — جهش: بی فوکوس هنگام باز',
+	$w55b_focus, $w55b_njs, str_replace( "if ( open && first() ) {\n\t\t\t\t\tfirst().focus();", "if ( open && first() ) {\n\t\t\t\t\tvoid 0;", $w55b_njs ) );
+t( 'بند ۱: جهش — Escape بی گارد فهرست مکان می‌افتد', ! $w55b_focus( str_replace( " || morePanel.querySelector( '.tp-loc__list:not([hidden])' )", '', $w55b_njs ) ) );
+
+$w55b_ljs = $w55b_read( $w55b_r . 'assets/topersia-g-loc.js' );
+tp441_mut( 'بند ۱: combobox شهر استانِ select را به REST می‌دهد و تغییر استان شهر پیشین را پیش از ارسال کنار می‌گذارد (capture) — جهش: بی پارامتر prov',
+	function ( $j ) {
+		return false !== strpos( $j, "u.searchParams.set( 'prov', sel.value );" )
+			&& 1 === preg_match( "/document\.addEventListener\( 'change', function \( e \) \{\n\t\tvar sel = e\.target;\n\t\tif \( ! sel \|\| ! sel\.hasAttribute \|\| ! sel\.hasAttribute\( 'data-tp-loc-prov-sel' \).*?hid\.parentNode\.removeChild\( hid \);.*?\}, true \);/s", $j );
+	}, $w55b_ljs, str_replace( "u.searchParams.set( 'prov', sel.value );", '', $w55b_ljs ) );
+
+$w55b_hcss = $w55b_read( $w55b_r . 'assets/topersia-g-hub.css' );
+$w55b_ovl  = function ( $c ) {
+	$at = strpos( $c, '@media (max-width:720px){' . "\n" . '  /* دستۀ 55-ب بند ۱ (P5-D642) — لایۀ شناور' );
+	if ( false === $at || ! preg_match( '/\{(.*?)\n\}/s', substr( $c, $at ), $m ) ) {
+		return false;
+	}
+	$b = $m[1];
+	return false !== strpos( $b, 'html.tp-js .tp-page.tp-news-page .tp-hub-more{position:absolute;z-index:40;inset-inline:0;inset-block-start:calc(100% + 8px);' )
+		&& false !== strpos( $b, 'border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius,12px);background:var(--tp-bg);box-shadow:var(--tp-shadow)}' )
+		&& false !== strpos( $b, ':is(.tp-news-bar__tools,.tp-news-filterrow):has([data-tp-filter-panel]){position:relative}' )
+		&& false !== strpos( $b, '.tp-hub-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));' )
+		&& false !== strpos( $b, '.tp-hub-more > .tp-news-filter__f--q{grid-column:1 / -1}' )
+		&& 0 === preg_match( '/#[0-9a-f]{3,8}\b|rgba?\(/i', $b );   /* رنگ و سایه فقط از توکن */
+};
+tp441_mut( 'بند ۱: ≤۷۲۰ لایۀ شناور absolute زیر ردیف ابزار (محتوا جابه‌جا نمی‌شود)، قاب و سایه و زمینه از توکن، شبکۀ دوستونه با جست‌وجوی تمام‌عرض — جهش: سایۀ خام',
+	$w55b_ovl, $w55b_hcss, str_replace( 'box-shadow:var(--tp-shadow)}', 'box-shadow:0 8px 24px rgba(0,0,0,.2)}', $w55b_hcss ) );
+t( 'بند ۱: جهش — لایه در جریان صفحه (بی absolute) می‌افتد', ! $w55b_ovl( str_replace( '.tp-hub-more{position:absolute;', '.tp-hub-more{position:static;', $w55b_hcss ) ) );
+$w55b_pair = function ( $c ) {
+	$at = strpos( $c, '@media (max-width:720px){' . "\n" . '  /* دستۀ 55-ب بند ۱ (P5-D642) — لایۀ شناور' );
+	if ( false === $at || ! preg_match( '/\{(.*?)\n\}/s', substr( $c, $at ), $m ) ) {
+		return false;
+	}
+	return false !== strpos( $m[1], '.tp-hub-more > .tp-news-filter__f:has(select[name="tp_sort"]){grid-column-start:1}' )
+		&& false !== strpos( $m[1], '.tp-hub-more:not(:has(select[name="tp_kind"])) > .tp-news-filter__f:has(select[name="tp_when"]){grid-column:1 / -1}' );
+};
+tp441_mut( 'بند ۱: ≤۷۲۰ «مرتب‌سازی | نمایش» همیشه یک ردیف؛ /news/ بی «نوع مکان» ← «بازۀ زمانی» تمام‌عرض — جهش: مرتب‌سازی بی سطر تازه',
+	$w55b_pair, $w55b_hcss, str_replace( '{grid-column-start:1}', '{}', $w55b_hcss ) );
+t( 'بند ۱: جهش — «بازۀ زمانی» تنها بی تمام‌عرض می‌افتد', ! $w55b_pair( str_replace( '> .tp-news-filter__f:has(select[name="tp_when"]){grid-column:1 / -1}', '> .tp-news-filter__f:has(select[name="tp_when"]){}', $w55b_hcss ) ) );
+$w55b_nui = $w55b_read( $w55b_r . 'includes/topersia-g-news-ui.php' );
+tp441_mut( 'بند ۱: /news/ شیوه‌نامۀ هاب (دکمه و لایۀ شناور) را بار می‌کند — جهش: بی topersia-g-hub',
+	function ( $s ) {
+		return 1 === preg_match( "/if \( topersia_g_news_is_archive\(\) && ! topersia_g_news_is_article\(\) \) \{.*?wp_enqueue_style\( 'topersia-g-hub',[^\n]*\n\t\t\}\n\t\}, 31 \);/s", $s );
+	}, $w55b_nui, preg_replace( "/\t\t\twp_enqueue_style\( 'topersia-g-hub',[^\n]*\n(\t\t\}\n\t\}, 31 \);)/", '$1', $w55b_nui ) );

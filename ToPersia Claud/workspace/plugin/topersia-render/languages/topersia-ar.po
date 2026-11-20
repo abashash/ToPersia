@@ -377,10 +377,6 @@ msgstr "محافظة"
 msgid "استان مسیر"
 msgstr "محافظة على المسار"
 
-#: includes/topersia-g-loc.php
-msgid "استان یا شهر"
-msgstr "المحافظة أو المدينة"
-
 #: topersia-render.php
 msgid "استاندارد"
 msgstr "قياسي"
@@ -3747,10 +3743,6 @@ msgstr "غير صحي للفئات الحساسة"
 msgid "نام"
 msgstr "الاسم"
 
-#: includes/topersia-g-loc.php
-msgid "نام استان یا شهر"
-msgstr "اسم المحافظة أو المدينة"
-
 #: includes/topersia-g-map.php
 msgid "نام بومی"
 msgstr "الاسم المحلي"
@@ -3774,6 +3766,10 @@ msgstr "الاسم الرسمي بالعربية"
 #: includes/topersia-g-map.php
 msgid "نام رسمی فارسی"
 msgstr "الاسم الرسمي بالفارسية"
+
+#: includes/topersia-g-loc.php
+msgid "نام شهر"
+msgstr "اسم المدينة"
 
 #: includes/topersia-g-map.php
 msgid "نام فرودگاه"
@@ -4221,7 +4217,7 @@ msgstr "شركاؤنا"
 msgid "همۀ اخبار"
 msgstr "كل الأخبار"
 
-#: includes/topersia-g-home.php
+#: includes/topersia-g-loc.php
 msgid "همۀ استان‌ها"
 msgstr "جميع المحافظات"
 

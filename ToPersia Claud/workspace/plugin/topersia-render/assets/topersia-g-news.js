@@ -140,6 +140,13 @@
 				u.searchParams.set( k, String( v ).trim() );
 			}
 		} );
+		/* دستۀ 55-ب (P5-D642): نشانی فقط tp_place — شهر برگزیده (tp_place پنهان) برنده است، وگرنه استانِ select؛ tp_prov هرگز در نشانی
+		   (کلید کش قطعه و canonical همان tp_place را می‌شناسند). بی JS همان tp_prov با GET می‌رود و سرور یکی می‌کند. */
+		var prov = u.searchParams.get( 'tp_prov' );
+		u.searchParams.delete( 'tp_prov' );
+		if ( prov && ! u.searchParams.get( 'tp_place' ) ) {
+			u.searchParams.set( 'tp_place', prov );
+		}
 		return u;
 	}
 
@@ -167,8 +174,14 @@
 				if ( ! el.name || el.type === 'hidden' || el.type === 'submit' || el.tagName === 'BUTTON' || ( keep && el === document.activeElement ) ) {
 					return;
 				}
-				/* combobox مکان پس از هر بار خالی می‌ماند؛ مکان در ردیف پالایش‌های فعال است (P5-D557) */
-				el.value = el.name === 'tp_loc' ? '' : ( p.get( el.name ) || '' );
+				/* combobox مکان پس از هر بار خالی می‌ماند؛ مکان در ردیف پالایش‌های فعال است (P5-D557).
+				   select استان (P5-D642) از نشان ناحیۀ loc که همین پاسخ سرور جای‌گزین کرده: استانِ خودِ tp_place یا استانِ شهرش. */
+				if ( el.name === 'tp_prov' ) {
+					var mk = f.querySelector( '[data-tp-loc-prov]' );
+					el.value = mk ? mk.getAttribute( 'data-tp-loc-prov' ) : '';
+				} else {
+					el.value = el.name === 'tp_loc' ? '' : ( p.get( el.name ) || '' );
+				}
 				if ( el.tagName === 'SELECT' && el.selectedIndex < 0 ) {
 					el.selectedIndex = 0;
 				}
@@ -431,46 +444,64 @@
 		/* موبایل: جست‌وجو و مکان هاب زیر یک دکمۀ «فیلتر» (P5-D575)؛ دسکتاپ همیشه در خط. بی JS دکمه پنهان و فیلدها دیدنی‌اند. */
 		/* دستۀ 55 بند ۴: ظرف data-tp-filter-panel است، نه data-tp-more (نشان دکمۀ «N مورد دیگر» zones.js که با کلیک حذف می‌شود).
 		   بستن فقط با کلیک بیرون یا Escape؛ کلیک، تایپ و blur درون ظرف هیچ‌گاه آن را نمی‌بندد. */
+		/* دستۀ 55-ب بند ۱ (P5-D642): موبایل ≤۷۲۰ ظرف لایۀ شناور زیر دکمه است (CSS: position:absolute، دوستونه) — باز و بسته‌شدنش چیزی را
+		   جابه‌جا نمی‌کند، پس دیگر «پُر ← باز می‌ماند» (دستۀ 55 بند ۷) نیست: بسته یعنی پنهان؛ پالایش فعال در ردیف تراشه‌های فعال دیده می‌شود.
+		   باز ← فوکوس نخستین فیلد؛ بستن (Escape، دکمه، «نمایش»، کلیک بیرون وقتی فوکوس درون ظرف بود) ← فوکوس به دکمه. */
 		var moreBtn = root.querySelector( '[data-tp-more-btn]' ), morePanel = root.querySelector( '[data-tp-filter-panel]' );
 		if ( moreBtn && morePanel && window.matchMedia ) {
 			var narrow = window.matchMedia( '(max-width: 720px)' );
-			var filled = function () {
-				return Array.prototype.some.call( morePanel.querySelectorAll( 'input' ), function ( i ) { return i.type !== 'hidden' && i.value !== ''; } );
+			var isOpen = function () {
+				return 'true' === moreBtn.getAttribute( 'aria-expanded' );
 			};
 			var syncMore = function () {
 				moreBtn.hidden = ! narrow.matches;
-				morePanel.hidden = narrow.matches && 'true' !== moreBtn.getAttribute( 'aria-expanded' ) && ! filled();
+				if ( ! narrow.matches ) {
+					moreBtn.setAttribute( 'aria-expanded', 'false' );
+				}
+				morePanel.hidden = narrow.matches && ! isOpen();
+			};
+			var first = function () {
+				return morePanel.querySelector( 'input:not([type="hidden"]),select,textarea,button' );
 			};
 			moreBtn.addEventListener( 'click', function () {
-				var open = 'true' !== moreBtn.getAttribute( 'aria-expanded' );
+				var open = ! isOpen();
 				moreBtn.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
 				morePanel.hidden = ! open;
+				if ( open && first() ) {
+					first().focus();
+				}
 			} );
-			var shut = function () {
-				if ( ! narrow.matches || 'true' !== moreBtn.getAttribute( 'aria-expanded' ) ) {
+			var shut = function ( refocus ) {
+				if ( ! narrow.matches || ! isOpen() ) {
 					return false;
 				}
+				var inside = morePanel.contains( document.activeElement );
 				moreBtn.setAttribute( 'aria-expanded', 'false' );
-				morePanel.hidden = ! filled();
+				morePanel.hidden = true;
+				if ( refocus || inside ) {
+					moreBtn.focus();   /* فوکوس هرگز روی عنصر پنهان نمی‌ماند */
+				}
 				return true;
 			};
 			/* کلیک یا لمس بیرون از ظرف و دکمه */
 			document.addEventListener( 'pointerdown', function ( e ) {
 				if ( ! morePanel.contains( e.target ) && ! moreBtn.contains( e.target ) ) {
-					shut();
+					shut( false );
 				}
+			} );
+			/* «نمایش» (یا انتخاب شهر که فرم را می‌فرستد): نتیجه زیر لایه است ← لایه بسته، فوکوس به دکمه */
+			moreBtn.form.addEventListener( 'submit', function () {
+				shut( true );
 			} );
 			/* Escape، مگر فهرست مکان باز باشد — آن Escape مال combobox است (topersia-g-loc.js، شنوندۀ document که پس از این اجرا می‌شود) */
 			root.addEventListener( 'keydown', function ( e ) {
-				if ( 'Escape' !== e.key || ! morePanel.contains( e.target ) || morePanel.querySelector( '.tp-loc__list:not([hidden])' ) ) {
+				if ( 'Escape' !== e.key || ( ! morePanel.contains( e.target ) && e.target !== moreBtn ) || morePanel.querySelector( '.tp-loc__list:not([hidden])' ) ) {
 					return;
 				}
 				if ( e.target.classList.contains( 'tp-loc__in' ) && '' !== e.target.value ) {
 					return; /* Escape دوم combobox مکان مقدار را پاک می‌کند، نه ظرف را */
 				}
-				if ( shut() ) {
-					moreBtn.focus();
-				}
+				shut( true );
 			} );
 			syncMore();
 			/* دستۀ 55 بند ۷: وضعیت پیش از JS (CSS با data-tp-pre) همین بود؛ از این‌جا hidden و aria-expanded حاکم‌اند */

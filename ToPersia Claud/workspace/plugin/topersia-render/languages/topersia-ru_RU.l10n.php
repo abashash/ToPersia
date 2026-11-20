@@ -7,5 +7,6 @@ return array (
   'x-generator' => 'scripts/tp-i18n.php',
   'messages' => 
   array (
+    'نام شهر' => 'Название города',
   ),
 );

@@ -308,17 +308,20 @@ $w55_c7_view = function ( $j ) use ( $w55_nui7, $w55_ncss ) {
 tp441_mut( 'بند ۷: دکمۀ شبکه/فهرست با html.tp-js و شبکه از نخستین رنگ‌آمیزی دیدنی؛ applyView نشان پیش را برمی‌دارد تا hidden حاکم شود — جهش: نشان می‌ماند (بی شبکه پس از پالایش هم دیده می‌شد)', $w55_c7_view, $w55_njs,
 	str_replace( "\t\tbox.removeAttribute( 'data-tp-pre' );", '', $w55_njs ) );
 
-$w55_c7_panel = function ( $j ) use ( $w55_hub, $w55_art, $w55_hcss ) {
-	foreach ( array( $w55_hub, $w55_art ) as $t ) {
-		if ( false === strpos( $t, 'aria-controls="tp-hub-more" hidden data-tp-pre>' ) || false === strpos( $t, '<div data-tp-pre id="tp-hub-more" class="tp-hub-more" data-tp-filter-panel>' ) ) {
+/* دستۀ 55-ب بند ۱ (P5-D642): لایۀ شناور — همیشه بسته آغاز می‌شود (استثنای «پُر» دستۀ 55 بند ۷ برداشته شد)؛ /news/ هم همان دکمه و ظرف */
+$w55_narch = $w55_read( $w55_r . 'templates/news-archive.php' );
+$w55_c7_panel = function ( $j ) use ( $w55_hub, $w55_art, $w55_narch, $w55_hcss ) {
+	foreach ( array( array( $w55_hub, 'tp-hub-more' ), array( $w55_art, 'tp-hub-more' ), array( $w55_narch, 'tp-news-more' ) ) as $t ) {
+		if ( false === strpos( $t[0], 'aria-controls="' . $t[1] . '" hidden data-tp-pre>' ) || false === strpos( $t[0], '<div data-tp-pre id="' . $t[1] . '" class="tp-hub-more" data-tp-filter-panel>' ) ) {
 			return false;
 		}
 	}
-	return (bool) preg_match( '/@media \(max-width:720px\)\{[^@]*html\.tp-js \.tp-page\.tp-news-page \.tp-hub-more__btn\[data-tp-pre\]\{display:inline-flex\}\s*html\.tp-js \.tp-page\.tp-news-page \.tp-hub-more\[data-tp-pre\]:not\(:has\(input:not\(\[type="hidden"\]\):not\(\[value=""\]\)\)\)\{display:none\}/', $w55_hcss )
+	return (bool) preg_match( '/@media \(max-width:720px\)\{[^@]*html\.tp-js \.tp-page\.tp-news-page \.tp-hub-more__btn\[data-tp-pre\]\{display:inline-flex\}\s*html\.tp-js \.tp-page\.tp-news-page \.tp-hub-more\[data-tp-pre\]\{display:none\}/', $w55_hcss )
 		&& 1 === preg_match( "/syncMore\(\);\n.*?\n\t\t\tmoreBtn\.removeAttribute\( 'data-tp-pre' \);\n\t\t\tmorePanel\.removeAttribute\( 'data-tp-pre' \);/", $j )
-		&& false !== strpos( $j, "return i.type !== 'hidden' && i.value !== '';" );   /* «پُر» در CSS همان filled() */
+		&& false === strpos( $w55_hcss, ':not(:has(input:not([type="hidden"]):not([value=""])))' )
+		&& false !== strpos( $j, 'morePanel.hidden = narrow.matches && ! isOpen();' );   /* بسته یعنی پنهان، بی استثنای «پُر» */
 };
-tp441_mut( 'بند ۷: پنل فیلتر موبایل از نخستین رنگ‌آمیزی در وضعیت پس از news.js (دکمه دیدنی، ظرف بسته مگر ورودی دیدنی value داشته باشد)؛ news.js پس از syncMore نشان را برمی‌دارد — جهش: نشان ظرف می‌ماند (ظرف هرگز باز نمی‌شد)', $w55_c7_panel, $w55_njs,
+tp441_mut( 'بند ۷ · P5-D642: پنل فیلتر موبایل (هاب، /articles/، /news/) از نخستین رنگ‌آمیزی در وضعیت پس از news.js (دکمه دیدنی، لایه بسته)؛ news.js پس از syncMore نشان را برمی‌دارد — جهش: نشان ظرف می‌ماند (ظرف هرگز باز نمی‌شد)', $w55_c7_panel, $w55_njs,
 	str_replace( "\t\t\tmorePanel.removeAttribute( 'data-tp-pre' );", '', $w55_njs ) );
 
 $w55_c7_prog = function ( $c ) use ( $w55_tok, $w55_pcss ) {
@@ -488,9 +491,10 @@ $w55_c13_btn = function ( $c ) use ( $w55_ncss ) {
 tp441_mut( 'بند ۱۳: دکمۀ «فیلتر» ظاهر کاشی خودش را دارد (بسته · باز · هاور) و قاعدۀ دکمۀ ارسال بر آن نمی‌چربد؛ نشان پیش ≤۷۲۰ پس از [hidden] — جهش: گزینشگر بی .tp-news-filter (کد پیشین؛ متن حالت باز نامرئی)',
 	$w55_c13_btn, $w55_hcss, str_replace( '.tp-news-filter .tp-hub-more__btn', '.tp-hub-more__btn', $w55_hcss ) );
 $w55_c13_row = function ( $c ) {
-	return 1 === preg_match( '/@media \(max-width:720px\)\{[^@]*html \.tp-page\.tp-news-page \.tp-hub-more\{flex:1 1 100%\}[^@]*html \.tp-page\.tp-news-page \.tp-news-bar__tools form\.tp-news-filter--min\{flex:1 1 0;min-inline-size:0;flex-wrap:wrap\}\s*html \.tp-page\.tp-news-page \.tp-news-bar__tools \.tp-news-filter--min > \.tp-news-filter__f\{flex:1 1 0\}/', $c );
+	/* دستۀ 55-ب بند ۱ (P5-D642): ظرف لایۀ شناور است (absolute، دوستونه)؛ فرم همچنان پایۀ صفر و شکستن سطر تا شبکه/فهرست کنار «فیلتر» بماند */
+	return 1 === preg_match( '/@media \(max-width:720px\)\{[^@]*html \.tp-page\.tp-news-page :is\(\.tp-news-bar__tools,\.tp-news-filterrow\) > form\.tp-news-filter:has\(\[data-tp-filter-panel\]\)\{flex:1 1 0;min-inline-size:0;flex-wrap:wrap\}\s*html \.tp-page\.tp-news-page \.tp-hub-more\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\);/', $c );
 };
-tp441_mut( 'بند ۱۳: ≤۷۲۰ فرم ابزار پایۀ صفر و شکستن سطر دارد، ظرف باز سطر خودش را می‌گیرد، مرتب‌سازی کوچک می‌شود — جهش: بی شکستن سطر (کد پیشین؛ «نمایش» و شبکه/فهرست بیرون از لبه)',
+tp441_mut( 'بند ۱۳ · P5-D642: ≤۷۲۰ فرم ابزار پایۀ صفر و شکستن سطر دارد و ظرف شبکۀ دوستونه است — جهش: بی شکستن سطر (کد پیشین؛ «نمایش» و شبکه/فهرست بیرون از لبه)',
 	$w55_c13_row, $w55_hcss, str_replace( 'min-inline-size:0;flex-wrap:wrap}', 'min-inline-size:0}', $w55_hcss ) );
 
 /* شمارشگر --launch (بند ۸ هشدار؛ بند ۹ شمار تصویر مشترک و بی alt) — شمارشگر است، حکم نمی‌دهد */

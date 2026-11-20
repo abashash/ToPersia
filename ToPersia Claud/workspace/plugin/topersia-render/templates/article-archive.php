@@ -68,9 +68,10 @@ if ( $tp_part ) {
 									<input id="tp-hub-q" type="search" name="tp_q" value="<?php echo esc_attr( $tp_args['tp_q'] ); ?>" maxlength="80" autocomplete="off">
 								</div>
 								<?php if ( $tp_loc_on ) { echo topersia_g_loc_field( 'tp-hub-place', $tp_args['tp_place'] ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<?php /* دستۀ 55-ب بند ۱ (P5-D642): مرتب‌سازی و «نمایش» هم درون ظرف — موبایل لایۀ شناور دوستونه، دسکتاپ display:contents (همان خط) */ ?>
+								<?php echo topersia_g_news_select( 'tp-news-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_news_sort_options(), $tp_args['tp_sort'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<div class="tp-news-filter__go"><button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button></div>
 							</div>
-							<?php echo topersia_g_news_select( 'tp-news-sort', 'tp_sort', __( 'مرتب‌سازی', 'topersia' ), topersia_g_news_sort_options(), $tp_args['tp_sort'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-							<div class="tp-news-filter__go"><button type="submit"><?php echo esc_html__( 'نمایش', 'topersia' ); ?></button></div>
 						</form>
 						<?php echo topersia_g_news_view_toggle(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 					</div>

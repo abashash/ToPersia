@@ -480,7 +480,7 @@ if ( ! function_exists( 'topersia_g_hub_filtered' ) ) {
 		if ( array_filter( topersia_g_hub_args() ) ) {
 			return true;
 		}
-		foreach ( array( 'tp_place', 'tp_loc', 'tp_facet', 'season', 'tp_q', 'tp_sort' ) as $qv ) {
+		foreach ( array( 'tp_place', 'tp_loc', 'tp_prov', 'tp_facet', 'season', 'tp_q', 'tp_sort' ) as $qv ) {
 			$v = get_query_var( $qv );
 			if ( ! is_scalar( $v ) || ( '' !== trim( (string) $v ) && '0' !== (string) $v ) ) {
 				return true;

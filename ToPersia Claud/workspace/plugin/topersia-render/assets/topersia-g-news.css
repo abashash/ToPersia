@@ -97,6 +97,11 @@ html .tp-page.tp-news-page .tp-news-filter button{min-block-size:44px;margin:0;p
   background:var(--tp-primary-text);color:var(--tp-bg);font:inherit;font-weight:700;cursor:pointer}
 html .tp-page.tp-news-page .tp-news-filter button:hover{background:var(--tp-text-strong);border-color:var(--tp-text-strong)}
 html .tp-page.tp-news-page .tp-news-filter--min{margin:0;gap:8px}
+/* /news/ — دستۀ 55-ب بند ۱ (P5-D642): ردیف پالایش جدا زیر تراشه‌ها؛ فرم (دکمۀ «فیلتر» + ظرف [data-tp-filter-panel]) و شبکه/فهرست کنار هم.
+   فیلدها درون ظرف‌اند، پس قاعدۀ فرزند مستقیم فرم (`.tp-news-filter > .tp-news-filter__f`) به آن‌ها نمی‌رسد — قاعدۀ خودشان روی ظرف. */
+html .tp-page.tp-news-page .tp-news-filterrow{display:flex;align-items:flex-end;gap:12px;margin:0 0 20px}
+html .tp-page.tp-news-page .tp-news-filterrow > .tp-news-filter{flex:1 1 0;min-inline-size:0;margin:0}
+html .tp-page.tp-news-page .tp-news-filterrow .tp-hub-more > .tp-news-filter__f{flex:1 1 0}
 html .tp-page.tp-news-page .tp-news-all{display:inline-flex;align-items:center;min-block-size:44px;white-space:nowrap}
 
 /* ── ناحیۀ نتیجه در حال بارگیری (P5-D546) ── */
@@ -228,8 +233,11 @@ html .tp-page.tp-news-page .tp-news-empty{padding:24px 0;color:var(--tp-text)}
 }
 @media (max-width:900px){
   html .tp-page.tp-news-page .tp-news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  html .tp-page.tp-news-page .tp-news-filter:not(.tp-news-filter--min){display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-  html .tp-page.tp-news-page .tp-news-filter__go{grid-column:1 / -1}
+}
+/* /news/ پهنای میانه: شش فیلد در یک ردیف تنگ می‌شوند ← شبکۀ سه‌ستونه (جست‌وجو · استان · شهر / نوع · بازه · مرتب‌سازی / «نمایش»).
+   موبایل ≤۷۲۰ لایۀ شناور دوستونه در topersia-g-hub.css. :not([hidden]) تا ظرف بسته هرگز با display این قاعده باز نشود. */
+@media (min-width:721px) and (max-width:1200px){
+  html .tp-page.tp-news-page .tp-news-filterrow .tp-hub-more:not([hidden]){display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:767px){
   html .tp-page.tp-news-page .tp-news-bar{flex-wrap:wrap}

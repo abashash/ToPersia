@@ -16,10 +16,12 @@ html .tp-page.tp-hub .tp-hub-tiles.tp-news-grid--rows .tp-tile{min-block-size:56
 
 /* ══ دستۀ 53 · P5-D575 تا P5-D579 ═══════════════════════════════════════
    نوار ابزار یک‌خطی: جست‌وجو و ترکیب‌باکس مکان کنار مرتب‌سازی؛ موبایل زیر دکمۀ «فیلتر».
-   کاشی = کارت خبر با عکس؛ نمای فهرستی دسکتاپ دو ستون، موبایل یک ستون. فقط توکن. */
-html .tp-page.tp-news-page .tp-hub-more{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
+   کاشی = کارت خبر با عکس؛ نمای فهرستی دسکتاپ دو ستون، موبایل یک ستون. فقط توکن.
+   دستۀ 55-ب بند ۱ (P5-D642): ظرف [data-tp-filter-panel] همۀ پالایش‌ها، مرتب‌سازی و «نمایش» را دارد (هاب، /articles/، /news/) —
+   دسکتاپ یک ردیف (پهنای میانه شبکۀ سه‌ستونه)، موبایل ≤۷۲۰ لایۀ شناور دوستونه زیر دکمۀ «فیلتر». */
+html .tp-page.tp-news-page .tp-hub-more{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px;flex:1 1 auto;min-inline-size:0}
 html .tp-page.tp-news-page .tp-hub-more[hidden]{display:none}
-html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{min-inline-size:150px}
+html .tp-page.tp-news-page .tp-hub-more > .tp-news-filter__f{min-inline-size:0}
 /* دستۀ 55 بند ۱۳ — دکمۀ «فیلتر» درون فرم است و قاعدۀ دکمۀ ارسال (`.tp-news-filter button`) بر `.tp-hub-more__btn` می‌چربید: دکمه پرِ سبز
    دکمۀ «نمایش» را می‌گرفت و در حالت باز متن --tp-primary-text روی همان پر نامرئی می‌شد. حالا با .tp-news-filter (یک کلاس بیشتر) ظاهر کاشی
    خودش را دارد (P5-D245) و هاورش هم کاشی است — هاور دکمۀ ارسال (پر --tp-text-strong) دیگر به آن نمی‌رسد. */
@@ -37,18 +39,38 @@ html .tp-page.tp-news-page .tp-hub-card .tp-news-card__media--icon svg{inline-si
   html .tp-page.tp-news-page .tp-hub-more{flex-wrap:nowrap}
   html .tp-page.tp-news-page .tp-news-bar > .tp-news-chips{min-inline-size:0}
 }
+/* پهنای میانه (دستۀ 55-ب بند ۱): نوار هاب و /articles/ دو سطر می‌شود — تراشه‌ها، سپس ابزار تمام‌عرض — تا چهار فیلد و «نمایش» و
+   شبکه/فهرست هرگز از لبه بیرون نزنند (۷۶۸). فقط نواری که ظرف پالایش دارد؛ نوار صفحۀ خبر مکان (فقط مرتب‌سازی) همان قاعدۀ ≤۷۶۷ را دارد. */
+@media (max-width:1180px){
+  html .tp-page.tp-news-page .tp-news-bar:has([data-tp-filter-panel]){flex-wrap:wrap}
+  html .tp-page.tp-news-page .tp-news-bar:has([data-tp-filter-panel]) > .tp-news-chips{flex:1 1 100%}
+  html .tp-page.tp-news-page .tp-news-bar__tools:has([data-tp-filter-panel]){flex:1 1 100%;margin-inline-start:0}
+  html .tp-page.tp-news-page .tp-news-bar__tools > form.tp-news-filter:has([data-tp-filter-panel]){flex:1 1 0;min-inline-size:0}
+  html .tp-page.tp-news-page .tp-news-bar__tools .tp-hub-more > .tp-news-filter__f{inline-size:auto;flex:1 1 0}
+}
+@media (min-width:721px) and (max-width:960px){
+  html .tp-page.tp-news-page .tp-news-bar__tools .tp-hub-more:not([hidden]){display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 @media (max-width:720px){
-  html .tp-page.tp-news-page .tp-hub-more{flex:1 1 100%}
-  html .tp-page.tp-news-page .tp-hub-more .tp-news-filter__f{flex:1 1 100%}
-  /* دستۀ 55 بند ۱۳ — ردیف ابزار هرگز از لبۀ صفحه بیرون نمی‌زند (پیش‌تر در ۳۹۰ با ظرف باز «نمایش» و شبکه/فهرست بیرون از لبه، در ۳۲۰ حتی بسته؛
-     برش ریشه سرریز سند را پنهان می‌کرد). فرم پایۀ صفر می‌گیرد تا دکمۀ شبکه/فهرست کنارش بماند و خودش سطر می‌شکند؛ ظرف باز (پایۀ ۱۰۰٪)
-     سطر خودش را زیر «فیلتر» می‌گیرد — ترتیب دیداری همان ترتیب DOM و فوکوس؛ مرتب‌سازی با پایۀ صفر کوچک می‌شود و سطر بسته را نمی‌شکند. */
-  html .tp-page.tp-news-page .tp-news-bar__tools form.tp-news-filter--min{flex:1 1 0;min-inline-size:0;flex-wrap:wrap}
-  html .tp-page.tp-news-page .tp-news-bar__tools .tp-news-filter--min > .tp-news-filter__f{flex:1 1 0}
-  /* دستۀ 55 بند ۷ — همان وضعیت پس از news.js از نخستین رنگ‌آمیزی (html.tp-js یعنی JS اجرا خواهد شد): دکمۀ «فیلتر» دیدنی،
-     ظرف بسته مگر پُر — «پُر» همان filled() news.js: ورودی دیدنی با ویژگی value ناتهی از سرور. news.js پس از syncMore نشان data-tp-pre را برمی‌دارد. */
+  /* دستۀ 55-ب بند ۱ (P5-D642) — لایۀ شناور زیر دکمۀ «فیلتر»: absolute در ردیف ابزار (هاب و /articles/: .tp-news-bar__tools ·
+     /news/: .tp-news-filterrow) پس محتوای زیرش جابه‌جا نمی‌شود؛ سایه و قاب از توکن. شبکۀ دوستونه: جست‌وجو تمام‌عرض · استان | شهر ·
+     (خبر: نوع | بازه) · مرتب‌سازی | «نمایش». بی JS (بی html.tp-js) همان شبکه در جریان صفحه، همیشه دیدنی. هدف‌ها ≥ ۴۴px از قاعدۀ فیلد و دکمه.
+     دستۀ 55 بند ۱۳ پابرجا: فرم پایۀ صفر می‌گیرد تا دکمۀ شبکه/فهرست کنارش بماند و ردیف هرگز از لبه بیرون نزند. */
+  html .tp-page.tp-news-page :is(.tp-news-bar__tools,.tp-news-filterrow):has([data-tp-filter-panel]){position:relative}
+  html .tp-page.tp-news-page :is(.tp-news-bar__tools,.tp-news-filterrow) > form.tp-news-filter:has([data-tp-filter-panel]){flex:1 1 0;min-inline-size:0;flex-wrap:wrap}
+  html .tp-page.tp-news-page .tp-hub-more{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;flex:1 1 100%}
+  html .tp-page.tp-news-page .tp-hub-more > .tp-news-filter__f--q{grid-column:1 / -1}
+  /* ردیف «مرتب‌سازی | نمایش» همیشه جفت: مرتب‌سازی سطر تازه می‌گیرد؛ /news/ بی «نوع مکان» (en · ar) ← «بازۀ زمانی» تمام‌عرض، نه خانۀ تهی */
+  html .tp-page.tp-news-page .tp-hub-more > .tp-news-filter__f:has(select[name="tp_sort"]){grid-column-start:1}
+  html .tp-page.tp-news-page .tp-hub-more:not(:has(select[name="tp_kind"])) > .tp-news-filter__f:has(select[name="tp_when"]){grid-column:1 / -1}
+  html .tp-page.tp-news-page .tp-hub-more > .tp-news-filter__go{align-self:end}
+  html .tp-page.tp-news-page .tp-hub-more > .tp-news-filter__go button{inline-size:100%}
+  html.tp-js .tp-page.tp-news-page .tp-hub-more{position:absolute;z-index:40;inset-inline:0;inset-block-start:calc(100% + 8px);box-sizing:border-box;padding:16px;
+    border:1px solid var(--tp-tile-border);border-radius:var(--tp-tile-radius,12px);background:var(--tp-bg);box-shadow:var(--tp-shadow)}
+  /* دستۀ 55 بند ۷ — همان وضعیت پس از news.js از نخستین رنگ‌آمیزی (html.tp-js یعنی JS اجرا خواهد شد): دکمۀ «فیلتر» دیدنی، ظرف بسته.
+     P5-D642: استثنای «پُر» برداشته شد — لایه همیشه بسته آغاز می‌شود و پالایش فعال در ردیف تراشه‌های فعال دیده می‌شود. news.js پس از syncMore نشان data-tp-pre را برمی‌دارد. */
   html.tp-js .tp-page.tp-news-page .tp-hub-more__btn[data-tp-pre]{display:inline-flex}
-  html.tp-js .tp-page.tp-news-page .tp-hub-more[data-tp-pre]:not(:has(input:not([type="hidden"]):not([value=""]))){display:none}
+  html.tp-js .tp-page.tp-news-page .tp-hub-more[data-tp-pre]{display:none}
 }
 
 /* ══ دستۀ 55 بند ۶ — «نمایش بیشتر»: پیوند واقعی صفحۀ بعد (rel=next)؛ با JS کاشی‌ها به همین شبکه افزوده می‌شوند.

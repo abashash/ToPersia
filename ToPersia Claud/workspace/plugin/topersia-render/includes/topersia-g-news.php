@@ -429,10 +429,13 @@ if ( ! function_exists( 'topersia_g_news_is_archive' ) ) {
 /** مکان پالایش (شناسۀ منتشرشدۀ استان یا شهر) یا صفر. */
 if ( ! function_exists( 'topersia_g_news_filter_place' ) ) {
 	function topersia_g_news_filter_place() {
-		$id = absint( function_exists( 'get_query_var' ) ? get_query_var( 'tp_place' ) : 0 );
-		/* P5-D549: بی JS نام در tp_loc می‌آید؛ همان fold، تطبیق دقیق. متن نوشته‌شده بر tp_place پیشین برنده است (P5-D557). */
+		$id   = absint( function_exists( 'get_query_var' ) ? get_query_var( 'tp_place' ) : 0 );
+		$prov = function_exists( 'topersia_g_loc_prov_param' ) ? topersia_g_loc_prov_param() : 0;   /* P5-D642: select استان (فقط بی JS در نشانی) */
+		/* P5-D549: بی JS نام شهر در tp_loc می‌آید؛ همان fold، تطبیق دقیق (با استان برگزیده فقط شهرهای همان). متن نوشته‌شده بر tp_place پیشین برنده است (P5-D557). */
 		if ( function_exists( 'topersia_g_loc_resolve' ) && is_scalar( get_query_var( 'tp_loc' ) ) && '' !== trim( (string) get_query_var( 'tp_loc' ) ) ) {
-			$id = topersia_g_loc_resolve( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ) );
+			$id = topersia_g_loc_resolve( sanitize_text_field( (string) get_query_var( 'tp_loc' ) ), $prov );
+		} elseif ( $prov && ( ! $id || topersia_g_loc_prov_of( $id ) !== $prov ) ) {
+			$id = $prov;   /* استان عوض شد و شهر پیشین در آن نیست، یا فقط استان */
 		}
 		if ( ! $id || ! in_array( (string) get_post_type( $id ), array( 'tp_province', 'tp_city' ), true ) ) {
 			return 0;
@@ -798,6 +801,7 @@ if ( function_exists( 'add_action' ) ) {
 	add_filter( 'query_vars', function ( $vars ) {
 		$vars[] = 'tp_place';
 		$vars[] = 'tp_loc';   /* P5-D549: نام مکان بی JS */
+		$vars[] = 'tp_prov';  /* P5-D642: استانِ select بی JS؛ با JS نشانی فقط tp_place */
 		return $vars;
 	} );
 

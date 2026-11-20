@@ -376,10 +376,6 @@ msgstr ""
 msgid "استان مسیر"
 msgstr ""
 
-#: includes/topersia-g-loc.php
-msgid "استان یا شهر"
-msgstr ""
-
 #: topersia-render.php
 msgid "استاندارد"
 msgstr ""
@@ -3746,10 +3742,6 @@ msgstr ""
 msgid "نام"
 msgstr ""
 
-#: includes/topersia-g-loc.php
-msgid "نام استان یا شهر"
-msgstr ""
-
 #: includes/topersia-g-map.php
 msgid "نام بومی"
 msgstr ""
@@ -3772,6 +3764,10 @@ msgstr ""
 
 #: includes/topersia-g-map.php
 msgid "نام رسمی فارسی"
+msgstr ""
+
+#: includes/topersia-g-loc.php
+msgid "نام شهر"
 msgstr ""
 
 #: includes/topersia-g-map.php
@@ -4220,7 +4216,7 @@ msgstr ""
 msgid "همۀ اخبار"
 msgstr ""
 
-#: includes/topersia-g-home.php
+#: includes/topersia-g-loc.php
 msgid "همۀ استان‌ها"
 msgstr ""
 

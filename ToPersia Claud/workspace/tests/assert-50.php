@@ -64,8 +64,13 @@ $w50_five = function ( $a, $u, $n ) {
 	preg_match_all( "/topersia_g_news_select\( 'tp-news-(\w+)', 'tp_(\w+)'/", $a, $m );
 	$f = array_merge( $m[2], false !== strpos( $a, 'name="tp_q"' ) ? array( 'q' ) : array(), false !== strpos( $a, "topersia_g_loc_field( 'tp-news-place', \$tp_place )" ) ? array( 'place' ) : array() );   /* P5-D549: مکان combobox متنی */
 	sort( $f );
+	/* دستۀ 55-ب بند ۱ (P5-D642): مرتب‌سازی درون فرم و ظرف [data-tp-filter-panel] (نه در نوار با form=) — همان لایۀ شناور موبایل */
+	$pan = strpos( $a, 'data-tp-filter-panel>' );
+	$srt = strpos( $a, "topersia_g_news_select( 'tp-news-sort'" );
+	$end = strpos( $a, '</form>' );
 	return array( 'kind', 'place', 'q', 'sort', 'when' ) === $f
-		&& false !== strpos( $a, "'tp-news-form' ); // phpcs:ignore" ) && false !== strpos( $a, '<form id="tp-news-form"' )
+		&& false !== strpos( $a, '<form id="tp-news-form"' ) && false !== $pan && false !== $srt && false !== $end && $pan < $srt && $srt < $end
+		&& false === strpos( $a, "'tp-news-form' ); // phpcs:ignore" )
 		&& false !== strpos( $u, "'tp_when'  => isset( topersia_g_news_when_map()[ \$when ] ) ? \$when : ''," )
 		&& false !== strpos( $u, "return array( '7d' => '7 days ago', '30d' => '30 days ago', '12m' => '12 months ago' );" )
 		&& false !== strpos( $n, "'column' => 'post_date', 'after' => topersia_g_news_when_map()[ \$args['tp_when'] ]" );

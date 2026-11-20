@@ -138,7 +138,7 @@ if ( ! function_exists( 'topersia_g_news_filtered' ) ) {
 			return true;
 		}
 		/* مقدار نامعتبر (موضوع یا مکان ناموجود) هم پالایش است: نتیجۀ تهی، noindex، پیام «با این پالایش». */
-		foreach ( array( 'tp_place', 'tp_loc', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as $qv ) {
+		foreach ( array( 'tp_place', 'tp_loc', 'tp_prov', 'tp_kind', 'tp_topic', 'tp_q', 'tp_sort', 'tp_when' ) as $qv ) {
 			$v = get_query_var( $qv );
 			if ( ! is_scalar( $v ) || ( '' !== trim( (string) $v ) && '0' !== (string) $v ) ) {
 				return true;
@@ -1070,6 +1070,8 @@ if ( function_exists( 'add_action' ) ) {
 		if ( topersia_g_news_is_archive() && ! topersia_g_news_is_article() ) {
 			/* P5-D549: combobox مکان — فقط جایی که فیلد هست */
 			wp_enqueue_script( 'topersia-g-loc', topersia_render_url() . 'assets/topersia-g-loc.js', array(), topersia_render_asset_version( 'assets/topersia-g-loc.js' ), array( 'in_footer' => true, 'strategy' => 'defer' ) );
+			/* دستۀ 55-ب بند ۱ (P5-D642): /news/ هم دکمۀ «فیلتر» و لایۀ شناور هاب را دارد — همان شیوه‌نامه (یک منبع برای ظرف پالایش) */
+			wp_enqueue_style( 'topersia-g-hub', topersia_render_url() . 'assets/topersia-g-hub.css', array( 'topersia-g-news' ), topersia_render_asset_version( 'assets/topersia-g-hub.css' ) );
 		}
 	}, 31 );
 }
