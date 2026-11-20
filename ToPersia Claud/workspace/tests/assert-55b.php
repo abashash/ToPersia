@@ -269,3 +269,90 @@ tp441_mut( 'بند ۳: سرعنوان گروه از توکن پاورقی (--tp-
 	function ( $c ) {
 		return 1 === preg_match( '/\.tp-ft-menu \.tp-ft-menu__h\{\s*margin:var\(--tp-ft-stack\) 0 0;\s*font-size:var\(--tp-ft-menu-fs\);\s*font-weight:700;\s*line-height:1\.4;\s*color:var\(--tp-ft-head\);\s*\}/', $c );
 	}, $w55b_fcss, str_replace( "font-weight:700;\n  line-height:1.4;\n  color:var(--tp-ft-head);", "font-weight:700;\n  line-height:1.4;\n  color:#333;", $w55b_fcss ) );
+
+/* ── بند ۴: منوی اصلی #19 — والد بی‌مقصد با زیرمنو دکمه، بی زیرمنو پنهان؛ ترجمۀ WPML از جدول ────────────────────────────
+ * رفتار روی وردپرس واقعی: tests/nav-main-local.js (fa/en/ar × ۱۴۴۰ و ۳۹۰؛ دکمه با آیتم فرزند موقت). هم‌خوانی داده با هدف:
+ * `wp eval-file scripts/tp-main-menu.php check`. بدنۀ تابع‌ها از سورس بیرون کشیده و همان کد اجرا می‌شود، پس جهش رفتار را عوض می‌کند. */
+require_once TP_PLUGIN_DIR . 'includes/topersia-g-nav.php';
+$w55b_nav  = $w55b_read( $w55b_r . 'includes/topersia-g-nav.php' );
+$w55b_body = function ( $src, $sig, $params ) {
+	if ( ! preg_match( '/function ' . preg_quote( $sig, '/' ) . ' \{\n(.*?)\n\t}\n/s', $src, $m ) ) {
+		return null;
+	}
+	return eval( 'return function ( ' . $params . ' ) {' . $m[1] . '};' );   // phpcs:ignore Squiz.PHP.Eval
+};
+$w55b_it = function ( $id, $parent, $url, $type = 'custom' ) {
+	return (object) array( 'ID' => $id, 'menu_item_parent' => $parent, 'url' => $url, 'type' => $type );
+};
+$w55b_items = array(
+	$w55b_it( 1, 0, '#' ),                        // بی‌مقصد، بی فرزند ← پنهان
+	$w55b_it( 2, 0, '#' ),                        // بی‌مقصد با فرزند ← می‌ماند (دکمه)
+	$w55b_it( 3, 2, 'http://topersia.local/news/' ),
+	$w55b_it( 4, 0, '' ),                         // بی‌مقصد که تنها فرزندش هم بی‌مقصد است ← هر دو پنهان (تکرار تا پایدار)
+	$w55b_it( 5, 4, '#' ),
+	$w55b_it( 6, 0, '#' ),                        // بی‌مقصد با بلوک وودمارت ← می‌ماند
+	$w55b_it( 7, 0, '', 'post_type' ),            // صفحه/نوع — نشانی خودش را دارد
+	$w55b_it( 8, 0, 'http://topersia.local/events/' ),
+);
+$w55b_nav_ids = function ( $fn ) use ( $w55b_items ) {
+	$GLOBALS['tp_meta'][6]['_menu_item_block'] = '99';
+	$out = is_callable( $fn ) ? array_map( function ( $i ) { return $i->ID; }, $fn( $w55b_items ) ) : null;
+	unset( $GLOBALS['tp_meta'][6] );
+	return $out;
+};
+tp441_mut( 'بند ۴: آیتم سفارشی «#»/تهی بی فرزند و بی بلوک برداشته می‌شود، تا پایدار شدن تکرار؛ با فرزند یا بلوک و آیتم غیر custom می‌ماند — جهش: یک دور',
+	function ( $s ) use ( $w55b_body, $w55b_nav_ids ) {
+		return array( 2, 3, 6, 7, 8 ) === $w55b_nav_ids( $w55b_body( $s, 'topersia_g_nav_objects( $items )', '$items' ) );
+	}, $w55b_nav, str_replace( '} while ( count( $items ) < $before );', '} while ( false );', $w55b_nav ) );
+
+$w55b_a = '<a href="#" class="woodmart-nav-link"><span class="nav-link-text">X</span></a><a href="#">Y</a>';
+tp441_mut( 'بند ۴: والد بی‌مقصد دارای زیرمنو دکمه است — بی href، role="button" tabindex="0" aria-expanded="false" aria-haspopup="true"، کلاس وودمارت می‌ماند، فقط نخستین <a> — جهش: href می‌ماند',
+	function ( $s ) use ( $w55b_body, $w55b_a ) {
+		$fn  = $w55b_body( $s, 'topersia_g_nav_button( $html )', '$html' );
+		$out = is_callable( $fn ) ? $fn( $w55b_a ) : '';
+		return '<a class="woodmart-nav-link" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true" data-tp-nav-btn><span class="nav-link-text">X</span></a><a href="#">Y</a>' === $out;
+	}, $w55b_nav, str_replace( '(?:href|role|tabindex', '(?:role|tabindex', $w55b_nav ) );
+t( 'بند ۴: start_el فقط آیتم بی‌مقصد را دکمه می‌کند؛ آیتم با مقصد دست‌نخورده',
+	false !== strpos( topersia_g_nav_start_el( $w55b_a, $w55b_it( 2, 0, '#' ) ), 'role="button"' )
+	&& $w55b_a === topersia_g_nav_start_el( $w55b_a, $w55b_it( 8, 0, 'http://topersia.local/events/' ) )
+	&& $w55b_a === topersia_g_nav_start_el( $w55b_a, $w55b_it( 7, 0, '', 'post_type' ) ) );
+tp441_mut( 'بند ۴: پروندۀ منو در فهرست بارگذاری render است — جهش: بیرون از فهرست',
+	function ( $s ) {
+		return false !== strpos( $s, "'includes/topersia-g-footer.php', 'includes/topersia-g-nav.php'," );
+	}, $w55b_read( $w55b_r . 'topersia-render.php' ), str_replace( "'includes/topersia-g-nav.php', ", '', $w55b_read( $w55b_r . 'topersia-render.php' ) ) );
+
+$w55b_mm_src = $w55b_read( 'scripts/i18n/main-menu.php' );
+$w55b_mm_ok  = function ( $src ) {
+	$tbl = eval( '?>' . $src );   // phpcs:ignore Squiz.PHP.Eval
+	if ( ! is_array( $tbl ) || ! isset( $tbl['_menu'] ) || count( $tbl ) < 6 ) {
+		return false;
+	}
+	foreach ( $tbl as $fa => $row ) {
+		if ( ! is_array( $row ) || array( 'en', 'ar', 'ru' ) !== array_keys( $row )
+			|| ! preg_match( '/^[A-Z][A-Za-z ]*$/', (string) $row['en'] )
+			|| ! preg_match( '/^[\x{0621}-\x{064A} ]+$/u', (string) $row['ar'] )
+			|| ! preg_match( '/^[\x{0400}-\x{04FF} ]+$/u', (string) $row['ru'] ) ) {
+			return false;
+		}
+	}
+	return true;
+};
+tp441_mut( 'بند ۴: جدول منوی اصلی — هر عنوان en (لاتین) · ar (حرف عربی، بی پ چ ژ گ ک ی فارسی) · ru (سیریلیک) — جهش: «ی» فارسی در عربی',
+	$w55b_mm_ok, $w55b_mm_src, str_replace( "'دليل السفر'", "'دلیل السفر'", $w55b_mm_src ) );
+
+$w55b_mm = $w55b_read( 'scripts/tp-main-menu.php' );
+tp441_mut( 'بند ۴: tp-main-menu فقط topersia.local؛ apply نخست رونوشت را می‌نویسد و بازمی‌خواند، سپس هر نوشتن؛ نشانی دستی غیر «#» بازنویسی نمی‌شود — جهش: بازنویسی هر نشانی',
+	function ( $s ) {
+		$ap = (string) strstr( (string) strstr( $s, "if ( 'apply' === \$tp_mode ) {" ), "if ( 'restore' === \$tp_mode ) {", true );
+		$bk = strpos( $ap, 'file_get_contents( $tp_file ) !== $tp_snap' );
+		$w1 = strpos( $ap, 'update_post_meta(' );
+		return false !== strpos( $s, "if ( 'topersia.local' !== (string) wp_parse_url( home_url(), PHP_URL_HOST ) ) {" )
+			&& false !== $bk && false !== $w1 && $bk < $w1 && $bk < (int) strpos( $ap, 'wp_create_nav_menu(' )
+			&& false !== strpos( $ap, "if ( '#' !== \$want && in_array( trim( \$it['url'] ), array( '', '#' ), true ) ) {" );
+	}, $w55b_mm, str_replace( "if ( '#' !== \$want && in_array( trim( \$it['url'] ), array( '', '#' ), true ) ) {", "if ( '#' !== \$want ) {", $w55b_mm ) );
+tp441_mut( 'بند ۴: مقصد آیتم هاب‌دار فقط از topersia_g_ft_menu_url (هاب با محتوای واقعی همان زبان)، وگرنه «#»؛ هر آیتم ترجمه هم‌trid اصل — جهش: نشانی هاب بی سنجش محتوا',
+	function ( $s ) {
+		return false !== strpos( $s, '$url = (string) topersia_g_ft_menu_url( $hub[0], $hub[1] );' )
+			&& false !== strpos( $s, "return '' === \$url ? '#' : \$url;" )
+			&& false !== strpos( $s, "'element_type' => 'post_nav_menu_item', 'trid' => \$trid, 'language_code' => \$l, 'source_language_code' => \$tp_fa" );
+	}, $w55b_mm, str_replace( '$url = (string) topersia_g_ft_menu_url( $hub[0], $hub[1] );', '$url = (string) home_url( "/{$hub[1]}/" );', $w55b_mm ) );
