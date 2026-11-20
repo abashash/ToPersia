@@ -419,6 +419,39 @@ if ( ! defined( 'TOPERSIA_NEWS_PER_PAGE' ) ) {
 	define( 'TOPERSIA_NEWS_PER_PAGE', 12 );
 }
 
+/**
+ * گنجایش صفحۀ ۱ آرشیو — دستۀ 56-الف بند ۱. بلوک بالای /news/ بی‌پالایش (برگزیده + ستون‌های کناری) جای کاشی‌های
+ * شبکه را نمی‌گیرد: پیش‌تر ۷ خبر از همان ۱۲ صفحه برمی‌داشت، شبکه ۵ کاشی (ردیف ناقص) می‌گرفت و باقی به صفحۀ ۲ می‌رفت.
+ * با پالایش یا در /articles/ (بی بلوک بالا) همان TOPERSIA_NEWS_PER_PAGE.
+ *
+ * @param bool $filtered آیا پالایشی روشن است
+ */
+if ( ! function_exists( 'topersia_g_news_first_cap' ) ) {
+	function topersia_g_news_first_cap( $filtered ) {
+		if ( $filtered || topersia_g_news_is_article() || ! function_exists( 'topersia_g_news_top_max' ) ) {
+			return TOPERSIA_NEWS_PER_PAGE;
+		}
+		return TOPERSIA_NEWS_PER_PAGE + topersia_g_news_top_max();
+	}
+}
+
+/**
+ * شمار صفحه‌ها با صفحۀ ۱ بزرگ‌تر: هر چه در گنجایش صفحۀ ۱ جا شود تک‌صفحه است.
+ *
+ * @param int  $total    شمار کل نتیجه
+ * @param bool $filtered آیا پالایشی روشن است
+ */
+if ( ! function_exists( 'topersia_g_news_page_count' ) ) {
+	function topersia_g_news_page_count( $total, $filtered ) {
+		$total = (int) $total;
+		$first = topersia_g_news_first_cap( $filtered );
+		if ( $total <= 0 ) {
+			return 0;
+		}
+		return $total <= $first ? 1 : 1 + (int) ceil( ( $total - $first ) / TOPERSIA_NEWS_PER_PAGE );
+	}
+}
+
 /** آیا این درخواست آرشیو سراسری خبر است. */
 if ( ! function_exists( 'topersia_g_news_is_archive' ) ) {
 	function topersia_g_news_is_archive() {
@@ -811,6 +844,17 @@ if ( function_exists( 'add_action' ) ) {
 			return;
 		}
 		$q->set( 'posts_per_page', TOPERSIA_NEWS_PER_PAGE );
+		/* دستۀ 56-الف بند ۱: صفحۀ ۱ بی‌پالایش جای بلوک بالا را هم دارد؛ صفحه‌های بعد با offset از پس آن */
+		$tp_first = topersia_g_news_first_cap( topersia_g_news_filtered() );
+		$tp_paged = max( 1, (int) $q->get( 'paged' ) );
+		$q->set( 'tp_news_paging', 1 );
+		if ( TOPERSIA_NEWS_PER_PAGE !== $tp_first ) {
+			if ( 1 === $tp_paged ) {
+				$q->set( 'posts_per_page', $tp_first );
+			} else {
+				$q->set( 'offset', $tp_first + ( $tp_paged - 2 ) * TOPERSIA_NEWS_PER_PAGE );
+			}
+		}
 		$q->set( 'post_status', 'publish' );
 		$q->set( 'has_password', false );
 		$q->set( 'orderby', 'date' );
@@ -849,6 +893,14 @@ if ( function_exists( 'add_action' ) ) {
 			$q->set( 'date_query', array( array( 'column' => 'post_date', 'after' => topersia_g_news_when_map()[ $args['tp_when'] ], 'inclusive' => true ) ) );
 		}
 	} );
+
+	/* دستۀ 56-الف بند ۱: شمار صفحه از گنجایش واقعی صفحه‌ها، نه ceil( کل / posts_per_page ) وردپرس */
+	add_filter( 'the_posts', function ( $posts, $q ) {
+		if ( $q instanceof WP_Query && $q->get( 'tp_news_paging' ) ) {
+			$q->max_num_pages = topersia_g_news_page_count( $q->found_posts, topersia_g_news_filtered() );
+		}
+		return $posts;
+	}, 10, 2 );
 
 	add_filter( 'template_include', function ( $template ) {
 		if ( ! topersia_g_news_is_archive() ) {

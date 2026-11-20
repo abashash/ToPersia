@@ -10,6 +10,7 @@
  * ▸ toolbar (بند ۱۳، یافتۀ عکس) — ردیف ابزار /city/ و /articles/ در ۳۲۰ · ۳۹۰ · ۶۰۰ · ۷۲۰ · ۷۶۸: هر کنترل درون صفحه، بسته و با ظرف
  *   «فیلتر» باز؛ متن «فیلتر» در سه حالت رنگ (بسته · باز · هاور) ≥ ۴٫۵. کالیبراسیون با CSS پیش از رفع.
  * ▸ list (بند ۵) — نمای فهرستی همۀ هاب‌ها و فهرست‌های خبر/مقاله: بندانگشتی توکن، ستون، دو سطر خلاصه، بلندی ردیف (هدف دسکتاپ < ۱۴۰px).
+ * ▸ paging (دستۀ 56-الف بند ۱) — fa/en/ar × ۱۴۴۰ · ۷۶۸ · ۳۹۰: شمار نمایش = اعلام، صفحۀ ۱ پر، تک‌صفحه تا گنجایش، بی کاشی خالی؛ --mut با هستۀ پیش از رفع قرمز.
  * ▸ shots (بند ۱۳، فقط با --only=shots) — عکس «پس» fa: هاب شهرها شبکه/فهرست، هاب خبر، جست‌وجوی فوکوس، فوتر × سه حالت ← tests/.screens/55/
  *
  * یک زنجیره در هر زمان؛ هم‌زمان هیچ درخواست دیگری به سایت. کد خروج: ۰ سبز · ۱ افتادن · ۲ محیط ناقص.
@@ -522,6 +523,96 @@ const PERF_PAGES = [
 	{ k: 'هاب شهر', u: '/city/' },
 	{ k: 'هاب جاذبه‌ها', u: '/attractions/' },
 ];
+/* ── دستۀ 56-الف بند ۱ — صفحه‌بندی پس از پالایش: شمار نمایش‌داده‌شده = شمار اعلام‌شده، صفحۀ ۱ تا گنجایشش پر،
+   هیچ صفحۀ غیرآخر ردیف ناقص (کاشی خالی) ندارد. پیش از رفع: /news/ بی‌پالایش بلوک بالا ۷ خبر از ۱۲ را برمی‌داشت ←
+   شبکۀ ۵ کاشی در ۴ ستون (۳ خانۀ خالی) و ۲ خبر در صفحۀ ۲. جهش: --mut هستۀ topersia-g-news.php را موقتاً با نسخۀ
+   HEAD~ (پیش از رفع، TP_MUT_REF) عوض می‌کند و باید قرمز شود؛ در finally برمی‌گردد. */
+const PAGING_URLS = [
+	{ k: 'اخبار', u: '/news/' }, { k: 'اخبار ۱۲ ماه', u: '/news/?tp_when=12m' }, { k: 'اخبار قدیمی‌تر', u: '/news/?tp_sort=old' },
+	{ k: 'اخبار شهر', u: '/news/?tp_kind=tp_city' }, { k: 'مقالات', u: '/articles/' },
+	{ k: 'هاب شهر «ا»', u: '/city/?tp_q=' + encodeURIComponent( 'ا' ) }, { k: 'هاب جاذبه «ا»', u: '/attractions/?tp_q=' + encodeURIComponent( 'ا' ) },
+];
+const digits = s => +String( s ).replace( /[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf( d ) ).replace( /[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf( d ) ).replace( /\D/g, '' );
+const announced = h => { const m = h.match( /data-tp-news-msg="([^"]*)"/ ); return m && /[0-9۰-۹٠-٩]/.test( m[1] ) ? digits( m[1] ) : -1; };
+const itemsIn = h => ( h.match( /<article class="tp-news-(?:card|feat|mini)[ "]/g ) || [] ).length;
+const featIn  = h => ( h.match( /<article class="tp-news-(?:feat|mini)[ "]/g ) || [] ).length;
+const pageUrl = ( u, n ) => { const [ p, q ] = u.split( '?' ); return p + ( n > 1 ? 'page/' + n + '/' : '' ) + ( q ? '?' + q : '' ); };
+async function pagingServer() {
+	for ( const L of [ '', '/en', '/ar' ] ) {
+		for ( const P of PAGING_URLS ) {
+			const u = L + P.u, r = await get( u ), h = r.body.toString( 'utf8' ), tag = `${ L || '/fa' } ${ P.k }`;
+			if ( 200 !== r.code ) { t( `${ tag }: ${ u } در دسترس`, 404 === r.code, `کد ${ r.code } (۴۰۴ = این زبان این فهرست را ندارد)` ); continue; }
+			const total = announced( h ), last = lastPage( h );
+			let sum = itemsIn( h );
+			const grid1 = sum - featIn( h );
+			for ( let n = 2; n <= last; n++ ) { sum += itemsIn( ( await get( pageUrl( u, n ) ) ).body.toString( 'utf8' ) ); }
+			t( `${ tag }: شمار نمایش‌داده‌شده در همۀ صفحه‌ها = شمار اعلام‌شده`, total >= 0 && sum === total, `نمایش ${ sum } · اعلام ${ total } · صفحه ${ last }` );
+			const per = /^\/(?:news|articles)\//.test( P.u ) ? 12 : PER;
+			t( `${ tag }: صفحۀ ۱ تا گنجایش پر (شبکه = min(باقی، ${ per }))؛ بلوک بالا جای شبکه را نمی‌گیرد`, grid1 === Math.min( Math.max( 0, total - featIn( h ) ), per ), `شبکه ${ grid1 } · بالا ${ featIn( h ) } · کل ${ total }` );
+			if ( total <= per ) { t( `${ tag }: کل ≤ ${ per } ← تک‌صفحه، بی صفحه‌بندی و «نمایش بیشتر»`, 1 === last && ! /data-tp-load-more/.test( h ), `صفحه ${ last }` ); }
+			const after = await get( pageUrl( u, last + 1 ) );
+			t( `${ tag }: صفحۀ ${ last + 1 } ← ۴۰۴ یا ۳۰۱`, 404 === after.code || 301 === after.code, String( after.code ) );
+		}
+	}
+}
+async function pagingBrowser() {
+	const br = await chromium.launch();
+	try {
+		for ( const L of [ '', '/en', '/ar' ] ) {
+			for ( const [ w, hh ] of VIEWS ) {
+				const ctx = await br.newContext( { viewport: { width: w, height: hh } } ), page = await ctx.newPage();
+				for ( const P of PAGING_URLS ) {
+					const res = await page.goto( BASE + L + P.u, { waitUntil: 'load', timeout: 120000 * X } );
+					if ( ! res || 200 !== res.status() ) { continue; }
+					const g = await page.evaluate( () => {
+						const i = document.querySelector( '[data-tp-news-items]' );
+						if ( ! i ) { return null; }
+						const vis = e => { const r = e.getBoundingClientRect(), cs = getComputedStyle( e ); return 'none' !== cs.display && r.width > 0 && r.height > 0; };
+						const kids = [ ...i.children ].filter( vis );
+						const cols = 'grid' === getComputedStyle( i ).display ? getComputedStyle( i ).gridTemplateColumns.split( ' ' ).filter( Boolean ).length : 1;
+						/* جایگاه تبلیغ (.tp-ad-slot) کاشی خالی نیست: در پیش‌نمایش نشانگرش برای همه دیده می‌شود (P5-D650) و یک خانه است */
+						const ads = kids.filter( e => e.matches( '.tp-ad-slot' ) ).length;
+						return { cols, ads, cards: kids.filter( e => e.matches( '.tp-news-card' ) ).length, empty: kids.filter( e => ! e.matches( '.tp-ad-slot' ) && ( ! e.matches( '.tp-news-card' ) || ! e.querySelector( 'a[href]' ) ) ).length,
+							more: !! document.querySelector( '.tp-news-pages a[rel="next"], .tp-news-pages a[href*="/page/"], a[data-tp-load-more]' ) };
+					} );
+					if ( ! g ) { continue; }
+					const tag = `${ w } ${ L || '/fa' } ${ P.k }`;
+					t( `${ tag }: بی کاشی خالی یا جانگهدار دیدنی برای عموم`, 0 === g.empty, `خالی ${ g.empty }` );
+					/* با جایگاه تبلیغ چیدن ردیف کار موتور مکان‌یابی است (بند ۳، گیت ads-infeed-gate.js)؛ این‌جا فقط شبکۀ بی جایگاه */
+					if ( g.more && 0 === g.ads ) { t( `${ tag }: صفحۀ غیرآخر بی ردیف ناقص (${ g.cards } کاشی + ${ g.ads } جایگاه در ${ g.cols } ستون)`, 0 === ( g.cards + g.ads ) % g.cols, `${ g.cards + g.ads } % ${ g.cols }` ); }
+				}
+				await ctx.close();
+			}
+		}
+	} finally {
+		await br.close();
+	}
+}
+async function paging() {
+	const MUT = process.argv.includes( '--mut' );
+	console.log( `\nدستۀ 56-الف بند ۱ — صفحه‌بندی پس از پالایش${ MUT ? ' (جهش: هستۀ پیش از رفع — باید قرمز شود)' : '' }\n` + '─'.repeat( 78 ) );
+	const fs = require( 'fs' ), cp = require( 'child_process' );
+	const live = require( 'path' ).join( ENV.wp, 'wp-content/plugins/topersia-render/includes/topersia-g-news.php' );
+	const keep = MUT ? fs.readFileSync( live ) : null;
+	try {
+		if ( MUT ) {
+			const ref = process.env.TP_MUT_REF || 'HEAD';
+			fs.writeFileSync( live, cp.execFileSync( 'git', [ 'show', ref + ':ToPersia Claud/workspace/plugin/topersia-render/includes/topersia-g-news.php' ], { cwd: ENV.root, maxBuffer: 1 << 26 } ) );
+		}
+		const p0 = pass, f0 = fail;
+		await pagingServer();
+		await pagingBrowser();
+		if ( MUT ) {
+			const red = fail - f0;
+			console.log( `  جهش: ${ red } ادعا قرمز شد (${ pass - p0 } سبز)` );
+			pass = p0; fail = f0;
+			t( 'جهش: هستۀ پیش از رفع دست‌کم یک ادعای صفحه‌بندی را قرمز می‌کند', red > 0, String( red ) );
+		}
+	} finally {
+		if ( keep ) { fs.writeFileSync( live, keep ); }
+	}
+}
+
 const http = require( 'http' );
 const zlib = require( 'zlib' );
 const get = ( path, headers ) => new Promise( ( ok, no ) => {
@@ -972,6 +1063,7 @@ async function shots() {
 	if ( want( 'list' ) ) { await list(); }
 	if ( want( 'more' ) ) { await more(); }
 	if ( want( 'cls' ) ) { await cls(); }
+	if ( want( 'paging' ) ) { await paging(); }   /* دستۀ 56-الف بند ۱ */
 	if ( ONLY.includes( 'perf' ) ) { await perf(); }   /* فقط با درخواست صریح — سنجش است، نه گیت */
 	console.log( '\n' + '─'.repeat( 78 ) + '\nدستۀ 55: ' + pass + ' گذشت · ' + fail + ' افتاد · ' + Math.round( ( Date.now() - t0 ) / 1000 ) + ' ثانیه' );
 	console.log( 'END w55-local' );
