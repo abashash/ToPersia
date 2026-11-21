@@ -285,9 +285,9 @@ $w54_gate_css = function ( $css ) {
 };
 /* نمای فهرست: ردیف تمام‌عرض، ولی خود آگهی ۴:۳ در میانه با پهنای توکنی — وگرنه ۴:۳ تمام‌عرض از صفحه‌نمایش بلندتر است (عکس «پس» 56-الف) */
 $w54_rows_cap = function ( $css ) {
-	return false !== strpos( $css, '.tp-news-grid--rows:has(> .tp-ad-slot--hub-infeed){grid-auto-flow:row dense}' ) && false !== strpos( $css, '.tp-news-grid--rows > .tp-ad-slot--hub-infeed > *{inline-size:min(100%,calc(var(--tp-list-thumb-w) * 3));margin-inline:auto}' );
+	return false !== strpos( $css, '.tp-ad--hub-infeed,.tp-ad--hub-infeed .tp-ad__a{block-size:100%;inline-size:100%}' ) && false !== strpos( $css, '.tp-news-grid--rows:has(> .tp-ad-slot--hub-infeed){grid-auto-flow:row dense}' ) && false !== strpos( $css, '.tp-news-grid--rows > .tp-ad-slot--hub-infeed > *{inline-size:min(100%,calc(var(--tp-list-thumb-w) * 3));margin-inline:auto}.tp-news-grid--rows > .tp-ad-slot--hub-infeed .tp-ad__a{block-size:auto}' );
 };
-tp441_mut( 'P5-D641: نمای فهرست ← آگهی در ردیف تمام‌عرض با پهنای سقف‌دار از --tp-list-thumb-w، بی خانۀ خالی پیش از آن (dense) — جهش: بی سقف', $w54_rows_cap, $w54_css,
+tp441_mut( 'P5-D641: نمای فهرست ← آگهی در ردیف تمام‌عرض با پهنای سقف‌دار از --tp-list-thumb-w، بی خانۀ خالی پیش از آن (dense)؛ در شبکه پهنا از خانه، نه از نسبت و ارتفاع ردیف (سرریز ۷۶۸) — جهش: بی سقف', $w54_rows_cap, $w54_css,
 	str_replace( '.tp-news-grid--rows > .tp-ad-slot--hub-infeed > *{inline-size:min(100%,calc(var(--tp-list-thumb-w) * 3));margin-inline:auto}', '', $w54_css ) );
 tp441_mut( 'بند ۷: جایگاه بسته تا tp-ads.js بازش کند (جز «زیر نوار ابزار هاب» و کارت میان‌فهرستی که جای ثابت P5-D641 دارد)؛ در نمای فهرست یک ردیف تمام‌عرض — جهش: جایگاه از آغاز باز', $w54_gate_css, $w54_css,
 	str_replace( '.tp-ad-slot:not(.tp-ad-on):not(.tp-ad-slot--hub-top):not(.tp-ad-slot--hub-infeed){display:none}', '', $w54_css ) );

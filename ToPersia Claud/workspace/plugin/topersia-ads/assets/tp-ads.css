@@ -9,7 +9,7 @@
 /* P5-D641: کارت میان‌فهرستی جای ثابت دارد (بی دروازۀ صفحه‌نمایش)؛ hidden = خانه‌ای که قاعده نمی‌دهد (tp-ads.js) */
 .tp-ad-slot[hidden]{display:none}
 /* نمای فهرست (P5-D641): کارت میان فهرست یک ردیف تمام‌عرض */
-.tp-news-grid--rows:has(> .tp-ad-slot--hub-infeed){grid-auto-flow:row dense}.tp-news-grid--rows > .tp-ad-slot--hub-infeed{grid-column:1 / -1}.tp-news-grid--rows > .tp-ad-slot--hub-infeed > *{inline-size:min(100%,calc(var(--tp-list-thumb-w) * 3));margin-inline:auto}
+.tp-news-grid--rows:has(> .tp-ad-slot--hub-infeed){grid-auto-flow:row dense}.tp-news-grid--rows > .tp-ad-slot--hub-infeed{grid-column:1 / -1}.tp-news-grid--rows > .tp-ad-slot--hub-infeed > *{inline-size:min(100%,calc(var(--tp-list-thumb-w) * 3));margin-inline:auto}.tp-news-grid--rows > .tp-ad-slot--hub-infeed .tp-ad__a{block-size:auto}
 .tp-ad{position:relative;margin:0;max-inline-size:100%;--tp-ad-r:4 / 1}
 .tp-ad--r-wide{--tp-ad-r:4 / 1}
 .tp-ad--r-mwide{--tp-ad-r:2 / 1}
@@ -24,7 +24,7 @@ html body .tp-ad img.tp-ad__img,.tp-ad__img{display:block;inline-size:100%;max-i
 .tp-ad__tag{position:absolute;inset-block-start:8px;inset-inline-start:8px;padding:1px 8px;border:1px solid var(--tp-border);border-radius:999px;background:var(--tp-surface);color:var(--tp-text);font-size:12px;line-height:1.5;pointer-events:none}
 .tp-ad--demo .tp-ad__a{display:grid;place-items:center;border-style:dashed}
 .tp-ad__ph{color:var(--tp-tile-text);font-size:14px}
-.tp-ad--hub-infeed,.tp-ad--hub-infeed .tp-ad__a{block-size:100%}
+.tp-ad--hub-infeed,.tp-ad--hub-infeed .tp-ad__a{block-size:100%;inline-size:100%}
 
 /* دید دستگاه — یک HTML برای همه (کش)؛ موبایل نسبت خودش را دارد */
 @media (max-width:767px){
