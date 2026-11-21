@@ -40,6 +40,28 @@ if ( 'save' === $cmd ) {
 }
 $saved  = unserialize( file_get_contents( $file ) );
 $before = isset( $saved['posts'] ) ? $saved['posts'] : $saved;   /* پرونده‌های قدیمی فقط پست دارند */
+
+/* بازپایۀ یک حذف عمدی (دستۀ 55-ه، P5-D656): forget <file> <id> "<دلیل>" — فقط اگر پست واقعاً رفته باشد؛
+ * فقط همان ردیف و یال‌های همان شناسه برداشته می‌شوند و دلیل در docs/ops/CANARY-REBASES.md می‌ماند. */
+if ( 'forget' === $cmd ) {
+	$id     = (int) ( $argv[3] ?? 0 );
+	$reason = trim( (string) ( $argv[4] ?? '' ) );
+	if ( ! $id || '' === $reason || ! isset( $before[ $id ] ) || isset( $now[ $id ] ) ) {
+		fwrite( STDERR, "forget: شناسه باید در عکس باشد و در سایت نباشد، و دلیل لازم است\n" );
+		exit( 2 );
+	}
+	$sig = $before[ $id ];
+	unset( $before[ $id ] );
+	$kept = array();
+	foreach ( ( $saved['edges'] ?? array() ) as $k => $v ) {
+		$part = explode( '|', $k );
+		if ( (int) $part[1] !== $id && (int) $part[2] !== $id ) { $kept[ $k ] = $v; }
+	}
+	file_put_contents( $file, serialize( array( 'posts' => $before, 'edges' => $kept ) ) );
+	file_put_contents( dirname( __DIR__ ) . '/docs/ops/CANARY-REBASES.md', '- ' . gmdate( 'Y-m-d H:i' ) . " UTC · #{$id} ({$sig}) · {$reason}\n", FILE_APPEND );
+	echo "forgot {$id}\n";
+	exit( 0 );
+}
 $gone = array(); $changed = array();
 foreach ( $before as $id => $sig ) {
 	if ( ! isset( $now[ $id ] ) ) { $gone[] = $id . ' (' . explode( '|', $sig )[0] . ')'; }
