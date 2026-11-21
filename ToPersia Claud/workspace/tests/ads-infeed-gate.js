@@ -113,7 +113,12 @@ const loadCls = page => page.evaluate( () => new Promise( ok => {
 
 async function onePage( page, L, pre, pg, P, state ) {
 	const res = await page.goto( BASE + pre + pg.u, { waitUntil: 'load', timeout: 120000 * X } ).catch( () => null );
-	if ( ! res || 200 !== res.status() ) { return; }   /* این زبان این فهرست را ندارد — پوشش در گزارش حسابرسی */
+	/* ۴۰۴ در زبان دیگر یعنی این زبان این فهرست را ندارد (پوشش در گزارش حسابرسی)؛ هر چیز دیگر — مهلت، ۵۰۰، یا ۴۰۴ در fa — افتادن است، نه پرش بی‌صدا */
+	if ( ! res || 200 !== res.status() ) {
+		const code = res ? res.status() : 0;
+		if ( ! ( 404 === code && 'fa' !== L ) ) { t( `${ L } ${ pg.k }: بارگذاری ۲۰۰`, false, code ? `کد ${ code }` : 'مهلت' ); }
+		return;
+	}
 	const c = await loadCls( page );
 	t( `${ L } ${ pg.k }: CLS بارگذاری < ۰٫۱`, c >= 0 && c < 0.1, Number( c ).toFixed( 3 ) );
 	for ( const [ w, h ] of ( QUICK ? [ WIDTHS[0] ] : WIDTHS ) ) {
