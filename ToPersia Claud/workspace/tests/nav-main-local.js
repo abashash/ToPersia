@@ -4,7 +4,8 @@
  *   TP_TIMEOUT_X=2 node tests/nav-main-local.js
  *
  * ۱) دادۀ واقعی: در هیچ منوی سربرگ (رومیزی، رونوشت چسبان، موبایل) پیوند «#» یا <a> بی href که دکمه نیست نیست؛
- *    fa همان آیتم‌های دارای مقصد #19 به همان ترتیب و هر نشانی ۲۰۰؛ en/ar بی حرف ویژۀ فارسی (en بی هیچ حرف عربی).
+ *    منوی رومیزی هر زبان = درخت منوی همان زبان (سطح اول و زیرمنو، دستۀ 55-ه)، سقف ۶ · ۸ · ۱۵۰، هر نشانی ۲۰۰؛ دکمه‌ها
+ *    دقیقاً والدهای دارای زیرمنو؛ en/ar بی حرف ویژۀ فارسی (en بی هیچ حرف عربی).
  *    تعویض‌گر زبان WPML (li.wpml-ls-item) از سنجش نشت بیرون است — نام هر زبان به خط خودش درست است.
  * ۲) دکمه: زیر «فرهنگ و مردم» (بی‌مقصد) در هر زبان یک آیتم فرزند موقت (`_tp_test_nav`) ← والد <a role="button"
  *    tabindex="0" aria-expanded aria-haspopup> بی href با عنوان همان زبان (پس منوی ترجمۀ WPML است که دیده می‌شود)؛
@@ -35,6 +36,7 @@ const php = args => execFileSync( ENV.php, args, { cwd: ENV.workspace, encoding:
 const wp  = code => php( [ ENV.wpCli, '--path=' + ENV.wp, '--url=' + ENV.base, 'eval', code ] ).trim().split( '\n' ).pop();
 
 let fails = 0, passes = 0;
+let TREES = {};   // درخت مورد انتظار هر زبان (TREE_PHP)
 const ok = ( cond, msg ) => {
 	if ( cond ) {
 		passes++;
@@ -58,8 +60,30 @@ foreach ( wp_get_nav_menu_items( 19 ) as $i ) {
 }
 echo wp_json_encode( $o, JSON_UNESCAPED_UNICODE );`;
 const CLEAN_PHP = `$n = 0; foreach ( get_posts( array( "post_type" => "nav_menu_item", "post_status" => "any", "numberposts" => -1, "suppress_filters" => true, "meta_key" => "_tp_test_nav", "fields" => "ids" ) ) as $id ) { wp_delete_post( $id, true ); $n++; } echo $n;`;
-/* آیتم‌های منتشرشدۀ دارای مقصد #19 (fa)، به ترتیب */
-const FA_LINKS_PHP = `$o = array(); foreach ( wp_get_nav_menu_items( 19 ) as $i ) { if ( "publish" === $i->post_status && ! in_array( trim( $i->url ), array( "", "#" ), true ) ) { $o[] = array( $i->post_title, $i->url ); } } echo wp_json_encode( $o, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );`;
+/* دستۀ 55-ه بند ۵ — درخت مورد انتظار هر زبان از منوی همان زبان (#19 و ترجمۀ هم‌trid WPML)، با همان قاعدۀ رندر
+ * (includes/topersia-g-nav.php): آیتم «#»/تهی بی فرزند دیدنی نمی‌آید؛ والد «#» با فرزند دیدنی دکمه (نشانی null).
+ * [ [ عنوان، نشانی|null، [ [ عنوان، نشانی ] … ] ] … ] به ترتیب منو؛ زبان پیش از خواندن عوض می‌شود (adjust id WPML). */
+const TREE_PHP = `global $wpdb; $o = array();
+$tt   = (int) $wpdb->get_var( "SELECT term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE term_id = 19 AND taxonomy = 'nav_menu'" );
+$trid = (int) apply_filters( "wpml_element_trid", null, $tt, "tax_nav_menu" );
+foreach ( (array) apply_filters( "wpml_get_element_translations", null, $trid, "tax_nav_menu" ) as $l => $r ) {
+	do_action( "wpml_switch_language", $l );
+	$mid  = (int) $wpdb->get_var( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id = %d", $r->element_id ) );
+	$all  = array_values( array_filter( (array) wp_get_nav_menu_items( $mid ), function ( $i ) { return "publish" === $i->post_status; } ) );
+	$link = function ( $i ) { $u = trim( (string) $i->url ); return "" === $u || "#" === $u ? null : $u; };
+	$tree = array();
+	foreach ( $all as $i ) {
+		if ( (int) $i->menu_item_parent ) { continue; }
+		$kids = array();
+		foreach ( $all as $k ) {
+			if ( (int) $k->menu_item_parent === (int) $i->ID && null !== $link( $k ) ) { $kids[] = array( $k->title, $link( $k ) ); }
+		}
+		if ( null !== $link( $i ) || $kids ) { $tree[] = array( $i->title, $link( $i ), $kids ); }
+	}
+	$o[ $l ] = $tree;
+}
+echo wp_json_encode( $o, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );`;
+const TOP_MAX = 6, CHILD_MAX = 8, LINK_MAX = 150;   // همان TP_MM_* در scripts/tp-main-menu.php
 /* زبان پیش از نوشتن عوض می‌شود: WPML شناسۀ منو را به ترجمۀ زبان جاری برمی‌گرداند (wp_get_nav_menu_object) — بی آن
  * فرزند en/ar در #19 می‌نشیند. منوی واقعی آیتم از جدول خوانده و برگردانده می‌شود تا آزمون همان را بسنجد. */
 const addChild = ( lang, par ) => JSON.parse( wp( `global $wpdb; do_action( "wpml_switch_language", ${ JSON.stringify( lang ) } );
@@ -91,6 +115,19 @@ function probeNav() {
 		} );
 	} );
 	return out;
+}
+
+/* درخت منوی رومیزی (نخستین ul.wd-nav-main سربرگ؛ رونوشت چسبان پس از آن می‌آید): سطح اول و زیرمنوی هر کدام، بی تعویض‌گر زبان */
+function probeTree() {
+	const ul = document.querySelector( 'nav.wd-header-main-nav ul.wd-nav-main' );
+	if ( ! ul ) {
+		return null;
+	}
+	const txt = a => ( a.querySelector( '.nav-link-text' ) || a ).textContent.trim();
+	return [ ...ul.querySelectorAll( ':scope > li.menu-item' ) ].filter( li => ! li.classList.contains( 'wpml-ls-item' ) ).map( li => {
+		const a = li.querySelector( ':scope > a' );
+		return [ txt( a ), a.getAttribute( 'href' ), [ ...li.querySelectorAll( ':scope ul li.menu-item > a' ) ].map( k => [ txt( k ), k.getAttribute( 'href' ) ] ) ];
+	} );
 }
 
 /* نخستین نمونۀ دیدنی درون پنجره را نشان می‌زند تا رونوشت پنهان چسبان برگزیده نشود */
@@ -137,17 +174,16 @@ async function run( browserType, name, widths, withButton, parents ) {
 				if ( 'fa' !== lang ) {
 					ok( leakFree( lang, items ), `${ name } · ${ lang } · ${ w }: بی نشت فارسی در عنوان منو [${ [ ...new Set( items.filter( i => ! i.ls ).map( i => i.text ) ) ].join( '، ' ) || '—' }]` );
 				}
-				if ( ! withButton ) {
-					continue;
-				}
-				const want = parents[ lang ];
-				const btns = items.filter( i => 'button' === i.role );
-				ok( btns.length > 0 && btns.every( b => null === b.href && '0' === b.tab && 'false' === b.exp && 'true' === b.pop && b.text === want.title ),
-					`${ name } · ${ lang } · ${ w }: والد «${ want.title }» دکمه است — ${ btns.length } نمونه، بی href، tabindex 0، aria-expanded false، aria-haspopup true، عنوان همان زبان` + ( btns.length ? ' [' + [ ...new Set( btns.map( b => b.text ) ) ].join( '، ' ) + ']' : '' ) );
+				/* دستۀ 55-ه: دکمه‌ها دقیقاً والدهای بی‌مقصدی که به همین زبان فرزند دیدنی دارند (و با فرزند موقت، والد آن) */
+				const want  = [ ...new Set( ( TREES[ lang ] || [] ).filter( t => null === t[1] && t[2].length ).map( t => t[0] ).concat( withButton ? [ parents[ lang ].title ] : [] ) ) ].sort();
+				const btns  = items.filter( i => 'button' === i.role );
+				const texts = [ ...new Set( btns.map( b => b.text ) ) ].sort();
+				ok( btns.every( b => null === b.href && '0' === b.tab && 'false' === b.exp && 'true' === b.pop ) && JSON.stringify( texts ) === JSON.stringify( want ),
+					`${ name } · ${ withButton ? 'با فرزند موقت' : 'دادۀ واقعی' } · ${ lang } · ${ w }: دکمه‌ها [${ texts.join( '، ' ) || '—' }] = والدهای دارای زیرمنو [${ want.join( '، ' ) || '—' }]؛ ${ btns.length } نمونه، بی href، tabindex 0، aria-expanded false، aria-haspopup true` );
 			}
 		}
 		if ( withButton ) {
-			await behaviour( page, go, name, parents );
+			await behaviour( page, go, name );
 		}
 	} catch ( e ) {
 		fails++;
@@ -158,14 +194,14 @@ async function run( browserType, name, widths, withButton, parents ) {
 }
 
 /* رفتار دکمه — fa، رومیزی و موبایل */
-async function behaviour( page, go, name, parents ) {
-	const title = parents.fa.title;
+async function behaviour( page, go, name ) {
 	await go( ENV.base + '/', 1440 );
 	/* رونوشت چسبان وودمارت پس از بارگذاری ساخته می‌شود و نشان را هم رونوشت می‌کند؛ پس پیش از هر کنش دوباره نشان زده می‌شود */
 	const BTN_SEL = 'nav.wd-header-main-nav ul.wd-nav-main > li > a[data-tp-nav-btn]';
 	const tag     = () => page.evaluate( markVisible, [ BTN_SEL, 'btn' ] );
 	const found   = await tag();
-	ok( found, `${ name } · fa · ۱۴۴۰: دکمۀ «${ title }» در سربرگ دیدنی است` );
+	const title   = found ? await page.evaluate( () => { const b = document.querySelector( '[data-tp-t="btn"]' ); return ( b.querySelector( '.nav-link-text' ) || b ).textContent.trim(); } ) : '';
+	ok( found, `${ name } · fa · ۱۴۴۰: نخستین دکمۀ والد «${ title }» در سربرگ دیدنی است` );
 	if ( ! found ) {
 		return;
 	}
@@ -209,46 +245,73 @@ async function behaviour( page, go, name, parents ) {
 	await page.locator( '[data-tp-t="burger"]' ).first().click();
 	await page.waitForTimeout( 900 );
 	const msel = 'ul.wd-nav-mobile > li > a[data-tp-nav-btn]';
+	/* چیدمان منوی موبایل از سازندۀ سربرگ: dropdown (li.opener-page، بستن با کلیک دوباره) یا drilldown (زیرمنو جای سطح اول، بستن با «بازگشت») */
 	const mst  = () => page.evaluate( s => {
 		const b = document.querySelector( s );
-		return b ? { exp: b.getAttribute( 'aria-expanded' ), open: b.parentElement.classList.contains( 'opener-page' ), opener: !! b.parentElement.querySelector( ':scope > .wd-nav-opener' ) } : null;
+		if ( ! b ) {
+			return null;
+		}
+		const li = b.parentElement, sub = li.querySelector( ':scope > .wd-sub-menu' );
+		const vis = e => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && 'visible' === getComputedStyle( e ).visibility; };
+		const drill = !! b.closest( 'ul.wd-layout-drilldown' );
+		return { exp: b.getAttribute( 'aria-expanded' ), drill, opener: !! li.querySelector( ':scope > .wd-nav-opener' ),
+			open: drill ? !! ( sub && sub.classList.contains( 'wd-drilldown-show' ) && vis( sub ) ) : li.classList.contains( 'opener-page' ),
+			btnVis: vis( b ) };
 	}, msel );
 	await page.locator( msel ).first().click();
 	await page.waitForTimeout( 700 );
 	const m1 = await mst();
-	await page.locator( msel ).first().click();
+	if ( m1 && m1.drill ) {
+		await page.evaluate( s => { const a = document.querySelector( s ).parentElement.querySelector( ':scope > .wd-sub-menu > .wd-drilldown-back > a' ); if ( a ) { a.setAttribute( 'data-tp-t', 'mback' ); } }, msel );
+		await page.locator( '[data-tp-t="mback"]' ).click();
+	} else {
+		await page.locator( msel ).first().click();
+	}
 	await page.waitForTimeout( 700 );
 	const m0 = await mst();
-	ok( m1 && m1.opener && m1.open && 'true' === m1.exp && m0 && ! m0.open && 'false' === m0.exp,
-		`${ name } · fa · ۳۹۰ · منوی موبایل: پیکان وودمارت ${ m1 && m1.opener }؛ کلیک ← opener-page ${ m1 && m1.open } aria ${ m1 && m1.exp }؛ کلیک دوباره ← ${ m0 && m0.open } aria ${ m0 && m0.exp }` );
+	ok( m1 && m1.opener && m1.open && 'true' === m1.exp && m0 && ! m0.open && 'false' === m0.exp && m0.btnVis,
+		`${ name } · fa · ۳۹۰ · منوی موبایل (${ m1 && m1.drill ? 'drilldown' : 'dropdown' }): پیکان وودمارت ${ m1 && m1.opener }؛ کلیک ← باز ${ m1 && m1.open } aria ${ m1 && m1.exp }؛ ${ m1 && m1.drill ? 'بازگشت' : 'کلیک دوباره' } ← ${ m0 && m0.open } aria ${ m0 && m0.exp }، دکمه دیدنی ${ m0 && m0.btnVis }` );
 }
 
-/* fa: منوی رومیزی = آیتم‌های دارای مقصد #19 به همان ترتیب؛ هر نشانی ۲۰۰ */
-async function faDestinations( faLinks ) {
+/* دستۀ 55-ه بند ۵: منوی رومیزی هر زبان = درخت منوی همان زبان (سطح اول و زیرمنو، عنوان و نشانی، به همان ترتیب)؛ سقف
+ * سطح اول ≤ TOP_MAX، هر زیرمنو ≤ CHILD_MAX، کل ≤ LINK_MAX؛ fa ساختار سطح اول بند ۴ را دارد؛ هر نشانی ۲۰۰ */
+async function structure() {
 	const { browser, ctx, page, go } = await session( chromium );
+	const urls = new Map();
 	try {
-		await go( ENV.base + '/', 1440 );
-		const main = ( await page.evaluate( probeNav ) ).filter( i => 'main' === i.kind && i.top && ! i.ls );
-		const seen = [ ...new Map( main.map( i => [ i.href, i.text ] ) ).entries() ].map( ( [ h, t ] ) => [ t, h ] );
-		ok( faLinks.length > 0 && JSON.stringify( seen ) === JSON.stringify( faLinks ), `fa · ۱۴۴۰: منوی رومیزی [${ seen.map( s => s[0] ).join( '، ' ) }] = آیتم‌های دارای مقصد #19 [${ faLinks.map( s => s[0] ).join( '، ' ) }]` );
-		for ( const [ t, u ] of faLinks ) {
+		for ( const [ lang, p ] of Object.entries( LANGS ) ) {
+			const want = TREES[ lang ] || [];
+			await go( ENV.base + p, 1440 );
+			const seen = await page.evaluate( probeTree );
+			const kids = want.map( t => t[2].length );
+			const all  = want.reduce( ( n, t ) => n + 1 + t[2].length, 0 );
+			ok( !! seen && JSON.stringify( seen ) === JSON.stringify( want ),
+				`${ lang } · ۱۴۴۰: منوی رومیزی = درخت منوی ${ lang } — ${ want.map( t => t[0] + ( t[2].length ? ' (' + t[2].length + ')' : '' ) ).join( '، ' ) || '—' }` + ( seen && JSON.stringify( seen ) !== JSON.stringify( want ) ? ' ← دیده: ' + JSON.stringify( seen ) : '' ) );
+			ok( want.length <= TOP_MAX && ( ! kids.length || Math.max( ...kids ) <= CHILD_MAX ) && all <= LINK_MAX,
+				`${ lang }: سقف — سطح اول ${ want.length } (≤ ${ TOP_MAX })، بیشینۀ زیرمنو ${ kids.length ? Math.max( ...kids ) : 0 } (≤ ${ CHILD_MAX })، کل ${ all } (≤ ${ LINK_MAX })` );
+			want.forEach( t => [ [ t[0], t[1] ], ...t[2] ].forEach( ( [ n, u ] ) => u && urls.set( u, lang + ' «' + n + '»' ) ) );
+		}
+		const top = ( TREES.fa || [] ).map( t => t[0] );
+		ok( [ 'مقصدها', 'تجربه‌ها', 'فرهنگ و مردم', 'راهنمای سفر', 'مجله' ].every( t => top.includes( t ) ) && ( TREES.fa || [] ).filter( t => 'مجله' === t[0] ).every( t => /\/news\/$/.test( t[1] || '' ) ),
+			`fa: سطح اول بند ۴ [${ top.join( '، ' ) }] — «مجله» ← هاب اخبار` );
+		for ( const [ u, who ] of urls ) {
 			const r = await ctx.request.get( u, { timeout: 180000 * X } );
-			ok( 200 === r.status(), `fa · «${ t }» ${ u } ← ${ r.status() }` );
+			ok( 200 === r.status(), `${ who } ${ u } ← ${ r.status() }` );
 		}
 	} catch ( e ) {
 		fails++;
-		console.log( '  ❌ خطا (مقصدهای fa): ' + ( e && e.message ? e.message.split( '\n' )[0] : e ) );
+		console.log( '  ❌ خطا (ساختار منو): ' + ( e && e.message ? e.message.split( '\n' )[0] : e ) );
 	} finally {
 		await browser.close();
 	}
 }
 
 ( async () => {
-	let parents, faLinks;
+	let parents;
 	try {
 		wp( CLEAN_PHP );
 		parents = JSON.parse( wp( PARENTS_PHP ) );
-		faLinks = JSON.parse( wp( FA_LINKS_PHP ) );
+		TREES   = JSON.parse( wp( TREE_PHP ) );
 	} catch ( e ) {
 		console.error( 'محیط ناقص: ' + e.message );
 		process.exit( 2 );
@@ -259,7 +322,7 @@ async function faDestinations( faLinks ) {
 	}
 	console.log( 'START nav-main ' + new Date().toISOString() );
 
-	await faDestinations( faLinks );
+	await structure();
 	await run( chromium, 'کروم', [ 1440, 390 ], false, parents );
 	await run( firefox, 'فایرفاکس', [ 1440 ], false, parents );
 
