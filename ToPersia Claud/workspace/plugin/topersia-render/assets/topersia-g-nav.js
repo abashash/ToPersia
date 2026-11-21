@@ -4,6 +4,8 @@
  *   رومیزی، هاور (wd-event-hover)  نشانگر روی آیتم ← باز؛ Enter/فاصله زیرمنو را با wd-opened باز و بسته می‌کند.
  *   رومیزی، کلیک (wd-event-click)  دست‌گیرۀ خود وودمارت wd-opened را روی li می‌گذارد؛ Enter/فاصله همان کلیک است.
  *   موبایل                          بازکردن با پیکان وودمارت (.wd-nav-opener ← li.opener-page)؛ کلیک و Enter روی دکمه همان پیکان.
+ *   موبایل، drilldown (سازندۀ سربرگ) همان پیکان ← .wd-sub-menu.wd-drilldown-show؛ بستن با «بازگشت» وودمارت (.wd-drilldown-back).
+ *   هر تغییر کلاس درون منوی موبایل aria را هم‌گام می‌کند (MutationObserver) — «بازگشت» دکمۀ ما نیست.
  * Escape زیرمنو را می‌بندد و فوکوس را به دکمه برمی‌گرداند؛ فوکوس که از آیتم بیرون رفت، بازِ صفحه‌کلیدی بسته می‌شود.
  * گوش روی document — سربرگ چسبان وودمارت رونوشت همان منوست.
  */
@@ -22,12 +24,13 @@
 			li: li,
 			drop: li.querySelector( ':scope > .wd-dropdown' ),
 			opener: li.querySelector( ':scope > .wd-nav-opener' ),
+			back: li.querySelector( ':scope > .wd-sub-menu > .wd-drilldown-back > a' ),
 		};
 	}
 
 	function isOpen( p ) {
 		if ( p.opener ) {
-			return p.li.classList.contains( 'opener-page' );
+			return p.li.classList.contains( 'opener-page' ) || !! p.li.querySelector( ':scope > .wd-sub-menu.wd-drilldown-show' );
 		}
 		return p.li.classList.contains( 'wd-opened' ) || !! ( p.drop && p.drop.classList.contains( 'wd-opened' ) ) ||
 			( p.li.classList.contains( 'wd-event-hover' ) && p.li.matches( ':hover' ) );
@@ -104,7 +107,9 @@
 		if ( ! p || ! isOpen( p ) ) {
 			return;
 		}
-		if ( p.opener && p.li.classList.contains( 'opener-page' ) ) {
+		if ( p.back && p.li.querySelector( ':scope > .wd-sub-menu.wd-drilldown-show' ) ) {
+			p.back.click();
+		} else if ( p.opener && p.li.classList.contains( 'opener-page' ) ) {
 			p.opener.click();
 		} else if ( p.li.classList.contains( 'wd-opened' ) ) {
 			p.btn.click();
@@ -137,4 +142,29 @@
 	}
 	document.addEventListener( 'mouseover', onPointer );
 	document.addEventListener( 'mouseout', onPointer );
+
+	var pending = false;
+	function onMutate() {
+		if ( pending ) {
+			return;
+		}
+		pending = true;
+		requestAnimationFrame( function () {
+			pending = false;
+			syncAll();
+		} );
+	}
+	function watch() {
+		if ( 'function' !== typeof MutationObserver ) {
+			return;
+		}
+		document.querySelectorAll( 'ul.wd-nav-mobile' ).forEach( function ( ul ) {
+			new MutationObserver( onMutate ).observe( ul, { subtree: true, attributes: true, attributeFilter: [ 'class' ] } );
+		} );
+	}
+	if ( 'loading' === document.readyState ) {
+		document.addEventListener( 'DOMContentLoaded', watch );
+	} else {
+		watch();
+	}
 }() );

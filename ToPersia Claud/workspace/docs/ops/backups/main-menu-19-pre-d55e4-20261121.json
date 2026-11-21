@@ -1,0 +1,61 @@
+{
+    "made": "2026-11-21T05:24:20+00:00",
+    "menu": {
+        "term_id": 19,
+        "tt_id": 19,
+        "name": "منوی اصلی",
+        "trid": 3203,
+        "lang": "fa"
+    },
+    "items": [
+        {
+            "ID": 6206,
+            "title": "خانه",
+            "url": "",
+            "status": "publish",
+            "order": 1,
+            "parent": 0,
+            "type": "post_type",
+            "meta": {
+                "_menu_item_type": "post_type",
+                "_menu_item_menu_item_parent": "0",
+                "_menu_item_object_id": "1708",
+                "_menu_item_object": "page",
+                "_menu_item_target": "",
+                "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                "_menu_item_xfn": "",
+                "_menu_item_url": "",
+                "_menu_item_design": "default",
+                "_menu_item_width": "",
+                "_menu_item_height": "",
+                "_menu_item_padding": "",
+                "_menu_item_icon": "",
+                "_menu_item_event": "hover",
+                "_menu_item_label": "",
+                "_menu_item_label-text": "",
+                "_menu_item_block": "",
+                "_menu_item_dropdown-ajax": "",
+                "_menu_item_colorscheme": "",
+                "_menu_item_opanchor": "",
+                "_menu_item_image-type": "image",
+                "_menu_item_style_aside": "default",
+                "_menu_item_scroll": "no"
+            }
+        }
+    ],
+    "translations": {
+        "ar": {
+            "term_id": 77,
+            "name": "القائمة الرئيسية",
+            "items": []
+        },
+        "en": {
+            "term_id": 78,
+            "name": "Main menu",
+            "items": []
+        }
+    },
+    "locations": {
+        "main-menu": 19
+    }
+}

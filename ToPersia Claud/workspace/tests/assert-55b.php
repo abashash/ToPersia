@@ -347,11 +347,12 @@ tp441_mut( 'بند ۴: جدول منوی اصلی — هر عنوان en (لات
 $w55b_mm = $w55b_read( 'scripts/tp-main-menu.php' );
 tp441_mut( 'بند ۴: tp-main-menu فقط topersia.local؛ apply نخست رونوشت را می‌نویسد و بازمی‌خواند، سپس هر نوشتن؛ نشانی دستی غیر «#» بازنویسی نمی‌شود — جهش: بازنویسی هر نشانی',
 	function ( $s ) {
-		$ap = (string) strstr( (string) strstr( $s, "if ( 'apply' === \$tp_mode ) {" ), "if ( 'restore' === \$tp_mode ) {", true );
+		$ap = (string) strstr( (string) strstr( $s, "if ( 'apply' === \$tp_mode || 'build' === \$tp_mode ) {" ), "if ( 'restore' === \$tp_mode ) {", true );
 		$bk = strpos( $ap, 'file_get_contents( $tp_file ) !== $tp_snap' );
 		$w1 = strpos( $ap, 'update_post_meta(' );
 		return false !== strpos( $s, "if ( 'topersia.local' !== (string) wp_parse_url( home_url(), PHP_URL_HOST ) ) {" )
 			&& false !== $bk && false !== $w1 && $bk < $w1 && $bk < (int) strpos( $ap, 'wp_create_nav_menu(' )
+			&& $bk < (int) strpos( $ap, 'wp_update_nav_menu_item(' ) && $bk < (int) strpos( $ap, 'wp_delete_post(' )
 			&& false !== strpos( $ap, "if ( '#' !== \$want && in_array( trim( \$it['url'] ), array( '', '#' ), true ) ) {" );
 	}, $w55b_mm, str_replace( "if ( '#' !== \$want && in_array( trim( \$it['url'] ), array( '', '#' ), true ) ) {", "if ( '#' !== \$want ) {", $w55b_mm ) );
 tp441_mut( 'بند ۴: مقصد آیتم هاب‌دار فقط از topersia_g_ft_menu_url (هاب با محتوای واقعی همان زبان)، وگرنه «#»؛ هر آیتم ترجمه هم‌trid اصل — جهش: نشانی هاب بی سنجش محتوا',
@@ -360,3 +361,39 @@ tp441_mut( 'بند ۴: مقصد آیتم هاب‌دار فقط از topersia_g_
 			&& false !== strpos( $s, "return '' === \$url ? '#' : \$url;" )
 			&& false !== strpos( $s, "'element_type' => 'post_nav_menu_item', 'trid' => \$trid, 'language_code' => \$l, 'source_language_code' => \$tp_fa" );
 	}, $w55b_mm, str_replace( '$url = (string) topersia_g_ft_menu_url( $hub[0], $hub[1] );', '$url = (string) home_url( "/{$hub[1]}/" );', $w55b_mm ) );
+
+/* دستۀ 55-ه بند ۴–۵ (P5-D651): ساختار منوی اصلی — سطح اول ثابت، زیرمنو فقط هاب واقعی فارسی با سقف، check ساختار و سقف را
+ * در هر منو می‌سنجد؛ رفتار روی وردپرس واقعی در tests/nav-main-local.js (درخت هر زبان = منوی رومیزی، دکمه‌ها، ۲۰۰) */
+tp441_mut( 'دستۀ 55-ه: سطح اول دقیقاً مقصدها · تجربه‌ها · فرهنگ و مردم · راهنمای سفر · مجله (← هاب اخبار)؛ سقف ۶ · ۸ · ۱۵۰ — جهش: سقف زیرمنو ۹',
+	function ( $s ) {
+		return 1 === preg_match( "/const TP_MM_TOP = array\(\n\tarray\( 'مقصدها', null, array\( 'dest' \), true \),\n\tarray\( 'تجربه‌ها', null, array\( 'exp', 'events', 'seasons' \), false \),\n\tarray\( 'فرهنگ و مردم', null, array\( 'culture', 'food' \), false \),\n\tarray\( 'راهنمای سفر', null, array\( 'guide' \), false \),\n\tarray\( 'مجله', array\( 'type', 'tpc_news' \), array\(\), false \),\n\);/u", $s )
+			&& false !== strpos( $s, "const TP_MM_TOP_MAX   = 6;\nconst TP_MM_CHILD_MAX = 8;\nconst TP_MM_LINK_MAX  = 150;" );
+	}, $w55b_mm, str_replace( 'const TP_MM_CHILD_MAX = 8;', 'const TP_MM_CHILD_MAX = 9;', $w55b_mm ) );
+tp441_mut( 'دستۀ 55-ه: زیرمنو فقط سطری که topersia_g_ft_menu_url به فارسی برایش نشانی دارد (یا واژۀ تجربه با محتوای واقعی)، بریده به TP_MM_CHILD_MAX — جهش: بی سنجش هاب',
+	function ( $s ) {
+		$tr = (string) strstr( (string) strstr( $s, 'function tp_mm_tree( $fa ) {' ), 'function tp_mm_target_url(', true );
+		return false !== strpos( $tr, "if ( '' !== (string) topersia_g_ft_menu_url( \$r['kind'], \$r['key'], \$r['min'] ) ) {" )
+			&& false !== strpos( $tr, 'array_slice( $kids, 0, TP_MM_CHILD_MAX )' )
+			&& false !== strpos( $s, 'topersia_g_ft_real_count( topersia_g_tag_items( $t->term_id ) ) >= 1' );
+	}, $w55b_mm, str_replace( "if ( '' !== (string) topersia_g_ft_menu_url( \$r['kind'], \$r['key'], \$r['min'] ) ) {", 'if ( true ) {', $w55b_mm ) );
+tp441_mut( 'دستۀ 55-ه: check درخت آیتم‌های build را با درخت هدف و سقف سطح اول · زیرمنو · کل را در fa و هر منوی ترجمه می‌سنجد — جهش: بی سنجش سقف',
+	function ( $s ) {
+		$pr = (string) strstr( (string) strstr( $s, 'function tp_mm_problems(' ), 'function tp_mm_print(', true );
+		return false !== strpos( $pr, "if ( \$have !== \$want ) {" ) && false !== strpos( $pr, 'foreach ( tp_mm_tree( $fa ) as $top ) {' )
+			&& false !== strpos( $pr, 'if ( $top > TP_MM_TOP_MAX || ( $kids && max( $kids ) > TP_MM_CHILD_MAX ) || count( $list ) > TP_MM_LINK_MAX ) {' );
+	}, $w55b_mm, str_replace( 'if ( $top > TP_MM_TOP_MAX || ( $kids && max( $kids ) > TP_MM_CHILD_MAX ) || count( $list ) > TP_MM_LINK_MAX ) {', 'if ( false ) {', $w55b_mm ) );
+tp441_mut( 'دستۀ 55-ه: آیتم ترجمه پس از تعویض زبان به همان زبان نوشته می‌شود و عضویتش در منوی همان زبان سنجیده می‌شود (در بافت fa در #19 می‌نشست) — جهش: بی تعویض زبان',
+	function ( $s ) {
+		return false !== strpos( $s, "do_action( 'wpml_switch_language', \$l );\n\t\tif ( empty( \$tp_st['tr'][ \$l ] ) ) {" )
+			&& false !== strpos( $s, "if ( array( (int) \$mid ) !== \$in ) {" );
+	}, $w55b_mm, str_replace( "do_action( 'wpml_switch_language', \$l );\n\t\tif ( empty(", "if ( empty(", $w55b_mm ) );
+/* دستۀ 55-ه بند ۵: چیدمان drilldown منوی موبایل (سازندۀ سربرگ) — زیرمنو با wd-drilldown-show باز است، Escape «بازگشت» وودمارت را
+ * می‌زند و هر تغییر کلاس درون ul.wd-nav-mobile aria-expanded را هم‌گام می‌کند؛ رفتار در tests/nav-main-local.js */
+$w55b_njs = $w55b_read( $w55b_r . 'assets/topersia-g-nav.js' );
+tp441_mut( 'دستۀ 55-ه: aria-expanded دکمۀ موبایل در چیدمان drilldown هم حال واقعی را می‌گوید (wd-drilldown-show، «بازگشت» با Escape، MutationObserver) — جهش: بی شرط drilldown',
+	function ( $s ) {
+		return false !== strpos( $s, "return p.li.classList.contains( 'opener-page' ) || !! p.li.querySelector( ':scope > .wd-sub-menu.wd-drilldown-show' );" )
+			&& false !== strpos( $s, "back: li.querySelector( ':scope > .wd-sub-menu > .wd-drilldown-back > a' )," )
+			&& false !== strpos( $s, "if ( p.back && p.li.querySelector( ':scope > .wd-sub-menu.wd-drilldown-show' ) ) {\n\t\t\tp.back.click();" )
+			&& false !== strpos( $s, "new MutationObserver( onMutate ).observe( ul, { subtree: true, attributes: true, attributeFilter: [ 'class' ] } );" );
+	}, $w55b_njs, str_replace( " || !! p.li.querySelector( ':scope > .wd-sub-menu.wd-drilldown-show' );", ';', $w55b_njs ) );
