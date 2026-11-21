@@ -72,26 +72,27 @@ tp441_mut( 'P5-D646: tp-image-fix پیش از پاک‌کردن پشتیبان �
 			&& 1 === preg_match( "/3762 => '[^']*تصویرسازی/u", $s );
 	}, $w55d_if, str_replace( 'file_put_contents( $file', 'xx_removed( $file', $w55d_if ) );
 
-/* ── بند ۶ (P5-D649 الف): ستون پنجم «کاوش در ایران» با سرعنوان گروه نخستش «چهار فصل»؛ سه‌زبانه + ru؛ ترازبندی ردیف‌ها بی تغییر پهنا ── */
+/* ── بند ۶ (P5-D649 الف) ← دستۀ 55-ه (P5-D651): ستون پنجم «کاوش در ایران» و سرعنوان گروه‌ها برداشته شد؛ چهار ستون با یک سرتیتر؛
+ *    ترازبندی ردیف‌ها (یک گام برای هر پیوند) بی تغییر پهنا می‌ماند ── */
 $w55d_ft  = (string) @file_get_contents( dirname( __DIR__ ) . '/plugin/topersia-render/includes/topersia-g-footer.php' );
 $w55d_cat = (string) @file_get_contents( dirname( __DIR__ ) . '/scripts/i18n/topersia-render.php' );
 $w55d_css = (string) @file_get_contents( dirname( __DIR__ ) . '/plugin/topersia-render/assets/topersia-g-footer.css' );
-tp441_mut( 'P5-D649: عنوان ستون season «کاوش در ایران» (جدا از گروه) و گروه seasons «چهار فصل»؛ عنوان ستون از نخستین گروه نمی‌آید — جهش: ستون دوباره از عنوان گروه',
+tp441_mut( 'P5-D651: ستون پنجم «کاوش در ایران» نیست؛ عنوان هر ستون فقط از toggle (dest · exp · culture · about)، هرگز از عنوان گروه — جهش: ستون پنجم برگردد',
 	function ( $s ) {
-		return false !== strpos( $s, "'کاوش در ایران' => __( 'کاوش در ایران', 'topersia' )," )
-			&& false !== strpos( $s, "'seasons' => array( __( 'چهار فصل', 'topersia' ), 'season' )," )
-			&& false !== strpos( $s, "\$titles = array( 'season' => topersia_g_ft_toggle_titles()['کاوش در ایران'] );" )
-			&& false !== strpos( $s, "isset( \$titles[ \$def[1] ] ) ? \$titles[ \$def[1] ] : \$def[0]" );
-	}, $w55d_ft, str_replace( "isset( \$titles[ \$def[1] ] ) ? \$titles[ \$def[1] ] : \$def[0]", "\$def[0]", $w55d_ft ) );
-t( 'P5-D649: «کاوش در ایران» و «چهار فصل» در کاتالوگ با en لاتین، ar بی حرف ویژهٔ فارسی و ru سیریلیک',
-	1 === preg_match( "/'کاوش در ایران' => array\( 'en' => '[A-Za-z ]+', 'ar' => '[^']+', 'ru' => '[^']*\p{Cyrillic}[^']*' \)/u", $w55d_cat )
-	&& 1 === preg_match( "/'چهار فصل' => array\( 'en' => '[A-Za-z ]+', 'ar' => '[^']+', 'ru' => '[^']*\p{Cyrillic}[^']*' \)/u", $w55d_cat )
-	&& 0 === preg_match( '/[پچژگکی]/u', ( preg_match( "/'کاوش در ایران' => array\( 'en' => '[^']+', 'ar' => '([^']+)'/u", $w55d_cat, $w55d_m ) ? $w55d_m[1] : 'ی' ) ) );
-tp441_mut( 'P5-D649: ردیف‌های منو روی شبکهٔ عمودی — هر پیوند یک گام --tp-ft-menu-h، سرعنوان گروه دو گام، فقط ≥۱۰۲۴؛ هیچ پهنای ستونی در بلوک تازه نیست — جهش: بی گام ثابت',
+		return false === strpos( $s, "'کاوش در ایران'" ) && false === strpos( $s, "'season' )," ) && false === strpos( $s, "'legal' )," )
+			&& false !== strpos( $s, "\$titles = array( 'dest' => \$t['مقصدها'], 'exp' => \$t['تجربه‌ها'], 'culture' => \$t['فرهنگ و راهنما'], 'about' => \$t['توپرشیا'] );" )
+			&& false !== strpos( $s, "\$cols[ \$def[1] ] = array( \$titles[ \$def[1] ], array() );" );
+	}, $w55d_ft, str_replace( "'mag'     => array( __( 'مجله', 'topersia' ), 'culture' ),", "'mag'     => array( __( 'مجله', 'topersia' ), 'culture' ),\n\t\t\t'legal'   => array( __( 'کاوش در ایران', 'topersia' ), 'legal' ),", $w55d_ft ) );
+t( 'P5-D651: «تجربه‌ها» و «فرهنگ و راهنما» در کاتالوگ با en لاتین، ar بی حرف ویژهٔ فارسی و ru سیریلیک؛ «کاوش در ایران» دیگر در کاتالوگ نیست',
+	1 === preg_match( "/'تجربه‌ها' => array\( 'en' => '[A-Za-z ]+', 'ar' => '[^']+', 'ru' => '[^']*\p{Cyrillic}[^']*' \)/u", $w55d_cat )
+	&& 1 === preg_match( "/'فرهنگ و راهنما' => array\( 'en' => '[A-Za-z ]+', 'ar' => '[^']+', 'ru' => '[^']*\p{Cyrillic}[^']*' \)/u", $w55d_cat )
+	&& 0 === preg_match( '/[پچژگکی]/u', ( preg_match( "/'فرهنگ و راهنما' => array\( 'en' => '[^']+', 'ar' => '([^']+)'/u", $w55d_cat, $w55d_m ) ? $w55d_m[1] : 'ی' ) )
+	&& false === strpos( $w55d_cat, "'کاوش در ایران' =>" ) );
+tp441_mut( 'P5-D649 · P5-D651: ردیف‌های منو روی شبکهٔ عمودی — هر پیوند یک گام --tp-ft-menu-h، فقط ≥۱۰۲۴؛ سرعنوان گروه نیست؛ هیچ پهنای ستونی در بلوک نیست — جهش: بی گام ثابت',
 	function ( $c ) {
 		$p = strpos( $c, 'ترازبندی ردیف‌های منوی پاورقی' );
 		if ( false === $p ) { return false; }
 		$b = substr( $c, $p );
 		return 1 === preg_match( '/@media \(min-width:1024px\)\{\s*html:root \[data-elementor-type="footer"\] \.tp-ft-menu__a\{\s*display:flex;[^\n]*\n\s*block-size:var\(--tp-ft-menu-h\);/', $b )
-			&& false !== strpos( $b, 'block-size:calc(2 * var(--tp-ft-menu-h));' ) && 0 === preg_match( '/(?<![-a-z])(?:width|inline-size|flex-basis):/', $b );
+			&& false === strpos( $c, 'tp-ft-menu__h' ) && 0 === preg_match( '/(?<![-a-z])(?:width|inline-size|flex-basis):/', $b );
 	}, $w55d_css, str_replace( 'block-size:var(--tp-ft-menu-h);', 'min-block-size:var(--tp-ft-menu-h);', $w55d_css ) );

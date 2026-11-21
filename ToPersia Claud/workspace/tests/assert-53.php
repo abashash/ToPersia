@@ -569,14 +569,14 @@ tp441_mut( 'P5-D620 acceptance.php: Playwright تازه‌ترین نامزدی 
 
 /* 53-ت · P5-D617 — منوهای واقعی پاورقی به جای پیوندهای نمایشی پوسته؛ رفتار روی وردپرس واقعی در tests/footer-gate.js */
 /* دستۀ 55-ب بند ۳ (P5-D643): ستون‌ها از رجیستری؛ دروازۀ هاب «دست‌کم min پست واقعی» (topersia_g_home_real با $demo = false) */
-tp441_mut( 'P5-D617 · P5-D643 [tp_footer_menu]: ثبت شورت‌کد؛ صفحه فقط از topersia_g_legal_page (نامک‌های about · contact · terms · privacy-policy · copyright)؛ هاب فقط با دست‌کم min پست واقعی منتشرشدۀ همان زبان (topersia_g_home_real بی نمونه)؛ ستون بی پیوند ← هیچ خروجی — جهش: دروازۀ topersia_g_home_real برداشته شود',
+tp441_mut( 'P5-D617 · P5-D643 [tp_footer_menu]: ثبت شورت‌کد؛ صفحه فقط از topersia_g_legal_page (P5-D651: about · contact · advertise · privacy-policy · terms؛ نوار cookie-policy · accessibility · copyright)؛ هاب فقط با دست‌کم min پست واقعی منتشرشدۀ همان زبان (topersia_g_home_real بی نمونه)؛ ستون بی پیوند ← هیچ خروجی — جهش: دروازۀ topersia_g_home_real برداشته شود',
 	function ( $s ) {
 		preg_match_all( "/\\\$row\( '[a-z]+', __\( '[^']+', 'topersia' \), 'page', '([a-z-]+)' \)/u", $s, $pg );
 		return false !== strpos( $s, "add_shortcode( 'tp_footer_menu', 'topersia_g_sc_footer_menu' );" )
 			&& false !== strpos( $s, "\$id = function_exists( 'topersia_g_legal_page' ) ? topersia_g_legal_page( \$key ) : 0;" )
 			&& false !== strpos( $s, "count( topersia_g_home_real( \$types, max( 5, \$min ), false ) ) < \$min" )
-			&& false !== strpos( $s, "if ( '' === \$body ) {" )
-			&& array( 'about', 'contact', 'terms', 'privacy-policy', 'copyright' ) === $pg[1];
+			&& false !== strpos( $s, "if ( '' === \$items ) {\n\t\t\treturn '';" )
+			&& array( 'about', 'contact', 'advertise', 'privacy-policy', 'terms', 'cookie-policy', 'accessibility', 'copyright' ) === $pg[1];
 	}, $w53_ft, str_replace( "count( topersia_g_home_real( \$types, max( 5, \$min ), false ) ) < \$min", 'false', $w53_ft ) );
 tp441_mut( 'P5-D617 کش عنصر المنتور برای هر زبان جدا نیست: toggle با عنوان شناخته‌شده پویا (is_dynamic_content) و زنده کشیده می‌شود؛ toggle منوی بی پیوند پنهان (render_content نشان، should_render false) و شیوه‌نامۀ درونش با after_render می‌ماند — جهش: صافی is_dynamic_content ثبت نشود',
 	function ( $s ) {
@@ -589,11 +589,12 @@ tp441_mut( 'P5-D617 کش عنصر المنتور برای هر زبان جدا �
 	}, $w53_ft, str_replace( "'elementor/element/is_dynamic_content'", "'elementor/element/tp_off'", $w53_ft ) );
 
 $w53_l10n = $GLOBALS['tp_l10n'] ?? null;
-$GLOBALS['tp_l10n'] = array( 'مقصدها' => 'Destinations', 'حقوقی' => '<b>Legal</b>' );
+$GLOBALS['tp_l10n'] = array( 'مقصدها' => 'Destinations', 'تجربه‌ها' => '<b>Experiences</b>' );   /* P5-D651: عنوان شناختۀ تازه */
 $h = topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">  مقصدها </div><div class="tp-x"><div class="wd-el-toggle-title title">مقصدها</div></div>', ' مقصدها ' );
 $w53_okm = 1 === substr_count( $h, 'title">Destinations</div>' ) && 1 === substr_count( $h, 'title">مقصدها</div>' )   /* فقط نخستین عنوان */
 	&& '<div class="wd-el-toggle-title title">دیگر</div>' === topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">دیگر</div>', 'دیگر' )
-	&& false !== strpos( topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">حقوقی</div>', 'حقوقی' ), '&lt;b&gt;Legal&lt;/b&gt;' );
+	&& false !== strpos( topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">تجربه‌ها</div>', 'تجربه‌ها' ), '&lt;b&gt;Experiences&lt;/b&gt;' )
+	&& '<div class="wd-el-toggle-title title">حقوقی</div>' === topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">حقوقی</div>', 'حقوقی' );   /* ستون پنجم دیگر عنوان شناخته نیست */
 $GLOBALS['tp_l10n'] = array();
 $w53_okm = $w53_okm && '<div class="wd-el-toggle-title title">مقصدها</div>' === topersia_g_ft_toggle_title_html( '<div class="wd-el-toggle-title title">مقصدها</div>', 'مقصدها' );   /* فارسی دست‌نخورده */
 if ( null === $w53_l10n ) {
@@ -629,13 +630,13 @@ $w53_fmct = function ( $cat ) use ( $w53_ft, $w53_home ) {
 			return false;
 		}
 	}
-	return 51 === count( $keys );   /* ۵ عنوان toggle · ۵ گروه تازه (با «چهار فصل») · ۳۲ برچسب رجیستری · ۹ نوع راهنما */
+	return 59 === count( $keys );   /* دستۀ 55-ه (P5-D651): ۴ عنوان toggle · ۱۰ گروه · برچسب‌های رجیستری · ۹ نوع راهنما — یکتا */
 };
-tp441_mut( 'P5-D617 · P5-D643 هر عنوان، گروه و برچسب رجیستری منوی پاورقی در کاتالوگ با en لاتین، ar بی حرف ویژۀ فارسی و ru سیریلیک؛ ستون «توپرشیا» با عنوان «دربارۀ توپرشیا» (دستۀ 55 بند ۱۰) — جهش: «حقوقی» از کاتالوگ بیفتد',
-	function ( $cat ) use ( $w53_fmct, $w53_ft ) { return $w53_fmct( $cat ) && false !== strpos( $w53_ft, "'توپرشیا'     => __( 'دربارۀ توپرشیا', 'topersia' )," ); },
-	$w53_cat, str_replace( "\n\t'حقوقی' => array(", "\n\t'حقوقی-' => array(", $w53_cat ) );
-t( 'P5-D643 جهش: برچسب رجیستری بی ru («پارک‌های ملی») می‌افتد',
-	! $w53_fmct( preg_replace( "/(\n\t'پارک‌های ملی' => array\( 'en' => '[^']+', 'ar' => '[^']+'), 'ru' => '[^']+'/u", '$1', $w53_cat ) ) );
+tp441_mut( 'P5-D617 · P5-D643 · P5-D651 هر عنوان، گروه و برچسب رجیستری منوی پاورقی در کاتالوگ با en لاتین، ar بی حرف ویژۀ فارسی و ru سیریلیک؛ ستون «توپرشیا» با همان نام (دستۀ 55-ه) — جهش: «تجربه‌ها» از کاتالوگ بیفتد',
+	function ( $cat ) use ( $w53_fmct, $w53_ft ) { return $w53_fmct( $cat ) && false !== strpos( $w53_ft, "'توپرشیا'         => __( 'توپرشیا', 'topersia' )," ); },
+	$w53_cat, str_replace( "\n\t'تجربه‌ها' => array(", "\n\t'تجربه‌ها-' => array(", $w53_cat ) );
+t( 'P5-D643 جهش: برچسب رجیستری بی ru («کوه‌ها») می‌افتد',
+	! $w53_fmct( preg_replace( "/(\n\t'کوه‌ها' => array\( 'en' => '[^']+', 'ar' => '[^']+'), 'ru' => '[^']+'/u", '$1', $w53_cat ) ) );
 tp441_mut( 'P5-D617 CSS منو از توکن: بلندی و اندازۀ قلم از --tp-ft-menu-h و --tp-ft-menu-fs (تعریف در topersia-tokens.css)، رنگ --tp-ft-link، text-align:start — جهش: اندازۀ قلم خام',
 	function ( $css ) use ( $w53_tok ) {
 		$b = preg_replace( '/\s+/', '', preg_replace( '#/\*.*?\*/#s', '', $css ) );

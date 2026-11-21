@@ -242,6 +242,10 @@ msgstr "Ethnic ritual"
 msgid "آیینی"
 msgstr "Ritual"
 
+#: includes/topersia-g-footer.php
+msgid "آیین‌ها"
+msgstr "Rituals"
+
 #: includes/topersia-g-map.php
 msgid "آیین‌ها و مراسم این قوم"
 msgstr "Rituals and ceremonies of this ethnic group"
@@ -308,10 +312,6 @@ msgstr "News"
 #, php-format
 msgid "اخبار %s"
 msgstr "%s news"
-
-#: includes/topersia-g-footer.php
-msgid "اخبار و مقالات"
-msgstr "News and articles"
 
 #: includes/topersia-g-news.php
 #, php-format
@@ -478,6 +478,10 @@ msgstr "Climate"
 #: includes/topersia-g-map.php
 msgid "اقلیمی"
 msgstr "Climatic"
+
+#: includes/topersia-g-footer.php
+msgid "اقوام"
+msgstr "Ethnic groups"
 
 #: includes/topersia-g-map.php
 msgid "اقوام ساکن این استان"
@@ -847,10 +851,6 @@ msgstr "Ticket"
 msgid "بناها و میراث تاریخی"
 msgstr "Monuments and historic heritage"
 
-#: includes/topersia-g-footer.php
-msgid "بناهای تاریخی"
-msgstr "Historic monuments"
-
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "بناهای تاریخی %s"
@@ -1043,6 +1043,14 @@ msgstr "Text to speech"
 #: includes/topersia-g-footer.php
 msgid "تبلیغ"
 msgstr "Ad"
+
+#: includes/topersia-g-footer.php
+msgid "تبلیغات"
+msgstr "Advertising"
+
+#: includes/topersia-g-footer.php
+msgid "تجربه‌ها"
+msgstr "Experiences"
 
 #: includes/topersia-g-map.php
 msgid "تخصصی"
@@ -1463,10 +1471,6 @@ msgstr "Visitors"
 msgid "حق نشر"
 msgstr "Copyright"
 
-#: includes/topersia-g-footer.php
-msgid "حقوقی"
-msgstr "Legal"
-
 #: includes/topersia-g-map.php
 msgid "حلال"
 msgstr "Halal"
@@ -1688,10 +1692,6 @@ msgstr "About us"
 msgid "دربارۀ %s"
 msgstr "About %s"
 
-#: includes/topersia-g-footer.php
-msgid "دربارۀ توپرشیا"
-msgstr "About ToPersia"
-
 #: includes/topersia-g-map.php
 msgid "درجۀ سانتی‌گراد"
 msgstr "°C"
@@ -1800,6 +1800,10 @@ msgstr "Historical era / dynasty"
 #, php-format
 msgid "دوره‌ها و سلسله‌های تاریخی %s"
 msgstr "Historical eras and dynasties of %s"
+
+#: includes/topersia-g-footer.php
+msgid "دوره‌های تاریخی"
+msgstr "Historical eras"
 
 #: includes/topersia-g-map.php
 msgid "دوره‌های تاریخی این بنا"
@@ -1965,6 +1969,10 @@ msgstr "Folk dance"
 #: includes/topersia-g-map.php
 msgid "رقص‌های رایج در این استان"
 msgstr "Dances of this province"
+
+#: includes/topersia-g-footer.php
+msgid "رقص‌های محلی"
+msgstr "Folk dances"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -2386,6 +2394,10 @@ msgstr "Equestrian"
 msgid "سیاست هزینه و پرداخت"
 msgstr "Fees and payment policy"
 
+#: includes/topersia-g-footer.php
+msgid "سیاست کوکی"
+msgstr "Cookie policy"
+
 #: includes/topersia-g-map.php
 msgid "شاعر"
 msgstr "Poet"
@@ -2413,6 +2425,10 @@ msgstr "Nightlife"
 #: includes/topersia-g-zones.php
 msgid "شخصیت تاریخی"
 msgstr "Historical figure"
+
+#: includes/topersia-g-footer.php
+msgid "شخصیت‌های تاریخی"
+msgstr "Historical figures"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -2483,10 +2499,6 @@ msgstr "Northwest"
 #: includes/topersia-g-map.php
 msgid "شنا"
 msgstr "Swimming"
-
-#: includes/topersia-g-footer.php
-msgid "شناسۀ پست موجودیت، نه هاب؛ هر زبان فقط نسخۀ منتشرشدۀ خودش را نشان می‌دهد."
-msgstr "Entity post ID, not a hub; each language shows only its own published version."
 
 #: includes/topersia-g-map.php
 msgid "شنبه"
@@ -2782,6 +2794,10 @@ msgstr "Travel etiquette"
 msgid "فرهنگ سفر و آداب %s"
 msgstr "Travel culture and etiquette in %s"
 
+#: includes/topersia-g-footer.php
+msgid "فرهنگ و راهنما"
+msgstr "Culture and guide"
+
 #: includes/topersia-g-map.php
 msgid "فرهنگ و رویداد"
 msgstr "Culture and events"
@@ -2789,6 +2805,10 @@ msgstr "Culture and events"
 #: includes/topersia-g-zones.php
 msgid "فرهنگ و غذا"
 msgstr "Culture and food"
+
+#: includes/topersia-g-footer.php
+msgid "فرهنگ و مردم"
+msgstr "Culture and people"
 
 #: includes/topersia-g-map.php
 msgid "فرهنگی"
@@ -2923,6 +2943,10 @@ msgstr "Men’s dress"
 #: includes/topersia-g-map.php
 msgid "لباس مناسبتی"
 msgstr "Ceremonial dress"
+
+#: includes/topersia-g-footer.php
+msgid "لباس‌های سنتی"
+msgstr "Traditional costumes"
 
 #: includes/topersia-g-hub.php
 #, php-format
@@ -3072,6 +3096,10 @@ msgstr "Moderate"
 #: includes/topersia-g-map.php
 msgid "مجاز"
 msgstr "Allowed"
+
+#: includes/topersia-g-footer.php
+msgid "مجله"
+msgstr "Magazine"
 
 #: includes/topersia-g-map.php
 msgid "مجوز صعود لازم است"
@@ -3485,6 +3513,10 @@ msgstr "Suitability for tourists"
 msgid "مناسب‌ترین فصل برای سفر"
 msgstr "Best season to travel"
 
+#: includes/topersia-g-footer.php
+msgid "مناطق جغرافیایی"
+msgstr "Regions"
+
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "مناطق جغرافیایی %s"
@@ -3677,10 +3709,6 @@ msgstr "News topic"
 msgid "موضوع و برچسب‌ها"
 msgstr "Topic and tags"
 
-#: includes/topersia-g-footer.php
-msgid "موضوعات پرکاربرد"
-msgstr "Popular topics"
-
 #: includes/topersia-g-map.php
 msgid "موضوعیت ندارد"
 msgstr "Not applicable"
@@ -3738,10 +3766,6 @@ msgstr "Related places"
 #: includes/topersia-g-map.php
 msgid "مکان‌های مشمول این قوانین"
 msgstr "Sites covered by these rules"
-
-#: includes/topersia-g-footer.php
-msgid "میراث ثبت‌شده"
-msgstr "Listed heritage"
 
 #: includes/topersia-g-map.php
 msgid "میراث جهانی"
@@ -4475,10 +4499,6 @@ msgstr "King"
 msgid "پارک ملی"
 msgstr "National park"
 
-#: includes/topersia-g-footer.php
-msgid "پارک‌های ملی"
-msgstr "National parks"
-
 #: includes/topersia-g-hub.php
 #, php-format
 msgid "پارک‌های ملی و مناطق حفاظت‌شدۀ %s"
@@ -4678,8 +4698,8 @@ msgid "پیوندها"
 msgstr "Links"
 
 #: includes/topersia-g-footer.php
-msgid "پیوندهای ویژه"
-msgstr "Featured links"
+msgid "پیوندهای پایین پاورقی"
+msgstr "Footer bottom links"
 
 #: includes/topersia-g-map.php
 msgid "چادر لازم"
@@ -4776,10 +4796,6 @@ msgstr "Exchange channels and receipts"
 #: topersia-render.php
 msgid "کاهش شدت رنگ و نور"
 msgstr "Reduce color and brightness"
-
-#: includes/topersia-g-footer.php
-msgid "کاوش در ایران"
-msgstr "Explore Iran"
 
 #: includes/topersia-g-map.php
 msgid "کاوش مقطعی"

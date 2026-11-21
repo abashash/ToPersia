@@ -405,47 +405,43 @@ tp441_mut( 'بند ۹: جایگزین تصویر از زنجیرۀ نیا (کا�
 t( 'بند ۹: بی ثابت پیش‌نمایش، جایگزین مشترک خاموش است (همان مقدار topersia_demo_on)',
 	function_exists( 'topersia_g_shared_fallback_on' ) && false === topersia_g_shared_fallback_on() && topersia_g_shared_fallback_on() === topersia_demo_on() );
 
-/* ── بند ۱۰: منوی پاورقی (۶٫۱) — بی تکرار کاشی صفحۀ اول؛ «دربارۀ توپرشیا»؛ حقوقی دست‌نخورده ──────────
- * رفتار روی وردپرس واقعی (هر زبان، ستون بی پیوند پنهان): tests/footer-gate.js. */
+/* ── بند ۱۰ ← دستۀ 55-ه بند ۳ (P5-D651): منوی پاورقی چهار ستون × پنج پیوند و نوار پایین ──────────
+ * رفتار روی وردپرس واقعی (هر زبان، دقیقاً پنج یا استثنای صریح، ستون بی پیوند پنهان): tests/footer-gate.js. */
 require_once TP_PLUGIN_DIR . 'includes/topersia-g-home.php';     /* topersia_g_home_guide_types — فقط تعریف تابع */
 require_once TP_PLUGIN_DIR . 'includes/topersia-g-footer.php';
 $w55_ft   = $w55_read( $w55_r . 'includes/topersia-g-footer.php' );
-/* دستۀ 55-ب بند ۳ (P5-D643): منو از رجیستری (topersia_g_ft_registry)؛ قاعدۀ «بی تکرار کاشی» فقط برای «مقصدها» — «راهنمای سفر» همۀ
-   نوع‌های راهنمای دارای محتواست (متن تازۀ کاربر)؛ حقوقی (و حق نشر) عیناً همان سه صفحه. */
+/* «مقصدها» = هاب‌های جغرافیایی به ترتیب بیشترین محتوای واقعی همان زبان (هم‌شمار ← ترتیب رجیستری)؛ «توپرشیا» = درباره، تماس،
+   تبلیغات، حریم خصوصی، قوانین؛ نوار = کوکی، دسترس‌پذیری، حق نشر — همه از همان رجیستری مرکزی. */
 $w55_c10  = function ( $s ) {
 	if ( ! preg_match( '/function topersia_g_ft_registry\(\) \{.*?\n\t}\n/s', $s, $b ) || ! preg_match( '/function topersia_g_ft_links\( \$group \) \{.*?\n\t}\n/s', $s, $l ) ) {
 		return false;
 	}
-	preg_match_all( "/\\\$row\( 'dest', __\( '[^']+', 'topersia' \), '([a-z]+)', '([a-z_-]+)' \)/u", $b[0], $m, PREG_SET_ORDER );
-	$tiles = topersia_g_ft_home_tiles();
-	foreach ( $m as $it ) {
-		if ( in_array( $it[1] . ':' . $it[2], $tiles, true ) ) {
-			return false;
-		}
-	}
-	return count( $m ) > 0 && false !== strpos( $l[0], "( 'dest' === \$group && in_array( \$r['id'], \$tiles, true ) )" )
-		&& false !== strpos( $b[0], "\t\t\$rows[] = \$row( 'legal', __( 'قوانین و مقررات', 'topersia' ), 'page', 'terms' );\n\t\t\$rows[] = \$row( 'legal', __( 'حریم خصوصی', 'topersia' ), 'page', 'privacy-policy' );\n\t\t\$rows[] = \$row( 'legal', __( 'حق نشر', 'topersia' ), 'page', 'copyright' );\n" );
+	return false !== strpos( $l[0], "'dest' === \$group && 'type' === \$r['kind'] ? topersia_g_ft_type_count( \$r['key'] ) : 0" )
+		&& false !== strpos( $l[0], "usort( \$out, function ( \$a, \$b ) { return \$b[2] - \$a[2] ?: \$a[3] - \$b[3]; } );" )
+		&& false !== strpos( $b[0], "\t\t\$rows[] = \$row( 'about', __( 'درباره ما', 'topersia' ), 'page', 'about' );\n\t\t\$rows[] = \$row( 'about', __( 'تماس با ما', 'topersia' ), 'page', 'contact' );\n\t\t\$rows[] = \$row( 'about', __( 'تبلیغات', 'topersia' ), 'page', 'advertise' );\n\t\t\$rows[] = \$row( 'about', __( 'حریم خصوصی', 'topersia' ), 'page', 'privacy-policy' );\n\t\t\$rows[] = \$row( 'about', __( 'قوانین و مقررات', 'topersia' ), 'page', 'terms' );\n" )
+		&& false !== strpos( $b[0], "\t\t\$rows[] = \$row( 'bar', __( 'سیاست کوکی', 'topersia' ), 'page', 'cookie-policy' );\n\t\t\$rows[] = \$row( 'bar', __( 'دسترس‌پذیری', 'topersia' ), 'page', 'accessibility' );\n\t\t\$rows[] = \$row( 'bar', __( 'حق نشر', 'topersia' ), 'page', 'copyright' );\n" );
 };
-tp441_mut( 'بند ۱۰ · P5-D643: هیچ سطر «مقصدها»ی رجیستری مقصد کاشی صفحۀ اول نیست (استان، /attractions/، نُه نوع راهنما) و صافی زمان اجرا هم همین را می‌گیرد؛ ستون حقوقی (و حق نشر) عیناً همان — جهش: «روادید» به «مقصدها» برگردد',
-	$w55_c10, $w55_ft, str_replace( "\$row( 'dest', __( 'روستاها', 'topersia' ), 'type', 'tp_village' ),", "\$row( 'dest', __( 'روادید', 'topersia' ), 'type', 'tp_visa' ),\n\t\t\t\$row( 'dest', __( 'روستاها', 'topersia' ), 'type', 'tp_village' ),", $w55_ft ) );
+tp441_mut( 'بند ۱۰ · P5-D651: «مقصدها» به ترتیب بیشترین محتوای واقعی همان زبان (topersia_g_ft_type_count)، هم‌شمار به ترتیب رجیستری؛ ستون «توپرشیا» پنج صفحه با /advertise/؛ نوار کوکی · دسترس‌پذیری · حق نشر — جهش: مرتب‌سازی برداشته شود',
+	$w55_c10, $w55_ft, str_replace( "usort( \$out, function ( \$a, \$b ) { return \$b[2] - \$a[2] ?: \$a[3] - \$b[3]; } );", '', $w55_ft ) );
 
 $w55_cols = topersia_g_ft_menu_cols();
 $w55_keys = array();
 foreach ( topersia_g_ft_registry() as $w55_r10 ) {
 	$w55_keys[ $w55_r10['group'] ][] = $w55_r10['id'];
 }
-$w55_tl  = topersia_g_ft_home_tiles();
 $w55_ids = array_merge( ...array_values( $w55_keys ) );
-t( 'بند ۱۰ · P5-D643: پنج ستون (مقصدها · راهنمای سفر · کاوش در ایران با گروه‌های چهار فصل و رویدادها، تجربه‌ها و پیوندهای ویژه · دربارۀ توپرشیا با اخبار و مقالات · حقوقی)؛ «مقصدها» با محبوب‌ترین مقاصد، روستاها و جزیره‌ها؛ راهنما نُه نوع صفحۀ اول + مسیر و صنایع‌دستی؛ چهار فصل؛ شناسه‌ها یکتا؛ بی /advertise/؛ حقوقی بی تغییر — کاشی‌ها ۱۱ (بی /city/)',
-	array( 'dest' => array( 'dest' ), 'guide' => array( 'guide' ), 'season' => array( 'seasons', 'events', 'exp', 'picks' ), 'about' => array( 'about', 'news' ), 'legal' => array( 'legal' ) ) === array_map( function ( $c ) { return $c[1]; }, $w55_cols )
-	&& array( 'type:tp_city', 'type:tp_village', 'type:tp_island' ) === array_slice( $w55_keys['dest'], 0, 3 ) && 13 === count( $w55_keys['dest'] )
-	&& array_merge( array_map( function ( $t ) { return 'type:' . $t; }, array_keys( topersia_g_home_guide_types() ) ), array( 'type:tp_route', 'type:tp_handicraft' ) ) === $w55_keys['guide']
+t( 'بند ۱۰ · P5-D651: دقیقاً چهار ستون (مقصدها · تجربه‌ها با کارها، رویدادها و چهار فصل · فرهنگ و راهنما با فرهنگ، غذا، راهنما و مجله · توپرشیا)، هر ستون یک سرتیتر و حداکثر پنج پیوند؛ «مقصدها» فقط یازده نوع جغرافیایی؛ نوار ستون نیست؛ شناسه‌ها یکتا',
+	array( 'dest' => array( 'dest' ), 'exp' => array( 'exp', 'events', 'seasons' ), 'culture' => array( 'culture', 'food', 'guide', 'mag' ), 'about' => array( 'about' ) ) === array_map( function ( $c ) { return $c[1]; }, $w55_cols )
+	&& array( 'مقصدها', 'تجربه‌ها', 'فرهنگ و راهنما', 'توپرشیا' ) === array_values( array_map( function ( $c ) { return $c[0]; }, $w55_cols ) )
+	&& array( 'مقصدها', 'تجربه‌ها', 'فرهنگ و راهنما', 'توپرشیا' ) === array_keys( topersia_g_ft_toggle_titles() )
+	&& 5 === TOPERSIA_FOOTER_COL_MAX && ! defined( 'TOPERSIA_FOOTER_PICKS' )
+	&& array( 'type:tp_city', 'type:tp_province', 'type:tp_country', 'type:tp_region', 'type:tp_village', 'type:tp_district', 'type:tp_island', 'type:tp_mountain', 'type:tp_water_body', 'type:tp_desert', 'type:tp_forest_plain' ) === $w55_keys['dest']
 	&& array( 'season:spring', 'season:summer', 'season:autumn', 'season:winter' ) === $w55_keys['seasons']
-	&& array( 'page:about', 'page:contact' ) === $w55_keys['about'] && array( 'type:tpc_news', 'type:tpc_article', 'topics:tpc_news_topic' ) === $w55_keys['news']
-	&& array( 'page:terms', 'page:privacy-policy', 'page:copyright' ) === $w55_keys['legal']
-	&& count( $w55_ids ) === count( array_unique( $w55_ids ) ) && false === strpos( implode( ' ', $w55_ids ), 'advertise' )
-	&& 'دربارۀ توپرشیا' === $w55_cols['about'][0] && 'دربارۀ توپرشیا' === topersia_g_ft_toggle_titles()['توپرشیا'] && 'کاوش در ایران' === $w55_cols['season'][0] && 'چهار فصل' === topersia_g_ft_groups()['seasons'][0] && 'کاوش در ایران' !== topersia_g_ft_groups()['seasons'][0]
-	&& 11 === count( $w55_tl ) && in_array( 'type:tp_visa', $w55_tl, true ) && in_array( 'type:tp_local_food', $w55_tl, true ) && ! in_array( 'type:tp_city', $w55_tl, true ),
+	&& array( 'type:tpc_news', 'type:tpc_article' ) === $w55_keys['mag'] && array( 'type:tp_local_food' ) === $w55_keys['food']
+	&& array( 'page:about', 'page:contact', 'page:advertise', 'page:privacy-policy', 'page:terms' ) === $w55_keys['about']
+	&& array( 'page:cookie-policy', 'page:accessibility', 'page:copyright' ) === $w55_keys['bar'] && 'bar' === topersia_g_ft_groups()['bar'][1]
+	&& count( $w55_ids ) === count( array_unique( $w55_ids ) )
+	&& ! function_exists( 'topersia_g_ft_home_tiles' ) && ! function_exists( 'topersia_g_ft_picks' ) && ! function_exists( 'topersia_g_ft_topics' ),
 	wp_json_encode( $w55_keys ) );
 
 /* فصل امروز به تقویم شمسی — مرز هر فصل (۱ فروردین · ۱ تیر · ۱ مهر · ۱ دی ۱۴۰۵) و روز پیش از آن */

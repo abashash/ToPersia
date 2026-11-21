@@ -104,19 +104,12 @@ if ( ! function_exists( 'topersia_g_ft_opts' ) ) {
 
 		$demo = isset( $raw['demo_ads'] ) ? (int) $raw['demo_ads'] : 2;
 
-		/* دستۀ 55-ب بند ۳ (P5-D643): سطرهای خاموش رجیستری (فقط شناسۀ شناخته) و «پیوندهای ویژه» (تا TOPERSIA_FOOTER_PICKS شناسۀ یکتا) */
+		/* دستۀ 55-ب بند ۳ (P5-D643): سطرهای خاموش رجیستری (فقط شناسۀ شناخته). «پیوندهای ویژه» با P5-D651 برداشته شد. */
 		$known = function_exists( 'topersia_g_ft_registry' ) ? array_column( topersia_g_ft_registry(), 'id' ) : array();
 		$off   = array();
 		foreach ( ( isset( $raw['off'] ) && is_array( $raw['off'] ) ? $raw['off'] : array() ) as $id ) {
 			if ( is_string( $id ) && in_array( $id, $known, true ) && ! in_array( $id, $off, true ) ) {
 				$off[] = $id;
-			}
-		}
-		$picks = array();
-		foreach ( ( isset( $raw['picks'] ) && is_array( $raw['picks'] ) ? $raw['picks'] : array() ) as $id ) {
-			$id = absint( $id );
-			if ( $id && count( $picks ) < TOPERSIA_FOOTER_PICKS && ! in_array( $id, $picks, true ) ) {
-				$picks[] = $id;
 			}
 		}
 
@@ -127,7 +120,6 @@ if ( ! function_exists( 'topersia_g_ft_opts' ) ) {
 			'social'   => $social,
 			'demo_ads' => max( 0, min( TOPERSIA_FOOTER_ADS, $demo ) ),
 			'off'      => $off,
-			'picks'    => $picks,
 		);
 	}
 }
@@ -403,134 +395,118 @@ if ( ! function_exists( 'topersia_g_ft_toggle_titles' ) ) {
 	/**
 	 * عنوان ستون‌های پاورقی (P5-D617) — متن فارسی ذخیره‌شده در ویجت wd_toggle قالب #6128 ← عنوان به زبان صفحه.
 	 * قالب ترجمۀ WPML ندارد؛ پس عنوان در داده فارسی می‌ماند و این‌جا از کاتالوگ ترجمه می‌شود (صافی render_content پایین).
-	 * ستونی که در داده «توپرشیا» نام دارد «دربارۀ توپرشیا» نشان داده می‌شود تا با نام برند در جعبۀ برند دوتایی نشود (دستۀ 55 بند ۱۰).
-	 * دستۀ 55-ب بند ۳ (P5-D643): ستون پنجم «ایران در چهار فصل» — toggle تازۀ #6128 با [tp_footer_menu col="season"].
+	 * دستۀ 55-ه (P5-D651): ستون «توپرشیا» همان نام متن کاربر را دارد؛ جعبۀ برند عنوان متنی ندارد (عنوانش تهی است) و دوتایی نمی‌شود.
 	 *
 	 * @return array متن فارسی داده ← عنوان نمایشی
 	 */
 	function topersia_g_ft_toggle_titles() {
+		/* دستۀ 55-ه (P5-D651): چهار ستون، هر کدام یک سرتیتر؛ ستون پنجم و سرعنوان گروه‌ها (55-ب · 55-د) برداشته شد. */
 		return array(
-			'مقصدها'      => __( 'مقصدها', 'topersia' ),
-			'راهنمای سفر' => __( 'راهنمای سفر', 'topersia' ),
-			'کاوش در ایران' => __( 'کاوش در ایران', 'topersia' ),   /* دستۀ 55-د (P5-D649): پیش‌تر «ایران در چهار فصل»؛ آن عنوان حالا سرعنوان گروه فصل‌هاست */
-			'توپرشیا'     => __( 'دربارۀ توپرشیا', 'topersia' ),
-			'حقوقی'       => __( 'حقوقی', 'topersia' ),
+			'مقصدها'          => __( 'مقصدها', 'topersia' ),
+			'تجربه‌ها'         => __( 'تجربه‌ها', 'topersia' ),
+			'فرهنگ و راهنما' => __( 'فرهنگ و راهنما', 'topersia' ),
+			'توپرشیا'         => __( 'توپرشیا', 'topersia' ),
 		);
 	}
 }
 
 if ( ! defined( 'TOPERSIA_FOOTER_COL_MAX' ) ) {
-	define( 'TOPERSIA_FOOTER_COL_MAX', 8 );   /* پیوند در هر ستون (P5-D643) */
-}
-if ( ! defined( 'TOPERSIA_FOOTER_PICKS' ) ) {
-	define( 'TOPERSIA_FOOTER_PICKS', 8 );     /* «پیوندهای ویژه» برگزیدۀ پیشخوان */
-}
-if ( ! defined( 'TOPERSIA_FOOTER_TOPICS' ) ) {
-	define( 'TOPERSIA_FOOTER_TOPICS', 4 );    /* «موضوعات پرکاربرد» اخبار */
+	define( 'TOPERSIA_FOOTER_COL_MAX', 5 );   /* دقیقاً پنج پیوند در هر ستون (P5-D651) */
 }
 
 if ( ! function_exists( 'topersia_g_ft_groups' ) ) {
 	/**
-	 * گروه‌های منوی پاورقی به ترتیب (دستۀ 55-ب بند ۳ · P5-D643) — کلید ← [ عنوان، ستون ].
-	 * ستون = کلید [tp_footer_menu col] یکی از پنج toggle قالب #6128 (دسکتاپ پنج ستون، موبایل آکاردئونِ همان toggle).
-	 * گروهی که عنوانش عنوان toggle است سرعنوان درون‌ستونی نمی‌گیرد؛ بقیه می‌گیرند (topersia_g_sc_footer_menu).
+	 * گروه‌های منوی پاورقی به ترتیب (دستۀ 55-ه · P5-D651) — کلید ← [ برچسب پیشخوان، ستون ].
+	 * ستون = کلید [tp_footer_menu col] یکی از چهار toggle قالب #6128 (دسکتاپ چهار ستون، موبایل آکاردئون همان toggle)، یا «bar» =
+	 * نوار پایین ([tp_footer_bar]). گروه در خروجی سرعنوان ندارد — هر ستون فقط سرتیتر toggle را دارد؛ گروه فقط سهم نوبتی ستون
+	 * (topersia_g_ft_share) و ردیف پیشخوان را می‌سازد.
 	 *
 	 * @return array
 	 */
 	function topersia_g_ft_groups() {
-		$t = topersia_g_ft_toggle_titles();
 		return array(
-			'dest'    => array( $t['مقصدها'], 'dest' ),
-			'guide'   => array( $t['راهنمای سفر'], 'guide' ),
-			'seasons' => array( __( 'چهار فصل', 'topersia' ), 'season' ),   /* سرعنوان گروه نخست ستون «کاوش در ایران» (P5-D649) */
-			'events'  => array( __( 'رویدادها و جشنواره‌ها', 'topersia' ), 'season' ),
-			'exp'     => array( __( 'کارها و تجربیات', 'topersia' ), 'season' ),
-			'picks'   => array( __( 'پیوندهای ویژه', 'topersia' ), 'season' ),
-			'about'   => array( $t['توپرشیا'], 'about' ),
-			'news'    => array( __( 'اخبار و مقالات', 'topersia' ), 'about' ),
-			'legal'   => array( $t['حقوقی'], 'legal' ),
+			'dest'    => array( __( 'مقصدها', 'topersia' ), 'dest' ),
+			'exp'     => array( __( 'کارها و تجربیات', 'topersia' ), 'exp' ),
+			'events'  => array( __( 'رویدادها و جشنواره‌ها', 'topersia' ), 'exp' ),
+			'seasons' => array( __( 'چهار فصل', 'topersia' ), 'exp' ),
+			'culture' => array( __( 'فرهنگ و مردم', 'topersia' ), 'culture' ),
+			'food'    => array( __( 'غذاهای محلی', 'topersia' ), 'culture' ),
+			'guide'   => array( __( 'راهنمای سفر', 'topersia' ), 'culture' ),
+			'mag'     => array( __( 'مجله', 'topersia' ), 'culture' ),
+			'about'   => array( __( 'توپرشیا', 'topersia' ), 'about' ),
+			'bar'     => array( __( 'پیوندهای پایین پاورقی', 'topersia' ), 'bar' ),
 		);
 	}
 }
 
 if ( ! function_exists( 'topersia_g_ft_registry' ) ) {
 	/**
-	 * رجیستری مرکزی منوی پاورقی (دستۀ 55-ب بند ۳ · P5-D643) — یک سطر برای هر هاب، صفحه یا مجموعه:
+	 * رجیستری مرکزی منوی پاورقی (دستۀ 55-ب بند ۳ · P5-D643؛ چینش دستۀ 55-ه · P5-D651) — یک سطر برای هر هاب، صفحه یا مجموعه:
 	 *   id     «نوع منبع:مقدار» — کلید سوییچ پیشخوان (گزینۀ off)
 	 *   group  کلید topersia_g_ft_groups
-	 *   label  msgid فارسی؛ en · ar · ru از کاتالوگ (scripts/i18n/topersia-render.php). سطر exp · topics · picks برچسبش فقط در پیشخوان است؛
-	 *          پیوندهایش نام خود واژه، موضوع یا موجودیت را دارند
+	 *   label  msgid فارسی؛ en · ar · ru از کاتالوگ (scripts/i18n/topersia-render.php). سطر exp برچسبش فقط در پیشخوان است؛
+	 *          پیوندهایش نام خود واژه را دارند
 	 *   kind   type (هاب نوع) · group (هاب گروهی) · page (صفحۀ ثابت، topersia_g_legal_page) · season (صفحۀ فصل) ·
-	 *          exp (واژه‌های «کارها و تجربیات» صفحۀ اول) · topics (پرکاربردترین موضوع‌های اخبار، ?tp_topic= روی /news/) ·
-	 *          picks (موجودیت‌های برگزیدۀ پیشخوان)
+	 *          exp (واژه‌های «کارها و تجربیات» صفحۀ اول)
 	 *   min    کمینۀ محتوای واقعی منتشرشدۀ همین زبان — نمونۀ نمایشی هرگز شمرده نمی‌شود، حتی در پیش‌نمایش («پیوند واقعی»)
 	 *   on     سوییچ پیش‌فرض؛ پیشخوان «پاورقی» با گزینۀ off خاموش می‌کند
-	 * «مقصدها» فقط هاب‌هایی که کاشی صفحۀ اول نیستند (topersia_g_ft_home_tiles). /advertise/ تا تأیید noindex است و هرگز این‌جا نیست؛
-	 * سطرهای حقوقی (و حق نشر) همان پیشین. صافی topersia_g_ft_registry سطر می‌افزاید یا برمی‌دارد.
+	 * «مقصدها» هاب‌های جغرافیایی است به ترتیب بیشترین محتوای واقعی همان زبان (topersia_g_ft_links)؛ بقیۀ ستون‌ها نوبتی از گروه‌ها.
+	 * صفحۀ پیش‌نویس پیوند نمی‌شود (topersia_g_legal_page فقط منتشرشده). صافی topersia_g_ft_registry سطر می‌افزاید یا برمی‌دارد.
 	 *
 	 * @return array[]
 	 */
 	function topersia_g_ft_registry() {
-		$row  = function ( $group, $label, $kind, $key, $min = 1 ) {
+		$row   = function ( $group, $label, $kind, $key, $min = 1 ) {
 			return array( 'id' => $kind . ':' . $key, 'group' => $group, 'label' => $label, 'kind' => $kind, 'key' => $key, 'min' => $min, 'on' => true );
 		};
-		$rows = array(
-			$row( 'dest', __( 'محبوب‌ترین مقاصد', 'topersia' ), 'type', 'tp_city' ),
+		$guide = function_exists( 'topersia_g_home_guide_types' ) ? topersia_g_home_guide_types() : array();
+		$rows  = array(
+			$row( 'dest', __( 'شهرها', 'topersia' ), 'type', 'tp_city' ),
+			$row( 'dest', __( 'استان‌ها', 'topersia' ), 'type', 'tp_province' ),
+			$row( 'dest', __( 'کشورها', 'topersia' ), 'type', 'tp_country' ),
+			$row( 'dest', __( 'مناطق جغرافیایی', 'topersia' ), 'type', 'tp_region' ),
 			$row( 'dest', __( 'روستاها', 'topersia' ), 'type', 'tp_village' ),
+			$row( 'dest', __( 'محله‌ها', 'topersia' ), 'type', 'tp_district' ),
 			$row( 'dest', __( 'جزیره‌ها', 'topersia' ), 'type', 'tp_island' ),
-			$row( 'dest', __( 'بناهای تاریخی', 'topersia' ), 'type', 'tp_monument' ),
-			$row( 'dest', __( 'محوطه‌های باستانی', 'topersia' ), 'type', 'tp_ancient_site' ),
-			$row( 'dest', __( 'مکان‌های مذهبی', 'topersia' ), 'type', 'tp_religious_site' ),
-			$row( 'dest', __( 'میراث ثبت‌شده', 'topersia' ), 'type', 'tp_designation' ),
-			$row( 'dest', __( 'موزه‌ها', 'topersia' ), 'type', 'tp_museum' ),
 			$row( 'dest', __( 'کوه‌ها', 'topersia' ), 'type', 'tp_mountain' ),
-			$row( 'dest', __( 'کویرها', 'topersia' ), 'type', 'tp_desert' ),
 			$row( 'dest', __( 'پهنه‌های آبی', 'topersia' ), 'type', 'tp_water_body' ),
+			$row( 'dest', __( 'کویرها', 'topersia' ), 'type', 'tp_desert' ),
 			$row( 'dest', __( 'جنگل‌ها و دشت‌ها', 'topersia' ), 'type', 'tp_forest_plain' ),
-			$row( 'dest', __( 'پارک‌های ملی', 'topersia' ), 'type', 'tp_protected_area' ),
+			$row( 'exp', __( 'کارها و تجربیات', 'topersia' ), 'exp', 'tpc_tag' ),
+			$row( 'events', __( 'همۀ رویدادها', 'topersia' ), 'group', 'events' ),
+			$row( 'events', __( 'جشنواره‌ها', 'topersia' ), 'type', 'tp_festival' ),
+			$row( 'events', __( 'رویدادهای ورزشی', 'topersia' ), 'type', 'tp_sports_event' ),
+			$row( 'events', __( 'مراسم مذهبی', 'topersia' ), 'type', 'tp_religious_event' ),
+			$row( 'events', __( 'رویدادهای فصلی', 'topersia' ), 'type', 'tp_seasonal_event' ),
 		);
-		foreach ( function_exists( 'topersia_g_home_guide_types' ) ? topersia_g_home_guide_types() : array() as $type => $g ) {
-			$rows[] = $row( 'guide', $g[0], 'type', $type );
-		}
-		$rows[] = $row( 'guide', __( 'مسیرهای گردشگری', 'topersia' ), 'type', 'tp_route' );
-		$rows[] = $row( 'guide', __( 'صنایع‌دستی', 'topersia' ), 'type', 'tp_handicraft' );
 		foreach ( array( 'spring' => __( 'بهار', 'topersia' ), 'summer' => __( 'تابستان', 'topersia' ), 'autumn' => __( 'پاییز', 'topersia' ), 'winter' => __( 'زمستان', 'topersia' ) ) as $s => $label ) {
 			$rows[] = $row( 'seasons', $label, 'season', $s );
 		}
-		$rows[] = $row( 'events', __( 'همۀ رویدادها', 'topersia' ), 'group', 'events' );
-		$rows[] = $row( 'events', __( 'جشنواره‌ها', 'topersia' ), 'type', 'tp_festival' );
-		$rows[] = $row( 'events', __( 'رویدادهای ورزشی', 'topersia' ), 'type', 'tp_sports_event' );
-		$rows[] = $row( 'events', __( 'مراسم مذهبی', 'topersia' ), 'type', 'tp_religious_event' );
-		$rows[] = $row( 'events', __( 'رویدادهای فصلی', 'topersia' ), 'type', 'tp_seasonal_event' );
-		$rows[] = $row( 'exp', __( 'کارها و تجربیات', 'topersia' ), 'exp', 'tpc_tag' );
-		$rows[] = $row( 'picks', __( 'پیوندهای ویژه', 'topersia' ), 'picks', 'admin' );
+		$rows[] = $row( 'culture', __( 'صنایع‌دستی', 'topersia' ), 'type', 'tp_handicraft' );
+		$rows[] = $row( 'culture', __( 'اقوام', 'topersia' ), 'type', 'tp_ethnic_group' );
+		$rows[] = $row( 'culture', __( 'آیین‌ها', 'topersia' ), 'type', 'tp_ritual' );
+		$rows[] = $row( 'culture', __( 'لباس‌های سنتی', 'topersia' ), 'type', 'tp_costume' );
+		$rows[] = $row( 'culture', __( 'موسیقی محلی', 'topersia' ), 'type', 'tp_music' );
+		$rows[] = $row( 'culture', __( 'رقص‌های محلی', 'topersia' ), 'type', 'tp_dance' );
+		$rows[] = $row( 'culture', __( 'زبان و گویش', 'topersia' ), 'type', 'tp_language' );
+		$rows[] = $row( 'culture', __( 'شخصیت‌های تاریخی', 'topersia' ), 'type', 'tp_figure' );
+		$rows[] = $row( 'culture', __( 'دوره‌های تاریخی', 'topersia' ), 'type', 'tp_historical_era' );
+		$rows[] = $row( 'food', __( 'غذاهای محلی', 'topersia' ), 'type', 'tp_local_food' );
+		foreach ( array( 'tp_visa', 'tp_currency', 'tp_health_safety', 'tp_transport', 'tp_calendar', 'tp_travel_etiquette', 'tp_border_crossing' ) as $type ) {
+			$rows[] = $row( 'guide', isset( $guide[ $type ] ) ? $guide[ $type ][0] : $type, 'type', $type );
+		}
+		$rows[] = $row( 'guide', __( 'مسیرهای گردشگری', 'topersia' ), 'type', 'tp_route' );
+		$rows[] = $row( 'mag', __( 'اخبار', 'topersia' ), 'type', 'tpc_news' );
+		$rows[] = $row( 'mag', __( 'مقالات', 'topersia' ), 'type', 'tpc_article' );
 		$rows[] = $row( 'about', __( 'درباره ما', 'topersia' ), 'page', 'about' );
 		$rows[] = $row( 'about', __( 'تماس با ما', 'topersia' ), 'page', 'contact' );
-		$rows[] = $row( 'news', __( 'اخبار', 'topersia' ), 'type', 'tpc_news' );
-		$rows[] = $row( 'news', __( 'مقالات', 'topersia' ), 'type', 'tpc_article' );
-		$rows[] = $row( 'news', __( 'موضوعات پرکاربرد', 'topersia' ), 'topics', 'tpc_news_topic' );
-		$rows[] = $row( 'legal', __( 'قوانین و مقررات', 'topersia' ), 'page', 'terms' );
-		$rows[] = $row( 'legal', __( 'حریم خصوصی', 'topersia' ), 'page', 'privacy-policy' );
-		$rows[] = $row( 'legal', __( 'حق نشر', 'topersia' ), 'page', 'copyright' );
+		$rows[] = $row( 'about', __( 'تبلیغات', 'topersia' ), 'page', 'advertise' );
+		$rows[] = $row( 'about', __( 'حریم خصوصی', 'topersia' ), 'page', 'privacy-policy' );
+		$rows[] = $row( 'about', __( 'قوانین و مقررات', 'topersia' ), 'page', 'terms' );
+		$rows[] = $row( 'bar', __( 'سیاست کوکی', 'topersia' ), 'page', 'cookie-policy' );
+		$rows[] = $row( 'bar', __( 'دسترس‌پذیری', 'topersia' ), 'page', 'accessibility' );
+		$rows[] = $row( 'bar', __( 'حق نشر', 'topersia' ), 'page', 'copyright' );
 		return function_exists( 'apply_filters' ) ? (array) apply_filters( 'topersia_g_ft_registry', $rows ) : $rows;
-	}
-}
-
-if ( ! function_exists( 'topersia_g_ft_home_tiles' ) ) {
-	/**
-	 * مقصد ثابت کاشی‌های صفحۀ اول (دستۀ 55 بند ۱۰) به شکل «نوع منبع:مقدار» رجیستری — «مقصدها» هیچ‌کدام را تکرار نمی‌کند:
-	 * کاشی استان‌ها و «همۀ استان‌ها» · «مشاهدۀ همه»ی جاذبه‌ها (/attractions/) · نُه کاشی «راهنمای سفر» (topersia_g_home_guide_types).
-	 * دستۀ 55-ب بند ۳ (P5-D643): «محبوب‌ترین مقاصد» (/city/) و «کارها و تجربیات» بخش‌اند، نه کاشی — متن کاربر هر دو را نمونۀ
-	 * گروه «مقصدها» آورده؛ پس type:tp_city از این فهرست بیرون آمد.
-	 *
-	 * @return string[]
-	 */
-	function topersia_g_ft_home_tiles() {
-		$keys = array( 'type:tp_province', 'group:attractions' );
-		foreach ( array_keys( function_exists( 'topersia_g_home_guide_types' ) ? topersia_g_home_guide_types() : array() ) as $type ) {
-			$keys[] = 'type:' . $type;
-		}
-		return $keys;
 	}
 }
 
@@ -651,53 +627,33 @@ if ( ! function_exists( 'topersia_g_ft_exp' ) ) {
 	}
 }
 
-if ( ! function_exists( 'topersia_g_ft_topics' ) ) {
+if ( ! function_exists( 'topersia_g_ft_type_count' ) ) {
 	/**
-	 * «موضوعات پرکاربرد»: موضوع‌های اخبار زبان جاری به ترتیب شمار خبر واقعی (کمینه $min)، تا TOPERSIA_FOOTER_TOPICS —
-	 * [ نام، نشانی ?tp_topic= ]. موضوع آرشیو عمومی ندارد؛ پالایش /news/ همان است که تراشۀ موضوع می‌سازد.
+	 * شمار پست واقعی منتشرشدۀ یک نوع به زبان جاری (WPML با suppress_filters = false) — ترتیب «مقصدها» (P5-D651: «هاب‌های
+	 * جغرافیایی با بیشترین محتوا»). نمونۀ نمایشی هرگز، بی گذرواژه.
 	 */
-	function topersia_g_ft_topics( $min = 1 ) {
-		if ( ! function_exists( 'topersia_g_news_topics' ) || ! function_exists( 'topersia_g_news_archive_ids' ) || ! function_exists( 'topersia_g_news_archive_url' ) ) {
-			return array();
+	function topersia_g_ft_type_count( $type ) {
+		if ( ! post_type_exists( $type ) ) {
+			return 0;
 		}
-		$base = (string) topersia_g_news_archive_url();
-		$ids  = array_map( 'absint', (array) topersia_g_news_archive_ids() );
-		$rank = array();
-		foreach ( '' !== $base && $ids ? (array) topersia_g_news_topics() : array() as $i => $term ) {
-			$has = get_objects_in_term( $term->term_id, 'tpc_news_topic' );
-			$n   = is_wp_error( $has ) ? 0 : topersia_g_ft_real_count( array_intersect( array_map( 'absint', (array) $has ), $ids ) );
-			if ( $n >= max( 1, (int) $min ) ) {
-				$rank[] = array( $n, $i, (string) $term->name, add_query_arg( 'tp_topic', rawurlencode( (string) $term->slug ), $base ) );
-			}
-		}
-		usort( $rank, function ( $a, $b ) { return $b[0] - $a[0] ?: $a[1] - $b[1]; } );
-		return array_map( function ( $r ) { return array( $r[2], $r[3] ); }, array_slice( $rank, 0, TOPERSIA_FOOTER_TOPICS ) );
-	}
-}
-
-if ( ! function_exists( 'topersia_g_ft_picks' ) ) {
-	/**
-	 * «پیوندهای ویژه»: تا TOPERSIA_FOOTER_PICKS موجودیت برگزیدۀ پیشخوان — نسخۀ منتشرشدۀ زبان جاری (topersia_g_published)، فقط
-	 * پست یک نوع عمومی موجودیت (topersia_g_hub_registry) و هرگز نمونه — [ نام به زبان صفحه، نشانی ]. هاب نه (کاشی‌ها هاب‌اند).
-	 */
-	function topersia_g_ft_picks( $opts = null ) {
-		$opts  = null === $opts ? topersia_g_ft_opts() : $opts;
-		$types = function_exists( 'topersia_g_hub_registry' ) ? array_keys( topersia_g_hub_registry() ) : array();
-		$out   = array();
-		foreach ( topersia_g_published( array_map( 'absint', (array) $opts['picks'] ) ) as $id ) {
-			if ( in_array( (string) get_post_type( $id ), $types, true ) && 1 === topersia_g_ft_real_count( array( $id ) ) ) {
-				$name  = function_exists( 'topersia_g_name' ) ? (string) topersia_g_name( $id ) : (string) get_the_title( $id );
-				$out[] = array( '' !== $name ? $name : (string) get_the_title( $id ), (string) get_permalink( $id ) );
-			}
-		}
-		return $out;
+		$q = new WP_Query( array(
+			'post_type'        => $type,
+			'post_status'      => 'publish',
+			'has_password'     => false,
+			'posts_per_page'   => 1,
+			'fields'           => 'ids',
+			'suppress_filters' => false,
+			'meta_query'       => topersia_g_ft_real_mq(),
+		) );
+		return (int) $q->found_posts;
 	}
 }
 
 if ( ! function_exists( 'topersia_g_ft_links' ) ) {
 	/**
-	 * پیوندهای زندۀ یک گروه به زبان جاری — [ برچسب، نشانی ] … (P5-D643). سطر خاموش (سوییچ پیشخوان)، کاشی صفحۀ اول در «مقصدها»،
-	 * محتوای کمتر از کمینه، نشانی بیرون از همین سایت و نشانی تکراری نمی‌آیند. حافظۀ همین درخواست به زبان جاری.
+	 * پیوندهای زندۀ یک گروه به زبان جاری — [ برچسب، نشانی ] … (P5-D643 · P5-D651). سطر خاموش (سوییچ پیشخوان)، محتوای کمتر از
+	 * کمینه، صفحۀ پیش‌نویس، نشانی بیرون از همین سایت و نشانی تکراری نمی‌آیند. «مقصدها» به ترتیب بیشترین محتوای واقعی همان زبان
+	 * (هم‌شمار ← ترتیب رجیستری). حافظۀ همین درخواست به زبان جاری.
 	 *
 	 * @param string $group کلید topersia_g_ft_groups
 	 * @return array[]
@@ -708,21 +664,16 @@ if ( ! function_exists( 'topersia_g_ft_links' ) ) {
 		if ( isset( $memo[ $lang ][ $group ] ) ) {
 			return $memo[ $lang ][ $group ];
 		}
-		$opts  = topersia_g_ft_opts();
-		$tiles = topersia_g_ft_home_tiles();
-		$home  = function_exists( 'home_url' ) ? (string) home_url( '/' ) : '';
-		$out   = array();
-		$seen  = array();
-		foreach ( topersia_g_ft_registry() as $r ) {
-			if ( $group !== $r['group'] || empty( $r['on'] ) || in_array( $r['id'], $opts['off'], true ) || ( 'dest' === $group && in_array( $r['id'], $tiles, true ) ) ) {
+		$opts = topersia_g_ft_opts();
+		$home = function_exists( 'home_url' ) ? (string) home_url( '/' ) : '';
+		$out  = array();
+		$seen = array();
+		foreach ( topersia_g_ft_registry() as $i => $r ) {
+			if ( $group !== $r['group'] || empty( $r['on'] ) || in_array( $r['id'], $opts['off'], true ) ) {
 				continue;
 			}
-			if ( 'topics' === $r['kind'] ) {
-				$found = topersia_g_ft_topics( $r['min'] );
-			} elseif ( 'exp' === $r['kind'] ) {
+			if ( 'exp' === $r['kind'] ) {
 				$found = topersia_g_ft_exp( $r['min'] );
-			} elseif ( 'picks' === $r['kind'] ) {
-				$found = topersia_g_ft_picks( $opts );
 			} else {
 				$url   = topersia_g_ft_menu_url( $r['kind'], $r['key'], $r['min'] );
 				$found = '' === $url ? array() : array( array( (string) $r['label'], $url ) );
@@ -733,25 +684,33 @@ if ( ! function_exists( 'topersia_g_ft_links' ) ) {
 					continue;
 				}
 				$seen[ $it[1] ] = true;
-				$out[]          = $it;
+				$out[]          = array( $it[0], $it[1], 'dest' === $group && 'type' === $r['kind'] ? topersia_g_ft_type_count( $r['key'] ) : 0, $i );
 			}
 		}
-		return $memo[ $lang ][ $group ] = $out;
+		if ( 'dest' === $group ) {
+			usort( $out, function ( $a, $b ) { return $b[2] - $a[2] ?: $a[3] - $b[3]; } );
+		}
+		return $memo[ $lang ][ $group ] = array_map( function ( $it ) { return array( $it[0], $it[1] ); }, $out );
 	}
 }
 
 if ( ! function_exists( 'topersia_g_ft_menu_cols' ) ) {
 	/**
-	 * ستون‌های منوی پاورقی (P5-D617 · P5-D643) — کلید ستون ← [ عنوان toggle، [ کلید گروه … ] ] به ترتیب رجیستری.
+	 * ستون‌های منوی پاورقی (P5-D617 · P5-D651) — کلید ستون ← [ سرتیتر toggle، [ کلید گروه … ] ] به ترتیب رجیستری؛ نوار پایین
+	 * (bar) ستون نیست. هر ستون فقط یک سرتیتر دارد.
 	 *
 	 * @return array
 	 */
 	function topersia_g_ft_menu_cols() {
+		$t      = topersia_g_ft_toggle_titles();
+		$titles = array( 'dest' => $t['مقصدها'], 'exp' => $t['تجربه‌ها'], 'culture' => $t['فرهنگ و راهنما'], 'about' => $t['توپرشیا'] );
 		$cols   = array();
-		$titles = array( 'season' => topersia_g_ft_toggle_titles()['کاوش در ایران'] );   /* عنوان ستون جدا از سرعنوان گروه نخستش «چهار فصل» (P5-D649) */
 		foreach ( topersia_g_ft_groups() as $g => $def ) {
+			if ( ! isset( $titles[ $def[1] ] ) ) {
+				continue;
+			}
 			if ( ! isset( $cols[ $def[1] ] ) ) {
-				$cols[ $def[1] ] = array( isset( $titles[ $def[1] ] ) ? $titles[ $def[1] ] : $def[0], array() );
+				$cols[ $def[1] ] = array( $titles[ $def[1] ], array() );
 			}
 			$cols[ $def[1] ][1][] = $g;
 		}
@@ -762,7 +721,8 @@ if ( ! function_exists( 'topersia_g_ft_menu_cols' ) ) {
 if ( ! function_exists( 'topersia_g_ft_share' ) ) {
 	/**
 	 * سهم هر گروه از TOPERSIA_FOOTER_COL_MAX خانۀ یک ستون — نوبتی (یکی از هر گروه، تا پر شدن) تا هر گروه دارای پیوند دست‌کم
-	 * یک خانه بگیرد و «پیوندهای ویژه» زیر گروه‌های پیشین گم نشود. ترتیب درون گروه دست نمی‌خورد.
+	 * یک خانه بگیرد (P5-D651: «تجربه‌ها» = کارها، رویدادها، فصل‌ها؛ «فرهنگ و راهنما» = فرهنگ، غذا، راهنما، مجله). ترتیب درون گروه
+	 * دست نمی‌خورد.
 	 *
 	 * @param int[] $have کلید گروه ← شمار پیوند
 	 * @return int[] کلید گروه ← شمار نشان‌دادنی
@@ -784,11 +744,36 @@ if ( ! function_exists( 'topersia_g_ft_share' ) ) {
 	}
 }
 
+if ( ! function_exists( 'topersia_g_ft_col_links' ) ) {
+	/**
+	 * پیوندهای نهایی یک ستون — گروه‌های همان ستون به ترتیب، هر کدام به سهمش، روی هم حداکثر TOPERSIA_FOOTER_COL_MAX —
+	 * [ [ برچسب، نشانی، گروه ] … ]. همان چیزی که شورت‌کد چاپ می‌کند و گیت می‌سنجد.
+	 */
+	function topersia_g_ft_col_links( $col ) {
+		$cols = topersia_g_ft_menu_cols();
+		if ( ! isset( $cols[ $col ] ) ) {
+			return array();
+		}
+		$lists = array();
+		foreach ( $cols[ $col ][1] as $g ) {
+			$lists[ $g ] = topersia_g_ft_links( $g );
+		}
+		$take = topersia_g_ft_share( array_map( 'count', $lists ) );
+		$out  = array();
+		foreach ( $lists as $g => $links ) {
+			foreach ( array_slice( $links, 0, $take[ $g ] ) as $it ) {
+				$out[] = array( $it[0], $it[1], $g );
+			}
+		}
+		return $out;
+	}
+}
+
 if ( ! function_exists( 'topersia_g_sc_footer_menu' ) ) {
 	/**
-	 * [tp_footer_menu col="dest|guide|season|about|legal"] — یک ستون پاورقی از رجیستری (P5-D617 · P5-D643): گروه‌های همان ستون
-	 * به ترتیب، روی هم حداکثر TOPERSIA_FOOTER_COL_MAX پیوند؛ گروه بی پیوند پنهان؛ ستون بی پیوند ← هیچ خروجی (toggle پنهان می‌شود).
-	 * گروهی که عنوانش عنوان toggle نیست سرعنوان خودش را دارد و فهرستش با aria-labelledby به آن بسته است.
+	 * [tp_footer_menu col="dest|exp|culture|about"] — یک ستون پاورقی از رجیستری (P5-D617 · P5-D651): یک فهرست، حداکثر
+	 * TOPERSIA_FOOTER_COL_MAX پیوند، بی سرعنوان گروه (سرتیتر ستون همان عنوان toggle است)؛ ستون بی پیوند ← هیچ خروجی
+	 * (toggle پنهان می‌شود). هر آیتم گروهش را در data-tp-ft-group دارد.
 	 */
 	function topersia_g_sc_footer_menu( $atts = array() ) {
 
@@ -800,35 +785,33 @@ if ( ! function_exists( 'topersia_g_sc_footer_menu' ) ) {
 			return '';
 		}
 
-		$groups = topersia_g_ft_groups();
-		$lists  = array();
-		foreach ( $cols[ $key ][1] as $g ) {
-			$lists[ $g ] = topersia_g_ft_links( $g );
-		}
-		$take = topersia_g_ft_share( array_map( 'count', $lists ) );
-		$body = '';
-		foreach ( $lists as $g => $links ) {
-			$items = '';
-			foreach ( array_slice( $links, 0, $take[ $g ] ) as $it ) {
-				$items .= '<li class="tp-ft-menu__item"><a class="tp-ft-menu__a" href="' . esc_url( $it[1] ) . '">' . esc_html( $it[0] ) . '</a></li>';
-			}
-			if ( '' === $items ) {
-				continue;
-			}
-			if ( $groups[ $g ][0] === $cols[ $key ][0] ) {
-				$body .= '<ul class="tp-ft-menu__list" role="list" data-tp-ft-group="' . esc_attr( $g ) . '">' . $items . '</ul>';
-			} else {
-				$hid   = 'tp-ft-g-' . $g;
-				$body .= '<p class="tp-ft-menu__h" id="' . esc_attr( $hid ) . '">' . esc_html( $groups[ $g ][0] ) . '</p>'
-					. '<ul class="tp-ft-menu__list" role="list" aria-labelledby="' . esc_attr( $hid ) . '" data-tp-ft-group="' . esc_attr( $g ) . '">' . $items . '</ul>';
-			}
+		$items = '';
+		foreach ( topersia_g_ft_col_links( $key ) as $it ) {
+			$items .= '<li class="tp-ft-menu__item" data-tp-ft-group="' . esc_attr( $it[2] ) . '"><a class="tp-ft-menu__a" href="' . esc_url( $it[1] ) . '">' . esc_html( $it[0] ) . '</a></li>';
 		}
 
-		if ( '' === $body ) {
+		if ( '' === $items ) {
 			return '';
 		}
 
-		return '<nav class="tp-ft tp-ft-menu" aria-label="' . esc_attr( $cols[ $key ][0] ) . '">' . $body . '</nav>';
+		return '<nav class="tp-ft tp-ft-menu" aria-label="' . esc_attr( $cols[ $key ][0] ) . '"><ul class="tp-ft-menu__list" role="list">' . $items . '</ul></nav>';
+	}
+}
+
+if ( ! function_exists( 'topersia_g_sc_footer_bar' ) ) {
+	/**
+	 * [tp_footer_bar] — نوار پایین پاورقی (P5-D651): کوکی، دسترس‌پذیری، حق نشر از گروه «bar» رجیستری؛ فقط صفحۀ منتشرشدۀ همین
+	 * زبان (topersia_g_legal_page). هیچ صفحۀ منتشرشده ← هیچ خروجی (متن حق نشر قالب سر جایش می‌ماند).
+	 */
+	function topersia_g_sc_footer_bar() {
+		$items = '';
+		foreach ( array_slice( topersia_g_ft_links( 'bar' ), 0, TOPERSIA_FOOTER_COL_MAX ) as $it ) {
+			$items .= '<li class="tp-ft-bar__item"><a class="tp-ft-bar__a" href="' . esc_url( $it[1] ) . '">' . esc_html( $it[0] ) . '</a></li>';
+		}
+		if ( '' === $items ) {
+			return '';
+		}
+		return '<nav class="tp-ft tp-ft-bar" aria-label="' . esc_attr__( 'پیوندهای پایین پاورقی', 'topersia' ) . '"><ul class="tp-ft-bar__list" role="list">' . $items . '</ul></nav>';
 	}
 }
 
@@ -928,6 +911,7 @@ if ( function_exists( 'add_shortcode' ) ) {
 	add_shortcode( 'tp_footer_partners', 'topersia_g_sc_footer_partners' );
 	add_shortcode( 'tp_footer_social', 'topersia_g_sc_footer_social' );
 	add_shortcode( 'tp_footer_menu', 'topersia_g_sc_footer_menu' );
+	add_shortcode( 'tp_footer_bar', 'topersia_g_sc_footer_bar' );
 }
 
 if ( function_exists( 'add_filter' ) ) {
@@ -1102,7 +1086,7 @@ if ( ! function_exists( 'topersia_g_ft_admin_page' ) ) {
 		}
 		echo '</tbody></table>';
 
-		/* دستۀ 55-ب بند ۳ (P5-D643) — منوی پاورقی: سوییچ هر سطر رجیستری؛ «پیوندهای ویژه» تا TOPERSIA_FOOTER_PICKS شناسۀ موجودیت.
+		/* دستۀ 55-ب بند ۳ (P5-D643) — منوی پاورقی: سوییچ هر سطر رجیستری (چینش P5-D651: چهار ستون × پنج، نوار پایین).
 		   سطر روشن فقط وقتی پیوند می‌شود که محتوای واقعی منتشرشدۀ همان زبان دارد (topersia_g_ft_links). */
 		$groups = topersia_g_ft_groups();
 		echo '<h2>' . esc_html__( 'منوی پاورقی', 'topersia' ) . '</h2><table class="widefat striped"><thead><tr><th>' . esc_html__( 'گروه', 'topersia' ) . '</th><th>'
@@ -1113,12 +1097,6 @@ if ( ! function_exists( 'topersia_g_ft_admin_page' ) ) {
 				. '<td><label>' . $cb( 'tp_ft[show][' . $r['id'] . ']', ! in_array( $r['id'], $o['off'], true ) ) . ' ' . esc_html__( 'نمایش', 'topersia' ) . '</label></td></tr>';
 		}
 		echo '</tbody></table>';
-		echo '<h3>' . esc_html( $groups['picks'][0] ) . '</h3><p>' . esc_html__( 'شناسۀ پست موجودیت، نه هاب؛ هر زبان فقط نسخۀ منتشرشدۀ خودش را نشان می‌دهد.', 'topersia' ) . '</p><p>';
-		for ( $i = 0; $i < TOPERSIA_FOOTER_PICKS; $i++ ) {
-			$id = isset( $o['picks'][ $i ] ) ? (int) $o['picks'][ $i ] : 0;
-			echo '<label><input type="number" min="0" step="1" class="small-text" dir="ltr" name="tp_ft[picks][]" value="' . ( $id ? $id : '' ) . '"> ' . ( $id ? esc_html( get_the_title( $id ) ) : '' ) . '</label><br>';
-		}
-		echo '</p>';
 
 		submit_button();
 		echo '</form></div>';

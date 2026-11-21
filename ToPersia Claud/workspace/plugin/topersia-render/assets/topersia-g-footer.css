@@ -141,16 +141,17 @@ html:root [data-elementor-type="footer"] .tp-ft-menu__a{
   text-align:start;
   color:var(--tp-ft-link);
 }
-/* سرعنوان گروه درون ستون (دستۀ 55-ب بند ۳ · P5-D643) — «رویدادها و جشنواره‌ها»، «اخبار و مقالات» …؛ گروه هم‌نام toggle سرعنوان ندارد */
-html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__h{
-  margin:var(--tp-ft-stack) 0 0;
+/* --- [tp_footer_bar] — نوار پایین (دستۀ 55-ه · P5-D651): کوکی، دسترس‌پذیری، حق نشر؛ یک ردیف شکستنی از آغاز سطر ---------- */
+.tp-ft-bar__list{display:flex;flex-wrap:wrap;align-items:center;gap:0 calc(3 * var(--tp-ft-gap));margin:0;padding:0;list-style:none}
+html:root [data-elementor-type="footer"] .tp-ft-bar__item{margin:0;padding:0;list-style:none}
+html:root [data-elementor-type="footer"] .tp-ft-bar__a{
+  display:inline-flex;
+  align-items:center;
+  min-block-size:var(--tp-ft-menu-h);
   font-size:var(--tp-ft-menu-fs);
-  font-weight:700;
   line-height:1.4;
-  color:var(--tp-ft-head);
+  color:var(--tp-ft-link);
 }
-html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__h:first-child{margin-block-start:0}
-html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__list + .tp-ft-menu__list{margin-block-start:var(--tp-ft-stack)}
 
 /* --- ردیف هم‌ارتفاع همکاران و شبکه‌ها — یک توکن --tp-ft-row-h برای هر دو (P5-D615) ------------------- */
 .tp-ft-row{
@@ -258,7 +259,7 @@ html:root:not([data-tp-mode="dark"]) [data-elementor-type="footer"] .tp-ft-socia
 html:root [data-elementor-type="footer"] .e-con{border-color:var(--tp-ft-line)}
 
 /* --- ترازبندی ردیف‌های منوی پاورقی میان ستون‌ها (دستۀ 55-د بند ۶ · P5-D649) — ستون‌ها کنار هم‌اند (≥ ۱۰۲۴؛ زیر آن آکاردئون) -------------
-   هر پیوند دقیقاً یک گام --tp-ft-menu-h بلندی دارد (عنوان دوسطری با line-height کوچک در همان گام می‌نشیند) و سرعنوان گروه دو گام؛
+   هر پیوند دقیقاً یک گام --tp-ft-menu-h بلندی دارد (عنوان دوسطری با line-height کوچک در همان گام می‌نشیند) (P5-D651: ستون سرعنوان گروه ندارد)؛
    پس بلندی هر ستون مضرب یک گام است و ردیف‌های ستون‌های هم‌جوار روی یک شبکۀ عمودی می‌نشینند. پهنای ستون‌ها دست نمی‌خورد. */
 @media (min-width:1024px){
   html:root [data-elementor-type="footer"] .tp-ft-menu__a{
@@ -268,13 +269,4 @@ html:root [data-elementor-type="footer"] .e-con{border-color:var(--tp-ft-line)}
     line-height:1.15;
     overflow-wrap:anywhere;
   }
-  html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__h{
-    display:flex;
-    align-items:center;
-    box-sizing:border-box;
-    block-size:calc(2 * var(--tp-ft-menu-h));
-    margin:0;
-    line-height:1.15;
-  }
-  html:root [data-elementor-type="footer"] .tp-ft-menu .tp-ft-menu__list + .tp-ft-menu__list{margin-block-start:0}
 }

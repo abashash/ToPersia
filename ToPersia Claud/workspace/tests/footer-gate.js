@@ -25,10 +25,11 @@
  *   ▸ ستون‌ها و پیوندها همان خروجی topersia_g_ft_menu_url در همان زبان؛ ستون بی پیوند اصلاً نمی‌آید، هیچ toggle تهی
  *   ▸ هر پیوند ۲۰۰ بی تغییر مسیر و پیشوند زبانش همان زبان صفحه؛ برچسب en لاتین، ar بی حرف ویژۀ فارسی
  *   ▸ سمت سرور: اگر نخستین ستون (که شیوه‌نامۀ el-toggle وودمارت را می‌نویسد) پنهان شود، شیوه‌نامه می‌ماند — با جهش
- * رجیستری پاورقی (دستۀ 55-ب بند ۳ · P5-D643)، سه زبان در ۱۴۴۰:
- *   ▸ حداکثر پنج ستون منو، هر ستون حداکثر TOPERSIA_FOOTER_COL_MAX (۸) پیوند؛ گروه‌ها و پیوندها همان سهم سرور (topersia_g_ft_share)
- *   ▸ هر گروهی جز گروه هم‌نام toggle سرعنوان <p> دیدنی بلافاصله پیش از فهرستش و aria-labelledby همان؛ هیچ فهرست تهی
- *   ▸ هیچ پیوند /advertise/ در پاورقی؛ شمار پیوند منو هر زبان در menu-counts.json؛ fa دست‌کم ۳۰
+ * رجیستری پاورقی (دستۀ 55-ب بند ۳ · P5-D643 ← دستۀ 55-ه · P5-D651)، سه زبان در ۱۴۴۰:
+ *   ▸ دقیقاً چهار ستون منو (مقصدها · تجربه‌ها · فرهنگ و راهنما · توپرشیا)، هر ستون دقیقاً TOPERSIA_FOOTER_COL_MAX (۵) پیوند واقعی همان
+ *     زبان — مگر استثنای صریح EXCEPTIONS (کلید «زبان:ستون»، شمار دقیق، دلیل، تاریخ)؛ استثنای کهنه (شمار سرور ≠ شمار ثبت‌شده) هم افتادن است
+ *   ▸ هر ستون یک فهرست، بی سرعنوان گروه؛ گروه هر آیتم در data-tp-ft-group، همان سهم سرور (topersia_g_ft_col_links)
+ *   ▸ ستون «توپرشیا» با /advertise/؛ نوار پایین (کوکی · دسترس‌پذیری · حق نشر) سه پیوند یا استثنای صریح؛ شمار هر زبان در menu-counts.json
  *   ▸ ۳۹۰، fa: هر toggle منو آکاردئون — بسته تا کلیک، با کلیک پیوندهایش دیدنی
  * عکس هر ترکیب در tests/.screens/footer-gate/ (بیرون از git)؛ «پس» fa در ۱۴۴۰ · ۷۶۸ · ۳۹۰ × سه حالت.
  *
@@ -75,18 +76,32 @@ const headsOk = ( L, lang, w ) => {
 	ok( L.heads.length >= 2 && ! bad.length, `جهت عنوان · ${ lang } · ${ w }: ${ L.heads.length } عنوان، جهت ${ want }، ناهمخوان ${ bad.length }` + ( bad.length ? ' ← ' + bad.slice( 0, 4 ).map( h => '«' + h.text + '» ' + h.ta + ' ' + h.dir + ' آغاز ' + h.atStart ).join( ' | ' ) : '' ) );
 };
 
-/* P5-D617 · P5-D643: عنوان ستون به ترتیب dest · guide · season · about · legal — مستقل از کد، از کاتالوگ بازبینی‌شده */
-const MENU_COLS   = [ 'dest', 'guide', 'season', 'about', 'legal' ];
+/* P5-D617 · P5-D651: عنوان ستون به ترتیب dest · exp · culture · about — مستقل از کد، از کاتالوگ بازبینی‌شده */
+const MENU_COLS   = [ 'dest', 'exp', 'culture', 'about' ];
 const MENU_TITLES = {
-	fa: [ 'مقصدها', 'راهنمای سفر', 'کاوش در ایران', 'دربارۀ توپرشیا', 'حقوقی' ],
-	en: [ 'Destinations', 'Travel guide', 'Explore Iran', 'About ToPersia', 'Legal' ],
-	ar: [ 'الوجهات', 'دليل السفر', 'استكشف إيران', 'عن توبيرشيا', 'قانوني' ],
+	fa: [ 'مقصدها', 'تجربه‌ها', 'فرهنگ و راهنما', 'توپرشیا' ],
+	en: [ 'Destinations', 'Experiences', 'Culture and guide', 'ToPersia' ],
+	ar: [ 'الوجهات', 'التجارب', 'الثقافة والدليل', 'توبيرشيا' ],
 };
-const COL_MAX = 8, COLS_MAX = 5, FA_MIN = 30;   /* TOPERSIA_FOOTER_COL_MAX · پنج toggle · هدف «دست‌کم ۳۰ پیوند واقعی در fa» */
-/* خروجی سرور در هر زبان: ستون ← { u: نشانی‌ها، g: گروه‌های دارای پیوند } — همان رجیستری، همان سهم topersia_g_ft_share و همان
-   برش شورت‌کد، پس از wpml_switch_language. در WP-CLI home_url با تعویض زبان عوض نمی‌شود؛ wpml_permalink همان تبدیل صفحه را
-   می‌دهد و روی نشانی ازپیش‌زبان‌دار بی‌اثر است (دستۀ 55 بند ۱۰). */
-const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( topersia_g_ft_menu_cols() as $k => $c ) { $l = array(); foreach ( $c[1] as $g ) { $l[ $g ] = topersia_g_ft_links( $g ); } $t = topersia_g_ft_share( array_map( "count", $l ) ); $o[ $k ] = array( "u" => array(), "g" => array() ); foreach ( $l as $g => $ls ) { foreach ( array_slice( $ls, 0, $t[ $g ] ) as $it ) { $o[ $k ]["u"][] = apply_filters( "wpml_permalink", $it[1], "' + lang + '" ); } if ( $t[ $g ] > 0 ) { $o[ $k ]["g"][] = $g; } } } echo wp_json_encode( $o );' ).trim().split( '\n' ).pop() );
+const COL_MAX = 5, BAR_N = 3;   /* TOPERSIA_FOOTER_COL_MAX — دقیقاً پنج در هر ستون؛ نوار: کوکی · دسترس‌پذیری · حق نشر (P5-D651) */
+/* استثنای صریح P5-D651 — ستونی که با محتوای واقعی منتشرشدۀ همان زبان به پنج نمی‌رسد. گیت شل نمی‌شود: شمار دقیق ثبت می‌شود و
+   هر تغییر (رشد یا افت) گیت را قرمز می‌کند تا استثنا بازبینی شود. شمار ۰ یعنی toggle پنهان. */
+const EXCEPTIONS = {
+	'en:dest':    { n: 2, date: '2026-11-20', why: 'فقط هاب شهرها و استان‌ها ترجمۀ انگلیسی منتشرشده دارند' },
+	'en:exp':     { n: 1, date: '2026-11-20', why: 'بی واژۀ «کارها و تجربیات» و رویداد ترجمه‌شده؛ فقط صفحۀ فصل پاییز' },
+	'en:culture': { n: 1, date: '2026-11-20', why: 'فقط مسیرهای گردشگری ترجمۀ انگلیسی منتشرشده دارد' },
+	'ar:dest':    { n: 2, date: '2026-11-20', why: 'فقط هاب شهرها و استان‌ها ترجمۀ عربی منتشرشده دارند' },
+	'ar:exp':     { n: 0, date: '2026-11-20', why: 'هیچ محتوای تجربه، رویداد یا فصل عربی منتشرشده — ستون پنهان' },
+	'ar:culture': { n: 0, date: '2026-11-20', why: 'هیچ محتوای فرهنگ، غذا، راهنما یا مجلۀ عربی منتشرشده — ستون پنهان' },
+	'fa:bar':     { n: 0, date: '2026-11-20', why: 'صفحه‌های cookie-policy (#6210) · accessibility (#6211) · copyright (#6212) پیش‌نویس‌اند تا مالک متن را بنویسد' },
+	'en:bar':     { n: 0, date: '2026-11-20', why: 'نسخۀ فارسی هنوز پیش‌نویس است؛ ترجمه‌ای نیست' },
+	'ar:bar':     { n: 0, date: '2026-11-20', why: 'نسخۀ فارسی هنوز پیش‌نویس است؛ ترجمه‌ای نیست' },
+};
+const wantN = ( lang, col ) => ( EXCEPTIONS[ lang + ':' + col ] ? EXCEPTIONS[ lang + ':' + col ].n : ( 'bar' === col ? BAR_N : COL_MAX ) );
+/* خروجی سرور در هر زبان: ستون ← { u: نشانی‌ها، g: گروه‌ها به ترتیب } — همان topersia_g_ft_col_links که شورت‌کد چاپ می‌کند، پس از
+   wpml_switch_language؛ bar همان topersia_g_ft_links( 'bar' ). در WP-CLI home_url با تعویض زبان عوض نمی‌شود؛ wpml_permalink همان
+   تبدیل صفحه را می‌دهد و روی نشانی ازپیش‌زبان‌دار بی‌اثر است (دستۀ 55 بند ۱۰). */
+const menuExpect = lang => JSON.parse( wp( 'do_action( "wpml_switch_language", "' + lang + '" ); $o = array(); foreach ( array_keys( topersia_g_ft_menu_cols() ) as $k ) { $o[ $k ] = array( "u" => array(), "g" => array() ); foreach ( topersia_g_ft_col_links( $k ) as $it ) { $o[ $k ]["u"][] = apply_filters( "wpml_permalink", $it[1], "' + lang + '" ); if ( ! in_array( $it[2], $o[ $k ]["g"], true ) ) { $o[ $k ]["g"][] = $it[2]; } } } $o["bar"] = array( "u" => array(), "g" => array( "bar" ) ); foreach ( array_slice( topersia_g_ft_links( "bar" ), 0, TOPERSIA_FOOTER_COL_MAX ) as $it ) { $o["bar"]["u"][] = apply_filters( "wpml_permalink", $it[1], "' + lang + '" ); } echo wp_json_encode( $o );' ).trim().split( '\n' ).pop() );
 /* سمت سرور: ستون dest تهی ساخته می‌شود؛ پاورقی بی آن کشیده می‌شود و شیوه‌نامۀ el-toggle باید بماند. mut = بی بازگرداندن after_render */
 const keepCss = mut => JSON.parse( wp( '$mut = ' + ( mut ? 1 : 0 ) + '; add_filter( "elementor/widget/render_content", function ( $h, $w ) { return ( "wd_toggle" === $w->get_name() && "dest" === topersia_g_ft_toggle_menu_col( (array) $w->get_raw_data() ) ) ? str_replace( "tp-ft-menu__a", "tp-ft-menu__x", $h ) : $h; }, 5, 2 ); if ( $mut ) { remove_all_actions( "elementor/frontend/widget/after_render" ); } $o = \\Elementor\\Plugin::$instance->frontend->get_builder_content_for_display( 6128 ); preg_match_all( "#wd-el-toggle-title[^>]*>\\s*([^<]*?)\\s*<#u", $o, $t ); echo wp_json_encode( array( "titles" => $t[1], "css" => preg_match_all( "#<link[^>]+id=\\"wd-el-toggle(-rtl)?-css\\"#", $o ), "raw" => false !== strpos( $o, "[tp_footer_menu" ) || false !== strpos( $o, "[elementor-element" ) ) );' ).trim().split( '\n' ).pop() );
 
@@ -168,19 +183,17 @@ function probeMenus() {
 			links:  nav ? [ ...nav.querySelectorAll( 'a.tp-ft-menu__a' ) ].map( a => ( { href: a.href, text: a.textContent.trim() } ) ) : [],
 			filled: !! ( body && body.querySelector( 'a[href], img, p, li' ) ),
 			brand:  !! t.querySelector( '.tp-ft-brand' ),
-			/* P5-D643: هر فهرست گروه — شمار پیوند، و سرعنوانش (aria-labelledby ← p.tp-ft-menu__h دیدنی، درست پیش از فهرست) */
-			groups: nav ? [ ...nav.querySelectorAll( 'ul.tp-ft-menu__list' ) ].map( u => {
-				const id = u.getAttribute( 'aria-labelledby' ) || '';
-				const h  = id ? nav.querySelector( '#' + CSS.escape( id ) ) : null;
-				return { g: u.getAttribute( 'data-tp-ft-group' ) || '', n: u.querySelectorAll( 'a.tp-ft-menu__a' ).length, id, head: h ? h.textContent.trim() : '',
-					headOk: ! id || ( !! h && h.matches( 'p.tp-ft-menu__h' ) && /^tp-/.test( id ) && h.nextElementSibling === u && '' !== h.textContent.trim() && 'none' !== getComputedStyle( h ).display ) };
-			} ) : [],
-			heads:  nav ? nav.querySelectorAll( 'p.tp-ft-menu__h' ).length : 0,
+			/* P5-D651: گروه‌ها به ترتیب نخستین آیتم هر کدام (li[data-tp-ft-group])؛ یک فهرست و هیچ سرعنوان گروه */
+			groups: nav ? [ ...new Set( [ ...nav.querySelectorAll( 'li.tp-ft-menu__item' ) ].map( li => li.getAttribute( 'data-tp-ft-group' ) || '' ) ) ] : [],
+			lists:  nav ? nav.querySelectorAll( 'ul.tp-ft-menu__list' ).length : 0,
+			heads:  nav ? nav.querySelectorAll( '.tp-ft-menu__h, [aria-labelledby]' ).length : 0,
+			advert: nav ? nav.querySelectorAll( 'a[href*="/advertise/"]' ).length : 0,
 		};
 	} );
+	const bar = foot.querySelector( 'nav.tp-ft-bar' );
 	return {
 		toggles,
-		advert: [ ...foot.querySelectorAll( 'a[href]' ) ].filter( a => /\/advertise\/?$/.test( new URL( a.href, location.href ).pathname ) ).map( a => a.textContent.trim().slice( 0, 24 ) ),
+		bar:    bar ? { label: bar.getAttribute( 'aria-label' ) || '', links: [ ...bar.querySelectorAll( 'a.tp-ft-bar__a' ) ].map( a => ( { href: a.href, text: a.textContent.trim() } ) ) } : { label: '', links: [] },
 		demo:   [ ...foot.querySelectorAll( '.wd-el-toggle a' ) ].filter( a => DEMO.test( a.textContent ) || ! a.getAttribute( 'href' ) || '#' === a.getAttribute( 'href' ).trim() ).map( a => '«' + a.textContent.trim().slice( 0, 24 ) + '» ' + a.getAttribute( 'href' ) ),
 		text:   DEMO.test( foot.textContent ),
 		legacy: foot.querySelectorAll( '[data-widget_type^="wd_extra_menu_list"]' ).length,
@@ -355,32 +368,32 @@ async function probeContrast( mode ) {
 			const want  = MENU_COLS.filter( c => exp[ c ] && exp[ c ].u.length );
 			const rows  = want.map( ( c, i ) => {
 				const t = menus[ i ] || { title: '', label: '', links: [], groups: [] }, wt = T[ MENU_COLS.indexOf( c ) ];
-				return { c, ok: t.title === wt && t.label === wt && JSON.stringify( t.links.map( l => l.href ) ) === JSON.stringify( exp[ c ].u ) && JSON.stringify( t.groups.map( g => g.g ) ) === JSON.stringify( exp[ c ].g ),
-					got: t.title + ' (' + t.links.length + ' · ' + t.groups.map( g => g.g ).join( '+' ) + ')', wt: wt + ' (' + exp[ c ].u.length + ' · ' + exp[ c ].g.join( '+' ) + ')', n: exp[ c ].u.length };
+				return { c, ok: t.title === wt && t.label === wt && JSON.stringify( t.links.map( l => l.href ) ) === JSON.stringify( exp[ c ].u ) && JSON.stringify( t.groups ) === JSON.stringify( exp[ c ].g ),
+					got: t.title + ' (' + t.links.length + ' · ' + t.groups.join( '+' ) + ')', wt: wt + ' (' + exp[ c ].u.length + ' · ' + exp[ c ].g.join( '+' ) + ')', n: exp[ c ].u.length };
 			} );
-			/* P5-D643 — سقف ستون و پیوند، سرعنوان گروه، فهرست تهی نه، /advertise/ نه؛ گروه هم‌نام toggle بی سرعنوان، بقیه با سرعنوان */
-			const grpBad = menus.flatMap( t => t.groups.filter( g => ! g.headOk || ! g.n || ( g.id ? g.head === t.title : false ) ).map( g => t.title + '/' + g.g + ( g.n ? '' : ' تهی' ) + ( g.headOk ? '' : ' سرعنوان ' + ( g.id || '—' ) ) ) );
-			const headN  = menus.reduce( ( s, t ) => s + t.groups.filter( g => g.id ).length, 0 );
-			ok( M && menus.length <= COLS_MAX && menus.every( t => t.links.length <= COL_MAX ) && ! grpBad.length && menus.every( t => t.heads === t.groups.filter( g => g.id ).length ) && ! M.advert.length,
-				`رجیستری · ${ lang } (P5-D643): ${ menus.length } ستون (≤ ${ COLS_MAX })، پیوند هر ستون [${ menus.map( t => t.links.length ).join( '، ' ) }] (≤ ${ COL_MAX })، ${ headN } سرعنوان گروه با aria-labelledby، ناهمخوان ${ grpBad.length }، پیوند /advertise/ ${ M ? M.advert.length : '—' }` + ( grpBad.length ? ' ← ' + grpBad.slice( 0, 5 ).join( ' | ' ) : '' ) );
+			/* P5-D651 — دقیقاً پنج در هر ستون (یا شمار دقیق استثنای صریح)، روی سرور و صفحه؛ یک فهرست، بی سرعنوان گروه؛ /advertise/ در «توپرشیا» */
+			const cnt = MENU_COLS.concat( 'bar' ).map( c => ( { c, want: wantN( lang, c ), srv: exp[ c ] ? exp[ c ].u.length : 0, exc: !! EXCEPTIONS[ lang + ':' + c ] } ) );
+			const cntBad = cnt.filter( x => x.srv !== x.want );
+			ok( ! cntBad.length, `شمار ستون · ${ lang } (P5-D651): [${ cnt.map( x => x.c + ' ' + x.srv + ( x.exc ? '*' : '' ) ).join( '، ' ) }] (انتظار ${ COL_MAX } و نوار ${ BAR_N }؛ * = استثنای صریح)` + ( cntBad.length ? ' ← ' + cntBad.map( x => x.c + ': ' + x.srv + ' ≠ ' + x.want + ( x.exc ? ' (استثنا کهنه است — بازبینی کن)' : '' ) ).join( ' | ' ) : '' ) );
+			const tAboutM = menus.find( t => t.title === T[ MENU_COLS.indexOf( 'about' ) ] );
+			ok( M && menus.length === want.length && menus.length <= MENU_COLS.length && menus.every( t => 1 === t.lists && 0 === t.heads && t.links.length <= COL_MAX ) && !! tAboutM && 1 === tAboutM.advert,
+				`رجیستری · ${ lang } (P5-D651): ${ menus.length } ستون (≤ ${ MENU_COLS.length })، هر ستون یک فهرست [${ menus.map( t => t.lists ).join( '، ' ) }]، سرعنوان گروه [${ menus.map( t => t.heads ).join( '، ' ) }] (انتظار ۰)، /advertise/ در «توپرشیا» ${ tAboutM ? tAboutM.advert : '—' }` );
+			const bw = exp.bar ? exp.bar.u : [];
+			ok( M && JSON.stringify( M.bar.links.map( l => l.href ) ) === JSON.stringify( bw ) && ( ! bw.length || '' !== M.bar.label ),
+				`نوار پایین · ${ lang } (P5-D651): ${ M ? M.bar.links.length : '—' } پیوند = سرور ${ bw.length }${ bw.length ? '، aria-label «' + M.bar.label + '»' : ' (هیچ صفحۀ منتشرشده ← nav نیست)' }` );
 			const total  = menus.reduce( ( s, t ) => s + t.links.length, 0 );
-			COUNTS[ lang ] = { total, cols: Object.fromEntries( menus.map( t => [ t.title, t.links.length ] ) ), groups: Object.fromEntries( menus.flatMap( t => t.groups.map( g => [ g.g, g.n ] ) ) ) };
-			if ( 'fa' === lang ) {
-				ok( total >= FA_MIN, `شمار پیوند واقعی منو · fa: ${ total } (هدف ≥ ${ FA_MIN })` );
-			} else {
-				console.log( `     شمار پیوند منو · ${ lang }: ${ total } (با ترجمۀ بیشتر خودکار رشد می‌کند)` );
-			}
+			COUNTS[ lang ] = { total, cols: Object.fromEntries( menus.map( t => [ t.title, t.links.length ] ) ), groups: Object.fromEntries( menus.map( t => [ t.title, t.groups ] ) ), bar: M ? M.bar.links.length : 0 };
 			ok( M && ! M.demo.length && ! M.text && 0 === M.legacy, `منو · ${ lang }: بی پیوند نمایشی (${ M ? M.demo.length : '—' }${ M && M.demo.length ? ' ← ' + M.demo.slice( 0, 4 ).join( ' | ' ) : '' })، بی متن شهرهای دمو ${ M ? ! M.text : '—' }، ویجت wd_extra_menu_list ${ M ? M.legacy : '—' }` );
 			ok( menus.length === want.length && rows.every( r => r.ok ),
 				`منو · ${ lang }: ستون‌ها [${ rows.map( r => r.wt + ' ' + r.n ).join( '، ' ) }] = صفحه [${ menus.map( t => t.title + ' ' + t.links.length ).join( '، ' ) }]` + ( rows.some( r => ! r.ok ) ? ' ← ناهمخوان ' + rows.filter( r => ! r.ok ).map( r => r.c + ': ' + r.got + ' ≠ ' + r.wt ).join( ' | ' ) : '' ) );
 			const others = M ? M.toggles.filter( t => ! t.menu ) : [];
 			/* دستۀ 55 بند ۱۰: جعبۀ برند از محتوایش (.tp-ft-brand) شناخته می‌شود، نه از عنوان — عنوانش انتخاب کاربر است و در ذخیرۀ
-			   #6128 تهی شد؛ فقط نباید هم‌نام ستون «دربارۀ توپرشیا» باشد (خواستۀ بند ۱۰: دوتایی نشود). */
+			   #6128 تهی شد؛ فقط نباید هم‌نام ستون «توپرشیا» باشد (دوتایی نشود). */
 			const tAbout = T[ MENU_COLS.indexOf( 'about' ) ];
 			ok( M && M.toggles.every( t => t.filled ) && 1 === others.length && others.every( t => t.brand && t.title !== tAbout ),
 				`منو · ${ lang }: هیچ toggle تهی (${ M ? M.toggles.filter( t => ! t.filled ).map( t => '«' + t.title + '»' ).join( ' ' ) || 'هیچ' : '—' })؛ toggle بی منو فقط یک جعبۀ برند، نه هم‌نام «${ tAbout }» (${ others.map( t => '«' + t.title + '» برند ' + t.brand ).join( ' | ' ) })` );
 			const script = 'en' === lang ? /^[\x20-\x7E]+$/ : /[؀-ۿ]/;
-			const links  = menus.flatMap( t => t.links.map( l => ( { ...l, col: t.title } ) ) );
+			const links  = menus.flatMap( t => t.links.map( l => ( { ...l, col: t.title } ) ) ).concat( M ? M.bar.links.map( l => ( { ...l, col: 'bar' } ) ) : [] );
 			const badL   = [];
 			for ( const l of links ) {
 				const u  = new URL( l.href );
